@@ -4,7 +4,7 @@
 
 ## REPOSITORIES AND SPECIFIC FILES:
 
-* Main UBP epository: 
+* Main UBP repository: 
 'https://github.com/DigitalEuan/UBP_Repo/tree/main/core_studio_v4.0'
 
 * Main GLM repository: 
