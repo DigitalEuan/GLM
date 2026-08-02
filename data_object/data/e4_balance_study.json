@@ -1,0 +1,194 @@
+{
+  "summary": [
+    {
+      "encoding": "A_chem_core",
+      "prop_set": [
+        "Z",
+        "M",
+        "EN",
+        "Valence_e"
+      ],
+      "n_pairs": 37,
+      "n_dh_pairs": 30,
+      "be_r_xor_hamming_weight": 0.0064469855324461025,
+      "be_r_hex_disagreements": -0.042985010881698135,
+      "be_r_scn_overlap_count": 0.2191413372947191,
+      "be_r_nat_sum": 0.2932563019246712,
+      "dh_r_xor_hamming_weight": -0.43122780826354673,
+      "dh_r_hex_disagreements": 0.3795615971495519,
+      "dh_r_scn_overlap_count": -0.05300960574290834,
+      "dh_r_nat_sum": -0.21124771864086442
+    },
+    {
+      "encoding": "B_oxidation",
+      "prop_set": [
+        "Z",
+        "M",
+        "EN",
+        "Oxidation"
+      ],
+      "n_pairs": 37,
+      "n_dh_pairs": 30,
+      "be_r_xor_hamming_weight": 0.041551908982303966,
+      "be_r_hex_disagreements": -0.04484359417744574,
+      "be_r_scn_overlap_count": 0.06899609172725929,
+      "be_r_nat_sum": 0.09854239321845758,
+      "dh_r_xor_hamming_weight": -0.49111509448249513,
+      "dh_r_hex_disagreements": 0.16098174649797342,
+      "dh_r_scn_overlap_count": -0.15898984379696,
+      "dh_r_nat_sum": -0.14472294502824457
+    },
+    {
+      "encoding": "C_electronic",
+      "prop_set": [
+        "Z",
+        "EN",
+        "Ion",
+        "Valence_e"
+      ],
+      "n_pairs": 37,
+      "n_dh_pairs": 30,
+      "be_r_xor_hamming_weight": 0.030706746564706122,
+      "be_r_hex_disagreements": -0.09338269179949243,
+      "be_r_scn_overlap_count": 0.13405398268577506,
+      "be_r_nat_sum": 0.2932563019246712,
+      "dh_r_xor_hamming_weight": -0.45255144379732787,
+      "dh_r_hex_disagreements": 0.14813281103762482,
+      "dh_r_scn_overlap_count": -0.10343836377299374,
+      "dh_r_nat_sum": -0.21124771864086442
+    },
+    {
+      "encoding": "D_geometric",
+      "prop_set": [
+        "Z",
+        "Rad",
+        "EN",
+        "Valence_e"
+      ],
+      "n_pairs": 37,
+      "n_dh_pairs": 30,
+      "be_r_xor_hamming_weight": -0.03722090583553601,
+      "be_r_hex_disagreements": -0.0725380464324973,
+      "be_r_scn_overlap_count": 0.46228063730796864,
+      "be_r_nat_sum": 0.2932563019246712,
+      "dh_r_xor_hamming_weight": -0.24121608810811546,
+      "dh_r_hex_disagreements": 0.4358269276638492,
+      "dh_r_scn_overlap_count": 0.17332336147715102,
+      "dh_r_nat_sum": -0.21124771864086442
+    },
+    {
+      "encoding": "E_thermal",
+      "prop_set": [
+        "Z",
+        "M",
+        "BP",
+        "MP"
+      ],
+      "n_pairs": 37,
+      "n_dh_pairs": 30,
+      "be_r_xor_hamming_weight": -0.0370740391816348,
+      "be_r_hex_disagreements": -0.02106072343487092,
+      "be_r_scn_overlap_count": -0.1801453672979393,
+      "be_r_nat_sum": -0.046169251592476826,
+      "dh_r_xor_hamming_weight": -0.3061221558277502,
+      "dh_r_hex_disagreements": -0.24627339263846237,
+      "dh_r_scn_overlap_count": -0.15708936959183153,
+      "dh_r_nat_sum": -0.12968367765784586
+    },
+    {
+      "encoding": "F_solid_state",
+      "prop_set": [
+        "Z",
+        "Rad",
+        "Rho",
+        "Crystal"
+      ],
+      "n_pairs": 37,
+      "n_dh_pairs": 30,
+      "be_r_xor_hamming_weight": -0.11129704784690232,
+      "be_r_hex_disagreements": -0.05744300037880402,
+      "be_r_scn_overlap_count": -0.12603502536692657,
+      "be_r_nat_sum": -0.32233265489767915,
+      "dh_r_xor_hamming_weight": 0.0582221558804564,
+      "dh_r_hex_disagreements": -0.10413415001891575,
+      "dh_r_scn_overlap_count": -0.18775684939950948,
+      "dh_r_nat_sum": -0.1610158982542466
+    },
+    {
+      "encoding": "G_size_pull",
+      "prop_set": [
+        "Z",
+        "EN",
+        "Ion",
+        "Rad"
+      ],
+      "n_pairs": 37,
+      "n_dh_pairs": 30,
+      "be_r_xor_hamming_weight": -0.022715723660896903,
+      "be_r_hex_disagreements": -0.07128934937293388,
+      "be_r_scn_overlap_count": 0.012674502449348674,
+      "be_r_nat_sum": 0.07016889852809337,
+      "dh_r_xor_hamming_weight": -0.286470065451964,
+      "dh_r_hex_disagreements": 0.05806237069909974,
+      "dh_r_scn_overlap_count": -0.12387434069122939,
+      "dh_r_nat_sum": -0.32880389412379135
+    },
+    {
+      "encoding": "H_redox",
+      "prop_set": [
+        "Z",
+        "Oxidation",
+        "Ion",
+        "Rad"
+      ],
+      "n_pairs": 37,
+      "n_dh_pairs": 30,
+      "be_r_xor_hamming_weight": -0.05659080554308973,
+      "be_r_hex_disagreements": 0.018691090836472773,
+      "be_r_scn_overlap_count": 0.19909504091012045,
+      "be_r_nat_sum": 0.07016889852809337,
+      "dh_r_xor_hamming_weight": -0.2669023355069527,
+      "dh_r_hex_disagreements": -0.19935858596707237,
+      "dh_r_scn_overlap_count": -0.33564598887191355,
+      "dh_r_nat_sum": -0.32880389412379135
+    },
+    {
+      "encoding": "I_minimal_Z_only",
+      "prop_set": [
+        "Z",
+        "Z",
+        "Z",
+        "Z"
+      ],
+      "n_pairs": 37,
+      "n_dh_pairs": 30,
+      "be_r_xor_hamming_weight": -0.08573477188223208,
+      "be_r_hex_disagreements": -0.017081377155093634,
+      "be_r_scn_overlap_count": -0.31156631123271805,
+      "be_r_nat_sum": -0.3904126622352365,
+      "dh_r_xor_hamming_weight": 0.02126751115232883,
+      "dh_r_hex_disagreements": -0.018212691273883277,
+      "dh_r_scn_overlap_count": -0.19116252417500937,
+      "dh_r_nat_sum": 0.11210500416868824
+    },
+    {
+      "encoding": "J_period_trend",
+      "prop_set": [
+        "Z",
+        "Rad",
+        "Phase_STP",
+        "Crystal"
+      ],
+      "n_pairs": 37,
+      "n_dh_pairs": 30,
+      "be_r_xor_hamming_weight": -0.07048283332955989,
+      "be_r_hex_disagreements": -0.05027317486814422,
+      "be_r_scn_overlap_count": -0.10511503921061986,
+      "be_r_nat_sum": -0.32233265489767915,
+      "dh_r_xor_hamming_weight": -0.07544439028659194,
+      "dh_r_hex_disagreements": -0.12769099707026982,
+      "dh_r_scn_overlap_count": 0.12112308790875545,
+      "dh_r_nat_sum": -0.1610158982542466
+    }
+  ]
+}

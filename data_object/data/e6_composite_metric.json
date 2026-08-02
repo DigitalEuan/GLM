@@ -1,0 +1,322 @@
+{
+  "pairs_data": [
+    {
+      "pair": "H+H",
+      "be": 436,
+      "dh": null,
+      "e4_scn_overlap": 3,
+      "e5_sa_b_max_3d": 1.594436429147036e-16,
+      "e6_aa_normal_dot": 0.14228477327528885
+    },
+    {
+      "pair": "O+O",
+      "be": 498,
+      "dh": null,
+      "e4_scn_overlap": 5,
+      "e5_sa_b_max_3d": 1.7775249843181618e-16,
+      "e6_aa_normal_dot": 0.03213365880016508
+    },
+    {
+      "pair": "N+N",
+      "be": 945,
+      "dh": null,
+      "e4_scn_overlap": 9,
+      "e5_sa_b_max_3d": 1.6291219903597252e-16,
+      "e6_aa_normal_dot": 0.04899753436580745
+    },
+    {
+      "pair": "F+F",
+      "be": 159,
+      "dh": null,
+      "e4_scn_overlap": 3,
+      "e5_sa_b_max_3d": 1.7775249843181618e-16,
+      "e6_aa_normal_dot": 0.053761980155919535
+    },
+    {
+      "pair": "Cl+Cl",
+      "be": 243,
+      "dh": null,
+      "e4_scn_overlap": 3,
+      "e5_sa_b_max_3d": 1.7775249843181618e-16,
+      "e6_aa_normal_dot": 0.15030971791606199
+    },
+    {
+      "pair": "H+F",
+      "be": 570,
+      "dh": -273,
+      "e4_scn_overlap": 5,
+      "e5_sa_b_max_3d": 1.7775249843181618e-16,
+      "e6_aa_normal_dot": 0.06332856672818139
+    },
+    {
+      "pair": "H+Cl",
+      "be": 432,
+      "dh": -92,
+      "e4_scn_overlap": 4,
+      "e5_sa_b_max_3d": 1.7775249843181618e-16,
+      "e6_aa_normal_dot": 0.11904183341945514
+    },
+    {
+      "pair": "H+Br",
+      "be": 366,
+      "dh": -36,
+      "e4_scn_overlap": 3,
+      "e5_sa_b_max_3d": 1.6661374560996333e-16,
+      "e6_aa_normal_dot": 0.08152916303349464
+    },
+    {
+      "pair": "H+I",
+      "be": 298,
+      "dh": 26,
+      "e4_scn_overlap": 5,
+      "e5_sa_b_max_3d": 1.6661374560996333e-16,
+      "e6_aa_normal_dot": 0.12455343110653444
+    },
+    {
+      "pair": "H+O",
+      "be": 463,
+      "dh": -286,
+      "e4_scn_overlap": 4,
+      "e5_sa_b_max_3d": 1.7775249843181618e-16,
+      "e6_aa_normal_dot": 0.05764567382417074
+    },
+    {
+      "pair": "H+N",
+      "be": 391,
+      "dh": -46,
+      "e4_scn_overlap": 4,
+      "e5_sa_b_max_3d": 1.6291219903597252e-16,
+      "e6_aa_normal_dot": 0.13718282445805888
+    },
+    {
+      "pair": "H+C",
+      "be": 413,
+      "dh": -75,
+      "e4_scn_overlap": 4,
+      "e5_sa_b_max_3d": 1.6661374560996333e-16,
+      "e6_aa_normal_dot": 0.10121222619280099
+    },
+    {
+      "pair": "H+S",
+      "be": 363,
+      "dh": -20,
+      "e4_scn_overlap": 5,
+      "e5_sa_b_max_3d": 1.6498427161603293e-16,
+      "e6_aa_normal_dot": 0.11581209840464167
+    },
+    {
+      "pair": "C+O",
+      "be": 799,
+      "dh": -394,
+      "e4_scn_overlap": 5,
+      "e5_sa_b_max_3d": 1.7775249843181618e-16,
+      "e6_aa_normal_dot": 0.04907176387139986
+    },
+    {
+      "pair": "C+C",
+      "be": 347,
+      "dh": null,
+      "e4_scn_overlap": 4,
+      "e5_sa_b_max_3d": 1.6661374560996333e-16,
+      "e6_aa_normal_dot": 0.07278188426433949
+    },
+    {
+      "pair": "C+N",
+      "be": 305,
+      "dh": null,
+      "e4_scn_overlap": 5,
+      "e5_sa_b_max_3d": 1.6291219903597252e-16,
+      "e6_aa_normal_dot": 0.09424472623987185
+    },
+    {
+      "pair": "C+Cl",
+      "be": 339,
+      "dh": -102,
+      "e4_scn_overlap": 6,
+      "e5_sa_b_max_3d": 1.7775249843181618e-16,
+      "e6_aa_normal_dot": 0.09029908249350081
+    },
+    {
+      "pair": "C+F",
+      "be": 485,
+      "dh": -680,
+      "e4_scn_overlap": 6,
+      "e5_sa_b_max_3d": 1.7775249843181618e-16,
+      "e6_aa_normal_dot": 0.05795637617858188
+    },
+    {
+      "pair": "Na+Cl",
+      "be": 411,
+      "dh": -411,
+      "e4_scn_overlap": 3,
+      "e5_sa_b_max_3d": 1.7775249843181618e-16,
+      "e6_aa_normal_dot": 0.10422825429904531
+    },
+    {
+      "pair": "Na+F",
+      "be": 477,
+      "dh": -574,
+      "e4_scn_overlap": 4,
+      "e5_sa_b_max_3d": 1.7775249843181618e-16,
+      "e6_aa_normal_dot": 0.0486781368300385
+    },
+    {
+      "pair": "Na+Br",
+      "be": 367,
+      "dh": -361,
+      "e4_scn_overlap": 4,
+      "e5_sa_b_max_3d": 1.6661374560996333e-16,
+      "e6_aa_normal_dot": 0.06791722714819091
+    },
+    {
+      "pair": "Na+I",
+      "be": 305,
+      "dh": -288,
+      "e4_scn_overlap": 4,
+      "e5_sa_b_max_3d": 1.6661374560996333e-16,
+      "e6_aa_normal_dot": 0.11949929361611732
+    },
+    {
+      "pair": "K+Cl",
+      "be": 427,
+      "dh": -436,
+      "e4_scn_overlap": 1,
+      "e5_sa_b_max_3d": 1.7775249843181618e-16,
+      "e6_aa_normal_dot": 0.109586428971564
+    },
+    {
+      "pair": "K+F",
+      "be": 494,
+      "dh": -567,
+      "e4_scn_overlap": 2,
+      "e5_sa_b_max_3d": 1.7775249843181618e-16,
+      "e6_aa_normal_dot": 0.054755475130312446
+    },
+    {
+      "pair": "K+Br",
+      "be": 382,
+      "dh": -394,
+      "e4_scn_overlap": 4,
+      "e5_sa_b_max_3d": 1.6661374560996333e-16,
+      "e6_aa_normal_dot": 0.07314579977471483
+    },
+    {
+      "pair": "K+I",
+      "be": 323,
+      "dh": -328,
+      "e4_scn_overlap": 4,
+      "e5_sa_b_max_3d": 1.6661374560996333e-16,
+      "e6_aa_normal_dot": 0.12108599973279856
+    },
+    {
+      "pair": "Li+F",
+      "be": 577,
+      "dh": -617,
+      "e4_scn_overlap": 6,
+      "e5_sa_b_max_3d": 1.7775249843181618e-16,
+      "e6_aa_normal_dot": 0.105728101885139
+    },
+    {
+      "pair": "Li+Cl",
+      "be": 469,
+      "dh": -409,
+      "e4_scn_overlap": 4,
+      "e5_sa_b_max_3d": 1.7775249843181618e-16,
+      "e6_aa_normal_dot": 0.12598323451831292
+    },
+    {
+      "pair": "Li+Br",
+      "be": 423,
+      "dh": -351,
+      "e4_scn_overlap": 4,
+      "e5_sa_b_max_3d": 1.6661374560996333e-16,
+      "e6_aa_normal_dot": 0.09703681230298868
+    },
+    {
+      "pair": "Li+I",
+      "be": 345,
+      "dh": -271,
+      "e4_scn_overlap": 5,
+      "e5_sa_b_max_3d": 1.6661374560996333e-16,
+      "e6_aa_normal_dot": 0.16518632415274406
+    },
+    {
+      "pair": "Fe+O",
+      "be": 460,
+      "dh": -824,
+      "e4_scn_overlap": 5,
+      "e5_sa_b_max_3d": 1.7775249843181618e-16,
+      "e6_aa_normal_dot": 0.024899474001900575
+    },
+    {
+      "pair": "Mg+O",
+      "be": 385,
+      "dh": -602,
+      "e4_scn_overlap": 6,
+      "e5_sa_b_max_3d": 1.7775249843181618e-16,
+      "e6_aa_normal_dot": 0.14810024148356032
+    },
+    {
+      "pair": "Ca+O",
+      "be": 360,
+      "dh": -635,
+      "e4_scn_overlap": 4,
+      "e5_sa_b_max_3d": 1.7775249843181618e-16,
+      "e6_aa_normal_dot": 0.042838385763370936
+    },
+    {
+      "pair": "Al+O",
+      "be": 511,
+      "dh": -1676,
+      "e4_scn_overlap": 2,
+      "e5_sa_b_max_3d": 1.7775249843181618e-16,
+      "e6_aa_normal_dot": 0.041530452630835435
+    },
+    {
+      "pair": "Si+O",
+      "be": 452,
+      "dh": -911,
+      "e4_scn_overlap": 5,
+      "e5_sa_b_max_3d": 1.7775249843181618e-16,
+      "e6_aa_normal_dot": 0.07595335275390713
+    },
+    {
+      "pair": "Cl+O",
+      "be": 205,
+      "dh": -33,
+      "e4_scn_overlap": 4,
+      "e5_sa_b_max_3d": 1.7775249843181618e-16,
+      "e6_aa_normal_dot": 0.07866552832324061
+    },
+    {
+      "pair": "S+O",
+      "be": 523,
+      "dh": -297,
+      "e4_scn_overlap": 5,
+      "e5_sa_b_max_3d": 1.7775249843181618e-16,
+      "e6_aa_normal_dot": 0.08131978351261154
+    }
+  ],
+  "regression_dh": {
+    "beta": [
+      -936.4420618154096,
+      31.214377122034364,
+      1.0917177655222305e-11,
+      4533.18647120915
+    ],
+    "r_squared": 0.2384645249540689,
+    "multiple_r": 0.488328296286493,
+    "n": 30
+  },
+  "regression_be": {
+    "beta": [
+      350.0177035358909,
+      44.76311408316717,
+      -2.2724839784712726e-12,
+      -1317.758935231601
+    ],
+    "r_squared": 0.32668132831531316,
+    "multiple_r": 0.5715604327761966,
+    "n": 37
+  }
+}

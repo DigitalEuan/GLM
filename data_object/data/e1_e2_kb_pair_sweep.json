@@ -1,0 +1,2333 @@
+[
+  {
+    "xor_hamming_weight": 0,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "0",
+    "xor_nrci": "1",
+    "hex_a": [
+      3,
+      2,
+      1,
+      2,
+      1,
+      3
+    ],
+    "hex_b": [
+      3,
+      2,
+      1,
+      2,
+      1,
+      3
+    ],
+    "hex_xor": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "hex_agreements": 6,
+    "hex_disagreements": 0,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 10.92313529208127,
+    "scn_overlap_count": 4,
+    "int_a_full": 2566844,
+    "int_b_full": 2566844,
+    "int_a_cap": 61,
+    "int_b_cap": 61,
+    "nat_sum": 122,
+    "row_hw_xor": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "onto_xor": {
+      "Reality": "0",
+      "Info": "0",
+      "Activation": "0",
+      "Potential": "0",
+      "Global_NRCI": "0"
+    },
+    "pair": [
+      "H",
+      "H"
+    ],
+    "label": "H2 bond",
+    "bond_energy_kJ": 436,
+    "delta_H_kJ": 0,
+    "hw_a": 12,
+    "hw_b": 12
+  },
+  {
+    "xor_hamming_weight": 0,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "0",
+    "xor_nrci": "1",
+    "hex_a": [
+      3,
+      1,
+      2,
+      3,
+      1,
+      2
+    ],
+    "hex_b": [
+      3,
+      1,
+      2,
+      3,
+      1,
+      2
+    ],
+    "hex_xor": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "hex_agreements": 6,
+    "hex_disagreements": 0,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 11.50536913824532,
+    "scn_overlap_count": 1,
+    "int_a_full": 14467103,
+    "int_b_full": 14467103,
+    "int_a_cap": 32,
+    "int_b_cap": 32,
+    "nat_sum": 64,
+    "row_hw_xor": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "onto_xor": {
+      "Reality": "0",
+      "Info": "0",
+      "Activation": "0",
+      "Potential": "0",
+      "Global_NRCI": "0"
+    },
+    "pair": [
+      "O",
+      "O"
+    ],
+    "label": "O2 bond",
+    "bond_energy_kJ": 498,
+    "delta_H_kJ": 0,
+    "hw_a": 12,
+    "hw_b": 12
+  },
+  {
+    "xor_hamming_weight": 0,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "0",
+    "xor_nrci": "1",
+    "hex_a": [
+      2,
+      2,
+      1,
+      1,
+      0,
+      0
+    ],
+    "hex_b": [
+      2,
+      2,
+      1,
+      1,
+      0,
+      0
+    ],
+    "hex_xor": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "hex_agreements": 6,
+    "hex_disagreements": 0,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 12.0660509196448,
+    "scn_overlap_count": 5,
+    "int_a_full": 15602377,
+    "int_b_full": 15602377,
+    "int_a_cap": 10,
+    "int_b_cap": 10,
+    "nat_sum": 20,
+    "row_hw_xor": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "onto_xor": {
+      "Reality": "0",
+      "Info": "0",
+      "Activation": "0",
+      "Potential": "0",
+      "Global_NRCI": "0"
+    },
+    "pair": [
+      "N",
+      "N"
+    ],
+    "label": "N2 triple bond",
+    "bond_energy_kJ": 945,
+    "delta_H_kJ": 0,
+    "hw_a": 12,
+    "hw_b": 12
+  },
+  {
+    "xor_hamming_weight": 0,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "0",
+    "xor_nrci": "1",
+    "hex_a": [
+      1,
+      0,
+      0,
+      3,
+      1,
+      3
+    ],
+    "hex_b": [
+      1,
+      0,
+      0,
+      3,
+      1,
+      3
+    ],
+    "hex_xor": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "hex_agreements": 6,
+    "hex_disagreements": 0,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 10.41444615481604,
+    "scn_overlap_count": 11,
+    "int_a_full": 4569055,
+    "int_b_full": 4569055,
+    "int_a_cap": 32,
+    "int_b_cap": 32,
+    "nat_sum": 64,
+    "row_hw_xor": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "onto_xor": {
+      "Reality": "0",
+      "Info": "0",
+      "Activation": "0",
+      "Potential": "0",
+      "Global_NRCI": "0"
+    },
+    "pair": [
+      "F",
+      "F"
+    ],
+    "label": "F2 bond",
+    "bond_energy_kJ": 159,
+    "delta_H_kJ": 0,
+    "hw_a": 16,
+    "hw_b": 16
+  },
+  {
+    "xor_hamming_weight": 0,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "0",
+    "xor_nrci": "1",
+    "hex_a": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "hex_b": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "hex_xor": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "hex_agreements": 6,
+    "hex_disagreements": 0,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 11.565739754736889,
+    "scn_overlap_count": 9,
+    "int_a_full": 958335,
+    "int_b_full": 958335,
+    "int_a_cap": 64,
+    "int_b_cap": 64,
+    "nat_sum": 128,
+    "row_hw_xor": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "onto_xor": {
+      "Reality": "0",
+      "Info": "0",
+      "Activation": "0",
+      "Potential": "0",
+      "Global_NRCI": "0"
+    },
+    "pair": [
+      "Cl",
+      "Cl"
+    ],
+    "label": "Cl2 bond",
+    "bond_energy_kJ": 243,
+    "delta_H_kJ": 0,
+    "hw_a": 16,
+    "hw_b": 16
+  },
+  {
+    "xor_hamming_weight": 12,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+    "xor_nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+    "hex_a": [
+      3,
+      2,
+      1,
+      2,
+      1,
+      3
+    ],
+    "hex_b": [
+      1,
+      0,
+      0,
+      3,
+      1,
+      3
+    ],
+    "hex_xor": [
+      2,
+      2,
+      1,
+      1,
+      0,
+      0
+    ],
+    "hex_agreements": 2,
+    "hex_disagreements": 4,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 11.4179593934571,
+    "scn_overlap_count": 6,
+    "int_a_full": 2566844,
+    "int_b_full": 4569055,
+    "int_a_cap": 61,
+    "int_b_cap": 32,
+    "nat_sum": 93,
+    "row_hw_xor": [
+      2,
+      3,
+      4,
+      3
+    ],
+    "onto_xor": {
+      "Reality": "1/6",
+      "Info": "1/4",
+      "Activation": "1/3",
+      "Potential": "1/4",
+      "Global_NRCI": "1/4"
+    },
+    "pair": [
+      "H",
+      "F"
+    ],
+    "label": "HF",
+    "bond_energy_kJ": 570,
+    "delta_H_kJ": -273,
+    "hw_a": 12,
+    "hw_b": 16
+  },
+  {
+    "xor_hamming_weight": 12,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+    "xor_nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+    "hex_a": [
+      3,
+      2,
+      1,
+      2,
+      1,
+      3
+    ],
+    "hex_b": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "hex_xor": [
+      3,
+      2,
+      1,
+      2,
+      1,
+      3
+    ],
+    "hex_agreements": 0,
+    "hex_disagreements": 6,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 11.832818980465953,
+    "scn_overlap_count": 7,
+    "int_a_full": 2566844,
+    "int_b_full": 958335,
+    "int_a_cap": 61,
+    "int_b_cap": 64,
+    "nat_sum": 125,
+    "row_hw_xor": [
+      2,
+      4,
+      4,
+      2
+    ],
+    "onto_xor": {
+      "Reality": "1/6",
+      "Info": "1/3",
+      "Activation": "1/3",
+      "Potential": "1/6",
+      "Global_NRCI": "1/4"
+    },
+    "pair": [
+      "H",
+      "Cl"
+    ],
+    "label": "HCl",
+    "bond_energy_kJ": 432,
+    "delta_H_kJ": -92,
+    "hw_a": 12,
+    "hw_b": 16
+  },
+  {
+    "xor_hamming_weight": 16,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "251540099987291377284560121471552045519461326629092897089382/40344489343054752407088436891842371820968160890283666757563",
+    "xor_nrci": "201722446715273762035442184459211859104840804451418333787815/327492496708919450677722245194987881864571467765964782332506",
+    "hex_a": [
+      3,
+      2,
+      1,
+      2,
+      1,
+      3
+    ],
+    "hex_b": [
+      1,
+      1,
+      0,
+      0,
+      2,
+      2
+    ],
+    "hex_xor": [
+      2,
+      3,
+      1,
+      2,
+      3,
+      1
+    ],
+    "hex_agreements": 0,
+    "hex_disagreements": 6,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 10.901742864846161,
+    "scn_overlap_count": 5,
+    "int_a_full": 2566844,
+    "int_b_full": 13490258,
+    "int_a_cap": 61,
+    "int_b_cap": 19,
+    "nat_sum": 80,
+    "row_hw_xor": [
+      4,
+      5,
+      3,
+      4
+    ],
+    "onto_xor": {
+      "Reality": "1/3",
+      "Info": "5/12",
+      "Activation": "1/4",
+      "Potential": "1/3",
+      "Global_NRCI": "1/3"
+    },
+    "pair": [
+      "H",
+      "Br"
+    ],
+    "label": "HBr",
+    "bond_energy_kJ": 366,
+    "delta_H_kJ": -36,
+    "hw_a": 12,
+    "hw_b": 12
+  },
+  {
+    "xor_hamming_weight": 8,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/40344489343054752407088436891842371820968160890283666757563",
+    "xor_nrci": "403444893430547524070884368918423718209681608902836667575630/529214943424193212713164429654199740969412272217383116120321",
+    "hex_a": [
+      3,
+      2,
+      1,
+      2,
+      1,
+      3
+    ],
+    "hex_b": [
+      0,
+      1,
+      1,
+      2,
+      0,
+      2
+    ],
+    "hex_xor": [
+      3,
+      3,
+      0,
+      0,
+      1,
+      1
+    ],
+    "hex_agreements": 2,
+    "hex_disagreements": 4,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 11.66183154629627,
+    "scn_overlap_count": 5,
+    "int_a_full": 2566844,
+    "int_b_full": 8789752,
+    "int_a_cap": 61,
+    "int_b_cap": 57,
+    "nat_sum": 118,
+    "row_hw_xor": [
+      2,
+      3,
+      2,
+      1
+    ],
+    "onto_xor": {
+      "Reality": "1/6",
+      "Info": "1/4",
+      "Activation": "1/6",
+      "Potential": "1/12",
+      "Global_NRCI": "1/6"
+    },
+    "pair": [
+      "H",
+      "I"
+    ],
+    "label": "HI",
+    "bond_energy_kJ": 298,
+    "delta_H_kJ": 26,
+    "hw_a": 12,
+    "hw_b": 12
+  },
+  {
+    "xor_hamming_weight": 16,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "251540099987291377284560121471552045519461326629092897089382/40344489343054752407088436891842371820968160890283666757563",
+    "xor_nrci": "201722446715273762035442184459211859104840804451418333787815/327492496708919450677722245194987881864571467765964782332506",
+    "hex_a": [
+      3,
+      2,
+      1,
+      2,
+      1,
+      3
+    ],
+    "hex_b": [
+      3,
+      1,
+      2,
+      3,
+      1,
+      2
+    ],
+    "hex_xor": [
+      0,
+      3,
+      3,
+      1,
+      0,
+      1
+    ],
+    "hex_agreements": 2,
+    "hex_disagreements": 4,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 11.127521902132427,
+    "scn_overlap_count": 4,
+    "int_a_full": 2566844,
+    "int_b_full": 14467103,
+    "int_a_cap": 61,
+    "int_b_cap": 32,
+    "nat_sum": 93,
+    "row_hw_xor": [
+      5,
+      5,
+      3,
+      3
+    ],
+    "onto_xor": {
+      "Reality": "5/12",
+      "Info": "5/12",
+      "Activation": "1/4",
+      "Potential": "1/4",
+      "Global_NRCI": "1/3"
+    },
+    "pair": [
+      "H",
+      "O"
+    ],
+    "label": "H2O O-H",
+    "bond_energy_kJ": 463,
+    "delta_H_kJ": -286,
+    "hw_a": 12,
+    "hw_b": 12
+  },
+  {
+    "xor_hamming_weight": 12,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+    "xor_nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+    "hex_a": [
+      3,
+      2,
+      1,
+      2,
+      1,
+      3
+    ],
+    "hex_b": [
+      2,
+      2,
+      1,
+      1,
+      0,
+      0
+    ],
+    "hex_xor": [
+      1,
+      0,
+      0,
+      3,
+      1,
+      3
+    ],
+    "hex_agreements": 2,
+    "hex_disagreements": 4,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 11.365577251615445,
+    "scn_overlap_count": 5,
+    "int_a_full": 2566844,
+    "int_b_full": 15602377,
+    "int_a_cap": 61,
+    "int_b_cap": 10,
+    "nat_sum": 71,
+    "row_hw_xor": [
+      3,
+      3,
+      2,
+      4
+    ],
+    "onto_xor": {
+      "Reality": "1/4",
+      "Info": "1/4",
+      "Activation": "1/6",
+      "Potential": "1/3",
+      "Global_NRCI": "1/4"
+    },
+    "pair": [
+      "H",
+      "N"
+    ],
+    "label": "NH3 N-H",
+    "bond_energy_kJ": 391,
+    "delta_H_kJ": -46,
+    "hw_a": 12,
+    "hw_b": 12
+  },
+  {
+    "xor_hamming_weight": 8,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/40344489343054752407088436891842371820968160890283666757563",
+    "xor_nrci": "403444893430547524070884368918423718209681608902836667575630/529214943424193212713164429654199740969412272217383116120321",
+    "hex_a": [
+      3,
+      2,
+      1,
+      2,
+      1,
+      3
+    ],
+    "hex_b": [
+      0,
+      3,
+      3,
+      1,
+      0,
+      1
+    ],
+    "hex_xor": [
+      3,
+      1,
+      2,
+      3,
+      1,
+      2
+    ],
+    "hex_agreements": 0,
+    "hex_disagreements": 6,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 10.752614103247431,
+    "scn_overlap_count": 5,
+    "int_a_full": 2566844,
+    "int_b_full": 16212726,
+    "int_a_cap": 61,
+    "int_b_cap": 55,
+    "nat_sum": 116,
+    "row_hw_xor": [
+      3,
+      1,
+      2,
+      2
+    ],
+    "onto_xor": {
+      "Reality": "1/4",
+      "Info": "1/12",
+      "Activation": "1/6",
+      "Potential": "1/6",
+      "Global_NRCI": "1/6"
+    },
+    "pair": [
+      "H",
+      "C"
+    ],
+    "label": "CH4 C-H",
+    "bond_energy_kJ": 413,
+    "delta_H_kJ": -75,
+    "hw_a": 12,
+    "hw_b": 16
+  },
+  {
+    "xor_hamming_weight": 12,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+    "xor_nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+    "hex_a": [
+      3,
+      2,
+      1,
+      2,
+      1,
+      3
+    ],
+    "hex_b": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "hex_xor": [
+      3,
+      2,
+      1,
+      2,
+      1,
+      3
+    ],
+    "hex_agreements": 0,
+    "hex_disagreements": 6,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 10.152083017528385,
+    "scn_overlap_count": 6,
+    "int_a_full": 2566844,
+    "int_b_full": 8166280,
+    "int_a_cap": 61,
+    "int_b_cap": 9,
+    "nat_sum": 70,
+    "row_hw_xor": [
+      3,
+      5,
+      1,
+      3
+    ],
+    "onto_xor": {
+      "Reality": "1/4",
+      "Info": "5/12",
+      "Activation": "1/12",
+      "Potential": "1/4",
+      "Global_NRCI": "1/4"
+    },
+    "pair": [
+      "H",
+      "S"
+    ],
+    "label": "H2S",
+    "bond_energy_kJ": 363,
+    "delta_H_kJ": -20,
+    "hw_a": 12,
+    "hw_b": 12
+  },
+  {
+    "xor_hamming_weight": 12,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+    "xor_nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+    "hex_a": [
+      0,
+      3,
+      3,
+      1,
+      0,
+      1
+    ],
+    "hex_b": [
+      3,
+      1,
+      2,
+      3,
+      1,
+      2
+    ],
+    "hex_xor": [
+      3,
+      2,
+      1,
+      2,
+      1,
+      3
+    ],
+    "hex_agreements": 0,
+    "hex_disagreements": 6,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 11.597805528791561,
+    "scn_overlap_count": 5,
+    "int_a_full": 16212726,
+    "int_b_full": 14467103,
+    "int_a_cap": 55,
+    "int_b_cap": 32,
+    "nat_sum": 87,
+    "row_hw_xor": [
+      2,
+      4,
+      3,
+      3
+    ],
+    "onto_xor": {
+      "Reality": "1/6",
+      "Info": "1/3",
+      "Activation": "1/4",
+      "Potential": "1/4",
+      "Global_NRCI": "1/4"
+    },
+    "pair": [
+      "C",
+      "O"
+    ],
+    "label": "CO2 C=O",
+    "bond_energy_kJ": 799,
+    "delta_H_kJ": -394,
+    "hw_a": 16,
+    "hw_b": 12
+  },
+  {
+    "xor_hamming_weight": 0,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "0",
+    "xor_nrci": "1",
+    "hex_a": [
+      0,
+      3,
+      3,
+      1,
+      0,
+      1
+    ],
+    "hex_b": [
+      0,
+      3,
+      3,
+      1,
+      0,
+      1
+    ],
+    "hex_xor": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "hex_agreements": 6,
+    "hex_disagreements": 0,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 11.42568699321912,
+    "scn_overlap_count": 5,
+    "int_a_full": 16212726,
+    "int_b_full": 16212726,
+    "int_a_cap": 55,
+    "int_b_cap": 55,
+    "nat_sum": 110,
+    "row_hw_xor": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "onto_xor": {
+      "Reality": "0",
+      "Info": "0",
+      "Activation": "0",
+      "Potential": "0",
+      "Global_NRCI": "0"
+    },
+    "pair": [
+      "C",
+      "C"
+    ],
+    "label": "C-C single",
+    "bond_energy_kJ": 347,
+    "delta_H_kJ": 0,
+    "hw_a": 16,
+    "hw_b": 16
+  },
+  {
+    "xor_hamming_weight": 12,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+    "xor_nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+    "hex_a": [
+      0,
+      3,
+      3,
+      1,
+      0,
+      1
+    ],
+    "hex_b": [
+      2,
+      2,
+      1,
+      1,
+      0,
+      0
+    ],
+    "hex_xor": [
+      2,
+      1,
+      2,
+      0,
+      0,
+      1
+    ],
+    "hex_agreements": 2,
+    "hex_disagreements": 4,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 11.653661764562061,
+    "scn_overlap_count": 5,
+    "int_a_full": 16212726,
+    "int_b_full": 15602377,
+    "int_a_cap": 55,
+    "int_b_cap": 10,
+    "nat_sum": 65,
+    "row_hw_xor": [
+      2,
+      4,
+      0,
+      6
+    ],
+    "onto_xor": {
+      "Reality": "1/6",
+      "Info": "1/3",
+      "Activation": "0",
+      "Potential": "1/2",
+      "Global_NRCI": "1/4"
+    },
+    "pair": [
+      "C",
+      "N"
+    ],
+    "label": "C-N",
+    "bond_energy_kJ": 305,
+    "delta_H_kJ": 0,
+    "hw_a": 16,
+    "hw_b": 12
+  },
+  {
+    "xor_hamming_weight": 16,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "251540099987291377284560121471552045519461326629092897089382/40344489343054752407088436891842371820968160890283666757563",
+    "xor_nrci": "201722446715273762035442184459211859104840804451418333787815/327492496708919450677722245194987881864571467765964782332506",
+    "hex_a": [
+      0,
+      3,
+      3,
+      1,
+      0,
+      1
+    ],
+    "hex_b": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "hex_xor": [
+      0,
+      3,
+      3,
+      1,
+      0,
+      1
+    ],
+    "hex_agreements": 2,
+    "hex_disagreements": 4,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 12.687417476427846,
+    "scn_overlap_count": 6,
+    "int_a_full": 16212726,
+    "int_b_full": 958335,
+    "int_a_cap": 55,
+    "int_b_cap": 64,
+    "nat_sum": 119,
+    "row_hw_xor": [
+      5,
+      5,
+      4,
+      2
+    ],
+    "onto_xor": {
+      "Reality": "5/12",
+      "Info": "5/12",
+      "Activation": "1/3",
+      "Potential": "1/6",
+      "Global_NRCI": "1/3"
+    },
+    "pair": [
+      "C",
+      "Cl"
+    ],
+    "label": "CCl4",
+    "bond_energy_kJ": 339,
+    "delta_H_kJ": -102,
+    "hw_a": 16,
+    "hw_b": 16
+  },
+  {
+    "xor_hamming_weight": 12,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+    "xor_nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+    "hex_a": [
+      0,
+      3,
+      3,
+      1,
+      0,
+      1
+    ],
+    "hex_b": [
+      1,
+      0,
+      0,
+      3,
+      1,
+      3
+    ],
+    "hex_xor": [
+      1,
+      3,
+      3,
+      2,
+      1,
+      2
+    ],
+    "hex_agreements": 0,
+    "hex_disagreements": 6,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 12.013034099526084,
+    "scn_overlap_count": 7,
+    "int_a_full": 16212726,
+    "int_b_full": 4569055,
+    "int_a_cap": 55,
+    "int_b_cap": 32,
+    "nat_sum": 87,
+    "row_hw_xor": [
+      3,
+      4,
+      2,
+      3
+    ],
+    "onto_xor": {
+      "Reality": "1/4",
+      "Info": "1/3",
+      "Activation": "1/6",
+      "Potential": "1/4",
+      "Global_NRCI": "1/4"
+    },
+    "pair": [
+      "C",
+      "F"
+    ],
+    "label": "CF4",
+    "bond_energy_kJ": 485,
+    "delta_H_kJ": -680,
+    "hw_a": 16,
+    "hw_b": 16
+  },
+  {
+    "xor_hamming_weight": 16,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "251540099987291377284560121471552045519461326629092897089382/40344489343054752407088436891842371820968160890283666757563",
+    "xor_nrci": "201722446715273762035442184459211859104840804451418333787815/327492496708919450677722245194987881864571467765964782332506",
+    "hex_a": [
+      1,
+      0,
+      2,
+      1,
+      0,
+      2
+    ],
+    "hex_b": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "hex_xor": [
+      1,
+      0,
+      2,
+      1,
+      0,
+      2
+    ],
+    "hex_agreements": 2,
+    "hex_disagreements": 4,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 12.045754481461096,
+    "scn_overlap_count": 4,
+    "int_a_full": 3499952,
+    "int_b_full": 958335,
+    "int_a_cap": 49,
+    "int_b_cap": 64,
+    "nat_sum": 113,
+    "row_hw_xor": [
+      3,
+      6,
+      3,
+      4
+    ],
+    "onto_xor": {
+      "Reality": "1/4",
+      "Info": "1/2",
+      "Activation": "1/4",
+      "Potential": "1/3",
+      "Global_NRCI": "1/3"
+    },
+    "pair": [
+      "Na",
+      "Cl"
+    ],
+    "label": "NaCl",
+    "bond_energy_kJ": 411,
+    "delta_H_kJ": -411,
+    "hw_a": 12,
+    "hw_b": 16
+  },
+  {
+    "xor_hamming_weight": 12,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+    "xor_nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+    "hex_a": [
+      1,
+      0,
+      2,
+      1,
+      0,
+      2
+    ],
+    "hex_b": [
+      1,
+      0,
+      0,
+      3,
+      1,
+      3
+    ],
+    "hex_xor": [
+      0,
+      0,
+      2,
+      2,
+      1,
+      1
+    ],
+    "hex_agreements": 2,
+    "hex_disagreements": 4,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 11.41353717135495,
+    "scn_overlap_count": 5,
+    "int_a_full": 3499952,
+    "int_b_full": 4569055,
+    "int_a_cap": 49,
+    "int_b_cap": 32,
+    "nat_sum": 81,
+    "row_hw_xor": [
+      3,
+      3,
+      1,
+      5
+    ],
+    "onto_xor": {
+      "Reality": "1/4",
+      "Info": "1/4",
+      "Activation": "1/12",
+      "Potential": "5/12",
+      "Global_NRCI": "1/4"
+    },
+    "pair": [
+      "Na",
+      "F"
+    ],
+    "label": "NaF",
+    "bond_energy_kJ": 477,
+    "delta_H_kJ": -574,
+    "hw_a": 12,
+    "hw_b": 16
+  },
+  {
+    "xor_hamming_weight": 16,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "251540099987291377284560121471552045519461326629092897089382/40344489343054752407088436891842371820968160890283666757563",
+    "xor_nrci": "201722446715273762035442184459211859104840804451418333787815/327492496708919450677722245194987881864571467765964782332506",
+    "hex_a": [
+      1,
+      0,
+      2,
+      1,
+      0,
+      2
+    ],
+    "hex_b": [
+      1,
+      1,
+      0,
+      0,
+      2,
+      2
+    ],
+    "hex_xor": [
+      0,
+      1,
+      2,
+      1,
+      2,
+      0
+    ],
+    "hex_agreements": 2,
+    "hex_disagreements": 4,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 10.726836379105375,
+    "scn_overlap_count": 6,
+    "int_a_full": 3499952,
+    "int_b_full": 13490258,
+    "int_a_cap": 49,
+    "int_b_cap": 19,
+    "nat_sum": 68,
+    "row_hw_xor": [
+      5,
+      3,
+      6,
+      2
+    ],
+    "onto_xor": {
+      "Reality": "5/12",
+      "Info": "1/4",
+      "Activation": "1/2",
+      "Potential": "1/6",
+      "Global_NRCI": "1/3"
+    },
+    "pair": [
+      "Na",
+      "Br"
+    ],
+    "label": "NaBr",
+    "bond_energy_kJ": 367,
+    "delta_H_kJ": -361,
+    "hw_a": 12,
+    "hw_b": 12
+  },
+  {
+    "xor_hamming_weight": 12,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+    "xor_nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+    "hex_a": [
+      1,
+      0,
+      2,
+      1,
+      0,
+      2
+    ],
+    "hex_b": [
+      0,
+      1,
+      1,
+      2,
+      0,
+      2
+    ],
+    "hex_xor": [
+      1,
+      1,
+      3,
+      3,
+      0,
+      0
+    ],
+    "hex_agreements": 2,
+    "hex_disagreements": 4,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 12.125929179936756,
+    "scn_overlap_count": 2,
+    "int_a_full": 3499952,
+    "int_b_full": 8789752,
+    "int_a_cap": 49,
+    "int_b_cap": 57,
+    "nat_sum": 106,
+    "row_hw_xor": [
+      3,
+      5,
+      3,
+      1
+    ],
+    "onto_xor": {
+      "Reality": "1/4",
+      "Info": "5/12",
+      "Activation": "1/4",
+      "Potential": "1/12",
+      "Global_NRCI": "1/4"
+    },
+    "pair": [
+      "Na",
+      "I"
+    ],
+    "label": "NaI",
+    "bond_energy_kJ": 305,
+    "delta_H_kJ": -288,
+    "hw_a": 12,
+    "hw_b": 12
+  },
+  {
+    "xor_hamming_weight": 12,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+    "xor_nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+    "hex_a": [
+      2,
+      0,
+      1,
+      0,
+      1,
+      2
+    ],
+    "hex_b": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "hex_xor": [
+      2,
+      0,
+      1,
+      0,
+      1,
+      2
+    ],
+    "hex_agreements": 2,
+    "hex_disagreements": 4,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 12.469859126449427,
+    "scn_overlap_count": 7,
+    "int_a_full": 15182543,
+    "int_b_full": 958335,
+    "int_a_cap": 16,
+    "int_b_cap": 64,
+    "nat_sum": 80,
+    "row_hw_xor": [
+      4,
+      3,
+      3,
+      2
+    ],
+    "onto_xor": {
+      "Reality": "1/3",
+      "Info": "1/4",
+      "Activation": "1/4",
+      "Potential": "1/6",
+      "Global_NRCI": "1/4"
+    },
+    "pair": [
+      "K",
+      "Cl"
+    ],
+    "label": "KCl",
+    "bond_energy_kJ": 427,
+    "delta_H_kJ": -436,
+    "hw_a": 16,
+    "hw_b": 16
+  },
+  {
+    "xor_hamming_weight": 8,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/40344489343054752407088436891842371820968160890283666757563",
+    "xor_nrci": "403444893430547524070884368918423718209681608902836667575630/529214943424193212713164429654199740969412272217383116120321",
+    "hex_a": [
+      2,
+      0,
+      1,
+      0,
+      1,
+      2
+    ],
+    "hex_b": [
+      1,
+      0,
+      0,
+      3,
+      1,
+      3
+    ],
+    "hex_xor": [
+      3,
+      0,
+      1,
+      3,
+      0,
+      1
+    ],
+    "hex_agreements": 2,
+    "hex_disagreements": 4,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 11.6857884996043,
+    "scn_overlap_count": 8,
+    "int_a_full": 15182543,
+    "int_b_full": 4569055,
+    "int_a_cap": 16,
+    "int_b_cap": 32,
+    "nat_sum": 48,
+    "row_hw_xor": [
+      2,
+      2,
+      3,
+      1
+    ],
+    "onto_xor": {
+      "Reality": "1/6",
+      "Info": "1/6",
+      "Activation": "1/4",
+      "Potential": "1/12",
+      "Global_NRCI": "1/6"
+    },
+    "pair": [
+      "K",
+      "F"
+    ],
+    "label": "KF",
+    "bond_energy_kJ": 494,
+    "delta_H_kJ": -567,
+    "hw_a": 16,
+    "hw_b": 16
+  },
+  {
+    "xor_hamming_weight": 12,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+    "xor_nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+    "hex_a": [
+      2,
+      0,
+      1,
+      0,
+      1,
+      2
+    ],
+    "hex_b": [
+      1,
+      1,
+      0,
+      0,
+      2,
+      2
+    ],
+    "hex_xor": [
+      3,
+      1,
+      1,
+      0,
+      3,
+      0
+    ],
+    "hex_agreements": 2,
+    "hex_disagreements": 4,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 11.271697462045141,
+    "scn_overlap_count": 6,
+    "int_a_full": 15182543,
+    "int_b_full": 13490258,
+    "int_a_cap": 16,
+    "int_b_cap": 19,
+    "nat_sum": 35,
+    "row_hw_xor": [
+      2,
+      4,
+      2,
+      4
+    ],
+    "onto_xor": {
+      "Reality": "1/6",
+      "Info": "1/3",
+      "Activation": "1/6",
+      "Potential": "1/3",
+      "Global_NRCI": "1/4"
+    },
+    "pair": [
+      "K",
+      "Br"
+    ],
+    "label": "KBr",
+    "bond_energy_kJ": 382,
+    "delta_H_kJ": -394,
+    "hw_a": 16,
+    "hw_b": 12
+  },
+  {
+    "xor_hamming_weight": 12,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+    "xor_nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+    "hex_a": [
+      2,
+      0,
+      1,
+      0,
+      1,
+      2
+    ],
+    "hex_b": [
+      0,
+      1,
+      1,
+      2,
+      0,
+      2
+    ],
+    "hex_xor": [
+      2,
+      1,
+      0,
+      2,
+      1,
+      0
+    ],
+    "hex_agreements": 2,
+    "hex_disagreements": 4,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 12.602896391695076,
+    "scn_overlap_count": 6,
+    "int_a_full": 15182543,
+    "int_b_full": 8789752,
+    "int_a_cap": 16,
+    "int_b_cap": 57,
+    "nat_sum": 73,
+    "row_hw_xor": [
+      2,
+      4,
+      1,
+      5
+    ],
+    "onto_xor": {
+      "Reality": "1/6",
+      "Info": "1/3",
+      "Activation": "1/12",
+      "Potential": "5/12",
+      "Global_NRCI": "1/4"
+    },
+    "pair": [
+      "K",
+      "I"
+    ],
+    "label": "KI",
+    "bond_energy_kJ": 323,
+    "delta_H_kJ": -328,
+    "hw_a": 16,
+    "hw_b": 12
+  },
+  {
+    "xor_hamming_weight": 12,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+    "xor_nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+    "hex_a": [
+      0,
+      1,
+      2,
+      1,
+      2,
+      0
+    ],
+    "hex_b": [
+      1,
+      0,
+      0,
+      3,
+      1,
+      3
+    ],
+    "hex_xor": [
+      1,
+      1,
+      2,
+      2,
+      3,
+      3
+    ],
+    "hex_agreements": 0,
+    "hex_disagreements": 6,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 12.06794827401969,
+    "scn_overlap_count": 4,
+    "int_a_full": 7519056,
+    "int_b_full": 4569055,
+    "int_a_cap": 17,
+    "int_b_cap": 32,
+    "nat_sum": 49,
+    "row_hw_xor": [
+      3,
+      2,
+      3,
+      4
+    ],
+    "onto_xor": {
+      "Reality": "1/4",
+      "Info": "1/6",
+      "Activation": "1/4",
+      "Potential": "1/3",
+      "Global_NRCI": "1/4"
+    },
+    "pair": [
+      "Li",
+      "F"
+    ],
+    "label": "LiF",
+    "bond_energy_kJ": 577,
+    "delta_H_kJ": -617,
+    "hw_a": 12,
+    "hw_b": 16
+  },
+  {
+    "xor_hamming_weight": 12,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+    "xor_nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+    "hex_a": [
+      0,
+      1,
+      2,
+      1,
+      2,
+      0
+    ],
+    "hex_b": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "hex_xor": [
+      0,
+      1,
+      2,
+      1,
+      2,
+      0
+    ],
+    "hex_agreements": 2,
+    "hex_disagreements": 4,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 12.703388879337378,
+    "scn_overlap_count": 6,
+    "int_a_full": 7519056,
+    "int_b_full": 958335,
+    "int_a_cap": 17,
+    "int_b_cap": 64,
+    "nat_sum": 81,
+    "row_hw_xor": [
+      5,
+      1,
+      1,
+      5
+    ],
+    "onto_xor": {
+      "Reality": "5/12",
+      "Info": "1/12",
+      "Activation": "1/12",
+      "Potential": "5/12",
+      "Global_NRCI": "1/4"
+    },
+    "pair": [
+      "Li",
+      "Cl"
+    ],
+    "label": "LiCl",
+    "bond_energy_kJ": 469,
+    "delta_H_kJ": -409,
+    "hw_a": 12,
+    "hw_b": 16
+  },
+  {
+    "xor_hamming_weight": 12,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+    "xor_nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+    "hex_a": [
+      0,
+      1,
+      2,
+      1,
+      2,
+      0
+    ],
+    "hex_b": [
+      1,
+      1,
+      0,
+      0,
+      2,
+      2
+    ],
+    "hex_xor": [
+      1,
+      0,
+      2,
+      1,
+      0,
+      2
+    ],
+    "hex_agreements": 2,
+    "hex_disagreements": 4,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 11.195855469827665,
+    "scn_overlap_count": 6,
+    "int_a_full": 7519056,
+    "int_b_full": 13490258,
+    "int_a_cap": 17,
+    "int_b_cap": 19,
+    "nat_sum": 36,
+    "row_hw_xor": [
+      5,
+      4,
+      2,
+      1
+    ],
+    "onto_xor": {
+      "Reality": "5/12",
+      "Info": "1/3",
+      "Activation": "1/6",
+      "Potential": "1/12",
+      "Global_NRCI": "1/4"
+    },
+    "pair": [
+      "Li",
+      "Br"
+    ],
+    "label": "LiBr",
+    "bond_energy_kJ": 423,
+    "delta_H_kJ": -351,
+    "hw_a": 12,
+    "hw_b": 12
+  },
+  {
+    "xor_hamming_weight": 12,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+    "xor_nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+    "hex_a": [
+      0,
+      1,
+      2,
+      1,
+      2,
+      0
+    ],
+    "hex_b": [
+      0,
+      1,
+      1,
+      2,
+      0,
+      2
+    ],
+    "hex_xor": [
+      0,
+      0,
+      3,
+      3,
+      2,
+      2
+    ],
+    "hex_agreements": 2,
+    "hex_disagreements": 4,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 12.65131240760157,
+    "scn_overlap_count": 5,
+    "int_a_full": 7519056,
+    "int_b_full": 8789752,
+    "int_a_cap": 17,
+    "int_b_cap": 57,
+    "nat_sum": 74,
+    "row_hw_xor": [
+      5,
+      2,
+      3,
+      2
+    ],
+    "onto_xor": {
+      "Reality": "5/12",
+      "Info": "1/6",
+      "Activation": "1/4",
+      "Potential": "1/6",
+      "Global_NRCI": "1/4"
+    },
+    "pair": [
+      "Li",
+      "I"
+    ],
+    "label": "LiI",
+    "bond_energy_kJ": 345,
+    "delta_H_kJ": -271,
+    "hw_a": 12,
+    "hw_b": 12
+  },
+  {
+    "xor_hamming_weight": 16,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "251540099987291377284560121471552045519461326629092897089382/40344489343054752407088436891842371820968160890283666757563",
+    "xor_nrci": "201722446715273762035442184459211859104840804451418333787815/327492496708919450677722245194987881864571467765964782332506",
+    "hex_a": [
+      2,
+      1,
+      3,
+      1,
+      3,
+      2
+    ],
+    "hex_b": [
+      3,
+      1,
+      2,
+      3,
+      1,
+      2
+    ],
+    "hex_xor": [
+      1,
+      0,
+      1,
+      2,
+      2,
+      0
+    ],
+    "hex_agreements": 2,
+    "hex_disagreements": 4,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 11.926333251511606,
+    "scn_overlap_count": 3,
+    "int_a_full": 7276272,
+    "int_b_full": 14467103,
+    "int_a_cap": 49,
+    "int_b_cap": 32,
+    "nat_sum": 81,
+    "row_hw_xor": [
+      3,
+      4,
+      4,
+      5
+    ],
+    "onto_xor": {
+      "Reality": "1/4",
+      "Info": "1/3",
+      "Activation": "1/3",
+      "Potential": "5/12",
+      "Global_NRCI": "1/3"
+    },
+    "pair": [
+      "Fe",
+      "O"
+    ],
+    "label": "Fe2O3",
+    "bond_energy_kJ": 460,
+    "delta_H_kJ": -824,
+    "hw_a": 12,
+    "hw_b": 12
+  },
+  {
+    "xor_hamming_weight": 12,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+    "xor_nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+    "hex_a": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "hex_b": [
+      3,
+      1,
+      2,
+      3,
+      1,
+      2
+    ],
+    "hex_xor": [
+      1,
+      3,
+      0,
+      1,
+      3,
+      0
+    ],
+    "hex_agreements": 2,
+    "hex_disagreements": 4,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 10.046169228745168,
+    "scn_overlap_count": 4,
+    "int_a_full": 1221382,
+    "int_b_full": 14467103,
+    "int_a_cap": 7,
+    "int_b_cap": 32,
+    "nat_sum": 39,
+    "row_hw_xor": [
+      4,
+      3,
+      2,
+      3
+    ],
+    "onto_xor": {
+      "Reality": "1/3",
+      "Info": "1/4",
+      "Activation": "1/6",
+      "Potential": "1/4",
+      "Global_NRCI": "1/4"
+    },
+    "pair": [
+      "Mg",
+      "O"
+    ],
+    "label": "MgO",
+    "bond_energy_kJ": 385,
+    "delta_H_kJ": -602,
+    "hw_a": 8,
+    "hw_b": 12
+  },
+  {
+    "xor_hamming_weight": 12,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+    "xor_nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+    "hex_a": [
+      1,
+      2,
+      3,
+      1,
+      2,
+      3
+    ],
+    "hex_b": [
+      3,
+      1,
+      2,
+      3,
+      1,
+      2
+    ],
+    "hex_xor": [
+      2,
+      3,
+      1,
+      2,
+      3,
+      1
+    ],
+    "hex_agreements": 0,
+    "hex_disagreements": 6,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 11.410257261927269,
+    "scn_overlap_count": 3,
+    "int_a_full": 4893049,
+    "int_b_full": 14467103,
+    "int_a_cap": 58,
+    "int_b_cap": 32,
+    "nat_sum": 90,
+    "row_hw_xor": [
+      3,
+      3,
+      3,
+      3
+    ],
+    "onto_xor": {
+      "Reality": "1/4",
+      "Info": "1/4",
+      "Activation": "1/4",
+      "Potential": "1/4",
+      "Global_NRCI": "1/4"
+    },
+    "pair": [
+      "Ca",
+      "O"
+    ],
+    "label": "CaO",
+    "bond_energy_kJ": 360,
+    "delta_H_kJ": -635,
+    "hw_a": 12,
+    "hw_b": 12
+  },
+  {
+    "xor_hamming_weight": 12,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+    "xor_nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+    "hex_a": [
+      0,
+      3,
+      1,
+      3,
+      1,
+      0
+    ],
+    "hex_b": [
+      3,
+      1,
+      2,
+      3,
+      1,
+      2
+    ],
+    "hex_xor": [
+      3,
+      2,
+      3,
+      0,
+      0,
+      2
+    ],
+    "hex_agreements": 2,
+    "hex_disagreements": 4,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 10.64933953951554,
+    "scn_overlap_count": 3,
+    "int_a_full": 548539,
+    "int_b_full": 14467103,
+    "int_a_cap": 60,
+    "int_b_cap": 32,
+    "nat_sum": 92,
+    "row_hw_xor": [
+      4,
+      2,
+      4,
+      2
+    ],
+    "onto_xor": {
+      "Reality": "1/3",
+      "Info": "1/6",
+      "Activation": "1/3",
+      "Potential": "1/6",
+      "Global_NRCI": "1/4"
+    },
+    "pair": [
+      "Al",
+      "O"
+    ],
+    "label": "Al2O3",
+    "bond_energy_kJ": 511,
+    "delta_H_kJ": -1676,
+    "hw_a": 12,
+    "hw_b": 12
+  },
+  {
+    "xor_hamming_weight": 12,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+    "xor_nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+    "hex_a": [
+      3,
+      2,
+      3,
+      0,
+      0,
+      2
+    ],
+    "hex_b": [
+      3,
+      1,
+      2,
+      3,
+      1,
+      2
+    ],
+    "hex_xor": [
+      0,
+      3,
+      1,
+      3,
+      1,
+      0
+    ],
+    "hex_agreements": 2,
+    "hex_disagreements": 4,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 11.295030741510184,
+    "scn_overlap_count": 2,
+    "int_a_full": 3049931,
+    "int_b_full": 14467103,
+    "int_a_cap": 12,
+    "int_b_cap": 32,
+    "nat_sum": 44,
+    "row_hw_xor": [
+      4,
+      2,
+      4,
+      2
+    ],
+    "onto_xor": {
+      "Reality": "1/3",
+      "Info": "1/6",
+      "Activation": "1/3",
+      "Potential": "1/6",
+      "Global_NRCI": "1/4"
+    },
+    "pair": [
+      "Si",
+      "O"
+    ],
+    "label": "SiO2",
+    "bond_energy_kJ": 452,
+    "delta_H_kJ": -911,
+    "hw_a": 12,
+    "hw_b": 12
+  },
+  {
+    "xor_hamming_weight": 12,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+    "xor_nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+    "hex_a": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "hex_b": [
+      3,
+      1,
+      2,
+      3,
+      1,
+      2
+    ],
+    "hex_xor": [
+      3,
+      1,
+      2,
+      3,
+      1,
+      2
+    ],
+    "hex_agreements": 0,
+    "hex_disagreements": 6,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 10.971234866667372,
+    "scn_overlap_count": 4,
+    "int_a_full": 958335,
+    "int_b_full": 14467103,
+    "int_a_cap": 64,
+    "int_b_cap": 32,
+    "nat_sum": 96,
+    "row_hw_xor": [
+      3,
+      3,
+      5,
+      1
+    ],
+    "onto_xor": {
+      "Reality": "1/4",
+      "Info": "1/4",
+      "Activation": "5/12",
+      "Potential": "1/12",
+      "Global_NRCI": "1/4"
+    },
+    "pair": [
+      "Cl",
+      "O"
+    ],
+    "label": "Cl-O",
+    "bond_energy_kJ": 205,
+    "delta_H_kJ": -33,
+    "hw_a": 16,
+    "hw_b": 12
+  },
+  {
+    "xor_hamming_weight": 12,
+    "xor_syndrome_weight": 0,
+    "xor_is_codeword": true,
+    "xor_tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+    "xor_nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+    "hex_a": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "hex_b": [
+      3,
+      1,
+      2,
+      3,
+      1,
+      2
+    ],
+    "hex_xor": [
+      3,
+      1,
+      2,
+      3,
+      1,
+      2
+    ],
+    "hex_agreements": 0,
+    "hex_disagreements": 6,
+    "scn_min_distance": 1.0,
+    "scn_mean_distance": 11.472010767861645,
+    "scn_overlap_count": 3,
+    "int_a_full": 8166280,
+    "int_b_full": 14467103,
+    "int_a_cap": 9,
+    "int_b_cap": 32,
+    "nat_sum": 41,
+    "row_hw_xor": [
+      2,
+      2,
+      4,
+      4
+    ],
+    "onto_xor": {
+      "Reality": "1/6",
+      "Info": "1/6",
+      "Activation": "1/3",
+      "Potential": "1/3",
+      "Global_NRCI": "1/4"
+    },
+    "pair": [
+      "S",
+      "O"
+    ],
+    "label": "SO2",
+    "bond_energy_kJ": 523,
+    "delta_H_kJ": -297,
+    "hw_a": 12,
+    "hw_b": 12
+  }
+]
