@@ -2,7 +2,7 @@
 
 * **Author:** E R A Craig, New Zealand, 1 August 2026.
 
-## REPOSITORIES AND SPECIFIC FILES:
+## EXTERNAL REPOSITORIES AND SPECIFIC FILES:
 
 * Main UBP repository: 
 'https://github.com/DigitalEuan/UBP_Repo/tree/main/core_studio_v4.0'
@@ -195,6 +195,7 @@ Do not attempt to find a "rule" yet. Pass the input grid ($A$) through the **Dis
 3.  **Preserve:** Moving or rotating existing material.
 4.  **Simplify:** Removing noise or objects.
 5.  **Compress:** Changing the grid size (this requires Milestone 1 tools).
+6.  **Further Information:** for more on the "Disruption Lens" perspective see: [https://github.com/DigitalEuan/GLM/blob/main/arc_agi_15/DISRUPTION_ANALYSIS.md]
 
 #### **Step 2: Semantic Translation (Pillar 3)**
 Translate the discrete grid coordinates or color values into the binary substrate.
