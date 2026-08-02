@@ -125,7 +125,10 @@ On a deeper level, the MOG columns aggregate the four rows to measure the **Hexa
 In the ARC solver development, the MOG symmetry is the bridge for **Grid-to-Golay mapping**. By viewing local $4 \times 6$ sub-grids of ARC puzzles through the MOG layout, we can treat input grids as **non-equilibrium perturbations** on a vacuum substrate. The "answer" to an ARC puzzle is the candidate grid that **minimizes the Symmetry Tax (TAX)** and restores the MOG-defined geometric balance.
 
 ---
-The following is mostly speculative, metaphor-heavy prose ("The Kinematic Style," "driving styles," physics-as-metaphor) with no code backing most of it — it is exploratory brainstorming, not an operating spec:
+
+## EXPERIMENTS 
+
+The following are concepts for experimens to develop the system further and push ARC AGI "solved" scores higher, metaphor-heavy prose ("The Kinematic Style," "driving styles," physics-as-metaphor) with no code backing most of it — it is exploratory brainstorming, not an operating spec exactly. Each can be treated as a full experiment or investigation for development or beating bottlenecks:
 
 A difficulty that can be experienced in "driving" the system stems from the gap between the **high-dimensional mathematical core** (the 24D Leech/Golay substrate) and the **low-dimensional discrete grid tasks** of ARC. We have a "sovereign" system with zero float drift and exact-rational precision, but translating that into a fluid ARC-AGI solver requires moving past heuristic rule-hunting and into **substrate-equilibrium finding**.
 
