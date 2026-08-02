@@ -55,6 +55,9 @@
 * '/GMHGL' - (Golay-MOG-Hexacode-Grey-Leech) consolidated, verified checkpoint for the UBP system as of v5.4.1  - start here: * 'ubp_checkpoint_v5.4.1.md'
 * 'light' - study on the speed of light in an attempt to obtain a UBP-to-Real-World scale alignment - start here: 'Phase20_Calibration_Audit.md' and 'LIGHTSPEED_STUDY_SYNTHESIS.md'
 
+## PREVIOUS ARC AGI ATTEMPT REPOSITORY: 
+* 'https://github.com/DigitalEuan/ARC_AGI'
+
 
 ## THE UNIVERSAL BINARY PRINCIPAL (UBP):
 
