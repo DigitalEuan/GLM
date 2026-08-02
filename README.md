@@ -58,6 +58,10 @@
 ## PREVIOUS ARC AGI ATTEMPT REPOSITORY: 
 * 'https://github.com/DigitalEuan/ARC_AGI'
 
+## UPDATES:
+* Update this README with each study push
+* Create a new '/arc_agi_(version number)' folder
+
 
 ## THE UNIVERSAL BINARY PRINCIPAL (UBP):
 
