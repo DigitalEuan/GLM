@@ -84,6 +84,9 @@ Each of the 24 bits is assigned a 24D Leech point using the **A_basis scheme** (
 - Per-bit Leech points → spatial arithmetic polygons → scene metrics
 - Best: `sa_b_scene_max_3d_dist` (see Layer 1 signals above)
 
+### To be tested:
+Can this per-bit 24D assignment provide additional dataspace/geometry to encode actual information about a Subject past the 6-bit capacity of grid-level grey coded encoding.
+
 ---
 
 ## Stacked MOG Grid Configuration
