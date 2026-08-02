@@ -50,7 +50,7 @@
 ## THIS MODULE OF FOLDERS:
 * '/arc_agi_15' - current ARC AGI repository - start here: 'README.md'
 * '/data_object' - how to input information into the GLM system - start here: 'encoding_specification.md'
-* 'driving_ubp_glm.txt' - (this document) the running instructions for using this UBP and GLM system
+* 'README.md' - (this document) the running instructions for using this UBP and GLM system
 * '/GMHGL' - (Golay-MOG-Hexacode-Grey-Leech) consolidated, verified checkpoint for the UBP system as of v5.4.1  - start here: * 'ubp_checkpoint_v5.4.1.md'
 * 'light' - study on the speed of light in an attempt to obtain a UBP-to-Real-World scale alignment - start here: 'Phase20_Calibration_Audit.md'
 
