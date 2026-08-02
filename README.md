@@ -49,7 +49,7 @@
 ---
 
 ## THIS MODULE OF FOLDERS:
-* '/arc_agi_15' - current ARC AGI repository - start here: 'README.md'
+* '/arc_agi_15' - current ARC AGI repository - start here: 'FOR_USER_v065.md' and 'README.md'
 * '/data_object' - how to input information into the GLM system - start here: 'encoding_specification.md'
 * 'README.md' - (this document) the running instructions for using this UBP and GLM system
 * '/GMHGL' - (Golay-MOG-Hexacode-Grey-Leech) consolidated, verified checkpoint for the UBP system as of v5.4.1  - start here: * 'ubp_checkpoint_v5.4.1.md'
@@ -61,7 +61,7 @@
 ## UPDATES:
 * Update and refine this README with each study push
 * Create a new '/arc_agi_(version number)' folder for each ARC AGI commit after a series of pushes
-* Record study pushes and developments
+* Record all study pushes and developments in a consistent accessable document 
 
 
 ## THE UNIVERSAL BINARY PRINCIPAL (UBP):
