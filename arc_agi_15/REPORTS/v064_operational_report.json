@@ -1,0 +1,645 @@
+{
+  "version": "v064",
+  "solved": 9,
+  "total": 50,
+  "pct": 18.0,
+  "solver_counts": {
+    "multi_interior_fill": 1,
+    "gravity_down": 1,
+    "minkowski_distance": 1,
+    "local_swap": 1,
+    "colour_center_fill": 1,
+    "column_rank_fill": 1,
+    "marker_fill_85": 1,
+    "cond_recolour": 1,
+    "cross_shift_by_markers": 1
+  },
+  "category_counts": {
+    "expand": 3,
+    "enrich": 21,
+    "preserve": 12,
+    "compress": 4,
+    "simplify": 10
+  },
+  "unsolved_by_category": {
+    "enrich": 18,
+    "preserve": 9,
+    "compress": 4,
+    "simplify": 9,
+    "expand": 1
+  },
+  "reason_counts": {
+    "covered by solver 'multi_interior_fill' because its train pairs match that solver's rule family": 1,
+    "covered by solver 'gravity_down' because its train pairs match that solver's rule family": 1,
+    "has no consistent global colour mapping across train pairs": 41,
+    "needs conditional recolouring or object-specific selection rather than one uniform rule": 41,
+    "needs a size-changing transform such as crop, selection, extraction, or downsampling": 17,
+    "needs relational object selection or object ranking before transformation": 21,
+    "introduces a derived fill colour that must be inferred from structure, not copied directly": 10,
+    "covered by solver 'minkowski_distance' because its train pairs match that solver's rule family": 1,
+    "covered by solver 'local_swap' because its train pairs match that solver's rule family": 1,
+    "needs a multi-step composition that both erases and synthesises cells": 6,
+    "covered by solver 'colour_center_fill' because its train pairs match that solver's rule family": 1,
+    "covered by solver 'column_rank_fill' because its train pairs match that solver's rule family": 1,
+    "covered by solver 'marker_fill_85' because its train pairs match that solver's rule family": 1,
+    "covered by solver 'cond_recolour' because its train pairs match that solver's rule family": 1,
+    "covered by solver 'cross_shift_by_markers' because its train pairs match that solver's rule family": 1
+  },
+  "results": [
+    {
+      "task_id": "00dbd492",
+      "solved": true,
+      "solver": "multi_interior_fill",
+      "category": "expand",
+      "reasons": [
+        "covered by solver 'multi_interior_fill' because its train pairs match that solver's rule family"
+      ],
+      "correct_on_dev": true
+    },
+    {
+      "task_id": "1e0a9b12",
+      "solved": true,
+      "solver": "gravity_down",
+      "category": "enrich",
+      "reasons": [
+        "covered by solver 'gravity_down' because its train pairs match that solver's rule family"
+      ],
+      "correct_on_dev": true
+    },
+    {
+      "task_id": "1f642eb9",
+      "solved": false,
+      "solver": "none",
+      "category": "enrich",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "2697da3f",
+      "solved": false,
+      "solver": "none",
+      "category": "preserve",
+      "reasons": [
+        "needs a size-changing transform such as crop, selection, extraction, or downsampling",
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "2753e76c",
+      "solved": false,
+      "solver": "none",
+      "category": "compress",
+      "reasons": [
+        "needs a size-changing transform such as crop, selection, extraction, or downsampling",
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "needs relational object selection or object ranking before transformation"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "2bcee788",
+      "solved": false,
+      "solver": "none",
+      "category": "enrich",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "introduces a derived fill colour that must be inferred from structure, not copied directly"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "3345333e",
+      "solved": false,
+      "solver": "none",
+      "category": "simplify",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "needs relational object selection or object ranking before transformation"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "36d67576",
+      "solved": false,
+      "solver": "none",
+      "category": "enrich",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "396d80d7",
+      "solved": true,
+      "solver": "minkowski_distance",
+      "category": "preserve",
+      "reasons": [
+        "covered by solver 'minkowski_distance' because its train pairs match that solver's rule family"
+      ],
+      "correct_on_dev": true
+    },
+    {
+      "task_id": "3979b1a8",
+      "solved": false,
+      "solver": "none",
+      "category": "enrich",
+      "reasons": [
+        "needs a size-changing transform such as crop, selection, extraction, or downsampling",
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "45737921",
+      "solved": true,
+      "solver": "local_swap",
+      "category": "preserve",
+      "reasons": [
+        "covered by solver 'local_swap' because its train pairs match that solver's rule family"
+      ],
+      "correct_on_dev": true
+    },
+    {
+      "task_id": "46c35fc7",
+      "solved": false,
+      "solver": "none",
+      "category": "simplify",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "needs a multi-step composition that both erases and synthesises cells",
+        "needs relational object selection or object ranking before transformation"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "484b58aa",
+      "solved": false,
+      "solver": "none",
+      "category": "preserve",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "50846271",
+      "solved": false,
+      "solver": "none",
+      "category": "enrich",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "introduces a derived fill colour that must be inferred from structure, not copied directly"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "5289ad53",
+      "solved": false,
+      "solver": "none",
+      "category": "compress",
+      "reasons": [
+        "needs a size-changing transform such as crop, selection, extraction, or downsampling",
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "needs relational object selection or object ranking before transformation"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "538b439f",
+      "solved": false,
+      "solver": "none",
+      "category": "preserve",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "needs relational object selection or object ranking before transformation"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "54d82841",
+      "solved": true,
+      "solver": "colour_center_fill",
+      "category": "enrich",
+      "reasons": [
+        "covered by solver 'colour_center_fill' because its train pairs match that solver's rule family"
+      ],
+      "correct_on_dev": true
+    },
+    {
+      "task_id": "5521c0d9",
+      "solved": false,
+      "solver": "none",
+      "category": "preserve",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "needs a multi-step composition that both erases and synthesises cells"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "5587a8d0",
+      "solved": false,
+      "solver": "none",
+      "category": "simplify",
+      "reasons": [
+        "needs a size-changing transform such as crop, selection, extraction, or downsampling",
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "needs relational object selection or object ranking before transformation"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "575b1a71",
+      "solved": true,
+      "solver": "column_rank_fill",
+      "category": "expand",
+      "reasons": [
+        "covered by solver 'column_rank_fill' because its train pairs match that solver's rule family"
+      ],
+      "correct_on_dev": true
+    },
+    {
+      "task_id": "5e6bbc0b",
+      "solved": false,
+      "solver": "none",
+      "category": "enrich",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "needs a multi-step composition that both erases and synthesises cells",
+        "introduces a derived fill colour that must be inferred from structure, not copied directly",
+        "needs relational object selection or object ranking before transformation"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "662c240a",
+      "solved": false,
+      "solver": "none",
+      "category": "compress",
+      "reasons": [
+        "needs a size-changing transform such as crop, selection, extraction, or downsampling",
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "needs relational object selection or object ranking before transformation"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "6ecd11f4",
+      "solved": false,
+      "solver": "none",
+      "category": "compress",
+      "reasons": [
+        "needs a size-changing transform such as crop, selection, extraction, or downsampling",
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "needs relational object selection or object ranking before transformation"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "6f473927",
+      "solved": false,
+      "solver": "none",
+      "category": "enrich",
+      "reasons": [
+        "needs a size-changing transform such as crop, selection, extraction, or downsampling",
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "introduces a derived fill colour that must be inferred from structure, not copied directly"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "712bf12e",
+      "solved": false,
+      "solver": "none",
+      "category": "enrich",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "782b5218",
+      "solved": false,
+      "solver": "none",
+      "category": "preserve",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "needs a multi-step composition that both erases and synthesises cells",
+        "needs relational object selection or object ranking before transformation"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "7953d61e",
+      "solved": false,
+      "solver": "none",
+      "category": "enrich",
+      "reasons": [
+        "needs a size-changing transform such as crop, selection, extraction, or downsampling",
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "7acdf6d3",
+      "solved": false,
+      "solver": "none",
+      "category": "preserve",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "needs relational object selection or object ranking before transformation"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "846bdb03",
+      "solved": false,
+      "solver": "none",
+      "category": "simplify",
+      "reasons": [
+        "needs a size-changing transform such as crop, selection, extraction, or downsampling",
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "needs relational object selection or object ranking before transformation"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "8abad3cf",
+      "solved": false,
+      "solver": "none",
+      "category": "simplify",
+      "reasons": [
+        "needs a size-changing transform such as crop, selection, extraction, or downsampling",
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "needs relational object selection or object ranking before transformation"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "9caf5b84",
+      "solved": false,
+      "solver": "none",
+      "category": "simplify",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "introduces a derived fill colour that must be inferred from structure, not copied directly",
+        "needs relational object selection or object ranking before transformation"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "9f27f097",
+      "solved": false,
+      "solver": "none",
+      "category": "preserve",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "a85d4709",
+      "solved": true,
+      "solver": "marker_fill_85",
+      "category": "enrich",
+      "reasons": [
+        "covered by solver 'marker_fill_85' because its train pairs match that solver's rule family"
+      ],
+      "correct_on_dev": true
+    },
+    {
+      "task_id": "ae58858e",
+      "solved": true,
+      "solver": "cond_recolour",
+      "category": "preserve",
+      "reasons": [
+        "covered by solver 'cond_recolour' because its train pairs match that solver's rule family"
+      ],
+      "correct_on_dev": true
+    },
+    {
+      "task_id": "b1fc8b8e",
+      "solved": false,
+      "solver": "none",
+      "category": "preserve",
+      "reasons": [
+        "needs a size-changing transform such as crop, selection, extraction, or downsampling",
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "b91ae062",
+      "solved": false,
+      "solver": "none",
+      "category": "expand",
+      "reasons": [
+        "needs a size-changing transform such as crop, selection, extraction, or downsampling",
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "needs relational object selection or object ranking before transformation"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "bc4146bd",
+      "solved": false,
+      "solver": "none",
+      "category": "enrich",
+      "reasons": [
+        "needs a size-changing transform such as crop, selection, extraction, or downsampling",
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "c62e2108",
+      "solved": false,
+      "solver": "none",
+      "category": "simplify",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "needs a multi-step composition that both erases and synthesises cells",
+        "needs relational object selection or object ranking before transformation"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "d255d7a7",
+      "solved": false,
+      "solver": "none",
+      "category": "enrich",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "needs a multi-step composition that both erases and synthesises cells",
+        "needs relational object selection or object ranking before transformation"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "d43fd935",
+      "solved": false,
+      "solver": "none",
+      "category": "enrich",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "d4f3cd78",
+      "solved": false,
+      "solver": "none",
+      "category": "enrich",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "introduces a derived fill colour that must be inferred from structure, not copied directly"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "d631b094",
+      "solved": false,
+      "solver": "none",
+      "category": "preserve",
+      "reasons": [
+        "needs a size-changing transform such as crop, selection, extraction, or downsampling",
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "needs relational object selection or object ranking before transformation"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "e048c9ed",
+      "solved": false,
+      "solver": "none",
+      "category": "enrich",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "introduces a derived fill colour that must be inferred from structure, not copied directly"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "e4888269",
+      "solved": false,
+      "solver": "none",
+      "category": "simplify",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "e48d4e1a",
+      "solved": true,
+      "solver": "cross_shift_by_markers",
+      "category": "simplify",
+      "reasons": [
+        "covered by solver 'cross_shift_by_markers' because its train pairs match that solver's rule family"
+      ],
+      "correct_on_dev": true
+    },
+    {
+      "task_id": "e509e548",
+      "solved": false,
+      "solver": "none",
+      "category": "enrich",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "introduces a derived fill colour that must be inferred from structure, not copied directly"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "e7a25a18",
+      "solved": false,
+      "solver": "none",
+      "category": "enrich",
+      "reasons": [
+        "needs a size-changing transform such as crop, selection, extraction, or downsampling",
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "needs relational object selection or object ranking before transformation"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "ed74f2f2",
+      "solved": false,
+      "solver": "none",
+      "category": "simplify",
+      "reasons": [
+        "needs a size-changing transform such as crop, selection, extraction, or downsampling",
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "introduces a derived fill colour that must be inferred from structure, not copied directly",
+        "needs relational object selection or object ranking before transformation"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "f8f52ecc",
+      "solved": false,
+      "solver": "none",
+      "category": "enrich",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "needs relational object selection or object ranking before transformation"
+      ],
+      "correct_on_dev": null
+    },
+    {
+      "task_id": "fcc82909",
+      "solved": false,
+      "solver": "none",
+      "category": "enrich",
+      "reasons": [
+        "has no consistent global colour mapping across train pairs",
+        "needs conditional recolouring or object-specific selection rather than one uniform rule",
+        "introduces a derived fill colour that must be inferred from structure, not copied directly"
+      ],
+      "correct_on_dev": null
+    }
+  ]
+}

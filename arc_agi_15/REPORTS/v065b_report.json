@@ -1,0 +1,320 @@
+{
+  "solved": 10,
+  "total": 50,
+  "pct": 20.0,
+  "new": 1,
+  "solver_counts": {
+    "multi_interior_fill": 1,
+    "gravity_down": 1,
+    "minkowski_distance": 1,
+    "neighbour_recolour": 1,
+    "position_recolour": 1,
+    "colour_center_fill": 1,
+    "column_rank_fill": 1,
+    "marker_fill_85": 1,
+    "cond_recolour": 1,
+    "cross_shift_by_markers": 1
+  },
+  "results": [
+    {
+      "task_id": "00dbd492",
+      "solved": true,
+      "solver": "multi_interior_fill",
+      "new": false
+    },
+    {
+      "task_id": "1e0a9b12",
+      "solved": true,
+      "solver": "gravity_down",
+      "new": false
+    },
+    {
+      "task_id": "1f642eb9",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "2697da3f",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "2753e76c",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "2bcee788",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "3345333e",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "36d67576",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "396d80d7",
+      "solved": true,
+      "solver": "minkowski_distance",
+      "new": false
+    },
+    {
+      "task_id": "3979b1a8",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "45737921",
+      "solved": true,
+      "solver": "neighbour_recolour",
+      "new": false
+    },
+    {
+      "task_id": "46c35fc7",
+      "solved": true,
+      "solver": "position_recolour",
+      "new": true
+    },
+    {
+      "task_id": "484b58aa",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "50846271",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "5289ad53",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "538b439f",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "54d82841",
+      "solved": true,
+      "solver": "colour_center_fill",
+      "new": false
+    },
+    {
+      "task_id": "5521c0d9",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "5587a8d0",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "575b1a71",
+      "solved": true,
+      "solver": "column_rank_fill",
+      "new": false
+    },
+    {
+      "task_id": "5e6bbc0b",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "662c240a",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "6ecd11f4",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "6f473927",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "712bf12e",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "782b5218",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "7953d61e",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "7acdf6d3",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "846bdb03",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "8abad3cf",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "9caf5b84",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "9f27f097",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "a85d4709",
+      "solved": true,
+      "solver": "marker_fill_85",
+      "new": false
+    },
+    {
+      "task_id": "ae58858e",
+      "solved": true,
+      "solver": "cond_recolour",
+      "new": false
+    },
+    {
+      "task_id": "b1fc8b8e",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "b91ae062",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "bc4146bd",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "c62e2108",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "d255d7a7",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "d43fd935",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "d4f3cd78",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "d631b094",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "e048c9ed",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "e4888269",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "e48d4e1a",
+      "solved": true,
+      "solver": "cross_shift_by_markers",
+      "new": false
+    },
+    {
+      "task_id": "e509e548",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "e7a25a18",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "ed74f2f2",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "f8f52ecc",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    },
+    {
+      "task_id": "fcc82909",
+      "solved": false,
+      "solver": "none",
+      "new": false
+    }
+  ]
+}
