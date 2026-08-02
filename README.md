@@ -53,7 +53,7 @@
 * '/data_object' - how to input information into the GLM system - start here: 'encoding_specification.md'
 * 'README.md' - (this document) the running instructions for using this UBP and GLM system
 * '/GMHGL' - (Golay-MOG-Hexacode-Grey-Leech) consolidated, verified checkpoint for the UBP system as of v5.4.1  - start here: * 'ubp_checkpoint_v5.4.1.md'
-* 'light' - study on the speed of light in an attempt to obtain a UBP-to-Real-World scale alignment - start here: 'Phase20_Calibration_Audit.md' and 'LIGHTSPEED_STUDY_SYNTHESIS.md'
+* '/light' - study on the speed of light in an attempt to obtain a UBP-to-Real-World scale alignment - start here: '/reports/Phase20_Calibration_Audit.md' and 'reports/LIGHTSPEED_STUDY_SYNTHESIS.md'
 
 ## PREVIOUS ARC AGI ATTEMPT REPOSITORY: 
 * 'https://github.com/DigitalEuan/ARC_AGI'
@@ -120,6 +120,7 @@ On a deeper level, the MOG columns aggregate the four rows to measure the **Hexa
 In the ARC solver development, the MOG symmetry is the bridge for **Grid-to-Golay mapping**. By viewing local $4 \times 6$ sub-grids of ARC puzzles through the MOG layout, we can treat input grids as **non-equilibrium perturbations** on a vacuum substrate. The "answer" to an ARC puzzle is the candidate grid that **minimizes the Symmetry Tax (TAX)** and restores the MOG-defined geometric balance.
 
 ---
+The following is mostly speculative, metaphor-heavy prose ("The Kinematic Style," "driving styles," physics-as-metaphor) with no code backing most of it — it is exploratory brainstorming, not an operating spec:
 
 A difficulty that can be experienced in "driving" the system stems from the gap between the **high-dimensional mathematical core** (the 24D Leech/Golay substrate) and the **low-dimensional discrete grid tasks** of ARC. We have a "sovereign" system with zero float drift and exact-rational precision, but translating that into a fluid ARC-AGI solver requires moving past heuristic rule-hunting and into **substrate-equilibrium finding**.
 
