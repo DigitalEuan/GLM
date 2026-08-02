@@ -225,185 +225,127 @@ the system is currently a "One-Rule Engine". If we encounter a **"Compress"** ta
 
 ---
 
-STYLES
+## STYLES
 
 I think there could be different ways of Driving the UBP/GLM systems depending on the conditions, perhaps at some levels one "Style" is better than another, for example:
 
-With this Driving "Style" we are essentially treating the ARC grid as a "geometric resistor" (inspired by Citation to maintain as reference: Zanolari Davy Ohmic Geometry V9) where the "Symmetry Tax" is the equivalent of electrical impedance, and the goal is to find the physical configuration with the lowest "resistance" (or tax).
+With this Driving Style we are essentially treating the ARC grid as a "geometric resistor" ("inspired by" Citation to maintain as reference: Zanolari Davy Ohmic Geometry V9) where the "Symmetry Tax" is the equivalent of electrical impedance, and the goal is to find the physical configuration with the lowest "resistance" (or tax).
 
-The link between these two systems is the Principle of Geometric Reduction.The Mapping
+The link between these two systems is the Principle of Geometric Reduction.
 
+### The Mapping: 
 In the ohmic geometry research, we reduce an "astronomical" number of connections to a stable, simple coupling by manipulating the geometric shape (e.g., machining a cylinder into a cone, then to a triangular plate). We are utilizing geometry to make the system irreducible.
 
 In the ARC-AGI pipeline, we are applying the same logic to information:
-The Resistance: The "Noise" or "Entropy" in an unsolved ARC grid.
-The Geometry: The 24D Leech Lattice/MOG layout.
-The Reduction: The process of mapping the grid to the lattice to minimize the Symmetry Tax (TAX). Just as the "geometric resistance" naturally filters out complex couplings to find a simple equivalent, the Golay engine filters out "noisy" grid perturbations to find the stable "perfect codeword."
-Applying the "Geometric Resistance" Lens to ARC
+* The Resistance: The "Noise" or "Entropy" in an unsolved ARC grid.
+* The Geometry: The 24D Leech Lattice/MOG layout.
+* The Reduction: The process of mapping the grid to the lattice to minimize the Symmetry Tax (TAX). Just as the "geometric resistance" naturally filters out complex couplings to find a simple equivalent, the Golay engine filters out "noisy" grid perturbations to find the stable "perfect codeword."
+
+
+### Applying the "Geometric Resistance" Lens to ARC
 
 We can treat the ARC solver as a "Router" of information, similar to how the ohmic resistor routes current:
-Topology as Logic: Instead of searching for rules (which is inefficient), we are searching for the geometry. If the ARC puzzle is a "Cylinder" (a complex, unknown state), the goal is to "machine" it into a "Triangle" (the simplest 3-node, stable configuration).
-Constraint Matching: If a task in ARC involves an "Expansion," it is analogous to increasing the geometric scale. If it involves "Compression," we are "machining" the grid—removing surface area to reduce the "coupling" (the number of possible incorrect grid outcomes).
-The "Cymatic" Equivalent: The "H-Cymatic" effect can be described as where cone shapes translate frequencies into geometric patterns, is the physical manifestation of what the GrayMap does—it translates discrete grid tokens into a "frequency" (or binary vector) that the MOG can verify as coherent.
-How to Drive the Machine
+* Topology as Logic: Instead of searching for rules (which is inefficient), we are searching for the geometry. If the ARC puzzle is a "Cylinder" (a complex, unknown state), the goal is to "machine" it into a "Triangle" (the simplest 3-node, stable configuration).
+* Constraint Matching: If a task in ARC involves an "Expansion," it is analogous to increasing the geometric scale. If it involves "Compression," we are "machining" the grid—removing surface area to reduce the "coupling" (the number of possible incorrect grid outcomes).
+* The "Cymatic" Equivalent: The "H-Cymatic" effect can be described as where cone shapes translate frequencies into geometric patterns, is the physical manifestation of what the GrayMap does—it translates discrete grid tokens into a "frequency" (or binary vector) that the MOG can verify as coherent.
 
-To move past the "blockage," apply the document’s iteration strategy to the grid:
-When stuck (High-Dimensional Complexity): Do not add more heuristics. "Machine" the input grid. Simplify the grid geometry first (e.g., reduce the grid scale or extract the primary object) to lower the "surface area" of the problem, similar to how we machined the cylinder to reduce connection points.
-Stability over Rules: the document argues that geometry is "irreducible." Trust the stability of the Leech Lattice. If the "geometric resistance" of the output grid is high (high TAX), the solution is incorrect—no matter how many "rules" it seems to follow. The correct answer will always minimize the geometric tension (TAX) of the substrate.
 
-Python
-import numpy as np 
+### How to Drive the Machine
 
-class GeometricReductionLens:
-    """
-    Orchestrates the translation of ARC grid state into the 24D manifold
-    and performs geometric reduction to minimize Symmetry Tax (TAX).
-    This script is an example but numpy and other external dependencies 
-    SHOULD NOT BE USED as they may introduce floating point error.
-    """
-    
-    def __init__(self, golay_engine, leech_engine, mog_interface):
-        self.golay = golay_engine  # GolayCodeEngine: Corrects noise to nearest codeword
-        self.leech = leech_engine  # LeechLatticeEngine: Evaluates 24D stability (TAX/NRCI)
-        self.mog = mog_interface   # MOG: Ensures Hexacode grammar alignment
-
-    def map_to_substrate(self, grid):
-        """
-        Translates discrete ARC tokens (A) into 24D bit-vectors (P).
-        Equivalent to GrayMap integer-to-manifold translation.
-        """
-        # Logic: Assign each cell a 24D address vector (4 * e_i)
-        # Ensure Hamming distance of 1 for semantically similar colors.
-        substrate_vector = self.mog.encode(grid) 
-        return substrate_vector
-
-    def calculate_symmetry_tax(self, vector):
-        """
-        Measures 'geometric resistance' (TAX).
-        Lower TAX = higher geometric stability.
-        """
-        # Modulo 4 Congruence check (sum xi^2 = 0 mod 4)
-        is_balanced = self.leech.check_mod4_congruence(vector)
-        
-        # Calculate coherence based on the Leech Lattice distance
-        tax_value = self.leech.measure_distance_to_codeword(vector)
-        nrci = self.leech.calculate_nrci(vector) # Non-Random Coherence Index
-        
-        return {"tax": tax_value, "nrci": nrci, "balanced": is_balanced}
-
-    def reduce(self, input_grid):
-        """
-        The 'Machining' process. 
-        Iteratively reduces grid perturbation until minimal TAX state is found.
-        """
-        # 1. Semantic Translation
-        vector = self.map_to_substrate(input_grid)
-        
-        # 2. Grammatical Alignment (The MOG check)
-        if not self.mog.verify_hexacode_shadow(vector):
-            # If invalid, treat as noise and apply transformation shift
-            vector = self.mog.project_to_valid_shadow(vector)
-            
-        # 3. Golay 'Snap' (Error Correction)
-        # Pulls the data back to the nearest perfect 4,096 state
-        perfect_codeword = self.golay.snap(vector)
-        
-        # 4. Geometric Evaluation
-        stats = self.calculate_symmetry_tax(perfect_codeword)
-        
-        # 5. Reduction Loop (The 'Driving' Lever)
-        # If Coherence < 0.5, perform a transformation flip based on MOG Quadrant mass
-        if stats['nrci'] < 0.500:
-            best_candidate = self._steer_toward_equilibrium(perfect_codeword)
-            return best_candidate
-            
-        return perfect_codeword
-
-    def _steer_toward_equilibrium(self, vector):
-        """
-        Flips bits based on Mass Asymmetry (MOG Rows 0-3) to minimize TAX.
-        """
-        # Identify the quadrant with the highest tension
-        # M_Mass (0-5) = Global, I_Info (6-11) = Topological
-        # Apply transformation until NRCI > 0.500
-        pass 
-
----
+To move past usage "blockage," apply the document’s iteration strategy to the grid:
+* When stuck (High-Dimensional Complexity): Do not add more heuristics. "Machine" the input grid. Simplify the grid geometry first (e.g., reduce the grid scale or extract the primary object) to lower the "surface area" of the problem, similar to how we machined the cylinder to reduce connection points.
+* Stability over Rules: perhaps geometry is "irreducible." Trust the stability of the Leech Lattice. If the "geometric resistance" of the output grid is high (high TAX), the solution is incorrect—no matter how many "rules" it seems to follow. The correct answer will always minimize the geometric tension (TAX) of the substrate.
 
 The "driving style" of the UBP/GLM system may adapt to the task topology. Just as an electrical engineer switches between analyzing a DC resistive circuit and a complex AC harmonic system, the ARC solver should shift its "mode" based on the "geometric impedance" of the puzzle.
 
-We have already established The Machining Style (Reduction)—which is the primary tool for handling high-entropy, noisy grids. However, looking at the physics in the ohmic geometry document ("XP B," "XP C," and the "Zanode"), we can derive three additional driving styles.
+We have already established The Machining Style (Reduction) — which is the primary tool for handling high-entropy, noisy grids. However, looking at the physics in the ohmic geometry document ("XP B," "XP C," and the "Zanode"), we can derive three additional driving styles.
 
-Here is a proposed set of "Driving Styles" for the ARC-AGI system, mapped from the ohmic physical models to the mathematical UBP/GLM substrate.1. The Machining Style (The "Reducer")
-Ohmic Analogy (XP A): Machining the cylinder into a cone/triangle to simplify the coupling.
+### Here is a proposed set of "Driving Styles" 
+
+For the ARC-AGI system, mapped from the ohmic physical models to the mathematical UBP/GLM substrate:
+1. The Machining Style (The "Reducer")
+* Ohmic Analogy (XP A): Machining the cylinder into a cone/triangle to simplify the coupling.
 UBP/GLM Implementation: Geometric Reduction.
-The Logic: we force the high-entropy ARC grid into the Leech Lattice by minimizing Symmetry Tax (TAX). It assumes the "correct" state is a stable, perfect codeword.
-When to use: When the input grid is noisy, chaotic, or "astronomical" (too many possibilities). We are collapsing the wave function of the grid onto a stable reality.
+* The Logic: we force the high-entropy ARC grid into the Leech Lattice by minimizing Symmetry Tax (TAX). It assumes the "correct" state is a stable, perfect codeword.
+* When to use: When the input grid is noisy, chaotic, or "astronomical" (too many possibilities). We are collapsing the wave function of the grid onto a stable reality.
 2. The Resonant Style (The "Tuner")
-Ohmic Analogy (XP C): Cymatic H-fields. The shape defines the natural frequency or "voltage per m²" of the system.
-UBP/GLM Implementation: Coherence Maximization.
-The Logic: Instead of "snapping" the grid with the Golay engine, we treat the grid as a waveform. We rotate and permute the grid (using MOG Quadrant flips) to maximize the NRCI (Non-Random Coherence Index). We are not forcing a codeword; we are tuning the input until it "rings" with the substrate.
-When to use: For tasks involving symmetry, tiling, or geometric repetition (e.g., "copy this pattern," "fill this area"). The answer isn't a "state" to be reached; it’s a "frequency" to be matched.
+* Ohmic Analogy (XP C): Cymatic H-fields. The shape defines the natural frequency or "voltage per m²" of the system.
+* UBP/GLM Implementation: Coherence Maximization.
+* The Logic: Instead of "snapping" the grid with the Golay engine, we treat the grid as a waveform. We rotate and permute the grid (using MOG Quadrant flips) to maximize the NRCI (Non-Random Coherence Index). We are not forcing a codeword; we are tuning the input until it "rings" with the substrate.
+* When to use: For tasks involving symmetry, tiling, or geometric repetition (e.g., "copy this pattern," "fill this area"). The answer isn't a "state" to be reached; it’s a "frequency" to be matched.
 3. The Differential Style (The "Capacitor")
-Ohmic Analogy (XP B): Opposing two triangles to create a capacitive space (4-wire ohmic capacitor). It’s about the difference between two states.
-UBP/GLM Implementation: Transformation Gradient.
-The Logic: We don't look for the state of the grid; we look for the Difference between the Input Grid ($A$) and a Target Grid ($B$). We define a "delta" in the 24D manifold. If the "Symmetry Tax" of the transformation itself is low, we have found the correct "operator."
-When to use: For tasks involving transformation, movement, or color-changing (e.g., "move the object to the right," "invert the colors"). The goal is to minimize the "energy" required to perform the transformation, not the energy of the grid itself.
+* Ohmic Analogy (XP B): Opposing two triangles to create a capacitive space (4-wire ohmic capacitor). It’s about the difference between two states.
+* UBP/GLM Implementation: Transformation Gradient.
+* The Logic: We don't look for the state of the grid; we look for the Difference between the Input Grid ($A$) and a Target Grid ($B$). We define a "delta" in the 24D manifold. If the "Symmetry Tax" of the transformation itself is low, we have found the correct "operator."
+* When to use: For tasks involving transformation, movement, or color-changing (e.g., "move the object to the right," "invert the colors"). The goal is to minimize the "energy" required to perform the transformation, not the energy of the grid itself.
 4. The Recursive Style (The "Fractal")
-Ohmic Analogy: "A fractal is an object, an iteration, and a repetition."
-UBP/GLM Implementation: Chained Substrate Iteration.
-The Logic: We use the Zanode concept—treating the 24D substrate not as a destination, but as a routing node. If one Golay snap doesn't yield a valid ARC solution, we feed the result back into the lens as a new input. This creates a "Depth-N" search chain.
-When to use: For complex, multi-step tasks where the final output is not directly reachable from the start (e.g., "select an object, recolor it, then move it").
+* Ohmic Analogy: "A fractal is an object, an iteration, and a repetition."
+* UBP/GLM Implementation: Chained Substrate Iteration.
+* The Logic: We use the Zanode concept—treating the 24D substrate not as a destination, but as a routing node. If one Golay snap doesn't yield a valid ARC solution, we feed the result back into the lens as a new input. This creates a "Depth-N" search chain.
+* When to use: For complex, multi-step tasks where the final output is not directly reachable from the start (e.g., "select an object, recolor it, then move it").
 Implementation Mapping (The "Driving" Protocol)
 
-If we are implementing this in the code, the main loop should act as a Router that selects the "Style" based on the Disruption Lens (from the document's Phase 2):
-Task Condition	Recommended Style	Goal Metric
-High Noise/Randomness	Machining	Minimize TAX
-Patterns/Repetition	Resonant	Maximize NRCI
-Movement/Conversion	Differential	Minimize Transformation Energy
-Multi-Stage Planning	Recursive	Reach Stable Equilibrium in N-steps
-Immediate Next Step
+If we are implementing this in the code, the main loop should act as a Router that selects the "Style" based on the Disruption Lens:
+
+| Task Condition |	Recommended Style |	Goal Metric |
+| :--- | :--- | :--- |
+| High Noise/Randomness |	Machining |	Minimize TAX |
+| Patterns/Repetition |	Resonant |	Maximize NRCI |
+| Movement/Conversion |	Differential |	Minimize Transformation Energy |
+| Multi-Stage Planning | Recursive |	Reach Stable Equilibrium in N-steps |
+
+
+### Immediate Next Step
 
 If we want to apply this "Differential Style" (The "Capacitor"), consider adding a calculate_delta(grid_a, grid_b) function to the script. This would allow us to score the path between two grids by measuring the Hamming distance of the transformation itself, rather than just the state of the final grid.
 
----
 To find the "Driving Styles" in other fields of physics, we must extract the core computational intent from each domain. We are looking for the methodological mode each branch of physics uses to solve for a state given a set of constraints.
 
-Here is a registry of driving styles across major physics domains, translated into ARC-AGI computational strategies.The Physics-Based Driving Registry
-Physics Field	Driving Style	Core Computational Logic	ARC-AGI Solver Strategy
-Classical Mechanics	The Causal/Ballistic Style	Follow the trajectory of momentum/force.	Track object "paths" over time; prioritize rules that conserve momentum across frames.
-Thermodynamics	The Entropic Style	Minimize disorder; maximize equilibrium.	Drive the grid to the state of lowest "grid-entropy" (simplest representation).
-Quantum Mechanics	The Probabilistic Style	Parallel state exploration (Superposition).	Maintain a "cloud" of candidate grid states; collapse to a single solution only when constraints force it.
-Relativity	The Geodesic Style	Follow the shortest path in curved space.	Find the most "direct" transformation (minimal change) from Input to Output grid.
-Fluid Dynamics	The Flow/Vector Style	Continuous deformation and laminar flow.	Treat grid changes as vector fields; solve for continuous transformations rather than discrete step-changes.
-Information Theory	The Compression Style	Minimize Kolmogorov complexity.	The answer is the shortest possible code/program that generates the output grid from the input.
-How to Drive These Styles
+### Here is a registry of driving styles across major physics domains, translated into ARC-AGI computational strategies:
 
-To use these styles in the UBP/GLM system, we must select the style based on the topology of the puzzle, rather than just the "Zone."1. The Causal Style (Classical Mechanics)
-Best for: Puzzles involving movement, collision, or pathfinding (e.g., "move the block from A to B").
-The Driver Tip: Don't look for the "goal"; look for the trajectory. Calculate the vector of the object in the input grid and extrapolate it to the next step. If an object is moving, it has a "momentum" that the output must account for.
+**The Physics-Based Driving Registry**
+| Physics Field	| Driving Style	| Core Computational Logic	| ARC-AGI Solver Strategy |
+| :--- | :--- | :--- | :--- |
+| Classical Mechanics	| The Causal/Ballistic Style	| Follow the trajectory of momentum/force.	| Track object "paths" over time; prioritize rules that conserve momentum across frames. |
+| Thermodynamics	| The Entropic Style	| Minimize disorder; maximize equilibrium.	| Drive the grid to the state of lowest "grid-entropy" (simplest representation). |
+| Quantum Mechanics	| The Probabilistic Style	| Parallel state exploration (Superposition).	| Maintain a "cloud" of candidate grid states; collapse to a single solution only when constraints force it. |
+| Relativity	| The Geodesic Style	| Follow the shortest path in curved space.	| Find the most "direct" transformation (minimal change) from Input to Output grid. |
+| Fluid Dynamics	| The Flow/Vector Style	| Continuous deformation and laminar flow.	| Treat grid changes as vector fields; solve for continuous transformations rather than discrete step-changes. |
+| Information Theory	| The Compression Style	| Minimize Kolmogorov complexity.	| The answer is the shortest possible code/program that generates the output grid from the input. |
+
+### How to Drive These Styles
+
+To use these styles in the UBP/GLM system, we must select the style based on the topology of the puzzle, rather than just the "Zone."
+1. The Causal Style (Classical Mechanics)
+* Best for: Puzzles involving movement, collision, or pathfinding (e.g., "move the block from A to B").
+* The Driver Tip: Don't look for the "goal"; look for the trajectory. Calculate the vector of the object in the input grid and extrapolate it to the next step. If an object is moving, it has a "momentum" that the output must account for.
+
 2. The Entropic Style (Thermodynamics)
-Best for: Puzzles involving clutter, noise, or "messy" grids.
-The Driver Tip: Use the Second Law. The "correct" answer is almost always the one that removes the "heat" (noise) from the system. If we have two potential output grids, choose the one with the higher organizational symmetry—it is statistically more likely to be the "equilibrium" state.
+* Best for: Puzzles involving clutter, noise, or "messy" grids.
+* The Driver Tip: Use the Second Law. The "correct" answer is almost always the one that removes the "heat" (noise) from the system. If we have two potential output grids, choose the one with the higher organizational symmetry—it is statistically more likely to be the "equilibrium" state.
+
 3. The Probabilistic Style (Quantum Mechanics)
-Best for: "Ambiguous" puzzles with multiple valid interpretations.
-The Driver Tip: Do not commit early. Maintain multiple potential grids as "superposed states." As we apply the operators (e.g., "color-fill"), reject only the branches that violate the physical constraints. The final grid is the one that remains after all "noise" branches have been collapsed.
+* Best for: "Ambiguous" puzzles with multiple valid interpretations.
+* The Driver Tip: Do not commit early. Maintain multiple potential grids as "superposed states." As we apply the operators (e.g., "color-fill"), reject only the branches that violate the physical constraints. The final grid is the one that remains after all "noise" branches have been collapsed.
+
 4. The Geodesic Style (Relativity)
-Best for: Transformation puzzles where the "space" is distorted (e.g., grids that are rotated, scaled, or non-linearly mapped).
-The Driver Tip: Treat the ARC grid as a coordinate manifold. Instead of searching for rules, find the transformation matrix (the "curvature") that maps the Input Grid's geometry directly onto the Output Grid's geometry. The "shortest path" between them is the correct rule.
+* Best for: Transformation puzzles where the "space" is distorted (e.g., grids that are rotated, scaled, or non-linearly mapped).
+* The Driver Tip: Treat the ARC grid as a coordinate manifold. Instead of searching for rules, find the transformation matrix (the "curvature") that maps the Input Grid's geometry directly onto the Output Grid's geometry. The "shortest path" between them is the correct rule.
+
 5. The Flow Style (Fluid Dynamics)
-Best for: Puzzles where the entire grid changes continuously (e.g., "fill the shape," "expand the liquid").
-The Driver Tip: Treat the grid as a viscous fluid. Instead of discrete steps (like "move 1 pixel"), solve for the "flow field." This is effective for tasks where objects "melt" or "fill" empty spaces based on gradient.
+* Best for: Puzzles where the entire grid changes continuously (e.g., "fill the shape," "expand the liquid").
+* The Driver Tip: Treat the grid as a viscous fluid. Instead of discrete steps (like "move 1 pixel"), solve for the "flow field." This is effective for tasks where objects "melt" or "fill" empty spaces based on gradient.
 Implementation Note: "Switching Gears"
 
-"Router" (the Zanode). We can use a router to dynamically switch these driving styles. If the solver is currently failing a task:
-Stop.
-Assess the grid "Physics": Is it Static (Ohmic), Moving (Mechanics), or Messy (Thermodynamic)?
-Swap the Driver: Switch from "Machining" (Ohmic) to "Geodesic" (Relativity) if the grid looks like it's been warped or rotated.
+### "Router" (the Zanode). 
+We can use a router to dynamically switch these driving styles. If the solver is currently failing a task:
+1. Stop.
+2. Assess the grid "Physics": Is it Static (Ohmic), Moving (Mechanics), or Messy (Thermodynamic)?
+3. Swap the Driver: Switch from "Machining" (Ohmic) to "Geodesic" (Relativity) if the grid looks like it's been warped or rotated.
 
----
+### The transition from treating the system as a mathematical curiosity to treating it as a **high-bandwidth signal processing engine**. 
 
-The transition from treating the system as a mathematical curiosity to treating it as a **high-bandwidth signal processing engine**. While we have already implemented **Quantization** via the Gray Map (mapping continuous values to discrete bits) and **Error Correction** via the Golay engine, looking at data through the lens of **Compression** and **Information Theory** is exactly the path needed to solve the current "size-changing" and "decision-chain" blockages.
+While we have already implemented **Quantization** via the Gray Map (mapping continuous values to discrete bits) and **Error Correction** via the Golay engine, looking at data through the lens of **Compression** and **Information Theory** is possibly the path needed to solve the current "size-changing" and "decision-chain" blockages.
 
 Here is how we can pick up these "Styles" from established fields and find their 24D sweet spots within the system:
 
@@ -436,7 +378,7 @@ To "drive" along this new path, focus on **Substrate Evaluator Integration (Mile
 
 This driving style, which we will call **The Kinematic Style (The "Performer")**, bridges the gap between the 24D logical substrate and the continuous physical motion described by spirograph mathematics and Pierre Baudin's grid.
 
-In this style, we do not treat an ARC grid as a static image, but as a **frozen frame of a continuous geometric performance**. The transformation between the input (A) and output (B) is modeled as a **state-transition** along a roulette curve (epitrochoid/hypotrochoid) within the 24D manifold [user query, 113].
+In this style, we do not treat an ARC grid as a static image, but as a **frozen frame of a continuous geometric performance**. The transformation between the input (A) and output (B) is modeled as a **state-transition** along a roulette curve (epitrochoid/hypotrochoid) within the 24D manifold.
 
 ---
 
