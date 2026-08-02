@@ -59,8 +59,9 @@
 * 'https://github.com/DigitalEuan/ARC_AGI'
 
 ## UPDATES:
-* Update this README with each study push
-* Create a new '/arc_agi_(version number)' folder
+* Update and refine this README with each study push
+* Create a new '/arc_agi_(version number)' folder for each ARC AGI commit after a series of pushes
+* Record study pushes and developments
 
 
 ## THE UNIVERSAL BINARY PRINCIPAL (UBP):
