@@ -1,4 +1,5 @@
 # THE UBP AND GLM SYSTEMS
+
 * **Author:** E R A Craig, New Zealand, 1 August 2026.
 
 ## REPOSITORIES AND SPECIFIC FILES:
@@ -52,7 +53,7 @@
 * '/data_object' - how to input information into the GLM system - start here: 'encoding_specification.md'
 * 'README.md' - (this document) the running instructions for using this UBP and GLM system
 * '/GMHGL' - (Golay-MOG-Hexacode-Grey-Leech) consolidated, verified checkpoint for the UBP system as of v5.4.1  - start here: * 'ubp_checkpoint_v5.4.1.md'
-* 'light' - study on the speed of light in an attempt to obtain a UBP-to-Real-World scale alignment - start here: 'Phase20_Calibration_Audit.md'
+* 'light' - study on the speed of light in an attempt to obtain a UBP-to-Real-World scale alignment - start here: 'Phase20_Calibration_Audit.md' and 'LIGHTSPEED_STUDY_SYNTHESIS.md'
 
 
 ## THE UNIVERSAL BINARY PRINCIPAL (UBP):
