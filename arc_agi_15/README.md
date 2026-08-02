@@ -166,6 +166,7 @@ python3 reasoning_loop.py  # (edit main() to target specific task)
 4. **Conditional colour maps** — detect when a colour map is conditional (only some cells change)
 5. **Geometric perception integration** — use spatial_arithmetic for object-level understanding
 6. **More Lingo operations** — expand the vocabulary of operations the mind can propose
+7. **Address the "unused GLM modules" problem** named in METHODS_TRIED.md section E — lingo chat, geometric translator, and HDRB are described as producing reasoning traces but not driving candidate generation.
 
 ## License
 
