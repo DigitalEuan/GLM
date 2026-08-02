@@ -160,13 +160,14 @@ python3 reasoning_loop.py  # (edit main() to target specific task)
 
 ## What's Next
 
-1. **Experience accumulation** — the mind should learn from failed proposals and remember why they failed
-2. **Size-change dynamics** — the mind needs to handle crop/pad/tile
-3. **Position-dependent rules** — cell rules that depend on absolute position, not just context
-4. **Conditional colour maps** — detect when a colour map is conditional (only some cells change)
-5. **Geometric perception integration** — use spatial_arithmetic for object-level understanding
-6. **More Lingo operations** — expand the vocabulary of operations the mind can propose
-7. **Address the "unused GLM modules" problem** named in METHODS_TRIED.md section E — lingo chat, geometric translator, and HDRB are described as producing reasoning traces but not driving candidate generation.
+1. **Further Development:** - see 'FOR_USER_v065.md'
+2. **Experience accumulation** — the mind should learn from failed proposals and remember why they failed
+3. **Size-change dynamics** — the mind needs to handle crop/pad/tile
+4. **Position-dependent rules** — cell rules that depend on absolute position, not just context
+5. **Conditional colour maps** — detect when a colour map is conditional (only some cells change)
+6. **Geometric perception integration** — use spatial_arithmetic for object-level understanding
+7. **More Lingo operations** — expand the vocabulary of operations the mind can propose
+8. **Address the "unused GLM modules" problem** named in METHODS_TRIED.md section E — lingo chat, geometric translator, and HDRB are described as producing reasoning traces but not driving candidate generation.
 
 ## License
 
