@@ -1,0 +1,46 @@
+{
+  "target": "river",
+  "generated_text": "River i me. Me iteration moonshine_corr. Moonshine_corr iteration identity.",
+  "bigram_score": {
+    "avg_log_prob": -9.185719458994607,
+    "never_seen_pair_frac": 1.0,
+    "n_bigrams": 10
+  },
+  "syndrome_weight": 0,
+  "vector": [
+    1,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    0,
+    1,
+    0,
+    1,
+    1,
+    0
+  ],
+  "n_crg_edges": 0,
+  "crg_edges": [],
+  "learning_status": {
+    "queries_processed": 60,
+    "words_learned": 0,
+    "edges_learned": 126,
+    "vectors_refined": 15,
+    "cooccurrence_pairs": 52,
+    "state_saved": true
+  }
+}

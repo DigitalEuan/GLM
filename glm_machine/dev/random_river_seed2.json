@@ -1,0 +1,46 @@
+{
+  "target": "river",
+  "generated_text": "River renorm arroyos. Arroyos renorm p. P renorm above.",
+  "bigram_score": {
+    "avg_log_prob": -8.961744479609948,
+    "never_seen_pair_frac": 0.875,
+    "n_bigrams": 8
+  },
+  "syndrome_weight": 0,
+  "vector": [
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0
+  ],
+  "n_crg_edges": 0,
+  "crg_edges": [],
+  "learning_status": {
+    "queries_processed": 60,
+    "words_learned": 0,
+    "edges_learned": 45,
+    "vectors_refined": 17,
+    "cooccurrence_pairs": 296,
+    "state_saved": true
+  }
+}

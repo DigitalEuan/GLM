@@ -1,0 +1,338 @@
+{
+  "d50c4666caf0de6cfeb11d0683780baea66840b9ffdaad6776487c3505f002c7": {
+    "ubp_id": "MATH_NUMBER_TWO_001",
+    "lexicon": "[ Two (2) ], [ Mathematical primitive: MATH_NUMBER_TWO_001 ]",
+    "math": "Type=Integer|Value=2|Property=Prime",
+    "atlas": {
+      "hierarchy": [
+        "NUMBER"
+      ],
+      "vector": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "nrci": "3227559147444380192567074951347389745677452871222693340605040/4107949497399900013063035376497821904995567514424518480417877",
+      "nrci_score": 0.785686,
+      "tax": "880390349955519820495960425150432159318114643201825139812837/322755914744438019256707495134738974567745287122269334060504",
+      "weight": 7,
+      "tilt": 42.6279
+    },
+    "tags": [
+      "HARDENED",
+      "NUMBER",
+      "SOP_002",
+      "TOPOLOGICAL_V8"
+    ],
+    "fingerprint": "d50c4666caf0de6cfeb11d0683780baea66840b9ffdaad6776487c3505f002c7"
+  },
+  "8c2b27109fa747cd8f404de855f7443e381afe557fb55b760bb6dc924029e49e": {
+    "ubp_id": "MATH_NUMBER_THREE_001",
+    "lexicon": "[ Three (3) ], [ Mathematical primitive: MATH_NUMBER_THREE_001 ]",
+    "math": "Type=Integer|Value=3|Property=Prime",
+    "atlas": {
+      "hierarchy": [
+        "NUMBER"
+      ],
+      "vector": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+      "nrci_score": 0.68138,
+      "tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+      "weight": 12,
+      "tilt": 64.3066
+    },
+    "tags": [
+      "HARDENED",
+      "NUMBER",
+      "SOP_002",
+      "TOPOLOGICAL_V8"
+    ],
+    "fingerprint": "8c2b27109fa747cd8f404de855f7443e381afe557fb55b760bb6dc924029e49e"
+  },
+  "64d5c771b967b4b857db421aa1874fba50466c3f4fc396cb78351fc8ea381c3d": {
+    "ubp_id": "MATH_NUMBER_FOUR_001",
+    "lexicon": "[ Four (4) ], [ Mathematical primitive: MATH_NUMBER_FOUR_001 ]",
+    "math": "Type=Integer|Value=4|Property=Composite",
+    "atlas": {
+      "hierarchy": [
+        "NUMBER"
+      ],
+      "vector": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "nrci": "3227559147444380192567074951347389745677452871222693340605040/4107949497399900013063035376497821904995567514424518480417877",
+      "nrci_score": 0.785686,
+      "tax": "880390349955519820495960425150432159318114643201825139812837/322755914744438019256707495134738974567745287122269334060504",
+      "weight": 7,
+      "tilt": 42.6279
+    },
+    "tags": [
+      "HARDENED",
+      "NUMBER",
+      "SOP_002",
+      "TOPOLOGICAL_V8"
+    ],
+    "fingerprint": "64d5c771b967b4b857db421aa1874fba50466c3f4fc396cb78351fc8ea381c3d"
+  },
+  "31445ec20eb1d23213d3665b1ada287974a1c238f0c2c4eb808a65f428e4a09c": {
+    "ubp_id": "MATH_NUMBER_FIVE_001",
+    "lexicon": "[ Five (5) ], [ Mathematical primitive: MATH_NUMBER_FIVE_001 ]",
+    "math": "Type=Integer|Value=5|Property=Prime",
+    "atlas": {
+      "hierarchy": [
+        "NUMBER"
+      ],
+      "vector": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0
+      ],
+      "nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+      "nrci_score": 0.68138,
+      "tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+      "weight": 12,
+      "tilt": 0.0
+    },
+    "tags": [
+      "HARDENED",
+      "NUMBER",
+      "SOP_002",
+      "TOPOLOGICAL_V8"
+    ],
+    "fingerprint": "31445ec20eb1d23213d3665b1ada287974a1c238f0c2c4eb808a65f428e4a09c"
+  },
+  "589a94c0370dd26b541f844d12aff1a4468bb17a4e1944c29bdb7c2e2a9b3586": {
+    "ubp_id": "MATH_NUMBER_SIX_001",
+    "lexicon": "[ Six (6) ], [ Mathematical primitive: MATH_NUMBER_SIX_001 ]",
+    "math": "Type=Integer|Value=6|Property=Composite",
+    "atlas": {
+      "hierarchy": [
+        "NUMBER"
+      ],
+      "vector": [
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      "nrci": "1613779573722190096283537475673694872838726435611346670302520/2494169923677709916779497900824127032156841078813171810115357",
+      "nrci_score": 0.647021,
+      "tax": "880390349955519820495960425150432159318114643201825139812837/161377957372219009628353747567369487283872643561134667030252",
+      "weight": 14,
+      "tilt": 167.4802
+    },
+    "tags": [
+      "HARDENED",
+      "NUMBER",
+      "SOP_002",
+      "TOPOLOGICAL_V8"
+    ],
+    "fingerprint": "589a94c0370dd26b541f844d12aff1a4468bb17a4e1944c29bdb7c2e2a9b3586"
+  },
+  "7d189a0c103027ced1d80be68b0d4504282a44dd1d8321782a4b971e8ac82414": {
+    "ubp_id": "MATH_NUMBER_SEVEN_001",
+    "lexicon": "[ Seven (7) ], [ Mathematical primitive: MATH_NUMBER_SEVEN_001 ]",
+    "math": "Type=Integer|Value=7|Property=Prime",
+    "atlas": {
+      "hierarchy": [
+        "NUMBER"
+      ],
+      "vector": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "nrci": "268963262287031682713922912612282478806454405935224445050420/394733312280677371356202973348058501566185069249770893595111",
+      "nrci_score": 0.68138,
+      "tax": "125770049993645688642280060735776022759730663314546448544691/26896326228703168271392291261228247880645440593522444505042",
+      "weight": 12,
+      "tilt": 0.0
+    },
+    "tags": [
+      "HARDENED",
+      "NUMBER",
+      "SOP_002",
+      "TOPOLOGICAL_V8"
+    ],
+    "fingerprint": "7d189a0c103027ced1d80be68b0d4504282a44dd1d8321782a4b971e8ac82414"
+  },
+  "d7021da34e67e08b92db584ab0a90fba1efbc96ed9917597ae75341fcfa84c97": {
+    "ubp_id": "MATH_NUMBER_TWELVE_001",
+    "lexicon": "[ Twelve (12) ], [ Mathematical primitive: MATH_NUMBER_TWELVE_001 ]",
+    "math": "Type=Integer|Value=12|Property=Composite",
+    "atlas": {
+      "hierarchy": [
+        "NUMBER"
+      ],
+      "vector": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      "nrci": "215170609829625346171138330089825983045163524748179556040336/340940659823271034813418390825602005804894188062726004585027",
+      "nrci_score": 0.631109,
+      "tax": "628850249968228443211400303678880113798653316572732242723455/107585304914812673085569165044912991522581762374089778020168",
+      "weight": 15,
+      "tilt": 99.4695
+    },
+    "tags": [
+      "HARDENED",
+      "NUMBER",
+      "SOP_002",
+      "TOPOLOGICAL_V8"
+    ],
+    "fingerprint": "d7021da34e67e08b92db584ab0a90fba1efbc96ed9917597ae75341fcfa84c97"
+  }
+}

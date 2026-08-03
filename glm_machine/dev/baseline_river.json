@@ -1,0 +1,46 @@
+{
+  "target": "river",
+  "generated_text": "River restaurant isolated. Isolated restaurant francium. Francium amusing theater.",
+  "bigram_score": {
+    "avg_log_prob": -9.18545832737415,
+    "never_seen_pair_frac": 1.0,
+    "n_bigrams": 8
+  },
+  "syndrome_weight": 0,
+  "vector": [
+    0,
+    1,
+    1,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0
+  ],
+  "n_crg_edges": 0,
+  "crg_edges": [],
+  "learning_status": {
+    "queries_processed": 0,
+    "words_learned": 0,
+    "edges_learned": 0,
+    "vectors_refined": 0,
+    "cooccurrence_pairs": 0,
+    "state_saved": false
+  }
+}
