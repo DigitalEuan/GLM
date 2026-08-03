@@ -1,0 +1,51 @@
+{
+  "contribution_note": "ARISTOTLE EXPERIMENTAL CONTRIBUTION: operationalization, validation design, analysis, and report; supplied UBP v5.4.1 formulas are retained unchanged.",
+  "endpoint": "52 neutral gas-phase diatomic D0 records at 0 K; 19 complete-element holdout folds",
+  "predeclared_pipeline": "atomic number -> Gray12 -> Golay24 -> fixed MOG/Hexacode; symmetric A/B/C participant composition plus XOR transition",
+  "fixed_results": [
+    {
+      "configuration": "mean_only",
+      "macro_element_mae_kJ_mol": 167.26186090318495,
+      "macro_element_rmse_kJ_mol": 191.64948167608196
+    },
+    {
+      "configuration": "raw_properties_ABC",
+      "macro_element_mae_kJ_mol": 122.33497937485554,
+      "macro_element_rmse_kJ_mol": 140.71634432425745
+    },
+    {
+      "configuration": "ubp_invariants",
+      "macro_element_mae_kJ_mol": 146.72090837830675,
+      "macro_element_rmse_kJ_mol": 169.87090207078367
+    },
+    {
+      "configuration": "ubp_fixed_mog_hex",
+      "macro_element_mae_kJ_mol": 232.43779518870704,
+      "macro_element_rmse_kJ_mol": 262.8153204958372
+    },
+    {
+      "configuration": "raw_plus_ubp_fixed",
+      "macro_element_mae_kJ_mol": 167.76489110194387,
+      "macro_element_rmse_kJ_mol": 194.78395979663665
+    }
+  ],
+  "random_mog_controls": {
+    "layouts": 16,
+    "mean_macro_mae_kJ_mol": 205.4957813846633,
+    "min_macro_mae_kJ_mol": 157.35856798604243,
+    "max_macro_mae_kJ_mol": 245.1183529231023
+  },
+  "exact_audits": {
+    "element_identity_words": 118,
+    "invalid_hexacode_shadows": 0,
+    "binary_tax_identity_failures": 0,
+    "element_identity_nrci_above_0_5": 118,
+    "tax_identity": "for binary v, TAX(v) = weight(v) * (Y + 1/8); NRCI is therefore a monotone transform of weight"
+  },
+  "interpretive_guardrails": [
+    "TAX and NRCI are evaluated as supplied engineered scores, not assumed physical energy or chemical coherence.",
+    "The 0.500 threshold is audited rather than used to select models or labels.",
+    "Fixed MOG performance must be compared with identical random-coordinate controls.",
+    "A valid Hexacode shadow is guaranteed by the chosen Golay encoding and is not by itself evidence of chemistry."
+  ]
+}

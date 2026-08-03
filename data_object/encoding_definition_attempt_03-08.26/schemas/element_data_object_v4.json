@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "element_data_object_v4.json",
+  "title": "Structured Element Knowledge Object v4",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "subject",
+    "identity_integrity",
+    "electronic_ground_state",
+    "observations",
+    "spatial_views",
+    "state_boundary"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 4
+    },
+    "subject": {
+      "type": "object",
+      "required": [
+        "kind",
+        "atomic_number",
+        "symbol",
+        "name"
+      ],
+      "properties": {
+        "kind": {
+          "const": "chemical_element"
+        },
+        "atomic_number": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 118
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "identity_integrity": {
+      "type": "object"
+    },
+    "electronic_ground_state": {
+      "type": "object"
+    },
+    "observations": {
+      "type": "object"
+    },
+    "spatial_views": {
+      "type": "array",
+      "minItems": 9
+    },
+    "state_boundary": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "design_contract": {
+    "identity": "Atomic number identifies an element; Golay/MOG is an integrity and coordinate view, not chemical content.",
+    "state": "Isotopes, ions, excited states, phases, molecules, and events require separate linked objects.",
+    "measurements": "Values retain units, missingness, conditions, uncertainty, and provenance.",
+    "geometry": "Each 4x6 layer has an explicit frame and z coordinate; 24D Leech addresses remain separate exact views because projecting them to 3D is lossy."
+  },
+  "orbital_cell_order": [
+    "1s",
+    "2s",
+    "2p",
+    "3s",
+    "3p",
+    "3d",
+    "4s",
+    "4p",
+    "4d",
+    "4f",
+    "5s",
+    "5p",
+    "5d",
+    "5f",
+    "6s",
+    "6p",
+    "6d",
+    "7s",
+    "7p"
+  ]
+}

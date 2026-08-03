@@ -1,0 +1,30 @@
+{
+  "schema_version": 2,
+  "element_count": 118,
+  "gray_round_trips": 118,
+  "distinct_gray_messages": 118,
+  "distinct_golay_words": 118,
+  "consecutive_message_hamming": {
+    "binary_mean": 1.9658119658119657,
+    "gray_mean": 1.0,
+    "gray_min": 1,
+    "gray_max": 1
+  },
+  "consecutive_golay_hamming": {
+    "binary_mean": 10.324786324786325,
+    "gray_mean": 9.982905982905983,
+    "gray_min": 8,
+    "gray_max": 12
+  },
+  "address_count": 24,
+  "distinct_addresses": 24,
+  "address_squared_norm_integer_scale": [
+    32
+  ],
+  "address_squared_norm_leech_scale": [
+    4.0
+  ],
+  "address_matrix_full_rank": true,
+  "mog_is_permutation": true,
+  "note": "Gray locality is exact before Golay encoding. The error-correcting map necessarily expands distinct messages to distance at least 8; it does not preserve one-bit adjacency."
+}

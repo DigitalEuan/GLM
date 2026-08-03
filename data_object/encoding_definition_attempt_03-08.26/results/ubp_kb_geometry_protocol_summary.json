@@ -1,0 +1,28 @@
+{
+  "typed_kb": {
+    "records": 590,
+    "elements": 118,
+    "channels_per_element": 5,
+    "lossless_value_policy": "value_exact is the unchanged rational string from the standardized KB extraction",
+    "metrology_policy": "unknown metadata are explicit; inferred units are labelled and are not represented as source declarations",
+    "density_warning": "unresolved: values appear to mix gas and condensed-phase conventions",
+    "positional_guardrail": "Channels in a category whose tensor length differs from its parameter table are not named positionally."
+  },
+  "octad_zones": {
+    "all_three_are_octads": true,
+    "partition": true
+  },
+  "projection": {
+    "pair_count": 276,
+    "mean_relative_distance_error": 0.653060659807443,
+    "max_relative_distance_error": 1.0,
+    "distance_cosine_similarity": 0.9437611712848193,
+    "directed_nearest_neighbor_edges_24d": 507,
+    "directed_nearest_neighbor_edges_3d": 47,
+    "directed_nearest_neighbor_recall": 0.08875739644970414,
+    "projected_point_collisions": 15
+  },
+  "particle": {
+    "status": "protocol_only_not_a_prospective_result"
+  }
+}

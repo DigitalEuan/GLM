@@ -1,0 +1,31 @@
+suite,quantity,prediction,target,error_percent,lens,validation_status
+canonical_phi,m_mu/m_e,206.70754304276645,206.7683,0.029384077362703185,w-source (169/w),formula reproduction; not held-out
+canonical_phi,alpha_s,0.11777842805348948,0.1181,0.2722878463255842,Information (24*Y^4),formula reproduction; not held-out
+canonical_phi,m_W,80.30362795887717,80.379,0.09377081218083472,Cross + Shear_1,formula reproduction; not held-out
+canonical_phi,Omega_k,2.035474369408135,0.000727,279882.7193133611,Potential + NRCI(1/8),formula reproduction; not held-out
+canonical_phi,n_gamma/n_b,41.57228082374787,1.684e-09,2468662756654.624,Potential + Shear_2 + NRCI(2),formula reproduction; not held-out
+canonical_phi,V_ub^2,1.347314543154075e-05,0.0001012,86.68661518622456,Potential + NRCI(13),formula reproduction; not held-out
+canonical_phi,alpha^3,3.881903846963704e-07,3.8859390093500144e-16,99896159814.58946,Potential* (29/24*Y^12*e),formula reproduction; not held-out
+canonical_phi,H0,69.8527863085721,70.0,0.21030527346841907,w-based (1/3*w*Y^3*Ue),formula reproduction; not held-out
+canonical_phi,G_grav,6.683154991969442e-11,6.6743e-11,0.1326729689921248,Potential_G (39/29*Y^18/w),formula reproduction; not held-out
+ultimate_atlas,Alpha Inv,137.06289078670588,137.035999,0.019623884893110597,Core Ratio,formula reproduction; not held-out
+ultimate_atlas,Proton/e- Ratio,1836.1519860678725,1836.15267,3.7248107884544614e-05,Stereoscopic,formula reproduction; not held-out
+ultimate_atlas,Muon/e- Ratio,206.70754304276645,206.76828,0.02937440754140152,Core Ratio,formula reproduction; not held-out
+ultimate_atlas,Electron (e-),0.5109957806030295,0.510998,0.00043432596026857706,1D Filament + 7/80 Sink,formula reproduction; not held-out
+ultimate_atlas,Muon (mu-),105.62733745193346,105.658,0.029020564525674364,Core Ratio,formula reproduction; not held-out
+ultimate_atlas,Tau (tau-),1777.260890653538,1776.86,0.022561746763269764,24D MPG Lever,formula reproduction; not held-out
+ultimate_atlas,Proton (p+),938.2717369210975,938.272,2.80386606971594e-05,Stereoscopic,formula reproduction; not held-out
+ultimate_atlas,Neutron (n0),939.5715786005426,939.565,0.0007001751387678309,G13 Hybrid,formula reproduction; not held-out
+ultimate_atlas,Delta++ (D++),1229.435610898466,1232.0,0.20814846603360718,G15 Spin Flip,formula reproduction; not held-out
+ultimate_atlas,Higgs Boson,125285.40223542214,125250.0,0.028265257822070268,Core Ratio,formula reproduction; not held-out
+ultimate_atlas,Top Quark,172796.88678562184,172760.0,0.021351461925128247,Core Ratio,formula reproduction; not held-out
+ultimate_atlas,Xi_bc+ (bcu),6951.681822343092,6943.0,0.12504425094471425,Higgs/18,formula reproduction; not held-out
+ultimate_atlas,Xi_bb (bbu),10143.108888888888,10143.0,0.0010735373054213634,Z-Boson/9,formula reproduction; not held-out
+ultimate_atlas,Omega_bbb (bbb),14375.740565468488,14371.0,0.03298702573577086,Top/12,formula reproduction; not held-out
+ultimate_atlas,Xicc++ (ccu),3621.55,3621.55,0.0,Anchor,formula reproduction; not held-out
+ultimate_atlas,Xicc+ (ccd),3621.9199524670125,3621.92,1.3123698847580743e-06,Isospin Shift,formula reproduction; not held-out
+ultimate_atlas,Omcc+ (ccs),3773.2764814353955,3773.28,9.324949657456978e-05,Strange Leap,formula reproduction; not held-out
+ultimate_atlas,Omccc++ (ccc),4760.575,4760.57,0.00010502943975196248,Triple Compression,formula reproduction; not held-out
+ultimate_atlas,Lc+ (udc),2290.6744113174223,2286.46,0.18432036061957116,Archimedean Lever,formula reproduction; not held-out
+ultimate_atlas,Xic+ (usc),2472.746189039897,2467.71,0.20408350413529255,Singly Strange,formula reproduction; not held-out
+ultimate_atlas,Omc0 (ssc),2654.8179667623717,2695.2,1.498294495311227,Doubly Strange,formula reproduction; not held-out

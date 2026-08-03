@@ -1,0 +1,143 @@
+{
+  "validation": "leave-one-period-out; train-only mean imputation and standardization; test-test pairs",
+  "input_features": [
+    "AtomicMass",
+    "Electronegativity",
+    "AtomicRadius",
+    "IonizationEnergy",
+    "ElectronAffinity",
+    "MeltingPoint",
+    "BoilingPoint",
+    "Density"
+  ],
+  "missing_values": "training mean, represented as zero after standardization",
+  "summary": [
+    {
+      "endpoint": "GroupBlock",
+      "family": "A",
+      "assignment_group": "fixed",
+      "fold_records": 6,
+      "mean_auc": 0.7916717689088046,
+      "min_auc": 0.5466666666666666,
+      "max_auc": 0.9629629629629629
+    },
+    {
+      "endpoint": "GroupBlock",
+      "family": "A",
+      "assignment_group": "random_controls",
+      "fold_records": 96,
+      "mean_auc": 0.7900766870014805,
+      "min_auc": 0.49333333333333335,
+      "max_auc": 0.9629629629629629
+    },
+    {
+      "endpoint": "GroupBlock",
+      "family": "B",
+      "assignment_group": "fixed",
+      "fold_records": 6,
+      "mean_auc": 0.7909135043868619,
+      "min_auc": 0.5066666666666667,
+      "max_auc": 0.9259259259259259
+    },
+    {
+      "endpoint": "GroupBlock",
+      "family": "B",
+      "assignment_group": "random_controls",
+      "fold_records": 96,
+      "mean_auc": 0.7963543887428995,
+      "min_auc": 0.49333333333333335,
+      "max_auc": 0.9629629629629629
+    },
+    {
+      "endpoint": "GroupBlock",
+      "family": "C",
+      "assignment_group": "fixed",
+      "fold_records": 6,
+      "mean_auc": 0.7865859265214326,
+      "min_auc": 0.6266666666666667,
+      "max_auc": 0.8888888888888888
+    },
+    {
+      "endpoint": "GroupBlock",
+      "family": "C",
+      "assignment_group": "random_controls",
+      "fold_records": 96,
+      "mean_auc": 0.7926714077915417,
+      "min_auc": 0.44,
+      "max_auc": 1.0
+    },
+    {
+      "endpoint": "GroupBlock",
+      "family": "raw",
+      "assignment_group": "fixed",
+      "fold_records": 6,
+      "mean_auc": 0.8051221878011342,
+      "min_auc": 0.5733333333333334,
+      "max_auc": 0.9629629629629629
+    },
+    {
+      "endpoint": "StandardState",
+      "family": "A",
+      "assignment_group": "fixed",
+      "fold_records": 6,
+      "mean_auc": 0.7437892031216125,
+      "min_auc": 0.4680377389721096,
+      "max_auc": 0.921875
+    },
+    {
+      "endpoint": "StandardState",
+      "family": "A",
+      "assignment_group": "random_controls",
+      "fold_records": 96,
+      "mean_auc": 0.7448733114361022,
+      "min_auc": 0.4544649507572623,
+      "max_auc": 0.9895833333333334
+    },
+    {
+      "endpoint": "StandardState",
+      "family": "B",
+      "assignment_group": "fixed",
+      "fold_records": 6,
+      "mean_auc": 0.7485233282793059,
+      "min_auc": 0.5079284945791608,
+      "max_auc": 0.9270833333333334
+    },
+    {
+      "endpoint": "StandardState",
+      "family": "B",
+      "assignment_group": "random_controls",
+      "fold_records": 96,
+      "mean_auc": 0.7522253034686543,
+      "min_auc": 0.4775386907225027,
+      "max_auc": 0.984375
+    },
+    {
+      "endpoint": "StandardState",
+      "family": "C",
+      "assignment_group": "fixed",
+      "fold_records": 6,
+      "mean_auc": 0.7419203680757546,
+      "min_auc": 0.4853761483075395,
+      "max_auc": 0.9462121212121212
+    },
+    {
+      "endpoint": "StandardState",
+      "family": "C",
+      "assignment_group": "random_controls",
+      "fold_records": 96,
+      "mean_auc": 0.7491614013367998,
+      "min_auc": 0.44864685922370273,
+      "max_auc": 1.0
+    },
+    {
+      "endpoint": "StandardState",
+      "family": "raw",
+      "assignment_group": "fixed",
+      "fold_records": 6,
+      "mean_auc": 0.7485118082806279,
+      "min_auc": 0.49501779359430603,
+      "max_auc": 0.921875
+    }
+  ],
+  "interpretation_guardrail": "The fixed address assignment was declared by a stable hash, not learned. Random assignments are norm-matched controls. Labels are not input features, but melting/boiling point is physically close to standard state, so that endpoint is a consistency check rather than an independent discovery."
+}

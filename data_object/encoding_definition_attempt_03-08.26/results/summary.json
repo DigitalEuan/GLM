@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "seed": 20260802,
+  "raw_sha256": "efcadb3dd180bd06fc0fa069a81082e86553ba2b8b5d679b7827bb8c03afd3ce",
+  "audit": {
+    "identity_count": 118,
+    "round_trips": 118,
+    "all_codewords": 4096,
+    "weight_distribution": {
+      "0": 1,
+      "8": 759,
+      "12": 2576,
+      "16": 759,
+      "24": 1
+    },
+    "parity_checks_all_zero": true,
+    "mog_is_permutation": true,
+    "rigid_distance_invariance_error": 6.661338147750939e-16
+  },
+  "configuration_normalized_mae": {
+    "z_poly": 1.0,
+    "message_bits": 1.0253529354674895,
+    "golay_bits": 1.100132570578003,
+    "random_06": 1.1152345606649796,
+    "random_02": 1.1194696123896917,
+    "random_07": 1.1207346725348473,
+    "random_01": 1.1352890939652769,
+    "random_03": 1.145740695842249,
+    "random_05": 1.151534345638537,
+    "gray_message_bits": 1.1516430152071737,
+    "mog_planar": 1.1682185618288337,
+    "random_00": 1.178273364663669,
+    "mog_cylinder": 1.1794878219560672,
+    "mog_stacked": 1.1869536255370643,
+    "gray_mog_planar": 1.1897801378146942,
+    "mog_sphere": 1.1957550874097305,
+    "gray_mog_cylinder": 1.211203370877563,
+    "gray_mog_stacked": 1.2126076548020719,
+    "gray_golay_bits": 1.2140741426866353,
+    "random_04": 1.2234202831245182,
+    "gray_mog_sphere": 1.2249542465152565
+  },
+  "best_experimental_configuration": "z_poly",
+  "interpretation": "Best means lowest average normalized held-out MAE in this atomic-property suite, not a universal physical optimum."
+}

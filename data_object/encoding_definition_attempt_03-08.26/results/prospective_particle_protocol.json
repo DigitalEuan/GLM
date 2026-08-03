@@ -1,0 +1,43 @@
+{
+  "status": "protocol_only_not_a_prospective_result",
+  "reason": "The supplied particle targets and fitted formulae have already been inspected; they cannot become an unseen locked test set retroactively.",
+  "subject_class": "dimensionless particle-property ratios, separated by observable type",
+  "grammar": {
+    "dimensionless_substrate_symbols": [
+      "Y",
+      "Y_INV",
+      "MONAD",
+      "WOBBLE",
+      "SINK_L",
+      "13",
+      "24",
+      "29"
+    ],
+    "allowed_expression": "signed products of predeclared symbols with integer exponents in [-3,3] and at most four factors",
+    "coefficient_rule": "coefficients restricted to reduced p/q with |p|<=24 and 1<=q<=24; enumerate lexicographically",
+    "selection_rule": "minimize training log-relative error, then expression length, then lexicographic order",
+    "dimensional_rule": "compare dimensionless ratios only; a dimensionful prediction must name an independently supplied unit-bearing anchor"
+  },
+  "data_split_rule": "Timestamped measurements published after protocol freeze form the locked test set; no coefficient or grammar revision after unblinding.",
+  "baselines": [
+    "training geometric mean within observable class",
+    "dimensional-analysis-only anchor prediction",
+    "parameter-count-matched random-symbol grammar"
+  ],
+  "metrics": [
+    "log-relative error",
+    "median absolute relative error",
+    "coverage if uncertainty intervals are available"
+  ],
+  "lightspeed_synthesis_interpretation": {
+    "electron_mass_residual": "an in-sample residual worth recording, not evidence of a QED correction without a frozen prediction",
+    "muon_ratio": "reported null-model result is prior evidence only and must be replicated prospectively",
+    "defined_SI_constants": "c, h, e, k_B and cesium frequency are unit anchors, not independently predicted measurements in SI"
+  },
+  "freeze_requirements": [
+    "versioned protocol hash",
+    "training table with provenance and units",
+    "locked target manifest",
+    "one final evaluation"
+  ]
+}

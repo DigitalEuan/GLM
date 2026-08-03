@@ -1,0 +1,56 @@
+{
+  "integer_coordinate_scale": "divide coordinates by sqrt(8)",
+  "golay_word_count": 4096,
+  "golay_weight_distribution": {
+    "0": 1,
+    "8": 759,
+    "12": 2576,
+    "16": 759,
+    "24": 1
+  },
+  "octad_count": 759,
+  "class_counts": {
+    "A": 1104,
+    "B": 97152,
+    "C": 98304
+  },
+  "expected_class_counts": {
+    "A": 1104,
+    "B": 97152,
+    "C": 98304
+  },
+  "total_count": 196560,
+  "all_vectors_distinct_within_class": {
+    "A": true,
+    "B": true,
+    "C": true
+  },
+  "classes_pairwise_disjoint": true,
+  "squared_norms_integer_scale": {
+    "A": [
+      32
+    ],
+    "B": [
+      32
+    ],
+    "C": [
+      32
+    ]
+  },
+  "squared_norms_leech_scale": {
+    "A": [
+      4.0
+    ],
+    "B": [
+      4.0
+    ],
+    "C": [
+      4.0
+    ]
+  },
+  "construction_notes": {
+    "A": "all coordinate pairs and four sign choices",
+    "B": "759 weight-8 extended-Golay supports and 128 even-parity sign choices",
+    "C": "24 distinguished coordinates and all 4096 extended-Golay codewords controlling signs"
+  }
+}

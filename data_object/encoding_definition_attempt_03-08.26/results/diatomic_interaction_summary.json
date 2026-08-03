@@ -1,0 +1,95 @@
+{
+  "endpoint": {
+    "name": "gas-phase diatomic D0",
+    "temperature_K": 0,
+    "unit": "kJ mol-1",
+    "charge": "neutral only",
+    "electronic_state": "CCCBDB state 1/configuration 1 ground-state record",
+    "species_records": 52,
+    "records_with_reported_uncertainty": 51,
+    "elements": 19
+  },
+  "validation": "complete-element holdout: all species containing the test element excluded from training; preprocessing refit per fold",
+  "predeclared_operators": {
+    "A": "coordinate sum",
+    "B": "absolute coordinate difference",
+    "C": "coordinatewise product"
+  },
+  "model": {
+    "type": "ridge regression",
+    "lambda": 10.0,
+    "selection": "fixed, no endpoint-driven tuning"
+  },
+  "fixed_results": [
+    {
+      "configuration": "mean_only",
+      "element_folds": 19,
+      "macro_element_mae_kJ_mol": 167.26186090318495,
+      "macro_element_rmse_kJ_mol": 191.64948167608196
+    },
+    {
+      "configuration": "atomic_number_ABC",
+      "element_folds": 19,
+      "macro_element_mae_kJ_mol": 177.98859438010606,
+      "macro_element_rmse_kJ_mol": 202.79299953432226
+    },
+    {
+      "configuration": "raw_properties_ABC",
+      "element_folds": 19,
+      "macro_element_mae_kJ_mol": 122.33497937485554,
+      "macro_element_rmse_kJ_mol": 140.71634432425745
+    },
+    {
+      "configuration": "fixed_A",
+      "element_folds": 19,
+      "macro_element_mae_kJ_mol": 116.17131177488157,
+      "macro_element_rmse_kJ_mol": 133.97418543571294
+    },
+    {
+      "configuration": "fixed_B",
+      "element_folds": 19,
+      "macro_element_mae_kJ_mol": 140.55421749666212,
+      "macro_element_rmse_kJ_mol": 163.77253848148771
+    },
+    {
+      "configuration": "fixed_C",
+      "element_folds": 19,
+      "macro_element_mae_kJ_mol": 144.85099765052198,
+      "macro_element_rmse_kJ_mol": 165.77400766920678
+    },
+    {
+      "configuration": "fixed_ABC",
+      "element_folds": 19,
+      "macro_element_mae_kJ_mol": 135.52871236596164,
+      "macro_element_rmse_kJ_mol": 159.95203350251032
+    }
+  ],
+  "random_address_controls": [
+    {
+      "family": "A",
+      "assignments": 16,
+      "mean_macro_mae_kJ_mol": 120.16190737092798,
+      "min_macro_mae_kJ_mol": 107.1906771103944,
+      "max_macro_mae_kJ_mol": 136.5513062373503
+    },
+    {
+      "family": "B",
+      "assignments": 16,
+      "mean_macro_mae_kJ_mol": 153.32428466141857,
+      "min_macro_mae_kJ_mol": 131.33812087169102,
+      "max_macro_mae_kJ_mol": 178.17196174205586
+    },
+    {
+      "family": "C",
+      "assignments": 16,
+      "mean_macro_mae_kJ_mol": 139.40989983287528,
+      "min_macro_mae_kJ_mol": 111.84381930091176,
+      "max_macro_mae_kJ_mol": 156.46549639912524
+    }
+  ],
+  "guardrails": [
+    "Atomic descriptors are measured side channels, not inferred from Golay geometry.",
+    "The small, uneven dataset supports a pilot comparison, not chemical deployment.",
+    "Missing source uncertainty is explicit and is not converted to zero."
+  ]
+}

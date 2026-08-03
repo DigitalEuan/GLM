@@ -1,0 +1,62 @@
+{
+  "convention": "fixed MOG_GRID_BITS 4x6 row-major display",
+  "zones": [
+    {
+      "zone": "octad_zone_1",
+      "columns": [
+        0,
+        1
+      ],
+      "coordinates": [
+        0,
+        4,
+        1,
+        17,
+        3,
+        21,
+        2,
+        23
+      ],
+      "is_golay_octad": true
+    },
+    {
+      "zone": "octad_zone_2",
+      "columns": [
+        2,
+        3
+      ],
+      "coordinates": [
+        6,
+        19,
+        15,
+        5,
+        20,
+        8,
+        14,
+        12
+      ],
+      "is_golay_octad": true
+    },
+    {
+      "zone": "octad_zone_3",
+      "columns": [
+        4,
+        5
+      ],
+      "coordinates": [
+        16,
+        11,
+        9,
+        13,
+        10,
+        22,
+        7,
+        18
+      ],
+      "is_golay_octad": true
+    }
+  ],
+  "partition_all_24_coordinates": true,
+  "scope": "Zones provide named regions for 24-coordinate MOG data only. They cannot assign names to mismatched KB tensor categories.",
+  "tensor_decoding_rule": "Decode a category positionally iff every observed tensor length equals its declared parameter count."
+}
