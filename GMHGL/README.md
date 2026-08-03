@@ -37,7 +37,8 @@ GMHGL (this folder)
 
 - `geometry.py` 
 ```
-Identity is derived from TOPOLOGY. The 'math' field is treated as a 3D Voxel Structure. The Vector is a measurement of that structure's Volume and Compactness.
+Identity is derived from TOPOLOGY. The 'math' field is treated as a 3D Voxel Structure.
+The Vector is a measurement of that structure's Volume and Compactness.
 STANDARDS:
 1. Domain: Bits 0-2 (Prefix)
 2. Volume: Bits 3-7 (Voxel Count, Gray Coded)
@@ -45,7 +46,7 @@ STANDARDS:
 4. Parity: Bits 12-23 (Golay [24,12,8])
 ```
 - 'physics.py' 
-"""
+```
 Strict float-free metrics suitable for core UBP logic.
 - No floats, no UBPUltimateSubstrate.get_pi(50), no numpy.
 - All computations return Fractions (or ints / enums).
@@ -53,29 +54,27 @@ Strict float-free metrics suitable for core UBP logic.
   This keeps the entire system float-free while remaining deterministic and reproducible.
 - If you want an absolutely symbolic π (unevaluated), replace `pi_approx()` usage with an expression
   object of your choice. This module keeps things runnable without external dependencies.
-"""
-- 'refined_nrci.py'
-"""
-Primary UBP measuring metric
-"""
+```
+- 'refined_nrci.py': Primary UBP measuring metric
 -spatial_artithmetic.py'
-"""
+```
 Signed integers are represented by regular unit-edge polygons embedded in 3-D.
 The vertex count stores magnitude and sign.  The empty space between adjacent
 polygons stores an operator.  An observer reconstructs the connected cycles,
 measures their geometry, decodes the expression, and evaluates it with exact
 ``fractions.Fraction`` arithmetic.
-"""
+```
 - 'tgic_v3.py'
-"""
+```
 1. A top-down Golay-code filter.  Codewords, syndromes, octads and correction
-   all use ``ubp_unified_v5.GolayCodeEngine`` so there is one code convention.
+   all use `ubp_unified_v5.GolayCodeEngine` so there is one code convention.
 2. A bottom-up, finite-state RuneCube simulator adapted from
-   ``ubp_tgic_engine.py``.  It provides the older axis operations, internal
+   `ubp_tgic_engine.py`.  It provides the older axis operations, internal
    interaction score, neighbourhood pressure and relational attraction without
-   relying on the unavailable ``ubp_core_v5_3_merged`` module.
-"""
-- 'ldp_nrci.py' + 'ldp_complete_mapping.md'
+   relying on the unavailable `ubp_core_v5_3_merged` module.
+```
+- 'ldp_nrci.py' + 'ldp_complete_mapping.md':
+
 The Dimensional Ladder
 | Dim | Code | d/n | DHC | AND Closure | Phase |
 |-----|------|-----|-----|-------------|-------|
@@ -85,15 +84,8 @@ The Dimensional Ladder
 | 14D | — | — | — | 0.247 | **PHASE TRANSITION** |
 | 24D | [24,12,8] | 0.33 | FALSE | 0.038 | Above transition |
 
-- 'ubp_kb_architect.py' 
-"""
-The script used to generate ubp_system_kb.json entries
-"""
+- 'ubp_kb_architect.py': The script used to generate ubp_system_kb.json entries
 - 'ubp_phenomenology.py'
-"""
-
-"""
-
 ---
 
 ## What `ubp_unified_v5.py` Provides
@@ -101,7 +93,7 @@ The script used to generate ubp_system_kb.json entries
 0. STD-LIB **ONLY**
 
 1. EXACT MATH (class 'ExactMath'):
-    """
+    ```
     Float-free integer / rational mathematics.
 
     Provides what `math` provided, but with deterministic exactness:
@@ -113,33 +105,33 @@ The script used to generate ubp_system_kb.json entries
       • igcd(a, b)              gcd (Euclidean)
       • sqrt_frac(f, prec=30)  Fraction sqrt to ~prec decimal digits
       • newton_sqrt(f, iters)   raw Newton iteration on Fraction
-    """
+    ```
 
 1.1. EXACT ROOT (class 'ExactRoot'):
-    """
+
     Exact symbolic representation of  coef · √radicand  with Fraction internals.
     Useful for physics expressions that contain irrational closed-form roots
     (e.g. γ = 1/√(1−β²),  v_esc = √(2GM/R)).
-
+   
     Operations:
-      • multiply by Fraction or ExactRoot
-      • divide by Fraction or ExactRoot
-      • approximate to a Fraction via to_fraction(prec)
-      • convert to float via float() ONLY on the display boundary
-    """
+    multiply by Fraction or ExactRoot
+    divide by Fraction or ExactRoot
+    approximate to a Fraction via to_fraction(prec)
+    convert to float via float() ONLY on the display boundary
+
 
 1.5. GRAY MAP ISOMETRY  (Z_4 ↔ F_2^2)
-    """
+```
 The isometric bridge between two metric worlds.  Walk around the 4-cycle
 (0,0) → (1,0) → (1,1) → (0,1) → (0,0) in the Hamming cube: each step
 changes exactly one bit.  So Hamming distance in F_2^2 equals Lee distance
 in Z_4.  The Gray map is THE isometry between (Z_4, Lee) and (F_2^2, Ham).
 
-       z  →  (b1, b2)
-       0  →  (0, 0)
-       1  →  (1, 0)
-       2  →  (1, 1)
-       3  →  (0, 1)
+z  →  (b1, b2)
+0  →  (0, 0)
+1  →  (1, 0)
+2  →  (1, 1)
+3  →  (0, 1)
 
  This is the bridge that lets us verify Z_4-linear constructions using
  binary tools (Hamming weights, code linearity) while the lattice itself
@@ -147,10 +139,10 @@ in Z_4.  The Gray map is THE isometry between (Z_4, Lee) and (F_2^2, Ham).
 
 GRAY_MAP     = {0: (0, 0), 1: (1, 0), 2: (1, 1), 3: (0, 1)}
 GRAY_MAP_INV = {v: k for k, v in GRAY_MAP.items()}
-    """
+```
 
 2. UBP SUBSTRATE (class 'UBPUltimateSubstrate'):
-    """
+    ```
     Ultimate-precision mathematical substrate.
 
     π, e, and φ are computed via 50-term continued-fraction expansions,
@@ -213,72 +205,63 @@ GRAY_MAP_INV = {v: k for k, v in GRAY_MAP.items()}
         L = wobble / F(13)
         c.update({"PHI": phi, "E": e, "MONAD": monad, "WOBBLE": wobble, "SINK_L": L})
         return c
-    """
+    ```
 
 3. BINARY LINEAR ALGEBRA (class 'BinaryLinearAlgebra')
-    """
+    ```
     All operations modulo 2.  No floats anywhere.
     BLA = BinaryLinearAlgebra   # short alias
-    """
+    ```
 
 4. GOLAY CODE (class 'GolayCodeEngine')
-    """
+    ```
     Extended binary Golay [24, 12, 8] code.
-
     Provides:
-      • encode(msg12)            — systematic encoding
-      • syndrome(v24)            — H · v mod 2
-      • snap_to_codeword(v24)    — corrects any error pattern of weight ≤ 3
-      • decode(v24)              — returns (msg, correctable, errors)
-      • get_octads()             — all 759 weight-8 codewords
-      • get_all_codewords()      — full list of 4096 codewords
-      • get_random_octad(n)      — deterministic octad selector
-      • get_shadow_metrics()     — noumenal/phenomenal split
-    """
-
+      encode(msg12)            — systematic encoding
+      syndrome(v24)            — H · v mod 2
+      snap_to_codeword(v24)    — corrects any error pattern of weight ≤ 3
+      decode(v24)              — returns (msg, correctable, errors)
+      get_octads()             — all 759 weight-8 codewords
+      get_all_codewords()      — full list of 4096 codewords
+      get_random_octad(n)      — deterministic octad selector
+      get_shadow_metrics()     — noumenal/phenomenal split
+    ```
+    
 4.5. HEXACODE [6,3,4]/GF(4) + MOG DECOMPOSITION
-    """
-    The algebraic shadow of the Golay code.  Every Golay codeword, arranged
-    # in the 4×6 MOG grid, has its 6 column labels forming a Hexacode word.
-    """
+- The algebraic shadow of the Golay code.  Every Golay codeword, arranged in the 4×6 MOG grid, has its 6 column labels forming a Hexacode word.
 
 5. LEECH LATTICE  Λ₂₄ (class 'LeechPointScaled')
-    """
-    Λ₂₄ point in scaled integer coordinates (each entry × √8 in physical)."""
-    """
-5.5 FULL MINIMAL-VECTOR ENUMERATION
-    """
-    The Leech lattice has exactly 196,560 minimal vectors of norm 4 (×8 repr.:
-    # norm² = 32 = 4·8).
-    """
-5.5.1. VECTOR COST ('def audit_minimal_vector_classes(self) -> Dict[str, Any]:')
-        """
-        Run `audit_vector_cost` on a representative vector from each of the 3
-        minimal-vector classes (A, B, C), plus the zero vector as a baseline.
+- Λ₂₄ point in scaled integer coordinates (each entry × √8 in physical).
 
-        This is the headline transparency report: it shows exactly how the
-        Hamming Weight and Norm² contribute to the TAX and NRCI for each
-        shape-class, with all values as exact Fractions.
-        """
+5.5 FULL MINIMAL-VECTOR ENUMERATION
+    The Leech lattice has exactly 196,560 minimal vectors of norm 4 (×8 repr.:
+- norm² = 32 = 4·8).
+
+5.5.1. VECTOR COST ('def audit_minimal_vector_classes(self) -> Dict[str, Any]:')
+Run `audit_vector_cost` on a representative vector from each of the 3
+minimal-vector classes (A, B, C), plus the zero vector as a baseline.
+
+This is the headline transparency report: it shows exactly how the
+Hamming Weight and Norm² contribute to the TAX and NRCI for each
+shape-class, with all values as exact Fractions.
+
 5.5.2. SYMMETRY TAX ('def calculate_symmetry_tax(self, point: List[int],')
+
 5.5.3. ONTOLOGICAL HEALTH ('def ontological_health(self, point: List[int]) -> Dict[str, Fraction]:')
+
 5.5.4. STABILITY RANKING ('def rank_by_stability(self, points: List[List[int]]) -> List[Tuple[List[int], Fraction]]:')
+
 5.5.5. NEAREST OCTAD ('def nearest_octad_idx(self, seed24: List[int]) -> Dict[str, int]:')
 
-6. MONSTER GROUP - 26 sporadic simple groups (class 'MonsterGroup')
-    """
-    All 26 sporadic simple groups + triad activation logic.
-    """
+6. MONSTER GROUP - 26 sporadic simple groups (class 'MonsterGroup'): All 26 sporadic simple groups + triad activation logic.
 
 7. BARNES-WALL ENGINE  - recursive |u | u+v| (class 'BarnesWallEngine')
-    """
-    Generalised Barnes-Wall engine — power-of-two dimension ≥ 32.
-    BW256, BW512, BW1024 all supported.  Float-free except for output convenience.
-    """
+-  Generalised Barnes-Wall engine — power-of-two dimension ≥ 32.
+- BW256, BW512, BW1024 all supported.  Float-free except for output convenience.
 
 8. SUBSTRATE LIBRARY + SUBSTRATE STUB + NOISE CELLS
 8.1. class 'GolaySubstrateStub')
-    """
+    ```
     Calibration shortcut for the canonical PERFECT_V1 substrate.
     PERFECT_SUBSTRATE = [1,0,1,1,0,0,0,0,0,0,1,1,1,0,0,1,0,0,1,0,0,0,0,1]
     _CALIBRATION = {
@@ -287,28 +270,21 @@ GRAY_MAP_INV = {v: k for k, v in GRAY_MAP.items()}
             "curve": {0: 0, 1: 1, 2: 2, 3: 3, 4: 4},
             "elastic_limit": 4,
         }
-    """
+    ```
 8.2. class SubstrateLibrary:
-    """
-    Catalogued 24-bit substrates with known mathematical properties.
-    PERFECT_V1     = [1,0,1,1,0,0,0,0,0,0,1,1,1,0,0,1,0,0,1,0,0,0,0,1]
-    DODECAD_ANCHOR = [1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0]
-    OCTAD_ANCHOR   = [1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    """
-8.3. class NoiseCellV3:
-    """
-    24-bit manifold cell — base-12 digit storage with displacement curve.
-    """
-8.4. class NoiseRegisterV3:
-    """
-    Auto-expanding base-12 register made of NoiseCellV3 instances.
-    """
-8.5. class SubstrateCalibrator:
-    """
-    Empirically measures the displacement curve of any 24-bit substrate.
-    """
+Catalogued 24-bit substrates with known mathematical properties.
+- PERFECT_V1     = [1,0,1,1,0,0,0,0,0,0,1,1,1,0,0,1,0,0,1,0,0,0,0,1]
+- DODECAD_ANCHOR = [1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0]
+- OCTAD_ANCHOR   = [1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    
+8.3. class NoiseCellV3: 24-bit manifold cell — base-12 digit storage with displacement curve.
+
+8.4. class NoiseRegisterV3: Auto-expanding base-12 register made of NoiseCellV3 instances.
+
+8.5. class SubstrateCalibrator: Empirically measures the displacement curve of any 24-bit substrate.
 
 9. CONSTRUCTION SYSTEM - D / X / N / J primitives + UBPObject (class 'ConstructionPrimitive', 'ConstructionPath', 'UBPObject', 'TriadActivationEngine')
+```
         configs = [
             ("SEG_1", "Segment 1", "geometry.1d", [("D",1),("X",1)]),
             ("SEG_2", "Segment 2", "geometry.1d", [("D",2),("X",2)]),
@@ -335,70 +311,64 @@ GRAY_MAP_INV = {v: k for k, v in GRAY_MAP.items()}
             ("KNOT_1", "Knot 1", "geometry.topology",[("D",3),("X",3)]*2),
             ("KNOT_2", "Knot 2", "geometry.topology",[("D",1),("X",1),("D",2),("X",2)]),
         ]
+```
 
 10. PARTICLE PHYSICS - UBPSourceCodeParticlePhysics - experimental not absolute (class 'UBPSourceCodeParticlePhysics')
-        """
+```
     def phi_generator(self, k: int, arm: str, layer: str, C: Union[int, float, Fraction],
                       correction: str = "none", alpha: Union[int, float, Fraction] = F(1),
                       vec: Optional[List[int]] = None) -> Fraction:
 
         Universal Generator Function Phi(k, arm, layer, C, correction, alpha, vec).
         Implements Section 8 of the UBP Skill Reference (July 2026).
-        """
-
+```
 11. UBP FINGERPRINT - Gray code → Golay snap → Leech metrics ('def to_gray_code(n: int, bits: int = 24) -> List[int]:', 'def ubp_fingerprint_logic(val: Any) -> Dict[str, Any]:')
 
 12. NOISE ALU - float-free arithmetic + integer ops (class 'AdaptiveManifold', 'NeuralPatternDetector', 'ParallelUBP')
 class NoiseALU:
-    """
     Arithmetic Logic Unit — every result carries a UBP fingerprint.
-
     v5: All previously-float-using ops (mean, variance, dot, magnitude,
     isqrt) now return Fraction or ExactRoot results.  A `result` (display
     float) and `result_exact` (string of Fraction or ExactRoot) are both
     returned where appropriate.
-    """
+    
 12.1. Enhanced UBP fingerprint (Golay + Leech + BW)
 12.2. Integer / number-theory ops
 12.3.     def is_prime(self, n: int) -> Dict[str, Any]:
-        """
-        [LAW_TOPOLOGICAL_TENACITY_001] Native UBP Primality Certification.
-        Replaces classical Miller-Rabin with pure substrate-native Lock Pressure.
-        """
+- [LAW_TOPOLOGICAL_TENACITY_001] Native UBP Primality Certification.
+- Replaces classical Miller-Rabin with pure substrate-native Lock Pressure.
 12.4. Triad / Leech / Monster / BW
 
 13. PHYSICS ALU - float-free using ExactRoot (class 'PhysicsALU(NoiseALU)')
-    """
+```
     Physical-law ALU using exact Fraction / ExactRoot arithmetic.
-
     Constants  (CODATA / SI exact):
         G_N  = 6.6743 × 10⁻¹¹                  m³/(kg·s²)        (CODATA 2018)
         c    = 299 792 458                       m/s   (exact, SI definition)
         h    = 6.62607015 × 10⁻³⁴               J·s   (exact, SI 2019)
-    """
+```
 
-14. LINEAR-ALGEBRA ALU (class 'LinearAlgebraALU(NoiseALU)')
-    """
-    Float-free 2×2 / 3×3 / n×n determinants and matrix-vector ops.
-    """
+14. LINEAR-ALGEBRA ALU (class 'LinearAlgebraALU(NoiseALU)'): Float-free 2×2 / 3×3 / n×n determinants and matrix-vector ops.
 
 15. MATHNET PROBLEM ROUTER
+
 16. PROBLEM SET (33 entries + physics/linalg - expand if possible)
 
 17. COMPREHENSIVE TEST SUITE
 
 18. FULL RUN (problem set + report)
 
-19 — ENTRY POINT
+19. ENTRY POINT
 
 20. FRONTIER PHYSICS EXPANSION (QFT, CFT, TOPOLOGICAL)
 
 **Constants (exact Fractions):**
+```
 - Y = 1/(π + 2/π) ≈ 0.264675 — entropic wobble
 - TAX = HW·Y + ‖v‖²/8 — Symmetry Tax
 - NRCI = 10/(10 + TAX) — coherence measure
 - Coherence horizon: NRCI = 0.500
-
+```
 ---
 
 ## Verified Properties
