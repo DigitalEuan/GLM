@@ -177,27 +177,25 @@ Training Data + Knowledge (grows with each run)
 
 ---
 
-## Resources
-
-- GLM language unified resource (15MB): 'https://github.com/DigitalEuan/UBP_Repo/blob/main/core_studio_v4.0/GLM/glm_unified_resource.json'
-- GLM Concept Relation Graph: 'https://github.com/DigitalEuan/UBP_Repo/blob/main/core_studio_v4.0/GLM/GLM_CRG_EXPANDED.py'
-- Database of words and explanation: 'https://github.com/DigitalEuan/UBP_Repo/blob/main/core_studio_v4.0/core/ubp_lang_kb_combined_v4.json'
-
-- Currently under/unused datasets and scripts in 'glm_machine/'
+## Under used GLM Resources
+```
+- Currently under/unused datasets and scripts in 'glm_machine/':
+   - 'glm_unified_resource.json' 15MB GLM language unified resource
+   - 'GLM_CRG_EXPANDED.py' 32KB GLM Concept Relation Graph
    - 'GLM_CRG_MASSIVE.py' 10KB
    - 'GLM15_physics_pack.py' 33KB - physics definitions
    - 'color_space_data.json' 183KB
    - 'corpus.txt' 500KB chat conversation for language training
    - 'glm_learned_state.json' 12KB
    - 'GLM21_generator.py' - GENERATION loop — it produces novel sequences, not just recalled templates.
-   - 'GLM22_ontological_grammar.py' - UBP ontological layers (Reality, Information, Activation, Potential) map to grammatical categories:
-1. Reality    (M_*)  → NOUN      (concrete things that exist)
-2. Information (I_*) → ADJECTIVE  (relational qualities)
-3. Activation (A_*)  → VERB       (processes, actions)
-4. Potential  (P_*)  → OPERATOR   (logical/abstract relations)
+   - 'GLM22_ontological_grammar.py' - For words and language UBP ontological layers map to grammatical categories:
+    ├──→ Reality    (M_*)  → NOUN      (concrete things that exist)
+    ├──→ Information (I_*) → ADJECTIVE  (relational qualities)
+    ├──→ Activation (A_*)  → VERB       (processes, actions)
+    └──→ Potential  (P_*)  → OPERATOR   (logical/abstract relations)
    - 'GLM39_agent_loop.py'
    - 'golden_cases.json' 13KB
-   - 'idea_meta_graph.json' 77KB
-
+   - 'idea_meta_graph.json' 77KB 
+- Additional Words + definitions resource 11.2MB 'long_term_memory/ubp_lang_kb_combined_v4.json'
 - ARC AGI Attempts before v15: 'https://github.com/DigitalEuan/ARC_AGI'
-
+```
