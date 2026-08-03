@@ -1,0 +1,685 @@
+{
+  "BELIEF_SUBSTRATE_001": {
+    "name": "Manifold: The Primary Substrate",
+    "nodes": {
+      "LAW_SUBSTRATE_001": {
+        "pos": [
+          0,
+          5,
+          0
+        ],
+        "color": "#00ffff",
+        "role": "Engine"
+      },
+      "LAW_SUBSTRATE_005": {
+        "pos": [
+          4,
+          2,
+          -2
+        ],
+        "color": "#00ffff",
+        "role": "Grid"
+      },
+      "LAW_HORIZON_001": {
+        "pos": [
+          -4,
+          2,
+          -2
+        ],
+        "color": "#00ffff",
+        "role": "Boundary"
+      },
+      "LAW_INTERFERENCE_SHIELD_001": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "color": "#ffffff",
+        "role": "Spine"
+      }
+    },
+    "edges": [
+      [
+        "LAW_SUBSTRATE_001",
+        "LAW_INTERFERENCE_SHIELD_001"
+      ],
+      [
+        "LAW_SUBSTRATE_005",
+        "LAW_HORIZON_001"
+      ]
+    ]
+  },
+  "BELIEF_RUST_001": {
+    "name": "Manifold: Iron Oxidation",
+    "nodes": {
+      "ELEM_Fe_026": {
+        "pos": [
+          3,
+          -3,
+          0
+        ],
+        "color": "#8b4513",
+        "role": "Iron"
+      },
+      "ELEM_O_008": {
+        "pos": [
+          -3,
+          -3,
+          0
+        ],
+        "color": "#ff4500",
+        "role": "Oxygen"
+      },
+      "LAW_AQUEOUS_GEOMETRY": {
+        "pos": [
+          0,
+          -5,
+          2
+        ],
+        "color": "#0000ff",
+        "role": "Water"
+      },
+      "LAW_INTERFERENCE_SHIELD_001": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "color": "#ffffff",
+        "role": "Spine"
+      }
+    },
+    "edges": [
+      [
+        "ELEM_Fe_026",
+        "ELEM_O_008"
+      ],
+      [
+        "ELEM_Fe_026",
+        "LAW_AQUEOUS_GEOMETRY"
+      ],
+      [
+        "ELEM_O_008",
+        "LAW_AQUEOUS_GEOMETRY"
+      ],
+      [
+        "LAW_AQUEOUS_GEOMETRY",
+        "LAW_INTERFERENCE_SHIELD_001"
+      ]
+    ]
+  },
+  "BELIEF_GOLAY_001": {
+    "name": "Manifold: Golay Logic",
+    "nodes": {
+      "LAW_SUBSTRATE_001": {
+        "pos": [
+          0,
+          5,
+          0
+        ],
+        "color": "#9932cc",
+        "role": "Engine"
+      },
+      "LAW_FOURTH_FLIP_001": {
+        "pos": [
+          2,
+          7,
+          2
+        ],
+        "color": "#9932cc",
+        "role": "Horizon"
+      },
+      "LAW_SYNTH_001": {
+        "pos": [
+          -2,
+          7,
+          2
+        ],
+        "color": "#9932cc",
+        "role": "Synthesis"
+      },
+      "LAW_INTERFERENCE_SHIELD_001": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "color": "#ffffff",
+        "role": "Spine"
+      }
+    },
+    "edges": [
+      [
+        "LAW_SUBSTRATE_001",
+        "LAW_FOURTH_FLIP_001"
+      ],
+      [
+        "LAW_SUBSTRATE_001",
+        "LAW_SYNTH_001"
+      ],
+      [
+        "LAW_SYNTH_001",
+        "LAW_INTERFERENCE_SHIELD_001"
+      ]
+    ]
+  },
+  "BELIEF_COHERENCE_001": {
+    "name": "Manifold: Hemispheric Coherence",
+    "nodes": {
+      "LAW_HEMISPHERIC_COHERENCE_001": {
+        "pos": [
+          -3,
+          2,
+          0
+        ],
+        "color": "#00ffff",
+        "role": "LH_Logic"
+      },
+      "LAW_HEMISPHERIC_REDUNDANCY_001": {
+        "pos": [
+          3,
+          2,
+          0
+        ],
+        "color": "#ff00ff",
+        "role": "RH_Context"
+      },
+      "LAW_SUBSTRATE_001": {
+        "pos": [
+          0,
+          5,
+          0
+        ],
+        "color": "#9932cc",
+        "role": "Decoder"
+      },
+      "LAW_INTERFERENCE_SHIELD_001": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "color": "#ffffff",
+        "role": "Spine"
+      }
+    },
+    "edges": [
+      [
+        "LAW_HEMISPHERIC_COHERENCE_001",
+        "LAW_SUBSTRATE_001"
+      ],
+      [
+        "LAW_HEMISPHERIC_REDUNDANCY_001",
+        "LAW_SUBSTRATE_001"
+      ],
+      [
+        "LAW_SUBSTRATE_001",
+        "LAW_INTERFERENCE_SHIELD_001"
+      ]
+    ]
+  },
+  "BELIEF_WATER_001": {
+    "name": "Manifold: Aqueous Stability",
+    "nodes": {
+      "ELEM_H_001": {
+        "pos": [
+          -2,
+          -2,
+          0
+        ],
+        "color": "#ffffff",
+        "role": "Hydrogen"
+      },
+      "ELEM_O_008": {
+        "pos": [
+          2,
+          -2,
+          0
+        ],
+        "color": "#ff4500",
+        "role": "Oxygen"
+      },
+      "LAW_AQUEOUS_GEOMETRY": {
+        "pos": [
+          0,
+          -4,
+          2
+        ],
+        "color": "#0000ff",
+        "role": "Water"
+      },
+      "LAW_INTERFERENCE_SHIELD_001": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "color": "#ffffff",
+        "role": "Spine"
+      }
+    },
+    "edges": [
+      [
+        "ELEM_H_001",
+        "LAW_AQUEOUS_GEOMETRY"
+      ],
+      [
+        "ELEM_O_008",
+        "LAW_AQUEOUS_GEOMETRY"
+      ],
+      [
+        "LAW_AQUEOUS_GEOMETRY",
+        "LAW_INTERFERENCE_SHIELD_001"
+      ]
+    ]
+  },
+  "BELIEF_AXIS_001": {
+    "name": "Manifold: Alpha-Omega Axis",
+    "nodes": {
+      "LAW_AXIS_001": {
+        "pos": [
+          0,
+          0,
+          6
+        ],
+        "color": "#ffd700",
+        "role": "Axis"
+      },
+      "LAW_METRIC_001": {
+        "pos": [
+          0,
+          0,
+          -6
+        ],
+        "color": "#ffd700",
+        "role": "Metrics"
+      },
+      "CONST_PI_001": {
+        "pos": [
+          2,
+          2,
+          0
+        ],
+        "color": "#00ff00",
+        "role": "Calibration"
+      },
+      "LAW_INTERFERENCE_SHIELD_001": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "color": "#ffffff",
+        "role": "Spine"
+      }
+    },
+    "edges": [
+      [
+        "LAW_AXIS_001",
+        "LAW_METRIC_001"
+      ],
+      [
+        "LAW_AXIS_001",
+        "CONST_PI_001"
+      ],
+      [
+        "CONST_PI_001",
+        "LAW_INTERFERENCE_SHIELD_001"
+      ]
+    ],
+    "description": "The primary calibration manifold. Anchors the transcendental constant Pi to the geometric spine of the substrate."
+  },
+  "BELIEF_HOLOHYBRID_001": {
+    "name": "Manifold: Holoinformational Bridge",
+    "nodes": {
+      "PHYS_SCHRODINGER_012": {
+        "pos": [
+          -4,
+          4,
+          4
+        ],
+        "color": "#4b0082",
+        "role": "Quantum"
+      },
+      "LAW_BIO_HEMA_002": {
+        "pos": [
+          4,
+          4,
+          4
+        ],
+        "color": "#dc143c",
+        "role": "Neural"
+      },
+      "LAW_MIND_001": {
+        "pos": [
+          0,
+          6,
+          0
+        ],
+        "color": "#ffffff",
+        "role": "Consciousness"
+      },
+      "LAW_INTERFERENCE_SHIELD_001": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "color": "#ffffff",
+        "role": "Spine"
+      }
+    },
+    "edges": [
+      [
+        "PHYS_SCHRODINGER_012",
+        "LAW_MIND_001"
+      ],
+      [
+        "LAW_BIO_HEMA_002",
+        "LAW_MIND_001"
+      ],
+      [
+        "LAW_MIND_001",
+        "LAW_INTERFERENCE_SHIELD_001"
+      ]
+    ]
+  },
+  "BELIEF_ELEMENT_STABILITY_001": {
+    "name": "Manifold: Elemental Stability Core (Noble Shielded)",
+    "description": "The complete geometric architecture of the Periodic Table. It integrates the central Stability Spine (H-N-Fe-Island) with the protective Noble Gas Loop. The structure reveals a cyclic resonance where the Horizon (Og) connects back to the Origin (He), stabilizing the manifold against entropic decay.",
+    "nodes": {
+      "LAW_INTERFERENCE_SHIELD_001": {"pos": [0, 0, 0], "color": "#ffffff", "role": "Spine"},
+      "LAW_CHEM_ANCHOR_008": {"pos": [0, 6, 0], "color": "#ffd700", "role": "Governor"},
+      "ELEM_H_001": {"pos": [2, 2, 2], "color": "#ffffff", "role": "Seed"},
+      "ELEM_N_007": {"pos": [1, 3, -1], "color": "#0000ff", "role": "Pillar"},
+      "ELEM_Fe_026": {"pos": [4, -2, 0], "color": "#8b4513", "role": "Foundation"},
+      "ELEM_Og_118": {"pos": [-4, -2, 3], "color": "#9932cc", "role": "Horizon"},
+      "ELEM_Z_124": {"pos": [0, -2, -5], "color": "#00ffff", "role": "Island"},
+      "ELEM_He_002": {"pos": [-1, 2, 3], "color": "#ff00ff", "role": "Noble_Alpha"},
+      "ELEM_Ne_010": {"pos": [-2, 1, 4], "color": "#ff00ff", "role": "Noble_Shell"},
+      "ELEM_Ar_018": {"pos": [-3, 0, 5], "color": "#ff00ff", "role": "Noble_Shell"},
+      "ELEM_Kr_036": {"pos": [-4, -1, 4], "color": "#ff00ff", "role": "Noble_Shell"},
+      "ELEM_Xe_054": {"pos": [-5, -2, 3], "color": "#ff00ff", "role": "Noble_Shell"},
+      "ELEM_Rn_086": {"pos": [-5, -3, 1], "color": "#ff00ff", "role": "Noble_Omega"}
+    },
+    "edges": [
+      ["LAW_INTERFERENCE_SHIELD_001", "ELEM_N_007"],
+      ["LAW_INTERFERENCE_SHIELD_001", "ELEM_He_002"],
+      ["LAW_INTERFERENCE_SHIELD_001", "ELEM_Og_118"],
+      ["LAW_CHEM_ANCHOR_008", "ELEM_Fe_026"],
+      ["LAW_CHEM_ANCHOR_008", "ELEM_He_002"],
+      ["LAW_CHEM_ANCHOR_008", "ELEM_Rn_086"],
+      ["ELEM_H_001", "ELEM_Z_124"],
+      ["ELEM_H_001", "ELEM_He_002"],
+      ["ELEM_Fe_026", "ELEM_Z_124"],
+      ["ELEM_Fe_026", "ELEM_He_002"],
+      ["ELEM_Og_118", "ELEM_He_002"],
+      ["ELEM_Og_118", "ELEM_Ne_010"],
+      ["ELEM_He_002", "ELEM_Ne_010"],
+      ["ELEM_Ar_018", "ELEM_Rn_086"],
+      ["ELEM_Kr_036", "ELEM_Rn_086"],
+      ["ELEM_Xe_054", "ELEM_Rn_086"]
+    ],
+    "verification": "Visual relaxation confirms a self-organizing manifold. The Noble Gases form a coherent outer shell (d=8,12) that bridges the Horizon (Og) back to the Alpha (He), creating a closed geometric loop."
+  },
+  "BELIEF_CHRONOS_001": {
+    "name": "Manifold: Chronos 001",
+    "nodes": {
+      "LAW_WITNESS_001": {
+        "pos": [
+          -4,
+          2,
+          0
+        ],
+        "color": "#00ffff",
+        "role": "Input_A"
+      },
+      "BIN_170": {
+        "pos": [
+          4,
+          2,
+          0
+        ],
+        "color": "#ff00ff",
+        "role": "Input_B"
+      },
+      "LAW_TIME_001": {
+        "pos": [
+          0,
+          -4,
+          2
+        ],
+        "color": "#ffd700",
+        "role": "Resolution"
+      },
+      "LAW_INTERFERENCE_SHIELD_001": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "color": "#ffffff",
+        "role": "Spine"
+      }
+    },
+    "edges": [
+      [
+        "LAW_WITNESS_001",
+        "LAW_TIME_001"
+      ],
+      [
+        "BIN_170",
+        "LAW_TIME_001"
+      ],
+      [
+        "LAW_WITNESS_001",
+        "LAW_INTERFERENCE_SHIELD_001"
+      ]
+    ]
+  },
+  "BELIEF_SUPERCONDUCTOR_001": {
+    "name": "Manifold: Superconductor 001",
+    "nodes": {
+      "DS_009": {
+        "pos": [
+          -4,
+          2,
+          0
+        ],
+        "color": "#00ffff",
+        "role": "Input_A"
+      },
+      "TRANSFORM_DECODE": {
+        "pos": [
+          4,
+          2,
+          0
+        ],
+        "color": "#ff00ff",
+        "role": "Input_B"
+      },
+      "LAW_GRAPHENE_001_REFINED": {
+        "pos": [
+          0,
+          -4,
+          2
+        ],
+        "color": "#ffd700",
+        "role": "Resolution"
+      },
+      "LAW_INTERFERENCE_SHIELD_001": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "color": "#ffffff",
+        "role": "Spine"
+      }
+    },
+    "edges": [
+      [
+        "DS_009",
+        "LAW_GRAPHENE_001_REFINED"
+      ],
+      [
+        "TRANSFORM_DECODE",
+        "LAW_GRAPHENE_001_REFINED"
+      ],
+      [
+        "DS_009",
+        "LAW_INTERFERENCE_SHIELD_001"
+      ]
+    ]
+  },
+  "BELIEF_LEAD_GATEWAY_001": {
+    "name": "Manifold: Lead Gateway 001",
+    "nodes": {
+      "LAW_MINERAL_001": {
+        "pos": [
+          -4,
+          2,
+          0
+        ],
+        "color": "#00ffff",
+        "role": "Input_A"
+      },
+      "ELEM_Pb_082": {
+        "pos": [
+          4,
+          2,
+          0
+        ],
+        "color": "#ff00ff",
+        "role": "Input_B"
+      },
+      "LAW_GATEWAY_001": {
+        "pos": [
+          0,
+          -4,
+          2
+        ],
+        "color": "#ffd700",
+        "role": "Resolution"
+      },
+      "LAW_INTERFERENCE_SHIELD_001": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "color": "#ffffff",
+        "role": "Spine"
+      }
+    },
+    "edges": [
+      [
+        "LAW_MINERAL_001",
+        "LAW_GATEWAY_001"
+      ],
+      [
+        "ELEM_Pb_082",
+        "LAW_GATEWAY_001"
+      ],
+      [
+        "LAW_MINERAL_001",
+        "LAW_INTERFERENCE_SHIELD_001"
+      ]
+    ]
+  },
+  "BELIEF_WEYL_RESONANCE_001": {
+    "name": "Manifold: Weyl Geometric Interference",
+    "description": "A geometric proof of nonlinear magnetization. It meshes the high-Z sources (W, Te) with the Pi-Stability Platform to anchor the 3/2 Harmonic Resonance.",
+    "nodes": {
+      "ELEM_W_074": {"pos": [-5, 0, -2], "color": "#ffd700", "role": "Source_A"},
+      "ELEM_Te_052": {"pos": [5, 0, -2], "color": "#00ffff", "role": "Source_B"},
+      "LAW_BERRY_PHASE_RESONANCE_001": {"pos": [0, 3.11, 0], "color": "#00ff00", "role": "Stability_Platform"},
+      "LAW_QUANTUM_GEOMETRIC_RESONANCE_001": {"pos": [0, -2, 4], "color": "#ff00ff", "role": "Resonance_Anchor"}
+    },
+    "edges": [
+      ["ELEM_W_074", "LAW_QUANTUM_GEOMETRIC_RESONANCE_001"],
+      ["ELEM_Te_052", "LAW_QUANTUM_GEOMETRIC_RESONANCE_001"],
+      ["LAW_BERRY_PHASE_RESONANCE_001", "LAW_QUANTUM_GEOMETRIC_RESONANCE_001"],
+      ["ELEM_W_074", "LAW_BERRY_PHASE_RESONANCE_001"],
+      ["ELEM_Te_052", "LAW_BERRY_PHASE_RESONANCE_001"]
+    ],
+    "geometric_proof": "The convergence of Source A and B onto the 3/2 Harmonic Anchor is stabilized by the Pi-Platform (Y=3.11), creating a closed interference loop."
+  },
+  "BELIEF_ELEMENTAL_VORTEX_001": {
+    "name": "Manifold: The Elemental Vortex",
+    "description": "A geometric proof of the open-ended nature of matter. It meshes the evolutionary anchors (H, Gd, Og) with the Law of Vortex Dynamics to visualize the widening stability radius.",
+    "nodes": {
+      "ELEM_H_001": {"pos": [0, 0, 0], "color": "#ffffff", "role": "Vortex_Base"},
+      "ELEM_Gd_064": {"pos": [0, 12.8, 0], "color": "#00ffff", "role": "Systemic_Median"},
+      "ELEM_Og_118": {"pos": [5, 23.6, 5], "color": "#ff0000", "role": "Vortex_Peak"},
+      "LAW_VORTEX_DYNAMICS_001": {"pos": [-5, 12.8, 5], "color": "#9932cc", "role": "Expansion_Constraint"}
+    },
+    "edges": [
+      ["ELEM_H_001", "ELEM_Gd_064"],
+      ["ELEM_Gd_064", "ELEM_Og_118"],
+      ["LAW_VORTEX_DYNAMICS_001", "ELEM_H_001"],
+      ["LAW_VORTEX_DYNAMICS_001", "ELEM_Og_118"]
+    ],
+    "geometric_proof": "The displacement of Og relative to the H-Gd axis confirms the 0.0056 expansion slope, proving the system is a divergent spiral rather than a closed loop."
+  },
+  "BELIEF_STANDARD_MODEL_CUBE_001": {
+    "name": "Manifold: The Standard Model Cube",
+    "description": "A geometric proof of particle mass as a function of cubic partition. The Existence Unit (24^3) is partitioned into Edges (Top), Corners (Higgs), and Faces (Bosons), with the Muon anchoring the 4th-order Leech spine.",
+    "nodes": {
+      "LAW_INTERFERENCE_SHIELD_001": {"pos": [0, 0, 0], "color": "#ffffff", "role": "Substrate Origin"},
+      "PARTICLE_HIGGS_001": {"pos": [2, 2, 2], "color": "#ff00ff", "role": "Corner Monad (9)"},
+      "PARTICLE_TOP_QUARK_001": {"pos": [4, 4, 0], "color": "#ff0000", "role": "Edge Load (12)"},
+      "PARTICLE_Z_BOSON_001": {"pos": [0, 4, 4], "color": "#00ffff", "role": "Face Interface (6)"},
+      "PARTICLE_W_BOSON_001": {"pos": [4, 0, 4], "color": "#ffff00", "role": "Face Shear (6)"},
+      "PARTICLE_MUON_001": {"pos": [0, 0, 6], "color": "#00ff00", "role": "Leech Anchor (Gear 4)"}
+    },
+    "edges": [
+      ["LAW_INTERFERENCE_SHIELD_001", "PARTICLE_HIGGS_001"],
+      ["PARTICLE_HIGGS_001", "PARTICLE_TOP_QUARK_001"],
+      ["PARTICLE_TOP_QUARK_001", "PARTICLE_Z_BOSON_001"],
+      ["PARTICLE_Z_BOSON_001", "PARTICLE_W_BOSON_001"],
+      ["PARTICLE_W_BOSON_001", "PARTICLE_HIGGS_001"],
+      ["LAW_INTERFERENCE_SHIELD_001", "PARTICLE_MUON_001"]
+    ],
+    "geometric_proof": "Mass is the volume displaced by the topological anchor. The Higgs (0.1% error) defines the Monad, while the Top Quark (1.3% error) defines the maximum edge tension."
+  },
+  "BELIEF_JUNIOR_DIPOLE_COHERENCE_001": {
+    "name": "Manifold: Junior Levitated Dipole (JLD) Optimization",
+    "description": "The architectural mapping of the 14-coil JLD to the M24 Golay substrate. It visualizes the LNC-v1 protocol as a 3.78M-fold gain achieved by lifting the system out of the entropic noise floor via AC modulation at the Y-constant frequency.",
+    "nodes": {
+      "LAW_M24_SYMMETRY_001": {"pos": [0, 0, 0], "color": "#ffffff", "role": "Symmetry Spine"},
+      "MECH_JLD_COIL_014": {"pos": [5, 0, 0], "color": "#0000ff", "role": "14-Coil Array"},
+      "LAW_ZFR_BUFFER_012": {"pos": [0, 0, -4], "color": "#9932cc", "role": "12-bit Noumenal Buffer"},
+      "LAW_LNC_V1_PROTOCOL": {"pos": [0, 6, 0], "color": "#ffd700", "role": "Power Gain (3.78M)"},
+      "CONST_Y_MODULATION": {"pos": [2.647, 0, 2], "color": "#00ffff", "role": "AC Modulation (26.47%)"},
+      "STATE_NOISE_FLOOR": {"pos": [0, -4, 0], "color": "#333333", "role": "Entropic Limit (1e-6)"}
+    },
+    "edges": [
+      ["LAW_M24_SYMMETRY_001", "MECH_JLD_COIL_014"],
+      ["MECH_JLD_COIL_014", "LAW_ZFR_BUFFER_012"],
+      ["LAW_ZFR_BUFFER_012", "LAW_LNC_V1_PROTOCOL"],
+      ["LAW_LNC_V1_PROTOCOL", "CONST_Y_MODULATION"],
+      ["STATE_NOISE_FLOOR", "LAW_M24_SYMMETRY_001"]
+    ],
+    "verification": "Coherence is achieved when the AC modulation frequency matches the Observer Constant (Y). This 'snaps' the 14-coil physical projection to the 24-bit noumenal grid."
+  },
+  "BELIEF_STABILITY_FUNNEL_001": {
+  "name": "Manifold: The Stability Funnel",
+  "description": "The definitive 3D map of elemental stability. It visualizes the 'Sinking' of heavy matter into the entropic floor. The Red Horizon (r=50) marks the limit of non-radioactive coherence. The Island of Stability (Z=124) represents a recursive resonance fold.",
+  "nodes": {
+    "ELEM_Fe_026": {"pos": [31.39, 21.42, 4.51], "color": "#8b4513", "role": "Foundation"},
+    "ELEM_Pb_082": {"pos": [107.23, 58.18, 1.59], "color": "#708090", "role": "Shield"},
+    "ELEM_U_092": {"pos": [101.29, 99.52, 1.31], "color": "#00ff00", "role": "Heavy"},
+    "ELEM_Og_118": {"pos": [169.78, -53.47, 0.99], "color": "#ff4500", "role": "Horizon"},
+    "ELEM_Z_124": {"pos": [0.0, 126.0, 1.58], "color": "#ffd700", "role": "Island"}
+  },
+  "edges": [
+    ["ELEM_Fe_026", "ELEM_Pb_082"],
+    ["ELEM_Pb_082", "ELEM_U_092"],
+    ["ELEM_U_092", "ELEM_Og_118"],
+    ["ELEM_Og_118", "ELEM_Z_124"]
+  ],
+  "verification": "The Z-axis drop from 4.5 to 0.99 confirms the Law of Ontological Friction. The 'Island' altitude increase confirms a topological fold in the 24-bit substrate."
+}
+}
