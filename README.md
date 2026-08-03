@@ -51,12 +51,12 @@ https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the dire
 | **ROOT Top Tier repository folder** | Collect, define and conduct use of all sub-folders, files within folders and scripts throughout the whole of this repository and system, to direct experiments and studies that use the UBP and or GLM systems | — | 'README.md' (this file) | Organise all folders and their contents so no scripts are repeated and all systems use a single source ('GMHGL/' and 'glm_machine/') for operations, 'data_object/' for encoding, 'light/' for scale calibration and 'long_term_memory/' for all GLM training and learning |
 | **GMHGL/** | Foundation — Golay engine, TAX, NRCI | — | `ubp_unified_v5.py` | Extend existing capacity/capabilities if possible |
 | **data_object/** | Encoding — Subjects → 24-bit Data Objects | — | `encoding_specification.md` | Find best Data-Object encoding for every Subject Domain, develop encoding strategy, refine and define Data Object encoding |
-| **glm_machine/** | Active Geometric Language Machine system | 9/50 | `consolidated_mind.py` | Growth and development alongside the ARC AGI developments |
+| **glm_machine/** | Active Geometric Language Machine system | — | `GLM11_runtime.py` | Growth and development alongside the ARC AGI developments |
 | **arc_agi_(version_number)/** | running attempts at ARC AGI | Running Score | README.md | Operating the UBP + GLM systems through the correct pipeline in full, trying various experiments to solve ARC AGI challenges as well as a range of tests/challenges to widen the problem-solving abilities of the natural system through training MOG grids with yes/no feedback loop, to avoid using Solvers to find solutions - rather the aim is to enable the UBP-GLM systems to gain understanding through structured and calibrated input then calculating solutions natively. Future editions need to use scripts from the 'GMHGL/'' and 'data_object/' folders/systems and consolidate training/knowledge |
 | **arc_agi_15/** | Solver — Working Solvers (3/9 mind solved / 6/9 Solvers solved) | 9/50 | `consolidated_mind.py` | Leave as record of attempting #15 and for parts if needed rather than rebuilding scripts from scratch |
 | **arc_agi_16/** | Experiments — next iteration | 9/50 | `arc_learning_mind.py` | Leave as record of attempting #16 and parts |
 | **light/** | Calibration — UBP ↔ real world | — | `reports/` | More experimenting to try to derive the Speed of Light, more calibration anchors through various scales of reality |
-| **long_term_memory/** | Archive — all GLM training data + knowledge | — | `glm_training_data.json` | Proper implementation so this becomes an on-going GLM training method to save re-training the GLM each iteration, refinement and formalisation of structure, further training, building and benchmarking |
+| **long_term_memory/** | Archive — all GLM training data + knowledge | — | `glm_training_data.json` | Needs proper implementation so this becomes an on-going GLM training method to save re-training the GLM each iteration, refinement and formalisation of structure, further training, building and benchmarking |
 
 ---
 
@@ -177,14 +177,27 @@ Training Data + Knowledge (grows with each run)
 
 ---
 
-## External Resources
+## Resources
 
-- GitHub repository folder for current UBP system: `https://github.com/DigitalEuan/UBP_Repo/blob/main/core_studio_v4.0`
-- Main GLM repo: `https://github.com/DigitalEuan/UBP_Repo/tree/main/core_studio_v4.0/GLM`
-- UBP Knowledge-bank: `https://github.com/DigitalEuan/UBP_Repo/blob/main/core_studio_v4.0/system_kb/ubp_system_kb.json`
-- ubp_system_kb.json entry generator: 'https://github.com/DigitalEuan/UBP_Repo/blob/main/core_studio_v4.0/core/ubp_kb_architect.py'
 - GLM language unified resource (15MB): 'https://github.com/DigitalEuan/UBP_Repo/blob/main/core_studio_v4.0/GLM/glm_unified_resource.json'
 - GLM Concept Relation Graph: 'https://github.com/DigitalEuan/UBP_Repo/blob/main/core_studio_v4.0/GLM/GLM_CRG_EXPANDED.py'
 - Database of words and explanation: 'https://github.com/DigitalEuan/UBP_Repo/blob/main/core_studio_v4.0/core/ubp_lang_kb_combined_v4.json'
+
+- Currently under/unused datasets and scripts in 'glm_machine/'
+   - 'GLM_CRG_MASSIVE.py' 10KB
+   - 'GLM15_physics_pack.py' 33KB - physics definitions
+   - 'color_space_data.json' 183KB
+   - 'corpus.txt' 500KB chat conversation for language training
+   - 'glm_learned_state.json' 12KB
+   - 'GLM21_generator.py' - GENERATION loop — it produces novel sequences, not just recalled templates.
+   - 'GLM22_ontological_grammar.py' - UBP ontological layers (Reality, Information, Activation, Potential) map to grammatical categories:
+1. Reality    (M_*)  → NOUN      (concrete things that exist)
+2. Information (I_*) → ADJECTIVE  (relational qualities)
+3. Activation (A_*)  → VERB       (processes, actions)
+4. Potential  (P_*)  → OPERATOR   (logical/abstract relations)
+   - 'GLM39_agent_loop.py'
+   - 'golden_cases.json' 13KB
+   - 'idea_meta_graph.json' 77KB
+
 - ARC AGI Attempts before v15: 'https://github.com/DigitalEuan/ARC_AGI'
 
