@@ -1,0 +1,186 @@
+{
+  "baseline": {
+    "spec": {
+      "name": "baseline_Z_Rad_EN_Val",
+      "prop_set": [
+        "Z",
+        "Rad",
+        "EN",
+        "Valence_e"
+      ],
+      "row_assignment": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "scaling": {
+        "Z": "identity",
+        "Rad": "div4",
+        "EN": "en_x15",
+        "Valence_e": "valence_redundant"
+      },
+      "leech_scheme": "A_basis"
+    },
+    "result": {
+      "name": "baseline_Z_Rad_EN_Val",
+      "overall_score": 0.2912975045017948,
+      "best_r_be": 0.2664169352608028,
+      "best_r_be_metric": "r_hex_agreements_be",
+      "best_r_dh": 0.3161780737427868,
+      "best_r_dh_metric": "r_overlap_dh",
+      "n_pairs": 38,
+      "n_dh": 10,
+      "correlations": {
+        "r_hw_xor_be": -0.12488058858855952,
+        "r_hw_xor_dh": -0.3161780737427868,
+        "r_sw_xor_be": -0.07416293066902843,
+        "r_sw_xor_dh": -0.015545493207315252,
+        "r_hex_agreements_be": 0.2664169352608028,
+        "r_hex_agreements_dh": -0.11952884505124167,
+        "r_overlap_be": 0.12488058858855952,
+        "r_overlap_dh": 0.3161780737427868,
+        "r_hamming_dist_be": -0.12488058858855952,
+        "r_hamming_dist_dh": -0.3161780737427868
+      }
+    }
+  },
+  "best_properties": {
+    "spec": {
+      "name": "combo_EN_BP_MP_Rho",
+      "prop_set": [
+        "EN",
+        "BP",
+        "MP",
+        "Rho"
+      ],
+      "row_assignment": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "scaling": {
+        "EN": "identity",
+        "BP": "identity",
+        "MP": "identity",
+        "Rho": "identity"
+      },
+      "leech_scheme": "A_basis"
+    },
+    "result": {
+      "name": "combo_EN_BP_MP_Rho",
+      "overall_score": 0.5048198615143084,
+      "best_r_be": 0.1611322519177044,
+      "best_r_be_metric": "r_hex_agreements_be",
+      "best_r_dh": 0.8485074711109123,
+      "best_r_dh_metric": "r_sw_xor_dh",
+      "n_pairs": 38,
+      "n_dh": 10,
+      "correlations": {
+        "r_hw_xor_be": -0.15077417965248657,
+        "r_hw_xor_dh": -0.14657180884020218,
+        "r_sw_xor_be": 0.07457986945496661,
+        "r_sw_xor_dh": 0.8485074711109123,
+        "r_hex_agreements_be": 0.1611322519177044,
+        "r_hex_agreements_dh": -0.13570873996708638,
+        "r_overlap_be": 0.15077417965248657,
+        "r_overlap_dh": 0.14657180884020218,
+        "r_hamming_dist_be": -0.15077417965248657,
+        "r_hamming_dist_dh": -0.14657180884020218
+      }
+    }
+  },
+  "best_scaling": {
+    "spec": {
+      "name": "scale_en_x10_identity_identity_identity",
+      "prop_set": [
+        "EN",
+        "BP",
+        "MP",
+        "Rho"
+      ],
+      "row_assignment": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "scaling": {
+        "EN": "en_x10",
+        "BP": "identity",
+        "MP": "identity",
+        "Rho": "identity"
+      },
+      "leech_scheme": "A_basis"
+    },
+    "result": {
+      "name": "scale_en_x10_identity_identity_identity",
+      "overall_score": 0.5293971958837825,
+      "best_r_be": 0.19915828737257352,
+      "best_r_be_metric": "r_overlap_be",
+      "best_r_dh": -0.8596361043949915,
+      "best_r_dh_metric": "r_hex_agreements_dh",
+      "n_pairs": 38,
+      "n_dh": 10,
+      "correlations": {
+        "r_hw_xor_be": -0.19915828737257352,
+        "r_hw_xor_dh": 0.39599248005899207,
+        "r_sw_xor_be": -0.019768476071482428,
+        "r_sw_xor_dh": 0.5834537727819987,
+        "r_hex_agreements_be": 0.14423480067645225,
+        "r_hex_agreements_dh": -0.8596361043949915,
+        "r_overlap_be": 0.19915828737257352,
+        "r_overlap_dh": -0.39599248005899207,
+        "r_hamming_dist_be": -0.19915828737257352,
+        "r_hamming_dist_dh": 0.39599248005899207
+      }
+    }
+  },
+  "best_permutation": {
+    "spec": {
+      "name": "perm_[0, 1, 2, 3]",
+      "prop_set": [
+        "EN",
+        "BP",
+        "MP",
+        "Rho"
+      ],
+      "row_assignment": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "scaling": {
+        "EN": "en_x10",
+        "BP": "identity",
+        "MP": "identity",
+        "Rho": "identity"
+      },
+      "leech_scheme": "A_basis"
+    },
+    "result": {
+      "name": "perm_[0, 1, 2, 3]",
+      "overall_score": 0.5293971958837825,
+      "best_r_be": 0.19915828737257352,
+      "best_r_be_metric": "r_overlap_be",
+      "best_r_dh": -0.8596361043949915,
+      "best_r_dh_metric": "r_hex_agreements_dh",
+      "n_pairs": 38,
+      "n_dh": 10,
+      "correlations": {
+        "r_hw_xor_be": -0.19915828737257352,
+        "r_hw_xor_dh": 0.39599248005899207,
+        "r_sw_xor_be": -0.019768476071482428,
+        "r_sw_xor_dh": 0.5834537727819987,
+        "r_hex_agreements_be": 0.14423480067645225,
+        "r_hex_agreements_dh": -0.8596361043949915,
+        "r_overlap_be": 0.19915828737257352,
+        "r_overlap_dh": -0.39599248005899207,
+        "r_hamming_dist_be": -0.19915828737257352,
+        "r_hamming_dist_dh": 0.39599248005899207
+      }
+    }
+  }
+}

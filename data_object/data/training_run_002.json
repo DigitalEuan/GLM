@@ -1,0 +1,70 @@
+{
+  "v1_best": {
+    "spec": {
+      "name": "v1_best_EN_BP_MP_Rho",
+      "prop_set": [
+        "EN",
+        "BP",
+        "MP",
+        "Rho"
+      ],
+      "row_assignment": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "scaling": {
+        "EN": "en_x10",
+        "BP": "identity",
+        "MP": "identity",
+        "Rho": "identity"
+      },
+      "leech_scheme": "A_basis"
+    },
+    "result": {
+      "name": "v1_best_EN_BP_MP_Rho",
+      "overall_score": 0.5361620205628034,
+      "best_r_be": -0.21268793673061534,
+      "best_r_be_metric": "hw_xor+hex_agreements",
+      "best_r_dh": -0.8596361043949915,
+      "best_r_dh_metric": "hex_agreements",
+      "n_pairs": 38,
+      "n_dh": 10
+    }
+  },
+  "nonlinear_best": {
+    "spec": {
+      "name": "nl_en_x10_div40_div40_rho_x10",
+      "prop_set": [
+        "EN",
+        "BP",
+        "MP",
+        "Rho"
+      ],
+      "row_assignment": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "scaling": {
+        "EN": "en_x10",
+        "BP": "div40",
+        "MP": "div40",
+        "Rho": "rho_x10"
+      },
+      "leech_scheme": "A_basis"
+    },
+    "result": {
+      "name": "nl_en_x10_div40_div40_rho_x10",
+      "overall_score": 0.581816657633317,
+      "best_r_be": 0.2513375949695747,
+      "best_r_be_metric": "sw_xor+hex_agreements",
+      "best_r_dh": -0.9122957202970593,
+      "best_r_dh_metric": "hw_xor-sw_xor",
+      "n_pairs": 38,
+      "n_dh": 10
+    }
+  }
+}

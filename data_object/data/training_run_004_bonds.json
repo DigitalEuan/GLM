@@ -1,0 +1,81 @@
+{
+  "strategy_comparison": {
+    "xor": {
+      "name": "element_best",
+      "encoding_fn": "xor",
+      "overall_score": 0.8408734762055777,
+      "best_r_be": 0.8408734762055777,
+      "best_predictor": "bond_order",
+      "r_hw_be": -0.06152464019003142,
+      "r_nrci_be": 0.06576202399755338,
+      "r_bo_be": 0.8408734762055777,
+      "r_hwbo_be": 0.26553527460172077,
+      "r_hwnrci_be": -0.06062901764630819,
+      "n_bonds": 36
+    },
+    "concat": {
+      "name": "element_best",
+      "encoding_fn": "concat",
+      "overall_score": 0.8408734762055777,
+      "best_r_be": 0.8408734762055777,
+      "best_predictor": "bond_order",
+      "r_hw_be": -0.09398300010251397,
+      "r_nrci_be": -0.3064104679112434,
+      "r_bo_be": 0.8408734762055777,
+      "r_hwbo_be": 0.6860076121589692,
+      "r_hwnrci_be": -0.13562624882216462,
+      "n_bonds": 36
+    },
+    "bond_mod": {
+      "name": "element_best",
+      "encoding_fn": "bond_mod",
+      "overall_score": 0.8408734762055777,
+      "best_r_be": 0.8408734762055777,
+      "best_predictor": "bond_order",
+      "r_hw_be": 0.018741429899110564,
+      "r_nrci_be": -0.29142779758021875,
+      "r_bo_be": 0.8408734762055777,
+      "r_hwbo_be": 0.7059199303668122,
+      "r_hwnrci_be": -0.027723077525120664,
+      "n_bonds": 36
+    }
+  },
+  "best": {
+    "spec": {
+      "name": "bond_Z_Rad_EN_Valence_e_xor",
+      "prop_set": [
+        "Z",
+        "Rad",
+        "EN",
+        "Valence_e"
+      ],
+      "row_assignment": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "scaling": {
+        "Z": "identity",
+        "Rad": "identity",
+        "EN": "en_x10",
+        "Valence_e": "identity"
+      },
+      "leech_scheme": "A_basis"
+    },
+    "enc_fn": "xor",
+    "result": {
+      "name": "bond_Z_Rad_EN_Valence_e_xor",
+      "encoding_fn": "xor",
+      "overall_score": 0.8408734762055777,
+      "best_r_be": 0.8408734762055777,
+      "best_predictor": "bond_order",
+      "r_hw_be": -0.0738479521810034,
+      "r_nrci_be": 0.1751797321585691,
+      "r_bo_be": 0.8408734762055777,
+      "r_hwbo_be": 0.20049659832602504,
+      "r_hwnrci_be": -0.06429528110943285,
+      "n_bonds": 36
+    }
+  }
+}

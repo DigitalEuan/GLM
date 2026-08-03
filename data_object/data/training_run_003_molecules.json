@@ -1,0 +1,68 @@
+{
+  "element_on_molecule": {
+    "spec": {
+      "name": "element_best_on_molecules",
+      "prop_set": [
+        "EN",
+        "BP",
+        "MP",
+        "Rho"
+      ],
+      "row_assignment": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "scaling": {
+        "EN": "en_x10",
+        "BP": "div40",
+        "MP": "div40",
+        "Rho": "rho_x10"
+      },
+      "leech_scheme": "A_basis"
+    },
+    "result": {
+      "name": "element_best_on_molecules",
+      "overall_score": 0.3326235021071335,
+      "r_hw_be": 0.16979691169525135,
+      "r_nrci_be": -0.5486958201818366,
+      "best_r_dh": 0.2793777744443125,
+      "best_r_dh_metric": "hw_xor",
+      "n_be": 10,
+      "n_dh": 4
+    }
+  },
+  "best_molecule_spec": {
+    "spec": {
+      "name": "mol_M_MP",
+      "prop_set": [
+        "M",
+        "MP",
+        "MP",
+        "MP"
+      ],
+      "row_assignment": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "scaling": {
+        "M": "log2",
+        "MP": "div40"
+      },
+      "leech_scheme": "A_basis"
+    },
+    "result": {
+      "name": "mol_M_MP",
+      "overall_score": 0.6417497890804097,
+      "r_hw_be": 0.41649455957150244,
+      "r_nrci_be": -0.5486958201818366,
+      "best_r_dh": 0.9600589874878899,
+      "best_r_dh_metric": "sw_xor",
+      "n_be": 10,
+      "n_dh": 4
+    }
+  }
+}

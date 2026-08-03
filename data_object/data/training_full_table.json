@@ -1,0 +1,394 @@
+{
+  "v0_baseline": {
+    "spec": {
+      "name": "v0_baseline",
+      "prop_set": [
+        "Z",
+        "Rad",
+        "EN",
+        "Valence_e"
+      ],
+      "row_assignment": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "scaling": {
+        "Z": "identity",
+        "Rad": "div4",
+        "EN": "en_x15",
+        "Valence_e": "valence_redundant"
+      },
+      "leech_scheme": "A_basis"
+    },
+    "element_distribution": {
+      "hw_dist": {
+        "8": 65,
+        "12": 22,
+        "14": 4,
+        "6": 16,
+        "10": 5,
+        "4": 5,
+        "16": 1
+      },
+      "unique_vectors": 87,
+      "n_elements": 118,
+      "mean_hw": 8.661016949152541,
+      "mean_nrci": 0.7511629952501803,
+      "mean_bits_changed": 1.3728813559322033
+    },
+    "pair_distribution": {
+      "n_pairs": 7000,
+      "mean_hw_xor": 8.788285714285715,
+      "mean_overlap": 15.211714285714285,
+      "mean_hex_agreements": 2.1027142857142858
+    },
+    "chemistry": {
+      "n_pairs": 38,
+      "n_dh": 10,
+      "best_r_be": -0.4239852534169086,
+      "best_r_be_metric": "r_z_sum_be",
+      "best_r_dh": 0.3161780737427868,
+      "best_r_dh_metric": "r_overlap_dh"
+    },
+    "chemistry_correlations": {
+      "r_hw_xor_be": -0.12488058858855952,
+      "r_hw_xor_dh": -0.3161780737427868,
+      "r_sw_xor_be": -0.07416293066902843,
+      "r_sw_xor_dh": -0.015545493207315252,
+      "r_hex_agreements_be": 0.2664169352608028,
+      "r_hex_agreements_dh": -0.11952884505124167,
+      "r_overlap_be": 0.12488058858855952,
+      "r_overlap_dh": 0.3161780737427868,
+      "r_hamming_dist_be": -0.12488058858855952,
+      "r_hamming_dist_dh": -0.3161780737427868,
+      "r_z_sum_be": -0.4239852534169086,
+      "r_z_diff_be": -0.3575996917618838,
+      "r_z_sum_dh": -0.29800529700037254,
+      "r_z_diff_dh": 0.07239612632345091,
+      "r_hw\u00d7zdiff_be": -0.3414864732692118
+    },
+    "molecule_distribution": {
+      "n_molecules": 82,
+      "unique_vectors": 1,
+      "hw_dist": {
+        "0": 82
+      }
+    }
+  },
+  "v1_best": {
+    "spec": {
+      "name": "v1_best",
+      "prop_set": [
+        "EN",
+        "BP",
+        "MP",
+        "Rho"
+      ],
+      "row_assignment": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "scaling": {
+        "EN": "en_x10",
+        "BP": "div40",
+        "MP": "div40",
+        "Rho": "rho_x10"
+      },
+      "leech_scheme": "A_basis"
+    },
+    "element_distribution": {
+      "hw_dist": {
+        "4": 3,
+        "0": 10,
+        "12": 42,
+        "10": 8,
+        "16": 3,
+        "6": 4,
+        "8": 45,
+        "14": 3
+      },
+      "unique_vectors": 106,
+      "n_elements": 118,
+      "mean_hw": 9.067796610169491,
+      "mean_nrci": 0.7483500919561243,
+      "mean_bits_changed": 1.7118644067796611
+    },
+    "pair_distribution": {
+      "n_pairs": 7000,
+      "mean_hw_xor": 10.62657142857143,
+      "mean_overlap": 13.37342857142857,
+      "mean_hex_agreements": 1.7257142857142858
+    },
+    "chemistry": {
+      "n_pairs": 38,
+      "n_dh": 10,
+      "best_r_be": -0.4239852534169086,
+      "best_r_be_metric": "r_z_sum_be",
+      "best_r_dh": 0.7094921152150954,
+      "best_r_dh_metric": "r_sw_xor_dh"
+    },
+    "chemistry_correlations": {
+      "r_hw_xor_be": -0.08116299087162557,
+      "r_hw_xor_dh": -0.6151795131647709,
+      "r_sw_xor_be": 0.09071098440080928,
+      "r_sw_xor_dh": 0.7094921152150954,
+      "r_hex_agreements_be": 0.22320879273618785,
+      "r_hex_agreements_dh": -0.0068605362437342745,
+      "r_overlap_be": 0.08116299087162557,
+      "r_overlap_dh": 0.6151795131647709,
+      "r_hamming_dist_be": -0.08116299087162557,
+      "r_hamming_dist_dh": -0.6151795131647709,
+      "r_z_sum_be": -0.4239852534169086,
+      "r_z_diff_be": -0.3575996917618838,
+      "r_z_sum_dh": -0.29800529700037254,
+      "r_z_diff_dh": 0.07239612632345091,
+      "r_hw\u00d7zdiff_be": -0.348646650969539
+    },
+    "molecule_distribution": {
+      "n_molecules": 82,
+      "unique_vectors": 24,
+      "hw_dist": {
+        "8": 16,
+        "12": 2,
+        "4": 16,
+        "0": 46,
+        "6": 2
+      }
+    }
+  },
+  "v2_z_en_val_m": {
+    "spec": {
+      "name": "v2_z_en_val_m",
+      "prop_set": [
+        "Z",
+        "EN",
+        "Valence_e",
+        "M"
+      ],
+      "row_assignment": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "scaling": {
+        "Z": "identity",
+        "EN": "en_x10",
+        "Valence_e": "valence_redundant",
+        "M": "log2"
+      },
+      "leech_scheme": "A_basis"
+    },
+    "element_distribution": {
+      "hw_dist": {
+        "8": 61,
+        "12": 30,
+        "10": 19,
+        "6": 5,
+        "16": 2,
+        "14": 1
+      },
+      "unique_vectors": 86,
+      "n_elements": 118,
+      "mean_hw": 9.440677966101696,
+      "mean_nrci": 0.7334470938599051,
+      "mean_bits_changed": 1.5593220338983051
+    },
+    "pair_distribution": {
+      "n_pairs": 7000,
+      "mean_hw_xor": 8.504,
+      "mean_overlap": 15.496,
+      "mean_hex_agreements": 2.1245714285714286
+    },
+    "chemistry": {
+      "n_pairs": 38,
+      "n_dh": 10,
+      "best_r_be": -0.4239852534169086,
+      "best_r_be_metric": "r_z_sum_be",
+      "best_r_dh": -0.29800529700037254,
+      "best_r_dh_metric": "r_z_sum_dh"
+    },
+    "chemistry_correlations": {
+      "r_hw_xor_be": -0.15965309899214647,
+      "r_hw_xor_dh": -0.17339862156839367,
+      "r_sw_xor_be": -0.04662197242704834,
+      "r_sw_xor_dh": 0.26442674197700194,
+      "r_hex_agreements_be": 0.12077508329807377,
+      "r_hex_agreements_dh": 0.20443297628899235,
+      "r_overlap_be": 0.15965309899214647,
+      "r_overlap_dh": 0.17339862156839367,
+      "r_hamming_dist_be": -0.15965309899214647,
+      "r_hamming_dist_dh": -0.17339862156839367,
+      "r_z_sum_be": -0.4239852534169086,
+      "r_z_diff_be": -0.3575996917618838,
+      "r_z_sum_dh": -0.29800529700037254,
+      "r_z_diff_dh": 0.07239612632345091,
+      "r_hw\u00d7zdiff_be": -0.33058130416453757
+    },
+    "molecule_distribution": {
+      "n_molecules": 82,
+      "unique_vectors": 1,
+      "hw_dist": {
+        "0": 82
+      }
+    }
+  },
+  "v3_z_rad_en_m": {
+    "spec": {
+      "name": "v3_z_rad_en_m",
+      "prop_set": [
+        "Z",
+        "Rad",
+        "EN",
+        "M"
+      ],
+      "row_assignment": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "scaling": {
+        "Z": "log2",
+        "Rad": "div8",
+        "EN": "en_x10",
+        "M": "log2"
+      },
+      "leech_scheme": "A_basis"
+    },
+    "element_distribution": {
+      "hw_dist": {
+        "8": 38,
+        "4": 30,
+        "12": 10,
+        "10": 6,
+        "6": 2,
+        "0": 32
+      },
+      "unique_vectors": 43,
+      "n_elements": 118,
+      "mean_hw": 5.220338983050848,
+      "mean_nrci": 0.8447041161396879,
+      "mean_bits_changed": 1.7457627118644068
+    },
+    "pair_distribution": {
+      "n_pairs": 7000,
+      "mean_hw_xor": 6.304857142857143,
+      "mean_overlap": 17.69514285714286,
+      "mean_hex_agreements": 2.3404285714285713
+    },
+    "chemistry": {
+      "n_pairs": 38,
+      "n_dh": 10,
+      "best_r_be": -0.4239852534169086,
+      "best_r_be_metric": "r_z_sum_be",
+      "best_r_dh": -0.6932233382399173,
+      "best_r_dh_metric": "r_overlap_dh"
+    },
+    "chemistry_correlations": {
+      "r_hw_xor_be": -0.2975570288403595,
+      "r_hw_xor_dh": 0.6932233382399173,
+      "r_sw_xor_be": -0.21239561161947781,
+      "r_sw_xor_dh": 0.1197032139308609,
+      "r_hex_agreements_be": 0.2690191897703539,
+      "r_hex_agreements_dh": -0.2117169696549636,
+      "r_overlap_be": 0.2975570288403595,
+      "r_overlap_dh": -0.6932233382399173,
+      "r_hamming_dist_be": -0.2975570288403595,
+      "r_hamming_dist_dh": 0.6932233382399173,
+      "r_z_sum_be": -0.4239852534169086,
+      "r_z_diff_be": -0.3575996917618838,
+      "r_z_sum_dh": -0.29800529700037254,
+      "r_z_diff_dh": 0.07239612632345091,
+      "r_hw\u00d7zdiff_be": -0.38178310010701005
+    },
+    "molecule_distribution": {
+      "n_molecules": 82,
+      "unique_vectors": 1,
+      "hw_dist": {
+        "0": 82
+      }
+    }
+  },
+  "v4_all_nonlinear": {
+    "spec": {
+      "name": "v4_all_nonlinear",
+      "prop_set": [
+        "Z",
+        "Rad",
+        "EN",
+        "M"
+      ],
+      "row_assignment": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "scaling": {
+        "Z": "sqrt",
+        "Rad": "div16",
+        "EN": "en_x15",
+        "M": "div40"
+      },
+      "leech_scheme": "A_basis"
+    },
+    "element_distribution": {
+      "hw_dist": {
+        "8": 42,
+        "0": 17,
+        "12": 3,
+        "6": 31,
+        "4": 23,
+        "10": 2
+      },
+      "unique_vectors": 47,
+      "n_elements": 118,
+      "mean_hw": 5.677966101694915,
+      "mean_nrci": 0.8264812696177387,
+      "mean_bits_changed": 1.3220338983050848
+    },
+    "pair_distribution": {
+      "n_pairs": 7000,
+      "mean_hw_xor": 6.706571428571428,
+      "mean_overlap": 17.29342857142857,
+      "mean_hex_agreements": 2.373142857142857
+    },
+    "chemistry": {
+      "n_pairs": 38,
+      "n_dh": 10,
+      "best_r_be": -0.4239852534169086,
+      "best_r_be_metric": "r_z_sum_be",
+      "best_r_dh": 0.3919577882249142,
+      "best_r_dh_metric": "r_hex_agreements_dh"
+    },
+    "chemistry_correlations": {
+      "r_hw_xor_be": -0.09133636721500984,
+      "r_hw_xor_dh": 0.03187668678136045,
+      "r_sw_xor_be": -0.04001317173518669,
+      "r_sw_xor_dh": 0.06956800381596316,
+      "r_hex_agreements_be": 0.19790421735204405,
+      "r_hex_agreements_dh": 0.3919577882249142,
+      "r_overlap_be": 0.09133636721500986,
+      "r_overlap_dh": -0.03187668678136045,
+      "r_hamming_dist_be": -0.09133636721500984,
+      "r_hamming_dist_dh": 0.03187668678136045,
+      "r_z_sum_be": -0.4239852534169086,
+      "r_z_diff_be": -0.3575996917618838,
+      "r_z_sum_dh": -0.29800529700037254,
+      "r_z_diff_dh": 0.07239612632345091,
+      "r_hw\u00d7zdiff_be": -0.3323596680442952
+    },
+    "molecule_distribution": {
+      "n_molecules": 82,
+      "unique_vectors": 1,
+      "hw_dist": {
+        "0": 82
+      }
+    }
+  }
+}

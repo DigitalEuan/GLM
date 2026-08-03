@@ -1,0 +1,22 @@
+{
+  "refined_nrci_x_bo_be": {
+    "pass_rate": 1.0,
+    "mean_r": 0.902134754198128,
+    "attempts": 1
+  },
+  "shape_compactness": {
+    "pass_rate": 0.625,
+    "mean_error": 1395703378.8518856,
+    "attempts": 8
+  },
+  "shape_intersection_refined": {
+    "pass_rate": 0.75,
+    "mean_error": 0.25,
+    "attempts": 4
+  },
+  "golay_systematic_correction": {
+    "pass_rate": 0.6,
+    "mean_error": 0.4,
+    "attempts": 5
+  }
+}

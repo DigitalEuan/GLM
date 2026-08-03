@@ -1,0 +1,27 @@
+{
+  "pair_geometry_r": {
+    "pass_rate": 0.4666666666666667,
+    "mean_r": 0.054241662722920275,
+    "attempts": 15
+  },
+  "mol_geometry_r": {
+    "pass_rate": 0.0,
+    "mean_r": 0.0,
+    "attempts": 15
+  },
+  "shape_intersection": {
+    "pass_rate": 0.6666666666666666,
+    "mean_r": 0.2777777777777778,
+    "attempts": 3
+  },
+  "golay_error_correction": {
+    "pass_rate": 0.6,
+    "mean_error": 0.4,
+    "attempts": 25
+  },
+  "triplet_nrci": {
+    "pass_rate": 1.0,
+    "mean_r": 0.7887238111880215,
+    "attempts": 10
+  }
+}

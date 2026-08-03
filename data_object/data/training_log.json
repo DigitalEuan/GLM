@@ -1,0 +1,14 @@
+{
+  "runs": [
+    {
+      "iteration": 12,
+      "focus": "Full data accumulation",
+      "n_elements": 118,
+      "n_bonds": 36,
+      "n_molecules": 82,
+      "n_patterns": 10,
+      "best_r_be": 0.9021,
+      "timestamp": "2026-08-02T17:02:37"
+    }
+  ]
+}
