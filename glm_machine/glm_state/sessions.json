@@ -1,0 +1,373 @@
+[
+  {
+    "query": "What is gravity?",
+    "response_len": 36,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784523058.0568795
+  },
+  {
+    "query": "What is gravity?",
+    "response_len": 36,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784523064.4231992
+  },
+  {
+    "query": "What is a boson?",
+    "response_len": 38,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784523141.4441383
+  },
+  {
+    "query": "What is a photon?",
+    "response_len": 38,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784523141.6276643
+  },
+  {
+    "query": "What is the Universal Binary Principle?",
+    "response_len": 52,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524132.42171
+  },
+  {
+    "query": "What is the Golay code?",
+    "response_len": 42,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524138.1967554
+  },
+  {
+    "query": "What is NRCI?",
+    "response_len": 48,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524138.3854728
+  },
+  {
+    "query": "What is gravity?",
+    "response_len": 48,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524138.5401492
+  },
+  {
+    "query": "What is a boson?",
+    "response_len": 45,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524138.6871076
+  },
+  {
+    "query": "What is hydrogen?",
+    "response_len": 46,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524138.8361483
+  },
+  {
+    "query": "How does error correction work?",
+    "response_len": 44,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524139.0075378
+  },
+  {
+    "query": "What is the Observer Constant?",
+    "response_len": 51,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524139.1494896
+  },
+  {
+    "query": "What is the Universal Binary Principle?",
+    "response_len": 66,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524254.9990335
+  },
+  {
+    "query": "What is the Golay code?",
+    "response_len": 38,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524261.4333558
+  },
+  {
+    "query": "What is NRCI?",
+    "response_len": 47,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524261.6041636
+  },
+  {
+    "query": "What is gravity?",
+    "response_len": 44,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524261.7563407
+  },
+  {
+    "query": "What is a boson?",
+    "response_len": 38,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524261.9496741
+  },
+  {
+    "query": "What is hydrogen?",
+    "response_len": 54,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524262.0912845
+  },
+  {
+    "query": "How does error correction work?",
+    "response_len": 51,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524262.2494977
+  },
+  {
+    "query": "What is the Observer Constant?",
+    "response_len": 64,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524262.3941448
+  },
+  {
+    "query": "What is the golden ratio?",
+    "response_len": 44,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524324.1293666
+  },
+  {
+    "query": "What is the golden ratio?",
+    "response_len": 49,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524341.415835
+  },
+  {
+    "query": "What is the golden ratio?",
+    "response_len": 49,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524348.0501218
+  },
+  {
+    "query": "What is the golden ratio?",
+    "response_len": 44,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524423.0381358
+  },
+  {
+    "query": "What is the golden ratio?",
+    "response_len": 49,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524438.3458273
+  },
+  {
+    "query": "What is the golden ratio?",
+    "response_len": 44,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524537.9412084
+  },
+  {
+    "query": "What is the golden ratio?",
+    "response_len": 44,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524592.4345891
+  },
+  {
+    "query": "What is the golden ratio?",
+    "response_len": 44,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524676.7640176
+  },
+  {
+    "query": "What is the golden ratio?",
+    "response_len": 49,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524702.0000274
+  },
+  {
+    "query": "What is the golden ratio?",
+    "response_len": 44,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524760.5174484
+  },
+  {
+    "query": "What is the golden ratio?",
+    "response_len": 49,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524773.8084905
+  },
+  {
+    "query": "What is the golden ratio?",
+    "response_len": 44,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524840.278763
+  },
+  {
+    "query": "What is the golden ratio?",
+    "response_len": 44,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784524919.0201154
+  },
+  {
+    "query": "What is the golden ratio?",
+    "response_len": 44,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784525009.3629282
+  },
+  {
+    "query": "What is the golden ratio?",
+    "response_len": 39,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784525082.1824129
+  },
+  {
+    "query": "What is the Universal Binary Principle?",
+    "response_len": 71,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784525092.950656
+  },
+  {
+    "query": "What is NRCI?",
+    "response_len": 32,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784525093.1323886
+  },
+  {
+    "query": "What is gravity?",
+    "response_len": 42,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784525093.2842958
+  },
+  {
+    "query": "What is a boson?",
+    "response_len": 62,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784525093.4796386
+  },
+  {
+    "query": "What is hydrogen?",
+    "response_len": 30,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784525093.6235726
+  },
+  {
+    "query": "How does error correction work?",
+    "response_len": 43,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784525093.7927058
+  },
+  {
+    "query": "What is the Observer Constant?",
+    "response_len": 72,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784525093.9912605
+  },
+  {
+    "query": "What is the Universal Binary Principle?",
+    "response_len": 73,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784525132.2753818
+  },
+  {
+    "query": "What is the Golay code?",
+    "response_len": 33,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784525132.437415
+  },
+  {
+    "query": "What is NRCI?",
+    "response_len": 36,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784525132.6029534
+  },
+  {
+    "query": "What is gravity?",
+    "response_len": 41,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784525132.7716856
+  },
+  {
+    "query": "What is a boson?",
+    "response_len": 60,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784525132.9470696
+  },
+  {
+    "query": "What is hydrogen?",
+    "response_len": 52,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784525133.1086864
+  },
+  {
+    "query": "How does error correction work?",
+    "response_len": 44,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784525133.2704623
+  },
+  {
+    "query": "What is the Observer Constant?",
+    "response_len": 51,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784525133.446835
+  },
+  {
+    "query": "What is the golden ratio?",
+    "response_len": 43,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784525133.7092338
+  },
+  {
+    "query": "What is the relationship between mass and energy?",
+    "response_len": 50,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784525133.959014
+  },
+  {
+    "query": "What is the distance between gravity and time?",
+    "response_len": 236,
+    "tools_used": [],
+    "coherence": 0.0,
+    "timestamp": 1784535781.192474
+  }
+]

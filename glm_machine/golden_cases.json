@@ -1,0 +1,417 @@
+{
+  "_meta": {
+    "description": "Gold-set benchmark for GLM consolidation. Stable set of cases used for before/after comparison.",
+    "version": "2.0",
+    "created": "2026-07-01",
+    "v3.9.0_updated": "2026-07-03",
+    "convention": "Each case has: id, suite, query, expected, match (substring|exact|regex), category (optional), difficulty (optional).",
+    "suites": ["mathnet", "mathnet_expanded", "critpt", "language", "failure",
+               "v39_linear_algebra", "v39_multivariable", "v39_differential_equations",
+               "v39_series", "v39_natural_language", "v39_definitions"],
+    "sources": {
+      "mathnet": "core/ubp_mathnet_problem_set.json (20 problems)",
+      "mathnet_expanded": "core/ubp_mathnet_expanded_problems.json (60 problems)",
+      "critpt": "core/critpt.json (frontier physics)",
+      "language": "hand-curated language/semantic edge cases",
+      "failure": "failure-mode tests for unknown/ambiguous terms",
+      "v39_linear_algebra": "v3.9.0: determinant, eigenvalues, trace",
+      "v39_multivariable": "v3.9.0: partial derivatives, gradients",
+      "v39_differential_equations": "v3.9.0: ODE solver",
+      "v39_series": "v3.9.0: Taylor series, limits",
+      "v39_natural_language": "v3.9.0: semantic-frame NL generation",
+      "v39_definitions": "v3.9.0: master resource dictionary definitions"
+    },
+    "usage": "Run: python run_golden_cases.py"
+  },
+  "cases": [
+    {
+      "id": "MN_NT_001",
+      "suite": "mathnet",
+      "category": "Number Theory",
+      "difficulty": "medium",
+      "query": "Find all positive integers n for which 2^n - 1 is divisible by 7.",
+      "expected": "divisible by 3",
+      "match": "substring"
+    },
+    {
+      "id": "MN_NT_003",
+      "suite": "mathnet",
+      "category": "Number Theory",
+      "difficulty": "easy",
+      "query": "Prove that the fraction (21n+4)/(14n+3) is irreducible for every natural number n.",
+      "expected": "gcd",
+      "match": "substring"
+    },
+    {
+      "id": "MN_NT_005",
+      "suite": "mathnet",
+      "category": "Number Theory",
+      "difficulty": "hard",
+      "query": "Find the largest integer n such that n is divisible by all positive integers less than the cube root of n.",
+      "expected": "420",
+      "match": "substring"
+    },
+    {
+      "id": "MN_ALG_002",
+      "suite": "mathnet",
+      "category": "Algebra",
+      "difficulty": "easy",
+      "query": "Let a, b, c be positive reals with a + b + c = 1. Prove that a^2 + b^2 + c^2 >= 1/3.",
+      "expected": "1/3",
+      "match": "substring"
+    },
+    {
+      "id": "MN_ALG_004",
+      "suite": "mathnet",
+      "category": "Algebra",
+      "difficulty": "medium",
+      "query": "Find all real solutions to x^4 - 3x^3 + 4x^2 - 3x + 1 = 0.",
+      "expected": "1",
+      "match": "substring"
+    },
+    {
+      "id": "MN_GEO_002",
+      "suite": "mathnet",
+      "category": "Geometry",
+      "difficulty": "medium",
+      "query": "In triangle ABC, the median from A has length m_a. Prove that m_a <= (b+c)/2.",
+      "expected": "(b+c)/2",
+      "match": "substring"
+    },
+    {
+      "id": "MN_GEO_004",
+      "suite": "mathnet",
+      "category": "Geometry",
+      "difficulty": "easy",
+      "query": "In a right triangle with legs a and b and hypotenuse c, prove that a + b <= c*sqrt(2).",
+      "expected": "sqrt(2)",
+      "match": "substring"
+    },
+    {
+      "id": "MN_GEO_005",
+      "suite": "mathnet",
+      "category": "Geometry",
+      "difficulty": "medium",
+      "query": "A regular tetrahedron has edge length a. Find the radius of the inscribed sphere.",
+      "expected": "sqrt(6)",
+      "match": "substring"
+    },
+    {
+      "id": "MN_COMB_002",
+      "suite": "mathnet",
+      "category": "Combinatorics",
+      "difficulty": "easy",
+      "query": "In how many ways can n identical balls be distributed into k distinct boxes such that each box contains at least one ball?",
+      "expected": "C(n-1, k-1)",
+      "match": "substring"
+    },
+    {
+      "id": "MN_COMB_004",
+      "suite": "mathnet",
+      "category": "Combinatorics",
+      "difficulty": "hard",
+      "query": "How many subsets of {1, 2, 3, ..., 10} have the property that the sum of the elements is divisible by 3?",
+      "expected": "344",
+      "match": "substring"
+    },
+    {
+      "id": "CALC_01",
+      "suite": "mathnet_expanded",
+      "category": "calculus",
+      "difficulty": "medium",
+      "query": "Find the derivative of x^3 * sin(x) with respect to x.",
+      "expected": "3*x**2*sin(x) + x**3*cos(x)",
+      "match": "substring"
+    },
+    {
+      "id": "CALC_03",
+      "suite": "mathnet_expanded",
+      "category": "calculus",
+      "difficulty": "medium",
+      "query": "Evaluate the integral of x^2 * exp(x) with respect to x.",
+      "expected": "(x**2 - 2*x + 2)*exp(x)",
+      "match": "substring"
+    },
+    {
+      "id": "ALG_04",
+      "suite": "mathnet_expanded",
+      "category": "algebra",
+      "difficulty": "easy",
+      "query": "Solve x^2 - 4 = 0 for x.",
+      "expected": "[-2, 2]",
+      "match": "substring"
+    },
+    {
+      "id": "ALG_05",
+      "suite": "mathnet_expanded",
+      "category": "algebra",
+      "difficulty": "easy",
+      "query": "Simplify (x^2 - 1)/(x - 1).",
+      "expected": "x + 1",
+      "match": "substring"
+    },
+    {
+      "id": "NUM_01",
+      "suite": "mathnet_expanded",
+      "category": "number_theory",
+      "difficulty": "easy",
+      "query": "Find the greatest common divisor of 252 and 198.",
+      "expected": "18",
+      "match": "substring"
+    },
+    {
+      "id": "NUM_03",
+      "suite": "mathnet_expanded",
+      "category": "number_theory",
+      "difficulty": "easy",
+      "query": "Find the GCD of 48 and 36.",
+      "expected": "12",
+      "match": "substring"
+    },
+    {
+      "id": "NUM_04",
+      "suite": "mathnet_expanded",
+      "category": "number_theory",
+      "difficulty": "easy",
+      "query": "Find the LCM of 12 and 18.",
+      "expected": "36",
+      "match": "substring"
+    },
+    {
+      "id": "VEC_02",
+      "suite": "mathnet_expanded",
+      "category": "vector_physics",
+      "difficulty": "easy",
+      "query": "Compute the dot product of <3, -1, 4> and <2, 5, -3>.",
+      "expected": "-11",
+      "match": "substring"
+    },
+    {
+      "id": "VEC_03",
+      "suite": "mathnet_expanded",
+      "category": "vector_physics",
+      "difficulty": "easy",
+      "query": "Find the magnitude of the vector <3, 4, 12>.",
+      "expected": "13",
+      "match": "substring"
+    },
+    {
+      "id": "COMB_04",
+      "suite": "mathnet_expanded",
+      "category": "combinatorics",
+      "difficulty": "easy",
+      "query": "Compute 6 factorial.",
+      "expected": "720",
+      "match": "substring"
+    },
+    {
+      "id": "CRITPT_01_PLACEHOLDER",
+      "suite": "critpt",
+      "category": "holography",
+      "difficulty": "hard",
+      "query": "What is the Weyl anomaly in a holographic QFT?",
+      "expected": "weyl anomaly",
+      "match": "substring",
+      "_note": "Placeholder — replace with actual CritPt problem from critpt.json once the gold set is finalized. The actual CritPt problems are LaTeX-heavy and need careful query/expected extraction."
+    },
+    {
+      "id": "LANG_MULTIWORD_01",
+      "suite": "language",
+      "category": "multiword",
+      "difficulty": "easy",
+      "query": "What is the weyl anomaly?",
+      "expected": "weyl anomaly",
+      "match": "substring",
+      "_note": "Tests that multi-word physics terms are preserved as atomic tokens."
+    },
+    {
+      "id": "LANG_MULTIWORD_02",
+      "suite": "language",
+      "category": "multiword",
+      "difficulty": "easy",
+      "query": "Tell me about the beta function in QFT.",
+      "expected": "beta function",
+      "match": "substring"
+    },
+    {
+      "id": "LANG_LATEX_01",
+      "suite": "language",
+      "category": "latex",
+      "difficulty": "medium",
+      "query": "What does $\\alpha + \\beta$ mean?",
+      "expected": "alpha",
+      "match": "substring",
+      "_note": "Tests that LaTeX Greek letters are expanded to plain-text names."
+    },
+    {
+      "id": "LANG_ALIAS_01",
+      "suite": "language",
+      "category": "alias",
+      "difficulty": "easy",
+      "query": "Tell me about the monster group.",
+      "expected": "moonshine",
+      "match": "substring",
+      "_note": "Tests that 'monster' resolves to the moonshine KB entry."
+    },
+    {
+      "id": "FAIL_EMPTY",
+      "suite": "failure",
+      "category": "edge",
+      "difficulty": "easy",
+      "query": "",
+      "expected": "",
+      "match": "exact",
+      "_note": "Empty query must not crash. Expected is empty — we just assert no exception."
+    },
+    {
+      "id": "FAIL_NONSENSE",
+      "suite": "failure",
+      "category": "edge",
+      "difficulty": "easy",
+      "query": "qwerty asdf zxcv",
+      "expected": "gap",
+      "match": "substring",
+      "_note": "Nonsense query should produce a [gap] tag, not a crash."
+    },
+    {
+      "id": "FAIL_LATEX_GARBAGE",
+      "suite": "failure",
+      "category": "edge",
+      "difficulty": "easy",
+      "query": "\\nonexistent\\command{arg}",
+      "expected": "",
+      "match": "substring",
+      "_note": "LaTeX garbage must not crash. Expected is empty — we just assert no exception."
+    },
+    {
+      "id": "V39_LINALG_01",
+      "suite": "v39_linear_algebra",
+      "category": "determinant",
+      "difficulty": "easy",
+      "query": "Find the determinant of the matrix [[1, 2, 3], [4, 5, 6], [7, 8, 10]].",
+      "expected": "-3",
+      "match": "substring",
+      "_note": "v3.9.0: linear algebra determinant detector"
+    },
+    {
+      "id": "V39_LINALG_02",
+      "suite": "v39_linear_algebra",
+      "category": "eigenvalues",
+      "difficulty": "medium",
+      "query": "Find the eigenvalues of the matrix [[2, 1], [1, 2]].",
+      "expected": "3",
+      "match": "substring",
+      "_note": "v3.9.0: eigenvalue detector; expected {1: 1, 3: 1}"
+    },
+    {
+      "id": "V39_LINALG_03",
+      "suite": "v39_linear_algebra",
+      "category": "trace",
+      "difficulty": "easy",
+      "query": "Compute the trace of the matrix [[1, 2], [3, 4]].",
+      "expected": "5",
+      "match": "substring",
+      "_note": "v3.9.0: matrix trace detector"
+    },
+    {
+      "id": "V39_MULTIVAR_01",
+      "suite": "v39_multivariable",
+      "category": "partial_derivative",
+      "difficulty": "medium",
+      "query": "Compute the partial derivative of x^2*y + y^3*z with respect to y.",
+      "expected": "x**2 + 3*y**2*z",
+      "match": "substring",
+      "_note": "v3.9.0: partial derivative detector"
+    },
+    {
+      "id": "V39_MULTIVAR_02",
+      "suite": "v39_multivariable",
+      "category": "gradient",
+      "difficulty": "medium",
+      "query": "Find the gradient of x^2*y + y^2*z + z^2*x.",
+      "expected": "z**2 + 2*x*y",
+      "match": "substring",
+      "_note": "v3.9.0: gradient detector; expected (z**2 + 2*x*y, x**2 + 2*y*z, y**2 + 2*x*z)"
+    },
+    {
+      "id": "V39_DIFFEQ_01",
+      "suite": "v39_differential_equations",
+      "category": "ode",
+      "difficulty": "medium",
+      "query": "Solve the ODE: dy/dx = y.",
+      "expected": "C1*exp(x)",
+      "match": "substring",
+      "_note": "v3.9.0: ODE solver; expected Eq(y(x), C1*exp(x))"
+    },
+    {
+      "id": "V39_DIFFEQ_02",
+      "suite": "v39_differential_equations",
+      "category": "ode",
+      "difficulty": "medium",
+      "query": "Solve the ODE: y' = y.",
+      "expected": "C1*exp(x)",
+      "match": "substring",
+      "_note": "v3.9.0: ODE solver (prime notation)"
+    },
+    {
+      "id": "V39_TAYLOR_01",
+      "suite": "v39_series",
+      "category": "taylor",
+      "difficulty": "medium",
+      "query": "Find the Taylor series expansion of exp(x) around 0.",
+      "expected": "x**4/24",
+      "match": "substring",
+      "_note": "v3.9.0: Taylor series detector"
+    },
+    {
+      "id": "V39_LIMIT_01",
+      "suite": "v39_series",
+      "category": "limit",
+      "difficulty": "medium",
+      "query": "Find the limit of sin(x)/x as x -> 0.",
+      "expected": "1",
+      "match": "substring",
+      "_note": "v3.9.0: limit detector"
+    },
+    {
+      "id": "V39_NL_01",
+      "suite": "v39_natural_language",
+      "category": "explanation",
+      "difficulty": "medium",
+      "query": "Tell me about the hamiltonian and time.",
+      "expected": "hamiltonian generates time",
+      "match": "substring",
+      "_note": "v3.9.0: natural-language explanation via semantic frames"
+    },
+    {
+      "id": "V39_NL_02",
+      "suite": "v39_natural_language",
+      "category": "explanation",
+      "difficulty": "medium",
+      "query": "Discuss the ads bcft duality.",
+      "expected": "ads is dual to bcft",
+      "match": "substring",
+      "_note": "v3.9.0: NL explanation with is_dual_to frame"
+    },
+    {
+      "id": "V39_DEFINITION_01",
+      "suite": "v39_definitions",
+      "category": "definition",
+      "difficulty": "easy",
+      "query": "What is energy?",
+      "expected": "Internal or inherent power",
+      "match": "substring",
+      "_note": "v3.9.0: master resource dictionary definition surfacing"
+    },
+    {
+      "id": "V39_DEFINITION_02",
+      "suite": "v39_definitions",
+      "category": "definition",
+      "difficulty": "easy",
+      "query": "Define oxygen.",
+      "expected": "colorless",
+      "match": "substring",
+      "_note": "v3.9.0: master resource dictionary definition for oxygen"
+    }
+  ]
+}

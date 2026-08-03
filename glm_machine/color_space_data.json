@@ -1,0 +1,14198 @@
+{
+ "total_concepts": 1547,
+ "concepts": [
+  {
+   "word": "complexity",
+   "hex": "#90009a",
+   "rgb": [
+    144,
+    0,
+    154
+   ],
+   "adj_hex": "#7c0085",
+   "adj_rgb": [
+    124,
+    0,
+    133
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "difference",
+   "hex": "#900001",
+   "rgb": [
+    144,
+    0,
+    1
+   ],
+   "adj_hex": "#850000",
+   "adj_rgb": [
+    133,
+    0,
+    0
+   ],
+   "nrci": 0.8953,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 3,
+   "quadrants": [
+    2,
+    0,
+    0,
+    1
+   ]
+  },
+  {
+   "word": "emergence",
+   "hex": "#900003",
+   "rgb": [
+    144,
+    0,
+    3
+   ],
+   "adj_hex": "#820002",
+   "adj_rgb": [
+    130,
+    0,
+    2
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    0,
+    2
+   ]
+  },
+  {
+   "word": "equivalence",
+   "hex": "#900002",
+   "rgb": [
+    144,
+    0,
+    2
+   ],
+   "adj_hex": "#850001",
+   "adj_rgb": [
+    133,
+    0,
+    1
+   ],
+   "nrci": 0.8953,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 3,
+   "quadrants": [
+    2,
+    0,
+    0,
+    1
+   ]
+  },
+  {
+   "word": "identity",
+   "hex": "#900006",
+   "rgb": [
+    144,
+    0,
+    6
+   ],
+   "adj_hex": "#820005",
+   "adj_rgb": [
+    130,
+    0,
+    5
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    0,
+    2
+   ]
+  },
+  {
+   "word": "multiplicity",
+   "hex": "#900007",
+   "rgb": [
+    144,
+    0,
+    7
+   ],
+   "adj_hex": "#7f0006",
+   "adj_rgb": [
+    127,
+    0,
+    6
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    0,
+    3
+   ]
+  },
+  {
+   "word": "similarity",
+   "hex": "#900005",
+   "rgb": [
+    144,
+    0,
+    5
+   ],
+   "adj_hex": "#820004",
+   "adj_rgb": [
+    130,
+    0,
+    4
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    0,
+    2
+   ]
+  },
+  {
+   "word": "simplicity",
+   "hex": "#900004",
+   "rgb": [
+    144,
+    0,
+    4
+   ],
+   "adj_hex": "#850003",
+   "adj_rgb": [
+    133,
+    0,
+    3
+   ],
+   "nrci": 0.8953,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 3,
+   "quadrants": [
+    2,
+    0,
+    0,
+    1
+   ]
+  },
+  {
+   "word": "unity",
+   "hex": "#90000c",
+   "rgb": [
+    144,
+    0,
+    12
+   ],
+   "adj_hex": "#82000a",
+   "adj_rgb": [
+    130,
+    0,
+    10
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    0,
+    2
+   ]
+  },
+  {
+   "word": "accuracy",
+   "hex": "#90000f",
+   "rgb": [
+    144,
+    0,
+    15
+   ],
+   "adj_hex": "#7c000d",
+   "adj_rgb": [
+    124,
+    0,
+    13
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    0,
+    4
+   ]
+  },
+  {
+   "word": "acidity",
+   "hex": "#90000e",
+   "rgb": [
+    144,
+    0,
+    14
+   ],
+   "adj_hex": "#7f000c",
+   "adj_rgb": [
+    127,
+    0,
+    12
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    0,
+    3
+   ]
+  },
+  {
+   "word": "solubility_acid",
+   "hex": "#90000a",
+   "rgb": [
+    144,
+    0,
+    10
+   ],
+   "adj_hex": "#820009",
+   "adj_rgb": [
+    130,
+    0,
+    9
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    0,
+    2
+   ]
+  },
+  {
+   "word": "isomorph",
+   "hex": "#90000b",
+   "rgb": [
+    144,
+    0,
+    11
+   ],
+   "adj_hex": "#7f0009",
+   "adj_rgb": [
+    127,
+    0,
+    9
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    0,
+    3
+   ]
+  },
+  {
+   "word": "change",
+   "hex": "#900009",
+   "rgb": [
+    144,
+    0,
+    9
+   ],
+   "adj_hex": "#820008",
+   "adj_rgb": [
+    130,
+    0,
+    8
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    0,
+    2
+   ]
+  },
+  {
+   "word": "combine",
+   "hex": "#900008",
+   "rgb": [
+    144,
+    0,
+    8
+   ],
+   "adj_hex": "#850007",
+   "adj_rgb": [
+    133,
+    0,
+    7
+   ],
+   "nrci": 0.8953,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 3,
+   "quadrants": [
+    2,
+    0,
+    0,
+    1
+   ]
+  },
+  {
+   "word": "create",
+   "hex": "#900018",
+   "rgb": [
+    144,
+    0,
+    24
+   ],
+   "adj_hex": "#820015",
+   "adj_rgb": [
+    130,
+    0,
+    21
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    0,
+    2
+   ]
+  },
+  {
+   "word": "destroy",
+   "hex": "#900019",
+   "rgb": [
+    144,
+    0,
+    25
+   ],
+   "adj_hex": "#7f0016",
+   "adj_rgb": [
+    127,
+    0,
+    22
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    0,
+    3
+   ]
+  },
+  {
+   "word": "know",
+   "hex": "#90021d",
+   "rgb": [
+    144,
+    2,
+    29
+   ],
+   "adj_hex": "#7a0118",
+   "adj_rgb": [
+    122,
+    1,
+    24
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "measure",
+   "hex": "#9000ec",
+   "rgb": [
+    144,
+    0,
+    236
+   ],
+   "adj_hex": "#7a00c8",
+   "adj_rgb": [
+    122,
+    0,
+    200
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "move",
+   "hex": "#90001e",
+   "rgb": [
+    144,
+    0,
+    30
+   ],
+   "adj_hex": "#7c001a",
+   "adj_rgb": [
+    124,
+    0,
+    26
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    0,
+    4
+   ]
+  },
+  {
+   "word": "separate",
+   "hex": "#90001f",
+   "rgb": [
+    144,
+    0,
+    31
+   ],
+   "adj_hex": "#7a001a",
+   "adj_rgb": [
+    122,
+    0,
+    26
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    0,
+    5
+   ]
+  },
+  {
+   "word": "stay",
+   "hex": "#90001d",
+   "rgb": [
+    144,
+    0,
+    29
+   ],
+   "adj_hex": "#7c0019",
+   "adj_rgb": [
+    124,
+    0,
+    25
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    0,
+    4
+   ]
+  },
+  {
+   "word": "stop",
+   "hex": "#90001c",
+   "rgb": [
+    144,
+    0,
+    28
+   ],
+   "adj_hex": "#7f0018",
+   "adj_rgb": [
+    127,
+    0,
+    24
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    0,
+    3
+   ]
+  },
+  {
+   "word": "e_act",
+   "hex": "#900014",
+   "rgb": [
+    144,
+    0,
+    20
+   ],
+   "adj_hex": "#820012",
+   "adj_rgb": [
+    130,
+    0,
+    18
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    0,
+    2
+   ]
+  },
+  {
+   "word": "addresses",
+   "hex": "#900015",
+   "rgb": [
+    144,
+    0,
+    21
+   ],
+   "adj_hex": "#7f0012",
+   "adj_rgb": [
+    127,
+    0,
+    18
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    0,
+    3
+   ]
+  },
+  {
+   "word": "address",
+   "hex": "#900017",
+   "rgb": [
+    144,
+    0,
+    23
+   ],
+   "adj_hex": "#7c0013",
+   "adj_rgb": [
+    124,
+    0,
+    19
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    0,
+    4
+   ]
+  },
+  {
+   "word": "adj_min",
+   "hex": "#900016",
+   "rgb": [
+    144,
+    0,
+    22
+   ],
+   "adj_hex": "#7f0013",
+   "adj_rgb": [
+    127,
+    0,
+    19
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    0,
+    3
+   ]
+  },
+  {
+   "word": "tax_adj",
+   "hex": "#900012",
+   "rgb": [
+    144,
+    0,
+    18
+   ],
+   "adj_hex": "#820010",
+   "adj_rgb": [
+    130,
+    0,
+    16
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    0,
+    2
+   ]
+  },
+  {
+   "word": "s_adj",
+   "hex": "#900013",
+   "rgb": [
+    144,
+    0,
+    19
+   ],
+   "adj_hex": "#7f0010",
+   "adj_rgb": [
+    127,
+    0,
+    16
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    0,
+    3
+   ]
+  },
+  {
+   "word": "admissible iff syndrome",
+   "hex": "#900011",
+   "rgb": [
+    144,
+    0,
+    17
+   ],
+   "adj_hex": "#82000f",
+   "adj_rgb": [
+    130,
+    0,
+    15
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    0,
+    2
+   ]
+  },
+  {
+   "word": "advantage",
+   "hex": "#900010",
+   "rgb": [
+    144,
+    0,
+    16
+   ],
+   "adj_hex": "#85000e",
+   "adj_rgb": [
+    133,
+    0,
+    14
+   ],
+   "nrci": 0.8953,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 3,
+   "quadrants": [
+    2,
+    0,
+    0,
+    1
+   ]
+  },
+  {
+   "word": "agg_ratio",
+   "hex": "#900030",
+   "rgb": [
+    144,
+    0,
+    48
+   ],
+   "adj_hex": "#82002b",
+   "adj_rgb": [
+    130,
+    0,
+    43
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    0,
+    2
+   ]
+  },
+  {
+   "word": "focus",
+   "hex": "#900031",
+   "rgb": [
+    144,
+    0,
+    49
+   ],
+   "adj_hex": "#7f002b",
+   "adj_rgb": [
+    127,
+    0,
+    43
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    0,
+    3
+   ]
+  },
+  {
+   "word": "forget",
+   "hex": "#900033",
+   "rgb": [
+    144,
+    0,
+    51
+   ],
+   "adj_hex": "#7c002c",
+   "adj_rgb": [
+    124,
+    0,
+    44
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    0,
+    4
+   ]
+  },
+  {
+   "word": "ignore",
+   "hex": "#900032",
+   "rgb": [
+    144,
+    0,
+    50
+   ],
+   "adj_hex": "#7f002c",
+   "adj_rgb": [
+    127,
+    0,
+    44
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    0,
+    3
+   ]
+  },
+  {
+   "word": "remember",
+   "hex": "#900036",
+   "rgb": [
+    144,
+    0,
+    54
+   ],
+   "adj_hex": "#7c002e",
+   "adj_rgb": [
+    124,
+    0,
+    46
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    0,
+    4
+   ]
+  },
+  {
+   "word": "nrci",
+   "hex": "#900329",
+   "rgb": [
+    144,
+    3,
+    41
+   ],
+   "adj_hex": "#7a0222",
+   "adj_rgb": [
+    122,
+    2,
+    34
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "allotrope",
+   "hex": "#900035",
+   "rgb": [
+    144,
+    0,
+    53
+   ],
+   "adj_hex": "#7c002d",
+   "adj_rgb": [
+    124,
+    0,
+    45
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    0,
+    4
+   ]
+  },
+  {
+   "word": "alpha_bond",
+   "hex": "#900034",
+   "rgb": [
+    144,
+    0,
+    52
+   ],
+   "adj_hex": "#7f002e",
+   "adj_rgb": [
+    127,
+    0,
+    46
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    0,
+    3
+   ]
+  },
+  {
+   "word": "alpha_inv",
+   "hex": "#90003c",
+   "rgb": [
+    144,
+    0,
+    60
+   ],
+   "adj_hex": "#7c0034",
+   "adj_rgb": [
+    124,
+    0,
+    52
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    0,
+    4
+   ]
+  },
+  {
+   "word": "alpha_ratio",
+   "hex": "#90003d",
+   "rgb": [
+    144,
+    0,
+    61
+   ],
+   "adj_hex": "#7a0033",
+   "adj_rgb": [
+    122,
+    0,
+    51
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    0,
+    5
+   ]
+  },
+  {
+   "word": "1/alpha",
+   "hex": "#90003f",
+   "rgb": [
+    144,
+    0,
+    63
+   ],
+   "adj_hex": "#780034",
+   "adj_rgb": [
+    120,
+    0,
+    52
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    0,
+    6
+   ]
+  },
+  {
+   "word": "alpha",
+   "hex": "#90003a",
+   "rgb": [
+    144,
+    0,
+    58
+   ],
+   "adj_hex": "#7c0032",
+   "adj_rgb": [
+    124,
+    0,
+    50
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "Fine-structure constant or first Greek letter.",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    0,
+    4
+   ]
+  },
+  {
+   "word": "alpha^-1",
+   "hex": "#90003b",
+   "rgb": [
+    144,
+    0,
+    59
+   ],
+   "adj_hex": "#7a0032",
+   "adj_rgb": [
+    122,
+    0,
+    50
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    0,
+    5
+   ]
+  },
+  {
+   "word": "alpha_g",
+   "hex": "#900039",
+   "rgb": [
+    144,
+    0,
+    57
+   ],
+   "adj_hex": "#7c0031",
+   "adj_rgb": [
+    124,
+    0,
+    49
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    0,
+    4
+   ]
+  },
+  {
+   "word": "alpha_s",
+   "hex": "#900038",
+   "rgb": [
+    144,
+    0,
+    56
+   ],
+   "adj_hex": "#7f0031",
+   "adj_rgb": [
+    127,
+    0,
+    49
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    0,
+    3
+   ]
+  },
+  {
+   "word": "l_amp",
+   "hex": "#900028",
+   "rgb": [
+    144,
+    0,
+    40
+   ],
+   "adj_hex": "#820024",
+   "adj_rgb": [
+    130,
+    0,
+    36
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    0,
+    2
+   ]
+  },
+  {
+   "word": "w_amp",
+   "hex": "#900029",
+   "rgb": [
+    144,
+    0,
+    41
+   ],
+   "adj_hex": "#7f0024",
+   "adj_rgb": [
+    127,
+    0,
+    36
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    0,
+    3
+   ]
+  },
+  {
+   "word": "amu",
+   "hex": "#90002b",
+   "rgb": [
+    144,
+    0,
+    43
+   ],
+   "adj_hex": "#7c0025",
+   "adj_rgb": [
+    124,
+    0,
+    37
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    0,
+    4
+   ]
+  },
+  {
+   "word": "amylopectin",
+   "hex": "#90002a",
+   "rgb": [
+    144,
+    0,
+    42
+   ],
+   "adj_hex": "#7f0025",
+   "adj_rgb": [
+    127,
+    0,
+    37
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    0,
+    3
+   ]
+  },
+  {
+   "word": "amylose",
+   "hex": "#90002e",
+   "rgb": [
+    144,
+    0,
+    46
+   ],
+   "adj_hex": "#7c0027",
+   "adj_rgb": [
+    124,
+    0,
+    39
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    0,
+    4
+   ]
+  },
+  {
+   "word": "d_h",
+   "hex": "#90039e",
+   "rgb": [
+    144,
+    3,
+    158
+   ],
+   "adj_hex": "#750281",
+   "adj_rgb": [
+    117,
+    2,
+    129
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    3,
+    4
+   ]
+  },
+  {
+   "word": "anchor_invariant",
+   "hex": "#90002d",
+   "rgb": [
+    144,
+    0,
+    45
+   ],
+   "adj_hex": "#7c0027",
+   "adj_rgb": [
+    124,
+    0,
+    39
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    0,
+    4
+   ]
+  },
+  {
+   "word": "anchor",
+   "hex": "#90002c",
+   "rgb": [
+    144,
+    0,
+    44
+   ],
+   "adj_hex": "#7f0026",
+   "adj_rgb": [
+    127,
+    0,
+    38
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    0,
+    3
+   ]
+  },
+  {
+   "word": "if dh",
+   "hex": "#900024",
+   "rgb": [
+    144,
+    0,
+    36
+   ],
+   "adj_hex": "#820020",
+   "adj_rgb": [
+    130,
+    0,
+    32
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    0,
+    2
+   ]
+  },
+  {
+   "word": "angle",
+   "hex": "#900025",
+   "rgb": [
+    144,
+    0,
+    37
+   ],
+   "adj_hex": "#7f0020",
+   "adj_rgb": [
+    127,
+    0,
+    32
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    0,
+    3
+   ]
+  },
+  {
+   "word": "antimatter",
+   "hex": "#900027",
+   "rgb": [
+    144,
+    0,
+    39
+   ],
+   "adj_hex": "#7c0021",
+   "adj_rgb": [
+    124,
+    0,
+    33
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    0,
+    4
+   ]
+  },
+  {
+   "word": "p_detect approx 99.84%",
+   "hex": "#900026",
+   "rgb": [
+    144,
+    0,
+    38
+   ],
+   "adj_hex": "#7f0021",
+   "adj_rgb": [
+    127,
+    0,
+    33
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    0,
+    3
+   ]
+  },
+  {
+   "word": "arity",
+   "hex": "#900022",
+   "rgb": [
+    144,
+    0,
+    34
+   ],
+   "adj_hex": "#82001e",
+   "adj_rgb": [
+    130,
+    0,
+    30
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    0,
+    2
+   ]
+  },
+  {
+   "word": "aromatic",
+   "hex": "#900023",
+   "rgb": [
+    144,
+    0,
+    35
+   ],
+   "adj_hex": "#7f001f",
+   "adj_rgb": [
+    127,
+    0,
+    31
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    0,
+    3
+   ]
+  },
+  {
+   "word": "atmosphere",
+   "hex": "#900021",
+   "rgb": [
+    144,
+    0,
+    33
+   ],
+   "adj_hex": "#82001d",
+   "adj_rgb": [
+    130,
+    0,
+    29
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    0,
+    2
+   ]
+  },
+  {
+   "word": "macro_atomic_bridge",
+   "hex": "#900020",
+   "rgb": [
+    144,
+    0,
+    32
+   ],
+   "adj_hex": "#85001d",
+   "adj_rgb": [
+    133,
+    0,
+    29
+   ],
+   "nrci": 0.8953,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 3,
+   "quadrants": [
+    2,
+    0,
+    0,
+    1
+   ]
+  },
+  {
+   "word": "atomic_structure",
+   "hex": "#900060",
+   "rgb": [
+    144,
+    0,
+    96
+   ],
+   "adj_hex": "#820056",
+   "adj_rgb": [
+    130,
+    0,
+    86
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    1,
+    1
+   ]
+  },
+  {
+   "word": "atp_yield",
+   "hex": "#900061",
+   "rgb": [
+    144,
+    0,
+    97
+   ],
+   "adj_hex": "#7f0055",
+   "adj_rgb": [
+    127,
+    0,
+    85
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "attention",
+   "hex": "#900063",
+   "rgb": [
+    144,
+    0,
+    99
+   ],
+   "adj_hex": "#7c0055",
+   "adj_rgb": [
+    124,
+    0,
+    85
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "author",
+   "hex": "#900062",
+   "rgb": [
+    144,
+    0,
+    98
+   ],
+   "adj_hex": "#7f0056",
+   "adj_rgb": [
+    127,
+    0,
+    86
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "efficiency_avg",
+   "hex": "#900066",
+   "rgb": [
+    144,
+    0,
+    102
+   ],
+   "adj_hex": "#7c0058",
+   "adj_rgb": [
+    124,
+    0,
+    88
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "flux_avg",
+   "hex": "#900067",
+   "rgb": [
+    144,
+    0,
+    103
+   ],
+   "adj_hex": "#7a0057",
+   "adj_rgb": [
+    122,
+    0,
+    87
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "avg_nrci_target",
+   "hex": "#900065",
+   "rgb": [
+    144,
+    0,
+    101
+   ],
+   "adj_hex": "#7c0057",
+   "adj_rgb": [
+    124,
+    0,
+    87
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "avg_nrci",
+   "hex": "#900064",
+   "rgb": [
+    144,
+    0,
+    100
+   ],
+   "adj_hex": "#7f0058",
+   "adj_rgb": [
+    127,
+    0,
+    88
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "nrci_avg",
+   "hex": "#90006c",
+   "rgb": [
+    144,
+    0,
+    108
+   ],
+   "adj_hex": "#7c005d",
+   "adj_rgb": [
+    124,
+    0,
+    93
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "dh_avg",
+   "hex": "#90006d",
+   "rgb": [
+    144,
+    0,
+    109
+   ],
+   "adj_hex": "#7a005c",
+   "adj_rgb": [
+    122,
+    0,
+    92
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "topology_aware",
+   "hex": "#90006f",
+   "rgb": [
+    144,
+    0,
+    111
+   ],
+   "adj_hex": "#78005c",
+   "adj_rgb": [
+    120,
+    0,
+    92
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    1,
+    5
+   ]
+  },
+  {
+   "word": "axes",
+   "hex": "#90006e",
+   "rgb": [
+    144,
+    0,
+    110
+   ],
+   "adj_hex": "#7a005d",
+   "adj_rgb": [
+    122,
+    0,
+    93
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "c",
+   "hex": "#9003b3",
+   "rgb": [
+    144,
+    3,
+    179
+   ],
+   "adj_hex": "#750292",
+   "adj_rgb": [
+    117,
+    2,
+    146
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    3,
+    4
+   ]
+  },
+  {
+   "word": "bandgap",
+   "hex": "#90006b",
+   "rgb": [
+    144,
+    0,
+    107
+   ],
+   "adj_hex": "#7a005a",
+   "adj_rgb": [
+    122,
+    0,
+    90
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "baryon",
+   "hex": "#900069",
+   "rgb": [
+    144,
+    0,
+    105
+   ],
+   "adj_hex": "#7c005b",
+   "adj_rgb": [
+    124,
+    0,
+    91
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "Three-quark bound state.",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "base_mass",
+   "hex": "#900068",
+   "rgb": [
+    144,
+    0,
+    104
+   ],
+   "adj_hex": "#7f005c",
+   "adj_rgb": [
+    127,
+    0,
+    92
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "basic",
+   "hex": "#900079",
+   "rgb": [
+    144,
+    0,
+    121
+   ],
+   "adj_hex": "#7a0066",
+   "adj_rgb": [
+    122,
+    0,
+    102
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "basins",
+   "hex": "#90007b",
+   "rgb": [
+    144,
+    0,
+    123
+   ],
+   "adj_hex": "#780066",
+   "adj_rgb": [
+    120,
+    0,
+    102
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    1,
+    5
+   ]
+  },
+  {
+   "word": "bcaa",
+   "hex": "#90007a",
+   "rgb": [
+    144,
+    0,
+    122
+   ],
+   "adj_hex": "#7a0067",
+   "adj_rgb": [
+    122,
+    0,
+    103
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "total mass before",
+   "hex": "#90007e",
+   "rgb": [
+    144,
+    0,
+    126
+   ],
+   "adj_hex": "#780069",
+   "adj_rgb": [
+    120,
+    0,
+    105
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    1,
+    5
+   ]
+  },
+  {
+   "word": "behold",
+   "hex": "#90007f",
+   "rgb": [
+    144,
+    0,
+    127
+   ],
+   "adj_hex": "#750067",
+   "adj_rgb": [
+    117,
+    0,
+    103
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    1,
+    6
+   ]
+  },
+  {
+   "word": "w * behold_z",
+   "hex": "#90007d",
+   "rgb": [
+    144,
+    0,
+    125
+   ],
+   "adj_hex": "#780068",
+   "adj_rgb": [
+    120,
+    0,
+    104
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    1,
+    5
+   ]
+  },
+  {
+   "word": "best_stochastic_cost",
+   "hex": "#90007c",
+   "rgb": [
+    144,
+    0,
+    124
+   ],
+   "adj_hex": "#7a0069",
+   "adj_rgb": [
+    122,
+    0,
+    105
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "beta",
+   "hex": "#900074",
+   "rgb": [
+    144,
+    0,
+    116
+   ],
+   "adj_hex": "#7c0064",
+   "adj_rgb": [
+    124,
+    0,
+    100
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "Beta function: RG flow of a coupling with energy scale.",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "bias",
+   "hex": "#900075",
+   "rgb": [
+    144,
+    0,
+    117
+   ],
+   "adj_hex": "#7a0063",
+   "adj_rgb": [
+    122,
+    0,
+    99
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "binding_energy",
+   "hex": "#900077",
+   "rgb": [
+    144,
+    0,
+    119
+   ],
+   "adj_hex": "#780063",
+   "adj_rgb": [
+    120,
+    0,
+    99
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    1,
+    5
+   ]
+  },
+  {
+   "word": "differentiate",
+   "hex": "#900076",
+   "rgb": [
+    144,
+    0,
+    118
+   ],
+   "adj_hex": "#7a0064",
+   "adj_rgb": [
+    122,
+    0,
+    100
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "evolve",
+   "hex": "#900606",
+   "rgb": [
+    144,
+    6,
+    6
+   ],
+   "adj_hex": "#7c0505",
+   "adj_rgb": [
+    124,
+    5,
+    5
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "To change in time according to a dynamical law.",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "inhibit",
+   "hex": "#900073",
+   "rgb": [
+    144,
+    0,
+    115
+   ],
+   "adj_hex": "#7a0061",
+   "adj_rgb": [
+    122,
+    0,
+    97
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "metabolize",
+   "hex": "#900071",
+   "rgb": [
+    144,
+    0,
+    113
+   ],
+   "adj_hex": "#7c0062",
+   "adj_rgb": [
+    124,
+    0,
+    98
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "mutate",
+   "hex": "#900070",
+   "rgb": [
+    144,
+    0,
+    112
+   ],
+   "adj_hex": "#7f0063",
+   "adj_rgb": [
+    127,
+    0,
+    99
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "replicate",
+   "hex": "#900050",
+   "rgb": [
+    144,
+    0,
+    80
+   ],
+   "adj_hex": "#820048",
+   "adj_rgb": [
+    130,
+    0,
+    72
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    1,
+    1
+   ]
+  },
+  {
+   "word": "signal",
+   "hex": "#90014a",
+   "rgb": [
+    144,
+    1,
+    74
+   ],
+   "adj_hex": "#7c0040",
+   "adj_rgb": [
+    124,
+    0,
+    64
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "transcribe",
+   "hex": "#900053",
+   "rgb": [
+    144,
+    0,
+    83
+   ],
+   "adj_hex": "#7c0047",
+   "adj_rgb": [
+    124,
+    0,
+    71
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "birefringent",
+   "hex": "#900052",
+   "rgb": [
+    144,
+    0,
+    82
+   ],
+   "adj_hex": "#7f0048",
+   "adj_rgb": [
+    127,
+    0,
+    72
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "fraction",
+   "hex": "#900056",
+   "rgb": [
+    144,
+    0,
+    86
+   ],
+   "adj_hex": "#7c004a",
+   "adj_rgb": [
+    124,
+    0,
+    74
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "12_bits",
+   "hex": "#900057",
+   "rgb": [
+    144,
+    0,
+    87
+   ],
+   "adj_hex": "#7a0049",
+   "adj_rgb": [
+    122,
+    0,
+    73
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "bits",
+   "hex": "#900055",
+   "rgb": [
+    144,
+    0,
+    85
+   ],
+   "adj_hex": "#7c0049",
+   "adj_rgb": [
+    124,
+    0,
+    73
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "recall_5bit",
+   "hex": "#900054",
+   "rgb": [
+    144,
+    0,
+    84
+   ],
+   "adj_hex": "#7f004a",
+   "adj_rgb": [
+    127,
+    0,
+    74
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "bkm_identity",
+   "hex": "#90005c",
+   "rgb": [
+    144,
+    0,
+    92
+   ],
+   "adj_hex": "#7c004f",
+   "adj_rgb": [
+    124,
+    0,
+    79
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "norm^2",
+   "hex": "#90033e",
+   "rgb": [
+    144,
+    3,
+    62
+   ],
+   "adj_hex": "#750232",
+   "adj_rgb": [
+    117,
+    2,
+    50
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    2,
+    5
+   ]
+  },
+  {
+   "word": "bohr_model",
+   "hex": "#90005f",
+   "rgb": [
+    144,
+    0,
+    95
+   ],
+   "adj_hex": "#78004f",
+   "adj_rgb": [
+    120,
+    0,
+    79
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    1,
+    5
+   ]
+  },
+  {
+   "word": "bonds",
+   "hex": "#90005e",
+   "rgb": [
+    144,
+    0,
+    94
+   ],
+   "adj_hex": "#7a004f",
+   "adj_rgb": [
+    122,
+    0,
+    79
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "bond_energy",
+   "hex": "#90005a",
+   "rgb": [
+    144,
+    0,
+    90
+   ],
+   "adj_hex": "#7c004e",
+   "adj_rgb": [
+    124,
+    0,
+    78
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "although",
+   "hex": "#90005b",
+   "rgb": [
+    144,
+    0,
+    91
+   ],
+   "adj_hex": "#7a004d",
+   "adj_rgb": [
+    122,
+    0,
+    77
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "because",
+   "hex": "#900059",
+   "rgb": [
+    144,
+    0,
+    89
+   ],
+   "adj_hex": "#7c004d",
+   "adj_rgb": [
+    124,
+    0,
+    77
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "consequently",
+   "hex": "#900058",
+   "rgb": [
+    144,
+    0,
+    88
+   ],
+   "adj_hex": "#7f004d",
+   "adj_rgb": [
+    127,
+    0,
+    77
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "furthermore",
+   "hex": "#900048",
+   "rgb": [
+    144,
+    0,
+    72
+   ],
+   "adj_hex": "#820041",
+   "adj_rgb": [
+    130,
+    0,
+    65
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    1,
+    1
+   ]
+  },
+  {
+   "word": "however",
+   "hex": "#900049",
+   "rgb": [
+    144,
+    0,
+    73
+   ],
+   "adj_hex": "#7f0040",
+   "adj_rgb": [
+    127,
+    0,
+    64
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "meanwhile",
+   "hex": "#90004b",
+   "rgb": [
+    144,
+    0,
+    75
+   ],
+   "adj_hex": "#7c0041",
+   "adj_rgb": [
+    124,
+    0,
+    65
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "moreover",
+   "hex": "#90004a",
+   "rgb": [
+    144,
+    0,
+    74
+   ],
+   "adj_hex": "#7f0041",
+   "adj_rgb": [
+    127,
+    0,
+    65
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "nevertheless",
+   "hex": "#90004e",
+   "rgb": [
+    144,
+    0,
+    78
+   ],
+   "adj_hex": "#7c0043",
+   "adj_rgb": [
+    124,
+    0,
+    67
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "otherwise",
+   "hex": "#90004f",
+   "rgb": [
+    144,
+    0,
+    79
+   ],
+   "adj_hex": "#7a0043",
+   "adj_rgb": [
+    122,
+    0,
+    67
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "therefore",
+   "hex": "#90004d",
+   "rgb": [
+    144,
+    0,
+    77
+   ],
+   "adj_hex": "#7c0042",
+   "adj_rgb": [
+    124,
+    0,
+    66
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "abstraction",
+   "hex": "#90004c",
+   "rgb": [
+    144,
+    0,
+    76
+   ],
+   "adj_hex": "#7f0043",
+   "adj_rgb": [
+    127,
+    0,
+    67
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "analogy",
+   "hex": "#900044",
+   "rgb": [
+    144,
+    0,
+    68
+   ],
+   "adj_hex": "#82003d",
+   "adj_rgb": [
+    130,
+    0,
+    61
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    1,
+    1
+   ]
+  },
+  {
+   "word": "axiom",
+   "hex": "#900230",
+   "rgb": [
+    144,
+    2,
+    48
+   ],
+   "adj_hex": "#7f012a",
+   "adj_rgb": [
+    127,
+    1,
+    42
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "conjecture",
+   "hex": "#900047",
+   "rgb": [
+    144,
+    0,
+    71
+   ],
+   "adj_hex": "#7c003d",
+   "adj_rgb": [
+    124,
+    0,
+    61
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "evidence",
+   "hex": "#900046",
+   "rgb": [
+    144,
+    0,
+    70
+   ],
+   "adj_hex": "#7f003e",
+   "adj_rgb": [
+    127,
+    0,
+    62
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "generalisation",
+   "hex": "#900042",
+   "rgb": [
+    144,
+    0,
+    66
+   ],
+   "adj_hex": "#82003b",
+   "adj_rgb": [
+    130,
+    0,
+    59
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    1,
+    1
+   ]
+  },
+  {
+   "word": "hypothesis",
+   "hex": "#900043",
+   "rgb": [
+    144,
+    0,
+    67
+   ],
+   "adj_hex": "#7f003b",
+   "adj_rgb": [
+    127,
+    0,
+    59
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "inference",
+   "hex": "#900041",
+   "rgb": [
+    144,
+    0,
+    65
+   ],
+   "adj_hex": "#82003a",
+   "adj_rgb": [
+    130,
+    0,
+    58
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    1,
+    1
+   ]
+  },
+  {
+   "word": "paradox",
+   "hex": "#900040",
+   "rgb": [
+    144,
+    0,
+    64
+   ],
+   "adj_hex": "#85003b",
+   "adj_rgb": [
+    133,
+    0,
+    59
+   ],
+   "nrci": 0.8953,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 3,
+   "quadrants": [
+    2,
+    0,
+    1,
+    0
+   ]
+  },
+  {
+   "word": "proof",
+   "hex": "#9000c0",
+   "rgb": [
+    144,
+    0,
+    192
+   ],
+   "adj_hex": "#8200ad",
+   "adj_rgb": [
+    130,
+    0,
+    173
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    2,
+    0
+   ]
+  },
+  {
+   "word": "cause",
+   "hex": "#9000c1",
+   "rgb": [
+    144,
+    0,
+    193
+   ],
+   "adj_hex": "#7f00aa",
+   "adj_rgb": [
+    127,
+    0,
+    170
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    2,
+    1
+   ]
+  },
+  {
+   "word": "certain",
+   "hex": "#9000c3",
+   "rgb": [
+    144,
+    0,
+    195
+   ],
+   "adj_hex": "#7c00a9",
+   "adj_rgb": [
+    124,
+    0,
+    169
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "contingent",
+   "hex": "#9000c2",
+   "rgb": [
+    144,
+    0,
+    194
+   ],
+   "adj_hex": "#7f00ab",
+   "adj_rgb": [
+    127,
+    0,
+    171
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    2,
+    1
+   ]
+  },
+  {
+   "word": "effect",
+   "hex": "#9000c6",
+   "rgb": [
+    144,
+    0,
+    198
+   ],
+   "adj_hex": "#7c00ab",
+   "adj_rgb": [
+    124,
+    0,
+    171
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "impossible",
+   "hex": "#9000c7",
+   "rgb": [
+    144,
+    0,
+    199
+   ],
+   "adj_hex": "#7a00a9",
+   "adj_rgb": [
+    122,
+    0,
+    169
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "inevitable",
+   "hex": "#9000c5",
+   "rgb": [
+    144,
+    0,
+    197
+   ],
+   "adj_hex": "#7c00aa",
+   "adj_rgb": [
+    124,
+    0,
+    170
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "necessary",
+   "hex": "#900274",
+   "rgb": [
+    144,
+    2,
+    116
+   ],
+   "adj_hex": "#7a0162",
+   "adj_rgb": [
+    122,
+    1,
+    98
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "possible",
+   "hex": "#90027c",
+   "rgb": [
+    144,
+    2,
+    124
+   ],
+   "adj_hex": "#780167",
+   "adj_rgb": [
+    120,
+    1,
+    103
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "probable",
+   "hex": "#9000cd",
+   "rgb": [
+    144,
+    0,
+    205
+   ],
+   "adj_hex": "#7a00ae",
+   "adj_rgb": [
+    122,
+    0,
+    174
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "sufficient",
+   "hex": "#9000cf",
+   "rgb": [
+    144,
+    0,
+    207
+   ],
+   "adj_hex": "#7800ac",
+   "adj_rgb": [
+    120,
+    0,
+    172
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "both",
+   "hex": "#9000ce",
+   "rgb": [
+    144,
+    0,
+    206
+   ],
+   "adj_hex": "#7a00af",
+   "adj_rgb": [
+    122,
+    0,
+    175
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "each",
+   "hex": "#9000ca",
+   "rgb": [
+    144,
+    0,
+    202
+   ],
+   "adj_hex": "#7c00af",
+   "adj_rgb": [
+    124,
+    0,
+    175
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "either",
+   "hex": "#9000cb",
+   "rgb": [
+    144,
+    0,
+    203
+   ],
+   "adj_hex": "#7a00ac",
+   "adj_rgb": [
+    122,
+    0,
+    172
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "every",
+   "hex": "#9000c9",
+   "rgb": [
+    144,
+    0,
+    201
+   ],
+   "adj_hex": "#7c00ae",
+   "adj_rgb": [
+    124,
+    0,
+    174
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "few",
+   "hex": "#9000c8",
+   "rgb": [
+    144,
+    0,
+    200
+   ],
+   "adj_hex": "#7f00b1",
+   "adj_rgb": [
+    127,
+    0,
+    177
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    2,
+    1
+   ]
+  },
+  {
+   "word": "many",
+   "hex": "#9000d8",
+   "rgb": [
+    144,
+    0,
+    216
+   ],
+   "adj_hex": "#7c00bb",
+   "adj_rgb": [
+    124,
+    0,
+    187
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "most",
+   "hex": "#9000d9",
+   "rgb": [
+    144,
+    0,
+    217
+   ],
+   "adj_hex": "#7a00b8",
+   "adj_rgb": [
+    122,
+    0,
+    184
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "neither",
+   "hex": "#9000db",
+   "rgb": [
+    144,
+    0,
+    219
+   ],
+   "adj_hex": "#7800b6",
+   "adj_rgb": [
+    120,
+    0,
+    182
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "none",
+   "hex": "#900249",
+   "rgb": [
+    144,
+    2,
+    73
+   ],
+   "adj_hex": "#7c013f",
+   "adj_rgb": [
+    124,
+    1,
+    63
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "some",
+   "hex": "#900248",
+   "rgb": [
+    144,
+    2,
+    72
+   ],
+   "adj_hex": "#7f013f",
+   "adj_rgb": [
+    127,
+    1,
+    63
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    2,
+    1
+   ]
+  },
+  {
+   "word": "across",
+   "hex": "#9000df",
+   "rgb": [
+    144,
+    0,
+    223
+   ],
+   "adj_hex": "#7500b6",
+   "adj_rgb": [
+    117,
+    0,
+    182
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    2,
+    5
+   ]
+  },
+  {
+   "word": "against",
+   "hex": "#9000dd",
+   "rgb": [
+    144,
+    0,
+    221
+   ],
+   "adj_hex": "#7800b8",
+   "adj_rgb": [
+    120,
+    0,
+    184
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "among",
+   "hex": "#9000dc",
+   "rgb": [
+    144,
+    0,
+    220
+   ],
+   "adj_hex": "#7a00ba",
+   "adj_rgb": [
+    122,
+    0,
+    186
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "beneath",
+   "hex": "#9000d4",
+   "rgb": [
+    144,
+    0,
+    212
+   ],
+   "adj_hex": "#7c00b7",
+   "adj_rgb": [
+    124,
+    0,
+    183
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "between",
+   "hex": "#90060e",
+   "rgb": [
+    144,
+    6,
+    14
+   ],
+   "adj_hex": "#7a050b",
+   "adj_rgb": [
+    122,
+    5,
+    11
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "beyond",
+   "hex": "#90060a",
+   "rgb": [
+    144,
+    6,
+    10
+   ],
+   "adj_hex": "#7c0508",
+   "adj_rgb": [
+    124,
+    5,
+    8
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "through",
+   "hex": "#90060b",
+   "rgb": [
+    144,
+    6,
+    11
+   ],
+   "adj_hex": "#7a0509",
+   "adj_rgb": [
+    122,
+    5,
+    9
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "toward",
+   "hex": "#9000d2",
+   "rgb": [
+    144,
+    0,
+    210
+   ],
+   "adj_hex": "#7c00b6",
+   "adj_rgb": [
+    124,
+    0,
+    182
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "upon",
+   "hex": "#9000d3",
+   "rgb": [
+    144,
+    0,
+    211
+   ],
+   "adj_hex": "#7a00b3",
+   "adj_rgb": [
+    122,
+    0,
+    179
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "within",
+   "hex": "#900608",
+   "rgb": [
+    144,
+    6,
+    8
+   ],
+   "adj_hex": "#7f0507",
+   "adj_rgb": [
+    127,
+    5,
+    7
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    2,
+    1
+   ]
+  },
+  {
+   "word": "boundary",
+   "hex": "#90063b",
+   "rgb": [
+    144,
+    6,
+    59
+   ],
+   "adj_hex": "#750430",
+   "adj_rgb": [
+    117,
+    4,
+    48
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    2,
+    5
+   ]
+  },
+  {
+   "word": "centre",
+   "hex": "#9000f0",
+   "rgb": [
+    144,
+    0,
+    240
+   ],
+   "adj_hex": "#7c00d0",
+   "adj_rgb": [
+    124,
+    0,
+    208
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "exterior",
+   "hex": "#9000f1",
+   "rgb": [
+    144,
+    0,
+    241
+   ],
+   "adj_hex": "#7a00cc",
+   "adj_rgb": [
+    122,
+    0,
+    204
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "interior",
+   "hex": "#9000f3",
+   "rgb": [
+    144,
+    0,
+    243
+   ],
+   "adj_hex": "#7800ca",
+   "adj_rgb": [
+    120,
+    0,
+    202
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "network",
+   "hex": "#9000f2",
+   "rgb": [
+    144,
+    0,
+    242
+   ],
+   "adj_hex": "#7a00cd",
+   "adj_rgb": [
+    122,
+    0,
+    205
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "part",
+   "hex": "#9000f6",
+   "rgb": [
+    144,
+    0,
+    246
+   ],
+   "adj_hex": "#7800cd",
+   "adj_rgb": [
+    120,
+    0,
+    205
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "periphery",
+   "hex": "#9000f7",
+   "rgb": [
+    144,
+    0,
+    247
+   ],
+   "adj_hex": "#7500ca",
+   "adj_rgb": [
+    117,
+    0,
+    202
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    2,
+    5
+   ]
+  },
+  {
+   "word": "whole",
+   "hex": "#9000f5",
+   "rgb": [
+    144,
+    0,
+    245
+   ],
+   "adj_hex": "#7800cc",
+   "adj_rgb": [
+    120,
+    0,
+    204
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "after",
+   "hex": "#90063d",
+   "rgb": [
+    144,
+    6,
+    61
+   ],
+   "adj_hex": "#750431",
+   "adj_rgb": [
+    117,
+    4,
+    49
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    2,
+    5
+   ]
+  },
+  {
+   "word": "already",
+   "hex": "#9000fc",
+   "rgb": [
+    144,
+    0,
+    252
+   ],
+   "adj_hex": "#7800d2",
+   "adj_rgb": [
+    120,
+    0,
+    210
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "before",
+   "hex": "#90063e",
+   "rgb": [
+    144,
+    6,
+    62
+   ],
+   "adj_hex": "#750432",
+   "adj_rgb": [
+    117,
+    4,
+    50
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    2,
+    5
+   ]
+  },
+  {
+   "word": "during",
+   "hex": "#900619",
+   "rgb": [
+    144,
+    6,
+    25
+   ],
+   "adj_hex": "#7a0515",
+   "adj_rgb": [
+    122,
+    5,
+    21
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "eventually",
+   "hex": "#9000fe",
+   "rgb": [
+    144,
+    0,
+    254
+   ],
+   "adj_hex": "#7500cf",
+   "adj_rgb": [
+    117,
+    0,
+    207
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    2,
+    5
+   ]
+  },
+  {
+   "word": "gradually",
+   "hex": "#9000fa",
+   "rgb": [
+    144,
+    0,
+    250
+   ],
+   "adj_hex": "#7800d0",
+   "adj_rgb": [
+    120,
+    0,
+    208
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "immediately",
+   "hex": "#9000fb",
+   "rgb": [
+    144,
+    0,
+    251
+   ],
+   "adj_hex": "#7500cd",
+   "adj_rgb": [
+    117,
+    0,
+    205
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    2,
+    5
+   ]
+  },
+  {
+   "word": "simultaneously",
+   "hex": "#9000f9",
+   "rgb": [
+    144,
+    0,
+    249
+   ],
+   "adj_hex": "#7800cf",
+   "adj_rgb": [
+    120,
+    0,
+    207
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "since",
+   "hex": "#9000f8",
+   "rgb": [
+    144,
+    0,
+    248
+   ],
+   "adj_hex": "#7a00d2",
+   "adj_rgb": [
+    122,
+    0,
+    210
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "until",
+   "hex": "#9000e8",
+   "rgb": [
+    144,
+    0,
+    232
+   ],
+   "adj_hex": "#7c00c9",
+   "adj_rgb": [
+    124,
+    0,
+    201
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "classify",
+   "hex": "#90012f",
+   "rgb": [
+    144,
+    1,
+    47
+   ],
+   "adj_hex": "#780027",
+   "adj_rgb": [
+    120,
+    0,
+    39
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    1,
+    5
+   ]
+  },
+  {
+   "word": "compare",
+   "hex": "#900214",
+   "rgb": [
+    144,
+    2,
+    20
+   ],
+   "adj_hex": "#7f0111",
+   "adj_rgb": [
+    127,
+    1,
+    17
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "compose",
+   "hex": "#900610",
+   "rgb": [
+    144,
+    6,
+    16
+   ],
+   "adj_hex": "#7f050e",
+   "adj_rgb": [
+    127,
+    5,
+    14
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    2,
+    1
+   ]
+  },
+  {
+   "word": "decompose",
+   "hex": "#900630",
+   "rgb": [
+    144,
+    6,
+    48
+   ],
+   "adj_hex": "#7c0529",
+   "adj_rgb": [
+    124,
+    5,
+    41
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "define",
+   "hex": "#9000ef",
+   "rgb": [
+    144,
+    0,
+    239
+   ],
+   "adj_hex": "#7500c3",
+   "adj_rgb": [
+    117,
+    0,
+    195
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    2,
+    5
+   ]
+  },
+  {
+   "word": "explain",
+   "hex": "#9000ed",
+   "rgb": [
+    144,
+    0,
+    237
+   ],
+   "adj_hex": "#7800c5",
+   "adj_rgb": [
+    120,
+    0,
+    197
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "predict",
+   "hex": "#900128",
+   "rgb": [
+    144,
+    1,
+    40
+   ],
+   "adj_hex": "#7f0023",
+   "adj_rgb": [
+    127,
+    0,
+    35
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "transform",
+   "hex": "#900255",
+   "rgb": [
+    144,
+    2,
+    85
+   ],
+   "adj_hex": "#7a0148",
+   "adj_rgb": [
+    122,
+    1,
+    72
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "verify",
+   "hex": "#9000e7",
+   "rgb": [
+    144,
+    0,
+    231
+   ],
+   "adj_hex": "#7800c0",
+   "adj_rgb": [
+    120,
+    0,
+    192
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "boost",
+   "hex": "#9000e6",
+   "rgb": [
+    144,
+    0,
+    230
+   ],
+   "adj_hex": "#7a00c3",
+   "adj_rgb": [
+    122,
+    0,
+    195
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "bottom",
+   "hex": "#9000e2",
+   "rgb": [
+    144,
+    0,
+    226
+   ],
+   "adj_hex": "#7c00c4",
+   "adj_rgb": [
+    124,
+    0,
+    196
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "horizon_breach",
+   "hex": "#9000e3",
+   "rgb": [
+    144,
+    0,
+    227
+   ],
+   "adj_hex": "#7a00c0",
+   "adj_rgb": [
+    122,
+    0,
+    192
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "breach",
+   "hex": "#9000e1",
+   "rgb": [
+    144,
+    0,
+    225
+   ],
+   "adj_hex": "#7c00c3",
+   "adj_rgb": [
+    124,
+    0,
+    195
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "bridge",
+   "hex": "#9000e0",
+   "rgb": [
+    144,
+    0,
+    224
+   ],
+   "adj_hex": "#7f00c6",
+   "adj_rgb": [
+    127,
+    0,
+    198
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    2,
+    1
+   ]
+  },
+  {
+   "word": "buffer_gain",
+   "hex": "#9000a0",
+   "rgb": [
+    144,
+    0,
+    160
+   ],
+   "adj_hex": "#820090",
+   "adj_rgb": [
+    130,
+    0,
+    144
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    1,
+    1
+   ]
+  },
+  {
+   "word": "capacity",
+   "hex": "#9000a3",
+   "rgb": [
+    144,
+    0,
+    163
+   ],
+   "adj_hex": "#7c008d",
+   "adj_rgb": [
+    124,
+    0,
+    141
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "sink_capture",
+   "hex": "#9000a2",
+   "rgb": [
+    144,
+    0,
+    162
+   ],
+   "adj_hex": "#7f008f",
+   "adj_rgb": [
+    127,
+    0,
+    143
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "capture",
+   "hex": "#9000a6",
+   "rgb": [
+    144,
+    0,
+    166
+   ],
+   "adj_hex": "#7c008f",
+   "adj_rgb": [
+    124,
+    0,
+    143
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "card",
+   "hex": "#9000a7",
+   "rgb": [
+    144,
+    0,
+    167
+   ],
+   "adj_hex": "#7a008d",
+   "adj_rgb": [
+    122,
+    0,
+    141
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "nitrogen_carrier",
+   "hex": "#9000a5",
+   "rgb": [
+    144,
+    0,
+    165
+   ],
+   "adj_hex": "#7c008f",
+   "adj_rgb": [
+    124,
+    0,
+    143
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "cascade",
+   "hex": "#9000a4",
+   "rgb": [
+    144,
+    0,
+    164
+   ],
+   "adj_hex": "#7f0091",
+   "adj_rgb": [
+    127,
+    0,
+    145
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "cells",
+   "hex": "#9000ac",
+   "rgb": [
+    144,
+    0,
+    172
+   ],
+   "adj_hex": "#7c0095",
+   "adj_rgb": [
+    124,
+    0,
+    149
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "chain_reaction",
+   "hex": "#9000ad",
+   "rgb": [
+    144,
+    0,
+    173
+   ],
+   "adj_hex": "#7a0093",
+   "adj_rgb": [
+    122,
+    0,
+    147
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "chaos",
+   "hex": "#9000af",
+   "rgb": [
+    144,
+    0,
+    175
+   ],
+   "adj_hex": "#780091",
+   "adj_rgb": [
+    120,
+    0,
+    145
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    1,
+    5
+   ]
+  },
+  {
+   "word": "electron_charge",
+   "hex": "#9000ae",
+   "rgb": [
+    144,
+    0,
+    174
+   ],
+   "adj_hex": "#7a0093",
+   "adj_rgb": [
+    122,
+    0,
+    147
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "proton_charge",
+   "hex": "#9000aa",
+   "rgb": [
+    144,
+    0,
+    170
+   ],
+   "adj_hex": "#7c0093",
+   "adj_rgb": [
+    124,
+    0,
+    147
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "charm",
+   "hex": "#9000ab",
+   "rgb": [
+    144,
+    0,
+    171
+   ],
+   "adj_hex": "#7a0091",
+   "adj_rgb": [
+    122,
+    0,
+    145
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "bond",
+   "hex": "#9000a9",
+   "rgb": [
+    144,
+    0,
+    169
+   ],
+   "adj_hex": "#7c0092",
+   "adj_rgb": [
+    124,
+    0,
+    146
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "catalyze",
+   "hex": "#9000a8",
+   "rgb": [
+    144,
+    0,
+    168
+   ],
+   "adj_hex": "#7f0094",
+   "adj_rgb": [
+    127,
+    0,
+    148
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "dissolve",
+   "hex": "#9000b8",
+   "rgb": [
+    144,
+    0,
+    184
+   ],
+   "adj_hex": "#7c009f",
+   "adj_rgb": [
+    124,
+    0,
+    159
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "ionize",
+   "hex": "#9000b9",
+   "rgb": [
+    144,
+    0,
+    185
+   ],
+   "adj_hex": "#7a009d",
+   "adj_rgb": [
+    122,
+    0,
+    157
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "oxidize",
+   "hex": "#9000bb",
+   "rgb": [
+    144,
+    0,
+    187
+   ],
+   "adj_hex": "#78009b",
+   "adj_rgb": [
+    120,
+    0,
+    155
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    1,
+    5
+   ]
+  },
+  {
+   "word": "polymerize",
+   "hex": "#9000ba",
+   "rgb": [
+    144,
+    0,
+    186
+   ],
+   "adj_hex": "#7a009e",
+   "adj_rgb": [
+    122,
+    0,
+    158
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "precipitate",
+   "hex": "#9000be",
+   "rgb": [
+    144,
+    0,
+    190
+   ],
+   "adj_hex": "#78009e",
+   "adj_rgb": [
+    120,
+    0,
+    158
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    1,
+    5
+   ]
+  },
+  {
+   "word": "react",
+   "hex": "#9000bf",
+   "rgb": [
+    144,
+    0,
+    191
+   ],
+   "adj_hex": "#75009c",
+   "adj_rgb": [
+    117,
+    0,
+    156
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    1,
+    6
+   ]
+  },
+  {
+   "word": "reduce",
+   "hex": "#9000bd",
+   "rgb": [
+    144,
+    0,
+    189
+   ],
+   "adj_hex": "#78009d",
+   "adj_rgb": [
+    120,
+    0,
+    157
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    1,
+    5
+   ]
+  },
+  {
+   "word": "unbond",
+   "hex": "#9000bc",
+   "rgb": [
+    144,
+    0,
+    188
+   ],
+   "adj_hex": "#7a009f",
+   "adj_rgb": [
+    122,
+    0,
+    159
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "chirality",
+   "hex": "#9000b4",
+   "rgb": [
+    144,
+    0,
+    180
+   ],
+   "adj_hex": "#7c009c",
+   "adj_rgb": [
+    124,
+    0,
+    156
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "class",
+   "hex": "#9000b5",
+   "rgb": [
+    144,
+    0,
+    181
+   ],
+   "adj_hex": "#7a0099",
+   "adj_rgb": [
+    122,
+    0,
+    153
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "closure",
+   "hex": "#9000b7",
+   "rgb": [
+    144,
+    0,
+    183
+   ],
+   "adj_hex": "#780098",
+   "adj_rgb": [
+    120,
+    0,
+    152
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    1,
+    5
+   ]
+  },
+  {
+   "word": "rational_closure",
+   "hex": "#9000b6",
+   "rgb": [
+    144,
+    0,
+    182
+   ],
+   "adj_hex": "#7a009a",
+   "adj_rgb": [
+    122,
+    0,
+    154
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "codon_corrected",
+   "hex": "#9000b2",
+   "rgb": [
+    144,
+    0,
+    178
+   ],
+   "adj_hex": "#7c009a",
+   "adj_rgb": [
+    124,
+    0,
+    154
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "coherence",
+   "hex": "#9000b3",
+   "rgb": [
+    144,
+    0,
+    179
+   ],
+   "adj_hex": "#7a0098",
+   "adj_rgb": [
+    122,
+    0,
+    152
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "rel_coh",
+   "hex": "#9000b1",
+   "rgb": [
+    144,
+    0,
+    177
+   ],
+   "adj_hex": "#7c0099",
+   "adj_rgb": [
+    124,
+    0,
+    153
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "coil_i",
+   "hex": "#9000b0",
+   "rgb": [
+    144,
+    0,
+    176
+   ],
+   "adj_hex": "#7f009b",
+   "adj_rgb": [
+    127,
+    0,
+    155
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "coil_n",
+   "hex": "#900090",
+   "rgb": [
+    144,
+    0,
+    144
+   ],
+   "adj_hex": "#820082",
+   "adj_rgb": [
+    130,
+    0,
+    130
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    1,
+    1
+   ]
+  },
+  {
+   "word": "collagen",
+   "hex": "#900091",
+   "rgb": [
+    144,
+    0,
+    145
+   ],
+   "adj_hex": "#7f0080",
+   "adj_rgb": [
+    127,
+    0,
+    128
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "collapse",
+   "hex": "#900093",
+   "rgb": [
+    144,
+    0,
+    147
+   ],
+   "adj_hex": "#7c007f",
+   "adj_rgb": [
+    124,
+    0,
+    127
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "color",
+   "hex": "#900092",
+   "rgb": [
+    144,
+    0,
+    146
+   ],
+   "adj_hex": "#7f0081",
+   "adj_rgb": [
+    127,
+    0,
+    129
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "compactness",
+   "hex": "#900096",
+   "rgb": [
+    144,
+    0,
+    150
+   ],
+   "adj_hex": "#7c0082",
+   "adj_rgb": [
+    124,
+    0,
+    130
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "different",
+   "hex": "#900097",
+   "rgb": [
+    144,
+    0,
+    151
+   ],
+   "adj_hex": "#7a0080",
+   "adj_rgb": [
+    122,
+    0,
+    128
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "equal",
+   "hex": "#900210",
+   "rgb": [
+    144,
+    2,
+    16
+   ],
+   "adj_hex": "#82010e",
+   "adj_rgb": [
+    130,
+    1,
+    14
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    1,
+    1
+   ]
+  },
+  {
+   "word": "greater",
+   "hex": "#900211",
+   "rgb": [
+    144,
+    2,
+    17
+   ],
+   "adj_hex": "#7f010f",
+   "adj_rgb": [
+    127,
+    1,
+    15
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "less",
+   "hex": "#900213",
+   "rgb": [
+    144,
+    2,
+    19
+   ],
+   "adj_hex": "#7c0110",
+   "adj_rgb": [
+    124,
+    1,
+    16
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "opposite",
+   "hex": "#90009d",
+   "rgb": [
+    144,
+    0,
+    157
+   ],
+   "adj_hex": "#7a0085",
+   "adj_rgb": [
+    122,
+    0,
+    133
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "similar",
+   "hex": "#900216",
+   "rgb": [
+    144,
+    2,
+    22
+   ],
+   "adj_hex": "#7c0113",
+   "adj_rgb": [
+    124,
+    1,
+    19
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "complete",
+   "hex": "#90009e",
+   "rgb": [
+    144,
+    0,
+    158
+   ],
+   "adj_hex": "#7a0086",
+   "adj_rgb": [
+    122,
+    0,
+    134
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "concentration_max",
+   "hex": "#90009b",
+   "rgb": [
+    144,
+    0,
+    155
+   ],
+   "adj_hex": "#7a0083",
+   "adj_rgb": [
+    122,
+    0,
+    131
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "concept",
+   "hex": "#900099",
+   "rgb": [
+    144,
+    0,
+    153
+   ],
+   "adj_hex": "#7c0084",
+   "adj_rgb": [
+    124,
+    0,
+    132
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "conditional",
+   "hex": "#900098",
+   "rgb": [
+    144,
+    0,
+    152
+   ],
+   "adj_hex": "#7f0086",
+   "adj_rgb": [
+    127,
+    0,
+    134
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "condition",
+   "hex": "#900088",
+   "rgb": [
+    144,
+    0,
+    136
+   ],
+   "adj_hex": "#82007b",
+   "adj_rgb": [
+    130,
+    0,
+    123
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    1,
+    1
+   ]
+  },
+  {
+   "word": "electrical_cond",
+   "hex": "#900089",
+   "rgb": [
+    144,
+    0,
+    137
+   ],
+   "adj_hex": "#7f0079",
+   "adj_rgb": [
+    127,
+    0,
+    121
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "thermal_cond",
+   "hex": "#90008b",
+   "rgb": [
+    144,
+    0,
+    139
+   ],
+   "adj_hex": "#7c0078",
+   "adj_rgb": [
+    124,
+    0,
+    120
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "connectivity",
+   "hex": "#90008a",
+   "rgb": [
+    144,
+    0,
+    138
+   ],
+   "adj_hex": "#7f007a",
+   "adj_rgb": [
+    127,
+    0,
+    122
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "e_cons",
+   "hex": "#90008e",
+   "rgb": [
+    144,
+    0,
+    142
+   ],
+   "adj_hex": "#7c007b",
+   "adj_rgb": [
+    124,
+    0,
+    123
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "quark_content",
+   "hex": "#90008f",
+   "rgb": [
+    144,
+    0,
+    143
+   ],
+   "adj_hex": "#7a0079",
+   "adj_rgb": [
+    122,
+    0,
+    121
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "convergence",
+   "hex": "#90008d",
+   "rgb": [
+    144,
+    0,
+    141
+   ],
+   "adj_hex": "#7c007a",
+   "adj_rgb": [
+    124,
+    0,
+    122
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "s_corrected",
+   "hex": "#90008c",
+   "rgb": [
+    144,
+    0,
+    140
+   ],
+   "adj_hex": "#7f007c",
+   "adj_rgb": [
+    127,
+    0,
+    124
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "octad_correction",
+   "hex": "#900084",
+   "rgb": [
+    144,
+    0,
+    132
+   ],
+   "adj_hex": "#820077",
+   "adj_rgb": [
+    130,
+    0,
+    119
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    1,
+    1
+   ]
+  },
+  {
+   "word": "correction",
+   "hex": "#900085",
+   "rgb": [
+    144,
+    0,
+    133
+   ],
+   "adj_hex": "#7f0075",
+   "adj_rgb": [
+    127,
+    0,
+    117
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "correlation",
+   "hex": "#900087",
+   "rgb": [
+    144,
+    0,
+    135
+   ],
+   "adj_hex": "#7c0075",
+   "adj_rgb": [
+    124,
+    0,
+    117
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "moonshine_corr",
+   "hex": "#900086",
+   "rgb": [
+    144,
+    0,
+    134
+   ],
+   "adj_hex": "#7f0076",
+   "adj_rgb": [
+    127,
+    0,
+    118
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "cost",
+   "hex": "#900082",
+   "rgb": [
+    144,
+    0,
+    130
+   ],
+   "adj_hex": "#820075",
+   "adj_rgb": [
+    130,
+    0,
+    117
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    1,
+    1
+   ]
+  },
+  {
+   "word": "p",
+   "hex": "#900291",
+   "rgb": [
+    144,
+    2,
+    145
+   ],
+   "adj_hex": "#7c017d",
+   "adj_rgb": [
+    124,
+    1,
+    125
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "t_cos",
+   "hex": "#900081",
+   "rgb": [
+    144,
+    0,
+    129
+   ],
+   "adj_hex": "#820074",
+   "adj_rgb": [
+    130,
+    0,
+    116
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    1,
+    1
+   ]
+  },
+  {
+   "word": "counter",
+   "hex": "#900080",
+   "rgb": [
+    144,
+    0,
+    128
+   ],
+   "adj_hex": "#850076",
+   "adj_rgb": [
+    133,
+    0,
+    118
+   ],
+   "nrci": 0.8953,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 3,
+   "quadrants": [
+    2,
+    0,
+    1,
+    0
+   ]
+  },
+  {
+   "word": "crack_density",
+   "hex": "#900180",
+   "rgb": [
+    144,
+    1,
+    128
+   ],
+   "adj_hex": "#820073",
+   "adj_rgb": [
+    130,
+    0,
+    115
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    2,
+    0
+   ]
+  },
+  {
+   "word": "crossover",
+   "hex": "#900181",
+   "rgb": [
+    144,
+    1,
+    129
+   ],
+   "adj_hex": "#7f0072",
+   "adj_rgb": [
+    127,
+    0,
+    114
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    2,
+    1
+   ]
+  },
+  {
+   "word": "cross_section_max",
+   "hex": "#900183",
+   "rgb": [
+    144,
+    1,
+    131
+   ],
+   "adj_hex": "#7c0071",
+   "adj_rgb": [
+    124,
+    0,
+    113
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "crv_multiplier",
+   "hex": "#900182",
+   "rgb": [
+    144,
+    1,
+    130
+   ],
+   "adj_hex": "#7f0073",
+   "adj_rgb": [
+    127,
+    0,
+    115
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    2,
+    1
+   ]
+  },
+  {
+   "word": "crystallinity",
+   "hex": "#900186",
+   "rgb": [
+    144,
+    1,
+    134
+   ],
+   "adj_hex": "#7c0074",
+   "adj_rgb": [
+    124,
+    0,
+    116
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "crystal_system",
+   "hex": "#900187",
+   "rgb": [
+    144,
+    1,
+    135
+   ],
+   "adj_hex": "#7a0072",
+   "adj_rgb": [
+    122,
+    0,
+    114
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "crystal",
+   "hex": "#900185",
+   "rgb": [
+    144,
+    1,
+    133
+   ],
+   "adj_hex": "#7c0073",
+   "adj_rgb": [
+    124,
+    0,
+    115
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "Periodic arrangement of atoms with long-range order.",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "dt_csc",
+   "hex": "#900184",
+   "rgb": [
+    144,
+    1,
+    132
+   ],
+   "adj_hex": "#7f0074",
+   "adj_rgb": [
+    127,
+    0,
+    116
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    2,
+    1
+   ]
+  },
+  {
+   "word": "cubic_err_h",
+   "hex": "#90018c",
+   "rgb": [
+    144,
+    1,
+    140
+   ],
+   "adj_hex": "#7c0079",
+   "adj_rgb": [
+    124,
+    0,
+    121
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "curvature",
+   "hex": "#90018d",
+   "rgb": [
+    144,
+    1,
+    141
+   ],
+   "adj_hex": "#7a0077",
+   "adj_rgb": [
+    122,
+    0,
+    119
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "Local measure of departure from flatness.",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "cutoff",
+   "hex": "#90018f",
+   "rgb": [
+    144,
+    1,
+    143
+   ],
+   "adj_hex": "#780077",
+   "adj_rgb": [
+    120,
+    0,
+    119
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "cyclic",
+   "hex": "#90018e",
+   "rgb": [
+    144,
+    1,
+    142
+   ],
+   "adj_hex": "#7a0078",
+   "adj_rgb": [
+    122,
+    0,
+    120
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "decay",
+   "hex": "#900601",
+   "rgb": [
+    144,
+    6,
+    1
+   ],
+   "adj_hex": "#7f0500",
+   "adj_rgb": [
+    127,
+    5,
+    0
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    2,
+    1
+   ]
+  },
+  {
+   "word": "volume_deficit ~ syndrome_weight <",
+   "hex": "#90018b",
+   "rgb": [
+    144,
+    1,
+    139
+   ],
+   "adj_hex": "#7a0076",
+   "adj_rgb": [
+    122,
+    0,
+    118
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "mole_definition",
+   "hex": "#900189",
+   "rgb": [
+    144,
+    1,
+    137
+   ],
+   "adj_hex": "#7c0076",
+   "adj_rgb": [
+    124,
+    0,
+    118
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "si_definition",
+   "hex": "#900188",
+   "rgb": [
+    144,
+    1,
+    136
+   ],
+   "adj_hex": "#7f0078",
+   "adj_rgb": [
+    127,
+    0,
+    120
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    2,
+    1
+   ]
+  },
+  {
+   "word": "degree",
+   "hex": "#900198",
+   "rgb": [
+    144,
+    1,
+    152
+   ],
+   "adj_hex": "#7c0083",
+   "adj_rgb": [
+    124,
+    0,
+    131
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "glucose_delta",
+   "hex": "#900199",
+   "rgb": [
+    144,
+    1,
+    153
+   ],
+   "adj_hex": "#7a0082",
+   "adj_rgb": [
+    122,
+    0,
+    130
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "delta",
+   "hex": "#90019b",
+   "rgb": [
+    144,
+    1,
+    155
+   ],
+   "adj_hex": "#780081",
+   "adj_rgb": [
+    120,
+    0,
+    129
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "delta_nrci",
+   "hex": "#90019a",
+   "rgb": [
+    144,
+    1,
+    154
+   ],
+   "adj_hex": "#7a0082",
+   "adj_rgb": [
+    122,
+    0,
+    130
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "delta_tax",
+   "hex": "#90019e",
+   "rgb": [
+    144,
+    1,
+    158
+   ],
+   "adj_hex": "#780083",
+   "adj_rgb": [
+    120,
+    0,
+    131
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "tax_delta",
+   "hex": "#90019f",
+   "rgb": [
+    144,
+    1,
+    159
+   ],
+   "adj_hex": "#750082",
+   "adj_rgb": [
+    117,
+    0,
+    130
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    2,
+    5
+   ]
+  },
+  {
+   "word": "delta_ca",
+   "hex": "#90019d",
+   "rgb": [
+    144,
+    1,
+    157
+   ],
+   "adj_hex": "#780082",
+   "adj_rgb": [
+    120,
+    0,
+    130
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "delta_g",
+   "hex": "#90019c",
+   "rgb": [
+    144,
+    1,
+    156
+   ],
+   "adj_hex": "#7a0084",
+   "adj_rgb": [
+    122,
+    0,
+    132
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "density_gas",
+   "hex": "#900194",
+   "rgb": [
+    144,
+    1,
+    148
+   ],
+   "adj_hex": "#7c0080",
+   "adj_rgb": [
+    124,
+    0,
+    128
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "depth",
+   "hex": "#900195",
+   "rgb": [
+    144,
+    1,
+    149
+   ],
+   "adj_hex": "#7a007e",
+   "adj_rgb": [
+    122,
+    0,
+    126
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "design",
+   "hex": "#900197",
+   "rgb": [
+    144,
+    1,
+    151
+   ],
+   "adj_hex": "#78007d",
+   "adj_rgb": [
+    120,
+    0,
+    125
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "detected",
+   "hex": "#900196",
+   "rgb": [
+    144,
+    1,
+    150
+   ],
+   "adj_hex": "#7a007f",
+   "adj_rgb": [
+    122,
+    0,
+    127
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "diagonal",
+   "hex": "#900192",
+   "rgb": [
+    144,
+    1,
+    146
+   ],
+   "adj_hex": "#7c007e",
+   "adj_rgb": [
+    124,
+    0,
+    126
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "diameter",
+   "hex": "#900193",
+   "rgb": [
+    144,
+    1,
+    147
+   ],
+   "adj_hex": "#7a007c",
+   "adj_rgb": [
+    122,
+    0,
+    124
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "t_dilation",
+   "hex": "#900191",
+   "rgb": [
+    144,
+    1,
+    145
+   ],
+   "adj_hex": "#7c007d",
+   "adj_rgb": [
+    124,
+    0,
+    125
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "t_dil",
+   "hex": "#900190",
+   "rgb": [
+    144,
+    1,
+    144
+   ],
+   "adj_hex": "#7f007f",
+   "adj_rgb": [
+    127,
+    0,
+    127
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    2,
+    1
+   ]
+  },
+  {
+   "word": "dimensionless",
+   "hex": "#9001b0",
+   "rgb": [
+    144,
+    1,
+    176
+   ],
+   "adj_hex": "#7c0098",
+   "adj_rgb": [
+    124,
+    0,
+    152
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "monster_dim",
+   "hex": "#9001b1",
+   "rgb": [
+    144,
+    1,
+    177
+   ],
+   "adj_hex": "#7a0096",
+   "adj_rgb": [
+    122,
+    0,
+    150
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "dipole",
+   "hex": "#9001b3",
+   "rgb": [
+    144,
+    1,
+    179
+   ],
+   "adj_hex": "#780095",
+   "adj_rgb": [
+    120,
+    0,
+    149
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "max_discount",
+   "hex": "#9001b2",
+   "rgb": [
+    144,
+    1,
+    178
+   ],
+   "adj_hex": "#7a0097",
+   "adj_rgb": [
+    122,
+    0,
+    151
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "discovery",
+   "hex": "#9001b6",
+   "rgb": [
+    144,
+    1,
+    182
+   ],
+   "adj_hex": "#780097",
+   "adj_rgb": [
+    120,
+    0,
+    151
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "disruption",
+   "hex": "#9001b7",
+   "rgb": [
+    144,
+    1,
+    183
+   ],
+   "adj_hex": "#750095",
+   "adj_rgb": [
+    117,
+    0,
+    149
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    2,
+    5
+   ]
+  },
+  {
+   "word": "hamming_distance",
+   "hex": "#9001b5",
+   "rgb": [
+    144,
+    1,
+    181
+   ],
+   "adj_hex": "#780096",
+   "adj_rgb": [
+    120,
+    0,
+    150
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "distinction",
+   "hex": "#9001b4",
+   "rgb": [
+    144,
+    1,
+    180
+   ],
+   "adj_hex": "#7a0098",
+   "adj_rgb": [
+    122,
+    0,
+    152
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "distortion",
+   "hex": "#9001bc",
+   "rgb": [
+    144,
+    1,
+    188
+   ],
+   "adj_hex": "#78009c",
+   "adj_rgb": [
+    120,
+    0,
+    156
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "distribution",
+   "hex": "#9001bd",
+   "rgb": [
+    144,
+    1,
+    189
+   ],
+   "adj_hex": "#75009a",
+   "adj_rgb": [
+    117,
+    0,
+    154
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    2,
+    5
+   ]
+  },
+  {
+   "word": "lattice_dist",
+   "hex": "#9001bf",
+   "rgb": [
+    144,
+    1,
+    191
+   ],
+   "adj_hex": "#730099",
+   "adj_rgb": [
+    115,
+    0,
+    153
+   ],
+   "nrci": 0.7196,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 10,
+   "quadrants": [
+    2,
+    0,
+    2,
+    6
+   ]
+  },
+  {
+   "word": "mean_dist",
+   "hex": "#9001be",
+   "rgb": [
+    144,
+    1,
+    190
+   ],
+   "adj_hex": "#75009b",
+   "adj_rgb": [
+    117,
+    0,
+    155
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    2,
+    5
+   ]
+  },
+  {
+   "word": "dna_only",
+   "hex": "#9001ba",
+   "rgb": [
+    144,
+    1,
+    186
+   ],
+   "adj_hex": "#78009b",
+   "adj_rgb": [
+    120,
+    0,
+    155
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "d_dock + w_syndrome >",
+   "hex": "#9001bb",
+   "rgb": [
+    144,
+    1,
+    187
+   ],
+   "adj_hex": "#750099",
+   "adj_rgb": [
+    117,
+    0,
+    153
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    2,
+    5
+   ]
+  },
+  {
+   "word": "dqi",
+   "hex": "#9001b9",
+   "rgb": [
+    144,
+    1,
+    185
+   ],
+   "adj_hex": "#78009a",
+   "adj_rgb": [
+    120,
+    0,
+    154
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "observer_drag",
+   "hex": "#9001b8",
+   "rgb": [
+    144,
+    1,
+    184
+   ],
+   "adj_hex": "#7a009c",
+   "adj_rgb": [
+    122,
+    0,
+    156
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "drag_red",
+   "hex": "#9001a8",
+   "rgb": [
+    144,
+    1,
+    168
+   ],
+   "adj_hex": "#7c0091",
+   "adj_rgb": [
+    124,
+    0,
+    145
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "physical_drift<",
+   "hex": "#9001a9",
+   "rgb": [
+    144,
+    1,
+    169
+   ],
+   "adj_hex": "#7a008f",
+   "adj_rgb": [
+    122,
+    0,
+    143
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "shadow_drift>",
+   "hex": "#9001ab",
+   "rgb": [
+    144,
+    1,
+    171
+   ],
+   "adj_hex": "#78008e",
+   "adj_rgb": [
+    120,
+    0,
+    142
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "duality",
+   "hex": "#9001aa",
+   "rgb": [
+    144,
+    1,
+    170
+   ],
+   "adj_hex": "#7a0090",
+   "adj_rgb": [
+    122,
+    0,
+    144
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "ecc",
+   "hex": "#9001ae",
+   "rgb": [
+    144,
+    1,
+    174
+   ],
+   "adj_hex": "#780091",
+   "adj_rgb": [
+    120,
+    0,
+    145
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "edges",
+   "hex": "#9001af",
+   "rgb": [
+    144,
+    1,
+    175
+   ],
+   "adj_hex": "#75008f",
+   "adj_rgb": [
+    117,
+    0,
+    143
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    2,
+    5
+   ]
+  },
+  {
+   "word": "horizon_eff",
+   "hex": "#9001ad",
+   "rgb": [
+    144,
+    1,
+    173
+   ],
+   "adj_hex": "#780090",
+   "adj_rgb": [
+    120,
+    0,
+    144
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "nrci_eff",
+   "hex": "#9001ac",
+   "rgb": [
+    144,
+    1,
+    172
+   ],
+   "adj_hex": "#7a0092",
+   "adj_rgb": [
+    122,
+    0,
+    146
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "h_eff",
+   "hex": "#9001a4",
+   "rgb": [
+    144,
+    1,
+    164
+   ],
+   "adj_hex": "#7c008e",
+   "adj_rgb": [
+    124,
+    0,
+    142
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "k_eff",
+   "hex": "#9001a5",
+   "rgb": [
+    144,
+    1,
+    165
+   ],
+   "adj_hex": "#7a008c",
+   "adj_rgb": [
+    122,
+    0,
+    140
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "eigenvalue",
+   "hex": "#9001a7",
+   "rgb": [
+    144,
+    1,
+    167
+   ],
+   "adj_hex": "#78008b",
+   "adj_rgb": [
+    120,
+    0,
+    139
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "Scalar associated with an eigenfunction by a linear operator.",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "hamming",
+   "hex": "#90016e",
+   "rgb": [
+    144,
+    1,
+    110
+   ],
+   "adj_hex": "#78005b",
+   "adj_rgb": [
+    120,
+    0,
+    91
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "electron_ratio",
+   "hex": "#9001a2",
+   "rgb": [
+    144,
+    1,
+    162
+   ],
+   "adj_hex": "#7c008c",
+   "adj_rgb": [
+    124,
+    0,
+    140
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "v_emergent",
+   "hex": "#9001a3",
+   "rgb": [
+    144,
+    1,
+    163
+   ],
+   "adj_hex": "#7a008a",
+   "adj_rgb": [
+    122,
+    0,
+    138
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "resonant iff hamming",
+   "hex": "#9001a1",
+   "rgb": [
+    144,
+    1,
+    161
+   ],
+   "adj_hex": "#7c008b",
+   "adj_rgb": [
+    124,
+    0,
+    139
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "energy_release",
+   "hex": "#9001a0",
+   "rgb": [
+    144,
+    1,
+    160
+   ],
+   "adj_hex": "#7f008d",
+   "adj_rgb": [
+    127,
+    0,
+    141
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    2,
+    1
+   ]
+  },
+  {
+   "word": "energy_in",
+   "hex": "#9001e0",
+   "rgb": [
+    144,
+    1,
+    224
+   ],
+   "adj_hex": "#7c00c2",
+   "adj_rgb": [
+    124,
+    0,
+    194
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    3,
+    1
+   ]
+  },
+  {
+   "word": "entropy",
+   "hex": "#9001e1",
+   "rgb": [
+    144,
+    1,
+    225
+   ],
+   "adj_hex": "#7a00bf",
+   "adj_rgb": [
+    122,
+    0,
+    191
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    3,
+    2
+   ]
+  },
+  {
+   "word": "ent",
+   "hex": "#9001e2",
+   "rgb": [
+    144,
+    1,
+    226
+   ],
+   "adj_hex": "#7a00c0",
+   "adj_rgb": [
+    122,
+    0,
+    192
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    3,
+    2
+   ]
+  },
+  {
+   "word": "envelope",
+   "hex": "#9001e6",
+   "rgb": [
+    144,
+    1,
+    230
+   ],
+   "adj_hex": "#7800bf",
+   "adj_rgb": [
+    120,
+    0,
+    191
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    3,
+    3
+   ]
+  },
+  {
+   "word": "epsilon",
+   "hex": "#9001e7",
+   "rgb": [
+    144,
+    1,
+    231
+   ],
+   "adj_hex": "#7500bd",
+   "adj_rgb": [
+    117,
+    0,
+    189
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    3,
+    4
+   ]
+  },
+  {
+   "word": "epsilon_0",
+   "hex": "#9001e5",
+   "rgb": [
+    144,
+    1,
+    229
+   ],
+   "adj_hex": "#7800be",
+   "adj_rgb": [
+    120,
+    0,
+    190
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    3,
+    3
+   ]
+  },
+  {
+   "word": "eps",
+   "hex": "#9001e4",
+   "rgb": [
+    144,
+    1,
+    228
+   ],
+   "adj_hex": "#7a00c1",
+   "adj_rgb": [
+    122,
+    0,
+    193
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    3,
+    2
+   ]
+  },
+  {
+   "word": "equilibrium",
+   "hex": "#900602",
+   "rgb": [
+    144,
+    6,
+    2
+   ],
+   "adj_hex": "#7f0501",
+   "adj_rgb": [
+    127,
+    5,
+    1
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    2,
+    1
+   ]
+  },
+  {
+   "word": "global_error",
+   "hex": "#9001ed",
+   "rgb": [
+    144,
+    1,
+    237
+   ],
+   "adj_hex": "#7500c1",
+   "adj_rgb": [
+    117,
+    0,
+    193
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    3,
+    4
+   ]
+  },
+  {
+   "word": "proton_error",
+   "hex": "#9001ef",
+   "rgb": [
+    144,
+    1,
+    239
+   ],
+   "adj_hex": "#7300c0",
+   "adj_rgb": [
+    115,
+    0,
+    192
+   ],
+   "nrci": 0.7196,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 10,
+   "quadrants": [
+    2,
+    0,
+    3,
+    5
+   ]
+  },
+  {
+   "word": "error_ae",
+   "hex": "#9001ee",
+   "rgb": [
+    144,
+    1,
+    238
+   ],
+   "adj_hex": "#7500c2",
+   "adj_rgb": [
+    117,
+    0,
+    194
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    3,
+    4
+   ]
+  },
+  {
+   "word": "lattice_err_mu",
+   "hex": "#9001ea",
+   "rgb": [
+    144,
+    1,
+    234
+   ],
+   "adj_hex": "#7800c3",
+   "adj_rgb": [
+    120,
+    0,
+    195
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    3,
+    3
+   ]
+  },
+  {
+   "word": "triadic_err_p",
+   "hex": "#9001eb",
+   "rgb": [
+    144,
+    1,
+    235
+   ],
+   "adj_hex": "#7500c0",
+   "adj_rgb": [
+    117,
+    0,
+    192
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    3,
+    4
+   ]
+  },
+  {
+   "word": "essential",
+   "hex": "#9001e9",
+   "rgb": [
+    144,
+    1,
+    233
+   ],
+   "adj_hex": "#7800c2",
+   "adj_rgb": [
+    120,
+    0,
+    194
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    3,
+    3
+   ]
+  },
+  {
+   "word": "eta",
+   "hex": "#9001e8",
+   "rgb": [
+    144,
+    1,
+    232
+   ],
+   "adj_hex": "#7a00c5",
+   "adj_rgb": [
+    122,
+    0,
+    197
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    3,
+    2
+   ]
+  },
+  {
+   "word": "exact",
+   "hex": "#9001f8",
+   "rgb": [
+    144,
+    1,
+    248
+   ],
+   "adj_hex": "#7800ce",
+   "adj_rgb": [
+    120,
+    0,
+    206
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    3,
+    3
+   ]
+  },
+  {
+   "word": "exec_time",
+   "hex": "#9001f9",
+   "rgb": [
+    144,
+    1,
+    249
+   ],
+   "adj_hex": "#7500cb",
+   "adj_rgb": [
+    117,
+    0,
+    203
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    3,
+    4
+   ]
+  },
+  {
+   "word": "exponent",
+   "hex": "#9001fb",
+   "rgb": [
+    144,
+    1,
+    251
+   ],
+   "adj_hex": "#7300c9",
+   "adj_rgb": [
+    115,
+    0,
+    201
+   ],
+   "nrci": 0.7196,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 10,
+   "quadrants": [
+    2,
+    0,
+    3,
+    5
+   ]
+  },
+  {
+   "word": "faces",
+   "hex": "#9001fa",
+   "rgb": [
+    144,
+    1,
+    250
+   ],
+   "adj_hex": "#7500cc",
+   "adj_rgb": [
+    117,
+    0,
+    204
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    3,
+    4
+   ]
+  },
+  {
+   "word": "g_factor",
+   "hex": "#9001fe",
+   "rgb": [
+    144,
+    1,
+    254
+   ],
+   "adj_hex": "#7300cc",
+   "adj_rgb": [
+    115,
+    0,
+    204
+   ],
+   "nrci": 0.7196,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 10,
+   "quadrants": [
+    2,
+    0,
+    3,
+    5
+   ]
+  },
+  {
+   "word": "ferrimagnetic",
+   "hex": "#9001ff",
+   "rgb": [
+    144,
+    1,
+    255
+   ],
+   "adj_hex": "#7100c9",
+   "adj_rgb": [
+    113,
+    0,
+    201
+   ],
+   "nrci": 0.7,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 11,
+   "quadrants": [
+    2,
+    0,
+    3,
+    6
+   ]
+  },
+  {
+   "word": "gain_fes2",
+   "hex": "#9001fd",
+   "rgb": [
+    144,
+    1,
+    253
+   ],
+   "adj_hex": "#7300cb",
+   "adj_rgb": [
+    115,
+    0,
+    203
+   ],
+   "nrci": 0.7196,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 10,
+   "quadrants": [
+    2,
+    0,
+    3,
+    5
+   ]
+  },
+  {
+   "word": "field",
+   "hex": "#9001fc",
+   "rgb": [
+    144,
+    1,
+    252
+   ],
+   "adj_hex": "#7500ce",
+   "adj_rgb": [
+    117,
+    0,
+    206
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "A function assigning a value to every point of spacetime.",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    3,
+    4
+   ]
+  },
+  {
+   "word": "unified_field",
+   "hex": "#9001f4",
+   "rgb": [
+    144,
+    1,
+    244
+   ],
+   "adj_hex": "#7800cb",
+   "adj_rgb": [
+    120,
+    0,
+    203
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    3,
+    3
+   ]
+  },
+  {
+   "word": "filter_radius",
+   "hex": "#9001f5",
+   "rgb": [
+    144,
+    1,
+    245
+   ],
+   "adj_hex": "#7500c8",
+   "adj_rgb": [
+    117,
+    0,
+    200
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    3,
+    4
+   ]
+  },
+  {
+   "word": "v_final",
+   "hex": "#9001f7",
+   "rgb": [
+    144,
+    1,
+    247
+   ],
+   "adj_hex": "#7300c6",
+   "adj_rgb": [
+    115,
+    0,
+    198
+   ],
+   "nrci": 0.7196,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 10,
+   "quadrants": [
+    2,
+    0,
+    3,
+    5
+   ]
+  },
+  {
+   "word": "flammable",
+   "hex": "#9001f6",
+   "rgb": [
+    144,
+    1,
+    246
+   ],
+   "adj_hex": "#7500c9",
+   "adj_rgb": [
+    117,
+    0,
+    201
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    3,
+    4
+   ]
+  },
+  {
+   "word": "flavors",
+   "hex": "#9001f2",
+   "rgb": [
+    144,
+    1,
+    242
+   ],
+   "adj_hex": "#7800c9",
+   "adj_rgb": [
+    120,
+    0,
+    201
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    3,
+    3
+   ]
+  },
+  {
+   "word": "flavor",
+   "hex": "#9001f3",
+   "rgb": [
+    144,
+    1,
+    243
+   ],
+   "adj_hex": "#7500c6",
+   "adj_rgb": [
+    117,
+    0,
+    198
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    3,
+    4
+   ]
+  },
+  {
+   "word": "noise_floor",
+   "hex": "#9001f1",
+   "rgb": [
+    144,
+    1,
+    241
+   ],
+   "adj_hex": "#7800c8",
+   "adj_rgb": [
+    120,
+    0,
+    200
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    3,
+    3
+   ]
+  },
+  {
+   "word": "folded",
+   "hex": "#9001f0",
+   "rgb": [
+    144,
+    1,
+    240
+   ],
+   "adj_hex": "#7a00cb",
+   "adj_rgb": [
+    122,
+    0,
+    203
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    3,
+    2
+   ]
+  },
+  {
+   "word": "fold_limit",
+   "hex": "#9001d0",
+   "rgb": [
+    144,
+    1,
+    208
+   ],
+   "adj_hex": "#7c00b4",
+   "adj_rgb": [
+    124,
+    0,
+    180
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    3,
+    1
+   ]
+  },
+  {
+   "word": "pivot",
+   "hex": "#90037e",
+   "rgb": [
+    144,
+    3,
+    126
+   ],
+   "adj_hex": "#730265",
+   "adj_rgb": [
+    115,
+    2,
+    101
+   ],
+   "nrci": 0.7196,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 10,
+   "quadrants": [
+    2,
+    0,
+    3,
+    5
+   ]
+  },
+  {
+   "word": "fold_ratio",
+   "hex": "#9001d3",
+   "rgb": [
+    144,
+    1,
+    211
+   ],
+   "adj_hex": "#7800af",
+   "adj_rgb": [
+    120,
+    0,
+    175
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    3,
+    3
+   ]
+  },
+  {
+   "word": "accelerate field",
+   "hex": "#9001d2",
+   "rgb": [
+    144,
+    1,
+    210
+   ],
+   "adj_hex": "#7a00b2",
+   "adj_rgb": [
+    122,
+    0,
+    178
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    3,
+    2
+   ]
+  },
+  {
+   "word": "bind",
+   "hex": "#9001d6",
+   "rgb": [
+    144,
+    1,
+    214
+   ],
+   "adj_hex": "#7800b2",
+   "adj_rgb": [
+    120,
+    0,
+    178
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    3,
+    3
+   ]
+  },
+  {
+   "word": "channel",
+   "hex": "#9001d7",
+   "rgb": [
+    144,
+    1,
+    215
+   ],
+   "adj_hex": "#7500af",
+   "adj_rgb": [
+    117,
+    0,
+    175
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    3,
+    4
+   ]
+  },
+  {
+   "word": "release",
+   "hex": "#9001d5",
+   "rgb": [
+    144,
+    1,
+    213
+   ],
+   "adj_hex": "#7800b1",
+   "adj_rgb": [
+    120,
+    0,
+    177
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    3,
+    3
+   ]
+  },
+  {
+   "word": "shield",
+   "hex": "#9003da",
+   "rgb": [
+    144,
+    3,
+    218
+   ],
+   "adj_hex": "#7502b2",
+   "adj_rgb": [
+    117,
+    2,
+    178
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    4,
+    3
+   ]
+  },
+  {
+   "word": "stability_formula",
+   "hex": "#9001dc",
+   "rgb": [
+    144,
+    1,
+    220
+   ],
+   "adj_hex": "#7800b7",
+   "adj_rgb": [
+    120,
+    0,
+    183
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    3,
+    3
+   ]
+  },
+  {
+   "word": "formula_unit",
+   "hex": "#9001dd",
+   "rgb": [
+    144,
+    1,
+    221
+   ],
+   "adj_hex": "#7500b4",
+   "adj_rgb": [
+    117,
+    0,
+    180
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    3,
+    4
+   ]
+  },
+  {
+   "word": "formula",
+   "hex": "#9001df",
+   "rgb": [
+    144,
+    1,
+    223
+   ],
+   "adj_hex": "#7300b3",
+   "adj_rgb": [
+    115,
+    0,
+    179
+   ],
+   "nrci": 0.7196,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 10,
+   "quadrants": [
+    2,
+    0,
+    3,
+    5
+   ]
+  },
+  {
+   "word": "cl_fraction",
+   "hex": "#9001de",
+   "rgb": [
+    144,
+    1,
+    222
+   ],
+   "adj_hex": "#7500b5",
+   "adj_rgb": [
+    117,
+    0,
+    181
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    3,
+    4
+   ]
+  },
+  {
+   "word": "dm_fraction",
+   "hex": "#9001da",
+   "rgb": [
+    144,
+    1,
+    218
+   ],
+   "adj_hex": "#7800b5",
+   "adj_rgb": [
+    120,
+    0,
+    181
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    3,
+    3
+   ]
+  },
+  {
+   "word": "frequency",
+   "hex": "#9001db",
+   "rgb": [
+    144,
+    1,
+    219
+   ],
+   "adj_hex": "#7500b3",
+   "adj_rgb": [
+    117,
+    0,
+    179
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    3,
+    4
+   ]
+  },
+  {
+   "word": "friction",
+   "hex": "#9001d9",
+   "rgb": [
+    144,
+    1,
+    217
+   ],
+   "adj_hex": "#7800b4",
+   "adj_rgb": [
+    120,
+    0,
+    180
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    3,
+    3
+   ]
+  },
+  {
+   "word": "fuel",
+   "hex": "#9001d8",
+   "rgb": [
+    144,
+    1,
+    216
+   ],
+   "adj_hex": "#7a00b7",
+   "adj_rgb": [
+    122,
+    0,
+    183
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    3,
+    2
+   ]
+  },
+  {
+   "word": "gain_h2o",
+   "hex": "#9001c8",
+   "rgb": [
+    144,
+    1,
+    200
+   ],
+   "adj_hex": "#7c00ad",
+   "adj_rgb": [
+    124,
+    0,
+    173
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    3,
+    1
+   ]
+  },
+  {
+   "word": "gamma",
+   "hex": "#9001c9",
+   "rgb": [
+    144,
+    1,
+    201
+   ],
+   "adj_hex": "#7a00aa",
+   "adj_rgb": [
+    122,
+    0,
+    170
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    3,
+    2
+   ]
+  },
+  {
+   "word": "mass_gap",
+   "hex": "#9001cb",
+   "rgb": [
+    144,
+    1,
+    203
+   ],
+   "adj_hex": "#7800a9",
+   "adj_rgb": [
+    120,
+    0,
+    169
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    3,
+    3
+   ]
+  },
+  {
+   "word": "gap",
+   "hex": "#9001ca",
+   "rgb": [
+    144,
+    1,
+    202
+   ],
+   "adj_hex": "#7a00ab",
+   "adj_rgb": [
+    122,
+    0,
+    171
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    3,
+    2
+   ]
+  },
+  {
+   "word": "gap^-1",
+   "hex": "#9001ce",
+   "rgb": [
+    144,
+    1,
+    206
+   ],
+   "adj_hex": "#7800ab",
+   "adj_rgb": [
+    120,
+    0,
+    171
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    3,
+    3
+   ]
+  },
+  {
+   "word": "ideal_gas",
+   "hex": "#9001cf",
+   "rgb": [
+    144,
+    1,
+    207
+   ],
+   "adj_hex": "#7500a9",
+   "adj_rgb": [
+    117,
+    0,
+    169
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    3,
+    4
+   ]
+  },
+  {
+   "word": "gate",
+   "hex": "#9001cd",
+   "rgb": [
+    144,
+    1,
+    205
+   ],
+   "adj_hex": "#7800aa",
+   "adj_rgb": [
+    120,
+    0,
+    170
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    3,
+    3
+   ]
+  },
+  {
+   "word": "p_gci_max",
+   "hex": "#9001cc",
+   "rgb": [
+    144,
+    1,
+    204
+   ],
+   "adj_hex": "#7a00ad",
+   "adj_rgb": [
+    122,
+    0,
+    173
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    3,
+    2
+   ]
+  },
+  {
+   "word": "p_gci",
+   "hex": "#9001c4",
+   "rgb": [
+    144,
+    1,
+    196
+   ],
+   "adj_hex": "#7c00aa",
+   "adj_rgb": [
+    124,
+    0,
+    170
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    3,
+    1
+   ]
+  },
+  {
+   "word": "gears",
+   "hex": "#9001c5",
+   "rgb": [
+    144,
+    1,
+    197
+   ],
+   "adj_hex": "#7a00a7",
+   "adj_rgb": [
+    122,
+    0,
+    167
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    3,
+    2
+   ]
+  },
+  {
+   "word": "index",
+   "hex": "#9001c7",
+   "rgb": [
+    144,
+    1,
+    199
+   ],
+   "adj_hex": "#7800a5",
+   "adj_rgb": [
+    120,
+    0,
+    165
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    3,
+    3
+   ]
+  },
+  {
+   "word": "iteration",
+   "hex": "#9001c6",
+   "rgb": [
+    144,
+    1,
+    198
+   ],
+   "adj_hex": "#7a00a8",
+   "adj_rgb": [
+    122,
+    0,
+    168
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    3,
+    2
+   ]
+  },
+  {
+   "word": "magnitude",
+   "hex": "#9001c2",
+   "rgb": [
+    144,
+    1,
+    194
+   ],
+   "adj_hex": "#7c00a8",
+   "adj_rgb": [
+    124,
+    0,
+    168
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "Euclidean length (L2 norm) of a vector.",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    3,
+    1
+   ]
+  },
+  {
+   "word": "maximum",
+   "hex": "#9001c3",
+   "rgb": [
+    144,
+    1,
+    195
+   ],
+   "adj_hex": "#7a00a5",
+   "adj_rgb": [
+    122,
+    0,
+    165
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    3,
+    2
+   ]
+  },
+  {
+   "word": "minimum",
+   "hex": "#9001c1",
+   "rgb": [
+    144,
+    1,
+    193
+   ],
+   "adj_hex": "#7c00a7",
+   "adj_rgb": [
+    124,
+    0,
+    167
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    3,
+    1
+   ]
+  },
+  {
+   "word": "mode",
+   "hex": "#9001c0",
+   "rgb": [
+    144,
+    1,
+    192
+   ],
+   "adj_hex": "#7f00aa",
+   "adj_rgb": [
+    127,
+    0,
+    170
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    3,
+    0
+   ]
+  },
+  {
+   "word": "null",
+   "hex": "#900140",
+   "rgb": [
+    144,
+    1,
+    64
+   ],
+   "adj_hex": "#820039",
+   "adj_rgb": [
+    130,
+    0,
+    57
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    2,
+    0
+   ]
+  },
+  {
+   "word": "order",
+   "hex": "#900635",
+   "rgb": [
+    144,
+    6,
+    53
+   ],
+   "adj_hex": "#78052c",
+   "adj_rgb": [
+    120,
+    5,
+    44
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "origin",
+   "hex": "#900143",
+   "rgb": [
+    144,
+    1,
+    67
+   ],
+   "adj_hex": "#7c003a",
+   "adj_rgb": [
+    124,
+    0,
+    58
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "parameter",
+   "hex": "#900142",
+   "rgb": [
+    144,
+    1,
+    66
+   ],
+   "adj_hex": "#7f003a",
+   "adj_rgb": [
+    127,
+    0,
+    58
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    2,
+    1
+   ]
+  },
+  {
+   "word": "path",
+   "hex": "#900638",
+   "rgb": [
+    144,
+    6,
+    56
+   ],
+   "adj_hex": "#7a052f",
+   "adj_rgb": [
+    122,
+    5,
+    47
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "pattern",
+   "hex": "#900612",
+   "rgb": [
+    144,
+    6,
+    18
+   ],
+   "adj_hex": "#7c050f",
+   "adj_rgb": [
+    124,
+    5,
+    15
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "pole",
+   "hex": "#900145",
+   "rgb": [
+    144,
+    1,
+    69
+   ],
+   "adj_hex": "#7c003b",
+   "adj_rgb": [
+    124,
+    0,
+    59
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "range",
+   "hex": "#900144",
+   "rgb": [
+    144,
+    1,
+    68
+   ],
+   "adj_hex": "#7f003c",
+   "adj_rgb": [
+    127,
+    0,
+    60
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    2,
+    1
+   ]
+  },
+  {
+   "word": "reflection",
+   "hex": "#90014c",
+   "rgb": [
+    144,
+    1,
+    76
+   ],
+   "adj_hex": "#7c0041",
+   "adj_rgb": [
+    124,
+    0,
+    65
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "regime",
+   "hex": "#90034d",
+   "rgb": [
+    144,
+    3,
+    77
+   ],
+   "adj_hex": "#780240",
+   "adj_rgb": [
+    120,
+    2,
+    64
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    3,
+    3
+   ]
+  },
+  {
+   "word": "resolution",
+   "hex": "#90014f",
+   "rgb": [
+    144,
+    1,
+    79
+   ],
+   "adj_hex": "#780041",
+   "adj_rgb": [
+    120,
+    0,
+    65
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "root",
+   "hex": "#90014e",
+   "rgb": [
+    144,
+    1,
+    78
+   ],
+   "adj_hex": "#7a0042",
+   "adj_rgb": [
+    122,
+    0,
+    66
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "step",
+   "hex": "#90014b",
+   "rgb": [
+    144,
+    1,
+    75
+   ],
+   "adj_hex": "#7a003f",
+   "adj_rgb": [
+    122,
+    0,
+    63
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "sum",
+   "hex": "#90020e",
+   "rgb": [
+    144,
+    2,
+    14
+   ],
+   "adj_hex": "#7c010c",
+   "adj_rgb": [
+    124,
+    1,
+    12
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "surface",
+   "hex": "#900148",
+   "rgb": [
+    144,
+    1,
+    72
+   ],
+   "adj_hex": "#7f003f",
+   "adj_rgb": [
+    127,
+    0,
+    63
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    2,
+    1
+   ]
+  },
+  {
+   "word": "symbol",
+   "hex": "#900158",
+   "rgb": [
+    144,
+    1,
+    88
+   ],
+   "adj_hex": "#7c004c",
+   "adj_rgb": [
+    124,
+    0,
+    76
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "tensor",
+   "hex": "#900159",
+   "rgb": [
+    144,
+    1,
+    89
+   ],
+   "adj_hex": "#7a004b",
+   "adj_rgb": [
+    122,
+    0,
+    75
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "Multilinear geometric object transforming under coordinate changes.",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "topology",
+   "hex": "#90015b",
+   "rgb": [
+    144,
+    1,
+    91
+   ],
+   "adj_hex": "#78004b",
+   "adj_rgb": [
+    120,
+    0,
+    75
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "trace",
+   "hex": "#90015a",
+   "rgb": [
+    144,
+    1,
+    90
+   ],
+   "adj_hex": "#7a004c",
+   "adj_rgb": [
+    122,
+    0,
+    76
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "Sum of diagonal elements of a matrix.",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "trend",
+   "hex": "#90015e",
+   "rgb": [
+    144,
+    1,
+    94
+   ],
+   "adj_hex": "#78004e",
+   "adj_rgb": [
+    120,
+    0,
+    78
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "uniform",
+   "hex": "#90015f",
+   "rgb": [
+    144,
+    1,
+    95
+   ],
+   "adj_hex": "#75004d",
+   "adj_rgb": [
+    117,
+    0,
+    77
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    2,
+    5
+   ]
+  },
+  {
+   "word": "variance",
+   "hex": "#90015d",
+   "rgb": [
+    144,
+    1,
+    93
+   ],
+   "adj_hex": "#78004d",
+   "adj_rgb": [
+    120,
+    0,
+    77
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "Second central moment of a probability distribution.",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "j",
+   "hex": "#90015c",
+   "rgb": [
+    144,
+    1,
+    92
+   ],
+   "adj_hex": "#7a004e",
+   "adj_rgb": [
+    122,
+    0,
+    78
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "q",
+   "hex": "#900154",
+   "rgb": [
+    144,
+    1,
+    84
+   ],
+   "adj_hex": "#7c0048",
+   "adj_rgb": [
+    124,
+    0,
+    72
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "zero",
+   "hex": "#900234",
+   "rgb": [
+    144,
+    2,
+    52
+   ],
+   "adj_hex": "#7c012d",
+   "adj_rgb": [
+    124,
+    1,
+    45
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "gen",
+   "hex": "#900157",
+   "rgb": [
+    144,
+    1,
+    87
+   ],
+   "adj_hex": "#780048",
+   "adj_rgb": [
+    120,
+    0,
+    72
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "geo",
+   "hex": "#900156",
+   "rgb": [
+    144,
+    1,
+    86
+   ],
+   "adj_hex": "#7a0049",
+   "adj_rgb": [
+    122,
+    0,
+    73
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "stability_global",
+   "hex": "#900153",
+   "rgb": [
+    144,
+    1,
+    83
+   ],
+   "adj_hex": "#7a0046",
+   "adj_rgb": [
+    122,
+    0,
+    70
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "h_glob",
+   "hex": "#900151",
+   "rgb": [
+    144,
+    1,
+    81
+   ],
+   "adj_hex": "#7c0046",
+   "adj_rgb": [
+    124,
+    0,
+    70
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "glucose_limit",
+   "hex": "#900150",
+   "rgb": [
+    144,
+    1,
+    80
+   ],
+   "adj_hex": "#7f0046",
+   "adj_rgb": [
+    127,
+    0,
+    70
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    2,
+    1
+   ]
+  },
+  {
+   "word": "nrci_glyph",
+   "hex": "#900170",
+   "rgb": [
+    144,
+    1,
+    112
+   ],
+   "adj_hex": "#7c0061",
+   "adj_rgb": [
+    124,
+    0,
+    97
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "v_gpu",
+   "hex": "#900171",
+   "rgb": [
+    144,
+    1,
+    113
+   ],
+   "adj_hex": "#7a0060",
+   "adj_rgb": [
+    122,
+    0,
+    96
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "gradient",
+   "hex": "#900173",
+   "rgb": [
+    144,
+    1,
+    115
+   ],
+   "adj_hex": "#78005f",
+   "adj_rgb": [
+    120,
+    0,
+    95
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "kappa",
+   "hex": "#900172",
+   "rgb": [
+    144,
+    1,
+    114
+   ],
+   "adj_hex": "#7a0060",
+   "adj_rgb": [
+    122,
+    0,
+    96
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "omega",
+   "hex": "#900176",
+   "rgb": [
+    144,
+    1,
+    118
+   ],
+   "adj_hex": "#780062",
+   "adj_rgb": [
+    120,
+    0,
+    98
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "psi",
+   "hex": "#900368",
+   "rgb": [
+    144,
+    3,
+    104
+   ],
+   "adj_hex": "#7a0258",
+   "adj_rgb": [
+    122,
+    2,
+    88
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    3,
+    2
+   ]
+  },
+  {
+   "word": "tau",
+   "hex": "#900175",
+   "rgb": [
+    144,
+    1,
+    117
+   ],
+   "adj_hex": "#780061",
+   "adj_rgb": [
+    120,
+    0,
+    97
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "mu",
+   "hex": "#900174",
+   "rgb": [
+    144,
+    1,
+    116
+   ],
+   "adj_hex": "#7a0062",
+   "adj_rgb": [
+    122,
+    0,
+    98
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "nu",
+   "hex": "#90017c",
+   "rgb": [
+    144,
+    1,
+    124
+   ],
+   "adj_hex": "#780067",
+   "adj_rgb": [
+    120,
+    0,
+    103
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "pi",
+   "hex": "#90017d",
+   "rgb": [
+    144,
+    1,
+    125
+   ],
+   "adj_hex": "#750066",
+   "adj_rgb": [
+    117,
+    0,
+    102
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    2,
+    5
+   ]
+  },
+  {
+   "word": "xi",
+   "hex": "#90017f",
+   "rgb": [
+    144,
+    1,
+    127
+   ],
+   "adj_hex": "#730066",
+   "adj_rgb": [
+    115,
+    0,
+    102
+   ],
+   "nrci": 0.7196,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 10,
+   "quadrants": [
+    2,
+    0,
+    2,
+    6
+   ]
+  },
+  {
+   "word": "zeta",
+   "hex": "#90017e",
+   "rgb": [
+    144,
+    1,
+    126
+   ],
+   "adj_hex": "#750067",
+   "adj_rgb": [
+    117,
+    0,
+    103
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    2,
+    5
+   ]
+  },
+  {
+   "word": "grid",
+   "hex": "#90017a",
+   "rgb": [
+    144,
+    1,
+    122
+   ],
+   "adj_hex": "#780065",
+   "adj_rgb": [
+    120,
+    0,
+    101
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "grip: strong",
+   "hex": "#90017b",
+   "rgb": [
+    144,
+    1,
+    123
+   ],
+   "adj_hex": "#750064",
+   "adj_rgb": [
+    117,
+    0,
+    100
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    2,
+    5
+   ]
+  },
+  {
+   "word": "ground_state",
+   "hex": "#900179",
+   "rgb": [
+    144,
+    1,
+    121
+   ],
+   "adj_hex": "#780064",
+   "adj_rgb": [
+    120,
+    0,
+    100
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "gwp",
+   "hex": "#900178",
+   "rgb": [
+    144,
+    1,
+    120
+   ],
+   "adj_hex": "#7a0065",
+   "adj_rgb": [
+    122,
+    0,
+    101
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "t_half",
+   "hex": "#900168",
+   "rgb": [
+    144,
+    1,
+    104
+   ],
+   "adj_hex": "#7c005a",
+   "adj_rgb": [
+    124,
+    0,
+    90
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "hammingdistance",
+   "hex": "#900169",
+   "rgb": [
+    144,
+    1,
+    105
+   ],
+   "adj_hex": "#7a0059",
+   "adj_rgb": [
+    122,
+    0,
+    89
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "hardness",
+   "hex": "#90016f",
+   "rgb": [
+    144,
+    1,
+    111
+   ],
+   "adj_hex": "#75005a",
+   "adj_rgb": [
+    117,
+    0,
+    90
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    2,
+    5
+   ]
+  },
+  {
+   "word": "harmonic",
+   "hex": "#90016d",
+   "rgb": [
+    144,
+    1,
+    109
+   ],
+   "adj_hex": "#78005a",
+   "adj_rgb": [
+    120,
+    0,
+    90
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "Integer-multiple frequency component.",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "hbar",
+   "hex": "#90016c",
+   "rgb": [
+    144,
+    1,
+    108
+   ],
+   "adj_hex": "#7a005b",
+   "adj_rgb": [
+    122,
+    0,
+    91
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "health",
+   "hex": "#900164",
+   "rgb": [
+    144,
+    1,
+    100
+   ],
+   "adj_hex": "#7c0056",
+   "adj_rgb": [
+    124,
+    0,
+    86
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "heal",
+   "hex": "#90027e",
+   "rgb": [
+    144,
+    2,
+    126
+   ],
+   "adj_hex": "#750167",
+   "adj_rgb": [
+    117,
+    1,
+    103
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    2,
+    5
+   ]
+  },
+  {
+   "word": "k_helix",
+   "hex": "#900167",
+   "rgb": [
+    144,
+    1,
+    103
+   ],
+   "adj_hex": "#780055",
+   "adj_rgb": [
+    120,
+    0,
+    85
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "hierarchy",
+   "hex": "#900166",
+   "rgb": [
+    144,
+    1,
+    102
+   ],
+   "adj_hex": "#7a0056",
+   "adj_rgb": [
+    122,
+    0,
+    86
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "higgs/z",
+   "hex": "#900162",
+   "rgb": [
+    144,
+    1,
+    98
+   ],
+   "adj_hex": "#7c0055",
+   "adj_rgb": [
+    124,
+    0,
+    85
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "hole",
+   "hex": "#900163",
+   "rgb": [
+    144,
+    1,
+    99
+   ],
+   "adj_hex": "#7a0054",
+   "adj_rgb": [
+    122,
+    0,
+    84
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "s_holo",
+   "hex": "#900161",
+   "rgb": [
+    144,
+    1,
+    97
+   ],
+   "adj_hex": "#7c0054",
+   "adj_rgb": [
+    124,
+    0,
+    84
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "horizon",
+   "hex": "#900160",
+   "rgb": [
+    144,
+    1,
+    96
+   ],
+   "adj_hex": "#7f0055",
+   "adj_rgb": [
+    127,
+    0,
+    85
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    2,
+    1
+   ]
+  },
+  {
+   "word": "hybrid",
+   "hex": "#900120",
+   "rgb": [
+    144,
+    1,
+    32
+   ],
+   "adj_hex": "#82001c",
+   "adj_rgb": [
+    130,
+    0,
+    28
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    1,
+    1
+   ]
+  },
+  {
+   "word": "hygroscopic",
+   "hex": "#900121",
+   "rgb": [
+    144,
+    1,
+    33
+   ],
+   "adj_hex": "#7f001d",
+   "adj_rgb": [
+    127,
+    0,
+    29
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "parity",
+   "hex": "#900123",
+   "rgb": [
+    144,
+    1,
+    35
+   ],
+   "adj_hex": "#7c001e",
+   "adj_rgb": [
+    124,
+    0,
+    30
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "snap",
+   "hex": "#9003d3",
+   "rgb": [
+    144,
+    3,
+    211
+   ],
+   "adj_hex": "#7502ac",
+   "adj_rgb": [
+    117,
+    2,
+    172
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    4,
+    3
+   ]
+  },
+  {
+   "word": "q_identity",
+   "hex": "#900126",
+   "rgb": [
+    144,
+    1,
+    38
+   ],
+   "adj_hex": "#7c0020",
+   "adj_rgb": [
+    124,
+    0,
+    32
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "nrci -> 1.0 iff l_moire",
+   "hex": "#900127",
+   "rgb": [
+    144,
+    1,
+    39
+   ],
+   "adj_hex": "#7a0021",
+   "adj_rgb": [
+    122,
+    0,
+    33
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "peak",
+   "hex": "#900125",
+   "rgb": [
+    144,
+    1,
+    37
+   ],
+   "adj_hex": "#7c0020",
+   "adj_rgb": [
+    124,
+    0,
+    32
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "temp_ignition",
+   "hex": "#900124",
+   "rgb": [
+    144,
+    1,
+    36
+   ],
+   "adj_hex": "#7f001f",
+   "adj_rgb": [
+    127,
+    0,
+    31
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "refractive_index",
+   "hex": "#90012c",
+   "rgb": [
+    144,
+    1,
+    44
+   ],
+   "adj_hex": "#7c0026",
+   "adj_rgb": [
+    124,
+    0,
+    38
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "vector_index",
+   "hex": "#90012d",
+   "rgb": [
+    144,
+    1,
+    45
+   ],
+   "adj_hex": "#7a0026",
+   "adj_rgb": [
+    122,
+    0,
+    38
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "decode",
+   "hex": "#900634",
+   "rgb": [
+    144,
+    6,
+    52
+   ],
+   "adj_hex": "#7a052c",
+   "adj_rgb": [
+    122,
+    5,
+    44
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    2,
+    3
+   ]
+  },
+  {
+   "word": "encode",
+   "hex": "#90063c",
+   "rgb": [
+    144,
+    6,
+    60
+   ],
+   "adj_hex": "#780532",
+   "adj_rgb": [
+    120,
+    5,
+    50
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "word": "encrypt",
+   "hex": "#900129",
+   "rgb": [
+    144,
+    1,
+    41
+   ],
+   "adj_hex": "#7c0023",
+   "adj_rgb": [
+    124,
+    0,
+    35
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "receive",
+   "hex": "#900138",
+   "rgb": [
+    144,
+    1,
+    56
+   ],
+   "adj_hex": "#7c0030",
+   "adj_rgb": [
+    124,
+    0,
+    48
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "retrieve",
+   "hex": "#900139",
+   "rgb": [
+    144,
+    1,
+    57
+   ],
+   "adj_hex": "#7a0030",
+   "adj_rgb": [
+    122,
+    0,
+    48
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "store",
+   "hex": "#90013b",
+   "rgb": [
+    144,
+    1,
+    59
+   ],
+   "adj_hex": "#780031",
+   "adj_rgb": [
+    120,
+    0,
+    49
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    1,
+    5
+   ]
+  },
+  {
+   "word": "transmit",
+   "hex": "#90013a",
+   "rgb": [
+    144,
+    1,
+    58
+   ],
+   "adj_hex": "#7a0031",
+   "adj_rgb": [
+    122,
+    0,
+    49
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "s_info !",
+   "hex": "#90013e",
+   "rgb": [
+    144,
+    1,
+    62
+   ],
+   "adj_hex": "#780033",
+   "adj_rgb": [
+    120,
+    0,
+    51
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    1,
+    5
+   ]
+  },
+  {
+   "word": "v_inf",
+   "hex": "#90013f",
+   "rgb": [
+    144,
+    1,
+    63
+   ],
+   "adj_hex": "#750033",
+   "adj_rgb": [
+    117,
+    0,
+    51
+   ],
+   "nrci": 0.7404,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 9,
+   "quadrants": [
+    2,
+    0,
+    1,
+    6
+   ]
+  },
+  {
+   "word": "integral",
+   "hex": "#90013d",
+   "rgb": [
+    144,
+    1,
+    61
+   ],
+   "adj_hex": "#780032",
+   "adj_rgb": [
+    120,
+    0,
+    50
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "Antiderivative or sum over a continuum.",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    1,
+    5
+   ]
+  },
+  {
+   "word": "integrity",
+   "hex": "#90013c",
+   "rgb": [
+    144,
+    1,
+    60
+   ],
+   "adj_hex": "#7a0032",
+   "adj_rgb": [
+    122,
+    0,
+    50
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "triad_invariant",
+   "hex": "#900134",
+   "rgb": [
+    144,
+    1,
+    52
+   ],
+   "adj_hex": "#7c002d",
+   "adj_rgb": [
+    124,
+    0,
+    45
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "invariant",
+   "hex": "#900135",
+   "rgb": [
+    144,
+    1,
+    53
+   ],
+   "adj_hex": "#7a002d",
+   "adj_rgb": [
+    122,
+    0,
+    45
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "inverse",
+   "hex": "#900137",
+   "rgb": [
+    144,
+    1,
+    55
+   ],
+   "adj_hex": "#78002d",
+   "adj_rgb": [
+    120,
+    0,
+    45
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    1,
+    5
+   ]
+  },
+  {
+   "word": "",
+   "hex": "#900136",
+   "rgb": [
+    144,
+    1,
+    54
+   ],
+   "adj_hex": "#7a002d",
+   "adj_rgb": [
+    122,
+    0,
+    45
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "y_inv",
+   "hex": "#900132",
+   "rgb": [
+    144,
+    1,
+    50
+   ],
+   "adj_hex": "#7c002b",
+   "adj_rgb": [
+    124,
+    0,
+    43
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "y * y_inv",
+   "hex": "#900133",
+   "rgb": [
+    144,
+    1,
+    51
+   ],
+   "adj_hex": "#7a002b",
+   "adj_rgb": [
+    122,
+    0,
+    43
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "ion",
+   "hex": "#900131",
+   "rgb": [
+    144,
+    1,
+    49
+   ],
+   "adj_hex": "#7c002a",
+   "adj_rgb": [
+    124,
+    0,
+    42
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "isomorphism",
+   "hex": "#900130",
+   "rgb": [
+    144,
+    1,
+    48
+   ],
+   "adj_hex": "#7f002a",
+   "adj_rgb": [
+    127,
+    0,
+    42
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "isospin",
+   "hex": "#900110",
+   "rgb": [
+    144,
+    1,
+    16
+   ],
+   "adj_hex": "#82000e",
+   "adj_rgb": [
+    130,
+    0,
+    14
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    1,
+    1
+   ]
+  },
+  {
+   "word": "\u03b1_jera",
+   "hex": "#900111",
+   "rgb": [
+    144,
+    1,
+    17
+   ],
+   "adj_hex": "#7f000f",
+   "adj_rgb": [
+    127,
+    0,
+    15
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "tax_joined",
+   "hex": "#900113",
+   "rgb": [
+    144,
+    1,
+    19
+   ],
+   "adj_hex": "#7c0010",
+   "adj_rgb": [
+    124,
+    0,
+    16
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "kernel",
+   "hex": "#900112",
+   "rgb": [
+    144,
+    1,
+    18
+   ],
+   "adj_hex": "#7f000f",
+   "adj_rgb": [
+    127,
+    0,
+    15
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "ksp",
+   "hex": "#900116",
+   "rgb": [
+    144,
+    1,
+    22
+   ],
+   "adj_hex": "#7c0013",
+   "adj_rgb": [
+    124,
+    0,
+    19
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "lambda",
+   "hex": "#900117",
+   "rgb": [
+    144,
+    1,
+    23
+   ],
+   "adj_hex": "#7a0013",
+   "adj_rgb": [
+    122,
+    0,
+    19
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "newton_law",
+   "hex": "#900115",
+   "rgb": [
+    144,
+    1,
+    21
+   ],
+   "adj_hex": "#7c0012",
+   "adj_rgb": [
+    124,
+    0,
+    18
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "law_c",
+   "hex": "#900114",
+   "rgb": [
+    144,
+    1,
+    20
+   ],
+   "adj_hex": "#7f0011",
+   "adj_rgb": [
+    127,
+    0,
+    17
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "layers",
+   "hex": "#90011c",
+   "rgb": [
+    144,
+    1,
+    28
+   ],
+   "adj_hex": "#7c0018",
+   "adj_rgb": [
+    124,
+    0,
+    24
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "layer_max <",
+   "hex": "#90011d",
+   "rgb": [
+    144,
+    1,
+    29
+   ],
+   "adj_hex": "#7a0018",
+   "adj_rgb": [
+    122,
+    0,
+    24
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "layer",
+   "hex": "#90011f",
+   "rgb": [
+    144,
+    1,
+    31
+   ],
+   "adj_hex": "#780019",
+   "adj_rgb": [
+    120,
+    0,
+    25
+   ],
+   "nrci": 0.7623,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 8,
+   "quadrants": [
+    2,
+    0,
+    1,
+    5
+   ]
+  },
+  {
+   "word": "leakage",
+   "hex": "#90011e",
+   "rgb": [
+    144,
+    1,
+    30
+   ],
+   "adj_hex": "#7a0019",
+   "adj_rgb": [
+    122,
+    0,
+    25
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "leak",
+   "hex": "#90011a",
+   "rgb": [
+    144,
+    1,
+    26
+   ],
+   "adj_hex": "#7c0016",
+   "adj_rgb": [
+    124,
+    0,
+    22
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "lepton",
+   "hex": "#90011b",
+   "rgb": [
+    144,
+    1,
+    27
+   ],
+   "adj_hex": "#7a0016",
+   "adj_rgb": [
+    122,
+    0,
+    22
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "lifting",
+   "hex": "#900119",
+   "rgb": [
+    144,
+    1,
+    25
+   ],
+   "adj_hex": "#7c0015",
+   "adj_rgb": [
+    124,
+    0,
+    21
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "massless_limit",
+   "hex": "#900118",
+   "rgb": [
+    144,
+    1,
+    24
+   ],
+   "adj_hex": "#7f0015",
+   "adj_rgb": [
+    127,
+    0,
+    21
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "nrci_limit",
+   "hex": "#900108",
+   "rgb": [
+    144,
+    1,
+    8
+   ],
+   "adj_hex": "#820007",
+   "adj_rgb": [
+    130,
+    0,
+    7
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    1,
+    1
+   ]
+  },
+  {
+   "word": "tax_limit",
+   "hex": "#900109",
+   "rgb": [
+    144,
+    1,
+    9
+   ],
+   "adj_hex": "#7f0007",
+   "adj_rgb": [
+    127,
+    0,
+    7
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "lim",
+   "hex": "#90010b",
+   "rgb": [
+    144,
+    1,
+    11
+   ],
+   "adj_hex": "#7c0009",
+   "adj_rgb": [
+    124,
+    0,
+    9
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "riemann_line",
+   "hex": "#90010a",
+   "rgb": [
+    144,
+    1,
+    10
+   ],
+   "adj_hex": "#7f0008",
+   "adj_rgb": [
+    127,
+    0,
+    8
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "line",
+   "hex": "#90022d",
+   "rgb": [
+    144,
+    2,
+    45
+   ],
+   "adj_hex": "#7a0126",
+   "adj_rgb": [
+    122,
+    1,
+    38
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "link",
+   "hex": "#90010f",
+   "rgb": [
+    144,
+    1,
+    15
+   ],
+   "adj_hex": "#7a000c",
+   "adj_rgb": [
+    122,
+    0,
+    12
+   ],
+   "nrci": 0.7857,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 7,
+   "quadrants": [
+    2,
+    0,
+    1,
+    4
+   ]
+  },
+  {
+   "word": "load",
+   "hex": "#90010d",
+   "rgb": [
+    144,
+    1,
+    13
+   ],
+   "adj_hex": "#7c000b",
+   "adj_rgb": [
+    124,
+    0,
+    11
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "tilt_lock",
+   "hex": "#900104",
+   "rgb": [
+    144,
+    1,
+    4
+   ],
+   "adj_hex": "#820003",
+   "adj_rgb": [
+    130,
+    0,
+    3
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    1,
+    1
+   ]
+  },
+  {
+   "word": "lock",
+   "hex": "#900105",
+   "rgb": [
+    144,
+    1,
+    5
+   ],
+   "adj_hex": "#7f0004",
+   "adj_rgb": [
+    127,
+    0,
+    4
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "logic",
+   "hex": "#900107",
+   "rgb": [
+    144,
+    1,
+    7
+   ],
+   "adj_hex": "#7c0006",
+   "adj_rgb": [
+    124,
+    0,
+    6
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "word": "nrci_loop",
+   "hex": "#900106",
+   "rgb": [
+    144,
+    1,
+    6
+   ],
+   "adj_hex": "#7f0005",
+   "adj_rgb": [
+    127,
+    0,
+    5
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "lorentzian_norm",
+   "hex": "#900102",
+   "rgb": [
+    144,
+    1,
+    2
+   ],
+   "adj_hex": "#820001",
+   "adj_rgb": [
+    130,
+    0,
+    1
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    1,
+    1
+   ]
+  },
+  {
+   "word": "lustre",
+   "hex": "#900103",
+   "rgb": [
+    144,
+    1,
+    3
+   ],
+   "adj_hex": "#7f0002",
+   "adj_rgb": [
+    127,
+    0,
+    2
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "word": "t_macro",
+   "hex": "#900101",
+   "rgb": [
+    144,
+    1,
+    1
+   ],
+   "adj_hex": "#820000",
+   "adj_rgb": [
+    130,
+    0,
+    0
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    1,
+    1
+   ]
+  },
+  {
+   "word": "magnetic_moment",
+   "hex": "#900100",
+   "rgb": [
+    144,
+    1,
+    0
+   ],
+   "adj_hex": "#850000",
+   "adj_rgb": [
+    133,
+    0,
+    0
+   ],
+   "nrci": 0.8953,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 3,
+   "quadrants": [
+    2,
+    0,
+    1,
+    0
+   ]
+  },
+  {
+   "word": "magnetic",
+   "hex": "#900300",
+   "rgb": [
+    144,
+    3,
+    0
+   ],
+   "adj_hex": "#820200",
+   "adj_rgb": [
+    130,
+    2,
+    0
+   ],
+   "nrci": 0.8651,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 4,
+   "quadrants": [
+    2,
+    0,
+    2,
+    0
+   ]
+  },
+  {
+   "word": "manifold",
+   "hex": "#900301",
+   "rgb": [
+    144,
+    3,
+    1
+   ],
+   "adj_hex": "#7f0200",
+   "adj_rgb": [
+    127,
+    2,
+    0
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "Topological space locally homeomorphic to Euclidean space.",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    2,
+    1
+   ]
+  },
+  {
+   "word": "mapping",
+   "hex": "#900303",
+   "rgb": [
+    144,
+    3,
+    3
+   ],
+   "adj_hex": "#7c0202",
+   "adj_rgb": [
+    124,
+    2,
+    2
+   ],
+   "nrci": 0.8105,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 6,
+   "quadrants": [
+    2,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "word": "mass_shadow >",
+   "hex": "#900302",
+   "rgb": [
+    144,
+    3,
+    2
+   ],
+   "adj_hex": "#7f0201",
+   "adj_rgb": [
+    127,
+    2,
+    1
+   ],
+   "nrci": 0.8369,
+   "mog": "I_Topology",
+   "definition": "",
+   "hamming_weight": 5,
+   "quadrants": [
+    2,
+    0,
+    2,
+    1
+   ]
+  }
+ ],
+ "mog_summary": {
+  "A_Energy": {
+   "count": 14,
+   "avg_color": "#4e666a",
+   "avg_nrci": 0.7309,
+   "sample_words": [
+    "plus",
+    "minus",
+    "hamiltonian",
+    "lagrangian",
+    "energy"
+   ]
+  },
+  "A_Flux": {
+   "count": 13,
+   "avg_color": "#937567",
+   "avg_nrci": 0.7249,
+   "sample_words": [
+    "dispersion",
+    "propagator",
+    "convection",
+    "tunneling",
+    "geodesic"
+   ]
+  },
+  "A_Force": {
+   "count": 12,
+   "avg_color": "#736a92",
+   "avg_nrci": 0.7169,
+   "sample_words": [
+    "times",
+    "squeezed",
+    "requires",
+    "transforms",
+    "strong"
+   ]
+  },
+  "A_Resonance": {
+   "count": 2,
+   "avg_color": "#26bebd",
+   "avg_nrci": 0.6892,
+   "sample_words": [
+    "benard",
+    "minus_thousand"
+   ]
+  },
+  "A_Spin": {
+   "count": 2,
+   "avg_color": "#006ff0",
+   "avg_nrci": 0.7196,
+   "sample_words": [
+    "oam",
+    "helicity"
+   ]
+  },
+  "A_Velocity": {
+   "count": 5,
+   "avg_color": "#704e9d",
+   "avg_nrci": 0.6972,
+   "sample_words": [
+    "derivative",
+    "relativistic",
+    "gradient_of",
+    "fourteen",
+    "ninety"
+   ]
+  },
+  "I_Complexity": {
+   "count": 8,
+   "avg_color": "#2baf86",
+   "avg_nrci": 0.7452,
+   "sample_words": [
+    "holevo",
+    "holevo information",
+    "minus_five",
+    "minus_thirteen",
+    "minus_fifteen"
+   ]
+  },
+  "I_Connectivity": {
+   "count": 24,
+   "avg_color": "#4c854e",
+   "avg_nrci": 0.7361,
+   "sample_words": [
+    "coupling",
+    "hubbard",
+    "interaction",
+    "form",
+    "has"
+   ]
+  },
+  "I_Density": {
+   "count": 7,
+   "avg_color": "#49cd8e",
+   "avg_nrci": 0.7099,
+   "sample_words": [
+    "polarizability",
+    "minus_six",
+    "minus_eight",
+    "minus_ten",
+    "minus_twelve"
+   ]
+  },
+  "I_Dimension": {
+   "count": 18,
+   "avg_color": "#50997e",
+   "avg_nrci": 0.7407,
+   "sample_words": [
+    "leech",
+    "dimension",
+    "metric",
+    "brane",
+    "ads"
+   ]
+  },
+  "I_Symmetry": {
+   "count": 21,
+   "avg_color": "#6f8e5b",
+   "avg_nrci": 0.7447,
+   "sample_words": [
+    "golay",
+    "codeword",
+    "commutes",
+    "encodes",
+    "pure"
+   ]
+  },
+  "I_Topology": {
+   "count": 1319,
+   "avg_color": "#811a77",
+   "avg_nrci": 0.7616,
+   "sample_words": [
+    "complexity",
+    "difference",
+    "emergence",
+    "equivalence",
+    "identity"
+   ]
+  },
+  "M_Charge": {
+   "count": 3,
+   "avg_color": "#8b5e86",
+   "avg_nrci": 0.7025,
+   "sample_words": [
+    "charge",
+    "partition function",
+    "sixty"
+   ]
+  },
+  "M_Count": {
+   "count": 13,
+   "avg_color": "#b19a6a",
+   "avg_nrci": 0.6737,
+   "sample_words": [
+    "one",
+    "two",
+    "three",
+    "four",
+    "five"
+   ]
+  },
+  "M_Mass": {
+   "count": 5,
+   "avg_color": "#077871",
+   "avg_nrci": 0.7169,
+   "sample_words": [
+    "mass",
+    "particle",
+    "quark",
+    "hadron",
+    "massive"
+   ]
+  },
+  "M_Space": {
+   "count": 6,
+   "avg_color": "#b74a70",
+   "avg_nrci": 0.6522,
+   "sample_words": [
+    "space",
+    "twelve",
+    "sixteen",
+    "eighteen",
+    "seventy"
+   ]
+  },
+  "M_Thermal": {
+   "count": 3,
+   "avg_color": "#846350",
+   "avg_nrci": 0.6502,
+   "sample_words": [
+    "thermal",
+    "twenty",
+    "minus_thirty"
+   ]
+  },
+  "M_Time": {
+   "count": 6,
+   "avg_color": "#d97a67",
+   "avg_nrci": 0.6344,
+   "sample_words": [
+    "time",
+    "waiting time",
+    "thirteen",
+    "seventeen",
+    "nineteen"
+   ]
+  },
+  "P_Coherence": {
+   "count": 10,
+   "avg_color": "#6b7490",
+   "avg_nrci": 0.6664,
+   "sample_words": [
+    "equals",
+    "coherent",
+    "is",
+    "stabilizes",
+    "defines"
+   ]
+  },
+  "P_Limit": {
+   "count": 17,
+   "avg_color": "#24884f",
+   "avg_nrci": 0.7392,
+   "sample_words": [
+    "renormalization",
+    "regularization",
+    "regulator",
+    "critical",
+    "constant"
+   ]
+  },
+  "P_Phase": {
+   "count": 11,
+   "avg_color": "#786e51",
+   "avg_nrci": 0.7415,
+   "sample_words": [
+    "ground",
+    "projector",
+    "become",
+    "phase",
+    "mott"
+   ]
+  },
+  "P_Probability": {
+   "count": 7,
+   "avg_color": "#48965a",
+   "avg_nrci": 0.7306,
+   "sample_words": [
+    "expectation",
+    "predicts",
+    "gamma distribution",
+    "expectation value",
+    "density matrix"
+   ]
+  },
+  "P_Ratio": {
+   "count": 12,
+   "avg_color": "#276a57",
+   "avg_nrci": 0.7255,
+   "sample_words": [
+    "measures",
+    "scales",
+    "beta function",
+    "wineland parameter",
+    "efolds"
+   ]
+  },
+  "P_Tax": {
+   "count": 9,
+   "avg_color": "#2e856c",
+   "avg_nrci": 0.7121,
+   "sample_words": [
+    "instability",
+    "dephasing",
+    "dissipation",
+    "lindblad",
+    "dissipator"
+   ]
+  }
+ },
+ "edge_gradients": [
+  {
+   "src": "hamiltonian",
+   "dst": "operator",
+   "label": "is_a",
+   "src_color": "#233fe0",
+   "dst_color": "#9002d1"
+  },
+  {
+   "src": "lagrangian",
+   "dst": "functional",
+   "label": "is_a",
+   "src_color": "#230929",
+   "dst_color": "#00cb70"
+  },
+  {
+   "src": "propagator",
+   "dst": "function",
+   "label": "is_a",
+   "src_color": "#fa46c2",
+   "dst_color": "#808870"
+  },
+  {
+   "src": "weyl anomaly",
+   "dst": "anomaly",
+   "label": "is_a",
+   "src_color": "#c08320",
+   "dst_color": "#7d37e9"
+  },
+  {
+   "src": "rayleigh number",
+   "dst": "number",
+   "label": "is_a",
+   "src_color": "#00995f",
+   "dst_color": "#a3cd64"
+  },
+  {
+   "src": "chern number",
+   "dst": "number",
+   "label": "is_a",
+   "src_color": "#034e30",
+   "dst_color": "#a3cd64"
+  },
+  {
+   "src": "parafermion",
+   "dst": "fermion",
+   "label": "is_a",
+   "src_color": "#031c10",
+   "dst_color": "#0f0f0e"
+  },
+  {
+   "src": "majorana",
+   "dst": "fermion",
+   "label": "is_a",
+   "src_color": "#999999",
+   "dst_color": "#0f0f0e"
+  },
+  {
+   "src": "quark",
+   "dst": "fermion",
+   "label": "is_a",
+   "src_color": "#066512",
+   "dst_color": "#0f0f0e"
+  },
+  {
+   "src": "gluon",
+   "dst": "boson",
+   "label": "is_a",
+   "src_color": "#3b6ad0",
+   "dst_color": "#0f0f0f"
+  },
+  {
+   "src": "density matrix",
+   "dst": "operator",
+   "label": "is_a",
+   "src_color": "#80414c",
+   "dst_color": "#9002d1"
+  },
+  {
+   "src": "commutator",
+   "dst": "operator",
+   "label": "is_a",
+   "src_color": "#333333",
+   "dst_color": "#9002d1"
+  },
+  {
+   "src": "anticommutator",
+   "dst": "operator",
+   "label": "is_a",
+   "src_color": "#333332",
+   "dst_color": "#9002d1"
+  },
+  {
+   "src": "ground state",
+   "dst": "state",
+   "label": "is_a",
+   "src_color": "#00b643",
+   "dst_color": "#9003fc"
+  },
+  {
+   "src": "coherent state",
+   "dst": "state",
+   "label": "is_a",
+   "src_color": "#405f4f",
+   "dst_color": "#9003fc"
+  },
+  {
+   "src": "squeezed state",
+   "dst": "state",
+   "label": "is_a",
+   "src_color": "#001b71",
+   "dst_color": "#9003fc"
+  },
+  {
+   "src": "projector",
+   "dst": "operator",
+   "label": "is_a",
+   "src_color": "#f2f673",
+   "dst_color": "#9002d1"
+  },
+  {
+   "src": "hadron",
+   "dst": "particle",
+   "label": "is_a",
+   "src_color": "#054c46",
+   "dst_color": "#0e9f7f"
+  },
+  {
+   "src": "partition function",
+   "dst": "functional",
+   "label": "is_a",
+   "src_color": "#3c7b60",
+   "dst_color": "#00cb70"
+  },
+  {
+   "src": "pion",
+   "dst": "meson",
+   "label": "is_a",
+   "src_color": "#c32100",
+   "dst_color": "#1b1b00"
+  },
+  {
+   "src": "matrix product",
+   "dst": "state",
+   "label": "is_a",
+   "src_color": "#034e30",
+   "dst_color": "#9003fc"
+  },
+  {
+   "src": "kraus operator",
+   "dst": "operator",
+   "label": "is_a",
+   "src_color": "#349a7c",
+   "dst_color": "#9002d1"
+  },
+  {
+   "src": "tetrad",
+   "dst": "connection",
+   "label": "is_a",
+   "src_color": "#031320",
+   "dst_color": "#037320"
+  },
+  {
+   "src": "ads",
+   "dst": "manifold",
+   "label": "is_a",
+   "src_color": "#5631d6",
+   "dst_color": "#900301"
+  },
+  {
+   "src": "brane",
+   "dst": "manifold",
+   "label": "is_a",
+   "src_color": "#40e0e8",
+   "dst_color": "#900301"
+  },
+  {
+   "src": "quantum metric",
+   "dst": "metric",
+   "label": "is_a",
+   "src_color": "#c06210",
+   "dst_color": "#458116"
+  },
+  {
+   "src": "hilbert space",
+   "dst": "manifold",
+   "label": "is_a",
+   "src_color": "#039770",
+   "dst_color": "#900301"
+  },
+  {
+   "src": "excited state",
+   "dst": "state",
+   "label": "is_a",
+   "src_color": "#82b403",
+   "dst_color": "#9003fc"
+  },
+  {
+   "src": "baryon",
+   "dst": "hadron",
+   "label": "is_a",
+   "src_color": "#900069",
+   "dst_color": "#054c46"
+  },
+  {
+   "src": "fermi liquid",
+   "dst": "state",
+   "label": "is_a",
+   "src_color": "#804d23",
+   "dst_color": "#9003fc"
+  },
+  {
+   "src": "beta function",
+   "dst": "function",
+   "label": "is_a",
+   "src_color": "#00b10f",
+   "dst_color": "#808870"
+  },
+  {
+   "src": "dot product",
+   "dst": "operator",
+   "label": "is_a",
+   "src_color": "#032070",
+   "dst_color": "#9002d1"
+  },
+  {
+   "src": "cross product",
+   "dst": "operator",
+   "label": "is_a",
+   "src_color": "#034e30",
+   "dst_color": "#9002d1"
+  },
+  {
+   "src": "path integral",
+   "dst": "integral",
+   "label": "is_a",
+   "src_color": "#40cd50",
+   "dst_color": "#90013d"
+  },
+  {
+   "src": "majorana",
+   "dst": "topological",
+   "label": "has_property",
+   "src_color": "#999999",
+   "dst_color": "#76ffa1"
+  },
+  {
+   "src": "weyl anomaly",
+   "dst": "conformal",
+   "label": "has_property",
+   "src_color": "#c08320",
+   "dst_color": "#62b0db"
+  },
+  {
+   "src": "quark",
+   "dst": "massive",
+   "label": "has_property",
+   "src_color": "#066512",
+   "dst_color": "#0174a2"
+  },
+  {
+   "src": "gluon",
+   "dst": "massless",
+   "label": "has_property",
+   "src_color": "#3b6ad0",
+   "dst_color": "#3f8af7"
+  },
+  {
+   "src": "photon",
+   "dst": "massless",
+   "label": "has_property",
+   "src_color": "#82b403",
+   "dst_color": "#3f8af7"
+  },
+  {
+   "src": "hubbard",
+   "dst": "strong",
+   "label": "has_property",
+   "src_color": "#96aad4",
+   "dst_color": "#b5dfe8"
+  },
+  {
+   "src": "parafermion",
+   "dst": "topological",
+   "label": "has_property",
+   "src_color": "#031c10",
+   "dst_color": "#76ffa1"
+  },
+  {
+   "src": "chern number",
+   "dst": "topological",
+   "label": "has_property",
+   "src_color": "#034e30",
+   "dst_color": "#76ffa1"
+  },
+  {
+   "src": "hatsugai-kohmoto",
+   "dst": "strong",
+   "label": "has_property",
+   "src_color": "#007ed2",
+   "dst_color": "#b5dfe8"
+  },
+  {
+   "src": "ads",
+   "dst": "holographic",
+   "label": "has_property",
+   "src_color": "#5631d6",
+   "dst_color": "#46a842"
+  },
+  {
+   "src": "squeezed state",
+   "dst": "quantum",
+   "label": "has_property",
+   "src_color": "#001b71",
+   "dst_color": "#e38e39"
+  },
+  {
+   "src": "coherent state",
+   "dst": "quantum",
+   "label": "has_property",
+   "src_color": "#405f4f",
+   "dst_color": "#e38e39"
+  },
+  {
+   "src": "rayleigh number",
+   "dst": "critical",
+   "label": "has_property",
+   "src_color": "#00995f",
+   "dst_color": "#389b47"
+  },
+  {
+   "src": "convection",
+   "dst": "critical",
+   "label": "has_property",
+   "src_color": "#e949a5",
+   "dst_color": "#389b47"
+  },
+  {
+   "src": "weyl",
+   "dst": "conformal",
+   "label": "has_property",
+   "src_color": "#7a5a4c",
+   "dst_color": "#62b0db"
+  },
+  {
+   "src": "qft",
+   "dst": "relativistic",
+   "label": "has_property",
+   "src_color": "#039300",
+   "dst_color": "#0012e2"
+  },
+  {
+   "src": "beta",
+   "dst": "coupling",
+   "label": "depends_on",
+   "src_color": "#900074",
+   "dst_color": "#8d5fde"
+  },
+  {
+   "src": "anomaly",
+   "dst": "dimension",
+   "label": "depends_on",
+   "src_color": "#7d37e9",
+   "dst_color": "#47ea29"
+  },
+  {
+   "src": "weyl anomaly",
+   "dst": "metric",
+   "label": "depends_on",
+   "src_color": "#c08320",
+   "dst_color": "#458116"
+  },
+  {
+   "src": "weyl anomaly",
+   "dst": "curvature",
+   "label": "depends_on",
+   "src_color": "#c08320",
+   "dst_color": "#90018d"
+  },
+  {
+   "src": "renormalization",
+   "dst": "regulator",
+   "label": "depends_on",
+   "src_color": "#23fc52",
+   "dst_color": "#28a605"
+  },
+  {
+   "src": "rayleigh number",
+   "dst": "prandtl",
+   "label": "depends_on",
+   "src_color": "#00995f",
+   "dst_color": "#00245f"
+  },
+  {
+   "src": "convection",
+   "dst": "rayleigh number",
+   "label": "depends_on",
+   "src_color": "#e949a5",
+   "dst_color": "#00995f"
+  },
+  {
+   "src": "parton",
+   "dst": "scale",
+   "label": "depends_on",
+   "src_color": "#03de00",
+   "dst_color": "#900636"
+  },
+  {
+   "src": "hubbard",
+   "dst": "tunneling",
+   "label": "depends_on",
+   "src_color": "#96aad4",
+   "dst_color": "#e7b1be"
+  },
+  {
+   "src": "hubbard",
+   "dst": "interaction",
+   "label": "depends_on",
+   "src_color": "#96aad4",
+   "dst_color": "#8e3c56"
+  },
+  {
+   "src": "beta",
+   "dst": "scaling",
+   "label": "depends_on",
+   "src_color": "#900074",
+   "dst_color": "#9003cd"
+  },
+  {
+   "src": "regularization",
+   "dst": "dimension",
+   "label": "depends_on",
+   "src_color": "#269dac",
+   "dst_color": "#47ea29"
+  },
+  {
+   "src": "rayleigh number",
+   "dst": "temperature",
+   "label": "depends_on",
+   "src_color": "#00995f",
+   "dst_color": "#900247"
+  },
+  {
+   "src": "dephasing",
+   "dst": "dissipator",
+   "label": "depends_on",
+   "src_color": "#005e7c",
+   "dst_color": "#00327c"
+  },
+  {
+   "src": "spin squeezing",
+   "dst": "variance",
+   "label": "depends_on",
+   "src_color": "#e0a040",
+   "dst_color": "#90015d"
+  },
+  {
+   "src": "wineland parameter",
+   "dst": "spin squeezing",
+   "label": "depends_on",
+   "src_color": "#00921f",
+   "dst_color": "#e0a040"
+  },
+  {
+   "src": "dglap",
+   "dst": "coupling",
+   "label": "depends_on",
+   "src_color": "#c09b02",
+   "dst_color": "#8d5fde"
+  },
+  {
+   "src": "loop",
+   "dst": "regularization",
+   "label": "depends_on",
+   "src_color": "#43e404",
+   "dst_color": "#269dac"
+  },
+  {
+   "src": "matching kernel",
+   "dst": "coupling",
+   "label": "depends_on",
+   "src_color": "#036388",
+   "dst_color": "#8d5fde"
+  },
+  {
+   "src": "beta function",
+   "dst": "coupling",
+   "label": "depends_on",
+   "src_color": "#00b10f",
+   "dst_color": "#8d5fde"
+  },
+  {
+   "src": "gamma distribution",
+   "dst": "waiting time",
+   "label": "depends_on",
+   "src_color": "#00d75c",
+   "dst_color": "#f0ac60"
+  },
+  {
+   "src": "growth rate",
+   "dst": "gamma distribution",
+   "label": "depends_on",
+   "src_color": "#282f6b",
+   "dst_color": "#00d75c"
+  },
+  {
+   "src": "holevo information",
+   "dst": "density matrix",
+   "label": "depends_on",
+   "src_color": "#029e44",
+   "dst_color": "#80414c"
+  },
+  {
+   "src": "hamiltonian",
+   "dst": "symmetry",
+   "label": "commutes_with",
+   "src_color": "#233fe0",
+   "dst_color": "#900611"
+  },
+  {
+   "src": "symmetry",
+   "dst": "hamiltonian",
+   "label": "commutes_with",
+   "src_color": "#900611",
+   "dst_color": "#233fe0"
+  },
+  {
+   "src": "projector",
+   "dst": "hamiltonian",
+   "label": "commutes_with",
+   "src_color": "#f2f673",
+   "dst_color": "#233fe0"
+  },
+  {
+   "src": "hamiltonian",
+   "dst": "projector",
+   "label": "commutes_with",
+   "src_color": "#233fe0",
+   "dst_color": "#f2f673"
+  },
+  {
+   "src": "density matrix",
+   "dst": "hamiltonian",
+   "label": "commutes_with",
+   "src_color": "#80414c",
+   "dst_color": "#233fe0"
+  },
+  {
+   "src": "hamiltonian",
+   "dst": "density matrix",
+   "label": "commutes_with",
+   "src_color": "#233fe0",
+   "dst_color": "#80414c"
+  },
+  {
+   "src": "number",
+   "dst": "hamiltonian",
+   "label": "commutes_with",
+   "src_color": "#a3cd64",
+   "dst_color": "#233fe0"
+  },
+  {
+   "src": "hamiltonian",
+   "dst": "number",
+   "label": "commutes_with",
+   "src_color": "#233fe0",
+   "dst_color": "#a3cd64"
+  },
+  {
+   "src": "spin",
+   "dst": "hamiltonian",
+   "label": "commutes_with",
+   "src_color": "#900277",
+   "dst_color": "#233fe0"
+  },
+  {
+   "src": "hamiltonian",
+   "dst": "spin",
+   "label": "commutes_with",
+   "src_color": "#233fe0",
+   "dst_color": "#900277"
+  },
+  {
+   "src": "rayleigh number",
+   "dst": "temperature",
+   "label": "scales_as",
+   "src_color": "#00995f",
+   "dst_color": "#900247"
+  },
+  {
+   "src": "propagator",
+   "dst": "momentum",
+   "label": "scales_as",
+   "src_color": "#fa46c2",
+   "dst_color": "#9002d8"
+  },
+  {
+   "src": "hubbard",
+   "dst": "tunneling",
+   "label": "scales_as",
+   "src_color": "#96aad4",
+   "dst_color": "#e7b1be"
+  },
+  {
+   "src": "dispersion",
+   "dst": "wavenumber",
+   "label": "scales_as",
+   "src_color": "#f107e4",
+   "dst_color": "#003950"
+  },
+  {
+   "src": "growth rate",
+   "dst": "coupling",
+   "label": "scales_as",
+   "src_color": "#282f6b",
+   "dst_color": "#8d5fde"
+  },
+  {
+   "src": "synchrotron",
+   "dst": "energy",
+   "label": "scales_as",
+   "src_color": "#f88000",
+   "dst_color": "#3442bf"
+  },
+  {
+   "src": "ads",
+   "dst": "bcft",
+   "label": "is_dual_to",
+   "src_color": "#5631d6",
+   "dst_color": "#034e30"
+  },
+  {
+   "src": "bcft",
+   "dst": "ads",
+   "label": "is_dual_to",
+   "src_color": "#034e30",
+   "dst_color": "#5631d6"
+  },
+  {
+   "src": "holographic",
+   "dst": "conformal",
+   "label": "is_dual_to",
+   "src_color": "#46a842",
+   "dst_color": "#62b0db"
+  },
+  {
+   "src": "conformal",
+   "dst": "holographic",
+   "label": "is_dual_to",
+   "src_color": "#62b0db",
+   "dst_color": "#46a842"
+  },
+  {
+   "src": "brane",
+   "dst": "boundary",
+   "label": "is_dual_to",
+   "src_color": "#40e0e8",
+   "dst_color": "#90063b"
+  },
+  {
+   "src": "boundary",
+   "dst": "brane",
+   "label": "is_dual_to",
+   "src_color": "#90063b",
+   "dst_color": "#40e0e8"
+  },
+  {
+   "src": "lamet",
+   "dst": "parton",
+   "label": "is_dual_to",
+   "src_color": "#036f00",
+   "dst_color": "#03de00"
+  },
+  {
+   "src": "parton",
+   "dst": "lamet",
+   "label": "is_dual_to",
+   "src_color": "#03de00",
+   "dst_color": "#036f00"
+  },
+  {
+   "src": "matrix product",
+   "dst": "tensor",
+   "label": "is_dual_to",
+   "src_color": "#034e30",
+   "dst_color": "#900159"
+  },
+  {
+   "src": "tensor",
+   "dst": "matrix product",
+   "label": "is_dual_to",
+   "src_color": "#900159",
+   "dst_color": "#034e30"
+  },
+  {
+   "src": "hamiltonian",
+   "dst": "time",
+   "label": "generates",
+   "src_color": "#233fe0",
+   "dst_color": "#cfcf78"
+  },
+  {
+   "src": "momentum",
+   "dst": "space",
+   "label": "generates",
+   "src_color": "#9002d8",
+   "dst_color": "#43aed8"
+  },
+  {
+   "src": "symmetry",
+   "dst": "anomaly",
+   "label": "generates",
+   "src_color": "#900611",
+   "dst_color": "#7d37e9"
+  },
+  {
+   "src": "renormalization",
+   "dst": "beta",
+   "label": "generates",
+   "src_color": "#23fc52",
+   "dst_color": "#900074"
+  },
+  {
+   "src": "dissipator",
+   "dst": "dephasing",
+   "label": "generates",
+   "src_color": "#00327c",
+   "dst_color": "#005e7c"
+  },
+  {
+   "src": "entropy",
+   "dst": "dimension",
+   "label": "measures",
+   "src_color": "#9001e1",
+   "dst_color": "#47ea29"
+  },
+  {
+   "src": "chern number",
+   "dst": "topological",
+   "label": "measures",
+   "src_color": "#034e30",
+   "dst_color": "#76ffa1"
+  },
+  {
+   "src": "trace",
+   "dst": "density matrix",
+   "label": "measures",
+   "src_color": "#90015a",
+   "dst_color": "#80414c"
+  },
+  {
+   "src": "variance",
+   "dst": "dispersion",
+   "label": "measures",
+   "src_color": "#90015d",
+   "dst_color": "#f107e4"
+  },
+  {
+   "src": "rayleigh number",
+   "dst": "instability",
+   "label": "measures",
+   "src_color": "#00995f",
+   "dst_color": "#b0a567"
+  },
+  {
+   "src": "quantum metric",
+   "dst": "curvature",
+   "label": "measures",
+   "src_color": "#c06210",
+   "dst_color": "#90018d"
+  },
+  {
+   "src": "expectation value",
+   "dst": "operator",
+   "label": "measures",
+   "src_color": "#44d80c",
+   "dst_color": "#9002d1"
+  },
+  {
+   "src": "beta function",
+   "dst": "scaling",
+   "label": "measures",
+   "src_color": "#00b10f",
+   "dst_color": "#9003cd"
+  },
+  {
+   "src": "boson",
+   "dst": "fermion",
+   "label": "contradicts",
+   "src_color": "#0f0f0f",
+   "dst_color": "#0f0f0e"
+  },
+  {
+   "src": "fermion",
+   "dst": "boson",
+   "label": "contradicts",
+   "src_color": "#0f0f0e",
+   "dst_color": "#0f0f0f"
+  },
+  {
+   "src": "commutator",
+   "dst": "anticommutator",
+   "label": "contradicts",
+   "src_color": "#333333",
+   "dst_color": "#333332"
+  },
+  {
+   "src": "anticommutator",
+   "dst": "commutator",
+   "label": "contradicts",
+   "src_color": "#333332",
+   "dst_color": "#333333"
+  },
+  {
+   "src": "continuum",
+   "dst": "lattice",
+   "label": "incompatible_with",
+   "src_color": "#555555",
+   "dst_color": "#555554"
+  },
+  {
+   "src": "lattice",
+   "dst": "continuum",
+   "label": "incompatible_with",
+   "src_color": "#555554",
+   "dst_color": "#555555"
+  },
+  {
+   "src": "classical",
+   "dst": "quantum",
+   "label": "incompatible_with",
+   "src_color": "#e38e38",
+   "dst_color": "#e38e39"
+  },
+  {
+   "src": "quantum",
+   "dst": "classical",
+   "label": "incompatible_with",
+   "src_color": "#e38e39",
+   "dst_color": "#e38e38"
+  },
+  {
+   "src": "majorana",
+   "dst": "dirac",
+   "label": "incompatible_with",
+   "src_color": "#999999",
+   "dst_color": "#999998"
+  },
+  {
+   "src": "dirac",
+   "dst": "majorana",
+   "label": "incompatible_with",
+   "src_color": "#999998",
+   "dst_color": "#999999"
+  },
+  {
+   "src": "unitary",
+   "dst": "antiunitary",
+   "label": "contradicts",
+   "src_color": "#db6db6",
+   "dst_color": "#db6db7"
+  },
+  {
+   "src": "antiunitary",
+   "dst": "unitary",
+   "label": "contradicts",
+   "src_color": "#db6db7",
+   "dst_color": "#db6db6"
+  },
+  {
+   "src": "real",
+   "dst": "imaginary",
+   "label": "incompatible_with",
+   "src_color": "#820820",
+   "dst_color": "#820821"
+  },
+  {
+   "src": "imaginary",
+   "dst": "real",
+   "label": "incompatible_with",
+   "src_color": "#820821",
+   "dst_color": "#820820"
+  },
+  {
+   "src": "local",
+   "dst": "nonlocal",
+   "label": "incompatible_with",
+   "src_color": "#00ff00",
+   "dst_color": "#00ff01"
+  },
+  {
+   "src": "nonlocal",
+   "dst": "local",
+   "label": "incompatible_with",
+   "src_color": "#00ff01",
+   "dst_color": "#00ff00"
+  },
+  {
+   "src": "on-shell",
+   "dst": "off-shell",
+   "label": "incompatible_with",
+   "src_color": "#007c15",
+   "dst_color": "#047238"
+  },
+  {
+   "src": "off-shell",
+   "dst": "on-shell",
+   "label": "incompatible_with",
+   "src_color": "#047238",
+   "dst_color": "#007c15"
+  },
+  {
+   "src": "infrared",
+   "dst": "ultraviolet",
+   "label": "incompatible_with",
+   "src_color": "#d0bd31",
+   "dst_color": "#001b71"
+  },
+  {
+   "src": "ultraviolet",
+   "dst": "infrared",
+   "label": "incompatible_with",
+   "src_color": "#001b71",
+   "dst_color": "#d0bd31"
+  },
+  {
+   "src": "perturbative",
+   "dst": "nonperturbative",
+   "label": "incompatible_with",
+   "src_color": "#005231",
+   "dst_color": "#007c15"
+  },
+  {
+   "src": "nonperturbative",
+   "dst": "perturbative",
+   "label": "incompatible_with",
+   "src_color": "#007c15",
+   "dst_color": "#005231"
+  },
+  {
+   "src": "isotropic",
+   "dst": "anisotropic",
+   "label": "incompatible_with",
+   "src_color": "#c08073",
+   "dst_color": "#001b71"
+  },
+  {
+   "src": "anisotropic",
+   "dst": "isotropic",
+   "label": "incompatible_with",
+   "src_color": "#001b71",
+   "dst_color": "#c08073"
+  },
+  {
+   "src": "boson",
+   "dst": "fermion",
+   "label": "contradicts",
+   "src_color": "#0f0f0f",
+   "dst_color": "#0f0f0e"
+  },
+  {
+   "src": "fermion",
+   "dst": "boson",
+   "label": "contradicts",
+   "src_color": "#0f0f0e",
+   "dst_color": "#0f0f0f"
+  },
+  {
+   "src": "fermion",
+   "dst": "boson",
+   "label": "contradicts",
+   "src_color": "#0f0f0e",
+   "dst_color": "#0f0f0f"
+  },
+  {
+   "src": "boson",
+   "dst": "fermion",
+   "label": "contradicts",
+   "src_color": "#0f0f0f",
+   "dst_color": "#0f0f0e"
+  },
+  {
+   "src": "commutator",
+   "dst": "anticommutator",
+   "label": "contradicts",
+   "src_color": "#333333",
+   "dst_color": "#333332"
+  },
+  {
+   "src": "anticommutator",
+   "dst": "commutator",
+   "label": "contradicts",
+   "src_color": "#333332",
+   "dst_color": "#333333"
+  },
+  {
+   "src": "anticommutator",
+   "dst": "commutator",
+   "label": "contradicts",
+   "src_color": "#333332",
+   "dst_color": "#333333"
+  },
+  {
+   "src": "commutator",
+   "dst": "anticommutator",
+   "label": "contradicts",
+   "src_color": "#333333",
+   "dst_color": "#333332"
+  },
+  {
+   "src": "continuum",
+   "dst": "lattice",
+   "label": "incompatible_with",
+   "src_color": "#555555",
+   "dst_color": "#555554"
+  },
+  {
+   "src": "lattice",
+   "dst": "continuum",
+   "label": "incompatible_with",
+   "src_color": "#555554",
+   "dst_color": "#555555"
+  },
+  {
+   "src": "lattice",
+   "dst": "continuum",
+   "label": "incompatible_with",
+   "src_color": "#555554",
+   "dst_color": "#555555"
+  },
+  {
+   "src": "continuum",
+   "dst": "lattice",
+   "label": "incompatible_with",
+   "src_color": "#555555",
+   "dst_color": "#555554"
+  },
+  {
+   "src": "classical",
+   "dst": "quantum",
+   "label": "incompatible_with",
+   "src_color": "#e38e38",
+   "dst_color": "#e38e39"
+  },
+  {
+   "src": "quantum",
+   "dst": "classical",
+   "label": "incompatible_with",
+   "src_color": "#e38e39",
+   "dst_color": "#e38e38"
+  },
+  {
+   "src": "quantum",
+   "dst": "classical",
+   "label": "incompatible_with",
+   "src_color": "#e38e39",
+   "dst_color": "#e38e38"
+  },
+  {
+   "src": "classical",
+   "dst": "quantum",
+   "label": "incompatible_with",
+   "src_color": "#e38e38",
+   "dst_color": "#e38e39"
+  },
+  {
+   "src": "majorana",
+   "dst": "dirac",
+   "label": "incompatible_with",
+   "src_color": "#999999",
+   "dst_color": "#999998"
+  },
+  {
+   "src": "dirac",
+   "dst": "majorana",
+   "label": "incompatible_with",
+   "src_color": "#999998",
+   "dst_color": "#999999"
+  },
+  {
+   "src": "dirac",
+   "dst": "majorana",
+   "label": "incompatible_with",
+   "src_color": "#999998",
+   "dst_color": "#999999"
+  },
+  {
+   "src": "majorana",
+   "dst": "dirac",
+   "label": "incompatible_with",
+   "src_color": "#999999",
+   "dst_color": "#999998"
+  },
+  {
+   "src": "unitary",
+   "dst": "antiunitary",
+   "label": "contradicts",
+   "src_color": "#db6db6",
+   "dst_color": "#db6db7"
+  },
+  {
+   "src": "antiunitary",
+   "dst": "unitary",
+   "label": "contradicts",
+   "src_color": "#db6db7",
+   "dst_color": "#db6db6"
+  },
+  {
+   "src": "antiunitary",
+   "dst": "unitary",
+   "label": "contradicts",
+   "src_color": "#db6db7",
+   "dst_color": "#db6db6"
+  },
+  {
+   "src": "unitary",
+   "dst": "antiunitary",
+   "label": "contradicts",
+   "src_color": "#db6db6",
+   "dst_color": "#db6db7"
+  },
+  {
+   "src": "real",
+   "dst": "imaginary",
+   "label": "incompatible_with",
+   "src_color": "#820820",
+   "dst_color": "#820821"
+  },
+  {
+   "src": "imaginary",
+   "dst": "real",
+   "label": "incompatible_with",
+   "src_color": "#820821",
+   "dst_color": "#820820"
+  },
+  {
+   "src": "imaginary",
+   "dst": "real",
+   "label": "incompatible_with",
+   "src_color": "#820821",
+   "dst_color": "#820820"
+  },
+  {
+   "src": "real",
+   "dst": "imaginary",
+   "label": "incompatible_with",
+   "src_color": "#820820",
+   "dst_color": "#820821"
+  },
+  {
+   "src": "local",
+   "dst": "nonlocal",
+   "label": "incompatible_with",
+   "src_color": "#00ff00",
+   "dst_color": "#00ff01"
+  },
+  {
+   "src": "nonlocal",
+   "dst": "local",
+   "label": "incompatible_with",
+   "src_color": "#00ff01",
+   "dst_color": "#00ff00"
+  },
+  {
+   "src": "nonlocal",
+   "dst": "local",
+   "label": "incompatible_with",
+   "src_color": "#00ff01",
+   "dst_color": "#00ff00"
+  },
+  {
+   "src": "local",
+   "dst": "nonlocal",
+   "label": "incompatible_with",
+   "src_color": "#00ff00",
+   "dst_color": "#00ff01"
+  },
+  {
+   "src": "seed",
+   "dst": "light",
+   "label": "co_occurs",
+   "src_color": "#9003ce",
+   "dst_color": "#90061d"
+  },
+  {
+   "src": "differentiate",
+   "dst": "x",
+   "label": "co_occurs",
+   "src_color": "#900076",
+   "dst_color": "#9002a5"
+  }
+ ],
+ "color_clusters": {
+  "903": [
+   "agg_ratio",
+   "focus",
+   "forget",
+   "ignore",
+   "remember",
+   "allotrope",
+   "alpha_bond",
+   "alpha_inv",
+   "alpha_ratio",
+   "1/alpha"
+  ],
+  "901": [
+   "create",
+   "destroy",
+   "know",
+   "move",
+   "separate",
+   "stay",
+   "stop",
+   "e_act",
+   "addresses",
+   "address"
+  ],
+  "900": [
+   "difference",
+   "emergence",
+   "equivalence",
+   "identity",
+   "multiplicity",
+   "similarity",
+   "simplicity",
+   "unity",
+   "accuracy",
+   "acidity"
+  ],
+  "902": [
+   "nrci",
+   "l_amp",
+   "w_amp",
+   "amu",
+   "amylopectin",
+   "amylose",
+   "anchor_invariant",
+   "anchor",
+   "if dh",
+   "angle"
+  ],
+  "90c": [
+   "proof",
+   "cause",
+   "certain",
+   "contingent",
+   "effect",
+   "impossible",
+   "inevitable",
+   "probable",
+   "sufficient",
+   "both"
+  ],
+  "90a": [
+   "buffer_gain",
+   "capacity",
+   "sink_capture",
+   "capture",
+   "card",
+   "nitrogen_carrier",
+   "cascade",
+   "cells",
+   "chain_reaction",
+   "chaos"
+  ],
+  "90b": [
+   "c",
+   "dissolve",
+   "ionize",
+   "oxidize",
+   "polymerize",
+   "precipitate",
+   "react",
+   "reduce",
+   "unbond",
+   "chirality"
+  ],
+  "907": [
+   "basic",
+   "basins",
+   "bcaa",
+   "total mass before",
+   "behold",
+   "w * behold_z",
+   "best_stochastic_cost",
+   "beta",
+   "bias",
+   "binding_energy"
+  ],
+  "905": [
+   "replicate",
+   "transcribe",
+   "birefringent",
+   "fraction",
+   "12_bits",
+   "bits",
+   "recall_5bit",
+   "bkm_identity",
+   "bohr_model",
+   "bonds"
+  ],
+  "904": [
+   "signal",
+   "furthermore",
+   "however",
+   "meanwhile",
+   "moreover",
+   "nevertheless",
+   "otherwise",
+   "therefore",
+   "abstraction",
+   "analogy"
+  ],
+  "906": [
+   "atomic_structure",
+   "atp_yield",
+   "attention",
+   "author",
+   "efficiency_avg",
+   "flux_avg",
+   "avg_nrci_target",
+   "avg_nrci",
+   "nrci_avg",
+   "dh_avg"
+  ],
+  "908": [
+   "condition",
+   "electrical_cond",
+   "thermal_cond",
+   "connectivity",
+   "e_cons",
+   "quark_content",
+   "convergence",
+   "s_corrected",
+   "octad_correction",
+   "correction"
+  ],
+  "90f": [
+   "centre",
+   "exterior",
+   "interior",
+   "network",
+   "part",
+   "periphery",
+   "whole",
+   "already",
+   "eventually",
+   "gradually"
+  ],
+  "90d": [
+   "many",
+   "most",
+   "neither",
+   "across",
+   "against",
+   "among",
+   "beneath",
+   "toward",
+   "upon",
+   "fold_limit"
+  ],
+  "909": [
+   "complexity",
+   "d_h",
+   "coil_n",
+   "collagen",
+   "collapse",
+   "color",
+   "compactness",
+   "different",
+   "opposite",
+   "complete"
+  ],
+  "90e": [
+   "measure",
+   "until",
+   "define",
+   "explain",
+   "verify",
+   "boost",
+   "bottom",
+   "horizon_breach",
+   "breach",
+   "bridge"
+  ],
+  "043": [
+   "chern number",
+   "matrix product",
+   "bcft",
+   "chern-simons",
+   "polarizability",
+   "rayleigh range",
+   "cross product"
+  ],
+  "f56": [
+   "commutes",
+   "sixteen",
+   "seventeen",
+   "eighteen"
+  ],
+  "b56": [
+   "thirteen",
+   "fourteen",
+   "fifteen",
+   "eighty"
+  ],
+  "5e8": [
+   "minus_seven",
+   "minus_eight",
+   "minus_nine",
+   "minus_ten"
+  ]
+ }
+}

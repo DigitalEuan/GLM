@@ -1,0 +1,4457 @@
+[
+  {
+    "type": "vocab",
+    "description": "Learned: alpha",
+    "timestamp": 1784526456.8571367
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: baryon",
+    "timestamp": 1784526456.9037807
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: beta",
+    "timestamp": 1784526456.9393551
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: evolve",
+    "timestamp": 1784526456.9729943
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: crystal",
+    "timestamp": 1784526457.0297084
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: curvature",
+    "timestamp": 1784526457.069102
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: eigenvalue",
+    "timestamp": 1784526457.1161644
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: field",
+    "timestamp": 1784526457.1541948
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: magnitude",
+    "timestamp": 1784526457.1914403
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: tensor",
+    "timestamp": 1784526457.2281132
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: trace",
+    "timestamp": 1784526457.2684963
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: variance",
+    "timestamp": 1784526457.3109033
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: pi",
+    "timestamp": 1784526457.34897
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: harmonic",
+    "timestamp": 1784526457.3879712
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: integral",
+    "timestamp": 1784526457.4265902
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: manifold",
+    "timestamp": 1784526457.4675486
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: scaling",
+    "timestamp": 1784526457.508586
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: state",
+    "timestamp": 1784526457.5510037
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: norm",
+    "timestamp": 1784526457.5890028
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: operator",
+    "timestamp": 1784526457.6420252
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: vertex",
+    "timestamp": 1784526457.6825106
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: partition",
+    "timestamp": 1784526457.7174335
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: converge",
+    "timestamp": 1784526457.7609653
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: derive",
+    "timestamp": 1784526457.812701
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: diverge",
+    "timestamp": 1784526457.852058
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: oscillate",
+    "timestamp": 1784526457.8880942
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: propagate",
+    "timestamp": 1784526457.9245565
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: symmetry",
+    "timestamp": 1784526457.9606192
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: scale",
+    "timestamp": 1784526457.9973764
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: vector",
+    "timestamp": 1784526458.0437346
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: mercury",
+    "timestamp": 1784526458.0803838
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: electron",
+    "timestamp": 1784526458.1182222
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: proton",
+    "timestamp": 1784526458.153602
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: neutron",
+    "timestamp": 1784526458.190882
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: photon",
+    "timestamp": 1784526458.2279375
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: gluon",
+    "timestamp": 1784526458.2630928
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: water",
+    "timestamp": 1784526458.3052065
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: dimension",
+    "timestamp": 1784526458.3596454
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: hamiltonian",
+    "timestamp": 1784526458.3978815
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: lagrangian",
+    "timestamp": 1784526458.430891
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: energy",
+    "timestamp": 1784526458.470932
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: coupling",
+    "timestamp": 1784526458.5135093
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: metric",
+    "timestamp": 1784526458.5792887
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: anomaly",
+    "timestamp": 1784526458.6181283
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: dispersion",
+    "timestamp": 1784526458.6512635
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: number",
+    "timestamp": 1784526458.6873484
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: squeezed",
+    "timestamp": 1784526458.7227094
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: projector",
+    "timestamp": 1784526458.7614198
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: propagator",
+    "timestamp": 1784526458.8100145
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: renormalization",
+    "timestamp": 1784526458.8433013
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: regularization",
+    "timestamp": 1784526458.8785698
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: regulator",
+    "timestamp": 1784526458.9245272
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: convection",
+    "timestamp": 1784526458.9611003
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: instability",
+    "timestamp": 1784526458.9992223
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: hubbard",
+    "timestamp": 1784526459.0427938
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: tunneling",
+    "timestamp": 1784526459.078913
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: interaction",
+    "timestamp": 1784526459.1209059
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: brane",
+    "timestamp": 1784526459.1563356
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: ads",
+    "timestamp": 1784526459.190004
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: holographic",
+    "timestamp": 1784526459.2297587
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: conformal",
+    "timestamp": 1784526459.2621148
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: topological",
+    "timestamp": 1784526459.298672
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: weyl",
+    "timestamp": 1784526459.3471117
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: chern",
+    "timestamp": 1784526459.3901954
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: quark",
+    "timestamp": 1784526459.4341393
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: hadron",
+    "timestamp": 1784526459.4775689
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: strong",
+    "timestamp": 1784526459.5243473
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: weak",
+    "timestamp": 1784526459.5633488
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: massive",
+    "timestamp": 1784526459.60792
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: massless",
+    "timestamp": 1784526459.6486979
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: critical",
+    "timestamp": 1784526459.6909056
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: action",
+    "timestamp": 1784526459.729149
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: constant",
+    "timestamp": 1784526459.7655616
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: phase",
+    "timestamp": 1784526459.8052595
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: group",
+    "timestamp": 1784526459.846314
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: loop",
+    "timestamp": 1784526459.887291
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: divergence",
+    "timestamp": 1784526459.9246395
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: function",
+    "timestamp": 1784526459.9609344
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: functional",
+    "timestamp": 1784526459.9944048
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: derivative",
+    "timestamp": 1784526460.035757
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: geodesic",
+    "timestamp": 1784526460.0800266
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: connection",
+    "timestamp": 1784526460.1286705
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: torsion",
+    "timestamp": 1784526460.1771736
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: tetrad",
+    "timestamp": 1784526460.2175376
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: parton",
+    "timestamp": 1784526460.25506
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: pion",
+    "timestamp": 1784526460.2923825
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: meson",
+    "timestamp": 1784526460.3293767
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: feynman",
+    "timestamp": 1784526460.3711808
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: diagram",
+    "timestamp": 1784526460.4092553
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: casimir",
+    "timestamp": 1784526460.449326
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: dimensional regularization",
+    "timestamp": 1784526460.5023997
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: sail diagram",
+    "timestamp": 1784526460.5476751
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: lamet",
+    "timestamp": 1784526460.602335
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: matching kernel",
+    "timestamp": 1784526460.6395621
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: dglap",
+    "timestamp": 1784526460.6850772
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: photopion",
+    "timestamp": 1784526460.720896
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: synchrotron",
+    "timestamp": 1784526460.7570076
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: beta function",
+    "timestamp": 1784526460.8312993
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: weyl anomaly",
+    "timestamp": 1784526460.8728848
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: partition function",
+    "timestamp": 1784526460.9083357
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: path integral",
+    "timestamp": 1784526460.9667933
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: hatsugai-kohmoto",
+    "timestamp": 1784526460.9996133
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: parafermion",
+    "timestamp": 1784526461.041273
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: anyon",
+    "timestamp": 1784526461.086752
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: braiding",
+    "timestamp": 1784526461.120322
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: fusion",
+    "timestamp": 1784526461.1857247
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: verlinde",
+    "timestamp": 1784526461.2226956
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: verlinde line",
+    "timestamp": 1784526461.2727642
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: moore-read",
+    "timestamp": 1784526461.3143854
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: filling",
+    "timestamp": 1784526461.3464293
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: hopping",
+    "timestamp": 1784526461.3871863
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: mott",
+    "timestamp": 1784526461.4319153
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: berry",
+    "timestamp": 1784526461.474284
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: chern number",
+    "timestamp": 1784526461.5124002
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: wannier",
+    "timestamp": 1784526461.5490558
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: brillouin",
+    "timestamp": 1784526461.602478
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: quantum metric",
+    "timestamp": 1784526461.6409247
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: fermi surface",
+    "timestamp": 1784526461.678965
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: fermi liquid",
+    "timestamp": 1784526461.7746818
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: quasiparticle",
+    "timestamp": 1784526461.8119006
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: spin squeezing",
+    "timestamp": 1784526461.8531606
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: wineland parameter",
+    "timestamp": 1784526461.8903112
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: dephasing",
+    "timestamp": 1784526461.931868
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: dissipation",
+    "timestamp": 1784526461.967824
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: lindblad",
+    "timestamp": 1784526462.0070539
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: dissipator",
+    "timestamp": 1784526462.0452898
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: kraus",
+    "timestamp": 1784526462.0798526
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: kraus operator",
+    "timestamp": 1784526462.1189806
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: squeezed state",
+    "timestamp": 1784526462.1543677
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: coherent state",
+    "timestamp": 1784526462.191929
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: holevo",
+    "timestamp": 1784526462.2277226
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: holevo information",
+    "timestamp": 1784526462.2641525
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: matrix product",
+    "timestamp": 1784526462.2986407
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: bond dimension",
+    "timestamp": 1784526462.338574
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: qubit",
+    "timestamp": 1784526462.3865693
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: pauli",
+    "timestamp": 1784526462.4232225
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: bcft",
+    "timestamp": 1784526462.4823632
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: einstein-hilbert",
+    "timestamp": 1784526462.534967
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: palatini",
+    "timestamp": 1784526462.5791593
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: chern-simons",
+    "timestamp": 1784526462.6156967
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: efolds",
+    "timestamp": 1784526462.6596646
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: scale factor",
+    "timestamp": 1784526462.7233531
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: qft",
+    "timestamp": 1784526462.7654889
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: cavity",
+    "timestamp": 1784526462.8128684
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: optical",
+    "timestamp": 1784526462.859763
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: tweezer",
+    "timestamp": 1784526462.90433
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: polarizability",
+    "timestamp": 1784526462.9428723
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: rayleigh range",
+    "timestamp": 1784526462.9789975
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: opa",
+    "timestamp": 1784526463.0144525
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: photocurrent",
+    "timestamp": 1784526463.0459025
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: oam",
+    "timestamp": 1784526463.0808356
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: helicity",
+    "timestamp": 1784526463.1139948
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: rayleigh",
+    "timestamp": 1784526463.1475043
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: rayleigh number",
+    "timestamp": 1784526463.1909158
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: prandtl",
+    "timestamp": 1784526463.2590292
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: benard",
+    "timestamp": 1784526463.306602
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: darcy",
+    "timestamp": 1784526463.3449337
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: eigenfunction",
+    "timestamp": 1784526463.3866706
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: wavenumber",
+    "timestamp": 1784526463.4271307
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: growth rate",
+    "timestamp": 1784526463.467426
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: gamma distribution",
+    "timestamp": 1784526463.4995944
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: waiting time",
+    "timestamp": 1784526463.550206
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: autocatalytic",
+    "timestamp": 1784526463.5925906
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: homeostasis",
+    "timestamp": 1784526463.6345413
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: hilbert",
+    "timestamp": 1784526463.6800385
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: hilbert space",
+    "timestamp": 1784526463.7230713
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: expectation value",
+    "timestamp": 1784526463.7634275
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: ground state",
+    "timestamp": 1784526463.8043425
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: excited state",
+    "timestamp": 1784526463.8663874
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: density matrix",
+    "timestamp": 1784526463.907445
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: commute",
+    "timestamp": 1784526463.958292
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: interact",
+    "timestamp": 1784526463.9985592
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: squeeze",
+    "timestamp": 1784526464.0707762
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: dissipate",
+    "timestamp": 1784526464.114021
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: renormalize",
+    "timestamp": 1784526464.1504066
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: regularize",
+    "timestamp": 1784526464.1850119
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: braid",
+    "timestamp": 1784526464.2220051
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: dot product",
+    "timestamp": 1784526464.257975
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: cross product",
+    "timestamp": 1784526464.293882
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: perturbative",
+    "timestamp": 1784526464.3264503
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: nonperturbative",
+    "timestamp": 1784526464.3949213
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: relativistic",
+    "timestamp": 1784526464.4439473
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: isotropic",
+    "timestamp": 1784526464.4874098
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: anisotropic",
+    "timestamp": 1784526464.526949
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: free",
+    "timestamp": 1784526464.5627153
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: on-shell",
+    "timestamp": 1784526464.6074321
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: off-shell",
+    "timestamp": 1784526464.6626003
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: infrared",
+    "timestamp": 1784526464.6977923
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: ultraviolet",
+    "timestamp": 1784526464.7347863
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: commute_with",
+    "timestamp": 1784526464.7725303
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: scales_as",
+    "timestamp": 1784526464.812376
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: dual_to",
+    "timestamp": 1784526464.8490968
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: gradient_of",
+    "timestamp": 1784526464.8908656
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: integral_of",
+    "timestamp": 1784526464.929239
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: expectation_of",
+    "timestamp": 1784526464.9707716
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: speed of light",
+    "timestamp": 1784526465.007057
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: photosynthesis",
+    "timestamp": 1784526465.0443137
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: golden ratio",
+    "timestamp": 1784526465.0870624
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: evolution",
+    "timestamp": 1784526465.1331089
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: dna",
+    "timestamp": 1784526465.1693234
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: cell",
+    "timestamp": 1784526465.2042832
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: atom",
+    "timestamp": 1784526465.2401078
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: algorithm",
+    "timestamp": 1784526465.2759998
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: internet",
+    "timestamp": 1784526465.3372812
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: earth",
+    "timestamp": 1784526465.3834834
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: sun",
+    "timestamp": 1784526465.4171543
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: moon",
+    "timestamp": 1784526465.4632394
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: mount everest",
+    "timestamp": 1784526465.4972405
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hamiltonian --is_a--> operator",
+    "timestamp": 1784526465.5534816
+  },
+  {
+    "type": "edge",
+    "description": "Learned: lagrangian --is_a--> functional",
+    "timestamp": 1784526465.6125205
+  },
+  {
+    "type": "edge",
+    "description": "Learned: propagator --is_a--> function",
+    "timestamp": 1784526465.6602538
+  },
+  {
+    "type": "edge",
+    "description": "Learned: weyl anomaly --is_a--> anomaly",
+    "timestamp": 1784526465.7161138
+  },
+  {
+    "type": "edge",
+    "description": "Learned: rayleigh number --is_a--> number",
+    "timestamp": 1784526465.7689376
+  },
+  {
+    "type": "edge",
+    "description": "Learned: chern number --is_a--> number",
+    "timestamp": 1784526465.8204112
+  },
+  {
+    "type": "edge",
+    "description": "Learned: parafermion --is_a--> fermion",
+    "timestamp": 1784526465.8933783
+  },
+  {
+    "type": "edge",
+    "description": "Learned: majorana --is_a--> fermion",
+    "timestamp": 1784526465.9540348
+  },
+  {
+    "type": "edge",
+    "description": "Learned: quark --is_a--> fermion",
+    "timestamp": 1784526466.0051947
+  },
+  {
+    "type": "edge",
+    "description": "Learned: gluon --is_a--> boson",
+    "timestamp": 1784526466.0584693
+  },
+  {
+    "type": "edge",
+    "description": "Learned: density matrix --is_a--> operator",
+    "timestamp": 1784526466.1162019
+  },
+  {
+    "type": "edge",
+    "description": "Learned: commutator --is_a--> operator",
+    "timestamp": 1784526466.1738403
+  },
+  {
+    "type": "edge",
+    "description": "Learned: anticommutator --is_a--> operator",
+    "timestamp": 1784526466.2310252
+  },
+  {
+    "type": "edge",
+    "description": "Learned: ground state --is_a--> state",
+    "timestamp": 1784526466.282892
+  },
+  {
+    "type": "edge",
+    "description": "Learned: coherent state --is_a--> state",
+    "timestamp": 1784526466.3471777
+  },
+  {
+    "type": "edge",
+    "description": "Learned: squeezed state --is_a--> state",
+    "timestamp": 1784526466.402002
+  },
+  {
+    "type": "edge",
+    "description": "Learned: projector --is_a--> operator",
+    "timestamp": 1784526466.452335
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hadron --is_a--> particle",
+    "timestamp": 1784526466.5144804
+  },
+  {
+    "type": "edge",
+    "description": "Learned: partition function --is_a--> functional",
+    "timestamp": 1784526466.570916
+  },
+  {
+    "type": "edge",
+    "description": "Learned: pion --is_a--> meson",
+    "timestamp": 1784526466.623678
+  },
+  {
+    "type": "edge",
+    "description": "Learned: matrix product --is_a--> state",
+    "timestamp": 1784526466.7196147
+  },
+  {
+    "type": "edge",
+    "description": "Learned: kraus operator --is_a--> operator",
+    "timestamp": 1784526466.7897482
+  },
+  {
+    "type": "edge",
+    "description": "Learned: tetrad --is_a--> connection",
+    "timestamp": 1784526466.8462157
+  },
+  {
+    "type": "edge",
+    "description": "Learned: ads --is_a--> manifold",
+    "timestamp": 1784526466.8994915
+  },
+  {
+    "type": "edge",
+    "description": "Learned: brane --is_a--> manifold",
+    "timestamp": 1784526466.9546459
+  },
+  {
+    "type": "edge",
+    "description": "Learned: quantum metric --is_a--> metric",
+    "timestamp": 1784526467.0264149
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hilbert space --is_a--> manifold",
+    "timestamp": 1784526467.0784214
+  },
+  {
+    "type": "edge",
+    "description": "Learned: excited state --is_a--> state",
+    "timestamp": 1784526467.1316211
+  },
+  {
+    "type": "edge",
+    "description": "Learned: baryon --is_a--> hadron",
+    "timestamp": 1784526467.211477
+  },
+  {
+    "type": "edge",
+    "description": "Learned: fermi liquid --is_a--> state",
+    "timestamp": 1784526467.267422
+  },
+  {
+    "type": "edge",
+    "description": "Learned: beta function --is_a--> function",
+    "timestamp": 1784526467.3257856
+  },
+  {
+    "type": "edge",
+    "description": "Learned: dot product --is_a--> operator",
+    "timestamp": 1784526467.3774555
+  },
+  {
+    "type": "edge",
+    "description": "Learned: cross product --is_a--> operator",
+    "timestamp": 1784526467.426686
+  },
+  {
+    "type": "edge",
+    "description": "Learned: path integral --is_a--> integral",
+    "timestamp": 1784526467.4798505
+  },
+  {
+    "type": "edge",
+    "description": "Learned: majorana --has_property--> topological",
+    "timestamp": 1784526467.5326066
+  },
+  {
+    "type": "edge",
+    "description": "Learned: weyl anomaly --has_property--> conformal",
+    "timestamp": 1784526467.5883195
+  },
+  {
+    "type": "edge",
+    "description": "Learned: quark --has_property--> massive",
+    "timestamp": 1784526467.6394334
+  },
+  {
+    "type": "edge",
+    "description": "Learned: gluon --has_property--> massless",
+    "timestamp": 1784526467.6893601
+  },
+  {
+    "type": "edge",
+    "description": "Learned: photon --has_property--> massless",
+    "timestamp": 1784526467.7706718
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hubbard --has_property--> strong",
+    "timestamp": 1784526467.8283792
+  },
+  {
+    "type": "edge",
+    "description": "Learned: parafermion --has_property--> topological",
+    "timestamp": 1784526467.8844275
+  },
+  {
+    "type": "edge",
+    "description": "Learned: chern number --has_property--> topological",
+    "timestamp": 1784526467.9394608
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hatsugai-kohmoto --has_property--> strong",
+    "timestamp": 1784526467.992493
+  },
+  {
+    "type": "edge",
+    "description": "Learned: ads --has_property--> holographic",
+    "timestamp": 1784526468.0510037
+  },
+  {
+    "type": "edge",
+    "description": "Learned: squeezed state --has_property--> quantum",
+    "timestamp": 1784526468.1069615
+  },
+  {
+    "type": "edge",
+    "description": "Learned: coherent state --has_property--> quantum",
+    "timestamp": 1784526468.1656177
+  },
+  {
+    "type": "edge",
+    "description": "Learned: rayleigh number --has_property--> critical",
+    "timestamp": 1784526468.2157562
+  },
+  {
+    "type": "edge",
+    "description": "Learned: convection --has_property--> critical",
+    "timestamp": 1784526468.2785976
+  },
+  {
+    "type": "edge",
+    "description": "Learned: weyl --has_property--> conformal",
+    "timestamp": 1784526468.3423164
+  },
+  {
+    "type": "edge",
+    "description": "Learned: qft --has_property--> relativistic",
+    "timestamp": 1784526468.4262733
+  },
+  {
+    "type": "edge",
+    "description": "Learned: beta --depends_on--> coupling",
+    "timestamp": 1784526468.4790416
+  },
+  {
+    "type": "edge",
+    "description": "Learned: anomaly --depends_on--> dimension",
+    "timestamp": 1784526468.535795
+  },
+  {
+    "type": "edge",
+    "description": "Learned: weyl anomaly --depends_on--> metric",
+    "timestamp": 1784526468.5963278
+  },
+  {
+    "type": "edge",
+    "description": "Learned: weyl anomaly --depends_on--> curvature",
+    "timestamp": 1784526468.6588645
+  },
+  {
+    "type": "edge",
+    "description": "Learned: renormalization --depends_on--> regulator",
+    "timestamp": 1784526468.71183
+  },
+  {
+    "type": "edge",
+    "description": "Learned: rayleigh number --depends_on--> prandtl",
+    "timestamp": 1784526468.765616
+  },
+  {
+    "type": "edge",
+    "description": "Learned: convection --depends_on--> rayleigh number",
+    "timestamp": 1784526468.8171184
+  },
+  {
+    "type": "edge",
+    "description": "Learned: parton --depends_on--> scale",
+    "timestamp": 1784526468.9098587
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hubbard --depends_on--> tunneling",
+    "timestamp": 1784526468.969405
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hubbard --depends_on--> interaction",
+    "timestamp": 1784526469.0253851
+  },
+  {
+    "type": "edge",
+    "description": "Learned: beta --depends_on--> scaling",
+    "timestamp": 1784526469.0829525
+  },
+  {
+    "type": "edge",
+    "description": "Learned: regularization --depends_on--> dimension",
+    "timestamp": 1784526469.1321478
+  },
+  {
+    "type": "edge",
+    "description": "Learned: rayleigh number --depends_on--> temperature",
+    "timestamp": 1784526469.188555
+  },
+  {
+    "type": "edge",
+    "description": "Learned: dephasing --depends_on--> dissipator",
+    "timestamp": 1784526469.2350547
+  },
+  {
+    "type": "edge",
+    "description": "Learned: spin squeezing --depends_on--> variance",
+    "timestamp": 1784526469.3050132
+  },
+  {
+    "type": "edge",
+    "description": "Learned: wineland parameter --depends_on--> spin squeezing",
+    "timestamp": 1784526469.3636737
+  },
+  {
+    "type": "edge",
+    "description": "Learned: dglap --depends_on--> coupling",
+    "timestamp": 1784526469.4119518
+  },
+  {
+    "type": "edge",
+    "description": "Learned: loop --depends_on--> regularization",
+    "timestamp": 1784526469.4619958
+  },
+  {
+    "type": "edge",
+    "description": "Learned: matching kernel --depends_on--> coupling",
+    "timestamp": 1784526469.5130012
+  },
+  {
+    "type": "edge",
+    "description": "Learned: beta function --depends_on--> coupling",
+    "timestamp": 1784526469.5718963
+  },
+  {
+    "type": "edge",
+    "description": "Learned: gamma distribution --depends_on--> waiting time",
+    "timestamp": 1784526469.622732
+  },
+  {
+    "type": "edge",
+    "description": "Learned: growth rate --depends_on--> gamma distribution",
+    "timestamp": 1784526469.6784384
+  },
+  {
+    "type": "edge",
+    "description": "Learned: holevo information --depends_on--> density matrix",
+    "timestamp": 1784526469.7291174
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hamiltonian --commutes_with--> symmetry",
+    "timestamp": 1784526469.793102
+  },
+  {
+    "type": "edge",
+    "description": "Learned: symmetry --commutes_with--> hamiltonian",
+    "timestamp": 1784526469.8493538
+  },
+  {
+    "type": "edge",
+    "description": "Learned: projector --commutes_with--> hamiltonian",
+    "timestamp": 1784526469.908155
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hamiltonian --commutes_with--> projector",
+    "timestamp": 1784526469.9574614
+  },
+  {
+    "type": "edge",
+    "description": "Learned: density matrix --commutes_with--> hamiltonian",
+    "timestamp": 1784526470.0309794
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hamiltonian --commutes_with--> density matrix",
+    "timestamp": 1784526470.0872538
+  },
+  {
+    "type": "edge",
+    "description": "Learned: number --commutes_with--> hamiltonian",
+    "timestamp": 1784526470.1448324
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hamiltonian --commutes_with--> number",
+    "timestamp": 1784526470.190937
+  },
+  {
+    "type": "edge",
+    "description": "Learned: spin --commutes_with--> hamiltonian",
+    "timestamp": 1784526470.2414305
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hamiltonian --commutes_with--> spin",
+    "timestamp": 1784526470.2899387
+  },
+  {
+    "type": "edge",
+    "description": "Learned: rayleigh number --scales_as--> temperature",
+    "timestamp": 1784526470.3495362
+  },
+  {
+    "type": "edge",
+    "description": "Learned: propagator --scales_as--> momentum",
+    "timestamp": 1784526470.401074
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hubbard --scales_as--> tunneling",
+    "timestamp": 1784526470.4535282
+  },
+  {
+    "type": "edge",
+    "description": "Learned: dispersion --scales_as--> wavenumber",
+    "timestamp": 1784526470.5039155
+  },
+  {
+    "type": "edge",
+    "description": "Learned: growth rate --scales_as--> coupling",
+    "timestamp": 1784526470.551692
+  },
+  {
+    "type": "edge",
+    "description": "Learned: photocurrent --scales_as--> power",
+    "timestamp": 1784526470.6199925
+  },
+  {
+    "type": "edge",
+    "description": "Learned: synchrotron --scales_as--> energy",
+    "timestamp": 1784526470.684991
+  },
+  {
+    "type": "edge",
+    "description": "Learned: ads --is_dual_to--> bcft",
+    "timestamp": 1784526470.7555246
+  },
+  {
+    "type": "edge",
+    "description": "Learned: bcft --is_dual_to--> ads",
+    "timestamp": 1784526470.83448
+  },
+  {
+    "type": "edge",
+    "description": "Learned: holographic --is_dual_to--> conformal",
+    "timestamp": 1784526470.9074333
+  },
+  {
+    "type": "edge",
+    "description": "Learned: conformal --is_dual_to--> holographic",
+    "timestamp": 1784526470.98042
+  },
+  {
+    "type": "edge",
+    "description": "Learned: brane --is_dual_to--> boundary",
+    "timestamp": 1784526471.037642
+  },
+  {
+    "type": "edge",
+    "description": "Learned: boundary --is_dual_to--> brane",
+    "timestamp": 1784526471.0882835
+  },
+  {
+    "type": "edge",
+    "description": "Learned: lamet --is_dual_to--> parton",
+    "timestamp": 1784526471.138342
+  },
+  {
+    "type": "edge",
+    "description": "Learned: parton --is_dual_to--> lamet",
+    "timestamp": 1784526471.1867743
+  },
+  {
+    "type": "edge",
+    "description": "Learned: matrix product --is_dual_to--> tensor",
+    "timestamp": 1784526471.2336025
+  },
+  {
+    "type": "edge",
+    "description": "Learned: tensor --is_dual_to--> matrix product",
+    "timestamp": 1784526471.2834525
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hamiltonian --generates--> time",
+    "timestamp": 1784526471.3350945
+  },
+  {
+    "type": "edge",
+    "description": "Learned: momentum --generates--> space",
+    "timestamp": 1784526471.3869095
+  },
+  {
+    "type": "edge",
+    "description": "Learned: symmetry --generates--> anomaly",
+    "timestamp": 1784526471.4390275
+  },
+  {
+    "type": "edge",
+    "description": "Learned: renormalization --generates--> beta",
+    "timestamp": 1784526471.4947295
+  },
+  {
+    "type": "edge",
+    "description": "Learned: dissipator --generates--> dephasing",
+    "timestamp": 1784526471.5447283
+  },
+  {
+    "type": "edge",
+    "description": "Learned: entropy --measures--> dimension",
+    "timestamp": 1784526471.595164
+  },
+  {
+    "type": "edge",
+    "description": "Learned: chern number --measures--> topological",
+    "timestamp": 1784526471.6493635
+  },
+  {
+    "type": "edge",
+    "description": "Learned: trace --measures--> density matrix",
+    "timestamp": 1784526471.7006493
+  },
+  {
+    "type": "edge",
+    "description": "Learned: variance --measures--> dispersion",
+    "timestamp": 1784526471.7510219
+  },
+  {
+    "type": "edge",
+    "description": "Learned: rayleigh number --measures--> instability",
+    "timestamp": 1784526471.8000295
+  },
+  {
+    "type": "edge",
+    "description": "Learned: holevo information --measures--> information",
+    "timestamp": 1784526471.8497477
+  },
+  {
+    "type": "edge",
+    "description": "Learned: wineland parameter --measures--> squeezing",
+    "timestamp": 1784526471.9044108
+  },
+  {
+    "type": "edge",
+    "description": "Learned: quantum metric --measures--> curvature",
+    "timestamp": 1784526471.963923
+  },
+  {
+    "type": "edge",
+    "description": "Learned: expectation value --measures--> operator",
+    "timestamp": 1784526472.0135765
+  },
+  {
+    "type": "edge",
+    "description": "Learned: beta function --measures--> scaling",
+    "timestamp": 1784526472.063638
+  },
+  {
+    "type": "edge",
+    "description": "Learned: boson --contradicts--> fermion",
+    "timestamp": 1784526472.1178293
+  },
+  {
+    "type": "edge",
+    "description": "Learned: fermion --contradicts--> boson",
+    "timestamp": 1784526472.169383
+  },
+  {
+    "type": "edge",
+    "description": "Learned: commutator --contradicts--> anticommutator",
+    "timestamp": 1784526472.222137
+  },
+  {
+    "type": "edge",
+    "description": "Learned: anticommutator --contradicts--> commutator",
+    "timestamp": 1784526472.2742295
+  },
+  {
+    "type": "edge",
+    "description": "Learned: continuum --incompatible_with--> lattice",
+    "timestamp": 1784526472.331195
+  },
+  {
+    "type": "edge",
+    "description": "Learned: lattice --incompatible_with--> continuum",
+    "timestamp": 1784526472.378834
+  },
+  {
+    "type": "edge",
+    "description": "Learned: classical --incompatible_with--> quantum",
+    "timestamp": 1784526472.4274864
+  },
+  {
+    "type": "edge",
+    "description": "Learned: quantum --incompatible_with--> classical",
+    "timestamp": 1784526472.475525
+  },
+  {
+    "type": "edge",
+    "description": "Learned: majorana --incompatible_with--> dirac",
+    "timestamp": 1784526472.5251546
+  },
+  {
+    "type": "edge",
+    "description": "Learned: dirac --incompatible_with--> majorana",
+    "timestamp": 1784526472.5841217
+  },
+  {
+    "type": "edge",
+    "description": "Learned: unitary --contradicts--> antiunitary",
+    "timestamp": 1784526472.6338427
+  },
+  {
+    "type": "edge",
+    "description": "Learned: antiunitary --contradicts--> unitary",
+    "timestamp": 1784526472.6841037
+  },
+  {
+    "type": "edge",
+    "description": "Learned: real --incompatible_with--> imaginary",
+    "timestamp": 1784526472.7369003
+  },
+  {
+    "type": "edge",
+    "description": "Learned: imaginary --incompatible_with--> real",
+    "timestamp": 1784526472.8413355
+  },
+  {
+    "type": "edge",
+    "description": "Learned: local --incompatible_with--> nonlocal",
+    "timestamp": 1784526472.8946154
+  },
+  {
+    "type": "edge",
+    "description": "Learned: nonlocal --incompatible_with--> local",
+    "timestamp": 1784526472.9500802
+  },
+  {
+    "type": "edge",
+    "description": "Learned: on-shell --incompatible_with--> off-shell",
+    "timestamp": 1784526473.0289435
+  },
+  {
+    "type": "edge",
+    "description": "Learned: off-shell --incompatible_with--> on-shell",
+    "timestamp": 1784526473.1289864
+  },
+  {
+    "type": "edge",
+    "description": "Learned: infrared --incompatible_with--> ultraviolet",
+    "timestamp": 1784526473.189106
+  },
+  {
+    "type": "edge",
+    "description": "Learned: ultraviolet --incompatible_with--> infrared",
+    "timestamp": 1784526473.2463434
+  },
+  {
+    "type": "edge",
+    "description": "Learned: perturbative --incompatible_with--> nonperturbative",
+    "timestamp": 1784526473.306003
+  },
+  {
+    "type": "edge",
+    "description": "Learned: nonperturbative --incompatible_with--> perturbative",
+    "timestamp": 1784526473.363797
+  },
+  {
+    "type": "edge",
+    "description": "Learned: free --incompatible_with--> interacting",
+    "timestamp": 1784526473.5453753
+  },
+  {
+    "type": "edge",
+    "description": "Learned: interacting --incompatible_with--> free",
+    "timestamp": 1784526473.608938
+  },
+  {
+    "type": "edge",
+    "description": "Learned: isotropic --incompatible_with--> anisotropic",
+    "timestamp": 1784526473.6738577
+  },
+  {
+    "type": "edge",
+    "description": "Learned: anisotropic --incompatible_with--> isotropic",
+    "timestamp": 1784526473.7400541
+  },
+  {
+    "type": "edge",
+    "description": "Learned: boson --contradicts--> fermion",
+    "timestamp": 1784526473.8061917
+  },
+  {
+    "type": "edge",
+    "description": "Learned: fermion --contradicts--> boson",
+    "timestamp": 1784526473.8678346
+  },
+  {
+    "type": "edge",
+    "description": "Learned: fermion --contradicts--> boson",
+    "timestamp": 1784526473.9251492
+  },
+  {
+    "type": "edge",
+    "description": "Learned: boson --contradicts--> fermion",
+    "timestamp": 1784526473.9810698
+  },
+  {
+    "type": "edge",
+    "description": "Learned: commutator --contradicts--> anticommutator",
+    "timestamp": 1784526474.0369651
+  },
+  {
+    "type": "edge",
+    "description": "Learned: anticommutator --contradicts--> commutator",
+    "timestamp": 1784526474.0967813
+  },
+  {
+    "type": "edge",
+    "description": "Learned: anticommutator --contradicts--> commutator",
+    "timestamp": 1784526474.1637077
+  },
+  {
+    "type": "edge",
+    "description": "Learned: commutator --contradicts--> anticommutator",
+    "timestamp": 1784526474.2265244
+  },
+  {
+    "type": "edge",
+    "description": "Learned: continuum --incompatible_with--> lattice",
+    "timestamp": 1784526474.2791522
+  },
+  {
+    "type": "edge",
+    "description": "Learned: lattice --incompatible_with--> continuum",
+    "timestamp": 1784526474.3304992
+  },
+  {
+    "type": "edge",
+    "description": "Learned: lattice --incompatible_with--> continuum",
+    "timestamp": 1784526474.3818843
+  },
+  {
+    "type": "edge",
+    "description": "Learned: continuum --incompatible_with--> lattice",
+    "timestamp": 1784526474.4384358
+  },
+  {
+    "type": "edge",
+    "description": "Learned: classical --incompatible_with--> quantum",
+    "timestamp": 1784526474.4974535
+  },
+  {
+    "type": "edge",
+    "description": "Learned: quantum --incompatible_with--> classical",
+    "timestamp": 1784526474.55941
+  },
+  {
+    "type": "edge",
+    "description": "Learned: quantum --incompatible_with--> classical",
+    "timestamp": 1784526474.6127071
+  },
+  {
+    "type": "edge",
+    "description": "Learned: classical --incompatible_with--> quantum",
+    "timestamp": 1784526474.6724963
+  },
+  {
+    "type": "edge",
+    "description": "Learned: majorana --incompatible_with--> dirac",
+    "timestamp": 1784526474.728599
+  },
+  {
+    "type": "edge",
+    "description": "Learned: dirac --incompatible_with--> majorana",
+    "timestamp": 1784526474.7817836
+  },
+  {
+    "type": "edge",
+    "description": "Learned: dirac --incompatible_with--> majorana",
+    "timestamp": 1784526474.836638
+  },
+  {
+    "type": "edge",
+    "description": "Learned: majorana --incompatible_with--> dirac",
+    "timestamp": 1784526474.8849099
+  },
+  {
+    "type": "edge",
+    "description": "Learned: unitary --contradicts--> antiunitary",
+    "timestamp": 1784526474.943964
+  },
+  {
+    "type": "edge",
+    "description": "Learned: antiunitary --contradicts--> unitary",
+    "timestamp": 1784526475.0034487
+  },
+  {
+    "type": "edge",
+    "description": "Learned: antiunitary --contradicts--> unitary",
+    "timestamp": 1784526475.0553756
+  },
+  {
+    "type": "edge",
+    "description": "Learned: unitary --contradicts--> antiunitary",
+    "timestamp": 1784526475.1096015
+  },
+  {
+    "type": "edge",
+    "description": "Learned: real --incompatible_with--> imaginary",
+    "timestamp": 1784526475.1704473
+  },
+  {
+    "type": "edge",
+    "description": "Learned: imaginary --incompatible_with--> real",
+    "timestamp": 1784526475.231135
+  },
+  {
+    "type": "edge",
+    "description": "Learned: imaginary --incompatible_with--> real",
+    "timestamp": 1784526475.2933087
+  },
+  {
+    "type": "edge",
+    "description": "Learned: real --incompatible_with--> imaginary",
+    "timestamp": 1784526475.3661578
+  },
+  {
+    "type": "edge",
+    "description": "Learned: local --incompatible_with--> nonlocal",
+    "timestamp": 1784526475.4361944
+  },
+  {
+    "type": "edge",
+    "description": "Learned: nonlocal --incompatible_with--> local",
+    "timestamp": 1784526475.4960022
+  },
+  {
+    "type": "edge",
+    "description": "Learned: nonlocal --incompatible_with--> local",
+    "timestamp": 1784526475.560013
+  },
+  {
+    "type": "edge",
+    "description": "Learned: local --incompatible_with--> nonlocal",
+    "timestamp": 1784526475.6182837
+  },
+  {
+    "type": "edge",
+    "description": "Learned: universal --co_occurs--> binary",
+    "timestamp": 1784526475.6750348
+  },
+  {
+    "type": "edge",
+    "description": "Learned: universal --co_occurs--> principle",
+    "timestamp": 1784526475.767846
+  },
+  {
+    "type": "edge",
+    "description": "Learned: binary --co_occurs--> principle",
+    "timestamp": 1784526475.8246136
+  },
+  {
+    "type": "edge",
+    "description": "Learned: golay --co_occurs--> code",
+    "timestamp": 1784526475.8892417
+  },
+  {
+    "type": "edge",
+    "description": "Learned: golden --co_occurs--> ratio",
+    "timestamp": 1784526475.9474025
+  },
+  {
+    "type": "edge",
+    "description": "Learned: correction --co_occurs--> error",
+    "timestamp": 1784526475.9952078
+  },
+  {
+    "type": "edge",
+    "description": "Learned: constant --co_occurs--> observer",
+    "timestamp": 1784526476.0454717
+  },
+  {
+    "type": "edge",
+    "description": "Learned: warm-blooded --co_occurs--> whale",
+    "timestamp": 1784526476.1074495
+  },
+  {
+    "type": "edge",
+    "description": "Learned: whale --co_occurs--> warm-blooded",
+    "timestamp": 1784526476.165734
+  },
+  {
+    "type": "edge",
+    "description": "Learned: machines --co_occurs--> widgets",
+    "timestamp": 1784526476.223744
+  },
+  {
+    "type": "edge",
+    "description": "Learned: widgets --co_occurs--> machines",
+    "timestamp": 1784526476.2912514
+  },
+  {
+    "type": "edge",
+    "description": "Learned: water --contains--> hydrogen",
+    "timestamp": 1784526476.3515255
+  },
+  {
+    "type": "edge",
+    "description": "Learned: water --contains--> oxygen",
+    "timestamp": 1784526476.4033117
+  },
+  {
+    "type": "edge",
+    "description": "Learned: photosynthesis --produces--> oxygen",
+    "timestamp": 1784526476.4942386
+  },
+  {
+    "type": "edge",
+    "description": "Learned: dna --encodes--> genetic information",
+    "timestamp": 1784526476.5685692
+  },
+  {
+    "type": "edge",
+    "description": "Learned: cell --contains--> dna",
+    "timestamp": 1784526476.6366796
+  },
+  {
+    "type": "edge",
+    "description": "Learned: sun --is_a--> star",
+    "timestamp": 1784526476.7060065
+  },
+  {
+    "type": "edge",
+    "description": "Learned: earth --is_a--> planet",
+    "timestamp": 1784526476.770283
+  },
+  {
+    "type": "edge",
+    "description": "Learned: moon --is_a--> satellite",
+    "timestamp": 1784526476.848779
+  },
+  {
+    "type": "edge",
+    "description": "Learned: pi --is_a--> transcendental",
+    "timestamp": 1784526476.9391966
+  },
+  {
+    "type": "edge",
+    "description": "Learned: golden ratio --is_a--> irrational",
+    "timestamp": 1784526476.9997027
+  },
+  {
+    "type": "edge",
+    "description": "Learned: speed of light --is_a--> physical constant",
+    "timestamp": 1784526477.0681596
+  },
+  {
+    "type": "edge",
+    "description": "Learned: water --is_a--> molecule",
+    "timestamp": 1784526477.1294785
+  },
+  {
+    "type": "edge",
+    "description": "Learned: atom --contains--> proton",
+    "timestamp": 1784526477.1915143
+  },
+  {
+    "type": "edge",
+    "description": "Learned: atom --contains--> neutron",
+    "timestamp": 1784526477.2406313
+  },
+  {
+    "type": "edge",
+    "description": "Learned: atom --contains--> electron",
+    "timestamp": 1784526477.293366
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: alpha",
+    "timestamp": 1784528161.359259
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: baryon",
+    "timestamp": 1784528161.4029808
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: beta",
+    "timestamp": 1784528161.4513595
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: evolve",
+    "timestamp": 1784528161.4961812
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: crystal",
+    "timestamp": 1784528161.5357018
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: curvature",
+    "timestamp": 1784528161.5729809
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: eigenvalue",
+    "timestamp": 1784528161.6111784
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: field",
+    "timestamp": 1784528161.6487467
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: magnitude",
+    "timestamp": 1784528161.7130706
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: tensor",
+    "timestamp": 1784528161.7507458
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: trace",
+    "timestamp": 1784528161.792763
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: variance",
+    "timestamp": 1784528161.826193
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: pi",
+    "timestamp": 1784528161.8676891
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: harmonic",
+    "timestamp": 1784528161.9185896
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: integral",
+    "timestamp": 1784528161.9530034
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: manifold",
+    "timestamp": 1784528162.0026371
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: scaling",
+    "timestamp": 1784528162.0598578
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: state",
+    "timestamp": 1784528162.1006083
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: norm",
+    "timestamp": 1784528162.1439326
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: operator",
+    "timestamp": 1784528162.191139
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: vertex",
+    "timestamp": 1784528162.2476006
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: partition",
+    "timestamp": 1784528162.2913978
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: converge",
+    "timestamp": 1784528162.3402696
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: derive",
+    "timestamp": 1784528162.3844612
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: diverge",
+    "timestamp": 1784528162.4382472
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: oscillate",
+    "timestamp": 1784528162.4898381
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: propagate",
+    "timestamp": 1784528162.5394948
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: symmetry",
+    "timestamp": 1784528162.581465
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: scale",
+    "timestamp": 1784528162.6216118
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: vector",
+    "timestamp": 1784528162.6651099
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: hydrogen",
+    "timestamp": 1784528162.707578
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: oxygen",
+    "timestamp": 1784528162.753763
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: gold",
+    "timestamp": 1784528162.7868412
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: mercury",
+    "timestamp": 1784528162.8303835
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: electron",
+    "timestamp": 1784528162.8682368
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: proton",
+    "timestamp": 1784528162.9074154
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: neutron",
+    "timestamp": 1784528162.9501946
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: photon",
+    "timestamp": 1784528162.9847436
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: gluon",
+    "timestamp": 1784528163.0231183
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: water",
+    "timestamp": 1784528163.0602212
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: dimension",
+    "timestamp": 1784528163.1004877
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: hamiltonian",
+    "timestamp": 1784528163.1376827
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: lagrangian",
+    "timestamp": 1784528163.1749303
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: energy",
+    "timestamp": 1784528163.2114842
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: coupling",
+    "timestamp": 1784528163.2496994
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: metric",
+    "timestamp": 1784528163.297486
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: anomaly",
+    "timestamp": 1784528163.3386967
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: dispersion",
+    "timestamp": 1784528163.3748217
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: number",
+    "timestamp": 1784528163.4113123
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: squeezed",
+    "timestamp": 1784528163.4974298
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: projector",
+    "timestamp": 1784528163.5446525
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: propagator",
+    "timestamp": 1784528163.5868757
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: renormalization",
+    "timestamp": 1784528163.6278503
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: regularization",
+    "timestamp": 1784528163.6654897
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: regulator",
+    "timestamp": 1784528163.711382
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: convection",
+    "timestamp": 1784528163.7523823
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: instability",
+    "timestamp": 1784528163.7983518
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: hubbard",
+    "timestamp": 1784528163.8339705
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: tunneling",
+    "timestamp": 1784528163.8718686
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: interaction",
+    "timestamp": 1784528163.9109778
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: brane",
+    "timestamp": 1784528163.9694486
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: ads",
+    "timestamp": 1784528164.0058758
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: holographic",
+    "timestamp": 1784528164.0456407
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: conformal",
+    "timestamp": 1784528164.0827394
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: topological",
+    "timestamp": 1784528164.1239932
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: weyl",
+    "timestamp": 1784528164.16347
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: chern",
+    "timestamp": 1784528164.2011998
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: quark",
+    "timestamp": 1784528164.2389076
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: hadron",
+    "timestamp": 1784528164.285291
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: strong",
+    "timestamp": 1784528164.3231244
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: weak",
+    "timestamp": 1784528164.3821778
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: massive",
+    "timestamp": 1784528164.4508395
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: massless",
+    "timestamp": 1784528164.4964507
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: critical",
+    "timestamp": 1784528164.534999
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: action",
+    "timestamp": 1784528164.5839121
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: constant",
+    "timestamp": 1784528164.6246197
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: phase",
+    "timestamp": 1784528164.6638887
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: group",
+    "timestamp": 1784528164.7100687
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: loop",
+    "timestamp": 1784528164.757362
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: divergence",
+    "timestamp": 1784528164.8043714
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: function",
+    "timestamp": 1784528164.8435974
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: functional",
+    "timestamp": 1784528164.8886008
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: derivative",
+    "timestamp": 1784528164.9527898
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: geodesic",
+    "timestamp": 1784528164.9930816
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: connection",
+    "timestamp": 1784528165.0397737
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: torsion",
+    "timestamp": 1784528165.0775132
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: tetrad",
+    "timestamp": 1784528165.1196792
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: parton",
+    "timestamp": 1784528165.1697643
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: pion",
+    "timestamp": 1784528165.2096214
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: meson",
+    "timestamp": 1784528165.2491045
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: feynman",
+    "timestamp": 1784528165.2895947
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: diagram",
+    "timestamp": 1784528165.3305576
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: casimir",
+    "timestamp": 1784528165.391351
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: dimensional regularization",
+    "timestamp": 1784528165.4325998
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: sail diagram",
+    "timestamp": 1784528165.5060904
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: lamet",
+    "timestamp": 1784528165.5520895
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: matching kernel",
+    "timestamp": 1784528165.5927918
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: dglap",
+    "timestamp": 1784528165.6327298
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: photopion",
+    "timestamp": 1784528165.6751144
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: synchrotron",
+    "timestamp": 1784528165.7148361
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: beta function",
+    "timestamp": 1784528165.7520096
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: weyl anomaly",
+    "timestamp": 1784528165.8026369
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: partition function",
+    "timestamp": 1784528165.841958
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: path integral",
+    "timestamp": 1784528165.8862777
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: hatsugai-kohmoto",
+    "timestamp": 1784528165.931507
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: parafermion",
+    "timestamp": 1784528165.9740026
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: anyon",
+    "timestamp": 1784528166.0131028
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: braiding",
+    "timestamp": 1784528166.062422
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: fusion",
+    "timestamp": 1784528166.1028202
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: verlinde",
+    "timestamp": 1784528166.1449752
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: verlinde line",
+    "timestamp": 1784528166.1884096
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: moore-read",
+    "timestamp": 1784528166.2232778
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: filling",
+    "timestamp": 1784528166.259322
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: hopping",
+    "timestamp": 1784528166.30462
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: mott",
+    "timestamp": 1784528166.347649
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: berry",
+    "timestamp": 1784528166.396085
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: chern number",
+    "timestamp": 1784528166.4562771
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: wannier",
+    "timestamp": 1784528166.495401
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: brillouin",
+    "timestamp": 1784528166.536883
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: quantum metric",
+    "timestamp": 1784528166.5775528
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: fermi surface",
+    "timestamp": 1784528166.620344
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: fermi liquid",
+    "timestamp": 1784528166.662886
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: quasiparticle",
+    "timestamp": 1784528166.7018223
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: spin squeezing",
+    "timestamp": 1784528166.7411873
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: wineland parameter",
+    "timestamp": 1784528166.7898712
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: dephasing",
+    "timestamp": 1784528166.8382623
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: dissipation",
+    "timestamp": 1784528166.877104
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: lindblad",
+    "timestamp": 1784528166.9213507
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: dissipator",
+    "timestamp": 1784528166.96662
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: kraus",
+    "timestamp": 1784528167.0066383
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: kraus operator",
+    "timestamp": 1784528167.0531037
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: squeezed state",
+    "timestamp": 1784528167.0939412
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: coherent state",
+    "timestamp": 1784528167.135579
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: holevo",
+    "timestamp": 1784528167.181225
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: holevo information",
+    "timestamp": 1784528167.225312
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: matrix product",
+    "timestamp": 1784528167.2687747
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: bond dimension",
+    "timestamp": 1784528167.334206
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: qubit",
+    "timestamp": 1784528167.3762157
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: pauli",
+    "timestamp": 1784528167.4172573
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: bcft",
+    "timestamp": 1784528167.4710128
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: einstein-hilbert",
+    "timestamp": 1784528167.5250409
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: palatini",
+    "timestamp": 1784528167.5788443
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: chern-simons",
+    "timestamp": 1784528167.6645093
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: efolds",
+    "timestamp": 1784528167.7056856
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: scale factor",
+    "timestamp": 1784528167.7477167
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: qft",
+    "timestamp": 1784528167.794822
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: cavity",
+    "timestamp": 1784528167.8359587
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: optical",
+    "timestamp": 1784528167.87903
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: tweezer",
+    "timestamp": 1784528167.9276443
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: polarizability",
+    "timestamp": 1784528167.9727404
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: rayleigh range",
+    "timestamp": 1784528168.030874
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: opa",
+    "timestamp": 1784528168.07029
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: photocurrent",
+    "timestamp": 1784528168.11192
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: oam",
+    "timestamp": 1784528168.1532633
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: helicity",
+    "timestamp": 1784528168.194289
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: rayleigh",
+    "timestamp": 1784528168.2346761
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: rayleigh number",
+    "timestamp": 1784528168.2745261
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: prandtl",
+    "timestamp": 1784528168.314646
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: benard",
+    "timestamp": 1784528168.3664856
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: darcy",
+    "timestamp": 1784528168.4096537
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: eigenfunction",
+    "timestamp": 1784528168.4495144
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: wavenumber",
+    "timestamp": 1784528168.490863
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: growth rate",
+    "timestamp": 1784528168.5390418
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: gamma distribution",
+    "timestamp": 1784528168.586114
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: waiting time",
+    "timestamp": 1784528168.6350682
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: autocatalytic",
+    "timestamp": 1784528168.70473
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: homeostasis",
+    "timestamp": 1784528168.748856
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: hilbert",
+    "timestamp": 1784528168.790663
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: hilbert space",
+    "timestamp": 1784528168.8387568
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: expectation value",
+    "timestamp": 1784528168.8863285
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: ground state",
+    "timestamp": 1784528168.9406426
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: excited state",
+    "timestamp": 1784528168.986562
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: density matrix",
+    "timestamp": 1784528169.0371332
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: commute",
+    "timestamp": 1784528169.0868564
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: interact",
+    "timestamp": 1784528169.1475165
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: squeeze",
+    "timestamp": 1784528169.1952772
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: dissipate",
+    "timestamp": 1784528169.236001
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: renormalize",
+    "timestamp": 1784528169.279066
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: regularize",
+    "timestamp": 1784528169.3184195
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: braid",
+    "timestamp": 1784528169.3551822
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: dot product",
+    "timestamp": 1784528169.4125462
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: cross product",
+    "timestamp": 1784528169.4504387
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: perturbative",
+    "timestamp": 1784528169.4858289
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: nonperturbative",
+    "timestamp": 1784528169.5255015
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: relativistic",
+    "timestamp": 1784528169.5640008
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: isotropic",
+    "timestamp": 1784528169.6015918
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: anisotropic",
+    "timestamp": 1784528169.64283
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: free",
+    "timestamp": 1784528169.682189
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: on-shell",
+    "timestamp": 1784528169.7259197
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: off-shell",
+    "timestamp": 1784528169.7718937
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: infrared",
+    "timestamp": 1784528169.817444
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: ultraviolet",
+    "timestamp": 1784528169.8514411
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: commute_with",
+    "timestamp": 1784528169.9117563
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: scales_as",
+    "timestamp": 1784528169.9610167
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: dual_to",
+    "timestamp": 1784528170.0161595
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: gradient_of",
+    "timestamp": 1784528170.053778
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: integral_of",
+    "timestamp": 1784528170.0960383
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: expectation_of",
+    "timestamp": 1784528170.1379707
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: speed of light",
+    "timestamp": 1784528170.1962652
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: gravity",
+    "timestamp": 1784528170.2389693
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: photosynthesis",
+    "timestamp": 1784528170.2854197
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: universal binary principle",
+    "timestamp": 1784528170.3298078
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: atom",
+    "timestamp": 1784528170.3691125
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: molecule",
+    "timestamp": 1784528170.4387975
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: evolution",
+    "timestamp": 1784528170.482416
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: cell",
+    "timestamp": 1784528170.5511382
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: dna",
+    "timestamp": 1784528170.6190941
+  },
+  {
+    "type": "vocab",
+    "description": "Learned: internet",
+    "timestamp": 1784528170.705664
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hamiltonian --is_a--> operator",
+    "timestamp": 1784528170.7953756
+  },
+  {
+    "type": "edge",
+    "description": "Learned: lagrangian --is_a--> functional",
+    "timestamp": 1784528170.8518405
+  },
+  {
+    "type": "edge",
+    "description": "Learned: propagator --is_a--> function",
+    "timestamp": 1784528170.9146223
+  },
+  {
+    "type": "edge",
+    "description": "Learned: weyl anomaly --is_a--> anomaly",
+    "timestamp": 1784528170.9741125
+  },
+  {
+    "type": "edge",
+    "description": "Learned: rayleigh number --is_a--> number",
+    "timestamp": 1784528171.02927
+  },
+  {
+    "type": "edge",
+    "description": "Learned: chern number --is_a--> number",
+    "timestamp": 1784528171.094644
+  },
+  {
+    "type": "edge",
+    "description": "Learned: parafermion --is_a--> fermion",
+    "timestamp": 1784528171.1507845
+  },
+  {
+    "type": "edge",
+    "description": "Learned: majorana --is_a--> fermion",
+    "timestamp": 1784528171.2099085
+  },
+  {
+    "type": "edge",
+    "description": "Learned: quark --is_a--> fermion",
+    "timestamp": 1784528171.2720437
+  },
+  {
+    "type": "edge",
+    "description": "Learned: gluon --is_a--> boson",
+    "timestamp": 1784528171.354546
+  },
+  {
+    "type": "edge",
+    "description": "Learned: density matrix --is_a--> operator",
+    "timestamp": 1784528171.4052148
+  },
+  {
+    "type": "edge",
+    "description": "Learned: commutator --is_a--> operator",
+    "timestamp": 1784528171.4585152
+  },
+  {
+    "type": "edge",
+    "description": "Learned: anticommutator --is_a--> operator",
+    "timestamp": 1784528171.5153463
+  },
+  {
+    "type": "edge",
+    "description": "Learned: ground state --is_a--> state",
+    "timestamp": 1784528171.5912025
+  },
+  {
+    "type": "edge",
+    "description": "Learned: coherent state --is_a--> state",
+    "timestamp": 1784528171.6557074
+  },
+  {
+    "type": "edge",
+    "description": "Learned: squeezed state --is_a--> state",
+    "timestamp": 1784528171.714807
+  },
+  {
+    "type": "edge",
+    "description": "Learned: projector --is_a--> operator",
+    "timestamp": 1784528171.786938
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hadron --is_a--> particle",
+    "timestamp": 1784528171.8539689
+  },
+  {
+    "type": "edge",
+    "description": "Learned: partition function --is_a--> functional",
+    "timestamp": 1784528171.917133
+  },
+  {
+    "type": "edge",
+    "description": "Learned: pion --is_a--> meson",
+    "timestamp": 1784528171.9961178
+  },
+  {
+    "type": "edge",
+    "description": "Learned: matrix product --is_a--> state",
+    "timestamp": 1784528172.0499587
+  },
+  {
+    "type": "edge",
+    "description": "Learned: kraus operator --is_a--> operator",
+    "timestamp": 1784528172.1042013
+  },
+  {
+    "type": "edge",
+    "description": "Learned: tetrad --is_a--> connection",
+    "timestamp": 1784528172.174731
+  },
+  {
+    "type": "edge",
+    "description": "Learned: ads --is_a--> manifold",
+    "timestamp": 1784528172.2287576
+  },
+  {
+    "type": "edge",
+    "description": "Learned: brane --is_a--> manifold",
+    "timestamp": 1784528172.2859604
+  },
+  {
+    "type": "edge",
+    "description": "Learned: quantum metric --is_a--> metric",
+    "timestamp": 1784528172.3538988
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hilbert space --is_a--> manifold",
+    "timestamp": 1784528172.4061635
+  },
+  {
+    "type": "edge",
+    "description": "Learned: excited state --is_a--> state",
+    "timestamp": 1784528172.4689023
+  },
+  {
+    "type": "edge",
+    "description": "Learned: baryon --is_a--> hadron",
+    "timestamp": 1784528172.5242789
+  },
+  {
+    "type": "edge",
+    "description": "Learned: fermi liquid --is_a--> state",
+    "timestamp": 1784528172.5772133
+  },
+  {
+    "type": "edge",
+    "description": "Learned: beta function --is_a--> function",
+    "timestamp": 1784528172.6336076
+  },
+  {
+    "type": "edge",
+    "description": "Learned: dot product --is_a--> operator",
+    "timestamp": 1784528172.6921093
+  },
+  {
+    "type": "edge",
+    "description": "Learned: cross product --is_a--> operator",
+    "timestamp": 1784528172.7457469
+  },
+  {
+    "type": "edge",
+    "description": "Learned: path integral --is_a--> integral",
+    "timestamp": 1784528172.8092535
+  },
+  {
+    "type": "edge",
+    "description": "Learned: majorana --has_property--> topological",
+    "timestamp": 1784528172.8901367
+  },
+  {
+    "type": "edge",
+    "description": "Learned: weyl anomaly --has_property--> conformal",
+    "timestamp": 1784528173.0063736
+  },
+  {
+    "type": "edge",
+    "description": "Learned: quark --has_property--> massive",
+    "timestamp": 1784528173.0856485
+  },
+  {
+    "type": "edge",
+    "description": "Learned: gluon --has_property--> massless",
+    "timestamp": 1784528173.1517637
+  },
+  {
+    "type": "edge",
+    "description": "Learned: photon --has_property--> massless",
+    "timestamp": 1784528173.2217698
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hubbard --has_property--> strong",
+    "timestamp": 1784528173.2790332
+  },
+  {
+    "type": "edge",
+    "description": "Learned: parafermion --has_property--> topological",
+    "timestamp": 1784528173.3450673
+  },
+  {
+    "type": "edge",
+    "description": "Learned: chern number --has_property--> topological",
+    "timestamp": 1784528173.4039345
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hatsugai-kohmoto --has_property--> strong",
+    "timestamp": 1784528173.454563
+  },
+  {
+    "type": "edge",
+    "description": "Learned: ads --has_property--> holographic",
+    "timestamp": 1784528173.5363748
+  },
+  {
+    "type": "edge",
+    "description": "Learned: squeezed state --has_property--> quantum",
+    "timestamp": 1784528173.5930293
+  },
+  {
+    "type": "edge",
+    "description": "Learned: coherent state --has_property--> quantum",
+    "timestamp": 1784528173.6485333
+  },
+  {
+    "type": "edge",
+    "description": "Learned: rayleigh number --has_property--> critical",
+    "timestamp": 1784528173.7110908
+  },
+  {
+    "type": "edge",
+    "description": "Learned: convection --has_property--> critical",
+    "timestamp": 1784528173.7825384
+  },
+  {
+    "type": "edge",
+    "description": "Learned: weyl --has_property--> conformal",
+    "timestamp": 1784528173.8422892
+  },
+  {
+    "type": "edge",
+    "description": "Learned: qft --has_property--> relativistic",
+    "timestamp": 1784528173.9166772
+  },
+  {
+    "type": "edge",
+    "description": "Learned: beta --depends_on--> coupling",
+    "timestamp": 1784528173.9713469
+  },
+  {
+    "type": "edge",
+    "description": "Learned: anomaly --depends_on--> dimension",
+    "timestamp": 1784528174.0263033
+  },
+  {
+    "type": "edge",
+    "description": "Learned: weyl anomaly --depends_on--> metric",
+    "timestamp": 1784528174.0826128
+  },
+  {
+    "type": "edge",
+    "description": "Learned: weyl anomaly --depends_on--> curvature",
+    "timestamp": 1784528174.1422017
+  },
+  {
+    "type": "edge",
+    "description": "Learned: renormalization --depends_on--> regulator",
+    "timestamp": 1784528174.2198086
+  },
+  {
+    "type": "edge",
+    "description": "Learned: rayleigh number --depends_on--> prandtl",
+    "timestamp": 1784528174.3005126
+  },
+  {
+    "type": "edge",
+    "description": "Learned: convection --depends_on--> rayleigh number",
+    "timestamp": 1784528174.3840094
+  },
+  {
+    "type": "edge",
+    "description": "Learned: parton --depends_on--> scale",
+    "timestamp": 1784528174.5262
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hubbard --depends_on--> tunneling",
+    "timestamp": 1784528174.6372416
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hubbard --depends_on--> interaction",
+    "timestamp": 1784528174.72863
+  },
+  {
+    "type": "edge",
+    "description": "Learned: beta --depends_on--> scaling",
+    "timestamp": 1784528174.7965999
+  },
+  {
+    "type": "edge",
+    "description": "Learned: regularization --depends_on--> dimension",
+    "timestamp": 1784528174.8615975
+  },
+  {
+    "type": "edge",
+    "description": "Learned: rayleigh number --depends_on--> temperature",
+    "timestamp": 1784528174.9141538
+  },
+  {
+    "type": "edge",
+    "description": "Learned: dephasing --depends_on--> dissipator",
+    "timestamp": 1784528174.9658287
+  },
+  {
+    "type": "edge",
+    "description": "Learned: spin squeezing --depends_on--> variance",
+    "timestamp": 1784528175.0348842
+  },
+  {
+    "type": "edge",
+    "description": "Learned: wineland parameter --depends_on--> spin squeezing",
+    "timestamp": 1784528175.1107626
+  },
+  {
+    "type": "edge",
+    "description": "Learned: dglap --depends_on--> coupling",
+    "timestamp": 1784528175.203366
+  },
+  {
+    "type": "edge",
+    "description": "Learned: loop --depends_on--> regularization",
+    "timestamp": 1784528175.3094
+  },
+  {
+    "type": "edge",
+    "description": "Learned: matching kernel --depends_on--> coupling",
+    "timestamp": 1784528175.367148
+  },
+  {
+    "type": "edge",
+    "description": "Learned: beta function --depends_on--> coupling",
+    "timestamp": 1784528175.440694
+  },
+  {
+    "type": "edge",
+    "description": "Learned: gamma distribution --depends_on--> waiting time",
+    "timestamp": 1784528175.5294423
+  },
+  {
+    "type": "edge",
+    "description": "Learned: growth rate --depends_on--> gamma distribution",
+    "timestamp": 1784528175.5972478
+  },
+  {
+    "type": "edge",
+    "description": "Learned: holevo information --depends_on--> density matrix",
+    "timestamp": 1784528175.672477
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hamiltonian --commutes_with--> symmetry",
+    "timestamp": 1784528175.748806
+  },
+  {
+    "type": "edge",
+    "description": "Learned: symmetry --commutes_with--> hamiltonian",
+    "timestamp": 1784528175.825136
+  },
+  {
+    "type": "edge",
+    "description": "Learned: projector --commutes_with--> hamiltonian",
+    "timestamp": 1784528175.8863423
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hamiltonian --commutes_with--> projector",
+    "timestamp": 1784528175.9406688
+  },
+  {
+    "type": "edge",
+    "description": "Learned: density matrix --commutes_with--> hamiltonian",
+    "timestamp": 1784528176.0036163
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hamiltonian --commutes_with--> density matrix",
+    "timestamp": 1784528176.0734398
+  },
+  {
+    "type": "edge",
+    "description": "Learned: number --commutes_with--> hamiltonian",
+    "timestamp": 1784528176.1404564
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hamiltonian --commutes_with--> number",
+    "timestamp": 1784528176.194486
+  },
+  {
+    "type": "edge",
+    "description": "Learned: spin --commutes_with--> hamiltonian",
+    "timestamp": 1784528176.2744231
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hamiltonian --commutes_with--> spin",
+    "timestamp": 1784528176.3513064
+  },
+  {
+    "type": "edge",
+    "description": "Learned: rayleigh number --scales_as--> temperature",
+    "timestamp": 1784528176.4145331
+  },
+  {
+    "type": "edge",
+    "description": "Learned: propagator --scales_as--> momentum",
+    "timestamp": 1784528176.4733524
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hubbard --scales_as--> tunneling",
+    "timestamp": 1784528176.5335977
+  },
+  {
+    "type": "edge",
+    "description": "Learned: dispersion --scales_as--> wavenumber",
+    "timestamp": 1784528176.5937638
+  },
+  {
+    "type": "edge",
+    "description": "Learned: growth rate --scales_as--> coupling",
+    "timestamp": 1784528176.6642516
+  },
+  {
+    "type": "edge",
+    "description": "Learned: photocurrent --scales_as--> power",
+    "timestamp": 1784528176.7216082
+  },
+  {
+    "type": "edge",
+    "description": "Learned: synchrotron --scales_as--> energy",
+    "timestamp": 1784528176.8018963
+  },
+  {
+    "type": "edge",
+    "description": "Learned: ads --is_dual_to--> bcft",
+    "timestamp": 1784528176.861322
+  },
+  {
+    "type": "edge",
+    "description": "Learned: bcft --is_dual_to--> ads",
+    "timestamp": 1784528176.9183946
+  },
+  {
+    "type": "edge",
+    "description": "Learned: holographic --is_dual_to--> conformal",
+    "timestamp": 1784528176.978381
+  },
+  {
+    "type": "edge",
+    "description": "Learned: conformal --is_dual_to--> holographic",
+    "timestamp": 1784528177.0340393
+  },
+  {
+    "type": "edge",
+    "description": "Learned: brane --is_dual_to--> boundary",
+    "timestamp": 1784528177.0920146
+  },
+  {
+    "type": "edge",
+    "description": "Learned: boundary --is_dual_to--> brane",
+    "timestamp": 1784528177.1662872
+  },
+  {
+    "type": "edge",
+    "description": "Learned: lamet --is_dual_to--> parton",
+    "timestamp": 1784528177.2299118
+  },
+  {
+    "type": "edge",
+    "description": "Learned: parton --is_dual_to--> lamet",
+    "timestamp": 1784528177.289485
+  },
+  {
+    "type": "edge",
+    "description": "Learned: matrix product --is_dual_to--> tensor",
+    "timestamp": 1784528177.350996
+  },
+  {
+    "type": "edge",
+    "description": "Learned: tensor --is_dual_to--> matrix product",
+    "timestamp": 1784528177.4134986
+  },
+  {
+    "type": "edge",
+    "description": "Learned: hamiltonian --generates--> time",
+    "timestamp": 1784528177.4675243
+  },
+  {
+    "type": "edge",
+    "description": "Learned: momentum --generates--> space",
+    "timestamp": 1784528177.5235791
+  },
+  {
+    "type": "edge",
+    "description": "Learned: symmetry --generates--> anomaly",
+    "timestamp": 1784528177.6063094
+  },
+  {
+    "type": "edge",
+    "description": "Learned: renormalization --generates--> beta",
+    "timestamp": 1784528177.6644554
+  },
+  {
+    "type": "edge",
+    "description": "Learned: dissipator --generates--> dephasing",
+    "timestamp": 1784528177.7346685
+  },
+  {
+    "type": "edge",
+    "description": "Learned: entropy --measures--> dimension",
+    "timestamp": 1784528177.8177114
+  },
+  {
+    "type": "edge",
+    "description": "Learned: chern number --measures--> topological",
+    "timestamp": 1784528177.872966
+  },
+  {
+    "type": "edge",
+    "description": "Learned: trace --measures--> density matrix",
+    "timestamp": 1784528177.939241
+  },
+  {
+    "type": "edge",
+    "description": "Learned: variance --measures--> dispersion",
+    "timestamp": 1784528178.0005589
+  },
+  {
+    "type": "edge",
+    "description": "Learned: rayleigh number --measures--> instability",
+    "timestamp": 1784528178.0624208
+  },
+  {
+    "type": "edge",
+    "description": "Learned: holevo information --measures--> information",
+    "timestamp": 1784528178.1200294
+  },
+  {
+    "type": "edge",
+    "description": "Learned: wineland parameter --measures--> squeezing",
+    "timestamp": 1784528178.184301
+  },
+  {
+    "type": "edge",
+    "description": "Learned: quantum metric --measures--> curvature",
+    "timestamp": 1784528178.240123
+  },
+  {
+    "type": "edge",
+    "description": "Learned: expectation value --measures--> operator",
+    "timestamp": 1784528178.3113568
+  },
+  {
+    "type": "edge",
+    "description": "Learned: beta function --measures--> scaling",
+    "timestamp": 1784528178.3658798
+  },
+  {
+    "type": "edge",
+    "description": "Learned: boson --contradicts--> fermion",
+    "timestamp": 1784528178.4236503
+  },
+  {
+    "type": "edge",
+    "description": "Learned: fermion --contradicts--> boson",
+    "timestamp": 1784528178.5031307
+  },
+  {
+    "type": "edge",
+    "description": "Learned: commutator --contradicts--> anticommutator",
+    "timestamp": 1784528178.5777807
+  },
+  {
+    "type": "edge",
+    "description": "Learned: anticommutator --contradicts--> commutator",
+    "timestamp": 1784528178.6333644
+  },
+  {
+    "type": "edge",
+    "description": "Learned: continuum --incompatible_with--> lattice",
+    "timestamp": 1784528178.6903956
+  },
+  {
+    "type": "edge",
+    "description": "Learned: lattice --incompatible_with--> continuum",
+    "timestamp": 1784528178.744919
+  },
+  {
+    "type": "edge",
+    "description": "Learned: classical --incompatible_with--> quantum",
+    "timestamp": 1784528178.8108997
+  },
+  {
+    "type": "edge",
+    "description": "Learned: quantum --incompatible_with--> classical",
+    "timestamp": 1784528178.9135292
+  },
+  {
+    "type": "edge",
+    "description": "Learned: majorana --incompatible_with--> dirac",
+    "timestamp": 1784528179.0027742
+  },
+  {
+    "type": "edge",
+    "description": "Learned: dirac --incompatible_with--> majorana",
+    "timestamp": 1784528179.0736072
+  },
+  {
+    "type": "edge",
+    "description": "Learned: unitary --contradicts--> antiunitary",
+    "timestamp": 1784528179.136329
+  },
+  {
+    "type": "edge",
+    "description": "Learned: antiunitary --contradicts--> unitary",
+    "timestamp": 1784528179.1979005
+  },
+  {
+    "type": "edge",
+    "description": "Learned: real --incompatible_with--> imaginary",
+    "timestamp": 1784528179.253007
+  },
+  {
+    "type": "edge",
+    "description": "Learned: imaginary --incompatible_with--> real",
+    "timestamp": 1784528179.3078291
+  },
+  {
+    "type": "edge",
+    "description": "Learned: local --incompatible_with--> nonlocal",
+    "timestamp": 1784528179.3774216
+  },
+  {
+    "type": "edge",
+    "description": "Learned: nonlocal --incompatible_with--> local",
+    "timestamp": 1784528179.4367654
+  },
+  {
+    "type": "edge",
+    "description": "Learned: on-shell --incompatible_with--> off-shell",
+    "timestamp": 1784528179.4927397
+  },
+  {
+    "type": "edge",
+    "description": "Learned: off-shell --incompatible_with--> on-shell",
+    "timestamp": 1784528179.5558794
+  },
+  {
+    "type": "edge",
+    "description": "Learned: infrared --incompatible_with--> ultraviolet",
+    "timestamp": 1784528179.6222968
+  },
+  {
+    "type": "edge",
+    "description": "Learned: ultraviolet --incompatible_with--> infrared",
+    "timestamp": 1784528179.6882427
+  },
+  {
+    "type": "edge",
+    "description": "Learned: perturbative --incompatible_with--> nonperturbative",
+    "timestamp": 1784528179.7439628
+  },
+  {
+    "type": "edge",
+    "description": "Learned: nonperturbative --incompatible_with--> perturbative",
+    "timestamp": 1784528179.8185863
+  },
+  {
+    "type": "edge",
+    "description": "Learned: free --incompatible_with--> interacting",
+    "timestamp": 1784528179.9009018
+  },
+  {
+    "type": "edge",
+    "description": "Learned: interacting --incompatible_with--> free",
+    "timestamp": 1784528179.958466
+  },
+  {
+    "type": "edge",
+    "description": "Learned: isotropic --incompatible_with--> anisotropic",
+    "timestamp": 1784528180.0236166
+  },
+  {
+    "type": "edge",
+    "description": "Learned: anisotropic --incompatible_with--> isotropic",
+    "timestamp": 1784528180.0879364
+  },
+  {
+    "type": "edge",
+    "description": "Learned: boson --contradicts--> fermion",
+    "timestamp": 1784528180.1435957
+  },
+  {
+    "type": "edge",
+    "description": "Learned: fermion --contradicts--> boson",
+    "timestamp": 1784528180.2151763
+  },
+  {
+    "type": "edge",
+    "description": "Learned: fermion --contradicts--> boson",
+    "timestamp": 1784528180.286909
+  },
+  {
+    "type": "edge",
+    "description": "Learned: boson --contradicts--> fermion",
+    "timestamp": 1784528180.3425703
+  },
+  {
+    "type": "edge",
+    "description": "Learned: commutator --contradicts--> anticommutator",
+    "timestamp": 1784528180.4024823
+  },
+  {
+    "type": "edge",
+    "description": "Learned: anticommutator --contradicts--> commutator",
+    "timestamp": 1784528180.4687793
+  },
+  {
+    "type": "edge",
+    "description": "Learned: anticommutator --contradicts--> commutator",
+    "timestamp": 1784528180.544335
+  },
+  {
+    "type": "edge",
+    "description": "Learned: commutator --contradicts--> anticommutator",
+    "timestamp": 1784528180.6017632
+  },
+  {
+    "type": "edge",
+    "description": "Learned: continuum --incompatible_with--> lattice",
+    "timestamp": 1784528180.6578653
+  },
+  {
+    "type": "edge",
+    "description": "Learned: lattice --incompatible_with--> continuum",
+    "timestamp": 1784528180.7103972
+  },
+  {
+    "type": "edge",
+    "description": "Learned: lattice --incompatible_with--> continuum",
+    "timestamp": 1784528180.775573
+  },
+  {
+    "type": "edge",
+    "description": "Learned: continuum --incompatible_with--> lattice",
+    "timestamp": 1784528180.8282812
+  },
+  {
+    "type": "edge",
+    "description": "Learned: classical --incompatible_with--> quantum",
+    "timestamp": 1784528180.9390244
+  },
+  {
+    "type": "edge",
+    "description": "Learned: quantum --incompatible_with--> classical",
+    "timestamp": 1784528180.9954653
+  },
+  {
+    "type": "edge",
+    "description": "Learned: quantum --incompatible_with--> classical",
+    "timestamp": 1784528181.0593855
+  },
+  {
+    "type": "edge",
+    "description": "Learned: classical --incompatible_with--> quantum",
+    "timestamp": 1784528181.1202426
+  },
+  {
+    "type": "edge",
+    "description": "Learned: majorana --incompatible_with--> dirac",
+    "timestamp": 1784528181.1786063
+  },
+  {
+    "type": "edge",
+    "description": "Learned: dirac --incompatible_with--> majorana",
+    "timestamp": 1784528181.2361023
+  },
+  {
+    "type": "edge",
+    "description": "Learned: dirac --incompatible_with--> majorana",
+    "timestamp": 1784528181.2903192
+  },
+  {
+    "type": "edge",
+    "description": "Learned: majorana --incompatible_with--> dirac",
+    "timestamp": 1784528181.3495905
+  },
+  {
+    "type": "edge",
+    "description": "Learned: unitary --contradicts--> antiunitary",
+    "timestamp": 1784528181.422766
+  },
+  {
+    "type": "edge",
+    "description": "Learned: antiunitary --contradicts--> unitary",
+    "timestamp": 1784528181.4741905
+  },
+  {
+    "type": "edge",
+    "description": "Learned: antiunitary --contradicts--> unitary",
+    "timestamp": 1784528181.555611
+  },
+  {
+    "type": "edge",
+    "description": "Learned: unitary --contradicts--> antiunitary",
+    "timestamp": 1784528181.6124442
+  },
+  {
+    "type": "edge",
+    "description": "Learned: real --incompatible_with--> imaginary",
+    "timestamp": 1784528181.666568
+  },
+  {
+    "type": "edge",
+    "description": "Learned: imaginary --incompatible_with--> real",
+    "timestamp": 1784528181.723331
+  },
+  {
+    "type": "edge",
+    "description": "Learned: imaginary --incompatible_with--> real",
+    "timestamp": 1784528181.78542
+  },
+  {
+    "type": "edge",
+    "description": "Learned: real --incompatible_with--> imaginary",
+    "timestamp": 1784528181.840982
+  },
+  {
+    "type": "edge",
+    "description": "Learned: local --incompatible_with--> nonlocal",
+    "timestamp": 1784528181.8980856
+  },
+  {
+    "type": "edge",
+    "description": "Learned: nonlocal --incompatible_with--> local",
+    "timestamp": 1784528181.9883864
+  },
+  {
+    "type": "edge",
+    "description": "Learned: nonlocal --incompatible_with--> local",
+    "timestamp": 1784528182.0651155
+  },
+  {
+    "type": "edge",
+    "description": "Learned: local --incompatible_with--> nonlocal",
+    "timestamp": 1784528182.1395698
+  },
+  {
+    "type": "edge",
+    "description": "Learned: universal --co_occurs--> binary",
+    "timestamp": 1784528182.2132165
+  },
+  {
+    "type": "edge",
+    "description": "Learned: universal --co_occurs--> principle",
+    "timestamp": 1784528182.2946904
+  },
+  {
+    "type": "edge",
+    "description": "Learned: binary --co_occurs--> principle",
+    "timestamp": 1784528182.358052
+  },
+  {
+    "type": "edge",
+    "description": "Learned: golay --co_occurs--> code",
+    "timestamp": 1784528182.4147267
+  },
+  {
+    "type": "edge",
+    "description": "Learned: golden --co_occurs--> ratio",
+    "timestamp": 1784528182.4778678
+  },
+  {
+    "type": "edge",
+    "description": "Learned: correction --co_occurs--> error",
+    "timestamp": 1784528182.5613463
+  },
+  {
+    "type": "edge",
+    "description": "Learned: constant --co_occurs--> observer",
+    "timestamp": 1784528182.6185
+  },
+  {
+    "type": "edge",
+    "description": "Learned: warm-blooded --co_occurs--> whale",
+    "timestamp": 1784528182.6740327
+  },
+  {
+    "type": "edge",
+    "description": "Learned: whale --co_occurs--> warm-blooded",
+    "timestamp": 1784528182.7322576
+  },
+  {
+    "type": "edge",
+    "description": "Learned: machines --co_occurs--> widgets",
+    "timestamp": 1784528182.7847304
+  },
+  {
+    "type": "edge",
+    "description": "Learned: widgets --co_occurs--> machines",
+    "timestamp": 1784528182.8518372
+  },
+  {
+    "type": "edge",
+    "description": "Learned: seed --co_occurs--> light",
+    "timestamp": 1784528182.9373286
+  },
+  {
+    "type": "edge",
+    "description": "Learned: differentiate --co_occurs--> x",
+    "timestamp": 1784528182.9936574
+  },
+  {
+    "type": "edge",
+    "description": "Learned: x --co_occurs--> respect",
+    "timestamp": 1784528183.0611248
+  },
+  {
+    "type": "edge",
+    "description": "Learned: x --co_occurs--> solve",
+    "timestamp": 1784528183.1174166
+  },
+  {
+    "type": "edge",
+    "description": "Learned: all --co_occurs--> warm-blooded",
+    "timestamp": 1784528183.1884568
+  },
+  {
+    "type": "edge",
+    "description": "Learned: all --co_occurs--> whale",
+    "timestamp": 1784528183.244444
+  },
+  {
+    "type": "edge",
+    "description": "Learned: mammals --co_occurs--> warm-blooded",
+    "timestamp": 1784528183.3030949
+  },
+  {
+    "type": "edge",
+    "description": "Learned: mammals --co_occurs--> whale",
+    "timestamp": 1784528183.3629508
+  },
+  {
+    "type": "edge",
+    "description": "Learned: warm-blooded --co_occurs--> mammal",
+    "timestamp": 1784528183.4359365
+  },
+  {
+    "type": "edge",
+    "description": "Learned: whale --co_occurs--> mammal",
+    "timestamp": 1784528183.490263
+  },
+  {
+    "type": "edge",
+    "description": "Learned: mammal --co_occurs--> whale",
+    "timestamp": 1784528183.5604293
+  },
+  {
+    "type": "edge",
+    "description": "Learned: mammal --co_occurs--> warm-blooded",
+    "timestamp": 1784528183.6166644
+  },
+  {
+    "type": "edge",
+    "description": "Learned: along --co_occurs--> machines",
+    "timestamp": 1784528183.6782658
+  },
+  {
+    "type": "edge",
+    "description": "Learned: along --co_occurs--> widgets",
+    "timestamp": 1784528183.734311
+  },
+  {
+    "type": "edge",
+    "description": "Learned: machines --co_occurs--> minutes",
+    "timestamp": 1784528183.8005977
+  },
+  {
+    "type": "edge",
+    "description": "Learned: minutes --co_occurs--> widgets",
+    "timestamp": 1784528183.8587966
+  },
+  {
+    "type": "edge",
+    "description": "Learned: minutes --co_occurs--> machines",
+    "timestamp": 1784528183.9171588
+  },
+  {
+    "type": "edge",
+    "description": "Learned: name --co_occurs--> alice",
+    "timestamp": 1784528183.9772475
+  },
+  {
+    "type": "edge",
+    "description": "Learned: alice --co_occurs--> name",
+    "timestamp": 1784528184.0313568
+  },
+  {
+    "type": "edge",
+    "description": "Learned: atomic number --co_occurs--> hydrogen",
+    "timestamp": 1784528184.1004558
+  },
+  {
+    "type": "edge",
+    "description": "Learned: formula --co_occurs--> water",
+    "timestamp": 1784528184.1628766
+  },
+  {
+    "type": "edge",
+    "description": "Learned: formula --co_occurs--> chemical",
+    "timestamp": 1784528184.2184412
+  },
+  {
+    "type": "edge",
+    "description": "Learned: water --co_occurs--> chemical",
+    "timestamp": 1784528184.2837486
+  },
+  {
+    "type": "edge",
+    "description": "Learned: plane --co_occurs--> closest",
+    "timestamp": 1784528184.3504574
+  },
+  {
+    "type": "edge",
+    "description": "Learned: plane --co_occurs--> sun",
+    "timestamp": 1784528184.4232786
+  },
+  {
+    "type": "edge",
+    "description": "Learned: closest --co_occurs--> sun",
+    "timestamp": 1784528184.488589
+  },
+  {
+    "type": "edge",
+    "description": "Learned: pi --co_occurs--> value",
+    "timestamp": 1784528184.5595999
+  },
+  {
+    "type": "edge",
+    "description": "Learned: golay --co_occurs--> role",
+    "timestamp": 1784528184.6131322
+  },
+  {
+    "type": "edge",
+    "description": "Learned: golay --co_occurs--> substrate",
+    "timestamp": 1784528184.6734204
+  },
+  {
+    "type": "edge",
+    "description": "Learned: role --co_occurs--> substrate",
+    "timestamp": 1784528184.741569
+  },
+  {
+    "type": "edge",
+    "description": "Learned: role --co_occurs--> code",
+    "timestamp": 1784528184.804902
+  },
+  {
+    "type": "edge",
+    "description": "Learned: substrate --co_occurs--> code",
+    "timestamp": 1784528184.8609574
+  },
+  {
+    "type": "edge",
+    "description": "Learned: leech --co_occurs--> lattice",
+    "timestamp": 1784528184.9403725
+  },
+  {
+    "type": "edge",
+    "description": "Learned: leech --co_occurs--> golay",
+    "timestamp": 1784528185.0022912
+  },
+  {
+    "type": "edge",
+    "description": "Learned: leech --co_occurs--> code",
+    "timestamp": 1784528185.0642774
+  },
+  {
+    "type": "edge",
+    "description": "Learned: lattice --co_occurs--> golay",
+    "timestamp": 1784528185.127492
+  },
+  {
+    "type": "edge",
+    "description": "Learned: lattice --co_occurs--> code",
+    "timestamp": 1784528185.1858084
+  },
+  {
+    "type": "edge",
+    "description": "Learned: monad --co_occurs--> triadic",
+    "timestamp": 1784528185.2537296
+  },
+  {
+    "type": "edge",
+    "description": "Learned: four --co_occurs--> layers",
+    "timestamp": 1784528185.3134341
+  },
+  {
+    "type": "edge",
+    "description": "Learned: four --co_occurs--> substrate",
+    "timestamp": 1784528185.395878
+  },
+  {
+    "type": "edge",
+    "description": "Learned: four --co_occurs--> ontological",
+    "timestamp": 1784528185.4523635
+  },
+  {
+    "type": "edge",
+    "description": "Learned: layers --co_occurs--> substrate",
+    "timestamp": 1784528185.5204296
+  },
+  {
+    "type": "edge",
+    "description": "Learned: layers --co_occurs--> ontological",
+    "timestamp": 1784528185.5967689
+  },
+  {
+    "type": "edge",
+    "description": "Learned: substrate --co_occurs--> ontological",
+    "timestamp": 1784528185.658901
+  },
+  {
+    "type": "edge",
+    "description": "Learned: differentiate --co_occurs--> respect",
+    "timestamp": 1784528185.7580225
+  },
+  {
+    "type": "edge",
+    "description": "Learned: all --co_occurs--> mammals",
+    "timestamp": 1784528185.823694
+  },
+  {
+    "type": "edge",
+    "description": "Learned: all --co_occurs--> mammal",
+    "timestamp": 1784528185.882848
+  },
+  {
+    "type": "edge",
+    "description": "Learned: mammals --co_occurs--> mammal",
+    "timestamp": 1784528185.9414227
+  },
+  {
+    "type": "edge",
+    "description": "Learned: sequence --co_occurs--> next",
+    "timestamp": 1784528186.0046923
+  },
+  {
+    "type": "edge",
+    "description": "Learned: along --co_occurs--> minutes",
+    "timestamp": 1784528186.061388
+  },
+  {
+    "type": "edge",
+    "description": "Learned: opposite --co_occurs--> hot",
+    "timestamp": 1784528186.1262412
+  },
+  {
+    "type": "edge",
+    "description": "Learned: difference --co_occurs--> effect",
+    "timestamp": 1784528186.200519
+  },
+  {
+    "type": "edge",
+    "description": "Learned: difference --co_occurs--> affect",
+    "timestamp": 1784528186.2604418
+  },
+  {
+    "type": "edge",
+    "description": "Learned: effect --co_occurs--> affect",
+    "timestamp": 1784528186.3169036
+  },
+  {
+    "type": "edge",
+    "description": "Learned: name --co_occurs--> told",
+    "timestamp": 1784528186.3752558
+  },
+  {
+    "type": "edge",
+    "description": "Learned: gravity --co_occurs--> simple",
+    "timestamp": 1784528186.427117
+  },
+  {
+    "type": "edge",
+    "description": "Learned: gravity --co_occurs--> terms",
+    "timestamp": 1784528186.4826767
+  },
+  {
+    "type": "edge",
+    "description": "Learned: simple --co_occurs--> terms",
+    "timestamp": 1784528186.5490763
+  },
+  {
+    "type": "edge",
+    "description": "Learned: magnitude --co_occurs--> vector",
+    "timestamp": 1784528186.6100013
+  },
+  {
+    "type": "edge",
+    "description": "Learned: matrix --co_occurs--> determinant",
+    "timestamp": 1784528186.679603
+  },
+  {
+    "type": "edge",
+    "description": "Learned: told --co_occurs--> name",
+    "timestamp": 1784528186.7370365
+  },
+  {
+    "type": "edge",
+    "description": "Learned: mercury --is_a--> planet",
+    "timestamp": 1784528186.7956574
+  },
+  {
+    "type": "edge",
+    "description": "Learned: water --is_a--> molecule",
+    "timestamp": 1784528186.8724968
+  },
+  {
+    "type": "edge",
+    "description": "Learned: water --contains--> hydrogen",
+    "timestamp": 1784528186.9313176
+  },
+  {
+    "type": "edge",
+    "description": "Learned: water --contains--> oxygen",
+    "timestamp": 1784528186.9970155
+  },
+  {
+    "type": "edge",
+    "description": "Learned: atom --contains--> proton",
+    "timestamp": 1784528187.0549328
+  },
+  {
+    "type": "edge",
+    "description": "Learned: atom --contains--> neutron",
+    "timestamp": 1784528187.1119678
+  },
+  {
+    "type": "edge",
+    "description": "Learned: atom --contains--> electron",
+    "timestamp": 1784528187.1790867
+  },
+  {
+    "type": "edge",
+    "description": "Learned: photosynthesis --produces--> glucose",
+    "timestamp": 1784528187.2375531
+  },
+  {
+    "type": "edge",
+    "description": "Learned: photosynthesis --produces--> oxygen",
+    "timestamp": 1784528187.2926595
+  },
+  {
+    "type": "edge",
+    "description": "Learned: earth --is_a--> planet",
+    "timestamp": 1784528187.3540127
+  },
+  {
+    "type": "edge",
+    "description": "Learned: sun --is_a--> star",
+    "timestamp": 1784528187.424827
+  },
+  {
+    "type": "edge",
+    "description": "Learned: moon --is_a--> satellite",
+    "timestamp": 1784528187.488536
+  },
+  {
+    "type": "edge",
+    "description": "Learned: gravity --is_a--> fundamental force",
+    "timestamp": 1784528187.5549319
+  },
+  {
+    "type": "edge",
+    "description": "Learned: gravity --attracts--> mass",
+    "timestamp": 1784528187.6476107
+  },
+  {
+    "type": "edge",
+    "description": "Learned: gravity --depends_on--> mass",
+    "timestamp": 1784528187.7188575
+  },
+  {
+    "type": "edge",
+    "description": "Learned: gravity --depends_on--> distance",
+    "timestamp": 1784528187.79193
+  },
+  {
+    "type": "edge",
+    "description": "Learned: speed of light --is_a--> physical constant",
+    "timestamp": 1784528187.8661318
+  },
+  {
+    "type": "edge",
+    "description": "Learned: pi --is_a--> mathematical constant",
+    "timestamp": 1784528187.9379413
+  },
+  {
+    "type": "edge",
+    "description": "Learned: golden ratio --is_a--> irrational",
+    "timestamp": 1784528188.038235
+  },
+  {
+    "type": "edge",
+    "description": "Learned: electron --has_property--> negative charge",
+    "timestamp": 1784528188.1016011
+  },
+  {
+    "type": "edge",
+    "description": "Learned: proton --has_property--> positive charge",
+    "timestamp": 1784528188.1588807
+  },
+  {
+    "type": "edge",
+    "description": "Learned: neutron --has_property--> no charge",
+    "timestamp": 1784528188.2188766
+  },
+  {
+    "type": "edge",
+    "description": "Learned: photon --is_a--> boson",
+    "timestamp": 1784528188.2791574
+  },
+  {
+    "type": "edge",
+    "description": "Learned: photon --carries--> electromagnetic force",
+    "timestamp": 1784528188.3535829
+  },
+  {
+    "type": "edge",
+    "description": "Learned: evolution --is_a--> biological process",
+    "timestamp": 1784528188.4084725
+  },
+  {
+    "type": "edge",
+    "description": "Learned: cell --contains--> dna",
+    "timestamp": 1784528188.4696307
+  },
+  {
+    "type": "edge",
+    "description": "Learned: cell --contains--> mitochondria",
+    "timestamp": 1784528188.5311053
+  },
+  {
+    "type": "edge",
+    "description": "Learned: internet --is_a--> network",
+    "timestamp": 1784528188.583365
+  },
+  {
+    "type": "edge",
+    "description": "Learned: algorithm --is_a--> procedure",
+    "timestamp": 1784528188.6681046
+  },
+  {
+    "type": "edge",
+    "description": "Learned: machine learning --is_a--> artificial intelligence",
+    "timestamp": 1784528188.7631614
+  },
+  {
+    "type": "edge",
+    "description": "Learned: sun --co_occurs--> closest",
+    "timestamp": 1784528188.8208323
+  }
+]

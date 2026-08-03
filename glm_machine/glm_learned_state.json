@@ -1,0 +1,838 @@
+{
+  "cooccurrence": {
+    "gravity": {
+      "hamiltonian": 1,
+      "time": 3,
+      "mass": 2,
+      "simple": 10,
+      "terms": 10,
+      "physicist": 2,
+      "analyze": 3,
+      "force": 1,
+      "attract": 1,
+      "objects": 1,
+      "now": 1,
+      "concept": 2,
+      "instance": 1
+    },
+    "hamiltonian": {
+      "gravity": 1,
+      "time": 1
+    },
+    "time": {
+      "gravity": 3,
+      "hamiltonian": 1,
+      "physicist": 1,
+      "analyze": 1,
+      "instance": 1
+    },
+    "universal": {
+      "binary": 15,
+      "principle": 15
+    },
+    "binary": {
+      "universal": 15,
+      "principle": 15
+    },
+    "principle": {
+      "universal": 15,
+      "binary": 15,
+      "golay": 1,
+      "code": 1
+    },
+    "golay": {
+      "principle": 1,
+      "code": 21,
+      "role": 8,
+      "substrate": 8,
+      "leech": 8,
+      "lattice": 8
+    },
+    "code": {
+      "principle": 1,
+      "golay": 21,
+      "role": 8,
+      "substrate": 8,
+      "leech": 8,
+      "lattice": 8
+    },
+    "correction": {
+      "substrate": 1,
+      "error": 3
+    },
+    "substrate": {
+      "correction": 1,
+      "error": 1,
+      "golay": 8,
+      "role": 8,
+      "code": 8,
+      "four": 8,
+      "layers": 8,
+      "ontological": 8
+    },
+    "error": {
+      "correction": 3,
+      "substrate": 1
+    },
+    "observer": {
+      "constant": 11
+    },
+    "constant": {
+      "observer": 11
+    },
+    "coherence": {
+      "ubp": 1,
+      "framework": 1
+    },
+    "ubp": {
+      "coherence": 1,
+      "framework": 1
+    },
+    "framework": {
+      "coherence": 1,
+      "ubp": 1
+    },
+    "mass": {
+      "gravity": 2,
+      "energy": 1,
+      "force": 1,
+      "physicist": 1,
+      "attract": 1,
+      "objects": 1
+    },
+    "boson": {
+      "fermion": 3,
+      "differ": 1
+    },
+    "fermion": {
+      "boson": 3,
+      "differ": 1
+    },
+    "differ": {
+      "boson": 1,
+      "fermion": 1
+    },
+    "golden": {
+      "ratio": 5
+    },
+    "ratio": {
+      "golden": 5
+    },
+    "energy": {
+      "mass": 1
+    },
+    "atomic number": {
+      "hydrogen": 8
+    },
+    "hydrogen": {
+      "atomic number": 8,
+      "instance": 1,
+      "oxygen": 1
+    },
+    "seed": {
+      "light": 11
+    },
+    "light": {
+      "seed": 11
+    },
+    "formula": {
+      "water": 10,
+      "chemical": 10
+    },
+    "water": {
+      "formula": 10,
+      "chemical": 10
+    },
+    "chemical": {
+      "formula": 10,
+      "water": 10
+    },
+    "plane": {
+      "closest": 10,
+      "sun": 10,
+      "physicist": 1,
+      "create": 1,
+      "quantum": 1,
+      "mechanism": 1,
+      "help": 1
+    },
+    "closest": {
+      "plane": 10,
+      "sun": 10
+    },
+    "sun": {
+      "plane": 10,
+      "closest": 10
+    },
+    "pi": {
+      "value": 10
+    },
+    "value": {
+      "pi": 10,
+      "geometry": 2
+    },
+    "role": {
+      "golay": 8,
+      "substrate": 8,
+      "code": 8
+    },
+    "leech": {
+      "lattice": 8,
+      "golay": 8,
+      "code": 8
+    },
+    "lattice": {
+      "leech": 8,
+      "golay": 8,
+      "code": 8
+    },
+    "monad": {
+      "triadic": 8
+    },
+    "triadic": {
+      "monad": 8
+    },
+    "four": {
+      "layers": 8,
+      "substrate": 8,
+      "ontological": 8
+    },
+    "layers": {
+      "four": 8,
+      "substrate": 8,
+      "ontological": 8
+    },
+    "ontological": {
+      "four": 8,
+      "layers": 8,
+      "substrate": 8
+    },
+    "differentiate": {
+      "x": 16,
+      "respect": 8
+    },
+    "x": {
+      "differentiate": 16,
+      "respect": 16,
+      "solve": 16
+    },
+    "respect": {
+      "differentiate": 8,
+      "x": 16
+    },
+    "solve": {
+      "x": 16
+    },
+    "all": {
+      "mammals": 8,
+      "warm-blooded": 16,
+      "whale": 16,
+      "mammal": 8
+    },
+    "mammals": {
+      "all": 8,
+      "warm-blooded": 16,
+      "whale": 16,
+      "mammal": 8
+    },
+    "warm-blooded": {
+      "all": 16,
+      "mammals": 16,
+      "whale": 32,
+      "mammal": 16
+    },
+    "whale": {
+      "all": 16,
+      "mammals": 16,
+      "warm-blooded": 32,
+      "mammal": 16
+    },
+    "mammal": {
+      "all": 8,
+      "mammals": 8,
+      "warm-blooded": 16,
+      "whale": 16
+    },
+    "sequence": {
+      "next": 8
+    },
+    "next": {
+      "sequence": 8
+    },
+    "along": {
+      "machines": 18,
+      "minutes": 9,
+      "widgets": 18
+    },
+    "machines": {
+      "along": 18,
+      "minutes": 18,
+      "widgets": 36
+    },
+    "minutes": {
+      "along": 9,
+      "machines": 18,
+      "widgets": 18
+    },
+    "widgets": {
+      "along": 18,
+      "machines": 36,
+      "minutes": 18
+    },
+    "opposite": {
+      "hot": 8
+    },
+    "hot": {
+      "opposite": 8
+    },
+    "difference": {
+      "effect": 8,
+      "affect": 8
+    },
+    "effect": {
+      "difference": 8,
+      "affect": 8
+    },
+    "affect": {
+      "difference": 8,
+      "effect": 8
+    },
+    "name": {
+      "alice": 17,
+      "told": 9
+    },
+    "alice": {
+      "name": 17,
+      "am": 1,
+      "physicist": 1
+    },
+    "told": {
+      "name": 9
+    },
+    "simple": {
+      "gravity": 10,
+      "terms": 10
+    },
+    "terms": {
+      "gravity": 10,
+      "simple": 10
+    },
+    "magnitude": {
+      "vector": 8
+    },
+    "vector": {
+      "magnitude": 8
+    },
+    "matrix": {
+      "determinant": 8
+    },
+    "determinant": {
+      "matrix": 8
+    },
+    "am": {
+      "alice": 1,
+      "physicist": 1
+    },
+    "physicist": {
+      "alice": 1,
+      "am": 1,
+      "create": 1,
+      "plane": 1,
+      "quantum": 1,
+      "mechanism": 1,
+      "help": 1,
+      "time": 1,
+      "analyze": 1,
+      "gravity": 2,
+      "force": 1,
+      "attract": 1,
+      "mass": 1,
+      "objects": 1
+    },
+    "quantum": {
+      "entanglement": 1,
+      "physicist": 1,
+      "create": 1,
+      "plane": 1,
+      "mechanism": 1,
+      "help": 1
+    },
+    "entanglement": {
+      "quantum": 1
+    },
+    "dark": {
+      "matter": 1
+    },
+    "matter": {
+      "dark": 1
+    },
+    "create": {
+      "physicist": 1,
+      "plane": 1,
+      "quantum": 1,
+      "mechanism": 1,
+      "help": 1
+    },
+    "mechanism": {
+      "physicist": 1,
+      "create": 1,
+      "plane": 1,
+      "quantum": 1,
+      "help": 1
+    },
+    "help": {
+      "physicist": 1,
+      "create": 1,
+      "plane": 1,
+      "quantum": 1,
+      "mechanism": 1
+    },
+    "analyze": {
+      "physicist": 1,
+      "time": 1,
+      "gravity": 3,
+      "concept": 2
+    },
+    "force": {
+      "gravity": 1,
+      "physicist": 1,
+      "attract": 1,
+      "mass": 1,
+      "objects": 1
+    },
+    "attract": {
+      "gravity": 1,
+      "force": 1,
+      "physicist": 1,
+      "mass": 1,
+      "objects": 1
+    },
+    "objects": {
+      "gravity": 1,
+      "force": 1,
+      "physicist": 1,
+      "attract": 1,
+      "mass": 1
+    },
+    "now": {
+      "gravity": 1
+    },
+    "concept": {
+      "analyze": 2,
+      "gravity": 2
+    },
+    "topological": {
+      "health": 2,
+      "knowledge": 2,
+      "graph": 2
+    },
+    "health": {
+      "topological": 2,
+      "knowledge": 2,
+      "graph": 2
+    },
+    "knowledge": {
+      "topological": 2,
+      "health": 2,
+      "graph": 2
+    },
+    "graph": {
+      "topological": 2,
+      "health": 2,
+      "knowledge": 2
+    },
+    "geometry": {
+      "value": 2
+    },
+    "instance": {
+      "gravity": 1,
+      "time": 1,
+      "hydrogen": 1,
+      "oxygen": 1
+    },
+    "oxygen": {
+      "instance": 1,
+      "hydrogen": 1
+    }
+  },
+  "learned_words": {},
+  "learned_edges": [
+    [
+      "universal",
+      "co_occurs",
+      "binary"
+    ],
+    [
+      "universal",
+      "co_occurs",
+      "principle"
+    ],
+    [
+      "binary",
+      "co_occurs",
+      "principle"
+    ],
+    [
+      "golay",
+      "co_occurs",
+      "code"
+    ],
+    [
+      "golden",
+      "co_occurs",
+      "ratio"
+    ],
+    [
+      "correction",
+      "co_occurs",
+      "error"
+    ],
+    [
+      "constant",
+      "co_occurs",
+      "observer"
+    ],
+    [
+      "warm-blooded",
+      "co_occurs",
+      "whale"
+    ],
+    [
+      "whale",
+      "co_occurs",
+      "warm-blooded"
+    ],
+    [
+      "machines",
+      "co_occurs",
+      "widgets"
+    ],
+    [
+      "widgets",
+      "co_occurs",
+      "machines"
+    ],
+    [
+      "seed",
+      "co_occurs",
+      "light"
+    ],
+    [
+      "differentiate",
+      "co_occurs",
+      "x"
+    ],
+    [
+      "x",
+      "co_occurs",
+      "respect"
+    ],
+    [
+      "x",
+      "co_occurs",
+      "solve"
+    ],
+    [
+      "all",
+      "co_occurs",
+      "warm-blooded"
+    ],
+    [
+      "all",
+      "co_occurs",
+      "whale"
+    ],
+    [
+      "mammals",
+      "co_occurs",
+      "warm-blooded"
+    ],
+    [
+      "mammals",
+      "co_occurs",
+      "whale"
+    ],
+    [
+      "warm-blooded",
+      "co_occurs",
+      "mammal"
+    ],
+    [
+      "whale",
+      "co_occurs",
+      "mammal"
+    ],
+    [
+      "mammal",
+      "co_occurs",
+      "whale"
+    ],
+    [
+      "mammal",
+      "co_occurs",
+      "warm-blooded"
+    ],
+    [
+      "along",
+      "co_occurs",
+      "machines"
+    ],
+    [
+      "along",
+      "co_occurs",
+      "widgets"
+    ],
+    [
+      "machines",
+      "co_occurs",
+      "minutes"
+    ],
+    [
+      "minutes",
+      "co_occurs",
+      "widgets"
+    ],
+    [
+      "minutes",
+      "co_occurs",
+      "machines"
+    ],
+    [
+      "name",
+      "co_occurs",
+      "alice"
+    ],
+    [
+      "alice",
+      "co_occurs",
+      "name"
+    ],
+    [
+      "atomic number",
+      "co_occurs",
+      "hydrogen"
+    ],
+    [
+      "formula",
+      "co_occurs",
+      "water"
+    ],
+    [
+      "formula",
+      "co_occurs",
+      "chemical"
+    ],
+    [
+      "water",
+      "co_occurs",
+      "chemical"
+    ],
+    [
+      "plane",
+      "co_occurs",
+      "closest"
+    ],
+    [
+      "plane",
+      "co_occurs",
+      "sun"
+    ],
+    [
+      "closest",
+      "co_occurs",
+      "sun"
+    ],
+    [
+      "pi",
+      "co_occurs",
+      "value"
+    ],
+    [
+      "golay",
+      "co_occurs",
+      "role"
+    ],
+    [
+      "golay",
+      "co_occurs",
+      "substrate"
+    ],
+    [
+      "role",
+      "co_occurs",
+      "substrate"
+    ],
+    [
+      "role",
+      "co_occurs",
+      "code"
+    ],
+    [
+      "substrate",
+      "co_occurs",
+      "code"
+    ],
+    [
+      "leech",
+      "co_occurs",
+      "lattice"
+    ],
+    [
+      "leech",
+      "co_occurs",
+      "golay"
+    ],
+    [
+      "leech",
+      "co_occurs",
+      "code"
+    ],
+    [
+      "lattice",
+      "co_occurs",
+      "golay"
+    ],
+    [
+      "lattice",
+      "co_occurs",
+      "code"
+    ],
+    [
+      "monad",
+      "co_occurs",
+      "triadic"
+    ],
+    [
+      "four",
+      "co_occurs",
+      "layers"
+    ],
+    [
+      "four",
+      "co_occurs",
+      "substrate"
+    ],
+    [
+      "four",
+      "co_occurs",
+      "ontological"
+    ],
+    [
+      "layers",
+      "co_occurs",
+      "substrate"
+    ],
+    [
+      "layers",
+      "co_occurs",
+      "ontological"
+    ],
+    [
+      "substrate",
+      "co_occurs",
+      "ontological"
+    ],
+    [
+      "differentiate",
+      "co_occurs",
+      "respect"
+    ],
+    [
+      "all",
+      "co_occurs",
+      "mammals"
+    ],
+    [
+      "all",
+      "co_occurs",
+      "mammal"
+    ],
+    [
+      "mammals",
+      "co_occurs",
+      "mammal"
+    ],
+    [
+      "sequence",
+      "co_occurs",
+      "next"
+    ],
+    [
+      "along",
+      "co_occurs",
+      "minutes"
+    ],
+    [
+      "opposite",
+      "co_occurs",
+      "hot"
+    ],
+    [
+      "difference",
+      "co_occurs",
+      "effect"
+    ],
+    [
+      "difference",
+      "co_occurs",
+      "affect"
+    ],
+    [
+      "effect",
+      "co_occurs",
+      "affect"
+    ],
+    [
+      "name",
+      "co_occurs",
+      "told"
+    ],
+    [
+      "gravity",
+      "co_occurs",
+      "simple"
+    ],
+    [
+      "gravity",
+      "co_occurs",
+      "terms"
+    ],
+    [
+      "simple",
+      "co_occurs",
+      "terms"
+    ],
+    [
+      "magnitude",
+      "co_occurs",
+      "vector"
+    ],
+    [
+      "matrix",
+      "co_occurs",
+      "determinant"
+    ],
+    [
+      "told",
+      "co_occurs",
+      "name"
+    ],
+    [
+      "sun",
+      "co_occurs",
+      "closest"
+    ],
+    [
+      "gravity",
+      "co_occurs",
+      "time"
+    ],
+    [
+      "analyze",
+      "co_occurs",
+      "gravity"
+    ]
+  ],
+  "query_count": 325,
+  "vectors_refined": 544
+}

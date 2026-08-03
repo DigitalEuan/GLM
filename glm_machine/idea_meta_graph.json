@@ -1,0 +1,4411 @@
+{
+  "ideas": [
+    {
+      "idea_id": "idea_1_63b03104",
+      "centroid": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "topic_nouns": [
+        "nrci",
+        "substrate",
+        "coherence",
+        "correction",
+        "error"
+      ],
+      "thesis": "nrci depends on substrate and nrci measures coherence.",
+      "backbone": [
+        {
+          "src": "nrci",
+          "label": "depends_on",
+          "dst": "substrate"
+        },
+        {
+          "src": "nrci",
+          "label": "measures",
+          "dst": "coherence"
+        }
+      ],
+      "peak_coherence": 0.7056,
+      "turn_count": 4,
+      "created_at_turn": 4
+    },
+    {
+      "idea_id": "idea_2_63b03104",
+      "centroid": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        1
+      ],
+      "topic_nouns": [
+        "nrci",
+        "substrate",
+        "coherence",
+        "correction",
+        "error",
+        "entropy",
+        "difference",
+        "multiplicity"
+      ],
+      "thesis": "nrci depends on substrate and nrci measures coherence.",
+      "backbone": [
+        {
+          "src": "nrci",
+          "label": "depends_on",
+          "dst": "substrate"
+        },
+        {
+          "src": "nrci",
+          "label": "measures",
+          "dst": "coherence"
+        },
+        {
+          "src": "substrate",
+          "label": "lattice_adjacent_1",
+          "dst": "entropy"
+        },
+        {
+          "src": "coherence",
+          "label": "lattice_adjacent_1",
+          "dst": "multiplicity"
+        },
+        {
+          "src": "correction",
+          "label": "lattice_adjacent_3",
+          "dst": "difference"
+        }
+      ],
+      "peak_coherence": 0.7056,
+      "turn_count": 4,
+      "created_at_turn": 4
+    },
+    {
+      "idea_id": "idea_3_63b03104",
+      "centroid": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "topic_nouns": [
+        "nrci",
+        "substrate",
+        "coherence",
+        "correction",
+        "error",
+        "entropy",
+        "difference",
+        "multiplicity",
+        "toxic",
+        "width",
+        "oxidation",
+        "catalyze",
+        "ubp",
+        "framework"
+      ],
+      "thesis": "nrci depends on substrate and nrci measures coherence.",
+      "backbone": [
+        {
+          "src": "nrci",
+          "label": "depends_on",
+          "dst": "substrate"
+        },
+        {
+          "src": "nrci",
+          "label": "measures",
+          "dst": "coherence"
+        },
+        {
+          "src": "substrate",
+          "label": "lattice_adjacent_1",
+          "dst": "entropy"
+        },
+        {
+          "src": "coherence",
+          "label": "lattice_adjacent_1",
+          "dst": "multiplicity"
+        },
+        {
+          "src": "correction",
+          "label": "lattice_adjacent_3",
+          "dst": "difference"
+        },
+        {
+          "src": "entropy",
+          "label": "lattice_adjacent_3",
+          "dst": "toxic"
+        },
+        {
+          "src": "entropy",
+          "label": "lattice_adjacent_1",
+          "dst": "width"
+        },
+        {
+          "src": "entropy",
+          "label": "lattice_adjacent_1",
+          "dst": "oxidation"
+        },
+        {
+          "src": "difference",
+          "label": "lattice_adjacent_1",
+          "dst": "catalyze"
+        }
+      ],
+      "peak_coherence": 0.7056,
+      "turn_count": 6,
+      "created_at_turn": 6
+    },
+    {
+      "idea_id": "idea_4_63b03104",
+      "centroid": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "topic_nouns": [
+        "nrci",
+        "substrate",
+        "coherence",
+        "correction",
+        "error",
+        "entropy",
+        "difference",
+        "multiplicity",
+        "toxic",
+        "width",
+        "oxidation",
+        "catalyze",
+        "ubp",
+        "framework",
+        "macro_atomic_bridge",
+        "atp_yield",
+        "cause",
+        "bridge"
+      ],
+      "thesis": "nrci depends on substrate and nrci measures coherence.",
+      "backbone": [
+        {
+          "src": "nrci",
+          "label": "depends_on",
+          "dst": "substrate"
+        },
+        {
+          "src": "nrci",
+          "label": "measures",
+          "dst": "coherence"
+        },
+        {
+          "src": "substrate",
+          "label": "lattice_adjacent_1",
+          "dst": "entropy"
+        },
+        {
+          "src": "coherence",
+          "label": "lattice_adjacent_1",
+          "dst": "multiplicity"
+        },
+        {
+          "src": "correction",
+          "label": "lattice_adjacent_3",
+          "dst": "difference"
+        },
+        {
+          "src": "entropy",
+          "label": "lattice_adjacent_3",
+          "dst": "toxic"
+        },
+        {
+          "src": "entropy",
+          "label": "lattice_adjacent_1",
+          "dst": "width"
+        },
+        {
+          "src": "entropy",
+          "label": "lattice_adjacent_1",
+          "dst": "oxidation"
+        },
+        {
+          "src": "difference",
+          "label": "lattice_adjacent_1",
+          "dst": "catalyze"
+        },
+        {
+          "src": "difference",
+          "label": "lattice_adjacent_3",
+          "dst": "macro_atomic_bridge"
+        },
+        {
+          "src": "difference",
+          "label": "lattice_adjacent_3",
+          "dst": "atp_yield"
+        },
+        {
+          "src": "difference",
+          "label": "lattice_adjacent_3",
+          "dst": "cause"
+        },
+        {
+          "src": "difference",
+          "label": "lattice_adjacent_1",
+          "dst": "bridge"
+        }
+      ],
+      "peak_coherence": 0.7056,
+      "turn_count": 6,
+      "created_at_turn": 6
+    },
+    {
+      "idea_id": "idea_5_d59f4185",
+      "centroid": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "universal",
+        "binary",
+        "principle"
+      ],
+      "thesis": "An idea regarding universal, binary.",
+      "backbone": [
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "binary"
+        },
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "principle"
+        },
+        {
+          "src": "binary",
+          "label": "co_occurs",
+          "dst": "principle"
+        }
+      ],
+      "peak_coherence": 0.7,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_6_d59f4185",
+      "centroid": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "universal",
+        "binary",
+        "principle"
+      ],
+      "thesis": "An idea regarding universal, binary.",
+      "backbone": [
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "binary"
+        },
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "principle"
+        },
+        {
+          "src": "binary",
+          "label": "co_occurs",
+          "dst": "principle"
+        }
+      ],
+      "peak_coherence": 0.7,
+      "turn_count": 2,
+      "created_at_turn": 2
+    },
+    {
+      "idea_id": "idea_7_d59f4185",
+      "centroid": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "universal",
+        "binary",
+        "principle"
+      ],
+      "thesis": "An idea regarding universal, binary.",
+      "backbone": [
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "binary"
+        },
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "principle"
+        },
+        {
+          "src": "binary",
+          "label": "co_occurs",
+          "dst": "principle"
+        }
+      ],
+      "peak_coherence": 0.7,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_8_d59f4185",
+      "centroid": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "universal",
+        "binary",
+        "principle"
+      ],
+      "thesis": "An idea regarding universal, binary.",
+      "backbone": [
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "binary"
+        },
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "principle"
+        },
+        {
+          "src": "binary",
+          "label": "co_occurs",
+          "dst": "principle"
+        }
+      ],
+      "peak_coherence": 0.7,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_9_d59f4185",
+      "centroid": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "universal",
+        "binary",
+        "principle"
+      ],
+      "thesis": "An idea regarding universal, binary.",
+      "backbone": [
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "binary"
+        },
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "principle"
+        },
+        {
+          "src": "binary",
+          "label": "co_occurs",
+          "dst": "principle"
+        }
+      ],
+      "peak_coherence": 0.7,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_10_d59f4185",
+      "centroid": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "universal",
+        "binary",
+        "principle"
+      ],
+      "thesis": "An idea regarding universal, binary.",
+      "backbone": [
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "binary"
+        },
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "principle"
+        },
+        {
+          "src": "binary",
+          "label": "co_occurs",
+          "dst": "principle"
+        }
+      ],
+      "peak_coherence": 0.7,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_11_d8aa9232",
+      "centroid": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "differentiate",
+        "x",
+        "respect"
+      ],
+      "thesis": "An idea regarding differentiate, x.",
+      "backbone": [
+        {
+          "src": "differentiate",
+          "label": "co_occurs",
+          "dst": "x"
+        },
+        {
+          "src": "x",
+          "label": "co_occurs",
+          "dst": "respect"
+        }
+      ],
+      "peak_coherence": 0.7248,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_12_f2249a35",
+      "centroid": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0
+      ],
+      "topic_nouns": [
+        "all",
+        "mammals",
+        "warm-blooded",
+        "whale",
+        "mammal"
+      ],
+      "thesis": "An idea regarding all, mammals.",
+      "backbone": [
+        {
+          "src": "all",
+          "label": "co_occurs",
+          "dst": "warm-blooded"
+        },
+        {
+          "src": "all",
+          "label": "co_occurs",
+          "dst": "whale"
+        },
+        {
+          "src": "mammals",
+          "label": "co_occurs",
+          "dst": "warm-blooded"
+        },
+        {
+          "src": "mammals",
+          "label": "co_occurs",
+          "dst": "whale"
+        },
+        {
+          "src": "warm-blooded",
+          "label": "co_occurs",
+          "dst": "whale"
+        },
+        {
+          "src": "warm-blooded",
+          "label": "co_occurs",
+          "dst": "mammal"
+        },
+        {
+          "src": "whale",
+          "label": "co_occurs",
+          "dst": "mammal"
+        }
+      ],
+      "peak_coherence": 0.7699,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_13_67352673",
+      "centroid": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "topic_nouns": [
+        "along",
+        "machines",
+        "minutes",
+        "widgets"
+      ],
+      "thesis": "An idea regarding along, machines.",
+      "backbone": [
+        {
+          "src": "along",
+          "label": "co_occurs",
+          "dst": "machines"
+        },
+        {
+          "src": "along",
+          "label": "co_occurs",
+          "dst": "widgets"
+        },
+        {
+          "src": "machines",
+          "label": "co_occurs",
+          "dst": "minutes"
+        },
+        {
+          "src": "machines",
+          "label": "co_occurs",
+          "dst": "widgets"
+        },
+        {
+          "src": "minutes",
+          "label": "co_occurs",
+          "dst": "widgets"
+        }
+      ],
+      "peak_coherence": 0.7997,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_14_28db4850",
+      "centroid": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "formula",
+        "water",
+        "chemical"
+      ],
+      "thesis": "An idea regarding formula, water.",
+      "backbone": [
+        {
+          "src": "formula",
+          "label": "co_occurs",
+          "dst": "water"
+        },
+        {
+          "src": "formula",
+          "label": "co_occurs",
+          "dst": "chemical"
+        },
+        {
+          "src": "water",
+          "label": "co_occurs",
+          "dst": "chemical"
+        }
+      ],
+      "peak_coherence": 0.7091,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_15_d59f4185",
+      "centroid": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "universal",
+        "binary",
+        "principle"
+      ],
+      "thesis": "An idea regarding universal, binary.",
+      "backbone": [
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "binary"
+        },
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "principle"
+        },
+        {
+          "src": "binary",
+          "label": "co_occurs",
+          "dst": "principle"
+        }
+      ],
+      "peak_coherence": 0.7,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_16_67352673",
+      "centroid": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "topic_nouns": [
+        "along",
+        "machines",
+        "minutes",
+        "widgets"
+      ],
+      "thesis": "An idea regarding along, machines.",
+      "backbone": [
+        {
+          "src": "along",
+          "label": "co_occurs",
+          "dst": "machines"
+        },
+        {
+          "src": "along",
+          "label": "co_occurs",
+          "dst": "minutes"
+        },
+        {
+          "src": "along",
+          "label": "co_occurs",
+          "dst": "widgets"
+        },
+        {
+          "src": "machines",
+          "label": "co_occurs",
+          "dst": "minutes"
+        },
+        {
+          "src": "machines",
+          "label": "co_occurs",
+          "dst": "widgets"
+        },
+        {
+          "src": "minutes",
+          "label": "co_occurs",
+          "dst": "widgets"
+        }
+      ],
+      "peak_coherence": 0.7997,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_17_f598f0a4",
+      "centroid": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1
+      ],
+      "topic_nouns": [
+        "gravity",
+        "simple",
+        "terms"
+      ],
+      "thesis": "An idea regarding gravity, simple.",
+      "backbone": [
+        {
+          "src": "gravity",
+          "label": "co_occurs",
+          "dst": "simple"
+        },
+        {
+          "src": "gravity",
+          "label": "co_occurs",
+          "dst": "terms"
+        },
+        {
+          "src": "simple",
+          "label": "co_occurs",
+          "dst": "terms"
+        }
+      ],
+      "peak_coherence": 0.7339,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_18_28db4850",
+      "centroid": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "formula",
+        "water",
+        "chemical"
+      ],
+      "thesis": "An idea regarding formula, water.",
+      "backbone": [
+        {
+          "src": "formula",
+          "label": "co_occurs",
+          "dst": "water"
+        },
+        {
+          "src": "formula",
+          "label": "co_occurs",
+          "dst": "chemical"
+        },
+        {
+          "src": "water",
+          "label": "co_occurs",
+          "dst": "chemical"
+        }
+      ],
+      "peak_coherence": 0.7091,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_19_28db4850",
+      "centroid": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "formula",
+        "water",
+        "chemical"
+      ],
+      "thesis": "An idea regarding formula, water.",
+      "backbone": [
+        {
+          "src": "formula",
+          "label": "co_occurs",
+          "dst": "water"
+        },
+        {
+          "src": "formula",
+          "label": "co_occurs",
+          "dst": "chemical"
+        },
+        {
+          "src": "water",
+          "label": "co_occurs",
+          "dst": "chemical"
+        }
+      ],
+      "peak_coherence": 0.7091,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_20_d59f4185",
+      "centroid": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "universal",
+        "binary",
+        "principle"
+      ],
+      "thesis": "An idea regarding universal, binary.",
+      "backbone": [
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "binary"
+        },
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "principle"
+        },
+        {
+          "src": "binary",
+          "label": "co_occurs",
+          "dst": "principle"
+        }
+      ],
+      "peak_coherence": 0.7,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_21_e186e9da",
+      "centroid": [
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0
+      ],
+      "topic_nouns": [
+        "golay",
+        "role",
+        "substrate",
+        "code"
+      ],
+      "thesis": "An idea regarding golay, role.",
+      "backbone": [
+        {
+          "src": "golay",
+          "label": "co_occurs",
+          "dst": "role"
+        },
+        {
+          "src": "golay",
+          "label": "co_occurs",
+          "dst": "substrate"
+        },
+        {
+          "src": "golay",
+          "label": "co_occurs",
+          "dst": "code"
+        },
+        {
+          "src": "role",
+          "label": "co_occurs",
+          "dst": "substrate"
+        },
+        {
+          "src": "role",
+          "label": "co_occurs",
+          "dst": "code"
+        },
+        {
+          "src": "substrate",
+          "label": "co_occurs",
+          "dst": "code"
+        }
+      ],
+      "peak_coherence": 0.7883,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_22_e1022ce2",
+      "centroid": [
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "topic_nouns": [
+        "leech",
+        "lattice",
+        "golay",
+        "code"
+      ],
+      "thesis": "An idea regarding leech, lattice.",
+      "backbone": [
+        {
+          "src": "leech",
+          "label": "co_occurs",
+          "dst": "lattice"
+        },
+        {
+          "src": "leech",
+          "label": "co_occurs",
+          "dst": "golay"
+        },
+        {
+          "src": "leech",
+          "label": "co_occurs",
+          "dst": "code"
+        },
+        {
+          "src": "lattice",
+          "label": "co_occurs",
+          "dst": "golay"
+        },
+        {
+          "src": "lattice",
+          "label": "co_occurs",
+          "dst": "code"
+        },
+        {
+          "src": "golay",
+          "label": "co_occurs",
+          "dst": "code"
+        }
+      ],
+      "peak_coherence": 0.8204,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_23_bb4966f0",
+      "centroid": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "topic_nouns": [
+        "four",
+        "layers",
+        "substrate",
+        "ontological"
+      ],
+      "thesis": "An idea regarding four, layers.",
+      "backbone": [
+        {
+          "src": "four",
+          "label": "co_occurs",
+          "dst": "layers"
+        },
+        {
+          "src": "four",
+          "label": "co_occurs",
+          "dst": "substrate"
+        },
+        {
+          "src": "four",
+          "label": "co_occurs",
+          "dst": "ontological"
+        },
+        {
+          "src": "layers",
+          "label": "co_occurs",
+          "dst": "substrate"
+        },
+        {
+          "src": "layers",
+          "label": "co_occurs",
+          "dst": "ontological"
+        },
+        {
+          "src": "substrate",
+          "label": "co_occurs",
+          "dst": "ontological"
+        }
+      ],
+      "peak_coherence": 0.8308,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_24_d8aa9232",
+      "centroid": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "differentiate",
+        "x",
+        "respect"
+      ],
+      "thesis": "An idea regarding differentiate, x.",
+      "backbone": [
+        {
+          "src": "differentiate",
+          "label": "co_occurs",
+          "dst": "x"
+        },
+        {
+          "src": "differentiate",
+          "label": "co_occurs",
+          "dst": "respect"
+        },
+        {
+          "src": "x",
+          "label": "co_occurs",
+          "dst": "respect"
+        }
+      ],
+      "peak_coherence": 0.8381,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_25_f2249a35",
+      "centroid": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0
+      ],
+      "topic_nouns": [
+        "all",
+        "mammals",
+        "warm-blooded",
+        "whale",
+        "mammal"
+      ],
+      "thesis": "An idea regarding all, mammals.",
+      "backbone": [
+        {
+          "src": "all",
+          "label": "co_occurs",
+          "dst": "mammals"
+        },
+        {
+          "src": "all",
+          "label": "co_occurs",
+          "dst": "warm-blooded"
+        },
+        {
+          "src": "all",
+          "label": "co_occurs",
+          "dst": "whale"
+        },
+        {
+          "src": "all",
+          "label": "co_occurs",
+          "dst": "mammal"
+        },
+        {
+          "src": "mammals",
+          "label": "co_occurs",
+          "dst": "warm-blooded"
+        },
+        {
+          "src": "mammals",
+          "label": "co_occurs",
+          "dst": "whale"
+        },
+        {
+          "src": "mammals",
+          "label": "co_occurs",
+          "dst": "mammal"
+        },
+        {
+          "src": "warm-blooded",
+          "label": "co_occurs",
+          "dst": "whale"
+        },
+        {
+          "src": "warm-blooded",
+          "label": "co_occurs",
+          "dst": "mammal"
+        },
+        {
+          "src": "whale",
+          "label": "co_occurs",
+          "dst": "mammal"
+        }
+      ],
+      "peak_coherence": 0.7699,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_26_67352673",
+      "centroid": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "topic_nouns": [
+        "along",
+        "machines",
+        "minutes",
+        "widgets"
+      ],
+      "thesis": "An idea regarding along, machines.",
+      "backbone": [
+        {
+          "src": "along",
+          "label": "co_occurs",
+          "dst": "machines"
+        },
+        {
+          "src": "along",
+          "label": "co_occurs",
+          "dst": "minutes"
+        },
+        {
+          "src": "along",
+          "label": "co_occurs",
+          "dst": "widgets"
+        },
+        {
+          "src": "machines",
+          "label": "co_occurs",
+          "dst": "minutes"
+        },
+        {
+          "src": "machines",
+          "label": "co_occurs",
+          "dst": "widgets"
+        },
+        {
+          "src": "minutes",
+          "label": "co_occurs",
+          "dst": "widgets"
+        }
+      ],
+      "peak_coherence": 0.7997,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_27_86442dea",
+      "centroid": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "difference",
+        "effect",
+        "affect"
+      ],
+      "thesis": "An idea regarding difference, effect.",
+      "backbone": [
+        {
+          "src": "difference",
+          "label": "co_occurs",
+          "dst": "effect"
+        },
+        {
+          "src": "difference",
+          "label": "co_occurs",
+          "dst": "affect"
+        },
+        {
+          "src": "effect",
+          "label": "co_occurs",
+          "dst": "affect"
+        }
+      ],
+      "peak_coherence": 0.7846,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_28_f598f0a4",
+      "centroid": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1
+      ],
+      "topic_nouns": [
+        "gravity",
+        "simple",
+        "terms"
+      ],
+      "thesis": "An idea regarding gravity, simple.",
+      "backbone": [
+        {
+          "src": "gravity",
+          "label": "co_occurs",
+          "dst": "simple"
+        },
+        {
+          "src": "gravity",
+          "label": "co_occurs",
+          "dst": "terms"
+        },
+        {
+          "src": "simple",
+          "label": "co_occurs",
+          "dst": "terms"
+        }
+      ],
+      "peak_coherence": 0.7339,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_29_28db4850",
+      "centroid": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "formula",
+        "water",
+        "chemical"
+      ],
+      "thesis": "An idea regarding formula, water.",
+      "backbone": [
+        {
+          "src": "formula",
+          "label": "co_occurs",
+          "dst": "water"
+        },
+        {
+          "src": "formula",
+          "label": "co_occurs",
+          "dst": "chemical"
+        },
+        {
+          "src": "water",
+          "label": "co_occurs",
+          "dst": "chemical"
+        }
+      ],
+      "peak_coherence": 0.7091,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_30_d59f4185",
+      "centroid": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "universal",
+        "binary",
+        "principle"
+      ],
+      "thesis": "An idea regarding universal, binary.",
+      "backbone": [
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "binary"
+        },
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "principle"
+        },
+        {
+          "src": "binary",
+          "label": "co_occurs",
+          "dst": "principle"
+        }
+      ],
+      "peak_coherence": 0.7,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_31_e186e9da",
+      "centroid": [
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0
+      ],
+      "topic_nouns": [
+        "golay",
+        "role",
+        "substrate",
+        "code"
+      ],
+      "thesis": "An idea regarding golay, role.",
+      "backbone": [
+        {
+          "src": "golay",
+          "label": "co_occurs",
+          "dst": "role"
+        },
+        {
+          "src": "golay",
+          "label": "co_occurs",
+          "dst": "substrate"
+        },
+        {
+          "src": "golay",
+          "label": "co_occurs",
+          "dst": "code"
+        },
+        {
+          "src": "role",
+          "label": "co_occurs",
+          "dst": "substrate"
+        },
+        {
+          "src": "role",
+          "label": "co_occurs",
+          "dst": "code"
+        },
+        {
+          "src": "substrate",
+          "label": "co_occurs",
+          "dst": "code"
+        }
+      ],
+      "peak_coherence": 0.7883,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_32_e1022ce2",
+      "centroid": [
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "topic_nouns": [
+        "leech",
+        "lattice",
+        "golay",
+        "code"
+      ],
+      "thesis": "An idea regarding leech, lattice.",
+      "backbone": [
+        {
+          "src": "leech",
+          "label": "co_occurs",
+          "dst": "lattice"
+        },
+        {
+          "src": "leech",
+          "label": "co_occurs",
+          "dst": "golay"
+        },
+        {
+          "src": "leech",
+          "label": "co_occurs",
+          "dst": "code"
+        },
+        {
+          "src": "lattice",
+          "label": "co_occurs",
+          "dst": "golay"
+        },
+        {
+          "src": "lattice",
+          "label": "co_occurs",
+          "dst": "code"
+        },
+        {
+          "src": "golay",
+          "label": "co_occurs",
+          "dst": "code"
+        }
+      ],
+      "peak_coherence": 0.8204,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_33_bb4966f0",
+      "centroid": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "topic_nouns": [
+        "four",
+        "layers",
+        "substrate",
+        "ontological"
+      ],
+      "thesis": "An idea regarding four, layers.",
+      "backbone": [
+        {
+          "src": "four",
+          "label": "co_occurs",
+          "dst": "layers"
+        },
+        {
+          "src": "four",
+          "label": "co_occurs",
+          "dst": "substrate"
+        },
+        {
+          "src": "four",
+          "label": "co_occurs",
+          "dst": "ontological"
+        },
+        {
+          "src": "layers",
+          "label": "co_occurs",
+          "dst": "substrate"
+        },
+        {
+          "src": "layers",
+          "label": "co_occurs",
+          "dst": "ontological"
+        },
+        {
+          "src": "substrate",
+          "label": "co_occurs",
+          "dst": "ontological"
+        }
+      ],
+      "peak_coherence": 0.8308,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_34_d8aa9232",
+      "centroid": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "differentiate",
+        "x",
+        "respect"
+      ],
+      "thesis": "An idea regarding differentiate, x.",
+      "backbone": [
+        {
+          "src": "differentiate",
+          "label": "co_occurs",
+          "dst": "x"
+        },
+        {
+          "src": "differentiate",
+          "label": "co_occurs",
+          "dst": "respect"
+        },
+        {
+          "src": "x",
+          "label": "co_occurs",
+          "dst": "respect"
+        }
+      ],
+      "peak_coherence": 0.8381,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_35_f2249a35",
+      "centroid": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0
+      ],
+      "topic_nouns": [
+        "all",
+        "mammals",
+        "warm-blooded",
+        "whale",
+        "mammal"
+      ],
+      "thesis": "An idea regarding all, mammals.",
+      "backbone": [
+        {
+          "src": "all",
+          "label": "co_occurs",
+          "dst": "mammals"
+        },
+        {
+          "src": "all",
+          "label": "co_occurs",
+          "dst": "warm-blooded"
+        },
+        {
+          "src": "all",
+          "label": "co_occurs",
+          "dst": "whale"
+        },
+        {
+          "src": "all",
+          "label": "co_occurs",
+          "dst": "mammal"
+        },
+        {
+          "src": "mammals",
+          "label": "co_occurs",
+          "dst": "warm-blooded"
+        },
+        {
+          "src": "mammals",
+          "label": "co_occurs",
+          "dst": "whale"
+        },
+        {
+          "src": "mammals",
+          "label": "co_occurs",
+          "dst": "mammal"
+        },
+        {
+          "src": "warm-blooded",
+          "label": "co_occurs",
+          "dst": "whale"
+        },
+        {
+          "src": "warm-blooded",
+          "label": "co_occurs",
+          "dst": "mammal"
+        },
+        {
+          "src": "whale",
+          "label": "co_occurs",
+          "dst": "mammal"
+        }
+      ],
+      "peak_coherence": 0.7699,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_36_67352673",
+      "centroid": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "topic_nouns": [
+        "along",
+        "machines",
+        "minutes",
+        "widgets"
+      ],
+      "thesis": "An idea regarding along, machines.",
+      "backbone": [
+        {
+          "src": "along",
+          "label": "co_occurs",
+          "dst": "machines"
+        },
+        {
+          "src": "along",
+          "label": "co_occurs",
+          "dst": "minutes"
+        },
+        {
+          "src": "along",
+          "label": "co_occurs",
+          "dst": "widgets"
+        },
+        {
+          "src": "machines",
+          "label": "co_occurs",
+          "dst": "minutes"
+        },
+        {
+          "src": "machines",
+          "label": "co_occurs",
+          "dst": "widgets"
+        },
+        {
+          "src": "minutes",
+          "label": "co_occurs",
+          "dst": "widgets"
+        }
+      ],
+      "peak_coherence": 0.7997,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_37_86442dea",
+      "centroid": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "difference",
+        "effect",
+        "affect"
+      ],
+      "thesis": "An idea regarding difference, effect.",
+      "backbone": [
+        {
+          "src": "difference",
+          "label": "co_occurs",
+          "dst": "effect"
+        },
+        {
+          "src": "difference",
+          "label": "co_occurs",
+          "dst": "affect"
+        },
+        {
+          "src": "effect",
+          "label": "co_occurs",
+          "dst": "affect"
+        }
+      ],
+      "peak_coherence": 0.7846,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_38_f598f0a4",
+      "centroid": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1
+      ],
+      "topic_nouns": [
+        "gravity",
+        "simple",
+        "terms"
+      ],
+      "thesis": "An idea regarding gravity, simple.",
+      "backbone": [
+        {
+          "src": "gravity",
+          "label": "co_occurs",
+          "dst": "simple"
+        },
+        {
+          "src": "gravity",
+          "label": "co_occurs",
+          "dst": "terms"
+        },
+        {
+          "src": "simple",
+          "label": "co_occurs",
+          "dst": "terms"
+        }
+      ],
+      "peak_coherence": 0.7339,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_39_28db4850",
+      "centroid": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "formula",
+        "water",
+        "chemical"
+      ],
+      "thesis": "An idea regarding formula, water.",
+      "backbone": [
+        {
+          "src": "formula",
+          "label": "co_occurs",
+          "dst": "water"
+        },
+        {
+          "src": "formula",
+          "label": "co_occurs",
+          "dst": "chemical"
+        },
+        {
+          "src": "water",
+          "label": "co_occurs",
+          "dst": "chemical"
+        }
+      ],
+      "peak_coherence": 0.7091,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_40_d59f4185",
+      "centroid": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "universal",
+        "binary",
+        "principle"
+      ],
+      "thesis": "An idea regarding universal, binary.",
+      "backbone": [
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "binary"
+        },
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "principle"
+        },
+        {
+          "src": "binary",
+          "label": "co_occurs",
+          "dst": "principle"
+        }
+      ],
+      "peak_coherence": 0.7,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_41_e186e9da",
+      "centroid": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "topic_nouns": [
+        "golay",
+        "role",
+        "substrate",
+        "code"
+      ],
+      "thesis": "An idea regarding golay, role.",
+      "backbone": [
+        {
+          "src": "golay",
+          "label": "co_occurs",
+          "dst": "role"
+        },
+        {
+          "src": "golay",
+          "label": "co_occurs",
+          "dst": "substrate"
+        },
+        {
+          "src": "golay",
+          "label": "co_occurs",
+          "dst": "code"
+        },
+        {
+          "src": "role",
+          "label": "co_occurs",
+          "dst": "substrate"
+        },
+        {
+          "src": "role",
+          "label": "co_occurs",
+          "dst": "code"
+        },
+        {
+          "src": "substrate",
+          "label": "co_occurs",
+          "dst": "code"
+        }
+      ],
+      "peak_coherence": 0.8067,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_42_e1022ce2",
+      "centroid": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "topic_nouns": [
+        "leech",
+        "lattice",
+        "golay",
+        "code"
+      ],
+      "thesis": "An idea regarding leech, lattice.",
+      "backbone": [
+        {
+          "src": "leech",
+          "label": "co_occurs",
+          "dst": "lattice"
+        },
+        {
+          "src": "leech",
+          "label": "co_occurs",
+          "dst": "golay"
+        },
+        {
+          "src": "leech",
+          "label": "co_occurs",
+          "dst": "code"
+        },
+        {
+          "src": "lattice",
+          "label": "co_occurs",
+          "dst": "golay"
+        },
+        {
+          "src": "lattice",
+          "label": "co_occurs",
+          "dst": "code"
+        },
+        {
+          "src": "golay",
+          "label": "co_occurs",
+          "dst": "code"
+        }
+      ],
+      "peak_coherence": 0.8308,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_43_bb4966f0",
+      "centroid": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      "topic_nouns": [
+        "four",
+        "layers",
+        "substrate",
+        "ontological"
+      ],
+      "thesis": "An idea regarding four, layers.",
+      "backbone": [
+        {
+          "src": "four",
+          "label": "co_occurs",
+          "dst": "layers"
+        },
+        {
+          "src": "four",
+          "label": "co_occurs",
+          "dst": "substrate"
+        },
+        {
+          "src": "four",
+          "label": "co_occurs",
+          "dst": "ontological"
+        },
+        {
+          "src": "layers",
+          "label": "co_occurs",
+          "dst": "substrate"
+        },
+        {
+          "src": "layers",
+          "label": "co_occurs",
+          "dst": "ontological"
+        },
+        {
+          "src": "substrate",
+          "label": "co_occurs",
+          "dst": "ontological"
+        }
+      ],
+      "peak_coherence": 0.8665,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_44_d8aa9232",
+      "centroid": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "differentiate",
+        "x",
+        "respect"
+      ],
+      "thesis": "An idea regarding differentiate, x.",
+      "backbone": [
+        {
+          "src": "differentiate",
+          "label": "co_occurs",
+          "dst": "x"
+        },
+        {
+          "src": "differentiate",
+          "label": "co_occurs",
+          "dst": "respect"
+        },
+        {
+          "src": "x",
+          "label": "co_occurs",
+          "dst": "respect"
+        }
+      ],
+      "peak_coherence": 0.8381,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_45_f2249a35",
+      "centroid": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0
+      ],
+      "topic_nouns": [
+        "all",
+        "mammals",
+        "warm-blooded",
+        "whale",
+        "mammal"
+      ],
+      "thesis": "An idea regarding all, mammals.",
+      "backbone": [
+        {
+          "src": "all",
+          "label": "co_occurs",
+          "dst": "mammals"
+        },
+        {
+          "src": "all",
+          "label": "co_occurs",
+          "dst": "warm-blooded"
+        },
+        {
+          "src": "all",
+          "label": "co_occurs",
+          "dst": "whale"
+        },
+        {
+          "src": "all",
+          "label": "co_occurs",
+          "dst": "mammal"
+        },
+        {
+          "src": "mammals",
+          "label": "co_occurs",
+          "dst": "warm-blooded"
+        },
+        {
+          "src": "mammals",
+          "label": "co_occurs",
+          "dst": "whale"
+        },
+        {
+          "src": "mammals",
+          "label": "co_occurs",
+          "dst": "mammal"
+        },
+        {
+          "src": "warm-blooded",
+          "label": "co_occurs",
+          "dst": "whale"
+        },
+        {
+          "src": "warm-blooded",
+          "label": "co_occurs",
+          "dst": "mammal"
+        },
+        {
+          "src": "whale",
+          "label": "co_occurs",
+          "dst": "mammal"
+        }
+      ],
+      "peak_coherence": 0.7699,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_46_67352673",
+      "centroid": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "topic_nouns": [
+        "along",
+        "machines",
+        "minutes",
+        "widgets"
+      ],
+      "thesis": "An idea regarding along, machines.",
+      "backbone": [
+        {
+          "src": "along",
+          "label": "co_occurs",
+          "dst": "machines"
+        },
+        {
+          "src": "along",
+          "label": "co_occurs",
+          "dst": "minutes"
+        },
+        {
+          "src": "along",
+          "label": "co_occurs",
+          "dst": "widgets"
+        },
+        {
+          "src": "machines",
+          "label": "co_occurs",
+          "dst": "minutes"
+        },
+        {
+          "src": "machines",
+          "label": "co_occurs",
+          "dst": "widgets"
+        },
+        {
+          "src": "minutes",
+          "label": "co_occurs",
+          "dst": "widgets"
+        }
+      ],
+      "peak_coherence": 0.7997,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_47_86442dea",
+      "centroid": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "difference",
+        "effect",
+        "affect"
+      ],
+      "thesis": "An idea regarding difference, effect.",
+      "backbone": [
+        {
+          "src": "difference",
+          "label": "co_occurs",
+          "dst": "effect"
+        },
+        {
+          "src": "difference",
+          "label": "co_occurs",
+          "dst": "affect"
+        },
+        {
+          "src": "effect",
+          "label": "co_occurs",
+          "dst": "affect"
+        }
+      ],
+      "peak_coherence": 0.7846,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_48_f598f0a4",
+      "centroid": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1
+      ],
+      "topic_nouns": [
+        "gravity",
+        "simple",
+        "terms"
+      ],
+      "thesis": "An idea regarding gravity, simple.",
+      "backbone": [
+        {
+          "src": "gravity",
+          "label": "co_occurs",
+          "dst": "simple"
+        },
+        {
+          "src": "gravity",
+          "label": "co_occurs",
+          "dst": "terms"
+        },
+        {
+          "src": "simple",
+          "label": "co_occurs",
+          "dst": "terms"
+        }
+      ],
+      "peak_coherence": 0.7339,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_49_28db4850",
+      "centroid": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "formula",
+        "water",
+        "chemical"
+      ],
+      "thesis": "An idea regarding formula, water.",
+      "backbone": [
+        {
+          "src": "formula",
+          "label": "co_occurs",
+          "dst": "water"
+        },
+        {
+          "src": "formula",
+          "label": "co_occurs",
+          "dst": "chemical"
+        },
+        {
+          "src": "water",
+          "label": "co_occurs",
+          "dst": "chemical"
+        }
+      ],
+      "peak_coherence": 0.7091,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_50_d59f4185",
+      "centroid": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "universal",
+        "binary",
+        "principle"
+      ],
+      "thesis": "An idea regarding universal, binary.",
+      "backbone": [
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "binary"
+        },
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "principle"
+        },
+        {
+          "src": "binary",
+          "label": "co_occurs",
+          "dst": "principle"
+        }
+      ],
+      "peak_coherence": 0.7,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_51_e186e9da",
+      "centroid": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "topic_nouns": [
+        "golay",
+        "role",
+        "substrate",
+        "code"
+      ],
+      "thesis": "An idea regarding golay, role.",
+      "backbone": [
+        {
+          "src": "golay",
+          "label": "co_occurs",
+          "dst": "role"
+        },
+        {
+          "src": "golay",
+          "label": "co_occurs",
+          "dst": "substrate"
+        },
+        {
+          "src": "golay",
+          "label": "co_occurs",
+          "dst": "code"
+        },
+        {
+          "src": "role",
+          "label": "co_occurs",
+          "dst": "substrate"
+        },
+        {
+          "src": "role",
+          "label": "co_occurs",
+          "dst": "code"
+        },
+        {
+          "src": "substrate",
+          "label": "co_occurs",
+          "dst": "code"
+        }
+      ],
+      "peak_coherence": 0.7535,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_52_e1022ce2",
+      "centroid": [
+        0,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "topic_nouns": [
+        "leech",
+        "lattice",
+        "golay",
+        "code"
+      ],
+      "thesis": "An idea regarding leech, lattice.",
+      "backbone": [
+        {
+          "src": "leech",
+          "label": "co_occurs",
+          "dst": "lattice"
+        },
+        {
+          "src": "leech",
+          "label": "co_occurs",
+          "dst": "golay"
+        },
+        {
+          "src": "leech",
+          "label": "co_occurs",
+          "dst": "code"
+        },
+        {
+          "src": "lattice",
+          "label": "co_occurs",
+          "dst": "golay"
+        },
+        {
+          "src": "lattice",
+          "label": "co_occurs",
+          "dst": "code"
+        },
+        {
+          "src": "golay",
+          "label": "co_occurs",
+          "dst": "code"
+        }
+      ],
+      "peak_coherence": 0.8604,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_53_bb4966f0",
+      "centroid": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "topic_nouns": [
+        "four",
+        "layers",
+        "substrate",
+        "ontological"
+      ],
+      "thesis": "An idea regarding four, layers.",
+      "backbone": [
+        {
+          "src": "four",
+          "label": "co_occurs",
+          "dst": "layers"
+        },
+        {
+          "src": "four",
+          "label": "co_occurs",
+          "dst": "substrate"
+        },
+        {
+          "src": "four",
+          "label": "co_occurs",
+          "dst": "ontological"
+        },
+        {
+          "src": "layers",
+          "label": "co_occurs",
+          "dst": "substrate"
+        },
+        {
+          "src": "layers",
+          "label": "co_occurs",
+          "dst": "ontological"
+        },
+        {
+          "src": "substrate",
+          "label": "co_occurs",
+          "dst": "ontological"
+        }
+      ],
+      "peak_coherence": 0.8144,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_54_d8aa9232",
+      "centroid": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "differentiate",
+        "x",
+        "respect"
+      ],
+      "thesis": "An idea regarding differentiate, x.",
+      "backbone": [
+        {
+          "src": "differentiate",
+          "label": "co_occurs",
+          "dst": "x"
+        },
+        {
+          "src": "differentiate",
+          "label": "co_occurs",
+          "dst": "respect"
+        },
+        {
+          "src": "x",
+          "label": "co_occurs",
+          "dst": "respect"
+        }
+      ],
+      "peak_coherence": 0.8381,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_55_f2249a35",
+      "centroid": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0
+      ],
+      "topic_nouns": [
+        "all",
+        "mammals",
+        "warm-blooded",
+        "whale",
+        "mammal"
+      ],
+      "thesis": "An idea regarding all, mammals.",
+      "backbone": [
+        {
+          "src": "all",
+          "label": "co_occurs",
+          "dst": "mammals"
+        },
+        {
+          "src": "all",
+          "label": "co_occurs",
+          "dst": "warm-blooded"
+        },
+        {
+          "src": "all",
+          "label": "co_occurs",
+          "dst": "whale"
+        },
+        {
+          "src": "all",
+          "label": "co_occurs",
+          "dst": "mammal"
+        },
+        {
+          "src": "mammals",
+          "label": "co_occurs",
+          "dst": "warm-blooded"
+        },
+        {
+          "src": "mammals",
+          "label": "co_occurs",
+          "dst": "whale"
+        },
+        {
+          "src": "mammals",
+          "label": "co_occurs",
+          "dst": "mammal"
+        },
+        {
+          "src": "warm-blooded",
+          "label": "co_occurs",
+          "dst": "whale"
+        },
+        {
+          "src": "warm-blooded",
+          "label": "co_occurs",
+          "dst": "mammal"
+        },
+        {
+          "src": "whale",
+          "label": "co_occurs",
+          "dst": "mammal"
+        }
+      ],
+      "peak_coherence": 0.7699,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_56_67352673",
+      "centroid": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "topic_nouns": [
+        "along",
+        "machines",
+        "minutes",
+        "widgets"
+      ],
+      "thesis": "An idea regarding along, machines.",
+      "backbone": [
+        {
+          "src": "along",
+          "label": "co_occurs",
+          "dst": "machines"
+        },
+        {
+          "src": "along",
+          "label": "co_occurs",
+          "dst": "minutes"
+        },
+        {
+          "src": "along",
+          "label": "co_occurs",
+          "dst": "widgets"
+        },
+        {
+          "src": "machines",
+          "label": "co_occurs",
+          "dst": "minutes"
+        },
+        {
+          "src": "machines",
+          "label": "co_occurs",
+          "dst": "widgets"
+        },
+        {
+          "src": "minutes",
+          "label": "co_occurs",
+          "dst": "widgets"
+        }
+      ],
+      "peak_coherence": 0.7997,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_57_86442dea",
+      "centroid": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "difference",
+        "effect",
+        "affect"
+      ],
+      "thesis": "An idea regarding difference, effect.",
+      "backbone": [
+        {
+          "src": "difference",
+          "label": "co_occurs",
+          "dst": "effect"
+        },
+        {
+          "src": "difference",
+          "label": "co_occurs",
+          "dst": "affect"
+        },
+        {
+          "src": "effect",
+          "label": "co_occurs",
+          "dst": "affect"
+        }
+      ],
+      "peak_coherence": 0.7846,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_58_f598f0a4",
+      "centroid": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1
+      ],
+      "topic_nouns": [
+        "gravity",
+        "simple",
+        "terms"
+      ],
+      "thesis": "An idea regarding gravity, simple.",
+      "backbone": [
+        {
+          "src": "gravity",
+          "label": "co_occurs",
+          "dst": "simple"
+        },
+        {
+          "src": "gravity",
+          "label": "co_occurs",
+          "dst": "terms"
+        },
+        {
+          "src": "simple",
+          "label": "co_occurs",
+          "dst": "terms"
+        }
+      ],
+      "peak_coherence": 0.7339,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_59_28db4850",
+      "centroid": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "formula",
+        "water",
+        "chemical"
+      ],
+      "thesis": "An idea regarding formula, water.",
+      "backbone": [
+        {
+          "src": "formula",
+          "label": "co_occurs",
+          "dst": "water"
+        },
+        {
+          "src": "formula",
+          "label": "co_occurs",
+          "dst": "chemical"
+        },
+        {
+          "src": "water",
+          "label": "co_occurs",
+          "dst": "chemical"
+        }
+      ],
+      "peak_coherence": 0.7091,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_60_d59f4185",
+      "centroid": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "universal",
+        "binary",
+        "principle"
+      ],
+      "thesis": "An idea regarding universal, binary.",
+      "backbone": [
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "binary"
+        },
+        {
+          "src": "universal",
+          "label": "co_occurs",
+          "dst": "principle"
+        },
+        {
+          "src": "binary",
+          "label": "co_occurs",
+          "dst": "principle"
+        }
+      ],
+      "peak_coherence": 0.7,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_61_e186e9da",
+      "centroid": [
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0
+      ],
+      "topic_nouns": [
+        "golay",
+        "role",
+        "substrate",
+        "code"
+      ],
+      "thesis": "An idea regarding golay, role.",
+      "backbone": [
+        {
+          "src": "golay",
+          "label": "co_occurs",
+          "dst": "role"
+        },
+        {
+          "src": "golay",
+          "label": "co_occurs",
+          "dst": "substrate"
+        },
+        {
+          "src": "golay",
+          "label": "co_occurs",
+          "dst": "code"
+        },
+        {
+          "src": "role",
+          "label": "co_occurs",
+          "dst": "substrate"
+        },
+        {
+          "src": "role",
+          "label": "co_occurs",
+          "dst": "code"
+        },
+        {
+          "src": "substrate",
+          "label": "co_occurs",
+          "dst": "code"
+        }
+      ],
+      "peak_coherence": 0.7883,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_62_e1022ce2",
+      "centroid": [
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "topic_nouns": [
+        "leech",
+        "lattice",
+        "golay",
+        "code"
+      ],
+      "thesis": "An idea regarding leech, lattice.",
+      "backbone": [
+        {
+          "src": "leech",
+          "label": "co_occurs",
+          "dst": "lattice"
+        },
+        {
+          "src": "leech",
+          "label": "co_occurs",
+          "dst": "golay"
+        },
+        {
+          "src": "leech",
+          "label": "co_occurs",
+          "dst": "code"
+        },
+        {
+          "src": "lattice",
+          "label": "co_occurs",
+          "dst": "golay"
+        },
+        {
+          "src": "lattice",
+          "label": "co_occurs",
+          "dst": "code"
+        },
+        {
+          "src": "golay",
+          "label": "co_occurs",
+          "dst": "code"
+        }
+      ],
+      "peak_coherence": 0.8204,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_63_bb4966f0",
+      "centroid": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "topic_nouns": [
+        "four",
+        "layers",
+        "substrate",
+        "ontological"
+      ],
+      "thesis": "An idea regarding four, layers.",
+      "backbone": [
+        {
+          "src": "four",
+          "label": "co_occurs",
+          "dst": "layers"
+        },
+        {
+          "src": "four",
+          "label": "co_occurs",
+          "dst": "substrate"
+        },
+        {
+          "src": "four",
+          "label": "co_occurs",
+          "dst": "ontological"
+        },
+        {
+          "src": "layers",
+          "label": "co_occurs",
+          "dst": "substrate"
+        },
+        {
+          "src": "layers",
+          "label": "co_occurs",
+          "dst": "ontological"
+        },
+        {
+          "src": "substrate",
+          "label": "co_occurs",
+          "dst": "ontological"
+        }
+      ],
+      "peak_coherence": 0.8308,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_64_d8aa9232",
+      "centroid": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "differentiate",
+        "x",
+        "respect"
+      ],
+      "thesis": "An idea regarding differentiate, x.",
+      "backbone": [
+        {
+          "src": "differentiate",
+          "label": "co_occurs",
+          "dst": "x"
+        },
+        {
+          "src": "differentiate",
+          "label": "co_occurs",
+          "dst": "respect"
+        },
+        {
+          "src": "x",
+          "label": "co_occurs",
+          "dst": "respect"
+        }
+      ],
+      "peak_coherence": 0.8381,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_65_f2249a35",
+      "centroid": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0
+      ],
+      "topic_nouns": [
+        "all",
+        "mammals",
+        "warm-blooded",
+        "whale",
+        "mammal"
+      ],
+      "thesis": "An idea regarding all, mammals.",
+      "backbone": [
+        {
+          "src": "all",
+          "label": "co_occurs",
+          "dst": "mammals"
+        },
+        {
+          "src": "all",
+          "label": "co_occurs",
+          "dst": "warm-blooded"
+        },
+        {
+          "src": "all",
+          "label": "co_occurs",
+          "dst": "whale"
+        },
+        {
+          "src": "all",
+          "label": "co_occurs",
+          "dst": "mammal"
+        },
+        {
+          "src": "mammals",
+          "label": "co_occurs",
+          "dst": "warm-blooded"
+        },
+        {
+          "src": "mammals",
+          "label": "co_occurs",
+          "dst": "whale"
+        },
+        {
+          "src": "mammals",
+          "label": "co_occurs",
+          "dst": "mammal"
+        },
+        {
+          "src": "warm-blooded",
+          "label": "co_occurs",
+          "dst": "whale"
+        },
+        {
+          "src": "warm-blooded",
+          "label": "co_occurs",
+          "dst": "mammal"
+        },
+        {
+          "src": "whale",
+          "label": "co_occurs",
+          "dst": "mammal"
+        }
+      ],
+      "peak_coherence": 0.7699,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_66_67352673",
+      "centroid": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "topic_nouns": [
+        "along",
+        "machines",
+        "minutes",
+        "widgets"
+      ],
+      "thesis": "An idea regarding along, machines.",
+      "backbone": [
+        {
+          "src": "along",
+          "label": "co_occurs",
+          "dst": "machines"
+        },
+        {
+          "src": "along",
+          "label": "co_occurs",
+          "dst": "minutes"
+        },
+        {
+          "src": "along",
+          "label": "co_occurs",
+          "dst": "widgets"
+        },
+        {
+          "src": "machines",
+          "label": "co_occurs",
+          "dst": "minutes"
+        },
+        {
+          "src": "machines",
+          "label": "co_occurs",
+          "dst": "widgets"
+        },
+        {
+          "src": "minutes",
+          "label": "co_occurs",
+          "dst": "widgets"
+        }
+      ],
+      "peak_coherence": 0.7997,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_67_86442dea",
+      "centroid": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "topic_nouns": [
+        "difference",
+        "effect",
+        "affect"
+      ],
+      "thesis": "An idea regarding difference, effect.",
+      "backbone": [
+        {
+          "src": "difference",
+          "label": "co_occurs",
+          "dst": "effect"
+        },
+        {
+          "src": "difference",
+          "label": "co_occurs",
+          "dst": "affect"
+        },
+        {
+          "src": "effect",
+          "label": "co_occurs",
+          "dst": "affect"
+        }
+      ],
+      "peak_coherence": 0.7846,
+      "turn_count": 1,
+      "created_at_turn": 1
+    },
+    {
+      "idea_id": "idea_68_f598f0a4",
+      "centroid": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1
+      ],
+      "topic_nouns": [
+        "gravity",
+        "simple",
+        "terms"
+      ],
+      "thesis": "An idea regarding gravity, simple.",
+      "backbone": [
+        {
+          "src": "gravity",
+          "label": "co_occurs",
+          "dst": "simple"
+        },
+        {
+          "src": "gravity",
+          "label": "co_occurs",
+          "dst": "terms"
+        },
+        {
+          "src": "simple",
+          "label": "co_occurs",
+          "dst": "terms"
+        }
+      ],
+      "peak_coherence": 0.7339,
+      "turn_count": 1,
+      "created_at_turn": 1
+    }
+  ]
+}
