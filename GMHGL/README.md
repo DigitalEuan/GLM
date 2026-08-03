@@ -36,14 +36,14 @@ GMHGL (this folder)
 ## Other important system scripts
 
 - `geometry.py` 
-"""
+```
 Identity is derived from TOPOLOGY. The 'math' field is treated as a 3D Voxel Structure. The Vector is a measurement of that structure's Volume and Compactness.
 STANDARDS:
 1. Domain: Bits 0-2 (Prefix)
 2. Volume: Bits 3-7 (Voxel Count, Gray Coded)
 3. Compactness: Bits 8-11 (Surface Area Proxy, Gray Coded)
 4. Parity: Bits 12-23 (Golay [24,12,8])
-"""
+```
 - 'physics.py' 
 """
 Strict float-free metrics suitable for core UBP logic.
@@ -77,7 +77,6 @@ measures their geometry, decodes the expression, and evaluates it with exact
 """
 - 'ldp_nrci.py' + 'ldp_complete_mapping.md'
 The Dimensional Ladder
-"""
 | Dim | Code | d/n | DHC | AND Closure | Phase |
 |-----|------|-----|-----|-------------|-------|
 | 4D | [4,2,2] | 0.50 | TRUE | 1.000 | Below transition |
@@ -85,7 +84,7 @@ The Dimensional Ladder
 | 12D | [12,6,6] | 0.50 | UNKNOWN | 0.008 | At transition |
 | 14D | — | — | — | 0.247 | **PHASE TRANSITION** |
 | 24D | [24,12,8] | 0.33 | FALSE | 0.038 | Above transition |
-"""
+
 - 'ubp_kb_architect.py' 
 """
 The script used to generate ubp_system_kb.json entries
@@ -131,20 +130,20 @@ The script used to generate ubp_system_kb.json entries
 
 1.5. GRAY MAP ISOMETRY  (Z_4 ↔ F_2^2)
     """
-# The isometric bridge between two metric worlds.  Walk around the 4-cycle
-# (0,0) → (1,0) → (1,1) → (0,1) → (0,0) in the Hamming cube: each step
-# changes exactly one bit.  So Hamming distance in F_2^2 equals Lee distance
-# in Z_4.  The Gray map is THE isometry between (Z_4, Lee) and (F_2^2, Ham).
-#
-#       z  →  (b1, b2)
-#       0  →  (0, 0)
-#       1  →  (1, 0)
-#       2  →  (1, 1)
-#       3  →  (0, 1)
-#
-# This is the bridge that lets us verify Z_4-linear constructions using
-# binary tools (Hamming weights, code linearity) while the lattice itself
-# lives in Z_4 (Lee metric, glue conditions).
+The isometric bridge between two metric worlds.  Walk around the 4-cycle
+(0,0) → (1,0) → (1,1) → (0,1) → (0,0) in the Hamming cube: each step
+changes exactly one bit.  So Hamming distance in F_2^2 equals Lee distance
+in Z_4.  The Gray map is THE isometry between (Z_4, Lee) and (F_2^2, Ham).
+
+       z  →  (b1, b2)
+       0  →  (0, 0)
+       1  →  (1, 0)
+       2  →  (1, 1)
+       3  →  (0, 1)
+
+ This is the bridge that lets us verify Z_4-linear constructions using
+ binary tools (Hamming weights, code linearity) while the lattice itself
+ lives in Z_4 (Lee metric, glue conditions).
 
 GRAY_MAP     = {0: (0, 0), 1: (1, 0), 2: (1, 1), 3: (0, 1)}
 GRAY_MAP_INV = {v: k for k, v in GRAY_MAP.items()}
@@ -156,7 +155,7 @@ GRAY_MAP_INV = {v: k for k, v in GRAY_MAP.items()}
 
     π, e, and φ are computed via 50-term continued-fraction expansions,
     yielding exact Fraction objects good to ~80 decimal digits with 0.00 float error.
-    """
+
 
     _PI_CF = [3, 7, 15, 1, 292, 1, 1, 1, 2, 1, 3, 1, 14, 2, 1, 1, 2, 2, 2, 2,
               1, 84, 2, 1, 1, 15, 3, 13, 1, 4, 2, 6, 6, 99, 1, 2, 2, 6, 3, 5,
