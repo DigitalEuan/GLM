@@ -1,0 +1,17 @@
+Elements encoding experiment/test: The 256-D Barnes-Wall Macro-Lattice
+
+While the 24-bit Golay/Leech substrate is perfect for modeling fundamental particles and simple elements, highly complex molecules (DNA bases, ATP) experience extreme **Topological Tension** when compressed into 24 bits. To study macroscopic phenomena, the UBP utilizes the **256-Dimensional Barnes-Wall Lattice ($BW_{256}$)**.
+
+**The SHA-256 Isomorphism.** The 256-dimensional space is not arbitrary; it maps 1:1 with the SHA-256 cryptographic fingerprints used in SOP_002. The fingerprint is no longer just a database label — it is the literal physical coordinate of the macro-state in the bulk universe. Because $256 = 2^8$, operations at this scale hit a perfect memory alignment stride. The function `hex_to_bw256(hex_str)` in `ubp_integrated_engine_v1.py` performs this mapping.
+
+**Recursive Unfolding and Moire Dynamics.** Macro-states are generated using the recursive $|u \mid u + v|$ construction:
+- **$u$ (The Signal):** Recursive doubling of the 24-bit Noumenal Seed.
+- **$v$ (The Program):** The interference wave derived from the Golay Syndrome of the seed.
+
+When a molecule is "Active" (e.g., 1-bit environmental drift), the $v$ component generates a **Moire Interference Pattern** across the 256-D space. The variance dictates the molecule's ability to do "Work." For example, ATP generates a jagged high-variance pattern (kinetic energy); Glucose generates a symmetric low-variance pattern (storage).
+
+**The Successive Cancellation Decoder (The Lens).** To obtain "Clarity" in the 256-D bulk, the system uses a Successive Cancellation Decoder. This recursively cleans the 256-D field by forcing parity at every layer ($128 \rightarrow 64 \rightarrow 32$) until it snaps back to the 24-bit Golay core. Comparing raw vs. snapped stability gives the **Relative Coherence** — a geometric filter distinguishing structural molecules (high relative coherence) from signaling/energy molecules (functional noise).
+
+**The Macro-Anchor.** Through exhaustive computational search, UBP identified the **256-D Macro-Anchor (Golay Basis Vector Index 2)**. When unfolded into 256 dimensions, this specific seed achieves a maximum "Super-Stability" NRCI of **0.323214**. It serves as the **Universal North** for all macroscopic structures.
+
+The `BarnesWallEngine` in `ubp_unified_v5.py` is generalized to any power-of-two dimension ≥ 32 (256 / 512 / 1024 supported).
