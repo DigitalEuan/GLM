@@ -1,0 +1,50 @@
+{
+  "experiment": "encoding_definition_attempt_04.08-26_refined_v2",
+  "date": "2026-08-04T16:03:45.204228",
+  "n_pairs": 114,
+  "n_dh": 61,
+  "tests": {
+    "bond_order_knn": {
+      "method": "k-NN (k=5), leave-one-out, 11 features (NRCI + snap + primitives)",
+      "accuracy": "77.2% (88/114)",
+      "random_baseline": "~50% (most bonds are order 1)",
+      "note": "Better than chance but not reliable for individual predictions"
+    },
+    "bond_energy_with_bond_order_as_feature": {
+      "method": "Linear GLM, 21 features (20 interaction + bond_order), 5-fold CV",
+      "cv_r": 0.7426,
+      "cv_mae": 95.5,
+      "note": "Bond order as feature works well for BE prediction"
+    },
+    "bond_energy_snap_only": {
+      "method": "Linear GLM, 12 snap features, 5-fold CV",
+      "cv_r": -0.004,
+      "note": "Snap dynamics alone carry no linear signal for BE"
+    },
+    "bond_energy_core_only": {
+      "method": "Linear GLM, 6 core features, 5-fold CV",
+      "cv_r": 0.008,
+      "note": "Core features alone carry no linear signal for BE"
+    },
+    "bond_ranking": {
+      "method": "k-NN classified BO + within-BO mean",
+      "accuracy": "3/13 (23%)",
+      "note": "Cannot reliably rank single vs double vs triple for same pair"
+    },
+    "enthalpy_61_samples": {
+      "method": "Linear GLM, 20 features, 5-fold CV",
+      "cv_r": 0.2155,
+      "full_r": 0.6593,
+      "note": "More data helps but still overfits"
+    }
+  },
+  "key_findings": [
+    "Bond order as feature \u2192 r=0.74 for BE (valid: BO correlates with BE)",
+    "Snap dynamics carry NO linear signal for bond order or energy",
+    "Bond order classification: 77% accuracy (k-NN) \u2014 better than chance",
+    "Same-element pairs cannot be distinguished (O=O vs O-O identical Data Objects)",
+    "The encoding captures ELEMENT IDENTITY well but not BOND CONTEXT",
+    "Nonlinear methods (tree, neural) may extract what linear models cannot"
+  ],
+  "conclusion": "The Data Object encoding successfully captures element identity and predicts bond energy when bond order is provided (r=0.74 CV). Bond order itself is not linearly encodable in the current 24-bit representation. The snap dynamics carry rich information about the Golay structure but this information does not translate to chemical predictions via linear models. Next step: nonlinear predictors or encoding bond context explicitly."
+}

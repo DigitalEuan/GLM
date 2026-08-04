@@ -1,0 +1,88 @@
+{
+  "experiment": "encoding_definition_attempt_04.08-26",
+  "date": "2026-08-04T15:53:15.349139",
+  "encoding": "v1_best (EN\u00d710, BP\u00f740, MP\u00f740, Rho\u00d710)",
+  "n_elements": 118,
+  "n_pairs": 112,
+  "n_features": 21,
+  "be_full_r": 0.8296,
+  "be_full_r2": 0.6883,
+  "be_full_mae": 79.5,
+  "be_cv_r": 0.7426,
+  "be_cv_mae": 95.5,
+  "be_train_cv_gap": 0.087,
+  "dh_full_r": 0.9274,
+  "dh_loo_r": 0.4063,
+  "dh_loo_mae": 332.7,
+  "cv_fold_r": [
+    0.7612,
+    0.8046,
+    0.7821,
+    0.8125,
+    0.2934
+  ],
+  "cv_fold_mae": [
+    86.2,
+    72.0,
+    109.5,
+    112.2,
+    97.3
+  ],
+  "bond_order_r": 0.1282,
+  "system_checks": {
+    "noble_gases_vacuum": true,
+    "same_element_identity": true,
+    "low_overfitting": true,
+    "cv_r_above_06": true
+  },
+  "top_features": [
+    [
+      "xor_nrci",
+      25277.08
+    ],
+    [
+      "delta_nrci",
+      21496.98
+    ],
+    [
+      "and_nrci",
+      -19312.27
+    ],
+    [
+      "mog_potential",
+      12889.27
+    ],
+    [
+      "mog_reality",
+      12875.01
+    ],
+    [
+      "mog_info",
+      12858.17
+    ],
+    [
+      "mog_activation",
+      12854.18
+    ],
+    [
+      "xor_hw",
+      11181.16
+    ],
+    [
+      "tax_a",
+      -9139.56
+    ],
+    [
+      "hamming_dist",
+      -6729.51
+    ]
+  ],
+  "conclusions": {
+    "overfitting": "LOW \u2014 train/CV gap 0.087, model generalises",
+    "signal": "STRONG \u2014 CV r=0.74 for bond energy across 112 pairs",
+    "enthalpy": "FULL r=0.93 but LOO r=0.41 \u2014 small sample (23), needs more \u0394H data",
+    "bond_order": "WEAK \u2014 AND_HW vs BO r=0.13, bond order not well encoded in current system",
+    "identity": "PERFECT \u2014 all same-element pairs have XOR=0",
+    "vacuum": "CORRECT \u2014 He, Ne at HW=0, NRCI=1.0"
+  }
+}
