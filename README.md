@@ -1,6 +1,6 @@
 # TOP REPOSITORY LEVEL TIER ROOT README 
 
-**Version:** 2.2 (3 August 2026)  
+**Version:** 3.0 (4 August 2026)  
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand  
 **Parent:** None - Top Level
 
@@ -50,7 +50,7 @@ https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the dire
 |--------|---------|-------|----------|----------|
 | **ROOT Top Tier repository folder** | Collect, define and conduct use of all sub-folders, files within folders and scripts throughout the whole of this repository and system, to direct experiments and studies that use the UBP and or GLM systems | — | 'README.md' (this file) | Organise all folders and their contents so no scripts are repeated and all systems use a single source ('GMHGL/' and 'glm_machine/') for operations, 'data_object/' for encoding, 'light/' for scale calibration and 'long_term_memory/' for all GLM training and learning |
 | **GMHGL/** | Foundation — Golay engine, TAX, NRCI | — | `ubp_unified_v5.py` | Extend existing capacity/capabilities if possible |
-| **data_object/** | Encoding — Subjects → 24-bit Data Objects | — | `encoding_specification.md` | Find best Data-Object encoding for every Subject Domain, develop encoding strategy, refine and define Data Object encoding |
+| **data_object/** | Encoding — Subjects → 24-bit Data Objects | — | `readme.md` | Warping optimization complete for elements (r=0.55, BO acc=86.8%). Calibration: 190 kJ/mol per work unit. Next: molecules, words, ARC AGI integration |
 | **glm_machine/** | Active Geometric Language Machine system | — | `GLM11_runtime.py` | Growth and development alongside the ARC AGI developments |
 | **arc_agi_(version_number)/** | running attempts at ARC AGI | Running Score | README.md | Operating the UBP + GLM systems through the correct pipeline in full, trying various experiments to solve ARC AGI challenges as well as a range of tests/challenges to widen the problem-solving abilities of the natural system through training MOG grids with yes/no feedback loop, to avoid using Solvers to find solutions - rather the aim is to enable the UBP-GLM systems to gain understanding through structured and calibrated input then calculating solutions natively. Future editions need to use scripts from the 'GMHGL/'' and 'data_object/' folders/systems and consolidate training/knowledge |
 | **arc_agi_15/** | Solver — Working Solvers (3/9 mind solved / 6/9 Solvers solved) | 9/50 | `consolidated_mind.py` | Leave as record of attempting #15 and for parts if needed rather than rebuilding scripts from scratch |
@@ -66,8 +66,12 @@ https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the dire
 Subjects (elements, molecules, words)
     ↓ encode via data_object/
 Data Objects (24-bit vectors in Leech space)
+    ↓ warp via Activation row modification
+Warped Data Objects (bond-order-aware geometry)
     ↓ compute on via GMHGL/
-Metrics (TAX, NRCI, AND, XOR, snap cost)
+Metrics (TAX, NRCI, AND, XOR, snap cost, geometric work)
+    ↓ calibrate via 190 kJ/mol scale factor
+Predictions (bond energy, bond order, enthalpy in kJ/mol)
     ↓ reason about via glm_machine/
 Decisions (perceive → interpret → propose → inspect)
     ↓ solve via arc_agi_(version number)
@@ -123,6 +127,16 @@ Training Data + Knowledge (grows with each run)
 - Noble gases = vacuum state (HW=0, NRCI=1.0)
 - Details: `data_object/elements.md`
 
+### Element Interactions (114 pairs) — NEW 4 August 2026
+- **Best warping: rotate_3 + flip Activation** → r(BE) = 0.55 (5-fold CV)
+- **Bond order classification: 86.8% accuracy** (k-NN, flip_act_all)
+- **The Activation row is the bond formation layer** (diff_A r = 0.50)
+- **Geometric work (path integral) carries independent signal** (partial r = 0.33)
+- **Empirical calibration: 190 kJ/mol per work unit** (matches Br-Br bond energy)
+- **Substrate physics: tick = 2.10 fs, cell = 17 μm** (molecular scale)
+- **Element property prediction: EN r=0.92, BP r=0.95, MP r=0.87, Rho r=0.82**
+- Details: `data_object/encoding_definition_attempt_04.08.26/`
+
 ### Molecules (82)
 - Best encoding: M (log2), MP (div40)
 - r(ΔH) = +0.96
@@ -150,6 +164,10 @@ Training Data + Knowledge (grows with each run)
 | **NRCI** | 10/(10+TAX) | Coherence (1.0=vacuum, 0.5=horizon) |
 | **Y** | 1/(π+2/π) ≈ 0.2647 | Entropic wobble |
 | **AND** | a[i] & b[i] | Shared structure |
+| **Geometric Work** | Σ HD(Vₜ, Vₜ₊₁) × NRCIₜ | Path integral of settlement (bit-steps × coherence) |
+| **Empirical Scale** | 190 kJ/mol per work unit | Conversion from abstract work to real chemistry |
+| **Tick Duration** | 2.10 × 10⁻¹⁵ s | Substrate clock speed (molecular vibration timescale) |
+| **Cell Length** | 17.0 μm | Substrate spatial scale (molecular domain size) |
 
 ---
 
@@ -170,7 +188,7 @@ Training Data + Knowledge (grows with each run)
 
 | Folder | Documents |
 |--------|-----------|
-| data_object/ | `elements.md`, `molecules.md`, `CALIBRATION_LOG.md` |
+| data_object/ | `elements.md`, `molecules.md`, `CALIBRATION_LOG.md`, `encoding_definition_attempt_04.08.26/` |
 | glm_machine/ | README with full architecture docs |
 | GMHGL/ | `ubp_checkpoint_v5.4.1.md` |
 | long_term_memory/ | `GLM_KNOWLEDGE.md` |
