@@ -42,7 +42,8 @@ data_object/ (this folder)
 | `experiments/` | Various experiments to define and refine encoding | — |
 | `data/` | Experiment results (JSON) | — |
 | `vis/` | Renders of experiment findings | — |
-| `encoding_definition_attempt_(DATE)/` | Attempts at defining and refing the exact encoding method for data input to the UBP/GLM system | — |
+| `encoding_definition_attempt_(DATE)/` | Attempts at defining and refining the exact encoding method for data input to the UBP/GLM system | — |
+| `Elements encoding experiment/test_Barnes256.txt` | The next Elements encoding experiment to do | — |
 
 ---
 
