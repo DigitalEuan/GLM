@@ -1,0 +1,513 @@
+spatial_arithmetic.py - signed integers are encoded as regular, unit-edge polygons in 3D space. Mathematical operators ($+$, $-$, $\times$, $\div$) are encoded as the specific clearance distances between the bounding spheres of these polygons.
+MULTIPLY = 4 edge-lengths of empty space.
+DIVIDE = 5 edge-lengths.
+ADD = 6 edge-lengths.
+SUBTRACT = 7 edge-lengths.
+
+The extended Golay code's systematic generator is $G = [I_{12} \mid B]$.
+
+The Top 2 Rows (Reality & Info): The Data / The Subject
+Bits 0–11 make up the $I_{12}$ identity matrix. The input data
+
+Row 0 (Reality): This is the Header. It contains the core identity of the subject.
+Row 1 (Info): This is the Actionable trait. It defines what the subject is capable of doing.
+
+The Bottom 2 Rows (Activation & Potential): The Rules / Operations
+Bits 12–23 make up the $B$ matrix. These are the dependent "parity" bits.
+
+When you input a Subject in the top rows, the bottom rows automatically calculate the necessary forces, clearances, and parity checks required for that Subject to exist in the lattice.
+
+====
+
+### THE UBP GEOMETRIC INTERACTION PRIMITIVES (v1.0)
+
+These are the fundamental forces that govern how Data Objects interact in the virtual space. Each is driven by a specific MOG layer and resolved through the 24D Leech substrate.
+
+#### 1. `Gravitic_Barycentric_Attraction`
+*   **Physics Equivalent:** Gravity / Mass Attraction.
+*   **MOG Driver:** Row 0 (`#Reality` / Mass).
+*   **Geometric Action:** Data Objects with high Mass (Row 0) exert an attractive pull on each other. The "distance" is measured in 24D Leech space, not just 3D.
+*   **Mathematical Basis:** The force is proportional to the product of their Mass bits and inversely proportional to their Leech lattice distance. It pulls objects toward a shared center of mass (barycenter) to minimize global geometric displacement.
+*   **Why it's not Gravity:** It operates on exact `Fraction` TAX gradients. Objects don't just move in 3D; their 24D Leech coordinates shift to minimize the combined Symmetry Tax.
+
+#### 2. `Electrostatic_Potential_Well`
+*   **Physics Equivalent:** Electromagnetism / Charge Bonding.
+*   **MOG Driver:** Row 1 (`#Information` / Topology & Charge).
+*   **Geometric Action:** Dictates structural bonding. Objects with complementary Information topologies (e.g., Hydrogen's valence of 1 and Oxygen's valence of 2) form "potential wells." 
+*   **Mathematical Basis:** Calculated via the Hexacode column twists. If the Hexacode symbols of two objects align to form a valid Golay shadow, a "bond" is formed. The depth of the well is the reduction in TAX achieved by sharing those specific Info bits.
+
+#### 3. `Fermionic_Exclusion_Manifold`
+*   **Physics Equivalent:** Pauli Exclusion Principle / Steric Hindrance.
+*   **MOG Driver:** Row 3 (`#Potential` / Rules & Gates).
+*   **Geometric Action:** Prevents two Data Objects from occupying the exact same semantic or spatial state. If two objects have identical Mass and Info, this force creates an infinitely high TAX barrier between them.
+*   **Mathematical Basis:** If Object A and Object B attempt to resolve to the same 24D Leech coordinate, the mod-8 glue condition of the Leech lattice is violated. The system calculates a massive, exact-rational TAX penalty, effectively creating a "hard shell" around the object in the virtual space.
+
+#### 4. `Entropic_Relaxation_Gradient`
+*   **Physics Equivalent:** Thermodynamics / Heat Dissipation / Entropy.
+*   **MOG Driver:** Row 2 (`#Activation` / Time & Processes).
+*   **Geometric Action:** This is the "engine" of time. It is the mechanism by which the system sheds excess TAX (energy) and settles into equilibrium. It simulates the "cooling" of the system.
+*   **Mathematical Basis:** At each simulation tick, the system calculates the local TAX gradient ($\nabla \text{TAX}$). Objects are perturbed slightly (Activation quantum $Y + 1/8$). If the perturbation lowers the global TAX, it is kept. If it raises it, it is rejected (simulating energy dissipation). 
+
+#### 5. `Confinement_Flux_Tether`
+*   **Physics Equivalent:** The Strong Nuclear Force / Quark Confinement.
+*   **MOG Driver:** Row 0 & Row 1 combined (Mass + Info).
+*   **Geometric Action:** Unlike gravity (which weakens with distance), this force *increases* in tension as objects are pulled apart. It keeps the internal components of a single Data Object (or a tightly bonded molecule) strictly bound together.
+*   **Mathematical Basis:** Modeled as a "flux tube" in the Leech lattice. The TAX cost increases linearly with the Hamming distance between the bound bits. If you try to pull a proton away from an electron, the TAX approaches infinity, snapping them back together.
+
+#### 6. `Cymatic_Phase_Interference`
+*   **Physics Equivalent:** Wave Mechanics / Quantum Superposition & Interference.
+*   **MOG Driver:** The Hexacode Grammar (Column aggregations).
+*   **Geometric Action:** When the "fields" of two Data Objects overlap, their Hexacode phases ($0, 1, \omega, \omega^2$) interfere. 
+*   **Mathematical Basis:** Constructive interference (phases align) lowers the local TAX, creating stable orbital structures. Destructive interference (phases clash) spikes the TAX, creating "nodes" of zero probability where the object cannot exist. This is how you get orbital shapes (s, p, d, f) purely from geometric interference.
+
+---
+
+### How This Changes the Implementation (The "Soft Gate" in Action)
+
+By using these physics primitives, you completely eliminate the need for rigid `if/then` boolean logic (like `if object_A == object_B: return XOR`). 
+
+Instead, your `spatial_arithmetic.py` becomes a **Potential Field Simulator**.
+
+Here is the exact workflow for the example Hydrogen + Oxygen $\rightarrow$ Water experiment using these primitives:
+
+1.  **Initialize the Vacuum:** The 24D Leech lattice is at its lowest energy state (TAX = 0, NRCI = 1.0).
+2.  **Inject Perturbations (The Atoms):** 
+    *   Inject the Hydrogen MOG-data. The `Gravitic_Barycentric_Attraction` and `Fermionic_Exclusion_Manifold` instantly carve out a "shape" and a "mass" in the lattice. The local TAX spikes.
+    *   Inject the Oxygen MOG-data. It carves out its own shape.
+3.  **Activate the Fields (The Interaction):**
+    *   Turn on `Electrostatic_Potential_Well`. The Hydrogen and Oxygen "feel" each other's valence (Info row).
+    *   Turn on `Cymatic_Phase_Interference`. Their Hexacode columns begin to overlap and interfere.
+4.  **Apply `Entropic_Relaxation_Gradient` (The Settlement):**
+    *   The system enters a loop. It calculates the global TAX of the current configuration.
+    *   It applies micro-perturbations (moving the H atoms slightly relative to the O atom).
+    *   If a perturbation *lowers* the TAX (because the Electrostatic well deepened and the Cymatic interference became constructive), the system "keeps" that state.
+    *   If it *raises* the TAX (because the Fermionic Exclusion manifold was violated, or phases destructively interfered), the system rejects it.
+5.  **Equilibrium (The Molecule):**
+    *   The system stops when the TAX gradient reaches zero. 
+    *   The resulting 3D/24D geometry *is* the water molecule. The bond angle (104.5° in reality) emerges naturally because that is the exact geometric angle where the Hexacode phase interference is perfectly constructive and the TAX is globally minimized.
+
+====
+
+# CONDENSED METHODS FOR UBP/GLM EXPERIMENTATION
+**From: "Emergent Capabilities Arise Randomly from Learning Sparse Attention Patterns" (Baherwani et al., 2026)**
+
+## 1. KEY FINDING: Capabilities Emerge Randomly & Abruptly
+
+**What they found:**
+- Same capability emerges at **different training steps** depending on random initialization
+- Larger models acquire capabilities **earlier on average**
+- Emergence is **binary**: models either solve the task completely or make no progress
+- Coincides with learning **task-relevant attention patterns**
+
+**For your UBP/GLM:**
+- When testing MOG-mind configurations, **run multiple seeds** (at least 10)
+- Don't judge a configuration by one run — emergence is stochastic
+- Track **when** (not just if) settlement dynamics are learned
+- Your 9/50 score might jump abruptly once key patterns are learned
+
+---
+
+## 2. EXPERIMENTAL METHOD: Causal Attention Head Ablation
+
+**The Technique:**
+1. Identify "pre-emergence" checkpoint (before capability appears)
+2. Identify "post-emergence" checkpoint (after capability appears)
+3. For each attention head:
+   - Patch the **post-emergence attention pattern** into the pre-emergence model
+   - Measure change in performance
+4. Select top-K heads with largest performance change
+
+**For your UBP/GLM:**
+Apply this to your MOG-mind:
+- **Pre-emergence**: Mind fails on a specific ARC task
+- **Post-emergence**: Mind solves it
+- **Patch**: Replace specific MOG channels or driving styles from post-emergence into pre-emergence
+- **Identify**: Which semantic channels (Mass/Info/Activation/Potential) are causal?
+
+**Example Test:**
+```python
+# Pseudo-code for MOG-mind ablation
+pre_mind = load_checkpoint(step=1000)  # Fails on gravity task
+post_mind = load_checkpoint(step=3000)  # Solves gravity task
+
+for channel in ['mass', 'info', 'activation', 'potential']:
+    patched_mind = pre_mind.copy()
+    patched_mind.perception[channel] = post_mind.perception[channel]
+    
+    delta = evaluate(patched_mind, task='gravity')
+    print(f"Patching {channel} improves by {delta}")
+```
+
+---
+
+## 3. SYNTHETIC TASK DESIGN: Controlled Attention Learning
+
+**Their Tasks:**
+
+### A. Linear Map Task
+- State size S, sparsity s
+- Transition: x_{t+1} = A·x_t mod 2
+- Model must learn which bits to attend to (matrix A)
+- **Key insight**: Medium sparsity (s/S ≈ 0.5) is hardest
+
+### B. Cellular Automata Task
+- Fixed local window pattern
+- Must infer rule from context
+- **Key insight**: Context length is the bottleneck
+
+**For your UBP/GLM:**
+
+Create **synthetic ARC-like tasks** with known ground-truth settlement dynamics:
+
+```python
+# Synthetic Task 1: Known Settlement Pattern
+def synthetic_gravity_task():
+    """
+    Ground truth: All non-zero cells compact to bottom
+    Known attention pattern: Attend to column-wise non-zero cells
+    """
+    input_grid = random_grid()
+    output_grid = compact_to_bottom(input_grid)
+    return input_grid, output_grid
+
+# Synthetic Task 2: MOG-Based Transformation
+def synthetic_mog_task():
+    """
+    Ground truth: Apply specific MOG row operations
+    Row 0 (Mass): Multiply by 2
+    Row 1 (Info): Divide by 3  
+    Row 2 (Activation): Add 1
+    Row 3 (Potential): Subtract 1
+    """
+    mog_state = random_mog_state()
+    output = apply_mog_operations(mog_state)
+    return mog_state, output
+```
+
+**Why this helps:**
+- You know the **exact ground-truth pattern**
+- Can measure **how accurately** the mind learns it
+- Can test how **context length** (grid size) affects learning
+- Can test how **pattern sparsity** (how many cells change) affects learning
+
+---
+
+## 4. ARCHITECTURE SCALING: How to Allocate Capacity
+
+**Their Findings:**
+
+### Scaling Width (Number of Heads H)
+- **More heads = better performance** on attention-heavy tasks
+- Each head independently searches for patterns
+- More heads = higher probability of finding correct pattern
+
+### Scaling Head Dimension
+- **Diminishing returns** past minimum capacity
+- Task-dependent minimum dimension needed
+
+### Optimal Configuration
+- **Many heads with small dimension** works best for attention-heavy tasks
+- But need **minimum head dimension** to store rule information
+
+**For the UBP/GLM:**
+
+Your "attention heads" are:
+- **MOG channels** (4: Mass, Info, Activation, Potential)
+- **Driving styles** (9: Flow, Resonant, Differential, etc.)
+- **Settlement dynamics** (gravity, cell rules, component conditional)
+
+**Test these scalings:**
+
+```python
+# Experiment 1: Scale MOG Channels
+configs = [
+    {'channels': ['mass']},                    # 1 channel
+    {'channels': ['mass', 'info']},            # 2 channels
+    {'channels': ['mass', 'info', 'activation']},  # 3 channels
+    {'channels': ['mass', 'info', 'activation', 'potential']},  # 4 channels
+]
+
+# Experiment 2: Scale Driving Styles  
+configs = [
+    {'styles': ['flow']},                      # 1 style
+    {'styles': ['flow', 'resonant']},          # 2 styles
+    {'styles': ['flow', 'resonant', 'differential']},  # 3 styles
+    {'styles': 'all'},                         # 9 styles
+]
+
+# Experiment 3: Scale Settlement Dynamics
+configs = [
+    {'dynamics': ['gravity']},                 # 1 dynamic
+    {'dynamics': ['gravity', 'cell_rules']},   # 2 dynamics
+    {'dynamics': 'all'},                       # All learned dynamics
+]
+```
+
+**Hypothesis:** More "heads" (channels/styles/dynamics) = faster emergence of capabilities
+
+---
+
+## 5. ATTENTION INTERVENTIONS: Accelerate Learning
+
+**Their Method:**
+Add bias to attention logits toward ground-truth pattern:
+```python
+# Attention intervention
+attention_logits += c * ground_truth_pattern
+```
+
+**Result:** 
+- Removes loss plateaus entirely
+- Near-immediate learning (100 steps vs 10,000 steps)
+- Confirms attention pattern learning is the bottleneck
+
+**For your UBP/GLM:**
+
+**Intervention 1: Bias MOG Perception**
+```python
+def biased_mog_perception(grid, known_pattern):
+    """
+    If you know the task requires attending to non-zero cells,
+    bias the MOG perception toward that pattern
+    """
+    mass_channel = calculate_mass(grid)
+    
+    # Bias: amplify non-zero cells
+    if known_pattern == 'gravity':
+        mass_channel *= 2.0  # Amplify mass signal
+    
+    return mass_channel
+```
+
+**Intervention 2: Seed Settlement Dynamics**
+```python
+def seed_settlement_dynamics(mind, task_type):
+    """
+    Pre-load known settlement patterns
+    """
+    if task_type == 'gravity':
+        # Seed the exact settlement rule
+        mind.settlement_rules = {
+            'gravity': lambda grid: compact_to_bottom(grid)
+        }
+    elif task_type == 'fill':
+        mind.settlement_rules = {
+            'fill': lambda grid: fill_zeros(grid, dominant_color)
+        }
+```
+
+**Intervention 3: Pre-pretraining on Synthetic Tasks**
+```python
+# Phase 1: Pre-pretrain on synthetic MOG tasks
+synthetic_tasks = generate_synthetic_mog_tasks(n=10000)
+mind.train(synthetic_tasks, steps=5000)
+
+# Phase 2: Fine-tune on real ARC tasks
+arc_tasks = load_arc_training_tasks()
+mind.train(arc_tasks, steps=5000)
+
+# Compare to baseline (train on ARC only)
+baseline_mind = Mind()
+baseline_mind.train(arc_tasks, steps=10000)
+```
+
+**Their finding:** Pre-pretraining on synthetic data (Dyck languages, neural cellular automata) accelerated emergence of in-context capabilities
+
+---
+
+## 6. MEASUREMENT METRICS: What to Track
+
+**Their Metrics:**
+
+1. **Point of Emergence**: First training step where argmax(prediction) = ground_truth
+2. **Loss Plateau Length**: Steps before first progress
+3. **Attention Entropy**: −Σ s_ij log s_ij (drops when pattern is learned)
+4. **Correct Token Probability**: p(y*|x) (spikes abruptly at emergence)
+
+**For your UBP/GLM:**
+
+```python
+class EmergenceTracker:
+    def __init__(self, mind, task):
+        self.mind = mind
+        self.task = task
+        self.emergence_step = None
+        self.loss_plateau_length = None
+        self.attention_entropy_history = []
+        
+    def track_training(self, step, loss, predictions):
+        # Check for emergence
+        if self.emergence_step is None:
+            if self.is_solved(predictions):
+                self.emergence_step = step
+                self.loss_plateau_length = step
+        
+        # Track attention entropy (MOG channel entropy)
+        entropy = self.calculate_mog_entropy()
+        self.attention_entropy_history.append(entropy)
+        
+    def is_solved(self, predictions):
+        """Check if mind solves all train pairs"""
+        for input_grid, target_grid in self.task.train_pairs:
+            pred = self.mind.predict(input_grid)
+            if not np.array_equal(pred, target_grid):
+                return False
+        return True
+    
+    def calculate_mog_entropy(self):
+        """Measure how focused the MOG perception is"""
+        # High entropy = uniform attention
+        # Low entropy = focused attention pattern
+        pass
+```
+
+---
+
+## 7. EXPERIMENTAL PROTOCOL: Step-by-Step
+
+**For your next UBP/GLM experiments:**
+
+### Step 1: Define Synthetic Task with Known Pattern
+```python
+task = SyntheticMOGTask(
+    state_size=16,           # Grid size
+    sparsity=3,              # How many cells change
+    pattern_type='sparse_linear_map'  # Known ground truth
+)
+```
+
+### Step 2: Run Multiple Seeds
+```python
+results = []
+for seed in range(10):
+    mind = MOGMind(seed=seed)
+    tracker = EmergenceTracker(mind, task)
+    
+    for step in range(10000):
+        loss = mind.train_step(task)
+        tracker.track_training(step, loss, mind.predictions)
+        
+        if tracker.emergence_step is not None:
+            break
+    
+    results.append({
+        'seed': seed,
+        'emergence_step': tracker.emergence_step,
+        'final_loss': loss,
+        'solved': tracker.emergence_step is not None
+    })
+```
+
+### Step 3: Analyze Emergence Distribution
+```python
+# How many seeds solved it?
+solve_rate = sum(1 for r in results if r['solved']) / len(results)
+
+# When did emergence occur?
+emergence_steps = [r['emergence_step'] for r in results if r['solved']]
+print(f"Solve rate: {solve_rate*100:.1f}%")
+print(f"Mean emergence step: {np.mean(emergence_steps):.0f}")
+print(f"Std emergence step: {np.std(emergence_steps):.0f}")
+```
+
+### Step 4: Causal Ablation
+```python
+# Identify causal components
+pre_mind = load_checkpoint(step=emergence_step - 100)
+post_mind = load_checkpoint(step=emergence_step)
+
+for component in ['mass_channel', 'info_channel', 'flow_style', 'gravity_rule']:
+    patched_mind = patch_component(pre_mind, post_mind, component)
+    delta = evaluate(patched_mind, task)
+    print(f"Patching {component} improves by {delta}")
+```
+
+### Step 5: Test Interventions
+```python
+# Test attention bias intervention
+for bias_strength in [0.0, 0.5, 1.0, 2.0]:
+    mind = MOGMind()
+    mind.apply_attention_bias(task.ground_truth_pattern, bias_strength)
+    
+    emergence_step = train_and_track(mind, task)
+    print(f"Bias {bias_strength}: emergence at step {emergence_step}")
+```
+
+---
+
+## 8. KEY HYPOTHESES TO TEST
+
+**Based on their findings, test these for UBP/GLM:**
+
+1. **Hypothesis 1**: Settlement dynamics emerge abruptly, not gradually
+   - Test: Track NRCI on individual train pairs across training
+
+2. **Hypothesis 2**: Larger minds (more parameters) learn dynamics earlier
+   - Test: Scale MOG channels, driving styles, settlement rules
+
+3. **Hypothesis 3**: Context length (grid size) is the primary bottleneck
+   - Test: Same task with 8×8, 16×16, 32×32 grids
+
+4. **Hypothesis 4**: Pattern sparsity affects difficulty
+   - Test: Tasks where 1 cell changes vs 50% of cells change
+
+5. **Hypothesis 5**: Patching learned settlement rules elicits emergence
+   - Test: Patch gravity rule from solved task to unsolved task
+
+6. **Hypothesis 6**: Pre-pretraining on synthetic MOG tasks accelerates ARC learning
+   - Test: Pre-train on synthetic tasks, then fine-tune on ARC
+
+---
+
+## 9. QUICK WINS FOR YOUR PROJECT
+
+**Immediate experiments you can run:**
+
+### Experiment 1: Multi-Seed Analysis
+```bash
+# Run your current best mind with 10 different seeds
+for seed in {0..9}; do
+    python3 substrate_mind.py --seed $seed --task 1e0a9b12
+done
+
+# Analyze: Do all seeds solve it? At what step?
+```
+
+### Experiment 2: Causal Channel Ablation
+```python
+# In substrate_mind.py, add ablation:
+def ablate_channel(mind, channel_name):
+    """Zero out a specific MOG channel"""
+    original = mind.perception[channel_name].copy()
+    mind.perception[channel_name] = np.zeros_like(original)
+    
+    result = mind.evaluate(task)
+    
+    mind.perception[channel_name] = original  # Restore
+    return result
+
+# Test which channels are causal for gravity task
+for channel in ['mass', 'info', 'activation', 'potential']:
+    delta = ablate_channel(mind, channel)
+    print(f"Ablating {channel} reduces accuracy by {delta}")
+```
+
+### Experiment 3: Synthetic Gravity Task
+```python
+# Create controlled gravity task
+def generate_synthetic_gravity(n_samples=100, grid_size=16):
+    tasks = []
+    for _ in range(n_samples):
+        grid = np.random.randint(0, 10, size=(grid_size, grid_size))
+        target = compact_to_bottom(grid)
+        tasks.append((grid, target))
+    return tasks
+
+# Test: Does mind learn faster on synthetic vs real?
+synthetic_tasks = generate_synthetic_gravity()
+mind.train(synthetic_tasks, steps=1000)
+
+# Then test on real gravity task
+real_task = load_arc_task('1e0a9b12')
+accuracy = mind.evaluate(real_task)
+```
