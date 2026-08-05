@@ -57,7 +57,7 @@ https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the dire
 | **arc_agi_(version.number)/** | running attempts at ARC AGI | Running Score | README.md | Operating the UBP + GLM systems through the correct pipeline in full, trying various experiments to solve ARC AGI challenges as well as a range of tests/challenges to widen the problem-solving abilities of the natural system through training MOG grids with yes/no feedback loop, to avoid using Solvers to find solutions - rather the aim is to enable the UBP-GLM systems to gain understanding through structured and calibrated input then calculating solutions natively. Future editions need to use scripts from the 'GMHGL/'' and 'data_object/' folders/systems and consolidate training/knowledge |
 | **arc_agi_15/** | Solver — Working Solvers (3/9 mind solved / 6/9 Solvers solved) | 9/50 | `consolidated_mind.py` | Leave as record of attempting #15 and for parts if needed rather than rebuilding scripts from scratch |
 | **arc_agi_16/** | Experiments | 9/50 | `arc_learning_mind.py` | Leave as record of attempting #16 and parts if needed rather than rebuilding scripts from scratch |
-| **light/** | Calibration — UBP ↔ real world | — | `reports/substrate_speed_of_light` | More calibration anchors through various scales of reality |
+| **light/** | Calibration — UBP ↔ real world | — | `aristotle_01/lattice_shortcut.py' and aristotle_01/LATTICE_SHORTCUT_METHOD.md` | Add more calibration anchors through various scales of reality |
 | **long_term_memory/** | Archive — all GLM training data + knowledge | — | `glm_training_data.json` | Needs proper implementation so this becomes an on-going GLM training method to save re-training the GLM each iteration, refinement and formalisation of structure, further training, building and benchmarking |
 
 ---
@@ -67,7 +67,7 @@ https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the dire
 ```
 Subjects (elements, molecules, words)
 for Elements: ubp_system_kb.json (118 elements)
-    ↓ encode via elements_data_object_system.py
+    ↓ encode via elements_data_object_system.py (Subjects other than the Elements still under development)
 24-bit Data Objects (EN×10, BP÷40, MP÷40, Rho×10)
     ↓ warp via graduated_activation_warp / rotate_3+flip
 Warped Data Objects (Activation row modified for BO≥2)
@@ -113,6 +113,12 @@ Training Data + Knowledge (grows with each run)
 - Class A: 1,104 (HW=2, NRCI=0.688)
 - Class B: 97,152 (HW=8, NRCI=0.620)
 - Class C: 98,304 (HW=24, NRCI=0.491)
+
+### Lightspeed calibration
+- Charge: 1 vertex step = e/12 C (exact)
+- Velocity: v/c = 0.339 (exact, from γ = MONAD/13)
+- Mass: m_e = Y² × WOBBLE × 24⁴ × 29⁴ × h × Δν_Cs / c² (0.007% - 0.009% error results vary currently)
+The mass residual is an open problem.
 
 ### Y Constant
 - Y = 1/(π + 2/π) ≈ 0.264675
