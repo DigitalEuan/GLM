@@ -1,6 +1,6 @@
 # TOP REPOSITORY LEVEL TIER ROOT README 
 
-**Version:** 2.3 (5 August 2026)  
+**Version:** 2.4 (6 August 2026)  
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand  
 **Parent:** None - Top Level
 
