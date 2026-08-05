@@ -1,6 +1,6 @@
 # LIGHT README — Speed of Light Calibration Study
 
-**Version:** 1.1.0  (3 August 2026) 
+**Version:** 1.2.0  (6 August 2026) 
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand   
 **Parent:** `../README.md`  
 
@@ -14,8 +14,18 @@
 
 ```
 light/ (this folder)
-  └── provides calibration constants to → ../GMHGL/ (scale alignment)
-```
+  ├──┬ 'aristotle_01' - provides calibration constants to → ../GMHGL/ (scale alignment)
+  │  ├ 'lattice_shortcut.py' - the operational system: self-contained implementation
+  │  └ `LATTICE_SHORTCUT_METHOD.md` the working method, stage by stage
+  │
+  ├── 'reports' = development reports
+  │
+  ├── 'scripts' = development python scripts
+  │
+  ├── 'source_documents' = original research
+  │
+  └── 'worklogs' = original research workload
+
 
 20 phases of rigorous, independent audit of the UBP framework's claims about
 the speed of light and physical constants. The study evolved from falsification

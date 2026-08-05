@@ -1,0 +1,1686 @@
+{
+  "reproducibility_of_published_directory": {
+    "Deep Interfacial Sequence (N = 1,000,033 .. 1,000,050)": {
+      "gray24": "0/17 jump vectors reproduced exactly",
+      "gray24+substrate snap": "0/17 jump vectors reproduced exactly",
+      "byte-gray": "0/17 jump vectors reproduced exactly",
+      "byte-gray+substrate snap": "0/17 jump vectors reproduced exactly",
+      "byte-gray+complete snap": "0/17 jump vectors reproduced exactly"
+    },
+    "Deep Prime-to-Prime Trajectory (P > 1,000,000)": {
+      "gray24": "0/19 jump vectors reproduced exactly",
+      "gray24+substrate snap": "0/19 jump vectors reproduced exactly",
+      "byte-gray": "11/19 jump vectors reproduced exactly",
+      "byte-gray+substrate snap": "19/19 jump vectors reproduced exactly",
+      "byte-gray+complete snap": "5/19 jump vectors reproduced exactly"
+    }
+  },
+  "claim_checks": {
+    "golay_weight_distribution": {
+      "0": 1,
+      "8": 759,
+      "12": 2576,
+      "16": 759,
+      "24": 1
+    },
+    "consecutive_d2_gray24": [
+      [
+        1,
+        17
+      ]
+    ],
+    "consecutive_d2_bytegray": [
+      [
+        1,
+        17
+      ]
+    ],
+    "gray24_pairs_tested": 19900,
+    "gray24_pairs_with_odd_d2": 10000,
+    "gray24_odd_d2_iff_opposite_parity": true,
+    "xor_shortcut_valid": true,
+    "substrate_snap_failures_per_1000": 441,
+    "complete_snap_failures_per_1000": 0,
+    "ambiguous_weight4_cosets": 1771,
+    "weight4_coset_leader_multiplicities": {
+      "6": 1771
+    },
+    "max_coset_leader_weight": 4,
+    "corrected_consecutive_d2_distribution": [
+      [
+        0,
+        466
+      ],
+      [
+        8,
+        1534
+      ]
+    ],
+    "corrected_jumps_are_leech_vectors": true
+  },
+  "summary": {
+    "total_transitions": 36,
+    "raw_gray_d2_distribution": [
+      [
+        1,
+        17
+      ],
+      [
+        2,
+        10
+      ],
+      [
+        4,
+        8
+      ],
+      [
+        5,
+        1
+      ]
+    ],
+    "snapped_d2_distribution": [
+      [
+        0,
+        7
+      ],
+      [
+        8,
+        29
+      ]
+    ],
+    "all_snapped_supports_are_golay_codewords": true,
+    "all_doubled_jumps_are_leech_vectors": true,
+    "minimal_octad_step_rate_pct": 80.56,
+    "even_quantization_rate_pct_raw": 50.0
+  },
+  "catalogs": {
+    "Deep Interfacial Sequence (N = 1,000,033 .. 1,000,050)": [
+      {
+        "step": 1,
+        "origin": {
+          "n": 1000033,
+          "is_prime": true
+        },
+        "target": {
+          "n": 1000034,
+          "is_prime": false
+        },
+        "raw_gray_d2": 1,
+        "raw_gray_d2_via_xor_shortcut": 1,
+        "snapped_jump_vector_24d": [
+          -1,
+          -1,
+          0,
+          -1,
+          0,
+          -1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 2,
+        "origin": {
+          "n": 1000034,
+          "is_prime": false
+        },
+        "target": {
+          "n": 1000035,
+          "is_prime": false
+        },
+        "raw_gray_d2": 1,
+        "raw_gray_d2_via_xor_shortcut": 1,
+        "snapped_jump_vector_24d": [
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 3,
+        "origin": {
+          "n": 1000035,
+          "is_prime": false
+        },
+        "target": {
+          "n": 1000036,
+          "is_prime": false
+        },
+        "raw_gray_d2": 1,
+        "raw_gray_d2_via_xor_shortcut": 1,
+        "snapped_jump_vector_24d": [
+          -1,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 4,
+        "origin": {
+          "n": 1000036,
+          "is_prime": false
+        },
+        "target": {
+          "n": 1000037,
+          "is_prime": true
+        },
+        "raw_gray_d2": 1,
+        "raw_gray_d2_via_xor_shortcut": 1,
+        "snapped_jump_vector_24d": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 5,
+        "origin": {
+          "n": 1000037,
+          "is_prime": true
+        },
+        "target": {
+          "n": 1000038,
+          "is_prime": false
+        },
+        "raw_gray_d2": 1,
+        "raw_gray_d2_via_xor_shortcut": 1,
+        "snapped_jump_vector_24d": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "snapped_d2": 0,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": false,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 0
+      },
+      {
+        "step": 6,
+        "origin": {
+          "n": 1000038,
+          "is_prime": false
+        },
+        "target": {
+          "n": 1000039,
+          "is_prime": true
+        },
+        "raw_gray_d2": 1,
+        "raw_gray_d2_via_xor_shortcut": 1,
+        "snapped_jump_vector_24d": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "snapped_d2": 0,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": false,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 0
+      },
+      {
+        "step": 7,
+        "origin": {
+          "n": 1000039,
+          "is_prime": true
+        },
+        "target": {
+          "n": 1000040,
+          "is_prime": false
+        },
+        "raw_gray_d2": 1,
+        "raw_gray_d2_via_xor_shortcut": 1,
+        "snapped_jump_vector_24d": [
+          -1,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          -1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 8,
+        "origin": {
+          "n": 1000040,
+          "is_prime": false
+        },
+        "target": {
+          "n": 1000041,
+          "is_prime": false
+        },
+        "raw_gray_d2": 1,
+        "raw_gray_d2_via_xor_shortcut": 1,
+        "snapped_jump_vector_24d": [
+          1,
+          1,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 9,
+        "origin": {
+          "n": 1000041,
+          "is_prime": false
+        },
+        "target": {
+          "n": 1000042,
+          "is_prime": false
+        },
+        "raw_gray_d2": 1,
+        "raw_gray_d2_via_xor_shortcut": 1,
+        "snapped_jump_vector_24d": [
+          -1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 10,
+        "origin": {
+          "n": 1000042,
+          "is_prime": false
+        },
+        "target": {
+          "n": 1000043,
+          "is_prime": false
+        },
+        "raw_gray_d2": 1,
+        "raw_gray_d2_via_xor_shortcut": 1,
+        "snapped_jump_vector_24d": [
+          1,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          -1,
+          -1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          -1,
+          0,
+          1
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 11,
+        "origin": {
+          "n": 1000043,
+          "is_prime": false
+        },
+        "target": {
+          "n": 1000044,
+          "is_prime": false
+        },
+        "raw_gray_d2": 1,
+        "raw_gray_d2_via_xor_shortcut": 1,
+        "snapped_jump_vector_24d": [
+          -1,
+          0,
+          0,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          -1
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 12,
+        "origin": {
+          "n": 1000044,
+          "is_prime": false
+        },
+        "target": {
+          "n": 1000045,
+          "is_prime": false
+        },
+        "raw_gray_d2": 1,
+        "raw_gray_d2_via_xor_shortcut": 1,
+        "snapped_jump_vector_24d": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          -1,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 13,
+        "origin": {
+          "n": 1000045,
+          "is_prime": false
+        },
+        "target": {
+          "n": 1000046,
+          "is_prime": false
+        },
+        "raw_gray_d2": 1,
+        "raw_gray_d2_via_xor_shortcut": 1,
+        "snapped_jump_vector_24d": [
+          -1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          -1,
+          -1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 14,
+        "origin": {
+          "n": 1000046,
+          "is_prime": false
+        },
+        "target": {
+          "n": 1000047,
+          "is_prime": false
+        },
+        "raw_gray_d2": 1,
+        "raw_gray_d2_via_xor_shortcut": 1,
+        "snapped_jump_vector_24d": [
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          -1,
+          1,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 15,
+        "origin": {
+          "n": 1000047,
+          "is_prime": false
+        },
+        "target": {
+          "n": 1000048,
+          "is_prime": false
+        },
+        "raw_gray_d2": 1,
+        "raw_gray_d2_via_xor_shortcut": 1,
+        "snapped_jump_vector_24d": [
+          -1,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          -1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 16,
+        "origin": {
+          "n": 1000048,
+          "is_prime": false
+        },
+        "target": {
+          "n": 1000049,
+          "is_prime": false
+        },
+        "raw_gray_d2": 1,
+        "raw_gray_d2_via_xor_shortcut": 1,
+        "snapped_jump_vector_24d": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          -1,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          -1,
+          1,
+          0,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 17,
+        "origin": {
+          "n": 1000049,
+          "is_prime": false
+        },
+        "target": {
+          "n": 1000050,
+          "is_prime": false
+        },
+        "raw_gray_d2": 1,
+        "raw_gray_d2_via_xor_shortcut": 1,
+        "snapped_jump_vector_24d": [
+          -1,
+          -1,
+          0,
+          0,
+          -1,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          -1,
+          0,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      }
+    ],
+    "Deep Prime-to-Prime Trajectory (P > 1,000,000)": [
+      {
+        "step": 1,
+        "origin": {
+          "n": 1000003,
+          "is_prime": true
+        },
+        "target": {
+          "n": 1000033,
+          "is_prime": true
+        },
+        "raw_gray_d2": 4,
+        "raw_gray_d2_via_xor_shortcut": 4,
+        "snapped_jump_vector_24d": [
+          0,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          -1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 2,
+        "origin": {
+          "n": 1000033,
+          "is_prime": true
+        },
+        "target": {
+          "n": 1000037,
+          "is_prime": true
+        },
+        "raw_gray_d2": 2,
+        "raw_gray_d2_via_xor_shortcut": 2,
+        "snapped_jump_vector_24d": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "snapped_d2": 0,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": false,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 0
+      },
+      {
+        "step": 3,
+        "origin": {
+          "n": 1000037,
+          "is_prime": true
+        },
+        "target": {
+          "n": 1000039,
+          "is_prime": true
+        },
+        "raw_gray_d2": 2,
+        "raw_gray_d2_via_xor_shortcut": 2,
+        "snapped_jump_vector_24d": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "snapped_d2": 0,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": false,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 0
+      },
+      {
+        "step": 4,
+        "origin": {
+          "n": 1000039,
+          "is_prime": true
+        },
+        "target": {
+          "n": 1000081,
+          "is_prime": true
+        },
+        "raw_gray_d2": 4,
+        "raw_gray_d2_via_xor_shortcut": 4,
+        "snapped_jump_vector_24d": [
+          -1,
+          0,
+          1,
+          0,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1,
+          -1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 5,
+        "origin": {
+          "n": 1000081,
+          "is_prime": true
+        },
+        "target": {
+          "n": 1000099,
+          "is_prime": true
+        },
+        "raw_gray_d2": 4,
+        "raw_gray_d2_via_xor_shortcut": 4,
+        "snapped_jump_vector_24d": [
+          1,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          1,
+          -1,
+          0,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 6,
+        "origin": {
+          "n": 1000099,
+          "is_prime": true
+        },
+        "target": {
+          "n": 1000117,
+          "is_prime": true
+        },
+        "raw_gray_d2": 4,
+        "raw_gray_d2_via_xor_shortcut": 4,
+        "snapped_jump_vector_24d": [
+          -1,
+          0,
+          0,
+          -1,
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 7,
+        "origin": {
+          "n": 1000117,
+          "is_prime": true
+        },
+        "target": {
+          "n": 1000121,
+          "is_prime": true
+        },
+        "raw_gray_d2": 2,
+        "raw_gray_d2_via_xor_shortcut": 2,
+        "snapped_jump_vector_24d": [
+          0,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          -1,
+          -1,
+          1,
+          1,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 8,
+        "origin": {
+          "n": 1000121,
+          "is_prime": true
+        },
+        "target": {
+          "n": 1000133,
+          "is_prime": true
+        },
+        "raw_gray_d2": 2,
+        "raw_gray_d2_via_xor_shortcut": 2,
+        "snapped_jump_vector_24d": [
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          -1,
+          1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 9,
+        "origin": {
+          "n": 1000133,
+          "is_prime": true
+        },
+        "target": {
+          "n": 1000151,
+          "is_prime": true
+        },
+        "raw_gray_d2": 4,
+        "raw_gray_d2_via_xor_shortcut": 4,
+        "snapped_jump_vector_24d": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          -1,
+          -1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 10,
+        "origin": {
+          "n": 1000151,
+          "is_prime": true
+        },
+        "target": {
+          "n": 1000159,
+          "is_prime": true
+        },
+        "raw_gray_d2": 2,
+        "raw_gray_d2_via_xor_shortcut": 2,
+        "snapped_jump_vector_24d": [
+          0,
+          0,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 11,
+        "origin": {
+          "n": 1000159,
+          "is_prime": true
+        },
+        "target": {
+          "n": 1000171,
+          "is_prime": true
+        },
+        "raw_gray_d2": 4,
+        "raw_gray_d2_via_xor_shortcut": 4,
+        "snapped_jump_vector_24d": [
+          0,
+          0,
+          -1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          -1,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 12,
+        "origin": {
+          "n": 1000171,
+          "is_prime": true
+        },
+        "target": {
+          "n": 1000183,
+          "is_prime": true
+        },
+        "raw_gray_d2": 2,
+        "raw_gray_d2_via_xor_shortcut": 2,
+        "snapped_jump_vector_24d": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "snapped_d2": 0,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": false,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 0
+      },
+      {
+        "step": 13,
+        "origin": {
+          "n": 1000183,
+          "is_prime": true
+        },
+        "target": {
+          "n": 1000187,
+          "is_prime": true
+        },
+        "raw_gray_d2": 2,
+        "raw_gray_d2_via_xor_shortcut": 2,
+        "snapped_jump_vector_24d": [
+          0,
+          0,
+          0,
+          -1,
+          -1,
+          -1,
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 14,
+        "origin": {
+          "n": 1000187,
+          "is_prime": true
+        },
+        "target": {
+          "n": 1000193,
+          "is_prime": true
+        },
+        "raw_gray_d2": 5,
+        "raw_gray_d2_via_xor_shortcut": 5,
+        "snapped_jump_vector_24d": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "snapped_d2": 0,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": false,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 0
+      },
+      {
+        "step": 15,
+        "origin": {
+          "n": 1000193,
+          "is_prime": true
+        },
+        "target": {
+          "n": 1000199,
+          "is_prime": true
+        },
+        "raw_gray_d2": 2,
+        "raw_gray_d2_via_xor_shortcut": 2,
+        "snapped_jump_vector_24d": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          -1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 16,
+        "origin": {
+          "n": 1000199,
+          "is_prime": true
+        },
+        "target": {
+          "n": 1000211,
+          "is_prime": true
+        },
+        "raw_gray_d2": 4,
+        "raw_gray_d2_via_xor_shortcut": 4,
+        "snapped_jump_vector_24d": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          -1,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 17,
+        "origin": {
+          "n": 1000211,
+          "is_prime": true
+        },
+        "target": {
+          "n": 1000213,
+          "is_prime": true
+        },
+        "raw_gray_d2": 2,
+        "raw_gray_d2_via_xor_shortcut": 2,
+        "snapped_jump_vector_24d": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          -1,
+          1
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 18,
+        "origin": {
+          "n": 1000213,
+          "is_prime": true
+        },
+        "target": {
+          "n": 1000231,
+          "is_prime": true
+        },
+        "raw_gray_d2": 4,
+        "raw_gray_d2_via_xor_shortcut": 4,
+        "snapped_jump_vector_24d": [
+          0,
+          0,
+          1,
+          0,
+          -1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          -1,
+          -1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "snapped_d2": 8,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": true,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 32
+      },
+      {
+        "step": 19,
+        "origin": {
+          "n": 1000231,
+          "is_prime": true
+        },
+        "target": {
+          "n": 1000249,
+          "is_prime": true
+        },
+        "raw_gray_d2": 2,
+        "raw_gray_d2_via_xor_shortcut": 2,
+        "snapped_jump_vector_24d": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "snapped_d2": 0,
+        "support_is_golay_codeword": true,
+        "is_minimal_octad_step": false,
+        "doubled_jump_is_leech_vector": true,
+        "doubled_norm_sq_x8_representation": 0
+      }
+    ]
+  }
+}
