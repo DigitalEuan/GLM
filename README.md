@@ -1,6 +1,6 @@
 # TOP REPOSITORY LEVEL TIER ROOT README 
 
-**Version:** 3.0 (4 August 2026)  
+**Version:** 2.3 (5 August 2026)  
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand  
 **Parent:** None - Top Level
 
@@ -38,7 +38,9 @@ https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the dire
   ├──→ arc_agi_16/      ARC AGI v16 EXPERIMENTS EDITION 
   │                     Focussed on training the GLM, perhaps doesn't use this system well
   │
-  └──→ arc_agi_(version_number)/      THE NEXT ARC AGI attempt
+  ├──→ arc_agi_(version_number)/      THE NEXT ARC AGI attempt
+  │
+  └──→ leech_lattice/      fast way to map and measure integers within the Leech lattice
 
 ```
 
@@ -50,12 +52,12 @@ https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the dire
 |--------|---------|-------|----------|----------|
 | **ROOT Top Tier repository folder** | Collect, define and conduct use of all sub-folders, files within folders and scripts throughout the whole of this repository and system, to direct experiments and studies that use the UBP and or GLM systems | — | 'README.md' (this file) | Organise all folders and their contents so no scripts are repeated and all systems use a single source ('GMHGL/' and 'glm_machine/') for operations, 'data_object/' for encoding, 'light/' for scale calibration and 'long_term_memory/' for all GLM training and learning |
 | **GMHGL/** | Foundation — Golay engine, TAX, NRCI | — | `ubp_unified_v5.py` | Extend existing capacity/capabilities if possible |
-| **data_object/** | Encoding — Subjects → 24-bit Data Objects | — | `readme.md` | Warping optimization complete for elements (r=0.55, BO acc=86.8%). Calibration: 190 kJ/mol per work unit. Next: molecules, words, ARC AGI integration |
+| **data_object/** | Encoding — Subjects → 24-bit Data Objects | — | `encoding_definition_attempt_04.08.26/README.md` | Use in studies/experiments |
 | **glm_machine/** | Active Geometric Language Machine system | — | `GLM11_runtime.py` | Growth and development alongside the ARC AGI developments |
-| **arc_agi_(version_number)/** | running attempts at ARC AGI | Running Score | README.md | Operating the UBP + GLM systems through the correct pipeline in full, trying various experiments to solve ARC AGI challenges as well as a range of tests/challenges to widen the problem-solving abilities of the natural system through training MOG grids with yes/no feedback loop, to avoid using Solvers to find solutions - rather the aim is to enable the UBP-GLM systems to gain understanding through structured and calibrated input then calculating solutions natively. Future editions need to use scripts from the 'GMHGL/'' and 'data_object/' folders/systems and consolidate training/knowledge |
+| **arc_agi_(version.number)/** | running attempts at ARC AGI | Running Score | README.md | Operating the UBP + GLM systems through the correct pipeline in full, trying various experiments to solve ARC AGI challenges as well as a range of tests/challenges to widen the problem-solving abilities of the natural system through training MOG grids with yes/no feedback loop, to avoid using Solvers to find solutions - rather the aim is to enable the UBP-GLM systems to gain understanding through structured and calibrated input then calculating solutions natively. Future editions need to use scripts from the 'GMHGL/'' and 'data_object/' folders/systems and consolidate training/knowledge |
 | **arc_agi_15/** | Solver — Working Solvers (3/9 mind solved / 6/9 Solvers solved) | 9/50 | `consolidated_mind.py` | Leave as record of attempting #15 and for parts if needed rather than rebuilding scripts from scratch |
-| **arc_agi_16/** | Experiments — next iteration | 9/50 | `arc_learning_mind.py` | Leave as record of attempting #16 and parts |
-| **light/** | Calibration — UBP ↔ real world | — | `reports/` | More experimenting to try to derive the Speed of Light, more calibration anchors through various scales of reality |
+| **arc_agi_16/** | Experiments | 9/50 | `arc_learning_mind.py` | Leave as record of attempting #16 and parts if needed rather than rebuilding scripts from scratch |
+| **light/** | Calibration — UBP ↔ real world | — | `reports/substrate_speed_of_light` | More calibration anchors through various scales of reality |
 | **long_term_memory/** | Archive — all GLM training data + knowledge | — | `glm_training_data.json` | Needs proper implementation so this becomes an on-going GLM training method to save re-training the GLM each iteration, refinement and formalisation of structure, further training, building and benchmarking |
 
 ---
@@ -64,14 +66,19 @@ https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the dire
 
 ```
 Subjects (elements, molecules, words)
-    ↓ encode via data_object/
-Data Objects (24-bit vectors in Leech space)
-    ↓ warp via Activation row modification
-Warped Data Objects (bond-order-aware geometry)
-    ↓ compute on via GMHGL/
-Metrics (TAX, NRCI, AND, XOR, snap cost, geometric work)
+for Elements: ubp_system_kb.json (118 elements)
+    ↓ encode via elements_data_object_system.py
+24-bit Data Objects (EN×10, BP÷40, MP÷40, Rho×10)
+    ↓ warp via graduated_activation_warp / rotate_3+flip
+Warped Data Objects (Activation row modified for BO≥2)
+    ↓ interact via AND/XOR + geometric work
+Feature vectors (24 features per pair)
+    ↓ predict via Random Forest / k-NN
+Bond Energy (r=0.55) + Bond Order (86.8%)
     ↓ calibrate via 190 kJ/mol scale factor
-Predictions (bond energy, bond order, enthalpy in kJ/mol)
+Real thermodynamic values (kJ/mol)
+    ↓ compute on via GMHGL/
+Metrics (TAX, NRCI, AND, XOR, snap cost)
     ↓ reason about via glm_machine/
 Decisions (perceive → interpret → propose → inspect)
     ↓ solve via arc_agi_(version number)
@@ -122,29 +129,19 @@ Training Data + Knowledge (grows with each run)
 ## What We've Learned
 
 ### Elements (118)
-- Best encoding: EN×10, BP÷40, MP÷40, Rho×10
-- r(ΔH) = −0.91 (enthalpy prediction)
-- Noble gases = vacuum state (HW=0, NRCI=1.0)
-- Details: `data_object/elements.md`
-
-### Element Interactions (114 pairs) — NEW 4 August 2026
-- **Best warping: rotate_3 + flip Activation** → r(BE) = 0.55 (5-fold CV)
-- **Bond order classification: 86.8% accuracy** (k-NN, flip_act_all)
-- **The Activation row is the bond formation layer** (diff_A r = 0.50)
-- **Geometric work (path integral) carries independent signal** (partial r = 0.33)
-- **Empirical calibration: 190 kJ/mol per work unit** (matches Br-Br bond energy)
-- **Substrate physics: tick = 2.10 fs, cell = 17 μm** (molecular scale)
-- **Element property prediction: EN r=0.92, BP r=0.95, MP r=0.87, Rho r=0.82**
-- Details: `data_object/encoding_definition_attempt_04.08.26/`
+1. **Element identity is well-encoded** (EN r=0.92, BP r=0.95)
+2. **The Activation row is the bond formation layer** (diff_A r=0.50)
+3. **Warping the Activation row creates distinct bond-order sectors** (r=0.55)
+4. **Geometric work (path integral) carries independent signal** (partial r=0.33)
+5. **The snap process is part of the interaction mechanism** (snap energy monotonic with BO)
+6. **Bond order classification: 86.8% accuracy** (k-NN with flip_act_all)
+7. **The 190 kJ/mol scale factor matches real bond energies** (Br-Br = 190 kJ/mol)
+- see 'encoding_definition_attempt_04.08.26/README.md' for latest
 
 ### Molecules (82)
 - Best encoding: M (log2), MP (div40)
 - r(ΔH) = +0.96
 - Details: `data_object/molecules.md`
-
-### Bonds (36)
-- AND encoding: r(BE) = +0.90 with NRCI × bond_order
-- Cross-validated: mean R = 0.82
 
 ### Patterns (29 synthetic)
 - 19/29 (66%) with substrate knowledge
@@ -164,10 +161,6 @@ Training Data + Knowledge (grows with each run)
 | **NRCI** | 10/(10+TAX) | Coherence (1.0=vacuum, 0.5=horizon) |
 | **Y** | 1/(π+2/π) ≈ 0.2647 | Entropic wobble |
 | **AND** | a[i] & b[i] | Shared structure |
-| **Geometric Work** | Σ HD(Vₜ, Vₜ₊₁) × NRCIₜ | Path integral of settlement (bit-steps × coherence) |
-| **Empirical Scale** | 190 kJ/mol per work unit | Conversion from abstract work to real chemistry |
-| **Tick Duration** | 2.10 × 10⁻¹⁵ s | Substrate clock speed (molecular vibration timescale) |
-| **Cell Length** | 17.0 μm | Substrate spatial scale (molecular domain size) |
 
 ---
 
@@ -188,32 +181,34 @@ Training Data + Knowledge (grows with each run)
 
 | Folder | Documents |
 |--------|-----------|
-| data_object/ | `elements.md`, `molecules.md`, `CALIBRATION_LOG.md`, `encoding_definition_attempt_04.08.26/` |
+| data_object/ | `elements.md`, `molecules.md`, `CALIBRATION_LOG.md` |
 | glm_machine/ | README with full architecture docs |
 | GMHGL/ | `ubp_checkpoint_v5.4.1.md` |
 | long_term_memory/ | `GLM_KNOWLEDGE.md` |
 
 ---
 
-## Under used GLM Resources
-```
-- Currently under/unused datasets and scripts in 'glm_machine/':
-   - 'glm_unified_resource.json' 15MB GLM language unified resource
-   - 'GLM_CRG_EXPANDED.py' 32KB GLM Concept Relation Graph
+## Resources
+
+- GLM language unified resource (15MB): 'https://github.com/DigitalEuan/UBP_Repo/blob/main/core_studio_v4.0/GLM/glm_unified_resource.json'
+- GLM Concept Relation Graph: 'https://github.com/DigitalEuan/UBP_Repo/blob/main/core_studio_v4.0/GLM/GLM_CRG_EXPANDED.py'
+- Database of words and explanation: 'https://github.com/DigitalEuan/UBP_Repo/blob/main/core_studio_v4.0/core/ubp_lang_kb_combined_v4.json'
+
+- Currently under/unused datasets and scripts in 'glm_machine/'
    - 'GLM_CRG_MASSIVE.py' 10KB
    - 'GLM15_physics_pack.py' 33KB - physics definitions
    - 'color_space_data.json' 183KB
    - 'corpus.txt' 500KB chat conversation for language training
    - 'glm_learned_state.json' 12KB
    - 'GLM21_generator.py' - GENERATION loop — it produces novel sequences, not just recalled templates.
-   - 'GLM22_ontological_grammar.py' - For words and language UBP ontological layers map to grammatical categories:
-    ├──→ Reality    (M_*)  → NOUN      (concrete things that exist)
-    ├──→ Information (I_*) → ADJECTIVE  (relational qualities)
-    ├──→ Activation (A_*)  → VERB       (processes, actions)
-    └──→ Potential  (P_*)  → OPERATOR   (logical/abstract relations)
+   - 'GLM22_ontological_grammar.py' - UBP ontological layers (Reality, Information, Activation, Potential) map to grammatical categories:
+1. Reality    (M_*)  → NOUN      (concrete things that exist)
+2. Information (I_*) → ADJECTIVE  (relational qualities)
+3. Activation (A_*)  → VERB       (processes, actions)
+4. Potential  (P_*)  → OPERATOR   (logical/abstract relations)
    - 'GLM39_agent_loop.py'
    - 'golden_cases.json' 13KB
-   - 'idea_meta_graph.json' 77KB 
-- Additional Words + definitions resource 11.2MB 'long_term_memory/ubp_lang_kb_combined_v4.json'
+   - 'idea_meta_graph.json' 77KB
+
 - ARC AGI Attempts before v15: 'https://github.com/DigitalEuan/ARC_AGI'
-```
+
