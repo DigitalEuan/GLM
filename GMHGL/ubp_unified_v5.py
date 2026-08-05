@@ -1,10 +1,10 @@
 """
 ================================================================================
-UBP UNIFIED v5.4.1 — Golay-MOG-Hexacode-Grey-Leech
+UBP UNIFIED v5.4.1 — Unified Checkpoint
 ================================================================================
 Author  : E R A Craig, New Zealand
-Version : 5.4.1
-Date    : 30 July 2026
+Version : 5.4.2
+Date    : 6 August 2026
 
 THE 5 PILLARS OF THE UBP ARCHITECTURE
 =====================================
@@ -578,7 +578,12 @@ class GolayCodeEngine:
     def syndrome_weight(self, v24: List[int]) -> int:
         return sum(self.syndrome(v24))
 
-    # ── syndrome table (lazy: 2325 entries for weight ≤ 3) ────────────────────
+    # ── syndrome table (complete: 4096 entries, weights 0..4) ─────────────────
+    # FIX per leech_lattice/RequestProject/Decoder.lean (Lean theorems
+    # `golay_covering_radius`, `decode_isGolay`, `decode_dist_le_four`).
+    # The previous version only built weights 0..3 (2,325 entries) and silently
+    # returned non-codewords for the 1,771 weight-4 cosets (43% of inputs).
+    # See Substrate.lean `legacySnap_not_codeword` for the proof of the bug.
     def _build_syndrome_table(self) -> Dict[Tuple[int, ...], List[int]]:
         cols = self._H_cols
         table: Dict[Tuple[int, ...], List[int]] = {}
@@ -602,13 +607,36 @@ class GolayCodeEngine:
                     s = tuple(a ^ b for a, b in zip(sij, cols[k]))
                     e = [0]*24; e[i] = 1; e[j] = 1; e[k] = 1
                     table[s] = e
+        # weight 4 — THE FIX (covers the remaining 1,771 cosets)
+        # Per Lean `golay_covering_radius`: every 24-bit word is within Hamming
+        # distance 4 of a codeword, so this completes the decoder.
+        # Per Lean `decoding_not_unique`: at distance 4 the nearest codeword is
+        # not unique (1,771 cosets have 6 tied weight-4 leaders). The tiebreak
+        # convention below is: first-found = lex-smallest by index order. This
+        # matches Decoder.lean's `leaderNat` ("minimum weight, then smallest
+        # coordinate mask").
+        for i in range(24):
+            for j in range(i+1, 24):
+                sij = tuple(a ^ b for a, b in zip(cols[i], cols[j]))
+                for k in range(j+1, 24):
+                    sijk = tuple(a ^ b for a, b in zip(sij, cols[k]))
+                    for l in range(k+1, 24):
+                        s = tuple(a ^ b for a, b in zip(sijk, cols[l]))
+                        if s not in table:  # only add if not already covered
+                            e = [0]*24
+                            e[i] = 1; e[j] = 1; e[k] = 1; e[l] = 1
+                            table[s] = e
         return table
 
     def _ensure_syn_table(self):
         if self._syn_table is None:
             self._syn_table = self._build_syndrome_table()
 
-    # ── snap (correct ≤ 3 errors) ──────────────────────────────────────────────
+    # ── snap (complete decoder: corrects any pattern of weight ≤ 4) ──────────
+    # Per Lean `decode_isGolay`: the result is always a Golay codeword.
+    # Per Lean `decode_dist_le_four`: snap distance is ≤ 4 (the covering radius).
+    # The `else` branch below is now unreachable (the table is complete), but is
+    # kept as a defensive fallback.
     def snap_to_codeword(self, v24: List[int]) -> Tuple[List[int], Dict[str, Any]]:
         if len(v24) != 24:
             raise ValueError("snap: 24 bits required")
@@ -625,12 +653,10 @@ class GolayCodeEngine:
             d = sum(e)
             return corrected, {"syndrome_weight": sw, "corrected": True,
                                "anchor_distance": d, "correctable": True}
+        # Unreachable after the weight-4 fix (table is complete, 4096 entries).
+        # Kept as a defensive fallback per Lean `decode_isGolay`.
         return list(v24), {"syndrome_weight": sw, "corrected": False,
                            "anchor_distance": -1, "correctable": False}
-
-    def decode(self, v24: List[int]) -> Tuple[List[int], bool, int]:
-        cw, meta = self.snap_to_codeword(v24)
-        return cw[:12], meta["correctable"], meta["anchor_distance"]
 
     # ── enumeration ────────────────────────────────────────────────────────────
     def get_all_codewords(self) -> List[List[int]]:
@@ -2445,8 +2471,8 @@ class NoiseALU:
 
         # 1. Calculate target metrics
         v_target = [(n_val ^ (n_val >> 1) >> i) & 1 for i in range(23, -1, -1)]
-        decoded, _, _ = GOLAY_ENGINE.decode(v_target)
-        snapped = GOLAY_ENGINE.encode(decoded)
+        snapped, _ = GOLAY_ENGINE.snap_to_codeword(v_target)
+        
         tax = LEECH_ENGINE.calculate_symmetry_tax(snapped)
         target_nrci = Fraction(10, 1) / (Fraction(10, 1) + tax)
 
@@ -2455,8 +2481,8 @@ class NoiseALU:
         for offset in (-1, 1):
             neighbor_val = n_val + offset
             v_neigh = [(neighbor_val ^ (neighbor_val >> 1) >> i) & 1 for i in range(23, -1, -1)]
-            dec_n, _, _ = GOLAY_ENGINE.decode(v_neigh)
-            snap_n = GOLAY_ENGINE.encode(dec_n)
+            snap_n, _ = GOLAY_ENGINE.snap_to_codeword(v_neigh)
+            
             tax_n = LEECH_ENGINE.calculate_symmetry_tax(snap_n)
             nrci_n = Fraction(10, 1) / (Fraction(10, 1) + tax_n)
             if nrci_n > neighbor_nrci:
@@ -3559,7 +3585,9 @@ def run_tests(verbose: bool = True) -> Dict[str, Any]:
     for _ in range(200):
         msg = [rng.randint(0, 1) for _ in range(12)]
         cw  = g.encode(msg)
-        msg2, ok, _ = g.decode(cw)
+        snapped_cw, meta = g.snap_to_codeword(cw)
+        msg2 = snapped_cw[:12]
+        ok = meta.get('correctable', False)
         if msg == msg2 and ok:
             rt_ok += 1
     check("Golay encode/decode round-trip 200/200", rt_ok == 200)
