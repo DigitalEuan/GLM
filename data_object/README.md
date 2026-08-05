@@ -1,6 +1,6 @@
-# DATA OBJECT — Encoding System
+# 'data_object/' - DATA OBJECT — Encoding System
 
-**Version:** 5.0.0  (4 August 2026)
+**Version:** 5.1.0  (5 August 2026)
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand   
 **Parent:** `../README.md`
 
@@ -31,7 +31,7 @@ data_object/ (this folder)
 
 | Path | Purpose | Connects To |
 |------|---------|-------------|
-| `encoding_specification.md` | Formal encoding spec | — |
+| `encoding_specification.md` | Experimental encoding spec | — |
 | `elements.md` | Element encoding knowledge | sub-doc of README |
 | `molecules.md` | Molecule encoding knowledge | sub-doc of README |
 | `scripts/encoding_spec.py` | EncodingSpec dataclass + scoring | imports GMHGL |

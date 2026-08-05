@@ -1,0 +1,201 @@
+{
+  "n_seeds": 10,
+  "n_epochs": 50,
+  "n_train": 91,
+  "n_test": 23,
+  "emergence_rate": 0.0,
+  "mean_test_r": -0.4628167633755981,
+  "best_test_r": -0.3899848486606328,
+  "best_test_mae": 326.3155607021896,
+  "best_seed": 9,
+  "best_weights": {
+    "gravitic": -24.451734665400462,
+    "electrostatic": -37.260804275316396,
+    "exclusion": 0.71396176758215,
+    "confinement": -56.91531469313305,
+    "cymatic": -0.8635195078073843,
+    "entropic": 1.2632716158589918
+  },
+  "all_results": [
+    {
+      "seed": 0,
+      "emergence_step": null,
+      "max_streak": 0,
+      "train_r": -0.13236270951967086,
+      "train_mae": 444.3700242016283,
+      "test_r": -0.4802535059469347,
+      "test_mae": 436.8084537826712,
+      "final_weights": {
+        "gravitic": -11.739326344547782,
+        "electrostatic": -24.73561653024896,
+        "exclusion": 1.11728654718372,
+        "confinement": -58.53130533369967,
+        "cymatic": 21.316803192469884,
+        "entropic": 1.1382256980393193
+      },
+      "final_temperature": 0.01
+    },
+    {
+      "seed": 1,
+      "emergence_step": null,
+      "max_streak": 0,
+      "train_r": -0.13288916815298382,
+      "train_mae": 529.3821017925512,
+      "test_r": -0.4682775240415127,
+      "test_mae": 512.585293926901,
+      "final_weights": {
+        "gravitic": -26.06408631533194,
+        "electrostatic": -16.565913795202558,
+        "exclusion": 1.6433878918783678,
+        "confinement": -51.65209392811033,
+        "cymatic": 7.927442022736778,
+        "entropic": 1.1638296584706576
+      },
+      "final_temperature": 0.01
+    },
+    {
+      "seed": 2,
+      "emergence_step": null,
+      "max_streak": 2,
+      "train_r": -0.13233964663042724,
+      "train_mae": 358.90117574477125,
+      "test_r": -0.49400597043062733,
+      "test_mae": 353.7243163781908,
+      "final_weights": {
+        "gravitic": 1.941302971667789,
+        "electrostatic": -29.78045930023913,
+        "exclusion": 0.5886727868032023,
+        "confinement": -59.10330415905495,
+        "cymatic": 7.430571639169101,
+        "entropic": 1.6383053253087538
+      },
+      "final_temperature": 0.01
+    },
+    {
+      "seed": 3,
+      "emergence_step": null,
+      "max_streak": 2,
+      "train_r": -0.10456270605892784,
+      "train_mae": 421.5097172448716,
+      "test_r": -0.4269656553360982,
+      "test_mae": 391.42337237070745,
+      "final_weights": {
+        "gravitic": -29.888338227967015,
+        "electrostatic": -12.035151406901836,
+        "exclusion": 1.0506112894314197,
+        "confinement": -98.94569244051434,
+        "cymatic": 18.64872700219767,
+        "entropic": 0.6500269337092301
+      },
+      "final_temperature": 0.01
+    },
+    {
+      "seed": 4,
+      "emergence_step": null,
+      "max_streak": 1,
+      "train_r": -0.12531783575098648,
+      "train_mae": 448.74742742365567,
+      "test_r": -0.4696178761592963,
+      "test_mae": 433.29726788467997,
+      "final_weights": {
+        "gravitic": -14.050624005878504,
+        "electrostatic": -29.71633382121335,
+        "exclusion": 1.0918346147466507,
+        "confinement": -87.7965905741503,
+        "cymatic": -9.145613653277563,
+        "entropic": 1.0626773298129168
+      },
+      "final_temperature": 0.01
+    },
+    {
+      "seed": 5,
+      "emergence_step": null,
+      "max_streak": 0,
+      "train_r": -0.13906395988710638,
+      "train_mae": 551.5025634921017,
+      "test_r": -0.48102094049790406,
+      "test_mae": 542.7637469690605,
+      "final_weights": {
+        "gravitic": -15.00925350057306,
+        "electrostatic": -19.518691181743524,
+        "exclusion": 1.6798845962459203,
+        "confinement": -50.20772553373164,
+        "cymatic": -7.623204414187649,
+        "entropic": 1.9000894820367402
+      },
+      "final_temperature": 0.01
+    },
+    {
+      "seed": 6,
+      "emergence_step": null,
+      "max_streak": 0,
+      "train_r": -0.1389154510087277,
+      "train_mae": 457.95677603436246,
+      "test_r": -0.4813287090554962,
+      "test_mae": 455.8948077553842,
+      "final_weights": {
+        "gravitic": -10.021222354234709,
+        "electrostatic": -22.907016722300245,
+        "exclusion": 1.2274583342881822,
+        "confinement": -42.504767253105776,
+        "cymatic": -9.26137458229743,
+        "entropic": 1.5220331819198725
+      },
+      "final_temperature": 0.01
+    },
+    {
+      "seed": 7,
+      "emergence_step": null,
+      "max_streak": 0,
+      "train_r": -0.13725266956782853,
+      "train_mae": 528.4895425910447,
+      "test_r": -0.48218081385856226,
+      "test_mae": 518.5636921642622,
+      "final_weights": {
+        "gravitic": -10.173963872968635,
+        "electrostatic": -32.08424743314918,
+        "exclusion": 1.4718072725331555,
+        "confinement": -72.53667297055843,
+        "cymatic": -12.153038213372033,
+        "entropic": 1.017501113837488
+      },
+      "final_temperature": 0.01
+    },
+    {
+      "seed": 8,
+      "emergence_step": null,
+      "max_streak": 1,
+      "train_r": -0.11444899150293797,
+      "train_mae": 363.0409154845376,
+      "test_r": -0.454531789768916,
+      "test_mae": 344.4229631078101,
+      "final_weights": {
+        "gravitic": -12.956436588800742,
+        "electrostatic": -17.795803500076058,
+        "exclusion": 0.6994662653257245,
+        "confinement": -71.80980910397426,
+        "cymatic": -7.070906573565456,
+        "entropic": 0.8398551472950955
+      },
+      "final_temperature": 0.01
+    },
+    {
+      "seed": 9,
+      "emergence_step": null,
+      "max_streak": 2,
+      "train_r": -0.1010165550093067,
+      "train_mae": 350.34088152962516,
+      "test_r": -0.3899848486606328,
+      "test_mae": 326.3155607021896,
+      "final_weights": {
+        "gravitic": -24.451734665400462,
+        "electrostatic": -37.260804275316396,
+        "exclusion": 0.71396176758215,
+        "confinement": -56.91531469313305,
+        "cymatic": -0.8635195078073843,
+        "entropic": 1.2632716158589918
+      },
+      "final_temperature": 0.01
+    }
+  ]
+}
