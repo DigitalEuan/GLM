@@ -18,11 +18,15 @@ https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the dire
   │                     (exact rational math - NO Floats wherever possible)
   │
   ├──→ data_object/     ENCODING
-  │                     How to encode subjects as 24-bit Data Objects
-  │                     118 elements, 82 molecules, 36 bonds, 95 words
+  │                     1) 'data_objrct/' - how to encode subjects as 24-bit Data Objects - 118 elements, 82 molecules, 36 bonds, 95 words
+  │                     2) 'encoding_definition_attempt_03-08.26/' - Gas-phase diatomic interaction pilot and structured Element Object v4
+  │                     3) 'encoding_definition_attempt_04.08.26/' - Empirical calibration: 190 kJ/mol per work unit. Tick=2.10 fs, Cell=17 μm. + Dual-warp architecture: graduated for energy, flip for classification.
+  │
   │
   ├──→ light/           SCALE CALIBRATION
   │                     Speed of light study (UBP ↔ real-world)
+  │                     'aristotle_01/' (Lattice walking shortcut method)
+  │                     'EM_calibration_1/' (substrate-unit-to-meters conversion)
   │
   ├──→ glm_machine/     THE GLM MIND
   │                     Perceives, reasons, acts,
