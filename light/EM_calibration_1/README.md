@@ -1,12 +1,19 @@
 # 'EM_calibration_1/' README — Speed of Light Calibration Study
 
-**Version:** 1.0.0  (6 August 2026) 
+**Version:** 1.1.0  (6 August 2026) 
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand   
 **Parent:** `light/README.md`  
 
 ## UPDATE THIS README - if changes are made in this folder or systems in sub-folders need rewiring within the repository and effect this README file's structure
 
 - The UBP substrate doesn't have a single scale number — it has a scale **function** that maps each photon's wavelength (continuous) through its HW class (discrete) to a substrate-unit-to-meters conversion. That function bridges discrete and continuous. 
+
+- BIT-OPS: 'ubp_layered_arch_v11_report.md' and 'ubp_layered_arch_v11.py'
+The interleaved BitOps ↔ Python architecture is ** viable and useful**:
+1. **The verified engine already has the ALU.** NoiseALU.mul() uses shift-add (bit ops). We don't need to build a new ALU — we USE the existing one.
+2. **EML is a useful binary math primitive.** It produces continuous values from discrete codewords, bridging the discrete-continuous gap. The result isn't a codeword (it's a float), but it can be re-encoded.
+3. **Signed multiplication works via parity.** The sign is a substrate property (derived from HW), not an external flag. This is the user's approach, adapted to the substrate.
+4. **The pipeline produces correct results AND rich metrics.** Pure Python gives you a number. The layered pipeline gives you the number PLUS bit-metrics, conservation verification, and multi-scale coherence. The GLM gets context, not just computation.
 
 ---
 
