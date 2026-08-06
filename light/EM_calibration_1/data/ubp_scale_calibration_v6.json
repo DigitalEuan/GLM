@@ -1,0 +1,2859 @@
+{
+  "experiment": "UBP Scale Calibration v6",
+  "date": "2026-08-06",
+  "engine": "GMHGL/ubp_unified_v5.py + Lean-verified decoder patch + BarnesWallEngine at 256/512/1024",
+  "two_integrations": {
+    "1_bw1024_fine_scale": "Test if BW-1024 gives finer than 3-class NRCI resolution",
+    "2_operational_landscape_and_substrate_time": "Each axis is measurable; tick calibrated via Cs-133"
+  },
+  "ubp_constants": {
+    "Y": 0.26467543040452696,
+    "MONAD": 13.817580227176494
+  },
+  "bw_fine_scale_test": {
+    "by_hw_class": {
+      "8": {
+        "n_photons": 7,
+        "nrci_256": {
+          "values_distinct": 1,
+          "min": 0.3232142749901492,
+          "max": 0.3232142749901492,
+          "range": 0.0,
+          "example": 0.3232142749901492
+        },
+        "nrci_512": {
+          "values_distinct": 1,
+          "min": 0.19275824583266318,
+          "max": 0.19275824583266318,
+          "range": 0.0,
+          "example": 0.19275824583266318
+        },
+        "nrci_1024": {
+          "values_distinct": 1,
+          "min": 0.10665880499284615,
+          "max": 0.10665880499284615,
+          "range": 0.0,
+          "example": 0.10665880499284615
+        }
+      },
+      "12": {
+        "n_photons": 30,
+        "nrci_256": {
+          "values_distinct": 1,
+          "min": 0.24149432057282788,
+          "max": 0.24149432057282788,
+          "range": 0.0,
+          "example": 0.24149432057282788
+        },
+        "nrci_512": {
+          "values_distinct": 1,
+          "min": 0.1373292809901495,
+          "max": 0.1373292809901495,
+          "range": 0.0,
+          "example": 0.1373292809901495
+        },
+        "nrci_1024": {
+          "values_distinct": 1,
+          "min": 0.07372708422836556,
+          "max": 0.07372708422836556,
+          "range": 0.0,
+          "example": 0.07372708422836556
+        }
+      },
+      "16": {
+        "n_photons": 11,
+        "nrci_256": {
+          "values_distinct": 1,
+          "min": 0.19275824583266318,
+          "max": 0.19275824583266318,
+          "range": 0.0,
+          "example": 0.19275824583266318
+        },
+        "nrci_512": {
+          "values_distinct": 1,
+          "min": 0.10665880499284615,
+          "max": 0.10665880499284615,
+          "range": 0.0,
+          "example": 0.10665880499284615
+        },
+        "nrci_1024": {
+          "values_distinct": 1,
+          "min": 0.05633364196274362,
+          "max": 0.05633364196274362,
+          "range": 0.0,
+          "example": 0.05633364196274362
+        }
+      }
+    },
+    "total_distinct_nrci_values": {
+      "bw_256": 3,
+      "bw_512": 3,
+      "bw_1024": 3
+    },
+    "verdict": "BW-1024 gives 3 distinct NRCI values across the spectrum (vs BW-256: 3, BW-512: 3). Within each HW class, NRCI is CONSTANT \u2014 the macro-lattice preserves the 3-class HW discretization. BW-1024 does NOT give finer resolution.",
+    "anti_numerology_note": "NRCI is determined by HW (number of non-zero coords). The recursive |u | u+v| construction preserves HW exactly: HW_256 = 8 \u00d7 HW_24, HW_1024 = 32 \u00d7 HW_24. So NRCI_256 and NRCI_1024 are deterministic functions of HW_24 \u2014 no new information is added by going to higher dimensions. To get finer resolution, the SEED (24-bit codeword) must change, not the lattice dimension."
+  },
+  "calibration": {
+    "calibration_photon": "Cs-133 hyperfine (SI second)",
+    "calibration_frequency_hz": 9192631770,
+    "calibration_real_period_s": 1.0878277570776665e-10,
+    "calibration_real_period_ps": 108.78277570776665,
+    "calibration_n_ticks_one_way": 2,
+    "calibration_round_trip_ticks": 4,
+    "calibrated_tick_duration_s": 2.7195693926941663e-11,
+    "calibrated_tick_duration_fs": 27195.69392694166,
+    "calibrated_tick_duration_ps": 27.19569392694166,
+    "calibration_method": "Cs-133 photon period (108.78 ps, exact) divided by round-trip relaxation ticks (2 \u00d7 N_ticks_to_vacuum). The Cs photon is the SI definition of the second, so this calibration has zero measurement uncertainty."
+  },
+  "operational_landscape": [
+    {
+      "name": "ELF submarine comms (USA)",
+      "category": "ELF radio",
+      "frequency_hz": 76.0,
+      "wavelength_m": 3944637.6052631577,
+      "energy_eV": 3.1431074496621326e-13,
+      "hw24": 16,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 0.013157894736842105,
+        "real_period_fs": 13157894736842.105,
+        "period_ratio_substrate_to_real": 8.267490953790266e-09,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 13157894736842.1055 fs; ratio = 8.2675e-09"
+      },
+      "domain_axis": {
+        "n_cells": 232037506191.95047,
+        "cell_length_um": 17.0,
+        "total_span_m": 3944637.6052631577
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 1.5961250851573726e-13,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 5.035813314e-32
+      },
+      "landscape_coordinate": [
+        4,
+        232037506191.95047,
+        1.5961250851573726e-13
+      ]
+    },
+    {
+      "name": "VLF navigation (Omega)",
+      "category": "VLF radio",
+      "frequency_hz": 10000.0,
+      "wavelength_m": 29979.2458,
+      "energy_eV": 4.135667696923859e-11,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 0.0001,
+        "real_period_fs": 100000000000.0,
+        "period_ratio_substrate_to_real": 1.0878277570776666e-06,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 100000000000.0000 fs; ratio = 1.0878e-06"
+      },
+      "domain_axis": {
+        "n_cells": 1763485047.0588236,
+        "cell_length_um": 17.0,
+        "total_span_m": 29979.2458
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 2.100164585733385e-11,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 6.62607015e-30
+      },
+      "landscape_coordinate": [
+        4,
+        1763485047.0588236,
+        2.100164585733385e-11
+      ]
+    },
+    {
+      "name": "LORAN-C 100 kHz",
+      "category": "LF radio",
+      "frequency_hz": 100000.0,
+      "wavelength_m": 2997.92458,
+      "energy_eV": 4.135667696923859e-10,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 1e-05,
+        "real_period_fs": 10000000000.0,
+        "period_ratio_substrate_to_real": 1.0878277570776664e-05,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 10000000000.0000 fs; ratio = 1.0878e-05"
+      },
+      "domain_axis": {
+        "n_cells": 176348504.70588234,
+        "cell_length_um": 17.0,
+        "total_span_m": 2997.92458
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 2.1001645857333848e-10,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 6.62607015e-29
+      },
+      "landscape_coordinate": [
+        4,
+        176348504.70588234,
+        2.1001645857333848e-10
+      ]
+    },
+    {
+      "name": "AM radio (mid band)",
+      "category": "MF radio",
+      "frequency_hz": 1000000.0,
+      "wavelength_m": 299.792458,
+      "energy_eV": 4.135667696923859e-09,
+      "hw24": 16,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 1e-06,
+        "real_period_fs": 1000000000.0,
+        "period_ratio_substrate_to_real": 0.00010878277570776666,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 1000000000.0000 fs; ratio = 1.0878e-04"
+      },
+      "domain_axis": {
+        "n_cells": 17634850.470588237,
+        "cell_length_um": 17.0,
+        "total_span_m": 299.792458
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 2.100164585733385e-09,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 6.62607015e-28
+      },
+      "landscape_coordinate": [
+        4,
+        17634850.470588237,
+        2.100164585733385e-09
+      ]
+    },
+    {
+      "name": "Shortwave radio (31m band)",
+      "category": "HF radio",
+      "frequency_hz": 9700000.0,
+      "wavelength_m": 30.906438969072166,
+      "energy_eV": 4.011597666016143e-08,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 1.0309278350515464e-07,
+        "real_period_fs": 103092783.50515464,
+        "period_ratio_substrate_to_real": 0.0010551929243653366,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 103092783.5052 fs; ratio = 1.0552e-03"
+      },
+      "domain_axis": {
+        "n_cells": 1818025.8217101274,
+        "cell_length_um": 17.0,
+        "total_span_m": 30.906438969072166
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 2.0371596481613834e-08,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 6.4272880455e-27
+      },
+      "landscape_coordinate": [
+        4,
+        1818025.8217101274,
+        2.0371596481613834e-08
+      ]
+    },
+    {
+      "name": "FM radio (mid band)",
+      "category": "VHF radio",
+      "frequency_hz": 98000000.0,
+      "wavelength_m": 3.0591067142857145,
+      "energy_eV": 4.052954342985382e-07,
+      "hw24": 16,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 1.0204081632653062e-08,
+        "real_period_fs": 10204081.632653061,
+        "period_ratio_substrate_to_real": 0.010660712019361132,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 10204081.6327 fs; ratio = 1.0661e-02"
+      },
+      "domain_axis": {
+        "n_cells": 179947.45378151262,
+        "cell_length_um": 17.0,
+        "total_span_m": 3.0591067142857145
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 2.0581612940187172e-07,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 6.493548747e-26
+      },
+      "landscape_coordinate": [
+        4,
+        179947.45378151262,
+        2.0581612940187172e-07
+      ]
+    },
+    {
+      "name": "VHF TV channel 7",
+      "category": "VHF TV",
+      "frequency_hz": 174000000.0,
+      "wavelength_m": 1.7229451609195403,
+      "energy_eV": 7.196061792647514e-07,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 5.747126436781609e-09,
+        "real_period_fs": 5747126.436781609,
+        "period_ratio_substrate_to_real": 0.018928202973151398,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 5747126.4368 fs; ratio = 1.8928e-02"
+      },
+      "domain_axis": {
+        "n_cells": 101349.71534820825,
+        "cell_length_um": 17.0,
+        "total_span_m": 1.7229451609195403
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 3.65428637917609e-07,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 1.1529362061e-25
+      },
+      "landscape_coordinate": [
+        4,
+        101349.71534820825,
+        3.65428637917609e-07
+      ]
+    },
+    {
+      "name": "UHF TV channel 14",
+      "category": "UHF TV",
+      "frequency_hz": 470000000.0,
+      "wavelength_m": 0.6378562936170212,
+      "energy_eV": 1.943763817554214e-06,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 2.127659574468085e-09,
+        "real_period_fs": 2127659.574468085,
+        "period_ratio_substrate_to_real": 0.051127904582650326,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 2127659.5745 fs; ratio = 5.1128e-02"
+      },
+      "domain_axis": {
+        "n_cells": 37520.958448060075,
+        "cell_length_um": 17.0,
+        "total_span_m": 0.6378562936170212
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 9.87077355294691e-07,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 3.1142529705e-25
+      },
+      "landscape_coordinate": [
+        4,
+        37520.958448060075,
+        9.87077355294691e-07
+      ]
+    },
+    {
+      "name": "Cellular 700 MHz (LTE band 12)",
+      "category": "Cellular",
+      "frequency_hz": 729000000.0,
+      "wavelength_m": 0.41123793964334704,
+      "energy_eV": 3.014901751057493e-06,
+      "hw24": 16,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 1.3717421124828533e-09,
+        "real_period_fs": 1371742.1124828532,
+        "period_ratio_substrate_to_real": 0.07930264349096189,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 1371742.1125 fs; ratio = 7.9303e-02"
+      },
+      "domain_axis": {
+        "n_cells": 24190.467037843944,
+        "cell_length_um": 17.0,
+        "total_span_m": 0.41123793964334704
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 1.5310199829996375e-06,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 4.83040513935e-25
+      },
+      "landscape_coordinate": [
+        4,
+        24190.467037843944,
+        1.5310199829996375e-06
+      ]
+    },
+    {
+      "name": "GPS L1 (1575.42 MHz)",
+      "category": "GNSS",
+      "frequency_hz": 1575420000.0,
+      "wavelength_m": 0.19029367279836487,
+      "energy_eV": 6.5154136030877855e-06,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 6.347513678891978e-10,
+        "real_period_fs": 634751.3678891978,
+        "period_ratio_substrate_to_real": 0.17137856050552974,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 634751.3679 fs; ratio = 1.7138e-01"
+      },
+      "domain_axis": {
+        "n_cells": 11193.745458727346,
+        "cell_length_um": 17.0,
+        "total_span_m": 0.19029367279836487
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 3.308641291656089e-06,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 1.0438843435712999e-24
+      },
+      "landscape_coordinate": [
+        4,
+        11193.745458727346,
+        3.308641291656089e-06
+      ]
+    },
+    {
+      "name": "WiFi 2.4 GHz (channel 1)",
+      "category": "WiFi",
+      "frequency_hz": 2412000000.0,
+      "wavelength_m": 0.12429206384742952,
+      "energy_eV": 9.975230484980348e-06,
+      "hw24": 8,
+      "vibration_axis": {
+        "n_ticks_one_way": 1,
+        "round_trip_ticks": 2,
+        "substrate_oscillation_period_s": 5.4391387853883326e-11,
+        "substrate_oscillation_period_fs": 54391.38785388332,
+        "real_period_s": 4.1459369817578773e-10,
+        "real_period_fs": 414593.69817578775,
+        "period_ratio_substrate_to_real": 0.1311920275035666,
+        "interpretation": "substrate oscillation = 2 ticks \u00d7 27195.6939 fs = 54391.3879 fs; real period = 414593.6982 fs; ratio = 1.3119e-01"
+      },
+      "domain_axis": {
+        "n_cells": 7311.297873378207,
+        "cell_length_um": 17.0,
+        "total_span_m": 0.12429206384742952
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 5.065596980788925e-06,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 1.59820812018e-24
+      },
+      "landscape_coordinate": [
+        2,
+        7311.297873378207,
+        5.065596980788925e-06
+      ]
+    },
+    {
+      "name": "Bluetooth LE (channel 0)",
+      "category": "Bluetooth",
+      "frequency_hz": 2402000000.0,
+      "wavelength_m": 0.1248095162364696,
+      "energy_eV": 9.93387380801111e-06,
+      "hw24": 8,
+      "vibration_axis": {
+        "n_ticks_one_way": 1,
+        "round_trip_ticks": 2,
+        "substrate_oscillation_period_s": 5.4391387853883326e-11,
+        "substrate_oscillation_period_fs": 54391.38785388332,
+        "real_period_s": 4.1631973355537055e-10,
+        "real_period_fs": 416319.73355537053,
+        "period_ratio_substrate_to_real": 0.13064811362502773,
+        "interpretation": "substrate oscillation = 2 ticks \u00d7 27195.6939 fs = 54391.3879 fs; real period = 416319.7336 fs; ratio = 1.3065e-01"
+      },
+      "domain_axis": {
+        "n_cells": 7341.736249204095,
+        "cell_length_um": 17.0,
+        "total_span_m": 0.1248095162364696
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 5.044595334931591e-06,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 1.59158205003e-24
+      },
+      "landscape_coordinate": [
+        2,
+        7341.736249204095,
+        5.044595334931591e-06
+      ]
+    },
+    {
+      "name": "S-band radar (weather)",
+      "category": "Radar",
+      "frequency_hz": 2800000000.0,
+      "wavelength_m": 0.107068735,
+      "energy_eV": 1.1579869551386804e-05,
+      "hw24": 8,
+      "vibration_axis": {
+        "n_ticks_one_way": 1,
+        "round_trip_ticks": 2,
+        "substrate_oscillation_period_s": 5.4391387853883326e-11,
+        "substrate_oscillation_period_fs": 54391.38785388332,
+        "real_period_s": 3.5714285714285715e-10,
+        "real_period_fs": 357142.85714285716,
+        "period_ratio_substrate_to_real": 0.15229588599087332,
+        "interpretation": "substrate oscillation = 2 ticks \u00d7 27195.6939 fs = 54391.3879 fs; real period = 357142.8571 fs; ratio = 1.5230e-01"
+      },
+      "domain_axis": {
+        "n_cells": 6298.160882352941,
+        "cell_length_um": 17.0,
+        "total_span_m": 0.107068735
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 5.8804608400534775e-06,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 1.855299642e-24
+      },
+      "landscape_coordinate": [
+        2,
+        6298.160882352941,
+        5.8804608400534775e-06
+      ]
+    },
+    {
+      "name": "C-band satellite (4 GHz)",
+      "category": "Satellite",
+      "frequency_hz": 4000000000.0,
+      "wavelength_m": 0.0749481145,
+      "energy_eV": 1.6542670787695434e-05,
+      "hw24": 8,
+      "vibration_axis": {
+        "n_ticks_one_way": 1,
+        "round_trip_ticks": 2,
+        "substrate_oscillation_period_s": 5.4391387853883326e-11,
+        "substrate_oscillation_period_fs": 54391.38785388332,
+        "real_period_s": 2.5e-10,
+        "real_period_fs": 250000.00000000003,
+        "period_ratio_substrate_to_real": 0.2175655514155333,
+        "interpretation": "substrate oscillation = 2 ticks \u00d7 27195.6939 fs = 54391.3879 fs; real period = 250000.0000 fs; ratio = 2.1757e-01"
+      },
+      "domain_axis": {
+        "n_cells": 4408.712617647058,
+        "cell_length_um": 17.0,
+        "total_span_m": 0.0749481145
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 8.40065834293354e-06,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 2.65042806e-24
+      },
+      "landscape_coordinate": [
+        2,
+        4408.712617647058,
+        8.40065834293354e-06
+      ]
+    },
+    {
+      "name": "5G n78 mid-band (3.5 GHz)",
+      "category": "5G",
+      "frequency_hz": 3500000000.0,
+      "wavelength_m": 0.085654988,
+      "energy_eV": 1.4474836939233508e-05,
+      "hw24": 8,
+      "vibration_axis": {
+        "n_ticks_one_way": 1,
+        "round_trip_ticks": 2,
+        "substrate_oscillation_period_s": 5.4391387853883326e-11,
+        "substrate_oscillation_period_fs": 54391.38785388332,
+        "real_period_s": 2.857142857142857e-10,
+        "real_period_fs": 285714.2857142857,
+        "period_ratio_substrate_to_real": 0.19036985748859164,
+        "interpretation": "substrate oscillation = 2 ticks \u00d7 27195.6939 fs = 54391.3879 fs; real period = 285714.2857 fs; ratio = 1.9037e-01"
+      },
+      "domain_axis": {
+        "n_cells": 5038.528705882353,
+        "cell_length_um": 17.0,
+        "total_span_m": 0.085654988
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 7.3505760500668475e-06,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 2.3191245525e-24
+      },
+      "landscape_coordinate": [
+        2,
+        5038.528705882353,
+        7.3505760500668475e-06
+      ]
+    },
+    {
+      "name": "Cs-133 hyperfine (SI second)",
+      "category": "Atomic clock",
+      "frequency_hz": 9192631770,
+      "wavelength_m": 0.03261225571749406,
+      "energy_eV": 3.8017670260905e-05,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 1.0878277570776665e-10,
+        "real_period_fs": 108782.77570776665,
+        "period_ratio_substrate_to_real": 1.0,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 108782.7757 fs; ratio = 1.0000e+00"
+      },
+      "domain_axis": {
+        "n_cells": 1918.3679833820033,
+        "cell_length_um": 17.0,
+        "total_span_m": 0.03261225571749406
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 1.9306039693041603e-05,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 6.091102297113866e-24
+      },
+      "landscape_coordinate": [
+        4,
+        1918.3679833820033,
+        1.9306039693041603e-05
+      ]
+    },
+    {
+      "name": "X-band radar (8-12 GHz)",
+      "category": "Radar",
+      "frequency_hz": 10000000000.0,
+      "wavelength_m": 0.0299792458,
+      "energy_eV": 4.135667696923858e-05,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 1e-10,
+        "real_period_fs": 100000.0,
+        "period_ratio_substrate_to_real": 1.0878277570776664,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 100000.0000 fs; ratio = 1.0878e+00"
+      },
+      "domain_axis": {
+        "n_cells": 1763.4850470588235,
+        "cell_length_um": 17.0,
+        "total_span_m": 0.0299792458
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 2.1001645857333846e-05,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 6.626070149999999e-24
+      },
+      "landscape_coordinate": [
+        4,
+        1763.4850470588235,
+        2.1001645857333846e-05
+      ]
+    },
+    {
+      "name": "Ku-band satellite (12 GHz)",
+      "category": "Satellite",
+      "frequency_hz": 12000000000.0,
+      "wavelength_m": 0.024982704833333334,
+      "energy_eV": 4.96280123630863e-05,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 8.333333333333333e-11,
+        "real_period_fs": 83333.33333333333,
+        "period_ratio_substrate_to_real": 1.3053933084932,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 83333.3333 fs; ratio = 1.3054e+00"
+      },
+      "domain_axis": {
+        "n_cells": 1469.5708725490197,
+        "cell_length_um": 17.0,
+        "total_span_m": 0.024982704833333334
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 2.5201975028800616e-05,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 7.951284179999999e-24
+      },
+      "landscape_coordinate": [
+        4,
+        1469.5708725490197,
+        2.5201975028800616e-05
+      ]
+    },
+    {
+      "name": "K-band radar (24 GHz)",
+      "category": "Radar",
+      "frequency_hz": 24000000000.0,
+      "wavelength_m": 0.012491352416666667,
+      "energy_eV": 9.92560247261726e-05,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 4.1666666666666665e-11,
+        "real_period_fs": 41666.666666666664,
+        "period_ratio_substrate_to_real": 2.6107866169864,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 41666.6667 fs; ratio = 2.6108e+00"
+      },
+      "domain_axis": {
+        "n_cells": 734.7854362745098,
+        "cell_length_um": 17.0,
+        "total_span_m": 0.012491352416666667
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 5.040395005760123e-05,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 1.5902568359999998e-23
+      },
+      "landscape_coordinate": [
+        4,
+        734.7854362745098,
+        5.040395005760123e-05
+      ]
+    },
+    {
+      "name": "Ka-band satellite (26.5 GHz)",
+      "category": "Satellite",
+      "frequency_hz": 26500000000.0,
+      "wavelength_m": 0.011312922943396227,
+      "energy_eV": 0.00010959519396848226,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 3.7735849056603774e-11,
+        "real_period_fs": 37735.84905660377,
+        "period_ratio_substrate_to_real": 2.882743556255816,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 37735.8491 fs; ratio = 2.8827e+00"
+      },
+      "domain_axis": {
+        "n_cells": 665.4660554938957,
+        "cell_length_um": 17.0,
+        "total_span_m": 0.011312922943396227
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 5.56543615219347e-05,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 1.75590858975e-23
+      },
+      "landscape_coordinate": [
+        4,
+        665.4660554938957,
+        5.56543615219347e-05
+      ]
+    },
+    {
+      "name": "5G mmWave n257 (28 GHz)",
+      "category": "5G",
+      "frequency_hz": 28000000000.0,
+      "wavelength_m": 0.0107068735,
+      "energy_eV": 0.00011579869551386806,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 3.5714285714285714e-11,
+        "real_period_fs": 35714.28571428571,
+        "period_ratio_substrate_to_real": 3.0459177198174663,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 35714.2857 fs; ratio = 3.0459e+00"
+      },
+      "domain_axis": {
+        "n_cells": 629.8160882352942,
+        "cell_length_um": 17.0,
+        "total_span_m": 0.0107068735
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 5.880460840053478e-05,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 1.855299642e-23
+      },
+      "landscape_coordinate": [
+        4,
+        629.8160882352942,
+        5.880460840053478e-05
+      ]
+    },
+    {
+      "name": "THz imaging (1 THz)",
+      "category": "THz",
+      "frequency_hz": 1000000000000.0,
+      "wavelength_m": 0.000299792458,
+      "energy_eV": 0.004135667696923859,
+      "hw24": 8,
+      "vibration_axis": {
+        "n_ticks_one_way": 1,
+        "round_trip_ticks": 2,
+        "substrate_oscillation_period_s": 5.4391387853883326e-11,
+        "substrate_oscillation_period_fs": 54391.38785388332,
+        "real_period_s": 1e-12,
+        "real_period_fs": 1000.0,
+        "period_ratio_substrate_to_real": 54.39138785388333,
+        "interpretation": "substrate oscillation = 2 ticks \u00d7 27195.6939 fs = 54391.3879 fs; real period = 1000.0000 fs; ratio = 5.4391e+01"
+      },
+      "domain_axis": {
+        "n_cells": 17.634850470588237,
+        "cell_length_um": 17.0,
+        "total_span_m": 0.000299792458
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 0.002100164585733385,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 6.6260701499999995e-22
+      },
+      "landscape_coordinate": [
+        2,
+        17.634850470588237,
+        0.002100164585733385
+      ]
+    },
+    {
+      "name": "Water vapor line (183 GHz)",
+      "category": "Atmospheric",
+      "frequency_hz": 183310000000.0,
+      "wavelength_m": 0.0016354397359663957,
+      "energy_eV": 0.0007581092455231126,
+      "hw24": 16,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 5.4552397577873545e-12,
+        "real_period_fs": 5455.239757787354,
+        "period_ratio_substrate_to_real": 19.940970614990707,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 5455.2398 fs; ratio = 1.9941e+01"
+      },
+      "domain_axis": {
+        "n_cells": 96.20233740978799,
+        "cell_length_um": 17.0,
+        "total_span_m": 0.0016354397359663957
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 0.00038498117021078677,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 1.2146249191965e-22
+      },
+      "landscape_coordinate": [
+        4,
+        96.20233740978799,
+        0.00038498117021078677
+      ]
+    },
+    {
+      "name": "CO2 laser (10.6 \u03bcm)",
+      "category": "Far-IR laser",
+      "frequency_hz": 28300000000000.0,
+      "wavelength_m": 1.0593373074204947e-05,
+      "energy_eV": 0.1170393958229452,
+      "hw24": 8,
+      "vibration_axis": {
+        "n_ticks_one_way": 1,
+        "round_trip_ticks": 2,
+        "substrate_oscillation_period_s": 5.4391387853883326e-11,
+        "substrate_oscillation_period_fs": 54391.38785388332,
+        "real_period_s": 3.5335689045936397e-14,
+        "real_period_fs": 35.3356890459364,
+        "period_ratio_substrate_to_real": 1539.2762762648981,
+        "interpretation": "substrate oscillation = 2 ticks \u00d7 27195.6939 fs = 54391.3879 fs; real period = 35.3357 fs; ratio = 1.5393e+03"
+      },
+      "domain_axis": {
+        "n_cells": 0.623139592600291,
+        "cell_length_um": 17.0,
+        "total_span_m": 1.0593373074204947e-05
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 0.05943465777625479,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 1.87517785245e-20
+      },
+      "landscape_coordinate": [
+        2,
+        0.623139592600291,
+        0.05943465777625479
+      ]
+    },
+    {
+      "name": "NH3 inversion (1.25 cm)",
+      "category": "Microwave molecular",
+      "frequency_hz": 23984000000.0,
+      "wavelength_m": 0.012499685540360241,
+      "energy_eV": 9.918985404302184e-05,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 4.169446297531688e-11,
+        "real_period_fs": 41694.46297531688,
+        "period_ratio_substrate_to_real": 2.6090460925750754,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 41694.4630 fs; ratio = 2.6090e+00"
+      },
+      "domain_axis": {
+        "n_cells": 735.2756200211907,
+        "cell_length_um": 17.0,
+        "total_span_m": 0.012499685540360241
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 5.037034742422951e-05,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 1.589196664776e-23
+      },
+      "landscape_coordinate": [
+        4,
+        735.2756200211907,
+        5.037034742422951e-05
+      ]
+    },
+    {
+      "name": "HF chemical laser (2.7 \u03bcm)",
+      "category": "Mid-IR laser",
+      "frequency_hz": 111000000000000.0,
+      "wavelength_m": 2.700832954954955e-06,
+      "energy_eV": 0.4590591143585483,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 9.009009009009009e-15,
+        "real_period_fs": 9.00900900900901,
+        "period_ratio_substrate_to_real": 12074.888103562098,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 9.0090 fs; ratio = 1.2075e+04"
+      },
+      "domain_axis": {
+        "n_cells": 0.15887252676205618,
+        "cell_length_um": 17.0,
+        "total_span_m": 2.700832954954955e-06
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 0.2331182690164057,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 7.354937866499999e-20
+      },
+      "landscape_coordinate": [
+        4,
+        0.15887252676205618,
+        0.2331182690164057
+      ]
+    },
+    {
+      "name": "1550 nm fiber comms",
+      "category": "Near-IR telecom",
+      "frequency_hz": 193400000000000.0,
+      "wavelength_m": 1.5501161220268872e-06,
+      "energy_eV": 0.7998381325850744,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 5.170630816959669e-15,
+        "real_period_fs": 5.17063081695967,
+        "period_ratio_substrate_to_real": 21038.58882188207,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 5.1706 fs; ratio = 2.1039e+04"
+      },
+      "domain_axis": {
+        "n_cells": 0.09118330129569925,
+        "cell_length_um": 17.0,
+        "total_span_m": 1.5501161220268872e-06
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 0.4061718308808367,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 1.28148196701e-19
+      },
+      "landscape_coordinate": [
+        4,
+        0.09118330129569925,
+        0.4061718308808367
+      ]
+    },
+    {
+      "name": "Nd:YAG 1064 nm",
+      "category": "Near-IR laser",
+      "frequency_hz": 281760000000000.0,
+      "wavelength_m": 1.063999354060193e-06,
+      "energy_eV": 1.1652657302852665,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 3.5491198182850653e-15,
+        "real_period_fs": 3.549119818285065,
+        "period_ratio_substrate_to_real": 30650.63488342033,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 3.5491 fs; ratio = 3.0651e+04"
+      },
+      "domain_axis": {
+        "n_cells": 0.06258819729765841,
+        "cell_length_um": 17.0,
+        "total_span_m": 1.063999354060193e-06
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 0.5917423736762385,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 1.866961525464e-19
+      },
+      "landscape_coordinate": [
+        4,
+        0.06258819729765841,
+        0.5917423736762385
+      ]
+    },
+    {
+      "name": "GaAs 850 nm (VCSEL)",
+      "category": "Near-IR laser",
+      "frequency_hz": 352500000000000.0,
+      "wavelength_m": 8.504750581560283e-07,
+      "energy_eV": 1.45782286316566,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 2.8368794326241136e-15,
+        "real_period_fs": 2.8368794326241136,
+        "period_ratio_substrate_to_real": 38345.92843698774,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 2.8369 fs; ratio = 3.8346e+04"
+      },
+      "domain_axis": {
+        "n_cells": 0.05002794459741343,
+        "cell_length_um": 17.0,
+        "total_span_m": 8.504750581560283e-07
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 0.7403080164710181,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 2.3356897278749997e-19
+      },
+      "landscape_coordinate": [
+        4,
+        0.05002794459741343,
+        0.7403080164710181
+      ]
+    },
+    {
+      "name": "HeNe 632.8 nm",
+      "category": "Visible laser",
+      "frequency_hz": 473600000000000.0,
+      "wavelength_m": 6.330077238175676e-07,
+      "energy_eV": 1.9586522212631396,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 2.1114864864864867e-15,
+        "real_period_fs": 2.111486486486487,
+        "period_ratio_substrate_to_real": 51519.52257519828,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 2.1115 fs; ratio = 5.1520e+04"
+      },
+      "domain_axis": {
+        "n_cells": 0.037235748459856916,
+        "cell_length_um": 17.0,
+        "total_span_m": 6.330077238175676e-07
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 0.9946379478033311,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 3.13810682304e-19
+      },
+      "landscape_coordinate": [
+        4,
+        0.037235748459856916,
+        0.9946379478033311
+      ]
+    },
+    {
+      "name": "Na D2 (589.0 nm)",
+      "category": "Visible atomic",
+      "frequency_hz": 508923000000000.0,
+      "wavelength_m": 5.89072331177801e-07,
+      "energy_eV": 2.104736411321581,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 1.9649337915558935e-15,
+        "real_period_fs": 1.9649337915558935,
+        "period_ratio_substrate_to_real": 55362.05656152373,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 1.9649 fs; ratio = 5.5362e+04"
+      },
+      "domain_axis": {
+        "n_cells": 0.03465131359869418,
+        "cell_length_um": 17.0,
+        "total_span_m": 5.89072331177801e-07
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 1.0688220614651915,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 3.37215949894845e-19
+      },
+      "landscape_coordinate": [
+        4,
+        0.03465131359869418,
+        1.0688220614651915
+      ]
+    },
+    {
+      "name": "Hg green 546.1 nm",
+      "category": "Visible lamp",
+      "frequency_hz": 548700000000000.0,
+      "wavelength_m": 5.463686130854748e-07,
+      "energy_eV": 2.2692408653021214,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 1.822489520685256e-15,
+        "real_period_fs": 1.822489520685256,
+        "period_ratio_substrate_to_real": 59689.10903085156,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 1.8225 fs; ratio = 5.9689e+04"
+      },
+      "domain_axis": {
+        "n_cells": 0.03213933018149852,
+        "cell_length_um": 17.0,
+        "total_span_m": 5.463686130854748e-07
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 1.1523603081919083,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 3.635724691305e-19
+      },
+      "landscape_coordinate": [
+        4,
+        0.03213933018149852,
+        1.1523603081919083
+      ]
+    },
+    {
+      "name": "Hg blue 435.8 nm",
+      "category": "Visible lamp",
+      "frequency_hz": 687900000000000.0,
+      "wavelength_m": 4.3580819595871493e-07,
+      "energy_eV": 2.8449258087139224,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 1.453699665649077e-15,
+        "real_period_fs": 1.4536996656490768,
+        "period_ratio_substrate_to_real": 74831.67140937268,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 1.4537 fs; ratio = 7.4832e+04"
+      },
+      "domain_axis": {
+        "n_cells": 0.025635776232865583,
+        "cell_length_um": 17.0,
+        "total_span_m": 4.3580819595871493e-07
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 1.4447032185259954,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 4.558073656185e-19
+      },
+      "landscape_coordinate": [
+        4,
+        0.025635776232865583,
+        1.4447032185259954
+      ]
+    },
+    {
+      "name": "H-beta (486.1 nm)",
+      "category": "Visible stellar",
+      "frequency_hz": 616700000000000.0,
+      "wavelength_m": 4.86123654937571e-07,
+      "energy_eV": 2.550466268692944,
+      "hw24": 16,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 1.6215339711366953e-15,
+        "real_period_fs": 1.6215339711366954,
+        "period_ratio_substrate_to_real": 67086.3377789797,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 1.6215 fs; ratio = 6.7086e+04"
+      },
+      "domain_axis": {
+        "n_cells": 0.028595509113974762,
+        "cell_length_um": 17.0,
+        "total_span_m": 4.86123654937571e-07
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 1.2951715000217785,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 4.086297461505e-19
+      },
+      "landscape_coordinate": [
+        4,
+        0.028595509113974762,
+        1.2951715000217785
+      ]
+    },
+    {
+      "name": "H-alpha (656.3 nm)",
+      "category": "Visible stellar",
+      "frequency_hz": 456800000000000.0,
+      "wavelength_m": 6.562882180385289e-07,
+      "energy_eV": 1.889173003954819,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 2.189141856392294e-15,
+        "real_period_fs": 2.189141856392294,
+        "period_ratio_substrate_to_real": 49691.971943307806,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 2.1891 fs; ratio = 4.9692e+04"
+      },
+      "domain_axis": {
+        "n_cells": 0.038605189296384054,
+        "cell_length_um": 17.0,
+        "total_span_m": 6.562882180385289e-07
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 0.9593551827630102,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 3.02678884452e-19
+      },
+      "landscape_coordinate": [
+        4,
+        0.038605189296384054,
+        0.9593551827630102
+      ]
+    },
+    {
+      "name": "Ca K (393.4 nm)",
+      "category": "UV stellar",
+      "frequency_hz": 762100000000000.0,
+      "wavelength_m": 3.9337679832043036e-07,
+      "energy_eV": 3.151792351825673,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 1.312163758037003e-15,
+        "real_period_fs": 1.312163758037003,
+        "period_ratio_substrate_to_real": 82903.35336688897,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 1.3122 fs; ratio = 8.2903e+04"
+      },
+      "domain_axis": {
+        "n_cells": 0.02313981166590767,
+        "cell_length_um": 17.0,
+        "total_span_m": 3.9337679832043036e-07
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 1.6005354307874127,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 5.049728061315e-19
+      },
+      "landscape_coordinate": [
+        4,
+        0.02313981166590767,
+        1.6005354307874127
+      ]
+    },
+    {
+      "name": "Mg II h (280.3 nm)",
+      "category": "UV stellar",
+      "frequency_hz": 1069000000000000.0,
+      "wavelength_m": 2.804419625818522e-07,
+      "energy_eV": 4.421028768011605,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 9.354536950420954e-16,
+        "real_period_fs": 0.9354536950420954,
+        "period_ratio_substrate_to_real": 116288.78723160256,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 0.9355 fs; ratio = 1.1629e+05"
+      },
+      "domain_axis": {
+        "n_cells": 0.0164965860342266,
+        "cell_length_um": 17.0,
+        "total_span_m": 2.804419625818522e-07
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 2.2450759421489885,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 7.08326899035e-19
+      },
+      "landscape_coordinate": [
+        4,
+        0.0164965860342266,
+        2.2450759421489885
+      ]
+    },
+    {
+      "name": "Lyman-alpha (121.6 nm)",
+      "category": "UV stellar",
+      "frequency_hz": 2466000000000000.0,
+      "wavelength_m": 1.215703398215734e-07,
+      "energy_eV": 10.198556540614236,
+      "hw24": 16,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 4.0551500405515003e-16,
+        "real_period_fs": 0.40551500405515,
+        "period_ratio_substrate_to_real": 268258.3248953526,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 0.4055 fs; ratio = 2.6826e+05"
+      },
+      "domain_axis": {
+        "n_cells": 0.007151196460092553,
+        "cell_length_um": 17.0,
+        "total_span_m": 1.215703398215734e-07
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 5.179005868418527,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 1.63398889899e-18
+      },
+      "landscape_coordinate": [
+        4,
+        0.007151196460092553,
+        5.179005868418527
+      ]
+    },
+    {
+      "name": "He II 30.4 nm (EUV)",
+      "category": "EUV solar",
+      "frequency_hz": 9860000000000000.0,
+      "wavelength_m": 3.0404914604462476e-08,
+      "energy_eV": 40.77768349166925,
+      "hw24": 16,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 1.0141987829614605e-16,
+        "real_period_fs": 0.10141987829614604,
+        "period_ratio_substrate_to_real": 1072598.168478579,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 0.1014 fs; ratio = 1.0726e+06"
+      },
+      "domain_axis": {
+        "n_cells": 0.0017885243884977929,
+        "cell_length_um": 17.0,
+        "total_span_m": 3.0404914604462476e-08
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 20.707622815331174,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 6.5333051679e-18
+      },
+      "landscape_coordinate": [
+        4,
+        0.0017885243884977929,
+        20.707622815331174
+      ]
+    },
+    {
+      "name": "Fe XV 28.4 nm (EUV)",
+      "category": "EUV solar",
+      "frequency_hz": 1.055e+16,
+      "wavelength_m": 2.841634672985782e-08,
+      "energy_eV": 43.631294202546705,
+      "hw24": 16,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 9.478672985781991e-17,
+        "real_period_fs": 0.09478672985781991,
+        "period_ratio_substrate_to_real": 1147658.2837169382,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 0.0948 fs; ratio = 1.1477e+06"
+      },
+      "domain_axis": {
+        "n_cells": 0.0016715498076386953,
+        "cell_length_um": 17.0,
+        "total_span_m": 2.841634672985782e-08
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 22.15673637948721,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 6.99050400825e-18
+      },
+      "landscape_coordinate": [
+        4,
+        0.0016715498076386953,
+        22.15673637948721
+      ]
+    },
+    {
+      "name": "Al K-alpha (1.49 keV)",
+      "category": "Soft X-ray",
+      "frequency_hz": 3.6e+17,
+      "wavelength_m": 8.327568277777778e-10,
+      "energy_eV": 1488.8403708925891,
+      "hw24": 16,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 2.7777777777777778e-18,
+        "real_period_fs": 0.002777777777777778,
+        "period_ratio_substrate_to_real": 39161799.254796,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 0.0028 fs; ratio = 3.9162e+07"
+      },
+      "domain_axis": {
+        "n_cells": 4.898569575163399e-05,
+        "cell_length_um": 17.0,
+        "total_span_m": 8.327568277777778e-10
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 756.0592508640186,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 2.385385254e-16
+      },
+      "landscape_coordinate": [
+        4,
+        4.898569575163399e-05,
+        756.0592508640186
+      ]
+    },
+    {
+      "name": "Cu K-alpha (8.04 keV)",
+      "category": "X-ray",
+      "frequency_hz": 1.946e+18,
+      "wavelength_m": 1.5405573381294964e-10,
+      "energy_eV": 8048.009338213829,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 5.138746145940391e-19,
+        "real_period_fs": 0.0005138746145940391,
+        "period_ratio_substrate_to_real": 211691281.5273139,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 0.0005 fs; ratio = 2.1169e+08"
+      },
+      "domain_axis": {
+        "n_cells": 9.062101988997038e-06,
+        "cell_length_um": 17.0,
+        "total_span_m": 1.5405573381294964e-10
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 4086.920283837167,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 1.28943325119e-15
+      },
+      "landscape_coordinate": [
+        4,
+        9.062101988997038e-06,
+        4086.920283837167
+      ]
+    },
+    {
+      "name": "Mo K-alpha (17.5 keV)",
+      "category": "Hard X-ray",
+      "frequency_hz": 4.23e+18,
+      "wavelength_m": 7.087292151300237e-11,
+      "energy_eV": 17493.874357987923,
+      "hw24": 16,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 2.364066193853428e-19,
+        "real_period_fs": 0.00023640661938534278,
+        "period_ratio_substrate_to_real": 460151141.243853,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 0.0002 fs; ratio = 4.6015e+08"
+      },
+      "domain_axis": {
+        "n_cells": 4.168995383117786e-06,
+        "cell_length_um": 17.0,
+        "total_span_m": 7.087292151300237e-11
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 8883.696197652218,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 2.8028276734499998e-15
+      },
+      "landscape_coordinate": [
+        4,
+        4.168995383117786e-06,
+        8883.696197652218
+      ]
+    },
+    {
+      "name": "Annihilation (511 keV)",
+      "category": "Gamma",
+      "frequency_hz": 1.236e+20,
+      "wavelength_m": 2.4255053236245953e-12,
+      "energy_eV": 511168.52733978897,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 8.090614886731392e-21,
+        "real_period_fs": 8.090614886731391e-06,
+        "period_ratio_substrate_to_real": 13445551077.479958,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 0.0000 fs; ratio = 1.3446e+10"
+      },
+      "domain_axis": {
+        "n_cells": 1.4267678374262325e-07,
+        "cell_length_um": 17.0,
+        "total_span_m": 2.4255053236245953e-12
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 259580.34279664638,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 8.1898227054e-14
+      },
+      "landscape_coordinate": [
+        4,
+        1.4267678374262325e-07,
+        259580.34279664638
+      ]
+    },
+    {
+      "name": "Cs-137 gamma (662 keV)",
+      "category": "Gamma nuclear",
+      "frequency_hz": 1.602e+20,
+      "wavelength_m": 1.8713636579275906e-12,
+      "energy_eV": 662533.9650472022,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 6.242197253433208e-21,
+        "real_period_fs": 6.2421972534332085e-06,
+        "period_ratio_substrate_to_real": 17427000668.38422,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 0.0000 fs; ratio = 1.7427e+10"
+      },
+      "domain_axis": {
+        "n_cells": 1.1008021517221121e-07,
+        "cell_length_um": 17.0,
+        "total_span_m": 1.8713636579275906e-12
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 336446.3666344883,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 1.06149643803e-13
+      },
+      "landscape_coordinate": [
+        4,
+        1.1008021517221121e-07,
+        336446.3666344883
+      ]
+    },
+    {
+      "name": "Co-60 gamma (1.33 MeV)",
+      "category": "Gamma nuclear",
+      "frequency_hz": 3.22e+20,
+      "wavelength_m": 9.310324782608695e-13,
+      "energy_eV": 1331684.9984094824,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 3.1055900621118013e-21,
+        "real_period_fs": 3.1055900621118013e-06,
+        "period_ratio_substrate_to_real": 35028053777.90086,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 0.0000 fs; ratio = 3.5028e+10"
+      },
+      "domain_axis": {
+        "n_cells": 5.4766616368286445e-08,
+        "cell_length_um": 17.0,
+        "total_span_m": 9.310324782608695e-13
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 676252.99660615,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 2.1335945882999998e-13
+      },
+      "landscape_coordinate": [
+        4,
+        5.4766616368286445e-08,
+        676252.99660615
+      ]
+    },
+    {
+      "name": "26Al decay (1.81 MeV)",
+      "category": "Gamma astrophysical",
+      "frequency_hz": 4.38e+20,
+      "wavelength_m": 6.844576666666666e-13,
+      "energy_eV": 1811422.4512526502,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 2.2831050228310502e-21,
+        "real_period_fs": 2.2831050228310503e-06,
+        "period_ratio_substrate_to_real": 47646855760.00179,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 0.0000 fs; ratio = 4.7647e+10"
+      },
+      "domain_axis": {
+        "n_cells": 4.026221568627451e-08,
+        "cell_length_um": 17.0,
+        "total_span_m": 6.844576666666666e-13
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 919872.0885512226,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 2.9022187257e-13
+      },
+      "landscape_coordinate": [
+        4,
+        4.026221568627451e-08,
+        919872.0885512226
+      ]
+    },
+    {
+      "name": "Pair-production threshold",
+      "category": "Gamma threshold",
+      "frequency_hz": 2.472e+20,
+      "wavelength_m": 1.2127526618122976e-12,
+      "energy_eV": 1022337.0546795779,
+      "hw24": 12,
+      "vibration_axis": {
+        "n_ticks_one_way": 2,
+        "round_trip_ticks": 4,
+        "substrate_oscillation_period_s": 1.0878277570776665e-10,
+        "substrate_oscillation_period_fs": 108782.77570776665,
+        "real_period_s": 4.045307443365696e-21,
+        "real_period_fs": 4.0453074433656955e-06,
+        "period_ratio_substrate_to_real": 26891102154.959915,
+        "interpretation": "substrate oscillation = 4 ticks \u00d7 27195.6939 fs = 108782.7757 fs; real period = 0.0000 fs; ratio = 2.6891e+10"
+      },
+      "domain_axis": {
+        "n_cells": 7.133839187131163e-08,
+        "cell_length_um": 17.0,
+        "total_span_m": 1.2127526618122976e-12
+      },
+      "bond_energy_axis": {
+        "n_bond_energies": 519160.68559329276,
+        "bond_energy_kJ_per_mol": 190.0,
+        "photon_energy_J": 1.63796454108e-13
+      },
+      "landscape_coordinate": [
+        4,
+        7.133839187131163e-08,
+        519160.68559329276
+      ]
+    }
+  ],
+  "a_to_b_propagation_measurements": [
+    {
+      "from": "Cs-133 hyperfine (SI second)",
+      "to": "Na D2 (589.0 nm)",
+      "ticks": 2,
+      "propagation_time_s": 5.4391387853883326e-11,
+      "propagation_time_fs": 54391.38785388332,
+      "converged": false,
+      "convergence_reason": "local_tax_minimum_without_reaching_B",
+      "trajectory_length": 3,
+      "tax_trajectory": [
+        4.676105164854324,
+        3.1174034432362157,
+        0.0
+      ]
+    },
+    {
+      "from": "Cs-133 hyperfine (SI second)",
+      "to": "Cs-137 gamma (662 keV)",
+      "ticks": 2,
+      "propagation_time_s": 5.4391387853883326e-11,
+      "propagation_time_fs": 54391.38785388332,
+      "converged": false,
+      "convergence_reason": "local_tax_minimum_without_reaching_B",
+      "trajectory_length": 3,
+      "tax_trajectory": [
+        4.676105164854324,
+        3.1174034432362157,
+        0.0
+      ]
+    },
+    {
+      "from": "Na D2 (589.0 nm)",
+      "to": "H-alpha (656.3 nm)",
+      "ticks": 0,
+      "propagation_time_s": 0.0,
+      "propagation_time_fs": 0.0,
+      "converged": true,
+      "convergence_reason": "reached_target_B",
+      "trajectory_length": 1,
+      "tax_trajectory": [
+        4.676105164854324
+      ]
+    },
+    {
+      "from": "WiFi 2.4 GHz (channel 1)",
+      "to": "HeNe 632.8 nm",
+      "ticks": 1,
+      "propagation_time_s": 2.7195693926941663e-11,
+      "propagation_time_fs": 27195.69392694166,
+      "converged": false,
+      "convergence_reason": "local_tax_minimum_without_reaching_B",
+      "trajectory_length": 2,
+      "tax_trajectory": [
+        3.1174034432362157,
+        0.0
+      ]
+    }
+  ],
+  "photons_full_data": [
+    {
+      "name": "ELF submarine comms (USA)",
+      "category": "ELF radio",
+      "frequency_hz": 76.0,
+      "wavelength_m": 3944637.6052631577,
+      "energy_eV": 3.1431074496621326e-13,
+      "hw24": 16,
+      "bw256": {
+        "hw_snapped": 128,
+        "norm_sq_snapped": 512,
+        "nrci_snapped": 0.19275824583266318
+      },
+      "bw512": {
+        "hw_snapped": 256,
+        "norm_sq_snapped": 1024,
+        "nrci_snapped": 0.10665880499284615
+      },
+      "bw1024": {
+        "hw_snapped": 512,
+        "norm_sq_snapped": 2048,
+        "nrci_snapped": 0.05633364196274362
+      }
+    },
+    {
+      "name": "VLF navigation (Omega)",
+      "category": "VLF radio",
+      "frequency_hz": 10000.0,
+      "wavelength_m": 29979.2458,
+      "energy_eV": 4.135667696923859e-11,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "LORAN-C 100 kHz",
+      "category": "LF radio",
+      "frequency_hz": 100000.0,
+      "wavelength_m": 2997.92458,
+      "energy_eV": 4.135667696923859e-10,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "AM radio (mid band)",
+      "category": "MF radio",
+      "frequency_hz": 1000000.0,
+      "wavelength_m": 299.792458,
+      "energy_eV": 4.135667696923859e-09,
+      "hw24": 16,
+      "bw256": {
+        "hw_snapped": 128,
+        "norm_sq_snapped": 512,
+        "nrci_snapped": 0.19275824583266318
+      },
+      "bw512": {
+        "hw_snapped": 256,
+        "norm_sq_snapped": 1024,
+        "nrci_snapped": 0.10665880499284615
+      },
+      "bw1024": {
+        "hw_snapped": 512,
+        "norm_sq_snapped": 2048,
+        "nrci_snapped": 0.05633364196274362
+      }
+    },
+    {
+      "name": "Shortwave radio (31m band)",
+      "category": "HF radio",
+      "frequency_hz": 9700000.0,
+      "wavelength_m": 30.906438969072166,
+      "energy_eV": 4.011597666016143e-08,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "FM radio (mid band)",
+      "category": "VHF radio",
+      "frequency_hz": 98000000.0,
+      "wavelength_m": 3.0591067142857145,
+      "energy_eV": 4.052954342985382e-07,
+      "hw24": 16,
+      "bw256": {
+        "hw_snapped": 128,
+        "norm_sq_snapped": 512,
+        "nrci_snapped": 0.19275824583266318
+      },
+      "bw512": {
+        "hw_snapped": 256,
+        "norm_sq_snapped": 1024,
+        "nrci_snapped": 0.10665880499284615
+      },
+      "bw1024": {
+        "hw_snapped": 512,
+        "norm_sq_snapped": 2048,
+        "nrci_snapped": 0.05633364196274362
+      }
+    },
+    {
+      "name": "VHF TV channel 7",
+      "category": "VHF TV",
+      "frequency_hz": 174000000.0,
+      "wavelength_m": 1.7229451609195403,
+      "energy_eV": 7.196061792647514e-07,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "UHF TV channel 14",
+      "category": "UHF TV",
+      "frequency_hz": 470000000.0,
+      "wavelength_m": 0.6378562936170212,
+      "energy_eV": 1.943763817554214e-06,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "Cellular 700 MHz (LTE band 12)",
+      "category": "Cellular",
+      "frequency_hz": 729000000.0,
+      "wavelength_m": 0.41123793964334704,
+      "energy_eV": 3.014901751057493e-06,
+      "hw24": 16,
+      "bw256": {
+        "hw_snapped": 128,
+        "norm_sq_snapped": 512,
+        "nrci_snapped": 0.19275824583266318
+      },
+      "bw512": {
+        "hw_snapped": 256,
+        "norm_sq_snapped": 1024,
+        "nrci_snapped": 0.10665880499284615
+      },
+      "bw1024": {
+        "hw_snapped": 512,
+        "norm_sq_snapped": 2048,
+        "nrci_snapped": 0.05633364196274362
+      }
+    },
+    {
+      "name": "GPS L1 (1575.42 MHz)",
+      "category": "GNSS",
+      "frequency_hz": 1575420000.0,
+      "wavelength_m": 0.19029367279836487,
+      "energy_eV": 6.5154136030877855e-06,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "WiFi 2.4 GHz (channel 1)",
+      "category": "WiFi",
+      "frequency_hz": 2412000000.0,
+      "wavelength_m": 0.12429206384742952,
+      "energy_eV": 9.975230484980348e-06,
+      "hw24": 8,
+      "bw256": {
+        "hw_snapped": 64,
+        "norm_sq_snapped": 256,
+        "nrci_snapped": 0.3232142749901492
+      },
+      "bw512": {
+        "hw_snapped": 128,
+        "norm_sq_snapped": 512,
+        "nrci_snapped": 0.19275824583266318
+      },
+      "bw1024": {
+        "hw_snapped": 256,
+        "norm_sq_snapped": 1024,
+        "nrci_snapped": 0.10665880499284615
+      }
+    },
+    {
+      "name": "Bluetooth LE (channel 0)",
+      "category": "Bluetooth",
+      "frequency_hz": 2402000000.0,
+      "wavelength_m": 0.1248095162364696,
+      "energy_eV": 9.93387380801111e-06,
+      "hw24": 8,
+      "bw256": {
+        "hw_snapped": 64,
+        "norm_sq_snapped": 256,
+        "nrci_snapped": 0.3232142749901492
+      },
+      "bw512": {
+        "hw_snapped": 128,
+        "norm_sq_snapped": 512,
+        "nrci_snapped": 0.19275824583266318
+      },
+      "bw1024": {
+        "hw_snapped": 256,
+        "norm_sq_snapped": 1024,
+        "nrci_snapped": 0.10665880499284615
+      }
+    },
+    {
+      "name": "S-band radar (weather)",
+      "category": "Radar",
+      "frequency_hz": 2800000000.0,
+      "wavelength_m": 0.107068735,
+      "energy_eV": 1.1579869551386804e-05,
+      "hw24": 8,
+      "bw256": {
+        "hw_snapped": 64,
+        "norm_sq_snapped": 256,
+        "nrci_snapped": 0.3232142749901492
+      },
+      "bw512": {
+        "hw_snapped": 128,
+        "norm_sq_snapped": 512,
+        "nrci_snapped": 0.19275824583266318
+      },
+      "bw1024": {
+        "hw_snapped": 256,
+        "norm_sq_snapped": 1024,
+        "nrci_snapped": 0.10665880499284615
+      }
+    },
+    {
+      "name": "C-band satellite (4 GHz)",
+      "category": "Satellite",
+      "frequency_hz": 4000000000.0,
+      "wavelength_m": 0.0749481145,
+      "energy_eV": 1.6542670787695434e-05,
+      "hw24": 8,
+      "bw256": {
+        "hw_snapped": 64,
+        "norm_sq_snapped": 256,
+        "nrci_snapped": 0.3232142749901492
+      },
+      "bw512": {
+        "hw_snapped": 128,
+        "norm_sq_snapped": 512,
+        "nrci_snapped": 0.19275824583266318
+      },
+      "bw1024": {
+        "hw_snapped": 256,
+        "norm_sq_snapped": 1024,
+        "nrci_snapped": 0.10665880499284615
+      }
+    },
+    {
+      "name": "5G n78 mid-band (3.5 GHz)",
+      "category": "5G",
+      "frequency_hz": 3500000000.0,
+      "wavelength_m": 0.085654988,
+      "energy_eV": 1.4474836939233508e-05,
+      "hw24": 8,
+      "bw256": {
+        "hw_snapped": 64,
+        "norm_sq_snapped": 256,
+        "nrci_snapped": 0.3232142749901492
+      },
+      "bw512": {
+        "hw_snapped": 128,
+        "norm_sq_snapped": 512,
+        "nrci_snapped": 0.19275824583266318
+      },
+      "bw1024": {
+        "hw_snapped": 256,
+        "norm_sq_snapped": 1024,
+        "nrci_snapped": 0.10665880499284615
+      }
+    },
+    {
+      "name": "Cs-133 hyperfine (SI second)",
+      "category": "Atomic clock",
+      "frequency_hz": 9192631770,
+      "wavelength_m": 0.03261225571749406,
+      "energy_eV": 3.8017670260905e-05,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "X-band radar (8-12 GHz)",
+      "category": "Radar",
+      "frequency_hz": 10000000000.0,
+      "wavelength_m": 0.0299792458,
+      "energy_eV": 4.135667696923858e-05,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "Ku-band satellite (12 GHz)",
+      "category": "Satellite",
+      "frequency_hz": 12000000000.0,
+      "wavelength_m": 0.024982704833333334,
+      "energy_eV": 4.96280123630863e-05,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "K-band radar (24 GHz)",
+      "category": "Radar",
+      "frequency_hz": 24000000000.0,
+      "wavelength_m": 0.012491352416666667,
+      "energy_eV": 9.92560247261726e-05,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "Ka-band satellite (26.5 GHz)",
+      "category": "Satellite",
+      "frequency_hz": 26500000000.0,
+      "wavelength_m": 0.011312922943396227,
+      "energy_eV": 0.00010959519396848226,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "5G mmWave n257 (28 GHz)",
+      "category": "5G",
+      "frequency_hz": 28000000000.0,
+      "wavelength_m": 0.0107068735,
+      "energy_eV": 0.00011579869551386806,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "THz imaging (1 THz)",
+      "category": "THz",
+      "frequency_hz": 1000000000000.0,
+      "wavelength_m": 0.000299792458,
+      "energy_eV": 0.004135667696923859,
+      "hw24": 8,
+      "bw256": {
+        "hw_snapped": 64,
+        "norm_sq_snapped": 256,
+        "nrci_snapped": 0.3232142749901492
+      },
+      "bw512": {
+        "hw_snapped": 128,
+        "norm_sq_snapped": 512,
+        "nrci_snapped": 0.19275824583266318
+      },
+      "bw1024": {
+        "hw_snapped": 256,
+        "norm_sq_snapped": 1024,
+        "nrci_snapped": 0.10665880499284615
+      }
+    },
+    {
+      "name": "Water vapor line (183 GHz)",
+      "category": "Atmospheric",
+      "frequency_hz": 183310000000.0,
+      "wavelength_m": 0.0016354397359663957,
+      "energy_eV": 0.0007581092455231126,
+      "hw24": 16,
+      "bw256": {
+        "hw_snapped": 128,
+        "norm_sq_snapped": 512,
+        "nrci_snapped": 0.19275824583266318
+      },
+      "bw512": {
+        "hw_snapped": 256,
+        "norm_sq_snapped": 1024,
+        "nrci_snapped": 0.10665880499284615
+      },
+      "bw1024": {
+        "hw_snapped": 512,
+        "norm_sq_snapped": 2048,
+        "nrci_snapped": 0.05633364196274362
+      }
+    },
+    {
+      "name": "CO2 laser (10.6 \u03bcm)",
+      "category": "Far-IR laser",
+      "frequency_hz": 28300000000000.0,
+      "wavelength_m": 1.0593373074204947e-05,
+      "energy_eV": 0.1170393958229452,
+      "hw24": 8,
+      "bw256": {
+        "hw_snapped": 64,
+        "norm_sq_snapped": 256,
+        "nrci_snapped": 0.3232142749901492
+      },
+      "bw512": {
+        "hw_snapped": 128,
+        "norm_sq_snapped": 512,
+        "nrci_snapped": 0.19275824583266318
+      },
+      "bw1024": {
+        "hw_snapped": 256,
+        "norm_sq_snapped": 1024,
+        "nrci_snapped": 0.10665880499284615
+      }
+    },
+    {
+      "name": "NH3 inversion (1.25 cm)",
+      "category": "Microwave molecular",
+      "frequency_hz": 23984000000.0,
+      "wavelength_m": 0.012499685540360241,
+      "energy_eV": 9.918985404302184e-05,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "HF chemical laser (2.7 \u03bcm)",
+      "category": "Mid-IR laser",
+      "frequency_hz": 111000000000000.0,
+      "wavelength_m": 2.700832954954955e-06,
+      "energy_eV": 0.4590591143585483,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "1550 nm fiber comms",
+      "category": "Near-IR telecom",
+      "frequency_hz": 193400000000000.0,
+      "wavelength_m": 1.5501161220268872e-06,
+      "energy_eV": 0.7998381325850744,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "Nd:YAG 1064 nm",
+      "category": "Near-IR laser",
+      "frequency_hz": 281760000000000.0,
+      "wavelength_m": 1.063999354060193e-06,
+      "energy_eV": 1.1652657302852665,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "GaAs 850 nm (VCSEL)",
+      "category": "Near-IR laser",
+      "frequency_hz": 352500000000000.0,
+      "wavelength_m": 8.504750581560283e-07,
+      "energy_eV": 1.45782286316566,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "HeNe 632.8 nm",
+      "category": "Visible laser",
+      "frequency_hz": 473600000000000.0,
+      "wavelength_m": 6.330077238175676e-07,
+      "energy_eV": 1.9586522212631396,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "Na D2 (589.0 nm)",
+      "category": "Visible atomic",
+      "frequency_hz": 508923000000000.0,
+      "wavelength_m": 5.89072331177801e-07,
+      "energy_eV": 2.104736411321581,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "Hg green 546.1 nm",
+      "category": "Visible lamp",
+      "frequency_hz": 548700000000000.0,
+      "wavelength_m": 5.463686130854748e-07,
+      "energy_eV": 2.2692408653021214,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "Hg blue 435.8 nm",
+      "category": "Visible lamp",
+      "frequency_hz": 687900000000000.0,
+      "wavelength_m": 4.3580819595871493e-07,
+      "energy_eV": 2.8449258087139224,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "H-beta (486.1 nm)",
+      "category": "Visible stellar",
+      "frequency_hz": 616700000000000.0,
+      "wavelength_m": 4.86123654937571e-07,
+      "energy_eV": 2.550466268692944,
+      "hw24": 16,
+      "bw256": {
+        "hw_snapped": 128,
+        "norm_sq_snapped": 512,
+        "nrci_snapped": 0.19275824583266318
+      },
+      "bw512": {
+        "hw_snapped": 256,
+        "norm_sq_snapped": 1024,
+        "nrci_snapped": 0.10665880499284615
+      },
+      "bw1024": {
+        "hw_snapped": 512,
+        "norm_sq_snapped": 2048,
+        "nrci_snapped": 0.05633364196274362
+      }
+    },
+    {
+      "name": "H-alpha (656.3 nm)",
+      "category": "Visible stellar",
+      "frequency_hz": 456800000000000.0,
+      "wavelength_m": 6.562882180385289e-07,
+      "energy_eV": 1.889173003954819,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "Ca K (393.4 nm)",
+      "category": "UV stellar",
+      "frequency_hz": 762100000000000.0,
+      "wavelength_m": 3.9337679832043036e-07,
+      "energy_eV": 3.151792351825673,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "Mg II h (280.3 nm)",
+      "category": "UV stellar",
+      "frequency_hz": 1069000000000000.0,
+      "wavelength_m": 2.804419625818522e-07,
+      "energy_eV": 4.421028768011605,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "Lyman-alpha (121.6 nm)",
+      "category": "UV stellar",
+      "frequency_hz": 2466000000000000.0,
+      "wavelength_m": 1.215703398215734e-07,
+      "energy_eV": 10.198556540614236,
+      "hw24": 16,
+      "bw256": {
+        "hw_snapped": 128,
+        "norm_sq_snapped": 512,
+        "nrci_snapped": 0.19275824583266318
+      },
+      "bw512": {
+        "hw_snapped": 256,
+        "norm_sq_snapped": 1024,
+        "nrci_snapped": 0.10665880499284615
+      },
+      "bw1024": {
+        "hw_snapped": 512,
+        "norm_sq_snapped": 2048,
+        "nrci_snapped": 0.05633364196274362
+      }
+    },
+    {
+      "name": "He II 30.4 nm (EUV)",
+      "category": "EUV solar",
+      "frequency_hz": 9860000000000000.0,
+      "wavelength_m": 3.0404914604462476e-08,
+      "energy_eV": 40.77768349166925,
+      "hw24": 16,
+      "bw256": {
+        "hw_snapped": 128,
+        "norm_sq_snapped": 512,
+        "nrci_snapped": 0.19275824583266318
+      },
+      "bw512": {
+        "hw_snapped": 256,
+        "norm_sq_snapped": 1024,
+        "nrci_snapped": 0.10665880499284615
+      },
+      "bw1024": {
+        "hw_snapped": 512,
+        "norm_sq_snapped": 2048,
+        "nrci_snapped": 0.05633364196274362
+      }
+    },
+    {
+      "name": "Fe XV 28.4 nm (EUV)",
+      "category": "EUV solar",
+      "frequency_hz": 1.055e+16,
+      "wavelength_m": 2.841634672985782e-08,
+      "energy_eV": 43.631294202546705,
+      "hw24": 16,
+      "bw256": {
+        "hw_snapped": 128,
+        "norm_sq_snapped": 512,
+        "nrci_snapped": 0.19275824583266318
+      },
+      "bw512": {
+        "hw_snapped": 256,
+        "norm_sq_snapped": 1024,
+        "nrci_snapped": 0.10665880499284615
+      },
+      "bw1024": {
+        "hw_snapped": 512,
+        "norm_sq_snapped": 2048,
+        "nrci_snapped": 0.05633364196274362
+      }
+    },
+    {
+      "name": "Al K-alpha (1.49 keV)",
+      "category": "Soft X-ray",
+      "frequency_hz": 3.6e+17,
+      "wavelength_m": 8.327568277777778e-10,
+      "energy_eV": 1488.8403708925891,
+      "hw24": 16,
+      "bw256": {
+        "hw_snapped": 128,
+        "norm_sq_snapped": 512,
+        "nrci_snapped": 0.19275824583266318
+      },
+      "bw512": {
+        "hw_snapped": 256,
+        "norm_sq_snapped": 1024,
+        "nrci_snapped": 0.10665880499284615
+      },
+      "bw1024": {
+        "hw_snapped": 512,
+        "norm_sq_snapped": 2048,
+        "nrci_snapped": 0.05633364196274362
+      }
+    },
+    {
+      "name": "Cu K-alpha (8.04 keV)",
+      "category": "X-ray",
+      "frequency_hz": 1.946e+18,
+      "wavelength_m": 1.5405573381294964e-10,
+      "energy_eV": 8048.009338213829,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "Mo K-alpha (17.5 keV)",
+      "category": "Hard X-ray",
+      "frequency_hz": 4.23e+18,
+      "wavelength_m": 7.087292151300237e-11,
+      "energy_eV": 17493.874357987923,
+      "hw24": 16,
+      "bw256": {
+        "hw_snapped": 128,
+        "norm_sq_snapped": 512,
+        "nrci_snapped": 0.19275824583266318
+      },
+      "bw512": {
+        "hw_snapped": 256,
+        "norm_sq_snapped": 1024,
+        "nrci_snapped": 0.10665880499284615
+      },
+      "bw1024": {
+        "hw_snapped": 512,
+        "norm_sq_snapped": 2048,
+        "nrci_snapped": 0.05633364196274362
+      }
+    },
+    {
+      "name": "Annihilation (511 keV)",
+      "category": "Gamma",
+      "frequency_hz": 1.236e+20,
+      "wavelength_m": 2.4255053236245953e-12,
+      "energy_eV": 511168.52733978897,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "Cs-137 gamma (662 keV)",
+      "category": "Gamma nuclear",
+      "frequency_hz": 1.602e+20,
+      "wavelength_m": 1.8713636579275906e-12,
+      "energy_eV": 662533.9650472022,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "Co-60 gamma (1.33 MeV)",
+      "category": "Gamma nuclear",
+      "frequency_hz": 3.22e+20,
+      "wavelength_m": 9.310324782608695e-13,
+      "energy_eV": 1331684.9984094824,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "26Al decay (1.81 MeV)",
+      "category": "Gamma astrophysical",
+      "frequency_hz": 4.38e+20,
+      "wavelength_m": 6.844576666666666e-13,
+      "energy_eV": 1811422.4512526502,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    },
+    {
+      "name": "Pair-production threshold",
+      "category": "Gamma threshold",
+      "frequency_hz": 2.472e+20,
+      "wavelength_m": 1.2127526618122976e-12,
+      "energy_eV": 1022337.0546795779,
+      "hw24": 12,
+      "bw256": {
+        "hw_snapped": 96,
+        "norm_sq_snapped": 384,
+        "nrci_snapped": 0.24149432057282788
+      },
+      "bw512": {
+        "hw_snapped": 192,
+        "norm_sq_snapped": 768,
+        "nrci_snapped": 0.1373292809901495
+      },
+      "bw1024": {
+        "hw_snapped": 384,
+        "norm_sq_snapped": 1536,
+        "nrci_snapped": 0.07372708422836556
+      }
+    }
+  ]
+}

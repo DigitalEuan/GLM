@@ -1,0 +1,2273 @@
+{
+  "experiment": "UBP-to-Realworld Scale Calibration v4",
+  "date": "2026-08-06",
+  "engine": "GMHGL/ubp_unified_v5.py + Lean-verified decoder patch",
+  "approach": "SIZE measurement (not TIME); 49 EM references spanning 18 orders of magnitude",
+  "anti_numerology": "Pre-registered wavelength ladder, full reporting, no cherry-picking",
+  "ubp_constants": {
+    "Y": 0.26467543040452696,
+    "MONAD": 13.817580227176494,
+    "WOBBLE": 0.8175802271764945,
+    "L": 0.06289078670588419,
+    "v_over_c_from_MONAD": 0.3388776987747419
+  },
+  "wavelength_ladder": [
+    {
+      "name": "ELF submarine comms (USA)",
+      "category": "ELF radio",
+      "real_ref": "Project Sanguine / Seafarer, 76 Hz",
+      "frequency_hz": 76.0,
+      "wavelength_m": 3944637.6052631577,
+      "energy_eV": 3.1431074496621326e-13,
+      "hamming_weight": 16
+    },
+    {
+      "name": "VLF navigation (Omega)",
+      "category": "VLF radio",
+      "real_ref": "Omega Nav System, 10-14 kHz",
+      "frequency_hz": 10000.0,
+      "wavelength_m": 29979.2458,
+      "energy_eV": 4.135667696923859e-11,
+      "hamming_weight": 12
+    },
+    {
+      "name": "LORAN-C 100 kHz",
+      "category": "LF radio",
+      "real_ref": "LORAN-C pulse at 100 kHz",
+      "frequency_hz": 100000.0,
+      "wavelength_m": 2997.92458,
+      "energy_eV": 4.135667696923859e-10,
+      "hamming_weight": 12
+    },
+    {
+      "name": "AM radio (mid band)",
+      "category": "MF radio",
+      "real_ref": "AM broadcast, 530-1710 kHz",
+      "frequency_hz": 1000000.0,
+      "wavelength_m": 299.792458,
+      "energy_eV": 4.135667696923859e-09,
+      "hamming_weight": 16
+    },
+    {
+      "name": "Shortwave radio (31m band)",
+      "category": "HF radio",
+      "real_ref": "International broadcast, 9.5-9.9 MHz",
+      "frequency_hz": 9700000.0,
+      "wavelength_m": 30.906438969072166,
+      "energy_eV": 4.011597666016143e-08,
+      "hamming_weight": 12
+    },
+    {
+      "name": "FM radio (mid band)",
+      "category": "VHF radio",
+      "real_ref": "FM broadcast, 88-108 MHz",
+      "frequency_hz": 98000000.0,
+      "wavelength_m": 3.0591067142857145,
+      "energy_eV": 4.052954342985382e-07,
+      "hamming_weight": 16
+    },
+    {
+      "name": "VHF TV channel 7",
+      "category": "VHF TV",
+      "real_ref": "VHF TV channels 7-13, 174-216 MHz",
+      "frequency_hz": 174000000.0,
+      "wavelength_m": 1.7229451609195403,
+      "energy_eV": 7.196061792647514e-07,
+      "hamming_weight": 12
+    },
+    {
+      "name": "UHF TV channel 14",
+      "category": "UHF TV",
+      "real_ref": "UHF TV, 470-608 MHz",
+      "frequency_hz": 470000000.0,
+      "wavelength_m": 0.6378562936170212,
+      "energy_eV": 1.943763817554214e-06,
+      "hamming_weight": 12
+    },
+    {
+      "name": "Cellular 700 MHz (LTE band 12)",
+      "category": "Cellular",
+      "real_ref": "LTE Band 12 downlink",
+      "frequency_hz": 729000000.0,
+      "wavelength_m": 0.41123793964334704,
+      "energy_eV": 3.014901751057493e-06,
+      "hamming_weight": 16
+    },
+    {
+      "name": "GPS L1 (1575.42 MHz)",
+      "category": "GNSS",
+      "real_ref": "GPS L1 carrier, 1575.42 MHz (exact by spec)",
+      "frequency_hz": 1575420000.0,
+      "wavelength_m": 0.19029367279836487,
+      "energy_eV": 6.5154136030877855e-06,
+      "hamming_weight": 12
+    },
+    {
+      "name": "WiFi 2.4 GHz (channel 1)",
+      "category": "WiFi",
+      "real_ref": "IEEE 802.11b/g/n channel 1, 2412 MHz (exact by spec)",
+      "frequency_hz": 2412000000.0,
+      "wavelength_m": 0.12429206384742952,
+      "energy_eV": 9.975230484980348e-06,
+      "hamming_weight": 8
+    },
+    {
+      "name": "Bluetooth LE (channel 0)",
+      "category": "Bluetooth",
+      "real_ref": "BLE adv channel 37, 2402 MHz",
+      "frequency_hz": 2402000000.0,
+      "wavelength_m": 0.1248095162364696,
+      "energy_eV": 9.93387380801111e-06,
+      "hamming_weight": 8
+    },
+    {
+      "name": "S-band radar (weather)",
+      "category": "Radar",
+      "real_ref": "NEXRAD S-band, 2.7-3.0 GHz",
+      "frequency_hz": 2800000000.0,
+      "wavelength_m": 0.107068735,
+      "energy_eV": 1.1579869551386804e-05,
+      "hamming_weight": 8
+    },
+    {
+      "name": "C-band satellite (4 GHz)",
+      "category": "Satellite",
+      "real_ref": "C-band downlink, 3.7-4.2 GHz",
+      "frequency_hz": 4000000000.0,
+      "wavelength_m": 0.0749481145,
+      "energy_eV": 1.6542670787695434e-05,
+      "hamming_weight": 8
+    },
+    {
+      "name": "5G n78 mid-band (3.5 GHz)",
+      "category": "5G",
+      "real_ref": "5G NR n78, 3.3-3.8 GHz",
+      "frequency_hz": 3500000000.0,
+      "wavelength_m": 0.085654988,
+      "energy_eV": 1.4474836939233508e-05,
+      "hamming_weight": 8
+    },
+    {
+      "name": "Cs-133 hyperfine (SI second)",
+      "category": "Atomic clock",
+      "real_ref": "SI definition of the second, EXACT",
+      "frequency_hz": 9192631770,
+      "wavelength_m": 0.03261225571749406,
+      "energy_eV": 3.8017670260905e-05,
+      "hamming_weight": 12
+    },
+    {
+      "name": "X-band radar (8-12 GHz)",
+      "category": "Radar",
+      "real_ref": "X-band marine/aviation radar, 8-12 GHz",
+      "frequency_hz": 10000000000.0,
+      "wavelength_m": 0.0299792458,
+      "energy_eV": 4.135667696923858e-05,
+      "hamming_weight": 12
+    },
+    {
+      "name": "Ku-band satellite (12 GHz)",
+      "category": "Satellite",
+      "real_ref": "Ku-band direct broadcast, 12.2-12.7 GHz",
+      "frequency_hz": 12000000000.0,
+      "wavelength_m": 0.024982704833333334,
+      "energy_eV": 4.96280123630863e-05,
+      "hamming_weight": 12
+    },
+    {
+      "name": "K-band radar (24 GHz)",
+      "category": "Radar",
+      "real_ref": "K-band automotive radar, 24-24.25 GHz",
+      "frequency_hz": 24000000000.0,
+      "wavelength_m": 0.012491352416666667,
+      "energy_eV": 9.92560247261726e-05,
+      "hamming_weight": 12
+    },
+    {
+      "name": "Ka-band satellite (26.5 GHz)",
+      "category": "Satellite",
+      "real_ref": "Ka-band 5G mmWave, 26.5-40 GHz",
+      "frequency_hz": 26500000000.0,
+      "wavelength_m": 0.011312922943396227,
+      "energy_eV": 0.00010959519396848226,
+      "hamming_weight": 12
+    },
+    {
+      "name": "5G mmWave n257 (28 GHz)",
+      "category": "5G",
+      "real_ref": "5G NR n257, 26.5-29.5 GHz",
+      "frequency_hz": 28000000000.0,
+      "wavelength_m": 0.0107068735,
+      "energy_eV": 0.00011579869551386806,
+      "hamming_weight": 12
+    },
+    {
+      "name": "THz imaging (1 THz)",
+      "category": "THz",
+      "real_ref": "THz time-domain spectroscopy, 0.1-10 THz",
+      "frequency_hz": 1000000000000.0,
+      "wavelength_m": 0.000299792458,
+      "energy_eV": 0.004135667696923859,
+      "hamming_weight": 8
+    },
+    {
+      "name": "Water vapor line (183 GHz)",
+      "category": "Atmospheric",
+      "real_ref": "Water vapor resonance, 183.31 GHz",
+      "frequency_hz": 183310000000.0,
+      "wavelength_m": 0.0016354397359663957,
+      "energy_eV": 0.0007581092455231126,
+      "hamming_weight": 16
+    },
+    {
+      "name": "CO2 laser (10.6 \u03bcm)",
+      "category": "Far-IR laser",
+      "real_ref": "CO2 laser line, 10.6 \u03bcm",
+      "frequency_hz": 28300000000000.0,
+      "wavelength_m": 1.0593373074204947e-05,
+      "energy_eV": 0.1170393958229452,
+      "hamming_weight": 8
+    },
+    {
+      "name": "NH3 inversion (1.25 cm)",
+      "category": "Microwave molecular",
+      "real_ref": "Ammonia maser, 23.984 GHz",
+      "frequency_hz": 23984000000.0,
+      "wavelength_m": 0.012499685540360241,
+      "energy_eV": 9.918985404302184e-05,
+      "hamming_weight": 12
+    },
+    {
+      "name": "HF chemical laser (2.7 \u03bcm)",
+      "category": "Mid-IR laser",
+      "real_ref": "Hydrogen fluoride laser, 2.6-3.0 \u03bcm",
+      "frequency_hz": 111000000000000.0,
+      "wavelength_m": 2.700832954954955e-06,
+      "energy_eV": 0.4590591143585483,
+      "hamming_weight": 12
+    },
+    {
+      "name": "1550 nm fiber comms",
+      "category": "Near-IR telecom",
+      "real_ref": "C-band DWDM, 1550 nm (zero-dispersion minimum of silica)",
+      "frequency_hz": 193400000000000.0,
+      "wavelength_m": 1.5501161220268872e-06,
+      "energy_eV": 0.7998381325850744,
+      "hamming_weight": 12
+    },
+    {
+      "name": "Nd:YAG 1064 nm",
+      "category": "Near-IR laser",
+      "real_ref": "Nd:YAG laser, 1064 nm (fundamental)",
+      "frequency_hz": 281760000000000.0,
+      "wavelength_m": 1.063999354060193e-06,
+      "energy_eV": 1.1652657302852665,
+      "hamming_weight": 12
+    },
+    {
+      "name": "GaAs 850 nm (VCSEL)",
+      "category": "Near-IR laser",
+      "real_ref": "GaAs VCSEL, 850 nm (datacom)",
+      "frequency_hz": 352500000000000.0,
+      "wavelength_m": 8.504750581560283e-07,
+      "energy_eV": 1.45782286316566,
+      "hamming_weight": 12
+    },
+    {
+      "name": "HeNe 632.8 nm",
+      "category": "Visible laser",
+      "real_ref": "HeNe laser, 632.816 nm",
+      "frequency_hz": 473600000000000.0,
+      "wavelength_m": 6.330077238175676e-07,
+      "energy_eV": 1.9586522212631396,
+      "hamming_weight": 12
+    },
+    {
+      "name": "Na D2 (589.0 nm)",
+      "category": "Visible atomic",
+      "real_ref": "Sodium D2 resonance, 588.995 nm",
+      "frequency_hz": 508923000000000.0,
+      "wavelength_m": 5.89072331177801e-07,
+      "energy_eV": 2.104736411321581,
+      "hamming_weight": 12
+    },
+    {
+      "name": "Hg green 546.1 nm",
+      "category": "Visible lamp",
+      "real_ref": "Mercury e-line, 546.074 nm",
+      "frequency_hz": 548700000000000.0,
+      "wavelength_m": 5.463686130854748e-07,
+      "energy_eV": 2.2692408653021214,
+      "hamming_weight": 12
+    },
+    {
+      "name": "Hg blue 435.8 nm",
+      "category": "Visible lamp",
+      "real_ref": "Mercury g-line, 435.834 nm",
+      "frequency_hz": 687900000000000.0,
+      "wavelength_m": 4.3580819595871493e-07,
+      "energy_eV": 2.8449258087139224,
+      "hamming_weight": 12
+    },
+    {
+      "name": "H-beta (486.1 nm)",
+      "category": "Visible stellar",
+      "real_ref": "Hydrogen Balmer-beta, 486.133 nm",
+      "frequency_hz": 616700000000000.0,
+      "wavelength_m": 4.86123654937571e-07,
+      "energy_eV": 2.550466268692944,
+      "hamming_weight": 16
+    },
+    {
+      "name": "H-alpha (656.3 nm)",
+      "category": "Visible stellar",
+      "real_ref": "Hydrogen Balmer-alpha, 656.281 nm",
+      "frequency_hz": 456800000000000.0,
+      "wavelength_m": 6.562882180385289e-07,
+      "energy_eV": 1.889173003954819,
+      "hamming_weight": 12
+    },
+    {
+      "name": "Ca K (393.4 nm)",
+      "category": "UV stellar",
+      "real_ref": "Calcium K-line (solar), 393.366 nm",
+      "frequency_hz": 762100000000000.0,
+      "wavelength_m": 3.9337679832043036e-07,
+      "energy_eV": 3.151792351825673,
+      "hamming_weight": 12
+    },
+    {
+      "name": "Mg II h (280.3 nm)",
+      "category": "UV stellar",
+      "real_ref": "Magnesium II h resonance, 280.270 nm",
+      "frequency_hz": 1069000000000000.0,
+      "wavelength_m": 2.804419625818522e-07,
+      "energy_eV": 4.421028768011605,
+      "hamming_weight": 12
+    },
+    {
+      "name": "Lyman-alpha (121.6 nm)",
+      "category": "UV stellar",
+      "real_ref": "Hydrogen Lyman-alpha, 121.567 nm (strongest UV line)",
+      "frequency_hz": 2466000000000000.0,
+      "wavelength_m": 1.215703398215734e-07,
+      "energy_eV": 10.198556540614236,
+      "hamming_weight": 16
+    },
+    {
+      "name": "He II 30.4 nm (EUV)",
+      "category": "EUV solar",
+      "real_ref": "Helium II resonance, 30.378 nm (solar imaging)",
+      "frequency_hz": 9860000000000000.0,
+      "wavelength_m": 3.0404914604462476e-08,
+      "energy_eV": 40.77768349166925,
+      "hamming_weight": 16
+    },
+    {
+      "name": "Fe XV 28.4 nm (EUV)",
+      "category": "EUV solar",
+      "real_ref": "Iron XV coronal line, 28.415 nm",
+      "frequency_hz": 1.055e+16,
+      "wavelength_m": 2.841634672985782e-08,
+      "energy_eV": 43.631294202546705,
+      "hamming_weight": 16
+    },
+    {
+      "name": "Al K-alpha (1.49 keV)",
+      "category": "Soft X-ray",
+      "real_ref": "Aluminum K-alpha fluorescence, 8.34 angstrom",
+      "frequency_hz": 3.6e+17,
+      "wavelength_m": 8.327568277777778e-10,
+      "energy_eV": 1488.8403708925891,
+      "hamming_weight": 16
+    },
+    {
+      "name": "Cu K-alpha (8.04 keV)",
+      "category": "X-ray",
+      "real_ref": "Copper K-alpha, 1.541 angstrom (XRD standard)",
+      "frequency_hz": 1.946e+18,
+      "wavelength_m": 1.5405573381294964e-10,
+      "energy_eV": 8048.009338213829,
+      "hamming_weight": 12
+    },
+    {
+      "name": "Mo K-alpha (17.5 keV)",
+      "category": "Hard X-ray",
+      "real_ref": "Molybdenum K-alpha, 0.7107 angstrom (medical X-ray)",
+      "frequency_hz": 4.23e+18,
+      "wavelength_m": 7.087292151300237e-11,
+      "energy_eV": 17493.874357987923,
+      "hamming_weight": 16
+    },
+    {
+      "name": "Annihilation (511 keV)",
+      "category": "Gamma",
+      "real_ref": "Positron annihilation, 511 keV (e+e- \u2192 2\u03b3)",
+      "frequency_hz": 1.236e+20,
+      "wavelength_m": 2.4255053236245953e-12,
+      "energy_eV": 511168.52733978897,
+      "hamming_weight": 12
+    },
+    {
+      "name": "Cs-137 gamma (662 keV)",
+      "category": "Gamma nuclear",
+      "real_ref": "Cs-137 decay line, 661.7 keV (Ba-137m)",
+      "frequency_hz": 1.602e+20,
+      "wavelength_m": 1.8713636579275906e-12,
+      "energy_eV": 662533.9650472022,
+      "hamming_weight": 12
+    },
+    {
+      "name": "Co-60 gamma (1.33 MeV)",
+      "category": "Gamma nuclear",
+      "real_ref": "Cobalt-60 decay line, 1.3325 MeV",
+      "frequency_hz": 3.22e+20,
+      "wavelength_m": 9.310324782608695e-13,
+      "energy_eV": 1331684.9984094824,
+      "hamming_weight": 12
+    },
+    {
+      "name": "26Al decay (1.81 MeV)",
+      "category": "Gamma astrophysical",
+      "real_ref": "Aluminum-26 decay, 1.809 MeV (Milky Way mapping)",
+      "frequency_hz": 4.38e+20,
+      "wavelength_m": 6.844576666666666e-13,
+      "energy_eV": 1811422.4512526502,
+      "hamming_weight": 12
+    },
+    {
+      "name": "Pair-production threshold",
+      "category": "Gamma threshold",
+      "real_ref": "1.022 MeV = 2\u00d7 electron rest mass",
+      "frequency_hz": 2.472e+20,
+      "wavelength_m": 1.2127526618122976e-12,
+      "energy_eV": 1022337.0546795779,
+      "hamming_weight": 12
+    }
+  ],
+  "substrate_size_measures_explained": {
+    "hamming_radius": "HW of codeword (= distance to vacuum)",
+    "norm_sq_scaled": "sum of squared coords in \u00d78 Leech repr (= HW for binary codewords)",
+    "norm_sq_actual": "scaled / 8",
+    "shell_index": "HW // 8 (0=vacuum, 1=min, 2=mid, 3=max)",
+    "kissing_count": "minimal Leech vectors (out of 196,560) within Hamming sphere",
+    "symmetry_tax": "HW \u00d7 (Y + 1/8)"
+  },
+  "scale_results": [
+    {
+      "name": "ELF submarine comms (USA)",
+      "category": "ELF radio",
+      "real_ref": "Project Sanguine / Seafarer, 76 Hz",
+      "frequency_hz": 76.0,
+      "wavelength_m": 3944637.6052631577,
+      "wavelength_label": "3944.64 km",
+      "energy_eV": 3.1431074496621326e-13,
+      "substrate_hamming_weight": 16,
+      "substrate_norm_sq_scaled": 16,
+      "substrate_shell_index": 2,
+      "substrate_kissing_count": 196536,
+      "substrate_TAX": 6.234806886472431,
+      "substrate_NRCI": 0.6159605143398686,
+      "scale_factors": {
+        "S_per_Hamming_radius": 246539.85032894736,
+        "S_per_norm_sq_scaled": 246539.85032894736,
+        "S_per_norm_actual": 1972318.8026315789,
+        "S_per_shell": 1972318.8026315789,
+        "S_per_kissing_count": 20.070814534045457,
+        "S_per_TAX": 632679.9974866551
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": 5.391887127991211,
+        "S_per_norm_sq_scaled": 5.391887127991211,
+        "S_per_norm_actual": 6.294977114983155,
+        "S_per_shell": 6.294977114983155,
+        "S_per_kissing_count": 1.3025649978219696,
+        "S_per_TAX": 5.801184104226037
+      }
+    },
+    {
+      "name": "VLF navigation (Omega)",
+      "category": "VLF radio",
+      "real_ref": "Omega Nav System, 10-14 kHz",
+      "frequency_hz": 10000.0,
+      "wavelength_m": 29979.2458,
+      "wavelength_label": "29.98 km",
+      "energy_eV": 4.135667696923859e-11,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 2498.2704833333332,
+        "S_per_norm_sq_scaled": 2498.2704833333332,
+        "S_per_norm_actual": 19986.163866666666,
+        "S_per_shell": 29979.2458,
+        "S_per_kissing_count": 0.1681204901301032,
+        "S_per_TAX": 6411.157307864772
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": 3.3976394568803028,
+        "S_per_norm_sq_scaled": 3.3976394568803028,
+        "S_per_norm_actual": 4.300729443872246,
+        "S_per_shell": 4.476820702927927,
+        "S_per_kissing_count": -0.7743793525442537,
+        "S_per_TAX": 3.8069364331151276
+      }
+    },
+    {
+      "name": "LORAN-C 100 kHz",
+      "category": "LF radio",
+      "real_ref": "LORAN-C pulse at 100 kHz",
+      "frequency_hz": 100000.0,
+      "wavelength_m": 2997.92458,
+      "wavelength_label": "3.00 km",
+      "energy_eV": 4.135667696923859e-10,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 249.82704833333332,
+        "S_per_norm_sq_scaled": 249.82704833333332,
+        "S_per_norm_actual": 1998.6163866666666,
+        "S_per_shell": 2997.92458,
+        "S_per_kissing_count": 0.016812049013010318,
+        "S_per_TAX": 641.1157307864771
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": 2.3976394568803028,
+        "S_per_norm_sq_scaled": 2.3976394568803028,
+        "S_per_norm_actual": 3.300729443872246,
+        "S_per_shell": 3.4768207029279274,
+        "S_per_kissing_count": -1.7743793525442537,
+        "S_per_TAX": 2.8069364331151276
+      }
+    },
+    {
+      "name": "AM radio (mid band)",
+      "category": "MF radio",
+      "real_ref": "AM broadcast, 530-1710 kHz",
+      "frequency_hz": 1000000.0,
+      "wavelength_m": 299.792458,
+      "wavelength_label": "299.792 m",
+      "energy_eV": 4.135667696923859e-09,
+      "substrate_hamming_weight": 16,
+      "substrate_norm_sq_scaled": 16,
+      "substrate_shell_index": 2,
+      "substrate_kissing_count": 196536,
+      "substrate_TAX": 6.234806886472431,
+      "substrate_NRCI": 0.6159605143398686,
+      "scale_factors": {
+        "S_per_Hamming_radius": 18.737028625,
+        "S_per_norm_sq_scaled": 18.737028625,
+        "S_per_norm_actual": 149.896229,
+        "S_per_shell": 149.896229,
+        "S_per_kissing_count": 0.0015253819045874548,
+        "S_per_TAX": 48.08367980898579
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": 1.2727007202720029,
+        "S_per_norm_sq_scaled": 1.2727007202720029,
+        "S_per_norm_actual": 2.175790707263946,
+        "S_per_shell": 2.175790707263946,
+        "S_per_kissing_count": -2.816621409897239,
+        "S_per_TAX": 1.6819976965068277
+      }
+    },
+    {
+      "name": "Shortwave radio (31m band)",
+      "category": "HF radio",
+      "real_ref": "International broadcast, 9.5-9.9 MHz",
+      "frequency_hz": 9700000.0,
+      "wavelength_m": 30.906438969072166,
+      "wavelength_label": "30.906 m",
+      "energy_eV": 4.011597666016143e-08,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 2.575536580756014,
+        "S_per_norm_sq_scaled": 2.575536580756014,
+        "S_per_norm_actual": 20.604292646048112,
+        "S_per_shell": 30.906438969072166,
+        "S_per_kissing_count": 0.00017332009291763217,
+        "S_per_TAX": 6.60944052357193
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": 0.4108677226140579,
+        "S_per_norm_sq_scaled": 0.4108677226140579,
+        "S_per_norm_actual": 1.3139577096060016,
+        "S_per_shell": 1.4900489686616827,
+        "S_per_kissing_count": -3.7611510868104987,
+        "S_per_TAX": 0.8201646988488829
+      }
+    },
+    {
+      "name": "FM radio (mid band)",
+      "category": "VHF radio",
+      "real_ref": "FM broadcast, 88-108 MHz",
+      "frequency_hz": 98000000.0,
+      "wavelength_m": 3.0591067142857145,
+      "wavelength_label": "3.059 m",
+      "energy_eV": 4.052954342985382e-07,
+      "substrate_hamming_weight": 16,
+      "substrate_norm_sq_scaled": 16,
+      "substrate_shell_index": 2,
+      "substrate_kissing_count": 196536,
+      "substrate_TAX": 6.234806886472431,
+      "substrate_NRCI": 0.6159605143398686,
+      "scale_factors": {
+        "S_per_Hamming_radius": 0.19119416964285715,
+        "S_per_norm_sq_scaled": 0.19119416964285715,
+        "S_per_norm_actual": 1.5295533571428572,
+        "S_per_shell": 1.5295533571428572,
+        "S_per_kissing_count": 1.5565121475382193e-05,
+        "S_per_TAX": 0.4906497939692428
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -0.718525355420492,
+        "S_per_norm_sq_scaled": -0.718525355420492,
+        "S_per_norm_actual": 0.18456463157145153,
+        "S_per_shell": 0.18456463157145153,
+        "S_per_kissing_count": -4.8078474855897335,
+        "S_per_TAX": -0.309228379185667
+      }
+    },
+    {
+      "name": "VHF TV channel 7",
+      "category": "VHF TV",
+      "real_ref": "VHF TV channels 7-13, 174-216 MHz",
+      "frequency_hz": 174000000.0,
+      "wavelength_m": 1.7229451609195403,
+      "wavelength_label": "1.723 m",
+      "energy_eV": 7.196061792647514e-07,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 0.1435787634099617,
+        "S_per_norm_sq_scaled": 0.1435787634099617,
+        "S_per_norm_actual": 1.1486301072796936,
+        "S_per_shell": 1.7229451609195403,
+        "S_per_kissing_count": 9.662097133913976e-06,
+        "S_per_TAX": 0.3684573165439524
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -0.8429097914022969,
+        "S_per_norm_sq_scaled": -0.8429097914022969,
+        "S_per_norm_actual": 0.06018019558964664,
+        "S_per_shell": 0.23627145464532784,
+        "S_per_kissing_count": -5.014928600826853,
+        "S_per_TAX": -0.43361281516747197
+      }
+    },
+    {
+      "name": "UHF TV channel 14",
+      "category": "UHF TV",
+      "real_ref": "UHF TV, 470-608 MHz",
+      "frequency_hz": 470000000.0,
+      "wavelength_m": 0.6378562936170212,
+      "wavelength_label": "637.856 mm",
+      "energy_eV": 1.943763817554214e-06,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 0.05315469113475177,
+        "S_per_norm_sq_scaled": 0.05315469113475177,
+        "S_per_norm_actual": 0.42523752907801415,
+        "S_per_shell": 0.6378562936170212,
+        "S_per_kissing_count": 3.5770317048958123e-06,
+        "S_per_TAX": 0.13640760229499513
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -1.2744584010554147,
+        "S_per_norm_sq_scaled": -1.2744584010554147,
+        "S_per_norm_actual": -0.3713684140634712,
+        "S_per_shell": -0.19527715500778994,
+        "S_per_kissing_count": -5.446477210479971,
+        "S_per_TAX": -0.8651614248205898
+      }
+    },
+    {
+      "name": "Cellular 700 MHz (LTE band 12)",
+      "category": "Cellular",
+      "real_ref": "LTE Band 12 downlink",
+      "frequency_hz": 729000000.0,
+      "wavelength_m": 0.41123793964334704,
+      "wavelength_label": "411.238 mm",
+      "energy_eV": 3.014901751057493e-06,
+      "substrate_hamming_weight": 16,
+      "substrate_norm_sq_scaled": 16,
+      "substrate_shell_index": 2,
+      "substrate_kissing_count": 196536,
+      "substrate_TAX": 6.234806886472431,
+      "substrate_NRCI": 0.6159605143398686,
+      "scale_factors": {
+        "S_per_Hamming_radius": 0.02570237122770919,
+        "S_per_norm_sq_scaled": 0.02570237122770919,
+        "S_per_norm_actual": 0.20561896982167352,
+        "S_per_shell": 0.20561896982167352,
+        "S_per_kissing_count": 2.0924305961419133e-06,
+        "S_per_TAX": 0.06595840851712728
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -1.5900268080459719,
+        "S_per_norm_sq_scaled": -1.5900268080459719,
+        "S_per_norm_actual": -0.6869368210540283,
+        "S_per_shell": -0.6869368210540283,
+        "S_per_kissing_count": -5.679348938215214,
+        "S_per_TAX": -1.1807298318111468
+      }
+    },
+    {
+      "name": "GPS L1 (1575.42 MHz)",
+      "category": "GNSS",
+      "real_ref": "GPS L1 carrier, 1575.42 MHz (exact by spec)",
+      "frequency_hz": 1575420000.0,
+      "wavelength_m": 0.19029367279836487,
+      "wavelength_label": "190.294 mm",
+      "energy_eV": 6.5154136030877855e-06,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 0.015857806066530405,
+        "S_per_norm_sq_scaled": 0.015857806066530405,
+        "S_per_norm_actual": 0.12686244853224324,
+        "S_per_shell": 0.19029367279836487,
+        "S_per_kissing_count": 1.0671471108028537e-06,
+        "S_per_TAX": 0.0406949087091999
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -1.7997568976683205,
+        "S_per_norm_sq_scaled": -1.7997568976683205,
+        "S_per_norm_actual": -0.8966669106763769,
+        "S_per_shell": -0.7205756516206957,
+        "S_per_kissing_count": -5.971775707092877,
+        "S_per_TAX": -1.3904599214334956
+      }
+    },
+    {
+      "name": "WiFi 2.4 GHz (channel 1)",
+      "category": "WiFi",
+      "real_ref": "IEEE 802.11b/g/n channel 1, 2412 MHz (exact by spec)",
+      "frequency_hz": 2412000000.0,
+      "wavelength_m": 0.12429206384742952,
+      "wavelength_label": "124.292 mm",
+      "energy_eV": 9.975230484980348e-06,
+      "substrate_hamming_weight": 8,
+      "substrate_norm_sq_scaled": 8,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 116496,
+      "substrate_TAX": 3.1174034432362157,
+      "substrate_NRCI": 0.7623459965437248,
+      "scale_factors": {
+        "S_per_Hamming_radius": 0.01553650798092869,
+        "S_per_norm_sq_scaled": 0.01553650798092869,
+        "S_per_norm_actual": 0.12429206384742952,
+        "S_per_shell": 0.12429206384742952,
+        "S_per_kissing_count": 1.0669213007092907e-06,
+        "S_per_TAX": 0.039870381267815745
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -1.8086465875321298,
+        "S_per_norm_sq_scaled": -1.8086465875321298,
+        "S_per_norm_actual": -0.9055566005401862,
+        "S_per_shell": -0.9055566005401862,
+        "S_per_kissing_count": -5.971867614247708,
+        "S_per_TAX": -1.3993496112973047
+      }
+    },
+    {
+      "name": "Bluetooth LE (channel 0)",
+      "category": "Bluetooth",
+      "real_ref": "BLE adv channel 37, 2402 MHz",
+      "frequency_hz": 2402000000.0,
+      "wavelength_m": 0.1248095162364696,
+      "wavelength_label": "124.810 mm",
+      "energy_eV": 9.93387380801111e-06,
+      "substrate_hamming_weight": 8,
+      "substrate_norm_sq_scaled": 8,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 116496,
+      "substrate_TAX": 3.1174034432362157,
+      "substrate_NRCI": 0.7623459965437248,
+      "scale_factors": {
+        "S_per_Hamming_radius": 0.0156011895295587,
+        "S_per_norm_sq_scaled": 0.0156011895295587,
+        "S_per_norm_actual": 0.1248095162364696,
+        "S_per_shell": 0.1248095162364696,
+        "S_per_kissing_count": 1.071363104625649e-06,
+        "S_per_TAX": 0.040036369532877425
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -1.8068422871309033,
+        "S_per_norm_sq_scaled": -1.8068422871309033,
+        "S_per_norm_actual": -0.9037523001389597,
+        "S_per_shell": -0.9037523001389597,
+        "S_per_kissing_count": -5.970063313846482,
+        "S_per_TAX": -1.3975453108960783
+      }
+    },
+    {
+      "name": "S-band radar (weather)",
+      "category": "Radar",
+      "real_ref": "NEXRAD S-band, 2.7-3.0 GHz",
+      "frequency_hz": 2800000000.0,
+      "wavelength_m": 0.107068735,
+      "wavelength_label": "107.069 mm",
+      "energy_eV": 1.1579869551386804e-05,
+      "substrate_hamming_weight": 8,
+      "substrate_norm_sq_scaled": 8,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 116496,
+      "substrate_TAX": 3.1174034432362157,
+      "substrate_NRCI": 0.7623459965437248,
+      "scale_factors": {
+        "S_per_Hamming_radius": 0.013383591875,
+        "S_per_norm_sq_scaled": 0.013383591875,
+        "S_per_norm_actual": 0.107068735,
+        "S_per_shell": 0.107068735,
+        "S_per_kissing_count": 9.190764918967174e-07,
+        "S_per_TAX": 0.034345485577846994
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -1.8734273154062353,
+        "S_per_norm_sq_scaled": -1.8734273154062353,
+        "S_per_norm_actual": -0.9703373284142917,
+        "S_per_shell": -0.9703373284142917,
+        "S_per_kissing_count": -6.036648342121814,
+        "S_per_TAX": -1.4641303391714102
+      }
+    },
+    {
+      "name": "C-band satellite (4 GHz)",
+      "category": "Satellite",
+      "real_ref": "C-band downlink, 3.7-4.2 GHz",
+      "frequency_hz": 4000000000.0,
+      "wavelength_m": 0.0749481145,
+      "wavelength_label": "74.948 mm",
+      "energy_eV": 1.6542670787695434e-05,
+      "substrate_hamming_weight": 8,
+      "substrate_norm_sq_scaled": 8,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 116496,
+      "substrate_TAX": 3.1174034432362157,
+      "substrate_NRCI": 0.7623459965437248,
+      "scale_factors": {
+        "S_per_Hamming_radius": 0.0093685143125,
+        "S_per_norm_sq_scaled": 0.0093685143125,
+        "S_per_norm_actual": 0.0749481145,
+        "S_per_shell": 0.0749481145,
+        "S_per_kissing_count": 6.433535443277022e-07,
+        "S_per_TAX": 0.024041839904492893
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -2.0283292753919784,
+        "S_per_norm_sq_scaled": -2.0283292753919784,
+        "S_per_norm_actual": -1.1252392884000348,
+        "S_per_shell": -1.1252392884000348,
+        "S_per_kissing_count": -6.191550302107557,
+        "S_per_TAX": -1.6190322991571535
+      }
+    },
+    {
+      "name": "5G n78 mid-band (3.5 GHz)",
+      "category": "5G",
+      "real_ref": "5G NR n78, 3.3-3.8 GHz",
+      "frequency_hz": 3500000000.0,
+      "wavelength_m": 0.085654988,
+      "wavelength_label": "85.655 mm",
+      "energy_eV": 1.4474836939233508e-05,
+      "substrate_hamming_weight": 8,
+      "substrate_norm_sq_scaled": 8,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 116496,
+      "substrate_TAX": 3.1174034432362157,
+      "substrate_NRCI": 0.7623459965437248,
+      "scale_factors": {
+        "S_per_Hamming_radius": 0.0107068735,
+        "S_per_norm_sq_scaled": 0.0107068735,
+        "S_per_norm_actual": 0.085654988,
+        "S_per_shell": 0.085654988,
+        "S_per_kissing_count": 7.35261193517374e-07,
+        "S_per_TAX": 0.027476388462277596
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -1.9703373284142915,
+        "S_per_norm_sq_scaled": -1.9703373284142915,
+        "S_per_norm_actual": -1.067247341422348,
+        "S_per_shell": -1.067247341422348,
+        "S_per_kissing_count": -6.13355835512987,
+        "S_per_TAX": -1.5610403521794667
+      }
+    },
+    {
+      "name": "Cs-133 hyperfine (SI second)",
+      "category": "Atomic clock",
+      "real_ref": "SI definition of the second, EXACT",
+      "frequency_hz": 9192631770,
+      "wavelength_m": 0.03261225571749406,
+      "wavelength_label": "32.612 mm",
+      "energy_eV": 3.8017670260905e-05,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 0.002717687976457838,
+        "S_per_norm_sq_scaled": 0.002717687976457838,
+        "S_per_norm_actual": 0.021741503811662705,
+        "S_per_shell": 0.03261225571749406,
+        "S_per_kissing_count": 1.8288613569702812e-07,
+        "S_per_TAX": 0.006974234874486626
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -2.5658004070153675,
+        "S_per_norm_sq_scaled": -2.5658004070153675,
+        "S_per_norm_actual": -1.6627104200234237,
+        "S_per_shell": -1.4866191609677424,
+        "S_per_kissing_count": -6.737819216439924,
+        "S_per_TAX": -2.156503430780542
+      }
+    },
+    {
+      "name": "X-band radar (8-12 GHz)",
+      "category": "Radar",
+      "real_ref": "X-band marine/aviation radar, 8-12 GHz",
+      "frequency_hz": 10000000000.0,
+      "wavelength_m": 0.0299792458,
+      "wavelength_label": "29.979 mm",
+      "energy_eV": 4.135667696923858e-05,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 0.0024982704833333333,
+        "S_per_norm_sq_scaled": 0.0024982704833333333,
+        "S_per_norm_actual": 0.019986163866666667,
+        "S_per_shell": 0.0299792458,
+        "S_per_kissing_count": 1.6812049013010318e-07,
+        "S_per_TAX": 0.006411157307864772
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -2.6023605431196972,
+        "S_per_norm_sq_scaled": -2.6023605431196972,
+        "S_per_norm_actual": -1.6992705561277537,
+        "S_per_shell": -1.5231792970720726,
+        "S_per_kissing_count": -6.774379352544254,
+        "S_per_TAX": -2.1930635668848724
+      }
+    },
+    {
+      "name": "Ku-band satellite (12 GHz)",
+      "category": "Satellite",
+      "real_ref": "Ku-band direct broadcast, 12.2-12.7 GHz",
+      "frequency_hz": 12000000000.0,
+      "wavelength_m": 0.024982704833333334,
+      "wavelength_label": "24.983 mm",
+      "energy_eV": 4.96280123630863e-05,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 0.0020818920694444447,
+        "S_per_norm_sq_scaled": 0.0020818920694444447,
+        "S_per_norm_actual": 0.016655136555555557,
+        "S_per_shell": 0.024982704833333334,
+        "S_per_kissing_count": 1.4010040844175266e-07,
+        "S_per_TAX": 0.00534263108988731
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -2.681541789167322,
+        "S_per_norm_sq_scaled": -2.681541789167322,
+        "S_per_norm_actual": -1.7784518021753786,
+        "S_per_shell": -1.6023605431196972,
+        "S_per_kissing_count": -6.853560598591878,
+        "S_per_TAX": -2.272244812932497
+      }
+    },
+    {
+      "name": "K-band radar (24 GHz)",
+      "category": "Radar",
+      "real_ref": "K-band automotive radar, 24-24.25 GHz",
+      "frequency_hz": 24000000000.0,
+      "wavelength_m": 0.012491352416666667,
+      "wavelength_label": "12.491 mm",
+      "energy_eV": 9.92560247261726e-05,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 0.0010409460347222223,
+        "S_per_norm_sq_scaled": 0.0010409460347222223,
+        "S_per_norm_actual": 0.008327568277777779,
+        "S_per_shell": 0.012491352416666667,
+        "S_per_kissing_count": 7.005020422087633e-08,
+        "S_per_TAX": 0.002671315544943655
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -2.982571784831303,
+        "S_per_norm_sq_scaled": -2.982571784831303,
+        "S_per_norm_actual": -2.07948179783936,
+        "S_per_shell": -1.9033905387836785,
+        "S_per_kissing_count": -7.154590594255859,
+        "S_per_TAX": -2.5732748085964783
+      }
+    },
+    {
+      "name": "Ka-band satellite (26.5 GHz)",
+      "category": "Satellite",
+      "real_ref": "Ka-band 5G mmWave, 26.5-40 GHz",
+      "frequency_hz": 26500000000.0,
+      "wavelength_m": 0.011312922943396227,
+      "wavelength_label": "11.313 mm",
+      "energy_eV": 0.00010959519396848226,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 0.0009427435786163522,
+        "S_per_norm_sq_scaled": 0.0009427435786163522,
+        "S_per_norm_actual": 0.007541948628930818,
+        "S_per_shell": 0.011312922943396227,
+        "S_per_kissing_count": 6.344169438871818e-08,
+        "S_per_TAX": 0.0024193046444772725
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -3.025606417056505,
+        "S_per_norm_sq_scaled": -3.025606417056505,
+        "S_per_norm_actual": -2.1225164300645614,
+        "S_per_shell": -1.9464251710088802,
+        "S_per_kissing_count": -7.197625226481062,
+        "S_per_TAX": -2.61630944082168
+      }
+    },
+    {
+      "name": "5G mmWave n257 (28 GHz)",
+      "category": "5G",
+      "real_ref": "5G NR n257, 26.5-29.5 GHz",
+      "frequency_hz": 28000000000.0,
+      "wavelength_m": 0.0107068735,
+      "wavelength_label": "10.707 mm",
+      "energy_eV": 0.00011579869551386806,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 0.0008922394583333334,
+        "S_per_norm_sq_scaled": 0.0008922394583333334,
+        "S_per_norm_actual": 0.007137915666666667,
+        "S_per_shell": 0.0107068735,
+        "S_per_kissing_count": 6.004303218932257e-08,
+        "S_per_TAX": 0.0022896990385231327
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -3.0495185744619167,
+        "S_per_norm_sq_scaled": -3.0495185744619167,
+        "S_per_norm_actual": -2.146428587469973,
+        "S_per_shell": -1.9703373284142915,
+        "S_per_kissing_count": -7.2215373838864725,
+        "S_per_TAX": -2.6402215982270913
+      }
+    },
+    {
+      "name": "THz imaging (1 THz)",
+      "category": "THz",
+      "real_ref": "THz time-domain spectroscopy, 0.1-10 THz",
+      "frequency_hz": 1000000000000.0,
+      "wavelength_m": 0.000299792458,
+      "wavelength_label": "299.792 \u03bcm",
+      "energy_eV": 0.004135667696923859,
+      "substrate_hamming_weight": 8,
+      "substrate_norm_sq_scaled": 8,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 116496,
+      "substrate_TAX": 3.1174034432362157,
+      "substrate_NRCI": 0.7623459965437248,
+      "scale_factors": {
+        "S_per_Hamming_radius": 3.747405725e-05,
+        "S_per_norm_sq_scaled": 3.747405725e-05,
+        "S_per_norm_actual": 0.000299792458,
+        "S_per_shell": 0.000299792458,
+        "S_per_kissing_count": 2.573414177310809e-09,
+        "S_per_TAX": 9.616735961797158e-05
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -4.426269284064016,
+        "S_per_norm_sq_scaled": -4.426269284064016,
+        "S_per_norm_actual": -3.5231792970720726,
+        "S_per_shell": -3.5231792970720726,
+        "S_per_kissing_count": -8.589490310779594,
+        "S_per_TAX": -4.016972307829191
+      }
+    },
+    {
+      "name": "Water vapor line (183 GHz)",
+      "category": "Atmospheric",
+      "real_ref": "Water vapor resonance, 183.31 GHz",
+      "frequency_hz": 183310000000.0,
+      "wavelength_m": 0.0016354397359663957,
+      "wavelength_label": "1.635 mm",
+      "energy_eV": 0.0007581092455231126,
+      "substrate_hamming_weight": 16,
+      "substrate_norm_sq_scaled": 16,
+      "substrate_shell_index": 2,
+      "substrate_kissing_count": 196536,
+      "substrate_TAX": 6.234806886472431,
+      "substrate_NRCI": 0.6159605143398686,
+      "scale_factors": {
+        "S_per_Hamming_radius": 0.00010221498349789973,
+        "S_per_norm_sq_scaled": 0.00010221498349789973,
+        "S_per_norm_actual": 0.0008177198679831979,
+        "S_per_shell": 0.0008177198679831979,
+        "S_per_kissing_count": 8.32132401171488e-09,
+        "S_per_TAX": 0.00026230800179469633
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -3.9904854371417025,
+        "S_per_norm_sq_scaled": -3.9904854371417025,
+        "S_per_norm_actual": -3.0873954501497587,
+        "S_per_shell": -3.0873954501497587,
+        "S_per_kissing_count": -8.079807567310944,
+        "S_per_TAX": -3.5811884609068776
+      }
+    },
+    {
+      "name": "CO2 laser (10.6 \u03bcm)",
+      "category": "Far-IR laser",
+      "real_ref": "CO2 laser line, 10.6 \u03bcm",
+      "frequency_hz": 28300000000000.0,
+      "wavelength_m": 1.0593373074204947e-05,
+      "wavelength_label": "10.593 \u03bcm",
+      "energy_eV": 0.1170393958229452,
+      "substrate_hamming_weight": 8,
+      "substrate_norm_sq_scaled": 8,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 116496,
+      "substrate_TAX": 3.1174034432362157,
+      "substrate_NRCI": 0.7623459965437248,
+      "scale_factors": {
+        "S_per_Hamming_radius": 1.3241716342756184e-06,
+        "S_per_norm_sq_scaled": 1.3241716342756184e-06,
+        "S_per_norm_actual": 1.0593373074204947e-05,
+        "S_per_shell": 1.0593373074204947e-05,
+        "S_per_kissing_count": 9.093336315585897e-11,
+        "S_per_TAX": 3.3981399158293844e-06
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -5.878055719588306,
+        "S_per_norm_sq_scaled": -5.878055719588306,
+        "S_per_norm_actual": -4.974965732596362,
+        "S_per_shell": -4.974965732596362,
+        "S_per_kissing_count": -10.041276746303884,
+        "S_per_TAX": -5.468758743353481
+      }
+    },
+    {
+      "name": "NH3 inversion (1.25 cm)",
+      "category": "Microwave molecular",
+      "real_ref": "Ammonia maser, 23.984 GHz",
+      "frequency_hz": 23984000000.0,
+      "wavelength_m": 0.012499685540360241,
+      "wavelength_label": "12.500 mm",
+      "energy_eV": 9.918985404302184e-05,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 0.0010416404616966867,
+        "S_per_norm_sq_scaled": 0.0010416404616966867,
+        "S_per_norm_actual": 0.008333123693573493,
+        "S_per_shell": 0.012499685540360241,
+        "S_per_kissing_count": 7.009693551121714e-08,
+        "S_per_TAX": 0.0026730976100169997
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -2.9822821586239017,
+        "S_per_norm_sq_scaled": -2.9822821586239017,
+        "S_per_norm_actual": -2.079192171631958,
+        "S_per_shell": -1.9031009125762766,
+        "S_per_kissing_count": -7.154300968048458,
+        "S_per_TAX": -2.5729851823890764
+      }
+    },
+    {
+      "name": "HF chemical laser (2.7 \u03bcm)",
+      "category": "Mid-IR laser",
+      "real_ref": "Hydrogen fluoride laser, 2.6-3.0 \u03bcm",
+      "frequency_hz": 111000000000000.0,
+      "wavelength_m": 2.700832954954955e-06,
+      "wavelength_label": "2.701 \u03bcm",
+      "energy_eV": 0.4590591143585483,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 2.2506941291291292e-07,
+        "S_per_norm_sq_scaled": 2.2506941291291292e-07,
+        "S_per_norm_actual": 1.8005553033033034e-06,
+        "S_per_shell": 2.700832954954955e-06,
+        "S_per_kissing_count": 1.51459901018111e-11,
+        "S_per_TAX": 5.775817394472767e-07
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -6.647683521906354,
+        "S_per_norm_sq_scaled": -6.647683521906354,
+        "S_per_norm_actual": -5.7445935349144115,
+        "S_per_shell": -5.56850227585873,
+        "S_per_kissing_count": -10.81970233133091,
+        "S_per_TAX": -6.2383865456715295
+      }
+    },
+    {
+      "name": "1550 nm fiber comms",
+      "category": "Near-IR telecom",
+      "real_ref": "C-band DWDM, 1550 nm (zero-dispersion minimum of silica)",
+      "frequency_hz": 193400000000000.0,
+      "wavelength_m": 1.5501161220268872e-06,
+      "wavelength_label": "1.550 \u03bcm",
+      "energy_eV": 0.7998381325850744,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 1.291763435022406e-07,
+        "S_per_norm_sq_scaled": 1.291763435022406e-07,
+        "S_per_norm_actual": 1.0334107480179249e-06,
+        "S_per_shell": 1.5501161220268872e-06,
+        "S_per_kissing_count": 8.692889872290754e-12,
+        "S_per_TAX": 3.3149727548421775e-07
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -6.888817012866681,
+        "S_per_norm_sq_scaled": -6.888817012866681,
+        "S_per_norm_actual": -5.985727025874737,
+        "S_per_shell": -5.8096357668190555,
+        "S_per_kissing_count": -11.060835822291237,
+        "S_per_TAX": -6.479520036631855
+      }
+    },
+    {
+      "name": "Nd:YAG 1064 nm",
+      "category": "Near-IR laser",
+      "real_ref": "Nd:YAG laser, 1064 nm (fundamental)",
+      "frequency_hz": 281760000000000.0,
+      "wavelength_m": 1.063999354060193e-06,
+      "wavelength_label": "1.064 \u03bcm",
+      "energy_eV": 1.1652657302852665,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 8.866661283834942e-08,
+        "S_per_norm_sq_scaled": 8.866661283834942e-08,
+        "S_per_norm_actual": 7.093329027067954e-07,
+        "S_per_shell": 1.063999354060193e-06,
+        "S_per_kissing_count": 5.966797633805479e-12,
+        "S_per_TAX": 2.2753965459485986e-07
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -7.052239881742899,
+        "S_per_norm_sq_scaled": -7.052239881742899,
+        "S_per_norm_actual": -6.1491498947509555,
+        "S_per_shell": -5.973058635695274,
+        "S_per_kissing_count": -11.224258691167455,
+        "S_per_TAX": -6.6429429055080735
+      }
+    },
+    {
+      "name": "GaAs 850 nm (VCSEL)",
+      "category": "Near-IR laser",
+      "real_ref": "GaAs VCSEL, 850 nm (datacom)",
+      "frequency_hz": 352500000000000.0,
+      "wavelength_m": 8.504750581560283e-07,
+      "wavelength_label": "850.475 nm",
+      "energy_eV": 1.45782286316566,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 7.087292151300236e-08,
+        "S_per_norm_sq_scaled": 7.087292151300236e-08,
+        "S_per_norm_actual": 5.669833721040189e-07,
+        "S_per_shell": 8.504750581560283e-07,
+        "S_per_kissing_count": 4.76937560652775e-12,
+        "S_per_TAX": 1.8187680305999353e-07
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -7.149519664447115,
+        "S_per_norm_sq_scaled": -7.149519664447115,
+        "S_per_norm_actual": -6.246429677455171,
+        "S_per_shell": -6.07033841839949,
+        "S_per_kissing_count": -11.321538473871671,
+        "S_per_TAX": -6.74022268821229
+      }
+    },
+    {
+      "name": "HeNe 632.8 nm",
+      "category": "Visible laser",
+      "real_ref": "HeNe laser, 632.816 nm",
+      "frequency_hz": 473600000000000.0,
+      "wavelength_m": 6.330077238175676e-07,
+      "wavelength_label": "633.008 nm",
+      "energy_eV": 1.9586522212631396,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 5.275064365146397e-08,
+        "S_per_norm_sq_scaled": 5.275064365146397e-08,
+        "S_per_norm_actual": 4.2200514921171174e-07,
+        "S_per_shell": 6.330077238175676e-07,
+        "S_per_kissing_count": 3.5498414301119763e-12,
+        "S_per_TAX": 1.3537072018295548e-07
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -7.2777722368345605,
+        "S_per_norm_sq_scaled": -7.2777722368345605,
+        "S_per_norm_actual": -6.374682249842617,
+        "S_per_shell": -6.198590990786935,
+        "S_per_kissing_count": -11.449791046259117,
+        "S_per_TAX": -6.868475260599736
+      }
+    },
+    {
+      "name": "Na D2 (589.0 nm)",
+      "category": "Visible atomic",
+      "real_ref": "Sodium D2 resonance, 588.995 nm",
+      "frequency_hz": 508923000000000.0,
+      "wavelength_m": 5.89072331177801e-07,
+      "wavelength_label": "589.072 nm",
+      "energy_eV": 2.104736411321581,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 4.9089360931483415e-08,
+        "S_per_norm_sq_scaled": 4.9089360931483415e-08,
+        "S_per_norm_actual": 3.927148874518673e-07,
+        "S_per_shell": 5.89072331177801e-07,
+        "S_per_kissing_count": 3.3034563210957883e-12,
+        "S_per_TAX": 1.2597499637204e-07
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -7.309012621714286,
+        "S_per_norm_sq_scaled": -7.309012621714286,
+        "S_per_norm_actual": -6.405922634722343,
+        "S_per_shell": -6.229831375666661,
+        "S_per_kissing_count": -11.481031431138844,
+        "S_per_TAX": -6.8997156454794615
+      }
+    },
+    {
+      "name": "Hg green 546.1 nm",
+      "category": "Visible lamp",
+      "real_ref": "Mercury e-line, 546.074 nm",
+      "frequency_hz": 548700000000000.0,
+      "wavelength_m": 5.463686130854748e-07,
+      "wavelength_label": "546.369 nm",
+      "energy_eV": 2.2692408653021214,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 4.55307177571229e-08,
+        "S_per_norm_sq_scaled": 4.55307177571229e-08,
+        "S_per_norm_actual": 3.642457420569832e-07,
+        "S_per_shell": 5.463686130854748e-07,
+        "S_per_kissing_count": 3.0639783147458207e-12,
+        "S_per_TAX": 1.1684267009048245e-07
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -7.341695503315776,
+        "S_per_norm_sq_scaled": -7.341695503315776,
+        "S_per_norm_actual": -6.438605516323833,
+        "S_per_shell": -6.262514257268152,
+        "S_per_kissing_count": -11.513714312740333,
+        "S_per_TAX": -6.932398527080951
+      }
+    },
+    {
+      "name": "Hg blue 435.8 nm",
+      "category": "Visible lamp",
+      "real_ref": "Mercury g-line, 435.834 nm",
+      "frequency_hz": 687900000000000.0,
+      "wavelength_m": 4.3580819595871493e-07,
+      "wavelength_label": "435.808 nm",
+      "energy_eV": 2.8449258087139224,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 3.6317349663226244e-08,
+        "S_per_norm_sq_scaled": 3.6317349663226244e-08,
+        "S_per_norm_actual": 2.9053879730580995e-07,
+        "S_per_shell": 4.3580819595871493e-07,
+        "S_per_kissing_count": 2.4439670029088994e-12,
+        "S_per_TAX": 9.319897234866655e-08
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -7.439885852569299,
+        "S_per_norm_sq_scaled": -7.439885852569299,
+        "S_per_norm_actual": -6.536795865577355,
+        "S_per_shell": -6.360704606521674,
+        "S_per_kissing_count": -11.611904661993854,
+        "S_per_TAX": -7.030588876334473
+      }
+    },
+    {
+      "name": "H-beta (486.1 nm)",
+      "category": "Visible stellar",
+      "real_ref": "Hydrogen Balmer-beta, 486.133 nm",
+      "frequency_hz": 616700000000000.0,
+      "wavelength_m": 4.86123654937571e-07,
+      "wavelength_label": "486.124 nm",
+      "energy_eV": 2.550466268692944,
+      "substrate_hamming_weight": 16,
+      "substrate_norm_sq_scaled": 16,
+      "substrate_shell_index": 2,
+      "substrate_kissing_count": 196536,
+      "substrate_TAX": 6.234806886472431,
+      "substrate_NRCI": 0.6159605143398686,
+      "scale_factors": {
+        "S_per_Hamming_radius": 3.0382728433598185e-08,
+        "S_per_norm_sq_scaled": 3.0382728433598185e-08,
+        "S_per_norm_actual": 2.430618274687855e-07,
+        "S_per_shell": 2.430618274687855e-07,
+        "S_per_kissing_count": 2.473458577245751e-12,
+        "S_per_TAX": 7.796932026753006e-08
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -7.517373228154302,
+        "S_per_norm_sq_scaled": -7.517373228154302,
+        "S_per_norm_actual": -6.614283241162358,
+        "S_per_shell": -6.614283241162358,
+        "S_per_kissing_count": -11.606695358323543,
+        "S_per_TAX": -7.108076251919477
+      }
+    },
+    {
+      "name": "H-alpha (656.3 nm)",
+      "category": "Visible stellar",
+      "real_ref": "Hydrogen Balmer-alpha, 656.281 nm",
+      "frequency_hz": 456800000000000.0,
+      "wavelength_m": 6.562882180385289e-07,
+      "wavelength_label": "656.288 nm",
+      "energy_eV": 1.889173003954819,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 5.4690684836544074e-08,
+        "S_per_norm_sq_scaled": 5.4690684836544074e-08,
+        "S_per_norm_actual": 4.375254786923526e-07,
+        "S_per_shell": 6.562882180385289e-07,
+        "S_per_kissing_count": 3.680396018609965e-12,
+        "S_per_TAX": 1.403493281056211e-07
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -7.262086638357489,
+        "S_per_norm_sq_scaled": -7.262086638357489,
+        "S_per_norm_actual": -6.358996651365545,
+        "S_per_shell": -6.1829053923098645,
+        "S_per_kissing_count": -11.434105447782045,
+        "S_per_TAX": -6.852789662122664
+      }
+    },
+    {
+      "name": "Ca K (393.4 nm)",
+      "category": "UV stellar",
+      "real_ref": "Calcium K-line (solar), 393.366 nm",
+      "frequency_hz": 762100000000000.0,
+      "wavelength_m": 3.9337679832043036e-07,
+      "wavelength_label": "393.377 nm",
+      "energy_eV": 3.151792351825673,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 3.278139986003586e-08,
+        "S_per_norm_sq_scaled": 3.278139986003586e-08,
+        "S_per_norm_actual": 2.622511988802869e-07,
+        "S_per_shell": 3.9337679832043036e-07,
+        "S_per_kissing_count": 2.2060161413213904e-12,
+        "S_per_TAX": 8.412488266454234e-08
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -7.484372504746356,
+        "S_per_norm_sq_scaled": -7.484372504746356,
+        "S_per_norm_actual": -6.5812825177544125,
+        "S_per_shell": -6.405191258698731,
+        "S_per_kissing_count": -11.656391314170913,
+        "S_per_TAX": -7.0750755285115305
+      }
+    },
+    {
+      "name": "Mg II h (280.3 nm)",
+      "category": "UV stellar",
+      "real_ref": "Magnesium II h resonance, 280.270 nm",
+      "frequency_hz": 1069000000000000.0,
+      "wavelength_m": 2.804419625818522e-07,
+      "wavelength_label": "280.442 nm",
+      "energy_eV": 4.421028768011605,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 2.3370163548487684e-08,
+        "S_per_norm_sq_scaled": 2.3370163548487684e-08,
+        "S_per_norm_actual": 1.8696130838790147e-07,
+        "S_per_shell": 2.804419625818522e-07,
+        "S_per_kissing_count": 1.5726893370449316e-12,
+        "S_per_TAX": 5.997340793138234e-08
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -7.6313382483284755,
+        "S_per_norm_sq_scaled": -7.6313382483284755,
+        "S_per_norm_actual": -6.728248261336532,
+        "S_per_shell": -6.55215700228085,
+        "S_per_kissing_count": -11.803357057753031,
+        "S_per_TAX": -7.222041272093651
+      }
+    },
+    {
+      "name": "Lyman-alpha (121.6 nm)",
+      "category": "UV stellar",
+      "real_ref": "Hydrogen Lyman-alpha, 121.567 nm (strongest UV line)",
+      "frequency_hz": 2466000000000000.0,
+      "wavelength_m": 1.215703398215734e-07,
+      "wavelength_label": "121.570 nm",
+      "energy_eV": 10.198556540614236,
+      "substrate_hamming_weight": 16,
+      "substrate_norm_sq_scaled": 16,
+      "substrate_shell_index": 2,
+      "substrate_kissing_count": 196536,
+      "substrate_TAX": 6.234806886472431,
+      "substrate_NRCI": 0.6159605143398686,
+      "scale_factors": {
+        "S_per_Hamming_radius": 7.598146238848337e-09,
+        "S_per_norm_sq_scaled": 7.598146238848337e-09,
+        "S_per_norm_actual": 6.07851699107867e-08,
+        "S_per_shell": 6.07851699107867e-08,
+        "S_per_kissing_count": 6.185652492244342e-13,
+        "S_per_TAX": 1.9498653612727408e-08
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -8.11929235198771,
+        "S_per_norm_sq_scaled": -8.11929235198771,
+        "S_per_norm_actual": -7.216202364995766,
+        "S_per_shell": -7.216202364995766,
+        "S_per_kissing_count": -12.208614482156952,
+        "S_per_TAX": -7.709995375752885
+      }
+    },
+    {
+      "name": "He II 30.4 nm (EUV)",
+      "category": "EUV solar",
+      "real_ref": "Helium II resonance, 30.378 nm (solar imaging)",
+      "frequency_hz": 9860000000000000.0,
+      "wavelength_m": 3.0404914604462476e-08,
+      "wavelength_label": "30.405 nm",
+      "energy_eV": 40.77768349166925,
+      "substrate_hamming_weight": 16,
+      "substrate_norm_sq_scaled": 16,
+      "substrate_shell_index": 2,
+      "substrate_kissing_count": 196536,
+      "substrate_TAX": 6.234806886472431,
+      "substrate_NRCI": 0.6159605143398686,
+      "scale_factors": {
+        "S_per_Hamming_radius": 1.9003071627789048e-09,
+        "S_per_norm_sq_scaled": 1.9003071627789048e-09,
+        "S_per_norm_actual": 1.5202457302231238e-08,
+        "S_per_shell": 1.5202457302231238e-08,
+        "S_per_kissing_count": 1.5470404711840312e-13,
+        "S_per_TAX": 4.8766409542581936e-09
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -8.721176194669209,
+        "S_per_norm_sq_scaled": -8.721176194669209,
+        "S_per_norm_actual": -7.818086207677265,
+        "S_per_shell": -7.818086207677265,
+        "S_per_kissing_count": -12.81049832483845,
+        "S_per_TAX": -8.311879218434383
+      }
+    },
+    {
+      "name": "Fe XV 28.4 nm (EUV)",
+      "category": "EUV solar",
+      "real_ref": "Iron XV coronal line, 28.415 nm",
+      "frequency_hz": 1.055e+16,
+      "wavelength_m": 2.841634672985782e-08,
+      "wavelength_label": "28.416 nm",
+      "energy_eV": 43.631294202546705,
+      "substrate_hamming_weight": 16,
+      "substrate_norm_sq_scaled": 16,
+      "substrate_shell_index": 2,
+      "substrate_kissing_count": 196536,
+      "substrate_TAX": 6.234806886472431,
+      "substrate_NRCI": 0.6159605143398686,
+      "scale_factors": {
+        "S_per_Hamming_radius": 1.7760216706161137e-09,
+        "S_per_norm_sq_scaled": 1.7760216706161137e-09,
+        "S_per_norm_actual": 1.420817336492891e-08,
+        "S_per_shell": 1.420817336492891e-08,
+        "S_per_kissing_count": 1.4458596252013787e-13,
+        "S_per_TAX": 4.557694768624246e-09
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -8.75055173936171,
+        "S_per_norm_sq_scaled": -8.75055173936171,
+        "S_per_norm_actual": -7.847461752369765,
+        "S_per_shell": -7.847461752369765,
+        "S_per_kissing_count": -12.839873869530951,
+        "S_per_TAX": -8.341254763126884
+      }
+    },
+    {
+      "name": "Al K-alpha (1.49 keV)",
+      "category": "Soft X-ray",
+      "real_ref": "Aluminum K-alpha fluorescence, 8.34 angstrom",
+      "frequency_hz": 3.6e+17,
+      "wavelength_m": 8.327568277777778e-10,
+      "wavelength_label": "832.757 pm",
+      "energy_eV": 1488.8403708925891,
+      "substrate_hamming_weight": 16,
+      "substrate_norm_sq_scaled": 16,
+      "substrate_shell_index": 2,
+      "substrate_kissing_count": 196536,
+      "substrate_TAX": 6.234806886472431,
+      "substrate_NRCI": 0.6159605143398686,
+      "scale_factors": {
+        "S_per_Hamming_radius": 5.204730173611111e-11,
+        "S_per_norm_sq_scaled": 5.204730173611111e-11,
+        "S_per_norm_actual": 4.163784138888889e-10,
+        "S_per_shell": 4.163784138888889e-10,
+        "S_per_kissing_count": 4.237171957187375e-15,
+        "S_per_TAX": 1.3356577724718276e-10
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -10.283601780495285,
+        "S_per_norm_sq_scaled": -10.283601780495285,
+        "S_per_norm_actual": -9.380511793503342,
+        "S_per_shell": -9.380511793503342,
+        "S_per_kissing_count": -14.372923910664527,
+        "S_per_TAX": -9.87430480426046
+      }
+    },
+    {
+      "name": "Cu K-alpha (8.04 keV)",
+      "category": "X-ray",
+      "real_ref": "Copper K-alpha, 1.541 angstrom (XRD standard)",
+      "frequency_hz": 1.946e+18,
+      "wavelength_m": 1.5405573381294964e-10,
+      "wavelength_label": "154.056 pm",
+      "energy_eV": 8048.009338213829,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 1.2837977817745803e-11,
+        "S_per_norm_sq_scaled": 1.2837977817745803e-11,
+        "S_per_norm_actual": 1.0270382254196642e-10,
+        "S_per_shell": 1.5405573381294964e-10,
+        "S_per_kissing_count": 8.639285207096772e-16,
+        "S_per_TAX": 3.294530990680766e-11
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -10.89150337905203,
+        "S_per_norm_sq_scaled": -10.89150337905203,
+        "S_per_norm_actual": -9.988413392060087,
+        "S_per_shell": -9.812322133004406,
+        "S_per_kissing_count": -15.063522188476586,
+        "S_per_TAX": -10.482206402817205
+      }
+    },
+    {
+      "name": "Mo K-alpha (17.5 keV)",
+      "category": "Hard X-ray",
+      "real_ref": "Molybdenum K-alpha, 0.7107 angstrom (medical X-ray)",
+      "frequency_hz": 4.23e+18,
+      "wavelength_m": 7.087292151300237e-11,
+      "wavelength_label": "70.873 pm",
+      "energy_eV": 17493.874357987923,
+      "substrate_hamming_weight": 16,
+      "substrate_norm_sq_scaled": 16,
+      "substrate_shell_index": 2,
+      "substrate_kissing_count": 196536,
+      "substrate_TAX": 6.234806886472431,
+      "substrate_NRCI": 0.6159605143398686,
+      "scale_factors": {
+        "S_per_Hamming_radius": 4.429557594562648e-12,
+        "S_per_norm_sq_scaled": 4.429557594562648e-12,
+        "S_per_norm_actual": 3.5436460756501184e-11,
+        "S_per_shell": 3.5436460756501184e-11,
+        "S_per_kissing_count": 3.606103793350957e-16,
+        "S_per_TAX": 1.1367300191249596e-11
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -11.353639647103039,
+        "S_per_norm_sq_scaled": -11.353639647103039,
+        "S_per_norm_actual": -10.450549660111095,
+        "S_per_shell": -10.450549660111095,
+        "S_per_kissing_count": -15.44296177727228,
+        "S_per_TAX": -10.944342670868215
+      }
+    },
+    {
+      "name": "Annihilation (511 keV)",
+      "category": "Gamma",
+      "real_ref": "Positron annihilation, 511 keV (e+e- \u2192 2\u03b3)",
+      "frequency_hz": 1.236e+20,
+      "wavelength_m": 2.4255053236245953e-12,
+      "wavelength_label": "2.426 pm",
+      "energy_eV": 511168.52733978897,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 2.0212544363538294e-13,
+        "S_per_norm_sq_scaled": 2.0212544363538294e-13,
+        "S_per_norm_actual": 1.6170035490830635e-12,
+        "S_per_shell": 2.4255053236245953e-12,
+        "S_per_kissing_count": 1.3601981402111908e-17,
+        "S_per_TAX": 5.187020475618747e-13
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -12.694379013872494,
+        "S_per_norm_sq_scaled": -12.694379013872494,
+        "S_per_norm_actual": -11.79128902688055,
+        "S_per_shell": -11.615197767824869,
+        "S_per_kissing_count": -16.86639782329705,
+        "S_per_TAX": -12.28508203763767
+      }
+    },
+    {
+      "name": "Cs-137 gamma (662 keV)",
+      "category": "Gamma nuclear",
+      "real_ref": "Cs-137 decay line, 661.7 keV (Ba-137m)",
+      "frequency_hz": 1.602e+20,
+      "wavelength_m": 1.8713636579275906e-12,
+      "wavelength_label": "1.871 pm",
+      "energy_eV": 662533.9650472022,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 1.559469714939659e-13,
+        "S_per_norm_sq_scaled": 1.559469714939659e-13,
+        "S_per_norm_actual": 1.2475757719517272e-12,
+        "S_per_shell": 1.8713636579275906e-12,
+        "S_per_kissing_count": 1.049441261735975e-17,
+        "S_per_TAX": 4.001970853848172e-13
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -12.807023054867916,
+        "S_per_norm_sq_scaled": -12.807023054867916,
+        "S_per_norm_actual": -11.903933067875972,
+        "S_per_shell": -11.72784180882029,
+        "S_per_kissing_count": -16.979041864292473,
+        "S_per_TAX": -12.397726078633092
+      }
+    },
+    {
+      "name": "Co-60 gamma (1.33 MeV)",
+      "category": "Gamma nuclear",
+      "real_ref": "Cobalt-60 decay line, 1.3325 MeV",
+      "frequency_hz": 3.22e+20,
+      "wavelength_m": 9.310324782608695e-13,
+      "wavelength_label": "931.032 fm",
+      "energy_eV": 1331684.9984094824,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 7.758603985507246e-14,
+        "S_per_norm_sq_scaled": 7.758603985507246e-14,
+        "S_per_norm_actual": 6.206883188405797e-13,
+        "S_per_shell": 9.310324782608695e-13,
+        "S_per_kissing_count": 5.221133233854136e-18,
+        "S_per_TAX": 1.9910426421940284e-13
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -13.110216414815529,
+        "S_per_norm_sq_scaled": -13.110216414815529,
+        "S_per_norm_actual": -12.207126427823585,
+        "S_per_shell": -12.031035168767904,
+        "S_per_kissing_count": -17.282235224240086,
+        "S_per_TAX": -12.700919438580703
+      }
+    },
+    {
+      "name": "26Al decay (1.81 MeV)",
+      "category": "Gamma astrophysical",
+      "real_ref": "Aluminum-26 decay, 1.809 MeV (Milky Way mapping)",
+      "frequency_hz": 4.38e+20,
+      "wavelength_m": 6.844576666666666e-13,
+      "wavelength_label": "684.458 fm",
+      "energy_eV": 1811422.4512526502,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 5.703813888888888e-14,
+        "S_per_norm_sq_scaled": 5.703813888888888e-14,
+        "S_per_norm_actual": 4.56305111111111e-13,
+        "S_per_shell": 6.844576666666666e-13,
+        "S_per_kissing_count": 3.8383673545685656e-18,
+        "S_per_TAX": 1.4637345451746053e-13
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -13.243834653623797,
+        "S_per_norm_sq_scaled": -13.243834653623797,
+        "S_per_norm_actual": -12.340744666631853,
+        "S_per_shell": -12.164653407576171,
+        "S_per_kissing_count": -17.415853463048354,
+        "S_per_TAX": -12.834537677388973
+      }
+    },
+    {
+      "name": "Pair-production threshold",
+      "category": "Gamma threshold",
+      "real_ref": "1.022 MeV = 2\u00d7 electron rest mass",
+      "frequency_hz": 2.472e+20,
+      "wavelength_m": 1.2127526618122976e-12,
+      "wavelength_label": "1.213 pm",
+      "energy_eV": 1022337.0546795779,
+      "substrate_hamming_weight": 12,
+      "substrate_norm_sq_scaled": 12,
+      "substrate_shell_index": 1,
+      "substrate_kissing_count": 178320,
+      "substrate_TAX": 4.676105164854324,
+      "substrate_NRCI": 0.6813796908424689,
+      "scale_factors": {
+        "S_per_Hamming_radius": 1.0106272181769147e-13,
+        "S_per_norm_sq_scaled": 1.0106272181769147e-13,
+        "S_per_norm_actual": 8.085017745415318e-13,
+        "S_per_shell": 1.2127526618122976e-12,
+        "S_per_kissing_count": 6.800990701055954e-18,
+        "S_per_TAX": 2.5935102378093736e-13
+      },
+      "log10_scale_factors": {
+        "S_per_Hamming_radius": -12.995409009536475,
+        "S_per_norm_sq_scaled": -12.995409009536475,
+        "S_per_norm_actual": -12.092319022544531,
+        "S_per_shell": -11.91622776348885,
+        "S_per_kissing_count": -17.16742781896103,
+        "S_per_TAX": -12.586112033301651
+      }
+    }
+  ],
+  "scale_consistency_test": {
+    "S_per_Hamming_radius": {
+      "n_samples": 48,
+      "log10_min": -13.243834653623797,
+      "log10_max": 5.391887127991211,
+      "log10_range": 18.635721781615008,
+      "variation_factor": 4.3223684210526254e+18,
+      "verdict": "STRONGLY VARYING: S varies by > 1000x across 48 samples",
+      "within_hw_consistency": {
+        "16": {
+          "n_samples": 11,
+          "log_range": 16.74552677509425,
+          "verdict": "VARIES within HW (true dispersion)"
+        },
+        "12": {
+          "n_samples": 30,
+          "log_range": 16.6414741105041,
+          "verdict": "VARIES within HW (true dispersion)"
+        },
+        "8": {
+          "n_samples": 7,
+          "log_range": 4.0712134324574025,
+          "verdict": "VARIES within HW (true dispersion)"
+        }
+      }
+    },
+    "S_per_norm_sq_scaled": {
+      "n_samples": 48,
+      "log10_min": -13.243834653623797,
+      "log10_max": 5.391887127991211,
+      "log10_range": 18.635721781615008,
+      "variation_factor": 4.3223684210526254e+18,
+      "verdict": "STRONGLY VARYING: S varies by > 1000x across 48 samples",
+      "within_hw_consistency": {
+        "16": {
+          "n_samples": 11,
+          "log_range": 16.74552677509425,
+          "verdict": "VARIES within HW (true dispersion)"
+        },
+        "12": {
+          "n_samples": 30,
+          "log_range": 16.6414741105041,
+          "verdict": "VARIES within HW (true dispersion)"
+        },
+        "8": {
+          "n_samples": 7,
+          "log_range": 4.0712134324574025,
+          "verdict": "VARIES within HW (true dispersion)"
+        }
+      }
+    },
+    "S_per_norm_actual": {
+      "n_samples": 48,
+      "log10_min": -12.340744666631853,
+      "log10_max": 6.294977114983155,
+      "log10_range": 18.635721781615008,
+      "variation_factor": 4.3223684210526254e+18,
+      "verdict": "STRONGLY VARYING: S varies by > 1000x across 48 samples",
+      "within_hw_consistency": {
+        "16": {
+          "n_samples": 11,
+          "log_range": 16.74552677509425,
+          "verdict": "VARIES within HW (true dispersion)"
+        },
+        "12": {
+          "n_samples": 30,
+          "log_range": 16.6414741105041,
+          "verdict": "VARIES within HW (true dispersion)"
+        },
+        "8": {
+          "n_samples": 7,
+          "log_range": 4.0712134324574025,
+          "verdict": "VARIES within HW (true dispersion)"
+        }
+      }
+    },
+    "S_per_shell": {
+      "n_samples": 48,
+      "log10_min": -12.164653407576171,
+      "log10_max": 6.294977114983155,
+      "log10_range": 18.459630522559326,
+      "variation_factor": 2.881578947368416e+18,
+      "verdict": "STRONGLY VARYING: S varies by > 1000x across 48 samples",
+      "within_hw_consistency": {
+        "16": {
+          "n_samples": 11,
+          "log_range": 16.74552677509425,
+          "verdict": "VARIES within HW (true dispersion)"
+        },
+        "12": {
+          "n_samples": 30,
+          "log_range": 16.6414741105041,
+          "verdict": "VARIES within HW (true dispersion)"
+        },
+        "8": {
+          "n_samples": 7,
+          "log_range": 4.0712134324574025,
+          "verdict": "VARIES within HW (true dispersion)"
+        }
+      }
+    },
+    "S_per_kissing_count": {
+      "n_samples": 48,
+      "log10_min": -17.415853463048354,
+      "log10_max": 1.3025649978219696,
+      "log10_range": 18.718418460870325,
+      "variation_factor": 5.228997821210761e+18,
+      "verdict": "STRONGLY VARYING: S varies by > 1000x across 48 samples",
+      "within_hw_consistency": {
+        "16": {
+          "n_samples": 11,
+          "log_range": 16.745526775094252,
+          "verdict": "VARIES within HW (true dispersion)"
+        },
+        "12": {
+          "n_samples": 30,
+          "log_range": 16.6414741105041,
+          "verdict": "VARIES within HW (true dispersion)"
+        },
+        "8": {
+          "n_samples": 7,
+          "log_range": 4.0712134324574025,
+          "verdict": "VARIES within HW (true dispersion)"
+        }
+      }
+    },
+    "S_per_TAX": {
+      "n_samples": 48,
+      "log10_min": -12.834537677388973,
+      "log10_max": 5.801184104226037,
+      "log10_range": 18.63572178161501,
+      "variation_factor": 4.3223684210526607e+18,
+      "verdict": "STRONGLY VARYING: S varies by > 1000x across 48 samples",
+      "within_hw_consistency": {
+        "16": {
+          "n_samples": 11,
+          "log_range": 16.745526775094252,
+          "verdict": "VARIES within HW (true dispersion)"
+        },
+        "12": {
+          "n_samples": 30,
+          "log_range": 16.6414741105041,
+          "verdict": "VARIES within HW (true dispersion)"
+        },
+        "8": {
+          "n_samples": 7,
+          "log_range": 4.071213432457403,
+          "verdict": "VARIES within HW (true dispersion)"
+        }
+      }
+    }
+  },
+  "anchor_comparison": {
+    "anchors": {
+      "anchor_1_v_UBP_0_339c": {
+        "value_SI": 101629643.26200001,
+        "units": "m/s",
+        "description": "v_UBP = 0.339c (light/)",
+        "matches_quantity": "velocity"
+      },
+      "anchor_2_tick_2_10fs": {
+        "value_SI": 2.1e-15,
+        "units": "s",
+        "description": "tick = 2.10 fs (data_object/)",
+        "matches_quantity": "time"
+      },
+      "anchor_3_cell_17um": {
+        "value_SI": 1.7e-05,
+        "units": "m",
+        "description": "cell = 17.0 \u03bcm (data_object/)",
+        "matches_quantity": "length"
+      },
+      "anchor_4_190kJ_per_mol": {
+        "value_SI": 3.1550242276303086e-19,
+        "units": "J",
+        "description": "190 kJ/mol per work unit (data_object/)",
+        "matches_quantity": "energy"
+      },
+      "anchor_5_e_per_12": {
+        "value_SI": 1.335147195e-20,
+        "units": "C",
+        "description": "e/12 per vertex step (light/)",
+        "matches_quantity": "charge"
+      }
+    },
+    "comparisons_by_scale_measure": {
+      "S_per_Hamming_radius": {
+        "units": "m per Hamming-radius-unit",
+        "n_samples": 48,
+        "tick_if_v_is_c": {
+          "mean_fs": 17325163849.100636,
+          "min_fs": 1.9025875190258752e-07,
+          "max_fs": 822368421052.6316,
+          "near_2_10fs_anchor_within_10pct": false
+        },
+        "v_implied_if_tick_is_2_10fs": {
+          "mean_over_c": 8250078023.381256,
+          "min_over_c": 9.059940566789881e-08,
+          "max_over_c": 391604010025.0627,
+          "near_0_339c_anchor_within_10pct": true
+        },
+        "E_per_substrate_unit_vs_190kJ": {
+          "mean_ratio": 682082.4177804381,
+          "min_ratio": 2.553800136251796e-12,
+          "max_ratio": 11038465.062614672,
+          "near_1_within_10pct": false
+        },
+        "anti_numerology_note": "We report ALL 48 samples for this measure. Matches to anchors are noted, but the 48 samples span a wide range, so any single match could be coincidence."
+      },
+      "S_per_norm_sq_scaled": {
+        "units": "m per norm\u00b2-scaled-unit",
+        "n_samples": 48,
+        "tick_if_v_is_c": {
+          "mean_fs": 17325163849.100636,
+          "min_fs": 1.9025875190258752e-07,
+          "max_fs": 822368421052.6316,
+          "near_2_10fs_anchor_within_10pct": false
+        },
+        "v_implied_if_tick_is_2_10fs": {
+          "mean_over_c": 8250078023.381256,
+          "min_over_c": 9.059940566789881e-08,
+          "max_over_c": 391604010025.0627,
+          "near_0_339c_anchor_within_10pct": true
+        },
+        "E_per_substrate_unit_vs_190kJ": {
+          "mean_ratio": 682082.4177804381,
+          "min_ratio": 2.553800136251796e-12,
+          "max_ratio": 11038465.062614672,
+          "near_1_within_10pct": false
+        },
+        "anti_numerology_note": "We report ALL 48 samples for this measure. Matches to anchors are noted, but the 48 samples span a wide range, so any single match could be coincidence."
+      },
+      "S_per_norm_actual": {
+        "units": "m per norm-actual-unit",
+        "n_samples": 48,
+        "tick_if_v_is_c": {
+          "mean_fs": 138601310792.80508,
+          "min_fs": 1.5220700152207001e-06,
+          "max_fs": 6578947368421.053,
+          "near_2_10fs_anchor_within_10pct": true
+        },
+        "v_implied_if_tick_is_2_10fs": {
+          "mean_over_c": 66000624187.05005,
+          "min_over_c": 7.247952453431905e-07,
+          "max_over_c": 3132832080200.5015,
+          "near_0_339c_anchor_within_10pct": false
+        },
+        "E_per_substrate_unit_vs_190kJ": {
+          "mean_ratio": 85260.30222255476,
+          "min_ratio": 3.192250170314745e-13,
+          "max_ratio": 1379808.132826834,
+          "near_1_within_10pct": false
+        },
+        "anti_numerology_note": "We report ALL 48 samples for this measure. Matches to anchors are noted, but the 48 samples span a wide range, so any single match could be coincidence."
+      },
+      "S_per_shell": {
+        "units": "m per shell",
+        "n_samples": 48,
+        "tick_if_v_is_c": {
+          "mean_fs": 139365977815.58713,
+          "min_fs": 2.2831050228310503e-06,
+          "max_fs": 6578947368421.053,
+          "near_2_10fs_anchor_within_10pct": true
+        },
+        "v_implied_if_tick_is_2_10fs": {
+          "mean_over_c": 66364751340.755775,
+          "min_over_c": 1.0871928680147857e-06,
+          "max_over_c": 3132832080200.5015,
+          "near_0_339c_anchor_within_10pct": false
+        },
+        "E_per_substrate_unit_vs_190kJ": {
+          "mean_ratio": 56974.772664412645,
+          "min_ratio": 3.192250170314745e-13,
+          "max_ratio": 919872.0885512226,
+          "near_1_within_10pct": true
+        },
+        "anti_numerology_note": "We report ALL 48 samples for this measure. Matches to anchors are noted, but the 48 samples span a wide range, so any single match could be coincidence."
+      },
+      "S_per_kissing_count": {
+        "units": "m per kissing-count",
+        "n_samples": 48,
+        "tick_if_v_is_c": {
+          "mean_fs": 1407743.5350272178,
+          "min_fs": 1.280341533664788e-11,
+          "max_fs": 66949030.899387926,
+          "near_2_10fs_anchor_within_10pct": true
+        },
+        "v_implied_if_tick_is_2_10fs": {
+          "mean_over_c": 670354.064298675,
+          "min_over_c": 6.0968644460228006e-12,
+          "max_over_c": 31880490.904470444,
+          "near_0_339c_anchor_within_10pct": false
+        },
+        "E_per_substrate_unit_vs_190kJ": {
+          "mean_ratio": 10127423407.94319,
+          "min_ratio": 3.136960397364893e-08,
+          "max_ratio": 164031590830.454,
+          "near_1_within_10pct": true
+        },
+        "anti_numerology_note": "We report ALL 48 samples for this measure. Matches to anchors are noted, but the 48 samples span a wide range, so any single match could be coincidence."
+      },
+      "S_per_TAX": {
+        "units": "m per TAX-unit",
+        "n_samples": 48,
+        "tick_if_v_is_c": {
+          "mean_fs": 44460498397.64126,
+          "min_fs": 4.882492891714458e-07,
+          "max_fs": 2110393309116.0525,
+          "near_2_10fs_anchor_within_10pct": true
+        },
+        "v_implied_if_tick_is_2_10fs": {
+          "mean_over_c": 21171665903.63869,
+          "min_over_c": 2.3249966151021232e-07,
+          "max_over_c": 1004949194817.1678,
+          "near_0_339c_anchor_within_10pct": true
+        },
+        "E_per_substrate_unit_vs_190kJ": {
+          "mean_ratio": 265790.7597199526,
+          "min_ratio": 9.951531672610582e-13,
+          "max_ratio": 4301418.624279706,
+          "near_1_within_10pct": true
+        },
+        "anti_numerology_note": "We report ALL 48 samples for this measure. Matches to anchors are noted, but the 48 samples span a wide range, so any single match could be coincidence."
+      }
+    },
+    "summary": "For each of 6 scale measures, we computed the implied tick (if v=c), the implied velocity (if tick=2.10fs), and the implied energy per substrate-unit, for all wavelengths. We then checked whether ANY sample matched an anchor within 10%. Results are reported fully; no cherry-picking."
+  }
+}

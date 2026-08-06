@@ -1,0 +1,298 @@
+{
+  "experiment": "UBP EM Propagation Calibration v2",
+  "date": "2026-08-06",
+  "engine": "GMHGL/ubp_unified_v5.py (verified v5.4.1)",
+  "decoder_patch": "Lean-verified complete decoder (leech_lattice/RequestProject/Decoder.lean)",
+  "tick_model": "Substrate relaxation events (TAX-minimizing snaps)",
+  "user_requests_addressed": {
+    "1_use_verified_engine": true,
+    "2_no_lattice_hops_use_relaxation": true,
+    "3_test_optical_photon": true,
+    "4_verify_aristotle_01_with_Lean": true
+  },
+  "lean_verification_of_engine_bug": {
+    "lean_theorem_substrate_snap_fails": {
+      "input_15_legacy_result_is_codeword": false,
+      "input_15_legacy_bug_exposed": true,
+      "input_15_patched_result_is_codeword": true,
+      "input_15_patched_anchor_distance": 4,
+      "lean_says": "legacySnap 15 = 15 \u2227 \u00ac IsGolay 15  (input 15 is non-codeword under legacy)",
+      "patched_says": "decode(15) is a codeword at distance 4"
+    },
+    "broader_test_cases": [
+      {
+        "input": 15,
+        "legacy_is_codeword": false,
+        "patched_is_codeword": true,
+        "legacy_bug_exposed": true
+      },
+      {
+        "input": 23,
+        "legacy_is_codeword": false,
+        "patched_is_codeword": true,
+        "legacy_bug_exposed": true
+      },
+      {
+        "input": 39,
+        "legacy_is_codeword": false,
+        "patched_is_codeword": true,
+        "legacy_bug_exposed": true
+      },
+      {
+        "input": 71,
+        "legacy_is_codeword": false,
+        "patched_is_codeword": true,
+        "legacy_bug_exposed": true
+      },
+      {
+        "input": 100,
+        "legacy_is_codeword": true,
+        "patched_is_codeword": true,
+        "legacy_bug_exposed": false
+      },
+      {
+        "input": 1000,
+        "legacy_is_codeword": false,
+        "patched_is_codeword": true,
+        "legacy_bug_exposed": true
+      },
+      {
+        "input": 1000033,
+        "legacy_is_codeword": true,
+        "patched_is_codeword": true,
+        "legacy_bug_exposed": false
+      },
+      {
+        "input": 1000037,
+        "legacy_is_codeword": true,
+        "patched_is_codeword": true,
+        "legacy_bug_exposed": false
+      }
+    ],
+    "patch_summary": {
+      "legacy_engine_corrects_weights": "0, 1, 2, 3 (2,325 cosets)",
+      "patched_engine_corrects_weights": "0, 1, 2, 3, 4 (all 4,096 cosets)",
+      "fraction_of_inputs_legacy_fails": "1,771 / 4,096 = 43.2%",
+      "lean_theorem": "decode_isGolay (always returns a codeword)"
+    }
+  },
+  "ubp_physics_constants": {
+    "Y": 0.26467543040452696,
+    "MONAD": 13.817580227176494,
+    "WOBBLE": 0.8175802271764945,
+    "L": 0.06289078670588419,
+    "gamma_MONAD_over_13": 1.062890786705884,
+    "v_over_c_from_MONAD": 0.3388776987747419,
+    "formula": "v/c = sqrt(1 - (13/MONAD)^2), MONAD = pi*phi*e"
+  },
+  "existing_anchors": {
+    "anchor_1_light_v": {
+      "v_UBP_over_c": 0.339,
+      "v_UBP_m_per_s": 101629643.26200001,
+      "source": "light/aristotle_01/substrate_lightspeed.py:298",
+      "formula": "sqrt(1 - (13/MONAD)^2) where MONAD = pi*phi*e"
+    },
+    "anchor_2_data_tick": {
+      "tick_s": 2.1e-15,
+      "tick_fs": 2.0999999999999996,
+      "source": "data_object/enc04 (molecular vibration timescale)"
+    },
+    "anchor_3_data_cell": {
+      "cell_m": 1.7e-05,
+      "cell_um": 17.0,
+      "source": "data_object/enc04"
+    },
+    "anchor_4_data_energy": {
+      "energy_kJ_per_mol": 190.0,
+      "energy_J_per_mol": 190000.0,
+      "source": "data_object/enc04 (Br-Br bond energy)"
+    }
+  },
+  "anchor_consistency": {
+    "v_cell_from_anchors_2_3": {
+      "v_cell_m_per_s": 8095238095.238096,
+      "v_cell_over_c": 27.002807706517075,
+      "verdict": "v_cell = 17um/2.10fs = 27.0c, which is 79.7x larger than anchor 1 (0.339c). The 80x discrepancy is the calibration gap."
+    },
+    "reconciliation_if_cell_is_N_hops": {
+      "N_hops_per_cell_if_v_UBP_is_0_339c": 79.6543000192244,
+      "N_hops_per_cell_if_v_UBP_is_c": 27.002807706517075,
+      "verdict": "If v_UBP = 0.339c (anchor 1) and cell = 17 um (anchor 3) and tick = 2.10 fs (anchor 2), then cell = 79.7 hops. If v_UBP = c (this experiment), cell = 27.0 hops."
+    }
+  },
+  "cs_photon": {
+    "encoding": {
+      "frequency_hz": 9192631770.0,
+      "wavelength_m": 0.03261225571749406,
+      "wavelength_nm": 32612255.717494056,
+      "energy_J": 6.091102297113866e-24,
+      "energy_eV": 3.8017670260905e-05,
+      "period_s": 1.0878277570776665e-10,
+      "period_fs": 108782.77570776665,
+      "msg12_int": 3598,
+      "domain": 3,
+      "volume_raw": 1,
+      "compactness_raw": 11,
+      "gray_volume": 1,
+      "gray_compactness": 14,
+      "codeword_int": 14740178,
+      "codeword_hex": "0x111000001110101011010010",
+      "hamming_weight": 12,
+      "is_golay_codeword": true,
+      "mog_rows": {
+        "reality_R": 18,
+        "info_I": 43,
+        "activation_A": 14,
+        "potential_P": 56
+      },
+      "msg12_bits": "111000001110"
+    },
+    "relaxation_summary": {
+      "converged": true,
+      "convergence_reason": "reached_vacuum",
+      "tick_count": 2,
+      "tax_trajectory_length": 3,
+      "initial_tax": 4.676105164854324,
+      "final_tax": 0.0,
+      "initial_nrci": 0.6813796908424689,
+      "final_nrci": 1.0,
+      "transition_distance_distribution": {
+        "8": 2
+      }
+    },
+    "calibration": {
+      "photon_label": "Cs-133 hyperfine (9.19 GHz, microwave)",
+      "frequency_hz": 9192631770.0,
+      "wavelength_m": 0.03261225571749406,
+      "period_s": 1.0878277570776665e-10,
+      "tick_count": 2,
+      "converged": true,
+      "convergence_reason": "reached_vacuum",
+      "tick_duration_s": 5.4391387853883326e-11,
+      "tick_duration_fs": 54391.38785388332,
+      "tick_duration_ps": 54.39138785388332,
+      "hop_length_m": 0.01630612785874703,
+      "hop_length_um": 16306.127858747028,
+      "hop_length_nm": 16306127.858747028,
+      "v_UBP_over_c": 1.0,
+      "K_factor": 1.0,
+      "initial_tax": 4.676105164854324,
+      "final_tax": 0.0,
+      "initial_nrci": 0.6813796908424689,
+      "final_nrci": 1.0
+    },
+    "cross_check": {
+      "photon": "Cs-133 hyperfine (9.19 GHz, microwave)",
+      "frequency_hz": 9192631770.0,
+      "tick_count": 2,
+      "tick_measured_fs": 54391.38785388332,
+      "hop_measured_um": 16306.127858747028,
+      "v_UBP_over_c_measured": 1.0,
+      "tick_ratio_vs_anchor_2": 25900.660882801585,
+      "hops_per_cell_vs_anchor_3": 0.0010425528456089446,
+      "photon_energy_kJ_per_mol": 0.003668147541677904,
+      "n_substrate_interactions_per_photon": 51797.26219875255,
+      "initial_tax": 4.676105164854324,
+      "final_tax": 0.0,
+      "initial_nrci": 0.6813796908424689,
+      "final_nrci": 1.0,
+      "converged": true,
+      "convergence_reason": "reached_vacuum",
+      "verdicts": [
+        "v_UBP/c = 1.000: substrate propagates at c (by construction; the relaxation model has 1 tick = 1 hop).",
+        "Tick = 54391.388 fs is 25901x larger than anchor 2 (2.10 fs). The 2.10 fs is likely a molecular interaction tick (TAX relaxation in a bond), not a propagation tick."
+      ]
+    }
+  },
+  "optical_photon": {
+    "encoding": {
+      "frequency_hz": 508923000000000.0,
+      "wavelength_m": 5.89072331177801e-07,
+      "wavelength_nm": 589.0723311778011,
+      "energy_J": 3.37215949894845e-19,
+      "energy_eV": 2.104736411321581,
+      "period_s": 1.9649337915558935e-15,
+      "period_fs": 1.9649337915558935,
+      "msg12_int": 3782,
+      "domain": 3,
+      "volume_raw": 16,
+      "compactness_raw": 11,
+      "gray_volume": 24,
+      "gray_compactness": 14,
+      "codeword_int": 15491719,
+      "codeword_hex": "0x111011000110001010000111",
+      "hamming_weight": 12,
+      "is_golay_codeword": true,
+      "mog_rows": {
+        "reality_R": 7,
+        "info_I": 10,
+        "activation_A": 6,
+        "potential_P": 59
+      },
+      "msg12_bits": "111011000110"
+    },
+    "relaxation_summary": {
+      "converged": true,
+      "convergence_reason": "reached_vacuum",
+      "tick_count": 2,
+      "tax_trajectory_length": 3,
+      "initial_tax": 4.676105164854324,
+      "final_tax": 0.0,
+      "initial_nrci": 0.6813796908424689,
+      "final_nrci": 1.0,
+      "transition_distance_distribution": {
+        "8": 2
+      }
+    },
+    "calibration": {
+      "photon_label": "Sodium D-line (508.9 THz, optical, 589.0 nm)",
+      "frequency_hz": 508923000000000.0,
+      "wavelength_m": 5.89072331177801e-07,
+      "period_s": 1.9649337915558935e-15,
+      "tick_count": 2,
+      "converged": true,
+      "convergence_reason": "reached_vacuum",
+      "tick_duration_s": 9.824668957779468e-16,
+      "tick_duration_fs": 0.9824668957779468,
+      "tick_duration_ps": 0.0009824668957779468,
+      "hop_length_m": 2.945361655889005e-07,
+      "hop_length_um": 0.2945361655889005,
+      "hop_length_nm": 294.53616558890053,
+      "v_UBP_over_c": 1.0,
+      "K_factor": 1.0,
+      "initial_tax": 4.676105164854324,
+      "final_tax": 0.0,
+      "initial_nrci": 0.6813796908424689,
+      "final_nrci": 1.0
+    },
+    "cross_check": {
+      "photon": "Sodium D-line (508.9 THz, optical, 589.0 nm)",
+      "frequency_hz": 508923000000000.0,
+      "tick_count": 2,
+      "tick_measured_fs": 0.9824668957779468,
+      "hop_measured_um": 0.2945361655889005,
+      "v_UBP_over_c_measured": 1.0,
+      "tick_ratio_vs_anchor_2": 0.46784137894187944,
+      "hops_per_cell_vs_anchor_3": 57.7178696069799,
+      "photon_energy_kJ_per_mol": 203.07619167838638,
+      "n_substrate_interactions_per_photon": 0.9356094302817375,
+      "initial_tax": 4.676105164854324,
+      "final_tax": 0.0,
+      "initial_nrci": 0.6813796908424689,
+      "final_nrci": 1.0,
+      "converged": true,
+      "convergence_reason": "reached_vacuum",
+      "verdicts": [
+        "v_UBP/c = 1.000: substrate propagates at c (by construction; the relaxation model has 1 tick = 1 hop).",
+        "Hop = 0.2945 um; cell (17 um) = 57.7 hops. Cell is a domain, not a single hop."
+      ]
+    }
+  },
+  "dispersion_test": {
+    "cs_tick_fs": 54391.38785388332,
+    "optical_tick_fs": 0.9824668957779468,
+    "ratio_optical_to_cs": 1.8062912798203265e-05,
+    "ratio_frequencies": 55362.05656152373,
+    "verdict": "DISpersive (linear): tick_opt/tick_cs = 0.000 = 1/(f_opt/f_cs). Tick duration is inversely proportional to frequency. This means v_UBP varies with frequency -- substrate is dispersive."
+  }
+}

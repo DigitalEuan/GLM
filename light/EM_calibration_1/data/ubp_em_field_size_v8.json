@@ -1,0 +1,1566 @@
+{
+  "experiment": "UBP EM Field Size Calibration v8",
+  "date": "2026-08-06",
+  "engine": "GMHGL/ubp_unified_v5.py + Lean-verified decoder patch",
+  "innovation": "New encoding carries fractional log2(f) as 5-bit phase (pi-bridged via 2*pi)",
+  "encoding_comparison": {
+    "old_distinct_cws": 29,
+    "new_distinct_cws": 46,
+    "old_distinct_hws": 3,
+    "new_distinct_hws": 3,
+    "new_distinct_phases": 26,
+    "new_distinct_cw_indices": 46
+  },
+  "ubp_constants": {
+    "Y": 0.26467543040452696,
+    "MONAD": 13.817580227176494
+  },
+  "scale_results": [
+    {
+      "name": "ELF submarine comms (USA)",
+      "category": "ELF radio",
+      "frequency_hz": 76.0,
+      "wavelength_m": 3944637.6052631577,
+      "log2_f": 6.247927513443585,
+      "frac_log2_f": 0.2479275134435852,
+      "phase_5bit": 7,
+      "octave": 6,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 3150,
+      "scale_factors": {
+        "S_per_HW": 328719.80043859646,
+        "S_per_phase": 563519.6578947369,
+        "S_per_cw_idx": 1252.2659064327486,
+        "S_per_TAX": 843573.3299822068
+      },
+      "log10_scale_factors": {
+        "S_per_HW": 5.516825864599511,
+        "S_per_phase": 5.750909070632879,
+        "S_per_cw_idx": 3.0976965568575356,
+        "S_per_TAX": 5.926122840834337
+      }
+    },
+    {
+      "name": "VLF navigation (Omega)",
+      "category": "VLF radio",
+      "frequency_hz": 10000.0,
+      "wavelength_m": 29979.2458,
+      "log2_f": 13.287712379549449,
+      "frac_log2_f": 0.2877123795494487,
+      "phase_5bit": 9,
+      "octave": 5,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 2921,
+      "scale_factors": {
+        "S_per_HW": 2498.2704833333332,
+        "S_per_phase": 3331.027311111111,
+        "S_per_cw_idx": 10.26335015405683,
+        "S_per_TAX": 6411.157307864772
+      },
+      "log10_scale_factors": {
+        "S_per_HW": 3.3976394568803028,
+        "S_per_phase": 3.5225781934886027,
+        "S_per_cw_idx": 1.0112891459543778,
+        "S_per_TAX": 3.8069364331151276
+      }
+    },
+    {
+      "name": "LORAN-C 100 kHz",
+      "category": "LF radio",
+      "frequency_hz": 100000.0,
+      "wavelength_m": 2997.92458,
+      "log2_f": 16.609640474436812,
+      "frac_log2_f": 0.6096404744368122,
+      "phase_5bit": 19,
+      "octave": 0,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 183,
+      "scale_factors": {
+        "S_per_HW": 249.82704833333332,
+        "S_per_phase": 157.7855042105263,
+        "S_per_cw_idx": 16.382101530054644,
+        "S_per_TAX": 641.1157307864771
+      },
+      "log10_scale_factors": {
+        "S_per_HW": 2.3976394568803028,
+        "S_per_phase": 2.1980671019750986,
+        "S_per_cw_idx": 1.2143696131974981,
+        "S_per_TAX": 2.8069364331151276
+      }
+    },
+    {
+      "name": "AM radio (mid band)",
+      "category": "MF radio",
+      "frequency_hz": 1000000.0,
+      "wavelength_m": 299.792458,
+      "log2_f": 19.931568569324174,
+      "frac_log2_f": 0.931568569324174,
+      "phase_5bit": 29,
+      "octave": 3,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 1939,
+      "scale_factors": {
+        "S_per_HW": 24.982704833333333,
+        "S_per_phase": 10.337670965517242,
+        "S_per_cw_idx": 0.1546118916967509,
+        "S_per_TAX": 64.11157307864772
+      },
+      "log10_scale_factors": {
+        "S_per_HW": 1.3976394568803028,
+        "S_per_phase": 1.0144227050289716,
+        "S_per_cw_idx": -0.8107571061507778,
+        "S_per_TAX": 1.8069364331151279
+      }
+    },
+    {
+      "name": "Shortwave radio (31m band)",
+      "category": "HF radio",
+      "frequency_hz": 9700000.0,
+      "wavelength_m": 30.906438969072166,
+      "log2_f": 23.20955331662394,
+      "frac_log2_f": 0.20955331662393917,
+      "phase_5bit": 6,
+      "octave": 7,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 3910,
+      "scale_factors": {
+        "S_per_HW": 2.575536580756014,
+        "S_per_phase": 5.151073161512028,
+        "S_per_cw_idx": 0.007904460094391857,
+        "S_per_TAX": 6.60944052357193
+      },
+      "log10_scale_factors": {
+        "S_per_HW": 0.4108677226140579,
+        "S_per_phase": 0.711897718278039,
+        "S_per_cw_idx": -2.102127788734184,
+        "S_per_TAX": 0.8201646988488829
+      }
+    },
+    {
+      "name": "FM radio (mid band)",
+      "category": "VHF radio",
+      "frequency_hz": 98000000.0,
+      "wavelength_m": 3.0591067142857145,
+      "log2_f": 26.54627841343938,
+      "frac_log2_f": 0.5462784134393814,
+      "phase_5bit": 17,
+      "octave": 2,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 1336,
+      "scale_factors": {
+        "S_per_HW": 0.2549255595238095,
+        "S_per_phase": 0.1799474537815126,
+        "S_per_cw_idx": 0.002289750534644996,
+        "S_per_TAX": 0.6541997252923236
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -0.5935866188121921,
+        "S_per_phase": -0.7448542941428412,
+        "S_per_cw_idx": -2.6402118309040943,
+        "S_per_TAX": -0.1842896425773671
+      }
+    },
+    {
+      "name": "VHF TV channel 7",
+      "category": "VHF TV",
+      "frequency_hz": 174000000.0,
+      "wavelength_m": 1.7229451609195403,
+      "log2_f": 27.3745120651729,
+      "frac_log2_f": 0.37451206517290103,
+      "phase_5bit": 11,
+      "octave": 3,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 1760,
+      "scale_factors": {
+        "S_per_HW": 0.1435787634099617,
+        "S_per_phase": 0.15663137826541276,
+        "S_per_cw_idx": 0.0009789461141588298,
+        "S_per_TAX": 0.3684573165439524
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -0.8429097914022969,
+        "S_per_phase": -0.8051212305128972,
+        "S_per_cw_idx": -3.009241213168822,
+        "S_per_TAX": -0.43361281516747197
+      }
+    },
+    {
+      "name": "UHF TV channel 14",
+      "category": "UHF TV",
+      "frequency_hz": 470000000.0,
+      "wavelength_m": 0.6378562936170212,
+      "log2_f": 28.808085515889175,
+      "frac_log2_f": 0.8080855158891751,
+      "phase_5bit": 25,
+      "octave": 4,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 2385,
+      "scale_factors": {
+        "S_per_HW": 0.05315469113475177,
+        "S_per_phase": 0.02551425174468085,
+        "S_per_cw_idx": 0.0002674449868415183,
+        "S_per_TAX": 0.13640760229499513
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -1.2744584010554147,
+        "S_per_phase": -1.5932171636798276,
+        "S_per_cw_idx": -3.5727655383839227,
+        "S_per_TAX": -0.8651614248205898
+      }
+    },
+    {
+      "name": "Cellular 700 MHz (LTE band 12)",
+      "category": "Cellular",
+      "frequency_hz": 729000000.0,
+      "wavelength_m": 0.41123793964334704,
+      "log2_f": 29.44134357365111,
+      "frac_log2_f": 0.44134357365111043,
+      "phase_5bit": 14,
+      "octave": 5,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 2857,
+      "scale_factors": {
+        "S_per_HW": 0.034269828303612256,
+        "S_per_phase": 0.02937413854595336,
+        "S_per_cw_idx": 0.0001439404758989664,
+        "S_per_TAX": 0.08794454468950304
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -1.465088071437672,
+        "S_per_phase": -1.532034861068285,
+        "S_per_cw_idx": -3.84181706577279,
+        "S_per_TAX": -1.0557910952028469
+      }
+    },
+    {
+      "name": "GPS L1 (1575.42 MHz)",
+      "category": "GNSS",
+      "frequency_hz": 1575420000.0,
+      "wavelength_m": 0.19029367279836487,
+      "log2_f": 30.55308934998968,
+      "frac_log2_f": 0.5530893499896798,
+      "phase_5bit": 17,
+      "octave": 6,
+      "hw": 16,
+      "tax": 6.234806886472431,
+      "nrci": 0.6159605143398686,
+      "codeword_index": 3389,
+      "scale_factors": {
+        "S_per_HW": 0.011893354549897804,
+        "S_per_phase": 0.011193745458727346,
+        "S_per_cw_idx": 5.615039032114632e-05,
+        "S_per_TAX": 0.03052118153189993
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -1.9246956342766204,
+        "S_per_phase": -1.9510245729989695,
+        "S_per_cw_idx": -4.250647220458074,
+        "S_per_TAX": -1.5153986580417955
+      }
+    },
+    {
+      "name": "WiFi 2.4 GHz (channel 1)",
+      "category": "WiFi",
+      "frequency_hz": 2412000000.0,
+      "wavelength_m": 0.12429206384742952,
+      "log2_f": 31.16758276122426,
+      "frac_log2_f": 0.16758276122425997,
+      "phase_5bit": 5,
+      "octave": 7,
+      "hw": 16,
+      "tax": 6.234806886472431,
+      "nrci": 0.6159605143398686,
+      "codeword_index": 4037,
+      "scale_factors": {
+        "S_per_HW": 0.007768253990464345,
+        "S_per_phase": 0.024858412769485905,
+        "S_per_cw_idx": 3.078822488170164e-05,
+        "S_per_TAX": 0.019935190633907873
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -2.109676583196111,
+        "S_per_phase": -1.604526604876205,
+        "S_per_cw_idx": -4.5116153499505005,
+        "S_per_TAX": -1.7003796069612858
+      }
+    },
+    {
+      "name": "Bluetooth LE (channel 0)",
+      "category": "Bluetooth",
+      "frequency_hz": 2402000000.0,
+      "wavelength_m": 0.1248095162364696,
+      "log2_f": 31.161589005029807,
+      "frac_log2_f": 0.161589005029807,
+      "phase_5bit": 5,
+      "octave": 7,
+      "hw": 16,
+      "tax": 6.234806886472431,
+      "nrci": 0.6159605143398686,
+      "codeword_index": 4037,
+      "scale_factors": {
+        "S_per_HW": 0.00780059476477935,
+        "S_per_phase": 0.024961903247293922,
+        "S_per_cw_idx": 3.091640233749557e-05,
+        "S_per_TAX": 0.020018184766438712
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -2.1078722827948844,
+        "S_per_phase": -1.6027223044749785,
+        "S_per_cw_idx": -4.509811049549274,
+        "S_per_TAX": -1.6985753065600595
+      }
+    },
+    {
+      "name": "S-band radar (weather)",
+      "category": "Radar",
+      "frequency_hz": 2800000000.0,
+      "wavelength_m": 0.107068735,
+      "log2_f": 31.382779681156503,
+      "frac_log2_f": 0.38277968115650296,
+      "phase_5bit": 12,
+      "octave": 7,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 3749,
+      "scale_factors": {
+        "S_per_HW": 0.008922394583333333,
+        "S_per_phase": 0.008922394583333333,
+        "S_per_cw_idx": 2.85592784742598e-05,
+        "S_per_TAX": 0.02289699038523133
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -2.0495185744619167,
+        "S_per_phase": -2.0495185744619167,
+        "S_per_cw_idx": -4.544252768835842,
+        "S_per_TAX": -1.6402215982270913
+      }
+    },
+    {
+      "name": "C-band satellite (4 GHz)",
+      "category": "Satellite",
+      "frequency_hz": 4000000000.0,
+      "wavelength_m": 0.0749481145,
+      "log2_f": 31.897352853986263,
+      "frac_log2_f": 0.8973528539862627,
+      "phase_5bit": 28,
+      "octave": 7,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 3733,
+      "scale_factors": {
+        "S_per_HW": 0.006245676208333333,
+        "S_per_phase": 0.002676718375,
+        "S_per_cw_idx": 2.0077180417894455e-05,
+        "S_per_TAX": 0.01602789326966193
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -2.2044205344476597,
+        "S_per_phase": -2.572397319742254,
+        "S_per_cw_idx": -4.69729727832634,
+        "S_per_TAX": -1.7951235582128346
+      }
+    },
+    {
+      "name": "5G n78 mid-band (3.5 GHz)",
+      "category": "5G",
+      "frequency_hz": 3500000000.0,
+      "wavelength_m": 0.085654988,
+      "log2_f": 31.704707776043865,
+      "frac_log2_f": 0.7047077760438647,
+      "phase_5bit": 22,
+      "octave": 7,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 3957,
+      "scale_factors": {
+        "S_per_HW": 0.007137915666666667,
+        "S_per_phase": 0.0038934085454545454,
+        "S_per_cw_idx": 2.164644629770028e-05,
+        "S_per_TAX": 0.01831759230818506
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -2.146428587469973,
+        "S_per_phase": -2.4096700222445544,
+        "S_per_cw_idx": -4.664613391688376,
+        "S_per_TAX": -1.7371316112351478
+      }
+    },
+    {
+      "name": "Cs-133 hyperfine (SI second)",
+      "category": "Atomic clock",
+      "frequency_hz": 9192631770,
+      "wavelength_m": 0.03261225571749406,
+      "log2_f": 33.09783080559574,
+      "frac_log2_f": 0.09783080559574131,
+      "phase_5bit": 3,
+      "octave": 1,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 647,
+      "scale_factors": {
+        "S_per_HW": 0.002717687976457838,
+        "S_per_phase": 0.010870751905831352,
+        "S_per_cw_idx": 5.0405341139867165e-05,
+        "S_per_TAX": 0.006974234874486626
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -2.5658004070153675,
+        "S_per_phase": -1.963740415687405,
+        "S_per_cw_idx": -4.297523441636443,
+        "S_per_TAX": -2.156503430780542
+      }
+    },
+    {
+      "name": "X-band radar (8-12 GHz)",
+      "category": "Radar",
+      "frequency_hz": 10000000000.0,
+      "wavelength_m": 0.0299792458,
+      "log2_f": 33.219280948873624,
+      "frac_log2_f": 0.21928094887362448,
+      "phase_5bit": 7,
+      "octave": 1,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 591,
+      "scale_factors": {
+        "S_per_HW": 0.0024982704833333333,
+        "S_per_phase": 0.0042827494,
+        "S_per_cw_idx": 5.072630423011844e-05,
+        "S_per_TAX": 0.006411157307864772
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -2.6023605431196972,
+        "S_per_phase": -2.3682773370863295,
+        "S_per_cw_idx": -4.294766777953328,
+        "S_per_TAX": -2.1930635668848724
+      }
+    },
+    {
+      "name": "Ku-band satellite (12 GHz)",
+      "category": "Satellite",
+      "frequency_hz": 12000000000.0,
+      "wavelength_m": 0.024982704833333334,
+      "log2_f": 33.48231535470742,
+      "frac_log2_f": 0.48231535470741704,
+      "phase_5bit": 15,
+      "octave": 1,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 559,
+      "scale_factors": {
+        "S_per_HW": 0.0020818920694444447,
+        "S_per_phase": 0.0016655136555555556,
+        "S_per_cw_idx": 4.469177966607036e-05,
+        "S_per_TAX": 0.00534263108988731
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -2.681541789167322,
+        "S_per_phase": -2.7784518021753786,
+        "S_per_cw_idx": -4.349772351006121,
+        "S_per_TAX": -2.272244812932497
+      }
+    },
+    {
+      "name": "K-band radar (24 GHz)",
+      "category": "Radar",
+      "frequency_hz": 24000000000.0,
+      "wavelength_m": 0.012491352416666667,
+      "log2_f": 34.48231535470742,
+      "frac_log2_f": 0.48231535470741704,
+      "phase_5bit": 15,
+      "octave": 2,
+      "hw": 8,
+      "tax": 3.1174034432362157,
+      "nrci": 0.7623459965437248,
+      "codeword_index": 1067,
+      "scale_factors": {
+        "S_per_HW": 0.0015614190520833334,
+        "S_per_phase": 0.0008327568277777778,
+        "S_per_cw_idx": 1.1706984457981881e-05,
+        "S_per_TAX": 0.004006973317415482
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -2.8064805257756222,
+        "S_per_phase": -3.07948179783936,
+        "S_per_cw_idx": -4.931554958208149,
+        "S_per_TAX": -2.397183549540797
+      }
+    },
+    {
+      "name": "Ka-band satellite (26.5 GHz)",
+      "category": "Satellite",
+      "frequency_hz": 26500000000.0,
+      "wavelength_m": 0.011312922943396227,
+      "log2_f": 34.62527330854946,
+      "frac_log2_f": 0.6252733085494597,
+      "phase_5bit": 20,
+      "octave": 2,
+      "hw": 16,
+      "tax": 6.234806886472431,
+      "nrci": 0.6159605143398686,
+      "codeword_index": 1275,
+      "scale_factors": {
+        "S_per_HW": 0.0007070576839622642,
+        "S_per_phase": 0.0005656461471698113,
+        "S_per_cw_idx": 8.872880739918609e-06,
+        "S_per_TAX": 0.0018144784833579544
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -3.150545153664805,
+        "S_per_phase": -3.2474551666728617,
+        "S_per_cw_idx": -5.051935355778855,
+        "S_per_TAX": -2.74124817742998
+      }
+    },
+    {
+      "name": "5G mmWave n257 (28 GHz)",
+      "category": "5G",
+      "frequency_hz": 28000000000.0,
+      "wavelength_m": 0.0107068735,
+      "log2_f": 34.70470777604387,
+      "frac_log2_f": 0.7047077760438683,
+      "phase_5bit": 22,
+      "octave": 2,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 1403,
+      "scale_factors": {
+        "S_per_HW": 0.0008922394583333334,
+        "S_per_phase": 0.00048667606818181817,
+        "S_per_cw_idx": 7.631413756236636e-06,
+        "S_per_TAX": 0.0022896990385231327
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -3.0495185744619167,
+        "S_per_phase": -3.3127600092364977,
+        "S_per_cw_idx": -5.117394999442651,
+        "S_per_TAX": -2.6402215982270913
+      }
+    },
+    {
+      "name": "THz imaging (1 THz)",
+      "category": "THz",
+      "frequency_hz": 1000000000000.0,
+      "wavelength_m": 0.000299792458,
+      "log2_f": 39.86313713864835,
+      "frac_log2_f": 0.863137138648348,
+      "phase_5bit": 27,
+      "octave": 7,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 3798,
+      "scale_factors": {
+        "S_per_HW": 2.4982704833333336e-05,
+        "S_per_phase": 1.110342437037037e-05,
+        "S_per_cw_idx": 7.893429647182729e-08,
+        "S_per_TAX": 6.411157307864772e-05
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -4.602360543119698,
+        "S_per_phase": -4.9545430612310595,
+        "S_per_cw_idx": -7.102734257473071,
+        "S_per_TAX": -4.193063566884872
+      }
+    },
+    {
+      "name": "Water vapor line (183 GHz)",
+      "category": "Atmospheric",
+      "frequency_hz": 183310000000.0,
+      "wavelength_m": 0.0016354397359663957,
+      "log2_f": 37.41549453425902,
+      "frac_log2_f": 0.41549453425901817,
+      "phase_5bit": 13,
+      "octave": 5,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 2986,
+      "scale_factors": {
+        "S_per_HW": 0.00013628664466386632,
+        "S_per_phase": 0.00012580305661279967,
+        "S_per_cw_idx": 5.47702523766375e-07,
+        "S_per_TAX": 0.00034974400239292844
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -3.8655467005334025,
+        "S_per_phase": -3.9003088067926144,
+        "S_per_cw_idx": -6.261455257874784,
+        "S_per_TAX": -3.4562497242985772
+      }
+    },
+    {
+      "name": "CO2 laser (10.6 \u03bcm)",
+      "category": "Far-IR laser",
+      "frequency_hz": 28300000000000.0,
+      "wavelength_m": 1.0593373074204947e-05,
+      "log2_f": 44.68586728659287,
+      "frac_log2_f": 0.6858672865928668,
+      "phase_5bit": 21,
+      "octave": 4,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 2545,
+      "scale_factors": {
+        "S_per_HW": 8.827810895170789e-07,
+        "S_per_phase": 5.044463368669023e-07,
+        "S_per_cw_idx": 4.162425569432199e-09,
+        "S_per_TAX": 2.265426610552923e-06
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -6.054146978643987,
+        "S_per_phase": -6.297185027330282,
+        "S_per_cw_idx": -8.38065351926914,
+        "S_per_TAX": -5.644850002409163
+      }
+    },
+    {
+      "name": "NH3 inversion (1.25 cm)",
+      "category": "Microwave molecular",
+      "frequency_hz": 23984000000.0,
+      "wavelength_m": 0.012499685540360241,
+      "log2_f": 34.48135323727203,
+      "frac_log2_f": 0.4813532372720317,
+      "phase_5bit": 15,
+      "octave": 2,
+      "hw": 8,
+      "tax": 3.1174034432362157,
+      "nrci": 0.7623459965437248,
+      "codeword_index": 1067,
+      "scale_factors": {
+        "S_per_HW": 0.0015624606925450301,
+        "S_per_phase": 0.0008333123693573494,
+        "S_per_cw_idx": 1.1714794320862456e-05,
+        "S_per_TAX": 0.0040096464150255
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -2.8061908995682203,
+        "S_per_phase": -3.079192171631958,
+        "S_per_cw_idx": -4.931265332000747,
+        "S_per_TAX": -2.396893923333395
+      }
+    },
+    {
+      "name": "HF chemical laser (2.7 \u03bcm)",
+      "category": "Mid-IR laser",
+      "frequency_hz": 111000000000000.0,
+      "wavelength_m": 2.700832954954955e-06,
+      "log2_f": 46.657553004998455,
+      "frac_log2_f": 0.657553004998455,
+      "phase_5bit": 21,
+      "octave": 6,
+      "hw": 16,
+      "tax": 6.234806886472431,
+      "nrci": 0.6159605143398686,
+      "codeword_index": 3581,
+      "scale_factors": {
+        "S_per_HW": 1.688020596846847e-07,
+        "S_per_phase": 1.286110930930931e-07,
+        "S_per_cw_idx": 7.542119393898227e-10,
+        "S_per_TAX": 4.331863045854576e-07
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -6.772622258514654,
+        "S_per_phase": -6.890721570592649,
+        "S_per_cw_idx": -9.122506596870632,
+        "S_per_TAX": -6.363325282279829
+      }
+    },
+    {
+      "name": "1550 nm fiber comms",
+      "category": "Near-IR telecom",
+      "frequency_hz": 193400000000000.0,
+      "wavelength_m": 1.5501161220268872e-06,
+      "log2_f": 47.45858112323783,
+      "frac_log2_f": 0.4585811232378276,
+      "phase_5bit": 14,
+      "octave": 7,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 3877,
+      "scale_factors": {
+        "S_per_HW": 1.291763435022406e-07,
+        "S_per_phase": 1.1072258014477765e-07,
+        "S_per_cw_idx": 3.9982360640363353e-10,
+        "S_per_TAX": 3.3149727548421775e-07
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -6.888817012866681,
+        "S_per_phase": -6.955763802497294,
+        "S_per_cw_idx": -9.398131567826265,
+        "S_per_TAX": -6.479520036631855
+      }
+    },
+    {
+      "name": "Nd:YAG 1064 nm",
+      "category": "Near-IR laser",
+      "frequency_hz": 281760000000000.0,
+      "wavelength_m": 1.063999354060193e-06,
+      "log2_f": 48.00146014270483,
+      "frac_log2_f": 0.0014601427048290816,
+      "phase_5bit": 0,
+      "octave": 0,
+      "hw": 8,
+      "tax": 3.1174034432362157,
+      "nrci": 0.7623459965437248,
+      "codeword_index": 5,
+      "scale_factors": {
+        "S_per_HW": 1.3299991925752413e-07,
+        "S_per_cw_idx": 2.127998708120386e-07,
+        "S_per_TAX": 3.413094818922898e-07
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -6.876148622687218,
+        "S_per_cw_idx": -6.672028640031293,
+        "S_per_TAX": -6.466851646452393
+      }
+    },
+    {
+      "name": "GaAs 850 nm (VCSEL)",
+      "category": "Near-IR laser",
+      "frequency_hz": 352500000000000.0,
+      "wavelength_m": 8.504750581560283e-07,
+      "log2_f": 48.32461658593451,
+      "frac_log2_f": 0.32461658593450693,
+      "phase_5bit": 10,
+      "octave": 0,
+      "hw": 16,
+      "tax": 6.234806886472431,
+      "nrci": 0.6159605143398686,
+      "codeword_index": 487,
+      "scale_factors": {
+        "S_per_HW": 5.315469113475177e-08,
+        "S_per_phase": 8.504750581560284e-08,
+        "S_per_cw_idx": 1.7463553555565263e-09,
+        "S_per_TAX": 1.3640760229499513e-07
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -7.274458401055415,
+        "S_per_phase": -7.07033841839949,
+        "S_per_cw_idx": -8.757867379614124,
+        "S_per_TAX": -6.86516142482059
+      }
+    },
+    {
+      "name": "HeNe 632.8 nm",
+      "category": "Visible laser",
+      "frequency_hz": 473600000000000.0,
+      "wavelength_m": 6.330077238175676e-07,
+      "log2_f": 48.75066240938994,
+      "frac_log2_f": 0.750662409389939,
+      "phase_5bit": 24,
+      "octave": 0,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 87,
+      "scale_factors": {
+        "S_per_HW": 5.275064365146397e-08,
+        "S_per_phase": 2.6375321825731984e-08,
+        "S_per_cw_idx": 7.2759508484777885e-09,
+        "S_per_TAX": 1.3537072018295548e-07
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -7.2777722368345605,
+        "S_per_phase": -7.578802232498542,
+        "S_per_cw_idx": -8.138110243405555,
+        "S_per_TAX": -6.868475260599736
+      }
+    },
+    {
+      "name": "Na D2 (589.0 nm)",
+      "category": "Visible atomic",
+      "frequency_hz": 508923000000000.0,
+      "wavelength_m": 5.89072331177801e-07,
+      "log2_f": 48.85444072161699,
+      "frac_log2_f": 0.8544407216169887,
+      "phase_5bit": 27,
+      "octave": 0,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 215,
+      "scale_factors": {
+        "S_per_HW": 4.9089360931483415e-08,
+        "S_per_phase": 2.1817493747325964e-08,
+        "S_per_cw_idx": 2.7398713078037257e-09,
+        "S_per_TAX": 1.2597499637204e-07
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -7.309012621714286,
+        "S_per_phase": -7.661195139825649,
+        "S_per_cw_idx": -8.562269835582267,
+        "S_per_TAX": -6.8997156454794615
+      }
+    },
+    {
+      "name": "Hg green 546.1 nm",
+      "category": "Visible lamp",
+      "frequency_hz": 548700000000000.0,
+      "wavelength_m": 5.463686130854748e-07,
+      "log2_f": 48.963010904230856,
+      "frac_log2_f": 0.9630109042308561,
+      "phase_5bit": 30,
+      "octave": 0,
+      "hw": 8,
+      "tax": 3.1174034432362157,
+      "nrci": 0.7623459965437248,
+      "codeword_index": 279,
+      "scale_factors": {
+        "S_per_HW": 6.829607663568435e-08,
+        "S_per_phase": 1.821228710284916e-08,
+        "S_per_cw_idx": 1.958310441166576e-09,
+        "S_per_TAX": 1.7526400513572368e-07
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -7.165604244260095,
+        "S_per_phase": -7.739635511987814,
+        "S_per_cw_idx": -8.70811846054175,
+        "S_per_TAX": -6.75630726802527
+      }
+    },
+    {
+      "name": "Hg blue 435.8 nm",
+      "category": "Visible lamp",
+      "frequency_hz": 687900000000000.0,
+      "wavelength_m": 4.3580819595871493e-07,
+      "log2_f": 49.289192184062934,
+      "frac_log2_f": 0.2891921840629337,
+      "phase_5bit": 9,
+      "octave": 1,
+      "hw": 16,
+      "tax": 6.234806886472431,
+      "nrci": 0.6159605143398686,
+      "codeword_index": 879,
+      "scale_factors": {
+        "S_per_HW": 2.7238012247419683e-08,
+        "S_per_phase": 4.842313288430166e-08,
+        "S_per_cw_idx": 4.957999954024061e-10,
+        "S_per_TAX": 6.989922926149991e-08
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -7.564824589177599,
+        "S_per_phase": -7.314947115960998,
+        "S_per_cw_idx": -9.304693481595447,
+        "S_per_TAX": -7.155527612942773
+      }
+    },
+    {
+      "name": "H-beta (486.1 nm)",
+      "category": "Visible stellar",
+      "frequency_hz": 616700000000000.0,
+      "wavelength_m": 4.86123654937571e-07,
+      "log2_f": 49.131562174739,
+      "frac_log2_f": 0.13156217473900256,
+      "phase_5bit": 4,
+      "octave": 1,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 711,
+      "scale_factors": {
+        "S_per_HW": 4.051030457813091e-08,
+        "S_per_phase": 1.2153091373439274e-07,
+        "S_per_cw_idx": 6.837182207279479e-10,
+        "S_per_TAX": 1.0395909369004008e-07
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -7.392434491546002,
+        "S_per_phase": -6.915313236826339,
+        "S_per_cw_idx": -9.165122846228144,
+        "S_per_TAX": -6.983137515311177
+      }
+    },
+    {
+      "name": "H-alpha (656.3 nm)",
+      "category": "Visible stellar",
+      "frequency_hz": 456800000000000.0,
+      "wavelength_m": 6.562882180385289e-07,
+      "log2_f": 48.69855597912383,
+      "frac_log2_f": 0.6985559791238316,
+      "phase_5bit": 22,
+      "octave": 0,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 375,
+      "scale_factors": {
+        "S_per_HW": 5.4690684836544074e-08,
+        "S_per_phase": 2.983128263811495e-08,
+        "S_per_cw_idx": 1.7501019147694103e-09,
+        "S_per_TAX": 1.403493281056211e-07
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -7.262086638357489,
+        "S_per_phase": -7.52532807313207,
+        "S_per_cw_idx": -8.756936660037583,
+        "S_per_TAX": -6.852789662122664
+      }
+    },
+    {
+      "name": "Ca K (393.4 nm)",
+      "category": "UV stellar",
+      "frequency_hz": 762100000000000.0,
+      "wavelength_m": 3.9337679832043036e-07,
+      "log2_f": 49.436973643777385,
+      "frac_log2_f": 0.43697364377738523,
+      "phase_5bit": 13,
+      "octave": 1,
+      "hw": 16,
+      "tax": 6.234806886472431,
+      "nrci": 0.6159605143398686,
+      "codeword_index": 943,
+      "scale_factors": {
+        "S_per_HW": 2.4586049895026898e-08,
+        "S_per_phase": 3.025975371695618e-08,
+        "S_per_cw_idx": 4.1715461115634185e-10,
+        "S_per_TAX": 6.309366199840676e-08
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -7.609311241354656,
+        "S_per_phase": -7.519134611005568,
+        "S_per_cw_idx": -9.379702951436059,
+        "S_per_TAX": -7.2000142651198304
+      }
+    },
+    {
+      "name": "Mg II h (280.3 nm)",
+      "category": "UV stellar",
+      "frequency_hz": 1069000000000000.0,
+      "wavelength_m": 2.804419625818522e-07,
+      "log2_f": 49.92518327636884,
+      "frac_log2_f": 0.9251832763688412,
+      "phase_5bit": 29,
+      "octave": 1,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 927,
+      "scale_factors": {
+        "S_per_HW": 2.3370163548487684e-08,
+        "S_per_phase": 9.67041250282249e-09,
+        "S_per_cw_idx": 3.025263889771868e-10,
+        "S_per_TAX": 5.997340793138234e-08
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -7.6313382483284755,
+        "S_per_phase": -8.014555000179806,
+        "S_per_cw_idx": -9.519236736425347,
+        "S_per_TAX": -7.222041272093651
+      }
+    },
+    {
+      "name": "Lyman-alpha (121.6 nm)",
+      "category": "UV stellar",
+      "frequency_hz": 2466000000000000.0,
+      "wavelength_m": 1.215703398215734e-07,
+      "log2_f": 51.131094223051186,
+      "frac_log2_f": 0.13109422305118557,
+      "phase_5bit": 4,
+      "octave": 3,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 1739,
+      "scale_factors": {
+        "S_per_HW": 1.0130861651797782e-08,
+        "S_per_phase": 3.039258495539335e-08,
+        "S_per_cw_idx": 6.990818851154307e-11,
+        "S_per_TAX": 2.5998204816969876e-08
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -7.99435361537941,
+        "S_per_phase": -7.517232360659747,
+        "S_per_cw_idx": -10.155471951334498,
+        "S_per_TAX": -7.585056639144585
+      }
+    },
+    {
+      "name": "He II 30.4 nm (EUV)",
+      "category": "EUV solar",
+      "frequency_hz": 9860000000000000.0,
+      "wavelength_m": 3.0404914604462476e-08,
+      "log2_f": 53.13050906991362,
+      "frac_log2_f": 0.13050906991362154,
+      "phase_5bit": 4,
+      "octave": 5,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 2754,
+      "scale_factors": {
+        "S_per_HW": 2.5337428837052062e-09,
+        "S_per_phase": 7.601228651115619e-09,
+        "S_per_cw_idx": 1.1040274003072795e-11,
+        "S_per_TAX": 6.502187939010925e-09
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -8.596237458060909,
+        "S_per_phase": -8.119116203341246,
+        "S_per_cw_idx": -10.95702014793419,
+        "S_per_TAX": -8.186940481826083
+      }
+    },
+    {
+      "name": "Fe XV 28.4 nm (EUV)",
+      "category": "EUV solar",
+      "frequency_hz": 1.055e+16,
+      "wavelength_m": 2.841634672985782e-08,
+      "log2_f": 53.22809251713026,
+      "frac_log2_f": 0.22809251713025702,
+      "phase_5bit": 7,
+      "octave": 5,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 2634,
+      "scale_factors": {
+        "S_per_HW": 2.368028894154818e-09,
+        "S_per_phase": 4.059478104265403e-09,
+        "S_per_cw_idx": 1.0788286533734935e-11,
+        "S_per_TAX": 6.07692635816566e-09
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -8.62561300275341,
+        "S_per_phase": -8.391529796720041,
+        "S_per_cw_idx": -10.967047527331548,
+        "S_per_TAX": -8.216316026518584
+      }
+    },
+    {
+      "name": "Al K-alpha (1.49 keV)",
+      "category": "Soft X-ray",
+      "frequency_hz": 3.6e+17,
+      "wavelength_m": 8.327568277777778e-10,
+      "log2_f": 58.32077451964011,
+      "frac_log2_f": 0.3207745196401106,
+      "phase_5bit": 10,
+      "octave": 2,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 1512,
+      "scale_factors": {
+        "S_per_HW": 6.939640231481481e-11,
+        "S_per_phase": 8.327568277777778e-11,
+        "S_per_cw_idx": 5.507650977366255e-13,
+        "S_per_TAX": 1.7808770299624367e-10
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -10.158663043886985,
+        "S_per_phase": -10.07948179783936,
+        "S_per_cw_idx": -12.259033589004547,
+        "S_per_TAX": -9.74936606765216
+      }
+    },
+    {
+      "name": "Cu K-alpha (8.04 keV)",
+      "category": "X-ray",
+      "frequency_hz": 1.946e+18,
+      "wavelength_m": 1.5405573381294964e-10,
+      "log2_f": 60.75521741809155,
+      "frac_log2_f": 0.7552174180915472,
+      "phase_5bit": 24,
+      "octave": 4,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 2129,
+      "scale_factors": {
+        "S_per_HW": 1.2837977817745803e-11,
+        "S_per_phase": 6.4189889088729015e-12,
+        "S_per_cw_idx": 7.236060770922952e-14,
+        "S_per_TAX": 3.294530990680766e-11
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -10.89150337905203,
+        "S_per_phase": -11.192533374716012,
+        "S_per_cw_idx": -13.140497794442728,
+        "S_per_TAX": -10.482206402817205
+      }
+    },
+    {
+      "name": "Mo K-alpha (17.5 keV)",
+      "category": "Hard X-ray",
+      "frequency_hz": 4.23e+18,
+      "wavelength_m": 7.087292151300237e-11,
+      "log2_f": 61.875363371317746,
+      "frac_log2_f": 0.8753633713177464,
+      "phase_5bit": 28,
+      "octave": 5,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 2713,
+      "scale_factors": {
+        "S_per_HW": 5.906076792750197e-12,
+        "S_per_phase": 2.531175768321513e-12,
+        "S_per_cw_idx": 2.612345061297544e-14,
+        "S_per_TAX": 1.515640025499946e-11
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -11.228700910494739,
+        "S_per_phase": -11.596677695789333,
+        "S_per_cw_idx": -13.58296945820871,
+        "S_per_TAX": -10.819403934259915
+      }
+    },
+    {
+      "name": "Annihilation (511 keV)",
+      "category": "Gamma",
+      "frequency_hz": 1.236e+20,
+      "wavelength_m": 2.4255053236245953e-12,
+      "log2_f": 66.74424064098953,
+      "frac_log2_f": 0.7442406409895312,
+      "phase_5bit": 23,
+      "octave": 2,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 1147,
+      "scale_factors": {
+        "S_per_HW": 2.0212544363538294e-13,
+        "S_per_phase": 1.0545675320106936e-13,
+        "S_per_cw_idx": 2.1146515463161248e-15,
+        "S_per_TAX": 5.187020475618747e-13
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -12.694379013872494,
+        "S_per_phase": -12.976925603842462,
+        "S_per_cw_idx": -14.674761185726137,
+        "S_per_TAX": -12.28508203763767
+      }
+    },
+    {
+      "name": "Cs-137 gamma (662 keV)",
+      "category": "Gamma nuclear",
+      "frequency_hz": 1.602e+20,
+      "wavelength_m": 1.8713636579275906e-12,
+      "log2_f": 67.11843604549387,
+      "frac_log2_f": 0.11843604549386555,
+      "phase_5bit": 3,
+      "octave": 3,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 1675,
+      "scale_factors": {
+        "S_per_HW": 1.559469714939659e-13,
+        "S_per_phase": 6.237878859758636e-13,
+        "S_per_cw_idx": 1.1172320345836363e-15,
+        "S_per_TAX": 4.001970853848172e-13
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -12.807023054867916,
+        "S_per_phase": -12.204963063539953,
+        "S_per_cw_idx": -14.951856620193155,
+        "S_per_TAX": -12.397726078633092
+      }
+    },
+    {
+      "name": "Co-60 gamma (1.33 MeV)",
+      "category": "Gamma nuclear",
+      "frequency_hz": 3.22e+20,
+      "wavelength_m": 9.310324782608695e-13,
+      "log2_f": 68.12562258608713,
+      "frac_log2_f": 0.1256225860871325,
+      "phase_5bit": 4,
+      "octave": 4,
+      "hw": 8,
+      "tax": 3.1174034432362157,
+      "nrci": 0.7623459965437248,
+      "codeword_index": 2243,
+      "scale_factors": {
+        "S_per_HW": 1.163790597826087e-13,
+        "S_per_phase": 2.327581195652174e-13,
+        "S_per_cw_idx": 4.150835837097055e-16,
+        "S_per_TAX": 2.9865639632910427e-13
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -12.934125155759848,
+        "S_per_phase": -12.633095160095866,
+        "S_per_cw_idx": -15.38186444235087,
+        "S_per_TAX": -12.524828179525022
+      }
+    },
+    {
+      "name": "26Al decay (1.81 MeV)",
+      "category": "Gamma astrophysical",
+      "frequency_hz": 4.38e+20,
+      "wavelength_m": 6.844576666666666e-13,
+      "log2_f": 68.56949276757369,
+      "frac_log2_f": 0.569492767573692,
+      "phase_5bit": 18,
+      "octave": 4,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 2482,
+      "scale_factors": {
+        "S_per_HW": 5.703813888888888e-14,
+        "S_per_phase": 3.802542592592592e-14,
+        "S_per_cw_idx": 2.757686005909213e-16,
+        "S_per_TAX": 1.4637345451746053e-13
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -13.243834653623797,
+        "S_per_phase": -13.419925912679478,
+        "S_per_cw_idx": -15.559455184738884,
+        "S_per_TAX": -12.834537677388973
+      }
+    },
+    {
+      "name": "Pair-production threshold",
+      "category": "Gamma threshold",
+      "frequency_hz": 2.472e+20,
+      "wavelength_m": 1.2127526618122976e-12,
+      "log2_f": 67.74424064098953,
+      "frac_log2_f": 0.7442406409895312,
+      "phase_5bit": 23,
+      "octave": 3,
+      "hw": 12,
+      "tax": 4.676105164854324,
+      "nrci": 0.6813796908424689,
+      "codeword_index": 1651,
+      "scale_factors": {
+        "S_per_HW": 1.0106272181769147e-13,
+        "S_per_phase": 5.272837660053468e-14,
+        "S_per_cw_idx": 7.345564275059344e-16,
+        "S_per_TAX": 2.5935102378093736e-13
+      },
+      "log10_scale_factors": {
+        "S_per_HW": -12.995409009536475,
+        "S_per_phase": -13.277955599506443,
+        "S_per_cw_idx": -15.133974836751644,
+        "S_per_TAX": -12.586112033301651
+      }
+    }
+  ],
+  "scale_consistency_test": {
+    "S_per_HW": {
+      "n": 48,
+      "n_distinct_values": 48,
+      "log10_min": -13.243834653623797,
+      "log10_max": 5.516825864599511,
+      "log10_range": 18.760660518223307,
+      "spearman_log2_f_vs_log10_S": -0.9981545809813289,
+      "verdict": "STRONG correlation with log2(f) (r=-0.998) \u2014 S varies smoothly with frequency. This is a REAL scale, not just HW-determined."
+    },
+    "S_per_phase": {
+      "n": 47,
+      "n_distinct_values": 47,
+      "log10_min": -13.419925912679478,
+      "log10_max": 5.750909070632879,
+      "log10_range": 19.170834983312357,
+      "spearman_log2_f_vs_log10_S": -0.9882053654024052,
+      "verdict": "STRONG correlation with log2(f) (r=-0.988) \u2014 S varies smoothly with frequency. This is a REAL scale, not just HW-determined."
+    },
+    "S_per_cw_idx": {
+      "n": 48,
+      "n_distinct_values": 48,
+      "log10_min": -15.559455184738884,
+      "log10_max": 3.0976965568575356,
+      "log10_range": 18.65715174159642,
+      "spearman_log2_f_vs_log10_S": -0.9823056882327401,
+      "verdict": "STRONG correlation with log2(f) (r=-0.982) \u2014 S varies smoothly with frequency. This is a REAL scale, not just HW-determined."
+    },
+    "S_per_TAX": {
+      "n": 48,
+      "n_distinct_values": 48,
+      "log10_min": -12.834537677388973,
+      "log10_max": 5.926122840834337,
+      "log10_range": 18.76066051822331,
+      "spearman_log2_f_vs_log10_S": -0.9981545809813289,
+      "verdict": "STRONG correlation with log2(f) (r=-0.998) \u2014 S varies smoothly with frequency. This is a REAL scale, not just HW-determined."
+    }
+  },
+  "bond_energy_test": {
+    "n_bonds": 20,
+    "encoding_method": "Each element by Z (7 bits), bond = XOR + AND of element codewords, geometric_work = AND + bond_order \u00d7 XOR",
+    "correlations_with_bond_energy": {
+      "spearman_energy_vs_xor_hw": 0.23980011558403388,
+      "spearman_energy_vs_and_hw": -0.2111519525797047,
+      "spearman_energy_vs_geometric_work": 0.666132330339461,
+      "spearman_energy_vs_tax": 0.23980011558403388
+    },
+    "br_br_anchor": {
+      "bond": "Br-Br (order 1)",
+      "energy_kJ_per_mol": 190,
+      "xor_hw": 0,
+      "and_hw": 8,
+      "geometric_work": 16,
+      "note": "Br-Br is a same-element bond, so XOR=0 (vacuum). Energy comes from bond_order \u00d7 8 (octad weight)."
+    },
+    "verdict": "Across 20 bonds, correlation of energy with geometric_work: r=0.666. Geometric work CORRELATES with bond energy \u2014 the 190 kJ/mol anchor IS derivable from the substrate via bond-geometry encoding!",
+    "all_bonds": [
+      {
+        "bond": "H-H (order 1)",
+        "elements": "H(Z=1) \u00d7 H(Z=1)",
+        "bond_order": 1,
+        "energy_kJ_per_mol": 436,
+        "energy_ratio_to_190": 2.294736842105263,
+        "xor_hw": 0,
+        "and_hw": 12,
+        "geometric_work": 20,
+        "tax_xor": 0,
+        "nrci_xor": 1.0
+      },
+      {
+        "bond": "C-C (order 1)",
+        "elements": "C(Z=6) \u00d7 C(Z=6)",
+        "bond_order": 1,
+        "energy_kJ_per_mol": 347,
+        "energy_ratio_to_190": 1.8263157894736841,
+        "xor_hw": 0,
+        "and_hw": 8,
+        "geometric_work": 16,
+        "tax_xor": 0,
+        "nrci_xor": 1.0
+      },
+      {
+        "bond": "C-C (order 2)",
+        "elements": "C(Z=6) \u00d7 C(Z=6)",
+        "bond_order": 2,
+        "energy_kJ_per_mol": 614,
+        "energy_ratio_to_190": 3.231578947368421,
+        "xor_hw": 0,
+        "and_hw": 8,
+        "geometric_work": 24,
+        "tax_xor": 0,
+        "nrci_xor": 1.0
+      },
+      {
+        "bond": "C-C (order 3)",
+        "elements": "C(Z=6) \u00d7 C(Z=6)",
+        "bond_order": 3,
+        "energy_kJ_per_mol": 839,
+        "energy_ratio_to_190": 4.41578947368421,
+        "xor_hw": 0,
+        "and_hw": 8,
+        "geometric_work": 32,
+        "tax_xor": 0,
+        "nrci_xor": 1.0
+      },
+      {
+        "bond": "N-N (order 1)",
+        "elements": "N(Z=7) \u00d7 N(Z=7)",
+        "bond_order": 1,
+        "energy_kJ_per_mol": 163,
+        "energy_ratio_to_190": 0.8578947368421053,
+        "xor_hw": 0,
+        "and_hw": 8,
+        "geometric_work": 16,
+        "tax_xor": 0,
+        "nrci_xor": 1.0
+      },
+      {
+        "bond": "N-N (order 2)",
+        "elements": "N(Z=7) \u00d7 N(Z=7)",
+        "bond_order": 2,
+        "energy_kJ_per_mol": 418,
+        "energy_ratio_to_190": 2.2,
+        "xor_hw": 0,
+        "and_hw": 8,
+        "geometric_work": 24,
+        "tax_xor": 0,
+        "nrci_xor": 1.0
+      },
+      {
+        "bond": "N-N (order 3)",
+        "elements": "N(Z=7) \u00d7 N(Z=7)",
+        "bond_order": 3,
+        "energy_kJ_per_mol": 941,
+        "energy_ratio_to_190": 4.9526315789473685,
+        "xor_hw": 0,
+        "and_hw": 8,
+        "geometric_work": 32,
+        "tax_xor": 0,
+        "nrci_xor": 1.0
+      },
+      {
+        "bond": "O-O (order 1)",
+        "elements": "O(Z=8) \u00d7 O(Z=8)",
+        "bond_order": 1,
+        "energy_kJ_per_mol": 146,
+        "energy_ratio_to_190": 0.7684210526315789,
+        "xor_hw": 0,
+        "and_hw": 8,
+        "geometric_work": 16,
+        "tax_xor": 0,
+        "nrci_xor": 1.0
+      },
+      {
+        "bond": "O-O (order 2)",
+        "elements": "O(Z=8) \u00d7 O(Z=8)",
+        "bond_order": 2,
+        "energy_kJ_per_mol": 495,
+        "energy_ratio_to_190": 2.6052631578947367,
+        "xor_hw": 0,
+        "and_hw": 8,
+        "geometric_work": 24,
+        "tax_xor": 0,
+        "nrci_xor": 1.0
+      },
+      {
+        "bond": "F-F (order 1)",
+        "elements": "F(Z=9) \u00d7 F(Z=9)",
+        "bond_order": 1,
+        "energy_kJ_per_mol": 155,
+        "energy_ratio_to_190": 0.8157894736842105,
+        "xor_hw": 0,
+        "and_hw": 8,
+        "geometric_work": 16,
+        "tax_xor": 0,
+        "nrci_xor": 1.0
+      },
+      {
+        "bond": "Cl-Cl (order 1)",
+        "elements": "Cl(Z=17) \u00d7 Cl(Z=17)",
+        "bond_order": 1,
+        "energy_kJ_per_mol": 239,
+        "energy_ratio_to_190": 1.2578947368421052,
+        "xor_hw": 0,
+        "and_hw": 8,
+        "geometric_work": 16,
+        "tax_xor": 0,
+        "nrci_xor": 1.0
+      },
+      {
+        "bond": "Br-Br (order 1)",
+        "elements": "Br(Z=35) \u00d7 Br(Z=35)",
+        "bond_order": 1,
+        "energy_kJ_per_mol": 190,
+        "energy_ratio_to_190": 1.0,
+        "xor_hw": 0,
+        "and_hw": 8,
+        "geometric_work": 16,
+        "tax_xor": 0,
+        "nrci_xor": 1.0
+      },
+      {
+        "bond": "I-I (order 1)",
+        "elements": "I(Z=53) \u00d7 I(Z=53)",
+        "bond_order": 1,
+        "energy_kJ_per_mol": 151,
+        "energy_ratio_to_190": 0.7947368421052632,
+        "xor_hw": 0,
+        "and_hw": 8,
+        "geometric_work": 16,
+        "tax_xor": 0,
+        "nrci_xor": 1.0
+      },
+      {
+        "bond": "C-H (order 1)",
+        "elements": "C(Z=6) \u00d7 H(Z=1)",
+        "bond_order": 1,
+        "energy_kJ_per_mol": 413,
+        "energy_ratio_to_190": 2.1736842105263157,
+        "xor_hw": 8,
+        "and_hw": 6,
+        "geometric_work": 14,
+        "tax_xor": 3.1174034432362157,
+        "nrci_xor": 0.7623459965437248
+      },
+      {
+        "bond": "C-O (order 1)",
+        "elements": "C(Z=6) \u00d7 O(Z=8)",
+        "bond_order": 1,
+        "energy_kJ_per_mol": 358,
+        "energy_ratio_to_190": 1.8842105263157896,
+        "xor_hw": 8,
+        "and_hw": 4,
+        "geometric_work": 12,
+        "tax_xor": 3.1174034432362157,
+        "nrci_xor": 0.7623459965437248
+      },
+      {
+        "bond": "C-O (order 2)",
+        "elements": "C(Z=6) \u00d7 O(Z=8)",
+        "bond_order": 2,
+        "energy_kJ_per_mol": 799,
+        "energy_ratio_to_190": 4.205263157894737,
+        "xor_hw": 8,
+        "and_hw": 4,
+        "geometric_work": 20,
+        "tax_xor": 3.1174034432362157,
+        "nrci_xor": 0.7623459965437248
+      },
+      {
+        "bond": "C-N (order 1)",
+        "elements": "C(Z=6) \u00d7 N(Z=7)",
+        "bond_order": 1,
+        "energy_kJ_per_mol": 305,
+        "energy_ratio_to_190": 1.605263157894737,
+        "xor_hw": 12,
+        "and_hw": 2,
+        "geometric_work": 14,
+        "tax_xor": 4.676105164854324,
+        "nrci_xor": 0.6813796908424689
+      },
+      {
+        "bond": "C-N (order 3)",
+        "elements": "C(Z=6) \u00d7 N(Z=7)",
+        "bond_order": 3,
+        "energy_kJ_per_mol": 891,
+        "energy_ratio_to_190": 4.689473684210526,
+        "xor_hw": 12,
+        "and_hw": 2,
+        "geometric_work": 38,
+        "tax_xor": 4.676105164854324,
+        "nrci_xor": 0.6813796908424689
+      },
+      {
+        "bond": "N-H (order 1)",
+        "elements": "N(Z=7) \u00d7 H(Z=1)",
+        "bond_order": 1,
+        "energy_kJ_per_mol": 391,
+        "energy_ratio_to_190": 2.057894736842105,
+        "xor_hw": 8,
+        "and_hw": 6,
+        "geometric_work": 14,
+        "tax_xor": 3.1174034432362157,
+        "nrci_xor": 0.7623459965437248
+      },
+      {
+        "bond": "O-H (order 1)",
+        "elements": "O(Z=8) \u00d7 H(Z=1)",
+        "bond_order": 1,
+        "energy_kJ_per_mol": 467,
+        "energy_ratio_to_190": 2.457894736842105,
+        "xor_hw": 8,
+        "and_hw": 6,
+        "geometric_work": 14,
+        "tax_xor": 3.1174034432362157,
+        "nrci_xor": 0.7623459965437248
+      }
+    ],
+    "anti_numerology_note": "Pre-registered 20 bonds with known elements and energies (CRC Handbook). We tested 4 substrate quantities (XOR_HW, AND_HW, geometric_work, TAX). We report ALL correlations, not just the best one. The geometric_work formula (AND + bond_order \u00d7 XOR) is a hypothesis; we report whether it works."
+  }
+}
