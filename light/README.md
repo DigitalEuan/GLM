@@ -1,6 +1,6 @@
 # 'light/' README — Speed of Light Calibration and EM scale calibration
 
-**Version:** 1.2.0  (6 August 2026) 
+**Version:** 1.3.0  (6 August 2026) 
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand   
 **Parent:** `../README.md`  
 
@@ -20,7 +20,8 @@ light/ (this folder)
   │
   ├──┬ 'EM_calibration_1' - The UBP-to-realworld scale is: S(λ, HW) = λ / [HW × (Y + 1/8)]d
   │  ├ 'reports/ubp_scale_final_v9_report.md' - explainer
-  │  └ `scripts/ubp_scale_final_v9` the working method, stage by stage
+  │  ├ 'scripts/ubp_scale_final_v9` the working method, stage by stage
+  │  └ `ubp_layered_arch_v11_report.md' Bit-Ops - native UBP bit-level operations and metrics
   │
   ├── 'reports' = development reports
   │
