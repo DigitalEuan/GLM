@@ -24,9 +24,9 @@ https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the dire
   │
   │
   ├──→ light/           SCALE CALIBRATION
-  │                     Speed of light study (UBP ↔ real-world)
-  │                     'aristotle_01/' (Lattice walking shortcut method)
-  │                     'EM_calibration_1/' (substrate-unit-to-meters conversion)
+  │                     1) Speed of light study (UBP ↔ real-world)
+  │                     2) 'aristotle_01/' (Lattice walking shortcut method)
+  │                     3) 'EM_calibration_1/' (substrate-unit-to-meters conversion)
   │
   ├──→ glm_machine/     THE GLM MIND
   │                     Perceives, reasons, acts,
