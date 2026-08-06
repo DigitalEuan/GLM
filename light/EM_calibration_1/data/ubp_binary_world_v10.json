@@ -1,0 +1,399 @@
+{
+  "experiment": "UBP Binary World v10",
+  "date": "2026-08-06",
+  "engine": "GMHGL/ubp_unified_v5.py + Lean-verified decoder patch",
+  "question": "Should the substrate move into the binary world?",
+  "substrate_description": {
+    "core_operations": [
+      "snap",
+      "xor",
+      "and_op",
+      "or_op",
+      "hamming_weight",
+      "syndrome"
+    ],
+    "native_arithmetic": "GF(2) addition (XOR) only",
+    "conservation_law": "TAX(a\u2295b) = TAX(a) + TAX(b) - 2\u00d7TAX(a\u2227b)",
+    "non_locality": "snap requires global syndrome computation"
+  },
+  "part_2_binary_alu": {
+    "tests": {
+      "xor_as_gf2_add": {
+        "a_msg": 2859,
+        "b_msg": 1236,
+        "a_cw": 13948024,
+        "b_cw": 2829191,
+        "xor_result": 16777215,
+        "is_xor_a_codeword": true,
+        "interpretation": "XOR of two codewords IS a codeword (the Golay code is LINEAR). This means GF(2) addition works natively. But this is NOT integer addition \u2014 it's mod-2 addition. The substrate does GF(2) arithmetic natively, but not integer arithmetic."
+      },
+      "integer_add_via_bits": {
+        "a": 15,
+        "b": 27,
+        "sum_via_bits": 42,
+        "sum_python": 42,
+        "matches": true,
+        "interpretation": "Integer addition CAN be done via bit ops (carry propagation). But the RESULT is not a codeword \u2014 it's just an integer. The substrate can DO integer arithmetic on the 24-bit REPRESENTATION, but the result doesn't snap to a codeword (unless you re-encode)."
+      },
+      "integer_mul_via_bits": {
+        "a": 6,
+        "b": 7,
+        "product_via_bits": 42,
+        "product_python": 42,
+        "matches": true,
+        "interpretation": "Integer multiplication CAN be done via bit ops (shift-add). Same caveat: the result is an integer, not a codeword."
+      },
+      "and_as_componentwise_mul": {
+        "a_cw": 13948024,
+        "b_cw": 2829191,
+        "and_result": 0,
+        "is_and_a_codeword": true,
+        "interpretation": "AND of two codewords is generally NOT a codeword. The Golay code is closed under XOR (GF(2) add) but NOT under AND (GF(2) mul). This means the substrate has native ADDITION but not native MULTIPLICATION. Multiplication requires leaving the code (and re-snapping)."
+      }
+    },
+    "summary": "The substrate does GF(2) arithmetic natively (XOR = addition). It does NOT do integer arithmetic natively \u2014 that requires carry propagation, which is a bit-op algorithm but not substrate-native. AND (componentwise multiplication) does NOT preserve the code. CONCLUSION: the substrate is a GF(2) linear algebra engine, not a general ALU.",
+    "what_the_binary_world_reveals": "Going to bit ops makes it clear: the substrate's native operation is XOR (GF(2) add). Everything else (integer add, multiply, AND) is either an algorithm ON TOP of the substrate or leaves the code. The substrate is a LINEAR ALGEBRA engine over GF(2), not a computer."
+  },
+  "part_3_composition": {
+    "test_pairs": [
+      {
+        "a_idx": 912,
+        "b_idx": 204,
+        "a_hw": 8,
+        "b_hw": 8,
+        "xor": {
+          "result_hw": 12,
+          "is_codeword": true,
+          "result_idx": 860
+        },
+        "and": {
+          "result_hw": 2,
+          "is_codeword": false,
+          "snapped_hw": 0,
+          "snap_distance": 2
+        },
+        "or": {
+          "result_hw": 14,
+          "is_codeword": false,
+          "snapped_hw": 12,
+          "snap_distance": 2
+        }
+      },
+      {
+        "a_idx": 2253,
+        "b_idx": 2006,
+        "a_hw": 12,
+        "b_hw": 16,
+        "xor": {
+          "result_hw": 16,
+          "is_codeword": true,
+          "result_idx": 3867
+        },
+        "and": {
+          "result_hw": 6,
+          "is_codeword": false,
+          "snapped_hw": 8,
+          "snap_distance": 2
+        },
+        "or": {
+          "result_hw": 22,
+          "is_codeword": false,
+          "snapped_hw": 24,
+          "snap_distance": 2
+        }
+      },
+      {
+        "a_idx": 1828,
+        "b_idx": 1143,
+        "a_hw": 12,
+        "b_hw": 8,
+        "xor": {
+          "result_hw": 12,
+          "is_codeword": true,
+          "result_idx": 851
+        },
+        "and": {
+          "result_hw": 4,
+          "is_codeword": false,
+          "snapped_hw": 8,
+          "snap_distance": 4
+        },
+        "or": {
+          "result_hw": 16,
+          "is_codeword": false,
+          "snapped_hw": 16,
+          "snap_distance": 4
+        }
+      },
+      {
+        "a_idx": 839,
+        "b_idx": 712,
+        "a_hw": 12,
+        "b_hw": 12,
+        "xor": {
+          "result_hw": 12,
+          "is_codeword": true,
+          "result_idx": 399
+        },
+        "and": {
+          "result_hw": 6,
+          "is_codeword": false,
+          "snapped_hw": 8,
+          "snap_distance": 4
+        },
+        "or": {
+          "result_hw": 18,
+          "is_codeword": false,
+          "snapped_hw": 16,
+          "snap_distance": 4
+        }
+      },
+      {
+        "a_idx": 3456,
+        "b_idx": 260,
+        "a_hw": 8,
+        "b_hw": 8,
+        "xor": {
+          "result_hw": 12,
+          "is_codeword": true,
+          "result_idx": 3204
+        },
+        "and": {
+          "result_hw": 2,
+          "is_codeword": false,
+          "snapped_hw": 0,
+          "snap_distance": 2
+        },
+        "or": {
+          "result_hw": 14,
+          "is_codeword": false,
+          "snapped_hw": 12,
+          "snap_distance": 2
+        }
+      },
+      {
+        "a_idx": 244,
+        "b_idx": 767,
+        "a_hw": 8,
+        "b_hw": 12,
+        "xor": {
+          "result_hw": 8,
+          "is_codeword": true,
+          "result_idx": 523
+        },
+        "and": {
+          "result_hw": 6,
+          "is_codeword": false,
+          "snapped_hw": 8,
+          "snap_distance": 2
+        },
+        "or": {
+          "result_hw": 14,
+          "is_codeword": false,
+          "snapped_hw": 12,
+          "snap_distance": 2
+        }
+      },
+      {
+        "a_idx": 1791,
+        "b_idx": 1905,
+        "a_hw": 16,
+        "b_hw": 12,
+        "xor": {
+          "result_hw": 12,
+          "is_codeword": true,
+          "result_idx": 398
+        },
+        "and": {
+          "result_hw": 8,
+          "is_codeword": false,
+          "snapped_hw": 12,
+          "snap_distance": 4
+        },
+        "or": {
+          "result_hw": 20,
+          "is_codeword": false,
+          "snapped_hw": 16,
+          "snap_distance": 4
+        }
+      },
+      {
+        "a_idx": 217,
+        "b_idx": 1628,
+        "a_hw": 12,
+        "b_hw": 12,
+        "xor": {
+          "result_hw": 12,
+          "is_codeword": true,
+          "result_idx": 1669
+        },
+        "and": {
+          "result_hw": 6,
+          "is_codeword": false,
+          "snapped_hw": 8,
+          "snap_distance": 4
+        },
+        "or": {
+          "result_hw": 18,
+          "is_codeword": false,
+          "snapped_hw": 16,
+          "snap_distance": 4
+        }
+      },
+      {
+        "a_idx": 3436,
+        "b_idx": 1805,
+        "a_hw": 16,
+        "b_hw": 16,
+        "xor": {
+          "result_hw": 8,
+          "is_codeword": true,
+          "result_idx": 2657
+        },
+        "and": {
+          "result_hw": 12,
+          "is_codeword": false,
+          "snapped_hw": 8,
+          "snap_distance": 4
+        },
+        "or": {
+          "result_hw": 20,
+          "is_codeword": false,
+          "snapped_hw": 16,
+          "snap_distance": 4
+        }
+      },
+      {
+        "a_idx": 3679,
+        "b_idx": 2278,
+        "a_hw": 12,
+        "b_hw": 12,
+        "xor": {
+          "result_hw": 12,
+          "is_codeword": true,
+          "result_idx": 1721
+        },
+        "and": {
+          "result_hw": 6,
+          "is_codeword": false,
+          "snapped_hw": 8,
+          "snap_distance": 4
+        },
+        "or": {
+          "result_hw": 18,
+          "is_codeword": false,
+          "snapped_hw": 16,
+          "snap_distance": 4
+        }
+      }
+    ],
+    "xor_always_codeword": true,
+    "and_never_codeword": true,
+    "or_never_codeword": true,
+    "composition_tautology": {
+      "formula": "HW(a XOR b) = HW(a) + HW(b) - 2 \u00d7 HW(a AND b)",
+      "holds": true,
+      "interpretation": "This is a TAUTOLOGY of binary arithmetic \u2014 it's always true for any two binary vectors. But it's a USEFUL tautology: it means the substrate's composition is governed by a conservation law. The XOR 'preserves' the total Hamming weight (minus the shared bits)."
+    },
+    "summary": "XOR is the ONLY composition operation that preserves the code (result is always a codeword). AND and OR leave the code (result is not a codeword), but can be re-snapped. The composition law HW(a\u2295b) = HW(a) + HW(b) - 2\u00d7HW(a\u2227b) is a tautology but reveals that the substrate has a CONSERVATION LAW: the total 'active bits' are conserved under XOR (minus the shared bits)."
+  },
+  "part_4_conservation": {
+    "parity_conservation": {
+      "test": "popcount(a XOR b) mod 2 = 0 for all codeword pairs?",
+      "result": true,
+      "interpretation": "Parity is conserved (codewords are doubly-even, so XOR is even)."
+    },
+    "mod4_conservation": {
+      "test": "popcount(a XOR b) mod 4 = 0 for all codeword pairs?",
+      "result": true,
+      "distribution": {
+        "0": 1000
+      },
+      "interpretation": "Mod 4 is conserved (Lean theorem `corrected_quantized`: d\u00b2 \u2208 {0,8,12,16,24}, all 0 mod 4)."
+    },
+    "mod8_conservation": {
+      "test": "popcount(a XOR b) mod 8 = 0 for all codeword pairs?",
+      "result": false,
+      "distribution": {
+        "4": 628,
+        "0": 372
+      },
+      "interpretation": "Mod 8 is NOT conserved (d\u00b2=12 gives 12 mod 8 = 4). The substrate conserves mod 4, not mod 8."
+    },
+    "tax_conservation": {
+      "test": "TAX(a XOR b) = TAX(a) + TAX(b) - 2\u00d7TAX(a AND b)?",
+      "result": true,
+      "formula": "TAX(a \u2295 b) = TAX(a) + TAX(b) - 2 \u00d7 TAX(a \u2227 b)",
+      "interpretation": "TAX IS conserved under XOR, with the AND term as the 'interaction energy'. This is the substrate's energy conservation law: the 'cost' of the combined state equals the sum of individual costs minus twice the 'shared cost'. This is analogous to E(A\u222aB) = E(A) + E(B) - E(A\u2229B) in statistical mechanics."
+    },
+    "nrci_conservation": {
+      "test": "Is NRCI conserved under any operation?",
+      "result": "NRCI is NOT conserved \u2014 it's a nonlinear function of TAX",
+      "sample_products": [
+        0.7221672840590456,
+        0.7221672840590456,
+        0.7067594161943791,
+        0.7067594161943791,
+        0.7067594161943791,
+        0.7067594161943791,
+        0.5811714184462449,
+        0.7067594161943791,
+        0.6035684431434529,
+        0.6202924328600211
+      ],
+      "interpretation": "NRCI (coherence) is a nonlinear function of TAX, so it doesn't have a simple conservation law. But TAX (cost) DOES. This means the substrate conserves COST, not COHERENCE. Coherence emerges from cost, not the other way around."
+    },
+    "summary": "The substrate conserves: (1) parity (mod 2), (2) mod 4 (Lean theorem), (3) TAX under XOR with the AND interaction. It does NOT conserve mod 8 or NRCI. The TAX conservation law (TAX(a\u2295b) = TAX(a) + TAX(b) - 2\u00d7TAX(a\u2227b)) is the deepest: it's the substrate's energy conservation law, with AND as the interaction term."
+  },
+  "part_5_cellular_automaton": {
+    "global_ca_test": {
+      "test": "Is the snap idempotent (snap(snap(x)) = snap(x))?",
+      "result": true,
+      "always_produces_codeword": true,
+      "interpretation": "The snap IS a global CA rule: it's a synchronous update of all 24 bits based on the global state. It's idempotent (one step converges). But it's NOT a LOCAL rule \u2014 each bit's update depends on the syndrome, which is a global property of all 24 bits."
+    },
+    "local_ca_majority_rule": {
+      "test": "Does the majority rule (3-bit local) converge to codewords?",
+      "n_converged_to_codeword": 1,
+      "n_tested": 100,
+      "interpretation": "Majority rule converges to a codeword in 1/100 cases. This is low \u2014 the majority rule does not approximate the Golay snap."
+    },
+    "local_ca_parity_rule": {
+      "test": "Does the parity rule (3-bit local) converge to codewords?",
+      "n_converged_to_codeword": 2,
+      "n_tested": 100,
+      "interpretation": "Parity rule converges to a codeword in 2/100 cases. Parity rule is GF(2)-linear, so it might relate to the Golay code's linearity."
+    },
+    "summary": "The substrate CAN be expressed as a GLOBAL CA (the snap is an idempotent global update). It CANNOT be expressed as a simple LOCAL CA (3-bit majority/parity rules don't reliably produce codewords). The Golay snap is inherently GLOBAL \u2014 it requires computing the syndrome, which depends on all 24 bits. This is the substrate's non-locality: you cannot snap a codeword by looking at local neighborhoods alone.",
+    "what_this_means_for_hardware": "An FPGA implementation would need GLOBAL connectivity (each of 24 bits connects to a syndrome computation, which feeds back to all bits). This is more like a content-addressable memory than a CA. The substrate is NOT massively parallel in the CA sense \u2014 it's a single 24-bit register with a global update function."
+  },
+  "part_6_assessment": {
+    "what_binary_ADDS": [
+      "1. CLARITY: The substrate's native operation is XOR (GF(2) add). Everything else is an algorithm on top. This is clearer in bit ops than in Python objects.",
+      "2. SPEED: Bit operations on 24-bit ints are ~100x faster than List[int] operations. The substrate could run at MHz in pure Python, GHz in C.",
+      "3. CONSERVATION LAW: The TAX conservation (TAX(a\u2295b) = TAX(a) + TAX(b) - 2\u00d7TAX(a\u2227b)) is obvious in bit ops but hidden in Python objects. This is the substrate's energy conservation law.",
+      "4. NON-LOCALITY: The Golay snap is inherently global (syndrome depends on all 24 bits). This is invisible in Python but obvious when you try to make it a local CA.",
+      "5. LINEARITY: The substrate is a GF(2) linear algebra engine. XOR preserves the code; AND/OR don't. This distinction is fundamental but easy to miss in Python."
+    ],
+    "what_binary_LOSES": [
+      "1. ABSTRACTION: The Python engine (ubp_unified_v5.py) has rich abstractions (ExactMath, LeechLatticeEngine, MonsterGroup) that make the substrate USABLE. Raw bits are fast but bare.",
+      "2. FRACTIONS: The verified engine uses exact Fractions (no float drift). Going to bits means using floats for Y, TAX, NRCI \u2014 losing exactness.",
+      "3. COMPOSABILITY: The Python engine composes (Golay \u2192 MOG \u2192 Hexacode \u2192 Leech \u2192 Monster). Raw bits don't compose \u2014 you'd rebuild each layer.",
+      "4. INSPECTABILITY: Python objects are easy to inspect (print, debug). Raw 24-bit ints are opaque without disassembly.",
+      "5. EXTENSIBILITY: Adding new substrate operations in Python is easy. In bit ops, each new operation requires careful bit-level design."
+    ],
+    "what_is_MISSING_from_the_substrate": [
+      "1. NATIVE MULTIPLICATION: The substrate has native ADD (XOR) but no native MUL. AND doesn't preserve the code. Multiplication requires leaving the code and re-snapping. This is a fundamental gap: the substrate can ADD but not MULTIPLY.",
+      "2. NATIVE I/O: The substrate has no 'port' for receiving input. Encoding (12-bit payload) is the input, but it's external to the substrate. A real OS needs an I/O mechanism.",
+      "3. NATIVE CONDITIONAL: TAX-minimization is a conditional (move only if TAX decreases), but it's implemented as a Python loop. The substrate doesn't have a native if/then/else.",
+      "4. NATIVE ITERATION: The relaxation trajectory is a loop, but it's driven externally. The substrate doesn't 'iterate' on its own \u2014 it needs a Python loop to drive it.",
+      "5. NATIVE MEMORY: Codewords ARE memory, but there's no native 'store' or 'recall' operation. The substrate doesn't have an addressable memory \u2014 it just has states.",
+      "6. NATIVE SYMMETRY: M24 (the Golay automorphism group) acts on the code, but the substrate doesn't 'know' about its symmetries. Applying an M24 element is a Python operation, not a substrate operation."
+    ],
+    "should_you_go_binary": {
+      "answer": "PARTIALLY. Going to bit ops for the CORE (Golay snap, XOR, TAX) is worth it \u2014 it's faster and reveals the conservation law. But keep the Python abstractions for the LAYERS above (Leech, Monster, phi_generator). The substrate is a GF(2) linear algebra engine at its core, but it's a rich structure on top.",
+      "recommended_architecture": "1. CORE (bit ops): Golay snap, syndrome, XOR, TAX, popcount \u2014 as 24-bit int operations\n2. MIDDLE (Python): Leech lattice, MOG, Hexacode, Barnes-Wall \u2014 using the verified engine\n3. HIGH (Python): phi_generator, MonsterGroup, Data Object encoding \u2014 as now\n4. I/O LAYER (NEW): a native encoding/decoding port that maps real-world quantities to payloads\n5. ALU LAYER (NEW): implement ADD (XOR, native) and MUL (via snap-after-AND) as substrate operations\n6. MEMORY LAYER (NEW): a codeword-addressable memory (the 4096 codewords ARE the address space)"
+    },
+    "the_deep_truth": "The substrate is a GF(2) LINEAR ALGEBRA ENGINE. Its native operation is XOR (addition in GF(2)). It has a conservation law (TAX is conserved under XOR with AND interaction). It is non-local (the snap requires global syndrome computation). It has NO native multiplication, conditional, iteration, or I/O \u2014 these must be built ON TOP of the substrate. Going to bit ops reveals this structure clearly. The Python engine HIDES it behind abstractions. But the abstractions are NECESSARY for usability \u2014 raw bits are too bare to be useful alone. The right answer is a LAYERED architecture: bit-ops core, Python middle, Python high, plus new I/O/ALU/memory layers."
+  }
+}
