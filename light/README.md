@@ -1,4 +1,4 @@
-# LIGHT README — Speed of Light Calibration Study
+# 'light/' README — Speed of Light Calibration and EM scale calibration
 
 **Version:** 1.2.0  (6 August 2026) 
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand   
@@ -14,9 +14,13 @@
 
 ```
 light/ (this folder)
-  ├──┬ 'aristotle_01' - provides calibration constants to → ../GMHGL/ (scale alignment)
+  ├──┬ 'aristotle_01' - provides Lattice shortcut method
   │  ├ 'lattice_shortcut.py' - the operational system: self-contained implementation
   │  └ `LATTICE_SHORTCUT_METHOD.md` the working method, stage by stage
+  │
+  ├──┬ 'EM_calibration_1' - The UBP-to-realworld scale is: S(λ, HW) = λ / [HW × (Y + 1/8)]d
+  │  ├ 'reports/ubp_scale_final_v9_report.md' - explainer
+  │  └ `scripts/ubp_scale_final_v9` the working method, stage by stage
   │
   ├── 'reports' = development reports
   │
@@ -41,20 +45,20 @@ The mass residual is the most important open problem.
 
 ## Contents
 
-### /reports — All audit reports (20 phases)
+### /reports — All original audit reports (20 phases)
 - `UBP_c_Falsification_Study.pdf` — Phase 1-3 (original PDF report with charts)
 - `Phase4_Structural_Claims_Audit.md` through `Phase20_Calibration_Audit.md`
 
-### /scripts — All Python analysis scripts
+### /scripts — All original Python analysis scripts
 - `phase1_falsification.py` through `phase20_calibration.py`
 - `ubp_constants.py` — UBP substrate constants
 - `aggregate_results.py` — Chart generation
 - `generate_pdf_report.py` — PDF report generator
 
-### /source_documents — Documents provided by the user
+### /source_documents — Original documents provided by the user
 - All .txt files (driving instructions, review documents, etc.)
 - `ubp_script_20260730192545.py` — Original UBP c-formula script
 - `ubp_study_2026-07-30.json` — Full UBP study export (91 files)
 
-### /worklogs — Multi-agent work log
+### /worklogs — Multi-agent original work log
 - `worklog.md` — Complete record of all 20 phases
