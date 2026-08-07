@@ -1,0 +1,48 @@
+{
+  "experiment": "ARC-AGI v17.9 \u2014 The Reasoning GLM",
+  "date": "2026-08-06",
+  "n_runs": 3,
+  "n_tasks": 40,
+  "runs": [
+    {
+      "run_number": 47,
+      "timestamp": "2026-08-06T23:13:35",
+      "n_tasks": 40,
+      "n_solved": 15,
+      "new_solves": 11,
+      "mind_solves": 3,
+      "refined_solves": 0,
+      "fallback_solves": 12,
+      "glm_concepts": 4620,
+      "glm_edges": 1223
+    },
+    {
+      "run_number": 48,
+      "timestamp": "2026-08-06T23:13:52",
+      "n_tasks": 40,
+      "n_solved": 15,
+      "new_solves": 11,
+      "mind_solves": 3,
+      "refined_solves": 0,
+      "fallback_solves": 12,
+      "glm_concepts": 4620,
+      "glm_edges": 1243
+    },
+    {
+      "run_number": 49,
+      "timestamp": "2026-08-06T23:14:09",
+      "n_tasks": 40,
+      "n_solved": 15,
+      "new_solves": 11,
+      "mind_solves": 3,
+      "refined_solves": 0,
+      "fallback_solves": 12,
+      "glm_concepts": 4620,
+      "glm_edges": 1263
+    }
+  ],
+  "best_run_solved": 15,
+  "mind_solves": 3,
+  "refined_solves": 0,
+  "fallback_solves": 12
+}

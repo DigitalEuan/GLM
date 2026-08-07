@@ -1,0 +1,1437 @@
+{
+  "experiment": "ARC-AGI v17.1 \u2014 Goal-Directed Pipeline",
+  "date": "2026-08-06",
+  "n_tasks": 10,
+  "n_solved": 5,
+  "n_new_solves": 1,
+  "strategy_wins": {
+    "settlement_gravity": 1,
+    "conditional_solver": 2,
+    "colour_map_via_AND": 2
+  },
+  "goal_accuracy": {
+    "correct": 5,
+    "total": 5
+  },
+  "results": [
+    {
+      "task_id": "00dbd492",
+      "solved": false,
+      "winning_strategy": null,
+      "goal": {
+        "goal_type": "CONDITIONAL",
+        "lingo_description": "CONDITIONAL_CHARGE_SWAP",
+        "human_description": "conditional colour swap (only some objects change)",
+        "confidence": 1.0,
+        "target_strategies": [
+          "conditional_solver",
+          "colour_map_via_AND"
+        ]
+      },
+      "attempts": [
+        {
+          "strategy": "conditional_solver",
+          "solved": false
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": false
+        },
+        {
+          "strategy": "settlement_gravity",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "interior_fill",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "shift_solver",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "rotate_solver",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "flip_solver",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "column_rank_solver",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "settlement_dynamics",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "substrate_metric_match",
+          "solved": false,
+          "fallback": true
+        }
+      ],
+      "solution": null
+    },
+    {
+      "task_id": "1e0a9b12",
+      "solved": true,
+      "winning_strategy": "settlement_gravity",
+      "goal": {
+        "goal_type": "COMPACTION_FLOW",
+        "lingo_description": "COMPACTION_FLOW",
+        "human_description": "cells fall down (gravity)",
+        "confidence": 1.0,
+        "target_strategies": [
+          "settlement_gravity"
+        ]
+      },
+      "attempts": [
+        {
+          "strategy": "settlement_gravity",
+          "solved": true
+        }
+      ],
+      "solution": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          5,
+          2,
+          0,
+          4,
+          0
+        ],
+        [
+          5,
+          2,
+          6,
+          4,
+          3
+        ]
+      ]
+    },
+    {
+      "task_id": "396d80d7",
+      "solved": true,
+      "winning_strategy": "conditional_solver",
+      "goal": {
+        "goal_type": "CONDITIONAL",
+        "lingo_description": "CONDITIONAL_CHARGE_SWAP",
+        "human_description": "conditional colour swap (only some objects change)",
+        "confidence": 1.0,
+        "target_strategies": [
+          "conditional_solver",
+          "colour_map_via_AND"
+        ]
+      },
+      "attempts": [
+        {
+          "strategy": "conditional_solver",
+          "solved": true
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": false
+        }
+      ],
+      "solution": [
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          1,
+          7,
+          7,
+          1,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          9,
+          9,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          9,
+          9,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          1,
+          7,
+          7,
+          1,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ]
+      ]
+    },
+    {
+      "task_id": "45737921",
+      "solved": false,
+      "winning_strategy": null,
+      "goal": {
+        "goal_type": "CHARGE_SWAP",
+        "lingo_description": "CHARGE_SWAP(5\u21928, 8\u21925)",
+        "human_description": "swap colours: 5\u21928, 8\u21925",
+        "confidence": 0.3333333333333333,
+        "target_strategies": [
+          "colour_map_via_AND",
+          "settlement_cell_rules",
+          "substrate_metric_match",
+          "parity_sign_recolor"
+        ]
+      },
+      "attempts": [
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": false
+        },
+        {
+          "strategy": "substrate_metric_match",
+          "solved": false
+        },
+        {
+          "strategy": "settlement_gravity",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "interior_fill",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "shift_solver",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "rotate_solver",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "flip_solver",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "conditional_solver",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "column_rank_solver",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "settlement_dynamics",
+          "solved": false,
+          "fallback": true
+        }
+      ],
+      "solution": null
+    },
+    {
+      "task_id": "50846271",
+      "solved": true,
+      "winning_strategy": "colour_map_via_AND",
+      "goal": {
+        "goal_type": "CONDITIONAL",
+        "lingo_description": "CONDITIONAL_CHARGE_SWAP",
+        "human_description": "conditional colour swap (only some objects change)",
+        "confidence": 1.0,
+        "target_strategies": [
+          "conditional_solver",
+          "colour_map_via_AND"
+        ]
+      },
+      "attempts": [
+        {
+          "strategy": "conditional_solver",
+          "solved": false
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": true
+        }
+      ],
+      "solution": [
+        [
+          0,
+          8,
+          0,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0,
+          8,
+          0,
+          0,
+          0,
+          8,
+          0,
+          8,
+          0,
+          0,
+          0,
+          8,
+          8,
+          0
+        ],
+        [
+          0,
+          8,
+          0,
+          8,
+          8,
+          0,
+          0,
+          0,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0,
+          0,
+          0,
+          0,
+          0,
+          8,
+          8,
+          8
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          8,
+          8,
+          8,
+          0,
+          0,
+          0,
+          0,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          8
+        ],
+        [
+          0,
+          0,
+          8,
+          8,
+          0,
+          8,
+          8,
+          8,
+          0,
+          8,
+          0,
+          8,
+          0,
+          8,
+          0,
+          8,
+          8,
+          0,
+          8,
+          8,
+          8,
+          0
+        ],
+        [
+          0,
+          8,
+          0,
+          8,
+          2,
+          2,
+          8,
+          2,
+          2,
+          8,
+          0,
+          0,
+          8,
+          0,
+          8,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          8,
+          0,
+          8,
+          2,
+          8,
+          8,
+          8,
+          0,
+          8,
+          0,
+          0,
+          0,
+          0,
+          8,
+          8,
+          8,
+          8,
+          0,
+          0
+        ],
+        [
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          2,
+          0,
+          8,
+          8,
+          0,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0,
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        [
+          8,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          8,
+          8,
+          8,
+          0,
+          8,
+          0,
+          0,
+          8,
+          0,
+          8,
+          0
+        ],
+        [
+          8,
+          8,
+          8,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0,
+          8,
+          2,
+          8,
+          2,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          8,
+          8,
+          8,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0,
+          8,
+          8,
+          0,
+          8,
+          8,
+          8,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          8,
+          8,
+          8,
+          0,
+          8,
+          0,
+          8,
+          0,
+          8,
+          8,
+          2,
+          8,
+          0,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0
+        ],
+        [
+          0,
+          8,
+          8,
+          8,
+          0,
+          0,
+          0,
+          8,
+          8,
+          8,
+          8,
+          0,
+          0,
+          8,
+          0,
+          8,
+          8,
+          0,
+          0,
+          0,
+          8,
+          8
+        ],
+        [
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0,
+          8,
+          0,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0,
+          8
+        ],
+        [
+          0,
+          0,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          8,
+          8,
+          8,
+          0,
+          0,
+          8,
+          0,
+          8
+        ],
+        [
+          8,
+          8,
+          0,
+          8,
+          8,
+          2,
+          2,
+          2,
+          8,
+          8,
+          8,
+          0,
+          8,
+          8,
+          8,
+          0,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0
+        ],
+        [
+          8,
+          0,
+          0,
+          0,
+          8,
+          2,
+          8,
+          0,
+          8,
+          0,
+          8,
+          0,
+          8,
+          8,
+          8,
+          8,
+          0,
+          0,
+          0,
+          0,
+          8,
+          8
+        ],
+        [
+          8,
+          8,
+          8,
+          0,
+          0,
+          2,
+          0,
+          8,
+          8,
+          0,
+          0,
+          2,
+          2,
+          2,
+          2,
+          2,
+          8,
+          0,
+          8,
+          0,
+          8,
+          8
+        ],
+        [
+          8,
+          0,
+          8,
+          0,
+          0,
+          8,
+          0,
+          8,
+          0,
+          0,
+          0,
+          0,
+          0,
+          8,
+          0,
+          8,
+          8,
+          8,
+          0,
+          8,
+          8,
+          0
+        ],
+        [
+          8,
+          8,
+          8,
+          8,
+          8,
+          0,
+          8,
+          0,
+          8,
+          8,
+          8,
+          8,
+          0,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0,
+          8,
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "task_id": "54d82841",
+      "solved": true,
+      "winning_strategy": "colour_map_via_AND",
+      "goal": {
+        "goal_type": "CONDITIONAL",
+        "lingo_description": "CONDITIONAL_CHARGE_SWAP",
+        "human_description": "conditional colour swap (only some objects change)",
+        "confidence": 1.0,
+        "target_strategies": [
+          "conditional_solver",
+          "colour_map_via_AND"
+        ]
+      },
+      "attempts": [
+        {
+          "strategy": "conditional_solver",
+          "solved": false
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": true
+        }
+      ],
+      "solution": [
+        [
+          4,
+          5,
+          5,
+          5,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        [
+          4,
+          5,
+          4,
+          5,
+          4,
+          8,
+          8,
+          8,
+          4,
+          4,
+          4
+        ],
+        [
+          4,
+          4,
+          4,
+          4,
+          4,
+          8,
+          4,
+          8,
+          3,
+          3,
+          3
+        ],
+        [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          3,
+          4,
+          3
+        ],
+        [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ]
+      ]
+    },
+    {
+      "task_id": "575b1a71",
+      "solved": false,
+      "winning_strategy": null,
+      "goal": {
+        "goal_type": "REGION_FILL",
+        "lingo_description": "REGION_FILL",
+        "human_description": "fill enclosed regions",
+        "confidence": 1.0,
+        "target_strategies": [
+          "interior_fill"
+        ]
+      },
+      "attempts": [
+        {
+          "strategy": "interior_fill",
+          "solved": false
+        },
+        {
+          "strategy": "settlement_gravity",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "shift_solver",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "rotate_solver",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "flip_solver",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "conditional_solver",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "column_rank_solver",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "settlement_dynamics",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "substrate_metric_match",
+          "solved": false,
+          "fallback": true
+        }
+      ],
+      "solution": null
+    },
+    {
+      "task_id": "a85d4709",
+      "solved": false,
+      "winning_strategy": null,
+      "goal": {
+        "goal_type": "CHARGE_SWAP",
+        "lingo_description": "CHARGE_SWAP(0\u21923, 5\u21923)",
+        "human_description": "swap colours: 0\u21923, 5\u21923",
+        "confidence": 0.25,
+        "target_strategies": [
+          "colour_map_via_AND",
+          "settlement_cell_rules",
+          "substrate_metric_match",
+          "parity_sign_recolor"
+        ]
+      },
+      "attempts": [
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": false
+        },
+        {
+          "strategy": "substrate_metric_match",
+          "solved": false
+        },
+        {
+          "strategy": "settlement_gravity",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "interior_fill",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "shift_solver",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "rotate_solver",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "flip_solver",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "conditional_solver",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "column_rank_solver",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "settlement_dynamics",
+          "solved": false,
+          "fallback": true
+        }
+      ],
+      "solution": null
+    },
+    {
+      "task_id": "ae58858e",
+      "solved": true,
+      "winning_strategy": "conditional_solver",
+      "goal": {
+        "goal_type": "CONDITIONAL",
+        "lingo_description": "CONDITIONAL_CHARGE_SWAP",
+        "human_description": "conditional colour swap (only some objects change)",
+        "confidence": 1.0,
+        "target_strategies": [
+          "conditional_solver",
+          "colour_map_via_AND"
+        ]
+      },
+      "attempts": [
+        {
+          "strategy": "conditional_solver",
+          "solved": true
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": true
+        }
+      ],
+      "solution": [
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          2,
+          2,
+          0
+        ],
+        [
+          6,
+          6,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          6,
+          0,
+          0,
+          6,
+          6,
+          0
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          0,
+          6,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          2,
+          2,
+          0,
+          0,
+          0,
+          2
+        ]
+      ]
+    },
+    {
+      "task_id": "e48d4e1a",
+      "solved": false,
+      "winning_strategy": null,
+      "goal": {
+        "goal_type": "CONDITIONAL",
+        "lingo_description": "CONDITIONAL_CHARGE_SWAP",
+        "human_description": "conditional colour swap (only some objects change)",
+        "confidence": 1.0,
+        "target_strategies": [
+          "conditional_solver",
+          "colour_map_via_AND"
+        ]
+      },
+      "attempts": [
+        {
+          "strategy": "conditional_solver",
+          "solved": false
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": false
+        },
+        {
+          "strategy": "settlement_gravity",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "interior_fill",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "shift_solver",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "rotate_solver",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "flip_solver",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "column_rank_solver",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "settlement_dynamics",
+          "solved": false,
+          "fallback": true
+        },
+        {
+          "strategy": "substrate_metric_match",
+          "solved": false,
+          "fallback": true
+        }
+      ],
+      "solution": null
+    }
+  ]
+}

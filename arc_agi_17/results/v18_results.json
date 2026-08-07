@@ -1,0 +1,82 @@
+{
+  "experiment": "ARC-AGI v18 \u2014 HexColour Analogical Reasoning",
+  "date": "2026-08-06",
+  "n_runs": 5,
+  "n_tasks": 40,
+  "runs": [
+    {
+      "run_number": 55,
+      "timestamp": "2026-08-06T23:34:14",
+      "n_tasks": 40,
+      "n_solved": 15,
+      "new_solves": 11,
+      "mind_solves": 2,
+      "analogical_solves": 1,
+      "refined_solves": 0,
+      "fallback_solves": 12,
+      "known_addresses": 15,
+      "glm_concepts": 4620,
+      "glm_edges": 1383
+    },
+    {
+      "run_number": 56,
+      "timestamp": "2026-08-06T23:34:33",
+      "n_tasks": 40,
+      "n_solved": 15,
+      "new_solves": 11,
+      "mind_solves": 2,
+      "analogical_solves": 1,
+      "refined_solves": 0,
+      "fallback_solves": 12,
+      "known_addresses": 15,
+      "glm_concepts": 4620,
+      "glm_edges": 1403
+    },
+    {
+      "run_number": 57,
+      "timestamp": "2026-08-06T23:34:52",
+      "n_tasks": 40,
+      "n_solved": 15,
+      "new_solves": 11,
+      "mind_solves": 2,
+      "analogical_solves": 1,
+      "refined_solves": 0,
+      "fallback_solves": 12,
+      "known_addresses": 15,
+      "glm_concepts": 4620,
+      "glm_edges": 1423
+    },
+    {
+      "run_number": 58,
+      "timestamp": "2026-08-06T23:35:11",
+      "n_tasks": 40,
+      "n_solved": 15,
+      "new_solves": 11,
+      "mind_solves": 2,
+      "analogical_solves": 1,
+      "refined_solves": 0,
+      "fallback_solves": 12,
+      "known_addresses": 15,
+      "glm_concepts": 4620,
+      "glm_edges": 1443
+    },
+    {
+      "run_number": 59,
+      "timestamp": "2026-08-06T23:35:30",
+      "n_tasks": 40,
+      "n_solved": 15,
+      "new_solves": 11,
+      "mind_solves": 2,
+      "analogical_solves": 1,
+      "refined_solves": 0,
+      "fallback_solves": 12,
+      "known_addresses": 15,
+      "glm_concepts": 4620,
+      "glm_edges": 1463
+    }
+  ],
+  "best_run_solved": 15,
+  "mind_solves": 3,
+  "analogical_solves": 1,
+  "known_addresses": 15
+}

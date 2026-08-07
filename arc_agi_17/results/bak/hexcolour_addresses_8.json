@@ -1,0 +1,38 @@
+{
+  "addresses": {
+    "0d3d703e": "16646707",
+    "253bf280": "14710989",
+    "1e0a9b12": "16252997",
+    "1f0c79e5": "6919833",
+    "22233c11": "3423914",
+    "2bee17df": "15737579",
+    "396d80d7": "13166593",
+    "4612dd53": "16457688",
+    "50846271": "7671350",
+    "5168d44c": "3934069",
+    "54d82841": "11939455",
+    "68b16354": "16303095",
+    "6c434453": "7737771",
+    "90f3ed37": "8506618",
+    "ae58858e": "15885420",
+    "2bee17df_swap43": "15737579"
+  },
+  "transforms": {
+    "0d3d703e": "colour_map_via_AND",
+    "253bf280": "colour_map_via_AND",
+    "1e0a9b12": "settlement_gravity",
+    "1f0c79e5": "conditional_solver",
+    "22233c11": "colour_map_via_AND",
+    "2bee17df": "colour_map_via_AND",
+    "396d80d7": "conditional_solver",
+    "4612dd53": "colour_map_via_AND",
+    "50846271": "colour_map_via_AND",
+    "5168d44c": "colour_map_via_AND",
+    "54d82841": "colour_map_via_AND",
+    "68b16354": "flip_solver",
+    "6c434453": "conditional_solver",
+    "90f3ed37": "colour_map_via_AND",
+    "ae58858e": "hexcolour_analogical",
+    "2bee17df_swap43": "colour_map_via_AND"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "experiment": "ARC-AGI v22 \u2014 All Components Generative",
+  "n_runs": 3,
+  "n_tasks": 40,
+  "runs": [
+    {
+      "run_number": 96,
+      "n_tasks": 40,
+      "n_solved": 14,
+      "new_solves": 10,
+      "mind_solves": 2,
+      "analogical_solves": 1,
+      "refined_solves": 0,
+      "fallback_solves": 11,
+      "crg_generated": 12,
+      "ltm_recommended": 12,
+      "sandbox_verified": 2,
+      "known_addresses": 15,
+      "glm_concepts": 4620,
+      "glm_edges": 2203
+    },
+    {
+      "run_number": 97,
+      "n_tasks": 40,
+      "n_solved": 14,
+      "new_solves": 10,
+      "mind_solves": 2,
+      "analogical_solves": 1,
+      "refined_solves": 0,
+      "fallback_solves": 11,
+      "crg_generated": 12,
+      "ltm_recommended": 12,
+      "sandbox_verified": 2,
+      "known_addresses": 15,
+      "glm_concepts": 4620,
+      "glm_edges": 2223
+    },
+    {
+      "run_number": 98,
+      "n_tasks": 40,
+      "n_solved": 14,
+      "new_solves": 10,
+      "mind_solves": 2,
+      "analogical_solves": 1,
+      "refined_solves": 0,
+      "fallback_solves": 11,
+      "crg_generated": 12,
+      "ltm_recommended": 12,
+      "sandbox_verified": 2,
+      "known_addresses": 15,
+      "glm_concepts": 4620,
+      "glm_edges": 2243
+    }
+  ],
+  "best_run_solved": 14,
+  "mind_solves": 3,
+  "generative_usage": {
+    "crg": 12,
+    "ltm": 12,
+    "sandbox": 2
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "experiment": "ARC-AGI v17.8 \u2014 The GLM as a Mind",
+  "date": "2026-08-06",
+  "n_runs": 5,
+  "n_tasks": 40,
+  "runs": [
+    {
+      "run_number": 42,
+      "n_solved": 15,
+      "n_new_solves": 11,
+      "n_tasks": 40,
+      "glm_mind_solves": 2,
+      "fallback_solves": 13,
+      "strategy_wins": {
+        "colour_map_via_AND": 10,
+        "glm_mind": 2,
+        "conditional_solver": 3
+      },
+      "glm_concepts": 4620,
+      "glm_edges": 1123
+    },
+    {
+      "run_number": 43,
+      "n_solved": 15,
+      "n_new_solves": 11,
+      "n_tasks": 40,
+      "glm_mind_solves": 2,
+      "fallback_solves": 13,
+      "strategy_wins": {
+        "colour_map_via_AND": 10,
+        "glm_mind": 2,
+        "conditional_solver": 3
+      },
+      "glm_concepts": 4620,
+      "glm_edges": 1143
+    },
+    {
+      "run_number": 44,
+      "n_solved": 15,
+      "n_new_solves": 11,
+      "n_tasks": 40,
+      "glm_mind_solves": 2,
+      "fallback_solves": 13,
+      "strategy_wins": {
+        "colour_map_via_AND": 10,
+        "glm_mind": 2,
+        "conditional_solver": 3
+      },
+      "glm_concepts": 4620,
+      "glm_edges": 1163
+    },
+    {
+      "run_number": 45,
+      "n_solved": 15,
+      "n_new_solves": 11,
+      "n_tasks": 40,
+      "glm_mind_solves": 2,
+      "fallback_solves": 13,
+      "strategy_wins": {
+        "colour_map_via_AND": 10,
+        "glm_mind": 2,
+        "conditional_solver": 3
+      },
+      "glm_concepts": 4620,
+      "glm_edges": 1183
+    },
+    {
+      "run_number": 46,
+      "n_solved": 15,
+      "n_new_solves": 11,
+      "n_tasks": 40,
+      "glm_mind_solves": 2,
+      "fallback_solves": 13,
+      "strategy_wins": {
+        "colour_map_via_AND": 10,
+        "glm_mind": 2,
+        "conditional_solver": 3
+      },
+      "glm_concepts": 4620,
+      "glm_edges": 1203
+    }
+  ],
+  "best_run_solved": 15,
+  "glm_mind_solves": 2,
+  "fallback_solves": 13
+}

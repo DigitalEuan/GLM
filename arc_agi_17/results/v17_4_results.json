@@ -1,0 +1,7090 @@
+{
+  "experiment": "ARC-AGI v17.4 \u2014 Unified Implementation",
+  "date": "2026-08-06",
+  "n_runs": 3,
+  "runs": [
+    {
+      "run_number": 2,
+      "n_solved": 5,
+      "n_new_solves": 1,
+      "n_tasks": 10,
+      "strategy_wins": {
+        "settlement_gravity": 1,
+        "conditional_solver": 1,
+        "colour_map_via_AND": 3
+      },
+      "glm_concepts": 65,
+      "glm_edges": 110,
+      "new_concepts": 39,
+      "new_edges": 12,
+      "training_examples": 14,
+      "learning_analysis": {
+        "fastest_task_types": [
+          [
+            "high_overlap",
+            1
+          ]
+        ],
+        "best_strategies": [
+          [
+            "colour_map_via_AND",
+            5
+          ],
+          [
+            "conditional_solver",
+            3
+          ],
+          [
+            "settlement_gravity",
+            2
+          ]
+        ],
+        "most_useful_concepts": [
+          [
+            "shape",
+            10
+          ],
+          [
+            "colour",
+            10
+          ],
+          [
+            "size",
+            5
+          ],
+          [
+            "layer_row",
+            5
+          ]
+        ],
+        "growth_history": [
+          {
+            "run": 1,
+            "new_concepts": 39,
+            "new_edges": 68,
+            "n_solved": 5,
+            "n_tasks": 10
+          },
+          {
+            "run": 2,
+            "new_concepts": 39,
+            "new_edges": 12,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          }
+        ],
+        "total_experiences": 205,
+        "total_successes": 30,
+        "total_failures_seen": 175,
+        "interpretation": "This analysis shows HOW the GLM learns. Fastest task types need less training. Best strategies are the GLM's strengths. Most useful concepts should be expanded. Use this to design targeted training routines."
+      },
+      "results": [
+        {
+          "task_id": "00dbd492",
+          "solved": false,
+          "winning_strategy": null,
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 15\u00d715 transforming to 15\u00d715.",
+              "math": "input_nodes=50, output_nodes=106, ratio=2.12",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (0\u21928).",
+              "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {0: 8}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": null
+        },
+        {
+          "task_id": "1e0a9b12",
+          "solved": true,
+          "winning_strategy": "settlement_gravity",
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": true,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "rotate_solver",
+            "scale_aware_resize",
+            "colour_map_via_AND",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "Observation 'compaction_flow' activates concept 'gravity'",
+            "Concept 'gravity' \u2192 strategy 'settlement_gravity' (direct map)",
+            "Concept 'gravity' --fills--> 'grid' --has--> 'symmetry' \u2192 strategy 'rotate_solver' (2-hop CRG path)",
+            "Concept 'gravity' --contradicts--> 'scale' \u2192 strategy 'scale_aware_resize' (CRG path)",
+            "Concept 'gravity' --contradicts--> 'scale' --preserves--> 'pattern' \u2192 strategy 'colour_map_via_AND' (2-hop CRG path)",
+            "Concept 'gravity' --produces--> 'cycle' --contains--> 'sequence' \u2192 strategy 'shift_solver' (2-hop CRG path)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 6\u00d76 transforming to 6\u00d76.",
+              "math": "input_nodes=8, output_nodes=8, ratio=1.00",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (9\u21920, 8\u21920, 0\u21929).",
+              "math": "|changes|=3, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {9: 0, 8: 0, 0: 9}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": true,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": true
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": [
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              5,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              5,
+              2,
+              0,
+              4,
+              0
+            ],
+            [
+              5,
+              2,
+              6,
+              4,
+              3
+            ]
+          ]
+        },
+        {
+          "task_id": "396d80d7",
+          "solved": true,
+          "winning_strategy": "conditional_solver",
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 16\u00d716 transforming to 16\u00d716.",
+              "math": "input_nodes=256, output_nodes=256, ratio=1.00",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (7\u21922).",
+              "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {7: 2}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": true,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": [
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              1,
+              7,
+              7,
+              1,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              9,
+              9,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              9,
+              9,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              1,
+              7,
+              7,
+              1,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ]
+          ]
+        },
+        {
+          "task_id": "45737921",
+          "solved": false,
+          "winning_strategy": null,
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": true,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false,
+            "match": true
+          },
+          "crg_proposed_strategies": [
+            "colour_map_via_AND"
+          ],
+          "crg_reasoning_steps": [
+            "Observation 'colour_swap' activates concept 'recolour'",
+            "Concept 'recolour' \u2192 strategy 'colour_map_via_AND' (direct map)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 7\u00d77 transforming to 7\u00d77.",
+              "math": "input_nodes=9, output_nodes=9, ratio=1.00",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (5\u21928, 8\u21925).",
+              "math": "|changes|=2, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {5: 8, 8: 5}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": true
+            },
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": null
+        },
+        {
+          "task_id": "50846271",
+          "solved": true,
+          "winning_strategy": "colour_map_via_AND",
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 18\u00d719 transforming to 18\u00d719.",
+              "math": "input_nodes=198, output_nodes=198, ratio=1.00",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (5\u21928).",
+              "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {5: 8}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": true,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": [
+            [
+              0,
+              8,
+              0,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0,
+              8,
+              0,
+              0,
+              0,
+              8,
+              0,
+              8,
+              0,
+              0,
+              0,
+              8,
+              8,
+              0
+            ],
+            [
+              0,
+              8,
+              0,
+              8,
+              8,
+              0,
+              0,
+              0,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0,
+              0,
+              0,
+              0,
+              0,
+              8,
+              8,
+              8
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              8,
+              8,
+              8,
+              0,
+              0,
+              0,
+              0,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8
+            ],
+            [
+              0,
+              0,
+              8,
+              8,
+              0,
+              8,
+              8,
+              8,
+              0,
+              8,
+              0,
+              8,
+              0,
+              8,
+              0,
+              8,
+              8,
+              0,
+              8,
+              8,
+              8,
+              0
+            ],
+            [
+              0,
+              8,
+              0,
+              8,
+              2,
+              2,
+              8,
+              2,
+              2,
+              8,
+              0,
+              0,
+              8,
+              0,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              8,
+              0,
+              8,
+              2,
+              8,
+              8,
+              8,
+              0,
+              8,
+              0,
+              0,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0
+            ],
+            [
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              2,
+              0,
+              8,
+              8,
+              0,
+              0,
+              0,
+              8,
+              0,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8
+            ],
+            [
+              8,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              8,
+              8,
+              8,
+              0,
+              8,
+              0,
+              0,
+              8,
+              0,
+              8,
+              0
+            ],
+            [
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0,
+              8,
+              2,
+              8,
+              2,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              0,
+              0,
+              0,
+              8,
+              8,
+              0,
+              8,
+              8,
+              8,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              8,
+              8,
+              8,
+              0,
+              8,
+              0,
+              8,
+              0,
+              8,
+              8,
+              2,
+              8,
+              0,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0
+            ],
+            [
+              0,
+              8,
+              8,
+              8,
+              0,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              0,
+              8,
+              8,
+              0,
+              0,
+              0,
+              8,
+              8
+            ],
+            [
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0,
+              8,
+              0,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0,
+              8
+            ],
+            [
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              0,
+              8
+            ],
+            [
+              8,
+              8,
+              0,
+              8,
+              8,
+              2,
+              2,
+              2,
+              8,
+              8,
+              8,
+              0,
+              8,
+              8,
+              8,
+              0,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0
+            ],
+            [
+              8,
+              0,
+              0,
+              0,
+              8,
+              2,
+              8,
+              0,
+              8,
+              0,
+              8,
+              0,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              0,
+              0,
+              8,
+              8
+            ],
+            [
+              8,
+              8,
+              8,
+              0,
+              0,
+              2,
+              0,
+              8,
+              8,
+              0,
+              0,
+              2,
+              2,
+              2,
+              2,
+              2,
+              8,
+              0,
+              8,
+              0,
+              8,
+              8
+            ],
+            [
+              8,
+              0,
+              8,
+              0,
+              0,
+              8,
+              0,
+              8,
+              0,
+              0,
+              0,
+              0,
+              0,
+              8,
+              0,
+              8,
+              8,
+              8,
+              0,
+              8,
+              8,
+              0
+            ],
+            [
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              8,
+              0,
+              8,
+              8,
+              8,
+              8,
+              0,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0,
+              8,
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "task_id": "54d82841",
+          "solved": true,
+          "winning_strategy": "colour_map_via_AND",
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 5\u00d75 transforming to 5\u00d75.",
+              "math": "input_nodes=5, output_nodes=6, ratio=1.20",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (0\u21924).",
+              "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {0: 4}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": true,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": [
+            [
+              4,
+              5,
+              5,
+              5,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4
+            ],
+            [
+              4,
+              5,
+              4,
+              5,
+              4,
+              8,
+              8,
+              8,
+              4,
+              4,
+              4
+            ],
+            [
+              4,
+              4,
+              4,
+              4,
+              4,
+              8,
+              4,
+              8,
+              3,
+              3,
+              3
+            ],
+            [
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              3,
+              4,
+              3
+            ],
+            [
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4
+            ],
+            [
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4
+            ],
+            [
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4
+            ]
+          ]
+        },
+        {
+          "task_id": "575b1a71",
+          "solved": false,
+          "winning_strategy": null,
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 10\u00d710 transforming to 10\u00d710.",
+              "math": "input_nodes=92, output_nodes=100, ratio=1.09",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (0\u21922).",
+              "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {0: 2}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": null
+        },
+        {
+          "task_id": "a85d4709",
+          "solved": false,
+          "winning_strategy": null,
+          "task_type": "size_change",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "scale_aware_resize"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 3\u00d73 transforming to 3\u00d73.",
+              "math": "input_nodes=3, output_nodes=9, ratio=3.00",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (5\u21922, 0\u21922).",
+              "math": "|changes|=2, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {5: 2, 0: 2}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": null
+        },
+        {
+          "task_id": "ae58858e",
+          "solved": true,
+          "winning_strategy": "colour_map_via_AND",
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 6\u00d76 transforming to 6\u00d76.",
+              "math": "input_nodes=13, output_nodes=13, ratio=1.00",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (2\u21926).",
+              "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {2: 6}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": true,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": true,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": [
+            [
+              0,
+              0,
+              0,
+              0,
+              6,
+              6,
+              6,
+              0
+            ],
+            [
+              6,
+              6,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              6,
+              6,
+              0,
+              0,
+              6,
+              6,
+              0
+            ],
+            [
+              0,
+              6,
+              0,
+              0,
+              0,
+              6,
+              6,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              6,
+              0,
+              6,
+              6,
+              0,
+              0,
+              0,
+              6
+            ]
+          ]
+        },
+        {
+          "task_id": "e48d4e1a",
+          "solved": false,
+          "winning_strategy": null,
+          "task_type": "medium_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "interior_fill",
+            "colour_map_via_AND",
+            "shift_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 10\u00d710 transforming to 10\u00d710.",
+              "math": "input_nodes=22, output_nodes=19, ratio=0.86",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (0\u21926, 6\u21920, 5\u21920).",
+              "math": "|changes|=3, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {0: 6, 6: 0, 5: 0}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": null
+        }
+      ]
+    },
+    {
+      "run_number": 3,
+      "n_solved": 5,
+      "n_new_solves": 1,
+      "n_tasks": 10,
+      "strategy_wins": {
+        "settlement_gravity": 1,
+        "conditional_solver": 1,
+        "colour_map_via_AND": 3
+      },
+      "glm_concepts": 65,
+      "glm_edges": 110,
+      "new_concepts": 39,
+      "new_edges": 0,
+      "training_examples": 14,
+      "learning_analysis": {
+        "fastest_task_types": [
+          [
+            "high_overlap",
+            1
+          ]
+        ],
+        "best_strategies": [
+          [
+            "colour_map_via_AND",
+            8
+          ],
+          [
+            "conditional_solver",
+            4
+          ],
+          [
+            "settlement_gravity",
+            3
+          ]
+        ],
+        "most_useful_concepts": [
+          [
+            "shape",
+            15
+          ],
+          [
+            "colour",
+            15
+          ],
+          [
+            "layer_row",
+            10
+          ],
+          [
+            "size",
+            5
+          ]
+        ],
+        "growth_history": [
+          {
+            "run": 1,
+            "new_concepts": 39,
+            "new_edges": 68,
+            "n_solved": 5,
+            "n_tasks": 10
+          },
+          {
+            "run": 2,
+            "new_concepts": 39,
+            "new_edges": 12,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 3,
+            "new_concepts": 39,
+            "new_edges": 0,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          }
+        ],
+        "total_experiences": 205,
+        "total_successes": 30,
+        "total_failures_seen": 175,
+        "interpretation": "This analysis shows HOW the GLM learns. Fastest task types need less training. Best strategies are the GLM's strengths. Most useful concepts should be expanded. Use this to design targeted training routines."
+      },
+      "results": [
+        {
+          "task_id": "00dbd492",
+          "solved": false,
+          "winning_strategy": null,
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 15\u00d715 transforming to 15\u00d715.",
+              "math": "input_nodes=50, output_nodes=106, ratio=2.12",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (0\u21928).",
+              "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {0: 8}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": null
+        },
+        {
+          "task_id": "1e0a9b12",
+          "solved": true,
+          "winning_strategy": "settlement_gravity",
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": true,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "rotate_solver",
+            "scale_aware_resize",
+            "colour_map_via_AND",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "Observation 'compaction_flow' activates concept 'gravity'",
+            "Concept 'gravity' \u2192 strategy 'settlement_gravity' (direct map)",
+            "Concept 'gravity' --fills--> 'grid' --has--> 'symmetry' \u2192 strategy 'rotate_solver' (2-hop CRG path)",
+            "Concept 'gravity' --contradicts--> 'scale' \u2192 strategy 'scale_aware_resize' (CRG path)",
+            "Concept 'gravity' --contradicts--> 'scale' --preserves--> 'pattern' \u2192 strategy 'colour_map_via_AND' (2-hop CRG path)",
+            "Concept 'gravity' --produces--> 'cycle' --contains--> 'sequence' \u2192 strategy 'shift_solver' (2-hop CRG path)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 6\u00d76 transforming to 6\u00d76.",
+              "math": "input_nodes=8, output_nodes=8, ratio=1.00",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (9\u21920, 8\u21920, 0\u21929).",
+              "math": "|changes|=3, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {9: 0, 8: 0, 0: 9}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": true,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": true
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": [
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              5,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              5,
+              2,
+              0,
+              4,
+              0
+            ],
+            [
+              5,
+              2,
+              6,
+              4,
+              3
+            ]
+          ]
+        },
+        {
+          "task_id": "396d80d7",
+          "solved": true,
+          "winning_strategy": "conditional_solver",
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 16\u00d716 transforming to 16\u00d716.",
+              "math": "input_nodes=256, output_nodes=256, ratio=1.00",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (7\u21922).",
+              "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {7: 2}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": true,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": [
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              1,
+              7,
+              7,
+              1,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              9,
+              9,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              9,
+              9,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              1,
+              7,
+              7,
+              1,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ]
+          ]
+        },
+        {
+          "task_id": "45737921",
+          "solved": false,
+          "winning_strategy": null,
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": true,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false,
+            "match": true
+          },
+          "crg_proposed_strategies": [
+            "colour_map_via_AND"
+          ],
+          "crg_reasoning_steps": [
+            "Observation 'colour_swap' activates concept 'recolour'",
+            "Concept 'recolour' \u2192 strategy 'colour_map_via_AND' (direct map)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 7\u00d77 transforming to 7\u00d77.",
+              "math": "input_nodes=9, output_nodes=9, ratio=1.00",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (5\u21928, 8\u21925).",
+              "math": "|changes|=2, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {5: 8, 8: 5}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": true
+            },
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": null
+        },
+        {
+          "task_id": "50846271",
+          "solved": true,
+          "winning_strategy": "colour_map_via_AND",
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 18\u00d719 transforming to 18\u00d719.",
+              "math": "input_nodes=198, output_nodes=198, ratio=1.00",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (5\u21928).",
+              "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {5: 8}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": true,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": [
+            [
+              0,
+              8,
+              0,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0,
+              8,
+              0,
+              0,
+              0,
+              8,
+              0,
+              8,
+              0,
+              0,
+              0,
+              8,
+              8,
+              0
+            ],
+            [
+              0,
+              8,
+              0,
+              8,
+              8,
+              0,
+              0,
+              0,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0,
+              0,
+              0,
+              0,
+              0,
+              8,
+              8,
+              8
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              8,
+              8,
+              8,
+              0,
+              0,
+              0,
+              0,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8
+            ],
+            [
+              0,
+              0,
+              8,
+              8,
+              0,
+              8,
+              8,
+              8,
+              0,
+              8,
+              0,
+              8,
+              0,
+              8,
+              0,
+              8,
+              8,
+              0,
+              8,
+              8,
+              8,
+              0
+            ],
+            [
+              0,
+              8,
+              0,
+              8,
+              2,
+              2,
+              8,
+              2,
+              2,
+              8,
+              0,
+              0,
+              8,
+              0,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              8,
+              0,
+              8,
+              2,
+              8,
+              8,
+              8,
+              0,
+              8,
+              0,
+              0,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0
+            ],
+            [
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              2,
+              0,
+              8,
+              8,
+              0,
+              0,
+              0,
+              8,
+              0,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8
+            ],
+            [
+              8,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              8,
+              8,
+              8,
+              0,
+              8,
+              0,
+              0,
+              8,
+              0,
+              8,
+              0
+            ],
+            [
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0,
+              8,
+              2,
+              8,
+              2,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              0,
+              0,
+              0,
+              8,
+              8,
+              0,
+              8,
+              8,
+              8,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              8,
+              8,
+              8,
+              0,
+              8,
+              0,
+              8,
+              0,
+              8,
+              8,
+              2,
+              8,
+              0,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0
+            ],
+            [
+              0,
+              8,
+              8,
+              8,
+              0,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              0,
+              8,
+              8,
+              0,
+              0,
+              0,
+              8,
+              8
+            ],
+            [
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0,
+              8,
+              0,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0,
+              8
+            ],
+            [
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              0,
+              8
+            ],
+            [
+              8,
+              8,
+              0,
+              8,
+              8,
+              2,
+              2,
+              2,
+              8,
+              8,
+              8,
+              0,
+              8,
+              8,
+              8,
+              0,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0
+            ],
+            [
+              8,
+              0,
+              0,
+              0,
+              8,
+              2,
+              8,
+              0,
+              8,
+              0,
+              8,
+              0,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              0,
+              0,
+              8,
+              8
+            ],
+            [
+              8,
+              8,
+              8,
+              0,
+              0,
+              2,
+              0,
+              8,
+              8,
+              0,
+              0,
+              2,
+              2,
+              2,
+              2,
+              2,
+              8,
+              0,
+              8,
+              0,
+              8,
+              8
+            ],
+            [
+              8,
+              0,
+              8,
+              0,
+              0,
+              8,
+              0,
+              8,
+              0,
+              0,
+              0,
+              0,
+              0,
+              8,
+              0,
+              8,
+              8,
+              8,
+              0,
+              8,
+              8,
+              0
+            ],
+            [
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              8,
+              0,
+              8,
+              8,
+              8,
+              8,
+              0,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0,
+              8,
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "task_id": "54d82841",
+          "solved": true,
+          "winning_strategy": "colour_map_via_AND",
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 5\u00d75 transforming to 5\u00d75.",
+              "math": "input_nodes=5, output_nodes=6, ratio=1.20",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (0\u21924).",
+              "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {0: 4}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": true,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": [
+            [
+              4,
+              5,
+              5,
+              5,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4
+            ],
+            [
+              4,
+              5,
+              4,
+              5,
+              4,
+              8,
+              8,
+              8,
+              4,
+              4,
+              4
+            ],
+            [
+              4,
+              4,
+              4,
+              4,
+              4,
+              8,
+              4,
+              8,
+              3,
+              3,
+              3
+            ],
+            [
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              3,
+              4,
+              3
+            ],
+            [
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4
+            ],
+            [
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4
+            ],
+            [
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4
+            ]
+          ]
+        },
+        {
+          "task_id": "575b1a71",
+          "solved": false,
+          "winning_strategy": null,
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 10\u00d710 transforming to 10\u00d710.",
+              "math": "input_nodes=92, output_nodes=100, ratio=1.09",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (0\u21922).",
+              "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {0: 2}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": null
+        },
+        {
+          "task_id": "a85d4709",
+          "solved": false,
+          "winning_strategy": null,
+          "task_type": "size_change",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "scale_aware_resize"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 3\u00d73 transforming to 3\u00d73.",
+              "math": "input_nodes=3, output_nodes=9, ratio=3.00",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (5\u21922, 0\u21922).",
+              "math": "|changes|=2, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {5: 2, 0: 2}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": null
+        },
+        {
+          "task_id": "ae58858e",
+          "solved": true,
+          "winning_strategy": "colour_map_via_AND",
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 6\u00d76 transforming to 6\u00d76.",
+              "math": "input_nodes=13, output_nodes=13, ratio=1.00",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (2\u21926).",
+              "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {2: 6}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": true,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": true,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": [
+            [
+              0,
+              0,
+              0,
+              0,
+              6,
+              6,
+              6,
+              0
+            ],
+            [
+              6,
+              6,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              6,
+              6,
+              0,
+              0,
+              6,
+              6,
+              0
+            ],
+            [
+              0,
+              6,
+              0,
+              0,
+              0,
+              6,
+              6,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              6,
+              0,
+              6,
+              6,
+              0,
+              0,
+              0,
+              6
+            ]
+          ]
+        },
+        {
+          "task_id": "e48d4e1a",
+          "solved": false,
+          "winning_strategy": null,
+          "task_type": "medium_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "interior_fill",
+            "colour_map_via_AND",
+            "shift_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 10\u00d710 transforming to 10\u00d710.",
+              "math": "input_nodes=22, output_nodes=19, ratio=0.86",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (0\u21926, 6\u21920, 5\u21920).",
+              "math": "|changes|=3, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {0: 6, 6: 0, 5: 0}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": null
+        }
+      ]
+    },
+    {
+      "run_number": 4,
+      "n_solved": 5,
+      "n_new_solves": 1,
+      "n_tasks": 10,
+      "strategy_wins": {
+        "settlement_gravity": 1,
+        "conditional_solver": 1,
+        "colour_map_via_AND": 3
+      },
+      "glm_concepts": 65,
+      "glm_edges": 110,
+      "new_concepts": 39,
+      "new_edges": 0,
+      "training_examples": 14,
+      "learning_analysis": {
+        "fastest_task_types": [
+          [
+            "high_overlap",
+            1
+          ]
+        ],
+        "best_strategies": [
+          [
+            "colour_map_via_AND",
+            11
+          ],
+          [
+            "conditional_solver",
+            5
+          ],
+          [
+            "settlement_gravity",
+            4
+          ]
+        ],
+        "most_useful_concepts": [
+          [
+            "shape",
+            20
+          ],
+          [
+            "colour",
+            20
+          ],
+          [
+            "layer_row",
+            15
+          ],
+          [
+            "size",
+            5
+          ]
+        ],
+        "growth_history": [
+          {
+            "run": 1,
+            "new_concepts": 39,
+            "new_edges": 68,
+            "n_solved": 5,
+            "n_tasks": 10
+          },
+          {
+            "run": 2,
+            "new_concepts": 39,
+            "new_edges": 12,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 3,
+            "new_concepts": 39,
+            "new_edges": 0,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 4,
+            "new_concepts": 39,
+            "new_edges": 0,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          }
+        ],
+        "total_experiences": 205,
+        "total_successes": 30,
+        "total_failures_seen": 175,
+        "interpretation": "This analysis shows HOW the GLM learns. Fastest task types need less training. Best strategies are the GLM's strengths. Most useful concepts should be expanded. Use this to design targeted training routines."
+      },
+      "results": [
+        {
+          "task_id": "00dbd492",
+          "solved": false,
+          "winning_strategy": null,
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 15\u00d715 transforming to 15\u00d715.",
+              "math": "input_nodes=50, output_nodes=106, ratio=2.12",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (0\u21928).",
+              "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {0: 8}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": null
+        },
+        {
+          "task_id": "1e0a9b12",
+          "solved": true,
+          "winning_strategy": "settlement_gravity",
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": true,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "rotate_solver",
+            "scale_aware_resize",
+            "colour_map_via_AND",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "Observation 'compaction_flow' activates concept 'gravity'",
+            "Concept 'gravity' \u2192 strategy 'settlement_gravity' (direct map)",
+            "Concept 'gravity' --fills--> 'grid' --has--> 'symmetry' \u2192 strategy 'rotate_solver' (2-hop CRG path)",
+            "Concept 'gravity' --contradicts--> 'scale' \u2192 strategy 'scale_aware_resize' (CRG path)",
+            "Concept 'gravity' --contradicts--> 'scale' --preserves--> 'pattern' \u2192 strategy 'colour_map_via_AND' (2-hop CRG path)",
+            "Concept 'gravity' --produces--> 'cycle' --contains--> 'sequence' \u2192 strategy 'shift_solver' (2-hop CRG path)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 6\u00d76 transforming to 6\u00d76.",
+              "math": "input_nodes=8, output_nodes=8, ratio=1.00",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (9\u21920, 8\u21920, 0\u21929).",
+              "math": "|changes|=3, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {9: 0, 8: 0, 0: 9}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": true,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": true
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": [
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              5,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              5,
+              2,
+              0,
+              4,
+              0
+            ],
+            [
+              5,
+              2,
+              6,
+              4,
+              3
+            ]
+          ]
+        },
+        {
+          "task_id": "396d80d7",
+          "solved": true,
+          "winning_strategy": "conditional_solver",
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 16\u00d716 transforming to 16\u00d716.",
+              "math": "input_nodes=256, output_nodes=256, ratio=1.00",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (7\u21922).",
+              "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {7: 2}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": true,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": [
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              1,
+              7,
+              7,
+              1,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              9,
+              9,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              9,
+              9,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              1,
+              7,
+              7,
+              1,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7,
+              7
+            ]
+          ]
+        },
+        {
+          "task_id": "45737921",
+          "solved": false,
+          "winning_strategy": null,
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": true,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false,
+            "match": true
+          },
+          "crg_proposed_strategies": [
+            "colour_map_via_AND"
+          ],
+          "crg_reasoning_steps": [
+            "Observation 'colour_swap' activates concept 'recolour'",
+            "Concept 'recolour' \u2192 strategy 'colour_map_via_AND' (direct map)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 7\u00d77 transforming to 7\u00d77.",
+              "math": "input_nodes=9, output_nodes=9, ratio=1.00",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (5\u21928, 8\u21925).",
+              "math": "|changes|=2, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {5: 8, 8: 5}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": true
+            },
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": null
+        },
+        {
+          "task_id": "50846271",
+          "solved": true,
+          "winning_strategy": "colour_map_via_AND",
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 18\u00d719 transforming to 18\u00d719.",
+              "math": "input_nodes=198, output_nodes=198, ratio=1.00",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (5\u21928).",
+              "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {5: 8}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": true,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": [
+            [
+              0,
+              8,
+              0,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0,
+              8,
+              0,
+              0,
+              0,
+              8,
+              0,
+              8,
+              0,
+              0,
+              0,
+              8,
+              8,
+              0
+            ],
+            [
+              0,
+              8,
+              0,
+              8,
+              8,
+              0,
+              0,
+              0,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0,
+              0,
+              0,
+              0,
+              0,
+              8,
+              8,
+              8
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              8,
+              8,
+              8,
+              0,
+              0,
+              0,
+              0,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8
+            ],
+            [
+              0,
+              0,
+              8,
+              8,
+              0,
+              8,
+              8,
+              8,
+              0,
+              8,
+              0,
+              8,
+              0,
+              8,
+              0,
+              8,
+              8,
+              0,
+              8,
+              8,
+              8,
+              0
+            ],
+            [
+              0,
+              8,
+              0,
+              8,
+              2,
+              2,
+              8,
+              2,
+              2,
+              8,
+              0,
+              0,
+              8,
+              0,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              8,
+              0,
+              8,
+              2,
+              8,
+              8,
+              8,
+              0,
+              8,
+              0,
+              0,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0
+            ],
+            [
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              2,
+              0,
+              8,
+              8,
+              0,
+              0,
+              0,
+              8,
+              0,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8
+            ],
+            [
+              8,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              8,
+              8,
+              8,
+              0,
+              8,
+              0,
+              0,
+              8,
+              0,
+              8,
+              0
+            ],
+            [
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0,
+              8,
+              2,
+              8,
+              2,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              0,
+              0,
+              0,
+              8,
+              8,
+              0,
+              8,
+              8,
+              8,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              8,
+              8,
+              8,
+              0,
+              8,
+              0,
+              8,
+              0,
+              8,
+              8,
+              2,
+              8,
+              0,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0
+            ],
+            [
+              0,
+              8,
+              8,
+              8,
+              0,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              0,
+              8,
+              8,
+              0,
+              0,
+              0,
+              8,
+              8
+            ],
+            [
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0,
+              8,
+              0,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0,
+              8
+            ],
+            [
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              0,
+              8
+            ],
+            [
+              8,
+              8,
+              0,
+              8,
+              8,
+              2,
+              2,
+              2,
+              8,
+              8,
+              8,
+              0,
+              8,
+              8,
+              8,
+              0,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0
+            ],
+            [
+              8,
+              0,
+              0,
+              0,
+              8,
+              2,
+              8,
+              0,
+              8,
+              0,
+              8,
+              0,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              0,
+              0,
+              8,
+              8
+            ],
+            [
+              8,
+              8,
+              8,
+              0,
+              0,
+              2,
+              0,
+              8,
+              8,
+              0,
+              0,
+              2,
+              2,
+              2,
+              2,
+              2,
+              8,
+              0,
+              8,
+              0,
+              8,
+              8
+            ],
+            [
+              8,
+              0,
+              8,
+              0,
+              0,
+              8,
+              0,
+              8,
+              0,
+              0,
+              0,
+              0,
+              0,
+              8,
+              0,
+              8,
+              8,
+              8,
+              0,
+              8,
+              8,
+              0
+            ],
+            [
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              8,
+              0,
+              8,
+              8,
+              8,
+              8,
+              0,
+              8,
+              0,
+              0,
+              8,
+              8,
+              0,
+              8,
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "task_id": "54d82841",
+          "solved": true,
+          "winning_strategy": "colour_map_via_AND",
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 5\u00d75 transforming to 5\u00d75.",
+              "math": "input_nodes=5, output_nodes=6, ratio=1.20",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (0\u21924).",
+              "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {0: 4}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": true,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": [
+            [
+              4,
+              5,
+              5,
+              5,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4
+            ],
+            [
+              4,
+              5,
+              4,
+              5,
+              4,
+              8,
+              8,
+              8,
+              4,
+              4,
+              4
+            ],
+            [
+              4,
+              4,
+              4,
+              4,
+              4,
+              8,
+              4,
+              8,
+              3,
+              3,
+              3
+            ],
+            [
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              3,
+              4,
+              3
+            ],
+            [
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4
+            ],
+            [
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4
+            ],
+            [
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4
+            ]
+          ]
+        },
+        {
+          "task_id": "575b1a71",
+          "solved": false,
+          "winning_strategy": null,
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 10\u00d710 transforming to 10\u00d710.",
+              "math": "input_nodes=92, output_nodes=100, ratio=1.09",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (0\u21922).",
+              "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {0: 2}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": null
+        },
+        {
+          "task_id": "a85d4709",
+          "solved": false,
+          "winning_strategy": null,
+          "task_type": "size_change",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "scale_aware_resize"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 3\u00d73 transforming to 3\u00d73.",
+              "math": "input_nodes=3, output_nodes=9, ratio=3.00",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (5\u21922, 0\u21922).",
+              "math": "|changes|=2, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {5: 2, 0: 2}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": null
+        },
+        {
+          "task_id": "ae58858e",
+          "solved": true,
+          "winning_strategy": "colour_map_via_AND",
+          "task_type": "high_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "conditional_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 6\u00d76 transforming to 6\u00d76.",
+              "math": "input_nodes=13, output_nodes=13, ratio=1.00",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (2\u21926).",
+              "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {2: 6}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": true,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": true,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": [
+            [
+              0,
+              0,
+              0,
+              0,
+              6,
+              6,
+              6,
+              0
+            ],
+            [
+              6,
+              6,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              6,
+              6,
+              0,
+              0,
+              6,
+              6,
+              0
+            ],
+            [
+              0,
+              6,
+              0,
+              0,
+              0,
+              6,
+              6,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              6,
+              0,
+              6,
+              6,
+              0,
+              0,
+              0,
+              6
+            ]
+          ]
+        },
+        {
+          "task_id": "e48d4e1a",
+          "solved": false,
+          "winning_strategy": null,
+          "task_type": "medium_overlap",
+          "observations": {
+            "colour_swap": false,
+            "compaction_flow": false,
+            "region_fill": false,
+            "centroid_shift": false,
+            "dihedral_rotation": false,
+            "plane_reflection": false,
+            "radius_scaling": false,
+            "conditional": false,
+            "cardinality_measure": false,
+            "size_change": false,
+            "marker_detected": false,
+            "rank_pattern": false,
+            "symmetry_detected": false,
+            "repeat_pattern": false,
+            "sequence_pattern": false
+          },
+          "crg_proposed_strategies": [
+            "settlement_gravity",
+            "interior_fill",
+            "colour_map_via_AND",
+            "scale_aware_resize",
+            "rotate_solver",
+            "flip_solver",
+            "shift_solver",
+            "column_rank_solver",
+            "conditional_solver",
+            "interior_fill",
+            "column_rank_solver",
+            "conditional_solver",
+            "conditional_solver",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "colour_map_via_AND",
+            "rotate_solver",
+            "scale_aware_resize",
+            "settlement_gravity",
+            "shift_solver"
+          ],
+          "crg_reasoning_steps": [
+            "No CRG paths found \u2014 using fallback (try all strategies)"
+          ],
+          "ltm_recommended_mapped": [
+            "interior_fill",
+            "colour_map_via_AND",
+            "shift_solver"
+          ],
+          "reasoning_trace": [
+            {
+              "language": "I perceive a SPATIAL_SUBSTRATE of shape 10\u00d710 transforming to 10\u00d710.",
+              "math": "input_nodes=22, output_nodes=19, ratio=0.86",
+              "script": "inp = task.train[0].input; out = task.train[0].output"
+            },
+            {
+              "language": "I observe CHARGE_SWAP: colours change (0\u21926, 6\u21920, 5\u21920).",
+              "math": "|changes|=3, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+              "script": "changes = {0: 6, 6: 0, 5: 0}"
+            },
+            {
+              "language": "The gap insight suggests the verb 'layer_row' connects the input to the output.",
+              "math": "gap=AND(grid,object)\u2192VERB quadrant",
+              "script": "gap_verb = self.gap_insight('grid', 'object')"
+            }
+          ],
+          "activated_concepts": [
+            "shape",
+            "colour",
+            "layer_row"
+          ],
+          "attempts": [
+            {
+              "strategy": "settlement_gravity",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "interior_fill",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "colour_map_via_AND",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "scale_aware_resize",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "rotate_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "flip_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "shift_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": true
+            },
+            {
+              "strategy": "column_rank_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "conditional_solver",
+              "solved": false,
+              "from_crg": true,
+              "from_ltm": false
+            },
+            {
+              "strategy": "parity_sign_recolor",
+              "solved": false,
+              "from_crg": false,
+              "from_ltm": false
+            }
+          ],
+          "solution": null
+        }
+      ]
+    }
+  ],
+  "cumulative_growth": {
+    "concepts_start": 65,
+    "concepts_end": 65,
+    "edges_start": 110,
+    "edges_end": 110,
+    "solved_start": 5,
+    "solved_end": 5
+  },
+  "crg_reasoning_contribution": {
+    "crg_wins": 15,
+    "total_wins": 15
+  }
+}

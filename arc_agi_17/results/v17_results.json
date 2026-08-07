@@ -1,0 +1,1369 @@
+{
+  "experiment": "ARC-AGI v17",
+  "date": "2026-08-06",
+  "n_tasks": 10,
+  "n_solved": 4,
+  "n_new_solves": 1,
+  "strategy_wins": {
+    "settlement_gravity": 1,
+    "colour_map_via_AND": 3
+  },
+  "results": [
+    {
+      "task_id": "00dbd492",
+      "solved": false,
+      "winning_strategy": null,
+      "attempts": [
+        {
+          "strategy": "settlement_gravity",
+          "solved": false
+        },
+        {
+          "strategy": "settlement_cell_rules",
+          "solved": false
+        },
+        {
+          "strategy": "interior_fill",
+          "solved": false
+        },
+        {
+          "strategy": "substrate_metric_match",
+          "solved": false
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": false
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false
+        },
+        {
+          "strategy": "parity_sign_recolor",
+          "solved": false
+        },
+        {
+          "strategy": "distance_rule",
+          "solved": false
+        }
+      ],
+      "perception_summary": {
+        "n_train": 4,
+        "n_test": 1,
+        "train_hw_values": [
+          12,
+          12,
+          8,
+          12
+        ],
+        "train_tax_values": [
+          4.6761,
+          4.6761,
+          3.1174,
+          4.6761
+        ],
+        "train_nrci_values": [
+          0.6814,
+          0.6814,
+          0.7623,
+          0.6814
+        ],
+        "train_transform_magnitudes": [
+          8,
+          12,
+          12,
+          8
+        ],
+        "train_conservation_holds": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "solution": null
+    },
+    {
+      "task_id": "1e0a9b12",
+      "solved": true,
+      "winning_strategy": "settlement_gravity",
+      "attempts": [
+        {
+          "strategy": "settlement_gravity",
+          "solved": true
+        },
+        {
+          "strategy": "settlement_cell_rules",
+          "solved": false
+        },
+        {
+          "strategy": "interior_fill",
+          "solved": false
+        },
+        {
+          "strategy": "substrate_metric_match",
+          "solved": false
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": false
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false
+        },
+        {
+          "strategy": "parity_sign_recolor",
+          "solved": false
+        },
+        {
+          "strategy": "distance_rule",
+          "solved": false
+        }
+      ],
+      "perception_summary": {
+        "n_train": 3,
+        "n_test": 1,
+        "train_hw_values": [
+          12,
+          12,
+          16
+        ],
+        "train_tax_values": [
+          4.6761,
+          4.6761,
+          6.2348
+        ],
+        "train_nrci_values": [
+          0.6814,
+          0.6814,
+          0.616
+        ],
+        "train_transform_magnitudes": [
+          0,
+          0,
+          0
+        ],
+        "train_conservation_holds": [
+          true,
+          true,
+          true
+        ]
+      },
+      "solution": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          5,
+          2,
+          0,
+          4,
+          0
+        ],
+        [
+          5,
+          2,
+          6,
+          4,
+          3
+        ]
+      ]
+    },
+    {
+      "task_id": "396d80d7",
+      "solved": false,
+      "winning_strategy": null,
+      "attempts": [
+        {
+          "strategy": "settlement_gravity",
+          "solved": false
+        },
+        {
+          "strategy": "settlement_cell_rules",
+          "solved": false
+        },
+        {
+          "strategy": "interior_fill",
+          "solved": false
+        },
+        {
+          "strategy": "substrate_metric_match",
+          "solved": false
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": false
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false
+        },
+        {
+          "strategy": "parity_sign_recolor",
+          "solved": false
+        },
+        {
+          "strategy": "distance_rule",
+          "solved": false
+        }
+      ],
+      "perception_summary": {
+        "n_train": 2,
+        "n_test": 1,
+        "train_hw_values": [
+          8,
+          8
+        ],
+        "train_tax_values": [
+          3.1174,
+          3.1174
+        ],
+        "train_nrci_values": [
+          0.7623,
+          0.7623
+        ],
+        "train_transform_magnitudes": [
+          0,
+          0
+        ],
+        "train_conservation_holds": [
+          true,
+          true
+        ]
+      },
+      "solution": null
+    },
+    {
+      "task_id": "45737921",
+      "solved": false,
+      "winning_strategy": null,
+      "attempts": [
+        {
+          "strategy": "settlement_gravity",
+          "solved": false
+        },
+        {
+          "strategy": "settlement_cell_rules",
+          "solved": false
+        },
+        {
+          "strategy": "interior_fill",
+          "solved": false
+        },
+        {
+          "strategy": "substrate_metric_match",
+          "solved": false
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": false
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false
+        },
+        {
+          "strategy": "parity_sign_recolor",
+          "solved": false
+        },
+        {
+          "strategy": "distance_rule",
+          "solved": false
+        }
+      ],
+      "perception_summary": {
+        "n_train": 3,
+        "n_test": 1,
+        "train_hw_values": [
+          12,
+          8,
+          8
+        ],
+        "train_tax_values": [
+          4.6761,
+          3.1174,
+          3.1174
+        ],
+        "train_nrci_values": [
+          0.6814,
+          0.7623,
+          0.7623
+        ],
+        "train_transform_magnitudes": [
+          0,
+          0,
+          0
+        ],
+        "train_conservation_holds": [
+          true,
+          true,
+          true
+        ]
+      },
+      "solution": null
+    },
+    {
+      "task_id": "50846271",
+      "solved": true,
+      "winning_strategy": "colour_map_via_AND",
+      "attempts": [
+        {
+          "strategy": "settlement_gravity",
+          "solved": false
+        },
+        {
+          "strategy": "settlement_cell_rules",
+          "solved": false
+        },
+        {
+          "strategy": "interior_fill",
+          "solved": false
+        },
+        {
+          "strategy": "substrate_metric_match",
+          "solved": false
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": true
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false
+        },
+        {
+          "strategy": "parity_sign_recolor",
+          "solved": false
+        },
+        {
+          "strategy": "distance_rule",
+          "solved": false
+        }
+      ],
+      "perception_summary": {
+        "n_train": 4,
+        "n_test": 1,
+        "train_hw_values": [
+          12,
+          12,
+          12,
+          12
+        ],
+        "train_tax_values": [
+          4.6761,
+          4.6761,
+          4.6761,
+          4.6761
+        ],
+        "train_nrci_values": [
+          0.6814,
+          0.6814,
+          0.6814,
+          0.6814
+        ],
+        "train_transform_magnitudes": [
+          12,
+          8,
+          8,
+          12
+        ],
+        "train_conservation_holds": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "solution": [
+        [
+          0,
+          8,
+          0,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0,
+          8,
+          0,
+          0,
+          0,
+          8,
+          0,
+          8,
+          0,
+          0,
+          0,
+          8,
+          8,
+          0
+        ],
+        [
+          0,
+          8,
+          0,
+          8,
+          8,
+          0,
+          0,
+          0,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0,
+          0,
+          0,
+          0,
+          0,
+          8,
+          8,
+          8
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          8,
+          8,
+          8,
+          0,
+          0,
+          0,
+          0,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          8
+        ],
+        [
+          0,
+          0,
+          8,
+          8,
+          0,
+          8,
+          8,
+          8,
+          0,
+          8,
+          0,
+          8,
+          0,
+          8,
+          0,
+          8,
+          8,
+          0,
+          8,
+          8,
+          8,
+          0
+        ],
+        [
+          0,
+          8,
+          0,
+          8,
+          2,
+          2,
+          8,
+          2,
+          2,
+          8,
+          0,
+          0,
+          8,
+          0,
+          8,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          8,
+          0,
+          8,
+          2,
+          8,
+          8,
+          8,
+          0,
+          8,
+          0,
+          0,
+          0,
+          0,
+          8,
+          8,
+          8,
+          8,
+          0,
+          0
+        ],
+        [
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          2,
+          0,
+          8,
+          8,
+          0,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0,
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        [
+          8,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          8,
+          8,
+          8,
+          0,
+          8,
+          0,
+          0,
+          8,
+          0,
+          8,
+          0
+        ],
+        [
+          8,
+          8,
+          8,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0,
+          8,
+          2,
+          8,
+          2,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          8,
+          8,
+          8,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0,
+          8,
+          8,
+          0,
+          8,
+          8,
+          8,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          8,
+          8,
+          8,
+          0,
+          8,
+          0,
+          8,
+          0,
+          8,
+          8,
+          2,
+          8,
+          0,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0
+        ],
+        [
+          0,
+          8,
+          8,
+          8,
+          0,
+          0,
+          0,
+          8,
+          8,
+          8,
+          8,
+          0,
+          0,
+          8,
+          0,
+          8,
+          8,
+          0,
+          0,
+          0,
+          8,
+          8
+        ],
+        [
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0,
+          8,
+          0,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0,
+          8
+        ],
+        [
+          0,
+          0,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          8,
+          8,
+          8,
+          0,
+          0,
+          8,
+          0,
+          8
+        ],
+        [
+          8,
+          8,
+          0,
+          8,
+          8,
+          2,
+          2,
+          2,
+          8,
+          8,
+          8,
+          0,
+          8,
+          8,
+          8,
+          0,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0
+        ],
+        [
+          8,
+          0,
+          0,
+          0,
+          8,
+          2,
+          8,
+          0,
+          8,
+          0,
+          8,
+          0,
+          8,
+          8,
+          8,
+          8,
+          0,
+          0,
+          0,
+          0,
+          8,
+          8
+        ],
+        [
+          8,
+          8,
+          8,
+          0,
+          0,
+          2,
+          0,
+          8,
+          8,
+          0,
+          0,
+          2,
+          2,
+          2,
+          2,
+          2,
+          8,
+          0,
+          8,
+          0,
+          8,
+          8
+        ],
+        [
+          8,
+          0,
+          8,
+          0,
+          0,
+          8,
+          0,
+          8,
+          0,
+          0,
+          0,
+          0,
+          0,
+          8,
+          0,
+          8,
+          8,
+          8,
+          0,
+          8,
+          8,
+          0
+        ],
+        [
+          8,
+          8,
+          8,
+          8,
+          8,
+          0,
+          8,
+          0,
+          8,
+          8,
+          8,
+          8,
+          0,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0,
+          8,
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "task_id": "54d82841",
+      "solved": true,
+      "winning_strategy": "colour_map_via_AND",
+      "attempts": [
+        {
+          "strategy": "settlement_gravity",
+          "solved": false
+        },
+        {
+          "strategy": "settlement_cell_rules",
+          "solved": false
+        },
+        {
+          "strategy": "interior_fill",
+          "solved": false
+        },
+        {
+          "strategy": "substrate_metric_match",
+          "solved": false
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": true
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false
+        },
+        {
+          "strategy": "parity_sign_recolor",
+          "solved": false
+        },
+        {
+          "strategy": "distance_rule",
+          "solved": false
+        }
+      ],
+      "perception_summary": {
+        "n_train": 3,
+        "n_test": 1,
+        "train_hw_values": [
+          12,
+          12,
+          12
+        ],
+        "train_tax_values": [
+          4.6761,
+          4.6761,
+          4.6761
+        ],
+        "train_nrci_values": [
+          0.6814,
+          0.6814,
+          0.6814
+        ],
+        "train_transform_magnitudes": [
+          12,
+          8,
+          8
+        ],
+        "train_conservation_holds": [
+          true,
+          true,
+          true
+        ]
+      },
+      "solution": [
+        [
+          4,
+          5,
+          5,
+          5,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        [
+          4,
+          5,
+          4,
+          5,
+          4,
+          8,
+          8,
+          8,
+          4,
+          4,
+          4
+        ],
+        [
+          4,
+          4,
+          4,
+          4,
+          4,
+          8,
+          4,
+          8,
+          3,
+          3,
+          3
+        ],
+        [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          3,
+          4,
+          3
+        ],
+        [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ]
+      ]
+    },
+    {
+      "task_id": "575b1a71",
+      "solved": false,
+      "winning_strategy": null,
+      "attempts": [
+        {
+          "strategy": "settlement_gravity",
+          "solved": false
+        },
+        {
+          "strategy": "settlement_cell_rules",
+          "solved": false
+        },
+        {
+          "strategy": "interior_fill",
+          "solved": false
+        },
+        {
+          "strategy": "substrate_metric_match",
+          "solved": false
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": false
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false
+        },
+        {
+          "strategy": "parity_sign_recolor",
+          "solved": false
+        },
+        {
+          "strategy": "distance_rule",
+          "solved": false
+        }
+      ],
+      "perception_summary": {
+        "n_train": 3,
+        "n_test": 1,
+        "train_hw_values": [
+          12,
+          8,
+          12
+        ],
+        "train_tax_values": [
+          4.6761,
+          3.1174,
+          4.6761
+        ],
+        "train_nrci_values": [
+          0.6814,
+          0.7623,
+          0.6814
+        ],
+        "train_transform_magnitudes": [
+          8,
+          12,
+          8
+        ],
+        "train_conservation_holds": [
+          true,
+          true,
+          true
+        ]
+      },
+      "solution": null
+    },
+    {
+      "task_id": "a85d4709",
+      "solved": false,
+      "winning_strategy": null,
+      "attempts": [
+        {
+          "strategy": "settlement_gravity",
+          "solved": false
+        },
+        {
+          "strategy": "settlement_cell_rules",
+          "solved": false
+        },
+        {
+          "strategy": "interior_fill",
+          "solved": false
+        },
+        {
+          "strategy": "substrate_metric_match",
+          "solved": false
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": false
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false
+        },
+        {
+          "strategy": "parity_sign_recolor",
+          "solved": false
+        },
+        {
+          "strategy": "distance_rule",
+          "solved": false
+        }
+      ],
+      "perception_summary": {
+        "n_train": 4,
+        "n_test": 1,
+        "train_hw_values": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "train_tax_values": [
+          3.1174,
+          3.1174,
+          3.1174,
+          3.1174
+        ],
+        "train_nrci_values": [
+          0.7623,
+          0.7623,
+          0.7623,
+          0.7623
+        ],
+        "train_transform_magnitudes": [
+          12,
+          12,
+          12,
+          8
+        ],
+        "train_conservation_holds": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "solution": null
+    },
+    {
+      "task_id": "ae58858e",
+      "solved": true,
+      "winning_strategy": "colour_map_via_AND",
+      "attempts": [
+        {
+          "strategy": "settlement_gravity",
+          "solved": false
+        },
+        {
+          "strategy": "settlement_cell_rules",
+          "solved": false
+        },
+        {
+          "strategy": "interior_fill",
+          "solved": false
+        },
+        {
+          "strategy": "substrate_metric_match",
+          "solved": false
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": true
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false
+        },
+        {
+          "strategy": "parity_sign_recolor",
+          "solved": false
+        },
+        {
+          "strategy": "distance_rule",
+          "solved": false
+        }
+      ],
+      "perception_summary": {
+        "n_train": 4,
+        "n_test": 1,
+        "train_hw_values": [
+          12,
+          8,
+          16,
+          16
+        ],
+        "train_tax_values": [
+          4.6761,
+          3.1174,
+          6.2348,
+          6.2348
+        ],
+        "train_nrci_values": [
+          0.6814,
+          0.7623,
+          0.616,
+          0.616
+        ],
+        "train_transform_magnitudes": [
+          12,
+          12,
+          12,
+          12
+        ],
+        "train_conservation_holds": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "solution": [
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          6,
+          6,
+          0
+        ],
+        [
+          6,
+          6,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          6,
+          0,
+          0,
+          6,
+          6,
+          0
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          0,
+          6,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          6,
+          6,
+          0,
+          0,
+          0,
+          6
+        ]
+      ]
+    },
+    {
+      "task_id": "e48d4e1a",
+      "solved": false,
+      "winning_strategy": null,
+      "attempts": [
+        {
+          "strategy": "settlement_gravity",
+          "solved": false
+        },
+        {
+          "strategy": "settlement_cell_rules",
+          "solved": false
+        },
+        {
+          "strategy": "interior_fill",
+          "solved": false
+        },
+        {
+          "strategy": "substrate_metric_match",
+          "solved": false
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": false
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false
+        },
+        {
+          "strategy": "parity_sign_recolor",
+          "solved": false
+        },
+        {
+          "strategy": "distance_rule",
+          "solved": false
+        }
+      ],
+      "perception_summary": {
+        "n_train": 4,
+        "n_test": 1,
+        "train_hw_values": [
+          12,
+          12,
+          8,
+          12
+        ],
+        "train_tax_values": [
+          4.6761,
+          4.6761,
+          3.1174,
+          4.6761
+        ],
+        "train_nrci_values": [
+          0.6814,
+          0.6814,
+          0.7623,
+          0.6814
+        ],
+        "train_transform_magnitudes": [
+          12,
+          12,
+          12,
+          12
+        ],
+        "train_conservation_holds": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "solution": null
+    }
+  ]
+}

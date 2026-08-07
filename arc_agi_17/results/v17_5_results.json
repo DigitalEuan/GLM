@@ -1,0 +1,1933 @@
+{
+  "experiment": "ARC-AGI v17.5 \u2014 Full GLM Integration",
+  "date": "2026-08-06",
+  "n_runs": 10,
+  "n_tasks": 25,
+  "runs": [
+    {
+      "run_number": 8,
+      "n_solved": 10,
+      "n_new_solves": 6,
+      "n_tasks": 25,
+      "strategy_wins": {
+        "colour_map_via_AND": 7,
+        "settlement_gravity": 1,
+        "conditional_solver": 2
+      },
+      "glm_concepts": 527,
+      "glm_edges": 754,
+      "new_concepts": 501,
+      "new_edges": 20,
+      "auto_expanded_edges": 20,
+      "training_examples": 10,
+      "weak_concepts": [],
+      "learning_after": {
+        "fastest_task_types": [
+          [
+            "high_overlap",
+            1
+          ],
+          [
+            "invisible",
+            38
+          ],
+          [
+            "medium_overlap",
+            61
+          ],
+          [
+            "size_change",
+            67
+          ]
+        ],
+        "best_strategies": [
+          [
+            "colour_map_via_AND",
+            32
+          ],
+          [
+            "conditional_solver",
+            11
+          ],
+          [
+            "settlement_gravity",
+            7
+          ]
+        ],
+        "most_useful_concepts": [
+          [
+            "p",
+            90
+          ],
+          [
+            "shape",
+            50
+          ],
+          [
+            "colour",
+            50
+          ],
+          [
+            "substrate",
+            30
+          ],
+          [
+            "form",
+            30
+          ],
+          [
+            "rate",
+            30
+          ],
+          [
+            "w",
+            30
+          ],
+          [
+            "change",
+            30
+          ],
+          [
+            "charge",
+            30
+          ],
+          [
+            "np",
+            30
+          ]
+        ],
+        "growth_history": [
+          {
+            "run": 1,
+            "new_concepts": 39,
+            "new_edges": 68,
+            "n_solved": 5,
+            "n_tasks": 10
+          },
+          {
+            "run": 2,
+            "new_concepts": 39,
+            "new_edges": 12,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 3,
+            "new_concepts": 39,
+            "new_edges": 0,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 4,
+            "new_concepts": 39,
+            "new_edges": 0,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 5,
+            "new_concepts": 501,
+            "new_edges": 607,
+            "auto_expanded": 20,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 6,
+            "new_concepts": 501,
+            "new_edges": 17,
+            "auto_expanded": 17,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 8,
+            "new_concepts": 501,
+            "new_edges": 20,
+            "auto_expanded": 20,
+            "n_solved": 10,
+            "n_tasks": 25
+          }
+        ],
+        "total_experiences": 210,
+        "total_successes": 35,
+        "total_failures_seen": 175,
+        "interpretation": "This analysis shows HOW the GLM learns. Fastest task types need less training. Best strategies are the GLM's strengths. Most useful concepts should be expanded. Use this to design targeted training routines."
+      }
+    },
+    {
+      "run_number": 9,
+      "n_solved": 10,
+      "n_new_solves": 6,
+      "n_tasks": 25,
+      "strategy_wins": {
+        "colour_map_via_AND": 7,
+        "settlement_gravity": 1,
+        "conditional_solver": 2
+      },
+      "glm_concepts": 527,
+      "glm_edges": 763,
+      "new_concepts": 501,
+      "new_edges": 9,
+      "auto_expanded_edges": 9,
+      "training_examples": 10,
+      "weak_concepts": [],
+      "learning_after": {
+        "fastest_task_types": [
+          [
+            "high_overlap",
+            1
+          ],
+          [
+            "invisible",
+            38
+          ],
+          [
+            "medium_overlap",
+            61
+          ],
+          [
+            "size_change",
+            67
+          ]
+        ],
+        "best_strategies": [
+          [
+            "colour_map_via_AND",
+            39
+          ],
+          [
+            "conditional_solver",
+            13
+          ],
+          [
+            "settlement_gravity",
+            8
+          ]
+        ],
+        "most_useful_concepts": [
+          [
+            "p",
+            120
+          ],
+          [
+            "shape",
+            60
+          ],
+          [
+            "colour",
+            60
+          ],
+          [
+            "substrate",
+            40
+          ],
+          [
+            "form",
+            40
+          ],
+          [
+            "rate",
+            40
+          ],
+          [
+            "w",
+            40
+          ],
+          [
+            "change",
+            40
+          ],
+          [
+            "charge",
+            40
+          ],
+          [
+            "np",
+            40
+          ]
+        ],
+        "growth_history": [
+          {
+            "run": 1,
+            "new_concepts": 39,
+            "new_edges": 68,
+            "n_solved": 5,
+            "n_tasks": 10
+          },
+          {
+            "run": 2,
+            "new_concepts": 39,
+            "new_edges": 12,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 3,
+            "new_concepts": 39,
+            "new_edges": 0,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 4,
+            "new_concepts": 39,
+            "new_edges": 0,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 5,
+            "new_concepts": 501,
+            "new_edges": 607,
+            "auto_expanded": 20,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 6,
+            "new_concepts": 501,
+            "new_edges": 17,
+            "auto_expanded": 17,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 8,
+            "new_concepts": 501,
+            "new_edges": 20,
+            "auto_expanded": 20,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 9,
+            "new_concepts": 501,
+            "new_edges": 9,
+            "auto_expanded": 9,
+            "n_solved": 10,
+            "n_tasks": 25
+          }
+        ],
+        "total_experiences": 210,
+        "total_successes": 35,
+        "total_failures_seen": 175,
+        "interpretation": "This analysis shows HOW the GLM learns. Fastest task types need less training. Best strategies are the GLM's strengths. Most useful concepts should be expanded. Use this to design targeted training routines."
+      }
+    },
+    {
+      "run_number": 10,
+      "n_solved": 10,
+      "n_new_solves": 6,
+      "n_tasks": 25,
+      "strategy_wins": {
+        "colour_map_via_AND": 7,
+        "settlement_gravity": 1,
+        "conditional_solver": 2
+      },
+      "glm_concepts": 527,
+      "glm_edges": 763,
+      "new_concepts": 501,
+      "new_edges": 0,
+      "auto_expanded_edges": 0,
+      "training_examples": 10,
+      "weak_concepts": [],
+      "learning_after": {
+        "fastest_task_types": [
+          [
+            "high_overlap",
+            1
+          ],
+          [
+            "invisible",
+            38
+          ],
+          [
+            "medium_overlap",
+            61
+          ],
+          [
+            "size_change",
+            67
+          ]
+        ],
+        "best_strategies": [
+          [
+            "colour_map_via_AND",
+            46
+          ],
+          [
+            "conditional_solver",
+            15
+          ],
+          [
+            "settlement_gravity",
+            9
+          ]
+        ],
+        "most_useful_concepts": [
+          [
+            "p",
+            150
+          ],
+          [
+            "shape",
+            70
+          ],
+          [
+            "colour",
+            70
+          ],
+          [
+            "substrate",
+            50
+          ],
+          [
+            "form",
+            50
+          ],
+          [
+            "rate",
+            50
+          ],
+          [
+            "w",
+            50
+          ],
+          [
+            "change",
+            50
+          ],
+          [
+            "charge",
+            50
+          ],
+          [
+            "np",
+            50
+          ]
+        ],
+        "growth_history": [
+          {
+            "run": 1,
+            "new_concepts": 39,
+            "new_edges": 68,
+            "n_solved": 5,
+            "n_tasks": 10
+          },
+          {
+            "run": 2,
+            "new_concepts": 39,
+            "new_edges": 12,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 3,
+            "new_concepts": 39,
+            "new_edges": 0,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 4,
+            "new_concepts": 39,
+            "new_edges": 0,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 5,
+            "new_concepts": 501,
+            "new_edges": 607,
+            "auto_expanded": 20,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 6,
+            "new_concepts": 501,
+            "new_edges": 17,
+            "auto_expanded": 17,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 8,
+            "new_concepts": 501,
+            "new_edges": 20,
+            "auto_expanded": 20,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 9,
+            "new_concepts": 501,
+            "new_edges": 9,
+            "auto_expanded": 9,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 10,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          }
+        ],
+        "total_experiences": 210,
+        "total_successes": 35,
+        "total_failures_seen": 175,
+        "interpretation": "This analysis shows HOW the GLM learns. Fastest task types need less training. Best strategies are the GLM's strengths. Most useful concepts should be expanded. Use this to design targeted training routines."
+      }
+    },
+    {
+      "run_number": 11,
+      "n_solved": 10,
+      "n_new_solves": 6,
+      "n_tasks": 25,
+      "strategy_wins": {
+        "colour_map_via_AND": 7,
+        "settlement_gravity": 1,
+        "conditional_solver": 2
+      },
+      "glm_concepts": 527,
+      "glm_edges": 763,
+      "new_concepts": 501,
+      "new_edges": 0,
+      "auto_expanded_edges": 0,
+      "training_examples": 10,
+      "weak_concepts": [],
+      "learning_after": {
+        "fastest_task_types": [
+          [
+            "high_overlap",
+            1
+          ],
+          [
+            "invisible",
+            38
+          ],
+          [
+            "medium_overlap",
+            61
+          ],
+          [
+            "size_change",
+            67
+          ]
+        ],
+        "best_strategies": [
+          [
+            "colour_map_via_AND",
+            53
+          ],
+          [
+            "conditional_solver",
+            17
+          ],
+          [
+            "settlement_gravity",
+            10
+          ]
+        ],
+        "most_useful_concepts": [
+          [
+            "p",
+            180
+          ],
+          [
+            "shape",
+            80
+          ],
+          [
+            "colour",
+            80
+          ],
+          [
+            "substrate",
+            60
+          ],
+          [
+            "form",
+            60
+          ],
+          [
+            "rate",
+            60
+          ],
+          [
+            "w",
+            60
+          ],
+          [
+            "change",
+            60
+          ],
+          [
+            "charge",
+            60
+          ],
+          [
+            "np",
+            60
+          ]
+        ],
+        "growth_history": [
+          {
+            "run": 1,
+            "new_concepts": 39,
+            "new_edges": 68,
+            "n_solved": 5,
+            "n_tasks": 10
+          },
+          {
+            "run": 2,
+            "new_concepts": 39,
+            "new_edges": 12,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 3,
+            "new_concepts": 39,
+            "new_edges": 0,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 4,
+            "new_concepts": 39,
+            "new_edges": 0,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 5,
+            "new_concepts": 501,
+            "new_edges": 607,
+            "auto_expanded": 20,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 6,
+            "new_concepts": 501,
+            "new_edges": 17,
+            "auto_expanded": 17,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 8,
+            "new_concepts": 501,
+            "new_edges": 20,
+            "auto_expanded": 20,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 9,
+            "new_concepts": 501,
+            "new_edges": 9,
+            "auto_expanded": 9,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 10,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 11,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          }
+        ],
+        "total_experiences": 210,
+        "total_successes": 35,
+        "total_failures_seen": 175,
+        "interpretation": "This analysis shows HOW the GLM learns. Fastest task types need less training. Best strategies are the GLM's strengths. Most useful concepts should be expanded. Use this to design targeted training routines."
+      }
+    },
+    {
+      "run_number": 12,
+      "n_solved": 10,
+      "n_new_solves": 6,
+      "n_tasks": 25,
+      "strategy_wins": {
+        "colour_map_via_AND": 7,
+        "settlement_gravity": 1,
+        "conditional_solver": 2
+      },
+      "glm_concepts": 527,
+      "glm_edges": 763,
+      "new_concepts": 501,
+      "new_edges": 0,
+      "auto_expanded_edges": 0,
+      "training_examples": 10,
+      "weak_concepts": [],
+      "learning_after": {
+        "fastest_task_types": [
+          [
+            "high_overlap",
+            1
+          ],
+          [
+            "invisible",
+            38
+          ],
+          [
+            "medium_overlap",
+            61
+          ],
+          [
+            "size_change",
+            67
+          ]
+        ],
+        "best_strategies": [
+          [
+            "colour_map_via_AND",
+            60
+          ],
+          [
+            "conditional_solver",
+            19
+          ],
+          [
+            "settlement_gravity",
+            11
+          ]
+        ],
+        "most_useful_concepts": [
+          [
+            "p",
+            210
+          ],
+          [
+            "shape",
+            90
+          ],
+          [
+            "colour",
+            90
+          ],
+          [
+            "substrate",
+            70
+          ],
+          [
+            "form",
+            70
+          ],
+          [
+            "rate",
+            70
+          ],
+          [
+            "w",
+            70
+          ],
+          [
+            "change",
+            70
+          ],
+          [
+            "charge",
+            70
+          ],
+          [
+            "np",
+            70
+          ]
+        ],
+        "growth_history": [
+          {
+            "run": 1,
+            "new_concepts": 39,
+            "new_edges": 68,
+            "n_solved": 5,
+            "n_tasks": 10
+          },
+          {
+            "run": 2,
+            "new_concepts": 39,
+            "new_edges": 12,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 3,
+            "new_concepts": 39,
+            "new_edges": 0,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 4,
+            "new_concepts": 39,
+            "new_edges": 0,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 5,
+            "new_concepts": 501,
+            "new_edges": 607,
+            "auto_expanded": 20,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 6,
+            "new_concepts": 501,
+            "new_edges": 17,
+            "auto_expanded": 17,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 8,
+            "new_concepts": 501,
+            "new_edges": 20,
+            "auto_expanded": 20,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 9,
+            "new_concepts": 501,
+            "new_edges": 9,
+            "auto_expanded": 9,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 10,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 11,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 12,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          }
+        ],
+        "total_experiences": 210,
+        "total_successes": 35,
+        "total_failures_seen": 175,
+        "interpretation": "This analysis shows HOW the GLM learns. Fastest task types need less training. Best strategies are the GLM's strengths. Most useful concepts should be expanded. Use this to design targeted training routines."
+      }
+    },
+    {
+      "run_number": 13,
+      "n_solved": 10,
+      "n_new_solves": 6,
+      "n_tasks": 25,
+      "strategy_wins": {
+        "colour_map_via_AND": 7,
+        "settlement_gravity": 1,
+        "conditional_solver": 2
+      },
+      "glm_concepts": 527,
+      "glm_edges": 763,
+      "new_concepts": 501,
+      "new_edges": 0,
+      "auto_expanded_edges": 0,
+      "training_examples": 10,
+      "weak_concepts": [],
+      "learning_after": {
+        "fastest_task_types": [
+          [
+            "high_overlap",
+            1
+          ],
+          [
+            "invisible",
+            38
+          ],
+          [
+            "medium_overlap",
+            61
+          ],
+          [
+            "size_change",
+            67
+          ]
+        ],
+        "best_strategies": [
+          [
+            "colour_map_via_AND",
+            67
+          ],
+          [
+            "conditional_solver",
+            21
+          ],
+          [
+            "settlement_gravity",
+            12
+          ]
+        ],
+        "most_useful_concepts": [
+          [
+            "p",
+            240
+          ],
+          [
+            "shape",
+            100
+          ],
+          [
+            "colour",
+            100
+          ],
+          [
+            "substrate",
+            80
+          ],
+          [
+            "form",
+            80
+          ],
+          [
+            "rate",
+            80
+          ],
+          [
+            "w",
+            80
+          ],
+          [
+            "change",
+            80
+          ],
+          [
+            "charge",
+            80
+          ],
+          [
+            "np",
+            80
+          ]
+        ],
+        "growth_history": [
+          {
+            "run": 1,
+            "new_concepts": 39,
+            "new_edges": 68,
+            "n_solved": 5,
+            "n_tasks": 10
+          },
+          {
+            "run": 2,
+            "new_concepts": 39,
+            "new_edges": 12,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 3,
+            "new_concepts": 39,
+            "new_edges": 0,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 4,
+            "new_concepts": 39,
+            "new_edges": 0,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 5,
+            "new_concepts": 501,
+            "new_edges": 607,
+            "auto_expanded": 20,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 6,
+            "new_concepts": 501,
+            "new_edges": 17,
+            "auto_expanded": 17,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 8,
+            "new_concepts": 501,
+            "new_edges": 20,
+            "auto_expanded": 20,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 9,
+            "new_concepts": 501,
+            "new_edges": 9,
+            "auto_expanded": 9,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 10,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 11,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 12,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 13,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          }
+        ],
+        "total_experiences": 210,
+        "total_successes": 35,
+        "total_failures_seen": 175,
+        "interpretation": "This analysis shows HOW the GLM learns. Fastest task types need less training. Best strategies are the GLM's strengths. Most useful concepts should be expanded. Use this to design targeted training routines."
+      }
+    },
+    {
+      "run_number": 14,
+      "n_solved": 10,
+      "n_new_solves": 6,
+      "n_tasks": 25,
+      "strategy_wins": {
+        "colour_map_via_AND": 7,
+        "settlement_gravity": 1,
+        "conditional_solver": 2
+      },
+      "glm_concepts": 527,
+      "glm_edges": 763,
+      "new_concepts": 501,
+      "new_edges": 0,
+      "auto_expanded_edges": 0,
+      "training_examples": 10,
+      "weak_concepts": [],
+      "learning_after": {
+        "fastest_task_types": [
+          [
+            "high_overlap",
+            1
+          ],
+          [
+            "invisible",
+            38
+          ],
+          [
+            "medium_overlap",
+            61
+          ],
+          [
+            "size_change",
+            67
+          ]
+        ],
+        "best_strategies": [
+          [
+            "colour_map_via_AND",
+            74
+          ],
+          [
+            "conditional_solver",
+            23
+          ],
+          [
+            "settlement_gravity",
+            13
+          ]
+        ],
+        "most_useful_concepts": [
+          [
+            "p",
+            270
+          ],
+          [
+            "shape",
+            110
+          ],
+          [
+            "colour",
+            110
+          ],
+          [
+            "substrate",
+            90
+          ],
+          [
+            "form",
+            90
+          ],
+          [
+            "rate",
+            90
+          ],
+          [
+            "w",
+            90
+          ],
+          [
+            "change",
+            90
+          ],
+          [
+            "charge",
+            90
+          ],
+          [
+            "np",
+            90
+          ]
+        ],
+        "growth_history": [
+          {
+            "run": 1,
+            "new_concepts": 39,
+            "new_edges": 68,
+            "n_solved": 5,
+            "n_tasks": 10
+          },
+          {
+            "run": 2,
+            "new_concepts": 39,
+            "new_edges": 12,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 3,
+            "new_concepts": 39,
+            "new_edges": 0,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 4,
+            "new_concepts": 39,
+            "new_edges": 0,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 5,
+            "new_concepts": 501,
+            "new_edges": 607,
+            "auto_expanded": 20,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 6,
+            "new_concepts": 501,
+            "new_edges": 17,
+            "auto_expanded": 17,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 8,
+            "new_concepts": 501,
+            "new_edges": 20,
+            "auto_expanded": 20,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 9,
+            "new_concepts": 501,
+            "new_edges": 9,
+            "auto_expanded": 9,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 10,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 11,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 12,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 13,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 14,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          }
+        ],
+        "total_experiences": 210,
+        "total_successes": 35,
+        "total_failures_seen": 175,
+        "interpretation": "This analysis shows HOW the GLM learns. Fastest task types need less training. Best strategies are the GLM's strengths. Most useful concepts should be expanded. Use this to design targeted training routines."
+      }
+    },
+    {
+      "run_number": 15,
+      "n_solved": 10,
+      "n_new_solves": 6,
+      "n_tasks": 25,
+      "strategy_wins": {
+        "colour_map_via_AND": 7,
+        "settlement_gravity": 1,
+        "conditional_solver": 2
+      },
+      "glm_concepts": 527,
+      "glm_edges": 763,
+      "new_concepts": 501,
+      "new_edges": 0,
+      "auto_expanded_edges": 0,
+      "training_examples": 10,
+      "weak_concepts": [],
+      "learning_after": {
+        "fastest_task_types": [
+          [
+            "high_overlap",
+            1
+          ],
+          [
+            "invisible",
+            38
+          ],
+          [
+            "medium_overlap",
+            61
+          ],
+          [
+            "size_change",
+            67
+          ]
+        ],
+        "best_strategies": [
+          [
+            "colour_map_via_AND",
+            81
+          ],
+          [
+            "conditional_solver",
+            25
+          ],
+          [
+            "settlement_gravity",
+            14
+          ]
+        ],
+        "most_useful_concepts": [
+          [
+            "p",
+            300
+          ],
+          [
+            "shape",
+            120
+          ],
+          [
+            "colour",
+            120
+          ],
+          [
+            "substrate",
+            100
+          ],
+          [
+            "form",
+            100
+          ],
+          [
+            "rate",
+            100
+          ],
+          [
+            "w",
+            100
+          ],
+          [
+            "change",
+            100
+          ],
+          [
+            "charge",
+            100
+          ],
+          [
+            "np",
+            100
+          ]
+        ],
+        "growth_history": [
+          {
+            "run": 1,
+            "new_concepts": 39,
+            "new_edges": 68,
+            "n_solved": 5,
+            "n_tasks": 10
+          },
+          {
+            "run": 2,
+            "new_concepts": 39,
+            "new_edges": 12,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 3,
+            "new_concepts": 39,
+            "new_edges": 0,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 4,
+            "new_concepts": 39,
+            "new_edges": 0,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 5,
+            "new_concepts": 501,
+            "new_edges": 607,
+            "auto_expanded": 20,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 6,
+            "new_concepts": 501,
+            "new_edges": 17,
+            "auto_expanded": 17,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 8,
+            "new_concepts": 501,
+            "new_edges": 20,
+            "auto_expanded": 20,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 9,
+            "new_concepts": 501,
+            "new_edges": 9,
+            "auto_expanded": 9,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 10,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 11,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 12,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 13,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 14,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 15,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          }
+        ],
+        "total_experiences": 210,
+        "total_successes": 35,
+        "total_failures_seen": 175,
+        "interpretation": "This analysis shows HOW the GLM learns. Fastest task types need less training. Best strategies are the GLM's strengths. Most useful concepts should be expanded. Use this to design targeted training routines."
+      }
+    },
+    {
+      "run_number": 16,
+      "n_solved": 10,
+      "n_new_solves": 6,
+      "n_tasks": 25,
+      "strategy_wins": {
+        "colour_map_via_AND": 7,
+        "settlement_gravity": 1,
+        "conditional_solver": 2
+      },
+      "glm_concepts": 527,
+      "glm_edges": 763,
+      "new_concepts": 501,
+      "new_edges": 0,
+      "auto_expanded_edges": 0,
+      "training_examples": 10,
+      "weak_concepts": [],
+      "learning_after": {
+        "fastest_task_types": [
+          [
+            "high_overlap",
+            1
+          ],
+          [
+            "invisible",
+            38
+          ],
+          [
+            "medium_overlap",
+            61
+          ],
+          [
+            "size_change",
+            67
+          ]
+        ],
+        "best_strategies": [
+          [
+            "colour_map_via_AND",
+            88
+          ],
+          [
+            "conditional_solver",
+            27
+          ],
+          [
+            "settlement_gravity",
+            15
+          ]
+        ],
+        "most_useful_concepts": [
+          [
+            "p",
+            330
+          ],
+          [
+            "shape",
+            130
+          ],
+          [
+            "colour",
+            130
+          ],
+          [
+            "substrate",
+            110
+          ],
+          [
+            "form",
+            110
+          ],
+          [
+            "rate",
+            110
+          ],
+          [
+            "w",
+            110
+          ],
+          [
+            "change",
+            110
+          ],
+          [
+            "charge",
+            110
+          ],
+          [
+            "np",
+            110
+          ]
+        ],
+        "growth_history": [
+          {
+            "run": 1,
+            "new_concepts": 39,
+            "new_edges": 68,
+            "n_solved": 5,
+            "n_tasks": 10
+          },
+          {
+            "run": 2,
+            "new_concepts": 39,
+            "new_edges": 12,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 3,
+            "new_concepts": 39,
+            "new_edges": 0,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 4,
+            "new_concepts": 39,
+            "new_edges": 0,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 5,
+            "new_concepts": 501,
+            "new_edges": 607,
+            "auto_expanded": 20,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 6,
+            "new_concepts": 501,
+            "new_edges": 17,
+            "auto_expanded": 17,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 8,
+            "new_concepts": 501,
+            "new_edges": 20,
+            "auto_expanded": 20,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 9,
+            "new_concepts": 501,
+            "new_edges": 9,
+            "auto_expanded": 9,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 10,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 11,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 12,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 13,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 14,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 15,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 16,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          }
+        ],
+        "total_experiences": 210,
+        "total_successes": 35,
+        "total_failures_seen": 175,
+        "interpretation": "This analysis shows HOW the GLM learns. Fastest task types need less training. Best strategies are the GLM's strengths. Most useful concepts should be expanded. Use this to design targeted training routines."
+      }
+    },
+    {
+      "run_number": 17,
+      "n_solved": 10,
+      "n_new_solves": 6,
+      "n_tasks": 25,
+      "strategy_wins": {
+        "colour_map_via_AND": 7,
+        "settlement_gravity": 1,
+        "conditional_solver": 2
+      },
+      "glm_concepts": 527,
+      "glm_edges": 763,
+      "new_concepts": 501,
+      "new_edges": 0,
+      "auto_expanded_edges": 0,
+      "training_examples": 10,
+      "weak_concepts": [],
+      "learning_after": {
+        "fastest_task_types": [
+          [
+            "high_overlap",
+            1
+          ],
+          [
+            "invisible",
+            38
+          ],
+          [
+            "medium_overlap",
+            61
+          ],
+          [
+            "size_change",
+            67
+          ]
+        ],
+        "best_strategies": [
+          [
+            "colour_map_via_AND",
+            95
+          ],
+          [
+            "conditional_solver",
+            29
+          ],
+          [
+            "settlement_gravity",
+            16
+          ]
+        ],
+        "most_useful_concepts": [
+          [
+            "p",
+            360
+          ],
+          [
+            "shape",
+            140
+          ],
+          [
+            "colour",
+            140
+          ],
+          [
+            "substrate",
+            120
+          ],
+          [
+            "form",
+            120
+          ],
+          [
+            "rate",
+            120
+          ],
+          [
+            "w",
+            120
+          ],
+          [
+            "change",
+            120
+          ],
+          [
+            "charge",
+            120
+          ],
+          [
+            "np",
+            120
+          ]
+        ],
+        "growth_history": [
+          {
+            "run": 1,
+            "new_concepts": 39,
+            "new_edges": 68,
+            "n_solved": 5,
+            "n_tasks": 10
+          },
+          {
+            "run": 2,
+            "new_concepts": 39,
+            "new_edges": 12,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 3,
+            "new_concepts": 39,
+            "new_edges": 0,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 4,
+            "new_concepts": 39,
+            "new_edges": 0,
+            "n_solved": 5,
+            "n_tasks": 10,
+            "training_examples": 14
+          },
+          {
+            "run": 5,
+            "new_concepts": 501,
+            "new_edges": 607,
+            "auto_expanded": 20,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 6,
+            "new_concepts": 501,
+            "new_edges": 17,
+            "auto_expanded": 17,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 8,
+            "new_concepts": 501,
+            "new_edges": 20,
+            "auto_expanded": 20,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 9,
+            "new_concepts": 501,
+            "new_edges": 9,
+            "auto_expanded": 9,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 10,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 11,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 12,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 13,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 14,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 15,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 16,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          },
+          {
+            "run": 17,
+            "new_concepts": 501,
+            "new_edges": 0,
+            "auto_expanded": 0,
+            "n_solved": 10,
+            "n_tasks": 25
+          }
+        ],
+        "total_experiences": 210,
+        "total_successes": 35,
+        "total_failures_seen": 175,
+        "interpretation": "This analysis shows HOW the GLM learns. Fastest task types need less training. Best strategies are the GLM's strengths. Most useful concepts should be expanded. Use this to design targeted training routines."
+      }
+    }
+  ],
+  "cumulative_growth": {
+    "concepts_start": 527,
+    "concepts_end": 527,
+    "edges_start": 754,
+    "edges_end": 763,
+    "solved_start": 10,
+    "solved_end": 10,
+    "best_run_solved": 10
+  },
+  "full_glm_integration": {
+    "crg_edges_loaded": 597,
+    "concepts_loaded": 473,
+    "auto_expansion_enabled": true,
+    "targeted_training_enabled": true
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "experiment": "ARC-AGI v21 \u2014 GLM Module Integration",
+  "n_runs": 5,
+  "n_tasks": 40,
+  "runs": [
+    {
+      "run_number": 91,
+      "timestamp": "2026-08-07T00:15:42",
+      "n_tasks": 40,
+      "n_solved": 15,
+      "new_solves": 11,
+      "mind_solves": 2,
+      "analogical_solves": 1,
+      "refined_solves": 0,
+      "fallback_solves": 12,
+      "known_addresses": 15,
+      "glm_concepts": 4620,
+      "glm_edges": 2103
+    },
+    {
+      "run_number": 92,
+      "timestamp": "2026-08-07T00:16:08",
+      "n_tasks": 40,
+      "n_solved": 15,
+      "new_solves": 11,
+      "mind_solves": 2,
+      "analogical_solves": 1,
+      "refined_solves": 0,
+      "fallback_solves": 12,
+      "known_addresses": 15,
+      "glm_concepts": 4620,
+      "glm_edges": 2123
+    },
+    {
+      "run_number": 93,
+      "timestamp": "2026-08-07T00:16:34",
+      "n_tasks": 40,
+      "n_solved": 15,
+      "new_solves": 11,
+      "mind_solves": 2,
+      "analogical_solves": 1,
+      "refined_solves": 0,
+      "fallback_solves": 12,
+      "known_addresses": 15,
+      "glm_concepts": 4620,
+      "glm_edges": 2143
+    },
+    {
+      "run_number": 94,
+      "timestamp": "2026-08-07T00:17:01",
+      "n_tasks": 40,
+      "n_solved": 15,
+      "new_solves": 11,
+      "mind_solves": 2,
+      "analogical_solves": 1,
+      "refined_solves": 0,
+      "fallback_solves": 12,
+      "known_addresses": 15,
+      "glm_concepts": 4620,
+      "glm_edges": 2163
+    },
+    {
+      "run_number": 95,
+      "timestamp": "2026-08-07T00:17:28",
+      "n_tasks": 40,
+      "n_solved": 15,
+      "new_solves": 11,
+      "mind_solves": 2,
+      "analogical_solves": 1,
+      "refined_solves": 0,
+      "fallback_solves": 12,
+      "known_addresses": 15,
+      "glm_concepts": 4620,
+      "glm_edges": 2183
+    }
+  ],
+  "best_run_solved": 15,
+  "mind_solves": 3,
+  "known_addresses": 15,
+  "modules_integrated": [
+    "geometric_compute",
+    "math_atlas",
+    "physics",
+    "data_object_encoding"
+  ]
+}

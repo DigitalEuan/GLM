@@ -1,0 +1,58 @@
+{
+  "experiment": "ARC-AGI v24",
+  "n_runs": 3,
+  "runs": [
+    {
+      "run_number": 119,
+      "n_tasks": 45,
+      "n_solved": 12,
+      "new_solves": 8,
+      "mind_solves": 0,
+      "lattice_solves": 0,
+      "analogical_solves": 1,
+      "imagination_used": 11,
+      "crystallized": 1,
+      "adversarial_passed": 1,
+      "known_addresses": 16,
+      "glm_concepts": 4620,
+      "glm_edges": 2663,
+      "n_variants": 5
+    },
+    {
+      "run_number": 120,
+      "n_tasks": 45,
+      "n_solved": 3,
+      "new_solves": 1,
+      "mind_solves": 0,
+      "lattice_solves": 0,
+      "analogical_solves": 3,
+      "imagination_used": 0,
+      "crystallized": 0,
+      "adversarial_passed": 2,
+      "known_addresses": 16,
+      "glm_concepts": 4620,
+      "glm_edges": 2683,
+      "n_variants": 5
+    },
+    {
+      "run_number": 121,
+      "n_tasks": 45,
+      "n_solved": 14,
+      "new_solves": 10,
+      "mind_solves": 0,
+      "lattice_solves": 0,
+      "analogical_solves": 1,
+      "imagination_used": 13,
+      "crystallized": 1,
+      "adversarial_passed": 1,
+      "known_addresses": 16,
+      "glm_concepts": 4620,
+      "glm_edges": 2703,
+      "n_variants": 5
+    }
+  ],
+  "best": 14,
+  "imagination": 13,
+  "crystallized": 1,
+  "edges": 2703
+}
