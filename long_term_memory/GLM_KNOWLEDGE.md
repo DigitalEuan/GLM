@@ -8,6 +8,8 @@
 
 ## What This Is
 
+## NOTE: the current 'arc_agi_v17/' has the most advance learning (07.08.26)
+
 The GLM (Geometric Language Machine) learns through experimentation. This document records what it has learned during ARC AGI iterations. The companion JSON file (`glm_training_data.json`) contains all training data — element encodings, bond predictions, molecule data, pattern solving results, and benchmarks.
 
 Everything is geometry. Data Objects are positions and geometry in 24D Leech space. Spatial Arithmetic 'GMHGL/spatial_artithmetic.py' computes on those positions. The mind learns by encoding subjects, computing on them, and verifying against reality.

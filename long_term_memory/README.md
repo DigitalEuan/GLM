@@ -1,6 +1,6 @@
-# Long-Term Memory — Consolidated Training Data
+# 'long_term_memory/ - The Long-Term Memory and Training Data
 
-**Version:** 1.1.0  (3 August 2026) 
+**Version:** 1.1.0  (7 August 2026) 
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand 
 **Parent:** `../README.md`
 
