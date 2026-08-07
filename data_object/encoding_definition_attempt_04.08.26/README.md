@@ -1,8 +1,8 @@
-# Encoding Definition Attempt — 4 August 2026
+# 'data_object/encoding_definition_attempt_04.08.26/' - 'Encoding Definition Attempt — 4 August 2026
 
-**Date:** 4 August 2026
+**Date:** 7 August 2026
 **Author:** E R A Craig (DigitalEuan) + AI assistant
-**Parent:** `../README.md`
+**Parent:** `data_object/README.md`
 **Status:** ACTIVE EXPERIMENT — strong results, refining
 
 ---
