@@ -1,4 +1,4 @@
-# GMHGL (Grey-MOG-Hexacode-Golay-Leech) — The Verified UBP Substrate Engine
+# 'GMHGL/' - (Grey-MOG-Hexacode-Golay-Leech) — The Verified UBP Substrate Engine
 
 **Version:** v5.4.1 (3 August 2026)  
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand  
