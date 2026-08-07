@@ -1,0 +1,1820 @@
+{
+  "experiment": "ARC-AGI v17.2 \u2014 GLM Semantic Core + LTM",
+  "date": "2026-08-06",
+  "n_tasks": 10,
+  "n_solved": 5,
+  "n_new_solves": 1,
+  "strategy_wins": {
+    "settlement_gravity": 1,
+    "conditional_solver": 2,
+    "colour_map_via_AND": 2
+  },
+  "ltm_wins": 2,
+  "ltm_updates": [
+    {
+      "task_id": "1e0a9b12",
+      "task_type": "high_overlap",
+      "strategy": "settlement_gravity",
+      "success": true,
+      "timestamp": "2026-08-06T21:42:24",
+      "substrate_metrics": {
+        "input_hw": 8,
+        "output_hw": 8,
+        "task_type": "high_overlap"
+      }
+    },
+    {
+      "task_id": "396d80d7",
+      "task_type": "high_overlap",
+      "strategy": "conditional_solver",
+      "success": true,
+      "timestamp": "2026-08-06T21:42:24",
+      "substrate_metrics": {
+        "input_hw": 256,
+        "output_hw": 256,
+        "task_type": "high_overlap"
+      }
+    },
+    {
+      "task_id": "50846271",
+      "task_type": "high_overlap",
+      "strategy": "colour_map_via_AND",
+      "success": true,
+      "timestamp": "2026-08-06T21:42:24",
+      "substrate_metrics": {
+        "input_hw": 198,
+        "output_hw": 198,
+        "task_type": "high_overlap"
+      }
+    },
+    {
+      "task_id": "54d82841",
+      "task_type": "high_overlap",
+      "strategy": "colour_map_via_AND",
+      "success": true,
+      "timestamp": "2026-08-06T21:42:24",
+      "substrate_metrics": {
+        "input_hw": 5,
+        "output_hw": 6,
+        "task_type": "high_overlap"
+      }
+    },
+    {
+      "task_id": "ae58858e",
+      "task_type": "high_overlap",
+      "strategy": "conditional_solver",
+      "success": true,
+      "timestamp": "2026-08-06T21:42:24",
+      "substrate_metrics": {
+        "input_hw": 13,
+        "output_hw": 13,
+        "task_type": "high_overlap"
+      }
+    }
+  ],
+  "ltm_routing_summary": {
+    "medium_overlap": {
+      "total_attempts": 76,
+      "total_successes": 15,
+      "best_strategy": "toolkit_interior_fill",
+      "best_rate": 1.0
+    },
+    "invisible": {
+      "total_attempts": 44,
+      "total_successes": 6,
+      "best_strategy": "toolkit_gravity",
+      "best_rate": 1.0
+    },
+    "size_change": {
+      "total_attempts": 68,
+      "total_successes": 1,
+      "best_strategy": "concentric_nesting",
+      "best_rate": 1.0
+    },
+    "low_overlap": {
+      "total_attempts": 8,
+      "total_successes": 0,
+      "best_strategy": null,
+      "best_rate": 0
+    },
+    "high_overlap": {
+      "total_attempts": 4,
+      "total_successes": 3,
+      "best_strategy": "toolkit_cond_4_6",
+      "best_rate": 1.0
+    }
+  },
+  "results": [
+    {
+      "task_id": "00dbd492",
+      "solved": false,
+      "winning_strategy": null,
+      "task_type": "high_overlap",
+      "ltm_recommended_strategies": [
+        "toolkit_cond_4_6"
+      ],
+      "ltm_recommended_mapped": [
+        "conditional_solver"
+      ],
+      "reasoning_trace": [
+        {
+          "language": "I perceive a SPATIAL_SUBSTRATE of shape 15\u00d715 transforming to 15\u00d715.",
+          "math": "input_nodes=50, output_nodes=106, ratio=2.12",
+          "script": "inp = task.train[0].input; out = task.train[0].output"
+        },
+        {
+          "language": "I observe CHARGE_SWAP: colours change (0\u21928).",
+          "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+          "script": "changes = {0: 8}"
+        },
+        {
+          "language": "The gap insight suggests the verb 'object' connects the input to the output.",
+          "math": "gap=AND(grid,object)\u2192VERB quadrant",
+          "script": "gap_verb = self.gap_insight('grid', 'object')"
+        }
+      ],
+      "attempts": [
+        {
+          "strategy": "conditional_solver",
+          "solved": false,
+          "from_ltm": true
+        },
+        {
+          "strategy": "settlement_gravity",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "interior_fill",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "shift_solver",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "rotate_solver",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "flip_solver",
+          "solved": false,
+          "from_ltm": false
+        }
+      ],
+      "solution": null,
+      "substrate_metrics": {
+        "input_hw": 50,
+        "output_hw": 106,
+        "task_type": "high_overlap"
+      }
+    },
+    {
+      "task_id": "1e0a9b12",
+      "solved": true,
+      "winning_strategy": "settlement_gravity",
+      "task_type": "high_overlap",
+      "ltm_recommended_strategies": [
+        "toolkit_cond_4_6"
+      ],
+      "ltm_recommended_mapped": [
+        "conditional_solver"
+      ],
+      "reasoning_trace": [
+        {
+          "language": "I perceive a SPATIAL_SUBSTRATE of shape 6\u00d76 transforming to 6\u00d76.",
+          "math": "input_nodes=8, output_nodes=8, ratio=1.00",
+          "script": "inp = task.train[0].input; out = task.train[0].output"
+        },
+        {
+          "language": "I observe CHARGE_SWAP: colours change (9\u21920, 8\u21920, 0\u21929).",
+          "math": "|changes|=3, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+          "script": "changes = {9: 0, 8: 0, 0: 9}"
+        },
+        {
+          "language": "The gap insight suggests the verb 'object' connects the input to the output.",
+          "math": "gap=AND(grid,object)\u2192VERB quadrant",
+          "script": "gap_verb = self.gap_insight('grid', 'object')"
+        }
+      ],
+      "attempts": [
+        {
+          "strategy": "conditional_solver",
+          "solved": false,
+          "from_ltm": true
+        },
+        {
+          "strategy": "settlement_gravity",
+          "solved": true,
+          "from_ltm": false
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "interior_fill",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "shift_solver",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "rotate_solver",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "flip_solver",
+          "solved": false,
+          "from_ltm": false
+        }
+      ],
+      "solution": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          5,
+          2,
+          0,
+          4,
+          0
+        ],
+        [
+          5,
+          2,
+          6,
+          4,
+          3
+        ]
+      ],
+      "substrate_metrics": {
+        "input_hw": 8,
+        "output_hw": 8,
+        "task_type": "high_overlap"
+      }
+    },
+    {
+      "task_id": "396d80d7",
+      "solved": true,
+      "winning_strategy": "conditional_solver",
+      "task_type": "high_overlap",
+      "ltm_recommended_strategies": [
+        "toolkit_cond_4_6"
+      ],
+      "ltm_recommended_mapped": [
+        "conditional_solver"
+      ],
+      "reasoning_trace": [
+        {
+          "language": "I perceive a SPATIAL_SUBSTRATE of shape 16\u00d716 transforming to 16\u00d716.",
+          "math": "input_nodes=256, output_nodes=256, ratio=1.00",
+          "script": "inp = task.train[0].input; out = task.train[0].output"
+        },
+        {
+          "language": "I observe CHARGE_SWAP: colours change (7\u21922).",
+          "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+          "script": "changes = {7: 2}"
+        },
+        {
+          "language": "The gap insight suggests the verb 'object' connects the input to the output.",
+          "math": "gap=AND(grid,object)\u2192VERB quadrant",
+          "script": "gap_verb = self.gap_insight('grid', 'object')"
+        }
+      ],
+      "attempts": [
+        {
+          "strategy": "conditional_solver",
+          "solved": true,
+          "from_ltm": true
+        },
+        {
+          "strategy": "settlement_gravity",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "interior_fill",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "shift_solver",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "rotate_solver",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "flip_solver",
+          "solved": false,
+          "from_ltm": false
+        }
+      ],
+      "solution": [
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          1,
+          7,
+          7,
+          1,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          9,
+          9,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          9,
+          9,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          1,
+          7,
+          7,
+          1,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ]
+      ],
+      "substrate_metrics": {
+        "input_hw": 256,
+        "output_hw": 256,
+        "task_type": "high_overlap"
+      }
+    },
+    {
+      "task_id": "45737921",
+      "solved": false,
+      "winning_strategy": null,
+      "task_type": "high_overlap",
+      "ltm_recommended_strategies": [
+        "toolkit_cond_4_6"
+      ],
+      "ltm_recommended_mapped": [
+        "conditional_solver"
+      ],
+      "reasoning_trace": [
+        {
+          "language": "I perceive a SPATIAL_SUBSTRATE of shape 7\u00d77 transforming to 7\u00d77.",
+          "math": "input_nodes=9, output_nodes=9, ratio=1.00",
+          "script": "inp = task.train[0].input; out = task.train[0].output"
+        },
+        {
+          "language": "I observe CHARGE_SWAP: colours change (5\u21928, 8\u21925).",
+          "math": "|changes|=2, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+          "script": "changes = {5: 8, 8: 5}"
+        },
+        {
+          "language": "The gap insight suggests the verb 'object' connects the input to the output.",
+          "math": "gap=AND(grid,object)\u2192VERB quadrant",
+          "script": "gap_verb = self.gap_insight('grid', 'object')"
+        }
+      ],
+      "attempts": [
+        {
+          "strategy": "conditional_solver",
+          "solved": false,
+          "from_ltm": true
+        },
+        {
+          "strategy": "settlement_gravity",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "interior_fill",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "shift_solver",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "rotate_solver",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "flip_solver",
+          "solved": false,
+          "from_ltm": false
+        }
+      ],
+      "solution": null,
+      "substrate_metrics": {
+        "input_hw": 9,
+        "output_hw": 9,
+        "task_type": "high_overlap"
+      }
+    },
+    {
+      "task_id": "50846271",
+      "solved": true,
+      "winning_strategy": "colour_map_via_AND",
+      "task_type": "high_overlap",
+      "ltm_recommended_strategies": [
+        "toolkit_cond_4_6"
+      ],
+      "ltm_recommended_mapped": [
+        "conditional_solver"
+      ],
+      "reasoning_trace": [
+        {
+          "language": "I perceive a SPATIAL_SUBSTRATE of shape 18\u00d719 transforming to 18\u00d719.",
+          "math": "input_nodes=198, output_nodes=198, ratio=1.00",
+          "script": "inp = task.train[0].input; out = task.train[0].output"
+        },
+        {
+          "language": "I observe CHARGE_SWAP: colours change (5\u21928).",
+          "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+          "script": "changes = {5: 8}"
+        },
+        {
+          "language": "The gap insight suggests the verb 'object' connects the input to the output.",
+          "math": "gap=AND(grid,object)\u2192VERB quadrant",
+          "script": "gap_verb = self.gap_insight('grid', 'object')"
+        }
+      ],
+      "attempts": [
+        {
+          "strategy": "conditional_solver",
+          "solved": false,
+          "from_ltm": true
+        },
+        {
+          "strategy": "settlement_gravity",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": true,
+          "from_ltm": false
+        },
+        {
+          "strategy": "interior_fill",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "shift_solver",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "rotate_solver",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "flip_solver",
+          "solved": false,
+          "from_ltm": false
+        }
+      ],
+      "solution": [
+        [
+          0,
+          8,
+          0,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0,
+          8,
+          0,
+          0,
+          0,
+          8,
+          0,
+          8,
+          0,
+          0,
+          0,
+          8,
+          8,
+          0
+        ],
+        [
+          0,
+          8,
+          0,
+          8,
+          8,
+          0,
+          0,
+          0,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0,
+          0,
+          0,
+          0,
+          0,
+          8,
+          8,
+          8
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          8,
+          8,
+          8,
+          0,
+          0,
+          0,
+          0,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          8
+        ],
+        [
+          0,
+          0,
+          8,
+          8,
+          0,
+          8,
+          8,
+          8,
+          0,
+          8,
+          0,
+          8,
+          0,
+          8,
+          0,
+          8,
+          8,
+          0,
+          8,
+          8,
+          8,
+          0
+        ],
+        [
+          0,
+          8,
+          0,
+          8,
+          2,
+          2,
+          8,
+          2,
+          2,
+          8,
+          0,
+          0,
+          8,
+          0,
+          8,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          8,
+          0,
+          8,
+          2,
+          8,
+          8,
+          8,
+          0,
+          8,
+          0,
+          0,
+          0,
+          0,
+          8,
+          8,
+          8,
+          8,
+          0,
+          0
+        ],
+        [
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          2,
+          0,
+          8,
+          8,
+          0,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0,
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        [
+          8,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          8,
+          8,
+          8,
+          0,
+          8,
+          0,
+          0,
+          8,
+          0,
+          8,
+          0
+        ],
+        [
+          8,
+          8,
+          8,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0,
+          8,
+          2,
+          8,
+          2,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          8,
+          8,
+          8,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0,
+          8,
+          8,
+          0,
+          8,
+          8,
+          8,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          8,
+          8,
+          8,
+          0,
+          8,
+          0,
+          8,
+          0,
+          8,
+          8,
+          2,
+          8,
+          0,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0
+        ],
+        [
+          0,
+          8,
+          8,
+          8,
+          0,
+          0,
+          0,
+          8,
+          8,
+          8,
+          8,
+          0,
+          0,
+          8,
+          0,
+          8,
+          8,
+          0,
+          0,
+          0,
+          8,
+          8
+        ],
+        [
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0,
+          8,
+          0,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0,
+          8
+        ],
+        [
+          0,
+          0,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          0,
+          0,
+          8,
+          8,
+          8,
+          8,
+          8,
+          0,
+          0,
+          8,
+          0,
+          8
+        ],
+        [
+          8,
+          8,
+          0,
+          8,
+          8,
+          2,
+          2,
+          2,
+          8,
+          8,
+          8,
+          0,
+          8,
+          8,
+          8,
+          0,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0
+        ],
+        [
+          8,
+          0,
+          0,
+          0,
+          8,
+          2,
+          8,
+          0,
+          8,
+          0,
+          8,
+          0,
+          8,
+          8,
+          8,
+          8,
+          0,
+          0,
+          0,
+          0,
+          8,
+          8
+        ],
+        [
+          8,
+          8,
+          8,
+          0,
+          0,
+          2,
+          0,
+          8,
+          8,
+          0,
+          0,
+          2,
+          2,
+          2,
+          2,
+          2,
+          8,
+          0,
+          8,
+          0,
+          8,
+          8
+        ],
+        [
+          8,
+          0,
+          8,
+          0,
+          0,
+          8,
+          0,
+          8,
+          0,
+          0,
+          0,
+          0,
+          0,
+          8,
+          0,
+          8,
+          8,
+          8,
+          0,
+          8,
+          8,
+          0
+        ],
+        [
+          8,
+          8,
+          8,
+          8,
+          8,
+          0,
+          8,
+          0,
+          8,
+          8,
+          8,
+          8,
+          0,
+          8,
+          0,
+          0,
+          8,
+          8,
+          0,
+          8,
+          0,
+          8
+        ]
+      ],
+      "substrate_metrics": {
+        "input_hw": 198,
+        "output_hw": 198,
+        "task_type": "high_overlap"
+      }
+    },
+    {
+      "task_id": "54d82841",
+      "solved": true,
+      "winning_strategy": "colour_map_via_AND",
+      "task_type": "high_overlap",
+      "ltm_recommended_strategies": [
+        "toolkit_cond_4_6"
+      ],
+      "ltm_recommended_mapped": [
+        "conditional_solver"
+      ],
+      "reasoning_trace": [
+        {
+          "language": "I perceive a SPATIAL_SUBSTRATE of shape 5\u00d75 transforming to 5\u00d75.",
+          "math": "input_nodes=5, output_nodes=6, ratio=1.20",
+          "script": "inp = task.train[0].input; out = task.train[0].output"
+        },
+        {
+          "language": "I observe CHARGE_SWAP: colours change (0\u21924).",
+          "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+          "script": "changes = {0: 4}"
+        },
+        {
+          "language": "The gap insight suggests the verb 'object' connects the input to the output.",
+          "math": "gap=AND(grid,object)\u2192VERB quadrant",
+          "script": "gap_verb = self.gap_insight('grid', 'object')"
+        }
+      ],
+      "attempts": [
+        {
+          "strategy": "conditional_solver",
+          "solved": false,
+          "from_ltm": true
+        },
+        {
+          "strategy": "settlement_gravity",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": true,
+          "from_ltm": false
+        },
+        {
+          "strategy": "interior_fill",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "shift_solver",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "rotate_solver",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "flip_solver",
+          "solved": false,
+          "from_ltm": false
+        }
+      ],
+      "solution": [
+        [
+          4,
+          5,
+          5,
+          5,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        [
+          4,
+          5,
+          4,
+          5,
+          4,
+          8,
+          8,
+          8,
+          4,
+          4,
+          4
+        ],
+        [
+          4,
+          4,
+          4,
+          4,
+          4,
+          8,
+          4,
+          8,
+          3,
+          3,
+          3
+        ],
+        [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          3,
+          4,
+          3
+        ],
+        [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ]
+      ],
+      "substrate_metrics": {
+        "input_hw": 5,
+        "output_hw": 6,
+        "task_type": "high_overlap"
+      }
+    },
+    {
+      "task_id": "575b1a71",
+      "solved": false,
+      "winning_strategy": null,
+      "task_type": "high_overlap",
+      "ltm_recommended_strategies": [
+        "toolkit_cond_4_6"
+      ],
+      "ltm_recommended_mapped": [
+        "conditional_solver"
+      ],
+      "reasoning_trace": [
+        {
+          "language": "I perceive a SPATIAL_SUBSTRATE of shape 10\u00d710 transforming to 10\u00d710.",
+          "math": "input_nodes=92, output_nodes=100, ratio=1.09",
+          "script": "inp = task.train[0].input; out = task.train[0].output"
+        },
+        {
+          "language": "I observe CHARGE_SWAP: colours change (0\u21922).",
+          "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+          "script": "changes = {0: 2}"
+        },
+        {
+          "language": "The gap insight suggests the verb 'object' connects the input to the output.",
+          "math": "gap=AND(grid,object)\u2192VERB quadrant",
+          "script": "gap_verb = self.gap_insight('grid', 'object')"
+        }
+      ],
+      "attempts": [
+        {
+          "strategy": "conditional_solver",
+          "solved": false,
+          "from_ltm": true
+        },
+        {
+          "strategy": "settlement_gravity",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "interior_fill",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "shift_solver",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "rotate_solver",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "flip_solver",
+          "solved": false,
+          "from_ltm": false
+        }
+      ],
+      "solution": null,
+      "substrate_metrics": {
+        "input_hw": 92,
+        "output_hw": 100,
+        "task_type": "high_overlap"
+      }
+    },
+    {
+      "task_id": "a85d4709",
+      "solved": false,
+      "winning_strategy": null,
+      "task_type": "size_change",
+      "ltm_recommended_strategies": [
+        "concentric_nesting"
+      ],
+      "ltm_recommended_mapped": [
+        "scale_aware_resize"
+      ],
+      "reasoning_trace": [
+        {
+          "language": "I perceive a SPATIAL_SUBSTRATE of shape 3\u00d73 transforming to 3\u00d73.",
+          "math": "input_nodes=3, output_nodes=9, ratio=3.00",
+          "script": "inp = task.train[0].input; out = task.train[0].output"
+        },
+        {
+          "language": "I observe CHARGE_SWAP: colours change (5\u21922, 0\u21922).",
+          "math": "|changes|=2, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+          "script": "changes = {5: 2, 0: 2}"
+        },
+        {
+          "language": "The gap insight suggests the verb 'object' connects the input to the output.",
+          "math": "gap=AND(grid,object)\u2192VERB quadrant",
+          "script": "gap_verb = self.gap_insight('grid', 'object')"
+        }
+      ],
+      "attempts": [
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false,
+          "from_ltm": true
+        },
+        {
+          "strategy": "settlement_gravity",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "interior_fill",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "shift_solver",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "rotate_solver",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "flip_solver",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "conditional_solver",
+          "solved": false,
+          "from_ltm": false
+        }
+      ],
+      "solution": null,
+      "substrate_metrics": {
+        "input_hw": 3,
+        "output_hw": 9,
+        "task_type": "size_change"
+      }
+    },
+    {
+      "task_id": "ae58858e",
+      "solved": true,
+      "winning_strategy": "conditional_solver",
+      "task_type": "high_overlap",
+      "ltm_recommended_strategies": [
+        "toolkit_cond_4_6"
+      ],
+      "ltm_recommended_mapped": [
+        "conditional_solver"
+      ],
+      "reasoning_trace": [
+        {
+          "language": "I perceive a SPATIAL_SUBSTRATE of shape 6\u00d76 transforming to 6\u00d76.",
+          "math": "input_nodes=13, output_nodes=13, ratio=1.00",
+          "script": "inp = task.train[0].input; out = task.train[0].output"
+        },
+        {
+          "language": "I observe CHARGE_SWAP: colours change (2\u21926).",
+          "math": "|changes|=1, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+          "script": "changes = {2: 6}"
+        },
+        {
+          "language": "The gap insight suggests the verb 'object' connects the input to the output.",
+          "math": "gap=AND(grid,object)\u2192VERB quadrant",
+          "script": "gap_verb = self.gap_insight('grid', 'object')"
+        }
+      ],
+      "attempts": [
+        {
+          "strategy": "conditional_solver",
+          "solved": true,
+          "from_ltm": true
+        },
+        {
+          "strategy": "settlement_gravity",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": true,
+          "from_ltm": false
+        },
+        {
+          "strategy": "interior_fill",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "shift_solver",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "rotate_solver",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "flip_solver",
+          "solved": false,
+          "from_ltm": false
+        }
+      ],
+      "solution": [
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          2,
+          2,
+          0
+        ],
+        [
+          6,
+          6,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          6,
+          0,
+          0,
+          6,
+          6,
+          0
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          0,
+          6,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          2,
+          2,
+          0,
+          0,
+          0,
+          2
+        ]
+      ],
+      "substrate_metrics": {
+        "input_hw": 13,
+        "output_hw": 13,
+        "task_type": "high_overlap"
+      }
+    },
+    {
+      "task_id": "e48d4e1a",
+      "solved": false,
+      "winning_strategy": null,
+      "task_type": "medium_overlap",
+      "ltm_recommended_strategies": [
+        "toolkit_interior_fill",
+        "toolkit_colour_center",
+        "toolkit_column_rank",
+        "toolkit_marker_fill",
+        "toolkit_cross_shift"
+      ],
+      "ltm_recommended_mapped": [
+        "interior_fill",
+        "colour_map_via_AND",
+        "shift_solver"
+      ],
+      "reasoning_trace": [
+        {
+          "language": "I perceive a SPATIAL_SUBSTRATE of shape 10\u00d710 transforming to 10\u00d710.",
+          "math": "input_nodes=22, output_nodes=19, ratio=0.86",
+          "script": "inp = task.train[0].input; out = task.train[0].output"
+        },
+        {
+          "language": "I observe CHARGE_SWAP: colours change (0\u21926, 6\u21920, 5\u21920).",
+          "math": "|changes|=3, conservation: TAX(a\u2295b)=TAX(a)+TAX(b)-2\u00b7TAX(a\u2227b)",
+          "script": "changes = {0: 6, 6: 0, 5: 0}"
+        },
+        {
+          "language": "The gap insight suggests the verb 'object' connects the input to the output.",
+          "math": "gap=AND(grid,object)\u2192VERB quadrant",
+          "script": "gap_verb = self.gap_insight('grid', 'object')"
+        }
+      ],
+      "attempts": [
+        {
+          "strategy": "interior_fill",
+          "solved": false,
+          "from_ltm": true
+        },
+        {
+          "strategy": "colour_map_via_AND",
+          "solved": false,
+          "from_ltm": true
+        },
+        {
+          "strategy": "shift_solver",
+          "solved": false,
+          "from_ltm": true
+        },
+        {
+          "strategy": "settlement_gravity",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "scale_aware_resize",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "rotate_solver",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "flip_solver",
+          "solved": false,
+          "from_ltm": false
+        },
+        {
+          "strategy": "conditional_solver",
+          "solved": false,
+          "from_ltm": false
+        }
+      ],
+      "solution": null,
+      "substrate_metrics": {
+        "input_hw": 22,
+        "output_hw": 19,
+        "task_type": "medium_overlap"
+      }
+    }
+  ]
+}
