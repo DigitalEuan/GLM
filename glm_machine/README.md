@@ -1,6 +1,6 @@
-# GLM README — Geometric Language Machine
+# 'glm_machine/' - GLM README — Geometric Language Machine
 
-**Version:** 4.0.0  (3 August 2026) 
+**Version:** 4.0.1  (7 August 2026) 
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand  
 **Parent:** `../README.md`
 
