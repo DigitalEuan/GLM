@@ -1,4 +1,4 @@
-# TOP REPOSITORY LEVEL TIER ROOT README 
+# '../' - TOP REPOSITORY LEVEL TIER ROOT README 
 
 **Version:** 2.5 (7 August 2026)  
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand  
@@ -47,8 +47,9 @@ https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the dire
   │
   ├──→ arc_agi_17/      ARC AGI v17 SUBSTRATE-NATIVE COGNITIVE ARCHITECTURE
   │                     GLM mind + lattice perception + imagination + growth system
-  │                     Best: 16/45 | CRG: 3,003 edges | 136 cumulative runs
-  │                     Key: scripts/arc_v26_pipeline.py
+  │                     Best: 105/181 (23% ARC + 100% diverse types) | CRG: 4,015 edges | 217 runs
+  │                     Key: scripts/arc_v35_pipeline.py (latest) or scripts/arc_v32_pipeline.py (self-contained)
+  │                     11 puzzle types, 197 simplicial faces, physics-corrected (Gray code, Symmetry Tax, 2Δv)
   │
   ├──→ arc_agi_(version_number)/      THE NEXT ARC AGI attempt
   │
@@ -66,7 +67,7 @@ https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the dire
 | **GMHGL/** | Foundation — Golay engine, TAX, NRCI | — | `ubp_unified_v5.py` | Extend existing capacity/capabilities if possible. Note: `snap_to_codeword` has a Lean-verified bug (only corrects weight ≤ 3, not 4). Fix documented in arc_agi_17/snap_to_codeword_FIX.md |
 | **data_object/** | Encoding — Subjects → 24-bit Data Objects | — | `encoding_definition_attempt_04.08.26/README.md` | Use in studies/experiments. Warping (rotate_3 + flip) and geometric work (190 kJ/mol calibration) now integrated into arc_agi_17 |
 | **glm_machine/** | Active Geometric Language Machine system | — | `dev/glm_v37_grown.py` | Growth and development alongside the ARC AGI developments. v37 features (crystallization, adversarial testing, gap word derivation, deliberative reasoning) now integrated into arc_agi_17 |
-| **arc_agi_17/** | Substrate-native cognitive architecture — GLM mind with lattice perception, imagination, growth | 16/45 (best) | `scripts/arc_v26_pipeline.py` | Continue growth training. Target: 5,000 CRG edges per major epoch. Current: 3,003 edges, 136 cumulative runs. All 14 components generative. Solvers as fallback only. |
+| **arc_agi_17/** | Substrate-native cognitive architecture — GLM mind with lattice perception, imagination, growth, diverse puzzles, simplicial faces | 105/181 (23% ARC + 100% diverse) | `scripts/arc_v35_pipeline.py` | Continue growth. Target: 5,000 CRG edges (current: 4,015), 30%+ ARC. 217 cumulative runs. 11 puzzle types. Physics-corrected (Gray code, Symmetry Tax, 2Δv). Self-contained pipeline available at `scripts/arc_v32_pipeline.py`. |
 | **arc_agi_15/** | Solver — Working Solvers (3/9 mind solved / 6/9 Solvers solved) | 9/50 | `consolidated_mind.py` | Leave as record of attempting #15 and for parts if needed rather than rebuilding scripts from scratch |
 | **arc_agi_16/** | Experiments | 9/50 | `arc_learning_mind.py` | Leave as record of attempting #16 and parts if needed rather than rebuilding scripts from scratch |
 | **light/** | Calibration — UBP ↔ real world | — | `aristotle_01/lattice_shortcut.py` and `aristotle_01/LATTICE_SHORTCUT_METHOD.md` | Add more calibration anchors through various scales of reality. UBP-to-Realworld Scale: S(λ, HW) = λ / [HW × (Y + 1/8)] established in arc_agi_17 study |
@@ -96,7 +97,7 @@ Decisions (perceive → interpret → propose → inspect)
     ↓ solve via arc_agi_17/ (GLM mind + lattice perception + imagination)
 Results (solved tasks, experience, grown CRG)
     ↓ archive to long_term_memory/ + arc_agi_17/results/glm_state.json
-Training Data + Knowledge (grows with each run — 136 cumulative runs)
+Training Data + Knowledge (grows with each run — 217 cumulative runs)
 ```
 
 ---
