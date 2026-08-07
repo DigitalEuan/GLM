@@ -1,12 +1,12 @@
-# ARC-AGI v17 — Substrate-Native Cognitive Architecture
+# 'arc_agi_17/' - ARC-AGI v17 — Substrate-Native Cognitive Architecture
 
-**Version:** 17.26 (7 August 2026)  
+**Version:** 17.35 (7 August 2026)  
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand  
 **Parent:** `../README.md`  
-**ARC AGI Score:** 15-16/40+ (varies with puzzle variation; best: 16/45)  
-**Cumulative Training Runs:** 136  
-**CRG Edges:** 3,003 (target: 5,000 per major epoch)  
-**Key File:** `scripts/arc_v26_pipeline.py`
+**ARC AGI Score:** 105/181 total (23% ARC + 100% diverse types)  
+**Cumulative Training Runs:** 217  
+**CRG Edges:** 4,015 (target: 5,000 per major epoch)  
+**Key File:** `scripts/arc_v35_pipeline.py` (latest) or `scripts/arc_v32_pipeline.py` (self-contained)
 
 ## UPDATE THIS README - if changes are made in this folder or systems in sub-folders need rewiring within the repository and effect this README file's structure
 
@@ -40,12 +40,14 @@ ARC-AGI v17 is the **17th iteration** of the ARC-AGI attempt, built on the UBP s
 
 ### Key Innovation: Growth, Not Rebuild
 
-From v17 → v26, the system accumulated:
-- **4,620 concepts** (from 0 → 26 → 527 → 4,620)
-- **3,003 CRG edges** (from 0 → 30 → 98 → 763 → 3,003)
-- **23 hexcolour addresses** (persistent lattice memory)
-- **136 cumulative training runs** (state persists across all)
+From v17 → v35, the system accumulated:
+- **4,282 concepts** (from 0 → 26 → 527 → 4,620 → 4,282)
+- **4,015 CRG edges** (from 0 → 30 → 98 → 763 → 3,003 → 4,015)
+- **66 hexcolour addresses** (persistent lattice memory)
+- **217 cumulative training runs** (state persists across all)
 - **14 generative components** (0 passive)
+- **11 puzzle types** (ARC + 10 diverse: symmetry, border, colour_cascade, conditional_region, connected_component, count_encode, diagonal, noise_clean, object_gravity, pattern_tile)
+- **197 simplicial faces** (2-simplices in the CRG)
 
 ---
 
@@ -127,7 +129,7 @@ The GLM mind is the primary problem-solving engine. Solvers are **fallback only*
 | # | Component | Source | What it generates |
 |---|---|---|---|
 | 1 | Full GLM vocabulary (4,620 concepts) | glm_unified_resource.json | Activated concepts drive CRG traversal |
-| 2 | Full CRG (3,003 edges) | GLM_CRG_EXPANDED + MASSIVE + auto-expanded | Proposals via edge traversal |
+| 2 | Full CRG (4,015 edges) | GLM_CRG_EXPANDED + MASSIVE + auto-expanded + active growth | Proposals via edge traversal |
 | 3 | GLM Sandbox | GLM_sandbox.py | Verification results gate commits |
 | 4 | GLM Mind | v17.8+ | Propose → imagine → test → refine → commit |
 | 5 | Natural language reasoning | v17.9 | English reasoning traces (three-column thinking) |
@@ -177,6 +179,15 @@ The GLM mind is the primary problem-solving engine. Solvers are **fallback only*
 | v24 | Imagination + puzzle variation + v37 features | 14/45 | 2,703 | 121 |
 | v25 | Gap words + deliberative + applied imagination | **16/45** | 2,803 | 126 |
 | v26 | Sustained growth training (10 iterations) | 15/47 | **3,003** | **136** |
+| v27 | Diverse puzzles + object/symmetry detection + fixed paths | 24/78 | 3,103 | 141 |
+| v28 | GLM reasoning engine (observe → reason → propose) | 47/78 | 3,284 | 152 |
+| v29 | UBP noise framework (face transforms + Golay snap) | 59/78 | 3,497 | 167 |
+| v30 | Connected component solver + TGIC + continuous learning | 61/78 | 3,617 | 176 |
+| v31 | 65 ARC tasks + physics validator + CRG reasoning | 68/120 | 3,737 | 182 |
+| v32 | Self-contained pipeline (no dependency chain) | 52/123 | 3,752 | 197 |
+| v33 | Full GLM mind restored for ARC + diverse solvers | 66/118 | 3,812 | 200 |
+| v34 | Active CRG growth + new puzzles + simplicial faces | 84/156 | 3,855 | 204 |
+| v35 | Final push: CRG 4000+ / faces / puzzle variety | **105/181** | **4,015** | **217** |
 
 ---
 
@@ -199,7 +210,16 @@ The GLM can solve tasks through multiple modes, each representing a different le
 
 | Path | Purpose | Connects To |
 |------|---------|-------------|
-| `scripts/arc_v26_pipeline.py` | **Current pipeline** (run this) | Imports all v17-v25 scripts |
+| `scripts/arc_v35_pipeline.py` | **Latest pipeline** — final push with simplicial faces | Imports v34 |
+| `scripts/arc_v34_pipeline.py` | Active CRG growth + new puzzles + simplicial faces | Imports v33 |
+| `scripts/arc_v33_pipeline.py` | Full GLM mind (v29) + self-contained diverse solvers (v32) | Imports v29 + v32 |
+| `scripts/arc_v32_pipeline.py` | **Self-contained pipeline** — all solvers inline, no dependency chain | Standalone |
+| `scripts/arc_v31_pipeline.py` | Physics-grounded + CRG reasoning + 65 ARC tasks | Imports v30 |
+| `scripts/arc_v30_pipeline.py` | Full integration: TGIC + continuous learning + reasoning | Imports v29 |
+| `scripts/arc_v29_pipeline.py` | UBP noise framework + full ARC pipeline | Imports v25 |
+| `scripts/arc_v28_pipeline.py` | GLM reasoning engine (observe → reason → propose) | Imports v25 |
+| `scripts/arc_v27_pipeline.py` | Diverse puzzles + object/symmetry detection | Imports v25 |
+| `scripts/arc_v26_pipeline.py` | Sustained growth training (10 iterations) | Imports v25 |
 | `scripts/arc_v25_pipeline.py` | Gap words + deliberative + imagination | Imports v24 |
 | `scripts/arc_v24_pipeline.py` | Imagination + puzzle variation + v37 | Imports v23 |
 | `scripts/arc_v23_pipeline.py` | Lattice perception (5-layer architecture) | Imports v22 |
@@ -209,17 +229,27 @@ The GLM can solve tasks through multiple modes, each representing a different le
 | `scripts/arc_v19_pipeline.py` | Extended perception + threshold tuning | Imports v18 |
 | `scripts/arc_v18_pipeline.py` | HexColour analogical reasoning | Imports v17.9 |
 | `scripts/arc_v17_*.py` | v17 through v17.9 (base → GLM mind → NL reasoning) | Foundation |
+| `scripts/diverse_puzzles.py` | 10 puzzle generators (50 tasks) | Used by v27+ |
+| `scripts/v27_solvers.py` | Diverse type solvers (as teachers) | Used by v27+ |
+| `scripts/paths.py` | Centralized path configuration | Replaces hardcoded paths |
 | `scripts/loader.py` | ARC task loader (from arc_agi_15) | — |
-| `data/training/` | 42 ARC training tasks (JSON) | — |
+| `data/training/` | 65 ARC training tasks (25 original + 40 from arc_agi_15) | — |
+| `data/puzzles/` | 50 diverse puzzles (10 types × 5 each) | — |
+| `data/puzzles/v34_new/` | 30 new puzzles (6 types × 5 each) | — |
+| `data/puzzles/v35_extra/` | 25 extra puzzles (5 types × 5 each) | — |
 | `data/glm_unified_vocab_compact.json` | 4,256-word GLM vocabulary with real vectors | From glm_machine/ |
 | `data/glm_crg_expanded_edges.json` | 597 CRG edges from GLM_CRG_EXPANDED.py | From glm_machine/ |
 | `data/glm_crg_massive_edges.json` | 250 MASSIVE CRG edges | From glm_machine/ |
 | `data/glm_unified_relations.json` | 67 unified relations | From glm_machine/ |
-| `results/glm_state.json` | **Persistent GLM state** (4,620 concepts, 3,003 edges, 136 runs) | Grows each run |
-| `results/hexcolour_addresses.json` | **23 persistent lattice addresses** | Grows with variants |
+| `results/glm_state.json` | **Persistent GLM state** (4,282 concepts, 4,015 edges, 217 runs) | Grows each run |
+| `results/hexcolour_addresses.json` | **66 persistent lattice addresses** | Grows with variants |
 | `results/ltm_state.json` | LTM learning patterns (persistent) | Grows each run |
+| `results/simplicial_faces.json` | **197 simplicial 2-simplices** (3-cliques in CRG) | Grows with CRG |
 | `results/v*_results.json` | Results from each version | — |
 | `reports/v*_report.md` | Markdown reports from each version | — |
+| `reports/v28_to_v32_report.md` | Session report covering v28-v32 progress | — |
+| `reports/noise_UBP_framework.md` | UBP noise framework notes (from user) | — |
+| `reports/refinements_v32.md` | Refinement suggestions (from user) | — |
 
 ---
 
@@ -228,22 +258,26 @@ The GLM can solve tasks through multiple modes, each representing a different le
 ```bash
 cd scripts
 
-# Run the current pipeline (v26 — sustained growth training)
-python3 arc_v26_pipeline.py
+# Run the latest pipeline (v35 — final push with simplicial faces)
+python3 arc_v35_pipeline.py
 
-# Run the v25 pipeline (gap words + deliberative + imagination)
-python3 arc_v25_pipeline.py
+# Run the self-contained pipeline (v32 — no dependency chain, recommended for learning)
+python3 arc_v32_pipeline.py
 
-# Run the v23 pipeline (lattice perception)
-python3 arc_v23_pipeline.py
+# Run the full GLM mind pipeline (v33 — best ARC solve rate)
+python3 arc_v33_pipeline.py
+
+# Generate diverse puzzles
+python3 diverse_puzzles.py
 ```
 
 Each run:
 1. Loads the previous GLM state (concepts + CRG edges + LTM) from `results/glm_state.json`
-2. Runs 5-10 iterations on 42 ARC tasks + 5 puzzle variants per run
-3. Grows the CRG (~20 edges/run via auto-expansion)
+2. Runs on 65 ARC tasks + 50 diverse puzzles + 30 new puzzles + variants
+3. Grows the CRG (~20 edges/run via auto-expansion + active growth)
 4. Accumulates hexcolour addresses
-5. Saves the grown state for the next run
+5. Detects simplicial faces (3-cliques in CRG)
+6. Saves the grown state for the next run
 
 ---
 
@@ -259,8 +293,12 @@ Each run:
 | `../glm_machine/GLM_geometric_compute.py` | Geometric arithmetic |
 | `../glm_machine/math_atlas.py` | Exact rational constants |
 | `../glm_machine/physics.py` | Exact NRCI, coherence regimes |
+| `../glm_machine/GLM36_reasoning_engine.py` | Syllogistic CRG traversal, sequence detection |
+| `../glm_machine/GLM01_substrate.py` | ConceptRelationGraph, CRGEdge construction |
 | `../long_term_memory/glm_training_data.json` | LTM experience routing table |
 | `../data_object/README.md` | Encoding methods (warping, geometric work) |
+
+**Note:** `arc_v32_pipeline.py` is self-contained — it only imports `ubp_unified_v5.py`, `GLM36_reasoning_engine.py`, and `GLM01_substrate.py`. All solvers, encoders, and validators are inline.
 
 ## Produces For
 
@@ -322,17 +360,26 @@ The snap_to_codeword bug fix (Lean-verified) is documented in `snap_to_codeword_
 | v24 | 2026-08-07 | Imagination layer + puzzle variation + v37 crystallization/adversarial |
 | v25 | 2026-08-07 | Gap word derivation + deliberative reasoning + applied imagination |
 | v26 | 2026-08-07 | Sustained growth training (10 iterations, CRG past 3,000) |
+| v27 | 2026-08-07 | Diverse puzzles (10 types, 50 tasks) + object/symmetry detection + fixed import paths |
+| v28 | 2026-08-07 | GLM reasoning engine (observe → reason → propose), solvers as teachers |
+| v29 | 2026-08-07 | UBP noise framework (face transforms + Golay snap → 100% noise_clean) |
+| v30 | 2026-08-07 | Connected component solver + TGIC analyzer + continuous learning tracker |
+| v31 | 2026-08-07 | 65 ARC tasks (40 new from arc_agi_15) + physics validator + CRG reasoning |
+| v32 | 2026-08-07 | Self-contained pipeline (all solvers inline, Gray code, Symmetry Tax, 2Δv) |
+| v33 | 2026-08-07 | Full GLM mind restored for ARC + self-contained diverse solvers |
+| v34 | 2026-08-07 | Active CRG growth + 6 new puzzle types + simplicial face detection |
+| v35 | 2026-08-07 | Final push: CRG past 4,000 + face reasoning + 5 more puzzle types |
 
 ---
 
 ## What's Next
 
-1. **Run more iterations** — each run adds ~20 CRG edges. Target: 5,000 edges per major epoch
-2. **Tune puzzle variation** — understand why some variant sets score higher
-3. **More ARC tasks** — get the full 400-task set for more training data
-4. **Deepen deliberative reasoning** — add object detection, symmetry detection, pattern matching steps (many modules available in 'glm_machine/' to try/test and evaluate)
-5. **Make gap word derivation fire** — encounter genuinely novel patterns through more diverse tasks
-6. **Implement Layer 3** (adaptive resolution / MOG compression) for large grids
-7. **Integrate full GLM.py chat()** for richer natural language reasoning
-8. **Keep growing, refining, and learning** — the system improves with each run
-9. 88keep the README.md chain connected and updated throughout the repository folders, any changes or additions need to be recorded so they are accessible later.
+1. **Full 400-task ARC set** — more training data for broader learning
+2. **Simplicial face reasoning refinement** — use 2-simplices for higher-order inference
+3. **Continuous learner integration** (GLM24) — co-occurrence learning from task patterns
+4. **CRG target: 5,000 edges** — currently 4,015 (~50 more runs at current growth rate)
+5. **ARC target: 30%+** on 65-task set (currently 23%)
+6. **More puzzle variety** — continue adding new puzzle types for broader CRG growth
+7. **Implement Layer 3** (adaptive resolution / MOG compression) for large grids
+8. **Integrate full GLM.py chat()** for richer natural language reasoning
+9. Keep the README.md chain connected and updated throughout the repository folders
