@@ -1,0 +1,38 @@
+This document is from up to v27 so some items may have been completed already. 
+
+To push the **GLM ARC-AGI** score higher, we should focus on evolving the system from a "recognizer" of single transformations into a "composer" of logic. The current best of **16/45** (v25) and the recent v27 benchmarks show that while you have mastered "linear" transformations (gravity, symmetry, borders), you are hitting a wall with **recursive or conditional** logic (0% on `conditional_region`, `count_encode`, and `pattern_tile`).
+
+Drawing from your sources and broader AI research, here are the key areas to target:
+
+### 1. Close the "Compositional Proposal" Stub
+Your reports repeatedly mention "compositions" (e.g., 'flip THEN recolour') as stubs or next steps. In ARC, many high-difficulty puzzles are not a single \\(2\Delta v\\) vector in the Leech lattice, but a **vector sequence** or a **nested function**.
+*   **From the Sources:** v18 introduced the idea of compositional proposals, but v22–v26 results show they are not yet driving consistent solves.
+*   **Strategic Upgrade:** Implement a **Recursive Transition Engine**. Instead of one \\(2\Delta v\\), the system should calculate \\(\Delta v_1\\) (e.g., a move), apply it in imagination, and then calculate \\(\Delta v_2\\) (e.g., a color change) on the imaginary result. If the sequence \\(\Delta v_1 \to \Delta v_2\\) is invariant across train pairs, commit the **compositional vector**.
+
+### 2. Solve "Objectness" Beyond Connected Components
+v27 added **Connected Component Analysis**, which is a massive leap forward. However, "Objectness" in ARC often requires recognizing that two different shapes are the "same" object undergoing a transformation (like scaling or "unfolding").
+*   **From the Sources:** v23’s Lattice Perception treats the whole grid as a 24-bit state.
+*   **Strategic Upgrade (External Knowledge):** You need **Object Persistence**. Treat each detected object as its own "Local Substrate." Instead of just one hexcolour address for the grid, generate **Relative Hexcolour Addresses** for objects. This allows the GLM to recognize that an object at `Address_A` in the input became `Address_A + Offset` in the output, even if the background grid changed entirely.
+
+### 3. Reach the 5,000 CRG Edge Threshold via "Curriculum Growth"
+Your current prediction is that 5,000 CRG edges will trigger a "threshold gain". Currently at ~3,203, you are ~1,800 edges away.
+*   **From the Sources:** You are currently growing at ~18–20 edges per run.
+*   **Strategic Upgrade:** Shift from "Sustained Growth" (random variants) to **Curriculum Growth**. Design tasks specifically to bridge the 0% success areas. 
+    *   **For `count_encode` (0%):** Create a training set where the output is always a \\(1 \times 1\\) grid of color \\(N\\), where \\(N\\) is the number of objects. This forces the CRG to create an edge between `CARDINALITY_MEASURE` and `COLOR_ASSIGNMENT`.
+    *   **For `conditional_region` (0%):** Train the GLM to detect "Containment" as a primary relation. If an object is "inside" another, it gets a different \\(2\Delta v\\) than an object "outside".
+
+### 4. Enable "System 2" via the Full Chat() Runtime
+Reports v17.9 through v22 suggest integrating the **full GLM.py chat()** for richer natural language reasoning.
+*   **From the Sources:** Currently, the reasoner uses templates for "Three-column thinking". 
+*   **Strategic Upgrade (External Knowledge):** True "System 2" reasoning (deliberative, slow, logical) requires the GLM to **question its own perception**. Instead of just saying "I perceive a shift," the chat() runtime should be used to perform **Adversarial Self-Talk**: *"I perceive a shift, but that doesn't explain why the blue pixel disappeared. Is there a hidden layer or a occlusion rule?"* This mimics the way top-tier human solvers approach ARC.
+
+### 5. Adaptive Resolution (Layer 3)
+One of the "What's Next" items is **Adaptive Resolution / MOG compression** for large grids.
+*   **From the Sources:** Layers 1, 2, 4, and 5 are active, but **Layer 3** is largely a placeholder.
+*   **Strategic Upgrade:** Many ARC failures occur because \\(30 \times 30\\) grids are too "noisy" for a single 24-bit codeword. Implement Layer 3 to **fractalize the substrate**. Solve the \\(3 \times 3\\) sub-units of a \\(30 \times 30\\) grid as independent codewords, then use the **Miracle Octad Generator (MOG)** to find the "Meta-Rule" connecting those codewords.
+
+### Summary of Targets to Move from 16 to 25+:
+1.  **Composition Engine:** Move from single \\(2\Delta v\\) to sequences \\((\Delta v_1 \to \Delta v_2)\\).
+2.  **Object Persistence:** Map transformations to individual objects, not just the grid lattice.
+3.  **Targeted Training:** Specifically target the `conditional_region` and `count_encode` gaps to force CRG growth in those semantic areas.
+4.  **Semantic Feedback:** Use the full `chat()` method to allow the GLM to debug its own failures in natural language before retrying in the sandbox.

@@ -1,0 +1,78 @@
+This is an ambitious and well-structured evolution of the pipeline. You are successfully wiring the theoretical UBP physics into the operational ARC solver.
+
+However, looking at the code through the lens of the exact mathematically verified UBP substrate, there are a few **critical geometric and mathematical disconnects** in `v31` that will bottleneck your progress past 26%.
+
+Here are the immediate architectural corrections and suggestions for your 4 target areas:
+
+### 1. Physics Validator: The TAX Conservation Law is Mathematically Flawed
+
+In your `PhysicsValidator`, you are enforcing the inclusion-exclusion principle for `TAX`:
+`TAX(a⊕b) = TAX(a) + TAX(b) − 2×TAX(a∧b)`
+
+**The Bug:** You defined `compute_tax` to return the `syndrome_weight`. The syndrome weight (the distance to the nearest codeword) does **not** obey this conservation law because Golay coset leaders are not closed under bitwise AND. This law *only* applies to raw Hamming Weight (`popcount`) or a direct scalar multiple of it. By enforcing this on syndrome weights, your validator will reject physically valid geometric states.
+
+**The Fix:** You must compute the true **Symmetry Tax** as defined in the Leech Lattice engine (`HW·Y + ‖v‖²/8`). Furthermore, as strictly warned in `value_geometry.py` and `TGIC_v3.py`, you must use `fractions.Fraction` to avoid floating-point drift.
+
+```python
+    def compute_tax(self, bits: List[int]) -> Fraction:
+        """Compute exact Symmetry Tax (LAW_SYMMETRY_001) of a 24-bit state."""
+        hw = sum(bits)
+        # Use exact fraction Y from your substrate (approx 0.26467)
+        Y_FRAC = Fraction(100000, 377822) # replace with exact self.leech.Y
+        return Fraction(hw) * Y_FRAC + Fraction(hw, 8)
+
+    def compute_nrci(self, bits: List[int]) -> float:
+        """Compute NRCI exactly, then cast to float for display if needed."""
+        tax = self.compute_tax(bits)
+        return float(Fraction(10) / (Fraction(10) + tax))
+
+```
+
+### 2. Pushing ARC > 30%: Encoding & The Differential Vector ($2\Delta v$)
+
+**The Encoding Bug:** In `validate_grid_encoding`, you are using raw binary shifts (`(val >> i) & 1`) to encode grid density and dimensions. The UBP specifically forbids this for spatial data because it destroys topological adjacency. You must **Gray Code** the values before packing them. Gray coding ensures that a 1-unit change in the grid (e.g., width changing from 7 to 8) results in a Hamming distance of exactly $d^2 = 1$.
+
+```python
+        # In validate_grid_encoding:
+        for val in [min(15, int(density * 4)), min(15, distinct), min(15, h), min(15, w)]:
+            gray_val = val ^ (val >> 1)  # APPLY GRAY MAP ISOMETRY
+            bits.extend([(gray_val >> i) & 1 for i in range(3, -1, -1)])
+
+```
+
+**The Reasoning Bug:** Your `_apply_reasoned_transform` currently attempts to solve ARC puzzles purely through `colour_changes` mapping. ARC is heavily spatial, not just palette-swapping.
+To align with the UBP "Diffusion" model, you need to implement **Layer 5: Differential Temporal Tracking**. Rather than guessing the color output, you should map $Input \to c_{in}$ and $Output \to c_{out}$, and calculate the **Leech invariant shift vector**:
+$2\Delta v = 2(c_{out} - c_{in}) \in \Lambda_{24}$.
+To solve the test case, you simply apply that exact algebraic shift $2\Delta v$ to the test input.
+
+### 3. Integrating GLM34_simplicial_crg Faces
+
+If you are moving from a standard node-edge graph to a **Simplicial CRG**, simply adding edges is not enough. You must detect 2-simplices (filled triangles where $A \to B \to C \to A$).
+
+To ground this physically in the reasoning loop, map the simplicial construction to the **6 Directed Boolean Face Transforms** defined in `TGIC_v3.py`:
+
+* 
+**$XY$ (AND):** Maps to structural overlap or intersection concepts in the CRG.
+
+
+* 
+**$XZ$ (XOR):** Maps to spatial boundary and contrast edge concepts.
+
+
+* 
+**$YZ$ (OR):** Maps to contiguous object-merging concepts.
+
+
+
+When your reasoning engine pulls an ARC grid, run these three Boolean face transforms. If the results match an existing 2-simplex in the CRG, the system has successfully identified a physical spatial rule without needing brute-force search.
+
+### 4. Training Diversity (Task Variants)
+
+Your current variant `colour_swap_variant` is excellent for decoupling logic from specific hues. To expand this and trigger the Leech Lattice's native minimal vector hops ($d^2 = 8$), introduce **Rigid Geodesic Variants**:
+
+* **Translation Variant:** Shift the ARC matrix by +1 $X$ or +1 $Y$. Under Gray-coded Golay snapping, a minimal spatial shift equates to a kissing-sphere hop on the lattice.
+
+
+* **Reflection Variant:** Mirror the grid along an axis.
+
+By training the CRG on translations and reflections, the system learns to treat spatial movement as algebraic shifts, completely avoiding "ghost state" hallucinations.
