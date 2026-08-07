@@ -1,0 +1,289 @@
+{
+  "experiment": "v34",
+  "n_runs": 3,
+  "runs": [
+    {
+      "run_number": 202,
+      "n_tasks": 156,
+      "n_solved": 84,
+      "type_scores": {
+        "arc": {
+          "solved": 15,
+          "total": 65
+        },
+        "new_puzzle": {
+          "solved": 17,
+          "total": 30
+        },
+        "object_gravity": {
+          "solved": 5,
+          "total": 5
+        },
+        "arc_variant": {
+          "solved": 2,
+          "total": 11
+        },
+        "colour_cascade": {
+          "solved": 5,
+          "total": 5
+        },
+        "border": {
+          "solved": 5,
+          "total": 5
+        },
+        "conditional_region": {
+          "solved": 5,
+          "total": 5
+        },
+        "diagonal": {
+          "solved": 5,
+          "total": 5
+        },
+        "connected_component": {
+          "solved": 5,
+          "total": 5
+        },
+        "symmetry": {
+          "solved": 5,
+          "total": 5
+        },
+        "noise_clean": {
+          "solved": 5,
+          "total": 5
+        },
+        "pattern_tile": {
+          "solved": 5,
+          "total": 5
+        },
+        "count_encode": {
+          "solved": 5,
+          "total": 5
+        }
+      },
+      "mode_counts": {
+        "fallback_solver": 36,
+        "solver_gravity": 5,
+        "v25_error": 5,
+        "failed": 67,
+        "solver_colour_map": 11,
+        "solver_conditional_region": 6,
+        "solver_diagonal_fill": 5,
+        "solver_conncomp": 4,
+        "solver_shift": 10,
+        "solver_noise_clean": 2,
+        "solver_count_encode": 5
+      },
+      "glm_edges": 3852,
+      "crg_new_edges": 0,
+      "simplicial_faces": 197
+    },
+    {
+      "run_number": 203,
+      "n_tasks": 156,
+      "n_solved": 84,
+      "type_scores": {
+        "new_puzzle": {
+          "solved": 17,
+          "total": 30
+        },
+        "object_gravity": {
+          "solved": 5,
+          "total": 5
+        },
+        "arc": {
+          "solved": 15,
+          "total": 65
+        },
+        "pattern_tile": {
+          "solved": 5,
+          "total": 5
+        },
+        "symmetry": {
+          "solved": 5,
+          "total": 5
+        },
+        "diagonal": {
+          "solved": 5,
+          "total": 5
+        },
+        "border": {
+          "solved": 5,
+          "total": 5
+        },
+        "arc_variant": {
+          "solved": 2,
+          "total": 11
+        },
+        "colour_cascade": {
+          "solved": 5,
+          "total": 5
+        },
+        "connected_component": {
+          "solved": 5,
+          "total": 5
+        },
+        "noise_clean": {
+          "solved": 5,
+          "total": 5
+        },
+        "conditional_region": {
+          "solved": 5,
+          "total": 5
+        },
+        "count_encode": {
+          "solved": 5,
+          "total": 5
+        }
+      },
+      "mode_counts": {
+        "fallback_solver": 36,
+        "solver_gravity": 5,
+        "v25_error": 4,
+        "solver_shift": 10,
+        "failed": 68,
+        "solver_diagonal_fill": 5,
+        "solver_colour_map": 11,
+        "solver_conncomp": 4,
+        "solver_conditional_region": 6,
+        "solver_noise_clean": 2,
+        "solver_count_encode": 5
+      },
+      "glm_edges": 3852,
+      "crg_new_edges": 0,
+      "simplicial_faces": 197
+    },
+    {
+      "run_number": 204,
+      "n_tasks": 155,
+      "n_solved": 84,
+      "type_scores": {
+        "new_puzzle": {
+          "solved": 17,
+          "total": 30
+        },
+        "object_gravity": {
+          "solved": 5,
+          "total": 5
+        },
+        "arc": {
+          "solved": 15,
+          "total": 65
+        },
+        "count_encode": {
+          "solved": 5,
+          "total": 5
+        },
+        "symmetry": {
+          "solved": 5,
+          "total": 5
+        },
+        "arc_variant": {
+          "solved": 2,
+          "total": 10
+        },
+        "border": {
+          "solved": 5,
+          "total": 5
+        },
+        "diagonal": {
+          "solved": 5,
+          "total": 5
+        },
+        "connected_component": {
+          "solved": 5,
+          "total": 5
+        },
+        "noise_clean": {
+          "solved": 5,
+          "total": 5
+        },
+        "colour_cascade": {
+          "solved": 5,
+          "total": 5
+        },
+        "pattern_tile": {
+          "solved": 5,
+          "total": 5
+        },
+        "conditional_region": {
+          "solved": 5,
+          "total": 5
+        }
+      },
+      "mode_counts": {
+        "fallback_solver": 35,
+        "solver_gravity": 5,
+        "failed": 68,
+        "solver_count_encode": 5,
+        "solver_shift": 10,
+        "solver_colour_map": 11,
+        "solver_diagonal_fill": 5,
+        "solver_conncomp": 4,
+        "v25_error": 3,
+        "solver_noise_clean": 2,
+        "solver_conditional_region": 6,
+        "deliberative_reasoning": 1
+      },
+      "glm_edges": 3855,
+      "crg_new_edges": 3,
+      "simplicial_faces": 197
+    }
+  ],
+  "best": 84,
+  "final_edges": 3855,
+  "total_new_edges": 3,
+  "aggregate": {
+    "arc": {
+      "solved": 45,
+      "total": 195
+    },
+    "new_puzzle": {
+      "solved": 51,
+      "total": 90
+    },
+    "object_gravity": {
+      "solved": 15,
+      "total": 15
+    },
+    "arc_variant": {
+      "solved": 6,
+      "total": 32
+    },
+    "colour_cascade": {
+      "solved": 15,
+      "total": 15
+    },
+    "border": {
+      "solved": 15,
+      "total": 15
+    },
+    "conditional_region": {
+      "solved": 15,
+      "total": 15
+    },
+    "diagonal": {
+      "solved": 15,
+      "total": 15
+    },
+    "connected_component": {
+      "solved": 15,
+      "total": 15
+    },
+    "symmetry": {
+      "solved": 15,
+      "total": 15
+    },
+    "noise_clean": {
+      "solved": 15,
+      "total": 15
+    },
+    "pattern_tile": {
+      "solved": 15,
+      "total": 15
+    },
+    "count_encode": {
+      "solved": 15,
+      "total": 15
+    }
+  }
+}

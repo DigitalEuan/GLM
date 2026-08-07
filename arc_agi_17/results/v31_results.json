@@ -1,0 +1,263 @@
+{
+  "experiment": "ARC-AGI v31 \u2014 Physics-Grounded Reasoning + Simplicial CRG",
+  "n_runs": 3,
+  "runs": [
+    {
+      "run_number": 180,
+      "n_tasks": 120,
+      "n_solved": 68,
+      "type_scores": {
+        "arc": {
+          "solved": 17,
+          "total": 65
+        },
+        "colour_cascade": {
+          "solved": 5,
+          "total": 5
+        },
+        "noise_clean": {
+          "solved": 5,
+          "total": 5
+        },
+        "count_encode": {
+          "solved": 5,
+          "total": 5
+        },
+        "symmetry": {
+          "solved": 5,
+          "total": 5
+        },
+        "object_gravity": {
+          "solved": 5,
+          "total": 5
+        },
+        "border": {
+          "solved": 5,
+          "total": 5
+        },
+        "diagonal": {
+          "solved": 5,
+          "total": 5
+        },
+        "pattern_tile": {
+          "solved": 5,
+          "total": 5
+        },
+        "arc_variant": {
+          "solved": 1,
+          "total": 5
+        },
+        "conditional_region": {
+          "solved": 5,
+          "total": 5
+        },
+        "connected_component": {
+          "solved": 5,
+          "total": 5
+        }
+      },
+      "mode_counts": {
+        "failed": 46,
+        "fallback_solver": 20,
+        "glm_reasoning": 25,
+        "solver_taught": 15,
+        "deliberative_reasoning": 2,
+        "v25_error": 6,
+        "conncomp_solver": 5,
+        "hexcolour_analogical": 1
+      },
+      "glm_edges": 3697,
+      "new_edges": 0,
+      "crg_graph_edges": 3577
+    },
+    {
+      "run_number": 181,
+      "n_tasks": 120,
+      "n_solved": 68,
+      "type_scores": {
+        "arc": {
+          "solved": 17,
+          "total": 65
+        },
+        "symmetry": {
+          "solved": 5,
+          "total": 5
+        },
+        "connected_component": {
+          "solved": 5,
+          "total": 5
+        },
+        "pattern_tile": {
+          "solved": 5,
+          "total": 5
+        },
+        "colour_cascade": {
+          "solved": 5,
+          "total": 5
+        },
+        "border": {
+          "solved": 5,
+          "total": 5
+        },
+        "count_encode": {
+          "solved": 5,
+          "total": 5
+        },
+        "object_gravity": {
+          "solved": 5,
+          "total": 5
+        },
+        "arc_variant": {
+          "solved": 1,
+          "total": 5
+        },
+        "diagonal": {
+          "solved": 5,
+          "total": 5
+        },
+        "conditional_region": {
+          "solved": 5,
+          "total": 5
+        },
+        "noise_clean": {
+          "solved": 5,
+          "total": 5
+        }
+      },
+      "mode_counts": {
+        "failed": 47,
+        "glm_reasoning": 25,
+        "conncomp_solver": 5,
+        "fallback_solver": 20,
+        "v25_error": 5,
+        "solver_taught": 15,
+        "hexcolour_analogical": 1,
+        "deliberative_reasoning": 2
+      },
+      "glm_edges": 3717,
+      "new_edges": 0,
+      "crg_graph_edges": 3597
+    },
+    {
+      "run_number": 182,
+      "n_tasks": 119,
+      "n_solved": 68,
+      "type_scores": {
+        "arc": {
+          "solved": 17,
+          "total": 65
+        },
+        "object_gravity": {
+          "solved": 5,
+          "total": 5
+        },
+        "count_encode": {
+          "solved": 5,
+          "total": 5
+        },
+        "symmetry": {
+          "solved": 5,
+          "total": 5
+        },
+        "arc_variant": {
+          "solved": 1,
+          "total": 4
+        },
+        "noise_clean": {
+          "solved": 5,
+          "total": 5
+        },
+        "conditional_region": {
+          "solved": 5,
+          "total": 5
+        },
+        "colour_cascade": {
+          "solved": 5,
+          "total": 5
+        },
+        "border": {
+          "solved": 5,
+          "total": 5
+        },
+        "diagonal": {
+          "solved": 5,
+          "total": 5
+        },
+        "connected_component": {
+          "solved": 5,
+          "total": 5
+        },
+        "pattern_tile": {
+          "solved": 5,
+          "total": 5
+        }
+      },
+      "mode_counts": {
+        "failed": 47,
+        "solver_taught": 15,
+        "glm_reasoning": 25,
+        "fallback_solver": 19,
+        "deliberative_reasoning": 3,
+        "conncomp_solver": 5,
+        "v25_error": 4,
+        "hexcolour_analogical": 1
+      },
+      "glm_edges": 3737,
+      "new_edges": 0,
+      "crg_graph_edges": 3617
+    }
+  ],
+  "best": 68,
+  "final_edges": 3737,
+  "total_new_edges": 40,
+  "aggregate_types": {
+    "arc": {
+      "solved": 51,
+      "total": 195
+    },
+    "colour_cascade": {
+      "solved": 15,
+      "total": 15
+    },
+    "noise_clean": {
+      "solved": 15,
+      "total": 15
+    },
+    "count_encode": {
+      "solved": 15,
+      "total": 15
+    },
+    "symmetry": {
+      "solved": 15,
+      "total": 15
+    },
+    "object_gravity": {
+      "solved": 15,
+      "total": 15
+    },
+    "border": {
+      "solved": 15,
+      "total": 15
+    },
+    "diagonal": {
+      "solved": 15,
+      "total": 15
+    },
+    "pattern_tile": {
+      "solved": 15,
+      "total": 15
+    },
+    "arc_variant": {
+      "solved": 3,
+      "total": 14
+    },
+    "conditional_region": {
+      "solved": 15,
+      "total": 15
+    },
+    "connected_component": {
+      "solved": 15,
+      "total": 15
+    }
+  }
+}

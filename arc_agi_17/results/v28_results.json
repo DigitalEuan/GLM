@@ -1,0 +1,232 @@
+{
+  "experiment": "ARC-AGI v28 \u2014 GLM Reasoning Engine",
+  "n_runs": 3,
+  "runs": [
+    {
+      "run_number": 156,
+      "n_tasks": 75,
+      "n_solved": 47,
+      "type_scores": {
+        "count_encode": {
+          "solved": 5,
+          "total": 5
+        },
+        "arc": {
+          "solved": 6,
+          "total": 25
+        },
+        "conditional_region": {
+          "solved": 5,
+          "total": 5
+        },
+        "noise_clean": {
+          "solved": 0,
+          "total": 5
+        },
+        "pattern_tile": {
+          "solved": 5,
+          "total": 5
+        },
+        "object_gravity": {
+          "solved": 5,
+          "total": 5
+        },
+        "connected_component": {
+          "solved": 1,
+          "total": 5
+        },
+        "symmetry": {
+          "solved": 5,
+          "total": 5
+        },
+        "colour_cascade": {
+          "solved": 5,
+          "total": 5
+        },
+        "border": {
+          "solved": 5,
+          "total": 5
+        },
+        "diagonal": {
+          "solved": 5,
+          "total": 5
+        }
+      },
+      "mode_counts": {
+        "solver_taught": 16,
+        "failed": 28,
+        "glm_reasoning": 31
+      },
+      "glm_edges": 3214,
+      "new_edges": 0,
+      "learned_patterns": 14
+    },
+    {
+      "run_number": 157,
+      "n_tasks": 75,
+      "n_solved": 47,
+      "type_scores": {
+        "noise_clean": {
+          "solved": 0,
+          "total": 5
+        },
+        "object_gravity": {
+          "solved": 5,
+          "total": 5
+        },
+        "arc": {
+          "solved": 6,
+          "total": 25
+        },
+        "border": {
+          "solved": 5,
+          "total": 5
+        },
+        "symmetry": {
+          "solved": 5,
+          "total": 5
+        },
+        "diagonal": {
+          "solved": 5,
+          "total": 5
+        },
+        "colour_cascade": {
+          "solved": 5,
+          "total": 5
+        },
+        "connected_component": {
+          "solved": 1,
+          "total": 5
+        },
+        "count_encode": {
+          "solved": 5,
+          "total": 5
+        },
+        "conditional_region": {
+          "solved": 5,
+          "total": 5
+        },
+        "pattern_tile": {
+          "solved": 5,
+          "total": 5
+        }
+      },
+      "mode_counts": {
+        "failed": 28,
+        "solver_taught": 16,
+        "glm_reasoning": 31
+      },
+      "glm_edges": 3284,
+      "new_edges": 0,
+      "learned_patterns": 14
+    },
+    {
+      "run_number": 158,
+      "n_tasks": 75,
+      "n_solved": 47,
+      "type_scores": {
+        "diagonal": {
+          "solved": 5,
+          "total": 5
+        },
+        "colour_cascade": {
+          "solved": 5,
+          "total": 5
+        },
+        "arc": {
+          "solved": 6,
+          "total": 25
+        },
+        "object_gravity": {
+          "solved": 5,
+          "total": 5
+        },
+        "pattern_tile": {
+          "solved": 5,
+          "total": 5
+        },
+        "noise_clean": {
+          "solved": 0,
+          "total": 5
+        },
+        "border": {
+          "solved": 5,
+          "total": 5
+        },
+        "conditional_region": {
+          "solved": 5,
+          "total": 5
+        },
+        "count_encode": {
+          "solved": 5,
+          "total": 5
+        },
+        "connected_component": {
+          "solved": 1,
+          "total": 5
+        },
+        "symmetry": {
+          "solved": 5,
+          "total": 5
+        }
+      },
+      "mode_counts": {
+        "glm_reasoning": 31,
+        "solver_taught": 16,
+        "failed": 28
+      },
+      "glm_edges": 3284,
+      "new_edges": 0,
+      "learned_patterns": 14
+    }
+  ],
+  "best": 47,
+  "final_edges": 3284,
+  "total_new_edges": 70,
+  "aggregate_types": {
+    "count_encode": {
+      "solved": 15,
+      "total": 15
+    },
+    "arc": {
+      "solved": 18,
+      "total": 75
+    },
+    "conditional_region": {
+      "solved": 15,
+      "total": 15
+    },
+    "noise_clean": {
+      "solved": 0,
+      "total": 15
+    },
+    "pattern_tile": {
+      "solved": 15,
+      "total": 15
+    },
+    "object_gravity": {
+      "solved": 15,
+      "total": 15
+    },
+    "connected_component": {
+      "solved": 3,
+      "total": 15
+    },
+    "symmetry": {
+      "solved": 15,
+      "total": 15
+    },
+    "colour_cascade": {
+      "solved": 15,
+      "total": 15
+    },
+    "border": {
+      "solved": 15,
+      "total": 15
+    },
+    "diagonal": {
+      "solved": 15,
+      "total": 15
+    }
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "co_occurrence": {
+    "arc|None": 18,
+    "pattern_tile|unknown": 5,
+    "symmetry|unknown": 5,
+    "colour_cascade|colour_map": 5,
+    "diagonal|density_change": 5,
+    "object_gravity|settlement_gravity": 5,
+    "connected_component|conncomp": 5,
+    "arc|hexcolour_analogical": 1,
+    "conditional_region|conditional_region": 5,
+    "count_encode|count_encode": 5,
+    "border|colour_map": 5,
+    "noise_clean|colour_map_via_AND": 5,
+    "arc|colour_map_via_AND": 5,
+    "arc|deliberative_reasoning": 2,
+    "arc|conditional_solver": 2
+  },
+  "task_patterns": {
+    "pattern_tile": [
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown"
+    ],
+    "symmetry": [
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown"
+    ],
+    "colour_cascade": [
+      "colour_map",
+      "colour_map",
+      "colour_map",
+      "colour_map",
+      "colour_map"
+    ],
+    "diagonal": [
+      "density_change",
+      "density_change",
+      "density_change",
+      "density_change",
+      "density_change"
+    ],
+    "object_gravity": [
+      "settlement_gravity",
+      "settlement_gravity",
+      "settlement_gravity",
+      "settlement_gravity",
+      "settlement_gravity"
+    ],
+    "connected_component": [
+      "conncomp",
+      "conncomp",
+      "conncomp",
+      "conncomp",
+      "conncomp"
+    ],
+    "arc": [
+      "hexcolour_analogical",
+      "colour_map_via_AND",
+      "colour_map_via_AND",
+      "deliberative_reasoning",
+      "conditional_solver",
+      "colour_map_via_AND",
+      "conditional_solver",
+      "colour_map_via_AND",
+      "colour_map_via_AND",
+      "deliberative_reasoning"
+    ],
+    "conditional_region": [
+      "conditional_region",
+      "conditional_region",
+      "conditional_region",
+      "conditional_region",
+      "conditional_region"
+    ],
+    "count_encode": [
+      "count_encode",
+      "count_encode",
+      "count_encode",
+      "count_encode",
+      "count_encode"
+    ],
+    "border": [
+      "colour_map",
+      "colour_map",
+      "colour_map",
+      "colour_map",
+      "colour_map"
+    ],
+    "noise_clean": [
+      "colour_map_via_AND",
+      "colour_map_via_AND",
+      "colour_map_via_AND",
+      "colour_map_via_AND",
+      "colour_map_via_AND"
+    ]
+  },
+  "total_tasks": 78
+}

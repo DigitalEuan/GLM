@@ -1,0 +1,491 @@
+{
+  "experiment": "ARC-AGI v30 \u2014 Full Integration",
+  "n_runs": 3,
+  "runs": [
+    {
+      "run_number": 174,
+      "n_tasks": 78,
+      "n_solved": 61,
+      "type_scores": {
+        "object_gravity": {
+          "solved": 5,
+          "total": 5
+        },
+        "noise_clean": {
+          "solved": 5,
+          "total": 5
+        },
+        "conditional_region": {
+          "solved": 5,
+          "total": 5
+        },
+        "colour_cascade": {
+          "solved": 5,
+          "total": 5
+        },
+        "count_encode": {
+          "solved": 5,
+          "total": 5
+        },
+        "symmetry": {
+          "solved": 5,
+          "total": 5
+        },
+        "arc": {
+          "solved": 10,
+          "total": 25
+        },
+        "border": {
+          "solved": 5,
+          "total": 5
+        },
+        "pattern_tile": {
+          "solved": 5,
+          "total": 5
+        },
+        "diagonal": {
+          "solved": 5,
+          "total": 5
+        },
+        "connected_component": {
+          "solved": 5,
+          "total": 5
+        },
+        "arc_variant": {
+          "solved": 1,
+          "total": 3
+        }
+      },
+      "mode_counts": {
+        "solver_taught": 15,
+        "fallback_solver": 13,
+        "glm_reasoning": 25,
+        "deliberative_reasoning": 2,
+        "failed": 15,
+        "v25_error": 2,
+        "conncomp_solver": 5,
+        "hexcolour_analogical": 1
+      },
+      "glm_edges": 3577,
+      "new_edges": 0,
+      "learning_stats": {
+        "total_tasks": 78,
+        "unique_pairs": 15,
+        "task_types": 11,
+        "top_pairs": [
+          [
+            [
+              "arc",
+              null
+            ],
+            17
+          ],
+          [
+            [
+              "arc",
+              "colour_map_via_AND"
+            ],
+            6
+          ],
+          [
+            [
+              "object_gravity",
+              "settlement_gravity"
+            ],
+            5
+          ],
+          [
+            [
+              "noise_clean",
+              "colour_map_via_AND"
+            ],
+            5
+          ],
+          [
+            [
+              "conditional_region",
+              "conditional_region"
+            ],
+            5
+          ],
+          [
+            [
+              "colour_cascade",
+              "colour_map"
+            ],
+            5
+          ],
+          [
+            [
+              "count_encode",
+              "count_encode"
+            ],
+            5
+          ],
+          [
+            [
+              "symmetry",
+              "unknown"
+            ],
+            5
+          ],
+          [
+            [
+              "border",
+              "colour_map"
+            ],
+            5
+          ],
+          [
+            [
+              "pattern_tile",
+              "unknown"
+            ],
+            5
+          ]
+        ]
+      }
+    },
+    {
+      "run_number": 175,
+      "n_tasks": 78,
+      "n_solved": 61,
+      "type_scores": {
+        "arc": {
+          "solved": 10,
+          "total": 25
+        },
+        "symmetry": {
+          "solved": 5,
+          "total": 5
+        },
+        "arc_variant": {
+          "solved": 1,
+          "total": 3
+        },
+        "border": {
+          "solved": 5,
+          "total": 5
+        },
+        "colour_cascade": {
+          "solved": 5,
+          "total": 5
+        },
+        "conditional_region": {
+          "solved": 5,
+          "total": 5
+        },
+        "object_gravity": {
+          "solved": 5,
+          "total": 5
+        },
+        "pattern_tile": {
+          "solved": 5,
+          "total": 5
+        },
+        "connected_component": {
+          "solved": 5,
+          "total": 5
+        },
+        "count_encode": {
+          "solved": 5,
+          "total": 5
+        },
+        "noise_clean": {
+          "solved": 5,
+          "total": 5
+        },
+        "diagonal": {
+          "solved": 5,
+          "total": 5
+        }
+      },
+      "mode_counts": {
+        "fallback_solver": 12,
+        "glm_reasoning": 25,
+        "deliberative_reasoning": 3,
+        "failed": 13,
+        "v25_error": 4,
+        "solver_taught": 15,
+        "conncomp_solver": 5,
+        "hexcolour_analogical": 1
+      },
+      "glm_edges": 3597,
+      "new_edges": 0,
+      "learning_stats": {
+        "total_tasks": 78,
+        "unique_pairs": 15,
+        "task_types": 11,
+        "top_pairs": [
+          [
+            [
+              "arc",
+              null
+            ],
+            17
+          ],
+          [
+            [
+              "arc",
+              "colour_map_via_AND"
+            ],
+            5
+          ],
+          [
+            [
+              "symmetry",
+              "unknown"
+            ],
+            5
+          ],
+          [
+            [
+              "border",
+              "colour_map"
+            ],
+            5
+          ],
+          [
+            [
+              "colour_cascade",
+              "colour_map"
+            ],
+            5
+          ],
+          [
+            [
+              "conditional_region",
+              "conditional_region"
+            ],
+            5
+          ],
+          [
+            [
+              "object_gravity",
+              "settlement_gravity"
+            ],
+            5
+          ],
+          [
+            [
+              "pattern_tile",
+              "unknown"
+            ],
+            5
+          ],
+          [
+            [
+              "connected_component",
+              "conncomp"
+            ],
+            5
+          ],
+          [
+            [
+              "count_encode",
+              "count_encode"
+            ],
+            5
+          ]
+        ]
+      }
+    },
+    {
+      "run_number": 176,
+      "n_tasks": 78,
+      "n_solved": 60,
+      "type_scores": {
+        "arc_variant": {
+          "solved": 0,
+          "total": 3
+        },
+        "pattern_tile": {
+          "solved": 5,
+          "total": 5
+        },
+        "symmetry": {
+          "solved": 5,
+          "total": 5
+        },
+        "colour_cascade": {
+          "solved": 5,
+          "total": 5
+        },
+        "diagonal": {
+          "solved": 5,
+          "total": 5
+        },
+        "object_gravity": {
+          "solved": 5,
+          "total": 5
+        },
+        "arc": {
+          "solved": 10,
+          "total": 25
+        },
+        "connected_component": {
+          "solved": 5,
+          "total": 5
+        },
+        "conditional_region": {
+          "solved": 5,
+          "total": 5
+        },
+        "count_encode": {
+          "solved": 5,
+          "total": 5
+        },
+        "border": {
+          "solved": 5,
+          "total": 5
+        },
+        "noise_clean": {
+          "solved": 5,
+          "total": 5
+        }
+      },
+      "mode_counts": {
+        "failed": 16,
+        "glm_reasoning": 25,
+        "solver_taught": 15,
+        "conncomp_solver": 5,
+        "hexcolour_analogical": 1,
+        "fallback_solver": 12,
+        "deliberative_reasoning": 2,
+        "v25_error": 2
+      },
+      "glm_edges": 3617,
+      "new_edges": 0,
+      "learning_stats": {
+        "total_tasks": 78,
+        "unique_pairs": 15,
+        "task_types": 11,
+        "top_pairs": [
+          [
+            [
+              "arc",
+              null
+            ],
+            18
+          ],
+          [
+            [
+              "pattern_tile",
+              "unknown"
+            ],
+            5
+          ],
+          [
+            [
+              "symmetry",
+              "unknown"
+            ],
+            5
+          ],
+          [
+            [
+              "colour_cascade",
+              "colour_map"
+            ],
+            5
+          ],
+          [
+            [
+              "diagonal",
+              "density_change"
+            ],
+            5
+          ],
+          [
+            [
+              "object_gravity",
+              "settlement_gravity"
+            ],
+            5
+          ],
+          [
+            [
+              "connected_component",
+              "conncomp"
+            ],
+            5
+          ],
+          [
+            [
+              "conditional_region",
+              "conditional_region"
+            ],
+            5
+          ],
+          [
+            [
+              "count_encode",
+              "count_encode"
+            ],
+            5
+          ],
+          [
+            [
+              "border",
+              "colour_map"
+            ],
+            5
+          ]
+        ]
+      }
+    }
+  ],
+  "best": 61,
+  "final_edges": 3617,
+  "total_new_edges": 40,
+  "aggregate_types": {
+    "object_gravity": {
+      "solved": 15,
+      "total": 15
+    },
+    "noise_clean": {
+      "solved": 15,
+      "total": 15
+    },
+    "conditional_region": {
+      "solved": 15,
+      "total": 15
+    },
+    "colour_cascade": {
+      "solved": 15,
+      "total": 15
+    },
+    "count_encode": {
+      "solved": 15,
+      "total": 15
+    },
+    "symmetry": {
+      "solved": 15,
+      "total": 15
+    },
+    "arc": {
+      "solved": 30,
+      "total": 75
+    },
+    "border": {
+      "solved": 15,
+      "total": 15
+    },
+    "pattern_tile": {
+      "solved": 15,
+      "total": 15
+    },
+    "diagonal": {
+      "solved": 15,
+      "total": 15
+    },
+    "connected_component": {
+      "solved": 15,
+      "total": 15
+    },
+    "arc_variant": {
+      "solved": 2,
+      "total": 9
+    }
+  }
+}

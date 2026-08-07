@@ -1,0 +1,269 @@
+{
+  "experiment": "v33",
+  "n_runs": 3,
+  "runs": [
+    {
+      "run_number": 198,
+      "n_tasks": 118,
+      "n_solved": 66,
+      "type_scores": {
+        "arc": {
+          "solved": 15,
+          "total": 65
+        },
+        "noise_clean": {
+          "solved": 5,
+          "total": 5
+        },
+        "symmetry": {
+          "solved": 5,
+          "total": 5
+        },
+        "object_gravity": {
+          "solved": 5,
+          "total": 5
+        },
+        "colour_cascade": {
+          "solved": 5,
+          "total": 5
+        },
+        "diagonal": {
+          "solved": 5,
+          "total": 5
+        },
+        "count_encode": {
+          "solved": 5,
+          "total": 5
+        },
+        "pattern_tile": {
+          "solved": 5,
+          "total": 5
+        },
+        "connected_component": {
+          "solved": 5,
+          "total": 5
+        },
+        "border": {
+          "solved": 5,
+          "total": 5
+        },
+        "arc_variant": {
+          "solved": 1,
+          "total": 3
+        },
+        "conditional_region": {
+          "solved": 5,
+          "total": 5
+        }
+      },
+      "mode_counts": {
+        "fallback_solver": 18,
+        "failed": 49,
+        "solver_conditional_region": 6,
+        "solver_shift": 10,
+        "solver_gravity": 5,
+        "solver_colour_map": 11,
+        "solver_diagonal_fill": 5,
+        "solver_count_encode": 5,
+        "v25_error": 3,
+        "solver_conncomp": 4,
+        "solver_noise_clean": 2
+      },
+      "glm_edges": 3772,
+      "new_edges": 0
+    },
+    {
+      "run_number": 199,
+      "n_tasks": 118,
+      "n_solved": 65,
+      "type_scores": {
+        "arc": {
+          "solved": 15,
+          "total": 65
+        },
+        "connected_component": {
+          "solved": 5,
+          "total": 5
+        },
+        "pattern_tile": {
+          "solved": 5,
+          "total": 5
+        },
+        "noise_clean": {
+          "solved": 5,
+          "total": 5
+        },
+        "diagonal": {
+          "solved": 5,
+          "total": 5
+        },
+        "border": {
+          "solved": 5,
+          "total": 5
+        },
+        "conditional_region": {
+          "solved": 5,
+          "total": 5
+        },
+        "object_gravity": {
+          "solved": 5,
+          "total": 5
+        },
+        "count_encode": {
+          "solved": 5,
+          "total": 5
+        },
+        "symmetry": {
+          "solved": 5,
+          "total": 5
+        },
+        "colour_cascade": {
+          "solved": 5,
+          "total": 5
+        },
+        "arc_variant": {
+          "solved": 0,
+          "total": 3
+        }
+      },
+      "mode_counts": {
+        "fallback_solver": 17,
+        "failed": 49,
+        "solver_conncomp": 4,
+        "solver_shift": 10,
+        "solver_diagonal_fill": 5,
+        "solver_colour_map": 11,
+        "solver_conditional_region": 6,
+        "solver_gravity": 5,
+        "v25_error": 4,
+        "solver_count_encode": 5,
+        "solver_noise_clean": 2
+      },
+      "glm_edges": 3792,
+      "new_edges": 0
+    },
+    {
+      "run_number": 200,
+      "n_tasks": 118,
+      "n_solved": 65,
+      "type_scores": {
+        "arc": {
+          "solved": 15,
+          "total": 65
+        },
+        "diagonal": {
+          "solved": 5,
+          "total": 5
+        },
+        "object_gravity": {
+          "solved": 5,
+          "total": 5
+        },
+        "symmetry": {
+          "solved": 5,
+          "total": 5
+        },
+        "count_encode": {
+          "solved": 5,
+          "total": 5
+        },
+        "conditional_region": {
+          "solved": 5,
+          "total": 5
+        },
+        "colour_cascade": {
+          "solved": 5,
+          "total": 5
+        },
+        "border": {
+          "solved": 5,
+          "total": 5
+        },
+        "pattern_tile": {
+          "solved": 5,
+          "total": 5
+        },
+        "noise_clean": {
+          "solved": 5,
+          "total": 5
+        },
+        "arc_variant": {
+          "solved": 0,
+          "total": 3
+        },
+        "connected_component": {
+          "solved": 5,
+          "total": 5
+        }
+      },
+      "mode_counts": {
+        "failed": 50,
+        "solver_diagonal_fill": 5,
+        "solver_gravity": 5,
+        "solver_shift": 10,
+        "solver_count_encode": 5,
+        "fallback_solver": 17,
+        "solver_conditional_region": 6,
+        "solver_colour_map": 11,
+        "solver_noise_clean": 2,
+        "solver_conncomp": 4,
+        "v25_error": 3
+      },
+      "glm_edges": 3812,
+      "new_edges": 0
+    }
+  ],
+  "best": 66,
+  "final_edges": 3812,
+  "total_new_edges": 40,
+  "aggregate": {
+    "arc": {
+      "solved": 45,
+      "total": 195
+    },
+    "noise_clean": {
+      "solved": 15,
+      "total": 15
+    },
+    "symmetry": {
+      "solved": 15,
+      "total": 15
+    },
+    "object_gravity": {
+      "solved": 15,
+      "total": 15
+    },
+    "colour_cascade": {
+      "solved": 15,
+      "total": 15
+    },
+    "diagonal": {
+      "solved": 15,
+      "total": 15
+    },
+    "count_encode": {
+      "solved": 15,
+      "total": 15
+    },
+    "pattern_tile": {
+      "solved": 15,
+      "total": 15
+    },
+    "connected_component": {
+      "solved": 15,
+      "total": 15
+    },
+    "border": {
+      "solved": 15,
+      "total": 15
+    },
+    "arc_variant": {
+      "solved": 1,
+      "total": 9
+    },
+    "conditional_region": {
+      "solved": 15,
+      "total": 15
+    }
+  }
+}
