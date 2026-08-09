@@ -1,6 +1,6 @@
 # 'light/' README — Speed of Light Calibration and EM scale calibration
 
-**Version:** 1.3.0  (6 August 2026) 
+**Version:** 1.4.0  (9 August 2026) 
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand   
 **Parent:** `../README.md`  
 
@@ -14,6 +14,8 @@
 
 ```
 light/ (this folder)
+  ├── 'Y' - Lean verified and fully defined UBP system **new**
+  │
   ├──┬ 'aristotle_01' - provides Lattice shortcut method
   │  ├ 'lattice_shortcut.py' - the operational system: self-contained implementation
   │  └ `LATTICE_SHORTCUT_METHOD.md` the working method, stage by stage
