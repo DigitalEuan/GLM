@@ -9,7 +9,7 @@
 ## next item to implement: 'light/Y/Y_STUDY_CLEAN_RESTATEMENT.md'
 - see 'light/Y/README.md' for concept.
 
-- A substrate-native cognitive architecture that grows with each iteration rather than starting again over and over. Not a solver pipeline — a system that perceives, reasons, and acts using a 24-dimensional mathematical substrate built on the Universal Binary Principle (UBP).
+## The GLM is a substrate-native cognitive architecture that grows with each iteration rather than starting again over and over. Not a solver pipeline — a system that perceives, reasons, and acts using a 24-dimensional mathematical substrate built on the Universal Binary Principle (UBP).
 
 ---
 
