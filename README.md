@@ -4,7 +4,10 @@
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand  
 **Parent:** None - Top Level
 
-## UPDATE THIS README - if changes are made in this folder or systems in sub-folders need rewiring within the repository and effect this README file's structure
+## UPDATE THIS README - if changes are made in this folder or systems in sub-folders need rewiring within the repository and effect this README file's structure.
+
+## next item to implement: 'light/Y/Y_STUDY_CLEAN_RESTATEMENT.md'
+- see 'light/Y/README.md' for concept.
 
 - A substrate-native cognitive architecture that grows with each iteration rather than starting again over and over. Not a solver pipeline — a system that perceives, reasons, and acts using a 24-dimensional mathematical substrate built on the Universal Binary Principle (UBP).
 
