@@ -14,11 +14,10 @@
 
 ```
 light/ (this folder)
-  ├── 'Y' - Lean verified and fully defined UBP system **new**
-  │
   ├──┬ 'aristotle_01' - provides Lattice shortcut method
   │  ├ 'lattice_shortcut.py' - the operational system: self-contained implementation
-  │  └ `LATTICE_SHORTCUT_METHOD.md` the working method, stage by stage
+  │  ├ `LATTICE_SHORTCUT_METHOD.md` the working method, stage by stage
+  │  └ 'Y_STUDY_CLEAN_RESTATEMENT.md' - Lean4 verified UBP system - 'Y' constant +
   │
   ├──┬ 'EM_calibration_1' - The UBP-to-realworld scale is: S(λ, HW) = λ / [HW × (Y + 1/8)]d
   │  ├ 'reports/ubp_scale_final_v9_report.md' - explainer
