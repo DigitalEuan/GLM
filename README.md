@@ -1,13 +1,12 @@
 # '../' - TOP REPOSITORY LEVEL TIER ROOT README 
 
-**Version:** 2.4 (10 August 2026)  
+**Version:** 2.6 (10 August 2026)  
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand  
 **Parent:** None - Top Level
 
 ## UPDATE THIS README - if changes are made in this folder or systems in sub-folders need rewiring within the repository and effect this README file's structure.
 
-## next item to implement: 'light/Y/Y_STUDY_CLEAN_RESTATEMENT.md'
-- see 'light/aristotle_01/Y_STUDY_CLEAN_RESTATEMENT.md' for concept.
+## next item to implement: 'light/aristotle_01/Y_STUDY_CLEAN_RESTATEMENT.md'
 
 ## The GLM is a substrate-native cognitive architecture that grows with each iteration rather than starting again over and over. Not a solver pipeline — a system that perceives, reasons, and acts using a 24-dimensional mathematical substrate built on the Universal Binary Principle (UBP).
 
