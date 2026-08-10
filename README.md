@@ -4,15 +4,19 @@
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand  
 **Parent:** None - Top Level
 
-## UPDATE THIS README - if changes are made in this folder or systems in sub-folders need rewiring within the repository and effect this README file's structure.
+## UPDATE THIS README
+if changes are made in this folder or systems in sub-folders need rewiring within the repository and effect this README file's structure.
 
-## next item to implement: 'light/aristotle_01/Y_STUDY_CLEAN_RESTATEMENT.md'
+## next item to implement: 
+'light/aristotle_01/Y_STUDY_CLEAN_RESTATEMENT.md'
 
-## The GLM is a substrate-native cognitive architecture that grows with each iteration rather than starting again over and over. Not a solver pipeline — a system that perceives, reasons, and acts using a 24-dimensional mathematical substrate built on the Universal Binary Principle (UBP).
+## The GLM is a substrate-native cognitive architecture. 
+It grows with each iteration rather than starting again over and over. Not a solver pipeline — a system that perceives, reasons, and acts using a 24-dimensional mathematical substrate built on the Universal Binary Principle (UBP).
 
 ---
 
-## This repository is a system, each folder has a README.md wiring the folders together like a script with dependencies:
+## This repository is a system 
+each folder has a README.md wiring the folders together like a script with dependencies:
 
 ```
 https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the director and collector. 
@@ -31,6 +35,7 @@ https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the dire
   │                     3) 'EM_calibration_1/' (substrate-unit-to-meters conversion)
   │                     4) UBP-to-Realworld Scale: S(λ, HW) = λ / [HW × (Y + 1/8)]
   │                        (from arc_agi_17 EM propagation study, v1-v9)
+  │                     5) light/aristotle_01/Y_STUDY_CLEAN_RESTATEMENT.md - Lean4 verified Y, TAX, NRCI +
   │
   ├──→ glm_machine/     THE GLM MIND
   │                     Perceives, reasons, acts,
