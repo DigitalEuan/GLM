@@ -28,7 +28,7 @@ https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the dire
   │
   ├──→ light/           SCALE CALIBRATION
   │                     1) Speed of light study (UBP ↔ real-world)
-  │                     2) 'aristotle_01/' (Lattice walking shortcut method)
+  │                     2) 'aristotle_01/' - Lattice walking shortcut method + Lean4 verified UBP including 'Y' constant, Symmetry TAX, NRCI +
   │                     3) 'EM_calibration_1/' (substrate-unit-to-meters conversion)
   │                     4) UBP-to-Realworld Scale: S(λ, HW) = λ / [HW × (Y + 1/8)]
   │                        (from arc_agi_17 EM propagation study, v1-v9)
@@ -73,7 +73,7 @@ https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the dire
 | **arc_agi_17/** | Substrate-native cognitive architecture — GLM mind with lattice perception, imagination, growth, diverse puzzles, simplicial faces | 105/181 (23% ARC + 100% diverse) | `scripts/arc_v35_pipeline.py` | Continue growth. Target: 5,000 CRG edges (current: 4,015), 30%+ ARC. 217 cumulative runs. 11 puzzle types. Physics-corrected (Gray code, Symmetry Tax, 2Δv). Self-contained pipeline available at `scripts/arc_v32_pipeline.py`. |
 | **arc_agi_15/** | Solver — Working Solvers (3/9 mind solved / 6/9 Solvers solved) | 9/50 | `consolidated_mind.py` | Leave as record of attempting #15 and for parts if needed rather than rebuilding scripts from scratch |
 | **arc_agi_16/** | Experiments | 9/50 | `arc_learning_mind.py` | Leave as record of attempting #16 and parts if needed rather than rebuilding scripts from scratch |
-| **light/** | Calibration — UBP ↔ real world | — | `aristotle_01/lattice_shortcut.py` and `aristotle_01/LATTICE_SHORTCUT_METHOD.md` | Add more calibration anchors through various scales of reality. UBP-to-Realworld Scale: S(λ, HW) = λ / [HW × (Y + 1/8)] established in arc_agi_17 study |
+| **light/** | Calibration — UBP ↔ real world | — | `aristotle_01/lattice_shortcut.py` and `aristotle_01/LATTICE_SHORTCUT_METHOD.md`, 'Y_STUDY_CLEAN_RESTATEMENT.md' | Add more calibration anchors through various scales of reality. UBP-to-Realworld Scale: S(λ, HW) = λ / [HW × (Y + 1/8)] established in arc_agi_17 study |
 | **long_term_memory/** | Archive — all GLM training data + knowledge | — | `glm_training_data.json` | Needs proper implementation so this becomes an on-going GLM training method. arc_agi_17 now reads from this and writes learning patterns persistently |
 
 ---
@@ -107,30 +107,26 @@ Training Data + Knowledge (grows with each run — 217 cumulative runs)
 
 ## The Constants
 
-### Golay [24,12,8]
-- 4,096 codewords, minimum distance 8
-- Corrects 3 errors, detects 7
-- Single-bit vectors snap to HW=0 (isolated bits = noise)
-- Basis vectors all collapse to zero — the alphabet is full codewords
-- **Lean-verified bug fix**: `snap_to_codeword` only corrects weight ≤ 3 (should be ≤ 4). Fix: extend coset-leader table to all 4,096 entries. See `arc_agi_17/snap_to_codeword_FIX.md`
-
-### MOG (Miracle Octad Generator)
-- 4×6 grid: 4 rows (Reality, Info, Activation, Potential) × 6 columns
-- Each row is 6 bits (Gray-coded, values 0-63)
-- Projects 24D to 2D for observation
-- Row 0 (Reality) has widest blast radius (11 bits per toggle)
-
-1. Domain: Bits 0-2 (Prefix)
-2. Volume: Bits 3-7 (Voxel Count, Gray Coded)
-3. Compactness: Bits 8-11 (Surface Area Proxy, Gray Coded)
-4. Parity: Bits 12-23 (Golay [24,12,8])
-
-### Leech Lattice (Λ₂₄)
-- 196,560 minimal vectors, all norm²=32
-- Class A: 1,104 (HW=2, NRCI=0.688)
-- Class B: 97,152 (HW=8, NRCI=0.620)
-- Class C: 98,304 (HW=24, NRCI=0.491)
-- **ARC transformations = Leech lattice translation vectors** (2Δv ∈ Λ₂₄). Finding the ARC rule = finding the invariant 2Δv. (arc_agi_17 v23)
+| Structural term | Symbol | Type | Operational meaning |
+|---|---|---|---|
+| Perfect space | `0` | pattern | no active coordinate |
+| Zero vector | `0` | pattern | no disturbance, no information |
+| Raw information | `v` | `Fin n → ℤ` | an integer pattern on `n = 24` coordinates |
+| Primitive difference "2" | `Δ` | `ℝ` = 2 | the numerator of the read operator |
+| Capacity / zone-share | `Z★` | `ℝ` = 1/8 | cost of occupying a permitted zone |
+| Body | 24 coordinates | index set | the coordinate space |
+| Loop-check (numeric) | `Π` | `ℝ` = π | the argument of the read operator |
+| Loop-check (structural) | `σ(v)` | 12 bits | the Golay syndrome |
+| Not-quite-closed loop | `σ(v) ≠ 0` | — | history, gap, syndrome |
+| MOG | nearest-codeword reading | — | the grammar that turns a pattern into a lawful one |
+| Golay | `[24,12,8]` code | — | protection: minimum distance 8 |
+| Leech | `Λ₂₄` | — | embodiment: the 24-dimensional geometry |
+| Observer / read quantum | `Y` | `ℝ` | `1/(π + 2/π) = 0.2646754…` |
+| Activation quantum | `Q` | `ℝ` | `Y + 1/8 = 0.3896754…` |
+| TAX | `TAX(v)` | `ℝ` | `HW(v)·Y + ‖v‖²/8` |
+| Coherence budget | `B` | `ℝ` = 10 | the unit in which tax is measured |
+| NRCI | `NRCI(v)` | `ℝ` | `B/(B + TAX(v))` |
+| CoherenceRegime | one of four | — | a band of `NRCI`, equivalently of `TAX` |
 
 ### Lightspeed calibration
 - Charge: 1 vertex step = e/12 C (exact)
@@ -143,7 +139,7 @@ Training Data + Knowledge (grows with each run — 217 cumulative runs)
 - **TAX conservation law**: TAX(a⊕b) = TAX(a) + TAX(b) − 2×TAX(a∧b) (arc_agi_17 v10)
 The mass residual is an open problem.
 
-### Y Constant
+### (π calibrated) Y Constant
 - Y = 1/(π + 2/π) ≈ 0.264675
 - Entropic wobble — cost per active coordinate
 - Activation quantum: Y + 1/8 = 0.389675
@@ -188,24 +184,9 @@ The mass residual is an open problem.
 - **5-layer perception**: encoding → active perception → adaptive resolution → Golay snap → differential transition (2Δv)
 - **v37 features**: crystallization, adversarial testing, gap word derivation, deliberative reasoning, applied imagination
 
-### Previous ARC-AGI (v15/v16)
+### Older ARC-AGI (v15/v16)
 - 9/50 (18%) — 3 by mind, 6 by toolkit
 - Experience routing table built (150 entries)
-
----
-
-## Key Metrics
-
-| Metric | Formula | Meaning |
-|--------|---------|---------|
-| **TAX** | HW·Y + ‖v‖²/8 | Symmetry Tax — cost of being |
-| **NRCI** | 10/(10+TAX) | Coherence (1.0=vacuum, 0.5=horizon) |
-| **Y** | 1/(π+2/π) ≈ 0.2647 | Entropic wobble |
-| **AND** | a[i] & b[i] | Shared structure (interaction energy) |
-| **XOR** | a[i] ^ b[i] | Transformation (difference vector) |
-| **Geometric Work** | AND_HW + XOR_HW | Transformation energy (190 kJ/mol per unit) |
-| **HexColour** | #RRGGBB from 24-bit vector | Lattice address (analogical reasoning) |
-| **2Δv** | 2(c_out - c_in) ∈ Λ₂₄ | Leech lattice transition vector (the ARC rule IS the vector) |
 
 ---
 
