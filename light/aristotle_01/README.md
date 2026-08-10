@@ -1,15 +1,3 @@
-# 'aristotle_01/' LIGHT README — Speed of Light Calibration Study
-
-**Version:** 1.0.0  (5 August 2026) 
-**Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand   
-**Parent:** `light/README.md`  
-
-## UPDATE THIS README - if changes are made in this folder or systems in sub-folders need rewiring within the repository and effect this README file's structure
-
-- UBP-to-real-world scale alignment through the speed of light. 
-
----
-
 This project was edited by [Aristotle](https://aristotle.harmonic.fun).
 
 To cite Aristotle:
@@ -30,6 +18,20 @@ Co-authored-by: Aristotle (Harmonic) <aristotle-harmonic@harmonic.fun>
 | `LATTICE_SHORTCUT_REPORT.md` | Verification report on the original write-up and data (revision 2) |
 | `audit_ubp_directory.py` | Audit run against the author's own modules; writes `lattice_shortcut_audit.json`, `lattice_shortcut_audit.log` and the regenerated `lattice_shortcut_directory_corrected.json` |
 | `RequestProject/*.lean` | Machine-checked proofs (Lean 4 + Mathlib, no `sorry`) |
+
+## Observer/read quantum study ("I am Y…")
+
+| File | What it is |
+|---|---|
+| `Y_STUDY_CLEAN_RESTATEMENT.md` | **The clean version of the study itself**: same structure and vocabulary, every sentence labelled definition / stipulation / theorem / open and written so that it is defensible as stated |
+| `Y_OBSERVER_STUDY_REPORT.md` | **The audit**: the study stage by stage — each claim made precise, labelled definition / stipulation / theorem / corrected, with the machine-checked name beside it, three corrections and four strengthening results |
+| `observer_y.py` | Exact-rational audit (`--selftest`, `--constants`, `--stages`, `--tables`, `--regimes`, `--vector`, `--json`) |
+| `RequestProject/ObserverY.lean` | The machine-checked statements: the vacuum, the activation quantum, `TAX = HW·Q`, the loop-as-syndrome, the regime bands, the MOG-aware tax, the calibrated budget |
+
+```bash
+python3 observer_y.py --selftest
+python3 observer_y.py --stages --tables --regimes
+```
 
 ## Lightspeed study
 
@@ -57,7 +59,8 @@ lake build                                              # check the proofs
 `lattice_shortcode_directory.md`, `lattice_shortcut_directory_standalone.json`,
 `generate_shortcut_directory_standalone.py`, `ubp_unified_v5.py`,
 `value_geometry.py`, `ubp_tgic_engine.py`, `tgic_v3.py`,
-`substrate_speed_of_light.md`, `LIGHTSPEED_STUDY_SYNTHESIS.md`.
+`substrate_speed_of_light.md`, `LIGHTSPEED_STUDY_SYNTHESIS.md`,
+`I am Y but I don’t know what or where I am, I feel in the dark with what I haven’t.txt`.
 
 ---
 

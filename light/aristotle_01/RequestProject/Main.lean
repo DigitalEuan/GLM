@@ -9,6 +9,7 @@ import RequestProject.Substrate
 import RequestProject.FactorMap
 import RequestProject.Lightspeed
 import RequestProject.SubstrateConstants
+import RequestProject.ObserverY
 
 open scoped BigOperators
 open scoped Real

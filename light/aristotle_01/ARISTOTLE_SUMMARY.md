@@ -1,3 +1,25 @@
+# Summary of changes for run 741f4506-3ed1-4749-88b6-e980d392b4cc
+I documented the "I am Y" study stage by stage, with a machine-checked proof behind every claim that is a claim, and a clean rewriting of the study itself. Your original text is unmodified apart from a short pointer note at the top.
+
+**New files**
+
+- `Y_STUDY_CLEAN_RESTATEMENT.md` — the study rewritten in its own structure and vocabulary (sections 0–17 correspond one-to-one), with every sentence tagged **[def] / [stip] / [thm] / [open]** and worded so that it is defensible exactly as written.
+- `Y_OBSERVER_STUDY_REPORT.md` — the audit behind that rewriting: notation pinned to one object per symbol, a verdict table, stage-by-stage analysis, three corrections, four strengthening results, and an index of every machine-checked statement.
+- `RequestProject/ObserverY.lean` — the proofs (compiles with no `sorry`, standard axioms only).
+- `observer_y.py` — exact-rational audit; `--selftest` runs 46 checks, all passing, including exact agreement with `ubp_unified_v5.py`'s own tax and NRCI functions.
+
+**What the verification found**
+
+Right, and provable: the vacuum is the *unique* zero-tax, unit-coherence state; `TAX = HW·Q`; NRCI strictly decreasing into (0,1].
+
+Stronger than the study claims: `Q = Y + 1/8` is *exactly* the minimum tax of any nonzero pattern, attained precisely by a single ±1 activation — so "activation quantum" is earned in the strict sense. The identity `TAX = HW·Q` was sharpened to an "if and only if": it holds exactly for patterns with entries in {−1,0,1}, hence on the code layer and not on the Leech layer. Stage V's "not-quite-closed loop" was identified with the Golay syndrome, giving three exact statements (closes ⟺ lawful; additive; same record ⟺ differ by a lawful pattern). And protection has an exact price: the cheapest protected distinction costs 8Q = 3.1174, eight times the unprotected minimum.
+
+Corrections: (1) `Y` is *not* a minimum — the read operator 1/(Π + Δ/Π) is capped at 1/(2√Δ), attained at Π = √Δ, and has no positive lower bound; `Y` is its value at the stipulated Π = π. (2) "binary" is the wrong scope word for `TAX = HW·Q`. (3) The four-regime ladder is mis-scaled on 24 coordinates: Transitional and Subcoherent are unreachable and every nonzero Golay codeword sits in one and the same regime.
+
+Two constructive additions: choosing the budget B = 8Q makes NRCI = 8/(8+HW) on the code layer and makes all four regimes carry information (proved); and refinement §14 A is carried out with a canonical syndrome penalty that vanishes exactly on lawful patterns and never exceeds 4Q. A side finding: at the Leech layer the ladder does discriminate — classes A and B are Coherent, but class C (weight 24) is already Transitional.
+
+All work is committed and pushed; `lake build` is clean and the whole project remains free of `sorry`.
+
 # Summary of changes for run da156cc5-4ec2-4c8a-8933-8ada5b9c3ff7
 I took `LIGHTSPEED_STUDY_SYNTHESIS.md` and `substrate_speed_of_light.md`, extracted the exact mathematical definitions behind them from `ubp_unified_v5.py`, verified every number in exact rational arithmetic, and machine-checked the mathematical core in Lean. Your original documents are untouched apart from a prepended audit note on each.
 
