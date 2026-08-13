@@ -1,0 +1,68 @@
+word senses used per noun: 3
+classes 269  dev [2500, 2500]  test [2539, 1939, 5000, 5000]
+
+--- reference: continuous class model (information ceiling) ---
+   {'dev_subj': 0.6948, 'dev_obj': 0.6948, 'wsj_subj': 0.644, 'wsj_obj': 0.7151, 'brown_subj': 0.6582, 'brown_obj': 0.6957, 'test_mean': 0.6783}
+
+--- v5: 24 cells = 24 WordNet classes ---
+  note: 1 of the v5 classes do not exist in this inventory (senses=3); comparing on the 23 that do
+v5 searched 24 classes           dev=0.6237 test=0.6059  wsj_subj=0.591 wsj_obj=0.627 brown_subj=0.616 brown_obj=0.590  ties 0.26
+
+--- v6: 24 cells = graded rules, searched ---
+  5000 dev items, 2690 candidate cells
+  precomputed 275227 firings
+    +never(event.n.01, 0.3)                     -> 0.5267
+    +always(event.n.01, 0.35)                   -> 0.5534
+    +never(living_thing.n.01, 0.15)             -> 0.5683
+    +always(organism.n.01, 0.35)                -> 0.5814
+    +always(noun.communication, 0.35)           -> 0.5910
+    +never(noun.communication, 0.15)            -> 0.5996
+    +always(attribute.n.02, 0.35)               -> 0.6057
+    +never(noun.possession, 0.03)               -> 0.6109
+    +never(attribute.n.02, 0.3)                 -> 0.6151
+    +always(noun.artifact, 0.35)                -> 0.6190
+    +never(artifact.n.01, 0.15)                 -> 0.6229
+    +always(group.n.01, 0.35)                   -> 0.6260
+    +never(noun.cognition, 0.15)                -> 0.6292
+    +never(noun.time, 0.03)                     -> 0.6320
+    +never(person.n.01, 0.08)                   -> 0.6344
+    +never(process.n.06, 0.15)                  -> 0.6367
+    +never(social_group.n.01, 0.08)             -> 0.6390
+    +never(message.n.02, 0.03)                  -> 0.6413
+    +never(action.n.01, 0.03)                   -> 0.6432
+    +never(happening.n.01, 0.03)                -> 0.6450
+    +never(matter.n.03, 0.08)                   -> 0.6469
+    +never(written_communication.n.01, 0.03)    -> 0.6486
+    +never(shape.n.02, 0.03)                    -> 0.6501
+    +always(noun.person, 0.35)                  -> 0.6515
+  swap sweep 1: 0.6528
+  swap sweep 2: 0.6534
+search dev score 0.6534
+  cell  0  never(event.n.01, 0.3)
+  cell  1  always(event.n.01, 0.35)
+  cell  2  never(living_thing.n.01, 0.08)
+  cell  3  never(noun.location, 0.01)
+  cell  4  always(noun.communication, 0.35)
+  cell  5  never(noun.communication, 0.15)
+  cell  6  always(attribute.n.02, 0.35)
+  cell  7  never(noun.possession, 0.03)
+  cell  8  never(attribute.n.02, 0.3)
+  cell  9  always(noun.artifact, 0.35)
+  cell 10  never(artifact.n.01, 0.15)
+  cell 11  always(group.n.01, 0.35)
+  cell 12  never(noun.cognition, 0.15)
+  cell 13  never(fundamental_quantity.n.01, 0.03)
+  cell 14  never(person.n.01, 0.15)
+  cell 15  never(process.n.06, 0.15)
+  cell 16  never(social_group.n.01, 0.08)
+  cell 17  never(message.n.02, 0.03)
+  cell 18  never(action.n.01, 0.03)
+  cell 19  never(happening.n.01, 0.03)
+  cell 20  never(matter.n.03, 0.08)
+  cell 21  never(written_communication.n.01, 0.03)
+  cell 22  never(shape.n.02, 0.03)
+  cell 23  always(noun.person, 0.35)
+v6 searched 24 rules             dev=0.6534 test=0.6180  wsj_subj=0.606 wsj_obj=0.626 brown_subj=0.631 brown_obj=0.608  ties 0.26
+ABLATION 24 random rules         dev=0.5410 test=0.5338  wsj_subj=0.510 wsj_obj=0.525 brown_subj=0.569 brown_obj=0.531  ties 0.34
+
+wrote results/exp3_rules_senses3.json and encoder_v6_senses3.json

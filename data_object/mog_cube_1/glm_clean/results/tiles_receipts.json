@@ -1,0 +1,257 @@
+{
+  "hexacode_verify": {
+    "dimension": 12,
+    "n_words": 4096,
+    "weight_enumerator": {
+      "0": 1,
+      "8": 759,
+      "12": 2576,
+      "16": 759,
+      "24": 1
+    },
+    "is_golay_enumerator": true,
+    "min_distance": 8,
+    "doubly_even": true,
+    "self_dual": true,
+    "n_hexacode": 64,
+    "decompose_failures": 0,
+    "decompose_checked": 4096,
+    "fibre_sizes": [
+      32
+    ],
+    "n_fibres": 128
+  },
+  "receipts": [
+    {
+      "name": "Y = 0.2646754...",
+      "verdict": "PASS",
+      "evidence": "0.26467543040452696"
+    },
+    {
+      "name": "Q = 0.3896754...",
+      "verdict": "PASS",
+      "evidence": "0.38967543040452696"
+    },
+    {
+      "name": "8Q = 3.1174032... (8 x the rounded Q)",
+      "verdict": "PASS",
+      "evidence": "3.1174034432362157"
+    },
+    {
+      "name": "24Q = 9.3522096 < 10",
+      "verdict": "PASS",
+      "evidence": "9.352210329708647"
+    },
+    {
+      "name": "calibrated ladder 1 / .5 / .4 / .333 / .25",
+      "verdict": "PASS",
+      "evidence": "{'0': 1.0, '8': 0.5, '12': 0.4, '16': 0.3333333333333333, '24': 0.25}"
+    },
+    {
+      "name": "Leech A / B / C = 0.688262 / 0.620447 / 0.491347",
+      "verdict": "PASS",
+      "evidence": "[0.688262, 0.620447, 0.491347]"
+    },
+    {
+      "name": "196560 minimal vectors",
+      "verdict": "PASS",
+      "evidence": "196560"
+    },
+    {
+      "name": "AM-GM cap 0.353553 > Y, equality at sqrt 2",
+      "verdict": "PASS",
+      "evidence": "{'cap_1_over_2sqrt2': 0.3535533905932738, 'Y_at_pi': 0.26467543040452696, 'Y_below_cap': True, 'value_at_sqrt2': 0.3535533905932738, 'equality_at_sqrt2': True}"
+    },
+    {
+      "name": "2325 shallow / 1771 deep syndromes",
+      "verdict": "PASS",
+      "evidence": "{'cosets_by_leader_weight': {0: 1, 1: 24, 2: 276, 3: 2024, 4: 1771}, 'shallow_le3': 2325, 'deep_eq4': 1771, 'ambiguous': 1771, 'expected_shallow': 2325, 'expected_deep': 1771}"
+    },
+    {
+      "name": "snap repairs every defect of weight <= 3, uniquely",
+      "verdict": "PASS",
+      "evidence": "600 patterns of weight 1, 2, 3"
+    },
+    {
+      "name": "13 . L == wobble exactly (as Fractions)",
+      "verdict": "PASS",
+      "evidence": "(0.8175802271764945, 0.06289078670588419)"
+    },
+    {
+      "name": "wobble = 0.81757..., L = 0.062890...",
+      "verdict": "PASS",
+      "evidence": "(0.8175802271764945, 0.06289078670588419)"
+    },
+    {
+      "name": "MOG / hexacode: 0 failures out of 4096",
+      "verdict": "PASS",
+      "evidence": "{'dimension': 12, 'n_words': 4096, 'weight_enumerator': {0: 1, 8: 759, 12: 2576, 16: 759, 24: 1}, 'is_golay_enumerator': True, 'min_distance': 8, 'doubly_even': True, 'self_dual': True, 'n_hexacode': 64, 'decompose_failures': 0, 'decompose_checked': 4096, 'fibre_sizes': [32], 'n_fibres': 128}"
+    },
+    {
+      "name": "the MOG grid really is the Golay code",
+      "verdict": "PASS",
+      "evidence": "{0: 1, 8: 759, 12: 2576, 16: 759, 24: 1}"
+    },
+    {
+      "name": "Y_CONST = 0.232150 (nesting surcharge)",
+      "verdict": "UNVERIFIABLE",
+      "evidence": "this constant comes from ubp_unified_v5.py, which is not in the repository, and it is not derivable from anything that is; it is carried as a stipulated parameter"
+    }
+  ],
+  "taxonomy": {
+    "T0 vacuum": "HW= 0 q=0 leaders=1 TAX_MOG= 0.0000 NRCI=1.0000 NRCI_cal=1.0000  T0 vacuum",
+    "T_reg(8)": "HW= 8 q=0 leaders=1 TAX_MOG= 3.1174 NRCI=0.7623 NRCI_cal=0.5000  T_reg(w=8)",
+    "T_reg(12)": "HW=12 q=0 leaders=1 TAX_MOG= 4.6761 NRCI=0.6814 NRCI_cal=0.4000  T_reg(w=12)",
+    "T_reg(16)": "HW=16 q=0 leaders=1 TAX_MOG= 6.2348 NRCI=0.6160 NRCI_cal=0.3333  T_reg(w=16)",
+    "T_reg(24)": "HW=24 q=0 leaders=1 TAX_MOG= 9.3522 NRCI=0.5167 NRCI_cal=0.2500  T_reg(w=24)",
+    "T_def(1)": "HW= 1 q=1 leaders=1 TAX_MOG= 0.7794 NRCI=0.9277 NRCI_cal=0.8889  T_def(1) transient",
+    "T_def(2)": "HW= 2 q=2 leaders=1 TAX_MOG= 1.5587 NRCI=0.8651 NRCI_cal=0.8000  T_def(2) transient",
+    "T_def(3)": "HW= 3 q=3 leaders=1 TAX_MOG= 2.3381 NRCI=0.8105 NRCI_cal=0.7273  T_def(3) transient",
+    "T_def(4) anchor": "HW= 4 q=4 leaders=6 TAX_MOG= 3.1174 NRCI=0.7623 NRCI_cal=0.6667  T_def(4) persistent / anchor"
+  },
+  "syndromes": {
+    "cosets_by_leader_weight": {
+      "0": 1,
+      "1": 24,
+      "2": 276,
+      "3": 2024,
+      "4": 1771
+    },
+    "shallow_le3": 2325,
+    "deep_eq4": 1771,
+    "ambiguous": 1771,
+    "expected_shallow": 2325,
+    "expected_deep": 1771
+  },
+  "update": {
+    "linear": true,
+    "matrix": [
+      [
+        2,
+        3,
+        3
+      ],
+      [
+        3,
+        2,
+        3
+      ],
+      [
+        3,
+        3,
+        2
+      ]
+    ],
+    "order": 3
+  },
+  "automaton": {
+    "cells": 125,
+    "all_joins_legal": true,
+    "reversible": true,
+    "corner_word": [
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+    ]
+  },
+  "box_counts": [
+    {
+      "box": "1x1x1",
+      "counted": 64,
+      "formula": 64,
+      "agree": true
+    },
+    {
+      "box": "2x1x1",
+      "counted": 1024,
+      "formula": 1024,
+      "agree": true
+    },
+    {
+      "box": "3x1x1",
+      "counted": 16384,
+      "formula": 16384,
+      "agree": true
+    },
+    {
+      "box": "4x1x1",
+      "counted": 262144,
+      "formula": 262144,
+      "agree": true
+    },
+    {
+      "box": "2x2x1",
+      "counted": 65536,
+      "formula": 65536,
+      "agree": true
+    },
+    {
+      "box": "3x2x1",
+      "counted": 4194304,
+      "formula": 4194304,
+      "agree": true
+    },
+    {
+      "box": "2x2x2",
+      "counted": 16777216,
+      "formula": 16777216,
+      "agree": true
+    }
+  ],
+  "phi": {
+    "matrix": [
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    "char_poly": "x^2 - x - 1",
+    "perron_root": "phi",
+    "ratio_after_20": 1.6180339985218033,
+    "ratio_after_40": 1.618033988749895,
+    "phi": 1.618033988749895,
+    "err_after_40": 4.270451384663378e-17,
+    "stipulated": true
+  },
+  "thirteen": {
+    "wobble": 0.8175802271764945,
+    "sink_L": 0.06289078670588419,
+    "balance_exact": true,
+    "M24_order": 244823040,
+    "M24_factorisation": {
+      "2": 10,
+      "3": 3,
+      "5": 1,
+      "7": 1,
+      "11": 1,
+      "23": 1
+    },
+    "13_divides_M24": false,
+    "13_is_an_element_order": false,
+    "13_divides_any_code_parameter": [
+      196560
+    ],
+    "verdict": "13 divides neither the order of M24 nor any parameter of the Golay code, and is not an element order of M24. It does divide the kissing number 196560 = 13 x 15120, which is the one foothold it has. On this evidence 13 stays a stipulation [stip] and 'why 13' stays [open]."
+  },
+  "admissibility": {
+    "window": [
+      0.7,
+      0.8
+    ],
+    "weights_in_window": [
+      7,
+      8,
+      9,
+      10
+    ],
+    "octad_in_window": true,
+    "note": "the window does not single out weight 8; that the keystone is an octad is an extra stipulation."
+  }
+}

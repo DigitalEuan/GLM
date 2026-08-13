@@ -1,0 +1,124 @@
+{
+  "cells": [
+    {
+      "class": "event.n.01",
+      "direction": "forbid",
+      "tau": 0.3
+    },
+    {
+      "class": "event.n.01",
+      "direction": "require",
+      "tau": 0.35
+    },
+    {
+      "class": "living_thing.n.01",
+      "direction": "forbid",
+      "tau": 0.08
+    },
+    {
+      "class": "LEX:noun.location",
+      "direction": "forbid",
+      "tau": 0.01
+    },
+    {
+      "class": "LEX:noun.communication",
+      "direction": "require",
+      "tau": 0.35
+    },
+    {
+      "class": "LEX:noun.communication",
+      "direction": "forbid",
+      "tau": 0.15
+    },
+    {
+      "class": "attribute.n.02",
+      "direction": "require",
+      "tau": 0.35
+    },
+    {
+      "class": "LEX:noun.possession",
+      "direction": "forbid",
+      "tau": 0.03
+    },
+    {
+      "class": "attribute.n.02",
+      "direction": "forbid",
+      "tau": 0.3
+    },
+    {
+      "class": "LEX:noun.artifact",
+      "direction": "require",
+      "tau": 0.35
+    },
+    {
+      "class": "artifact.n.01",
+      "direction": "forbid",
+      "tau": 0.15
+    },
+    {
+      "class": "group.n.01",
+      "direction": "require",
+      "tau": 0.35
+    },
+    {
+      "class": "LEX:noun.cognition",
+      "direction": "forbid",
+      "tau": 0.15
+    },
+    {
+      "class": "fundamental_quantity.n.01",
+      "direction": "forbid",
+      "tau": 0.03
+    },
+    {
+      "class": "person.n.01",
+      "direction": "forbid",
+      "tau": 0.15
+    },
+    {
+      "class": "process.n.06",
+      "direction": "forbid",
+      "tau": 0.15
+    },
+    {
+      "class": "social_group.n.01",
+      "direction": "forbid",
+      "tau": 0.08
+    },
+    {
+      "class": "message.n.02",
+      "direction": "forbid",
+      "tau": 0.03
+    },
+    {
+      "class": "action.n.01",
+      "direction": "forbid",
+      "tau": 0.03
+    },
+    {
+      "class": "happening.n.01",
+      "direction": "forbid",
+      "tau": 0.03
+    },
+    {
+      "class": "matter.n.03",
+      "direction": "forbid",
+      "tau": 0.08
+    },
+    {
+      "class": "written_communication.n.01",
+      "direction": "forbid",
+      "tau": 0.03
+    },
+    {
+      "class": "shape.n.02",
+      "direction": "forbid",
+      "tau": 0.03
+    },
+    {
+      "class": "LEX:noun.person",
+      "direction": "require",
+      "tau": 0.35
+    }
+  ]
+}

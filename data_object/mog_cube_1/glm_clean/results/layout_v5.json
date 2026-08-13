@@ -1,0 +1,36 @@
+{
+  "classes": [
+    "organism.n.01",
+    "psychological_feature.n.01",
+    "LEX:noun.communication",
+    "attribute.n.02",
+    "LEX:noun.artifact",
+    "LEX:noun.act",
+    "group.n.01",
+    "LEX:noun.person",
+    "object.n.01",
+    "LEX:noun.cognition",
+    "location.n.01",
+    "measure.n.02",
+    "state.n.02",
+    "event.n.01",
+    "social_group.n.01",
+    "cognition.n.01",
+    "living_thing.n.01",
+    "relation.n.01",
+    "communication.n.02",
+    "person.n.01",
+    "act.n.02",
+    "artifact.n.01",
+    "activity.n.01",
+    "LEX:noun.attribute"
+  ],
+  "params": {
+    "theta_req": 0.4,
+    "theta_forb": 0.08,
+    "base_min": 0.05,
+    "k1": 1.0,
+    "k2": 20.0,
+    "min_count": 2.0
+  }
+}

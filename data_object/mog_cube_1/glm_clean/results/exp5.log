@@ -1,0 +1,219 @@
+vocabulary 2000 nouns, 148 verbs
+==============================================================================
+1  LICENSING RATE  (fraction of the noun vocabulary with TAX = 0)
+==============================================================================
+  subj HW<=0: mean 0.0006  median 0.0000  max 0.0205
+  subj HW<=3: mean 0.0181  median 0.0015  max 0.2380
+  subj: median over verbs of the best achievable HW = 2  (range 0..9)
+  obj HW<=0: mean 0.0001  median 0.0000  max 0.0025
+  obj HW<=3: mean 0.0045  median 0.0000  max 0.0815
+  obj: median over verbs of the best achievable HW = 4  (range 0..9)
+
+==============================================================================
+2  SENTENCE DISCRIMINATION  (gold WSJ triples vs corrupted copies)
+==============================================================================
+  corrupt obj  : accuracy 0.6538  ties 0.108  (n=917)
+  corrupt subj : accuracy 0.6107  ties 0.129  (n=917)
+  corrupt both : accuracy 0.7143  ties 0.059  (n=917)
+
+==============================================================================
+3  GENERATION  (uniform sample of the least-TAX nouns, nothing reranked)
+==============================================================================
+  generated 60 sentences, one per verb
+  distinct subjects/objects among 60 generated sentences: 51/58
+  distinct subjects/objects among 60 frequency baseline sentences: 54/59
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 2172.25it/s]
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+  GPT-2 mean log-prob/token, GLM generated     : -7.5379
+  GPT-2 mean log-prob/token, random nouns      : -8.3469
+  GPT-2 mean log-prob/token, frequency baseline: -8.1450
+  GPT-2 mean log-prob/token, real WSJ triples  : -7.3919
+  (verb,object) attested, GLM generated : whole corpus 0.750   held-out 10% only 0.067
+  (verb,object) attested, random nouns  : whole corpus 0.133   held-out 10% only 0.000
+  (verb,object) attested, frequency baseline: whole corpus 0.367   held-out 10% only 0.050
+
+  --- every generated sentence, in the order produced ---
+    A lady asks a witness.                                  HW=4 TAX=1.559 NRCI=0.86515
+    A player scores goal.                                   HW=7 TAX=2.728 NRCI=0.78569
+    A precipitation destroys a house.                       HW=7 TAX=2.728 NRCI=0.78569
+    A source gives notice.                                  HW=12 TAX=4.676 NRCI=0.68138
+    A player wears a jacket.                                HW=2 TAX=0.779 NRCI=0.92770
+    A band releases album.                                  HW=0 TAX=0.000 NRCI=1.00000
+    Force captures a destroyer.                             HW=10 TAX=3.897 NRCI=0.71959
+    A quantity changes name.                                HW=10 TAX=3.897 NRCI=0.71959
+    Analysis shows concern.                                 HW=7 TAX=2.728 NRCI=0.78569
+    A destroyer lays an egg.                                HW=8 TAX=3.117 NRCI=0.76235
+    Hearing continues trade.                                HW=6 TAX=2.338 NRCI=0.81050
+    A commander orders a punt.                              HW=8 TAX=3.117 NRCI=0.76235
+    Passage follows a suit.                                 HW=10 TAX=3.897 NRCI=0.71959
+    Film receives review.                                   HW=10 TAX=3.897 NRCI=0.71959
+    Harm brings a sun.                                      HW=5 TAX=1.948 NRCI=0.83693
+    An episode introduces a law.                            HW=8 TAX=3.117 NRCI=0.76235
+    A destroyer carries a meter.                            HW=4 TAX=1.559 NRCI=0.86515
+    A draft passes bill.                                    HW=8 TAX=3.117 NRCI=0.76235
+    Cloud forms an unit.                                    HW=8 TAX=3.117 NRCI=0.76235
+    Storm makes progress.                                   HW=11 TAX=4.286 NRCI=0.69996
+    A torpedo hits a ball.                                  HW=12 TAX=4.676 NRCI=0.68138
+    Century sees replacement.                               HW=9 TAX=3.507 NRCI=0.74035
+    A hotel undergoes an improvement.                       HW=6 TAX=2.338 NRCI=0.81050
+    A fan watches an episode.                               HW=5 TAX=1.948 NRCI=0.83693
+    A country adopts policy.                                HW=6 TAX=2.338 NRCI=0.81050
+    Capability improves feel.                               HW=1 TAX=0.390 NRCI=0.96249
+    A male defends a city.                                  HW=5 TAX=1.948 NRCI=0.83693
+    A commentator writes letter.                            HW=9 TAX=3.507 NRCI=0.74035
+    An ark reports wind.                                    HW=10 TAX=3.897 NRCI=0.71959
+    A player plays role.                                    HW=10 TAX=3.897 NRCI=0.71959
+    A board acquires a property.                            HW=7 TAX=2.728 NRCI=0.78569
+    Cloud moves a headquarters.                             HW=9 TAX=3.507 NRCI=0.74035
+    Cloud turns an eye.                                     HW=11 TAX=4.286 NRCI=0.69996
+    A court grants franchise.                               HW=14 TAX=5.455 NRCI=0.64702
+    Franchise adds component.                               HW=8 TAX=3.117 NRCI=0.76235
+    Wood performs analysis.                                 HW=5 TAX=1.948 NRCI=0.83693
+    Storm affects a side.                                   HW=4 TAX=1.559 NRCI=0.86515
+    A rider discusses a feeling.                            HW=1 TAX=0.390 NRCI=0.96249
+    A committee sets record.                                HW=4 TAX=1.559 NRCI=0.86515
+    Magazine wins award.                                    HW=10 TAX=3.897 NRCI=0.71959
+    A reviewer praises music.                               HW=4 TAX=1.559 NRCI=0.86515
+    An ally meets a boy.                                    HW=12 TAX=4.676 NRCI=0.68138
+    A death leaves a ministry.                              HW=10 TAX=3.897 NRCI=0.71959
+    An agency builds a house.                               HW=1 TAX=0.390 NRCI=0.96249
+    A critic cites regulation.                              HW=3 TAX=1.169 NRCI=0.89533
+    Voice reflects favour.                                  HW=3 TAX=1.169 NRCI=0.89533
+    A center serves chapter.                                HW=7 TAX=2.728 NRCI=0.78569
+    Play lacks capability.                                  HW=3 TAX=1.169 NRCI=0.89533
+    A critic considers closure.                             HW=5 TAX=1.948 NRCI=0.83693
+    An ally enjoys trip.                                    HW=2 TAX=0.779 NRCI=0.92770
+    An engine drives a car.                                 HW=9 TAX=3.507 NRCI=0.74035
+    A carrier launches tribute.                             HW=9 TAX=3.507 NRCI=0.74035
+    A publisher sends letter.                               HW=7 TAX=2.728 NRCI=0.78569
+    A dog eats an emperor.                                  HW=6 TAX=2.338 NRCI=0.81050
+    Range extends lead.                                     HW=8 TAX=3.117 NRCI=0.76235
+    A musician sings song.                                  HW=3 TAX=1.169 NRCI=0.89533
+    Magazine publishes journal.                             HW=4 TAX=1.559 NRCI=0.86515
+    Icon represents a state.                                HW=6 TAX=2.338 NRCI=0.81050
+    A submarine attacks a stand.                            HW=10 TAX=3.897 NRCI=0.71959
+    A hair cuts a cash.                                     HW=10 TAX=3.897 NRCI=0.71959
+
+  --- the random-noun baseline, same verbs, for comparison ---
+    Evacuation asks goodbye.                                HW=26 TAX=10.132
+    A jacket scores diversity.                              HW=26 TAX=10.132
+    Dominance destroys a string.                            HW=17 TAX=6.624
+    Plan gives price.                                       HW=29 TAX=11.301
+    Revision wears a patrol.                                HW=31 TAX=12.080
+    A door releases stuff.                                  HW=13 TAX=5.066
+    Basketball captures an inch.                            HW=35 TAX=13.639
+    A trace changes an organ.                               HW=29 TAX=11.301
+    Clue shows thunderstorm.                                HW=26 TAX=10.132
+    A representative lays dialogue.                         HW=24 TAX=9.352
+    Clue continues struggle.                                HW=16 TAX=6.235
+    An a orders a vessel.                                   HW=27 TAX=10.521
+    Cloud follows an union.                                 HW=30 TAX=11.690
+    Finding receives risk.                                  HW=26 TAX=10.132
+    A shoulder brings a bell.                               HW=30 TAX=11.690
+    A disturbance introduces a traffic.                     HW=26 TAX=10.132
+    Trophy carries interview.                               HW=24 TAX=9.352
+    Frustration passes tale.                                HW=21 TAX=8.183
+    A board forms a foundation.                             HW=16 TAX=6.235
+    Trip makes a tribe.                                     HW=24 TAX=9.352
+    Metal hits deadline.                                    HW=32 TAX=12.470
+    A publisher sees music.                                 HW=26 TAX=10.132
+    A female undergoes adaptation.                          HW=15 TAX=5.845
+    A funeral watches a shareholder.                        HW=26 TAX=10.132
+    Action adopts practice.                                 HW=30 TAX=11.690
+    Asset improves offer.                                   HW=16 TAX=6.235
+    Announcement defends access.                            HW=29 TAX=11.301
+    Resemblance writes investigation.                       HW=29 TAX=11.301
+    Manner reports a tape.                                  HW=31 TAX=12.080
+    A winner plays abuse.                                   HW=22 TAX=8.573
+    A sequence acquires a champion.                         HW=20 TAX=7.794
+    An accident moves mention.                              HW=30 TAX=11.690
+    Reception turns detachment.                             HW=31 TAX=12.080
+    A headquarters grants a skin.                           HW=28 TAX=10.911
+    Obligation adds tenure.                                 HW=21 TAX=8.183
+    A fund performs sport.                                  HW=17 TAX=6.624
+    Platinum affects execution.                             HW=23 TAX=8.963
+    Acquisition discusses evil.                             HW=18 TAX=7.014
+    A profit sets a tribe.                                  HW=22 TAX=8.573
+    Breakdown wins ban.                                     HW=29 TAX=11.301
+    A minefield praises a zone.                             HW=22 TAX=8.573
+    Chart meets teaching.                                   HW=30 TAX=11.690
+    A supporter leaves poster.                              HW=28 TAX=10.911
+    An earth builds a world.                                HW=14 TAX=5.455
+    A direction cites baseball.                             HW=24 TAX=9.352
+    Installation reflects estimate.                         HW=14 TAX=5.455
+    A canal serves a horse.                                 HW=14 TAX=5.455
+    A chairman lacks bombardment.                           HW=25 TAX=9.742
+    Achievement considers blow.                             HW=22 TAX=8.573
+    Program enjoys bill.                                    HW=19 TAX=7.404
+    Collaboration drives accolade.                          HW=28 TAX=10.911
+    Month launches a speaker.                               HW=26 TAX=10.132
+    Task sends specimen.                                    HW=34 TAX=13.249
+    A tail eats distance.                                   HW=28 TAX=10.911
+    Yen extends a centre.                                   HW=30 TAX=11.690
+    A disciple sings approval.                              HW=16 TAX=6.235
+    Climate publishes an earthquake.                        HW=26 TAX=10.132
+    A key represents a bell.                                HW=27 TAX=10.521
+    An office attacks a cell.                               HW=24 TAX=9.352
+    A dish cuts a watch.                                    HW=23 TAX=8.963
+
+==============================================================================
+4  REPAIR  (a broken sentence, what the grid says, the smallest fix)
+==============================================================================
+  Evacuation asks goodbye.
+    HW=26  subject cells 15  object cells 10  exactly diagnosable: subj=False obj=False
+    subject 'evacuation' violates: always(person.n.01), always(noun.person), always(causal_agent.n.01), always(organism.n.01), always(living_thing.n.01), never(process.n.06) ...
+    object 'goodbye' violates: always(language.n.01), always(person.n.01), always(noun.person), always(causal_agent.n.01), always(organism.n.01), always(living_thing.n.01) ...
+    smallest fix, subject: lady (HW=0), man (HW=1), father (HW=1)
+    smallest fix, object: enemy (HW=4), date (HW=4), dealer (HW=4)
+
+  A jacket scores diversity.
+    HW=26  subject cells 10  object cells 16  exactly diagnosable: subj=False obj=False
+    subject 'jacket' violates: always(biological_group.n.01), always(region.n.01), always(contestant.n.01), always(unit.n.03), always(musician.n.01), always(extremity.n.04) ...
+    object 'diversity' violates: always(extremity.n.04), always(equipment.n.01), always(region.n.01), always(noun.location), always(location.n.01), always(content.n.05) ...
+    smallest fix, subject: player (HW=6), goal (HW=7), end (HW=7)
+    smallest fix, object: goal (HW=1), terminus (HW=4), layer (HW=5)
+
+  Dominance destroys a string.
+    HW=17  subject cells 7  object cells 10  exactly diagnosable: subj=False obj=False
+    subject 'dominance' violates: always(atmospheric_phenomenon.n.01), always(physical_phenomenon.n.01), always(natural_process.n.01), always(noun.act), always(noun.process), always(happening.n.01) ...
+    object 'string' violates: always(structure.n.01), always(building.n.01), always(social_group.n.01), always(group.n.01), always(noun.group), always(vehicle.n.01) ...
+    smallest fix, subject: precipitation (HW=3), storm (HW=4), wind (HW=4)
+    smallest fix, object: house (HW=4), court (HW=5), hospital (HW=5)
+
+  Plan gives price.
+    HW=29  subject cells 15  object cells 14  exactly diagnosable: subj=False obj=False
+    subject 'plan' violates: always(adult.n.01), always(document.n.01), always(unwelcome_person.n.01), never(noun.artifact), always(noun.person), always(causal_agent.n.01) ...
+    object 'price' violates: always(noun.communication), always(psychological_feature.n.01), always(communication.n.02), always(cognition.n.01), always(process.n.02), always(event.n.01) ...
+    smallest fix, subject: source (HW=6), plot (HW=7), policy (HW=8)
+    smallest fix, object: notice (HW=6), explanation (HW=7), portrayal (HW=7)
+
+  Revision wears a patrol.
+    HW=31  subject cells 19  object cells 12  exactly diagnosable: subj=False obj=False
+    subject 'revision' violates: always(noun.person), always(person.n.01), always(causal_agent.n.01), always(organism.n.01), always(living_thing.n.01), never(noun.communication) ...
+    object 'patrol' violates: always(clothing.n.01), always(consumer_goods.n.01), always(covering.n.02), always(commodity.n.01), always(garment.n.01), always(noun.artifact) ...
+    smallest fix, subject: man (HW=2), player (HW=2), woman (HW=2)
+    smallest fix, object: coat (HW=0), shirt (HW=0), jacket (HW=0)
+
+  A door releases stuff.
+    HW=13  subject cells 7  object cells 6  exactly diagnosable: subj=False obj=False
+    subject 'door' violates: always(decoration.n.01), always(organization.n.01), always(group.n.01), always(social_group.n.01), always(noun.group), never(psychological_feature.n.01) ...
+    object 'stuff' violates: always(product.n.02), always(creation.n.02), always(instrumentality.n.03), always(noun.communication), always(artifact.n.01), always(whole.n.02)
+    smallest fix, subject: band (HW=0), house (HW=2), club (HW=2)
+    smallest fix, object: album (HW=0), film (HW=1), book (HW=1)
+
+  Basketball captures an inch.
+    HW=35  subject cells 19  object cells 16  exactly diagnosable: subj=False obj=False
+    subject 'basketball' violates: always(quality.n.01), always(physical_phenomenon.n.01), always(natural_phenomenon.n.01), always(property.n.02), always(phenomenon.n.01), always(noun.phenomenon) ...
+    object 'inch' violates: always(whole.n.02), always(noun.artifact), always(vessel.n.02), always(artifact.n.01), always(craft.n.02), always(district.n.01) ...
+    smallest fix, subject: force (HW=7), rain (HW=8), energy (HW=8)
+    smallest fix, object: destroyer (HW=3), carrier (HW=3), bomber (HW=4)
+
+  A trace changes an organ.
+    HW=29  subject cells 12  object cells 17  exactly diagnosable: subj=False obj=False
+    subject 'trace' violates: always(attribute.n.02), always(noun.cognition), always(cognition.n.01), always(noun.attribute), always(content.n.05), always(noun.state) ...
+    object 'organ' violates: always(language_unit.n.01), always(status.n.01), always(part.n.01), always(content.n.05), always(noun.cognition), always(cognition.n.01) ...
+    smallest fix, subject: thing (HW=4), style (HW=4), possibility (HW=4)
+    smallest fix, object: name (HW=6), recognition (HW=9), grade (HW=9)
+
+wrote results/generated_sentences.txt and results/exp5_generate.json
