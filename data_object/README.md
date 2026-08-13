@@ -1,6 +1,6 @@
 # 'data_object/' - DATA OBJECT — Encoding System
 
-**Version:** 5.1.0  (5 August 2026)
+**Version:** 5.2.0  (13 August 2026)
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand   
 **Parent:** `../README.md`
 
@@ -44,10 +44,24 @@ data_object/ (this folder)
 | `encoding_definition_attempt_03-08.26/` | Previous encoding attempt | — |
 | `Elements encoding experiment:test_Barnes256.txt` | 256-D Barnes-Wall Macro-Lattice spec | — |
 | `MOG_experiment_1.txt` | MOG Spatial Arithmetic + Geometric Interaction Primitives | — |
+| `mog_cube_1/` | Mathlib development that puts measurable meaning on the 24-cell
+MOG/Golay data object and builds a small language on top of it | — |
 
 ---
 
-## Latest Results (4 August 2026)
+## Latest Results (13 August 2026)
+
+**Experiment:** `mog_cube_1/`
+
+A Lean 4 / Mathlib development that puts measurable meaning on the 24-cell
+MOG/Golay data object and builds a small language on top of it: words with
+physical dimension, sentences that are true, connectives (`and`, `but`, `so`)
+with measured meanings, a conversation that remembers, and plans that say what
+to do
+
+---
+
+## Results (4 August 2026)
 
 **Experiment:** `encoding_definition_attempt_04.08.26/`
 
