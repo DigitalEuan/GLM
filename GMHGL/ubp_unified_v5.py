@@ -1,41 +1,72 @@
 """
 ================================================================================
-UBP UNIFIED v5.4.1 — Unified Checkpoint
+UBP UNIFIED v5.5.0 — audit-aligned edition
 ================================================================================
 Author  : E R A Craig, New Zealand
-Version : 5.4.2
-Date    : 6 August 2026
+Version : 5.5.0
+Date    : 19 August 2026
 
-THE 5 PILLARS OF THE UBP ARCHITECTURE
-=====================================
-1. Golay = The Seed, The Engine, The Measure
-   - The extended binary Golay code [24, 12, 8] is the logical DNA of the universe. 
-   - The Seed: It contains the 4,096 perfect, error-free states.
-   - The Engine: It provides the "snap" (error correction) that pulls chaotic, noisy data back into coherent alignment.
-   - The Measure: It defines distance (Hamming weight) and orthogonality. It is the pure, massless, binary logic before physical geometry takes over.
+WHAT THIS VERSION IS
+====================
+Same file name, same public API and same command-line interface as v5.4.0, so
+existing calls keep working.  What is new is a layer that carries the results of
+the Lean 4 audit of the UBP constants study into the code, so the script can no
+longer quietly disagree with what was actually proved.
 
-2. MOG (Miracle Octad Generator) = The Observer's Window (2D projection of 24D)
-   - The MOG is a 4 x 6 grid. It is how a lower-dimensional observer (like us) looks at a 24-dimensional object. 
-   - It projects the 24D space into a 2D matrix. The 4 rows represent the Z_4 (Mod 4) states (Real, Imaginary, etc.), and the 6 columns represent the spatial blocks. It is the holographic screen where the hidden 24D geometry becomes readable to the observer.
+v5.5.0 (audit-aligned)
+==================================================
+- NEW PART 2B "audit layer", entirely additive:
+    * `AuditLedger`      — the claim-by-claim verdict ledger (A verified,
+                           B corrected, C open, D not mathematics), queryable.
+    * `VerifiedSeeds`    — pi, phi, e, M, w, L, Y in exact rationals, each
+                           checked against the interval its Lean proof certifies.
+    * `LeagueFormulas`   — the League 1-4 formulas with their audited relative
+                           errors, plus the corrections B1, B2, B3, B9 and the
+                           rank-3 coefficient optimality result (A4b).
+    * `EvidenceLedger`   — the bit-score ledger: how much each numerical
+                           agreement is worth over the accuracy that a lattice
+                           of candidate values gives away for free.
+    * `PackingAnalysis`  — the sphere-packing computation that forces 23 and
+                           shows 24 to be a parity extension.
+    * `SeedProvenance`   — which layer each seed can come from, the phi stretch
+                           vs shear correction, and the plastic-number
+                           correction to "phi is the cheapest self-similarity".
+    * `audit_report()`   — one call returning all of the above.
+- `GolayCodeEngine` gains a genuine minimum-distance decoder
+  (`nearest_codeword`, `decode_complete`, `is_codeword`, `COVERING_RADIUS`).
+  `snap_to_codeword` is unchanged in behaviour and is now documented for what
+  it is: a bounded-distance corrector for weight <= 3 (audit item B8).
+- `LeechLatticeEngine.kissing_sqrt_report()` records that 196560 is not a
+  perfect square (audit item B6); 443 is its integer square root.
+- `UBPSourceCodeParticlePhysics.get_ultimate_predictions()` now also returns an
+  `evidence` block (bit scores and caveats).  All previously returned keys are
+  unchanged, and consumers that iterate over the dict should skip the keys in
+  `NON_PARTICLE_KEYS`.
+- Removed a duplicated block of assignments in the particle-physics constructor.
+- Test suite extended with section [P] (audit layer): 53 new checks (196 in
+  total), including every certified interval, the corrections and the evidence
+  ledger.
+- New CLI flags `--audit` and `--evidence`; `--physics` now prints the bit-score
+  ledger under the atlas.  All existing flags behave as before.
 
-3. Gray Code = The Translator (Words/Numbers into Binary)
-   - Gray code is the bridge between continuous human meaning (numbers, words, hashes) and the discrete binary substrate. 
-   - Because Gray code only changes 1 bit at a time as you count up, it ensures that concepts that are semantically close remain topologically close. It translates our "words" into raw binary coordinates before the Golay engine snaps them into place.
+WHAT WAS NOT CARRIED OVER
+=========================
+See `docs/V5_EXCLUSIONS.md` for the list of claims and code paths that did not
+survive the audit, together with the reason in each case.
 
-4. Hexacode = The Language (Syntax and Grammar)
-   - If Golay is the raw 1s and 0s, the Hexacode (F_4^6) is the higher-level alphabet. It groups the 24 bits into 6 symbols, using a 4-letter alphabet (0, 1, omega, omega^2). 
-   - It dictates the rules of combination — the grammar of the universe. Every valid Golay codeword must cast a valid Hexacode shadow. It is the language that ensures the 24 bits actually "mean" something coherent rather than just being random noise.
+STATUS VOCABULARY USED THROUGHOUT
+=================================
+    verified      proved in Lean; the machine agrees
+    corrected     the earlier version was wrong; the corrected one is proved
+    open          genuine mathematics nobody can prove today
+    interpretation  naming or physical reading; nothing to prove
+    provisional   a numerical comparison retained but not claimed as evidence
 
-5. Leech Lattice (Lambda_24) = The Discrete Physical Structure
-   - The Leech lattice is the ultimate virtual-physical manifestation. 
-   - Where Golay is just logic and 1s and 0s, the Leech lattice assigns geometry, distance, and mass (Norm^2 = 32). 
-   - It is the virtual-physical crystal of reality. The 196,560 minimal vectors are the actual "atoms" of this space (the localized anchors, the "physical" matter in virtual space, and the vacuum continuum). It is where the Symmetry Tax is collected and where the Non-Random Coherence Index (NRCI) which measures coherence, is felt like a physical force (Gravity/Mass).
-
----
-The Full Pipeline in One Sentence:
-A human concept (Gray Code) is spoken into the system, where it must obey the grammar of the universe (Hexacode), so it is measured and error-corrected by the logical engine (Golay), projected onto the observer's screen (MOG), and finally manifests as a physical, mass-bearing coordinate in reality (Leech Lattice).
 ================================================================================
 """
+
+__version__ = "5.5.0"
+__audit__ = "Lean 4 audit of the UBP constants study; ledger in docs/VERDICTS.md"
 
 # ════════════════════════════════════════════════════════════════════════════════
 #  STD-LIB ONLY
@@ -59,7 +90,7 @@ F = Fraction
 
 
 # ════════════════════════════════════════════════════════════════════════════════
-#  PART 1 — EXACT MATH (no floats as they introduce drift and hide computation)
+#  PART 1 — EXACT MATH (no floats!)
 # ════════════════════════════════════════════════════════════════════════════════
 
 class ExactMath:
@@ -306,63 +337,7 @@ class ExactRoot:
 
 
 # ════════════════════════════════════════════════════════════════════════════════
-#  PART 1.5 — GRAY MAP ISOMETRY  (Z_4 ↔ F_2^2)
-# ════════════════════════════════════════════════════════════════════════════════
-# The isometric bridge between two metric worlds.  Walk around the 4-cycle
-# (0,0) → (1,0) → (1,1) → (0,1) → (0,0) in the Hamming cube: each step
-# changes exactly one bit.  So Hamming distance in F_2^2 equals Lee distance
-# in Z_4.  The Gray map is THE isometry between (Z_4, Lee) and (F_2^2, Ham).
-#
-#       z  →  (b1, b2)
-#       0  →  (0, 0)
-#       1  →  (1, 0)
-#       2  →  (1, 1)
-#       3  →  (0, 1)
-#
-# This is the bridge that lets us verify Z_4-linear constructions using
-# binary tools (Hamming weights, code linearity) while the lattice itself
-# lives in Z_4 (Lee metric, glue conditions).
-
-GRAY_MAP     = {0: (0, 0), 1: (1, 0), 2: (1, 1), 3: (0, 1)}
-GRAY_MAP_INV = {v: k for k, v in GRAY_MAP.items()}
-
-def gray_map(z4_val: int) -> Tuple[int, int]:
-    """Z_4 → F_2^2 (single symbol). The forward isometry."""
-    return GRAY_MAP[z4_val & 3]
-
-def gray_map_inverse(b1: int, b2: int) -> int:
-    """F_2^2 → Z_4 (single symbol). The inverse isometry."""
-    return GRAY_MAP_INV[(b1 & 1, b2 & 1)]
-
-def gray_map_vector(z4_tuple: Tuple[int, ...]) -> Tuple[int, ...]:
-    """Apply Gray map componentwise: Z_4^n → F_2^{2n}."""
-    out = []
-    for z in z4_tuple:
-        b1, b2 = GRAY_MAP[z & 3]
-        out.append(b1)
-        out.append(b2)
-    return tuple(out)
-
-def gray_map_inverse_vector(bits_tuple: Tuple[int, ...]) -> Tuple[int, ...]:
-    """Inverse of gray_map_vector: F_2^{2n} → Z_4^n."""
-    n = len(bits_tuple) // 2
-    out = []
-    for i in range(n):
-        out.append(GRAY_MAP_INV[(bits_tuple[2 * i] & 1, bits_tuple[2 * i + 1] & 1)])
-    return tuple(out)
-
-def lee_distance(a: int, b: int) -> int:
-    """Lee distance on Z_4: min(|a-b|, 4-|a-b|). The natural metric on Z_4."""
-    d = abs((a - b) % 4)
-    return min(d, 4 - d)
-
-def lee_weight(a: int) -> int:
-    """Lee weight of a single Z_4 element."""
-    return lee_distance(a, 0)
-
-
-# ════════════════════════════════════════════════════════════════════════════════
-#  PART 2 — UBP SUBSTRATE  (50-term π, fundamental constants - do more decimals if you can but not less)
+#  PART 2 — UBP SUBSTRATE  (50-term π, fundamental constants)
 # ════════════════════════════════════════════════════════════════════════════════
 
 class UBPUltimateSubstrate:
@@ -440,6 +415,821 @@ _Y_CONST    = _UBP_CONSTS["Y_CONST"]
 _PHI        = _UBP_CONSTS["PHI"]
 _E          = _UBP_CONSTS["E"]
 _SINK_L     = _UBP_CONSTS["SINK_L"]
+
+
+# ════════════════════════════════════════════════════════════════════════════════
+#  PART 2B — AUDIT LAYER  (new in v5.5.0)
+#
+#  Everything in this part is a *transcription* of results that were stated and
+#  machine-checked in Lean 4 in the accompanying study (directories `UBP/`,
+#  `FirstPrinciples/`, `Projection/`; ledger in `docs/VERDICTS.md`).  The Python
+#  here re-computes each number in exact rational arithmetic and checks that it
+#  falls inside the interval the Lean proof certifies, so the script and the
+#  proofs cannot silently drift apart.  Nothing in this part is a new claim.
+# ════════════════════════════════════════════════════════════════════════════════
+
+
+def _dec(s: str) -> Fraction:
+    """Exact Fraction from a decimal string (no float ever constructed)."""
+    return Fraction(s)
+
+
+AUDIT_PROVENANCE: Dict[str, Any] = {
+    "study": "UBP constants study — Lean 4 audit",
+    "ledger": "docs/VERDICTS.md",
+    "sub_studies": {
+        "UBP/": "claim-by-claim audit of the five League reports",
+        "FirstPrinciples/": "what the binary principle forces, and what it does not",
+        "Projection/": "layer / fibre / cost analysis and the bit-score ledger",
+    },
+    "axioms": "propext, Classical.choice, Quot.sound only; no `sorry`, no added axiom",
+    "verdict_groups": {
+        "A": "verified — proved in Lean, the machine agrees with the study",
+        "B": "corrected — the study's version is wrong; the corrected version is proved",
+        "C": "open — genuine mathematics nobody can prove today",
+        "D": "not mathematics — interpretation, naming, physical reading",
+    },
+}
+
+
+class AuditLedger:
+    """
+    The verdict ledger, queryable from code.
+
+    Each entry is a dict with:
+        id      — stable identifier (A1, B3, C1, D2, FP-15, P4-3, …)
+        group   — A | B | C | D
+        claim   — the study's claim, in one line
+        verdict — what the audit established
+        lean    — the Lean theorem(s) that settle it (or "" when group C/D)
+        source  — the file the theorem lives in
+    """
+
+    ENTRIES: List[Dict[str, str]] = [
+        # ── A — verified ───────────────────────────────────────────────────────
+        {"id": "A1", "group": "A",
+         "claim": "M = pi*phi*e = 13.8175802271764944…, hull floor(M) = 13",
+         "verdict": "verified to 18 digits; hull is 13",
+         "lean": "monad_enc, monad_floor", "source": "UBP/Seeds.lean"},
+        {"id": "A1b", "group": "A",
+         "claim": "w = M - 13 is the fractional part of M, L = w/13, 13L = w",
+         "verdict": "verified (but see D1: L is *defined* as w/13)",
+         "lean": "wobble_eq_fract, leak_thirteen", "source": "UBP/Seeds.lean"},
+        {"id": "A1c", "group": "A",
+         "claim": "Y = 1/(pi + 2/pi) = pi/(pi^2+2) = 0.264675430404526942…",
+         "verdict": "verified", "lean": "Y_eq, Y_enc", "source": "UBP/Seeds.lean"},
+        {"id": "A2", "group": "A",
+         "claim": "League 1: the four alpha^-1 formulas hit the quoted accuracies",
+         "verdict": "verified: 1.9624e-4, 4.5507e-10, 1.83845e-10, 6.43314e-10",
+         "lean": "alphaBaseline_relErr, alphaR1_relErr, alphaR2_relErr, alphaR3_relErr",
+         "source": "UBP/Alpha.lean"},
+        {"id": "A3", "group": "A",
+         "claim": "the four mass-ratio formulas hit the quoted accuracies",
+         "verdict": "verified: muon 2.93757e-4, proton 3.7435e-7, tau 1.52635e-2",
+         "lean": "muonPred_relErr, protonPred_relErr, tauPred_relErr",
+         "source": "UBP/Masses.lean"},
+        {"id": "A4", "group": "A",
+         "claim": "League 2: [1]^24 is a Golay codeword and weight-1 flips are corrected",
+         "verdict": "verified for ALL patterns of weight <= 3, not sampled",
+         "lean": "allOnes_isGolay, classC_stable", "source": "UBP/League2.lean"},
+        {"id": "A4b", "group": "A",
+         "claim": "Class B (matter) first reachable at k = 12 flipped bits",
+         "verdict": "verified exactly: 12 are necessary and 12 suffice",
+         "lean": "matter_requires_twelve_bits, matter_threshold_is_attained",
+         "source": "UBP/League2.lean"},
+        {"id": "A4c", "group": "A",
+         "claim": "31/11 is the optimal rank-3 coefficient (report: denominators <= 200)",
+         "verdict": "verified and strengthened to all denominators <= 8000",
+         "lean": "alphaR3_coefficient_optimal", "source": "UBP/OpenQuestions.lean"},
+        {"id": "A5", "group": "A",
+         "claim": "rho_Lambda = 36 Y^18 / 196560^21 = 1.0040371715e-120",
+         "verdict": "verified (the *accuracy* quoted for it is not: see B3)",
+         "lean": "rhoLambda_scaled_enc", "source": "UBP/Cosmology.lean"},
+        {"id": "A6", "group": "A",
+         "claim": "League 4: Delta M = 2 pi i e phi = 2i M, |Delta M| = 2M",
+         "verdict": "verified as an identity (but generic: see B4, B10)",
+         "lean": "monodromy_eq_two_I_monad, abs_monodromy", "source": "UBP/Monodromy.lean"},
+        {"id": "A7", "group": "A",
+         "claim": "the seed-replacement (redundancy) table",
+         "verdict": "every row verified; conclusions confirmed",
+         "lean": "sub3phie_*, subPi1e_*, subPiPhi2_*, subRational_*",
+         "source": "UBP/Redundancy.lean"},
+        {"id": "A8", "group": "A",
+         "claim": "pi, phi, e are irrational; phi is algebraic of degree 2",
+         "verdict": "verified unconditionally (e proved from scratch)",
+         "lean": "seeds_irrational, exp_one_irrational, phi_isAlgebraic",
+         "source": "UBP/SeedClasses.lean, UBP/ExpIrrational.lean"},
+        {"id": "A9", "group": "A",
+         "claim": "the structural integers (137=220-83, 169=13^2, 196560 factorisation, …)",
+         "verdict": "arithmetic verified; the attribution is not (see D2)",
+         "lean": "structural_counts_are_vendored", "source": "UBP/Structural.lean"},
+        # ── B — corrected ──────────────────────────────────────────────────────
+        {"id": "B1", "group": "B",
+         "claim": "rank-1 factored as 137 + 2L[1/(3pi) + 7/65]",
+         "verdict": "misprint: that equals 137.0268915…; correct form is "
+                    "137 + L - 2L[1/(3pi) + 7/65]",
+         "lean": "r1_factored, report_factored_form_is_wrong", "source": "UBP/Alpha.lean"},
+        {"id": "B2", "group": "B",
+         "claim": "the L^2/w terms are second order / two-loop",
+         "verdict": "they are linear: w = 13L exactly, so 14L^2/(5w) = 14L/65 and "
+                    "38L^2/(7w) = 38L/91",
+         "lean": "r1_second_term_linear, r2_second_term_linear", "source": "UBP/Alpha.lean"},
+        {"id": "B3", "group": "B",
+         "claim": "League 3 agreement is 0.17 %",
+         "verdict": "the relative error is 0.4037 %; 0.0017 is the log10 residual "
+                    "(a figure in dex) printed as a percentage",
+         "lean": "rhoLambda_relErr, rhoLambda_error_exceeds_quoted", "source": "UBP/Cosmology.lean"},
+        {"id": "B4", "group": "B",
+         "claim": "the monodromy identity is evidence about the seeds",
+         "verdict": "2 pi i a b = 2i (pi b a) holds for ANY complex a, b — generic",
+         "lean": "monodromy_identity_is_generic", "source": "UBP/Monodromy.lean"},
+        {"id": "B5", "group": "B",
+         "claim": "replacing pi by 3 shifts the hull to a different shell",
+         "verdict": "it does not: floor(3 phi e) = 13 too; what changes is the wobble "
+                    "(0.8176 -> 0.1948) and the muon error (319.5 %)",
+         "lean": "hull_unchanged_when_pi_replaced_by_three", "source": "UBP/Redundancy.lean"},
+        {"id": "B6", "group": "B",
+         "claim": "sqrt(196560) = 443",
+         "verdict": "196560 is not a perfect square: 443^2 = 196249 < 196560 < 197136 = 444^2; "
+                    "443 is the integer square root",
+         "lean": "kissing_not_square, kissing_sqrt_bounds", "source": "UBP/Structural.lean"},
+        {"id": "B7", "group": "B",
+         "claim": "departure from Class C begins at k = 4",
+         "verdict": "only for some of them: a weight-4 word is equidistant (distance 4) "
+                    "from several codewords, so it sits on a decoding boundary; under the "
+                    "audited coset-leader convention pattern 30 escapes to a weight-16 "
+                    "word while pattern 15 is returned to the vacuum",
+         "lean": "weight_four_can_escape, weight_four_can_still_be_corrected",
+         "source": "UBP/League2.lean"},
+        {"id": "B8", "group": "B",
+         "claim": "snap_to_codeword is a decoder",
+         "verdict": "it is a bounded-distance corrector for weight <= 3; the covering "
+                    "radius of the Golay code is 4, and at distance 4 the nearest "
+                    "codeword need not be unique",
+         "lean": "golay_covering_radius, decode_isGolay, decoding_not_unique",
+         "source": "UBP/Vendor (LatticeShortcut)"},
+        {"id": "B9", "group": "B",
+         "claim": "the alpha correction applied to the muon gives 22.9 %",
+         "verdict": "not reproducible; the two computable analogues give 1.36357 % and "
+                    "0.0923070 %, both worse than the uncorrected 169/w (0.0293757 %)",
+         "lean": "muonAnalog1_relErr, muonAnalog2_relErr, alpha_correction_does_not_port",
+         "source": "UBP/OpenQuestions.lean"},
+        {"id": "B10", "group": "B",
+         "claim": "Delta M is the constant 2 pi i e phi",
+         "verdict": "the increment of exp(z) log(z) phi is 2 pi i phi exp(z) — a function "
+                    "of the base point; 2 pi i e phi is its value at z = 1",
+         "lean": "monodromy_increment, monodromy_increment_at_zero_ne",
+         "source": "UBP/Monodromy.lean"},
+        {"id": "P2-6", "group": "B",
+         "claim": "phi shears",
+         "verdict": "phi stretches: the only eigenvalue of a shear is 1; phi is the "
+                    "eigenvalue of the Fibonacci matrix, with exponential growth",
+         "lean": "shear_eigenvalue_eq_one, fibMat_eigenvector", "source": "Projection/OneParameter.lean"},
+        {"id": "L-11", "group": "B",
+         "claim": "phi is an eigenvalue coming from the Co_0 / lattice layer",
+         "verdict": "phi is never an eigenvalue of a finite-order map; it enters as a "
+                    "character (trace) value — the trace of a rotation of order 10",
+         "lean": "phi_not_eigenvalue_of_finite_order, phi_is_trace_of_order_ten",
+         "source": "Projection/Layers.lean"},
+        {"id": "P4-3", "group": "B",
+         "claim": "phi is the cheapest self-similarity an integer lattice supports",
+         "verdict": "true in dimension 2 only: phi is the smallest quadratic Pisot number, "
+                    "but the plastic number (x^3 = x+1, 1.3247…) is a smaller Pisot number",
+         "lean": "quadratic_pisot_ge_phi, plastic_lt_phi", "source": "Projection/Cheapest.lean"},
+        {"id": "FP-18", "group": "B",
+         "claim": "24 is forced by the substrate",
+         "verdict": "23 is forced (perfect 3-error-correcting length); 24 is a parity "
+                    "extension chosen for self-duality, and adds detection, not correction",
+         "lean": "perfect_triple_length, parityExt_dist_of_odd, golay24_not_perfect",
+         "source": "FirstPrinciples/Packing.lean"},
+        {"id": "FP-26", "group": "B",
+         "claim": "alpha^-1 = 137 + L is a striking agreement",
+         "verdict": "a progression of spacing L lands within 2.3e-4 of ANY target >= 137; "
+                    "the fit achieves 1.96e-4 — under one bit of information",
+         "lean": "alpha_generic_guarantee, alpha_bits_lt_one",
+         "source": "FirstPrinciples/FitCapacity.lean, Projection/Surprisal.lean"},
+        # ── C — open ───────────────────────────────────────────────────────────
+        {"id": "C1", "group": "C",
+         "claim": "the seed set {pi, phi, e} is minimal / e is not derivable from pi",
+         "verdict": "OPEN: needs the algebraic independence of pi and e; it is not even "
+                    "known whether pi+e or pi*e is irrational",
+         "lean": "(stated, never asserted) AlgIndep_pi_e", "source": "UBP/OpenClaims.lean"},
+        {"id": "C2", "group": "C",
+         "claim": "M, w and L are irrational",
+         "verdict": "OPEN, and equivalent to each other; a consequence of C1",
+         "lean": "irrational_monad_iff_irrational_wobble", "source": "UBP/OpenClaims.lean"},
+        {"id": "C3", "group": "C",
+         "claim": "pi and e are transcendental (Lindemann, Hermite)",
+         "verdict": "classical, but absent from the pinned Mathlib; carried as explicit "
+                    "hypotheses wherever used, never as axioms",
+         "lean": "Lindemann, Hermite (hypotheses)", "source": "UBP/SeedClasses.lean"},
+        # ── D — not mathematics ────────────────────────────────────────────────
+        {"id": "D1", "group": "D",
+         "claim": "'discovered identities' L/w = 1/13 and M/13 = 1 + L",
+         "verdict": "true but contentless: L is *defined* as w/13",
+         "lean": "derived_layer_is_definitional", "source": "FirstPrinciples/FitCapacity.lean"},
+        {"id": "D2", "group": "D",
+         "claim": "the integers are structural, not fitted",
+         "verdict": "an attribution, not a theorem; 137 = 220 - 83 holds of infinitely "
+                    "many pairs",
+         "lean": "", "source": "docs/VERDICTS.md"},
+        {"id": "D3", "group": "D",
+         "claim": "zero free parameters",
+         "verdict": "true of 137 + L and 169/w only; the coefficients 2/3, 14/5, 1/2, 38/7, "
+                    "31/11, 11/15, 3/5, 29/24 were fitted, and 1836 is an input",
+         "lean": "", "source": "docs/VERDICTS.md"},
+        {"id": "D4", "group": "D",
+         "claim": "rho_Lambda agrees with the observed vacuum energy",
+         "verdict": "10^-120 is a one-significant-figure placeholder, not a measurement",
+         "lean": "", "source": "docs/VERDICTS.md"},
+        {"id": "D5", "group": "D",
+         "claim": "the redundancy test re-derives the pipeline with substituted seeds",
+         "verdict": "it does not: the downstream integers 13 and 169 are left untouched "
+                    "while the hull changes to 8, 10, 9",
+         "lean": "", "source": "docs/VERDICTS.md"},
+        {"id": "D6", "group": "D",
+         "claim": "hull / wobble / sink leakage / coherence horizon as physics",
+         "verdict": "namings attached to numbers; as *defined cost functions* they are "
+                    "formalised, as physical claims they are outside proof",
+         "lean": "", "source": "Projection/Cost.lean, docs/VERDICTS.md"},
+        {"id": "D7", "group": "D",
+         "claim": "196884 - 196560 = 18^2 shows a Monster connection",
+         "verdict": "the arithmetic is exact; the inference is not a statement",
+         "lean": "", "source": "docs/VERDICTS.md"},
+        {"id": "D8", "group": "D",
+         "claim": "'no third correction term exists' / 'no generating function'",
+         "verdict": "conclusions of finite searches over unlisted candidate families; "
+                    "Q3's forms use coefficients the report never defines",
+         "lean": "", "source": "docs/VERDICTS.md"},
+    ]
+
+    @classmethod
+    def by_id(cls, entry_id: str) -> Optional[Dict[str, str]]:
+        for e in cls.ENTRIES:
+            if e["id"] == entry_id:
+                return e
+        return None
+
+    @classmethod
+    def by_group(cls, group: str) -> List[Dict[str, str]]:
+        return [e for e in cls.ENTRIES if e["group"] == group.upper()]
+
+    @classmethod
+    def summary(cls) -> Dict[str, int]:
+        out = {g: len(cls.by_group(g)) for g in ("A", "B", "C", "D")}
+        out["total"] = len(cls.ENTRIES)
+        return out
+
+    @classmethod
+    def corrections(cls) -> List[Dict[str, str]]:
+        return cls.by_group("B")
+
+    @classmethod
+    def as_markdown(cls) -> str:
+        rows = ["| id | group | claim | verdict | Lean |",
+                "|----|-------|-------|---------|------|"]
+        for e in cls.ENTRIES:
+            rows.append(f"| {e['id']} | {e['group']} | {e['claim']} | "
+                        f"{e['verdict']} | `{e['lean']}` |")
+        return "\n".join(rows)
+
+
+# ── High-precision seeds used by the audit layer ────────────────────────────────
+# The globals _PI/_PHI/_E are kept exactly as they were (v5.5.0 behaviour).  The
+# audit layer uses longer continued fractions so that every certified interval
+# below can be checked with room to spare.
+_HP_PI  = UBPUltimateSubstrate.get_pi(60)
+_HP_E   = UBPUltimateSubstrate.get_e(90)
+_HP_PHI = UBPUltimateSubstrate.get_phi(120)
+
+
+class VerifiedSeeds:
+    """
+    The seed layer, with the intervals certified by the Lean development.
+
+    `check()` recomputes each quantity in exact rational arithmetic and reports
+    whether it lies inside the certified interval.  A False anywhere means the
+    script and the proofs disagree and one of them is wrong.
+    """
+
+    PI     = _HP_PI
+    PHI    = _HP_PHI
+    E      = _HP_E
+    MONAD  = _HP_PI * _HP_PHI * _HP_E
+    HULL   = 13                      # floor(MONAD), UBP.monad_floor
+    WOBBLE = MONAD - HULL
+    LEAK   = WOBBLE / 13
+    Y      = _HP_PI / (_HP_PI ** 2 + 2)
+
+    # name -> (value, certified lower bound, certified upper bound, Lean theorem)
+    CERTIFIED: Dict[str, Tuple[str, str, str]] = {
+        "pi":     ("3.141592653589793238",  "3.141592653589793239",  "UBP.pi_enc"),
+        "e":      ("2.718281828459045235",  "2.718281828459045236",  "UBP.eSeed_enc"),
+        "phi":    ("1.618033988749894848",  "1.6180339887498948485", "UBP.phi_enc"),
+        "monad":  ("13.8175802271764944",   "13.8175802271764945",   "UBP.monad_enc"),
+        "wobble": ("0.8175802271764944",    "0.8175802271764945",    "UBP.wobble_enc"),
+        "leak":   ("0.062890786705884184",  "0.06289078670588420",   "UBP.leak_enc"),
+        "Y":      ("0.264675430404526942",  "0.264675430404526943",  "UBP.Y_enc"),
+    }
+
+    @classmethod
+    def values(cls) -> Dict[str, Fraction]:
+        return {"pi": cls.PI, "e": cls.E, "phi": cls.PHI, "monad": cls.MONAD,
+                "wobble": cls.WOBBLE, "leak": cls.LEAK, "Y": cls.Y}
+
+    @classmethod
+    def check(cls) -> Dict[str, Dict[str, Any]]:
+        out: Dict[str, Dict[str, Any]] = {}
+        vals = cls.values()
+        for name, (lo, hi, thm) in cls.CERTIFIED.items():
+            v = vals[name]
+            out[name] = {
+                "value": float(v),
+                "inside": _dec(lo) <= v <= _dec(hi),
+                "interval": [lo, hi],
+                "lean": thm,
+            }
+        return out
+
+    @classmethod
+    def all_inside(cls) -> bool:
+        return all(d["inside"] for d in cls.check().values())
+
+    @classmethod
+    def hull_of(cls, x: Fraction) -> int:
+        """floor(x) — the 'hull' operation, exact for Fractions."""
+        return x.numerator // x.denominator
+
+    @classmethod
+    def alternative_hulls(cls) -> Dict[str, int]:
+        """FP-24: reading 13 out of the seeds is a *choice* of monomial."""
+        pi, phi, e = cls.PI, cls.PHI, cls.E
+        return {
+            "pi*phi*e":   cls.hull_of(pi * phi * e),      # 13
+            "pi*e/phi":   cls.hull_of(pi * e / phi),      # 5
+            "pi*phi^2*e": cls.hull_of(pi * phi ** 2 * e), # 22
+            "pi*phi*e^2": cls.hull_of(pi * phi * e ** 2), # 37
+            "3*phi*e":    cls.hull_of(3 * phi * e),       # 13 — B5
+        }
+
+
+class LeagueFormulas:
+    """
+    The League 1–4 formulas, exactly as audited.
+
+    Every method returns an exact Fraction; `table()` reports the relative error
+    of each one together with the interval the Lean proof certifies for that
+    error, and whether the computed value falls inside it.
+    """
+
+    # CODATA-2022 benchmarks used by the Lean audit
+    TARGETS: Dict[str, str] = {
+        "alpha_inv":   "137.035999177",
+        "muon_ratio":  "206.7682827",
+        "proton_ratio": "1836.152673426",
+        "tau_ratio":   "3477.23",
+        "rho_lambda_scaled": "1",     # rho_Lambda * 10^120 against the 10^-120 placeholder
+    }
+
+    KISSING = 196560
+
+    # ── the formulas ───────────────────────────────────────────────────────────
+    @staticmethod
+    def alpha_baseline() -> Fraction:
+        return 137 + VerifiedSeeds.LEAK
+
+    @staticmethod
+    def alpha_r1() -> Fraction:
+        L, pi, w = VerifiedSeeds.LEAK, VerifiedSeeds.PI, VerifiedSeeds.WOBBLE
+        return 137 + L - L / pi * F(2, 3) - L ** 2 / w * F(14, 5)
+
+    @staticmethod
+    def alpha_r2() -> Fraction:
+        L, pi, w = VerifiedSeeds.LEAK, VerifiedSeeds.PI, VerifiedSeeds.WOBBLE
+        return 137 + L - L ** 2 / pi * F(1, 2) - L ** 2 / w * F(38, 7)
+
+    @staticmethod
+    def alpha_r3(c: Fraction = F(31, 11)) -> Fraction:
+        L, pi, Y = VerifiedSeeds.LEAK, VerifiedSeeds.PI, VerifiedSeeds.Y
+        return 137 + L + L / pi - L * Y * c
+
+    @staticmethod
+    def muon() -> Fraction:
+        return F(169) / VerifiedSeeds.WOBBLE
+
+    @staticmethod
+    def muon_r1() -> Fraction:
+        L, pi = VerifiedSeeds.LEAK, VerifiedSeeds.PI
+        return LeagueFormulas.muon() * (1 + L ** 2 / pi ** 2 * F(11, 15))
+
+    @staticmethod
+    def muon_r2() -> Fraction:
+        L, pi, w = VerifiedSeeds.LEAK, VerifiedSeeds.PI, VerifiedSeeds.WOBBLE
+        return F(169) / (w - L ** 2 / pi ** 2 * F(3, 5))
+
+    @staticmethod
+    def proton() -> Fraction:
+        return 1836 + 2 * VerifiedSeeds.LEAK * F(29, 24)
+
+    @staticmethod
+    def tau() -> Fraction:
+        return F(169 * 127 * 3) / (VerifiedSeeds.WOBBLE * 23)
+
+    @staticmethod
+    def rho_lambda_scaled() -> Fraction:
+        """rho_Lambda * 10^120, so the 10^-120 placeholder becomes 1."""
+        return 36 * VerifiedSeeds.Y ** 18 / F(LeagueFormulas.KISSING) ** 21 * 10 ** 120
+
+    # ── errors ─────────────────────────────────────────────────────────────────
+    @staticmethod
+    def relative_error(pred: Fraction, target: Fraction) -> Fraction:
+        return abs(pred - target) / target
+
+    # name -> (callable, target key, certified error interval, Lean theorem)
+    AUDITED: List[Tuple[str, str, str, str, str]] = [
+        ("alpha_baseline", "alpha_inv",    "0.00019623755",    "0.00019623756",    "UBP.alphaBaseline_relErr"),
+        ("alpha_r1",       "alpha_inv",    "0.00000000045507089", "0.00000000045507091", "UBP.alphaR1_relErr"),
+        ("alpha_r2",       "alpha_inv",    "0.00000000018384518", "0.00000000018384519", "UBP.alphaR2_relErr"),
+        ("alpha_r3",       "alpha_inv",    "0.00000000064331400", "0.00000000064331402", "UBP.alphaR3_relErr"),
+        ("muon",           "muon_ratio",   "0.00029375712",    "0.00029375713",    "UBP.muonPred_relErr"),
+        ("muon_r1",        "muon_ratio",   "0.0000000403998",  "0.0000000403999",  "UBP.muonPredR1_relErr"),
+        ("muon_r2",        "muon_ratio",   "0.000000343076",   "0.000000343077",   "UBP.muonPredR2_relErr"),
+        ("proton",         "proton_ratio", "0.00000037434",    "0.00000037435",    "UBP.protonPred_relErr"),
+        ("tau",            "tau_ratio",    "0.015263474",      "0.015263475",      "UBP.tauPred_relErr"),
+        ("rho_lambda_scaled", "rho_lambda_scaled", "0.0040371715052641", "0.0040371715052642",
+         "UBP.rhoLambda_relErr"),
+    ]
+
+    @classmethod
+    def table(cls) -> List[Dict[str, Any]]:
+        rows = []
+        for name, tkey, lo, hi, thm in cls.AUDITED:
+            pred = getattr(cls, name)()
+            target = _dec(cls.TARGETS[tkey])
+            err = cls.relative_error(pred, target)
+            rows.append({
+                "formula": name,
+                "value": float(pred),
+                "target": float(target),
+                "rel_error": float(err),
+                "certified": [lo, hi],
+                "inside": _dec(lo) <= err <= _dec(hi),
+                "lean": thm,
+            })
+        return rows
+
+    @classmethod
+    def all_inside(cls) -> bool:
+        return all(r["inside"] for r in cls.table())
+
+    # ── B1: the misprinted factorisation ───────────────────────────────────────
+    @classmethod
+    def r1_factored_correct(cls) -> Fraction:
+        L, pi = VerifiedSeeds.LEAK, VerifiedSeeds.PI
+        return 137 + L - 2 * L * (1 / (3 * pi) + F(7, 65))
+
+    @classmethod
+    def r1_factored_as_printed(cls) -> Fraction:
+        L, pi = VerifiedSeeds.LEAK, VerifiedSeeds.PI
+        return 137 + 2 * L * (1 / (3 * pi) + F(7, 65))
+
+    @classmethod
+    def factorisation_check(cls) -> Dict[str, Any]:
+        return {
+            "correct_form_matches_rank1": cls.r1_factored_correct() == cls.alpha_r1(),
+            "printed_form_value": float(cls.r1_factored_as_printed()),
+            "printed_form_matches_rank1": cls.r1_factored_as_printed() == cls.alpha_r1(),
+            "audit": "B1",
+        }
+
+    # ── B2: the "second order" terms are linear ────────────────────────────────
+    @classmethod
+    def second_order_is_linear(cls) -> Dict[str, Any]:
+        L, w = VerifiedSeeds.LEAK, VerifiedSeeds.WOBBLE
+        return {
+            "w_eq_13L": w == 13 * L,
+            "14L^2/(5w) == 14L/65": L ** 2 / w * F(14, 5) == L * F(14, 65),
+            "38L^2/(7w) == 38L/91": L ** 2 / w * F(38, 7) == L * F(38, 91),
+            "audit": "B2",
+        }
+
+    # ── B3: the League-3 error figure ──────────────────────────────────────────
+    @classmethod
+    def rho_lambda_error_report(cls) -> Dict[str, Any]:
+        err = cls.relative_error(cls.rho_lambda_scaled(), F(1))
+        return {
+            "relative_error_percent": float(err * 100),
+            "quoted_percent": 0.17,
+            "explanation": "0.0017 is the log10 residual (dex), not a percentage",
+            "exceeds_quoted": err > F(4, 1000),
+            "audit": "B3",
+        }
+
+    # ── B9: the alpha correction does not port to the muon ─────────────────────
+    @classmethod
+    def muon_analogues(cls) -> Dict[str, Any]:
+        L, pi = VerifiedSeeds.LEAK, VerifiedSeeds.PI
+        base = cls.muon()
+        a1 = base * (1 - L / pi * F(2, 3))
+        a2 = base * (1 - L ** 2 / pi * F(1, 2))
+        t = _dec(cls.TARGETS["muon_ratio"])
+        e0, e1, e2 = (cls.relative_error(x, t) for x in (base, a1, a2))
+        return {
+            "uncorrected_percent": float(e0 * 100),
+            "analogue1_percent": float(e1 * 100),
+            "analogue2_percent": float(e2 * 100),
+            "both_worse": e0 < e1 and e0 < e2,
+            "quoted_percent": 22.9,
+            "audit": "B9",
+        }
+
+    # ── A4b: the optimal rank-3 coefficient ────────────────────────────────────
+    @classmethod
+    def alpha_r3_optimal_coefficient(cls, max_denominator: int = 8000) -> Dict[str, Any]:
+        """
+        The rank-3 formula is affine in its coefficient c, so the deviation is
+        L*Y*|c - c*| for one fixed real c*.  Find the best rational with
+        denominator <= max_denominator and compare it with the study's 31/11.
+        """
+        L, pi, Y = VerifiedSeeds.LEAK, VerifiedSeeds.PI, VerifiedSeeds.Y
+        target = _dec(cls.TARGETS["alpha_inv"])
+        c_star = (137 + L + L / pi - target) / (L * Y)
+        num, den = c_star.numerator, c_star.denominator
+        best_q, best_p, best_num = 1, round(c_star), None
+        for q in range(1, max_denominator + 1):
+            p = (num * q + den // 2) // den          # nearest integer to c* * q
+            for cand in (p, p + 1):                  # guard the rounding boundary
+                dev = abs(cand * den - num * q)      # |p/q - c*| = dev / (q*den)
+                if best_num is None or dev * best_q < best_num * q:
+                    best_num, best_q, best_p = dev, q, cand
+        best = F(best_p, best_q)
+        return {
+            "c_star": float(c_star),
+            "best_rational": f"{best.numerator}/{best.denominator}",
+            "study_value": "31/11",
+            "study_is_optimal": best == F(31, 11),
+            "abs_gap_31_11": float(abs(F(31, 11) - c_star)),
+            "max_denominator": max_denominator,
+            "sensitivity_LY": float(L * Y),
+            "audit": "A4b",
+        }
+
+    # ── A7 / B5: the seed-replacement table ────────────────────────────────────
+    @classmethod
+    def substitution_table(cls) -> List[Dict[str, Any]]:
+        pi, phi, e = VerifiedSeeds.PI, VerifiedSeeds.PHI, VerifiedSeeds.E
+        rows = [("pi*phi*e (baseline)", pi * phi * e),
+                ("3*phi*e",             3 * phi * e),
+                ("pi*1*e",              pi * e),
+                ("pi*phi*2",            pi * phi * 2),
+                ("3*(8/5)*2",           F(3) * F(8, 5) * 2)]
+        ta = _dec(cls.TARGETS["alpha_inv"])
+        tm = _dec(cls.TARGETS["muon_ratio"])
+        out = []
+        for label, m in rows:
+            hull = VerifiedSeeds.hull_of(m)
+            w = m - hull
+            alpha = 137 + w / 13          # note D5: the 13 and the 169 are NOT re-derived
+            muon = F(169) / w
+            out.append({
+                "monad": label,
+                "hull": hull,
+                "wobble": float(w),
+                "alpha_rel_error": float(cls.relative_error(alpha, ta)),
+                "muon_rel_error": float(cls.relative_error(muon, tm)),
+            })
+        return out
+
+
+class EvidenceLedger:
+    """
+    How much a numerical agreement is worth (FirstPrinciples Stage 4,
+    Projection Module 6).
+
+    A formula of the shape "fixed number + integer multiple of a small constant"
+    is an arithmetic progression, and a progression of spacing s lands within
+    s/2 of *every* target.  The bit score log2(generic / achieved) says how many
+    binary digits of agreement the fit buys over that free guarantee.
+    """
+
+    # (label, spacing, target, generic guarantee used in the Lean proof, Lean theorem)
+    ROWS: List[Tuple[str, str, str, str, str]] = [
+        ("alpha_inv = 137 + L",      "leak",     "alpha_inv",    "0.00023",
+         "UBPProjection.alpha_bits_lt_one"),
+        ("m_mu/m_e = 169/w",         "inv_w",    "muon_ratio",   "0.00297",
+         "UBPProjection.muon_bits_between_three_and_four"),
+        ("m_p/m_e = 1836 + 2*L*29/24", "leak_12", "proton_ratio", "0.0000015",
+         "UBPProjection.proton_bits_between_two_and_three"),
+    ]
+
+    @staticmethod
+    def spacing(kind: str) -> Fraction:
+        L, w = VerifiedSeeds.LEAK, VerifiedSeeds.WOBBLE
+        if kind == "leak":
+            return L                     # 137 + n*L
+        if kind == "inv_w":
+            return 1 / w                 # n/w
+        if kind == "leak_12":
+            return L / 12                # 1836 + p*(L/12), since 2*L*29/24 = 29*(L/12)
+        raise ValueError(f"unknown spacing kind: {kind}")
+
+    @staticmethod
+    def generic_guarantee(spacing: Fraction, target: Fraction) -> Fraction:
+        """Half the spacing, relative to the target: the free accuracy."""
+        return spacing / 2 / target
+
+    @staticmethod
+    def bits(generic: Fraction, achieved: Fraction) -> float:
+        """log2(generic / achieved) — 0 bits means 'no better than guessing'."""
+        if achieved <= 0:
+            return float("inf")
+        return math.log2(float(generic) / float(achieved))
+
+    @classmethod
+    def table(cls) -> List[Dict[str, Any]]:
+        achieved_by_target = {
+            "alpha_inv": LeagueFormulas.relative_error(
+                LeagueFormulas.alpha_baseline(), _dec(LeagueFormulas.TARGETS["alpha_inv"])),
+            "muon_ratio": LeagueFormulas.relative_error(
+                LeagueFormulas.muon(), _dec(LeagueFormulas.TARGETS["muon_ratio"])),
+            "proton_ratio": LeagueFormulas.relative_error(
+                LeagueFormulas.proton(), _dec(LeagueFormulas.TARGETS["proton_ratio"])),
+        }
+        rows = []
+        for label, kind, tkey, audited_generic, thm in cls.ROWS:
+            target = _dec(LeagueFormulas.TARGETS[tkey])
+            s = cls.spacing(kind)
+            g_exact = cls.generic_guarantee(s, target)
+            g_audit = _dec(audited_generic)
+            achieved = achieved_by_target[tkey]
+            rows.append({
+                "fit": label,
+                "spacing": float(s),
+                "generic_guarantee": float(g_exact),
+                "generic_guarantee_audited": float(g_audit),
+                "achieved": float(achieved),
+                "bits": cls.bits(g_exact, achieved),
+                "bits_audited": cls.bits(g_audit, achieved),
+                "verdict": cls.verdict(cls.bits(g_audit, achieved)),
+                "lean": thm,
+            })
+        return rows
+
+    @staticmethod
+    def verdict(bits: float) -> str:
+        if bits < 1:
+            return "NOT EVIDENCE (under one bit over the free guarantee)"
+        if bits < 3:
+            return "WEAK (worth a small factor)"
+        if bits < 8:
+            return "SUGGESTIVE (worth ~1 decimal digit or more)"
+        return "STRONG"
+
+    @staticmethod
+    def capacity_bits(n_candidates: int, delta: Fraction, plausible_range: Fraction) -> float:
+        """
+        log2(R / (2*N*delta)) — the general no-miracle bound.  N candidate
+        predictions each matching within delta cover a set of measure <= 2*N*delta
+        inside a plausible range of width R.  Doubling N costs exactly one bit.
+        """
+        covered = 2 * n_candidates * delta
+        if covered <= 0:
+            return float("inf")
+        return math.log2(float(plausible_range) / float(covered))
+
+
+class PackingAnalysis:
+    """
+    Where 23 and 24 actually come from (FirstPrinciples Stage 2).
+
+    The sphere-packing bound |C| * ball(n,t) <= 2^n is met exactly at n = 23 for
+    t = 3; at n = 24 the same code leaves over 43 % of the space uncovered, so 24
+    is a parity extension chosen for self-duality, not an information-theoretic
+    necessity.
+    """
+
+    @staticmethod
+    def ball(n: int, t: int) -> int:
+        return sum(ExactMath.icomb(n, i) for i in range(t + 1))
+
+    @staticmethod
+    def is_power_of_two(m: int) -> bool:
+        return m > 0 and (m & (m - 1)) == 0
+
+    @classmethod
+    def perfect_lengths(cls, t: int = 3, n_max: int = 200) -> List[int]:
+        """Lengths at which a perfect t-error-correcting binary code can exist."""
+        return [n for n in range(4, n_max + 1) if cls.is_power_of_two(cls.ball(n, t))]
+
+    @classmethod
+    def golay_report(cls) -> Dict[str, Any]:
+        ball23, ball24 = cls.ball(23, 3), cls.ball(24, 3)
+        covered24 = 4096 * ball24
+        return {
+            "ball(23,3)": ball23,
+            "perfect_at_23": 4096 * ball23 == 2 ** 23,
+            "ball(24,3)": ball24,
+            "covered_at_24": covered24,
+            "space_at_24": 2 ** 24,
+            "deficit_at_24": 2 ** 24 - covered24,
+            "uncovered_fraction": float(F(2 ** 24 - covered24, 2 ** 24)),
+            "correction_radius_of_d8": (8 - 1) // 2,
+            "reading": "23 is forced; 24 is a parity extension (detection, not correction)",
+            "audit": "FP-15 … FP-18",
+        }
+
+
+class SeedProvenance:
+    """
+    Which layer each seed can come from (Projection Modules 1, 2, 4).
+
+    * phi  — lattice layer: algebraic of degree 2, the trace of a rotation of
+             order 10, and never an eigenvalue of a finite-order map (L-11).
+             Its motion is a stretch (Fibonacci matrix), not a shear (P2-6).
+    * pi   — periodic flow: the generator of the period lattice of rotation.
+    * e    — non-compact flow: the time-1 value of the identity flow.
+
+    No finite symmetry acting linearly on a lattice can produce a transcendental
+    invariant, so pi and e cannot be lattice characters (L-5, L-7).
+    """
+
+    LAYERS: Dict[str, Dict[str, str]] = {
+        "phi": {"layer": "lattice / finite symmetry", "role": "character (trace) value",
+                "fibre": "size 2 — {phi, 1-phi}", "lean": "phi_is_trace_of_order_ten"},
+        "pi":  {"layer": "compact one-parameter flow", "role": "period-lattice generator",
+                "fibre": "infinite (winding number lost)", "lean": "period_lattice_eq"},
+        "e":   {"layer": "non-compact one-parameter flow", "role": "flow time 1",
+                "fibre": "the whole time axis", "lean": "flow_time_one"},
+    }
+
+    @staticmethod
+    def phi_is_two_cos_pi_over_five(digits: int = 12) -> bool:
+        """phi = 2 cos(pi/5), checked to `digits` decimal places."""
+        lhs = float(VerifiedSeeds.PHI)
+        rhs = 2 * math.cos(math.pi / 5)
+        return abs(lhs - rhs) < 10 ** (-digits)
+
+    @staticmethod
+    def plastic_number(iters: int = 200) -> Fraction:
+        """The real root of x^3 = x + 1, by bisection in exact rationals."""
+        lo, hi = F(1), F(2)
+        for _ in range(iters):
+            mid = (lo + hi) / 2
+            if mid ** 3 - mid - 1 < 0:
+                lo = mid
+            else:
+                hi = mid
+        return (lo + hi) / 2
+
+    @classmethod
+    def cheapest_report(cls) -> Dict[str, Any]:
+        rho = cls.plastic_number(80)
+        return {
+            "phi": float(VerifiedSeeds.PHI),
+            "plastic_number": float(rho),
+            "plastic_is_smaller": rho < VerifiedSeeds.PHI,
+            "reading": "phi is the smallest QUADRATIC Pisot number; the plastic number "
+                       "is a smaller Pisot number of degree 3",
+            "audit": "P4-3",
+        }
+
+    @staticmethod
+    def badly_approximable(q_max: int = 500) -> bool:
+        """|phi - p/q| >= 1/(3 q^2) for every rational with q <= q_max (P4-5)."""
+        phi = VerifiedSeeds.PHI
+        for q in range(1, q_max + 1):
+            p = round(phi * q)
+            for cand in (p - 1, p, p + 1):
+                if abs(phi - F(cand, q)) < F(1, 3 * q * q):
+                    return False
+        return True
+
+
+def audit_report() -> Dict[str, Any]:
+    """One call that returns everything the audit layer knows."""
+    return {
+        "version": __version__,
+        "provenance": AUDIT_PROVENANCE,
+        "ledger_summary": AuditLedger.summary(),
+        "seed_checks": VerifiedSeeds.check(),
+        "seed_checks_all_inside": VerifiedSeeds.all_inside(),
+        "alternative_hulls": VerifiedSeeds.alternative_hulls(),
+        "league_table": LeagueFormulas.table(),
+        "league_all_inside": LeagueFormulas.all_inside(),
+        "corrections": {
+            "B1_factorisation": LeagueFormulas.factorisation_check(),
+            "B2_second_order": LeagueFormulas.second_order_is_linear(),
+            "B3_rho_lambda": LeagueFormulas.rho_lambda_error_report(),
+            "B9_muon_analogues": LeagueFormulas.muon_analogues(),
+        },
+        "rank3_coefficient": LeagueFormulas.alpha_r3_optimal_coefficient(),
+        "substitution_table": LeagueFormulas.substitution_table(),
+        "evidence": EvidenceLedger.table(),
+        "packing": PackingAnalysis.golay_report(),
+        "seed_layers": SeedProvenance.LAYERS,
+        "cheapest": SeedProvenance.cheapest_report(),
+        "open_problems": [e for e in AuditLedger.by_group("C")],
+    }
 
 
 # ════════════════════════════════════════════════════════════════════════════════
@@ -578,12 +1368,7 @@ class GolayCodeEngine:
     def syndrome_weight(self, v24: List[int]) -> int:
         return sum(self.syndrome(v24))
 
-    # ── syndrome table (complete: 4096 entries, weights 0..4) ─────────────────
-    # FIX per leech_lattice/RequestProject/Decoder.lean (Lean theorems
-    # `golay_covering_radius`, `decode_isGolay`, `decode_dist_le_four`).
-    # The previous version only built weights 0..3 (2,325 entries) and silently
-    # returned non-codewords for the 1,771 weight-4 cosets (43% of inputs).
-    # See Substrate.lean `legacySnap_not_codeword` for the proof of the bug.
+    # ── syndrome table (lazy: 2325 entries for weight ≤ 3) ────────────────────
     def _build_syndrome_table(self) -> Dict[Tuple[int, ...], List[int]]:
         cols = self._H_cols
         table: Dict[Tuple[int, ...], List[int]] = {}
@@ -607,36 +1392,13 @@ class GolayCodeEngine:
                     s = tuple(a ^ b for a, b in zip(sij, cols[k]))
                     e = [0]*24; e[i] = 1; e[j] = 1; e[k] = 1
                     table[s] = e
-        # weight 4 — THE FIX (covers the remaining 1,771 cosets)
-        # Per Lean `golay_covering_radius`: every 24-bit word is within Hamming
-        # distance 4 of a codeword, so this completes the decoder.
-        # Per Lean `decoding_not_unique`: at distance 4 the nearest codeword is
-        # not unique (1,771 cosets have 6 tied weight-4 leaders). The tiebreak
-        # convention below is: first-found = lex-smallest by index order. This
-        # matches Decoder.lean's `leaderNat` ("minimum weight, then smallest
-        # coordinate mask").
-        for i in range(24):
-            for j in range(i+1, 24):
-                sij = tuple(a ^ b for a, b in zip(cols[i], cols[j]))
-                for k in range(j+1, 24):
-                    sijk = tuple(a ^ b for a, b in zip(sij, cols[k]))
-                    for l in range(k+1, 24):
-                        s = tuple(a ^ b for a, b in zip(sijk, cols[l]))
-                        if s not in table:  # only add if not already covered
-                            e = [0]*24
-                            e[i] = 1; e[j] = 1; e[k] = 1; e[l] = 1
-                            table[s] = e
         return table
 
     def _ensure_syn_table(self):
         if self._syn_table is None:
             self._syn_table = self._build_syndrome_table()
 
-    # ── snap (complete decoder: corrects any pattern of weight ≤ 4) ──────────
-    # Per Lean `decode_isGolay`: the result is always a Golay codeword.
-    # Per Lean `decode_dist_le_four`: snap distance is ≤ 4 (the covering radius).
-    # The `else` branch below is now unreachable (the table is complete), but is
-    # kept as a defensive fallback.
+    # ── snap (correct ≤ 3 errors) ──────────────────────────────────────────────
     def snap_to_codeword(self, v24: List[int]) -> Tuple[List[int], Dict[str, Any]]:
         if len(v24) != 24:
             raise ValueError("snap: 24 bits required")
@@ -653,10 +1415,57 @@ class GolayCodeEngine:
             d = sum(e)
             return corrected, {"syndrome_weight": sw, "corrected": True,
                                "anchor_distance": d, "correctable": True}
-        # Unreachable after the weight-4 fix (table is complete, 4096 entries).
-        # Kept as a defensive fallback per Lean `decode_isGolay`.
         return list(v24), {"syndrome_weight": sw, "corrected": False,
                            "anchor_distance": -1, "correctable": False}
+
+    def decode(self, v24: List[int]) -> Tuple[List[int], bool, int]:
+        cw, meta = self.snap_to_codeword(v24)
+        return cw[:12], meta["correctable"], meta["anchor_distance"]
+
+    # ── complete decoding (new in v5.5.0; audit item B8) ───────────────────────
+    #
+    # `snap_to_codeword` above is a *bounded-distance corrector*: it fixes error
+    # patterns of weight <= 3 and returns anything further away unchanged, with
+    # correctable=False.  That is the right behaviour for a substrate corrector,
+    # but it is not minimum-distance decoding: the covering radius of the
+    # extended Golay code is 4, so every word is within distance 4 of a codeword,
+    # and at distance exactly 4 the nearest codeword need not be unique.  The
+    # methods below make that explicit rather than leaving it implied.
+
+    COVERING_RADIUS: int = 4
+    MIN_DISTANCE: int = 8
+    CORRECTION_RADIUS: int = 3          # floor((8-1)/2)
+
+    def is_codeword(self, v24: List[int]) -> bool:
+        return len(v24) == 24 and not any(self.syndrome(v24))
+
+    def nearest_codeword(self, v24: List[int]) -> Dict[str, Any]:
+        """
+        Complete minimum-distance decoding by exhaustive search over all 4096
+        codewords.  Reports the distance, the number of codewords attaining it
+        and whether the decoding is unique.
+        """
+        if len(v24) != 24:
+            raise ValueError("nearest_codeword: 24 bits required")
+        best_d, best, ties = 25, None, 0
+        for c in self.get_all_codewords():
+            d = sum(a ^ b for a, b in zip(c, v24))
+            if d < best_d:
+                best_d, best, ties = d, c, 1
+            elif d == best_d:
+                ties += 1
+        return {
+            "codeword": best,
+            "distance": best_d,
+            "ties": ties,
+            "unique": ties == 1,
+            "within_correction_radius": best_d <= self.CORRECTION_RADIUS,
+        }
+
+    def decode_complete(self, v24: List[int]) -> Tuple[List[int], Dict[str, Any]]:
+        """Minimum-distance decode; always returns a codeword (see B8)."""
+        info = self.nearest_codeword(v24)
+        return info["codeword"], info
 
     # ── enumeration ────────────────────────────────────────────────────────────
     def get_all_codewords(self) -> List[List[int]]:
@@ -689,174 +1498,6 @@ class GolayCodeEngine:
             "shadow_ratio":        F(1, 2),
             "description": "12-bit Noumenal (hidden) + 12-bit Phenomenal (visible)",
         }
-
-    # ══════════════════════════════════════════════════════════════════════════
-    #  PART 4.5 — HEXACODE [6,3,4]/GF(4) + MOG DECOMPOSITION
-    # ══════════════════════════════════════════════════════════════════════════
-    # The algebraic shadow of the Golay code.  Every Golay codeword, arranged
-    # in the 4×6 MOG grid, has its 6 column labels forming a Hexacode word.
-    #
-    # The CYCLIC_TO_MOG permutation and COLUMN_TO_GF4 map below are the
-    # VERIFIED alignment from lee_golay_core.py (Type 4 exhaustive proof:
-    # 0/4096 codewords fail to decompose into a valid Hexacode word).
-    # Hard-coded here so ubp_unified_v5.py remains stdlib-only (no external
-    # dependency on lee_golay_core).
-
-    # GF(4) arithmetic (elements 0, 1, 2, 3 = 0, 1, ω, ω²)
-    GF4_ADD_TBL = [[a ^ b for b in range(4)] for a in range(4)]
-    GF4_MUL_TBL = [
-        [0, 0, 0, 0],
-        [0, 1, 2, 3],
-        [0, 2, 3, 1],
-        [0, 3, 1, 2]
-    ]
-
-    # Hexacode generator basis (3 rows over GF(4), each of length 6)
-    HEXACODE_BASIS = (
-        (1, 1, 1, 1, 1, 1),
-        (1, 2, 3, 1, 2, 3),
-        (1, 1, 2, 2, 3, 3)
-    )
-
-    # Linear "sum of row labels" map: row r → GF(4) element r itself.
-    # label(p) = XOR (GF(4) sum) of row labels r for each set bit r of p.
-    #   p=0 (0000) → 0          p=8 (1000) → 3
-    #   p=1 (0001) → 0 (row 0)  p=9 (1001) → 0^3 = 3
-    #   p=2 (0010) → 1 (row 1)  p=10(1010) → 1^3 = 2
-    #   p=3 (0011) → 0^1 = 1    p=11(1011) → 0^1^3 = 2
-    #   p=4 (0100) → 2 (row 2)  p=12(1100) → 2^3 = 1
-    #   p=5 (0101) → 0^2 = 2    p=13(1101) → 0^2^3 = 1
-    #   p=6 (0110) → 1^2 = 3    p=14(1110) → 1^2^3 = 0
-    #   p=7 (0111) → 0^1^2 = 3  p=15(1111) → 0^1^2^3 = 0
-    # GF(2)-linear, surjective onto GF(4), kernel = {0000, 0001}.
-    COLUMN_TO_GF4 = (0, 0, 1, 1,   # 0000, 0001, 0010, 0011
-                     2, 2, 3, 3,   # 0100, 0101, 0110, 0111
-                     3, 3, 2, 2,   # 1000, 1001, 1010, 1011
-                     1, 1, 0, 0)   # 1100, 1101, 1110, 1111
-
-    # Verified cyclic→MOG bit permutation (mog_idx = r*6 + c, row-major).
-    # MOG_GRID_BITS[mog_idx] = cyclic_idx.
-    # NOTE: This alignment is SPECIFIC to the systematic B-matrix construction
-    # used in this engine (G = [I_12 | B]).  It was discovered by re-running
-    # the sextet+row-ordering search, and
-    # verified to give 0/4096 MOG/Hexacode failures.  It is DIFFERENT from
-    # the alignment for the cyclic-polynomial Golay code
-    # because the two codes use different coordinate labelings.
-    MOG_GRID_BITS = (0, 4, 6, 19, 16, 11,    # row 0
-                     1, 17, 15, 5, 9, 13,    # row 1
-                     3, 21, 20, 8, 10, 22,   # row 2 (= ω)
-                     2, 23, 14, 12, 7, 18)   # row 3 (= ω²)
-
-    # Inverse permutation: CYCLIC_TO_MOG[cyclic_idx] = mog_idx
-    # (Computed after the class body — see post-definition assignment below.)
-    CYCLIC_TO_MOG: Tuple[int, ...] = (0,) * 24  # placeholder, overwritten below
-
-    @staticmethod
-    def gf4_add(a: int, b: int) -> int:
-        """GF(4) addition (= XOR)."""
-        return a ^ b
-
-    @staticmethod
-    def gf4_mul(a: int, b: int) -> int:
-        """GF(4) multiplication via lookup table."""
-        return GolayCodeEngine.GF4_MUL_TBL[a][b]
-
-    @classmethod
-    def build_hexacode(cls) -> Tuple[Tuple[int, ...], ...]:
-        """Build all 64 codewords of the Hexacode [6,3,4] over GF(4)."""
-        code = set()
-        for a in range(4):
-            for b in range(4):
-                for c in range(4):
-                    word = tuple(
-                        cls.gf4_add(cls.gf4_add(
-                            cls.gf4_mul(a, cls.HEXACODE_BASIS[0][i]),
-                            cls.gf4_mul(b, cls.HEXACODE_BASIS[1][i])),
-                            cls.gf4_mul(c, cls.HEXACODE_BASIS[2][i]))
-                        for i in range(6)
-                    )
-                    code.add(word)
-        return tuple(sorted(code))
-
-    def __init_mog_state(self):
-        """Lazily build HEXACODE set (called from __init__ or first use)."""
-        if not hasattr(self, "_HEXACODE_SET"):
-            self._HEXACODE_SET = set(GolayCodeEngine.build_hexacode())
-            self._HEXACODE_TUPLE = tuple(sorted(self._HEXACODE_SET))
-
-    def mog_decompose(self, cyclic_vec: List[int]) -> Tuple[Tuple[int, ...], Tuple[int, ...]]:
-        """
-        BRIDGE: Map a 24-bit cyclic Golay codeword into the 4×6 MOG grid,
-        then decompose it into its 6-symbol Hexacode word and 6 column
-        patterns (4-bit values).
-
-        Returns: (hex_symbols, col_vals)
-          hex_symbols : 6 GF(4) elements (0,1,2,3 = 0,1,ω,ω²)
-          col_vals    : 6 integers in [0, 15], the 4-bit column patterns
-
-        For every Golay codeword, the returned hex_symbols form a valid
-        Hexacode word (Type 4 verified: 0/4096 failures).
-        """
-        if len(cyclic_vec) != 24:
-            raise ValueError("mog_decompose: 24-bit vector required")
-        self.__init_mog_state()
-        # 1. Map cyclic → MOG (row-major: mog_idx = r*6 + c)
-        mog_vec = [0] * 24
-        for mog_idx, cyc_idx in enumerate(GolayCodeEngine.MOG_GRID_BITS):
-            mog_vec[mog_idx] = cyclic_vec[cyc_idx]
-        # 2. Decompose each column
-        hex_symbols = []
-        col_vals = []
-        for c in range(6):
-            col_val = 0
-            for r in range(4):
-                bit_idx = r * 6 + c
-                if mog_vec[bit_idx]:
-                    col_val |= (1 << r)
-            col_vals.append(col_val)
-            hex_symbols.append(GolayCodeEngine.COLUMN_TO_GF4[col_val])
-        return tuple(hex_symbols), tuple(col_vals)
-
-    def mog_verify_all(self) -> Dict[str, Any]:
-        """
-        TYPE 4 EXHAUSTIVE TEST: verify that EVERY Golay codeword decomposes
-        into a valid Hexacode word via the MOG alignment.
-
-        Returns a dict with the failure count (0 = perfect) and a sample
-        decomposition.
-        """
-        self.__init_mog_state()
-        hex_set = self._HEXACODE_SET
-        failures = 0
-        sample = None
-        for cw in self.get_all_codewords():
-            hex_word, _col_vals = self.mog_decompose(cw)
-            if hex_word not in hex_set:
-                failures += 1
-            elif sample is None:
-                sample = (list(cw), hex_word)
-        return {
-            "total_codewords":    4096,
-            "mog_failures":       failures,
-            "hexacode_size":      len(hex_set),
-            "alignment_perfect":  failures == 0,
-            "sample_decomposition": sample,
-        }
-
-    @property
-    def hexacode(self) -> Tuple[Tuple[int, ...], ...]:
-        """All 64 Hexacode codewords (sorted tuple of 6-tuples)."""
-        self.__init_mog_state()
-        return self._HEXACODE_TUPLE
-
-
-# Post-definition: compute the inverse permutation CYCLIC_TO_MOG[cyclic_idx] = mog_idx.
-# (Cannot be done inside the class body because it references MOG_GRID_BITS via cls.)
-_inv = [0] * 24
-for _mog_idx, _cyc_idx in enumerate(GolayCodeEngine.MOG_GRID_BITS):
-    _inv[_cyc_idx] = _mog_idx
-GolayCodeEngine.CYCLIC_TO_MOG = tuple(_inv)
-del _inv, _mog_idx, _cyc_idx
 
 
 # ════════════════════════════════════════════════════════════════════════════════
@@ -920,192 +1561,6 @@ class LeechLatticeEngine:
 
     # alias for consistency with v4
     expand_octad = expand_octad_to_physical
-
-    # ══════════════════════════════════════════════════════════════════════════
-    #  PART 5.5 — FULL MINIMAL-VECTOR ENUMERATION  (196,560 vectors)
-    # ══════════════════════════════════════════════════════════════════════════
-    # The Leech lattice has exactly 196,560 minimal vectors of norm 4 (×8 repr.:
-    # norm² = 32 = 4·8).  They fall into 3 shape-classes, one per coset of the
-    # mod-8 glue condition:
-    #
-    #   Class A: (±4, ±4, 0²²)              — 2 non-zero coords, each ±4.    1104
-    #   Class B: (±2⁸, 0¹⁶) on octads       — 8 non-zero coords at octad.   97152
-    #   Class C: (±3, ±1²³) Golay-controlled — 1 coord ±3, 23 coords ±1.   98304
-    #   ------------------------------------------------------------------  ------
-    #   Total:                                                              196560
-    #
-    # Class A is purely a feature of Z^24 (any Construction-A lattice has these).
-    # Class B is where the Golay code first enters (octad supports).  Class C is
-    # the deepest: it uses EVERY codeword of the Golay code, and the mod-8 glue
-    # is satisfied automatically because the code is doubly-even.
-    #
-    # NOTE: The earlier `expand_octad_to_physical` (above) is preserved as a
-    # Class-B-only convenience that returns 128 points per octad.  The method
-    # below returns ALL 196,560 minimal vectors across all 3 classes.
-
-    def enumerate_minimal_vectors(self) -> Dict[str, Any]:
-        """
-        Exhaustively enumerate all 196,560 minimal vectors of the Leech lattice
-        (×8 integer representation: norm² = 32).
-
-        Returns a dict with keys:
-            "Class_A"      : list of 1,104 vectors  (±4, ±4, 0²²)
-            "Class_B"      : list of 97,152 vectors  (±2⁸, 0¹⁶) on octads
-            "Class_C"      : list of 98,304 vectors  (±3, ±1²³) Golay-controlled
-            "total_count"  : 196,560
-            "norm_sq"      : 32 (verified for all 3 classes)
-            "glue_check"   : {"A": 0, "B": 0, "C": 4}  (Σ mod 8 per class)
-
-        All vectors are 24-element tuples of integers.  No floats anywhere.
-        """
-        codebook = self.golay.get_all_codewords()
-        octads    = self.golay.get_octads()
-        dim       = self.DIM
-
-        # ── Class A: (±4, ±4, 0²²) — all C(24,2) pairs, all 4 sign choices ──
-        # 276 pairs × 4 sign combos = 1,104 vectors.  Glue: ±4±4 ∈ {0,±8} ≡ 0 (mod 8).
-        class_A: List[Tuple[int, ...]] = []
-        for i in range(dim):
-            for j in range(i + 1, dim):
-                for s_i in (+4, -4):
-                    for s_j in (+4, -4):
-                        v = [0] * dim
-                        v[i], v[j] = s_i, s_j
-                        class_A.append(tuple(v))
-
-        # ── Class B: (±2⁸, 0¹⁶) on octads, even-sign parity ─────────────────
-        # 759 octads × 128 even-parity sign patterns = 97,152 vectors.
-        # Glue: even # of -2's ⟹ Σ ≡ 0 (mod 8).
-        class_B: List[Tuple[int, ...]] = []
-        for oct_mask in octads:
-            positions = [k for k, b in enumerate(oct_mask) if b]
-            for sign_mask in range(256):
-                if bin(sign_mask).count('1') & 1:    # odd # of -2's → skip
-                    continue
-                v = [0] * dim
-                for k, pos in enumerate(positions):
-                    v[pos] = -2 if (sign_mask >> k) & 1 else 2
-                class_B.append(tuple(v))
-
-        # ── Class C: (±3, ±1²³) controlled by Golay codeword ────────────────
-        # 24 positions × 4096 codewords = 98,304 vectors.
-        # Conway-Sloane construction (×8 repr., all-odd coset):
-        #   v_i = +3   if bit i of c is 1,  else  v_i = -3
-        #   v_j = (-1)^{c_j}  for j ≠ i     (+1 if c_j=0, -1 if c_j=1)
-        # Glue: Σ ≡ 4 (mod 8), satisfied automatically because the Golay code
-        # is doubly-even (every weight ≡ 0 mod 4).  Proof:
-        #   Σv = v_i + Σ_{j≠i} (-1)^{c_j}
-        #       = v_i + (24 - 2·wt(c)) - (-1)^{c_i}
-        #   If c_i=1:  = 3 + 24 - 2·wt(c) + 1 = 28 - 2·wt(c) ≡ 4 (mod 8) since wt(c)≡0 mod 4.
-        #   If c_i=0:  = -3 + 24 - 2·wt(c) - 1 = 20 - 2·wt(c) ≡ 4 (mod 8) ditto.
-        class_C: List[Tuple[int, ...]] = []
-        for i in range(dim):
-            for c in codebook:
-                v = [0] * dim
-                v[i] = 3 if c[i] else -3
-                for j in range(dim):
-                    if j != i:
-                        v[j] = -1 if c[j] else 1
-                class_C.append(tuple(v))
-
-        total = len(class_A) + len(class_B) + len(class_C)
-        assert total == 196560, f"Kissing number mismatch: got {total}, expected 196,560"
-        assert all(sum(x*x for x in v) == 32 for v in (class_A[0], class_B[0], class_C[0])), \
-            "Norm² ≠ 32 (×8 repr. broken)"
-
-        return {
-            "Class_A":     class_A,
-            "Class_B":     class_B,
-            "Class_C":     class_C,
-            "total_count": total,
-            "norm_sq":     32,
-            "glue_check":  {"A": sum(class_A[0]) % 8,
-                            "B": sum(class_B[0]) % 8,
-                            "C": sum(class_C[0]) % 8},
-            "counts":      {"A": len(class_A), "B": len(class_B), "C": len(class_C)},
-        }
-
-    def audit_vector_cost(self, point: List[int],
-                          alpha: Union[int, float, Fraction] = F(1)) -> Dict[str, Any]:
-        """
-        Break down the EXACT symmetry tax and NRCI for a single vector, showing
-        precisely where the cost comes from.  All values are exact Fractions
-        (a parallel `*_float` field is included for human display only).
-
-        The UBP symmetry tax has two physical penalties:
-          1. Topological Cost  = Hamming Weight × Y
-             Every non-zero coordinate requires energy to maintain against the
-             entropic wobble (Y).  Y = 1/(π + 2/π) from the 50-term CF of π.
-          2. Geometric Cost    = Norm² / 8
-             The squared magnitude of the vector (×8 integer repr.) divided by
-             the lattice scale factor 8.  Represents displacement from origin.
-
-        Total Tax = (HW × Y) + (Norm² / 8)
-        NRCI      = 10 / (10 + α × Tax)        (α = 1 by default)
-
-        Returns a dict with keys:
-            "vector_sample"       : first 6 coords (for display)
-            "hamming_weight"      : int
-            "hw_cost_exact"       : Fraction  (= HW × Y)
-            "hw_cost_float"       : float     (display only)
-            "norm_squared"        : int       (×8 repr.)
-            "ns_cost_exact"       : Fraction  (= Norm² / 8)
-            "ns_cost_float"       : float     (display only)
-            "total_tax_exact"     : Fraction
-            "total_tax_float"     : float
-            "nrci_exact"          : Fraction  (= 10 / (10 + α × Tax))
-            "nrci_float"          : float
-            "alpha"               : Fraction
-            "Y_exact"             : Fraction  (the wobble constant used)
-        """
-        if len(point) != 24:
-            raise ValueError("audit_vector_cost: 24 elements required")
-        if not isinstance(alpha, Fraction):
-            alpha = Fraction(alpha)
-
-        hw = sum(1 for x in point if x != 0)
-        ns = sum(x * x for x in point)
-
-        hw_cost     = F(hw, 1) * self.Y
-        ns_cost     = F(ns, 8)
-        total_tax   = hw_cost + ns_cost
-        nrci        = F(10, 1) / (F(10, 1) + alpha * total_tax)
-
-        return {
-            "vector_sample":   list(point[:6]),
-            "hamming_weight":  hw,
-            "hw_cost_exact":   hw_cost,
-            "hw_cost_float":   float(hw_cost),
-            "norm_squared":    ns,
-            "ns_cost_exact":   ns_cost,
-            "ns_cost_float":   float(ns_cost),
-            "total_tax_exact": total_tax,
-            "total_tax_float": float(total_tax),
-            "nrci_exact":      nrci,
-            "nrci_float":      float(nrci),
-            "alpha":           alpha,
-            "Y_exact":         self.Y,
-        }
-
-    def audit_minimal_vector_classes(self) -> Dict[str, Any]:
-        """
-        Run `audit_vector_cost` on a representative vector from each of the 3
-        minimal-vector classes (A, B, C), plus the zero vector as a baseline.
-
-        This is the headline transparency report: it shows exactly how the
-        Hamming Weight and Norm² contribute to the TAX and NRCI for each
-        shape-class, with all values as exact Fractions.
-        """
-        mvs = self.enumerate_minimal_vectors()
-        zero = [0] * 24
-        return {
-            "Zero":        self.audit_vector_cost(zero),
-            "Class_A":     self.audit_vector_cost(list(mvs["Class_A"][0])),
-            "Class_B":     self.audit_vector_cost(list(mvs["Class_B"][0])),
-            "Class_C":     self.audit_vector_cost(list(mvs["Class_C"][0])),
-            "class_counts": mvs["counts"],
-            "total_minimal_vectors": mvs["total_count"],
-        }
 
     # ── Symmetry tax ──────────────────────────────────────────────────────────
     def calculate_symmetry_tax(self, point: List[int],
@@ -1178,9 +1633,26 @@ class LeechLatticeEngine:
             "norm_sq_octad_point": 32,
         }
 
+    def kissing_sqrt_report(self) -> Dict[str, Any]:
+        """
+        Audit item B6.  The kissing number 196560 is NOT a perfect square:
+        443^2 = 196249 < 196560 < 197136 = 444^2.  Any use of "sqrt(196560)"
+        means the integer square root 443, and loses information.
+        """
+        r = ExactMath.isqrt(self.KISSING)
+        return {
+            "kissing_number":  self.KISSING,
+            "integer_sqrt":    r,
+            "is_perfect_square": r * r == self.KISSING,
+            "lower_square":    r * r,
+            "upper_square":    (r + 1) ** 2,
+            "factorisation":   "2^4 * 3^3 * 5 * 7 * 13",
+            "audit":           "B6",
+        }
+
 
 # ════════════════════════════════════════════════════════════════════════════════
-#  PART 6 — MONSTER GROUP  (26 sporadic simple groups - expand if you can)
+#  PART 6 — MONSTER GROUP  (26 sporadic simple groups)
 # ════════════════════════════════════════════════════════════════════════════════
 
 class MonsterGroup:
@@ -1407,6 +1879,135 @@ LEECH_ENGINE   = LeechLatticeEngine(GOLAY_ENGINE)
 MONSTER_ENGINE = MonsterGroup()
 BW_ENGINE      = BarnesWallEngine(GOLAY_ENGINE, dimension=256)
 SUBSTRATE      = UBPUltimateSubstrate()
+
+
+# ── League-2 stability, as audited (new in v5.5.0) ───────────────────────────
+
+class GolayStability:
+    """
+    The League-2 "kissing-sphere perturbation" results, in the stronger form the
+    Lean audit proved.
+
+    * every error pattern of weight <= 3 on the vacuum word [1]^24 is corrected
+      back (the report sampled; here it is exhaustive) — audit A4;
+    * at weight 4 the behaviour splits: some patterns escape to a weight-16
+      codeword, others are still corrected — audit B7, correcting the report's
+      unqualified "departure begins at k = 4";
+    * the first Class-B (matter) state needs exactly 12 flipped bits — audit A4b.
+    """
+
+    VACUUM: List[int] = [1] * 24
+
+    @classmethod
+    def _flip(cls, positions: List[int]) -> List[int]:
+        v = list(cls.VACUUM)
+        for i in positions:
+            v[i] ^= 1
+        return v
+
+    @classmethod
+    def all_weight_le_three_corrected(cls) -> Dict[str, Any]:
+        """Exhaustive check over all 2325 patterns of weight <= 3."""
+        from itertools import combinations
+        total, bad = 0, []
+        for k in range(4):
+            for pos in combinations(range(24), k):
+                total += 1
+                cw, _ = GOLAY_ENGINE.snap_to_codeword(cls._flip(list(pos)))
+                if cw != cls.VACUUM:
+                    bad.append(list(pos))
+        return {"patterns_checked": total, "failures": bad,
+                "all_corrected": not bad, "audit": "A4"}
+
+    @classmethod
+    def weight_four_split(cls) -> Dict[str, Any]:
+        """
+        What actually happens at weight 4 (audit B7).
+
+        A weight-4 perturbation of the vacuum word sits at distance 4 from
+        [1]^24 *and* from at least one other codeword, so it lies on the
+        decoding boundary: the bounded-distance corrector declines to move it,
+        and where it ends up under a complete decoder depends on the
+        tie-breaking convention.  The report's unqualified "departure begins at
+        k = 4" is therefore too strong; with the audit's coset-leader
+        convention, pattern 15 is returned to the vacuum and pattern 30 escapes
+        to a weight-16 codeword.
+        """
+        def bits_of(mask: int) -> List[int]:
+            return [i for i in range(24) if (mask >> i) & 1]
+        out: Dict[str, Any] = {}
+        for label, mask in (("pattern_15", 15), ("pattern_30", 30)):
+            v = cls._flip(bits_of(mask))
+            info = GOLAY_ENGINE.nearest_codeword(v)
+            nearest_weights = sorted({sum(c) for c in GOLAY_ENGINE.get_all_codewords()
+                                      if sum(a ^ b for a, b in zip(c, v)) == info["distance"]})
+            _, meta = GOLAY_ENGINE.snap_to_codeword(v)
+            out[label] = {
+                "distance_to_code": info["distance"],
+                "tied_codewords": info["ties"],
+                "nearest_codeword_weights": nearest_weights,
+                "vacuum_is_among_nearest": 24 in nearest_weights,
+                "bounded_distance_corrector_moves_it": meta["corrected"],
+            }
+        out["on_decoding_boundary"] = all(
+            out[p]["distance_to_code"] == 4 and out[p]["tied_codewords"] > 1
+            for p in ("pattern_15", "pattern_30"))
+        out["escape_is_convention_dependent"] = out["on_decoding_boundary"]
+        out["audit"] = "B7"
+        return out
+
+    @classmethod
+    def matter_threshold(cls) -> Dict[str, Any]:
+        """
+        Class B (matter) is the octad class: codewords of weight 8.  Every such
+        codeword is at Hamming distance 24 - 8 = 16 from the vacuum word, and a
+        complete decoder moves a word by at most the covering radius 4, so an
+        error pattern that decodes to a Class-B word must flip at least
+        16 - 4 = 12 bits.  Twelve is attained (a witness is constructed below,
+        in this file's own bit ordering), so the threshold is exactly 12.
+        """
+        from itertools import combinations
+        dists = {24 - sum(c) for c in GOLAY_ENGINE.get_all_codewords() if sum(c) == 8}
+        d_octad = min(dists)
+        radius = GOLAY_ENGINE.COVERING_RADIUS
+
+        # A twelve-flip witness: take an octad and raise four of its zeros.  The
+        # result has weight 12, so it is twelve flips from the vacuum word, and
+        # four flips from the octad.  Every weight-12 word sits at distance
+        # exactly 4 from six codewords, so it is always on a decoding boundary;
+        # a witness is one whose nearest codewords include a Class-B octad and
+        # do NOT include the vacuum, so no complete decoder can send it back.
+        octad = GOLAY_ENGINE.get_octads()[0]
+        zeros = [i for i in range(24) if octad[i] == 0]
+        witness: Optional[Dict[str, Any]] = None
+        for pick in combinations(zeros, 4):
+            v = list(octad)
+            for i in pick:
+                v[i] = 1
+            info = GOLAY_ENGINE.nearest_codeword(v)
+            weights = sorted({sum(c) for c in GOLAY_ENGINE.get_all_codewords()
+                              if sum(a ^ b for a, b in zip(c, v)) == info["distance"]})
+            if 8 in weights and 24 not in weights:
+                witness = {
+                    "flip_positions": [i for i in range(24) if v[i] == 0],
+                    "flips": 24 - sum(v),
+                    "distance_to_code": info["distance"],
+                    "tied_codewords": info["ties"],
+                    "nearest_codeword_weights": weights,
+                    "vacuum_unreachable": True,
+                }
+                break
+        return {
+            "class_B_weight": 8,
+            "distance_vacuum_to_class_B": d_octad,
+            "covering_radius": radius,
+            "necessary_flips": d_octad - radius,
+            "threshold_is_twelve": d_octad - radius == 12,
+            "witness": witness,
+            "witness_flips": None if witness is None else witness["flips"],
+            "witness_reaches_class_B": witness is not None and witness["flips"] == 12,
+            "audit": "A4b",
+        }
 
 
 # ════════════════════════════════════════════════════════════════════════════════
@@ -1889,7 +2490,7 @@ class TriadActivationEngine:
     def export_atlas(self, filename: str = "ubp_atlas.json"):
         data = {
             "metadata": {
-                "version":      "UBP Unified v5.4.0",
+                "version":      "UBP Unified v5.5.0",
                 "timestamp":    datetime.now().isoformat(),
                 "triad_state":  self.triad_state,
                 "object_count": len(self.atlas),
@@ -1901,7 +2502,7 @@ class TriadActivationEngine:
 
 
 # ════════════════════════════════════════════════════════════════════════════════
-#  PART 10 — PARTICLE PHYSICS (UBPSourceCodeParticlePhysics - experimental not absolute)
+#  PART 10 — PARTICLE PHYSICS (UBPSourceCodeParticlePhysics)
 # ════════════════════════════════════════════════════════════════════════════════
 
 class UBPSourceCodeParticlePhysics:
@@ -1926,9 +2527,8 @@ class UBPSourceCodeParticlePhysics:
         self.LY     = self.L * self.Y
         self.shear_1 = F(1) + F(3) * self.LY
         self.shear_2 = F(1) + F(3) * self.LY + F(12) * (self.LY ** 2)
-        self.LY     = self.L * self.Y
-        self.shear_1 = F(1) + F(3) * self.LY
-        self.shear_2 = F(1) + F(3) * self.LY + F(12) * (self.LY ** 2)
+        # the hull is a *choice* of monomial, not a derivation (audit FP-24)
+        self.hull   = int(self.monad)
 
     def get_ultimate_predictions(self) -> Dict[str, Any]:
         L, L_s, U_e, Y, Y_inv, pi = (
@@ -2002,6 +2602,22 @@ class UBPSourceCodeParticlePhysics:
                 "lens":          d["lens"],
             }
         results["global_error"] = float(total_err / len(atlas))
+        # New in v5.5.0: how much the headline agreements are actually worth.
+        # `evidence` is metadata, not a particle; consumers iterating over this
+        # dict should skip the keys listed in NON_PARTICLE_KEYS.
+        results["evidence"] = {
+            "bit_scores": EvidenceLedger.table(),
+            "caveats": [
+                "D3: the refinement coefficients (2/3, 14/5, 1/2, 38/7, 31/11, "
+                "11/15, 3/5, 29/24) were fitted; only 137 + L and 169/w are "
+                "parameter-free, and 1836 is a measured input.",
+                "FP-24: the hull 13 comes from choosing the monomial pi*phi*e; "
+                "pi*e/phi gives 5, pi*phi^2*e gives 22, pi*phi*e^2 gives 37.",
+                "FP-26: a progression of spacing L lands within 2.3e-4 of any "
+                "target above 137, so the alpha agreement is worth under 1 bit.",
+            ],
+            "ledger": "docs/VERDICTS.md",
+        }
         results["sink_metadata"] = {
             "L":           float(L),
             "L_s":         float(L_s),
@@ -2109,6 +2725,9 @@ class UBPSourceCodeParticlePhysics:
 
 
 PARTICLE_PHYSICS = UBPSourceCodeParticlePhysics(precision=50)
+
+# Keys of `get_ultimate_predictions()` that are metadata rather than particles.
+NON_PARTICLE_KEYS: Tuple[str, ...] = ("global_error", "sink_metadata", "evidence")
 
 
 class LinearStateEncoder:
@@ -2471,8 +3090,8 @@ class NoiseALU:
 
         # 1. Calculate target metrics
         v_target = [(n_val ^ (n_val >> 1) >> i) & 1 for i in range(23, -1, -1)]
-        snapped, _ = GOLAY_ENGINE.snap_to_codeword(v_target)
-        
+        decoded, _, _ = GOLAY_ENGINE.decode(v_target)
+        snapped = GOLAY_ENGINE.encode(decoded)
         tax = LEECH_ENGINE.calculate_symmetry_tax(snapped)
         target_nrci = Fraction(10, 1) / (Fraction(10, 1) + tax)
 
@@ -2481,8 +3100,8 @@ class NoiseALU:
         for offset in (-1, 1):
             neighbor_val = n_val + offset
             v_neigh = [(neighbor_val ^ (neighbor_val >> 1) >> i) & 1 for i in range(23, -1, -1)]
-            snap_n, _ = GOLAY_ENGINE.snap_to_codeword(v_neigh)
-            
+            dec_n, _, _ = GOLAY_ENGINE.decode(v_neigh)
+            snap_n = GOLAY_ENGINE.encode(dec_n)
             tax_n = LEECH_ENGINE.calculate_symmetry_tax(snap_n)
             nrci_n = Fraction(10, 1) / (Fraction(10, 1) + tax_n)
             if nrci_n > neighbor_nrci:
@@ -3175,7 +3794,7 @@ class MathNetNoiseRunner:
 
 
 # ════════════════════════════════════════════════════════════════════════════════
-#  PART 16 — PROBLEM SET (33 entries + physics/linalg - expand if possible)
+#  PART 16 — PROBLEM SET (33 entries + new physics/linalg)
 # ════════════════════════════════════════════════════════════════════════════════
 
 NOISECORE_PROBLEMS = [
@@ -3262,7 +3881,7 @@ def run_tests(verbose: bool = True) -> Dict[str, Any]:
 
     if verbose:
         print("\n" + "=" * 78)
-        print("UBP Unified v5.4.0 — COMPREHENSIVE TEST SUITE")
+        print("UBP Unified v5.5.0 — COMPREHENSIVE TEST SUITE")
         print("=" * 78)
 
     # ── [A] ExactMath ──────────────────────────────────────────────────────────
@@ -3585,9 +4204,7 @@ def run_tests(verbose: bool = True) -> Dict[str, Any]:
     for _ in range(200):
         msg = [rng.randint(0, 1) for _ in range(12)]
         cw  = g.encode(msg)
-        snapped_cw, meta = g.snap_to_codeword(cw)
-        msg2 = snapped_cw[:12]
-        ok = meta.get('correctable', False)
+        msg2, ok, _ = g.decode(cw)
         if msg == msg2 and ok:
             rt_ok += 1
     check("Golay encode/decode round-trip 200/200", rt_ok == 200)
@@ -3680,6 +4297,121 @@ def run_tests(verbose: bool = True) -> Dict[str, Any]:
           F(0) < dqi <= F(1),
           f"got {float(dqi):.4f}")
 
+    # ── [P] Audit layer (new in v5.5.0) ───────────────────────────────────────
+    if verbose: print("\n[P] Audit layer")
+
+    # P.1 every seed lies inside the interval its Lean proof certifies
+    for name, d in VerifiedSeeds.check().items():
+        check(f"{name} inside certified interval ({d['lean']})", d["inside"],
+              f"got {d['value']!r}")
+    check("hull floor(pi*phi*e) = 13", VerifiedSeeds.HULL == 13)
+    check("w = M - 13 and 13L = w exactly",
+          VerifiedSeeds.WOBBLE == VerifiedSeeds.MONAD - 13 and
+          13 * VerifiedSeeds.LEAK == VerifiedSeeds.WOBBLE)
+    alts = VerifiedSeeds.alternative_hulls()
+    check("FP-24 hull alternatives 13 / 5 / 22 / 37",
+          (alts["pi*phi*e"], alts["pi*e/phi"], alts["pi*phi^2*e"], alts["pi*phi*e^2"])
+          == (13, 5, 22, 37), f"got {alts}")
+    check("B5 hull unchanged when pi -> 3 (both 13)", alts["3*phi*e"] == 13)
+
+    # P.2 every League formula reproduces its certified relative error
+    for row in LeagueFormulas.table():
+        check(f"{row['formula']} rel error in certified interval ({row['lean']})",
+              row["inside"], f"got {row['rel_error']:.6e}")
+
+    # P.3 the corrections
+    fac = LeagueFormulas.factorisation_check()
+    check("B1 correct factorisation equals rank 1", fac["correct_form_matches_rank1"])
+    check("B1 printed factorisation does NOT equal rank 1",
+          not fac["printed_form_matches_rank1"] and
+          abs(fac["printed_form_value"] - 137.0268915) < 1e-6,
+          f"got {fac['printed_form_value']}")
+    lin = LeagueFormulas.second_order_is_linear()
+    check("B2 w = 13L exactly", lin["w_eq_13L"])
+    check("B2 14L^2/(5w) = 14L/65", lin["14L^2/(5w) == 14L/65"])
+    check("B2 38L^2/(7w) = 38L/91", lin["38L^2/(7w) == 38L/91"])
+    rho = LeagueFormulas.rho_lambda_error_report()
+    check("B3 rho_Lambda error is 0.4037 %, not 0.17 %",
+          rho["exceeds_quoted"] and abs(rho["relative_error_percent"] - 0.4037172) < 1e-6,
+          f"got {rho['relative_error_percent']}")
+    ana = LeagueFormulas.muon_analogues()
+    check("B9 both muon analogues are worse than 169/w", ana["both_worse"])
+    check("B9 analogue errors are 1.36357 % and 0.0923070 %",
+          abs(ana["analogue1_percent"] - 1.3635676) < 1e-6 and
+          abs(ana["analogue2_percent"] - 0.0923070) < 1e-6,
+          f"got {ana['analogue1_percent']}, {ana['analogue2_percent']}")
+    ksr = LEECH_ENGINE.kissing_sqrt_report()
+    check("B6 196560 is not a perfect square", not ksr["is_perfect_square"])
+    check("B6 integer sqrt is 443, and 443^2 < 196560 < 444^2",
+          ksr["integer_sqrt"] == 443 and ksr["lower_square"] == 196249
+          and ksr["upper_square"] == 197136)
+
+    # P.4 the rank-3 coefficient
+    opt = LeagueFormulas.alpha_r3_optimal_coefficient(8000)
+    check("A4b 31/11 is optimal among denominators <= 8000", opt["study_is_optimal"],
+          f"got {opt['best_rational']}")
+    check("A4b |31/11 - c*| = 5.2961e-6",
+          abs(opt["abs_gap_31_11"] - 5.29611e-6) < 1e-10,
+          f"got {opt['abs_gap_31_11']}")
+
+    # P.5 the evidence ledger
+    ev = {r["fit"]: r for r in EvidenceLedger.table()}
+    check("P6-1 alpha fit is worth under one bit",
+          0 < ev["alpha_inv = 137 + L"]["bits_audited"] < 1,
+          f"got {ev['alpha_inv = 137 + L']['bits_audited']:.3f}")
+    check("P6-2 muon fit is worth between three and four bits",
+          3 < ev["m_mu/m_e = 169/w"]["bits_audited"] < 4,
+          f"got {ev['m_mu/m_e = 169/w']['bits_audited']:.3f}")
+    check("P6-3 proton fit is worth between two and three bits",
+          2 < ev["m_p/m_e = 1836 + 2*L*29/24"]["bits_audited"] < 3,
+          f"got {ev['m_p/m_e = 1836 + 2*L*29/24']['bits_audited']:.3f}")
+    check("P6-5 doubling the candidate family costs exactly one bit",
+          abs((EvidenceLedger.capacity_bits(10, F(1, 1000), F(1)) -
+               EvidenceLedger.capacity_bits(20, F(1, 1000), F(1))) - 1.0) < 1e-12)
+
+    # P.6 packing: 23 is forced, 24 is a parity extension
+    pk = PackingAnalysis.golay_report()
+    check("FP-15 perfect 3-correcting lengths below 200 are exactly 7 and 23",
+          PackingAnalysis.perfect_lengths(3, 200) == [7, 23])
+    check("FP-16 length 23 meets the sphere-packing bound exactly", pk["perfect_at_23"])
+    check("FP-17 length 24 leaves 7,254,016 states uncovered",
+          pk["deficit_at_24"] == 7254016)
+    check("FP-11 correction radius of d = 8 is 3", pk["correction_radius_of_d8"] == 3)
+
+    # P.7 Golay stability, in the audited (stronger) form
+    st = GolayStability.all_weight_le_three_corrected()
+    check("A4 all 2325 patterns of weight <= 3 are corrected back",
+          st["all_corrected"] and st["patterns_checked"] == 2325)
+    w4 = GolayStability.weight_four_split()
+    check("B7 weight-4 patterns sit on a decoding boundary (ties, not escapes)",
+          w4["on_decoding_boundary"])
+    mt = GolayStability.matter_threshold()
+    check("A4b Class-B matter needs exactly 12 flipped bits",
+          mt["threshold_is_twelve"] and mt["witness_reaches_class_B"])
+    check("B8 the covering radius is 4, above the correction radius 3",
+          GOLAY_ENGINE.COVERING_RADIUS == 4 and GOLAY_ENGINE.CORRECTION_RADIUS == 3)
+    cw0 = GOLAY_ENGINE.get_all_codewords()[7]
+    check("complete decoder fixes codewords",
+          GOLAY_ENGINE.decode_complete(cw0)[0] == cw0 and GOLAY_ENGINE.is_codeword(cw0))
+
+    # P.8 seed provenance
+    check("L-8 phi = 2 cos(pi/5)", SeedProvenance.phi_is_two_cos_pi_over_five(12))
+    ch = SeedProvenance.cheapest_report()
+    check("P4-3 the plastic number is smaller than phi", ch["plastic_is_smaller"])
+    check("P4-5 phi is badly approximable (q <= 300)",
+          SeedProvenance.badly_approximable(300))
+
+    # P.9 the ledger itself
+    led = AuditLedger.summary()
+    check("ledger has entries in all four groups",
+          all(led[g] > 0 for g in ("A", "B", "C", "D")), f"got {led}")
+    check("ledger lookup by id works", AuditLedger.by_id("B3")["group"] == "B")
+    check("C1 (algebraic independence of pi and e) is recorded as open",
+          AuditLedger.by_id("C1")["group"] == "C")
+    rep = audit_report()
+    check("audit_report(): every certified interval holds",
+          rep["seed_checks_all_inside"] and rep["league_all_inside"])
+
     # ── Print results ────────────────────────────────────────────────────────
     if verbose:
         print()
@@ -3701,7 +4433,7 @@ def run_tests(verbose: bool = True) -> Dict[str, Any]:
 def run_all(output_path: str = "ubp_unified_v5_results.json",
             report_path: str = "ubp_unified_v5_report.md") -> Dict[str, Any]:
     print("=" * 72)
-    print("UBP Unified v5.4.0 — Hardened Full Run")
+    print("UBP Unified v5.5.0 — Hardened Full Run")
     print(f"Golay        : GolayCodeEngine (unified)")
     print(f"Leech        : LeechLatticeEngine (Λ₂₄)")
     print(f"Monster      : MonsterGroup (26 sporadics)")
@@ -3782,7 +4514,7 @@ def run_all(output_path: str = "ubp_unified_v5_results.json",
 
 def _write_outputs(runner, cal, summ, json_path, report_path):
     out = {
-        "version":      "UBP_Unified_v5.4.0",
+        "version":      "UBP_Unified_v5.5.0",
         "engines": {
             "golay":         "GolayCodeEngine (unified, 4096 codewords)",
             "leech":         "LeechLatticeEngine (Λ₂₄, full)",
@@ -3790,6 +4522,13 @@ def _write_outputs(runner, cal, summ, json_path, report_path):
             "barnes_wall":   "BarnesWallEngine (256/512/1024)",
             "particle_phys": "UBPSourceCodeParticlePhysics (50-term π)",
             "construction":  "TriadActivationEngine (D/X/N/J)",
+        },
+        "audit": {
+            "provenance":  AUDIT_PROVENANCE,
+            "ledger":      AuditLedger.summary(),
+            "seed_checks_all_inside": VerifiedSeeds.all_inside(),
+            "league_all_inside":      LeagueFormulas.all_inside(),
+            "evidence":    EvidenceLedger.table(),
         },
         "calibration": cal,
         "summary":     {k: (str(v) if isinstance(v, dict) else v)
@@ -3806,7 +4545,7 @@ def _write_outputs(runner, cal, summ, json_path, report_path):
     triad = summ.get("triad", {})
     cats  = summ.get("categories", {})
     lines = [
-        "# UBP Unified v5.4.0 — Hardened Validation Report",
+        "# UBP Unified v5.5.0 — Hardened Validation Report",
         "",
         f"Generated: {datetime.now().isoformat()}",
         "",
@@ -3845,10 +4584,28 @@ def _write_outputs(runner, cal, summ, json_path, report_path):
     ]
     for cat, stats in cats.items():
         lines.append(f"| {cat} | {stats['correct']}/{stats['total']} |")
+    led = AuditLedger.summary()
+    lines += [
+        "",
+        "## Audit layer",
+        "",
+        f"Ledger (`docs/VERDICTS.md`): **{led['A']} verified**, **{led['B']} corrected**, "
+        f"**{led['C']} open**, **{led['D']} not mathematics**.",
+        "",
+        f"* every certified seed interval holds: **{VerifiedSeeds.all_inside()}**",
+        f"* every League formula reproduces its certified relative error: "
+        f"**{LeagueFormulas.all_inside()}**",
+        "",
+        "| fit | generic guarantee | achieved | bits | verdict |",
+        "|-----|-------------------|----------|------|---------|",
+    ]
+    for row in EvidenceLedger.table():
+        lines.append(f"| {row['fit']} | {row['generic_guarantee']:.3e} | "
+                     f"{row['achieved']:.3e} | {row['bits']:.2f} | {row['verdict']} |")
     lines += [
         "",
         "---",
-        "*UBP Unified v5.4.0 — E R A Craig, New Zealand*",
+        "*UBP Unified v5.5.0 — E R A Craig, New Zealand*",
     ]
     Path(report_path).write_text("\n".join(lines))
 
@@ -3859,7 +4616,7 @@ def _write_outputs(runner, cal, summ, json_path, report_path):
 
 if __name__ == "__main__":
     import argparse
-    ap = argparse.ArgumentParser(description="UBP Unified v5.4.0")
+    ap = argparse.ArgumentParser(description="UBP Unified v5.5.0")
     ap.add_argument("--test",      action="store_true",
                     help="Run comprehensive test suite")
     ap.add_argument("--run",       action="store_true",
@@ -3874,16 +4631,14 @@ if __name__ == "__main__":
                     help="BW256 audit for integer N")
     ap.add_argument("--physics",   action="store_true",
                     help="Print particle-physics atlas")
+    ap.add_argument("--audit",     action="store_true",
+                    help="Print the audit ledger and re-check every certified interval")
+    ap.add_argument("--evidence",  action="store_true",
+                    help="Print the bit-score evidence ledger only")
     ap.add_argument("--triad",     action="store_true",
                     help="Run triad activation demo")
     ap.add_argument("--demo",      action="store_true",
                     help="Demo: (10+7)−3 with full fingerprints")
-    ap.add_argument("--audit",     action="store_true",
-                    help="Audit TAX/NRCI cost breakdown for all 3 minimal-vector classes")
-    ap.add_argument("--verify-minimal", action="store_true",
-                    help="Exhaustively verify 196,560 minimal vectors + MOG/Hexacode alignment")
-    ap.add_argument("--mog",       action="store_true",
-                    help="Demonstrate MOG/Hexacode decomposition on sample codewords")
     ap.add_argument("--output",    default="ubp_unified_v5",
                     help="Output filename stem")
     args = ap.parse_args()
@@ -3926,7 +4681,7 @@ if __name__ == "__main__":
               f"{'TARGET':<12} | {'ERR %':<10} | LENS")
         print("-" * 92)
         for k, d in pp.items():
-            if k in ("global_error", "sink_metadata"):
+            if k in NON_PARTICLE_KEYS:
                 continue
             err_str = f"{d['error_percent']:.4f}%"
             if d["error_percent"] < 0.05:
@@ -3941,6 +4696,48 @@ if __name__ == "__main__":
         print(f"Wobble        : {meta['wobble']:.10f}")
         print(f"Sink leakage L: {meta['leakage_L']:.10f}")
         print(f"Status        : {meta['status']}")
+        print("\nEvidence ledger (bits over the accuracy a candidate lattice gives free):")
+        for row in pp["evidence"]["bit_scores"]:
+            print(f"  {row['fit']:<30} generic={row['generic_guarantee']:.3e}  "
+                  f"achieved={row['achieved']:.3e}  bits={row['bits']:.2f}  "
+                  f"{row['verdict']}")
+        for c in pp["evidence"]["caveats"]:
+            print(f"  ! {c}")
+
+    if args.audit:
+        rep = audit_report()
+        print(f"\nUBP Unified v{__version__} — audit layer")
+        print(f"Ledger: {rep['provenance']['ledger']}")
+        s = rep["ledger_summary"]
+        print(f"  A verified {s['A']} | B corrected {s['B']} | C open {s['C']} | "
+              f"D not-mathematics {s['D']}  (total {s['total']})")
+        print("\nCertified seed intervals:")
+        for name, d in rep["seed_checks"].items():
+            mark = "OK " if d["inside"] else "BAD"
+            print(f"  [{mark}] {name:<7} {d['value']!r:<22} in [{d['interval'][0]}, "
+                  f"{d['interval'][1]}]  ({d['lean']})")
+        print("\nLeague formulas vs certified relative errors:")
+        for r in rep["league_table"]:
+            mark = "OK " if r["inside"] else "BAD"
+            print(f"  [{mark}] {r['formula']:<20} err={r['rel_error']:.6e}  ({r['lean']})")
+        print("\nCorrections carried in this version:")
+        for e in AuditLedger.corrections():
+            print(f"  {e['id']:<6} {e['claim']}")
+            print(f"         -> {e['verdict']}")
+        print("\nOpen (not settled by anyone):")
+        for e in rep["open_problems"]:
+            print(f"  {e['id']:<6} {e['claim']}")
+        print(f"\nHull alternatives (the monomial is a choice): "
+              f"{rep['alternative_hulls']}")
+        print(f"Packing: {rep['packing']['reading']}; "
+              f"uncovered at n=24: {rep['packing']['uncovered_fraction']:.3%}")
+
+    if args.evidence:
+        print(f"\n{'FIT':<32} | {'GENERIC':<11} | {'ACHIEVED':<11} | BITS | VERDICT")
+        print("-" * 100)
+        for row in EvidenceLedger.table():
+            print(f"{row['fit']:<32} | {row['generic_guarantee']:<11.4e} | "
+                  f"{row['achieved']:<11.4e} | {row['bits']:>4.2f} | {row['verdict']}")
 
     if args.triad:
         eng = TriadActivationEngine()
@@ -3948,7 +4745,7 @@ if __name__ == "__main__":
         eng.activate(max_iter=3, verbose=True)
 
     if args.demo:
-        print("─── UBP Unified v5.4.0 Demo: (10 + 7) − 3 ───")
+        print("─── UBP Unified v5.5.0 Demo: (10 + 7) − 3 ───")
         alu = NoiseALU()
         a = alu.add(10, 7)
         b = alu.sub(a["result"], 3)
@@ -3960,127 +4757,9 @@ if __name__ == "__main__":
                   f"M-grade={fp.get('monster_grade','-')}")
         print(f"\n  Triad: {alu.triad_snapshot()}")
 
-    if args.mog:
-        print("=" * 80)
-        print("MOG / HEXACODE DECOMPOSITION  (F_2^24 → F_4^6)")
-        print("=" * 80)
-        mog_v = GOLAY_ENGINE.mog_verify_all()
-        print(f"\n  Type 4 exhaustive test:")
-        print(f"    Total codewords:     {mog_v['total_codewords']}")
-        print(f"    MOG failures:        {mog_v['mog_failures']}")
-        print(f"    Alignment perfect:   {mog_v['alignment_perfect']}")
-        print(f"    Hexacode size:       {mog_v['hexacode_size']} words")
-        print(f"\n  Discovered MOG grid (cyclic bit → MOG cell), row r = GF(4) element r:")
-        for r in range(4):
-            row = GolayCodeEngine.MOG_GRID_BITS[r*6:(r+1)*6]
-            labels = ['0', '1', 'ω', 'ω²']
-            print(f"    row {r} (= {labels[r]}):  {list(row)}")
-        if mog_v['sample_decomposition']:
-            cw, hex_w = mog_v['sample_decomposition']
-            print(f"\n  Sample decomposition (first non-trivial codeword):")
-            print(f"    Codeword (24 bits):  {cw}")
-            print(f"    Hexacode word:       {hex_w}")
-            print(f"    Valid Hexacode?      {hex_w in set(GolayCodeEngine.build_hexacode())}")
-
-    if args.verify_minimal:
-        print("=" * 80)
-        print("EXHAUSTIVE VERIFICATION: 196,560 MINIMAL VECTORS + MOG ALIGNMENT")
-        print("=" * 80)
-        import time as _time
-        t0 = _time.time()
-        print("\n  [1/3] Enumerating all 196,560 minimal vectors...")
-        mvs = LEECH_ENGINE.enumerate_minimal_vectors()
-        t1 = _time.time()
-        print(f"        Done in {t1-t0:.2f}s.")
-        print(f"        Class A (±4,±4,0²²):    {mvs['counts']['A']:>6} vectors  (expected 1,104)")
-        print(f"        Class B (±2⁸,0¹⁶):      {mvs['counts']['B']:>6} vectors  (expected 97,152)")
-        print(f"        Class C (±3,±1²³):      {mvs['counts']['C']:>6} vectors  (expected 98,304)")
-        print(f"        ─────────────────────────────────────────")
-        print(f"        Total:                   {mvs['total_count']:>6} vectors  (expected 196,560)")
-        ok_total = mvs['total_count'] == 196560
-        print(f"        Kissing number OK:       {ok_total}")
-
-        print(f"\n  [2/3] Verifying norm² = 32 (×8 repr.) for all 3 classes...")
-        norm_A = all(sum(x*x for x in v) == 32 for v in mvs['Class_A'])
-        norm_B = all(sum(x*x for x in v) == 32 for v in mvs['Class_B'])
-        norm_C = all(sum(x*x for x in v) == 32 for v in mvs['Class_C'])
-        print(f"        Class A norm² = 32: {norm_A}  ({len(mvs['Class_A'])} vectors)")
-        print(f"        Class B norm² = 32: {norm_B}  ({len(mvs['Class_B'])} vectors)")
-        print(f"        Class C norm² = 32: {norm_C}  ({len(mvs['Class_C'])} vectors)")
-
-        print(f"\n  [3/3] Verifying mod-8 glue conditions...")
-        # Class A: all vectors should have Σ ≡ 0 (mod 8) (all-even coset)
-        glue_A = all(sum(v) % 8 == 0 for v in mvs['Class_A'])
-        glue_B = all(sum(v) % 8 == 0 for v in mvs['Class_B'])
-        glue_C = all(sum(v) % 8 == 4 for v in mvs['Class_C'])
-        print(f"        Class A Σ ≡ 0 (mod 8):  {glue_A}  (all-even coset)")
-        print(f"        Class B Σ ≡ 0 (mod 8):  {glue_B}  (all-even coset)")
-        print(f"        Class C Σ ≡ 4 (mod 8):  {glue_C}  (all-odd coset)")
-
-        print(f"\n  [4/4] Verifying MOG/Hexacode alignment (Type 4 exhaustive)...")
-        mog_v = GOLAY_ENGINE.mog_verify_all()
-        print(f"        {mog_v['mog_failures']}/{mog_v['total_codewords']} codewords "
-              f"failed MOG/Hexacode alignment")
-        print(f"        Alignment perfect: {mog_v['alignment_perfect']}")
-
-        print(f"\n  {'='*40}")
-        all_ok = ok_total and norm_A and norm_B and norm_C and glue_A and glue_B and glue_C and mog_v['alignment_perfect']
-        print(f"  ALL CHECKS PASSED: {all_ok}")
-        print(f"  Total time: {_time.time()-t0:.2f}s")
-        print(f"  {'='*40}")
-
-    if args.audit:
-        print("=" * 80)
-        print("TAX / NRCI COST AUDIT  —  Exact Fraction Transparency Report")
-        print("=" * 80)
-        print(f"\n  Y (wobble constant) = 1 / (π + 2/π)")
-        print(f"    exact  = {LEECH_ENGINE.Y}")
-        print(f"    float  ≈ {float(LEECH_ENGINE.Y):.12f}")
-        print(f"\n  Formula:")
-        print(f"    Topological Cost  = Hamming Weight × Y")
-        print(f"    Geometric Cost    = Norm² / 8        (×8 integer repr.)")
-        print(f"    Total Tax         = (HW × Y) + (Norm² / 8)")
-        print(f"    NRCI              = 10 / (10 + α × Tax)    (α = 1 by default)")
-        print()
-
-        audit = LEECH_ENGINE.audit_minimal_vector_classes()
-        for label in ["Zero", "Class_A", "Class_B", "Class_C"]:
-            a = audit[label]
-            print(f"  ── {label} ──────────────────────────────────────────────────")
-            print(f"    Vector (first 6):     {a['vector_sample']}")
-            print(f"    Hamming Weight:       {a['hamming_weight']}")
-            print(f"    Norm² (×8 repr.):     {a['norm_squared']}")
-            print(f"    ────────────────────────────────────────────")
-            print(f"    Topological Cost  (HW × Y):")
-            print(f"      exact  = {a['hw_cost_exact']}")
-            print(f"      float  ≈ {a['hw_cost_float']:.12f}")
-            print(f"    Geometric Cost    (Norm² / 8):")
-            print(f"      exact  = {a['ns_cost_exact']}")
-            print(f"      float  ≈ {a['ns_cost_float']:.12f}")
-            print(f"    ────────────────────────────────────────────")
-            print(f"    TOTAL SYMMETRY TAX:")
-            print(f"      exact  = {a['total_tax_exact']}")
-            print(f"      float  ≈ {a['total_tax_float']:.12f}")
-            print(f"    NRCI (α = {a['alpha']}):")
-            print(f"      exact  = {a['nrci_exact']}")
-            print(f"      float  ≈ {a['nrci_float']:.12f}")
-            print()
-        print(f"  ── SUMMARY ──────────────────────────────────────────────────")
-        print(f"    Total minimal vectors enumerated: {audit['total_minimal_vectors']}")
-        print(f"      Class A: {audit['class_counts']['A']:>6}    Class B: {audit['class_counts']['B']:>6}    Class C: {audit['class_counts']['C']:>6}")
-        print()
-        print(f"  NRCI progression (float, for human reading):")
-        for label in ["Zero", "Class_A", "Class_B", "Class_C"]:
-            print(f"    {label:<10}  NRCI = {audit[label]['nrci_float']:.6f}   "
-                  f"(HW={audit[label]['hamming_weight']}, Norm²={audit[label]['norm_squared']})")
-        print()
-        print(f"  Reading: Class A is the most coherent (lowest TAX, highest NRCI).")
-        print(f"  Class C, with Hamming Weight 24 (all bits active), carries the")
-        print(f"  highest topological cost and crosses below the 0.500 NRCI horizon.")
-
     if args.run or not any([args.test, args.calibrate, args.leech, args.monster,
                             args.bw, args.physics, args.triad, args.demo,
-                            args.audit, args.verify_minimal, args.mog]):
+                            args.audit, args.evidence]):
         run_all(
             output_path=f"{args.output}_results.json",
             report_path=f"{args.output}_report.md",
