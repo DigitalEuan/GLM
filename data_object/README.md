@@ -1,6 +1,6 @@
 # 'data_object/' - DATA OBJECT — Encoding System
 
-**Version:** 5.2.0  (13 August 2026)
+**Version:** 5.3.0  (20 August 2026)
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand   
 **Parent:** `../README.md`
 
@@ -37,10 +37,9 @@ data_object/ (this folder)
 | `scripts/encoding_spec.py` | EncodingSpec dataclass + scoring | imports GMHGL |
 | `scripts/kb_adapter.py` | KB parser (118 elements, 82 molecules) | to read from ../long_term_memory/ |
 | `scripts/spatial_arithmetic.py` | R(n), EML, 3D geometry | — |
-| `scripts/elements_data_object_system.py` | Complete Data Object system (Golay, encoding, interaction, prediction) | — |
 | `scripts/training_*.py` | 15 training scripts | imports GMHGL |
 | `scripts/training_accumulate.py` | Builds consolidated data | writes to long_term_memory/ |
-| `encoding_definition_attempt_04.08.26/` | **Latest experiment — warping + geometric work + calibration** | — |
+| `encoding_definition_attempt_04.08.26/` | **Latest experiment — warping + geometric work + calibration** (includes `elements_data_object_system.py`, `geometric_work.py`, `warp_optimizer.py`) | — |
 | `encoding_definition_attempt_03-08.26/` | Previous encoding attempt | — |
 | `Elements encoding experiment:test_Barnes256.txt` | 256-D Barnes-Wall Macro-Lattice spec | — |
 | `MOG_experiment_1.txt` | MOG Spatial Arithmetic + Geometric Interaction Primitives | — |
@@ -247,3 +246,5 @@ data_object/
 |---------|------|--------|
 | 4.0.0 | 2026-08-03 | Initial structure with encoding spec, elements, molecules |
 | 5.0.0 | 2026-08-04 | Added encoding_definition_attempt_04.08.26 with warping optimization, geometric work, empirical calibration. BE r=0.55, BO acc=86.8%, scale=190 kJ/mol. |
+| 5.2.0 | 2026-08-13 | Added mog_cube_1 (MOG cube GLM semantics, Lean 4 development) |
+| 5.3.0 | 2026-08-20 | Verified cross-references. Noted elements_data_object_system.py is in encoding_definition_attempt_04.08.26/scripts/ not scripts/. Added FirstPrinciples/ and Projection/ Lean sub-studies to catalog. |
