@@ -1,0 +1,954 @@
+{
+  "claims": 58,
+  "run": 58,
+  "passed": 58,
+  "failed": 0,
+  "skipped": 0,
+  "seconds": 50.49,
+  "results": [
+    {
+      "id": "C1",
+      "statement": "the register holds its concepts with exact meanings, and every defining relation checks out",
+      "status": "PASS",
+      "seconds": 0.03,
+      "detail": {
+        "concepts": 660,
+        "aliases": 40,
+        "domains": 26,
+        "distinct_meanings": 251,
+        "with_fractional_exponents": 6,
+        "with_decimal_scale": 57,
+        "with_nonzero_rank": 64,
+        "pseudo_quantities": 15,
+        "with_nominal_kind": 53,
+        "affine_scales": 6,
+        "relations_checked": 222,
+        "relations_ok": 222,
+        "relation_failures": [],
+        "relations_also_exact_at_full_meaning": 186,
+        "tensor_relations_checked": 71,
+        "tensor_relations_ok": 71,
+        "tensor_relation_failures": [],
+        "all_encodable": true
+      }
+    },
+    {
+      "id": "C2",
+      "statement": "the register spans 18 domains and uses every new field: fractional exponents, decimal scale, tensor rank, parities, nominal kinds and affine scales",
+      "status": "PASS",
+      "seconds": 0.029,
+      "detail": {
+        "domains": 26,
+        "with_fractional_exponents": 6,
+        "with_decimal_scale": 57,
+        "with_nonzero_rank": 64,
+        "pseudo_quantities": 15,
+        "with_nominal_kind": 53,
+        "affine_scales": 6
+      }
+    },
+    {
+      "id": "C3",
+      "statement": "meaning is a group: composition adds, division subtracts, and the named laws hold exactly",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "E = m c^2": true,
+        "E/m = c^2": true,
+        "(E/m)^(1/2) = c": true,
+        "E = mc^4 rejected": true
+      }
+    },
+    {
+      "id": "C4",
+      "statement": "rational powers are legal exactly when they should be: no square root of a pseudovector or of a rank-2 tensor",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "sqrt(stress) refused": true,
+        "cbrt(torque) refused": true,
+        "sqrt(energy) allowed": true,
+        "fracture toughness has L^(-1/2)": true
+      }
+    },
+    {
+      "id": "C5",
+      "statement": "the meaning module has torsion, so no injective homomorphism into a torsion-free group exists; the encoder is a bijection onto its image and a homomorphism on the torsion-free part",
+      "status": "PASS",
+      "seconds": 3.061,
+      "detail": {
+        "2 * (P-odd) is P-even": true,
+        "and is not the identity": true,
+        "torsion element exists": true,
+        "addition exact on torsion-free part": true,
+        "compose matches the product": true
+      }
+    },
+    {
+      "id": "C6",
+      "statement": "the new axes carry real distinctions: torque, hertz vs becquerel, radiance vs irradiance, h vs hbar, km vs m, axial vs polar vectors",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "torque vs energy": true,
+        "frequency vs activity": true,
+        "radiance vs irradiance": true,
+        "planck vs reduced planck": true,
+        "kilometre vs length": true,
+        "torque vs force": true,
+        "entropy vs heat capacity": true,
+        "bit rate vs bandwidth": true
+      }
+    },
+    {
+      "id": "C7",
+      "statement": "the parser is exact: powers of ten only, rational exponents, and refusal to absorb arbitrary constants",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "mass*speed^2 = energy": true,
+        "(energy/mass)^(1/2) = speed": true,
+        "1000*length is a kilometre": true,
+        "refuses '2 * length'": true,
+        "refuses 'length^x'": true,
+        "refuses 'nonsense_quantity'": true
+      }
+    },
+    {
+      "id": "C8",
+      "statement": "affine scales are held apart from the group: Celsius and decibel are recorded as non-multiplicative",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "affine scales": 6,
+        "celsius listed": true,
+        "decibel listed": true,
+        "not in the concept register": true
+      }
+    },
+    {
+      "id": "C9",
+      "statement": "every concept in the register is encodable on the (1/12) lattice, and 105 defining relations hold exactly",
+      "status": "PASS",
+      "seconds": 0.009,
+      "detail": {
+        "ok": 222,
+        "total": 222,
+        "failures": []
+      }
+    },
+    {
+      "id": "C10",
+      "statement": "[Z^24 : Lambda] = 2^36, counted from the defining congruences",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "residues_per_parity": 34359738368,
+        "lambda_mod_8Z24": 68719476736,
+        "Z8_24": 4722366482869645213696,
+        "index": 68719476736,
+        "expected": 68719476736,
+        "matches": true
+      }
+    },
+    {
+      "id": "C11",
+      "statement": "the Hermite normal form of the explicit generating set is a Z-basis of Lambda: 24 rows, all in Lambda, determinant 2^36",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "rows": 24,
+        "determinant": 68719476736,
+        "all rows in Lambda": true
+      }
+    },
+    {
+      "id": "C12",
+      "statement": "lattice coordinates round trip exactly, and every minimal vector lies in the lattice the basis generates",
+      "status": "PASS",
+      "seconds": 0.38,
+      "detail": {
+        "round trips": true,
+        "minimal vectors": 196560,
+        "sampled coordinates exist": true
+      }
+    },
+    {
+      "id": "C13",
+      "statement": "the theta series from E_4^3 - 720 Delta agrees with the enumeration of minimal vectors",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "theta head": [
+          1,
+          0,
+          196560,
+          16773120,
+          398034000
+        ],
+        "kissing number": 196560
+      }
+    },
+    {
+      "id": "C14",
+      "statement": "every concept encodes to a Leech point and decodes back exactly",
+      "status": "PASS",
+      "seconds": 3.19,
+      "detail": {
+        "concepts_encoded": 660,
+        "distinct_meanings": 433,
+        "distinct_carriers": 433,
+        "all_in_lattice": true,
+        "round_trip_exact": true
+      }
+    },
+    {
+      "id": "C15",
+      "statement": "the slot layout is a bijection onto its image: 24 named slots, and off-image points are refused",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "slots": 24,
+        "context preserved": true,
+        "meaning preserved": true,
+        "off-image refused": true
+      }
+    },
+    {
+      "id": "C16",
+      "statement": "distinct concepts are at squared carrier distance at least 32",
+      "status": "PASS",
+      "seconds": 0.034,
+      "detail": {
+        "distinct carriers": 433,
+        "minimum sampled squared distance": 2880,
+        "guaranteed bound": 32
+      }
+    },
+    {
+      "id": "C17",
+      "statement": "the packing radius squared is 8",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "packing radius^2": "8",
+        "minimum norm^2": 32
+      }
+    },
+    {
+      "id": "C18",
+      "statement": "every corruption of squared magnitude at most 7 is repaired exactly, on a sweep over concepts and error patterns",
+      "status": "PASS",
+      "seconds": 6.403,
+      "detail": {
+        "trials": 294,
+        "repaired exactly": 294
+      }
+    },
+    {
+      "id": "C19",
+      "statement": "composition of carriers matches the product of meanings",
+      "status": "PASS",
+      "seconds": 3.066,
+      "detail": {
+        "torsion-free addition exact": true,
+        "compose exact on all pairs": true
+      }
+    },
+    {
+      "id": "C20",
+      "statement": "capacity: 196,561 concepts within squared norm 32, 16,969,681 within 48, countably infinitely many in all",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "within 32": 196561,
+        "within 48": 16969681
+      }
+    },
+    {
+      "id": "C21",
+      "statement": "the fast decoder agrees with the slow reference decoder",
+      "status": "PASS",
+      "seconds": 3.514,
+      "detail": {
+        "trials": 6,
+        "same distance": 6,
+        "distinct but equidistant": 0
+      }
+    },
+    {
+      "id": "C22",
+      "statement": "decoded points satisfy the Voronoi condition against all 196,560 minimal-vector translates",
+      "status": "PASS",
+      "seconds": 2.465,
+      "detail": {
+        "random points checked": 3,
+        "translates per point": 196560
+      }
+    },
+    {
+      "id": "C23",
+      "statement": "every generator is an automorphism of Lambda: basis in the lattice, Gram preserved, unimodular in coordinates",
+      "status": "PASS",
+      "seconds": 0.111,
+      "detail": {
+        "generators": 17,
+        "all verified": true,
+        "kinds": [
+          "permutation",
+          "sextet",
+          "sign"
+        ]
+      }
+    },
+    {
+      "id": "C24",
+      "statement": "the sextet element is found by search: of the 64 sign patterns exactly the 32 odd ones preserve Lambda",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "sextet": [
+          [
+            0,
+            1,
+            2,
+            3
+          ],
+          [
+            7,
+            9,
+            10,
+            16
+          ],
+          [
+            5,
+            8,
+            12,
+            19
+          ],
+          [
+            6,
+            14,
+            15,
+            20
+          ],
+          [
+            11,
+            13,
+            18,
+            22
+          ],
+          [
+            4,
+            17,
+            21,
+            23
+          ]
+        ],
+        "working sign patterns": 32
+      }
+    },
+    {
+      "id": "C25",
+      "statement": "the monomial subgroup 2^12 : M24 has exactly three orbits on the minimal vectors: 1104 / 97152 / 98304",
+      "status": "PASS",
+      "seconds": 7.16,
+      "detail": {
+        "orbit sizes": [
+          1104,
+          97152,
+          98304
+        ],
+        "order": 1002795171840
+      }
+    },
+    {
+      "id": "C26",
+      "statement": "the full group is transitive on the 196,560 minimal vectors",
+      "status": "PASS",
+      "seconds": 7.485,
+      "detail": {
+        "orbit size": 196560
+      }
+    },
+    {
+      "id": "C27",
+      "statement": "the type-2 class of a minimal vector has an orbit of exactly 98,280 classes in Lambda / 2Lambda",
+      "status": "PASS",
+      "seconds": 3.038,
+      "detail": {
+        "orbit": 98280
+      }
+    },
+    {
+      "id": "C28",
+      "statement": "a rigorous lower bound for the order of the group is 8,315,553,613,086,720,000, the classical order of Co_0",
+      "status": "PASS",
+      "seconds": 7.106,
+      "detail": {
+        "basic orbit lengths": [
+          98280,
+          47104,
+          275,
+          181440,
+          18
+        ],
+        "image lower bound": 4157776806543360000,
+        "group lower bound": 8315553613086720000,
+        "classical |Co_0|": 8315553613086720000
+      }
+    },
+    {
+      "id": "C29",
+      "statement": "the Lambda / 2Lambda class census closes: 1 + 98,280 + 8,386,560 + 8,292,375 = 2^24",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "mod2_classes_type2": 98280,
+        "mod2_classes_type3": 8386560,
+        "mod2_classes_type4": 8292375,
+        "mod2_classes_total": 16777216,
+        "mod2_census_is_2^24": true
+      }
+    },
+    {
+      "id": "C30",
+      "statement": "measurement: how many concept pairs a mod-2 carrier confuses, and how many a seven-exponent integer system confuses that GLM-2 separates",
+      "status": "PASS",
+      "seconds": 1.803,
+      "detail": {
+        "inequivalent pairs": 207794,
+        "confused by a mod-2 carrier": 12284,
+        "confused by a seven-exponent integer system": 4569,
+        "separated by": {
+          "angle": 1499,
+          "solid_angle": 180,
+          "information": 1339,
+          "scale": 759,
+          "rank": 759,
+          "parity": 4,
+          "kind": 29
+        },
+        "confused by GLM-2": 0
+      }
+    },
+    {
+      "id": "C31",
+      "statement": "Co_0 is a symmetry of the carrier and not of the semantics: norms are preserved, meanings are not",
+      "status": "PASS",
+      "seconds": 0.001,
+      "detail": {
+        "concept": "energy",
+        "carrier_norm2": 6467552,
+        "generators_tested": 6,
+        "norm_preserved_by_all": true,
+        "images_that_carry_a_meaning": 0,
+        "detail": [
+          {
+            "generator": "pi_0",
+            "norm_preserved": true,
+            "carries_a_meaning": false
+          },
+          {
+            "generator": "pi_1",
+            "norm_preserved": true,
+            "carries_a_meaning": false
+          },
+          {
+            "generator": "pi_2",
+            "norm_preserved": true,
+            "carries_a_meaning": false
+          },
+          {
+            "generator": "pi_3",
+            "norm_preserved": true,
+            "carries_a_meaning": false
+          },
+          {
+            "generator": "eps_0",
+            "norm_preserved": true,
+            "carries_a_meaning": false
+          },
+          {
+            "generator": "eps_1",
+            "norm_preserved": true,
+            "carries_a_meaning": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "C32",
+      "statement": "the Griess ledger closes: 300 + 98,280 + 98,304 = 196,884, with 98,280 counted from Lambda / 2Lambda",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "300": 300,
+        "type-2 classes": 98280,
+        "24 x 4096": 98304,
+        "total": 196884
+      }
+    },
+    {
+      "id": "C33",
+      "statement": "the j-function head, computed as E_4^3 / Delta, is 1/q + 744 + 196884 q + 21493760 q^2",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "coefficients": [
+          1,
+          744,
+          196884,
+          21493760,
+          864299970
+        ]
+      }
+    },
+    {
+      "id": "C34",
+      "statement": "the Jordan algebra of symmetric matrices is commutative, unital, non-associative, satisfies the Jordan identity, and its rank-one idempotents are axes of Jordan type 1/2",
+      "status": "PASS",
+      "seconds": 0.193,
+      "detail": {
+        "dim": 10,
+        "commutative": true,
+        "associator defects": 336,
+        "Jordan identity": true,
+        "Frobenius form": true,
+        "unital": true,
+        "axis spectrum in {1,1/2,0}": true,
+        "eigenspace dims": {
+          "1": 1,
+          "1/2": 3,
+          "0": 6
+        },
+        "Jordan-type fusion": true
+      }
+    },
+    {
+      "id": "C35",
+      "statement": "the Matsuo algebra of S_3 with eta = 1/4 is the Norton-Sakuma algebra 2A: a_0 a_1 = (1/8)(a_0 + a_1 - a_rho)",
+      "status": "PASS",
+      "seconds": 0.005,
+      "detail": {
+        "a_0 a_1": [
+          "1/8",
+          "1/8",
+          "-1/8"
+        ],
+        "eigenspace dims": {
+          "1": 1,
+          "0": 1,
+          "1/4": 1
+        },
+        "fusion": true,
+        "non-associative": true
+      }
+    },
+    {
+      "id": "C36",
+      "statement": "Matsuo algebras of S_3, S_4 and S_5 are axial of Jordan type with Miyamoto involutions that are algebra automorphisms",
+      "status": "PASS",
+      "seconds": 0.983,
+      "detail": {
+        "2A": {
+          "dim": 3,
+          "eigenspace_dims": {
+            "1": 1,
+            "0": 1,
+            "1/4": 1
+          },
+          "jordan_type_fusion": true
+        },
+        "3C": {
+          "dim": 3,
+          "eigenspace_dims": {
+            "1": 1,
+            "0": 1,
+            "1/32": 1
+          },
+          "jordan_type_fusion": true
+        },
+        "Matsuo_S4": {
+          "dim": 6,
+          "eigenspace_dims": {
+            "1": 1,
+            "0": 3,
+            "1/4": 2
+          },
+          "jordan_type_fusion": true
+        },
+        "Matsuo_S5": {
+          "dim": 10,
+          "eigenspace_dims": {
+            "1": 1,
+            "0": 6,
+            "1/4": 3
+          },
+          "jordan_type_fusion": true
+        }
+      }
+    },
+    {
+      "id": "C37",
+      "statement": "the Miyamoto involutions of the S_n Matsuo algebra generate S_n itself",
+      "status": "PASS",
+      "seconds": 0.001,
+      "detail": {
+        "S_3": 6,
+        "S_4": 24,
+        "S_5": 120
+      }
+    },
+    {
+      "id": "C38",
+      "statement": "the reasoner accepts the true laws and rejects the traps, with a reason for every rejection",
+      "status": "PASS",
+      "seconds": 0.001,
+      "detail": {
+        "accept energy = mass*speed^2": true,
+        "accept force = mass*acceleration": true,
+        "accept power = energy/time": true,
+        "accept charge = current*time": true,
+        "accept illuminance = luminous_flux/area": true,
+        "accept angular_momentum = moment_of_inertia*angular_velocity": true,
+        "reject energy = mass*speed^4": [
+          "dimensions differ by L^-2 T^2"
+        ],
+        "reject force = mass*acceleration^3": [
+          "dimensions differ by L^-2 T^4",
+          "tensor rank 1 vs 3"
+        ],
+        "reject energy = torque": [
+          "dimensions differ by A^1",
+          "tensor rank 0 vs 1",
+          "nominal kind energy vs torque-like"
+        ],
+        "reject radiance = irradiance": [
+          "dimensions differ by S^-1"
+        ],
+        "reject frequency = activity": [
+          "nominal kind cycle rate vs nuclear decay rate"
+        ],
+        "reject kilometre = length": [
+          "decimal scale differs by 10^3"
+        ]
+      }
+    },
+    {
+      "id": "C39",
+      "statement": "synthesis returns exact rational exponents, including fractional ones, and says 'no pathway' when there is none",
+      "status": "PASS",
+      "seconds": 0.001,
+      "detail": {
+        "energy from mass, speed": "energy = mass * speed^2",
+        "speed from energy, mass": "speed = energy^(1/2) * mass^(-1/2)",
+        "power from current, resistance": "power = current^2 * resistance",
+        "reduced planck from action, angle": "reduced_planck = action * angle^-1",
+        "no pathway": true
+      }
+    },
+    {
+      "id": "C40",
+      "statement": "Buckingham Pi: the dimensionless groups are computed exactly over Q",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "Reynolds-like": [
+          {
+            "speed": "-1",
+            "length": "-1",
+            "kinematic_viscosity": "1"
+          }
+        ],
+        "Froude-like": [
+          {
+            "speed": "-2",
+            "length": "1",
+            "gravitational_field": "1"
+          }
+        ],
+        "length and mass have no group": 0
+      }
+    },
+    {
+      "id": "C41",
+      "statement": "telemetry reports a lattice point for every concept",
+      "status": "PASS",
+      "seconds": 0.001,
+      "detail": {
+        "energy": 6467552,
+        "torque": 3782304,
+        "radiance": 11304032,
+        "information_rate": 35424,
+        "kilometre": 13428704
+      }
+    },
+    {
+      "id": "C42",
+      "statement": "transmission: corrupt and repair a concept, exactly",
+      "status": "PASS",
+      "seconds": 0.065,
+      "detail": {
+        "energy": {
+          "error^2": 7,
+          "repaired": true
+        },
+        "radiance": {
+          "error^2": 7,
+          "repaired": true
+        },
+        "gigabit_per_second": {
+          "error^2": 7,
+          "repaired": true
+        }
+      }
+    },
+    {
+      "id": "C43",
+      "statement": "unit conversion is exact and decimal",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "kilometre->length": "1 kilometre = 10^3 length",
+        "gigahertz->frequency": "1 gigahertz = 10^9 frequency",
+        "megapascal->pressure": "1 megapascal = 10^6 pressure",
+        "gigabit->information": "1 gigabit = 10^9 information"
+      }
+    },
+    {
+      "id": "C44",
+      "statement": "carrier neighbourhoods are meaningful: the nearest concepts to a given one differ by one small exponent step",
+      "status": "PASS",
+      "seconds": 0.017,
+      "detail": {
+        "energy": [
+          [
+            "kinetic_energy",
+            0
+          ],
+          [
+            "potential_energy",
+            0
+          ],
+          [
+            "acceleration",
+            41488
+          ],
+          [
+            "particle_electric_dipole_moment",
+            47456
+          ],
+          [
+            "surface_brightness",
+            57632
+          ]
+        ]
+      }
+    },
+    {
+      "id": "C45",
+      "statement": "invariant I1: no float appears in any carrier or meaning computation",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "carrier entries are ints": true,
+        "exponents are Fractions": true
+      }
+    },
+    {
+      "id": "C46",
+      "statement": "invariant I3: every carrier point of the register satisfies the defining congruences of Lambda",
+      "status": "PASS",
+      "seconds": 0.016,
+      "detail": {
+        "concepts": 660,
+        "failures": []
+      }
+    },
+    {
+      "id": "C47",
+      "statement": "invariant I5: repair never returns a different concept; outside the packing radius it says so",
+      "status": "PASS",
+      "seconds": 0.044,
+      "detail": {
+        "inside radius": {
+          "err^2": 5,
+          "exact": true
+        },
+        "outside radius": {
+          "err^2": 16,
+          "within radius": false,
+          "still exact": false
+        }
+      }
+    },
+    {
+      "id": "C48",
+      "statement": "invariant I9: the first-generation Golay code and M24 are reused, not copied",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "Golay codewords": 4096,
+        "octads": 759,
+        "source": "../glm/glm_substrate.py, ../glm/glm_m24.py"
+      }
+    },
+    {
+      "id": "C49",
+      "statement": "the differential operators are all built from one nabla, so their rank and parity bookkeeping is forced, not tabulated",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "nabla": "L^-1  [rank 1, P-odd]",
+        "nabla is L^-1, rank 1, P-odd": true,
+        "grad raises rank": true,
+        "div lowers rank": true,
+        "curl keeps rank 1": true,
+        "laplacian keeps rank": true,
+        "curl(polar) is axial": true,
+        "curl(axial) is polar": true,
+        "laplacian preserves character: voltage": true,
+        "laplacian preserves character: temperature": true,
+        "laplacian preserves character: charge_density": true
+      }
+    },
+    {
+      "id": "C50",
+      "statement": "contraction and the tensor product are different operations with the same dimensions, and GLM-2 keeps them apart",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "same dimensions": true,
+        "tensor product has rank 2": true,
+        "contraction has rank 0": true,
+        "contraction is an energy": true,
+        "tensor product is not an energy": true,
+        "they are not the same meaning": true
+      }
+    },
+    {
+      "id": "C51",
+      "statement": "the cross product reproduces the register's axial quantities exactly, angular momentum and torque included",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "moment(position, momentum) = angular_momentum": true,
+        "moment(position, force) = torque": true,
+        "rot(velocity) = vorticity": true,
+        "curl(magnetic_field_h) = current_density": true,
+        "cross(electric_field, magnetic_field_h) = poynting_vector": true,
+        "ddt(velocity) = acceleration": true,
+        "ddt(momentum) = force": true,
+        "integral_dt(power) = energy": true,
+        "integral_dV(charge_density) = charge": true,
+        "integral_dV(energy_density) = energy": true
+      }
+    },
+    {
+      "id": "C52",
+      "statement": "d/dt and the time integral are mutually inverse, and d/dt flips the T grading of every concept in the register",
+      "status": "PASS",
+      "seconds": 0.078,
+      "detail": {
+        "concepts": 660,
+        "round trips": 660,
+        "T-graded concepts": 657,
+        "T grading flipped": 657
+      }
+    },
+    {
+      "id": "C53",
+      "statement": "the T and C gradings are derived from the exponents, hence are homomorphisms: they add over every pair of concepts",
+      "status": "PASS",
+      "seconds": 0.116,
+      "detail": {
+        "pairs tested": 6219,
+        "T failures": 0,
+        "C failures": 0
+      }
+    },
+    {
+      "id": "C54",
+      "statement": "the anomaly field is used exactly once, for the particle electric dipole moment, and it is what makes an EDM a T-violating observable",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "anomalous concepts": [
+          "particle_electric_dipole_moment"
+        ],
+        "same dimensions": true,
+        "same rank": true,
+        "EDM is T-odd": true,
+        "ordinary dipole is T-even": true,
+        "reasoner rejects equating them": true,
+        "reason": [
+          "parity mismatch: T"
+        ]
+      }
+    },
+    {
+      "id": "C55",
+      "statement": "the derived T grading agrees with the textbook behaviour of twenty standard quantities",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "quantities checked": 20,
+        "disagreements": []
+      }
+    },
+    {
+      "id": "C56",
+      "statement": "expressions built with the operator algebra are first-class concepts: they encode to Leech points and decode back exactly",
+      "status": "PASS",
+      "seconds": 0.001,
+      "detail": {
+        "moment(position, momentum)": true,
+        "dot(force, position)": true,
+        "grad(pressure)": true,
+        "div(velocity)": true,
+        "rot(velocity)": true,
+        "cross(electric_field, magnetic_field_h)": true,
+        "laplacian(voltage)": true,
+        "ddt(velocity)": true,
+        "integral_dt(power)": true,
+        "force * position": true,
+        "1000 * grad(pressure)": true
+      }
+    },
+    {
+      "id": "C57",
+      "statement": "the register carries a second table of relations that hold in the FULL meaning \u2014 rank and parities included \u2014 among them all four Maxwell equations",
+      "status": "PASS",
+      "seconds": 0.023,
+      "detail": {
+        "tensor relations": 71,
+        "tensor relations exact": 71,
+        "failures": [],
+        "scalar relations": 222,
+        "scalar relations exact": 222,
+        "of those, also exact at full meaning": 186,
+        "Gauss": true,
+        "Gauss for magnetism (B is a curl)": true,
+        "Faraday": true,
+        "Ampere": true,
+        "Ampere, displacement term": true
+      }
+    },
+    {
+      "id": "C58",
+      "statement": "meaning is the state and the carrier is derived: every concept's point is encode(its meaning) and decodes back to it, the derivation is injective, and no audit carries a mod-2 view",
+      "status": "PASS",
+      "seconds": 0.054,
+      "detail": {
+        "concepts checked": 660,
+        "carrier is encode(meaning) and decodes back": true,
+        "distinct meanings, distinct carriers": true,
+        "audit carries no mod-2 verdict": true,
+        "carrier of a product = compose of the carriers": true,
+        "torsion-free slots add": true,
+        "appendix: F_2 false positives on two sample pairs": 1
+      }
+    }
+  ]
+}
