@@ -1,6 +1,6 @@
 # '../' - TOP REPOSITORY LEVEL TIER ROOT README 
 
-**Version:** 2.6 (10 August 2026)  
+**Version:** 2.7 (20 August 2026)  
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand  
 **Parent:** None - Top Level
 
@@ -42,6 +42,12 @@ https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the dire
   │                     Lingo (GLM language) language, conditional reasoning
   │                     dev/glm_v37_grown.py — latest runtime (crystallization, adversarial, gap words)
   │
+  ├──→ glm_lean/        LEAN-VERIFIED GLM (3 generations)
+  │                     GLM-1: 43 claims, integer exponents, Golay/MOG carrier
+  │                     GLM-2: 58 claims, rational exponents, Leech carrier, Co₀
+  │                     GLM-3: 64 claims, full Griess algebra (196,884 dims), Monster
+  │                     Each: paper + reasoner + Lean 4 proofs (no sorry)
+  │
   ├──→ long_term_memory/   THE GLM MEMORY
   │                        glm_training_data.json (all GLM training data)
   │                        GLM_KNOWLEDGE.md (all GLM knowledge from training)
@@ -60,7 +66,9 @@ https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the dire
   │
   ├──→ arc_agi_(version_number)/      THE NEXT ARC AGI attempt
   │
-  └──→ leech_lattice/      fast way to map and measure integers within the Leech lattice
+  ├──→ leech_lattice/      fast way to map and measure integers within the Leech lattice
+  │
+  └──→ CATALOG.md          full repository catalog (all files, all folders)
 
 ```
 
@@ -71,7 +79,7 @@ https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the dire
 | Folder | Intended Purpose | Current ARC AGI Score | Current Key File | Experiment and Development Work Needed |
 |--------|---------|-------|----------|----------|
 | **ROOT Top Tier repository folder** | Collect, define and conduct use of all sub-folders, files within folders and scripts throughout the whole of this repository and system, to direct experiments and studies that use the UBP and or GLM systems | — | 'README.md' (this file) | Organise all folders and their contents so no scripts are repeated and all systems use a single source ('GMHGL/' and 'glm_machine/') for operations, 'data_object/' for encoding, 'light/' for scale calibration and 'long_term_memory/' for all GLM training and learning |
-| **GMHGL/** | Foundation — Golay engine, TAX, NRCI | — | `ubp_unified_v5.py` | Extend existing capacity/capabilities if possible. Note: `snap_to_codeword` has a Lean-verified bug (only corrects weight ≤ 3, not 4). Fix documented in arc_agi_17/snap_to_codeword_FIX.md |
+| **GMHGL/** | Foundation — Golay engine, TAX, NRCI | — | `ubp_unified_v5.py` | Extend existing capacity/capabilities if possible. Note: `snap_to_codeword` has a Lean-verified bug (only corrects weight ≤ 3, not 4). Fix documented in light/EM_calibration_1/reports/snap_to_codeword_FIX.md |
 | **data_object/** | Encoding — Subjects → 24-bit Data Objects | — | `encoding_definition_attempt_04.08.26/README.md` | Use in studies/experiments. Warping (rotate_3 + flip) and geometric work (190 kJ/mol calibration) now integrated into arc_agi_17 |
 | **glm_machine/** | Active Geometric Language Machine system | — | `dev/glm_v37_grown.py` | Growth and development alongside the ARC AGI developments. v37 features (crystallization, adversarial testing, gap word derivation, deliberative reasoning) now integrated into arc_agi_17 |
 | **arc_agi_17/** | Substrate-native cognitive architecture — GLM mind with lattice perception, imagination, growth, diverse puzzles, simplicial faces | 105/181 (23% ARC + 100% diverse) | `scripts/arc_v35_pipeline.py` | Continue growth. Target: 5,000 CRG edges (current: 4,015), 30%+ ARC. 217 cumulative runs. 11 puzzle types. Physics-corrected (Gray code, Symmetry Tax, 2Δv). Self-contained pipeline available at `scripts/arc_v32_pipeline.py`. |
@@ -79,6 +87,7 @@ https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the dire
 | **arc_agi_16/** | Experiments | 9/50 | `arc_learning_mind.py` | Leave as record of attempting #16 and parts if needed rather than rebuilding scripts from scratch |
 | **light/** | Calibration — UBP ↔ real world | — | `aristotle_01/lattice_shortcut.py` and `aristotle_01/LATTICE_SHORTCUT_METHOD.md`, 'Y_STUDY_CLEAN_RESTATEMENT.md' | Add more calibration anchors through various scales of reality. UBP-to-Realworld Scale: S(λ, HW) = λ / [HW × (Y + 1/8)] established in arc_agi_17 study |
 | **long_term_memory/** | Archive — all GLM training data + knowledge | — | `glm_training_data.json` | Needs proper implementation so this becomes an on-going GLM training method. arc_agi_17 now reads from this and writes learning patterns persistently |
+| **glm_lean/** | Lean-verified GLM — 3 generations of exact composable meaning on a lattice carrier | — | `glm3/glm3_paper.py` | Independent verification of GLM concepts via Lean 4 + Mathlib proofs (no sorry). GLM-1 (43 claims), GLM-2 (58 claims), GLM-3 (64 claims, full Griess algebra). See `CATALOG.md` for full file listing. |
 
 ---
 
@@ -179,11 +188,13 @@ The mass residual is an open problem.
 - Resonant (tiling): 4/4, Geodesic (mirrors): 4/4
 
 ### ARC-AGI (arc_agi_17)
-- **Best: 16/45** (v25, Run 123)
-- **136 cumulative training runs** (state persists across all)
-- **3,003 CRG edges** (target: 5,000 per major epoch)
-- **23 hexcolour addresses** (persistent lattice memory)
+- **Best: 105/181** (v35, 23% ARC + 100% diverse types)
+- **217 cumulative training runs** (state persists across all)
+- **4,015 CRG edges** (target: 5,000 per major epoch)
+- **66 hexcolour addresses** (persistent lattice memory)
+- **197 simplicial faces** (2-simplices in CRG)
 - **14 generative components** (0 passive)
+- **11 puzzle types** (ARC + 10 diverse: symmetry, border, colour_cascade, conditional_region, connected_component, count_encode, diagonal, noise_clean, object_gravity, pattern_tile)
 - **6 solve modes**: lattice_perception, deliberative_reasoning, hexcolour_analogical, glm_mind, glm_mind_refined, fallback_solver
 - **5-layer perception**: encoding → active perception → adaptive resolution → Golay snap → differential transition (2Δv)
 - **v37 features**: crystallization, adversarial testing, gap word derivation, deliberative reasoning, applied imagination
@@ -219,7 +230,10 @@ The mass residual is an open problem.
 | GMHGL/ | `ubp_checkpoint_v5.4.1.md` |
 | long_term_memory/ | `GLM_KNOWLEDGE.md` |
 | arc_agi_17/ | `README.md` (full architecture + version history + change log) |
-| arc_agi_17/reports/ | `v17_report.md` through `v26_report.md` (one per version) |
+| arc_agi_17/reports/ | `v17_report.md` through `v35_report.md` (one per version) |
+| glm_lean/glm/ | `DEVELOPMENT_CATALOG.md`, `glm_paper.py` (43 claims verified) |
+| glm_lean/glm2/ | `glm2_paper.py` (58 claims verified) |
+| glm_lean/glm3/ | `glm3_paper.py` (64 claims verified) |
 
 ---
 
@@ -259,4 +273,6 @@ The mass residual is an open problem.
 | Version | Date | Change |
 |---------|------|--------|
 | 2.4 | 2026-08-06 | Initial structure with arc_agi_15/16 |
-| 2.5 | 2026-08-07 | Added arc_agi_17 (substrate-native cognitive architecture). Updated: data flow, constants (Lean fix, TAX conservation, UBP scale, 2Δv), metrics (geometric work, hexcolour, 2Δv), driving styles (lattice perception, deliberative, imagination), ARC-AGI results (16/45, 136 runs, 3,003 edges). Marked integrated glm_machine modules. Added v37 features note. |
+| 2.5 | 2026-08-07 | Added arc_agi_17 (substrate-native cognitive architecture). Updated: data flow, constants (Lean fix, TAX conservation, UBP scale, 2Δv), metrics (geometric work, hexcolour, 2Δv), driving styles (lattice perception, deliberative, imagination), ARC-AGI results. Marked integrated glm_machine modules. Added v37 features note. |
+| 2.6 | 2026-08-10 | Added next_steps_from_7Aug26.md. Minor restructuring notes. |
+| 2.7 | 2026-08-20 | Full repository catalog (CATALOG.md). Added glm_lean/ to tree and folder table. Updated ARC-AGI stats to v35 final (105/181, 217 runs, 4,015 edges, 66 hexcolour, 197 simplicial faces, 11 puzzle types). Verified all README cross-references. Fixed missing folder references. |
