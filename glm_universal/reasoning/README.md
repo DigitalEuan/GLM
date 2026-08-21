@@ -176,3 +176,35 @@ the fixture is module-scoped, so the cost is paid once.
 ## Depends on
 
 `glm_universal.substrate`, `glm_universal.data_objects`. Nothing else.
+
+---
+
+## v0.6.0 update: five new directive-mentioned modules
+
+Five new modules were added to implement mechanisms the directive
+(`ubp_universal_1.txt`) mentions but that had no code at all:
+
+| Module | What it implements | Status |
+|---|---|---|
+| `moonshine.py` | The Moonshine layer: graded dimensions V_0..V_10, the j-function q-series, and the Leech-to-Moonshine bridge. V_0 = 1 (vacuum), V_1 = 0 (FLM theorem), V_2 = 196884 (Griess algebra). | ✓ graded dimensions + j-function + bridge. VOA state-field map is future work. |
+| `niemeier.py` | The 23 Niemeier lattices (ADE root systems, Conway-Sloane). The Leech is the unique one with no roots (rank 0); the other 22 have rank-24 root systems. | ✓ catalogue + deep-hole types. Voronoi cell computation is future work. |
+| `llvq.py` | Leech Lattice Vector Quantization: codebook-free angular search over Leech shells. The first 6 shells are catalogued. | ✓ shell classification. Full O(1) lookup table is future work. |
+| `fwht.py` | The Fast Walsh-Hadamard Transform: O(N log N) instead of O(N^2). Verified: fwht(fwht(v)) = N*v exactly. | ✓ transform + incoherence_apply. Wiring into substrate group actions is future work. |
+| `valorani.py` | Valorani's log-space SVD for Buckingham-Pi: rational nullspace (exact, float-free). | ✓ rational nullspace + buckingham_pi_groups. The SVD step is documented as conceptual motivation; the rational approach is exact. |
+
+## The pipeline is now complete
+
+The directive's "unbroken mathematical pipeline" is:
+
+    Golay → Leech Lattice → Griess Algebra → Moonshine Functions
+
+All four stages are now implemented:
+
+1. **Golay** (`substrate/mog.py`): 4,096 codewords, 759 octads, MOG trio/sextet.
+2. **Leech** (`substrate/leech2.py`): 196,560 minimal vectors, 98,280 type-2 classes.
+3. **Griess** (`reasoning/product.py`): Norton-Sakuma 2A algebra, trilinear form, Griess metric.
+4. **Moonshine** (`reasoning/moonshine.py`): graded dimensions V_0..V_10, j-function q-series, Leech-to-Moonshine bridge.
+
+The VOA state-field map Y(u, z) = sum u_n z^-n-1 is the
+infinite-dimensional half of the Moonshine bridge and is explicitly
+future work.

@@ -104,6 +104,8 @@ sys.path.insert(0, {root!r})
 
 from glm_universal import data_objects as do
 from glm_universal.reasoning import analogy as an
+from glm_universal.reasoning import coherence as co
+from glm_universal.reasoning import dimension_layers as dl
 from glm_universal.reasoning import metric as me
 from glm_universal.reasoning import product as pr
 from glm_universal.reasoning import verifier as ve
@@ -155,7 +157,7 @@ def _pool_snippet(domain: str) -> str:
         "physics": "do.physics_objects()",
         "chemistry": "do.element_objects()",
         "mathematics": "do.mathematics_objects()",
-        "lexicon": "do.lexicon_objects()[0]",
+        "lexicon": "do.semantic_lexicon_objects()[0]",
         "spatial": "spatial_objects()",
     }
     if domain not in loaders:
@@ -208,6 +210,8 @@ def _body_describe(args: Mapping[str, object]) -> str:
 obj = by_name[{args["name"]!r}]
 params = obj.parameters()
 address = obj.monster_address()
+# v0.5.3: wires analogy.nearest_lattice_point into the describe payload.
+lattice = an.nearest_lattice_point(list(obj.carrier))
 
 observed = {{
     "name": obj.name,
@@ -219,6 +223,264 @@ observed = {{
     "is_golay_codeword": str(address["is_golay_codeword"]),
     "round_trip_ok": str(obj.round_trip_ok()),
     "griess_norm2": q(me.griess_norm2(obj.carrier)),
+    "lattice_distance2": q(lattice.distance2),
+    "lattice_norm2": q(lattice.norm2),
+    "lattice_is_2a_axis": str(lattice.is_2a_axis),
+}}
+'''
+
+
+def _body_project(args: Mapping[str, object]) -> str:
+    """Template for the v0.5.3 'project A B' query kind.
+
+    Recomputes the layered projection from the substrate up to the
+    universal layer, reporting each layer's view of the two carriers and
+    the distance it measured.  Wires ``reasoning/dimension_layers.escalate``.
+    """
+    domain_a = args["domain_a"]
+    domain_b = args["domain_b"]
+    name_a = args["name_a"]
+    name_b = args["name_b"]
+    return f'''# -- recompute -------------------------------------------------------------
+
+# Two pools may be needed -- if the operands come from different domains.
+pool_a = {{
+    "physics": do.physics_objects(),
+    "chemistry": do.element_objects(),
+    "mathematics": do.mathematics_objects(),
+    "lexicon": do.semantic_lexicon_objects()[0],
+    "spatial": spatial_objects(),
+}}[{domain_a!r}]
+pool_b = {{
+    "physics": do.physics_objects(),
+    "chemistry": do.element_objects(),
+    "mathematics": do.mathematics_objects(),
+    "lexicon": do.semantic_lexicon_objects()[0],
+    "spatial": spatial_objects(),
+}}[{domain_b!r}]
+obj_a = next(o for o in pool_a if o.name == {name_a!r})
+obj_b = next(o for o in pool_b if o.name == {name_b!r})
+
+# Walk every dimension-projection layer.
+result = dl.escalate(obj_a.carrier, obj_b.carrier, start=0)
+all_views = result["all_views"]
+final_layer = result["layer"]
+
+observed = {{
+    "operand_a": obj_a.name,
+    "operand_b": obj_b.name,
+    "layers_walked": str(len(all_views)),
+    "final_layer": final_layer.name,
+    "final_distance": q(Fraction(result["distance"])),
+}}
+'''
+
+
+def _body_trilinear(args: Mapping[str, object]) -> str:
+    """Template for the v0.5.3 'trilinear A B C' query kind.
+
+    Projects each carrier onto its nearest 2A axis (via the Leech
+    lattice's type-2 class) and computes the invariant trilinear form
+    ``T(A, B, C) = <A.B, C>`` of the Griess algebra.  Wires
+    ``reasoning/product.griess_trilinear``.
+    """
+    return f'''# -- recompute -------------------------------------------------------------
+
+pool = {{
+    "physics": do.physics_objects(),
+    "chemistry": do.element_objects(),
+    "mathematics": do.mathematics_objects(),
+    "lexicon": do.semantic_lexicon_objects()[0],
+    "spatial": spatial_objects(),
+}}[{args["domain_a"]!r}]
+by_name = {{o.name: o for o in pool}}
+obj_a = by_name[{args["name_a"]!r}]
+obj_b = by_name[{args["name_b"]!r}]
+obj_c = by_name[{args["name_c"]!r}]
+
+# Project each carrier onto its nearest 2A axis via the Leech lattice.
+lat_a = an.nearest_lattice_point(list(obj_a.carrier))
+lat_b = an.nearest_lattice_point(list(obj_b.carrier))
+lat_c = an.nearest_lattice_point(list(obj_c.carrier))
+cls_a = leech2.class_of(list(lat_a.point))
+cls_b = leech2.class_of(list(lat_b.point))
+cls_c = leech2.class_of(list(lat_c.point))
+ax_a = pr.axis(cls_a)
+ax_b = pr.axis(cls_b)
+ax_c = pr.axis(cls_c)
+
+# The invariant trilinear form T(A, B, C) = <A.B, C>.
+T = pr.griess_trilinear(ax_a, ax_b, ax_c)
+# Pairwise bilinear forms: squared norms of the pairwise products.
+prod_ab = pr.axis_product(cls_a, cls_b)
+prod_ac = pr.axis_product(cls_a, cls_c)
+prod_bc = pr.axis_product(cls_b, cls_c)
+Tab = pr.griess_form(prod_ab, prod_ab)
+Tac = pr.griess_form(prod_ac, prod_ac)
+Tbc = pr.griess_form(prod_bc, prod_bc)
+
+observed = {{
+    "operand_a": obj_a.name,
+    "operand_b": obj_b.name,
+    "operand_c": obj_c.name,
+    "axis_a": str(cls_a),
+    "axis_b": str(cls_b),
+    "axis_c": str(cls_c),
+    "trilinear": q(T),
+    "pairwise_AB": q(Tab),
+    "pairwise_AC": q(Tac),
+    "pairwise_BC": q(Tbc),
+}}
+'''
+
+
+def _body_coherence(args: Mapping[str, object]) -> str:
+    """Template for the v0.5.3 'coherence <concept>' query kind.
+
+    Recomputes the five-shell NRCI breakdown.  Wires
+    ``reasoning/coherence.nrci_breakdown``.
+    """
+    return f'''# -- recompute -------------------------------------------------------------
+
+{_pool_snippet(str(args["domain"]))}
+obj = by_name[{args["name"]!r}]
+carrier = list(obj.carrier)
+
+breakdown = co.nrci_breakdown(carrier)
+regime = breakdown.get("regime") or co.coherence_regime(breakdown["nrci"])
+nrci_value = breakdown["nrci"]
+if isinstance(nrci_value, Fraction):
+    nrci_str = q(nrci_value)
+else:
+    nrci_str = q(Fraction(nrci_value).limit_denominator(10**6))
+
+def _render(v):
+    if isinstance(v, Fraction):
+        return q(v)
+    if isinstance(v, float):
+        # 6 decimal places; the colon is doubled in the outer f-string
+        return ("%" + ".6f") % v
+    return str(v)
+
+observed = {{
+    "name": obj.name,
+    "domain": obj.domain,
+    "nrci": nrci_str,
+    "regime": regime,
+    "shell0_golay": _render(breakdown["shell0_golay"]),
+    "shell1_sign_parity": _render(breakdown["shell1_sign_parity"]),
+}}
+'''
+
+
+# ===========================================================================
+# v0.5.4 templates: report and angle query kinds
+# ===========================================================================
+
+def _body_report_relations(args: Mapping[str, object]) -> str:
+    """Recompute the verifier's 222+71 relation audit (v0.5.4)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+report = ve.verifier_report()
+scalar_scalar = report["scalar_relations_under_scalar_semantics"]
+scalar_full = report["scalar_relations_under_full_semantics"]
+tensor_full = report["tensor_relations_under_full_semantics"]
+
+observed = {
+    "scalar_scalar_checked": str(scalar_scalar["checked"]),
+    "scalar_scalar_held": str(scalar_scalar["held"]),
+    "scalar_full_checked": str(scalar_full["checked"]),
+    "scalar_full_held": str(scalar_full["held"]),
+    "scalar_full_failed": str(scalar_full["failed"]),
+    "tensor_full_checked": str(tensor_full["checked"]),
+    "tensor_full_held": str(tensor_full["held"]),
+}
+'''
+
+
+def _body_report_leech(args: Mapping[str, object]) -> str:
+    """Recompute the Leech lattice pair census (v0.5.4)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+census = leech2.pair_census()
+
+observed = {
+    "position_4": str(census[4]),
+    "position_2": str(census[2]),
+    "position_1": str(census[1]),
+    "position_0": str(census[0]),
+}
+'''
+
+
+def _body_report_theta(args: Mapping[str, object]) -> str:
+    """Recompute the Leech theta series (v0.5.4)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+coeffs = leech2.theta_series(order=5)
+
+observed = {
+    "coeff_0": str(coeffs[0]),
+    "coeff_1": str(coeffs[1]),
+    "coeff_2": str(coeffs[2]),
+    "coeff_3": str(coeffs[3]),
+    "coeff_4": str(coeffs[4]),
+}
+'''
+
+
+def _body_report_subalgebra(args: Mapping[str, object]) -> str:
+    """Recompute the 2A subalgebra closure report (v0.5.4)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+report = pr.two_a_closure_report()
+
+observed = {k: str(v) for k, v in report.items()}
+'''
+
+
+def _body_angle(args: Mapping[str, object]) -> str:
+    """Recompute the signed cosine squared (v0.5.4)."""
+    domain_a = args["domain_a"]
+    domain_b = args["domain_b"]
+    name_a = args["name_a"]
+    name_b = args["name_b"]
+    return f'''# -- recompute -------------------------------------------------------------
+
+pool_a = {{
+    "physics": do.physics_objects(),
+    "chemistry": do.element_objects(),
+    "mathematics": do.mathematics_objects(),
+    "lexicon": do.semantic_lexicon_objects()[0],
+    "spatial": spatial_objects(),
+}}[{domain_a!r}]
+pool_b = {{
+    "physics": do.physics_objects(),
+    "chemistry": do.element_objects(),
+    "mathematics": do.mathematics_objects(),
+    "lexicon": do.semantic_lexicon_objects()[0],
+    "spatial": spatial_objects(),
+}}[{domain_b!r}]
+obj_a = next(o for o in pool_a if o.name == {name_a!r})
+obj_b = next(o for o in pool_b if o.name == {name_b!r})
+
+sc2 = me.signed_cosine_squared(obj_a.carrier, obj_b.carrier)
+sign = "+" if sc2 >= 0 else "-"
+abs_sc2 = abs(sc2)
+if abs_sc2 == 0:
+    regime = "orthogonal"
+elif abs_sc2 == 1:
+    regime = "parallel" if sc2 > 0 else "anti-parallel"
+elif abs_sc2 >= Fraction(1, 2):
+    regime = "acute" if sc2 > 0 else "obtuse"
+else:
+    regime = "near-orthogonal"
+
+observed = {{
+    "operand_a": obj_a.name,
+    "operand_b": obj_b.name,
+    "signed_cosine_squared": q(sc2),
+    "regime": regime,
 }}
 '''
 
@@ -334,6 +596,18 @@ TEMPLATES = {
     "product": _body_product,
     "cluster": _body_cluster,
     "spatial": _body_spatial,
+    # Three new templates added in v0.5.3, wiring previously-unused
+    # reasoning mechanisms into the runtime.
+    "project": _body_project,        # uses dimension_layers.escalate
+    "trilinear": _body_trilinear,    # uses product.griess_trilinear
+    "coherence": _body_coherence,   # uses coherence.nrci_breakdown
+    # Two more templates added in v0.5.4 for the report and angle
+    # query kinds.
+    "report_relations": _body_report_relations,
+    "report_leech": _body_report_leech,
+    "report_theta": _body_report_theta,
+    "report_subalgebra": _body_report_subalgebra,
+    "angle": _body_angle,
 }
 
 

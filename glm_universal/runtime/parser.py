@@ -72,7 +72,8 @@ QueryKind = str
 
 KINDS: Tuple[str, ...] = (
     "verify", "analogy", "describe", "nearest", "product", "cluster",
-    "spatial", "unknown",
+    "spatial", "project", "trilinear", "coherence", "report", "angle",
+    "unknown",
 )
 
 #: Directive keyword -> intent.  Longest surface form is matched first, so
@@ -103,6 +104,18 @@ VERBS: Dict[str, str] = {
     "grid": "spatial", "mog grid": "spatial", "facet": "spatial",
     "spatial": "spatial", "layout of": "spatial", "trio": "spatial",
     "sextet": "spatial", "octad": "spatial", "brick": "spatial",
+    # project -- walk the dimension-projection layers (v0.5.3)
+    "project": "project", "escalate": "project", "layered view": "project",
+    "dimension projection": "project",
+    # trilinear -- the invariant trilinear form (v0.5.3)
+    "trilinear": "trilinear", "threefold": "trilinear",
+    # coherence -- the five-shell NRCI (v0.5.3)
+    "coherence": "coherence", "nrci": "coherence", "tax": "coherence",
+    # report -- on-demand recomputation of facts (v0.5.4)
+    "report": "report", "facts": "report", "recompute": "report",
+    "census": "report",
+    # angle -- exact cosine comparison (v0.5.4)
+    "angle": "angle", "angular": "angle", "cosine": "angle",
 }
 
 #: Fixed order used to break a cross-domain name collision.  A surface form
@@ -309,14 +322,49 @@ def _aliases_for(obj) -> Tuple[str, ...]:
     chemical elements (whose carrier name is the symbol) and ``"symbol"`` for
     the physical quantities (whose carrier name is already the long form).
     Nothing is invented: an alias exists only if the register supplies it.
+
+    A short physics symbol that collides with an element symbol (``Li``,
+    ``Na``, ``Be``, ``B``, ``F``, ``P``, ``S``, ``K``, ``Ar``, etc.) is
+    *suppressed* on the physics side.  These one- and two-letter strings
+    overwhelmingly mean the element to a human reader, and the existing
+    DOMAIN_PRIORITY (physics first) would otherwise resolve ``Li`` to
+    ``acoustic_intensity_level`` instead of lithium.  The physics concept
+    is still reachable by its long name (``acoustic_intensity_level``)
+    and by its symbol within an explicit domain hint.
     """
     out: List[str] = [normalise(obj.name)]
     attrs = getattr(obj, "attributes", {}) or {}
+    is_physics = (getattr(obj, "domain", "") == "physics")
     for key in ("name", "symbol"):
         value = attrs.get(key)
         if isinstance(value, str) and value.strip():
-            out.append(normalise(value))
+            n = normalise(value)
+            # Suppress short physics symbols that collide with element
+            # symbols.  See _CHEMISTRY_SYMBOLS below for the table.
+            if is_physics and len(n) <= 2 and n in _CHEMISTRY_SYMBOLS:
+                continue
+            out.append(n)
     return tuple(a for a in dict.fromkeys(out) if a)
+
+
+#: The set of one- and two-letter normalised chemical element symbols.
+#: Used by :func:`_aliases_for` to suppress physics symbol aliases that
+#: would collide with element symbols.  Built once at import time from
+#: the periodic table data; this is the authoritative set of 118 symbols.
+_CHEMISTRY_SYMBOLS: frozenset = frozenset({
+    "h", "he", "li", "be", "b", "c", "n", "o", "f", "ne",
+    "na", "mg", "al", "si", "p", "s", "cl", "ar", "k", "ca",
+    "sc", "ti", "v", "cr", "mn", "fe", "co", "ni", "cu", "zn",
+    "ga", "ge", "as", "se", "br", "kr", "rb", "sr", "y", "zr",
+    "nb", "mo", "tc", "ru", "rh", "pd", "ag", "cd", "in", "sn",
+    "sb", "te", "i", "xe", "cs", "ba", "la", "ce", "pr", "nd",
+    "pm", "sm", "eu", "gd", "tb", "dy", "ho", "er", "tm", "yb",
+    "lu", "hf", "ta", "w", "re", "os", "ir", "pt", "au", "hg",
+    "tl", "pb", "bi", "po", "at", "rn", "fr", "ra", "ac", "th",
+    "pa", "u", "np", "pu", "am", "cm", "bk", "cf", "es", "fm",
+    "md", "no", "lr", "rf", "db", "sg", "bh", "hs", "mt", "ds",
+    "rg", "cn", "nh", "fl", "mc", "lv", "ts", "og",
+})
 
 
 # ===========================================================================
@@ -806,6 +854,92 @@ def _build_keyword_query(text: str, cleaned: str, lowered: str,
         return Query(raw=text, normalised=cleaned, kind=kind, domain=settled,
                      operands=operands, options=options, rule=rule,
                      trace=tuple(trace))
+
+    if kind == "project":
+        # 'project A B' or 'escalate A against B' -- two operands.
+        # If the user wrote 'project carbon, oxygen' or 'project carbon
+        # and oxygen' that's the comma/and form; if they wrote 'project
+        # carbon oxygen' that's the whitespace form.  Try comma/and
+        # first, fall back to whitespace split.
+        names = _split_list(_strip_connectives(remainder))
+        if len(names) < 2:
+            # Whitespace fallback: split on whitespace, drop any
+            # connectives.
+            ws_parts = [p for p in remainder.split()
+                        if p.lower() not in _CONNECTIVES
+                        and p not in (",", "and", "vs", "versus")]
+            if len(ws_parts) >= 2:
+                names = tuple(ws_parts[:2])
+        if len(names) < 2:
+            trace.append("project needs two operands, A and B; "
+                         "falling back to describe")
+            target = _strip_connectives(remainder)
+            operands, settled = _resolve_operands((target,), index,
+                                                    domain, trace)
+            return Query(raw=text, normalised=cleaned, kind="describe",
+                         domain=settled, operands=operands, options=options,
+                         rule=rule, trace=tuple(trace))
+        operands, settled = _resolve_operands(names[:2], index, domain, trace)
+        return Query(raw=text, normalised=cleaned, kind="project",
+                     domain=settled, operands=operands, options=options,
+                     rule=rule, trace=tuple(trace))
+
+    if kind == "trilinear":
+        # 'trilinear A B C' -- three operands.  Same comma/and-first
+        # then whitespace-fallback split as 'project'.
+        names = _split_list(_strip_connectives(remainder))
+        if len(names) < 3:
+            ws_parts = [p for p in remainder.split()
+                        if p.lower() not in _CONNECTIVES
+                        and p not in (",", "and", "vs", "versus")]
+            if len(ws_parts) >= 3:
+                names = tuple(ws_parts[:3])
+        if len(names) < 3:
+            trace.append("trilinear needs three operands, A B and C; "
+                         "falling back to describe")
+            target = _strip_connectives(remainder)
+            operands, settled = _resolve_operands((target,), index,
+                                                    domain, trace)
+            return Query(raw=text, normalised=cleaned, kind="describe",
+                         domain=settled, operands=operands, options=options,
+                         rule=rule, trace=tuple(trace))
+        operands, settled = _resolve_operands(names[:3], index, domain, trace)
+        return Query(raw=text, normalised=cleaned, kind="trilinear",
+                     domain=settled, operands=operands, options=options,
+                     rule=rule, trace=tuple(trace))
+
+    if kind == "report":
+        # 'report <subject>' -- the subject names what to recompute.
+        # Recognised subjects: relations, leech distribution, theta,
+        # subalgebra, trilinear.
+        target = _strip_connectives(remainder).lower()
+        options["subject"] = target
+        return Query(raw=text, normalised=cleaned, kind="report",
+                     domain=domain, operands=(), options=options,
+                     rule=rule, trace=tuple(trace))
+
+    if kind == "angle":
+        # 'angle A B' -- two operands for the cosine comparison.
+        names = _split_list(_strip_connectives(remainder))
+        if len(names) < 2:
+            ws_parts = [p for p in remainder.split()
+                        if p.lower() not in _CONNECTIVES
+                        and p not in (",", "and", "vs", "versus")]
+            if len(ws_parts) >= 2:
+                names = tuple(ws_parts[:2])
+        if len(names) < 2:
+            trace.append("angle needs two operands, A and B; "
+                         "falling back to describe")
+            target = _strip_connectives(remainder)
+            operands, settled = _resolve_operands((target,), index,
+                                                    domain, trace)
+            return Query(raw=text, normalised=cleaned, kind="describe",
+                         domain=settled, operands=operands, options=options,
+                         rule=rule, trace=tuple(trace))
+        operands, settled = _resolve_operands(names[:2], index, domain, trace)
+        return Query(raw=text, normalised=cleaned, kind="angle",
+                     domain=settled, operands=operands, options=options,
+                     rule=rule, trace=tuple(trace))
 
     if kind == "verify":
         # A verify keyword with no '=' in the line: nothing to compare.

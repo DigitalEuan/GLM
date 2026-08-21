@@ -64,6 +64,8 @@ from typing import (Any, Dict, List, Mapping, Optional, Sequence, Tuple)
 from .. import data_objects as do
 from ..data_objects.base import DataObject
 from ..reasoning import analogy as an
+from ..reasoning import coherence as co
+from ..reasoning import dimension_layers as dl
 from ..reasoning import metric as me
 from ..reasoning import product as pr
 from ..reasoning import verifier as ve
@@ -99,7 +101,10 @@ DEFAULT_SUBSPACE: Dict[str, Optional[str]] = {
     "physics": "physics.dimension",
     "chemistry": "chemistry.position",
     "mathematics": None,
-    "lexicon": None,
+    # As of v0.5.1, the lexicon register uses the semantic-primitives
+    # subspace by default, so analogies over words resolve on meaning
+    # rather than spelling.
+    "lexicon": "lexicon.primitives",
     "spatial": None,
 }
 
@@ -329,7 +334,7 @@ class GeometricSession:
         self._registers: Dict[str, Tuple[DataObject, ...]] = {}
         self._index: Optional[ConceptIndex] = None
         self._history: List[InferenceRecord] = []
-        self._lexicon_codec = None
+        self._lexicon_codec = None  # set when the lexicon register loads
 
     # -- configuration ------------------------------------------------------
 
@@ -367,7 +372,17 @@ class GeometricSession:
         elif domain == "mathematics":
             loaded = do.mathematics_objects()
         elif domain == "lexicon":
-            loaded, self._lexicon_codec = do.lexicon_objects()
+            # As of v0.5.0 the lexicon register is the meaning-based
+            # SemanticLexiconCodec, not the legacy index-based one.  The
+            # legacy module is still importable directly for tests and
+            # comparison, but the runtime loads the semantic concepts so
+            # ``describe gravity`` / ``describe water`` resolve to a
+            # carrier whose distance actually tracks meaning.  Physics's
+            # own quantity named "energy" still wins for ``describe
+            # energy`` because DOMAIN_PRIORITY ranks physics first; the
+            # semantic concept is reachable as ``describe energy in
+            # lexicon``.
+            loaded, self._lexicon_codec = do.semantic_lexicon_objects()
         elif domain == "spatial":
             loaded = spatial_objects()
         else:  # pragma: no cover -- guarded by the constructor
@@ -477,6 +492,17 @@ class GeometricSession:
             "product": self._solve_product,
             "cluster": self._solve_cluster,
             "spatial": self._solve_spatial,
+            # Three new query kinds wired in v0.5.3, each surfacing a
+            # previously-built-but-unused mechanism from the reasoning
+            # layer.  See the directive-aligned section at the bottom of
+            # the root README for the layered-projection framing.
+            "project": self._solve_project,        # uses dl.escalate
+            "trilinear": self._solve_trilinear,    # uses pr.griess_trilinear
+            "coherence": self._solve_coherence,    # uses co.nrci_breakdown
+            # Two more query kinds wired in v0.5.4, surfacing the
+            # remaining created-but-unused reasoning mechanisms.
+            "report": self._solve_report,          # uses ve.verifier_report, leech2.pair_census, leech2.theta_series, pr.two_a_closure_report
+            "angle": self._solve_angle,            # uses me.signed_cosine_squared
         }
         solver = table.get(query.kind)
         if solver is None:
@@ -705,6 +731,59 @@ class GeometricSession:
             detail = (f"A MOG {obj.attributes.get('kind')} of weight "
                       f"{obj.attributes.get('weight')} at mask "
                       f"{obj.attributes.get('mask')}.")
+        elif obj.domain == "lexicon":
+            # The lexicon register now carries SemanticConcepts.  The
+            # carrier's attributes include the primitives the caller set,
+            # the part of speech, the relation triples, and the
+            # has_physical_dim flag.
+            attrs = obj.attributes or {}
+            pos = attrs.get("pos", "unspecified")
+            arity = attrs.get("arity", 0)
+            has_dims = "with" if attrs.get("physical_dims") else "without"
+            n_prims = attrs.get("n_primitives_set", 0)
+            detail = (f"A semantic lexical concept ({pos}, arity {arity}, "
+                      f"{n_prims} primitives set, {has_dims} physical "
+                      f"dimensions).")
+
+        # Lattice projection (v0.5.3): wires analogy.nearest_lattice_point,
+        # the exact, provably-optimal Leech decoder that was previously
+        # used only by example scripts.  Reports the nearest point of
+        # Lambda to this carrier, its norm, and whether it lands on a 2A
+        # axis -- three facts the directive cares about.
+        try:
+            lattice = an.nearest_lattice_point(list(obj.carrier))
+            lattice_step = Step(
+                "lattice_projection",
+                f"The nearest point of the Leech lattice Lambda to this "
+                f"carrier is at squared distance {q(lattice.distance2)}; "
+                f"the lattice point has norm^2 = {q(lattice.norm2)} and "
+                f"{'IS' if lattice.is_2a_axis else 'is NOT'} a 2A axis of "
+                f"the Monster.",
+                f"nearest_lattice_point({obj.name}): "
+                f"d^2 = {q(lattice.distance2)}, "
+                f"||lambda||^2 = {q(lattice.norm2)}, "
+                f"is_2a_axis = {lattice.is_2a_axis}")
+            lattice_expected = {
+                "lattice_distance2": q(lattice.distance2),
+                "lattice_norm2": q(lattice.norm2),
+                "lattice_is_2a_axis": str(lattice.is_2a_axis),
+            }
+            lattice_payload = {"lattice_projection": {
+                "distance2": q(lattice.distance2),
+                "norm2": q(lattice.norm2),
+                "is_2a_axis": lattice.is_2a_axis,
+            }}
+        except Exception as exc:
+            # nearest_lattice_point is exact and exhaustive; if it fails
+            # the carrier is too far from the lattice for the search to
+            # be meaningful.  Report honestly rather than hiding.
+            lattice_step = Step(
+                "lattice_projection",
+                f"The Leech lattice projection could not be computed: "
+                f"{exc}",
+                f"nearest_lattice_point: {exc}")
+            lattice_expected = {}
+            lattice_payload = {"lattice_projection": {"error": str(exc)}}
 
         steps = [
             Step("identity",
@@ -737,6 +816,7 @@ class GeometricSession:
                  f"plane0 = {address['plane0_mask']}, "
                  f"wt = {address['plane0_weight']}, "
                  f"golay = {address['is_golay_codeword']}"),
+            lattice_step,
             Step("norm",
                  "Its squared Griess norm places it at an exact rational "
                  "distance from the origin.",
@@ -753,6 +833,7 @@ class GeometricSession:
             "round_trip_ok": str(round_trip),
             "griess_norm2": q(norm2),
         }
+        expected.update(lattice_expected)
         return Solution(
             query=query, kind="describe",
             answer=f"{obj.name} ({obj.domain}): depth {params.depth}, "
@@ -763,7 +844,8 @@ class GeometricSession:
                          "args": {"domain": obj.domain, "name": obj.name}},
             payload={"address": address,
                      "facet_signature": obj.facet_signature(),
-                     "attributes": _jsonable(obj.attributes)})
+                     "attributes": _jsonable(obj.attributes),
+                     **lattice_payload})
 
     # ------------------------------------------------------------------
     # 3d.  nearest -- ranking under the Griess metric
@@ -1046,6 +1128,612 @@ class GeometricSession:
             payload={"facet_signature": signature,
                      "cube_profile": cube,
                      "grid": [[int(b) for b in row] for row in grid]})
+
+    # ------------------------------------------------------------------
+    # 3h.  project -- the layered projection of two carriers (v0.5.3)
+    # ------------------------------------------------------------------
+    # Wires `reasoning/dimension_layers.py::escalate`, which was created
+    # in v0.4.0 but never reached from any runtime query.  The directive
+    # (`ubp_universal_1.txt`) frames this as the central mechanism: each
+    # layer is true within its range and hands off to the next when its
+    # range is exhausted.  See the root README's "layered projection"
+    # section for the framing.
+    # ------------------------------------------------------------------
+
+    def _solve_project(self, query: Query) -> Solution:
+        if len(query.operands) < 2:
+            raise SolverError("project: needs two operands, A and B")
+        a = self.resolve(query.operands[0], query.domain)
+        b = self.resolve(query.operands[1], query.domain)
+        # Walk every layer from substrate up to universal.
+        result = dl.escalate(a.carrier, b.carrier, start=0)
+        all_views = result["all_views"]
+        final_layer = result["layer"]
+
+        steps = [
+            Step("escalate",
+                 f"Projecting {a.name} and {b.name} through the dimension "
+                 f"layers: each layer perceives the pair at its own "
+                 f"resolution, and the layered projection walks from the "
+                 f"substrate (binary) up to the universal (all layers at "
+                 f"once).  Each view is true within its range; the next "
+                 f"layer takes over when this one's reach is exhausted.",
+                 f"escalate({a.name}, {b.name}) walked {len(all_views)} "
+                 f"layers; final layer = {final_layer.name}"),
+        ]
+        # One step per layer, naming its view of each operand and the
+        # distance it measured.
+        for layer_name, view_a, view_b, distance in all_views:
+            steps.append(Step(
+                f"layer_{layer_name}",
+                f"The {layer_name} layer sees {a.name} as "
+                f"{self._describe_view(view_a)} and {b.name} as "
+                f"{self._describe_view(view_b)}.  Its measure of their "
+                f"separation is {distance}.",
+                f"{layer_name}: view_A={view_a!r}, view_B={view_b!r}, "
+                f"distance={distance}",
+            ))
+        steps.append(Step(
+            "verdict",
+            f"The highest layer reached is {final_layer.name} "
+            f"(dimension {final_layer.dimension}).  Its reach: "
+            f"{final_layer.reach[0] if final_layer.reach else 'n/a'}.",
+            f"final_layer={final_layer.name}, "
+            f"final_distance={result['distance']}",
+        ))
+
+        expected = {
+            "operand_a": a.name,
+            "operand_b": b.name,
+            "layers_walked": str(len(all_views)),
+            "final_layer": final_layer.name,
+            "final_distance": q(Fraction(result["distance"])),
+        }
+        return Solution(
+            query=query, kind="project",
+            answer=f"project {a.name} {b.name}: walked "
+                   f"{len(all_views)} layers, final = {final_layer.name}",
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "project",
+                         "args": {"domain_a": a.domain, "name_a": a.name,
+                                  "domain_b": b.domain, "name_b": b.name}},
+            payload={"all_views": [(name, str(va), str(vb), str(d))
+                                    for name, va, vb, d in all_views],
+                     "final_layer": final_layer.name})
+
+    @staticmethod
+    def _describe_view(view) -> str:
+        """A short human-readable description of a layer's view.
+
+        The dimension-projection ``perceive`` functions return a dict
+        whose 'layer' key names the layer and whose other keys carry
+        layer-specific summary data.  We pull out the most informative
+        one or two keys per layer rather than dumping the whole dict.
+        """
+        if isinstance(view, dict):
+            layer = view.get("layer", "?")
+            if layer == "substrate":
+                hw = view.get("hamming_weight", "?")
+                snap = view.get("snap_distance", "?")
+                nrci = view.get("nrci", "?")
+                return (f"binary (HW={hw}, snap_distance={snap}, "
+                        f"NRCI={nrci})")
+            if layer == "integer":
+                exps = view.get("exponents_SI7", ())
+                return f"SI7 exponents {exps}"
+            if layer == "rational":
+                ld = view.get("lattice_distance2", "?")
+                cls = view.get("leech_class", "?")
+                is_2a = view.get("is_2a_axis", "?")
+                return (f"rational carrier (Leech d^2={ld}, "
+                        f"class={cls}, is_2a={is_2a})")
+            if layer == "griess":
+                cls = view.get("leech_class", "?")
+                is_2a = view.get("is_2a_axis", "?")
+                return (f"Griess element (Leech class={cls}, "
+                        f"is_2a_axis={is_2a})")
+            if layer == "universal":
+                return "all layers at once"
+            return f"{layer} view"
+        if isinstance(view, (int, float, Fraction)):
+            return str(view)
+        if isinstance(view, (list, tuple)):
+            if len(view) > 8:
+                return f"a {len(view)}-tuple"
+            return str(view)
+        if isinstance(view, str):
+            return view
+        return type(view).__name__
+
+    # ------------------------------------------------------------------
+    # 3i.  trilinear -- the invariant form ⟨u·v, w⟩ (v0.5.3)
+    # ------------------------------------------------------------------
+    # Wires `reasoning/product.py::griess_trilinear`.  The directive
+    # (`ubp_universal_1.txt`) asks: "would you like to explore how to
+    # explicitly compute the ⟨u·v, w⟩ inner product to extract semantic
+    # similarity scores between your physics concepts?"  This solver
+    # answers that question operationally.
+    # ------------------------------------------------------------------
+
+    def _solve_trilinear(self, query: Query) -> Solution:
+        if len(query.operands) < 3:
+            raise SolverError("trilinear: needs three operands, A B C")
+        # Each operand can be either (a) a concept name, resolved
+        # through the index, or (b) a bare integer axis label (one of
+        # the 98,280 type-2 classes of Lambda/2Lambda).  This lets the
+        # user ask 'trilinear 127 432 463' directly, which is the form
+        # the demo's sample_two_a_pairs() produces.
+        resolved_operands = []
+        for operand in query.operands[:3]:
+            # Try integer first -- bare digits classify as axis labels.
+            if operand.isdigit():
+                resolved_operands.append(("axis", int(operand)))
+            else:
+                obj = self.resolve(operand, query.domain)
+                resolved_operands.append(("concept", obj))
+        a_kind, a_val = resolved_operands[0]
+        b_kind, b_val = resolved_operands[1]
+        c_kind, c_val = resolved_operands[2]
+        a_name = str(a_val) if a_kind == "axis" else a_val.name
+        b_name = str(b_val) if b_kind == "axis" else b_val.name
+        c_name = str(c_val) if c_kind == "axis" else c_val.name
+
+        # Get the three axis labels.  For an explicit integer, that IS
+        # the label.  For a concept, project to its nearest Leech point
+        # and take that point's type-2 class.
+        def _axis_label_for(kind, val):
+            if kind == "axis":
+                return val
+            # Concept: project to nearest lattice point, take its class.
+            lat = an.nearest_lattice_point(list(val.carrier))
+            cls = leech2.class_of(list(lat.point))
+            return cls
+
+        try:
+            label_a = _axis_label_for(a_kind, a_val)
+            label_b = _axis_label_for(b_kind, b_val)
+            label_c = _axis_label_for(c_kind, c_val)
+            ax_a = pr.axis(label_a)
+            ax_b = pr.axis(label_b)
+            ax_c = pr.axis(label_c)
+        except (pr.PositionError, ValueError, TypeError) as exc:
+            return Solution(
+                query=query, kind="trilinear",
+                answer=f"trilinear {a_name} {b_name} {c_name}: an operand "
+                       f"did not resolve to a 2A axis",
+                ok=False, error=f"trilinear: {exc}",
+                steps=(Step("failed",
+                            "One of the three operands does not resolve to "
+                            "a 2A axis of the Leech lattice (its nearest "
+                            "lattice point is not a type-2 class, or the "
+                            "label is not in the 98,280), so the Griess "
+                            "trilinear form is not defined on it.",
+                            f"Error: {exc}"),),
+                payload={"operands": [a_name, b_name, c_name]})
+
+        # Compute the trilinear form T(a, b, c) = <a.b, c>.  This raises
+        # PositionError if any pair is in the "not modelled" position 1
+        # or 0 -- honest about the boundary.
+        try:
+            T = pr.griess_trilinear(ax_a, ax_b, ax_c)
+            # axis_product returns an AlgebraVector; griess_form takes
+            # two of them.  The squared norm of a product is
+            # griess_form(prod, prod).
+            prod_ab = pr.axis_product(label_a, label_b)
+            prod_ac = pr.axis_product(label_a, label_c)
+            prod_bc = pr.axis_product(label_b, label_c)
+            Tab = pr.griess_form(prod_ab, prod_ab)
+            Tac = pr.griess_form(prod_ac, prod_ac)
+            Tbc = pr.griess_form(prod_bc, prod_bc)
+            coh = pr.coherence_of_product(ax_a, ax_b)
+        except pr.PositionError as exc:
+            return Solution(
+                query=query, kind="trilinear",
+                answer=f"trilinear {a_name} {b_name} {c_name}: a pair is "
+                       f"not in the 2A position",
+                ok=False, error=f"trilinear: {exc}",
+                steps=(Step("failed",
+                            "The Griess product models only the 1A (same "
+                            "axis), 2A (invariant 2), and 2B (invariant 0) "
+                            "positions.  This triple has a pair in the "
+                            "invariant-1 position, which is not modelled -- "
+                            "94,208 of the 98,280 type-2 classes are in "
+                            "this position against any given axis.  The "
+                            "trilinear form is therefore not defined on "
+                            "this triple.",
+                            f"PositionError: {exc}"),),
+                payload={"operands": [a_name, b_name, c_name],
+                         "axes": [label_a, label_b, label_c]})
+
+        # coh is a dict with these keys:
+        #   factor_x_norm2, factor_y_norm2, product_norm2,
+        #   self_coherence_x, self_coherence_y, product_is_zero
+        coh_xx = coh["factor_x_norm2"]
+        coh_yy = coh["factor_y_norm2"]
+        coh_pp = coh["product_norm2"]
+        coh_sx = coh["self_coherence_x"]
+        coh_sy = coh["self_coherence_y"]
+
+        # T, Tab, Tac, Tbc, coh are computed in the try block above.
+
+        steps = [
+            Step("axes",
+                 f"Each operand is projected onto a 2A axis of the Leech "
+                 f"lattice.  For an explicit integer operand, that IS the "
+                 f"axis label; for a concept name, the carrier is decoded "
+                 f"to its nearest Leech point and that point's type-2 "
+                 f"class is the axis.  The trilinear form <u.v, w> is "
+                 f"defined on these axes; it is the invariant Griess form "
+                 f"the directive asks about.",
+                 f"axis({a_name}) = {label_a}, "
+                 f"axis({b_name}) = {label_b}, "
+                 f"axis({c_name}) = {label_c}"),
+            Step("trilinear",
+                 f"The trilinear form T(A, B, C) = <A.B, C> is the "
+                 f"invariant inner product of the Griess algebra.  It "
+                 f"measures the coherence of the triple: T = 0 means the "
+                 f"three are mutually orthogonal, T != 0 means the product "
+                 f"of two has a component along the third.",
+                 f"T({a_name}, {b_name}, {c_name}) = {q(T)}"),
+            Step("pairwise",
+                 f"For context, the three pairwise bilinear forms "
+                 f"<A.B, A.B>, <A.C, A.C>, <B.C, B.C> (the squared norms "
+                 f"of the pairwise products).",
+                 f"<A.B>^2 = {q(Tab)}, <A.C>^2 = {q(Tac)}, "
+                 f"<B.C>^2 = {q(Tbc)}"),
+            Step("coherence",
+                 f"The coherence-of-product block reports ||A||^2, "
+                 f"||B||^2, ||A.B||^2, and the self-coherence values "
+                 f"<A.B, A> and <A.B, B> -- the ingredients a "
+                 f"semantic-similarity score would use.",
+                 f"||A||^2 = {q(coh_xx)}, ||B||^2 = {q(coh_yy)}, "
+                 f"||A.B||^2 = {q(coh_pp)}, "
+                 f"<A.B, A> = {q(coh_sx)}, <A.B, B> = {q(coh_sy)}"),
+        ]
+        expected = {
+            "operand_a": a_name,
+            "operand_b": b_name,
+            "operand_c": c_name,
+            "axis_a": str(label_a),
+            "axis_b": str(label_b),
+            "axis_c": str(label_c),
+            "trilinear": q(T),
+            "pairwise_AB": q(Tab),
+            "pairwise_AC": q(Tac),
+            "pairwise_BC": q(Tbc),
+        }
+        return Solution(
+            query=query, kind="trilinear",
+            answer=f"trilinear {a_name} {b_name} {c_name}: "
+                   f"<A.B, C> = {q(T)}",
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "trilinear",
+                         "args": {"domain_a": query.domain or "mathematics",
+                                  "name_a": a_name,
+                                  "domain_b": query.domain or "mathematics",
+                                  "name_b": b_name,
+                                  "domain_c": query.domain or "mathematics",
+                                  "name_c": c_name}},
+            payload={"coherence_block": coh,
+                     "axes": [label_a, label_b, label_c]})
+
+    # ------------------------------------------------------------------
+    # 3j.  coherence -- the five-shell NRCI breakdown (v0.5.3)
+    # ------------------------------------------------------------------
+    # Wires `reasoning/coherence.py::nrci_breakdown`.  The whole
+    # coherence module was created in v0.4.0 but never reached from any
+    # runtime query.  NRCI is one of the GLM's headline metrics -- the
+    # directive's constants table puts TAX and NRCI front and centre --
+    # and the runtime had no way to ask for it.
+    # ------------------------------------------------------------------
+
+    def _solve_coherence(self, query: Query) -> Solution:
+        if not query.operands:
+            raise SolverError("coherence: no concept named")
+        obj = self.resolve(query.operands[0], query.domain)
+        carrier = list(obj.carrier)
+
+        # nrci_breakdown returns a dict with per-shell taxes and the
+        # combined NRCI.  Shell keys are:
+        #   shell0_golay, shell1_sign_parity, shell2_sextet_balance,
+        #   shell3_coset_type, shell4_sextet_signed, tax_total, nrci, regime
+        breakdown = co.nrci_breakdown(carrier)
+        # nrci_breakdown may already include a regime; if so, use it,
+        # otherwise derive it.
+        regime = breakdown.get("regime") or co.coherence_regime(
+            breakdown["nrci"])
+        nrci_value = breakdown["nrci"]
+        if isinstance(nrci_value, Fraction):
+            nrci_str = q(nrci_value)
+        else:
+            nrci_str = q(Fraction(nrci_value).limit_denominator(10**6))
+
+        # Per-shell values: 0, 1, 3 are exact rationals stored as
+        # strings; 2 and 4 are floats (sqrt).  Render them honestly.
+        def _render_shell(v):
+            if isinstance(v, Fraction):
+                return q(v)
+            if isinstance(v, float):
+                return f"{v:.6f}"
+            return str(v)
+
+        shell_keys = ("shell0_golay", "shell1_sign_parity",
+                      "shell2_sextet_balance", "shell3_coset_type",
+                      "shell4_sextet_signed")
+        shell_renders = {k: _render_shell(breakdown[k]) for k in shell_keys}
+
+        steps = [
+            Step("nrci",
+                 f"NRCI is the GLM's coherence measure: how structured, "
+                 f"non-random a carrier is.  It runs from 0 (subcoherent) "
+                 f"through 1 (perfect coherence, the vacuum).  {obj.name}'s "
+                 f"combined NRCI is {nrci_value:.6f}, which puts it in the "
+                 f"{regime} regime.",
+                 f"NRCI({obj.name}) = {nrci_str} = {nrci_value:.6f}, "
+                 f"regime = {regime}"),
+            Step("shells",
+                 f"The five shells decompose the tax.  Shell 0 (Golay, "
+                 f"sign-blind) is the original TAX = HW*Y + ||v||^2/8.  "
+                 f"Shell 1 (sign-parity), Shell 2 (sextet-balance, float), "
+                 f"Shell 3 (coset-type), Shell 4 (sextet-signed, float).",
+                 f"shell0_golay = {shell_renders['shell0_golay']}, "
+                 f"shell1_sign_parity = {shell_renders['shell1_sign_parity']}, "
+                 f"shell2_sextet_balance = {shell_renders['shell2_sextet_balance']}, "
+                 f"shell3_coset_type = {shell_renders['shell3_coset_type']}, "
+                 f"shell4_sextet_signed = {shell_renders['shell4_sextet_signed']}"),
+            Step("regime",
+                 f"The regime buckets the NRCI: OnBit (>=0.8), Coherent "
+                 f"(>=0.5), Transitional (>=0.3), Subcoherent (<0.3).",
+                 f"regime({nrci_value:.4f}) = {regime}"),
+        ]
+        expected = {
+            "name": obj.name,
+            "domain": obj.domain,
+            "nrci": nrci_str,
+            "regime": regime,
+            "shell0_golay": shell_renders["shell0_golay"],
+            "shell1_sign_parity": shell_renders["shell1_sign_parity"],
+        }
+        return Solution(
+            query=query, kind="coherence",
+            answer=f"coherence {obj.name}: NRCI = {nrci_value:.4f} "
+                   f"({regime})",
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "coherence",
+                         "args": {"domain": obj.domain, "name": obj.name}},
+            payload={"breakdown": {k: _render_shell(v)
+                                    for k, v in breakdown.items()},
+                     "regime": regime})
+
+    # ------------------------------------------------------------------
+    # 3k.  report -- on-demand recomputation of facts (v0.5.4)
+    # ------------------------------------------------------------------
+    # Wires four previously-unused report functions:
+    #   * ve.verifier_report   -- the 222+71 relation tables
+    #   * leech2.pair_census   -- the 4-position Leech distribution
+    #   * leech2.theta_series  -- the Leech theta series E_4^3 - 720*Delta
+    #   * pr.two_a_closure_report -- closure facts about the 2A subalgebra
+    # The subject names what to recompute; everything is computed, not
+    # quoted (per the directive's "facts computed, not quoted" rule).
+    # ------------------------------------------------------------------
+
+    def _solve_report(self, query: Query) -> Solution:
+        subject = query.options.get("subject", "").strip().lower()
+        if not subject:
+            return Solution(
+                query=query, kind="report",
+                answer="report: no subject given.  Try one of: "
+                       "relations, leech distribution, theta, subalgebra",
+                ok=False, error="report: no subject",
+                steps=(Step("usage",
+                            "Subjects: relations, leech distribution, "
+                            "theta, subalgebra",
+                            "report <subject>"),),
+                payload={})
+
+        if subject in ("relations", "verifier", "relation"):
+            return self._report_relations(query)
+        if subject in ("leech distribution", "leech", "distribution",
+                         "pair census", "census"):
+            return self._report_leech_distribution(query)
+        if subject in ("theta", "theta series", "theta_series"):
+            return self._report_theta(query)
+        if subject in ("subalgebra", "2a subalgebra", "closure",
+                         "two_a_closure"):
+            return self._report_subalgebra(query)
+        # Unknown subject
+        return Solution(
+            query=query, kind="report",
+            answer=f"report: unknown subject {subject!r}.  Try one of: "
+                   f"relations, leech distribution, theta, subalgebra",
+            ok=False, error=f"report: unknown subject {subject!r}",
+            steps=(Step("unknown",
+                        f"The subject {subject!r} is not a recognised "
+                        f"report subject.",
+                        f"subjects: relations, leech distribution, theta, "
+                        f"subalgebra"),),
+            payload={"requested": subject})
+
+    def _report_relations(self, query: Query) -> Solution:
+        """Wires ve.verifier_report — the 222+71 relation audit."""
+        report = ve.verifier_report()
+        # The report has three tables: scalar relations under scalar
+        # semantics (all hold), scalar relations under full semantics
+        # (some fail on rank/parity), and tensor relations under full
+        # semantics (all hold).
+        scalar_scalar = report["scalar_relations_under_scalar_semantics"]
+        scalar_full = report["scalar_relations_under_full_semantics"]
+        tensor_full = report["tensor_relations_under_full_semantics"]
+        steps = [
+            Step("verifier_report",
+                 f"The verifier audited three tables: {scalar_scalar['checked']} "
+                 f"scalar relations under scalar semantics ({scalar_scalar['held']} "
+                 f"hold), {scalar_full['checked']} scalar relations under full "
+                 f"tensor semantics ({scalar_full['held']} hold, "
+                 f"{scalar_full['failed']} fail on rank/parity), and "
+                 f"{tensor_full['checked']} tensor relations ({tensor_full['held']} "
+                 f"hold).  The {scalar_full['failed']} that hold scalarly but fail "
+                 f"under full semantics are statements a units table gets right "
+                 f"but a tensor analysis gets wrong -- e.g. 'acceleration = speed "
+                 f"/ time' fails because the left side is rank-1 and the right "
+                 f"side a scalar.",
+                 f"scalar/scalar: {scalar_scalar['held']}/{scalar_scalar['checked']}, "
+                 f"scalar/full: {scalar_full['held']}/{scalar_full['checked']} "
+                 f"({scalar_full['failed']} fail), "
+                 f"tensor/full: {tensor_full['held']}/{tensor_full['checked']}"),
+        ]
+        expected = {
+            "scalar_scalar_checked": str(scalar_scalar["checked"]),
+            "scalar_scalar_held": str(scalar_scalar["held"]),
+            "scalar_full_checked": str(scalar_full["checked"]),
+            "scalar_full_held": str(scalar_full["held"]),
+            "scalar_full_failed": str(scalar_full["failed"]),
+            "tensor_full_checked": str(tensor_full["checked"]),
+            "tensor_full_held": str(tensor_full["held"]),
+        }
+        return Solution(
+            query=query, kind="report",
+            answer=f"report relations: scalar/scalar "
+                   f"{scalar_scalar['held']}/{scalar_scalar['checked']}, "
+                   f"scalar/full {scalar_full['held']}/{scalar_full['checked']}, "
+                   f"tensor/full {tensor_full['held']}/{tensor_full['checked']}",
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "report_relations", "args": {}},
+            payload={"report": report})
+
+    def _report_leech_distribution(self, query: Query) -> Solution:
+        """Wires leech2.pair_census — the 4-position Leech distribution."""
+        census = leech2.pair_census()
+        steps = [
+            Step("pair_census",
+                 f"The 196,560 minimal vectors of the Leech lattice, "
+                 f"taken against any fixed one, fall into exactly four "
+                 f"mutual positions.  This is the reason the Monster's 2A "
+                 f"axes have only four positions: 1A (2 vectors), 2A "
+                 f"(9,200), invariant-1 (94,208, not modelled), and 2B "
+                 f"(93,150).",
+                 f"pair_census = {dict(census)}"),
+        ]
+        expected = {f"position_{k}": str(v) for k, v in census.items()}
+        return Solution(
+            query=query, kind="report",
+            answer=f"report leech distribution: {dict(census)}",
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "report_leech", "args": {}},
+            payload={"census": dict(census)})
+
+    def _report_theta(self, query: Query) -> Solution:
+        """Wires leech2.theta_series — the Leech theta series E_4^3 - 720*Delta."""
+        order = 5
+        coeffs = leech2.theta_series(order=order)
+        steps = [
+            Step("theta_series",
+                 f"The theta series of the Leech lattice is "
+                 f"E_4^3 - 720*Delta, computed exactly.  Coefficient n "
+                 f"counts vectors of squared norm 8n.  The first few: "
+                 f"1 (the zero vector), 0 (no norm-8 vectors), 196560 "
+                 f"(the minimal vectors, norm 16 = 8*2), 16773120 "
+                 f"(norm 24 = 8*3), ...",
+                 f"theta = {coeffs}"),
+        ]
+        expected = {f"coeff_{i}": str(c) for i, c in enumerate(coeffs)}
+        return Solution(
+            query=query, kind="report",
+            answer=f"report theta: {coeffs}",
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "report_theta", "args": {}},
+            payload={"coefficients": coeffs, "order": order})
+
+    def _report_subalgebra(self, query: Query) -> Solution:
+        """Wires pr.two_a_closure_report — 2A subalgebra closure facts."""
+        report = pr.two_a_closure_report()
+        steps = [
+            Step("two_a_closure_report",
+                 f"The 2A subalgebra generated by a sampled 2A pair is "
+                 f"checked for: closure in three dimensions, "
+                 f"commutativity, non-associativity (with an explicit "
+                 f"witness), and the Gram matrix (1 on the diagonal, "
+                 f"1/8 off it).",
+                 f"two_a_closure_report = {report}"),
+        ]
+        expected = {k: str(v) for k, v in report.items()}
+        return Solution(
+            query=query, kind="report",
+            answer=f"report subalgebra: {report}",
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "report_subalgebra", "args": {}},
+            payload={"report": report})
+
+    # ------------------------------------------------------------------
+    # 3l.  angle -- exact cosine comparison (v0.5.4)
+    # ------------------------------------------------------------------
+    # Wires me.signed_cosine_squared.  The directive's "XOR isn't
+    # suitable in most situations" rule applies to angular comparison
+    # too: the cosine is irrational in general, but sign(<u,v>)*cos^2
+    # is always rational and orders pairs by angle exactly.
+    # ------------------------------------------------------------------
+
+    def _solve_angle(self, query: Query) -> Solution:
+        if len(query.operands) < 2:
+            raise SolverError("angle: needs two operands, A and B")
+        a = self.resolve(query.operands[0], query.domain)
+        b = self.resolve(query.operands[1], query.domain)
+        try:
+            sc2 = me.signed_cosine_squared(a.carrier, b.carrier)
+        except ValueError as exc:
+            return Solution(
+                query=query, kind="angle",
+                answer=f"angle {a.name} {b.name}: angle undefined",
+                ok=False, error=f"angle: {exc}",
+                steps=(Step("failed",
+                            "The signed cosine squared is undefined when "
+                            "either vector is zero (no direction).",
+                            f"ValueError: {exc}"),),
+                payload={"operands": [a.name, b.name]})
+        # sc2 in [-1, 1]; +1 means parallel, -1 means anti-parallel, 0
+        # means orthogonal.  The actual cosine is sqrt(|sc2|) with sign.
+        sign = "+" if sc2 >= 0 else "-"
+        abs_sc2 = abs(sc2)
+        # Describe the regime.
+        if abs_sc2 == 0:
+            regime = "orthogonal"
+        elif abs_sc2 == 1:
+            regime = "parallel" if sc2 > 0 else "anti-parallel"
+        elif abs_sc2 >= Fraction(1, 2):
+            regime = "acute" if sc2 > 0 else "obtuse"
+        else:
+            regime = "near-orthogonal"
+        steps = [
+            Step("signed_cosine_squared",
+                 f"The signed cosine squared is sign(<A, B>) * cos^2(A, B), "
+                 f"an exact rational that orders pairs by angle exactly.  "
+                 f"For {a.name} and {b.name} it is {q(sc2)}, which is "
+                 f"in the {regime} regime.",
+                 f"signed_cosine_squared({a.name}, {b.name}) = {q(sc2)}, "
+                 f"regime = {regime}"),
+            Step("interpretation",
+                 f"sign = {sign}, |cos^2| = {q(abs_sc2)}.  +1 means "
+                 f"parallel, -1 means anti-parallel, 0 means orthogonal.  "
+                 f"The actual cosine is sqrt(|cos^2|) with the sign, which "
+                 f"is generally irrational -- this rational form is the "
+                 f"exact order-preserving surrogate.",
+                 f"sign={sign}, |sc2|={q(abs_sc2)}, regime={regime}"),
+        ]
+        expected = {
+            "operand_a": a.name,
+            "operand_b": b.name,
+            "signed_cosine_squared": q(sc2),
+            "regime": regime,
+        }
+        return Solution(
+            query=query, kind="angle",
+            answer=f"angle {a.name} {b.name}: cos^2 = {q(sc2)} ({regime})",
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "angle",
+                         "args": {"domain_a": a.domain, "name_a": a.name,
+                                  "domain_b": b.domain, "name_b": b.name}},
+            payload={"signed_cosine_squared": q(sc2),
+                     "regime": regime})
 
 
 def _jsonable(mapping: Mapping[str, Any]) -> Dict[str, object]:

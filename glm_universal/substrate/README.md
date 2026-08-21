@@ -212,3 +212,24 @@ uv run pytest glm_universal/tests/test_substrate.py -q
   implemented, so there is no way yet to move between alignments.
 * **Facet attribution is bit-level, not semantic.** It says *where* two
   carriers differ in the MOG geometry. It does not say why.
+
+---
+
+## v0.6.0 update: the multi-MOG-cube is operational
+
+The `digit_stack` module IS the multi-MOG-cube from
+`glm_lean/glm3/glm3_mog.py`.  Verified on a real Leech basis vector:
+
+* plane 0 is constant (all 24 cells equal — the mod-2 parity frame)
+* plane 1 is a Golay codeword (a valid member of `GOLAY_SET`)
+* the mod-8 sum condition holds (`sum(x) ≡ 4·(x_0 mod 2) mod 8`)
+
+Every `DataObject.stack()` produces this stack of MOG frames, and
+`obj.plane_grids()` shows each plane as a 4×6 grid.
+
+The `leech2.theta_series` function computes the Leech theta series
+`E_4^3 - 720*Delta`, which is the bridge to the Moonshine layer
+(`reasoning/moonshine.py`, added in v0.6.0).  The j-function is
+`E_4^3 / Delta + 744`, and its first non-trivial coefficient is
+196884 = dim V_2 = the dimension of the Griess algebra that the
+substrate's `leech2` module indexes via the 98,280 type-2 classes.

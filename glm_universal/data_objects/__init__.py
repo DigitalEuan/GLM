@@ -36,7 +36,7 @@ appears even in serialisation.
 
 from __future__ import annotations
 
-from . import base, elements, lexicon, mathematics, physics
+from . import base, elements, lexicon, mathematics, physics, semantic_lexicon
 from .base import (Carrier, Codec, DataObject, RoundTripFailure, Scalar,
                    StackParameters, as_exact, carrier_from_json,
                    carrier_to_json, derive_dynamic_parameters, dyadic_exponent,
@@ -56,9 +56,15 @@ from .physics import (AXES_EXT10, AXES_SI7, PHYSICS_LAYOUT, PhysicsCodec,
                       Quantity, basis_collision_report, dimension_string,
                       load_physics_register, physics_objects,
                       quantity_by_name, si7_projection_lossy)
+from .semantic_lexicon import (MAX_SEMANTIC_RELATIONS, SEMANTIC_LAYOUT,
+                               SEMANTIC_PRIMITIVE_NAMES, SEMANTIC_PRIMITIVES,
+                               SEMANTIC_SAMPLE_CONCEPTS, SemanticConcept,
+                               SemanticLexiconCodec, default_semantic_vocabulary,
+                               semantic_lexicon_objects)
 
 __all__ = [
     "base", "physics", "elements", "mathematics", "lexicon",
+    "semantic_lexicon",
     # base
     "DataObject", "Codec", "StackParameters", "RoundTripFailure",
     "Carrier", "Scalar", "as_exact", "exact_vector",
@@ -77,9 +83,14 @@ __all__ = [
     "EXACT_SHAPES", "MATRIX_LAYOUT", "RationalMatrix", "Reflection",
     "FieldElement", "MatrixCodec", "ReflectionCodec", "FieldElementCodec",
     "mathematics_objects", "reflect", "compose_matrices",
-    # lexicon
+    # lexicon (legacy index-based)
     "LEXICON_LAYOUT", "Vocabulary", "Concept", "LexiconCodec",
     "default_vocabulary", "lexicon_objects",
+    # semantic_lexicon (meaning-based)
+    "SEMANTIC_LAYOUT", "SEMANTIC_PRIMITIVES", "SEMANTIC_PRIMITIVE_NAMES",
+    "SEMANTIC_SAMPLE_CONCEPTS", "MAX_SEMANTIC_RELATIONS",
+    "SemanticConcept", "SemanticLexiconCodec",
+    "default_semantic_vocabulary", "semantic_lexicon_objects",
 ]
 
 

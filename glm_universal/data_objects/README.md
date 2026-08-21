@@ -300,3 +300,44 @@ establish.
 uv run python -m pytest glm_universal/tests/test_data_objects.py -q
 uv run python workflow/08_step2_data_objects_verification.py
 ```
+
+---
+
+## v0.6.0 update: encoding lessons learned
+
+The v0.5.0 → v0.5.2 work taught us several things about how to
+encode data_objects correctly:
+
+1. **Every data_object has 24 coordinates, no padding.**  The carrier
+   shape is fixed by the Leech lattice, not by the data.  If a domain
+   needs more than 24 coordinates, it must split across multiple
+   carriers.
+
+2. **Missingness is data, not an inconvenience.**  The element register
+   uses a missingness mask (coord 17) so "0 because no measurement"
+   is distinguishable from "0 as a value".  Any new domain with sparse
+   data should follow this pattern.
+
+3. **Aliases must avoid cross-domain collisions.**  The v0.5.2 fix
+   (suppress short physics symbols that collide with element symbols)
+   is a hard lesson: adding 60 physics concepts broke the chemistry
+   analogy because `Li` resolved to `acoustic_intensity_level` instead
+   of lithium.
+
+4. **Primitive vectors must be unique.**  The v0.5.1 lexicon audit
+   found 6 groups of concepts with identical primitive vectors.  The
+   fix was to set every primitive on every concept (no defaults) and
+   use 1/8 gradations where 1/4 was too coarse.
+
+5. **Words are projections of meaning.**  The directive says "many
+   words may be just projections of existing physics or math concepts".
+   The semantic lexicon encodes words with 10 primitives, but `hot`
+   is not yet encoded as "temperature at high scale" — it is a
+   standalone concept.  Future work: encode words as projections.
+
+6. **Register sizes (v0.6.0):**
+   - physics: 720 quantities (EXT10 + SI7 + metadata)
+   - chemistry: 118 elements (measured properties + Golay address)
+   - mathematics: 22 objects (matrices, reflections, field elements)
+   - lexicon: 95 semantic concepts (10 primitives + relations)
+   - spatial: 28 MOG structures (trio, sextet, frame rows)

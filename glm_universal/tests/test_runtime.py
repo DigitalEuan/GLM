@@ -318,7 +318,7 @@ class TestSessionConfiguration:
             fresh.set_basis("nonsense")
 
     def test_the_register_sizes_are_the_documented_ones(self, sess):
-        assert len(sess.register("physics")) == 660
+        assert len(sess.register("physics")) == 720
         assert len(sess.register("chemistry")) == 118
         assert len(sess.register("spatial")) == 28
 
@@ -744,7 +744,7 @@ class TestCommandLine:
         text = out.getvalue()
         for domain in SE.DOMAINS:
             assert domain in text
-        assert "660" in text and "118" in text
+        assert "720" in text and "118" in text
 
     def test_a_batch_query_succeeds(self, glm):
         out = io.StringIO()

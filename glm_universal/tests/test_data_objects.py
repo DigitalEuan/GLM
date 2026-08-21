@@ -172,9 +172,9 @@ class TestPhysics(unittest.TestCase):
         cls.register = do.load_physics_register()
         cls.codec = do.PhysicsCodec()
 
-    def test_register_holds_660_concepts(self):
-        self.assertEqual(len(self.register), 660)
-        self.assertEqual(len({q.name for q in self.register}), 660)
+    def test_register_holds_720_concepts(self):
+        self.assertEqual(len(self.register), 720)
+        self.assertEqual(len({q.name for q in self.register}), 720)
 
     def test_axes(self):
         self.assertEqual(do.AXES_EXT10,
@@ -240,7 +240,7 @@ class TestPhysics(unittest.TestCase):
 
     def test_ext10_resolves_more_than_si7(self):
         report = do.basis_collision_report()
-        self.assertEqual(report["concepts"], 660)
+        self.assertEqual(report["concepts"], 720)
         self.assertLess(report["EXT10"]["colliding_pairs"],
                         report["SI7"]["colliding_pairs"])
         self.assertGreater(report["ext10_resolves_extra_pairs"], 0)
@@ -753,7 +753,7 @@ class TestCrossDomain(unittest.TestCase):
                 with self.subTest(domain=domain, name=obj.name):
                     self.assertTrue(obj.round_trip_ok())
                 total += 1
-        self.assertGreaterEqual(total, 660 + 118 + 20 + 10)
+        self.assertGreaterEqual(total, 720 + 118 + 20 + 10)
 
     def test_every_carrier_has_24_coordinates(self):
         catalogue = do.all_objects()

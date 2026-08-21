@@ -52,6 +52,7 @@ from typing import Dict, List, Optional, Sequence, Tuple
 from ..data_objects import base as do_base
 from ..data_objects import elements as do_elements
 from ..data_objects import physics as do_physics
+from ..data_objects import semantic_lexicon as do_semantic_lexicon
 from ..data_objects.base import DataObject
 from ..substrate import leech2, mog
 from . import metric
@@ -91,6 +92,20 @@ SUBSPACES: Dict[str, Tuple[str, ...]] = {
     "chemistry.measured": (
         "atomic_weight_u", "electronegativity_pauling", "atomic_radius_pm",
         "covalent_radius_pm", "valence_electrons", "ionization_energy_eV"),
+    # lexicon (v0.5.1): the ten semantic primitives alone.  This subspace
+    # lets analogies over words resolve on meaning rather than spelling.
+    # `energy : force :: heat : ?` should resolve to `temperature` from
+    # this subspace, because heat->temperature differs from energy->force
+    # in the same primitive axes.
+    "lexicon.primitives": tuple(do_semantic_lexicon.SEMANTIC_PRIMITIVE_NAMES),
+    # lexicon (v0.5.1): the four predicate + four object slots.  This
+    # subspace asks "what relations does this concept participate in?"
+    # without regard to its meaning.
+    "lexicon.relations": tuple(
+        f"predicate{i}" for i in range(do_semantic_lexicon.MAX_SEMANTIC_RELATIONS)
+    ) + tuple(
+        f"object{i}" for i in range(do_semantic_lexicon.MAX_SEMANTIC_RELATIONS)
+    ),
 }
 
 
