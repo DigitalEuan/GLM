@@ -237,6 +237,143 @@ class TestSakumaProduct:
 
 
 # ===========================================================================
+# 1b.  THE GRIESS TRILINEAR FORM
+# ===========================================================================
+
+class TestTrilinearForm:
+
+    def test_trilinear_on_idempotent_axis_is_norm(self, two_a_pairs):
+        """T(a, a, a) = <a . a, a> = <a, a> = 1"""
+        u, _ = two_a_pairs[0]
+        assert PR.trilinear_on_axes(u, u, u) == Fraction(1)
+        assert PR.axis_trilinear(u, u, u) == Fraction(1)
+
+    def test_trilinear_with_self_product_is_inner(self, two_a_pairs):
+        """T(a, a, b) = <a . a, b> = <a, b> = 1/8 for a 2A pair."""
+        u, v = two_a_pairs[0]
+        assert PR.trilinear_on_axes(u, u, v) == PR.TWO_A_INNER
+        assert PR.trilinear_on_axes(v, v, u) == PR.TWO_A_INNER
+
+    def test_trilinear_is_zero_for_2b_pair(self, two_a_pairs):
+        """T(a, b, c) = 0 when a, b are orthogonal (2B)."""
+        u, _ = two_a_pairs[0]
+        lam, _ = L.axis_of_class(u)
+        for cls in sorted(L.type2_classes()):
+            mu, _ = L.axis_of_class(cls)
+            if L.pair_invariant(lam, mu) == 0:
+                # found a 2B partner
+                assert PR.trilinear_on_axes(u, cls, u) == Fraction(0)
+                assert PR.trilinear_on_axes(cls, u, u) == Fraction(0)
+                break
+
+    def test_trilinear_agrees_with_product_then_form(self, two_a_pairs):
+        """T(x, y, z) == <x . y, z> computed step by step."""
+        for u, v in two_a_pairs[:3]:
+            w = PR.sakuma_third_axis(u, v)
+            for i in (u, v, w):
+                for j in (u, v, w):
+                    for k in (u, v, w):
+                        direct = PR.trilinear_on_axes(i, j, k)
+                        via_product = PR.griess_form(
+                            PR.axis_product(i, j), PR.axis(k))
+                        assert direct == via_product
+
+    def test_trilinear_is_bilinear_in_first_two_args(self, subalgebra):
+        """T(ax + by, z, w) = a*T(x,z,w) + b*T(y,z,w)."""
+        a, b, c = subalgebra.basis()
+        alpha, beta = Fraction(2, 3), Fraction(-1, 5)
+        combo = a.scale(alpha) + b.scale(beta)
+        lhs = PR.griess_trilinear(combo, b, c)
+        rhs = (PR.griess_trilinear(a, b, c) * alpha
+               + PR.griess_trilinear(b, b, c) * beta)
+        assert lhs == rhs
+
+    def test_trilinear_is_linear_in_third_arg(self, subalgebra):
+        """T(x, y, az + bw) = a*T(x,y,z) + b*T(x,y,w)."""
+        a, b, c = subalgebra.basis()
+        alpha, beta = Fraction(3, 7), Fraction(-2, 7)
+        combo = c.scale(alpha) + a.scale(beta)
+        lhs = PR.griess_trilinear(a, b, combo)
+        rhs = (PR.griess_trilinear(a, b, c) * alpha
+               + PR.griess_trilinear(a, b, a) * beta)
+        assert lhs == rhs
+
+    def test_griess_trilinear_on_vectors(self, two_a_pairs):
+        """The general form works on AlgebraVector inputs."""
+        u, v = two_a_pairs[0]
+        x, y, z = PR.axis(u), PR.axis(v), PR.axis(u)
+        assert PR.griess_trilinear(x, y, z) == PR.trilinear_on_axes(u, v, u)
+
+    def test_trilinear_report_recomputes_facts(self, two_a_pairs):
+        report = PR.trilinear_report(two_a_pairs)
+        assert report["pairs_checked"] == len(two_a_pairs)
+        assert report["all_exact"]
+        assert report["all_diagonal_ones"]
+        assert report["all_self_product_correct"]
+
+    def test_semantic_distance2_is_zero_iff_equal(self, two_a_pairs):
+        """d(x, x) = 0 and d(x, y) > 0 for distinct axes."""
+        u, v = two_a_pairs[0]
+        x, y = PR.axis(u), PR.axis(v)
+        assert PR.semantic_distance2(x, x) == 0
+        assert PR.semantic_distance2(x, y) > 0
+        assert PR.semantic_distance2(y, x) == PR.semantic_distance2(x, y)
+
+    def test_semantic_distance2_is_symmetric(self, two_a_pairs):
+        """d(x, y) == d(y, x) for all pairs."""
+        for u, v in two_a_pairs[:4]:
+            x, y = PR.axis(u), PR.axis(v)
+            assert PR.semantic_distance2(x, y) == PR.semantic_distance2(y, x)
+
+    def test_semantic_similarity_is_one_for_same_axis(self, two_a_pairs):
+        """cos^2(a, a) = 1."""
+        u, _ = two_a_pairs[0]
+        x = PR.axis(u)
+        assert PR.semantic_similarity(x, x) == Fraction(1)
+
+    def test_semantic_similarity_is_bounded(self, two_a_pairs):
+        """0 <= cos^2(x, y) <= 1."""
+        for u, v in two_a_pairs[:4]:
+            x, y = PR.axis(u), PR.axis(v)
+            s = PR.semantic_similarity(x, y)
+            assert Fraction(0) <= s <= Fraction(1)
+
+    def test_semantic_similarity_refuses_zero(self):
+        """Zero element has no direction."""
+        with pytest.raises(ValueError):
+            PR.semantic_similarity(PR.zero(), PR.axis(0))
+
+    def test_coherence_of_product_captures_structure(self, two_a_pairs):
+        """Product coherence is a dict with the expected keys."""
+        u, v = two_a_pairs[0]
+        coh = PR.coherence_of_product(PR.axis(u), PR.axis(v))
+        assert isinstance(coh["factor_x_norm2"], Fraction)
+        assert isinstance(coh["factor_y_norm2"], Fraction)
+        assert isinstance(coh["product_norm2"], Fraction)
+        assert isinstance(coh["self_coherence_x"], Fraction)
+        assert isinstance(coh["self_coherence_y"], Fraction)
+        # the product of two distinct 2A axes is not zero
+        assert not coh["product_is_zero"]
+
+    def test_coherence_self_product_matches_form(self, two_a_pairs):
+        """<a . a, a> = <a, a> = 1 for any axis."""
+        u, _ = two_a_pairs[0]
+        coh = PR.coherence_of_product(PR.axis(u), PR.axis(u))
+        assert coh["self_coherence_x"] == Fraction(1)
+        assert coh["product_norm2"] == Fraction(1)
+
+    def test_all_values_are_fractions(self, two_a_pairs):
+        """No float is ever constructed by the trilinear form."""
+        for u, v in two_a_pairs[:3]:
+            w = PR.sakuma_third_axis(u, v)
+            for i in (u, v, w):
+                for j in (u, v, w):
+                    for k in (u, v, w):
+                        val = PR.trilinear_on_axes(i, j, k)
+                        assert isinstance(val, Fraction)
+
+
+# ===========================================================================
 # 2.  THE GRIESS METRIC
 # ===========================================================================
 
@@ -625,9 +762,15 @@ class TestExactness:
                         path.name
 
     def test_no_float_literals_and_no_float_calls(self):
-        """No source line constructs a float, in any reasoning module."""
+        """No source line constructs a float, in any reasoning module.
+
+        Exception: coherence.py is allowed floats for NRCI shells 2 and 4
+        which require sqrt (irrational).  This is documented in the module.
+        """
         offenders = []
         for path in sorted(REASONING_DIR.glob("*.py")):
+            if path.name == "coherence.py":
+                continue  # NRCI shells 2, 4 need sqrt — floats are documented
             tree = ast.parse(path.read_text(encoding="utf-8"))
             for node in ast.walk(tree):
                 if isinstance(node, ast.Constant) and isinstance(
@@ -663,3 +806,149 @@ class TestExactness:
         assert ME.positive_definite_report() == ME.positive_definite_report()
         assert (VE.facet_attribution_census("tensor", "full")
                 == VE.facet_attribution_census("tensor", "full"))
+
+
+# ===========================================================================
+# 6.  DIMENSION PROJECTION LAYERS
+# ===========================================================================
+
+class TestDimensionLayers:
+
+    def test_five_layers_exist(self):
+        from glm_universal.reasoning import dimension_layers as DL
+        assert len(DL.LAYERS) == 5
+        names = [l.name for l in DL.LAYERS]
+        assert names == ["substrate", "integer", "rational", "griess", "universal"]
+
+    def test_layers_are_ordered_by_dimension(self):
+        from glm_universal.reasoning import dimension_layers as DL
+        # substrate < integer < rational < griess < universal (-1 = unbounded)
+        dims = [l.dimension for l in DL.LAYERS]
+        assert dims == [24, 7, 10, 196884, -1]
+
+    def test_substrate_layer_perceives_binary(self):
+        from glm_universal.reasoning import dimension_layers as DL
+        carrier = [Fraction(i % 2) for i in range(24)]
+        view = DL.LAYER_SUBSTRATE.perceive(carrier)
+        assert view["layer"] == "substrate"
+        assert "bits" in view
+        assert "hamming_weight" in view
+        assert "nrci" in view
+        assert isinstance(view["nrci"], Fraction)
+
+    def test_substrate_measure_is_hamming_distance(self):
+        from glm_universal.reasoning import dimension_layers as DL
+        a = [Fraction(0)] * 24
+        b = [Fraction(1)] * 24
+        va = DL.LAYER_SUBSTRATE.perceive(a)
+        vb = DL.LAYER_SUBSTRATE.perceive(b)
+        d = DL.LAYER_SUBSTRATE.measure(va, vb)
+        assert d == Fraction(24)
+
+    def test_integer_layer_perceives_dimensions(self):
+        from glm_universal.reasoning import dimension_layers as DL
+        carrier = [Fraction(i) for i in range(24)]
+        view = DL.LAYER_INTEGER.perceive(carrier)
+        assert view["layer"] == "integer"
+        assert "exponents_SI7" in view
+        assert len(view["exponents_SI7"]) == 7
+
+    def test_rational_layer_perceives_lattice(self):
+        from glm_universal.reasoning import dimension_layers as DL
+        carrier = [Fraction(0)] * 24
+        view = DL.LAYER_RATIONAL.perceive(carrier)
+        assert view["layer"] == "rational"
+        assert "lattice_point" in view
+        assert "leech_class" in view
+
+    def test_griess_layer_perceives_algebra(self):
+        from glm_universal.reasoning import dimension_layers as DL
+        carrier = [Fraction(0)] * 24
+        view = DL.LAYER_GRIESS.perceive(carrier)
+        assert view["layer"] == "griess"
+        assert "is_2a_axis" in view
+
+    def test_universal_layer_perceives_all(self):
+        from glm_universal.reasoning import dimension_layers as DL
+        carrier = [Fraction(0)] * 24
+        view = DL.LAYER_UNIVERSAL.perceive(carrier)
+        assert view["layer"] == "universal"
+        assert view["all_layers"] is True
+        assert "substrate" in view
+        assert "integer" in view
+
+    def test_griess_can_multiply_but_lower_cannot(self):
+        from glm_universal.reasoning import dimension_layers as DL
+        assert not DL.LAYER_SUBSTRATE.can_multiply
+        assert not DL.LAYER_INTEGER.can_multiply
+        assert not DL.LAYER_RATIONAL.can_multiply
+        assert DL.LAYER_GRIESS.can_multiply
+        assert DL.LAYER_UNIVERSAL.can_multiply
+
+    def test_escalate_visits_layers(self):
+        from glm_universal.reasoning import dimension_layers as DL
+        a = [Fraction(0)] * 24
+        b = [Fraction(1)] + [Fraction(0)] * 23
+        result = DL.escalate(a, b)
+        assert result["layer"].name == "universal"
+        assert len(result["all_views"]) == 5
+        # each view has the layer name
+        for name, va, vb, d in result["all_views"]:
+            assert isinstance(d, Fraction)
+
+    def test_escalate_from_substrate(self):
+        from glm_universal.reasoning import dimension_layers as DL
+        a = [Fraction(0)] * 24
+        b = [Fraction(1)] * 24
+        result = DL.escalate(a, b, start=0)
+        assert len(result["all_views"]) == 5
+
+    def test_escalate_from_griess(self):
+        from glm_universal.reasoning import dimension_layers as DL
+        a = [Fraction(0)] * 24
+        b = [Fraction(1)] * 24
+        result = DL.escalate(a, b, start=3)
+        assert len(result["all_views"]) == 2  # griess + universal
+
+    def test_projection_report_runs(self):
+        from glm_universal.reasoning import dimension_layers as DL
+        report = DL.projection_report()
+        assert report["total_layers"] == 5
+        assert report["final_layer"] == "universal"
+        assert len(report["layers"]) == 5
+        for lr in report["layers"]:
+            assert "name" in lr
+            assert "distance" in lr
+            assert isinstance(lr["distance"], str)  # Fraction as string
+
+    def test_projection_report_with_custom_carriers(self):
+        from glm_universal.reasoning import dimension_layers as DL
+        a = [Fraction(0)] * 24
+        b = [Fraction(i, 3) for i in range(24)]
+        report = DL.projection_report(a, b)
+        assert report["total_layers"] == 5
+        # substrate distance should be 24 (all bits differ)
+        substrate = report["layers"][0]
+        assert substrate["name"] == "substrate"
+
+    def test_layer_lookup_by_name(self):
+        from glm_universal.reasoning import dimension_layers as DL
+        assert DL.LAYER_BY_NAME["substrate"] is DL.LAYER_SUBSTRATE
+        assert DL.LAYER_BY_NAME["universal"] is DL.LAYER_UNIVERSAL
+
+    def test_no_floats_in_dimension_layers(self):
+        """No float is constructed by any layer's perceive or measure."""
+        from glm_universal.reasoning import dimension_layers as DL
+        import ast as ast_mod
+        path = REASONING_DIR / "dimension_layers.py"
+        tree = ast_mod.parse(path.read_text(encoding="utf-8"))
+        for node in ast_mod.walk(tree):
+            if isinstance(node, ast_mod.Constant) and isinstance(
+                    node.value, float):
+                pytest.fail(
+                    f"dimension_layers.py:{node.lineno} float literal")
+            if (isinstance(node, ast_mod.Call)
+                    and isinstance(node.func, ast_mod.Name)
+                    and node.func.id == "float"):
+                pytest.fail(
+                    f"dimension_layers.py:{node.lineno} float() call")

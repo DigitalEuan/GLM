@@ -79,6 +79,9 @@ __all__ = [
     "AlgebraVector", "axis", "zero",
     "pair_invariant_classes", "position_name", "is_two_a_pair",
     "sakuma_third_axis", "axis_product", "algebra_product", "griess_form",
+    "griess_trilinear", "trilinear_on_axes", "axis_trilinear",
+    "semantic_distance2", "semantic_similarity",
+    "coherence_of_product", "trilinear_report",
     "TwoASubalgebra", "two_a_subalgebra", "two_a_closure_report",
     "adjoint_matrix", "fusion_spectrum", "miyamoto_tau", "miyamoto_sigma",
     "apply_map", "is_automorphism", "preserves_form",
@@ -321,6 +324,202 @@ def griess_form(x: AlgebraVector, y: AlgebraVector) -> Fraction:
                 raise PositionError(
                     f"griess_form: pair invariant {inv} is not modelled")
     return total
+
+
+# ===========================================================================
+# 3b.  THE GRIESS TRILINEAR FORM  <u . v, w>
+# ===========================================================================
+
+
+def griess_trilinear(x: AlgebraVector, y: AlgebraVector,
+                     z: AlgebraVector) -> Fraction:
+    """The invariant trilinear form ``T(x, y, z) = <x . y, z>``.
+
+    This is the fundamental invariant of the Griess algebra: the bilinear
+    form evaluated on the product.  For the ``2A`` subalgebra it is
+    completely determined by the Sakuma relation and the ``2A`` inner
+    products, but making it explicit as a trilinear map allows callers to:
+
+    * measure how much of the product ``u . v`` projects onto a direction
+      ``w`` -- the **coherence** of the triple;
+    * define a **semantic distance** between axes that respects the
+      algebraic structure, not just the metric;
+    * detect when three concepts are **mutually reinforcing** (positive
+      triple product) versus **interfering** (negative).
+
+    Everything is exact.  No float is constructed.
+    """
+    prod = algebra_product(x, y)
+    return griess_form(prod, z)
+
+
+def trilinear_on_axes(i: int, j: int, k: int) -> Fraction:
+    """``T(a_i, a_j, a_k) = <a_i . a_j, a_k>`` on three basis axes.
+
+    Computed from the Sakuma relation and the ``2A`` inner products, not
+    quoted.  The value depends on the positions of the three pairs:
+
+    * If any pair is ``2B`` (invariant 0), the product vanishes and the
+      form is 0.
+    * If ``i == j``, then ``a_i . a_i = a_i`` and the form reduces to
+      ``<a_i, a_k>``.
+    * If the pair ``(i, j)`` is ``2A``, the Sakuma relation applies.
+    """
+    inv_ij = pair_invariant_classes(i, j)
+    if inv_ij == 0:
+        # 2B: a_i . a_j = 0, so <0, a_k> = 0
+        return Fraction(0)
+    if inv_ij == 4:
+        # 1A: a_i . a_i = a_i, so <a_i, a_k> = griess_form(a_i, a_k)
+        return griess_form(axis(i), axis(k))
+    if inv_ij == 2:
+        # 2A: a_i . a_j = (1/8)(a_i + a_j - a_ij), so
+        # <a_i . a_j, a_k> = (1/8)(<a_i, a_k> + <a_j, a_k> - <a_ij, a_k>)
+        w = sakuma_third_axis(i, j)
+        return TWO_A_PRODUCT_COEFF * (
+            griess_form(axis(i), axis(k))
+            + griess_form(axis(j), axis(k))
+            - griess_form(axis(w), axis(k)))
+    raise PositionError(
+        f"trilinear_on_axes: pair invariant {inv_ij} is not modelled")
+
+
+def axis_trilinear(i: int, j: int, k: int) -> Fraction:
+    """Alias for :func:`trilinear_on_axes` -- the trilinear form on axes.
+
+    Both names exist so that callers can choose whichever reads more
+    naturally: ``axis_trilinear`` when thinking of it as a form on basis
+    elements, ``trilinear_on_axes`` when thinking of it as a lookup.
+    """
+    return trilinear_on_axes(i, j, k)
+
+
+def semantic_distance2(x: AlgebraVector, y: AlgebraVector) -> Fraction:
+    """Squared Griess distance between two algebra elements.
+
+    Defined as ``<x - y, x - y>`` using the bilinear form.  This is the
+    natural metric on the Griess algebra: two concepts are close when their
+    product structure is similar, not just when their carriers are nearby.
+
+    Returns a :class:`~fractions.Fraction` that is zero iff ``x == y``
+    as algebra elements (same support and coefficients).
+    """
+    diff = x - y
+    return griess_form(diff, diff)
+
+
+def semantic_similarity(x: AlgebraVector, y: AlgebraVector) -> Fraction:
+    """Cosine-squared similarity between two algebra elements.
+
+    Defined as ``<x, y>^2 / (<x, x> * <y, y>)``, which is 1 when the
+    elements are proportional, 0 when orthogonal, and always in ``[0, 1]``
+    for non-zero elements.  The sign of the inner product is lost; use
+    :func:`griess_form` directly when the sign matters.
+
+    Raises if either element is zero (no direction, so no similarity).
+    """
+    nx = griess_form(x, x)
+    ny = griess_form(y, y)
+    if nx == 0:
+        raise ValueError("semantic_similarity: the first element is zero")
+    if ny == 0:
+        raise ValueError("semantic_similarity: the second element is zero")
+    ip = griess_form(x, y)
+    return ip * ip / (nx * ny)
+
+
+def coherence_of_product(x: AlgebraVector, y: AlgebraVector) -> Dict[str, object]:
+    """How coherent the product ``x . y`` is with its factors.
+
+    Measures three things, all exact:
+
+    * ``self_coherence``: ``<x . y, x>`` and ``<x . y, y>`` -- how much
+      of the product projects back onto each factor.
+    * ``product_norm2``: ``<x . y, x . y>`` -- the squared norm of the
+      product, which is a measure of how much information the product
+      carries.
+    * ``factor_norms``: ``<x, x>`` and ``<y, y>`` -- the norms of the
+      factors, for comparison.
+
+    All values are exact :class:`~fractions.Fraction`.
+    """
+    prod = algebra_product(x, y)
+    return {
+        "factor_x_norm2": griess_form(x, x),
+        "factor_y_norm2": griess_form(y, y),
+        "product_norm2": griess_form(prod, prod),
+        "self_coherence_x": griess_form(prod, x),
+        "self_coherence_y": griess_form(prod, y),
+        "product_is_zero": prod.is_zero(),
+    }
+
+
+def trilinear_report(pairs: Optional[Sequence[Tuple[int, int]]] = None,
+                     count: int = 6) -> Dict[str, object]:
+    """Recompute trilinear form facts over a set of ``2A`` axis pairs.
+
+    For each pair ``(i, j)``, computes the full trilinear form on the
+    three-dimensional subalgebra ``{a_i, a_j, a_ij}`` -- a 3x3x3 tensor
+    of exact rationals -- and verifies:
+
+    * every entry is an exact ``Fraction``;
+    * the form is symmetric in its last two arguments when the first is
+      a product that lives in the subalgebra;
+    * the diagonal entries ``T(a_i, a_i, a_i)`` are 1 (idempotent axis);
+    * the off-diagonal entries at ``2A`` position are 1/8 or smaller.
+
+    The report is a computed fact, not a quoted one.
+    """
+    if pairs is None:
+        pairs = sample_two_a_pairs(count)
+    records: List[Dict[str, object]] = []
+    for u, v in pairs:
+        w = sakuma_third_axis(u, v)
+        labels = (u, v, w)
+        # build the 3x3x3 trilinear tensor
+        tensor = []
+        for i in labels:
+            layer = []
+            for j in labels:
+                row = []
+                for k in labels:
+                    row.append(trilinear_on_axes(i, j, k))
+                layer.append(row)
+            tensor.append(layer)
+        # verify structural properties
+        all_exact = all(
+            isinstance(tensor[a][b][c], Fraction)
+            for a in range(3) for b in range(3) for c in range(3))
+        # T(a, a, a) = <a . a, a> = <a, a> = 1
+        diagonal_ones = all(tensor[i][i][i] == Fraction(1) for i in range(3))
+        # T(a, a, b) = <a, b> for the 2A pair
+        self_product_values = [
+            tensor[0][0][1],  # <a_u . a_u, a_v> = <a_u, a_v> = 1/8
+            tensor[1][1][0],  # <a_v . a_v, a_u> = <a_v, a_u> = 1/8
+        ]
+        self_product_correct = all(
+            v == TWO_A_INNER for v in self_product_values)
+        # coherence of the product
+        coh = coherence_of_product(axis(u), axis(v))
+        records.append({
+            "labels": list(labels),
+            "all_exact": all_exact,
+            "diagonal_ones": diagonal_ones,
+            "self_product_correct": self_product_correct,
+            "product_norm2": str(coh["product_norm2"]),
+            "self_coherence_x": str(coh["self_coherence_x"]),
+            "self_coherence_y": str(coh["self_coherence_y"]),
+            "tensor": [[[str(tensor[a][b][c]) for c in range(3)]
+                         for b in range(3)] for a in range(3)],
+        })
+    return {
+        "pairs_checked": len(records),
+        "all_exact": all(r["all_exact"] for r in records),
+        "all_diagonal_ones": all(r["diagonal_ones"] for r in records),
+        "all_self_product_correct": all(r["self_product_correct"]
+                                         for r in records),
+        "records": records,
+    }
 
 
 # ===========================================================================

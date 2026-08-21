@@ -41,7 +41,7 @@ Invariants, inherited unchanged from the substrate
 
 from __future__ import annotations
 
-from . import analogy, metric, product, verifier
+from . import analogy, coherence, dimension_layers, metric, product, verifier
 from .analogy import (SUBSPACES, AnalogyResult, LatticeAnalogyResult,
                       analogy_target, domain_analogy, element_analogy,
                       lattice_analogy, nearest_golay_codeword,
@@ -59,10 +59,13 @@ from .product import (POSITION_BY_INVARIANT, SELF_INNER, TWO_A_INNER,
                       TWO_A_PRODUCT_COEFF, AlgebraVector, ClassTranslation,
                       PositionError, TwoASubalgebra, adjoint_matrix,
                       algebra_product, apply_map, axis, axis_product,
-                      class_translation, fusion_spectrum, griess_form,
+                      axis_trilinear, class_translation, coherence_of_product,
+                      fusion_spectrum, griess_form, griess_trilinear,
                       is_automorphism, is_two_a_pair, miyamoto_sigma,
                       miyamoto_tau, pair_invariant_classes, position_name,
                       preserves_form, sakuma_third_axis, sample_two_a_pairs,
+                      semantic_distance2, semantic_similarity,
+                      trilinear_on_axes, trilinear_report,
                       two_a_closure_report, two_a_subalgebra, zero)
 from .verifier import (NABLA, OPERATORS, RELATION_LAYOUT, SCALAR_SENSE,
                        SEMANTICS, RelationError, RelationVerdict, Sense,
@@ -71,8 +74,14 @@ from .verifier import (NABLA, OPERATORS, RELATION_LAYOUT, SCALAR_SENSE,
                        sense_of_quantity, tokenise, verifier_report,
                        verify_all, verify_expression_pair, verify_relation)
 
+from .dimension_layers import (
+    LAYER_GRIESS, LAYER_INTEGER, LAYER_RATIONAL, LAYER_SUBSTRATE,
+    LAYER_UNIVERSAL, LAYERS, DimensionLayer, escalate, projection_report,
+)
+
 __all__ = [
-    "product", "metric", "analogy", "verifier",
+    "product", "metric", "analogy", "verifier", "dimension_layers",
+    "coherence",
     # product
     "AlgebraVector", "TwoASubalgebra", "ClassTranslation", "PositionError",
     "TWO_A_PRODUCT_COEFF", "TWO_A_INNER", "SELF_INNER",
@@ -80,6 +89,9 @@ __all__ = [
     "algebra_product", "griess_form", "pair_invariant_classes",
     "position_name", "is_two_a_pair", "sakuma_third_axis",
     "two_a_subalgebra", "two_a_closure_report", "sample_two_a_pairs",
+    "griess_trilinear", "trilinear_on_axes", "axis_trilinear",
+    "semantic_distance2", "semantic_similarity",
+    "coherence_of_product", "trilinear_report",
     "adjoint_matrix", "fusion_spectrum", "miyamoto_tau", "miyamoto_sigma",
     "apply_map", "is_automorphism", "preserves_form", "class_translation",
     # metric
@@ -101,6 +113,10 @@ __all__ = [
     "resolve_name", "sense_of_quantity", "sense_carrier", "load_relations",
     "relation_table", "verify_relation", "verify_expression_pair",
     "verify_all", "facet_attribution_census", "verifier_report",
+    # dimension layers
+    "DimensionLayer", "LAYER_SUBSTRATE", "LAYER_INTEGER",
+    "LAYER_RATIONAL", "LAYER_GRIESS", "LAYER_UNIVERSAL", "LAYERS",
+    "escalate", "projection_report",
 ]
 
 

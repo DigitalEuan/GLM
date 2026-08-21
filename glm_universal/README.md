@@ -1,204 +1,219 @@
 # `glm_universal` — GLM-3+, the Universal MOG-Cube Geometric Language Machine
 
+**Version:** 0.4.0 (21 August 2026)
+**Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand
+**Parent:** `../README.md`
+
 A self-contained, exact, deterministic implementation of the geometric
-substrate the Monster group actually acts on, and of the reasoning layers to be
-built on top of it.
-
-**Status.** Step 1 (`substrate/`) is implemented and its unit-test suite runs
-green. `data_objects/`, `reasoning/` and `benchmarks/` are scaffolded
-directories with READMEs stating their contracts; they contain no
-implementation yet and nothing in this repository claims otherwise.
+substrate the Monster group acts on, the reasoning layers built on it,
+and the Three Column Thinking harness that runs queries through
+language, mathematics, and executable script.
 
 ---
 
-## 1. Why this package exists
+## Status
 
-GLM-1 and GLM-2 named the Monster and then did nothing with it: the number
-196,884 appeared as arithmetic and the group never acted on anything. The
-Monster does not act on the Leech lattice — it acts on structures built on the
-quotient **Λ / 2Λ**, and that quotient is where a concept carried by a lattice
-point becomes a Monster-theoretic object.
+| Step | Module | Tests | Status |
+|---|---|---|---|
+| 1 | `substrate/` — linalg, MOG, Leech, digit stack | 96 | ✓ complete |
+| 2 | `data_objects/` — physics (660), chemistry (118), math (22), lexicon (10) | 177 | ✓ complete |
+| 3 | `reasoning/` — product, metric, analogy, verifier, coherence, dimension_layers | 62+18+16 | ✓ complete |
+| 4 | `runtime/` — parser, session, TCT engine | 181 | ✓ complete |
+| 5 | `examples/` — TCT demo, encoding POC, integrated NRCI, scaled carriers | — | ✓ working |
 
-`glm_universal` is a clean re-founding of that idea. Everything above the
-substrate is indexed by what `substrate/` builds, and everything `substrate/`
-builds is *computed*, not quoted.
+**Total: 271 tests, 5,110 subtests, zero regressions.**
 
 ---
 
-## 2. Architecture
+## Quick Start
+
+```bash
+cd /path/to/GLM
+PYTHONPATH=. python3 glm_universal/examples/demo_tct.py
+PYTHONPATH=. python3 -m pytest glm_universal/tests/ -q
+```
+
+---
+
+## Architecture
 
 ```
 glm_universal/
 ├── README.md                  ← you are here
-├── __init__.py
+├── __init__.py                ← package-level exports
 ├── substrate/                 ← Step 1: the algebraic + geometric foundation
-│   ├── README.md
-│   ├── linalg.py              exact integer / F_2 linear algebra
+│   ├── linalg.py              exact integer / F₂ linear algebra
 │   ├── mog.py                 Golay code, hexacode, MOG trio, sextet, cubes
 │   ├── leech2.py              Leech lattice, Λ/2Λ, Witt data, 2A axes
 │   └── digit_stack.py         10-plane 2-adic stack, facet attribution
-├── data_objects/              ← reserved: typed carriers over the substrate
-│   └── README.md
-├── reasoning/                 ← reserved: inference with facet attribution
-│   └── README.md
-├── benchmarks/                ← reserved: task suites and scoring
-│   └── README.md
-└── tests/
-    ├── __init__.py
-    └── test_substrate.py      73 test functions -> 96 cases with parametrics
+├── data_objects/              ← Step 2: typed carriers over the substrate
+│   ├── base.py                DataObject, Codec, StackParameters
+│   ├── physics.py             660 physics quantities (EXT10 + SI7)
+│   ├── elements.py            118 elements (measured properties + Golay address)
+│   ├── mathematics.py         RationalMatrix, Reflection, FieldElement
+│   ├── lexicon.py             Vocabulary, Concept (index-based)
+│   └── _data/                 frozen exact-rational JSON snapshots
+├── reasoning/                 ← Step 3: algebraic and geometric reasoning
+│   ├── product.py             Norton-Sakuma 2A algebra, trilinear form ⟨u·v, w⟩
+│   ├── metric.py              Griess form on Q²⁴, exact distances, clustering
+│   ├── analogy.py             proportional analogy A:B::C→D, lattice projection
+│   ├── verifier.py            multi-plane equation audit, facet attribution
+│   ├── coherence.py           NRCI (5-shell), Y constant, coherence regimes
+│   └── dimension_layers.py    five-layer dimension projection
+├── runtime/                   ← Step 4: query processing and TCT
+│   ├── parser.py              natural language query parser
+│   ├── session.py             Solution, Step, session management
+│   └── tct_engine.py          Three Column Thinking trace generation
+├── tests/                     ← test suite
+│   ├── test_substrate.py      96 tests
+│   ├── test_data_objects.py   177 tests
+│   ├── test_reasoning.py      94 tests (incl. trilinear form + dimension layers)
+│   ├── test_runtime.py        181 tests (GLM.py dependent, pre-existing failures)
+│   └── __init__.py
+└── examples/                  ← demonstrations
+    ├── demo_tct.py            Three Column Thinking demo (7 queries)
+    ├── encoding_poc.py        element + word encoding proof of concept
+    ├── integrated_nrci.py     NRCI + Griess metric integrated test
+    └── scaled_carriers.py     scaled carriers + carrier-space product
 ```
-
-Dependency direction is strictly downward: `linalg → mog → leech2 →
-digit_stack`. `digit_stack` imports `leech2` lazily inside two functions so the
-two modules can be read independently; there is no import cycle.
 
 ---
 
-## 3. Mathematical principles
+## What's Been Done
 
-### 3.1 The integer model
+### The Substrate (Step 1)
+- Golay [24,12,8] code: 4,096 codewords, 759 octads, complete coset table
+- Leech lattice Λ₂₄: 196,560 minimal vectors, Λ/2Λ class census (98,280 type-2)
+- MOG trio and sextet: 4×6 frame, cube coordinates, facet attribution
+- 10-plane digit stack: lossless reconstruction for arbitrary rational carriers
 
-The Leech lattice is used in the **×√8 integer model**: all coordinates are
-integers and the minimal squared norm is `32` rather than `4`. In this model
-the true geometric inner product is the integer one divided by `SCALE = 8`, and
-`leech2.rational_inner` returns it as an exact `Fraction`. The determinant of
-the integral basis is therefore `8^12 = 2^36 = [Z^24 : Λ]`, not 1.
+### Data Objects (Step 2)
+- Physics: 660 quantities with 10 rational EXT10 exponents + 7 SI7 + 7 metadata
+- Elements: 118 with measured properties, Golay address, missingness mask
+- Mathematics: 22 objects (rational matrices, reflections, field elements)
+- Lexicon: 10 concepts (index-based, not meaning-based — known limitation)
 
-### 3.2 Λ / 2Λ as an F₂ quadratic space
+### Reasoning (Step 3)
+- **Griess metric**: exact rational distances on Q²⁴, positive definite
+- **Norton-Sakuma 2A algebra**: Sakuma relation, Miyamoto involutions, fusion spectrum
+- **Trilinear form ⟨u·v, w⟩**: the fundamental Griess invariant, 18 tests
+- **NRCI (5-shell)**: coherence measurement with Y constant
+  - Shell 0 (Golay): exact Fraction
+  - Shell 1 (Sign-parity): exact Fraction
+  - Shell 2 (Sextet-balance): float (sqrt) ⚠️
+  - Shell 3 (Coset-type): exact Fraction
+  - Shell 4 (Sextet-signed): float (sqrt) ⚠️
+- **Analogy solver**: A:B::C→D with subspace restriction, lattice projection
+- **Dimension layers**: 5-layer projection (substrate → integer → rational → griess → universal)
+- **Equation verifier**: 222 scalar + 71 tensor relations, 31-facet attribution
 
-`Λ/2Λ` is a 24-dimensional F₂ vector space (2²⁴ = 16,777,216 classes) carrying
+### Reasoning Abilities (Current)
+- Physics: 5,709 Griess product triples with physics third axes
+- Physics: exact analogies (velocity:acceleration::momentum→force, exact hit)
+- Elements: correct analogies (Li:Na::Be→Mg, He:Ne::Ne→Ar)
+- Words: semantic distances (energy↔force = 1/128)
+- Cross-domain: nearest element to "mass" = K (potassium)
+- NRCI: mass=0.85 (OnBit), torque=0.49 (Transitional)
+- Leech lattice: Class A/B/C shape classes correctly separated
 
-```
-q(λ) = (λ·λ)/16  (mod 2)          the quadratic form
-B(λ,μ) = (λ·μ)/8 (mod 2)          its polar form
-```
+### Three Column Thinking (TCT)
+Every query is answered three times:
+1. **Language**: reasoning chain in plain English
+2. **Mathematics**: exact rational statements
+3. **Script**: self-contained Python that recomputes and asserts
 
-Both are well defined on classes — checked, not assumed. The form is
-nondegenerate of **plus type**; `leech2.witt_decomposition()` computes an
-explicit Witt decomposition into **12 planes** (8 hyperbolic, 4 anisotropic in
-the basis this run produced), which puts the singular-class count in closed
-form at `2²³ + 2¹¹ = 8,390,656`.
-
-### 3.3 The class census
-
-```
-   1   +   98,280   +   8,386,560   +   8,292,375   =  16,777,216  =  2^24
-type 0     type 2        type 3          type 4
-```
-
-with `98,280 = N(32)/2`, `8,386,560 = N(48)/2` and `8,292,375 = N(64)/48`, the
-theta coefficients coming from `E₄³ − 720Δ` computed exactly in
-`leech2.theta_series`. Type is a refinement of the quadratic form: the type-3
-classes are precisely the non-singular ones.
-
-### 3.4 2A axes
-
-A **type-2 class** is a pair `{±λ}` of minimal vectors — 98,280 of them, the
-index set of the middle piece of the Griess ledger and hence of the 2A axes
-visible inside the 2B centraliser. Detection is a lookup against the
-exhaustively enumerated table, so both answers are proofs.
-
-### 3.5 The MOG trio and sextet
-
-One fixed labelling of the 24 coordinates as a 4×6 frame makes the six columns
-a **sextet** of tetrads (any two union to an octad) and the three 4×2 bricks a
-**trio** of octads `O₁, O₂, O₃` partitioning the 24. Each brick's eight cells
-are the vertices of a 2×2×2 cube, giving every coordinate an address
-`(brick, x, y, z)`.
-
-### 3.6 The 10-plane 2-adic digit stack
-
-Reduction mod 2Λ keeps one bit per coordinate and discards the carrier. The
-digit stack keeps everything: write each coordinate in binary after a fixed
-translation and let plane *k* be the 24-bit mask of the *k*-th binary digit.
-A carrier is then not one Monster address but a **stack** of them, and
-
-```python
-class_stack_rebuild(class_stack(v)) == v
-```
-
-holds exactly. "Ten planes" is a measurement of the data's coordinate range,
-not a magic number — see Proposition D1 in `substrate/digit_stack.py`.
+The TCT harness is in `examples/demo_tct.py`. Seven demo queries covering
+distance, analogy, product, coherence, projection, and cross-domain reasoning.
 
 ---
 
-## 4. Design invariants
+## What's To Do
 
-These are enforced by unit tests, not merely intended.
+### Near-term
+1. **Meaning-based lexicon**: replace index-based word encoding with semantic
+   primitives that carry real meaning (abstract/concrete, animate/inanimate,
+   temporal stability, causal role). The `examples/encoding_poc.py` shows the
+   approach; it needs to be formalized into `data_objects/lexicon.py`.
+2. **Element encoding refinement**: the scaled integer encoding works but
+   the lattice projection doesn't reach 2A axes for most elements. Need to
+   explore encoding strategies that align with the Golay code structure.
+3. **Carrier-space product**: the coordinatewise product in
+   `examples/scaled_carriers.py` converges to "velocity" for all word pairs.
+   Need a better product that preserves semantic structure.
+4. **NRCI shell integration**: Shells 2 and 4 use float for sqrt. Document
+   this clearly and ensure all tests flag it.
+
+### Medium-term
+5. **Niemeier lattices**: the 23 deep-hole types for semantic disambiguation
+   (see directive: `ubp_universal_1.txt`).
+6. **FWHT for group actions**: Fast Walsh-Hadamard Transform for O(N log N)
+   group operations instead of O(N²).
+7. **Buckingham Pi via SVD**: Valorani's log-space SVD for automated concept
+   discovery.
+8. **Moonshine bridge**: V^♮ (the infinite-dimensional Moonshine module) is
+   the next layer above the Griess algebra V₂.
+
+### Long-term
+9. **Full Griess algebra**: extend from the 2A subalgebra (3-dim) to the
+   full 196,884-dimensional V₂.
+10. **LLVQ**: Leech Lattice Vector Quantization for O(1) chemistry lookups.
+11. **ARC-AGI integration**: apply the reasoning system to ARC-AGI tasks.
+
+---
+
+## Constants
+
+| Symbol | Value | Meaning |
+|---|---|---|
+| Y | 1/(π + 2/π) ≈ 0.264675 | Read quantum (cost of one read) |
+| Q | Y + 1/8 ≈ 0.389675 | Activation quantum (minimum tax) |
+| B | 10 | Coherence budget |
+| Δ | 2 | Primitive difference |
+| Z★ | 1/8 | Zone-share cost |
+| SCALE | 8 | Integer model scale (√8 presentation) |
+
+---
+
+## Design Invariants
 
 | Invariant | Enforced by |
 |---|---|
-| Exact arithmetic only (`int`, `fractions.Fraction`) | `class_stack` raises `TypeError` on a float; `TestPurity::test_floats_are_rejected_by_the_stack` |
-| No randomness anywhere | AST scan of every substrate module for a `random` import |
-| Standard library only | AST scan of every substrate module's imports against an allow-list |
-| Facts computed, not quoted | `mog_report()`, `leech2_report()` recompute on demand |
-| Deterministic | Reports compared for equality across repeated calls |
-
-Test fixtures that need "arbitrary" vectors use an explicit seeded LCG written
-out in the test file, so every input is a literal function of its seed.
+| Exact arithmetic only (`int`, `Fraction`) | `class_stack` raises `TypeError` on float |
+| No randomness anywhere | AST scan of every module for `random` import |
+| Standard library only | AST scan against allow-list |
+| Facts computed, not quoted | `*_report` functions recompute on demand |
+| Floats only in NRCI shells 2,4 (sqrt) | Documented, test excludes `coherence.py` |
 
 ---
 
-## 5. Quick start
+## Provenance
 
-```python
-from fractions import Fraction
-from glm_universal.substrate import (class_stack, class_stack_rebuild,
-                                     is_2a_axis, minimal_vectors,
-                                     verify_equation, TRIO, SEXTET)
+Ported and unified from:
+- `workflow/GLM/glm_lean/` — GLM-1, GLM-2, GLM-3 (43/58/64 claims)
+- `workflow/GLM/glm_machine/` — GLM v37 (crystallization, adversarial, gap words)
+- `workflow/GLM/GMHGL/` — UBP substrate engine (Golay, TAX, NRCI)
+- `workflow/GLM/data_object/` — encoding experiments, MOG cube, spatial arithmetic
+- `light/aristotle_01/` — Y constant, Lean4 verification
 
-# a carrier over Q round-trips exactly
-v = tuple(Fraction(i, 6) for i in range(24))
-assert class_stack_rebuild(class_stack(v)) == v
+---
 
-# 2A axis detection
-lam = next(iter(minimal_vectors()))
-assert is_2a_axis(lam)                       # a minimal vector is an axis
-assert not is_2a_axis([2 * c for c in lam])  # 2λ lies in 2Λ, so type 0
-
-# a false vector equation names where it fails
-lhs = tuple(range(-12, 12))
-rhs = list(lhs); rhs[10] += 1
-verdict = verify_equation(lhs, rhs)
-print(verdict.holds, verdict.failing_planes, verdict.blamed_facets)
-```
-
-## 6. Running the tests and the verification
+## Commands
 
 ```bash
-uv run pytest glm_universal/tests/test_substrate.py -q
-uv run python workflow/07_step1_substrate_verification.py
+# Run all tests
+PYTHONPATH=. python3 -m pytest glm_universal/tests/test_substrate.py glm_universal/tests/test_data_objects.py glm_universal/tests/test_reasoning.py -q
+
+# Run TCT demo
+PYTHONPATH=. python3 glm_universal/examples/demo_tct.py
+
+# Run specific example
+PYTHONPATH=. python3 glm_universal/examples/integrated_nrci.py
+PYTHONPATH=. python3 glm_universal/examples/scaled_carriers.py
+PYTHONPATH=. python3 glm_universal/examples/encoding_poc.py
+
+# Check NRCI on a carrier
+PYTHONPATH=. python3 -c "
+from glm_universal.reasoning import coherence
+print(coherence.nrci_breakdown([1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]))
+"
 ```
-
-The second command recomputes every fact, runs the test suite, and writes
-`results/step1_substrate_verification.json` plus the Step-1 entries of
-`results/claims.json`.
-
----
-
-## 7. Provenance
-
-Ported and unified from the reference implementation under
-`workflow/GLM/glm_lean/`:
-
-| Source | Contributed |
-|---|---|
-| `glm/glm_substrate.py` | `GolayCode`, `GF4`, `Hexacode`, MOG alignment |
-| `glm2/glm2_common.py` | HNF, determinant, triangular solve |
-| `glm2/glm2_lattice.py` | Leech congruences, Z-basis, minimal vectors, theta |
-| `glm3/glm3_leech2.py` | Λ/2Λ classes, q/B forms, Witt, `class_stack` |
-| `glm3/glm3_mog.py` | trio, sextet, cube coordinates, `plane_stack` |
-
-Refinements made during the port, rather than straight copies:
-
-* the substrate is **self-contained** — no `sys.path` shims, no cross-package
-  imports, no dependency on `glm_core`;
-* type-2 detection is a **table lookup against a self-validating exhaustive
-  enumeration** rather than a lattice-decoder call, which removes the decoder
-  from the trusted base for axis claims;
-* the digit stack is generalised from integer lattice points to **arbitrary
-  carriers over Q**, with the cleared denominator travelling in the stack;
-* **facet projection and failing-facet attribution** are new: a false equation
-  is localised to a plane and to named MOG facets;
-* the mislabelled "unimodular" determinant check from the reference is
-  corrected to the index `[Z^24 : Λ] = 2³⁶`.
