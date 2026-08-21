@@ -1,0 +1,474 @@
+{
+ "source": "workflow/GLM/data_object/encoding_definition_attempt_03-08.26/data/processed/diatomic_dissociation_0k.csv",
+ "count": 52,
+ "species": [
+  {
+   "species": "H2",
+   "element_a": "H",
+   "element_b": "H",
+   "charge": 0,
+   "d0_kJ_per_mol": "4321/10",
+   "uncertainty_kJ_per_mol": null,
+   "uncertainty_status": "not_reported"
+  },
+  {
+   "species": "LiH",
+   "element_a": "Li",
+   "element_b": "H",
+   "charge": 0,
+   "d0_kJ_per_mol": "233/1",
+   "uncertainty_kJ_per_mol": "1/1",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "Li2",
+   "element_a": "Li",
+   "element_b": "Li",
+   "charge": 0,
+   "d0_kJ_per_mol": "100/1",
+   "uncertainty_kJ_per_mol": "18/5",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "BeH",
+   "element_a": "Be",
+   "element_b": "H",
+   "charge": 0,
+   "d0_kJ_per_mol": "1084/5",
+   "uncertainty_kJ_per_mol": "147/5",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "BH",
+   "element_a": "B",
+   "element_b": "H",
+   "charge": 0,
+   "d0_kJ_per_mol": "1682/5",
+   "uncertainty_kJ_per_mol": "49/5",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "B2",
+   "element_a": "B",
+   "element_b": "B",
+   "charge": 0,
+   "d0_kJ_per_mol": "290/1",
+   "uncertainty_kJ_per_mol": "18/1",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "CH",
+   "element_a": "C",
+   "element_b": "H",
+   "charge": 0,
+   "d0_kJ_per_mol": "3347/10",
+   "uncertainty_kJ_per_mol": "7/5",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "C2",
+   "element_a": "C",
+   "element_b": "C",
+   "charge": 0,
+   "d0_kJ_per_mol": "600/1",
+   "uncertainty_kJ_per_mol": "10/1",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "NH",
+   "element_a": "N",
+   "element_b": "H",
+   "charge": 0,
+   "d0_kJ_per_mol": "657/2",
+   "uncertainty_kJ_per_mol": "10/1",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "BN",
+   "element_a": "B",
+   "element_b": "N",
+   "charge": 0,
+   "d0_kJ_per_mol": "470/1",
+   "uncertainty_kJ_per_mol": "301/5",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "CN",
+   "element_a": "C",
+   "element_b": "N",
+   "charge": 0,
+   "d0_kJ_per_mol": "745/1",
+   "uncertainty_kJ_per_mol": "5/1",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "N2",
+   "element_a": "N",
+   "element_b": "N",
+   "charge": 0,
+   "d0_kJ_per_mol": "4708/5",
+   "uncertainty_kJ_per_mol": "4/5",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "OH",
+   "element_a": "O",
+   "element_b": "H",
+   "charge": 0,
+   "d0_kJ_per_mol": "2129/5",
+   "uncertainty_kJ_per_mol": "3/10",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "BO",
+   "element_a": "B",
+   "element_b": "O",
+   "charge": 0,
+   "d0_kJ_per_mol": "800/1",
+   "uncertainty_kJ_per_mol": "121/10",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "CO",
+   "element_a": "C",
+   "element_b": "O",
+   "charge": 0,
+   "d0_kJ_per_mol": "5359/5",
+   "uncertainty_kJ_per_mol": "1/2",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "NO",
+   "element_a": "N",
+   "element_b": "O",
+   "charge": 0,
+   "d0_kJ_per_mol": "6271/10",
+   "uncertainty_kJ_per_mol": "2/5",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "O2",
+   "element_a": "O",
+   "element_b": "O",
+   "charge": 0,
+   "d0_kJ_per_mol": "4937/10",
+   "uncertainty_kJ_per_mol": "1/5",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "HF",
+   "element_a": "H",
+   "element_b": "F",
+   "charge": 0,
+   "d0_kJ_per_mol": "2833/5",
+   "uncertainty_kJ_per_mol": "4/5",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "BF",
+   "element_a": "B",
+   "element_b": "F",
+   "charge": 0,
+   "d0_kJ_per_mol": "3736/5",
+   "uncertainty_kJ_per_mol": "56/5",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "CF",
+   "element_a": "C",
+   "element_b": "F",
+   "charge": 0,
+   "d0_kJ_per_mol": "5369/10",
+   "uncertainty_kJ_per_mol": "8/1",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "F2",
+   "element_a": "F",
+   "element_b": "F",
+   "charge": 0,
+   "d0_kJ_per_mol": "309/2",
+   "uncertainty_kJ_per_mol": "3/5",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "FO",
+   "element_a": "F",
+   "element_b": "O",
+   "charge": 0,
+   "d0_kJ_per_mol": "2157/10",
+   "uncertainty_kJ_per_mol": "10/1",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "NF",
+   "element_a": "N",
+   "element_b": "F",
+   "charge": 0,
+   "d0_kJ_per_mol": "3151/10",
+   "uncertainty_kJ_per_mol": "3/1",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "NaH",
+   "element_a": "Na",
+   "element_b": "H",
+   "charge": 0,
+   "d0_kJ_per_mol": "988/5",
+   "uncertainty_kJ_per_mol": "96/5",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "Na2",
+   "element_a": "Na",
+   "element_b": "Na",
+   "charge": 0,
+   "d0_kJ_per_mol": "709/10",
+   "uncertainty_kJ_per_mol": "9/5",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "MgH",
+   "element_a": "Mg",
+   "element_b": "H",
+   "charge": 0,
+   "d0_kJ_per_mol": "658/5",
+   "uncertainty_kJ_per_mol": "31/5",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "MgO",
+   "element_a": "Mg",
+   "element_b": "O",
+   "charge": 0,
+   "d0_kJ_per_mol": "2417/10",
+   "uncertainty_kJ_per_mol": "21/1",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "AlH",
+   "element_a": "Al",
+   "element_b": "H",
+   "charge": 0,
+   "d0_kJ_per_mol": "2943/10",
+   "uncertainty_kJ_per_mol": "53/10",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "AlO",
+   "element_a": "Al",
+   "element_b": "O",
+   "charge": 0,
+   "d0_kJ_per_mol": "1015/2",
+   "uncertainty_kJ_per_mol": "89/10",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "SiH",
+   "element_a": "Si",
+   "element_b": "H",
+   "charge": 0,
+   "d0_kJ_per_mol": "1474/5",
+   "uncertainty_kJ_per_mol": "113/10",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "Si2",
+   "element_a": "Si",
+   "element_b": "Si",
+   "charge": 0,
+   "d0_kJ_per_mol": "3113/10",
+   "uncertainty_kJ_per_mol": "136/5",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "SiN",
+   "element_a": "Si",
+   "element_b": "N",
+   "charge": 0,
+   "d0_kJ_per_mol": "514/1",
+   "uncertainty_kJ_per_mol": "369/10",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "SiO",
+   "element_a": "Si",
+   "element_b": "O",
+   "charge": 0,
+   "d0_kJ_per_mol": "7941/10",
+   "uncertainty_kJ_per_mol": "58/5",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "PH",
+   "element_a": "P",
+   "element_b": "H",
+   "charge": 0,
+   "d0_kJ_per_mol": "1386/5",
+   "uncertainty_kJ_per_mol": "67/2",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "P2",
+   "element_a": "P",
+   "element_b": "P",
+   "charge": 0,
+   "d0_kJ_per_mol": "971/2",
+   "uncertainty_kJ_per_mol": "14/5",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "PN",
+   "element_a": "P",
+   "element_b": "N",
+   "charge": 0,
+   "d0_kJ_per_mol": "614/1",
+   "uncertainty_kJ_per_mol": "15/1",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "PO",
+   "element_a": "P",
+   "element_b": "O",
+   "charge": 0,
+   "d0_kJ_per_mol": "590/1",
+   "uncertainty_kJ_per_mol": "17/5",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "HS",
+   "element_a": "H",
+   "element_b": "S",
+   "charge": 0,
+   "d0_kJ_per_mol": "351/1",
+   "uncertainty_kJ_per_mol": "7/2",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "PS",
+   "element_a": "P",
+   "element_b": "S",
+   "charge": 0,
+   "d0_kJ_per_mol": "440/1",
+   "uncertainty_kJ_per_mol": "12/1",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "S2",
+   "element_a": "S",
+   "element_b": "S",
+   "charge": 0,
+   "d0_kJ_per_mol": "2108/5",
+   "uncertainty_kJ_per_mol": "2/5",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "HCl",
+   "element_a": "H",
+   "element_b": "Cl",
+   "charge": 0,
+   "d0_kJ_per_mol": "2139/5",
+   "uncertainty_kJ_per_mol": "1/10",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "Cl2",
+   "element_a": "Cl",
+   "element_b": "Cl",
+   "charge": 0,
+   "d0_kJ_per_mol": "2393/10",
+   "uncertainty_kJ_per_mol": "0/1",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "ClF",
+   "element_a": "Cl",
+   "element_b": "F",
+   "charge": 0,
+   "d0_kJ_per_mol": "2471/10",
+   "uncertainty_kJ_per_mol": "1/2",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "ClO",
+   "element_a": "Cl",
+   "element_b": "O",
+   "charge": 0,
+   "d0_kJ_per_mol": "1326/5",
+   "uncertainty_kJ_per_mol": "21/10",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "NaCl",
+   "element_a": "Na",
+   "element_b": "Cl",
+   "charge": 0,
+   "d0_kJ_per_mol": "2037/5",
+   "uncertainty_kJ_per_mol": "11/5",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "CaO",
+   "element_a": "Ca",
+   "element_b": "O",
+   "charge": 0,
+   "d0_kJ_per_mol": "385/1",
+   "uncertainty_kJ_per_mol": "10/1",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "CuO",
+   "element_a": "Cu",
+   "element_b": "O",
+   "charge": 0,
+   "d0_kJ_per_mol": "1386/5",
+   "uncertainty_kJ_per_mol": "209/5",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "HBr",
+   "element_a": "H",
+   "element_b": "Br",
+   "charge": 0,
+   "d0_kJ_per_mol": "1812/5",
+   "uncertainty_kJ_per_mol": "1/5",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "Br2",
+   "element_a": "Br",
+   "element_b": "Br",
+   "charge": 0,
+   "d0_kJ_per_mol": "951/5",
+   "uncertainty_kJ_per_mol": "3/10",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "BrCl",
+   "element_a": "Br",
+   "element_b": "Cl",
+   "charge": 0,
+   "d0_kJ_per_mol": "2153/10",
+   "uncertainty_kJ_per_mol": "1/5",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "HI",
+   "element_a": "H",
+   "element_b": "I",
+   "charge": 0,
+   "d0_kJ_per_mol": "589/2",
+   "uncertainty_kJ_per_mol": "1/10",
+   "uncertainty_status": "reported"
+  },
+  {
+   "species": "I2",
+   "element_a": "I",
+   "element_b": "I",
+   "charge": 0,
+   "d0_kJ_per_mol": "744/5",
+   "uncertainty_kJ_per_mol": "1/10",
+   "uncertainty_status": "reported"
+  }
+ ]
+}
