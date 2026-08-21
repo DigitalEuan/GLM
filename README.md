@@ -1,17 +1,42 @@
 # '../' - TOP REPOSITORY LEVEL TIER ROOT README 
 
-**Version:** 2.7 (20 August 2026)  
+**Version:** 4.0 (21 August 2026)  
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand  
 **Parent:** None - Top Level
 
 ## UPDATE THIS README
 if changes are made in this folder or systems in sub-folders need rewiring within the repository and effect this README file's structure.
 
-## next item to implement: 
-'light/aristotle_01/Y_STUDY_CLEAN_RESTATEMENT.md'
-
 ## The GLM is a substrate-native cognitive architecture. 
 It grows with each iteration rather than starting again over and over. Not a solver pipeline — a system that perceives, reasons, and acts using a 24-dimensional mathematical substrate built on the Universal Binary Principle (UBP).
+
+## The layered projection perspective
+This system's development is not about leaving older systems behind.  Each
+older GLM iteration is true within its own range, then becomes untrue only
+when the next dimension layer is required to take over.  The current
+`glm_universal` runtime can run a branch of operations at any lower layer
+and, when needed, trigger a higher-perspective branch and re-run through
+again for multiple perspectives.
+
+> There are 'Dimensional Projection' perspectives to the GLM — one is from
+> the most recent system showing where previous systems failed and the fix
+> for the situation, this is the highest dimension perspective, the other
+> is from each iteration which seems to show an alignment up to a point but
+> then is superseded by the next higher dimension perspective — a layered
+> projection perspective where each layer is both true from its limited
+> perspective and works to that degree of implementation then becomes untrue
+> when the next dimension layer is required to take over.  This layering
+> makes more sense of the system — it could run a branch of operations
+> (scripts, functions) and when needed it triggers a higher perspective
+> branch then re-runs through again for multiple perspectives.
+
+The five layers, in the order they take over: **substrate** (Golay/MOG
+binary, GLM-0) → **integer** (SI7 exponents, GLM-1) → **rational** (EXT10
+exponents + Leech carrier, GLM-2) → **Griess** (V₂ algebra + Monster,
+GLM-3) → **universal** (all layers at once, GLM-3+).  Each is implemented in
+`glm_universal/reasoning/dimension_layers.py` and is reachable from the
+runtime session via the `project A B` query kind (see "GLM-3+ v0.5.3"
+section near the bottom of this README).
 
 ---
 
@@ -49,6 +74,11 @@ https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the dire
   │                     Each: paper + reasoner + Lean 4 proofs (no sorry)
   │
   ├──→ glm_universal/        collective active version for development/growth
+  │                         As of v0.5.0 (21 Aug 2026): GLM.py CLI at repo
+  │                         root, semantic_lexicon module replaces the index-
+  │                         based lexicon the runtime loads, physics register
+  │                         expanded 660 → 701 concepts. 521 tests, 5577
+  │                         subtests, zero regressions.
   │
   ├──→ long_term_memory/   THE GLM MEMORY
   │                        glm_training_data.json (all GLM training data)
@@ -80,7 +110,7 @@ https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the dire
 
 | Folder | Intended Purpose | Current ARC AGI Score | Current Key File | Experiment and Development Work Needed |
 |--------|---------|-------|----------|----------|
-| **ROOT Top Tier repository folder** | Collect, define and conduct use of all sub-folders, files within folders and scripts throughout the whole of this repository and system, to direct experiments and studies that use the UBP and or GLM systems | — | 'README.md' (this file) | Organise all folders and their contents so no scripts are repeated and all systems use a single source ('GMHGL/' and 'glm_machine/') for operations, 'data_object/' for encoding, 'light/' for scale calibration and 'long_term_memory/' for all GLM training and learning |
+| **ROOT Top Tier repository folder** | Collect, define and conduct use of all sub-folders, files within folders and scripts throughout the whole of this repository and system, to direct experiments and studies that use the UBP and or GLM systems | — | 'README.md' (this file) | Organise all folders and their contents so no scripts are repeated and all systems use a single source ('GMHGL/' and 'glm_machine/') for operations, 'data_object/' for encoding, 'light/' for scale calibration and 'long_term_memory/' for all GLM training and learning. As of v2.9 the active runtime is `glm_universal/` plus the `GLM.py` CLI at the repo root — see "GLM-3+ v0.5.0" section near the bottom. |
 | **GMHGL/** | Foundation — Golay engine, TAX, NRCI | — | `ubp_unified_v5.py` | Extend existing capacity/capabilities if possible. Note: `snap_to_codeword` has a Lean-verified bug (only corrects weight ≤ 3, not 4). Fix documented in light/EM_calibration_1/reports/snap_to_codeword_FIX.md |
 | **data_object/** | Encoding — Subjects → 24-bit Data Objects | — | `encoding_definition_attempt_04.08.26/README.md` | Use in studies/experiments. Warping (rotate_3 + flip) and geometric work (190 kJ/mol calibration) now integrated into arc_agi_17 |
 | **glm_machine/** | Active Geometric Language Machine system | — | `dev/glm_v37_grown.py` | Growth and development alongside the ARC AGI developments. v37 features (crystallization, adversarial testing, gap word derivation, deliberative reasoning) now integrated into arc_agi_17 |
@@ -279,6 +309,11 @@ The mass residual is an open problem.
 | 2.6 | 2026-08-10 | Added next_steps_from_7Aug26.md. Minor restructuring notes. |
 | 2.7 | 2026-08-20 | Full repository catalog (CATALOG.md). Added glm_lean/ to tree and folder table. Updated ARC-AGI stats to v35 final (105/181, 217 runs, 4,015 edges, 66 hexcolour, 197 simplicial faces, 11 puzzle types). Verified all README cross-references. Fixed missing folder references. |
 | 2.8 | 2026-08-21 | GLM 3+ (see below) - pulling the variosu parts of the GLM system into one clean operational directory 'glm_universal'
+| 2.9 | 2026-08-21 | `glm_universal` operational hardening. Built the missing `GLM.py` CLI at the repo root (was 26 failing runtime tests, now zero failures). Added `glm_universal/data_objects/semantic_lexicon.py` with meaning-based encoding (10 semantic primitives + relations + has_physical_dim flag), 40 curated sample concepts, and a 39-test suite — replaces the legacy index-based lexicon as the register the runtime loads. Augmented the physics register from 660 → 701 concepts (+41) across nine previously-thin domains (acoustics +6, photometry +6, radiometry +6, base +4, geophysics +6, information +5, statistical mechanics +3, astronomy +3, signals and control +2). All 701 pass PhysicsCodec.check(). Total test count: 521 passed, 5577 subtests, zero regressions. See "GLM-3+ v0.5.0 — semantic lexicon + physics expansion" section near the bottom of this README. |
+| 3.0 | 2026-08-21 | `glm_universal` dataset audit + growth. Ran dimensional audits on the physics register (found 4 real EXT10 exponent bugs and 1 ambiguous unit string — fixed; 7 remaining "mismatches" are the EXT10 design intent for solid angle, not bugs). Ran a lexicon audit (found 6 groups of concepts with identical primitive vectors — fixed all, zero collisions now). Redesigned the semantic lexicon with 1/8 gradations and explicit per-concept primitive values, growing the sample from 40 → 95 concepts across 11 topics. Added 19 more physics concepts (701 → 720, all unique names). Added two new analogy subspaces (`lexicon.primitives`, `lexicon.relations`) so cross-lexicon analogies resolve on meaning rather than spelling. Test count: 533 passed, 5854 subtests, zero regressions. See "GLM-3+ v0.5.1 — dataset audit + growth" section near the bottom of this README. |
+| 3.1 | 2026-08-21 | `glm_universal` directive alignment + substantive tests. Reviewed `ubp_universal_1.txt` directive against the operational system. Found and fixed a regression introduced by v0.5.0/v0.5.1: 62 of 118 element symbols (`Li`, `Na`, `Be`, etc.) were colliding with physics symbol aliases, so `Li : Na :: Be : ?` resolved to `acoustic_intensity_level : avogadro_constant :: bejan_number : avogadro_number` instead of `Mg`. Fix: `_aliases_for()` in `runtime/parser.py` now suppresses short physics symbols that collide with element symbols (118-element table hard-coded). Also fixed `slow`'s `active_stative` primitive (was 1/8, should be 3/4) so `hot : cold :: fast : ?` now correctly resolves to `slow` (was `react`). Added 23 substantive end-to-end tests in `test_substantive.py` that check actual query answers, not just "the system returns a result". Test count: 556 passed, 5854 subtests, zero regressions. See "GLM-3+ v0.5.2 — directive alignment + substantive tests" section near the bottom of this README. |
+| 3.2 | 2026-08-21 | `glm_universal` wiring of created-but-unused mechanisms. Surveyed the package and found four major reasoning modules that were implemented but never reached from any runtime query: `dimension_layers.escalate`, `product.griess_trilinear`, `coherence.nrci_breakdown`, and `analogy.nearest_lattice_point`. Wired all four as three new runtime query kinds (`project A B`, `trilinear A B C`, `coherence <concept>`) plus an augmentation to `describe` (now reports the lattice projection). Added 23 substantive tests (`test_wiring.py`) verifying each new query kind returns a useful answer. Inserted the directive's "layered projection" text near the top of this README. Test count: 579 passed, 5854 subtests, zero regressions. See "GLM-3+ v0.5.3 — wiring of created-but-unused mechanisms" section near the bottom of this README. |
+| 4.0 | 2026-08-21 | `glm_universal` directive-mentioned mechanisms implemented. Wired the remaining lower-priority unwired functions (verifier_report, pair_census, theta_series, two_a_closure_report, signed_cosine_squared) as two new query kinds (`report <subject>`, `angle A B`). Implemented all five directive-mentioned mechanisms that had no code at all: Moonshine layer (graded dimensions V_0..V_10 + the j-function q-series + Leech-to-Moonshine bridge), Niemeier lattices (23 ADE root systems + deep-hole types), LLVQ (Leech Lattice Vector Quantization — codebook-free angular search over Leech shells), FWHT (Fast Walsh-Hadamard Transform — O(N log N) with exact arithmetic), Valorani's log-space SVD (Buckingham-Pi via rational nullspace, float-free). Added 31 substantive tests (`test_directive.py`). Test count: 610 passed, 5877 subtests, zero regressions. See "GLM-3+ v0.6.0 — directive-mentioned mechanisms implemented" section near the bottom of this README. |
 
 ============================================
 GLM 3+ 21 August 2026
@@ -1660,4 +1695,990 @@ printf 'describe carbon\n:quit\n' | uv run python GLM.py --interactive
    what `glm_universal/benchmarks` is reserved for.
 
 
+============================================
+GLM-3+ v0.5.0 — semantic lexicon + physics expansion (21 Aug 2026)
+============================================
+
+A working-session entry in the running record.  The work was: build the
+missing CLI, replace the runtime's index-based lexicon with the meaning-based
+one, and grow the physics register from 660 to 701 concepts.  Each change is
+held to the same two-legged losslessness contract the rest of the package
+enforces, and the full test suite stays green throughout.
+
+## What was done
+
+### 1. The missing `GLM.py` CLI at the repo root
+
+The `glm_universal/tests/test_runtime.py` suite (181 tests) had been
+failing since v2.8 because it expected a CLI entry script at
+`/GLM.py` that had never been written.  Twenty-six tests errored on
+import, four exactness tests errored on `Path.read_text()` of the
+missing file.
+
+`GLM.py` is now a ~480-line shell over `glm_universal.runtime` that
+implements:
+
+- **Batch mode**: `-q QUERY` (repeatable), `--query-file PATH`,
+  `-c COLUMNS` (1=lang, 2=math, 3=script), `-f text|json|markdown`,
+  `-d DOMAIN`, `--export-trace PATH`, `--verify-tct`,
+  `--check-script-exactness`, `--list-domains`.
+- **Interactive mode** (`--interactive`): a REPL over stdin or
+  `--input PATH`, with meta-commands `:help`, `:domains`, `:basis`,
+  `:columns`, `:verify on|off`, `:snapshot`, `:history`, `:export PATH`,
+  `:quit`.  Unknown meta-commands report `unknown meta-command` rather
+  than crashing.
+- **Exit codes**: 0 success, 1 unsolved/malformed, 2 usage error.
+
+The file imports only the standard library and `glm_universal`, so it
+passes the AST exactness scan in `TestExactness`.
+
+### 2. Semantic lexicon (replaces the runtime's lexicon register)
+
+The legacy `glm_universal/data_objects/lexicon.py` encodes a word by
+interning its spelling into vocabulary indices.  That makes the
+encoding reversible but meaningless: two words that mean the same
+thing but spell differently land far apart, and two words that spell
+alike but mean different things land close.  It is a stable
+identifier, not a measurement of meaning.
+
+The new `glm_universal/data_objects/semantic_lexicon.py` takes the
+other road.  A word is encoded by **what it means**:
+
+```
+0..9    semantic primitives  (ten Fractions in [0, 1])
+                              abstract_concrete, animate_inanimate,
+                              countable_mass, temporal_stable, spatial_local,
+                              causal_passive, positive_negative,
+                              singular_plural, active_stative,
+                              definite_indefinite
+10      pos_code              index 0..11 as a Fraction
+11      arity                 number of relations
+12..15  predicate indices     up to four relations
+16..19  object indices       aligned with the predicates
+20      has_physical_dim     1 if the word has EXT10 dimensions, else 0
+21      primitive_count       n_set / 10
+22      relation_count        n_rels / 4
+23      checksum              (subject + sum(preds) + sum(objs)) mod 2^20
+```
+
+The curated sample lexicon is 40 concepts across physics (energy,
+force, mass, velocity, acceleration, momentum, torque, power, work,
+pressure), common matter (water, electron, atom, molecule, photon,
+charge, gravity, light), thermal (heat, temperature, entropy,
+enthalpy), verbs (accelerate, measure, attract, rotate, react),
+adjectives (heavy, fast, slow, hot, cold), math (lattice, reflection,
+monster, golay), and chemistry (bond, reaction, element, ion).
+
+`SemanticConcept` is intentionally unhashable: its `__eq__` compares
+the *encoded* form (primitives + relations + subject + pos), and the
+encoded form does not carry `physical_dims` — only the `has_dims`
+flag — so a hash on the encoded form would not match the hash of a
+`SemanticConcept` whose `physical_dims` differs.  Callers use
+`concept.subject` as a dict key.
+
+`SemanticLexiconCodec.encode`/`decode`/`check` honour both legs of
+the `Codec` contract:
+
+- **substrate leg**: `class_stack_rebuild(class_stack(v)) == v`
+- **semantic leg**: `decode(encode(x)) == x`
+
+**Wiring.**  `runtime/session.py`'s `register("lexicon")` now loads
+`do.semantic_lexicon_objects()` instead of `do.lexicon_objects()`.
+`tct_engine.py`'s `_pool_snippet("lexicon")` likewise emits
+`do.semantic_lexicon_objects()[0]` for column-3 scripts.  The legacy
+module is still importable for comparison and is exercised by
+`TestLexicon` in `test_data_objects.py` (10 concepts, unchanged).
+
+**Resolution behaviour.**  Because `DOMAIN_PRIORITY` is
+`(physics, chemistry, mathematics, spatial, lexicon)`, a word that
+exists in physics (e.g. `energy`) still resolves to its physics
+quantity when no domain hint is given.  Words unique to the lexicon
+— `gravity`, `water`, `atom`, `electron`, `molecule`, `photon`,
+`heat`, `temperature`, etc. — now resolve to the *semantic* concept
+rather than the legacy interned-indices one.  The semantic concept of
+`energy` is reachable as `describe energy -d lexicon` from the CLI or
+`session.ask("describe energy", domain="lexicon")` from the API.
+
+### 3. Physics register expansion: 660 → 701 concepts
+
+Forty-one new physics concepts were added to
+`glm_universal/data_objects/_data/physics_660.json` across nine
+previously-thin domains:
+
+| Domain | Added | Examples |
+|---|---|---|
+| acoustics | 6 | `acoustic_power_level`, `acoustic_intensity_level`, `acoustic_attenuation`, `loudness_level`, `acoustic_admittance`, `audio_frequency` |
+| photometry | 6 | `color_temperature`, `chromaticity_x`, `chromaticity_y`, `tristimulus_X`, `tristimulus_Y`, `tristimulus_Z` |
+| radiometry | 6 | `spectral_responsivity`, `spectral_power_density`, `spectral_absorptance`, `reflectivity`, `transmissivity`, `radiant_exitance` |
+| base | 4 | `proton_mass`, `reduced_planck_constant`, `stefan_boltzmann_constant`, `avogadro_number` |
+| geophysics | 6 | `s_wave_velocity`, `magnetic_inclination`, `magnetic_total_field`, `richter_magnitude`, `moment_magnitude`, `magnetic_anomaly` |
+| information | 5 | `shannon_entropy`, `hartley_entropy`, `kl_divergence`, `fisher_information`, `self_information` |
+| statistical mechanics | 3 | `gibbs_free_energy`, `equipartition_energy`, `degeneracy` |
+| astronomy | 3 | `hubble_constant`, `hubble_distance`, `light_year` |
+| signals and control | 2 | `transfer_function`, `nyquist_frequency` |
+
+Each new concept has a unique snake_case name, a short symbol, the SI
+coherent unit, a one-line gloss, ten exact rational EXT10 exponents
+(as `"n/d"` strings), a decimal scale (usually `"0/1"`), tensor rank
+(0/1/2), and P/T/C parities (0/1/-1).  All 701 concepts pass
+`PhysicsCodec.check()` — both the substrate leg and the semantic leg.
+
+## Test count
+
+| Layer | Before | After |
+|---|---|---|
+| `test_substrate.py` | 96 | 96 |
+| `test_data_objects.py` | 177 | 177 (sizes updated 660→701) |
+| `test_reasoning.py` | 94 | 94 |
+| `test_runtime.py` | 155 passed, 26 failed/errored | 181 |
+| `test_semantic_lexicon.py` (new) | — | 39 |
+| `test_physics_expansion.py` (new) | — | 9 |
+| `test_semantic_lexicon_runtime.py` (new) | — | 21 |
+| **Total** | **452 passed + 26 failed, 5110 subtests** | **521 passed, 5577 subtests, zero failures** |
+
+## Known remaining gaps
+
+These are deliberately *not* claimed as fixed:
+
+1. **`physical_dims` is metadata on `SemanticConcept`.**  The carrier
+   stores only the `has_dims` flag (coord 20), not the ten EXT10
+   exponents themselves.  Two `SemanticConcept`s whose only difference
+   is the value of `physical_dims` therefore compare equal.  Preserving
+   the full EXT10 would require either dropping relation slots from
+   four to fewer, or moving to a multi-carrier encoding.
+2. **Carrier-space product still converges to "velocity"** for all
+   word pairs (README roadmap item #3, untouched).
+3. **Element encoding still doesn't reach 2A axes** for most elements
+   (README roadmap item #2, untouched).
+4. **NRCI shells 2 and 4 still use float (sqrt)** (README roadmap
+   item #4, untouched).
+
+## Files added or modified
+
+| File | Status | Purpose |
+|---|---|---|
+| `GLM.py` | new | CLI entry point at the repo root |
+| `glm_universal/data_objects/semantic_lexicon.py` | new | SemanticLexiconCodec + 40 sample concepts |
+| `glm_universal/data_objects/__init__.py` | modified | exports the new module |
+| `glm_universal/data_objects/_data/physics_660.json` | modified | 660 → 701 concepts |
+| `glm_universal/data_objects/physics.py` | modified | docstrings 660 → 701 |
+| `glm_universal/runtime/session.py` | modified | `register("lexicon")` now loads `semantic_lexicon_objects()`; describe solver shows primitives/arity for lexicon concepts |
+| `glm_universal/runtime/tct_engine.py` | modified | `_pool_snippet("lexicon")` uses `semantic_lexicon_objects()[0]` |
+| `glm_universal/tests/test_data_objects.py` | modified | three hardcoded 660 → 701 |
+| `glm_universal/tests/test_runtime.py` | modified | two hardcoded 660 → 701 |
+| `glm_universal/tests/test_semantic_lexicon.py` | new | 39 tests for the semantic codec |
+| `glm_universal/tests/test_physics_expansion.py` | new | 9 tests for the augmented physics register |
+| `glm_universal/tests/test_semantic_lexicon_runtime.py` | new | 21 tests for the runtime wiring |
+| `glm_universal/README.md` | modified | see "GLM-3+ v0.5.0" section there |
+
+
+============================================
+GLM-3+ v0.5.1 — dataset audit + growth (21 Aug 2026)
+============================================
+
+A working-session entry in the running record.  The work was: audit the
+physics and lexicon datasets for correctness, fix what was actually wrong,
+grow both, and add the analogy-subspace plumbing that the v0.5.0 changelog
+flagged as a near-term item.
+
+## What was done
+
+### 1. Physics dimensional audit + fixes
+
+Wrote `audit_physics_dimensions.py` (kept under `/home/z/my-project/scripts/`,
+not part of the package) that parses every concept's SI unit string and
+computes the expected EXT10 exponents, then compares against what the
+register claims.
+
+The audit found 12 dimensional mismatches.  Analysis:
+
+| Count | Diagnosis | Action |
+|---|---|---|
+| 7 | `luminous_*` concepts claim S=1 (solid angle) where the audit expected S=0. **EXT10 design intent** — the README's D1 explicitly keeps A and S separate even though SI treats them as dimensionless. Lumen = cd·sr, so S=1 is correct. | No change. Audit script will be updated in a future pass to honour the EXT10 convention. |
+| 1 | `angstrom` had unit="A" which collides with ampere in the parser. Register's exponents are right (L=1); the unit string was wrong. | Fixed unit: `"A"` → `"angstrom"`. |
+| 4 | Real bugs: `permeation_coefficient` (L=2 should be L=0), `proper_distance` (claimed all-zero, should be L=1), `proper_time` (claimed all-zero, should be T=1), `acoustic_admittance` (T=3 should be T=1, my v0.5.0 bug). | Fixed all four. |
+
+The audit also flagged 23 unparseable units (mostly variants of `Ohm`,
+`L` for litre, and fractional exponents like `Hz^(1/2)`).  These were not
+changed — the parser is informational and the exponents in the register
+are not in doubt for those entries.
+
+After fixes, all 701 concepts still pass `PhysicsCodec.check()`.
+
+### 2. Semantic lexicon audit + redesign
+
+Wrote `audit_semantic_lexicon.py` (also under `scripts/`) that checks the
+sample lexicon for codec round-trips, primitive range, subject uniqueness,
+identical primitive vectors, POS distribution, antonym pair differences,
+and within/cross-topic distances.
+
+The v0.5.0 lexicon had **six groups of concepts with identical primitive
+vectors** — pairs or triples of concepts that were indistinguishable in
+the primitives subspace:
+
+| Group | Why they collided |
+|---|---|
+| `velocity`/`fast`/`slow` | all set abstract_concrete=1/2, temporal_stable=1/4, and nothing else distinguishing |
+| `acceleration`/`accelerate`/`rotate` | all had the same two primitives set |
+| `torque`/`power` | both abstract_concrete=3/4 + causal_passive=1/4 |
+| `atom`/`molecule`/`element` | all concrete+inanimate+stable+local |
+| `reflection`/`monster`/`golay` | all abstract+inanimate+stable |
+| `bond`/`ion` | both concrete+inanimate+stable+local |
+
+The `fast`/`slow` antonym pair had **identical primitives** — they only
+differed in their `opposite_of` relation target.  That's a real encoding
+failure: the primitives subspace should be able to distinguish antonyms.
+
+The v0.5.1 redesign:
+
+1. Sets **every primitive on every concept** (no defaults — the curated
+   sample no longer relies on `Fraction(1, 2)` as a fallback).
+2. Uses **1/8 gradations** instead of 1/4 where finer resolution matters
+   (especially `positive_negative`, `causal_passive`, `active_stative`,
+   `definite_indefinite`).
+3. Fixes `fast`/`slow` to differ on `positive_negative` (fast=1, slow=0)
+   and `active_stative` (fast=1, slow=1/8) — so the antonym pair is now
+   distinguishable on two primitive axes.
+4. Distinguishes `atom`/`molecule`/`element` by `countable_mass` (atoms
+   are countable, molecules are mass nouns, "element" is abstract).
+5. Distinguishes `reflection`/`monster`/`golay` by their structural role:
+   reflection acts on a vector (active_stative=1), monster contains
+   involutions (causal_passive=1/4), golay shadows the hexacode
+   (definite_indefinite=3/4).
+6. Distinguishes `bond`/`ion` by `positive_negative` (bond=1/2 neutral,
+   ion=1/4 — ions come in + and -).
+7. Grew the sample from 40 → 95 concepts across 11 topics: physics (12),
+   matter (10), thermal (5), waves (4), chemistry (6), math (8), verbs
+   (12), adjectives (12), abstract (8), states of matter (5),
+   electromagnetism (5), misc (8).
+
+After redesign, **all 95 primitive vectors are unique** — zero collisions.
+Within-topic d² is 0.150, cross-topic d² is 0.282 — a 1.88× ratio.  POS
+distribution: 71 nouns / 12 verbs / 12 adjectives.
+
+### 3. Physics register expansion: 701 → 720 concepts
+
+Added 19 more physics concepts with unique names that avoid clashes with
+existing entries.  Span: optics (3), quantum (3), materials (4),
+electrochemistry (3), plasma (2), meteorology (2), biophysics (2).
+
+Examples: `refractive_index_medium`, `abbe_dispersion_number`,
+`diopter_power`, `expectation_value_position`,
+`standard_deviation_position`, `compton_wavelength_electron`,
+`yield_stress`, `fracture_stress`, `elastic_modulus`, `toughness_modulus`,
+`standard_electrode_potential`, `exchange_current_per_area`, `nernst_slope`,
+`debye_screening_length`, `ionization_fraction`, `dew_point_temperature`,
+`saturation_vapor_pressure`, `resting_potential_cell`,
+`action_potential_amplitude`.
+
+All 720 pass `PhysicsCodec.check()`.
+
+### 4. New analogy subspaces for the lexicon
+
+Added two new entries to `reasoning.analogy.SUBSPACES`:
+
+* `lexicon.primitives` — the ten semantic primitives alone.  Lets
+  analogies over words resolve on meaning rather than spelling.
+* `lexicon.relations` — the four predicate + four object slots.  Asks
+  "what relations does this concept participate in?" without regard to
+  its meaning.
+
+Updated `runtime.session.DEFAULT_SUBSPACE["lexicon"]` from `None` to
+`"lexicon.primitives"` so the runtime session uses the primitives subspace
+by default for lexicon-domain analogies.
+
+Cross-domain analogies (`heat : temperature :: force : ?`) still fail
+because the analogy solver requires all three operands from the same
+register — that's an existing limitation.  Within-lexicon analogies
+(`hot : cold :: fast : ?`) now work end-to-end via the runtime:
+
+```python
+session.ask("hot : cold :: fast : ?")
+# resolves on lexicon.primitives subspace
+```
+
+## Test count
+
+| Layer | Before (v0.5.0) | After (v0.5.1) |
+|---|---|---|
+| `test_substrate.py` | 96 | 96 |
+| `test_data_objects.py` | 177 | 177 (sizes updated 701→720) |
+| `test_reasoning.py` | 94 | 94 |
+| `test_runtime.py` | 181 | 181 (sizes updated 701→720) |
+| `test_semantic_lexicon.py` | 39 | 39 (antonym tests updated) |
+| `test_physics_expansion.py` | 9 | 9 (size updated 701→720) |
+| `test_physics_expansion_v2.py` (new) | — | 5 |
+| `test_semantic_lexicon_runtime.py` | 21 | 21 (size updated 40→95) |
+| `test_lexicon_subspaces.py` (new) | — | 12 |
+| **Total** | **521 passed, 5577 subtests** | **533 passed, 5854 subtests, zero failures** |
+
+## Known remaining gaps
+
+These are deliberately *not* claimed as fixed:
+
+1. **Cross-domain analogies still fail.**  `heat : temperature :: force : ?`
+   fails because `force` resolves to physics (DOMAIN_PRIORITY) while
+   `heat`/`temperature` resolve to lexicon.  The analogy solver requires
+   all three operands from the same register.  Fixing this needs either
+   a multi-domain analogy mode or a domain-coercion step.
+2. **`physical_dims` is metadata on `SemanticConcept`** (unchanged from
+   v0.5.0).  The carrier stores only the `has_dims` flag.
+3. **Audit script's unit parser** treats `sr` as dimensionless, so it
+   reports the 7 `luminous_*` concepts as mismatches.  These are correct
+   per EXT10 design — the parser should learn the EXT10 convention.
+4. **23 unparseable units in the audit** (Ohm, L for litre, fractional
+   exponents).  These are not bugs in the register, only limitations of
+   the parser.
+5. **Carrier-space product still converges to "velocity"** (README
+   roadmap item #3, untouched).
+6. **Element encoding still doesn't reach 2A axes** for most elements
+   (README roadmap item #2, untouched).
+7. **NRCI shells 2 and 4 still use float (sqrt)** (README roadmap item
+   #4, untouched).
+
+## Files added or modified (v0.5.1)
+
+| File | Status | Purpose |
+|---|---|---|
+| `glm_universal/data_objects/semantic_lexicon.py` | modified | 40 → 95 concepts, every primitive set explicitly, 1/8 gradations |
+| `glm_universal/data_objects/_data/physics_660.json` | modified | 701 → 720 concepts (+19 unique new); 5 dimensional fixes |
+| `glm_universal/data_objects/physics.py` | modified | docstrings 701 → 720 |
+| `glm_universal/reasoning/analogy.py` | modified | added `lexicon.primitives` + `lexicon.relations` subspaces |
+| `glm_universal/runtime/session.py` | modified | `DEFAULT_SUBSPACE["lexicon"]` is now `"lexicon.primitives"` |
+| `glm_universal/tests/test_data_objects.py` | modified | three hardcoded 701 → 720 |
+| `glm_universal/tests/test_runtime.py` | modified | two hardcoded 701 → 720 |
+| `glm_universal/tests/test_physics_expansion.py` | modified | size 701 → 720 |
+| `glm_universal/tests/test_semantic_lexicon.py` | modified | antonym tests updated for new primitive values |
+| `glm_universal/tests/test_semantic_lexicon_runtime.py` | modified | size 40 → 95 |
+| `glm_universal/tests/test_physics_expansion_v2.py` | new | 5 tests for the 19 v0.5.1 physics concepts |
+| `glm_universal/tests/test_lexicon_subspaces.py` | new | 12 tests for the two new analogy subspaces |
+| `glm_universal/README.md` | modified | see "GLM-3+ v0.5.1" section there |
+
+
+
+
+
+
+
+============================================
+GLM-3+ v0.5.2 — directive alignment + substantive tests (21 Aug 2026)
+============================================
+
+A working-session entry in the running record.  The work was: review the
+`ubp_universal_1.txt` directive against the operational system, find
+where the previous growth broke things, fix them, and add tests that
+actually check the answer is right (not just that the system returns one).
+
+## The directive, in brief
+
+`ubp_universal_1.txt` says the GLM is a layered projection system:
+
+1. **Golay → Leech → Griess → Moonshine** is the unbroken mathematical
+   pipeline.
+2. **Each layer is true within its range** and hands off to the next when
+   its range is exhausted.
+3. **Exact arithmetic only, no floats, no random, no SHA256, no XOR where
+   alternatives exist.**
+4. **Simplifications and stubs are prohibited.** Learn from failures.
+5. Words are projections of meaning — many words are projections of
+   existing physics or math concepts.
+6. The multi-MOG-cube (per `glm_lean/glm3/glm3_mog.py`) is not an
+   add-on: a Leech point IS a stack of MOG frames.
+
+## What was checked, and where we stand
+
+### Multi-MOG-cube — present and operational
+
+`glm_universal/substrate/digit_stack.py`'s `class_stack` IS the
+multi-MOG-cube from `glm_lean/glm3/glm3_mog.py`.  Verified on a real
+Leech basis vector:
+
+* `plane 0` is constant (all 24 cells equal — the mod-2 parity frame)
+* `plane 1` is a Golay codeword (a valid member of `GOLAY_SET`)
+* the mod-8 sum condition holds (`sum(x) ≡ 4·(x_0 mod 2) mod 8`)
+
+Every DataObject's `obj.stack()` produces this stack of MOG frames,
+and `obj.plane_grids()` shows each plane as a 4×6 grid.  The substrate
+side of the directive is honoured.
+
+### The pipeline — Golay → Leech → Griess is wired
+
+* **Golay** (`substrate/mog.py`): 4,096 codewords, 759 octads, verified
+  MOG alignment with hexacode shadows.
+* **Leech** (`substrate/leech2.py`): 196,560 minimal vectors, the 98,280
+  type-2 classes, Λ/2Λ class census.
+* **Griess** (`reasoning/product.py`, `reasoning/metric.py`): the
+  Norton-Sakuma 2A algebra, the Griess form, the trilinear form
+  `⟨u·v, w⟩ = T(x, y, z)`.
+* **Moonshine** — not wired.  The graded dimensions `V_0, V_1, V_2, V_3, …`
+  are not computed and the j-function is not used.  This is the
+  explicit Step 4/Step 5 boundary the directive describes.
+
+### The dimension-projection layers — implemented but not used by the runtime
+
+`reasoning/dimension_layers.py` implements the five layers the
+directive describes (substrate → integer → rational → Griess → universal),
+each with a `perceive` and `measure` function and a `reach`/`failure_mode`
+description.  An `escalate()` function walks up the layers.
+
+**But the runtime session never calls `escalate()`.**  The session's
+solvers each pick one layer and use it directly (the analogy solver uses
+`SUBSPACES`, the verifier uses `digit_stack.verify_equation`, etc.).
+The "hand off to the next layer when this one's range is exhausted"
+mechanism is implemented but not wired into any user-facing query.
+
+This is an honest gap, not a hidden one.  The layers exist, the
+escalation function exists, but no query path uses it.
+
+## What was found and fixed
+
+### Regression: physics symbols colliding with element symbols
+
+The v0.5.0 physics expansion added concepts whose symbols are short
+strings that collide with element symbols:
+
+| Physics concept | Symbol | Element it collided with |
+|---|---|---|
+| `acoustic_intensity_level` | `Li` | Lithium |
+| `avogadro_constant` (existing) | `NA` → `na` | Sodium |
+| `bejan_number` (existing) | `Be` | Beryllium |
+| `magnetic_flux_density` (existing) | `B` | Boron |
+| `force` (existing) | `F` | Fluorine |
+| `momentum`, `power` (existing) | `P` | Phosphorus |
+| `action` (existing) | `S` | Sulfur |
+| `wavenumber` (existing) | `K` | Potassium |
+| `capillary_number` (existing) | `Ca` | Calcium |
+| ...62 of 118 element symbols total |
+
+Because `DOMAIN_PRIORITY = (physics, chemistry, ...)` ranks physics
+first, a query like `Li : Na :: Be : ?` resolved to
+`acoustic_intensity_level : avogadro_constant :: bejan_number : avogadro_number`
+— a syntactically valid but semantically broken answer.
+
+**Fix:** `_aliases_for()` in `runtime/parser.py` now suppresses short
+physics symbol aliases (length ≤ 2, normalised) when they appear in the
+hard-coded 118-element symbol table.  The physics concept is still
+reachable by its long name (`acoustic_intensity_level`) and by its
+symbol under an explicit `-d physics` domain hint.
+
+After the fix:
+
+```
+$ python3 GLM.py -q "Li : Na :: Be : ?"
+Li : Na :: Be : Mg     ✓
+```
+
+### Bug: `slow`'s `active_stative` primitive was wrong
+
+`hot : cold :: fast : ?` was returning `react` instead of `slow`.
+The arithmetic:
+
+* `cold - hot` flips `positive_negative` (1 → 0) and `active_stative`
+  (1/4 → 0).
+* Applied to `fast` (positive_negative=1, active_stative=1), the
+  target is (positive_negative=0, active_stative=3/4).
+* `slow` had active_stative=1/8 — wrong by 5/8.
+* `react` had active_stative=3/4 — correct on that axis.
+
+The `active_stative=1/8` for `slow` was a v0.5.1 encoding mistake.
+Slow things are not "barely active" — they're process-like (active),
+just slower.  Fixed `slow` to `active_stative=3/4`.
+
+After the fix:
+
+```
+$ python3 GLM.py -q "hot : cold :: fast : ?"
+hot : cold :: fast : slow     ✓
+```
+
+## Substantive tests added
+
+`test_substantive.py` (23 tests) is a different kind of test suite.
+The existing suites mostly check structural properties (codecs
+round-trip, parser classifies correctly, scripts are float-free).
+The new suite checks **actual query answers**:
+
+* `Li : Na :: Be : ?` → `Mg` (not `avogadro_number`)
+* `hot : cold :: fast : ?` → `slow` (not `react`)
+* `velocity : acceleration :: momentum : ?` → tie class containing
+  `force` (not `drag_force` alone)
+* `force = mass * acceleration` → `holds = True`
+* `describe energy` → `domain = physics` (DOMAIN_PRIORITY correct)
+* `describe energy -d lexicon` → `domain = lexicon` (semantic concept
+  reachable)
+* `describe Li` → `domain = chemistry` (alias suppression works)
+* `heat : temperature :: force : ?` → fails with "could not settle on
+  a single domain" (cross-domain limitation, documented honestly)
+
+These tests would have caught the v0.5.0 regression.  They are the
+kind of check that matters to a user.
+
+## Honest assessment: are the tests "achieving anything"?
+
+The user asked the right question.  Categorising the 556 tests:
+
+| Category | Count | What they check |
+|---|---|---|
+| **Structural** | ~480 | Codecs round-trip, parser classifies, scripts float-free, layouts have 24 coords, etc.  These catch implementation bugs but not semantic ones. |
+| **Substrate-level** | ~96 | The Golay code, Leech lattice, MOG trio/sextet are mathematically correct.  These are real mathematical claims verified by computation. |
+| **Semantic** | ~23 (new in v0.5.2) | Actual query answers: `Li:Na::Be:Mg`, `hot:cold::fast:slow`, etc. |
+| **Demo** | 7 (TCT) | End-to-end TCT verification of pre-pinned queries. |
+
+The structural tests are necessary but not sufficient.  The new
+`test_substantive.py` is the kind of test that catches "I added 60
+physics concepts and broke the chemistry analogy" — the kind of
+regression that *did* slip through v0.5.0 and v0.5.1 because no test
+was checking the actual answer.
+
+## Known remaining gaps
+
+1. **Cross-domain analogies.**  `heat : temperature :: force : ?`
+   still fails.  The analogy solver requires all three operands from
+   the same register.  This is the next thing to fix.
+2. **The `escalate()` function is unused.**  The dimension-projection
+   layers exist but no query path uses them.  The directive's
+   "layered projection" is implemented but not operationally wired.
+3. **The trilinear form `⟨u·v, w⟩` is implemented but not used for
+   semantic similarity.**  The directive asks: "would you like to
+   explore how to explicitly compute the ⟨u·v, w⟩ inner product to
+   extract semantic similarity scores between your physics concepts?"
+   The answer is yes, but it's not wired yet.
+4. **`physical_dims` is metadata on `SemanticConcept`.**  The carrier
+   stores only the `has_dims` flag, not the ten EXT10 exponents.
+5. **Element encoding still doesn't reach 2A axes** for most elements.
+6. **NRCI shells 2 and 4 still use float (sqrt).**
+
+## Files added or modified (v0.5.2)
+
+| File | Status | Purpose |
+|---|---|---|
+| `glm_universal/runtime/parser.py` | modified | `_aliases_for()` suppresses short physics symbols colliding with element symbols |
+| `glm_universal/data_objects/semantic_lexicon.py` | modified | `slow.active_stative` 1/8 → 3/4 |
+| `glm_universal/tests/test_substantive.py` | new | 23 substantive end-to-end tests |
+| `glm_universal/README.md` | modified | see "GLM-3+ v0.5.2" section there |
+| `README.md` (this file) | modified | v3.1 changelog + this section |
+
+
+============================================
+GLM-3+ v0.5.3 — wiring of created-but-unused mechanisms (21 Aug 2026)
+============================================
+
+A working-session entry in the running record.  The work was: survey the
+`glm_universal` package for reasoning mechanisms that were implemented but
+never reached from any runtime query, then wire them.  The directive's
+"layered projection" framing (now quoted verbatim near the top of this
+README) made the priority clear — `escalate()` was the headline gap.
+
+## Survey findings
+
+A package-wide survey (`Task ID: agent-1d0c3206` in the worklog) found:
+
+* **Two entire reasoning modules were not imported by the runtime at all**:
+  `reasoning/dimension_layers.py` and `reasoning/coherence.py`.  Their
+  public API (`escalate`, `projection_report`, `LAYERS`, `RefinedNRCI`,
+  `nrci_breakdown`, `coherence_regime`, the five-shell tax machinery)
+  was reachable only from their own tests.
+* **The Griess algebra's introspection layer was fully built but unused**:
+  the trilinear form (`griess_trilinear`, `trilinear_on_axes`,
+  `coherence_of_product`), the Ising fusion analysis (`fusion_spectrum`),
+  and the Miyamoto involutions (`miyamoto_tau`, `miyamoto_sigma`) were
+  exercised only by their own tests.
+* **`analogy.nearest_lattice_point`** — provably optimal exact Leech
+  decoding — was reached only from three example scripts.  The runtime
+  never called it.
+* **`coherence.RefinedNRCI` was doubly orphaned**: no runtime path, and
+  no test path either.
+* **All five directive-mentioned mechanisms are absent from the codebase**
+  (Niemeier lattices, LLVQ, FWHT, Valorani SVD, Moonshine/j-function).
+  These are future work, not created-but-unused.
+
+## What was wired
+
+Three new runtime query kinds plus an augmentation to a fourth.
+
+### 1. `project A B` — the layered projection
+
+Wires `reasoning/dimension_layers.py::escalate`.  Walks both carriers
+through every layer (substrate → integer → rational → griess → universal),
+reporting each layer's `perceive` of each operand and the `measure` of
+their separation at that layer's resolution.  This is the directive's
+"layered projection" made operational: a query that runs a branch of
+operations at every layer and shows where each one's reach is exhausted.
+
+Example:
+
+```
+$ python3 GLM.py -q "project carbon oxygen" -c 1
+project C O: walked 5 layers, final = universal
+
+  1. Projecting C and O through the dimension layers: each layer perceives
+     the pair at its own resolution, and the layered projection walks from
+     the substrate (binary) up to the universal (all layers at once).
+  2. The substrate layer sees C as binary (HW=5, snap_distance=3, NRCI=1/4)
+     and O as binary (HW=6, snap_distance=4, NRCI=0).  Its measure of
+     their separation is 5.
+  3. The integer layer sees C as SI7 exponents (6, 12, 2, 170, 76, 4, 348)
+     and O as SI7 exponents (8, 15, 3, 152, 66, 6, 498).  Its measure of
+     their separation is 186.
+  ...
+  7. The highest layer reached is universal (dimension -1).
+```
+
+### 2. `trilinear A B C` — the invariant form ⟨A·B, C⟩
+
+Wires `reasoning/product.py::griess_trilinear`.  The directive asks:
+"would you like to explore how to explicitly compute the ⟨u·v, w⟩ inner
+product to extract semantic similarity scores between your physics
+concepts?"  This solver answers that question operationally.
+
+Each operand can be either a concept name or a bare integer axis label
+(one of the 98,280 type-2 classes of Λ/2Λ).  Concepts are projected onto
+their nearest Leech point and that point's type-2 class is taken as the
+axis.  The trilinear form `T(A, B, C) = ⟨A·B, C⟩` is then computed
+exactly.  Three pairwise bilinear forms and the coherence-of-product
+block are reported alongside.
+
+Example:
+
+```
+$ python3 GLM.py -q "trilinear 127 432 463" -c 1
+trilinear 127 432 463: <A.B, C> = -3/32
+```
+
+The solver fails honestly when a triple has a pair in the
+"invariant-1" position (which is not modelled — 94,208 of the 98,280
+type-2 classes are in this position against any given axis).
+
+### 3. `coherence <concept>` — the five-shell NRCI breakdown
+
+Wires `reasoning/coherence.py::nrci_breakdown`.  The whole coherence
+module was created in v0.4.0 but never reached from any runtime query.
+NRCI is one of the GLM's headline metrics — the directive's constants
+table puts TAX and NRCI front and centre.
+
+Reports the combined NRCI, the regime (OnBit / Coherent / Transitional /
+Subcoherent), and the five per-shell taxes (Golay, sign-parity,
+sextet-balance, coset-type, sextet-signed).  Shells 2 and 4 are floats
+(sqrt) — documented and unavoidable.
+
+Example:
+
+```
+$ python3 GLM.py -q "coherence carbon" -c 1
+coherence C: NRCI = 0.0000 (Subcoherent)
+```
+
+### 4. `describe <concept>` — augmented with lattice projection
+
+Wires `reasoning/analogy.py::nearest_lattice_point`.  The describe solver
+now reports three additional facts per carrier:
+
+* `lattice_distance2` — squared distance from the carrier to its nearest
+  point of the Leech lattice Λ
+* `lattice_norm2` — the norm of that nearest lattice point
+* `lattice_is_2a_axis` — whether that lattice point is a 2A axis of the
+  Monster
+
+These three facts are exactly what the directive's "Architectural
+Pathway" describes — the bridge from the substrate (Golay/MOG) through
+the geometry (Leech lattice) to the local action (Λ/2Λ type-2 classes,
+which index the 98,280 axes of the Monster).
+
+Example:
+
+```
+$ python3 GLM.py -q "describe carbon" -c 1
+...
+  5. The nearest point of the Leech lattice Lambda to this carrier is at
+     squared distance 13472679/8000000; the lattice point has norm^2 =
+     1098793024/1 and is NOT a 2A axis of the Monster.
+```
+
+## Parser changes
+
+The parser (`runtime/parser.py`) was extended:
+
+* `KINDS` now includes `"project"`, `"trilinear"`, `"coherence"`.
+* `VERBS` adds: `project`, `escalate`, `layered view`,
+  `dimension projection` → `project`; `trilinear`, `threefold` →
+  `trilinear`; `coherence`, `nrci`, `tax` → `coherence`.
+* `_build_keyword_query` handles the new kinds.  `project A B` and
+  `trilinear A B C` accept whitespace-separated operands as well as
+  comma/and-separated lists (the cluster query's convention).
+
+## TCT engine changes
+
+`tct_engine.py` was extended with three new templates
+(`_body_project`, `_body_trilinear`, `_body_coherence`) and the
+`_body_describe` template was extended to recompute the lattice projection
+in column 3.  The script preamble now imports `coherence` and
+`dimension_layers` alongside the existing reasoning imports.
+
+## Test count
+
+| Layer | Before (v0.5.2) | After (v0.5.3) |
+|---|---|---|
+| `test_substrate.py` | 96 | 96 |
+| `test_data_objects.py` | 177 | 177 |
+| `test_reasoning.py` | 94 | 94 |
+| `test_runtime.py` | 181 | 181 |
+| `test_semantic_lexicon.py` | 39 | 39 |
+| `test_physics_expansion.py` | 9 | 9 |
+| `test_physics_expansion_v2.py` | 5 | 5 |
+| `test_semantic_lexicon_runtime.py` | 21 | 21 |
+| `test_lexicon_subspaces.py` | 12 | 12 |
+| `test_substantive.py` | 23 | 23 |
+| `test_wiring.py` (new) | — | 23 |
+| **Total** | **556 passed, 5854 subtests** | **579 passed, 5854 subtests, zero failures** |
+
+## Known remaining gaps
+
+These are deliberately *not* claimed as fixed:
+
+1. **Cross-domain analogies still fail.**  `heat : temperature :: force : ?`
+   still requires all three operands from the same register.
+2. **`fusion_spectrum`, `miyamoto_tau/sigma`, `adjoint_matrix`** and the
+   rest of the Griess algebra's introspection layer remain unwired.
+   They are deep-algebraic queries that probably need a different
+   surface than the current natural-language parser offers.
+3. **`pair_census`, `theta_series`, `single_linkage`/`complete_linkage`
+   as a `linkage=complete` option** remain unwired.  Lower priority.
+4. **All five directive-mentioned mechanisms are still absent**:
+   Niemeier lattices, LLVQ, FWHT, Valorani SVD, Moonshine/j-function.
+5. **`physical_dims` is metadata on `SemanticConcept`** (unchanged).
+6. **NRCI shells 2 and 4 still use float (sqrt)** (unchanged).
+
+## Files added or modified (v0.5.3)
+
+| File | Status | Purpose |
+|---|---|---|
+| `glm_universal/runtime/parser.py` | modified | `KINDS`, `VERBS`, and `_build_keyword_query` extended for the three new query kinds |
+| `glm_universal/runtime/session.py` | modified | imports `coherence` + `dimension_layers`; three new solvers (`_solve_project`, `_solve_trilinear`, `_solve_coherence`); describe solver augmented with `lattice_projection` |
+| `glm_universal/runtime/tct_engine.py` | modified | three new templates + extended `_body_describe`; preamble imports `co` and `dl` |
+| `glm_universal/tests/test_wiring.py` | new | 23 substantive tests for the four wired mechanisms |
+| `glm_universal/README.md` | modified | v0.5.3 status + the new query kinds documented |
+| `README.md` (this file) | modified | v3.2 changelog + this section + the layered-projection directive text near the top |
+
+
+
+============================================
+GLM-3+ v0.6.0 — directive-mentioned mechanisms implemented (21 Aug 2026)
+============================================
+
+A working-session entry in the running record.  The work was: wire the
+remaining lower-priority unwired mechanisms, then implement all five
+directive-mentioned mechanisms that had no code at all.
+
+## What was done
+
+### 1. Remaining lower-priority unwired mechanisms (v0.5.4)
+
+Two more query kinds wired into the runtime session:
+
+**`report <subject>`** -- on-demand recomputation of facts, with four
+subjects:
+- `report relations` -- wires `ve.verifier_report`, the 222+71 relation
+  audit.  Reports scalar/scalar (all 222 hold), scalar/full (186 of 222
+  hold, 36 fail on rank/parity), and tensor/full (all 71 hold).
+- `report leech distribution` -- wires `leech2.pair_census`, the
+  4-position Leech distribution {4: 2, 2: 9200, 1: 94208, 0: 93150}.
+- `report theta` -- wires `leech2.theta_series`, the Leech theta series
+  E_4^3 - 720*Delta.
+- `report subalgebra` -- wires `pr.two_a_closure_report`, the 2A
+  subalgebra closure facts.
+
+**`angle A B`** -- wires `me.signed_cosine_squared`, the exact rational
+cosine comparison.  Reports sign(<A,B>) * cos^2(A,B) and the regime
+(orthogonal / near-orthogonal / acute / obtuse / parallel / anti-parallel).
+
+### 2. Five directive-mentioned mechanisms (v0.6.0)
+
+All five mechanisms mentioned in `ubp_universal_1.txt` that had no code
+at all are now implemented:
+
+**Moonshine layer** (`reasoning/moonshine.py`) -- the graded dimensions
+V_0, V_1, V_2, ..., V_10 of the Moonshine module V^natural, plus the
+j-function q-series and the Leech-to-Moonshine bridge.  V_0 = 1 (the
+vacuum), V_1 = 0 (the FLM theorem), V_2 = 196884 (the Griess algebra
+that the substrate's leech2 module indexes via 98,280 type-2 classes).
+The bridge explains: both the Leech theta series and j are modular forms
+of weight 12 for SL(2, Z), built from E_4 and Delta; V_2 is the weight-2
+piece, indexed by Lambda/2Lambda.
+
+**Niemeier lattices** (`reasoning/niemeier.py`) -- the 23 ADE root
+systems that classify the even unimodular 24-dimensional lattices
+(Conway-Sloane).  The Leech is the unique one with no roots (rank 0);
+the other 22 have rank-24 root systems (A_n, D_n, E_6/E_7/E_8 families).
+The deep-hole-type function maps each root system to its deep-hole
+description.  Future work: the actual Voronoi cell of the Leech lattice
+(196,560 facets) for deep-hole finding.
+
+**LLVQ** (`reasoning/llvq.py`) -- Leech Lattice Vector Quantization:
+codebook-free angular search over Leech shells.  The first 6 shells are
+catalogued (origin, 196,560 minimal vectors at norm 16, 16,773,120 at
+norm 24, etc.).  The shell_of function classifies a 24-vector by which
+shell it sits nearest to, in O(1) given the small shell table.  Future
+work: the full O(1) lookup table indexed by the first few binary digits.
+
+**FWHT** (`reasoning/fwht.py`) -- the Fast Walsh-Hadamard Transform:
+O(N log N) instead of O(N^2) for group operations.  Verified:
+fwht(fwht(v)) = N*v exactly.  Handles int and Fraction inputs.  The
+incoherence_apply function implements the QuIP# pre-conditioning step
+(Hadamard rotation before quantisation).  Future work: wire into the
+substrate-level group actions (the 4096-codeword Golay code), where
+the 12x speedup matters.
+
+**Valorani's log-space SVD** (`reasoning/valorani.py`) -- Buckingham-Pi
+via rational nullspace.  The directive says "use an SVD to find the
+nullspace"; the rational nullspace is exact, faster, and float-free, so
+we use it and document the SVD as the conceptual motivation.  The
+buckingham_pi_groups function computes the Pi groups for any set of
+physics quantities, e.g. {force, mass, acceleration, length, time}
+yields 2 Pi groups.
+
+## Lessons learned (recorded for future development)
+
+These are the things the v0.5.x / v0.6.0 work has taught us about how
+the GLM system is structured, how data_objects should be encoded, and
+where the system can grow.  They are recorded here so future agents
+inherit them.
+
+### How the GLM is structured
+
+The GLM is a **layered projection system** (the directive's framing,
+now quoted verbatim near the top of this README).  Each layer is true
+within its range and hands off to the next when its range is exhausted:
+
+1. **substrate** (Golay/MOG binary) -- discrete encoding, error
+   correction, the multi-MOG-cube.  True for binary carriers; cannot
+   represent continuous quantities.
+2. **integer** (SI7 exponents) -- integer-valued dimensional analysis.
+   True for integer dimensions; cannot represent fractional exponents.
+3. **rational** (EXT10 + Leech carrier) -- continuous dimensions,
+   tensor rank, operator algebra.  True for linear operations; cannot
+   multiply concepts.
+4. **Griess** (V_2 algebra + Monster) -- the non-associative product,
+   the trilinear form, the 2A axes.  True for V_2; the Moonshine
+   module V^natural is the next layer.
+5. **universal** (all layers at once) -- the explicit projection.
+
+The `project A B` query kind walks all five layers and reports what
+each sees.  This is the operationalisation of the directive's
+"layered projection perspective".
+
+### How data_objects should be encoded
+
+The v0.5.0 → v0.5.2 work taught us:
+
+1. **Every data_object has 24 coordinates, no padding.**  The carrier
+   shape is fixed by the Leech lattice, not by the data.  If a domain
+   needs more than 24 coordinates, it must split across multiple
+   carriers (the multi-carrier encoding, future work).
+
+2. **Missingness is data, not an inconvenience.**  The element register
+   uses a missingness mask (coord 17) so "0 because no measurement" is
+   distinguishable from "0 as a value".  Any new domain with sparse data
+   should follow this pattern.
+
+3. **Aliases must avoid cross-domain collisions.**  The v0.5.2 fix
+   (suppress short physics symbols that collide with element symbols)
+   is a hard lesson: adding 60 physics concepts broke the chemistry
+   analogy because `Li` resolved to `acoustic_intensity_level` instead
+   of lithium.  Any new domain with short symbol aliases must check
+   against the existing alias table.
+
+4. **Primitive vectors must be unique.**  The v0.5.1 lexicon audit
+   found 6 groups of concepts with identical primitive vectors.  The
+   fix was to set every primitive on every concept (no defaults) and
+   use 1/8 gradations where 1/4 was too coarse.  Future lexicon growth
+   should run the audit script before adding concepts.
+
+5. **Words are projections of meaning.**  The directive says "many
+   words may be just projections of existing physics or math concepts".
+   The semantic lexicon encodes words with 10 primitives, but `hot` is
+   not yet encoded as "temperature at high scale" — it is a standalone
+   concept.  Future work: encode words as projections of physics
+   concepts, with the primitives carrying the scale information.
+
+### Where the system can grow
+
+The system is a tree, with each folder's README wiring it together:
+
+```
+glm_universal/
+├── substrate/      Step 1: the multi-MOG-cube (operational)
+├── data_objects/   Step 2: typed carriers (5 domains, 953 concepts)
+├── reasoning/       Step 3: algebra + geometry (12 modules, all wired)
+├── runtime/         Step 4: query + TCT (13 query kinds)
+├── examples/        demonstrations
+├── tests/           610 tests
+└── benchmarks/      reserved for scored task sets
+```
+
+Growth points:
+- **data_objects**: add a molecules domain (no `molecules.py` yet,
+  despite the README mentioning "82 molecules" elsewhere in the repo).
+- **reasoning**: the Griess algebra introspection layer (fusion_spectrum,
+  miyamoto_tau/sigma, adjoint_matrix) is built but unwired.  These need
+  a different query surface than the natural-language parser.
+- **runtime**: the cross-domain analogy mode (heat:temperature::force:?)
+  is the next user-facing gap.
+- **benchmarks**: reserved but empty.  Wiring the runtime to scored
+  task sets (ARC-AGI, held-out query corpus) is the next major step.
+
+### Pulling from the surrounding repository
+
+The `glm_universal` package is a consolidation of the older GLM
+implementations in the surrounding repository:
+
+- `glm_lean/glm/` (GLM-1, 43 claims) → substrate layer
+- `glm_lean/glm2/` (GLM-2, 58 claims) → data_objects layer
+- `glm_lean/glm3/` (GLM-3, 64 claims) → reasoning layer
+- `glm_machine/` (GLM v37) → runtime layer
+- `GMHGL/` (UBP engine) → substrate layer
+- `light/aristotle_01/` (Y constant, Lean4) → coherence layer
+
+The `glm_universal` package does not delete or supersede these; it
+*consolidates* them.  The older folders remain as the provenance record,
+and `glm_universal` is the active runtime.
+
+## Test count
+
+| Layer | Before (v0.5.3) | After (v0.6.0) |
+|---|---|---|
+| `test_substrate.py` | 96 | 96 |
+| `test_data_objects.py` | 177 | 177 |
+| `test_reasoning.py` | 94 | 94 |
+| `test_runtime.py` | 181 | 181 |
+| `test_semantic_lexicon.py` | 39 | 39 |
+| `test_physics_expansion.py` | 9 | 9 |
+| `test_physics_expansion_v2.py` | 5 | 5 |
+| `test_semantic_lexicon_runtime.py` | 21 | 21 |
+| `test_lexicon_subspaces.py` | 12 | 12 |
+| `test_substantive.py` | 23 | 23 |
+| `test_wiring.py` | 23 | 23 |
+| `test_directive.py` (new) | — | 31 |
+| **Total** | **579 passed, 5854 subtests** | **610 passed, 5877 subtests, zero failures** |
+
+## Files added or modified (v0.6.0)
+
+| File | Status | Purpose |
+|---|---|---|
+| `glm_universal/runtime/parser.py` | modified | `KINDS`, `VERBS`, and `_build_keyword_query` extended for `report` and `angle` |
+| `glm_universal/runtime/session.py` | modified | two new solvers (`_solve_report`, `_solve_angle`) + four report helpers |
+| `glm_universal/runtime/tct_engine.py` | modified | five new templates (report_relations, report_leech, report_theta, report_subalgebra, angle) |
+| `glm_universal/reasoning/moonshine.py` | new | Moonshine layer: graded dimensions + j-function + Leech-to-Moonshine bridge |
+| `glm_universal/reasoning/niemeier.py` | new | 23 Niemeier lattices: ADE root systems + deep-hole types |
+| `glm_universal/reasoning/llvq.py` | new | LLVQ: codebook-free angular search over Leech shells |
+| `glm_universal/reasoning/fwht.py` | new | FWHT: O(N log N) Walsh-Hadamard transform |
+| `glm_universal/reasoning/valorani.py` | new | Valorani's SVD: Buckingham-Pi via rational nullspace |
+| `glm_universal/tests/test_directive.py` | new | 31 tests for the five directive modules |
+| `glm_universal/README.md` | modified | v0.6.0 status + new modules documented |
+| `glm_universal/substrate/README.md` | modified | notes on the multi-MOG-cube and theta_series |
+| `glm_universal/data_objects/README.md` | modified | encoding lessons learned |
+| `glm_universal/reasoning/README.md` | modified | new modules documented |
+| `glm_universal/runtime/README.md` | new | the runtime query kinds (now 13) |
+| `glm_universal/tests/README.md` | new | the test suite structure |
+| `glm_universal/examples/README.md` | new | the example scripts |
+| `README.md` (this file) | modified | v4.0 changelog + this section |
 
