@@ -4,14 +4,38 @@
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand
 **Parent:** [`../README.md`](../README.md)
 
-A self-contained, exact, deterministic implementation of the geometric
-substrate the Monster group acts on, the reasoning layers built on it,
-and the Three Column Thinking harness that runs queries through
-language, mathematics, and executable script.
+## GLM — Current most developed system - `glm_universal` — GLM-3+
+* Repository folder: [https://github.com/DigitalEuan/GLM/tree/main/glm_universal]
 
-Standard library only. No float on any path that feeds a result. No
-randomness anywhere. Every published number is recomputed on demand by
-a `*_report` function rather than quoted.
+## What it is
+Most systems that answer questions about physics, chemistry or meaning either look the answer up or produce it from statistical association. GLM does neither. A concept is encoded — as a carrier in the geometry of the extended binary Golay code and the Leech lattice — and an answer is computed from that encoding by exact arithmetic. Nothing anywhere in the package constructs a floating-point number: every quantity is an integer or an exact rational, so a result is reproducible bit for bit rather than approximately.
+
+## The five things that characterise it:
+1. One substrate, used for everything. The 24-coordinate Golay/Leech geometry carries physical quantities, chemical elements, molecules, mathematical objects and word meanings alike. Analogy, dimensional verification, clustering and nearest-neighbour search are all operations in that one space, not separate subsystems bolted together.
+
+2. Three Column Thinking. Every answer is returned as three synchronised columns: the reasoning in language, the same step in exact mathematics, and an independently generated script that recomputes the answer's falsifiable claims from scratch. That script runs in a fresh interpreter, with no shared state and no warm caches, and the system compares what it produced with what it claimed. --verify-tct prints VERIFIED True only when a separate process re-derived the numbers.
+
+3. Refusal as a first-class answer. GLM is built to say where it stops. An ambiguous term is refused rather than resolved by ordering accident; an analogy whose relation cannot be transported is refused with a statement of where it looked; a logarithm without a positivity witness is refused with the depth named. The end-to-end evaluation scores this deliberately: a refusal that tells the user where the machine stops scores above a confident wrong answer, which is scored negatively.
+
+4. The documentation cannot go stale. Every count the documentation quotes is recomputed by the code that reports it and written to a generated figures file; the test suite fails if a document and the code disagree. Counts in the README chain are checked, not asserted.
+
+5. A machine-checked formal layer. Alongside the Python package sits a Lean 4 development — 27 files, no sorry — that proves the claims the code relies on, and, just as importantly, proves where they fail: the Golay code's minimum distance and covering radius, the exact six-fold tie at a deep hole and its sextet partition of the 24 coordinates, the coset census and the mean distance to the code (3433/1024, strictly past the radius of unique reading), Cesàro convergence of the perturbation chain with an explicit rate, the error budgets of the transcendental layer, and a state–field map on the Griess algebra together with a proof that the finite layer is not a vertex algebra — so the infinite-dimensional development is necessary rather than merely traditional.
+
+## What it contains
+* Six registers, 1,040 carriers: physics (726 quantities with exact dimensional exponents), chemistry (118 elements), molecules (51 species and ions, every coordinate derived from the element register rather than stored), mathematics, a semantic lexicon (95 concepts, 380 explicit relation triples) and a spatial register built from the substrate's own structures.
+* A query language of 18 kinds — verification, analogy, description, nearest-neighbour, clustering, spatial layout, projection, coherence, dimensionless (Buckingham-Pi) groups, meaning, real-number approximation and comparison, and a report kind dispatching 25 subjects — reachable from a CLI in batch or interactive mode.
+* Exact real numbers as processes: sqrt, roots of any degree, π, e, φ, plus exp, log, sin, cos, tan and real powers, each returning an exact rational within a stated error bound at any requested precision, with no float ever constructed.
+* A grounded meaning layer: 357 meanings and 1,705 notations, every edge re-derived on demand. The inherited hash-of-a-spelling concept graph it replaces was audited rather than described — only 83 of its 4,282 concepts denoted anything determinate — and formally demoted to evidence, with a test that walks the imports of every module on the answering path to prove nothing consults it.
+* Three independent instruments that do not trust each other: capability probes (where the library stops), benchmark suites (solver functions against published baselines), and an end-to-end evaluation that starts the CLI in a fresh interpreter for every question and scores what a user actually gets.
+
+## Current measured state:
+* test suite	1,677 tests across 37 files, 8,851 subtests, zero failures
+* end-to-end CLI evaluation	83 / 83 — 73 answered, 10 refused as expected, 0 unexpected refusals, 0 confidently wrong, 0 errored
+* benchmark suites	2,389 / 2,390 across 5 suites, every suite above its baseline
+* capability probes	33 probes — 20 hold, 13 break, 0 errored, 0 surprises
+* Lean development	27 files, builds clean, no sorry
+
+Thirteen of the 33 probes break — and that is reported rather than hidden, because most of those breaks are theorems: the Golay repair radius is 3 and no better decoder exists; equality of two reals is never claimed; a target outside the convex hull of the available states is unreachable under any schedule, with an explicit separating certificate; the Sakuma product is non-associative. A boundary that is proved is a stronger result than a boundary that is merely not yet reached, and the system distinguishes the two.
 
 ---
 
