@@ -31,6 +31,33 @@ The layers are ordered from lowest to highest.  A caller that starts at the
 bottom can escalate to the next layer when the current one reports that its
 reach is exhausted.
 
+The stack is a refinement chain
+-------------------------------
+Escalating must never cost anything: whatever a layer can tell apart, every
+layer above it can tell apart too.  That is not automatic, and it was not
+true of the first version of this module.  The seven SI7 exponents are read
+off coordinates 0-6, so an integer layer that saw *only* them was blind to a
+unit on coordinate 10 that the substrate's 24-bit parity view separates from
+the vacuum -- escalating from the substrate to the integer layer destroyed a
+distinction.
+
+The layers here are therefore **cumulative**: each view holds what the layer
+below saw, and each measure is zero only when every reading in the view
+agrees.  Concretely, the integer view carries ``substrate_bits`` beside
+``exponents_SI7`` and its measure adds the Hamming term; the Griess and
+universal measures add the carrier term to the semantic one, so that two
+distinct carriers repairing to a single 2A axis are no longer called the
+same thing by a layer that sits above one which splits them.  The pure
+semantic verdict is still available on its own, as
+:func:`griess_semantic_component`.
+
+The discarded reading is kept as :data:`LAYER_INTEGER_RAW` -- outside
+:data:`LAYERS` -- so that the hole it has can be exhibited and regression
+tested rather than merely described.
+:func:`glm_universal.reasoning.information_loss.information_loss_report`
+checks every consecutive pair of the five layers and reports
+``refinement_chain_intact``.
+
 Layers
 ------
 0. **Substrate** (GMHGL): binary carrier, Hamming distance, NRCI.
@@ -38,7 +65,8 @@ Layers
    Failure: no product, no semantic composition.  Two carriers can be
    compared but not *multiplied*.
 
-1. **Integer** (GLM-1): 7 integer dimension exponents, Golay/MOG carrier.
+1. **Integer** (GLM-1): 7 integer dimension exponents on top of the
+   substrate's parity view, Golay/MOG carrier.
    Reach: concept encoding with integer-valued physical dimensions.
    Failure: integer-only -- cannot represent fractional dimensions or
    continuous quantities.
@@ -69,13 +97,14 @@ from dataclasses import dataclass
 from fractions import Fraction
 from typing import Callable, Dict, List, Optional, Sequence, Tuple
 
-from ..substrate import mog, leech2
+from ..substrate import golay_decode, mog, leech2
 from . import metric, product
 
 __all__ = [
     "DimensionLayer", "LAYER_SUBSTRATE", "LAYER_INTEGER", "LAYER_RATIONAL",
-    "LAYER_GRIESS", "LAYER_UNIVERSAL", "LAYERS",
-    "escalate", "projection_report",
+    "LAYER_GRIESS", "LAYER_UNIVERSAL", "LAYERS", "LAYER_INTEGER_RAW",
+    "escalate", "projection_report", "parity_bits",
+    "griess_semantic_component",
 ]
 
 
@@ -126,26 +155,50 @@ class DimensionLayer:
 # 2.  LAYER 0: SUBSTRATE  (GMHGL)
 # ===========================================================================
 
-def _substrate_perceive(carrier: Sequence) -> Dict[str, object]:
-    """Binary carrier: Hamming weight, NRCI, nearest codeword."""
+def parity_bits(carrier: Sequence) -> int:
+    """The 24-bit parity reading of a carrier: bit ``i`` is ``carrier[i]`` odd.
+
+    This is the whole of what the substrate sees of a carrier's coordinates,
+    and every layer above the substrate carries it too -- see
+    :func:`_integer_perceive`.  Factored out so that there is exactly one
+    definition of it in the package.
+    """
     bits = 0
     for i, v in enumerate(carrier):
         if int(v) & 1:
             bits |= (1 << i)
+    return bits
+
+
+def _substrate_perceive(carrier: Sequence) -> Dict[str, object]:
+    """Binary carrier: Hamming weight, NRCI, complete Golay decoding.
+
+    The legacy version of this function *snapped*: it scanned the 4,096
+    codewords and kept the first one at least distance.  At coset weight 4
+    there are six such codewords and the scan silently returned whichever the
+    enumeration reached first, so the view was a function of codeword order.
+    It now calls
+    :func:`glm_universal.substrate.golay_decode.decode_complete`, which
+    returns the exact coset weight, every minimum-weight leader, and a status
+    that says out loud when no unique answer exists.  ``nearest_codeword`` is
+    ``None`` in that case; ``nearest_codewords`` always holds the full tie.
+    """
+    bits = parity_bits(carrier)
     hw = bin(bits).count("1")
-    # snap to nearest Golay codeword
-    best_word, best_dist = None, 25
-    for word in mog.GOLAY_MASKS:
-        d = bin(bits ^ word).count("1")
-        if d < best_dist:
-            best_dist, best_word = d, word
-    nrci = Fraction(1) - Fraction(best_dist, 4)  # covering radius = 4
+    decoding = golay_decode.decode_complete(bits)
+    # Covering radius 4: NRCI falls linearly from 1 at a codeword to 0 at the
+    # deep holes of the code.
+    nrci = Fraction(1) - Fraction(decoding.weight, 4)
     return {
         "layer": "substrate",
         "bits": bits,
         "hamming_weight": hw,
-        "nearest_codeword": best_word,
-        "snap_distance": best_dist,
+        "nearest_codeword": decoding.corrected,
+        "nearest_codewords": decoding.candidates,
+        "codeword_multiplicity": len(decoding.candidates),
+        "snap_distance": decoding.weight,
+        "decode_status": decoding.status,
+        "decode_guaranteed": decoding.guaranteed,
         "nrci": max(Fraction(0), nrci),
     }
 
@@ -160,20 +213,69 @@ def _substrate_measure(a: Dict[str, object], b: Dict[str, object]) -> Fraction:
 # ===========================================================================
 
 def _integer_perceive(carrier: Sequence) -> Dict[str, object]:
-    """7 integer dimension exponents, quantised from the carrier."""
+    """7 integer dimension exponents, on top of the substrate's parity view.
+
+    The integer layer is **cumulative**: escalating to it adds the seven SI7
+    exponents to what the substrate already saw, it does not trade one
+    reading for the other.  The view therefore carries ``substrate_bits`` as
+    well as ``exponents_SI7``.
+
+    This is not decoration.  The seven exponents are read off coordinates
+    0-6, so a reading made of them alone is blind to coordinates 7-23: it
+    cannot tell a unit on coordinate 10 from the vacuum, while the substrate
+    below it can.  A stack whose first step reads only the exponents is not a
+    refinement chain -- escalating from the substrate to it *destroys* a
+    distinction -- and :func:`glm_universal.reasoning.information_loss.
+    information_loss_report` exhibits exactly that pair for
+    :data:`LAYER_INTEGER_RAW`, the non-cumulative reading kept beside this
+    one so the hole can be shown rather than described.
+    """
     exact = metric.as_exact_vector(carrier)
     # The first 7 coordinates are the integer dimension exponents
     # (L, M, T, A, Th, N, J in SI7)
     exponents = tuple(int(exact[i]) for i in range(7))
+    bits = parity_bits(carrier)
     return {
         "layer": "integer",
         "exponents_SI7": exponents,
+        "substrate_bits": bits,
+        "hamming_weight": bin(bits).count("1"),
         "carrier": exact,
     }
 
 
 def _integer_measure(a: Dict[str, object], b: Dict[str, object]) -> Fraction:
-    """L1 distance on the 7 integer exponents."""
+    """L1 distance on the exponents plus Hamming distance on the parity bits.
+
+    Zero exactly when the two carriers agree on *both* readings the layer
+    holds, which is what makes this layer a refinement of the substrate: a
+    pair it calls the same is a pair the substrate calls the same.
+    """
+    ea, eb = a["exponents_SI7"], b["exponents_SI7"]
+    exponent_part = Fraction(sum(abs(x - y) for x, y in zip(ea, eb)))
+    hamming_part = Fraction(
+        bin(a["substrate_bits"] ^ b["substrate_bits"]).count("1"))
+    return exponent_part + hamming_part
+
+
+def _integer_raw_perceive(carrier: Sequence) -> Dict[str, object]:
+    """The seven SI7 exponents and nothing else -- the non-cumulative reading.
+
+    Kept, and reported on, because it is the reading a layer stack reaches
+    for by default, and it is the one that breaks the chain.  It is not part
+    of :data:`LAYERS`.
+    """
+    exact = metric.as_exact_vector(carrier)
+    return {
+        "layer": "integer_raw",
+        "exponents_SI7": tuple(int(exact[i]) for i in range(7)),
+        "carrier": exact,
+    }
+
+
+def _integer_raw_measure(a: Dict[str, object],
+                         b: Dict[str, object]) -> Fraction:
+    """L1 distance on the 7 integer exponents alone."""
     ea, eb = a["exponents_SI7"], b["exponents_SI7"]
     return Fraction(sum(abs(x - y) for x, y in zip(ea, eb)))
 
@@ -240,13 +342,35 @@ def _griess_perceive(carrier: Sequence) -> Dict[str, object]:
     }
 
 
-def _griess_measure(a: Dict[str, object], b: Dict[str, object]) -> Fraction:
-    """Griess form distance -- uses the algebra element when available."""
+def griess_semantic_component(a: Dict[str, object],
+                              b: Dict[str, object]) -> Fraction:
+    """The algebraic part of the Griess-layer measure, on its own.
+
+    Zero means the two carriers repair to the *same* 2A axis: they are the
+    same concept as far as the algebra is concerned.  That is a genuine and
+    useful verdict, and it is why it is available separately -- but it is not
+    a resolution, because two different carriers can share an axis.  The
+    layer's own :func:`_griess_measure` adds the carrier term so that the
+    layer keeps everything the rational layer below it had.
+    """
     ea, eb = a.get("algebra_element"), b.get("algebra_element")
     if ea is not None and eb is not None:
         return product.semantic_distance2(ea, eb)
-    # fall back to carrier distance
-    return metric.distance2(a["carrier"], b["carrier"])
+    return Fraction(0)
+
+
+def _griess_measure(a: Dict[str, object], b: Dict[str, object]) -> Fraction:
+    """Semantic distance between the 2A axes *plus* the carrier distance.
+
+    The Griess view holds the carrier as well as the algebra element, so two
+    views are the same only when both agree.  Measuring the algebra alone
+    would conflate two distinct carriers that repair to one axis -- a pair
+    the rational layer below splits -- and escalating would then lose a
+    distinction instead of adding one.  Both terms are non-negative, so the
+    sum is zero exactly when each is.
+    """
+    return (griess_semantic_component(a, b)
+            + metric.distance2(a["carrier"], b["carrier"]))
 
 
 # ===========================================================================
@@ -277,11 +401,13 @@ def _universal_perceive(carrier: Sequence) -> Dict[str, object]:
 
 
 def _universal_measure(a: Dict[str, object], b: Dict[str, object]) -> Fraction:
-    """The highest-resolution measure available."""
-    ea, eb = a.get("algebra_element"), b.get("algebra_element")
-    if ea is not None and eb is not None:
-        return product.semantic_distance2(ea, eb)
-    return metric.distance2(a["carrier"], b["carrier"])
+    """The highest-resolution measure available: algebra plus carrier.
+
+    The universal view holds every lower view at once, so -- as at the Griess
+    layer -- its measure is zero only when all of them agree.
+    """
+    return (griess_semantic_component(a, b)
+            + metric.distance2(a["carrier"], b["carrier"]))
 
 
 # ===========================================================================
@@ -299,7 +425,7 @@ LAYER_SUBSTRATE = DimensionLayer(
         "Discrete encoding and error correction",
         "Hamming weight and distance",
         "NRCI (coherence) measurement",
-        "Nearest Golay codeword (snap)",
+        "Complete Golay decoding, with ties reported and never broken",
     ),
     failure_mode=(
         "No product: two carriers can be compared but not multiplied.  "
@@ -314,13 +440,15 @@ LAYER_INTEGER = DimensionLayer(
     name="integer",
     dimension=7,
     description=(
-        "Seven integer dimension exponents (SI7).  Concepts are their "
-        "physical dimensions; carriers are quantised projections."
+        "Seven integer dimension exponents (SI7), carried on top of the "
+        "substrate's 24-bit parity view.  Concepts are their physical "
+        "dimensions; carriers are quantised projections."
     ),
     reach=(
         "Integer-valued dimensional analysis",
         "Buckingham Pi with integer exponents",
         "Concept identity by dimension vector",
+        "Everything the substrate can tell apart: the view is cumulative",
     ),
     failure_mode=(
         "Integer-only: cannot represent fractional dimensions.  "
@@ -403,6 +531,32 @@ LAYER_UNIVERSAL = DimensionLayer(
     perceive=_universal_perceive,
     measure=_universal_measure,
     can_multiply=True,
+)
+
+#: The seven SI7 exponents on their own -- the *non-cumulative* integer
+#: reading.  It is deliberately **not** in :data:`LAYERS`.  Coordinates 7-23
+#: are invisible to it, so it conflates carriers the substrate below it
+#: separates, and a stack built on it is not a refinement chain.  It is kept
+#: as a first-class object so that the hole can be exhibited and tested --
+#: see ``information_loss.information_loss_report()["non_cumulative"]``.
+LAYER_INTEGER_RAW = DimensionLayer(
+    name="integer_raw",
+    dimension=7,
+    description=(
+        "Seven integer dimension exponents and nothing else: the reading "
+        "that discards the substrate's view instead of adding to it."
+    ),
+    reach=(
+        "Integer-valued dimensional analysis on coordinates 0-6",
+    ),
+    failure_mode=(
+        "Blind to coordinates 7-23, so it conflates carriers the substrate "
+        "already separates: escalating to it loses information rather than "
+        "gaining it.  Superseded by LAYER_INTEGER, which keeps both readings."
+    ),
+    perceive=_integer_raw_perceive,
+    measure=_integer_raw_measure,
+    can_multiply=False,
 )
 
 #: All five layers in order, lowest to highest.

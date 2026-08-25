@@ -1,11 +1,23 @@
 # `glm_universal.substrate`
 
-The algebraic and geometric foundation of GLM-3+. Four modules, strictly
+**Parent:** [`../README.md`](../README.md) · **Repository root:**
+[`../../README.md`](../../README.md)
+
+The algebraic and geometric foundation of GLM-3+. Eight modules, strictly
 layered, pure Python standard library, exact arithmetic, no randomness.
 
 ```
 linalg.py  ──►  mog.py  ──►  leech2.py  ──►  digit_stack.py
+                  │
+                  ├──►  golay_decode.py  ──►  isomorphism.py
+                  │           │
+                  │           └──►  superposition.py
+                  └──►  leech_construct.py
 ```
+
+The first four are the original core; `golay_decode`, `leech_construct` and
+`isomorphism` were added in v0.8.0 and `superposition` later; all four are
+documented in the final sections of this file.
 
 `digit_stack` imports `leech2` lazily (inside `_leech_coords` and
 `class_stack_rebuild`) so that the two can be read and tested independently.
@@ -233,3 +245,161 @@ The `leech2.theta_series` function computes the Leech theta series
 `E_4^3 / Delta + 744`, and its first non-trivial coefficient is
 196884 = dim V_2 = the dimension of the Griess algebra that the
 substrate's `leech2` module indexes via the 98,280 type-2 classes.
+
+---
+
+# v0.8.0: three new substrate modules
+
+## `golay_decode.py` — complete decoding, and honest failure
+
+The legacy substrate used a *snap* routine: scan the 4,096 codewords, keep the
+nearest, break ties arbitrarily.  That is fast and almost always right, and its
+two failure modes were silent.  `golay_decode` replaces it with a syndrome/coset
+construction that makes both failures explicit.
+
+| Object | Content |
+|---|---|
+| `coset_table()` | all 4,096 cosets of the code in `F_2^24`, each with its full set of minimum-weight leaders |
+| `coset_census()` | `cosets 4096`, leaders by weight `{0:1, 1:24, 2:276, 3:2024, 4:1771}`, `12951` leaders in total |
+| `decode_complete(word)` | a `Decoding` record: codeword, error, coset weight, `status` in `corrected` / `ambiguous`, and `guaranteed` |
+| `decode_or_detect(word)` | returns `None` rather than a wrong answer whenever the coset weight exceeds the packing radius 3 |
+| `is_guaranteed_decodable(word)` | the declared-radius predicate |
+
+The two structural facts the census records:
+
+* **Covering radius 4 > packing radius 3.**  The 1,771 weight-4 cosets each have
+  **six** leaders — the six tetrads of a sextet.  Nearest-codeword decoding there
+  is a *choice*, not a deduction, so `decode_complete` reports `ambiguous` and
+  `decode_or_detect` refuses.  `legacy_snap_decode` silently picked one.
+* **Weight-5 miscorrection is not a bug.**  `weight5_miscorrection_report()`
+  samples weight-5 errors and finds every one of them at coset weight 3: by
+  `S(5,8,24)` each 5-set lies in a unique octad, so the received word sits at
+  distance 3 from that octad and 5 from the truth.  The decoding is unique,
+  inside the packing radius, and wrong.  The remedy is a declared channel bound,
+  not a better decoder — which is exactly what `guaranteed` exposes.
+
+`steiner_system_report()` verifies the `S(5,8,24)` property directly;
+`decoder_comparison_report()` runs snap and complete decoding side by side and
+counts the divergences.
+
+## `leech_construct.py` — the A/B/C ladder to 196,560
+
+Construction A alone (`2 * Golay + 4 * Z^24`, scaled) is a lattice with minimal
+norm² 16 and a kissing number of **48** — the `(±4, 0^23)` shape only.  This
+module builds the ladder and measures each rung:
+
+| Level | Conditions | min norm² | kissing | shapes |
+|---|---|---|---|---|
+| `A` | mod-2 Golay support | 16 | 48 | `(±4, 0^23)`: 48 |
+| `B` | + mod-4 even parity | 32 | 98,256 | `(±4², 0^22)`: 1,104; `(±2^8` on an octad`)`: 97,152 |
+| `C` | + mod-8 coordinate-sum condition and the odd glue coset | 32 | **196,560** | the two above plus `(∓3, ±1^23)`: 98,304 |
+
+`kissing_of_level('C')` returns 196,560 with `no_duplicates` and `all_in_level`
+true, and `agrees_with_leech2()` checks the result against the independently
+built `leech2` module.
+
+The multi-mod system the ladder needs is exposed directly:
+
+* `mod_profile(v)` — the residue signature of a vector at moduli 2, 4 and 8;
+* `mod_sieve(...)` — filter any vector family by any combination of the moduli;
+* `even_parity`, `golay_support`, `golay_condition`, `sum_condition` — the four
+  predicates, individually callable;
+* `necessity_report()` — drops each condition in turn and shows the packing
+  break it causes, so no condition is decoration.
+
+`projection_lattice_basis` and `supported_sublattice_basis` give exact Z-bases
+for the sub-lattices used by the facet and multi-resolution layers.
+
+## `isomorphism.py` — the legacy ↔ core bridge
+
+`LEGACY_TO_CORE` is the coordinate permutation between the historical GLM
+labelling and the canonical `glm_core` frame; `CORE_TO_LEGACY` is its inverse.
+`permute_mask` moves the bit at coordinate `i` to `perm[i]`.
+
+| Group | Functions |
+|---|---|
+| permutation algebra | `is_permutation`, `invert_permutation`, `compose_permutations`, `permute_mask/vector/indices` |
+| frame changes | `to_core_mask`, `to_legacy_mask`, `to_core_vector`, `to_legacy_vector` |
+| addresses | `hexcolour_to_mask`, `mask_to_hexcolour`, `migrate_hexcolour` |
+| the two codes | `legacy_code`, `shared_codewords`, `weight_distribution`, `is_golay_automorphism`, `code_report` |
+| decoding | `decode_legacy`, `legacy_snap_in_legacy_frame`, `legacy_decoder_comparison` |
+| migration | `MigrationSpec`, `CONCEPT_SPEC`, `EDGE_SPEC`, `HEXCOLOUR_SPEC`, `migrate_record/records/dataset`, `sample_dataset`, `migration_report` |
+
+Measured facts, all asserted in the tests:
+
+* the permutation is **not** a Golay automorphism — `is_golay_automorphism()`
+  returns false with a witness codeword whose image leaves the code (4,088 of
+  the 4,096 canonical codewords do);
+* the two codes nevertheless share exactly **8** codewords, matching the Step-5
+  note in `TopLevel_README.md`, and have identical weight distributions
+  `{0:1, 8:759, 12:2576, 16:759, 24:1}` and minimum distance 8;
+* the permutation is an **isometry** — `isometry_report()` confirms Hamming
+  weight and distance are preserved, so decoding commutes with the frame change
+  (proved in Lean as `decoding_commutes`);
+* the fixed points are `[0, 1, 2, 3, 4, 5, 8]`;
+* running the sample dataset through both decoders turns **24** silent snap ties
+  into 24 explicit `"ambiguous"` results, while the weight-5 miscorrection —
+  which is mathematical, not implementational — survives in both columns.
+
+`migrate_dataset` is the single entry point for the bulk migration of the
+concept, CRG-edge and hexcolour tables; `migration_report()` is what the
+runtime's `report migration` query calls.
+
+**Update.** That last sentence used to end "once the `glm_core` data tree is
+available". It is available, and the migration has been run on it: see
+[`../migration/README.md`](../migration/README.md), which uses this module's
+frame machinery to bring 4,282 stored concepts and 4,014 CRG edges into
+canonical form (plus 398 carriers minted for names the source referred to but
+never defined), writing `arc_agi_17/results/glm_state_canonical.json`. The
+first finding of that work was that the stored concept vectors are *already* in
+the canonical frame, so `LEGACY_TO_CORE` must **not** be applied to them; the
+stored integer addresses, by contrast, are MSB-first and do need the bit
+reversal. `report migration` covers the frame bridge described here; `report
+state migration` covers the data run.
+
+
+---
+
+# `superposition.py` — ambiguity as a first-class value
+
+`golay_decode.py` reports a weight-4 coset as `ambiguous` and stops. This
+module is what happens if it does not stop: the six equally-near readings are
+kept together as one value, carried, combined, and collapsed only when a
+context says which one is meant. Everything is `int` and `Fraction`; no float
+is constructed.
+
+| Object | Content |
+|---|---|
+| `superpose(word)` / `Superposition` | the frozen, ordered set of nearest codewords of a received word, with its `dimension` (1 when the reading is unique, 6 at a deep hole) |
+| `bundle_f2(words)` | the VSA bundle over F₂ — the XOR of the members |
+| `bundle_rational(words)` | the bundle over Q — the coordinatewise mean, an exact 24-tuple of `Fraction` |
+| `recover_from_bundle(vec)` | reads the member set back out of a rational bundle |
+| `collapse(sup, context)` / `Collapse` | filters the members by a context predicate; `collapsed` (one survivor), `superposed` (several) or `refuted` (none) — it never breaks a tie by member order |
+| `sextet_cycle_reading(sup, ticks)` | the time average of a carrier that cycles through the members |
+| `sextet_partition_report`, `bundling_report`, `collapse_report`, `alphabet_expansion_report`, `superposition_report` | the measured findings below, recomputed on call |
+
+Measured facts, all asserted in the tests and all matching the Lean statements
+in `Golay/Sextet.lean`, `Superposition.lean`, `Wobble.lean` and
+`HullExpansion.lean`:
+
+* over **64** tetrads checked, the number of nearest codewords of a weight-4
+  coset is always exactly **6**, those six differ pairwise in exactly 8
+  coordinates, and their supports relative to the received word partition all
+  24 coordinates into six disjoint tetrads — the sextet;
+* over **256** superpositions checked, the F₂ bundle takes exactly **one**
+  value, `16777215` = all ones. The XOR of a six-fold tie is the all-ones
+  vector whatever the tie is, so an F₂ bundle distinguishes **1** of the 256
+  inputs: at this arity the binary bundle is information-free;
+* the rational bundle of the same six words has coordinates only in
+  `{1/6, 5/6}`, is **injective** over all 256 inputs, and `recover_from_bundle`
+  returns the members exactly. Ambiguity survives in a rational carrier and
+  dies in a binary one;
+* collapse is contextual, not positional: on the weight-4 word `15` a context
+  naming one member yields `collapsed`, a context naming several yields
+  `superposed` with that many survivors, and a context naming none yields
+  `refuted` rather than a guess;
+* alphabet expansion, not rescaling, is what buys reach: with the functional
+  `(7, −1, …, −1)` the target `½·e₀` sits at `7/2` while every one of the
+  **4,096** scaled codewords sits at `≤ 0`, so no schedule over that alphabet
+  reaches it; admitting the two Leech vectors `±4e₀ ± 4e₁` reaches it exactly
+  in a **16**-tick cycle.

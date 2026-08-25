@@ -156,6 +156,7 @@ def _pool_snippet(domain: str) -> str:
     loaders = {
         "physics": "do.physics_objects()",
         "chemistry": "do.element_objects()",
+        "molecules": "do.molecule_objects()",
         "mathematics": "do.mathematics_objects()",
         "lexicon": "do.semantic_lexicon_objects()[0]",
         "spatial": "spatial_objects()",
@@ -203,6 +204,46 @@ observed = {{
 '''
 
 
+def _body_analogy_model(args: Mapping[str, object]) -> str:
+    return f'''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import analogy_models as am
+
+{_pool_snippet(str(args["domain"]))}
+model = am.explain_analogy({args["domain"]!r}, {args["a"]!r}, {args["b"]!r},
+                           {args["c"]!r}, pool)
+
+observed = {{
+    "model": model.model,
+    "answer": str(model.answer),
+    "candidates": str(list(model.candidates)),
+    "unique": str(model.unique),
+}}
+'''
+
+
+def _body_report_analogies(args: Mapping[str, object]) -> str:
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import analogy_models as am
+
+report = am.analogy_models_report()
+table = report["periodic_table"]
+
+observed = {
+    "cases_total": str(report["cases_total"]),
+    "cases_as_expected": str(report["cases_as_expected"]),
+    "models": str(list(report["models"])),
+    "periods_agree_with_register":
+        str(table["periods_agree_with_register"]),
+    "noble_gases": str(list(table["noble_gases"])),
+}
+for row in report["cases"]:
+    observed["case_%s" % row["question"]] = "%s:%s" % (row["model"],
+                                                       row["answer"])
+'''
+
+
 def _body_describe(args: Mapping[str, object]) -> str:
     return f'''# -- recompute -------------------------------------------------------------
 
@@ -226,6 +267,28 @@ observed = {{
     "lattice_distance2": q(lattice.distance2),
     "lattice_norm2": q(lattice.norm2),
     "lattice_is_2a_axis": str(lattice.is_2a_axis),
+}}
+'''
+
+
+def _body_describe_arithmetic(args: Mapping[str, object]) -> str:
+    """Re-evaluate arithmetic over register names (v1.3.0)."""
+    expression = str(args["expression"])
+    return f'''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import term_arithmetic as tar
+
+_result = tar.evaluate({expression!r})
+
+observed = {{
+    "source": _result.source,
+    "normalised": _result.normalised,
+    "ext10": _result.ext10,
+    "si7": _result.si7,
+    "scale": str(_result.sense.scale),
+    "rank": str(_result.sense.rank),
+    "name_count": str(len(_result.names)),
+    "names": str(list(_result.names[:tar.NAMES_SHOWN])),
 }}
 '''
 
@@ -348,18 +411,12 @@ carrier = list(obj.carrier)
 
 breakdown = co.nrci_breakdown(carrier)
 regime = breakdown.get("regime") or co.coherence_regime(breakdown["nrci"])
-nrci_value = breakdown["nrci"]
-if isinstance(nrci_value, Fraction):
-    nrci_str = q(nrci_value)
-else:
-    nrci_str = q(Fraction(nrci_value).limit_denominator(10**6))
+nrci_value = Fraction(breakdown["nrci"])
+nrci_str = q(nrci_value)
 
 def _render(v):
     if isinstance(v, Fraction):
         return q(v)
-    if isinstance(v, float):
-        # 6 decimal places; the colon is doubled in the outer f-string
-        return ("%" + ".6f") % v
     return str(v)
 
 observed = {{
@@ -413,19 +470,817 @@ observed = {
 '''
 
 
+def _body_report_information_loss(args: Mapping[str, object]) -> str:
+    """Recompute the layer-boundary information-loss study (v0.7.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import information_loss as il
+
+report = il.information_loss_report()
+raw = report["non_cumulative"]
+
+observed = {"carrier_count": str(report["carrier_count"])}
+for _layer in report["layers"]:
+    _name = _layer["name"]
+    observed["resolution_" + _name] = str(_layer["resolution"])
+    observed["loss_" + _name] = str(_layer["loss_count"])
+    observed["addition_descends_" + _name] = str(_layer["addition_descends"])
+for _edge in report["boundaries"]:
+    _key = _edge["lower"] + "_to_" + _edge["higher"]
+    observed["lost_count_" + _key] = str(_edge["lost_count"])
+    observed["refines_" + _key] = str(_edge["refines"])
+observed["refinement_chain_intact"] = str(report["refinement_chain_intact"])
+observed["non_cumulative_refines_substrate"] = str(raw["refines_substrate"])
+observed["non_cumulative_violations"] = str(raw["violation_count"])
+observed["cumulative_refines_substrate"] = str(
+    raw["cumulative_refines_substrate"])
+'''
+
+
+def _body_real(args: Mapping[str, object]) -> str:
+    """Recompute a real value as a process, in a fresh interpreter (v1.2.0)."""
+    notation = str(args.get("notation", "sqrt(2)"))
+    places = int(args.get("places", 20))          # type: ignore[arg-type]
+    levels = int(args.get("levels", 6))           # type: ignore[arg-type]
+    ticks = int(args.get("ticks", 512))           # type: ignore[arg-type]
+    return f'''# -- recompute -------------------------------------------------------------
+
+from fractions import Fraction
+
+from glm_universal.reasoning import exact_real as xr
+
+_value = xr.parse_real({notation!r})
+_stand_ins = xr.surrogate_sequence(_value, {levels})
+_exposed = []
+for _level in range({levels} - 1):
+    _found = None
+    for _higher in range(_level, _level + 12):
+        if xr.surrogate(_value, _higher) != xr.rational_surrogate(
+                _stand_ins[_level], _higher):
+            _found = _higher
+            break
+    _exposed.append(str(_level) + "->" + (str(_found) if _found is not None
+                                          else "never"))
+
+_at = _value.at(64)
+_fractional = _at - (_at.numerator // _at.denominator)
+_average = xr.delta_sigma_average(_fractional, {ticks})
+_error = abs(_average - _fractional)
+
+observed = {{
+    "notation": {notation!r},
+    "places": str({places}),
+    "decimal": _value.decimal({places}),
+    "rational": str(_value.exact is not None),
+    "stand_ins": str([str(_s) for _s in _stand_ins]),
+    "exposed": str(_exposed),
+    "delta_sigma_ticks": str({ticks}),
+    "delta_sigma_average": str(_average),
+    "delta_sigma_within_bound": str(_error <= Fraction(1, {ticks})),
+}}
+'''
+
+
+def _body_compare(args: Mapping[str, object]) -> str:
+    """Re-decide the order of two written real values (v1.2.0)."""
+    left = str(args.get("left", "sqrt(2)"))
+    right = str(args.get("right", "7/5"))
+    relation = str(args.get("relation", "compare"))
+    ladder = list(args.get("ladder", [8, 16, 32, 64, 128, 256]))  # type: ignore[arg-type]
+    return f'''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import exact_real as xr
+
+_left = xr.parse_real({left!r})
+_right = xr.parse_real({right!r})
+_ladder = {ladder!r}
+
+_order, _settled = 0, None
+for _precision in _ladder:
+    _order = xr.compare(_left, _right, _precision)
+    if _order != 0:
+        _settled = _precision
+        break
+
+_relation = {relation!r}
+if _order == 0:
+    _verdict = "undecided"
+elif _relation == "greater":
+    _verdict = str(_order > 0)
+elif _relation == "less":
+    _verdict = str(_order < 0)
+elif _relation == "equal":
+    _verdict = "False"
+else:
+    _verdict = "{{}} {{}} {{}}".format(
+        {left!r}, ">" if _order > 0 else "<", {right!r})
+
+observed = {{
+    "left": {left!r},
+    "right": {right!r},
+    "relation": _relation,
+    "order": str(_order),
+    "settled_at": str(_settled),
+    "verdict": _verdict,
+    "left_decimal": _left.decimal(20),
+    "right_decimal": _right.decimal(20),
+}}
+'''
+
+
+def _body_report_infinite_values(args: Mapping[str, object]) -> str:
+    """Recompute the infinite-values report from the public API (v1.2.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import exact_real as xr
+
+report = xr.exact_real_report()
+
+observed = {
+    "sqrt2_decimal_20": report["sqrt2_decimal_20"],
+    "pi_decimal_20": report["pi_decimal_20"],
+    "e_decimal_20": report["e_decimal_20"],
+    "phi_decimal_20": report["phi_decimal_20"],
+    "delta_sigma_law_holds": str(report["delta_sigma_law_holds"]),
+    "delta_sigma_deterministic": str(report["delta_sigma_deterministic"]),
+    "no_stand_in_is_the_target": str(report["no_stand_in_is_the_target"]),
+    "golay_reachable_deviation": str(report["golay_reachable_deviation"]),
+    "golay_within_one_over_n": str(report["golay_within_one_over_n"]),
+    "golay_unreachable_certified": str(report["golay_unreachable_certified"]),
+    "equality_undecided": str(report["equality_undecided"]),
+    "inequality_decided": str(report["inequality_decided"]),
+}
+'''
+
+
+def _body_report_capabilities(args: Mapping[str, object]) -> str:
+    """Re-run every capability probe in a fresh interpreter (v1.2.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal import capabilities as cap
+
+report = cap.capability_report()
+
+observed = {
+    "probes": str(report["probes"]),
+    "holds": str(report["holds"]),
+    "breaks": str(report["breaks"]),
+    "errors": str(report["errors"]),
+    "surprises": str(report["surprises"]),
+}
+for _result in report["results"]:
+    observed["verdict_" + _result["name"]] = str(_result["verdict"])
+'''
+
+
+def _body_meaning(args: Mapping[str, object]) -> str:
+    """Re-resolve notations and re-derive their relations (v1.1.0)."""
+    terms = [str(t) for t in args.get("terms", ())]      # type: ignore[arg-type]
+    return f'''# -- recompute -------------------------------------------------------------
+
+from fractions import Fraction
+
+from glm_universal.semantics import meaning as sme
+from glm_universal.semantics import reference as sre
+from glm_universal.semantics import relations as srl
+
+_terms = {terms!r}
+_answers = [sre.resolve(_term) for _term in _terms]
+
+observed = {{"terms": str(list(_terms))}}
+for _a in _answers:
+    observed["grounded_" + _a.term] = str(_a.grounded)
+    if _a.meaning is not None:
+        observed["meaning_" + _a.term] = _a.meaning.describe()
+        observed["carrier_" + _a.term] = str(
+            [str(Fraction(_c).numerator) + "/" + str(Fraction(_c).denominator)
+             for _c in sme.encode(_a.meaning)])
+
+_grounded = [_a for _a in _answers if _a.meaning is not None]
+if _grounded:
+    observed["all_round_trips_hold"] = str(all(
+        sme.decode(sme.encode(_a.meaning)) == _a.meaning for _a in _grounded))
+
+if len(_grounded) == 2:
+    _first, _second = _grounded[0].meaning, _grounded[1].meaning
+    _claims = srl.derive(_first, _second) + srl.derive(_second, _first)
+    observed["same_meaning"] = str(_first == _second)
+    observed["relations"] = str(sorted({{_c.relation for _c in _claims}}))
+    observed["relation_count"] = str(len(_claims))
+    observed["all_claims_reverify"] = str(
+        all(srl.verify(_c) for _c in _claims))
+'''
+
+
+def _body_report_semantics(args: Mapping[str, object]) -> str:
+    """Re-run the whole semantic audit of the inherited graph (v1.1.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.semantics import audit as sau
+
+report = sau.audit_report()
+concepts = report["concept_grounding"]
+edges = report["edge_grounding"]
+carriers = report["carrier_information"]
+variants = report["notational_variants"]
+plan = report["purge_plan"]
+replacement = report["replacement"]
+classes = edges["classes"]
+
+observed = {
+    "legacy_concepts": str(concepts["concepts"]),
+    "legacy_concepts_grounded": str(concepts["grounded"]),
+    "legacy_edges": str(edges["edges"]),
+    "edges_proximity_artefact": str(classes.get("proximity_artefact", 0)),
+    "edges_endpoint_ungrounded": str(classes.get("endpoint_ungrounded", 0)),
+    "edges_derivable": str(classes.get("derivable", 0)),
+    "edges_retained": str(plan["retained"]),
+    "edges_dumped": str(plan["dumped"]),
+    "mean_hamming_related": str(carriers["mean_hamming_related"]),
+    "mean_hamming_unrelated": str(carriers["mean_hamming_unrelated"]),
+    "synonym_pairs": str(variants["synonym_pairs"]),
+    "mean_legacy_hamming_between_synonyms": str(
+        variants["mean_legacy_hamming_between_synonyms"]),
+    "grounded_meanings": str(replacement["meanings"]),
+    "grounded_notations": str(replacement["notations"]),
+    "grounded_binary_edges": str(replacement["binary_edges"]),
+    "grounded_ternary_edges": str(replacement["ternary_edges"]),
+    "all_edges_reverified": str(replacement["all_edges_reverified"]),
+}
+'''
+
+
+def _body_report_fusion(args: Mapping[str, object]) -> str:
+    """Recompute the Ising fusion structure of the 2A algebra (v0.9.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import product as pr
+
+report = pr.fusion_report()
+
+observed = {
+    "pairs_checked": str(report["pairs_checked"]),
+    "axes_checked": str(report["axes_checked"]),
+    "all_eigenspaces_span": str(report["all_eigenspaces_span"]),
+    "all_dimensions_as_predicted": str(report["all_dimensions_as_predicted"]),
+    "all_adjoint_traces_five_quarters": str(
+        report["all_adjoint_traces_five_quarters"]),
+    "tau_always_identity": str(report["tau_always_identity"]),
+    "sigma_always_swaps": str(report["sigma_always_swaps"]),
+    "all_automorphisms": str(report["all_automorphisms"]),
+    "all_isometries": str(report["all_isometries"]),
+    "all_involutions": str(report["all_involutions"]),
+}
+'''
+
+
+def _body_report_benchmarks(args: Mapping[str, object]) -> str:
+    """Re-run every benchmark suite in a fresh interpreter (v1.0.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal import benchmarks as bm
+
+report = bm.benchmark_report()
+
+observed = {
+    "suite_count": str(report["suite_count"]),
+    "task_count": str(report["task_count"]),
+    "passed_count": str(report["passed_count"]),
+    "overall_score": str(report["overall_score"]),
+    "run_id": str(report["run_id"]),
+    "null_result_count": str(len(report["null_results"])),
+}
+for _suite in report["suites"]:
+    _name = _suite["name"]
+    observed["score_" + _name] = str(_suite["score"])
+    observed["baseline_" + _name] = str(_suite["baseline"])
+    observed["verdict_" + _name] = str(_suite["verdict"])
+'''
+
+
+def _body_report_golay_decoding(args: Mapping[str, object]) -> str:
+    """Recompute the complete Golay decoder's census (v0.8.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.substrate import golay_decode as gdc
+
+report = gdc.golay_decode_report()
+census = report["coset_census"]
+steiner = report["steiner"]
+weight5 = report["weight5"]
+
+observed = {
+    "cosets": str(census["cosets"]),
+    "total_leaders": str(census["total_leaders"]),
+    "unique_below_radius_4": str(census["unique_below_radius_4"]),
+    "sextet_at_radius_4": str(census["sextet_at_radius_4"]),
+    "packing_radius": str(report["packing_radius"]),
+    "covering_radius": str(report["covering_radius"]),
+    "codewords": str(report["codewords"]),
+    "octads": str(steiner["octads"]),
+    "is_steiner_5_8_24": str(steiner["is_steiner_5_8_24"]),
+    "weight5_always_coset_weight_3": str(weight5["always_coset_weight_3"]),
+    "weight5_always_miscorrected": str(weight5["always_miscorrected"]),
+    "silent_tie_breaking_retired": str(report["silent_tie_breaking_retired"]),
+}
+'''
+
+
+def _body_report_transform_decoder(args: Mapping[str, object]) -> str:
+    """Recompute the transform-driven decoder and its certificate (v1.4.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import fwht_decode as fdc
+
+report = fdc.fwht_decode_report()
+counts = report["operation_counts"]
+rates = report["certificate_rates"]
+agree = report["agreement"]
+ties = report["tie_sets"]
+
+observed = {
+    "direct_adds": str(counts["direct_adds"]),
+    "fwht_ops": str(counts["fwht_ops"]),
+    "equal_because_n_equals_2k": str(counts["equal_because_n_equals_2k"]),
+    "column_identity_failures": str(agree["column_identity_failures"]),
+    "support_sums_failures": str(agree["support_sums_failures"]),
+    "lattice_point_failures": str(agree["lattice_point_failures"]),
+    "all_agree": str(agree["all_agree"]),
+    "tie_set_failures": str(ties["failures"]),
+    "sextet_case_is_sixfold": str(ties["sextet_case_is_sixfold"]),
+    "flat_profile_always_certifies":
+        str(rates["flat_profile_always_certifies"]),
+    "certified_but_wrong": str(rates["certified_but_wrong"]),
+    "overall_certified_fraction": str(rates["overall_certified_fraction"]),
+}
+'''
+
+
+def _body_report_units(args: Mapping[str, object]) -> str:
+    """Recompute the unit-string audit and the steradian case (v1.5.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import units as un
+
+report = un.units_report()
+audit = report["audit"]
+case = report["steradian"]
+
+observed = {
+    "quantities": str(audit["quantities"]),
+    "every_unit_readable": str(audit["every_unit_readable"]),
+    "every_unit_agrees": str(audit["every_unit_agrees"]),
+    "mismatched_count": str(audit["mismatched_count"]),
+    "broken_by_dropping_the_steradian": str(case["broken_count"]),
+    "photometric_count": str(case["photometric_count"]),
+}
+'''
+
+
+def _body_report_deep_holes(args: Mapping[str, object]) -> str:
+    """Recompute the deep-hole census reached by walking (v1.5.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import deep_holes as dhl
+
+report = dhl.deep_holes_report(walks=3)
+census = report["census"]
+
+observed = {
+    "catalogue_size": str(report["catalogue_size"]),
+    "covering_radius2": str(report["covering_radius2"]),
+    "walks_run": str(census["walks_run"]),
+    "every_named_type_certified":
+        str(census["every_named_type_certified"]),
+    "census_complete": str(census["census_complete"]),
+}
+'''
+
+
+def _body_report_molecules(args: Mapping[str, object]) -> str:
+    """Recompute the molecules register from name and formula alone (v1.4.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.data_objects import molecules as mol
+
+report = mol.molecules_report()
+collisions = report["collisions"]
+heaviest_name, heaviest_mass = report["largest_by_mass"]
+
+observed = {
+    "molecules": str(report["molecules"]),
+    "coordinates": str(report["coordinates"]),
+    "derived_fields": str(report["derived_fields"]),
+    "distinct_elements_used": str(report["distinct_elements_used"]),
+    "bundle_is_faithful": str(collisions["bundle_is_faithful"]),
+    "distinct_composites": str(collisions["distinct_composites"]),
+    "composite_collision_count":
+        str(collisions["composite_collision_count"]),
+    "bundle_collision_count": str(collisions["bundle_collision_count"]),
+    "missing_by_field": str(dict(report["missing_by_field"])),
+    "largest_by_mass": heaviest_name + "=" + q(heaviest_mass),
+}
+'''
+
+
+def _body_report_chemistry_coverage(args: Mapping[str, object]) -> str:
+    """Recompute the three honest widenings of the element register (v1.4.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import element_coverage as eco
+
+report = eco.element_coverage_report()
+coverage = report["coverage"]
+derived = report["derived"]
+estimates = report["estimates"]
+model = estimates["model"]
+cross = report["cross_check"]
+
+observed = {
+    "elements": str(coverage["elements"]),
+    "total_cells": str(coverage["total_cells"]),
+    "filled_cells": str(coverage["filled_cells"]),
+    "sparsest": str(coverage["sparsest"]),
+    "derived_attribute_count": str(derived["attribute_count"]),
+    "derived_new_cells": str(derived["new_cells"]),
+    "fitted_on": str(model["fitted_on"]),
+    "slope": q(model["slope"]),
+    "intercept_pm": q(model["intercept_pm"]),
+    "mean_absolute_residual_pm": q(model["mean_absolute_residual_pm"]),
+    "estimate_count": str(estimates["estimate_count"]),
+    "measured_count": str(estimates["measured_count"]),
+    "coverage_before": str(estimates["coverage_before"]),
+    "coverage_after": str(estimates["coverage_after"]),
+    "cross_check_compared": str(cross["compared"]),
+    "cross_check_agree_within_20": str(cross["agree_within_20_count"]),
+    "largest_difference_element":
+        str(cross["largest_difference"]["element"]),
+}
+'''
+
+
+def _body_report_superposition(args: Mapping[str, object]) -> str:
+    """Recompute the parallel-hypothesis study (v1.3.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.substrate import superposition as sup
+
+report = sup.superposition_report()
+sextet = report["sextet"]
+bundling = report["bundling"]
+collapse = report["collapse"]
+census = report["census"]
+chain = report["chain"]
+hull = report["hull"]
+
+observed = {
+    "tie_count": str(report["tie_count"]),
+    "pairwise_disjoint": str(sextet["pairwise_disjoint"]),
+    "covers_all_24": str(sextet["covers_all_24"]),
+    "f2_bundle_is_all_ones": str(bundling["f2_bundle_is_all_ones"]),
+    "f2_bundle_distinguishes": str(bundling["f2_bundle_distinguishes"]),
+    "rational_bundle_recovers_input":
+        str(bundling["rational_bundle_recovers_input"]),
+    "rational_bundle_distinguishes":
+        str(bundling["rational_bundle_distinguishes"]),
+    "collapse_status": str(collapse["collapsed"]["status"]),
+    "refuted_status": str(collapse["refuted"]["status"]),
+    "cosets": str(census["cosets"]),
+    "cosets_by_distance": str(census["cosets_by_distance"]),
+    "mean_coset_weight": str(census["mean_coset_weight"]),
+    "uniquely_read_cosets": str(census["uniquely_read_cosets"]),
+    "ambiguous_cosets": str(census["ambiguous_cosets"]),
+    "ambiguous_fraction": str(census["ambiguous_fraction"]),
+    "mean_exceeds_packing_radius":
+        str(census["mean_exceeds_packing_radius"]),
+    "mean_below_covering_radius": str(census["mean_below_covering_radius"]),
+    "census_agrees_with_lean": str(census["census_agrees_with_lean"]),
+    "mean_agrees_with_lean": str(census["mean_agrees_with_lean"]),
+    "chain_states": str(chain["states"]),
+    "columns_all_odd_parity": str(chain["columns_all_odd_parity"]),
+    "uniform_is_stationary": str(chain["uniform_is_stationary"]),
+    "parity_alternates": str(chain["parity_alternates"]),
+    "law_never_uniform": str(chain["law_never_uniform"]),
+    "settles_in_distribution": str(chain["settles_in_distribution"]),
+    "two_step_average_mean_distance":
+        str(chain["two_step_average_mean_distance"]),
+    "two_step_average_error": str(chain["two_step_average_error"]),
+    "corrected_carrier_returns_to_code":
+        str(chain["corrected_carrier_returns_to_code"]),
+    "corrected_distance_after_correction":
+        str(chain["corrected_distance_after_correction"]),
+    "codewords_checked": str(hull["codewords_checked"]),
+    "max_over_scaled_codewords": str(hull["max_over_scaled_codewords"]),
+    "value_at_target": str(hull["value_at_target"]),
+    "leech_cycle_reaches_target": str(hull["leech_cycle_reaches_target"]),
+}
+'''
+
+
+def _body_report_leech_construction(args: Mapping[str, object]) -> str:
+    """Recompute the Construction A/B/C ladder (v0.8.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.substrate import leech_construct as lcs
+
+report = lcs.leech_construction_report()
+kissing = report["kissing_by_level"]
+norms = report["minimal_norm_by_level"]
+necessity = report["necessity"]
+agreement = report["agreement_with_leech2"]
+
+observed = {
+    "kissing_A": str(kissing["A"]),
+    "kissing_B": str(kissing["B"]),
+    "kissing_C": str(kissing["C"]),
+    "min_norm2_A": str(norms["A"]),
+    "min_norm2_B": str(norms["B"]),
+    "min_norm2_C": str(norms["C"]),
+    "odd_coset_contribution": str(report["odd_coset_contribution"]),
+    "construction_C_is_196560": str(report["construction_C_is_196560"]),
+    "drop_mod4_golay_min_norm2":
+        str(necessity["drop_mod4_golay"]["minimal_norm2"]),
+    "drop_mod8_sum_min_norm2":
+        str(necessity["drop_mod8_sum"]["minimal_norm2"]),
+    "agrees_with_leech2": str(agreement["agrees"]),
+}
+'''
+
+
+def _body_report_facets(args: Mapping[str, object]) -> str:
+    """Recompute the six-facet decomposition (v0.8.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import facets as fa
+
+report = fa.facets_report()
+partition = report["partition"]
+linearity = report["linearity"]
+pythagoras = report["pythagoras"]
+index = report["index_by_facet"]
+
+observed = {
+    "facets": str(partition["facets"]),
+    "total": str(partition["total"]),
+    "is_partition": str(partition["is_partition"]),
+    "strictly_linear": str(linearity["strictly_linear"]),
+    "pythagoras_additive": str(pythagoras["additive"]),
+    "autonomous_facets": str(list(report["autonomous_facets"])),
+}
+for _name in report["order"]:
+    observed["size_" + _name] = str(partition["sizes"][_name])
+    observed["index_" + _name] = str(index[_name])
+'''
+
+
+def _body_report_monster_stack(args: Mapping[str, object]) -> str:
+    """Recompute the ten-plane Monster address stack (v0.8.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import monster_stack as msk
+
+report = msk.monster_stack_report()
+census = report["position_census"]
+repaired = report["position_census_pair_repaired"]
+loss = report["shortcut_loss"]
+assoc = report["associativity"]
+
+observed = {
+    "depth": str(report["depth"]),
+    "planes": str(census["planes"]),
+    "defined_strict": str(census["defined"]),
+    "defined_pair_repaired": str(repaired["defined"]),
+    "sakuma_term_count": str(loss["sakuma_term_count"]),
+    "terms_discarded_by_xor": str(loss["terms_discarded_by_xor"]),
+    "xor_is_the_third_axis_label": str(loss["xor_is_the_third_axis_label"]),
+    "sakuma_norm2": str(loss["sakuma_norm2"]),
+    "shortcut_norm2": str(loss["shortcut_norm2"]),
+    "associative": str(assoc["associative"]),
+    "xor_associative": str(assoc["xor_associative"]),
+    "commutative": str(assoc["commutative"]),
+    "associativity_difference_norm2": str(assoc["difference_norm2"]),
+}
+'''
+
+
+def _body_report_multiresolution(args: Mapping[str, object]) -> str:
+    """Recompute the multi-resolution addressing report (v0.8.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import multires as mrs
+
+report = mrs.multires_report()
+fib = report["fibration"]
+columns = report["columns"]
+rows = report["scale_invariance"]["rows"]
+collision = report["census_collision"]
+indices = sorted({_col["index"] for _col in columns})
+
+observed = {
+    "fibre_columns": str(fib["columns"]),
+    "fibre_bijective": str(fib["bijective"]),
+    "fibre_round_trip": str(fib["round_trip"]),
+    "fibre_kernel": str(list(fib["kernel"])),
+    "fibre_kernel_is_cyclic_of_order_4":
+        str(fib["kernel_is_cyclic_of_order_4"]),
+    "column_indices": str(indices),
+    "signature_invariant_everywhere":
+        str(all(_row["signature_invariant"] for _row in rows)),
+    "address_invariant_anywhere":
+        str(any(_row["address_invariant"] for _row in rows)),
+    "census_collision_found": str(collision["found"]),
+    "census_collision_carriers_equal": str(collision["carriers_equal"]),
+}
+'''
+
+
+def _body_report_migration(args: Mapping[str, object]) -> str:
+    """Recompute the legacy-to-core migration report (v0.8.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.substrate import isomorphism as iso
+
+report = iso.migration_report()
+codes = report["codes"]
+isometry = codes["isometry"]
+automorphism = codes["automorphism"]
+decoder = report["decoder"]
+dataset = report["dataset"]
+
+observed = {
+    "is_permutation": str(report["is_permutation"]),
+    "fixed_points": str(list(report["fixed_points"])),
+    "shared_codewords": str(codes["shared_codewords"]),
+    "legacy_is_distinct": str(codes["legacy_is_distinct"]),
+    "weight_distributions_agree": str(codes["weight_distributions_agree"]),
+    "minimum_distance": str(codes["minimum_distance"]),
+    "is_automorphism": str(automorphism["is_automorphism"]),
+    "weight_preserving": str(isometry["weight_preserving"]),
+    "distance_preserving": str(isometry["distance_preserving"]),
+    "snap_silent_ties_total": str(decoder["snap_silent_ties_total"]),
+    "routed_flagged_total": str(decoder["routed_flagged_total"]),
+    "every_silent_tie_is_now_flagged":
+        str(decoder["every_silent_tie_is_now_flagged"]),
+    "guaranteed_below_packing_radius":
+        str(decoder["guaranteed_below_packing_radius"]),
+    "dataset_round_trip": str(dataset["round_trip"]),
+    "dataset_weights_preserved": str(dataset["weights_preserved"]),
+    "dataset_referentially_intact": str(dataset["referentially_intact"]),
+}
+'''
+
+
+def _body_report_state_migration(args: Mapping[str, object]) -> str:
+    """Recompute the literal migration of the stored GLM state (v0.9.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.migration import state as stm
+
+report = stm.state_migration_report()
+checks = report["checks"]
+frame = report["frame"]
+verification = report["verification"]
+addresses = frame["addresses"] or {}
+
+observed = {
+    "frames_coincide": str(frame["frames_coincide"]),
+    "shared_codewords": str(frame["shared_codewords"]),
+    "permutation_damage": str(frame["permutation_damage"]),
+    "bit_reversal_required": str(addresses.get("bit_reversal_required")),
+    "concepts_imported": str(checks["concepts_imported"]),
+    "concepts_minted": str(checks["concepts_minted"]),
+    "edges_migrated": str(checks["edges_migrated"]),
+    "edges_dropped": str(checks["edges_dropped"]),
+    "referentially_intact": str(checks["referentially_intact"]),
+    "roles_agree": str(checks["roles_agree"]),
+    "carriers_that_are_codewords":
+        str(checks["carriers_that_are_codewords"]),
+    "decode_ambiguous": str(checks["decode_ambiguous"]),
+    "decode_guaranteed": str(checks["decode_guaranteed"]),
+    "worst_nrci_gap": str(list(checks["worst_nrci_gap"])),
+    "fields_recomputed_and_agreeing":
+        str(verification["fields_recomputed_and_agreeing"]),
+    "floats_in_payload": str(verification["floats_in_payload"]),
+}
+'''
+
+
+def _body_report_concept_store(args: Mapping[str, object]) -> str:
+    """Recompute the facts about the migrated concept store (v0.9.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.migration import store as sto
+
+report = sto.store_report()
+
+observed = {
+    "concepts": str(report["concepts"]),
+    "edges": str(report["edges"]),
+    "labels": str(report["labels"]),
+    "asserted_edges": str(report["asserted_edges"]),
+    "auto_proposed_edges": str(report["auto_proposed_edges"]),
+    "isolated_concepts": str(report["isolated_concepts"]),
+    "minted_concepts": str(report["minted_concepts"]),
+    "max_degree": str(report["max_degree"]),
+    "max_degree_concept": str(report["max_degree_concept"]),
+    "samples_checked": str(report["samples_checked"]),
+    "samples_where_graph_and_substrate_agree":
+        str(report["samples_where_graph_and_substrate_agree"]),
+}
+'''
+
+
+def _body_task_concepts(args: Mapping[str, object]) -> str:
+    """Recompute the migrated-CRG reasoning task (v0.9.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import tasks as tk
+
+result = tk.concept_task()
+checks = result["checks"]
+
+observed = {
+    "source": str(result["source"]),
+    "target": str(result["target"]),
+    "asserted_steps": str(len(result["asserted_path"])),
+    "path_found": str(checks["path_found"]),
+    "asserted_path_found": str(checks["asserted_path_found"]),
+    "paths_differ": str(checks["paths_differ"]),
+    "both_crosslinked": str(checks["both_crosslinked"]),
+    "law_holds": str(checks["law_holds"]),
+    "control_fails": str(checks["control_fails"]),
+    "discriminating": str(checks["discriminating"]),
+    "substrate_contributes": str(checks["substrate_contributes"]),
+}
+'''
+
+
+def _body_task_grid(args: Mapping[str, object]) -> str:
+    """Recompute the ARC-style grid task (v0.8.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import tasks as tk
+
+result = tk.grid_task()
+stages = {_s["resolution"]: _s for _s in result["stages"]}
+checks = result["checks"]
+
+observed = {
+    "task": str(result["task"]),
+    "solved": str(result["solved"]),
+    "rule": str(result["rule"]),
+    "prediction": str(result["prediction"]),
+    "training_reproduced": str(checks["training_reproduced"]),
+    "address_changed": str(checks["address_changed"]),
+    "signature_preserved": str(checks["signature_preserved"]),
+    "survivors_signature": str(list(stages["signature"]["survivors"])),
+    "survivors_plane0": str(list(stages["address_plane0"]["survivors"])),
+    "survivors_full": str(list(stages["address_full"]["survivors"])),
+}
+'''
+
+
+def _body_task_physics(args: Mapping[str, object]) -> str:
+    """Recompute the energy-versus-torque task (v0.8.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import tasks as tk
+
+result = tk.physics_task()
+si7 = result["si7"]
+ext10 = result["ext10"]
+escalation = result["escalation"]
+facet_part = result["facets"]
+address = result["address"]
+
+observed = {
+    "left": str(result["left"]),
+    "right": str(result["right"]),
+    "si7_equal": str(si7["equal"]),
+    "ext10_equal": str(ext10["equal"]),
+    "si7_left": str(si7["left"]),
+    "ext10_right": str(ext10["right"]),
+    "first_separating_layer": str(escalation["first_separating_layer"]),
+    "carrying_the_difference":
+        str(list(facet_part["carrying_the_difference"])),
+    "first_differing_plane": str(address["first_differing_plane"]),
+    "difference_weight": str(address["difference_weight"]),
+    "decode_status": str(address["golay"]["status"]),
+    "decode_guaranteed": str(address["golay"]["guaranteed"]),
+}
+'''
+
+
 def _body_report_theta(args: Mapping[str, object]) -> str:
     """Recompute the Leech theta series (v0.5.4)."""
     return '''# -- recompute -------------------------------------------------------------
 
 coeffs = leech2.theta_series(order=5)
 
-observed = {
-    "coeff_0": str(coeffs[0]),
-    "coeff_1": str(coeffs[1]),
-    "coeff_2": str(coeffs[2]),
-    "coeff_3": str(coeffs[3]),
-    "coeff_4": str(coeffs[4]),
-}
+# Every coefficient the series returns, not a hand-written prefix of them:
+# `order=5` yields six coefficients, and listing five of them left the last
+# one unchecked.
+observed = {"coeff_%d" % i: str(c) for i, c in enumerate(coeffs)}
 '''
 
 
@@ -481,6 +1336,39 @@ observed = {{
     "operand_b": obj_b.name,
     "signed_cosine_squared": q(sc2),
     "regime": regime,
+}}
+'''
+
+
+def _body_pi_groups(args: Mapping[str, object]) -> str:
+    """Recompute the Buckingham-Pi groups of a quantity set (v1.0.0)."""
+    names = list(args["names"])            # type: ignore[arg-type]
+    return f'''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import valorani as va
+
+names = {names!r}
+report = va.buckingham_pi_groups(names)
+groups = [[Fraction(c) for c in vec] for vec in report["pi_groups"]]
+rank = len(names) - len(groups)
+
+residues = []
+for _vec in groups:
+    _total = [Fraction(0)] * 10
+    for _weight, _name in zip(_vec, names):
+        _exps = do.physics.quantity_by_name(_name).exps_ext10
+        for _axis in range(10):
+            _total[_axis] += _weight * _exps[_axis]
+    residues.append(_total)
+all_dimensionless = all(all(x == 0 for x in row) for row in residues)
+
+observed = {{
+    "quantities": str(names),
+    "n_quantities": str(len(names)),
+    "rank": str(rank),
+    "n_pi_groups": str(len(groups)),
+    "pi_groups": str([[q(c) for c in vec] for vec in groups]),
+    "all_dimensionless": str(all_dimensionless),
 }}
 '''
 
@@ -545,17 +1433,20 @@ observed = {{
 
 def _body_cluster(args: Mapping[str, object]) -> str:
     names = list(args["names"])  # type: ignore[arg-type]
+    linkage = str(args.get("linkage", "single"))
+    build = "complete_linkage" if linkage == "complete" else "single_linkage"
     return f'''# -- recompute -------------------------------------------------------------
 
 {_pool_snippet(str(args["domain"]))}
 names = {names!r}
 objs = [by_name[n] for n in names]
-tree = me.single_linkage([o.carrier for o in objs], [o.name for o in objs])
+tree = me.{build}([o.carrier for o in objs], [o.name for o in objs])
 groups = me.cut_tree(tree, {int(args["k"])})
 
 observed = {{
     "labels": str([o.name for o in objs]),
     "k": str({int(args["k"])}),
+    "linkage": tree.linkage,
     "groups": str(groups),
     "merge_heights": str([q(m.height) for m in tree.merges]),
 }}
@@ -591,7 +1482,13 @@ observed = {{
 TEMPLATES = {
     "verify": _body_verify,
     "analogy": _body_analogy,
+    # v1.4.0: an analogy transported as a named relation, and the report
+    # that re-solves every case through the model layer.
+    "analogy_model": _body_analogy_model,
+    "report_analogies": _body_report_analogies,
     "describe": _body_describe,
+    # v1.3.0: a description whose subject is arithmetic over register names.
+    "describe_arithmetic": _body_describe_arithmetic,
     "nearest": _body_nearest,
     "product": _body_product,
     "cluster": _body_cluster,
@@ -605,9 +1502,46 @@ TEMPLATES = {
     # query kinds.
     "report_relations": _body_report_relations,
     "report_leech": _body_report_leech,
+    # v0.7.0: the information-loss-at-boundaries study.
+    "report_information_loss": _body_report_information_loss,
     "report_theta": _body_report_theta,
     "report_subalgebra": _body_report_subalgebra,
     "angle": _body_angle,
+    # v0.8.0: the five newly reachable report subjects and the two
+    # worked end-to-end tasks.
+    "report_golay_decoding": _body_report_golay_decoding,
+    "report_superposition": _body_report_superposition,
+    "report_leech_construction": _body_report_leech_construction,
+    "report_facets": _body_report_facets,
+    "report_monster_stack": _body_report_monster_stack,
+    "report_multiresolution": _body_report_multiresolution,
+    "report_migration": _body_report_migration,
+    "report_state_migration": _body_report_state_migration,
+    "report_concept_store": _body_report_concept_store,
+    # v0.9.0: the Griess-algebra fusion layer.
+    "report_fusion": _body_report_fusion,
+    # v1.0.0: the benchmark suites and the Buckingham-Pi query kind.
+    "report_benchmarks": _body_report_benchmarks,
+    "pi_groups": _body_pi_groups,
+    # v1.1.0: the meaning space -- reference resolution, derived relations,
+    # and the audit of the inherited concept graph against both.
+    "meaning": _body_meaning,
+    # v1.2.0: values that are not carriers, and the capability probes.
+    "real": _body_real,
+    "compare": _body_compare,
+    "report_infinite_values": _body_report_infinite_values,
+    "report_capabilities": _body_report_capabilities,
+    "report_semantics": _body_report_semantics,
+    # v1.4.0: the transform-driven decoder and its O(1) certificate.
+    "report_transform_decoder": _body_report_transform_decoder,
+    "report_deep_holes": _body_report_deep_holes,
+    "report_units": _body_report_units,
+    # v1.4.0: the molecules register and the chemistry-coverage widening.
+    "report_molecules": _body_report_molecules,
+    "report_chemistry_coverage": _body_report_chemistry_coverage,
+    "task_grid": _body_task_grid,
+    "task_physics": _body_task_physics,
+    "task_concepts": _body_task_concepts,
 }
 
 

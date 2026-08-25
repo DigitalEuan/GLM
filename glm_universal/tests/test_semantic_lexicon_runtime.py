@@ -97,10 +97,28 @@ class TestDescribeResolution:
         assert sol.ok
         assert sol.expected["domain"] == "lexicon"
 
-    def test_describe_water_resolves_to_lexicon(self, sess):
+    def test_describe_water_resolves_to_molecules_and_says_so(self, sess):
+        """`water` is in two registers as of v1.4.0, and the clash is reported.
+
+        Before the molecules register existed, `water` named only a lexical
+        concept.  It now also names a molecule, and DOMAIN_PRIORITY ranks a
+        register of things ahead of the register of words -- the same rule
+        that makes `describe energy` resolve to physics.  What matters is
+        that the collision is *stated* in the trace rather than silently
+        decided, and that the lexical concept stays reachable.
+        """
         sol = sess.ask("describe water")
         assert sol.ok
+        assert sol.expected["domain"] == "molecules"
+        assert any("ambiguous across" in line and "lexicon" in line
+                   for line in sol.query.trace)
+
+    def test_describe_water_with_a_lexicon_hint_resolves_to_lexicon(self, sess):
+        """The lexical concept is still reachable behind an explicit hint."""
+        sol = sess.ask("describe water", domain="lexicon")
+        assert sol.ok
         assert sol.expected["domain"] == "lexicon"
+        assert "semantic lexical concept" in sol.steps[0].language
 
     def test_describe_atom_resolves_to_lexicon(self, sess):
         sol = sess.ask("describe atom")

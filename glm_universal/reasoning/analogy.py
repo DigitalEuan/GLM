@@ -54,7 +54,7 @@ from ..data_objects import elements as do_elements
 from ..data_objects import physics as do_physics
 from ..data_objects import semantic_lexicon as do_semantic_lexicon
 from ..data_objects.base import DataObject
-from ..substrate import leech2, mog
+from ..substrate import golay_decode, leech2, mog
 from . import metric
 
 __all__ = [
@@ -92,6 +92,19 @@ SUBSPACES: Dict[str, Tuple[str, ...]] = {
     "chemistry.measured": (
         "atomic_weight_u", "electronegativity_pauling", "atomic_radius_pm",
         "covalent_radius_pm", "valence_electrons", "ionization_energy_eV"),
+    # molecules: what the molecule is made of, and nothing derived from the
+    # element register.  A composition-only subspace keeps molar mass and
+    # electronegativity -- which vary by orders of magnitude between
+    # coordinates -- from outvoting the counts that carry the analogy.
+    "molecules.composition": (
+        "atom_count", "distinct_elements", "carbon_count", "hydrogen_count",
+        "oxygen_count", "nitrogen_count", "heteroatom_count", "charge"),
+    # molecules: the derived bulk properties, for analogies about size
+    # rather than about formula.
+    "molecules.bulk": (
+        "molar_mass_u", "electron_count", "valence_electron_total",
+        "electronegativity_mean", "electronegativity_spread",
+        "carbon_mass_fraction"),
     # lexicon (v0.5.1): the ten semantic primitives alone.  This subspace
     # lets analogies over words resolve on meaning rather than spelling.
     # `energy : force :: heat : ?` should resolve to `temperature` from
@@ -271,21 +284,20 @@ def solve_analogy_objects(a: DataObject, b: DataObject, c: DataObject,
 def nearest_golay_codeword(mask: int) -> Tuple[int, int, int]:
     """``(codeword, distance, count)`` for the nearest Golay codewords.
 
-    Exhaustive over all 4096 codewords, so the distance is the true minimum;
-    ``count`` says how many attain it, which is 1 exactly when the mask is
-    within the code's unique-decoding radius of 3.
+    Delegates to :func:`glm_universal.substrate.golay_decode.decode_complete`,
+    which reads the answer off the syndrome coset table instead of scanning
+    the 4,096 codewords.  ``distance`` is the exact coset weight and ``count``
+    says how many codewords attain it -- 1 exactly when the mask is inside the
+    code's unique-decoding radius of 3, and 6 at coset weight 4.  The returned
+    codeword is ``min`` of the winners, so it is a function of the data and
+    not of enumeration order; when ``count > 1`` the caller is looking at a
+    tie and should say so rather than treat the value as the answer.
     """
     if not 0 <= int(mask) < (1 << 24):
         raise ValueError("nearest_golay_codeword: mask must be 24-bit")
-    mask = int(mask)
-    best, winners = 25, []
-    for word in mog.GOLAY_MASKS:
-        d = bin(mask ^ word).count("1")
-        if d < best:
-            best, winners = d, [word]
-        elif d == best:
-            winners.append(word)
-    return min(winners), best, len(winners)
+    decoding = golay_decode.decode_complete(int(mask))
+    return (min(decoding.candidates), decoding.weight,
+            len(decoding.candidates))
 
 
 @dataclass(frozen=True)

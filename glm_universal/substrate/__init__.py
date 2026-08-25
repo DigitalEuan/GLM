@@ -17,6 +17,24 @@ Four modules, in dependency order:
     its Witt decomposition into 12 hyperbolic planes, exact rational inner
     products, and ``2A`` (type-2) axis detection against the exhaustively
     enumerated table of 98,280 classes.
+``golay_decode``
+    Complete syndrome decoding of the Golay code: the coset leader table, the
+    exact distance to the code, *every* nearest codeword, and the proof (via
+    the Steiner system ``S(5,8,24)``) that a weight-5 error is decoded
+    confidently and wrongly by any nearest-codeword rule.  This module retired
+    the package's legacy ``snap`` decode.
+``isomorphism``
+    The legacy-to-core coordinate permutation: the only sanctioned bridge
+    between the project's earlier Golay frame and this package's canonical
+    one, the proof that it is an isometry and therefore safe to wrap around
+    the decoder, and the bulk migration of concepts, CRG edges and
+    hexcolour addresses.
+``leech_construct``
+    The construction ladder for ``Lambda_24``: Construction A (kissing 48),
+    Construction B (98,256) and Construction C with the mod-8 coordinate-sum
+    condition, which restores the true 196,560 minimal vectors; the multi-mod
+    sieve (mod 2 / 4 / 8) that decides membership; and the shared lattice
+    helpers used by the six-facet decomposition.
 ``digit_stack``
     The 10-plane 2-adic digit stack over Q / Z: lossless carrier
     reconstruction, plus bitwise facet projection and failing-facet
@@ -29,7 +47,43 @@ anywhere in the package.
 
 from __future__ import annotations
 
-from . import digit_stack, leech2, linalg, mog
+from . import (digit_stack, golay_decode, isomorphism, leech2,
+               leech_construct, linalg, mog, superposition)
+from .isomorphism import (CONCEPT_SPEC, CORE_TO_LEGACY, EDGE_SPEC,
+                          HEXCOLOUR_SPEC, LEGACY_TO_CORE, MigrationSpec,
+                          code_report, compose_permutations, decode_legacy,
+                          hexcolour_to_mask, invert_permutation,
+                          is_golay_automorphism, is_permutation,
+                          isometry_report, legacy_code,
+                          legacy_decoder_comparison,
+                          legacy_snap_in_legacy_frame, mask_to_hexcolour,
+                          migrate_dataset, migrate_hexcolour, migrate_record,
+                          migrate_records, migration_report, permute_indices,
+                          permute_mask, permute_vector, sample_dataset,
+                          shared_codewords, to_core_mask, to_core_vector,
+                          to_legacy_mask, to_legacy_vector,
+                          weight_distribution)
+from .leech_construct import (LEVEL_A, LEVEL_B, LEVEL_C, LEVELS,
+                              agrees_with_leech2, even_parity,
+                              golay_condition, golay_support, in_level,
+                              kissing_of_level, leech_construction_report,
+                              level_of, minimal_shape_census,
+                              minimal_vectors_of_level, mod_profile,
+                              mod_sieve, necessity_report,
+                              projection_lattice_basis, small_shell_minimum,
+                              sum_condition, supported_sublattice_basis)
+from .golay_decode import (COVERING_RADIUS, PACKING_RADIUS, Decoding,
+                           coset_census, coset_leaders, coset_table,
+                           coset_weight, decode_complete, decode_or_detect,
+                           decoder_comparison_report, golay_decode_report,
+                           is_guaranteed_decodable, steiner_system_report,
+                           weight5_miscorrection_report)
+from .superposition import (ALL_ONES, TIE_COUNT, Collapse, Superposition,
+                            alphabet_expansion_report, bundle_f2,
+                            bundle_rational, bundling_report, collapse,
+                            collapse_report, recover_from_bundle,
+                            sextet_cycle_reading, sextet_partition_report,
+                            superpose, superposition_report)
 from .digit_stack import (FACETS, STACK_DEPTH, STACK_OFFSET, DigitStack,
                           EquationVerdict, FacetReport, class_stack,
                           class_stack_fitted, class_stack_rebuild,
@@ -54,7 +108,38 @@ from .mog import (BRICKS, COLUMNS, GOLAY, GOLAY_MASKS, GOLAY_SET, HEXACODE,
                   trio_census, trio_of_octad)
 
 __all__ = [
-    "linalg", "mog", "leech2", "digit_stack",
+    "linalg", "mog", "leech2", "digit_stack", "golay_decode",
+    "leech_construct", "isomorphism", "superposition",
+    # isomorphism
+    "LEGACY_TO_CORE", "CORE_TO_LEGACY", "MigrationSpec", "CONCEPT_SPEC",
+    "EDGE_SPEC", "HEXCOLOUR_SPEC", "is_permutation", "invert_permutation",
+    "compose_permutations", "permute_mask", "permute_vector",
+    "permute_indices", "to_core_mask", "to_legacy_mask", "to_core_vector",
+    "to_legacy_vector", "hexcolour_to_mask", "mask_to_hexcolour",
+    "migrate_hexcolour", "legacy_code", "shared_codewords",
+    "weight_distribution", "is_golay_automorphism", "isometry_report",
+    "code_report", "decode_legacy", "legacy_snap_in_legacy_frame",
+    "legacy_decoder_comparison", "migrate_record", "migrate_records",
+    "migrate_dataset", "sample_dataset", "migration_report",
+    # leech_construct
+    "LEVEL_A", "LEVEL_B", "LEVEL_C", "LEVELS", "even_parity",
+    "golay_support", "golay_condition", "sum_condition", "in_level",
+    "level_of", "minimal_vectors_of_level", "minimal_shape_census",
+    "kissing_of_level", "mod_profile", "mod_sieve",
+    "projection_lattice_basis", "supported_sublattice_basis",
+    "small_shell_minimum", "necessity_report", "agrees_with_leech2",
+    "leech_construction_report",
+    # golay_decode
+    "Decoding", "PACKING_RADIUS", "COVERING_RADIUS",
+    "coset_table", "coset_leaders", "coset_weight", "coset_census",
+    "decode_complete", "decode_or_detect", "is_guaranteed_decodable",
+    "decoder_comparison_report", "steiner_system_report",
+    "weight5_miscorrection_report", "golay_decode_report",
+    # superposition
+    "ALL_ONES", "TIE_COUNT", "Superposition", "Collapse", "superpose",
+    "bundle_f2", "bundle_rational", "recover_from_bundle", "collapse",
+    "sextet_cycle_reading", "sextet_partition_report", "bundling_report",
+    "collapse_report", "alphabet_expansion_report", "superposition_report",
     # mog
     "GOLAY", "GOLAY_MASKS", "GOLAY_SET", "OCTAD_MASKS", "HEXACODE",
     "TRIO", "SEXTET", "BRICKS", "COLUMNS",

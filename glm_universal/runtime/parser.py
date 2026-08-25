@@ -73,7 +73,7 @@ QueryKind = str
 KINDS: Tuple[str, ...] = (
     "verify", "analogy", "describe", "nearest", "product", "cluster",
     "spatial", "project", "trilinear", "coherence", "report", "angle",
-    "unknown",
+    "task", "pi_groups", "meaning", "real", "compare", "unknown",
 )
 
 #: Directive keyword -> intent.  Longest surface form is matched first, so
@@ -116,13 +116,53 @@ VERBS: Dict[str, str] = {
     "census": "report",
     # angle -- exact cosine comparison (v0.5.4)
     "angle": "angle", "angular": "angle", "cosine": "angle",
+    # task -- run a worked end-to-end task through the whole pipeline
+    "task": "task", "solve task": "task", "puzzle": "task",
+    "worked example": "task",
+    # pi_groups -- Buckingham-Pi over a set of quantities (v1.0.0)
+    "pi groups": "pi_groups", "pi_groups": "pi_groups",
+    "buckingham": "pi_groups", "buckingham-pi": "pi_groups",
+    "dimensionless groups": "pi_groups", "dimensionless": "pi_groups",
+    # meaning -- reference resolution and derived relations (v1.1.0).
+    # The operands are raw notations, not register names: the whole point
+    # is that a term is looked up by what it denotes, so it must reach the
+    # resolver unresolved by any name index.
+    # real -- values that are not carriers: irrationals as processes
+    # (v1.2.0).  The operand is a notation such as "sqrt(2)", "pi" or
+    # "phi", carried through verbatim: it names no register entry, which
+    # is the whole point.
+    "approximate": "real", "irrational": "real", "real value": "real",
+    "to precision": "real",
+    # compare -- order two real values, each given as a written expression
+    # (v1.2.0).  Inequality between two processes is decidable and is
+    # decided; equality is not, and comes back as 'not distinguished'.
+    "compare": "compare", "greater than": "compare",
+    "bigger than": "compare", "larger than": "compare",
+    "less than": "compare", "smaller than": "compare",
+    "equal to": "compare", "the same as": "compare",
+    "which is bigger": "compare", "which is larger": "compare",
+    "meaning": "meaning", "meaning of": "meaning", "means": "meaning",
+    "denotes": "meaning", "denotation": "meaning", "refers to": "meaning",
+    "ground": "meaning", "grounding": "meaning", "relate": "meaning",
+    "same meaning": "meaning",
+}
+
+#: Comparison keyword -> the relation the question asserts.  ``"compare"``
+#: asserts nothing and asks for the order.
+_COMPARE_RELATION: Dict[str, str] = {
+    "greater than": "greater", "bigger than": "greater",
+    "larger than": "greater", "less than": "less",
+    "smaller than": "less", "equal to": "equal",
+    "the same as": "equal", "compare": "compare",
+    "which is bigger": "compare", "which is larger": "compare",
 }
 
 #: Fixed order used to break a cross-domain name collision.  A surface form
 #: that exists in two registers resolves to the earlier domain here, and the
 #: collision is reported in :attr:`Query.trace` rather than hidden.
 DOMAIN_PRIORITY: Tuple[str, ...] = (
-    "physics", "chemistry", "mathematics", "spatial", "lexicon",
+    "physics", "chemistry", "molecules", "mathematics", "spatial",
+    "lexicon",
 )
 
 #: Words that pin the comparison semantics of a ``verify`` query.  The
@@ -317,11 +357,12 @@ class ConceptIndex:
 def _aliases_for(obj) -> Tuple[str, ...]:
     """Every surface form that should resolve to ``obj``, normalised.
 
-    Generated from the carrier's own name and from the two attribute keys the
+    Generated from the carrier's own name and from the attribute keys the
     registers actually use for human-readable naming -- ``"name"`` for the
-    chemical elements (whose carrier name is the symbol) and ``"symbol"`` for
-    the physical quantities (whose carrier name is already the long form).
-    Nothing is invented: an alias exists only if the register supplies it.
+    chemical elements (whose carrier name is the symbol), ``"symbol"`` for
+    the physical quantities (whose carrier name is already the long form),
+    and, for molecules, ``"formula"`` and ``"hill_formula"``.  Nothing is
+    invented: an alias exists only if the register supplies it.
 
     A short physics symbol that collides with an element symbol (``Li``,
     ``Na``, ``Be``, ``B``, ``F``, ``P``, ``S``, ``K``, ``Ar``, etc.) is
@@ -334,8 +375,16 @@ def _aliases_for(obj) -> Tuple[str, ...]:
     """
     out: List[str] = [normalise(obj.name)]
     attrs = getattr(obj, "attributes", {}) or {}
-    is_physics = (getattr(obj, "domain", "") == "physics")
-    for key in ("name", "symbol"):
+    domain = getattr(obj, "domain", "")
+    is_physics = (domain == "physics")
+    keys = ("name", "symbol")
+    if domain == "molecules":
+        # A molecule is named as often by its formula as by its name, and
+        # the register supplies both.  Indexing them is what makes
+        # ``describe C6H12O6`` reach the carrier rather than only the
+        # denotation the reference resolver can build for any formula.
+        keys = keys + ("formula", "hill_formula")
+    for key in keys:
         value = attrs.get(key)
         if isinstance(value, str) and value.strip():
             n = normalise(value)
@@ -634,10 +683,68 @@ def _strip_weak_openers(text: str) -> str:
 
 
 def _extract_subspace(lowered: str) -> Optional[str]:
-    """A dotted subspace name if one is written out, e.g. ``physics.dimension``."""
+    """A dotted subspace name if one is written out, e.g. ``physics.dimension``.
+
+    All three registers that define subspaces are read, ``lexicon`` included:
+    ``lexicon.primitives`` is the default an untagged lexicon analogy already
+    uses, and it was previously impossible to *ask* for, so a query could not
+    request the geometric solve in the one register where the named-relation
+    layer answers most often.
+    """
     m = re.search(r"(?<![a-z0-9_.])"
-                  r"(physics|chemistry)\.[a-z_]+", lowered)
+                  r"(physics|chemistry|lexicon)\.[a-z_]+", lowered)
     return m.group(0) if m else None
+
+
+#: How a cluster query may name its linkage rule.  ``single`` merges the two
+#: closest clusters (nearest neighbour), ``complete`` the two whose furthest
+#: members are closest (furthest neighbour); both are exact.
+LINKAGE_PATTERN = re.compile(
+    r"(?:(single|complete|furthest|farthest)[-\s]+linkage"
+    r"|linkage\s*[=:]?\s*(single|complete|furthest|farthest))")
+
+
+def _extract_linkage(lowered: str) -> Optional[str]:
+    """The linkage rule a cluster query asks for, or ``None`` for the default."""
+    match = LINKAGE_PATTERN.search(lowered)
+    if match is None:
+        return None
+    word = match.group(1) or match.group(2)
+    return "single" if word == "single" else "complete"
+
+
+def _strip_linkage_phrase(text: str) -> str:
+    """Remove the linkage phrase so it is not mistaken for a concept name."""
+    cleaned = LINKAGE_PATTERN.sub(" ", text.lower())
+    cleaned = re.sub(r"\b(with|using|by|under)\s*$", " ", cleaned.strip())
+    return re.sub(r"\s+", " ", cleaned).strip(" ,;")
+
+
+def _common_register(surfaces: Sequence[str],
+                     index: ConceptIndex) -> Optional[str]:
+    """A single register in which every surface form resolves, if there is one.
+
+    Used to rescue a query whose operands were split across registers by
+    :data:`DOMAIN_PRIORITY` alone -- ``heat : temperature :: force : ?`` sends
+    ``heat`` to the lexicon and ``force`` to physics, yet all three words are
+    lexicon concepts.  Registers are tried in domain-priority order, so the
+    choice is deterministic; ``None`` means no register holds them all, and
+    the query really is cross-domain.
+    """
+    shared: Optional[set] = None
+    for surface in surfaces:
+        here = {d for d, _ in index.candidates(surface)}
+        if not here:
+            return None
+        shared = here if shared is None else (shared & here)
+        if not shared:
+            return None
+    if not shared:
+        return None
+    for domain in DOMAIN_PRIORITY:
+        if domain in shared:
+            return domain
+    return sorted(shared)[0]
 
 
 def _resolve_operands(surfaces: Sequence[str], index: ConceptIndex,
@@ -680,9 +787,26 @@ def _resolve_operands(surfaces: Sequence[str], index: ConceptIndex,
             settled = unique[0]
             trace.append(f"domain inferred as {settled!r} from the operands")
         else:
-            trace.append(
-                f"operands span domains {unique}; leaving the query "
-                f"cross-domain")
+            # The surface forms landed in different registers only because
+            # each was resolved on its own by domain priority.  Before
+            # giving up, look for a single register that holds *all* of
+            # them: carriers from different registers do not share a
+            # coordinate layout, so an answer is only meaningful inside one.
+            shared = _common_register(surfaces, index)
+            if shared is None:
+                trace.append(
+                    f"operands span domains {unique} and no single register "
+                    f"holds all of them; leaving the query cross-domain")
+            else:
+                trace.append(
+                    f"operands span domains {unique} under domain priority, "
+                    f"but all of them also resolve in {shared!r}; the query "
+                    f"was coerced to that register")
+                resolved = []
+                for surface in surfaces:
+                    hit = index.lookup(surface, shared)
+                    resolved.append(surface if hit is None else hit[1])
+                settled = shared
     return tuple(resolved), settled
 
 
@@ -833,8 +957,12 @@ def _build_keyword_query(text: str, cleaned: str, lowered: str,
         if k is not None:
             options["k"] = k
             trace.append(f"cluster count k={k}")
-        names = _split_list(
-            _strip_count_phrase(remainder, ("into", "k", "clusters")))
+        linkage = _extract_linkage(lowered)
+        if linkage is not None:
+            options["linkage"] = linkage
+            trace.append(f"linkage {linkage!r} requested")
+        names = _split_list(_strip_linkage_phrase(
+            _strip_count_phrase(remainder, ("into", "k", "clusters"))))
         operands, settled = _resolve_operands(names, index, domain, trace)
         return Query(raw=text, normalised=cleaned, kind=kind, domain=settled,
                      operands=operands, options=options, rule=rule,
@@ -915,6 +1043,113 @@ def _build_keyword_query(text: str, cleaned: str, lowered: str,
         target = _strip_connectives(remainder).lower()
         options["subject"] = target
         return Query(raw=text, normalised=cleaned, kind="report",
+                     domain=domain, operands=(), options=options,
+                     rule=rule, trace=tuple(trace))
+
+    if kind == "pi_groups":
+        # 'pi groups force, mass, acceleration, length, time' -- two or
+        # more quantities, comma/and separated or whitespace separated.
+        names = _split_list(_strip_connectives(remainder))
+        if len(names) < 2:
+            ws_parts = [p for p in remainder.split()
+                        if p.lower() not in _CONNECTIVES
+                        and p not in (",", "and", "vs", "versus")]
+            if len(ws_parts) >= 2:
+                names = tuple(ws_parts)
+        if len(names) < 2:
+            trace.append("pi groups needs at least two quantities")
+            return Query(raw=text, normalised=cleaned, kind="unknown",
+                         domain=domain, operands=(remainder,), rule=rule,
+                         trace=tuple(trace),
+                         suggestions=index.suggest(remainder))
+        operands, settled = _resolve_operands(names, index, domain, trace)
+        return Query(raw=text, normalised=cleaned, kind="pi_groups",
+                     domain=settled, operands=operands, options=options,
+                     rule=rule, trace=tuple(trace))
+
+    if kind == "meaning":
+        # 'meaning <term>' or 'relate <term> <term>' -- the operands are
+        # notations to be resolved by reference, so they are carried through
+        # verbatim in options rather than resolved against the name index.
+        names = _split_list(_strip_connectives(remainder))
+        if len(names) < 2:
+            ws_parts = [p for p in remainder.split()
+                        if p.lower() not in _CONNECTIVES
+                        and p not in (",", "and", "vs", "versus")]
+            if len(ws_parts) >= 2:
+                names = tuple(ws_parts[:2])
+        if not names:
+            names = (_strip_connectives(remainder),)
+        options["terms"] = tuple(names[:2])
+        trace.append(f"meaning terms {tuple(names[:2])!r} pass to the "
+                     f"reference resolver unchanged")
+        return Query(raw=text, normalised=cleaned, kind="meaning",
+                     domain=domain, operands=(), options=options,
+                     rule=rule, trace=tuple(trace))
+
+    if kind == "real":
+        # 'approximate sqrt(2) to 20 places' -- the operand is a notation for
+        # a real number, not a register name, so it is passed through
+        # verbatim.  An optional place count sets the precision.
+        places_match = re.search(
+            r"(?<![a-z0-9_])(\d+)\s*(?:decimal\s*)?(?:places|digits|dp)\b",
+            lowered)
+        if places_match:
+            options["places"] = int(places_match.group(1))
+        target = re.sub(
+            r"\bto\s*\d+\s*(?:decimal\s*)?(?:places|digits|dp)\b", " ",
+            remainder, flags=re.IGNORECASE)
+        target = re.sub(
+            r"(?<![a-z0-9_])\d+\s*(?:decimal\s*)?(?:places|digits|dp)\b",
+            " ", target, flags=re.IGNORECASE)
+        options["notation"] = _strip_connectives(
+            re.sub(r"\s+", " ", target)).strip()
+        trace.append(f"real notation {options['notation']!r} passes to the "
+                     f"exact-real constructor unresolved")
+        return Query(raw=text, normalised=cleaned, kind="real",
+                     domain="mathematics", operands=(), options=options,
+                     rule=rule, trace=tuple(trace))
+
+    if kind == "compare":
+        # 'is sqrt(2) greater than 7/5' -- both sides are notations, so the
+        # split is made on the keyword itself rather than on the remainder,
+        # which has had the keyword cut out of it.
+        relation = _COMPARE_RELATION.get(keyword, "compare")
+        options["relation"] = relation
+        index_of = cleaned.lower().find(keyword)
+        if keyword in ("compare", "which is bigger", "which is larger"):
+            body = _strip_connectives(remainder)
+            sides = _split_list(body)
+            if len(sides) < 2:
+                sides = tuple(
+                    part.strip()
+                    for part in re.split(r"\bversus\b|\bvs\b|\bor\b|\band\b|,",
+                                         body) if part.strip())
+        else:
+            left = cleaned[:index_of]
+            right = cleaned[index_of + len(keyword):]
+            left = re.sub(r"^\s*(is|are|does|do)\b", " ", left,
+                          flags=re.IGNORECASE)
+            sides = (left.strip(" ?,:"), right.strip(" ?,:"))
+        if len(sides) < 2 or not all(sides[:2]):
+            raise QueryError(
+                f"parse_query: {text!r} -- a comparison needs two values, "
+                f"e.g. 'is sqrt(2) greater than 7/5'")
+        options["left"] = sides[0]
+        options["right"] = sides[1]
+        trace.append(f"comparison {sides[0]!r} {relation} {sides[1]!r}; both "
+                     f"sides pass to the exact-real grammar unresolved")
+        return Query(raw=text, normalised=cleaned, kind="compare",
+                     domain="mathematics", operands=(), options=options,
+                     rule=rule, trace=tuple(trace))
+
+    if kind == "task":
+        # 'task <name>' -- the name selects one of the worked end-to-end
+        # tasks: 'grid' (the ARC-style half-turn puzzle) or 'physics'
+        # (energy versus torque through the whole pipeline).
+        target = _strip_connectives(remainder).lower()
+        options["task"] = target
+        return Query(raw=text, normalised=cleaned, kind="task",
                      domain=domain, operands=(), options=options,
                      rule=rule, trace=tuple(trace))
 

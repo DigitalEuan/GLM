@@ -85,6 +85,7 @@ __all__ = [
     "TwoASubalgebra", "two_a_subalgebra", "two_a_closure_report",
     "adjoint_matrix", "fusion_spectrum", "miyamoto_tau", "miyamoto_sigma",
     "apply_map", "is_automorphism", "preserves_form",
+    "ISING_EIGENVALUES", "IDENTITY3", "fusion_report",
     "class_translation", "sample_two_a_pairs",
 ]
 
@@ -884,6 +885,124 @@ def preserves_form(matrix: Matrix, sub: TwoASubalgebra) -> bool:
             if lhs != rhs:
                 return False
     return True
+
+
+# ===========================================================================
+# 5b.  THE FUSION REPORT
+# ===========================================================================
+
+#: The identity of the three-dimensional subalgebra, as a matrix.
+IDENTITY3: Matrix = tuple(tuple(Fraction(1 if i == j else 0)
+                                for j in range(3)) for i in range(3))
+
+
+def _matrix_strings(matrix: Matrix) -> List[List[str]]:
+    """A matrix as exact ``num/den`` strings, for reporting."""
+    return [[f"{c.numerator}/{c.denominator}" for c in row]
+            for row in matrix]
+
+
+def _sigma_permutation(label: int, sub: TwoASubalgebra) -> List[Optional[int]]:
+    """Where ``sigma_label`` sends each axis, as labels (``None`` if nowhere).
+
+    The image is *matched* against the three axes rather than assumed, so a
+    map that moved an axis off the basis would be reported as ``None`` rather
+    than quietly rounded to the nearest axis.
+    """
+    sigma = miyamoto_sigma(label, sub)
+    out: List[Optional[int]] = []
+    for other in sub.labels:
+        image = apply_map(sigma, axis(other), sub)
+        out.append(next((l for l in sub.labels if image == axis(l)), None))
+    return out
+
+
+def fusion_report(pairs: Optional[Sequence[Tuple[int, int]]] = None
+                  ) -> Dict[str, object]:
+    """Recompute the Ising fusion structure of the ``2A`` algebra.
+
+    For every axis of every sampled ``2A`` subalgebra this recomputes, in
+    exact rational arithmetic:
+
+    * the adjoint matrix of ``x |-> a . x`` in the subalgebra basis, and its
+      trace -- which must be ``1 + 0 + 1/4 = 5/4`` if the Ising eigenvalues
+      are the ones the fusion rules predict;
+    * the dimensions of the four Ising eigenspaces, *searched for* rather
+      than assumed: ``1``, ``0`` and ``1/4`` each contribute one dimension
+      and ``1/32`` contributes none, so they span the three dimensions;
+    * the Miyamoto involution ``tau_a`` (``-1`` on the ``1/32``-eigenspace),
+      which is therefore the identity here, and ``sigma_a`` (``-1`` on the
+      ``1/4``-eigenspace), which fixes ``a`` and exchanges the other two
+      axes -- the permutation is read off the computed matrix;
+    * that both maps are algebra automorphisms, isometries of the Griess
+      form, and involutions.
+
+    Nothing in the returned record is quoted from the literature: each field
+    is the outcome of a computation on the algebra the substrate builds.
+    """
+    if pairs is None:
+        pairs = sample_two_a_pairs(3)
+    records: List[Dict[str, object]] = []
+    for u, v in pairs:
+        sub = two_a_subalgebra(u, v)
+        axis_records: List[Dict[str, object]] = []
+        for label in sub.labels:
+            ad = adjoint_matrix(label, sub)
+            spectrum = fusion_spectrum(label, sub)
+            dims = {lam: len(basis) for lam, basis in spectrum.items()}
+            tau = miyamoto_tau(label, sub)
+            sigma = miyamoto_sigma(label, sub)
+            perm = _sigma_permutation(label, sub)
+            here = sub.index_of(label)
+            others = [i for i in range(3) if i != here]
+            axis_records.append({
+                "label": label,
+                "adjoint": _matrix_strings(ad),
+                "adjoint_trace": str(sum((ad[i][i] for i in range(3)),
+                                         Fraction(0))),
+                "eigenspace_dimensions": {str(lam): dims[lam]
+                                          for lam in ISING_EIGENVALUES},
+                "eigenspaces_span": sum(dims.values()) == 3,
+                "tau_is_identity": tau == IDENTITY3,
+                "tau_is_automorphism": is_automorphism(tau, sub),
+                "tau_preserves_form": preserves_form(tau, sub),
+                "sigma": _matrix_strings(sigma),
+                "sigma_is_automorphism": is_automorphism(sigma, sub),
+                "sigma_preserves_form": preserves_form(sigma, sub),
+                "sigma_is_involution": _matmul(sigma, sigma) == IDENTITY3,
+                "sigma_permutation": perm,
+                "sigma_fixes_its_axis": perm[here] == label,
+                "sigma_swaps_the_others": (
+                    perm[others[0]] == sub.labels[others[1]]
+                    and perm[others[1]] == sub.labels[others[0]]),
+            })
+        records.append({"labels": list(sub.labels), "axes": axis_records})
+
+    flat = [a for r in records for a in r["axes"]]        # type: ignore[index]
+    expected_dims = {str(Fraction(1)): 1, str(Fraction(0)): 1,
+                     str(Fraction(1, 4)): 1, str(Fraction(1, 32)): 0}
+    return {
+        "pairs_checked": len(records),
+        "axes_checked": len(flat),
+        "ising_eigenvalues": [str(lam) for lam in ISING_EIGENVALUES],
+        "expected_eigenspace_dimensions": expected_dims,
+        "all_eigenspaces_span": all(a["eigenspaces_span"] for a in flat),
+        "all_dimensions_as_predicted": all(
+            a["eigenspace_dimensions"] == expected_dims for a in flat),
+        "all_adjoint_traces_five_quarters": all(
+            a["adjoint_trace"] == str(Fraction(5, 4)) for a in flat),
+        "tau_always_identity": all(a["tau_is_identity"] for a in flat),
+        "sigma_always_swaps": all(a["sigma_swaps_the_others"]
+                                  and a["sigma_fixes_its_axis"]
+                                  for a in flat),
+        "all_automorphisms": all(a["tau_is_automorphism"]
+                                 and a["sigma_is_automorphism"]
+                                 for a in flat),
+        "all_isometries": all(a["tau_preserves_form"]
+                              and a["sigma_preserves_form"] for a in flat),
+        "all_involutions": all(a["sigma_is_involution"] for a in flat),
+        "records": records,
+    }
 
 
 # ===========================================================================

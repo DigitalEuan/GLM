@@ -355,6 +355,11 @@ def sense_of_quantity(q: do_physics.Quantity) -> Sense:
 _PUNCT = set("*/^(),")
 
 
+def _is_word(tok: str) -> bool:
+    """Whether a token could be part of a register name."""
+    return bool(tok) and (tok[0].isalpha() or tok[0] == "_")
+
+
 def tokenise(text: str) -> List[str]:
     """Split an expression into names, numbers, operators and punctuation."""
     out: List[str] = []
@@ -434,10 +439,33 @@ class _Parser:
             return _numeric(tok)
         if tok in OPERATORS and self.peek() == "(":
             return self.call(tok)
-        q = resolve_name(tok)
+        name, q = self.multiword(tok)
         if q is None:
-            raise RelationError(f"unknown concept {tok!r}")
+            raise RelationError(f"unknown concept {name!r}")
         return sense_of_quantity(q)
+
+    def multiword(self, tok: str) -> Tuple[str, Optional[do_physics.Quantity]]:
+        """The longest run of adjacent word tokens that names a quantity.
+
+        A register name such as ``speed_of_light`` may be typed with spaces
+        inside an expression.  The tokeniser has already split it into three
+        tokens, so the parser glues consecutive word tokens back together with
+        ``_`` and keeps the longest join the register recognises.  Only a join
+        that resolves is ever accepted, so a genuinely missing ``*`` still
+        raises rather than being silently absorbed.
+        """
+        best_name, best_q, best_pos = tok, resolve_name(tok), self.pos
+        parts = [tok]
+        look = self.pos
+        while look < len(self.tokens) and _is_word(self.tokens[look]):
+            parts.append(self.tokens[look])
+            look += 1
+            candidate = "_".join(parts)
+            found = resolve_name(candidate)
+            if found is not None:
+                best_name, best_q, best_pos = candidate, found, look
+        self.pos = best_pos
+        return best_name, best_q
 
     def call(self, name: str) -> Sense:
         arity, fn = OPERATORS[name]

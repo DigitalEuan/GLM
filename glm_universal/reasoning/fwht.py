@@ -204,11 +204,18 @@ def fwht_report() -> dict:
                  "actions (the Golay code's 2^12 = 4096 codewords), "
                  "where the FWHT gives a 12x speedup."),
         "status": (
-            "The FWHT is implemented and verified.  It is NOT wired "
-            "into any runtime query path -- the existing O(N^2) "
-            "matrix products in the substrate are fast enough for the "
-            "current 24-dimensional carriers.  When the system scales "
-            "to larger group actions (e.g. the 4096-codeword Golay "
-            "code), the FWHT becomes the right tool."
+            "The FWHT is implemented, verified and now wired: "
+            "reasoning.fwht_decode uses it to produce all 4,096 Golay "
+            "coset costs of the exact Leech nearest-point decoder in one "
+            "transform, and the runtime reaches it as `report transform "
+            "decoder`.  What that wiring measured is worth recording "
+            "here: for this code the transform is not a speed-up.  The "
+            "direct summation costs n * 2^(k-1) = 49,152 additions and "
+            "the transform costs 2^k * k = 49,152 add/subtracts, and "
+            "those are equal exactly when n = 2k -- which is the case "
+            "for the [24, 12, 8] Golay code.  The transform earns its "
+            "place by producing the whole cost spectrum at once (tie "
+            "sets, list decoding, the certificate check), not by being "
+            "faster.  See fwht_decode.operation_counts."
         ),
     }

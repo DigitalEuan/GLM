@@ -764,13 +764,12 @@ class TestExactness:
     def test_no_float_literals_and_no_float_calls(self):
         """No source line constructs a float, in any reasoning module.
 
-        Exception: coherence.py is allowed floats for NRCI shells 2 and 4
-        which require sqrt (irrational).  This is documented in the module.
+        There is no longer an exception: NRCI shells 2 and 4 take their
+        square root rationally, at the declared resolution of
+        ``coherence.rational_sqrt``.
         """
         offenders = []
         for path in sorted(REASONING_DIR.glob("*.py")):
-            if path.name == "coherence.py":
-                continue  # NRCI shells 2, 4 need sqrt — floats are documented
             tree = ast.parse(path.read_text(encoding="utf-8"))
             for node in ast.walk(tree):
                 if isinstance(node, ast.Constant) and isinstance(
@@ -785,8 +784,8 @@ class TestExactness:
     def test_only_the_standard_library_is_imported(self):
         allowed_third_party: set = set()
         stdlib_roots = {"ast", "dataclasses", "fractions", "functools",
-                        "itertools", "json", "math", "pathlib", "typing",
-                        "__future__"}
+                        "itertools", "json", "math", "pathlib", "re",
+                        "typing", "__future__"}
         for path in sorted(REASONING_DIR.glob("*.py")):
             tree = ast.parse(path.read_text(encoding="utf-8"))
             for node in ast.walk(tree):

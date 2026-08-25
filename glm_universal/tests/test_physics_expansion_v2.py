@@ -1,6 +1,7 @@
 """Tests for the v0.5.1 second physics expansion.
 
-Adds 19 more concepts to take the register from 701 → 720, with unique
+Adds 19 more concepts to take the register from 701 → 720 (726 after the
+v4.2 constants expansion), with unique
 names that avoid clashes with existing concepts.  The new concepts span
 optics (3), quantum (3), materials (4), electrochemistry (3), plasma (2),
 meteorology (2), and biophysics (2).
@@ -34,7 +35,7 @@ NEW_CONCEPT_NAMES_V2 = (
     "resting_potential_cell", "action_potential_amplitude",
 )
 
-EXPECTED_COUNT_V2 = 720  # 660 + 41 (v0.5.0) + 19 (v0.5.1)
+EXPECTED_COUNT_V2 = 726  # 660 + 41 (v0.5.0) + 19 (v0.5.1) + 6 (v4.2)
 
 
 class TestPhysicsExpansionV2(unittest.TestCase):
@@ -44,7 +45,7 @@ class TestPhysicsExpansionV2(unittest.TestCase):
         cls.register = load_physics_register()
         cls.codec = PhysicsCodec()
 
-    def test_register_size_is_720(self):
+    def test_register_size_is_726(self):
         self.assertEqual(len(self.register), EXPECTED_COUNT_V2)
 
     def test_every_v2_concept_is_present(self):

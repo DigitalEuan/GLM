@@ -107,28 +107,41 @@ class TestLexiconAnalogiesResolve:
         assert sol.ok
         assert sol.expected["answer"] == "slow"
 
-    def test_antonym_analogy_uses_primitives_subspace(self, sess):
-        """The default subspace for lexicon-domain analogies should be
-        `lexicon.primitives` (v0.5.1)."""
+    def test_the_antonym_analogy_is_answered_by_the_named_relation(self, sess):
+        """No subspace is consulted once the relation has a name.
+
+        The default subspace for a lexicon analogy is `lexicon.primitives`,
+        and it is still what the displacement solver uses.  But the register
+        *states* `hot opposite_of cold`, so the relation model transports
+        that relation from `fast` instead of measuring any distance, and the
+        solution records no subspace at all.  Asking for the geometric solve
+        explicitly still goes the old way.
+        """
         sol = sess.ask("hot : cold :: fast : ?")
         assert sol.ok
-        assert sol.payload["subspace"] == "lexicon.primitives"
+        assert sol.payload["subspace"] is None
+        assert sol.payload["model"]["model"] == "lexicon_relation"
 
-    def test_water_liquid_electron_yields_some_lexicon_concept(self, sess):
-        """water:liquid::electron:? -- this is a hard semantic question
-        because `liquid` is a state of matter, and asking "what state
-        is the electron?" doesn't have a clean answer.  The system
-        resolves to the closest lexicon concept by primitive distance,
-        which may be an adjective like `light_adj` (electrons are
-        lightweight).  We assert only that it returns *some* lexicon
-        concept, not that the answer is a state of matter."""
+        geometric = sess.ask(
+            "hot : cold :: fast : ? in lexicon.primitives")
+        assert geometric.ok
+        assert geometric.payload["subspace"] == "lexicon.primitives"
+
+    def test_water_liquid_electron_is_refused_by_the_relation_model(self,
+                                                                    sess):
+        """A relation the register states, leading nowhere from `electron`.
+
+        `water is_a liquid` is a triple the lexicon carries, so the relation
+        model recognises the step and looks `is_a` up from `electron` -- and
+        the register states no `is_a` for `electron` at all.  The refusal is
+        the honest answer: the machine used to return the nearest word by
+        primitive distance, an adjective like `light_adj`, which answers a
+        question nobody asked.
+        """
         sol = sess.ask("water : liquid :: electron : ?")
-        assert sol.ok
-        answer_name = sol.expected["answer"]
-        lexicon = sess.register("lexicon")
-        answer_obj = next((o for o in lexicon if o.name == answer_name), None)
-        assert answer_obj is not None, \
-            f"answer {answer_name!r} not in lexicon register"
+        assert not sol.ok
+        assert "is_a" in sol.error
+        assert "electron" in sol.error
 
 
 # ===========================================================================
@@ -200,27 +213,64 @@ class TestUserFacingQueries:
 
 
 # ===========================================================================
-# 6.  CROSS-DOMAIN — what currently fails (and should fail honestly)
+# 6.  CROSS-DOMAIN — coercion to a common register, or an honest refusal
 # ===========================================================================
 
-class TestCrossDomainLimitations:
-    """These tests document what the system CANNOT do, so that a future
-    improvement that adds the capability also updates the test."""
+class TestCrossRegisterCoercion:
+    """Operands split across registers by domain priority alone.
 
-    def test_cross_domain_analogy_currently_fails(self, sess):
-        """`heat : temperature :: force : ?` should ideally resolve to
-        `work` or `power` (force's energy-form), but the analogy solver
-        requires all three operands from the same register.  heat and
-        temperature resolve to lexicon, force resolves to physics, so
-        the analogy solver reports the cross-domain mix.
+    ``heat : temperature :: force : ?`` is the case that shows what the
+    coercion is and is not for.  ``heat`` is only a lexicon concept while
+    ``temperature`` and ``force`` are claimed by physics first, so the three
+    operands appear to span two registers.  They do not -- all three are
+    lexicon concepts too -- and the parser finds the single register that
+    holds them all, which is what makes the query *parse*.  Carriers from
+    different registers share no coordinate layout, so this coercion, and
+    not a mixed-layout subtraction, is the only thing that could.
 
-        When a multi-domain analogy mode is added, this test should be
-        updated to assert the new behaviour."""
+    Parsing it is not answering it.  The solver then finds that the relation
+    the lexicon states -- ``temperature drives heat`` -- reaches nothing at
+    all when looked up from ``force``, and that physics, the more specific
+    register, holds two of the three terms and not the third.  That is the
+    signature of a question about physics coerced into the lexicon, and the
+    honest answer is to say so.
+    """
+
+    def test_the_cross_register_analogy_parses_into_one_register(self, sess):
         sol = sess.ask("heat : temperature :: force : ?")
-        # Document the current behaviour: it fails because of the
-        # cross-domain mix, not because of a bug.
+        assert sol.kind == "analogy"
+        assert sol.query.domain == "lexicon"
+
+    def test_the_cross_register_analogy_is_refused_with_the_split_named(
+            self, sess):
+        sol = sess.ask("heat : temperature :: force : ?")
+        assert not sol.ok
+        assert "drives" in sol.error
+        assert "physics holds" in sol.error
+        assert "but not heat" in sol.error
+
+    def test_the_coercion_is_recorded_in_the_parse_trace(self, sess):
+        sol = sess.ask("heat : temperature :: force : ?")
+        trace = " ".join(sol.query.trace)
+        assert "coerced" in trace
+        assert "lexicon" in trace
+
+    def test_a_domain_hint_still_wins(self, sess):
+        """An explicit register is never overridden by the coercion."""
+        sol = sess.ask("energy : power :: force : ?", domain="physics")
+        assert sol.query.domain == "physics"
+
+    def test_operands_with_no_common_register_are_still_refused(self, sess):
+        """Coercion rescues a false split, never a real one.
+
+        ``carbon`` is a chemistry concept and ``heat`` a lexicon one, with no
+        register holding both, so the query is refused rather than answered
+        by subtracting carriers that do not share a layout.
+        """
+        sol = sess.ask("heat : carbon :: force : ?")
         assert not sol.ok
         assert "could not settle on a single domain" in (sol.error or "")
+        assert "no single register" in " ".join(sol.query.trace)
 
 
 if __name__ == "__main__":

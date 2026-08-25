@@ -205,14 +205,16 @@ def valorani_report() -> Dict[str, object]:
     return {
         "example": example,
         "method": "rational_nullspace (exact, float-free)",
+        "query_kind": "pi_groups",
         "status": (
             "The Buckingham-Pi computation is implemented exactly via "
             "the rational nullspace in substrate.linalg.  The SVD step "
             "that Valorani's method prescribes is documented as the "
             "conceptual motivation but is not used -- the rational "
-            "approach is exact and does not need it.  This is NOT "
-            "wired into any runtime query path; the existing 'verify' "
-            "query kind covers the related task of checking that an "
-            "equation is dimensionally consistent."
+            "approach is exact and does not need it.  It is reachable "
+            "from the runtime as the 'pi_groups' query kind, e.g. "
+            "'pi groups force, mass, acceleration, length, time', which "
+            "reports the rank, the Pi groups and a check that each one "
+            "is dimensionless in all ten EXT10 axes."
         ),
     }

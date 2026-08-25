@@ -220,17 +220,28 @@ def llvq_report() -> Dict[str, object]:
             "via the existing analogy.nearest_lattice_point."
         ),
         "status": (
-            "The shell classification layer is implemented.  The full "
-            "O(1) lookup table that the directive envisions -- indexed "
-            "by the first few binary digits of the input -- is NOT "
-            "implemented.  That requires a precomputed codebook of "
-            "shell boundaries, which is future work."
+            "The shell classification layer is implemented here.  The "
+            "O(1) lookup the directive envisions is implemented in "
+            "reasoning.fwht_decode, and not as a stored codebook: a "
+            "lookup on leading digits alone cannot see reliability "
+            "magnitudes, so instead of storing more digits the fast "
+            "path was given a *certificate*.  It hard-decides the 24 "
+            "signs, reads the Golay coset leaders out of the syndrome "
+            "table, and then proves optimality from the code's minimum "
+            "distance -- or declines, in which case the exact "
+            "transform-driven decoder is entered.  The fast path is "
+            "constant time; the exact path is entered only when it is "
+            "needed; and the rate at which the certificate fires is "
+            "measured per reliability regime by "
+            "fwht_decode.certificate_rate_report rather than claimed."
         ),
         "use_for_chemistry": (
             "Per the directive, LLVQ's codebook-free angular search "
             "could drastically accelerate scaling to a full chemistry "
             "library with O(1) lookups.  The current chemistry register "
             "(118 elements) is small enough that the existing "
-            "nearest-lattice-point is sufficient."
+            "nearest-lattice-point is sufficient, so this is potential "
+            "rather than a measured win; what has been built is the "
+            "two-tier decoder it would rest on."
         ),
     }

@@ -318,7 +318,7 @@ class TestSessionConfiguration:
             fresh.set_basis("nonsense")
 
     def test_the_register_sizes_are_the_documented_ones(self, sess):
-        assert len(sess.register("physics")) == 720
+        assert len(sess.register("physics")) == 726
         assert len(sess.register("chemistry")) == 118
         assert len(sess.register("spatial")) == 28
 
@@ -744,7 +744,7 @@ class TestCommandLine:
         text = out.getvalue()
         for domain in SE.DOMAINS:
             assert domain in text
-        assert "720" in text and "118" in text
+        assert "726" in text and "118" in text
 
     def test_a_batch_query_succeeds(self, glm):
         out = io.StringIO()
@@ -1009,3 +1009,48 @@ class TestRegressionGuards:
         quantity = do.quantity_by_name("force")
         assert sol.expected["lhs_dimension"] == quantity.dimension_string(
             "EXT10")
+
+
+# ===========================================================================
+# 7.  THE THETA TEMPLATE CHECKS EVERY COEFFICIENT IT REPORTS
+# ===========================================================================
+
+class TestReportThetaTemplate:
+    """``report theta`` claims six coefficients, so six must be recomputed.
+
+    The column-3 template for this subject used to hand-write the keys
+    ``coeff_0`` .. ``coeff_4``, while ``theta_series(order=5)`` returns *six*
+    coefficients and the solver puts all six into ``expected``.  The last one
+    was therefore claimed in column 2 and never re-derived in column 3.  The
+    template now enumerates whatever the series returns; these tests pin that,
+    so a hand-written prefix cannot come back unnoticed.
+    """
+
+    def test_the_solver_claims_every_coefficient_the_series_returns(self,
+                                                                     sess):
+        from glm_universal.substrate import leech2
+        sol = sess.ask("report theta")
+        assert sol.ok, sol.error
+        coeffs = leech2.theta_series(order=sol.payload["order"])
+        assert set(sol.expected) == {f"coeff_{i}"
+                                     for i in range(len(coeffs))}
+        assert len(coeffs) == 6, "order=5 yields six coefficients"
+
+    def test_the_generated_script_enumerates_rather_than_lists(self, sess):
+        """The shape of the fix: a comprehension, not a written-out prefix."""
+        script = TE.build_trace(sess.ask("report theta")).script
+        assert "for i, c in enumerate(coeffs)" in script
+        assert '"coeff_0": str(coeffs[0])' not in script
+
+    def test_column_three_reproduces_every_coefficient(self, sess):
+        """The slow one: a fresh interpreter recomputes all six."""
+        sol = sess.ask("report theta")
+        trace = TE.verify_trace(TE.build_trace(sol), timeout=900)
+        verdict = trace.verdict
+        assert verdict.executed, verdict.stderr_tail
+        assert verdict.returncode == 0, verdict.stderr_tail
+        assert not verdict.mismatches, verdict.mismatches
+        assert not verdict.missing_keys, verdict.missing_keys
+        assert set(verdict.observed) == set(sol.expected)
+        assert verdict.observed["coeff_5"] == sol.expected["coeff_5"]
+        assert trace.verified

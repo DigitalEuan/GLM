@@ -15,8 +15,11 @@ answer -- not just that the system returns one.
 
 from __future__ import annotations
 
+from fractions import Fraction
+
 import pytest
 
+from glm_universal.runtime import tct_engine as tct
 from glm_universal.runtime.session import GeometricSession
 
 
@@ -206,6 +209,132 @@ class TestDescribeIncludesLatticeProjection:
 
 
 # ===========================================================================
+# 4b.  CLUSTER -- the linkage option (wires metric.complete_linkage)
+# ===========================================================================
+
+CLUSTER_QUERY = "cluster mass, force, energy, power into 2"
+
+
+class TestClusterLinkage:
+    """``complete_linkage`` existed but no query could ask for it."""
+
+    def test_single_linkage_is_the_default(self, sess):
+        sol = sess.ask(CLUSTER_QUERY)
+        assert sol.ok
+        assert sol.expected["linkage"] == "single"
+
+    @pytest.mark.parametrize("phrasing", [
+        CLUSTER_QUERY + " with complete linkage",
+        CLUSTER_QUERY + " linkage=complete",
+        CLUSTER_QUERY + " using furthest linkage",
+    ])
+    def test_complete_linkage_can_be_asked_for(self, sess, phrasing):
+        sol = sess.ask(phrasing)
+        assert sol.ok, sol.error
+        assert sol.expected["linkage"] == "complete"
+
+    def test_the_linkage_phrase_is_not_taken_for_a_concept(self, sess):
+        sol = sess.ask(CLUSTER_QUERY + " with complete linkage")
+        assert sol.expected["labels"] == str(
+            ["mass", "force", "energy", "power"])
+
+    def test_the_two_rules_disagree_on_this_pool(self, sess):
+        """If they agreed the option would be untestable, not merely unused."""
+        single = sess.ask(CLUSTER_QUERY)
+        complete = sess.ask(CLUSTER_QUERY + " with complete linkage")
+        assert single.expected["groups"] != complete.expected["groups"]
+
+    def test_complete_linkage_heights_are_never_below_single(self, sess):
+        """Furthest-neighbour merges can only cost more than nearest."""
+        single = eval(sess.ask(CLUSTER_QUERY).expected["merge_heights"])
+        complete = eval(sess.ask(
+            CLUSTER_QUERY + " with complete linkage").expected[
+                "merge_heights"])
+        assert len(single) == len(complete)
+        for lo, hi in zip(single, complete):
+            assert Fraction(lo) <= Fraction(hi)
+
+    def test_an_unknown_linkage_is_refused(self, sess):
+        sol = sess.ask(CLUSTER_QUERY)
+        sol.query.options["linkage"] = "average"
+        refused = sess.solve(sol.query)
+        assert not refused.ok
+        assert "linkage" in (refused.error or "")
+
+    def test_the_generated_script_reproduces_column_two(self, sess):
+        sol = sess.ask(CLUSTER_QUERY + " with complete linkage")
+        trace = tct.verify_trace(tct.build_trace(sol))
+        assert trace.verdict is not None
+        assert trace.verdict.executed
+        assert trace.verdict.matches_column2
+        assert trace.verdict.mismatches == ()
+
+
+# ===========================================================================
+# 4c.  PI GROUPS -- the last unwired reasoning module (v1.0.0)
+# ===========================================================================
+
+PI_QUERY = "pi groups force, mass, acceleration, length, time"
+
+
+class TestPiGroups:
+    """``valorani.buckingham_pi_groups`` had no query path at all."""
+
+    def test_the_query_parses_as_its_own_kind(self, sess):
+        sol = sess.ask(PI_QUERY)
+        assert sol.ok, sol.error
+        assert sol.kind == "pi_groups"
+
+    @pytest.mark.parametrize("phrasing", [
+        PI_QUERY,
+        "buckingham force, mass, acceleration, length, time",
+        "dimensionless groups force, mass, acceleration, length, time",
+    ])
+    def test_every_phrasing_reaches_the_same_answer(self, sess, phrasing):
+        assert sess.ask(phrasing).expected["pi_groups"] == sess.ask(
+            PI_QUERY).expected["pi_groups"]
+
+    def test_the_theorem_holds_on_this_set(self, sess):
+        """N quantities of rank M give N - M independent Pi groups."""
+        sol = sess.ask(PI_QUERY)
+        n = int(sol.expected["n_quantities"])
+        rank = int(sol.expected["rank"])
+        assert int(sol.expected["n_pi_groups"]) == n - rank
+
+    def test_newtons_second_law_is_one_of_the_groups(self, sess):
+        """F^-1 * m * a is dimensionless, and should be found."""
+        sol = sess.ask(PI_QUERY)
+        assert "force^(-1/1) * mass^(1/1) * acceleration^(1/1)" in sol.answer
+
+    def test_every_group_is_checked_to_be_dimensionless(self, sess):
+        sol = sess.ask(PI_QUERY)
+        assert sol.expected["all_dimensionless"] == "True"
+
+    def test_a_dimensionally_independent_set_has_no_groups(self, sess):
+        sol = sess.ask("pi groups length, mass, time")
+        assert sol.ok, sol.error
+        assert sol.expected["n_pi_groups"] == "0"
+        assert sol.expected["rank"] == "3"
+
+    def test_a_single_quantity_is_refused(self, sess):
+        sol = sess.ask("pi groups energy")
+        assert not sol.ok
+
+    def test_a_non_physics_carrier_is_refused(self, sess):
+        sol = sess.ask("pi groups carbon, oxygen")
+        assert not sol.ok
+        assert "physics" in (sol.error or "")
+
+    def test_the_generated_script_reproduces_column_two(self, sess):
+        sol = sess.ask(PI_QUERY)
+        trace = tct.verify_trace(tct.build_trace(sol))
+        assert trace.verdict is not None
+        assert trace.verdict.executed
+        assert trace.verdict.matches_column2
+        assert trace.verdict.mismatches == ()
+
+
+# ===========================================================================
 # 5.  Cross-query smoke tests
 # ===========================================================================
 
@@ -217,12 +346,40 @@ class TestNewQueryKindsSmoke:
         "coherence carbon",
         "coherence gravity",
         "coherence energy",
+        "pi groups energy, power, time",
     ])
     def test_query_succeeds(self, sess, query):
         """Each new query kind should succeed (or fail honestly)."""
         sol = sess.ask(query)
         # Either ok=True, or ok=False with a clear error message.
         assert sol.ok or sol.error, f"{query!r} returned no error message"
+
+
+# ===========================================================================
+# 6.  The package surface
+# ===========================================================================
+
+class TestPackageSurface:
+    """Every implemented subpackage is reachable from ``glm_universal``."""
+
+    def test_version_is_current(self):
+        import glm_universal as g
+        assert g.__version__ == "1.3.0"
+
+    @pytest.mark.parametrize("name", [
+        "substrate", "data_objects", "reasoning", "semantics", "runtime",
+        "migration", "benchmarks", "capabilities", "evaluation",
+    ])
+    def test_subpackage_is_exported_and_importable(self, name):
+        import glm_universal as g
+        assert name in g.__all__
+        module = getattr(g, name)
+        assert module.__name__ == f"glm_universal.{name}"
+
+    def test_unknown_attribute_still_raises(self):
+        import glm_universal as g
+        with pytest.raises(AttributeError):
+            g.no_such_subpackage
 
 
 if __name__ == "__main__":

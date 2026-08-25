@@ -52,7 +52,7 @@ NEW_CONCEPT_NAMES = (
     "transfer_function", "nyquist_frequency",
 )
 
-EXPECTED_COUNT = 720  # 660 original + 41 + 19 new
+EXPECTED_COUNT = 726  # 660 original + 41 + 19 + 6 new
 ADDED_COUNT = 41
 
 
@@ -63,7 +63,7 @@ class TestPhysicsAugmentation(unittest.TestCase):
         cls.register = load_physics_register()
         cls.codec = PhysicsCodec()
 
-    def test_register_size_is_720(self):
+    def test_register_size_is_726(self):
         self.assertEqual(len(self.register), EXPECTED_COUNT)
 
     def test_no_duplicate_names(self):
