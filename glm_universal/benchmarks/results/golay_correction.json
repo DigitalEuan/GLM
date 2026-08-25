@@ -1,0 +1,216 @@
+{
+  "baseline": "1/2325",
+  "findings": [
+    {
+      "detail": "One past the packing radius the nearest codeword stops being unique.  The decoder reports `ambiguous` and returns all six rather than picking one, so the boundary is visible to the caller instead of being hidden by a silent tie-break.",
+      "key": "weight_4_is_ambiguous",
+      "statement": "10626 of 10626 weight-4 patterns are equidistant from six codewords."
+    },
+    {
+      "detail": "A weight-5 error is the complement, inside a unique octad of the Steiner system S(5,8,24), of a weight-3 error, so the received word sits at distance 3 from the wrong codeword and 5 from the right one.  Every nearest-codeword rule is unique, confident and wrong here; the remedy is a declared channel radius, not a better decoder.  This is a null result for correction beyond the radius and is reported as one.",
+      "key": "weight_5_is_confidently_wrong",
+      "statement": "42504 of 42504 weight-5 patterns decode to a unique, wrong codeword."
+    }
+  ],
+  "measurements": {
+    "ambiguous_at_weight_4": "10626/10626",
+    "legacy_snap_correct": "2325/2325",
+    "linearity_spot_check": "True",
+    "miscorrected_at_weight_5": "42504/42504",
+    "patterns_scored": "2325"
+  },
+  "name": "golay_correction",
+  "outcomes": [
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "codeword, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 0 pattern 0x000000"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x000001"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x000002"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x000004"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x000008"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x000010"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x000020"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x000040"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x000080"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x000100"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x000200"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x000400"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x000800"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x001000"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x002000"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x004000"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x008000"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x010000"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x020000"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x040000"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x080000"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x100000"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x200000"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x400000"
+    },
+    {
+      "expected": "corrected to 0, uniquely, guaranteed",
+      "note": "",
+      "observed": "corrected, 1 candidate(s), guaranteed=True",
+      "passed": true,
+      "task": "weight 1 pattern 0x800000"
+    }
+  ],
+  "outcomes_note": "every failing outcome is written; passing outcomes are sampled to the first 25.  The score, the run id and the claims are computed from all 2325.",
+  "outcomes_total": 2325,
+  "outcomes_written": 25,
+  "passed": 2325,
+  "question": "Does the complete decoder correct every error the code guarantees, and say so when it cannot?",
+  "score": "1/1",
+  "tier": {
+    "baseline": "return the received word unchanged, which is right only when no error occurred: 1 of 2325",
+    "ground_truth": "the minimum distance of the binary Golay code is 8, so every pattern of weight at most 3 is nearer to the sent codeword than to any other -- a theorem, independent of the decoder under test",
+    "null_result": "any pattern inside the packing radius that decodes to the wrong codeword, or reports a tie",
+    "pass_criterion": "`decode_complete` returns exactly one nearest codeword, it is the sent one, and the decoding is flagged `guaranteed`",
+    "population": "every error pattern of Hamming weight 0, 1, 2 or 3 on 24 coordinates -- 1 + 24 + 276 + 2024 = 2325 patterns.  The code is linear, so decoding an error added to the zero codeword decides the same question for every codeword; the suite checks that invariance on a fixed non-zero codeword rather than assuming it.",
+    "tier": "exhaustive"
+  },
+  "total": 2325,
+  "verdict": "pass"
+}

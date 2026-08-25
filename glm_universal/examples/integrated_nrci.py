@@ -10,7 +10,9 @@ Elements: normalized measured properties.
 Words: semantic primitives.
 Physics: dimensional exponents.
 
-All values are exact. No floats in carriers. Floats only in NRCI (sqrt).
+All values are exact: the carriers are rationals, and so is the NRCI --
+its square roots are taken at the declared resolution of
+``coherence.rational_sqrt`` rather than in floating point.
 """
 
 from __future__ import annotations
@@ -38,7 +40,11 @@ def load_physics() -> Dict[str, Tuple[Fraction, ...]]:
 # 2.  NORMALIZED ELEMENT CARRIERS
 # ═════════════════════════════════════════════════════════════════════════
 
-_DATA_DIR = Path(__file__).resolve().parent / "data_objects" / "_data"
+#: The packaged data lives beside ``data_objects``, one level up from the
+#: examples directory -- resolve it from the package, not from this file's
+#: own directory, so the example runs from anywhere.
+_DATA_DIR = (Path(__file__).resolve().parent.parent
+             / "data_objects" / "_data")
 
 def _load_elements() -> List[dict]:
     with open(_DATA_DIR / "elements_118.json") as f:
@@ -160,8 +166,8 @@ def main():
     print("=" * 72)
     print("INTEGRATED TEST: NRCI Coherence + Griess Distance")
     print("=" * 72)
-    print(f"\nY = {coherence.Y_FLOAT:.10f}")
-    print(f"Q = Y + 1/8 = {float(coherence.Q):.10f}")
+    print(f"\nY = {coherence.Y_DECIMAL}")
+    print(f"Q = Y + 1/8 = {coherence.decimal_str(coherence.Q, 10)}")
     print(f"B = {float(coherence.B)}")
 
     # Load all three domains
@@ -185,7 +191,7 @@ def main():
     for name in test_physics:
         if name in physics:
             bd = coherence.nrci_breakdown(physics[name])
-            print(f"  {name:15s}: NRCI={bd['nrci']:.4f} ({bd['regime']:12s}) "
+            print(f"  {name:15s}: NRCI={coherence.decimal_str(bd['nrci'], 4)} ({bd['regime']:12s}) "
                   f"tax0={bd['shell0_golay']}")
 
     print("\n--- Griess distances (selected pairs) ---")
@@ -206,7 +212,7 @@ def main():
     for sym in test_elems:
         if sym in elements:
             bd = coherence.nrci_breakdown(elements[sym])
-            print(f"  {sym:3s}: NRCI={bd['nrci']:.4f} ({bd['regime']:12s}) "
+            print(f"  {sym:3s}: NRCI={coherence.decimal_str(bd['nrci'], 4)} ({bd['regime']:12s}) "
                   f"tax0={bd['shell0_golay']}")
 
     print("\n--- Griess distances (within groups) ---")
@@ -233,7 +239,7 @@ def main():
     for name in test_words:
         if name in words:
             bd = coherence.nrci_breakdown(words[name])
-            print(f"  {name:15s}: NRCI={bd['nrci']:.4f} ({bd['regime']:12s})")
+            print(f"  {name:15s}: NRCI={coherence.decimal_str(bd['nrci'], 4)} ({bd['regime']:12s})")
 
     print("\n--- Griess distances (physics words) ---")
     pw = ['energy', 'force', 'mass', 'velocity', 'acceleration', 'torque', 'power']
@@ -257,7 +263,7 @@ def main():
         elem_nrci.append((sym, n))
     elem_nrci.sort(key=lambda x: -x[1])
     for sym, n in elem_nrci[:10]:
-        print(f"  {sym:3s}: NRCI = {n:.4f}")
+        print(f"  {sym:3s}: NRCI = {coherence.decimal_str(n, 4)}")
 
     print("\n--- Top 10 most coherent words ---")
     word_nrci = []
@@ -266,7 +272,7 @@ def main():
         word_nrci.append((name, n))
     word_nrci.sort(key=lambda x: -x[1])
     for name, n in word_nrci[:10]:
-        print(f"  {name:15s}: NRCI = {n:.4f}")
+        print(f"  {name:15s}: NRCI = {coherence.decimal_str(n, 4)}")
 
     # ── The combined view: distance + coherence ────────────────────────
     print("\n--- Combined: element nearest to 'mass' with NRCI ---")
@@ -280,7 +286,7 @@ def main():
         ranked.sort(key=lambda x: x[1])
         print("  Rank  Sym  d^2(word,element)    NRCI(element)")
         for i, (sym, d2, n) in enumerate(ranked[:5]):
-            print(f"  {i+1:4d}  {sym:3s}  {float(d2):18.10f}  {n:.4f}")
+            print(f"  {i+1:4d}  {sym:3s}  {float(d2):18.10f}  {coherence.decimal_str(n, 4)}")
 
     # ── Leech lattice axes: NRCI on physical points ────────────────────
     print("\n" + "=" * 72)
@@ -295,26 +301,27 @@ def main():
         if hw == 2 and shown["A"] < 2:
             n = coherence.nrci(list(v))
             bd = coherence.nrci_breakdown(list(v))
-            print(f"  Class A (±4, 0^22): HW={hw}, NRCI={n:.4f}, "
-                  f"regime={bd['regime']}, shell4={bd['shell4_sextet_signed']:.4f}")
+            print(f"  Class A (±4, 0^22): HW={hw}, NRCI={coherence.decimal_str(n, 4)}, "
+                  f"regime={bd['regime']}, shell4={coherence.decimal_str(bd['shell4_sextet_signed'], 4)}")
             shown["A"] += 1
         elif hw == 8 and shown["B"] < 2:
             n = coherence.nrci(list(v))
             bd = coherence.nrci_breakdown(list(v))
-            print(f"  Class B (±2^8, 0^16): HW={hw}, NRCI={n:.4f}, "
-                  f"regime={bd['regime']}, shell4={bd['shell4_sextet_signed']:.4f}")
+            print(f"  Class B (±2^8, 0^16): HW={hw}, NRCI={coherence.decimal_str(n, 4)}, "
+                  f"regime={bd['regime']}, shell4={coherence.decimal_str(bd['shell4_sextet_signed'], 4)}")
             shown["B"] += 1
         elif hw == 24 and shown["C"] < 2:
             n = coherence.nrci(list(v))
             bd = coherence.nrci_breakdown(list(v))
-            print(f"  Class C (±3, ±1^23): HW={hw}, NRCI={n:.4f}, "
-                  f"regime={bd['regime']}, shell4={bd['shell4_sextet_signed']:.4f}")
+            print(f"  Class C (±3, ±1^23): HW={hw}, NRCI={coherence.decimal_str(n, 4)}, "
+                  f"regime={bd['regime']}, shell4={coherence.decimal_str(bd['shell4_sextet_signed'], 4)}")
             shown["C"] += 1
         if all(v >= 2 for v in shown.values()):
             break
 
     print("\n" + "=" * 72)
-    print("DONE — All values exact where possible. Floats only in NRCI (sqrt).")
+    print("DONE — All values exact rationals, NRCI included; the roots in "
+          "shells 2 and 4 are taken at a declared rational resolution.")
     print("=" * 72)
 
 

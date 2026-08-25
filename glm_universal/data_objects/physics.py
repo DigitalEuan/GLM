@@ -1,8 +1,8 @@
-"""Physics carriers: the 720-concept dimensional register in 24 dimensions.
+"""Physics carriers: the 726-concept dimensional register in 24 dimensions.
 
 The register
 ------------
-720 named physical quantities across 26 domains, ingested from
+726 named physical quantities across 26 domains, ingested from
 ``workflow/GLM/glm_lean/glm2/glm2_library.py`` and frozen into
 ``_data/physics_660.json`` as exact rationals.  Each concept carries a
 *meaning*: ten rational exponents on the EXT10 axes
@@ -165,7 +165,7 @@ def si7_projection_lossy(quantity: Quantity) -> bool:
 
 @lru_cache(maxsize=1)
 def load_physics_register() -> Tuple[Quantity, ...]:
-    """The 720 quantities, parsed once from the frozen snapshot."""
+    """The 726 quantities, parsed once from the frozen snapshot."""
     raw = json.loads(_DATA.read_text(encoding="utf-8"))
     if raw["axes_ext10"] != list(AXES_EXT10):
         raise AssertionError("physics snapshot axis order has drifted")

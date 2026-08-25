@@ -1,0 +1,114 @@
+{
+  "baseline": "1/4",
+  "findings": [
+    {
+      "detail": "none",
+      "key": "misses",
+      "statement": "0 of 12 analogies resolve to the wrong carrier."
+    }
+  ],
+  "measurements": {
+    "baseline_hits": "3/12",
+    "domain": "chemistry"
+  },
+  "name": "analogy_chemistry",
+  "outcomes": [
+    {
+      "expected": "Mg",
+      "note": "",
+      "observed": "Mg",
+      "passed": true,
+      "task": "Li : Na :: Be : ?"
+    },
+    {
+      "expected": "Ca",
+      "note": "",
+      "observed": "Ca",
+      "passed": true,
+      "task": "Na : K :: Mg : ?"
+    },
+    {
+      "expected": "P",
+      "note": "",
+      "observed": "P",
+      "passed": true,
+      "task": "C : Si :: N : ?"
+    },
+    {
+      "expected": "S",
+      "note": "",
+      "observed": "S",
+      "passed": true,
+      "task": "F : Cl :: O : ?"
+    },
+    {
+      "expected": "Mg",
+      "note": "",
+      "observed": "Mg",
+      "passed": true,
+      "task": "Li : Be :: Na : ?"
+    },
+    {
+      "expected": "S",
+      "note": "",
+      "observed": "S",
+      "passed": true,
+      "task": "N : O :: P : ?"
+    },
+    {
+      "expected": "Sr",
+      "note": "",
+      "observed": "Sr",
+      "passed": true,
+      "task": "K : Ca :: Rb : ?"
+    },
+    {
+      "expected": "Se",
+      "note": "",
+      "observed": "Se",
+      "passed": true,
+      "task": "Cl : Br :: S : ?"
+    },
+    {
+      "expected": "K",
+      "note": "",
+      "observed": "K",
+      "passed": true,
+      "task": "Ne : Ar :: Na : ?"
+    },
+    {
+      "expected": "Kr",
+      "note": "",
+      "observed": "Kr",
+      "passed": true,
+      "task": "He : Ne :: Ar : ?"
+    },
+    {
+      "expected": "Si",
+      "note": "",
+      "observed": "Si",
+      "passed": true,
+      "task": "B : Al :: C : ?"
+    },
+    {
+      "expected": "Ne",
+      "note": "",
+      "observed": "Ne",
+      "passed": true,
+      "task": "H : Li :: He : ?"
+    }
+  ],
+  "passed": 12,
+  "question": "Do periodic-table analogies resolve to the right element?",
+  "score": "1/1",
+  "tier": {
+    "baseline": "answer with the nearest carrier to C, ignoring the displacement A -> B entirely",
+    "ground_truth": "the periodic table: the answer is the element standing to C as B stands to A",
+    "null_result": "a score at or below that baseline, meaning the displacement carried no information",
+    "pass_criterion": "the solver's answer is that element's symbol, exactly",
+    "population": "12 four-term analogies over the 118-element register, each a move by one group or one period",
+    "tier": "curated"
+  },
+  "total": 12,
+  "verdict": "pass"
+}

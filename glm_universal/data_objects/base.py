@@ -57,7 +57,7 @@ from typing import (Any, Dict, Iterable, List, Mapping, Optional, Sequence,
                     Tuple, Union)
 
 from .. import substrate
-from ..substrate import digit_stack, leech2, mog
+from ..substrate import digit_stack, golay_decode, leech2, mog
 
 __all__ = [
     "N", "Scalar", "Carrier",
@@ -349,28 +349,30 @@ class DataObject:
     def golay_alignment(self) -> Dict[str, object]:
         """Nearest-structure report of plane 0 against the Golay code.
 
-        Reports the minimum Hamming distance from plane 0 to the ``[24,12,8]``
+        Reports the exact Hamming distance from plane 0 to the ``[24,12,8]``
         code and how many codewords attain it.  Distance ``0`` means plane 0
         *is* a codeword; the Golay code corrects up to three errors, so a
         distance above three has no unique nearest codeword and the count says
         so explicitly.
+
+        Computed by
+        :func:`glm_universal.substrate.golay_decode.decode_complete`, which
+        returns every minimum-weight coset leader rather than the first one a
+        scan reaches, so a tie is reported and never broken silently.
         """
         plane0 = self.stack().planes[0]
-        best = 24
-        winners: List[int] = []
-        for word in mog.GOLAY_MASKS:
-            d = bin(plane0 ^ word).count("1")
-            if d < best:
-                best, winners = d, [word]
-            elif d == best:
-                winners.append(word)
+        decoding = golay_decode.decode_complete(plane0)
+        winners = decoding.candidates
         return {
             "plane0_mask": f"0x{plane0:06x}",
-            "distance_to_code": best,
+            "distance_to_code": decoding.weight,
             "nearest_codeword_count": len(winners),
-            "uniquely_decodable": best <= 3 and len(winners) == 1,
+            "uniquely_decodable": (decoding.status != "ambiguous"
+                                   and decoding.guaranteed),
             "nearest_codeword": (f"0x{winners[0]:06x}" if len(winners) == 1
                                  else None),
+            "decode_status": decoding.status,
+            "decode_guaranteed": decoding.guaranteed,
         }
 
     # -- views -------------------------------------------------------------

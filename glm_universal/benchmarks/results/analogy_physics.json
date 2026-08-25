@@ -1,0 +1,127 @@
+{
+  "baseline": "0/1",
+  "findings": [
+    {
+      "detail": "The gap is the register's dimensional degeneracy: many quantities share an exponent vector, and which of them the metric returns is decided by the coordinates outside the exponent block, not by the analogy.",
+      "key": "name_level_score",
+      "statement": "Scored by name rather than by dimension the suite gets 4 of 13."
+    },
+    {
+      "detail": "It is not the displacement solver that reaches it.  The named-relation layer recognises that every EXT10 exponent of wavenumber is the negative of length's, names the step a reciprocal, and reflects time's exponent vector instead of translating it, which fixes the answer's dimension at T^-1 exactly.  The additive model is still unable to reach the case; it is no longer the only model on offer.",
+      "key": "reciprocal_relations_are_in_model",
+      "statement": "`length : wavenumber :: time : frequency` now holds."
+    }
+  ],
+  "measurements": {
+    "baseline_hits": "0/13",
+    "domain": "physics",
+    "name_level_hits": "4/13"
+  },
+  "name": "analogy_physics",
+  "outcomes": [
+    {
+      "expected": "force [L M T^-2]",
+      "note": "",
+      "observed": "drag_force [L M T^-2]",
+      "passed": true,
+      "task": "velocity : acceleration :: momentum : ?"
+    },
+    {
+      "expected": "volume [L^3]",
+      "note": "",
+      "observed": "litre [L^3]",
+      "passed": true,
+      "task": "length : area :: area : ?"
+    },
+    {
+      "expected": "area [L^2]",
+      "note": "",
+      "observed": "body_surface_area [L^2]",
+      "passed": true,
+      "task": "area : volume :: length : ?"
+    },
+    {
+      "expected": "force [L M T^-2]",
+      "note": "",
+      "observed": "drag_force [L M T^-2]",
+      "passed": true,
+      "task": "velocity : momentum :: acceleration : ?"
+    },
+    {
+      "expected": "force [L M T^-2]",
+      "note": "",
+      "observed": "drag_force [L M T^-2]",
+      "passed": true,
+      "task": "energy : power :: momentum : ?"
+    },
+    {
+      "expected": "acceleration [L T^-2]",
+      "note": "",
+      "observed": "acceleration [L T^-2]",
+      "passed": true,
+      "task": "length : velocity :: velocity : ?"
+    },
+    {
+      "expected": "momentum [L M T^-1]",
+      "note": "",
+      "observed": "four_momentum [L M T^-1]",
+      "passed": true,
+      "task": "power : energy :: force : ?"
+    },
+    {
+      "expected": "surface_tension [M T^-2]",
+      "note": "",
+      "observed": "adhesion_energy [M T^-2]",
+      "passed": true,
+      "task": "force : pressure :: energy : ?"
+    },
+    {
+      "expected": "charge_density [L^-3 T I]",
+      "note": "",
+      "observed": "charge_density [L^-3 T I]",
+      "passed": true,
+      "task": "mass : density :: charge : ?"
+    },
+    {
+      "expected": "mass_flow [M T^-1]",
+      "note": "",
+      "observed": "damping_coefficient [M T^-1]",
+      "passed": true,
+      "task": "volume : volumetric_flow :: mass : ?"
+    },
+    {
+      "expected": "entropy_production_rate [L^2 M T^-3 H^-1]",
+      "note": "",
+      "observed": "entropy_production_rate [L^2 M T^-3 H^-1]",
+      "passed": true,
+      "task": "energy : entropy :: power : ?"
+    },
+    {
+      "expected": "angular_velocity [T^-1 A]",
+      "note": "",
+      "observed": "angular_frequency [T^-1 A]",
+      "passed": true,
+      "task": "acceleration : angular_acceleration :: velocity : ?"
+    },
+    {
+      "expected": "frequency [T^-1]",
+      "note": "",
+      "observed": "frequency [T^-1]",
+      "passed": true,
+      "task": "length : wavenumber :: time : ?"
+    }
+  ],
+  "passed": 13,
+  "question": "Do dimensional analogies land in the right dimension?",
+  "score": "1/1",
+  "tier": {
+    "baseline": "answer with the nearest carrier to C, ignoring the displacement A -> B entirely, scored the same way",
+    "ground_truth": "SI dimensional analysis: the target quantity is named in the task and its exponent vector is read from the register, not from the solver",
+    "null_result": "a score at or below that baseline",
+    "pass_criterion": "the answer's EXT10 exponent vector equals the target's.  Name equality is reported as a separate measurement: many register entries share a dimension, so requiring a particular name would score the tie-break rather than the analogy",
+    "population": "13 four-term analogies over the physics register, each a standard dimensional relation (per unit time, per unit area, per unit temperature, times a length, and one reciprocal)",
+    "tier": "curated"
+  },
+  "total": 13,
+  "verdict": "pass"
+}

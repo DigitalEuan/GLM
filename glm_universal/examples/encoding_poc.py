@@ -36,7 +36,8 @@ F = Fraction
 # everything on the same scale.
 
 # Load the element data
-_DATA_DIR = Path(__file__).resolve().parent / "data_objects" / "_data"
+_DATA_DIR = (Path(__file__).resolve().parent.parent
+             / "data_objects" / "_data")
 _ELEMENTS_JSON = _DATA_DIR / "elements_118.json"
 
 def _load_elements() -> List[dict]:

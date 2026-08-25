@@ -32,7 +32,8 @@ F = Fraction
 # 1.  SCALED ELEMENT CARRIERS
 # ═════════════════════════════════════════════════════════════════════════
 
-_DATA_DIR = Path(__file__).resolve().parent / "data_objects" / "_data"
+_DATA_DIR = (Path(__file__).resolve().parent.parent
+             / "data_objects" / "_data")
 
 def _load_elements():
     with open(_DATA_DIR / "elements_118.json") as f:
@@ -276,13 +277,13 @@ def main():
     print("\n--- Elements ---")
     for sym in ['H', 'C', 'O', 'Fe', 'Au', 'He', 'Ne', 'Li', 'Na']:
         bd = coherence.nrci_breakdown(list(elements[sym]))
-        print(f"  {sym:3s}: NRCI={bd['nrci']:.4f} ({bd['regime']})")
+        print(f"  {sym:3s}: NRCI={coherence.decimal_str(bd['nrci'], 4)} ({bd['regime']})")
 
     print("\n--- Words ---")
     for name in ['energy', 'force', 'mass', 'velocity', 'water', 'electron',
                  'gravity', 'heavy', 'fast']:
         bd = coherence.nrci_breakdown(list(words[name]))
-        print(f"  {name:12s}: NRCI={bd['nrci']:.4f} ({bd['regime']})")
+        print(f"  {name:12s}: NRCI={coherence.decimal_str(bd['nrci'], 4)} ({bd['regime']})")
 
     # ── Carrier-space product on words ─────────────────────────────────
     print("\n" + "=" * 72)
@@ -307,7 +308,7 @@ def main():
             if best_d2 is None or d2 < best_d2:
                 best_d2, best_name = d2, name
         print(f"  {n1:12s} . {n2:12s} -> nearest: {best_name:12s} "
-              f"(d2={best_d2}), product_nrci={coh['product_nrci']:.4f}")
+              f"(d2={best_d2}), product_nrci={coherence.decimal_str(coh['product_nrci'], 4)}")
 
     # ── Carrier-space product on elements ──────────────────────────────
     print("\n" + "=" * 72)
@@ -330,7 +331,7 @@ def main():
             if best_d2 is None or d2 < best_d2:
                 best_d2, best_sym = d2, sym
         print(f"  {s1:2s} . {s2:2s} -> nearest: {best_sym:3s} "
-              f"(d2={best_d2}), product_nrci={coh['product_nrci']:.4f}")
+              f"(d2={best_d2}), product_nrci={coherence.decimal_str(coh['product_nrci'], 4)}")
 
     # ── Cross-domain: element . word ───────────────────────────────────
     print("\n" + "=" * 72)
@@ -357,7 +358,7 @@ def main():
             if best_d2 is None or d2 < best_d2:
                 best_d2, best_name, best_domain = d2, s, "element"
         print(f"  {sym:2s} . {wname:12s} -> nearest: {best_name:12s} "
-              f"({best_domain}), d2={best_d2}, nrci={coh['product_nrci']:.4f}")
+              f"({best_domain}), d2={best_d2}, nrci={coherence.decimal_str(coh['product_nrci'], 4)}")
 
     # ── Coherence-weighted distances ───────────────────────────────────
     print("\n" + "=" * 72)
@@ -369,11 +370,14 @@ def main():
     print(f"  {'Pair':30s} {'d^2':>12s} {'d_cw':>12s} {'NRCI diff':>10s}")
     for i, w1 in enumerate(pw):
         for w2 in pw[i+1:]:
-            d2 = float(metric.distance2(words[w1], words[w2]))
+            d2 = metric.distance2(words[w1], words[w2])
             dcw = coherence_weighted_distance(words[w1], words[w2])
             n1 = coherence.nrci(list(words[w1]))
             n2 = coherence.nrci(list(words[w2]))
-            print(f"  {w1+' . '+w2:30s} {d2:12.6f} {dcw:12.6f} {abs(n1-n2):10.4f}")
+            print(f"  {w1+' . '+w2:30s} "
+                  f"{coherence.decimal_str(d2, 6):>12s} "
+                  f"{coherence.decimal_str(dcw, 6):>12s} "
+                  f"{coherence.decimal_str(abs(n1 - n2), 4):>10s}")
 
     # ── Summary ────────────────────────────────────────────────────────
     print("\n" + "=" * 72)

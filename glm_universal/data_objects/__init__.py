@@ -1,6 +1,6 @@
 """``glm_universal.data_objects`` -- typed carriers over the substrate.
 
-Four domains, one carrier shape.  Every object in this package is a point of
+Five domains, one carrier shape.  Every object in this package is a point of
 ``Q^24`` with an exact 2-adic digit stack behind it, and every codec is held to
 the same two-legged losslessness contract described in :mod:`.base`:
 
@@ -20,6 +20,11 @@ Modules
     All 118 chemical elements with exact rational attributes, an explicit
     missingness mask, and a Golay address per element; plus 52 diatomic
     species with measured dissociation energies.
+``molecules``
+    Molecules as multi-carriers: a name and a formula are stored and nothing
+    else, the faithful representation is the bundle of the constituent
+    element carriers with their multiplicities, and the composite carrier
+    beside it is labelled a summary and checked for collisions.
 ``mathematics``
     Rational matrices, exact reflections, and ``GF(2)`` / ``GF(4)`` elements.
 ``lexicon``
@@ -36,7 +41,8 @@ appears even in serialisation.
 
 from __future__ import annotations
 
-from . import base, elements, lexicon, mathematics, physics, semantic_lexicon
+from . import (base, elements, lexicon, mathematics, molecules, physics,
+               semantic_lexicon)
 from .base import (Carrier, Codec, DataObject, RoundTripFailure, Scalar,
                    StackParameters, as_exact, carrier_from_json,
                    carrier_to_json, derive_dynamic_parameters, dyadic_exponent,
@@ -52,6 +58,12 @@ from .mathematics import (EXACT_SHAPES, MATRIX_LAYOUT, FieldElement,
                           FieldElementCodec, MatrixCodec, RationalMatrix,
                           Reflection, ReflectionCodec, compose_matrices,
                           mathematics_objects, reflect)
+from .molecules import (MOLECULE_FIELDS, MOLECULE_LAYOUT, MOLECULES,
+                        FormulaError, Molecule, MoleculeCodec,
+                        composite_collisions, format_formula,
+                        formula_from_bundle, load_molecule_register,
+                        molecule_bundle, molecule_by_name, molecule_objects,
+                        molecules_report, parse_formula)
 from .physics import (AXES_EXT10, AXES_SI7, PHYSICS_LAYOUT, PhysicsCodec,
                       Quantity, basis_collision_report, dimension_string,
                       load_physics_register, physics_objects,
@@ -64,7 +76,7 @@ from .semantic_lexicon import (MAX_SEMANTIC_RELATIONS, SEMANTIC_LAYOUT,
 
 __all__ = [
     "base", "physics", "elements", "mathematics", "lexicon",
-    "semantic_lexicon",
+    "semantic_lexicon", "molecules",
     # base
     "DataObject", "Codec", "StackParameters", "RoundTripFailure",
     "Carrier", "Scalar", "as_exact", "exact_vector",
@@ -79,6 +91,12 @@ __all__ = [
     "ElementCodec", "load_element_register", "load_diatomic_register",
     "element_objects", "element_by_symbol", "element_by_z", "period_of",
     "golay_address", "periodic_separation_report",
+    # molecules
+    "MOLECULE_LAYOUT", "MOLECULE_FIELDS", "MOLECULES", "FormulaError",
+    "Molecule", "MoleculeCodec", "parse_formula", "format_formula",
+    "molecule_by_name", "load_molecule_register", "molecule_objects",
+    "molecule_bundle", "formula_from_bundle", "composite_collisions",
+    "molecules_report",
     # mathematics
     "EXACT_SHAPES", "MATRIX_LAYOUT", "RationalMatrix", "Reflection",
     "FieldElement", "MatrixCodec", "ReflectionCodec", "FieldElementCodec",
@@ -104,6 +122,7 @@ def all_objects() -> dict:
     return {
         "physics": physics_objects(),
         "chemistry": element_objects(),
+        "molecules": molecule_objects(),
         "mathematics": mathematics_objects(),
         "lexicon": lex_objects,
         "lexicon_codec": lex_codec,

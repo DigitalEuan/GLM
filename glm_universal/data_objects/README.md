@@ -1,7 +1,20 @@
 # `glm_universal.data_objects` — typed carriers over the substrate
 
-**Status: implemented (Step 2).** Four domains, one carrier shape: every object
-here is a point of $\mathbb{Q}^{24}$ with an exact 2-adic digit stack behind it.
+**Parent:** [`../README.md`](../README.md) · **Repository root:**
+[`../../README.md`](../../README.md)
+
+**Status: implemented (Step 2), extended since.** Six domains, one carrier
+shape: every object here is a point of $\mathbb{Q}^{24}$ with an exact 2-adic
+digit stack behind it.
+
+As loaded by the runtime (`GeometricSession.register`), the registers are
+physics **726**, chemistry **118**, **51 molecules**, mathematics **22**,
+lexicon **95** (the semantic lexicon), spatial **28** — 1,040 carriers in all.
+The live counts are recomputed in [`../../FIGURES.md`](../../FIGURES.md) under
+*Registers*; `spatial` is built in the runtime rather than here. The tables
+below record the *verification sweep* over the frozen snapshots at the time it
+was run, and give the register sizes of that run; the sizes above are the
+current ones.
 
 All figures below were computed by
 `workflow/08_step2_data_objects_verification.py` and are recorded in
@@ -214,6 +227,53 @@ at 0 K (NIST CCCBDB) is available via `load_diatomic_register()`.
 
 ---
 
+## 4b. Molecules — 51 species, nothing tabulated but the formula
+
+`molecules.py` is the multi-carrier register. It answers the question the
+element register could not: how to say `C6H12O6` to the machine.
+
+**A molecule is held twice, because one holding cannot do both jobs.**
+
+| Holding | What it is | What it is good for |
+|---|---|---|
+| bundle | `((symbol, count, carrier), ...)` — one element carrier per distinct element, with its multiplicity | *faithful*: `formula_from_bundle` reads the formula straight back off it |
+| composite | one point of $\mathbb{Q}^{24}$ derived from the bundle | the geometry: distance, nearest, clustering |
+
+The composite is a **summary**, so it might collide. `composite_collisions`
+looks for two molecules sharing one composite and reports what it finds rather
+than assuming injectivity; measured over the register, all **51 composites and
+all 51 bundles are distinct — 0 collisions of either kind**.
+
+**Nothing is stored but a name and a formula.** All 19 derived fields —
+`atom_count`, `distinct_elements`, `molar_mass_u`, `electron_count`,
+`valence_electron_total`, `heaviest_z`, `lightest_z`, the four
+electronegativity fields, `degree_of_unsaturation`, `charge`, the C/H/O/N
+counts, `heteroatom_count`, `carbon_mass_fraction` — are computed from the
+element register when the carrier is built. Where the element register has a
+gap the value is *absent* and the missingness bit is set, exactly as for an
+element: `degree_of_unsaturation` is missing for 14 of the 51, and nothing is
+imputed.
+
+Layout: the 19 derived fields at coordinates 0–18, then `missing_mask` and the
+three composition bricks with their Golay codeword at 19–23.
+
+The formula grammar (`parse_formula`) reads counts, nested brackets, hydrates
+written with `.`, and a trailing charge: `H2O`, `Ca(OH)2`, `Fe2(SO4)3`,
+`CuSO4.5H2O`, `SO4 2-`. An unknown symbol is refused by name, never silently
+dropped. The register spans 17 distinct elements and includes 5 ions; the
+heaviest species is iron(III) sulfate at $199939/500$ u and the largest by atom
+count is sucrose at 45 atoms.
+
+```python
+objs, codec = do.molecule_objects()
+do.formula_from_bundle(do.molecule_bundle(do.molecule_by_name("glucose")))
+```
+
+See `report molecules` for the whole thing recomputed on demand, and
+`report chemistry coverage` for how sparse the element data underneath it is.
+
+---
+
 ## 5. Mathematics
 
 `RationalMatrix` — any $r \times c$ over $\mathbb{Q}$ with $rc \le 24$,
@@ -286,8 +346,10 @@ establish.
 | `base.py` | `DataObject`, `Codec`, `StackParameters`, `derive_dynamic_parameters`, `as_exact` |
 | `physics.py` | `Quantity`, `PhysicsCodec`, `basis_collision_report` |
 | `elements.py` | `Element`, `Diatomic`, `ElementCodec`, `golay_address`, `periodic_separation_report` |
+| `molecules.py` | `Molecule`, `MoleculeCodec`, `parse_formula`, `molecule_bundle`, `formula_from_bundle`, `composite_collisions`, `molecules_report` — the 51-species multi-carrier register |
 | `mathematics.py` | `RationalMatrix`, `Reflection`, `FieldElement` and their codecs |
-| `lexicon.py` | `Vocabulary`, `Concept`, `LexiconCodec` |
+| `lexicon.py` | `Vocabulary`, `Concept`, `LexiconCodec` (index-based, legacy; still tested, no longer loaded by the runtime) |
+| `semantic_lexicon.py` | `SemanticConcept`, `SemanticLexiconCodec` — the 95 meaning-based concepts the `lexicon` register actually holds: 10 semantic primitives in 1/8 gradations, POS, arity, up to four (predicate, object) slots, a 20-bit checksum |
 | `_data/` | Frozen exact-rational snapshots; regenerate with `workflow/08a_ingest_registers.py` |
 
 ## Depends on
@@ -297,8 +359,9 @@ establish.
 ## Verify
 
 ```bash
-uv run python -m pytest glm_universal/tests/test_data_objects.py -q
-uv run python workflow/08_step2_data_objects_verification.py
+PYTHONPATH=. python3 -m pytest glm_universal/tests/test_data_objects.py -q      # 81 tests
+PYTHONPATH=. python3 -m pytest glm_universal/tests/test_semantic_lexicon.py -q  # 39 tests
+PYTHONPATH=. python3 -m pytest glm_universal/tests/test_molecules.py -q         # 39 tests
 ```
 
 ---
@@ -336,8 +399,14 @@ encode data_objects correctly:
    standalone concept.  Future work: encode words as projections.
 
 6. **Register sizes (v0.6.0):**
-   - physics: 720 quantities (EXT10 + SI7 + metadata)
+   - physics: 726 quantities (EXT10 + SI7 + metadata)
    - chemistry: 118 elements (measured properties + Golay address)
    - mathematics: 22 objects (matrices, reflections, field elements)
    - lexicon: 95 semantic concepts (10 primitives + relations)
    - spatial: 28 MOG structures (trio, sextet, frame rows)
+
+7. **A domain that does not fit one carrier gets two holdings, not a
+   truncation.** The molecules register is the worked example of lesson 1:
+   a molecule cannot be squeezed into 24 coordinates without loss, so the
+   faithful bundle and the summary composite are both kept and the
+   summary is *tested* for collisions instead of being trusted.

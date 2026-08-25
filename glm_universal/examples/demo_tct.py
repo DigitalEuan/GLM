@@ -71,8 +71,8 @@ def demo_physics_distances():
             f"energy = (2, 1, -2, 0, 0, 0, 0, 0, 0, 0, ...)  [EXT10: L²MT⁻²]\n"
             f"  torque = (2, 1, -2, 0, 0, 0, 0, -1, 0, 0, ...) [EXT10: L²MT⁻²A⁻¹]\n"
             f"  d²(energy, torque) = {d2}\n"
-            f"  NRCI(energy) = {coherence.nrci(list(e)):.4f}\n"
-            f"  NRCI(torque) = {coherence.nrci(list(t)):.4f}"
+            f"  NRCI(energy) = {coherence.decimal_str(coherence.nrci(list(e)), 4)}\n"
+            f"  NRCI(torque) = {coherence.decimal_str(coherence.nrci(list(t)), 4)}"
         ),
         script_fn=lambda: _assert(d2 == F(3, 8), f"expected 3/8, got {d2}"),
     )
@@ -205,9 +205,9 @@ def demo_nrci_coherence():
             "making it more complex — Transitional regime."
         ),
         math=(
-            f"mass: NRCI = {m['nrci']:.4f}, regime = {m['regime']}\n"
+            f"mass: NRCI = {coherence.decimal_str(m['nrci'], 4)}, regime = {m['regime']}\n"
             f"  TAX = HW·Y + ‖v‖²/8 = {m['shell0_golay']}\n"
-            f"torque: NRCI = {t['nrci']:.4f}, regime = {t['regime']}\n"
+            f"torque: NRCI = {coherence.decimal_str(t['nrci'], 4)}, regime = {t['regime']}\n"
             f"  TAX = HW·Y + ‖v‖²/8 = {t['shell0_golay']}\n"
             f"mass is more coherent: {m['nrci'] > t['nrci']}"
         ),
@@ -234,7 +234,7 @@ def demo_dimension_projection():
         ),
         math=(
             f"energy carrier = (2, 1, -2, 0, 0, 0, 0, 0, 0, 0, ...)\n"
-            f"NRCI = {coherence.nrci(list(e)):.4f} ({coherence.coherence_regime(coherence.nrci(list(e)))})\n"
+            f"NRCI = {coherence.decimal_str(coherence.nrci(list(e)), 4)} ({coherence.coherence_regime(coherence.nrci(list(e)))})\n"
             f"Lattice projection: d² = {analogy.nearest_lattice_point(e).distance2}\n"
             f"Griess norm² = {metric.griess_norm2(e)}"
         ),
@@ -331,9 +331,9 @@ def main():
     print("=" * 72)
     print("GLM UNIVERSAL — Three Column Thinking Demonstration")
     print("=" * 72)
-    print(f"\nY = {float(coherence.Y):.10f}")
-    print(f"Q = Y + 1/8 = {float(coherence.Q):.10f}")
-    print(f"B = {float(coherence.B)}")
+    print(f"\nY = {coherence.Y_DECIMAL}")
+    print(f"Q = Y + 1/8 = {coherence.decimal_str(coherence.Q, 10)}")
+    print(f"B = {coherence.decimal_str(coherence.B, 1)}")
     print(f"Substrate: Golay [24,12,8] + Leech lattice Λ₂₄")
     print(f"Algebra: Griess V₂ (196,884 dims), Norton-Sakuma 2A")
     print(f"Reasoning: metric + NRCI + product + analogy + projection")
