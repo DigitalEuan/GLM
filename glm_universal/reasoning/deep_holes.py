@@ -92,10 +92,13 @@ Everything is exact ``Fraction`` / integer arithmetic.
 
 from __future__ import annotations
 
+from functools import lru_cache
+
 import math
 from fractions import Fraction
 from typing import Dict, List, Optional, Sequence, Tuple
 
+from ..derived import memo
 from ..substrate import leech2, mog
 from ..substrate.linalg import popcount
 from . import metric, niemeier, voronoi_walk
@@ -739,6 +742,7 @@ def _dodecad_vectors(limit: int = 60) -> List[Tuple[int, ...]]:
     return out
 
 
+@memo
 def octad_pair_hole() -> Dict[str, object]:
     """A deep hole built as the midpoint of two orthogonal octad vectors.
 
@@ -759,6 +763,7 @@ def octad_pair_hole() -> Dict[str, object]:
     raise RuntimeError("octad_pair_hole: no orthogonal pair of octads found")
 
 
+@memo
 def dodecad_triangle_hole() -> Dict[str, object]:
     """A deep hole built as the centroid of an equilateral lattice triangle.
 
@@ -783,6 +788,7 @@ def dodecad_triangle_hole() -> Dict[str, object]:
 # 4.  THE CENSUS -- HOLES REACHED BY WALKING
 # ===========================================================================
 
+@lru_cache(maxsize=None)
 def walked_hole(seed: int = 20260825, probes: int = 200,
                 patience: int = 40) -> Dict[str, object]:
     """One complete run of the process, start to finish.
@@ -842,6 +848,7 @@ def walked_hole(seed: int = 20260825, probes: int = 200,
     return summary
 
 
+@lru_cache(maxsize=None)
 def deep_hole_census(walks: int = 8, seed: int = 20260825, probes: int = 200,
                      patience: int = 40, constructions: bool = True
                      ) -> Dict[str, object]:
@@ -941,6 +948,7 @@ def deep_hole_census(walks: int = 8, seed: int = 20260825, probes: int = 200,
     }
 
 
+@lru_cache(maxsize=None)
 def deep_holes_report(walks: int = 8, probes: int = 200, patience: int = 40
                       ) -> Dict[str, object]:
     """Everything this module knows, recomputed on call."""

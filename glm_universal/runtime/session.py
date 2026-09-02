@@ -32,11 +32,16 @@ that are deliberately kept apart:
 
 The registers
 -------------
-Five come from :mod:`glm_universal.data_objects`: ``physics`` (726 quantities),
-``chemistry`` (118 elements), ``molecules`` (51 molecules and ions, every
-coordinate derived from the element register), ``mathematics`` (rational
-matrices, reflections and field elements) and ``lexicon`` (relational
-concepts).  A sixth, ``spatial``, is built here in :func:`spatial_objects`
+Seven come from :mod:`glm_universal.data_objects`:
+``physics`` (726 quantities), ``chemistry`` (118 elements),
+``molecules`` (51 molecules and ions, every coordinate derived from the
+element register), ``mathematics`` (rational matrices, reflections and
+field elements),
+``lexicon`` (relational concepts), ``harmonics`` (28 musical intervals as
+exact rational frequency ratios, every coordinate derived from the pair
+``(n, d)``) and ``economics`` (21 quoted prices as exact rationals, every
+coordinate derived from the price and its magnitude).  An eighth,
+``spatial``, is built here in :func:`spatial_objects`
 from the MOG's own structures -- the trio's three octads, the sextet's six
 tetrads, the four rows of the ``4 x 6`` frame, and the fifteen octads
 obtained as unions of tetrad pairs.  It is a presentation of the substrate,
@@ -45,6 +50,20 @@ not a new dataset, and every member is checked against
 
 Loading is lazy and cached: a session that only asks physics questions never
 pays for the element register, and no register is ever loaded twice.
+
+Where the solvers live
+----------------------
+One solver per query kind, and they are methods of :class:`GeometricSession`
+-- except the ``report <subject>`` family, which is forty-seven solvers and
+was two thirds of this file.  Those moved to
+:mod:`glm_universal.runtime.reports` in v1.12.0, one module per family named
+for the sub-package that computes it, each a mixin this class inherits.  What
+stays here is the dispatcher: :meth:`_solve_report` maps a subject, and its
+aliases, onto one of them, and :data:`REPORT_SUBJECTS` is still the one list
+of subject names.  The carriers a solver returns are in
+:mod:`glm_universal.runtime.solution` and the payload renderers in
+:mod:`glm_universal.runtime.payload`, both re-exported here, so
+``from ...session import Solution`` keeps working.
 
 Invariants
 ----------
@@ -58,61 +77,45 @@ operation on rationals, where ordinary ``+`` and ``-`` are used instead.
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass, field, replace
+from dataclasses import replace
 from fractions import Fraction
-from typing import (Any, Dict, List, Mapping, Optional, Sequence, Tuple)
+from typing import Dict, List, Optional, Sequence, Tuple
 
 from .. import data_objects as do
 from ..data_objects.base import DataObject
 from ..reasoning import analogy as an
 from ..reasoning import analogy_models as am
 from ..reasoning import coherence as co
-from ..reasoning import deep_holes as dhl
 from ..reasoning import dimension_layers as dl
-from ..reasoning import element_coverage as eco
 from ..reasoning import exact_real as xr
-from ..reasoning import facets as fa
-from ..reasoning import fwht_decode as fdc
-from ..reasoning import information_loss as il
+from ..reasoning import measure_view as mvw
 from ..reasoning import metric as me
-from ..reasoning import monster_stack as msk
-from ..reasoning import multires as mrs
 from ..reasoning import product as pr
 from ..reasoning import tasks as tk
 from ..reasoning import term_arithmetic as tar
-from ..reasoning import units as un
 from ..reasoning import valorani as va
 from ..reasoning import verifier as ve
 from ..substrate import digit_stack as ds
-from ..substrate import golay_decode as gdc
-from ..substrate import isomorphism as iso
-from ..substrate import leech_construct as lcs
 from ..substrate import leech2, mog
-from ..substrate import superposition as sup
-from ..migration import state as stm
-from ..migration import store as sto
-from ..semantics import audit as sau
+from .. import recipe as rcp
 from ..semantics import meaning as sme
 from ..semantics import reference as sre
 from ..semantics import relations as srl
 from . import parser as PA
 from .parser import ConceptIndex, Query, QueryError, parse_query
+from .payload import as_magnitude, jsonable
+from .reports import (DevelopmentReports, LanguageReports,
+                      LatticeGeometryReports, LedgerReports,
+                      MigrationReports, RecipeReports, RegisterReports,
+                      ResolutionReports, SemanticsReports,
+                      SignalReports, SubstrateReports)
+from .solution import (InferenceRecord, Solution, SolverError, Step, q)
 
 __all__ = [
     "SolverError", "DOMAINS", "DEFAULT_SUBSPACE", "REPORT_SUBJECTS",
     "TASKS", "Step", "Solution", "InferenceRecord", "GeometricSession",
     "spatial_objects", "q",
 ]
-
-
-class SolverError(ValueError):
-    """Raised when a well-formed query cannot be solved as asked.
-
-    Distinct from :class:`~glm_universal.runtime.parser.QueryError`, which is
-    about the shape of the string.  This is about the content: an operand that
-    names nothing in the register, a domain with no candidate pool, a class
-    label that is not of type 2.
-    """
 
 
 #: The canonical names of the subjects ``report <subject>`` understands.
@@ -127,6 +130,11 @@ REPORT_SUBJECTS: Tuple[str, ...] = (
     "infinite values", "capabilities", "analogies",
     "transform decoder", "deep holes", "units",
     "molecules", "chemistry coverage",
+    "blueprint", "reversible", "mantissa", "engine", "noise",
+    "signature", "drift", "catalog", "containers", "companion",
+    "lattices", "shells", "llvq", "harmony", "economics",
+    "lean", "directives", "pipeline", "escalation", "measure",
+    "names", "recipe", "language",
 )
 
 #: The canonical names of the worked end-to-end tasks ``task <name>`` runs.
@@ -135,7 +143,7 @@ TASKS: Tuple[str, ...] = ("grid", "physics", "concepts")
 #: The registers a session can load, in a fixed order.
 DOMAINS: Tuple[str, ...] = (
     "physics", "chemistry", "molecules", "mathematics", "lexicon",
-    "spatial",
+    "spatial", "harmonics", "economics",
 )
 
 #: The subspace an analogy uses when the query does not name one.  A raw
@@ -155,19 +163,22 @@ DEFAULT_SUBSPACE: Dict[str, Optional[str]] = {
     # rather than spelling.
     "lexicon": "lexicon.primitives",
     "spatial": None,
+    # As of v1.7.0.  An interval's carrier holds its numerator and
+    # denominator outright beside a dozen quantities derived from them, so a
+    # raw 24-coordinate difference would be decided by whichever interval
+    # happens to be written over the largest denominator.  ``None`` is left
+    # here deliberately rather than a subspace invented for the occasion:
+    # the harmony study reads intervals through their prime exponents, and
+    # says so in ``reasoning/harmony.tuning_vector``.
+    "harmonics": None,
+    # As of v1.7.0, and for the same reason as ``harmonics``.  A price
+    # carrier holds two magnitude buckets and two mantissas beside ten
+    # dimensional exponents, and the mantissas dominate a raw difference,
+    # so ``None`` is left here rather than a subspace invented for the
+    # occasion: the economics study reads prices through the whole vector
+    # and says so in ``reasoning/economics.price_vector``.
+    "economics": None,
 }
-
-
-def q(x: Any) -> str:
-    """Canonical ``"n/d"`` rendering of an exact scalar.
-
-    Every rational that crosses a module boundary in this package is written
-    this way -- in ``expected``, in the generated script, and in the JSON
-    export -- so that comparing two of them is a string comparison that cannot
-    silently succeed on a rounded value.
-    """
-    f = Fraction(x)
-    return f"{f.numerator}/{f.denominator}"
 
 
 # ===========================================================================
@@ -263,87 +274,15 @@ def spatial_objects() -> Tuple[DataObject, ...]:
 
 
 # ===========================================================================
-# 2.  SOLUTION CARRIERS
-# ===========================================================================
-
-@dataclass(frozen=True)
-class Step:
-    """One reasoning step, stated twice: in language and in exact algebra.
-
-    Attributes
-    ----------
-    label
-        A short stable identifier for the step, so a test can assert on the
-        presence of a step without matching prose.
-    language
-        Column 1: what this step does and why, in plain English.
-    mathematics
-        Column 2: the same step as an exact statement over ``Q``, ``Z`` or
-        ``F_2``.  Never an approximation and never a float.
-    """
-
-    label: str
-    language: str
-    mathematics: str
-
-    def as_dict(self) -> Dict[str, str]:
-        """A JSON-serialisable view."""
-        return {"label": self.label, "language": self.language,
-                "mathematics": self.mathematics}
-
-
-@dataclass(frozen=True)
-class Solution:
-    """What a solver returns: an answer plus everything needed to check it."""
-
-    query: Query
-    kind: str
-    answer: str
-    steps: Tuple[Step, ...] = ()
-    expected: Mapping[str, str] = field(default_factory=dict)
-    script_spec: Mapping[str, object] = field(default_factory=dict)
-    payload: Mapping[str, object] = field(default_factory=dict)
-    ok: bool = True
-    error: Optional[str] = None
-
-    def as_dict(self) -> Dict[str, object]:
-        """A JSON-serialisable view."""
-        return {
-            "query": self.query.as_dict(),
-            "kind": self.kind,
-            "answer": self.answer,
-            "steps": [s.as_dict() for s in self.steps],
-            "expected": dict(self.expected),
-            "script_spec": dict(self.script_spec),
-            "payload": dict(self.payload),
-            "ok": self.ok,
-            "error": self.error,
-        }
-
-
-@dataclass(frozen=True)
-class InferenceRecord:
-    """One entry of the session's history."""
-
-    index: int
-    raw_query: str
-    kind: str
-    domain: Optional[str]
-    answer: str
-    ok: bool
-
-    def as_dict(self) -> Dict[str, object]:
-        """A JSON-serialisable view."""
-        return {"index": self.index, "raw_query": self.raw_query,
-                "kind": self.kind, "domain": self.domain,
-                "answer": self.answer, "ok": self.ok}
-
-
-# ===========================================================================
 # 3.  THE SESSION
 # ===========================================================================
 
-class GeometricSession:
+class GeometricSession(SubstrateReports, LatticeGeometryReports,
+                       RegisterReports, ResolutionReports,
+                       SignalReports, LedgerReports,
+                       SemanticsReports, MigrationReports,
+                       DevelopmentReports, RecipeReports,
+                       LanguageReports):
     """A stateful geometric reasoning session over the loaded registers.
 
     Parameters
@@ -436,6 +375,10 @@ class GeometricSession:
             loaded, self._lexicon_codec = do.semantic_lexicon_objects()
         elif domain == "spatial":
             loaded = spatial_objects()
+        elif domain == "harmonics":
+            loaded = do.harmonic_objects()
+        elif domain == "economics":
+            loaded = do.economics_objects()
         else:  # pragma: no cover -- guarded by the constructor
             raise SolverError(f"register: no loader for {domain!r}")
         self._registers[domain] = tuple(loaded)
@@ -592,6 +535,19 @@ class GeometricSession:
             # coordinate, because no coordinate holds it.
             "real": self._solve_real,              # uses xr.parse_real
             "compare": self._solve_compare,        # uses xr.compare
+            # v1.5.0: a measure word read against a comparison class -- the
+            # only query kind whose answer is a magnitude derived from two
+            # registers at once, and whose refusals are register boundaries.
+            "measure": self._solve_measure,        # uses mvw.read, mvw.classify
+            # v1.9.0: the comparative form of the same reading -- a relation
+            # between two *uses*, which the words alone do not decide across
+            # comparison classes.
+            "comparative": self._solve_comparative,  # uses mvw.answer_comparative
+            # v1.11.0: one coordinate of one object, answered off the domain
+            # descriptions themselves -- the only query kind that holds no
+            # rule of its own, and whose refusals are a description's
+            # boundary rather than a register's.
+            "derive": self._solve_derive,          # uses rcp.ask
         }
         solver = table.get(query.kind)
         if solver is None:
@@ -1065,6 +1021,35 @@ class GeometricSession:
             detail = (f"A MOG {obj.attributes.get('kind')} of weight "
                       f"{obj.attributes.get('weight')} at mask "
                       f"{obj.attributes.get('mask')}.")
+        elif obj.domain == "harmonics":
+            attrs = obj.attributes or {}
+            error = attrs.get("tet_error")
+            detail = (
+                f"The interval {attrs.get('numerator')}/"
+                f"{attrs.get('denominator')}, exactly: a "
+                f"{attrs.get('prime_limit')}-limit ratio of Euler gradus "
+                f"{attrs.get('euler_gradus')} and Tenney height "
+                f"{attrs.get('product_complexity')}.  The nearest "
+                f"12-tone equal step is {attrs.get('tet_step')}, decided by "
+                f"integer comparison rather than by a logarithm, and "
+                + ("that step is the interval itself."
+                   if error == 1 else
+                   f"equal temperament misses it by {error}, which is not "
+                   f"1 and -- by "
+                   f"RequestProject/GLM/Harmony.lean -- never can be."))
+        elif obj.domain == "economics":
+            attrs = obj.attributes or {}
+            detail = (
+                f"The quoted price {attrs.get('price')} of "
+                f"{attrs.get('priced_quantity')} in "
+                f"{attrs.get('quoting_unit')}, as an exact rational.  Its "
+                f"base-2 magnitude bucket is {obj.carrier[2]} and its "
+                f"base-10 bucket {obj.carrier[3]}, each the unique integer "
+                f"k with base^k <= price < base^(k+1), decided by integer "
+                f"comparison rather than by a logarithm and proved unique "
+                f"in RequestProject/GLM/LogBucket.lean.  Source: "
+                f"{attrs.get('reference_source')}, retrieved "
+                f"{attrs.get('retrieval_date')}.")
         elif obj.domain == "lexicon":
             # The lexicon register now carries SemanticConcepts.  The
             # carrier's attributes include the primitives the caller set,
@@ -1178,7 +1163,7 @@ class GeometricSession:
                          "args": {"domain": obj.domain, "name": obj.name}},
             payload={"address": address,
                      "facet_signature": obj.facet_signature(),
-                     "attributes": _jsonable(obj.attributes),
+                     "attributes": jsonable(obj.attributes),
                      **lattice_payload})
 
     # ------------------------------------------------------------------
@@ -1188,7 +1173,8 @@ class GeometricSession:
     def _solve_nearest(self, query: Query) -> Solution:
         if not query.operands:
             raise SolverError("nearest: no reference concept named")
-        obj = self.resolve(query.operands[0], query.domain)
+        obj, formula = self._resolve_or_parse_molecule(query.operands[0],
+                                                       query.domain)
         domain = obj.domain
         limit = int(query.options.get("limit", 5))
         if limit < 1:
@@ -1212,9 +1198,18 @@ class GeometricSession:
 
         steps = [
             Step("reference",
-                 f"Take {obj.name} from the {domain} register as the query "
-                 f"point.",
-                 f"query = {obj.name} in Q^24"),
+                 (f"Take {obj.name} from the {domain} register as the query "
+                  f"point.") if formula is None else
+                 (f"{query.operands[0]!r} names no carrier in the register, "
+                  f"so it is read as a chemical formula: parsed into an "
+                  f"exact composition and encoded into the same 24 "
+                  f"coordinates a registered molecule uses, with every "
+                  f"coordinate derived from the element register."),
+                 f"query = {obj.name} in Q^24"
+                 + ("" if formula is None else
+                    f", built from the formula {formula!r}: "
+                    f"{obj.attributes['composition']}, "
+                    f"charge {obj.attributes['charge']}")),
             Step("subspace",
                  (f"Compare only in the {subspace!r} coordinates."
                   if subspace else
@@ -1245,9 +1240,62 @@ class GeometricSession:
             steps=tuple(steps), expected=expected,
             script_spec={"template": "nearest",
                          "args": {"domain": domain, "name": obj.name,
-                                  "limit": limit, "subspace": subspace}},
+                                  "limit": limit, "subspace": subspace,
+                                  "formula": formula}},
             payload={"ranked": [[n, q(d)] for n, d in top],
-                     "pool_size": len(pool), "subspace": subspace})
+                     "pool_size": len(pool), "subspace": subspace,
+                     "formula": formula,
+                     "unregistered": formula is not None})
+
+    def _resolve_or_parse_molecule(
+            self, surface: str,
+            domain: Optional[str] = None) -> Tuple[DataObject, Optional[str]]:
+        """Resolve a surface form, falling back to the formula parser.
+
+        The register enumerates 51 molecules and a formula names indefinitely
+        many, so an operand that no register knows is offered to the molecule
+        formula parser before the query is refused.  Returns the carrier and,
+        when it was built rather than looked up, the formula it was built
+        from.
+        """
+        try:
+            return self.resolve(surface, domain), None
+        except SolverError:
+            if domain is not None and domain != "molecules":
+                raise
+            try:
+                obj = do.object_from_formula(surface)
+            except (do.FormulaError, ValueError, KeyError):
+                raise SolverError(
+                    f"resolve: {surface!r} names no carrier in "
+                    f"{domain or 'any enabled domain'}, and does not parse "
+                    f"as a chemical formula either") from None
+            return obj, surface
+
+    @staticmethod
+    def _formula_steps(built: Sequence[Tuple[str, DataObject,
+                                             Optional[str]]]) -> List[Step]:
+        """One step for each operand that had to be built from a formula.
+
+        ``built`` holds ``(surface, object, formula)`` triples as returned by
+        :meth:`_resolve_or_parse_molecule`; the entries whose formula is
+        ``None`` were register look-ups and say nothing here.
+        """
+        steps: List[Step] = []
+        for surface, obj, formula in built:
+            if formula is None:
+                continue
+            steps.append(Step(
+                f"carrier_{obj.name}",
+                f"{surface!r} names no carrier in the register, so it is "
+                f"read as a chemical formula: parsed into an exact "
+                f"composition and encoded into the same 24 coordinates a "
+                f"registered molecule uses, with every coordinate derived "
+                f"from the element register.",
+                f"{obj.name} built from the formula {formula!r}: "
+                f"{obj.attributes['composition']}, "
+                f"charge {obj.attributes['charge']}"))
+        return steps
 
     # ------------------------------------------------------------------
     # 3e.  product -- the Norton-Sakuma 2A algebra
@@ -1346,7 +1394,10 @@ class GeometricSession:
             raise SolverError(
                 f"cluster: need at least two carriers, got "
                 f"{list(query.operands)}")
-        objs = [self.resolve(name, query.domain) for name in query.operands]
+        resolved = [self._resolve_or_parse_molecule(name, query.domain)
+                    for name in query.operands]
+        objs = [obj for obj, _formula in resolved]
+        formulas = [formula for _obj, formula in resolved]
         domains = sorted({o.domain for o in objs})
         if len(domains) > 1:
             raise SolverError(
@@ -1368,10 +1419,16 @@ class GeometricSession:
                 f"cluster: k must be between 1 and {len(labels)}, got {k}")
         groups = me.cut_tree(tree, k)
 
+        built = [labels[i] for i, f in enumerate(formulas) if f is not None]
         steps = [
             Step("carriers",
                  f"Cluster {len(labels)} carriers from the {domains[0]} "
-                 f"register: {labels}.",
+                 f"register: {labels}."
+                 + ("" if not built else
+                    f"  {len(built)} of them name no register entry and are "
+                    f"built from their chemical formulae instead, every "
+                    f"coordinate derived from the element register: "
+                    f"{built}."),
                  f"labels = {labels}"),
             Step("metric",
                  "Merge heights are exact squared Griess distances, so the "
@@ -1408,8 +1465,11 @@ class GeometricSession:
             steps=tuple(steps), expected=expected,
             script_spec={"template": "cluster",
                          "args": {"domain": domains[0], "names": labels,
-                                  "k": k, "linkage": linkage}},
-            payload={"dendrogram": tree.as_dict()})
+                                  "k": k, "linkage": linkage,
+                                  "formulas": formulas}},
+            payload={"dendrogram": tree.as_dict(),
+                     "formulas": formulas,
+                     "unregistered": built})
 
     # ------------------------------------------------------------------
     # 3g.  spatial -- the MOG presentation of a carrier
@@ -1418,7 +1478,8 @@ class GeometricSession:
     def _solve_spatial(self, query: Query) -> Solution:
         if not query.operands:
             raise SolverError("spatial: no carrier named")
-        obj = self.resolve(query.operands[0], query.domain)
+        obj, formula = self._resolve_or_parse_molecule(query.operands[0],
+                                                       query.domain)
         stack = obj.stack()
         plane0 = stack.planes[0]
         grid = mog.frame(plane0)
@@ -1429,8 +1490,13 @@ class GeometricSession:
 
         steps = [
             Step("carrier",
-                 f"Take {obj.name} from the {obj.domain} register and read "
-                 f"its digit plane 0 as a 24-bit mask.",
+                 (f"Take {obj.name} from the {obj.domain} register and read "
+                  f"its digit plane 0 as a 24-bit mask.") if formula is None
+                 else
+                 (f"{query.operands[0]!r} names no carrier in the register, "
+                  f"so it is read as a chemical formula and encoded into the "
+                  f"same 24 coordinates a registered molecule uses; its "
+                  f"digit plane 0 is then read as a 24-bit mask."),
                  f"plane0 = 0x{plane0:06x}, weight = "
                  f"{bin(plane0).count('1')}"),
             Step("frame",
@@ -1473,10 +1539,13 @@ class GeometricSession:
                    f"{distance}",
             steps=tuple(steps), expected=expected,
             script_spec={"template": "spatial",
-                         "args": {"domain": obj.domain, "name": obj.name}},
+                         "args": {"domain": obj.domain, "name": obj.name,
+                                  "formula": formula}},
             payload={"facet_signature": signature,
                      "cube_profile": cube,
-                     "grid": [[int(b) for b in row] for row in grid]})
+                     "grid": [[int(b) for b in row] for row in grid],
+                     "formula": formula,
+                     "unregistered": formula is not None})
 
     # ------------------------------------------------------------------
     # 3h.  project -- the layered projection of two carriers (v0.5.3)
@@ -1492,14 +1561,18 @@ class GeometricSession:
     def _solve_project(self, query: Query) -> Solution:
         if len(query.operands) < 2:
             raise SolverError("project: needs two operands, A and B")
-        a = self.resolve(query.operands[0], query.domain)
-        b = self.resolve(query.operands[1], query.domain)
+        a, formula_a = self._resolve_or_parse_molecule(query.operands[0],
+                                                       query.domain)
+        b, formula_b = self._resolve_or_parse_molecule(query.operands[1],
+                                                       query.domain)
         # Walk every layer from substrate up to universal.
         result = dl.escalate(a.carrier, b.carrier, start=0)
         all_views = result["all_views"]
         final_layer = result["layer"]
 
-        steps = [
+        steps = self._formula_steps(
+            ((query.operands[0], a, formula_a),
+             (query.operands[1], b, formula_b))) + [
             Step("escalate",
                  f"Projecting {a.name} and {b.name} through the dimension "
                  f"layers: each layer perceives the pair at its own "
@@ -1545,10 +1618,16 @@ class GeometricSession:
             steps=tuple(steps), expected=expected,
             script_spec={"template": "project",
                          "args": {"domain_a": a.domain, "name_a": a.name,
-                                  "domain_b": b.domain, "name_b": b.name}},
+                                  "domain_b": b.domain, "name_b": b.name,
+                                  "formula_a": formula_a,
+                                  "formula_b": formula_b}},
             payload={"all_views": [(name, str(va), str(vb), str(d))
                                     for name, va, vb, d in all_views],
-                     "final_layer": final_layer.name})
+                     "final_layer": final_layer.name,
+                     "formula_a": formula_a, "formula_b": formula_b,
+                     "unregistered": [n for n, f in
+                                      ((a.name, formula_a), (b.name, formula_b))
+                                      if f is not None]})
 
     @staticmethod
     def _describe_view(view) -> str:
@@ -1779,7 +1858,12 @@ class GeometricSession:
     def _solve_coherence(self, query: Query) -> Solution:
         if not query.operands:
             raise SolverError("coherence: no concept named")
-        obj = self.resolve(query.operands[0], query.domain)
+        # v1.4.0: the coherence solver takes a carrier and nothing else, so
+        # an operand no register enumerates is offered to the molecule
+        # formula parser before the query is refused -- the same
+        # fall-through `nearest` and `describe` already had.
+        obj, formula = self._resolve_or_parse_molecule(query.operands[0],
+                                                       query.domain)
         carrier = list(obj.carrier)
 
         # nrci_breakdown returns a dict with per-shell taxes and the
@@ -1808,7 +1892,8 @@ class GeometricSession:
                       "shell4_sextet_signed")
         shell_renders = {k: _render_shell(breakdown[k]) for k in shell_keys}
 
-        steps = [
+        steps = self._formula_steps(
+            ((query.operands[0], obj, formula),)) + [
             Step("nrci",
                  f"NRCI is the GLM's coherence measure: how structured, "
                  f"non-random a carrier is.  It runs from 0 (subcoherent) "
@@ -1847,10 +1932,13 @@ class GeometricSession:
                    f"{co.decimal_str(nrci_value, 4)} ({regime})",
             steps=tuple(steps), expected=expected,
             script_spec={"template": "coherence",
-                         "args": {"domain": obj.domain, "name": obj.name}},
+                         "args": {"domain": obj.domain, "name": obj.name,
+                                  "formula": formula}},
             payload={"breakdown": {k: _render_shell(v)
                                     for k, v in breakdown.items()},
-                     "regime": regime})
+                     "regime": regime,
+                     "formula": formula,
+                     "unregistered": formula is not None})
 
     # ------------------------------------------------------------------
     # 3k.  report -- on-demand recomputation of facts (v0.5.4)
@@ -1890,6 +1978,86 @@ class GeometricSession:
         if subject in ("information loss", "loss", "boundaries",
                          "boundary", "information_loss"):
             return self._report_information_loss(query)
+        if subject in ("blueprint", "unification blueprint", "claims",
+                         "claim ledger", "ledger", "audit"):
+            return self._report_blueprint(query)
+        if subject in ("reversible", "reversibility", "gray", "gray code",
+                         "toffoli", "fredkin", "solitons", "kinks"):
+            return self._report_reversible(query)
+        if subject in ("mantissa", "ptb", "aoo", "float", "floats",
+                         "metrology", "ieee754", "ieee-754"):
+            return self._report_mantissa(query)
+        if subject in ("engine", "tdce", "carrier engine", "gearbox",
+                         "radiator", "turbocharger", "multi-fuel"):
+            return self._report_engine(query)
+        if subject in ("noise", "wobble", "wiggle", "dither", "cascade",
+                         "noise lab", "noise_lab"):
+            return self._report_noise(query)
+        if subject in ("lattices", "lattice", "higher lattices",
+                         "higher_lattices", "barnes-wall", "barnes wall",
+                         "32", "48", "extremal", "ladder"):
+            return self._report_lattices(query)
+        if subject in ("shells", "shell", "shell sigma", "shell_sigma",
+                         "gibbs", "leech noise", "leech sigma",
+                         "lattice alphabet"):
+            return self._report_shells(query)
+        if subject in ("llvq", "llvq table", "llvq_table", "lookup table",
+                         "quantiser", "quantizer", "class table",
+                         "hexacode"):
+            return self._report_llvq(query)
+        if subject in ("harmony", "harmonics", "music", "intervals",
+                         "tuning", "temperament", "consonance"):
+            return self._report_harmony(query)
+        if subject in ("economics", "economic", "prices", "price",
+                         "market", "markets", "price discovery"):
+            return self._report_economics(query)
+        if subject in ("escalation", "escalation at scale", "at scale",
+                         "scale", "registers", "ceiling", "resolution"):
+            return self._report_escalation(query)
+        if subject in ("names", "name", "name coordinate", "name_coordinate",
+                         "naming", "resolution ceiling"):
+            return self._report_names(query)
+        if subject in ("measure", "measure words", "measure view",
+                         "relative measure", "comparison classes",
+                         "comparison class", "scales",
+                         "denotation", "denotations", "residue",
+                         "related_to", "vocabulary"):
+            return self._report_measure(query)
+        if subject in ("recipe", "recipes", "descriptions", "description",
+                         "domain description", "domain descriptions",
+                         "regeneration", "generic path"):
+            return self._report_recipe(query)
+        if subject in ("language", "question", "questions",
+                         "question shapes", "question shape", "surface",
+                         "surface language", "phrasing", "phrasings"):
+            return self._report_language(query)
+        if subject in ("lean", "lean addresses", "lean address",
+                         "declarations", "address book", "addresses"):
+            return self._report_lean(query)
+        if subject in ("directives", "directive", "standing orders",
+                         "rules", "working practice"):
+            return self._report_directives(query)
+        if subject in ("pipeline", "stages", "study pipeline",
+                         "readiness", "board"):
+            return self._report_pipeline(query)
+        if subject in ("signature", "spectral", "spectral signature",
+                         "wobble signature", "sturmian", "resonance",
+                         "oscillator", "snr"):
+            return self._report_signature(query)
+        if subject in ("drift", "iteration drift", "prime drift",
+                         "orbit drift", "divergence", "drift ladder"):
+            return self._report_drift(query)
+        if subject in ("catalog", "catalogue", "study catalog",
+                         "study catalogue", "findings", "study findings",
+                         "external studies"):
+            return self._report_catalog(query)
+        if subject in ("containers", "container", "generators",
+                         "generators and containers", "hull census",
+                         "convergence"):
+            return self._report_containers(query)
+        if subject in ("companion", "companion studies", "companion study",
+                         "preprints", "iteration study", "lattice survey"):
+            return self._report_companion(query)
         if subject in ("golay decoding", "golay", "decoder", "decoding",
                          "golay_decode", "coset"):
             return self._report_golay_decoding(query)
@@ -2189,1843 +2357,6 @@ class GeometricSession:
                                   "ladder": list(self.COMPARE_LADDER)}},
             payload={"order": order, "settled_at": settled_at})
 
-    def _report_infinite_values(self, query: Query) -> Solution:
-        """Wires xr.exact_real_report -- what the machine does with infinities.
-
-        Three claims, each recomputed: irrational values are reached as
-        processes; the dynamic carrier's one-dimensional bound is exact; and
-        in twenty-four dimensions the reachable set is the convex hull of the
-        code, with a certificate for a target outside it.
-        """
-        report = xr.exact_real_report()
-        runs = ", ".join(f"N={steps} err={error}"
-                         for steps, error, _ok in report["delta_sigma_runs"])
-
-        steps = [
-            Step("the wall",
-                 "A carrier is a tuple of rationals and a digit stack is "
-                 "finite, so the set of values either can hold is countable "
-                 "while the reals are not.  No representation the machine "
-                 "could adopt separates all real targets -- "
-                 "GLM.Info.no_countable_layer_lossless.",
-                 f"sqrt(2) to 2**-40 = {report['sqrt2_at_40']}; "
-                 f"its square misses 2 by {report['sqrt2_squared_error']}"),
-            Step("through it, by process",
-                 "A real is held as a function from precision to rational. "
-                 "Constants are produced to any precision asked for, and "
-                 "each is checked against a relation it must satisfy.",
-                 f"sqrt(2) = {report['sqrt2_decimal_20']}, "
-                 f"pi = {report['pi_decimal_20']}, "
-                 f"e = {report['e_decimal_20']}, "
-                 f"phi = {report['phi_decimal_20']}"),
-            Step("the tower's stand-ins",
-                 "Each level of the dyadic tower holds a rational carrier "
-                 "indistinguishable from the target at that resolution, and "
-                 "each is exposed at a higher level: true up to a point, then "
-                 "superseded.",
-                 f"levels 0..{report['levels'] - 1}: "
-                 f"{', '.join(report['stand_ins'])}; exposed at "
-                 f"{report['stand_in_exposed_at']}"),
-            Step("the dynamic carrier, in one dimension",
-                 "The modulator's time average is within 1/N of the target "
-                 "after N ticks, exactly as proved.  No random, no float.",
-                 f"{runs}; law holds {report['delta_sigma_law_holds']}; "
-                 f"deterministic {report['delta_sigma_deterministic']}"),
-            Step("and in twenty-four",
-                 "Every state the 24-D carrier emits is a codeword, so its "
-                 "reachable set is the convex hull of the code.  The all-1/2 "
-                 "vector is inside it and is held exactly; the ramp target "
-                 "i/24 is outside it, and a separating functional verified "
-                 "against all 4,096 codewords proves no quantiser can hold "
-                 "it -- GLM.Info.not_tendsto_avg_of_separating.",
-                 f"reachable deviation {report['golay_reachable_deviation']}; "
-                 f"unreachable deviation {report['golay_average_deviation']} "
-                 f"with accumulator {report['golay_max_accumulator']}; "
-                 f"certificate {report['golay_unreachable_certified']} "
-                 f"(gap {report['golay_certificate_gap']})"),
-            Step("what is still not possible",
-                 "Equality of two processes is undecidable, and the machine "
-                 "reports 'not yet distinguished' rather than guessing. "
-                 "Inequality is decidable.",
-                 f"equality undecided {report['equality_undecided']}; "
-                 f"inequality decided {report['inequality_decided']}"),
-        ]
-
-        expected = {
-            "sqrt2_decimal_20": report["sqrt2_decimal_20"],
-            "pi_decimal_20": report["pi_decimal_20"],
-            "e_decimal_20": report["e_decimal_20"],
-            "phi_decimal_20": report["phi_decimal_20"],
-            "delta_sigma_law_holds": str(report["delta_sigma_law_holds"]),
-            "delta_sigma_deterministic": str(
-                report["delta_sigma_deterministic"]),
-            "no_stand_in_is_the_target": str(
-                report["no_stand_in_is_the_target"]),
-            "golay_reachable_deviation": str(
-                report["golay_reachable_deviation"]),
-            "golay_within_one_over_n": str(report["golay_within_one_over_n"]),
-            "golay_unreachable_certified": str(
-                report["golay_unreachable_certified"]),
-            "equality_undecided": str(report["equality_undecided"]),
-            "inequality_decided": str(report["inequality_decided"]),
-        }
-
-        return Solution(
-            query=query, kind="report",
-            answer=f"report infinite values: sqrt(2) = "
-                   f"{report['sqrt2_decimal_20']}, pi = "
-                   f"{report['pi_decimal_20']}; the 1/N law holds "
-                   f"{report['delta_sigma_law_holds']}; the 24-D carrier "
-                   f"holds the all-1/2 target exactly and provably cannot "
-                   f"hold the ramp target "
-                   f"({report['golay_unreachable_certified']}); equality of "
-                   f"processes stays undecidable "
-                   f"({report['equality_undecided']})",
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_infinite_values", "args": {}},
-            payload={"report": {key: str(value)
-                                for key, value in report.items()}})
-
-    def _report_capabilities(self, query: Query) -> Solution:
-        """Wires capabilities.capability_report -- what works and what stops.
-
-        Each probe states a capability in a user's words and comes back either
-        holding, with how far it was pushed, or breaking, with the place it
-        stops.  A probe whose verdict differs from what was expected is
-        surfaced as a surprise rather than buried.
-        """
-        from .. import capabilities as cap
-        report = cap.capability_report()
-        areas = ", ".join(
-            f"{area} {counts['holds']}/{counts['holds'] + counts['breaks']}"
-            for area, counts in report["by_area"].items())
-        boundary_lines = "; ".join(
-            f"{b['name']}" for b in report["boundaries"])
-
-        steps = [
-            Step("what was asked",
-                 f"{report['probes']} capability probes, each a question a "
-                 f"user might ask of the machine, put to the real code.  A "
-                 f"probe that breaks is a located boundary, not a failure.",
-                 f"holds {report['holds']}, breaks {report['breaks']}, "
-                 f"errors {report['errors']}"),
-            Step("by area",
-                 "Where the machine is solid and where it is thin.",
-                 areas),
-            Step("where it breaks",
-                 "Each of these carries the exact place the capability "
-                 "stops.  Several are theorems and will not move: the Golay "
-                 "repair radius, the undecidability of equality between "
-                 "processes, the convex hull that bounds the 24-D carrier.",
-                 boundary_lines),
-            Step("surprises",
-                 "A probe whose verdict differs from the expectation "
-                 "declared before it ran: a regression, or a capability "
-                 "newly won.",
-                 str(report["surprises"]) if report["surprises"] else "none"),
-        ]
-
-        expected = {
-            "probes": str(report["probes"]),
-            "holds": str(report["holds"]),
-            "breaks": str(report["breaks"]),
-            "errors": str(report["errors"]),
-            "surprises": str(report["surprises"]),
-        }
-        for result in report["results"]:
-            expected[f"verdict_{result['name']}"] = str(result["verdict"])
-
-        return Solution(
-            query=query, kind="report",
-            answer=f"report capabilities: {report['probes']} probes, "
-                   f"{report['holds']} hold, {report['breaks']} break, "
-                   f"{report['errors']} errored; surprises "
-                   f"{report['surprises'] or 'none'}",
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_capabilities", "args": {}},
-            payload={"report": report})
-
-    def _report_analogies(self, query: Query) -> Solution:
-        """Wires analogy_models.analogy_models_report -- analogy by relation.
-
-        Every case is re-solved here and now through the model layer, and
-        each row says which model recognised the relation, what it answered,
-        and whether that is what the mathematics of the case requires.  A
-        refusal is a row like any other: the periodic step that lands on
-        group 3 of period 6 has no single element to name.
-        """
-        report = am.analogy_models_report()
-        table = report["periodic_table"]
-        lines = "; ".join(
-            f"{row['question']} -> "
-            f"{row['answer'] or 'refused'} [{row['model']}]"
-            for row in report["cases"])
-        steps = [
-            Step("the models",
-                 "An analogy is transported as a *named relation* wherever "
-                 "the register states one, and as a displacement of the "
-                 "coordinates only when it does not.",
-                 f"models = {list(report['models'])}"),
-            Step("the table's own coordinates",
-                 f"The chemistry model needs a period and a group, and the "
-                 f"register stores a group-block *category*, not a group.  "
-                 f"Both are derived from the period boundaries and checked "
-                 f"against the {table['elements']} stored periods.",
-                 f"elements = {table['elements']}, "
-                 f"periods_agree_with_register = "
-                 f"{table['periods_agree_with_register']}, "
-                 f"noble gases = {table['noble_gases']}"),
-            Step("what is not transportable",
-                 "A relation that records *that* two concepts are linked "
-                 "without saying how determines no answer, so it is excluded "
-                 "by name rather than followed to a guess.",
-                 f"vague relations = {list(report['vague_relations'])}"),
-            Step("the cases",
-                 f"{report['cases_total']} analogies re-solved through the "
-                 f"layer; {report['cases_as_expected']} came out as the "
-                 f"mathematics of the case requires.",
-                 lines),
-        ]
-        expected = {
-            "cases_total": str(report["cases_total"]),
-            "cases_as_expected": str(report["cases_as_expected"]),
-            "models": str(list(report["models"])),
-            "periods_agree_with_register":
-                str(table["periods_agree_with_register"]),
-            "noble_gases": str(list(table["noble_gases"])),
-        }
-        for row in report["cases"]:
-            expected[f"case_{row['question']}"] = (
-                f"{row['model']}:{row['answer']}")
-        return Solution(
-            query=query, kind="report",
-            answer=(f"report analogies: {len(report['models'])} relation "
-                    f"models, {report['cases_total']} cases, "
-                    f"{report['cases_as_expected']} as expected"),
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_analogies", "args": {}},
-            payload={"report": report})
-
-    def _report_relations(self, query: Query) -> Solution:
-        """Wires ve.verifier_report — the 222+71 relation audit."""
-        report = ve.verifier_report()
-        # The report has three tables: scalar relations under scalar
-        # semantics (all hold), scalar relations under full semantics
-        # (some fail on rank/parity), and tensor relations under full
-        # semantics (all hold).
-        scalar_scalar = report["scalar_relations_under_scalar_semantics"]
-        scalar_full = report["scalar_relations_under_full_semantics"]
-        tensor_full = report["tensor_relations_under_full_semantics"]
-        steps = [
-            Step("verifier_report",
-                 f"The verifier audited three tables: {scalar_scalar['checked']} "
-                 f"scalar relations under scalar semantics ({scalar_scalar['held']} "
-                 f"hold), {scalar_full['checked']} scalar relations under full "
-                 f"tensor semantics ({scalar_full['held']} hold, "
-                 f"{scalar_full['failed']} fail on rank/parity), and "
-                 f"{tensor_full['checked']} tensor relations ({tensor_full['held']} "
-                 f"hold).  The {scalar_full['failed']} that hold scalarly but fail "
-                 f"under full semantics are statements a units table gets right "
-                 f"but a tensor analysis gets wrong -- e.g. 'acceleration = speed "
-                 f"/ time' fails because the left side is rank-1 and the right "
-                 f"side a scalar.",
-                 f"scalar/scalar: {scalar_scalar['held']}/{scalar_scalar['checked']}, "
-                 f"scalar/full: {scalar_full['held']}/{scalar_full['checked']} "
-                 f"({scalar_full['failed']} fail), "
-                 f"tensor/full: {tensor_full['held']}/{tensor_full['checked']}"),
-        ]
-        expected = {
-            "scalar_scalar_checked": str(scalar_scalar["checked"]),
-            "scalar_scalar_held": str(scalar_scalar["held"]),
-            "scalar_full_checked": str(scalar_full["checked"]),
-            "scalar_full_held": str(scalar_full["held"]),
-            "scalar_full_failed": str(scalar_full["failed"]),
-            "tensor_full_checked": str(tensor_full["checked"]),
-            "tensor_full_held": str(tensor_full["held"]),
-        }
-        return Solution(
-            query=query, kind="report",
-            answer=f"report relations: scalar/scalar "
-                   f"{scalar_scalar['held']}/{scalar_scalar['checked']}, "
-                   f"scalar/full {scalar_full['held']}/{scalar_full['checked']}, "
-                   f"tensor/full {tensor_full['held']}/{tensor_full['checked']}",
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_relations", "args": {}},
-            payload={"report": report})
-
-    def _report_transform_decoder(self, query: Query) -> Solution:
-        """Wires fwht_decode.fwht_decode_report -- the transform and the tier.
-
-        Two claims, both measured here rather than quoted: that the 4,096
-        Golay coset costs are one Walsh-Hadamard transform, and that the
-        constant-time lookup can prove its own answer -- sometimes.
-        """
-        report = fdc.fwht_decode_report()
-        counts = report["operation_counts"]
-        rates = report["certificate_rates"]
-        agree = report["agreement"]
-        ties = report["tie_sets"]
-        flat = rates["regimes"][0]
-        widest = rates["regimes"][-1]
-
-        steps = [
-            Step("the search is one transform",
-                 f"Coordinate k of the codeword of message m is the parity "
-                 f"of m against a fixed 12-bit generator column, so the "
-                 f"{counts['codeword_count']} support sums the decoder "
-                 f"minimises are the Walsh-Hadamard transform of a "
-                 f"length-{counts['codeword_count']} array with only "
-                 f"{counts['n']} nonzero entries.  The identity was checked "
-                 f"on {agree['support_sums_checked']} sums and on "
-                 f"{agree['column_identity_checks']} column parities.",
-                 f"support-sum mismatches = {agree['support_sums_failures']}, "
-                 f"column mismatches = {agree['column_identity_failures']}"),
-            Step("what the transform costs, and what it buys",
-                 f"Direct summation costs {counts['direct_adds']} additions "
-                 f"(n * 2^(k-1)); the transform costs {counts['fwht_ops']} "
-                 f"add/subtracts (2^k * k).  These are equal exactly when "
-                 f"n = 2k, and for this code n = {counts['n']}, "
-                 f"k = {counts['k']}.  The transform is therefore not a "
-                 f"speed-up here; what it buys is the whole cost spectrum in "
-                 f"one pass.",
-                 f"direct = {counts['direct_adds']}, "
-                 f"fwht = {counts['fwht_ops']}, "
-                 f"ratio = {counts['ratio_direct_over_fwht']}, "
-                 f"equal because n = 2k: "
-                 f"{counts['equal_because_n_equals_2k']}"),
-            Step("the exact decoder is reproduced, ties included",
-                 f"The transform-driven nearest-Leech-point decoder was run "
-                 f"against the existing complete decoder on "
-                 f"{agree['lattice_points_checked']} rational targets -- "
-                 f"point, distance, Leech class and 2A flag all compared -- "
-                 f"and the argmin *set* was compared on "
-                 f"{ties['cases']} soft-decision profiles, one of them "
-                 f"engineered to be the six-fold covering-radius tie.",
-                 f"lattice-point disagreements = "
-                 f"{agree['lattice_point_failures']}, "
-                 f"tie-set disagreements = {ties['failures']}, "
-                 f"largest tie set = {ties['largest_tie_set']}, "
-                 f"sextet case six-fold = {ties['sextet_case_is_sixfold']}"),
-            Step("the O(1) lookup, with a certificate instead of a guess",
-                 f"The constant-time route hard-decides the 24 signs, takes "
-                 f"one syndrome, reads the coset leaders from the table, and "
-                 f"then tries to *prove* its answer using the code's minimum "
-                 f"distance {fdc.MIN_DISTANCE}: any other coset member "
-                 f"differs by a codeword of weight at least 8, so it must pay "
-                 f"for at least 8 - j coordinates outside the leader while "
-                 f"recovering at most the j largest inside it.  When that "
-                 f"inequality holds the fast answer is optimal, with proof.",
-                 f"leaders per coset <= 6, magnitudes sorted once, "
-                 f"nothing scales with the "
-                 f"{counts['codeword_count']} codewords"),
-            Step("how often it fires -- measured, per regime",
-                 f"The rate is a statement about reliability spread, not "
-                 f"about the code.  On a flat profile it fires "
-                 f"{flat['certified']} times in {flat['samples']}; on "
-                 f"magnitudes spread over a hundredfold band it fires "
-                 f"{widest['certified']} in {widest['samples']}.  Every "
-                 f"certified answer was re-checked against the exact "
-                 f"transform, and "
-                 f"{rates['certified_but_wrong']} were wrong.  Where the "
-                 f"certificate declines, the exact transform is entered: the "
-                 f"decoder is never wrong, only sometimes slow.",
-                 " | ".join(f"{r['regime']}: {r['certified']}/{r['samples']}"
-                            for r in rates["regimes"])),
-        ]
-        expected = {
-            "direct_adds": str(counts["direct_adds"]),
-            "fwht_ops": str(counts["fwht_ops"]),
-            "equal_because_n_equals_2k":
-                str(counts["equal_because_n_equals_2k"]),
-            "column_identity_failures": str(agree["column_identity_failures"]),
-            "support_sums_failures": str(agree["support_sums_failures"]),
-            "lattice_point_failures": str(agree["lattice_point_failures"]),
-            "all_agree": str(agree["all_agree"]),
-            "tie_set_failures": str(ties["failures"]),
-            "sextet_case_is_sixfold": str(ties["sextet_case_is_sixfold"]),
-            "flat_profile_always_certifies":
-                str(rates["flat_profile_always_certifies"]),
-            "certified_but_wrong": str(rates["certified_but_wrong"]),
-            "overall_certified_fraction":
-                str(rates["overall_certified_fraction"]),
-        }
-        return Solution(
-            query=query, kind="report",
-            answer=f"report transform decoder: the "
-                   f"{counts['codeword_count']} Golay coset costs are one "
-                   f"Walsh-Hadamard transform, which costs "
-                   f"{counts['fwht_ops']} add/subtracts against the direct "
-                   f"{counts['direct_adds']} -- equal, because n = 2k, so "
-                   f"the transform is not a speed-up for this code; the "
-                   f"transform-driven decoder reproduces the existing one "
-                   f"exactly, tie sets included; and the constant-time "
-                   f"lookup certifies its own optimality on "
-                   f"{rates['total_certified']} of "
-                   f"{rates['total_samples']} sampled profiles -- always on "
-                   f"a flat profile, rarely on a very wide one -- with "
-                   f"{rates['certified_but_wrong']} certified answers wrong",
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_transform_decoder", "args": {}},
-            payload={"report": report})
-
-    def _report_units(self, query: Query) -> Solution:
-        """Wires units.units_report -- the unit strings, read as dimensions.
-
-        Every quantity states what it is twice, once as a unit string and
-        once as EXT10 exponents.  This parses the first and checks it
-        against the second, and measures what the SI reading of the
-        steradian would cost.
-        """
-        report = un.units_report()
-        audit = report["audit"]
-        case = report["steradian"]
-
-        steps = [
-            Step("ten units stored, the rest derived",
-                 report["method"],
-                 f"base units = {report['base_unit_count']}, derived "
-                 f"definitions = {report['derived_unit_count']}, decimal "
-                 f"prefixes = {report['prefix_count']}"),
-            Step("every unit string in the register is parsed and checked",
-                 f"Each of the {audit['quantities']} quantities carries a "
-                 f"unit string and a vector of EXT10 exponents, written "
-                 f"independently.  The string is parsed and the two are "
-                 f"compared, so a typo in either is a failure rather than a "
-                 f"silent disagreement.",
-                 f"readable = {audit['readable']}/{audit['quantities']}, "
-                 f"agreeing = {audit['agreed']}, mismatched = "
-                 f"{audit['mismatched_count']}, unreadable = "
-                 f"{audit['unreadable_count']}"),
-            Step("the steradian is a dimension here, not a ratio",
-                 case["statement"],
-                 f"with the steradian carried, mismatches = "
-                 f"{case['with_steradian']['mismatched']}; dropped, "
-                 f"mismatches = {case['without_steradian']['mismatched']}"),
-            Step("what a dimensionless steradian would conflate",
-                 f"Dropping it breaks "
-                 f"{case['broken_count']} quantities, of which "
-                 f"{case['photometric_count']} are written with the lumen or "
-                 f"the lux: "
-                 f"{', '.join(case['photometric_quantities'])}.  The lumen "
-                 f"would read as the candela, so luminous flux would become "
-                 f"luminous intensity; the lux would read as the candela per "
-                 f"square metre, so illuminance would become luminance.",
-                 f"broken = {case['broken_count']}, photometric = "
-                 f"{case['photometric_count']}, quantities carrying a solid "
-                 f"angle = {case['solid_angle_count']}"),
-        ]
-        expected = {
-            "quantities": str(audit["quantities"]),
-            "every_unit_readable": str(audit["every_unit_readable"]),
-            "every_unit_agrees": str(audit["every_unit_agrees"]),
-            "mismatched_count": str(audit["mismatched_count"]),
-            "broken_by_dropping_the_steradian": str(case["broken_count"]),
-            "photometric_count": str(case["photometric_count"]),
-        }
-        return Solution(
-            query=query, kind="report",
-            answer=f"report units: all {audit['quantities']} unit strings in "
-                   f"the physics register parse, and all "
-                   f"{audit['agreed']} agree with the EXT10 exponents "
-                   f"declared beside them, with "
-                   f"{audit['mismatched_count']} mismatches; the parser "
-                   f"carries the steradian as a dimension, and reading it "
-                   f"the SI way -- as dimensionless -- would break "
-                   f"{case['broken_count']} quantities, "
-                   f"{case['photometric_count']} of them written with the "
-                   f"lumen or the lux",
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_units", "args": {}},
-            payload={"report": report})
-
-    def _report_deep_holes(self, query: Query) -> Solution:
-        """Wires deep_holes.deep_holes_report -- Niemeier types, no table.
-
-        The classification of a carrier by its nearest Niemeier type is
-        normally a Voronoi-cell problem with 196,560 facets.  Here it is a
-        process: walk to a hole, climb to the covering radius, read the
-        vertices off the modulator's trajectory, and certify the reading.
-        Nothing about the 23 types is stored except the catalogue, which is
-        itself derived.
-        """
-        report = dhl.deep_holes_report(walks=3)
-        census = report["census"]
-        catalogue = report["catalogue_size"]
-        exhibited = census["types_exhibited"]
-
-        steps = [
-            Step("the catalogue is derived, not listed",
-                 f"The {catalogue} Niemeier root systems are enumerated as "
-                 f"the unions of ADE components that share one Coxeter "
-                 f"number and total rank 24, from the component formulas "
-                 f"alone.  They are what a hole's diagram is checked "
-                 f"against.",
-                 f"catalogue size = {catalogue}"),
-            Step("a hole is reached by running, not looked up",
-                 report["method"],
-                 f"walks run = {census['walks_run']}, reaching the covering "
-                 f"radius = {census['walks_reaching_a_deep_hole']}, "
-                 f"stalling at a shallow hole = "
-                 f"{census['walks_stalling_at_a_shallow_hole']}"),
-            Step("the reading is certified",
-                 report["certificate"],
-                 f"types named = {len(exhibited)}, all certified = "
-                 f"{census['every_named_type_certified']}"),
-            Step("what it settles",
-                 f"This run exhibited "
-                 f"{census['types_exhibited_count']} of the {catalogue} "
-                 f"types: {', '.join(exhibited) if exhibited else 'none'}.  "
-                 f"Each was certified complete by the marked-barycentre "
-                 f"identity.",
-                 f"exhibited = {census['types_exhibited_count']}/"
-                 f"{catalogue}"),
-            Step("what it leaves undetermined",
-                 report["limits"] + "  " + census["honest_statement"],
-                 f"shortfall = {census['shortfall']} of {catalogue}, "
-                 f"census complete = {census['census_complete']}"),
-        ]
-        expected = {
-            "catalogue_size": str(catalogue),
-            "covering_radius2": str(report["covering_radius2"]),
-            "walks_run": str(census["walks_run"]),
-            "every_named_type_certified":
-                str(census["every_named_type_certified"]),
-            "census_complete": str(census["census_complete"]),
-        }
-        return Solution(
-            query=query, kind="report",
-            answer=f"report deep holes: a carrier is classified by walking "
-                   f"to the hole it sits in and certifying what the walk "
-                   f"found, never by enumerating the 196,560 facets or "
-                   f"storing the {catalogue} hole centres; this run reached "
-                   f"the covering radius on "
-                   f"{census['walks_reaching_a_deep_hole']} of "
-                   f"{census['walks_run']} walks and exhibited "
-                   f"{census['types_exhibited_count']} of the {catalogue} "
-                   f"Niemeier types, every one certified complete, with a "
-                   f"shortfall of {census['shortfall']} that is reported "
-                   f"as a shortfall",
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_deep_holes", "args": {}},
-            payload={"report": report})
-
-    def _report_molecules(self, query: Query) -> Solution:
-        """Wires molecules.molecules_report -- the multi-carrier register.
-
-        A molecule is held twice: as the faithful bundle of its element
-        carriers with multiplicities, and as one composite carrier that is
-        a *summary* of the bundle.  The report says which of the two is
-        lossless and checks the claim rather than asserting it.
-        """
-        report = do.molecules_report()
-        collisions = report["collisions"]
-        missing = report["missing_by_field"]
-        heaviest_name, heaviest_mass = report["largest_by_mass"]
-
-        steps = [
-            Step("the register stores no measurement",
-                 f"{report['molecules']} molecules and ions are held as a "
-                 f"name and a formula each.  Every one of the "
-                 f"{report['derived_fields']} derived coordinates -- molar "
-                 f"mass, electron count, electronegativity spread, degree "
-                 f"of unsaturation and the rest -- is recomputed from the "
-                 f"element register when the carrier is built, so this "
-                 f"register cannot disagree with that one.",
-                 f"molecules = {report['molecules']}, derived fields = "
-                 f"{report['derived_fields']}, coordinates = "
-                 f"{report['coordinates']}"),
-            Step("the bundle is faithful, the composite is a summary",
-                 f"The bundle ((symbol, count, carrier), ...) has the "
-                 f"formula read straight back off it, which is checked for "
-                 f"every molecule.  The composite carrier folds the "
-                 f"composition into 24 coordinates and is therefore a "
-                 f"summary; it is checked for collisions rather than "
-                 f"assumed injective.",
-                 f"bundle_is_faithful = "
-                 f"{collisions['bundle_is_faithful']}, distinct composites "
-                 f"= {collisions['distinct_composites']} of "
-                 f"{collisions['molecules']}, composite collisions = "
-                 f"{collisions['composite_collision_count']}"),
-            Step("a gap in the element register stays a gap",
-                 f"A coordinate the element register cannot support is left "
-                 f"at 0 with its bit set in the missingness mask, never "
-                 f"imputed.  On this register the only such coordinate is "
-                 f"the degree of unsaturation, which is undefined for a "
-                 f"formula containing sulfur, phosphorus or a metal -- so "
-                 f"it is absent rather than wrong.",
-                 f"missing_by_field = {dict(missing)}"),
-            Step("what the register reaches",
-                 f"{report['distinct_elements_used']} distinct elements "
-                 f"appear across the register; the heaviest molecule is "
-                 f"{heaviest_name} at {q(heaviest_mass)} u and the largest "
-                 f"by atom count is {report['largest_by_atom_count'][0]} "
-                 f"with {report['largest_by_atom_count'][1]} atoms.  "
-                 f"{len(report['charged'])} of the entries are ions.",
-                 f"elements used = {report['distinct_elements_used']}, "
-                 f"ions = {len(report['charged'])}"),
-        ]
-        expected = {
-            "molecules": str(report["molecules"]),
-            "coordinates": str(report["coordinates"]),
-            "derived_fields": str(report["derived_fields"]),
-            "distinct_elements_used": str(report["distinct_elements_used"]),
-            "bundle_is_faithful": str(collisions["bundle_is_faithful"]),
-            "distinct_composites": str(collisions["distinct_composites"]),
-            "composite_collision_count":
-                str(collisions["composite_collision_count"]),
-            "bundle_collision_count":
-                str(collisions["bundle_collision_count"]),
-            "missing_by_field": str(dict(missing)),
-            "largest_by_mass": f"{heaviest_name}={q(heaviest_mass)}",
-        }
-        return Solution(
-            query=query, kind="report",
-            answer=f"report molecules: {report['molecules']} molecules and "
-                   f"ions over {report['distinct_elements_used']} elements, "
-                   f"each held twice -- as the faithful bundle of its "
-                   f"element carriers, from which the formula is read back "
-                   f"exactly for every entry, and as one composite carrier "
-                   f"of {report['coordinates']} coordinates that is a "
-                   f"summary and collides "
-                   f"{collisions['composite_collision_count']} times on "
-                   f"this register; no measurement is stored and no missing "
-                   f"value is imputed",
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_molecules", "args": {}},
-            payload={"report": report})
-
-    def _report_chemistry_coverage(self, query: Query) -> Solution:
-        """Wires element_coverage.element_coverage_report.
-
-        The element register is sparse.  The three honest repairs -- derive,
-        estimate with the error measured, cross-check without merging -- are
-        run and each is labelled with what it is.
-        """
-        report = eco.element_coverage_report()
-        coverage = report["coverage"]
-        derived = report["derived"]
-        estimates = report["estimates"]
-        model = estimates["model"]
-        cross = report["cross_check"]
-
-        steps = [
-            Step("how sparse it actually is",
-                 f"Across {coverage['elements']} elements and the measured "
-                 f"fields there are {coverage['total_cells']} cells, of "
-                 f"which {coverage['filled_cells']} are filled.  Three "
-                 f"fields are complete "
-                 f"({', '.join(coverage['complete_fields'])}); the sparsest "
-                 f"is {coverage['sparsest']}.",
-                 f"filled = {coverage['filled_cells']}/"
-                 f"{coverage['total_cells']}, sparsest = "
-                 f"{coverage['sparsest']}"),
-            Step("derive: exact, and as reliable as its inputs",
-                 f"{derived['attribute_count']} attributes are exact "
-                 f"functions of fields already present -- molar volume, "
-                 f"liquid range, Mulliken electronegativity, valence-shell "
-                 f"load -- and together they add {derived['new_cells']} "
-                 f"filled cells without a new measurement.",
-                 f"derived attributes = {derived['attribute_count']}, new "
-                 f"cells = {derived['new_cells']}"),
-            Step("estimate: a line, fitted exactly, with its residuals",
-                 f"The covalent radius is known for "
-                 f"{estimates['measured_count']} elements.  A rational "
-                 f"least-squares line against the atomic radius, fitted on "
-                 f"exactly those {model['fitted_on']}, extends it to "
-                 f"{estimates['estimate_count']} more -- coverage "
-                 f"{estimates['coverage_before']} to "
-                 f"{estimates['coverage_after']}.  The mean absolute "
-                 f"residual is {q(model['mean_absolute_residual_pm'])} pm "
-                 f"and the worst is {model['worst_element']} at "
-                 f"{q(model['max_absolute_residual_pm'])} pm.  Every "
-                 f"extended value is labelled 'estimated', and "
-                 f"{len(estimates['still_absent'])} elements still have no "
-                 f"atomic radius to estimate from and stay absent.",
-                 f"fitted_on = {model['fitted_on']}, estimates = "
-                 f"{estimates['estimate_count']}, mean |residual| = "
-                 f"{q(model['mean_absolute_residual_pm'])} pm"),
-            Step("cross-check: compare, do not merge",
-                 cross["statement"],
-                 f"compared = {cross['compared']}, agreeing within 20 "
-                 f"kJ/mol = {cross['agree_within_20_count']}, largest "
-                 f"difference = {cross['largest_difference']['element']} at "
-                 f"{q(cross['largest_difference']['difference'])} kJ/mol"),
-            Step("what it leaves alone",
-                 report["limits"],
-                 f"values written back into the element register = 0"),
-        ]
-        expected = {
-            "elements": str(coverage["elements"]),
-            "total_cells": str(coverage["total_cells"]),
-            "filled_cells": str(coverage["filled_cells"]),
-            "sparsest": str(coverage["sparsest"]),
-            "derived_attribute_count": str(derived["attribute_count"]),
-            "derived_new_cells": str(derived["new_cells"]),
-            "fitted_on": str(model["fitted_on"]),
-            "slope": q(model["slope"]),
-            "intercept_pm": q(model["intercept_pm"]),
-            "mean_absolute_residual_pm":
-                q(model["mean_absolute_residual_pm"]),
-            "estimate_count": str(estimates["estimate_count"]),
-            "measured_count": str(estimates["measured_count"]),
-            "coverage_before": str(estimates["coverage_before"]),
-            "coverage_after": str(estimates["coverage_after"]),
-            "cross_check_compared": str(cross["compared"]),
-            "cross_check_agree_within_20":
-                str(cross["agree_within_20_count"]),
-            "largest_difference_element":
-                str(cross["largest_difference"]["element"]),
-        }
-        return Solution(
-            query=query, kind="report",
-            answer=f"report chemistry coverage: "
-                   f"{coverage['filled_cells']} of "
-                   f"{coverage['total_cells']} measured cells are filled and "
-                   f"the sparsest field is {coverage['sparsest']}; coverage "
-                   f"is widened three ways that each keep their label -- "
-                   f"{derived['attribute_count']} exactly derived "
-                   f"attributes adding {derived['new_cells']} cells, a "
-                   f"rational fit that carries the covalent radius from "
-                   f"{estimates['coverage_before']} to "
-                   f"{estimates['coverage_after']} of the elements with a "
-                   f"mean residual of "
-                   f"{q(model['mean_absolute_residual_pm'])} pm, and a "
-                   f"cross-check against the diatomic register that reports "
-                   f"the disagreement instead of merging the two "
-                   f"quantities; nothing is written back into the register",
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_chemistry_coverage", "args": {}},
-            payload={"report": report})
-
-    def _report_leech_distribution(self, query: Query) -> Solution:
-        """Wires leech2.pair_census — the 4-position Leech distribution."""
-        census = leech2.pair_census()
-        steps = [
-            Step("pair_census",
-                 f"The 196,560 minimal vectors of the Leech lattice, "
-                 f"taken against any fixed one, fall into exactly four "
-                 f"mutual positions.  This is the reason the Monster's 2A "
-                 f"axes have only four positions: 1A (2 vectors), 2A "
-                 f"(9,200), invariant-1 (94,208, not modelled), and 2B "
-                 f"(93,150).",
-                 f"pair_census = {dict(census)}"),
-        ]
-        expected = {f"position_{k}": str(v) for k, v in census.items()}
-        return Solution(
-            query=query, kind="report",
-            answer=f"report leech distribution: {dict(census)}",
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_leech", "args": {}},
-            payload={"census": dict(census)})
-
-    def _report_theta(self, query: Query) -> Solution:
-        """Wires leech2.theta_series — the Leech theta series E_4^3 - 720*Delta."""
-        order = 5
-        coeffs = leech2.theta_series(order=order)
-        steps = [
-            Step("theta_series",
-                 f"The theta series of the Leech lattice is "
-                 f"E_4^3 - 720*Delta, computed exactly.  Coefficient n "
-                 f"counts vectors of squared norm 8n.  The first few: "
-                 f"1 (the zero vector), 0 (no norm-8 vectors), 196560 "
-                 f"(the minimal vectors, norm 16 = 8*2), 16773120 "
-                 f"(norm 24 = 8*3), ...",
-                 f"theta = {coeffs}"),
-        ]
-        expected = {f"coeff_{i}": str(c) for i, c in enumerate(coeffs)}
-        return Solution(
-            query=query, kind="report",
-            answer=f"report theta: {coeffs}",
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_theta", "args": {}},
-            payload={"coefficients": coeffs, "order": order})
-
-    def _report_subalgebra(self, query: Query) -> Solution:
-        """Wires pr.two_a_closure_report — 2A subalgebra closure facts."""
-        report = pr.two_a_closure_report()
-        steps = [
-            Step("two_a_closure_report",
-                 f"The 2A subalgebra generated by a sampled 2A pair is "
-                 f"checked for: closure in three dimensions, "
-                 f"commutativity, non-associativity (with an explicit "
-                 f"witness), and the Gram matrix (1 on the diagonal, "
-                 f"1/8 off it).",
-                 f"two_a_closure_report = {report}"),
-        ]
-        expected = {k: str(v) for k, v in report.items()}
-        return Solution(
-            query=query, kind="report",
-            answer=f"report subalgebra: {report}",
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_subalgebra", "args": {}},
-            payload={"report": report})
-
-    def _report_information_loss(self, query: Query) -> Solution:
-        """Wires il.information_loss_report — loss at the layer boundaries.
-
-        Each layer of the stack is true within its own reach and hands off to
-        the next.  This report measures where a reach ends: what each layer
-        cannot tell apart, which pairs the layer above it splits, and whether
-        addition can be computed from what the layer sees.
-        """
-        report = il.information_loss_report()
-        by_name = {layer["name"]: layer for layer in report["layers"]}
-        edges = {(b["lower"], b["higher"]): b for b in report["boundaries"]}
-        names = tuple(layer["name"] for layer in report["layers"])
-        pairs = tuple((b["lower"], b["higher"])
-                      for b in report["boundaries"])
-        raw = report["non_cumulative"]
-
-        resolutions = ", ".join(
-            f"{n} {by_name[n]['resolution']}/{report['carrier_count']}"
-            for n in names)
-        descends = ", ".join(
-            n for n in names if by_name[n]["addition_descends"]) or "none"
-        lost = ", ".join(
-            f"{lo}->{hi} {edges[(lo, hi)]['lost_count']}" for lo, hi in pairs)
-        holes = [f"{lo}->{hi}" for lo, hi in pairs
-                 if not edges[(lo, hi)]["refines"]]
-
-        steps = [
-            Step("resolution",
-                 f"On {report['carrier_count']} carriers chosen to exercise "
-                 f"every handoff, each layer's own measure decides which of "
-                 f"them it can tell apart.  What it cannot tell apart is what "
-                 f"it loses.",
-                 f"resolved: {resolutions}"),
-            Step("boundary",
-                 f"The boundary between two layers is the set of pairs the "
-                 f"lower one conflates and the higher one splits.  That set "
-                 f"is exactly the information recovered by escalating -- and "
-                 f"exactly the information the lower layer was never wrong "
-                 f"to ignore, within its own reach.",
-                 f"lost pairs: {lost}"),
-            Step("reach of the law",
-                 f"Coordinatewise addition descends to a layer only when the "
-                 f"layer's view determines the view of the sum.  Where a "
-                 f"witness exists -- indistinguishable inputs with "
-                 f"distinguishable sums -- the law is true one level up and "
-                 f"untrue here.",
-                 f"addition descends at: {descends}"),
-            Step("refinement audit",
-                 f"A stack is a refinement chain when every layer sees at "
-                 f"least as much as the one below.  Where it is not, "
-                 f"escalation itself loses information.",
-                 f"chain intact: {report['refinement_chain_intact']}"
-                 + (f"; holes at {', '.join(holes)}" if holes else "")),
-            Step("what cumulativity buys",
-                 f"The chain is intact because each layer keeps what the "
-                 f"one below it saw and adds to it.  The reading that only "
-                 f"takes the seven SI7 exponents is kept beside the stack "
-                 f"to show the difference: it conflates carriers the "
-                 f"substrate already separates, so a stack built on it "
-                 f"would lose information by escalating.",
-                 f"{raw['layer']}: refines substrate "
-                 f"{raw['refines_substrate']}, "
-                 f"{raw['violation_count']} violating pair(s); "
-                 f"{raw['cumulative_layer']}: "
-                 f"{raw['cumulative_refines_substrate']}"),
-        ]
-
-        expected = {"carrier_count": str(report["carrier_count"])}
-        for name in names:
-            layer = by_name[name]
-            expected[f"resolution_{name}"] = str(layer["resolution"])
-            expected[f"loss_{name}"] = str(layer["loss_count"])
-            expected[f"addition_descends_{name}"] = str(
-                layer["addition_descends"])
-        for lower, higher in pairs:
-            edge = edges[(lower, higher)]
-            key = f"{lower}_to_{higher}"
-            expected[f"lost_count_{key}"] = str(edge["lost_count"])
-            expected[f"refines_{key}"] = str(edge["refines"])
-        expected["refinement_chain_intact"] = str(
-            report["refinement_chain_intact"])
-        expected["non_cumulative_refines_substrate"] = str(
-            raw["refines_substrate"])
-        expected["non_cumulative_violations"] = str(raw["violation_count"])
-        expected["cumulative_refines_substrate"] = str(
-            raw["cumulative_refines_substrate"])
-
-        return Solution(
-            query=query, kind="report",
-            answer=f"report information loss: resolved {resolutions}; "
-                   f"lost {lost}; addition descends at {descends}; "
-                   f"refinement chain intact "
-                   f"{report['refinement_chain_intact']}; "
-                   f"non-cumulative SI7 reading refines substrate "
-                   f"{raw['refines_substrate']}",
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_information_loss", "args": {}},
-            payload={"report": report})
-
-    def _report_fusion(self, query: Query) -> Solution:
-        """Wires pr.fusion_report -- the Ising fusion layer of the algebra.
-
-        The adjoint action of an axis, its eigenspaces at the four Ising
-        eigenvalues, and the two Miyamoto involutions built from them were
-        implemented but unreachable from a query.  This subject recomputes
-        all of it and states what the numbers mean.
-        """
-        report = pr.fusion_report()
-        dims = report["expected_eigenspace_dimensions"]
-        first = report["records"][0]["axes"][0]
-
-        steps = [
-            Step("adjoint action",
-                 f"An axis acts on its own subalgebra by multiplication: "
-                 f"x -> a . x.  In the three axes as a basis that is a "
-                 f"3x3 rational matrix, and its trace is the sum of the "
-                 f"eigenvalues.  Across {report['axes_checked']} axes of "
-                 f"{report['pairs_checked']} subalgebras the trace is "
-                 f"always 5/4 = 1 + 0 + 1/4.",
-                 f"adjoint(a_{first['label']}) = {first['adjoint']}, "
-                 f"trace = {first['adjoint_trace']}, "
-                 f"always 5/4: "
-                 f"{report['all_adjoint_traces_five_quarters']}"),
-            Step("fusion spectrum",
-                 f"The Ising fusion rules allow an axis the eigenvalues "
-                 f"{', '.join(report['ising_eigenvalues'])}.  The "
-                 f"eigenspaces are searched for, not assumed: each is the "
-                 f"exact kernel of ad_a - lambda, computed over the "
-                 f"rationals.  Here 1, 0 and 1/4 each contribute one "
-                 f"dimension and 1/32 contributes none, so the four "
-                 f"eigenspaces span all three dimensions -- the algebra is "
-                 f"of Majorana type with no twisted part.",
-                 f"dimensions = {dims}, span: "
-                 f"{report['all_eigenspaces_span']}, as predicted "
-                 f"everywhere: {report['all_dimensions_as_predicted']}"),
-            Step("Miyamoto involutions",
-                 f"tau_a negates the 1/32-eigenspace and sigma_a the "
-                 f"1/4-eigenspace.  Because the 1/32-part is zero here, "
-                 f"tau_a comes out as the identity -- a derived fact, not "
-                 f"an assumption -- and the nontrivial symmetry is carried "
-                 f"by sigma_a, which fixes its own axis and exchanges the "
-                 f"other two.  The permutation is read off the computed "
-                 f"matrix.",
-                 f"tau always identity: {report['tau_always_identity']}, "
-                 f"sigma fixes a and swaps the others: "
-                 f"{report['sigma_always_swaps']}, "
-                 f"sigma(a_{first['label']}) permutation = "
-                 f"{first['sigma_permutation']}"),
-            Step("symmetry check",
-                 f"Both maps are checked against the structure they are "
-                 f"supposed to preserve: every product and every Griess "
-                 f"inner product on the basis, and squaring back to the "
-                 f"identity.",
-                 f"automorphisms: {report['all_automorphisms']}, "
-                 f"isometries: {report['all_isometries']}, "
-                 f"involutions: {report['all_involutions']}"),
-        ]
-
-        expected = {
-            "pairs_checked": str(report["pairs_checked"]),
-            "axes_checked": str(report["axes_checked"]),
-            "all_eigenspaces_span": str(report["all_eigenspaces_span"]),
-            "all_dimensions_as_predicted": str(
-                report["all_dimensions_as_predicted"]),
-            "all_adjoint_traces_five_quarters": str(
-                report["all_adjoint_traces_five_quarters"]),
-            "tau_always_identity": str(report["tau_always_identity"]),
-            "sigma_always_swaps": str(report["sigma_always_swaps"]),
-            "all_automorphisms": str(report["all_automorphisms"]),
-            "all_isometries": str(report["all_isometries"]),
-            "all_involutions": str(report["all_involutions"]),
-        }
-
-        return Solution(
-            query=query, kind="report",
-            answer=f"report fusion: {report['axes_checked']} axes over "
-                   f"{report['pairs_checked']} 2A subalgebras; eigenspace "
-                   f"dimensions {dims} everywhere "
-                   f"({report['all_dimensions_as_predicted']}); "
-                   f"tau = identity {report['tau_always_identity']}, "
-                   f"sigma swaps the other two axes "
-                   f"{report['sigma_always_swaps']}; all automorphisms "
-                   f"{report['all_automorphisms']}",
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_fusion", "args": {}},
-            payload={"report": report})
-
-    def _report_benchmarks(self, query: Query) -> Solution:
-        """Wires benchmarks.benchmark_report -- the scored task suites.
-
-        Imported here rather than at module scope: the suites drive queries
-        through this very session class, so a top-level import would be
-        circular.
-        """
-        from .. import benchmarks as bm
-
-        report = bm.benchmark_report()
-        suites = report["suites"]
-        nulls = report["null_results"]
-
-        tiers = ", ".join(f"{s['name']} {s['tier']['tier']}" for s in suites)
-        scores = ", ".join(
-            f"{s['name']} {s['passed']}/{s['total']} vs {s['baseline']}"
-            for s in suites)
-
-        steps = [
-            Step("declared before the run",
-                 f"Each of the {report['suite_count']} suites fixes its "
-                 f"population, its ground truth, what counts as a pass, what "
-                 f"a baseline would score and what a null result would look "
-                 f"like, before it is run.  A score is reported only "
-                 f"together with that declaration.",
-                 f"tiers: {tiers}"),
-            Step("scores",
-                 f"{report['passed_count']} of {report['task_count']} tasks "
-                 f"pass, each against the baseline its own suite declared.  "
-                 f"The ratios are exact rationals; no score is a float.",
-                 f"{scores}\noverall = {report['overall_score']}"),
-            Step("null and negative results",
-                 f"A suite that only reported its wins would be a broken "
-                 f"suite.  {len(report['findings'])} findings are reported "
-                 f"beside the scores, including every failing task and every "
-                 f"known failure mode measured rather than asserted.",
-                 "; ".join(f"[{f['suite']}/{f['key']}] {f['statement']}"
-                           for f in report["findings"])),
-            Step("reproducibility",
-                 f"The run id is a hash of the results themselves, so the "
-                 f"same code produces the same id and a changed number is "
-                 f"visible as a changed id.  No suite samples without a "
-                 f"recorded seed.",
-                 f"run_id = {report['run_id']}"),
-        ]
-
-        expected = {
-            "suite_count": str(report["suite_count"]),
-            "task_count": str(report["task_count"]),
-            "passed_count": str(report["passed_count"]),
-            "overall_score": str(report["overall_score"]),
-            "run_id": str(report["run_id"]),
-            "null_result_count": str(len(nulls)),
-        }
-        for suite in suites:
-            name = suite["name"]
-            expected[f"score_{name}"] = str(suite["score"])
-            expected[f"baseline_{name}"] = str(suite["baseline"])
-            expected[f"verdict_{name}"] = str(suite["verdict"])
-
-        return Solution(
-            query=query, kind="report",
-            answer=f"report benchmarks: {report['passed_count']}/"
-                   f"{report['task_count']} tasks "
-                   f"({report['overall_score']}) across "
-                   f"{report['suite_count']} suites; {scores}; "
-                   + (f"null or below-baseline: {', '.join(nulls)}"
-                      if nulls else "every suite beat its baseline"),
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_benchmarks", "args": {}},
-            payload={"report": report})
-
-    # ------------------------------------------------------------------
-    # 3k-bis.  the five report subjects added in v0.8.0
-    # ------------------------------------------------------------------
-    # Each of these wires a substrate or reasoning module that had been
-    # built but was not reachable from a query.  They follow the same
-    # contract as the older report subjects: recompute, state the facts
-    # as steps, and put only independently reproducible scalars into
-    # ``expected``.
-    # ------------------------------------------------------------------
-
-    def _report_golay_decoding(self, query: Query) -> Solution:
-        """Wires gdc.golay_decode_report -- complete decoding, no silent snap."""
-        report = gdc.golay_decode_report()
-        census = report["coset_census"]
-        steiner = report["steiner"]
-        weight5 = report["weight5"]
-        rows = {row["weight"]: row for row in report["comparison"]["rows"]}
-        flagged_at_4 = rows[4]["complete"]["flagged"]
-        silent_at_4 = rows[4]["legacy_ties_broken_silently"]
-
-        steps = [
-            Step("coset table",
-                 f"The 4,096 cosets of the Golay code were enumerated and "
-                 f"each given its full set of minimum-weight leaders.  Below "
-                 f"the packing radius {report['packing_radius']} the leader "
-                 f"is unique; at the covering radius "
-                 f"{report['covering_radius']} every coset has a sextet of "
-                 f"six leaders, so no nearest codeword is singled out.",
-                 f"cosets = {census['cosets']}, "
-                 f"leaders = {census['total_leaders']}, "
-                 f"by leader weight = {census['cosets_by_leader_weight']}"),
-            Step("decode or detect",
-                 f"The complete decoder returns every nearest codeword and a "
-                 f"status.  On the {flagged_at_4} sampled weight-4 patterns "
-                 f"it reports ambiguity; the retired snap decoder returned "
-                 f"one of the six silently in all {silent_at_4} of them.",
-                 f"weight 4: complete flagged {flagged_at_4}, "
-                 f"legacy silent tie-breaks {silent_at_4}"),
-            Step("why weight 5 is not a bug",
-                 f"Every 5-subset of the 24 points lies in exactly one octad "
-                 f"-- the Steiner system S(5,8,24), verified here on all "
-                 f"{steiner['five_subsets_total']} of them.  A weight-5 "
-                 f"error is therefore the complement inside that octad of a "
-                 f"weight-3 error, so it sits at distance 3 from a codeword "
-                 f"and is decoded confidently and wrongly by any "
-                 f"nearest-codeword rule.  The remedy is a declared channel "
-                 f"radius, not a better decoder.",
-                 f"octads = {steiner['octads']}, "
-                 f"multiplicities = {steiner['multiplicities']}, "
-                 f"weight-5 coset weights = {weight5['coset_weights']}"),
-        ]
-        expected = {
-            "cosets": str(census["cosets"]),
-            "total_leaders": str(census["total_leaders"]),
-            "unique_below_radius_4": str(census["unique_below_radius_4"]),
-            "sextet_at_radius_4": str(census["sextet_at_radius_4"]),
-            "packing_radius": str(report["packing_radius"]),
-            "covering_radius": str(report["covering_radius"]),
-            "codewords": str(report["codewords"]),
-            "octads": str(steiner["octads"]),
-            "is_steiner_5_8_24": str(steiner["is_steiner_5_8_24"]),
-            "weight5_always_coset_weight_3":
-                str(weight5["always_coset_weight_3"]),
-            "weight5_always_miscorrected":
-                str(weight5["always_miscorrected"]),
-            "silent_tie_breaking_retired":
-                str(report["silent_tie_breaking_retired"]),
-        }
-        return Solution(
-            query=query, kind="report",
-            answer=f"report golay decoding: {census['cosets']} cosets, "
-                   f"{census['total_leaders']} leaders, unique below weight "
-                   f"4 and a sextet of six at weight 4; S(5,8,24) verified "
-                   f"on {steiner['five_subsets_total']} five-subsets, so "
-                   f"weight-5 miscorrection is a theorem, not a bug",
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_golay_decoding", "args": {}},
-            payload={"report": report})
-
-    def _report_superposition(self, query: Query) -> Solution:
-        """Wires sup.superposition_report -- the tie carried, not broken."""
-        report = sup.superposition_report()
-        sextet = report["sextet"]
-        bundling = report["bundling"]
-        collapsed = report["collapse"]
-        census = report["census"]
-        chain = report["chain"]
-        hull = report["hull"]
-
-        steps = [
-            Step("the tie is a sextet",
-                 f"At the covering radius the nearest-codeword reading has "
-                 f"exactly {report['tie_count']} answers.  Their error "
-                 f"patterns are six disjoint tetrads covering all 24 "
-                 f"coordinates -- a MOG sextet -- checked here on "
-                 f"{sextet['tetrads_checked']} received words.",
-                 f"leader counts = {sextet['leader_counts']}, "
-                 f"disjoint = {sextet['pairwise_disjoint']}, "
-                 f"covers 24 = {sextet['covers_all_24']}"),
-            Step("bundling: the two rules do not agree",
-                 f"Bundling the six candidates by F_2 symmetric difference "
-                 f"gives the all-ones word for every received word, so it "
-                 f"distinguishes {bundling['f2_bundle_distinguishes']} of the "
-                 f"{bundling['words_checked']} words checked.  Bundling them "
-                 f"by exact rational addition gives (1 + 4 v)/6 "
-                 f"coordinatewise, which is invertible: it distinguishes all "
-                 f"{bundling['rational_bundle_distinguishes']}, and the "
-                 f"received word is recovered from the bundle.",
-                 f"F_2 bundle = {bundling['f2_bundle_values']}, "
-                 f"rational coordinates = "
-                 f"{bundling['rational_bundle_coordinate_values']}, "
-                 f"recovers input = "
-                 f"{bundling['rational_bundle_recovers_input']}"),
-            Step("collapse is a measurement, not a coin flip",
-                 f"A downstream context filters the hypothesis space: a "
-                 f"selective one collapses it to a single codeword, a "
-                 f"permissive one leaves it standing, an incompatible one "
-                 f"refutes the read.  No tie is broken by enumeration order.",
-                 f"collapsed = {collapsed['collapsed']['status']}, "
-                 f"superposed = {collapsed['superposed']['status']}, "
-                 f"refuted = {collapsed['refuted']['status']}"),
-            Step("how often the tie happens",
-                 f"Counting the cosets rather than describing one: the "
-                 f"{census['cosets']} cosets sit at distances "
-                 f"{census['cosets_by_distance']} from the code, so "
-                 f"{census['uniquely_read_cosets']} are read uniquely and "
-                 f"{census['ambiguous_cosets']} are six-fold ties, and the "
-                 f"mean distance to the code is exactly "
-                 f"{census['mean_coset_weight']}.  That is strictly past the "
-                 f"packing radius {census['packing_radius']} and strictly "
-                 f"inside the covering radius {census['covering_radius']}: "
-                 f"the average word already sits outside the radius within "
-                 f"which the reading is unique, so ambiguity is the typical "
-                 f"case for this code rather than a corner case.",
-                 f"mean coset weight = {census['mean_coset_weight']}, "
-                 f"ambiguous fraction = {census['ambiguous_fraction']}, "
-                 f"agrees with Lean = "
-                 f"{census['census_agrees_with_lean']} / "
-                 f"{census['mean_agrees_with_lean']}"),
-            Step("the dynamical half: no, it does not settle",
-                 f"A carrier under repeated one-bit perturbation is a random "
-                 f"walk on the {chain['states']} cosets.  Its unique "
-                 f"stationary law is the uniform one, whose mean distance to "
-                 f"the code is the census figure "
-                 f"{chain['stationary_mean_distance']} -- but the walk has no "
-                 f"limiting law at all: every parity-check column has odd "
-                 f"parity, so after n ticks the law sits on one of the two "
-                 f"parity classes and never on both.  Only the time average "
-                 f"settles: after {chain['steps']} exact ticks the two-step "
-                 f"average is "
-                 f"{chain['two_step_average_mean_distance']}, within "
-                 f"{chain['two_step_average_error']} of the stationary mean.  "
-                 f"And if each perturbation is corrected, the carrier returns "
-                 f"to the same codeword and stays at distance "
-                 f"{chain['corrected_distance_after_correction']}: correction "
-                 f"destroys the criticality rather than maintaining it.",
-                 f"support by step = {chain['support_by_step']}, "
-                 f"parity alternates = {chain['parity_alternates']}, "
-                 f"two-step average error = "
-                 f"{chain['two_step_average_error']}, "
-                 f"corrected carrier returns = "
-                 f"{chain['corrected_carrier_returns_to_code']}"),
-            Step("widening the alphabet",
-                 f"The functional 7 x_0 - sum_(j != 0) x_j is <= 0 on all "
-                 f"{hull['codewords_checked']} codewords, hence on every "
-                 f"non-negative multiple of one, while it is "
-                 f"{hull['value_at_target']} at the target (1/2) e_0.  "
-                 f"Scaling the emitted alphabet therefore changes nothing; "
-                 f"admitting two minimal Leech vectors of shape (+-4^2, "
-                 f"0^22) reaches the same target exactly, at every completed "
-                 f"{hull['leech_cycle_length']}-tick cycle.",
-                 f"max over scaled codewords = "
-                 f"{hull['max_over_scaled_codewords']}, "
-                 f"value at target = {hull['value_at_target']}, "
-                 f"Leech cycle reaches target = "
-                 f"{hull['leech_cycle_reaches_target']}"),
-        ]
-        expected = {
-            "tie_count": str(report["tie_count"]),
-            "pairwise_disjoint": str(sextet["pairwise_disjoint"]),
-            "covers_all_24": str(sextet["covers_all_24"]),
-            "f2_bundle_is_all_ones": str(bundling["f2_bundle_is_all_ones"]),
-            "f2_bundle_distinguishes":
-                str(bundling["f2_bundle_distinguishes"]),
-            "rational_bundle_recovers_input":
-                str(bundling["rational_bundle_recovers_input"]),
-            "rational_bundle_distinguishes":
-                str(bundling["rational_bundle_distinguishes"]),
-            "collapse_status": str(collapsed["collapsed"]["status"]),
-            "refuted_status": str(collapsed["refuted"]["status"]),
-            "cosets": str(census["cosets"]),
-            "cosets_by_distance": str(census["cosets_by_distance"]),
-            "mean_coset_weight": str(census["mean_coset_weight"]),
-            "uniquely_read_cosets": str(census["uniquely_read_cosets"]),
-            "ambiguous_cosets": str(census["ambiguous_cosets"]),
-            "ambiguous_fraction": str(census["ambiguous_fraction"]),
-            "mean_exceeds_packing_radius":
-                str(census["mean_exceeds_packing_radius"]),
-            "mean_below_covering_radius":
-                str(census["mean_below_covering_radius"]),
-            "census_agrees_with_lean":
-                str(census["census_agrees_with_lean"]),
-            "mean_agrees_with_lean": str(census["mean_agrees_with_lean"]),
-            "chain_states": str(chain["states"]),
-            "columns_all_odd_parity": str(chain["columns_all_odd_parity"]),
-            "uniform_is_stationary": str(chain["uniform_is_stationary"]),
-            "parity_alternates": str(chain["parity_alternates"]),
-            "law_never_uniform": str(chain["law_never_uniform"]),
-            "settles_in_distribution": str(chain["settles_in_distribution"]),
-            "two_step_average_mean_distance":
-                str(chain["two_step_average_mean_distance"]),
-            "two_step_average_error": str(chain["two_step_average_error"]),
-            "corrected_carrier_returns_to_code":
-                str(chain["corrected_carrier_returns_to_code"]),
-            "corrected_distance_after_correction":
-                str(chain["corrected_distance_after_correction"]),
-            "codewords_checked": str(hull["codewords_checked"]),
-            "max_over_scaled_codewords":
-                str(hull["max_over_scaled_codewords"]),
-            "value_at_target": str(hull["value_at_target"]),
-            "leech_cycle_reaches_target":
-                str(hull["leech_cycle_reaches_target"]),
-        }
-        return Solution(
-            query=query, kind="report",
-            answer=f"report superposition: the covering-radius tie has "
-                   f"{report['tie_count']} candidates whose error patterns "
-                   f"partition the 24 coordinates; XOR-bundling them is the "
-                   f"constant all-ones word, rational bundling is the "
-                   f"invertible (1 + 4 v)/6 and recovers the read; context "
-                   f"collapses, holds or refutes; "
-                   f"{census['ambiguous_cosets']} of the {census['cosets']} "
-                   f"cosets are such ties and the mean distance to the code "
-                   f"is {census['mean_coset_weight']}, past the packing "
-                   f"radius, though the perturbation chain has no limiting "
-                   f"law and settles only on average; and widening the "
-                   f"emitted "
-                   f"alphabet by scale reaches nothing new while widening it "
-                   f"by support reaches (1/2) e_0 exactly",
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_superposition", "args": {}},
-            payload={"report": report})
-
-    def _report_leech_construction(self, query: Query) -> Solution:
-        """Wires lcs.leech_construction_report -- the A/B/C ladder."""
-        report = lcs.leech_construction_report()
-        kissing = report["kissing_by_level"]
-        norms = report["minimal_norm_by_level"]
-        shapes = report["levels"]["C"]["shapes"]
-        necessity = report["necessity"]
-        agreement = report["agreement_with_leech2"]
-
-        steps = [
-            Step("construction A",
-                 f"Construction A lifts the Golay code mod 2 alone.  It is a "
-                 f"lattice, but its minimum is {norms['A']} and only "
-                 f"{kissing['A']} vectors attain it -- the coordinate "
-                 f"vectors +-4 e_i.  That is the simplification this report "
-                 f"removes.",
-                 f"min norm^2 = {norms['A']}, kissing = {kissing['A']}"),
-            Step("construction B and the mod-8 sum",
-                 f"Requiring the coordinates mod 4 to form a Golay codeword "
-                 f"and the coordinate sum to vanish mod 8 kills +-4 e_i and "
-                 f"lifts the minimum to {norms['B']}, with {kissing['B']} "
-                 f"minimal vectors.",
-                 f"min norm^2 = {norms['B']}, kissing = {kissing['B']}"),
-            Step("construction C",
-                 f"Adjoining the odd coset -- all coordinates odd, again "
-                 f"with the Golay and mod-8 conditions -- contributes "
-                 f"{report['odd_coset_contribution']} further minimal "
-                 f"vectors and restores the true kissing number "
-                 f"{kissing['C']}.",
-                 f"shapes = {shapes}, kissing = {kissing['C']}"),
-            Step("each condition is necessary",
-                 f"Dropping the mod-4 Golay condition admits (2, -2, 0^22) "
-                 f"and the minimum falls to "
-                 f"{necessity['drop_mod4_golay']['minimal_norm2']}; "
-                 f"dropping the mod-8 sum readmits +-4 e_i and the minimum "
-                 f"falls to {necessity['drop_mod8_sum']['minimal_norm2']}.",
-                 f"drop mod-4 Golay: min norm^2 = "
-                 f"{necessity['drop_mod4_golay']['minimal_norm2']}; "
-                 f"drop mod-8 sum: min norm^2 = "
-                 f"{necessity['drop_mod8_sum']['minimal_norm2']}, "
-                 f"kissing = {necessity['drop_mod8_sum']['count_at_minimum']}"),
-            Step("agreement with the substrate",
-                 f"On {agreement['checked']} sampled vectors the ladder's "
-                 f"membership test agrees with the package's own Leech "
-                 f"predicate in every case, so the construction is the same "
-                 f"lattice the rest of the system uses.",
-                 f"checked = {agreement['checked']}, "
-                 f"disagreements = {agreement['disagreements']}"),
-        ]
-        expected = {
-            "kissing_A": str(kissing["A"]),
-            "kissing_B": str(kissing["B"]),
-            "kissing_C": str(kissing["C"]),
-            "min_norm2_A": str(norms["A"]),
-            "min_norm2_B": str(norms["B"]),
-            "min_norm2_C": str(norms["C"]),
-            "odd_coset_contribution": str(report["odd_coset_contribution"]),
-            "construction_C_is_196560":
-                str(report["construction_C_is_196560"]),
-            "drop_mod4_golay_min_norm2":
-                str(necessity["drop_mod4_golay"]["minimal_norm2"]),
-            "drop_mod8_sum_min_norm2":
-                str(necessity["drop_mod8_sum"]["minimal_norm2"]),
-            "agrees_with_leech2": str(agreement["agrees"]),
-        }
-        return Solution(
-            query=query, kind="report",
-            answer=f"report leech construction: A gives {kissing['A']} "
-                   f"minimal vectors, B gives {kissing['B']}, and C with the "
-                   f"mod-8 sum condition gives {kissing['C']} at norm^2 "
-                   f"{norms['C']}",
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_leech_construction",
-                         "args": {}},
-            payload={"report": report})
-
-    def _report_facets(self, query: Query) -> Solution:
-        """Wires fa.facets_report -- the six-facet linear decomposition."""
-        report = fa.facets_report()
-        partition = report["partition"]
-        linearity = report["linearity"]
-        pythagoras = report["pythagoras"]
-        index = report["index_by_facet"]
-
-        steps = [
-            Step("partition",
-                 f"The 24 coordinates are cut into {partition['facets']} "
-                 f"named facets -- {', '.join(report['order'])} -- which "
-                 f"cover all 24 and overlap nowhere.",
-                 f"sizes = {partition['sizes']}, "
-                 f"is_partition = {partition['is_partition']}"),
-            Step("strict linearity",
-                 f"Each facet projection was checked on "
-                 f"{linearity['checked_carriers']} carriers to be additive, "
-                 f"homogeneous, idempotent, mutually orthogonal and complete "
-                 f"-- so the decomposition is an orthogonal direct sum, not "
-                 f"a heuristic tagging.",
-                 f"strictly_linear = {linearity['strictly_linear']}"),
-            Step("pythagoras",
-                 f"Because the projections are orthogonal, squared distance "
-                 f"splits exactly across the facets; this was checked on "
-                 f"{pythagoras['checked_pairs']} pairs.",
-                 f"additive = {pythagoras['additive']}, "
-                 f"failures = {pythagoras['failures']}"),
-            Step("lattice index per facet",
-                 f"No facet is lattice-autonomous: the index of the "
-                 f"intersection in the projection is "
-                 f"{index['dimension']} for dimension, {index['context']} "
-                 f"for context and 8 for each one-dimensional facet, so a "
-                 f"facet reading always loses lattice information.",
-                 f"index = {index}, "
-                 f"autonomous = {report['autonomous_facets']}"),
-        ]
-        expected = {
-            "facets": str(partition["facets"]),
-            "total": str(partition["total"]),
-            "is_partition": str(partition["is_partition"]),
-            "strictly_linear": str(linearity["strictly_linear"]),
-            "pythagoras_additive": str(pythagoras["additive"]),
-            "autonomous_facets": str(list(report["autonomous_facets"])),
-        }
-        for name in report["order"]:
-            expected[f"size_{name}"] = str(partition["sizes"][name])
-            expected[f"index_{name}"] = str(index[name])
-        return Solution(
-            query=query, kind="report",
-            answer=f"report facets: {partition['facets']} facets partition "
-                   f"the 24 coordinates, the projections are strictly linear "
-                   f"and orthogonal, and no facet is lattice-autonomous "
-                   f"(indices {index})",
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_facets", "args": {}},
-            payload={"report": report})
-
-    def _report_monster_stack(self, query: Query) -> Solution:
-        """Wires msk.monster_stack_report -- ten planes and the 2A product."""
-        report = msk.monster_stack_report()
-        census = report["position_census"]
-        repaired = report["position_census_pair_repaired"]
-        loss = report["shortcut_loss"]
-        assoc = report["associativity"]
-
-        steps = [
-            Step("ten planes",
-                 f"A carrier is written as a stack of {report['depth']} "
-                 f"2-adic digit planes, each read as a class of "
-                 f"Lambda / 2 Lambda and repaired to the nearest type-2 "
-                 f"class, with exact lattice distance breaking Hamming ties.",
-                 f"depth = {report['depth']}, basis = {report['basis']}"),
-            Step("the exact Sakuma product",
-                 f"Where both planes carry a 2A axis the product is the "
-                 f"Norton-Sakuma relation a . b = (1/8)(a + b - a_rho), not "
-                 f"an XOR of labels.  {census['defined']} of "
-                 f"{census['planes']} planes compose strictly, and "
-                 f"{repaired['defined']} with pair-aware repair.",
-                 f"positions = {census['by_position']}, "
-                 f"pair-repaired = {repaired['by_position']}"),
-            Step("what the XOR shortcut discarded",
-                 f"The shortcut kept only the third-axis label: it dropped "
-                 f"{loss['terms_discarded_by_xor']} of the product's "
-                 f"{loss['sakuma_term_count']} terms and the coefficient "
-                 f"{loss['coefficient_on_xor_term']} on the one it kept, "
-                 f"changing the norm from {loss['sakuma_norm2']} to "
-                 f"{loss['shortcut_norm2']}.",
-                 f"u = {loss['u']}, v = {loss['v']}, "
-                 f"difference norm^2 = {loss['difference_norm2']}"),
-            Step("non-associativity is the point",
-                 f"On classes {assoc['classes']} the algebra gives "
-                 f"(a.b).c = {assoc['left_terms']} and "
-                 f"a.(b.c) = {assoc['right_terms']}, which differ, while the "
-                 f"XOR shortcut is associative.  A pipeline that composed "
-                 f"addresses by XOR was working in a quotient where the "
-                 f"Monster's product does not live.",
-                 f"associative = {assoc['associative']}, "
-                 f"xor_associative = {assoc['xor_associative']}, "
-                 f"difference norm^2 = {assoc['difference_norm2']}"),
-        ]
-        expected = {
-            "depth": str(report["depth"]),
-            "planes": str(census["planes"]),
-            "defined_strict": str(census["defined"]),
-            "defined_pair_repaired": str(repaired["defined"]),
-            "sakuma_term_count": str(loss["sakuma_term_count"]),
-            "terms_discarded_by_xor": str(loss["terms_discarded_by_xor"]),
-            "xor_is_the_third_axis_label":
-                str(loss["xor_is_the_third_axis_label"]),
-            "sakuma_norm2": str(loss["sakuma_norm2"]),
-            "shortcut_norm2": str(loss["shortcut_norm2"]),
-            "associative": str(assoc["associative"]),
-            "xor_associative": str(assoc["xor_associative"]),
-            "commutative": str(assoc["commutative"]),
-            "associativity_difference_norm2": str(assoc["difference_norm2"]),
-        }
-        return Solution(
-            query=query, kind="report",
-            answer=f"report monster stack: depth {report['depth']}, "
-                   f"{census['defined']} planes compose strictly and "
-                   f"{repaired['defined']} with pair repair; the Sakuma "
-                   f"product is non-associative where the retired XOR "
-                   f"shortcut was associative",
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_monster_stack", "args": {}},
-            payload={"report": report})
-
-    def _report_multiresolution(self, query: Query) -> Solution:
-        """Wires mrs.multires_report -- bit-level and grid-level addressing."""
-        report = mrs.multires_report()
-        fib = report["fibration"]
-        columns = report["columns"]
-        invariance = report["scale_invariance"]["rows"]
-        collision = report["census_collision"]
-        indices = sorted({col["index"] for col in columns})
-        sig_invariant = all(row["signature_invariant"] for row in invariance)
-        addr_invariant = any(row["address_invariant"] for row in invariance)
-
-        steps = [
-            Step("bit-level micro-addressing",
-                 f"Each of the {fib['columns']} values a MOG column can take "
-                 f"is mapped to a GF(4) x Z_4 fibre coordinate.  The map is "
-                 f"a bijection with round trip, and its kernel "
-                 f"{fib['kernel']} is elementary abelian rather than cyclic "
-                 f"of order 4, so the Z_4 coordinate indexes a fibre as a "
-                 f"set of residues.",
-                 f"bijective = {fib['bijective']}, "
-                 f"round_trip = {fib['round_trip']}, "
-                 f"kernel = {fib['kernel']}"),
-            Step("local sub-lattices",
-                 f"Each column carries a rank-4 local Leech sub-lattice.  "
-                 f"The index of the supported sub-lattice in the projection "
-                 f"is {indices} for every column, so a bit-level reading is "
-                 f"a strictly coarser view of the lattice.",
-                 f"columns = {len(columns)}, indices = {indices}"),
-            Step("grid-level macro-addressing",
-                 f"A whole 2D grid is carried into the 24 coordinates and "
-                 f"read as a ten-plane Monster address, so a configuration "
-                 f"and a single bit are addressed in the same space at two "
-                 f"resolutions.",
-                 f"grid = {report['grid']}, "
-                 f"census = {list(report['grid_census'])}"),
-            Step("scale invariance",
-                 f"Across the sampled grids and scale factors the signature "
-                 f"is invariant ({sig_invariant}) while the Monster address "
-                 f"is not ({addr_invariant}) -- the coarse reading survives "
-                 f"rescaling and the fine one does not, which is the loss "
-                 f"the two levels are there to measure.  A census collision "
-                 f"exhibits it directly: {collision['first']} and "
-                 f"{collision['second']} share a census.",
-                 f"signature invariant = {sig_invariant}, "
-                 f"address invariant = {addr_invariant}, "
-                 f"collision found = {collision['found']}"),
-        ]
-        expected = {
-            "fibre_columns": str(fib["columns"]),
-            "fibre_bijective": str(fib["bijective"]),
-            "fibre_round_trip": str(fib["round_trip"]),
-            "fibre_kernel": str(list(fib["kernel"])),
-            "fibre_kernel_is_cyclic_of_order_4":
-                str(fib["kernel_is_cyclic_of_order_4"]),
-            "column_indices": str(indices),
-            "signature_invariant_everywhere": str(sig_invariant),
-            "address_invariant_anywhere": str(addr_invariant),
-            "census_collision_found": str(collision["found"]),
-            "census_collision_carriers_equal":
-                str(collision["carriers_equal"]),
-        }
-        return Solution(
-            query=query, kind="report",
-            answer=f"report multiresolution: the F_2^4 -> GF(4) x Z_4 fibre "
-                   f"map is a bijection with kernel {list(fib['kernel'])}, "
-                   f"every column sub-lattice has index {indices}, and the "
-                   f"grid signature is scale-invariant where the ten-plane "
-                   f"address is not",
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_multiresolution", "args": {}},
-            payload={"report": report})
-
-    def _report_migration(self, query: Query) -> Solution:
-        """Wires iso.migration_report -- the legacy-to-core bridge."""
-        report = iso.migration_report()
-        codes = report["codes"]
-        isometry = codes["isometry"]
-        automorphism = codes["automorphism"]
-        decoder = report["decoder"]
-        dataset = report["dataset"]
-
-        steps = [
-            Step("two frames, one bridge",
-                 f"The legacy Golay frame and this package's canonical one "
-                 f"share only {codes['shared_codewords']} of their "
-                 f"{codes['core_codewords']} codewords, so legacy data read "
-                 f"in canonical coordinates is a different codeword, not a "
-                 f"relabelled one.  The derived permutation fixes "
-                 f"{len(report['fixed_points'])} coordinates and moves the "
-                 f"rest.",
-                 f"permutation = {report['permutation']}, "
-                 f"shared codewords = {codes['shared_codewords']}"),
-            Step("it is an isomorphism, not an automorphism",
-                 f"Under the permutation "
-                 f"{automorphism['codewords_leaving_the_code']} of the "
-                 f"{automorphism['codewords']} canonical codewords leave the "
-                 f"canonical code -- as they must, since the two codes are "
-                 f"different -- while the weight distributions agree "
-                 f"exactly, so the image is an equivalent [24, 12, 8] code.",
-                 f"is_automorphism = {automorphism['is_automorphism']}, "
-                 f"weight distributions agree = "
-                 f"{codes['weight_distributions_agree']}"),
-            Step("why a permutation and not any linear isomorphism",
-                 f"A coordinate permutation preserves Hamming weight and "
-                 f"distance, checked here on all "
-                 f"{isometry['codewords_checked']} codewords and "
-                 f"{isometry['pairs_checked']} pairs, so it commutes with "
-                 f"nearest-codeword decoding and may be wrapped around the "
-                 f"decoder.  A general linear isomorphism between the two "
-                 f"codes scrambles distance and may not.",
-                 f"weight preserving = {isometry['weight_preserving']}, "
-                 f"distance preserving = "
-                 f"{isometry['distance_preserving']}"),
-            Step("decoding legacy data",
-                 f"Routing legacy words through the canonical frame and the "
-                 f"complete decoder recovers the truth on every sampled "
-                 f"pattern within the packing radius, and turns all "
-                 f"{decoder['snap_silent_ties_total']} silently broken ties "
-                 f"into explicit ambiguities.  Weight-5 miscorrection "
-                 f"survives in both columns, because it is a theorem about "
-                 f"the code.",
-                 f"silent ties = {decoder['snap_silent_ties_total']}, "
-                 f"now flagged = {decoder['routed_flagged_total']}"),
-            Step("bulk migration",
-                 f"Concepts, CRG edges and hexcolour addresses migrate "
-                 f"through one call.  On the exercise dataset "
-                 f"({dataset['concepts']} concepts, {dataset['edges']} "
-                 f"edges, {dataset['hexcolours']} addresses) the migration "
-                 f"round-trips, preserves weights, keeps masks distinct and "
-                 f"leaves no dangling edge.",
-                 f"round trip = {dataset['round_trip']}, "
-                 f"referentially intact = "
-                 f"{dataset['referentially_intact']}"),
-        ]
-        expected = {
-            "is_permutation": str(report["is_permutation"]),
-            "fixed_points": str(list(report["fixed_points"])),
-            "shared_codewords": str(codes["shared_codewords"]),
-            "legacy_is_distinct": str(codes["legacy_is_distinct"]),
-            "weight_distributions_agree":
-                str(codes["weight_distributions_agree"]),
-            "minimum_distance": str(codes["minimum_distance"]),
-            "is_automorphism": str(automorphism["is_automorphism"]),
-            "weight_preserving": str(isometry["weight_preserving"]),
-            "distance_preserving": str(isometry["distance_preserving"]),
-            "snap_silent_ties_total":
-                str(decoder["snap_silent_ties_total"]),
-            "routed_flagged_total": str(decoder["routed_flagged_total"]),
-            "every_silent_tie_is_now_flagged":
-                str(decoder["every_silent_tie_is_now_flagged"]),
-            "guaranteed_below_packing_radius":
-                str(decoder["guaranteed_below_packing_radius"]),
-            "dataset_round_trip": str(dataset["round_trip"]),
-            "dataset_weights_preserved": str(dataset["weights_preserved"]),
-            "dataset_referentially_intact":
-                str(dataset["referentially_intact"]),
-        }
-        return Solution(
-            query=query, kind="report",
-            answer=f"report migration: the legacy and canonical codes share "
-                   f"{codes['shared_codewords']} of "
-                   f"{codes['core_codewords']} codewords; the bridge is a "
-                   f"weight- and distance-preserving permutation, so legacy "
-                   f"data can be decoded through the audited decoder, and "
-                   f"all {decoder['snap_silent_ties_total']} silent ties "
-                   f"become explicit",
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_migration", "args": {}},
-            payload={"report": report})
-
-    # ------------------------------------------------------------------
-    # 3l.  the migrated repository data
-    # ------------------------------------------------------------------
-    # ``report migration`` above is about the *machinery* -- a permutation
-    # between two Golay frames.  These two are about the *data*: which
-    # frame the repository actually writes in, what the migrated state
-    # contains, and what can be asked of it once migrated.
-    # ------------------------------------------------------------------
-
-    def _report_state_migration(self, query: Query) -> Solution:
-        """Wires stm.state_migration_report -- the literal data migration."""
-        report = stm.state_migration_report()
-        if not report.get("available"):
-            return Solution(
-                query=query, kind="report",
-                answer="report state migration: no stored GLM state is "
-                       "present in this checkout",
-                ok=False, error="state migration: no data",
-                steps=(Step("no data",
-                            "Neither the migrated state nor the source "
-                            "state was found under arc_agi_17/results.",
-                            "glm_state_canonical.json absent"),),
-                payload={"report": report})
-
-        checks = report["checks"]
-        frame = report["frame"]
-        verification = report["verification"]
-        addresses = frame["addresses"] or {}
-
-        steps = [
-            Step("which frame the data is in",
-                 f"The repository's own Golay engine and this package's "
-                 f"canonical code are the same "
-                 f"{frame['shared_codewords']} words under the same "
-                 f"coordinate numbering, so concept vectors migrate by the "
-                 f"identity.  The legacy-to-core permutation would move "
-                 f"{frame['permutation_damage']} codewords off the code, so "
-                 f"it must not be applied to them.",
-                 f"frames coincide = {frame['frames_coincide']}, "
-                 f"bridge = {frame['correct_bridge']}"),
-            Step("the one real coordinate correction",
-                 f"Stored integer addresses put coordinate i at bit 23-i.  "
-                 f"Read with the bit reversal, "
-                 f"{addresses.get('codewords_read_msb_first', 0)} of "
-                 f"{addresses.get('addresses', 0)} are Golay codewords; read "
-                 f"without it, "
-                 f"{addresses.get('codewords_read_lsb_first', 0)} are.  The "
-                 f"data decides the convention.",
-                 f"bit reversal required = "
-                 f"{addresses.get('bit_reversal_required')}"),
-            Step("what came across",
-                 f"{checks['concepts_imported']} concepts and "
-                 f"{checks['edges_migrated']} edges, with "
-                 f"{checks['concepts_minted']} carriers minted for edge "
-                 f"endpoints the state never gave one and "
-                 f"{checks['edges_dropped']} edge dropped for a nameless "
-                 f"endpoint.  Roles and quadrant weights are recomputed from "
-                 f"the carriers, and agree with the stored values in all "
-                 f"{checks['roles_agree']} cases.",
-                 f"concepts = {checks['concepts_total']}, "
-                 f"referentially intact = "
-                 f"{checks['referentially_intact']}"),
-            Step("how much of it is anchored",
-                 f"A concept vector is a received word, not a codeword: "
-                 f"{checks['carriers_that_are_codewords']} of "
-                 f"{checks['concepts_total']} are codewords, "
-                 f"{checks['decode_corrected']} decode to a unique nearest "
-                 f"codeword, and {checks['decode_ambiguous']} are genuinely "
-                 f"ambiguous -- six equally near codewords and no answer.  "
-                 f"Those are recorded as ambiguous rather than snapped.",
-                 f"guaranteed = {checks['decode_guaranteed']}, "
-                 f"ambiguous = {checks['decode_ambiguous']}"),
-            Step("exactness",
-                 f"NRCI is rewritten as an exact rational from the package's "
-                 f"Y; the stored float is kept beside it as the rational it "
-                 f"really is, and the two differ by at most "
-                 f"{checks['worst_nrci_gap'][0]}/"
-                 f"{checks['worst_nrci_gap'][1]}.  The written payload "
-                 f"contains {verification['floats_in_payload']} floats.",
-                 f"fields recomputed and agreeing = "
-                 f"{verification['fields_recomputed_and_agreeing']}"),
-        ]
-
-        expected = {
-            "frames_coincide": str(frame["frames_coincide"]),
-            "shared_codewords": str(frame["shared_codewords"]),
-            "permutation_damage": str(frame["permutation_damage"]),
-            "bit_reversal_required":
-                str(addresses.get("bit_reversal_required")),
-            "concepts_imported": str(checks["concepts_imported"]),
-            "concepts_minted": str(checks["concepts_minted"]),
-            "edges_migrated": str(checks["edges_migrated"]),
-            "edges_dropped": str(checks["edges_dropped"]),
-            "referentially_intact": str(checks["referentially_intact"]),
-            "roles_agree": str(checks["roles_agree"]),
-            "carriers_that_are_codewords":
-                str(checks["carriers_that_are_codewords"]),
-            "decode_ambiguous": str(checks["decode_ambiguous"]),
-            "decode_guaranteed": str(checks["decode_guaranteed"]),
-            "worst_nrci_gap": str(list(checks["worst_nrci_gap"])),
-            "fields_recomputed_and_agreeing":
-                str(verification["fields_recomputed_and_agreeing"]),
-            "floats_in_payload": str(verification["floats_in_payload"]),
-        }
-        return Solution(
-            query=query, kind="report",
-            answer=f"report state migration: {checks['concepts_imported']} "
-                   f"concepts and {checks['edges_migrated']} edges migrated "
-                   f"in the canonical frame, "
-                   f"{checks['concepts_minted']} carriers minted, "
-                   f"{checks['decode_ambiguous']} carriers ambiguous under "
-                   f"complete decoding, no float written",
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_state_migration", "args": {}},
-            payload={"report": report})
-
-    def _report_concept_store(self, query: Query) -> Solution:
-        """Wires sto.store_report -- what the migrated data supports."""
-        report = sto.store_report()
-        if not report.get("available"):
-            return Solution(
-                query=query, kind="report",
-                answer="report concept store: the migrated state has not "
-                       "been written",
-                ok=False, error="concept store: no data",
-                steps=(Step("no data",
-                            "Run the state migration first.",
-                            "glm_state_canonical.json absent"),),
-                payload={"report": report})
-
-        steps = [
-            Step("the graph",
-                 f"{report['concepts']} concepts, {report['edges']} edges "
-                 f"and {report['labels']} distinct relation labels.  The "
-                 f"busiest concept is {report['max_degree_concept']} with "
-                 f"{report['max_degree']} edges.",
-                 f"concepts = {report['concepts']}, "
-                 f"edges = {report['edges']}"),
-            Step("how much of it is asserted",
-                 f"{report['asserted_edges']} edges carry a real relation "
-                 f"label; {report['auto_proposed_edges']} are "
-                 f"'auto_proposed', proposals the growth loop made and "
-                 f"nothing confirmed.  A walk that excludes them is a walk "
-                 f"over asserted knowledge only, and it gives different "
-                 f"answers.",
-                 f"asserted = {report['asserted_edges']}, "
-                 f"auto-proposed = {report['auto_proposed_edges']}"),
-            Step("how much of it is reachable",
-                 f"{report['isolated_concepts']} of the concepts have no "
-                 f"edge at all, so they can be described but not reasoned "
-                 f"about relationally; {report['minted_concepts']} carriers "
-                 f"were minted by the migration and are marked as such.",
-                 f"isolated = {report['isolated_concepts']}, "
-                 f"minted = {report['minted_concepts']}"),
-            Step("two kinds of nearness",
-                 f"On {report['samples_checked']} sampled concepts, the "
-                 f"graph neighbourhood and the five nearest carriers in "
-                 f"Hamming distance share a name in "
-                 f"{report['samples_where_graph_and_substrate_agree']} "
-                 f"cases.  The carriers were assigned by digest, not by "
-                 f"meaning, so substrate distance between concepts is not a "
-                 f"semantic distance and must not be read as one.",
-                 f"agreements = "
-                 f"{report['samples_where_graph_and_substrate_agree']}"
-                 f"/{report['samples_checked']}"),
-        ]
-        expected = {
-            "concepts": str(report["concepts"]),
-            "edges": str(report["edges"]),
-            "labels": str(report["labels"]),
-            "asserted_edges": str(report["asserted_edges"]),
-            "auto_proposed_edges": str(report["auto_proposed_edges"]),
-            "isolated_concepts": str(report["isolated_concepts"]),
-            "minted_concepts": str(report["minted_concepts"]),
-            "max_degree": str(report["max_degree"]),
-            "max_degree_concept": str(report["max_degree_concept"]),
-            "samples_checked": str(report["samples_checked"]),
-            "samples_where_graph_and_substrate_agree":
-                str(report["samples_where_graph_and_substrate_agree"]),
-        }
-        return Solution(
-            query=query, kind="report",
-            answer=f"report concept store: {report['concepts']} concepts, "
-                   f"{report['edges']} edges "
-                   f"({report['asserted_edges']} asserted, "
-                   f"{report['auto_proposed_edges']} auto-proposed), "
-                   f"{report['isolated_concepts']} isolated",
-            steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_concept_store", "args": {}},
-            payload={"report": report})
 
     # ------------------------------------------------------------------
     # 3m.  task -- a worked end-to-end run through the whole pipeline
@@ -4293,8 +2624,10 @@ class GeometricSession:
     def _solve_angle(self, query: Query) -> Solution:
         if len(query.operands) < 2:
             raise SolverError("angle: needs two operands, A and B")
-        a = self.resolve(query.operands[0], query.domain)
-        b = self.resolve(query.operands[1], query.domain)
+        a, formula_a = self._resolve_or_parse_molecule(query.operands[0],
+                                                       query.domain)
+        b, formula_b = self._resolve_or_parse_molecule(query.operands[1],
+                                                       query.domain)
         try:
             sc2 = me.signed_cosine_squared(a.carrier, b.carrier)
         except ValueError as exc:
@@ -4320,7 +2653,9 @@ class GeometricSession:
             regime = "acute" if sc2 > 0 else "obtuse"
         else:
             regime = "near-orthogonal"
-        steps = [
+        steps = self._formula_steps(
+            ((query.operands[0], a, formula_a),
+             (query.operands[1], b, formula_b))) + [
             Step("signed_cosine_squared",
                  f"The signed cosine squared is sign(<A, B>) * cos^2(A, B), "
                  f"an exact rational that orders pairs by angle exactly.  "
@@ -4348,9 +2683,15 @@ class GeometricSession:
             steps=tuple(steps), expected=expected,
             script_spec={"template": "angle",
                          "args": {"domain_a": a.domain, "name_a": a.name,
-                                  "domain_b": b.domain, "name_b": b.name}},
+                                  "domain_b": b.domain, "name_b": b.name,
+                                  "formula_a": formula_a,
+                                  "formula_b": formula_b}},
             payload={"signed_cosine_squared": q(sc2),
-                     "regime": regime})
+                     "regime": regime,
+                     "formula_a": formula_a, "formula_b": formula_b,
+                     "unregistered": [n for n, f in
+                                      ((a.name, formula_a), (b.name, formula_b))
+                                      if f is not None]})
 
     # ------------------------------------------------------------------
     # 3m.  pi_groups -- Buckingham-Pi over a set of quantities (v1.0.0)
@@ -4548,120 +2889,484 @@ class GeometricSession:
             payload={"resolutions": [a.as_dict() for a in answers],
                      "claims": [c.as_dict() for c in claims]})
 
-    def _report_semantics(self, query: Query) -> Solution:
-        """Wires sau.audit_report -- what the inherited graph contains.
 
-        Four measurements over the shipped state file, and the grounded
-        graph that replaces what they condemn.  Every number is recomputed
-        here; none is quoted.
+    def _solve_measure(self, query: Query) -> Solution:
+        """Read a measure word against a comparison class -- or refuse.
+
+        Three shapes, and the third is the point.  ``measure hot in tea``
+        answers with an exact magnitude; ``measure 300 in tea`` answers with
+        the word a magnitude earns; ``measure hot`` answers with the word read
+        against every class of its quantity, which is what shows that *hot*
+        is relative rather than absolute.  A word the registers cannot reach
+        at all, and a word read against a class of another quantity --
+        ``measure large in room``, where *room* brackets a length and
+        ``large`` measures a volume -- are **refused with the reason**,
+        because ``GLM.Info.boundary_empty_of_unmeasured`` says the widened
+        view gains nothing there: there is no measurement to report, and
+        inventing one would be inventing a coordinate.
         """
-        report = sau.audit_report()
-        concepts = report["concept_grounding"]
-        edges = report["edge_grounding"]
-        carriers = report["carrier_information"]
-        variants = report["notational_variants"]
-        plan = report["purge_plan"]
-        replacement = report["replacement"]
-        classes = edges["classes"]              # type: ignore[index]
+        subject = str(query.options.get("subject", "")).strip()
+        klass = str(query.options.get("class", "")).strip()
+        if not subject:
+            raise SolverError(
+                "measure: nothing to measure.  Try 'measure hot in tea'")
 
+        magnitude = as_magnitude(subject)
+        try:
+            if magnitude is not None:
+                if not klass:
+                    raise SolverError(
+                        f"measure: a magnitude needs a comparison class -- "
+                        f"try 'measure {subject} in tea'")
+                return self._measure_from_magnitude(query, magnitude, klass)
+            if klass:
+                return self._measure_from_word(query, subject, klass)
+            return self._measure_across_classes(query, subject)
+        except mvw.MeasureBoundary as boundary:
+            raise SolverError(f"measure: {boundary}") from None
+        except KeyError as error:
+            raise SolverError(f"measure: {error}") from None
+
+    def _measure_from_word(self, query: Query, word: str,
+                           klass: str) -> Solution:
+        """``measure hot in tea`` -- the word, as a magnitude."""
+        reading = mvw.read(word, klass)
+        entry = mvw.word_by_name(word)
+        named = mvw.lexicon_quantity(word)
+        relations = mvw.measure_relations(word)
+        above = mvw.above_on(word)
+        others = [mvw.read(word, c.name)
+                  for c in do.classes_for_quantity(reading.quantity)
+                  if c.name != klass]
         steps = [
-            Step("concepts",
-                 f"Of the {concepts['concepts']} inherited concepts, "     # type: ignore[index]
-                 f"{concepts['grounded']} denote something determinate.",  # type: ignore[index]
-                 f"grounded = {concepts['grounded_fraction']}\n"           # type: ignore[index]
-                 f"by sense = {concepts['by_sense']}"),                    # type: ignore[index]
-            Step("edges",
-                 f"Of the {edges['edges']} inherited edges, "              # type: ignore[index]
-                 f"{classes.get('derivable', 0)} state a relation between "
-                 f"two determinate referents that can be re-derived now.",
-                 f"classes = {classes}"),
-            Step("carriers",
-                 "Stored carrier distance against semantic relatedness: a "
-                 "carrier that measured the subjects would put related "
-                 "pairs closer.",
-                 f"mean Hamming, related = "
-                 f"{carriers['mean_hamming_related']}\n"                   # type: ignore[index]
-                 f"mean Hamming, unrelated = "
-                 f"{carriers['mean_hamming_unrelated']}\n"                 # type: ignore[index]
-                 f"two random 24-bit words average 12"),
-            Step("synonyms",
-                 "Stored names that denote the same thing, and the distance "
-                 "the inherited carrier puts between them.",
-                 f"synonym pairs = {variants['synonym_pairs']}\n"          # type: ignore[index]
-                 f"mean legacy Hamming = "
-                 f"{variants['mean_legacy_hamming_between_synonyms']}\n"   # type: ignore[index]
-                 f"distance in the meaning space = 0"),
-            Step("replacement",
-                 f"The grounded graph built from the registers: "
-                 f"{replacement['meanings']} meanings carrying "           # type: ignore[index]
-                 f"{replacement['notations']} notations, and every edge "   # type: ignore[index]
-                 f"re-derived from the meanings it joins.",
-                 f"binary edges = {replacement['binary_edges']}\n"         # type: ignore[index]
-                 f"ternary edges = {replacement['ternary_edges']}\n"       # type: ignore[index]
-                 f"all re-verified = "
-                 f"{replacement['all_edges_reverified']}"),                # type: ignore[index]
+            Step("the quantity is not new information",
+                 f"The lexicon already says {word} is `property_of "
+                 f"{named or reading.quantity}`"
+                 + (f", which the register calls {reading.quantity} -- an "
+                    f"alias resolves the two names and supplies no "
+                    f"coordinate" if named and named != reading.quantity
+                    else "") +
+                 f", and the physics register already "
+                 f"holds {reading.quantity} with dimension "
+                 f"{reading.dimension} in {reading.unit}.  Neither is typed "
+                 f"twice here: both are read back out of the registers.",
+                 f"{word} measures {reading.quantity} "
+                 f"[{reading.dimension}], unit {reading.unit}"
+                 + (f", lexicon name {named}"
+                    if named and named != reading.quantity else "")),
+            Step("the class supplies the bracket",
+                 f"A comparison class is an exact bracket on the quantity, "
+                 f"and it is the only new datum in the answer: "
+                 f"{klass} runs from {q(reading.low)} to {q(reading.high)} "
+                 f"{reading.unit}.",
+                 f"{klass}: [{q(reading.low)}, {q(reading.high)}] "
+                 f"{reading.unit}"),
+            Step("the word supplies the position",
+                 f"{word} sits at {q(reading.position)} of the "
+                 f"{reading.quantity} scale, above {list(above) or 'nothing'} "
+                 f"and below the rest of it.  The position is exact and the "
+                 f"order is the `above_on` relation.",
+                 f"position {q(reading.position)}; above_on "
+                 f"{list(above)}"),
+            Step("the magnitude is the two together",
+                 f"low + position * (high - low), in exact rationals and "
+                 f"with no float constructed: "
+                 f"{q(reading.low)} + {q(reading.position)} * "
+                 f"({q(reading.high)} - {q(reading.low)}) = "
+                 f"{q(reading.magnitude)} {reading.unit}.",
+                 f"{word} in {klass} = {q(reading.magnitude)} "
+                 f"{reading.unit}"),
+            Step("the same word, measured elsewhere",
+                 f"The measurement is relative, and this is what that means: "
+                 f"the same word against the other classes of "
+                 f"{reading.quantity} names quite different magnitudes.",
+                 "; ".join(f"{o.comparison_class} {q(o.magnitude)} {o.unit}"
+                           for o in others) or "no other class"),
+            Step("what the static reading could not say",
+                 f"The concept carrier is the same for every use of {word}: "
+                 f"`GLM.Info.staticLayer_conflates_hot_uses` is that as a "
+                 f"theorem, and `GLM.Info.measureLayer_separates_hot_uses` "
+                 f"is the widened view telling them apart.  The relative "
+                 f"reading is added beside the static one, never in place of "
+                 f"it -- `GLM.Info.measureLayer_refines_staticLayer`.",
+                 f"derived relations: "
+                 + "; ".join(f"{p} {o}" for p, o in relations[:4]) + " ..."),
         ]
-
         expected = {
-            "legacy_concepts": str(concepts["concepts"]),          # type: ignore[index]
-            "legacy_concepts_grounded": str(concepts["grounded"]),  # type: ignore[index]
-            "legacy_edges": str(edges["edges"]),                    # type: ignore[index]
-            "edges_proximity_artefact": str(
-                classes.get("proximity_artefact", 0)),
-            "edges_endpoint_ungrounded": str(
-                classes.get("endpoint_ungrounded", 0)),
-            "edges_derivable": str(classes.get("derivable", 0)),
-            "edges_retained": str(plan["retained"]),                # type: ignore[index]
-            "edges_dumped": str(plan["dumped"]),                    # type: ignore[index]
-            "mean_hamming_related": str(
-                carriers["mean_hamming_related"]),                  # type: ignore[index]
-            "mean_hamming_unrelated": str(
-                carriers["mean_hamming_unrelated"]),                # type: ignore[index]
-            "synonym_pairs": str(variants["synonym_pairs"]),        # type: ignore[index]
-            "mean_legacy_hamming_between_synonyms": str(
-                variants["mean_legacy_hamming_between_synonyms"]),   # type: ignore[index]
-            "grounded_meanings": str(replacement["meanings"]),      # type: ignore[index]
-            "grounded_notations": str(replacement["notations"]),    # type: ignore[index]
-            "grounded_binary_edges": str(
-                replacement["binary_edges"]),                       # type: ignore[index]
-            "grounded_ternary_edges": str(
-                replacement["ternary_edges"]),                      # type: ignore[index]
-            "all_edges_reverified": str(
-                replacement["all_edges_reverified"]),               # type: ignore[index]
+            "word": word,
+            "comparison_class": klass,
+            "quantity": reading.quantity,
+            "unit": reading.unit,
+            "dimension": reading.dimension,
+            "position": q(reading.position),
+            "magnitude": q(reading.magnitude),
+            "low": q(reading.low),
+            "high": q(reading.high),
+            "above_on": ",".join(above),
+            "status": entry.status,
+            "other_classes": ",".join(
+                f"{o.comparison_class}:{q(o.magnitude)}" for o in others),
         }
-
-        derived_edges = (int(replacement["binary_edges"])       # type: ignore[index]
-                         + int(replacement["ternary_edges"]))   # type: ignore[index]
         return Solution(
-            query=query, kind="report",
-            answer=(f"report semantics: {concepts['grounded']} of "          # type: ignore[index]
-                    f"{concepts['concepts']} inherited concepts denote "     # type: ignore[index]
-                    f"anything determinate; {plan['retained']} of "          # type: ignore[index]
-                    f"{plan['edges']} inherited edges survive the audit; "   # type: ignore[index]
-                    f"the grounded graph has {replacement['meanings']} "     # type: ignore[index]
-                    f"meanings and {derived_edges} re-derived edges"),
+            query=query, kind="measure",
+            answer=f"{word} in {klass}: {q(reading.magnitude)} "
+                   f"{reading.unit} -- the {reading.quantity} scale puts "
+                   f"{word} at {q(reading.position)} of the class bracket "
+                   f"[{q(reading.low)}, {q(reading.high)}] {reading.unit}, "
+                   f"and the same word against "
+                   + ", ".join(f"{o.comparison_class} is {q(o.magnitude)} "
+                               f"{o.unit}" for o in others[:2])
+                   + f"; the measurement is exact and the static concept "
+                     f"carrier is unchanged by it",
             steps=tuple(steps), expected=expected,
-            script_spec={"template": "report_semantics", "args": {}},
-            payload={"report": report})
+            script_spec={"template": "measure",
+                         "args": {"word": word, "klass": klass}},
+            payload={"reading": jsonable(reading.as_dict()),
+                     "relations": [list(r) for r in relations]})
+
+    def _measure_from_magnitude(self, query: Query, magnitude: Fraction,
+                                klass: str) -> Solution:
+        """``measure 300 in tea`` -- the magnitude, as a word."""
+        verdict = mvw.classify(magnitude, klass)
+        word = str(verdict["word"])
+        steps = [
+            Step("the class is read from the register",
+                 f"{klass} brackets {verdict['quantity']} between "
+                 f"{q(verdict['bracket'][0])} and "
+                 f"{q(verdict['bracket'][1])} {verdict['unit']}.",
+                 f"bracket [{q(verdict['bracket'][0])}, "
+                 f"{q(verdict['bracket'][1])}] {verdict['unit']}"),
+            Step("the magnitude is placed exactly",
+                 f"(magnitude - low) / (high - low), in exact rationals: "
+                 f"{q(magnitude)} sits at {q(verdict['position'])} of the "
+                 f"class, and it is "
+                 f"{'inside' if verdict['inside_bracket'] else 'outside'} "
+                 f"the bracket.  A value outside is reported as outside "
+                 f"rather than clamped: the class is a claim about ordinary "
+                 f"cases.",
+                 f"position {q(verdict['position'])}, inside "
+                 f"{verdict['inside_bracket']}"),
+            Step("the nearest scale word",
+                 f"The {verdict['quantity']} scale is an ordered family of "
+                 f"degree words with exact positions, and the nearest to "
+                 f"{q(verdict['position'])} is {word} at "
+                 f"{q(verdict['word_position'])}.  Above it on the same "
+                 f"scale: {list(verdict['above'])}.",
+                 f"{word} at {q(verdict['word_position'])}; above "
+                 f"{list(verdict['above'])}"),
+        ]
+        expected = {
+            "magnitude": q(magnitude),
+            "comparison_class": klass,
+            "quantity": str(verdict["quantity"]),
+            "unit": str(verdict["unit"]),
+            "position": q(verdict["position"]),
+            "inside_bracket": str(verdict["inside_bracket"]),
+            "word": word,
+            "word_position": q(verdict["word_position"]),
+            "above": ",".join(verdict["above"]),
+        }
+        return Solution(
+            query=query, kind="measure",
+            answer=f"{q(magnitude)} {verdict['unit']} in {klass}: "
+                   f"{word} -- it sits at {q(verdict['position'])} of the "
+                   f"class bracket, "
+                   f"{'inside' if verdict['inside_bracket'] else 'outside'} "
+                   f"it, and the words above it on the "
+                   f"{verdict['quantity']} scale are "
+                   f"{list(verdict['above'])}",
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "measure_magnitude",
+                         "args": {"magnitude": str(magnitude),
+                                  "klass": klass}},
+            payload={"verdict": jsonable(verdict)})
+
+    def _measure_across_classes(self, query: Query, word: str) -> Solution:
+        """``measure hot`` -- the word against every class of its quantity."""
+        entry = mvw.word_by_name(word)
+        if not entry.scaled or entry.quantity is None:
+            raise mvw.MeasureBoundary(
+                f"{word!r} has no measure reading: {entry.reason}",
+                reason=entry.status)
+        readings = [mvw.read(word, c.name)
+                    for c in do.classes_for_quantity(entry.quantity)]
+        low = min(readings, key=lambda r: r.magnitude)
+        high = max(readings, key=lambda r: r.magnitude)
+        steps = [
+            Step("one word, one position, many magnitudes",
+                 f"{word} is at {q(entry.position)} of the "
+                 f"{entry.quantity} scale in every class alike; what changes "
+                 f"is the bracket the position is read against.",
+                 "; ".join(f"{r.comparison_class} {q(r.magnitude)} {r.unit}"
+                           for r in readings)),
+            Step("the spread is the answer",
+                 f"Between {low.comparison_class} and "
+                 f"{high.comparison_class} the same word names magnitudes "
+                 f"differing by a factor of "
+                 f"{q(high.magnitude / low.magnitude)}.  No layer of the "
+                 f"carrier stack could have said this, because the concept "
+                 f"carrier is identical across the uses.",
+                 f"{q(low.magnitude)} .. {q(high.magnitude)} {low.unit}, "
+                 f"ratio {q(high.magnitude / low.magnitude)}"),
+        ]
+        expected = {
+            "word": word,
+            "quantity": str(entry.quantity),
+            "position": q(entry.position),
+            "classes": ",".join(r.comparison_class for r in readings),
+            "magnitudes": ",".join(q(r.magnitude) for r in readings),
+            "lowest": low.comparison_class,
+            "highest": high.comparison_class,
+            "ratio": q(high.magnitude / low.magnitude),
+        }
+        return Solution(
+            query=query, kind="measure",
+            answer=f"{word} measures {entry.quantity} at "
+                   f"{q(entry.position)} of its scale, which against the "
+                   f"{len(readings)} classes the register holds is "
+                   + ", ".join(f"{r.comparison_class} {q(r.magnitude)} "
+                               f"{r.unit}" for r in readings)
+                   + f" -- a spread of "
+                     f"{q(high.magnitude / low.magnitude)} between "
+                     f"{low.comparison_class} and {high.comparison_class}",
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "measure_word", "args": {"word": word}},
+            payload={"readings": [jsonable(r.as_dict()) for r in readings]})
+
+    # ------------------------------------------------------------------
+    # 3z.  comparative -- *hotter than*, *as hot as*, between two uses
+    # ------------------------------------------------------------------
+
+    def _solve_comparative(self, query: Query) -> Solution:
+        """Decide a comparative between two measured uses -- or refuse.
+
+        ``is cold in stellar_surface hotter than hot in tea`` is **true**:
+        8000 K against 363 K, although *cold* sits below *hot* on the scale.
+        That is the whole point of the query kind -- a comparative is a
+        relation between two *uses*, and the words alone do not decide it
+        across comparison classes (``GLM.Info.comparative_not_static``,
+        ``GLM.Info.comparative_not_determined_by_word_order``).  Within one
+        class they do, exactly (``GLM.Info.hotterThan_iff_position_lt``).
+
+        Three refusals, each a register boundary with its reason stated: a
+        use the registers cannot measure, two uses of different quantities,
+        and a comparative of the wrong quantity for the pair.
+        """
+        form = str(query.options.get("form", "")).strip()
+        equative = bool(query.options.get("equative", False))
+        left_word = str(query.options.get("left_word", "")).strip()
+        left_class = str(query.options.get("left_class", "")).strip()
+        right_word = str(query.options.get("right_word", "")).strip()
+        right_class = str(query.options.get("right_class", "")).strip()
+        if not (form and left_word and left_class and right_word
+                and right_class):
+            raise SolverError(
+                "comparative: two measured uses are needed -- try 'is cold "
+                "in stellar_surface hotter than hot in tea'")
+        try:
+            verdict = mvw.answer_comparative(
+                form, left_word, left_class, right_word, right_class,
+                equative=equative)
+        except mvw.MeasureBoundary as boundary:
+            raise SolverError(f"comparative: {boundary}") from None
+        except KeyError as error:
+            raise SolverError(f"comparative: {error}") from None
+
+        comparison = verdict["comparison"]
+        left, right = comparison.left, comparison.right
+        audit = mvw.comparative_audit()
+        cross = audit["cross_class"]
+        same = audit["same_class"]
+        marker = (f"as {verdict['stem']} as" if equative
+                  else f"{form} than")
+        steps = [
+            Step("each side is read as an exact magnitude",
+                 f"A comparative is a relation between two *uses*, so both "
+                 f"sides are read first: {left_word} in {left_class} is "
+                 f"{q(left.magnitude)} {left.unit} and {right_word} in "
+                 f"{right_class} is {q(right.magnitude)} {right.unit}, each "
+                 f"low + position * (high - low) in exact rationals.",
+                 f"{q(left.magnitude)} {left.unit} vs "
+                 f"{q(right.magnitude)} {right.unit}"),
+            Step("the marker's direction is read off the register",
+                 f"{marker!r} is built from the degree word "
+                 f"{verdict['stem']!r}, which the register puts at "
+                 f"{q(mvw.word_by_name(str(verdict['stem'])).position)} "
+                 f"of the {verdict['quantity']} scale"
+                 + (", and an equative asserts equality of magnitudes"
+                    if equative else
+                    f", above the midpoint, so it asserts the greater "
+                    f"magnitude" if verdict["direction"] == "greater" else
+                    f", below the midpoint, so it asserts the smaller "
+                    f"magnitude") +
+                 f".  A word exactly at the midpoint names no direction and "
+                 f"the query refuses rather than guessing one.",
+                 f"stem {verdict['stem']}, direction "
+                 f"{verdict['direction']}"),
+            Step("the comparison is exact",
+                 f"{q(left.magnitude)} - {q(right.magnitude)} = "
+                 f"{q(verdict['difference'])} {left.unit}"
+                 + (f", a ratio of {q(verdict['ratio'])}"
+                    if verdict["ratio"] is not None else "") +
+                 f".  No float is constructed, and the trichotomy is the "
+                 f"one `GLM.Info.hotterThan_trichotomy` proves: greater, "
+                 f"equal or less, and exactly one of them.",
+                 f"order {verdict['order']}, claim "
+                 f"{'holds' if verdict['holds'] else 'fails'}"),
+            Step("what the words alone would have said",
+                 f"On the scale, {left_word} is at {q(left.position)} and "
+                 f"{right_word} at {q(right.position)}, which orders them "
+                 f"{verdict['word_order']}; the magnitudes order them "
+                 f"{verdict['order']}.  "
+                 + ("The two agree here."
+                    if verdict["word_order"] == verdict["order"] else
+                    "They disagree -- the class is load-bearing, and a "
+                    "reading of the two concepts alone would have answered "
+                    "this backwards."),
+                 f"word order {verdict['word_order']}, magnitude order "
+                 f"{verdict['order']}"),
+            Step("how often that happens, measured",
+                 f"Over the {audit['uses']} measured uses the registers "
+                 f"admit, {audit['comparable_pairs']} pairs share a "
+                 f"quantity and are comparable.  Within one class the word "
+                 f"order decides every one of the {same['pairs']} pairs -- "
+                 f"which `GLM.Info.hotterThan_iff_position_lt` proves it "
+                 f"must -- and across classes it gets "
+                 f"{cross['disagree']} of {cross['pairs']} backwards.",
+                 f"same class {same['disagree']}/{same['pairs']} "
+                 f"disagree; cross class {cross['disagree']}/"
+                 f"{cross['pairs']}"),
+        ]
+        expected = {
+            "form": form,
+            "stem": str(verdict["stem"]),
+            "equative": str(equative),
+            "direction": str(verdict["direction"]),
+            "quantity": str(verdict["quantity"]),
+            "unit": str(verdict["unit"]),
+            "left_magnitude": q(left.magnitude),
+            "right_magnitude": q(right.magnitude),
+            "difference": q(verdict["difference"]),
+            "order": str(verdict["order"]),
+            "word_order": str(verdict["word_order"]),
+            "holds": str(verdict["holds"]),
+            "same_class_disagree": str(same["disagree"]),
+            "cross_class_disagree": str(cross["disagree"]),
+            "cross_class_pairs": str(cross["pairs"]),
+        }
+        return Solution(
+            query=query, kind="comparative",
+            answer=f"{'Yes' if verdict['holds'] else 'No'}: "
+                   f"{verdict['claim']} is "
+                   f"{'true' if verdict['holds'] else 'false'} -- "
+                   f"{left_word} in {left_class} is {q(left.magnitude)} "
+                   f"{left.unit} and {right_word} in {right_class} is "
+                   f"{q(right.magnitude)} {right.unit}"
+                   + ("; the scale order of the two words agrees with the "
+                      "magnitudes here"
+                      if verdict["word_order"] == verdict["order"] else
+                      "; the scale order of the two words disagrees with "
+                      "the magnitudes, so the comparison class decides it"),
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "comparative",
+                         "args": {"form": form,
+                                  "equative": equative,
+                                  "left_word": left_word,
+                                  "left_class": left_class,
+                                  "right_word": right_word,
+                                  "right_class": right_class}},
+            payload={"comparison": jsonable(comparison.as_dict()),
+                     "holds": bool(verdict["holds"]),
+                     "audit": {"uses": audit["uses"],
+                               "comparable_pairs": audit["comparable_pairs"],
+                               "same_class_pairs": same["pairs"],
+                               "same_class_disagree": same["disagree"],
+                               "cross_class_pairs": cross["pairs"],
+                               "cross_class_disagree": cross["disagree"]}})
 
 
-def _jsonable(mapping: Mapping[str, Any]) -> Dict[str, object]:
-    """Render an attribute mapping so ``json.dumps`` accepts it.
+    # -- v1.11.0: the recipe made into an object -------------------------
 
-    Rationals become ``"n/d"`` strings rather than floats, which is the only
-    lossless option and the one the whole package uses.
-    """
-    out: Dict[str, object] = {}
-    for key, value in sorted(mapping.items()):
-        if isinstance(value, Fraction):
-            out[key] = q(value)
-        elif isinstance(value, (list, tuple)):
-            out[key] = [q(x) if isinstance(x, Fraction) else x for x in value]
-        elif isinstance(value, (int, str, bool)) or value is None:
-            out[key] = value
-        else:
-            out[key] = repr(value)
-    return out
+    def _solve_derive(self, query: Query) -> Solution:
+        """``derive span_ratio of tea`` -- one coordinate, off a description.
+
+        The answering path knows no domain: it asks the descriptions in
+        :mod:`glm_universal.recipe.descriptions` which of them derives the
+        coordinate, and that description answers.  A coordinate no
+        description derives is **refused with the reason**, which is
+        ``GLM.Recipe.Spec.answer_eq_none_iff``: the answerable coordinates are
+        exactly the described ones, so there is nothing to guess at.
+        """
+        coordinate = str(query.options.get("coordinate", "")).strip()
+        target = str(query.options.get("object", "")).strip()
+        named = str(query.options.get("domain", "")).strip() or None
+        if not coordinate or not target:
+            raise SolverError("derive: name a coordinate and an object, "
+                              "e.g. 'derive span_ratio of tea'")
+        try:
+            result = rcp.ask(coordinate, target, named)
+        except KeyError as error:
+            raise SolverError(f"derive: {error}") from None
+        if not result["answered"]:
+            raise SolverError(f"derive: {result['reason']}")
+
+        spec = rcp.description_by_name(str(result["domain"]))
+        value = result["value"]
+        rendered = q(value) if isinstance(value, Fraction) else str(value)
+        steps = [
+            Step("the coordinate is looked up in the descriptions",
+                 f"Nothing in the answering path knows what "
+                 f"{result['domain']} is about.  The described domains are "
+                 f"{', '.join(rcp.described_domains())}, and "
+                 f"{result['domain']} is the one whose description derives "
+                 f"{coordinate!r}.",
+                 f"{coordinate} is coordinate "
+                 f"{spec.layout.index(coordinate)} of "
+                 f"{len(spec.coordinates)} in the {spec.name} description"),
+            Step("the rule says what it derives from",
+                 f"A description states, for every coordinate, the rule that "
+                 f"computes it and the held quantity it comes from -- which "
+                 f"is what makes *nothing dimensional is typed twice* "
+                 f"checkable rather than aspirational.",
+                 f"{coordinate} = {result['rule']}, from {result['source']} "
+                 f"({result['kind']})"),
+            Step("the value, exactly",
+                 f"Computed from {target}'s held facts by the rule above; "
+                 f"the value is an integer or an exact rational and no float "
+                 f"is constructed anywhere on the path.",
+                 f"{coordinate} of {target} = {rendered}"),
+            Step("what would be refused instead",
+                 f"The same surface would refuse a coordinate no description "
+                 f"derives -- there is no `cents` in the harmonic "
+                 f"description, because a cent is a logarithm -- and "
+                 f"`GLM.Recipe.Spec.answer_eq_none_iff` says that boundary "
+                 f"is exactly the undescribed coordinates.  The {spec.name} "
+                 f"description keeps witnesses for it.",
+                 f"refused for {spec.name}: {', '.join(spec.refuses)}"),
+        ]
+        expected = {
+            "domain": str(result["domain"]),
+            "coordinate": coordinate,
+            "object": target,
+            "value": rendered,
+            "kind": str(result["kind"]),
+            "rule": str(result["rule"]),
+            "index": str(spec.layout.index(coordinate)),
+        }
+        return Solution(
+            query=query, kind="derive",
+            answer=f"{coordinate} of {target} = {rendered} -- derived by "
+                   f"{result['rule']} from {result['source']}, in the "
+                   f"{result['domain']} description ({result['kind']}); the "
+                   f"answering path holds no rule of its own, only the "
+                   f"description",
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "derive",
+                         "args": {"coordinate": coordinate,
+                                  "object": target,
+                                  "domain": str(result["domain"])}},
+            payload={"answer": {k: (q(v) if isinstance(v, Fraction) else v)
+                                for k, v in result.items()}})
 
 
 # Keep a module-level reference so the digit-stack import is not flagged as

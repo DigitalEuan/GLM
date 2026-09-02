@@ -38,6 +38,7 @@ from fractions import Fraction
 from pathlib import Path
 from typing import Dict, List, Optional, Sequence
 
+from ..derived import memo
 from . import audit as sau
 from .graph import SemanticGraph, build_graph, graph_report
 from .meaning import Meaning, encode
@@ -100,6 +101,7 @@ def graph_document(graph: Optional[SemanticGraph] = None) -> Dict[str, object]:
     }
 
 
+@memo
 def purge_document() -> Dict[str, object]:
     """The audit of the inherited graph and the plan that follows from it."""
     plan = sau.purge_plan()

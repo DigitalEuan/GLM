@@ -37,6 +37,8 @@ Every number here is an exact ``Fraction``.
 
 from __future__ import annotations
 
+from functools import lru_cache
+
 from fractions import Fraction
 from typing import Dict, List, Optional, Sequence, Tuple
 
@@ -289,6 +291,7 @@ def climb(center: Sequence, active: Sequence[Tuple[int, ...]],
     }
 
 
+@lru_cache(maxsize=None)
 def walk_to_deep_hole(seed: int = 20260825, spread: int = 250
                       ) -> Optional[Dict[str, object]]:
     """Walk to a Voronoi vertex, then climb.  The whole process, once.

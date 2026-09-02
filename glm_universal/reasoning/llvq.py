@@ -44,11 +44,13 @@ What this module does:
 
 What this module does NOT do:
 
-* It does not implement the full O(1) lookup table that the directive
-  envisions.  That requires a precomputed shell table indexed by the
-  first few binary digits of the input, which is a substantial
-  engineering project.  This module gives the *classification* layer
-  that such a table would expose.
+* It does not itself hold the O(1) lookup table that the directive
+  envisions.  That table is
+  :mod:`glm_universal.reasoning.llvq_table`, and it is not indexed by
+  the leading binary digits: the MOG's own structure gives a 16-entry
+  column table, 64 hexacode words and 128 classes of 32 codewords,
+  which is what the address hot path decodes through.  This module
+  gives the *classification* layer beside it.
 
 Everything is exact integer / Fraction arithmetic.
 """
@@ -221,8 +223,12 @@ def llvq_report() -> Dict[str, object]:
         ),
         "status": (
             "The shell classification layer is implemented here.  The "
-            "O(1) lookup the directive envisions is implemented in "
-            "reasoning.fwht_decode, and not as a stored codebook: a "
+            "O(1) table the directive envisions is "
+            "reasoning.llvq_table: the MOG's 16-entry column table, the "
+            "64 hexacode words and the 128 classes of 32 codewords, "
+            "which the address hot path now decodes through.  A second "
+            "constant-time route is in "
+            "reasoning.fwht_decode, and that one is not a stored codebook: a "
             "lookup on leading digits alone cannot see reliability "
             "magnitudes, so instead of storing more digits the fast "
             "path was given a *certificate*.  It hard-decides the 24 "
@@ -242,6 +248,8 @@ def llvq_report() -> Dict[str, object]:
             "(118 elements) is small enough that the existing "
             "nearest-lattice-point is sufficient, so this is potential "
             "rather than a measured win; what has been built is the "
-            "two-tier decoder it would rest on."
+            "decoder it would rest on -- the class table of "
+            "reasoning.llvq_table beside the certified tier of "
+            "reasoning.fwht_decode."
         ),
     }

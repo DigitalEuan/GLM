@@ -108,7 +108,7 @@ __all__ = [
     "MODEL_NAMES", "MODELS_BY_DOMAIN", "VAGUE_RELATIONS", "REPORT_CASES",
     "ModelResult", "explain_analogy", "analogy_models_report",
     "periodic_step", "reciprocal_dimension", "scale_shift",
-    "lexicon_relation",
+    "lexicon_relation", "repaired_triples",
 ]
 
 
@@ -491,13 +491,39 @@ def _triples(pool: Sequence[DataObject]
     return tuple(out)
 
 
+def repaired_triples() -> Tuple[Tuple[str, str, str], ...]:
+    """The relations the measure layer recovered from the ``related_to`` residue.
+
+    ``related_to`` is in :data:`VAGUE_RELATIONS` and is never transported: it
+    records that a link exists without saying which, and transporting it would
+    be a guess.  :func:`glm_universal.reasoning.measure_view.relation_repair`
+    decides some of those links against the physics register -- two endpoints
+    of the same dimension, or differing by exactly one quantity of a fixed
+    factor basis -- and the results are relations of a definite name.  They
+    are *derived*, so they cannot live in the lexicon's four relation slots;
+    they are read here instead, and they are the only triples in this module
+    that no register file contains.
+    """
+    from . import measure_view as mv
+    return mv.repaired_triples()
+
+
 def lexicon_relation(a: str, b: str, c: str,
-                     pool: Sequence[DataObject]) -> Optional[ModelResult]:
-    """``A : B :: C : ?`` transported along a relation the register states."""
+                     pool: Sequence[DataObject],
+                     repaired: bool = True) -> Optional[ModelResult]:
+    """``A : B :: C : ?`` transported along a relation the register states.
+
+    ``repaired=False`` suppresses the derived relations of
+    :func:`repaired_triples` and leaves only what the lexicon itself stores.
+    It is the control the repair has to beat, and nothing in the runtime uses
+    it.
+    """
     names = {o.name for o in pool}
     if not {a, b, c} <= names:
         return None
     triples = _triples(pool)
+    if repaired:
+        triples = triples + repaired_triples()
     linking = sorted({r for s, r, o in triples
                       if r not in VAGUE_RELATIONS
                       and ((s, o) == (a, b) or (s, o) == (b, a))})
@@ -570,15 +596,22 @@ MODEL_NAMES: Tuple[str, ...] = (
 
 
 def explain_analogy(domain: str, a: str, b: str, c: str,
-                    pool: Sequence[DataObject]) -> Optional[ModelResult]:
+                    pool: Sequence[DataObject],
+                    repaired: bool = True) -> Optional[ModelResult]:
     """The first relation model that recognises ``A : B``, or ``None``.
 
     ``None`` means no model claims to know what the relation is, which is the
     signal for the caller to fall back on the translation solver -- or to
     refuse, if the terms do not even share a register.
+
+    ``repaired`` reaches :func:`lexicon_relation` and nothing else; it is the
+    control switch for the repaired relations and defaults to on.
     """
     for model in MODELS_BY_DOMAIN.get(domain, ()):
-        result = model(a, b, c, pool)
+        if model is lexicon_relation:
+            result = model(a, b, c, pool, repaired=repaired)
+        else:
+            result = model(a, b, c, pool)
         if result is not None:
             return result
     return None

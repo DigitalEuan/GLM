@@ -45,6 +45,7 @@ from __future__ import annotations
 from fractions import Fraction
 from typing import Callable, Dict, List, Optional, Sequence, Tuple
 
+from ..derived import memo
 from ..data_objects import physics as do_physics
 from ..migration import store as concept_store
 from ..substrate import golay_decode
@@ -377,6 +378,7 @@ def concept_task(source: str = "entropy", target: str = "energy",
 # 4.  ONE REPORT
 # ===========================================================================
 
+@memo
 def tasks_report() -> Dict[str, object]:
     """Every task, recomputed."""
     return {"grid": grid_task(), "physics": physics_task(),

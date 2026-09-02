@@ -3,7 +3,7 @@
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 
-**Status: implemented (GLM-3+ Step 3, extended since).** **27 modules**, one
+**Status: implemented (GLM-3+ Step 3, extended since).** **49 modules**, one
 frozen data file,
 and a runnable audit. Everything is exact `int` / `fractions.Fraction` /
 `F_2`; nothing here imports `random`; nothing here imports a third-party
@@ -28,6 +28,9 @@ Sections 1–4 below describe these in detail.
 | `coherence.py` | NRCI over five shells, the `Y` and `Q` constants, the TAX decomposition, the coherence regimes, and `RefinedNRCI` (per-shell weights, shells switchable off) | `coherence <concept>` |
 | `dimension_layers.py` | the five cumulative dimension layers — substrate, integer, rational, griess, universal — each with its own `perceive` and `measure`, plus `escalate` | `project A B` |
 | `information_loss.py` | what each layer conflates, where the boundaries are, whether addition descends, and the pigeonhole capacity bound | `report information loss` |
+| `escalation.py` | the same audit at register scale: every register carrier rather than seven, by class key; the resolution ceiling and its collision classes | `report escalation` |
+| `measure_view.py` | a measure word read against a comparison class as an exact magnitude, the widening audit that shows adding the reading gives nothing up, the comparative between two such uses, and the `related_to` triples the physics register can convert | `measure hot in tea`, `is cold in stellar_surface hotter than hot in tea`, `report measure` |
+| `denotation_view.py` | the second pass over the `related_to` residue with `data_objects.denotation`'s verdicts in hand: what converts, what is repaired to `names_process_of`, what is declined by what the endpoint *is*, and the closure claim that nothing waits on a lookup | `report denotations` |
 | `facets.py` | the six-facet partition of the 24 coordinates: strictly linear, mutually orthogonal, no facet redundant | `report facets` |
 | `monster_stack.py` | the ten-plane 2-adic Monster stack, plane composition and pair repair | `report monster stack` |
 | `multires.py` | the `F_2^4 <-> GF(4) x Z_4` fibration, column sub-lattices, cross-level inner and tensor products, the scale-invariance boundary | `report multiresolution` |
@@ -46,8 +49,25 @@ Sections 1–4 below describe these in detail.
 | `units.py` | the unit string of every quantity parsed and checked against its EXT10 exponents, and what an SI reading of the steradian would cost | `report units` |
 | `term_arithmetic.py` | expressions written over register *names* — `energy divided by time`, `mass times velocity` — read into a dimension and back to the quantities that carry it | `compare`, `verify` |
 | `fwht_decode.py` | the transform wired to something: all 4,096 Golay coset costs as one Walsh–Hadamard transform, with the tier at which the constant-time answer carries its own certificate | `report transform decoder` |
+| `llvq_table.py` | the `O(1)` table `llvq.py` said was future work: the MOG's 16-entry column table, the 64 hexacode words and the 128 classes of 32 codewords, with a branch-and-bound decode that agrees with the 4,096-codeword scan on every vector tried | `report llvq` |
 | `voronoi_walk.py` | walking to a hole of the Leech lattice and climbing to the covering radius, so a hole is *reached* rather than looked up among 196,560 facets | (library) |
 | `deep_holes.py` | the Niemeier type of the hole a carrier sits in, read off the walk's trajectory and certified, against a derived catalogue | `report deep holes` |
+| `blueprint.py` | `glm_unification_blueprint.md` turned into a live claim ledger: every testable sentence recomputed against the package, each given one of four verdicts | `report blueprint` |
+| `engine.py` | the thermo-dynamic carrier engine of Part III assembled from parts the package already had — cam, accumulator, escapement, lattice snap, radiator, turbocharger, gearbox — so the section's headline precision figure is measured rather than quoted | `report engine` |
+| `mantissa.py` | IEEE-754 binary64 modelled exactly in integers and `Fraction` (no float is ever constructed) and its bit allocation compared against the exact binary expansion, so floating-point drift is *located* | `report mantissa` |
+| `reversible.py` | Part V: binary counting against the binary reflected Gray code, Toffoli and Fredkin on the 24 coordinates, and information carried as kinks in a circular string rather than as coordinate values | `report reversible` |
+| `noise_lab.py` | noise used as the computation rather than as a representation: signal-driven and cascaded (MASH 1-1) delta-sigma loops with the `O(1/M²)` triangular-window law, closed orbits, interacting tones read by an exact Walsh spectrum, and a subtractive-dither sweep, and the vector loop whose error returns through a rational matrix (the `1/(2N)` law at the identity, the dead zone when the feedback contracts, equivariance under any permutation the matrix respects) — all exact `Fraction`, no randomness | `report noise` |
+| `wobble.py` | the spectral signature of a constant, with the law beside every measured column: entropy, run lengths, transition rate and one-density are closed forms of the target (`Sturmian.lean`), plus the oscillator table, the exact resonance sweep and the quality-factor scan | `report signature` |
+| `drift.py` | the prime-iteration stress test in three regimes — exact rationals, an exact binary64 model, and binary64 truncated to a fixed number of displayed digits — with no float constructed anywhere | `report drift` |
+| `catalog.py` | `glm_study_findings_catalog.md` turned into a live claim ledger, in the same form as `blueprint.py`: 58 testable claims, each recomputed and given one of four verdicts | `report catalog` |
+| `containers.py` | the instrument behind the first companion study: eight constants profiled through three containers — the exact generator and the number of steps it needs to reach a stated precision (an integer comparison, no logarithm), the delta-sigma stream and its statistics, and the 24-dimensional projection tested against the convex hull of the Leech minimal vectors with a certificate on both sides rather than a sample | `report containers` |
+| `companion.py` | the two companion preprints turned into a live claim ledger, finer than `catalog.py`'s because the preprints state the projection, the indexing and the alphabet their summary omits: 49 testable claims, each recomputed and given one of the same four verdicts | `report companion` |
+| `higher_lattices.py` | the `24 -> 32 -> 48` ladder of extremal even unimodular lattices: the Barnes-Wall rung `BW_32` by Construction D over `RM(1,5) < RM(3,5)` with its 146,880 minimal vectors and three-resolution address, and the 48-dimensional ternary rung `P_48p` with its centre density `(3/2)^24`, every quantity built rather than quoted | `report lattices` |
+| `shell_sigma.py` | delta-sigma with a *large* alphabet — a Leech shell rather than a bit or a codeword: the matched rule and the separating certificate, each with its law in `ShellSigma.lean`, and a temperature read off a deterministic loop with no randomness anywhere | `report shells` |
+| `lean_address.py` | a deterministic Leech address for every declaration of the Lean development: the 24-coordinate feature map, the scale sweep, exact read-back, and the three-scheme separation measurement that says how much of "nearby address" is meaning and how much is arithmetic | `report lean` |
+| `directives.py` | `PROJECT_DIRECTIVES.md` read as a live document: each standing rule paired with the instrument that would fail if the rule were broken, and the instrument's presence checked rather than asserted | `report directives` |
+| `pipeline.py` | the study-to-test-to-implemented pipeline, with the stage each piece of work has reached computed from the tree rather than claimed in prose — the instrument for directive D5 | `report pipeline` |
+| `harmony.py` | the musical third of the catalogue's universality claim, tested rather than repeated: the exact rational by which equal temperament misses each of the 28 intervals of the harmonic register, the fifth that never closes (counted here, proved for every `n` in `Harmony.lean`), Kendall's tau between Tenney height and Euler's gradus, and the interval-by-interval Leech decode measured against an undecoded control | `report harmony` |
 
 ---
 
@@ -205,12 +225,13 @@ PYTHONPATH=. python3 -m pytest glm_universal/tests/ -q                    # the 
 ```
 
 The reasoning kernel is also covered by `test_coherence.py` (58),
-`test_fusion.py` (23), `test_information_loss.py` (53),
+`test_fusion.py` (23), `test_information_loss.py` (60),
+`test_escalation.py` (34), `test_denotation.py` (26),
 `test_multires_tasks.py` (40), `test_directive.py` (31),
 `test_reasoning_showcase.py` (14), `test_analogy_models.py` (53),
 `test_element_coverage.py` (40), `test_units.py` (24),
-`test_term_arithmetic.py` (40), `test_fwht_decode.py` (20) and
-`test_deep_holes.py` (25).  The suite-wide counts are recomputed in
+`test_term_arithmetic.py` (40), `test_fwht_decode.py` (20),
+`test_llvq_table.py` (21) and `test_deep_holes.py` (25).  The suite-wide counts are recomputed in
 [`../../FIGURES.md`](../../FIGURES.md) rather than quoted here.
 
 The first test that touches the `2A` algebra builds the exhaustive
@@ -232,7 +253,7 @@ Five new modules were added to implement mechanisms the directive
 |---|---|---|
 | `moonshine.py` | The Moonshine layer: graded dimensions V_0..V_10, the j-function q-series, and the Leech-to-Moonshine bridge. V_0 = 1 (vacuum), V_1 = 0 (FLM theorem), V_2 = 196884 (Griess algebra). | ✓ graded dimensions + j-function + bridge. VOA state-field map is future work. |
 | `niemeier.py` | The 23 Niemeier lattices (ADE root systems, Conway-Sloane). The Leech is the unique one with no roots (rank 0); the other 22 have rank-24 root systems. | ✓ catalogue + deep-hole types. Voronoi cell computation is future work. |
-| `llvq.py` | Leech Lattice Vector Quantization: codebook-free angular search over Leech shells. The first 6 shells are catalogued. | ✓ shell classification. Full O(1) lookup table is future work. |
+| `llvq.py` | Leech Lattice Vector Quantization: codebook-free angular search over Leech shells. The first 6 shells are catalogued. | ✓ shell classification. The `O(1)` lookup table, once future work, is `llvq_table.py`. |
 | `fwht.py` | The Fast Walsh-Hadamard Transform: O(N log N) instead of O(N^2). Verified: fwht(fwht(v)) = N*v exactly. | ✓ transform + incoherence_apply. Wiring into substrate group actions is future work. |
 | `valorani.py` | Valorani's log-space SVD for Buckingham-Pi: rational nullspace (exact, float-free). | ✓ rational nullspace + `buckingham_pi_groups`, wired in v1.0.0 as the `pi_groups` query kind. The SVD step is documented as conceptual motivation; the rational approach is exact. |
 
@@ -311,6 +332,43 @@ The counterpart formal development, with the same definitions proved as
 theorems, is `RequestProject/GLM/Layers.lean`, `RequestProject/GLM/Stack.lean`
 and `RequestProject/GLM/Cumulative.lean` at the repository root; the write-up
 is `INFORMATION_LOSS_STUDY.md`.
+
+## v1.7.0 update: `escalation.py` — the same audit at register scale
+
+The table above is measured on seven carriers, and every one of the seven was
+chosen *because* it exhibited a boundary.  `escalation.py` asks the same
+questions of **one carrier per named object of every register the package
+ships** — physics 726, chemistry 118, molecules 51, mathematics 22, harmonics
+28, lexicon 95, **1,040** in all, nothing sampled.
+
+The naive audit is quadratic in the carriers and the congruence search is
+quartic, which at this size is unaffordable and also unnecessary.  Each
+layer's measure is a sum of non-negative exact terms that vanishes exactly
+when a small reading of the two carriers agrees, so grouping carriers by that
+**class key** — parity bits, SI7 exponents beside them, or the exact carrier —
+answers both questions in one pass.  `key_agreement()` checks the shortcut
+rather than assuming it, re-deriving each verdict from the layer's own
+`perceive` and `measure` on 918 pairs.
+
+| layer | resolves (of 1,040) | boundary gain | refinement |
+|---|---|---|---|
+| substrate | 415 | — | — |
+| integer | 544 | 5,883 | yes |
+| rational | 757 | 5,475 | yes |
+| griess | 757 | 0 | yes |
+| universal | 757 | 0 | yes |
+| *integer_raw* | *359* | — | *11,176 violations* |
+
+`chain_intact` is **`True`** with zero violations.  What the seven carriers
+could not show is the **ceiling**: 757 distinct carriers among 1,040 entries,
+so 283 entries sit in 104 collision classes — every class inside a single
+register, the largest being 78 dimensionless physics quantities — that no
+layer can separate, because no layer sees anything but the carrier.
+
+The formal counterpart is `RequestProject/GLM/Escalation.lean`
+(`entryResolution_le_distinct`, `entryResolution_mono`,
+`substrate_addition_not_congruent`); the write-up is
+`studies/ESCALATION_STUDY.md`.
 
 ## v1.2.0 update: `exact_real.py` and `real_expr.py` — values that are processes
 

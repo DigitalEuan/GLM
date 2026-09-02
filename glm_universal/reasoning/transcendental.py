@@ -8,7 +8,7 @@ of the value.  Until this module, that layer reached exactly as far as
 ``+ - * /``, integer powers, roots of any degree, and the three named
 constants ``pi``, ``e`` and ``phi``.  ``sin(1)``, ``log(2)``, ``exp(1)`` and a
 non-integer exponent such as ``2^pi`` were refused *by name*, and
-``INFINITE_VALUES_STUDY.md`` recorded that as the largest single gap in the
+``studies/INFINITE_VALUES_STUDY.md`` recorded that as the largest single gap in the
 value layer.
 
 This module builds them, to the same standard as the rest: every function is a

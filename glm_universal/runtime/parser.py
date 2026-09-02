@@ -49,10 +49,13 @@ import re
 from dataclasses import dataclass, field
 from typing import Dict, List, Mapping, Optional, Sequence, Tuple
 
+from ..language.descriptions import DESCRIBED_KINDS
+
 __all__ = [
     "QueryError", "QueryKind", "KINDS", "VERBS", "DOMAIN_PRIORITY",
-    "SEMANTICS_KEYWORDS", "Query", "ConceptIndex", "normalise", "tokenise",
+    "Query", "ConceptIndex", "normalise", "tokenise",
     "levenshtein", "split_analogy", "split_equation", "parse_query",
+    "DESCRIBED_KINDS",
 ]
 
 
@@ -73,7 +76,9 @@ QueryKind = str
 KINDS: Tuple[str, ...] = (
     "verify", "analogy", "describe", "nearest", "product", "cluster",
     "spatial", "project", "trilinear", "coherence", "report", "angle",
-    "task", "pi_groups", "meaning", "real", "compare", "unknown",
+    "task", "pi_groups", "meaning", "real", "compare", "measure",
+    "comparative", "derive",
+    "unknown",
 )
 
 #: Directive keyword -> intent.  Longest surface form is matched first, so
@@ -141,20 +146,27 @@ VERBS: Dict[str, str] = {
     "less than": "compare", "smaller than": "compare",
     "equal to": "compare", "the same as": "compare",
     "which is bigger": "compare", "which is larger": "compare",
+    # measure -- a measure word read against a comparison class (v1.5.0).
+    # 'measure hot in tea' answers with a magnitude; 'measure 300 in tea'
+    # answers with a word.  The operands are a scale word or a magnitude and
+    # a class name, neither of which is a register entry, so they are carried
+    # through in options rather than resolved by the name index.
+    "measure": "measure", "how much": "measure",
+    "relative measure": "measure", "measure word": "measure",
+    "how far up": "measure",
+    # derive -- one coordinate of one object, answered off the domain
+    # descriptions rather than off a hand-written phrase (v1.11.0).
+    # 'derive span_ratio of tea' answers; 'derive cents of perfect_fifth'
+    # is refused, because no description derives it.  Both operands are
+    # carried through unresolved: the coordinate is a description's name for
+    # a coordinate, not a register entry.
+    "derive": "derive", "derivation of": "derive",
+    "coordinate": "derive", "which coordinate": "derive",
+    "what derives": "derive",
     "meaning": "meaning", "meaning of": "meaning", "means": "meaning",
     "denotes": "meaning", "denotation": "meaning", "refers to": "meaning",
     "ground": "meaning", "grounding": "meaning", "relate": "meaning",
     "same meaning": "meaning",
-}
-
-#: Comparison keyword -> the relation the question asserts.  ``"compare"``
-#: asserts nothing and asks for the order.
-_COMPARE_RELATION: Dict[str, str] = {
-    "greater than": "greater", "bigger than": "greater",
-    "larger than": "greater", "less than": "less",
-    "smaller than": "less", "equal to": "equal",
-    "the same as": "equal", "compare": "compare",
-    "which is bigger": "compare", "which is larger": "compare",
 }
 
 #: Fixed order used to break a cross-domain name collision.  A surface form
@@ -162,18 +174,8 @@ _COMPARE_RELATION: Dict[str, str] = {
 #: collision is reported in :attr:`Query.trace` rather than hidden.
 DOMAIN_PRIORITY: Tuple[str, ...] = (
     "physics", "chemistry", "molecules", "mathematics", "spatial",
-    "lexicon",
+    "harmonics", "economics", "lexicon",
 )
-
-#: Words that pin the comparison semantics of a ``verify`` query.  The
-#: verifier supports two: ``"scalar"`` compares dimension and decimal scale,
-#: ``"full"`` additionally compares tensor rank and P/T/C parity.
-SEMANTICS_KEYWORDS: Dict[str, str] = {
-    "dimensionally": "scalar", "dimensional": "scalar", "units": "scalar",
-    "unit": "scalar", "scalar": "scalar", "magnitude": "scalar",
-    "tensor": "full", "full": "full", "rank": "full", "parity": "full",
-    "vector": "full",
-}
 
 #: Applied to the raw string before tokenising.  Politeness and filler carry
 #: no semantics and would otherwise pollute keyword matching.
@@ -597,48 +599,6 @@ def _match_verb(lowered: str) -> Optional[Tuple[str, str, bool]]:
     return (keyword, kind, idx == 0)
 
 
-def _detect_semantics(lowered: str) -> Tuple[str, str, Optional[str]]:
-    """``(semantics, why, matched_word)`` for a verify query.
-
-    Defaults to ``"scalar"``.  An equation typed without qualification is read
-    as a statement about dimensions and decimal scale; asking additionally for
-    tensor rank and P/T/C parity is the stricter reading and must be requested
-    with a word from :data:`SEMANTICS_KEYWORDS`.  The choice is always
-    reported, never silent.
-
-    The matched word is returned so the caller can strip it from the
-    expression: a qualifier such as ``"tensor"`` in ``"check tensor force =
-    ..."`` is a directive about how to compare, not an operand, and leaving it
-    in the expression would make the left side an unknown concept.
-    """
-    for word in sorted(SEMANTICS_KEYWORDS, key=len, reverse=True):
-        if re.search(rf"(?<![a-z0-9_]){re.escape(word)}(?![a-z0-9_])", lowered):
-            return (SEMANTICS_KEYWORDS[word],
-                    f"keyword {word!r} selected {SEMANTICS_KEYWORDS[word]!r} "
-                    f"semantics",
-                    word)
-    return "scalar", ("no semantics keyword present; defaulted to 'scalar' "
-                      "(dimension and decimal scale)"), None
-
-
-def _strip_semantics_qualifier(body: str, word: Optional[str]) -> str:
-    """Remove a semantics qualifier used as a directive, not as an operand.
-
-    Only two positions count as directive use: a leading qualifier
-    (``"tensor force = ..."``) and a trailing ``"under <word> semantics"``
-    phrase.  A qualifier anywhere else is left alone, because there it is
-    plausibly part of an expression and silently deleting it would change the
-    equation being audited.
-    """
-    if not word:
-        return body
-    out = re.sub(rf"\b(under|in|with)\s+{re.escape(word)}\s+semantics\b\s*$",
-                 "", body.strip(), flags=re.IGNORECASE)
-    out = re.sub(rf"^\s*{re.escape(word)}(\s+semantics)?(?![a-z0-9_])", "",
-                 out, flags=re.IGNORECASE)
-    return out.strip(" ,:")
-
-
 def _strip_verb(text: str, keyword: str) -> str:
     lowered = text.lower()
     idx = lowered.find(keyword)
@@ -701,7 +661,8 @@ def _extract_subspace(lowered: str) -> Optional[str]:
 #: members are closest (furthest neighbour); both are exact.
 LINKAGE_PATTERN = re.compile(
     r"(?:(single|complete|furthest|farthest)[-\s]+linkage"
-    r"|linkage\s*[=:]?\s*(single|complete|furthest|farthest))")
+    r"|linkage\s*[=:]?\s*(single|complete|furthest|farthest))",
+    re.IGNORECASE)
 
 
 def _extract_linkage(lowered: str) -> Optional[str]:
@@ -709,14 +670,20 @@ def _extract_linkage(lowered: str) -> Optional[str]:
     match = LINKAGE_PATTERN.search(lowered)
     if match is None:
         return None
-    word = match.group(1) or match.group(2)
+    word = (match.group(1) or match.group(2)).lower()
     return "single" if word == "single" else "complete"
 
 
 def _strip_linkage_phrase(text: str) -> str:
-    """Remove the linkage phrase so it is not mistaken for a concept name."""
-    cleaned = LINKAGE_PATTERN.sub(" ", text.lower())
-    cleaned = re.sub(r"\b(with|using|by|under)\s*$", " ", cleaned.strip())
+    """Remove the linkage phrase so it is not mistaken for a concept name.
+
+    Case is preserved: a chemical formula such as ``PbCl2`` names no register
+    entry, and the molecule formula parser it falls through to reads the
+    capitalisation as element symbols.
+    """
+    cleaned = LINKAGE_PATTERN.sub(" ", text)
+    cleaned = re.sub(r"\b(with|using|by|under)\s*$", " ", cleaned.strip(),
+                     flags=re.IGNORECASE)
     return re.sub(r"\s+", " ", cleaned).strip(" ,;")
 
 
@@ -849,21 +816,24 @@ def parse_query(text: str, index: Optional[ConceptIndex] = None,
         trace.append(f"domain hint {domain!r} supplied")
 
     # -- rule 1: the analogy operator ---------------------------------------
-    if "::" in cleaned:
-        a, b, c, _d = split_analogy(cleaned)
-        trace.append("rule 'analogy_operator': found '::'")
-        operands, settled = _resolve_operands((a, b, c), index, domain, trace)
-        subspace = _extract_subspace(lowered)
-        options: Dict[str, object] = {}
-        if subspace:
-            options["subspace"] = subspace
-            trace.append(f"explicit subspace {subspace!r}")
-        limit = _extract_int_option(lowered, ("top", "limit"))
-        if limit is not None:
-            options["limit"] = limit
-        return Query(raw=text, normalised=cleaned, kind="analogy",
-                     domain=settled, operands=operands, options=options,
-                     rule="analogy_operator", trace=tuple(trace))
+    # Described, not coded: the shape is an operator with an operand on each
+    # side, its inner operator cuts each side again, and the two trailing
+    # options are described values rather than option scanners.
+    analogy = _described_infix_query(text, cleaned, "analogy", index,
+                                     domain, trace)
+    if analogy is not None:
+        return analogy
+
+    # -- rule 1b: the comparative between two measured uses ------------------
+    # Before the directive keywords, because 'larger than' is also an
+    # exact-real comparison keyword and the two are told apart by the shape
+    # of the operands rather than by the word.  Described as a *nested*
+    # shape: the operands are not text but readings, and each side has to
+    # match the measure shape itself.
+    comparative = _described_nested_query(text, cleaned, "comparative",
+                                          domain, trace)
+    if comparative is not None:
+        return comparative
 
     # -- rule 2 and 4: directive keywords -----------------------------------
     verb = _match_verb(lowered)
@@ -876,31 +846,15 @@ def parse_query(text: str, index: Optional[ConceptIndex] = None,
                                     domain, trace, rule="explicit_verb")
 
     # -- rule 3: an equation ------------------------------------------------
-    if len(equals) == 1:
-        body = cleaned
-        if verb is not None and verb[1] == "verify":
-            body = _strip_verb(cleaned, verb[0])
-            trace.append(f"rule 'equation': stripped directive {verb[0]!r}")
-        else:
-            trace.append("rule 'equation': single top-level '='")
-        semantics, why, word = _detect_semantics(lowered)
-        trace.append(why)
-        stripped = _strip_semantics_qualifier(body, word)
-        if stripped != body.strip(" ,:"):
-            trace.append(f"removed the semantics qualifier {word!r} from the "
-                         f"expression; it directs the comparison rather than "
-                         f"naming a quantity")
-            body = stripped
-        lhs, rhs = split_equation(body)
-        return Query(raw=text, normalised=cleaned, kind="verify",
-                     domain=domain or "physics",
-                     operands=(lhs, rhs),
-                     options={"semantics": semantics},
-                     rule="equation", trace=tuple(trace))
-    if len(equals) > 1:
-        raise QueryError(
-            f"parse_query: {len(equals)} top-level '=' signs in {text!r}; "
-            f"a chained equality is not a single relation")
+    # Described: the operator is the '=' that no comparison operator touches,
+    # the two sides are the operands, the optional verb is the opening, and
+    # the semantics qualifier is a described *modifier* -- a word that
+    # directs the reading rather than naming a thing.
+    if equals:
+        equation = _described_infix_query(text, cleaned, "verify", index,
+                                          domain, trace)
+        if equation is not None:
+            return equation
 
     if verb is not None:
         return _build_keyword_query(text, cleaned, lowered, verb, index,
@@ -922,11 +876,187 @@ def parse_query(text: str, index: Optional[ConceptIndex] = None,
                  suggestions=index.suggest(cleaned))
 
 
+def _described_query(text: str, cleaned: str, kind: str,
+                     domain: Optional[str], trace: List[str],
+                     rule: str) -> Query:
+    """Finish a query whose shape is *described* rather than coded here.
+
+    The three kinds that used to have a branch apiece in
+    :func:`_build_keyword_query` come through here.  The matching is
+    :func:`glm_universal.language.build.parse`, which knows nothing about
+    any kind; this function only decides what the runtime does with the
+    outcome, and even that is read off the description:
+
+    * a match becomes a :class:`Query` whose options are the filled slots,
+      named for the options they fill;
+    * a decline at a boundary the description marks ``raises`` is a
+      :class:`QueryError` with the description's own sentence -- which is
+      what the ``derive`` branch did with a question naming only one thing;
+    * a decline at any other described boundary is answered with the slot
+      left empty, which is what the ``measure`` and ``task`` branches did;
+    * a question whose opening is buried in undescribed text is *declined*.
+      The deleted branches would have answered it with the stray words
+      inside an option; that narrowing is the commitment recorded in
+      :func:`glm_universal.language.build.narrowing`, with a witness each.
+    """
+    from ..language.build import Match, parse as described_parse
+    from ..language.descriptions import question_by_kind
+
+    spec = question_by_kind(kind)
+    outcome = described_parse(cleaned)
+    trace.append(f"the {kind!r} question shape is described, not coded: "
+                 f"{spec.render()}")
+    trace.extend(outcome.trace)
+    if isinstance(outcome, Match):
+        options: Dict[str, object] = dict(outcome.fills)
+        trace.append(f"slots filled off the description: "
+                     f"{ {k: v for k, v in options.items()} }")
+        return Query(raw=text, normalised=cleaned, kind=outcome.kind,
+                     domain=domain, operands=(), options=options,
+                     rule=rule, trace=tuple(trace))
+
+    if outcome.boundary == "unrecognised_opening":
+        trace.append(
+            f"the {kind!r} opening is not at the head of the question and "
+            f"the preamble does not describe what precedes it; the surface "
+            f"declines rather than reading the leading words into a slot")
+        return Query(raw=text, normalised=cleaned, kind="unknown",
+                     domain=domain, operands=(cleaned,),
+                     rule="undescribed_opening", trace=tuple(trace))
+
+    try:
+        described = spec.refusal(outcome.boundary)
+    except KeyError:
+        described = None
+    if described is not None and described.raises:
+        raise QueryError(f"parse_query: {text!r} -- {outcome.reason}")
+    trace.append(f"declined at {outcome.boundary!r}: {outcome.reason}; the "
+                 f"slot is left empty and the solver states the boundary")
+    empty: Dict[str, object] = {name: "" for name in spec.options}
+    return Query(raw=text, normalised=cleaned, kind=kind,
+                 domain=domain, operands=(), options=empty,
+                 rule=rule, trace=tuple(trace))
+
+
+#: Where a described infix kind's operands go, and what domain it settles
+#: in.  ``resolve`` means the operands are looked up in the concept index --
+#: an analogy's terms name register entries -- and the domain is whatever
+#: the lookup settles on; the other two carry their operands through
+#: unresolved, because an equation's sides and a comparison's sides are
+#: notations read by a grammar rather than names.
+_INFIX_DELIVERY: Dict[str, Tuple[str, Optional[str]]] = {
+    "analogy": ("resolve", None),
+    "verify": ("operands", "physics"),
+    "compare": ("options", "mathematics"),
+}
+
+
+def _described_infix_query(text: str, cleaned: str, kind: str,
+                           index: ConceptIndex, domain: Optional[str],
+                           trace: List[str]) -> Optional[Query]:
+    """Read one *infix*-shaped kind off its description, or return ``None``.
+
+    ``None`` means the question holds none of that shape's operators, so the
+    rule did not fire and the caller carries on -- the same thing the
+    deleted branch's guard did.  A decline at a boundary the description
+    marks ``raises`` is a :class:`QueryError` carrying the description's own
+    sentence, and a decline at any other described boundary leaves the rule
+    unfired, exactly as the branch's structural checks did.
+
+    Nothing here knows what an analogy, an equation or a comparison is: the
+    shape says which operator cuts the question, which operands the cut
+    produces, which of them the runtime is given, which words may direct the
+    reading (a *modifier*) and which values may follow the operands (a
+    *trailing option*).  This function only decides where the pieces go.
+    """
+    from ..language.descriptions import infix_by_kind
+    from ..language.infix import InfixMatch, match_infix
+
+    spec = infix_by_kind(kind)
+    outcome = match_infix(spec, cleaned)
+    if not isinstance(outcome, InfixMatch):
+        if outcome.boundary == "no_operator":
+            return None
+        try:
+            described = spec.refusal(outcome.boundary)
+        except KeyError:
+            described = None
+        if described is not None and described.raises:
+            raise QueryError(f"parse_query: {text!r} -- {outcome.reason}")
+        trace.append(f"the {kind!r} shape declined at "
+                     f"{outcome.boundary!r}: {outcome.reason}")
+        return None
+
+    trace.append(f"rule {kind + '_shape'!r}: the shape is described, not "
+                 f"coded: {spec.render()}")
+    trace.extend(outcome.trace)
+    delivery, settled_domain = _INFIX_DELIVERY[kind]
+    carried = outcome.carried(spec)
+    options: Dict[str, object] = dict(outcome.options)
+    if delivery == "resolve":
+        operands, settled = _resolve_operands(
+            tuple(carried[name] for name in spec.carried), index, domain,
+            trace)
+        return Query(raw=text, normalised=cleaned, kind=kind,
+                     domain=settled, operands=operands, options=options,
+                     rule=f"{kind}_shape", trace=tuple(trace))
+    if delivery == "operands":
+        return Query(raw=text, normalised=cleaned, kind=kind,
+                     domain=domain or settled_domain,
+                     operands=tuple(carried[name] for name in spec.carried),
+                     options=options, rule=f"{kind}_shape",
+                     trace=tuple(trace))
+    options.update(carried)
+    return Query(raw=text, normalised=cleaned, kind=kind,
+                 domain=settled_domain, operands=(), options=options,
+                 rule=f"{kind}_shape", trace=tuple(trace))
+
+
+def _described_nested_query(text: str, cleaned: str, kind: str,
+                            domain: Optional[str],
+                            trace: List[str]) -> Optional[Query]:
+    """Read a *nested*-shaped kind off its description, or return ``None``.
+
+    A nested shape's operands are themselves shapes, so there are two ways
+    for the rule not to fire and they are told apart: the question holds no
+    operator of the described form at all, or it holds one and a side is not
+    a use of the nested shape.  Both leave the rule unfired -- ``is sqrt(2)
+    greater than 7/5`` is the second, and it goes on to be read as an
+    exact-real comparison -- and the boundary is written into the trace so
+    that the difference is visible rather than inferred.
+    """
+    from ..language.descriptions import nested_by_kind
+    from ..language.nested import NestedMatch, match_nested
+
+    spec = nested_by_kind(kind)
+    outcome = match_nested(spec, cleaned)
+    if not isinstance(outcome, NestedMatch):
+        if outcome.boundary != "no_operator":
+            trace.append(f"the {kind!r} shape declined at "
+                         f"{outcome.boundary!r}: {outcome.reason}")
+        return None
+    trace.append(f"rule {kind!r}: the shape is described, not coded: "
+                 f"{spec.render()}")
+    trace.extend(outcome.trace)
+    trace.append("the direction the marker asserts is read off the measure "
+                 "register rather than decided here")
+    return Query(raw=text, normalised=cleaned, kind=kind,
+                 domain=domain or "lexicon", operands=(),
+                 options=dict(outcome.options), rule=kind,
+                 trace=tuple(trace))
+
+
 def _build_keyword_query(text: str, cleaned: str, lowered: str,
                          verb: Tuple[str, str, bool], index: ConceptIndex,
                          domain: Optional[str], trace: List[str],
                          rule: str) -> Query:
-    """Finish a query classified by a directive keyword."""
+    """Finish a query classified by a directive keyword.
+
+    Three of the kinds it can produce -- ``derive``, ``measure`` and
+    ``task`` -- have no branch here at all: their shapes are described in
+    :mod:`glm_universal.language.descriptions` and read by one generic
+    matcher.  See :func:`_described_query`.
+    """
     keyword, kind, _at_start = verb
     trace.append(f"rule {rule!r}: keyword {keyword!r} -> kind {kind!r}")
     remainder = _strip_weak_openers(_strip_verb(cleaned, keyword))
@@ -1111,47 +1241,26 @@ def _build_keyword_query(text: str, cleaned: str, lowered: str,
                      rule=rule, trace=tuple(trace))
 
     if kind == "compare":
-        # 'is sqrt(2) greater than 7/5' -- both sides are notations, so the
-        # split is made on the keyword itself rather than on the remainder,
-        # which has had the keyword cut out of it.
-        relation = _COMPARE_RELATION.get(keyword, "compare")
-        options["relation"] = relation
-        index_of = cleaned.lower().find(keyword)
-        if keyword in ("compare", "which is bigger", "which is larger"):
-            body = _strip_connectives(remainder)
-            sides = _split_list(body)
-            if len(sides) < 2:
-                sides = tuple(
-                    part.strip()
-                    for part in re.split(r"\bversus\b|\bvs\b|\bor\b|\band\b|,",
-                                         body) if part.strip())
-        else:
-            left = cleaned[:index_of]
-            right = cleaned[index_of + len(keyword):]
-            left = re.sub(r"^\s*(is|are|does|do)\b", " ", left,
-                          flags=re.IGNORECASE)
-            sides = (left.strip(" ?,:"), right.strip(" ?,:"))
-        if len(sides) < 2 or not all(sides[:2]):
-            raise QueryError(
-                f"parse_query: {text!r} -- a comparison needs two values, "
-                f"e.g. 'is sqrt(2) greater than 7/5'")
-        options["left"] = sides[0]
-        options["right"] = sides[1]
-        trace.append(f"comparison {sides[0]!r} {relation} {sides[1]!r}; both "
-                     f"sides pass to the exact-real grammar unresolved")
-        return Query(raw=text, normalised=cleaned, kind="compare",
-                     domain="mathematics", operands=(), options=options,
-                     rule=rule, trace=tuple(trace))
+        # Two shapes, one kind, and both of them described: the relational
+        # form is an infix operator between two notations, and the list form
+        # is an opening followed by one slot whose filling is a *list*.
+        # Neither is coded here.
+        relational = _described_infix_query(text, cleaned, "compare", index,
+                                            domain, trace)
+        if relational is not None:
+            return relational
+        return _described_query(text, cleaned, "compare", domain, trace, rule)
 
-    if kind == "task":
-        # 'task <name>' -- the name selects one of the worked end-to-end
-        # tasks: 'grid' (the ARC-style half-turn puzzle) or 'physics'
-        # (energy versus torque through the whole pipeline).
-        target = _strip_connectives(remainder).lower()
-        options["task"] = target
-        return Query(raw=text, normalised=cleaned, kind="task",
-                     domain=domain, operands=(), options=options,
-                     rule=rule, trace=tuple(trace))
+    if kind in DESCRIBED_KINDS:
+        # 'derive span_ratio of tea', 'measure hot in tea', 'task grid' --
+        # three kinds that used to have a hand-written branch each here.
+        # They are now read off `glm_universal.language.descriptions`
+        # through the one generic matcher: the shape says which words open
+        # the question, which words separate its slots, which slots are
+        # optional and which boundaries it refuses at, and this function
+        # only turns the result into a `Query`.  Nothing here knows what a
+        # coordinate, a measure word or a task is.
+        return _described_query(text, cleaned, kind, domain, trace, rule)
 
     if kind == "angle":
         # 'angle A B' -- two operands for the cosine comparison.

@@ -61,6 +61,7 @@ from fractions import Fraction
 from functools import lru_cache
 from typing import Dict, List, Optional, Sequence, Tuple
 
+from ..derived import memo
 from ..substrate import digit_stack, leech2
 from . import product
 
@@ -479,6 +480,7 @@ def _two_a_triple() -> Tuple[int, int, int]:
     raise AssertionError("no 2A triple found among the first 400 classes")
 
 
+@memo
 def shortcut_loss_report() -> Dict[str, object]:
     """The XOR shortcut against the Sakuma product, term by term.
 
@@ -512,6 +514,7 @@ def shortcut_loss_report() -> Dict[str, object]:
     }
 
 
+@memo
 def associativity_report() -> Dict[str, object]:
     """``(a.b).c`` against ``a.(b.c)``, and the same triple under XOR.
 

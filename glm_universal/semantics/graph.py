@@ -38,12 +38,14 @@ from fractions import Fraction
 from typing import (Dict, Iterable, List, Mapping, Optional, Sequence, Set,
                     Tuple)
 
+from ..derived import memo
 from . import relations as rel
 from .meaning import Meaning, encode
 from .reference import Resolution, reference_terms, resolve
 
 __all__ = [
-    "SemanticGraph", "build_graph", "graph_report", "meaning_sort_key",
+    "SemanticGraph", "build_graph", "default_graph", "graph_report",
+    "meaning_sort_key",
 ]
 
 
@@ -173,7 +175,26 @@ def build_graph(terms: Optional[Iterable[str]] = None,
     (:func:`.reference.reference_terms`).  Terms with no determinate referent
     are not nodes; they are returned in ``refused`` with their reasons, so a
     caller can always see what the corpus contained that meaning could not.
+
+    The default corpus is a derivation of frozen registers with no argument,
+    so it is built once per process and reused; :func:`default_graph` is the
+    memoised holder, and ``default_graph.__wrapped__()`` still recomputes it
+    from scratch for anything that wants to check the reuse changes nothing.
     """
+    if terms is None and with_ternary:
+        return default_graph()
+    return _construct_graph(terms, with_ternary)
+
+
+@memo
+def default_graph() -> SemanticGraph:
+    """The grounded graph over the register-backed vocabulary."""
+    return _construct_graph(None, True)
+
+
+def _construct_graph(terms: Optional[Iterable[str]],
+                     with_ternary: bool) -> SemanticGraph:
+    """Do the work :func:`build_graph` describes, with nothing reused."""
     corpus = tuple(reference_terms() if terms is None else terms)
     grounded, refused = _index_notations(corpus)
     nodes = tuple(sorted(grounded, key=meaning_sort_key))

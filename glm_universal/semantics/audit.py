@@ -46,6 +46,7 @@ from fractions import Fraction
 from functools import lru_cache
 from typing import Dict, List, Mapping, Optional, Sequence, Tuple
 
+from ..derived import memo
 from ..migration.state import load_state
 from . import relations as rel
 from .graph import build_graph, graph_report
@@ -421,6 +422,7 @@ EVIDENCE_ONLY_SUBJECTS: Tuple[str, ...] = (
 )
 
 
+@memo
 def retention_decision() -> Dict[str, object]:
     """Keep the inherited concept graph, and on what terms -- with evidence.
 
@@ -477,6 +479,7 @@ def retention_decision() -> Dict[str, object]:
 # 7.  THE WHOLE AUDIT
 # ===========================================================================
 
+@memo
 def audit_report() -> Dict[str, object]:
     """Every measurement, with the replacement graph beside it."""
     concepts = concept_grounding()
