@@ -9,7 +9,7 @@ Four instruments were used, and all four can be re-run on demand:
 cd overlay
 PYTHONPATH=. python3 -m glm_universal.capabilities                    # 33 probes
 PYTHONPATH=. python3 -m glm_universal.benchmarks                      # 5 suites
-PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8             # 83 CLI cases
+PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8             # 131 CLI cases
 PYTHONPATH=. python3 -m pytest glm_universal/tests -q                 # the test suite
 ```
 
@@ -27,9 +27,9 @@ by hand twice: the counts are recomputed into
 |---|---|---|
 | capability probes | where the library stops, asked as user questions | **33 probes: 20 hold, 13 break, 0 errored, 0 surprises** |
 | benchmark suites | solver functions against curated and exhaustive task sets | **2,389 / 2,390 tasks across 5 suites; every suite beat its declared baseline** |
-| end-to-end CLI evaluation | the CLI, driven the way a user drives it | **83 cases: 83 passed** — 73 answered correctly, 10 refused as expected, 0 unexpected refusals, **0 confidently wrong**, 0 errored |
-| test suite | the package's own regression net | **1,677 tests across 37 test files, 8,851 subtests** |
-| Lean development | the machine-checked layer | **27 Lean files, `lake build` clean, no `sorry`** |
+| end-to-end CLI evaluation | the CLI, driven the way a user drives it | **131 cases: 131 passed** — 115 answered correctly, 16 refused as expected, 0 unexpected refusals, **0 confidently wrong**, 0 errored |
+| test suite | the package's own regression net | **2,872 tests across 61 of the 62 test files, 11,665 subtests, outside the document check**, zero failures |
+| Lean development | the machine-checked layer | **48 Lean files, `lake build` clean, no `sorry`** |
 
 A break in the probe report is not a failure — it is a located boundary, and
 each one names the exact place it stops. A *confidently wrong* answer in the
@@ -41,14 +41,14 @@ honest refusal is scored `+1`. There are now none.
 ## 2. The end-to-end CLI evaluation
 
 This is the instrument that measures what a user gets. It lives in
-`overlay/glm_universal/evaluation/`. Each of its 83 cases starts `GLM.py` in a
+`overlay/glm_universal/evaluation/`. Each of its 131 cases starts `GLM.py` in a
 **fresh interpreter** — one subprocess per question, no shared session, no warm
 caches — and scores the `ANSWER` or `UNSOLVED` line the process prints. The
-question set covers **all 18 query kinds** the runtime recognises and **all 25
+question set covers **all 21 query kinds** the runtime recognises and **all 47
 report subjects**; the coverage is checked against the runtime's own tables by
 a test, so a new kind or subject cannot be added without a case.
 
-10 of the 83 questions are ones the machine **should refuse**. Answering them
+16 of the 131 questions are ones the machine **should refuse**. Answering them
 confidently is scored worse than refusing them.
 
 ### Accuracy per query kind
@@ -56,24 +56,27 @@ confidently is scored worse than refusing them.
 | query kind | passed | wrong | unexpected refusals | errors |
 |---|---|---|---|---|
 | `analogy` | 10 / 10 | 0 | 0 | 0 |
-| `angle` | 1 / 1 | 0 | 0 | 0 |
-| `cluster` | 1 / 1 | 0 | 0 | 0 |
-| `coherence` | 1 / 1 | 0 | 0 | 0 |
+| `angle` | 2 / 2 | 0 | 0 | 0 |
+| `cluster` | 2 / 2 | 0 | 0 | 0 |
+| `coherence` | 2 / 2 | 0 | 0 | 0 |
+| `comparative` | 7 / 7 | 0 | 0 | 0 |
 | `compare` | 4 / 4 | 0 | 0 | 0 |
+| `derive` | 4 / 4 | 0 | 0 | 0 |
 | `describe` | 8 / 8 | 0 | 0 | 0 |
 | `meaning` | 6 / 6 | 0 | 0 | 0 |
+| `measure` | 9 / 9 | 0 | 0 | 0 |
 | `nearest` | 4 / 4 | 0 | 0 | 0 |
 | `pi_groups` | 2 / 2 | 0 | 0 | 0 |
 | `product` | 1 / 1 | 0 | 0 | 0 |
 | `project` | 1 / 1 | 0 | 0 | 0 |
 | `real` | 5 / 5 | 0 | 0 | 0 |
-| `report` | 26 / 26 | 0 | 0 | 0 |
-| `spatial` | 1 / 1 | 0 | 0 | 0 |
+| `report` | 50 / 50 | 0 | 0 | 0 |
+| `spatial` | 2 / 2 | 0 | 0 | 0 |
 | `task` | 3 / 3 | 0 | 0 | 0 |
 | `trilinear` | 2 / 2 | 0 | 0 | 0 |
 | `unknown` | 1 / 1 | 0 | 0 | 0 |
 | `verify` | 6 / 6 | 0 | 0 | 0 |
-| **total** | **83 / 83** | 0 | 0 | 0 |
+| **total** | **131 / 131** | 0 | 0 | 0 |
 
 Two facts are worth stating plainly. `analogy` — the kind that carried every
 failure in the previous round — is now 10 / 10, and the set grew from 8 cases
@@ -83,11 +86,11 @@ is not bought with over-caution.
 
 ### The refusals it got right
 
-All 10 refusal cases refused. Nine are **boundaries** — each is a theorem or a
-deliberate commitment, and cannot be closed by writing more code — and one is a
-**gap**, which is missing implementation.
+All 16 refusal cases refused, and all 16 are **boundaries** — each is a theorem
+or a deliberate commitment, and cannot be closed by writing more code. There
+is no longer a **gap** case: the last one is closed below.
 
-**Boundaries — 9.**
+**Boundaries — 16.**
 
 | case | question | why the refusal is correct |
 |---|---|---|
@@ -100,17 +103,36 @@ deliberate commitment, and cannot be closed by writing more code — and one is 
 | `unknown-nonsense` | `please compute the square root of a banana` | Nothing to parse into any query kind. |
 | `analogy-empty-table-position` | `Ca : Sc :: Ba : ?` | The step is well defined — `(+0 period, +1 group)` — but period 6, group 3 holds fifteen elements, because the f-block sits there. The position names no single element, and naming one would be a choice the table does not make. |
 | `analogy-cross-register` | `heat : temperature :: force : ?` | Both halves are stated. The relation the lexicon carries is `temperature related_to heat`, and `related_to` records *that* a link exists without saying which, so it transports nothing; and the three terms do not share a register, since physics holds `temperature` and `force` but not `heat`. |
+| `measure-large-room` | `measure large in room` | *large* measures a volume and *room* brackets a length, so the two are about different quantities and no measurement is defined. The refusal is the mismatch, not a missing entry. |
+| `measure-expensive-market` | `measure expensive in market` | *expensive* is on no measure scale at all, and the refusal names which register is missing the word rather than guessing a nearest one. |
+| `measure-hot-walking` | `measure hot in walking` | A temperature word against a velocity class: the two registers disagree about the quantity. |
+| `comparative-cross-quantity` | `is hot in tea hotter than fast in walking` | Both sides are perfectly well measured and still incomparable — a temperature and a velocity are on no common scale. Machine-checked as `GLM.Info.hotTea_not_comparable_fastWalking`. |
+| `comparative-wrong-scale-marker` | `is fast in walking hotter than slow in airliner` | *hotter* is a temperature comparative and the pair measures velocity; a marker cannot order magnitudes of another quantity. |
+| `comparative-midpoint-word` | `is tepid in tea tepider than cold in tea` | *tepid* sits exactly at the middle of the temperature scale, so its comparative names no direction. The direction a marker asserts is read off the register rather than listed, and at the midpoint the register does not decide it. |
+| `derive-undescribed-coordinate` | `derive cents of perfect_fifth` | A cent is a logarithm, so no domain description derives it. The answerable coordinates are exactly the described ones, which is `GLM.Recipe.Spec.answer_eq_none_iff`, so the boundary is a theorem rather than a missing entry. |
 
-The last two are new, and they are the interesting ones: they are refusals the
-machine could not previously *make*, because the old solver had no notion of a
-relation that is recognised and yet determines no answer. Both were wrong
-answers in the previous round.
+The two analogy cases were new in an earlier round, and they are the
+instructive ones: they are refusals the machine could not previously *make*,
+because the old solver had no notion of a relation that is recognised and yet
+determines no answer. Both were wrong answers before that. The three
+`comparative` cases are this round's addition, and they make the same point
+about a new query kind — two of the three refuse although *both* operands are
+fully measured, so the refusal is a statement about comparability rather than
+about coverage. The `derive` case is this round's, and it is the same kind of
+statement one level up: the query surface is driven off the domain descriptions
+themselves, so what it will not answer is fixed by what they derive.
 
-**Gap — 1.**
+**Gap — 0.**
 
-| case | question | what is missing |
-|---|---|---|
-| `nearest-unregistered-molecule` | `nearest to PbCl2` | The gap the molecules register moved rather than closed. The formula parser reads `PbCl2` and the molecule codec would encode it — every coordinate is derived from the element register, so no new datum is needed — but `nearest` resolves its operand against the names a register *enumerates* and stops there. Joining the two is the work item. |
+The last gap was `coherence-unregistered-molecule`, `coherence PbCl2`: the
+formula parser read `PbCl2` and the molecule codec would encode it — every
+coordinate derived from the element register — but the coherence solver
+resolved register names only, so it declined a species it could encode. Every
+solver that takes a carrier and nothing else now has the same fall-through
+`nearest` and `describe` already had, and four cases check it:
+`coherence PbCl2`, `spatial PbCl2`, `angle PbCl2 water` and
+`cluster PbCl2, water, ammonia`. Nothing is guessed — the fall-through refuses
+in turn unless the formula parses and every coordinate is derived.
 
 ---
 
@@ -173,7 +195,7 @@ patterns are shown to miscorrect** — a complete census, not a sample.
 
 The three analogy suites were the weakest instrument in the repository — 26 / 35
 in the previous round — and are now clean. What changed is described in
-[`ANALOGY_LAYER_STUDY.md`](ANALOGY_LAYER_STUDY.md) and summarised in §5 below.
+[`ANALOGY_LAYER_STUDY.md`](studies/ANALOGY_LAYER_STUDY.md) and summarised in §5 below.
 
 `physics_equations` loses its one point to a boundary rather than a gap: EXT10
 refuses the textbook identity `angular_momentum = momentum × length`, because
@@ -237,8 +259,8 @@ missing or wrong triple rather than to an opaque nearest-neighbour search.
 
 **Demonstrably working.**
 
-* Every `report` subject — all 25 of them — answers from a fresh interpreter,
-  and each recomputes its figures rather than quoting them. 26 / 26 in the CLI
+* Every `report` subject — all 47 of them — answers from a fresh interpreter,
+  and each recomputes its figures rather than quoting them. 49 / 49 in the CLI
   evaluation.
 * Analogy: 10 / 10 in the CLI evaluation and 35 / 35 across the three analogy
   suites, with two of the ten CLI cases being refusals the machine now knows
@@ -253,35 +275,99 @@ missing or wrong triple rather than to an opaque nearest-neighbour search.
 * Chemistry: 118 elements with their sparsity measured and widened three ways
   that invent no measurement, and a register of 51 molecules whose every
   coordinate is derived from the element register at load time.
+* Harmony: 28 intervals as exact rational frequency ratios, with equal
+  temperament's miss reported as an exact rational and the catalogue's
+  universality claim tested against an undecoded control rather than repeated
+  — the verdict, `not reproduced`, is read off the measurement.
 * Golay correction: a complete census over all 2,325 correctable patterns, all
   10,626 ambiguous ones and all 42,504 miscorrecting ones.
-* The machine refuses well. All 10 refusal cases were refused, and there were
-  **zero** unexpected refusals across all 83 cases.
+* Carriers for unregistered formulae. `coherence`, `spatial`, `angle`,
+  `cluster`, `nearest` and `describe` all fall through to the formula parser
+  when a name is in no register, so `coherence PbCl2` and
+  `cluster PbCl2, NaCl, H2O` are answered rather than refused.
+* The machine refuses well. All 16 refusal cases were refused, and there were
+  **zero** unexpected refusals across all 131 cases — including the four the
+  `measure` query is asked at its own boundary, where
+  `GLM.Info.boundary_empty_of_unmeasured` says there is nothing to answer with.
 
-**Demonstrably not working.** One case, and it is a gap rather than a boundary:
-`nearest to PbCl2` refuses, because `nearest` resolves its operand against the
-names a register enumerates and an unregistered formula is not one of them.
+**Demonstrably not working.** No case. Every refusal in the set is now a
+`boundary` — a theorem or a deliberate commitment — and the last `gap` case,
+`coherence PbCl2`, was closed by building the carrier from the formula.
 
-**Untouched.** The following remain unstarted, and nothing in this repository
-claims otherwise. The list is kept identical to `MASTER_PLAN.md` §7.9.
+**Untouched.** The list below is the one kept in `MASTER_PLAN_ARCHIVE.md`
+§7.9, with each entry's current state beside it rather than as it stood when
+the list was written.
 
-* **The infinite-dimensional half of the VOA bridge.** `VOA.lean` builds the
-  state–field map `Y(u, z) = Σ uₙ z⁻ⁿ⁻¹` at the Griess layer of the 2A algebra
-  — truncation, skew-symmetry, a forced invariant form, self-adjoint modes,
-  nondegeneracy, a vacuum — and proves that the finite layer is not a vertex
-  algebra, because Borcherds' commutator formula fails on the axis triple. The
-  modes past that layer are not built.
-* **Multi-domain analogy.** `heat : temperature :: force : ?` is refused
-  honestly rather than answered; answering it needs all four operands in one
-  register.
-* **Ranking an unregistered formula** — the evaluation set's one gap case.
-* **Open vocabulary.** There is no coordinate for *justice*.
-* **Words as projections.** `hot` is a standalone concept, not "temperature at
-  high scale".
-* **The delta–sigma directions** — cascaded loops, error feedback through a
-  symmetry-commuting rational matrix, subtractive dither with an equidistributed
-  sequence, sigma–delta on the shells, and the Gibbs-style rule — are
-  exploratory and not started.
+* **Multi-domain analogy** — *open*. `heat : temperature :: force : ?` is
+  refused honestly rather than answered; answering it needs all four operands
+  in one register.
+* **Open vocabulary** — *open, and a commitment rather than an oversight*.
+  There is no coordinate for *justice*.
+* **The infinite-dimensional half of the VOA bridge** — *closed*.
+  `VOA.lean` builds the state–field map `Y(u, z) = Σ uₙ z⁻ⁿ⁻¹` at the Griess
+  layer of the 2A algebra and proves that the finite layer is not a vertex
+  algebra, because Borcherds' commutator formula fails on the axis triple.
+  `Heisenberg.lean` builds the half past it — the Fock space of one free boson
+  over ℚ, the mode commutator, Borcherds' formula on it, and
+  `no_finite_dimensional_model`, which is why no finite layer could have
+  carried it.
+* **Words as projections** — *closed*. `hot` is still a concept and now
+  carries a measurement beside it: read against a comparison class it is an
+  exact magnitude, and the comparative between two such uses is a query kind
+  of its own. See `studies/RELATIVE_MEASURE_STUDY.md`.
+* **An economic register** — *closed*, and the claim it made testable is
+  recorded as `not reproduced` rather than confirmed:
+  `data_objects/economics_register.py` holds 21 quoted prices as exact
+  rationals and `report economics` measures the catalogue's §6.2 sentence
+  against an undecoded control that does exactly as well.
+* **The recipe applied by hand each round** — *closed for the domain*.
+  `glm_universal/recipe/` makes a domain declarative: comparison classes,
+  harmonics and prices were deleted and regenerated from their descriptions
+  alone, 94 of 94 carriers identical and every measured figure unchanged, and
+  `derive <coordinate> of <object>` answers off the descriptions. See
+  `studies/RECIPE_STUDY.md`.
+* **The question written as a hand-written phrase** — *closed for seven query
+  kinds, across three shape families, with no branch left for any of them*.
+  `glm_universal/language/` makes the **shape of a question** an object: an
+  opening, named slots, the literal words that separate them, an optional tail,
+  a described preamble, a list slot and named refusal boundaries, read by one
+  generic matcher that knows nothing about any kind. `derive`, `measure`,
+  `task` and `compare` are described that way — 7 slots, 47 surface forms, 15
+  counted judgements — a second family cuts a string at an operator for
+  `verify`, `analogy` and the relational half of `compare` (8 operands, 39
+  surface forms, 13 judgements) with a described modifier and described
+  trailing options, and a third **nests**: `comparative`, whose sides are
+  themselves the measure shape, tightened, at 4 judgements. **Every one of the
+  seven hand-written branches is deleted** and frozen in `language/legacy.py`,
+  so the agreement is measured against the deleted code: **947 / 947**,
+  **201 / 201** and **480 / 628** generated questions, kind *and* options, with
+  all **111** evaluation questions of the undescribed kinds declined (**0 false
+  positives**), 20 narrowing witnesses, and one declared widening — 148
+  comparatives written with `relative to` — accounted for with 0 left over.
+  `RequestProject/GLM/Question.lean` and `QuestionNested.lean` prove the round
+  trip, the disjointness, the preamble, the list cut, the modifier frame and
+  the nested shape's two refusals for all questions rather than for a sample.
+  What is *not* closed is stated as a limit rather than implied: thirteen kinds
+  have no description at all, and two of them — `describe`, a bare concept
+  name, and `report`, a subject table — are kinds a shape should not be bent to
+  fit. See `studies/LANGUAGE_STUDY.md`.
+* **The `O(1)` LLVQ lookup table** — *closed, with the claim narrowed*.
+  `reasoning/llvq_table.py` replaces the Leech quantiser's 8,192-codeword scan
+  with the MOG's own structure — a 16-entry column table, 64 hexacode words,
+  128 classes of 32 — and `RequestProject/GLM/LLVQTable.lean` proves the class
+  minimum in both parities and the exactness of the bounded search. The
+  subtractive test is the address book: **1,270 declarations decoded both ways,
+  0 addresses changed**, with 107 vectors agreeing point for point against the
+  frozen scan. What the measurement supports is **constant-bounded, not
+  constant** — 96.8 codeword costs per call against 8,192, worst case the whole
+  code — and the report says so. `report llvq`; see
+  `studies/LLVQ_TABLE_STUDY.md`.
+
+Seven items have left this list since the previous revisions of this document:
+the **32- and 48-dimensional lattices**, **sigma–delta on the Leech shells**
+with the Gibbs-style rule, **a harmonic register**, the **economic register**,
+the **infinite-dimensional half of the VOA bridge**, **words as projections**
+and the **`O(1)` LLVQ lookup table**.
 
 **Three things were answered rather than left open.** The
 self-organised-criticality reading of the mean coset weight had been claimed

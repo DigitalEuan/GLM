@@ -1,3 +1,118 @@
+# Summary of changes for run a8eb1ba5-cd98-4fb7-8a9f-769aa2848b27
+I finished the round that had been left open (the LLVQ lookup-table work) and brought the whole project back to a fully signed-off, self-consistent state.
+
+**What was outstanding and is now done**
+
+1. *Sign-off run.* The release runner could not previously record new suite totals — the ledger only recorded them when *every* unit passed, including the document check, which by construction fails whenever a round adds a test file. That deadlock was fixed (the condition is now over the counted units, i.e. the suite minus the document check, with a docstring explaining why), and a new `TestTheRecordedTotals` class in `overlay/glm_universal/tests/test_signoff.py` pins the behaviour.
+
+2. *Figures regenerated and propagated.* `overlay/FIGURES.md` was regenerated; the new suite sentence — **2,872 tests across 61 of the 62 test files, 11,665 subtests, outside the document check** — and version **v1.14.0** were propagated into `STATUS.md`, `CAPABILITY_ASSESSMENT.md`, `overlay/README.md`, `overlay/glm_universal/README.md` and `overlay/glm_universal/tests/README.md`. Residual stale numbers (a `2,746` paragraph in `STATUS.md`, three `v1.13.0` headers) were corrected.
+
+3. *Drift guard extended.* The retired phrases of this round (`47 report subjects`, `61 test files`, `46`/`47 Lean files`, `130 cases`/`130 CLI cases`/`130-case`, `2,847 tests`, `10,985 subtests`, `96 modules`, `48 reasoning modules`) were added to the superseded list in `overlay/glm_universal/tests/test_figures.py`, after confirming no document still contains them.
+
+**Verification performed (all green)**
+
+- Full suite in one process: **2,874 passed, 26 skipped, 13,523 subtests, zero failures**.
+- Release sign-off: **62 of 62 test units and 7 of 7 instruments signed off** — `lake build`, the sorry scan, the two-copy Lean diff, the capability probes, the benchmarks, the end-to-end evaluation and the figures check.
+- End-to-end CLI evaluation **131 / 131** (115 answered, 16 expected boundary refusals).
+- `lake build` clean; no `sorry` or `admit` anywhere in `RequestProject`; repository and overlay Lean copies identical.
+- `report llvq --verify-tct` returns `VERIFIED True`.
+- The five Lean results of `RequestProject/GLM/LLVQTable.lean` registered in the properties table (the cost identity, the two class-minimum theorems, the class-size count and the branch-and-bound exactness lemma) were checked with `#print axioms` and depend only on `propext`, `Classical.choice` and `Quot.sound`; they are now marked proved.
+
+All work is committed and pushed. `ARISTOTLE_SUMMARY.md` was read but not modified.
+
+
+# Summary of changes for run 2865a776-df6d-4d42-b4ef-b902a5ce2e1f
+The remaining documentation-reconciliation and verification tail is finished, and everything below was checked by running it here. All work is committed and pushed.
+
+**1. Test-count figures propagated.** The per-file table and totals in the test-suite README were already current at 54 files / 2,424 tests; the same counts now appear in `STATUS.md`, `CAPABILITY_ASSESSMENT.md`, the package README (`overlay/glm_universal/README.md`) and the overlay README (`overlay/README.md`). Two evaluation-set figures that had been left behind were corrected with them: the "104 CLI cases" comment in `STATUS.md` and the `test_evaluation.py` row in the tests README, both now 112.
+
+**2. The staleness guard widened.** `overlay/glm_universal/tests/test_figures.py` now also refuses `42 report subjects`, `38 Lean files`, `52 test files`, `104 cases`, `104 CLI cases`, `104-case`, `2,350 tests`, `2,350 collected tests` and the retired subtest totals (`9,088`, `9,165`, `9,170`, `9,232`). Each phrase names the unit it counts, so the still-true `104 collision classes` is untouched — I checked that the guard passes with that phrase in place.
+
+**3. A drift the full run exposed, and fixed.** The suite's corpus check failed: the Lean development has grown to **966 declarations across 39 files** (`MeasureView.lean` contributed 40 of its own), while four documents still described the 926-declaration corpus. `studies/LEAN_ADDRESS_STUDY.md` was re-measured against the code, not patched by hand — the kind table (623 theorems, 233 defs, 84 lemmas, 8 abbrevs, 8 structures, 5 inductives, 5 instances), `966 parsed, 0 duplicates`, read-back 966/966 with 0 coordinate errors out of 23,184 and worst residual 3 at `GLM.CoherenceRegime`, 899 distinct addresses in 57 collision classes (48 pairs, 8 triples, one class of four) covering 124 declarations, and the separation tests: nearest-by-address shares a file 343/966 (35.5 %) against 28 for the digest control and 21 for the seeded reshuffle, chance `1996/66585 ≈ 3.00 %`; cited either way 76/966 (7.87 %) against 11 and 1, chance ≈ 0.57 %; mean squared distances 5,399.2 within a file against 6,534.3 across, ratio 0.826. The scale sweep and all four §8 examples were recomputed and were unchanged. `STATUS.md`, both READMEs and the tests README now quote the same corpus.
+
+**4. A v5.12 changelog row** was added to `overlay/README_ARCHIVE.md`, following the established practice: the measure-word round (comparison-class register, the measured widening, the `measure` query and its forced refusals, `MeasureView.lean`) together with this reconciliation and the figures it was checked against.
+
+**5. Full verification.**
+
+| instrument | result |
+|---|---|
+| test suite | **2,424 tests across 54 test files, 10,782 subtests, zero failures** |
+| end-to-end CLI evaluation | **112 / 112** — 100 answered, 12 refused as expected (all boundary, 0 gap), 0 unexpected refusals, 0 confidently wrong, 0 errored |
+| Lean development | `lake build` completes cleanly; **no `sorry`**, and the repository tree and its overlay mirror are byte-identical |
+| figures | `figures --write` is a no-op — `FIGURES.md` already matches a fresh computation |
+| reports | `report lean`, `report measure`, `report escalation` each `VERIFIED True` under `--verify-tct` |
+
+The subtest total moved from the 9,232 the documents quoted to 10,782; the earlier figure predated the two test files added last round, and the guard now blocks its return.
+
+**Properties table.** The five `MeasureView.lean` properties left open last round are now marked proved — each was re-checked against a clean, `sorry`-free build and depends only on Lean's standard axioms (`propext`, `Classical.choice`, `Quot.sound`). The definition they are stated in terms of remains a definition entry.
+
+
+# Summary of changes for run bba72c13-d2ef-4e24-be71-f1d7407c1ed8
+All the outstanding items are done, verified by running them, and committed and pushed.
+
+**1. The three stale "849-declaration" statements, corrected.** Each now quotes the corpus as it actually is, measured here (861 declarations across 36 files, after `RequestProject/GLM/Harmony.lean` joined the development):
+
+- `STATUS.md` — the "Lean development, addressed" paragraph: 861 declarations, read back 861/861 with 0 coordinate errors, 806 distinct addresses, nearest-by-address shares a file 330 times against 26 for the digest control and 20 for the seeded reshuffle, chance `288/8815`.
+- `overlay/glm_universal/README.md` — the `report lean` bullet: the same figures, with 330/861 on the file test.
+- `overlay/README.md` — the one-line description of the study in the document index: 861.
+
+`MASTER_PLAN.md`'s phase record was left exactly as it was, as a historical entry.
+
+**2. Everything in the study re-checked against the code, not just the three edits.** Every figure in `LEAN_ADDRESS_STUDY.md` was recomputed and matched: the kind table (557 theorems, 201 defs, 82 lemmas, 6 abbrevs, 5 each of inductive/instance/structure = 861), `861 parsed, 0 duplicates`, largest file `Stack.lean` at 47, the scale sweep row by row, the read-back table (20,664 coordinates, 0 errors, worst residual 3 at `GLM.CoherenceRegime`, all 861 moved by the decoder), the 47 collision classes as 40 pairs / 6 triples / one class of four together with all four example classes quoted in §6, the §7 rates and mean squared distances, and all three §8 examples down to the individual neighbour distances. Two small corrections fell out: the per-file test count in the header, and a missing line number in one §8 example.
+
+**3. The drift is now caught rather than noticed.** `test_lean_address.py::TestDocumentsQuoteTheCurrentCorpus` parses the Lean tree and requires the four documents that state the corpus size to state the size the parser finds, so the next Lean file added fails the suite instead of quietly ageing the prose. The test-count figures that moved as a result (2,308 → 2,309 collected, 9,165 → 9,170 subtests) were regenerated with `figures --write` and propagated to `STATUS.md`, `CAPABILITY_ASSESSMENT.md`, the overlay README, the package README and the tests README, and a change-log row 5.9 (with the version header) records the round.
+
+**4. Full re-verification after the documentation edits.**
+
+| instrument | result |
+|---|---|
+| test suite | **2,309 tests across 51 test files, 9,170 subtests, zero failures** |
+| end-to-end CLI evaluation | **103 / 103** — 94 answered, 9 refused as expected (all boundary, 0 gap), 0 unexpected refusals, 0 confidently wrong, 0 errored |
+| verified reports (`--verify-tct`) | `lean`, `harmony`, `directives`, `pipeline`, `containers`, `companion`, `lattices`, `shells`, `semantics`, `noise`, `catalog`, `drift`, `signature` — all **VERIFIED True** |
+| Lean development | `lake build` completes cleanly; 36 files, 9,410 lines, **no `sorry`**, and the repository and overlay copies of the sources are identical |
+| figures | `FIGURES.md` regenerated and matching a fresh computation |
+
+**5. Properties table.** No registered declaration changed this session — the work was in documentation and one new test — so the table still matches the sources; the Lean entries it records were re-checked against a clean, `sorry`-free build.
+
+
+# Summary of changes for run 7ff21c97-e32b-44f1-aa8b-c56599e364b5
+I picked up the unfinished v1.4.0 round and closed it out — no new features were started; everything begun earlier is now wired, tested and documented.
+
+**Documentation finished (the main remaining gap)**
+
+- `MASTER_PLAN.md`: header figures corrected (18 query kinds, **35 report subjects**, 6 registers, **44 test files**); `report containers` and `report companion` added to the runtime-surface table; §7.9 "still untouched" updated — the "carrier in every solver" item is retired and the 32-/48-dimensional lattices are named as the open geometric direction; and a full **Phase 10** section added covering the three containers, the companion claim ledger, the formula fall-through, and the measured result.
+- `overlay/README.md`: current-state part brought to v1.4.0 (35 report subjects, 37 reasoning modules, 44 test files, 97 evaluation cases, 1,991 tests), `GLM_COMPANION_STUDIES_AUDIT.md` added to the document index, and a new **change-log row 5.5** written into the archive section (the historical rows below the archive marker were left untouched, as intended).
+- `CAPABILITY_ASSESSMENT.md` §6 refreshed: 35 report subjects / 36 report cases, 9 refusals across 97 cases, a new bullet for unregistered-formula carriers, "demonstrably not working" now correctly reports **no** failing case, and the untouched list realigned with the master plan.
+- `overlay/glm_universal/tests/test_figures.py`: three more superseded phrases (`33 report subjects`, `35 reasoning modules`, `92-case`) added to the drift guard, so those counts cannot silently return; the subtest total the documents quote was updated accordingly (8,935) in the five places that state it.
+
+**Full verification, all re-run from scratch and all clean**
+
+| instrument | result |
+|---|---|
+| test suite | **1,991 tests across 44 test files, 8,935 subtests, zero failures** |
+| end-to-end CLI evaluation | **97 / 97** — 88 answered, 9 refused as expected (all `boundary`, **0 gap**), 0 unexpected refusals, 0 confidently wrong, 0 errored |
+| capability probes | 33 probes: 20 hold, 13 break, 0 errored |
+| benchmark suites | 2,389 / 2,390 across 5 suites; every suite beat its baseline |
+| `figures --write` | no-op — `overlay/FIGURES.md` already matched a fresh computation |
+| `report containers` / `report companion` under `--verify-tct` | both `VERIFIED True` |
+| Lean development | `lake build` completed successfully; 32 GLM files, 8,157 lines, **no `sorry`** |
+
+Every documentation figure quoted above is now the figure the code produces, and the figures test enforces that.
+
+All work is committed and pushed. No new Lean declarations were added this session, so the properties table is unchanged and still matches the sources.
+
+# Summary of changes for run 79fd272a-e622-48eb-930d-e2ab65130a19
+I picked the project up where it stood, finished the one piece of work that had been left half-wired, and brought the documentation and README chain back into line with the code so the next iteration can start from an accurate picture.
+
+**What I found unfinished.** The previous round had landed the study-catalogue work (`reasoning/catalog.py`, `wobble.py`, `drift.py`, the `report catalog` / `report signature` / `report drift` subjects, `RequestProject/GLM/Sturmian.lean`) and `RequestProject/GLM/Feedback.lean`, but almost none of it had reached the documents: `MASTER_PLAN.md` stopped at Phase 8, `STATUS.md` still listed error feedback as not started, the Lean README claimed 32 files while its table listed 30, the top-level overlay README's version header had moved to 5.3 with no matching change-log row, and several counts were off. Worse, the error-feedback code was reachable from nothing: `feedback_experiment` was not in `noise_report`, no test touched it, and no report surfaced it.
+
+**Code completed.** The vector error-feedback loop is now the sixth step of `report noise` — every coordinate tracked to `1/(2N)`, the dead zone at `A = 1/2` where the quantiser never fires, and exact equivariance under a permutation the feedback matrix respects, with a non-invariant matrix run beside it so the hypothesis is seen to do work. Its column-3 script re-derives all of it in a fresh interpreter (`VERIFIED True`), and ten new tests in `glm_universal/tests/test_noise_lab.py` (40 → 50) pin the quantiser, the bound, the dead zone, the equivariance and the absence of any float.
+
+**Documentation reconciled.** `MASTER_PLAN.md` gains Phase 9 (the catalogue ledger, the spectral signature, the drift study, error feedback) plus eight missing runtime-surface rows, and its stale "not started" bullet is corrected; `STATUS.md` records the catalogue round, the two new Lean files and the new open item, and its document map now lists both audit write-ups, the Lean README and the supplied source material; the repository `README.md` gains a section on the two claim ledgers and the missing `Feedback.lean` entry; `NOISE_EXPERIMENT_STUDY.md` gains §6 on error feedback; the Lean README gains `Sturmian.lean` and `Feedback.lean`; the reasoning, runtime, package and tests READMEs gain `wobble.py` / `drift.py` / `catalog.py`, the three report subjects and corrected counts; and the overlay README gains change-log rows 5.3 and 5.4 with the header at 5.4. `tests/test_figures.py` now also holds `STATUS.md` to the generated figures, so the status document cannot silently drift again.
+
+**Verified here, by running it.** `lake build` completes cleanly over the 32 Lean files with no `sorry` (the repository and overlay copies are identical); the full Python suite is 1,894 tests across 42 test files, 8,896 subtests, zero failures; the end-to-end CLI evaluation is 92/92 (82 answered, 10 refused as expected — 9 boundary, 1 gap — 0 confidently wrong, 0 errored); benchmarks 2,389/2,390 with every suite above its baseline; 33 capability probes (20 hold, 13 break, 0 errored, 0 surprises); `FIGURES.md` regenerated; and `report noise`, `report catalog`, `report drift`, `report signature`, `report analogies`, `report molecules`, `report chemistry coverage` and `report semantics` each return `VERIFIED True`. The four `Feedback.lean` theorems now recorded in the properties table depend only on Lean's standard axioms.
+
+
 # Summary of changes for run 1c2d31a1-2424-4b7b-bccf-398ccedefc0e
 Everything you listed is done, checked by running it, and committed and pushed.
 
