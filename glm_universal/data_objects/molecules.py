@@ -461,6 +461,27 @@ def load_molecule_register() -> Tuple[Molecule, ...]:
     return tuple(out)
 
 
+def molecule_from_formula(text: str, name: Optional[str] = None) -> Molecule:
+    """Build a molecule from a formula alone, registered or not.
+
+    The register holds 51 species, and a formula names infinitely many.  This
+    is the route for the rest of them: the formula is parsed into an exact
+    composition and charge, and every coordinate of the resulting carrier is
+    then derived from the element register exactly as a registered molecule's
+    is -- so an unregistered species is a first-class carrier, not a special
+    case.  Raises :class:`FormulaError` if the formula does not parse or names
+    an element the register does not hold.
+    """
+    counts, charge = parse_formula(text)
+    return Molecule(name=name or format_formula(counts, charge),
+                    formula=text, counts=counts, charge=charge)
+
+
+def object_from_formula(text: str, name: Optional[str] = None) -> DataObject:
+    """The encoded carrier of a molecule named only by its formula."""
+    return MoleculeCodec().encode(molecule_from_formula(text, name))
+
+
 def molecule_by_name(name: str) -> Molecule:
     """One molecule by name, or by formula."""
     key = name.strip().lower()

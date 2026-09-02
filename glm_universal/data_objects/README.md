@@ -3,13 +3,14 @@
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 
-**Status: implemented (Step 2), extended since.** Six domains, one carrier
+**Status: implemented (Step 2), extended since.** Eight domains, one carrier
 shape: every object here is a point of $\mathbb{Q}^{24}$ with an exact 2-adic
 digit stack behind it.
 
 As loaded by the runtime (`GeometricSession.register`), the registers are
 physics **726**, chemistry **118**, **51 molecules**, mathematics **22**,
-lexicon **95** (the semantic lexicon), spatial **28** — 1,040 carriers in all.
+lexicon **95** (the semantic lexicon), spatial **28**, harmonics **28**,
+economics **21** — 1,089 carriers in all.
 The live counts are recomputed in [`../../FIGURES.md`](../../FIGURES.md) under
 *Registers*; `spatial` is built in the runtime rather than here. The tables
 below record the *verification sweep* over the frozen snapshots at the time it
@@ -274,6 +275,30 @@ See `report molecules` for the whole thing recomputed on demand, and
 
 ---
 
+## 4c. Harmonics — 28 intervals, and no float anywhere
+
+`harmonics.py` is the newest register, and the cheapest one to justify: an
+interval *is* a ratio of two positive integers, so nothing about it has to be
+measured, calibrated or rounded. All 24 coordinates of `HARMONIC_LAYOUT` are
+computed from the pair `(n, d)` in lowest terms — the exponents over 2, 3, 5
+and 7, Tenney height `n · d`, Euler's gradus suavitatis, the nearest
+equal-tempered step and the exact rational `(n/d)^12 / 2^k` by which that step
+misses — and only `n` and `d` are needed to read the interval back, which is
+what makes `IntervalCodec`'s round trip exact.
+
+The register holds **28 intervals**: 18 just, 5 septimal and 5 commas, over
+prime limits 2, 3, 5 and 7. The nearest equal step is decided by comparing
+`r^24` against powers of two — integers, not logarithms — so `tet_error` is an
+exact `Fraction`, `531441/524288` at the fifth and `244140625/268435456` at the
+just major third.
+
+The register exists to make a claim testable rather than to enlarge the
+package: `reasoning/harmony.py` runs the catalogue's universality sentence
+against it, and `RequestProject/GLM/Harmony.lean` proves the reason every
+tempering error is non-zero.
+
+---
+
 ## 5. Mathematics
 
 `RationalMatrix` — any $r \times c$ over $\mathbb{Q}$ with $rc \le 24$,
@@ -324,6 +349,88 @@ codec.decode(objs[0])                # Concept('electron', 'noun', ...)
 
 ---
 
+## 6b. Comparison classes — 45 brackets, 11 scales, 64 degree words
+
+`hot` is a lexicon concept, and the concept cannot say *how hot*, because hot
+for a cup of tea is 363 K and hot for a stellar surface is 44 000 K. What is
+missing is the **comparison class** the word is measured against, and
+`comparison_classes.py` is the register of them: **45 classes over 11
+quantities** (temperature 6, length 5, mass 5, velocity 5, volume 5, density 4,
+illuminance 4, force 3, luminous intensity 3, pressure 3, frequency 2), each an
+exact bracket `[low, high]` in the SI base unit of its quantity with a typical
+magnitude inside it. Seven further names are aliases resolving to one of the
+eleven — `size` → `volume`, `light` → `illuminance`, `distance` → `length` and
+so on — and supply no coordinate of their own.
+
+Nothing dimensional is typed twice. A class names a quantity, and the unit,
+the dimension and the ten EXT10 exponents of its 24-coordinate carrier are read
+out of the physics register at load time — a class naming a quantity the
+register does not hold **fails to load**, which is the same derivation rule the
+molecules register follows.
+
+Beside the classes are **11 measure scales carrying 64 degree words**, each at an
+exact position in `[0, 1]`, and `lexicon_agreement()` checks the 12 words the
+scales share with the semantic lexicon: the quantity must be the one the
+concept's `property_of` relation names, the position must fall on the side of
+the midpoint the `positive_negative` primitive says, and an `opposite_of` pair
+must have positions summing to 1. It reports `agrees: True`, with `heavy`
+noted as the one word whose polarity is the neutral `1/2` — a case the static
+reading cannot place and the scale can.
+
+```python
+klass = do.class_by_name("tea")
+klass.magnitude_at(Fraction(7, 8))    # Fraction(363, 1) — hot, in kelvin
+```
+
+The reading built on this register, the audit that shows adding it gives
+nothing up, and the query that refuses where the registers hold nothing are in
+`reasoning/measure_view.py` and
+[`../../../studies/RELATIVE_MEASURE_STUDY.md`](../../../studies/RELATIVE_MEASURE_STUDY.md).
+
+---
+
+## 6c. Denotations — 36 decisions about what a name denotes
+
+Repairing the lexicon's `related_to` triples leaves 39 that the physics
+register cannot decide, and 38 of those decline because an endpoint *reaches no
+dimension the register holds*. That sentence reports a lookup, not a fact about
+the word: it cannot tell a name the register merely spells differently from a
+name that denotes no magnitude at all.
+
+`denotation.py` is the register that settles the difference — **36 entries**,
+one per undimensioned endpoint, each a judgement made on purpose and written
+down with its justification. There are six verdicts and only the first makes a
+name dimensional:
+
+| verdict | entries | example |
+|---|---|---|
+| `quantity` | 1 | *gravity* — the register's `gravitational_field` under an ordinary-language name |
+| `ambiguous` | 3 | *motion* — velocity, momentum or kinetic energy, and the word does not choose |
+| `polymorphic` | 4 | *magnitude* — takes the dimension of whatever it is applied to |
+| `carrier` | 9 | *electron* — bears a mass and a charge and is neither |
+| `process` | 11 | *rotate* — quantified by an angle, and not one |
+| `abstraction` | 8 | *equilibrium* — a condition over quantities, taking no value |
+
+A `quantity` verdict supplies **no coordinate**: the dimension continues to be
+read out of the physics register, so a denotation can no more invent a quantity
+than an alias can. `denotation_audit()` refuses a verdict outside the six, a
+`quantity` naming something the register does not hold, an `ambiguous` entry
+with fewer than two real candidates, a name that shadows a registered quantity
+or an existing alias, an entry with no justification, and any duplicate
+(`sound: True`).
+
+```python
+do.verdict_of("motion")                 # 'ambiguous'
+do.denotes_quantity("gravity")          # 'gravitational_field'
+do.denotes_quantity("cause")            # None — decided, not missing
+```
+
+What the decisions change is measured next door, in
+`reasoning/denotation_view.py`, and written up in
+[`../../../studies/DENOTATION_STUDY.md`](../../../studies/DENOTATION_STUDY.md).
+
+---
+
 ## 7. Exactness
 
 `float` is refused at construction by `as_exact()`, which accepts `int`,
@@ -347,9 +454,11 @@ establish.
 | `physics.py` | `Quantity`, `PhysicsCodec`, `basis_collision_report` |
 | `elements.py` | `Element`, `Diatomic`, `ElementCodec`, `golay_address`, `periodic_separation_report` |
 | `molecules.py` | `Molecule`, `MoleculeCodec`, `parse_formula`, `molecule_bundle`, `formula_from_bundle`, `composite_collisions`, `molecules_report` — the 51-species multi-carrier register |
+| `harmonics.py` | `Interval`, `IntervalCodec`, `HARMONIC_LAYOUT`, `interval_register`, `interval_by_name`, `prime_exponents`, `product_complexity`, `euler_gradus`, `tet_step`, `tet_error`, `register_summary` — the 28-interval harmonic register, every coordinate derived from the ratio |
 | `mathematics.py` | `RationalMatrix`, `Reflection`, `FieldElement` and their codecs |
 | `lexicon.py` | `Vocabulary`, `Concept`, `LexiconCodec` (index-based, legacy; still tested, no longer loaded by the runtime) |
 | `semantic_lexicon.py` | `SemanticConcept`, `SemanticLexiconCodec` — the 95 meaning-based concepts the `lexicon` register actually holds: 10 semantic primitives in 1/8 gradations, POS, arity, up to four (predicate, object) slots, a 20-bit checksum |
+| `comparison_classes.py` | `ComparisonClass`, `ComparisonClassCodec`, `COMPARISON_LAYOUT`, `DegreeWord`, `MeasureScale`, `comparison_classes`, `class_by_name`, `classes_for_quantity`, `measure_scales`, `scale_for_quantity`, `degree_word`, `lexicon_agreement`, `register_summary` — the 45 comparison classes and the 11 scales, every dimension derived from the physics register |
 | `_data/` | Frozen exact-rational snapshots; regenerate with `workflow/08a_ingest_registers.py` |
 
 ## Depends on

@@ -384,7 +384,7 @@ _CHEMISTRY_TIER = EvidenceTier(
 
 
 # The three cases that used to miss are recorded in
-# ``ANALOGY_LAYER_STUDY.md``.  Two of them were missing relations, now
+# ``studies/ANALOGY_LAYER_STUDY.md``.  Two of them were missing relations, now
 # stated in the register: ``proton opposite_of electron`` and ``rotate
 # form_of move`` / ``accelerate form_of move``.  The third was a wrong
 # target: ``cause : effect :: force : ?`` was curated as ``motion``, but the

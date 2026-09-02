@@ -88,7 +88,7 @@ __all__ = [
     "exact_nrci", "hexcolour_of_mask", "fnv1a64", "minted_mask",
     "decode_record", "migrate_concept", "mint_concept", "migrate_state",
     "canonical_payload", "write_canonical", "load_canonical",
-    "verify_canonical", "state_migration_report",
+    "verify_canonical", "hexcolour_audit", "state_migration_report",
 ]
 
 #: The format tag written into every canonical payload.
@@ -631,7 +631,80 @@ def verify_canonical(payload: Mapping[str, object]) -> Dict[str, object]:
 
 
 # ===========================================================================
-# 6.  THE REPORT
+# 6.  THE HEXCOLOUR LAYER, AUDITED
+# ===========================================================================
+
+def hexcolour_audit(payload: Optional[Mapping[str, object]] = None
+                    ) -> Dict[str, object]:
+    """Are the hexcolour addresses actually carrying anything?
+
+    A hexcolour is the six-hex-digit rendering of a 24-bit mask -- one hex
+    digit per four coordinates -- so it is an *address*, in the sense of D3:
+    it fixes the carrier exactly and means nothing beyond it.  The question
+    this answers is whether the layer is doing that job on the shipped data
+    rather than merely existing, and every number below is measured here:
+
+    * ``concepts`` / ``distinct`` -- how many migrated concepts carry an
+      address, and how many distinct addresses those are.  Equality is the
+      claim that the rendering loses nothing.
+    * ``round_trip_failures`` -- concepts whose address does not read back to
+      its own mask through the public converters in
+      :mod:`glm_universal.substrate.isomorphism`.
+    * ``recomputed_disagreements`` -- concepts whose stored address is not the
+      one the mask produces, which is what
+      :func:`verify_canonical` refuses to let happen.
+    * ``migration_mismatches`` -- addresses for which permuting the coordinate
+      set and re-rendering disagrees with rendering and then migrating, i.e.
+      whether the address layer commutes with the legacy-to-core relabelling.
+    * ``legacy_*`` -- the same questions for the separate per-task address
+      table the supplied ARC pipeline left behind.
+    """
+    from ..substrate.isomorphism import (hexcolour_to_mask, mask_to_hexcolour,
+                                         migrate_hexcolour, to_core_mask)
+
+    if payload is None:
+        loaded = load_canonical()
+        payload = loaded if loaded is not None else canonical_payload()
+    if payload is None:
+        return {"available": False}
+
+    concepts = list(payload.get("concepts", []))  # type: ignore[arg-type]
+    colours = [str(c["hexcolour"]) for c in concepts]
+    masks = [int(c["mask"]) for c in concepts]
+    round_trip = sum(1 for colour, mask in zip(colours, masks)
+                     if hexcolour_to_mask(colour) != mask)
+    recomputed = sum(1 for colour, mask in zip(colours, masks)
+                     if mask_to_hexcolour(mask) != colour)
+    migrated = sum(1 for colour, mask in zip(colours, masks)
+                   if hexcolour_to_mask(migrate_hexcolour(colour))
+                   != to_core_mask(mask))
+
+    legacy = list(payload.get("hexcolours", []))  # type: ignore[arg-type]
+    legacy_colours = [str(r["hexcolour"]) for r in legacy]
+    legacy_masks = [int(r["mask"]) for r in legacy]
+    legacy_round_trip = sum(1 for colour, mask in zip(legacy_colours,
+                                                      legacy_masks)
+                            if hexcolour_to_mask(colour) != mask)
+    return {
+        "available": True,
+        "concepts": len(concepts),
+        "distinct": len(set(colours)),
+        "collisions": len(colours) - len(set(colours)),
+        "round_trip_failures": round_trip,
+        "recomputed_disagreements": recomputed,
+        "migration_mismatches": migrated,
+        "legacy_addresses": len(legacy),
+        "legacy_codewords": sum(1 for r in legacy if bool(r["is_codeword"])),
+        "legacy_distinct": len(set(legacy_colours)),
+        "legacy_round_trip_failures": legacy_round_trip,
+        "faithful": (round_trip == 0 and recomputed == 0
+                     and migrated == 0 and legacy_round_trip == 0
+                     and len(set(colours)) == len(colours)),
+    }
+
+
+# ===========================================================================
+# 7.  THE REPORT
 # ===========================================================================
 
 def state_migration_report() -> Dict[str, object]:
@@ -663,6 +736,7 @@ def state_migration_report() -> Dict[str, object]:
         "source_reproduces_the_file": reproduces,
         "checks": checks,
         "verification": verification,
+        "hexcolours": hexcolour_audit(payload),
         "frame": {
             "frames_coincide": frame["vectors"]["frames_coincide"],
             "shared_codewords": frame["vectors"]["shared_codewords"],

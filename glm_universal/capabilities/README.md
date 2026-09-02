@@ -110,7 +110,7 @@ The thirteen boundaries, each with the place it stops:
 
 The remaining work item, `semantics_open_vocabulary`, is written up with the
 exact line at which it stops in
-[`INFINITE_VALUES_STUDY.md`](../../../INFINITE_VALUES_STUDY.md) §3.6 and §3.7.
+[`INFINITE_VALUES_STUDY.md`](../../../studies/INFINITE_VALUES_STUDY.md) §3.6 and §3.7.
 
 Two probes have crossed from `breaks` to `holds` since that write-up, which is
 what the lifecycle is for. `runtime_arithmetic_inside_a_describe` recorded

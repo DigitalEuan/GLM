@@ -12,7 +12,7 @@ process's exit code and the `ANSWER` or `UNSOLVED` line it printed.
 
 ```bash
 cd overlay
-PYTHONPATH=. python3 -m glm_universal.evaluation                     # all 83 cases
+PYTHONPATH=. python3 -m glm_universal.evaluation                     # all 131 cases
 PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8            # in parallel
 PYTHONPATH=. python3 -m glm_universal.evaluation --only analogy      # one query kind
 PYTHONPATH=. python3 -m glm_universal.evaluation --case report-superposition
@@ -25,15 +25,15 @@ harness can be used as a gate.
 
 ## The question set
 
-`cases.py` holds **83 cases**. Between them they cover **all 18 query kinds**
+`cases.py` holds **131 cases**. Between them they cover **all 21 query kinds**
 the runtime recognises (including `unknown`, the kind a question gets when
-nothing else claims it) and **all 25 report subjects**. Coverage is not
+nothing else claims it) and **all 48 report subjects**. Coverage is not
 asserted in prose: `test_evaluation.py` compares `KINDS_COVERED` and
 `SUBJECTS_COVERED` against the runtime's own tables and fails when a kind or a
 subject is added without a case.
 
-Of the 83, **73 expect an answer and 10 expect a refusal** — 9 of those
-classified `boundary` and **1 `gap`**.
+Of the 130, **114 expect an answer and 16 expect a refusal** — all 16
+classified `boundary`, and **no `gap` case left**.
 
 A case declares what the honest outcome is:
 
@@ -51,18 +51,20 @@ A case declares what the honest outcome is:
 
 ## Where the run stands
 
-The whole set runs **83 of 83**, with no wrong answers and no unexpected
+The whole set runs **97 of 97**, with no wrong answers and no unexpected
 refusals: every case either answers with the ground truth or refuses exactly
 where it declared it would.
 
-**The one remaining gap** is `nearest-unregistered-molecule` — `nearest to
-PbCl2`. It is the gap the molecules register *moved* rather than closed. The
-formula parser reads `PbCl2` and the molecule codec would encode it — every
-coordinate is derived from the element register, so no new datum is needed —
-but the `nearest` search resolves its operand against the names a register
-enumerates and stops there. Joining the two, so that an unregistered formula
-can be ranked against the register, is the work item; until it is done the
-refusal is the honest answer and the case is scored as a pass for refusing.
+**No `gap` case is left.** The last one was `coherence PbCl2`: the formula
+parser read `PbCl2` and the molecule codec would encode it — every coordinate
+derived from the element register, so no new datum was needed — but each
+solver resolved its operand against the names a register enumerates and
+stopped there. Every solver that takes a carrier and nothing else now hands an
+operand no register enumerates to the formula parser before refusing, which
+is what `coherence-unregistered-molecule` and the `spatial`, `angle` and
+`cluster` cases beside it check. Nothing is guessed: an unparseable formula
+still refuses. The nine refusals that remain are all `boundary` — a theorem
+or a stated commitment, not a missing implementation.
 
 ## The scoring is asymmetric on purpose
 
@@ -94,7 +96,7 @@ its outcome and, for a failure, the exact point at which it stops (`stops_at`).
 
 | file | what it holds |
 |---|---|
-| `cases.py` | the 83 cases, `cases_by_kind`, `KINDS_COVERED`, `SUBJECTS_COVERED` |
+| `cases.py` | the 131 cases, `cases_by_kind`, `KINDS_COVERED`, `SUBJECTS_COVERED` |
 | `harness.py` | `run_case`, `run_all`, `evaluation_report`, `format_report`, `write_json` |
 | `__main__.py` | the command line above |
 

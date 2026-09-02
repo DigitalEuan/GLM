@@ -14,6 +14,10 @@ knowledge is actually shaped to answer:
   distance away (:meth:`ConceptStore.hamming_neighbours`), which is a
   *different* notion of nearness from the graph one and mostly disagrees with
   it -- a fact :func:`store_report` measures rather than hides;
+* **what a hexcolour address names** -- the six-hex-digit rendering of a
+  carrier is a key, not a decoration: :meth:`ConceptStore.by_hexcolour`
+  recovers the concept from the address alone, which is well defined because
+  the migration checks the addresses are distinct across the whole store;
 * **where the two knowledge bases meet** -- the names that are both a CRG
   concept and a carrier of a loaded register
   (:meth:`ConceptStore.crosslinks`), which is the only place where a
@@ -32,6 +36,12 @@ from typing import (Dict, Iterable, List, Mapping, Optional, Sequence, Tuple)
 from .state import load_canonical
 
 __all__ = ["ConceptStore", "store_report"]
+
+
+def _normalise_hexcolour(colour: str) -> str:
+    """``"#A1B2C3"`` and ``"a1b2c3"`` name the same address."""
+    text = colour.strip().lower()
+    return text[1:] if text.startswith("#") else text
 
 
 class ConceptStore:
@@ -55,6 +65,9 @@ class ConceptStore:
                            for name, items in adjacency.items()}
         self._by_mask: Dict[int, str] = {
             int(c["mask"]): str(c["name"]) for c in concepts}
+        self._by_hexcolour: Dict[str, str] = {
+            _normalise_hexcolour(str(c["hexcolour"])): str(c["name"])
+            for c in concepts}
 
     # -- loading ---------------------------------------------------------
 
@@ -173,6 +186,32 @@ class ConceptStore:
     def crosslinks(self, register_names: Iterable[str]) -> Tuple[str, ...]:
         """Names that are both a CRG concept and a register carrier."""
         return tuple(sorted(set(register_names) & set(self._concepts)))
+
+    # -- the address layer -----------------------------------------------
+
+    def hexcolour(self, name: str) -> str:
+        """The six-hex-digit address of a concept's carrier."""
+        return str(self.concept(name)["hexcolour"])
+
+    def by_hexcolour(self, colour: str) -> str:
+        """The concept a hexcolour address names.
+
+        This is what makes the address layer a *layer* rather than a
+        decoration: the six digits are enough to recover the concept, with
+        no name and no search, because the migration checks that they are
+        distinct across the whole store.  Leading ``#`` and letter case are
+        not significant.
+
+        :raises KeyError: if no concept carries that address.
+        """
+        key = _normalise_hexcolour(colour)
+        if key not in self._by_hexcolour:
+            raise KeyError(f"ConceptStore: no concept at address {colour!r}")
+        return self._by_hexcolour[key]
+
+    def addresses_are_distinct(self) -> bool:
+        """Whether the address layer separates every concept in this store."""
+        return len(self._by_hexcolour) == len(self._concepts)
 
 
 def store_report(store: Optional[ConceptStore] = None,

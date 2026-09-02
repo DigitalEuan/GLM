@@ -153,15 +153,14 @@ CASES: Tuple[EvalCase, ...] = (
             "the formula is one of the carrier's indexed aliases, so the "
             "query resolves to water and ranks the register around it."),
     _c("nearest-unregistered-molecule", "nearest", "nearest to PbCl2",
-       "refusal", classification="gap",
-       note="The gap the molecules register moved rather than closed.  The "
-            "formula parser reads `PbCl2` and the molecule codec would "
-            "encode it -- every coordinate is derived from the element "
-            "register, so no new datum is needed -- but the nearest search "
-            "resolves its operand against the names a register enumerates "
-            "and stops there.  Joining the two, so that an unregistered "
-            "formula can be ranked against the register, is the work "
-            "item."),
+       "answer", contains=("Cl2Pb", "sodium chloride"),
+       note="Was the evaluation set's last gap.  `PbCl2` names no carrier "
+            "the register enumerates, so the operand is handed to the "
+            "formula parser: the composition is read exactly and encoded "
+            "into the same 24 coordinates a registered molecule uses, every "
+            "coordinate derived from the element register, and the built "
+            "carrier is then ranked against the register.  Nothing is "
+            "guessed -- an unparseable formula still refuses."),
 
     # -------------------------------------------------------------- describe
     _c("describe-carbon", "describe", "describe carbon",
@@ -309,6 +308,27 @@ CASES: Tuple[EvalCase, ...] = (
        note="Not any query kind; the machine should say so and list what it "
             "does understand."),
 
+    _c("coherence-unregistered-molecule", "coherence", "coherence PbCl2",
+       "answer", contains=("Cl2Pb", "NRCI"),
+       note="Closed in v1.4.0.  Every solver that takes a carrier and "
+            "nothing else now hands an operand no register enumerates to "
+            "the molecule formula parser before refusing, so a species the "
+            "element register can encode is scored rather than declined.  "
+            "Nothing is guessed: the fall-through refuses in turn unless "
+            "the formula parses and every coordinate is derived."),
+    _c("spatial-unregistered-molecule", "spatial", "spatial PbCl2",
+       "answer", contains=("Cl2Pb", "Golay distance"),
+       note="The same fall-through, in the MOG presentation."),
+    _c("angle-unregistered-molecule", "angle", "angle PbCl2 water",
+       "answer", contains=("Cl2Pb", "cos^2"),
+       note="Two operands, one registered and one built from its formula."),
+    _c("cluster-unregistered-molecule", "cluster",
+       "cluster PbCl2, water, ammonia",
+       "answer", contains=("Cl2Pb",),
+       note="A list of operands, one of which no register enumerates.  The "
+            "cluster path also had to stop lower-casing its operands, since "
+            "a formula's capitalisation is what names its elements."),
+
     # ---------------------------------------------------------------- report
     _c("report-relations", "report", "report relations",
        "answer", contains=("222",)),
@@ -380,10 +400,290 @@ CASES: Tuple[EvalCase, ...] = (
        note="The three honest widenings of a sparse register -- derive, "
             "estimate with the error measured, cross-check without "
             "merging -- each keeping its label."),
+    _c("report-noise", "report", "report noise",
+       "answer", contains=("second difference", "triangular window"),
+       note="Noise used as the computation rather than as a representation: "
+            "a loop chasing a two-tone signal, the condition under which its "
+            "orbit closes, the cascade whose error is a second difference, "
+            "and what dither costs -- each measured against a theorem of "
+            "RequestProject/GLM/Cascade.lean."),
+    _c("report-lattices", "report", "report lattices",
+       "answer", contains=("three-resolution address", "even number of 2s"),
+       note="The two rungs above the Leech lattice: the 32-dimensional "
+            "Barnes-Wall lattice built by Construction D over a dual pair "
+            "of Reed-Muller codes, whose payoff is an address at three "
+            "resolutions, and the 48-dimensional extremal lattice, which "
+            "needs a ternary code and a neighbour step decided by a parity "
+            "census of the full-weight codewords."),
+    _c("report-shells", "report", "report shells",
+       "answer", contains=("support function", "unreachable"),
+       note="Delta-sigma with the alphabet widened to a Leech shell and "
+            "then to the whole lattice: the shell's support function in "
+            "closed form, a target tracked inside the hull and a target "
+            "certified unreachable outside it, and the Gibbs-style rule "
+            "realised deterministically by greedy error feedback."),
+    _c("report-llvq", "report", "report llvq",
+       "answer", contains=("128 classes of 32", "0 mismatches"),
+       note="The quantiser's search replaced by a table: the 4,096 Golay "
+            "codewords read as 128 classes of 32 out of a 16-entry column "
+            "table, the bounded class search proved least-cost in "
+            "RequestProject/GLM/LLVQTable.lean, and the frozen scan kept "
+            "beside it as the thing to agree with -- 0 mismatches."),
+    _c("report-signature", "report", "report signature",
+       "answer", contains=("floor(N t)", "binary entropy"),
+       note="The spectral signature the external studies tabulate for a "
+            "constant, recomputed with the law beside every measured "
+            "column: the ones are exactly floor(N t), the entropy is the "
+            "binary entropy of the density, and the longest run sits on "
+            "its proved bound."),
+    _c("report-drift", "report", "report drift",
+       "answer", contains=("contractive", "truncation never helps"),
+       note="One recurrence over the odd primes run three ways -- exactly, "
+            "in binary64, and truncated to a display precision -- with the "
+            "drift between them measured in exact arithmetic rather than "
+            "in the host's floats."),
+    _c("report-catalog", "report", "report catalog",
+       "answer", contains=("confirmed", "refuted"),
+       note="The external study findings read as a live claim ledger: every "
+            "figure recomputed here and given a verdict, so a finding the "
+            "package cannot reproduce is a recorded disagreement rather "
+            "than an unexamined claim."),
+    _c("report-containers", "report", "report containers",
+       "answer", contains=("three containers", "certificate"),
+       note="Eight constants through three containers -- the exact "
+            "generator, the delta-sigma stream and the 24-dimensional "
+            "projection -- with both hull verdicts checked against all "
+            "196,560 minimal vectors, since a sample of witnesses can only "
+            "ever prove that a point is inside."),
+    _c("report-companion", "report", "report companion",
+       "answer", contains=("confirmed", "refuted"),
+       note="The two companion preprints read as a live claim ledger, "
+            "finer than the catalogue's because the preprints state the "
+            "projection, the indexing and the alphabet their summary "
+            "omits."),
+    _c("report-blueprint", "report", "report blueprint",
+       "answer", contains=("testable claims",),
+       note="The blueprint read as a live claim ledger: every testable "
+            "sentence recomputed, and the ones that are false as written "
+            "recorded as refuted with what holds instead."),
+    _c("report-engine", "report", "report engine",
+       "answer", contains=("radiator", "turbocharger")),
+    _c("report-mantissa", "report", "report mantissa",
+       "answer", contains=("binary64",),
+       note="What a stored mantissa keeps and what it destroys, computed in "
+            "exact integer arithmetic rather than by asking the hardware."),
+    _c("report-reversible", "report", "report reversible",
+       "answer", contains=("Gray",),
+       note="The reversible-gate claims, each answered True or False by "
+            "measurement -- several of them False, which is the point."),
+    _c("report-lean", "report", "report lean",
+       "answer", contains=("deterministic Leech address", "SHA-256 control"),
+       note="Every declaration of the Lean development given a Leech "
+            "address by its structure alone, scored on read-back fidelity "
+            "and on whether address distance tracks anything -- against a "
+            "digest control that knows nothing and a reshuffle that keeps "
+            "the geometry."),
+    _c("report-directives", "report", "report directives",
+       "answer", contains=("standing rules", "instrument"),
+       note="The standing rules parsed out of PROJECT_DIRECTIVES.md, with "
+            "the instrument each one names checked to exist in the tree "
+            "rather than assumed."),
+    _c("report-pipeline", "report", "report pipeline",
+       "answer", contains=("six stages",),
+       note="Study to test to implemented to measured: the stage each "
+            "piece of work has reached, read off the tree rather than "
+            "claimed in prose."),
+    _c("report-harmony", "report", "report harmony",
+       "answer", contains=("531441/524288", "not reproduced"),
+       note="The harmonic register measured rather than described: equal "
+            "temperament's exact error, the fifth that never closes, and "
+            "the catalogue's universality claim tested against a control "
+            "that it does not beat."),
+    _c("report-economics", "report", "report economics",
+       "answer", contains=("21 quoted prices", "scale 1024",
+                           "not reproduced"),
+       note="The economic register measured rather than described: the "
+            "scale at which the lattice first separates all 21 records, the "
+            "co-movement rate against its chance rate, and the undecoded "
+            "control that scores just as well -- which is what makes the "
+            "catalogue's economic claim not reproduced."),
+    _c("report-escalation", "report", "report escalation",
+       "answer", contains=("1040", "757", "refinement"),
+       note="The layer audit run on every register carrier rather than on "
+            "seven fixtures: resolution rises and stops, every boundary is "
+            "still a refinement, and 283 named entries share a carrier with "
+            "another and are beyond every layer."),
+    _c("report-names", "report", "report names",
+       "answer", contains=("283", "16 bits", "register label recovers 0"),
+       note="The ceiling attacked where it lives.  An exact coordinate read "
+            "off the entry's own name recovers all 283 entries no layer "
+            "could separate; that much is forced, so the measurement is the "
+            "sweep and the control -- 16 bits suffice, and the register "
+            "label, a coordinate of the same exactness, recovers none."),
     _c("report-unknown-subject", "report", "report nonsense subject",
        "refusal", classification="boundary",
        note="An unknown subject must be refused with the list of subjects, "
             "not silently mapped to the nearest one."),
+    _c("report-measure", "report", "report measure",
+       "answer", contains=("45 comparison classes", "108", "0 violations"),
+       note="The relative-measure study recomputed: the register's size, "
+            "what the widening gains, and that it gives nothing up."),
+    _c("report-denotations", "report", "report denotations",
+       "answer", contains=("36 verdicts", "0 triples waiting",
+                           "12 of the 22 analogies"),
+       note="The denotation half of the same subject, reached by the name "
+            "the question asks for: what the undimensioned endpoints of the "
+            "residue denote is decided one name at a time, so nothing is "
+            "left waiting on a lookup, and the conversions the decision "
+            "licenses are transported rather than merely counted."),
+    _c("report-recipe", "report", "report recipe",
+       "answer", contains=("3 domains described", "72 coordinates",
+                           "94 of 94 carriers", "regenerated"),
+       note="The domain description made the object: three registers built "
+            "by hand in earlier rounds are deleted and rebuilt from their "
+            "descriptions alone by one generic path, and every carrier and "
+            "every measured figure comes back unchanged."),
+
+    _c("report-language", "report", "report language",
+       "answer", contains=("7 of 20 answerable query kinds",
+                           "derive, measure, task, compare by slot shape",
+                           "verify, analogy, compare by infix shape",
+                           "comparative by nested shape",
+                           "deleted and frozen",
+                           "0 disagreements", "one declared widening",
+                           "described"),
+       note="The question shape made the object.  Seven query kinds are now "
+            "read off their descriptions by the parser itself -- every "
+            "branch that used to recognise them is deleted, kept frozen "
+            "only so the comparison has something to measure against -- and "
+            "over corpora generated from the registers the reading is the "
+            "one the branches gave.  Three shape families: an opening with "
+            "slots, one of which may hold a list; an operator cutting the "
+            "question in two, with described modifiers and trailing "
+            "options; and a nested shape whose operands are not text but "
+            "matches of another shape.  The one place the descriptions read "
+            "more than the branches did is declared and every widened "
+            "question is accounted for by it."),
+
+    # --------------------------------------------------------------- measure
+    _c("measure-hot-tea", "measure", "measure hot in tea",
+       "answer", contains=("363/1", "K"), forbids=("44000",),
+       note="293 + 7/8 * (373 - 293) = 363 K, exactly.  A measure word is "
+            "relative: the answer is the class's bracket read at the word's "
+            "position, not a property of the word alone."),
+    _c("measure-hot-star", "measure", "measure hot in stellar_surface",
+       "answer", contains=("44000/1", "K"), forbids=("363/1 K --",),
+       note="The same word against a different class is a different "
+            "magnitude, which is the whole content of the claim that the "
+            "reading is relative."),
+    _c("measure-hot-across-classes", "measure", "measure hot",
+       "answer", contains=("363/1", "44000/1", "6 classes"),
+       note="One word, six brackets, six magnitudes -- the static concept "
+            "carrier is the same in all six."),
+    _c("measure-magnitude-in-tea", "measure", "measure 300 in tea",
+       "answer", contains=("cold", "7/80"),
+       note="The other direction: a magnitude earns the word whose scale "
+            "position is nearest, and 300 K is cold for tea."),
+    _c("measure-large-room-volume", "measure",
+       "measure large in room_volume",
+       "answer", contains=("1755/4", "m^3"),
+       note="10 + 7/8 * (500 - 10) = 1755/4 cubic metres, exactly.  `large` "
+            "is `property_of size` and the register calls that quantity "
+            "volume; the alias resolves the two names and every coordinate "
+            "of the reading still comes out of the physics register."),
+    _c("measure-dark-indoor", "measure", "measure dark in indoor_lighting",
+       "answer", contains=("675/4", "lx"),
+       note="The light half of the same step: `dark` is `property_of light`, "
+            "which the register holds as illuminance, so the word that used "
+            "to be refused is now an exact number of lux."),
+    _c("measure-large-room", "measure", "measure large in room",
+       "refusal", classification="boundary",
+       note="`large` measures a volume and *room* brackets a length, so the "
+            "two are about different quantities and no measurement is "
+            "defined.  This used to refuse because the registers held no "
+            "size at all; what refuses now is the mismatch, which is a "
+            "stricter boundary rather than a missing one."),
+    _c("measure-expensive-market", "measure", "measure expensive in market",
+       "refusal", classification="boundary",
+       note="`expensive` is on no measure scale at all.  The refusal names "
+            "which register is missing the word rather than guessing a "
+            "nearest one."),
+    _c("measure-hot-walking", "measure", "measure hot in walking",
+       "refusal", classification="boundary",
+       note="A temperature word against a velocity class: the two registers "
+            "disagree about the quantity, and no measurement is defined."),
+
+    # ----------------------------------------------------------- comparative
+    _c("comparative-cold-star-hotter-than-hot-tea", "comparative",
+       "is cold in stellar_surface hotter than hot in tea",
+       "answer", contains=("Yes", "8000/1", "363/1"), forbids=("No:",),
+       note="The reversal the comparative exists for: *cold*, for a star, is "
+            "8000 K and *hot*, for a cup of tea, is 363 K, although `cold` "
+            "sits below `hot` on the scale.  A machine that compared the two "
+            "concepts would answer this backwards; "
+            "`GLM.Info.comparative_not_determined_by_word_order` is the "
+            "theorem that it must."),
+    _c("comparative-hot-tea-hotter-than-cold-tea", "comparative",
+       "is hot in tea hotter than cold in tea",
+       "answer", contains=("Yes", "363/1", "303/1"),
+       note="Within one class the word order does decide it, and exactly: "
+            "`GLM.Info.hotterThan_iff_position_lt`."),
+    _c("comparative-false-claim", "comparative",
+       "is cold in tea hotter than hot in tea",
+       "answer", contains=("No",), forbids=("Yes:",),
+       note="A false comparative is answered false rather than refused: the "
+            "registers reach it, so there is a fact of the matter."),
+    _c("comparative-equative", "comparative",
+       "is warm in tea as hot as cold in stellar_surface",
+       "answer", contains=("No", "343/1", "8000/1"),
+       note="The equative asks for equality of magnitudes, which 343 K and "
+            "8000 K are not."),
+    _c("comparative-cross-quantity", "comparative",
+       "is hot in tea hotter than fast in walking",
+       "refusal", classification="boundary",
+       note="Both sides are perfectly well measured and still incomparable: "
+            "a temperature and a velocity are on no common scale.  "
+            "`GLM.Info.hotTea_not_comparable_fastWalking`."),
+    _c("comparative-wrong-scale-marker", "comparative",
+       "is fast in walking hotter than slow in airliner",
+       "refusal", classification="boundary",
+       note="*hotter* is a temperature comparative and the pair measures "
+            "velocity; the marker cannot order magnitudes of another "
+            "quantity."),
+    _c("comparative-midpoint-word", "comparative",
+       "is tepid in tea tepider than cold in tea",
+       "refusal", classification="boundary",
+       note="`tepid` sits exactly at the middle of the temperature scale, so "
+            "its comparative names no direction.  The direction a marker "
+            "asserts is read off the register rather than listed, and at the "
+            "midpoint the register does not decide it."),
+
+    # ---------------------------------------------------------------- derive
+    _c("derive-span-ratio-tea", "derive", "derive span_ratio of tea",
+       "answer", contains=("373/293", "quotient", "comparison"),
+       forbids=("1.27",),
+       note="The coordinate is answered off the domain description rather "
+            "than off a hand-written phrase: 373/293 is the tea bracket's "
+            "span as an exact rational, computed by the shared `quotient` "
+            "primitive that also serves a frequency ratio and a price."),
+    _c("derive-numerator-perfect-fifth", "derive",
+       "derive numerator of perfect_fifth",
+       "answer", contains=("= 3", "harmonics"),
+       note="The same query surface reaches a second described domain with "
+            "no new parsing rule, which is what makes the path generic."),
+    _c("derive-euler-gradus", "derive",
+       "derive euler_gradus of perfect_fifth",
+       "answer", contains=("= 4", "judgement"),
+       note="A coordinate the description cannot build from shared "
+            "primitives is marked a judgement rather than hidden: Euler's "
+            "gradus of 3/2 is 1 + (2 - 1) + (3 - 1) = 4."),
+    _c("derive-undescribed-coordinate", "derive",
+       "derive cents of perfect_fifth",
+       "refusal", classification="boundary",
+       note="A cent is a logarithm, so no description derives it, and the "
+            "refusal is exactly the boundary "
+            "`GLM.Recipe.Spec.answer_eq_none_iff` describes: the answered "
+            "coordinates are the described ones and no others."),
 )
 
 
