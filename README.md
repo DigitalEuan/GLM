@@ -1,477 +1,446 @@
-This project was edited by [Aristotle](https://aristotle.harmonic.fun).
+# '../' - TOP REPOSITORY LEVEL TIER ROOT README 
 
-To cite Aristotle:
-- Tag @Aristotle-Harmonic on GitHub PRs/issues
-- Add as co-author to commits:
-```
-Co-authored-by: Aristotle (Harmonic) <aristotle-harmonic@harmonic.fun>
-```
+**Version:** 5.17 (2 September 2026)  
+**Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand  
+**Parent:** None - Top Level
 
-# GLM system completion + the boundary studies
+## UPDATE THIS README
+if changes are made in this folder or systems in sub-folders need rewiring within the repository and effect this README file's structure.
 
-This repository holds the completed Geometric Language Machine package and two
-studies that came out of finishing it: what is lost when one layer hands over
-to the next, and what happens to a value that no carrier can hold.
+## The GLM is a substrate-native cognitive architecture. 
+It grows with each iteration rather than starting again over and over. Not a solver pipeline — a system that perceives, reasons, and acts using a 24-dimensional mathematical substrate built on the Universal Binary Principle (UBP).
 
-The package lives in **`overlay/`** — the supplied archive, unpacked and
-finished. The Lean 4 development lives in **`RequestProject/GLM/`** and builds
-with `lake build`, with no `sorry`; the overlay keeps its own copy of the same
-files under `overlay/glm_lean/`.
+## The layered projection perspective
+This system's development is not about leaving older systems behind.  Each
+older GLM iteration is true within its own range, then becomes untrue only
+when the next dimension layer is required to take over.  The current
+`glm_universal` runtime can run a branch of operations at any lower layer
+and, when needed, trigger a higher-perspective branch and re-run through
+again for multiple perspectives.
 
-The package holds **8 registers** of carriers, reached through **21 query
-kinds** one of which dispatches **48 report subjects**, and is checked by
-**62 test files** alongside **48 Lean files**.
+> There are 'Dimensional Projection' perspectives to the GLM — one is from
+> the most recent system showing where previous systems failed and the fix
+> for the situation, this is the highest dimension perspective, the other
+> is from each iteration which seems to show an alignment up to a point but
+> then is superseded by the next higher dimension perspective — a layered
+> projection perspective where each layer is both true from its limited
+> perspective and works to that degree of implementation then becomes untrue
+> when the next dimension layer is required to take over.  This layering
+> makes more sense of the system — it could run a branch of operations
+> (scripts, functions) and when needed it triggers a higher perspective
+> branch then re-runs through again for multiple perspectives.
 
-Every count in this repository's documentation is recomputed by
-`overlay/glm_universal/figures.py` and written to
-[`overlay/FIGURES.md`](overlay/FIGURES.md). Regenerate it with
-`python -m glm_universal.figures --write` from `overlay/`;
-`tests/test_figures.py` fails when a document and the code disagree, so no
-figure below needs to be re-derived by hand. The shortest route to the
-current state of the work is [`STATUS.md`](STATUS.md).
+The five layers, in the order they take over: **substrate** (Golay/MOG
+binary, GLM-0) → **integer** (SI7 exponents, GLM-1) → **rational** (EXT10
+exponents + Leech carrier, GLM-2) → **Griess** (V₂ algebra + Monster,
+GLM-3) → **universal** (all layers at once, GLM-3+).  Each is implemented in
+`glm_universal/reasoning/dimension_layers.py` and is reachable from the
+runtime session via the `project A B` query kind (see "GLM-3+ v0.5.3"
+section near the bottom of this README).
 
-```bash
-cd overlay
-PYTHONPATH=. python3 -m pytest glm_universal/tests -q     # 62 test files
-PYTHONPATH=. python3 GLM.py -q "report information loss" -c 1
-PYTHONPATH=. python3 GLM.py -q "report infinite values"   -c 1
-PYTHONPATH=. python3 GLM.py -q "report capabilities"      -c 1
-PYTHONPATH=. python3 -m glm_universal.capabilities
-PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8
-```
+---
 
-```bash
-lake build          # RequestProject/GLM/*.lean, 48 Lean files, no sorry
-```
+## The README chain
 
-## 1. The GLM system, completed
+Every folder's README names its parent and its children, so the documentation
+reads as one chain from this file down to the individual modules. Following it
+from here:
 
-* **`GLM.py` was missing from the archive.** The READMEs document it and two
-  test files import it by path, so 30 CLI tests errored on collection. It has
-  been written against the behaviour those tests specify — batch and
-  interactive modes, all documented flags and meta-commands, and the exit-code
-  contract.
-* **The legacy `snap` decoder is retired.** Complete syndrome decoding
-  (`substrate/golay_decode.py`) returns *every* nearest codeword and a status;
-  no tie is broken silently. Weight-5 miscorrection is shown, via the Steiner
-  system `S(5,8,24)` verified over all 42,504 five-subsets, to be a theorem
-  about the code rather than a defect of the decoder.
-* **The full Leech lattice replaces Construction A**, restoring the true
-  kissing number 196,560 from A's 48, with each construction condition shown
-  necessary by what breaks without it; **the exact 2A Sakuma product replaces
-  the XOR shortcut**; **the six facets are strict linear projections** with the
-  exact lattice index that says what a facet reading loses.
-* **The `LEGACY_TO_CORE` bridge is implemented and tested**: the two frames
-  share exactly 8 of their 4,096 codewords, the permutation is an isometry and
-  therefore safe to wrap around a decoder, and a dataset migrates through one
-  call with round-trip and referential-integrity checks.
-* **`semantics/` replaces spelling with meaning.** The inherited concept graph
-  was audited rather than described — 83 of its 4,282 concepts denote anything
-  determinate, and 2 of its 4,015 edges state a re-derivable relation — and the
-  grounded graph that replaces it holds 357 meanings, 1,705 notations and
-  12,859 edges, every one re-derived on demand.
-* **`capabilities/` says where the machine stops.** 33 probes, each phrased as
-  a question a user would ask, each answered by running the real code: 20 hold,
-  13 break, 0 errored, 0 surprises. A break is a located boundary, not a
-  failure — and when one is closed the probe flips to `holds` and says so, as
-  the transcendental-function probe did.
-* **A molecules register.** 51 molecules over 17 elements, each parsed from a
-  formula into an exact composition and encoded losslessly into the same
-  24-coordinate carrier; and `reasoning/element_coverage.py`, which measures
-  how sparse the element table really is and widens it three ways, each
-  labelled by provenance.
-* **Zero failures across the suite**, and every published number is recomputed
-  by a `*_report` function rather than quoted.
-
-**[`MASTER_PLAN.md`](MASTER_PLAN.md)** tracks this work phase by phase, with
-what was built, where it lives, and how to see it recompute itself.
-
-## 2. The information-loss study
-
-The write-up is **[`INFORMATION_LOSS_STUDY.md`](studies/INFORMATION_LOSS_STUDY.md)**.
-
-It takes the thesis that a system is true up to a point, then is superseded by
-a higher one which is true in its own right, and makes it precise enough to
-prove. The central results, all machine-checked in Lean 4 under
-`RequestProject/GLM/`:
-
-* **Information lost at a boundary is exactly new expressive power**
-  (`boundary_nonempty_iff_new_visible`).
-* **Nothing true below becomes false above** — visible propositions survive
-  every refinement (`Visible.mono`) — so the "becomes untrue" of the thesis is
-  located precisely: not in propositions changing truth value, but in
-  operations ceasing to be functions of what a layer sees
-  (`descends_iff_congruent`).
-* **The ascent is forced** by capacity below the carrier count
-  (`exists_indist_of_capacity_lt`), and it is computable: `escalate` returns
-  the least layer that separates two carriers, proved correct and minimal.
-* **And it continues without end.** The dyadic tower is an explicit infinite
-  ladder in which every step is a strict gain in expressive power
-  (`dyadic_boundary_nonempty`, `dyadic_new_visible`), no step loses anything
-  earlier (`dyadic_refines_of_le`), and every distinction is eventually made
-  (`dyadic_separates`).
-
-and four concrete, sharp boundaries: the layer stack over ℚ, addition ceasing
-to descend, the TAX conservation law (exact on bits; above it, repairable only
-if `Y = 1/2`, which is false), and Golay repair (unique at Hamming weight 3,
-ambiguous at 4).
-
-## 3. The infinite-values study
-
-The write-up is **[`INFINITE_VALUES_STUDY.md`](studies/INFINITE_VALUES_STUDY.md)**. It
-answers whether `cardinal_geometry_synthesis.md`,
-[`DYNAMIC_CARRIER_STUDY.md`](source_material/DYNAMIC_CARRIER_STUDY.md) and
-`geometric_substrate_study.py` provide what is needed to get the GLM working
-with infinite values and irrational numbers. They do, and it has been built:
-
-> A carrier is finite. A process is not. The GLM holds an irrational as the
-> process, not as the carrier — and the process is a first-class object it can
-> add, multiply, compare, print, refine and refuse.
-
-* **The value layer.** `reasoning/exact_real.py` holds a real as a rule:
-  `x.at(k)` returns an exact `Fraction` within `2⁻ᵏ`, for any `k`, with no
-  float anywhere. `reasoning/real_expr.py` reads written expressions over those
-  processes — `(1+sqrt(5))/2`, `sqrt(2)+sqrt(3)`, `pi/4`, `root(3, 2)` — and
-  reads a decimal literal as the rational it names, so `0.1+0.2` is exactly
-  `3/10`. `reasoning/transcendental.py` adds `exp`, `log`, `sin`, `cos`, `tan`
-  and a non-integer exponent, so `2^pi` and `log(2, 8)` are values like the
-  rest.
-* **Two new query kinds.** `approximate <expr> to <n> places`, and the
-  comparison family (`is pi less than 355/113`, `compare sqrt(2) and 1.5`,
-  `which is bigger e or pi`), which reports the precision that settled the
-  order — and refuses to claim equality, which is not decidable.
-* **A carrier that moves reaches every real**, at a proved rate: after `N`
-  ticks the modulator's time average is within `1/N` of the target
-  (`dsAverage_error_le`, `dsAverage_tendsto`).
-* **In 24 dimensions the geometry bounds it.** Every emitted state is a Golay
-  codeword, so the reachable set is the convex hull of the code
-  (`avgVec_mem_hull`), and for a target outside it the package computes a
-  separating linear functional — verified against all 4,096 codewords, gap
-  `13/5760` — which with `not_tendsto_avg_of_separating` proves no quantiser
-  rule converges there. `avgVec_periodic` pins the set from the other side.
-* **What is computable about an approximated value** is settled exactly in
-  `Computable.lean`: a real is nonzero *iff* a witness `|x| ≥ 2⁻ᵐ` exists, so
-  division needs precisely that witness; no fixed search depth works for every
-  divisor; and two processes never separated are equal, but "never" quantifies
-  over all precisions at once, which is why equality is refused and inequality
-  is decided.
-
-* **`exp`, `log`, `sin`, `cos`, `tan` and a real power `x^y`** are built on
-  the same footing, in exact rational arithmetic with no float anywhere, and
-  the error budget each one pays is machine-checked in `Transcendental.lean`.
-  `log` needs a positivity witness for the reason division needs a nonzero
-  one, and `pos_iff_witness` says such a witness is exactly what positivity
-  is.
-
-The study also names the capabilities that are absent rather than impossible,
-with the exact place each stops: the inverse and hyperbolic functions in the
-value grammar, a vocabulary that is exactly the registers, and no query kind
-that does arithmetic over register names.
-
-## 4. The geometric-ambiguity study
-
-The write-up is **[`GEOMETRIC_AMBIGUITY_STUDY.md`](studies/GEOMETRIC_AMBIGUITY_STUDY.md)**.
-It asks what the machine should do when the geometry does not name one answer,
-and answers it by building the case out rather than by choosing a tie-break:
-
-> An ambiguous reading is not a failed reading. At a deep hole of the Golay
-> code there are exactly six nearest codewords, and which of the six is meant
-> is information the received word does not contain — so the machine carries
-> all six until a context supplies it.
-
-* **The tie has an exact shape.** `Golay/Sextet.lean` proves, from exhaustive
-  checks over all 4,096 syndromes, that the code has minimum distance 8 and
-  covering radius 4, that a reading is unique up to weight 3, and that a
-  weight-4 coset has **exactly six** nearest codewords whose supports partition
-  the 24 coordinates into six tetrads — the sextet (`ties_card_eq_six`,
-  `sextet_partition`). Every coset is either uniquely readable or a six-fold
-  tie.
-* **How ambiguity is carried decides whether it survives.** Bundling the six
-  readings by XOR gives the all-ones vector *whatever the tie is*
-  (`bundleF2_eq_one`), so the binary bundle of a superposition is
-  information-free. The same bundle over the rationals is injective and
-  invertible (`bundleQ_eq`, `bundleQ_recover`, `bundleQ_injective`). The
-  package measures both: over 256 superpositions the F₂ bundle distinguishes 1
-  input and the rational bundle distinguishes all 256.
-* **Collapse is contextual.** `substrate/superposition.py` filters a
-  superposition by a context predicate and reports `collapsed`, `superposed` or
-  `refuted`; it never breaks a tie by member order, so a guess is never
-  disguised as an answer.
-* **Wobble is a lossless way to hold the tie.** A carrier cycling through the
-  six readings is read back exactly as their rational bundle
-  (`sextet_cycle_avgVec`), and that reading still determines which six they
-  were.
-* **When a wider alphabet is genuinely needed.** `HullExpansion.lean` exhibits
-  a target separated from the hull of the available states by an explicit
-  linear functional — so no schedule reaches it — and reaches it exactly in 16
-  ticks once two Leech vectors are admitted: `alphabet_expansion_strictly_helps`
-  is the statement that the gain is in the alphabet, not in the schedule.
-* **Wired into the runtime** as the `report superposition` subject, with a
-  Three Column Thinking template that recomputes every figure above in a fresh
-  interpreter.
-* **The dynamical reading is settled, and mostly negatively.** The
-  perturbation chain on cosets has the uniform law as its unique stationary
-  law but is periodic, so it has no limiting law at all; what converges is the
-  time average, and `Golay/Cesaro.lean` proves that it does, at the explicit
-  rate `|cesaro μ N f − 1/4096| ≤ 24/N`.
-
-The study is explicit about what it does not settle — the Niemeier deep-hole
-census is named as open, not glossed. The VOA state–field map it also named is
-now partly built: `VOA.lean` constructs `Y(u, z)` at the Griess layer of the 2A
-algebra, proves the structure that layer really carries — truncation,
-skew-symmetry, a forced invariant form, self-adjoint modes, nondegeneracy and a
-vacuum — and then proves the obstruction exactly, `borcherds_commutator_fails`,
-so the infinite-dimensional half is shown to be necessary rather than assumed.
-
-## 5. What the machine can actually do, measured
-
-The write-up is **[`CAPABILITY_ASSESSMENT.md`](CAPABILITY_ASSESSMENT.md)**. It
-does not describe the machine; it reports what happened when the machine was
-run, with every figure produced by a command that can be re-run.
-
-* **A new instrument, `glm_universal/evaluation/`.** **131 cases**, each
-  starting `GLM.py` in a **fresh interpreter** — one subprocess per question,
-  no shared session, no warm caches — covering **all 21 query kinds** and all
-  **48 report subjects**, with the coverage checked against the runtime's own
-  tables by a test. 16 of the questions are ones the machine *should* refuse.
-* **Scoring is asymmetric.** A refusal tells the user where the machine stops
-  and a confident wrong answer does not, so `correct` and `refused_as_expected`
-  score `+1`, an unexpected refusal `0`, and a wrong answer or a crash `−1`.
-* **The result: 131 of 131.** 115 answered correctly, 16 refused as expected,
-  **zero** unexpected refusals, **zero** confidently wrong, 0 errored. Every
-  kind is clean, `analogy` included at 10/10; the five analogy failures the
-  first assessment recorded were closed by the model-selection layer described
-  in [`ANALOGY_LAYER_STUDY.md`](studies/ANALOGY_LAYER_STUDY.md).
-* **Boundaries separated from gaps, and no gap is left.** All 15 correct
-  refusals are boundaries — undecidable equality of real processes, a
-  vocabulary that is exactly the registers, a quotient by an exact zero. The
-  last gap was `coherence PbCl2`, and it is closed: every solver that takes a
-  carrier and nothing else now hands an operand no register enumerates to the
-  molecule formula parser before refusing, so a species the element register
-  can encode is scored rather than declined. Nothing is guessed — an
-  unparseable formula still refuses.
-* **The other two instruments, re-run:** 33 probes (20 hold, 13 break, 0
-  errored, 0 surprises) and 2,389 of 2,390 benchmark tasks across 5 suites,
-  every suite above its baseline.
-
-The document ends by naming what is untouched — the Niemeier deep-hole census, the
-missing lexicon relation behind `heat : temperature :: force : ?`, the 32- and
-48-dimensional lattices, open vocabulary, words as projections,
-and the delta–sigma directions still not started (sigma–delta on the Leech
-shells and the Gibbs-style rule; error feedback through a symmetry-commuting
-rational matrix was on that list and is now built and proved) — so nothing is
-implicitly claimed. The infinite-dimensional half of the VOA bridge was on that
-list too and is now built: `RequestProject/GLM/Heisenberg.lean` carries the
-Fock space, the Heisenberg commutator and the trace obstruction that rules out
-any finite-dimensional model of it. The same
-list is kept in `MASTER_PLAN_ARCHIVE.md` §7.9 and mirrored in
-[`STATUS.md`](STATUS.md).
-
-## 6. The two supplied documents, read as claim ledgers
-
-Two of the supplied files record claims rather than code:
-`glm_unification_blueprint.md`, a specification, and
-`glm_study_findings_catalog.md`, a record of measurements from studies run
-outside this package. A document that is only read drifts from the system it
-describes, so each was turned into a **live ledger**: every testable sentence
-restated as a claim, recomputed against the package as it stands, and given one
-of four verdicts — `confirmed`, `refuted`, `not reproduced`, `not implemented`.
-
-* **The blueprint.** `reasoning/blueprint.py`, `report blueprint`. Write-up:
-  **[`GLM_UNIFICATION_BLUEPRINT_AUDIT.md`](studies/GLM_UNIFICATION_BLUEPRINT_AUDIT.md)**.
-  Reaching verdicts needed three subjects built beside it —
-  `reasoning/engine.py` (Part III's carrier engine), `reasoning/mantissa.py`
-  (binary64 modelled exactly, with no float ever constructed) and
-  `reasoning/reversible.py` (the Gray read channel, the Toffoli and Fredkin
-  gates, the kink invariant) — with `Mantissa.lean` and `Reversible.lean` as
-  the machine-checked half.
-* **The study catalogue.** `reasoning/catalog.py`, `report catalog`. Write-up:
-  **[`GLM_STUDY_CATALOG_AUDIT.md`](studies/GLM_STUDY_CATALOG_AUDIT.md)**. **58
-  testable claims: 33 confirmed, 14 refuted, 7 not reproduced, 4 not
-  implemented.** Where the catalogue reports a number produced by running a
-  loop, the package reproduces it to the digit; where it reports that a
-  measured column *is* a property of the thing measured, the column is usually
-  a closed form of the input. The sharpest case is the "vibrational
-  signature": `Sturmian.lean` proves that the modulator's stream is the
-  mechanical word of its target, so entropy, run lengths, transition rate and
-  one-density are all determined by the target before the loop is run
-  (`reasoning/wobble.py`, `report signature`). `reasoning/drift.py`
-  (`report drift`) reruns the prime-iteration stress test in three regimes —
-  exact rationals, an exact binary64 model, and binary64 truncated to a fixed
-  number of displayed digits — again with no float constructed anywhere.
-* **The two companion preprints.** `reasoning/companion.py`,
-  `report companion`. Write-up:
-  **[`GLM_COMPANION_STUDIES_AUDIT.md`](studies/GLM_COMPANION_STUDIES_AUDIT.md)**.
-  **49 testable claims: 26 confirmed, 17 refuted, 5 not reproduced, 1 not
-  implemented.** The catalogue above summarises these two studies, and a
-  summary loses the definitions — the projection, the indexing, the alphabet —
-  so several verdicts the catalogue had to leave open are settled here. The
-  instrument built beside it is `reasoning/containers.py`
-  (`report containers`): eight constants through three containers, with both
-  hull verdicts checked against all 196,560 Leech minimal vectors rather than
-  a sample of 150, since a sample can establish *inside* and can never
-  establish *outside*.
-
-## 6b. The musical third of the catalogue's universality claim
-
-Section 6.2 of the catalogue says chemical equilibria, musical harmony and
-market price discovery all map to Leech proximity. Two thirds of that can now
-be measured here. `data_objects/harmonics.py` holds **28 intervals** as exact
-rational frequency ratios — every coordinate computed from the pair `(n, d)`,
-no float anywhere — and `reasoning/harmony.py` (`report harmony`) tests the
-sentence rather than repeating it: equal temperament's miss is the exact
-rational `(n/d)^12 / 2^k`, `1` at the unison and the octave and nowhere else;
-no stack of fifths is a stack of octaves, searched to `n = 200` and proved for
-every `n` in `Harmony.lean`; and each interval is decoded to its nearest Leech
-point through its prime exponents.
-
-**The verdict is `not reproduced`.** Proximity does order the intervals by
-consonance, at an exact Kendall tau of `53/63` — but the same distance taken
-*before* the decoder runs scores `53/63` too, and the decoder reorders no
-pair, so what is measured is the prime-exponent vector rather than the
-geometry of the lattice. Write-up:
-**[`HARMONY_STUDY.md`](studies/HARMONY_STUDY.md)**.
-
-The economic third is now measured too. `data_objects/economics_register.py`
-holds 21 quoted prices as exact rationals — seven instruments over three
-consecutive quarters — read through an exact magnitude bucket decided by
-integer comparison rather than by a logarithm, and proved well defined,
-unique, monotone and scale-shifting in `RequestProject/GLM/LogBucket.lean`.
-The lattice separates all 21 records at scale 1024 and every record's nearest
-neighbour is another quarter of the same instrument, 21 of 21 against a chance
-rate of `1/10` — but the undecoded control scores 21 of 21 as well, so this
-third is **`not reproduced`** for the same reason the musical one is. Write-up:
-**[`ECONOMICS_STUDY.md`](studies/ECONOMICS_STUDY.md)**.
-
-## 7. Checking it, without checking it twice
-
-The suite is about a quarter of an hour, and `lake build`, the end-to-end
-evaluation, the benchmark suites, the capability probes and the figures check
-cost more again. Almost none of it changes between one iteration and the next,
-and re-running an unchanged check proves nothing — but "it is probably still
-fine" is a guess, not a verification.
-
-`overlay/.glm_signoff.json` makes the guess into a check. Each of the 61 test
-files and each of the 7 instruments carries the SHA-256 of **everything its
-last passing result depended on**: the file itself, every package module it
-imports transitively, the frozen data those modules read, the documents and
-Lean sources they name, the test scaffolding and the interpreter version. If
-the digest still holds, the result still holds. If one byte anywhere in that
-closure differs, the unit is stale and runs again.
-
-```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.signoff --verify         # what still holds
-PYTHONPATH=. python3 -m glm_universal.signoff --plan           # what would run, and why
-PYTHONPATH=. python3 -m glm_universal.signoff --run-everything # run only that
-PYTHONPATH=. python3 -m glm_universal.signoff --run-all        # ignore the ledger
-```
-
-Three things keep it honest: a failure is recorded as a failure and never
-signs; the sign-off package's own sources are inside every closure, so changing
-the rules invalidates every signature; and nothing is skipped silently —
-`--plan` says what will be skipped before anything runs and `--verify` re-checks
-every signature without running a test. The full run stays available and is
-what a release check does. The rule is directive **D4** of
-[`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md); the design is
-[`MASTER_PLAN_ARCHIVE.md`](MASTER_PLAN_ARCHIVE.md) Phase 12.
-
-## Layout
+Every count quoted below is recomputed by `glm_universal/figures.py` and
+written to [`FIGURES.md`](FIGURES.md); `tests/test_figures.py` fails if this
+file and that computation disagree, so none of these numbers has to be
+checked by hand.
 
 ```
-README.md                     this file
-STATUS.md                     where the work stands now, and what is left
-MASTER_PLAN.md                the wiring status: the header, the phase index, the open phase
-MASTER_PLAN_ARCHIVE.md        the closed phases, kept as they were written
-CAPABILITY_ASSESSMENT.md      what the machine can do, measured rather than described
-PROJECT_DIRECTIVES.md         the standing rules, and the instrument that enforces each
-DOCUMENTS.md                  the index: one line per document, wherever it lives
-studies/                      the write-ups produced here
-  INFORMATION_LOSS_STUDY.md   loss at the layer boundaries, and the refinement-chain decision
-  ESCALATION_STUDY.md         the same audit at register scale, and the resolution ceiling it finds
-  INFINITE_VALUES_STUDY.md    infinite values and irrational numbers
-  GEOMETRIC_AMBIGUITY_STUDY.md  ambiguity, superposition and contextual collapse
-  ANALOGY_LAYER_STUDY.md      how A : B :: C : D was made to work, and what it still cannot do
-  RELATIVE_MEASURE_PROPOSAL.md  a proposal: measure words as relative measures, and what it needs
-  NOISE_EXPERIMENT_STUDY.md   noise used as the computation: cascaded loops, closed orbits,
-                              interacting tones and dither, all exact
-  GLM_UNIFICATION_BLUEPRINT_AUDIT.md  the unification blueprint read as a live claim ledger
-  GLM_STUDY_CATALOG_AUDIT.md  the external study findings, recomputed and given verdicts
-  GLM_COMPANION_STUDIES_AUDIT.md  the two companion preprints, recomputed against the definitions they state
-  HARMONY_STUDY.md            the harmonic register, and the claim it makes testable
-  ECONOMICS_STUDY.md          the economic register, and the last third of the same claim
-  HEXCOLOUR_STUDY.md          the hexcolour address layer, audited on the shipped data
-  HIGHER_LATTICE_STUDY.md     the two rungs above the Leech lattice
-  LEAN_ADDRESS_STUDY.md       a Leech address for every Lean declaration
-  NAME_COORDINATE_STUDY.md    a coordinate for the name, and the ceiling it lifts
-  RELATIVE_MEASURE_STUDY.md   measure words as relative measures, and the comparative
-  DENOTATION_STUDY.md         what the undimensioned names denote, decided one at a time
-  RECIPE_STUDY.md             the recipe made into an object: three domains regenerated
-                              from their descriptions alone
-  LANGUAGE_STUDY.md           the question shape made an object: seven query kinds matched
-                              by shape, and measured against the parser they restate
-  LLVQ_TABLE_STUDY.md         the quantiser's search replaced by the MOG's class table,
-                              and every address in the corpus unchanged
-source_material/              what was supplied, kept as received
-  DYNAMIC_CARRIER_STUDY.md    the moving-carrier proposal these studies test
-  cardinal_geometry_synthesis.md, geometric_substrate_study.py,
-  glm_unification_blueprint.md, glm_study_findings_catalog.md, ToDo_01.txt,
-  GLM_Generators_Containers (2).pdf, GLM_Iteration_Study (1).pdf
-RequestProject/GLM/           the Lean 4 development (48 Lean files, no sorry)
-  Constants.lean              Y, Q, TAX, NRCI, coherence regimes
-  TaxConservation.lean        the conservation law and its boundary
-  Layers.lean                 the abstract theory of layers and boundaries
-  Cumulative.lean             how a stack is made a refinement chain
-  Tower.lean                  the unbounded dyadic tower: "this continues"
-  Stack.lean                  the concrete substrate/integer/rational stack
-  LayerChain.lean             the shipped five-layer chain, proved a refinement on real carriers
-  Escalation.lean             the same chain at register scale: the resolution ceiling, the
-                              order of the stack, and where addition stops descending
-  GolayBoundary.lean          the snap-radius boundary
-  Permutation.lean            coordinate permutations are isometries
-  Endianness.lean             MSB-first against LSB-first, as a frame choice
-  Sakuma.lean                 the 2A product against the XOR shortcut
-  Facets.lean                 the six-facet orthogonal decomposition
-  DeltaSigma.lean             the 1/N law of the moving carrier
-  Irrational.lean             the cardinality wall, and the faithful tower
-  Reachable.lean              the convex hull, and the separating certificate
-  Computable.lean             division, comparison and equality of processes
-  Transcendental.lean         the error budget of exp, log, sin, cos and x^y
-  Semantics/Meaning.lean      the meaning carrier, its round trip, its capacity
-  Semantics/Grounding.lean    meaning against spelling; the EXT10 → SI7 boundary
-  Golay/Code.lean             the concrete Golay code and its syndrome algebra
-  Golay/Sextet.lean           covering radius 4, and the six-fold tie at a hole
-  Golay/Census.lean           the coset census, and the mean coset weight 3433/1024
-  Golay/Dynamics.lean         the perturbation chain: it averages, it does not settle
-  Golay/Cesaro.lean           the Cesàro convergence of those averages, with rate 24/N
-  Superposition.lean          the F2 bundle against the rational bundle
-  Wobble.lean                 a carrier cycling through the six tied readings
-  HullExpansion.lean          when a wider alphabet is what buys the reach
-  VOA.lean                    the state-field map Y(u,z), and where the finite layer stops
-  Heisenberg.lean             the Fock space past that layer: the Heisenberg relation, and the
-                              trace obstruction that no finite-dimensional space can satisfy it
-  Mantissa.lean               where a float's precision goes: the collapsing dyadic orbit
-  Reversible.lean             the Gray read channel, the reversible gates, the kinks
-  Cascade.lean                signal-driven and cascaded delta-sigma: O(1/M^2) against O(1/M)
-  Feedback.lean               error feedback through a rational matrix, and the symmetry it keeps
-  Sturmian.lean               the stream as a mechanical word: run lengths, transitions, entropy
-  HigherLattices.lean         past 24: the 32- and 48-dimensional extremal rungs
-  ShellSigma.lean             delta-sigma against a Leech shell rather than a scalar
-  Address.lean                what a lattice address of a declaration can and cannot mean
-  Harmony.lean                why no tuning ever closes, and no interval is ever tempered exactly
-  LogBucket.lean              an exact magnitude without a logarithm, and the control it licenses
-  MeasureView.lean            a measure word read as a measurement, as a widening of the concept
-  Comparative.lean            *hotter than* as a relation between two uses, and what the words cannot decide
-  NameCoordinate.lean         the coordinate that lifts the resolution ceiling, and its two bounds
-  Denotation.lean             what a vocabulary decision can and cannot do to a repair
-  Recipe.lean                 the recipe as an object: a domain description, and the path it forces
-  Question.lean               a question's shape as an object: the matcher, and its round trip
-  QuestionNested.lean         the list cut, the modifier frame, and a shape whose sides are shapes
-  LLVQTable.lean              the class table under the quantiser: the least cost, and why the search may stop
-overlay/                      the GLM repository, with the finished package
-  GLM.py                      the CLI
-  README.md                   the project's own top-level README
-  glm_universal/              the package proper (eleven sub-packages)
-  README_ARCHIVE.md           the archival half of that README: the change log
-  glm_lean/                   the overlay's copy of the Lean development
+README.md  (this file, the top tier)
+└── glm_universal/README.md          v1.14.0 — the active runtime, the map of the eleven sub-packages
+    ├── substrate/README.md          Golay, MOG, Leech, the digit stack, decoding, the frame bridge
+    ├── data_objects/README.md       the 8 registers and the two-legged losslessness contract
+    ├── reasoning/README.md          the 49 reasoning modules, and what each one is reachable as
+    ├── semantics/README.md          the meaning space, reference, derived relations, the audit
+    ├── recipe/README.md             the domain description, the one generic path, the three domains regenerated
+    ├── language/README.md           the question description, the three generic matchers, and the seven kinds read off them
+    ├── runtime/README.md            the 21 query kinds, the 48 report subjects, the session API
+    ├── migration/README.md          the repository's stored state, brought in literally
+    ├── benchmarks/README.md         the 5 suites, their baselines and their findings
+    ├── capabilities/README.md       the 33 probes and the boundary each one locates
+    ├── evaluation/README.md         the 131-case end-to-end CLI evaluation, and how it scores
+    ├── tests/README.md              62 test files: what each one checks, and why
+    └── examples/README.md           the six demonstration scripts and the generated transcript
+
+FIGURES.md                              every documented count, regenerated by
+                                        `python -m glm_universal.figures --write`
+glm_lean/RequestProject/GLM/README.md   the Lean 4 development: 48 Lean files, no sorry
+INFORMATION_LOSS_STUDY.md               the information-loss-at-boundaries study
+INFINITE_VALUES_STUDY.md                infinite values and irrational numbers: what the
+                                        value layer can hold, and where it provably stops
+GEOMETRIC_AMBIGUITY_STUDY.md            ambiguity as a value: the six-fold tie at a deep
+                                        hole, bundling, and contextual collapse
+CAPABILITY_ASSESSMENT.md                what the machine can actually do, measured: the
+                                        probes, the benchmarks and the CLI evaluation
+ANALOGY_LAYER_STUDY.md                  analogy by named relation: why the vector-offset
+                                        model failed, and what replaced it
+NOISE_EXPERIMENT_STUDY.md               noise used as the computation: cascaded loops, closed
+                                        orbits, interacting tones, dither and error feedback
+                                        through a matrix, all exact
+GLM_UNIFICATION_BLUEPRINT_AUDIT.md      the unification blueprint read as a live claim ledger:
+                                        every testable sentence recomputed and given a verdict
+GLM_STUDY_CATALOG_AUDIT.md              the external study findings recomputed, claim by claim:
+                                        58 claims, 33 confirmed, 14 refuted, 7 not reproduced,
+                                        4 not implemented
+GLM_COMPANION_STUDIES_AUDIT.md          the two companion preprints tested against the
+                                        definitions they state: 49 claims, 26 confirmed,
+                                        17 refuted, 5 not reproduced, 1 not implemented
+HIGHER_LATTICE_STUDY.md                 above 24 dimensions: the 32-dimensional Barnes-Wall
+                                        rung and its three-resolution address, the
+                                        48-dimensional ternary rung, and delta-sigma run
+                                        against a Leech shell
+LEAN_ADDRESS_STUDY.md                   a deterministic Leech address for each of the 1270
+                                        Lean declarations, scored on read-back fidelity and
+                                        against a digest control and a seeded reshuffle
+HARMONY_STUDY.md                        the harmonic register — 28 intervals as exact ratios —
+                                        and the musical third of the catalogue's universality
+                                        claim, measured against a control it does not beat
+ECONOMICS_STUDY.md                      the economic register — 21 quoted prices as exact
+                                        rationals — and the last third of the same claim:
+                                        an exact magnitude decided by integer comparison,
+                                        and a control the lattice does not beat
+HEXCOLOUR_STUDY.md                      the hexcolour address layer audited on the shipped
+                                        data: 4,680 distinct addresses, read-back, agreement
+                                        with the stored masks, and lookup by address
+RELATIVE_MEASURE_STUDY.md               measure words as relative measures: the 45-class
+                                        comparison register, the widening measured over 56
+                                        uses, the comparative between two uses, and the
+                                        queries that refuse at their boundary
+DENOTATION_STUDY.md                     what the undimensioned names denote: the factor
+                                        basis swept, the 36-entry denotation register, and
+                                        the `related_to` residue finished as a vocabulary
+                                        decision rather than a failed lookup
+RECIPE_STUDY.md                         the recipe made into an object: a domain
+                                        description, the one generic path from it, and
+                                        three registers regenerated from their
+                                        descriptions alone, 94 of 94 carriers identical
+LANGUAGE_STUDY.md                       the question shape made into an object: seven
+                                        query kinds read off descriptions across three
+                                        shape families, with the branches they replaced
+                                        frozen beside them as the thing to agree with
+LLVQ_TABLE_STUDY.md                     the quantiser's search replaced by a lookup: the
+                                        MOG's 16-entry column table, 128 classes of 32,
+                                        the class minimum and the bounded search proved
+                                        in Lean, and 1,270 corpus addresses unchanged
+PROJECT_DIRECTIVES.md                   the eight standing rules, each naming the instrument
+                                        that enforces it
+STATUS.md                               the single status and to-do document: what is
+                                        done, what is open, and how to re-verify it
 ```
+
+Each of the other top-level folders keeps its own README as before; the tree
+below is the index to them.
+
+## This repository is a system 
+each folder has a README.md wiring the folders together like a script with dependencies:
+
+```
+https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the director and collector. 
+  ├──→ GMHGL/           UBP SYSTEM - Golay engine, TAX, NRCI 
+  │                     (exact rational math - NO Floats wherever possible)
+  │
+  ├──→ data_object/     ENCODING
+  │                     1) 'data_object/' - how to encode subjects as 24-bit Data Objects - 118 elements, 82 molecules, 36 bonds, 95 words
+  │                     2) 'encoding_definition_attempt_03-08.26/' - Gas-phase diatomic interaction pilot and structured Element Object v4
+  │                     3) 'encoding_definition_attempt_04.08.26/' - Empirical calibration: 190 kJ/mol per work unit. Tick=2.10 fs, Cell=17 μm. + Dual-warp architecture: graduated for energy, flip for classification.
+  │
+  │
+  ├──→ light/           SCALE CALIBRATION
+  │                     1) Speed of light study (UBP ↔ real-world)
+  │                     2) 'aristotle_01/' - Lattice walking shortcut method + Lean4 verified UBP including 'Y' constant, Symmetry TAX, NRCI +
+  │                     3) 'EM_calibration_1/' (substrate-unit-to-meters conversion)
+  │                     4) UBP-to-Realworld Scale: S(λ, HW) = λ / [HW × (Y + 1/8)]
+  │                        (from arc_agi_17 EM propagation study, v1-v9)
+  │                     5) light/aristotle_01/Y_STUDY_CLEAN_RESTATEMENT.md - Lean4 verified Y, TAX, NRCI +
+  │
+  ├──→ glm_machine/     THE GLM MIND
+  │                     Perceives, reasons, acts,
+  │                     Lingo (GLM language) language, conditional reasoning
+  │                     dev/glm_v37_grown.py — latest runtime (crystallization, adversarial, gap words)
+  │
+  ├──→ glm_lean/        LEAN-VERIFIED GLM (3 generations)
+  │                     GLM-1: 43 claims, integer exponents, Golay/MOG carrier
+  │                     GLM-2: 58 claims, rational exponents, Leech carrier, Co₀
+  │                     GLM-3: 64 claims, full Griess algebra (196,884 dims), Monster
+  │                     Each: paper + reasoner + Lean 4 proofs (no sorry)
+  │
+  ├──→ glm_universal/        collective active version for development/growth
+  │                         **v1.14.0 — feature complete.** Eleven sub-packages,
+  │                         each with its own README: substrate/ data_objects/
+  │                         reasoning/ semantics/ recipe/ language/ runtime/
+  │                         migration/ benchmarks/ capabilities/ evaluation/
+  │                         (plus tests/ and examples/). GLM.py CLI at repo root.
+  │                         21 query kinds, 48 report subjects, 8 registers
+  │                         (physics 726, chemistry 118, molecules 51,
+  │                         mathematics 22, lexicon 95, spatial 28,
+  │                         harmonics 28, economics 21)
+  │                         holding 1,089 carriers. The repository's stored
+  │                         state migrated in literally (4,282 concepts,
+  │                         4,014 CRG edges) and then audited: 83 of those
+  │                         concepts denote anything determinate, and the
+  │                         grounded graph that replaces it holds 357
+  │                         meanings, 1,705 notations and 12,859 edges, each
+  │                         re-derived on demand. 5 benchmark suites, 2,390
+  │                         scored tasks, every suite above its baseline.
+  │                         Reals held as processes, written arithmetic over
+  │                         them including exp/log/sin/cos/tan and real
+  │                         powers, and 33 probes that report where the
+  │                         machine stops: 20 hold, 13 break, 0 errored.
+  │                         A 131-case end-to-end evaluation drives GLM.py in
+  │                         a fresh interpreter over every query kind and
+  │                         every report subject.
+  │                         2,872 tests across 61 of the 62 test files, 11,665 subtests, outside the document check,
+  │                         zero failures. Every figure here is regenerated
+  │                         into `FIGURES.md`.
+  │                         Nothing unchanged is checked twice: the sign-off
+  │                         ledger `.glm_signoff.json` records, for each test
+  │                         file and each of the 7 instruments (lake build,
+  │                         the sorry scan, the two-copy diff, the probes,
+  │                         the benchmarks, the evaluation, the figures
+  │                         check), a digest of everything its last passing
+  │                         result depended on — imports, data, the documents
+  │                         and Lean sources it names, the scaffolding and
+  │                         the interpreter — and re-runs only what moved.
+  │                         `python -m glm_universal.signoff --verify`.
+  │                         Start at `glm_universal/README.md`.
+  │
+  ├──→ long_term_memory/   THE GLM MEMORY
+  │                        glm_training_data.json (all GLM training data)
+  │                        GLM_KNOWLEDGE.md (all GLM knowledge from training)
+  │     
+  ├──→ arc_agi_15/      ARC AGI v15 SOLVER EDITION 
+  │                     Leaves off at 'FOR_USER_v065.md'
+  │          
+  ├──→ arc_agi_16/      ARC AGI v16 EXPERIMENTS EDITION 
+  │                     Focussed on training the GLM, perhaps doesn't use this system well
+  │
+  ├──→ arc_agi_17/      ARC AGI v17 SUBSTRATE-NATIVE COGNITIVE ARCHITECTURE
+  │                     GLM mind + lattice perception + imagination + growth system
+  │                     Best: 105/181 (23% ARC + 100% diverse types) | CRG: 4,015 edges | 217 runs
+  │                     Key: scripts/arc_v35_pipeline.py (latest) or scripts/arc_v32_pipeline.py (self-contained)
+  │                     11 puzzle types, 197 simplicial faces, physics-corrected (Gray code, Symmetry Tax, 2Δv)
+  │
+  ├──→ arc_agi_(version_number)/      THE NEXT ARC AGI attempt
+  │
+  ├──→ leech_lattice/      fast way to map and measure integers within the Leech lattice
+  │
+  └──→ CATALOG.md          full repository catalog (all files, all folders 20.08.26)
+
+```
+
+---
+
+## What Each Folder Is
+
+| Folder | Intended Purpose | Current ARC AGI Score | Current Key File | Experiment and Development Work Needed |
+|--------|---------|-------|----------|----------|
+| **ROOT Top Tier repository folder** | Collect, define and conduct use of all sub-folders, files within folders and scripts throughout the whole of this repository and system, to direct experiments and studies that use the UBP and or GLM systems | — | 'README.md' (this file) | Organise all folders and their contents so no scripts are repeated and all systems use a single source ('GMHGL/' and 'glm_machine/') for operations, 'data_object/' for encoding, 'light/' for scale calibration and 'long_term_memory/' for all GLM training and learning. As of v2.9 the active runtime is `glm_universal/` plus the `GLM.py` CLI at the repo root — see "GLM-3+ v0.5.0" section near the bottom. |
+| **GMHGL/** | Foundation — Golay engine, TAX, NRCI | — | `ubp_unified_v5.py` | Extend existing capacity/capabilities if possible. Note: `snap_to_codeword` has a Lean-verified bug (only corrects weight ≤ 3, not 4). Fix documented in light/EM_calibration_1/reports/snap_to_codeword_FIX.md |
+| **data_object/** | Encoding — Subjects → 24-bit Data Objects | — | `encoding_definition_attempt_04.08.26/README.md` | Use in studies/experiments. Warping (rotate_3 + flip) and geometric work (190 kJ/mol calibration) now integrated into arc_agi_17 |
+| **glm_machine/** | Active Geometric Language Machine system | — | `dev/glm_v37_grown.py` | Growth and development alongside the ARC AGI developments. v37 features (crystallization, adversarial testing, gap word derivation, deliberative reasoning) now integrated into arc_agi_17 |
+| **arc_agi_17/** | Substrate-native cognitive architecture — GLM mind with lattice perception, imagination, growth, diverse puzzles, simplicial faces | 105/181 (23% ARC + 100% diverse) | `scripts/arc_v35_pipeline.py` | Continue growth. Target: 5,000 CRG edges (current: 4,015), 30%+ ARC. 217 cumulative runs. 11 puzzle types. Physics-corrected (Gray code, Symmetry Tax, 2Δv). Self-contained pipeline available at `scripts/arc_v32_pipeline.py`. |
+| **arc_agi_15/** | Solver — Working Solvers (3/9 mind solved / 6/9 Solvers solved) | 9/50 | `consolidated_mind.py` | Leave as record of attempting #15 and for parts if needed rather than rebuilding scripts from scratch |
+| **arc_agi_16/** | Experiments | 9/50 | `arc_learning_mind.py` | Leave as record of attempting #16 and parts if needed rather than rebuilding scripts from scratch |
+| **light/** | Calibration — UBP ↔ real world | — | `aristotle_01/lattice_shortcut.py` and `aristotle_01/LATTICE_SHORTCUT_METHOD.md`, 'Y_STUDY_CLEAN_RESTATEMENT.md' | Add more calibration anchors through various scales of reality. UBP-to-Realworld Scale: S(λ, HW) = λ / [HW × (Y + 1/8)] established in arc_agi_17 study |
+| **long_term_memory/** | Archive — all GLM training data + knowledge | — | `glm_training_data.json` | Needs proper implementation so this becomes an on-going GLM training method. arc_agi_17 now reads from this and writes learning patterns persistently |
+| **glm_lean/** | Lean-verified GLM — 3 generations of exact composable meaning on a lattice carrier | — | `glm3/glm3_paper.py` | Independent verification of GLM concepts via Lean 4 + Mathlib proofs (no sorry). GLM-1 (43 claims), GLM-2 (58 claims), GLM-3 (64 claims, full Griess algebra). See `CATALOG.md` for full file listing. |
+
+---
+
+## Data Flow
+
+```
+Subjects (elements, molecules, words)
+for Elements: ubp_system_kb.json (118 elements)
+    ↓ encode via elements_data_object_system.py
+24-bit Data Objects (EN×10, BP÷40, MP÷40, Rho×10)
+    ↓ warp via graduated_activation_warp / rotate_3+flip
+Warped Data Objects (Activation row modified for BO≥2)
+    ↓ interact via AND/XOR + geometric work
+Feature vectors (24 features per pair)
+    ↓ predict via Random Forest / k-NN
+Bond Energy (r=0.55) + Bond Order (86.8%)
+    ↓ calibrate via 190 kJ/mol scale factor
+Real thermodynamic values (kJ/mol)
+    ↓ compute on via GMHGL/
+Metrics (TAX, NRCI, AND, XOR, snap cost)
+    ↓ reason about via glm_machine/
+Decisions (perceive → interpret → propose → inspect)
+    ↓ solve via arc_agi_17/ (GLM mind + lattice perception + imagination)
+Results (solved tasks, experience, grown CRG)
+    ↓ archive to long_term_memory/ + arc_agi_17/results/glm_state.json
+Training Data + Knowledge (grows with each run — 217 cumulative runs)
+```
+
+---
+
+## The Constants
+
+| Structural term | Symbol | Type | Operational meaning |
+|---|---|---|---|
+| Perfect space | `0` | pattern | no active coordinate |
+| Zero vector | `0` | pattern | no disturbance, no information |
+| Raw information | `v` | `Fin n → ℤ` | an integer pattern on `n = 24` coordinates |
+| Primitive difference "2" | `Δ` | `ℝ` = 2 | the numerator of the read operator |
+| Capacity / zone-share | `Z★` | `ℝ` = 1/8 | cost of occupying a permitted zone |
+| Body | 24 coordinates | index set | the coordinate space |
+| Loop-check (numeric) | `Π` | `ℝ` = π | the argument of the read operator |
+| Loop-check (structural) | `σ(v)` | 12 bits | the Golay syndrome |
+| Not-quite-closed loop | `σ(v) ≠ 0` | — | history, gap, syndrome |
+| MOG | nearest-codeword reading | — | the grammar that turns a pattern into a lawful one |
+| Golay | `[24,12,8]` code | — | protection: minimum distance 8 |
+| Leech | `Λ₂₄` | — | embodiment: the 24-dimensional geometry |
+| Observer / read quantum | `Y` | `ℝ` | `1/(π + 2/π) = 0.2646754…` |
+| Activation quantum | `Q` | `ℝ` | `Y + 1/8 = 0.3896754…` |
+| TAX | `TAX(v)` | `ℝ` | `HW(v)·Y + ‖v‖²/8` |
+| Coherence budget | `B` | `ℝ` = 10 | the unit in which tax is measured |
+| NRCI | `NRCI(v)` | `ℝ` | `B/(B + TAX(v))` |
+| CoherenceRegime | one of four | — | a band of `NRCI`, equivalently of `TAX` |
+
+### Lightspeed calibration
+- Charge: 1 vertex step = e/12 C (exact)
+- Velocity: v/c = 0.339 (exact, from γ = MONAD/13)
+- Mass: m_e = Y² × WOBBLE × 24⁴ × 29⁴ × h × Δν_Cs / c² (0.007% - 0.009% error results vary currently)
+- **UBP-to-Realworld Scale**: S(λ, HW) = λ / [HW × (Y + 1/8)] (arc_agi_17 v9)
+  - HW=8: S = λ/3.1174 (gamma/X-ray/EUV)
+  - HW=12: S = λ/4.6761 (optical/IR/microwave)
+  - HW=16: S = λ/6.2348 (radio/ELF)
+- **TAX conservation law**: TAX(a⊕b) = TAX(a) + TAX(b) − 2×TAX(a∧b) (arc_agi_17 v10)
+The mass residual is an open problem.
+
+### (π calibrated) Y Constant
+- Y = 1/(π + 2/π) ≈ 0.264675
+- Entropic wobble — cost per active coordinate
+- Activation quantum: Y + 1/8 = 0.389675
+- Now available as exact Fraction (via math_atlas continued fractions) — no float drift
+
+### TAX and NRCI
+- TAX = HW·Y + ‖v‖²/8 (topological + geometric cost)
+- NRCI = 10/(10 + TAX) (coherence measure, 0-1)
+- NRCI=1.0 for zero vector (perfect coherence, vacuum)
+- CoherenceRegime: OnBit (≥0.8), Coherent (≥0.5), Transitional (≥0.3), Subcoherent (<0.3)
+
+---
+
+## What We've Learned
+
+### Elements (118)
+1. **Element identity is well-encoded** (EN r=0.92, BP r=0.95)
+2. **The Activation row is the bond formation layer** (diff_A r=0.50)
+3. **Warping the Activation row creates distinct bond-order sectors** (r=0.55)
+4. **Geometric work (path integral) carries independent signal** (partial r=0.33)
+5. **The snap process is part of the interaction mechanism** (snap energy monotonic with BO)
+6. **Bond order classification: 86.8% accuracy** (k-NN with flip_act_all)
+7. **The 190 kJ/mol scale factor matches real bond energies** (Br-Br = 190 kJ/mol)
+- see 'encoding_definition_attempt_04.08.26/README.md' for latest
+
+### Molecules (82)
+- Best encoding: M (log2), MP (div40)
+- r(ΔH) = +0.96
+- Details: `data_object/molecules.md`
+
+### Patterns (29 synthetic)
+- 19/29 (66%) with substrate knowledge
+- Resonant (tiling): 4/4, Geodesic (mirrors): 4/4
+
+### ARC-AGI (arc_agi_17)
+- **Best: 105/181** (v35, 23% ARC + 100% diverse types)
+- **217 cumulative training runs** (state persists across all)
+- **4,015 CRG edges** (target: 5,000 per major epoch)
+- **66 hexcolour addresses** (persistent lattice memory) — *superseded: the
+  shipped table `arc_agi_17/results/hexcolour_addresses.json` holds **15**
+  per-task addresses, all fifteen Golay codewords and all fifteen
+  round-tripping.  The figure of 66 is the upstream v35 run's own count and
+  is kept here as the historical record.  The audited, live count is the one
+  `report state migration` prints: 4,680 concept addresses, all distinct,
+  beside the 15 legacy per-task ones.*
+- **197 simplicial faces** (2-simplices in CRG)
+- **14 generative components** (0 passive)
+- **11 puzzle types** (ARC + 10 diverse: symmetry, border, colour_cascade, conditional_region, connected_component, count_encode, diagonal, noise_clean, object_gravity, pattern_tile)
+- **6 solve modes**: lattice_perception, deliberative_reasoning, hexcolour_analogical, glm_mind, glm_mind_refined, fallback_solver
+- **5-layer perception**: encoding → active perception → adaptive resolution → Golay snap → differential transition (2Δv)
+- **v37 features**: crystallization, adversarial testing, gap word derivation, deliberative reasoning, applied imagination
+
+### Older ARC-AGI (v15/v16)
+- 9/50 (18%) — 3 by mind, 6 by toolkit
+- Experience routing table built (150 entries)
+
+---
+
+## Driving Styles
+
+| Style | Goal | Best For |
+|-------|------|----------|
+| Machining | Minimise TAX | High noise |
+| Resonant | Maximise NRCI | Patterns, tiling |
+| Differential | Minimise Δ | Movement, colour |
+| Geodesic | Shortest path | Rotation, reflection |
+| Entropic | Equilibrium | Simplification |
+| Flow | Vector field | Expansion, fill |
+| **Lattice Perception** | Compute 2Δv | ARC transformation rules |
+| **Deliberative** | Step-by-step synthesis | Complex transformations |
+| **Imagination** | Imagine → check coherence → adjust | Proposal refinement |
+
+---
+
+## Sub-Documents can be used to store Subject-specific GLM training material, data and records
+
+| Folder | Documents |
+|--------|-----------|
+| data_object/ | `elements.md`, `molecules.md`, `CALIBRATION_LOG.md` |
+| glm_machine/ | README with full architecture docs |
+| GMHGL/ | `ubp_checkpoint_v5.4.1.md` |
+| long_term_memory/ | `GLM_KNOWLEDGE.md` |
+| arc_agi_17/ | `README.md` (full architecture + version history + change log) |
+| arc_agi_17/reports/ | `v17_report.md` through `v35_report.md` (one per version) |
+| glm_lean/glm/ | `DEVELOPMENT_CATALOG.md`, `glm_paper.py` (43 claims verified) |
+| glm_lean/glm2/ | `glm2_paper.py` (58 claims verified) |
+| glm_lean/glm3/ | `glm3_paper.py` (64 claims verified) |
+
+---
+
+## Resources
+
+- GLM language unified resource (15MB): 'https://github.com/DigitalEuan/UBP_Repo/blob/main/core_studio_v4.0/GLM/glm_unified_resource.json'
+- GLM Concept Relation Graph: 'https://github.com/DigitalEuan/UBP_Repo/blob/main/core_studio_v4.0/GLM/GLM_CRG_EXPANDED.py'
+- Database of words and explanation: 'https://github.com/DigitalEuan/UBP_Repo/blob/main/core_studio_v4.0/core/ubp_lang_kb_combined_v4.json'
+
+- Currently under/unused datasets and scripts in 'glm_machine/'
+   - 'GLM_CRG_MASSIVE.py' 10KB — **NOW INTEGRATED** into arc_agi_17 (250 edges)
+   - 'GLM15_physics_pack.py' 33KB - physics definitions
+   - 'color_space_data.json' 183KB
+   - 'corpus.txt' 500KB chat conversation for language training
+   - 'glm_learned_state.json' 12KB
+   - 'GLM21_generator.py' - GENERATION loop — it produces novel sequences, not just recalled templates.
+   - 'GLM22_ontological_grammar.py' - UBP ontological layers (Reality, Information, Activation, Potential) map to grammatical categories:
+1. Reality    (M_*)  → NOUN      (concrete things that exist)
+2. Information (I_*) → ADJECTIVE  (relational qualities)
+3. Activation (A_*)  → VERB       (processes, actions)
+4. Potential  (P_*)  → OPERATOR   (logical/abstract relations)
+   - 'GLM39_agent_loop.py'
+   - 'golden_cases.json' 13KB
+   - 'idea_meta_graph.json' 77KB
+   - 'dev/glm_v37_grown.py' — **v37 FEATURES NOW INTEGRATED** into arc_agi_17 (crystallization, adversarial, gap words, deliberative)
+   - 'GLM_geometric_compute.py' — **NOW INTEGRATED** into arc_agi_17 (GeometricNumber, GeometricArithmetic)
+   - 'math_atlas.py' — **NOW INTEGRATED** into arc_agi_17 (exact π, e, φ via continued fractions)
+   - 'physics.py' — **NOW INTEGRATED** into arc_agi_17 (exact NRCI, coherence regimes)
+   - 'GLM_sandbox.py' — **NOW INTEGRATED** into arc_agi_17 (verification, observation memory)
+
+- ARC AGI Attempts before v15: 'https://github.com/DigitalEuan/ARC_AGI'
+
+---
+
+<!-- figures:history -->
+
+*Everything below this line was an archive: the change log, and the write-up
+of each round as it was finished.  It now lives in
+[`README_ARCHIVE.md`](README_ARCHIVE.md), unchanged — the counts in it were
+true when the row was written and are deliberately left alone.  For the
+package as it is now, see [`FIGURES.md`](FIGURES.md), which is regenerated
+from the code.*
