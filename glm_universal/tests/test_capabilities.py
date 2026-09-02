@@ -274,6 +274,7 @@ class TestCapabilityQuery:
         assert int(solution.expected["breaks"]) == sum(
             1 for verdict in EXPECTED_VERDICTS.values() if verdict == "breaks")
 
+    @pytest.mark.exhaustive
     def test_the_third_column_reruns_the_probes(self, sess):
         trace = tct.verify_trace(tct.build_trace(sess.ask("report capabilities")))
         verdict = trace.verdict

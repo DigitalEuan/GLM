@@ -370,6 +370,7 @@ class TestWrittenResults:
         assert record["outcomes_written"] < record["outcomes_total"]
         assert "sampled" in record["outcomes_note"]
 
+    @pytest.mark.exhaustive
     def test_two_runs_write_the_same_bytes(self, tmp_path):
         first = tmp_path / "a"
         second = tmp_path / "b"
@@ -418,6 +419,7 @@ class TestRuntimeQuery:
             assert f"score_{name}" in sol.expected
             assert f"verdict_{name}" in sol.expected
 
+    @pytest.mark.exhaustive
     def test_the_generated_script_reproduces_column_two(self, sess):
         sol = sess.ask("report benchmarks")
         trace = tct.verify_trace(tct.build_trace(sol))

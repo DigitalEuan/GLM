@@ -356,5 +356,51 @@ class TestReport(unittest.TestCase):
                         trace.verdict.mismatches)
 
 
+class TestNearestOnAnUnregisteredMolecule(unittest.TestCase):
+    """The formula parser standing in for a name the register never stored.
+
+    A molecule that is not one of the register's own entries used to be a
+    dead end for ``nearest``: the operand was resolved against enumerated
+    keys and nothing else.  It is now routed through the formula grammar,
+    which builds the carrier from the element register, so the search runs
+    on a species the register has never seen.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.sess = GeometricSession()
+
+    def test_the_formula_is_not_one_of_the_registered_names(self):
+        names = {name.lower() for name, _ in mol.MOLECULES}
+        formulas = {formula.lower() for _, formula in mol.MOLECULES}
+        self.assertNotIn("pbcl2", names)
+        self.assertNotIn("pbcl2", formulas)
+
+    def test_the_parser_builds_a_carrier_for_it(self):
+        obj = mol.object_from_formula("PbCl2")
+        self.assertEqual(len(obj.carrier), 24)
+        for coordinate in obj.carrier:
+            self.assertIsInstance(coordinate, (int, Fraction))
+            self.assertNotIsInstance(coordinate, float)
+
+    def test_nearest_answers_on_the_unregistered_formula(self):
+        sol = self.sess.ask("nearest PbCl2")
+        self.assertTrue(sol.ok, sol.error)
+        self.assertTrue(sol.expected)
+
+    def test_the_re_derivation_reproduces_the_answer(self):
+        sol = self.sess.ask("nearest PbCl2")
+        trace = tct.verify_trace(tct.build_trace(sol))
+        self.assertIsNotNone(trace.verdict)
+        self.assertEqual(trace.verdict.returncode, 0,
+                         trace.verdict.stderr_tail)
+        self.assertTrue(trace.verdict.matches_column2,
+                        trace.verdict.mismatches)
+
+    def test_a_formula_the_grammar_cannot_read_is_refused(self):
+        sol = self.sess.ask("nearest Xyzzy9")
+        self.assertFalse(sol.ok)
+
+
 if __name__ == "__main__":  # pragma: no cover
     unittest.main()

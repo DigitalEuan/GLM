@@ -77,6 +77,7 @@ from __future__ import annotations
 from fractions import Fraction
 from typing import (Dict, Iterable, List, Mapping, Optional, Sequence, Tuple)
 
+from ..derived import memo
 from .golay_decode import Decoding, decode_complete
 from .mog import GOLAY_MASKS, GOLAY_SET
 
@@ -677,6 +678,7 @@ def sample_dataset(concept_count: int = 64, edge_count: int = 96,
             "hexcolours": tuple(colours)}
 
 
+@memo
 def migration_report() -> Dict[str, object]:
     """Everything this module claims, recomputed."""
     data = sample_dataset()

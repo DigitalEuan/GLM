@@ -34,6 +34,7 @@ from glm_universal.migration import store as SO
 from glm_universal.reasoning import tasks as TK
 from glm_universal.runtime import session as SE
 from glm_universal.runtime import tct_engine as TE
+from glm_universal.substrate import isomorphism as IS
 from glm_universal.substrate.mog import GOLAY_MASKS, GOLAY_SET
 
 HAS_SOURCE = ST.state_path() is not None
@@ -346,6 +347,135 @@ class TestTheWrittenFile:
         report = ST.state_migration_report()
         assert report["available"] is True
         assert report["source_reproduces_the_file"] is True
+
+
+# ===========================================================================
+# 3b.  THE HEXCOLOUR ADDRESSES
+# ===========================================================================
+
+class TestHexcolourConverters:
+    """The address layer on its own, before any stored data is involved."""
+
+    def test_a_hexcolour_round_trips_every_mask_it_can_name(self) -> None:
+        for mask in (0, 1, 0xABCDEF, 0xFFFFFF, 0x800001):
+            colour = IS.mask_to_hexcolour(mask)
+            assert colour.startswith("#") and len(colour) == 7
+            assert IS.hexcolour_to_mask(colour) == mask
+
+    def test_the_hash_is_optional_and_case_is_not_significant(self) -> None:
+        assert IS.hexcolour_to_mask("#AbCdEf") == IS.hexcolour_to_mask(
+            "abcdef") == 0xABCDEF
+
+    def test_a_malformed_address_raises(self) -> None:
+        for bad in ("#abcde", "abcdefg", "zzzzzz", ""):
+            with pytest.raises(ValueError):
+                IS.hexcolour_to_mask(bad)
+        with pytest.raises(TypeError):
+            IS.hexcolour_to_mask(0xABCDEF)  # type: ignore[arg-type]
+
+    def test_migrating_an_address_permutes_the_coordinates_it_names(
+            self) -> None:
+        for mask in (0, 1, 0xABCDEF, 0xFFFFFF):
+            colour = IS.mask_to_hexcolour(mask)
+            assert (IS.hexcolour_to_mask(IS.migrate_hexcolour(colour))
+                    == IS.to_core_mask(mask))
+
+    def test_migration_preserves_weight(self) -> None:
+        for mask in (1, 0xABCDEF, 0x0F0F0F, 0xFFFFFF):
+            moved = IS.hexcolour_to_mask(
+                IS.migrate_hexcolour(IS.mask_to_hexcolour(mask)))
+            assert bin(moved).count("1") == bin(mask).count("1")
+
+
+@needs_canonical
+class TestHexcolourAudit:
+    """And the same questions asked of the shipped data.
+
+    ``Endianness.lean`` is the machine-checked half: bit reversal is a
+    coordinate permutation, hence an isometry, so the MSB-first reading the
+    stored addresses turn out to need costs no guarantee.
+    """
+
+    def test_the_audit_is_available_and_faithful(self) -> None:
+        audit = ST.hexcolour_audit()
+        assert audit["available"] is True
+        assert audit["faithful"] is True
+
+    def test_every_concept_has_its_own_address(self) -> None:
+        audit = ST.hexcolour_audit()
+        assert audit["concepts"] > 4000
+        assert audit["distinct"] == audit["concepts"]
+        assert audit["collisions"] == 0
+
+    def test_nothing_fails_to_read_back(self) -> None:
+        audit = ST.hexcolour_audit()
+        assert audit["round_trip_failures"] == 0
+        assert audit["recomputed_disagreements"] == 0
+        assert audit["migration_mismatches"] == 0
+
+    def test_the_legacy_per_task_table_is_all_codewords(self) -> None:
+        audit = ST.hexcolour_audit()
+        assert audit["legacy_addresses"] > 0
+        assert audit["legacy_codewords"] == audit["legacy_addresses"]
+        assert audit["legacy_distinct"] == audit["legacy_addresses"]
+        assert audit["legacy_round_trip_failures"] == 0
+
+    def test_the_audit_is_recomputed_from_the_payload_it_is_given(
+            self) -> None:
+        payload = ST.load_canonical()
+        assert ST.hexcolour_audit(payload) == ST.hexcolour_audit()
+
+    def test_a_corrupted_address_is_caught(self) -> None:
+        payload = ST.load_canonical()
+        broken = dict(payload)
+        concepts = [dict(c) for c in payload["concepts"]]
+        concepts[0]["hexcolour"] = IS.mask_to_hexcolour(
+            concepts[0]["mask"] ^ 1)
+        broken["concepts"] = concepts
+        audit = ST.hexcolour_audit(broken)
+        assert audit["round_trip_failures"] == 1
+        assert audit["recomputed_disagreements"] == 1
+        assert audit["faithful"] is False
+
+    def test_the_report_carries_the_audit(self) -> None:
+        report = ST.state_migration_report()
+        assert report["hexcolours"] == ST.hexcolour_audit()
+
+
+@needs_canonical
+class TestHexcolourLookup:
+    """An address is a key: the store is reachable through it."""
+
+    def test_a_concept_is_recovered_from_its_address_alone(self) -> None:
+        store = SO.ConceptStore.load()
+        for name in ("energy", "entropy", "grid", "colour"):
+            assert store.by_hexcolour(store.hexcolour(name)) == name
+
+    def test_every_concept_round_trips_through_its_address(self) -> None:
+        store = SO.ConceptStore.load()
+        assert store.addresses_are_distinct() is True
+        for name in store.names:
+            assert store.by_hexcolour(store.hexcolour(name)) == name
+
+    def test_the_hash_and_the_case_are_not_significant(self) -> None:
+        store = SO.ConceptStore.load()
+        colour = store.hexcolour("energy")
+        assert store.by_hexcolour(colour.lstrip("#").upper()) == "energy"
+
+    def test_an_address_no_concept_carries_raises(self) -> None:
+        store = SO.ConceptStore.load()
+        used = {store.hexcolour(name) for name in store.names}
+        free = next(c for c in (IS.mask_to_hexcolour(m)
+                                for m in range(0x1000000))
+                    if c not in used)
+        with pytest.raises(KeyError):
+            store.by_hexcolour(free)
+
+    def test_the_address_agrees_with_the_carrier(self) -> None:
+        store = SO.ConceptStore.load()
+        for name in store.names:
+            assert (IS.hexcolour_to_mask(store.hexcolour(name))
+                    == int(store.concept(name)["mask"]))
 
 
 # ===========================================================================

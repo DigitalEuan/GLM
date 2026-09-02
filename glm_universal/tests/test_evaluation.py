@@ -47,10 +47,28 @@ class TestQuestionSet:
             if case.expect == "refusal":
                 assert case.classification in ("boundary", "gap"), case.id
 
-    def test_both_kinds_of_refusal_are_represented(self):
+    def test_the_boundary_refusals_are_represented(self):
+        """A refusal at a stated boundary is a result, and must be tested.
+
+        The second kind -- ``gap``, a question the machine could answer but
+        does not -- is *not* required to be present: the set held exactly one
+        such case (``coherence PbCl2``) and closing it in v1.4.0 emptied that
+        class.  What is required is that every refusal is classified, which
+        :meth:`test_expected_refusals_are_classified` checks, and that the
+        boundary class is never empty.
+        """
         kinds = {case.classification for case in EC.CASES
                  if case.expect == "refusal"}
-        assert kinds == {"boundary", "gap"}
+        assert "boundary" in kinds
+        assert kinds <= {"boundary", "gap"}
+
+    def test_the_carrier_solvers_take_an_unregistered_formula(self):
+        """The closed gap, pinned: the species that used to be refused."""
+        by_id = {case.id: case for case in EC.CASES}
+        for name in ("coherence", "spatial", "angle", "cluster"):
+            case = by_id[f"{name}-unregistered-molecule"]
+            assert case.expect == "answer", case.id
+            assert "PbCl2" in case.question
 
     def test_a_malformed_case_is_rejected(self):
         with pytest.raises(ValueError):

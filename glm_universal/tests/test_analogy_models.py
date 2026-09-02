@@ -290,24 +290,35 @@ class TestLexiconRelation:
         assert result is not None
         assert result.answer is not None
 
-    def test_a_vague_relation_is_not_transportable(self, lexicon):
+    def test_a_vague_relation_is_not_transportable(self, lexicon, subtests):
+        """``related_to`` transports nothing -- and the repair is what does.
+
+        The stored lexicon is checked with ``repaired=False``, which is the
+        control: on a pair the register links by ``related_to`` alone, the
+        model declines.  With the repair switched on, such a pair may become
+        answerable -- but only through a relation the physics register
+        *decided* (``same_dimension_as``, ``differs_by``), never through the
+        vague one, and that is asserted too.
+        """
         assert AM.VAGUE_RELATIONS == ("related_to",)
         triples = [(s, r, o) for obj in lexicon
                    for (s, r, o) in obj.attributes.get("triples", ())
                    if r == "related_to"]
         assert triples, "the register should carry some related_to triples"
-        subject, _relation, other = triples[0]
-        # Nothing but `related_to` may link this pair, or the case proves
-        # nothing; find one where that holds.
-        for subject, _relation, other in triples:
-            linking = {r for obj in lexicon
-                       for (s, r, o) in obj.attributes.get("triples", ())
-                       if {s, o} == {subject, other}}
-            if linking == {"related_to"}:
-                break
-        else:                                        # pragma: no cover
+        vague_only = [(s, o) for s, _r, o in triples
+                      if {r for obj in lexicon
+                          for (ss, r, oo) in obj.attributes.get("triples", ())
+                          if {ss, oo} == {s, o}} == {"related_to"}]
+        if not vague_only:                           # pragma: no cover
             pytest.skip("every related_to pair carries another relation too")
-        assert AM.lexicon_relation(subject, other, "fast", lexicon) is None
+        for subject, other in vague_only:
+            with subtests.test(pair=(subject, other)):
+                assert AM.lexicon_relation(subject, other, "fast", lexicon,
+                                           repaired=False) is None
+                answered = AM.lexicon_relation(subject, other, "fast",
+                                               lexicon)
+                if answered is not None:
+                    assert "related_to" not in answered.relation
 
     def test_the_model_declines_when_no_triple_links_a_and_b(self, lexicon):
         assert AM.lexicon_relation("fast", "liquid", "hot", lexicon) is None

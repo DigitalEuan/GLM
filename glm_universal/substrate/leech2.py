@@ -57,6 +57,7 @@ __all__ = [
     "q_form", "b_form", "q_coefficients", "b_coefficients",
     "witt_decomposition", "singular_class_count", "form_is_plus_type",
     "minimal_vectors", "type2_class_table", "type2_classes",
+    "type2_table_cache_state",
     "is_type2_class", "is_2a_axis", "axis_of_class",
     "pair_invariant", "pair_census",
     "theta_series", "type_census",
@@ -395,6 +396,97 @@ def minimal_vectors() -> Iterator[Vec]:
 _TYPE2_TABLE: Optional[Dict[int, Vec]] = None
 _TYPE2_SET: Optional[FrozenSet[int]] = None
 
+#: Bumped when the stored shape below changes, so an artefact written by an
+#: older version is *absent* rather than misread.
+_TYPE2_CACHE_SCHEMA = 1
+
+
+def _type2_cache_inputs() -> Tuple[object, ...]:
+    """The sources the table is a function of: this module and what it reads.
+
+    :func:`minimal_vectors` is driven by ``mog``'s Golay set and octad masks
+    and by ``linalg``'s basis reduction, so those two are inputs as much as
+    this file is.  Nothing else enters the derivation.
+    """
+    from pathlib import Path
+
+    here = Path(__file__).resolve().parent
+    return tuple(here / name
+                 for name in ("leech2.py", "linalg.py", "mog.py"))
+
+
+def _type2_store():
+    """The digest-keyed artefact holding the table."""
+    from ..derived import DerivedStore
+
+    return DerivedStore("leech2_type2_table", _type2_cache_inputs,
+                        schema=_TYPE2_CACHE_SCHEMA)
+
+
+def _encode_type2(table: Dict[int, Vec]) -> Dict[str, object]:
+    """Pack the table into two base64 blocks.
+
+    98,280 entries as JSON objects would be a thirty-megabyte file that takes
+    longer to parse than the enumeration takes to run, which would defeat the
+    point.  A class is a 24-bit integer, so four bytes hold it exactly; a
+    minimal vector's coordinates all lie in ``[-4, 4]``, so one signed byte
+    holds each.  Both packings are exact -- no value is approximated or
+    truncated -- and the reader checks the lengths it gets back.
+    """
+    import base64
+    from array import array
+
+    classes = sorted(table)
+    keys = array("I", classes)
+    coords = bytearray()
+    for cls in classes:
+        coords.extend(x & 0xFF for x in table[cls])
+    return {
+        "count": len(classes),
+        "classes": base64.b64encode(keys.tobytes()).decode("ascii"),
+        "vectors": base64.b64encode(bytes(coords)).decode("ascii"),
+    }
+
+
+def _decode_type2(payload: object) -> Optional[Dict[int, Vec]]:
+    """Unpack :func:`_encode_type2`, or ``None`` if the block is not usable.
+
+    A stored artefact is read back only when it has exactly the shape and the
+    counts the enumeration would have produced; anything else is treated as
+    absent, so a damaged file costs a recomputation and never an answer.
+    """
+    import base64
+    from array import array
+
+    if not isinstance(payload, dict):
+        return None
+    try:
+        count = int(payload["count"])
+        keys = array("I")
+        keys.frombytes(base64.b64decode(payload["classes"]))
+        coords = base64.b64decode(payload["vectors"])
+    except (KeyError, TypeError, ValueError):
+        return None
+    if count != KISSING // 2 or len(keys) != count:
+        return None
+    if len(coords) != count * DIM:
+        return None
+    table: Dict[int, Vec] = {}
+    for index, cls in enumerate(keys):
+        block = coords[index * DIM:(index + 1) * DIM]
+        table[cls] = tuple(b - 256 if b > 127 else b for b in block)
+    return table if len(table) == count else None
+
+
+def type2_table_cache_state() -> Dict[str, object]:
+    """Whether the stored table still describes the sources it came from.
+
+    The same three-way answer the Lean address book gives -- ``absent``,
+    ``stale`` or ``fresh``, with both digests shown.  A stale artefact is
+    never answered from; it is a signal to enumerate again.
+    """
+    return _type2_store().state()
+
 
 def type2_class_table() -> Dict[int, Vec]:
     """Every type-2 class, with one of its two minimal vectors.
@@ -403,10 +495,20 @@ def type2_class_table() -> Dict[int, Vec]:
     must produce exactly 98,280 distinct classes, each hit exactly twice (a
     type-2 class is the pair ``{+-lambda}``).  That is asserted here, so the
     table is self-validating.  Built once and cached for the process.
+
+    Across processes it is cached the way the Lean address book is: stored
+    beside the SHA-256 digest of the three modules it is derived from, read
+    back only while that digest holds, and enumerated again the moment it
+    moves.  A stale artefact is never answered from.
     """
     global _TYPE2_TABLE, _TYPE2_SET
     if _TYPE2_TABLE is not None:
         return _TYPE2_TABLE
+    stored = _decode_type2(_type2_store().read_fresh())
+    if stored is not None:
+        _TYPE2_TABLE = stored
+        _TYPE2_SET = frozenset(stored)
+        return stored
     table: Dict[int, Vec] = {}
     counts: Dict[int, int] = {}
     total = 0
@@ -426,6 +528,10 @@ def type2_class_table() -> Dict[int, Vec]:
         raise AssertionError(f"expected {KISSING // 2} type-2 classes")
     _TYPE2_TABLE = table
     _TYPE2_SET = frozenset(table)
+    try:
+        _type2_store().write(_encode_type2(table))
+    except OSError:  # pragma: no cover - a read-only checkout still works
+        pass
     return table
 
 

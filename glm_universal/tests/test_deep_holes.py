@@ -22,6 +22,8 @@ import functools
 import unittest
 from fractions import Fraction
 
+import pytest
+
 from glm_universal.reasoning import deep_holes as dh
 from glm_universal.reasoning import metric, niemeier
 from glm_universal.reasoning import voronoi_walk as vw
@@ -121,6 +123,7 @@ class TestWalk(unittest.TestCase):
         for earlier, later in zip(curve, curve[1:]):
             self.assertGreater(later, earlier)
 
+    @pytest.mark.exhaustive
     def test_the_walk_is_deterministic(self):
         first = vw.vertex_walk(seed=4242)
         second = vw.vertex_walk(seed=4242)
@@ -250,6 +253,7 @@ class TestCensus(unittest.TestCase):
                          census["shortfall"] == 0)
         self.assertIn("shortfall", census["honest_statement"])
 
+    @pytest.mark.exhaustive
     def test_the_constructions_alone_exhibit_two_types(self):
         census = dh.deep_hole_census(walks=0, probes=200, patience=40)
         self.assertEqual(set(census["types_exhibited"]),

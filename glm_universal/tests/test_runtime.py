@@ -134,7 +134,9 @@ class TestClassification:
         q = PA.parse_query("describe force : energy :: pressure : ?",
                            sess.index)
         assert q.kind == "analogy"
-        assert q.rule == "analogy_operator"
+        # The hand-written `analogy_operator` branch is gone; the infix
+        # description recognises the same question and names itself.
+        assert q.rule == "analogy_shape"
 
     def test_an_equation_is_a_verify(self, sess):
         q = PA.parse_query("force = mass * acceleration", sess.index)
@@ -149,7 +151,8 @@ class TestClassification:
     def test_semantics_defaults_to_scalar_and_says_so(self, sess):
         q = PA.parse_query("force = mass * acceleration", sess.index)
         assert q.options["semantics"] == "scalar"
-        assert any("defaulted to 'scalar'" in line for line in q.trace)
+        assert any("the description's default 'scalar' stands" in line
+                   for line in q.trace)
 
     def test_a_semantics_keyword_overrides_the_default(self, sess):
         q = PA.parse_query("check tensor force = mass * acceleration",
@@ -903,7 +906,71 @@ class TestCommandLineSubprocess:
 # ===========================================================================
 
 def _runtime_sources():
-    return sorted(RUNTIME_DIR.glob("*.py")) + [GLM_PATH]
+    """Every runtime source, including the report families.
+
+    ``rglob`` rather than ``glob``: the report solvers moved into
+    ``runtime/reports/`` in v1.12.0, and a directory-deep search is what keeps
+    the exactness, determinism and import audits below covering them.  A
+    ``glob`` here would have quietly stopped checking forty-eight hundred
+    lines the day they moved.
+    """
+    return sorted(p for p in RUNTIME_DIR.rglob("*.py")
+                  if "__pycache__" not in p.parts) + [GLM_PATH]
+
+
+class TestTheReportSolversStaySplitOut:
+    """The v1.12.0 split, kept from silently growing back.
+
+    Every ``report`` subject used to be a method of ``GeometricSession``, and
+    the file reached eight and a half thousand lines because each round added
+    one.  The solvers now live in ``runtime/reports/``, one module per family;
+    these tests are what makes that a property of the tree rather than a
+    tidy-up the next round undoes by habit.
+    """
+
+    def _session_tree(self):
+        return ast.parse((RUNTIME_DIR / "session.py").read_text(
+            encoding="utf-8"))
+
+    def test_the_session_defines_no_report_solver(self):
+        offenders = [node.name for node in ast.walk(self._session_tree())
+                     if isinstance(node, ast.FunctionDef)
+                     and node.name.startswith("_report_")]
+        assert not offenders, (
+            f"{offenders} are defined in session.py; a report solver belongs "
+            f"in a runtime/reports/ module beside the sub-package that "
+            f"computes it")
+
+    def test_every_subject_is_answered_by_a_mixin(self):
+        from glm_universal.runtime import reports as RP
+        owned = set()
+        for mixin in RP.REPORT_MIXINS:
+            owned |= {name for name in vars(mixin)
+                      if name.startswith("_report_")}
+        subjects = {f"_report_{subject.replace(' ', '_')}"
+                    for subject in SE.REPORT_SUBJECTS}
+        assert owned == subjects, (
+            f"solvers without a subject: {sorted(owned - subjects)}; "
+            f"subjects without a solver: {sorted(subjects - owned)}")
+        for name in sorted(owned):
+            assert hasattr(SE.GeometricSession, name)
+
+    def test_no_report_module_is_left_out_of_the_mixins(self):
+        from glm_universal.runtime import reports as RP
+        modules = {path.stem
+                   for path in (RUNTIME_DIR / "reports").glob("*.py")
+                   if path.stem != "__init__"}
+        used = {mixin.__module__.rsplit(".", 1)[1]
+                for mixin in RP.REPORT_MIXINS}
+        assert modules == used
+
+    def test_the_session_stays_smaller_than_what_it_dispatches(self):
+        """A budget, so the dispatcher cannot become the whole file again."""
+        session = len((RUNTIME_DIR / "session.py").read_text(
+            encoding="utf-8").splitlines())
+        assert session < 4500, (
+            f"session.py is {session} lines; a solver family that grew here "
+            f"belongs in runtime/reports/")
 
 
 class TestExactness:
@@ -1054,3 +1121,90 @@ class TestReportThetaTemplate:
         assert set(verdict.observed) == set(sol.expected)
         assert verdict.observed["coeff_5"] == sol.expected["coeff_5"]
         assert trace.verified
+
+
+class TestFormulaFallThrough:
+    """v1.4.0: every solver that takes a carrier accepts a formula.
+
+    ``nearest`` and ``describe`` already handed an operand no register
+    enumerates to the molecule formula parser; ``coherence``, ``spatial``,
+    ``angle``, ``project`` and ``cluster`` did not, so they refused a species
+    they could encode.  These tests pin the fall-through, the provenance the
+    answer carries, and the refusal that still happens when the operand is
+    not a formula at all.
+    """
+
+    UNREGISTERED = "PbCl2"
+
+    def test_the_formula_names_no_register_entry(self, sess):
+        """The premise: if PbCl2 were registered these tests would be empty."""
+        with pytest.raises(SE.SolverError):
+            sess.resolve(self.UNREGISTERED, None)
+
+    @pytest.mark.parametrize("query,kind", [
+        ("coherence PbCl2", "coherence"),
+        ("spatial PbCl2", "spatial"),
+        ("angle PbCl2 water", "angle"),
+        ("project PbCl2 water", "project"),
+        ("cluster PbCl2, water, ammonia", "cluster"),
+    ])
+    def test_each_solver_answers(self, sess, query, kind):
+        sol = sess.ask(query)
+        assert sol.ok, sol.error
+        assert sol.kind == kind
+        assert "Cl2Pb" in sol.answer
+
+    def test_the_answer_says_the_carrier_was_built(self, sess):
+        """Provenance, not silence: the payload records the formula."""
+        sol = sess.ask("coherence PbCl2")
+        assert sol.payload["formula"] == "PbCl2"
+        assert sol.payload["unregistered"] is True
+        assert any(step.label.startswith("carrier") for step in sol.steps)
+
+    def test_a_registered_carrier_records_no_formula(self, sess):
+        sol = sess.ask("coherence water")
+        assert sol.payload["formula"] is None
+        assert sol.payload["unregistered"] is False
+
+    def test_the_carrier_is_the_one_the_formula_parser_builds(self, sess):
+        """Nothing is invented: the coordinates come from the element
+        register, through the same parser ``nearest`` uses."""
+        from glm_universal import data_objects as do
+        built = do.object_from_formula(self.UNREGISTERED)
+        near = sess.ask("nearest to PbCl2")
+        assert near.ok, near.error
+        for query in ("coherence PbCl2", "spatial PbCl2"):
+            sol = sess.ask(query)
+            assert sol.ok, sol.error
+            assert sol.script_spec["args"]["formula"] == self.UNREGISTERED
+        assert built.name == "Cl2Pb"
+
+    @pytest.mark.parametrize("query", [
+        "coherence PbCl2", "spatial PbCl2", "angle PbCl2 water",
+        "project PbCl2 water", "cluster PbCl2, water, ammonia",
+    ])
+    def test_the_generated_script_rebuilds_from_the_formula(self, sess, query):
+        """Column 3 cannot look up a name that is not in a register."""
+        script = TE.build_trace(sess.ask(query)).script
+        assert "do.object_from_formula" in script
+        assert "'PbCl2'" in script
+        assert "by_name['PbCl2']" not in script
+        assert "by_name['Cl2Pb']" not in script
+
+    def test_the_cluster_path_keeps_the_capitalisation(self):
+        """A formula's case names its elements, so the parser must keep it."""
+        query = PA.parse_query("cluster PbCl2, water, ammonia")
+        assert query.operands == ("PbCl2", "water", "ammonia")
+
+    def test_the_linkage_phrase_is_still_stripped(self):
+        query = PA.parse_query("cluster water, ammonia with Complete Linkage")
+        assert query.operands == ("water", "ammonia")
+        assert query.options["linkage"] == "complete"
+
+    def test_a_term_that_is_not_a_formula_is_still_refused(self, sess):
+        """The fall-through widens what is computable, not what is guessed."""
+        for query in ("coherence banana", "spatial banana",
+                      "angle banana water"):
+            sol = sess.ask(query)
+            assert not sol.ok
+            assert "banana" in (sol.error or "")

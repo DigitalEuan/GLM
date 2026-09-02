@@ -323,6 +323,75 @@ class TestNonCumulativeReading:
         assert raw["cumulative_resolution"] == 5
 
 
+class TestTheClosedRefinementDefect:
+    """The audit finding that was closed, pinned so it cannot come back.
+
+    The defect was: the substrate's 24-bit parity view separates a unit on
+    coordinate 10 from the vacuum, while a layer that reads only the seven
+    SI7 exponents conflates them, so escalating destroyed a distinction the
+    layer below already had and ``refinement_chain_intact`` was ``False``.
+
+    The fix chosen -- and argued for in ``studies/INFORMATION_LOSS_STUDY.md``
+    -- was to *widen* the integer layer rather than narrow the substrate: the
+    integer view is cumulative, carrying the substrate reading beside the
+    exponents, so nothing is lost at any stage.  These tests fail if any part
+    of that regresses.
+    """
+
+    #: The pair that exposed the defect: the vacuum, and a unit outside SI7.
+    EXPOSING_PAIR = (VACUUM, FAR)
+
+    def test_the_exposing_pair_is_separated_by_the_substrate(self, carriers):
+        a, b = (carriers[i] for i in self.EXPOSING_PAIR)
+        assert not IL.indistinguishable(DL.LAYER_SUBSTRATE, a, b)
+
+    def test_the_exposing_pair_is_separated_by_every_layer_above(self,
+                                                                 carriers):
+        """Not just repaired at the integer layer -- kept all the way up."""
+        a, b = (carriers[i] for i in self.EXPOSING_PAIR)
+        for layer in DL.LAYERS:
+            assert not IL.indistinguishable(layer, a, b), layer.name
+
+    def test_the_exposing_pair_is_in_no_boundary_of_the_report(self, report):
+        pair = [VACUUM, FAR]
+        for edge in report["boundaries"]:
+            assert pair not in edge["lost_pairs"], (
+                f"{edge['lower']} -> {edge['higher']} conflates the pair "
+                f"that exposed the defect")
+            assert edge["refinement_violations"] == []
+
+    def test_no_layer_above_the_substrate_violates_refinement(self,
+                                                              carriers):
+        for layer in DL.LAYERS[1:]:
+            assert IL.refinement_violations(
+                DL.LAYER_SUBSTRATE, layer, carriers) == (), layer.name
+
+    def test_every_pair_of_layers_in_order_refines(self, carriers):
+        """Not only consecutive steps: the whole triangle."""
+        for i, lower in enumerate(DL.LAYERS):
+            for higher in DL.LAYERS[i:]:
+                assert IL.refines(higher, lower, carriers), (
+                    f"{higher.name} does not refine {lower.name}")
+
+    def test_resolution_never_decreases_going_up(self, carriers):
+        seen = [IL.resolution(layer, carriers) for layer in DL.LAYERS]
+        assert seen == sorted(seen), seen
+        assert seen[0] < seen[-1], "the stack should gain somewhere"
+
+    def test_the_widening_is_what_repairs_it(self, carriers):
+        """The narrow reading still fails on exactly this pair.
+
+        Kept beside the shipped layer so the decision stays legible: the
+        defect is a property of the *narrow* view, not of the carriers.
+        """
+        a, b = (carriers[i] for i in self.EXPOSING_PAIR)
+        assert IL.indistinguishable(DL.LAYER_INTEGER_RAW, a, b)
+        assert not IL.indistinguishable(DL.LAYER_INTEGER, a, b)
+        assert list(self.EXPOSING_PAIR) in [
+            list(p) for p in IL.refinement_violations(
+                DL.LAYER_SUBSTRATE, DL.LAYER_INTEGER_RAW, carriers)]
+
+
 # ===========================================================================
 # 6.  THE REACH OF A LAW
 # ===========================================================================

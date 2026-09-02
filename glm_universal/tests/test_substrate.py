@@ -142,8 +142,15 @@ class TestPurity:
                     assert root != "random", path.name
 
     def test_only_standard_library_imports(self) -> None:
+        # ``pathlib``, ``base64`` and ``array`` are here for one reason: the
+        # 98,280-class type-2 table is stored beside the digest of the sources
+        # it was derived from, and reading it back needs a path and an exact
+        # byte packing.  All three are deterministic and exact -- no
+        # randomness, no hashing, no floating point -- so the discipline this
+        # test enforces is untouched.
         allowed = {"", "__future__", "fractions", "typing", "dataclasses",
-                   "math", "itertools", "collections", "enum", "functools"}
+                   "math", "itertools", "collections", "enum", "functools",
+                   "pathlib", "base64", "array"}
         for path in sorted(SUBSTRATE_DIR.glob("*.py")):
             tree = ast.parse(path.read_text())
             for node in ast.walk(tree):

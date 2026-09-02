@@ -336,6 +336,7 @@ class TestSakumaAgainstTheShortcut:
 
 class TestRuntimeWiring:
 
+    @pytest.mark.exhaustive
     def test_report_leech_construction_is_reachable(self, sess):
         solution = sess.ask("report leech construction")
         assert solution.ok

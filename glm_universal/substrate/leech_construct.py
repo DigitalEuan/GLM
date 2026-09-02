@@ -61,6 +61,7 @@ from functools import lru_cache
 from itertools import combinations
 from typing import Dict, Iterator, List, Optional, Sequence, Tuple
 
+from ..derived import memo
 from . import leech2
 from .leech2 import DIM, MIN_NORM2, in_leech, norm2
 from .linalg import hermite_normal_form
@@ -486,6 +487,7 @@ def _value_tuples(size: int, budget: int) -> Iterator[Tuple[int, ...]]:
             yield (head,) + tail
 
 
+@memo
 def necessity_report() -> Dict[str, object]:
     """Remove one condition at a time and watch the packing collapse."""
 
@@ -565,6 +567,7 @@ def agrees_with_leech2(sample: Optional[Sequence[Sequence[int]]] = None
     }
 
 
+@memo
 def leech_construction_report() -> Dict[str, object]:
     """The whole ladder, recomputed."""
     levels = {level: kissing_of_level(level) for level in LEVELS}

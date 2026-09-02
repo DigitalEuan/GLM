@@ -3,7 +3,7 @@
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 
-The algebraic and geometric foundation of GLM-3+. Eight modules, strictly
+The algebraic and geometric foundation of GLM-3+. Ten modules, strictly
 layered, pure Python standard library, exact arithmetic, no randomness.
 
 ```
@@ -17,7 +17,12 @@ linalg.py  ──►  mog.py  ──►  leech2.py  ──►  digit_stack.py
 
 The first four are the original core; `golay_decode`, `leech_construct` and
 `isomorphism` were added in v0.8.0 and `superposition` later; all four are
-documented in the final sections of this file.
+documented in the final sections of this file. `lattice32.py` and
+`lattice48.py`, added in v1.5.0, sit *beside* the 24-dimensional layer rather
+than under it: `lattice32` uses only `linalg`, `lattice48` uses nothing from
+the package at all, and the only reader of either is
+`reasoning/higher_lattices.py`. Nothing in the Leech layer changes because
+they are there. They are documented in the last two sections.
 
 `digit_stack` imports `leech2` lazily (inside `_leech_coords` and
 `class_stack_rebuild`) so that the two can be read and tested independently.
@@ -403,3 +408,59 @@ in `Golay/Sextet.lean`, `Superposition.lean`, `Wobble.lean` and
   **4,096** scaled codewords sits at `≤ 0`, so no schedule over that alphabet
   reaches it; admitting the two Leech vectors `±4e₀ ± 4e₁` reaches it exactly
   in a **16**-tick cycle.
+
+---
+
+## `lattice32.py` — the 32-dimensional extremal lattice
+
+Construction A over a binary code cannot beat minimum 2 in any dimension: the
+vectors `2 e_i` are always there. The rung above the Leech lattice therefore
+needs a **two-level** lift, Construction D, over a nested pair of Reed–Muller
+codes:
+
+```
+L  =  4 Z^32  +  2 C1  +  C2,    C2 = RM(1,5) ⊂ C1 = RM(3,5),   Λ_32 = L / 2
+```
+
+In the unscaled integer model a lattice norm is `|x|²/4`, so minimum 4 means
+`|x|² ≥ 16` and evenness means `8 | |x|²`.
+
+| Function | What it returns |
+|---|---|
+| `outer_basis`, `inner_basis`, `outer_code`, `in_outer`, `in_inner` | the two Reed–Muller codes, built from monomial masks rather than tabulated |
+| `code_report()` | outer `[32, 6, 16]` (64 words, weights `{0, 16, 32}`, 62 of weight 16); inner `[32, 26, 4]` (1,240 words of weight 4, 0 lighter); `nested` and `is_dual_pair` both true |
+| `mk`, `address`, `from_address`, `in_lattice` | the **three-resolution address** `(fine, middle, coarse)` — a `4Z^32` part, a `C1` bit-mask and a `C2` bit-mask — and its exact inverse |
+| `resolution_sieve`, `index_ladder` | which resolution a point is visible at, and the index chain `[Λ : 4Z^32] = 2^32` |
+| `minimum_certificate()` | the minimum proved by three disjoint cases on the address, each closed by one code property: `c ≠ 0` by outer weight 16, `c = 0 ≠ b` by inner weight 4, `b = c = 0` by divisibility. All three give `\|x\|² ≥ 16`, so `min = 4` — extremal in dimension 32. The Lean statement is `GLM.HigherLattices.BarnesWall.norm_ge_of_ne_zero` |
+| `determinant_report()` | basis determinant `2^32`, Gram determinant `2^64`, scaled determinant `1` — unimodular — with evenness checked on the diagonal and the off-diagonal products |
+| `minimal_vectors`, `minimal_shape_census`, `kissing_number` | the minimal vectors enumerated by shape: `126,976` of shape `(±1^16, 0^16)`, `19,840` of `(±2^4, 0^28)`, `64` of `(±4, 0^31)` — **146,880** in total, counted rather than quoted |
+| `lattice32_report(verify_all=False)` | all of the above in one dictionary |
+
+## `lattice48.py` — the 48-dimensional extremal lattice
+
+In dimension 48 the extremal minimum is `2 + 2·⌊48/24⌋ = 6`, and the honest
+finding of this module is that **no binary code reaches it**.
+
+*The binary route, and where it stops.* `binary_generator`,
+`binary_code_report` and `binary_minimum_distance` build the extended quadratic
+residue code `QR(47)` from the residues mod 47 and verify that it is a
+`[48, 24, 12]` self-dual doubly even code (the distance exhaustively behind a
+flag, by walking all `2^24` codewords in Gray-code order). Construction A over
+it still contains `2 e_i`, of norm 2 in the `|x|²/2` model, so the binary
+lattice is stuck four short of extremal.
+
+*The ternary route, which works.* Over `F_3` the trivial vectors are `3 e_i`,
+of norm 3 in the `|x|²/3` model, and there is room.
+
+| Function | What it returns |
+|---|---|
+| `legendre`, `jacobsthal`, `symmetry_matrix`, `ternary_generator` | the Pless symmetry code `C(23)`, generator `[I_24 \| S]` with `S` the bordered Jacobsthal matrix of 23 — built, not tabulated |
+| `ternary_code_report()` | `S Sᵀ = −I (mod 3)`, self-dual, every weight divisible by 3, generator rows of weight 24 and generator pairs of weight 15 |
+| `ternary_minimum_distance`, `weight_enumerator` | an information-set search that finds weight 15 and excludes everything up to 8; the MacWilliams weight enumerator, all coefficients non-negative integers summing to `3^24`, minimum weight 15, `A_48 = 96` |
+| `construction_a_report()` | `A = {x ∈ Z^48 : x mod 3 ∈ C(23)}`, index `3^24` in `Z^48`, scaled determinant 1 — unimodular but **odd**, because `3 e_i` has norm 3 |
+| `even_sublattice_report()` | the index-2 even sublattice, and the minimum closed by two cases: off the code the support is ≥ 15 and `6 \| \|x\|²`, so `\|x\|² ≥ 18`; on the code `9 \| \|x\|²` and `6 \| \|x\|²` force `18 \| \|x\|²`. Minimum norm 18, i.e. **6**, attained by `3e_0 + 3e_1`. The Lean statement is `GLM.HigherLattices.Ternary.even_norm_ge_eighteen` |
+| `neighbour_report(exhaustive=False)` | the two glue vectors `h = (3/2, …)` of norm 36 and `h' = (9/2, 3/2, …)` of norm 42, both even, differing by `3 e_0`; the full-weight census of 96 words, cross-checked against `A_48` |
+| `lattice48_report(exhaustive=False)` | all of the above in one dictionary |
+
+Both modules are exercised by `tests/test_lattice_high.py` and read by
+`reasoning/higher_lattices.py`, which is what `report lattices` answers from.

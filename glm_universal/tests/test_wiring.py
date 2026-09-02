@@ -364,11 +364,12 @@ class TestPackageSurface:
 
     def test_version_is_current(self):
         import glm_universal as g
-        assert g.__version__ == "1.3.0"
+        assert g.__version__ == "1.14.0"
 
     @pytest.mark.parametrize("name", [
         "substrate", "data_objects", "reasoning", "semantics", "runtime",
         "migration", "benchmarks", "capabilities", "evaluation",
+        "recipe", "language",
     ])
     def test_subpackage_is_exported_and_importable(self, name):
         import glm_universal as g
