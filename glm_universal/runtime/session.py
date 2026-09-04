@@ -106,7 +106,8 @@ from .parser import ConceptIndex, Query, QueryError, parse_query
 from .payload import as_magnitude, jsonable
 from .reports import (DevelopmentReports, LanguageReports,
                       LatticeGeometryReports, LedgerReports,
-                      MigrationReports, RecipeReports, RegisterReports,
+                      MigrationReports, ReasoningReports, RecipeReports,
+                      RegisterReports,
                       ResolutionReports, SemanticsReports,
                       SignalReports, SubstrateReports)
 from .solution import (InferenceRecord, Solution, SolverError, Step, q)
@@ -134,7 +135,8 @@ REPORT_SUBJECTS: Tuple[str, ...] = (
     "signature", "drift", "catalog", "containers", "companion",
     "lattices", "shells", "llvq", "harmony", "economics",
     "lean", "directives", "pipeline", "escalation", "measure",
-    "names", "recipe", "language",
+    "names", "recipe", "language", "searchloop", "retrieval",
+    "controller",
 )
 
 #: The canonical names of the worked end-to-end tasks ``task <name>`` runs.
@@ -282,7 +284,7 @@ class GeometricSession(SubstrateReports, LatticeGeometryReports,
                        SignalReports, LedgerReports,
                        SemanticsReports, MigrationReports,
                        DevelopmentReports, RecipeReports,
-                       LanguageReports):
+                       LanguageReports, ReasoningReports):
     """A stateful geometric reasoning session over the loaded registers.
 
     Parameters
@@ -2031,6 +2033,17 @@ class GeometricSession(SubstrateReports, LatticeGeometryReports,
                          "question shapes", "question shape", "surface",
                          "surface language", "phrasing", "phrasings"):
             return self._report_language(query)
+        if subject in ("searchloop", "search loop", "search_loop",
+                         "hard gate", "gate", "reasoning loop",
+                         "candidate filter"):
+            return self._report_searchloop(query)
+        if subject in ("retrieval", "retrieve", "address retrieval",
+                         "nearest declarations", "index", "address index",
+                         "search"):
+            return self._report_retrieval(query)
+        if subject in ("controller", "loop", "derivation", "derivations",
+                         "propose", "plan", "planner"):
+            return self._report_controller(query)
         if subject in ("lean", "lean addresses", "lean address",
                          "declarations", "address book", "addresses"):
             return self._report_lean(query)

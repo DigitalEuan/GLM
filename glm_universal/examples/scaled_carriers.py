@@ -12,12 +12,15 @@ Two approaches, both valuable:
    the Griess form.  No lattice projection needed — the metric IS
    the product's invariant form.
 
-Both use NRCI for coherence.  Shells 2, 4 use float for sqrt — flagged.
+Both use NRCI for coherence.  Nothing here constructs a float: the
+normalisations below round an exact ``Fraction`` (Python's ``round`` on a
+``Fraction`` is exact), and every printed number goes through
+``coherence.decimal_str``.  Directives D7 and D9.
 """
 
 from __future__ import annotations
 
-import json, math
+import json
 from fractions import Fraction
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
@@ -86,18 +89,20 @@ def encode_element_scaled(rec, scale=SCALE):
         if raw is not None:
             # Normalize to [0,1], then scale to integer
             val = raw / mx
-            c[i] = max(0, min(scale, int(round(float(val) * scale))))
+            c[i] = max(0, min(scale, int(round(val * scale))))
     z = _as_frac(rec.get("z"))
     if z is not None:
-        c[10] = max(0, min(scale, int(round(float(z) / 118 * scale))))
+        c[10] = max(0, min(scale, int(round(z * scale / 118))))
         msg = [(int(z) >> k) & 1 for k in range(12)]
         cw = _golay_encode(msg)
         for j in range(4): c[14 + j] = cw[j]
     period = _as_frac(rec.get("period"))
     if period is not None:
-        c[11] = max(0, min(scale, int(round(float(period) / 7 * scale))))
-    c[12] = max(0, min(scale, int(round(float(rec.get("group_block_code", 0)) / 10 * scale))))
-    c[13] = max(0, min(scale, int(round(float(rec.get("standard_state_code", 0)) / 3 * scale))))
+        c[11] = max(0, min(scale, int(round(period * scale / 7))))
+    c[12] = max(0, min(scale,
+                       int(round(F(rec.get("group_block_code", 0)) * scale / 10))))
+    c[13] = max(0, min(scale,
+                       int(round(F(rec.get("standard_state_code", 0)) * scale / 3))))
     return sym, tuple(F(x) for x in c)
 
 def build_scaled_elements():
@@ -202,19 +207,20 @@ def carrier_coherence_product(x, y) -> Dict[str, object]:
 # 4.  COHERENCE-WEIGHTED DISTANCE
 # ═════════════════════════════════════════════════════════════════════════
 
-def coherence_weighted_distance(x, y, weight: float = 0.5) -> float:
+def coherence_weighted_distance(x, y, weight: Fraction = F(1, 2)) -> Fraction:
     """Distance that accounts for both metric proximity and coherence.
 
     d_cw(x, y) = d(x, y) * (1 + weight * |NRCI(x) - NRCI(y)|)
 
     Two concepts that are close in distance but differ in coherence
     are pushed apart — the system sees that one is more structured
-    than the other.
+    than the other.  Exact throughout: the weight is a ``Fraction`` and the
+    result is one, so the comparison is a comparison of rationals.
     """
-    d2 = float(metric.distance2(x, y))
+    d2 = metric.distance2(x, y)
     nx = coherence.nrci(list(x))
     ny = coherence.nrci(list(y))
-    return d2 * (1.0 + weight * abs(nx - ny))
+    return d2 * (1 + weight * abs(nx - ny))
 
 
 # ═════════════════════════════════════════════════════════════════════════

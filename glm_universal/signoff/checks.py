@@ -271,16 +271,16 @@ def _sign_check(unit: CheckUnit, outcome: Mapping[str, object],
 
 def _run_one(check: Check, exhaustive: bool = False) -> Dict[str, object]:
     """Run one instrument and report what happened."""
-    started = time.monotonic()
+    started = time.monotonic_ns()
     completed = subprocess.run(list(check.command), cwd=str(check.cwd),
                                capture_output=True, text=True,
                                env=L.run_environment(exhaustive))
-    elapsed = time.monotonic() - started
+    elapsed_ms = (time.monotonic_ns() - started) // 1_000_000
     ok = completed.returncode in check.ok_returncodes
     return {
         "status": "passed" if ok else "failed",
         "returncode": completed.returncode,
-        "milliseconds": int(elapsed * 1000),
+        "milliseconds": elapsed_ms,
         "output_tail": (completed.stdout + completed.stderr)[-800:],
     }
 
@@ -310,7 +310,7 @@ def run_checks(all_units: bool = False, names: Sequence[str] = (),
         chosen = [u for u in rows if u.stale]
     skipped = [u for u in rows if u not in chosen]
     results: List[Dict[str, object]] = []
-    started = time.monotonic()
+    started = time.monotonic_ns()
     if dry_run:
         for unit in chosen:
             results.append({"name": unit.name, "status": "not run",
@@ -342,7 +342,7 @@ def run_checks(all_units: bool = False, names: Sequence[str] = (),
     else:
         with ThreadPoolExecutor(max_workers=workers) as pool:
             results = list(pool.map(one, chosen))
-    elapsed = time.monotonic() - started
+    elapsed_ms = (time.monotonic_ns() - started) // 1_000_000
     L.save_ledger(book, ledger_path)
     return {
         "ran": len(chosen),
@@ -351,7 +351,7 @@ def run_checks(all_units: bool = False, names: Sequence[str] = (),
         "failed": tuple(r["name"] for r in results
                         if r.get("status") == "failed"),
         "jobs": workers,
-        "seconds": Fraction(int(elapsed * 1000), 1000),
+        "seconds": Fraction(elapsed_ms, 1000),
         "results": tuple(results),
     }
 

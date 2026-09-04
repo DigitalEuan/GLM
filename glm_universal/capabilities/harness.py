@@ -133,19 +133,21 @@ def get_probe(name: str) -> Probe:
 def run_probe(name: str) -> Dict[str, object]:
     """Run one probe.  A probe that raises is reported, never propagated."""
     item = get_probe(name)
-    started = time.monotonic()
+    started = time.monotonic_ns()
     try:
         outcome = item.run()
     except Exception as error:                      # noqa: BLE001 - reported
         outcome = Outcome("error", f"{type(error).__name__}: {error}",
                           {"traceback": traceback.format_exc(limit=3)})
-    elapsed = time.monotonic() - started
+    # D7/D9: the clock is read in integer nanoseconds and reported in integer
+    # milliseconds, so no float is constructed to time a probe.
+    elapsed_ms = (time.monotonic_ns() - started) // 1_000_000
     return {
         "name": item.name,
         "area": item.area,
         "question": item.question,
         "expectation": item.expectation,
-        "seconds": round(elapsed, 3),
+        "milliseconds": elapsed_ms,
         "surprise": outcome.verdict != item.expectation,
         **outcome.as_dict(),
     }

@@ -1365,6 +1365,136 @@ for _entry in report["domains"]:
 '''
 
 
+def _body_report_searchloop(args) -> str:
+    """Recompute the stabiliser, ambiguity and second-example censuses."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import search_loop as sl
+
+
+def _q(value):
+    from fractions import Fraction
+    f = Fraction(value)
+    return str(f.numerator) + "/" + str(f.denominator)
+
+
+report = sl.search_loop_report()
+second = report["second_example"]
+gate = report["soft_gate"]
+
+observed = {
+    "grids": str(report["grids"]),
+    "candidates": str(report["candidates"]),
+    "group_is_closed": str(report["group_is_closed"]),
+    "group_is_faithful": str(report["group_is_faithful"]),
+    "stabiliser_total": str(report["stabiliser_total"]),
+    "orbits": str(report["orbits"]),
+    "mean_survivors": _q(report["mean_survivors"]),
+    "pairs": str(report["pairs"]),
+    "ambiguity_total": str(report["ambiguity_total"]),
+    "mean_ambiguity": _q(report["mean_ambiguity"]),
+    "determined_fraction": _q(report["determined_fraction"]),
+    "every_ambiguity_divides_eight":
+        str(report["every_ambiguity_divides_eight"]),
+    "pinned_by_one": str(second["pinned_by_one"]),
+    "pinned_by_two": str(second["pinned_by_two"]),
+    "second_mean": _q(second["mean"]),
+    "score_choice_is_refuted": str(gate["score_choice_is_refuted"]),
+    "truth_survives": str(gate["truth_survives"]),
+    "lean_file": str(report["lean_file"]),
+}
+
+for _order, _count in sorted(report["stabiliser_census"].items()):
+    observed["stabiliser_" + str(_order)] = str(_count)
+for _width, _count in sorted(report["ambiguity_census"].items()):
+    observed["ambiguity_" + str(_width)] = str(_count)
+'''
+
+
+def _body_report_controller(args) -> str:
+    """Recompute the loop's six scorers, its refusals and its verifications."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import controller as ctl
+
+
+def _q(value):
+    from fractions import Fraction
+    f = Fraction(value)
+    return str(f.numerator) + "/" + str(f.denominator)
+
+
+report = ctl.controller_report()
+rows = report["heuristics"]
+
+observed = {
+    "targets": str(report["targets"]),
+    "reachable": str(report["reachable"]),
+    "unreachable": str(report["unreachable"]),
+    "register": str(report["register"]),
+    "reachable_in_register": str(report["reachable_in_register"]),
+    "width": str(report["width"]),
+    "depth": str(report["depth"]),
+    "moves": str(report["generators"]["moves"]),
+    "generators_are_unit_vectors":
+        str(report["generators"]["all_unit_vectors"]),
+    "lean_file": str(report["lean_file"]),
+}
+
+for _name in ctl.HEURISTIC_ORDER:
+    observed[_name + "_solved"] = str(rows[_name]["solved"])
+    observed[_name + "_minimal"] = str(rows[_name]["minimal"])
+    observed[_name + "_verified"] = str(rows[_name]["verified"])
+    observed[_name + "_mean_proposals"] = _q(rows[_name]["mean_proposals"])
+for _key, _value in report["verdict"].items():
+    observed["verdict_" + _key] = str(_value)
+'''
+
+
+def _body_report_retrieval(args) -> str:
+    """Recompute the retrieval experiment, its controls and the guarantee."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import retrieval as rt
+
+
+def _q(value):
+    from fractions import Fraction
+    f = Fraction(value)
+    return str(f.numerator) + "/" + str(f.denominator)
+
+
+report = rt.retrieval_report()
+decl = report["declaration_queries"]
+goal = report["goal_queries"]
+hybrid = report["hybrid"]
+guarantee = report["guarantee"]
+k = report["k"]
+rows = decl["schemes"]
+
+observed = {
+    "corpus": str(decl["corpus"]),
+    "queries": str(decl["queries"]),
+    "goal_queries": str(goal["queries"]),
+    "goal_features_reproduced": str(goal["features_reproduced"]),
+    "k": str(k),
+    "chance": _q(decl["chance"][k]),
+    "times_chance": _q(report["times_chance"]),
+    "times_chance_rounded": _q(report["times_chance_rounded"]),
+    "pairs_checked": str(guarantee["pairs_checked"]),
+    "violations": str(guarantee["violations"]),
+    "mean_shortlist": _q(guarantee["mean_shortlist"]),
+    "hybrid_beats_text": str(hybrid["any_shortlist_beats_text"]),
+    "lean_file": str(report["lean_file"]),
+}
+
+for _scheme in rt.SCHEMES:
+    observed[_scheme + "_hit_rate"] = _q(rows[_scheme][k]["hit_rate"])
+for _key, _value in report["verdict"].items():
+    observed["verdict_" + _key] = str(_value)
+'''
+
+
 def _body_report_harmony(args) -> str:
     """Recompute the harmonic register and the harmony verdict, fresh."""
     return '''# -- recompute -------------------------------------------------------------
@@ -2769,6 +2899,12 @@ TEMPLATES = {
     # v1.12.0: the surface language driven off the same kind of
     # description -- the question shape made an object.
     "report_language": _body_report_language,
+    # The archive's reasoning loop, restored and measured.
+    "report_searchloop": _body_report_searchloop,
+    # The address book used as an index, scored against its controls.
+    "report_retrieval": _body_report_retrieval,
+    # The loop: propose, check, refuse -- and whether the lattice can steer it.
+    "report_controller": _body_report_controller,
     # v1.8.0: the economic third of the same universality claim.
     "report_economics": _body_report_economics,
     # v1.8.0: the layer audit run on every register carrier.

@@ -118,25 +118,25 @@ def build_elements():
 POS = {"noun": F(1,8), "verb": F(2,8), "adjective": F(3,8), "adverb": F(4,8)}
 
 WORDS = {
-    "energy":      {"a":3/4,"i":1/4,"t":3/4,"c":1/4,"p":"noun","r":4,"d":1},
-    "force":       {"a":3/4,"i":1/4,"t":1/2,"c":1/4,"p":"noun","r":4,"d":1},
-    "mass":        {"a":3/4,"i":1/4,"t":1,  "c":3/4,"p":"noun","r":3,"d":1},
-    "velocity":    {"a":1/2,"i":1/4,"t":1/4,"c":1/2,"p":"noun","r":3,"d":1},
-    "acceleration":{"a":1/2,"i":1/4,"t":1/4,"c":1/2,"p":"noun","r":3,"d":1},
-    "torque":      {"a":3/4,"i":1/4,"t":1/2,"c":1/4,"p":"noun","r":3,"d":1},
-    "power":       {"a":3/4,"i":1/4,"t":1/2,"c":1/4,"p":"noun","r":3,"d":1},
-    "momentum":    {"a":3/4,"i":1/4,"t":1/2,"c":1/2,"p":"noun","r":3,"d":1},
-    "water":       {"a":1,  "i":1,  "t":3/4,"c":1,  "p":"noun","r":4,"d":0},
-    "electron":    {"a":1/2,"i":1,  "t":1,  "c":1/2,"p":"noun","r":4,"d":0},
-    "gravity":     {"a":1/4,"i":1,  "t":1,  "c":1/4,"p":"noun","r":4,"d":0},
-    "light":       {"a":1/2,"i":1,  "t":1/2,"c":1/2,"p":"noun","r":3,"d":0},
-    "heat":        {"a":3/4,"i":1,  "t":1/4,"c":3/4,"p":"noun","r":3,"d":0},
-    "temperature": {"a":3/4,"i":1,  "t":1/2,"c":3/4,"p":"noun","r":3,"d":0},
-    "charge":      {"a":3/4,"i":1,  "t":1,  "c":3/4,"p":"noun","r":3,"d":0},
-    "heavy":       {"a":3/4,"i":1,  "t":3/4,"c":1,  "p":"adjective","r":2,"d":0},
-    "fast":        {"a":1/2,"i":1,  "t":1/4,"c":1/2,"p":"adjective","r":2,"d":0},
-    "accelerate":  {"a":1/2,"i":1,  "t":1/4,"c":1/4,"p":"verb","r":2,"d":0},
-    "measure":     {"a":1/2,"i":1,  "t":1/4,"c":1/2,"p":"verb","r":2,"d":0},
+    "energy":      {"a":F(3,4),"i":F(1,4),"t":F(3,4),"c":F(1,4),"p":"noun","r":4,"d":1},
+    "force":       {"a":F(3,4),"i":F(1,4),"t":F(1,2),"c":F(1,4),"p":"noun","r":4,"d":1},
+    "mass":        {"a":F(3,4),"i":F(1,4),"t":1,  "c":F(3,4),"p":"noun","r":3,"d":1},
+    "velocity":    {"a":F(1,2),"i":F(1,4),"t":F(1,4),"c":F(1,2),"p":"noun","r":3,"d":1},
+    "acceleration":{"a":F(1,2),"i":F(1,4),"t":F(1,4),"c":F(1,2),"p":"noun","r":3,"d":1},
+    "torque":      {"a":F(3,4),"i":F(1,4),"t":F(1,2),"c":F(1,4),"p":"noun","r":3,"d":1},
+    "power":       {"a":F(3,4),"i":F(1,4),"t":F(1,2),"c":F(1,4),"p":"noun","r":3,"d":1},
+    "momentum":    {"a":F(3,4),"i":F(1,4),"t":F(1,2),"c":F(1,2),"p":"noun","r":3,"d":1},
+    "water":       {"a":1,  "i":1,  "t":F(3,4),"c":1,  "p":"noun","r":4,"d":0},
+    "electron":    {"a":F(1,2),"i":1,  "t":1,  "c":F(1,2),"p":"noun","r":4,"d":0},
+    "gravity":     {"a":F(1,4),"i":1,  "t":1,  "c":F(1,4),"p":"noun","r":4,"d":0},
+    "light":       {"a":F(1,2),"i":1,  "t":F(1,2),"c":F(1,2),"p":"noun","r":3,"d":0},
+    "heat":        {"a":F(3,4),"i":1,  "t":F(1,4),"c":F(3,4),"p":"noun","r":3,"d":0},
+    "temperature": {"a":F(3,4),"i":1,  "t":F(1,2),"c":F(3,4),"p":"noun","r":3,"d":0},
+    "charge":      {"a":F(3,4),"i":1,  "t":1,  "c":F(3,4),"p":"noun","r":3,"d":0},
+    "heavy":       {"a":F(3,4),"i":1,  "t":F(3,4),"c":1,  "p":"adjective","r":2,"d":0},
+    "fast":        {"a":F(1,2),"i":1,  "t":F(1,4),"c":F(1,2),"p":"adjective","r":2,"d":0},
+    "accelerate":  {"a":F(1,2),"i":1,  "t":F(1,4),"c":F(1,4),"p":"verb","r":2,"d":0},
+    "measure":     {"a":F(1,2),"i":1,  "t":F(1,4),"c":F(1,2),"p":"verb","r":2,"d":0},
 }
 
 def encode_word(name, d):
@@ -168,7 +168,7 @@ def main():
     print("=" * 72)
     print(f"\nY = {coherence.Y_DECIMAL}")
     print(f"Q = Y + 1/8 = {coherence.decimal_str(coherence.Q, 10)}")
-    print(f"B = {float(coherence.B)}")
+    print(f"B = {coherence.decimal_str(coherence.B, 4)}")
 
     # Load all three domains
     physics = load_physics()
@@ -286,7 +286,9 @@ def main():
         ranked.sort(key=lambda x: x[1])
         print("  Rank  Sym  d^2(word,element)    NRCI(element)")
         for i, (sym, d2, n) in enumerate(ranked[:5]):
-            print(f"  {i+1:4d}  {sym:3s}  {float(d2):18.10f}  {coherence.decimal_str(n, 4)}")
+            print(f"  {i+1:4d}  {sym:3s}  "
+                  f"{coherence.decimal_str(d2, 10):>18s}  "
+                  f"{coherence.decimal_str(n, 4)}")
 
     # ── Leech lattice axes: NRCI on physical points ────────────────────
     print("\n" + "=" * 72)

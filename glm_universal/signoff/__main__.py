@@ -43,7 +43,14 @@ from . import ledger as L
 
 
 def _seconds(value: Fraction) -> str:
-    return f"{float(value):.1f}s"
+    """An exact rational of seconds, to one decimal, without a float (D7)."""
+    tenths = (value * 10).__round__()
+    return f"{tenths // 10}.{tenths % 10}s"
+
+
+def _percent(value: Fraction) -> str:
+    """An exact rational of a whole, as a whole percentage, without a float."""
+    return f"{(value * 100).__round__()}"
 
 
 def _jobs(argv: Sequence[str]) -> int:
@@ -76,7 +83,7 @@ def _print_plan(full: bool = False) -> int:
           f"{saving['stale']} to run")
     print(f"  expected: {_seconds(saving['seconds_to_run'])} instead of "
           f"{_seconds(saving['seconds_full_run'])} "
-          f"({float(saving['fraction_saved']) * 100:.0f}% saved)")
+          f"({_percent(saving['fraction_saved'])}% saved)")
     if saving["units_without_timing"]:
         print(f"  no recorded timing for: "
               f"{', '.join(saving['units_without_timing'])}")
@@ -94,7 +101,7 @@ def _print_plan(full: bool = False) -> int:
           f"signed off; {check_saving['stale']} to run")
     print(f"  expected: {_seconds(check_saving['seconds_to_run'])} instead of "
           f"{_seconds(check_saving['seconds_full_run'])} "
-          f"({float(check_saving['fraction_saved']) * 100:.0f}% saved)")
+          f"({_percent(check_saving['fraction_saved'])}% saved)")
 
     print()
     whole = saving["seconds_full_run"] + check_saving["seconds_full_run"]

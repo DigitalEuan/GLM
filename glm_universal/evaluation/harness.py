@@ -99,7 +99,7 @@ class CaseResult:
     answer: str
     refused: bool
     stopped_at: str
-    seconds: float
+    milliseconds: int
 
     @property
     def passed(self) -> bool:
@@ -129,6 +129,17 @@ def _answer_line(stdout: str) -> Tuple[str, bool]:
     return answer, refused
 
 
+def _seconds_text(milliseconds: int) -> str:
+    """Integer milliseconds as seconds to one decimal, without a float.
+
+    The elapsed time is measured with :func:`time.monotonic_ns`, so it is an
+    exact integer of nanoseconds throughout; this renders it for a human
+    without ever constructing a floating-point number (directive D7).
+    """
+    tenths = (int(milliseconds) + 50) // 100
+    return f"{tenths // 10}.{tenths % 10}"
+
+
 def _missing(case: EvalCase, answer: str) -> List[str]:
     lowered = answer.lower()
     missing = [want for want in case.contains if want.lower() not in lowered]
@@ -137,11 +148,11 @@ def _missing(case: EvalCase, answer: str) -> List[str]:
     return missing
 
 
-def run_case(case: EvalCase, timeout: float = 300.0) -> CaseResult:
+def run_case(case: EvalCase, timeout: int = 300) -> CaseResult:
     """Run one case in a fresh interpreter and score it."""
     env = dict(os.environ)
     env["PYTHONPATH"] = str(PACKAGE_ROOT)
-    started = time.time()
+    started = time.monotonic_ns()
     try:
         proc = subprocess.run(
             [sys.executable, str(CLI_PATH), "-q", case.question,
@@ -154,9 +165,9 @@ def run_case(case: EvalCase, timeout: float = 300.0) -> CaseResult:
             id=case.id, kind=case.kind, question=case.question,
             expect=case.expect, classification=case.classification,
             outcome="error", returncode=-1, answer="", refused=False,
-            stopped_at=f"timed out after {timeout:g}s",
-            seconds=time.time() - started)
-    seconds = time.time() - started
+            stopped_at=f"timed out after {timeout}s",
+            milliseconds=(time.monotonic_ns() - started) // 1_000_000)
+    milliseconds = (time.monotonic_ns() - started) // 1_000_000
     answer, refused = _answer_line(stdout)
 
     if code not in (0, 1) or "Traceback (most recent call last)" in stderr:
@@ -165,14 +176,15 @@ def run_case(case: EvalCase, timeout: float = 300.0) -> CaseResult:
             id=case.id, kind=case.kind, question=case.question,
             expect=case.expect, classification=case.classification,
             outcome="error", returncode=code, answer=answer, refused=refused,
-            stopped_at=f"exit {code}: {tail}", seconds=seconds)
+            stopped_at=f"exit {code}: {tail}",
+            milliseconds=milliseconds)
     if not answer:
         return CaseResult(
             id=case.id, kind=case.kind, question=case.question,
             expect=case.expect, classification=case.classification,
             outcome="error", returncode=code, answer="", refused=False,
             stopped_at="the CLI printed neither an answer nor a refusal",
-            seconds=seconds)
+            milliseconds=milliseconds)
 
     if case.expect == "refusal":
         if refused:
@@ -197,11 +209,11 @@ def run_case(case: EvalCase, timeout: float = 300.0) -> CaseResult:
         id=case.id, kind=case.kind, question=case.question,
         expect=case.expect, classification=case.classification,
         outcome=outcome, returncode=code, answer=answer, refused=refused,
-        stopped_at=stopped, seconds=seconds)
+        stopped_at=stopped, milliseconds=milliseconds)
 
 
 def run_all(cases: Sequence[EvalCase] = CASES, jobs: int = 4,
-            timeout: float = 300.0) -> Tuple[CaseResult, ...]:
+            timeout: int = 300) -> Tuple[CaseResult, ...]:
     """Run every case, in parallel processes, and return the results in order."""
     if jobs <= 1:
         return tuple(run_case(case, timeout) for case in cases)
@@ -210,9 +222,9 @@ def run_all(cases: Sequence[EvalCase] = CASES, jobs: int = 4,
 
 
 def evaluation_report(cases: Sequence[EvalCase] = CASES, jobs: int = 4,
-                      timeout: float = 300.0) -> Dict[str, object]:
+                      timeout: int = 300) -> Dict[str, object]:
     """Run the whole set and summarise it: totals, per kind, every failure."""
-    started = time.time()
+    started = time.monotonic_ns()
     results = run_all(cases, jobs=jobs, timeout=timeout)
     counts = {outcome: 0 for outcome in OUTCOMES}
     for result in results:
@@ -254,7 +266,7 @@ def evaluation_report(cases: Sequence[EvalCase] = CASES, jobs: int = 4,
             if r.expect == "refusal" and r.classification == "gap"),
         "failures": [r.as_dict() for r in failures],
         "results": [r.as_dict() for r in results],
-        "seconds": round(time.time() - started, 1),
+        "milliseconds": (time.monotonic_ns() - started) // 1_000_000,
     }
 
 
@@ -292,7 +304,7 @@ def format_report(report: Mapping[str, object]) -> str:
     lines.append(
         f"expected refusals: {report['expected_refusals_boundary']} boundary, "
         f"{report['expected_refusals_gap']} gap")
-    lines.append(f"ran in {report['seconds']}s")
+    lines.append(f"ran in {_seconds_text(report['milliseconds'])}s")
     return "\n".join(lines)
 
 

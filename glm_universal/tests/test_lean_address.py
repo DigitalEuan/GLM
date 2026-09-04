@@ -350,8 +350,10 @@ class TestEveryCitedTheoremExists(unittest.TestCase):
     theorem cited under a namespace it does not live in.
     """
 
-    #: ``GLM.py`` is the command line script, not a Lean name.
-    IGNORED = {"GLM.py"}
+    #: ``GLM.py`` is the command line script, and ``GLM.lean`` is a file in
+    #: the supplied archive that ``salvage.py`` names as a source; neither is a
+    #: citation of a declaration.
+    IGNORED = {"GLM.py", "GLM.lean"}
 
     #: This file deliberately cites names that do not exist, to check that
     #: they are refused, and is therefore excluded from its own audit.

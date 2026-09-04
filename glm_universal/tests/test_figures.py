@@ -404,6 +404,34 @@ class TestDocumentationQuotesCurrentFigures(unittest.TestCase):
             "130 cases", "130 CLI cases", "130-case",
             "2,847 tests", "2,847 collected tests", "10,985 subtests",
             "96 modules", "48 reasoning modules",
+            # Retired in v5.20, when the supplied archive was read to the end:
+            # 25 files of Lean came back, the corpus went from 1,270
+            # declarations across 48 files to 2,118 across 73, and
+            # `test_retrieved_lean.py` made the sixty-third test file.
+            "48 Lean files", "62 test files", "1,270 declarations",
+            "2,872 tests", "2,872 collected tests", "11,665 subtests",
+            "13,826 lines",
+            # Retired in v5.21, when the work that had been dropped from the
+            # delivered tree was restored: 22 Lean files and nine test files
+            # came back, the corpus went from 2,118 declarations across 73
+            # files to 2,764 across 95, `report searchloop` made the
+            # forty-ninth report subject and the evaluation's
+            # hundred-and-thirty-second case, and the reasoning package went
+            # from 49 modules to 57.
+            "48 report subjects", "63 test files", "73 Lean files",
+            "131 cases", "131 CLI cases", "131-case",
+            "2,880 tests", "2,880 collected tests", "11,814 subtests",
+            "102 modules", "49 reasoning modules", "20,996 lines",
+            # Retired in v5.22, when the address book was made to do work:
+            # `report retrieval` and `report controller` are the fiftieth and
+            # fifty-first report subjects and the evaluation's hundred and
+            # thirty-third and hundred and thirty-fourth cases, two Lean files
+            # and two test files came with them, and the reasoning package
+            # went from 57 modules to 59.
+            "49 report subjects", "72 test files", "95 Lean files",
+            "132 cases", "132 CLI cases", "132-case",
+            "3,096 tests", "3,096 collected tests", "12,119 subtests",
+            "110 modules", "57 reasoning modules", "27,548 lines",
         )
         documents = [
             "README.md", "MASTER_PLAN.md", "CAPABILITY_ASSESSMENT.md",

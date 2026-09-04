@@ -154,11 +154,11 @@ development both ways and compares the points.
 
 | figure | value |
 |---|---|
-| declarations decoded both ways | **1,270** |
-| addresses unchanged | **1,270** |
+| declarations decoded both ways | **2,118** |
+| addresses unchanged | **2,118** |
 | addresses changed | **0** |
-| codeword costs formed per call, on this population | `9600/127` ≈ **75.6** |
-| classes opened per call | `300/127` ≈ **2.36** |
+| codeword costs formed per call, on this population | `78080/1059` ≈ **73.7** |
+| classes opened per call | `2440/1059` ≈ **2.30** |
 
 Beside it, `agreement_report()` compares the two routes point for point —
 point, squared distance, Leech class, norm, `exact_hit` and `is_2a_axis` — over

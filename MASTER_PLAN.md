@@ -1,13 +1,39 @@
 # Master plan: wiring status
 
+> ### Positioning — read this before starting a round
+>
+> **We are not claiming that the lattice generates the universe.** The claim is
+> narrower, and it is testable: there is an *exact* substrate — the Golay code,
+> the Leech lattice and the arithmetic on them, integer and `Fraction` exact
+> throughout (D7) — and reality maps onto it with unusual fidelity, measured
+> against a control every time it is asserted.
+>
+> The **Geometric Language Machine** is the experimental implementation of that
+> mapping. Can language, mathematics and program text be mapped onto the Leech
+> lattice using the Golay code and the other systems built here? Can the GLM
+> reason with what that mapping gives it? Can it be generative, and solve
+> problems, and return results that are real, accurate and checkable?
+>
+> Some of what the substrate holds is hidden by the layer it is read at. Every
+> carrier here is a **projection at a stated resolution** — the 24-bit word, the
+> syndrome, the MOG cell, the Leech point, the shell — so a correspondence that
+> is invisible at one layer can be exact one layer up. **Check a claim from
+> several layers and resolutions before calling it absent.**
+> [`studies/COMBINER_STUDY.md`](studies/COMBINER_STUDY.md) and
+> [`studies/INFORMATION_LOSS_STUDY.md`](studies/INFORMATION_LOSS_STUDY.md)
+> measure what each step down actually discards.
+>
+> The full note, with what follows from it in practice, is
+> [`POSITIONING.md`](POSITIONING.md).
+
 This document tracks the plan to fully wire the Geometric Language Machine,
 eliminate the architectural simplifications, and implement multi-resolution
 addressing. Each item says what was built, where it lives, and how to see it
 recompute itself.
 
 Everything below is reachable from the package's public API and from the query
-runtime — **21 query kinds**, **48 report subjects** and **8 registers** — is
-covered by the test suite (62 test files),
+runtime — **21 query kinds**, **51 report subjects** and **8 registers** — is
+covered by the test suite (74 test files),
 and — where it is a report or a task — has a generated column-3 script that
 recomputes the claim in a **fresh interpreter** and fails if anything differs.
 
@@ -55,14 +81,18 @@ The archive also holds three interstitial sections written between phases:
 *Directive — multi-resolution Leech addressing*, *A task for the system* and
 *Runtime surface added*.
 
-Phases 14–24 below are closed. **Phase 25 is proposed and is where the next
-round starts** — not a fourth shape family, but the three candidates the closed
+Phases 14–27 below are closed. **Phase 28 is proposed and is where the next
+round starts** — not a fourth shape family, but the two candidates the closed
 rounds have left standing: the Niemeier deep holes classified from a trajectory
-distribution, the semantic half of the analogy, and a stability measurement
-under declared exact perturbation. It is §3.4 of [`STATUS.md`](STATUS.md); the
-item that used to stand there — the `O(1)` LLVQ lookup table — is Phase 24,
-closed below, and the one before it — the four undescribed parts of the
-described question kinds — is Phase 23.
+distribution, and the semantic half of the analogy. The third that used to
+stand with them, a stability measurement under declared exact perturbation, was
+closed by Phase 26. It is §3.4 of [`STATUS.md`](STATUS.md). Phase 27, closed
+below, took neither candidate but the question underneath them: whether the
+substrate can do work rather than hold a table — retrieval, and steering a
+loop. Before it are the restoration and the archive's second reading (Phase
+26), reading the supplied archive to the end (Phase 25), the `O(1)` LLVQ lookup
+table (Phase 24) and the four undescribed parts of the described question kinds
+(Phase 23).
 
 ---
 
@@ -1235,7 +1265,228 @@ RequestProject.GLM.LLVQTable`.
 
 ---
 
-## Phase 25 — the three candidates that are left
+## Phase 25 — the archive, read to the end
+
+**Status: closed.**
+
+The supplied archive `source_material/GLM-main.zip` had never been read all the
+way down. Phases 1–24 took what the running system needed from it; this phase
+went through the parts the brief named — `glm_machine`, the two `light/`
+calibration rounds, `leech_lattice`, the two `data_object/` encoding attempts,
+`FirstPrinciples`, `mog_cube_1`, `Projection`, `GMHGL`, the earlier `glm_lean`
+iterations and `arc_agi_15` — and asked one question of each: **is there a
+claim here that can be stated as a theorem and checked?**
+
+### 25.1 What came back
+
+**25 files of Lean, 7,170 lines, 848 declarations**, all building against the
+pinned Mathlib with no `sorry` and all mirrored in `overlay/glm_lean/`. The
+per-file account is
+[`studies/RETRIEVED_LEAN_STUDY.md`](studies/RETRIEVED_LEAN_STUDY.md) §2; the
+groups are the MOG cube (`Cube/`, five files: the surface identification, the
+hexacode tiling, the stabiliser test, the price list and the three-cube
+proposal), the lattice shortcut (`Shortcut/`, eight files: the Golay code, its
+weight enumerator, a complete decoder, the Gray layer, the Leech step, the
+corrected pipeline and two audits of the published directory), the three
+generations of the paper's formal companion (`Foundations.lean`, `Gen2.lean`,
+`Gen3.lean`), the electromagnetic calibration (`Calibration.lean`,
+`AlignmentPoints.lean`), the first-principles sub-study (`FitCapacity.lean`,
+`Packing.lean`, `Triad.lean`), the projection sub-study (`SeedLayers.lean`),
+the graded cost model (`StepCost.lean`), spatial arithmetic
+(`SpatialArithmetic.lean`) and the ARC-era reasoning loop
+(`ReasoningLoop.lean`).
+
+### 25.2 Nine of the twenty-five are negative results
+
+That is the part of the retrieval that could not have been had by leaving the
+material in the archive, because a refuted claim in a script is
+indistinguishable from an unexamined one. The calibration chain returns the `c`
+it was given; `3, 6, 9` is produced by any three-element set; what a binary
+substrate forces is 23 and not 24; the three-cube rules give a `[24,12,4]`
+code that no relabelling repairs; the published directory's "even
+quantisation" is true by construction; the substrate's `snap_to_codeword` is
+not a decoder; consecutive integers are never a "geodesic jump"; the electron
+mass point's error is 0.0090–0.0093 % and not the quoted 0.007 %; and
+`FitCapacity.lean` is the instrument that says how much a numerical agreement
+could have been worth in the first place.
+
+### 25.3 What it moved, and what it did not
+
+The end-to-end evaluation returns the same **131 / 131** with the same 16
+boundary refusals, and the benchmarks and probes are unmoved: the retrieval is
+additive to what is *proved*, not to what is answered. The Lean corpus went
+from 1,270 declarations across 48 files to **2,118 across 73**, so
+`studies/LEAN_ADDRESS_STUDY.md` was re-measured against the code rather than
+patched — and the separation signal rose, to 13.2 times chance on the file test
+(from 12.3) and 15.0 on the citation test (from 9.6), on a corpus two thirds
+larger.
+
+*What recomputes it:* `lake build`, the sorry scan, the two-copy diff,
+`tests/test_retrieved_lean.py` (which re-derives every line count and
+declaration count the study states, and fails if a cited theorem is renamed),
+`PYTHONPATH=. python3 -m glm_universal.tools lean-address` and
+`PYTHONPATH=. python3 GLM.py -q "report lean" --verify-tct`.
+
+---
+
+## Phase 26 — the dropped work, restored, and the archive's second reading
+## closed
+
+**Status: closed.**
+
+The tree handed over at the end of Phase 25 was missing part of what that phase
+had produced: Lean files, their test files and several study documents had not
+survived the handover. `dropped.zip` at the repository root is what came back,
+and nothing in it was taken on trust — every Lean file was rebuilt against the
+pinned Mathlib, every figure its tests pin was recomputed from the substrate,
+and the two copies of the Lean tree were diffed.
+
+### 26.1 Where the development stands
+
+**95 files of Lean, 27,548 lines, 2,764 parsed declarations**, no `sorry`, both
+copies byte-identical — against 73 files and 2,118 declarations at the close of
+Phase 25. The suite was **72 files of tests** at the close of this phase; for
+the project as it is now see [`overlay/FIGURES.md`](overlay/FIGURES.md).
+
+### 26.2 The archive's second reading
+
+Eight further results, written up in
+[`studies/SOURCE_SALVAGE_SECOND_PASS.md`](studies/SOURCE_SALVAGE_SECOND_PASS.md):
+the cube surface as the MOG grid, the read quantum as an operator, the Gray
+jump norm, the ARC grid metrics as interval bounds (`GridTension.lean`), the
+conditional lobe, the mode algebra, the free cube symmetries
+(`Cube/Stabiliser.lean`) and the parity count that caps them at 24
+(`Golay/CubeMirror.lean` — the one Lean file of this phase written new rather
+than restored). The two questions the first reading left open are answered
+**no** in
+[`studies/ARCHIVE_DEEP_DIVE_STUDY.md`](studies/ARCHIVE_DEEP_DIVE_STUDY.md): the
+archive's 44 balanced octads barely exceed what a null census of all 735,471
+eight-subsets predicts, and are not even invariant under relabelling; and its
+relaxation reaches the code but not the nearest codeword, so it is not a
+decoder. [`studies/SOURCE_SALVAGE_AUDIT.md`](studies/SOURCE_SALVAGE_AUDIT.md)
+is the first reading's own write-up, restored in the same way.
+
+### 26.3 The stability measurement, which closes one Phase 27 candidate
+
+`reasoning/stability.py` against `RequestProject/GLM/Stability.lean`: the two
+certificates checked in exact rational arithmetic with no square root, the
+sharp radius as the least distance to a bisector, and past it a perturbation
+*built* rather than asserted. The addresses at radius zero are exactly the
+nearest-point ties, and what breaking them by index costs is
+[`studies/TIE_BREAK_STUDY.md`](studies/TIE_BREAK_STUDY.md).
+
+### 26.4 The rules made checkable
+
+`reasoning/exactness.py` and `tests/test_exactness.py` turn D7 and D9 into a
+machine-checked inventory: every site in the package where a float could be
+constructed, every cryptographic digest, and every XOR use is declared, and the
+suite fails both when an undeclared site appears and when a declared one stops
+existing. `tests/test_number_theory_evidence.py` does the same for
+[`studies/GLM_Complete_Number_Theory_Evidence.md`](studies/GLM_Complete_Number_Theory_Evidence.md),
+re-running the generators the paper names and comparing its tables and its
+worked transcript cell by cell.
+
+### 26.5 What moved in the runtime
+
+`report searchloop` is the **49th report subject** and the evaluation's
+**132nd** case; the end-to-end set was **132 / 132** with the same 16 boundary
+refusals. The reasoning package went from 49 modules to **57**. The address
+book was regenerated over the larger corpus and
+[`studies/LEAN_ADDRESS_STUDY.md`](studies/LEAN_ADDRESS_STUDY.md) re-measured
+rather than patched: **2,764 / 2,764 read back exactly, 0 coordinate errors**,
+2,426 distinct addresses, nearest-by-address sharing a file **560 / 2,764**
+against 37 for the digest control and 23 for the seeded reshuffle, with chance
+at `8878/636411`. Phase 27 re-measured all of it again over the larger corpus.
+
+---
+
+## Phase 27 — the address book made to do work, and the first loop
+
+**Status: closed.**
+
+Two faculties the substrate had never been asked for, each measured against
+controls and each answered in a way that constrains the claim rather than
+flattering it.
+
+### 27.1 Retrieval, against six controls
+
+`reasoning/retrieval.py` turns the address book into an index and measures it
+over **202** stride-selected queries of the **2,826**-declaration corpus, with
+chance computed in closed form. A hit is a *relative* — same file, or joined by
+a citation — and neither relation appears in any feature map, so "the
+neighbours are relatives" is a prediction that can fail.
+
+* The address is a real index: hit@5 **51.5 %** against **6.9 %** chance
+  (**7.4×**), beating the digest (3.5 %), the seeded reshuffle (6.9 %), the
+  random ranking (5.9 %) and name-substring search (34.2 %).
+* And it is beaten decisively by plain text: Jaccard overlap of identifier
+  tokens reaches **85.6 %** at **57.7 %** precision@5, against the address's
+  15.5 %.
+* The lattice is not what carries the signal: the same features with **no
+  quantisation at all** score **51.0 %**, and a lexical address built from
+  identifiers reaches **64.9 %** — better than the structural address, still
+  twenty one points behind the text control. The limit is the projection to 24
+  capped integers, not the choice of what to put in them.
+* An address shortlist does not make the text search cheaper for free: 800
+  candidates (28.3 % of the corpus) give 85.1 %, and 1.8 % of the corpus gives
+  69.8 %.
+
+### 27.2 What the geometry does earn: an exact guarantee
+
+`RequestProject/GLM/Retrieval.lean` proves the completeness bound behind the
+shortlist, and `filterRadius_eq_nil_certifies_absence` is why an empty
+shortlist is a *proof* of absence. Measured: **144,075** pairs, **0**
+violations; at feature radius 2 the guaranteed-complete shortlist is **70.9**
+declarations — **2.5 %** of the corpus — containing all **16.8** feature-close
+declarations on average.
+
+### 27.3 The loop: propose, check, refuse
+
+`reasoning/controller.py` builds a physical quantity out of the ten EXT10
+generators one factor at a time — twenty moves, a stated tie-break order, the
+state compared to the target exactly. Every plan any scorer returned was
+re-verified end to end by `verifier.verify_expression_pair` through the digit
+stack: **100 %**, under every scorer, by an instrument that did not build it.
+
+Two refusals, and only one is a budget. `Controller.unreachable_of_invariant`
+refuses **127 of the register's 726** quantities *with a proof* — an invariant
+no move can change — with no node expanded; and `Controller.beam_can_miss` is a
+kernel-decided witness that a width-one loop steered by an inexact heuristic
+can miss a plan that exists, which is why a failed search is a refusal and
+never an answer. `Controller.exists_descent` is the complement: steered by the
+exact distance the loop never backtracks.
+
+### 27.4 Can the substrate steer? Yes, and no better than the features
+
+On the 24 reachable tasks the Leech-address scorer solves **18**, against **8**
+for no guidance and **12** for a scorer that knows nothing about the target —
+so the geometry does real work here, which is more than it managed in the
+retrieval experiment. The same distance measured **without** the lattice solves
+**17**, one behind and with a better minimality record; and decoded at the
+register's own resolution (scale 1 rather than 9) the address scorer falls to
+exactly the no-guidance **8**, proposal for proposal, which is what the
+read-back bound of `Address.lean` predicts. Scoring by address costs about
+twenty milliseconds a state against microseconds for counting exponents.
+
+### 27.5 What moved in the runtime
+
+`report retrieval` and `report controller` are the **50th** and **51st** report
+subjects and the evaluation's 133rd and 134th cases; the end-to-end set is
+**134 / 134** with the same 16 boundary refusals. Two Lean files
+(`Retrieval.lean`, `Controller.lean`) and two test files
+(`test_retrieval.py`, `test_controller.py`) came with them.
+
+*What recomputes it:* `lake build`, the sorry scan, the two-copy diff,
+`tests/test_retrieval.py`, `tests/test_controller.py`, and
+`PYTHONPATH=. python3 GLM.py -q "report retrieval" --verify-tct` and
+`"report controller" --verify-tct`, whose third column re-derives every figure
+in a fresh interpreter. Write-ups:
+[`studies/ADDRESS_RETRIEVAL_STUDY.md`](studies/ADDRESS_RETRIEVAL_STUDY.md) and
+[`studies/CONTROLLER_STUDY.md`](studies/CONTROLLER_STUDY.md).
+
+---
+
+## Phase 28 — the two candidates that are left
 
 **Status: proposed. This is where the next round starts.**
 
@@ -1244,9 +1495,9 @@ turned a domain, then a question, then the parts of a question into
 descriptions, and the language layer has reached the point its own measurement
 says it should stop at: the thirteen remaining kinds are not shapes, and
 forcing them would make the coverage figure meaningless. So the next round is
-**not** a fourth shape family, and it is not the LLVQ table either — that is
-Phase 24, closed above. Three candidates stand, in the order they are worth
-attempting:
+**not** a fourth shape family; it is not the LLVQ table (Phase 24), the archive
+retrieval (Phase 25) or the address layer made to work (Phase 27), all closed
+above. Two candidates stand, in the order they are worth attempting:
 
 1. **The Niemeier deep holes, found rather than tabulated.** The last purely
    geometric item on the list, and the brief's third experiment: whether the
@@ -1261,10 +1512,12 @@ attempting:
    read off the registers rather than off the coordinates. The analogy shape is
    described now, so what is missing is the *semantic* half, and it is testable
    against the evaluation cases that already exist.
-3. **A stability measurement under declared exact perturbation.** Every figure
-   in the project is exact by directive D7, and the question that has never
-   been asked is how far an address moves when its input is perturbed by a
-   declared exact amount. Phase 24 makes it cheap for the first time.
+3. **A stability measurement under declared exact perturbation — closed by
+   Phase 26.** Every figure in the project is exact by directive D7, and the
+   question that had never been asked was how far an address moves when its
+   input is perturbed by a declared exact amount. `reasoning/stability.py` and
+   `Stability.lean` answer it, and the nearest-point ties they expose are
+   [`studies/TIE_BREAK_STUDY.md`](studies/TIE_BREAK_STUDY.md).
 
 Whichever is taken, the discipline is that of Phases 20–24: the thing must be
 *described* or *measured* rather than asserted, what does not generalise must

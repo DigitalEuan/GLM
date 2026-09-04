@@ -488,6 +488,30 @@ CASES: Tuple[EvalCase, ...] = (
        note="The standing rules parsed out of PROJECT_DIRECTIVES.md, with "
             "the instrument each one names checked to exist in the tree "
             "rather than assumed."),
+    _c("report-searchloop", "report", "report searchloop",
+       "answer", contains=("51/32", "filter"),
+       note="The archive's reasoning loop -- filter on every example, then "
+            "rank -- measured on the eight symmetries of the square over "
+            "the 512 binary 3 x 3 grids: what one example leaves, what a "
+            "second buys, and the witness that refutes ranking first."),
+    _c("report-controller", "report", "report controller",
+       "answer", contains=("propose-check-refuse", "re-verified",
+                           "refused outright"),
+       note="The multi-step loop: derive a physical quantity from the ten "
+            "EXT10 generators one factor at a time, with the digit-stack "
+            "verifier checking every finished plan and an invariant refusing "
+            "the unreachable targets outright.  Six scorers on the same "
+            "tasks, one of them the Leech address."),
+    _c("report-retrieval", "report", "report retrieval",
+       "answer", contains=("used as an index", "times the closed-form",
+                           "beaten decisively"),
+       note="The address book used as an index: does address-nearest "
+            "retrieval find the relatives of a query, and how does it "
+            "compare against a digest, a reshuffle, a random ranking, "
+            "chance, a name search and a plain lexical search?  It beats "
+            "every control except the last, which beats it decisively, and "
+            "what the lattice earns is the completeness bound rather than "
+            "the ranking."),
     _c("report-pipeline", "report", "report pipeline",
        "answer", contains=("six stages",),
        note="Study to test to implemented to measured: the stage each "

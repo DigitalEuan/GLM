@@ -1,6 +1,6 @@
 # `glm_universal` — GLM-3+, the Universal MOG-Cube Geometric Language Machine
 
-**Version:** 1.14.0
+**Version:** 1.15.0
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand
 **Parent:** [`../README.md`](../README.md)
 
@@ -21,23 +21,23 @@ a `*_report` function rather than quoted.
 |---|---|---|---|
 | 1 | `substrate/` — linalg, MOG, Leech, digit stack, Golay decoding, Leech construction, the legacy↔core isomorphism, superposition, and the two rungs above 24 dimensions (`lattice32`, `lattice48`) | 272 | ✓ complete |
 | 2 | `data_objects/` — physics (**726 quantities**), chemistry (118 elements + 52 diatomics), **51 molecules**, mathematics (22), semantic lexicon (95), spatial (28), **45 comparison classes** | 237 | ✓ complete |
-| 3 | `reasoning/` — **49 modules**: product, metric, analogy, analogy_models, periodic_table, verifier, coherence, dimension_layers, information_loss, element_coverage, units, term_arithmetic, facets, monster_stack, multires, tasks, moonshine, niemeier, llvq, llvq_table, fwht, fwht_decode, voronoi_walk, deep_holes, valorani, exact_real, real_expr, transcendental, blueprint, engine, mantissa, reversible, noise_lab, wobble, drift, catalog, containers, companion, higher_lattices, shell_sigma, harmony, lean_address, directives, pipeline, measure_view, denotation_view, economics, escalation, name_coordinate | 1,466 | ✓ complete |
+| 3 | `reasoning/` — **49 modules**: product, metric, analogy, analogy_models, periodic_table, verifier, coherence, dimension_layers, information_loss, element_coverage, units, term_arithmetic, facets, monster_stack, multires, tasks, moonshine, niemeier, llvq, llvq_table, fwht, fwht_decode, voronoi_walk, deep_holes, valorani, exact_real, real_expr, transcendental, blueprint, engine, mantissa, reversible, noise_lab, wobble, drift, catalog, containers, companion, higher_lattices, shell_sigma, harmony, lean_address, directives, pipeline, measure_view, denotation_view, economics, escalation, name_coordinate | 1,474 | ✓ complete |
 | 3½ | `semantics/` — the meaning space, reference resolution, derived relations, the grounded graph, the audit of the inherited concept graph | 59 | ✓ complete |
 | 3¾ | `recipe/` — the recipe made into an object: a declarative **domain description**, the 25 shared primitives one is written in, and the single generic path from a description to the carriers, the readings, the widening audit, the query surface and the refusal boundary. Three domains built by hand in earlier rounds are described and regenerated from their descriptions alone | 87 | ✓ complete |
 | 3⅞ | `language/` — the question shape made into an object: a declarative **question description** (an opening, named slots, the literal words that separate them, an optional tail, a described preamble and named refusal boundaries) plus a second **infix** form (an operator that cuts a string, for operands that are notations), and the two generic matchers that read them. Three of the runtime's query kinds are read off their descriptions with the hand-written branches deleted, three more are described and measured against the branches they have not yet replaced | 90 | ✓ complete |
-| 4 | `runtime/` — parser, session, TCT engine, and the `GLM.py` CLI; **21 query kinds**, **48 report subjects**, 8 registers | 320 | ✓ complete |
+| 4 | `runtime/` — parser, session, TCT engine, and the `GLM.py` CLI; **21 query kinds**, **51 report subjects**, 8 registers | 320 | ✓ complete |
 | 5 | `migration/` — the literal migration of the repository's stored state into canonical form | 64 | ✓ complete |
 | 6 | `benchmarks/` — 5 suites, 2,390 scored tasks, published baselines and findings | 67 | ✓ complete |
 | 7 | `capabilities/` — 33 capability probes: what the machine can do, and the exact place each thing it cannot do stops | 56 | ✓ complete |
-| 8 | `evaluation/` — **130** end-to-end CLI cases over all 21 query kinds and all 48 report subjects, each in a fresh interpreter, scored with a refusal worth more than a confident wrong answer | 20 | ✓ complete |
-| 9 | `signoff/` — the sign-off ledger over 62 test files and 7 instruments, with `integrity.py` (the one place a digest is computed) and `tools.py` (the command line for the study instruments) beside it, and the guards on the generated figures and the derived-artefact layer (`figures.py`, `derived.py`) | 118 | ✓ complete |
+| 8 | `evaluation/` — **134** end-to-end CLI cases over all 21 query kinds and all 51 report subjects, each in a fresh interpreter, scored with a refusal worth more than a confident wrong answer | 20 | ✓ complete |
+| 9 | `signoff/` — the sign-off ledger over 74 test files and 7 instruments, with `integrity.py` (the one place a digest is computed) and `tools.py` (the command line for the study instruments) beside it, and the guards on the generated figures and the derived-artefact layer (`figures.py`, `derived.py`) | 118 | ✓ complete |
 | — | `examples/` — TCT demo, reasoning showcase, encoding POC, integrated NRCI, scaled carriers, semantic replacement | — | ✓ working |
 
 The **Tests** column is the number of tests in the test files that cover
-that package; the eleven rows partition the 62 test files, so the column adds
+that package; the eleven rows partition the 74 test files, so the column adds
 to the total below.
 
-**Total: 2,872 tests across 61 of the 62 test files, 11,665 subtests, outside the document check, zero failures.**
+**Total: 3,163 tests across 73 of the 74 test files, 12,838 subtests, outside the document check, zero failures.**
 
 Per-file counts and what each file checks are in
 [`tests/README.md`](tests/README.md); every count quoted anywhere in the
@@ -314,13 +314,13 @@ standing rules made into instruments.
   the visit frequencies to the Boltzmann weights inside the proved bound
   `(m−1)/N`, with no random number drawn.
 - `reasoning/lean_address.py`, wired as `report lean`: every one of the
-  **1270** declarations of the Lean development gets a deterministic Leech
+  **2764** declarations of the Lean development gets a deterministic Leech
   address computed from 24 integer counts of its statement. Read back exactly
-  **1270/1270** with 0 coordinate errors; 1182 distinct addresses, exactly the
+  **2764/2764** with 0 coordinate errors; 2426 distinct addresses, exactly the
   number of distinct feature vectors, so the quantiser adds no conflation of
-  its own; and nearest-by-address shares a file **386/1270** against 26 for a
-  SHA-256-of-the-name control, 14 for a seeded reshuffle and a chance rate of
-  `1334/53721`.
+  its own; and nearest-by-address shares a file **560/2764** against 37 for a
+  SHA-256-of-the-name control, 23 for a seeded reshuffle and a chance rate of
+  `8878/636411`.
 - `reasoning/escalation.py`, wired as `report escalation`: the layer audit run
   on **1,040 register carriers** rather than the seven of `report information
   loss`. Resolution climbs 415 → 544 → 757 and then stops, every boundary is a
@@ -339,6 +339,109 @@ standing rules made into instruments.
   sign-off ledger that plans a run against recorded dependency digests
   computed from the source with `ast`. `glm_universal/tools.py` is their
   command line, kept out of the core for the same reason.
+
+---
+
+**v1.15.0** — the supplied archive, read to the end.
+
+- The parts of `source_material/GLM-main.zip` the brief named were gone through
+  script by script, and everything in them that could be stated as a theorem
+  was retrieved as Lean: **25 files, 7,170 lines, 848 declarations**, building
+  with no `sorry` — the MOG cube (`Cube/`), the lattice shortcut (`Shortcut/`),
+  the three generations of the paper's formal companion, the electromagnetic
+  calibration, the first-principles and projection sub-studies, the graded cost
+  model, spatial arithmetic and the ARC-era reasoning loop.
+- **Nine of the twenty-five are negative results** — the calibration chain
+  returns the `c` it was given, `3, 6, 9` is generic, the forced number is 23
+  rather than 24, the three-cube rules give a `[24,12,4]` code, the published
+  directory's "even quantisation" is true by construction, the substrate's
+  `snap_to_codeword` is not a decoder, consecutive integers are never a
+  "geodesic jump", the electron-mass point's error bar is corrected, and
+  `FitCapacity.lean` prices such agreements at all.
+- The Lean corpus grew from 1,270 declarations across 48 files to **2,118
+  across 73**, so the address book was rebuilt and
+  `studies/LEAN_ADDRESS_STUDY.md` re-measured against the code: the separation
+  signal rose to 13.2 times chance on the file test and 15.0 on the citation
+  test. Nothing the system answers moved — the end-to-end evaluation is the
+  same **131 / 131** with the same 16 boundary refusals.
+- New: `tests/test_retrieved_lean.py` (the sixty-third test file) and the write-up
+  `studies/RETRIEVED_LEAN_STUDY.md`. `glm_universal.__version__` 1.14.0 →
+  **1.15.0**.
+
+---
+
+**v1.15.0, completed** — the dropped work, restored, and the archive's second
+reading closed.
+
+- The tree handed over at the end of the retrieval round was missing part of
+  what that round had produced. Everything `dropped.zip` holds — Lean files,
+  their test files and several study documents — is back, and **re-verified
+  from the substrate rather than trusted**: the Lean sources build against the
+  pinned Mathlib with no `sorry`, and every figure their tests pin was
+  recomputed. The development stands at **95 Lean files, 27,548 lines, 2,764
+  declarations**, and the two copies of the tree are byte-identical.
+- The archive's **second reading** is eight results — the cube surface as the
+  MOG grid, the read quantum as an operator, the Gray jump norm, the ARC grid
+  metrics as interval bounds, the conditional lobe, the mode algebra, the free
+  cube symmetries, and the parity count that caps them at 24
+  (`Golay/CubeMirror.lean`, the one Lean file written new rather than
+  restored). The two questions the first reading left open are both answered
+  **no**: the archive's 44 balanced octads against a null census of all 735,471
+  eight-subsets, and its relaxation shown to reach the code but not the nearest
+  codeword.
+- New reasoning modules `salvage.py`, `salvage_second.py`, `deep_dive.py`,
+  `search_loop.py`, `combiner.py`, `tie_break.py`, `stability.py` and
+  `exactness.py` (**57 modules**), each with its own test file (**72 test
+  files**, 3,096 tests, 12,119 subtests).
+- `report searchloop` is the **49 report subjects**' newest member and the
+  evaluation's **132 CLI cases**' newest case; the end-to-end set is **132 /
+  132** with the same 16 boundary refusals.
+- The exactness clean-up is finished and enforced by a machine-checked
+  inventory: every float site and every digest in the package is declared, and
+  an undeclared one — or a declared one that has gone — fails the suite.
+- The address book was regenerated over the larger corpus and
+  `studies/LEAN_ADDRESS_STUDY.md` re-measured rather than patched: **2,764 /
+  2,764 read back exactly, 0 coordinate errors**, 2,426 distinct addresses, and
+  nearest-by-address shares a file **560 / 2,764** against 37 for the digest
+  control and 23 for the seeded reshuffle.
+
+---
+
+**v1.15.0, the address layer made to do work** — retrieval, and the first
+loop.
+
+- `reasoning/retrieval.py`, wired as `report retrieval`: the address book used
+  as an index over the Lean corpus and measured against six controls on 202
+  stride-selected queries, with chance in closed form. hit@5 **51.5 %** against
+  **6.9 %** chance; the digest (3.5 %), the seeded reshuffle (6.9 %), the
+  random ranking (5.9 %) and name search (34.2 %) below it, and a plain text
+  search **above** it at 85.6 % with 57.7 % precision@5. The two ablations say
+  the lattice is not what carries the signal: the same features unquantised
+  score 51.0 %, and a lexical address 64.9 %.
+- `RequestProject/GLM/Retrieval.lean`: the completeness bound behind the
+  shortlist — **144,075** measured pairs, **0** violations — under which an
+  empty shortlist is a proof of absence. At feature radius 2 the
+  guaranteed-complete shortlist is 70.9 declarations, 2.5 % of the corpus.
+- `reasoning/controller.py`, wired as `report controller`: propose–check–refuse
+  over the ten EXT10 generators, every returned plan re-verified end to end by
+  `verifier.verify_expression_pair` (**100 %**, every scorer). **127 of 726**
+  register quantities are refused with an invariant proof and no node expanded;
+  the address scorer solves **18 of 24** against 8 unguided and 17 for the same
+  distance without the lattice, and falls to exactly 8 when decoded at scale 1.
+- `RequestProject/GLM/Controller.lean`: the invariant refusal, the
+  exact-distance descent, and the decided witness that a width-one beam can
+  miss a plan that exists.
+- Two new test files, `test_retrieval.py` (42) and `test_controller.py` (25);
+  the reasoning package is **59 modules**; `report retrieval` and `report
+  controller` are the newest of the **51 report subjects** and the newest two
+  of the **134 CLI cases**, and the end-to-end set is **134 / 134** with the
+  same 16 boundary refusals.
+- The address book was regenerated over the 97-file tree: **2826/2826** read
+  back exactly, 0 coordinate errors, 2486 distinct addresses, and
+  nearest-by-address shares a file 578 / 2,826 against 35 for the digest
+  control and 37 for the seeded reshuffle.
+- The write-ups are `studies/ADDRESS_RETRIEVAL_STUDY.md` and
+  `studies/CONTROLLER_STUDY.md`.
 
 ---
 
@@ -381,7 +484,7 @@ search replaced by a lookup.
   `card_parity_class`, `isLeast_of_bounded_search`).
 - The subtractive test: `lean_address.quantise` decodes through the table, the
   scan stays in `analogy.py` as the thing to agree with, and the whole address
-  book comes out unchanged — **1,270 declarations, 0 addresses changed**, with
+  book comes out unchanged — **2,118 declarations, 0 addresses changed**, with
   107 vectors agreeing point for point. The claim is stated as
   **constant-bounded, not constant**: 96.8 codeword costs per call against the
   scan's 8,192, worst case the whole code.
@@ -776,10 +879,10 @@ glm_universal/
 │   ├── probes_language.py     11 probes through grammar, semantics, runtime
 │   └── __main__.py            CLI, with --area and --probe
 ├── evaluation/                ← Step 8: the machine measured from outside
-│   ├── cases.py               the 131 CLI cases, every query kind and report subject
+│   ├── cases.py               the 134 CLI cases, every query kind and report subject
 │   ├── harness.py             run_case, run_all, evaluation_report, the scoring
 │   └── __main__.py            CLI, with --only, --case, --jobs, --json, --list
-├── tests/                     ← 62 test files
+├── tests/                     ← 74 test files
 └── examples/                  ← demonstrations
     ├── demo_tct.py            Three Column Thinking demo (7 queries)
     ├── reasoning_showcase.py  29 probes, refusals included; writes the transcript
@@ -850,7 +953,7 @@ would be a node *of*. 1,705 notations collapse onto 357 meanings joined by
 [`semantics/README.md`](semantics/README.md).
 
 ### The runtime (Step 4)
-**21 query kinds** and **48 report subjects** over **8 registers** — see
+**21 query kinds** and **51 report subjects** over **8 registers** — see
 [`runtime/README.md`](runtime/README.md) for all three tables.
 
 Every query is answered three times (Three Column Thinking):
@@ -898,7 +1001,7 @@ names has an implementation.
    `llvq_table.py` reads the code off the MOG — 16 pattern entries, 64
    hexacode words, 128 classes of 32 — proves the class minimum and the
    bounded search in `RequestProject/GLM/LLVQTable.lean`, and is what
-   `lean_address.quantise` now decodes through: 1,270 corpus addresses
+   `lean_address.quantise` now decodes through: 2,118 corpus addresses
    unchanged, 107 vectors agreeing with the frozen scan point for point.
    What the measurement supports is *constant-bounded*, not constant — 96.8
    codeword costs per call against the scan's 8,192, worst case the whole

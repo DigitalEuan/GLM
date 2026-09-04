@@ -3,7 +3,7 @@
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 
-**Status: implemented (GLM-3+ Step 3, extended since).** **49 modules**, one
+**Status: implemented (GLM-3+ Step 3, extended since).** **59 modules**, one
 frozen data file,
 and a runnable audit. Everything is exact `int` / `fractions.Fraction` /
 `F_2`; nothing here imports `random`; nothing here imports a third-party
@@ -68,6 +68,18 @@ Sections 1–4 below describe these in detail.
 | `directives.py` | `PROJECT_DIRECTIVES.md` read as a live document: each standing rule paired with the instrument that would fail if the rule were broken, and the instrument's presence checked rather than asserted | `report directives` |
 | `pipeline.py` | the study-to-test-to-implemented pipeline, with the stage each piece of work has reached computed from the tree rather than claimed in prose — the instrument for directive D5 | `report pipeline` |
 | `harmony.py` | the musical third of the catalogue's universality claim, tested rather than repeated: the exact rational by which equal temperament misses each of the 28 intervals of the harmonic register, the fifth that never closes (counted here, proved for every `n` in `Harmony.lean`), Kendall's tau between Tenney height and Euler's gradus, and the interval-by-interval Leech decode measured against an undecoded control | `report harmony` |
+| `economics.py` | the economic third of the universality claim: 21 quoted prices as exact rationals, the magnitude bucket decided by integer comparison, and the undecoded control that does as well | `report economics` |
+| `name_coordinate.py` | a coordinate for the declaration's own name, exact integer arithmetic on the name itself, with the resolution ceiling it lifts and the four control coordinates it is measured against | `report names` |
+| `salvage.py` | the first reading of the supplied archive: the eleven results retrieved from it, each recomputed from the substrate and each also a theorem in `RequestProject/GLM/` | (library) |
+| `salvage_second.py` | the second reading: eight further results — the cube surface, the read quantum, the Gray jump, the grid tension bounds, the conditional lobe, the mode algebra, the free cube symmetries and the mirror argument that caps them at 24 | (library) |
+| `deep_dive.py` | the two questions the first reading left open, both answered no: the archive's 44 balanced octads against the null census of all 735,471 eight-subsets, and its relaxation shown to reach the code but not the nearest codeword | (library) |
+| `search_loop.py` | the archive's reasoning loop read as a program space: what the hard gate admits, what the ranking cannot separate, and the loop's soundness, monotonicity and termination | `report searchloop` |
+| `retrieval.py` | the address book used as a retrieval index, and the controls that decide whether it earns the role: eight ranking schemes over the Lean corpus — address, raw features, a lexical address book, a plain text search, a name search, a digest, a seeded reshuffle and a random order — scored against closed-form chance, with the completeness bound of `Retrieval.lean` checked pair by pair | `report retrieval` |
+| `controller.py` | the propose–check–refuse loop: a bounded beam over dimensional derivations from the ten EXT10 generators, six heuristics including two address-guided ones, every returned plan re-verified independently, and two kinds of refusal — exhausted, and unreachable with an invariant proof | `report controller` |
+| `combiner.py` | what XOR is doing here: the sixteen coordinatewise combiners, the eight affine ones the code is closed under, the pigeonhole bound on what a narrow output loses, and the inventory of every XOR site in the package | (library) |
+| `tie_break.py` | what a nearest-point tie is and what breaking it by index costs: the tie classes enumerated, the decoder's rule shown not to be the canonical one, and the read-back shown unchanged either way | (library) |
+| `stability.py` | how far an address may be perturbed before it moves: exact radii and residuals, the two certificates `Stability.lean` states, and the census of the declarations at radius zero | (library) |
+| `exactness.py` | the D7/D9 inventories: every site in the package where a float could be constructed and every cryptographic digest, each declared with its reason, so an undeclared one fails the suite | (library) |
 
 ---
 

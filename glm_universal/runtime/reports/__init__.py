@@ -41,6 +41,7 @@ module                     subjects
 ``semantics``              semantics
 ``migration``              migration, state migration, concept store
 ``development``            lean, directives, pipeline
+``reasoning``              searchloop
 ``recipe``                 recipe
 ``language``               language
 =========================  ==================================================
@@ -59,6 +60,7 @@ from .language import LanguageReports
 from .lattice_geometry import LatticeGeometryReports
 from .ledgers import LedgerReports
 from .migration import MigrationReports
+from .reasoning import ReasoningReports
 from .recipe import RecipeReports
 from .registers import RegisterReports
 from .resolution import ResolutionReports
@@ -79,11 +81,13 @@ REPORT_MIXINS = (
     DevelopmentReports,
     RecipeReports,
     LanguageReports,
+    ReasoningReports,
 )
 
 __all__ = [
     "DevelopmentReports", "LanguageReports", "LatticeGeometryReports",
-    "LedgerReports", "MigrationReports", "RecipeReports", "RegisterReports",
+    "LedgerReports", "MigrationReports", "ReasoningReports", "RecipeReports",
+    "RegisterReports",
     "ResolutionReports", "SemanticsReports", "SignalReports",
     "SubstrateReports", "REPORT_MIXINS",
 ]

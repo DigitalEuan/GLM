@@ -10,6 +10,7 @@ Five documents stay at the repository root; the study write-ups live in
 | document | one line |
 |---|---|
 | [`README.md`](README.md) | the repository's front door: what this is, and where to start reading |
+| [`POSITIONING.md`](POSITIONING.md) | what is being claimed and what is not, and why an absence at one layer is not a refutation |
 | [`STATUS.md`](STATUS.md) | the current state, what is done, what is open, and how to re-verify it |
 | [`MASTER_PLAN.md`](MASTER_PLAN.md) | the current phases of the plan, with what recomputes each item |
 | [`MASTER_PLAN_ARCHIVE.md`](MASTER_PLAN_ARCHIVE.md) | the closed phases, kept as they were written |
@@ -36,12 +37,23 @@ Five documents stay at the repository root; the study write-ups live in
 | [`studies/INFINITE_VALUES_STUDY.md`](studies/INFINITE_VALUES_STUDY.md) | reals as processes, and where the value layer stops |
 | [`studies/INFORMATION_LOSS_STUDY.md`](studies/INFORMATION_LOSS_STUDY.md) | what a layer boundary costs, made precise enough to prove — and the refinement-chain decision |
 | [`studies/LEAN_ADDRESS_STUDY.md`](studies/LEAN_ADDRESS_STUDY.md) | a deterministic Leech address for every Lean declaration, scored against two null models |
+| [`studies/ADDRESS_RETRIEVAL_STUDY.md`](studies/ADDRESS_RETRIEVAL_STUDY.md) | the address book made to do work: retrieval over the Lean corpus, measured against a lexical search, a digest, a reshuffle, a name search and closed-form chance — the address is a real index, is beaten decisively by plain text, and earns a proved complete shortlist instead |
+| [`studies/CONTROLLER_STUDY.md`](studies/CONTROLLER_STUDY.md) | the propose–check–refuse loop: multi-step dimensional derivations steered by six heuristics, every returned plan re-verified, and the refusals that carry a proof |
+| [`studies/RETRIEVED_LEAN_STUDY.md`](studies/RETRIEVED_LEAN_STUDY.md) | what the supplied archive still had to offer, retrieved as 25 files of Lean: what each script claimed, what is now proved, and the nine claims that turned out to be false |
+| [`studies/SOURCE_SALVAGE_AUDIT.md`](studies/SOURCE_SALVAGE_AUDIT.md) | the runtime half of the archive round: every number the eleven retrieved Lean files prove, recomputed from the substrate, and three corrections to the archive's own figures |
+| [`studies/ARCHIVE_DEEP_DIVE_STUDY.md`](studies/ARCHIVE_DEEP_DIVE_STUDY.md) | the two questions that audit left open: whether the 44 balanced octads are structure or chance, and whether the archive's relaxation is a decoder — both answered no, with the controls |
+| [`studies/SOURCE_SALVAGE_SECOND_PASS.md`](studies/SOURCE_SALVAGE_SECOND_PASS.md) | eight more results from a second reading of the archive: the cube surface as the MOG grid, the read quantum as an operator, the Gray jump norm, the ARC grid metrics, the conditional lobe, the mode algebra, the free cube symmetries, and the mirror argument that caps them at 24 |
 | [`studies/RELATIVE_MEASURE_PROPOSAL.md`](studies/RELATIVE_MEASURE_PROPOSAL.md) | a proposal (not a result): what it would take for `hot` to become a relative measure, and what that needs from the registers |
 | [`studies/RELATIVE_MEASURE_STUDY.md`](studies/RELATIVE_MEASURE_STUDY.md) | the result of that proposal's steps 2–5: the comparison-class register, the widening measured, the comparative between two uses, and the queries that refuse at the boundary |
 | [`studies/NAME_COORDINATE_STUDY.md`](studies/NAME_COORDINATE_STUDY.md) | a coordinate for the name: lifting the resolution ceiling the escalation audit proved, measured against a control |
 | [`studies/NOISE_EXPERIMENT_STUDY.md`](studies/NOISE_EXPERIMENT_STUDY.md) | noise used as the computation: cascades, closed orbits, dither, error feedback |
 | [`studies/RECIPE_STUDY.md`](studies/RECIPE_STUDY.md) | the recipe made into an object: a domain description, the one generic path from it, and three registers regenerated from their descriptions with every measured figure unchanged |
 | [`studies/LANGUAGE_STUDY.md`](studies/LANGUAGE_STUDY.md) | the question shape made an object: a question description, the one generic matcher from it, and three query kinds matched by shape in agreement with the hand-written parser over a generated corpus |
+| [`studies/GLM_ACADEMIC_PAPER.md`](studies/GLM_ACADEMIC_PAPER.md) | the supplied working paper on the GLM and the Universal Binary Principle, kept beside the studies it draws on |
+| [`studies/GLM_Complete_Number_Theory_Evidence.md`](studies/GLM_Complete_Number_Theory_Evidence.md) | the number-theory evidence, with every table and the worked transcript re-run by a test rather than quoted |
+| [`studies/COMBINER_STUDY.md`](studies/COMBINER_STUDY.md) | what XOR is doing here: the code is closed under exactly the affine combiners, the loss is the pigeonhole bound for the output width, and a wider output buys it back |
+| [`studies/SEARCH_LOOP_STUDY.md`](studies/SEARCH_LOOP_STUDY.md) | the archive's search loop read as a program space: what the hard gate admits, and what the ranking cannot separate |
+| [`studies/TIE_BREAK_STUDY.md`](studies/TIE_BREAK_STUDY.md) | what a nearest-point tie is, and what breaking it by index costs |
 | [`studies/LLVQ_TABLE_STUDY.md`](studies/LLVQ_TABLE_STUDY.md) | the Leech quantiser's 8,192-codeword scan replaced by the MOG's own structure: a 16-entry column table, 128 classes of 32, the class minimum and the bounded search proved in Lean, and the whole address book decoded both ways with nothing changed |
 
 ## `source_material/` — what was supplied

@@ -26,7 +26,7 @@ def main() -> int:
                         help="run a single case by id")
     parser.add_argument("--jobs", type=int, default=4,
                         help="how many CLI processes to run at once")
-    parser.add_argument("--timeout", type=float, default=300.0,
+    parser.add_argument("--timeout", type=int, default=300,
                         help="per-case timeout in seconds")
     parser.add_argument("--json", metavar="PATH", default=None,
                         help="also write the full report as JSON")

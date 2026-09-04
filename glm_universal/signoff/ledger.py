@@ -647,19 +647,19 @@ def run_environment(exhaustive: bool) -> Dict[str, str]:
 def _run_one(path: Path, quiet: bool = True,
              exhaustive: bool = False) -> Dict[str, object]:
     """Run one test file under pytest and report what happened."""
-    started = time.monotonic()
+    started = time.monotonic_ns()
     completed = subprocess.run(
         [sys.executable, "-m", "pytest", str(path), "-q", "--no-header"],
         cwd=str(PROJECT_ROOT), capture_output=True, text=True,
         env=run_environment(exhaustive))
-    elapsed = time.monotonic() - started
+    elapsed_ms = (time.monotonic_ns() - started) // 1_000_000
     summary = _parse_pytest_summary(completed.stdout + completed.stderr)
     if not quiet:
         print(completed.stdout[-2000:])
     return {
         "status": "passed" if completed.returncode == 0 else "failed",
         "returncode": completed.returncode,
-        "milliseconds": int(elapsed * 1000),
+        "milliseconds": elapsed_ms,
         "tests": summary["passed"],
         "failures": summary["failed"] + summary["errors"],
         "subtests": summary["subtests"],
@@ -807,7 +807,7 @@ def run_plan(all_units: bool = False, dry_run: bool = False,
     chosen = list(rows) if all_units else [u for u in rows if u.stale]
     skipped = [u for u in rows if u not in chosen]
     results: List[Dict[str, object]] = []
-    started = time.monotonic()
+    started = time.monotonic_ns()
     if dry_run:
         for unit in chosen:
             results.append({"name": unit.name, "status": "not run",
@@ -840,7 +840,7 @@ def run_plan(all_units: bool = False, dry_run: bool = False,
     else:
         with ThreadPoolExecutor(max_workers=workers) as pool:
             results = list(pool.map(one, chosen))
-    elapsed = time.monotonic() - started
+    elapsed_ms = (time.monotonic_ns() - started) // 1_000_000
     if exhaustive:
         _record_totals(book, "full")
     save_ledger(book, ledger_path)
@@ -852,7 +852,7 @@ def run_plan(all_units: bool = False, dry_run: bool = False,
                         if r.get("status") == "failed"),
         "jobs": workers,
         "mode": "full" if exhaustive else "fast",
-        "seconds": Fraction(int(elapsed * 1000), 1000),
+        "seconds": Fraction(elapsed_ms, 1000),
         "results": tuple(results),
     }
 

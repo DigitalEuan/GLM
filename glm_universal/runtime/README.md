@@ -58,7 +58,7 @@ answering kinds plus `unknown`, the honest fallback.
 
 ## The `report` subjects
 
-`session.REPORT_SUBJECTS` is the authoritative list: **48 report subjects**.
+`session.REPORT_SUBJECTS` is the authoritative list: **51 report subjects**.
 Every subject recomputes its facts on demand and has a Three Column Thinking
 template that reproduces them in a fresh interpreter.
 
