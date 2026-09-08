@@ -136,7 +136,7 @@ REPORT_SUBJECTS: Tuple[str, ...] = (
     "lattices", "shells", "llvq", "harmony", "economics",
     "lean", "directives", "pipeline", "escalation", "measure",
     "names", "recipe", "language", "searchloop", "retrieval",
-    "controller",
+    "controller", "generated",
 )
 
 #: The canonical names of the worked end-to-end tasks ``task <name>`` runs.
@@ -2044,6 +2044,10 @@ class GeometricSession(SubstrateReports, LatticeGeometryReports,
         if subject in ("controller", "loop", "derivation", "derivations",
                          "propose", "plan", "planner"):
             return self._report_controller(query)
+        if subject in ("generated", "generative", "zero storage",
+                         "zero-storage", "generate", "storage",
+                         "generated not stored"):
+            return self._report_generated(query)
         if subject in ("lean", "lean addresses", "lean address",
                          "declarations", "address book", "addresses"):
             return self._report_lean(query)

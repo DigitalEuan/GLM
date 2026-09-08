@@ -218,6 +218,10 @@ class TestTheQuotedCounts(unittest.TestCase):
             r"(\d+) files under `RequestProject/GLM/`", text))
         quoted |= set(int(n) for n in re.findall(
             r"`RequestProject/GLM/` \((\d+) files\)", text))
+        # The prose form as well.  A count written as "98 Lean files" in the
+        # closing section drifted unnoticed because only the two forms above
+        # were being read.
+        quoted |= set(int(n) for n in re.findall(r"(\d+) Lean files", text))
         self.assertTrue(quoted, "the paper no longer states a file count")
         self.assertEqual(quoted, {self._lean_files()})
 

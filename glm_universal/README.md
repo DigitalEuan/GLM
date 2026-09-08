@@ -25,19 +25,19 @@ a `*_report` function rather than quoted.
 | 3½ | `semantics/` — the meaning space, reference resolution, derived relations, the grounded graph, the audit of the inherited concept graph | 59 | ✓ complete |
 | 3¾ | `recipe/` — the recipe made into an object: a declarative **domain description**, the 25 shared primitives one is written in, and the single generic path from a description to the carriers, the readings, the widening audit, the query surface and the refusal boundary. Three domains built by hand in earlier rounds are described and regenerated from their descriptions alone | 87 | ✓ complete |
 | 3⅞ | `language/` — the question shape made into an object: a declarative **question description** (an opening, named slots, the literal words that separate them, an optional tail, a described preamble and named refusal boundaries) plus a second **infix** form (an operator that cuts a string, for operands that are notations), and the two generic matchers that read them. Three of the runtime's query kinds are read off their descriptions with the hand-written branches deleted, three more are described and measured against the branches they have not yet replaced | 90 | ✓ complete |
-| 4 | `runtime/` — parser, session, TCT engine, and the `GLM.py` CLI; **21 query kinds**, **51 report subjects**, 8 registers | 320 | ✓ complete |
+| 4 | `runtime/` — parser, session, TCT engine, and the `GLM.py` CLI; **21 query kinds**, **52 report subjects**, 8 registers | 320 | ✓ complete |
 | 5 | `migration/` — the literal migration of the repository's stored state into canonical form | 64 | ✓ complete |
 | 6 | `benchmarks/` — 5 suites, 2,390 scored tasks, published baselines and findings | 67 | ✓ complete |
 | 7 | `capabilities/` — 33 capability probes: what the machine can do, and the exact place each thing it cannot do stops | 56 | ✓ complete |
-| 8 | `evaluation/` — **134** end-to-end CLI cases over all 21 query kinds and all 51 report subjects, each in a fresh interpreter, scored with a refusal worth more than a confident wrong answer | 20 | ✓ complete |
-| 9 | `signoff/` — the sign-off ledger over 74 test files and 7 instruments, with `integrity.py` (the one place a digest is computed) and `tools.py` (the command line for the study instruments) beside it, and the guards on the generated figures and the derived-artefact layer (`figures.py`, `derived.py`) | 118 | ✓ complete |
+| 8 | `evaluation/` — **134** end-to-end CLI cases over all 21 query kinds and all 52 report subjects, each in a fresh interpreter, scored with a refusal worth more than a confident wrong answer | 20 | ✓ complete |
+| 9 | `signoff/` — the sign-off ledger over 75 test files and 7 instruments, with `integrity.py` (the one place a digest is computed) and `tools.py` (the command line for the study instruments) beside it, and the guards on the generated figures and the derived-artefact layer (`figures.py`, `derived.py`) | 118 | ✓ complete |
 | — | `examples/` — TCT demo, reasoning showcase, encoding POC, integrated NRCI, scaled carriers, semantic replacement | — | ✓ working |
 
 The **Tests** column is the number of tests in the test files that cover
-that package; the eleven rows partition the 74 test files, so the column adds
+that package; the eleven rows partition the 75 test files, so the column adds
 to the total below.
 
-**Total: 3,163 tests across 73 of the 74 test files, 12,838 subtests, outside the document check, zero failures.**
+**Total: 3,179 tests across 74 of the 75 test files, 12,839 subtests, outside the document check, zero failures.**
 
 Per-file counts and what each file checks are in
 [`tests/README.md`](tests/README.md); every count quoted anywhere in the
@@ -412,16 +412,16 @@ loop.
 
 - `reasoning/retrieval.py`, wired as `report retrieval`: the address book used
   as an index over the Lean corpus and measured against six controls on 202
-  stride-selected queries, with chance in closed form. hit@5 **51.5 %** against
+  stride-selected queries, with chance in closed form. hit@5 **51.0 %** against
   **6.9 %** chance; the digest (3.5 %), the seeded reshuffle (6.9 %), the
   random ranking (5.9 %) and name search (34.2 %) below it, and a plain text
-  search **above** it at 85.6 % with 57.7 % precision@5. The two ablations say
+  search **above** it at 85.8 % with 57.7 % precision@5. The two ablations say
   the lattice is not what carries the signal: the same features unquantised
-  score 51.0 %, and a lexical address 64.9 %.
+  score 50.5 %, and a lexical address 65.2 %.
 - `RequestProject/GLM/Retrieval.lean`: the completeness bound behind the
-  shortlist — **144,075** measured pairs, **0** violations — under which an
+  shortlist — **142,450** measured pairs, **0** violations — under which an
   empty shortlist is a proof of absence. At feature radius 2 the
-  guaranteed-complete shortlist is 70.9 declarations, 2.5 % of the corpus.
+  guaranteed-complete shortlist is 80.2 declarations, 2.8 % of the corpus.
 - `reasoning/controller.py`, wired as `report controller`: propose–check–refuse
   over the ten EXT10 generators, every returned plan re-verified end to end by
   `verifier.verify_expression_pair` (**100 %**, every scorer). **127 of 726**
@@ -432,16 +432,47 @@ loop.
   exact-distance descent, and the decided witness that a width-one beam can
   miss a plan that exists.
 - Two new test files, `test_retrieval.py` (42) and `test_controller.py` (25);
-  the reasoning package is **59 modules**; `report retrieval` and `report
-  controller` are the newest of the **51 report subjects** and the newest two
-  of the **134 CLI cases**, and the end-to-end set is **134 / 134** with the
-  same 16 boundary refusals.
-- The address book was regenerated over the 97-file tree: **2826/2826** read
-  back exactly, 0 coordinate errors, 2486 distinct addresses, and
-  nearest-by-address shares a file 578 / 2,826 against 35 for the digest
-  control and 37 for the seeded reshuffle.
+  the reasoning package was **59 modules** at that release; `report retrieval` and `report
+  controller` are the newest of the **52 report subjects** and the newest two
+  of the **135 CLI cases**, and the end-to-end set was **134 / 134** at that
+  release, with the same 16 boundary refusals.
+- The address book was regenerated over the 99-file tree: **2893/2893** read
+  back exactly, 0 coordinate errors, 2547 distinct addresses, and
+  nearest-by-address shares a file 587 / 2,893 against 35 for the digest
+  control and 26 for the seeded reshuffle.
 - The write-ups are `studies/ADDRESS_RETRIEVAL_STUDY.md` and
   `studies/CONTROLLER_STUDY.md`.
+
+---
+
+**v1.15.0, generated rather than stored** — the supplied zero-storage concept,
+measured against what it would replace.
+
+- `reasoning/generative.py`, wired as `report generated`: what a generator
+  costs beside the table it replaces, with **every regenerated object compared
+  against the stored one before its row is emitted**. The audited tables cost
+  **9,449,445 bytes** stored against **24,648** of generators, about **383 to
+  one**, all four verified identical; and of the bytes this package keeps on
+  disk, **7,296,569 of 7,316,334** are already caches with the digest of their
+  inputs, against **19,765** of primary data.
+- The proposed Leech sieve is **sound** and **99.4 % incomplete**: it keeps
+  **1,152 of the 196,560** minimal vectors, because "all coordinates agree mod
+  4" is not the Golay condition of Construction C. The one-line repair agrees
+  with the package's own membership test on **196,656** vectors. The snap built
+  on the sieve returned a non-lattice point on **4 of 4** general-position
+  probes; the exact coset decoder added beside it is inside Λ and within the
+  squared covering radius **16** every time. Of the script's three stated
+  accuracies for generated reals, **0** hold.
+- `RequestProject/GLM/ZeroStorage.lean` proves the general statements —
+  soundness, an exact characterisation of what the sieve generates, a
+  kernel-decided witness of a minimal vector it loses, the unsound fallback,
+  the dyadic read-out bound and its termination criterion.
+- No clock is read anywhere in the module: the audit is emitted through the
+  runtime, whose traces must be byte-identical between runs, so a storage row
+  carries bytes and verdicts and nothing a second run would print differently.
+- One new test file, `test_generative.py` (16), and the evaluation case
+  `report-generated`, so the subject is driven through the CLI as well as the
+  package. The write-up is `studies/ZERO_STORAGE_STUDY.md`.
 
 ---
 
@@ -879,10 +910,10 @@ glm_universal/
 │   ├── probes_language.py     11 probes through grammar, semantics, runtime
 │   └── __main__.py            CLI, with --area and --probe
 ├── evaluation/                ← Step 8: the machine measured from outside
-│   ├── cases.py               the 134 CLI cases, every query kind and report subject
+│   ├── cases.py               the 135 CLI cases, every query kind and report subject
 │   ├── harness.py             run_case, run_all, evaluation_report, the scoring
 │   └── __main__.py            CLI, with --only, --case, --jobs, --json, --list
-├── tests/                     ← 74 test files
+├── tests/                     ← 75 test files
 └── examples/                  ← demonstrations
     ├── demo_tct.py            Three Column Thinking demo (7 queries)
     ├── reasoning_showcase.py  29 probes, refusals included; writes the transcript
@@ -953,7 +984,7 @@ would be a node *of*. 1,705 notations collapse onto 357 meanings joined by
 [`semantics/README.md`](semantics/README.md).
 
 ### The runtime (Step 4)
-**21 query kinds** and **51 report subjects** over **8 registers** — see
+**21 query kinds** and **52 report subjects** over **8 registers** — see
 [`runtime/README.md`](runtime/README.md) for all three tables.
 
 Every query is answered three times (Three Column Thinking):

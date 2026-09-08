@@ -1,3 +1,64 @@
+# Summary of changes for run 5c233795-bdc6-4bdb-a87a-7b544d71c990
+I finished the outstanding items from the previous checkpoint. Everything below was checked by running it here, and all work is committed.
+
+**The corpus, re-measured rather than patched.** The Lean tree had grown with the decoder's global-optimality proofs, so every figure derived from it was recomputed: the development is now **99 Lean files, 29,122 lines, 2,893 parsed declarations, no `sorry`**, and `lake build` completes cleanly over all 8,126 build jobs. The derived caches were regenerated against the new tree digest — the structural address book (`reasoning/_data/lean_addresses.json`) and the lexical address book (`lean_lexical_addresses.json`) both report `fresh`; the type-2 table, the economics lattice points and the controller table were checked and were already fresh. `overlay/FIGURES.md` was regenerated and now matches a fresh computation.
+
+**The two studies that measure the corpus were re-measured, not adjusted.** `studies/LEAN_ADDRESS_STUDY.md`: read back **2,893 / 2,893** exactly with **0** coordinate errors out of 69,432, 2,547 distinct addresses (the quantiser still adds no conflation of its own, 235 classes, 581 declarations), nearest-by-address shares a file **587 / 2,893 ≈ 20.3 %** against 35 for the digest control and 26 for the seeded reshuffle, with chance at ≈ 1.32 % — so the file-test multiple is 15.3×, the third rise in a row against a falling chance rate. The kind table, the scale sweep, the pair statistics and the four worked examples were all re-run; the examples came back identical. `studies/ADDRESS_RETRIEVAL_STUDY.md` had still been quoting a 2,850-declaration run: it is now measured over **207** queries of the 2,893-declaration corpus — hit@5 **51.7 %** against **6.7 %** chance (7.7×), the plain text control still ahead at **85.0 %**, the unquantised-features ablation now tying the address query for query, and the proved completeness bound holding on **147,492** pairs with **0** violations.
+
+**Hard-coded numbers reconciled.** `STATUS.md`, `CAPABILITY_ASSESSMENT.md`, the overlay and package READMEs and the tests README were brought to the current counts, the superseded phrases from this round were added to the guard in `test_figures.py` so they cannot come back, and a change-log row (5.25) records the decoder proofs and this reconciliation. Historical per-phase and archive rows were left as they are, since they record what was true when written.
+
+**Clean runs, with nothing in flight.** Full Python suite: **3,181 tests, 15,253 subtests passed, 26 skipped, zero failures**. The release sign-off then ran end to end: **75 of 75 test files** in full mode and **all 7 instruments** (Lean build, `sorry`-free scan, the two Lean copies identical, capability probes, benchmarks, the end-to-end evaluation, the figures check) passed, and `--verify-release` confirms every signature still holds. The standalone `glm_zero_storage_substrate_v5.py --test` passes and exits 0.
+
+**The mirrored Lean tree** is byte-identical to the primary one across every `.lean` file (the only differences are the deliberately per-copy `README.md`, `Main.lean` and `.gitkeep`), which the sign-off's own check confirms.
+
+**Results list.** The four decoder theorems that closed the global-optimality gap — `coset_min_cost`, `coset_min_attained`, `leech_in_coset`, `lattice_dist_ge` — were not yet in the tracked list; they are now registered and marked proved, with the definitions they are stated in terms of (`InCoset`/`cosetRes`, `dist2`/`penaltyQ`). Each was re-checked here: sorry-free and depending only on `propext`, `Classical.choice` and `Quot.sound`.
+
+
+# Summary of changes for run 33c07703-d5d3-4e3a-b6c7-2fdd1cb7e6b8
+## What I did
+
+I rebuilt the zero-storage substrate draft as a single, refined, standalone script: **`glm_zero_storage_substrate_v4.py`** at the repository root. It imports nothing beyond the Python standard library (no dependency on the rest of the system), uses `int`/`Fraction` only — no floats in any computation, no RNG — and stores no tables at all: even the Golay code is generated from the quadratic residues mod 11 (36 bytes of generator rows).
+
+The earlier review of the v3 draft had found one mechanism correct, one sound but 99.4 % incomplete, one unsound, and one carrying accuracy claims that did not hold. The v4 script keeps only the working parts and levels each of them up:
+
+- **Leech membership** — the repaired test: the coordinates agreeing mod 4 must form a *Golay codeword* (not merely all agree). One pass over 24 coordinates plus one lookup, no stored shell.
+- **The snap** — replaced by an exact coset decoder returning the true nearest lattice point (all 4096 codewords × both parities, exact integer arithmetic); the unsound "round to the nearest even integer" fallback is gone.
+- **The minimal shell** — 196,560 vectors streamed from the code in three shapes, rather than held.
+- **Generated reals** — a real number is now a process with a contract: `x.at(k)` returns a dyadic rational within `2⁻ᵏ` with a stated tail bound and a denominator of `k + O(1)` bits. π, e, √2, φ, ln 2 and γ all satisfy it; γ is computed by Euler–Maclaurin with a bounded remainder instead of the old integer-rounded logarithm.
+- **The dyadic tower** — kept, with its one false claim corrected (readings are non-decreasing; it is the resolution that strictly improves).
+- **The "Niemeier portal"** — replaced by the object it was reaching for: the *sextet*, the partition of the 24 points into six tetrads any two of which union to an octad.
+- **Frequency-encoded state** — the Δ-Σ register rebuilt standalone, with the read-out bound `|average − target| < 1/N`.
+- **The storage audit** — stored bytes beside generator bytes, each row emitted only after the regenerated object was compared with what it replaces.
+
+`python3 glm_zero_storage_substrate_v4.py --test` runs the whole self-verification in about five seconds and exits 0: weight distribution 1 / 759 / 2576 / 759 / 1; all 196,560 minimal vectors of norm² 32 and accepted; the decoder inside Λ₂₄ and within squared covering radius 16 on every probe, with **no nearer point among the 196,560 neighbours**, and a half-step target decoding at exactly 1/2; 18 (constant, precision) pairs meeting their `2⁻ᵏ` contract; all 10,626 tetrads giving verified six-part sextet partitions, 1,771 sextets in all; and the storage audit reproducing 9,449,445 → 24,648 bytes, about 383 : 1. There are also `--report` (JSON), `--demo` and `--quick` modes.
+
+## Lean
+
+I added and proved (sorry-free, standard axioms only) `GLM.ZeroStorage.RefinedSieve` and `GLM.ZeroStorage.refinedSieve_iff_isLeech` in `RequestProject/GLM/ZeroStorage.lean`: the script's deterministic membership test — parity read off coordinate 0, no existential search, no table — decides exactly the Leech lattice. The full Lean project builds.
+
+## The old copy
+
+The v3 draft is not part of the running system; it is referenced only as source material, so rather than deleting it I moved it to `source_material/glm_zero_storage_substrate_v3.txt`. The root no longer holds it. I also recorded the follow-up in `studies/ZERO_STORAGE_STUDY.md` and `STATUS.md`, and confirmed the existing package tests still pass. All work is committed and pushed.
+
+# Summary of changes for run ea058872-5e81-48d0-9b90-7d7fe7676b25
+The round is closed out. Everything below was run, not assumed, and the tree is committed and pushed with a clean working directory.
+
+**The two inconsistencies the verification run had turned up are fixed.**
+
+1. *The wall-clock timings are gone from the generation audit.* `overlay/glm_universal/reasoning/generative.py` no longer imports a clock: the `regenerate_us` column and the timing helper are removed, and the storage rows now carry only bytes, counts and the verification verdict. The reason is stated in the module and in the write-up — the audit is emitted through the runtime, whose traces are required to be byte-identical between runs, so a timing in a row is a quantity a second run would print differently. The report text, the test file (a new case now asserts that two uncached computations of the report are equal), `studies/ZERO_STORAGE_STUDY.md`, the plan, the status document, the change log and the tests README were all adjusted to match.
+2. *The Lean file count in the number-theory paper.* Both stale quotations — "97 files under RequestProject/GLM/" and "89 Lean files" — now say **98**, the tree's count. The test that guards the paper only read two of the three phrasings, so the prose form drifted unnoticed; it now reads that form too, and would fail on the next drift.
+
+**What the verification run then found on its own, and what I did about it.** The release check reported that the round's new `report generated` subject was never exercised end to end: it existed in the package and in the report tests, but not in the CLI evaluation set. It now has the case `report-generated`, which starts the CLI in a fresh interpreter and checks three ground-truth phrases of the answer. The set is **135 / 135**, with the same 16 boundary refusals and 0 unexpected refusals.
+
+**Figures refreshed and propagated.** `overlay/FIGURES.md` was regenerated from a fresh computation; it had been stale in six rows (report subjects 51 → 52, modules 112 → 113, reasoning modules 59 → 60, Lean files 97 → 98, cases 134 → 135, and the suite sentence). The new counts were propagated to every document that quotes them, and the document check now passes on all of them. Two documentation gaps closed along the way: the new study had no row in the document index, and the Lean development's README table was a round and a half behind — it now has rows for `Retrieval.lean`, `Controller.lean` and `ZeroStorage.lean`.
+
+**Final state, measured.**
+- Release sign-off: **75 of 75 test files** run in full mode with the exhaustive cases on, and **7 of 7 instruments** (`lake build`, the sorry scan, the two-copy diff, the probes, the benchmarks, the end-to-end evaluation, the figures check) — all passed, and `--verify-release` confirms every signature still holds.
+- Suite totals, recorded by that run: **3,179 tests across 74 of the 75 test files, 12,840 subtests**. One `pytest` process over the whole tree independently gives **3,181 passed, 26 skipped, 15,164 subtests, zero failures** — the ledger's total plus the 28 tests of the document check it deliberately leaves out.
+- Lean: `lake build` completes cleanly (8,125 jobs), no `sorry` or `admit` anywhere in the development, and the six headline theorems of `RequestProject/GLM/ZeroStorage.lean` depend only on `propext`, `Classical.choice` and `Quot.sound`.
+- The overlay's own storage figures were re-measured from the tree rather than carried over: **7,296,569 of 7,316,334 bytes** on disk are caches with input digests, leaving **19,765 bytes** of primary data. The audited-table figures (9,449,445 stored against 24,648 of generators, about 383 to one, all four verified identical) are unchanged.
+
+
 # Summary of changes for run 9f3c68de-9c1b-4e8c-9700-eb2f7a1aba42
 ## What this round completed, and the results
 

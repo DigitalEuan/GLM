@@ -32,8 +32,8 @@ addressing. Each item says what was built, where it lives, and how to see it
 recompute itself.
 
 Everything below is reachable from the package's public API and from the query
-runtime — **21 query kinds**, **51 report subjects** and **8 registers** — is
-covered by the test suite (74 test files),
+runtime — **21 query kinds**, **52 report subjects** and **8 registers** — is
+covered by the test suite (75 test files),
 and — where it is a report or a task — has a generated column-3 script that
 recomputes the claim in a **fresh interpreter** and fails if anything differs.
 
@@ -81,18 +81,19 @@ The archive also holds three interstitial sections written between phases:
 *Directive — multi-resolution Leech addressing*, *A task for the system* and
 *Runtime surface added*.
 
-Phases 14–27 below are closed. **Phase 28 is proposed and is where the next
+Phases 14–29 below are closed. **Phase 30 is proposed and is where the next
 round starts** — not a fourth shape family, but the two candidates the closed
 rounds have left standing: the Niemeier deep holes classified from a trajectory
 distribution, and the semantic half of the analogy. The third that used to
 stand with them, a stability measurement under declared exact perturbation, was
-closed by Phase 26. It is §3.4 of [`STATUS.md`](STATUS.md). Phase 27, closed
-below, took neither candidate but the question underneath them: whether the
-substrate can do work rather than hold a table — retrieval, and steering a
-loop. Before it are the restoration and the archive's second reading (Phase
-26), reading the supplied archive to the end (Phase 25), the `O(1)` LLVQ lookup
-table (Phase 24) and the four undescribed parts of the described question kinds
-(Phase 23).
+closed by Phase 26. It is §3.4 of [`STATUS.md`](STATUS.md). Phase 28, closed
+below, took a supplied proposal instead — stop storing the substrate's tables
+and generate them — and measured both the saving and the generators. Phase 27
+took neither candidate but the question underneath them: whether the substrate
+can do work rather than hold a table — retrieval, and steering a loop. Before
+it are the restoration and the archive's second reading (Phase 26), reading the
+supplied archive to the end (Phase 25), the `O(1)` LLVQ lookup table (Phase 24)
+and the four undescribed parts of the described question kinds (Phase 23).
 
 ---
 
@@ -1411,20 +1412,20 @@ flattering it.
 ### 27.1 Retrieval, against six controls
 
 `reasoning/retrieval.py` turns the address book into an index and measures it
-over **202** stride-selected queries of the **2,826**-declaration corpus, with
+over **204** stride-selected queries of the **2,850**-declaration corpus, with
 chance computed in closed form. A hit is a *relative* — same file, or joined by
 a citation — and neither relation appears in any feature map, so "the
 neighbours are relatives" is a prediction that can fail.
 
-* The address is a real index: hit@5 **51.5 %** against **6.9 %** chance
+* The address is a real index: hit@5 **51.0 %** against **6.8 %** chance
   (**7.4×**), beating the digest (3.5 %), the seeded reshuffle (6.9 %), the
   random ranking (5.9 %) and name-substring search (34.2 %).
 * And it is beaten decisively by plain text: Jaccard overlap of identifier
-  tokens reaches **85.6 %** at **57.7 %** precision@5, against the address's
+  tokens reaches **85.8 %** at **57.7 %** precision@5, against the address's
   15.5 %.
 * The lattice is not what carries the signal: the same features with **no
   quantisation at all** score **51.0 %**, and a lexical address built from
-  identifiers reaches **64.9 %** — better than the structural address, still
+  identifiers reaches **65.2 %** — better than the structural address, still
   twenty one points behind the text control. The limit is the projection to 24
   capped integers, not the choice of what to put in them.
 * An address shortlist does not make the text search cheaper for free: 800
@@ -1435,8 +1436,8 @@ neighbours are relatives" is a prediction that can fail.
 
 `RequestProject/GLM/Retrieval.lean` proves the completeness bound behind the
 shortlist, and `filterRadius_eq_nil_certifies_absence` is why an empty
-shortlist is a *proof* of absence. Measured: **144,075** pairs, **0**
-violations; at feature radius 2 the guaranteed-complete shortlist is **70.9**
+shortlist is a *proof* of absence. Measured: **142,450** pairs, **0**
+violations; at feature radius 2 the guaranteed-complete shortlist is **80.2**
 declarations — **2.5 %** of the corpus — containing all **16.8** feature-close
 declarations on average.
 
@@ -1486,7 +1487,207 @@ in a fresh interpreter. Write-ups:
 
 ---
 
-## Phase 28 — the two candidates that are left
+## Phase 28 — generated rather than stored, and the generators checked
+
+**Status: closed.**
+
+A supplied script, `glm_zero_storage_substrate_v3.txt`, proposes that the
+substrate stop storing its tables and regenerate them from the congruences that
+define them. The round took the perspective seriously and did to it what the
+project does to every other supplied claim: measured it.
+
+### 28.1 The perspective is right, and now has a number
+
+`reasoning/generative.py` puts the two costs side by side and — the part that
+makes the row worth anything — **regenerates each object and compares it with
+the stored one before emitting the row**. The Golay code, the 759 octads, the
+196,560 minimal vectors and the membership decision cost **9,449,445 bytes**
+stored against **24,648 bytes** of generators: **3,149,815 : 8,216**, about
+**383 to one**, all four verified identical.
+
+Asked of this repository, the same audit finds the discipline mostly already in
+place: of **7,316,334** bytes the overlay keeps on disk, **7,296,569** are
+caches of recomputable objects stored beside the digest of their inputs, and
+only **19,765** bytes are primary. **99.7 %** of what looks like storage here
+is generation with a cache in front of it.
+
+### 28.2 The proposed Leech sieve: sound, and 99.4 % incomplete
+
+The script's membership test keeps **1,152 of the 196,560** minimal vectors —
+all 1,104 of the `(±4², 0²²)` shape, 48 of the 98,304 `(∓3, ±1²³)`, and **none**
+of the 97,152 `(±2⁸, 0¹⁶)` — with **0** unsound acceptances.
+
+* `GLM.ZeroStorage.v3Sieve_sound` proves the soundness in general rather than
+  sampling it.
+* `v3Sieve_iff` says exactly what the sieve generates: `IsLeech x ∧
+  UniformMod4 x`. Its "Construction B" step asks all 24 coordinates to agree
+  mod 4, where Construction C asks the *disagreeing* coordinates to form a
+  Golay codeword; only the empty and all-ones words satisfy the stronger
+  reading, which is the whole of the loss.
+* `v3Sieve_zero/add/neg`: the survivors are a genuine sublattice of Λ₂₄, so the
+  script does generate a lattice — the same failure mode Construction A has at
+  the rung below.
+* `octadVec_not_v3Sieve` is a kernel-decided witness: twice the indicator of the
+  octad `{0,1,2,3,4,17,21,23}`, norm² 32, in Λ and rejected.
+* The repair is one line. `corrected_sieve` agreed with the package's own
+  `leech2.in_leech` on **196,656** vectors — the shell plus probes, **96** of
+  them outside Λ — at the same cost.
+
+### 28.3 The snap does not snap, and an exact decoder that does
+
+The script's fallback, "round every coordinate to the nearest even integer", is
+called trivially a Leech point and is not: `fallbackVec_not_isLeech` refutes it
+at `(2, 2, 0²²)`, since the Golay code has no word of weight 22. Measured, the
+snap returned a point outside Λ on **4 of 4** general-position probes (excess
+squared distance up to **138**) and **3 of 4** near-lattice probes. `exact_snap`
+— a coset decoder over the 4096 codewords and both parities, exact throughout —
+is inside Λ on every probe and within the squared covering radius **16** every
+time, returning exactly `1/2` on targets half a step from a minimal vector.
+
+### 28.4 A generated number is only as good as its cost bound
+
+Against the package's certified `ExactReal` processes at 200 bits: π (Machin, 20
+terms) gives 96 bits and e gives 61, both as advertised; √2 by Babylonian
+iteration gives **202** bits where the docstring's doubling rule claims 1024,
+ln 2 at "precision 64" gives **9** bits where 256 are claimed, and γ gives
+**3** — its generator approximates `ln n` by `ln 2 · bit_length(n)`, so it is
+wrong rather than slow. **0 of the 3 stated accuracy claims hold.** The
+Babylonian denominator's bit length runs `2, 4, 9, 19, 40, 80, 162, 325, 650,
+1301, 2603, 5207`, doubling every step, so the module's default of 64 iterations
+cannot be run at all: a process is a number only when it is parameterised by
+the precision asked of it, which is the contract `ExactReal.at(k)` already
+keeps.
+
+The dyadic tower is that contract in the layer vocabulary, and it is now
+proved: `dyadic_surrogate_error` (level `n` pins a rational to a half-open
+window of width `2⁻ⁿ`), `dyadic_exact_iff_den_pow_two` (the ladder terminates
+exactly on the dyadic rationals) and `dyadic_value_not_strictMono`, which
+refutes the script's "strictly increasing ladder" for *readings* — at `q = 1/3`
+levels 0 and 1 both read 0. What is strictly increasing is the resolution.
+
+### 28.5 The Niemeier portal, and what moved in the runtime
+
+The sextet the portal detector finds is real — at all **200** weight-4 words
+checked there are exactly six codewords at distance 4, none closer, pairwise
+distance 8 — but the detector's output takes **1** distinct value over those
+words, so the printed `A₁²⁴` label separates nothing. `reasoning/deep_holes.py`
+remains the instrument that reads a hole diagram.
+
+`report generated` is the **52nd** report subject, column-3 verified in a fresh
+interpreter; `RequestProject/GLM/ZeroStorage.lean` and
+`tests/test_generative.py` (16 cases) came with it, and the pipeline row
+`zero-storage` makes **22 of 22** rows complete through all six stages. It is
+also the evaluation's **135th case**, `report-generated`, so the subject is
+driven through the CLI the way a user drives it and not only through the
+package: the end-to-end set is **135 / 135**.
+
+Nothing in the module reads a clock. The audit is emitted through the runtime,
+whose traces are required to be byte-identical between runs, so the storage
+rows carry bytes and verification verdicts and no wall-clock reading at all.
+
+*What recomputes it:* `lake build`, the sorry scan, the two-copy diff,
+`tests/test_generative.py`, the evaluation case `report-generated`, and
+`PYTHONPATH=. python3 GLM.py -q "report generated" --verify-tct`. Write-up:
+[`studies/ZERO_STORAGE_STUDY.md`](studies/ZERO_STORAGE_STUDY.md).
+
+---
+
+## Phase 29 — the last stored table removed, and the cost of generating measured
+
+**Status: closed.**
+
+Phase 28 left one corner of "generate, don't store" unfinished: membership in
+the Golay code still consulted a 4096-word set, about 12 KB held in memory.
+This round removes it, and — the part that makes the removal a trade rather
+than a slogan — attaches an exact integer cost to every generated answer.
+The work is `glm_zero_storage_substrate_v5.py` (standalone, standard library
+only, no float, no RNG) and `RequestProject/GLM/ZeroStorageV5.lean`.
+
+### 29.1 Membership is twelve parities
+
+The extended binary Golay code is self-dual, so its 12 generator rows are also
+a parity-check matrix: `mask ∈ G₂₄` exactly when the 12 parities
+`popcount(mask & row_j) mod 2` all vanish — **36 bytes**, twelve word
+operations, and when the word is not a codeword the same operations produce its
+**12-bit syndrome** rather than a bare `False`, which is the language
+`Golay/Census.lean` and `Cube/Tax.lean` already use.
+
+* `GLM.ZeroStorageV5.syndromeZero_iff_isGolay` — the equivalence, proved:
+  linearity of the checks (`check_xor`), a 144-case kernel decision for the
+  rows, and the systematic-encoder argument with a 4096-case kernel decision
+  for the twelve-bit block.
+* `syndromeSieve_iff_isLeech` — the whole membership test of the script
+  decides exactly `IsLeech`.
+* Checked before anything was removed: **196,560** shell vectors compared on
+  both routes with **0** disagreements, 1,536 deliberate non-codewords, the
+  whole **2²⁴**-word space swept (4096 accepted) *and* the same set obtained
+  exactly by null-space elimination, and the same checks against the Lean
+  development's own, differently generated rows.
+
+### 29.2 The cost ledger
+
+Thirteen primitives are counted — parity checks, popcounts, Gray-code XORs,
+coordinate passes, coset trials and prunes, ±4 repairs, table lookups, integer
+square roots, series terms, big divisions, Δ-Σ ticks, rational operations —
+as **exact integers, never wall-clock**, so a second run reproduces the ledger
+byte for byte. The storage audit becomes three columns: one membership
+decision is 12 parity checks against 36 bytes, one codeword about one XOR, one
+nearest-point decode **50,705** primitives (pruned) against **217,272**
+(exhaustive), with the pruned search checked to return the same point at the
+same distance. The optional cache is priced beside them, with its digest and a
+regenerate-and-compare check.
+
+### 29.3 NRCI, defined rather than invoked
+
+`NRCI(r ; x) = 1 − √(Σrᵢ²/Σxᵢ²)`, reported as an exact dyadic enclosure of
+width `2⁻ᵏ` and as the exact rational squared form, on three named streams:
+the Δ-Σ running-average residual, the residual of a decode, and the per-level
+dyadic residuals. For the Δ-Σ stream the proved bound `|rₙ| < 1/n` is checked
+at every `n` and printed beside the figure.
+
+### 29.4 The register tracks, and higher order is measured
+
+Retargeting keeps the accumulator, and the bound survives: `ds_track_bound`
+(`|average − mean target| < 1/N` for a moving target) and
+`ds_track_moving_target` (against a fixed target, plus exactly the mean
+deviation). Second- and third-order noise shaping is implemented in exact
+rationals and *measured*: through a triangular read-out window the guaranteed
+bound improves from `1.9 × 10⁻³` to `1.3 × 10⁻⁵` at N = 1024 between orders 1
+and 2, while order 3 at these coefficients is unstable (`max|e|` reaching
+`1.4 × 10⁷`) and nothing is claimed for it.
+
+### 29.5 The decode is proved optimal
+
+`quad_step_bound`, `quad_zero_bound`, `coset_cost_ge` and
+`coset_repair_attained`: inside a Construction-C coset the cheapest single ±4
+move is exactly the minimum when the mod-8 sum forces an odd repair. The
+surrounding claim is proved in the same file rather than left measured:
+`coset_min_cost` and `coset_min_attained` state the coset minimum for a
+*rational* target, `leech_in_coset` shows every Leech point lies in one of the
+8,192 cosets and `lattice_dist_ge` concludes that a bound holding on every
+coset holds on `Λ₂₄` — so the minimum the decoder searches for is the
+distance to the nearest lattice point. `allTwos_inCoset` keeps the hypotheses
+from being vacuous. What is still checked rather than proved is the
+transcription: that the script computes the quantities the theorems describe,
+which the self-test verifies against an unpruned exhaustive search.
+
+### 29.6 What Mathlib has, checked first
+
+Before any claim about where this work might belong upstream, the pinned
+Mathlib was searched: no Golay code, no Leech lattice, no Niemeier
+classification, no linear-code layer and nothing on sphere packing or
+quantisation; the ambient `ZLattice`, quadratic-form, root-system and
+modular-form theory is all present. §10 of the study records the counts and
+what follows — the missing prerequisite is a general self-dual-code layer, not
+the sieve equivalence.
+
+Reproduce: `python3 glm_zero_storage_substrate_v5.py --test`,
+`--test --full`, `--ledger`, `--report`; `lake build`. Write-up:
+[`studies/ZERO_STORAGE_V5_STUDY.md`](studies/ZERO_STORAGE_V5_STUDY.md).
+
+---
+
+## Phase 30 — the two candidates that are left
 
 **Status: proposed. This is where the next round starts.**
 
@@ -1496,8 +1697,10 @@ descriptions, and the language layer has reached the point its own measurement
 says it should stop at: the thirteen remaining kinds are not shapes, and
 forcing them would make the coverage figure meaningless. So the next round is
 **not** a fourth shape family; it is not the LLVQ table (Phase 24), the archive
-retrieval (Phase 25) or the address layer made to work (Phase 27), all closed
-above. Two candidates stand, in the order they are worth attempting:
+retrieval (Phase 25), the address layer made to work (Phase 27), the
+generate-versus-store audit (Phase 28) or the untabled substrate with its
+proved-optimal decode (Phase 29), all closed above. Two candidates stand,
+in the order they are worth attempting:
 
 1. **The Niemeier deep holes, found rather than tabulated.** The last purely
    geometric item on the list, and the brief's third experiment: whether the

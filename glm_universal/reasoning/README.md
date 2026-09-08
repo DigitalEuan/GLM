@@ -3,7 +3,7 @@
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 
-**Status: implemented (GLM-3+ Step 3, extended since).** **59 modules**, one
+**Status: implemented (GLM-3+ Step 3, extended since).** **60 modules**, one
 frozen data file,
 and a runnable audit. Everything is exact `int` / `fractions.Fraction` /
 `F_2`; nothing here imports `random`; nothing here imports a third-party
@@ -76,6 +76,7 @@ Sections 1–4 below describe these in detail.
 | `search_loop.py` | the archive's reasoning loop read as a program space: what the hard gate admits, what the ranking cannot separate, and the loop's soundness, monotonicity and termination | `report searchloop` |
 | `retrieval.py` | the address book used as a retrieval index, and the controls that decide whether it earns the role: eight ranking schemes over the Lean corpus — address, raw features, a lexical address book, a plain text search, a name search, a digest, a seeded reshuffle and a random order — scored against closed-form chance, with the completeness bound of `Retrieval.lean` checked pair by pair | `report retrieval` |
 | `controller.py` | the propose–check–refuse loop: a bounded beam over dimensional derivations from the ten EXT10 generators, six heuristics including two address-guided ones, every returned plan re-verified independently, and two kinds of refusal — exhausted, and unreachable with an invariant proof | `report controller` |
+| `generative.py` | generated instead of stored, and checked against what it replaces: the zero-storage script's Leech sieve measured over the whole kissing shell, the one-line repair that restores the Golay condition, an exact coset decoder that gives the true nearest lattice point, the closed-form constants scored against certified processes, and the storage audit of this package's own artefacts | `report generated` |
 | `combiner.py` | what XOR is doing here: the sixteen coordinatewise combiners, the eight affine ones the code is closed under, the pigeonhole bound on what a narrow output loses, and the inventory of every XOR site in the package | (library) |
 | `tie_break.py` | what a nearest-point tie is and what breaking it by index costs: the tie classes enumerated, the decoder's rule shown not to be the canonical one, and the read-back shown unchanged either way | (library) |
 | `stability.py` | how far an address may be perturbed before it moves: exact radii and residuals, the two certificates `Stability.lean` states, and the census of the declarations at radius zero | (library) |

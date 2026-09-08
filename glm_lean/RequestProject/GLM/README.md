@@ -1,6 +1,6 @@
 # `RequestProject/GLM/` — machine-checked companion to the GLM package
 
-**97 Lean files**, all building against Mathlib at `v4.28.0` — the
+**99 Lean files**, all building against Mathlib at `v4.28.0` — the
 toolchain already pinned by `glm_lean/lean-toolchain` — and all free of `sorry`.
 Every theorem below has been checked with `#print axioms`; none depends on
 anything beyond `propext`, `Classical.choice` and `Quot.sound`, except the
@@ -98,6 +98,9 @@ table says what each one claimed and what is now proved; the summary is:
 | `Cube/Tax.lean` | the price list: covering radius exactly 4, so the worst repair costs `4Q`; unique below 3, ambiguous at 4; AND is priced |
 | `Cube/Three.lean` | the three-cube rule proposal gives a `[24,12,4]` code and no relabelling repairs it — and Turyn's glue on the same three cubes does give the Golay code |
 | `Shortcut/*.lean` | the lattice-shortcut method, corrected: the complete Golay decoder the substrate's `snap_to_codeword` is not, the Gray layer's `O(1)` jump formula, the Leech octad step, and an audit of the published directory whose "even quantisation" turns out to be true by construction |
+| `Retrieval.lean` | the address book used as an index: ranking by exact integer distance with a total order and a deterministic tie-break, and `complete_shortlist` — every declaration within feature radius `r` of the query is in the shortlist the address radius selects, so `filterRadius_eq_nil_certifies_absence` makes an empty shortlist a proof of absence rather than a failure to find |
+| `Controller.lean` | propose–check–refuse as a search over integer states: `exists_descent` — from any state other than the target some move strictly shortens the `l1` distance, so a plan always exists; `unreachable_of_invariant` — a monoid homomorphism killed by every move refuses a target outright, with no node expanded; and `beam_can_miss`, a decided witness that a width-one beam misses a plan that exists |
+| `ZeroStorage.lean` | generated rather than stored, checked: `v3Sieve_sound` — everything the proposed on-the-fly Leech sieve keeps is in Λ; `v3Sieve_iff` — what it keeps is exactly `IsLeech x ∧ UniformMod4 x`, a genuine sublattice, so its "Construction B" step is stricter than Construction C; `octadVec_not_v3Sieve`, a kernel-decided minimal vector it loses; `fallbackVec_not_isLeech`, the snap's last-resort branch refuted; and the dyadic read-out, `dyadic_surrogate_error` with `dyadic_exact_iff_den_pow_two` for when the ladder terminates and `dyadic_value_not_strictMono` for the claim that does not hold |
 
 ## Relationship to the Python package
 

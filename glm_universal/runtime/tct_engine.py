@@ -1365,6 +1365,61 @@ for _entry in report["domains"]:
 '''
 
 
+
+def _body_report_generated(args) -> str:
+    """Recompute the generate-vs-store audit and its verdict."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import generative as gen
+
+
+def _q(value):
+    from fractions import Fraction
+    f = Fraction(value)
+    return str(f.numerator) + "/" + str(f.denominator)
+
+
+report = gen.zero_storage_report(4)
+sieve = report["sieve"]
+fix = report["fix"]
+snap = report["snap"]
+near = report["snap_near"]
+storage = report["storage"]
+repo = report["repo"]
+reals = report["exact_real"]
+sextet = report["sextet"]
+
+observed = {
+    "minimal_vectors": str(sieve["minimal_vectors"]),
+    "sieve_kept": str(sieve["kept"]),
+    "sieve_unsound": str(sieve["unsound"]),
+    "sieve_recall": _q(sieve["recall"]),
+    "fix_checked": str(fix["checked"]),
+    "fix_agree": str(fix["agree"]),
+    "fix_exact": str(fix["exact"]),
+    "snap_probes": str(snap["probes"]),
+    "snap_outside": str(snap["v3_outside_lattice"]),
+    "snap_near_outside": str(near["v3_outside_lattice"]),
+    "exact_all_in_lattice": str(snap["exact_all_in_lattice"]),
+    "exact_within_covering_radius": str(snap["exact_within_covering_radius"]),
+    "storage_stored_bytes": str(storage["stored_bytes"]),
+    "storage_generator_bytes": str(storage["generator_bytes"]),
+    "storage_ratio": _q(storage["ratio"]),
+    "storage_all_verified": str(storage["all_verified"]),
+    "repo_generated_bytes": str(repo["generated_bytes"]),
+    "repo_primary_bytes": str(repo["primary_bytes"]),
+    "repo_generated_fraction": _q(repo["generated_fraction"]),
+    "claims_met": str(reals["claims_met"]),
+    "claims_made": str(reals["claims_made"]),
+    "babylonian_doubles": str(reals["babylonian_doubles"]),
+    "sextet_confirmed": str(sextet["sextet_confirmed"]),
+    "sextet_distinct_outputs": str(sextet["distinct_detector_outputs"]),
+}
+
+for _key, _value in report["verdict"].items():
+    observed["verdict_" + _key] = str(_value)
+'''
+
 def _body_report_searchloop(args) -> str:
     """Recompute the stabiliser, ambiguity and second-example censuses."""
     return '''# -- recompute -------------------------------------------------------------
@@ -2905,6 +2960,8 @@ TEMPLATES = {
     "report_retrieval": _body_report_retrieval,
     # The loop: propose, check, refuse -- and whether the lattice can steer it.
     "report_controller": _body_report_controller,
+    # Generate, don't store: the audit of the zero-storage substrate.
+    "report_generated": _body_report_generated,
     # v1.8.0: the economic third of the same universality claim.
     "report_economics": _body_report_economics,
     # v1.8.0: the layer audit run on every register carrier.

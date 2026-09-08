@@ -432,6 +432,17 @@ class TestDocumentationQuotesCurrentFigures(unittest.TestCase):
             "132 cases", "132 CLI cases", "132-case",
             "3,096 tests", "3,096 collected tests", "12,119 subtests",
             "110 modules", "57 reasoning modules", "27,548 lines",
+            # Retired in v5.24, when the zero-storage substrate reached v5:
+            # the syndrome replaced the last stored table, and
+            # `ZeroStorageV5.lean` took the development from 98 Lean files
+            # and a 2,850-declaration corpus to 99 files and 2,881.
+            "98 Lean files", "2,850 declarations", "28,477 lines",
+            # Retired in v5.25, when the decoder's global-optimality
+            # proofs grew `ZeroStorageV5.lean`: the corpus went from
+            # 2,881 declarations to 2,893 and the tree from 28,884 lines
+            # to 29,122.
+            "2,881 declarations", "2,881 parsed declarations",
+            "28,884 lines", "12,840 subtests",
         )
         documents = [
             "README.md", "MASTER_PLAN.md", "CAPABILITY_ASSESSMENT.md",

@@ -44,8 +44,8 @@ with `lake build`, with no `sorry`; the overlay keeps its own copy of the same
 files under `overlay/glm_lean/`.
 
 The package holds **8 registers** of carriers, reached through **21 query
-kinds** one of which dispatches **51 report subjects**, and is checked by
-**74 test files** alongside **97 Lean files**.
+kinds** one of which dispatches **52 report subjects**, and is checked by
+**75 test files** alongside **99 Lean files**.
 
 Every count in this repository's documentation is recomputed by
 `overlay/glm_universal/figures.py` and written to
@@ -57,7 +57,7 @@ current state of the work is [`STATUS.md`](STATUS.md).
 
 ```bash
 cd overlay
-PYTHONPATH=. python3 -m pytest glm_universal/tests -q     # 74 test files
+PYTHONPATH=. python3 -m pytest glm_universal/tests -q     # 75 test files
 PYTHONPATH=. python3 GLM.py -q "report information loss" -c 1
 PYTHONPATH=. python3 GLM.py -q "report infinite values"   -c 1
 PYTHONPATH=. python3 GLM.py -q "report capabilities"      -c 1
@@ -66,7 +66,7 @@ PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8
 ```
 
 ```bash
-lake build          # RequestProject/GLM/*.lean, 97 Lean files, no sorry
+lake build          # RequestProject/GLM/*.lean, 99 Lean files, no sorry
 ```
 
 ## 1. The GLM system
@@ -116,7 +116,7 @@ run, with every figure produced by a command that can be re-run.
 * **A new instrument, `glm_universal/evaluation/`.** **134 cases**, each
   starting `GLM.py` in a **fresh interpreter** — one subprocess per question,
   no shared session, no warm caches — covering **all 21 query kinds** and all
-  **51 report subjects**, with the coverage checked against the runtime's own
+  **52 report subjects**, with the coverage checked against the runtime's own
   tables by a test. 16 of the questions are ones the machine *should* refuse.
 * **Scoring is asymmetric.** A refusal tells the user where the machine stops
   and a confident wrong answer does not, so `correct` and `refused_as_expected`
@@ -302,7 +302,7 @@ source_material/              what was supplied, kept as received
   glm_unification_blueprint.md, glm_study_findings_catalog.md, ToDo_01.txt,
   GLM_Generators_Containers (2).pdf, GLM_Iteration_Study (1).pdf
   GLM-main.zip                the original project - lots of resources available
-RequestProject/GLM/           the Lean 4 development (97 Lean files, no sorry)
+RequestProject/GLM/           the Lean 4 development (99 Lean files, no sorry)
   Constants.lean              Y, Q, TAX, NRCI, coherence regimes
   TaxConservation.lean        the conservation law and its boundary
   Layers.lean                 the abstract theory of layers and boundaries

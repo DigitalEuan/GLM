@@ -388,6 +388,9 @@ XOR_SITES: Tuple[Tuple[str, Tuple[str, ...], str], ...] = (
      "the codeword ramp of the 24-D loop"),
     ("reasoning/fwht_decode.py", ("group-law",),
      "the Walsh-Hadamard decoder adds coset representatives"),
+    ("reasoning/generative.py", ("group-law", "metric"),
+     "the Golay code regenerated as the XOR closure of its 12 rows, and "
+     "Hamming distance to a codeword in the deep-hole check"),
     # ``reasoning/lean_address.py`` used to be declared here as a digest site.
     # Its address is now a SHA-256 of the declaration text, so the module
     # contains no ``^`` at all and the row was retired: a declared site that

@@ -512,6 +512,15 @@ CASES: Tuple[EvalCase, ...] = (
             "every control except the last, which beats it decisively, and "
             "what the lattice earns is the completeness bound rather than "
             "the ranking."),
+    _c("report-generated", "report", "report generated",
+       "answer", contains=("sound and badly incomplete",
+                           "1152 of the 196560",
+                           "every regenerated object checked identical"),
+       note="Generate rather than store, measured: what a generator saves "
+            "against the table it replaces, with every regenerated object "
+            "compared with the stored one, and whether the proposed "
+            "on-the-fly Leech sieve is the lattice -- it is sound and keeps "
+            "1,152 of the 196,560 minimal vectors."),
     _c("report-pipeline", "report", "report pipeline",
        "answer", contains=("six stages",),
        note="Study to test to implemented to measured: the stage each "

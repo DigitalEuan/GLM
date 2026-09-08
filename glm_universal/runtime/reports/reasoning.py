@@ -15,6 +15,7 @@ keeps the dispatcher readable as a dispatcher.
 from __future__ import annotations
 
 from ...reasoning import controller as ctl
+from ...reasoning import generative as gen
 from ...reasoning import retrieval as rt
 from ...reasoning import search_loop as sl
 
@@ -515,3 +516,209 @@ class ReasoningReports:
                 "none": rows["none"]["solved"],
                 "random": rows["random"]["solved"],
                 "lean_file": report["lean_file"]})})
+
+    # -- generate, don't store: the zero-storage substrate, measured ------
+
+    def _report_generated(self, query: Query) -> Solution:
+        """Wires gen.zero_storage_report -- what can be generated, and is it right?
+
+        The zero-storage proposal is that the substrate should stop holding
+        tables and start regenerating them: the lattice from an arithmetic
+        sieve at the moment of the snap, a real number from a process, a
+        register from a running loop.  This subject measures the proposal
+        against the package's own exact instruments -- the sieve against all
+        196,560 minimal vectors, the snap against an exact coset decoder, the
+        closed-form constants against certified processes -- and then asks
+        the same question of the overlay's own stored files.
+        """
+        report = gen.zero_storage_report(4)
+        sieve = report["sieve"]
+        fix = report["fix"]
+        snap = report["snap"]
+        near = report["snap_near"]
+        storage = report["storage"]
+        repo = report["repo"]
+        reals = report["exact_real"]
+        sextet = report["sextet"]
+        verdict = report["verdict"]
+        by_bits = {row["constant"]: row for row in reals["rows"]}
+
+        steps = [
+            Step("generating the lattice is the right idea",
+                 f"Membership of Lambda is three congruences on 24 integers, "
+                 f"so the {sieve['minimal_vectors']} minimal vectors never "
+                 f"have to be held: a stored shell costs "
+                 f"{storage['rows'][2]['stored_bytes']} bytes and the "
+                 f"generator that decides membership costs "
+                 f"{storage['rows'][2]['generator_bytes']} -- the Golay code, "
+                 f"itself regenerated from 12 rows and "
+                 f"checked identical to the stored code.  Over the whole "
+                 f"table the ratio is {q(storage['ratio'])} to one, and every "
+                 f"regenerated object was compared with the stored one before "
+                 f"the row was emitted: {storage['all_verified']}.",
+                 f"stored {storage['stored_bytes']} bytes, generator "
+                 f"{storage['generator_bytes']}, ratio {q(storage['ratio'])}, "
+                 f"all verified {storage['all_verified']}"),
+            Step("but the proposed sieve is not the lattice",
+                 f"The sieve keeps a vector when all 24 coordinates agree "
+                 f"mod 4.  That is sound -- {sieve['unsound']} of the vectors "
+                 f"it keeps are outside Lambda -- and it is not the Golay "
+                 f"condition of Construction C, which asks that the "
+                 f"coordinates which *disagree* form a codeword.  Run against "
+                 f"the kissing shell it keeps {sieve['kept']} of "
+                 f"{sieve['minimal_vectors']}: every "
+                 f"(4^2, 0^22) vector, 48 of the 98,304 odd ones, and none at "
+                 f"all of the 97,152 octad vectors.  Lean: v3Sieve_sound and "
+                 f"v3Sieve_iff in RequestProject/GLM/ZeroStorage.lean, with "
+                 f"octadVec the rejected minimal vector.",
+                 f"kept {sieve['kept']}/{sieve['minimal_vectors']}, recall "
+                 f"{q(sieve['recall'])}, unsound {sieve['unsound']}"),
+            Step("the repair is one line, and it is exact",
+                 f"Replacing 'all coordinates agree mod 4' by 'the "
+                 f"disagreeing coordinates form a Golay codeword' restores "
+                 f"the defining congruences at the same cost.  The repaired "
+                 f"sieve was compared with the package's own membership test "
+                 f"on {fix['checked']} vectors -- the whole shell plus probe "
+                 f"vectors in general position, {fix['probe_vectors_outside_lattice']} "
+                 f"of which are outside the lattice -- and agreed every time: "
+                 f"{fix['exact']}.",
+                 f"checked {fix['checked']}, agree {fix['agree']}, exact "
+                 f"{fix['exact']}"),
+            Step("and the generated snap does not snap",
+                 f"The proposed snap rounds, probes one coordinate at a time, "
+                 f"and falls back to 'round every coordinate to the nearest "
+                 f"even integer'.  On {snap['probes']} targets in general "
+                 f"position it returned a point outside the lattice "
+                 f"{snap['v3_outside_lattice']} times, at squared distance up "
+                 f"to {q(snap['worst_excess_dist2'])} beyond the true nearest "
+                 f"point; on {near['probes']} targets half a step from a "
+                 f"genuine minimal vector, {near['v3_outside_lattice']}.  The "
+                 f"exact coset decoder beside it answered inside the lattice "
+                 f"every time ({snap['exact_all_in_lattice']}) and within the "
+                 f"covering radius squared of {snap['covering_radius2']} "
+                 f"({snap['exact_within_covering_radius']}), which is the "
+                 f"check that it really is the nearest point.  Lean: "
+                 f"fallbackVec_not_isLeech.",
+                 f"v3 outside {snap['v3_outside_lattice']}/{snap['probes']} "
+                 f"general, {near['v3_outside_lattice']}/{near['probes']} "
+                 f"near; exact in lattice {snap['exact_all_in_lattice']}"),
+            Step("a generated number is only as good as its cost bound",
+                 f"Machin's pi and the Taylor e are exactly what they claim.  "
+                 f"The Babylonian sqrt is not: its own docstring promises "
+                 f"about 2^k bits after k steps and ten steps deliver "
+                 f"{by_bits['sqrt2 (Babylonian, 10 steps)']['bits_correct']}, "
+                 f"while the denominator of the iterate doubles in length "
+                 f"every step ({reals['babylonian_doubles']}), so the "
+                 f"module's own default of {reals['default_iterations']} "
+                 f"iterations is unrunnable.  The alternating ln2 at "
+                 f"precision 64 yields "
+                 f"{by_bits['ln2 (alternating, precision=64)']['bits_correct']} "
+                 f"bits, and the Euler-Mascheroni generator -- which rounds "
+                 f"log n to a bit length -- yields "
+                 f"{by_bits['gamma (H_n - ln2*bit_length, precision=8)']['bits_correct']}.  "
+                 f"{reals['claims_met']} of {reals['claims_made']} stated "
+                 f"accuracy claims hold.  A process is a number only when the "
+                 f"error is a function of the work, which is what "
+                 f"ExactReal.at(k) is for.",
+                 f"claims met {reals['claims_met']}/{reals['claims_made']}, "
+                 f"babylonian denominator doubles "
+                 f"{reals['babylonian_doubles']}"),
+            Step("the deep-hole 'portal' is a real invariant with a constant label",
+                 f"At each of the {sextet['weight4_words_checked']} weight-4 "
+                 f"words checked there are exactly six codewords at distance "
+                 f"4 and none closer ({sextet['sextet_confirmed']}), and "
+                 f"their pairwise distances are all 8 "
+                 f"({sextet['pairwise_distance_8']}): the sextet is genuine.  "
+                 f"What it is not is a Niemeier identification -- the "
+                 f"detector's output takes "
+                 f"{sextet['distinct_detector_outputs']} distinct value over "
+                 f"those words, and a constant separates nothing.  The "
+                 f"instrument that does read a hole's diagram is "
+                 f"reasoning/deep_holes.py.",
+                 f"sextets {sextet['sextet_confirmed']}/"
+                 f"{sextet['weight4_words_checked']}, distinct outputs "
+                 f"{sextet['distinct_detector_outputs']}"),
+            Step("and the same question, asked of this package",
+                 f"Of the {repo['total_bytes']} bytes the overlay keeps on "
+                 f"disk, {repo['generated_bytes']} are caches of things it "
+                 f"can recompute -- the address books from the Lean tree, the "
+                 f"type-2 table from the lattice -- each stored beside the "
+                 f"digest of the inputs it came from, and only "
+                 f"{repo['primary_bytes']} are primary data it was given.  "
+                 f"The generate-don't-store principle is already how this "
+                 f"system holds {q(repo['generated_fraction'])} of its bytes; "
+                 f"what the audit adds is that a generator has to be checked "
+                 f"against what it replaces.",
+                 f"generated {repo['generated_bytes']} bytes, primary "
+                 f"{repo['primary_bytes']}, fraction "
+                 f"{q(repo['generated_fraction'])}"),
+        ]
+
+        expected = {
+            "minimal_vectors": str(sieve["minimal_vectors"]),
+            "sieve_kept": str(sieve["kept"]),
+            "sieve_unsound": str(sieve["unsound"]),
+            "sieve_recall": q(sieve["recall"]),
+            "fix_checked": str(fix["checked"]),
+            "fix_agree": str(fix["agree"]),
+            "fix_exact": str(fix["exact"]),
+            "snap_probes": str(snap["probes"]),
+            "snap_outside": str(snap["v3_outside_lattice"]),
+            "snap_near_outside": str(near["v3_outside_lattice"]),
+            "exact_all_in_lattice": str(snap["exact_all_in_lattice"]),
+            "exact_within_covering_radius":
+                str(snap["exact_within_covering_radius"]),
+            "storage_stored_bytes": str(storage["stored_bytes"]),
+            "storage_generator_bytes": str(storage["generator_bytes"]),
+            "storage_ratio": q(storage["ratio"]),
+            "storage_all_verified": str(storage["all_verified"]),
+            "repo_generated_bytes": str(repo["generated_bytes"]),
+            "repo_primary_bytes": str(repo["primary_bytes"]),
+            "repo_generated_fraction": q(repo["generated_fraction"]),
+            "claims_met": str(reals["claims_met"]),
+            "claims_made": str(reals["claims_made"]),
+            "babylonian_doubles": str(reals["babylonian_doubles"]),
+            "sextet_confirmed": str(sextet["sextet_confirmed"]),
+            "sextet_distinct_outputs":
+                str(sextet["distinct_detector_outputs"]),
+        }
+        for key, value in verdict.items():
+            expected[f"verdict_{key}"] = str(value)
+
+        return Solution(
+            query=query, kind="report",
+            answer=f"report generated: how much of the substrate can be "
+                   f"generated instead of stored, and whether the generated "
+                   f"copy is the same object.  Generating is right in "
+                   f"principle -- the stored tables audited here cost "
+                   f"{storage['stored_bytes']} bytes against "
+                   f"{storage['generator_bytes']} for their generators, a "
+                   f"ratio of {q(storage['ratio'])} to one, every regenerated "
+                   f"object checked identical -- and "
+                   f"{q(repo['generated_fraction'])} of the overlay's own "
+                   f"stored bytes are already caches with a digest.  But the "
+                   f"proposed on-the-fly Leech sieve is sound and badly "
+                   f"incomplete: it keeps {sieve['kept']} of the "
+                   f"{sieve['minimal_vectors']} minimal vectors, because "
+                   f"'all coordinates agree mod 4' is not the Golay condition "
+                   f"of Construction C; the repaired sieve agrees with the "
+                   f"package's membership test on all {fix['checked']} "
+                   f"vectors tested.  The snap built on it returned a "
+                   f"non-lattice point on {snap['v3_outside_lattice']} of "
+                   f"{snap['probes']} targets in general position, where an "
+                   f"exact coset decoder is always inside and within the "
+                   f"covering radius.  Of the script's closed-form constants "
+                   f"{reals['claims_met']} of {reals['claims_made']} accuracy "
+                   f"claims hold.  The general statements are proved in "
+                   f"RequestProject/GLM/ZeroStorage.lean",
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "report_generated", "args": {}},
+            payload={"report": jsonable({
+                "minimal_vectors": sieve["minimal_vectors"],
+                "sieve_kept": sieve["kept"],
+                "sieve_unsound": sieve["unsound"],
+                "fix_exact": fix["exact"],
+                "snap_outside": snap["v3_outside_lattice"],
+                "storage_ratio": storage["ratio"],
+                "repo_generated_fraction": repo["generated_fraction"],
+                "lean_file": "RequestProject/GLM/ZeroStorage.lean"})})

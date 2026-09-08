@@ -202,6 +202,12 @@ REGISTRY: Tuple[Row, ...] = (
         ("reasoning/pipeline.py",),
         "pipeline",
         (), lean_expected=False),
+    Row("zero-storage", "generated instead of stored, and checked against "
+        "what it replaces",
+        "ZERO_STORAGE_STUDY.md",
+        ("reasoning/generative.py",),
+        "generated",
+        ("ZeroStorage.lean",)),
 )
 
 
