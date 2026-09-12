@@ -1,5 +1,18 @@
 # What was left behind in the archive, and what of it is a theorem
 
+
+## Tier 0 — the coarse read
+
+**Question.** What did the supplied archive still have to offer, and what of it is a theorem?
+
+**Verdict.** What each script claimed, what is now proved, and the nine claims that turned out to be false.
+
+**Deciding figure.** 25 files of Lean came back from the archive, mirrored in the overlay and checked by `lake build`.
+
+**Recomputed by.** `glm_universal.reasoning.salvage.salvage_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 *The supplied archive (`source_material/GLM-main.zip`) holds a decade of GLM
 experiments as loose scripts, notes and half-finished Lean files. This round
 went through the parts the brief named — the `glm_machine` scripts, the two

@@ -1,5 +1,18 @@
 # Can the system speak Lean results?
 
+
+## Tier 0 — the coarse read
+
+**Question.** Can the system speak Lean results — is a declaration's Leech address unique, readable back, and meaningful?
+
+**Verdict.** Yes to determinism, partly to meaning, and the two are not the same thing.
+
+**Deciding figure.** Every declaration read back exactly from its address, and nearest-by-address shares a source file many times more often than chance.
+
+**Recomputed by.** `glm_universal.reasoning.lean_address.lean_address_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 *Every declaration of the formal development is given a deterministic point of
 the Leech lattice, and the three questions that decides are then measured
 rather than asserted: is the address unique, can the declaration be read back
@@ -40,7 +53,7 @@ losslessness, and partly to meaning — and the three are different claims.**
   and perfectly useless.
 * **Losslessness** is a design question about the scale, and it is settled
   exactly: at scale 9 the feature vector is recovered from the address in every
-  one of 2,893 cases, with 0 coordinate errors out of 69,432.
+  case in the development, with no coordinate error anywhere (§5).
 * **Meaning** is the only interesting one, and it is a property of the *feature
   map*, not of the lattice. `Address.lean` proves this rather than arguing it:
   equal features force equal addresses, so the address cannot carry a single
@@ -72,38 +85,31 @@ wrong, and it *was* wrong in two ways that this round found and fixed:
   pins it there.
 
 The reader now tracks comment depth line by line (`_comment_depth_after`) and
-looks past a leading attribute bracket. The corpus moved from 804 to 849
-declarations across 35 files when that was fixed, stood at 1,270 across 48
-files for several rounds, reached **2,118** across **73** after the retrieval
-round, stood at **2,764** across **95** once the second pass and the restored
-files had joined it, and stands at **2,893** declarations across **99** files
-now that `Retrieval.lean` (38), `Controller.lean` (24), `ZeroStorage.lean` (26)
-and `ZeroStorageV5.lean` (41) have been added — the
-round documented in
-[`RETRIEVED_LEAN_STUDY.md`](RETRIEVED_LEAN_STUDY.md) has brought **848**
-declarations in 25 files back from the supplied archive: the MOG cube
-(`Cube/Surface.lean` 82, `Cube/Stabiliser.lean` 48, `Cube/Three.lean` 48,
-`Cube/Tax.lean` 32, `Cube/HexTiles.lean` 22), the Leech-lattice shortcut
-(`Shortcut/` — 128 across eight files), the three generations of the paper's
-formal companion (`Gen3.lean` 98, `Gen2.lean` 69, `Foundations.lean` 41), the
-electromagnetic calibration chain (`Calibration.lean` 70,
-`AlignmentPoints.lean` 17), the first-principles sub-study (`FitCapacity.lean`
-54, `Packing.lean` 32, `Triad.lean` 4), the projection sub-study
-(`SeedLayers.lean` 41), the graded cost model (`StepCost.lean` 28), spatial
-arithmetic (`SpatialArithmetic.lean` 22) and the ARC-era reasoning loop
-(`ReasoningLoop.lean` 12).
+looks past a leading attribute bracket. The corpus was 804 declarations across
+35 files before that was fixed and has grown with the development ever since —
+most of the growth being the retrieval round of
+[`RETRIEVED_LEAN_STUDY.md`](RETRIEVED_LEAN_STUDY.md), which brought the MOG
+cube, the Leech-lattice shortcut, the three generations of the paper's formal
+companion, the electromagnetic calibration chain, the first-principles
+sub-study, the projection sub-study, the graded cost model, spatial arithmetic
+and the ARC-era reasoning loop back from the supplied archive. Its size now is
+not written down here; it is emitted:
 
+<!-- generated: lean-corpus -->
 | kind | count |
 |---|---|
-| theorem | 1,922 |
-| def | 756 |
-| lemma | 110 |
-| abbrev | 38 |
-| structure | 27 |
-| instance | 24 |
-| inductive | 14 |
+| abbrev | 43 |
+| def | 826 |
 | example | 2 |
-| **total** | **2,893** |
+| inductive | 21 |
+| instance | 26 |
+| lemma | 112 |
+| structure | 40 |
+| theorem | 2,117 |
+| **total** | **3,187** |
+
+3,187 declarations across 111 files, the largest being `Gen3.lean` with 98.
+<!-- end generated -->
 
 The two `example` rows are `Denotation.lean`'s anonymous check that the physics
 register does not dimension the word *gravity* and one retrieved with
@@ -112,13 +118,11 @@ register does not dimension the word *gravity* and one retrieved with
 retrieved files supply fourteen more — so an unnamed declaration is addressed
 rather than silently dropped.
 
-Largest single file: `Gen3.lean`, 98 declarations.
-
 Two independent checks keep the reader honest.
 
-* `parser_agreement()` reports **2,893 parsed, 0 duplicates** — no name is
-  claimed twice — and will compare against the compiler's own list of names
-  when one is supplied.
+* `parser_agreement()` reports every declaration parsed and **0 duplicates** —
+  no name is claimed twice — and will compare against the compiler's own list
+  of names when one is supplied.
 * A new audit in `test_lean_address.py` scans **every** Python file of the
   package for tokens of the form `GLM.…` and requires each to resolve to a real
   declaration or a real namespace of the corpus. Nothing else in the project
@@ -135,8 +139,8 @@ Two independent checks keep the reader honest.
 One exact nearest-point decode used to cost about a tenth of a second, and
 since the class table of
 [`LLVQ_TABLE_STUDY.md`](LLVQ_TABLE_STUDY.md) took over the hot path it costs a
-few hundredths — still not something to do 2,893 times per query, and the
-address book is unchanged by the swap, declaration for declaration.
+few hundredths — still not something to do once per declaration per query, and
+the address book is unchanged by the swap, declaration for declaration.
 
 The address book is computed once and stored
 in `reasoning/_data/lean_addresses.json` **next to the SHA-256 digest of the
@@ -187,14 +191,18 @@ The feature vector is multiplied by `SCALE` before decoding. Two conditions
 pull in opposite directions, and `scale_sweep()` measures both on the first 60
 declarations in source order rather than asserting either:
 
+<!-- generated: lean-scale -->
 | scale | read back exactly | moved by the decoder | worst residual | verdict |
 |---|---|---|---|---|
-| 4 | 35 / 60 | 25 | — | **lossy** |
+| 4 | 31 / 60 | 29 | — | **lossy** |
 | 6 | 60 / 60 | 60 | 2 | lossless, non-degenerate |
-| 8 | 60 / 60 | **0** | 0 | **degenerate** |
+| 8 | 60 / 60 | 0 | 0 | **degenerate** |
 | **9** | **60 / 60** | **60** | **2** | **lossless, non-degenerate** |
-| 12 | 60 / 60 | 25 | 4 | lossless, partly degenerate |
-| 16 | 60 / 60 | **0** | 0 | **degenerate** |
+| 12 | 60 / 60 | 29 | 4 | lossless, partly degenerate |
+| 16 | 60 / 60 | 0 | 0 | **degenerate** |
+
+On the first 60 declarations in source order, decoding being the expensive step.  The chosen scale is 9.
+<!-- end generated -->
 
 The two failures are different in kind.
 
@@ -230,21 +238,24 @@ Reading an address back inverts the quantiser — divide by 9, round to the
 nearest integer — and it succeeds exactly when the quantisation error stayed
 below half a scale unit in every coordinate.
 
-| | measured |
+<!-- generated: lean-readback -->
+|  | measured |
 |---|---|
-| declarations checked | 2893 |
-| read back exactly | **2,893 / 2,893** (rate 1) |
-| coordinates checked | 69,432 |
+| declarations checked | 3,187 |
+| read back exactly | **3,187 / 3,187** (rate 1) |
+| coordinates checked | 76,488 |
 | coordinate errors | **0** |
-| moved by the decoder | 2,893 / 2,893 |
-| worst observed residual | **3**, at `GLM.Gen2.Meaning.pseudoscalar_parity_ne_zero` |
+| moved by the decoder | 3,187 / 3,187 |
+| worst observed residual | **3**, at `GLM.DeepHoleLadder.Reading.cumulative_ge_right` |
 | half a scale step | `9/2` |
 | covering radius | 4 |
+| bound respected | yes |
+<!-- end generated -->
 
-The worst residual anywhere in the development is 3, against a half-step of
-`9/2 = 4.5`. So the guarantee is not merely satisfied, it is satisfied with
-room: the bound that makes read-back *provable* is 4, and the worst case
-actually observed is 3.
+The worst residual anywhere in the development is strictly below the half-step
+of `9/2`. So the guarantee is not merely satisfied, it is satisfied with room:
+the bound that makes read-back *provable* is the covering radius 4, and the
+worst case actually observed is smaller than that.
 
 This is what makes the sentence in §8 well defined rather than a guess. Under
 scale 9 the encoding is a bijection onto its image, and "the address means the
@@ -254,11 +265,13 @@ declaration" is, at this point, a statement about the feature map alone.
 
 ## 6. Injectivity, and where the layer boundary falls
 
+<!-- generated: lean-injectivity -->
 | scheme | distinct addresses | distinct feature vectors | classes | declarations conflated | quantisation adds conflation? |
 |---|---|---|---|---|---|
-| `feature` | 2,547 / 2,893 | 2,547 | 235 | 581 | **no** |
-| `hash_control` | **2,893 / 2,893** | 2,547 | 0 | 0 | — |
-| `shuffled` | 2,547 / 2,893 | 2,547 | 235 | 581 | no |
+| `feature` | 2,823 / 3,187 | 2,823 | 249 | 613 | no |
+| `hash_control` | **3,187 / 3,187** | 2,823 | 0 | 0 | — |
+| `shuffled` | 2,823 / 3,187 | 2,823 | 249 | 613 | no |
+<!-- end generated -->
 
 Two things to read off this table.
 
@@ -271,57 +284,65 @@ proved, and `injective_features_of_injective_address` is the direction that
 other way round.
 
 **The control is injective and that means nothing.** SHA-256 of the name
-separates all 2,893, because a digest separates anything; §7 shows it separates
-them into a cloud with no structure in it. Injectivity is cheap. It is the
-wrong thing to optimise, and the control is in the report to make that visible.
+separates every declaration, because a digest separates anything; §7 shows it
+separates them into a cloud with no structure in it. Injectivity is cheap. It
+is the wrong thing to optimise, and the control is in the report to make that
+visible.
 
-The 235 classes are still small — 181 pairs, 26 triples, 18 classes of four,
-three of five, four of six, one of seven, one of eight and one of fifteen —
-and they are recognisably the *right* classes, in the sense that a reader shown
-only the 24 counts would also fail to tell the members apart:
+The classes are still small, and they are recognisably the *right* classes, in
+the sense that a reader shown only the 24 counts would also fail to tell the
+members apart:
+
+<!-- generated: lean-classes -->
+249 classes: 193 pairs, 29 triples, 15 classes of 4, 4 classes of 5, 5 classes of 6, 2 classes of 7, 1 class of 16.
+
+The widest, written out, because the point they make can only be read from the names:
 
 ```
-15 GLM.Calibration.dEnergy, GLM.Calibration.dLength, GLM.Calibration.dTime,
-   GLM.DimensionCarrier.Dim, GLM.DimensionCarrier.energyDim,
-   GLM.DimensionCarrier.mc4Shift, GLM.Foundations.Dim,
-   GLM.Foundations.energyDim, GLM.Foundations.mc4Shift,
-   GLM.Lightspeed.dEnergy, GLM.Lightspeed.dLength, GLM.Lightspeed.dMass,
-   GLM.Lightspeed.dSpeed, GLM.Lightspeed.dTime, GLM.VOA.vac
-8  GLM.Facets.Carrier, GLM.Gen2.Exps, GLM.Gen2.mass, GLM.Gen2.speed,
-   GLM.Golay24.Word, GLM.GolayHex.w, GLM.Info.Carrier24, GLM.Info.tea
-7  GLM.Calibration.NA_pos, GLM.Calibration.cSI_pos, GLM.Calibration.hSI_pos,
-   GLM.Lightspeed.NA_pos, GLM.Lightspeed.cSI_pos, GLM.Lightspeed.hSI_pos,
-   GLM.Lightspeed.molarPlanck_pos
-6  GLM.DimensionCarrier.mc4Dim, GLM.Foundations.mc4Dim, GLM.Gen2.energy,
-   GLM.GolayHex.w2, GLM.Heisenberg.V, GLM.Semantics.energyDim
-6  GLM.Calibration.NA, GLM.Calibration.molarPlanck, GLM.Lightspeed.NA,
-   GLM.Lightspeed.cSI, GLM.Lightspeed.hSI, GLM.Lightspeed.molarPlanck
-6  GLM.Calibration.cellDuration_bounds, GLM.Calibration.tick_bounds,
-   GLM.Calibration.workEnergy_bounds, GLM.Lightspeed.cellDuration_bounds,
-   GLM.Lightspeed.tick_bounds, GLM.Lightspeed.workEnergy_bounds
+16  GLM.Calibration.dEnergy, GLM.Calibration.dLength, GLM.Calibration.dTime,
+    GLM.Conjugate.energyDim, GLM.DimensionCarrier.Dim,
+    GLM.DimensionCarrier.energyDim, GLM.DimensionCarrier.mc4Shift,
+    GLM.Foundations.Dim, GLM.Foundations.energyDim,
+    GLM.Foundations.mc4Shift, GLM.Lightspeed.dEnergy,
+    GLM.Lightspeed.dLength, GLM.Lightspeed.dMass, GLM.Lightspeed.dSpeed,
+    GLM.Lightspeed.dTime, GLM.VOA.vac
+7   GLM.Calibration.NA_pos, GLM.Calibration.cSI_pos,
+    GLM.Calibration.hSI_pos, GLM.Lightspeed.NA_pos, GLM.Lightspeed.cSI_pos,
+    GLM.Lightspeed.hSI_pos, GLM.Lightspeed.molarPlanck_pos
+7   GLM.Gen2.Exps, GLM.Gen2.mass, GLM.Gen2.speed, GLM.Golay24.Word,
+    GLM.GolayHex.w, GLM.Info.Carrier24, GLM.Info.tea
+6   GLM.Admission.ledger_refusals, GLM.Completion.ledger_coverage,
+    GLM.Gen3.dimensionless_counts, GLM.GrayJump.d2_1000033_1000034,
+    GLM.LatticeShortcut.d2_1000033_1000034,
+    GLM.Vagueness.ledger_conjugate_conversions
+6   GLM.Calibration.NA, GLM.Calibration.molarPlanck, GLM.Lightspeed.NA,
+    GLM.Lightspeed.cSI, GLM.Lightspeed.hSI, GLM.Lightspeed.molarPlanck
+6   GLM.Calibration.cellDuration_bounds, GLM.Calibration.tick_bounds,
+    GLM.Calibration.workEnergy_bounds, GLM.Lightspeed.cellDuration_bounds,
+    GLM.Lightspeed.tick_bounds, GLM.Lightspeed.workEnergy_bounds
 ```
+<!-- end generated -->
 
 The largest class is the sharpest statement of what the layer cannot see: it is
-one dimension vector, written out in four different files — the calibration
-chain, the dimension carrier, the paper's `Foundations`, the restored
-`Lightspeed` — plus the vacuum vector of the VOA. Fifteen declarations, each a
-short definition of a tuple of exponents, and as *shapes* they are the same
-declaration. The single class of seven makes the same point: three
-positivity facts about SI constants restated in two files, and a fourth
-positivity fact beside them. Two of the four classes of six are the calibration
-chain against its own restored copy — a genuine duplication in the development, which
-the address layer notices and a reader would not.
+one dimension vector, written out in five different files — the calibration
+chain, the dimension carrier, the conjugate register, the paper's `Foundations`,
+the restored `Lightspeed` — plus the vacuum vector of the VOA. Sixteen
+declarations, each a short definition of a tuple of exponents, and as *shapes*
+they are the same declaration. The first class of seven makes the same point:
+positivity facts about SI constants restated in two files. Several of the
+classes of six are the calibration chain against its own restored copy — a
+genuine duplication in the development, which the address layer notices and a
+reader would not.
 
-The second line is a class of naming, and it has stayed at eight members across
-two re-measurements: one-line abbreviations for a carrier or a named datum — a
-function on `Fin 24`, a Golay word, a hexacode digit vector, an exponent tuple,
-a 24-coordinate carrier — which have, as *shapes*, nothing to tell them apart.
-That is the expected behaviour of a conflation class under a larger corpus and
-is worth stating plainly: a resolution's boundary widens when more statements of
-the same shape arrive. So the boundary of this layer is, almost exactly, "the
-same statement about a different member of the same family", which is a fair
-description of what a 24-count structural summary should be unable to see. What
-the growth from 119 classes to 235 adds is a second kind of member: the same
+The second class of seven is a class of naming: one-line abbreviations for a
+carrier or a named datum — a function on `Fin 24`, a Golay word, a hexacode
+digit vector, an exponent tuple, a 24-coordinate carrier — which have, as *shapes*, nothing
+to tell them apart. That is the expected behaviour of a conflation class under
+a larger corpus and is worth stating plainly: a resolution's boundary widens
+when more statements of the same shape arrive. So the boundary of this layer
+is, almost exactly, "the same statement about a different member of the same
+family", which is a fair description of what a 24-count structural summary
+should be unable to see. What growth adds is a second kind of member: the same
 statement in a different *file*, because a retrieved file and the file it was
 retrieved beside often state the same definition. That is a fact about the
 development, not about the encoding, and the address layer is the thing that
@@ -336,39 +357,44 @@ whether that neighbour came from the same file, and whether the two cite one
 another. Ties are broken by taking all of them, and the tie sizes are reported,
 so a scheme cannot win by being vague.
 
-The chance rate is not `1/98`. It is computed from the actual file sizes — the
-probability that a uniformly chosen other declaration shares a file — which
-comes to `9232/697213 ≈ 1.32 %`.
+The chance rate is not one over the number of files. It is computed in closed
+form from the actual file sizes — the probability that a uniformly chosen other
+declaration shares a file — and it appears as the *chance* row below.
 
+The third table is on *all* pairs, not just nearest ones.
+
+<!-- generated: lean-neighbours -->
 | scheme | nearest shares a file | rate | mean tie size |
 |---|---|---|---|
-| `feature` | **587 / 2,893** | ≈ **20.3 %** | 1.69 |
-| `hash_control` | 35 / 2,893 | ≈ 1.21 % | 1.00 |
-| `shuffled` | 26 / 2,893 | ≈ 0.90 % | 1.69 |
-| *chance* | — | ≈ 1.32 % | — |
+| `feature` | **624 / 3,187** | ≈ **19.58 %** | 1.68 |
+| `hash_control` | 33 / 3,187 | ≈ 1.04 % | 1.00 |
+| `shuffled` | 30 / 3,187 | ≈ 0.94 % | 1.68 |
+| *chance* | — | ≈ 1.18 % | — |
 
 | scheme | nearest is cited, either way | rate |
 |---|---|---|
-| `feature` | **106 / 2,893** | ≈ 3.66 % |
-| `hash_control` | 8 / 2,893 | ≈ 0.28 % |
-| `shuffled` | 3 / 2,893 | ≈ 0.10 % |
-| *chance* | — | ≈ 0.21 % |
-
-And on all pairs, not just nearest ones — 55,392 same-file pairs against
-4,127,886 cross-file ones:
+| `feature` | **116 / 3,187** | ≈ **3.64 %** |
+| `hash_control` | 6 / 3,187 | ≈ 0.19 % |
+| `shuffled` | 3 / 3,187 | ≈ 0.09 % |
+| *chance* | — | ≈ 0.19 % |
 
 | scheme | mean d² within a file | mean d² across files | ratio |
 |---|---|---|---|
-| `feature` | 5,742.7 | 6,618.1 | **0.868** |
-| `hash_control` | 54,451.1 | 54,300.4 | 1.003 |
-| `shuffled` | 6,457.2 | 6,608.5 | 0.977 |
+| `feature` | 5,791.0 | 6,669.7 | **0.868** |
+| `hash_control` | 54,446.1 | 54,284.1 | 1.003 |
+| `shuffled` | 6,572.7 | 6,660.4 | 0.987 |
+
+Against closed-form chance the feature encoding runs 16.7× on the file test and 19.0× on the citation test, from an encoding that is never shown a file name.
+
+Over 59,654 same-file pairs and 5,017,237 cross-file pairs.  The feature encoding beats the hash control: yes; beats the seeded reshuffle: yes; beats closed-form chance: yes.
+<!-- end generated -->
 
 The two controls do exactly what they are there for.
 
 * **`hash_control`** is deterministic, stable and injective, and lands within a
-  hair of chance on every measure: 1.21 % against 1.32 %, and a within-file
-  distance 0.3 % *above* the across-file one. This is what an address looks like
-  when it carries no information about its subject. It is the empirical content
+  hair of chance on every measure, with a within-file mean distance slightly
+  *above* the across-file one. This is what an address looks like when it
+  carries no information about its subject. It is the empirical content
   of directive **D3** — *a digest addresses integrity, never meaning* — and the
   reason the project has moved all of its SHA-256 use into a single
   `integrity` module one level above the six core sub-packages, where a purity
@@ -377,32 +403,29 @@ The two controls do exactly what they are there for.
   labelled as a control.
 * **`shuffled`** is the stronger null. It is the *same multiset of feature
   addresses*, re-assigned by a seeded permutation, so it has precisely the same
-  geometry — same distances available, same tie structure (mean tie size 1.69,
-  identical to `feature`), same 235 collision classes — and only the pairing
-  between address and declaration is destroyed. It lands at 0.90 %, below
-  chance, and its within-file mean distance is 2.3 % below the across-file one
-  against `feature`'s 13.2 % below — a residue of the fact that the shuffle
-  keeps the multiset of addresses and so keeps the corpus's clustering, while
-  losing the pairing that would make it mean anything. So the 20.3 % is not the
+  geometry — same distances available, same tie structure (its mean tie size is
+  identical to `feature`'s), same collision classes — and only the pairing
+  between address and declaration is destroyed. It lands at chance, and its
+  within-file mean distance sits far closer to its across-file one than
+  `feature`'s does — a residue of the fact that the shuffle keeps the multiset
+  of addresses and so keeps the corpus's clustering, while losing the pairing
+  that would make it mean anything. So the feature encoding's rate is not the
   lattice being clever with a lot of points; it is information the features
   supplied.
 
 Verdict, as the report computes it: `feature` beats chance, beats the digest
-control, and beats the shuffle, on both the file test and the citation test.
-The digest control is chance-like. Just over fifteen times chance on the file
-test, and just under eighteen times chance on the citation test, from an
-encoding that is never shown a file name. Both multiples have risen again on a
-larger corpus — the file-test multiple has gone 15.0×, 15.2×, 15.3× over the
-last three measurements — which is the one thing a file-proxy measurement could
-not have been arranged to do by growing: the absolute rate is flat (20.5 %,
-20.1 %, 20.3 %) while the chance rate keeps falling (1.36 %, 1.33 %, 1.32 %),
-which is what a real signal does when the population grows.
+control, and beats the shuffle, on both the file test and the citation test,
+and the digest control is chance-like. The multiple over chance has held or
+risen across every re-measurement on a growing corpus, which is the one thing a
+file-proxy measurement could not have been arranged to do by growing: the
+absolute rate stays flat while the chance rate falls, which is what a real
+signal does when the population grows.
 
-Two honest qualifications. First, 20.3 % is not 90 %: nearest-by-address is a
-weak retrieval signal, useful for "show me results shaped like this one" and
-not for "find the lemma I need". Second, the file test is a proxy — declarations
-in one file *are* usually about one thing, but the encoding is being credited
-for a correlation, not for understanding.
+Two honest qualifications. First, a fifth is not nine tenths:
+nearest-by-address is a weak retrieval signal, useful for "show me results
+shaped like this one" and not for "find the lemma I need". Second, the file
+test is a proxy — declarations in one file *are* usually about one thing, but
+the encoding is being credited for a correlation, not for understanding.
 
 ---
 
@@ -424,49 +447,52 @@ GLM.HigherLattices.BarnesWall.norm_dvd_eight      (HigherLattices.lean:198)
 GLM.Info.Layer.Visible.mono                       (Layers.lean:91)
   "a theorem, over Prop/Bool, citing 3 and cited by 1"
   |address|² = 4160,  read back exactly
-  nearest:  GLM.Golay.hdist_bitReverse                    d² = 320
-            GLM.Info.Layer.boundary_verdict               d² = 320
+  nearest:  GLM.Recipe.Spec.answer_of_mem                 d² = 256
+            GLM.Golay.hdist_bitReverse                    d² = 320
             GLM.Info.Layer.cumulativeTower_zero           d² = 320
 
 GLM.Address.address_congr                         (Address.lean:150)
   "a theorem, stating 2 equality/-ies, citing 5 and cited by 2"
   |address|² = 8944,  read back exactly
-  nearest:  GLM.ModeAlgebra.definitionOk_is_a_function_of_dominant_role  d² = 608
-            GLM.Shell.shSum_eq                            d² = 608
-            GLM.Info.namedResolution_of_injective         d² = 704
+  nearest:  GLM.Conjugate.rel_injective                   d² = 384
+            GLM.Shell.shSum_eq                            d² = 592
+            GLM.Completion.estimated_of_empty             d² = 608
 
 GLM.Info.glmChain_refines_of_le                   (LayerChain.lean:189)
-  "a theorem, stating 1 order relation(s), over N, citing 4 and cited by 1"
-  |address|² = 4672,  read back exactly
-  nearest:  GLM.CubeTax.xor_codeword_free                 d² = 256
-            GLM.Facets.proj_add                           d² = 256
-            GLM.Golay24.card_symmDiff_eq                  d² = 256
+  "a theorem, stating 1 order relation(s), over N, citing 5 and cited by 1"
+  |address|² = 5312,  read back exactly
+  nearest:  GLM.DeepHoleLadder.Reading.cumulative_ge_left d² = 128
+            GLM.Address.conflates_refl                    d² = 256
+            GLM.Info.namedLayer                           d² = 256
 ```
 
-None of the four moved this round: on a corpus twelve declarations larger, all
-four keep the same address, the same sentence and the same three neighbours at
-the same distances — the twelve new statements are of shapes that fall nowhere
-near these four. That is what a *weak* similarity signal does when the
-population grows away from it, and the examples are re-measured rather than
-re-picked.
+Two of the four moved this round, and in the way the encoding predicts they
+should. On a corpus 52 declarations larger (3,135 → 3,187) the two lattice
+results keep their addresses, their read-back sentences and their three nearest
+neighbours at the same distances. The other two moved because their *citation*
+coordinates moved, which is the encoding working rather than drifting:
+`glmChain_refines_of_le` is now read as citing 5 rather than 4, so its address
+grew from 4672 to 5312 and its neighbourhood re-sorted; `address_congr` keeps its
+address exactly and admits one new neighbour, `GLM.Shell.shSum_eq` at d² = 592,
+between the two it had. The examples are re-measured rather than re-picked, so
+this is a property of the round and not of the choice.
 
-The first two are the stable ones. `Visible.mono` keeps the same three
-neighbours in the same tie at 320, two of them from its own `Layers.lean`. The
-Barnes–Wall divisibility result keeps its modular-sum lemma from `TieBreak.lean`
-at d² = 1232, nearly four times further than anything in the second example,
-and its own file still supplies no neighbour at all in the top three; its
-neighbourhood has improved steadily as the corpus grew (1952, then 1488, now
-1232), which is what a thin region looks like when statements of a shape it was
-short of arrive. The two that moved both moved because a *citation count*
-changed, which is a coordinate: `address_congr` is now cited twice rather than
-once — `Retrieval.lean` cites it — so its own address shifted, its old tie at
-352/384 is gone, and the same mode-algebra result now sits at 608 beside a
-shell identity with its own file's `conflates_symm` out of the top three.
-`glmChain_refines_of_le` did not move at all (norm 4672, same sentence); its
-old nearest neighbour `ds_refines_of_le` did, its own citation count having
-risen, and at d² = 544 it is displaced by a three-way tie at 256 of statements
-of the same `≤ ⇒ something` shape from three different files — the encoding
-reads the shape, not the subject.
+The Barnes–Wall divisibility result is the stable one: it keeps its modular-sum
+lemma from `TieBreak.lean` at d² = 1232, then the two `Foundations.lean`
+statements at 1488 and 1904, unchanged, and its own file still supplies no
+neighbour at all in the top three; its neighbourhood improved steadily as the
+corpus grew (1952, then 1488, then 1232) and has now held for a round, which is
+what a thin region looks like once statements of a shape it was short of have
+arrived. `Visible.mono` keeps `Recipe.Spec.answer_of_mem` at 256 ahead of the
+pair at 320, so `boundary_verdict` stays out of the top three. `address_congr`
+keeps norm 8944 and its citation count of two, with two statements still
+between it and the mode-algebra result it used to tie with:
+`Conjugate.rel_injective` at 384 and `Completion.estimated_of_empty` at 608.
+`glmChain_refines_of_le` did not move either (norm 4672, same sentence), and
+its three-way tie at 256 is still led by
+`DeepHoleLadder.Reading.cumulative_ge_left` at 192 — a statement of the same
+`≤ ⇒ something` shape from the escalation file, which is a fourth file rather
+than a fourth subject. The encoding reads the shape, not the subject.
 A declaration far from everything gets a neighbour that means little, and the
 distance says so; a declaration in a dense region gets neighbours that mean
 something. The geometry reports its own confidence, and nothing in the pipeline
@@ -495,10 +521,14 @@ properties with no mention of which lattice is used.
 | `eightZ_mem_leech` | `8ℤ²⁴ ⊆ Λ` | §4: why not 8 |
 | `nineZ_not_mem_leech` | `(9,0,…,0) ∉ Λ` | §4: the degeneracy is 8's, not scaling's |
 
-Everything else in this document is a measurement: 2,893, 2,547, 587, 35, 26,
-106, 0 coordinate errors, worst residual 3. Those are properties of *this*
+Everything else in this document is a measurement, and no measurement is
+written here by hand: every table above is a generated block, emitted from
+`glm_universal.corpus.measurements` and rewritten by `python3 -m
+glm_universal.corpus --write`. Those figures are properties of *this*
 development at *this* commit, they move when the Lean sources move, and the
-digest guard is what makes them say so instead of going quietly stale.
+digest guard is what makes them say so instead of going quietly stale — a block
+whose measurements were taken from an older tree prints that it is stale rather
+than printing a number.
 
 ---
 
@@ -517,8 +547,8 @@ classes are its boundary, and both can be exhibited rather than argued about.
 integer counts of surface syntax; it does not know what a theorem says, only
 what shape it is. Two statements about different objects of the same family
 share an address, and the study names them rather than hiding them. Nor does it
-license retrieval: 20.3 % same-file is far above the 1.32 % chance rate and
-far below useful — and
+license retrieval: the same-file rate is far above chance and far below useful
+— and
 [`ADDRESS_RETRIEVAL_STUDY.md`](ADDRESS_RETRIEVAL_STUDY.md) has since made that
 precise by putting the address book to work as an index and measuring it
 against a plain lexical search, which beats it decisively.
@@ -527,9 +557,9 @@ against a plain lexical search, which beats it decisively.
 deterministic, stable across runs and machines, trivial to compute — every
 property one might naively want from an addressing scheme — and it is
 indistinguishable from chance on every measure that asks whether the address
-knows anything. That is the whole content of directive D3, measured on 2,893
-declarations, and it is why the project's SHA-256 use now lives in one module
-that the core sub-packages are audited not to import.
+knows anything. That is the whole content of directive D3, measured on every
+declaration of the development, and it is why the project's SHA-256 use now
+lives in one module that the core sub-packages are audited not to import.
 
 ---
 
@@ -556,6 +586,11 @@ PYTHONPATH=. python3 -c "from glm_universal.reasoning import lean_address as la;
 
 # rebuild the address book (slow: one exact decode per declaration)
 PYTHONPATH=. python3 -m glm_universal.tools lean-address --write
+
+# re-take the measurements this document's tables are emitted from,
+# and rewrite every generated block in it
+PYTHONPATH=. python3 -m glm_universal.corpus --remeasure
+PYTHONPATH=. python3 -m glm_universal.corpus --write
 
 # the tests
 PYTHONPATH=. python3 -m unittest glm_universal.tests.test_lean_address

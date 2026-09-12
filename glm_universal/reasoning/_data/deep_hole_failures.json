@@ -1,0 +1,6067 @@
+{
+ "cell": {
+  "layer": "joint",
+  "layer_name": "L4 - the joint reading, L2 and L3 together",
+  "starts": 1920
+ },
+ "counts": {
+  "a_closest_pair": 4,
+  "b_bimodal": 4,
+  "c_tie": 0,
+  "d_absent_from_shortlist": 0,
+  "near_miss": 1,
+  "none_of_the_four": 0
+ },
+ "failing_types": [
+  "D_10 E_7^2",
+  "D_6^4",
+  "D_8^3"
+ ],
+ "failures": [
+  {
+   "a_closest_pair": true,
+   "b_bimodal": true,
+   "c_tie": false,
+   "d_absent_from_shortlist": false,
+   "first_half_named": "E_8^3",
+   "half_gap": {
+    "__fraction__": "22920277/586850880"
+   },
+   "margin": {
+    "__fraction__": "16560697/3321138240"
+   },
+   "margin_over_separation": {
+    "__fraction__": "98229277434590/705583991625051"
+   },
+   "named": "D_10 E_7^2",
+   "near_miss": false,
+   "none_of_the_four": false,
+   "own_rank": 2,
+   "pair_distance": {
+    "__fraction__": "1935379/37316160"
+   },
+   "pair_rank": 2,
+   "query": "hole 5 · translation",
+   "second_half_named": "D_8^3",
+   "truth": "D_8^3"
+  },
+  {
+   "a_closest_pair": true,
+   "b_bimodal": true,
+   "c_tie": false,
+   "d_absent_from_shortlist": false,
+   "first_half_named": "D_10 E_7^2",
+   "half_gap": {
+    "__fraction__": "23512067/372427200"
+   },
+   "margin": {
+    "__fraction__": "3961389/427753760"
+   },
+   "margin_over_separation": {
+    "__fraction__": "422943480212940/1635792100434107"
+   },
+   "named": "D_8^3",
+   "near_miss": false,
+   "none_of_the_four": false,
+   "own_rank": 2,
+   "pair_distance": {
+    "__fraction__": "1935379/37316160"
+   },
+   "pair_rank": 2,
+   "query": "hole 7 · translation",
+   "second_half_named": "D_8^3",
+   "truth": "D_10 E_7^2"
+  },
+  {
+   "a_closest_pair": true,
+   "b_bimodal": true,
+   "c_tie": false,
+   "d_absent_from_shortlist": false,
+   "first_half_named": "E_6^4",
+   "half_gap": {
+    "__fraction__": "21610453/268756800"
+   },
+   "margin": {
+    "__fraction__": "57061341761/3593047267200"
+   },
+   "margin_over_separation": {
+    "__fraction__": "171184025283/386085607897"
+   },
+   "named": "E_6^4",
+   "near_miss": false,
+   "none_of_the_four": false,
+   "own_rank": 2,
+   "pair_distance": {
+    "__fraction__": "611863087/17082633600"
+   },
+   "pair_rank": 1,
+   "query": "hole 9 · negation",
+   "second_half_named": "D_6^4",
+   "truth": "D_6^4"
+  },
+  {
+   "a_closest_pair": true,
+   "b_bimodal": true,
+   "c_tie": false,
+   "d_absent_from_shortlist": false,
+   "first_half_named": "E_6^4",
+   "half_gap": {
+    "__fraction__": "3422191/71744400"
+   },
+   "margin": {
+    "__fraction__": "905706493/359494533760"
+   },
+   "margin_over_separation": {
+    "__fraction__": "40756792185/579434343389"
+   },
+   "named": "E_6^4",
+   "near_miss": true,
+   "none_of_the_four": false,
+   "own_rank": 2,
+   "pair_distance": {
+    "__fraction__": "611863087/17082633600"
+   },
+   "pair_rank": 1,
+   "query": "hole 9 · permutation",
+   "second_half_named": "D_6^4",
+   "truth": "D_6^4"
+  }
+ ],
+ "faithfulness": {
+  "certified_radius": {
+   "__fraction__": "611863087/34165267200"
+  },
+  "compatible": false,
+  "faithfulness": {
+   "__fraction__": "2095859/31802240"
+  },
+  "shortfall": {
+   "__fraction__": "129538369457/2699056108800"
+  }
+ },
+ "half_control": {
+  "correct": 40,
+  "correct_halves_disagree": 7,
+  "failures": 4,
+  "failures_halves_disagree": 4
+ },
+ "leave_out": {
+  "any_below_one": false,
+  "best_one": {
+   "below_one": false,
+   "dropped": [
+    "D_6^4"
+   ],
+   "kept": [
+    "A_12^2",
+    "A_1^24",
+    "A_2^12",
+    "D_10 E_7^2",
+    "D_16 E_8",
+    "D_24",
+    "D_8^3",
+    "E_6^4",
+    "E_8^3"
+   ],
+   "ratio": {
+    "__fraction__": "100904368185/43578928943"
+   },
+   "separation": {
+    "__fraction__": "1935379/37316160"
+   },
+   "spread": {
+    "__fraction__": "3634229/60525696"
+   }
+  },
+  "best_two": {
+   "below_one": false,
+   "dropped": [
+    "D_8^3",
+    "D_6^4"
+   ],
+   "kept": [
+    "A_12^2",
+    "A_1^24",
+    "A_2^12",
+    "D_10 E_7^2",
+    "D_16 E_8",
+    "D_24",
+    "E_6^4",
+    "E_8^3"
+   ],
+   "ratio": {
+    "__fraction__": "103651209318925/70109290256082"
+   },
+   "separation": {
+    "__fraction__": "74133713/912666400"
+   },
+   "spread": {
+    "__fraction__": "3634229/60525696"
+   }
+  },
+  "full": {
+   "below_one": false,
+   "kept": [
+    "A_12^2",
+    "A_1^24",
+    "A_2^12",
+    "D_10 E_7^2",
+    "D_16 E_8",
+    "D_24",
+    "D_6^4",
+    "D_8^3",
+    "E_6^4",
+    "E_8^3"
+   ],
+   "ratio": {
+    "__fraction__": "177875553330/48337183873"
+   },
+   "separation": {
+    "__fraction__": "611863087/17082633600"
+   },
+   "spread": {
+    "__fraction__": "2095859/31802240"
+   }
+  },
+  "one": [
+   {
+    "below_one": false,
+    "dropped": [
+     "D_6^4"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "100904368185/43578928943"
+    },
+    "separation": {
+     "__fraction__": "1935379/37316160"
+    },
+    "spread": {
+     "__fraction__": "3634229/60525696"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "E_6^4"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "244404405567/96170917889"
+    },
+    "separation": {
+     "__fraction__": "1935379/37316160"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_1^24"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_2^12"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "E_8^3"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "D_24"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_12^2"
+    ],
+    "kept": [
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "D_8^3"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "D_10 E_7^2"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "D_16 E_8"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   }
+  ],
+  "subsets_tried": 55,
+  "two": [
+   {
+    "below_one": false,
+    "dropped": [
+     "D_8^3",
+     "D_6^4"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "103651209318925/70109290256082"
+    },
+    "separation": {
+     "__fraction__": "74133713/912666400"
+    },
+    "spread": {
+     "__fraction__": "3634229/60525696"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "D_10 E_7^2",
+     "D_6^4"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_16 E_8",
+     "D_24",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "310953627956775/197775076067503"
+    },
+    "separation": {
+     "__fraction__": "8783367059/114995966400"
+    },
+    "spread": {
+     "__fraction__": "3634229/60525696"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "D_8^3",
+     "E_6^4"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "11955125552735/7367556665366"
+    },
+    "separation": {
+     "__fraction__": "74133713/912666400"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "E_6^4",
+     "D_10 E_7^2"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "753172909822305/436454292528769"
+    },
+    "separation": {
+     "__fraction__": "8783367059/114995966400"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "D_24",
+     "D_6^4"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "371276568/172248731"
+    },
+    "separation": {
+     "__fraction__": "1935379/37316160"
+    },
+    "spread": {
+     "__fraction__": "1718873/30751280"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_1^24",
+     "D_6^4"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "100904368185/43578928943"
+    },
+    "separation": {
+     "__fraction__": "1935379/37316160"
+    },
+    "spread": {
+     "__fraction__": "3634229/60525696"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_2^12",
+     "D_6^4"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "100904368185/43578928943"
+    },
+    "separation": {
+     "__fraction__": "1935379/37316160"
+    },
+    "spread": {
+     "__fraction__": "3634229/60525696"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "E_8^3",
+     "D_6^4"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_8^3",
+     "E_6^4"
+    ],
+    "ratio": {
+     "__fraction__": "100904368185/43578928943"
+    },
+    "separation": {
+     "__fraction__": "1935379/37316160"
+    },
+    "spread": {
+     "__fraction__": "3634229/60525696"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_12^2",
+     "D_6^4"
+    ],
+    "kept": [
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "100904368185/43578928943"
+    },
+    "separation": {
+     "__fraction__": "1935379/37316160"
+    },
+    "spread": {
+     "__fraction__": "3634229/60525696"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "E_6^4",
+     "D_6^4"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_8^3",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "100904368185/43578928943"
+    },
+    "separation": {
+     "__fraction__": "1935379/37316160"
+    },
+    "spread": {
+     "__fraction__": "3634229/60525696"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "D_16 E_8",
+     "D_6^4"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_24",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "100904368185/43578928943"
+    },
+    "separation": {
+     "__fraction__": "1935379/37316160"
+    },
+    "spread": {
+     "__fraction__": "3634229/60525696"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_1^24",
+     "E_6^4"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "244404405567/96170917889"
+    },
+    "separation": {
+     "__fraction__": "1935379/37316160"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_2^12",
+     "E_6^4"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "244404405567/96170917889"
+    },
+    "separation": {
+     "__fraction__": "1935379/37316160"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "E_8^3",
+     "E_6^4"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "D_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "244404405567/96170917889"
+    },
+    "separation": {
+     "__fraction__": "1935379/37316160"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "D_24",
+     "E_6^4"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_6^4",
+     "D_8^3",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "244404405567/96170917889"
+    },
+    "separation": {
+     "__fraction__": "1935379/37316160"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_12^2",
+     "E_6^4"
+    ],
+    "kept": [
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "244404405567/96170917889"
+    },
+    "separation": {
+     "__fraction__": "1935379/37316160"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "E_6^4",
+     "D_16 E_8"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "244404405567/96170917889"
+    },
+    "separation": {
+     "__fraction__": "1935379/37316160"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_1^24",
+     "A_2^12"
+    ],
+    "kept": [
+     "A_12^2",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_1^24",
+     "E_8^3"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_1^24",
+     "D_24"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_1^24",
+     "A_12^2"
+    ],
+    "kept": [
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_1^24",
+     "D_8^3"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_1^24",
+     "D_10 E_7^2"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_2^12",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_1^24",
+     "D_16 E_8"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_2^12",
+     "E_8^3"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_2^12",
+     "D_24"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_2^12",
+     "A_12^2"
+    ],
+    "kept": [
+     "A_1^24",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_2^12",
+     "D_8^3"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_2^12",
+     "D_10 E_7^2"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_2^12",
+     "D_16 E_8"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "D_10 E_7^2",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "E_8^3",
+     "D_24"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "E_8^3",
+     "A_12^2"
+    ],
+    "kept": [
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "E_8^3",
+     "D_8^3"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "E_6^4"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "E_8^3",
+     "D_10 E_7^2"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "E_8^3",
+     "D_16 E_8"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "D_24",
+     "A_12^2"
+    ],
+    "kept": [
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "D_24",
+     "D_8^3"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_6^4",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "D_24",
+     "D_10 E_7^2"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_16 E_8",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "D_24",
+     "D_16 E_8"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_12^2",
+     "D_8^3"
+    ],
+    "kept": [
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_12^2",
+     "D_10 E_7^2"
+    ],
+    "kept": [
+     "A_1^24",
+     "A_2^12",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "A_12^2",
+     "D_16 E_8"
+    ],
+    "kept": [
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "D_8^3",
+     "D_10 E_7^2"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_16 E_8",
+     "D_24",
+     "D_6^4",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "D_8^3",
+     "D_16 E_8"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_10 E_7^2",
+     "D_24",
+     "D_6^4",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   },
+   {
+    "below_one": false,
+    "dropped": [
+     "D_10 E_7^2",
+     "D_16 E_8"
+    ],
+    "kept": [
+     "A_12^2",
+     "A_1^24",
+     "A_2^12",
+     "D_24",
+     "D_6^4",
+     "D_8^3",
+     "E_6^4",
+     "E_8^3"
+    ],
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "separation": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    }
+   }
+  ]
+ },
+ "limits": "A deletion that takes the ratio below 1 certifies only over the types that remain.  The four diagnoses are readings of the same 44 queries and are not independent tests.  Nothing here is a new rung: no cell other than (joint, 1920) is measured, and no claim is made about one.",
+ "method": "One cell, declared in advance and not searched over: the joint reading at 1920 starts, which is the cell the escalation round landed on.  Every used query is re-read there and its exact distance to all ten references is kept, so that the four failures can be diagnosed by rank and margin rather than by hypothesis.  The spread is then opened up type by type, and the declared deletion sweep asks whether one type's spread is what holds the ratio above 1.",
+ "original_negative": {
+  "criterion": "rho < 1",
+  "reading": "The escalation round's negative is kept on the record beside whatever this round returns: at the passing cell the ratio is 2.59 against a criterion of 1, no absence is certified, and nothing below repairs that.",
+  "rho_at_the_passing_cell": {
+   "__fraction__": "217685134165020/83909068161919"
+  },
+  "stands": true
+ },
+ "pairs": [
+  {
+   "distance": {
+    "__fraction__": "611863087/17082633600"
+   },
+   "left": "E_6^4",
+   "rank": 1,
+   "right": "D_6^4"
+  },
+  {
+   "distance": {
+    "__fraction__": "1935379/37316160"
+   },
+   "left": "D_8^3",
+   "rank": 2,
+   "right": "D_10 E_7^2"
+  },
+  {
+   "distance": {
+    "__fraction__": "8783367059/114995966400"
+   },
+   "left": "E_8^3",
+   "rank": 3,
+   "right": "D_8^3"
+  },
+  {
+   "distance": {
+    "__fraction__": "74133713/912666400"
+   },
+   "left": "E_8^3",
+   "rank": 4,
+   "right": "D_10 E_7^2"
+  },
+  {
+   "distance": {
+    "__fraction__": "1362128581/16143988800"
+   },
+   "left": "E_8^3",
+   "rank": 5,
+   "right": "D_16 E_8"
+  },
+  {
+   "distance": {
+    "__fraction__": "2915129/33880704"
+   },
+   "left": "A_12^2",
+   "rank": 6,
+   "right": "D_8^3"
+  },
+  {
+   "distance": {
+    "__fraction__": "131845981/1498273920"
+   },
+   "left": "A_12^2",
+   "rank": 7,
+   "right": "D_16 E_8"
+  },
+  {
+   "distance": {
+    "__fraction__": "23605537/237164928"
+   },
+   "left": "A_12^2",
+   "rank": 8,
+   "right": "D_10 E_7^2"
+  },
+  {
+   "distance": {
+    "__fraction__": "4899991201/48484353600"
+   },
+   "left": "D_10 E_7^2",
+   "rank": 9,
+   "right": "D_16 E_8"
+  },
+  {
+   "distance": {
+    "__fraction__": "685099553/6519962400"
+   },
+   "left": "D_8^3",
+   "rank": 10,
+   "right": "D_6^4"
+  },
+  {
+   "distance": {
+    "__fraction__": "455513519/4186875600"
+   },
+   "left": "E_8^3",
+   "rank": 11,
+   "right": "D_6^4"
+  },
+  {
+   "distance": {
+    "__fraction__": "1684602401/15462955200"
+   },
+   "left": "D_24",
+   "rank": 12,
+   "right": "D_16 E_8"
+  },
+  {
+   "distance": {
+    "__fraction__": "373396807/3351346560"
+   },
+   "left": "D_8^3",
+   "rank": 13,
+   "right": "E_6^4"
+  },
+  {
+   "distance": {
+    "__fraction__": "354156671/3142504400"
+   },
+   "left": "D_8^3",
+   "rank": 14,
+   "right": "D_16 E_8"
+  },
+  {
+   "distance": {
+    "__fraction__": "1139559029/10054039680"
+   },
+   "left": "E_6^4",
+   "rank": 15,
+   "right": "D_10 E_7^2"
+  },
+  {
+   "distance": {
+    "__fraction__": "978267029/8382808800"
+   },
+   "left": "D_10 E_7^2",
+   "rank": 16,
+   "right": "D_6^4"
+  },
+  {
+   "distance": {
+    "__fraction__": "5945795069/50215881600"
+   },
+   "left": "E_8^3",
+   "rank": 17,
+   "right": "E_6^4"
+  },
+  {
+   "distance": {
+    "__fraction__": "195610063/1615286400"
+   },
+   "left": "E_8^3",
+   "rank": 18,
+   "right": "A_12^2"
+  },
+  {
+   "distance": {
+    "__fraction__": "2138821/14734720"
+   },
+   "left": "D_24",
+   "rank": 19,
+   "right": "A_12^2"
+  },
+  {
+   "distance": {
+    "__fraction__": "13277947/78499200"
+   },
+   "left": "A_12^2",
+   "rank": 20,
+   "right": "D_6^4"
+  },
+  {
+   "distance": {
+    "__fraction__": "228898729/1347255360"
+   },
+   "left": "E_8^3",
+   "rank": 21,
+   "right": "D_24"
+  },
+  {
+   "distance": {
+    "__fraction__": "94733783/543711168"
+   },
+   "left": "A_12^2",
+   "rank": 22,
+   "right": "E_6^4"
+  },
+  {
+   "distance": {
+    "__fraction__": "86525107/484581600"
+   },
+   "left": "D_16 E_8",
+   "rank": 23,
+   "right": "D_6^4"
+  },
+  {
+   "distance": {
+    "__fraction__": "706439/3831570"
+   },
+   "left": "D_24",
+   "rank": 24,
+   "right": "D_10 E_7^2"
+  },
+  {
+   "distance": {
+    "__fraction__": "1012151/5431680"
+   },
+   "left": "E_6^4",
+   "rank": 25,
+   "right": "D_16 E_8"
+  },
+  {
+   "distance": {
+    "__fraction__": "4575083/23840880"
+   },
+   "left": "D_24",
+   "rank": 26,
+   "right": "D_8^3"
+  },
+  {
+   "distance": {
+    "__fraction__": "9309131/34720800"
+   },
+   "left": "D_24",
+   "rank": 27,
+   "right": "D_6^4"
+  },
+  {
+   "distance": {
+    "__fraction__": "502693/1810560"
+   },
+   "left": "D_24",
+   "rank": 28,
+   "right": "E_6^4"
+  },
+  {
+   "distance": {
+    "__fraction__": "117/320"
+   },
+   "left": "A_1^24",
+   "rank": 29,
+   "right": "A_2^12"
+  },
+  {
+   "distance": {
+    "__fraction__": "77/192"
+   },
+   "left": "A_2^12",
+   "rank": 30,
+   "right": "E_6^4"
+  },
+  {
+   "distance": {
+    "__fraction__": "3869/9600"
+   },
+   "left": "A_2^12",
+   "rank": 31,
+   "right": "D_6^4"
+  },
+  {
+   "distance": {
+    "__fraction__": "557/1152"
+   },
+   "left": "A_2^12",
+   "rank": 32,
+   "right": "D_10 E_7^2"
+  },
+  {
+   "distance": {
+    "__fraction__": "1313/2688"
+   },
+   "left": "A_2^12",
+   "rank": 33,
+   "right": "D_8^3"
+  },
+  {
+   "distance": {
+    "__fraction__": "1741909/3550080"
+   },
+   "left": "A_2^12",
+   "rank": 34,
+   "right": "E_8^3"
+  },
+  {
+   "distance": {
+    "__fraction__": "1355/2496"
+   },
+   "left": "A_2^12",
+   "rank": 35,
+   "right": "A_12^2"
+  },
+  {
+   "distance": {
+    "__fraction__": "5407/9600"
+   },
+   "left": "A_2^12",
+   "rank": 36,
+   "right": "D_16 E_8"
+  },
+  {
+   "distance": {
+    "__fraction__": "9471/14720"
+   },
+   "left": "A_2^12",
+   "rank": 37,
+   "right": "D_24"
+  },
+  {
+   "distance": {
+    "__fraction__": "229/320"
+   },
+   "left": "A_1^24",
+   "rank": 38,
+   "right": "E_6^4"
+  },
+  {
+   "distance": {
+    "__fraction__": "6889/9600"
+   },
+   "left": "A_1^24",
+   "rank": 39,
+   "right": "D_6^4"
+  },
+  {
+   "distance": {
+    "__fraction__": "1511/1920"
+   },
+   "left": "A_1^24",
+   "rank": 40,
+   "right": "E_8^3"
+  },
+  {
+   "distance": {
+    "__fraction__": "4543/5760"
+   },
+   "left": "A_1^24",
+   "rank": 41,
+   "right": "D_10 E_7^2"
+  },
+  {
+   "distance": {
+    "__fraction__": "10667/13440"
+   },
+   "left": "A_1^24",
+   "rank": 42,
+   "right": "D_8^3"
+  },
+  {
+   "distance": {
+    "__fraction__": "3489/4160"
+   },
+   "left": "A_1^24",
+   "rank": 43,
+   "right": "A_12^2"
+  },
+  {
+   "distance": {
+    "__fraction__": "2749/3200"
+   },
+   "left": "A_1^24",
+   "rank": 44,
+   "right": "D_16 E_8"
+  },
+  {
+   "distance": {
+    "__fraction__": "41063/44160"
+   },
+   "left": "A_1^24",
+   "rank": 45,
+   "right": "D_24"
+  }
+ ],
+ "per_type": {
+  "certified": [
+   "A_2^12",
+   "A_12^2",
+   "A_1^24"
+  ],
+  "count": 3,
+  "reading": "For these types the criterion holds at the type level, so naming them is certified rather than heuristic; for the rest it does not, and naming them remains a faculty without a certificate.",
+  "total": 10
+ },
+ "queries": [
+  {
+   "best_distance": {
+    "__fraction__": "29/960"
+   },
+   "correct": true,
+   "first_half_named": "A_1^24",
+   "half_gap": {
+    "__fraction__": "11/160"
+   },
+   "halves_agree": true,
+   "kind": "seed",
+   "label": "A_1^24",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "29/960"
+   },
+   "own_rank": 1,
+   "query": "hole 0 · seed",
+   "ranked": [
+    [
+     "A_1^24",
+     {
+      "__fraction__": "29/960"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "19/48"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "47/64"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "7069/9600"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "103/128"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "929/1152"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "727/896"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "1777/2080"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "2799/3200"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "41707/44160"
+     }
+    ]
+   ],
+   "second_half_named": "A_1^24",
+   "truth": "A_1^24",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "13/480"
+   },
+   "correct": true,
+   "first_half_named": "A_1^24",
+   "half_gap": {
+    "__fraction__": "17/480"
+   },
+   "halves_agree": true,
+   "kind": "translation",
+   "label": "A_1^24",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "13/480"
+   },
+   "own_rank": 1,
+   "query": "hole 0 · translation",
+   "ranked": [
+    [
+     "A_1^24",
+     {
+      "__fraction__": "13/480"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "91/240"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "29/40"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "6979/9600"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "944273/1183360"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "4603/5760"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "10807/13440"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "1061/1248"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "8357/9600"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "13887/14720"
+     }
+    ]
+   ],
+   "second_half_named": "A_1^24",
+   "truth": "A_1^24",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "1/40"
+   },
+   "correct": true,
+   "first_half_named": "A_1^24",
+   "half_gap": {
+    "__fraction__": "17/480"
+   },
+   "halves_agree": true,
+   "kind": "negation",
+   "label": "A_1^24",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "1/40"
+   },
+   "own_rank": 1,
+   "query": "hole 0 · negation",
+   "ranked": [
+    [
+     "A_1^24",
+     {
+      "__fraction__": "1/40"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "361/960"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "137/192"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "6869/9600"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "1507/1920"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "4531/5760"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "10639/13440"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "10441/12480"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "8227/9600"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "13657/14720"
+     }
+    ]
+   ],
+   "second_half_named": "A_1^24",
+   "truth": "A_1^24",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "7/320"
+   },
+   "correct": true,
+   "first_half_named": "A_1^24",
+   "half_gap": {
+    "__fraction__": "1/30"
+   },
+   "halves_agree": true,
+   "kind": "permutation",
+   "label": "A_1^24",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "7/320"
+   },
+   "own_rank": 1,
+   "query": "hole 0 · permutation",
+   "ranked": [
+    [
+     "A_1^24",
+     {
+      "__fraction__": "7/320"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "347/960"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "341/480"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "6839/9600"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "1501/1920"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "4513/5760"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "10597/13440"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "5201/6240"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "8197/9600"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "13611/14720"
+     }
+    ]
+   ],
+   "second_half_named": "A_1^24",
+   "truth": "A_1^24",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "1/32"
+   },
+   "correct": true,
+   "first_half_named": "A_2^12",
+   "half_gap": {
+    "__fraction__": "7/160"
+   },
+   "halves_agree": true,
+   "kind": "seed",
+   "label": "A_2^12",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "1/32"
+   },
+   "own_rank": 1,
+   "query": "hole 1 · seed",
+   "ranked": [
+    [
+     "A_2^12",
+     {
+      "__fraction__": "1/32"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "117/320"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "131/320"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "3949/9600"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "2833/5760"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "6677/13440"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "117853/236672"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "3433/6240"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "5477/9600"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "5747/8832"
+     }
+    ]
+   ],
+   "second_half_named": "A_2^12",
+   "truth": "A_2^12",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "23/960"
+   },
+   "correct": true,
+   "first_half_named": "A_2^12",
+   "half_gap": {
+    "__fraction__": "1/32"
+   },
+   "halves_agree": true,
+   "kind": "translation",
+   "label": "A_2^12",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "23/960"
+   },
+   "own_rank": 1,
+   "query": "hole 1 · translation",
+   "ranked": [
+    [
+     "A_2^12",
+     {
+      "__fraction__": "23/960"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "353/960"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "193/480"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "1293/3200"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "2797/5760"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "6593/13440"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "1753003/3550080"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "3407/6240"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "5437/9600"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "28643/44160"
+     }
+    ]
+   ],
+   "second_half_named": "A_2^12",
+   "truth": "A_2^12",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "7/192"
+   },
+   "correct": true,
+   "first_half_named": "A_2^12",
+   "half_gap": {
+    "__fraction__": "19/480"
+   },
+   "halves_agree": true,
+   "kind": "negation",
+   "label": "A_2^12",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "7/192"
+   },
+   "own_rank": 1,
+   "query": "hole 1 · negation",
+   "ranked": [
+    [
+     "A_2^12",
+     {
+      "__fraction__": "7/192"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "117/320"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "77/192"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "3869/9600"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "2779/5760"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "6551/13440"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "346163/710016"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "421/780"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "5377/9600"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "28229/44160"
+     }
+    ]
+   ],
+   "second_half_named": "A_2^12",
+   "truth": "A_2^12",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "29/960"
+   },
+   "correct": true,
+   "first_half_named": "A_2^12",
+   "half_gap": {
+    "__fraction__": "5/96"
+   },
+   "halves_agree": true,
+   "kind": "permutation",
+   "label": "A_2^12",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "29/960"
+   },
+   "own_rank": 1,
+   "query": "hole 1 · permutation",
+   "ranked": [
+    [
+     "A_2^12",
+     {
+      "__fraction__": "29/960"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "59/160"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "397/960"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "3989/9600"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "575/1152"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "1355/2688"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "360955/710016"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "583/1040"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "1859/3200"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "29333/44160"
+     }
+    ]
+   ],
+   "second_half_named": "A_2^12",
+   "truth": "A_2^12",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "75976363/2737999200"
+   },
+   "correct": true,
+   "first_half_named": "E_8^3",
+   "half_gap": {
+    "__fraction__": "7478899/128481600"
+   },
+   "halves_agree": true,
+   "kind": "seed",
+   "label": "E_8^3",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "75976363/2737999200"
+   },
+   "own_rank": 1,
+   "query": "hole 2 · seed",
+   "ranked": [
+    [
+     "E_8^3",
+     {
+      "__fraction__": "75976363/2737999200"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "1285751/20731200"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "248273/3331800"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "255173501/2794269600"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "69037183/673393800"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "1776851659/16756732800"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "2316896651/17787369600"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "1063509/5676400"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "4591/9600"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "2507/3200"
+     }
+    ]
+   ],
+   "second_half_named": "E_8^3",
+   "truth": "E_8^3",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "43546061/1085732800"
+   },
+   "correct": true,
+   "first_half_named": "E_8^3",
+   "half_gap": {
+    "__fraction__": "406313351/6060859200"
+   },
+   "halves_agree": true,
+   "kind": "translation",
+   "label": "E_8^3",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "43546061/1085732800"
+   },
+   "own_rank": 1,
+   "query": "hole 2 · translation",
+   "ranked": [
+    [
+     "E_8^3",
+     {
+      "__fraction__": "43546061/1085732800"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "558420013/7608350400"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "12326443/163036080"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "2690773/32043504"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "183114359/1662069600"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "25852289/221491840"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "1401047573/10580169600"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "410818403/2339845200"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "1589/3200"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "7697/9600"
+     }
+    ]
+   ],
+   "second_half_named": "E_8^3",
+   "truth": "E_8^3",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "185011289/4939048800"
+   },
+   "correct": true,
+   "first_half_named": "E_8^3",
+   "half_gap": {
+    "__fraction__": "11293/191168"
+   },
+   "halves_agree": true,
+   "kind": "negation",
+   "label": "E_8^3",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "185011289/4939048800"
+   },
+   "own_rank": 1,
+   "query": "hole 2 · negation",
+   "ranked": [
+    [
+     "E_8^3",
+     {
+      "__fraction__": "185011289/4939048800"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "52763579/824065200"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "687316081/9888782400"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "307553317/3360369600"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "327828551/3358588800"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "102899927/971782560"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "186547369/1527926400"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "127753771/675813600"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "13681/28800"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "22471/28800"
+     }
+    ]
+   ],
+   "second_half_named": "E_8^3",
+   "truth": "E_8^3",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "111497663/3285599040"
+   },
+   "correct": true,
+   "first_half_named": "E_8^3",
+   "half_gap": {
+    "__fraction__": "8417113/137044800"
+   },
+   "halves_agree": true,
+   "kind": "permutation",
+   "label": "E_8^3",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "111497663/3285599040"
+   },
+   "own_rank": 1,
+   "query": "hole 2 · permutation",
+   "ranked": [
+    [
+     "E_8^3",
+     {
+      "__fraction__": "111497663/3285599040"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "289529/4442400"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "2176021/26654400"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "783799783/8080725600"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "22371253/223541568"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "43197911/372371840"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "2427504841/17787369600"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "2962257103/15734980800"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "13973/28800"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "22763/28800"
+     }
+    ]
+   ],
+   "second_half_named": "E_8^3",
+   "truth": "E_8^3",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "140683453/3027984960"
+   },
+   "correct": true,
+   "first_half_named": "D_24",
+   "half_gap": {
+    "__fraction__": "239767/3537216"
+   },
+   "halves_agree": true,
+   "kind": "seed",
+   "label": "D_24",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "140683453/3027984960"
+   },
+   "own_rank": 1,
+   "query": "hole 3 · seed",
+   "ranked": [
+    [
+     "D_24",
+     {
+      "__fraction__": "140683453/3027984960"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "118419037091/1072968436800"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "252320657/2018656640"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "9975989863/60592469600"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "38102009333/218368837440"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "10392257973/56614143040"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "17997439/69441600"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "1450597/5431680"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "5539/8832"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "8069/8832"
+     }
+    ]
+   ],
+   "second_half_named": "D_24",
+   "truth": "D_24",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "3634229/60525696"
+   },
+   "correct": true,
+   "first_half_named": "D_24",
+   "half_gap": {
+    "__fraction__": "1784147/23318688"
+   },
+   "halves_agree": true,
+   "kind": "translation",
+   "label": "D_24",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "3634229/60525696"
+   },
+   "own_rank": 1,
+   "query": "hole 3 · translation",
+   "ranked": [
+    [
+     "D_24",
+     {
+      "__fraction__": "3634229/60525696"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "170323351/1429821312"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "36542851/281012160"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "19344132581/109005206400"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "4025377457/21824622720"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "3344486711/16974706560"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "3293468981/12360604800"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "22397263/80569920"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "13939/22080"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "2533/2760"
+     }
+    ]
+   ],
+   "second_half_named": "D_24",
+   "truth": "D_24",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "68626847/1506341760"
+   },
+   "correct": true,
+   "first_half_named": "D_24",
+   "half_gap": {
+    "__fraction__": "528335/9027408"
+   },
+   "halves_agree": true,
+   "kind": "negation",
+   "label": "D_24",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "68626847/1506341760"
+   },
+   "own_rank": 1,
+   "query": "hole 3 · negation",
+   "ranked": [
+    [
+     "D_24",
+     {
+      "__fraction__": "68626847/1506341760"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "57095007911/533773180800"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "125578645/979122144"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "18272041411/108515295360"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "19786083731/108632672640"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "36106447/190727040"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "218006733/820336768"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "248251/905280"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "4697/7360"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "319/345"
+     }
+    ]
+   ],
+   "second_half_named": "D_24",
+   "truth": "D_24",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "1290161/23802240"
+   },
+   "correct": true,
+   "first_half_named": "D_24",
+   "half_gap": {
+    "__fraction__": "1152449/14909520"
+   },
+   "halves_agree": true,
+   "kind": "permutation",
+   "label": "D_24",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "1290161/23802240"
+   },
+   "own_rank": 1,
+   "query": "hole 3 · permutation",
+   "ranked": [
+    [
+     "D_24",
+     {
+      "__fraction__": "1290161/23802240"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "1439149097/11808074880"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "31157713/232071840"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "3718529207/20004700800"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "2271579617/12015803520"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "814333267/4005267840"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "160254709/583309440"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "37933277/133076160"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "14311/22080"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "5159/5520"
+     }
+    ]
+   ],
+   "second_half_named": "D_24",
+   "truth": "D_24",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "931531/34114080"
+   },
+   "correct": true,
+   "first_half_named": "A_12^2",
+   "half_gap": {
+    "__fraction__": "22526839/442994760"
+   },
+   "halves_agree": true,
+   "kind": "seed",
+   "label": "A_12^2",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "931531/34114080"
+   },
+   "own_rank": 1,
+   "query": "hole 4 · seed",
+   "ranked": [
+    [
+     "A_12^2",
+     {
+      "__fraction__": "931531/34114080"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "4127243257/48353385600"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "44130445/510263936"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "314455897/3280268160"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "2018792291/16383619200"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "436988549/3138495360"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "975922211/5573443200"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "113041729/626680080"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "569/1040"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "263/312"
+     }
+    ]
+   ],
+   "second_half_named": "A_12^2",
+   "truth": "A_12^2",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "14951/436800"
+   },
+   "correct": true,
+   "first_half_named": "A_12^2",
+   "half_gap": {
+    "__fraction__": "277361/4449120"
+   },
+   "halves_agree": true,
+   "kind": "translation",
+   "label": "A_12^2",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "14951/436800"
+   },
+   "own_rank": 1,
+   "query": "hole 4 · translation",
+   "ranked": [
+    [
+     "A_12^2",
+     {
+      "__fraction__": "14951/436800"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "193677/2764160"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "615310951/8399414400"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "263873527/2849059200"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "2654113273/25613827200"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "173128399/1168252800"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "11521/71040"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "2915827/17652960"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "3373/6240"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "5219/6240"
+     }
+    ]
+   ],
+   "second_half_named": "A_12^2",
+   "truth": "A_12^2",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "16377307/710726016"
+   },
+   "correct": true,
+   "first_half_named": "A_12^2",
+   "half_gap": {
+    "__fraction__": "9181797/136751680"
+   },
+   "halves_agree": true,
+   "kind": "negation",
+   "label": "A_12^2",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "16377307/710726016"
+   },
+   "own_rank": 1,
+   "query": "hole 4 · negation",
+   "ranked": [
+    [
+     "A_12^2",
+     {
+      "__fraction__": "16377307/710726016"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "25889841443/314807781600"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "1408024309/16610528480"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "793219373/8542557504"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "13648853/115377600"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "5310824531/40866745920"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "12492277987/72572510400"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "1788222457/10043176320"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "4523/8320"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "20953/24960"
+     }
+    ]
+   ],
+   "second_half_named": "A_12^2",
+   "truth": "A_12^2",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "5603513/177777600"
+   },
+   "correct": true,
+   "first_half_named": "A_12^2",
+   "half_gap": {
+    "__fraction__": "14009959/222462240"
+   },
+   "halves_agree": true,
+   "kind": "permutation",
+   "label": "A_12^2",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "5603513/177777600"
+   },
+   "own_rank": 1,
+   "query": "hole 4 · permutation",
+   "ranked": [
+    [
+     "A_12^2",
+     {
+      "__fraction__": "5603513/177777600"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "218769103/2849059200"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "6933359/78499200"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "2537494601/25641532800"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "2776710167/25613827200"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "513263/3203200"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "12649009/78499200"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "24841/150880"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "1123/2080"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "1043/1248"
+     }
+    ]
+   ],
+   "second_half_named": "A_12^2",
+   "truth": "A_12^2",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "21027437/554115360"
+   },
+   "correct": true,
+   "first_half_named": "D_8^3",
+   "half_gap": {
+    "__fraction__": "8708723/163360960"
+   },
+   "halves_agree": true,
+   "kind": "seed",
+   "label": "D_8^3",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "21027437/554115360"
+   },
+   "own_rank": 1,
+   "query": "hole 5 · seed",
+   "ranked": [
+    [
+     "D_8^3",
+     {
+      "__fraction__": "21027437/554115360"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "11065438997/174357741600"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "2410725089/34909267680"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "406669349/4942807800"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "6577360499/71138712960"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "76219655/719182464"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "19610132131/171528789600"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "5857919/28918176"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "6257/13440"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "3453/4480"
+     }
+    ]
+   ],
+   "second_half_named": "D_8^3",
+   "truth": "D_8^3",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "24153941/474448320"
+   },
+   "correct": false,
+   "first_half_named": "E_8^3",
+   "half_gap": {
+    "__fraction__": "22920277/586850880"
+   },
+   "halves_agree": false,
+   "kind": "translation",
+   "label": "D_10 E_7^2",
+   "margin": {
+    "__fraction__": "16560697/3321138240"
+   },
+   "own_distance": {
+    "__fraction__": "1718873/30751280"
+   },
+   "own_rank": 2,
+   "query": "hole 5 · translation",
+   "ranked": [
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "24153941/474448320"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "1718873/30751280"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "1374032207/16587748800"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "9101953/96683904"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "185470619/1880961600"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "5747921/57016960"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "1767550243/16318612800"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "30584399/151314240"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "2109/4480"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "10429/13440"
+     }
+    ]
+   ],
+   "second_half_named": "D_8^3",
+   "truth": "D_8^3",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "79730197/3841491360"
+   },
+   "correct": true,
+   "first_half_named": "D_8^3",
+   "half_gap": {
+    "__fraction__": "311741/7210560"
+   },
+   "halves_agree": true,
+   "kind": "negation",
+   "label": "D_8^3",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "79730197/3841491360"
+   },
+   "own_rank": 1,
+   "query": "hole 5 · negation",
+   "ranked": [
+    [
+     "D_8^3",
+     {
+      "__fraction__": "79730197/3841491360"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "28594999/512198848"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "8650596799/115120219200"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "7816409/101751936"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "48068071/460729920"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "7512585319/70454321280"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "1138342463/9992858400"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "85985209/450056640"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "6511/13440"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "10613/13440"
+     }
+    ]
+   ],
+   "second_half_named": "D_8^3",
+   "truth": "D_8^3",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "8258353/385393008"
+   },
+   "correct": true,
+   "first_half_named": "D_8^3",
+   "half_gap": {
+    "__fraction__": "18560029/483819840"
+   },
+   "halves_agree": true,
+   "kind": "permutation",
+   "label": "D_8^3",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "8258353/385393008"
+   },
+   "own_rank": 1,
+   "query": "hole 5 · permutation",
+   "ranked": [
+    [
+     "D_8^3",
+     {
+      "__fraction__": "8258353/385393008"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "74796025/1541572032"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "24839092261/346478932800"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "51714413/530930400"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "625916633/6425677440"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "164209/1665664"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "454541299/4260716460"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "33621/171028"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "1289/2688"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "10547/13440"
+     }
+    ]
+   ],
+   "second_half_named": "D_8^3",
+   "truth": "D_8^3",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "677723/25528896"
+   },
+   "correct": true,
+   "first_half_named": "E_6^4",
+   "half_gap": {
+    "__fraction__": "45976123/636185520"
+   },
+   "halves_agree": true,
+   "kind": "seed",
+   "label": "E_6^4",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "677723/25528896"
+   },
+   "own_rank": 1,
+   "query": "hole 6 · seed",
+   "ranked": [
+    [
+     "E_6^4",
+     {
+      "__fraction__": "677723/25528896"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "38139599/851414400"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "114912131/1169239680"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "50144687/501102720"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "282431101/2502806400"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "944819/6158880"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "229801/1353600"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "108613/415104"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "589/1440"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "521/720"
+     }
+    ]
+   ],
+   "second_half_named": "E_6^4",
+   "truth": "E_6^4",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "34309121/2047743360"
+   },
+   "correct": true,
+   "first_half_named": "D_6^4",
+   "half_gap": {
+    "__fraction__": "20701/568512"
+   },
+   "halves_agree": true,
+   "kind": "translation",
+   "label": "E_6^4",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "34309121/2047743360"
+   },
+   "own_rank": 1,
+   "query": "hole 6 · translation",
+   "ranked": [
+    [
+     "E_6^4",
+     {
+      "__fraction__": "34309121/2047743360"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "139638269/3414715200"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "11738091/104208832"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "232684987/2007570240"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "78616729/669913920"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "29158487/167207040"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "1800374947/9874987200"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "23053229/83603520"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "2317/5760"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "4129/5760"
+     }
+    ]
+   ],
+   "second_half_named": "D_6^4",
+   "truth": "E_6^4",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "51366549/1130392960"
+   },
+   "correct": true,
+   "first_half_named": "E_6^4",
+   "half_gap": {
+    "__fraction__": "2407849/42096960"
+   },
+   "halves_agree": false,
+   "kind": "negation",
+   "label": "E_6^4",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "51366549/1130392960"
+   },
+   "own_rank": 1,
+   "query": "hole 6 · negation",
+   "ranked": [
+    [
+     "E_6^4",
+     {
+      "__fraction__": "51366549/1130392960"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "227937359/3392976960"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "1121118809/9984738240"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "293385949/2588635840"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "6513041791/49869748800"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "37607289/239983744"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "1688060797/9812122560"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "2568376721/9553199040"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "803/1920"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "469/640"
+     }
+    ]
+   ],
+   "second_half_named": "D_6^4",
+   "truth": "E_6^4",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "22329793/507862080"
+   },
+   "correct": true,
+   "first_half_named": "E_6^4",
+   "half_gap": {
+    "__fraction__": "916907/13987344"
+   },
+   "halves_agree": false,
+   "kind": "permutation",
+   "label": "E_6^4",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "22329793/507862080"
+   },
+   "own_rank": 1,
+   "query": "hole 6 · permutation",
+   "ranked": [
+    [
+     "E_6^4",
+     {
+      "__fraction__": "22329793/507862080"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "11138101/199267200"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "19492853/221527680"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "184981117/1993749120"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "49492799/398318976"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "669293/4455360"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "32100259/192086400"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "6523217/24773760"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "403/960"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "47/64"
+     }
+    ]
+   ],
+   "second_half_named": "D_6^4",
+   "truth": "E_6^4",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "456267511/9904775040"
+   },
+   "correct": true,
+   "first_half_named": "D_8^3",
+   "half_gap": {
+    "__fraction__": "51851/665712"
+   },
+   "halves_agree": false,
+   "kind": "seed",
+   "label": "D_10 E_7^2",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "456267511/9904775040"
+   },
+   "own_rank": 1,
+   "query": "hole 7 · seed",
+   "ranked": [
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "456267511/9904775040"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "162121861/3301591680"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "8569736803/148411094400"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "4686469981/50487062400"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "76906577/756904608"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "597442387/5407523200"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "951260221/8034586560"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "615881213/3158897280"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "2057/4320"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "6751/8640"
+     }
+    ]
+   ],
+   "second_half_named": "D_6^4",
+   "truth": "D_10 E_7^2",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "212819441/4619740608"
+   },
+   "correct": false,
+   "first_half_named": "D_10 E_7^2",
+   "half_gap": {
+    "__fraction__": "23512067/372427200"
+   },
+   "halves_agree": false,
+   "kind": "translation",
+   "label": "D_8^3",
+   "margin": {
+    "__fraction__": "3961389/427753760"
+   },
+   "own_distance": {
+    "__fraction__": "182573173/3299814720"
+   },
+   "own_rank": 2,
+   "query": "hole 7 · translation",
+   "ranked": [
+    [
+     "D_8^3",
+     {
+      "__fraction__": "212819441/4619740608"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "182573173/3299814720"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "34265027/549374880"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "5457/59200"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "1009442449/10086629760"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "5501176367/48641515200"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "136946023/1189668480"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "375970571/1894318272"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "8213/17280"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "13487/17280"
+     }
+    ]
+   ],
+   "second_half_named": "D_8^3",
+   "truth": "D_10 E_7^2",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "10039063/219632256"
+   },
+   "correct": true,
+   "first_half_named": "D_10 E_7^2",
+   "half_gap": {
+    "__fraction__": "181211/3437280"
+   },
+   "halves_agree": false,
+   "kind": "negation",
+   "label": "D_10 E_7^2",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "10039063/219632256"
+   },
+   "own_rank": 1,
+   "query": "hole 7 · negation",
+   "ranked": [
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "10039063/219632256"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "413861759/7687128960"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "106896157/1828291200"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "89011883/952214400"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "21105437/207318400"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "30929897/296936640"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "4688345/41959728"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "566265191/3152096640"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "29/60"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "757/960"
+     }
+    ]
+   ],
+   "second_half_named": "D_8^3",
+   "truth": "D_10 E_7^2",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "3844679/123609780"
+   },
+   "correct": true,
+   "first_half_named": "D_8^3",
+   "half_gap": {
+    "__fraction__": "1616599/25807680"
+   },
+   "halves_agree": false,
+   "kind": "permutation",
+   "label": "D_10 E_7^2",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "3844679/123609780"
+   },
+   "own_rank": 1,
+   "query": "hole 7 · permutation",
+   "ranked": [
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "3844679/123609780"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "46722581/988878240"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "804209377/9878097600"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "84292339/916755840"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "1468439411/14576738400"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "4063699/37549440"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "39994073/360039600"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "14948177/81097632"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "2749/5760"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "4507/5760"
+     }
+    ]
+   ],
+   "second_half_named": "D_10 E_7^2",
+   "truth": "D_10 E_7^2",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "1277676737/47436609600"
+   },
+   "correct": true,
+   "first_half_named": "D_16 E_8",
+   "half_gap": {
+    "__fraction__": "22730963/245966400"
+   },
+   "halves_agree": true,
+   "kind": "seed",
+   "label": "D_16 E_8",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "1277676737/47436609600"
+   },
+   "own_rank": 1,
+   "query": "hole 8 · seed",
+   "ranked": [
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "1277676737/47436609600"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "402368149/4746268800"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "4569252467/48218961600"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "1695261607/16090372800"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "492495611/4618484640"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "814095167/7039538100"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "1526902913/8201656800"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "5264443/27158400"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "16421/28800"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "24941/28800"
+     }
+    ]
+   ],
+   "second_half_named": "D_16 E_8",
+   "truth": "D_16 E_8",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "721148879/23875466400"
+   },
+   "correct": true,
+   "first_half_named": "D_16 E_8",
+   "half_gap": {
+    "__fraction__": "15736847/249249600"
+   },
+   "halves_agree": true,
+   "kind": "translation",
+   "label": "D_16 E_8",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "721148879/23875466400"
+   },
+   "own_rank": 1,
+   "query": "hole 8 · translation",
+   "ranked": [
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "721148879/23875466400"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "161725399/1941538752"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "4618960741/52554902400"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "2399805743/23245437600"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "85854299/809849520"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "4479899693/37792977600"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "61630073/344000100"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "9412466489/49509763200"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "3221/5760"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "985/1152"
+     }
+    ]
+   ],
+   "second_half_named": "D_16 E_8",
+   "truth": "D_16 E_8",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "816708709/15812203200"
+   },
+   "correct": true,
+   "first_half_named": "D_16 E_8",
+   "half_gap": {
+    "__fraction__": "23485141/393566400"
+   },
+   "halves_agree": true,
+   "kind": "negation",
+   "label": "D_16 E_8",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "816708709/15812203200"
+   },
+   "own_rank": 1,
+   "query": "hole 8 · negation",
+   "ranked": [
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "816708709/15812203200"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "4318860503/52208956800"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "2250475459/24109480800"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "84529279/769747440"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "1441557641/12067779600"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "210248923/1759884525"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "836741/4528800"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "46091479/237603200"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "16333/28800"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "24853/28800"
+     }
+    ]
+   ],
+   "second_half_named": "D_16 E_8",
+   "truth": "D_16 E_8",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "1659533953/47724739200"
+   },
+   "correct": true,
+   "first_half_named": "D_16 E_8",
+   "half_gap": {
+    "__fraction__": "22323337/398354400"
+   },
+   "halves_agree": true,
+   "kind": "permutation",
+   "label": "D_16 E_8",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "1659533953/47724739200"
+   },
+   "own_rank": 1,
+   "query": "hole 8 · permutation",
+   "ranked": [
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "1659533953/47724739200"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "742838609/9702368640"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "28978931/336705600"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "5133282647/48564316800"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "12389103313/113316739200"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "1116155353/9293074560"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "3122411/18115200"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "30893/169740"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "2003/3600"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "767/900"
+     }
+    ]
+   ],
+   "second_half_named": "D_16 E_8",
+   "truth": "D_16 E_8",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "4608087/189505120"
+   },
+   "correct": true,
+   "first_half_named": "D_6^4",
+   "half_gap": {
+    "__fraction__": "4910561/88641600"
+   },
+   "halves_agree": true,
+   "kind": "seed",
+   "label": "D_6^4",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "4608087/189505120"
+   },
+   "own_rank": 1,
+   "query": "hole 9 · seed",
+   "ranked": [
+    [
+     "D_6^4",
+     {
+      "__fraction__": "4608087/189505120"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "1558941031/51139267200"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "264647/2591400"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "154454339/1394173200"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "5755023053/50136004800"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "437781563/2584982400"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "198071/1129800"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "13955539/51970800"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "3929/9600"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "6949/9600"
+     }
+    ]
+   ],
+   "second_half_named": "D_6^4",
+   "truth": "D_6^4",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "2095859/31802240"
+   },
+   "correct": true,
+   "first_half_named": "E_6^4",
+   "half_gap": {
+    "__fraction__": "989821/14773200"
+   },
+   "halves_agree": false,
+   "kind": "translation",
+   "label": "D_6^4",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "2095859/31802240"
+   },
+   "own_rank": 1,
+   "query": "hole 9 · translation",
+   "ranked": [
+    [
+     "D_6^4",
+     {
+      "__fraction__": "2095859/31802240"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "8149823/119195200"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "503010031/4211395200"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "529697287/4206844800"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "434715689/3275529600"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "16663799/94894800"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "778141207/4138588800"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "124789367/447708800"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "47/120"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "113/160"
+     }
+    ]
+   ],
+   "second_half_named": "D_6^4",
+   "truth": "D_6^4",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "239035459/5712316800"
+   },
+   "correct": false,
+   "first_half_named": "E_6^4",
+   "half_gap": {
+    "__fraction__": "21610453/268756800"
+   },
+   "halves_agree": false,
+   "kind": "negation",
+   "label": "E_6^4",
+   "margin": {
+    "__fraction__": "57061341761/3593047267200"
+   },
+   "own_distance": {
+    "__fraction__": "6873497/119069700"
+   },
+   "own_rank": 2,
+   "query": "hole 9 · negation",
+   "ranked": [
+    [
+     "E_6^4",
+     {
+      "__fraction__": "239035459/5712316800"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "6873497/119069700"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "2009019683/16818926400"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "575164507/4360462400"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "1121920333/8400376800"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "1067842207/6063657600"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "1669693/9086400"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "1495452169/5364004800"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "3799/9600"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "2273/3200"
+     }
+    ]
+   ],
+   "second_half_named": "D_6^4",
+   "truth": "D_6^4",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "34836157/1071625200"
+   },
+   "correct": false,
+   "first_half_named": "E_6^4",
+   "half_gap": {
+    "__fraction__": "3422191/71744400"
+   },
+   "halves_agree": false,
+   "kind": "permutation",
+   "label": "E_6^4",
+   "margin": {
+    "__fraction__": "905706493/359494533760"
+   },
+   "own_distance": {
+    "__fraction__": "200298133/5718364800"
+   },
+   "own_rank": 2,
+   "query": "hole 9 · permutation",
+   "ranked": [
+    [
+     "E_6^4",
+     {
+      "__fraction__": "34836157/1071625200"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "200298133/5718364800"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "5545105117/50483433600"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "4538137403/39264892800"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "5872141529/50428886400"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "53637847/303343040"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "1670213/9091200"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "19242297/69699200"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "1889/4800"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "1133/1600"
+     }
+    ]
+   ],
+   "second_half_named": "D_6^4",
+   "truth": "D_6^4",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "180591289/4100342400"
+   },
+   "correct": true,
+   "first_half_named": "E_8^3",
+   "half_gap": {
+    "__fraction__": "7637503/170754400"
+   },
+   "halves_agree": true,
+   "kind": "sibling",
+   "label": "E_8^3",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "180591289/4100342400"
+   },
+   "own_rank": 1,
+   "query": "walk 6 · sibling centre",
+   "ranked": [
+    [
+     "E_8^3",
+     {
+      "__fraction__": "180591289/4100342400"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "96211177/1368259200"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "292872529/4104777600"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "353732069/4033814400"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "28802519/278974080"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "110243009/1045598400"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "1830893/14414400"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "9560129/51004800"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "7009/14400"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "2851/3600"
+     }
+    ]
+   ],
+   "second_half_named": "E_8^3",
+   "truth": "E_8^3",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "90138443/1650787200"
+   },
+   "correct": true,
+   "first_half_named": "E_8^3",
+   "half_gap": {
+    "__fraction__": "168378277/3113636400"
+   },
+   "halves_agree": true,
+   "kind": "sibling",
+   "label": "E_8^3",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "90138443/1650787200"
+   },
+   "own_rank": 1,
+   "query": "walk 7 · sibling centre",
+   "ranked": [
+    [
+     "E_8^3",
+     {
+      "__fraction__": "90138443/1650787200"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "99760493/1652572800"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "44433529/550857600"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "159063587/1624003200"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "5350273/52619400"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "60719023/561571200"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "1900037/14894880"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "2615801/13749120"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "6779/14400"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "5587/7200"
+     }
+    ]
+   ],
+   "second_half_named": "E_8^3",
+   "truth": "E_8^3",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "65761321/1273728960"
+   },
+   "correct": true,
+   "first_half_named": "E_6^4",
+   "half_gap": {
+    "__fraction__": "35977/439920"
+   },
+   "halves_agree": true,
+   "kind": "sibling",
+   "label": "E_6^4",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "65761321/1273728960"
+   },
+   "own_rank": 1,
+   "query": "walk 10 · sibling centre",
+   "ranked": [
+    [
+     "E_6^4",
+     {
+      "__fraction__": "65761321/1273728960"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "77607827/1213718400"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "86601577/1000073088"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "50385733/555596160"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "815721407/8324937600"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "26931413/193152960"
+     }
+    ],
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "2024027/13507200"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "15110033/62133120"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "567367/1350720"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "263/360"
+     }
+    ]
+   ],
+   "second_half_named": "E_6^4",
+   "truth": "E_6^4",
+   "verdict": "named"
+  },
+  {
+   "best_distance": {
+    "__fraction__": "364589297/9550186560"
+   },
+   "correct": true,
+   "first_half_named": "A_12^2",
+   "half_gap": {
+    "__fraction__": "51685279/664660800"
+   },
+   "halves_agree": false,
+   "kind": "sibling",
+   "label": "D_16 E_8",
+   "margin": {
+    "__fraction__": "0/1"
+   },
+   "own_distance": {
+    "__fraction__": "364589297/9550186560"
+   },
+   "own_rank": 1,
+   "query": "walk 11 · sibling centre",
+   "ranked": [
+    [
+     "D_16 E_8",
+     {
+      "__fraction__": "364589297/9550186560"
+     }
+    ],
+    [
+     "E_8^3",
+     {
+      "__fraction__": "3966049147/48538468800"
+     }
+    ],
+    [
+     "A_12^2",
+     {
+      "__fraction__": "671900941/7507843200"
+     }
+    ],
+    [
+     "D_10 E_7^2",
+     {
+      "__fraction__": "886505897/9718194240"
+     }
+    ],
+    [
+     "D_8^3",
+     {
+      "__fraction__": "601573939/5668946640"
+     }
+    ],
+    [
+     "D_24",
+     {
+      "__fraction__": "390659921/3320776800"
+     }
+    ],
+    [
+     "D_6^4",
+     {
+      "__fraction__": "194561/1132200"
+     }
+    ],
+    [
+     "E_6^4",
+     {
+      "__fraction__": "4868383/27158400"
+     }
+    ],
+    [
+     "A_2^12",
+     {
+      "__fraction__": "15881/28800"
+     }
+    ],
+    [
+     "A_1^24",
+     {
+      "__fraction__": "24401/28800"
+     }
+    ]
+   ],
+   "second_half_named": "D_16 E_8",
+   "truth": "D_16 E_8",
+   "verdict": "named"
+  }
+ ],
+ "reproduction": {
+  "correct": 40,
+  "expected_correct": 40,
+  "expected_queries": 44,
+  "failures": 4,
+  "queries": 44,
+  "reproduces": true
+ },
+ "same_mechanism": true,
+ "source_digest": "dce7c4c0c81efdb71c64768798b498cc4f743f881aca648b9aeb782cbc7ba702",
+ "spread": {
+  "closest_pair": [
+   "E_6^4",
+   "D_6^4"
+  ],
+  "rho_all": {
+   "__fraction__": "177875553330/48337183873"
+  },
+  "rho_seed": {
+   "__fraction__": "217685134165020/83909068161919"
+  },
+  "rows": [
+   {
+    "gap": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "nearest_reference": "E_6^4",
+    "ratio": {
+     "__fraction__": "177875553330/48337183873"
+    },
+    "ratio_seed": {
+     "__fraction__": "142213943160/104739835711"
+    },
+    "seed_spread": {
+     "__fraction__": "4608087/189505120"
+    },
+    "spread": {
+     "__fraction__": "2095859/31802240"
+    },
+    "type": "D_6^4",
+    "widest_by": "hole 9 · translation"
+   },
+   {
+    "gap": {
+     "__fraction__": "1684602401/15462955200"
+    },
+    "nearest_reference": "D_16 E_8",
+    "ratio": {
+     "__fraction__": "165266563775/149929613689"
+    },
+    "ratio_seed": {
+     "__fraction__": "2559032010070/3000276876181"
+    },
+    "seed_spread": {
+     "__fraction__": "140683453/3027984960"
+    },
+    "spread": {
+     "__fraction__": "3634229/60525696"
+    },
+    "type": "D_24",
+    "widest_by": "hole 3 · translation"
+   },
+   {
+    "gap": {
+     "__fraction__": "1935379/37316160"
+    },
+    "nearest_reference": "D_10 E_7^2",
+    "ratio": {
+     "__fraction__": "371276568/172248731"
+    },
+    "ratio_seed": {
+     "__fraction__": "5298914124/3621094109"
+    },
+    "seed_spread": {
+     "__fraction__": "21027437/554115360"
+    },
+    "spread": {
+     "__fraction__": "1718873/30751280"
+    },
+    "type": "D_8^3",
+    "widest_by": "hole 5 · translation"
+   },
+   {
+    "gap": {
+     "__fraction__": "1935379/37316160"
+    },
+    "nearest_reference": "D_8^3",
+    "ratio": {
+     "__fraction__": "2556024422/1197999601"
+    },
+    "ratio_seed": {
+     "__fraction__": "3193872577/1797967091"
+    },
+    "seed_spread": {
+     "__fraction__": "456267511/9904775040"
+    },
+    "spread": {
+     "__fraction__": "182573173/3299814720"
+    },
+    "type": "D_10 E_7^2",
+    "widest_by": "hole 7 · translation"
+   },
+   {
+    "gap": {
+     "__fraction__": "8783367059/114995966400"
+    },
+    "nearest_reference": "D_8^3",
+    "ratio": {
+     "__fraction__": "389307935317/272284378829"
+    },
+    "ratio_seed": {
+     "__fraction__": "6382014492/8783367059"
+    },
+    "seed_spread": {
+     "__fraction__": "75976363/2737999200"
+    },
+    "spread": {
+     "__fraction__": "90138443/1650787200"
+    },
+    "type": "E_8^3",
+    "widest_by": "walk 7 · sibling centre"
+   },
+   {
+    "gap": {
+     "__fraction__": "1362128581/16143988800"
+    },
+    "nearest_reference": "E_8^3",
+    "ratio": {
+     "__fraction__": "3020188805882/2466814860191"
+    },
+    "ratio_seed": {
+     "__fraction__": "4724848573426/7400444580573"
+    },
+    "seed_spread": {
+     "__fraction__": "1277676737/47436609600"
+    },
+    "spread": {
+     "__fraction__": "816708709/15812203200"
+    },
+    "type": "D_16 E_8",
+    "widest_by": "hole 8 · negation"
+   },
+   {
+    "gap": {
+     "__fraction__": "611863087/17082633600"
+    },
+    "nearest_reference": "D_6^4",
+    "ratio": {
+     "__fraction__": "827277418180/286963787803"
+    },
+    "ratio_seed": {
+     "__fraction__": "42628776700/28757565089"
+    },
+    "seed_spread": {
+     "__fraction__": "677723/25528896"
+    },
+    "spread": {
+     "__fraction__": "65761321/1273728960"
+    },
+    "type": "E_6^4",
+    "widest_by": "walk 10 · sibling centre"
+   },
+   {
+    "gap": {
+     "__fraction__": "117/320"
+    },
+    "nearest_reference": "A_1^24",
+    "ratio": {
+     "__fraction__": "70/351"
+    },
+    "ratio_seed": {
+     "__fraction__": "20/117"
+    },
+    "seed_spread": {
+     "__fraction__": "1/32"
+    },
+    "spread": {
+     "__fraction__": "7/192"
+    },
+    "type": "A_2^12",
+    "widest_by": "hole 1 · negation"
+   },
+   {
+    "gap": {
+     "__fraction__": "2915129/33880704"
+    },
+    "nearest_reference": "D_8^3",
+    "ratio": {
+     "__fraction__": "405889748/510147575"
+    },
+    "ratio_seed": {
+     "__fraction__": "75377656/118755665"
+    },
+    "seed_spread": {
+     "__fraction__": "931531/34114080"
+    },
+    "spread": {
+     "__fraction__": "14951/436800"
+    },
+    "type": "A_12^2",
+    "widest_by": "hole 4 · translation"
+   },
+   {
+    "gap": {
+     "__fraction__": "117/320"
+    },
+    "nearest_reference": "A_2^12",
+    "ratio": {
+     "__fraction__": "58/351"
+    },
+    "ratio_seed": {
+     "__fraction__": "58/351"
+    },
+    "seed_spread": {
+     "__fraction__": "29/960"
+    },
+    "spread": {
+     "__fraction__": "29/960"
+    },
+    "type": "A_1^24",
+    "widest_by": "the sanity seed"
+   }
+  ],
+  "separation": {
+   "__fraction__": "611863087/17082633600"
+  },
+  "worst_seed_spread": {
+   "__fraction__": "140683453/3027984960"
+  },
+  "worst_seed_type": "D_24",
+  "worst_spread": {
+   "__fraction__": "2095859/31802240"
+  },
+  "worst_type": "D_6^4"
+ },
+ "subsets_tried": 55,
+ "worst_spread_type": "D_6^4"
+}

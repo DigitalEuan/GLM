@@ -405,12 +405,20 @@ def referenced_documents(paths: Iterable[Path]) -> Tuple[Path, ...]:
     return tuple(sorted(out))
 
 
-def unit_closure(test_path: Path) -> Tuple[Path, ...]:
+def unit_closure(test_path: Path, include_documents: bool = True
+                 ) -> Tuple[Path, ...]:
     """Every file a test file's result depends on, sorted.
 
     Computed by walking imports from the test file through the package, then
     adding the data files, the documents and Lean sources those modules name,
     and the scaffolding.
+
+    ``include_documents=False`` drops the documents and the Lean sources from
+    the closure, leaving the code and the frozen data.  A *test* is never
+    closed that way -- a test that reads a document depends on it -- but a
+    **derivation** that reads no document is keyed more tightly without it,
+    which is what :func:`code_store` asks for: editing
+    a study should not invalidate a cache the study cannot reach.
     """
     test_path = Path(test_path).resolve()
     seen: Set[Path] = {test_path}
@@ -431,9 +439,34 @@ def unit_closure(test_path: Path) -> Tuple[Path, ...]:
                 seen.add(resolved)
                 frontier.append(resolved)
     seen.update(p.resolve() for p in _data_files_for(seen))
-    seen.update(p.resolve() for p in referenced_documents(tuple(seen)))
+    if include_documents:
+        seen.update(p.resolve() for p in referenced_documents(tuple(seen)))
     seen.update(p.resolve() for p in scaffolding_paths())
     return tuple(sorted(seen))
+
+
+def code_store(name: str, module_file: str, schema: int = 1,
+               root: Optional[Path] = None):
+    """A derived store keyed on the **import closure of one module**, code only.
+
+    The inputs are computed rather than listed: every module of this package
+    that ``module_file`` reaches, transitively, plus the frozen data those
+    modules read, taken from :func:`unit_closure` with the documents left out.
+    So a derivation stored this way is reused exactly when none of the code or
+    data it could have read has changed, and recomputed on the first byte that
+    moves -- the sign-off discipline, applied to a report instead of to a test.
+
+    This factory lives here rather than in :mod:`glm_universal.derived`
+    because it is the *ledger's* notion of a closure; keeping it here also
+    keeps the document closure of a unit that imports ``derived`` free of the
+    documents this module's prose names.
+    """
+    from ..derived import DerivedStore
+
+    def inputs() -> Iterable[Path]:
+        return unit_closure(Path(module_file), include_documents=False)
+
+    return DerivedStore(name, inputs, schema=schema, root=root)
 
 
 def unit_digest(test_path: Path) -> str:

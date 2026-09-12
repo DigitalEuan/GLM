@@ -783,9 +783,18 @@ class TestExactness:
 
     def test_only_the_standard_library_is_imported(self):
         allowed_third_party: set = set()
-        stdlib_roots = {"ast", "dataclasses", "fractions", "functools",
-                        "itertools", "json", "math", "pathlib", "re",
-                        "typing", "__future__"}
+        # ``concurrent`` is here for one use only: the deep-hole failure
+        # round fills its ensembles through a process pool.  Each ensemble is
+        # a deterministic function of its centre and seed, so running them in
+        # parallel changes how long the measurement takes and nothing else.
+        # ``importlib`` is here for one use only: the review-sweep register
+        # records, for each stalled result, the module and attribute that
+        # would recompute it, and checks that the pair still resolves.  That
+        # is a read of the tree, not a computation, and it is what stops an
+        # entry pointing at code that has since been renamed away.
+        stdlib_roots = {"ast", "concurrent", "dataclasses", "fractions",
+                        "functools", "importlib", "itertools", "json",
+                        "math", "pathlib", "re", "typing", "__future__"}
         for path in sorted(REASONING_DIR.glob("*.py")):
             tree = ast.parse(path.read_text(encoding="utf-8"))
             for node in ast.walk(tree):

@@ -1,5 +1,18 @@
 # What the GLM can actually do — a measured assessment
 
+
+## Tier 0 — the coarse read
+
+**Question.** What can the machine actually do, and where exactly does it stop?
+
+**Verdict.** This document does not describe the machine. It reports what happened when the machine was run.
+
+**Deciding figure.** 33 probes: 20 hold, 13 break, 0 errored, 0 surprises.
+
+**Recomputed by.** `glm_universal.capabilities.harness.capability_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 > ### Positioning — read this before starting a round
 >
 > **We are not claiming that the lattice generates the universe.** The claim is
@@ -23,8 +36,8 @@
 > [`studies/INFORMATION_LOSS_STUDY.md`](studies/INFORMATION_LOSS_STUDY.md)
 > measure what each step down actually discards.
 >
-> The full note, with what follows from it in practice, is
-> [`POSITIONING.md`](POSITIONING.md).
+> The full note, with what follows from it in practice, is the Positioning
+> section of [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md).
 
 This document does not describe the machine. It reports what happened when the
 machine was run.
@@ -35,7 +48,7 @@ Four instruments were used, and all four can be re-run on demand:
 cd overlay
 PYTHONPATH=. python3 -m glm_universal.capabilities                    # 33 probes
 PYTHONPATH=. python3 -m glm_universal.benchmarks                      # 5 suites
-PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8             # 135 CLI cases
+PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8             # 147 CLI cases
 PYTHONPATH=. python3 -m pytest glm_universal/tests -q                 # the test suite
 ```
 
@@ -53,9 +66,9 @@ by hand twice: the counts are recomputed into
 |---|---|---|
 | capability probes | where the library stops, asked as user questions | **33 probes: 20 hold, 13 break, 0 errored, 0 surprises** |
 | benchmark suites | solver functions against curated and exhaustive task sets | **2,389 / 2,390 tasks across 5 suites; every suite beat its declared baseline** |
-| end-to-end CLI evaluation | the CLI, driven the way a user drives it | **135 cases: 135 passed** — 119 answered correctly, 16 refused as expected, 0 unexpected refusals, **0 confidently wrong**, 0 errored |
-| test suite | the package's own regression net | **3,179 tests across 74 of the 75 test files, 12,839 subtests, outside the document check**, zero failures |
-| Lean development | the machine-checked layer | **99 Lean files, `lake build` clean, no `sorry`** |
+| end-to-end CLI evaluation | the CLI, driven the way a user drives it | **147 cases: 147 passed** — 131 answered correctly, 16 refused as expected, 0 unexpected refusals, **0 confidently wrong**, 0 errored |
+| test suite | the package's own regression net | **<!--figure:suite-->3,631 tests across 88 of the 89 test files, 13,777 subtests, outside the document check<!--/figure-->**, zero failures |
+| Lean development | the machine-checked layer | **111 Lean files, `lake build` clean, no `sorry`** |
 
 A break in the probe report is not a failure — it is a located boundary, and
 each one names the exact place it stops. A *confidently wrong* answer in the
@@ -67,21 +80,21 @@ honest refusal is scored `+1`. There are now none.
 ## 2. The end-to-end CLI evaluation
 
 This is the instrument that measures what a user gets. It lives in
-`overlay/glm_universal/evaluation/`. Each of its 135 cases starts `GLM.py` in a
+`overlay/glm_universal/evaluation/`. Each of its 147 cases starts `GLM.py` in a
 **fresh interpreter** — one subprocess per question, no shared session, no warm
 caches — and scores the `ANSWER` or `UNSOLVED` line the process prints. The
-question set covers **all 21 query kinds** the runtime recognises and **all 47
-report subjects**; the coverage is checked against the runtime's own tables by
+question set covers **all 21 query kinds** the runtime recognises and every one of its
+report subjects; the coverage is checked against the runtime's own tables by
 a test, so a new kind or subject cannot be added without a case.
 
-16 of the 131 questions are ones the machine **should refuse**. Answering them
+16 of the 147 questions are ones the machine **should refuse**. Answering them
 confidently is scored worse than refusing them.
 
 ### Accuracy per query kind
 
 | query kind | passed | wrong | unexpected refusals | errors |
 |---|---|---|---|---|
-| `analogy` | 10 / 10 | 0 | 0 | 0 |
+| `analogy` | 11 / 11 | 0 | 0 | 0 |
 | `angle` | 2 / 2 | 0 | 0 | 0 |
 | `cluster` | 2 / 2 | 0 | 0 | 0 |
 | `coherence` | 2 / 2 | 0 | 0 | 0 |
@@ -96,17 +109,17 @@ confidently is scored worse than refusing them.
 | `product` | 1 / 1 | 0 | 0 | 0 |
 | `project` | 1 / 1 | 0 | 0 | 0 |
 | `real` | 5 / 5 | 0 | 0 | 0 |
-| `report` | 54 / 54 | 0 | 0 | 0 |
+| `report` | 65 / 65 | 0 | 0 | 0 |
 | `spatial` | 2 / 2 | 0 | 0 | 0 |
 | `task` | 3 / 3 | 0 | 0 | 0 |
 | `trilinear` | 2 / 2 | 0 | 0 | 0 |
 | `unknown` | 1 / 1 | 0 | 0 | 0 |
 | `verify` | 6 / 6 | 0 | 0 | 0 |
-| **total** | **135 / 135** | 0 | 0 | 0 |
+| **total** | **147 / 147** | 0 | 0 | 0 |
 
 Two facts are worth stating plainly. `analogy` — the kind that carried every
-failure in the previous round — is now 10 / 10, and the set grew from 8 cases
-to 10 while it was fixed. And there are **no unexpected refusals at all**: the
+failure in an earlier round — is now 11 / 11, and the set has grown from 8
+cases to 11 since it was fixed. And there are **no unexpected refusals at all**: the
 machine never declined a question it was supposed to answer, so the clean sheet
 is not bought with over-caution.
 
@@ -285,11 +298,11 @@ missing or wrong triple rather than to an opaque nearest-neighbour search.
 
 **Demonstrably working.**
 
-* Every `report` subject — all 47 of them — answers from a fresh interpreter,
-  and each recomputes its figures rather than quoting them. 49 / 49 in the CLI
+* Every `report` subject — all 63 of them — answers from a fresh interpreter,
+  and each recomputes its figures rather than quoting them. 65 / 65 in the CLI
   evaluation.
-* Analogy: 10 / 10 in the CLI evaluation and 35 / 35 across the three analogy
-  suites, with two of the ten CLI cases being refusals the machine now knows
+* Analogy: 11 / 11 in the CLI evaluation and 35 / 35 across the three analogy
+  suites, with two of the eleven CLI cases being refusals the machine now knows
   how to make.
 * Dimensional verification: 6 / 6 in the CLI evaluation, 29 / 30 on the
   benchmark, with the one loss identified as a semantics boundary.
@@ -312,7 +325,7 @@ missing or wrong triple rather than to an opaque nearest-neighbour search.
   when a name is in no register, so `coherence PbCl2` and
   `cluster PbCl2, NaCl, H2O` are answered rather than refused.
 * The machine refuses well. All 16 refusal cases were refused, and there were
-  **zero** unexpected refusals across all 135 cases — including the four the
+  **zero** unexpected refusals across all 147 cases — including the four the
   `measure` query is asked at its own boundary, where
   `GLM.Info.boundary_empty_of_unmeasured` says there is nothing to answer with.
 
@@ -320,7 +333,7 @@ missing or wrong triple rather than to an opaque nearest-neighbour search.
 `boundary` — a theorem or a deliberate commitment — and the last `gap` case,
 `coherence PbCl2`, was closed by building the carrier from the formula.
 
-**Untouched.** The list below is the one kept in `MASTER_PLAN_ARCHIVE.md`
+**Untouched.** The list below is the one kept in `archive/MASTER_PLAN_ARCHIVE.md`
 §7.9, with each entry's current state beside it rather than as it stood when
 the list was written.
 

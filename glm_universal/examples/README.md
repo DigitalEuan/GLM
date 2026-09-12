@@ -1,5 +1,18 @@
 # `glm_universal/examples` — demonstration scripts
 
+
+## Tier 0 — the coarse read
+
+**Question.** What can be run directly, and what does each script demonstrate?
+
+**Verdict.** Six runnable scripts and one generated transcript.
+
+**Deciding figure.** Every script was run from a clean checkout at the version this README describes, and the results quoted are what they printed.
+
+**Recomputed by.** (hand-written argument; nothing to recompute)
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 

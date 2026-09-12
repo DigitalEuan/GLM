@@ -294,6 +294,107 @@ for row in report["cases"]:
 '''
 
 
+def _body_report_conjugates(args: Mapping[str, object]) -> str:
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import conjugate as cj
+
+report = cj.conjugate_report()
+audit = report["audit"]
+headline = report["headline"]
+
+observed = {
+    "row_count": str(audit["row_count"]),
+    "names": str(audit["names"]),
+    "sound": str(audit["sound"]),
+    "all_dimensional": str(audit["all_dimensional"]),
+    "roles_unique": str(audit["roles_unique"]),
+    "cases_total": str(report["cases_total"]),
+    "cases_as_expected": str(report["cases_as_expected"]),
+    "answered": str(report["answered"]),
+    "refused": str(report["refused"]),
+    "headline_answer": str(headline["answer"]),
+    "criteria": str(report["criterion_names"]),
+}
+for row in report["cases"]:
+    observed["case_%s" % row["question"]] = "%s:%s" % (
+        row["answer"], row["failed_criterion"])
+'''
+
+
+def _body_report_completion(args: Mapping[str, object]) -> str:
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import element_completion as ecp
+
+report = ecp.element_completion_report()
+cover = report["coverage"]
+ledger = report["dispositions"]
+counts = ledger["counts"]
+
+observed = {
+    "total_cells": str(cover["total_cells"]),
+    "measured": str(cover["measured"]),
+    "estimated": str(cover["estimated"]),
+    "filled": str(cover["filled"]),
+    "empty": str(cover["empty"]),
+    "empty_cells": str(ledger["empty_cells"]),
+    "accounted": str(ledger["accounted"]),
+    "dispositions": str(dict(sorted(counts.items()))),
+    "admitted_count": str(report["admitted_count"]),
+    "safety": str(report["safety"]["holds"]),
+}
+'''
+
+
+def _body_report_vagueness(args: Mapping[str, object]) -> str:
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import vagueness as vgn
+
+report = vgn.vagueness_report()
+routing = report["routing"]
+counts = routing["counts"]
+proposer = report["proposer"]
+conjugate = report["conjugate"]
+
+observed = {
+    "triples": str(routing["triples"]),
+    "counts": str(dict(sorted(counts.items()))),
+    "decided_without_a_person": str(routing["decided_without_a_person"]),
+    "referred": str(routing["referred"]),
+    "every_triple_routed": str(routing["every_triple_routed"]),
+    "rules_tried": str(proposer["rules_tried"]),
+    "rules_admitted": str(list(proposer["admitted"])),
+    "conjugate_converted": str(conjugate["converted_count"]),
+}
+'''
+
+
+def _body_report_admission(args: Mapping[str, object]) -> str:
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import admission as adm
+
+report = adm.admission_report()
+audit = report["audit"]
+counts = audit["counts"]
+
+observed = {
+    "probes": str(audit["probes"]),
+    "counts": str(dict(sorted(counts.items()))),
+    "admitted": str(audit["admitted"]),
+    "refused": str(audit["refused"]),
+    "vocabulary_size": str(audit["vocabulary_size"]),
+    "every_probe_routed": str(audit["every_probe_routed"]),
+    "determinate": str(audit["determinate"]),
+    "registers_unchanged": str(audit["registers_unchanged"]),
+    "holds": str(audit["holds"]),
+    "unit_gaps": str(list(report["unit_gaps"])),
+}
+'''
+
+
 def _body_describe(args: Mapping[str, object]) -> str:
     return f'''# -- recompute -------------------------------------------------------------
 
@@ -1999,6 +2100,65 @@ observed = {
 '''
 
 
+def _body_report_hole_classifier(args: Mapping[str, object]) -> str:
+    """Recompute the deep-hole trajectory classifier from its cache."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import deep_hole_classifier as dhc
+
+condition = dhc.state()
+report = dhc.current()
+
+if report is None:
+    observed = {"cache": str(condition["verdict"])}
+else:
+    run = report["run"]
+    method = run["method"]
+    gate = report["gate"]
+    observed = {
+        "cache": str(condition["verdict"]),
+        "types": str(report["table"]["size"]),
+        "queries": str(method["queries"]),
+        "correct": str(method["correct"]),
+        "baseline_correct": str(run["baseline"]["correct"]),
+        "digest_correct": str(run["digest"]["correct"]),
+        "reshuffle_correct": str(run["reshuffle"]["correct"]),
+        "beats_baseline": str(run["beats_baseline"]),
+        "beats_every_control": str(run["beats_every_control"]),
+        "sanity_holds": str(gate["sanity_holds"]),
+        "verdict": str(gate["verdict"]),
+        "faithfulness_compatible": str(run["faithfulness_compatible"]),
+    }
+'''
+
+
+def _body_report_hole_ladder(args: Mapping[str, object]) -> str:
+    """Recompute the deep-hole escalation ladder from its cache."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import deep_hole_escalation as esc
+
+condition = esc.state()
+report = esc.current()
+
+if report is None:
+    observed = {"cache": str(condition["verdict"])}
+else:
+    tree = report["decision"]
+    observed = {
+        "cache": str(condition["verdict"]),
+        "cells": str(len(report["cells"])),
+        "gate": str(tree["gate"]),
+        "reproduces": str(tree["reproduces"]),
+        "bottom_q0": str(tree["bottom"]["q0"]),
+        "best_q0": str(tree["best"]["q0"]),
+        "best_layer": str(tree["best"]["layer"]),
+        "best_starts": str(tree["best"]["starts"]),
+        "verdict": str(tree["verdict"]),
+    }
+'''
+
+
 def _body_report_molecules(args: Mapping[str, object]) -> str:
     """Recompute the molecules register from name and formula alone (v1.4.0)."""
     return '''# -- recompute -------------------------------------------------------------
@@ -2126,6 +2286,41 @@ for _row in report["oscillator"]:
     observed["oscillator_" + _key] = str(_row["entropy_rounded"])
 for _row in report["resonance_sweep"]:
     observed["sweep_" + q(_row["ratio"])] = str(_row["entropy_rounded"])
+'''
+
+
+def _body_report_landscape(args: Mapping[str, object]) -> str:
+    """Recompute the pre-registered wobble landscape (v5.14.0)."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import wobble_landscape as wls
+
+report = wls.landscape_report()
+primary = report["primary"]["primary_null"]
+secondary = report["primary"]["secondary_null"]
+gate = report["gate"]
+golay = report["golay_null"]
+magnitude = report["golay_magnitude"]
+check = report["closed_form_check"]
+alpha_golay = next(_r for _r in report["golay"] if _r["name"] == "alpha")
+
+observed = {
+    "statistic": q(report["primary"]["statistic"]),
+    "tail": q(primary["tail"]),
+    "members": str(primary["members"]),
+    "extreme": str(primary["at_least_as_extreme"]),
+    "score": str(gate["score_rounded"]),
+    "verdict": str(gate["verdict"]),
+    "enumerate": str(gate["enumerate"]),
+    "secondary_tail": q(secondary["tail"]),
+    "run_length": str(report["run_length"]),
+    "entropy": str(report["entropy_rounded"]),
+    "closed_form_holds": str(check["holds"]),
+    "golay_within_three": str(golay["within_three"]),
+    "golay_probability": q(golay["within_three_probability"]),
+    "golay_magnitude_tail": q(magnitude["tail"]),
+    "alpha_d_min": str(alpha_golay["d_min"]),
+}
 '''
 
 
@@ -2909,6 +3104,116 @@ observed = {{
 '''
 
 
+def _body_report_cumulativity(args: Mapping[str, object]) -> str:
+    """Recompute the refinement check every declared layer family passes."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import cumulativity as cml
+
+report = cml.cumulativity_report()
+rows = report["families"]
+conflated = sum(int(loss["count"])
+                for row in rows for loss in row["conflations"])
+
+observed = {
+    "families": str(report["count"]),
+    "shipped": str(report["shipped"]),
+    "edges_checked": str(report["edges_checked"]),
+    "non_edges_checked": str(report["non_edges_checked"]),
+    "defects": str(len(report["defects"])),
+    "holds": str(report["holds"]),
+    "conflated_pairs": str(conflated),
+}
+for row in rows:
+    observed["passes_" + str(row["key"])] = str(row["passes"])
+'''
+
+
+def _body_report_query_escalation(args: Mapping[str, object]) -> str:
+    """Recompute the escalation loop's two gates from their cache."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import query_escalation as qesc
+
+condition = qesc.state()
+report = qesc.current()
+
+if report is None:
+    observed = {"cache": str(condition["verdict"])}
+else:
+    safety = report["safety"]
+    utility = report["utility"]
+    observed = {
+        "cache": str(condition["verdict"]),
+        "cases": str(safety["cases"]),
+        "safety_holds": str(safety["holds"]),
+        "answers_moved": str(len(safety["answers_moved"])),
+        "principled_refusals_converted":
+            str(len(safety["principled_refusals_converted"])),
+        "probes": str(utility["probes"]),
+        "resolved_above_the_first_rung":
+            str(len(utility["resolved_above_the_first_rung"])),
+        "certified_absences": str(len(utility["certified_absences"])),
+        "rungs": str(len(report["layers"])),
+    }
+'''
+
+
+def _body_report_hole_failures(args: Mapping[str, object]) -> str:
+    """Recompute the four failures and the spread from their cache."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import deep_hole_failures as dhf
+
+condition = dhf.state()
+report = dhf.current()
+
+if report is None:
+    observed = {"cache": str(condition["verdict"])}
+else:
+    cell = report["cell"]
+    rep = report["reproduction"]
+    counts = report["counts"]
+    observed = {
+        "cache": str(condition["verdict"]),
+        "layer": str(cell["layer"]),
+        "starts": str(cell["starts"]),
+        "correct": str(rep["correct"]),
+        "queries": str(rep["queries"]),
+        "reproduces": str(rep["reproduces"]),
+        "failures": str(len(report["failures"])),
+        "a_closest_pair": str(counts["a_closest_pair"]),
+        "worst_spread_type": str(report["worst_spread_type"]),
+        "same_mechanism": str(report["same_mechanism"]),
+        "negative_stands": str(report["original_negative"]["stands"]),
+        "subsets_tried": str(report["subsets_tried"]),
+        "any_below_one": str(report["leave_out"]["any_below_one"]),
+        "certified_types": str(report["per_type"]["count"]),
+    }
+'''
+
+
+def _body_report_review_sweep(args: Mapping[str, object]) -> str:
+    """Recompute the register of stalled results and the order it ranks in."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import review_sweep as rvs
+
+report = rvs.review_sweep_report()
+by_class = report["by_class"]
+
+observed = {
+    "entries": str(report["count"]),
+    "licensed_for_re_reading": str(report["licensed_for_re_reading"]),
+    "defects": str(len(report["defects"])),
+    "holds": str(report["holds"]),
+    "order": ",".join(str(row["key"]) for row in report["entries"]),
+}
+for name in report["classes"]:
+    observed["class_" + str(name)] = str(len(by_class[name]))
+'''
+
+
 #: Template name -> body renderer.  A solver names its template in
 #: ``Solution.script_spec["template"]``; there is no fallback, because a
 #: silently generic script would verify nothing in particular.
@@ -2919,6 +3224,10 @@ TEMPLATES = {
     # that re-solves every case through the model layer.
     "analogy_model": _body_analogy_model,
     "report_analogies": _body_report_analogies,
+    "report_conjugates": _body_report_conjugates,
+    "report_completion": _body_report_completion,
+    "report_vagueness": _body_report_vagueness,
+    "report_admission": _body_report_admission,
     "describe": _body_describe,
     # v1.3.0: a description whose subject is arithmetic over register names.
     "describe_arithmetic": _body_describe_arithmetic,
@@ -3012,6 +3321,12 @@ TEMPLATES = {
     # v1.4.0: the transform-driven decoder and its O(1) certificate.
     "report_transform_decoder": _body_report_transform_decoder,
     "report_deep_holes": _body_report_deep_holes,
+    "report_hole_classifier": _body_report_hole_classifier,
+    "report_hole_ladder": _body_report_hole_ladder,
+    "report_hole_failures": _body_report_hole_failures,
+    "report_cumulativity": _body_report_cumulativity,
+    "report_review_sweep": _body_report_review_sweep,
+    "report_query_escalation": _body_report_query_escalation,
     "report_units": _body_report_units,
     # v1.4.0: the molecules register and the chemistry-coverage widening.
     "report_molecules": _body_report_molecules,
@@ -3020,6 +3335,7 @@ TEMPLATES = {
     # studies it rests on.
     "report_blueprint": _body_report_blueprint,
     "report_signature": _body_report_signature,
+    "report_landscape": _body_report_landscape,
     "report_drift": _body_report_drift,
     "report_catalog": _body_report_catalog,
     # v5.5.0: the two companion preprints, and the instrument behind them.

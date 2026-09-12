@@ -1,5 +1,18 @@
 # `glm_universal/migration/` — the literal data migration
 
+
+## Tier 0 — the coarse read
+
+**Question.** Can the repository's persisted state be brought in exactly, without re-deriving it?
+
+**Verdict.** The emphasis is on literal.
+
+**Deciding figure.** Every concept in the canonical file is either a record that was in the source file or a carrier minted deterministically for a name the source referred to but never defined, and the two are labelled apart.
+
+**Recomputed by.** `glm_universal.migration.state.state_migration_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 

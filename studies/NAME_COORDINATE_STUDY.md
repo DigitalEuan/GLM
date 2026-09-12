@@ -1,5 +1,18 @@
 # A coordinate for the name — attacking the resolution ceiling where it lives
 
+
+## Tier 0 — the coarse read
+
+**Question.** Can a coordinate for the name lift the resolution ceiling the escalation audit proved?
+
+**Verdict.** The headline is the least interesting number.
+
+**Deciding figure.** The sweep, and the control that decides what is doing the work.
+
+**Recomputed by.** `glm_universal.reasoning.name_coordinate.name_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 *What `reasoning/name_coordinate.py`, `RequestProject/GLM/NameCoordinate.lean`
 and `report names` are for, and what they measured.*
 

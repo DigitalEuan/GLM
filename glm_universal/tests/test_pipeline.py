@@ -87,6 +87,13 @@ class TestStages(unittest.TestCase):
     def test_wired_means_the_subject_dispatches(self):
         from glm_universal.runtime.session import REPORT_SUBJECTS
         for row in self.report["rows"]:
+            if not row["wire_expected"]:
+                # The sandbox row of directive D14: the runtime is forbidden
+                # to reach it, so the stage is satisfied by there being no
+                # subject at all, and a subject appearing would be the defect.
+                self.assertTrue(row["stages"]["wired"], row["key"])
+                self.assertIsNone(row["subject"], row["key"])
+                continue
             self.assertEqual(row["stages"]["wired"],
                              row["subject"] in REPORT_SUBJECTS, row["key"])
 
@@ -107,6 +114,13 @@ class TestStages(unittest.TestCase):
     def test_verified_means_a_column_three_template_exists(self):
         from glm_universal.runtime.tct_engine import TEMPLATES
         for row in self.report["rows"]:
+            if not row["wire_expected"]:
+                # Nothing the runtime cannot reach can carry a column-3
+                # template; the recomputation guarantee for such a row is its
+                # study's generated blocks instead.
+                self.assertTrue(row["stages"]["verified"], row["key"])
+                self.assertIsNone(row["template"], row["key"])
+                continue
             self.assertEqual(row["stages"]["verified"],
                              row["template"] in TEMPLATES, row["key"])
 

@@ -1,9 +1,22 @@
 # `glm_universal.reasoning` — the algebraic and geometric reasoning kernel
 
+
+## Tier 0 — the coarse read
+
+**Question.** What reasoning does the kernel do over the substrate, module by module?
+
+**Verdict.** Everything is exact `int` / `fractions.Fraction` / `F_2`; nothing here imports `random`.
+
+**Deciding figure.** 72 modules, one frozen data file, and a runnable audit.
+
+**Recomputed by.** `glm_universal.reasoning.reasoning_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 
-**Status: implemented (GLM-3+ Step 3, extended since).** **60 modules**, one
+**Status: implemented (GLM-3+ Step 3, extended since).** **72 modules**, one
 frozen data file,
 and a runnable audit. Everything is exact `int` / `fractions.Fraction` /
 `F_2`; nothing here imports `random`; nothing here imports a third-party
@@ -52,11 +65,14 @@ Sections 1–4 below describe these in detail.
 | `llvq_table.py` | the `O(1)` table `llvq.py` said was future work: the MOG's 16-entry column table, the 64 hexacode words and the 128 classes of 32 codewords, with a branch-and-bound decode that agrees with the 4,096-codeword scan on every vector tried | `report llvq` |
 | `voronoi_walk.py` | walking to a hole of the Leech lattice and climbing to the covering radius, so a hole is *reached* rather than looked up among 196,560 facets | (library) |
 | `deep_holes.py` | the Niemeier type of the hole a carrier sits in, read off the walk's trajectory and certified, against a derived catalogue | `report deep holes` |
+| `deep_hole_classifier.py` | the pre-registered question *can the distribution of trajectories arriving at a hole name the hole?*: a declared 240-start ensemble, the arrival-share profile as the statistic, a nearest-reference rule with a stated refusal, and four controls of which the plain vertex count is the competitor that matters. Exact throughout, cached behind a digest of its sources | `report hole classifier` |
+| `deep_hole_escalation.py` | the second deep-hole round: was the first round's failure the geometry or the layer it was read at?  A ladder of four readings — the first round's arrival shares, those shares widened by the strays it discarded, the exact rational measure of emission distances, and the two joined — at 240, 480, 960 and 1920 nested starts, with one gate: every reference hole recognises itself under a bare seed change.  The bottom rung reproduces the first round at 3 of 10, the best pre-registered cell reaches 9, and the extension rung reaches the gate at 10 of 10, where the full query set is 40 of 44 against 12 for the vertex count | `report hole ladder` |
 | `blueprint.py` | `glm_unification_blueprint.md` turned into a live claim ledger: every testable sentence recomputed against the package, each given one of four verdicts | `report blueprint` |
 | `engine.py` | the thermo-dynamic carrier engine of Part III assembled from parts the package already had — cam, accumulator, escapement, lattice snap, radiator, turbocharger, gearbox — so the section's headline precision figure is measured rather than quoted | `report engine` |
 | `mantissa.py` | IEEE-754 binary64 modelled exactly in integers and `Fraction` (no float is ever constructed) and its bit allocation compared against the exact binary expansion, so floating-point drift is *located* | `report mantissa` |
 | `reversible.py` | Part V: binary counting against the binary reflected Gray code, Toffoli and Fredkin on the 24 coordinates, and information carried as kinks in a circular string rather than as coordinate values | `report reversible` |
 | `noise_lab.py` | noise used as the computation rather than as a representation: signal-driven and cascaded (MASH 1-1) delta-sigma loops with the `O(1/M²)` triangular-window law, closed orbits, interacting tones read by an exact Walsh spectrum, and a subtractive-dither sweep, and the vector loop whose error returns through a rational matrix (the `1/(2N)` law at the identity, the dead zone when the feedback contracts, equivariance under any permutation the matrix respects) — all exact `Fraction`, no randomness | `report noise` |
+| `wobble_landscape.py` | the pre-registered question *is alpha's gap structure distinctive?*, answered in one number: the closed-form gap spectrum from the continued fraction (Ostrowski stage by stage, checked against a run), two magnitude-matched nulls enumerated exhaustively, an exact Golay null, and the bit score `log2(1/p) - log2(m)` as a rational bracket. Exact throughout, cached behind a digest of its sources | `report landscape` |
 | `wobble.py` | the spectral signature of a constant, with the law beside every measured column: entropy, run lengths, transition rate and one-density are closed forms of the target (`Sturmian.lean`), plus the oscillator table, the exact resonance sweep and the quality-factor scan | `report signature` |
 | `drift.py` | the prime-iteration stress test in three regimes — exact rationals, an exact binary64 model, and binary64 truncated to a fixed number of displayed digits — with no float constructed anywhere | `report drift` |
 | `catalog.py` | `glm_study_findings_catalog.md` turned into a live claim ledger, in the same form as `blueprint.py`: 58 testable claims, each recomputed and given one of four verdicts | `report catalog` |
@@ -77,6 +93,7 @@ Sections 1–4 below describe these in detail.
 | `retrieval.py` | the address book used as a retrieval index, and the controls that decide whether it earns the role: eight ranking schemes over the Lean corpus — address, raw features, a lexical address book, a plain text search, a name search, a digest, a seeded reshuffle and a random order — scored against closed-form chance, with the completeness bound of `Retrieval.lean` checked pair by pair | `report retrieval` |
 | `controller.py` | the propose–check–refuse loop: a bounded beam over dimensional derivations from the ten EXT10 generators, six heuristics including two address-guided ones, every returned plan re-verified independently, and two kinds of refusal — exhausted, and unreachable with an invariant proof | `report controller` |
 | `generative.py` | generated instead of stored, and checked against what it replaces: the zero-storage script's Leech sieve measured over the whole kissing shell, the one-line repair that restores the Golay condition, an exact coset decoder that gives the true nearest lattice point, the closed-form constants scored against certified processes, and the storage audit of this package's own artefacts | `report generated` |
+| `pcgs.py` | the proof-carrying generative substrate: a generated object answers with a certificate and an exact ledger, never with a bare value — Reed–Muller `RM(1,m)` generated from its evaluation basis with the weight distribution its theorem forces, the number-theoretic transform generated from `(p, g)` with the radix-2 algorithm checked against the definition that is proved invertible, a stencil operator and a transducer, the cost algebra (operation counts and information bits, replacing CPU cycles and RAM bytes), the Landauer/CMOS physical layer in exact `Fraction`s, and the break-even query count at which a stored table starts to pay | — |
 | `combiner.py` | what XOR is doing here: the sixteen coordinatewise combiners, the eight affine ones the code is closed under, the pigeonhole bound on what a narrow output loses, and the inventory of every XOR site in the package | (library) |
 | `tie_break.py` | what a nearest-point tie is and what breaking it by index costs: the tie classes enumerated, the decoder's rule shown not to be the canonical one, and the read-back shown unchanged either way | (library) |
 | `stability.py` | how far an address may be perturbed before it moves: exact radii and residuals, the two certificates `Stability.lean` states, and the census of the declarations at radius zero | (library) |

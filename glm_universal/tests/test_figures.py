@@ -350,7 +350,14 @@ class TestDocumentationQuotesCurrentFigures(unittest.TestCase):
             "15 query kinds", "five registers", "52 diatomics; a general",
             "37 report subjects",
             "46 test files", "34 Lean files", "99 cases", "99-case",
-            "37 reasoning modules", "71 modules",
+            "37 reasoning modules",
+            # "71 modules" was retired here when the *package* held 71
+            # modules; the package now holds 126 and the reasoning kernel
+            # holds 71, so the bare phrase names a figure that is current
+            # again and cannot be guarded without failing on the truth.
+            # The package figure is guarded by "88 modules", "92 modules",
+            # "96 modules", "102 modules" and "110 modules" below, which
+            # collide with nothing.
             "40 report subjects", "35 Lean files", "6 registers",
             "2,205 tests", "2,183 collected tests",
             "2,309 tests", "2,309 collected tests",
@@ -443,6 +450,14 @@ class TestDocumentationQuotesCurrentFigures(unittest.TestCase):
             # to 29,122.
             "2,881 declarations", "2,881 parsed declarations",
             "28,884 lines", "12,840 subtests",
+            # Retired in v5.26, when the corpus toolkit was registered:
+            # `Corpus.lean` made the hundredth Lean file and
+            # `test_corpus.py` the seventy-sixth test file, so the
+            # declaration, line, file and suite counts all moved together.
+            "99 Lean files", "2,893 declarations",
+            "2,893 parsed declarations", "29,122 lines",
+            "75 test files", "3,179 tests", "12,839 subtests",
+            "nine standing rules", "nine rules",
         )
         documents = [
             "README.md", "MASTER_PLAN.md", "CAPABILITY_ASSESSMENT.md",

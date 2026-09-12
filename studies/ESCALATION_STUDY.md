@@ -1,5 +1,18 @@
 # Escalation at register scale — what the layer stack does on the machine's own data
 
+
+## Tier 0 — the coarse read
+
+**Question.** What does the layer stack do when the audit is run on every register carrier rather than seven?
+
+**Verdict.** There is a resolution ceiling, and the seven carriers could not have shown it.
+
+**Deciding figure.** Each layer's resolution and each boundary's gain, measured at register scale.
+
+**Recomputed by.** `glm_universal.reasoning.escalation.escalation_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 *What `reasoning/escalation.py`, `RequestProject/GLM/Escalation.lean` and
 `report escalation` are for, and what they measured.*
 

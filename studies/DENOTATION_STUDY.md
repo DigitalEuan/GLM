@@ -1,5 +1,18 @@
 # What the undimensioned names denote — the residue finished as a decision
 
+
+## Tier 0 — the coarse read
+
+**Question.** What do the lexicon's undimensioned names denote, once the lookup stops being the answer?
+
+**Verdict.** The residue is a vocabulary decision rather than a lookup.
+
+**Deciding figure.** Each of the 36 undimensioned endpoints is given a decision rather than a missing entry.
+
+**Recomputed by.** `glm_universal.reasoning.denotation_view.denotation_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 *The lexicon's `related_to` triples were split by `reasoning/measure_view.py`
 into 27 that the physics register converts and 39 that it declines. Thirty-eight
 of those 39 declined for one reason — an endpoint reaches no dimension the

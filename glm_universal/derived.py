@@ -253,3 +253,4 @@ class DerivedStore:
         payload = compute()
         self.write(payload)
         return payload
+

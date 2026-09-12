@@ -1,5 +1,18 @@
 # Infinite values and irrational numbers in the GLM
 
+
+## Tier 0 — the coarse read
+
+**Question.** Can the GLM work with infinite values and irrational numbers?
+
+**Verdict.** Yes, and it has now been built.
+
+**Deciding figure.** What the machine can now do, and — in more detail — what it provably cannot.
+
+**Recomputed by.** `glm_universal.reasoning.exact_real.exact_real_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 **What this document answers.** Does the attached material —
 `cardinal_geometry_synthesis.md`, `DYNAMIC_CARRIER_STUDY.md` and
 `geometric_substrate_study.py` — provide what is needed to get the GLM working

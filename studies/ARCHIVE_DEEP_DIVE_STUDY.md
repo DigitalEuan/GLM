@@ -1,5 +1,18 @@
 # Two questions the archive audit left open
 
+
+## Tier 0 — the coarse read
+
+**Question.** Are the archive's 44 balanced octads structure or chance, and is its relaxation a decoder?
+
+**Verdict.** Both answers are negative, and both are more useful than the positive would have been.
+
+**Deciding figure.** Two questions, two negative answers, every census a full enumeration in exact arithmetic.
+
+**Recomputed by.** `glm_universal.reasoning.deep_dive.deep_dive_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 *[`SOURCE_SALVAGE_AUDIT.md`](SOURCE_SALVAGE_AUDIT.md) closed eleven retrievals
 from the supplied archive. Two of them closed with a number rather than with a
 verdict, and both numbers invited a second question that the audit did not ask.

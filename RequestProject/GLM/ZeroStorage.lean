@@ -211,7 +211,7 @@ theorem fallbackVec_not_isLeech : ¬ IsLeech fallbackVec := by
 
 /-! ### §1b The repaired sieve: what the refined script actually computes
 
-The refined substrate script (`glm_zero_storage_substrate_v4.py`,
+The refined substrate script (`studies/scripts/glm_zero_storage_substrate_v4.py`,
 `is_leech`) replaces the uniform mod-4 test by the Golay test, and it does so
 *deterministically*: it reads the parity off coordinate `0` rather than
 searching for one, then checks three congruences in a single pass.

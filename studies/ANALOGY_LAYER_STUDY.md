@@ -1,5 +1,18 @@
 # Analogy by named relation
 
+
+## Tier 0 — the coarse read
+
+**Question.** Why was `A : B :: C : D` the machine's worst query kind, and what did closing it cost?
+
+**Verdict.** The relation is not always a displacement.
+
+**Deciding figure.** Every figure is recomputed by `report analogies`, by the three `analogy_*` benchmark suites and by the end-to-end evaluation.
+
+**Recomputed by.** `glm_universal.reasoning.analogy_models.analogy_models_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 *Why `A : B :: C : D` was the machine's worst query kind, what the diagnosis
 turned out to be, and what closing it cost.*
 

@@ -1,5 +1,18 @@
 # `glm_universal.benchmarks` — task suites and scoring
 
+
+## Tier 0 — the coarse read
+
+**Question.** What do the benchmark suites score, and what did they find?
+
+**Verdict.** Five suites, 2,390 scored tasks, results written as data.
+
+**Deciding figure.** 2,390 scored tasks, with a null or below-baseline result reported rather than hidden.
+
+**Recomputed by.** `glm_universal.figures.benchmark_figures`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 

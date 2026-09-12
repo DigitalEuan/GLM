@@ -1,5 +1,18 @@
 # `glm_universal.capabilities` — what the machine can do, and where it stops
 
+
+## Tier 0 — the coarse read
+
+**Question.** What can the library do at all, and where exactly does it stop?
+
+**Verdict.** A located boundary is a work item and a passing test is not.
+
+**Deciding figure.** 33 probes, each phrased as a question a user would ask.
+
+**Recomputed by.** `glm_universal.capabilities.harness.capability_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 

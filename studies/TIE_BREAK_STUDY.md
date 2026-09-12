@@ -1,5 +1,18 @@
 # The tie-break: the part of an address that geometry does not decide
 
+
+## Tier 0 — the coarse read
+
+**Question.** What is a nearest-point tie, and what does breaking it by index cost?
+
+**Verdict.** Most of this development's Leech addresses are not unique.
+
+**Deciding figure.** The tie class enumerated exactly, with what the tie-break provably cannot touch stated beside what it can.
+
+**Recomputed by.** `glm_universal.reasoning.tie_break.tie_break_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 *Most of this development's Leech addresses are not unique. The scaled feature
 vector sits exactly equidistant from several lattice points, and which of them
 becomes the address is settled by the decoder's tie-break — an implementation
@@ -25,7 +38,9 @@ The decoder it describes:
 
 ## 1. The question, and where it came from
 
-[`STABILITY_STUDY.md`](STABILITY_STUDY.md) asked how far an input may move
+The stability measurement in
+[`reasoning/stability.py`](../overlay/glm_universal/reasoning/stability.py)
+asked how far an input may move
 before its address does, and got an answer nobody had asked for: for most of
 the corpus the answer is **zero**. The input lies exactly on a bisector, two
 lattice points are equally near, and the exact stability radius is 0 not

@@ -1,5 +1,18 @@
 # `glm_universal/recipe` — the recipe made into an object
 
+
+## Tier 0 — the coarse read
+
+**Question.** Can the recipe every register was built by become an input rather than a habit?
+
+**Verdict.** This package makes the recipe's input an object.
+
+**Deciding figure.** A `DomainSpec` describes a domain and `build.py` turns any such description into the whole apparatus.
+
+**Recomputed by.** `glm_universal.recipe.report.recipe_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 

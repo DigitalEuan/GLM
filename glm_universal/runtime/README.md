@@ -1,5 +1,18 @@
 # `glm_universal/runtime` — the interactive geometric language runtime
 
+
+## Tier 0 — the coarse read
+
+**Question.** How is the machine actually asked a question, and what can it be asked?
+
+**Verdict.** `session.DOMAINS` is the authoritative list.
+
+**Deciding figure.** 8 registers holding 1,089 carriers, loaded lazily and cached.
+
+**Recomputed by.** `glm_universal.figures.package_figures`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 
@@ -58,7 +71,7 @@ answering kinds plus `unknown`, the honest fallback.
 
 ## The `report` subjects
 
-`session.REPORT_SUBJECTS` is the authoritative list: **52 report subjects**.
+`session.REPORT_SUBJECTS` is the authoritative list: **63 report subjects**.
 Every subject recomputes its facts on demand and has a Three Column Thinking
 template that reproduces them in a fresh interpreter.
 

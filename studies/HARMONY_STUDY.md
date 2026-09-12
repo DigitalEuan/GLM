@@ -1,5 +1,18 @@
 # The harmonic register, and the third of a claim it makes testable
 
+
+## Tier 0 — the coarse read
+
+**Question.** Does the musical third of the universality claim reproduce?
+
+**Verdict.** The verdict: `not reproduced`.
+
+**Deciding figure.** 28 intervals, no float anywhere, and a control the lattice does not beat.
+
+**Recomputed by.** `glm_universal.reasoning.harmony.harmony_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 *What `data_objects/harmonics.py`, `reasoning/harmony.py`,
 `RequestProject/GLM/Harmony.lean` and `report harmony` are for, and what they
 measured.*

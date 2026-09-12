@@ -1,5 +1,18 @@
 # The two companion studies, tested
 
+
+## Tier 0 — the coarse read
+
+**Question.** Do the two companion preprints hold up when their own definitions are recomputed?
+
+**Verdict.** A summary loses the definitions.
+
+**Deciding figure.** Every claim of both preprints restated and given a verdict, finer than the catalogue ledger could be.
+
+**Recomputed by.** `glm_universal.reasoning.companion.companion_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 **What this document is.** Two companion preprints sit beside the main GLM
 paper:
 

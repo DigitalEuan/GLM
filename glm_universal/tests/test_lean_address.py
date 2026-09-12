@@ -25,6 +25,8 @@ import unittest
 from fractions import Fraction
 from pathlib import Path
 
+import pytest
+
 from glm_universal.reasoning import lean_address as la
 
 
@@ -214,6 +216,86 @@ class TestAddressBook(unittest.TestCase):
         text = Path(la.DATA_PATH).read_text(encoding="utf-8")
         for token in json.loads(text)["addresses"]["feature"].values():
             self.assertTrue(all(isinstance(v, int) for v in token))
+
+
+class TestTheIncrementalRebuild(unittest.TestCase):
+    """Reusing a decode must be an optimisation and never a claim.
+
+    Rebuilding the book from nothing decodes once per declaration and costs a
+    minute; rebuilding it against the stored book decodes only the feature
+    vectors that are new.  That is sound because the address is a function of
+    the vector -- so what is checked here is exactly that: the reused answers
+    are the answers a fresh decode gives, and the bookkeeping says how many
+    were reused rather than leaving it to be believed.
+    """
+
+    def test_the_decoder_reuses_a_vector_it_has_already_seen(self):
+        decoder = la.Decoder()
+        vector = tuple(la.feature_table()[la.address_book()["order"][0]])
+        first = decoder(vector)
+        second = decoder(vector)
+        self.assertEqual(first, second)
+        self.assertEqual(1, decoder.decoded)
+        self.assertEqual(1, decoder.reused)
+        self.assertEqual(la.quantise(vector), first)
+
+    def test_a_seeded_answer_is_the_answer_a_decode_gives(self):
+        book = la.address_book()
+        names = list(book["order"])[:12]
+        seed = {tuple(book["features"][name]):
+                tuple(book["addresses"]["feature"][name]) for name in names}
+        decoder = la.Decoder(seed)
+        for name in names:
+            self.assertEqual(la.quantise(tuple(book["features"][name])),
+                             decoder(tuple(book["features"][name])), name)
+        self.assertEqual(0, decoder.decoded)
+        self.assertEqual(len(names), decoder.reused)
+
+    def test_the_audit_re_decodes_what_it_says_it_re_decodes(self):
+        book = la.address_book()
+        names = list(book["order"])[:5]
+        seed = {tuple(book["features"][name]):
+                tuple(book["addresses"]["feature"][name]) for name in names}
+        audit = la.Decoder(seed).audit(3)
+        self.assertEqual(3, audit["audited"])
+        self.assertEqual((), audit["moved"])
+        self.assertTrue(audit["holds"])
+
+    def test_a_wrong_seed_is_caught_by_the_audit(self):
+        book = la.address_book()
+        name = book["order"][0]
+        vector = tuple(book["features"][name])
+        moved = tuple(c + 1 for c in book["addresses"]["feature"][name])
+        audit = la.Decoder({vector: moved}).audit(1)
+        self.assertFalse(audit["holds"])
+        self.assertEqual((vector,), audit["moved"])
+
+    def test_no_seed_is_taken_from_a_book_at_another_scale(self):
+        book = dict(la.address_book())
+        book["scale"] = la.SCALE + 1
+        feature_seed, hash_seed = la._seed_from(book)
+        self.assertEqual({}, feature_seed)
+        self.assertEqual({}, hash_seed)
+
+    def test_the_incremental_book_is_the_stored_book(self):
+        """Rebuilt against itself, the book comes out unchanged."""
+        rebuilt, report = la.compute_address_book(reuse=True, audit=8)
+        stored = la.address_book()
+        self.assertEqual(stored["addresses"], rebuilt["addresses"])
+        self.assertEqual(stored["features"], rebuilt["features"])
+        self.assertEqual(0, report["decoded"],
+                         "nothing changed, so nothing should have been "
+                         "decoded again")
+        self.assertTrue(report["audit"]["holds"])
+
+    @pytest.mark.exhaustive
+    def test_the_incremental_book_is_the_book_decoded_from_nothing(self):
+        """The expensive form of the previous test: every address, both ways."""
+        incremental, _ = la.compute_address_book(reuse=True)
+        full, report = la.compute_address_book(reuse=False)
+        self.assertEqual(full, incremental)
+        self.assertEqual(0, report["seeded"],
+                         "a full rebuild starts from nothing")
 
 
 class TestSchemes(unittest.TestCase):
@@ -425,7 +507,11 @@ class TestDocumentsQuoteTheCurrentCorpus(unittest.TestCase):
             ("STATUS.md", f"Read back exactly {n}/{n}"),
             ("overlay/README.md", f"for each of the {n}"),
             ("overlay/glm_universal/README.md", f"**{n}/{n}**"),
-            ("studies/LEAN_ADDRESS_STUDY.md", f"| declarations checked | {n} |"),
+            # That row is a generated block, and the generator writes counts
+            # with a thousands separator, so the phrase is checked in the
+            # form the study actually renders.
+            ("studies/LEAN_ADDRESS_STUDY.md",
+             f"| declarations checked | {n:,} |"),
         ]
 
     def test_the_documents_state_the_corpus_as_it_is_parsed(self):

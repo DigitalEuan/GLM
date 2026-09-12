@@ -1,5 +1,18 @@
 # The economic register, and the last third of the universality claim
 
+
+## Tier 0 — the coarse read
+
+**Question.** Does the economic third of the universality claim reproduce?
+
+**Verdict.** The verdict: not reproduced.
+
+**Deciding figure.** An exact magnitude without a logarithm, and a control the lattice does not beat.
+
+**Recomputed by.** `glm_universal.reasoning.economics.economics_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 *What `data_objects/economics_register.py`, `reasoning/economics.py`,
 `RequestProject/GLM/LogBucket.lean` and `report economics` are for, and what
 they measured.*

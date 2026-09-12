@@ -19,6 +19,7 @@ from __future__ import annotations
 from ...reasoning import directives as drc
 from ...reasoning import lean_address as lad
 from ...reasoning import pipeline as ppl
+from ...reasoning import review_sweep as rvs
 
 from ..parser import Query
 from ..solution import Solution, Step, q
@@ -290,3 +291,71 @@ class DevelopmentReports:
             script_spec={"template": "report_pipeline", "args": {}},
             payload={"blocked_at": {k: list(v) for k, v
                                     in report["blocked_at"].items()}})
+
+    def _report_review_sweep(self, query: Query) -> Solution:
+        """Wires rvs.review_sweep_report -- what is worth re-reading, and why.
+
+        Directive D13's second practice clause: rank candidates for a
+        re-reading by whether there is an identifiable discarded quantity at
+        the coarse reading, not by how disappointing the original result was.
+        The register applies that to every stalled result the repository
+        carries, and is written before the next re-reading rather than after
+        it.  Which class an entry is in is declared; that its document exists,
+        that a claimed discarded quantity has somewhere it is reported, and
+        that the order follows the rule are measured on call.
+        """
+        report = rvs.review_sweep_report()
+        rows = report["entries"]
+        by_class = report["by_class"]
+        steps = [
+            Step("the rule the register sorts by",
+                 str(report["rule"]),
+                 " > ".join(report["classes"])),
+            Step("the register, in the order the rule gives",
+                 f"An entry that claims a discarded quantity has to point at "
+                 f"where it is reported; one that cannot is ranked below an "
+                 f"entry that honestly names nothing, because an unsupported "
+                 f"claim is the failure mode this clause exists to stop.",
+                 "; ".join(f"{row['key']} ({row['verdict']})"
+                           for row in rows)),
+            Step("what re-reading is licensed for",
+                 f"Only these are candidates for an escalated re-reading. "
+                 f"Everywhere else the stall is in the signal rather than in "
+                 f"the reading, and the entry names what is needed instead -- "
+                 f"new data, a new pre-registration, or a proof.",
+                 ", ".join(report["recoverable"]) or "nothing"),
+            Step("what has already been recovered",
+                 f"Kept in the register with the reading that resolved it: a "
+                 f"register that drops its successes stops being evidence "
+                 f"that the rule works.",
+                 ", ".join(by_class["recovered"]) or "nothing yet"),
+            Step("the limits, stated with the register",
+                 str(report["limits"]),
+                 f"defects: " + (", ".join(report["defects"]) or "none")),
+        ]
+        expected = {
+            "entries": str(report["count"]),
+            "licensed_for_re_reading": str(report["licensed_for_re_reading"]),
+            "defects": str(len(report["defects"])),
+            "holds": str(report["holds"]),
+            "order": ",".join(str(row["key"]) for row in rows),
+        }
+        for name in report["classes"]:
+            expected[f"class_{name}"] = str(len(by_class[name]))
+        return Solution(
+            query=query, kind="report",
+            answer=f"report review sweep: {report['count']} stalled results "
+                   f"ranked by whether the coarse reading discarded anything "
+                   f"identifiable -- "
+                   + "; ".join(f"{name} {len(by_class[name])}"
+                               for name in report["classes"])
+                   + f"; a re-reading is licensed for "
+                   + (", ".join(report["recoverable"]) or "nothing")
+                   + f", and {len(report['defects'])} entry defects",
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "report_review_sweep", "args": {}},
+            payload={"report": {
+                "entries": [{"key": row["key"], "verdict": row["verdict"],
+                             "supported": row["supported"]}
+                            for row in rows],
+                "recoverable": list(report["recoverable"])}})

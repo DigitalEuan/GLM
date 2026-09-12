@@ -1,5 +1,18 @@
 # The GLM Number-Theoretic Substrate
 
+
+## Tier 0 — the coarse read
+
+**Question.** What does the number-theoretic substrate actually establish?
+
+**Verdict.** The claim is narrower and testable.
+
+**Deciding figure.** Every Lean statement quoted was read back out of the development rather than retyped.
+
+**Recomputed by.** `glm_universal.reasoning.mantissa.mantissa_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand
 **Date:** 3 September 2026
 **Checked against this repository:** every Lean statement quoted below was read
@@ -22,7 +35,9 @@ carrier here is a projection at a stated resolution — the 24-bit word, the
 syndrome, the MOG cell, the Leech point, the shell — so a correspondence that is
 invisible at one layer can be exact one layer up, and it is worth checking a
 claim from several layer and resolution perspectives before calling it absent.
-[`POSITIONING.md`](../POSITIONING.md) is the standing form of this note;
+The Positioning section of
+[`PROJECT_DIRECTIVES.md`](../PROJECT_DIRECTIVES.md) is the standing form of
+this note;
 §14 below walks one number down all of those layers so that the loss at each
 step can be seen rather than described.
 
@@ -51,10 +66,10 @@ cd overlay && PYTHONPATH=. python3 -m glm_universal.examples.number_pipeline
 python3 studies/scripts/tmm_null_model.py
 
 # the Lean development itself
-lake build          # 99 files under RequestProject/GLM/, 0 sorry
+lake build          # 111 files under RequestProject/GLM/, 0 sorry
 ```
 
-The Lean development is 99 files under `RequestProject/GLM/`, all building
+The Lean development is 111 files under `RequestProject/GLM/`, all building
 against Mathlib for Lean 4.28.0 with **no `sorry` and no `admit`**, and no
 declared axiom anywhere: every proof depends only on `propext`,
 `Classical.choice`, `Quot.sound`, and — for the theorems reached through
@@ -818,7 +833,7 @@ carried out here.
 The Golay code [24,12,8], the Leech lattice Λ₂₄, and exact arithmetic on them.
 It is not the universe and it does not generate the universe. It is a
 mathematical object with unusual fidelity to the structure of numbers, and the
-fidelity is provable (99 Lean files, 0 `sorry`) and measurable (exact integer
+fidelity is provable (111 Lean files, 0 `sorry`) and measurable (exact integer
 experiments, 24/24 Sturmian matches).
 
 ### 13.2 What it holds
@@ -1025,7 +1040,7 @@ scripts that regenerate the data on demand.
 | the exact tables of §1.3, §2.4, §9.2 | `studies/scripts/number_theory_tables.py` |
 | the worked example of §14 | `overlay/glm_universal/examples/number_pipeline.py` |
 | the TMM sweep and its null model | `studies/scripts/tmm_null_model.py` |
-| the Lean development | `RequestProject/GLM/` (99 files) and its mirror `overlay/glm_lean/` |
+| the Lean development | `RequestProject/GLM/` (111 files) and its mirror `overlay/glm_lean/` |
 | the wobble implementation | `overlay/glm_universal/reasoning/wobble.py` |
 | the constants | `overlay/glm_universal/reasoning/coherence.py` |
 | the Golay code and its decoder | `overlay/glm_universal/substrate/mog.py`, `.../golay_decode.py` |

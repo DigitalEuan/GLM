@@ -1,5 +1,18 @@
 # Measure words as relative measures — what is already here, and what is missing
 
+
+## Tier 0 — the coarse read
+
+**Question.** What would it take for `hot` to become a relative measure rather than a static concept?
+
+**Verdict.** This is a proposal, not a result.
+
+**Deciding figure.** Everything measured from the code as it stands is in the first section; everything after it is a design argument and is marked as such.
+
+**Recomputed by.** (hand-written argument; nothing to recompute)
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 *Scope note.* This is a **proposal**, not a result. Everything in §1 is
 measured from the code as it stands today; everything in §2 onwards is a design
 argument and is marked as such. Nothing in this document is implemented yet,

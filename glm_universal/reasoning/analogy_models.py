@@ -62,8 +62,20 @@ The models
 
     One relation is deliberately **not** transportable: ``related_to``.  It
     records that a link exists without saying which, so it determines no
-    answer; ``heat related_to temperature`` is the whole reason
-    ``heat : temperature :: force : ?`` has no honest answer here.
+    answer.  ``heat related_to temperature`` was for several rounds the whole
+    reason ``heat : temperature :: force : ?`` had no answer here; it is now
+    answered by the model below, from a register that does say which.
+
+``conjugate_pair`` (across registers)
+    The rows of
+    :mod:`glm_universal.data_objects.conjugate_pairs` are energy domains --
+    an effort, an extent, and the transfer they make -- and they run *across*
+    the physics and lexicon registers rather than inside either.  ``heat :
+    temperature`` is ``temperature effort_of heat``, and since ``force`` is
+    itself an effort the relation is applied in reverse, to the unique
+    transfer whose effort is ``force``: ``work``.
+    :mod:`glm_universal.reasoning.conjugate` states the four criteria under
+    which a relation may be transported at all, and checks each of them.
 
 Narrowing a dimension class
 ---------------------------
@@ -102,13 +114,14 @@ from typing import Dict, List, Optional, Sequence, Tuple
 from ..data_objects import elements as do_elements
 from ..data_objects import physics as do_physics
 from ..data_objects.base import DataObject
+from . import conjugate as cj
 from . import periodic_table as pt
 
 __all__ = [
     "MODEL_NAMES", "MODELS_BY_DOMAIN", "VAGUE_RELATIONS", "REPORT_CASES",
     "ModelResult", "explain_analogy", "analogy_models_report",
     "periodic_step", "reciprocal_dimension", "scale_shift",
-    "lexicon_relation", "repaired_triples",
+    "lexicon_relation", "conjugate_pair", "repaired_triples",
 ]
 
 
@@ -578,19 +591,65 @@ def lexicon_relation(a: str, b: str, c: str,
 
 
 # ===========================================================================
+# 3b.  ACROSS REGISTERS -- THE ENERGY-CONJUGATE PAIRING
+# ===========================================================================
+
+def conjugate_pair(a: str, b: str, c: str,
+                   pool: Sequence[DataObject]) -> Optional[ModelResult]:
+    """``A : B :: C : ?`` through the energy-conjugate register.
+
+    The one model whose register is not the query's.  Its rows -- effort,
+    extent and the transfer they make -- run *across* the domains, which is
+    what ``heat : temperature :: force : ?`` needs: the three terms share no
+    other register, and in this one they are a transfer, an effort and an
+    effort.  :mod:`glm_universal.reasoning.conjugate` states the rule under
+    which a relation may be carried and checks it; this function only dresses
+    the result as a :class:`ModelResult`.
+
+    ``pool`` is not consulted for the answer -- the register decides it -- but
+    whether the answer is a name the query's own register also holds is
+    recorded in the witness, because a reader is owed the difference.
+    """
+    result = cj.transport(a, b, c)
+    if result is None:
+        return None
+    relation = (f"{result.witness['statement']} -- the energy-conjugate "
+                f"pairing of the {result.witness['row']} row, in which "
+                f"{a} is the {result.witness['a_role']} and "
+                f"{b} the {result.witness['b_role']}")
+    witness = dict(result.witness)
+    witness["model"] = "conjugate_pair"
+    if result.answer is None:
+        return ModelResult(
+            model="conjugate_pair", domain="conjugate", relation=relation,
+            refusal=f"{result.refusal} (the {result.failed} criterion)",
+            steps=result.steps, witness=witness)
+    witness["in_query_register"] = str(
+        result.answer in {o.name for o in pool})
+    return ModelResult(
+        model="conjugate_pair", domain="conjugate", relation=relation,
+        answer=result.answer, candidates=result.candidates,
+        steps=result.steps, witness=witness)
+
+
+# ===========================================================================
 # 4.  THE LAYER
 # ===========================================================================
 
-#: The models a domain offers, in the order they are tried.
+#: The models a domain offers, in the order they are tried.  ``conjugate_pair``
+#: comes first wherever it is offered: it is the most specific model, since it
+#: fires only when both ``A`` and ``B`` are named in one row of a small
+#: curated table, and the reading it gives is dimensioned where the lexicon's
+#: is not.
 MODELS_BY_DOMAIN: Dict[str, Tuple] = {
     "chemistry": (periodic_step,),
-    "physics": (reciprocal_dimension, scale_shift),
-    "lexicon": (lexicon_relation,),
+    "physics": (conjugate_pair, reciprocal_dimension, scale_shift),
+    "lexicon": (conjugate_pair, lexicon_relation),
 }
 
 #: Every model name, in domain order.
 MODEL_NAMES: Tuple[str, ...] = (
-    "periodic_step", "reciprocal_dimension", "scale_shift",
+    "periodic_step", "conjugate_pair", "reciprocal_dimension", "scale_shift",
     "lexicon_relation",
 )
 
@@ -640,6 +699,9 @@ REPORT_CASES: Tuple[Tuple[str, str, str, str, str, str], ...] = (
     ("physics", "gram", "mass", "millisecond", "scale_shift", "time"),
     ("lexicon", "hot", "cold", "fast", "lexicon_relation", "slow"),
     ("lexicon", "solid", "liquid", "liquid", "lexicon_relation", "gas"),
+    ("lexicon", "heat", "temperature", "force", "conjugate_pair", "work"),
+    ("physics", "temperature", "entropy", "force", "conjugate_pair",
+     "length"),
 )
 
 

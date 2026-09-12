@@ -1,5 +1,18 @@
 # Hexcolour addresses: are they carrying anything?
 
+
+## Tier 0 — the coarse read
+
+**Question.** Are the hexcolour addresses carrying anything, and is anything ever looked up by one?
+
+**Verdict.** A hexcolour is a rendering of a 24-bit carrier, and an address is not a measurement.
+
+**Deciding figure.** Every address audited on the shipped data rather than asserted, and lookup by address added where the audit found none.
+
+**Recomputed by.** `glm_universal.migration.store.store_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 *What `substrate/isomorphism.py`, `migration/state.py`, `migration/store.py`,
 `RequestProject/GLM/Endianness.lean` and `report state migration` say about the
 address layer, and what auditing it measured.*

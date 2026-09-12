@@ -29,6 +29,13 @@ from typing import Optional, Sequence
 from .reasoning import directives as drc
 from .reasoning import lean_address as lad
 from .reasoning import pipeline as ppl
+from .reasoning import deep_hole_classifier as dhc
+from .reasoning import deep_hole_escalation as esc
+from .reasoning import deep_hole_failures as dhf
+from .reasoning import cumulativity as cml
+from .reasoning import query_escalation as qesc
+from .reasoning import review_sweep as rvs
+from .reasoning import wobble_landscape as wls
 from .signoff import checks as chk
 from .signoff import ledger as sgn
 
@@ -193,6 +200,398 @@ def _signoff(args: argparse.Namespace) -> int:
     return 0 if report["all_signed"] else 1
 
 
+# ---------------------------------------------------------------------------
+#  landscape
+# ---------------------------------------------------------------------------
+
+def _landscape(args: argparse.Namespace) -> int:
+    """The pre-registered wobble landscape, and its measurement cache."""
+    if args.write:
+        path = wls.write_measurements()
+        print(f"wrote {path}")
+        print(f"digest {wls.module_digest()}")
+        return 0
+    condition = wls.state()
+    report = wls.landscape_report()
+    primary = report["primary"]["primary_null"]
+    gate = report["gate"]
+    if args.json:
+        print(json.dumps({
+            "cache": condition["verdict"],
+            "statistic": str(report["primary"]["statistic"]),
+            "tail": str(primary["tail"]),
+            "null": primary["name"],
+            "score": gate["score_rounded"],
+            "verdict": gate["verdict"],
+            "enumerate": gate["enumerate"],
+        }, indent=1, sort_keys=True))
+        return 0 if condition["fresh"] else 1
+    print(f"cache             {condition['verdict']}")
+    print(f"statistic         S(alpha) = "
+          f"{report['primary']['statistic_rounded']}")
+    print(f"null              {primary['name']}")
+    print(f"tail              {primary['tail']} "
+          f"({primary['at_least_as_extreme']} of {primary['members']})")
+    print(f"bit score         {gate['score_rounded']} "
+          f"({gate['verdict']}); enumerate: {gate['enumerate']}")
+    return 0 if condition["fresh"] else 1
+
+
+# ---------------------------------------------------------------------------
+#  deepholes
+# ---------------------------------------------------------------------------
+
+def _deepholes(args: argparse.Namespace) -> int:
+    """The pre-registered deep-hole classifier, and its measurement cache.
+
+    ``--write`` re-takes the measurement, which is a quarter of an hour of
+    exact decoding; without it the stored one is read and its freshness
+    reported, never silently recomputed.
+    """
+    if args.write:
+        path = dhc.write_measurements()
+        print(f"wrote {path}")
+        print(f"digest {dhc.module_digest()}")
+        return 0
+    condition = dhc.state()
+    report = dhc.current()
+    if report is None:
+        print(f"cache             {condition['verdict']}")
+        print("nothing is reported from a cache that does not describe the "
+              "sources; re-take it with --write")
+        return 1
+    run = report["run"]
+    method = run["method"]
+    gate = report["gate"]
+    if args.json:
+        print(json.dumps({
+            "cache": condition["verdict"],
+            "types": report["table"]["size"],
+            "queries": method["queries"],
+            "correct": method["correct"],
+            "baseline": run["baseline"]["correct"],
+            "digest": run["digest"]["correct"],
+            "reshuffle": run["reshuffle"]["correct"],
+            "score": gate["score_rounded"],
+            "sanity_holds": gate["sanity_holds"],
+            "verdict": gate["verdict"],
+        }, indent=1, sort_keys=True))
+        return 0
+    print(f"cache             {condition['verdict']}")
+    print(f"types reached     {report['table']['size']} of "
+          f"{report['catalogue_size']}")
+    print(f"method            {method['correct']} of {method['queries']} "
+          f"queries")
+    print(f"vertex count      {run['baseline']['correct']} "
+          f"(digest {run['digest']['correct']}, reshuffle "
+          f"{run['reshuffle']['correct']})")
+    print(f"sanity holds      {gate['sanity_holds']}")
+    print(f"bit score         {gate['score_rounded']} "
+          f"({gate['verdict']})")
+    return 0
+
+
+# ---------------------------------------------------------------------------
+#  escalation
+# ---------------------------------------------------------------------------
+
+def _escalation(args: argparse.Namespace) -> int:
+    """The deep-hole ladder, and its measurement cache.
+
+    ``--write`` re-takes the measurement, which is a quarter of an hour of
+    exact decoding; without it the stored one is read and its freshness
+    reported, never silently recomputed.
+    """
+    if args.write:
+        path = esc.write_measurements()
+        print(f"wrote {path}")
+        print(f"digest {esc.module_digest()}")
+        return 0
+    condition = esc.state()
+    report = esc.current()
+    if report is None:
+        print(f"cache             {condition['verdict']}")
+        print("nothing is reported from a cache that does not describe the "
+              "sources; re-take it with --write")
+        return 1
+    tree = report["decision"]
+    best = tree["best"]
+    if args.json:
+        print(json.dumps({
+            "cache": condition["verdict"],
+            "verdict": tree["verdict"],
+            "reproduces": tree["reproduces"],
+            "gate": tree["gate"],
+            "best_layer": best["layer"],
+            "best_starts": best["starts"],
+            "best_q0": best["q0"],
+            "cells": [{"layer": cell["layer"], "starts": cell["starts"],
+                       "q0": cell["q0"],
+                       "ratio": (esc.rounded(cell["ratio"], 4)
+                                 if cell["ratio"] is not None else None)}
+                      for cell in report["cells"]],
+        }, indent=1, sort_keys=True))
+        return 0
+    print(f"cache             {condition['verdict']}")
+    print(f"verdict           {tree['verdict']}")
+    print(f"bottom rung       {tree['bottom']['q0']} of {tree['gate']} "
+          f"(reproduces the first round: {tree['reproduces']})")
+    for cell in report["cells"]:
+        ratio = (esc.rounded(cell["ratio"], 4)
+                 if cell["ratio"] is not None else "n/a")
+        print(f"  {cell['layer']:<9} {cell['starts']:>4} starts   "
+              f"Q0 {cell['q0']:>2} of {cell['gate']:<2}  rho {ratio}")
+    print(f"best cell         {best['layer']} at {best['starts']} starts, "
+          f"Q0 {best['q0']} of {tree['gate']}")
+    return 0
+
+
+# ---------------------------------------------------------------------------
+#  failures
+# ---------------------------------------------------------------------------
+
+def _failures(args: argparse.Namespace) -> int:
+    """The four failures of the escalated reading, and the stalled ratio.
+
+    ``--write`` re-takes the measurement, which runs every declared ensemble
+    once; without it the stored one is read and its freshness reported.
+    """
+    if args.write:
+        path = dhf.write_measurements()
+        print(f"wrote {path}")
+        print(f"digest {dhf.module_digest()}")
+        return 0
+    condition = dhf.state()
+    report = dhf.current()
+    if report is None:
+        print(f"cache             {condition['verdict']}")
+        print("nothing is reported from a cache that does not describe the "
+              "sources; re-take it with --write")
+        return 1
+    check = report["reproduction"]
+    spread = report["spread"]
+    if args.json:
+        print(json.dumps({
+            "cache": condition["verdict"],
+            "reproduces": check["reproduces"],
+            "correct": check["correct"],
+            "queries": check["queries"],
+            "counts": dict(report["counts"]),
+            "worst_type": spread["worst_type"],
+            "rho_seed": dhf.rounded(spread["rho_seed"], 4),
+            "rho_all": dhf.rounded(spread["rho_all"], 4),
+            "same_mechanism": report["same_mechanism"],
+            "best_deletion": dhf.rounded(
+                report["leave_out"]["best_two"]["ratio"], 4),
+        }, indent=1, sort_keys=True))
+        return 0
+    print(f"cache             {condition['verdict']}")
+    print(f"reproduces        {check['correct']} of {check['queries']} "
+          f"({check['reproduces']})")
+    for row in report["failures"]:
+        print(f"  {row['query']:<28} truth {row['truth']:<10} named "
+              f"{str(row['named']):<10} rank {row['own_rank']}  margin "
+              f"{dhf.rounded(row['margin'], 4)}")
+    print(f"worst spread      {spread['worst_type']} at "
+          f"{dhf.rounded(spread['worst_spread'], 4)}")
+    print(f"rho               {dhf.rounded(spread['rho_seed'], 4)} (seed), "
+          f"{dhf.rounded(spread['rho_all'], 4)} (all perturbations)")
+    print(f"same mechanism    {report['same_mechanism']}")
+    return 0
+
+
+# ---------------------------------------------------------------------------
+#  cumulativity
+# ---------------------------------------------------------------------------
+
+def _cumulativity(args: argparse.Namespace) -> int:
+    """The refinement check every declared layer family has to pass."""
+    report = cml.cumulativity_report()
+    if args.json:
+        print(json.dumps({
+            "families": [{"key": row["key"], "shipped": row["shipped"],
+                          "passes": row["passes"],
+                          "defects": list(row["defects"])}
+                         for row in report["families"]],
+            "edges_checked": report["edges_checked"],
+            "non_edges_checked": report["non_edges_checked"],
+            "holds": report["holds"],
+        }, indent=1, sort_keys=True))
+        return 0 if report["holds"] else 1
+    print(f"families          {report['count']} "
+          f"({report['shipped']} shipped)")
+    print(f"edges             {report['edges_checked']} checked, "
+          f"{report['non_edges_checked']} declared non-edges")
+    for row in report["families"]:
+        state = "passes" if row["passes"] else "DEFECT"
+        ships = "ships" if row["shipped"] else "not shipped"
+        print(f"  {row['key']:<26} {state:<7} ({ships})")
+        for defect in row["defects"]:
+            print(f"    {defect}")
+        for loss in row["conflations"]:
+            if loss["count"]:
+                print(f"    conflates {loss['count']} pair(s) at "
+                      f"{loss['rung']} -- a resolution, not a defect")
+    print(f"rule holds        {report['holds']}")
+    return 0 if report["holds"] else 1
+
+
+# ---------------------------------------------------------------------------
+#  queryesc
+# ---------------------------------------------------------------------------
+
+def _queryesc(args: argparse.Namespace) -> int:
+    """The escalation loop: what it costs, and what it buys."""
+    if args.write:
+        path = qesc.write_measurements()
+        print(f"wrote {path}")
+        print(f"digest {qesc.module_digest()}")
+        return 0
+    condition = qesc.state()
+    report = qesc.current()
+    if report is None:
+        print(f"cache             {condition['verdict']}")
+        print("nothing is reported from a cache that does not describe the "
+              "sources; re-take it with --write")
+        return 1
+    safety = report["safety"]
+    utility = report["utility"]
+    if args.json:
+        print(json.dumps({"cache": condition["verdict"],
+                          "safety_holds": safety["holds"],
+                          "cases": safety["cases"],
+                          "answered_directly": safety["answered_directly"],
+                          "probes": utility["probes"],
+                          "resolved_above_the_first_rung":
+                              list(utility["resolved_above_the_first_rung"]),
+                          "certified_absences":
+                              list(utility["certified_absences"])},
+                         indent=1, sort_keys=True))
+        return 0
+    print(f"cache             {condition['verdict']}")
+    print(f"gate 1 (safety)   {safety['holds']} over {safety['cases']} cases")
+    print(f"gate 2 (utility)  {utility['has_an_instance']}, "
+          f"{len(utility['resolved_above_the_first_rung'])} of "
+          f"{utility['probes']} probes resolve above the first rung")
+    for row in report["probes"]:
+        outcome = (f"answered at {row['layer']}" if row["answered"]
+                   else f"refused at {row['layer']}")
+        print(f"  {row['query']:<44} {outcome:<20} cost {row['cost']}")
+    return 0
+
+
+
+# ---------------------------------------------------------------------------
+#  review sweep
+# ---------------------------------------------------------------------------
+
+def _review(args: argparse.Namespace) -> int:
+    """The register of stalled results, ranked before any is re-read."""
+    report = rvs.review_sweep_report()
+    if args.json:
+        print(json.dumps({
+            "entries": [{"key": row["key"], "verdict": row["verdict"],
+                         "supported": row["supported"],
+                         "document": row["document"]}
+                        for row in report["entries"]],
+            "recoverable": list(report["recoverable"]),
+            "defects": list(report["defects"]),
+            "holds": report["holds"],
+        }, indent=1, sort_keys=True))
+        return 0 if report["holds"] else 1
+    print(f"entries           {report['count']}")
+    for row in report["entries"]:
+        mark = "" if row["supported"] else "  (unsupported claim)"
+        print(f"  {row['key']:<26} {row['verdict']:<16}{mark}")
+        print(f"    read at       {row['reading']}")
+        print(f"    next          {row['next_step']}")
+    print(f"re-reading        licensed for "
+          f"{', '.join(report['recoverable']) or 'nothing'}")
+    for defect in report["defects"]:
+        print(f"  DEFECT {defect}")
+    print(f"register holds    {report['holds']}")
+    return 0 if report["holds"] else 1
+
+# ---------------------------------------------------------------------------
+#  planner
+# ---------------------------------------------------------------------------
+
+def _planner(args: argparse.Namespace) -> int:
+    """The reverse-call planner, in the sandbox: what it answers and refuses."""
+    from .sandbox import planner as pl
+    report = pl.planner_report()
+    promotion = report["promotion"]
+    fallback = report["fallback"]
+    if args.json:
+        print(json.dumps({"tools": len(report["tools"]),
+                          "budget": report["budget"],
+                          "tasks": len(report["tasks"]),
+                          "answered": report["answered"],
+                          "verified": report["verified"],
+                          "beyond_the_runtime":
+                              list(report["answered_beyond_the_runtime"]),
+                          "fallback_safety": fallback["safety_holds"],
+                          "fallback_utility": fallback["utility_holds"],
+                          "ready": promotion["ready"]},
+                         indent=1, sort_keys=True))
+        return 0
+    print(f"tools             {len(report['tools'])}, "
+          f"budget {report['budget']}")
+    for row in report["tasks"]:
+        state = (f"answered by {row['tool']}" if row["answered"]
+                 else f"refused ({row['refusal_tag']})")
+        print(f"  {row['task']:<38} {state:<34} cost {row['cost']:>2} "
+              f"checked {row['verified']}")
+    print(f"answered          {report['answered']} of "
+          f"{len(report['tasks'])}, {report['verified']} checked, "
+          f"{len(report['answered_beyond_the_runtime'])} beyond the runtime")
+    print(f"fallback          {fallback['cases']} evaluation cases, "
+          f"{fallback['planner_consulted']} offered, "
+          f"{len(fallback['gained'])} gained")
+    print(f"  safety gate     {fallback['safety_holds']}")
+    print(f"  utility gate    {fallback['utility_holds']}")
+    for name, value in promotion["checks"].items():
+        print(f"  {name:<46} {value}")
+    print(f"ready to promote  {promotion['ready']}")
+    return 0
+
+
+# ---------------------------------------------------------------------------
+#  lean-mirror
+# ---------------------------------------------------------------------------
+
+def _lean_mirror(args: argparse.Namespace) -> int:
+    from .signoff import mirror as mir
+
+    report = mir.mirror_report()
+    if args.write:
+        outcome = mir.write_mirror(report)
+        for name in outcome["written"]:
+            print(f"wrote   {name}")
+        for name in outcome["removed"]:
+            print(f"removed {name}")
+        if not outcome["written"] and not outcome["removed"]:
+            print("the mirror was already the source")
+        print(f"{outcome['files']} files, "
+              f"{'identical' if outcome['identical'] else 'STILL DIFFERENT'}")
+        return 0 if outcome["identical"] else 1
+    if args.json:
+        print(json.dumps(report, indent=2, sort_keys=True))
+        return 0 if report["identical"] else 1
+    print(f"source  {report['source']}")
+    print(f"mirror  {report['mirror']}")
+    print(f"files   {report['files']}")
+    for name in report["missing"]:
+        print(f"  missing from the mirror: {name}")
+    for name in report["extra"]:
+        print(f"  in the mirror only:      {name}")
+    for name in report["differing"]:
+        print(f"  differs:                 {name}")
+    print("identical" if report["identical"]
+          else "run with --write to generate the mirror")
+    return 0 if report["identical"] else 1
+
+
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="python -m glm_universal.tools",
@@ -208,6 +607,15 @@ def _parser() -> argparse.ArgumentParser:
     address.add_argument("--json", action="store_true")
     address.set_defaults(handler=_lean_address)
 
+    mirror = sub.add_parser(
+        "lean-mirror",
+        help="the overlay's copy of the Lean tree, generated from the "
+             "repository's")
+    mirror.add_argument("--write", action="store_true",
+                        help="bring the mirror to the source")
+    mirror.add_argument("--json", action="store_true")
+    mirror.set_defaults(handler=_lean_mirror)
+
     board = sub.add_parser("pipeline", help="study to test to implemented")
     board.add_argument("--commands", action="store_true",
                        help="also print the column-3 verification commands")
@@ -217,6 +625,56 @@ def _parser() -> argparse.ArgumentParser:
     rules = sub.add_parser("directives", help="the project directives")
     rules.add_argument("--json", action="store_true")
     rules.set_defaults(handler=_directives)
+
+    landscape = sub.add_parser(
+        "landscape", help="the pre-registered wobble landscape study")
+    landscape.add_argument("--write", action="store_true",
+                           help="re-take the measurement cache")
+    landscape.add_argument("--json", action="store_true")
+    landscape.set_defaults(handler=_landscape)
+
+    holes = sub.add_parser(
+        "deepholes", help="the pre-registered deep-hole classifier study")
+    holes.add_argument("--write", action="store_true",
+                       help="re-take the measurement cache")
+    holes.add_argument("--json", action="store_true")
+    holes.set_defaults(handler=_deepholes)
+
+    ladder = sub.add_parser(
+        "escalation", help="the pre-registered deep-hole escalation ladder")
+    ladder.add_argument("--write", action="store_true",
+                        help="re-take the measurement cache")
+    ladder.add_argument("--json", action="store_true")
+    ladder.set_defaults(handler=_escalation)
+
+    four = sub.add_parser(
+        "failures", help="the four failures and the spread that gates them")
+    four.add_argument("--write", action="store_true",
+                      help="re-take the measurement cache")
+    four.add_argument("--json", action="store_true")
+    four.set_defaults(handler=_failures)
+
+    cumul = sub.add_parser(
+        "cumulativity", help="the refinement check every layer family passes")
+    cumul.add_argument("--json", action="store_true")
+    cumul.set_defaults(handler=_cumulativity)
+
+    loop = sub.add_parser(
+        "queryesc", help="escalation as a step of the query loop")
+    loop.add_argument("--write", action="store_true",
+                      help="re-take the measurement cache")
+    loop.add_argument("--json", action="store_true")
+    loop.set_defaults(handler=_queryesc)
+
+    sweep = sub.add_parser(
+        "review", help="the register of stalled results, ranked for re-reading")
+    sweep.add_argument("--json", action="store_true")
+    sweep.set_defaults(handler=_review)
+
+    sandbox = sub.add_parser(
+        "planner", help="the reverse-call planner, in the sandbox")
+    sandbox.add_argument("--json", action="store_true")
+    sandbox.set_defaults(handler=_planner)
 
     ledger = sub.add_parser("signoff",
                             help="what the sign-off ledger currently covers")

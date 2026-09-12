@@ -25,6 +25,7 @@ from ...reasoning import mantissa as mn
 from ...reasoning import noise_lab as nlb
 from ...reasoning import reversible as rv
 from ...reasoning import wobble as wbl
+from ...reasoning import wobble_landscape as wls
 
 from ..payload import containers_payload, drift_payload, noise_payload
 from ..parser import Query
@@ -325,6 +326,128 @@ class SignalReports:
             steps=tuple(steps), expected=expected,
             script_spec={"template": "report_signature", "args": {}},
             payload={"report": noise_payload(report)})
+
+    def _report_landscape(self, query: Query) -> Solution:
+        """Wires wls.landscape_report -- the pre-registered wobble landscape.
+
+        One question, fixed before the measurement in
+        ``studies/WOBBLE_LANDSCAPE_STUDY.md``: is alpha's gap-structure
+        signature unusual against a magnitude-matched null?  One number
+        answers it, and the subject reports the correction and the gate
+        beside the number rather than the number alone.  This does not derive
+        alpha and must not be read as deriving it.
+        """
+        report = wls.landscape_report()
+        primary = report["primary"]["primary_null"]
+        secondary = report["primary"]["secondary_null"]
+        gate = report["gate"]
+        golay = report["golay_null"]
+        magnitude = report["golay_magnitude"]
+        check = report["closed_form_check"]
+        alpha_golay = next(row for row in report["golay"]
+                           if row["name"] == "alpha")
+
+        steps = [
+            Step("the gap spectrum is the continued fraction",
+                 f"The stream is the Sturmian word of slope t, so the gaps "
+                 f"between ones take only the two lengths floor(1/t) and "
+                 f"floor(1/t) + 1 (GLM.Landscape.gap_mem_pair) and the long "
+                 f"gaps among the first K are exactly ceil((K+1) frac(1/t)) "
+                 f"- 1.  Nothing here is simulated; the run only checks it.",
+                 f"1/alpha = {report['reciprocal_cf']}; gaps "
+                 f"{check['short_gap']} and {check['long_gap']}; over "
+                 f"{check['gaps']} gaps the closed form gives "
+                 f"{check['long_closed_form']} long and the run gives "
+                 f"{check['long_observed']}: {check['holds']}"),
+            Step("the entropy is refused as a statistic",
+                 f"The ones in N ticks are exactly floor(N t), so the "
+                 f"entropy of the raw stream is the binary entropy of the "
+                 f"slope and carries only the magnitude of alpha.  The "
+                 f"catalogue's 0.062 is that number, correctly computed and "
+                 f"structurally empty; the run length 137 is a_0 of the "
+                 f"continued fraction of 1/alpha and nothing more.",
+                 f"entropy {report['entropy_rounded']} bits, run length "
+                 f"{report['run_length']}"),
+            Step("the pre-registered statistic, against its null",
+                 f"S(x) = frac(1/frac(x)) is the frequency of the longer of "
+                 f"the two gap lengths.  The tail is two-sided about 1/2 and "
+                 f"the null is every rational j/{primary['stride']} in "
+                 f"(1/138, 1/136), enumerated exhaustively.",
+                 f"S(alpha) = {report['primary']['statistic_rounded']}; "
+                 f"{primary['at_least_as_extreme']} of "
+                 f"{primary['members']} at least as extreme, tail "
+                 f"{primary['tail']}"),
+            Step("the score, corrected and gated",
+                 f"B = log2(1/p) - log2(m) with m = "
+                 f"{report['statistics_tried']} statistics tried.  The gate "
+                 f"was fixed before measuring: below 1 bit is not evidence, "
+                 f"below 3 is weak and stops the study, 3 or more continues "
+                 f"to the landscape enumeration.",
+                 f"raw {primary['score']['raw_rounded']} bits, corrected "
+                 f"{gate['score_rounded']} -- {gate['verdict']}; "
+                 f"enumerate: {gate['enumerate']}"),
+            Step("the second null disagrees, and says so about itself",
+                 f"The k-sweep null gives a different answer, which is the "
+                 f"point of reporting it: its measure over k is a choice "
+                 f"rather than a fact, and the study named it secondary "
+                 f"before measuring.",
+                 f"tail {secondary['tail']}, corrected "
+                 f"{secondary['score']['corrected_rounded']} bits"),
+            Step("the Golay reading, corrected",
+                 f"Under a uniform 24-bit word d_min <= 3 has probability "
+                 f"{golay['within_three']}/{golay['space']} = "
+                 f"{golay['within_three_probability']} exactly -- the "
+                 f"majority case, worth under a bit, not a coincidence.  And "
+                 f"under the magnitude-matched null it is worth nothing at "
+                 f"all: alpha's first 72 bits are all zero because its slope "
+                 f"is below 1/72, and every one of the null's members does "
+                 f"the same.",
+                 f"alpha d_min {alpha_golay['d_min']} at depths "
+                 f"{tuple(row['depth'] for row in alpha_golay['rows'])}; "
+                 f"magnitude-matched tail {magnitude['tail']} over "
+                 f"{magnitude['members']} members, "
+                 f"{magnitude['score']['raw_rounded']} bits"),
+        ]
+
+        expected = {
+            "statistic": q(report["primary"]["statistic"]),
+            "tail": q(primary["tail"]),
+            "members": str(primary["members"]),
+            "extreme": str(primary["at_least_as_extreme"]),
+            "score": str(gate["score_rounded"]),
+            "verdict": str(gate["verdict"]),
+            "enumerate": str(gate["enumerate"]),
+            "secondary_tail": q(secondary["tail"]),
+            "run_length": str(report["run_length"]),
+            "entropy": str(report["entropy_rounded"]),
+            "closed_form_holds": str(check["holds"]),
+            "golay_within_three": str(golay["within_three"]),
+            "golay_probability": q(golay["within_three_probability"]),
+            "golay_magnitude_tail": q(magnitude["tail"]),
+            "alpha_d_min": str(alpha_golay["d_min"]),
+        }
+
+        return Solution(
+            query=query, kind="report",
+            answer=f"report landscape: the pre-registered statistic is the "
+                   f"stage-0 long-gap frequency S(alpha) = "
+                   f"{report['primary']['statistic_rounded']}, whose "
+                   f"two-sided tail against the magnitude-matched stride "
+                   f"null is {primary['tail']} "
+                   f"({primary['at_least_as_extreme']} of "
+                   f"{primary['members']}), so B = "
+                   f"{gate['score_rounded']} bits after correcting for "
+                   f"{report['statistics_tried']} statistics -- "
+                   f"{gate['verdict']}, and the landscape enumeration is not "
+                   f"run; the Golay reading is worth "
+                   f"{magnitude['score']['raw_rounded']} bits under the same "
+                   f"null.  This is not a derivation of alpha",
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "report_landscape", "args": {}},
+            payload={"report": {"statistic": str(report["primary"]["statistic"]),
+                                "tail": str(primary["tail"]),
+                                "score": gate["score_rounded"],
+                                "verdict": gate["verdict"]}})
 
     def _report_drift(self, query: Query) -> Solution:
         """Wires dft.drift_report -- iteration drift over the odd primes.

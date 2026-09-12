@@ -1,5 +1,18 @@
 # Generate, don't store — and say what generating costs
 
+
+## Tier 0 — the coarse read
+
+**Question.** What does removing the last stored table cost, in exact integers?
+
+**Verdict.** The last stored table is removed, and the cost of the removal is measured rather than assumed.
+
+**Deciding figure.** Golay membership as twelve parity checks against 36 bytes, proved equivalent and checked on the whole shell.
+
+**Recomputed by.** (hand-written argument; nothing to recompute)
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 *The zero-storage substrate reached v4 with one stored table left in it: a
 4096-word set of Golay codewords, consulted on every membership decision. v5
 removes it — the code is self-dual, so its twelve generator rows are also a
@@ -10,14 +23,14 @@ integer **ledger** of what it cost. A third piece, **NRCI**, is given one
 written-down definition here and reported for three streams the substrate
 already emits, beside the bound that is proved for one of them.*
 
-Code: [`glm_zero_storage_substrate_v5.py`](../glm_zero_storage_substrate_v5.py)
+Code: [`glm_zero_storage_substrate_v5.py`](scripts/glm_zero_storage_substrate_v5.py)
 (standalone, standard library only; v4 is kept unchanged at
-[`glm_zero_storage_substrate_v4.py`](../glm_zero_storage_substrate_v4.py) so
+[`glm_zero_storage_substrate_v4.py`](scripts/glm_zero_storage_substrate_v4.py) so
 the two can be run side by side).
 Formal development:
 [`RequestProject/GLM/ZeroStorageV5.lean`](../RequestProject/GLM/ZeroStorageV5.lean),
 building on [`ZeroStorage.lean`](../RequestProject/GLM/ZeroStorage.lean).
-Run: `python3 glm_zero_storage_substrate_v5.py --test` (about six seconds,
+Run: `python3 studies/scripts/glm_zero_storage_substrate_v5.py --test` (about six seconds,
 exits 0), `--ledger`, `--demo`, `--report`, and `--test --full` for the
 sixteen-million-word sweep.
 
@@ -359,10 +372,10 @@ agreeing on both routes, ledger totals 12 / 50,705 / 217,272, the work ratio
 9,461,733 : 180 bytes. They are reproduced by
 
 ```bash
-python3 glm_zero_storage_substrate_v5.py --test        # the whole self-check
-python3 glm_zero_storage_substrate_v5.py --test --full # + the 2²⁴ sweep
-python3 glm_zero_storage_substrate_v5.py --ledger      # the cost of each answer
-python3 glm_zero_storage_substrate_v5.py --report      # everything, as JSON
+python3 studies/scripts/glm_zero_storage_substrate_v5.py --test        # the whole self-check
+python3 studies/scripts/glm_zero_storage_substrate_v5.py --test --full # + the 2²⁴ sweep
+python3 studies/scripts/glm_zero_storage_substrate_v5.py --ledger      # the cost of each answer
+python3 studies/scripts/glm_zero_storage_substrate_v5.py --report      # everything, as JSON
 lake build RequestProject.GLM.ZeroStorageV5            # the proofs
 ```
 

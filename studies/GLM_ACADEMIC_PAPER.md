@@ -1,5 +1,18 @@
 # The Geometric Language Machine: A Unified Substrate for Exact Computation, Physical Calibration, and Semantic Reasoning
 
+
+## Tier 0 — the coarse read
+
+**Question.** What is the GLM, stated as a paper rather than as a repository?
+
+**Verdict.** The system rejects floating-point arithmetic entirely, operating instead with exact rational arithmetic.
+
+**Deciding figure.** A working paper synthesised from the sub-studies, kept beside the studies it draws on.
+
+**Recomputed by.** (hand-written argument; nothing to recompute)
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 ## A Technical Documentation Paper
 
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand  

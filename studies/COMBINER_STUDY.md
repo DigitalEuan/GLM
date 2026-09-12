@@ -1,5 +1,18 @@
 # XOR: what it is doing here, what it costs, and what could replace it
 
+
+## Tier 0 — the coarse read
+
+**Question.** Is XOR a choice in this system, and what does it cost?
+
+**Verdict.** XOR is not a choice where the system uses it: on the carrier the substrate actually runs on it is the only coordinatewise combiner available, up to a constant.
+
+**Deciding figure.** Every map from pairs of 24-bit words to single 24-bit words loses at least as much.
+
+**Recomputed by.** `glm_universal.reasoning.combiner.combiner_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 **The question.** XOR keeps turning up in this system, and the objection is a
 fair one. `a ^ b` throws away which of the two operands supplied each bit: from
 the result you cannot recover the pair. If the substrate is meant to be exact,

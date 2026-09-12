@@ -1,5 +1,18 @@
 # The unification blueprint, tested
 
+
+## Tier 0 — the coarse read
+
+**Question.** Does the supplied blueprint describe the package as it now stands?
+
+**Verdict.** A specification that is only read can drift away from the code without anybody noticing.
+
+**Deciding figure.** Every testable sentence of the blueprint restated as a claim and given one of four verdicts.
+
+**Recomputed by.** `glm_universal.reasoning.blueprint.blueprint_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 **What this document is.** `glm_unification_blueprint.md` is a specification: it
 states, in prose, what the GLM-3+ substrate is and what it does. A
 specification that is only read can drift away from the code without anybody

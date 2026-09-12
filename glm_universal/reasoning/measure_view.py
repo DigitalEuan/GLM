@@ -1085,9 +1085,16 @@ def transport_audit() -> Dict[str, object]:
 
     The audit builds every analogy the repaired triples themselves license:
     for each pair of distinct converted triples sharing a predicate, the four
-    terms are put to :func:`analogy_models.explain_analogy` twice, once with
+    terms are put to :func:`analogy_models.lexicon_relation` twice, once with
     the repair in scope and once with it suppressed.  The second run is the
     control, and it has to refuse everything.
+
+    The model is called directly rather than through
+    :func:`analogy_models.explain_analogy`, and the reason is worth stating:
+    the layer tries the energy-conjugate register first, which answers two of
+    these cases from a different register entirely.  Those answers are real,
+    but they are not what this audit measures -- the question here is what the
+    *repair* buys, so the measurement asks the model the repair changes.
     """
     from . import analogy_models as am
     from ..data_objects import semantic_lexicon as lex
@@ -1106,9 +1113,8 @@ def transport_audit() -> Dict[str, object]:
             for j, (c, _, _d) in enumerate(group):
                 if i == j or not {a, b, c} <= names:
                     continue
-                result = am.explain_analogy("lexicon", a, b, c, pool)
-                control = am.explain_analogy("lexicon", a, b, c, pool,
-                                             repaired=False)
+                result = am.lexicon_relation(a, b, c, pool)
+                control = am.lexicon_relation(a, b, c, pool, repaired=False)
                 cases.append({
                     "predicate": predicate,
                     "a": a, "b": b, "c": c,

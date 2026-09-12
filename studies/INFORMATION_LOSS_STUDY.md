@@ -1,5 +1,18 @@
 # Information loss at boundaries
 
+
+## Tier 0 — the coarse read
+
+**Question.** What does a layer boundary cost, made precise enough to prove?
+
+**Verdict.** A system is true up to a point, and past that point a different system takes over and is true in its own right.
+
+**Deciding figure.** Four boundaries, measured on the GLM's real carriers rather than asserted.
+
+**Recomputed by.** `glm_universal.reasoning.information_loss.information_loss_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 A study of the thesis that a system is true up to a point, and that past that
 point a different system takes over and is true in its own right, with the
 former statement now false but built upon.

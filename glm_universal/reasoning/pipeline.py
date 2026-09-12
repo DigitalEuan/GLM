@@ -44,6 +44,14 @@ row cannot claim a stage it has not reached.
 A row may declare ``lean_expected=False`` when a Lean counterpart is not
 meaningful (the directives table, this module).  Those rows are counted
 separately rather than silently excused.
+
+A row may also declare ``wire_expected=False``, which is the stronger case: the
+runtime is *forbidden* to reach it.  Directive D14 puts work that is not yet
+relied on in ``glm_universal/sandbox/``, which nothing the system computes with
+may import, so a report subject dispatching to it would break the isolation the
+sandbox exists to provide.  Such a row reaches "wired" and "verified" by
+declaration, is reported as unwired by design, and carries its recomputation
+guarantee through the generated blocks of its study instead.
 """
 
 from __future__ import annotations
@@ -90,6 +98,13 @@ class Row:
     subject: Optional[str]
     lean: Tuple[str, ...] = ()
     lean_expected: bool = True
+    #: A row may declare ``wire_expected=False`` when the runtime is *forbidden*
+    #: to reach it -- the sandbox of directive D14, which nothing the system
+    #: computes with may import.  Such a row is reported as unwired by design
+    #: rather than counted as blocked, and it names no report subject; the
+    #: recomputation guarantee is carried by the generated blocks of its study
+    #: instead of by a column-3 template.
+    wire_expected: bool = True
 
 
 #: The registry.  Association only -- every stage is measured, never declared.
@@ -202,12 +217,59 @@ REGISTRY: Tuple[Row, ...] = (
         ("reasoning/pipeline.py",),
         "pipeline",
         (), lean_expected=False),
+    Row("wobble-landscape", "is alpha structurally distinctive, and by how "
+        "many bits",
+        "WOBBLE_LANDSCAPE_STUDY.md",
+        ("reasoning/wobble_landscape.py",),
+        "landscape",
+        ("WobbleLandscape.lean",)),
+    Row("deep-hole-classifier", "can a trajectory distribution name a deep "
+        "hole, and does it beat the vertex count",
+        "DEEP_HOLE_STUDY.md",
+        ("reasoning/deep_hole_classifier.py",),
+        "hole classifier",
+        ("DeepHoleClassifier.lean",)),
+    Row("deep-hole-escalation", "was the deep-hole boundary the geometry or "
+        "the layer it was read at",
+        "DEEP_HOLE_ESCALATION_STUDY.md",
+        ("reasoning/deep_hole_escalation.py",),
+        "hole ladder",
+        ("DeepHoleEscalation.lean",)),
     Row("zero-storage", "generated instead of stored, and checked against "
         "what it replaces",
         "ZERO_STORAGE_STUDY.md",
         ("reasoning/generative.py",),
         "generated",
         ("ZeroStorage.lean",)),
+    Row("deep-hole-failure", "the four failures the escalated reading does "
+        "not name, and the spread that stalls the criterion",
+        "DEEP_HOLE_FAILURE_STUDY.md",
+        ("reasoning/deep_hole_failures.py",),
+        "hole failures",
+        ("DeepHoleFailure.lean",)),
+    Row("cumulativity", "a layer ships with its refinement check",
+        "CUMULATIVITY_STUDY.md",
+        ("reasoning/cumulativity.py",),
+        "cumulativity",
+        ("CumulativityRule.lean",)),
+    Row("query-escalation", "escalation as a declared, costed step of the "
+        "query loop",
+        "QUERY_ESCALATION_STUDY.md",
+        ("reasoning/query_escalation.py", "runtime/escalation_loop.py"),
+        "query escalation",
+        ("EscalationLoop.lean",)),
+    Row("review-sweep", "which stalled results are worth re-reading, ranked "
+        "before any of them is re-read",
+        "REVIEW_SWEEP_STUDY.md",
+        ("reasoning/review_sweep.py",),
+        "review sweep",
+        (), lean_expected=False),
+    Row("reverse-call-planner", "the problem-driven planner, in the sandbox "
+        "and not promoted",
+        "REVERSE_CALL_PLANNER_STUDY.md",
+        ("sandbox/planner.py",),
+        None,
+        (), lean_expected=False, wire_expected=False),
 )
 
 
@@ -336,11 +398,13 @@ def stage_report(row: Row) -> Dict[str, object]:
     stages = {
         "studied": bool(doc) and doc_bytes >= STUB_BYTES,
         "implemented": bool(modules) and all(modules.values()),
-        "wired": bool(row.subject) and row.subject in subjects,
+        "wired": ((bool(row.subject) and row.subject in subjects)
+                  if row.wire_expected else True),
         "tested": bool(all_covering),
         "formalised": (all(lean.values()) and bool(lean))
                       if row.lean_expected else True,
-        "verified": bool(template_name) and template_name in templates,
+        "verified": ((bool(template_name) and template_name in templates)
+                     if row.wire_expected else True),
     }
     missing = [name for name in STAGES if not stages[name]]
     return {
@@ -355,6 +419,7 @@ def stage_report(row: Row) -> Dict[str, object]:
         "test_count": sum(count_tests(name) for name in all_covering),
         "lean": dict(sorted(lean.items())),
         "lean_expected": row.lean_expected,
+        "wire_expected": row.wire_expected,
         "stages": stages,
         "stages_reached": sum(1 for name in STAGES if stages[name]),
         "complete": not missing,

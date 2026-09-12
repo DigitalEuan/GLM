@@ -1,5 +1,18 @@
 # Measure words as relative measures — the widening, measured
 
+
+## Tier 0 — the coarse read
+
+**Question.** What did the proposal's steps actually buy, once built?
+
+**Verdict.** This is the result document for steps 2–5 of the proposal.
+
+**Deciding figure.** The comparison-class register, the widening measured, and the queries that refuse at the boundary.
+
+**Recomputed by.** `glm_universal.reasoning.measure_view.measure_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 *What `data_objects/comparison_classes.py`, `reasoning/measure_view.py`,
 `RequestProject/GLM/MeasureView.lean` and the `measure` query are for, and what
 they measured.*

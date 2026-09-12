@@ -1,5 +1,18 @@
 # `glm_universal.evaluation` — the end-to-end CLI evaluation
 
+
+## Tier 0 — the coarse read
+
+**Question.** What does a user actually get when the machine is driven from the command line?
+
+**Verdict.** Every case starts `GLM.py` in a fresh interpreter.
+
+**Deciding figure.** Exit code 0 when every case passes and 1 when any case fails.
+
+**Recomputed by.** `glm_universal.evaluation.harness.evaluation_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 The other measuring instruments in this package look at the machine from the
 inside. `capabilities/` asks the library where it stops; `benchmarks/` scores
 solver functions on curated and exhaustive task sets. Neither of them goes
@@ -12,7 +25,7 @@ process's exit code and the `ANSWER` or `UNSOLVED` line it printed.
 
 ```bash
 cd overlay
-PYTHONPATH=. python3 -m glm_universal.evaluation                     # all 135 cases
+PYTHONPATH=. python3 -m glm_universal.evaluation                     # all 147 cases
 PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8            # in parallel
 PYTHONPATH=. python3 -m glm_universal.evaluation --only analogy      # one query kind
 PYTHONPATH=. python3 -m glm_universal.evaluation --case report-superposition
@@ -25,14 +38,14 @@ harness can be used as a gate.
 
 ## The question set
 
-`cases.py` holds **135 cases**. Between them they cover **all 21 query kinds**
+`cases.py` holds **147 cases**. Between them they cover **all 21 query kinds**
 the runtime recognises (including `unknown`, the kind a question gets when
-nothing else claims it) and **all 52 report subjects**. Coverage is not
+nothing else claims it) and **all 63 report subjects**. Coverage is not
 asserted in prose: `test_evaluation.py` compares `KINDS_COVERED` and
 `SUBJECTS_COVERED` against the runtime's own tables and fails when a kind or a
 subject is added without a case.
 
-Of the 135, **119 expect an answer and 16 expect a refusal** — all 16
+Of the 147, **131 expect an answer and 16 expect a refusal** — all 16
 classified `boundary`, and **no `gap` case left**.
 
 A case declares what the honest outcome is:
@@ -51,7 +64,7 @@ A case declares what the honest outcome is:
 
 ## Where the run stands
 
-The whole set runs **97 of 97**, with no wrong answers and no unexpected
+The whole set runs **147 of 147**, with no wrong answers and no unexpected
 refusals: every case either answers with the ground truth or refuses exactly
 where it declared it would.
 
@@ -63,7 +76,7 @@ stopped there. Every solver that takes a carrier and nothing else now hands an
 operand no register enumerates to the formula parser before refusing, which
 is what `coherence-unregistered-molecule` and the `spatial`, `angle` and
 `cluster` cases beside it check. Nothing is guessed: an unparseable formula
-still refuses. The nine refusals that remain are all `boundary` — a theorem
+still refuses. The sixteen refusals that remain are all `boundary` — a theorem
 or a stated commitment, not a missing implementation.
 
 ## The scoring is asymmetric on purpose
@@ -96,7 +109,7 @@ its outcome and, for a failure, the exact point at which it stops (`stops_at`).
 
 | file | what it holds |
 |---|---|
-| `cases.py` | the 135 cases, `cases_by_kind`, `KINDS_COVERED`, `SUBJECTS_COVERED` |
+| `cases.py` | the 147 cases, `cases_by_kind`, `KINDS_COVERED`, `SUBJECTS_COVERED` |
 | `harness.py` | `run_case`, `run_all`, `evaluation_report`, `format_report`, `write_json` |
 | `__main__.py` | the command line above |
 

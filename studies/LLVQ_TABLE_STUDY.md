@@ -1,5 +1,18 @@
 # The LLVQ table: the quantiser's search, replaced by a lookup
 
+
+## Tier 0 — the coarse read
+
+**Question.** Can the quantiser's 4,096-codeword scan be replaced by the MOG's own structure?
+
+**Verdict.** The scan is a 16-entry column table, the 64 hexacode words, 128 classes of 32.
+
+**Deciding figure.** Every address in the corpus decoded both ways, with nothing changed.
+
+**Recomputed by.** `glm_universal.reasoning.llvq_table.llvq_table_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 *The Leech quantiser is the hot path of every address, and it was a scan: for
 each of the two congruence classes of Λ, form the cost of all 4,096 Golay
 codewords and keep the cheapest. This study replaces the scan by the MOG's own

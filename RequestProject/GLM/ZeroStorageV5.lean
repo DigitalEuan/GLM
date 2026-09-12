@@ -3,7 +3,7 @@ import RequestProject.GLM.ZeroStorage
 /-!
 # The zero-storage substrate, v5: the syndrome, the tracker, and the repair
 
-`glm_zero_storage_substrate_v5.py` closes the last corner of the
+`studies/scripts/glm_zero_storage_substrate_v5.py` closes the last corner of the
 "generate, don't store" claim and adds a cost ledger.  Three of its
 mechanisms are mathematical claims rather than engineering choices, and they
 are proved here.

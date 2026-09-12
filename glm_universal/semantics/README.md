@@ -1,5 +1,18 @@
 # `glm_universal/semantics` — meaning as the thing that gets encoded
 
+
+## Tier 0 — the coarse read
+
+**Question.** What should a carrier for a word be derived from, if not its spelling?
+
+**Verdict.** A hash of a spelling is a perfectly good identifier of a string, and it is not a measurement of anything the string is about.
+
+**Deciding figure.** The inherited graph holds 4,282 concepts and 4,015 edges, and its carriers were produced by hashing a spelling.
+
+**Recomputed by.** `glm_universal.semantics.graph.graph_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 

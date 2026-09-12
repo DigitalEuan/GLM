@@ -1,5 +1,18 @@
 # The archive, read a second time
 
+
+## Tier 0 — the coarse read
+
+**Question.** Read a second time, with the first pass's Lean in hand, what else does the archive give up?
+
+**Verdict.** Eight more results came back.
+
+**Deciding figure.** Eight results, each recomputing what its Lean file proves, in exact arithmetic.
+
+**Recomputed by.** `glm_universal.reasoning.salvage_second.second_pass_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 *The first pass over `source_material/GLM-main.zip` retrieved eleven results
 ([`SOURCE_SALVAGE_AUDIT.md`](SOURCE_SALVAGE_AUDIT.md)) and left two questions
 open ([`ARCHIVE_DEEP_DIVE_STUDY.md`](ARCHIVE_DEEP_DIVE_STUDY.md)). Read a second

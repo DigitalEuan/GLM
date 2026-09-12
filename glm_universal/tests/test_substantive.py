@@ -228,12 +228,20 @@ class TestCrossRegisterCoercion:
     different registers share no coordinate layout, so this coercion, and
     not a mixed-layout subtraction, is the only thing that could.
 
-    Parsing it is not answering it.  The solver then finds that the relation
-    the lexicon states -- ``temperature drives heat`` -- reaches nothing at
-    all when looked up from ``force``, and that physics, the more specific
-    register, holds two of the three terms and not the third.  That is the
-    signature of a question about physics coerced into the lexicon, and the
-    honest answer is to say so.
+    Parsing it is not answering it.  For several rounds it was not answered:
+    the relation the lexicon states -- ``temperature drives heat`` -- reaches
+    nothing when looked up from ``force``, and physics, the more specific
+    register, holds two of the three terms and not the third, so the machine
+    refused and named both halves of the reason.
+
+    It is answered now, and by supplying what was missing rather than by
+    relaxing anything: the energy-conjugate register of
+    ``data_objects/conjugate_pairs.py`` has rows that *span* the domains, and
+    in it all three terms are placed -- ``heat`` a transfer, ``temperature``
+    and ``force`` efforts.  The tests below keep both behaviours honest: the
+    question is answered ``work`` through a named relation, and a third term
+    that the conjugate register does not place is still refused with the
+    register split named.
     """
 
     def test_the_cross_register_analogy_parses_into_one_register(self, sess):
@@ -241,11 +249,32 @@ class TestCrossRegisterCoercion:
         assert sol.kind == "analogy"
         assert sol.query.domain == "lexicon"
 
-    def test_the_cross_register_analogy_is_refused_with_the_split_named(
+    def test_the_cross_register_analogy_is_answered_by_the_conjugate_register(
             self, sess):
         sol = sess.ask("heat : temperature :: force : ?")
+        assert sol.ok
+        assert sol.answer == "heat : temperature :: force : work"
+        witness = sol.payload["model"]["witness"]
+        assert witness["relation"] == "effort_of"
+        assert witness["statement"] == "temperature effort_of heat"
+        # force occupies B's column, so the relation is used in reverse --
+        # legitimate because it is a bijection between its two columns.
+        assert witness["direction"] == "reverse"
+        assert witness["row"] == "thermal"
+        assert witness["target_row"] == "mechanical"
+
+    def test_a_term_the_conjugate_register_does_not_place_is_still_refused(
+            self, sess):
+        """The refusal, and the register split, survive where the row does not.
+
+        ``acceleration`` is not a column of any conjugate row, so there is no
+        side of ``effort_of`` for it to enter on; the answer says that, names
+        the admissibility criterion that failed, and still reports the split.
+        """
+        sol = sess.ask("heat : temperature :: acceleration : ?")
         assert not sol.ok
-        assert "drives" in sol.error
+        assert "occupies no column of the conjugate register" in sol.error
+        assert "role_typed" in sol.error
         assert "physics holds" in sol.error
         assert "but not heat" in sol.error
 

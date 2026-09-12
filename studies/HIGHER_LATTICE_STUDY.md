@@ -1,5 +1,18 @@
 # Past 24: the higher-lattice study
 
+
+## Tier 0 — the coarse read
+
+**Question.** What does the machine gain above the Leech lattice, and what does it give up?
+
+**Verdict.** The 32-dimensional Barnes–Wall rung and its three-resolution address; the 48-dimensional ternary rung and its factor of 16,834 in density.
+
+**Deciding figure.** A factor of 16,834 in density at 48 dimensions, and delta–sigma run against a Leech shell.
+
+**Recomputed by.** `glm_universal.reasoning.higher_lattices.higher_lattices_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 *What the machine gains by climbing above the Leech lattice, and what it has to
 give up to get there. The 32-dimensional Barnes–Wall rung and its
 three-resolution address; the 48-dimensional ternary rung and its factor of

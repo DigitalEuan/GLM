@@ -1,5 +1,18 @@
 # The search loop, retrieved from the archive's ARC generations
 
+
+## Tier 0 — the coarse read
+
+**Question.** What does the archive's search loop guarantee, and what does its ranking leave undetermined?
+
+**Verdict.** A procedure is retrievable in exactly the way a number is.
+
+**Deciding figure.** What the hard gate admits, and what the ranking cannot separate, measured as a census.
+
+**Recomputed by.** `glm_universal.reasoning.search_loop.search_loop_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 **What this document is.**
 [`SOURCE_SALVAGE_AUDIT.md`](SOURCE_SALVAGE_AUDIT.md) read the archive area by
 area for *exact claims* — counts, identities, bounds — and closed

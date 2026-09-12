@@ -1,5 +1,18 @@
 # Geometric ambiguity as computation
 
+
+## Tier 0 — the coarse read
+
+**Question.** What happens when the six-fold Golay tie is carried instead of broken?
+
+**Verdict.** The tie is exactly six, and it is a sextet.
+
+**Deciding figure.** Collapse is a measurement, not a coin flip, and the wiggle really does compute.
+
+**Recomputed by.** `glm_universal.reasoning.wobble.wobble_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 *What happens when the six-fold Golay tie is carried instead of broken, and
 what happens when the emitted alphabet is widened.*
 
@@ -331,7 +344,7 @@ coverage`) and the unit strings including the priced steradian
 with a stated reason* rather than answered wrongly, which is progress but not
 an answer — see [`ANALOGY_LAYER_STUDY.md`](ANALOGY_LAYER_STUDY.md). The `O(1)`
 LLVQ table remains unbuilt. The current list of what is untouched is kept in
-one place, `MASTER_PLAN_ARCHIVE.md` §7.9, and mirrored in `STATUS.md`.
+one place, `archive/MASTER_PLAN_ARCHIVE.md` §7.9, and mirrored in `STATUS.md`.
 
 ## 9. Re-running it
 

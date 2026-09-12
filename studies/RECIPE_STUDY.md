@@ -1,5 +1,18 @@
 # The recipe made into an object
 
+
+## Tier 0 — the coarse read
+
+**Question.** Can a register be regenerated from a description of its domain?
+
+**Verdict.** Three registers regenerated from their descriptions with every measured figure unchanged.
+
+**Deciding figure.** The one generic path run over each description, with the regeneration as the subtractive test.
+
+**Recomputed by.** `glm_universal.recipe.report.recipe_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 *What `glm_universal/recipe/`, `RequestProject/GLM/Recipe.lean`,
 `report recipe` and `derive <coordinate> of <object>` are for, and what they
 measured.*

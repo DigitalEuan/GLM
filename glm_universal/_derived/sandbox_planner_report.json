@@ -1,0 +1,423 @@
+{
+ "input_digest": "259b0e3d15bfe18d470efbbb918a8c5f24c01feb531f89952668f19a71ca4012",
+ "name": "sandbox_planner_report",
+ "payload": {
+  "answered": 10,
+  "answered_beyond_the_runtime": [
+   "derive energy",
+   "derive pressure",
+   "describe energie",
+   "nearest to k_B",
+   "layers energy and torque"
+  ],
+  "budget": 12,
+  "fallback": {
+   "answers_moved": [],
+   "cases": 147,
+   "gained": [],
+   "gained_unchecked": [],
+   "planner_consulted": 4,
+   "principled_refusals": 10,
+   "principled_refusals_offered_to_the_planner": [],
+   "rule": "the runtime answers first and its answers are untouched; the planner is consulted only on a refusal, and only on a refusal the escalation classifier calls escalatable",
+   "runtime_answered": 133,
+   "runtime_refused": 14,
+   "safety_holds": true,
+   "utility_holds": false
+  },
+  "limits": "Eight tools, not sixty-seven: a tool is registered here when it has a precondition that can be checked cheaply and a postcondition that can be stated, and registering the rest is the work the promotion checklist is waiting on.  The parser is deliberately thin, so a problem it reads wrongly is planned wrongly -- which is a reason the planner is in the sandbox.",
+  "max_depth": 2,
+  "method": "A string becomes a problem; the planner selects every tool whose declared precondition the problem satisfies, runs them cheapest first, checks each answer where an independent check exists, and stops on a refusal classified as principled.  What it returns is the cheapest verified answer, or a refusal naming every tool tried.",
+  "promotion": {
+   "checks": {
+    "answers_something_the_runtime_does_not": false,
+    "deterministic": true,
+    "every_answer_independently_checked": true,
+    "every_refusal_classified": true,
+    "exact": true,
+    "no_principled_refusal_reaches_the_planner": true,
+    "no_regression_against_the_runtime": true
+   },
+   "fallback": {
+    "answers_moved": [],
+    "cases": 147,
+    "gained": [],
+    "gained_unchecked": [],
+    "planner_consulted": 4,
+    "principled_refusals": 10,
+    "principled_refusals_offered_to_the_planner": [],
+    "rule": "the runtime answers first and its answers are untouched; the planner is consulted only on a refusal, and only on a refusal the escalation classifier calls escalatable",
+    "runtime_answered": 133,
+    "runtime_refused": 14,
+    "safety_holds": true,
+    "utility_holds": false
+   },
+   "order": [
+    "deterministic",
+    "exact",
+    "no_regression_against_the_runtime",
+    "every_refusal_classified",
+    "every_answer_independently_checked",
+    "no_principled_refusal_reaches_the_planner",
+    "answers_something_the_runtime_does_not"
+   ],
+   "ready": false,
+   "regressions": [],
+   "rule": "The planner ships when every line above is true.  While any is false it stays in the sandbox, and the false line is the work that remains -- not a caveat to be written around.",
+   "unclassified": [],
+   "unverified": []
+  },
+  "refused": 5,
+  "tasks": [
+   {
+    "answer": "energy = length * length * mass / time / time (5 moves, minimal=True)",
+    "answered": true,
+    "cost": 9,
+    "goal": "derive",
+    "purpose": "the controller searches, and the verifier checks what it found",
+    "refusal_tag": null,
+    "runtime_answer": "raised: parse_query: 'derive energy' -- a derivation needs a coordinate and an object, written '<coordinate> of <object>'; 'derive energy' names only one thing",
+    "runtime_answered": false,
+    "task": "derive energy",
+    "tool": "controller",
+    "tried": [
+     "controller"
+    ],
+    "verified": true
+   },
+   {
+    "answer": "pressure = 1 / length * mass / time / time (4 moves, minimal=True)",
+    "answered": true,
+    "cost": 9,
+    "goal": "derive",
+    "purpose": "a second derivation, to show the first is not a one-off",
+    "refusal_tag": null,
+    "runtime_answer": "raised: parse_query: 'derive pressure' -- a derivation needs a coordinate and an object, written '<coordinate> of <object>'; 'derive pressure' names only one thing",
+    "runtime_answered": false,
+    "task": "derive pressure",
+    "tool": "controller",
+    "tried": [
+     "controller"
+    ],
+    "verified": true
+   },
+   {
+    "answer": "no tool declares a precondition this problem satisfies (goal 'derive')",
+    "answered": false,
+    "cost": 0,
+    "goal": "derive",
+    "purpose": "no such quantity: no tool declares a precondition",
+    "refusal_tag": "no-tool",
+    "runtime_answer": "raised: parse_query: 'derive unobtainium' -- a derivation needs a coordinate and an object, written '<coordinate> of <object>'; 'derive unobtainium' names only one thing",
+    "runtime_answered": false,
+    "task": "derive unobtainium",
+    "tool": null,
+    "tried": [],
+    "verified": false
+   },
+   {
+    "answer": "energy = force * length holds under scalar semantics",
+    "answered": true,
+    "cost": 6,
+    "goal": "verify",
+    "purpose": "the audit, answered by the verifier",
+    "refusal_tag": null,
+    "runtime_answer": "energy = force * length holds under scalar semantics",
+    "runtime_answered": true,
+    "task": "verify energy = force * length",
+    "tool": "verifier",
+    "tried": [
+     "runtime",
+     "verifier",
+     "escalated_runtime"
+    ],
+    "verified": true
+   },
+   {
+    "answer": "energy = force * time fails under scalar semantics",
+    "answered": true,
+    "cost": 6,
+    "goal": "verify",
+    "purpose": "a false equation: answered, and false",
+    "refusal_tag": null,
+    "runtime_answer": "energy = force * time does not hold under scalar semantics",
+    "runtime_answered": true,
+    "task": "verify energy = force * time",
+    "tool": "verifier",
+    "tried": [
+     "runtime",
+     "verifier",
+     "escalated_runtime"
+    ],
+    "verified": true
+   },
+   {
+    "answer": "energy (physics): depth 4, plane-0 mask 0x400802, |v|^2 = 47/8",
+    "answered": true,
+    "cost": 5,
+    "goal": "describe",
+    "purpose": "the register reading, cheapest first",
+    "refusal_tag": null,
+    "runtime_answer": "energy (physics): depth 4, plane-0 mask 0x400802, |v|^2 = 47/8",
+    "runtime_answered": true,
+    "task": "describe energy",
+    "tool": "escalated_runtime",
+    "tried": [
+     "reference",
+     "runtime",
+     "escalated_runtime"
+    ],
+    "verified": true
+   },
+   {
+    "answer": "energy (physics): depth 4, plane-0 mask 0x400802, |v|^2 = 47/8  [answered by a lookup at L3: 'energie' -> 'energy', the unique alias within 2 edits]",
+    "answered": true,
+    "cost": 5,
+    "goal": "describe",
+    "purpose": "a misspelling: only the escalated reading finds it",
+    "refusal_tag": null,
+    "runtime_answer": "unsolved: resolve: 'energie' names no carrier in any enabled domain; did you mean ['energy', 'angle', 'charge', 'entropy', 'etendue']?",
+    "runtime_answered": false,
+    "task": "describe energie",
+    "tool": "escalated_runtime",
+    "tried": [
+     "reference",
+     "runtime",
+     "escalated_runtime"
+    ],
+    "verified": true
+   },
+   {
+    "answer": "every tool tried refused: reference: 'unobtainium': no determinate referent: the term is not a numeral, a number word; runtime: resolve: 'unobtainium' names no carrier in any enabled domain; did you mean ['ac; escalated_runtime: refused at every rung of the declared ladder ['L1', 'L2', 'L3'], so the answer i",
+    "answered": false,
+    "cost": 5,
+    "goal": "describe",
+    "purpose": "absent everywhere: every tool refuses, and says so",
+    "refusal_tag": "absent",
+    "runtime_answer": "unsolved: resolve: 'unobtainium' names no carrier in any enabled domain; did you mean ['actinium', 'einsteinium', 'neptunium', 'nobelium', 'potassium']?",
+    "runtime_answered": false,
+    "task": "describe unobtainium",
+    "tool": null,
+    "tried": [
+     "reference",
+     "runtime",
+     "escalated_runtime"
+    ],
+    "verified": false
+   },
+   {
+    "answer": "every tool tried refused: reference: 'justice': no determinate referent: the term is not a numeral, a number word, a ; runtime: resolve: 'justice' names no carrier in any enabled domain; did you mean ['lattic; escalated_runtime: refused at every rung of the declared ladder ['L1', 'L2', 'L3'], so the answer i",
+    "answered": false,
+    "cost": 5,
+    "goal": "describe",
+    "purpose": "open vocabulary: refused, and classified",
+    "refusal_tag": "absent",
+    "runtime_answer": "unsolved: resolve: 'justice' names no carrier in any enabled domain; did you mean ['lattice', 'distance', 'space', 'time', 'a_sc']?",
+    "runtime_answered": false,
+    "task": "describe justice",
+    "tool": null,
+    "tried": [
+     "reference",
+     "runtime",
+     "escalated_runtime"
+    ],
+    "verified": false
+   },
+   {
+    "answer": "'H2O' denotes compound Z1_2 Z8",
+    "answered": true,
+    "cost": 5,
+    "goal": "meaning",
+    "purpose": "the reference layer answers where the register does not",
+    "refusal_tag": null,
+    "runtime_answer": "'H2O' denotes compound Z1_2 Z8",
+    "runtime_answered": true,
+    "task": "meaning of H2O",
+    "tool": "escalated_runtime",
+    "tried": [
+     "reference",
+     "runtime",
+     "escalated_runtime"
+    ],
+    "verified": true
+   },
+   {
+    "answer": "nearest to boltzmann_constant: bekenstein_hawking_entropy, entropy, entropy_per_particle, heat_capacity, thermodynamic_bit_entropy",
+    "answered": true,
+    "cost": 4,
+    "goal": "nearest",
+    "purpose": "a constant the register does not spell",
+    "refusal_tag": null,
+    "runtime_answer": "unsolved: resolve: 'k_B' names no carrier in any enabled domain, and does not parse as a chemical formula either",
+    "runtime_answered": false,
+    "task": "nearest to k_B",
+    "tool": "escalated_runtime",
+    "tried": [
+     "runtime",
+     "escalated_runtime"
+    ],
+    "verified": true
+   },
+   {
+    "answer": "energy and torque are first separated at the substrate layer",
+    "answered": true,
+    "cost": 4,
+    "goal": "layers",
+    "purpose": "the layer stack: which reading first tells two carriers apart",
+    "refusal_tag": null,
+    "runtime_answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive'].",
+    "runtime_answered": false,
+    "task": "layers energy and torque",
+    "tool": "layers",
+    "tried": [
+     "layers"
+    ],
+    "verified": true
+   },
+   {
+    "answer": "sqrt(2)+1 = 2.41421356237309504880 (to 20 places); no carrier holds it",
+    "answered": true,
+    "cost": 8,
+    "goal": "approximate",
+    "purpose": "an exact real, checked against a deeper reading",
+    "refusal_tag": null,
+    "runtime_answer": "sqrt(2)+1 = 2.41421356237309504880 (to 20 places); no carrier holds it",
+    "runtime_answered": true,
+    "task": "approximate sqrt(2)+1 to 20 places",
+    "tool": "escalated_runtime",
+    "tried": [
+     "runtime",
+     "escalated_runtime",
+     "exact_real"
+    ],
+    "verified": true
+   },
+   {
+    "answer": "every tool tried refused: runtime: parse_real: 'banana' is not a notation this module reads; it understands sqrt(<r; escalated_runtime: refused at L1, which is the whole of the declared ladder for a real query; exact_real: 'banana' does not parse as a real expression: parse_expression: 'banana' -- 'ban",
+    "answered": false,
+    "cost": 8,
+    "goal": "approximate",
+    "purpose": "not a real expression: refused",
+    "refusal_tag": "absent",
+    "runtime_answer": "unsolved: parse_real: 'banana' is not a notation this module reads; it understands sqrt(<rational>), pi, e, phi, <integer>, <numerator>/<denominator>, and any arithmetic combination of those, e.g. (1+sqrt(5))/2 or pi/4.  The expression grammar stopped with: parse_expression: 'banana' -- 'banana' is not a constant or function this module knows; it reads + - * / ^, brackets, the constants pi, e, phi, sqrt(x), cbrt(x), root(<degree>, x), exp(x), log(x), log(<base>, x), ln(x), sin(x), cos(x), tan(x), and any rational or decimal literal",
+    "runtime_answered": false,
+    "task": "approximate banana to 20 places",
+    "tool": null,
+    "tried": [
+     "runtime",
+     "escalated_runtime",
+     "exact_real"
+    ],
+    "verified": false
+   },
+   {
+    "answer": "every tool tried refused, and the refusal is underdetermined, so the plan stopped rather than trying the rest: runtime: analogy: Ca -> Sc is a step of (+0 period, +1 group) in the derived table coordi",
+    "answered": false,
+    "cost": 1,
+    "goal": "analogy",
+    "purpose": "underdetermined: the plan must stop, not shop",
+    "refusal_tag": "underdetermined",
+    "runtime_answer": "unsolved: analogy: Ca -> Sc is a step of (+0 period, +1 group) in the derived table coordinates, but the step is well defined -- (+0 period, +1 group) -- but period 6, group 3 holds 15 elements (the f-block sits there), so it names no single element",
+    "runtime_answered": false,
+    "task": "Ca : Sc :: Ba : ?",
+    "tool": null,
+    "tried": [
+     "runtime"
+    ],
+    "verified": false
+   }
+  ],
+  "tools": [
+   {
+    "cost": 1,
+    "goals": [
+     "describe",
+     "meaning"
+    ],
+    "has_check": false,
+    "name": "reference",
+    "postcondition": "the meaning a term denotes"
+   },
+   {
+    "cost": 1,
+    "goals": [
+     "describe",
+     "nearest",
+     "verify",
+     "analogy",
+     "report",
+     "coherence",
+     "meaning",
+     "approximate"
+    ],
+    "has_check": false,
+    "name": "runtime",
+    "postcondition": "the register reading of the question"
+   },
+   {
+    "cost": 2,
+    "goals": [
+     "verify"
+    ],
+    "has_check": false,
+    "name": "verifier",
+    "postcondition": "whether an equation is dimensionally consistent"
+   },
+   {
+    "cost": 2,
+    "goals": [
+     "describe",
+     "evaluate"
+    ],
+    "has_check": false,
+    "name": "term_arithmetic",
+    "postcondition": "the dimension of a written expression"
+   },
+   {
+    "cost": 3,
+    "goals": [
+     "describe",
+     "nearest",
+     "verify",
+     "analogy",
+     "report",
+     "coherence",
+     "meaning",
+     "approximate"
+    ],
+    "has_check": false,
+    "name": "escalated_runtime",
+    "postcondition": "the register reading, escalated along the declared ladder"
+   },
+   {
+    "cost": 3,
+    "goals": [
+     "derive"
+    ],
+    "has_check": true,
+    "name": "controller",
+    "postcondition": "a derivation plan for a register quantity"
+   },
+   {
+    "cost": 4,
+    "goals": [
+     "layers"
+    ],
+    "has_check": true,
+    "name": "layers",
+    "postcondition": "the first layer of the stack that separates two carriers"
+   },
+   {
+    "cost": 4,
+    "goals": [
+     "approximate"
+    ],
+    "has_check": true,
+    "name": "exact_real",
+    "postcondition": "an exact real read to a stated number of places"
+   }
+  ],
+  "verified": 10
+ },
+ "schema": 1
+}

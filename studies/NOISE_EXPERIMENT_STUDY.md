@@ -1,5 +1,18 @@
 # The noise experiment
 
+
+## Tier 0 — the coarse read
+
+**Question.** What can the wobble compute once it stops being a way of writing a number down?
+
+**Verdict.** A loop can chase a signal, not just a constant.
+
+**Deciding figure.** Cascades, closed orbits, dither and error feedback, each measured exactly and each bound to a theorem.
+
+**Recomputed by.** `glm_universal.reasoning.noise_lab.noise_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 *What the wobble can compute once it stops being a way of writing a number
 down. Cascaded loops, interacting tones, closed orbits, dither and error
 feedback through a matrix — each measured exactly and each bound to a

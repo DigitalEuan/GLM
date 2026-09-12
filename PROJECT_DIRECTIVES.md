@@ -1,30 +1,85 @@
 # Project directives
 
-> ### Positioning — read this before starting a round
->
-> **We are not claiming that the lattice generates the universe.** The claim is
-> narrower, and it is testable: there is an *exact* substrate — the Golay code,
-> the Leech lattice and the arithmetic on them, integer and `Fraction` exact
-> throughout (D7) — and reality maps onto it with unusual fidelity, measured
-> against a control every time it is asserted.
->
-> The **Geometric Language Machine** is the experimental implementation of that
-> mapping. Can language, mathematics and program text be mapped onto the Leech
-> lattice using the Golay code and the other systems built here? Can the GLM
-> reason with what that mapping gives it? Can it be generative, and solve
-> problems, and return results that are real, accurate and checkable?
->
-> Some of what the substrate holds is hidden by the layer it is read at. Every
-> carrier here is a **projection at a stated resolution** — the 24-bit word, the
-> syndrome, the MOG cell, the Leech point, the shell — so a correspondence that
-> is invisible at one layer can be exact one layer up. **Check a claim from
-> several layers and resolutions before calling it absent.**
-> [`studies/COMBINER_STUDY.md`](studies/COMBINER_STUDY.md) and
-> [`studies/INFORMATION_LOSS_STUDY.md`](studies/INFORMATION_LOSS_STUDY.md)
-> measure what each step down actually discards.
->
-> The full note, with what follows from it in practice, is
-> [`POSITIONING.md`](POSITIONING.md).
+
+## Tier 0 — the coarse read
+
+**Question.** What standing rules does work in this repository follow, and what enforces each?
+
+**Verdict.** A digest addresses integrity, never meaning.
+
+**Deciding figure.** 153 of the package's 154 non-test modules contain no float site at all.
+
+**Recomputed by.** `glm_universal.reasoning.directives.directives_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+## Positioning — read this before starting a round
+
+*This section was `POSITIONING.md` until the two documents were consolidated:
+the directives file already carried a summary of it, and a rule and the reason
+for the rule are better read together than in two files that have to be kept
+in step. Nothing was dropped in the merge.*
+
+### The claim
+
+**We are not claiming that the lattice generates the universe.** The claim is
+narrower, and it is testable: there is an *exact* substrate — the Golay code,
+the Leech lattice, and the arithmetic on them, integer and `Fraction` exact
+throughout (D7) — and reality maps onto it with unusual fidelity.
+
+"Unusual fidelity" is a measurement, not an adjective. Wherever this repository
+asserts it, there is a control beside it — a digest, a reshuffle, a chance
+baseline — and the assertion stands only by the margin over that control. Where
+the margin is not there, the study says so; nine of the retrieved results are
+negative results, kept because a refuted claim is a result.
+
+### What the GLM is
+
+The **Geometric Language Machine (GLM)** is the experimental implementation of
+that mapping. It exists to answer four questions, and each one is a question
+about what the machine can be made to do rather than about what the substrate
+is:
+
+1. Can language, mathematics and program text be mapped onto the Leech lattice,
+   using the Golay code and the other systems developed here?
+2. Can the GLM *reason* with the information that mapping gives it?
+3. Can it be generative — work with what it holds, rather than only recall it?
+4. Can it solve problems and produce results that are real, accurate and
+   checkable?
+
+Every one of those is answerable by running something.
+[`CAPABILITY_ASSESSMENT.md`](CAPABILITY_ASSESSMENT.md) is where the current
+answers live, and each is a probe that either holds or breaks.
+
+### Layers, and why an absence is not a refutation
+
+Some of what the substrate holds is hidden by the layer it is read at. Every
+carrier here is a **projection at a stated resolution** — the 24-bit word, the
+syndrome, the MOG cell, the Leech point, the shell — so a correspondence that
+is invisible at one layer can be exact one layer up.
+
+The working consequence: **check a claim from several layers and resolutions
+before calling it absent.** An absence at one resolution is a statement about
+that resolution, not about the substrate.
+
+Two studies measure exactly what each step down discards, so that this is a
+measurement rather than an excuse:
+
+* [`studies/COMBINER_STUDY.md`](studies/COMBINER_STUDY.md) — what XOR loses
+  (uniformly `2²⁴`-to-one, which is the pigeonhole bound for *any* combiner of
+  that output width), and what a wider output buys back.
+* [`studies/INFORMATION_LOSS_STUDY.md`](studies/INFORMATION_LOSS_STUDY.md) —
+  what each layer of the stack cannot see, listed pair by pair rather than
+  asserted.
+
+### What follows from this in practice
+
+* A result is stated at the layer it was measured at, and the layer is named.
+* A negative result is recorded, not discarded; it is the cheapest thing this
+  project produces and the most easily lost.
+* No claim of correspondence is made without the control it was measured
+  against.
+* The substrate stays exact: integers and `Fraction`, no floats (D7).
 
 ## How to work in this repository
 
@@ -58,6 +113,11 @@ if this file and the module disagree.
 | D7 | No floats. Exact integers and `Fraction` everywhere. | `glm_universal.reasoning.exactness`, `tests/test_exactness.py` |
 | D8 | Where a Lean file and a Python module disagree, the Lean file is the specification. | `glm_lean/RequestProject/GLM/README.md` |
 | D9 | An operation that is not the substrate's own is used only where it is warranted, and every such site is declared. | `glm_universal.reasoning.exactness`, `glm_universal.reasoning.combiner`, `tests/test_exactness.py` |
+| D10 | A document is data: classified by rule, generated where it can be, addressed, and checked. | `glm_universal.corpus`, `tests/test_corpus.py` |
+| D11 | A forbidden operation never cancels an experiment: run it, declare the site, and carry the cost. | `glm_universal.reasoning.exactness`, `glm_universal.reasoning.combiner`, `tests/test_exactness.py` |
+| D12 | A layer ships with its refinement check: declared edges verified, declared non-edges witnessed. | `glm_universal.reasoning.cumulativity`, `tests/test_cumulativity.py` |
+| D13 | An escalated re-reading is declared before it is taken, and it is costed. | `glm_universal.runtime.escalation_loop`, `glm_universal.reasoning.query_escalation`, `glm_universal.reasoning.review_sweep`, `tests/test_query_escalation.py`, `tests/test_review_sweep.py` |
+| D14 | Something not yet relied on lives in the sandbox, with a computed promotion checklist. | `glm_universal.sandbox.planner`, `tests/test_sandbox_planner.py` |
 
 ---
 
@@ -310,13 +370,22 @@ hashing a meaning is not that someone remembers the rule, it is that the
 inventory fails.
 
 **Why.** The whole claim of this project is that the correspondences it reports
-are properties of the substrate rather than of the machinery used to read it.
+are properties of the substrate **and** of the machinery used to read it. The
+reading is never free and never neutral: every carrier here is a projection at
+a stated resolution, so a correspondence is always a joint fact about what the
+substrate holds and what the reader can see of it. That is why the reader is
+declared rather than hidden — the inventories below are the reader's parts
+list, and a result that a declared operation was load-bearing for is a result
+about that pairing and is stated as one.
+
 Each of these four operations is a way of smuggling structure in from outside:
 a digest manufactures an address that has nothing to do with the thing
 addressed; a lossy XOR collapses distinct inputs and makes an agreement out of
 the collapse; a float invents agreement in the last bits; an arbitrary function
-or constant fits the answer. Any result that depended on one of them would be
-measuring the reader, not the read.
+or constant fits the answer. A result that depended on one of them is measuring
+the reader as much as the read — which is not a reason to suppress it, and is
+every reason to say which parts of the reader it depended on, so that the cost
+of the reading can be subtracted from the finding. That is D11.
 
 **The three inventories.** `warranted_operations_report` runs all three and
 holds only if all three do.
@@ -349,3 +418,238 @@ computation it stands beside. A site that cannot be described that way is not
 warranted; retire it, and leave the retired row in place with an explanation,
 which is what happened to the two XOR sites that no longer XOR and to the
 lossy `bundle_f2` that `bundle_rational` replaced.
+
+
+---
+
+## D10 — A document is data
+
+**The rule.** The prose of this project is held the way the substrate holds
+data, and not by memory. A document is **classified by rule** — archive
+membership is decided by the path and nothing else, never by judgement; it is
+**generated** wherever it can be, so `DIGEST.md` and every in-document
+`<!-- generated: ... -->` block is emitted from the measurement it reports
+rather than typed; it is **addressed**, so a question returns a shortlist that
+is complete up to a stated radius and an empty shortlist is a proof of absence;
+and it is **checked**, so drift fails a run instead of misleading a reader.
+
+**In practice.**
+
+1. Every current-state document opens with a tier-0 block: the question, the
+   verdict, the one figure that decides it, and the function that recomputes
+   that figure. Nothing below a tier 0 may contradict it.
+2. A study's measured table is a generated block, not a typed one. When the
+   sources it was taken from move, the block reports staleness and one command
+   re-takes the measurement.
+3. A new document is reachable from [`ENTRY.md`](ENTRY.md) or it is archive;
+   there is no third state, and the coverage claim is tested rather than
+   asserted.
+4. Run the check before committing:
+
+```bash
+cd overlay
+PYTHONPATH=. python3 -m glm_universal.corpus --check
+```
+
+**Why.** A document that quotes a number is a cache of that number, and a cache
+with no digest goes stale silently. This is D6 applied to the prose itself, and
+the part of it that is a theorem — the soundness of the tiered read, the
+archive partition, the freshness rule and certified absence — is
+`RequestProject/GLM/Corpus.lean`.
+
+---
+
+## D11 — A forbidden operation never cancels an experiment
+
+**The rule.** The operations this repository avoids — a cryptographic digest
+used for anything but integrity, a call to a random source, a stored table
+standing in for a computation, a lossy XOR, a float, a truncation or a
+rounding — are avoided **wherever it is possible to avoid them**, which is
+almost everywhere. Where an experiment genuinely cannot be run without one,
+the experiment is still run. It is not dropped, and the round is not
+abandoned: the site is declared in the inventory of D9, the study says in
+words which step needed it and what the step would have cost without it, and
+the finding is reported with that dependence attached.
+
+**Why.** This repository exists to develop the GLM, so a round is worth
+running when it either finds a solution or marks a boundary; a round dropped
+because one step would need a disallowed operation marks nothing. And the
+declaration is not bookkeeping — it is the measurement this project wants
+most. Each of these operations destroys information in a stated way (D9's
+inventory records how much: XOR is uniformly `2²⁴`-to-one at 24 bits, a digest
+carries none of the addressed thing, a truncation discards a stated tail),
+so a site where one was unavoidable is a place where the **cost** of reading
+the substrate can be priced. A path with a declared cost can be compared with
+another path, and the cheaper one preferred; a path with no declared cost
+cannot be compared with anything.
+
+**In practice.**
+
+1. Reach for the exact form first: `int` and `Fraction`, enumeration rather
+   than sampling, a computation rather than a table, the code's group law
+   rather than a bare XOR (D7, D2).
+2. If a step will not go without a disallowed operation, run it, and add the
+   site to `exactness.FLOAT_SITES`, `exactness.DIGEST_SITES` or
+   `combiner.XOR_SITES` with its role, in the same commit.
+3. Say in the study, in one sentence, what the operation bought and what it
+   destroyed — the pigeonhole factor, the bits dropped, the tail truncated.
+4. Report the finding twice where the difference can be computed: with the
+   operation, and with the exact path where an exact path exists at reduced
+   scope. The gap between the two is the price of the reading.
+5. A control that *must* use the operation — the digest control that D3
+   requires beside every correspondence — is a declared site like any other,
+   and is the clearest case of the rule: the experiment needs it precisely
+   because the operation carries no meaning.
+
+**Where it stands.** The declared sites are D9's three inventories, and the
+suite fails both when an undeclared site appears and when a declared one
+silently goes away. The current reading is one float module (the probe that
+hands floats to the substrate and requires them to be refused), three digest
+modules (all integrity), and 31 modules of XOR, each classified by role, two
+of them retired and kept only so that what they discarded can still be
+counted.
+
+---
+
+## D12 — A layer ships with its refinement check
+
+**The rule.** A new layer, rung or perspective ships only if it arrives with
+the machine-checked statement that it **refines** the layer below it: every
+pair of carriers the lower reading separates is separated by the higher one, on
+a declared probe set. A layer family also declares its **non**-edges — the
+pairs of rungs where refinement is *not* claimed — and each of those must come
+with a witnessing pair, because "B does not refine A" is a claim too, and an
+unwitnessed claim is not a declaration but an excuse. Cumulativity is a
+property, not an intention: a layer without its check does not ship.
+
+**Why.** Refinement is exactly the condition under which an operation defined
+at one layer remains a function of what the layer above it sees. Where it
+fails, an answer computed above cannot be pushed down to a statement below, and
+an escalation ladder stops being well defined — "the least rung that resolves"
+presupposes that climbing never loses what the climb was for. The rule has
+already earned itself: the first run of this check at scale found a real design
+flaw in the shipped layer code, the substrate → integer step, which was not a
+refinement on real carriers. It was reported rather than silently patched, and
+the shipped integer reading now carries the substrate's bits alongside the
+exponents because of it.
+
+**A conflation is not a cumulativity failure, and the remedies differ.** Every
+rung below the finest conflates something; that is what a coarse reading *is*,
+and the check reports conflations beside the edges rather than as defects. The
+distinction matters because the two are repaired differently: a cumulativity
+failure is a constraint on how the higher rung is **constructed**, whereas a
+conflation is repaired only by a **joint** reading with a rung that sees
+something else. The `A_1^24` / `A_2^12` pair is the second kind — the exact
+rational reading conflates it because neither type emits a stray, and no
+refinement of that reading separates them. Cumulativity stops a new layer
+re-inflicting a loss; it does not repair one.
+
+**In practice.**
+
+1. Register the family in `glm_universal.reasoning.cumulativity` with its
+   rungs, its probe set, its edges and its non-edges — before running the
+   check.
+2. Run it: `python3 -m glm_universal.tools cumulativity`. A defect is a
+   violated edge or an unwitnessed non-edge, and either one blocks shipping.
+3. Where a family is rejected, keep it registered with `shipped=False` and its
+   witness, so what it would have cost stays on the record.
+4. State the theorem-shaped version in Lean where the property is general
+   rather than probe-set-sized: `RequestProject/GLM/CumulativityRule.lean`.
+
+**Where it stands.** Three families are registered, two of them shipped; seven
+declared refinement edges hold, two declared non-edges are witnessed, and no
+shipped family carries a defect. The round is written up in
+[`studies/CUMULATIVITY_STUDY.md`](studies/CUMULATIVITY_STUDY.md).
+
+---
+
+## D13 — An escalated re-reading is declared before it is taken, and it is costed
+
+**The rule.** Re-reading a refusal, a stall or a negative result at a finer
+layer is legitimate, and it is the project's most productive move. It is
+legitimate **only** under three conditions, all of which precede the
+measurement: the ladder of rungs is declared in advance and is finite; every
+cell actually tried is counted and reported, including the ones that failed;
+and the original refusal or negative stays on the record beside whatever the
+escalated reading returns. An escalated answer is reported as more expensive
+than a direct one, and a refusal carries the layer it was refused at.
+
+**Why.** Because the failure mode is severe and quiet. Re-reading a negative at
+layer after layer until one of them passes is an unbounded multiple-comparison
+search, and the pass then means considerably less than the original negative
+did. The deep-hole escalation round survived that objection only because its
+ladder of layer × budget cells was declared before it was climbed, its
+extension rung was labelled as an extension everywhere it appears, and its
+multiplicity correction was widened to pay for the extra cells. Declaration is
+what separates escalation from shopping. The converse also matters: where a
+stall is caused by absence of signal rather than by loss in the reading, no
+rung resolves it, and a declared ladder makes the apparatus say so instead of
+climbing indefinitely.
+
+**Escalation must not convert a principled refusal.** Some refusals are correct
+at every layer — a question that is ill formed, one that is underdetermined,
+one whose relation is grounded in no register. These are classified as
+non-escalatable *before* the ladder is climbed. Without that rule the loop
+grinds to the top of the tower on every such question and the verdict "refused
+at the top of the declared tower" stops meaning anything.
+
+**In practice.**
+
+1. Declare the ladder — rungs, costs, and which query kinds get which ladder —
+   in `glm_universal.runtime.escalation_loop`, and the probe set in the study,
+   before measuring.
+2. Rank candidates for re-reading by whether there is an **identifiable
+   discarded quantity** at the coarse reading, not by how disappointing the
+   original result was. Where nothing was discarded, escalation has nothing to
+   recover.
+3. Report the cost. An answer reached at the third rung is reported as costing
+   what three rungs cost, so accuracy cannot be bought with unbounded work.
+4. Keep the original negative in the document, in its own section, unedited.
+
+**Where it stands.** The loop is wired into the session and measured over the
+whole evaluation set: no answer moves, no principled refusal is converted, and
+four declared probes resolve above the first rung. See
+[`studies/QUERY_ESCALATION_STUDY.md`](studies/QUERY_ESCALATION_STUDY.md), and
+[`studies/DEEP_HOLE_FAILURE_STUDY.md`](studies/DEEP_HOLE_FAILURE_STUDY.md) for
+a round run under this rule with **no** search on the layer axis at all.
+Practice clause 2 is kept as a register rather than as an intention:
+`glm_universal.reasoning.review_sweep` ranks every stalled result the
+repository carries by whether the coarse reading discarded anything
+identifiable, and `report review sweep` prints it. It is written before the
+next re-reading, which is the only time it can constrain one; see
+[`studies/REVIEW_SWEEP_STUDY.md`](studies/REVIEW_SWEEP_STUDY.md).
+
+---
+
+## D14 — Not yet relied on means the sandbox, with a computed promotion checklist
+
+**The rule.** Work that is worth running and not yet worth relying on goes in
+`glm_universal/sandbox/`, and nothing the system computes with may import from
+there. Each sandbox module carries a **promotion checklist** whose lines are
+measured on every call rather than asserted in prose, and it leaves the sandbox
+when every line is true — not when it looks promising.
+
+**Why.** The alternative is a module that is half-trusted, which in practice
+means trusted by whatever calls it and disclaimed in the document nobody reads
+at the point of use. Isolation makes the disclaimer structural: while a module
+is in the sandbox, deleting the directory cannot change a single answer the
+system gives, and that is a fact a test can check rather than a promise. The
+computed checklist then makes promotion a decision against a standard declared
+in advance, instead of a judgement made after seeing an encouraging number.
+
+**In practice.**
+
+1. Put the module in `glm_universal/sandbox/`, with a `promotion_checklist`
+   function returning one boolean per condition and their conjunction.
+2. Include at least one gate measured against the **whole** evaluation set, not
+   only against a task set the module chose for itself. A set a module picked
+   for itself can be an existence proof and never a gate.
+3. Test that no shipped module imports the sandbox. The documentation layer may
+   import it lazily in order to report on it; that exception is declared and
+   checked.
+4. Write the round up like any other: the checklist as it stands, and the false
+   line named as the work remaining.
+
+**Where it stands.** One occupant, the reverse-call planner. Its safety gate
+holds and its utility gate does not, so it is not promoted; see
+[`studies/REVERSE_CALL_PLANNER_STUDY.md`](studies/REVERSE_CALL_PLANNER_STUDY.md).

@@ -1,5 +1,18 @@
 # The external study findings, tested
 
+
+## Tier 0 — the coarse read
+
+**Question.** Which of the supplied catalogue's findings survive recomputation against this package?
+
+**Verdict.** This study turns it into a live claim ledger.
+
+**Deciding figure.** Every testable sentence of the catalogue restated as a claim and given one of four verdicts.
+
+**Recomputed by.** `glm_universal.reasoning.catalog.catalog_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 **What this document is.** `glm_study_findings_catalog.md` is a record of
 measurements: the empirical findings of a series of GLM studies run outside
 this package — iteration drift over the odd primes and the code-to-lattice

@@ -31,6 +31,7 @@ import pytest
 from glm_universal import integrity
 from glm_universal.signoff import checks as C
 from glm_universal.signoff import ledger as L
+from glm_universal.signoff import mirror as M
 
 
 class TestUnits(unittest.TestCase):
@@ -630,6 +631,41 @@ class TestTheRecordedTotals(unittest.TestCase):
 def check_closure_nonempty(check) -> bool:
     """Whether an instrument's closure names at least its own scaffolding."""
     return len(C.check_closure(check)) > 0
+
+
+# ===========================================================================
+#  THE LEAN MIRROR, GENERATED RATHER THAN KEPT IN STEP
+# ===========================================================================
+
+class TestTheLeanMirror(unittest.TestCase):
+    """The overlay's copy of the Lean tree is an output of the repository's.
+
+    ``lean-copies-identical`` checks that the two agree; this checks that the
+    agreement is *maintainable* -- there is a source, an output, and a command
+    that writes the one from the other, so the invariant is generated rather
+    than remembered.
+    """
+
+    def test_the_two_copies_agree(self):
+        report = M.mirror_report()
+        self.assertEqual((), report["missing"])
+        self.assertEqual((), report["extra"])
+        self.assertEqual((), report["differing"])
+        self.assertTrue(report["identical"])
+
+    def test_the_source_is_the_copy_the_build_compiles(self):
+        self.assertTrue(M.SOURCE.is_dir())
+        self.assertTrue((M.SOURCE.parent.parent / "lakefile.toml").is_file())
+
+    def test_the_mirror_keeps_its_own_readme(self):
+        self.assertIn("README.md", M.MIRROR_ONLY)
+        self.assertTrue((M.MIRROR / "README.md").is_file())
+
+    def test_writing_an_unchanged_mirror_writes_nothing(self):
+        outcome = M.write_mirror()
+        self.assertEqual((), outcome["written"])
+        self.assertEqual((), outcome["removed"])
+        self.assertTrue(outcome["identical"])
 
 
 if __name__ == "__main__":  # pragma: no cover

@@ -1,5 +1,18 @@
 # Can the GLM function as a reasoning machine yet?
 
+
+## Tier 0 — the coarse read
+
+**Question.** Can the GLM function as a reasoning machine yet?
+
+**Verdict.** Yes, within a bounded but non-trivial competence, and with an unusually strong guarantee attached to every answer it does give.
+
+**Deciding figure.** Of the 25 answered probes in the showcase, 25 were verified by independent re-derivation, and every generated script was float-free.
+
+**Recomputed by.** `glm_universal.examples.reasoning_showcase.main`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 **Short answer: yes, within a bounded but non-trivial competence, and with an
 unusually strong guarantee attached to every answer it does give.**
 

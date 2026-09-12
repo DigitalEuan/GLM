@@ -134,15 +134,26 @@ CASES: Tuple[EvalCase, ...] = (
             "table does not make."),
     _c("analogy-cross-register", "analogy",
        "heat : temperature :: force : ?",
+       "answer", contains=("work",),
+       note="Refused as a boundary until the energy-conjugate register was "
+            "built, and the refusal had two halves: the lexicon's own "
+            "relation -- `temperature drives heat` -- reaches nothing from "
+            "force, and the three terms share no register that dimensions "
+            "them.  Both are closed by a register whose rows run across the "
+            "domains: `heat = temperature x entropy` and `work = force x "
+            "length` are two rows of it, `temperature effort_of heat` is "
+            "the relation, and force occupies the effort column, so the "
+            "relation is applied in reverse to the unique transfer whose "
+            "effort is force.  The answer is derived rather than chosen "
+            "because the relation is a bijection between its two columns."),
+    _c("analogy-conjugate-unplaced", "analogy",
+       "heat : temperature :: acceleration : ?",
        "refusal", classification="boundary",
-       note="Both halves of the refusal are stated.  The relation the "
-            "lexicon does carry -- `temperature drives heat` -- reaches "
-            "nothing when looked up from force in either direction; and the "
-            "three terms do not share a register, since physics holds "
-            "temperature and force but not heat, so the query is answerable "
-            "only in the lexicon, which is not where the question lives.  "
-            "Answering with an unrelated energy-like quantity is a "
-            "confident wrong answer."),
+       note="The complement of the case above, and the reason answering it "
+            "is not a licence to answer anything: acceleration occupies no "
+            "column of the conjugate register, so `effort_of` has no side "
+            "for it to enter on.  The refusal names the criterion that "
+            "failed -- role_typed -- and still reports the register split."),
 
     # --------------------------------------------------------------- nearest
     _c("nearest-molecule", "nearest", "nearest to H2O",
@@ -373,6 +384,34 @@ CASES: Tuple[EvalCase, ...] = (
        "answer", contains=("relation models",),
        note="Re-solves every analogy case through the relation-model layer "
             "and says which model recognised each relation."),
+    _c("report-completion", "report", "report completion",
+       "answer", contains=("1257 of 1652", "empty cells are decided",
+                           "register itself unchanged"),
+       note="Every empty cell of the element register is decided: filled by "
+            "a rule that beat the field's own mean out of sample, or named "
+            "as lacking the rule's inputs, or belonging to a field where "
+            "every rule failed the gate, or to a field no rule over this "
+            "register could reach."),
+    _c("report-vagueness", "report", "report vagueness",
+       "answer", contains=("34 of 66", "referred to a person"),
+       note="The standing rule for a vague related_to triple: four routes "
+            "tried in order, of which only the last asks a person, and a "
+            "proposer whose rules are admitted only for agreeing with every "
+            "hand decision they fire on."),
+    _c("report-admission", "report", "report admission",
+       "answer", contains=("a name is admissible exactly when",
+                           "20 of 27 probes", "7 are refused"),
+       note="The door a new word comes in by: three routes admit -- already "
+            "held by a register, parses as a unit expression, is arithmetic "
+            "over register names -- and the fourth refuses, conditionally "
+            "and with the condition named."),
+    _c("report-conjugates", "report", "report conjugates",
+       "answer", contains=("7 energy domains",
+                           "heat : temperature :: force : work"),
+       note="The register that carries an analogy across the domains: seven "
+            "rows, each checked against the physics register's own "
+            "exponents, and the four criteria under which a relation may be "
+            "transported at all."),
     _c("report-transform-decoder", "report", "report transform decoder",
        "answer", contains=("49152", "n = 2k"),
        note="The Walsh-Hadamard route to the 4,096 coset costs, its "
@@ -502,6 +541,39 @@ CASES: Tuple[EvalCase, ...] = (
             "verifier checking every finished plan and an invariant refusing "
             "the unreachable targets outright.  Six scorers on the same "
             "tasks, one of them the Leech address."),
+    _c("report-landscape", "report", "report landscape",
+       "answer", contains=("77/1066", "not a derivation of alpha",
+                           "magnitude-matched"),
+       note="The pre-registered wobble landscape: one statistic fixed "
+            "before the measurement -- the stage-0 long-gap frequency of "
+            "the Sturmian word -- against a magnitude-matched null "
+            "enumerated exhaustively, scored in bits and corrected for the "
+            "statistics tried.  The answer is a weak result, reported as "
+            "one, and it is not a derivation of alpha."),
+    _c("report-hole-classifier", "report", "report hole classifier",
+       "answer", contains=("arrival-share profile", "vertex count",
+                           "sanity query fails"),
+       note="The pre-registered deep-hole round: can the distribution of "
+            "trajectories that arrive at a hole name the hole's "
+            "Coxeter-Dynkin type?  One statistic fixed before the module "
+            "existed, against a digest control, a seeded reshuffle, a "
+            "uniform-profile ablation and the competitor that mattered, "
+            "the plain vertex count.  It beats all four and the round "
+            "still stops, because the sanity query -- the same hole under "
+            "a different declared ensemble -- fails."),
+    _c("report-hole-ladder", "report", "report hole ladder",
+       "answer", contains=("cells", "recognise", "the law descends"),
+       note="The second deep-hole round: was the first round's failure the "
+            "geometry or the layer it was read at?  Four readings at four "
+            "ensemble sizes -- twelve cells fixed before the module existed "
+            "and one extension rung added afterwards and labelled as one -- "
+            "with one gate: every reference hole recognises itself under a "
+            "bare seed change.  The bottom rung reproduces the first round "
+            "at 3 of 10, the best pre-registered cell reaches 9 of 10, and "
+            "the extension rung reaches the gate at 10 of 10, where the full "
+            "query set comes out 40 of 44 against 12 for the vertex count.  "
+            "So the obstruction was the reading, and the round says which "
+            "reading and at what cost."),
     _c("report-retrieval", "report", "report retrieval",
        "answer", contains=("used as an index", "times the closed-form",
                            "beaten decisively"),
@@ -597,6 +669,40 @@ CASES: Tuple[EvalCase, ...] = (
             "matches of another shape.  The one place the descriptions read "
             "more than the branches did is declared and every widened "
             "question is accounted for by it."),
+
+    _c("report-cumulativity", "report", "report cumulativity",
+       "answer", contains=("3 declared layer families",
+                           "7 refinement edges verified",
+                           "conflated pairs reported as resolutions"),
+       note="Cumulativity as a shipping condition: every declared "
+            "refinement edge is verified on its probe set, every declared "
+            "non-edge is witnessed, and the conflations each rung inflicts "
+            "are reported beside them as resolutions rather than as "
+            "defects."),
+    _c("report-hole-failures", "report", "report hole failures",
+       "answer", contains=("40 of 44", "rank-2 near misses",
+                           "3 of 10 types"),
+       note="The four failures of the escalated deep-hole reading, scored "
+            "against four mechanisms fixed in advance: all four are rank-2 "
+            "near misses on a closest reference pair, and the type whose "
+            "spread stalls the separation ratio is the type they belong "
+            "to, so the failures and the unmet criterion are one "
+            "mechanism."),
+    _c("report-query-escalation", "report", "report query escalation",
+       "answer", contains=("147 evaluation cases", "no answer moves",
+                           "4 of 18 declared probes"),
+       note="Escalation as a step of the ordinary query loop: over the "
+            "whole evaluation set no answer moves and no principled "
+            "refusal is converted, while four declared probes are "
+            "resolved above the first rung and two refusals come back as "
+            "certified absences."),
+    _c("report-review-sweep", "report", "report review sweep",
+       "answer", contains=("8 stalled results", "retrieval-hit-at-5",
+                           "0 entry defects"),
+       note="The review-sweep register of directive D13: the standing set "
+            "of stalled results ranked by whether the coarse reading "
+            "discarded an identifiable quantity, written before the next "
+            "re-reading rather than after it."),
 
     # --------------------------------------------------------------- measure
     _c("measure-hot-tea", "measure", "measure hot in tea",

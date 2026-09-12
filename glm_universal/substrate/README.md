@@ -1,5 +1,18 @@
 # `glm_universal.substrate`
 
+
+## Tier 0 — the coarse read
+
+**Question.** What is the algebraic and geometric foundation, and what are its known limits?
+
+**Verdict.** Ten modules, strictly layered, pure Python standard library, exact arithmetic, no randomness.
+
+**Deciding figure.** The A/B/C ladder reaches all 196,560 minimal vectors of the Leech lattice.
+
+**Recomputed by.** (hand-written argument; nothing to recompute)
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 

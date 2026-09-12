@@ -6,7 +6,8 @@ Reports about what the registers hold.
 The physical relation audit, the unit strings, the molecule register, the
 sparsity of the element register and the three widenings that invent no
 measurement, the harmonic register's temperament arithmetic, the price
-register's discovery run, and analogy by named relation.
+register's discovery run, analogy by named relation, and the energy-conjugate
+register that carries an analogy across registers.
 
 Every method here is a solver for one ``report <subject>`` query.  They are
 mixed into :class:`glm_universal.runtime.session.GeometricSession`,
@@ -19,7 +20,9 @@ from __future__ import annotations
 
 from ... import data_objects as do
 from ...reasoning import analogy_models as am
+from ...reasoning import conjugate as cj
 from ...reasoning import economics as ecn
+from ...reasoning import element_completion as ecp
 from ...reasoning import element_coverage as eco
 from ...reasoning import harmony as hy
 from ...reasoning import units as un
@@ -668,4 +671,172 @@ class RegisterReports:
                     f"{report['cases_as_expected']} as expected"),
             steps=tuple(steps), expected=expected,
             script_spec={"template": "report_analogies", "args": {}},
+            payload={"report": report})
+
+    def _report_conjugates(self, query: Query) -> Solution:
+        """Wires conjugate.conjugate_report -- one register across the domains.
+
+        The subject that answers ``heat : temperature :: force : ?``.  The
+        register's rows are energy domains -- an effort, an extent and the
+        transfer they make -- and each row is decided against the physics
+        register's own exponents rather than asserted here.  The four
+        admissibility criteria are reported beside the cases, because what
+        makes a relation transportable is the part of this that generalises.
+        """
+        report = cj.conjugate_report()
+        audit = report["audit"]
+        headline = report["headline"]
+        lines = "; ".join(
+            f"{row['question']} -> "
+            f"{row['answer'] or 'refused [' + row['failed_criterion'] + ']'}"
+            for row in report["cases"])
+        steps = [
+            Step("the register",
+                 f"Seven energy domains, each a row: an intensive effort, the "
+                 f"extensive extent it acts through, and the transfer of "
+                 f"energy they make.  The rows run across the physics and "
+                 f"lexicon registers rather than inside either, which is what "
+                 f"a cross-register analogy needs.",
+                 f"rows = {audit['row_count']}, names = {audit['names']}, "
+                 f"relations = {list(audit['relations'])}"),
+            Step("grounded",
+                 f"Every row is checked against the physics register in exact "
+                 f"integer arithmetic: the effort's EXT10 exponents and the "
+                 f"extent's sum to those of energy "
+                 f"({audit['energy_dimension']}), and their decimal scales "
+                 f"sum to its scale.  This is what pairs pressure with volume "
+                 f"and not with area.",
+                 f"endpoints_in_register = {audit['endpoints_in_register']}, "
+                 f"all_dimensional = {audit['all_dimensional']}, "
+                 f"sound = {audit['sound']}"),
+            Step("role-typed and functional",
+                 f"No name of the table occupies two columns, so a name "
+                 f"determines its role and each relation is a bijection "
+                 f"between its two columns.  That is what makes the answer "
+                 f"derived rather than chosen, in either direction.",
+                 f"roles_unique = {audit['roles_unique']}, "
+                 f"relations_disjoint = {audit['relations_disjoint']}, "
+                 f"criteria = {report['criterion_names']}"),
+            Step("the question",
+                 f"{headline['question']} is "
+                 f"{headline['relation']} carried to force, in the "
+                 f"{headline['direction']} direction because force occupies "
+                 f"the effort column: the answer is {headline['answer']}.",
+                 f"answer = {headline['answer']}, "
+                 f"direction = {headline['direction']}"),
+            Step("the cases",
+                 f"{report['cases_total']} questions re-solved through the "
+                 f"register: {report['answered']} answered and "
+                 f"{report['refused']} refused, each refusal naming the "
+                 f"criterion that failed.  {report['cases_as_expected']} came "
+                 f"out as the register requires.",
+                 lines),
+        ]
+        expected = {
+            "row_count": str(audit["row_count"]),
+            "names": str(audit["names"]),
+            "sound": str(audit["sound"]),
+            "all_dimensional": str(audit["all_dimensional"]),
+            "roles_unique": str(audit["roles_unique"]),
+            "cases_total": str(report["cases_total"]),
+            "cases_as_expected": str(report["cases_as_expected"]),
+            "answered": str(report["answered"]),
+            "refused": str(report["refused"]),
+            "headline_answer": str(headline["answer"]),
+            "criteria": str(report["criterion_names"]),
+        }
+        for row in report["cases"]:
+            expected[f"case_{row['question']}"] = (
+                f"{row['answer']}:{row['failed_criterion']}")
+        return Solution(
+            query=query, kind="report",
+            answer=(f"report conjugates: {audit['row_count']} energy domains, "
+                    f"every row dimensionally checked against the physics "
+                    f"register, {report['cases_total']} questions re-solved "
+                    f"({report['answered']} answered, {report['refused']} "
+                    f"refused) -- heat : temperature :: force : "
+                    f"{headline['answer']}"),
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "report_conjugates", "args": {}},
+            payload={"report": report})
+
+    def _report_completion(self, query: Query) -> Solution:
+        """Wires element_completion.element_completion_report -- empty cells decided.
+
+        ``report chemistry coverage`` measures the sparsity and widens it
+        without writing anything back.  This subject is the step that closes
+        it: every empty cell of the register receives exactly one of four
+        dispositions, the rules that fill any of them are admitted only by
+        beating the field's own mean out of sample, and the completed view
+        read at the measured provenance is the register itself.
+        """
+        report = ecp.element_completion_report()
+        cover = report["coverage"]
+        ledger = report["dispositions"]
+        gate = report["gate"]
+        counts = ledger["counts"]
+        rules = ", ".join(
+            f"{name} by {rule['family']} on {rule['predictor']} "
+            f"(skill {q(rule['skill_3dp'])})"
+            for name, rule in sorted(report["admitted_rules"].items()))
+        steps = [
+            Step("the sparsity",
+                 f"The register carries {cover['measured']} of "
+                 f"{cover['total_cells']} cells over {cover['elements']} "
+                 f"elements and {cover['fields']} fields.  The other "
+                 f"{ledger['empty_cells']} are what this subject is about.",
+                 f"measured = {cover['measured']}/{cover['total_cells']} "
+                 f"= {q(cover['measured_fraction'])}"),
+            Step("the gate",
+                 gate["statement"],
+                 f"skill <= {q(gate['skill'])}, scored on at least "
+                 f"{gate['minimum_scored_on']} elements"),
+            Step("the rules admitted",
+                 f"{report['admitted_count']} fields take a rule; each was "
+                 f"chosen by measurement rather than by preference, every "
+                 f"other field being tried as a predictor and the best "
+                 f"scoring one kept.",
+                 rules),
+            Step("every empty cell decided",
+                 f"{counts['estimated']} cells are filled by an admitted "
+                 f"rule, {counts['inputs_absent']} are named as lacking the "
+                 f"rule's inputs, {counts['no_admitted_rule']} belong to a "
+                 f"field where every rule failed the gate, and "
+                 f"{counts['not_derivable']} to a field no rule over this "
+                 f"register could reach.  None is left as a failed lookup.",
+                 f"accounted = {ledger['accounted']}, "
+                 f"dispositions = {dict(sorted(counts.items()))}"),
+            Step("the register is not disturbed",
+                 "Read at the measured provenance the completed view is the "
+                 "register, cell for cell, and no estimate occupies a cell "
+                 "the register fills.  Both are checked here and proved in "
+                 "GLM.Completion.",
+                 f"measured layer identical = {report['safety']['holds']}, "
+                 f"filled {cover['filled']}/{cover['total_cells']} "
+                 f"= {q(cover['filled_fraction'])}"),
+        ]
+        expected = {
+            "total_cells": str(cover["total_cells"]),
+            "measured": str(cover["measured"]),
+            "estimated": str(cover["estimated"]),
+            "filled": str(cover["filled"]),
+            "empty": str(cover["empty"]),
+            "empty_cells": str(ledger["empty_cells"]),
+            "accounted": str(ledger["accounted"]),
+            "dispositions": str(dict(sorted(counts.items()))),
+            "admitted_count": str(report["admitted_count"]),
+            "safety": str(report["safety"]["holds"]),
+        }
+        return Solution(
+            query=query, kind="report",
+            answer=(f"report completion: {cover['measured']} of "
+                    f"{cover['total_cells']} element cells are measured; "
+                    f"{counts['estimated']} more are filled by rules that "
+                    f"beat the field's own mean out of sample, taking the "
+                    f"completed view to {cover['filled']}, and all "
+                    f"{ledger['empty_cells']} empty cells are decided "
+                    f"({dict(sorted(counts.items()))}) with the register "
+                    f"itself unchanged"),
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "report_completion", "args": {}},
             payload={"report": report})

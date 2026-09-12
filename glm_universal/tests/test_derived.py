@@ -395,3 +395,49 @@ class TestTheDefaultDerivationsReuseNothingTheyShouldNot:
         entries = escalation.register_carriers()
         assert escalation.escalation_report(entries) == \
             escalation.escalation_report()
+
+
+# ===========================================================================
+# 7.  A STORE KEYED ON THE CODE THAT PRODUCES IT
+# ===========================================================================
+
+class TestTheCodeStore:
+    """``code_store`` keys a derivation on the import closure of a module.
+
+    The point is that the key is *computed*: every module the derivation can
+    reach and every frozen table those modules read, and nothing else.  A
+    derivation that reads no document is not invalidated by a document, which
+    is what makes a documentation round cheap; a derivation whose code moves
+    is invalidated by that, which is what keeps it honest.
+    """
+
+    def test_the_inputs_are_the_code_the_derivation_can_reach(self):
+        from glm_universal.sandbox import planner as pl
+
+        store = L.code_store("probe-planner", pl.__file__)
+        paths = [str(p) for p in store.input_paths()]
+        assert any(p.endswith("sandbox/planner.py") for p in paths)
+        assert any(p.endswith("evaluation/cases.py") for p in paths), \
+            "a lazy import inside a function is still an input"
+        assert all(not p.endswith(".md") for p in paths)
+
+    def test_a_payload_written_now_is_fresh_now_and_stale_on_a_change(
+            self, tmp_path):
+        inputs = [Path(D.__file__)]
+        store = D.DerivedStore("probe-closure", lambda: list(inputs),
+                               root=tmp_path)
+        store.write({"value": 1})
+        assert store.state()["verdict"] == "fresh"
+        extra = tmp_path / "extra.py"
+        extra.write_text("x = 1\n", encoding="utf-8")
+        inputs.append(extra)
+        assert store.state()["verdict"] == "stale"
+        assert store.read_fresh() is None
+
+    def test_the_closure_without_documents_is_inside_the_closure_with_them(self):
+        from glm_universal.sandbox import planner as pl
+
+        wide = set(L.unit_closure(Path(pl.__file__)))
+        narrow = set(L.unit_closure(Path(pl.__file__), include_documents=False))
+        assert narrow < wide, "the planner's closure does name documents"
+        assert all(p.suffix != ".md" for p in narrow)

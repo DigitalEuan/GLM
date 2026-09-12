@@ -1,5 +1,18 @@
 # `glm_universal/language` — the question shape made an object
 
+
+## Tier 0 — the coarse read
+
+**Question.** Can the shape of a question be made an object, so the parser reads a description instead of a branch?
+
+**Verdict.** This package makes the question's shape an object.
+
+**Deciding figure.** For the three slot shapes the runtime now reads the description instead of the branch.
+
+**Recomputed by.** `glm_universal.language.report.language_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 

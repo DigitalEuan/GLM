@@ -1,5 +1,18 @@
 # The loop: propose, check, refuse — and whether the substrate can steer it
 
+
+## Tier 0 — the coarse read
+
+**Question.** The geometry does not do the retrieving — can it do the steering?
+
+**Verdict.** Every returned plan is re-verified, and the refusals carry a proof.
+
+**Deciding figure.** Six heuristics scored on the same 24 tasks.
+
+**Recomputed by.** `glm_universal.reasoning.controller.controller_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 **What this document is.**
 [`SEARCH_LOOP_STUDY.md`](SEARCH_LOOP_STUDY.md) retrieved the archive's
 procedure — filter on every observation, then rank — and proved what one pass

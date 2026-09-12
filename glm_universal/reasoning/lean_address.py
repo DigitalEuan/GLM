@@ -608,18 +608,122 @@ def sentence(features: Sequence[int]) -> str:
 #  The stored address book
 # ===========================================================================
 
-def compute_address_book() -> Dict[str, object]:
-    """Compute every address from the sources.  Slow: one decode each."""
+class Decoder:
+    """:func:`quantise`, with every answer it has already given kept.
+
+    The whole reason a rebuild of the address book is expensive is that it
+    decodes once per declaration, and a decode is the slow step.  But the
+    address is a function of the **feature vector** and of nothing else: two
+    declarations with the same vector have the same address, by
+    ``GLM.Address.address_congr``, and the same declaration in an unchanged
+    file has the same vector as before.  So an answer may be reused exactly
+    when the vector is one that has already been decoded -- within this
+    rebuild, or in the stored book of the previous one.
+
+    That is what makes the rebuild incremental without weakening it: adding a
+    file re-decodes the vectors that file introduces and nothing else.  The
+    reuse is *checked* rather than trusted -- :meth:`audit` re-decodes a stated
+    number of the reused answers and reports any that moved, and the rebuild
+    records that count in its report.
+
+    ``seed`` is the vector-to-point table to start from; a seed taken from a
+    book written at a different :data:`SCALE` or :data:`CAP` is not admissible
+    and the callers below check that before offering one.
+    """
+
+    def __init__(self, seed: Optional[Mapping[Sequence[int],
+                                              Sequence[int]]] = None) -> None:
+        self.table: Dict[Tuple[int, ...], Tuple[int, ...]] = {}
+        if seed:
+            for vector, point in seed.items():
+                self.table[tuple(int(v) for v in vector)] = \
+                    tuple(int(c) for c in point)
+        self.seeded = len(self.table)
+        self.reused = 0
+        self.decoded = 0
+
+    def __call__(self, vector: Sequence[int]) -> Tuple[int, ...]:
+        key = tuple(int(v) for v in vector)
+        found = self.table.get(key)
+        if found is not None:
+            self.reused += 1
+            return found
+        point = quantise(key)
+        self.table[key] = point
+        self.decoded += 1
+        return point
+
+    def audit(self, count: int) -> Dict[str, object]:
+        """Re-decode ``count`` of the answers held, and report any that moved.
+
+        The sample is the first ``count`` vectors in sorted order, so it is the
+        same sample on every run: an audit that varies is an audit that cannot
+        be compared with the last one.
+        """
+        sample = sorted(self.table)[:max(0, int(count))]
+        moved = [vector for vector in sample
+                 if quantise(vector) != self.table[vector]]
+        return {"audited": len(sample), "moved": tuple(moved),
+                "holds": not moved}
+
+
+def _seed_from(book: Optional[Mapping[str, object]]
+               ) -> Tuple[Dict[Tuple[int, ...], Tuple[int, ...]],
+                          Dict[Tuple[int, ...], Tuple[int, ...]]]:
+    """The two vector-to-point tables a stored book licenses reusing.
+
+    Nothing is taken from a book written under a different schema, scale or
+    cap: those decide what the decoder was asked, and an answer to a different
+    question is not an answer.  The hash-control seed is keyed by the *vector*
+    rather than by the name, so it is the same kind of statement as the other
+    one -- this vector decodes to this point -- and a renamed declaration is
+    simply a vector that is not in the table.
+    """
+    empty: Dict[Tuple[int, ...], Tuple[int, ...]] = {}
+    if not book:
+        return empty, dict(empty)
+    if (book.get("schema") != SCHEMA or book.get("scale") != SCALE
+            or book.get("cap") != CAP):
+        return empty, dict(empty)
+    features = book.get("features") or {}
+    stored = book.get("addresses") or {}
+    feature_points = stored.get("feature") or {}
+    hash_points = stored.get("hash_control") or {}
+    feature_seed = {
+        tuple(int(v) for v in vector): tuple(int(c) for c in
+                                             feature_points[name])
+        for name, vector in features.items() if name in feature_points}
+    hash_seed = {
+        name_hash_vector(name): tuple(int(c) for c in point)
+        for name, point in hash_points.items()}
+    return feature_seed, hash_seed
+
+
+def compute_address_book(previous: Optional[Mapping[str, object]] = None,
+                         reuse: bool = True, audit: int = 0
+                         ) -> Tuple[Dict[str, object], Dict[str, object]]:
+    """The address book, and a report of how much of it had to be decoded.
+
+    With ``reuse`` the stored book is used as a seed for the decoder, so only
+    the feature vectors that are *new* cost a decode; with ``reuse=False``
+    every address is decoded from nothing, which is what the audit in
+    ``tests/test_lean_address.py`` compares against.
+    """
     table = feature_table()
     order = [d.name for d in declarations()]
     meta = {d.name: {"kind": d.kind, "file": d.file, "line": d.line}
             for d in declarations()}
+    seed = ({}, {})
+    if reuse:
+        seed = _seed_from(previous if previous is not None else address_book())
+    feature_decoder = Decoder(seed[0])
+    hash_decoder = Decoder(seed[1])
     feature_addresses = {}
     hash_addresses = {}
     for name in order:
-        feature_addresses[name] = list(quantise(table[name]))
-        hash_addresses[name] = list(quantise(name_hash_vector(name)))
-    return {
+        feature_addresses[name] = list(feature_decoder(table[name]))
+        hash_addresses[name] = list(hash_decoder(name_hash_vector(name)))
+    book = {
         "schema": SCHEMA,
         "scale": SCALE,
         "cap": CAP,
@@ -632,16 +736,44 @@ def compute_address_book() -> Dict[str, object]:
             "hash_control": hash_addresses,
         },
     }
+    report = {
+        "declarations": len(order),
+        "reuse": bool(reuse),
+        "seeded": feature_decoder.seeded + hash_decoder.seeded,
+        "decoded": feature_decoder.decoded + hash_decoder.decoded,
+        "reused": feature_decoder.reused + hash_decoder.reused,
+        "feature": {"decoded": feature_decoder.decoded,
+                    "reused": feature_decoder.reused},
+        "hash_control": {"decoded": hash_decoder.decoded,
+                         "reused": hash_decoder.reused},
+        "audit": feature_decoder.audit(audit),
+    }
+    return book, report
 
 
-def write_address_book(path: Optional[Path] = None) -> Path:
-    """Recompute the address book and store it beside its tree digest."""
+def write_address_book(path: Optional[Path] = None, reuse: bool = True,
+                       audit: int = 0) -> Path:
+    """Rebuild the address book and store it beside its tree digest."""
+    return Path(str(rebuild_address_book(path, reuse=reuse,
+                                         audit=audit)["path"]))
+
+
+def rebuild_address_book(path: Optional[Path] = None, reuse: bool = True,
+                         audit: int = 0) -> Dict[str, object]:
+    """Rebuild the book, write it, and report what the rebuild cost.
+
+    The report is the point of the incremental path: it says how many of the
+    addresses were decoded and how many were reused, so "the rebuild was
+    cheap" is a number rather than an impression.
+    """
     target = Path(path) if path is not None else DATA_PATH
     target.parent.mkdir(parents=True, exist_ok=True)
-    book = compute_address_book()
+    book, report = compute_address_book(reuse=reuse, audit=audit)
     target.write_text(json.dumps(book, indent=1, sort_keys=True) + "\n",
                       encoding="utf-8")
-    return target
+    out = dict(report)
+    out["path"] = str(target)
+    return out
 
 
 _book_cache: Optional[Dict[str, object]] = None

@@ -1,5 +1,18 @@
 # The archive retrievals, recomputed
 
+
+## Tier 0 — the coarse read
+
+**Question.** Do the numbers the retrieved Lean files prove come back out of the substrate?
+
+**Verdict.** The audit is a measurement rather than a quotation.
+
+**Deciding figure.** Every number the eleven retrieved Lean files prove, recomputed, with three corrections to the archive's own figures.
+
+**Recomputed by.** `glm_universal.reasoning.salvage.salvage_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 *[`RETRIEVED_LEAN_STUDY.md`](RETRIEVED_LEAN_STUDY.md) is the Lean half of the
 archive round: what the supplied archive claimed, and what of it is a theorem.
 This document is the **runtime half**. Every number those Lean files prove is

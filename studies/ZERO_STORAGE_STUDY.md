@@ -1,5 +1,18 @@
 # Generated, not stored — how far the idea goes, and where it has to be checked
 
+
+## Tier 0 — the coarse read
+
+**Question.** How far does generate-rather-than-store go, and where does it have to be checked?
+
+**Verdict.** The idea is right, and it is measurable.
+
+**Deciding figure.** The proposed Leech sieve is sound and 99.4 % incomplete, with the one-line repair stated.
+
+**Recomputed by.** `glm_universal.reasoning.generative.zero_storage_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 **Instrument:** `overlay/glm_universal/reasoning/generative.py`.
 **Report subject:** `report generated` (column‑3 verified in a fresh interpreter).
 **Tests:** `overlay/glm_universal/tests/test_generative.py` (16 cases), and the end-to-end case `report-generated` in `overlay/glm_universal/evaluation/cases.py`.
@@ -196,7 +209,7 @@ certificate.
 ## 7. Follow-up: the refined substrate script
 
 The findings above are now carried by a standalone successor,
-`glm_zero_storage_substrate_v4.py` at the repository root — standard library
+[`scripts/glm_zero_storage_substrate_v4.py`](scripts/glm_zero_storage_substrate_v4.py), beside this study — standard library
 only, no dependency on the overlay, exact arithmetic throughout. It keeps the
 working parts and repairs the rest:
 
@@ -229,8 +242,8 @@ The v3 draft is kept for the record at
 ## Reproducing
 
 ```
-python3 glm_zero_storage_substrate_v4.py --test
-python3 glm_zero_storage_substrate_v4.py --demo
+python3 studies/scripts/glm_zero_storage_substrate_v4.py --test
+python3 studies/scripts/glm_zero_storage_substrate_v4.py --demo
 ```
 
 ```

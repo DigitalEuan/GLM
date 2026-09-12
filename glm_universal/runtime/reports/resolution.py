@@ -5,7 +5,8 @@ Reports about resolution: what is conflated, and where.
 
 Information loss at the layer boundaries, the same audit at register
 scale, the resolution ceiling a name reaches, and the measure word read
-against a comparison class together with the denotation residue.
+against a comparison class together with the denotation residue, and the
+standing rule that decides a vague triple without a person wherever it can.
 
 Every method here is a solver for one ``report <subject>`` query.  They are
 mixed into :class:`glm_universal.runtime.session.GeometricSession`,
@@ -16,11 +17,15 @@ dispatcher readable as a dispatcher.
 """
 from __future__ import annotations
 
+from ...reasoning import admission as adm
+from ...reasoning import cumulativity as cml
 from ...reasoning import denotation_view as dvw
 from ...reasoning import escalation as esc
 from ...reasoning import information_loss as il
 from ...reasoning import measure_view as mvw
 from ...reasoning import name_coordinate as nco
+from ...reasoning import query_escalation as qesc
+from ...reasoning import vagueness as vgn
 
 from ..payload import noise_payload
 from ..parser import Query
@@ -879,3 +884,385 @@ class ResolutionReports:
             script_spec={"template": "report_measure", "args": {}},
             payload={"report": noise_payload(report),
                      "denotation": noise_payload(denot)})
+
+    def _report_vagueness(self, query: Query) -> Solution:
+        """Wires vagueness.vagueness_report -- the standing rule for a vague triple.
+
+        The denotation round decided the 39 residue triples by hand and left
+        the next one open.  This subject is the rule that replaces the hand
+        work where a rule can: four routes tried in order, of which only the
+        last asks a person, and a proposer whose rules are admitted only for
+        agreeing with every hand decision they fire on.
+        """
+        report = vgn.vagueness_report()
+        proposer = report["proposer"]
+        conjugate = report["conjugate"]
+        routing = report["routing"]
+        counts = routing["counts"]
+        refused = "; ".join(
+            f"{row['rule']} ({row['agreed']}/{row['fired_on']}: "
+            f"{', '.join(row['disagreements'])})"
+            for row in proposer["rules"] if not row["admitted"])
+        steps = [
+            Step("the four routes",
+                 report["statement"],
+                 f"routes = {list(report['routes'])}"),
+            Step("the conjugate route",
+                 f"{conjugate['converted_count']} of the "
+                 f"{conjugate['triples']} related_to triples are decided by "
+                 f"the energy-conjugate register, "
+                 f"{conjugate['converted_only_here_count']} of them by no "
+                 f"other rule.  {conjugate['agreement']}  "
+                 f"{conjugate['placed_in_different_rows_count']} pairs have "
+                 f"both endpoints placed but in different rows and are "
+                 f"deliberately not converted.",
+                 f"converted = {conjugate['converted_count']}, new = "
+                 f"{conjugate['converted_only_here_count']}, placed apart = "
+                 f"{conjugate['placed_in_different_rows_count']}"),
+            Step("the proposer, and what it costs to admit a rule",
+                 f"{proposer['rules_tried']} rules were scored against the "
+                 f"{proposer['decided_names']} names the register decided by "
+                 f"hand, and {proposer['admitted_count']} was admitted.  "
+                 f"{proposer['gate']}  The refused ones are kept with their "
+                 f"disagreements, because a rule refused on a named "
+                 f"disagreement is a finding.",
+                 f"admitted = {list(proposer['admitted'])}; refused: "
+                 f"{refused}"),
+            Step("what the rule decides now",
+                 f"Of the {routing['triples']} vague triples, "
+                 f"{routing['decided_without_a_person']} are decided without "
+                 f"a person -- {counts['dimensional']} dimensionally, "
+                 f"{counts['conjugate']} by the conjugate register and "
+                 f"{counts['proposed']} by the proposer -- and "
+                 f"{routing['referred']} are referred with the evidence "
+                 f"collected.",
+                 f"counts = {dict(sorted(counts.items()))}, every triple "
+                 f"routed = {routing['every_triple_routed']}"),
+        ]
+        expected = {
+            "triples": str(routing["triples"]),
+            "counts": str(dict(sorted(counts.items()))),
+            "decided_without_a_person": str(routing["decided_without_a_person"]),
+            "referred": str(routing["referred"]),
+            "every_triple_routed": str(routing["every_triple_routed"]),
+            "rules_tried": str(proposer["rules_tried"]),
+            "rules_admitted": str(list(proposer["admitted"])),
+            "conjugate_converted": str(conjugate["converted_count"]),
+        }
+        return Solution(
+            query=query, kind="report",
+            answer=(f"report vagueness: {routing['decided_without_a_person']} "
+                    f"of {routing['triples']} related_to triples are decided "
+                    f"by rule -- {counts['dimensional']} dimensionally, "
+                    f"{counts['conjugate']} by the conjugate register, "
+                    f"{counts['proposed']} by the one proposer rule of four "
+                    f"that was admitted -- and the other {routing['referred']} "
+                    f"are referred to a person with the evidence collected"),
+            steps=tuple(steps), expected=expected,
+            payload={"report": report},
+            script_spec={"template": "report_vagueness", "args": {}})
+
+    def _report_admission(self, query: Query) -> Solution:
+        """Wires admission.admission_report -- the door a new word comes in by.
+
+        "Open vocabulary" stood for a long time as a commitment rather than a
+        mechanism: the vocabulary is exactly the registers, and the semantics
+        layer refuses rather than inventing a coordinate for *justice*.  The
+        commitment was right and it was not the whole story -- what was
+        missing is how a name gets *in*.  This subject is the criterion, the
+        three routes that admit and the one that refuses, and what the
+        refusal is a refusal of.
+        """
+        report = adm.admission_report()
+        audit = report["audit"]
+        counts = audit["counts"]
+        rows = audit["rows"]
+        criteria = ", ".join(row["clause"] for row in report["criteria"])
+        near = next((row for row in rows
+                     if row.name == "km/h"), None)
+        steps = [
+            Step("the criterion",
+                 report["criterion"],
+                 f"clauses = ({criteria})"),
+            Step("the routes, in order",
+                 "Three routes admit and the last refuses: a name already "
+                 "held by one of the nine registers keeps that register's "
+                 "coordinates; a unit expression is dimensioned exactly by "
+                 "the unit register; an expression over register names is "
+                 "evaluated exactly by term arithmetic.  Nothing is typed in "
+                 "at admission time and nothing is written back.",
+                 f"routes = {list(report['routes'])}, counts = "
+                 f"{dict(sorted(counts.items()))}"),
+            Step("what the door does to the probes",
+                 f"{audit['probes']} names are put to the door -- carriers "
+                 f"from every register, unit expressions, arithmetic over "
+                 f"register names and the standing ungrounded words.  Every "
+                 f"one gets exactly one route, no refused name is given "
+                 f"coordinates, asking twice gives the same answer, and the "
+                 f"{len(audit['widened_by'])} names admitted by computation "
+                 f"are still not carriers afterwards: the vocabulary of "
+                 f"{audit['vocabulary_size']} held names is unchanged by "
+                 f"having been widened.",
+                 f"routed = {audit['every_probe_routed']}, grounded = "
+                 f"{audit['no_coordinates_without_a_register']}, "
+                 f"determinate = {audit['determinate']}, registers "
+                 f"unchanged = {audit['registers_unchanged']}"),
+            Step("what a refusal is a refusal of",
+                 f"{report['refusal_count']} probes are refused, and the "
+                 f"refusal is conditional rather than a matter of kind: "
+                 f"{report['justice']['reason']}.  "
+                 f"{report['unit_gap_count']} of the refusals are of a "
+                 f"second shape, and the distinction is the useful one: "
+                 f"the name reaches for a register and the register cannot "
+                 f"finish reading it, which is a gap in the register rather "
+                 f"than in the door"
+                 + (f" -- {near.reason}" if near is not None else ""),
+                 f"refused = {list(report['refusals'])}, of which unit gaps "
+                 f"= {list(report['unit_gaps'])} and ungrounded = "
+                 f"{list(report['ungrounded_refused'])}"),
+        ]
+        expected = {
+            "probes": str(audit["probes"]),
+            "counts": str(dict(sorted(counts.items()))),
+            "admitted": str(audit["admitted"]),
+            "refused": str(audit["refused"]),
+            "vocabulary_size": str(audit["vocabulary_size"]),
+            "every_probe_routed": str(audit["every_probe_routed"]),
+            "determinate": str(audit["determinate"]),
+            "registers_unchanged": str(audit["registers_unchanged"]),
+            "holds": str(audit["holds"]),
+            "unit_gaps": str(list(report["unit_gaps"])),
+        }
+        return Solution(
+            query=query, kind="report",
+            answer=(f"report admission: a name is admissible exactly when a "
+                    f"stated route gives it coordinates computed from a "
+                    f"register the machine already checks -- "
+                    f"{audit['admitted']} of {audit['probes']} probes are "
+                    f"admitted ({counts['held']} held, {counts['unit']} by "
+                    f"unit, {counts['arithmetic']} by arithmetic over "
+                    f"register names) and {audit['refused']} are refused, "
+                    f"conditionally and with the condition named, over a "
+                    f"held vocabulary of {audit['vocabulary_size']} names "
+                    f"that admission leaves unchanged"),
+            steps=tuple(steps), expected=expected,
+            payload={"report": {
+                "routes": list(report["routes"]),
+                "criteria": report["criteria"],
+                "criterion": report["criterion"],
+                "counts": dict(sorted(counts.items())),
+                "refusals": list(report["refusals"]),
+                "rows": [{"name": row.name, "route": row.route,
+                          "source": row.source, "reason": row.reason,
+                          "coordinates": ("" if row.coordinates is None
+                                          else ",".join(
+                                              q(x) for x in row.coordinates))}
+                         for row in rows],
+                "commitment": report["commitment"],
+                "limits": report["limits"]}},
+            script_spec={"template": "report_admission", "args": {}})
+
+    def _report_cumulativity(self, query: Query) -> Solution:
+        """Wires cml.cumulativity_report -- the check a layer family ships with.
+
+        Directive D12: a layer family ships only if every declared refinement
+        edge holds on its probe set and every declared non-edge has a witness.
+        The board is recomputed on call -- three declared families, two of
+        them shipped -- and the conflations each rung inflicts are reported
+        beside the edges rather than counted as defects, because the two
+        failure modes have different remedies.  `GLM.Info.Layer` proves the
+        distinction: `factored_conflates` says no reading of a view repairs
+        what the view conflates, and `join_separates` says a join with a
+        reading that does see the pair repairs it.
+        """
+        report = cml.cumulativity_report()
+        rows = report["families"]
+        conflated = sum(int(loss["count"])
+                        for row in rows for loss in row["conflations"])
+        steps = [
+            Step("the rule, stated before the board is read",
+                 str(report["rule"]),
+                 f"{report['count']} declared families, "
+                 f"{report['shipped']} shipped"),
+            Step("every declared refinement edge, verified on the probes",
+                 f"An edge fails when the lower rung splits a probe pair the "
+                 f"higher one conflates, and every violating pair is listed "
+                 f"rather than counted, because the witness is what fixes a "
+                 f"defect of construction.",
+                 "; ".join(
+                     f"{row['key']}: "
+                     + (", ".join(f"{e['lower']}->{e['higher']} "
+                                  f"({len(e['violations'])} violations)"
+                                  for e in row["edges"]) or "no edges")
+                     for row in rows)),
+            Step("every declared non-edge, witnessed",
+                 f"A family that denies a refinement has to show the pair "
+                 f"that denies it, or the shape of the ladder is an "
+                 f"assertion.  The rejected integer reading is kept in the "
+                 f"registry for exactly this reason: its non-edge is the "
+                 f"defect the check caught the first time it was run.",
+                 "; ".join(f"{n['family']}: {n['lower']} -> {n['higher']} "
+                           f"witnessed by {n['witness']}"
+                           for row in rows for n in row["non_edges"])
+                 or "no declared non-edges"),
+            Step("what each rung cannot see, reported and not charged",
+                 f"A conflation is the rung's resolution, not a defect: "
+                 f"refining a reading of that rung's view cannot repair it, "
+                 f"and the remedy is a joint reading.  This is the "
+                 f"A_1^24 / A_2^12 pair of the deep-hole ladder in general "
+                 f"form.",
+                 f"{conflated} conflated pairs across the rungs, 0 of them "
+                 f"counted as defects"),
+            Step("the verdict",
+                 f"A shipped family with a defect would fail this step; the "
+                 f"families kept for pricing a rejected reading are reported "
+                 f"separately rather than excused.",
+                 f"shipped defects: "
+                 + (", ".join(report["defects"]) or "none")),
+        ]
+        expected = {
+            "families": str(report["count"]),
+            "shipped": str(report["shipped"]),
+            "edges_checked": str(report["edges_checked"]),
+            "non_edges_checked": str(report["non_edges_checked"]),
+            "defects": str(len(report["defects"])),
+            "holds": str(report["holds"]),
+            "conflated_pairs": str(conflated),
+        }
+        for row in rows:
+            expected[f"passes_{row['key']}"] = str(row["passes"])
+        return Solution(
+            query=query, kind="report",
+            answer=f"report cumulativity: {report['count']} declared layer "
+                   f"families, {report['shipped']} of them shipped; "
+                   f"{report['edges_checked']} refinement edges verified and "
+                   f"{report['non_edges_checked']} declared non-edges "
+                   f"witnessed; {len(report['defects'])} defect(s) in a "
+                   f"shipped family, and {conflated} conflated pairs "
+                   f"reported as resolutions rather than defects",
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "report_cumulativity", "args": {}},
+            payload={"report": {
+                "families": [{"key": row["key"], "shipped": row["shipped"],
+                              "passes": row["passes"],
+                              "defects": list(row["defects"])}
+                             for row in rows],
+                "holds": report["holds"]}})
+
+    def _report_query_escalation(self, query: Query) -> Solution:
+        """Wires qesc.query_escalation_report -- escalation in the query loop.
+
+        Directive D13.  The deep-hole round escalated one reading along a
+        declared ladder; this subject is that discipline wired into the
+        ordinary loop, and measured over the whole evaluation set: nothing
+        already answered may move, no principled refusal may be converted,
+        every rung run is charged, and a refusal carries the layer it was
+        refused at.  `GLM.EscalationLoop.climb_answers_least` and
+        `climbFrom_refused_all` are the two statements that make an answer at a
+        rung, and a refusal from the whole ladder, statements about the other
+        rungs.
+
+        Read from the cache, which carries the digest of the sources it was
+        taken from (D4): a stale cache is reported as stale rather than
+        silently re-run.
+        """
+        report = qesc.current()
+        condition = qesc.state()
+        if report is None:
+            return Solution(
+                query=query, kind="report",
+                answer=f"report query escalation: the stored measurement is "
+                       f"{condition['verdict']}, so no figure is reported "
+                       f"rather than one taken from code that has moved; run "
+                       f"`python3 -m glm_universal.tools queryesc --write` to "
+                       f"re-take it",
+                steps=(Step("the cache is not current",
+                            "D4: a stored result is reused only against a "
+                            "recorded digest of everything it depended on, "
+                            "and this one no longer matches.",
+                            f"cache = {condition['verdict']}"),),
+                expected={"cache": str(condition["verdict"])},
+                script_spec={"template": "report_query_escalation",
+                             "args": {}},
+                payload={"report": {"cache": condition["verdict"]}})
+
+        safety = report["safety"]
+        utility = report["utility"]
+        layers = report["layers"]
+        classified = report["classified"]
+        escalatable = [row for row in classified if row["escalatable"]]
+        steps = [
+            Step("the ladder, declared before it was climbed",
+                 f"Three rungs, each with its cost, and a ladder declared "
+                 f"per query kind rather than one tower for everything: "
+                 f"{report['kinds_with_a_ladder_above_one_rung']} of the "
+                 f"declared kinds have more than one rung, and the tallest "
+                 f"ladder is {report['tallest_ladder']} rungs.",
+                 "; ".join(f"{l['key']} ({l['title']}) cost {l['cost']}"
+                           for l in layers)),
+            Step("gate 1 -- nothing already answered moves",
+                 f"The whole evaluation set is run twice, directly and "
+                 f"through the loop.  A single moved answer, or a single "
+                 f"answer that became more expensive, would fail this gate; "
+                 f"so would converting a refusal classified as principled.",
+                 f"{safety['cases']} cases, "
+                 f"{safety['answered_directly']} answered directly, "
+                 f"{len(safety['answers_moved'])} moved, "
+                 f"{len(safety['principled_refusals_converted'])} principled "
+                 f"refusals converted, holds = {safety['holds']}"),
+            Step("gate 2 -- what escalation buys",
+                 f"A declared probe set, reported in full including the "
+                 f"probes expected to stay refused.  An answer reached at "
+                 f"the third rung is charged what three rungs cost, so "
+                 f"accuracy cannot be bought with unbounded work.",
+                 f"{len(utility['resolved_above_the_first_rung'])} of "
+                 f"{utility['probes']} probes resolve above the first rung "
+                 f"("
+                 + ", ".join(utility["resolved_above_the_first_rung"])
+                 + f"); direct cost {utility['direct_cost']}, escalated "
+                 f"costs {', '.join(str(c) for c in utility['escalated_cost'])}"),
+            Step("a refusal carries the layer it was refused at",
+                 f"Of the declared refusals of the evaluation set, the ones "
+                 f"classified as an absence are the only ones the loop is "
+                 f"allowed to escalate; the rest are returned at the layer "
+                 f"they were classified at, by "
+                 f"{report['markers']} declared markers.",
+                 f"{len(classified)} declared refusals, "
+                 f"{len(escalatable)} escalatable, "
+                 f"{len(utility['certified_absences'])} certified absences "
+                 f"("
+                 + ", ".join(utility["certified_absences"]) + ")"),
+            Step("the limits, stated with the result",
+                 str(report["limits"]),
+                 f"neighbourhood radius {report['radius']}"),
+        ]
+        expected = {
+            "cache": str(condition["verdict"]),
+            "cases": str(safety["cases"]),
+            "safety_holds": str(safety["holds"]),
+            "answers_moved": str(len(safety["answers_moved"])),
+            "principled_refusals_converted":
+                str(len(safety["principled_refusals_converted"])),
+            "probes": str(utility["probes"]),
+            "resolved_above_the_first_rung":
+                str(len(utility["resolved_above_the_first_rung"])),
+            "certified_absences": str(len(utility["certified_absences"])),
+            "rungs": str(len(layers)),
+        }
+        return Solution(
+            query=query, kind="report",
+            answer=f"report query escalation: over {safety['cases']} "
+                   f"evaluation cases no answer moves and no principled "
+                   f"refusal is converted (safety = {safety['holds']}), and "
+                   f"{len(utility['resolved_above_the_first_rung'])} of "
+                   f"{utility['probes']} declared probes resolve above the "
+                   f"first rung, {len(utility['certified_absences'])} of the "
+                   f"refusals as certified absences",
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "report_query_escalation", "args": {}},
+            payload={"report": {
+                "safety": {"cases": safety["cases"],
+                           "holds": safety["holds"]},
+                "utility": {"probes": utility["probes"],
+                            "resolved": list(
+                                utility["resolved_above_the_first_rung"])}}})

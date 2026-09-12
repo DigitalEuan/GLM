@@ -17,6 +17,9 @@ dispatcher readable as a dispatcher.
 """
 from __future__ import annotations
 
+from ...reasoning import deep_hole_classifier as dhc
+from ...reasoning import deep_hole_escalation as esc
+from ...reasoning import deep_hole_failures as dhf
 from ...reasoning import deep_holes as dhl
 from ...reasoning import facets as fa
 from ...reasoning import fwht_decode as fdc
@@ -417,6 +420,249 @@ class LatticeGeometryReports:
             steps=tuple(steps), expected=expected,
             script_spec={"template": "report_deep_holes", "args": {}},
             payload={"report": report})
+
+    def _report_hole_classifier(self, query: Query) -> Solution:
+        """Wires dhc.deep_hole_classifier_report -- the pre-registered round.
+
+        Can the *distribution of trajectories* that arrive at a deep hole
+        name the hole, where the certified reader names it from the diagram?
+        One statistic, fixed in ``studies/DEEP_HOLE_STUDY.md`` before the
+        module existed, against four controls of which the plain vertex
+        count is the one that matters -- a deep hole has ``24 + k`` vertices,
+        so the count already names some of the types by itself.
+
+        The measurement is a quarter of an hour of exact decoding, so it is
+        read from the cache and the cache carries the digest of the sources
+        it was taken from (D4): a stale cache is reported as stale rather
+        than silently re-run.
+        """
+        report = dhc.current()
+        condition = dhc.state()
+        if report is None:
+            return Solution(
+                query=query, kind="report",
+                answer=f"report hole classifier: the stored measurement is "
+                       f"{condition['verdict']}, so no figure is reported "
+                       f"rather than one taken from code that has moved; "
+                       f"run `python3 -m glm_universal.tools deepholes "
+                       f"--write` to re-take it",
+                steps=(Step("the cache is not current",
+                            "D4: a stored result is reused only against a "
+                            "recorded digest of everything it depended on, "
+                            "and this one no longer matches.",
+                            f"cache = {condition['verdict']}"),),
+                expected={"cache": str(condition["verdict"])},
+                script_spec={"template": "report_hole_classifier", "args": {}},
+                payload={"report": {"cache": condition["verdict"]}})
+
+        run = report["run"]
+        method = run["method"]
+        baseline = run["baseline"]
+        digest = run["digest"]
+        reshuffle = run["reshuffle"]
+        ablation = run["ablation"]
+        gate = report["gate"]
+        table = report["table"]
+
+        steps = [
+            Step("the ensemble, declared before it was run",
+                 f"{report['starts']} deterministic starts, one tick each, "
+                 f"quantised by the exact nearest-Leech-point decoder; every "
+                 f"emission recorded, arrivals at the minimum distance kept "
+                 f"and strays counted separately.  The offsets are exact "
+                 f"rationals and there is no float and no sampling: the "
+                 f"ensemble *is* the declared starts, because the "
+                 f"2001**24 possible offsets cannot be enumerated and the "
+                 f"study says so up front.",
+                 f"starts = {report['starts']}, reference seed = "
+                 f"{report['reference_seed']}"),
+            Step("the holes, reached rather than looked up",
+                 f"Two built from the substrate's own codewords, then "
+                 f"{report['walk_budget']} walks at declared seeds.  Each "
+                 f"type is the certified reading of the frozen path, and "
+                 f"the types the budget did not reach are reported as not "
+                 f"reached.",
+                 f"types reached = {table['size']} of "
+                 f"{report['catalogue_size']}, queries = "
+                 f"{method['queries']}"),
+            Step("the method against the control that mattered",
+                 f"The competitor was fixed before the measurement: the "
+                 f"plain vertex count, which is 24 + k for k components and "
+                 f"therefore already names some types.  The digest control "
+                 f"and the reshuffle are the chance baselines, and the "
+                 f"uniform-profile ablation is the vertex count expressed "
+                 f"in the method's own metric.",
+                 f"method {method['correct']}/{method['queries']}, vertex "
+                 f"count {baseline['correct']}, ablation "
+                 f"{ablation['correct']}, digest {digest['correct']}, "
+                 f"reshuffle {reshuffle['correct']}"),
+            Step("and the pre-registered stopping rule fires anyway",
+                 f"Q0 changes only the ensemble seed.  If the statistic "
+                 f"does not survive that, the study said in advance that "
+                 f"nothing downstream is worth reading, and it does not "
+                 f"survive it.  {gate['reading'].capitalize()}.",
+                 f"sanity holds = {gate['sanity_holds']}, verdict = "
+                 f"{gate['verdict']}, score = {gate['score_rounded']} bits "
+                 f"against a gate of {gate['gate_bits']}"),
+            Step("what the certified-absence theorem needs, and does not get",
+                 f"GLM.DeepHole.absent_certifies turns a refusal into a "
+                 f"proof given faithfulness -- every hole within r of its "
+                 f"own reference -- and uniqueness needs the references "
+                 f"more than 2r apart.  The measurement supplies both radii "
+                 f"and they are incompatible here, so the theorem holds and "
+                 f"the detector does not.",
+                 f"faithfulness radius = "
+                 f"{dhc.rounded(run['faithfulness_radius'], 4)}, r* = "
+                 f"{dhc.rounded(run['certified_radius'], 4)}, compatible = "
+                 f"{run['faithfulness_compatible']}"),
+        ]
+        expected = {
+            "cache": str(condition["verdict"]),
+            "types": str(table["size"]),
+            "queries": str(method["queries"]),
+            "correct": str(method["correct"]),
+            "baseline_correct": str(baseline["correct"]),
+            "digest_correct": str(digest["correct"]),
+            "reshuffle_correct": str(reshuffle["correct"]),
+            "beats_baseline": str(run["beats_baseline"]),
+            "beats_every_control": str(run["beats_every_control"]),
+            "sanity_holds": str(gate["sanity_holds"]),
+            "verdict": str(gate["verdict"]),
+            "faithfulness_compatible": str(run["faithfulness_compatible"]),
+        }
+        return Solution(
+            query=query, kind="report",
+            answer=f"report hole classifier: over {method['queries']} "
+                   f"queries on {table['size']} of the "
+                   f"{report['catalogue_size']} Niemeier types, the "
+                   f"arrival-share profile names {method['correct']} "
+                   f"correctly against {baseline['correct']} for the plain "
+                   f"vertex count, {digest['correct']} for the digest "
+                   f"control and {reshuffle['correct']} for the reshuffle -- "
+                   f"so it beats every control and the round still stops, "
+                   f"because the pre-registered sanity query fails "
+                   f"(sanity holds = {gate['sanity_holds']}) and the verdict "
+                   f"fixed in advance for that case is "
+                   f"'{gate['verdict']}'",
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "report_hole_classifier", "args": {}},
+            payload={"report": {"types": table["size"],
+                                "queries": method["queries"],
+                                "correct": method["correct"],
+                                "baseline": baseline["correct"],
+                                "verdict": gate["verdict"]}})
+
+    def _report_hole_ladder(self, query: Query) -> Solution:
+        """Wires esc.deep_hole_escalation_report -- the escalation ladder.
+
+        The first deep-hole round stopped at its own sanity check.  This one
+        asks whether that was the geometry or the layer it was read at, and
+        escalates the reading along a ladder fixed in
+        ``studies/DEEP_HOLE_ESCALATION_STUDY.md`` before the module existed:
+        four readings, three ensemble sizes, twelve cells, and one gate --
+        every reference hole recognises itself under a bare seed change.
+
+        Read from the cache, which carries the digest of the sources it was
+        taken from (D4): a stale cache is reported as stale rather than
+        silently re-run.
+        """
+        report = esc.current()
+        condition = esc.state()
+        if report is None:
+            return Solution(
+                query=query, kind="report",
+                answer=f"report hole ladder: the stored measurement is "
+                       f"{condition['verdict']}, so no figure is reported "
+                       f"rather than one taken from code that has moved; "
+                       f"run `python3 -m glm_universal.tools escalation "
+                       f"--write` to re-take it",
+                steps=(Step("the cache is not current",
+                            "D4: a stored result is reused only against a "
+                            "recorded digest of everything it depended on, "
+                            "and this one no longer matches.",
+                            f"cache = {condition['verdict']}"),),
+                expected={"cache": str(condition["verdict"])},
+                script_spec={"template": "report_hole_ladder", "args": {}},
+                payload={"report": {"cache": condition["verdict"]}})
+
+        tree = report["decision"]
+        bottom = tree["bottom"]
+        best = tree["best"]
+        cells = report["cells"]
+        gate = tree["gate"]
+
+        steps = [
+            Step("the defect, named before the ladder was built",
+                 f"The first round excluded the strays from the profile and "
+                 f"fixed the budget at 240 starts.  Both are readings of a "
+                 f"layer, not facts about the hole, so the question is "
+                 f"whether the law -- the hole's type is invariant under a "
+                 f"change of declared ensemble -- descends to a wider or "
+                 f"larger reading.",
+                 f"cells = {len(cells)}, gate = every one of {gate} holes "
+                 f"recognises itself"),
+            Step("the bottom rung reproduces the first round",
+                 f"The ladder's first cell is the first round's cell, and it "
+                 f"has to return the first round's number before anything "
+                 f"above it is read.",
+                 f"bottom rung Q0 = {bottom['q0']} of {gate}, expected "
+                 f"{tree['expected']}, reproduces = {tree['reproduces']}"),
+            Step("the ladder, cell by cell",
+                 f"Each cell reports how many holes recognise themselves and "
+                 f"the scale-free ratio rho = 2W/B; rho < 1 is sufficient "
+                 f"for the gate, and that implication is "
+                 f"GLM.DeepHoleLadder.nearest_correct rather than an "
+                 f"assumption.",
+                 f"best cell = {best['layer']} at {best['starts']} starts, "
+                 f"Q0 = {best['q0']} of {gate}, rho = "
+                 f"{esc.rounded(best['ratio'], 4) if best['ratio'] is not None else 'n/a'}"),
+            Step("the decision the tree fixed in advance",
+                 f"{tree['reading']}",
+                 f"verdict = {tree['verdict']}"),
+        ]
+        expected = {
+            "cache": str(condition["verdict"]),
+            "cells": str(len(cells)),
+            "gate": str(gate),
+            "reproduces": str(tree["reproduces"]),
+            "bottom_q0": str(bottom["q0"]),
+            "best_q0": str(best["q0"]),
+            "best_layer": str(best["layer"]),
+            "best_starts": str(best["starts"]),
+            "verdict": str(tree["verdict"]),
+            "winner_is_extension": str(tree.get("winner_is_extension")),
+        }
+        run = report.get("run")
+        tail = ""
+        if run:
+            tail = (f"; over the full query set at that cell the reading "
+                    f"names {run['method']['correct']} of "
+                    f"{run['method']['queries']} correctly against "
+                    f"{run['baseline']['correct']} for the vertex-count "
+                    f"baseline")
+        if tree.get("winner_is_extension"):
+            tail += (", and the passing cell is the extension rung decided "
+                     "after the pre-registered cells were measured, so it is "
+                     "reported as an extension")
+        return Solution(
+            query=query, kind="report",
+            answer=f"report hole ladder: over {len(cells)} cells -- "
+                   f"{len(report['layers'])} "
+                   f"readings at {len(report['starts_ladder'])} ensemble "
+                   f"sizes -- the sanity gate is "
+                   f"that all {gate} reference holes recognise themselves "
+                   f"under a bare seed change; the first round's cell "
+                   f"returns {bottom['q0']} of {gate} and the best cell of "
+                   f"the ladder, {best['layer']} at {best['starts']} starts, "
+                   f"returns {best['q0']} of {gate}, so the verdict fixed in "
+                   f"advance for that case is '{tree['verdict']}'{tail}",
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "report_hole_ladder", "args": {}},
+            payload={"report": {"cells": len(cells),
+                                "gate": gate,
+                                "bottom": bottom["q0"],
+                                "best": best["q0"],
+                                "verdict": tree["verdict"]}})
 
     def _report_lattices(self, query: Query) -> Solution:
         """Wires hlt.higher_lattices_report -- the 24 -> 32 -> 48 ladder.
@@ -969,3 +1215,150 @@ class LatticeGeometryReports:
             steps=tuple(steps), expected=expected,
             script_spec={"template": "report_transform_decoder", "args": {}},
             payload={"report": report})
+
+    def _report_hole_failures(self, query: Query) -> Solution:
+        """Wires dhf.deep_hole_failure_report -- the four failures and the spread.
+
+        The escalated deep-hole reading names 40 of 44 queries.  This subject
+        opens the four it does not, and asks whether the mechanism behind them
+        is the one that keeps the separation ratio above its criterion.  It is
+        read at a single pre-registered cell, with no search along the layer
+        axis at all, which is what directive D13 asks of a round that could
+        have escalated instead.
+
+        `GLM.DeepHoleFailure.failure_pair_close` says a failure at spread `w`
+        exhibits a reference pair inside `2w`, so diagnosis A is forced rather
+        than hypothesised; `resolves_of_subset` is why the deletion sweep
+        locates the spread and never certifies it; `per_type_correct` is what
+        licenses the per-type reading.
+
+        Read from the cache, which carries the digest of the sources it was
+        taken from (D4): a stale cache is reported as stale rather than
+        silently re-run.
+        """
+        report = dhf.current()
+        condition = dhf.state()
+        if report is None:
+            return Solution(
+                query=query, kind="report",
+                answer=f"report hole failures: the stored measurement is "
+                       f"{condition['verdict']}, so no figure is reported "
+                       f"rather than one taken from code that has moved; run "
+                       f"`python3 -m glm_universal.tools failures --write` to "
+                       f"re-take it",
+                steps=(Step("the cache is not current",
+                            "D4: a stored result is reused only against a "
+                            "recorded digest of everything it depended on, "
+                            "and this one no longer matches.",
+                            f"cache = {condition['verdict']}"),),
+                expected={"cache": str(condition["verdict"])},
+                script_spec={"template": "report_hole_failures", "args": {}},
+                payload={"report": {"cache": condition["verdict"]}})
+
+        cell = report["cell"]
+        rep = report["reproduction"]
+        counts = report["counts"]
+        spread = report["spread"]
+        per_type = report["per_type"]
+        leave_out = report["leave_out"]
+        negative = report["original_negative"]
+        control = report["half_control"]
+        steps = [
+            Step("one cell, declared before the round",
+                 f"The reading is the escalation round's passing cell and "
+                 f"nothing else: no rung is tried, so no result here can be "
+                 f"the best of a search along the layer axis.",
+                 f"{cell['layer']} at {cell['starts']} starts "
+                 f"({cell['layer_name']})"),
+            Step("the stopping rule: the cell reproduces",
+                 f"If this round did not return the escalation round's own "
+                 f"figure at the same cell, nothing below it would be read.",
+                 f"{rep['correct']} of {rep['queries']} correct against "
+                 f"{rep['expected_correct']} of {rep['expected_queries']} "
+                 f"expected, reproduces = {rep['reproduces']}"),
+            Step("what the four failures are",
+                 f"Each failure is scored against four diagnoses fixed in "
+                 f"advance.  All four are rank-2 near misses -- the truth is "
+                 f"second, not absent -- and all four sit on a closest "
+                 f"reference pair, which "
+                 f"`GLM.DeepHoleFailure.failure_pair_close` says they had to.",
+                 f"{len(report['failures'])} failures; closest pair "
+                 f"{counts['a_closest_pair']}, bimodal {counts['b_bimodal']}, "
+                 f"tie {counts['c_tie']}, absent from the shortlist "
+                 f"{counts['d_absent_from_shortlist']}, none of the four "
+                 f"{counts['none_of_the_four']}"),
+            Step("the spread that stalls the ratio",
+                 f"The criterion is rho = 2W/B < 1.  The type whose "
+                 f"within-type spread stalls it is the type the failures "
+                 f"belong to, so the open question of the escalation round "
+                 f"and the failures of this one are one mechanism.",
+                 f"worst spread {spread['worst_type']} at "
+                 f"{dhf.rounded(spread['worst_spread'], 4)} against a closest "
+                 f"separation of {dhf.rounded(spread['separation'], 4)}; "
+                 f"rho = {dhf.rounded(spread['rho_seed'], 4)} on the seed "
+                 f"reading; same mechanism = {report['same_mechanism']}"),
+            Step("the original negative, kept",
+                 str(negative["reading"]),
+                 f"rho at the passing cell "
+                 f"{dhf.rounded(negative['rho_at_the_passing_cell'], 4)}, "
+                 f"stands = {negative['stands']}; the declared deletion sweep "
+                 f"over {report['subsets_tried']} subsets gets no lower than "
+                 f"{dhf.rounded(leave_out['best_one']['ratio'], 4)} and "
+                 f"reaches the criterion nowhere "
+                 f"(any below one = {leave_out['any_below_one']})"),
+            Step("the new positive: the criterion type by type",
+                 f"Where a single type's own criterion holds, "
+                 f"`GLM.DeepHoleFailure.per_type_correct` certifies naming "
+                 f"for that type whatever the rest of the table does.  This "
+                 f"reading was added after the numbers were seen and is "
+                 f"labelled as such in the study.",
+                 f"{per_type['count']} of {per_type['total']} types "
+                 f"certified: {', '.join(per_type['certified'])}"),
+            Step("the control on the bimodality diagnosis",
+                 f"Diagnosis B is scored by splitting the ensemble in half; "
+                 f"the control asks how often the halves disagree on a query "
+                 f"that did *not* fail, so 'the halves disagree' is not read "
+                 f"as a property of failures alone.",
+                 f"halves disagree on {control['failures_halves_disagree']} "
+                 f"of {control['failures']} failures and on "
+                 f"{control['correct_halves_disagree']} of "
+                 f"{control['correct']} correct queries"),
+        ]
+        expected = {
+            "cache": str(condition["verdict"]),
+            "layer": str(cell["layer"]),
+            "starts": str(cell["starts"]),
+            "correct": str(rep["correct"]),
+            "queries": str(rep["queries"]),
+            "reproduces": str(rep["reproduces"]),
+            "failures": str(len(report["failures"])),
+            "a_closest_pair": str(counts["a_closest_pair"]),
+            "worst_spread_type": str(report["worst_spread_type"]),
+            "same_mechanism": str(report["same_mechanism"]),
+            "negative_stands": str(negative["stands"]),
+            "subsets_tried": str(report["subsets_tried"]),
+            "any_below_one": str(leave_out["any_below_one"]),
+            "certified_types": str(per_type["count"]),
+        }
+        return Solution(
+            query=query, kind="report",
+            answer=f"report hole failures: at the single declared cell "
+                   f"({cell['layer']}, {cell['starts']} starts) the round "
+                   f"reproduces {rep['correct']} of {rep['queries']}; all "
+                   f"{len(report['failures'])} failures are rank-2 near "
+                   f"misses on a closest reference pair, the type whose "
+                   f"spread stalls the ratio is "
+                   f"{report['worst_spread_type']}, so the failures and the "
+                   f"unmet criterion are one mechanism "
+                   f"({report['same_mechanism']}); the global negative "
+                   f"stands at rho = "
+                   f"{dhf.rounded(spread['rho_seed'], 4)}, and "
+                   f"{per_type['count']} of {per_type['total']} types satisfy "
+                   f"the criterion type by type",
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "report_hole_failures", "args": {}},
+            payload={"report": {"cell": dict(cell),
+                                "correct": rep["correct"],
+                                "queries": rep["queries"],
+                                "certified_types": list(
+                                    per_type["certified"])}})

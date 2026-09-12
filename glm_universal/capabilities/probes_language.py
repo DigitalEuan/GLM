@@ -212,15 +212,26 @@ def _semantics_open_vocabulary() -> Outcome:
         return holds("some open-vocabulary word resolved",
                      resolved=tuple(resolved))
     report = rf.ambiguity_report()
+    from ..reasoning import admission as adm
+    door = adm.admission_report()
     return breaks(
         "the vocabulary is exactly the registers -- numerals, SI constants, "
         "the 118 elements and their formulae, the physics quantities and the "
         "operators.  A word outside them has no determinate referent and is "
         "refused, which is the right answer for a machine whose meanings are "
         "geometric: it has nowhere to put 'justice'.  Widening the "
-        "vocabulary means widening the registers, not the parser",
+        "vocabulary means widening the registers, not the parser -- and that "
+        "is now a door with a stated latch rather than a habit: "
+        "reasoning/admission.py admits a name by three routes and refuses by "
+        "one, the refusal is conditional and names its condition, and this "
+        "probe keeps breaking because no register measures any of the words "
+        "tried, which is a fact about the registers rather than about the "
+        "kind of word",
         named_terms=report["named_terms"],
-        tried=words, senses=refused)
+        tried=words, senses=refused,
+        admission_routes=door["routes"],
+        admission_criterion=door["criterion"],
+        justice_refusal=door["justice"]["reason"])
 
 
 # ===========================================================================

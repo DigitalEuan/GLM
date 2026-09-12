@@ -1,5 +1,18 @@
 # The question shape made an object
 
+
+## Tier 0 — the coarse read
+
+**Question.** Can a question's shape be described well enough that the parser's branches can be deleted?
+
+**Verdict.** The branches deleted, and a second shape family.
+
+**Deciding figure.** Both matchers re-run over both generated corpora and checked key by key against the branches the parser used to have.
+
+**Recomputed by.** `glm_universal.language.report.language_report`
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
 *What `glm_universal/language/`, `RequestProject/GLM/Question.lean` and
 `report language` are for, and what they measured.*
 

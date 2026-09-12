@@ -101,6 +101,7 @@ from .. import recipe as rcp
 from ..semantics import meaning as sme
 from ..semantics import reference as sre
 from ..semantics import relations as srl
+from . import escalation_loop as esl
 from . import parser as PA
 from .parser import ConceptIndex, Query, QueryError, parse_query
 from .payload import as_magnitude, jsonable
@@ -128,7 +129,8 @@ REPORT_SUBJECTS: Tuple[str, ...] = (
     "leech construction", "facets",
     "monster stack", "multiresolution", "migration", "state migration",
     "concept store", "fusion", "benchmarks", "semantics",
-    "infinite values", "capabilities", "analogies",
+    "infinite values", "capabilities", "analogies", "conjugates",
+    "completion", "vagueness", "admission",
     "transform decoder", "deep holes", "units",
     "molecules", "chemistry coverage",
     "blueprint", "reversible", "mantissa", "engine", "noise",
@@ -136,7 +138,9 @@ REPORT_SUBJECTS: Tuple[str, ...] = (
     "lattices", "shells", "llvq", "harmony", "economics",
     "lean", "directives", "pipeline", "escalation", "measure",
     "names", "recipe", "language", "searchloop", "retrieval",
-    "controller", "generated",
+    "controller", "generated", "landscape", "hole classifier",
+    "hole ladder", "hole failures", "cumulativity", "query escalation",
+    "review sweep",
 )
 
 #: The canonical names of the worked end-to-end tasks ``task <name>`` runs.
@@ -435,6 +439,39 @@ class GeometricSession(SubstrateReports, LatticeGeometryReports,
     def clear_history(self) -> None:
         """Forget the inference history; registers stay loaded."""
         self._history = []
+
+    def ask_escalated(self, text: str,
+                      domain: Optional[str] = None) -> Solution:
+        """Parse and answer one query through the escalation loop.
+
+        The difference from :meth:`ask` is what happens when the reading the
+        query was asked at refuses.  :meth:`ask` stops there.  This climbs the
+        query kind's **declared** ladder --
+        :data:`glm_universal.runtime.escalation_loop.LADDERS` -- and returns
+        the least rung that resolves, or a refusal that carries the layer it
+        was refused at.  Three rules make that honest rather than merely
+        persistent: the ladder is finite and fixed before the question is
+        seen, every rung run is costed and the cost is reported, and a refusal
+        classified as *principled* -- ill formed, underdetermined, or grounded
+        in no register -- is never escalated at all.
+
+        A question the register answers is answered exactly as :meth:`ask`
+        answers it, at the same cost; the ladder is recorded in the payload
+        under ``"escalation"`` beside the answer rather than written into it.
+        """
+        query = parse_query(text, self.index, domain)
+        climb = esl.resolve(self, query)
+        solution = esl.escalated_solution(self, climb)
+        self._history.append(InferenceRecord(
+            index=len(self._history), raw_query=text, kind=solution.kind,
+            domain=query.domain, answer=solution.answer, ok=solution.ok))
+        return solution
+
+    def escalate(self, text: str,
+                 domain: Optional[str] = None) -> "esl.Escalated":
+        """The climb itself, for a caller that wants the ladder and not the
+        answer: every rung tried, what it cost, and the layer it stopped at."""
+        return esl.resolve(self, parse_query(text, self.index, domain))
 
     def snapshot(self) -> Dict[str, object]:
         """A JSON-serialisable record of the session's whole state."""
@@ -2061,6 +2098,10 @@ class GeometricSession(SubstrateReports, LatticeGeometryReports,
                          "wobble signature", "sturmian", "resonance",
                          "oscillator", "snr"):
             return self._report_signature(query)
+        if subject in ("landscape", "wobble landscape", "alpha",
+                         "fine structure", "fine-structure constant",
+                         "bit score", "distinctiveness"):
+            return self._report_landscape(query)
         if subject in ("drift", "iteration drift", "prime drift",
                          "orbit drift", "divergence", "drift ladder"):
             return self._report_drift(query)
@@ -2122,10 +2163,34 @@ class GeometricSession(SubstrateReports, LatticeGeometryReports,
         if subject in ("analogies", "analogy", "analogy models",
                          "relation models", "proportional analogy"):
             return self._report_analogies(query)
+        if subject in ("conjugates", "conjugate", "conjugate pairs",
+                         "conjugate register", "effort", "cross register",
+                         "cross-register analogy"):
+            return self._report_conjugates(query)
         if subject in ("transform decoder", "fwht", "walsh", "hadamard",
                          "transform", "o(1) lookup", "certificate",
                          "llvq", "soft decoding"):
             return self._report_transform_decoder(query)
+        if subject in ("hole classifier", "hole classification",
+                         "arrival profile", "trajectory classifier",
+                         "deep hole classifier"):
+            return self._report_hole_classifier(query)
+        if subject in ("hole ladder", "escalation ladder", "deep hole ladder",
+                         "hole escalation", "ladder"):
+            return self._report_hole_ladder(query)
+        if subject in ("hole failures", "hole failure", "deep hole failures",
+                         "the four failures", "failures"):
+            return self._report_hole_failures(query)
+        if subject in ("cumulativity", "refinement check", "layer families",
+                         "refinement edges", "cumulativity rule"):
+            return self._report_cumulativity(query)
+        if subject in ("review sweep", "review register", "re-reading",
+                         "rereading", "stalled results", "sweep"):
+            return self._report_review_sweep(query)
+        if subject in ("query escalation", "escalation loop",
+                         "query loop escalation", "escalated queries",
+                         "escalation in the loop"):
+            return self._report_query_escalation(query)
         if subject in ("deep holes", "deep hole", "holes", "niemeier",
                          "niemeier classification", "hole census",
                          "covering radius", "voronoi"):
@@ -2140,6 +2205,17 @@ class GeometricSession(SubstrateReports, LatticeGeometryReports,
                          "sparse", "sparsity", "covalent radius",
                          "chemistry_coverage"):
             return self._report_chemistry_coverage(query)
+        if subject in ("completion", "chemistry completion", "empty cells",
+                         "completed table", "element completion",
+                         "dispositions"):
+            return self._report_completion(query)
+        if subject in ("vagueness", "vague", "related_to", "related to",
+                         "standing rule", "proposer", "vague triples"):
+            return self._report_vagueness(query)
+        if subject in ("admission", "open vocabulary", "admissible",
+                         "vocabulary door", "door", "new words",
+                         "new word"):
+            return self._report_admission(query)
         # Unknown subject
         return Solution(
             query=query, kind="report",
