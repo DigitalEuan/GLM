@@ -7,7 +7,7 @@
 
 **Verdict.** Everything is exact `int` / `fractions.Fraction` / `F_2`; nothing here imports `random`.
 
-**Deciding figure.** 72 modules, one frozen data file, and a runnable audit.
+**Deciding figure.** 75 modules, one frozen data file, and a runnable audit.
 
 **Recomputed by.** `glm_universal.reasoning.reasoning_report`
 
@@ -16,7 +16,7 @@
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 
-**Status: implemented (GLM-3+ Step 3, extended since).** **72 modules**, one
+**Status: implemented (GLM-3+ Step 3, extended since).** **75 modules**, one
 frozen data file,
 and a runnable audit. Everything is exact `int` / `fractions.Fraction` /
 `F_2`; nothing here imports `random`; nothing here imports a third-party
@@ -91,6 +91,9 @@ Sections 1–4 below describe these in detail.
 | `deep_dive.py` | the two questions the first reading left open, both answered no: the archive's 44 balanced octads against the null census of all 735,471 eight-subsets, and its relaxation shown to reach the code but not the nearest codeword | (library) |
 | `search_loop.py` | the archive's reasoning loop read as a program space: what the hard gate admits, what the ranking cannot separate, and the loop's soundness, monotonicity and termination | `report searchloop` |
 | `retrieval.py` | the address book used as a retrieval index, and the controls that decide whether it earns the role: eight ranking schemes over the Lean corpus — address, raw features, a lexical address book, a plain text search, a name search, a digest, a seeded reshuffle and a random order — scored against closed-form chance, with the completeness bound of `Retrieval.lean` checked pair by pair | `report retrieval` |
+| `stack.py` | the faculties arranged as a stack rather than scored one at a time: a confidence that says when the leading faculty has no evidence for *this* query, a stated gate, and an interleave that lets the two geometric address books answer when it abstains — measured against the text control on a tuning stride, a disjoint held-out stride and bare goal queries, with a digest-and-reshuffle relay as the control | `report relay` |
+| `vision_stack.py` | the same relay in the grid register: a generator, an eight-dimension visual filter and a cross-domain check over the 50 ARC training puzzles, with the carry table saying which faculty supplied the rule that verified | `report relay` |
+| `anonymous.py` | the register where the structural address is the only faculty still reading: a query whose identifiers are not the corpus's, modelled by renaming everything outside a declared vocabulary, with every faculty scored on both readings of the same 813 queries, the invariance of the syntax coordinates checked coordinate by coordinate against the shipped feature map, and the stack's own gate left untouched | `report anonymous` |
 | `controller.py` | the propose–check–refuse loop: a bounded beam over dimensional derivations from the ten EXT10 generators, six heuristics including two address-guided ones, every returned plan re-verified independently, and two kinds of refusal — exhausted, and unreachable with an invariant proof | `report controller` |
 | `generative.py` | generated instead of stored, and checked against what it replaces: the zero-storage script's Leech sieve measured over the whole kissing shell, the one-line repair that restores the Golay condition, an exact coset decoder that gives the true nearest lattice point, the closed-form constants scored against certified processes, and the storage audit of this package's own artefacts | `report generated` |
 | `pcgs.py` | the proof-carrying generative substrate: a generated object answers with a certificate and an exact ledger, never with a bare value — Reed–Muller `RM(1,m)` generated from its evaluation basis with the weight distribution its theorem forces, the number-theoretic transform generated from `(p, g)` with the radix-2 algorithm checked against the definition that is proved invertible, a stencil operator and a transducer, the cost algebra (operation counts and information bits, replacing CPU cycles and RAM bytes), the Landauer/CMOS physical layer in exact `Fraction`s, and the break-even query count at which a stored table starts to pay | — |

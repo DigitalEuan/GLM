@@ -216,7 +216,8 @@ REGISTER: Tuple[Entry, ...] = (
                "refusals the fallback rule offers it, it correctly refuses "
                "all four, so it would add nothing to the shipped system"),
         document="REVERSE_CALL_PLANNER_STUDY.md",
-        reading="the whole 147-case evaluation set under the declared fallback rule",
+        reading=("the whole evaluation set under the declared fallback "
+                 "rule"),
         verdict="no-discard",
         discarded=("nothing.  Every question in the evaluation set that the "
                    "runtime refuses is a question that ought to be refused, "

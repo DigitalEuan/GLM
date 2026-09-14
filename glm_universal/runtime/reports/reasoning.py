@@ -14,10 +14,13 @@ keeps the dispatcher readable as a dispatcher.
 """
 from __future__ import annotations
 
+from ...reasoning import anonymous as anon
 from ...reasoning import controller as ctl
 from ...reasoning import generative as gen
 from ...reasoning import retrieval as rt
 from ...reasoning import search_loop as sl
+from ...reasoning import stack as sk
+from ...reasoning import vision_stack as vs
 
 from ..payload import jsonable
 from ..parser import Query
@@ -363,7 +366,267 @@ class ReasoningReports:
                 "violations": guarantee["violations"],
                 "lean_file": report["lean_file"]})})
 
+    # -- the multi-part stack, and who carries whom -----------------------
+
+    def _report_relay(self, query: Query) -> Solution:
+        """Wires sk.relay_report -- does the stack beat its best faculty?
+
+        The retrieval subject records the negative result that the address
+        layer loses to a plain lexical search when it answers alone.  This
+        subject asks the question that result does not settle: gated on the
+        text layer's own confidence, do the two geometric address books carry
+        the queries the text layer cannot read, and does the stack then beat
+        the text control?  The controls are a relay to the digest addresses
+        and a seeded permutation, and a relay to the name search, so a gain
+        from padding a list is separated from a gain from the substrate.  The
+        second register is the ARC grids, where the same relay runs over a
+        generator, a visual filter and a cross-domain check.
+        """
+        report = sk.relay_report()
+        vision = vs.vision_report()
+        sets = report["sets"]
+        verdict = report["verdict"]
+        k = 5
+        carried = sum(len(sets[name]["carried"]) for name in sets)
+        lost = sum(len(sets[name]["lost"]) for name in sets)
+
+        def pair(name: str) -> str:
+            entry = sets[name]
+            return (f"{entry['leader']['hits'][k]} -> "
+                    f"{entry['relay']['hits'][k]} of {entry['queries']}")
+
+        steps = [
+            Step("the gate, and what it is for",
+                 f"A faculty reports how much evidence it has for *this* "
+                 f"query: for the lexical search that is the overlap its best "
+                 f"candidate achieves.  Below a gate of {report['gate']} the "
+                 f"leader is judged to have abstained and the stack relays to "
+                 f"the two address books, taking "
+                 f"{', '.join(f'{quota} from {name}' for name, quota in report['quotas'])}.  "
+                 f"The gate fires on "
+                 f"{sum(sets[name]['fired'] for name in sets)} of "
+                 f"{sum(sets[name]['queries'] for name in sets)} queries, so "
+                 f"the stack leaves the leader alone almost everywhere "
+                 f"-- which is GLM.Relay.relay_confident.",
+                 f"gate {report['gate']}, quotas "
+                 f"{', '.join(f'{name}:{quota}' for name, quota in report['quotas'])}"),
+            Step("the relay beats the control that beat the geometry",
+                 f"At k = {k} the relay lifts the text control on the tuning "
+                 f"stride ({pair('tuning')}), on a disjoint held-out stride "
+                 f"({pair('holdout')}) and on the goal queries "
+                 f"({pair('goal')}).  It carries {carried} queries the text "
+                 f"control misses and loses {lost}.",
+                 f"tuning {pair('tuning')}, holdout {pair('holdout')}, "
+                 f"goal {pair('goal')}, carried {carried}, lost {lost}"),
+            Step("and the gain is the geometry's",
+                 f"The same relay to the digest addresses and a seeded "
+                 f"permutation carries "
+                 f"{sum(len(report['controls']['digest_random'][name]['carried']) for name in sets)} "
+                 f"queries; to the name search, "
+                 f"{sum(len(report['controls']['name'][name]['carried']) for name in sets)}.  "
+                 f"The mechanism is not padding a list.",
+                 f"geometry {carried}, digest+reshuffle "
+                 f"{sum(len(report['controls']['digest_random'][name]['carried']) for name in sets)}, "
+                 f"name "
+                 f"{sum(len(report['controls']['name'][name]['carried']) for name in sets)}"),
+            Step("the same stack over grids",
+                 f"On the {vision['puzzles']} ARC training puzzles the same "
+                 f"relay runs over a generator, a visual filter and a "
+                 f"cross-domain check: the cheap look removes "
+                 f"{q(vision['filter_saving'])} of "
+                 f"{vision['proposed']} proposals before the verification "
+                 f"gate sees them, the leading faculty solves "
+                 f"{vision['leader_solves']} alone and the relay solves "
+                 f"{vision['relay_solves']}.",
+                 f"puzzles {vision['puzzles']}, filter "
+                 f"{q(vision['filter_saving'])}, leader "
+                 f"{vision['leader_solves']}, relay {vision['relay_solves']}"),
+        ]
+
+        expected = {
+            "gate": q(report["gate"]),
+            "corpus": str(report["corpus"]),
+            "carried": str(carried),
+            "lost": str(lost),
+            "vision_puzzles": str(vision["puzzles"]),
+            "vision_leader_solves": str(vision["leader_solves"]),
+            "vision_relay_solves": str(vision["relay_solves"]),
+            "vision_filter_saving": q(vision["filter_saving"]),
+            "lean_file": str(report["lean_file"]),
+        }
+        for name in sets:
+            expected[f"{name}_queries"] = str(sets[name]["queries"])
+            expected[f"{name}_fired"] = str(sets[name]["fired"])
+            expected[f"{name}_leader_hits"] = str(sets[name]["leader"]["hits"][k])
+            expected[f"{name}_relay_hits"] = str(sets[name]["relay"]["hits"][k])
+        for key, value in verdict.items():
+            expected[f"verdict_{key}"] = str(value)
+
+        return Solution(
+            query=query, kind="report",
+            answer=f"report relay: the machine's faculties arranged as a "
+                   f"stack rather than scored one at a time.  Gated on the "
+                   f"text layer's own confidence -- below {report['gate']} it "
+                   f"is judged to have no evidence for the query -- the two "
+                   f"geometric address books carry it, and at k = {k} the "
+                   f"stack beats the text control on the tuning stride "
+                   f"({pair('tuning')}), on a disjoint held-out stride "
+                   f"({pair('holdout')}) and on bare goal queries "
+                   f"({pair('goal')}), carrying {carried} queries it misses "
+                   f"and losing {lost}.  The same relay to a digest and a "
+                   f"reshuffle carries "
+                   f"{sum(len(report['controls']['digest_random'][name]['carried']) for name in sets)}, "
+                   f"so the gain is the substrate's rather than the list "
+                   f"padding's, and the gate fires on only "
+                   f"{sum(sets[name]['fired'] for name in sets)} of "
+                   f"{sum(sets[name]['queries'] for name in sets)} queries.  "
+                   f"In the grid register the same mechanism runs over "
+                   f"{vision['puzzles']} ARC puzzles with a generator, a "
+                   f"visual filter and a cross-domain check: the filter "
+                   f"removes {q(vision['filter_saving'])} of the proposals "
+                   f"before the verification gate sees them, and the relay "
+                   f"solves {vision['relay_solves']} "
+                   f"against the leading faculty's {vision['leader_solves']}",
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "report_relay", "args": {}},
+            payload={"report": jsonable({
+                "gate": q(report["gate"]),
+                "carried": carried,
+                "lost": lost,
+                "tuning": sets["tuning"]["relay"]["hits"][k],
+                "holdout": sets["holdout"]["relay"]["hits"][k],
+                "goal": sets["goal"]["relay"]["hits"][k],
+                "vision_relay_solves": vision["relay_solves"],
+                "lean_file": report["lean_file"]})})
+
     # -- the loop: propose, check, refuse ---------------------------------
+
+    def _report_anonymous(self, query: Query) -> Solution:
+        """Wires anon.anonymous_report -- who reads a query with no names.
+
+        The relay subject shows the geometry carrying a *residue*: a handful
+        of queries the text layer cannot read.  This subject asks whether
+        there is a register where the carry set is a whole class, and answers
+        yes: rename every identifier of a query outside a declared vocabulary
+        and the text search and the identifier address book both fall to
+        chance, while the structural address keeps most of what it had,
+        because renaming cannot move a count of the syntax.
+        """
+        report = anon.anonymous_report()
+        plain = report["plain"]
+        after = report["anonymous"]
+        relay_after = report["relay_anonymous"]
+        verdict = report["verdict"]
+        queries = report["queries"]
+        k = report["k"]
+
+        def hits(table, faculty: str) -> int:
+            return table[faculty]["hits"][k]
+
+        def move(faculty: str) -> str:
+            return (f"{hits(plain, faculty)} -> {hits(after, faculty)} "
+                    f"of {queries}")
+
+        chance_hits = report["chance_at_5"] * queries
+        steps = [
+            Step("the register, stated before it is measured",
+                 f"A query is *anonymous* when its identifiers are not the "
+                 f"corpus's: a goal from another formalisation, a generated "
+                 f"goal with no names yet, a statement autoformalised in the "
+                 f"vocabulary of its source.  Every identifier outside a "
+                 f"declared vocabulary of "
+                 f"{len(report['kept_vocabulary'])} words -- Lean's own "
+                 f"syntax and the type names the feature map counts -- is "
+                 f"replaced by a positional placeholder, and the "
+                 f"placeholders are checked to be fresh against the corpus "
+                 f"rather than assumed to be.",
+                 f"queries {queries}, kept vocabulary "
+                 f"{len(report['kept_vocabulary'])}, placeholders fresh "
+                 f"{verdict['placeholders_are_fresh']}"),
+            Step("what the renaming does to each faculty",
+                 f"At k = {k} the text search falls {move('text')} and the "
+                 f"identifier address book falls {move('lexical')}, both to "
+                 f"the {chance_hits.numerator // chance_hits.denominator} "
+                 f"hits chance alone would give; the structural address "
+                 f"holds {move('address')}, which is more than twice what "
+                 f"any other faculty manages in this register.",
+                 f"text {move('text')}, lexical {move('lexical')}, address "
+                 f"{move('address')}, digest {move('digest')}, random "
+                 f"{move('random')}"),
+            Step("why, checked coordinate by coordinate",
+                 f"A renaming cannot move a count of the syntax, which is "
+                 f"GLM.Anonymous.features_anonymise.  Measured on the "
+                 f"shipped feature map rather than on the idealisation: "
+                 f"{report['invariant_queries']} of {queries} queries keep "
+                 f"every syntax coordinate, and every coordinate that moves "
+                 f"on the remaining "
+                 f"{queries - report['invariant_queries']} is one of the six "
+                 f"that count type words, which the shipped map reads inside "
+                 f"identifiers too.",
+                 f"invariant {report['invariant_queries']} of {queries}, "
+                 f"moved outside the type vocabulary "
+                 f"{len(report['queries_moved_outside_the_type_vocabulary'])}"),
+            Step("and the stack hands the register over on its own",
+                 f"The gate is the one the relay already carries, not "
+                 f"re-tuned: it fires on {relay_after['fired']} of "
+                 f"{queries} anonymous queries against "
+                 f"{report['relay_plain']['fired']} of the same queries read "
+                 f"plainly, and the relay lifts the text leader "
+                 f"{relay_after['leader']['hits'][k]} -> "
+                 f"{relay_after['relay']['hits'][k]}.  With confidence zero "
+                 f"that hand-over is a theorem, "
+                 f"GLM.Anonymous.relay_hands_over, not a measurement.",
+                 f"fired {relay_after['fired']} of {queries}, leader "
+                 f"{relay_after['leader']['hits'][k]}, relay "
+                 f"{relay_after['relay']['hits'][k]}"),
+        ]
+
+        expected = {
+            "queries": str(queries),
+            "corpus": str(report["corpus"]),
+            "chance_at_5": q(report["chance_at_5"]),
+            "invariant_queries": str(report["invariant_queries"]),
+            "fired": str(relay_after["fired"]),
+            "relay_hits": str(relay_after["relay"]["hits"][k]),
+            "leader_hits": str(relay_after["leader"]["hits"][k]),
+            "lean_file": str(report["lean_file"]),
+        }
+        for faculty in anon.SCORED:
+            expected[f"plain_{faculty}_hits"] = str(hits(plain, faculty))
+            expected[f"anonymous_{faculty}_hits"] = str(hits(after, faculty))
+        for key, value in verdict.items():
+            expected[f"verdict_{key}"] = str(value)
+
+        return Solution(
+            query=query, kind="report",
+            answer=f"report anonymous: the register where the geometric "
+                   f"address is the only faculty left reading.  Rename every "
+                   f"identifier of a query outside a declared vocabulary and "
+                   f"at k = {k} over {queries} queries the text search falls "
+                   f"{move('text')} and the identifier address book "
+                   f"{move('lexical')}, both to the "
+                   f"{chance_hits.numerator // chance_hits.denominator} hits "
+                   f"chance gives, while the structural address holds "
+                   f"{move('address')} -- more than twice any other faculty "
+                   f"here.  A renaming cannot move a count of the syntax "
+                   f"({report['invariant_queries']} of {queries} queries "
+                   f"keep every syntax coordinate, and the rest move only "
+                   f"the six that count type words), so the stack's existing "
+                   f"gate fires on {relay_after['fired']} of {queries} and "
+                   f"lifts the leader "
+                   f"{relay_after['leader']['hits'][k]} -> "
+                   f"{relay_after['relay']['hits'][k]}.  The carry set is a "
+                   f"class, not a residue",
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "report_anonymous", "args": {}},
+            payload={"report": jsonable({
+                "queries": queries,
+                "text": hits(after, "text"),
+                "lexical": hits(after, "lexical"),
+                "address": hits(after, "address"),
+                "fired": relay_after["fired"],
+                "invariant_queries": report["invariant_queries"],
+                "lean_file": report["lean_file"]})})
 
     def _report_controller(self, query: Query) -> Solution:
         """Wires ctl.controller_report -- can the substrate steer a loop?

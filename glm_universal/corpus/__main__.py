@@ -29,6 +29,7 @@ import json
 from typing import List, Optional
 
 from ..reasoning import lean_address as la
+from ..reasoning import retrieval as rt
 from . import address as ad
 from . import checks as ck
 from . import inventory as inv
@@ -73,9 +74,11 @@ def _refresh(reuse: bool = True) -> int:
     thing it would rebuild is already a description of its inputs:
 
     1. the **Lean address book**, which the measurements read;
-    2. the **document address book**, which the corpus blocks quote;
-    3. the **measurements**, which are taken from the Lean book;
-    4. the **generated documents and blocks**, which quote all three.
+    2. the **lexical address book** over the same declarations, which the
+       retrieval and relay measurements read beside it;
+    3. the **document address book**, which the corpus blocks quote;
+    4. the **measurements**, which are taken from the two Lean books;
+    5. the **generated documents and blocks**, which quote all four.
 
     Nothing later in that list can move anything earlier -- the corpus digest
     is taken over the written text with generated bodies blanked -- so one
@@ -93,6 +96,14 @@ def _refresh(reuse: bool = True) -> int:
               f"({report['decoded']:,} decoded, {report['reused']:,} reused, "
               f"{audit['audited']} re-decoded as a check, "
               f"{'no drift' if audit['holds'] else 'DRIFT'})")
+
+    lexical = rt.lexical_cache_state()
+    if lexical["fresh"]:
+        print("lexical address book:  fresh")
+    else:
+        target = rt.write_lexical_book()
+        rt.lexical_book(refresh=True)
+        print(f"lexical address book:  rebuilt ({target.name})")
 
     document = ad.cache_state()
     if document["fresh"]:

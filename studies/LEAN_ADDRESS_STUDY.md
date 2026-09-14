@@ -98,17 +98,17 @@ not written down here; it is emitted:
 <!-- generated: lean-corpus -->
 | kind | count |
 |---|---|
-| abbrev | 43 |
-| def | 826 |
-| example | 2 |
-| inductive | 21 |
-| instance | 26 |
+| abbrev | 44 |
+| def | 842 |
+| example | 10 |
+| inductive | 22 |
+| instance | 27 |
 | lemma | 112 |
-| structure | 40 |
-| theorem | 2,117 |
-| **total** | **3,187** |
+| structure | 41 |
+| theorem | 2,151 |
+| **total** | **3,249** |
 
-3,187 declarations across 111 files, the largest being `Gen3.lean` with 98.
+3,249 declarations across 113 files, the largest being `Gen3.lean` with 98.
 <!-- end generated -->
 
 The two `example` rows are `Denotation.lean`'s anonymous check that the physics
@@ -241,11 +241,11 @@ below half a scale unit in every coordinate.
 <!-- generated: lean-readback -->
 |  | measured |
 |---|---|
-| declarations checked | 3,187 |
-| read back exactly | **3,187 / 3,187** (rate 1) |
-| coordinates checked | 76,488 |
+| declarations checked | 3,249 |
+| read back exactly | **3,249 / 3,249** (rate 1) |
+| coordinates checked | 77,976 |
 | coordinate errors | **0** |
-| moved by the decoder | 3,187 / 3,187 |
+| moved by the decoder | 3,249 / 3,249 |
 | worst observed residual | **3**, at `GLM.DeepHoleLadder.Reading.cumulative_ge_right` |
 | half a scale step | `9/2` |
 | covering radius | 4 |
@@ -268,9 +268,9 @@ declaration" is, at this point, a statement about the feature map alone.
 <!-- generated: lean-injectivity -->
 | scheme | distinct addresses | distinct feature vectors | classes | declarations conflated | quantisation adds conflation? |
 |---|---|---|---|---|---|
-| `feature` | 2,823 / 3,187 | 2,823 | 249 | 613 | no |
-| `hash_control` | **3,187 / 3,187** | 2,823 | 0 | 0 | — |
-| `shuffled` | 2,823 / 3,187 | 2,823 | 249 | 613 | no |
+| `feature` | 2,883 / 3,249 | 2,883 | 252 | 618 | no |
+| `hash_control` | **3,249 / 3,249** | 2,883 | 0 | 0 | — |
+| `shuffled` | 2,883 / 3,249 | 2,883 | 252 | 618 | no |
 <!-- end generated -->
 
 Two things to read off this table.
@@ -294,7 +294,7 @@ the sense that a reader shown only the 24 counts would also fail to tell the
 members apart:
 
 <!-- generated: lean-classes -->
-249 classes: 193 pairs, 29 triples, 15 classes of 4, 4 classes of 5, 5 classes of 6, 2 classes of 7, 1 class of 16.
+252 classes: 196 pairs, 29 triples, 15 classes of 4, 4 classes of 5, 6 classes of 6, 1 class of 7, 1 class of 16.
 
 The widest, written out, because the point they make can only be read from the names:
 
@@ -309,8 +309,6 @@ The widest, written out, because the point they make can only be read from the n
 7   GLM.Calibration.NA_pos, GLM.Calibration.cSI_pos,
     GLM.Calibration.hSI_pos, GLM.Lightspeed.NA_pos, GLM.Lightspeed.cSI_pos,
     GLM.Lightspeed.hSI_pos, GLM.Lightspeed.molarPlanck_pos
-7   GLM.Gen2.Exps, GLM.Gen2.mass, GLM.Gen2.speed, GLM.Golay24.Word,
-    GLM.GolayHex.w, GLM.Info.Carrier24, GLM.Info.tea
 6   GLM.Admission.ledger_refusals, GLM.Completion.ledger_coverage,
     GLM.Gen3.dimensionless_counts, GLM.GrayJump.d2_1000033_1000034,
     GLM.LatticeShortcut.d2_1000033_1000034,
@@ -320,6 +318,8 @@ The widest, written out, because the point they make can only be read from the n
 6   GLM.Calibration.cellDuration_bounds, GLM.Calibration.tick_bounds,
     GLM.Calibration.workEnergy_bounds, GLM.Lightspeed.cellDuration_bounds,
     GLM.Lightspeed.tick_bounds, GLM.Lightspeed.workEnergy_bounds
+6   GLM.DimensionCarrier.mc4Dim, GLM.Foundations.mc4Dim, GLM.Gen2.energy,
+    GLM.GolayHex.w2, GLM.Heisenberg.V, GLM.Semantics.energyDim
 ```
 <!-- end generated -->
 
@@ -366,27 +366,27 @@ The third table is on *all* pairs, not just nearest ones.
 <!-- generated: lean-neighbours -->
 | scheme | nearest shares a file | rate | mean tie size |
 |---|---|---|---|
-| `feature` | **624 / 3,187** | ≈ **19.58 %** | 1.68 |
-| `hash_control` | 33 / 3,187 | ≈ 1.04 % | 1.00 |
-| `shuffled` | 30 / 3,187 | ≈ 0.94 % | 1.68 |
-| *chance* | — | ≈ 1.18 % | — |
+| `feature` | **643 / 3,249** | ≈ **19.79 %** | 1.66 |
+| `hash_control` | 32 / 3,249 | ≈ 0.98 % | 1.00 |
+| `shuffled` | 32 / 3,249 | ≈ 0.98 % | 1.66 |
+| *chance* | — | ≈ 1.15 % | — |
 
 | scheme | nearest is cited, either way | rate |
 |---|---|---|
-| `feature` | **116 / 3,187** | ≈ **3.64 %** |
-| `hash_control` | 6 / 3,187 | ≈ 0.19 % |
-| `shuffled` | 3 / 3,187 | ≈ 0.09 % |
+| `feature` | **117 / 3,249** | ≈ **3.60 %** |
+| `hash_control` | 6 / 3,249 | ≈ 0.18 % |
+| `shuffled` | 6 / 3,249 | ≈ 0.18 % |
 | *chance* | — | ≈ 0.19 % |
 
 | scheme | mean d² within a file | mean d² across files | ratio |
 |---|---|---|---|
-| `feature` | 5,791.0 | 6,669.7 | **0.868** |
-| `hash_control` | 54,446.1 | 54,284.1 | 1.003 |
-| `shuffled` | 6,572.7 | 6,660.4 | 0.987 |
+| `feature` | 5,815.1 | 6,700.5 | **0.868** |
+| `hash_control` | 54,462.2 | 54,308.8 | 1.003 |
+| `shuffled` | 6,679.7 | 6,690.5 | 0.998 |
 
-Against closed-form chance the feature encoding runs 16.7× on the file test and 19.0× on the citation test, from an encoding that is never shown a file name.
+Against closed-form chance the feature encoding runs 17.2× on the file test and 19.0× on the citation test, from an encoding that is never shown a file name.
 
-Over 59,654 same-file pairs and 5,017,237 cross-file pairs.  The feature encoding beats the hash control: yes; beats the seeded reshuffle: yes; beats closed-form chance: yes.
+Over 60,648 same-file pairs and 5,215,728 cross-file pairs.  The feature encoding beats the hash control: yes; beats the seeded reshuffle: yes; beats closed-form chance: yes.
 <!-- end generated -->
 
 The two controls do exactly what they are there for.

@@ -14,7 +14,7 @@ Two rows are measured from outside the package and are marked as such: the colle
 
 ## At a glance
 
-**8 registers** holding 1089 carriers, reached through **21 query kinds** of which one dispatches **63 report subjects**; **118 elements** and **51 molecules**; **357 meanings** in the lexicon; **33 probes** of which 20 hold and 13 break; **147 cases** end to end; **89 test files**; **111 Lean files** carrying 0 sorries.
+**8 registers** holding 1089 carriers, reached through **21 query kinds** of which one dispatches **65 report subjects**; **118 elements** and **51 molecules**; **357 meanings** in the lexicon; **33 probes** of which 20 hold and 13 break; **149 cases** end to end; **91 test files**; **113 Lean files** carrying 0 sorries.
 
 ## Sentences
 
@@ -22,13 +22,13 @@ Quote these verbatim.  `tests/test_figures.py` finds every phrase of the shape i
 
 | name | sentence | shape | counts |
 |---|---|---|---|
-| `evaluation_cases` | 147 CLI cases | `\b\d+ CLI cases\b` | the evaluation set |
-| `lean_files` | 111 Lean files | `\b\d+ Lean files\b` | the Lean development |
+| `evaluation_cases` | 149 CLI cases | `\b\d+ CLI cases\b` | the evaluation set |
+| `lean_files` | 113 Lean files | `\b\d+ Lean files\b` | the Lean development |
 | `query_kinds` | 21 query kinds | `\b\d+ query kinds\b` | how many query kinds |
 | `registers` | 8 registers | `\b\d+ registers\b` | how many registers there are |
-| `report_subjects` | 63 report subjects | `\b\d+ report subjects\b` | how many subjects |
-| `suite` | 3,631 tests across 88 of the 89 test files, 13,777 subtests, outside the document check | `\b[\d,]+ tests across \d+(?: of the \d+)? test files, [\d,]+ subtests(?:, outside the document check)?` | what a complete run counts |
-| `test_files` | 89 test files | `\b\d+ test files\b` | how many test files |
+| `report_subjects` | 65 report subjects | `\b\d+ report subjects\b` | how many subjects |
+| `suite` | 3,695 tests across 90 of the 91 test files, 14,131 subtests, outside the document check | `\b[\d,]+ tests across \d+(?: of the \d+)? test files, [\d,]+ subtests(?:, outside the document check)?` | what a complete run counts |
+| `test_files` | 91 test files | `\b\d+ test files\b` | how many test files |
 
 ## Package surface
 
@@ -37,12 +37,12 @@ Quote these verbatim.  `tests/test_figures.py` finds every phrase of the shape i
 | `version` | 1.17.0 |
 | `subpackages` | substrate, data_objects, reasoning, semantics, recipe, language, runtime, migration, benchmarks, capabilities, evaluation |
 | `subpackage_count` | 11 |
-| `modules_by_subpackage` | substrate 10, data_objects 12, reasoning 72, semantics 6, recipe 4, language 7, runtime 6, migration 3, benchmarks 2, capabilities 3, evaluation 2 |
-| `module_count` | 127 |
+| `modules_by_subpackage` | substrate 10, data_objects 12, reasoning 75, semantics 6, recipe 4, language 7, runtime 6, migration 3, benchmarks 2, capabilities 3, evaluation 2 |
+| `module_count` | 130 |
 | `query_kinds` | verify, analogy, describe, nearest, product, cluster, spatial, project, trilinear, coherence, report, angle, task, pi_groups, meaning, real, compare, measure, comparative, derive, unknown |
 | `query_kind_count` | 21 |
-| `report_subjects` | relations, leech distribution, theta, subalgebra, information loss, golay decoding, superposition, leech construction, facets, monster stack, multiresolution, migration, state migration, concept store, fusion, benchmarks, semantics, infinite values, capabilities, analogies, conjugates, completion, vagueness, admission, transform decoder, deep holes, units, molecules, chemistry coverage, blueprint, reversible, mantissa, engine, noise, signature, drift, catalog, containers, companion, lattices, shells, llvq, harmony, economics, lean, directives, pipeline, escalation, measure, names, recipe, language, searchloop, retrieval, controller, generated, landscape, hole classifier, hole ladder, hole failures, cumulativity, query escalation, review sweep |
-| `report_subject_count` | 63 |
+| `report_subjects` | relations, leech distribution, theta, subalgebra, information loss, golay decoding, superposition, leech construction, facets, monster stack, multiresolution, migration, state migration, concept store, fusion, benchmarks, semantics, infinite values, capabilities, analogies, conjugates, completion, vagueness, admission, transform decoder, deep holes, units, molecules, chemistry coverage, blueprint, reversible, mantissa, engine, noise, signature, drift, catalog, containers, companion, lattices, shells, llvq, harmony, economics, lean, directives, pipeline, escalation, measure, names, recipe, language, searchloop, retrieval, relay, anonymous, controller, generated, landscape, hole classifier, hole ladder, hole failures, cumulativity, query escalation, review sweep |
+| `report_subject_count` | 65 |
 | `domains` | physics, chemistry, molecules, mathematics, lexicon, spatial, harmonics, economics |
 | `domain_count` | 8 |
 | `tasks` | grid, physics, concepts |
@@ -144,15 +144,15 @@ Quote these verbatim.  `tests/test_figures.py` finds every phrase of the shape i
 
 | figure | value |
 |---|---|
-| `cases` | 147 |
+| `cases` | 149 |
 | `kinds_covered` | 21 |
-| `by_kind` | analogy 11, angle 2, cluster 2, coherence 2, comparative 7, compare 4, derive 4, describe 8, meaning 6, measure 9, nearest 4, pi_groups 2, product 1, project 1, real 5, report 65, spatial 2, task 3, trilinear 2, unknown 1, verify 6 |
-| `expected_answers` | 131 |
+| `by_kind` | analogy 11, angle 2, cluster 2, coherence 2, comparative 7, compare 4, derive 4, describe 8, meaning 6, measure 9, nearest 4, pi_groups 2, product 1, project 1, real 5, report 67, spatial 2, task 3, trilinear 2, unknown 1, verify 6 |
+| `expected_answers` | 133 |
 | `expected_refusals` | 16 |
 | `refusals_boundary` | 16 |
 | `refusals_gap` | 0 |
 | `gap_cases` | (none) |
-| `report_subjects_exercised` | 64 |
+| `report_subjects_exercised` | 66 |
 
 ## Benchmarks
 
@@ -170,27 +170,27 @@ Quote these verbatim.  `tests/test_figures.py` finds every phrase of the shape i
 | figure | value |
 |---|---|
 | `root` | glm_lean |
-| `files` | 111 |
-| `lines` | 32565 |
+| `files` | 113 |
+| `lines` | 33158 |
 | `sorries` | 0 |
-| `file_names` | RequestProject/GLM/Address.lean, RequestProject/GLM/Admission.lean, RequestProject/GLM/AlignmentPoints.lean, RequestProject/GLM/Calibration.lean, RequestProject/GLM/Cascade.lean, RequestProject/GLM/Combiner.lean, RequestProject/GLM/Comparative.lean, RequestProject/GLM/Completion.lean, RequestProject/GLM/Computable.lean, RequestProject/GLM/ConditionalInduction.lean, RequestProject/GLM/Conjugate.lean, RequestProject/GLM/Constants.lean, RequestProject/GLM/Controller.lean, RequestProject/GLM/Corpus.lean, RequestProject/GLM/Cube/HexTiles.lean, RequestProject/GLM/Cube/Stabiliser.lean, RequestProject/GLM/Cube/Surface.lean, RequestProject/GLM/Cube/Tax.lean, RequestProject/GLM/Cube/Three.lean, RequestProject/GLM/Cumulative.lean, RequestProject/GLM/CumulativityRule.lean, RequestProject/GLM/DeepHoleClassifier.lean, RequestProject/GLM/DeepHoleEscalation.lean, RequestProject/GLM/DeepHoleFailure.lean, RequestProject/GLM/DeltaSigma.lean, RequestProject/GLM/Denotation.lean, RequestProject/GLM/Dimen... |
+| `file_names` | RequestProject/GLM/Address.lean, RequestProject/GLM/Admission.lean, RequestProject/GLM/AlignmentPoints.lean, RequestProject/GLM/Anonymous.lean, RequestProject/GLM/Calibration.lean, RequestProject/GLM/Cascade.lean, RequestProject/GLM/Combiner.lean, RequestProject/GLM/Comparative.lean, RequestProject/GLM/Completion.lean, RequestProject/GLM/Computable.lean, RequestProject/GLM/ConditionalInduction.lean, RequestProject/GLM/Conjugate.lean, RequestProject/GLM/Constants.lean, RequestProject/GLM/Controller.lean, RequestProject/GLM/Corpus.lean, RequestProject/GLM/Cube/HexTiles.lean, RequestProject/GLM/Cube/Stabiliser.lean, RequestProject/GLM/Cube/Surface.lean, RequestProject/GLM/Cube/Tax.lean, RequestProject/GLM/Cube/Three.lean, RequestProject/GLM/Cumulative.lean, RequestProject/GLM/CumulativityRule.lean, RequestProject/GLM/DeepHoleClassifier.lean, RequestProject/GLM/DeepHoleEscalation.lean, RequestProject/GLM/DeepHoleFailure.lean, RequestProject/GLM/DeltaSigma.lean, RequestProject/GLM/Denota... |
 
 ## The test suite
 
 | figure | value |
 |---|---|
-| `test_files` | 89 |
-| `file_names` | test_admission.py, test_analogy_models.py, test_benchmarks.py, test_blueprint.py, test_capabilities.py, test_catalog.py, test_coherence.py, test_combiner.py, test_companion.py, test_comparative.py, test_comparison_classes.py, test_conjugate.py, test_containers.py, test_controller.py, test_corpus.py, test_cumulativity.py, test_data_objects.py, test_deep_dive.py, test_deep_hole_classifier.py, test_deep_hole_escalation.py, test_deep_hole_failures.py, test_deep_holes.py, test_denotation.py, test_derived.py, test_directive.py, test_drift.py, test_economics.py, test_element_completion.py, test_element_coverage.py, test_escalation.py, test_evaluation.py, test_exact_real.py, test_exactness.py, test_figures.py, test_fusion.py, test_fwht_decode.py, test_generative.py, test_harmonics.py, test_information_loss.py, test_inherited_graph.py, test_language.py, test_lattice_high.py, test_lean_address.py, test_lexicon_subspaces.py, test_llvq_table.py, test_measure_words.py, test_molecules.py, test_mu... |
-| `collected` | 3659 |
+| `test_files` | 91 |
+| `file_names` | test_admission.py, test_analogy_models.py, test_anonymous.py, test_benchmarks.py, test_blueprint.py, test_capabilities.py, test_catalog.py, test_coherence.py, test_combiner.py, test_companion.py, test_comparative.py, test_comparison_classes.py, test_conjugate.py, test_containers.py, test_controller.py, test_corpus.py, test_cumulativity.py, test_data_objects.py, test_deep_dive.py, test_deep_hole_classifier.py, test_deep_hole_escalation.py, test_deep_hole_failures.py, test_deep_holes.py, test_denotation.py, test_derived.py, test_directive.py, test_drift.py, test_economics.py, test_element_completion.py, test_element_coverage.py, test_escalation.py, test_evaluation.py, test_exact_real.py, test_exactness.py, test_figures.py, test_fusion.py, test_fwht_decode.py, test_generative.py, test_harmonics.py, test_information_loss.py, test_inherited_graph.py, test_language.py, test_lattice_high.py, test_lean_address.py, test_lexicon_subspaces.py, test_llvq_table.py, test_measure_words.py, test_mo... |
+| `collected` | 3723 |
 
 ## What a complete run counted
 
 | figure | value |
 |---|---|
-| `test_files` | 88 |
-| `of_test_files` | 89 |
-| `tests` | 3631 |
-| `subtests` | 13777 |
+| `test_files` | 90 |
+| `of_test_files` | 91 |
+| `tests` | 3695 |
+| `subtests` | 14131 |
 | `excludes` | test_figures.py |
 | `measured_by` | the sign-off ledger, at the last complete run |
 | `python` | python3.11.14 |

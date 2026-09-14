@@ -138,6 +138,7 @@ REPORT_SUBJECTS: Tuple[str, ...] = (
     "lattices", "shells", "llvq", "harmony", "economics",
     "lean", "directives", "pipeline", "escalation", "measure",
     "names", "recipe", "language", "searchloop", "retrieval",
+    "relay", "anonymous",
     "controller", "generated", "landscape", "hole classifier",
     "hole ladder", "hole failures", "cumulativity", "query escalation",
     "review sweep",
@@ -2078,6 +2079,12 @@ class GeometricSession(SubstrateReports, LatticeGeometryReports,
                          "nearest declarations", "index", "address index",
                          "search"):
             return self._report_retrieval(query)
+        if subject in ("relay", "stack", "faculties", "multi-part",
+                         "carry", "handover"):
+            return self._report_relay(query)
+        if subject in ("anonymous", "anonymous register", "renamed",
+                         "renaming", "no names", "nameless"):
+            return self._report_anonymous(query)
         if subject in ("controller", "loop", "derivation", "derivations",
                          "propose", "plan", "planner"):
             return self._report_controller(query)

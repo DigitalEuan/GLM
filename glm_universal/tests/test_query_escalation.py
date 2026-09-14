@@ -24,7 +24,7 @@ merely reported:
   becomes more expensive, and no principled refusal is converted;
 * the **exactness** of both modules, by the static instrument of directive D7.
 
-The two gates are measured over 147 evaluation cases and are read from the
+The two gates are measured over the whole evaluation set and are read from the
 cache; one test fails if that cache no longer describes the sources it was
 taken from (D4).  The cheap structural properties are recomputed here.
 """
@@ -35,6 +35,7 @@ from pathlib import Path
 
 import pytest
 
+from glm_universal.evaluation import cases as ev
 from glm_universal.reasoning import exactness as ex
 from glm_universal.reasoning import pipeline as ppl
 from glm_universal.reasoning import query_escalation as qesc
@@ -220,7 +221,7 @@ def test_nothing_the_runtime_already_answers_moves(stored):
     # The cache is JSON, so a tuple the report built is read back as a list;
     # what is being checked is that these three are empty.
     safety = stored["safety"]
-    assert safety["cases"] == 147
+    assert safety["cases"] == len(ev.CASES)
     assert list(safety["answers_moved"]) == []
     assert list(safety["answers_costing_more_than_the_first_rung"]) == []
     assert list(safety["principled_refusals_converted"]) == []
@@ -270,7 +271,7 @@ def test_the_subject_answers_from_the_cache(stored):
     solution = session.ask("report query escalation")
     assert solution.kind == "report"
     assert solution.expected["cache"] == "fresh"
-    assert solution.expected["cases"] == "147"
+    assert solution.expected["cases"] == str(len(ev.CASES))
     assert solution.expected["safety_holds"] == "True"
     assert solution.expected["answers_moved"] == "0"
     assert solution.expected["principled_refusals_converted"] == "0"

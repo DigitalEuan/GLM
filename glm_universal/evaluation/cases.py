@@ -32,7 +32,7 @@ being confidently wrong than on declining to answer.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from typing import Dict, Tuple
 
 __all__ = ["EvalCase", "CASES", "cases_by_kind", "KINDS_COVERED",
@@ -69,7 +69,11 @@ def _c(*args, **kwargs) -> EvalCase:
 
 
 #: The whole question set, in reading order.
-CASES: Tuple[EvalCase, ...] = (
+#:
+#: A case that quotes the size of the set writes ``{CASES}`` where the number
+#: goes; the count is filled in below, from the set itself, so that adding a
+#: case cannot leave a stale figure behind in the ground truth.
+_CASES: Tuple[EvalCase, ...] = (
 
     # ---------------------------------------------------------------- verify
     _c("verify-newton", "verify", "verify force = mass * acceleration",
@@ -689,13 +693,33 @@ CASES: Tuple[EvalCase, ...] = (
             "to, so the failures and the unmet criterion are one "
             "mechanism."),
     _c("report-query-escalation", "report", "report query escalation",
-       "answer", contains=("147 evaluation cases", "no answer moves",
+       "answer", contains=("{CASES} evaluation cases", "no answer moves",
                            "4 of 18 declared probes"),
        note="Escalation as a step of the ordinary query loop: over the "
             "whole evaluation set no answer moves and no principled "
             "refusal is converted, while four declared probes are "
             "resolved above the first rung and two refusals come back as "
             "certified absences."),
+    _c("report-relay", "report", "report relay",
+       "answer", contains=("356 -> 362 of 407", "48 of 1626",
+                           "carrying 16 queries it misses and losing 1"),
+       note="The faculties arranged as a stack rather than scored one at a "
+            "time: below a gate of 1/10 the leading lexical search is "
+            "judged to have abstained and the two geometric address books "
+            "answer in its place, by a stated quota.  The stack is ahead "
+            "of the text-only control at k = 5 on the tuning stride, on a "
+            "disjoint held-out stride and on bare goal queries, and the "
+            "matched digest-and-reshuffle control carries far fewer, so "
+            "the gain is the substrate's rather than the padding's."),
+    _c("report-anonymous", "report", "report anonymous",
+       "answer", contains=("710 -> 84 of 813", "232 -> 171 of 813",
+                           "class, not a residue"),
+       note="The register where the geometric address is the only faculty "
+            "still reading: rename every identifier of a query outside a "
+            "declared vocabulary and the text search and the identifier "
+            "address book both fall to chance, while the structural address "
+            "keeps most of what it had, because a renaming cannot move a "
+            "count of the syntax."),
     _c("report-review-sweep", "report", "report review sweep",
        "answer", contains=("8 stalled results", "retrieval-hit-at-5",
                            "0 entry defects"),
@@ -824,6 +848,29 @@ CASES: Tuple[EvalCase, ...] = (
             "`GLM.Recipe.Spec.answer_eq_none_iff` describes: the answered "
             "coordinates are the described ones and no others."),
 )
+
+
+def _fill_case_count(cases: Tuple[EvalCase, ...]) -> Tuple[EvalCase, ...]:
+    """Substitute the size of the set for ``{CASES}`` in every ground truth.
+
+    The evaluation set is its own subject in one case -- the escalation
+    report states how many cases it ran over -- and hand-typing that number
+    has twice gone stale as the set grew.  The token is replaced here, after
+    the set is complete, so the figure is read off the set rather than
+    remembered.
+    """
+    count = str(len(cases))
+
+    def fill(strings: Tuple[str, ...]) -> Tuple[str, ...]:
+        return tuple(s.replace("{CASES}", count) for s in strings)
+
+    return tuple(
+        replace(case, contains=fill(case.contains), forbids=fill(case.forbids))
+        for case in cases)
+
+
+#: The question set with every ``{CASES}`` token resolved.
+CASES: Tuple[EvalCase, ...] = _fill_case_count(_CASES)
 
 
 def cases_by_kind() -> Dict[str, Tuple[EvalCase, ...]]:

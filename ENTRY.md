@@ -115,6 +115,7 @@ first and descend into the few that bear on the task.
 **Addressing, retrieval and the corpus itself.**
 [`LEAN_ADDRESS_STUDY.md`](studies/LEAN_ADDRESS_STUDY.md) ·
 [`ADDRESS_RETRIEVAL_STUDY.md`](studies/ADDRESS_RETRIEVAL_STUDY.md) ·
+[`STACK_RELAY_STUDY.md`](studies/STACK_RELAY_STUDY.md) ·
 [`CORPUS_ADDRESS_STUDY.md`](studies/CORPUS_ADDRESS_STUDY.md) ·
 [`ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) ·
 [`HEXCOLOUR_STUDY.md`](studies/HEXCOLOUR_STUDY.md) ·

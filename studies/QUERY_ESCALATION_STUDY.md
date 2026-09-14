@@ -10,7 +10,7 @@ into an answer — without moving any answer the runtime already gives?
 
 **Verdict.** Yes, and at no cost to what the runtime already does: over the whole evaluation set no answer moves and no principled refusal is converted, while four of the declared probes are resolved above the first rung and two refusals become certified absences.
 
-**Deciding figure.** Over 147 evaluation cases, 0 answers moved and 0 principled refusals were converted; of 18 declared probes, 4 resolve above the first rung.
+**Deciding figure.** Over 149 evaluation cases, 0 answers moved and 0 principled refusals were converted; of 18 declared probes, 4 resolve above the first rung.
 
 **Recomputed by.** `glm_universal.reasoning.query_escalation.query_escalation_report`
 
@@ -20,12 +20,12 @@ into an answer — without moving any answer the runtime already gives?
 
 ## 0a. The reading in one paragraph
 
-Yes, and at no cost to what the runtime already does: over the whole evaluation set no answer moves and no principled refusal is converted, while four of the declared probes are resolved above the first rung and two refusals become certified absences. Over 147 evaluation cases, 0 answers moved and 0 principled refusals were converted; of 18 declared probes, 4 resolve above the first rung.
+Yes, and at no cost to what the runtime already does: over the whole evaluation set no answer moves and no principled refusal is converted, while four of the declared probes are resolved above the first rung and two refusals become certified absences. Over 149 evaluation cases, 0 answers moved and 0 principled refusals were converted; of 18 declared probes, 4 resolve above the first rung.
 
 The same reading, recomputed rather than written:
 
 <!-- generated: queryesc-tier -->
-**Both gates hold.**  Over the whole evaluation set of 147 cases, all 133 the runtime answers directly come back identical through the loop, at the first rung and for the first rung's cost — 0 answers moved and 0 principled refusals were converted into answers.  Of the 16 declared refusals, **14** are classified non-escalatable before the ladder is climbed.
+**Both gates hold.**  Over the whole evaluation set of 149 cases, all 135 the runtime answers directly come back identical through the loop, at the first rung and for the first rung's cost — 0 answers moved and 0 principled refusals were converted into answers.  Of the 16 declared refusals, **14** are classified non-escalatable before the ladder is climbed.
 
 The loop buys something: of the 18 declared probes, 8 are answered and 4 of those are reached *above* the first rung — 'nearest to k_B', 'describe energie', 'describe oxigen', 'nearest to velocty' — at a cost of 3, 5, 5, 5 against 1 for a direct answer.  2 refusals are certified absences within the declared radius of 2 edits.
 <!-- end generated -->
@@ -205,8 +205,8 @@ it, so when a source moves the block says so and the corpus check fails.*
 <!-- generated: queryesc-safety -->
 | check | reading |
 |---|---|
-| evaluation cases run both ways | 147 |
-| answered by the direct path | 133 |
+| evaluation cases run both ways | 149 |
+| answered by the direct path | 135 |
 | answers that moved | 0 |
 | answers that cost more than the first rung | 0 |
 | principled refusals converted into answers | 0 |
@@ -270,7 +270,7 @@ Answered by rung: L1 4, L2 1, L3 3.  Gate 2 asks for at least one probe resolvin
 ### 7.5 What the round establishes
 
 <!-- generated: queryesc-establishes -->
-**Escalation is a step of the loop and costs nothing where it is not needed.**  All 133 directly answered evaluation cases come back identical, at the first rung, for the first rung's cost.
+**Escalation is a step of the loop and costs nothing where it is not needed.**  All 135 directly answered evaluation cases come back identical, at the first rung, for the first rung's cost.
 
 **A refusal now carries its layer.**  Every refusal reports the rung it was made at and whether the ladder was climbed; 2 of the probes return an absence certified within 2 edits of an enumerated index, which is a refusal that knows its own radius rather than a shrug.
 

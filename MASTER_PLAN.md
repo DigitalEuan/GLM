@@ -5,7 +5,7 @@
 
 **Question.** What has each phase of the wiring plan delivered, and what does the next round start from?
 
-**Verdict.** Phase 35 is closed; Phase 36 is proposed and is where the next round starts.
+**Verdict.** Phase 37 is closed; Phase 38 is proposed and is where the next round starts.
 
 **Deciding figure.** Every closed phase names what was built, where it lives, and how to see it recompute itself.
 
@@ -45,8 +45,8 @@ addressing. Each item says what was built, where it lives, and how to see it
 recompute itself.
 
 Everything below is reachable from the package's public API and from the query
-runtime — **21 query kinds**, **63 report subjects** and **8 registers** — is
-covered by the test suite (<!--figure:test-files-->89 test files<!--/figure-->),
+runtime — **21 query kinds**, **65 report subjects** and **8 registers** — is
+covered by the test suite (<!--figure:test-files-->91 test files<!--/figure-->),
 and — where it is a report or a task — has a generated column-3 script that
 recomputes the claim in a **fresh interpreter** and fails if anything differs.
 
@@ -94,7 +94,21 @@ The archive also holds three interstitial sections written between phases:
 *Directive — multi-resolution Leech addressing*, *A task for the system* and
 *Runtime surface added*.
 
-**Phase 36 is proposed and is where the next round starts.** Phase 35 took
+**Phase 38 is proposed and is where the next round starts.** Phase 37 took the
+question Phase 36 left — is the geometry's carry set a residue or a class? — and
+answered it by naming the register first and measuring it second: a query is
+*anonymous* when its identifiers are not the corpus's, and in that register the
+text search and the identifier address book both fall to the hit rate chance
+gives while the structural address holds most of what it had, with the stack's
+existing gate handing the register over untuned. Phase 36 before it took the
+standing negative result of the retrieval round and pushed it the other way by
+making the faculties into a stack: a stated confidence gate, a stated quota,
+and the geometry given only the queries the leading text faculty cannot read.
+It is ahead of that leader on a tuning stride, on a disjoint held-out stride
+and on goal queries, never below it at any window, and it carries **16**
+queries against **1** lost where the matched controls carry **4** and **0** —
+with `relay_confident` and `relay_carry` proved in Lean and the same relay run
+in a register with no text in it. Phase 35 before it took
 four of the five things the deep-hole rounds left behind and closed them as
 mechanisms: escalation became a step of the ordinary query loop, the four
 remaining failures were diagnosed and found to be the same mechanism as the
@@ -113,7 +127,7 @@ hold a table.
 
 ---
 
-Phases 14–35 are closed as well, and are recorded in the same archive.
+Phases 14–36 are closed as well, and are recorded in the same archive.
 
 | phase | what it closed |
 |---|---|
@@ -139,6 +153,9 @@ Phases 14–35 are closed as well, and are recorded in the same archive.
 | 33 | the Niemeier deep holes classified from trajectories: pre-registered, beating every control at **15 of 44** against 11 for the vertex count — and stopped by its own sanity check, which kept **3 of 10** labels under a bare seed change |
 | 34 | the deep-hole ladder: the same question read one layer up, escalated over layer × budget cells until the law descends — **10 of 10** on the sanity check and **40 of 44** on the full query set at the joint reading with 1920 starts, with the separation criterion still unmet and said to be |
 | 35 | what the deep-hole rounds left behind, taken as architecture rather than geometry: escalation made a step of the ordinary query loop (**no answer moves**, **no principled refusal converted**, **4 of 18** probes resolved above the first rung), the four remaining failures diagnosed as **rank-2 near misses on a closest pair** belonging to the very type whose spread stalls `ρ`, cumulativity made a shipping condition (**7** edges verified, **2** non-edges witnessed, **0** defects), the reverse-call planner built and **not promoted** behind directive D14, and the standing set of stalled results ranked before the next re-reading (**8** entries, **1** licensed) |
+| 36 | the faculties made into a stack, and the standing negative result pushed the other way: a stated confidence gate of **1/10**, a stated quota and interleave, and the geometry given the queries the text layer cannot read — ahead of the text control on the tuning stride (**356 → 362** of 407), on a disjoint held-out stride (**354 → 358** of 406) and on goal queries (**710 → 715** of 813), never below it at any window; the gate fires on **66** of 1,614 queries and the geometry carries **16** against **1** lost, where a digest-and-reshuffle control carries **1** and a name search **none**; `relay_confident` and `relay_carry` in `RequestProject/GLM/Relay.lean` say what is a theorem rather than a hit rate; and the same relay run in a register with no text in it solves **2 of 50** ARC puzzles with a visual look that discards **95.3 %** of proposals |
+
+| 37 | the register the relay's carry set pointed at, found and measured: a query whose identifiers are not the corpus's — a goal from another formalisation, modelled by renaming everything outside a declared vocabulary — where at k = 5 over **813** queries the text search falls **710 → 84** and the identifier address book **388 → 48**, both to the **48** hits chance gives, while the structural address holds **232 → 171** and leads every other faculty by more than a factor of two; a renaming cannot move a count of the syntax (`features_anonymise`), the identifier overlap it leaves is zero (`overlap_anonymise_eq_zero`) and the stack's existing gate therefore hands the register over (`relay_hands_over`, all in `RequestProject/GLM/Anonymous.lean`) — it fires on **538** of 813 where it fires on **24** of the same queries read plainly; and the shipped feature map is audited rather than idealised: it counts type words inside identifiers too, which moves a coordinate on **33** of 813 queries and never a logical, numeric, bracket or length coordinate |
 
 The detail of each — what was built, where it lives and what recomputes it —
 is in [`archive/MASTER_PLAN_ARCHIVE.md`](archive/MASTER_PLAN_ARCHIVE.md), kept as it was
@@ -147,14 +164,20 @@ as everything else: only the open phase is state.
 
 ---
 
-## Phase 36 — what Phase 35 left behind
+## Phase 38 — what Phase 37 left behind
 
 **Status: proposed. This is where the next round starts.**
 
-It is §3.4 of [`STATUS.md`](STATUS.md), which points back here. Phase 35 took
-the architectural item — escalation as a step of the query loop — and three
-others with it, so what stands is what those rounds could not close rather than
-what they had not reached. Four candidates stand:
+It is §3.4 of [`STATUS.md`](STATUS.md), which points back here. Phase 36 took
+the standing negative result of the retrieval round — retrieval by lattice
+address beats chance and loses to plain text overlap — and answered it as an
+architecture question rather than a geometry one: the faculties were made into
+a stack, and the geometry was given only the queries the leading faculty cannot
+read. Phase 37 then asked whether what the stack carries is a residue or a
+class, and closed that question with the anonymous register. Both are closed.
+Six candidates stand — the four the deep-hole rounds left, the one the stack
+round added, and the two the anonymous round added in place of the one it
+closed:
 
 1. **The separation criterion, still unmet globally.** `nearest_correct` says a
    reading names holes correctly whenever `ρ = 2W/B < 1`. Phase 35 located the
@@ -176,7 +199,25 @@ what they had not reached. Four candidates stand:
 3. **The thirteen unreached types.** Unchanged: the ensemble reaches 10 of the
    23 Niemeier root systems from the 14 declared centres, and reaching the rest
    means new centres and therefore a new pre-registration.
-4. **The planner's utility gate.** The reverse-call planner satisfies every
+4. **A register that arrives anonymous on its own.** Phase 37 closed the
+   question this item used to ask — the carry set is a class, not a residue —
+   by renaming every identifier outside a declared vocabulary and measuring
+   retrieval over the result. Renaming is a faithful model of a
+   cross-vocabulary goal, and it is still a model. The measurement to want is
+   the same table over goals that arrive anonymous without being made so:
+   statements from a second Lean development, or from a generator, scored
+   against the same controls. The gate is also still a stated constant: the
+   sweep shows every threshold from 1/20 to 1/4 improves on the control, which
+   is robustness, not calibration.
+4a. **The leak the audit found in the feature map.** The shipped structural map
+   counts the type vocabulary wherever those words occur, including inside an
+   identifier, so a renaming moves a coordinate on 33 of 813 queries. The
+   reading that is supposed to be name-blind is therefore not quite name-blind,
+   and the extent of it is measured rather than assumed. Either the map is
+   narrowed to count a type word only where it is a type, or the leak is
+   priced — and either way it is a measurement with its own control, not a
+   patch.
+5. **The planner's utility gate.** The reverse-call planner satisfies every
    safety line and fails the one that matters: it adds nothing to the shipped
    system, because the refusals it is offered are refusals it agrees with. The
    question that would close it is whether a *tool* exists that the planner

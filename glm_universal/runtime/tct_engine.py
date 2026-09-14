@@ -1651,6 +1651,85 @@ for _key, _value in report["verdict"].items():
 '''
 
 
+def _body_report_relay(args) -> str:
+    """Recompute the relay, its controls and the grid register, fresh."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import stack as sk
+from glm_universal.reasoning import vision_stack as vs
+
+
+def _q(value):
+    from fractions import Fraction
+    f = Fraction(value)
+    return str(f.numerator) + "/" + str(f.denominator)
+
+
+report = sk.relay_report()
+vision = vs.vision_report()
+sets = report["sets"]
+k = 5
+
+observed = {
+    "gate": _q(report["gate"]),
+    "corpus": str(report["corpus"]),
+    "carried": str(sum(len(sets[_n]["carried"]) for _n in sets)),
+    "lost": str(sum(len(sets[_n]["lost"]) for _n in sets)),
+    "vision_puzzles": str(vision["puzzles"]),
+    "vision_leader_solves": str(vision["leader_solves"]),
+    "vision_relay_solves": str(vision["relay_solves"]),
+    "vision_filter_saving": _q(vision["filter_saving"]),
+    "lean_file": str(report["lean_file"]),
+}
+
+for _name in sets:
+    observed[_name + "_queries"] = str(sets[_name]["queries"])
+    observed[_name + "_fired"] = str(sets[_name]["fired"])
+    observed[_name + "_leader_hits"] = str(sets[_name]["leader"]["hits"][k])
+    observed[_name + "_relay_hits"] = str(sets[_name]["relay"]["hits"][k])
+for _key, _value in report["verdict"].items():
+    observed["verdict_" + _key] = str(_value)
+'''
+
+
+def _body_report_anonymous(args) -> str:
+    """Recompute the anonymous register and its verdict, fresh."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import anonymous as anon
+
+
+def _q(value):
+    from fractions import Fraction
+    f = Fraction(value)
+    return str(f.numerator) + "/" + str(f.denominator)
+
+
+report = anon.anonymous_report()
+plain = report["plain"]
+after = report["anonymous"]
+relay_after = report["relay_anonymous"]
+k = report["k"]
+
+observed = {
+    "queries": str(report["queries"]),
+    "corpus": str(report["corpus"]),
+    "chance_at_5": _q(report["chance_at_5"]),
+    "invariant_queries": str(report["invariant_queries"]),
+    "fired": str(relay_after["fired"]),
+    "relay_hits": str(relay_after["relay"]["hits"][k]),
+    "leader_hits": str(relay_after["leader"]["hits"][k]),
+    "lean_file": str(report["lean_file"]),
+}
+
+for _faculty in anon.SCORED:
+    observed["plain_" + _faculty + "_hits"] = str(plain[_faculty]["hits"][k])
+    observed["anonymous_" + _faculty + "_hits"] = str(after[_faculty]["hits"][k])
+for _key, _value in report["verdict"].items():
+    observed["verdict_" + _key] = str(_value)
+'''
+
+
 def _body_report_harmony(args) -> str:
     """Recompute the harmonic register and the harmony verdict, fresh."""
     return '''# -- recompute -------------------------------------------------------------
@@ -3267,6 +3346,9 @@ TEMPLATES = {
     "report_searchloop": _body_report_searchloop,
     # The address book used as an index, scored against its controls.
     "report_retrieval": _body_report_retrieval,
+    # The faculties arranged as a stack: who carries whom when one is silent.
+    "report_relay": _body_report_relay,
+    "report_anonymous": _body_report_anonymous,
     # The loop: propose, check, refuse -- and whether the lattice can steer it.
     "report_controller": _body_report_controller,
     # Generate, don't store: the audit of the zero-storage substrate.

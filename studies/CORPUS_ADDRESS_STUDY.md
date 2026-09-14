@@ -64,17 +64,17 @@ and `--check` fails if one of them has drifted.
 <!-- generated: corpus-inventory -->
 | figure | value |
 |---|---|
-| documents | 77 |
-| current-state documents | 74 |
+| documents | 79 |
+| current-state documents | 76 |
 | archive documents | 3 |
-| lines, whole corpus | 32,527 |
-| lines, current state | 24,506 |
-| lines, archive | 8,021 |
-| addressable sections | 871 |
-| documents carrying a tier 0 | 74 |
-| words in all tier-0 blocks together | 3,731 |
+| lines, whole corpus | 33,471 |
+| lines, current state | 25,439 |
+| lines, archive | 8,032 |
+| addressable sections | 887 |
+| documents carrying a tier 0 | 76 |
+| words in all tier-0 blocks together | 3,864 |
 
-Reading every current-state document costs 228,235 words; reading all 74 tier-0 blocks instead costs 3,731 — 1.6 % of it, with a stated bound on what the coarse read may omit.  The archive rule takes 24.7 % of the corpus out of what a session must load, without deleting a line of it.
+Reading every current-state document costs 238,125 words; reading all 76 tier-0 blocks instead costs 3,864 — 1.6 % of it, with a stated bound on what the coarse read may omit.  The archive rule takes 24.0 % of the corpus out of what a session must load, without deleting a line of it.
 <!-- end generated -->
 
 The three numbers that matter are the three resolutions a reader can stop at:
@@ -90,7 +90,7 @@ The documents that cost the most to read:
 |---|---|
 | `archive/PACKAGE_README_ARCHIVE.md` | 4,158 |
 | `archive/MASTER_PLAN_ARCHIVE.md` | 3,449 |
-| `STATUS.md` | 2,101 |
+| `STATUS.md` | 2,377 |
 | `studies/GLM_ACADEMIC_PAPER.md` | 1,222 |
 | `studies/GLM_Complete_Number_Theory_Evidence.md` | 1,077 |
 <!-- end generated -->
@@ -107,13 +107,13 @@ recomputing the figure must resolve to something importable.
 <!-- generated: corpus-tiers -->
 | check | documents |
 |---|---|
-| state documents | 74 |
-| carrying a tier-0 block | 74 |
+| state documents | 76 |
+| carrying a tier-0 block | 76 |
 | verdict found verbatim below tier 0 | 52 |
-| verdict grounded below tier 0 (verbatim or refinement) | 74 |
-| deciding figure's numbers found below tier 0 | 74 |
-| naming a function that recomputes the figure | 67 |
-| named functions that resolve | 67 |
+| verdict grounded below tier 0 (verbatim or refinement) | 76 |
+| deciding figure's numbers found below tier 0 | 76 |
+| naming a function that recomputes the figure | 69 |
+| named functions that resolve | 69 |
 | documents failing the contract | 0 |
 <!-- end generated -->
 
@@ -135,8 +135,8 @@ record of a round.** That is testable in both directions, and it is what turns
 <!-- generated: corpus-reachability -->
 | check | documents |
 |---|---|
-| state documents | 77 |
-| reachable from the entry document | 77 |
+| state documents | 79 |
+| reachable from the entry document | 79 |
 | unreachable | 0 |
 | archive documents | 3 |
 | archive documents listed in the entry document | 3 |
@@ -171,10 +171,10 @@ measurements are emitted.
 |---|---|
 | generated documents | 3 |
 | of those, rendered by this module | 1 |
-| lines in them | 1,857 |
-| generated blocks inside hand-written documents | 66 |
-| documents carrying at least one block | 12 |
-| renderers in the registry | 66 |
+| lines in them | 1,859 |
+| generated blocks inside hand-written documents | 76 |
+| documents carrying at least one block | 14 |
+| renderers in the registry | 76 |
 <!-- end generated -->
 
 Two details were needed to make this settle rather than oscillate. The corpus
@@ -201,14 +201,14 @@ exact decoder the physical carriers use.
 <!-- generated: corpus-address -->
 | figure | value |
 |---|---|
-| addressable units (sections) | 871 |
-| written documents they come from | 77 |
-| distinct addresses | 868 |
+| addressable units (sections) | 887 |
+| written documents they come from | 79 |
+| distinct addresses | 884 |
 | collision classes | 3 |
 | units sharing an address with another | 6 |
 | quantisation adds no conflation of its own | yes |
-| feature vectors read back exactly from the address | 871 / 871 |
-| coordinate errors | 0 of 20,904 |
+| feature vectors read back exactly from the address | 887 / 887 |
+| coordinate errors | 0 of 21,288 |
 | cache | fresh |
 <!-- end generated -->
 
@@ -223,15 +223,15 @@ and the strong control, a plain lexical overlap with no geometry at all?
 <!-- generated: corpus-retrieval -->
 | scheme | hit@5 | precision@5 | queries with a hit |
 |---|---|---|---|
-| `lexical` | 28.3 % | 8.0 % | 17 / 60 |
-| `lexical_raw` | 28.3 % | 8.0 % | 17 / 60 |
-| `structural` | 26.7 % | 10.3 % | 16 / 60 |
-| `text` | 71.7 % | 35.7 % | 43 / 60 |
-| `digest` | 13.3 % | 2.7 % | 8 / 60 |
-| `shuffled` | 6.7 % | 1.7 % | 4 / 60 |
-| chance (closed form) | 12.6 % | — | — |
+| `lexical` | 33.3 % | 8.0 % | 20 / 60 |
+| `lexical_raw` | 31.7 % | 7.7 % | 19 / 60 |
+| `structural` | 35.0 % | 13.0 % | 21 / 60 |
+| `text` | 78.3 % | 37.0 % | 47 / 60 |
+| `digest` | 11.7 % | 2.7 % | 7 / 60 |
+| `shuffled` | 13.3 % | 3.0 % | 8 / 60 |
+| chance (closed form) | 12.5 % | — | — |
 
-60 queries over 871 sections.  A retrieved section counts as relevant when it shares a document with the query, or lies in a document linked to it — neither relation is in the feature map, so this is a prediction the scheme can fail.  The lexical address beats chance by 9/4×; plain text overlap still beats it, which is the same division of labour the Lean retrieval study measured.
+60 queries over 887 sections.  A retrieved section counts as relevant when it shares a document with the query, or lies in a document linked to it — neither relation is in the feature map, so this is a prediction the scheme can fail.  The lexical address beats chance by 133/50×; plain text overlap still beats it, which is the same division of labour the Lean retrieval study measured.
 <!-- end generated -->
 
 The answer is the same answer, and it is worth having reached it twice on two
@@ -254,12 +254,12 @@ one is a proof that nothing in the corpus is that close.
 | figure | value |
 |---|---|
 | queries | 40 |
-| pairs checked | 34,800 |
+| pairs checked | 35,440 |
 | violations of the bound | 0 |
 | bound holds | yes |
 | feature radius | 2 |
 | certified address ball (squared) | 676 |
-| mean certified shortlist | 9/40 |
+| mean certified shortlist | 11/40 |
 | mean shortlist as a fraction of the corpus | 0.0 % |
 | covering radius ρ | 4 |
 | scale | 9 |

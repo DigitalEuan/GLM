@@ -18,7 +18,7 @@
 
 ## Structure
 
-**<!--figure:suite-->3,631 tests across 88 of the 89 test files, 13,777 subtests, outside the document check<!--/figure-->**, zero failures at the last complete run. The per-file counts below are a `pytest --collect-only` run over this directory,
+**<!--figure:suite-->3,695 tests across 90 of the 91 test files, 14,131 subtests, outside the document check<!--/figure-->**, zero failures at the last complete run. The per-file counts below are a `pytest --collect-only` run over this directory,
 not an estimate; the file list and the totals are recomputed under *The test
 suite* in [`../../FIGURES.md`](../../FIGURES.md), and `test_figures.py` fails
 if this README drifts from them.
@@ -44,6 +44,8 @@ if this README drifts from them.
 | `test_coherence.py` | 58 | The NRCI shells, the coherence regimes and the TAX decomposition | — |
 | `test_physics_constants.py` | 12 | `Y`, `Q`, `TAX` and the constants table, as exact rationals | — |
 | `test_fusion.py` | 23 | The Ising fusion layer: adjoint action, eigenspaces, the two Miyamoto involutions, and `report fusion` | — |
+| `test_stack.py` | 37 | The faculties arranged as a stack, and the theorems of `Relay.lean` checked against the running mechanism: the interleave against the Lean file's own worked example, no invention, no duplicate, a quota inside the summed window and a missing faculty costing only its quota; a confident leader returned untouched and an abstaining one handing over; the two query strides disjoint and every query carrying a relative; the measured claim recomputed from its own tables — the relay ahead of the text control at `k = 5` on all three sets, never behind it at any window, carrying far more queries than it loses, and carrying more than the digest-and-reshuffle and name controls do; and the grid register, where the same relay over the 50 ARC puzzles is never behind its leading faculty, the cheap look pays for most of the verification gate and more than one faculty carries a puzzle | — |
+| `test_anonymous.py` | 27 | The anonymous register: the anonymiser (what it replaces, what it keeps, that it is a function of the text alone and idempotent, and that its placeholders are fresh against the corpus); the theorems of `Anonymous.lean` against the running code — the structural reading surviving a renaming, the identifier overlap destroyed by it, and the relay handing the register over; the audit of the shipped feature map, which counts type words inside identifiers too, so a renaming moves one of six coordinates on a measured minority of queries and never any other; and the measurement recomputed from the report's own tables — text and the identifier address book collapsing to chance, the structural address holding and leading every other faculty, and the gate firing on most of the register | — |
 | `test_state_migration.py` | 64 | The frame audit (the stored data is in the canonical frame; `hexcolour` addresses are MSB-first), the literal migration of 4,680 concepts and 4,014 edges, `verify_canonical` re-deriving every field from the masks, the concept store, and the negative result that graph distance and Hamming distance do not agree | — |
 | `test_reasoning_showcase.py` | 14 | The showcase transcript still reproduces | — |
 | `test_benchmarks.py` | 67 | The benchmark harness: the tier discipline, exactness, each suite against its baseline, that every suite reports its findings, the written `results/` tree, and the `report benchmarks` query with its column-3 script | v1.0.0 |

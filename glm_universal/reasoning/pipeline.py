@@ -264,6 +264,18 @@ REGISTRY: Tuple[Row, ...] = (
         ("reasoning/review_sweep.py",),
         "review sweep",
         (), lean_expected=False),
+    Row("stack-relay", "the faculties arranged as a stack: who carries whom "
+        "when one of them goes silent",
+        "STACK_RELAY_STUDY.md",
+        ("reasoning/stack.py", "reasoning/vision_stack.py"),
+        "relay",
+        ("Relay.lean",)),
+    Row("anonymous-register", "the register where a structural address is "
+        "the only faculty still reading the query",
+        "ANONYMOUS_REGISTER_STUDY.md",
+        ("reasoning/anonymous.py",),
+        "anonymous",
+        ("Anonymous.lean",)),
     Row("reverse-call-planner", "the problem-driven planner, in the sandbox "
         "and not promoted",
         "REVERSE_CALL_PLANNER_STUDY.md",

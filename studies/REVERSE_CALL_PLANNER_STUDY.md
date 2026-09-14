@@ -11,7 +11,7 @@ made safe enough to promote out of a sandbox?
 
 **Verdict.** It buys something on the declared task set and nothing at all on the project's own evaluation set, and it is therefore not promoted. The safety gate holds and the utility gate does not: the planner answers five declared tasks the plain runtime refuses, every answer it gives is checked by a second tool, and no principled refusal ever reaches it — but of the four evaluation refusals it is offered, it correctly refuses all four, so under the declared fallback rule it would add nothing to the shipped system today.
 
-**Deciding figure.** 10 of 15 declared tasks answered, all 10 independently checked, 5 of them beyond the plain runtime; and over 147 evaluation cases, 4 refusals offered to the planner and 0 answers gained.
+**Deciding figure.** 10 of 15 declared tasks answered, all 10 independently checked, 5 of them beyond the plain runtime; and over 149 evaluation cases, 4 refusals offered to the planner and 0 answers gained.
 
 **Recomputed by.** `glm_universal.sandbox.planner.planner_report`
 
@@ -21,7 +21,7 @@ made safe enough to promote out of a sandbox?
 
 ## 0a. The reading in one paragraph
 
-It buys something on the declared task set and nothing at all on the project's own evaluation set, and it is therefore not promoted. The safety gate holds and the utility gate does not: the planner answers five declared tasks the plain runtime refuses, every answer it gives is checked by a second tool, and no principled refusal ever reaches it — but of the four evaluation refusals it is offered, it correctly refuses all four, so under the declared fallback rule it would add nothing to the shipped system today. In figures: 10 of 15 declared tasks answered, all 10 independently checked, 5 of them beyond the plain runtime; and over 147 evaluation cases, 4 refusals offered to the planner and 0 answers gained.
+It buys something on the declared task set and nothing at all on the project's own evaluation set, and it is therefore not promoted. The safety gate holds and the utility gate does not: the planner answers five declared tasks the plain runtime refuses, every answer it gives is checked by a second tool, and no principled refusal ever reaches it — but of the four evaluation refusals it is offered, it correctly refuses all four, so under the declared fallback rule it would add nothing to the shipped system today. In figures: 10 of 15 declared tasks answered, all 10 independently checked, 5 of them beyond the plain runtime; and over 149 evaluation cases, 4 refusals offered to the planner and 0 answers gained.
 
 The same reading, recomputed rather than written:
 
@@ -174,8 +174,8 @@ argument.
 <!-- generated: plannersandbox-fallback -->
 | reading | value |
 |---|---|
-| evaluation cases | 147 |
-| the runtime answers | 133 |
+| evaluation cases | 149 |
+| the runtime answers | 135 |
 | the runtime refuses | 14 |
 | of those, classified principled | 10 |
 | the planner is consulted on | 4 |

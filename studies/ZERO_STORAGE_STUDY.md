@@ -49,13 +49,18 @@ anywhere in the instrument: the report is emitted through the runtime, whose
 traces are required to be byte‑identical between runs, so every quantity in
 the table is one a second run reproduces exactly.
 
-**The same question, asked of this repository.** Of the **7,316,334 bytes** the
-overlay keeps on disk, **7,296,569** are caches of things it can recompute —
-the two Lean address books from the Lean tree, the controller addresses from
-the register, the 98,280‑class type‑2 table from the lattice — each stored
-beside the digest of the inputs it came from, and only **19,765 bytes** are
-primary data the package was given. **99.7 %** of what looks like storage here
-is already generation with a cache in front of it.
+**The same question, asked of this repository.** Of the
+**<!--figure:repo-stored-bytes-->7,789,760<!--/figure--> bytes** the overlay
+keeps on disk, **<!--figure:repo-cache-bytes-->7,769,995<!--/figure-->** are
+caches of things it can recompute — the two Lean address books from the Lean
+tree, the controller addresses from the register, the 98,280‑class type‑2
+table from the lattice — each stored beside the digest of the inputs it came
+from, and only **<!--figure:repo-primary-bytes-->19,765<!--/figure--> bytes**
+are primary data the package was given.
+**<!--figure:repo-cache-share-->99.7 %<!--/figure-->** of what looks like
+storage here is already generation with a cache in front of it. Those four
+numbers are emitted rather than typed, so the ledger below cannot age while
+the tree grows.
 
 So the perspective does not need arguing for. What it needs is the discipline
 the rest of the project applies to everything else: *a generator is a claim,
@@ -238,6 +243,71 @@ existential, no search — decides exactly `Λ₂₄`.
 
 The v3 draft is kept for the record at
 `source_material/glm_zero_storage_substrate_v3.txt`.
+
+## 8. The ledger has two sides: what a table costs to keep
+
+A note, because the arithmetic above is easy to read one-sidedly. *Generate,
+don't store* is usually presented as a saving, and it is one — but the saving
+is a **data footprint**, and what pays for it is **work at the point of use**.
+Neither side is free, and the honest comparison charges both.
+
+**What generation costs.** One pass over 24 coordinates and one set lookup per
+membership decision, every time it is asked; the generator's code, which has to
+be written and kept correct; and, where the object is large and wanted often,
+the same arithmetic repeated. That is the side everyone remembers, and it is
+the reason a cache exists at all.
+
+**What the table costs, once it is all counted.** The bytes it occupies are
+only the first line of the bill, and they are counted several times over: once
+in the working tree, once in every clone, once in every release archive and
+once in every backup. Beneath them are the costs a byte count does not show —
+the time to load and index the table before the first answer; the digest it has
+to be stored beside if it is derived, and the check, every round, that the
+digest still holds; the rebuild when its inputs move; the code that reads it,
+which is code the generator would not have needed; and the one that is not a
+cost but a risk, a stale table believed because it looks like data. A stored
+table is not an object you pay for once. It is a standing obligation.
+
+**Both sides are measured here, in integers.** The storage side is §1: of the
+bytes the overlay keeps on disk, all but the primary
+<!--figure:repo-primary-bytes-->19,765<!--/figure--> are a cache of something
+it can recompute, and the substrate tables it does *not* keep would be
+9,449,445 bytes against the 24,648 that regenerate them. The keeping side is
+[`ITERATION_COST_STUDY.md`](ITERATION_COST_STUDY.md), which prices exactly the
+obligations listed above: rebuilding both address books from nothing decodes
+<!--figure:rebuild-decodes-from-nothing-->7,880<!--/figure--> vectors, and
+against the stored books it decodes
+<!--figure:rebuild-decodes-now-->0<!--/figure-->, because each answer is keyed
+on the feature vector it came from rather than on the whole tree; and the
+planner's report, which five generated blocks quote, is now taken once per
+change rather than <!--figure:planner-reports-per-check-->5<!--/figure--> times
+per check. Those are the numbers a table costs to keep in this repository, and
+they are counted, not estimated.
+
+**The rule that follows.** Store a derived object when the generator's cost per
+use, multiplied by the number of uses between two invalidations, is larger than
+the cost of holding the table *and* keeping it honest; generate otherwise. The
+two ends of the scale are both here. The Golay code is the clear generate case:
+12 generator rows regenerate 4.7 MB of minimal vectors by XOR closure, the
+object is large, the generator is short, and a membership decision never
+consults a table at all — so storing it would buy nothing and cost everything
+on the list above. The Lean address book is the clear cache case: decoding
+every address from nothing is thousands of lattice decodes, the tree changes
+by a file or two a round, and the reuse is worth having — so it is stored, and
+the price of storing it is paid explicitly, as a digest beside the table and a
+check that fails when the digest moves.
+
+**Two things this does not claim.** No wall-clock figure appears anywhere in
+this study, or in the cost study, by design: the instruments count work in
+integers — bytes, decodes, reports, passes — because an integer reproduces
+between runs and a timing does not, so "cheaper" here means *less work of a
+countable kind*, not *measured to be faster on this machine*. And the ledger is
+about derived objects only. Primary data — the
+<!--figure:repo-primary-bytes-->19,765<!--/figure--> bytes the package was
+given — has no generator by definition, and nothing in this section applies to
+it.
+
+---
 
 ## Reproducing
 

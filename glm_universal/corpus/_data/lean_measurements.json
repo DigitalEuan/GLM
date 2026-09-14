@@ -1,7 +1,614 @@
 {
+ "anonymous": {
+  "anonymous": {
+   "address": [
+    {
+     "hit_rate": {
+      "__fraction__": "71/813"
+     },
+     "hits": 71,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "44/271"
+     },
+     "hits": 132,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "57/271"
+     },
+     "hits": 171,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "227/813"
+     },
+     "hits": 227,
+     "k": 10
+    }
+   ],
+   "digest": [
+    {
+     "hit_rate": {
+      "__fraction__": "10/813"
+     },
+     "hits": 10,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "34/813"
+     },
+     "hits": 34,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "61/813"
+     },
+     "hits": 61,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "39/271"
+     },
+     "hits": 117,
+     "k": 10
+    }
+   ],
+   "lexical": [
+    {
+     "hit_rate": {
+      "__fraction__": "4/271"
+     },
+     "hits": 12,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "13/271"
+     },
+     "hits": 39,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "16/271"
+     },
+     "hits": 48,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "65/813"
+     },
+     "hits": 65,
+     "k": 10
+    }
+   ],
+   "name": [
+    {
+     "hit_rate": {
+      "__fraction__": "8/813"
+     },
+     "hits": 8,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "13/813"
+     },
+     "hits": 13,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "17/813"
+     },
+     "hits": 17,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "10/271"
+     },
+     "hits": 30,
+     "k": 10
+    }
+   ],
+   "random": [
+    {
+     "hit_rate": {
+      "__fraction__": "3/271"
+     },
+     "hits": 9,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "22/813"
+     },
+     "hits": 22,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "13/271"
+     },
+     "hits": 39,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "68/813"
+     },
+     "hits": 68,
+     "k": 10
+    }
+   ],
+   "text": [
+    {
+     "hit_rate": {
+      "__fraction__": "26/813"
+     },
+     "hits": 26,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "47/813"
+     },
+     "hits": 47,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "28/271"
+     },
+     "hits": 84,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "125/813"
+     },
+     "hits": 125,
+     "k": 10
+    }
+   ]
+  },
+  "chance_at_5": {
+   "__fraction__": "36142323095402617/610367891727554268"
+  },
+  "corpus": 3249,
+  "gate": {
+   "__fraction__": "1/10"
+  },
+  "invariant_queries": 780,
+  "k": 5,
+  "k_ladder": [
+   1,
+   3,
+   5,
+   10
+  ],
+  "kept_vocabulary": 39,
+  "moved_outside_the_type_vocabulary": 0,
+  "plain": {
+   "address": [
+    {
+     "hit_rate": {
+      "__fraction__": "107/813"
+     },
+     "hits": 107,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "185/813"
+     },
+     "hits": 185,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "232/813"
+     },
+     "hits": 232,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "305/813"
+     },
+     "hits": 305,
+     "k": 10
+    }
+   ],
+   "digest": [
+    {
+     "hit_rate": {
+      "__fraction__": "2/271"
+     },
+     "hits": 6,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "9/271"
+     },
+     "hits": 27,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "17/271"
+     },
+     "hits": 51,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "100/813"
+     },
+     "hits": 100,
+     "k": 10
+    }
+   ],
+   "lexical": [
+    {
+     "hit_rate": {
+      "__fraction__": "217/813"
+     },
+     "hits": 217,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "109/271"
+     },
+     "hits": 327,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "388/813"
+     },
+     "hits": 388,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "478/813"
+     },
+     "hits": 478,
+     "k": 10
+    }
+   ],
+   "name": [
+    {
+     "hit_rate": {
+      "__fraction__": "157/813"
+     },
+     "hits": 157,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "70/271"
+     },
+     "hits": 210,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "254/813"
+     },
+     "hits": 254,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "110/271"
+     },
+     "hits": 330,
+     "k": 10
+    }
+   ],
+   "random": [
+    {
+     "hit_rate": {
+      "__fraction__": "3/271"
+     },
+     "hits": 9,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "22/813"
+     },
+     "hits": 22,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "13/271"
+     },
+     "hits": 39,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "68/813"
+     },
+     "hits": 68,
+     "k": 10
+    }
+   ],
+   "text": [
+    {
+     "hit_rate": {
+      "__fraction__": "193/271"
+     },
+     "hits": 579,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "679/813"
+     },
+     "hits": 679,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "710/813"
+     },
+     "hits": 710,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "736/813"
+     },
+     "hits": 736,
+     "k": 10
+    }
+   ]
+  },
+  "queries": 813,
+  "relay_anonymous": {
+   "carried": [
+    "GLM.AlignmentPoints.gammaS_bounds",
+    "GLM.Calibration.NA",
+    "GLM.Calibration.workEnergy",
+    "GLM.Calibration.cellLength_eq",
+    "GLM.Calibration.dLength",
+    "GLM.Calibration.Y_bounds",
+    "GLM.Calibration.octadTax_floor_three",
+    "GLM.Conjugate.Row",
+    "GLM.Info.dsState_mem_Ico",
+    "GLM.Extraspecial.sing",
+    "GLM.Feedback.quant_err_abs_le",
+    "GLM.Foundations.xor_universal_kernel",
+    "GLM.Gen2.half_speed_not_integral",
+    "GLM.Gen2.matsuo_3C",
+    "GLM.Gen3.pair_census",
+    "GLM.Harmony.fifth_never_closes",
+    "GLM.Heisenberg.lie_apply",
+    "GLM.Heisenberg.no_finite_dimensional_model",
+    "GLM.Heisenberg.Yfield_vac",
+    "GLM.Heisenberg.borcherds_commutator",
+    "GLM.LogBucket.le_iff_num_le_neg",
+    "GLM.Packing.radius_of_eight",
+    "GLM.ReasoningLoop.loop_reaches_zero_gap",
+    "GLM.Golay24.descend_within_four",
+    "GLM.SearchLoop.ambiguity_census",
+    "GLM.Semantics.Op.index",
+    "GLM.Shell.sState_norm_le",
+    "GLM.Info.substrate_perceive",
+    "GLM.Info.resolution_integer",
+    "GLM.Info.ds_zero_run_length_lt",
+    "GLM.Vagueness.all_declined_of_referred",
+    "GLM.ZeroStorageV5.quad_step_bound",
+    "GLM.Address.readback_unique",
+    "GLM.Admission.ledger_refusals",
+    "GLM.Calibration.molarPlanck",
+    "GLM.Calibration.cellDuration",
+    "GLM.Calibration.tick_bounds",
+    "GLM.Calibration.dAction",
+    "GLM.Calibration.signalSpeed",
+    "GLM.Calibration.refIndex_le_of_tax_le",
+    "GLM.Calibration.minimalVectorTax_values",
+    "GLM.Conjugate.table",
+    "GLM.Y_lt_half",
+    "GLM.Info.substrateModel_perceive",
+    "GLM.Foundations.shift_sign_comm",
+    "GLM.Gen3.class_census",
+    "GLM.Gen3.odd_constants_unique",
+    "GLM.Harmony.major_third_not_tempered",
+    "GLM.Packing.ball_card_eq",
+    "GLM.QuestionNested.tensorModifier_frame",
+    "GLM.Info.lossCount_rational",
+    "GLM.Info.glmStack_layer_two",
+    "GLM.Info.dsWindow_gt",
+    "GLM.tax_conservation_fails_at_integer_layer",
+    "GLM.Landscape.onePos"
+   ],
+   "fired": 538,
+   "leader": [
+    {
+     "hit_rate": {
+      "__fraction__": "26/813"
+     },
+     "hits": 26,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "47/813"
+     },
+     "hits": 47,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "28/271"
+     },
+     "hits": 84,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "125/813"
+     },
+     "hits": 125,
+     "k": 10
+    }
+   ],
+   "lost": [
+    "GLM.Gen3.m24_orbit_stabiliser",
+    "GLM.QuestionNested.ListCut",
+    "GLM.QuestionNested.compareCut_mark_and_second_rank",
+    "GLM.Retrieval.address_dist_le",
+    "GLM.TieBreak.dist_eq_of_mem_nearest",
+    "GLM.Feedback.efSum_id",
+    "GLM.Feedback.halfFeedback_dead_zone",
+    "GLM.Niemeier.bag_rank_sum",
+    "GLM.Question.skipMany",
+    "GLM.QuestionNested.DegreeOperator.at?",
+    "GLM.ReadQuantum.readCost_le_inv"
+   ],
+   "queries": 813,
+   "relay": [
+    {
+     "hit_rate": {
+      "__fraction__": "26/813"
+     },
+     "hits": 26,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "56/813"
+     },
+     "hits": 56,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "128/813"
+     },
+     "hits": 128,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "59/271"
+     },
+     "hits": 177,
+     "k": 10
+    }
+   ]
+  },
+  "relay_plain": {
+   "carried": [
+    "GLM.Calibration.NA",
+    "GLM.Gen3.pair_census",
+    "GLM.Packing.radius_of_eight",
+    "GLM.Admission.ledger_refusals",
+    "GLM.Calibration.molarPlanck",
+    "GLM.Gen3.class_census"
+   ],
+   "fired": 24,
+   "leader": [
+    {
+     "hit_rate": {
+      "__fraction__": "193/271"
+     },
+     "hits": 579,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "679/813"
+     },
+     "hits": 679,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "710/813"
+     },
+     "hits": 710,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "736/813"
+     },
+     "hits": 736,
+     "k": 10
+    }
+   ],
+   "lost": [
+    "GLM.Gen3.m24_orbit_stabiliser"
+   ],
+   "queries": 813,
+   "relay": [
+    {
+     "hit_rate": {
+      "__fraction__": "193/271"
+     },
+     "hits": 579,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "680/813"
+     },
+     "hits": 680,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "715/813"
+     },
+     "hits": 715,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "742/813"
+     },
+     "hits": 742,
+     "k": 10
+    }
+   ]
+  },
+  "verdict": {
+   "address_holds": true,
+   "address_is_above_twice_chance": true,
+   "address_is_the_clear_leader": true,
+   "address_stays_above_the_control": true,
+   "gate_hands_over": true,
+   "lexical_collapses_too": true,
+   "only_the_type_vocabulary_moves": true,
+   "placeholders_are_fresh": true,
+   "relay_beats_text_in_the_register": true,
+   "text_collapses_without_the_names": true,
+   "text_is_within_twice_chance": true,
+   "text_leads_when_the_names_are_there": true
+  }
+ },
  "available": true,
  "classes": {
-  "classes": 249,
+  "classes": 252,
   "largest": [
    [
     "GLM.Calibration.dEnergy",
@@ -31,15 +638,6 @@
     "GLM.Lightspeed.molarPlanck_pos"
    ],
    [
-    "GLM.Gen2.Exps",
-    "GLM.Gen2.mass",
-    "GLM.Gen2.speed",
-    "GLM.Golay24.Word",
-    "GLM.GolayHex.w",
-    "GLM.Info.Carrier24",
-    "GLM.Info.tea"
-   ],
-   [
     "GLM.Admission.ledger_refusals",
     "GLM.Completion.ledger_coverage",
     "GLM.Gen3.dimensionless_counts",
@@ -62,32 +660,40 @@
     "GLM.Lightspeed.cellDuration_bounds",
     "GLM.Lightspeed.tick_bounds",
     "GLM.Lightspeed.workEnergy_bounds"
+   ],
+   [
+    "GLM.DimensionCarrier.mc4Dim",
+    "GLM.Foundations.mc4Dim",
+    "GLM.Gen2.energy",
+    "GLM.GolayHex.w2",
+    "GLM.Heisenberg.V",
+    "GLM.Semantics.energyDim"
    ]
   ],
   "profile": {
    "16": 1,
-   "2": 193,
+   "2": 196,
    "3": 29,
    "4": 15,
    "5": 4,
-   "6": 5,
-   "7": 2
+   "6": 6,
+   "7": 1
   },
   "scheme": "feature"
  },
  "corpus": {
   "by_kind": {
-   "abbrev": 43,
-   "def": 826,
-   "example": 2,
-   "inductive": 21,
-   "instance": 26,
+   "abbrev": 44,
+   "def": 842,
+   "example": 10,
+   "inductive": 22,
+   "instance": 27,
    "lemma": 112,
-   "structure": 40,
-   "theorem": 2117
+   "structure": 41,
+   "theorem": 2151
   },
-  "declarations": 3187,
-  "files": 111,
+  "declarations": 3249,
+  "files": 113,
   "largest_file": "Gen3.lean",
   "largest_file_declarations": 98
  },
@@ -95,99 +701,99 @@
   "available": true,
   "bound_respected": true,
   "covering_radius": 4,
-  "declarations": 3187,
+  "declarations": 3249,
   "half_step": {
    "__fraction__": "9/2"
   },
   "lossless": true,
-  "moved_by_the_decoder": 3187,
+  "moved_by_the_decoder": 3249,
   "scale": 9,
   "scale_is_at_least_twice_radius": true,
   "worst_declaration": "GLM.DeepHoleLadder.Reading.cumulative_ge_right",
   "worst_observed_residual": 3
  },
- "lean_digest": "1367e338d002c3e1bc2d77264109fee563c1cdc85af81a0af51901aa7d021d94",
+ "lean_digest": "367f64cf6a3dd6847fbc656f7e84f0e839950b39860b23a337f81ebe9410ded5",
  "retrieval": {
   "chance": [
    {
     "k": 1,
     "rate": {
-     "__fraction__": "8497/678618"
+     "__fraction__": "1151/94656"
     }
    },
    {
     "k": 3,
     "rate": {
-     "__fraction__": "2651112032/71686377945"
+     "__fraction__": "13940990167/387975665728"
     }
    },
    {
     "k": 5,
     "rate": {
-     "__fraction__": "597514763902741/9844902669269304"
+     "__fraction__": "18071713846084621/306310085885414688"
     }
    },
    {
     "k": 10,
     "rate": {
-     "__fraction__": "52059729591067878244930240010/445457259305438515086854769867"
+     "__fraction__": "17911010322740725874678072411/157487693542533240684811708464"
     }
    }
   ],
-  "corpus": 3187,
+  "corpus": 3249,
   "declaration_rows": [
    {
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "46/213"
+       "__fraction__": "25/102"
       },
-      "hits": 46,
+      "hits": 50,
       "k": 1,
       "mrr": {
-       "__fraction__": "46/213"
+       "__fraction__": "25/102"
       },
       "precision": {
-       "__fraction__": "46/213"
+       "__fraction__": "25/102"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "27/71"
+       "__fraction__": "22/51"
       },
-      "hits": 81,
+      "hits": 88,
       "k": 3,
       "mrr": {
-       "__fraction__": "121/426"
+       "__fraction__": "50/153"
       },
       "precision": {
-       "__fraction__": "110/639"
+       "__fraction__": "13/68"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "98/213"
+       "__fraction__": "103/204"
       },
-      "hits": 98,
+      "hits": 103,
       "k": 5,
       "mrr": {
-       "__fraction__": "257/852"
+       "__fraction__": "4207/12240"
       },
       "precision": {
-       "__fraction__": "31/213"
+       "__fraction__": "77/510"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "113/213"
+       "__fraction__": "43/68"
       },
-      "hits": 113,
+      "hits": 129,
       "k": 10,
       "mrr": {
-       "__fraction__": "166841/536760"
+       "__fraction__": "8863/24480"
       },
       "precision": {
-       "__fraction__": "107/1065"
+       "__fraction__": "43/408"
       }
      }
     ],
@@ -197,54 +803,54 @@
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "50/213"
+       "__fraction__": "47/204"
       },
-      "hits": 50,
+      "hits": 47,
       "k": 1,
       "mrr": {
-       "__fraction__": "50/213"
+       "__fraction__": "47/204"
       },
       "precision": {
-       "__fraction__": "50/213"
+       "__fraction__": "47/204"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "80/213"
+       "__fraction__": "15/34"
       },
-      "hits": 80,
+      "hits": 90,
       "k": 3,
       "mrr": {
-       "__fraction__": "125/426"
+       "__fraction__": "197/612"
       },
       "precision": {
-       "__fraction__": "109/639"
+       "__fraction__": "29/153"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "94/213"
+       "__fraction__": "107/204"
       },
-      "hits": 94,
+      "hits": 107,
       "k": 5,
       "mrr": {
-       "__fraction__": "263/852"
+       "__fraction__": "49/144"
       },
       "precision": {
-       "__fraction__": "152/1065"
+       "__fraction__": "77/510"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "115/213"
+       "__fraction__": "65/102"
       },
-      "hits": 115,
+      "hits": 130,
       "k": 10,
       "mrr": {
-       "__fraction__": "43171/134190"
+       "__fraction__": "182621/514080"
       },
       "precision": {
-       "__fraction__": "221/2130"
+       "__fraction__": "13/120"
       }
      }
     ],
@@ -254,54 +860,54 @@
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "94/213"
+       "__fraction__": "41/102"
       },
-      "hits": 94,
+      "hits": 82,
       "k": 1,
       "mrr": {
-       "__fraction__": "94/213"
+       "__fraction__": "41/102"
       },
       "precision": {
-       "__fraction__": "94/213"
+       "__fraction__": "41/102"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "122/213"
+       "__fraction__": "9/17"
       },
-      "hits": 122,
+      "hits": 108,
       "k": 3,
       "mrr": {
-       "__fraction__": "1/2"
+       "__fraction__": "559/1224"
       },
       "precision": {
-       "__fraction__": "1/3"
+       "__fraction__": "31/102"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "140/213"
+       "__fraction__": "29/51"
       },
-      "hits": 140,
+      "hits": 116,
       "k": 5,
       "mrr": {
-       "__fraction__": "369/710"
+       "__fraction__": "2849/6120"
       },
       "precision": {
-       "__fraction__": "283/1065"
+       "__fraction__": "41/170"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "52/71"
+       "__fraction__": "145/204"
       },
-      "hits": 156,
+      "hits": 145,
       "k": 10,
       "mrr": {
-       "__fraction__": "6317/11928"
+       "__fraction__": "1223/2520"
       },
       "precision": {
-       "__fraction__": "197/1065"
+       "__fraction__": "63/340"
       }
      }
     ],
@@ -311,54 +917,54 @@
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "155/213"
+       "__fraction__": "47/68"
       },
-      "hits": 155,
+      "hits": 141,
       "k": 1,
       "mrr": {
-       "__fraction__": "155/213"
+       "__fraction__": "47/68"
       },
       "precision": {
-       "__fraction__": "155/213"
+       "__fraction__": "47/68"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "59/71"
+       "__fraction__": "169/204"
       },
-      "hits": 177,
+      "hits": 169,
       "k": 3,
       "mrr": {
-       "__fraction__": "985/1278"
+       "__fraction__": "307/408"
       },
       "precision": {
-       "__fraction__": "415/639"
+       "__fraction__": "11/17"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "61/71"
+       "__fraction__": "59/68"
       },
-      "hits": 183,
+      "hits": 177,
       "k": 5,
       "mrr": {
-       "__fraction__": "9931/12780"
+       "__fraction__": "3107/4080"
       },
       "precision": {
-       "__fraction__": "41/71"
+       "__fraction__": "59/102"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "190/213"
+       "__fraction__": "46/51"
       },
-      "hits": 190,
+      "hits": 184,
       "k": 10,
       "mrr": {
-       "__fraction__": "209807/268380"
+       "__fraction__": "65647/85680"
       },
       "precision": {
-       "__fraction__": "493/1065"
+       "__fraction__": "191/408"
       }
      }
     ],
@@ -368,54 +974,54 @@
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "14/71"
+       "__fraction__": "3/17"
       },
-      "hits": 42,
+      "hits": 36,
       "k": 1,
       "mrr": {
-       "__fraction__": "14/71"
+       "__fraction__": "3/17"
       },
       "precision": {
-       "__fraction__": "14/71"
+       "__fraction__": "3/17"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "19/71"
+       "__fraction__": "23/102"
       },
-      "hits": 57,
+      "hits": 46,
       "k": 3,
       "mrr": {
-       "__fraction__": "143/639"
+       "__fraction__": "241/1224"
       },
       "precision": {
-       "__fraction__": "94/639"
+       "__fraction__": "7/51"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "24/71"
+       "__fraction__": "29/102"
       },
-      "hits": 72,
+      "hits": 58,
       "k": 5,
       "mrr": {
-       "__fraction__": "307/1278"
+       "__fraction__": "1289/6120"
       },
       "precision": {
-       "__fraction__": "53/355"
+       "__fraction__": "139/1020"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "86/213"
+       "__fraction__": "13/34"
       },
-      "hits": 86,
+      "hits": 78,
       "k": 10,
       "mrr": {
-       "__fraction__": "133421/536760"
+       "__fraction__": "9551/42840"
       },
       "precision": {
-       "__fraction__": "51/355"
+       "__fraction__": "87/680"
       }
      }
     ],
@@ -425,54 +1031,54 @@
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "0/1"
+       "__fraction__": "1/204"
       },
-      "hits": 0,
+      "hits": 1,
       "k": 1,
       "mrr": {
-       "__fraction__": "0/1"
+       "__fraction__": "1/204"
       },
       "precision": {
-       "__fraction__": "0/1"
+       "__fraction__": "1/204"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "7/213"
+       "__fraction__": "1/34"
       },
-      "hits": 7,
+      "hits": 6,
       "k": 3,
       "mrr": {
-       "__fraction__": "1/71"
+       "__fraction__": "19/1224"
       },
       "precision": {
-       "__fraction__": "7/639"
+       "__fraction__": "1/102"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "10/213"
+       "__fraction__": "5/102"
       },
       "hits": 10,
       "k": 5,
       "mrr": {
-       "__fraction__": "37/2130"
+       "__fraction__": "247/12240"
       },
       "precision": {
-       "__fraction__": "2/213"
+       "__fraction__": "1/102"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "8/71"
+       "__fraction__": "5/51"
       },
-      "hits": 24,
+      "hits": 20,
       "k": 10,
       "mrr": {
-       "__fraction__": "905/35784"
+       "__fraction__": "7/272"
       },
       "precision": {
-       "__fraction__": "5/426"
+       "__fraction__": "1/102"
       }
      }
     ],
@@ -482,54 +1088,54 @@
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "5/213"
+       "__fraction__": "1/51"
       },
-      "hits": 5,
+      "hits": 4,
       "k": 1,
       "mrr": {
-       "__fraction__": "5/213"
+       "__fraction__": "1/51"
       },
       "precision": {
-       "__fraction__": "5/213"
+       "__fraction__": "1/51"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "8/213"
+       "__fraction__": "3/68"
       },
-      "hits": 8,
+      "hits": 9,
       "k": 3,
       "mrr": {
-       "__fraction__": "19/639"
+       "__fraction__": "1/34"
       },
       "precision": {
-       "__fraction__": "8/639"
+       "__fraction__": "11/612"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "4/71"
+       "__fraction__": "7/102"
       },
-      "hits": 12,
+      "hits": 14,
       "k": 5,
       "mrr": {
-       "__fraction__": "437/12780"
+       "__fraction__": "143/4080"
       },
       "precision": {
-       "__fraction__": "4/355"
+       "__fraction__": "4/255"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "25/213"
+       "__fraction__": "23/204"
       },
-      "hits": 25,
+      "hits": 23,
       "k": 10,
       "mrr": {
-       "__fraction__": "3839/89460"
+       "__fraction__": "529/12852"
       },
       "precision": {
-       "__fraction__": "9/710"
+       "__fraction__": "13/1020"
       }
      }
     ],
@@ -539,54 +1145,54 @@
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "1/213"
+       "__fraction__": "1/102"
       },
-      "hits": 1,
+      "hits": 2,
       "k": 1,
       "mrr": {
-       "__fraction__": "1/213"
+       "__fraction__": "1/102"
       },
       "precision": {
-       "__fraction__": "1/213"
+       "__fraction__": "1/102"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "5/213"
+       "__fraction__": "5/204"
       },
       "hits": 5,
       "k": 3,
       "mrr": {
-       "__fraction__": "8/639"
+       "__fraction__": "5/306"
       },
       "precision": {
-       "__fraction__": "5/639"
+       "__fraction__": "5/612"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "4/71"
+       "__fraction__": "5/102"
       },
-      "hits": 12,
+      "hits": 10,
       "k": 5,
       "mrr": {
-       "__fraction__": "259/12780"
+       "__fraction__": "1/45"
       },
       "precision": {
-       "__fraction__": "4/355"
+       "__fraction__": "1/102"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "19/213"
+       "__fraction__": "1/12"
       },
-      "hits": 19,
+      "hits": 17,
       "k": 10,
       "mrr": {
-       "__fraction__": "367/14910"
+       "__fraction__": "389/14688"
       },
       "precision": {
-       "__fraction__": "19/2130"
+       "__fraction__": "19/2040"
       }
      }
     ],
@@ -594,60 +1200,60 @@
    }
   ],
   "goal_features_reproduced": 0,
-  "goal_queries": 103,
+  "goal_queries": 102,
   "goal_rows": [
    {
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "10/103"
+       "__fraction__": "1/6"
       },
-      "hits": 10,
+      "hits": 17,
       "k": 1,
       "mrr": {
-       "__fraction__": "10/103"
+       "__fraction__": "1/6"
       },
       "precision": {
-       "__fraction__": "10/103"
+       "__fraction__": "1/6"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "29/103"
+       "__fraction__": "29/102"
       },
       "hits": 29,
       "k": 3,
       "mrr": {
-       "__fraction__": "18/103"
+       "__fraction__": "15/68"
       },
       "precision": {
-       "__fraction__": "12/103"
+       "__fraction__": "13/102"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "32/103"
+       "__fraction__": "6/17"
       },
-      "hits": 32,
+      "hits": 36,
       "k": 5,
       "mrr": {
-       "__fraction__": "187/1030"
+       "__fraction__": "481/2040"
       },
       "precision": {
-       "__fraction__": "10/103"
+       "__fraction__": "53/510"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "41/103"
+       "__fraction__": "7/17"
       },
-      "hits": 41,
+      "hits": 42,
       "k": 10,
       "mrr": {
-       "__fraction__": "50231/259560"
+       "__fraction__": "1489/6120"
       },
       "precision": {
-       "__fraction__": "37/515"
+       "__fraction__": "77/1020"
       }
      }
     ],
@@ -657,54 +1263,54 @@
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "25/103"
+       "__fraction__": "29/102"
       },
-      "hits": 25,
+      "hits": 29,
       "k": 1,
       "mrr": {
-       "__fraction__": "25/103"
+       "__fraction__": "29/102"
       },
       "precision": {
-       "__fraction__": "25/103"
+       "__fraction__": "29/102"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "39/103"
+       "__fraction__": "41/102"
       },
-      "hits": 39,
+      "hits": 41,
       "k": 3,
       "mrr": {
-       "__fraction__": "185/618"
+       "__fraction__": "205/612"
       },
       "precision": {
-       "__fraction__": "61/309"
+       "__fraction__": "11/51"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "48/103"
+       "__fraction__": "25/51"
       },
-      "hits": 48,
+      "hits": 50,
       "k": 5,
       "mrr": {
-       "__fraction__": "494/1545"
+       "__fraction__": "2173/6120"
       },
       "precision": {
-       "__fraction__": "87/515"
+       "__fraction__": "31/170"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "60/103"
+       "__fraction__": "31/51"
       },
-      "hits": 60,
+      "hits": 62,
       "k": 10,
       "mrr": {
-       "__fraction__": "87047/259560"
+       "__fraction__": "11947/32130"
       },
       "precision": {
-       "__fraction__": "64/515"
+       "__fraction__": "37/255"
       }
      }
     ],
@@ -714,54 +1320,54 @@
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "68/103"
+       "__fraction__": "23/34"
       },
-      "hits": 68,
+      "hits": 69,
       "k": 1,
       "mrr": {
-       "__fraction__": "68/103"
+       "__fraction__": "23/34"
       },
       "precision": {
-       "__fraction__": "68/103"
+       "__fraction__": "23/34"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "82/103"
+       "__fraction__": "41/51"
       },
       "hits": 82,
       "k": 3,
       "mrr": {
-       "__fraction__": "74/103"
+       "__fraction__": "112/153"
       },
       "precision": {
-       "__fraction__": "63/103"
+       "__fraction__": "11/17"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "89/103"
+       "__fraction__": "44/51"
       },
-      "hits": 89,
+      "hits": 88,
       "k": 5,
       "mrr": {
-       "__fraction__": "1513/2060"
+       "__fraction__": "1141/1530"
       },
       "precision": {
-       "__fraction__": "289/515"
+       "__fraction__": "307/510"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "91/103"
+       "__fraction__": "31/34"
       },
-      "hits": 91,
+      "hits": 93,
       "k": 10,
       "mrr": {
-       "__fraction__": "13667/18540"
+       "__fraction__": "16109/21420"
       },
       "precision": {
-       "__fraction__": "93/206"
+       "__fraction__": "173/340"
       }
      }
     ],
@@ -771,54 +1377,54 @@
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "22/103"
+       "__fraction__": "10/51"
       },
-      "hits": 22,
+      "hits": 20,
       "k": 1,
       "mrr": {
-       "__fraction__": "22/103"
+       "__fraction__": "10/51"
       },
       "precision": {
-       "__fraction__": "22/103"
+       "__fraction__": "10/51"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "29/103"
+       "__fraction__": "13/51"
       },
-      "hits": 29,
+      "hits": 26,
       "k": 3,
       "mrr": {
-       "__fraction__": "149/618"
+       "__fraction__": "15/68"
       },
       "precision": {
-       "__fraction__": "55/309"
+       "__fraction__": "25/153"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "34/103"
+       "__fraction__": "16/51"
       },
-      "hits": 34,
+      "hits": 32,
       "k": 5,
       "mrr": {
-       "__fraction__": "1559/6180"
+       "__fraction__": "479/2040"
       },
       "precision": {
-       "__fraction__": "16/103"
+       "__fraction__": "29/170"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "44/103"
+       "__fraction__": "22/51"
       },
       "hits": 44,
       "k": 10,
       "mrr": {
-       "__fraction__": "13775/51912"
+       "__fraction__": "12811/51408"
       },
       "precision": {
-       "__fraction__": "27/206"
+       "__fraction__": "27/170"
       }
      }
     ],
@@ -841,41 +1447,41 @@
      },
      {
       "hit_rate": {
-       "__fraction__": "3/103"
+       "__fraction__": "1/51"
       },
-      "hits": 3,
+      "hits": 2,
       "k": 3,
       "mrr": {
-       "__fraction__": "4/309"
+       "__fraction__": "1/102"
       },
       "precision": {
-       "__fraction__": "1/103"
+       "__fraction__": "1/153"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "6/103"
+       "__fraction__": "1/17"
       },
       "hits": 6,
       "k": 5,
       "mrr": {
-       "__fraction__": "119/6180"
+       "__fraction__": "3/170"
       },
       "precision": {
-       "__fraction__": "6/515"
+       "__fraction__": "7/510"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "9/103"
+       "__fraction__": "13/102"
       },
-      "hits": 9,
+      "hits": 13,
       "k": 10,
       "mrr": {
-       "__fraction__": "67/2884"
+       "__fraction__": "123/4760"
       },
       "precision": {
-       "__fraction__": "1/103"
+       "__fraction__": "7/510"
       }
      }
     ],
@@ -885,54 +1491,54 @@
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "1/103"
+       "__fraction__": "1/102"
       },
       "hits": 1,
       "k": 1,
       "mrr": {
-       "__fraction__": "1/103"
+       "__fraction__": "1/102"
       },
       "precision": {
-       "__fraction__": "1/103"
+       "__fraction__": "1/102"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "3/103"
+       "__fraction__": "1/34"
       },
       "hits": 3,
       "k": 3,
       "mrr": {
-       "__fraction__": "11/618"
+       "__fraction__": "11/612"
       },
       "precision": {
-       "__fraction__": "1/103"
+       "__fraction__": "1/102"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "7/103"
+       "__fraction__": "5/102"
       },
-      "hits": 7,
+      "hits": 5,
       "k": 5,
       "mrr": {
-       "__fraction__": "167/6180"
+       "__fraction__": "7/306"
       },
       "precision": {
-       "__fraction__": "7/515"
+       "__fraction__": "1/102"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "11/103"
+       "__fraction__": "3/34"
       },
-      "hits": 11,
+      "hits": 9,
       "k": 10,
       "mrr": {
-       "__fraction__": "929/28840"
+       "__fraction__": "113/4080"
       },
       "precision": {
-       "__fraction__": "11/1030"
+       "__fraction__": "1/102"
       }
      }
     ],
@@ -945,15 +1551,15 @@
    "covering_radius": 4,
    "feature_radius": 2,
    "mean_feature_close": {
-    "__fraction__": "41/3"
+    "__fraction__": "880/51"
    },
    "mean_shortlist": {
-    "__fraction__": "1199/17"
+    "__fraction__": "3874/51"
    },
    "mean_shortlist_fraction": {
-    "__fraction__": "1199/54179"
+    "__fraction__": "3874/165699"
    },
-   "pairs_checked": 162486,
+   "pairs_checked": 165648,
    "queries": 51,
    "scale": 9,
    "violations": 0,
@@ -962,75 +1568,75 @@
   "hybrid": {
    "any_shortlist_beats_text": false,
    "k": 5,
-   "queries": 213,
+   "queries": 204,
    "rows": [
     {
      "fraction_of_corpus": {
-      "__fraction__": "50/3187"
+      "__fraction__": "50/3249"
      },
      "hit_rate": {
-      "__fraction__": "125/213"
+      "__fraction__": "137/204"
      },
      "precision": {
-      "__fraction__": "271/1065"
+      "__fraction__": "97/340"
      },
      "shortlist": 50
     },
     {
      "fraction_of_corpus": {
-      "__fraction__": "100/3187"
+      "__fraction__": "100/3249"
      },
      "hit_rate": {
-      "__fraction__": "146/213"
+      "__fraction__": "73/102"
      },
      "precision": {
-      "__fraction__": "108/355"
+      "__fraction__": "167/510"
      },
      "shortlist": 100
     },
     {
      "fraction_of_corpus": {
-      "__fraction__": "200/3187"
+      "__fraction__": "200/3249"
      },
      "hit_rate": {
-      "__fraction__": "160/213"
+      "__fraction__": "157/204"
      },
      "precision": {
-      "__fraction__": "126/355"
+      "__fraction__": "193/510"
      },
      "shortlist": 200
     },
     {
      "fraction_of_corpus": {
-      "__fraction__": "400/3187"
+      "__fraction__": "400/3249"
      },
      "hit_rate": {
-      "__fraction__": "170/213"
+      "__fraction__": "40/51"
      },
      "precision": {
-      "__fraction__": "448/1065"
+      "__fraction__": "431/1020"
      },
      "shortlist": 400
     },
     {
      "fraction_of_corpus": {
-      "__fraction__": "800/3187"
+      "__fraction__": "800/3249"
      },
      "hit_rate": {
-      "__fraction__": "178/213"
+      "__fraction__": "57/68"
      },
      "precision": {
-      "__fraction__": "508/1065"
+      "__fraction__": "81/170"
      },
      "shortlist": 800
     }
    ],
    "text_alone": {
     "hit_rate": {
-     "__fraction__": "61/71"
+     "__fraction__": "59/68"
     },
     "precision": {
-     "__fraction__": "41/71"
+     "__fraction__": "59/102"
     }
    }
   },
@@ -1042,11 +1648,11 @@
    10
   ],
   "mean_relatives": {
-   "__fraction__": "8497/213"
+   "__fraction__": "8057/204"
   },
-  "queries": 213,
+  "queries": 204,
   "times_chance": {
-   "__fraction__": "4529579631870384/597514763902741"
+   "__fraction__": "154656562971557416/18071713846084621"
   },
   "verdict": {
    "address_beats_chance": true,
@@ -1064,10 +1670,10 @@
   }
  },
  "round_trip": {
-  "checked": 3187,
+  "checked": 3249,
   "coordinate_errors": 0,
-  "coordinates_checked": 76488,
-  "exact": 3187,
+  "coordinates_checked": 77976,
+  "exact": 3249,
   "exact_rate": {
    "__fraction__": "1/1"
   },
@@ -1161,13 +1767,13 @@
  "separation": {
   "feature": {
    "injectivity": {
-    "collision_classes": 249,
-    "declarations": 3187,
-    "declarations_conflated": 613,
-    "distinct_addresses": 2823,
-    "distinct_feature_vectors": 2823,
+    "collision_classes": 252,
+    "declarations": 3249,
+    "declarations_conflated": 618,
+    "distinct_addresses": 2883,
+    "distinct_feature_vectors": 2883,
     "distinct_rate": {
-     "__fraction__": "2823/3187"
+     "__fraction__": "961/1083"
     },
     "injective": false,
     "largest_class": [
@@ -1192,46 +1798,46 @@
     "quantisation_adds_no_conflation": true
    },
    "neighbours": {
-    "declarations": 3187,
+    "declarations": 3249,
     "linked_chance": {
-     "__fraction__": "9746/5076891"
+     "__fraction__": "9997/5276376"
     },
-    "linked_nearest": 116,
+    "linked_nearest": 117,
     "linked_rate": {
-     "__fraction__": "116/3187"
+     "__fraction__": "13/361"
     },
     "mean_tie_size": {
-     "__fraction__": "5342/3187"
+     "__fraction__": "1801/1083"
     },
     "same_file_chance": {
-     "__fraction__": "59654/5076891"
+     "__fraction__": "1/87"
     },
-    "same_file_nearest": 624,
+    "same_file_nearest": 643,
     "same_file_rate": {
-     "__fraction__": "624/3187"
+     "__fraction__": "643/3249"
     }
    },
    "pairs": {
     "cross_file_mean_squared_distance": {
-     "__fraction__": "33463383248/5017237"
+     "__fraction__": "2184261181/325983"
     },
-    "cross_file_pairs": 5017237,
+    "cross_file_pairs": 5215728,
     "ratio": {
-     "__fraction__": "108327981876631/124764041517262"
+     "__fraction__": "1895634274/2184261181"
     },
     "same_file_mean_squared_distance": {
-     "__fraction__": "172729304/29827"
+     "__fraction__": "44084518/7581"
     },
-    "same_file_pairs": 59654
+    "same_file_pairs": 60648
    }
   },
   "hash_control": {
    "injectivity": {
     "collision_classes": 0,
-    "declarations": 3187,
+    "declarations": 3249,
     "declarations_conflated": 0,
-    "distinct_addresses": 3187,
-    "distinct_feature_vectors": 2823,
+    "distinct_addresses": 3249,
+    "distinct_feature_vectors": 2883,
     "distinct_rate": {
      "__fraction__": "1/1"
     },
@@ -1243,104 +1849,1143 @@
     "quantisation_adds_no_conflation": false
    },
    "neighbours": {
-    "declarations": 3187,
+    "declarations": 3249,
     "linked_chance": {
-     "__fraction__": "9746/5076891"
+     "__fraction__": "9997/5276376"
     },
     "linked_nearest": 6,
     "linked_rate": {
-     "__fraction__": "6/3187"
+     "__fraction__": "2/1083"
     },
     "mean_tie_size": {
-     "__fraction__": "3197/3187"
+     "__fraction__": "1087/1083"
     },
     "same_file_chance": {
-     "__fraction__": "59654/5076891"
+     "__fraction__": "1/87"
     },
-    "same_file_nearest": 33,
+    "same_file_nearest": 32,
     "same_file_rate": {
-     "__fraction__": "33/3187"
+     "__fraction__": "32/3249"
     }
    },
    "pairs": {
     "cross_file_mean_squared_distance": {
-     "__fraction__": "272356203120/5017237"
+     "__fraction__": "17703759163/325983"
     },
-    "cross_file_pairs": 5017237,
+    "cross_file_pairs": 5215728,
     "ratio": {
-     "__fraction__": "509238326923594/507723029403765"
+     "__fraction__": "17753744626/17703759163"
     },
     "same_file_mean_squared_distance": {
-     "__fraction__": "1623964192/29827"
+     "__fraction__": "412877782/7581"
     },
-    "same_file_pairs": 59654
+    "same_file_pairs": 60648
    }
   },
   "shuffled": {
    "injectivity": {
-    "collision_classes": 249,
-    "declarations": 3187,
-    "declarations_conflated": 613,
-    "distinct_addresses": 2823,
-    "distinct_feature_vectors": 2823,
+    "collision_classes": 252,
+    "declarations": 3249,
+    "declarations_conflated": 618,
+    "distinct_addresses": 2883,
+    "distinct_feature_vectors": 2883,
     "distinct_rate": {
-     "__fraction__": "2823/3187"
+     "__fraction__": "961/1083"
     },
     "injective": false,
     "largest_class": [
-     "GLM.AlignmentPoints.electronMassPred",
-     "GLM.Calibration.refIndex_mul_signalSpeed",
-     "GLM.Calibration.octad_min_tax_strict",
-     "GLM.Info.fast",
-     "GLM.regime_zero",
-     "GLM.Info.DenotationExample.gravity_reaches_the_register",
-     "GLM.Info.glmRationalLayer_congruentOn",
-     "GLM.Gen2.griess_ledger",
-     "GLM.Golay24.step_parity",
-     "GLM.GrayJump.bit_xor",
-     "GLM.Info.Stack.escalate_mem_boundary",
-     "GLM.Niemeier.niemeierVectors_length_eq",
-     "GLM.Question.skipMany_step",
-     "GLM.Sakuma.axisProduct",
-     "GLM.Golay24.unique_octad",
-     "GLM.StepCost.abs_le_thirteen_of_mem"
+     "GLM.Anonymous.overlap_anonymise_eq_zero",
+     "GLM.Info.inv_error_le",
+     "GLM.Controller.l1_sub_delta",
+     "GLM.CubeMOG.wtG_le_four_of_face",
+     "GLM.Extraspecial.zmod2_self_add",
+     "GLM.Feedback.efState_id_succ",
+     "GLM.Gen2.tGrade_neg",
+     "GLM.Golay24.cosetWt",
+     "GLM.Golay24.unique_nearest_of_le_three",
+     "GLM.QuestionNested.DegreeOperator.find_append",
+     "GLM.QuestionNested.compareCut_and",
+     "GLM.Info.integer_perceive",
+     "GLM.band",
+     "GLM.Totient.subCycles_eq_zero_iff_prime",
+     "GLM.Triad.dev_eq_axisDev",
+     "GLM.ZeroStorageV5.check_row"
     ],
     "largest_class_size": 16,
     "quantisation_adds_no_conflation": true
    },
    "neighbours": {
-    "declarations": 3187,
+    "declarations": 3249,
     "linked_chance": {
-     "__fraction__": "9746/5076891"
+     "__fraction__": "9997/5276376"
     },
-    "linked_nearest": 3,
+    "linked_nearest": 6,
     "linked_rate": {
-     "__fraction__": "3/3187"
+     "__fraction__": "2/1083"
     },
     "mean_tie_size": {
-     "__fraction__": "5342/3187"
+     "__fraction__": "1801/1083"
     },
     "same_file_chance": {
-     "__fraction__": "59654/5076891"
+     "__fraction__": "1/87"
     },
-    "same_file_nearest": 30,
+    "same_file_nearest": 32,
     "same_file_rate": {
-     "__fraction__": "30/3187"
+     "__fraction__": "32/3249"
     }
    },
    "pairs": {
     "cross_file_mean_squared_distance": {
-     "__fraction__": "903155472/135601"
+     "__fraction__": "726994643/108661"
     },
-    "cross_file_pairs": 5017237,
+    "cross_file_pairs": 5215728,
     "ratio": {
-     "__fraction__": "369220233643/374144698102"
+     "__fraction__": "725825982/726994643"
     },
     "same_file_mean_squared_distance": {
-     "__fraction__": "196044696/29827"
+     "__fraction__": "2411382/361"
     },
-    "same_file_pairs": 59654
+    "same_file_pairs": 60648
    }
+  }
+ },
+ "stack": {
+  "controls": {
+   "digest_random": {
+    "goal": {
+     "carried": [
+      "GLM.CubeMOG.Col"
+     ],
+     "fired": 24,
+     "leader": [
+      {
+       "hit_rate": {
+        "__fraction__": "193/271"
+       },
+       "hits": 579,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "679/813"
+       },
+       "hits": 679,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "710/813"
+       },
+       "hits": 710,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "736/813"
+       },
+       "hits": 736,
+       "k": 10
+      }
+     ],
+     "leader_precision": {
+      "__fraction__": "473/813"
+     },
+     "lost": [
+      "GLM.Gen3.m24_orbit_stabiliser"
+     ],
+     "queries": 813,
+     "relay": [
+      {
+       "hit_rate": {
+        "__fraction__": "193/271"
+       },
+       "hits": 579,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "679/813"
+       },
+       "hits": 679,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "710/813"
+       },
+       "hits": 710,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "737/813"
+       },
+       "hits": 737,
+       "k": 10
+      }
+     ],
+     "relay_precision": {
+      "__fraction__": "2363/4065"
+     }
+    },
+    "holdout": {
+     "carried": [],
+     "fired": 9,
+     "leader": [
+      {
+       "hit_rate": {
+        "__fraction__": "293/406"
+       },
+       "hits": 293,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "170/203"
+       },
+       "hits": 340,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "177/203"
+       },
+       "hits": 354,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "26/29"
+       },
+       "hits": 364,
+       "k": 10
+      }
+     ],
+     "leader_precision": {
+      "__fraction__": "84/145"
+     },
+     "lost": [],
+     "queries": 406,
+     "relay": [
+      {
+       "hit_rate": {
+        "__fraction__": "293/406"
+       },
+       "hits": 293,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "170/203"
+       },
+       "hits": 340,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "177/203"
+       },
+       "hits": 354,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "26/29"
+       },
+       "hits": 364,
+       "k": 10
+      }
+     ],
+     "relay_precision": {
+      "__fraction__": "84/145"
+     }
+    },
+    "tuning": {
+     "carried": [],
+     "fired": 15,
+     "leader": [
+      {
+       "hit_rate": {
+        "__fraction__": "26/37"
+       },
+       "hits": 286,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "339/407"
+       },
+       "hits": 339,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "356/407"
+       },
+       "hits": 356,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "372/407"
+       },
+       "hits": 372,
+       "k": 10
+      }
+     ],
+     "leader_precision": {
+      "__fraction__": "1189/2035"
+     },
+     "lost": [
+      "GLM.Gen3.m24_orbit_stabiliser"
+     ],
+     "queries": 407,
+     "relay": [
+      {
+       "hit_rate": {
+        "__fraction__": "26/37"
+       },
+       "hits": 286,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "339/407"
+       },
+       "hits": 339,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "355/407"
+       },
+       "hits": 355,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "372/407"
+       },
+       "hits": 372,
+       "k": 10
+      }
+     ],
+     "relay_precision": {
+      "__fraction__": "1186/2035"
+     }
+    }
+   },
+   "name": {
+    "goal": {
+     "carried": [],
+     "fired": 24,
+     "leader": [
+      {
+       "hit_rate": {
+        "__fraction__": "193/271"
+       },
+       "hits": 579,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "679/813"
+       },
+       "hits": 679,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "710/813"
+       },
+       "hits": 710,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "736/813"
+       },
+       "hits": 736,
+       "k": 10
+      }
+     ],
+     "leader_precision": {
+      "__fraction__": "473/813"
+     },
+     "lost": [],
+     "queries": 813,
+     "relay": [
+      {
+       "hit_rate": {
+        "__fraction__": "193/271"
+       },
+       "hits": 579,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "679/813"
+       },
+       "hits": 679,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "710/813"
+       },
+       "hits": 710,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "736/813"
+       },
+       "hits": 736,
+       "k": 10
+      }
+     ],
+     "relay_precision": {
+      "__fraction__": "473/813"
+     }
+    },
+    "holdout": {
+     "carried": [],
+     "fired": 9,
+     "leader": [
+      {
+       "hit_rate": {
+        "__fraction__": "293/406"
+       },
+       "hits": 293,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "170/203"
+       },
+       "hits": 340,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "177/203"
+       },
+       "hits": 354,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "26/29"
+       },
+       "hits": 364,
+       "k": 10
+      }
+     ],
+     "leader_precision": {
+      "__fraction__": "84/145"
+     },
+     "lost": [],
+     "queries": 406,
+     "relay": [
+      {
+       "hit_rate": {
+        "__fraction__": "293/406"
+       },
+       "hits": 293,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "170/203"
+       },
+       "hits": 340,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "177/203"
+       },
+       "hits": 354,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "26/29"
+       },
+       "hits": 364,
+       "k": 10
+      }
+     ],
+     "relay_precision": {
+      "__fraction__": "84/145"
+     }
+    },
+    "tuning": {
+     "carried": [],
+     "fired": 15,
+     "leader": [
+      {
+       "hit_rate": {
+        "__fraction__": "26/37"
+       },
+       "hits": 286,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "339/407"
+       },
+       "hits": 339,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "356/407"
+       },
+       "hits": 356,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "372/407"
+       },
+       "hits": 372,
+       "k": 10
+      }
+     ],
+     "leader_precision": {
+      "__fraction__": "1189/2035"
+     },
+     "lost": [],
+     "queries": 407,
+     "relay": [
+      {
+       "hit_rate": {
+        "__fraction__": "26/37"
+       },
+       "hits": 286,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "339/407"
+       },
+       "hits": 339,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "356/407"
+       },
+       "hits": 356,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "372/407"
+       },
+       "hits": 372,
+       "k": 10
+      }
+     ],
+     "relay_precision": {
+      "__fraction__": "1189/2035"
+     }
+    }
+   }
+  },
+  "corpus": 3249,
+  "gate": {
+   "__fraction__": "1/10"
+  },
+  "k_ladder": [
+   1,
+   3,
+   5,
+   10
+  ],
+  "quotas": [
+   [
+    "text",
+    2
+   ],
+   [
+    "lexical",
+    2
+   ],
+   [
+    "address",
+    1
+   ]
+  ],
+  "sets": {
+   "goal": {
+    "carried": [
+     "GLM.Calibration.NA",
+     "GLM.Gen3.pair_census",
+     "GLM.Packing.radius_of_eight",
+     "GLM.Admission.ledger_refusals",
+     "GLM.Calibration.molarPlanck",
+     "GLM.Gen3.class_census"
+    ],
+    "fired": 24,
+    "leader": [
+     {
+      "hit_rate": {
+       "__fraction__": "193/271"
+      },
+      "hits": 579,
+      "k": 1
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "679/813"
+      },
+      "hits": 679,
+      "k": 3
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "710/813"
+      },
+      "hits": 710,
+      "k": 5
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "736/813"
+      },
+      "hits": 736,
+      "k": 10
+     }
+    ],
+    "leader_precision": {
+     "__fraction__": "473/813"
+    },
+    "lost": [
+     "GLM.Gen3.m24_orbit_stabiliser"
+    ],
+    "queries": 813,
+    "relay": [
+     {
+      "hit_rate": {
+       "__fraction__": "193/271"
+      },
+      "hits": 579,
+      "k": 1
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "680/813"
+      },
+      "hits": 680,
+      "k": 3
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "715/813"
+      },
+      "hits": 715,
+      "k": 5
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "742/813"
+      },
+      "hits": 742,
+      "k": 10
+     }
+    ],
+    "relay_precision": {
+     "__fraction__": "2369/4065"
+    }
+   },
+   "holdout": {
+    "carried": [
+     "GLM.Admission.ledger_refusals",
+     "GLM.Calibration.molarPlanck",
+     "GLM.FitCapacity.protonRatioTarget",
+     "GLM.Gen3.class_census"
+    ],
+    "fired": 9,
+    "leader": [
+     {
+      "hit_rate": {
+       "__fraction__": "293/406"
+      },
+      "hits": 293,
+      "k": 1
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "170/203"
+      },
+      "hits": 340,
+      "k": 3
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "177/203"
+      },
+      "hits": 354,
+      "k": 5
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "26/29"
+      },
+      "hits": 364,
+      "k": 10
+     }
+    ],
+    "leader_precision": {
+     "__fraction__": "84/145"
+    },
+    "lost": [],
+    "queries": 406,
+    "relay": [
+     {
+      "hit_rate": {
+       "__fraction__": "293/406"
+      },
+      "hits": 293,
+      "k": 1
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "341/406"
+      },
+      "hits": 341,
+      "k": 3
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "179/203"
+      },
+      "hits": 358,
+      "k": 5
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "184/203"
+      },
+      "hits": 368,
+      "k": 10
+     }
+    ],
+    "relay_precision": {
+     "__fraction__": "169/290"
+    }
+   },
+   "tuning": {
+    "carried": [
+     "GLM.Calibration.NA",
+     "GLM.CubeStab.Cell",
+     "GLM.FitCapacity.phi",
+     "GLM.Gen3.pair_census",
+     "GLM.Gen3.constant_minus_coherent",
+     "GLM.Packing.radius_of_eight"
+    ],
+    "fired": 15,
+    "leader": [
+     {
+      "hit_rate": {
+       "__fraction__": "26/37"
+      },
+      "hits": 286,
+      "k": 1
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "339/407"
+      },
+      "hits": 339,
+      "k": 3
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "356/407"
+      },
+      "hits": 356,
+      "k": 5
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "372/407"
+      },
+      "hits": 372,
+      "k": 10
+     }
+    ],
+    "leader_precision": {
+     "__fraction__": "1189/2035"
+    },
+    "lost": [],
+    "queries": 407,
+    "relay": [
+     {
+      "hit_rate": {
+       "__fraction__": "26/37"
+      },
+      "hits": 286,
+      "k": 1
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "31/37"
+      },
+      "hits": 341,
+      "k": 3
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "362/407"
+      },
+      "hits": 362,
+      "k": 5
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "378/407"
+      },
+      "hits": 378,
+      "k": 10
+     }
+    ],
+    "relay_precision": {
+     "__fraction__": "1197/2035"
+    }
+   }
+  },
+  "sweep": [
+   {
+    "carried": 0,
+    "fired": 0,
+    "gate": {
+     "__fraction__": "0/1"
+    },
+    "hit_at_5": {
+     "__fraction__": "356/407"
+    },
+    "lost": 0,
+    "precision_at_5": {
+     "__fraction__": "1189/2035"
+    }
+   },
+   {
+    "carried": 6,
+    "fired": 15,
+    "gate": {
+     "__fraction__": "1/20"
+    },
+    "hit_at_5": {
+     "__fraction__": "362/407"
+    },
+    "lost": 0,
+    "precision_at_5": {
+     "__fraction__": "1197/2035"
+    }
+   },
+   {
+    "carried": 6,
+    "fired": 15,
+    "gate": {
+     "__fraction__": "1/10"
+    },
+    "hit_at_5": {
+     "__fraction__": "362/407"
+    },
+    "lost": 0,
+    "precision_at_5": {
+     "__fraction__": "1197/2035"
+    }
+   },
+   {
+    "carried": 6,
+    "fired": 16,
+    "gate": {
+     "__fraction__": "3/20"
+    },
+    "hit_at_5": {
+     "__fraction__": "362/407"
+    },
+    "lost": 0,
+    "precision_at_5": {
+     "__fraction__": "1194/2035"
+    }
+   },
+   {
+    "carried": 6,
+    "fired": 19,
+    "gate": {
+     "__fraction__": "1/5"
+    },
+    "hit_at_5": {
+     "__fraction__": "362/407"
+    },
+    "lost": 0,
+    "precision_at_5": {
+     "__fraction__": "1191/2035"
+    }
+   },
+   {
+    "carried": 6,
+    "fired": 26,
+    "gate": {
+     "__fraction__": "1/4"
+    },
+    "hit_at_5": {
+     "__fraction__": "362/407"
+    },
+    "lost": 0,
+    "precision_at_5": {
+     "__fraction__": "1183/2035"
+    }
+   },
+   {
+    "carried": 12,
+    "fired": 183,
+    "gate": {
+     "__fraction__": "1/2"
+    },
+    "hit_at_5": {
+     "__fraction__": "360/407"
+    },
+    "lost": 8,
+    "precision_at_5": {
+     "__fraction__": "1053/2035"
+    }
+   }
+  ],
+  "tiebreak": {
+   "holdout": {
+    "address": {
+     "hits": [
+      {
+       "hit_rate": {
+        "__fraction__": "148/203"
+       },
+       "hits": 296,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "171/203"
+       },
+       "hits": 342,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "355/406"
+       },
+       "hits": 355,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "369/406"
+       },
+       "hits": 369,
+       "k": 10
+      }
+     ],
+     "precision_at_5": {
+      "__fraction__": "589/1015"
+     }
+    },
+    "lexical": {
+     "hits": [
+      {
+       "hit_rate": {
+        "__fraction__": "293/406"
+       },
+       "hits": 293,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "49/58"
+       },
+       "hits": 343,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "179/203"
+       },
+       "hits": 358,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "53/58"
+       },
+       "hits": 371,
+       "k": 10
+      }
+     ],
+     "precision_at_5": {
+      "__fraction__": "592/1015"
+     }
+    },
+    "name": {
+     "hits": [
+      {
+       "hit_rate": {
+        "__fraction__": "293/406"
+       },
+       "hits": 293,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "170/203"
+       },
+       "hits": 340,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "177/203"
+       },
+       "hits": 354,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "26/29"
+       },
+       "hits": 364,
+       "k": 10
+      }
+     ],
+     "precision_at_5": {
+      "__fraction__": "84/145"
+     }
+    }
+   },
+   "tuning": {
+    "address": {
+     "hits": [
+      {
+       "hit_rate": {
+        "__fraction__": "281/407"
+       },
+       "hits": 281,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "342/407"
+       },
+       "hits": 342,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "356/407"
+       },
+       "hits": 356,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "373/407"
+       },
+       "hits": 373,
+       "k": 10
+      }
+     ],
+     "precision_at_5": {
+      "__fraction__": "1197/2035"
+     }
+    },
+    "lexical": {
+     "hits": [
+      {
+       "hit_rate": {
+        "__fraction__": "288/407"
+       },
+       "hits": 288,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "343/407"
+       },
+       "hits": 343,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "360/407"
+       },
+       "hits": 360,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "372/407"
+       },
+       "hits": 372,
+       "k": 10
+      }
+     ],
+     "precision_at_5": {
+      "__fraction__": "1197/2035"
+     }
+    },
+    "name": {
+     "hits": [
+      {
+       "hit_rate": {
+        "__fraction__": "285/407"
+       },
+       "hits": 285,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "338/407"
+       },
+       "hits": 338,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "354/407"
+       },
+       "hits": 354,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "10/11"
+       },
+       "hits": 370,
+       "k": 10
+      }
+     ],
+     "precision_at_5": {
+      "__fraction__": "237/407"
+     }
+    }
+   }
+  },
+  "tiebreak_verdict": {
+   "beats_name_tiebreak_on_hits": true,
+   "beats_name_tiebreak_on_precision": true
+  },
+  "verdict": {
+   "carried_outnumber_lost": true,
+   "gain_holds_across_the_gate": true,
+   "gate_fires_rarely": true,
+   "geometry_carries_more_than_control": true,
+   "geometry_carries_more_than_name": true,
+   "geometry_never_carries_fewer_than_control": true,
+   "relay_beats_text_on_every_set": true,
+   "relay_never_below_leader": true
   }
  },
  "verdict": {

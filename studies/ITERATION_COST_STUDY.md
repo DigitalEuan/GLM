@@ -6,7 +6,7 @@
 
 **Verdict.** Most of the cost was work repeated on things that had not moved, and a cache keyed on what it is derived from does not repeat it.
 
-**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->7,726<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
+**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->7,880<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
 
 **Recomputed by.** `glm_universal.corpus.cost.cost_report`
 
@@ -72,8 +72,8 @@ nothing.
 <!-- generated: cost-addresses -->
 | book | units | decodes from nothing | decodes now | reused |
 |---|---|---|---|---|
-| Lean declarations | 3,187 | 6,010 | 0 | 6,374 |
-| corpus sections | 871 | 1,716 | 0 | 1,742 |
+| Lean declarations | 3,249 | 6,132 | 0 | 6,498 |
+| corpus sections | 887 | 1,748 | 0 | 1,774 |
 
 Reuse is checked, not assumed: each rebuild re-decodes a sample of the answers it reused and reports any that moved (4 sampled in the declaration book, 4 in the document book, none moved).
 <!-- end generated -->
@@ -92,7 +92,7 @@ nothing and requiring the two books to be equal byte for byte.
 | reading | value |
 |---|---|
 | blocks quoting the report | 5 |
-| evaluation cases per report | 147 |
+| evaluation cases per report | 149 |
 | reports taken per check, before | 5 |
 | reports taken per check, now | 0 |
 | stored report | fresh |
@@ -121,7 +121,7 @@ works for tables and not for a sentence, and the sentences were where the drift
 lived. The block mechanism is now available at the size of a phrase:
 
 ```markdown
-the suite is <!--figure:test-files-->89 test files<!--/figure--> today
+the suite is <!--figure:test-files-->91 test files<!--/figure--> today
 ```
 
 The markers are HTML comments, so a reader sees only the number. `--refresh`
@@ -129,9 +129,9 @@ rewrites the body, `--check` fails when it has drifted, and a marker naming a
 figure nothing emits is a reported defect rather than a silent no-op.
 
 <!-- generated: cost-figures -->
-19 figures are registered and 25 markers carry them, across 8 documents.  A marker whose text is not what its figure now says is what `--refresh` rewrites and what `--check` fails on.
+23 figures are registered and 36 markers carry them, across 9 documents.  A marker whose text is not what its figure now says is what `--refresh` rewrites and what `--check` fails on.
 
-The registry: `corpus-archive-documents`, `corpus-documents`, `corpus-sections`, `corpus-state-documents`, `evaluation-case-count`, `evaluation-cases`, `lean-declaration-files`, `lean-declarations`, `lean-file-count`, `lean-files`, `planner-reports-per-check`, `query-kinds`, `rebuild-decodes-from-nothing`, `rebuild-decodes-now`, `registers`, `report-subjects`, `suite`, `test-file-count`, `test-files`.
+The registry: `corpus-archive-documents`, `corpus-documents`, `corpus-sections`, `corpus-state-documents`, `evaluation-case-count`, `evaluation-cases`, `lean-declaration-files`, `lean-declarations`, `lean-file-count`, `lean-files`, `planner-reports-per-check`, `query-kinds`, `rebuild-decodes-from-nothing`, `rebuild-decodes-now`, `registers`, `repo-cache-bytes`, `repo-cache-share`, `repo-primary-bytes`, `repo-stored-bytes`, `report-subjects`, `suite`, `test-file-count`, `test-files`.
 <!-- end generated -->
 
 Two rules keep it honest. A figure must be **cheap** — a check renders every
@@ -168,6 +168,15 @@ makes — every number is still recomputed from the tree, and every cache is
 still refused when its input has moved. What changed is how often the same
 answer is computed twice.
 
+It is also only one side of a ledger. What is priced here is the cost of
+*keeping* a derived table — the rebuild, the digest, the check — which is
+exactly what a comparison between generating an object and looking it up has
+to charge the lookup with, and usually does not.
+[`ZERO_STORAGE_STUDY.md`](ZERO_STORAGE_STUDY.md) §8 puts the two sides
+together: the data footprint saved by generating, against the work per use
+that pays for it, with the storage, loading, digesting and rebuilding of the
+table counted on the table's side rather than assumed away.
+
 <!-- generated: cost-tier -->
-**Rebuilding both address books from nothing decodes 7,726 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 147 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  25 figures inside sentences, across 8 documents, are emitted rather than typed.
+**Rebuilding both address books from nothing decodes 7,880 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 149 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  36 figures inside sentences, across 9 documents, are emitted rather than typed.
 <!-- end generated -->

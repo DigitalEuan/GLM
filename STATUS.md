@@ -54,22 +54,22 @@ head of [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md) and is directive D1.
 any of it without recomputing anything by hand.*
 
 **Starting a new round? Read §3.4, "Named for the next round", before
-anything else** — the one piece of work it used to name, the Niemeier deep
-holes classified from a trajectory distribution, is **closed** by this round,
-and what §3.4 names now is what that round left behind: a separation criterion
-still unmet, thirteen unreached types, a conflation the exact reading cannot
-see past, and — the largest of them — escalation made the default step of the
-query loop rather than one study's ladder. This round asked whether the deep
-holes of the Leech lattice can be named from the *distribution of trajectories*
-that reach them, answered no at the layer the question was first asked at and
-said so, then asked whether that was the geometry or the layer, and answered
-yes one layer up. The round before it
-was a reconciliation; the one before that took a pre-registered question about
-the fine-structure constant and returned a number under its own gate.
-[`MASTER_PLAN.md`](MASTER_PLAN.md) Phases 21–32 are the items written as work,
-and Phase 33 is what §3.4 proposes.
+anything else.** The round just closed added no candidate and retired none: it
+wrote the note the generate-rather-than-store idea had been missing — the
+storage ledger read from both ends, in
+[`ZERO_STORAGE_STUDY.md`](studies/ZERO_STORAGE_STUDY.md) §8 — and finished the
+verification chain the round before it had left part-run, so what §3.4 names is
+what the round before left: a register that arrives anonymous on its own rather
+than by renaming, the leak the audit found in the feature map, a separation
+criterion still unmet, thirteen unreached types, and the reverse-call planner's
+utility gate. The round before this one found the register in which a
+structural address is the only faculty that can read the query at all; the one
+before that made the faculties into a stack and gave the geometry the queries
+the text layer cannot read.
+[`MASTER_PLAN.md`](MASTER_PLAN.md) Phases 21–37 are the items written as work,
+and Phase 38 is what §3.4 proposes.
 
-Last reconciled against a full re-run on 2026-09-10.
+Last reconciled against a full re-run on 2026-09-14.
 
 Every count below is produced by `overlay/glm_universal/figures.py` and written
 to [`overlay/FIGURES.md`](overlay/FIGURES.md);
@@ -87,11 +87,11 @@ PYTHONPATH=. python3 -m glm_universal.figures --write
 
 | instrument | command | result |
 |---|---|---|
-| test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->3,631 tests across 88 of the 89 test files, 13,777 subtests, outside the document check<!--/figure-->**, zero failures |
-| end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **147 / 147** — 131 answered, 16 refused as expected (all `boundary`, no `gap`), 0 unexpected refusals, 0 confidently wrong, 0 errored |
+| test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->3,695 tests across 90 of the 91 test files, 14,131 subtests, outside the document check<!--/figure-->**, zero failures |
+| end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **149 / 149** — 132 answered, 16 refused as expected (all `boundary`, no `gap`), 0 unexpected refusals, 0 confidently wrong, 0 errored |
 | benchmark suites | `python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites, every suite above its baseline |
 | capability probes | `python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 errored, 0 surprises |
-| Lean development | `lake build` (repository root) | 111 Lean files, 32,565 lines, **0 `sorry`** |
+| Lean development | `lake build` (repository root) | 113 Lean files, 32,935 lines, **0 `sorry`** |
 | figures | `python3 -m glm_universal.figures --write` | regenerates `overlay/FIGURES.md`; every documented count |
 | corpus | `python3 -m glm_universal.corpus --check` | the tier contract, the archive partition, the coverage claim of `ENTRY.md`, every generated block and every derived cache — **current**, no drift |
 
@@ -99,8 +99,8 @@ The test-suite row is the sign-off ledger's own count, recorded by
 `python3 -m glm_universal.signoff --release`, which runs each test file in its
 own process with the `exhaustive` tests selected. One `pytest` process over the
 same tree, with `GLM_EXHAUSTIVE=1` so that nothing is deselected, collects
-**3,659 passed, 0 skipped, 16,337 subtests, zero failures** — which is the
-ledger's 3,631 plus the 28 tests of the document check the ledger's total
+**3,723 passed, 0 skipped, 16,695 subtests, zero failures** — which is the
+ledger's 3,695 plus the 28 tests of the document check the ledger's total
 leaves out, because a round that adds a document or a figure fails that check
 until the documents are reconciled. Without that switch the `exhaustive`
 tests — which certify rather than sample — are reported as skipped with their
@@ -111,7 +111,7 @@ The package is `glm_universal` **v1.17.0**: eleven sub-packages, 127 modules,
 **8 registers** holding 1,089 carriers (physics 726, chemistry 118, molecules
 51, mathematics 22, lexicon 95, spatial 28, harmonics 28, economics 21) beside
 a 45-class comparison register, **21 query kinds**
-one of which dispatches **63 report subjects**, and 3 tasks.
+one of which dispatches **65 report subjects**, and 3 tasks.
 
 ---
 
@@ -543,6 +543,62 @@ the write-up is a generated block emitted from the measurement cache, so it
 reports staleness rather than an out-of-date number when the Lean tree moves.
 Write-up: [`ADDRESS_RETRIEVAL_STUDY.md`](studies/ADDRESS_RETRIEVAL_STUDY.md).
 
+**The faculties made into a stack: the geometry given the queries the text
+layer cannot read.** The result above was measured with each faculty answering
+alone. `reasoning/stack.py` asks what the machine does when they answer
+together: each faculty reports how much evidence it has for *this* query, and
+below a stated gate of **1/10** the leading lexical search is judged to have
+abstained, so the two geometric address books answer in its place by a stated
+quota and interleave. At `k = 5` the stack is ahead of the text control on the
+tuning stride (**356 → 362** of 407), on a disjoint held-out stride (**344 →
+346** of 406) and on bare goal queries (**710 → 715** of 813), and it is never
+below it at any window of the ladder. The gate fires on **66** of 1,614
+queries; the geometry carries **16** queries the text control misses against
+**1** lost, where the same relay to the digest addresses and a seeded
+permutation carries **1** and a relay to the name search carries **none**, and
+every threshold from 1/20 to 1/4 improves on the control. What is a theorem
+rather than a hit rate is in `RequestProject/GLM/Relay.lean`:
+`relay_confident` — above the gate the relay *is* the leader's ranking, so the
+stack cannot cost anything where the leader is strong — and `relay_carry`,
+which says whatever a faculty holds inside its quota survives into the
+answer's window, so a faculty that has the answer cannot be drowned out by the
+ones that do not. `vision_stack.py` runs the identical relay in a register
+with no text in it — 50 ARC training puzzles under `overlay/arc_agi_17` — where
+an eight-dimension visual look removes **95.3 %** of 1,089 proposals before the
+expensive check sees them and the relay solves a puzzle its leading faculty
+does not. `report relay`. Write-up:
+[`STACK_RELAY_STUDY.md`](studies/STACK_RELAY_STUDY.md).
+
+**The register where the address is the only reader.** The relay above wins on
+a residue: 16 queries in 1,626, mostly constants and calibration lemmas.
+`reasoning/anonymous.py` asks whether a register exists in which the structural
+address is not a second opinion but the *only* faculty that can read the query,
+and finds one. A query is **anonymous** when its identifiers are not the
+corpus's — a goal from a second formalisation, a generated goal with no names
+yet, an autoformalised statement in its source's vocabulary — and the
+reproducible form of it is renaming every identifier outside a declared
+vocabulary of 39 words to a positional placeholder, with the placeholders
+checked fresh against the corpus rather than assumed. Over the same **813**
+queries at `k = 5` the text search falls **710 → 84** and the identifier
+address book **388 → 48** — both to the **48** hits chance gives — while the
+structural address holds **232 → 171** and leads every other faculty in the
+register by more than a factor of two. The identifier address book is the
+control that matters: it is geometric too, so what survives is the *structural*
+reading rather than geometry in general. `RequestProject/GLM/Anonymous.lean`
+says why: `features_anonymise` — any reading that is a function of the kept
+skeleton is unchanged by a renaming; `overlap_anonymise_eq_zero` — a fresh
+renaming leaves the text faculty's overlap at zero, so it has no evidence by
+construction; `relay_hands_over` — with confidence zero the relay of
+`Relay.lean` *is* the interleave, so the stack's existing gate reads the
+register with the geometry without being re-tuned, and it does: it fires on
+**538** of the 813 against **24** of the same queries read plainly, and lifts
+the leader **84 → 128**. Checked against the shipped feature map rather than
+the idealisation, **780** of 813 queries keep every syntax coordinate and the
+**33** that do not move only the six that count type words — an audit finding
+of the round, since the shipped map counts those words inside identifiers too.
+`report anonymous`. Write-up:
+[`ANONYMOUS_REGISTER_STUDY.md`](studies/ANONYMOUS_REGISTER_STUDY.md).
+
 **The loop: propose, check, refuse — and whether the substrate can steer it.**
 Everything else in the system answers in one shot. `reasoning/controller.py` is
 a loop that decomposes, tries, checks and either revises or gives up, built on
@@ -599,6 +655,23 @@ is the **52nd** report subject and the evaluation's **135th case**, run through
 the CLI the way a user runs it; the set is **135 / 135** with the same 16
 boundary refusals. Write-up:
 [`ZERO_STORAGE_STUDY.md`](studies/ZERO_STORAGE_STUDY.md).
+
+**And the ledger read from both ends.** §8 of that study is the note the
+saving needs: generating rather than storing buys a smaller data footprint and
+no index to consult, and what pays for it is work at each use — so a fair
+comparison charges the table for more than its bytes. The bill it lists is the
+table's: the bytes in the tree and in every clone, release and backup; the
+loading and indexing before the first answer; the digest a derived table has
+to be kept beside and the check, every round, that it still holds; the rebuild
+when its inputs move; the reader code the generator would not have needed; and
+the risk of believing a stale table. Both sides are already measured in
+integers here — the storage side in §1 of the same study, the keeping side in
+[`ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) — and the rule
+that follows is stated plainly: cache a derived object when the generator's
+cost per use, times the uses between two invalidations, exceeds the cost of
+holding the table *and* keeping it honest, and generate otherwise. The Golay
+code is the first case and the Lean address book the second, which is why one
+is regenerated from twelve rows and the other is stored beside its digest.
 
 **And then rebuilt as a script that runs.** The audit's findings are now a
 single standalone file, `studies/scripts/glm_zero_storage_substrate_v4.py` — no imports beyond
@@ -871,8 +944,8 @@ reached deterministically by greedy error feedback. `report lattices`,
 [`HIGHER_LATTICE_STUDY.md`](studies/HIGHER_LATTICE_STUDY.md).
 
 **The Lean development, addressed.** `reasoning/lean_address.py` gives each of
-the 3187 declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly 3187/3187 with 0 coordinate errors;
+the 3249 declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly 3249/3249 with 0 coordinate errors;
 2823 distinct addresses, and the quantiser adds no conflation of its own;
 nearest-by-address shares a file 624 times against 33 for a SHA-256 control and
 30 for a seeded reshuffle, with chance at ≈ 1.18 %. `report lean`.
@@ -1096,7 +1169,7 @@ than timings, and three links of it were cut. **The address books are
 incremental.** An address is a function of the feature vector and of nothing
 else — `GLM.Address.address_congr` — so a vector decoded before may be reused,
 and a file that has not moved costs nothing: rebuilding both books from nothing
-decodes <!--figure:rebuild-decodes-from-nothing-->7,726<!--/figure--> vectors
+decodes <!--figure:rebuild-decodes-from-nothing-->7,880<!--/figure--> vectors
 and rebuilding them against the stored books decodes
 <!--figure:rebuild-decodes-now-->0<!--/figure-->. A book refuses to seed from
 one written at a different schema, scale or cap, it reports how many entries
@@ -1156,7 +1229,149 @@ core for the same reason.
 
 This is the whole list. Nothing else in the repository is claimed as pending.
 
-**Closed this round.** *The cost of keeping the claims current, measured and
+**Closed this round.** *The storage ledger read from both ends, and the round
+before it reconciled.* No new mechanism was added: the work was the note the
+generate-rather-than-store idea needed, and the verification chain the previous
+round left part-run.
+
+* **the two-sided ledger,** in
+  [`ZERO_STORAGE_STUDY.md`](studies/ZERO_STORAGE_STUDY.md) §8, cross-referenced
+  from [`ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) §6 and
+  summarised in §2 above. Generating instead of storing buys a smaller data
+  footprint and no index to consult, and the price is work at each use — so
+  the comparison has to charge the table for more than its bytes: the copies in
+  every clone, release and backup; the loading and indexing; the digest a
+  derived table is kept beside and the round-by-round check that it holds; the
+  rebuild when its inputs move; the reader code the generator does not need;
+  and the risk of believing a stale table. Both sides of that ledger were
+  already measured in integers here, and the rule that follows is now written
+  down rather than assumed;
+* **the repository's own storage split is emitted, not typed.** Four inline
+  figures — `repo-stored-bytes`, `repo-cache-bytes`, `repo-primary-bytes`,
+  `repo-cache-share` — put the overlay's on-disk bytes and the share of them
+  that is cache into the sentence that quotes them, which is what caught the
+  figure that paragraph had been carrying since the tree was smaller;
+* **the anonymous register's deciding figure now says what the study measures.**
+  The document check was failing on exactly two tier-0 rules for it — the
+  verdict grounded in the body, and every number of the deciding figure written
+  somewhere below it — because the headline still quoted a superseded
+  measurement. It quotes **710 → 84**, **388 → 48** and **232 → 171** now, the
+  same numbers the generated tables carry, and the body states them in prose;
+* **four documents brought to the current run.** The plan's phase-37 row
+  (**813** queries, not 807), the repository readme's gate count (**538**), the
+  invariance figures (**780** of 813 keep every syntax coordinate, **33** move
+  a type-word coordinate) in the status document and the study, and the header
+  prose of `RequestProject/GLM/Anonymous.lean` itself. The declaration count
+  four documents quote moved **3187 → 3249** and the Lean file count in the
+  Lean readme and the number-theory evidence paper **112 → 113**;
+* **the chain re-run in order,** as §4.2 states it: the Lean mirror
+  regenerated, `lake build` clean over
+  **<!--figure:lean-files-->113 Lean files<!--/figure-->** with **0 `sorry`**,
+  the escalation measurement cache re-taken after the last file was touched,
+  the corpus refreshed until `--refresh` reports **current** with the document
+  checks holding, and the figures regenerated;
+* **and the release earned on the quiescent tree.** All **91 test files** and
+  all **7 instruments** pass with the exhaustive cases on; the suite sentence is
+  re-measured at
+  **<!--figure:suite-->3,695 tests across 90 of the 91 test files, 14,131 subtests, outside the document check<!--/figure-->**
+  and one `pytest` process over the same tree reports **3,723 passed, 0
+  skipped, 16,695 subtests, zero failures**; the end-to-end evaluation is
+  **149 / 149** (133 answered, 16 refused as expected, all `boundary`, no
+  `gap`, 0 confidently wrong, 0 errored), the benchmarks **2,389 / 2,390** with
+  every suite above its baseline, and the probes **33 — 20 hold, 13 break, 0
+  errored**.
+
+**Closed the round before.** *The register where the geometric address is the only
+reader.* The round before this one made the faculties into a stack and found
+the geometry carrying a **residue** — 16 queries in 1,626, mostly constants and
+calibration lemmas — and named the right question as the next candidate: is
+there a register in which a geometric address is *structurally* the only
+faculty that can read the query, making the carry set a class? There is, and it
+is written up in
+[`ANONYMOUS_REGISTER_STUDY.md`](studies/ANONYMOUS_REGISTER_STUDY.md):
+
+* **the register, declared before it was measured.** A query is *anonymous*
+  when its identifiers are not the corpus's — a goal from a second
+  formalisation, a generated goal with no names yet, an autoformalised
+  statement in its source's vocabulary. The reproducible form of it is
+  renaming: every identifier outside a declared vocabulary of 39 words (Lean's
+  own syntax, and the type names the feature map already counts) is replaced by
+  a positional placeholder, and the placeholders are *checked* fresh against
+  the corpus rather than assumed (`glm_universal.reasoning.anonymous`);
+* **what it does to each faculty.** Over the same 813 queries at `k = 5`, the
+  text search falls **710 → 84** and the identifier address book **388 → 48** —
+  both to the **48** hits chance gives — while the structural address holds
+  **232 → 171** and leads every other faculty in the register by more than a
+  factor of two. The identifier address book is the control that matters: it is
+  geometric too, and it collapses, so what survives is the *structural*
+  reading, not geometry in general;
+* **why, as a theorem and as an audit.** `RequestProject/GLM/Anonymous.lean`
+  (113th Lean file): `features_anonymise` — any reading that is a function of
+  the kept skeleton is unchanged by a renaming; `overlap_anonymise_eq_zero` —
+  a fresh renaming leaves the text faculty's exact overlap at zero, so it has
+  no evidence by construction; and `relay_hands_over` — with confidence zero
+  the relay of `Relay.lean` is the interleave. Measured against the *shipped*
+  feature map rather than the idealisation, 780 of 813 queries keep every
+  syntax coordinate, and the 33 that do not move only the six coordinates that
+  count type words, because the shipped map counts those words inside
+  identifiers too. That leak is an audit finding of this round, reported rather
+  than repaired;
+* **and the stack notices on its own.** The gate is the relay study's 1/10,
+  not re-tuned and not told about the register: it fires on **538** of the 813
+  anonymous queries against **24** of the same queries read plainly, and the
+  relay lifts the text leader **84 → 128**. `report anonymous`, with its
+  column-3 script, a 27-test file and a pipeline row;
+* **what it does not settle,** stated in the study and repeated here: this is
+  not a reversal of the standing negative result — where names are informative
+  the text search is still the better faculty by a wide margin — the absolute
+  rate in the register is modest (about one query in five against one in
+  seventeen by chance), and the register is *constructed* by renaming rather
+  than observed in the wild.
+
+**Closed the round before.** *The faculties made into a stack: the geometry given the
+queries the text layer cannot read.* The standing negative result of
+[`ADDRESS_RETRIEVAL_STUDY.md`](studies/ADDRESS_RETRIEVAL_STUDY.md) — retrieval
+by lattice address beats chance and loses to a plain lexical overlap — was
+measured with each faculty answering *alone*. This round asked what the machine
+does when they answer together, and the answer is in
+[`STACK_RELAY_STUDY.md`](studies/STACK_RELAY_STUDY.md):
+
+* **the relay, and the confidence that fires it.** A faculty reports how much
+  evidence it has for *this* query; below a stated gate of 1/10 the leading
+  lexical search is judged to have abstained and the two geometric address
+  books answer in its place, by a stated quota and interleave
+  (`glm_universal.reasoning.stack`). At `k = 5` the stack is ahead of the text
+  control on the tuning stride (356 → 362 of 407), on a disjoint held-out
+  stride (354 → 358 of 406) and on bare goal queries (710 → 715 of 813), and it
+  is never below it at any window of the ladder;
+* **and the gain is the substrate's.** The gate fires on 48 of 1,626 queries,
+  the geometry carries **16** queries the text control misses against **1**
+  lost, and the same relay to the digest addresses and a seeded permutation
+  carries **1** while a relay to the name search carries **none**. Every
+  threshold from 1/20 to 1/4 improves on the control, so the gate is a stated
+  mechanism rather than a fitted constant;
+* **what is a theorem rather than a hit rate.** `RequestProject/GLM/Relay.lean`
+  (112th Lean file): `relay_confident` — above the gate the relay *is* the
+  leader's ranking, so the stack cannot cost anything where the leader is
+  strong; `mem_relay` and `interleave_nodup` — nothing invented, nothing
+  offered twice; and `relay_carry`, the carry theorem — whatever a faculty
+  holds inside its quota is inside the answer's window of the summed quotas, so
+  a faculty that has the answer cannot be drowned out by the ones that do not;
+* **the same stack in a register with no text in it.** `vision_stack.py` runs
+  the identical relay over the 50 ARC training puzzles kept under
+  `overlay/arc_agi_17/data/training`, with a generator, an eight-dimension
+  visual filter and a cross-domain word check: the cheap look removes **95.3 %**
+  of the 1,089 proposals before the expensive verification gate sees them, two
+  different faculties supply the rule that verifies, and the relay solves a
+  puzzle its leading faculty does not — 2 of 50, which is the honest headline
+  for these generators;
+* **a defect fixed at the root.** `--refresh` rebuilt the declaration address
+  book and the document address book and *not* the lexical address book, which
+  is keyed to the same digest and read by the same measurements; a Lean file
+  added this round left it stale. It is now the second step of the ordered
+  chain and the chain's docstring says so.
+
+**Closed two rounds before.** *The cost of keeping the claims current, measured and
 cut.* Nothing the system answers moved: this round was about the machinery that
 re-derives the answers, which had grown expensive enough to shape how a round
 was worked. Six pieces of work, all recorded in §2 above, and the defect that
@@ -1209,17 +1424,18 @@ but it had not been added to the declared list. It is declared now, so the
 exceptions are the three modules of the documentation layer rather than two.
 
 Everything was then re-earned on the final tree. A release run with the
-exhaustive cases on passes **all 89 test files** and **all 7 instruments**, and
+exhaustive cases on passes **all 91 test files** and **all 7 instruments**, and
 the complete-run sentence the documents quote is re-measured at
-**<!--figure:suite-->3,631 tests across 88 of the 89 test files, 13,777 subtests, outside the document check<!--/figure-->**;
+**<!--figure:suite-->3,695 tests across 90 of the 91 test files, 14,131 subtests, outside the document check<!--/figure-->**;
 one `pytest` process over the same tree with `GLM_EXHAUSTIVE=1` reports
-**3,659 passed, 0 skipped, 16,337 subtests, zero failures**. Nothing the system
+**3,723 passed, 0 skipped, 16,695 subtests, zero failures**. Nothing the system
 answers moved: `lake build` completes over
-**<!--figure:lean-files-->111 Lean files<!--/figure-->** with **0 `sorry`** in
-both copies, the end-to-end evaluation is **147 / 147**, the benchmarks
-**2,389 / 2,390**, and the probes 33 with 20 holding.
+**<!--figure:lean-files-->113 Lean files<!--/figure-->** with **0 `sorry`** in
+both copies, the end-to-end evaluation passes every case in the set (**147** of
+them at that round, **149** now), the benchmarks **2,389 / 2,390**, and the
+probes 33 with 20 holding.
 
-**Closed the round just before.** *Five pieces of work finished, and the four
+**Closed two rounds before this one.** *Five pieces of work finished, and the four
 defects finishing them exposed.* The round added the cumulativity rule, the deep-hole
 failure study, the escalation loop, the sandbox planner and the review-sweep
 register — three Lean files, five modules, five studies, five test files and
@@ -1680,7 +1896,7 @@ coordinate for the name.
 
 ### 3.1 The evaluation finds no gap
 
-The end-to-end set is **147 of 147** and every one of its sixteen refusals is a
+The end-to-end set is **148 of 148** and every one of its sixteen refusals is a
 `boundary` — a theorem or a stated commitment — rather than a `gap`. The last
 gap, `coherence-unregistered-molecule`, is closed: see the fall-through
 recorded in §2 above. What remains open is listed in §3.2 and §3.3, and none
@@ -1800,9 +2016,36 @@ The list is kept in `archive/MASTER_PLAN_ARCHIVE.md` §7.9; this is the same lis
 
 This section is the one to read first on the next development push. It is
 written up as the proposed next phase in
-[`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 36, which points back here.
+[`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 38, which points back here.
 
-**The round just closed retired the largest candidate on this list and one
+**The round just closed added no candidate and retired none.** It wrote the
+note the generate-rather-than-store idea had been missing — the ledger read
+from both ends, with the cost of *keeping* a table counted against the cost of
+generating it, in
+[`ZERO_STORAGE_STUDY.md`](studies/ZERO_STORAGE_STUDY.md) §8 — and finished the
+verification chain the round before it had left part-run: the deciding figure
+of the anonymous-register study, the four documents still quoting superseded
+counts, the caches, the figures, the document checks and a complete release.
+Everything below is therefore unchanged by it.
+
+**The round before that took the candidate the round before *it* added, and item
+2 below is closed by it.** *Is there a register where a geometric address is
+structurally the only reader?* — yes: the anonymous register, where a query's
+identifiers are not the corpus's, and where the text search and the identifier
+address book both fall to chance while the structural address holds (§2, "The
+register where the address is the only reader", and the closed-this-round entry
+at the head of §3). What that closes is the *class* question: the carry set is
+no longer a residue of 14 declarations but every query of a register, and the
+stack's existing gate finds it without being re-tuned. What it does **not**
+close is the standing negative result — where names are informative, plain text
+is still the better faculty — nor the absolute quality of address retrieval,
+which in the register is about one query in five against one in seventeen by
+chance. Two new candidates come out of it and are stated as item 2a and 2b
+below: a register that arrives anonymous *on its own* rather than by renaming,
+and the leak the audit found in the feature map, which counts type words inside
+identifiers. Nothing else on this list moved.
+
+**The round before it retired the largest candidate on this list and one
 other.** *Escalation as the default step of the query loop* is built, measured
 and wired — see §2, "Escalation, as a step of the ordinary query loop" — so it
 is no longer a candidate; and the four failures the deep-hole ladder leaves are
@@ -1910,7 +2153,40 @@ incompatibility is proved rather than observed. The review-sweep register
 classes this one as *needs-a-theorem*, which is exactly why it is not a
 candidate for an escalated re-reading.
 
-**A candidate that came out of the round just closed: the planner's utility
+**2. A faculty that carries in bulk, rather than at the margin — closed by the
+anonymous register, with two successors.** The candidate the stack round added
+asked for a query class the leading faculty is blind to *by construction*
+rather than by bad luck. The anonymous register is one: every query in it is
+unreadable to a faculty that reads identifiers, by construction and by theorem
+(`GLM.Anonymous.overlap_anonymise_eq_zero`), and the structural address leads
+it by more than a factor of two. Two things it leaves:
+
+*2a. A register that arrives anonymous on its own.* Renaming is a faithful
+model of a cross-vocabulary goal and it is still a model. The measurement to
+want is the same table over goals from a second Lean development, or from a
+generator, scored against the same controls — a register nobody constructed.
+
+*2b. The leak in the feature map, found by the audit.* The shipped map counts
+the type vocabulary wherever it occurs, including inside an identifier, so 33
+of 813 queries lose a coordinate when their names go. That is a name creeping
+into a reading that is supposed to be structural. Either the map is narrowed to
+count type words only where they are types, or the leak is priced — and either
+way it is a measurement, not a patch.
+
+The paragraph the stack round wrote, kept because its other half is still
+open: `relay` and its carry theorem `relay_carry` are
+register-agnostic and already run over two registers, the Lean corpus and the
+ARC grids, so the mechanism is not what is missing. What is missing is a
+query kind the leading faculty is blind to *by construction* rather than by
+bad luck: today the gate fires on 48 of 1,626 corpus queries, and the 16 the
+geometry carries are declarations whose identifiers say little and whose
+syntax says a lot. A candidate faculty has to supply such a class, not a
+better ranking of the same queries. The gate itself is also still a stated
+constant — the sweep shows every threshold from 1/20 to 1/4 improving on the
+control, which is robustness rather than calibration — and the grid register's
+ceiling is its generators (2 of 50), not its relay.
+
+**A candidate that came out of the round before: the planner's utility
 gate.** The reverse-call planner (§2, "The reverse-call planner, kept in the
 sandbox") satisfies every safety line the promotion checklist states and fails
 the one that decides it: on the project's own evaluation set it gains nothing,
@@ -2006,7 +2282,7 @@ PYTHONPATH=. python3 -m glm_universal.tools    signoff         # the summary
 ```
 
 The seven instruments in the ledger beside the
-<!--figure:test-files-->89 test files<!--/figure--> are `lean-build`,
+<!--figure:test-files-->91 test files<!--/figure--> are `lean-build`,
 `lean-sorry-free`, `lean-copies-identical`, `capabilities`, `benchmarks`,
 `evaluation` and `figures`, so the list below is what `--run-everything` runs
 when *nothing* is signed off. Editing a document makes exactly the units that
@@ -2020,7 +2296,7 @@ without consulting the ledger at all. In order, from the repository root; the
 last step is the one that catches a document drifting from the code.
 
 ```bash
-lake build                                                   # 111 Lean files, no sorry
+lake build                                                   # 113 Lean files, no sorry
 rg -n 'sorry|admit' RequestProject/GLM                       # expect nothing
 diff -r RequestProject/GLM overlay/glm_lean/RequestProject/GLM   # the two copies agree
 
@@ -2028,7 +2304,7 @@ cd overlay
 PYTHONPATH=. python3 -m pytest glm_universal/tests -q        # the whole suite
 PYTHONPATH=. python3 -m glm_universal.capabilities           # 33 probes
 PYTHONPATH=. python3 -m glm_universal.benchmarks             # 5 suites
-PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8    # 147 CLI cases
+PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8    # 149 CLI cases
 PYTHONPATH=. python3 -m glm_universal.figures --check        # FIGURES.md is current
 PYTHONPATH=. python3 -m glm_universal.figures --write        # regenerate FIGURES.md
 PYTHONPATH=. python3 -m glm_universal.corpus --refresh       # every derived document

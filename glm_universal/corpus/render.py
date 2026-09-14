@@ -857,6 +857,330 @@ def block_retrieval_guarantee() -> str:
     return "\n".join(lines)
 
 
+# ===========================================================================
+#  STACK_RELAY_STUDY.md -- the faculties, and who carries whom
+# ===========================================================================
+
+#: How each query set of the relay study is described where it is tabled.
+_STACK_SETS: Dict[str, str] = {
+    "tuning": "tuning — the stride the gate was chosen on",
+    "holdout": "holdout — a disjoint stride, never looked at while choosing",
+    "goal": "goal — both strides again, asked as bare goals",
+}
+
+
+def _stack() -> Optional[Mapping[str, object]]:
+    from . import measurements as ms
+    data = ms.current()
+    if data is None:
+        return None
+    stack = data.get("stack")
+    return stack if isinstance(stack, Mapping) else None
+
+
+def _stack_cell(cells: Sequence[Mapping[str, object]], k: int
+                ) -> Mapping[str, object]:
+    for cell in cells:
+        if cell["k"] == k:
+            return cell
+    raise KeyError(k)
+
+
+def block_stack_sets() -> str:
+    """The leader alone against the relay, on all three query sets."""
+    data = _stack()
+    if data is None:
+        return _lean_stale()
+    ladder = list(data["k_ladder"])
+    rows = []
+    for name, entry in data["sets"].items():
+        for who in ("leader", "relay"):
+            label = ("text alone" if who == "leader" else "**the relay**")
+            line = [_STACK_SETS.get(name, name), label,
+                    entry["queries"]]
+            for k in ladder:
+                cell = _stack_cell(entry[who], k)
+                text = f"{cell['hits']} ({per_cent(cell['hit_rate'])})"
+                line.append(f"**{text}**" if who == "relay" else text)
+            line.append(per_cent(entry[f"{who}_precision"]))
+            rows.append(line)
+    header = ["query set", "who answers", "queries"] \
+        + [f"hit@{k}" for k in ladder] + ["precision@5"]
+    lines = _table(header, rows)
+    carried = sum(len(entry["carried"]) for entry in data["sets"].values())
+    lost = sum(len(entry["lost"]) for entry in data["sets"].values())
+    fired = sum(entry["fired"] for entry in data["sets"].values())
+    queries = sum(entry["queries"] for entry in data["sets"].values())
+    lines.extend([
+        "",
+        f"The gate is {data['gate']} and fires on {fired} of {queries} "
+        f"queries.  Across the three sets the geometry carries **{carried}** "
+        f"queries the text control misses at k = 5 and loses **{lost}**.  "
+        "The relay "
+        "beats the text control on every set: "
+        f"{'yes' if data['verdict']['relay_beats_text_on_every_set'] else 'no'}"
+        "; it is never below the text control at any k: "
+        f"{'yes' if data['verdict']['relay_never_below_leader'] else 'no'}.",
+    ])
+    return "\n".join(lines)
+
+
+def block_stack_carried() -> str:
+    """Which queries the geometry carried, by name."""
+    data = _stack()
+    if data is None:
+        return _lean_stale()
+    rows = []
+    for name, entry in data["sets"].items():
+        rows.append([_STACK_SETS.get(name, name),
+                     entry["fired"],
+                     ", ".join(f"`{q}`" for q in entry["carried"]) or "—",
+                     ", ".join(f"`{q}`" for q in entry["lost"]) or "none"])
+    lines = _table(("query set", "gate fired", "carried by the geometry",
+                    "lost"), rows)
+    lines.extend([
+        "",
+        "A *carried* query is one the text control misses at k = 5 and the "
+        "relay hits; a *lost* query is the reverse, which is the column the "
+        "gate exists to keep empty.",
+    ])
+    return "\n".join(lines)
+
+
+def block_stack_controls() -> str:
+    """The same relay to a control partner: is the gain the geometry's?"""
+    data = _stack()
+    if data is None:
+        return _lean_stale()
+    rows = []
+    for name, entry in data["sets"].items():
+        line = [_STACK_SETS.get(name, name)]
+        line.append(len(entry["carried"]))
+        for partner in ("digest_random", "name"):
+            control = data["controls"][partner][name]
+            line.append(len(control["carried"]))
+        rows.append(line)
+    lines = _table(("query set", "carried by the two address books",
+                    "carried by digest + reshuffle",
+                    "carried by name search"), rows)
+    lines.extend([
+        "",
+        "Over the three sets the geometry carries more than the "
+        "digest-and-reshuffle control: "
+        f"{'yes' if data['verdict']['geometry_carries_more_than_control'] else 'no'}"
+        "; it never carries fewer on a set: "
+        f"{'yes' if data['verdict']['geometry_never_carries_fewer_than_control'] else 'no'}"
+        "; it carries more than the name search: "
+        f"{'yes' if data['verdict']['geometry_carries_more_than_name'] else 'no'}.",
+    ])
+    return "\n".join(lines)
+
+
+def block_stack_sweep() -> str:
+    """The gate swept: a mechanism, or a fitted constant?"""
+    data = _stack()
+    if data is None:
+        return _lean_stale()
+    rows = [[str(row["gate"]), row["fired"], per_cent(row["hit_at_5"]),
+             per_cent(row["precision_at_5"]), row["carried"], row["lost"]]
+            for row in data["sweep"]]
+    lines = _table(("gate", "queries it fires on", "hit@5", "precision@5",
+                    "carried", "lost"), rows)
+    lines.extend([
+        "",
+        "On the tuning set.  Every threshold from 1/20 to 1/4 improves on "
+        "the text control: "
+        f"{'yes' if data['verdict']['gain_holds_across_the_gate'] else 'no'}.",
+    ])
+    return "\n".join(lines)
+
+
+# ===========================================================================
+#  ANONYMOUS_REGISTER_STUDY.md -- the register only the address reads
+# ===========================================================================
+
+#: How each faculty is described where the anonymous register is tabled.
+_ANON_FACULTIES: Dict[str, str] = {
+    "text": "text — exact overlap of the identifiers",
+    "lexical": "lexical — the identifier address book",
+    "address": "**address — the structural address book**",
+    "name": "name — substring search over the names",
+    "digest": "digest — a control that knows nothing",
+    "random": "random — a seeded permutation",
+}
+
+
+def _anonymous() -> Optional[Mapping[str, object]]:
+    from . import measurements as ms
+    data = ms.current()
+    if data is None:
+        return None
+    found = data.get("anonymous")
+    return found if isinstance(found, Mapping) else None
+
+
+def block_anonymous_faculties() -> str:
+    """Every faculty, read plainly and read with the names taken away."""
+    data = _anonymous()
+    if data is None:
+        return _lean_stale()
+    k = data["k"]
+    rows = []
+    for faculty, label in _ANON_FACULTIES.items():
+        plain = _stack_cell(data["plain"][faculty], k)
+        after = _stack_cell(data["anonymous"][faculty], k)
+        rows.append([label,
+                     f"{plain['hits']} ({per_cent(plain['hit_rate'])})",
+                     f"{after['hits']} ({per_cent(after['hit_rate'])})"])
+    lines = _table(("faculty", f"hit@{k}, names kept",
+                    f"hit@{k}, names replaced"), rows)
+    lines.extend([
+        "",
+        f"{data['queries']} queries over a corpus of {data['corpus']} "
+        f"declarations; chance at k = {k} is "
+        f"{per_cent(data['chance_at_5'])}.  The text search collapses: "
+        f"{'yes' if data['verdict']['text_collapses_without_the_names'] else 'no'}"
+        "; the identifier address book collapses with it: "
+        f"{'yes' if data['verdict']['lexical_collapses_too'] else 'no'}"
+        "; the structural address holds: "
+        f"{'yes' if data['verdict']['address_holds'] else 'no'}"
+        "; and it leads every other faculty in this register: "
+        f"{'yes' if data['verdict']['address_is_the_clear_leader'] else 'no'}.",
+    ])
+    return "\n".join(lines)
+
+
+def block_anonymous_invariance() -> str:
+    """What a renaming can and cannot move in the shipped feature map."""
+    data = _anonymous()
+    if data is None:
+        return _lean_stale()
+    queries = data["queries"]
+    invariant = data["invariant_queries"]
+    rows = [
+        ["queries whose syntax coordinates are untouched", invariant,
+         f"{per_cent(Fraction(invariant, queries))} of {queries}"],
+        ["queries where a type-word coordinate moves", queries - invariant,
+         "the declaration's own name spells `Nat`, `Int`, `Rat`, `Set` or "
+         "`Decidable`, and the shipped map counts those words wherever they "
+         "occur"],
+        ["queries where any other syntax coordinate moves",
+         data["moved_outside_the_type_vocabulary"],
+         "none, which is `GLM.Anonymous.features_anonymise` holding of the "
+         "code"],
+    ]
+    lines = _table(("reading", "queries", "what it means"), rows)
+    lines.extend([
+        "",
+        "The declared vocabulary a query keeps is "
+        f"{data['kept_vocabulary']} words.  Placeholders fresh against the "
+        "corpus: "
+        f"{'yes' if data['verdict']['placeholders_are_fresh'] else 'no'}.",
+    ])
+    return "\n".join(lines)
+
+
+def block_anonymous_relay() -> str:
+    """The stack's own gate, unchanged, meeting the register."""
+    data = _anonymous()
+    if data is None:
+        return _lean_stale()
+    k = data["k"]
+    rows = []
+    for label, key in (("names kept", "relay_plain"),
+                       ("names replaced", "relay_anonymous")):
+        entry = data[key]
+        leader = _stack_cell(entry["leader"], k)
+        relayed = _stack_cell(entry["relay"], k)
+        rows.append([label, entry["queries"], entry["fired"],
+                     f"{leader['hits']} ({per_cent(leader['hit_rate'])})",
+                     f"**{relayed['hits']} "
+                     f"({per_cent(relayed['hit_rate'])})**"])
+    lines = _table(("reading", "queries", "gate fires on",
+                    f"text alone, hit@{k}", f"the relay, hit@{k}"), rows)
+    lines.extend([
+        "",
+        f"The gate is {data['gate']}, the one the relay study already "
+        "carries, not re-tuned for this register.  It hands over on most of "
+        "the register: "
+        f"{'yes' if data['verdict']['gate_hands_over'] else 'no'}"
+        "; and the relay beats the text leader here: "
+        f"{'yes' if data['verdict']['relay_beats_text_in_the_register'] else 'no'}.",
+    ])
+    return "\n".join(lines)
+
+
+def block_anonymous_verdict() -> str:
+    """Every pre-registered claim of the register, as it fell."""
+    data = _anonymous()
+    if data is None:
+        return _lean_stale()
+    rows = [[f"`{claim}`", "holds" if value else "**fails**"]
+            for claim, value in data["verdict"].items()]
+    return "\n".join(_table(("claim", "verdict"), rows))
+
+
+def block_stack_tiebreak() -> str:
+    """The other arrangement: the geometry inside the text layer's ties."""
+    data = _stack()
+    if data is None:
+        return _lean_stale()
+    ladder = list(data["k_ladder"])
+    rows = []
+    for label, schemes in data["tiebreak"].items():
+        for scheme, entry in schemes.items():
+            line = [label, scheme]
+            for k in ladder:
+                cell = _stack_cell(entry["hits"], k)
+                line.append(f"{cell['hits']} ({per_cent(cell['hit_rate'])})")
+            line.append(per_cent(entry["precision_at_5"]))
+            rows.append(line)
+    header = ["query set", "tie-break"] + [f"hit@{k}" for k in ladder] \
+        + ["precision@5"]
+    lines = _table(header, rows)
+    verdict = data["tiebreak_verdict"]
+    lines.extend([
+        "",
+        "Ranking by text overlap and breaking the many exact ties by address "
+        "distance instead of by name.  It beats the shipped name tie-break on "
+        f"hits: {'yes' if verdict['beats_name_tiebreak_on_hits'] else 'no'}; "
+        "on precision: "
+        f"{'yes' if verdict['beats_name_tiebreak_on_precision'] else 'no'}.",
+    ])
+    return "\n".join(lines)
+
+
+def block_stack_vision() -> str:
+    """The second register: the same relay over the ARC grids."""
+    from ..reasoning import vision_stack as vs
+    data = vs.vision_report()
+    rows = [
+        ("puzzles", _thousands(data["puzzles"])),
+        ("candidates proposed", _thousands(data["proposed"])),
+        ("candidates surviving the look", _thousands(data["survived"])),
+        ("share the cheap filter removes before the gate",
+         f"**{per_cent(data['filter_saving'])}**"),
+        ("puzzles the leading faculty solves alone",
+         _thousands(data["leader_solves"])),
+        ("puzzles the relay solves", f"**{_thousands(data['relay_solves'])}**"),
+        ("solved rules that also produce the held-out test output",
+         _thousands(len(data["test_solved"]))),
+        ("queries the gate fired on", _thousands(data["gate_fired"])),
+    ]
+    lines = _table(("what was measured", "result"), rows)
+    carry = "; ".join(
+        f"**{faculty}** — {', '.join('`' + name + '`' for name in names)}"
+        for faculty, names in data["carry"].items())
+    lines.extend([
+        "",
+        f"Who carried what: {carry}.  More than one faculty carries a "
+        f"puzzle: {'yes' if data['verdict']['more_than_one_faculty_carries'] else 'no'}; "
+        "the relay is never behind the leading faculty: "
+        f"{'yes' if data['verdict']['relay_never_behind_leader'] else 'no'}.",
+    ])
+    return "\n".join(lines)
+
+
 #: Documents written by a generator that lives outside this module, with the
 #: command that writes each.  They are *generated* in exactly the sense the
 #: inventory means -- nobody edits them by hand, so nobody gives them a tier-0
@@ -2428,6 +2752,18 @@ def _corpus_sections() -> str:
     return f"{len(ad.units()):,}"
 
 
+def _repo_storage() -> Mapping[str, object]:
+    """The overlay's own stored bytes, split into cache and primary data.
+
+    Cheap (one ``stat`` per artefact) and live (taken from the tree as it
+    stands), so it meets the rule for an inline figure: the storage side of
+    the generate-rather-than-store ledger can be written into a sentence
+    instead of typed out and left to age.
+    """
+    from ..reasoning import generative as gn
+    return gn.repo_storage_report()
+
+
 FIGURES: Dict[str, Callable[[], str]] = {
     #  The sentences the figures module already generates, now writable into
     #  a paragraph instead of quoted from a table by hand.
@@ -2451,6 +2787,17 @@ FIGURES: Dict[str, Callable[[], str]] = {
         lambda: f"{_cost()['addresses']['decodes_now']:,}",
     "planner-reports-per-check":
         lambda: str(_cost()["planner"]["reports_per_check_before"]),
+    #  The storage side of the generate-rather-than-store ledger: what the
+    #  overlay keeps on disk, and how much of it is a cache of something it
+    #  can recompute.
+    "repo-stored-bytes":
+        lambda: f"{int(_repo_storage()['total_bytes']):,}",
+    "repo-cache-bytes":
+        lambda: f"{int(_repo_storage()['generated_bytes']):,}",
+    "repo-primary-bytes":
+        lambda: f"{int(_repo_storage()['primary_bytes']):,}",
+    "repo-cache-share":
+        lambda: per_cent(Fraction(_repo_storage()['generated_fraction'])),
     #  And the corpus's own sizes, which no sentence pattern can cover
     #  because the documentation quotes subsets of them too.
     "lean-declarations": _lean_declaration_count,
@@ -2482,6 +2829,16 @@ BLOCKS: Dict[str, Callable[[], str]] = {
     "retrieval-goals": block_retrieval_goals,
     "retrieval-hybrid": block_retrieval_hybrid,
     "retrieval-guarantee": block_retrieval_guarantee,
+    "stack-sets": block_stack_sets,
+    "stack-carried": block_stack_carried,
+    "stack-controls": block_stack_controls,
+    "stack-sweep": block_stack_sweep,
+    "stack-tiebreak": block_stack_tiebreak,
+    "stack-vision": block_stack_vision,
+    "anonymous-faculties": block_anonymous_faculties,
+    "anonymous-invariance": block_anonymous_invariance,
+    "anonymous-relay": block_anonymous_relay,
+    "anonymous-verdict": block_anonymous_verdict,
     "landscape-verdict": block_landscape_verdict,
     "landscape-spectrum": block_landscape_spectrum,
     "landscape-depth": block_landscape_depth,

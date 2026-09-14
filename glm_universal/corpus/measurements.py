@@ -39,6 +39,7 @@ __all__ = [
     "DATA_PATH",
     "StaleAddressBook",
     "retrieval_figures",
+    "stack_figures",
     "measure",
     "write_measurements",
     "measurements",
@@ -168,6 +169,110 @@ def retrieval_figures() -> Dict[str, object]:
     }
 
 
+def anonymous_figures() -> Dict[str, object]:
+    """The anonymous register's tables, reshaped for storage.
+
+    Measured over the same corpus as the relay study and stale with it: every
+    faculty answers both readings of every query, so the cost is the same
+    quadratic pass.  Every rate stored is the exact
+    :class:`~fractions.Fraction` the report produced.
+    """
+    from ..reasoning import anonymous as an
+
+    report = an.anonymous_report()
+    ladder = list(report["k_ladder"])
+
+    def rates(entry: Mapping[str, object]) -> list:
+        return [{"k": k, "hits": entry["hits"][k],
+                 "hit_rate": entry["hit_rate"][k]} for k in ladder]
+
+    def faculties(table: Mapping[str, object]) -> Dict[str, object]:
+        return {faculty: rates(table[faculty]) for faculty in an.SCORED}
+
+    def relay(entry: Mapping[str, object]) -> Dict[str, object]:
+        return {
+            "queries": entry["queries"],
+            "fired": entry["fired"],
+            "leader": rates(entry["leader"]),
+            "relay": rates(entry["relay"]),
+            "carried": list(entry["carried"]),
+            "lost": list(entry["lost"]),
+        }
+
+    return {
+        "k_ladder": ladder,
+        "k": report["k"],
+        "corpus": report["corpus"],
+        "queries": report["queries"],
+        "chance_at_5": report["chance_at_5"],
+        "kept_vocabulary": len(report["kept_vocabulary"]),
+        "invariant_queries": report["invariant_queries"],
+        "moved_outside_the_type_vocabulary":
+            len(report["queries_moved_outside_the_type_vocabulary"]),
+        "gate": report["gate"],
+        "plain": faculties(report["plain"]),
+        "anonymous": faculties(report["anonymous"]),
+        "relay_plain": relay(report["relay_plain"]),
+        "relay_anonymous": relay(report["relay_anonymous"]),
+        "verdict": dict(report["verdict"]),
+    }
+
+
+def stack_figures() -> Dict[str, object]:
+    """The relay study's tables, reshaped for storage.
+
+    The relay is measured over the same corpus as the retrieval study and goes
+    stale with it: it asks every faculty of
+    :mod:`glm_universal.reasoning.stack` for an answer to each of three query
+    sets, which is as quadratic in the corpus as the study it extends.  Every
+    rate stored is the exact :class:`~fractions.Fraction` the report produced.
+    """
+    from ..reasoning import stack as sk
+
+    report = sk.relay_report()
+    ladder = list(report["k_ladder"])
+
+    def rates(entry: Mapping[str, object]) -> list:
+        return [{"k": k, "hits": entry["hits"][k], "hit_rate": entry["hit_rate"][k]}
+                for k in ladder]
+
+    def one(entry: Mapping[str, object]) -> Dict[str, object]:
+        return {
+            "queries": entry["queries"],
+            "fired": entry["fired"],
+            "leader": rates(entry["leader"]),
+            "relay": rates(entry["relay"]),
+            "leader_precision": entry["leader"]["precision_at_5"],
+            "relay_precision": entry["relay"]["precision_at_5"],
+            "carried": list(entry["carried"]),
+            "lost": list(entry["lost"]),
+        }
+
+    tiebreak = sk.tiebreak_report()
+    return {
+        "k_ladder": ladder,
+        "gate": report["gate"],
+        "quotas": [[name, quota] for name, quota in report["quotas"]],
+        "corpus": report["corpus"],
+        "sets": {name: one(entry) for name, entry in report["sets"].items()},
+        "controls": {partner: {name: one(entry) for name, entry in rows.items()}
+                     for partner, rows in report["controls"].items()},
+        "sweep": [{"gate": row["gate"], "fired": row["fired"],
+                   "hit_at_5": row["hit_at_5"],
+                   "precision_at_5": row["precision_at_5"],
+                   "carried": row["carried"], "lost": row["lost"]}
+                  for row in report["sweep"]],
+        "tiebreak": {label: {scheme: {
+            "hits": [{"k": k, "hits": entry["hits"][k],
+                      "hit_rate": entry["hit_rate"][k]} for k in ladder],
+            "precision_at_5": entry["precision_at_5"]}
+            for scheme, entry in rows.items()}
+            for label, rows in tiebreak["sets"].items()},
+        "tiebreak_verdict": dict(tiebreak["verdict"]),
+        "verdict": dict(report["verdict"]),
+    }
+
+
 def measure() -> Dict[str, object]:
     """Every figure the address study quotes, recomputed from the sources.
 
@@ -211,6 +316,8 @@ def measure() -> Dict[str, object]:
         "verdict": separation["verdict"],
         "classes": conflation_classes("feature"),
         "retrieval": retrieval_figures(),
+        "stack": stack_figures(),
+        "anonymous": anonymous_figures(),
     }
 
 

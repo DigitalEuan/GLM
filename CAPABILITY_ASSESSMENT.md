@@ -48,7 +48,7 @@ Four instruments were used, and all four can be re-run on demand:
 cd overlay
 PYTHONPATH=. python3 -m glm_universal.capabilities                    # 33 probes
 PYTHONPATH=. python3 -m glm_universal.benchmarks                      # 5 suites
-PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8             # 147 CLI cases
+PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8             # 149 CLI cases
 PYTHONPATH=. python3 -m pytest glm_universal/tests -q                 # the test suite
 ```
 
@@ -66,9 +66,9 @@ by hand twice: the counts are recomputed into
 |---|---|---|
 | capability probes | where the library stops, asked as user questions | **33 probes: 20 hold, 13 break, 0 errored, 0 surprises** |
 | benchmark suites | solver functions against curated and exhaustive task sets | **2,389 / 2,390 tasks across 5 suites; every suite beat its declared baseline** |
-| end-to-end CLI evaluation | the CLI, driven the way a user drives it | **147 cases: 147 passed** — 131 answered correctly, 16 refused as expected, 0 unexpected refusals, **0 confidently wrong**, 0 errored |
-| test suite | the package's own regression net | **<!--figure:suite-->3,631 tests across 88 of the 89 test files, 13,777 subtests, outside the document check<!--/figure-->**, zero failures |
-| Lean development | the machine-checked layer | **111 Lean files, `lake build` clean, no `sorry`** |
+| end-to-end CLI evaluation | the CLI, driven the way a user drives it | **149 cases: 148 passed** — 132 answered correctly, 16 refused as expected, 0 unexpected refusals, **0 confidently wrong**, 0 errored |
+| test suite | the package's own regression net | **<!--figure:suite-->3,695 tests across 90 of the 91 test files, 14,131 subtests, outside the document check<!--/figure-->**, zero failures |
+| Lean development | the machine-checked layer | **113 Lean files, `lake build` clean, no `sorry`** |
 
 A break in the probe report is not a failure — it is a located boundary, and
 each one names the exact place it stops. A *confidently wrong* answer in the
@@ -80,14 +80,14 @@ honest refusal is scored `+1`. There are now none.
 ## 2. The end-to-end CLI evaluation
 
 This is the instrument that measures what a user gets. It lives in
-`overlay/glm_universal/evaluation/`. Each of its 147 cases starts `GLM.py` in a
+`overlay/glm_universal/evaluation/`. Each of its 149 cases starts `GLM.py` in a
 **fresh interpreter** — one subprocess per question, no shared session, no warm
 caches — and scores the `ANSWER` or `UNSOLVED` line the process prints. The
 question set covers **all 21 query kinds** the runtime recognises and every one of its
 report subjects; the coverage is checked against the runtime's own tables by
 a test, so a new kind or subject cannot be added without a case.
 
-16 of the 147 questions are ones the machine **should refuse**. Answering them
+16 of the 149 questions are ones the machine **should refuse**. Answering them
 confidently is scored worse than refusing them.
 
 ### Accuracy per query kind
@@ -109,13 +109,13 @@ confidently is scored worse than refusing them.
 | `product` | 1 / 1 | 0 | 0 | 0 |
 | `project` | 1 / 1 | 0 | 0 | 0 |
 | `real` | 5 / 5 | 0 | 0 | 0 |
-| `report` | 65 / 65 | 0 | 0 | 0 |
+| `report` | 66 / 66 | 0 | 0 | 0 |
 | `spatial` | 2 / 2 | 0 | 0 | 0 |
 | `task` | 3 / 3 | 0 | 0 | 0 |
 | `trilinear` | 2 / 2 | 0 | 0 | 0 |
 | `unknown` | 1 / 1 | 0 | 0 | 0 |
 | `verify` | 6 / 6 | 0 | 0 | 0 |
-| **total** | **147 / 147** | 0 | 0 | 0 |
+| **total** | **149 / 149** | 0 | 0 | 0 |
 
 Two facts are worth stating plainly. `analogy` — the kind that carried every
 failure in an earlier round — is now 11 / 11, and the set has grown from 8
@@ -325,7 +325,7 @@ missing or wrong triple rather than to an opaque nearest-neighbour search.
   when a name is in no register, so `coherence PbCl2` and
   `cluster PbCl2, NaCl, H2O` are answered rather than refused.
 * The machine refuses well. All 16 refusal cases were refused, and there were
-  **zero** unexpected refusals across all 147 cases — including the four the
+  **zero** unexpected refusals across all 149 cases — including the four the
   `measure` query is asked at its own boundary, where
   `GLM.Info.boundary_empty_of_unmeasured` says there is nothing to answer with.
 
