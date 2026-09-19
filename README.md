@@ -13,12 +13,112 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-**Version:** 5.33 (12 September 2026)  
+**Version:** 5.37 (18 September 2026)  
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand  
 **Parent:** None - Top Level
 
 ## UPDATE THIS README
 if changes are made in this folder or systems in sub-folders need rewiring within the repository and effect this README file's structure.
+
+*Changed in 5.37:* the experiment the blockers study had been declaring for
+four rounds is **run**, and it is in `reasoning/probe_oracle.py`. Each of the
+twenty pre-registered probe questions is hand-written into the system's own
+query grammar and asked again, which splits the probe's seventeen refusals
+three ways: <!--figure:oracle-parsed-->6<!--/figure--> of twenty are answered
+by a query that already exists (against
+<!--figure:oracle-english-->2<!--/figure--> asked in English),
+<!--figure:oracle-surface-->10<!--/figure--> are held by a register row or a
+shipped function that no query kind returns, and
+<!--figure:oracle-absent-->4<!--/figure--> are held nowhere. So **the parser
+is worth <!--figure:oracle-parser-worth-->4<!--/figure--> questions and a
+field surface is worth ten** — a statement about coverage, not about
+reasoning, since a field surface is `table`, the weakest faculty. It ships as
+`tools oracle`, two generated blocks and
+[`../studies/PROBE_ORACLE_STUDY.md`](../studies/PROBE_ORACLE_STUDY.md), with
+`RequestProject/GLM/ProbeOracle.lean` proving the three classes partition the
+sample. It keeps **no measurement cache**: twenty live queries take seconds,
+so nothing new can go stale. Two smaller things came with it: the count of
+reasoning modules in the chain below is a generated figure rather than a
+hand-typed number, and the state the previous round left — 291 tracked `.pyc`
+files, two stale derived caches and a ledger signed for only five of the
+suite's files —
+is cleared.
+
+*Changed in 5.36:* the round the gates were made fast is **closed**, and two
+things that had been left half-done are finished. The sign-off machinery is
+split into the **rule** and the **record**: `signoff/rules.py` says what a
+closure is, what a digest covers and how a unit is run, and is in every
+closure; `signoff/ledger.py` keeps the plan, the signatures, the runner and
+the reporting, and is in none but the six units that import it. Editing the
+reporting used to re-run all 96 units and now runs 6, which is why two new
+instruments were worth adding: `signoff --why` names the *kind* of file that
+moved behind each stale unit (documents, code, data, Lean, scaffolding), and
+`signoff --impact PATH` says what an edit to a file *would* cost before it is
+made. [`../studies/ITERATION_COST_STUDY.md`](../studies/ITERATION_COST_STUDY.md)
+§5c is the measurement. A second gap closed with it: the ten study
+**measurement caches** — figures too expensive to take while rendering, kept
+beside the digest of their sources — were enumerated by nothing, so a stale
+one surfaced only when something happened to read it. `corpus --check` now
+takes a census of them (found by shape, with the re-taking command read out of
+`tools.py`) and names each stale one and its command, in the half-minute it
+already cost; §5d is that one. Alongside them: the count of standing rules is now a
+generated figure rather than a hand-written word — two documents said
+"fourteen" and "sixteen" at the same time — and the compiled `.pyc` files the
+last two rounds meant to stop tracking are untracked, with `__pycache__/` in
+`.gitignore` so they stay that way.
+
+*Changed in 5.35:* the **gates are fast now**, and this file says how. A
+documents check no longer recomputes a stale derivation — it names it and the
+command that rebuilds it, so `corpus --check` is half a minute rather than a
+quarter of an hour; the lattice quantiser decodes on scaled integers and is
+about nine times faster for the same points; and the planner's reading of the
+evaluation set, the expensive half of a refresh, runs on every core. The
+workflow block below is the order to run them in. Three documents moved with
+it: [`../STATUS.md`](../STATUS.md) is back to the present tense (the
+round-by-round narrative is in [`../MASTER_PLAN.md`](../MASTER_PLAN.md), Phase
+43), [`../PROJECT_DIRECTIVES.md`](../PROJECT_DIRECTIVES.md) states each rule
+and its instrument with the long-form argument moved to
+[`../archive/PROJECT_DIRECTIVES_RATIONALE_ARCHIVE.md`](../archive/PROJECT_DIRECTIVES_RATIONALE_ARCHIVE.md),
+and the reasoning sub-package is 80 modules rather than the 60 this file used
+to say.
+
+*Changed in 5.34:* this file says plainly **what is in this folder** and
+what is in the repository it is dropped over, because the two had drifted
+apart — the folder map below describes the parent repository, and only four of
+its branches are carried here. The README chain gained `corpus/`, `sandbox/`
+and `signoff/`; the operating manual
+[`../ITERATE.md`](../ITERATE.md) is named as the place a session starts; and
+the positioning note, which used to be repeated at the head of five documents,
+is now stated once in [`../PROJECT_DIRECTIVES.md`](../PROJECT_DIRECTIVES.md).
+
+## What is in this folder, and what is not
+
+This folder is the **overlay**: the part of the system that is developed and
+verified here, laid out so it can be dropped over the GLM repository the map
+further down describes. Everything in it is live — there is no inert copy.
+
+| here | what it is |
+|---|---|
+| `glm_universal/` | the active runtime and every study instrument — the substrate, the registers, the reasoning modules, the query runtime, the corpus tools, the sign-off ledger and the tests |
+| `glm_lean/RequestProject/GLM/` | the **generated mirror** of the Lean development. The source is `../RequestProject/GLM/`; `tools lean-mirror --write` regenerates this copy and an instrument checks the two are identical. Never edit this one |
+| `arc_agi_17/` | the puzzle data and the stored run state the grid register reads |
+| `GLM.py` | the command line: `python3 GLM.py -q "..."` |
+| `FIGURES.md` | every documented count, regenerated by `python3 -m glm_universal.figures --write` |
+| `REASONING_CAPABILITY.md` | whether the machine reasons, answered against the measurements rather than described |
+| `conftest.py` | the test harness scaffolding |
+
+What is **not** here, and is one level up: the standing rules
+([`../PROJECT_DIRECTIVES.md`](../PROJECT_DIRECTIVES.md)), the reading order
+([`../ENTRY.md`](../ENTRY.md)), the operating manual
+([`../ITERATE.md`](../ITERATE.md)), the current state
+([`../STATUS.md`](../STATUS.md)), the history
+([`../MASTER_PLAN.md`](../MASTER_PLAN.md)), the studies (`../studies/`), the
+Lean source (`../RequestProject/`) and the supplied material
+(`../source_material/`).
+
+**Starting a round?** [`../ITERATE.md`](../ITERATE.md) is the manual: the four
+short reads that orient a session, the three gates and which to run when, and
+where a finding is written down.
 
 ## The GLM is a substrate-native cognitive architecture. 
 It grows with each iteration rather than starting again over and over. Not a solver pipeline — a system that perceives, reasons, and acts using a 24-dimensional mathematical substrate built on the Universal Binary Principle (UBP).
@@ -68,10 +168,27 @@ After a change, one command brings every derived document back to the tree:
 
 ```bash
 cd overlay
+PYTHONPATH=. python3 -m glm_universal.corpus --check             # exit 1 on any drift, ~30 s
 PYTHONPATH=. python3 -m glm_universal.corpus --refresh           # the whole chain, in order
-PYTHONPATH=. python3 -m glm_universal.corpus --check             # exit 1 on any drift
 PYTHONPATH=. python3 -m glm_universal.tools lean-mirror --write  # regenerate the Lean mirror
 ```
+
+And three that price the work instead of doing it — each answers in under a
+minute and none of them runs a test:
+
+```bash
+PYTHONPATH=. python3 -m glm_universal.signoff --plan              # what is stale, and what it costs
+PYTHONPATH=. python3 -m glm_universal.signoff --why               # which kind of file moved, per unit
+PYTHONPATH=. python3 -m glm_universal.signoff --impact ../STATUS.md  # the cost of an edit, before it
+```
+
+Check first, refresh only if it asks you to. `--check` runs with recomputation
+forbidden: a derivation kept beside the digest of its code — the planner's
+reading of the evaluation set, the type-2 class table, the economic lattice
+points — is *reported* stale, together with the command that rebuilds it,
+rather than silently rebuilt inside a check. `--refresh` is where that cost is
+paid, once, and its expensive half runs on every core (`GLM_PLANNER_JOBS=1`
+makes it serial).
 
 `--refresh` rebuilds the Lean address book, the document address book, the
 measurement cache and then the generated documents, blocks and inline figures,
@@ -83,24 +200,34 @@ agree.
 
 ```
 README.md  (this file, the top tier)
-└── glm_universal/README.md          v1.17.0 — the active runtime, the map of the eleven sub-packages
+└── glm_universal/README.md          v1.18.0 — the active runtime, the map of the eleven sub-packages
     ├── substrate/README.md          Golay, MOG, Leech, the digit stack, decoding, the frame bridge
     ├── data_objects/README.md       the 8 registers and the two-legged losslessness contract
-    ├── reasoning/README.md          the 60 reasoning modules, and what each one is reachable as
+    ├── reasoning/README.md          the <!--figure:reasoning-modules-->83<!--/figure--> reasoning modules, and what each one is reachable as
     ├── semantics/README.md          the meaning space, reference, derived relations, the audit
     ├── recipe/README.md             the domain description, the one generic path, the three domains regenerated
     ├── language/README.md           the question description, the three generic matchers, and the seven kinds read off them
-    ├── runtime/README.md            the 21 query kinds, the 65 report subjects, the session API
+    ├── runtime/README.md            the 22 query kinds, the 65 report subjects, the session API
     ├── migration/README.md          the repository's stored state, brought in literally
     ├── benchmarks/README.md         the 5 suites, their baselines and their findings
     ├── capabilities/README.md       the 33 probes and the boundary each one locates
-    ├── evaluation/README.md         the <!--figure:evaluation-case-count-->149<!--/figure-->-case end-to-end CLI evaluation, and how it scores
-    ├── tests/README.md              <!--figure:test-files-->91 test files<!--/figure-->: what each one checks, and why
+    ├── evaluation/README.md         the <!--figure:evaluation-case-count-->157<!--/figure-->-case end-to-end CLI evaluation, and how it scores
+    ├── corpus/README.md             the documents read as data: the tier contract, the
+    │                                address book, the generated blocks and inline figures,
+    │                                and what one iteration costs
+    ├── sandbox/README.md            what is run but not relied on, with its computed
+    │                                promotion checklist (directive D14)
+    ├── signoff/ (in the package README) the ledger: a digest of everything each test file
+    │                                and each instrument depended on, so nothing unchanged
+    │                                is checked twice — `rules.py` is the rule (and is in
+    │                                every closure), `ledger.py` the record, and `--why`
+    │                                and `--impact` say what moved and what an edit costs
+    ├── tests/README.md              <!--figure:test-files-->98 test files<!--/figure-->: what each one checks, and why
     └── examples/README.md           the six demonstration scripts and the generated transcript
 
 FIGURES.md                              every documented count, regenerated by
                                         `python -m glm_universal.figures --write`
-glm_lean/RequestProject/GLM/README.md   the Lean 4 development: <!--figure:lean-files-->113 Lean files<!--/figure-->, no sorry
+glm_lean/RequestProject/GLM/README.md   the Lean 4 development: <!--figure:lean-files-->119 Lean files<!--/figure-->, no sorry
 INFORMATION_LOSS_STUDY.md               the information-loss-at-boundaries study
 INFINITE_VALUES_STUDY.md                infinite values and irrational numbers: what the
                                         value layer can hold, and where it provably stops
@@ -125,7 +252,7 @@ HIGHER_LATTICE_STUDY.md                 above 24 dimensions: the 32-dimensional 
                                         rung and its three-resolution address, the
                                         48-dimensional ternary rung, and delta-sigma run
                                         against a Leech shell
-LEAN_ADDRESS_STUDY.md                   a deterministic Leech address for each of the 3249
+LEAN_ADDRESS_STUDY.md                   a deterministic Leech address for each of the 3383
                                         Lean declarations, scored on read-back fidelity and
                                         against a digest control and a seeded reshuffle
 HARMONY_STUDY.md                        the harmonic register — 28 intervals as exact ratios —
@@ -178,10 +305,15 @@ SEARCH_LOOP_STUDY.md                    the archive's search loop read as a prog
                                         cannot separate
 TIE_BREAK_STUDY.md                      what a nearest-point tie is, and what breaking it
                                         by index costs
-PROJECT_DIRECTIVES.md                   the fourteen standing rules, each naming the
-                                        instrument that enforces it
-STATUS.md                               the single status and to-do document: what is
-                                        done, what is open, and how to re-verify it
+PROJECT_DIRECTIVES.md                   the standing rules, each naming the
+                                        instrument that enforces it, the positioning
+                                        note stated once, and the standing target
+ITERATE.md                              the operating manual: the three gates, and
+                                        where a finding is written down
+STATUS.md                               the current state: what is done now, what is
+                                        open, and how to re-verify it
+MASTER_PLAN.md                          the history: the phases, and what every round
+                                        delivered
 ```
 
 That list is a reading path through the studies this README was written
@@ -198,7 +330,15 @@ Each of the other top-level folders keeps its own README as before; the tree
 below is the index to them.
 
 ## This repository is a system 
-each folder has a README.md wiring the folders together like a script with dependencies:
+
+each folder has a README.md wiring the folders together like a script with
+dependencies. **The map below is of the parent GLM repository**, which is what
+this overlay is dropped over; of its branches, the ones carried here are
+`glm_universal/`, `glm_lean/`, `arc_agi_17/` and the root CLI. The rest are
+described as they stand upstream, and the material salvaged from them is
+audited in `../studies/SOURCE_SALVAGE_AUDIT.md`,
+`../studies/SOURCE_SALVAGE_SECOND_PASS.md` and
+`../studies/ARCHIVE_DEEP_DIVE_STUDY.md`.
 
 ```
 https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the director and collector. 
@@ -231,12 +371,12 @@ https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the dire
   │                     Each: paper + reasoner + Lean 4 proofs (no sorry)
   │
   ├──→ glm_universal/        collective active version for development/growth
-  │                         **v1.17.0 — feature complete.** Eleven sub-packages,
+  │                         **v1.18.0 — feature complete.** Eleven sub-packages,
   │                         each with its own README: substrate/ data_objects/
   │                         reasoning/ semantics/ recipe/ language/ runtime/
   │                         migration/ benchmarks/ capabilities/ evaluation/
   │                         (plus tests/ and examples/). GLM.py CLI at repo root.
-  │                         21 query kinds, 65 report subjects, 8 registers
+  │                         22 query kinds, 65 report subjects, 8 registers
   │                         (physics 726, chemistry 118, molecules 51,
   │                         mathematics 22, lexicon 95, spatial 28,
   │                         harmonics 28, economics 21)
@@ -252,10 +392,10 @@ https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the dire
   │                         them including exp/log/sin/cos/tan and real
   │                         powers, and 33 probes that report where the
   │                         machine stops: 20 hold, 13 break, 0 errored.
-  │                         A <!--figure:evaluation-case-count-->149<!--/figure-->-case end-to-end evaluation drives GLM.py in
+  │                         A <!--figure:evaluation-case-count-->157<!--/figure-->-case end-to-end evaluation drives GLM.py in
   │                         a fresh interpreter over every query kind and
   │                         every report subject.
-  │                         <!--figure:suite-->3,695 tests across 90 of the 91 test files, 14,131 subtests, outside the document check<!--/figure-->,
+  │                         <!--figure:suite-->3,924 tests across 97 of the 98 test files, 15,326 subtests, outside the document check<!--/figure-->,
   │                         zero failures. Every figure here is regenerated
   │                         into `FIGURES.md`.
   │                         Nothing unchanged is checked twice: the sign-off

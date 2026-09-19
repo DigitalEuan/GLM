@@ -42,7 +42,7 @@ register rather than tabulated.  The counts here are the ones
 
 ## The query kinds
 
-`parser.KINDS` is the authoritative list: **21 query kinds** — twenty
+`parser.KINDS` is the authoritative list: **<!--figure:query-kinds-->22 query kinds<!--/figure-->** — twenty-one
 answering kinds plus `unknown`, the honest fallback.
 
 | Kind | Surface | What it does | Wired in |
@@ -67,6 +67,7 @@ answering kinds plus `unknown`, the honest fallback.
 | `measure` | `measure hot in tea`, `measure hot`, `measure 300 in tea` | a measure word read against a comparison class, as an exact magnitude — `low + position * (high - low)` over the 45-class register, with the same word against every class of its quantity when no class is named, and the inverse reading when the subject is a magnitude. A word measured against a class of another quantity (`measure large in room`: `large` measures volume and `room` brackets a length), or a word on no scale at all, is refused with the reason, which `GLM.Info.boundary_empty_of_unmeasured` says is forced rather than missing | v1.5.0 |
 | `comparative` | `is cold in stellar_surface hotter than hot in tea`, `is hot in tea as hot as hot in tea` | the comparative and the equative between two *uses*, recognised structurally rather than by keyword: both sides are read as exact rationals and compared, and the direction is the degree word's position relative to the midpoint of its scale. Refuses across quantities, on an unmeasured use, and on a word that sits exactly at the midpoint and so names no direction. The word order does not decide it — `cold` for a star is hotter than `hot` for a cup of tea — which `GLM.Info.comparative_not_determined_by_word_order` proves and `comparative_audit()` measures at 151 of 204 cross-class pairs | v1.9.0 |
 | `derive` | `derive span_ratio of tea`, `derive numerator of perfect_fifth in harmonics` | one coordinate of one object, answered off the domain descriptions in `glm_universal.recipe` rather than off a hand-written phrase: the answering path holds no rule of its own, so a new description costs no new parsing rule. The rule that computed the value and the held quantity it came from are reported beside it, and a coordinate no description derives is refused with the reason, which `GLM.Recipe.Spec.answer_eq_none_iff` says is exactly the boundary | v1.11.0 |
+| `field` | `field atomic_weight_u of carbon`, `fields of water` | one named field of one named row, over the declared tables of `glm_universal.runtime.fields`: the element and molecule source rows, each register's carrier attributes, the Lean address book, the package's own top-level definitions, and a declared registry of zero-argument functions addressable by key. The second shape names the fields a row answers to. It is `table`, the weakest faculty, and says so in every answer; it refuses an unknown row, an unknown field and a field the register records as missing, and `GLM.FieldSurface.lookup_eq_none_iff` says the answerable pairs are exactly the declared ones | v1.18.0 |
 | `unknown` | (fallback) | diagnostics + suggestions | v0.4.0 |
 
 ## The `report` subjects

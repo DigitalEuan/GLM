@@ -8,10 +8,10 @@ own ``measure`` say the same thing.  Two classes do that -- one against the
 slow functions of ``information_loss`` on a mixed carrier set, one on the
 report's own sample -- and the rest pin the findings the scale produced:
 
-* resolution rises 415 -> 544 -> 757 and then stops, because the top three
+* resolution rises 469 -> 598 -> 811 and then stops, because the top three
   layers hold the carrier itself;
 * every boundary is a refinement, on a thousand carriers rather than seven;
-* the ceiling -- 757 distinct carriers under 1,040 named entries, so 283
+* the ceiling -- 811 distinct carriers under 1,094 named entries, so 283
   entries are beyond every layer, all of the collisions inside one register;
 * addition descends exactly where the view is the carrier;
 * the rejected SI7-only reading breaks refinement at scale, in bulk.
@@ -113,8 +113,8 @@ class TestTheCarrierSet:
     def test_one_carrier_per_named_object(self, entries):
         sizes = esc.register_sizes(entries)
         assert sizes == {"physics": 726, "chemistry": 118, "molecules": 51,
-                         "mathematics": 22, "harmonics": 28, "lexicon": 95}
-        assert len(entries) == sum(sizes.values()) == 1040
+                         "mathematics": 22, "harmonics": 28, "lexicon": 149}
+        assert len(entries) == sum(sizes.values()) == 1094
 
     def test_every_carrier_is_24_exact_rationals(self, entries):
         for entry in entries:
@@ -137,8 +137,8 @@ class TestResolutionAtScale:
     """What each layer resolves, and that the order cannot invert."""
 
     def test_the_measured_column(self, report, subtests):
-        expected = {"substrate": 415, "integer": 544, "rational": 757,
-                    "griess": 757, "universal": 757, "integer_raw": 359}
+        expected = {"substrate": 469, "integer": 598, "rational": 811,
+                    "griess": 811, "universal": 811, "integer_raw": 363}
         for layer in report["layers"]:
             with subtests.test(layer=layer["name"]):
                 assert layer["resolution"] == expected[layer["name"]]
@@ -188,8 +188,8 @@ class TestTheCeiling:
 
     def test_the_measured_ceiling(self, report):
         ceiling = report["ceiling"]
-        assert ceiling["entries"] == 1040
-        assert ceiling["distinct_carriers"] == 757
+        assert ceiling["entries"] == 1094
+        assert ceiling["distinct_carriers"] == 811
         assert ceiling["unreachable"] == 283
         assert ceiling["collision_classes"] == 104
         assert ceiling["cross_register"] == 0
@@ -275,10 +275,10 @@ class TestTheRejectedReadingAtScale:
     def test_it_breaks_refinement_in_bulk(self, report):
         raw = report["non_cumulative"]
         assert raw["refines_substrate"] is False
-        assert raw["violations"] == 11176
-        assert raw["resolution"] == 359
+        assert raw["violations"] == 13020
+        assert raw["resolution"] == 363
         assert raw["cumulative_refines_substrate"] is True
-        assert raw["cumulative_resolution"] == 544
+        assert raw["cumulative_resolution"] == 598
 
     def test_the_example_pair_is_a_real_violation(self, report, entries):
         raw = report["non_cumulative"]
@@ -303,7 +303,7 @@ class TestTheReportSubject:
         solution = session.ask("report escalation")
         expected = solution.expected
         assert expected["carriers"] == str(report["carrier_count"])
-        assert expected["distinct_carriers"] == "757"
+        assert expected["distinct_carriers"] == "811"
         assert expected["unreachable"] == "283"
         assert expected["chain_intact"] == "True"
         assert expected["addition_descends"] == "rational,griess,universal"

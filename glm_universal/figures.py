@@ -133,7 +133,21 @@ def package_figures() -> Dict[str, object]:
         "domain_count": len(DOMAINS),
         "tasks": TASKS,
         "task_count": len(TASKS),
+        "directive_count": _directive_count(),
     }
+
+
+def _directive_count() -> int:
+    """How many standing rules ``PROJECT_DIRECTIVES.md`` states.
+
+    Counted from the document rather than remembered, because it is exactly
+    the kind of number a round moves and no round remembers to update: two
+    files described "the fourteen rules" and "the sixteen rules" at the same
+    time, and both sentences were hand-written.
+    """
+    from .reasoning import directives as dv
+
+    return int(dv.directives_report()["count"])
 
 
 def register_figures() -> Dict[str, object]:
@@ -489,6 +503,7 @@ SENTENCE_PATTERNS: Tuple[Tuple[str, str, str], ...] = (
     ("evaluation_cases", r"\b\d+ CLI cases\b", "the evaluation set"),
     ("test_files", r"\b\d+ test files\b", "how many test files"),
     ("lean_files", r"\b\d+ Lean files\b", "the Lean development"),
+    ("directives", r"\b\d+ standing rules\b", "how many rules there are"),
     ("suite", r"\b[\d,]+ tests across \d+(?: of the \d+)? test files, "
      r"[\d,]+ subtests(?:, outside the document check)?",
      "what a complete run counts"),
@@ -541,6 +556,8 @@ def sentences(data: Optional[Mapping[str, object]] = None
         f"{get('tests', 'test_files')} test files")
     add("lean_files", get("lean", "files"),
         f"{get('lean', 'files')} Lean files")
+    add("directives", get("package", "directive_count"),
+        f"{get('package', 'directive_count')} standing rules")
     if get("suite", "tests") is not None:
         #  "M of the T test files" and "outside the document check" are part
         #  of the sentence, not a gloss on it: the totals are measured over

@@ -53,6 +53,7 @@ from ..language.descriptions import DESCRIBED_KINDS
 
 __all__ = [
     "QueryError", "QueryKind", "KINDS", "VERBS", "DOMAIN_PRIORITY",
+    "START_ONLY",
     "Query", "ConceptIndex", "normalise", "tokenise",
     "levenshtein", "split_analogy", "split_equation", "parse_query",
     "DESCRIBED_KINDS",
@@ -77,7 +78,7 @@ KINDS: Tuple[str, ...] = (
     "verify", "analogy", "describe", "nearest", "product", "cluster",
     "spatial", "project", "trilinear", "coherence", "report", "angle",
     "task", "pi_groups", "meaning", "real", "compare", "measure",
-    "comparative", "derive",
+    "comparative", "derive", "field",
     "unknown",
 )
 
@@ -163,6 +164,15 @@ VERBS: Dict[str, str] = {
     "derive": "derive", "derivation of": "derive",
     "coordinate": "derive", "which coordinate": "derive",
     "what derives": "derive",
+    # field -- one named field of one named row, or the field names a row
+    # answers to (v1.18.0).  Both operands are carried through unresolved:
+    # a field name is not a register entry, and a row may be a Lean
+    # declaration or a declared function rather than a carrier.  Every
+    # opening here is *start-only* (see :data:`START_ONLY`): `field` is an
+    # ordinary noun in the physics register -- `electric field strength` --
+    # so the word governs a question only when it opens it.
+    "field": "field", "fields": "field", "field names": "field",
+    "which field": "field", "value of field": "field",
     "meaning": "meaning", "meaning of": "meaning", "means": "meaning",
     "denotes": "meaning", "denotation": "meaning", "refers to": "meaning",
     "ground": "meaning", "grounding": "meaning", "relate": "meaning",
@@ -175,6 +185,21 @@ VERBS: Dict[str, str] = {
 DOMAIN_PRIORITY: Tuple[str, ...] = (
     "physics", "chemistry", "molecules", "mathematics", "spatial",
     "harmonics", "economics", "lexicon",
+)
+
+#: Directive keywords that govern **only** when they open the question.
+#:
+#: An ordinary directive fires wherever it occurs, which is what lets
+#: ``the nearest 3 to pressure`` be a ``nearest`` query.  That is wrong for a
+#: keyword which is also a common noun of a register: ``electric field
+#: strength`` names a physical quantity and asks for no field of any row, and
+#: before this set existed there was no way to say so.  A start-only keyword
+#: is skipped by :func:`_match_verb` unless it stands at position 0 of the
+#: cleaned question, after the courtesy and interrogative openers are
+#: stripped -- so ``field name of C`` is a field query and ``describe
+#: electric field strength`` is not.
+START_ONLY: Tuple[str, ...] = (
+    "field", "fields", "field names", "which field", "value of field",
 )
 
 #: Applied to the raw string before tokenising.  Politeness and filler carry
@@ -586,9 +611,12 @@ def _match_verb(lowered: str) -> Optional[Tuple[str, str, bool]]:
 
     A keyword at position 0 governs the query -- unless it is one of the
     :data:`_WEAK_OPENERS`, in which case a more specific keyword later in the
-    string takes over.  Otherwise the earliest keyword wins.
+    string takes over.  Otherwise the earliest keyword wins.  A keyword of
+    :data:`START_ONLY` is not considered at all unless it opens the question,
+    because it is also an ordinary noun of a register.
     """
-    hits = _verb_hits(lowered)
+    hits = [hit for hit in _verb_hits(lowered)
+            if hit[1] not in START_ONLY or hit[0] == 0]
     if not hits:
         return None
     idx, keyword, kind = hits[0]
@@ -1262,6 +1290,33 @@ def _build_keyword_query(text: str, cleaned: str, lowered: str,
         # coordinate, a measure word or a task is.
         return _described_query(text, cleaned, kind, domain, trace, rule)
 
+    if kind == "field":
+        # 'field atomic_weight_u of carbon' -- one field of one row -- and
+        # 'fields of water', which asks which fields a row answers to.
+        # Neither operand is resolved in the concept index: a field name is
+        # not a register entry, and a row may be a Lean declaration or a
+        # declared function.
+        if keyword in ("fields", "field names"):
+            options["list"] = True
+            options["name"] = ""
+            options["row"] = _strip_connectives(remainder)
+            trace.append(f"listing shape: the fields of "
+                         f"{options['row']!r}")
+        else:
+            head, separator, tail = _split_field_phrase(remainder)
+            options["list"] = False
+            options["name"] = head
+            options["row"] = tail
+            if separator is None:
+                trace.append("no separator between the field and the row; "
+                             "the solver states the boundary")
+            else:
+                trace.append(f"field {head!r} of row {tail!r}, split at "
+                             f"{separator!r}")
+        return Query(raw=text, normalised=cleaned, kind="field",
+                     domain=domain, operands=(), options=options,
+                     rule=rule, trace=tuple(trace))
+
     if kind == "angle":
         # 'angle A B' -- two operands for the cosine comparison.
         names = _split_list(_strip_connectives(remainder))
@@ -1306,6 +1361,37 @@ def _build_keyword_query(text: str, cleaned: str, lowered: str,
     return Query(raw=text, normalised=cleaned, kind=kind, domain=settled,
                  operands=operands, options=options, rule=rule,
                  trace=tuple(trace))
+
+
+#: The words that separate a field name from the row it is a field of.  The
+#: same three the ``derive`` description admits, for the same reason: a field
+#: can be ``of`` a row, ``for`` a row or ``on`` a row with no change of
+#: meaning, and which of the three was written is not a semantic decision.
+_FIELD_SEPARATORS: Tuple[str, ...] = (" of ", " for ", " on ")
+
+
+def _split_field_phrase(remainder: str) -> Tuple[str, Optional[str], str]:
+    """``'atomic_weight_u of carbon'`` -> ``('atomic_weight_u', ' of ', 'carbon')``.
+
+    The **last** separator cuts, so a field name containing one of the three
+    words is kept whole while the row -- a dotted Lean name or a register
+    entry -- is what follows.  With no separator present the whole remainder
+    is returned as the field name and the row is empty, which the solver
+    reports as the named boundary rather than guessing which half is which.
+    """
+    body = remainder.strip(" ,:")
+    lowered = body.lower()
+    best: Optional[Tuple[int, str]] = None
+    for separator in _FIELD_SEPARATORS:
+        idx = lowered.rfind(separator)
+        if idx >= 0 and (best is None or idx > best[0]):
+            best = (idx, separator)
+    if best is None:
+        return body, None, ""
+    idx, separator = best
+    head = body[:idx].strip(" ,:")
+    tail = _strip_connectives(body[idx + len(separator):])
+    return head, separator, tail
 
 
 _CONNECTIVES = ("the ", "of the ", "of ", "for ", "to ", "a ", "an ")

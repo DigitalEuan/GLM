@@ -14,6 +14,35 @@
 
 ---
 
+## Picking the work up, in one screen
+
+```bash
+cd overlay
+PYTHONPATH=. python3 -m glm_universal.corpus --check       # is the tree as the last round left it?  ~30 s
+PYTHONPATH=. python3 -m glm_universal.signoff --verify      # which checks are still signed
+PYTHONPATH=. python3 -m glm_universal.corpus --ask "what bears on the Golay code?"
+```
+
+1. Read [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md) — the Positioning
+   section, the target, the <!--figure:directives-->16 standing rules<!--/figure--> and *The round, end to end*.
+2. Read [`STATUS.md`](STATUS.md) §1 (where the work stands) and §3.4 (the
+   candidates, sharpest first). **Take one of those.**
+3. Use [`DIGEST.md`](DIGEST.md) to find the two or three studies that bear on
+   it, and descend into those only.
+4. Work, running the cheapest gate that could fail ([`ITERATE.md`](ITERATE.md)
+   §2). After a prose edit that is `corpus --check`; after a code edit it is
+   `corpus --refresh` once, then `signoff --run-everything --jobs 8`.
+5. Write the finding into a `studies/*_STUDY.md`, the present tense into
+   [`STATUS.md`](STATUS.md), the round into [`MASTER_PLAN.md`](MASTER_PLAN.md),
+   and anything proved into `RequestProject/GLM/`.
+6. Close with `corpus --refresh`, `corpus --check`,
+   `signoff --release --jobs 8`, and commit.
+
+Everything below says *what to read*; [`ITERATE.md`](ITERATE.md) says *what to
+do* at length.
+
+---
+
 This file is the one hand-written entry point. It makes a claim about
 **coverage**, and the claim is tested rather than asserted: these documents
 describe the system as it is; everything else is a record of a round, or a
@@ -43,10 +72,17 @@ needed to understand the state now, and nothing in it has been deleted.
 
 ## Read in this order
 
-1. [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md) — the standing rules,
-   the instrument that enforces each, and the Positioning section that opens
-   it: what is being claimed and what is not. Read the positioning first;
-   everything else assumes it has been read.
+0. [`ITERATE.md`](ITERATE.md) — the operating manual: how a session picks the
+   work up, which of the three gates to run when, and where a finding is
+   written down. This file says what to read; that one says what to do.
+0a. [`WHITEBOARD.md`](WHITEBOARD.md) — the round *in progress*: what the last
+   session finished, what it had running when it stopped, and the command that
+   resumes each thing left. Read it before anything else if a round is open;
+   it is empty between rounds.
+1. [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md) — the standing rules, the
+   instrument that enforces each, the round protocol end to end, and the
+   Positioning section that opens it: what is being claimed and what is not.
+   Read the positioning first; everything else assumes it has been read.
 2. [`DIGEST.md`](DIGEST.md) — the whole corpus at tier 0, one row per document.
 3. [`README.md`](README.md) — the repository's front door: what the system is,
    and what has been built.
@@ -104,6 +140,13 @@ first and descend into the few that bear on the task.
 [`NOISE_EXPERIMENT_STUDY.md`](studies/NOISE_EXPERIMENT_STUDY.md)
 
 **Layers, loss and escalation.**
+[`CONSTRUCTION_LADDER_STUDY.md`](studies/CONSTRUCTION_LADDER_STUDY.md) ·
+[`NORM_FAMILY_STUDY.md`](studies/NORM_FAMILY_STUDY.md) ·
+[`OPERATION_ESCALATION_STUDY.md`](studies/OPERATION_ESCALATION_STUDY.md) ·
+[`SECOND_READING_STUDY.md`](studies/SECOND_READING_STUDY.md) ·
+[`BLOCKERS_STUDY.md`](studies/BLOCKERS_STUDY.md) ·
+[`PROBE_ORACLE_STUDY.md`](studies/PROBE_ORACLE_STUDY.md) ·
+[`FIELD_SURFACE_STUDY.md`](studies/FIELD_SURFACE_STUDY.md) ·
 [`INFORMATION_LOSS_STUDY.md`](studies/INFORMATION_LOSS_STUDY.md) ·
 [`ESCALATION_STUDY.md`](studies/ESCALATION_STUDY.md) ·
 [`CUMULATIVITY_STUDY.md`](studies/CUMULATIVITY_STUDY.md) ·
@@ -172,6 +215,11 @@ made against a list rather than a hope.
   closed phases, as they were written.
 * [`archive/PACKAGE_README_ARCHIVE.md`](archive/PACKAGE_README_ARCHIVE.md) —
   the package change log, row by row.
+* [`archive/PROJECT_DIRECTIVES_RATIONALE_ARCHIVE.md`](archive/PROJECT_DIRECTIVES_RATIONALE_ARCHIVE.md)
+  — the long-form argument each standing rule was written with, as it was
+  written. The rules themselves are current and are in
+  [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md); only the rationale is here,
+  and its figures are frozen at the round that measured them.
 * [`ARISTOTLE_SUMMARY.md`](ARISTOTLE_SUMMARY.md) — the working notes left by
   the sessions that built this repository.
 * `source_material/` — what was supplied rather than written here, kept exactly

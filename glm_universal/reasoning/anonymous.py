@@ -8,8 +8,8 @@ geometric address beats chance by several times over and is beaten decisively
 by a plain lexical overlap of the statement text.
 :mod:`glm_universal.reasoning.stack` then showed that the address is not
 useless even so -- gated on the text layer's own confidence it *carries* the
-queries the text layer cannot read -- but the carry set there is a residue: 14
-queries out of 1,614, mostly constants and calibration lemmas whose identifiers
+queries the text layer cannot read -- but the carry set there is a residue: 13
+queries out of 1,652, mostly constants and calibration lemmas whose identifiers
 say little.
 
 The question that leaves, and the one this module settles, is whether the

@@ -484,7 +484,11 @@ class TestSolvers:
             assert Fraction(height) >= 0
 
     def test_cluster_refuses_a_cross_domain_mix(self, sess):
-        sol = sess.ask("cluster carbon, force into 2")
+        # ``oxygen`` is held by the element register and nothing else.
+        # ``carbon`` used to serve here and no longer can: v0.6.0 put it in
+        # the semantic lexicon as well, so it and ``force`` now do share a
+        # register and the query is answerable.
+        sol = sess.ask("cluster oxygen, force into 2")
         assert not sol.ok
 
     def test_cluster_refuses_a_single_carrier(self, sess):

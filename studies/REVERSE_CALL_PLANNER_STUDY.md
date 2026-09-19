@@ -174,11 +174,11 @@ argument.
 <!-- generated: plannersandbox-fallback -->
 | reading | value |
 |---|---|
-| evaluation cases | 149 |
-| the runtime answers | 135 |
-| the runtime refuses | 14 |
+| evaluation cases | 157 |
+| the runtime answers | 140 |
+| the runtime refuses | 17 |
 | of those, classified principled | 10 |
-| the planner is consulted on | 4 |
+| the planner is consulted on | 7 |
 | principled refusals reaching the planner | 0 |
 | answers the runtime does not give | 0 |
 | **safety gate** | **True** |

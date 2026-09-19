@@ -261,7 +261,7 @@ DIGEST_SITES: Tuple[Tuple[str, str], ...] = (
     ("benchmarks/harness.py",
      "a sixteen-character digest of a suite's inputs, so a benchmark result "
      "is only reused against the inputs it was measured on"),
-    ("signoff/ledger.py",
+    ("signoff/rules.py",
      "the signature a unit is signed off with: a digest of the sources and "
      "documents it depended on, which is what makes a signature go stale"),
 )
@@ -270,7 +270,7 @@ DIGEST_SITES: Tuple[Tuple[str, str], ...] = (
 def module_digest_uses(path: pathlib.Path) -> int:
     """How many times the module imports a hashing library.
 
-    Imports inside a function count -- ``signoff/ledger.py`` and
+    Imports inside a function count -- ``signoff/rules.py`` and
     ``derived.py`` import :mod:`hashlib` locally precisely so that the core
     never imports it at module scope -- and a mention in a docstring or in a
     list of banned names does not, which is why this parses.

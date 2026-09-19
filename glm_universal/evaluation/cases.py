@@ -397,7 +397,7 @@ _CASES: Tuple[EvalCase, ...] = (
             "every rule failed the gate, or to a field no rule over this "
             "register could reach."),
     _c("report-vagueness", "report", "report vagueness",
-       "answer", contains=("34 of 66", "referred to a person"),
+       "answer", contains=("35 of 110", "referred to a person"),
        note="The standing rule for a vague related_to triple: four routes "
             "tried in order, of which only the last asks a person, and a "
             "proposer whose rules are admitted only for agreeing with every "
@@ -617,7 +617,7 @@ _CASES: Tuple[EvalCase, ...] = (
             "control that scores just as well -- which is what makes the "
             "catalogue's economic claim not reproduced."),
     _c("report-escalation", "report", "report escalation",
-       "answer", contains=("1040", "757", "refinement"),
+       "answer", contains=("1094", "811", "refinement"),
        note="The layer audit run on every register carrier rather than on "
             "seven fixtures: resolution rises and stops, every boundary is "
             "still a refinement, and 283 named entries share a carrier with "
@@ -638,8 +638,8 @@ _CASES: Tuple[EvalCase, ...] = (
        note="The relative-measure study recomputed: the register's size, "
             "what the widening gains, and that it gives nothing up."),
     _c("report-denotations", "report", "report denotations",
-       "answer", contains=("36 verdicts", "0 triples waiting",
-                           "12 of the 22 analogies"),
+       "answer", contains=("83 verdicts", "0 triples waiting",
+                           "18 of the 26 analogies"),
        note="The denotation half of the same subject, reached by the name "
             "the question asks for: what the undimensioned endpoints of the "
             "residue denote is decided one name at a time, so nothing is "
@@ -654,7 +654,7 @@ _CASES: Tuple[EvalCase, ...] = (
             "every measured figure comes back unchanged."),
 
     _c("report-language", "report", "report language",
-       "answer", contains=("7 of 20 answerable query kinds",
+       "answer", contains=("7 of 21 answerable query kinds",
                            "derive, measure, task, compare by slot shape",
                            "verify, analogy, compare by infix shape",
                            "comparative by nested shape",
@@ -701,8 +701,8 @@ _CASES: Tuple[EvalCase, ...] = (
             "resolved above the first rung and two refusals come back as "
             "certified absences."),
     _c("report-relay", "report", "report relay",
-       "answer", contains=("356 -> 362 of 407", "48 of 1626",
-                           "carrying 16 queries it misses and losing 1"),
+       "answer", contains=("362 -> 365 of 423", "64 of 1692",
+                           "carrying 14 queries it misses and losing 1"),
        note="The faculties arranged as a stack rather than scored one at a "
             "time: below a gate of 1/10 the leading lexical search is "
             "judged to have abstained and the two geometric address books "
@@ -712,7 +712,7 @@ _CASES: Tuple[EvalCase, ...] = (
             "matched digest-and-reshuffle control carries far fewer, so "
             "the gain is the substrate's rather than the padding's."),
     _c("report-anonymous", "report", "report anonymous",
-       "answer", contains=("710 -> 84 of 813", "232 -> 171 of 813",
+       "answer", contains=("722 -> 73 of 846", "236 -> 161 of 846",
                            "class, not a residue"),
        note="The register where the geometric address is the only faculty "
             "still reading: rename every identifier of a query outside a "
@@ -847,6 +847,51 @@ _CASES: Tuple[EvalCase, ...] = (
             "refusal is exactly the boundary "
             "`GLM.Recipe.Spec.answer_eq_none_iff` describes: the answered "
             "coordinates are the described ones and no others."),
+
+    # ----------------------------------------------------------------- field
+    _c("field-atomic-weight-carbon", "field",
+       "field atomic_weight_u of carbon",
+       "answer", contains=("12011/1000", "12.011", "element"),
+       note="The fact the probe oracle found held and unreachable: the row "
+            "has always carried it and no query kind returned it.  Exact, "
+            "with the terminating decimal beside the rational because one "
+            "exists."),
+    _c("field-group-block-chlorine", "field",
+       "field group_block of chlorine",
+       "answer", contains=("Halogen", "Cl"),
+       note="A row is resolved by a name it holds itself -- here the "
+            "element's `name` field rather than its symbol."),
+    _c("field-molar-mass-water", "field", "field molar_mass_u of water",
+       "answer", contains=("3603/200", "18.015", "recomputed"),
+       note="The molecule register declares this derived rather than "
+            "stored, so the answer says it was recomputed and names the "
+            "rule: a surface that let a derived value pass as a held one "
+            "would be claiming more than it does."),
+    _c("field-lean-declaration-file", "field",
+       "field file of GLM.NormFamily.family_tower",
+       "answer", contains=("NormFamily.lean", "address"),
+       note="The Lean address book read as a table: one declaration, one "
+            "field, rather than the aggregate `report lean` gives."),
+    _c("field-listing-shape", "field",
+       "fields of glm_universal.substrate.norm_family.completeness",
+       "answer", contains=("complete", "rungs", "function"),
+       note="How *what does this return?* is asked without naming the "
+            "answer in the question: the keys of a declared function's "
+            "returned mapping are its fields."),
+    _c("field-unknown-field", "field", "field boiling_point of carbon",
+       "refusal", classification="boundary",
+       note="The field is refused with the list of the fields the row does "
+            "answer to -- `boiling_point_K` is the name it holds -- rather "
+            "than answered with a blank or guessed at."),
+    _c("field-missing-value", "field", "field electronegativity_pauling of He",
+       "refusal", classification="boundary",
+       note="Helium's row records this field as missing, and the "
+            "missingness mask is a fact about the register: answering "
+            "`none` as though it were a value would hide it."),
+    _c("field-unknown-row", "field", "field name of unobtainium",
+       "refusal", classification="boundary",
+       note="No declared table holds the row, and the refusal carries the "
+            "nearest row names rather than a bare failure."),
 )
 
 

@@ -102,6 +102,7 @@ from ..semantics import meaning as sme
 from ..semantics import reference as sre
 from ..semantics import relations as srl
 from . import escalation_loop as esl
+from . import fields as fl
 from . import parser as PA
 from .parser import ConceptIndex, Query, QueryError, parse_query
 from .payload import as_magnitude, jsonable
@@ -329,6 +330,7 @@ class GeometricSession(SubstrateReports, LatticeGeometryReports,
         self._registers: Dict[str, Tuple[DataObject, ...]] = {}
         self._index: Optional[ConceptIndex] = None
         self._history: List[InferenceRecord] = []
+        self._field_surface: Optional["fl.FieldSurface"] = None
         self._lexicon_codec = None  # set when the lexicon register loads
 
     # -- configuration ------------------------------------------------------
@@ -588,6 +590,11 @@ class GeometricSession(SubstrateReports, LatticeGeometryReports,
             # rule of its own, and whose refusals are a description's
             # boundary rather than a register's.
             "derive": self._solve_derive,          # uses rcp.ask
+            # v1.18.0: one named field of one named row -- the field
+            # surface.  It is `table`, the weakest of the three faculties:
+            # it derives nothing and addresses nothing, and it makes what is
+            # already held reachable.
+            "field": self._solve_field,            # uses fl.FieldSurface
         }
         solver = table.get(query.kind)
         if solver is None:
@@ -3468,7 +3475,141 @@ class GeometricSession(SubstrateReports, LatticeGeometryReports,
             payload={"answer": {k: (q(v) if isinstance(v, Fraction) else v)
                                 for k, v in result.items()}})
 
+    # -- v1.18.0: the field surface --------------------------------------
+
+    @property
+    def field_surface(self) -> "fl.FieldSurface":
+        """The field surface over this session's own registers.
+
+        Built once and kept, so a second field query pays nothing to index
+        the registers again; the session's carriers are handed to it rather
+        than reloaded, which is why the surface reports eight carrier tables
+        here and seven when it is built standalone.
+        """
+        if self._field_surface is None:
+            self._field_surface = fl.FieldSurface(
+                {domain: self.register(domain) for domain in self._domains})
+        return self._field_surface
+
+    def _solve_field(self, query: Query) -> Solution:
+        """``field atomic_weight_u of carbon`` -- one field of one row.
+
+        The weakest thing this system does, and the point of it: the element
+        register has always held ``atomic_weight_u = 12011/1000`` for carbon
+        and no query kind returned it, so the fact was here and unreachable.
+        Nothing is derived on this path -- where the value *is* recomputed,
+        because the register declares it derived rather than storing it, the
+        answer says so and names the rule.
+
+        The listing shape ``fields of <row>`` answers with the field names
+        the row admits, which is how a question about what something holds is
+        asked without naming the answer in the question.
+        """
+        row = str(query.options.get("row", "")).strip()
+        name = str(query.options.get("name", "")).strip()
+        listing = bool(query.options.get("list", False))
+        surface = self.field_surface
+        if not row:
+            raise SolverError(
+                "field: name a field and a row, written '<field> of <row>' "
+                "-- e.g. 'field atomic_weight_u of carbon'; "
+                "'fields of carbon' lists the fields a row answers to")
+        if listing or not name:
+            if not listing:
+                raise SolverError(
+                    f"field: {query.raw!r} names no field of {row!r}; write "
+                    f"'<field> of {row}', or 'fields of {row}' for the "
+                    f"fields it answers to")
+            try:
+                held = surface.fields(row)
+            except fl.FieldError as error:
+                raise SolverError(f"field: {error}") from None
+            steps = (
+                Step("the row is resolved against the declared tables",
+                     f"A row is looked up by the names it holds itself -- "
+                     f"its key, and any name, symbol, formula or identifier "
+                     f"field it carries. Nothing is invented and no alias "
+                     f"is guessed.",
+                     f"{held.row} is held by {', '.join(held.tables)}"),
+                Step("the fields it answers to",
+                     f"This is the surface's own index, not a description "
+                     f"of the row: every name here is a field some declared "
+                     f"table holds for this row, and asking for any other "
+                     f"name is refused rather than answered emptily.",
+                     f"{len(held.names)} fields: "
+                     f"{', '.join(held.names)}"),
+            )
+            return Solution(
+                query=query, kind="field",
+                answer=f"{held.row} answers to {len(held.names)} fields, "
+                       f"held by {', '.join(held.tables)}: "
+                       f"{', '.join(held.names)}",
+                steps=steps,
+                expected={"row": held.row,
+                          "tables": ", ".join(held.tables),
+                          "fields": ", ".join(held.names),
+                          "count": str(len(held.names))},
+                script_spec={"template": "field",
+                             "args": {"row": held.row, "list": True}},
+                payload={"row": held.row, "tables": list(held.tables),
+                         "fields": list(held.names)})
+
+        try:
+            found = surface.field(name, row)
+        except fl.FieldError as error:
+            raise SolverError(f"field: {error}") from None
+        table = surface.table_by_name(found.table)
+        how = (f"recomputed on read by the rule the register declares: "
+               f"{found.rule}"
+               if found.derived else
+               "read as it is held; nothing on this path computes it")
+        steps = [
+            Step("the row is resolved against the declared tables",
+                 f"The tables are consulted in a fixed priority order and "
+                 f"the first one holding both the row and the field "
+                 f"answers. {table.gloss.capitalize()}.",
+                 f"{found.row} in table {found.table} ({found.table_kind})"),
+            Step("the field is read, or refused",
+                 f"A field the row does not hold is refused with the list "
+                 f"of the fields it does hold, and a field the register "
+                 f"records as missing for this row is refused as missing "
+                 f"rather than answered with a blank.",
+                 f"{found.field} of {found.row} = {found.rendered}"),
+            Step("where the value came from",
+                 f"The provenance is the callable the table was declared "
+                 f"with, so the answer can be re-taken without this "
+                 f"session: {how}.",
+                 f"{found.provenance}"),
+            Step("what this is not",
+                 f"A field surface is `table`, the weakest of the three "
+                 f"faculties: it makes a held fact reachable and derives "
+                 f"nothing. The answer would be the same if every geometric "
+                 f"part of this system were removed.",
+                 f"faculty = table; derived = "
+                 f"{'yes' if found.derived else 'no'}"),
+        ]
+        return Solution(
+            query=query, kind="field",
+            answer=f"{found.field} of {found.row} = {found.rendered} "
+                   f"-- from the {found.table} table "
+                   f"({found.table_kind}), {how}",
+            steps=tuple(steps),
+            expected={"value": found.rendered, "field": found.field,
+                      "row": found.row, "table": found.table,
+                      "table_kind": found.table_kind,
+                      "derived": "yes" if found.derived else "no"},
+            script_spec={"template": "field",
+                         "args": {"row": found.row, "field": found.field,
+                                  "list": False}},
+            payload={"row": found.row, "field": found.field,
+                     "value": found.rendered, "table": found.table,
+                     "table_kind": found.table_kind,
+                     "derived": found.derived, "rule": found.rule,
+                     "provenance": found.provenance})
+
 
 # Keep a module-level reference so the digit-stack import is not flagged as
 # unused; the stack constants document the substrate this session sits on.
+#
+# (The field surface is reached through `GeometricSession.field_surface`.)
 _STACK_FACETS: int = len(ds.FACETS)

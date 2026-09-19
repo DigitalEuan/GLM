@@ -39,11 +39,13 @@ taken from :mod:`glm_universal.integrity`, lazily, only when a store is used.
 
 from __future__ import annotations
 
+import contextlib
 import functools
 import json
 import os
 from pathlib import Path
-from typing import Callable, Dict, Iterable, List, Optional, Tuple, TypeVar
+from typing import (Callable, Dict, Iterable, Iterator, List, Optional, Tuple,
+                    TypeVar)
 
 __all__ = [
     "memo",
@@ -51,6 +53,11 @@ __all__ = [
     "clear_memos",
     "memo_state",
     "DerivedStore",
+    "StaleDerivation",
+    "no_recompute",
+    "recomputation_allowed",
+    "store_registry",
+    "store_states",
     "CACHE_ROOT",
 ]
 
@@ -149,6 +156,55 @@ def memo_state() -> Dict[str, Dict[str, object]]:
 #  Digest-keyed artefacts on disk
 # ===========================================================================
 
+class StaleDerivation(RuntimeError):
+    """A stale artefact was needed where recomputing it was forbidden.
+
+    Raised only inside :func:`no_recompute`.  The checks that read the
+    documents run there, because recomputing one of these artefacts costs
+    minutes and a check that silently pays that cost is a check nobody runs.
+    The message names the artefact and the command that rebuilds it.
+    """
+
+
+#: Every store built in this process, by name.  Stores are built lazily, so
+#: this holds the ones something has asked for rather than all of them.
+_STORES: Dict[str, "DerivedStore"] = {}
+
+_RECOMPUTE = True
+
+
+def recomputation_allowed() -> bool:
+    """May a stale artefact be recomputed here?"""
+    return _RECOMPUTE
+
+
+@contextlib.contextmanager
+def no_recompute() -> Iterator[None]:
+    """Inside this block a stale artefact raises instead of being rebuilt.
+
+    This is the rule that keeps the documents gate cheap: reading is allowed
+    to *report* that a derivation is stale, and only a refresh is allowed to
+    pay for it.
+    """
+    global _RECOMPUTE
+    previous = _RECOMPUTE
+    _RECOMPUTE = False
+    try:
+        yield
+    finally:
+        _RECOMPUTE = previous
+
+
+def store_registry() -> Tuple[str, ...]:
+    """The names of every store built in this process, sorted."""
+    return tuple(sorted(_STORES))
+
+
+def store_states() -> Dict[str, Dict[str, object]]:
+    """``name -> state`` for every store built in this process."""
+    return {name: _STORES[name].state() for name in sorted(_STORES)}
+
+
 class DerivedStore:
     """A JSON artefact stored beside the digest of what it was derived from.
 
@@ -163,6 +219,7 @@ class DerivedStore:
         self.inputs = inputs
         self.schema = schema
         self.root = Path(root) if root is not None else CACHE_ROOT
+        _STORES[name] = self
 
     # -- the digest ------------------------------------------------------
     @property
@@ -246,10 +303,21 @@ class DerivedStore:
         return self.path
 
     def cached(self, compute: Callable[[], object]) -> object:
-        """The payload: read when fresh, recomputed and stored otherwise."""
+        """The payload: read when fresh, recomputed and stored otherwise.
+
+        Inside :func:`no_recompute` a stale or absent artefact raises
+        :class:`StaleDerivation` rather than being rebuilt, so a reader can
+        never pay a derivation's cost by accident.
+        """
         found = self.read_fresh()
         if found is not None:
             return found
+        if not recomputation_allowed():
+            raise StaleDerivation(
+                f"the derived artefact '{self.name}' is "
+                f"{self.state()['verdict']} and recomputing it is not "
+                f"allowed here -- run "
+                f"'python3 -m glm_universal.corpus --refresh'")
         payload = compute()
         self.write(payload)
         return payload

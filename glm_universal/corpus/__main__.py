@@ -28,10 +28,13 @@ import argparse
 import json
 from typing import List, Optional
 
+from .. import derived as dv
 from ..reasoning import lean_address as la
 from ..reasoning import retrieval as rt
 from . import address as ad
+from . import caches as ca
 from . import checks as ck
+from . import gate as gt
 from . import inventory as inv
 from . import measurements as ms
 from . import render as rd
@@ -194,6 +197,10 @@ def main(argv: Optional[List[str]] = None) -> int:
     parser.add_argument("--check", action="store_true",
                         help="fail if any generated artefact is stale or any "
                              "document check does not hold")
+    parser.add_argument("--all", action="store_true",
+                        help="with --check, run the whole pass even when "
+                             "nothing the check reads has changed since the "
+                             "last passing run")
     parser.add_argument("--ask", metavar="QUESTION", default=None,
                         help="a certified shortlist of the sections within "
                              "the stated radius of a question")
@@ -261,17 +268,47 @@ def main(argv: Optional[List[str]] = None) -> int:
         return 0
 
     if args.check:
-        outcome = rd.refresh(write=False)
-        checks = ck.corpus_checks()
-        state = ad.cache_state()
-        lean = ms.state()
-        inline = rd.figure_report()
+        #  Nothing the check can read has moved since it last passed, so it
+        #  cannot reach a different verdict: say so in a second rather than
+        #  spending three quarters of a minute re-deriving it.  Only a *pass*
+        #  is ever recorded, and ``--all`` ignores the record entirely.
+        digest = gt.inputs_digest()
+        if not args.all:
+            unchanged = gt.unchanged_since_pass()
+            if unchanged is not None:
+                print(f"unchanged since {unchanged['at']} -- "
+                      f"nothing the documents check reads has moved")
+                print("current")
+                return 0
+        #  Under ``no_recompute`` a stale derived artefact raises rather than
+        #  being rebuilt: a documents check reports staleness, it never pays
+        #  for it.  That is what keeps this gate a matter of seconds, and the
+        #  cost is paid once by ``--refresh``.
+        try:
+            with dv.no_recompute():
+                outcome = rd.refresh(write=False)
+                checks = ck.corpus_checks()
+                state = ad.cache_state()
+                lean = ms.state()
+                inline = rd.figure_report()
+                census = ca.cache_census()
+        except dv.StaleDerivation as stale:
+            gt.record(False, digest)
+            print(f"derived cache: {stale}")
+            print("run --refresh")
+            return 1
         for path, name in inline["unknown"]:
             print(f"unknown figure: {name} in {path}")
         for path, name in inline["in_history"]:
             print(f"figure in a record of a past round: {name} in {path}")
         ok = (outcome["current"] and checks["holds"] and state["fresh"]
-              and lean["fresh"] and inline["holds"])
+              and lean["fresh"] and inline["holds"] and census["holds"])
+        #  A study's measurement cache is named here, in half a minute, rather
+        #  than discovered by a failing evaluation twenty minutes into a
+        #  release run.  Naming it is the whole of it: re-taking one costs
+        #  minutes, so the check reports the command and never runs it.
+        for line in ca.describe(census):
+            print(line)
         if not lean["fresh"]:
             print(f"lean measurements: {lean['verdict']} -- run --remeasure")
         for path in outcome["documents_written"]:
@@ -282,6 +319,7 @@ def main(argv: Optional[List[str]] = None) -> int:
             print(f"address book: {state['verdict']}")
         if not checks["holds"]:
             _print_report()
+        gt.record(bool(ok), digest)
         print("current" if ok else "run --write")
         return 0 if ok else 1
 

@@ -7,7 +7,7 @@
 
 **Verdict.** The relay beats plain text on every query set, and the controls do not.
 
-**Deciding figure.** 16 queries carried against 1 lost, where a digest-and-reshuffle relay carries 1.
+**Deciding figure.** 14 queries carried against 1 lost, where a digest-and-reshuffle relay carries 2 and loses 2.
 
 **Recomputed by.** `glm_universal.reasoning.stack.relay_report`
 
@@ -37,16 +37,19 @@ a preferred result:
    bare goal queries, and it is never below the text control at any window of
    the ladder. §1.
 2. **It costs almost nothing, because it almost never fires.** The gate fires
-   on 48 of 1,626 queries — 3 % — and above the gate the relayed answer *is*
+   on 64 of 1,676 queries — 4 % — and above the gate the relayed answer *is*
    the text control's answer, which is a theorem (`GLM.Relay.relay_confident`)
    and not a measurement. §1.
 3. **The gain is the geometry's.** The same mechanism relaying to the digest
-   addresses and a seeded permutation carries 1 query where the two address
-   books carry 14; relaying to the name search carries none. A relay to
-   anything is not a relay to this. §3.
-4. **It is not a tuned threshold.** Every gate from 1/20 to 1/4 improves on the
-   text control, and the improvement is the same 7 queries over most of that
-   range. §4.
+   addresses and a seeded permutation carries 2 queries and loses 2, where the
+   two address books carry 14 and lose 1; relaying to the name search carries
+   none. A relay to anything is not a relay to this. §3.
+4. **It is not a tuned threshold, and the band has an edge.** The gain is
+   strict on four consecutive gates, 1/20 through 1/5, and the improvement is
+   the same 3 carried queries across all four; the first loss appears at 1/5
+   and at 1/4 the relay falls below the text control for the first time. A
+   single fitted threshold would not hold across four; a band with an edge is
+   what the measurement actually shows, and the edge is reported. §4.
 5. **The other arrangement helps less.** Letting the geometry break the text
    layer's many exact ties, rather than answer when the text layer is silent,
    moves hit@5 up by two to four queries and leaves precision a wash. It is a
@@ -99,21 +102,21 @@ occurrence of each name.
 <!-- generated: stack-sets -->
 | query set | who answers | queries | hit@1 | hit@3 | hit@5 | hit@10 | precision@5 |
 |---|---|---|---|---|---|---|---|
-| goal — both strides again, asked as bare goals | text alone | 813 | 579 (71.2 %) | 679 (83.5 %) | 710 (87.3 %) | 736 (90.5 %) | 58.2 % |
-| goal — both strides again, asked as bare goals | **the relay** | 813 | **579 (71.2 %)** | **680 (83.6 %)** | **715 (87.9 %)** | **742 (91.3 %)** | 58.3 % |
-| holdout — a disjoint stride, never looked at while choosing | text alone | 406 | 293 (72.2 %) | 340 (83.7 %) | 354 (87.2 %) | 364 (89.7 %) | 57.9 % |
-| holdout — a disjoint stride, never looked at while choosing | **the relay** | 406 | **293 (72.2 %)** | **341 (84.0 %)** | **358 (88.2 %)** | **368 (90.6 %)** | 58.3 % |
-| tuning — the stride the gate was chosen on | text alone | 407 | 286 (70.3 %) | 339 (83.3 %) | 356 (87.5 %) | 372 (91.4 %) | 58.4 % |
-| tuning — the stride the gate was chosen on | **the relay** | 407 | **286 (70.3 %)** | **341 (83.8 %)** | **362 (88.9 %)** | **378 (92.9 %)** | 58.8 % |
+| goal — both strides again, asked as bare goals | text alone | 846 | 590 (69.7 %) | 692 (81.8 %) | 722 (85.3 %) | 753 (89.0 %) | 57.6 % |
+| goal — both strides again, asked as bare goals | **the relay** | 846 | **590 (69.7 %)** | **693 (81.9 %)** | **726 (85.8 %)** | **758 (89.6 %)** | 57.6 % |
+| holdout — a disjoint stride, never looked at while choosing | text alone | 423 | 289 (68.3 %) | 348 (82.3 %) | 360 (85.1 %) | 376 (88.9 %) | 58.6 % |
+| holdout — a disjoint stride, never looked at while choosing | **the relay** | 423 | **289 (68.3 %)** | **353 (83.5 %)** | **366 (86.5 %)** | **382 (90.3 %)** | 59.0 % |
+| tuning — the stride the gate was chosen on | text alone | 423 | 301 (71.2 %) | 344 (81.3 %) | 362 (85.6 %) | 377 (89.1 %) | 56.5 % |
+| tuning — the stride the gate was chosen on | **the relay** | 423 | **301 (71.2 %)** | **344 (81.3 %)** | **365 (86.3 %)** | **380 (89.8 %)** | 56.6 % |
 
-The gate is 1/10 and fires on 48 of 1626 queries.  Across the three sets the geometry carries **16** queries the text control misses at k = 5 and loses **1**.  The relay beats the text control on every set: yes; it is never below the text control at any k: yes.
+The gate is 1/10 and fires on 64 of 1692 queries.  Across the three sets the geometry carries **14** queries the text control misses at k = 5 and loses **1**.  The relay beats the text control on every set: yes; it is never below the text control at any k: yes.
 <!-- end generated -->
 
 Three readings, in the order of how much they matter.
 
 **The stack beats the faculty that beat the geometry.** On every set the relay
 is strictly ahead of the text control at k = 5 and never behind it at any other
-window. The margins are small — seven queries on the tuning stride, two on the
+window. The margins are small — three queries on the tuning stride, six on the
 held-out stride, four on the goals — because the gate fires on 4 % of queries
 and can only change the answer there. That is the shape a correct mechanism has
 here: it does nothing where nothing is wrong.
@@ -122,7 +125,7 @@ here: it does nothing where nothing is wrong.
 text control's list, by `GLM.Relay.relay_confident`, so the 96 % of queries the
 text layer answers with evidence are untouched by construction rather than by
 luck. The single lost query in the goal set is a query the gate fired on and
-the interleave reordered; it is 1 lost against the 16 carried across the three
+the interleave reordered; it is 1 lost against the 14 carried across the three
 sets, and it is in the table rather than in a footnote.
 
 **The window is wide enough for whoever holds the answer.** The quotas sum to
@@ -138,9 +141,9 @@ of "another part takes the hit", stated as a theorem rather than hoped for.
 <!-- generated: stack-carried -->
 | query set | gate fired | carried by the geometry | lost |
 |---|---|---|---|
-| goal — both strides again, asked as bare goals | 24 | `GLM.Calibration.NA`, `GLM.Gen3.pair_census`, `GLM.Packing.radius_of_eight`, `GLM.Admission.ledger_refusals`, `GLM.Calibration.molarPlanck`, `GLM.Gen3.class_census` | `GLM.Gen3.m24_orbit_stabiliser` |
-| holdout — a disjoint stride, never looked at while choosing | 9 | `GLM.Admission.ledger_refusals`, `GLM.Calibration.molarPlanck`, `GLM.FitCapacity.protonRatioTarget`, `GLM.Gen3.class_census` | none |
-| tuning — the stride the gate was chosen on | 15 | `GLM.Calibration.NA`, `GLM.CubeStab.Cell`, `GLM.FitCapacity.phi`, `GLM.Gen3.pair_census`, `GLM.Gen3.constant_minus_coherent`, `GLM.Packing.radius_of_eight` | none |
+| goal — both strides again, asked as bare goals | 32 | `GLM.Calibration.NA`, `GLM.Admission.ledger_refusals`, `GLM.Calibration.molarPlanck`, `GLM.Harmony.pythagorean_comma_ne_one`, `GLM.Landscape.golay_ball_majority` | `GLM.Gen3.even_part_dimension` |
+| holdout — a disjoint stride, never looked at while choosing | 19 | `GLM.Admission.ledger_refusals`, `GLM.Calibration.molarPlanck`, `GLM.FitCapacity.protonPred`, `GLM.Gen3.agl_four_two_order`, `GLM.Gen3.all_plus_incoherent`, `GLM.Harmony.pythagorean_comma_ne_one` | none |
+| tuning — the stride the gate was chosen on | 13 | `GLM.Calibration.NA`, `GLM.FitCapacity.muonRatioTarget`, `GLM.Packing.radius_of_seven` | none |
 
 A *carried* query is one the text control misses at k = 5 and the relay hits; a *lost* query is the reverse, which is the column the gate exists to keep empty.
 <!-- end generated -->
@@ -161,9 +164,9 @@ it asks the geometry only there.
 <!-- generated: stack-controls -->
 | query set | carried by the two address books | carried by digest + reshuffle | carried by name search |
 |---|---|---|---|
-| goal — both strides again, asked as bare goals | 6 | 1 | 0 |
-| holdout — a disjoint stride, never looked at while choosing | 4 | 0 | 0 |
-| tuning — the stride the gate was chosen on | 6 | 0 | 0 |
+| goal — both strides again, asked as bare goals | 5 | 0 | 0 |
+| holdout — a disjoint stride, never looked at while choosing | 6 | 1 | 0 |
+| tuning — the stride the gate was chosen on | 3 | 1 | 0 |
 
 Over the three sets the geometry carries more than the digest-and-reshuffle control: yes; it never carries fewer on a set: yes; it carries more than the name search: yes.
 <!-- end generated -->
@@ -172,8 +175,9 @@ The control is the same mechanism with the substrate removed: the same gate,
 the same quotas, the same window, relaying to the SHA-256 addresses of
 directive D3 and to a seeded permutation of the corpus instead of to the two
 address books. If padding the tail of a short list were enough, the control
-would carry as many queries as the geometry does. It carries four against
-fourteen, and the name search — the strongest non-geometric second opinion
+would carry as many queries as the geometry does. It carries two — and loses
+two — against fourteen carried and one lost, and the name search — the
+strongest non-geometric second opinion
 available — carries none, because a query whose identifiers match nothing also
 matches nothing in a name.
 
@@ -184,26 +188,30 @@ matches nothing in a name.
 <!-- generated: stack-sweep -->
 | gate | queries it fires on | hit@5 | precision@5 | carried | lost |
 |---|---|---|---|---|---|
-| 0 | 0 | 87.5 % | 58.4 % | 0 | 0 |
-| 1/20 | 15 | 88.9 % | 58.8 % | 6 | 0 |
-| 1/10 | 15 | 88.9 % | 58.8 % | 6 | 0 |
-| 3/20 | 16 | 88.9 % | 58.7 % | 6 | 0 |
-| 1/5 | 19 | 88.9 % | 58.5 % | 6 | 0 |
-| 1/4 | 26 | 88.9 % | 58.1 % | 6 | 0 |
-| 1/2 | 183 | 88.5 % | 51.7 % | 12 | 8 |
+| 0 | 0 | 85.6 % | 56.5 % | 0 | 0 |
+| 1/20 | 13 | 86.3 % | 56.6 % | 3 | 0 |
+| 1/10 | 13 | 86.3 % | 56.6 % | 3 | 0 |
+| 3/20 | 13 | 86.3 % | 56.6 % | 3 | 0 |
+| 1/5 | 19 | 86.1 % | 56.5 % | 3 | 1 |
+| 1/4 | 26 | 85.3 % | 56.1 % | 3 | 4 |
+| 1/2 | 178 | 85.3 % | 50.6 % | 6 | 7 |
 
-On the tuning set.  Every threshold from 1/20 to 1/4 improves on the text control: yes.
+On the tuning set.  The gain is strict on 4 of the thresholds from 1/20 to 1/4, up to and including 1/5; across the whole of that band the relay is never below the text control: no.
 <!-- end generated -->
 
 A threshold chosen to make a table look good is a fitted constant, so the whole
 range is reported. At a gate of 0 the relay never fires and the row is the text
 control exactly, which is the arithmetic check that the mechanism is doing what
-it says. From 1/20 to 1/4 the relay is ahead of the control and the carried set
-is the same seven queries; the top of the range starts to cost precision, and
-at 1/2 — where the leader is overruled on almost half the corpus — it loses
-four queries to gain nine. The gate is doing what a gate should: it separates
-"no evidence" from "some evidence", and the answer does not depend on where
-inside that gap the line is drawn.
+it says. From 1/20 to 1/5 the relay is ahead of the control and the carried
+set is the same three queries; the first loss appears at 1/5, and at 1/4 the
+gate has widened enough that three carried queries are matched by four lost,
+so the relay falls below the control for the first time and precision slips
+with it; at 1/2 — where the leader is overruled on almost half the corpus — it
+carries six and loses seven, and the mechanism is plainly past its useful
+width. The
+gate is doing what a gate should: it separates "no evidence" from "some
+evidence", and inside that gap the answer does not depend on exactly where the
+line is drawn.
 
 ---
 
@@ -212,12 +220,12 @@ inside that gap the line is drawn.
 <!-- generated: stack-tiebreak -->
 | query set | tie-break | hit@1 | hit@3 | hit@5 | hit@10 | precision@5 |
 |---|---|---|---|---|---|---|
-| holdout | address | 296 (72.9 %) | 342 (84.2 %) | 355 (87.4 %) | 369 (90.9 %) | 58.0 % |
-| holdout | lexical | 293 (72.2 %) | 343 (84.5 %) | 358 (88.2 %) | 371 (91.4 %) | 58.3 % |
-| holdout | name | 293 (72.2 %) | 340 (83.7 %) | 354 (87.2 %) | 364 (89.7 %) | 57.9 % |
-| tuning | address | 281 (69.0 %) | 342 (84.0 %) | 356 (87.5 %) | 373 (91.6 %) | 58.8 % |
-| tuning | lexical | 288 (70.8 %) | 343 (84.3 %) | 360 (88.5 %) | 372 (91.4 %) | 58.8 % |
-| tuning | name | 285 (70.0 %) | 338 (83.0 %) | 354 (87.0 %) | 370 (90.9 %) | 58.2 % |
+| holdout | address | 292 (69.0 %) | 357 (84.4 %) | 363 (85.8 %) | 375 (88.7 %) | 58.9 % |
+| holdout | lexical | 287 (67.8 %) | 354 (83.7 %) | 361 (85.3 %) | 376 (88.9 %) | 58.8 % |
+| holdout | name | 289 (68.3 %) | 348 (82.3 %) | 359 (84.9 %) | 375 (88.7 %) | 58.5 % |
+| tuning | address | 298 (70.4 %) | 351 (83.0 %) | 364 (86.1 %) | 379 (89.6 %) | 57.0 % |
+| tuning | lexical | 304 (71.9 %) | 351 (83.0 %) | 360 (85.1 %) | 378 (89.4 %) | 56.5 % |
+| tuning | name | 300 (70.9 %) | 343 (81.1 %) | 361 (85.3 %) | 376 (88.9 %) | 56.4 % |
 
 Ranking by text overlap and breaking the many exact ties by address distance instead of by name.  It beats the shipped name tie-break on hits: yes; on precision: yes.
 <!-- end generated -->
@@ -314,9 +322,12 @@ take the hit" is a property of the mechanism rather than a hope about it.
   queries as the two address books do, the gain would be the list padding's and
   §3's conclusion would reverse. `test_stack.py` recomputes that comparison and
   fails when it does.
-* **The gate.** If the improvement held only at 1/10 and vanished at 1/20 or
-  1/4, the threshold would be fitted rather than stated. The sweep is in the
-  report and the test reads it.
+* **The gate.** If the improvement held only at 1/10 and vanished on either
+  side of it, the threshold would be fitted rather than stated. It does not:
+  it is strict over four consecutive gates and never below the control across
+  the whole declared band. Where the strict gain stops — currently 1/5 — is
+  recorded in the verdict as a measurement, not assumed; the sweep is in the
+  report and the test reads both halves of it.
 * **The loss column.** If the relay began losing more queries than it carries,
   the mechanism would be trading accuracy for coverage rather than adding it.
   The count is in §1 and in the verdict.

@@ -33,6 +33,7 @@ from .reasoning import deep_hole_classifier as dhc
 from .reasoning import deep_hole_escalation as esc
 from .reasoning import deep_hole_failures as dhf
 from .reasoning import cumulativity as cml
+from .reasoning import ladder_escalation as lesc
 from .reasoning import query_escalation as qesc
 from .reasoning import review_sweep as rvs
 from .reasoning import wobble_landscape as wls
@@ -437,6 +438,352 @@ def _cumulativity(args: argparse.Namespace) -> int:
 
 
 # ---------------------------------------------------------------------------
+#  ladder
+# ---------------------------------------------------------------------------
+
+def _ladder(args: argparse.Namespace) -> int:
+    """The construction ladder: every rung, and the escalation that walks it.
+
+    ``--write`` re-takes the measurement, which is about a minute of exact
+    decoding; without it the stored one is read and its freshness reported.
+    """
+    if args.write:
+        path = lesc.write_measurements()
+        print(f"wrote {path}")
+        print(f"digest {lesc.module_digest()}")
+        return 0
+    condition = lesc.state()
+    report = lesc.current()
+    if report is None:
+        print(f"cache             {condition['verdict']}")
+        print("nothing is reported from a cache that does not describe the "
+              "sources; re-take it with --write")
+        return 1
+    best = report["best_fixed_rung"]
+    if args.json:
+        print(json.dumps({"cache": condition["verdict"],
+                          "carriers": report["carriers"],
+                          "orders": report["orders"]["totals"],
+                          "fixed_rungs": report["fixed_rungs"]["totals"],
+                          "oracle": report["oracle"],
+                          "order_cost": report["order_cost"],
+                          "cheapest_order": report["cheapest_order"]},
+                         indent=1, sort_keys=True))
+        return 0
+    print(f"cache             {condition['verdict']}")
+    print(f"carriers          {report['carriers']} over "
+          f"{len(report['registers'])} registers, "
+          f"{len(report['perturbations'])} perturbations")
+    print("order             correct  wrong  refused        work")
+    for name, scores in report["orders"]["totals"].items():
+        print(f"  {name:<15} {scores['correct']:>6} {scores['wrong']:>6} "
+              f"{scores['refused']:>8} {scores['cost']:>11}")
+    print("rung alone        correct  wrong  refused        work")
+    for rung, scores in report["fixed_rungs"]["totals"].items():
+        if rung == "oracle":
+            continue
+        print(f"  {rung:<15} {scores['correct']:>6} {scores['wrong']:>6} "
+              f"{scores['refused']:>8} {scores['cost']:>11}")
+    print(f"oracle            {report['oracle']}")
+    print(f"best single rung  {best['rung']} at {best['correct']}")
+    print(f"cheapest order    {report['cheapest_order']}")
+    print(f"rungs disagree    {report['agreement']['rungs_disagree']}")
+    before = report.get("before")
+    if before is not None:
+        scores = before["orders"]["totals"]["middle_out"]
+        print(f"before ({before['ladder_length']} rungs)  "
+              f"{scores['correct']} correct, {scores['wrong']} wrong, "
+              f"{scores['refused']} refused")
+    sweep = report.get("length_sweep")
+    if sweep is not None:
+        print("ladder length     rungs  correct  wrong  refused  "
+              "disagree  order-independent")
+        for row in sweep["rows"]:
+            wrong = max(int(value) for value in row["wrong"].values())
+            print(f"  {'':<13} {row['length']:>5} "
+                  f"{row['correct']['middle_out']:>8} {wrong:>6} "
+                  f"{row['refused']['middle_out']:>8} "
+                  f"{row['rungs_disagree']:>9}  "
+                  f"{'yes' if row['order_independent'] else 'NO'}")
+        print(f"longest safe      {sweep['longest_safe']} rungs; "
+              f"first broken {sweep['first_broken']}")
+    return 0
+
+
+
+# ---------------------------------------------------------------------------
+#  normladder, operations, blockers
+# ---------------------------------------------------------------------------
+
+def _normladder(args: argparse.Namespace) -> int:
+    """The norm-indexed family of rungs, and the escalation over it."""
+    from .reasoning import norm_escalation as nesc
+    if args.write:
+        path = nesc.write_measurements()
+        print(f"wrote {path}")
+        print(f"digest {nesc.module_digest()}")
+        return 0
+    condition = nesc.state()
+    report = nesc.current()
+    if report is None:
+        print(f"cache             {condition['verdict']}")
+        print("nothing is reported from a cache that does not describe the "
+              "sources; re-take it with --write")
+        return 1
+    if args.json:
+        print(json.dumps({
+            "cache": condition["verdict"],
+            "declared": report["declared"]["orders"]["totals"],
+            "repaired": report["repaired"]["orders"]["totals"],
+            "repair": {"ladder": report["repair"]["ladder"],
+                       "safe": report["repair"]["safe"],
+                       "gaps": report["repair"]["gaps"]},
+            "sweep": {"longest_safe": report["sweep"]["longest_safe"],
+                      "first_broken": report["sweep"]["first_broken"]},
+        }, indent=1, sort_keys=True))
+        return 0
+    family = report["family"]
+    print(f"cache             {condition['verdict']}")
+    print(f"family            {family['rung_count']} rungs, "
+          f"{len(family['completeness']['norms'])} norms, "
+          f"complete {family['completeness']['complete']}, "
+          f"chain holds {family['chain']['holds']}")
+    print("ladder                                    rungs  correct  wrong  "
+          "refused  safe")
+    for key, title in (("declared", "the full power-of-two family"),
+                       ("repaired", "after the retirement rule"),
+                       ("chain", "the same family through B"),
+                       ("named_rungs", "the eleven named rungs")):
+        totals = report[key]["orders"]["totals"]["middle_out"]
+        safe = totals["wrong"] == 0
+        print(f"  {title:<39} {len(report[key]['ladder']):>5} "
+              f"{totals['correct']:>8} {totals['wrong']:>6} "
+              f"{totals['refused']:>8}  {'yes' if safe else 'NO'}")
+    repair = report["repair"]
+    print(f"repaired ladder   {' '.join(repair['ladder'])}")
+    print(f"norms left empty  {list(repair['gaps'])}")
+    print("family length     rungs  correct  wrong  refused  safe")
+    for row in report["sweep"]["rows"]:
+        print(f"  {'':<13} {row['length']:>5} "
+              f"{row['correct']['middle_out']:>8} "
+              f"{max(row['wrong'].values()):>6} "
+              f"{row['refused']['middle_out']:>8}  "
+              f"{'yes' if row['safe'] else 'NO'}")
+    print(f"longest safe      {report['sweep']['longest_safe']} rungs; "
+          f"first unsafe {report['sweep']['first_broken']}")
+    return 0
+
+
+def _operations(args: argparse.Namespace) -> int:
+    """Escalation applied to operations that are not retrieval."""
+    from .reasoning import operation_escalation as oesc
+    if args.write:
+        path = oesc.write_measurements()
+        print(f"wrote {path}")
+        print(f"digest {oesc.module_digest()}")
+        return 0
+    condition = oesc.state()
+    report = oesc.current()
+    if report is None:
+        print(f"cache             {condition['verdict']}")
+        print("nothing is reported from a cache that does not describe the "
+              "sources; re-take it with --write")
+        return 1
+    rows = list(report["operations"]) + [report["equation"]]
+    if args.json:
+        print(json.dumps({"cache": condition["verdict"],
+                          "operations": {row["operation"]: row["escalation"]
+                                         for row in rows},
+                          "helped": report["helped"],
+                          "no_gain": report["no_gain"],
+                          "unsafe": report["unsafe"]},
+                         indent=1, sort_keys=True))
+        return 0
+    print(f"cache             {condition['verdict']}")
+    print("operation     queries  correct  wrong  refused  best rung  prior  "
+          "control   gain")
+    for row in rows:
+        score = row["escalation"]
+        print(f"  {row['operation']:<11} {score['queries']:>6} "
+              f"{score['correct']:>8} {score['wrong']:>6} "
+              f"{score['refused']:>8} "
+              f"{row['best_rung_score']['correct']:>10} "
+              f"{row['control_label_prior']['correct']:>6} "
+              f"{row['control_substrate_removed']['correct']:>8} "
+              f"{row['gain_over_best_rung']:>6}")
+    print(f"helped            {', '.join(report['helped']) or 'none'}")
+    print(f"no gain           {', '.join(report['no_gain']) or 'none'}")
+    print(f"unsafe            {', '.join(report['unsafe']) or 'none'}")
+    return 0
+
+
+def _second_reading(args: argparse.Namespace) -> int:
+    """A second reading required to agree before an operation answers."""
+    from .reasoning import second_reading as sread
+    if args.write:
+        path = sread.write_measurements()
+        print(f"wrote {path}")
+        print(f"digest {sread.module_digest()}")
+        return 0
+    condition = sread.state()
+    report = sread.current()
+    if report is None:
+        print(f"cache             {condition['verdict']}")
+        print("nothing is reported from a cache that does not describe the "
+              "sources; re-take it with --write")
+        return 1
+    marks = report["marks_report"]
+    if args.json:
+        print(json.dumps({
+            "cache": condition["verdict"],
+            "adopted": marks["adopted"],
+            "shipped": marks["shipped"],
+            "verdict": marks["verdict"],
+            "program": {key: row["program"]
+                        for key, row in marks["verdicts"].items()},
+        }, indent=1, sort_keys=True))
+        return 0
+    print(f"cache             {condition['verdict']}")
+    print("operation     reading   queries  correct  wrong  refused")
+    for row in report["operations"]:
+        for key in ("primary", "code", "margin"):
+            score = row["readings"][key]
+            print(f"  {row['operation']:<11} {key:<8} {score['queries']:>7} "
+                  f"{score['correct']:>8} {score['wrong']:>6} "
+                  f"{score['refused']:>8}")
+    print("configuration   program correct  wrong  refused  given up  "
+          "removed  matched  M1 M2 M3 M4")
+    for key in sorted(marks["verdicts"]):
+        row = marks["verdicts"][key]
+        score = row["program"]
+        flags = " ".join("y " if row[mark] else "n "
+                         for mark in ("M1", "M2", "M3", "M4"))
+        print(f"  {key:<14} {score['correct']:>14} {score['wrong']:>6} "
+              f"{score['refused']:>8} {row['answers_given_up']:>9} "
+              f"{row['wrongs_removed']:>8} "
+              f"{row['matched_control_wrongs_removed']:>8}  {flags}")
+    print(f"adopted           {', '.join(marks['adopted']) or 'none'}")
+    print(f"shipped           {marks['shipped'] or 'none'}")
+    return 0
+
+
+def _blockers(args: argparse.Namespace) -> int:
+    """What is between this system and fuller reasoning, measured."""
+    from .reasoning import blockers as blk
+    if args.write:
+        path = blk.write_measurements()
+        print(f"wrote {path}")
+        print(f"digest {blk.module_digest()}")
+        return 0
+    condition = blk.state()
+    report = blk.current()
+    if report is None:
+        print(f"cache             {condition['verdict']}")
+        print("nothing is reported from a cache that does not describe the "
+              "sources; re-take it with --write")
+        return 1
+    probe = report["probe"]
+    if args.json:
+        print(json.dumps({"cache": condition["verdict"],
+                          "probe": probe["canonical"],
+                          "passed": probe["passed"],
+                          "figures": report["figures"]},
+                         indent=1, sort_keys=True))
+        return 0
+    print(f"cache             {condition['verdict']}")
+    print(f"probe             {probe['canonical']['correct']} correct, "
+          f"{probe['canonical']['wrong']} wrong, "
+          f"{probe['canonical']['refused']} refused of {probe['questions']}; "
+          f"pass mark {probe['pass_mark']['correct_at_least']} -- "
+          f"passed {probe['passed']}")
+    print(f"paraphrase        {probe['stable']} of {probe['questions']} "
+          f"score the same both ways")
+    print("blocker                                            measurement")
+    for blocker in report["blockers"]:
+        measured = " and ".join(
+            f"{name.strip()} = {report['figures'].get(name.strip())}"
+            for name in str(blocker["measurement"]).split(" and "))
+        print(f"  {blocker['key']:<16} {measured}")
+    ledger = {}
+    for row in report["ledger"]:
+        ledger[row["class"]] = ledger.get(row["class"], 0) + 1
+    print("faculty ledger    " + ", ".join(f"{count} {name}"
+                                           for name, count
+                                           in sorted(ledger.items())))
+    return 0
+
+
+# ---------------------------------------------------------------------------
+#  oracle
+# ---------------------------------------------------------------------------
+
+def _oracle(args) -> int:
+    """Blocker 1's own experiment: the probe questions, hand-translated."""
+    from .reasoning import probe_oracle as po
+    report = po.oracle_report()
+    if args.json:
+        print(json.dumps({"counts": report["counts"],
+                          "english_correct": report["english_correct"],
+                          "parser_worth": report["parser_worth"],
+                          "surface_worth": report["surface_worth"],
+                          "witness_kinds": report["witness_kinds"]},
+                         indent=1, sort_keys=True))
+        return 0
+    counts = report["counts"]
+    print(f"questions         {report['questions']}")
+    print(f"english           {report['english_correct']} correct as asked")
+    print(f"translated        {counts['parsed']} parsed, "
+          f"{counts['surface']} surface, {counts['absent']} absent")
+    print(f"parser worth      {report['parser_worth']} questions")
+    print(f"surface worth     {report['surface_worth']} questions")
+    print("question         class     the query it should become")
+    for row in report["rows"]:
+        print(f"  {row['key']:<15} {row['class']:<8} "
+              f"{row['query'] or '(not expressible)'}")
+    return 0
+
+
+# ---------------------------------------------------------------------------
+#  fieldsurface
+# ---------------------------------------------------------------------------
+
+def _fieldsurface(args) -> int:
+    """The field surface, measured against the prediction that bought it."""
+    from .reasoning import field_surface as fs
+    report = fs.surface_report()
+    census = report["census"]
+    if args.json:
+        print(json.dumps({"before": report["before"],
+                          "after": report["after"],
+                          "moved": list(report["moved"]),
+                          "predicted": report["predicted"],
+                          "still_surface": list(report["still_surface"]),
+                          "tables": census["tables"],
+                          "rows": census["rows"],
+                          "addressable_pairs": census["addressable_pairs"]},
+                         indent=1, sort_keys=True))
+        return 0
+    before, after = report["before"], report["after"]
+    print(f"held and unreachable  {len(report['surface_keys'])} questions")
+    print(f"declared reachable    {report['predicted']} "
+          f"(unreachable: {', '.join(report['declared_unreachable'])})")
+    print(f"moved                 {report['moved_count']}")
+    print(f"split before          {before['parsed']} parsed, "
+          f"{before['surface']} surface, {before['absent']} absent")
+    print(f"split after           {after['parsed']} parsed, "
+          f"{after['surface']} surface, {after['absent']} absent")
+    print(f"addressable           {census['tables']} tables, "
+          f"{census['rows']} rows, "
+          f"{census['addressable_pairs']} (row, field) pairs")
+    print("question         before -> after   the field query it becomes")
+    for row in report["rows"]:
+        print(f"  {row['key']:<15} {row['before']} -> {row['after']:<8} "
+              f"{row['query'] or '(not expressible)'}")
+    print(report["caveat"])
+    return 0
+
+
+# ---------------------------------------------------------------------------
 #  queryesc
 # ---------------------------------------------------------------------------
 
@@ -658,6 +1005,56 @@ def _parser() -> argparse.ArgumentParser:
         "cumulativity", help="the refinement check every layer family passes")
     cumul.add_argument("--json", action="store_true")
     cumul.set_defaults(handler=_cumulativity)
+
+    rungs = sub.add_parser(
+        "ladder", help="the construction ladder and the middle-out escalation")
+    rungs.add_argument("--write", action="store_true",
+                       help="re-take the measurement cache")
+    rungs.add_argument("--json", action="store_true")
+    rungs.set_defaults(handler=_ladder)
+
+    norms = sub.add_parser(
+        "normladder",
+        help="the power-of-two norm family and the escalation over it")
+    norms.add_argument("--write", action="store_true",
+                       help="re-take the measurement cache")
+    norms.add_argument("--json", action="store_true")
+    norms.set_defaults(handler=_normladder)
+
+    ops = sub.add_parser(
+        "operations", help="escalation applied to operations other than "
+                           "retrieval")
+    ops.add_argument("--write", action="store_true",
+                     help="re-take the measurement cache")
+    ops.add_argument("--json", action="store_true")
+    ops.set_defaults(handler=_operations)
+
+    second = sub.add_parser(
+        "second-reading",
+        help="a second reading required to agree before an operation answers")
+    second.add_argument("--write", action="store_true",
+                        help="re-take the measurement cache")
+    second.add_argument("--json", action="store_true")
+    second.set_defaults(handler=_second_reading)
+
+    block = sub.add_parser(
+        "blockers", help="what is between this system and fuller reasoning")
+    block.add_argument("--write", action="store_true",
+                       help="re-take the measurement cache")
+    block.add_argument("--json", action="store_true")
+    block.set_defaults(handler=_blockers)
+
+    oracle = sub.add_parser(
+        "oracle",
+        help="the probe questions hand-translated into the query grammar")
+    oracle.add_argument("--json", action="store_true")
+    oracle.set_defaults(handler=_oracle)
+
+    surface = sub.add_parser(
+        "fieldsurface",
+        help="what the field surface answers of the ten held and unreachable")
+    surface.add_argument("--json", action="store_true")
+    surface.set_defaults(handler=_fieldsurface)
 
     loop = sub.add_parser(
         "queryesc", help="escalation as a step of the query loop")

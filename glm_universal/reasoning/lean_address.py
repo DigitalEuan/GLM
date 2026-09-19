@@ -131,7 +131,16 @@ _LEAN_CANDIDATES = (
 
 DATA_PATH = _HERE.parent / "_data" / "lean_addresses.json"
 
-SCHEMA = 1
+#: Schema 2 adds the namespace and the head of the statement to each row of
+#: ``declarations``, so a reader that answers *about* a declaration -- the
+#: runtime's field surface -- can answer from the stored book instead of
+#: parsing the development.  See :mod:`glm_universal.reasoning.lean_book`.
+SCHEMA = 2
+
+#: How much of a statement the book keeps.  The field surface shows the head
+#: of a statement rather than the whole of it, and the book stores exactly
+#: what the surface shows: storing more would be storing what nothing reads.
+STATEMENT_CHARS = 200
 
 
 def lean_root() -> Optional[Path]:
@@ -711,7 +720,9 @@ def compute_address_book(previous: Optional[Mapping[str, object]] = None,
     """
     table = feature_table()
     order = [d.name for d in declarations()]
-    meta = {d.name: {"kind": d.kind, "file": d.file, "line": d.line}
+    meta = {d.name: {"kind": d.kind, "file": d.file, "line": d.line,
+                     "namespace": d.namespace,
+                     "statement": d.statement.strip()[:STATEMENT_CHARS]}
             for d in declarations()}
     seed = ({}, {})
     if reuse:
@@ -906,25 +917,50 @@ def round_trip_report(scheme: str = "feature") -> Dict[str, object]:
     }
 
 
+def _group_squared_distance_sum(points: Sequence[Sequence[int]]) -> int:
+    """``sum over i<j of |x_i - x_j|^2`` for a group of integer points.
+
+    Computed by the identity
+
+        sum_{i<j} |x_i - x_j|^2  =  n * sum_i |x_i|^2  -  |sum_i x_i|^2,
+
+    which is Lagrange's identity written for a point set: expanding the square
+    on the left gives ``2n * sum |x_i|^2 - 2 |sum x_i|^2`` over all ordered
+    pairs, and the unordered pairs are half of that.  Every term is an integer,
+    so this is the same number the pairwise loop produced -- and it costs one
+    pass over the points rather than one pass over their pairs, which is what
+    makes the pair statistics free rather than quadratic.
+    """
+    count = len(points)
+    if count < 2:
+        return 0
+    norm_total = 0
+    centre = [0] * len(points[0])
+    for point in points:
+        for index, value in enumerate(point):
+            norm_total += value * value
+            centre[index] += value
+    return count * norm_total - sum(value * value for value in centre)
+
+
 def _pair_statistics(scheme: str) -> Dict[str, object]:
     """Mean squared address distance, same file against different file."""
     book = address_book()
     table = addresses(scheme)
     names = [n for n in book["order"] if n in table] if book else []
     files = {n: book["declarations"][n]["file"] for n in names} if book else {}
-    same_total = same_count = 0
-    cross_total = cross_count = 0
-    for i, a in enumerate(names):
-        pa = table[a]
-        fa = files[a]
-        for b in names[i + 1:]:
-            distance = squared_distance(pa, table[b])
-            if files[b] == fa:
-                same_total += distance
-                same_count += 1
-            else:
-                cross_total += distance
-                cross_count += 1
+    by_file: Dict[str, List[Tuple[int, ...]]] = {}
+    for name in names:
+        by_file.setdefault(files[name], []).append(table[name])
+    total = len(names)
+    total_pairs = total * (total - 1) // 2
+    same_count = sum(len(group) * (len(group) - 1) // 2
+                     for group in by_file.values())
+    cross_count = total_pairs - same_count
+    all_total = _group_squared_distance_sum([table[n] for n in names])
+    same_total = sum(_group_squared_distance_sum(group)
+                     for group in by_file.values())
+    cross_total = all_total - same_total
     same_mean = Fraction(same_total, same_count) if same_count else Fraction(0)
     cross_mean = Fraction(cross_total, cross_count) if cross_count else Fraction(0)
     return {
@@ -936,6 +972,91 @@ def _pair_statistics(scheme: str) -> Dict[str, object]:
     }
 
 
+def nearest_points(points: Sequence[Sequence[int]]
+                   ) -> Dict[Tuple[int, ...], Tuple[int, Tuple[Tuple[int, ...], ...]]]:
+    """For each distinct point, its nearest others and how far, exactly.
+
+    The answer is the one the all-pairs loop gives -- every point at the
+    minimal squared distance, ties included -- and it is reached without
+    looking at every pair.  Two exact bounds do the pruning, and neither can
+    discard a point that the full distance would have kept:
+
+    * the points are held in order of their most spread-out coordinate, so
+      scanning outwards from a point can stop in a direction as soon as the
+      gap in that coordinate alone exceeds the best distance found so far;
+    * before the 24-coordinate distance is computed, the four most spread-out
+      coordinates give a lower bound on it, and a candidate whose bound
+      already exceeds the best is skipped.
+
+    Both are lower bounds on the true squared distance, so the minimum and its
+    full set of ties are unchanged.  :func:`nearest_points_exhaustive` is the
+    same answer computed by brute force, and the two are checked against each
+    other.
+    """
+    distinct = sorted({tuple(point) for point in points})
+    if len(distinct) < 2:
+        return {point: (0, ()) for point in distinct}
+    width = len(distinct[0])
+    spread = [max(p[k] for p in distinct) - min(p[k] for p in distinct)
+              for k in range(width)]
+    order = sorted(range(width), key=lambda k: (-spread[k], k))
+    lead = order[0]
+    guards = order[1:4]
+    ordered = sorted(distinct, key=lambda p: p[lead])
+    count = len(ordered)
+    out: Dict[Tuple[int, ...], Tuple[int, Tuple[Tuple[int, ...], ...]]] = {}
+    for index, point in enumerate(ordered):
+        anchor = point[lead]
+        guarded = [point[k] for k in guards]
+        best: Optional[int] = None
+        winners: List[Tuple[int, ...]] = []
+        for step in (1, -1):
+            cursor = index + step
+            while 0 <= cursor < count:
+                other = ordered[cursor]
+                gap = other[lead] - anchor
+                bound = gap * gap
+                if best is not None and bound > best:
+                    break
+                if best is not None:
+                    for position, value in zip(guards, guarded):
+                        difference = other[position] - value
+                        bound += difference * difference
+                    if bound > best:
+                        cursor += step
+                        continue
+                distance = squared_distance(point, other)
+                if best is None or distance < best:
+                    best, winners = distance, [other]
+                elif distance == best:
+                    winners.append(other)
+                cursor += step
+        out[point] = (best if best is not None else 0,
+                      tuple(sorted(winners)))
+    return out
+
+
+def nearest_points_exhaustive(points: Sequence[Sequence[int]]
+                              ) -> Dict[Tuple[int, ...], Tuple[int, Tuple[Tuple[int, ...], ...]]]:
+    """:func:`nearest_points` by brute force -- the definition, not the method."""
+    distinct = sorted({tuple(point) for point in points})
+    out: Dict[Tuple[int, ...], Tuple[int, Tuple[Tuple[int, ...], ...]]] = {}
+    for point in distinct:
+        best: Optional[int] = None
+        winners: List[Tuple[int, ...]] = []
+        for other in distinct:
+            if other == point:
+                continue
+            distance = squared_distance(point, other)
+            if best is None or distance < best:
+                best, winners = distance, [other]
+            elif distance == best:
+                winners.append(other)
+        out[point] = (best if best is not None else 0,
+                      tuple(sorted(winners)))
+    return out
+
+
 def _neighbour_statistics(scheme: str) -> Dict[str, object]:
     """For each declaration, is its nearest neighbour by address a relative?
 
@@ -943,6 +1064,10 @@ def _neighbour_statistics(scheme: str) -> Dict[str, object]:
     same source file, and cited-or-citing.  Ties are counted as a hit only if
     *every* tied nearest neighbour is a relative, so the statistic cannot be
     inflated by a large collision class.
+
+    Two declarations that quantise to the *same* address are each other's
+    nearest neighbours at distance zero, so the search runs over the distinct
+    addresses and the collision classes are read off directly.
     """
     book = address_book()
     table = addresses(scheme)
@@ -955,25 +1080,27 @@ def _neighbour_statistics(scheme: str) -> Dict[str, object]:
             if target in linked:
                 linked[target].add(source)
 
+    classes: Dict[Tuple[int, ...], List[str]] = {}
+    for name in names:
+        classes.setdefault(table[name], []).append(name)
+    nearest = nearest_points([table[n] for n in names])
+
     same_file_hits = 0
     linked_hits = 0
     tie_total = 0
-    for a in names:
-        pa = table[a]
-        best = None
-        winners: List[str] = []
-        for b in names:
-            if b == a:
-                continue
-            distance = squared_distance(pa, table[b])
-            if best is None or distance < best:
-                best, winners = distance, [b]
-            elif distance == best:
-                winners.append(b)
+    for name in names:
+        point = table[name]
+        sharing = [other for other in classes[point] if other != name]
+        if sharing:
+            winners = sharing
+        else:
+            winners = [other
+                       for neighbour in nearest[point][1]
+                       for other in classes[neighbour]]
         tie_total += len(winners)
-        if winners and all(files[w] == files[a] for w in winners):
+        if winners and all(files[w] == files[name] for w in winners):
             same_file_hits += 1
-        if winners and all(w in linked[a] for w in winners):
+        if winners and all(w in linked[name] for w in winners):
             linked_hits += 1
     total = len(names)
     # chance: the mean probability that a uniformly chosen other declaration

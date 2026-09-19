@@ -416,6 +416,348 @@ DENOTATIONS: Tuple[Denotation, ...] = (
         justification=(
             "The opposite label, for the same reason."),
     ),
+
+    # -- decided for the v0.6.0 probe vocabulary ---------------------------
+    # Growing the semantic lexicon by the probe's content words widened the
+    # residue: 46 further endpoints reach no dimension the physics register
+    # holds, and each one is decided here on the same terms as the rest.
+    Denotation(
+        name="frequency_word", verdict="quantity",
+        quantity="frequency",
+        justification=(
+            "The lexicon spells the noun 'frequency' as `frequency_word` so "
+            "that the word entry and the register entry do not collide on one "
+            "key. It denotes the register's `frequency`, in reciprocal "
+            "seconds, and the entry supplies no coordinate of its own: the "
+            "dimension continues to be read from the register, exactly as an "
+            "alias does."),
+    ),
+    Denotation(
+        name="derivative", verdict="polymorphic",
+        justification=(
+            "A derivative has the dimension of what is differentiated divided "
+            "by the dimension of what it is differentiated with respect to. "
+            "Velocity is the derivative of position and has L/T; a derivative "
+            "in general has whatever those two supply, so the word takes its "
+            "dimension from its arguments and has none of its own."),
+    ),
+    Denotation(
+        name="norm", verdict="polymorphic",
+        justification=(
+            "A norm returns the size of whatever it is applied to, in that "
+            "thing's own units: the norm of a displacement is a length, the "
+            "norm of a velocity a speed. The squared norm that indexes this "
+            "project's lattice rungs is a pure number because its argument "
+            "is. The word takes the dimension of its argument and fixes "
+            "none."),
+    ),
+    Denotation(
+        name="limit", verdict="polymorphic",
+        justification=(
+            "A limit of a quantity is that quantity: the limit of a sequence "
+            "of lengths is a length. The prime limit of a musical interval is "
+            "a bare integer for the same reason -- the argument is "
+            "dimensionless. The word fixes no dimension."),
+    ),
+    Denotation(
+        name="element", verdict="carrier",
+        justification=(
+            "A chemical element is a kind of matter, not a magnitude. It "
+            "bears an atomic number, an atomic weight and an "
+            "electronegativity, each of which the element register holds; the "
+            "element is what those are properties of."),
+    ),
+    Denotation(
+        name="sky", verdict="carrier",
+        justification=(
+            "The sky is a thing that is looked at. It bears a colour, a "
+            "radiance and a spectrum -- the last of which is what the "
+            "question about its blueness is really about -- and is none of "
+            "them."),
+    ),
+    Denotation(
+        name="file", verdict="carrier",
+        justification=(
+            "A file is an artefact that holds text. It bears a size in bytes "
+            "and a count of declarations, which are quantities; the file is "
+            "what has them."),
+    ),
+    Denotation(
+        name="module", verdict="carrier",
+        justification=(
+            "A module is the same kind of thing one level up: an artefact "
+            "that holds declarations and bears counts of them. Nothing about "
+            "the word names a magnitude."),
+    ),
+    Denotation(
+        name="add", verdict="process",
+        justification=(
+            "Addition is something done to two numbers to obtain a third. The "
+            "operands may carry a dimension and the result carries theirs, "
+            "but the operation is an event, not a magnitude."),
+    ),
+    Denotation(
+        name="check", verdict="process",
+        justification=(
+            "Checking is an act performed on a claim and returning a verdict. "
+            "The verdict is a truth value, which is not a magnitude, and the "
+            "act is not one either."),
+    ),
+    Denotation(
+        name="compute", verdict="process",
+        justification=(
+            "Computing is something done. What it produces may be "
+            "dimensional; the doing is not."),
+    ),
+    Denotation(
+        name="convert", verdict="process",
+        justification=(
+            "Converting is an act performed on a quantity, taking it from one "
+            "unit to another. It preserves the dimension of its argument and "
+            "has none of its own."),
+    ),
+    Denotation(
+        name="count", verdict="process",
+        justification=(
+            "Counting is an act performed on a collection, returning a bare "
+            "integer. The integer is dimensionless, and the act is not a "
+            "magnitude at all."),
+    ),
+    Denotation(
+        name="define", verdict="process",
+        justification=(
+            "Defining is something a module does to a name. It produces a "
+            "declaration; it is not a quantity and does not have one."),
+    ),
+    Denotation(
+        name="describe", verdict="process",
+        justification=(
+            "Describing is an act performed on a subject, producing an "
+            "account of it. Nothing about the act is measurable in the "
+            "register's sense."),
+    ),
+    Denotation(
+        name="explain", verdict="process",
+        justification=(
+            "Explaining is the same kind of act with a cause as its object. "
+            "Causes are already decided as abstractions here, and the act of "
+            "giving one is not a magnitude."),
+    ),
+    Denotation(
+        name="give", verdict="process",
+        justification=(
+            "Giving, in the sense the probe's questions use it ('give the "
+            "atomic weight of carbon'), is an act of reporting a value. The "
+            "value has a dimension; the reporting does not."),
+    ),
+    Denotation(
+        name="look", verdict="process",
+        justification=(
+            "Looking is an act of consulting a table or observing a thing. It "
+            "is an event with a subject and an object and no magnitude."),
+    ),
+    Denotation(
+        name="make", verdict="process",
+        justification=(
+            "Making is an act that produces an effect, which is why the "
+            "lexicon relates the two. The effect may be measurable; the "
+            "making is not."),
+    ),
+    Denotation(
+        name="mean", verdict="process",
+        justification=(
+            "Meaning, as a verb, is the relation a word stands in to what it "
+            "denotes -- which is the relation this whole register records. It "
+            "is not a magnitude, and the register would be circular if it "
+            "were."),
+    ),
+    Denotation(
+        name="return", verdict="process",
+        justification=(
+            "Returning is what a function does with a value. The value may be "
+            "dimensional and the returning is not."),
+    ),
+    Denotation(
+        name="tell", verdict="process",
+        justification=(
+            "Telling is reporting to a hearer. Like giving, it moves a value "
+            "without being one."),
+    ),
+    Denotation(
+        name="weigh", verdict="process",
+        justification=(
+            "Weighing is the act of measuring a weight. The weight is a force "
+            "and the register holds it; the act of measuring it is an event."),
+    ),
+    Denotation(
+        name="write", verdict="process",
+        justification=(
+            "Writing is the act that produces a file or a declaration. It has "
+            "an agent, an object and no magnitude."),
+    ),
+    Denotation(
+        name="belong", verdict="abstraction",
+        justification=(
+            "Belonging is membership -- a relation between a thing and a "
+            "collection, as chlorine belongs to the halogens. It is a "
+            "predicate over things, not an event and not a magnitude, which "
+            "is why it is recorded here rather than as a process."),
+    ),
+    Denotation(
+        name="abstract", verdict="abstraction",
+        justification=(
+            "An adjective for what has no concrete instance to point at. It "
+            "classifies a word rather than measuring a thing, and the "
+            "classification it makes is the one the semantic primitive "
+            "`abstract_concrete` records -- a coordinate of the lexicon "
+            "carrier, not a dimension of the physics register."),
+    ),
+    Denotation(
+        name="atomic", verdict="abstraction",
+        justification=(
+            "An adjective marking the scale a quantity is taken at: atomic "
+            "weight is a weight, atomic radius a length. The adjective picks "
+            "the scale and supplies no dimension of its own."),
+    ),
+    Denotation(
+        name="dimensional", verdict="abstraction",
+        justification=(
+            "An adjective about dimensions rather than a dimension. A "
+            "dimensional check compares exponent vectors; the word names that "
+            "comparison's subject matter and takes no value."),
+    ),
+    Denotation(
+        name="greatest", verdict="abstraction",
+        justification=(
+            "A superlative. It selects an extreme member of an ordered set -- "
+            "the greatest common divisor is one -- and the selection carries "
+            "whatever the members carry, which here is nothing."),
+    ),
+    Denotation(
+        name="common", verdict="abstraction",
+        justification=(
+            "A predicate of sharing: a common divisor is one that divides "
+            "both arguments. It says which members of a set qualify and is "
+            "not a magnitude."),
+    ),
+    Denotation(
+        name="perfect", verdict="abstraction",
+        justification=(
+            "A quality term. A perfect fifth is an interval named perfect by "
+            "convention of musical theory; the word classifies and does not "
+            "measure."),
+    ),
+    Denotation(
+        name="periodic", verdict="abstraction",
+        justification=(
+            "An adjective for a structure that repeats. The periodic table "
+            "repeats in its chemical properties, and the word describes that "
+            "repetition rather than a magnitude of it. (The period of a wave "
+            "is a time and a different word.)"),
+    ),
+    Denotation(
+        name="prime", verdict="abstraction",
+        justification=(
+            "A property of an integer: that it has exactly two divisors. It "
+            "is a predicate over pure numbers, and pure numbers are "
+            "dimensionless."),
+    ),
+    Denotation(
+        name="divisor", verdict="abstraction",
+        justification=(
+            "A divisor is an integer that divides another exactly. Integers "
+            "are dimensionless, and the role is a property of a pair of "
+            "them."),
+    ),
+    Denotation(
+        name="gcd", verdict="abstraction",
+        justification=(
+            "The greatest common divisor is an integer determined by two "
+            "integers. It is computed, not measured, and is dimensionless."),
+    ),
+    Denotation(
+        name="interval", verdict="abstraction",
+        justification=(
+            "A musical interval is a ratio of two frequencies. A ratio of two "
+            "quantities of the same kind is dimensionless, so the interval "
+            "names a relation between pitches and carries no dimension "
+            "itself."),
+    ),
+    Denotation(
+        name="fifth", verdict="abstraction",
+        justification=(
+            "One named interval, the ratio 3/2. The frequencies it relates "
+            "are quantities the register holds; the ratio between them is a "
+            "pure number."),
+    ),
+    Denotation(
+        name="family", verdict="abstraction",
+        justification=(
+            "A family is a collection whose members share a construction -- "
+            "here, the lattice rungs indexed by minimum squared norm. A "
+            "collection is not a magnitude, and its index is a pure number."),
+    ),
+    Denotation(
+        name="group", verdict="abstraction",
+        justification=(
+            "A group is an algebraic structure: a set with an operation. "
+            "Nothing about it is measured in the register's units."),
+    ),
+    Denotation(
+        name="lattice", verdict="abstraction",
+        justification=(
+            "A lattice is a discrete subgroup of a real vector space. Its "
+            "points have norms and its covolume is a number, but the "
+            "structure itself is not a magnitude."),
+    ),
+    Denotation(
+        name="block", verdict="abstraction",
+        justification=(
+            "A block of the periodic table -- s, p, d, f -- is a "
+            "classification of elements by the subshell their outermost "
+            "electron occupies. It names a set, not a value."),
+    ),
+    Denotation(
+        name="completeness", verdict="abstraction",
+        justification=(
+            "A property of a construction: that nothing it should contain is "
+            "missing. It is a predicate, holds or does not, and has no "
+            "magnitude."),
+    ),
+    Denotation(
+        name="meaning", verdict="abstraction",
+        justification=(
+            "What a word denotes. It is the subject of this register rather "
+            "than an entry in the physics one, and it takes no dimension."),
+    ),
+    Denotation(
+        name="mole", verdict="abstraction",
+        justification=(
+            "The unit of amount of substance. A unit is a convention for "
+            "reporting a magnitude, not a magnitude; and the physics register "
+            "holds no amount-of-substance quantity for the word to alias, so "
+            "the decision is that it denotes a unit and stops there."),
+    ),
+    Denotation(
+        name="molar", verdict="abstraction",
+        justification=(
+            "An adjective meaning 'per mole'. It modifies the dimension of "
+            "what it is applied to -- molar mass is a mass per amount -- and "
+            "supplies none by itself."),
+    ),
+    Denotation(
+        name="metre", verdict="abstraction",
+        justification=(
+            "A unit of length. The magnitude it reports is `length`, which "
+            "the register holds; the unit is the convention for reporting it "
+            "and is a different kind of thing."),
+    ),
+    Denotation(
+        name="foot", verdict="abstraction",
+        justification=(
+            "Another unit of length, and the reason the probe asks for a "
+            "conversion. Same decision, same reason."),
+    ),
 )
 
 

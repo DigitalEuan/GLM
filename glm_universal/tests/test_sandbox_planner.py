@@ -255,12 +255,43 @@ def test_the_safety_gate_holds_and_the_utility_gate_does_not(report):
 def test_the_fallback_is_measured_over_the_whole_evaluation_set(report):
     fallback = report["fallback"]
     assert fallback["cases"] == len(ev_cases.CASES)
-    assert fallback["planner_consulted"] == 4
+    #  Four when the reading was first taken, seven since the field surface
+    #  added three refusals of its own (an unknown field, an unknown row and
+    #  a value the register records as missing).  The measurement moved with
+    #  the evaluation set; what it says did not.
+    assert fallback["planner_consulted"] == 7
     assert fallback["gained"] == ()
     assert fallback["principled_refusals_offered_to_the_planner"] == ()
     assert fallback["safety_holds"] is True
     assert fallback["utility_holds"] is False
     assert "consulted only on a refusal" in str(fallback["rule"])
+
+
+def test_the_number_of_workers_is_declared_and_overridable(monkeypatch):
+    monkeypatch.setenv("GLM_PLANNER_JOBS", "1")
+    assert pl.fallback_jobs() == 1
+    monkeypatch.setenv("GLM_PLANNER_JOBS", "3")
+    assert pl.fallback_jobs() == 3
+    monkeypatch.setenv("GLM_PLANNER_JOBS", "not a number")
+    assert pl.fallback_jobs() == 1
+    monkeypatch.delenv("GLM_PLANNER_JOBS")
+    assert pl.fallback_jobs() >= 1
+
+
+def test_the_reading_is_the_same_read_in_parallel_as_read_in_order():
+    """Splitting the cases across processes is a speed-up, not a change.
+
+    Checked on a sample rather than on all 149: the whole reading is what the
+    exhaustive cases above run, and what matters here is that a row does not
+    depend on which process computed it or on the order they finished in.
+    """
+    from concurrent.futures import ProcessPoolExecutor
+
+    sample = [0, 1, 2, 3]
+    in_order = [pl.fallback_row(index) for index in sample]
+    with ProcessPoolExecutor(max_workers=2) as pool:
+        in_parallel = list(pool.map(pl.fallback_row, sample, chunksize=1))
+    assert in_parallel == in_order
 
 
 def test_the_gate_is_measured_against_a_set_the_module_did_not_choose():
@@ -272,13 +303,19 @@ def test_the_gate_is_measured_against_a_set_the_module_did_not_choose():
 
 @pytest.mark.exhaustive
 def test_the_by_product_is_two_questions_the_shipped_classifier_does_not_mark():
-    """The planner marks two refusals ill formed that the shipped list misses."""
+    """The planner marks two refusals ill formed that the shipped list misses.
+
+    Seven refusals reach the planner since the field surface added three of
+    its own; all seven stop, and the two the planner marks are the two it
+    marked when four reached it, so the by-product is the same finding over a
+    larger set.
+    """
     rows = [row for row in pl.fallback_rows() if row["planner_consulted"]]
-    assert len(rows) == 4
+    assert len(rows) == 7
     stopped = [row for row in rows
                if not row["planner_answered"]
                and row["refusal_tag"] == esl.ESCALATABLE]
-    assert len(stopped) == 4
+    assert len(stopped) == 7
     marked_by_the_planner = [row["question"] for row in stopped
                              if pl.ask(str(row["question"])).refusal_tag
                              != esl.ESCALATABLE]

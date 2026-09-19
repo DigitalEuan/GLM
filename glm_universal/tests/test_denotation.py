@@ -1,8 +1,10 @@
 """Tests for the denotation register and the second pass over the residue.
 
-``test_measure_words.py`` pins the first pass: 27 of the lexicon's 66
-``related_to`` triples convert from the physics register alone and 39 do not,
-38 of them because an endpoint reaches no dimension.  That last sentence is a
+``test_measure_words.py`` pins the first pass: 28 of the lexicon's
+``related_to`` triples convert from the physics register alone and 82 do not,
+81 of them because an endpoint reaches no dimension.  (The counts moved in
+v0.6.0, when the lexicon grew by the language probe's content words; the
+shape of the argument did not.)  That last sentence is a
 statement about a *lookup*, and this round replaces it with a statement about
 the *words*: ``data_objects/denotation.py`` decides, one name at a time and
 with a written reason, what each of those endpoints denotes.
@@ -54,15 +56,24 @@ class TestTheRegisterIsAudited:
         assert summary["audit"]["sound"] is True
 
     def test_the_shape_of_the_register(self, summary):
-        assert summary["entries"] == 36
+        assert summary["entries"] == 83
         assert summary["by_verdict"] == {
-            "quantity": 1, "ambiguous": 3, "polymorphic": 4,
-            "carrier": 9, "process": 11, "abstraction": 8}
+            "quantity": 2, "ambiguous": 3, "polymorphic": 7,
+            "carrier": 13, "process": 27, "abstraction": 31}
         assert sum(summary["by_verdict"].values()) == summary["entries"]
 
-    def test_only_one_name_is_dimensional(self, summary):
-        assert summary["dimensional"] == {"gravity": "gravitational_field"}
+    def test_only_the_two_aliasing_names_are_dimensional(self, summary):
+        """Two decided names reach a dimension, and both do it by aliasing.
+
+        ``gravity`` is the register's `gravitational_field`; ``frequency_word``
+        is the lexicon's spelling of `frequency`, kept apart from the register
+        key.  Neither supplies a coordinate of its own.
+        """
+        assert summary["dimensional"] == {
+            "gravity": "gravitational_field",
+            "frequency_word": "frequency"}
         assert dn.denotes_quantity("gravity") == "gravitational_field"
+        assert dn.denotes_quantity("frequency_word") == "frequency"
 
     def test_a_dimensional_verdict_names_a_registered_quantity(self, summary,
                                                                subtests):
@@ -106,7 +117,7 @@ class TestTheDecisionCoversTheResidue:
         assert cover["undecided"] == ()
         assert cover["idle"] == ()
         assert cover["complete"] is True
-        assert cover["needed"] == cover["decided"] == 36
+        assert cover["needed"] == cover["decided"] == 83
 
     def test_every_decided_name_is_an_undimensioned_residue_endpoint(
             self, subtests):
@@ -120,35 +131,36 @@ class TestTheDecisionCoversTheResidue:
                 assert mvw._dimension_of(name) is None
 
     def test_the_decision_does_not_move_the_first_pass(self):
-        """``relation_repair`` is untouched: 27 convert, 39 remain."""
+        """``relation_repair`` is untouched: 28 convert, 82 remain."""
         repair = mvw.relation_repair()
-        assert repair["converted"] == 27
-        assert repair["residue"] == 39
+        assert repair["converted"] == 28
+        assert repair["residue"] == 82
 
 
 class TestWhatTheDecisionChanges:
     """Measured, not asserted -- and mostly it changes the reasons."""
 
     def test_the_second_pass_accounts_for_every_residue_triple(self, passes):
-        assert passes["residue"] == 39
+        assert passes["residue"] == 82
         assert (passes["converted"] + passes["decided"]
-                + passes["declined"]) == 39
+                + passes["declined"]) == 82
 
     def test_naming_a_denotation_manufactures_no_conversions(self, passes):
         """Deciding what a word denotes is not a way of making relations."""
         assert passes["converted"] == 0
         assert passes["conversions"] == ()
 
-    def test_the_one_newly_dimensioned_name_still_declines(self, passes):
-        """*gravity* reaches a dimension and its triple is still refused.
+    def test_the_newly_dimensioned_names_still_decline(self, passes):
+        """A name reaching a dimension does not make its triple convert.
 
-        ``gravity related_to mass`` joins ``entropy related_to temperature``:
-        two genuine quantities that no single factor of the basis carries one
-        to the other.  That is the honest outcome of the decision, and it is
-        pinned so that a later change to the basis is visible here.
+        ``gravity related_to mass`` joins ``entropy related_to temperature``
+        and ``blue related_to wavelength``: genuine quantities at both ends
+        that no single factor of the basis carries one to the other.  That is
+        the honest outcome of the decision, and it is pinned so that a later
+        change to the basis is visible here.
         """
         kinds = passes["declined_by_kind"]
-        assert kinds["no_single_factor"] == 2
+        assert kinds["no_single_factor"] == 3
         declined = {(row["subject"], row["object"]): row
                     for row in passes["declined_rows"]}
         assert declined[("gravity", "mass")]["kind"] == "no_single_factor"
@@ -191,9 +203,9 @@ class TestWhatTheDecisionChanges:
 
     def test_the_declines_split_by_what_was_decided(self, passes):
         kinds = passes["declined_by_kind"]
-        assert sum(kinds.values()) == passes["declined"] == 33
+        assert sum(kinds.values()) == passes["declined"] == 76
         assert kinds["ambiguous"] == 5
-        assert kinds["polymorphic"] == 4
+        assert kinds["polymorphic"] == 5
 
 
 class TestTheClosure:
@@ -202,7 +214,7 @@ class TestTheClosure:
     def test_the_residue_is_decided(self):
         closed = dvw.closure()
         assert closed["decided"] is True
-        assert closed["accounted"] == closed["residue"] == 39
+        assert closed["accounted"] == closed["residue"] == 82
         assert closed["undecided_endpoints"] == ()
         assert closed["lookup_failures"] == ()
 
@@ -229,9 +241,9 @@ class TestTheQuery:
 
     def test_the_report_states_the_decision(self, sess):
         solution = sess.ask("report measure")
-        assert solution.expected["denotations"] == "36"
+        assert solution.expected["denotations"] == "83"
         assert solution.expected["denotation_closed"] == "True"
         assert solution.expected["denotation_complete"] == "True"
         assert solution.expected["denotation_converted"] == "0"
         assert solution.expected["denotation_decided"] == "6"
-        assert solution.expected["denotation_declined"] == "33"
+        assert solution.expected["denotation_declined"] == "76"

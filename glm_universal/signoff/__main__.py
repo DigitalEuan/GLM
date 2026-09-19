@@ -10,15 +10,27 @@
     PYTHONPATH=. python3 -m glm_universal.signoff --run-checks-all
     PYTHONPATH=. python3 -m glm_universal.signoff --run-everything
     PYTHONPATH=. python3 -m glm_universal.signoff --release
+    PYTHONPATH=. python3 -m glm_universal.signoff --release --resume
     PYTHONPATH=. python3 -m glm_universal.signoff --verify
     PYTHONPATH=. python3 -m glm_universal.signoff --verify-release
     PYTHONPATH=. python3 -m glm_universal.signoff --closure test_wobble.py
+    PYTHONPATH=. python3 -m glm_universal.signoff --why
+    PYTHONPATH=. python3 -m glm_universal.signoff --impact ../STATUS.md
 
 ``--run`` (equivalently ``--only-stale``) runs the stale *test files*;
 ``--run-checks`` runs the stale *instruments* (``lake build``, the evaluation,
 the benchmarks, the probes, the figures check); ``--run-everything`` runs both.
 The ``-all`` forms ignore the ledger, and ``--release`` is the round-close
 check: every test file and every instrument, with the exhaustive cases on.
+
+``--release --resume`` asks the same question and pays only what is still
+owed.  Signatures are written after each unit rather than at the end, so an
+interrupted release keeps everything it earned; resuming runs the units the
+*release* question calls stale -- unsigned, changed, failed, or signed only
+with the exhaustive cases deselected -- and skips the rest.  It is the right
+command after a release that ran out of time, and it is not a weaker gate:
+what decides the round is ``--verify-release``, which re-checks every
+signature and reports anything only signed fast as ``partial``.
 
 ``--jobs N`` runs N units at once (default: one per core, capped at eight).
 ``--exhaustive`` turns the opt-in cases on for a run that is not ``--release``;
@@ -27,6 +39,12 @@ they are on automatically for any ``-all`` form.
 A routine run signs a unit in ``fast`` mode.  ``--verify-release`` asks the
 stricter question -- is every unit signed off *with the exhaustive cases run* --
 and reports anything only signed fast as ``partial``.
+
+``--why`` is ``--plan`` with the reason for each stale unit: which kind of
+file moved -- code, data, documents, Lean, scaffolding -- rather than only
+that something did.  ``--impact PATH`` asks the question the other way round
+and *before* the edit: which units would an edit to that file make stale, and
+how long did they last take.
 
 Exit codes: ``0`` everything asked for succeeded, ``1`` a test failed or a
 signature did not hold, ``2`` the arguments were not understood.
@@ -107,6 +125,41 @@ def _print_plan(full: bool = False) -> int:
     whole = saving["seconds_full_run"] + check_saving["seconds_full_run"]
     todo = saving["seconds_to_run"] + check_saving["seconds_to_run"]
     print(f"everything: {_seconds(todo)} to run instead of {_seconds(whole)}")
+    return 0
+
+
+def _print_why() -> int:
+    """The plan, with the reason each stale unit is going to run."""
+    rows = L.plan()
+    stale = [u for u in rows if u.stale]
+    width = max([len(u.name) for u in stale] + [10])
+    for unit in stale:
+        last = unit.last_seconds
+        timing = _seconds(last) if last is not None else "  -  "
+        print(f"  {unit.name:<{width}} {timing:>8}   {L.reason(unit)}")
+    print(f"{len(stale)} of {len(rows)} test files will run")
+    if stale:
+        kinds = {}
+        for unit in stale:
+            for group in L.stale_groups(unit):
+                kinds[group] = kinds.get(group, 0) + 1
+        if kinds:
+            print("  by kind: " + ", ".join(
+                f"{name} {count}" for name, count in sorted(kinds.items())))
+    return 0
+
+
+def _print_impact(target: str) -> int:
+    """What an edit to one file would cost, before it is made."""
+    report = L.impact(target)
+    for name in report["units"]:
+        print(f"  {name}")
+    print(f"{report['count']} of {report['of']} test files reach "
+          f"{report['target']}")
+    print(f"  they last took {_seconds(report['seconds'])} in total")
+    if report["without_timing"]:
+        print(f"  no recorded timing for: "
+              f"{', '.join(report['without_timing'])}")
     return 0
 
 
@@ -204,13 +257,25 @@ def main(argv: Sequence[str]) -> int:
     exhaustive = True if "--exhaustive" in argv else None
     if not argv or "--plan" in argv:
         return _print_plan(full="--release" in argv)
+    if "--why" in argv:
+        return _print_why()
+    if "--impact" in argv:
+        index = list(argv).index("--impact")
+        if index + 1 >= len(argv):
+            print("--impact needs a path")
+            return 2
+        return _print_impact(argv[index + 1])
     if "--verify-release" in argv:
         return _print_verify(full=True)
     if "--verify" in argv:
         return _print_verify()
     if "--release" in argv:
-        return (_run(all_units=True, jobs=jobs, exhaustive=True)
-                | _run_checks(all_units=True, jobs=min(jobs, 3),
+        resume = "--resume" in argv
+        if resume:
+            print("resuming: running only what the release question calls "
+                  "stale; --verify-release still decides the round")
+        return (_run(all_units=not resume, jobs=jobs, exhaustive=True)
+                | _run_checks(all_units=not resume, jobs=min(jobs, 3),
                               exhaustive=True))
     if "--run-everything" in argv:
         return (_run(all_units=False, jobs=jobs, exhaustive=exhaustive)

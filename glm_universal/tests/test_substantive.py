@@ -292,11 +292,14 @@ class TestCrossRegisterCoercion:
     def test_operands_with_no_common_register_are_still_refused(self, sess):
         """Coercion rescues a false split, never a real one.
 
-        ``carbon`` is a chemistry concept and ``heat`` a lexicon one, with no
+        ``oxygen`` is a chemistry concept and ``heat`` a lexicon one, with no
         register holding both, so the query is refused rather than answered
-        by subtracting carriers that do not share a layout.
+        by subtracting carriers that do not share a layout.  (``carbon`` was
+        the witness until v0.6.0 added it to the semantic lexicon, which gave
+        the operands a register in common and made the query answerable --
+        the refusal is about the registers, not about the word.)
         """
-        sol = sess.ask("heat : carbon :: force : ?")
+        sol = sess.ask("heat : oxygen :: force : ?")
         assert not sol.ok
         assert "could not settle on a single domain" in (sol.error or "")
         assert "no single register" in " ".join(sol.query.trace)

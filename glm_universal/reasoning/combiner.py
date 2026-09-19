@@ -422,6 +422,9 @@ XOR_SITES: Tuple[Tuple[str, Tuple[str, ...], str], ...] = (
      "the digit stack adds words cube by cube"),
     ("substrate/golay_decode.py", ("group-law",),
      "syndrome decoding adds the coset leader"),
+    ("substrate/golay_paley.py", ("group-law",),
+     "the note's 12 x 12 block generates the code by adding its rows: the "
+     "span of the generator, and the span of the shortened generator"),
     ("substrate/isomorphism.py", ("group-law", "metric"),
      "the isomorphism transports the group law and checks it by distance"),
     ("substrate/lattice32.py", ("group-law",),

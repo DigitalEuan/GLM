@@ -37,6 +37,7 @@ checked** rather than maintained by memory.
 | `measurements.py` | The expensive figures — the tables of the address study and of the retrieval study — taken once and kept beside the digest of the Lean sources they were taken from. A stale cache is reported, never answered from. |
 | `cost.py` | What one iteration of the rebuild chain costs, in exact counts rather than timings: what a one-file change invalidates, how much of the decoding is reused, how often the planner's report is taken, and how many figures are emitted rather than typed. |
 | `checks.py` | The tier contract, the archive partition, the coverage claim of `ENTRY.md`, and the freshness of every derived artefact. |
+| `gate.py` | The verdict of the last passing check, stored beside a digest of everything that check can read, so a check whose inputs have not moved answers from the record instead of re-deriving it. |
 | `report.py` | All of it in one call, including the reading cost at each resolution. |
 
 ## Running it
@@ -45,6 +46,7 @@ checked** rather than maintained by memory.
 cd /path/to/GLM                       # repo root, where GLM.py lives
 PYTHONPATH=. python3 -m glm_universal.corpus            # the report
 PYTHONPATH=. python3 -m glm_universal.corpus --check    # exit 1 on any drift
+PYTHONPATH=. python3 -m glm_universal.corpus --check --all  # the full pass, ignoring the stored verdict
 PYTHONPATH=. python3 -m glm_universal.corpus --refresh  # rebuild everything derived, in order
 PYTHONPATH=. python3 -m glm_universal.corpus --write    # regenerate the blocks
 PYTHONPATH=. python3 -m glm_universal.corpus --remeasure  # re-take the Lean measurements
@@ -67,6 +69,16 @@ does not exist, a current-state document unreachable from `ENTRY.md`, an
 archived document left off its list, an inline `<!--figure:…-->` marker whose
 body is not what its figure now says, or a measurement cache taken from a Lean
 tree that has since moved.
+
+It answers in about three seconds when nothing has changed. `gate.py` stores
+the verdict beside a digest of everything the check can read — the documents,
+this package's code, the frozen data it reads and the Lean sources the blocks
+quote, taken as the sign-off ledger's closure of `__main__.py` — and a check
+whose inputs have not moved since it last **passed** reports that instead of
+re-deriving it. Only a pass is recorded, so a failure is never skipped, and
+`--check --all` ignores the record. The measurement is
+[`studies/ITERATION_COST_STUDY.md`](../../../studies/ITERATION_COST_STUDY.md)
+§5f.
 
 ## What is proved rather than asserted
 

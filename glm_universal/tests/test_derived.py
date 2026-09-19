@@ -197,6 +197,50 @@ class TestDerivedStore:
             assert store.cached(compute) == {"n": 2}    # stale: recomputed
             assert store.state()["verdict"] == "fresh"
 
+    def test_a_stale_artefact_raises_where_recomputing_is_forbidden(self):
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            source = root / "input.txt"
+            source.write_text("one", encoding="utf-8")
+            store = self._store(root / "cache", [source])
+            calls = []
+
+            def compute():
+                calls.append(1)
+                return {"n": len(calls)}
+
+            with D.no_recompute():
+                with pytest.raises(D.StaleDerivation) as raised:
+                    store.cached(compute)
+            assert calls == []                      # nothing was paid for
+            assert "unit-test" in str(raised.value)
+            assert "--refresh" in str(raised.value)
+
+    def test_a_fresh_artefact_is_read_where_recomputing_is_forbidden(self):
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            source = root / "input.txt"
+            source.write_text("one", encoding="utf-8")
+            store = self._store(root / "cache", [source])
+            store.write({"value": 1})
+            with D.no_recompute():
+                assert store.cached(lambda: {"value": 2}) == {"value": 1}
+
+    def test_the_ban_is_lifted_again_on_the_way_out(self):
+        assert D.recomputation_allowed()
+        with D.no_recompute():
+            assert not D.recomputation_allowed()
+        assert D.recomputation_allowed()
+
+    def test_every_store_built_is_registered_with_its_state(self):
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            source = root / "input.txt"
+            source.write_text("one", encoding="utf-8")
+            self._store(root / "cache", [source])
+            assert "unit-test" in D.store_registry()
+            assert D.store_states()["unit-test"]["verdict"] == "absent"
+
     def test_a_schema_bump_retires_the_artefact(self):
         with tempfile.TemporaryDirectory() as raw:
             root = Path(raw)

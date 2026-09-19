@@ -129,7 +129,7 @@ class TestTheRoutesAreTriedInOrder:
 
     def test_the_vocabulary_is_the_nine_registers(self):
         held = adm.vocabulary()
-        assert len(held) == 1093
+        assert len(held) == 1147
         assert set(held.values()) == {
             "physics", "chemistry", "molecules", "mathematics", "harmonics",
             "economics", "comparison", "lexicon", "semantic_lexicon",

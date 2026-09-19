@@ -52,8 +52,8 @@ already holds — **one carrier per named object of every shipped register**:
 | molecules | 51 |
 | mathematics | 22 |
 | harmonics | 28 |
-| lexicon | 95 |
-| **total** | **1,040** |
+| lexicon | 149 |
+| **total** | **1,094** |
 
 Nothing is sampled, and the order is the registers' own, so the carrier set is
 a deterministic function of the data files.
@@ -62,7 +62,7 @@ a deterministic function of the data files.
 
 `information_loss.py` compares carriers pairwise. `classes` is quadratic,
 `congruence_witness` is quartic, and a single comparison at the rational layer
-runs a Leech nearest-point decode. On 1,040 carriers the congruence search
+runs a Leech nearest-point decode. On 1,094 carriers the congruence search
 alone is on the order of 10¹² decodes: not a slow computation, an impossible
 one.
 
@@ -81,7 +81,7 @@ two carriers agrees — that reading is the layer's *class key*:
 
 Keys are hashable, so resolution, loss, boundary sizes and refinement
 violations are all computed by grouping rather than by comparing, in one pass.
-The whole 1,040-carrier audit then takes seconds.
+The whole 1,094-carrier audit then takes seconds.
 
 **The identification is checked, not assumed.** `key_agreement` re-runs each
 layer's own `perceive` and `measure` over every pair of a fixed 18-carrier
@@ -97,12 +97,12 @@ key deliberately to confirm the check can fail.
 
 | layer | resolves | loses | largest class | addition descends |
 |---|---|---|---|---|
-| substrate | 415 / 1,040 | 625 | 142 | no |
-| integer | 544 / 1,040 | 496 | 118 | no |
-| rational | 757 / 1,040 | 283 | 78 | yes |
-| griess | 757 / 1,040 | 283 | 78 | yes |
-| universal | 757 / 1,040 | 283 | 78 | yes |
-| *`integer_raw` (rejected)* | *359 / 1,040* | *681* | *177* | *no* |
+| substrate | 469 / 1,094 | 625 | 142 | no |
+| integer | 598 / 1,094 | 496 | 118 | no |
+| rational | 811 / 1,094 | 283 | 78 | yes |
+| griess | 811 / 1,094 | 283 | 78 | yes |
+| universal | 811 / 1,094 | 283 | 78 | yes |
+| *`integer_raw` (rejected)* | *363 / 1,094* | *731* | *184* | *no* |
 
 Resolution rises and then stops. It stops at the rational layer because that
 layer's view **is** the carrier, and the two layers above it add readings that
@@ -134,7 +134,7 @@ a hard ceiling on what escalation can ever resolve
 (`GLM.Info.entryResolution_le_distinct`), and the rational layer already
 attains it (`GLM.Info.entryResolution_rational`).
 
-Measured: **757 distinct carriers under 1,040 named entries.** 283 entries —
+Measured: **811 distinct carriers under 1,094 named entries.** 283 entries —
 27% of the corpus — are beyond every layer of the stack, in **104 collision
 classes**, and **every one of those classes lies inside a single register**;
 there is not one cross-register collision.
@@ -146,7 +146,7 @@ there is not one cross-register collision.
 | molecules | 51 | 43 | 51 | 51 | 0 |
 | mathematics | 22 | 10 | 12 | 14 | 8 |
 | harmonics | 28 | 28 | 28 | 28 | 0 |
-| lexicon | 95 | 91 | 91 | 95 | 0 |
+| lexicon | 149 | 91 | 91 | 95 | 0 |
 
 So the ceiling is almost entirely one register's, and the reason is not a
 defect of the layers. The four largest classes:

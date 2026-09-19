@@ -988,9 +988,12 @@ def block_stack_sweep() -> str:
                     "carried", "lost"), rows)
     lines.extend([
         "",
-        "On the tuning set.  Every threshold from 1/20 to 1/4 improves on "
-        "the text control: "
-        f"{'yes' if data['verdict']['gain_holds_across_the_gate'] else 'no'}.",
+        "On the tuning set.  The gain is strict on "
+        f"{data['verdict']['gain_strict_gates']} of the thresholds from "
+        f"1/20 to 1/4, up to and including "
+        f"{data['verdict']['gain_strict_to_gate']}; across the whole of that "
+        "band the relay is never below the text control: "
+        f"{'yes' if data['verdict']['gain_never_below_across_the_gate'] else 'no'}.",
     ])
     return "\n".join(lines)
 
@@ -2720,6 +2723,13 @@ def block_cost_figures() -> str:
 #  block, where staleness can be reported in the body.
 
 @memo
+def _package_figures() -> Mapping[str, object]:
+    """The package's own counts -- sub-packages, modules, kinds -- once."""
+    from .. import figures as fg
+    return fg.package_figures()
+
+
+@memo
 def _sentences() -> Mapping[str, str]:
     """The generated sentences of :mod:`glm_universal.figures`, once."""
     from .. import figures as fg
@@ -2764,20 +2774,351 @@ def _repo_storage() -> Mapping[str, object]:
     return gn.repo_storage_report()
 
 
+def _normesc_figure(which: str, field: str) -> str:
+    """One count of one reading of the norm-family measurement."""
+    data = _norm()
+    if data is None:
+        return "stale"
+    totals = data[which]["orders"]["totals"]["middle_out"]
+    if field == "queries":
+        return _thousands(int(totals["correct"]) + int(totals["wrong"])
+                          + int(totals["refused"]))
+    return _thousands(totals[field])
+
+
+def _normesc_rungs(which: str) -> str:
+    data = _norm()
+    return "stale" if data is None else _thousands(len(data[which]["ladder"]))
+
+
+def _normesc_sweep(field: str) -> str:
+    data = _norm()
+    return "stale" if data is None else _thousands(data["sweep"][field])
+
+
+def _normfamily_count(field: str) -> str:
+    data = _norm()
+    if data is None:
+        return "stale"
+    family = data["family"]
+    if field == "norms":
+        return _thousands(len(family["completeness"]["norms"]))
+    return _thousands(family[field])
+
+
+def _opesc_figure(field: str) -> str:
+    data = _opesc()
+    if data is None:
+        return "stale"
+    rows = list(data["operations"]) + [data["equation"]]
+    if field == "count":
+        return _thousands(len(rows))
+    program = [row for row in rows if row["operation"] == "program"][0]
+    if field == "program_correct":
+        return _thousands(program["escalation"]["correct"])
+    if field == "program_wrong":
+        return _thousands(program["escalation"]["wrong"])
+    return _thousands(program["escalation"]["queries"])
+
+
+def _secondread_figure(field: str) -> str:
+    from ..reasoning import second_reading as sr
+    data = sr.current()
+    if data is None:
+        return "stale"
+    marks = data["marks_report"]
+    if field == "adopted":
+        return _thousands(len(marks["adopted"]))
+    if field == "configurations":
+        return _thousands(len(marks["verdicts"]))
+    if field == "shipped":
+        return str(marks["shipped"] or "none")
+    shipped = marks["shipped"]
+    if shipped is None:
+        return "none"
+    row = marks["verdicts"][shipped]
+    if field == "program_correct":
+        return _thousands(row["program"]["correct"])
+    if field == "program_wrong":
+        return _thousands(row["program"]["wrong"])
+    if field == "program_refused":
+        return _thousands(row["program"]["refused"])
+    if field == "given_up":
+        return _thousands(row["answers_given_up"])
+    return _thousands(row["matched_control_wrongs_removed"])
+
+
+_oracle_cache: Optional[Mapping[str, object]] = None
+
+
+def _oracle() -> Mapping[str, object]:
+    """The hand-translation experiment, run once per process.
+
+    It keeps no measurement cache because it needs none: the twenty
+    translations are asked of a live session in a few seconds, so every
+    document that quotes it quotes what the solvers do now.
+    """
+    global _oracle_cache
+    if _oracle_cache is None:
+        from ..reasoning import probe_oracle as po
+        _oracle_cache = po.oracle_report()
+    return _oracle_cache
+
+
+def _oracle_figure(field: str) -> str:
+    data = _oracle()
+    if field in ("parsed", "surface", "absent"):
+        return _thousands(data["counts"][field])          # type: ignore[index]
+    if field == "questions":
+        return _thousands(data["questions"])
+    if field == "english":
+        return _thousands(data["english_correct"])
+    return _thousands(data["parser_worth"])
+
+
+def block_oracle_split() -> str:
+    """What hand-translation is worth, and what it is not."""
+    data = _oracle()
+    counts = data["counts"]                               # type: ignore[index]
+    rows = [
+        ("`parsed`", counts["parsed"],
+         "a query in the existing grammar answers it, with the declared "
+         "fragment in the declared field"),
+        ("`surface`", counts["surface"],
+         "no query answers it and a shipped register or function holds it: "
+         "the fact is here, and no query kind returns it"),
+        ("`absent`", counts["absent"],
+         "nothing here holds it, and the refusal is the right answer"),
+    ]
+    lines = _table(("class", "questions", "what it means"), rows)
+    kinds = ", ".join(
+        f"{count} `{kind}`"
+        for kind, count in sorted(data["witness_kinds"].items())   # type: ignore[union-attr]
+        if count)
+    moved = ", ".join(f"`{key}`"
+                      for key in data["moved_by_translation"])     # type: ignore[union-attr]
+    lines.extend([
+        "",
+        str(data["verdict"]),
+        "",
+        f"The questions the translation moves are {moved}.  What holds the "
+        f"`surface` class: {kinds}.",
+        "",
+        str(data["reading"]),
+    ])
+    return "\n".join(lines)
+
+
+def block_oracle_table() -> str:
+    """Every question, its translation, and where the answer actually is."""
+    data = _oracle()
+    rows = []
+    for row in data["rows"]:                              # type: ignore[union-attr]
+        query = f"`{row['query']}`" if row["query"] else "*not expressible*"
+        held = (f"`{row['witness']}` ({row['witness_kind']})"
+                if row["witness"] else "--")
+        rows.append((row["domain"], f"*{row['question']}*", query,
+                     f"`{row['class']}`", f"`{row['asked']['kind']}`", held))
+    return "\n".join(_table(
+        ("domain", "question", "the query it should become", "class",
+         "kind returned", "what holds the answer"), rows))
+
+
+_fieldsurface_cache: Optional[Mapping[str, object]] = None
+
+
+def _fieldsurface() -> Mapping[str, object]:
+    """What the field surface was worth, run once per process.
+
+    Like the oracle it keeps no measurement cache: both translation tables
+    are asked of a live session in seconds, so a document that quotes this
+    quotes what the solvers do now.
+    """
+    global _fieldsurface_cache
+    if _fieldsurface_cache is None:
+        from ..reasoning import field_surface as fs
+        _fieldsurface_cache = fs.surface_report()
+    return _fieldsurface_cache
+
+
+def _fieldsurface_figure(field: str) -> str:
+    data = _fieldsurface()
+    census = data["census"]                               # type: ignore[index]
+    if field == "moved":
+        return _thousands(data["moved_count"])
+    if field == "predicted":
+        return _thousands(data["predicted"])
+    if field == "held":
+        return _thousands(len(data["surface_keys"]))      # type: ignore[arg-type]
+    if field in ("parsed-after", "surface-after"):
+        return _thousands(data["after"][field.split("-")[0]])   # type: ignore[index]
+    if field in ("parsed-before", "surface-before"):
+        return _thousands(data["before"][field.split("-")[0]])  # type: ignore[index]
+    if field == "tables":
+        return _thousands(census["tables"])               # type: ignore[index]
+    if field == "rows":
+        return _thousands(census["rows"])                 # type: ignore[index]
+    if field == "fields":
+        return _thousands(census["distinct_fields"])      # type: ignore[index]
+    return _thousands(census["addressable_pairs"])        # type: ignore[index]
+
+
+def block_fieldsurface_split() -> str:
+    """The twenty questions before the surface and after it."""
+    data = _fieldsurface()
+    before = data["before"]                               # type: ignore[index]
+    after = data["after"]                                 # type: ignore[index]
+    rows = [(f"`{name}`", before[name], after[name],
+             _thousands(after[name] - before[name]) if after[name] >= before[name]
+             else str(after[name] - before[name]))
+            for name in ("parsed", "surface", "absent")]
+    lines = _table(("class", "before the surface", "after it", "change"), rows)
+    lines.extend([
+        "",
+        str(data["verdict"]),
+        "",
+        str(data["caveat"]),
+    ])
+    return "\n".join(lines)
+
+
+def block_fieldsurface_questions() -> str:
+    """The ten held-and-unreachable questions, one row each."""
+    data = _fieldsurface()
+    rows = []
+    for row in data["rows"]:                              # type: ignore[union-attr]
+        query = f"`{row['query']}`" if row["query"] else "*not expressible*"
+        rows.append((f"`{row['key']}`", f"*{row['question']}*", query,
+                     f"`{row['before']}`", f"`{row['after']}`",
+                     f"`{row['kind']}`"))
+    return "\n".join(_table(
+        ("question", "asked in English", "the field query it becomes",
+         "before", "after", "kind returned"), rows))
+
+
+def block_fieldsurface_tables() -> str:
+    """What the surface addresses: every declared table, with its size."""
+    data = _fieldsurface()
+    census = data["census"]                               # type: ignore[index]
+    rows = [(f"`{entry['table']}`", f"`{entry['kind']}`",
+             _thousands(entry["rows"]), _thousands(entry["fields"]),
+             entry["gloss"])
+            for entry in census["per_table"]]             # type: ignore[index]
+    lines = _table(("table", "kind", "rows", "distinct fields", "what it is"),
+                   rows)
+    lines.extend([
+        "",
+        f"{_thousands(census['tables'])} tables, "        # type: ignore[index]
+        f"{_thousands(census['rows'])} rows and "         # type: ignore[index]
+        f"{_thousands(census['addressable_pairs'])} addressable "
+        f"(row, field) pairs over "
+        f"{_thousands(census['distinct_fields'])} distinct field names.",
+    ])
+    return "\n".join(lines)
+
+
+def _probe_figure(field: str) -> str:
+    data = _blockers()
+    if data is None:
+        return "stale"
+    probe = data["probe"]
+    if field in ("correct", "wrong", "refused"):
+        return _thousands(probe["canonical"][field])
+    if field == "questions":
+        return _thousands(probe["questions"])
+    if field == "pass_mark":
+        return _thousands(probe["pass_mark"]["correct_at_least"])
+    if field == "lexicon_held":
+        return _thousands(data["lexicon"]["in_lexicon"])
+    if field == "lexicon_words":
+        return _thousands(data["lexicon"]["content_words"])
+    return _thousands(sum(1 for row in data["ledger"]
+                          if row["class"] == "derived"))
+
+
+
 FIGURES: Dict[str, Callable[[], str]] = {
+    #  The norm family and the escalation over it, so the sentences of
+    #  NORM_FAMILY_STUDY.md quote the measurement rather than a memory of it.
+    "normesc-correct": lambda: _normesc_figure("repaired", "correct"),
+    "normesc-wrong": lambda: _normesc_figure("repaired", "wrong"),
+    "normesc-refused": lambda: _normesc_figure("repaired", "refused"),
+    "normesc-queries": lambda: _normesc_figure("repaired", "queries"),
+    "normesc-rungs": lambda: _normesc_rungs("repaired"),
+    "normesc-family-correct": lambda: _normesc_figure("declared", "correct"),
+    "normesc-family-wrong": lambda: _normesc_figure("declared", "wrong"),
+    "normesc-family-rungs": lambda: _normesc_rungs("declared"),
+    "normesc-named-correct": lambda: _normesc_figure("named_rungs", "correct"),
+    "normesc-named-rungs": lambda: _normesc_rungs("named_rungs"),
+    "normesc-longest-safe": lambda: _normesc_sweep("longest_safe"),
+    "normesc-first-broken": lambda: _normesc_sweep("first_broken"),
+    "normfamily-rung-count": lambda: _normfamily_count("rung_count"),
+    "normfamily-norms": lambda: _normfamily_count("norms"),
+    #  The escalated operations.
+    "opesc-count": lambda: _opesc_figure("count"),
+    "opesc-program-correct": lambda: _opesc_figure("program_correct"),
+    "opesc-program-wrong": lambda: _opesc_figure("program_wrong"),
+    "opesc-program-queries": lambda: _opesc_figure("program_queries"),
+    #  The second reading, its guards and the marks they are held to.
+    "secondread-program-correct": lambda: _secondread_figure("program_correct"),
+    "secondread-program-wrong": lambda: _secondread_figure("program_wrong"),
+    "secondread-program-refused":
+        lambda: _secondread_figure("program_refused"),
+    "secondread-given-up": lambda: _secondread_figure("given_up"),
+    "secondread-matched-removes":
+        lambda: _secondread_figure("matched_removes"),
+    "secondread-adopted": lambda: _secondread_figure("adopted"),
+    "secondread-configurations":
+        lambda: _secondread_figure("configurations"),
+    "secondread-shipped": lambda: _secondread_figure("shipped"),
+    #  The blockers study and its pre-registered probe.
+    "probe-correct": lambda: _probe_figure("correct"),
+    "probe-wrong": lambda: _probe_figure("wrong"),
+    "probe-refused": lambda: _probe_figure("refused"),
+    "probe-questions": lambda: _probe_figure("questions"),
+    "probe-pass-mark": lambda: _probe_figure("pass_mark"),
+    "probe-lexicon-held": lambda: _probe_figure("lexicon_held"),
+    "probe-lexicon-words": lambda: _probe_figure("lexicon_words"),
+    "probe-derived": lambda: _probe_figure("derived"),
+    #  The hand-translation experiment against blocker 1.
+    "oracle-parsed": lambda: _oracle_figure("parsed"),
+    "oracle-surface": lambda: _oracle_figure("surface"),
+    "oracle-absent": lambda: _oracle_figure("absent"),
+    "oracle-questions": lambda: _oracle_figure("questions"),
+    "oracle-english": lambda: _oracle_figure("english"),
+    "oracle-parser-worth": lambda: _oracle_figure("parser_worth"),
+    #  The field surface built against that prediction, and what it moved.
+    "fieldsurface-moved": lambda: _fieldsurface_figure("moved"),
+    "fieldsurface-predicted": lambda: _fieldsurface_figure("predicted"),
+    "fieldsurface-held": lambda: _fieldsurface_figure("held"),
+    "fieldsurface-parsed-before": lambda: _fieldsurface_figure("parsed-before"),
+    "fieldsurface-parsed-after": lambda: _fieldsurface_figure("parsed-after"),
+    "fieldsurface-surface-before":
+        lambda: _fieldsurface_figure("surface-before"),
+    "fieldsurface-surface-after": lambda: _fieldsurface_figure("surface-after"),
+    "fieldsurface-tables": lambda: _fieldsurface_figure("tables"),
+    "fieldsurface-rows": lambda: _fieldsurface_figure("rows"),
+    "fieldsurface-fields": lambda: _fieldsurface_figure("fields"),
+    "fieldsurface-pairs": lambda: _fieldsurface_figure("pairs"),
     #  The sentences the figures module already generates, now writable into
     #  a paragraph instead of quoted from a table by hand.
     "suite": lambda: _sentence("suite"),
     "test-files": lambda: _sentence("test_files"),
     "lean-files": lambda: _sentence("lean_files"),
+    "directives": lambda: _sentence("directives"),
     "evaluation-cases": lambda: _sentence("evaluation_cases"),
     "registers": lambda: _sentence("registers"),
     "query-kinds": lambda: _sentence("query_kinds"),
     "report-subjects": lambda: _sentence("report_subjects"),
+    #  The bare module counts, so a README that names a sub-package's size
+    #  cannot age: the figure is read off the tree, like every other.
+    "reasoning-modules": lambda: _thousands(
+        _package_figures()["modules_by_subpackage"]["reasoning"]),
     #  The bare counts, for the sentences that put the unit in their own
     #  words ("a 147-case evaluation"): the same figure, without the noun.
     "test-file-count": lambda: _sentence("test_files").split()[0],
     "lean-file-count": lambda: _sentence("lean_files").split()[0],
+    "directive-count": lambda: _sentence("directives").split()[0],
     "evaluation-case-count": lambda: _sentence("evaluation_cases").split()[0],
     #  The cost figures, so the sentences of the iteration-cost study are
     #  emitted by the same mechanism they describe.
@@ -2807,6 +3148,678 @@ FIGURES: Dict[str, Callable[[], str]] = {
     "corpus-archive-documents": lambda: f"{len(inv.archive_documents()):,}",
     "corpus-sections": _corpus_sections,
 }
+
+
+
+# ===========================================================================
+#  NORM_FAMILY_STUDY.md -- the ladder as a power-of-two family
+# ===========================================================================
+
+def _norm_stale() -> str:
+    from ..reasoning import norm_escalation as ne
+    return ("The stored measurements of the norm family do not describe the "
+            f"modules as they now stand (`{ne.state()['verdict']}`), so "
+            "nothing is reported here rather than a figure taken from code "
+            "that has moved.  Run `python3 -m glm_universal.tools normladder "
+            "--write`.")
+
+
+def _norm() -> Optional[Mapping[str, object]]:
+    from ..reasoning import norm_escalation as ne
+    return ne.current()
+
+
+def block_normfamily_rungs() -> str:
+    """Every rung of the family, indexed by minimum squared norm."""
+    data = _norm()
+    if data is None:
+        return _norm_stale()
+    family = data["family"]
+    rows = []
+    for row in family["rows"]:
+        entries = row["rungs"]
+        rows.append((
+            _thousands(row["norm"]),
+            ", ".join(f"`{entry['rung']}`" for entry in entries),
+            f"`{row['densest']}`",
+            _thousands(entries[0]["kissing"]),
+            f"2^{entries[0]['covolume_log2']}",
+            f"`{row['chain']}`",
+        ))
+    lines = _table(("min. norm", "rungs generated at it", "densest",
+                    "its kissing number", "its covolume", "chain rung"), rows)
+    completeness = family["completeness"]
+    lines.extend([
+        "",
+        f"{_thousands(family['rung_count'])} rungs are generated in all, and "
+        f"every one of the {len(completeness['norms'])} powers of two from "
+        f"{_thousands(completeness['norms'][0])} to "
+        f"{_thousands(completeness['norms'][-1])} carries at least one: "
+        f"gaps = `{list(completeness['gaps'])}`, complete = "
+        f"`{completeness['complete']}`.  Each rung's declared minimum norm "
+        f"and kissing number is checked against its own generated theta "
+        f"series rather than printed beside it — all agree = "
+        f"`{family['series_all_agree']}`.",
+    ])
+    return "\n".join(lines)
+
+
+def block_normfamily_scaling() -> str:
+    """Why the family needs two constructions interleaved."""
+    data = _norm()
+    if data is None:
+        return _norm_stale()
+    rule = data["family"]["scaling_rule"]
+    rows = [(f"`{row['base']}` → `{row['doubled']}`",
+             f"{_thousands(row['norm'][0])} → {_thousands(row['norm'][1])}",
+             f"2^{row['covolume_log2'][0]} → 2^{row['covolume_log2'][1]}",
+             f"{_thousands(row['kissing'][0])} → {_thousands(row['kissing'][1])}")
+            for row in rule["rows"]]
+    lines = _table(("doubling", "minimum norm", "covolume", "kissing number"),
+                   rows)
+    lines.extend([
+        "",
+        f"Norm × 4 in every case = `{rule['norm_times_four']}`; covolume × "
+        f"2^24 = `{rule['covolume_plus_24']}`; kissing number unchanged = "
+        f"`{rule['kissing_unchanged']}`.  "
+        f"{str(rule['consequence'])[0].upper()}{str(rule['consequence'])[1:]}.  "
+        f"The same "
+        f"arithmetic is proved in Lean as `{rule['lean']}`.",
+    ])
+    return "\n".join(lines)
+
+
+def block_normfamily_chain() -> str:
+    """The tower: one rung per power of two, each inside the one below."""
+    data = _norm()
+    if data is None:
+        return _norm_stale()
+    chain = data["family"]["chain"]
+    rows = [(f"`{step['coarser']}` ⊆ `{step['finer']}`",
+             f"{_thousands(step['norms'][0])} ⊂ {_thousands(step['norms'][1])}",
+             f"`{step['derived']}`",
+             f"{step['points_checked']} / {step['misses']}",
+             f"`{step['holds']}`")
+            for step in chain["steps"]]
+    lines = _table(("step", "norms", "derived", "points tried / missed",
+                    "holds"), rows)
+    lines.extend([
+        "",
+        f"The chain is {len(chain['chain'])} rungs — "
+        + " ⊂ ".join(f"`{key}`" for key in reversed(chain["chain"]))
+        + f" — and every step holds = `{chain['holds']}`.  The Lean proofs "
+        f"are `{chain['lean']}`.",
+    ])
+    return "\n".join(lines)
+
+
+def block_normesc_measurement() -> str:
+    """The re-taken escalation measurement over the norm-indexed rungs."""
+    data = _norm()
+    if data is None:
+        return _norm_stale()
+    rows = []
+    for key, title in (("declared", "the full power-of-two family"),
+                       ("repaired", "the family after the declared "
+                                    "retirement rule"),
+                       ("chain", "the same family through `B` (a chain)"),
+                       ("named_rungs", "the eleven named construction "
+                                       "rungs (the recorded before)")):
+        report = data[key]
+        totals = report["orders"]["totals"]["middle_out"]
+        safety = report.get("safety")
+        rows.append((
+            title,
+            len(report["ladder"]),
+            _thousands(totals["correct"]),
+            _thousands(totals["wrong"]),
+            _thousands(totals["refused"]),
+            f"`{'yes' if (safety or {}).get('safe', totals['wrong'] == 0) else 'NO'}`",
+            _thousands(report["oracle"]),
+            f"`{report['orders']['totals']['middle_out']['correct'] == report['oracle']}`",
+        ))
+    lines = _table(("reading", "rungs", "correct", "wrong", "refused",
+                    "refuses rather than answers wrongly", "oracle",
+                    "matches oracle"), rows)
+    declared = data["declared"]
+    repaired = data["repaired"]
+    lines.extend([
+        "",
+        f"All three visiting orders return the same answers in every row — "
+        f"the rungs never name different carriers "
+        f"(`rungs_disagree = {repaired['agreement']['rungs_disagree']}`) — so "
+        f"the order is a cost decision, which is "
+        f"`GLM.ConstructionLadder.firstNamed_order_independent`.  The best "
+        f"single rung of the repaired ladder is "
+        f"`{repaired['best_fixed_rung']['rung']}` at "
+        f"{_thousands(repaired['best_fixed_rung']['correct'])} correct, so "
+        f"escalation is worth "
+        f"+{_thousands(repaired['orders']['totals']['middle_out']['correct'] - repaired['best_fixed_rung']['correct'])} "
+        f"queries over it.  The full family answers "
+        f"{_thousands(declared['orders']['totals']['middle_out']['correct'])} "
+        f"— more than the repaired ladder — and is reported as a **failure** "
+        f"anyway, because "
+        f"{_thousands(declared['orders']['totals']['middle_out']['wrong'])} "
+        f"of those queries is answered wrongly.",
+    ])
+    return "\n".join(lines)
+
+
+def block_normesc_audit() -> str:
+    """What each rung contributes, and which the rule retires."""
+    data = _norm()
+    if data is None:
+        return _norm_stale()
+    declared = data["declared"]
+    rows = [(f"`{row['rung']}`", _thousands(row["minimum_norm"]),
+             _thousands(row["correct"]), _thousands(row["wrong"]),
+             _thousands(row["refused"]), _thousands(row["unique_correct"]),
+             _thousands(row["disagrees"]))
+            for row in declared["rung_audit"]]
+    lines = _table(("rung", "min. norm", "correct", "wrong", "refused",
+                    "only rung to answer it", "disagreements"), rows)
+    repair = data["repair"]
+    lines.extend(["", f"**The retirement rule, declared before it was run:** "
+                      f"{declared['retirement']['rule']}.", ""])
+    for index, round_ in enumerate(repair["history"], start=1):
+        for move in round_["moves"]:
+            replacement = (f"replaced by `{move['replaced_by']}`, the next "
+                           f"rung the family generates at norm "
+                           f"{_thousands(move['norm'])}"
+                           if move["replaced_by"] else
+                           f"dropped: the family has no other untried rung at "
+                           f"norm {_thousands(move['norm'])}")
+            lines.append(f"* round {index}: `{move['retired']}` retired — "
+                         f"{move['why']}; {replacement}.")
+    lines.extend([
+        "",
+        f"After {repair['rounds']} round(s) the ladder is "
+        + " ".join(f"`{key}`" for key in repair["ladder"])
+        + f", safe = `{repair['safe']}`, with the norms "
+        f"`{list(repair['gaps'])}` left empty — the price of the rule, "
+        f"stated rather than hidden.",
+    ])
+    return "\n".join(lines)
+
+
+def block_normesc_sweep() -> str:
+    """The length sweep: where the family stops being safe."""
+    data = _norm()
+    if data is None:
+        return _norm_stale()
+    sweep = data["sweep"]
+    rows = [(_thousands(row["length"]), _thousands(row["highest_norm"]),
+             _thousands(row["correct"]["middle_out"]),
+             _thousands(max(row["wrong"].values())),
+             _thousands(row["refused"]["middle_out"]),
+             _thousands(row["rungs_disagree"]),
+             "yes" if row["order_independent"] else "NO",
+             "yes" if row["safe"] else "**NO**")
+            for row in sweep["rows"]]
+    lines = _table(("rungs", "highest norm", "correct", "wrong", "refused",
+                    "rungs disagree", "order-independent",
+                    "refuses rather than answers wrongly"), rows)
+    lines.extend([
+        "",
+        f"The longest safe family on this sample is "
+        f"**{sweep['longest_safe']} rungs** at "
+        f"{_thousands(sweep['best_correct'])} correct; the first unsafe one "
+        f"is **{sweep['first_broken']} rungs**.  The break is not the "
+        f"order-independence theorem failing — the rungs still agree — it is "
+        f"a rung whose cell holds exactly one carrier and the wrong one, so "
+        f"the ladder answers where it should have refused.",
+    ])
+    return "\n".join(lines)
+
+
+# ===========================================================================
+#  OPERATION_ESCALATION_STUDY.md -- faculties other than retrieval
+# ===========================================================================
+
+def _opesc_stale() -> str:
+    from ..reasoning import operation_escalation as oe
+    return ("The stored measurements of the escalated operations do not "
+            f"describe the modules as they now stand (`{oe.state()['verdict']}`), "
+            "so nothing is reported here.  Run `python3 -m "
+            "glm_universal.tools operations --write`.")
+
+
+def _opesc() -> Optional[Mapping[str, object]]:
+    from ..reasoning import operation_escalation as oe
+    return oe.current()
+
+
+def block_opesc_operations() -> str:
+    """Every operation, escalated, against its controls."""
+    data = _opesc()
+    if data is None:
+        return _opesc_stale()
+    rows = []
+    for row in list(data["operations"]) + [data["equation"]]:
+        score = row["escalation"]
+        rows.append((
+            f"`{row['operation']}`",
+            _thousands(row["queries"]),
+            _thousands(score["correct"]),
+            _thousands(score["wrong"]),
+            _thousands(score["refused"]),
+            f"`{row['best_rung']}` at {_thousands(row['best_rung_score']['correct'])}",
+            _thousands(row["control_label_prior"]["correct"]),
+            _thousands(row["control_substrate_removed"]["correct"]),
+            f"+{_thousands(row['gain_over_best_rung'])}",
+        ))
+    lines = _table(("operation", "queries", "correct", "wrong", "refused",
+                    "best single rung", "label-prior control",
+                    "substrate-removed control", "gain over the best rung"),
+                   rows)
+    lines.extend([
+        "",
+        f"The refusal contract is the same for all of them: "
+        f"{data['contract']}",
+        "",
+        f"Operations helped by escalation: "
+        + ", ".join(f"`{key}`" for key in data["helped"])
+        + (f".  Operations that gain nothing: "
+           + ", ".join(f"`{key}`" for key in data["no_gain"]) + "."
+           if data["no_gain"] else ".  No operation gained nothing.")
+        + (f"  Operations that lose the refusal property: "
+           + ", ".join(f"`{key}`" for key in data["unsafe"])
+           + " — reported as a failure, not a footnote."
+           if data["unsafe"] else "  Every operation refuses rather than "
+                                  "answering wrongly."),
+    ])
+    return "\n".join(lines)
+
+
+def block_opesc_equation() -> str:
+    """Equation checking: the one operation that derives rather than reads."""
+    data = _opesc()
+    if data is None:
+        return _opesc_stale()
+    row = data["equation"]
+    score = row["escalation"]
+    lines = [
+        f"**{row['title']}**  {row['question']}.",
+        "",
+        f"The case set is {_thousands(row['cases'])} declared triples — "
+        f"{_thousands(row['true_cases'])} that hold and "
+        f"{_thousands(row['false_cases'])} that do not — each asked at the "
+        f"four declared perturbations, so {_thousands(row['queries'])} "
+        f"queries.  {row['contract']}",
+        "",
+    ]
+    lines.extend(_table(
+        ("reading", "correct", "wrong", "refused"),
+        [("escalation over the ladder", _thousands(score["correct"]),
+          _thousands(score["wrong"]), _thousands(score["refused"])),
+         (f"best single rung (`{row['best_rung']}`)",
+          _thousands(row["best_rung_score"]["correct"]),
+          _thousands(row["best_rung_score"]["wrong"]),
+          _thousands(row["best_rung_score"]["refused"])),
+         ("answer the majority class, never refuse",
+          _thousands(row["control_label_prior"]["correct"]),
+          _thousands(row["control_label_prior"]["wrong"]),
+          _thousands(row["control_label_prior"]["refused"])),
+         ("substrate removed (digest cells)",
+          _thousands(row["control_substrate_removed"]["correct"]),
+          _thousands(row["control_substrate_removed"]["wrong"]),
+          _thousands(row["control_substrate_removed"]["refused"]))]))
+    lines.extend([
+        "",
+        f"{row['derivation'].capitalize()}.  The prior control is the sharp "
+        f"one here: the classes are balanced, so guessing scores "
+        f"{_thousands(row['control_label_prior']['correct'])} of "
+        f"{_thousands(row['queries'])} and the escalation's "
+        f"{_thousands(score['correct'])} is "
+        f"+{_thousands(row['gain_over_prior'])} on it.",
+    ])
+    return "\n".join(lines)
+
+
+# ===========================================================================
+#  SECOND_READING_STUDY.md -- a second reading before answering
+# ===========================================================================
+
+def _secondread_stale() -> str:
+    from ..reasoning import second_reading as sr
+    return ("The stored measurements of the second-reading study do not "
+            f"describe the modules as they now stand (`{sr.state()['verdict']}`), "
+            "so nothing is reported here.  Run `python3 -m "
+            "glm_universal.tools second-reading --write`.")
+
+
+def _secondread() -> Optional[Mapping[str, object]]:
+    from ..reasoning import second_reading as sr
+    return sr.current()
+
+
+def block_secondread_operations() -> str:
+    """Each reading on its own, before any guard is applied."""
+    data = _secondread()
+    if data is None:
+        return _secondread_stale()
+    rows = []
+    for row in data["operations"]:
+        readings = row["readings"]
+        for key, title in (("primary", "the escalated ladder"),
+                           ("code", "the code layer"),
+                           ("margin", "the metric layer")):
+            score = readings[key]
+            rows.append((
+                f"`{row['operation']}`" if key == "primary" else "",
+                title,
+                _thousands(score["queries"]),
+                _thousands(score["correct"]),
+                _thousands(score["wrong"]),
+                _thousands(score["refused"]),
+            ))
+    lines = _table(("operation", "reading", "queries", "correct", "wrong",
+                    "refused"), rows)
+    unsafe = [row["operation"] for row in data["operations"]
+              if row["readings"]["primary"]["wrong"] > 0]
+    unsafe_second = [f"`{row['operation']}`/{key}"
+                     for row in data["operations"]
+                     for key in ("code", "margin")
+                     if row["readings"][key]["wrong"] > 0]
+    lines.extend([
+        "",
+        "Read alone, before any guard: the primary reading is the one the "
+        "previous round shipped, and the two second readings are declared in "
+        "§2.",
+        "",
+        ("Operations the primary answers wrongly: "
+         + ", ".join(f"`{key}`" for key in unsafe) + "."
+         if unsafe else "The primary reading answers nothing wrongly here.")
+        + ("  Second readings that answer wrongly: "
+           + ", ".join(unsafe_second) + "."
+           if unsafe_second else "  Neither second reading answers anything "
+                                 "wrongly on any operation."),
+    ])
+    return "\n".join(lines)
+
+
+def block_secondread_marks() -> str:
+    """The six guarded configurations against the four declared marks."""
+    data = _secondread()
+    if data is None:
+        return _secondread_stale()
+    marks = data["marks_report"]
+    rows = []
+    for key in sorted(marks["verdicts"]):
+        row = marks["verdicts"][key]
+        score = row["program"]
+        rows.append((
+            f"`{key}`",
+            _thousands(score["correct"]),
+            _thousands(score["wrong"]),
+            _thousands(score["refused"]),
+            "yes" if row["M1"] else "no",
+            "yes" if row["M2"] else "no",
+            "yes" if row["M3"] else "no",
+            "yes" if row["M4"] else "no",
+            "**adopted**" if row["adopted"] else "not adopted",
+        ))
+    lines = _table(("configuration", "program correct", "program wrong",
+                    "program refused", "M1", "M2", "M3", "M4", "verdict"),
+                   rows)
+    lines.extend([
+        "",
+        "The marks are those of §4, fixed before the measurement: "
+        + "; ".join(f"**{key}** {text}"
+                    for key, text in sorted(marks["marks"].items()))
+        + ".",
+        "",
+        f"{marks['verdict'].capitalize()}.",
+    ])
+    damaged = [(key, marks["verdicts"][key]["damage"])
+               for key in sorted(marks["verdicts"])
+               if marks["verdicts"][key]["damage"]]
+    if damaged:
+        lines.extend([
+            "",
+            "What the configurations that fail M4 cost elsewhere: "
+            + "; ".join(f"`{key}` — " + ", ".join(items)
+                        for key, items in damaged) + ".",
+        ])
+    return "\n".join(lines)
+
+
+def block_secondread_controls() -> str:
+    """The two controls, on the operation the round is about."""
+    data = _secondread()
+    if data is None:
+        return _secondread_stale()
+    program = [row for row in data["operations"]
+               if row["operation"] == "program"][0]
+    rows = []
+    for key in sorted(program["configurations"]):
+        configuration = program["configurations"][key]
+        matched = configuration["control_matched_refusal"]
+        reshuffled = configuration["control_reshuffled"]
+        rows.append((
+            f"`{key}`",
+            _thousands(configuration["answers_given_up"]),
+            _thousands(configuration["wrongs_removed"]),
+            _thousands(configuration["control_matched_wrongs_removed"]),
+            f"{_thousands(matched['correct'])} / "
+            f"{_thousands(matched['wrong'])}",
+            f"{_thousands(reshuffled['correct'])} / "
+            f"{_thousands(reshuffled['wrong'])}",
+        ))
+    lines = _table(("configuration", "answers given up", "wrong answers "
+                    "removed", "matched refusal removes",
+                    "matched refusal correct / wrong",
+                    "reshuffled-label guard correct / wrong"), rows)
+    readings = program["readings"]
+    lines.extend([
+        "",
+        f"Control B read alone on the same operation: the code layer with its "
+        f"labels reshuffled answers {_thousands(readings['code_reshuffled']['correct'])} "
+        f"correctly and {_thousands(readings['code_reshuffled']['wrong'])} "
+        f"wrongly, and the metric layer reshuffled "
+        f"{_thousands(readings['margin_reshuffled']['correct'])} correctly "
+        f"and {_thousands(readings['margin_reshuffled']['wrong'])} wrongly — "
+        f"which is what a second opinion looks like when the relation between "
+        f"the geometry and the label has been destroyed.",
+    ])
+    return "\n".join(lines)
+
+
+# ===========================================================================
+#  BLOCKERS_STUDY.md -- what is between this and fuller reasoning
+# ===========================================================================
+
+def _blockers_stale() -> str:
+    from ..reasoning import blockers as bl
+    return ("The stored measurements of the blockers study do not describe "
+            f"the modules as they now stand (`{bl.state()['verdict']}`), so "
+            "nothing is reported here.  Run `python3 -m glm_universal.tools "
+            "blockers --write`.")
+
+
+def _blockers() -> Optional[Mapping[str, object]]:
+    from ..reasoning import blockers as bl
+    return bl.current()
+
+
+def block_blockers_probe() -> str:
+    """The pre-registered probe, question by question."""
+    data = _blockers()
+    if data is None:
+        return _blockers_stale()
+    probe = data["probe"]
+    rows = [(row["domain"], f"*{row['question']}*", f"`{row['expect']}`",
+             f"`{row['canonical']['verdict']}`",
+             f"`{row['paraphrased']['verdict']}`",
+             f"`{row['canonical']['kind']}`")
+            for row in probe["rows"]]
+    lines = _table(("domain", "question", "a right answer contains",
+                    "canonical", "paraphrased", "query kind"), rows)
+    mark = probe["pass_mark"]
+    lines.extend([
+        "",
+        f"**Declared before the run:** the probe passes if at least "
+        f"{mark['correct_at_least']} of {mark['of']} canonical askings are "
+        f"correct with at most {mark['wrong_at_most']} wrong.",
+        "",
+        f"**What happened:** {probe['canonical']['correct']} correct, "
+        f"{probe['canonical']['wrong']} wrong, "
+        f"{probe['canonical']['refused']} refused — "
+        f"**passed = `{probe['passed']}`**.  In paraphrase: "
+        f"{probe['paraphrased']['correct']} correct, "
+        f"{probe['paraphrased']['wrong']} wrong, "
+        f"{probe['paraphrased']['refused']} refused, with "
+        f"{probe['stable']} of {probe['questions']} questions scoring the "
+        f"same both ways.  {data['unrecognised']} of the canonical askings "
+        f"were not recognised as any query kind at all.",
+        "",
+        probe["reading"],
+    ])
+    return "\n".join(lines)
+
+
+def block_blockers_table() -> str:
+    """Each blocker, its measurement, and the smallest experiment."""
+    data = _blockers()
+    if data is None:
+        return _blockers_stale()
+    figures = data["figures"]
+    rows = []
+    for blocker in data["blockers"]:
+        measured = " and ".join(
+            f"`{name.strip()}` = {figures.get(name.strip())}"
+            for name in str(blocker["measurement"]).split(" and "))
+        rows.append((f"**{blocker['title']}**", blocker["statement"],
+                     measured, blocker["experiment"]))
+    return "\n".join(_table(
+        ("blocker", "what it means", "the measurement that demonstrates it",
+         "the smallest experiment that would remove it"), rows))
+
+
+def block_blockers_ledger() -> str:
+    """Table lookup, geometric addressing and derivation, kept apart."""
+    data = _blockers()
+    if data is None:
+        return _blockers_stale()
+    rows = [(row["result"], f"`{row['class']}`", row["why"],
+             f"`{row['measured_in']}`")
+            for row in data["ledger"]]
+    lines = _table(("measured result", "what it is", "why it is that",
+                    "measured in"), rows)
+    counts = {}
+    for row in data["ledger"]:
+        counts[row["class"]] = counts.get(row["class"], 0) + 1
+    lines.extend([
+        "",
+        "Of the measured results of this round, "
+        + ", ".join(f"{count} are `{name}`"
+                    for name, count in sorted(counts.items()))
+        + ".  " + str(data["claim"]),
+    ])
+    return "\n".join(lines)
+
+
+def block_blockers_python() -> str:
+    """The smallest experiment for the program-text blocker, run."""
+    data = _blockers()
+    if data is None:
+        return _blockers_stale()
+    python = data["python"]
+    lexicon = data["lexicon"]
+    chance = Fraction(str(python["chance"]["__fraction__"])
+                      if isinstance(python["chance"], dict)
+                      else str(python["chance"]))
+    rate = Fraction(str(python["rate"]["__fraction__"])
+                    if isinstance(python["rate"], dict)
+                    else str(python["rate"]))
+    lines = _table(
+        ("reading", "nearest neighbour shares a module", "of", "rate"),
+        [("24 syntax counts, quantised to the nearest point of rung `A`",
+          _thousands(python["nearest_shares_module"]),
+          _thousands(python["functions"]), per_cent(rate)),
+         ("a digest of the function's own name, quantised the same way",
+          _thousands(python["digest_control"]),
+          _thousands(python["functions"]),
+          per_cent(Fraction(python["digest_control"], python["functions"]))),
+         ("chance — two functions drawn at random",
+          "—", _thousands(python["functions"]), per_cent(chance))])
+    lines.extend([
+        "",
+        f"{_thousands(python['functions'])} functions over "
+        f"{_thousands(python['modules'])} modules, addressed by "
+        f"{len(python['features'])} counts of syntax and nothing else — no "
+        f"name, no module, no path.  {python['reading']}.",
+        "",
+        f"Beside it, the vocabulary measurement: of the "
+        f"{_thousands(lexicon['content_words'])} content words the probe "
+        f"uses, the lexicon holds {_thousands(lexicon['in_lexicon'])} and "
+        f"does not hold {_thousands(lexicon['out_of_lexicon'])} — a coverage "
+        f"of {per_cent(Fraction(lexicon['in_lexicon'], lexicon['content_words']))} "
+        f"against a lexicon of {_thousands(lexicon['lexicon_size'])} words.",
+    ])
+    return "\n".join(lines)
+
+
+def block_blockers_vocabulary() -> str:
+    """The vocabulary blocker's own experiment, run and read by its rule."""
+    data = _blockers()
+    if data is None:
+        return _blockers_stale()
+    experiment = data["vocabulary"]
+    lexicon = data["lexicon"]
+    before = experiment["score_before"]
+    after = experiment["score_after"]
+    baseline = experiment["baseline"]
+
+    def _fraction(value) -> Fraction:
+        if isinstance(value, dict):
+            return Fraction(str(value["__fraction__"]))
+        return Fraction(str(value))
+
+    rows = [
+        ("content words of the probe the register holds",
+         f"{baseline['in_lexicon']} of {baseline['content_words']}",
+         f"{lexicon['in_lexicon']} of {lexicon['content_words']}",
+         per_cent(_fraction(experiment["coverage_after"]))),
+        ("the same, after the declared surface forms",
+         f"{baseline['in_lexicon']} of {baseline['content_words']}",
+         f"{lexicon['in_lexicon_with_forms']} of "
+         f"{lexicon['content_words']}",
+         per_cent(_fraction(experiment["coverage_after_with_forms"]))),
+        ("concepts in the register",
+         _thousands(baseline["lexicon_size"]),
+         _thousands(lexicon["lexicon_size"]),
+         f"+{_thousands(experiment['words_added'])}"),
+        ("the probe, canonical askings: correct",
+         _thousands(before["correct"]), _thousands(after["correct"]), "—"),
+        ("the probe, canonical askings: wrong",
+         _thousands(before["wrong"]), _thousands(after["wrong"]), "—"),
+        ("the probe, canonical askings: refused",
+         _thousands(before["refused"]), _thousands(after["refused"]), "—"),
+    ]
+    lines = _table(("measurement", "before the words were added", "after",
+                    "change"), rows)
+    lines.extend([
+        "",
+        f"**Declared before the words were written:** "
+        f"{experiment['prediction']}.",
+        "",
+        f"**How the outcome is read, also declared first:** "
+        f"{experiment['reading']}.",
+        "",
+        f"**What happened:** {_thousands(experiment['words_added'])} concepts "
+        f"and {_thousands(lexicon['declared_forms'])} declared surface forms "
+        f"were added; the strict coverage of the probe's content words rose "
+        f"from {baseline['in_lexicon']} of {baseline['content_words']} to "
+        f"{lexicon['in_lexicon']} of {lexicon['content_words']}, and every "
+        f"remaining word is an inflection the declared forms resolve. The "
+        f"probe's canonical score moved by "
+        f"{_thousands(experiment['score_moved_by'])} askings — "
+        f"**prediction held = `{experiment['prediction_held']}`**.",
+        "",
+        str(experiment["verdict"]) + ".",
+    ])
+    return "\n".join(lines)
 
 
 BLOCKS: Dict[str, Callable[[], str]] = {
@@ -2885,6 +3898,27 @@ BLOCKS: Dict[str, Callable[[], str]] = {
     "cost-tier": block_cost_tier,
     "cost-addresses": block_cost_addresses,
     "cost-planner": block_cost_planner,
+    "normfamily-rungs": block_normfamily_rungs,
+    "normfamily-scaling": block_normfamily_scaling,
+    "normfamily-chain": block_normfamily_chain,
+    "normesc-measurement": block_normesc_measurement,
+    "normesc-audit": block_normesc_audit,
+    "normesc-sweep": block_normesc_sweep,
+    "opesc-operations": block_opesc_operations,
+    "opesc-equation": block_opesc_equation,
+    "secondread-operations": block_secondread_operations,
+    "secondread-marks": block_secondread_marks,
+    "secondread-controls": block_secondread_controls,
+    "blockers-probe": block_blockers_probe,
+    "blockers-table": block_blockers_table,
+    "blockers-ledger": block_blockers_ledger,
+    "blockers-python": block_blockers_python,
+    "blockers-vocabulary": block_blockers_vocabulary,
+    "oracle-split": block_oracle_split,
+    "oracle-table": block_oracle_table,
+    "fieldsurface-split": block_fieldsurface_split,
+    "fieldsurface-questions": block_fieldsurface_questions,
+    "fieldsurface-tables": block_fieldsurface_tables,
     "cost-figures": block_cost_figures,
 }
 

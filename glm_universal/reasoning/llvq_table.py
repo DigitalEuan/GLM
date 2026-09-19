@@ -83,6 +83,7 @@ from __future__ import annotations
 
 from fractions import Fraction
 from itertools import product
+from math import gcd
 from typing import Dict, List, Optional, Sequence, Tuple
 
 from ..substrate import leech2, mog
@@ -282,8 +283,26 @@ def column_costs(delta: Sequence) -> Tuple[Tuple[Fraction, ...], ...]:
         for col in range(6))
 
 
-def _class_minimum(costs: Sequence[Sequence[Fraction]],
-                   word: Sequence[int], parity: int) -> Fraction:
+def _column_costs_scaled(delta: Sequence[int]) -> Tuple[Tuple[int, ...], ...]:
+    """:func:`column_costs` on integers already brought to a common scale.
+
+    The decoder works in units of ``q**2``, where ``q`` is a common
+    denominator of the target's coordinates (:func:`_common_denominator`), so
+    every cost it compares is an ``int``.  The arithmetic is the same
+    arithmetic -- the same 384 conditional additions -- and scaling by a
+    positive constant preserves every comparison and every tie, so the point
+    returned is the point the rational route returns.  Integers are what makes
+    the decode fast enough to run inside a documentation check.
+    """
+    return tuple(
+        tuple(sum(delta[CELL[col][row]] for row in range(4)
+                  if (value >> row) & 1)
+              for value in range(16))
+        for col in range(6))
+
+
+def _class_minimum(costs: Sequence[Sequence],
+                   word: Sequence[int], parity: int):
     """The least ``sum_{i in w} delta_i`` over the 32 words of one class.
 
     Per column the two patterns differ only in their top bit, so the choice
@@ -291,9 +310,9 @@ def _class_minimum(costs: Sequence[Sequence[Fraction]],
     choices have the wrong parity the correction is the smallest of the six
     differences, which is exactly one comparison per column.
     """
-    total = Fraction(0)
+    total = 0
     tops = 0
-    smallest_gap: Optional[Fraction] = None
+    smallest_gap = None
     for col in range(6):
         low = costs[col][PATTERN_TABLE[(word[col], parity, 0)]]
         high = costs[col][PATTERN_TABLE[(word[col], parity, 1)]]
@@ -312,14 +331,22 @@ def _class_minimum(costs: Sequence[Sequence[Fraction]],
     return total
 
 
-def class_minima(delta: Sequence) -> Tuple[Tuple[Fraction, Tuple[int, ...],
-                                                 int], ...]:
-    """``(minimum, hexacode word, parity)`` for all 128 classes, sorted."""
-    costs = column_costs(delta)
+def _class_minima_from_costs(costs: Sequence[Sequence]) -> Tuple[Tuple]:
+    """``(minimum, hexacode word, parity)`` for all 128 classes, sorted.
+
+    Takes the column-cost table rather than the deltas, so a caller that
+    already holds one -- the decoder does -- does not build it twice.
+    """
     rows = [(_class_minimum(costs, word, parity), word, parity)
             for word, parity in CLASSES]
     rows.sort(key=lambda row: (row[0], row[1], row[2]))
     return tuple(rows)
+
+
+def class_minima(delta: Sequence) -> Tuple[Tuple[Fraction, Tuple[int, ...],
+                                                 int], ...]:
+    """``(minimum, hexacode word, parity)`` for all 128 classes, sorted."""
+    return _class_minima_from_costs(column_costs(delta))
 
 
 # ===========================================================================
@@ -358,33 +385,74 @@ class DecodeTrace:
                 + self.column_cost_additions)
 
 
-def _decode_branch(v: Sequence[Fraction], m: int,
-                   incumbent: Optional[Tuple[Fraction, List[int]]],
+def _common_denominator(v: Sequence[Fraction]) -> int:
+    """A positive integer ``q`` with every ``q * v[i]`` an integer.
+
+    The least such, so the integers the decoder forms stay as small as the
+    target allows.  Addresses arrive quantised, so in practice ``q`` is a
+    small power of two and the scaled arithmetic is machine-word sized.
+    """
+    q = 1
+    for value in v:
+        d = value.denominator
+        q = q // gcd(q, d) * d
+    return q
+
+
+def _round_to_residue_scaled(n: int, q: int, residue: int
+                             ) -> Tuple[int, int, int]:
+    """:func:`glm_universal.reasoning.analogy._round_to_residue`, in units of
+    ``q**2``.
+
+    ``n = q * value`` is an integer, and ``(value - x)**2 = (n - q*x)**2 /
+    q**2``, so dropping the fixed denominator turns every cost into an
+    integer and changes no comparison.  Returns ``(x, cost, penalty)`` on
+    that scale, with the same choice and the same tie-break as the rational
+    version -- ``tests/test_llvq_table.py`` checks the two agree.
+    """
+    floor_k = (n - residue * q) // (4 * q)
+    best_x, best_cost = None, None
+    for k in (floor_k, floor_k + 1):
+        x = residue + 4 * k
+        cost = (n - q * x) ** 2
+        if best_cost is None or cost < best_cost:
+            best_x, best_cost = x, cost
+    assert best_x is not None and best_cost is not None
+    up, down = (n - q * (best_x + 4)) ** 2, (n - q * (best_x - 4)) ** 2
+    return best_x, best_cost, (up if up <= down else down) - best_cost
+
+
+def _decode_branch(n: Sequence[int], q: int, m: int,
+                   incumbent: Optional[Tuple[int, List[int]]],
                    trace: DecodeTrace
-                   ) -> Optional[Tuple[Fraction, List[int]]]:
-    """One congruence class of ``Lambda``, decoded through the table."""
+                   ) -> Optional[Tuple[int, List[int]]]:
+    """One congruence class of ``Lambda``, decoded through the table.
+
+    ``n`` is the target scaled by ``q`` (see :func:`_common_denominator`) and
+    every cost here is an integer in units of ``q**2``.
+    """
     r0, r1 = m % 4, (m + 2) % 4
-    base = [_round_to_residue(value, r0) for value in v]
-    alt = [_round_to_residue(value, r1) for value in v]
-    base_cost = sum((b[1] for b in base), Fraction(0))
+    base = [_round_to_residue_scaled(value, q, r0) for value in n]
+    alt = [_round_to_residue_scaled(value, q, r1) for value in n]
+    base_cost = sum(b[1] for b in base)
     delta = [alt[i][1] - base[i][1] for i in range(N_COORDS)]
     step = [alt[i][0] - base[i][0] for i in range(N_COORDS)]
     base_sum = sum(b[0] for b in base)
     target = (4 * m) % 8
 
-    costs = column_costs(delta)
+    costs = _column_costs_scaled(delta)
     trace.column_cost_additions += 6 * 16 * 4
 
     # The two companions of the cost table: how far a pattern moves the
     # coordinate sum modulo 8, and the cheapest +-4 repair inside it.
     steps: List[List[int]] = []
-    repairs: List[List[Tuple[Fraction, int]]] = []
+    repairs: List[List[Tuple[int, int]]] = []
     for col in range(6):
         step_row: List[int] = []
-        repair_row: List[Tuple[Fraction, int]] = []
+        repair_row: List[Tuple[int, int]] = []
         for value in range(16):
             moved = 0
-            best: Optional[Tuple[Fraction, int]] = None
+            best: Optional[Tuple[int, int]] = None
             for row in range(4):
                 i = CELL[col][row]
                 if (value >> row) & 1:
@@ -401,7 +469,7 @@ def _decode_branch(v: Sequence[Fraction], m: int,
         repairs.append(repair_row)
 
     best = incumbent
-    for minimum, word, parity in class_minima(delta):
+    for minimum, word, parity in _class_minima_from_costs(costs):
         trace.class_minimum_additions += 6
         if best is not None and base_cost + minimum > best[0]:
             break
@@ -415,8 +483,8 @@ def _decode_branch(v: Sequence[Fraction], m: int,
             trace.words_evaluated += 1
             trace.codeword_additions += 6
             values = [patterns[col][tops[col]] for col in range(6)]
-            cost = base_cost + sum((costs[col][values[col]]
-                                    for col in range(6)), Fraction(0))
+            cost = base_cost + sum(costs[col][values[col]]
+                                   for col in range(6))
             if best is not None and cost > best[0]:
                 continue
             mask = 0
@@ -431,7 +499,8 @@ def _decode_branch(v: Sequence[Fraction], m: int,
                                      for col in range(6))
                 cost += penalty
                 x = point[index]
-                up, down = (v[index] - (x + 4)) ** 2, (v[index] - (x - 4)) ** 2
+                up = (n[index] - q * (x + 4)) ** 2
+                down = (n[index] - q * (x - 4)) ** 2
                 point[index] = x + 4 if up <= down else x - 4
             if best is None or cost < best[0] or (
                     cost == best[0] and point < best[1]):
@@ -443,12 +512,15 @@ def decode_with_trace(vector: Sequence
                       ) -> Tuple[LatticeAnalogyResult, DecodeTrace]:
     """The nearest Leech point through the table, and what it cost."""
     v = metric.as_exact_vector(vector)
+    q = _common_denominator(v)
+    n = [value.numerator * (q // value.denominator) for value in v]
     trace = DecodeTrace()
-    best: Optional[Tuple[Fraction, List[int]]] = None
+    best: Optional[Tuple[int, List[int]]] = None
     for m in (0, 1):
-        best = _decode_branch(v, m, best, trace)
+        best = _decode_branch(n, q, m, best, trace)
     assert best is not None
-    cost, point = best
+    scaled_cost, point = best
+    cost = Fraction(scaled_cost, q * q)
     if not leech2.in_leech(point):                       # pragma: no cover
         raise AssertionError(
             "llvq_table: the decoded point fails in_leech -- the class table "

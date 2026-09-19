@@ -7,7 +7,7 @@
 
 **Verdict.** The address is a real index, and it is beaten decisively by plain text.
 
-**Deciding figure.** Hit@5 of 46.0 % against 6.1 % for chance, with the text control at 85.9 %.
+**Deciding figure.** Hit@5 of 40.0 % against 5.9 % for chance, with the text control at 85.7 %.
 
 **Recomputed by.** `glm_universal.reasoning.retrieval.retrieval_report`
 
@@ -34,35 +34,36 @@ The answer, stated before the tables so that nothing here reads as a defence of
 a preferred result:
 
 1. **The address is a real index.** At `k = 5` it finds a relative for
-   **46.0 %** of queries against **6.1 %** for chance — **7.6×** — and it beats
-   the digest control (4.7 %), the seeded reshuffle (5.6 %), the random ranking
-   (5.6 %) and name-substring search (33.8 %).
+   **40.0 %** of queries against **5.9 %** for chance — **6.8×** — and it beats
+   the digest control (4.8 %), the seeded reshuffle (5.7 %), the random ranking
+   (5.7 %) and name-substring search (34.8 %).
 2. **And it is beaten decisively by plain text.** Jaccard overlap of identifier
    tokens between the query and the candidate statements finds a relative for
-   **85.9 %** of the same queries, at **57.7 %** precision against the address's
-   **14.6 %**.
+   **85.7 %** of the same queries, at **58.7 %** precision against the address's
+   **12.7 %**.
 3. **The lattice is not what carries the signal.** Ranking on the raw feature
-   vectors, with no quantisation at all, scores **44.1 %** against the address's
-   46.0 %. The two differ only where the quantiser rounds near-equal distances
-   apart: the address is ahead at `k = 5` (98 against 94), behind at `k = 1`
-   (46 against 50) and at `k = 10` (113 against 115), and precision@5 differs by
-   under half a point (14.6 % against 14.3 %). The geometry transports the
-   features faithfully; it does not add to them.
+   vectors, with no quantisation at all, scores **40.5 %** against the address's
+   40.0 %. The two differ only where the quantiser rounds near-equal distances
+   apart: the address is behind by one query at `k = 1` (43 against 44) and at
+   `k = 5` (84 against 85), ahead by one at `k = 10` (110 against 109), and
+   precision@5 differs by a tenth of a point (12.7 % against 12.8 %). The
+   geometry transports the features faithfully; it does not add to them, and on
+   the present stride it is a query behind them rather than a query ahead.
 4. **Giving the geometry the words helps, and is still not enough.** A second
    address scheme built from the statement's *identifiers* rather than its
    syntax — counted by initial letter into the same 24 coordinates and
-   quantised the same way — reaches **65.7 %**. Better than the structural
+   quantised the same way — reaches **62.4 %**. Better than the structural
    address by twenty points, worse than the text control by twenty.
    The limit is the projection to 24 capped integers, not the choice of what to
    put in them.
 5. **An address shortlist does not even make the text search cheaper for free.**
-   Pruning to the nearest 800 by address (25.1 % of the corpus) and then ranking
-   by text gives 83.6 %; at 1.6 % of the corpus it gives 58.7 %. Every
+   Pruning to the nearest 800 by address (23.9 % of the corpus) and then ranking
+   by text gives 84.3 %; at 1.5 % of the corpus it gives 64.8 %. Every
    shortlist costs accuracy. There is no free filter here.
 6. **What the lattice does earn is exactness.** The completeness bound of
-   `GLM/Retrieval.lean` holds on **162,486** measured pairs with **zero**
+   `GLM/Retrieval.lean` holds on **170,850** measured pairs with **zero**
    violations, and at feature radius 2 the guaranteed-complete shortlist is
-   **70.5** declarations — **2.2 %** of the corpus — containing all **13.7**
+   **94.4** declarations — **2.8 %** of the corpus — containing all **20.9**
    feature-close declarations on average. An empty shortlist is a *proof* of
    absence. That is a functional role, and it is a different one from
    "the geometry knows what a theorem is about".
@@ -101,7 +102,7 @@ seeded sample — and the goal experiment uses a coarser stride, because it
 decodes a fresh Leech point per query.
 
 <!-- generated: retrieval-setup -->
-All **3,249** declarations of the Lean development are the corpus.  The declaration experiment uses **204** queries and the goal experiment **102**, each with at least one relative; the mean query has **39.5** relatives among the 3,248 other declarations.  None of the 102 goal queries reproduces its own stored feature vector (0 of 102), so a goal address is held out every time.
+All **3,383** declarations of the Lean development are the corpus.  The declaration experiment uses **212** queries and the goal experiment **103**, each with at least one relative; the mean query has **40.5** relatives among the 3,382 other declarations.  None of the 103 goal queries reproduces its own stored feature vector (0 of 103), so a goal address is held out every time.
 <!-- end generated -->
 
 **What counts as a hit.** A retrieved declaration is *relevant* when it is a
@@ -124,17 +125,17 @@ relative in the top `k`.
 <!-- generated: retrieval-declarations -->
 | scheme | hit@1 | hit@3 | hit@5 | hit@10 | precision@5 | MRR@10 |
 |---|---|---|---|---|---|---|
-| **address** — Leech address of the structural feature vector | 50 (24.5 %) | 88 (43.1 %) | 103 (50.5 %) | 129 (63.2 %) | 15.1 % | 0.362 |
-| *features* — the same vector, no lattice (ablation) | 47 (23.0 %) | 90 (44.1 %) | 107 (52.5 %) | 130 (63.7 %) | 15.1 % | 0.355 |
-| *lexical* — Leech address of the identifier-letter vector | 82 (40.2 %) | 108 (52.9 %) | 116 (56.9 %) | 145 (71.1 %) | 24.1 % | 0.485 |
-| *text* — Jaccard overlap of identifier tokens (**the strong control**) | 141 (69.1 %) | 169 (82.8 %) | **177 (86.8 %)** | 184 (90.2 %) | 57.8 % | 0.766 |
-| *name* — name-substring search | 36 (17.6 %) | 46 (22.5 %) | 58 (28.4 %) | 78 (38.2 %) | 13.6 % | 0.223 |
-| *digest* — SHA-256 address (D3 control) | 1 (0.5 %) | 6 (2.9 %) | 10 (4.9 %) | 20 (9.8 %) | 1.0 % | 0.026 |
-| *shuffled* — the feature addresses re-paired by a seeded permutation | 4 (2.0 %) | 9 (4.4 %) | 14 (6.9 %) | 23 (11.3 %) | 1.6 % | 0.041 |
-| *random* — a seeded permutation of the corpus | 2 (1.0 %) | 5 (2.5 %) | 10 (4.9 %) | 17 (8.3 %) | 1.0 % | 0.026 |
-| **chance**, in closed form | 1.2 % | 3.6 % | 5.9 % | 11.4 % | — | — |
+| **address** — Leech address of the structural feature vector | 43 (20.3 %) | 70 (33.0 %) | 86 (40.6 %) | 110 (51.9 %) | 12.6 % | 0.289 |
+| *features* — the same vector, no lattice (ablation) | 43 (20.3 %) | 73 (34.4 %) | 87 (41.0 %) | 109 (51.4 %) | 12.5 % | 0.292 |
+| *lexical* — Leech address of the identifier-letter vector | 87 (41.0 %) | 120 (56.6 %) | 133 (62.7 %) | 155 (73.1 %) | 25.2 % | 0.503 |
+| *text* — Jaccard overlap of identifier tokens (**the strong control**) | 152 (71.7 %) | 173 (81.6 %) | **182 (85.8 %)** | 188 (88.7 %) | 59.1 % | 0.774 |
+| *name* — name-substring search | 41 (19.3 %) | 61 (28.8 %) | 75 (35.4 %) | 91 (42.9 %) | 13.8 % | 0.255 |
+| *digest* — SHA-256 address (D3 control) | 3 (1.4 %) | 8 (3.8 %) | 10 (4.7 %) | 22 (10.4 %) | 0.9 % | 0.033 |
+| *shuffled* — the feature addresses re-paired by a seeded permutation | 3 (1.4 %) | 8 (3.8 %) | 14 (6.6 %) | 23 (10.8 %) | 1.3 % | 0.037 |
+| *random* — a seeded permutation of the corpus | 0 (0.0 %) | 5 (2.4 %) | 9 (4.2 %) | 21 (9.9 %) | 0.8 % | 0.021 |
+| **chance**, in closed form | 1.2 % | 3.5 % | 5.8 % | 11.2 % | — | — |
 
-204 queries of the 3,249-declaration corpus.  At k = 5 the structural address runs 8.56× closed-form chance; the text control beats the address: yes; the lattice matches the raw features: no.
+212 queries of the 3,383-declaration corpus.  At k = 5 the structural address runs 6.99× closed-form chance; the text control beats the address: yes; the lattice matches the raw features: no.
 <!-- end generated -->
 
 Four readings, in the order of how much they matter.
@@ -143,14 +144,14 @@ Four readings, in the order of how much they matter.
 random — sit at chance or within a point or two of it, exactly as they should:
 the digest knows the name and nothing else, the reshuffle has the same geometry
 with the pairing destroyed, the random ranking never looks at the query. The
-address is 7.6 times chance.
+address is 6.8 times chance.
 So the twenty four counts are not noise, and the address book is not a
 decoration.
 
 **The lattice is not the reason.** `features` is the same experiment with the
-quantiser removed. It scores 44.1 % against the address's 46.0 % at `k = 5` — four
-queries behind — is two queries ahead at `k = 10` (54.0 % against 53.1 %) and within
-half a point on precision@5 (14.3 % against 14.6 %). Whatever separation
+quantiser removed. It scores 40.5 % against the address's 40.0 % at `k = 5` — one
+query ahead — is one query behind at `k = 10` (51.9 % against 52.4 %) and within
+a tenth of a point on precision@5 (12.8 % against 12.7 %). Whatever separation
 there is belongs to the feature map. This is exactly what `GLM.Address.address_congr`
 predicts and what `GLM.Retrieval.retrieve_congr` restates for retrieval: the
 address can make no distinction the feature map has not already made. The
@@ -188,25 +189,24 @@ this is a genuinely held-out address every time.
 <!-- generated: retrieval-goals -->
 | scheme | hit@1 | hit@3 | hit@5 | hit@10 | precision@5 |
 |---|---|---|---|---|---|
-| address | 17 (16.7 %) | 29 (28.4 %) | 36 (35.3 %) | 42 (41.2 %) | 10.4 % |
-| lexical | 29 (28.4 %) | 41 (40.2 %) | 50 (49.0 %) | 62 (60.8 %) | 18.2 % |
-| text | 69 (67.6 %) | 82 (80.4 %) | 88 (86.3 %) | 93 (91.2 %) | 60.2 % |
-| name | 20 (19.6 %) | 26 (25.5 %) | 32 (31.4 %) | 44 (43.1 %) | 17.1 % |
-| digest | 0 (0.0 %) | 2 (2.0 %) | 6 (5.9 %) | 13 (12.7 %) | 1.4 % |
-| random | 1 (1.0 %) | 3 (2.9 %) | 5 (4.9 %) | 9 (8.8 %) | 1.0 % |
+| address | 16 (15.5 %) | 23 (22.3 %) | 28 (27.2 %) | 34 (33.0 %) | 7.8 % |
+| lexical | 32 (31.1 %) | 38 (36.9 %) | 53 (51.5 %) | 68 (66.0 %) | 19.6 % |
+| text | 78 (75.7 %) | 89 (86.4 %) | 92 (89.3 %) | 93 (90.3 %) | 59.4 % |
+| name | 18 (17.5 %) | 26 (25.2 %) | 32 (31.1 %) | 40 (38.8 %) | 12.6 % |
+| digest | 0 (0.0 %) | 1 (1.0 %) | 5 (4.9 %) | 13 (12.6 %) | 1.0 % |
+| random | 0 (0.0 %) | 2 (1.9 %) | 3 (2.9 %) | 6 (5.8 %) | 0.6 % |
 
-102 goal queries, the two coordinates a goal cannot know set to zero.
+103 goal queries, the two coordinates a goal cannot know set to zero.
 <!-- end generated -->
 
 The goal set is a coarser stride, so the rates are not paired with §2's
 query-for-query; but read as two populations of the same corpus, the two
-unknowable coordinates cost the structural address 14.9 points of hit@5
-(46.0 % → 31.1 %) and the lexical scheme 19.1 (65.7 % → 46.6 %), while the text
-control loses nothing at all (85.9 % → 86.4 %), because a goal *is* its
-identifiers. The address still beats its digest and random controls by a wide
-margin — but on goals it is now *behind* name-substring search at `k = 5`
-(31.1 % against 33.0 %), so the gap it has to close is wider in the case that
-matters.
+unknowable coordinates cost the structural address 12.5 points of hit@5
+(40.0 % → 27.5 %) and the lexical scheme 13.4 (62.4 % → 49.0 %), while the text
+control loses four tenths of a point (85.7 % → 85.3 %), because a goal *is* its
+identifiers. The address still beats its digest and random controls — but on
+goals it is now *behind* name-substring search at `k = 5` (27.5 % against
+33.3 %), so the gap it has to close is wider in the case that matters.
 
 ---
 
@@ -219,12 +219,12 @@ standard architecture, and it is worth measuring rather than assuming.
 <!-- generated: retrieval-hybrid -->
 | shortlist | fraction of corpus | hit@5 | precision@5 |
 |---|---|---|---|
-| 50 | 1.5 % | 67.2 % | 28.5 % |
-| 100 | 3.1 % | 71.6 % | 32.7 % |
-| 200 | 6.2 % | 77.0 % | 37.8 % |
-| 400 | 12.3 % | 78.4 % | 42.3 % |
-| 800 | 24.6 % | 83.8 % | 47.6 % |
-| **no shortlist** | 100 % | **86.8 %** | **57.8 %** |
+| 50 | 1.5 % | 63.7 % | 25.4 % |
+| 100 | 3.0 % | 70.3 % | 30.9 % |
+| 200 | 5.9 % | 77.8 % | 37.3 % |
+| 400 | 11.8 % | 79.7 % | 42.6 % |
+| 800 | 23.6 % | 84.4 % | 49.0 % |
+| **no shortlist** | 100 % | **85.8 %** | **59.1 %** |
 
 Any shortlist beats the text control: no.
 <!-- end generated -->
@@ -258,13 +258,13 @@ The completeness bound is the one with teeth, and it is measured:
 <!-- generated: retrieval-guarantee -->
 | what was checked | result |
 |---|---|
-| pairs checked against `sqrt(address²) ≤ 9·sqrt(features²) + 2ρ`, ρ = 4 | **165,648** |
+| pairs checked against `sqrt(address²) ≤ 9·sqrt(features²) + 2ρ`, ρ = 4 | **172,482** |
 | violations | **0** |
 | tightest observed slack | 64 (squared units) |
-| guaranteed-complete shortlist at feature radius 2 | mean **76.0** declarations = **2.3 %** of the corpus |
-| feature-close declarations it must contain | mean **17.3** |
+| guaranteed-complete shortlist at feature radius 2 | mean **109.9** declarations = **3.2 %** of the corpus |
+| feature-close declarations it must contain | mean **25.6** |
 
-Over 51 queries of the 3,249-declaration corpus.  The bound holds: yes.
+Over 51 queries of the 3,383-declaration corpus.  The bound holds: yes.
 <!-- end generated -->
 
 So the address book is an exact spatial index with a proved recall guarantee:

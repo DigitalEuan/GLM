@@ -610,8 +610,9 @@ def _sigma3(n: int) -> int:
 def theta_series(order: int = 5) -> List[int]:
     """Theta series of ``Lambda`` as ``E_4^3 - 720 Delta``, exactly.
 
-    Coefficient ``n`` counts vectors of squared norm ``8n`` in the integer
-    model: ``[1, 0, 196560, 16773120, 398034000, ...]``.
+    Coefficient ``n`` counts vectors of squared norm ``16n`` in the integer
+    model -- the minimal vectors, of norm ``32``, are coefficient 2:
+    ``[1, 0, 196560, 16773120, 398034000, ...]``.
     """
     e4 = [0] * (order + 1)
     e4[0] = 1

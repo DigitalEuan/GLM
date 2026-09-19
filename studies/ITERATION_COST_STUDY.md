@@ -6,7 +6,7 @@
 
 **Verdict.** Most of the cost was work repeated on things that had not moved, and a cache keyed on what it is derived from does not repeat it.
 
-**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->7,880<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
+**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->8,363<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
 
 **Recomputed by.** `glm_universal.corpus.cost.cost_report`
 
@@ -16,6 +16,7 @@ Code: [`glm_universal/corpus/cost.py`](../overlay/glm_universal/corpus/cost.py),
 [`glm_universal/reasoning/lean_address.py`](../overlay/glm_universal/reasoning/lean_address.py),
 [`glm_universal/corpus/address.py`](../overlay/glm_universal/corpus/address.py),
 [`glm_universal/derived.py`](../overlay/glm_universal/derived.py),
+[`glm_universal/signoff/rules.py`](../overlay/glm_universal/signoff/rules.py),
 [`glm_universal/signoff/ledger.py`](../overlay/glm_universal/signoff/ledger.py).
 Tests: [`glm_universal/tests/test_corpus.py`](../overlay/glm_universal/tests/test_corpus.py),
 [`glm_universal/tests/test_lean_address.py`](../overlay/glm_universal/tests/test_lean_address.py),
@@ -72,8 +73,8 @@ nothing.
 <!-- generated: cost-addresses -->
 | book | units | decodes from nothing | decodes now | reused |
 |---|---|---|---|---|
-| Lean declarations | 3,249 | 6,132 | 0 | 6,498 |
-| corpus sections | 887 | 1,748 | 0 | 1,774 |
+| Lean declarations | 3,383 | 6,385 | 0 | 6,766 |
+| corpus sections | 1,006 | 1,978 | 0 | 2,012 |
 
 Reuse is checked, not assumed: each rebuild re-decodes a sample of the answers it reused and reports any that moved (4 sampled in the declaration book, 4 in the document book, none moved).
 <!-- end generated -->
@@ -92,7 +93,7 @@ nothing and requiring the two books to be equal byte for byte.
 | reading | value |
 |---|---|
 | blocks quoting the report | 5 |
-| evaluation cases per report | 149 |
+| evaluation cases per report | 157 |
 | reports taken per check, before | 5 |
 | reports taken per check, now | 0 |
 | stored report | fresh |
@@ -121,7 +122,7 @@ works for tables and not for a sentence, and the sentences were where the drift
 lived. The block mechanism is now available at the size of a phrase:
 
 ```markdown
-the suite is <!--figure:test-files-->91 test files<!--/figure--> today
+the suite is <!--figure:test-files-->98 test files<!--/figure--> today
 ```
 
 The markers are HTML comments, so a reader sees only the number. `--refresh`
@@ -129,9 +130,9 @@ rewrites the body, `--check` fails when it has drifted, and a marker naming a
 figure nothing emits is a reported defect rather than a silent no-op.
 
 <!-- generated: cost-figures -->
-23 figures are registered and 36 markers carry them, across 9 documents.  A marker whose text is not what its figure now says is what `--refresh` rewrites and what `--check` fails on.
+77 figures are registered and 198 markers carry them, across 19 documents.  A marker whose text is not what its figure now says is what `--refresh` rewrites and what `--check` fails on.
 
-The registry: `corpus-archive-documents`, `corpus-documents`, `corpus-sections`, `corpus-state-documents`, `evaluation-case-count`, `evaluation-cases`, `lean-declaration-files`, `lean-declarations`, `lean-file-count`, `lean-files`, `planner-reports-per-check`, `query-kinds`, `rebuild-decodes-from-nothing`, `rebuild-decodes-now`, `registers`, `repo-cache-bytes`, `repo-cache-share`, `repo-primary-bytes`, `repo-stored-bytes`, `report-subjects`, `suite`, `test-file-count`, `test-files`.
+The registry: `corpus-archive-documents`, `corpus-documents`, `corpus-sections`, `corpus-state-documents`, `directive-count`, `directives`, `evaluation-case-count`, `evaluation-cases`, `fieldsurface-fields`, `fieldsurface-held`, `fieldsurface-moved`, `fieldsurface-pairs`, `fieldsurface-parsed-after`, `fieldsurface-parsed-before`, `fieldsurface-predicted`, `fieldsurface-rows`, `fieldsurface-surface-after`, `fieldsurface-surface-before`, `fieldsurface-tables`, `lean-declaration-files`, `lean-declarations`, `lean-file-count`, `lean-files`, `normesc-correct`, `normesc-family-correct`, `normesc-family-rungs`, `normesc-family-wrong`, `normesc-first-broken`, `normesc-longest-safe`, `normesc-named-correct`, `normesc-named-rungs`, `normesc-queries`, `normesc-refused`, `normesc-rungs`, `normesc-wrong`, `normfamily-norms`, `normfamily-rung-count`, `opesc-count`, `opesc-program-correct`, `opesc-program-queries`, `opesc-program-wrong`, `oracle-absent`, `oracle-english`, `oracle-parsed`, `oracle-parser-worth`, `oracle-questions`, `oracle-surface`, `planner-reports-per-check`, `probe-correct`, `probe-derived`, `probe-lexicon-held`, `probe-lexicon-words`, `probe-pass-mark`, `probe-questions`, `probe-refused`, `probe-wrong`, `query-kinds`, `reasoning-modules`, `rebuild-decodes-from-nothing`, `rebuild-decodes-now`, `registers`, `repo-cache-bytes`, `repo-cache-share`, `repo-primary-bytes`, `repo-stored-bytes`, `report-subjects`, `secondread-adopted`, `secondread-configurations`, `secondread-given-up`, `secondread-matched-removes`, `secondread-program-correct`, `secondread-program-refused`, `secondread-program-wrong`, `secondread-shipped`, `suite`, `test-file-count`, `test-files`.
 <!-- end generated -->
 
 Two rules keep it honest. A figure must be **cheap** — a check renders every
@@ -158,6 +159,247 @@ wrong order is refused: `write_measurements` raises
 `glm_universal.corpus.measurements.StaleAddressBook` rather than measuring a
 book that no longer describes the tree.
 
+## 5a. The line that stopped the ledger being selective
+
+The sign-off ledger is only worth having if a change makes a *few* units
+stale. It was not selective, and the reason was one rule: a module whose
+string constants named **any** `.lean` file pulled the **whole** Lean
+development into its closure. That is the safe direction, and it was written
+as such — but the constants it fires on are mostly prose. A docstring in
+`reasoning/wobble.py` mentions `Sturmian.lean`; `wobble.py` is reachable from
+most of the package; so every unit that reached it depended on all 118 Lean
+files, and one Lean edit made almost the whole suite stale.
+
+A named file is now resolved to itself, in both copies, and only a `*.lean`
+glob — what a module that *walks* the tree writes — or a name the development
+does not hold still takes everything. Both halves are tested
+(`tests/test_signoff.py`), and the second half is what keeps the change safe:
+nothing that reads the tree loses its dependency on the tree.
+
+A token written as a path is resolved the same way. `"studies/RECIPE_STUDY.md"`
+names one file; resolving it by base name pulled in every file of that name,
+which for the fifteen `README.md` in the tree meant that editing any one of
+them made every unit that named a readme stale.
+
+Measured over the suite, by `glm_universal.corpus.cost.lean_blast_radius`:
+
+| | |
+|---|---|
+| test units in the suite | 98 |
+| Lean files | 120 |
+| units an edit to *any* Lean file used to make stale | 85 |
+| units one Lean file makes stale now, median | 27 |
+| units the worst single Lean file makes stale | 81 |
+| units that read the tree with a glob, so are stale whenever it moves | 27 |
+
+The floor of 27 is not a defect: those units name a `*.lean` glob because they
+read the development, and a reading of the development is stale when the
+development moves. The change is that the other 58 units now depend on the
+files they name rather than on all of them. A typical unit's closure is 129
+files, where naming one Lean file used to mean carrying all of them.
+
+## 5b. The check that was paying for a derivation
+
+The cache of §3 fixed the *repetition* — five blocks quoting one report, one
+pass instead of five — and left the harder half in place: when the report's
+cache is **stale**, something has to rebuild it, and what was rebuilding it was
+the documents check. On the tree as it stood at the start of this round the
+planner's cache was stale by one edit to a docstring, and
+`corpus --check` took **more than twenty minutes** before printing anything.
+That is the worst possible place to put the cost: the check is the thing a
+session runs to find out whether it has broken something, so it is run often
+and it is run first.
+
+The rule now is that **a reader may report a stale derivation and may not pay
+for one**. `glm_universal.derived.no_recompute` is a context manager inside
+which `DerivedStore.cached` raises `StaleDerivation` instead of computing, and
+`corpus --check` runs its whole pass inside it; the message names the artefact
+and the command that rebuilds it. Measured on this tree:
+
+| | before | after |
+|---|---|---|
+| `corpus --check`, planner cache fresh | ~25 s | ~25 s |
+| `corpus --check`, planner cache stale | > 20 min | **26 s**, with the reason named |
+| `corpus --refresh`, planner cache stale | ~16 min | ~6 min |
+
+Two things made the refresh itself cheaper, and both are exact rather than
+approximate:
+
+* **The quantiser decodes on scaled integers.** Every cost the LLVQ decoder
+  compares was a `Fraction`. Multiplying through by the square of a common
+  denominator of the target makes each one an `int`, which changes no
+  comparison and no tie, so the decoded point is the point the rational route
+  returns — checked against `analogy.nearest_lattice_point` over the whole
+  agreement sweep, and helper by helper in `tests/test_llvq_table.py`. On 200
+  targets after warm-up: **1.15 ms** a call against **10.55 ms**.
+* **The planner's reading runs on every core.** It asks the live runtime each
+  of the 149 declared evaluation cases; serially that is **955 s**, and the
+  cases are independent. `fallback_row` takes a case by index and
+  `fallback_rows` maps it across a process pool: **362 s** at eight workers.
+  The speed-up is 2.6× rather than 8× because the load is uneven — the longest
+  single case is **201 s** and the total serial work is **1,168 s**, so no
+  arrangement of eight workers finishes sooner than the longest case. That is
+  the floor, and it is named here rather than smoothed over: cutting it means
+  making `report-lean`, `report-anonymous`, `report-measure`, `report-relay`
+  and `report-denotations` cheaper, not adding workers.
+
+## 5c. The rule, the record, and the two questions a session asks
+
+§5a made a *Lean* edit selective. The same defect survived one level up, in
+the ledger's own sources. Every unit's closure contains the files that define
+what a dependency is — it has to, because if the rule changes no old signature
+is trustworthy — and the whole of `signoff/ledger.py` was one of them. But
+that file held two different things: the **rule** (what a closure is, what a
+digest covers, how a unit is run) and the **record** (the plan, the stored
+signatures, the parallel runner, the suite totals, the reporting). Only the
+first can change what a test observes. The second is what a round actually
+edits — and editing it re-ran all 96 units.
+
+The rule is now `signoff/rules.py` and is in every closure; the record stays in
+`signoff/ledger.py` and is in no closure but those of the units that import
+it. Measured with `signoff --impact`:
+
+| an edit to | units it makes stale | their last recorded time |
+|---|---|---|
+| `signoff/rules.py` (the rule) | 96 of 96 | 3,970 s |
+| `signoff/ledger.py` (the record) | 6 of 96 | 797 s |
+| `signoff/checks.py` (the instrument table) | 2 of 96 | 375 s |
+| `signoff/__main__.py` (the command line) | 1 of 96 | 54 s |
+
+The six are the units that import the ledger to test it. The direction of
+safety is unchanged: anything that can alter what a test observes is still in
+every closure, and `tests/test_signoff.py` now asserts both halves — `rules.py`
+is scaffolding, `ledger.py` is not, and a unit that imports the ledger still
+carries it.
+
+Two questions a session asks were unanswerable and are now instruments:
+
+* **Why is this unit stale?** A closure splits into five disjoint groups —
+  scaffolding, data, documents, Lean, code — whose union is exactly the
+  closure. A digest per group is recorded beside the signature (five hex
+  strings; they decide nothing), and `signoff --why` reports the groups that
+  moved. `changed: documents` is a prose edit that will pass; `changed: code`
+  may not.
+* **What would this edit cost?** `signoff --impact PATH` inverts the closure
+  relation and names the units an edit to that file *would* make stale,
+  together with what they last took — before the edit, rather than after.
+  `--impact ../PROJECT_DIRECTIVES.md` answers 93 of 96 units and 3,966 s,
+  which is the measured form of the standing advice to batch directive edits
+  into one pass.
+
+## 5d. The caches nothing was watching
+
+Ten study modules keep a measurement cache: figures that cost minutes to take,
+stored beside the digest of the sources they came from, with a `current()`
+that returns `None` when the digest has moved. The discipline is right — a
+stale measurement refuses rather than answers — but nothing *enumerated* them,
+so a stale cache was found by whatever happened to read it. In this round that
+was the end-to-end evaluation, twenty minutes into a release run, reporting a
+report subject that had gone quiet.
+
+`glm_universal.corpus.caches` is the census, and both halves of it are
+computed rather than listed: a module is in it when its source defines both
+`module_digest` and `current`, and the command that re-takes it is read out of
+`tools.py` by resolving the aliases its handlers use and finding the
+sub-command whose handler calls `write_measurements()`. `corpus --check` runs
+the census — a read and a digest per cache, a fraction of a second — and names
+each stale one together with the exact command, in the same half-minute it
+already cost. It never re-takes one: that is minutes of work and belongs to
+the session, not to a check (D16).
+
+| | |
+|---|---|
+| measurement caches in the package | 10 |
+| found by shape rather than by a list | 10 |
+| whose re-taking command is read out of `tools.py` | 10 |
+| stale when the census was first run | 1 (`query_escalation`) |
+| where that staleness used to surface | a failing evaluation, ~20 min into a release |
+
+## 5e. The selectivity that a new feature quietly undid
+
+§5a is a property of the *tree*, not of the rule alone: it holds only while
+nothing on the runtime's import path reads the whole development. A later
+round wired a **field surface** into the session, and one of its tables — the
+Lean address table — loaded its rows by calling
+`reasoning.lean_address.declarations()`, which walks the development and
+parses every file. The session is imported by nearly every test, so the
+whole development re-entered nearly every closure and the ledger stopped being
+selective. Nothing failed visibly; what happened is that a round that touched
+one Lean file paid for most of a release.
+
+The ledger caught it, because §5a had been written down as a test rather than
+as a paragraph: `tests/test_signoff.py` asks that a unit naming one Lean file
+carries that file and not the rest, and `tests/test_corpus.py` asks that the
+numbers in the table above are the numbers the code computes. Both failed.
+That is the argument for pinning a cost property the same way a claim is
+pinned: an efficiency gain that nothing checks is an efficiency gain with a
+half-life.
+
+The fix is a boundary rather than a workaround, and it is the same split as
+§5c. Reading the development and answering from what was read are two jobs:
+
+* `reasoning/lean_address.py` **builds** the address book — it walks the tree,
+  parses it, decodes the addresses, and writes the book. It belongs to the
+  refresh chain.
+* `reasoning/lean_book.py` **answers** from the book. It opens one generated
+  file, names no source of the development and imports nothing that does.
+
+The field surface now takes its Lean rows from the book, so the runtime does
+not read the development at all; the book carries the namespace and the head
+of each statement (schema 2) so the surface answers exactly what it answered
+before, field for field. Whether the book still *describes* the development
+is a separate question that needs the tree, and it stays where it was — with
+`lean_address.cache_state()` and `corpus --check`, which report a stale book
+and name the command that rebuilds it.
+
+Measured on the same instrument as §5a, before and after:
+
+| | with the surface reading the tree | reading the book |
+|---|---|---|
+| units one Lean file makes stale, median | 79 | **27** |
+| units that take the whole development | 79 | **27** |
+| units the worst single Lean file makes stale | 82 | 81 |
+| units an edit to *any* Lean file makes stale | 85 | 85 |
+
+The last two rows are the honest part of the table: this changes *nothing*
+about units that genuinely read the development, and nothing about the
+over-approximation by which a unit that names a Lean file in its prose depends
+on it. What it changes is the common case, which is the case a round pays for.
+
+## 5f. The check that does not have to be asked
+
+The documents gate renders all 97 generated blocks and all 201 inline figures
+across the corpus and compares each with what is written. That is the right
+thing to do after an edit. It is *also* what it did on picking a round up,
+when nothing at all had moved since the last round closed — and the answer a
+check gives about a tree that has not changed is the answer it gave last time.
+
+So the verdict is now stored beside a digest of everything the check can read:
+the documents, the code that renders them, the frozen data that code reads and
+the Lean sources the blocks quote — computed as the sign-off ledger's own
+closure of the corpus command, so nothing the check reads is outside it. If
+the digest matches and the stored verdict was a **pass**, the check says so and
+stops.
+
+| | blocks rendered | figures rendered | about |
+|---|---|---|---|
+| after an edit, or with `--check --all` | 97 | 201 | 50 s |
+| nothing in the closure has moved | 0 | 0 | 3 s |
+
+Three things keep it from being a way to miss a defect. Only a pass is ever
+recorded, so a session that has just been told what is stale runs the whole
+gate again and sees the same failure. The digest is over the closure rather
+than over a list, so a file that moves without mattering costs one full check
+while a file that matters cannot move unnoticed — the same direction of safety
+as §5a. And `--check --all` refuses the record outright, which is what the
+release does: the record is an optimisation, and nothing depends on it being
+there.
+
+The measurement is `glm_universal.corpus.gate`, and
+`tests/test_corpus.py::TestTheDocumentsGateRecord` pins what the digest covers,
+that a failure is never skippable, and that a record written under another rule
+is ignored rather than trusted.
+
 ## 6. What this does not establish
 
 It does not make anything faster that was not repetition. The measurement cache
@@ -178,5 +420,5 @@ that pays for it, with the storage, loading, digesting and rebuilding of the
 table counted on the table's side rather than assumed away.
 
 <!-- generated: cost-tier -->
-**Rebuilding both address books from nothing decodes 7,880 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 149 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  36 figures inside sentences, across 9 documents, are emitted rather than typed.
+**Rebuilding both address books from nothing decodes 8,363 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 157 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  198 figures inside sentences, across 19 documents, are emitted rather than typed.
 <!-- end generated -->

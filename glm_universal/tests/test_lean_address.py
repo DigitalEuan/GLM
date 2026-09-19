@@ -392,6 +392,61 @@ class TestMeasurements(unittest.TestCase):
             self.assertIsInstance(neighbours[key], Fraction)
 
 
+class TestTheFastRoutinesAreTheDefinitions(unittest.TestCase):
+    """The two shortcuts the separation study takes, against brute force.
+
+    Both are exact rearrangements rather than approximations, so the test is
+    equality and not a tolerance: the sum over pairs against Lagrange's
+    identity, and the pruned nearest-neighbour search against the all-pairs
+    loop, ties included.
+    """
+
+    def test_the_pair_sum_identity_matches_the_pairwise_loop(self):
+        points = [la.addresses("feature")[name]
+                  for name in sorted(la.addresses("feature"))[:120]]
+        direct = sum(la.squared_distance(a, b)
+                     for i, a in enumerate(points)
+                     for b in points[i + 1:])
+        self.assertEqual(direct, la._group_squared_distance_sum(points))
+
+    def test_the_pair_sum_identity_on_degenerate_groups(self):
+        self.assertEqual(0, la._group_squared_distance_sum([]))
+        self.assertEqual(0, la._group_squared_distance_sum([(1,) * 24]))
+        #  0, 1 and 2 on one axis: the pairs are 4, 1 and 1.
+        self.assertEqual(
+            6, la._group_squared_distance_sum(
+                [(0,) * 24, (2,) + (0,) * 23, (1,) + (0,) * 23]))
+
+    def test_the_pruned_search_matches_brute_force_on_the_corpus(self):
+        points = [la.addresses("feature")[name]
+                  for name in sorted(la.addresses("feature"))[:400]]
+        self.assertEqual(la.nearest_points_exhaustive(points),
+                         la.nearest_points(points))
+
+    def test_the_pruned_search_matches_brute_force_on_the_controls(self):
+        for scheme in ("hash_control", "shuffled"):
+            table = la.addresses(scheme)
+            points = [table[name] for name in sorted(table)[:250]]
+            with self.subTest(scheme=scheme):
+                self.assertEqual(la.nearest_points_exhaustive(points),
+                                 la.nearest_points(points))
+
+    def test_ties_are_reported_in_full(self):
+        """Three points equidistant from a fourth: all three are winners."""
+        origin = (0,) * 24
+        arms = [tuple(4 if k == axis else 0 for k in range(24))
+                for axis in (0, 1, 2)]
+        found = la.nearest_points([origin] + arms)
+        self.assertEqual((16, tuple(sorted(arms))), found[origin])
+        self.assertEqual(la.nearest_points_exhaustive([origin] + arms), found)
+
+    def test_repeated_points_collapse_to_one_entry(self):
+        a = (0,) * 24
+        b = (3,) + (0,) * 23
+        found = la.nearest_points([a, a, b, b])
+        self.assertEqual({a: (9, (b,)), b: (9, (a,))}, found)
+
+
 class TestSpeaking(unittest.TestCase):
 
     def test_an_unknown_name_is_refused_rather_than_guessed(self):

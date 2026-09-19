@@ -231,12 +231,12 @@ REGISTER: Tuple[Entry, ...] = (
     ),
     Entry(
         key="describable-coverage",
-        stall=("three of the eight registers are described, and seven of the "
-               "twenty answerable query kinds"),
+        stall=("three of the eight registers are described, and seven of "
+               "the twenty-one answerable query kinds"),
         document="LANGUAGE_STUDY.md",
         reading="the three declared shape families",
         verdict="no-discard",
-        discarded=("nothing.  The thirteen remaining query kinds are not "
+        discarded=("nothing.  The fourteen remaining query kinds are not "
                    "shapes of any family; forcing them would make the "
                    "coverage figure meaningless, which is the language "
                    "layer's own stopping rule"),

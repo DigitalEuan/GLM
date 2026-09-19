@@ -13,7 +13,7 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-**Version:** 1.17.0
+**Version:** 1.18.0
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand
 **Parent:** [`../README.md`](../README.md)
 
@@ -34,17 +34,17 @@ a `*_report` function rather than quoted.
 |---|---|---|---|
 | 1 | `substrate/` — linalg, MOG, Leech, digit stack, Golay decoding, Leech construction, the legacy↔core isomorphism, superposition, and the two rungs above 24 dimensions (`lattice32`, `lattice48`) | 298 | ✓ complete |
 | 2 | `data_objects/` — physics (**726 quantities**), chemistry (118 elements + 52 diatomics), **51 molecules**, mathematics (22), semantic lexicon (95), spatial (28), **45 comparison classes** | 373 | ✓ complete |
-| 3 | `reasoning/` — **65 modules**: admission, analogy, analogy_models, blueprint, catalog, coherence, combiner, companion, conjugate, containers, controller, deep_dive, deep_holes, denotation_view, dimension_layers, directives, drift, economics, element_completion, element_coverage, engine, escalation, exact_real, exactness, facets, fwht, fwht_decode, generative, harmony, higher_lattices, information_loss, lean_address, llvq, llvq_table, mantissa, measure_view, metric, monster_stack, moonshine, multires, name_coordinate, niemeier, noise_lab, periodic_table, pipeline, product, real_expr, retrieval, reversible, salvage, salvage_second, search_loop, shell_sigma, stability, tasks, term_arithmetic, tie_break, transcendental, units, vagueness, valorani, verifier, voronoi_walk, wobble, wobble_landscape | 1,676 | ✓ complete |
+| 3 | `reasoning/` — **81 modules**: admission, analogy, analogy_models, anonymous, blockers, blueprint, catalog, coherence, combiner, companion, conjugate, containers, controller, cumulativity, deep_dive, deep_hole_classifier, deep_hole_escalation, deep_hole_failures, deep_holes, denotation_view, dimension_layers, directives, drift, economics, element_completion, element_coverage, engine, escalation, exact_real, exactness, facets, fwht, fwht_decode, generative, harmony, higher_lattices, information_loss, ladder_escalation, lean_address, llvq, llvq_table, mantissa, measure_view, metric, monster_stack, moonshine, multires, name_coordinate, niemeier, noise_lab, norm_escalation, operation_escalation, pcgs, periodic_table, pipeline, probe_oracle, product, query_escalation, real_expr, retrieval, reversible, review_sweep, salvage, salvage_second, search_loop, second_reading, shell_sigma, stability, stack, tasks, term_arithmetic, tie_break, transcendental, units, vagueness, valorani, verifier, vision_stack, voronoi_walk, wobble, wobble_landscape | 1,676 | ✓ complete |
 | 3½ | `semantics/` — the meaning space, reference resolution, derived relations, the grounded graph, the audit of the inherited concept graph | 59 | ✓ complete |
 | 3¾ | `recipe/` — the recipe made into an object: a declarative **domain description**, the 25 shared primitives one is written in, and the single generic path from a description to the carriers, the readings, the widening audit, the query surface and the refusal boundary. Three domains built by hand in earlier rounds are described and regenerated from their descriptions alone | 87 | ✓ complete |
 | 3⅞ | `language/` — the question shape made into an object: a declarative **question description** (an opening, named slots, the literal words that separate them, an optional tail, a described preamble and named refusal boundaries) plus a second **infix** form (an operator that cuts a string, for operands that are notations), and the two generic matchers that read them. Three of the runtime's query kinds are read off their descriptions with the hand-written branches deleted, three more are described and measured against the branches they have not yet replaced | 122 | ✓ complete |
-| 4 | `runtime/` — parser, session, TCT engine, and the `GLM.py` CLI; **21 query kinds**, **65 report subjects**, 8 registers | 326 | ✓ complete |
+| 4 | `runtime/` — parser, session, TCT engine, and the `GLM.py` CLI; **<!--figure:query-kinds-->22 query kinds<!--/figure-->**, **65 report subjects**, 8 registers | 326 | ✓ complete |
 | 5 | `migration/` — the literal migration of the repository's stored state into canonical form | 108 | ✓ complete |
 | 6 | `benchmarks/` — 5 suites, 2,390 scored tasks, published baselines and findings | 67 | ✓ complete |
 | 7 | `capabilities/` — 33 capability probes: what the machine can do, and the exact place each thing it cannot do stops | 56 | ✓ complete |
-| 8 | `evaluation/` — **<!--figure:evaluation-case-count-->149<!--/figure-->** end-to-end CLI cases over all 21 query kinds and every report subject, each in a fresh interpreter, scored with a refusal worth more than a confident wrong answer | 20 | ✓ complete |
-| 9 | `signoff/` — the sign-off ledger over <!--figure:test-files-->91 test files<!--/figure--> and 7 instruments, with `integrity.py` (the one place a digest is computed) and `tools.py` (the command line for the study instruments) beside it, the generator of the Lean tree's second copy (`mirror.py`, `python3 -m glm_universal.tools lean-mirror`), and the guards on the generated figures and the derived-artefact layer (`figures.py`, `derived.py`) | 144 | ✓ complete |
-| 10 | `corpus/` — the documents held the way the substrate holds data: an inventory that classifies every document by rule, the generated `DIGEST.md`, the in-document generated blocks and the inline figures that emit a number inside a sentence, a Leech address for every section of the corpus with a certified-absence shortlist, the measurement cache the address study's tables are emitted from, the cost of one rebuild in exact counts (`cost.py`), the ordered `--refresh` that rebuilds all of it, and the checks that fail when any of it drifts | 55 | ✓ complete |
+| 8 | `evaluation/` — **<!--figure:evaluation-case-count-->157<!--/figure-->** end-to-end CLI cases over all <!--figure:query-kinds-->22 query kinds<!--/figure--> and every report subject, each in a fresh interpreter, scored with a refusal worth more than a confident wrong answer | 20 | ✓ complete |
+| 9 | `signoff/` — the sign-off ledger over <!--figure:test-files-->98 test files<!--/figure--> and 7 instruments, split into the **rule** (`rules.py`: what a closure is, what a digest covers, how a unit is run — in every closure) and the **record** (`ledger.py`: the plan, the signatures, the runner, the reporting — in none but the units that import it), with `--why` naming the kind of file that moved and `--impact` pricing an edit before it is made, with `integrity.py` (the one place a digest is computed) and `tools.py` (the command line for the study instruments) beside it, the generator of the Lean tree's second copy (`mirror.py`, `python3 -m glm_universal.tools lean-mirror`), and the guards on the generated figures and the derived-artefact layer (`figures.py`, `derived.py`) | 144 | ✓ complete |
+| 10 | `corpus/` — the documents held the way the substrate holds data: an inventory that classifies every document by rule, the generated `DIGEST.md`, the in-document generated blocks and the inline figures that emit a number inside a sentence, a Leech address for every section of the corpus with a certified-absence shortlist, the measurement cache the address study's tables are emitted from, the cost of one rebuild in exact counts (`cost.py`), the ordered `--refresh` that rebuilds all of it, the checks that fail when any of it drifts, and the record (`gate.py`) that lets a check whose inputs have not moved answer from its last passing verdict | 55 | ✓ complete |
 | — | `examples/` — TCT demo, reasoning showcase, encoding POC, integrated NRCI, scaled carriers, semantic replacement | — | ✓ working |
 
 The **Tests** column is the number of tests in the test files that cover that
@@ -58,7 +58,7 @@ column adds to less than the total. The per-file table is the authoritative
 one: it is checked against a collection run, and the total below is the
 sign-off ledger's own count from the last complete run.
 
-**Total: <!--figure:suite-->3,695 tests across 90 of the 91 test files, 14,131 subtests, outside the document check<!--/figure-->, zero failures.**
+**Total: <!--figure:suite-->3,924 tests across 97 of the 98 test files, 15,326 subtests, outside the document check<!--/figure-->, zero failures.**
 
 Per-file counts and what each file checks are in
 [`tests/README.md`](tests/README.md); every count quoted anywhere in the
@@ -207,10 +207,10 @@ glm_universal/
 │   ├── probes_language.py     11 probes through grammar, semantics, runtime
 │   └── __main__.py            CLI, with --area and --probe
 ├── evaluation/                ← Step 8: the machine measured from outside
-│   ├── cases.py               the 149 CLI cases, every query kind and report subject
+│   ├── cases.py               the 157 CLI cases, every query kind and report subject
 │   ├── harness.py             run_case, run_all, evaluation_report, the scoring
 │   └── __main__.py            CLI, with --only, --case, --jobs, --json, --list
-├── tests/                     ← <!--figure:test-files-->91 test files<!--/figure-->
+├── tests/                     ← <!--figure:test-files-->98 test files<!--/figure-->
 └── examples/                  ← demonstrations
     ├── demo_tct.py            Three Column Thinking demo (7 queries)
     ├── reasoning_showcase.py  29 probes, refusals included; writes the transcript
@@ -281,7 +281,7 @@ package's surface; it is a thin shell over `runtime/`.
 - **Equation verifier**: 222 scalar + 71 tensor relations, 31-facet attribution
 - **The Lean development, addressed**: `lean_address.py` gives every
   declaration of `RequestProject/GLM/` a deterministic 24-coordinate Leech
-  address computed from its statement, read back **3249/3249** with 0
+  address computed from its statement, read back **3383/3383** with 0
   coordinate errors, and `retrieval.py` makes the book an index whose
   completeness bound is proved in `RequestProject/GLM/Retrieval.lean`.
   `report lean`, `report retrieval`
@@ -296,7 +296,7 @@ would be a node *of*. 1,705 notations collapse onto 357 meanings joined by
 [`semantics/README.md`](semantics/README.md).
 
 ### The runtime (Step 4)
-**21 query kinds** and **65 report subjects** over **8 registers** — see
+**<!--figure:query-kinds-->22 query kinds<!--/figure-->** and **65 report subjects** over **8 registers** — see
 [`runtime/README.md`](runtime/README.md) for all three tables.
 
 Every query is answered three times (Three Column Thinking):

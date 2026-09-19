@@ -176,6 +176,36 @@ class TestAgreement(unittest.TestCase):
                 self.assertTrue(leech2.in_leech(list(got.point)))
                 self.assertTrue(got.in_leech)
 
+    def test_the_scaled_rounding_is_the_rational_one(self):
+        #  The decoder works in units of q**2 rather than in Fractions.  That
+        #  is an optimisation only if it decides exactly what the rational
+        #  version decides -- the same integer, the same cost, the same
+        #  penalty -- so here the two are put side by side.
+        for index, vector in enumerate(lt.sweep_vectors(6, 20250918)):
+            q = lt._common_denominator(vector)
+            with self.subTest(index=index):
+                for residue in range(4):
+                    for value in vector:
+                        n = value.numerator * (q // value.denominator)
+                        x, cost, penalty = an._round_to_residue(value, residue)
+                        sx, scost, spenalty = lt._round_to_residue_scaled(
+                            n, q, residue)
+                        self.assertEqual(sx, x)
+                        self.assertEqual(Fraction(scost, q * q), cost)
+                        self.assertEqual(Fraction(spenalty, q * q), penalty)
+
+    def test_the_scaled_column_costs_are_the_rational_ones(self):
+        vector = lt.sweep_vectors(1, 771)[0]
+        q = lt._common_denominator(vector)
+        delta = [value.numerator * (q // value.denominator)
+                 for value in vector]
+        scaled = lt._column_costs_scaled(delta)
+        exact = lt.column_costs([Fraction(d, q * q) for d in delta])
+        for col in range(6):
+            for value in range(16):
+                self.assertEqual(Fraction(scaled[col][value], q * q),
+                                 exact[col][value])
+
     def test_no_float_is_constructed(self):
         got = lt.nearest_lattice_point_table(lt.sweep_vectors(1, 5)[0])
         self.assertIsInstance(got.distance2, Fraction)

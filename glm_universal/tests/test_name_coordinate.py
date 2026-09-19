@@ -1,6 +1,6 @@
 """Tests for ``reasoning/name_coordinate`` -- a coordinate for the name.
 
-``test_escalation.py`` pins the ceiling: 1,040 named entries sit on 757
+``test_escalation.py`` pins the ceiling: 1,094 named entries sit on 811
 distinct carriers, so 283 of them are beyond every layer, because a layer's
 view is a function of the carrier.  This module pins what happens when the
 missing coordinate is supplied, and the point of it is that only *part* of
@@ -73,11 +73,11 @@ class TestTheCodeIsExactAndInjective:
 
     def test_names_repeat_across_registers_but_not_at_a_carrier(self,
                                                                 report):
-        """1,019 distinct names under 1,040 entries: the code alone is not a
+        """1,073 distinct names under 1,094 entries: the code alone is not a
         key, and the reading is the pair (carrier, code)."""
-        assert report["distinct_names"] == 1019
-        assert report["entries"] == 1040
-        assert report["exact"]["distinct"] == 1040
+        assert report["distinct_names"] == 1073
+        assert report["entries"] == 1094
+        assert report["exact"]["distinct"] == 1094
 
     def test_no_coordinate_is_a_float(self, entries, subtests):
         for kind in ("exact",) + nc.CONTROLS:
@@ -124,7 +124,7 @@ class TestTheExactCodeLiftsTheCeiling:
 
     def test_the_ceiling_before(self, report):
         before = report["before"]
-        assert before["distinct_carriers"] == 757
+        assert before["distinct_carriers"] == 811
         assert before["unreachable"] == 283
         assert before["collision_classes"] == 104
         assert before["within_register"] == 104
@@ -134,7 +134,7 @@ class TestTheExactCodeLiftsTheCeiling:
 
     def test_the_ceiling_after(self, report):
         exact = report["exact"]
-        assert exact["distinct"] == exact["entries"] == 1040
+        assert exact["distinct"] == exact["entries"] == 1094
         assert exact["unreachable"] == 0
         assert exact["recovered"] == 283
         assert exact["violations"] == 0
@@ -142,8 +142,8 @@ class TestTheExactCodeLiftsTheCeiling:
     def test_it_lifts_the_24_bit_substrate_too(self, report):
         """The coordinate does not need a good layer under it: the coarsest
         layer in the stack resolves everything once the name is beside it."""
-        assert report["substrate_resolution"] == 415
-        assert report["substrate_resolution_named"] == 1040
+        assert report["substrate_resolution"] == 469
+        assert report["substrate_resolution_named"] == 1094
 
 
 class TestTheBitSweep:

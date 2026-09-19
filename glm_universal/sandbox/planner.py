@@ -70,7 +70,8 @@ __all__ = [
     "Problem", "ToolResult", "Tool", "Plan", "PlanStep",
     "REGISTRY", "BUDGET", "parse_problem", "applicable", "plan",
     "TASKS", "task_rows", "promotion_checklist", "planner_report",
-    "FALLBACK_RULE", "fallback_rows", "fallback_reading",
+    "FALLBACK_RULE", "fallback_row", "fallback_rows", "fallback_jobs",
+    "fallback_reading",
     "REPORT_STORE", "cached_planner_report", "report_cache_state",
 ]
 
@@ -694,6 +695,63 @@ FALLBACK_RULE = (
     "classifier calls escalatable")
 
 
+def fallback_row(index: int) -> Dict[str, object]:
+    """One evaluation case under the fallback rule, by its position.
+
+    Taken by index rather than by case so that it can be handed to a worker
+    process: an index pickles, a case need not.  Nothing here reads anything
+    but the declared case and the code, which is what makes the whole reading
+    safe to compute out of order.
+    """
+    from ..evaluation import cases as ev
+
+    case = ev.CASES[index]
+    try:
+        direct = session().ask(case.question)
+        direct_ok, direct_answer = direct.ok, direct.answer
+    except Exception as exc:                    # pragma: no cover - defensive
+        direct_ok, direct_answer = False, f"raised: {exc}"
+    tag = (None if direct_ok
+           else str(esl.classify(direct_answer)["tag"]))
+    consulted = (not direct_ok) and tag == esl.ESCALATABLE
+    result = ask(case.question) if consulted else None
+    return {
+        "id": case.id,
+        "kind": case.kind,
+        "question": case.question,
+        "runtime_answered": direct_ok,
+        "runtime_answer": direct_answer,
+        "refusal_tag": tag,
+        "planner_consulted": consulted,
+        "planner_answered": bool(result and result.answered),
+        "planner_answer": result.answer if result else None,
+        "planner_tool": result.tool if result else None,
+        "planner_verified": bool(result and result.verified),
+        "planner_cost": result.cost if result else 0,
+    }
+
+
+def fallback_jobs() -> int:
+    """How many processes the fallback reading may use.
+
+    Every core by default, one when ``GLM_PLANNER_JOBS=1``.  The reading is
+    the expensive half of this module -- it asks the live runtime every
+    declared evaluation case -- and the cases are independent, so running them
+    one at a time is a choice rather than a requirement.  The answers do not
+    depend on it: ``tests/test_sandbox_planner.py`` runs the reading both ways
+    and requires the same rows in the same order.
+    """
+    import os
+
+    raw = os.environ.get("GLM_PLANNER_JOBS")
+    if raw is not None:
+        try:
+            return max(1, int(raw))
+        except ValueError:
+            return 1
+    return max(1, min(8, os.cpu_count() or 1))
+
+
 @memo
 def fallback_rows() -> Tuple[Dict[str, object], ...]:
     """Every evaluation case, under the fallback rule.
@@ -703,35 +761,24 @@ def fallback_rows() -> Tuple[Dict[str, object], ...]:
     classification of the refusal is taken from the shipped escalation
     classifier, so a refusal the system holds to be correct at every layer is
     identified *before* the planner is offered the question.
+
+    Computed across processes when there is more than one core
+    (:func:`fallback_jobs`), and in this one otherwise.  The order of the rows
+    is the declared order of the cases either way.
     """
     from ..evaluation import cases as ev
-    live = session()
-    rows: List[Dict[str, object]] = []
-    for case in ev.CASES:
-        try:
-            direct = live.ask(case.question)
-            direct_ok, direct_answer = direct.ok, direct.answer
-        except Exception as exc:                # pragma: no cover - defensive
-            direct_ok, direct_answer = False, f"raised: {exc}"
-        tag = (None if direct_ok
-               else str(esl.classify(direct_answer)["tag"]))
-        consulted = (not direct_ok) and tag == esl.ESCALATABLE
-        result = ask(case.question) if consulted else None
-        rows.append({
-            "id": case.id,
-            "kind": case.kind,
-            "question": case.question,
-            "runtime_answered": direct_ok,
-            "runtime_answer": direct_answer,
-            "refusal_tag": tag,
-            "planner_consulted": consulted,
-            "planner_answered": bool(result and result.answered),
-            "planner_answer": result.answer if result else None,
-            "planner_tool": result.tool if result else None,
-            "planner_verified": bool(result and result.verified),
-            "planner_cost": result.cost if result else 0,
-        })
-    return tuple(rows)
+
+    indices = range(len(ev.CASES))
+    jobs = fallback_jobs()
+    if jobs <= 1:
+        return tuple(fallback_row(index) for index in indices)
+    from concurrent.futures import ProcessPoolExecutor
+
+    #  One case per hand-out: the cases are wildly uneven -- the longest is
+    #  three minutes and the median under a second -- so any chunking pairs a
+    #  long case with another and lengthens the run.
+    with ProcessPoolExecutor(max_workers=jobs) as pool:
+        return tuple(pool.map(fallback_row, indices, chunksize=1))
 
 
 def fallback_reading(rows: Optional[Sequence[Dict[str, object]]] = None

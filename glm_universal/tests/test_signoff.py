@@ -310,11 +310,89 @@ class TestDocumentClosure(unittest.TestCase):
                        "MASTER_PLAN.md", "CAPABILITY_ASSESSMENT.md"):
             self.assertNotIn(quoted, documents)
 
-    def test_naming_a_lean_file_pulls_in_the_whole_development(self):
+    def test_naming_a_lean_glob_pulls_in_the_whole_development(self):
+        #  ``lean_address.py`` walks the tree with ``rglob("*.lean")``; a glob
+        #  cannot be resolved to one file, so the whole development is hashed.
         names = self.names(L.unit_closure(L.TESTS_DIR / "test_lean_address.py"))
         self.assertIn("Address.lean", names)
         self.assertIn("Tower.lean", names)
         self.assertIn("lean-toolchain", names)
+
+    def test_naming_one_lean_file_pulls_in_that_file_and_not_the_rest(self):
+        """The closure is over-approximate, but not by the whole development.
+
+        ``reasoning/wobble.py`` mentions ``Sturmian.lean`` in its prose and
+        reads no other Lean file.  Hashing all of them here is what stopped
+        the ledger being incremental: any Lean edit re-ran almost the suite.
+        """
+        closure = L.unit_closure(L.TESTS_DIR / "test_wobble.py")
+        names = self.names(closure)
+        self.assertIn("Sturmian.lean", names)
+        self.assertNotIn("Tower.lean", names)
+        #  Both copies of the file it does name, because they are meant to be
+        #  identical and a test may read either.
+        sturmian = [p for p in closure if p.name == "Sturmian.lean"]
+        self.assertEqual(len(sturmian), 2)
+        self.assertTrue(any("glm_lean" in p.parts for p in sturmian))
+
+    def test_building_a_session_does_not_take_the_whole_development(self):
+        """The property a feature undid once, pinned where it broke.
+
+        The runtime's field surface used to load its Lean rows by parsing the
+        development, and the session is imported by nearly every test -- so
+        every one of them depended on all 120 Lean files and one Lean edit
+        cost most of a release.  The rows come from the stored book now.  A
+        unit that builds a session and reads no Lean source must not carry
+        the development; ``studies/ITERATION_COST_STUDY.md`` 5e is the
+        measurement.
+        """
+        sources = set(L.lean_sources())
+        for unit in ("test_wobble.py", "test_language.py", "test_molecules.py"):
+            closure = set(L.unit_closure(L.TESTS_DIR / unit))
+            with self.subTest(unit=unit):
+                self.assertFalse(sources <= closure)
+
+    def test_the_book_reader_reads_no_source_of_the_development(self):
+        """The boundary the fix rests on, read out of the module itself.
+
+        ``reasoning/lean_book.py`` answers from the generated book; if it ever
+        imports the module that walks the tree, the closure widens again and
+        the test above is the only thing that would notice.
+        """
+        reader = (Path(L.PROJECT_ROOT) / "glm_universal" / "reasoning"
+                  / "lean_book.py")
+        closure = set(L.unit_closure(reader))
+        self.assertFalse(set(L.lean_sources()) <= closure)
+        modules = {p.name for p in closure if p.suffix == ".py"}
+        self.assertNotIn("lean_address.py", modules)
+
+    def test_the_lean_index_holds_every_file_under_both_copies(self):
+        index = L.lean_index()
+        self.assertIn("Sturmian.lean", index)
+        self.assertIn("Meaning.lean", index)
+        for name, paths in index.items():
+            #  ``Main.lean`` is the repository's entry point and is not part
+            #  of ``GLM/``, so the mirror does not carry it; everything the
+            #  mirror does carry is indexed under both copies.
+            expected = 1 if name == "Main.lean" else 2
+            with self.subTest(lean=name):
+                self.assertEqual(len(paths), expected, name)
+
+    def test_an_unresolvable_lean_name_still_pulls_in_the_whole_development(self):
+        """A name that cannot be resolved to a file is the safe direction.
+
+        A glob, or a file the development does not hold, could stand for any
+        of them, so all of them are hashed -- which is what the rule did for
+        every name before it could resolve one.
+        """
+        sources = set(L.lean_sources())
+        with tempfile.TemporaryDirectory() as folder:
+            for literal in ('"*.lean"', '"NoSuchFileHere.lean"'):
+                module = Path(folder) / "names_a_lean_file.py"
+                module.write_text(f"WHAT = {literal}\n", encoding="utf-8")
+                with self.subTest(names=literal):
+                    found = set(L.referenced_documents((module,)))
+                    self.assertEqual(found & sources, sources)
 
     def test_the_document_index_is_by_name_and_holds_every_copy(self):
         index = L.document_index()
@@ -431,7 +509,27 @@ class TestScaffoldingIsTheRuleAndNothingElse(unittest.TestCase):
     def test_the_harness_and_the_rule_are_in_every_closure(self):
         names = {p.name for p in L.scaffolding_paths()}
         self.assertIn("__init__.py", names)
-        self.assertIn("ledger.py", names)
+        self.assertIn("rules.py", names)
+
+    def test_the_record_is_not_the_rule_and_is_not_scaffolding(self):
+        """Improving the *reporting* must not re-run the whole suite.
+
+        ``rules.py`` says what a dependency is, what a digest covers and how
+        a unit is run, so it is in every closure.  ``ledger.py`` is the
+        record kept under that rule -- the plan, the stored signatures, the
+        parallel runner, the suite totals -- and cannot change what a test
+        observes, so it is not.  A test file that imports it still picks it
+        up as an ordinary import.
+        """
+        names = {p.name for p in L.scaffolding_paths()}
+        self.assertNotIn("ledger.py", names)
+        closure = {p.name for p in
+                   L.unit_closure(L.TESTS_DIR / "test_substrate.py")}
+        self.assertNotIn("ledger.py", closure)
+        self.assertIn("rules.py", closure)
+        self.assertIn("ledger.py",
+                      {p.name for p in
+                       L.unit_closure(L.TESTS_DIR / "test_signoff.py")})
 
     def test_the_instrument_table_is_not_in_a_test_units_closure(self):
         """Adding an instrument must not invalidate all fifty test units.
@@ -536,6 +634,58 @@ class TestRunModes(unittest.TestCase):
             self.assertIn(self.unit.name, report["partial"])
             self.assertFalse(report["all_signed"])
             self.assertTrue(report["full"])
+
+
+class TestResumingARelease(unittest.TestCase):
+    """A release that ran out of time is resumed, not restarted.
+
+    Signatures are written after each unit, so an interrupted release keeps
+    what it earned.  ``--release --resume`` therefore asks the release
+    question -- exhaustive cases on, a fast signature counted as `partial` --
+    and runs only the units that question calls stale.  What decides the
+    round is unchanged: ``--verify-release`` re-checks every signature.
+    """
+
+    def test_a_dry_resume_skips_what_is_already_signed_in_full(self):
+        rows = L.plan(full=True)
+        book = {"schema": L.SCHEMA, "python": L.interpreter_tag(), "units": {}}
+        for unit in rows:
+            book = L.sign(unit,
+                          {"status": "passed", "tests": 1, "subtests": 0,
+                           "failures": 0, "milliseconds": 10, "mode": "full"},
+                          book)
+        with tempfile.TemporaryDirectory() as raw:
+            path = Path(raw) / "ledger.json"
+            L.save_ledger(book, path)
+            resumed = L.run_plan(all_units=False, dry_run=True,
+                                 ledger_path=path, exhaustive=True)
+            restarted = L.run_plan(all_units=True, dry_run=True,
+                                   ledger_path=path, exhaustive=True)
+        self.assertEqual(resumed["ran"], 0)
+        self.assertEqual(resumed["skipped"], len(rows))
+        self.assertEqual(restarted["ran"], len(rows))
+        self.assertEqual(resumed["mode"], "full")
+
+    def test_a_resume_still_runs_a_unit_signed_only_fast(self):
+        rows = L.plan(full=True)
+        book = {"schema": L.SCHEMA, "python": L.interpreter_tag(), "units": {}}
+        for unit in rows:
+            mode = "fast" if unit.name == "test_signoff.py" else "full"
+            book = L.sign(unit,
+                          {"status": "passed", "tests": 1, "subtests": 0,
+                           "failures": 0, "milliseconds": 10, "mode": mode},
+                          book)
+        with tempfile.TemporaryDirectory() as raw:
+            path = Path(raw) / "ledger.json"
+            L.save_ledger(book, path)
+            resumed = L.run_plan(all_units=False, dry_run=True,
+                                 ledger_path=path, exhaustive=True)
+        self.assertEqual(resumed["ran"], 1)
+        self.assertNotIn("test_signoff.py", resumed["skipped_names"])
+
+    def test_the_command_line_documents_the_resume(self):
+        from glm_universal.signoff import __main__ as M
+        self.assertIn("--release --resume", M.__doc__)
 
 
 class TestParallelRuns(unittest.TestCase):
@@ -666,6 +816,102 @@ class TestTheLeanMirror(unittest.TestCase):
         self.assertEqual((), outcome["written"])
         self.assertEqual((), outcome["removed"])
         self.assertTrue(outcome["identical"])
+
+
+class TestWhyAUnitIsStale(unittest.TestCase):
+    """The reason a unit will run, and the cost of an edit before making it.
+
+    A digest answers "has anything moved?".  These two answer the questions a
+    session actually asks: *what kind* of file moved, and *what would this
+    edit cost*.  Both are read off the same closure the signature is taken
+    over, so neither can drift away from it.
+    """
+
+    UNIT = "test_wobble.py"
+
+    def unit_path(self):
+        return L.TESTS_DIR / self.UNIT
+
+    def test_the_groups_partition_the_closure(self):
+        """Five disjoint groups whose union is exactly the closure."""
+        path = self.unit_path()
+        groups = L.closure_groups(path)
+        self.assertEqual(set(groups), set(L.CLOSURE_GROUPS))
+        members = [p for group in groups.values() for p in group]
+        self.assertEqual(len(members), len(set(members)))
+        self.assertEqual(set(members), set(L.unit_closure(path)))
+
+    def test_each_group_is_the_kind_of_file_it_says(self):
+        groups = L.closure_groups(self.unit_path())
+        self.assertTrue(all(p.suffix == ".py" for p in groups["code"]))
+        self.assertTrue(all(p.suffix == ".lean" for p in groups["lean"]))
+        self.assertTrue(all(p.suffix != ".py" for p in groups["documents"]))
+        self.assertTrue(all("_data" in p.parts for p in groups["data"]))
+        self.assertEqual(
+            set(groups["scaffolding"]),
+            {p.resolve() for p in L.scaffolding_paths()}
+            & set(L.unit_closure(self.unit_path())))
+
+    def test_a_group_digest_moves_only_with_its_own_group(self):
+        digests = L.group_digests(self.unit_path())
+        self.assertEqual(set(digests), set(L.CLOSURE_GROUPS))
+        again = L.group_digests(self.unit_path())
+        self.assertEqual(digests, again)
+        for name, value in digests.items():
+            self.assertEqual(
+                value, L.tree_digest(L.closure_groups(self.unit_path())[name]),
+                f"the {name} digest is not its group's tree digest")
+
+    def test_the_reason_names_the_group_that_moved(self):
+        """A recorded signature, then one group's digest rewritten."""
+        path = self.unit_path()
+        recorded = dict(L.group_digests(path))
+        signed = L.Unit(path=path, name=self.UNIT, digest="not-the-digest",
+                        state="changed",
+                        recorded={"digest": "old", "status": "passed",
+                                  "groups": recorded})
+        self.assertEqual((), L.stale_groups(signed))
+        moved = dict(recorded)
+        moved["documents"] = "0" * 64
+        shifted = L.Unit(path=path, name=self.UNIT, digest="not-the-digest",
+                         state="changed",
+                         recorded={"digest": "old", "status": "passed",
+                                   "groups": moved})
+        self.assertEqual(("documents",), L.stale_groups(shifted))
+        self.assertEqual("changed: documents", L.reason(shifted))
+
+    def test_the_reason_is_honest_about_what_it_does_not_know(self):
+        path = self.unit_path()
+        older = L.Unit(path=path, name=self.UNIT, digest="d", state="changed",
+                       recorded={"digest": "old", "status": "passed"})
+        self.assertEqual((), L.stale_groups(older))
+        self.assertIn("signed before", L.reason(older))
+        never = L.Unit(path=path, name=self.UNIT, digest="d", state="new",
+                       recorded=None)
+        self.assertEqual("never run", L.reason(never))
+        broken = L.Unit(path=path, name=self.UNIT, digest="d", state="failed",
+                        recorded={"digest": "d", "status": "failed"})
+        self.assertEqual("last run failed", L.reason(broken))
+        fine = L.Unit(path=path, name=self.UNIT, digest="d", state="signed",
+                      recorded={"digest": "d", "status": "passed"})
+        self.assertEqual("signed", L.reason(fine))
+        self.assertEqual((), L.stale_groups(fine))
+
+    def test_an_edit_is_costed_before_it_is_made(self):
+        """``units_touching`` is the closure relation, inverted."""
+        own = L.units_touching(self.unit_path())
+        self.assertIn(self.UNIT, own)
+        rule = L.units_touching(L.PACKAGE_ROOT / "signoff" / "rules.py")
+        self.assertEqual(len(rule), len(L.test_units()))
+        nowhere = L.units_touching(L.PROJECT_ROOT / "no_such_file.md")
+        self.assertEqual((), nowhere)
+
+    def test_the_impact_report_agrees_with_the_plan(self):
+        report = L.impact(L.PACKAGE_ROOT / "signoff" / "rules.py")
+        self.assertEqual(report["count"], len(L.test_units()))
+        self.assertEqual(report["of"], len(L.test_units()))
+        self.assertIsInstance(report["seconds"], Fraction)
+        self.assertGreaterEqual(report["seconds"], 0)
 
 
 if __name__ == "__main__":  # pragma: no cover

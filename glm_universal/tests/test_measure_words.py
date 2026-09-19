@@ -56,13 +56,27 @@ def report():
 
 
 class TestWhichWordsCanBeMeasured:
-    """Twelve lexicon adjectives, and the registers now measure all twelve."""
+    """Twenty-three lexicon adjectives: twelve measured, eleven not.
 
-    def test_twelve_adjectives_all_of_them_scaled(self):
+    The register measured all twelve of its adjectives until v0.6.0 grew the
+    lexicon by the language probe's content words.  Eleven of the added words
+    are adjectives that no comparison class measures -- *prime*, *periodic*,
+    *equal* and the rest -- and the view reports each one as unscaled with the
+    reason, which is the behaviour it was built for.
+    """
+
+    def test_the_adjectives_split_into_measured_and_not(self):
         words = mvw.measure_words()
-        assert len(words) == 12
+        assert len(words) == 23
         assert len(mvw.scaled_words()) == 12
-        assert len(mvw.unscaled_words()) == 0
+        assert len(mvw.unscaled_words()) == 11
+
+    def test_every_unscaled_word_says_why(self, subtests):
+        for word in mvw.unscaled_words():
+            with subtests.test(word=word.word):
+                assert word.status in ("unscaled", "unregistered_quantity")
+                assert len(word.reason) >= 20
+                assert word.position is None
 
     def test_the_three_words_the_size_and_light_classes_closed(self):
         """``large``, ``small`` and ``dark`` used to have no measurement."""
@@ -168,16 +182,18 @@ class TestTheWidening:
     """Adding the reading gains 108 pairs and loses none."""
 
     def test_the_use_set(self, audit):
-        assert audit["uses"] == 56
+        assert audit["uses"] == 67
         assert audit["measured_uses"] == 56
-        assert audit["words"] == 12
-        assert audit["unmeasured_words"] == []
+        assert audit["words"] == 23
+        assert audit["unmeasured_words"] == [
+            "molar", "atomic", "periodic", "blue", "prime", "greatest",
+            "common", "perfect", "abstract", "equal", "dimensional"]
 
     def test_the_three_views_and_what_each_resolves(self, audit):
         views = {view["name"]: view for view in audit["views"]}
-        assert views["static"]["resolution"] == 12
-        assert views["measure"]["resolution"] == 56
-        assert views["measure_only"]["resolution"] == 56
+        assert views["static"]["resolution"] == 23
+        assert views["measure"]["resolution"] == 67
+        assert views["measure_only"]["resolution"] == 57
 
     def test_the_widening_gains_and_loses_nothing(self, audit):
         boundary = audit["boundary"]
@@ -190,7 +206,7 @@ class TestTheWidening:
         agreement = audit["static_agreement"]
         assert agreement["agrees"] is True
         assert agreement["disagreements"] == []
-        assert agreement["pairs_checked"] == 56 * 55 // 2
+        assert agreement["pairs_checked"] == 67 * 66 // 2
 
     def test_the_measure_view_is_a_pair_whose_first_half_is_the_static_one(
             self, subtests):
@@ -209,33 +225,44 @@ class TestTheWidening:
                     with subtests.test(pair=(a.name, b.name)):
                         assert mvw.measure_view(a) != mvw.measure_view(b)
 
-    def test_the_shipped_data_no_longer_refutes_the_replacement(self, audit):
-        """Not because it became sound: there is no unmeasured word left."""
-        assert audit["unmeasured_words"] == []
-        assert audit["non_cumulative"]["violations"] == 0
+    def test_the_shipped_data_refutes_the_replacement_again(self, audit):
+        """The counterexample is back in the shipped data, and that is honest.
+
+        When every adjective was measured there was no unmeasured word left
+        for the replacement view to collapse, so the refutation needed a
+        constructed witness.  The eleven unmeasured adjectives the probe
+        vocabulary brought in put it back where it belongs: the shipped
+        register alone shows the replacement losing what the static view told
+        apart.  The *widening* is untouched -- it still refines, with no
+        violation.
+        """
+        assert audit["unmeasured_words"] != []
+        assert audit["non_cumulative"]["violations"] == 55
+        assert audit["boundary"]["violations"] == 0
+        assert audit["boundary"]["refines"] is True
 
     def test_the_replacement_still_fails_on_an_unmeasured_use(self):
         """One use of each word with no class: they all read alike to it."""
         witness = mvw.replacement_witness()
-        assert witness["shipped_violations"] == 0
-        assert witness["unmeasured_uses"] == 12
-        assert witness["uses"] == 56 + 12
+        assert witness["shipped_violations"] == 55
+        assert witness["unmeasured_uses"] == 23
+        assert witness["uses"] == 56 + 23
         assert witness["widening"]["violations"] == 0
         assert witness["widening"]["refines"] is True
         assert witness["replacement"]["refines"] is False
-        assert witness["replacement"]["violations"] == 12 * 11 // 2
+        assert witness["replacement"]["violations"] == 23 * 22 // 2
 
     def test_an_unmeasured_use_reads_as_nothing_at_all(self):
         unmeasured = [mvw.Use(w.word, "") for w in mvw.measure_words()]
         assert {mvw.measure_only_view(u) for u in unmeasured} == {None}
-        assert len({mvw.static_view(u) for u in unmeasured}) == 12
+        assert len({mvw.static_view(u) for u in unmeasured}) == 23
 
     def test_no_two_measured_uses_share_a_magnitude(self, audit):
         assert audit["magnitude_collisions"]["count"] == 0
 
 
 class TestTheRelationRepair:
-    """27 of 66 ``related_to`` triples convert; the other 39 give a reason.
+    """28 of 110 ``related_to`` triples convert; the other 82 give a reason.
 
     The counts moved from 15/51 when the quantity-alias table grew from two
     entries to seven: an endpoint that was being declined for the *spelling*
@@ -245,20 +272,20 @@ class TestTheRelationRepair:
     """
 
     def test_the_counts(self, repair):
-        assert repair["triples"] == 380
-        assert repair["related_to"] == 66
-        assert repair["converted"] == 27
-        assert repair["residue"] == 39
+        assert repair["triples"] == 596
+        assert repair["related_to"] == 110
+        assert repair["converted"] == 28
+        assert repair["residue"] == 82
         assert repair["converted"] + repair["residue"] == repair["related_to"]
 
     def test_by_predicate(self, repair):
         assert repair["by_predicate"] == {"same_dimension_as": 6,
-                                          "differs_by": 21}
+                                          "differs_by": 22}
         assert sum(repair["by_predicate"].values()) == repair["converted"]
 
     def test_every_residue_triple_carries_its_reason(self, repair):
         reasons = repair["residue_reasons"]
-        assert sum(reasons.values()) == repair["residue"] == 39
+        assert sum(reasons.values()) == repair["residue"] == 82
         assert all(reason and count > 0 for reason, count in reasons.items())
 
     def test_the_factor_basis_is_all_registered_quantities(self, repair,
@@ -320,7 +347,7 @@ class TestTheReport:
 
     def test_the_report_agrees_with_its_parts(self, report, audit, repair):
         assert report["scaled"] == 12
-        assert report["unscaled"] == 0
+        assert report["unscaled"] == 11
         assert report["widening"] == audit
         assert report["relation_repair"] == repair
         assert report["register"] == dict(cc.register_summary())

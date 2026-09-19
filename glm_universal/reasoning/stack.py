@@ -541,6 +541,24 @@ def relay_report() -> Dict[str, object]:
             row["hit_at_5"] > sets["tuning"]["leader"]["hit_rate"][5]
             for row in sweep_report(tune)
             if Fraction(1, 20) <= row["gate"] <= Fraction(1, 4)),
+        #  Where the gain stops being strict is a measurement, not an
+        #  assumption: these two record the band rather than asserting one.
+        #  The claim the study rests on is that the improvement is not a
+        #  knife-edge at one threshold -- it holds over a *range* of gates --
+        #  and that within the declared band the relay is never behind.
+        "gain_strict_to_gate": str(max(
+            (row["gate"] for row in sweep_report(tune)
+             if Fraction(1, 20) <= row["gate"] <= Fraction(1, 4)
+             and row["hit_at_5"] > sets["tuning"]["leader"]["hit_rate"][5]),
+            default=Fraction(0))),
+        "gain_strict_gates": sum(
+            1 for row in sweep_report(tune)
+            if Fraction(1, 20) <= row["gate"] <= Fraction(1, 4)
+            and row["hit_at_5"] > sets["tuning"]["leader"]["hit_rate"][5]),
+        "gain_never_below_across_the_gate": all(
+            row["hit_at_5"] >= sets["tuning"]["leader"]["hit_rate"][5]
+            for row in sweep_report(tune)
+            if Fraction(1, 20) <= row["gate"] <= Fraction(1, 4)),
         "gate_fires_rarely": all(
             Fraction(sets[key]["fired"], sets[key]["queries"])
             <= Fraction(1, 10) for key in keys),

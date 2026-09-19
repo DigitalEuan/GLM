@@ -34,14 +34,19 @@ which drifts fails a run rather than misleading a reader.
 
 from __future__ import annotations
 
+import json
+import tempfile
 import unittest
 from fractions import Fraction
+from pathlib import Path
 
 import pytest
 
 from glm_universal.corpus import address as ad
+from glm_universal.corpus import caches as ca
 from glm_universal.corpus import checks as ck
 from glm_universal.corpus import cost as ct
+from glm_universal.corpus import gate as gt
 from glm_universal.corpus import inventory as inv
 from glm_universal.corpus import render as rd
 from glm_universal.corpus import report as rp
@@ -414,6 +419,45 @@ class TestTheIterationCost(unittest.TestCase):
                          counted["documents"])
         self.assertEqual(len(rd.FIGURES), counted["registered"])
 
+    def test_the_blast_radius_is_what_the_study_states(self):
+        """The study's table of what one Lean edit costs, recomputed.
+
+        ``lean_blast_radius`` is kept out of ``cost_report`` because it walks
+        every unit's closure and ``cost_report`` is rendered into documents on
+        every check.  This is where it is held to the prose instead.
+        """
+        radius = ct.lean_blast_radius()
+        study = (Path(ct.__file__).resolve().parents[3]
+                 / "studies" / "ITERATION_COST_STUDY.md")
+        text = study.read_text(encoding="utf-8")
+        for row, value in (
+                ("test units in the suite", radius["units"]),
+                ("Lean files", radius["lean_files"]),
+                ("units an edit to *any* Lean file used to make stale",
+                 radius["units_naming_lean"]),
+                ("units one Lean file makes stale now, median",
+                 radius["median_single_file"]),
+                ("units the worst single Lean file makes stale",
+                 radius["worst_single_file"]),
+                ("units that read the tree with a glob, so are stale "
+                 "whenever it moves",
+                 radius["units_taking_the_whole_development"])):
+            with self.subTest(row=row):
+                self.assertIn(f"| {row} | {value} |", text)
+
+    def test_the_ledger_is_selective_about_the_lean_development(self):
+        """The property the study's table is evidence for.
+
+        A unit that does not read the whole development must not depend on
+        the whole development: that single rule is what made the ledger
+        report every unit stale after any Lean edit.
+        """
+        radius = ct.lean_blast_radius()
+        self.assertLess(radius["units_taking_the_whole_development"],
+                        radius["units_naming_lean"])
+        self.assertLessEqual(radius["median_single_file"],
+                             radius["units_naming_lean"] // 2)
+
     def test_no_reading_of_the_cost_is_a_float(self):
         def walk(value):
             self.assertNotIsInstance(value, float)
@@ -447,6 +491,129 @@ class TestTheCorpusReport(unittest.TestCase):
                 for item in value:
                     walk(item)
         walk(rp.corpus_report())
+
+
+# ===========================================================================
+# 8b.  THE GATE THAT SKIPS AN UNCHANGED CHECK
+# ===========================================================================
+
+class TestTheDocumentsGateRecord(unittest.TestCase):
+    """``--check`` may skip only a question whose inputs have not moved.
+
+    The documents check renders every generated block of every document and
+    costs about three quarters of a minute; a session runs it on picking the
+    round up, when nothing at all has changed since the last round closed.
+    The record lets it answer that case in a second.  What is pinned here is
+    the part that could be wrong: what the digest covers, that only a *pass*
+    is skippable, and that a moved input is not.
+    """
+
+    def test_the_digest_covers_the_documents_the_code_and_the_development(self):
+        closure = {path.name for path in gt._closure()}
+        for named in ("STATUS.md", "ENTRY.md", "render.py", "inventory.py",
+                      "__main__.py"):
+            self.assertIn(named, closure)
+        self.assertTrue(any(name.endswith(".lean") for name in closure))
+
+    def test_the_digest_is_a_function_of_the_tree_alone(self):
+        self.assertEqual(gt.inputs_digest(), gt.inputs_digest())
+        self.assertEqual(64, len(gt.inputs_digest()))
+
+    def test_a_pass_is_skippable_and_a_failure_is_not(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "gate.json"
+            original = gt.GATE_PATH
+            gt.GATE_PATH = path
+            try:
+                self.assertIsNone(gt.unchanged_since_pass())
+                gt.record(True)
+                self.assertIsNotNone(gt.unchanged_since_pass())
+                gt.record(False)
+                self.assertIsNone(gt.unchanged_since_pass())
+                #  A pass recorded against another tree is not this tree's.
+                gt.record(True, digest="0" * 64)
+                self.assertIsNone(gt.unchanged_since_pass())
+                gt.forget()
+                self.assertIsNone(gt.stored())
+            finally:
+                gt.GATE_PATH = original
+
+    def test_a_record_of_another_schema_is_ignored_rather_than_trusted(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "gate.json"
+            original = gt.GATE_PATH
+            gt.GATE_PATH = path
+            try:
+                path.write_text(json.dumps({
+                    "schema": gt.SCHEMA + 1, "verdict": "current",
+                    "digest": gt.inputs_digest(), "at": "then"}),
+                    encoding="utf-8")
+                self.assertIsNone(gt.stored())
+                self.assertIsNone(gt.unchanged_since_pass())
+            finally:
+                gt.GATE_PATH = original
+
+
+# ===========================================================================
+# 9.  THE MEASUREMENT CACHES
+# ===========================================================================
+
+class TestEveryStoredMeasurementIsAccountedFor(unittest.TestCase):
+    """The census of study caches: total, cheap, and reachable.
+
+    Each of these caches is a set of figures too expensive to take while
+    rendering, kept beside the digest of the sources it was taken from. The
+    discipline is sound on its own -- a stale cache refuses rather than
+    answers -- but until the census existed a stale one was found by whatever
+    happened to read it, which in the worst case was a release run twenty
+    minutes in. What is pinned here is that the census *finds* them all and
+    that each one names the command that re-takes it.
+    """
+
+    def test_a_cache_is_recognised_by_its_shape_not_by_a_list(self):
+        found = set(ca.cached_modules())
+        self.assertIn("query_escalation", found)
+        self.assertIn("blockers", found)
+        for name in found:
+            source = (ca.REASONING / f"{name}.py").read_text(encoding="utf-8")
+            self.assertIn("def module_digest(", source)
+            self.assertIn("def current(", source)
+
+    def test_every_cache_names_the_command_that_re_takes_it(self):
+        census = ca.cache_census()
+        self.assertEqual((), census["without_a_command"])
+        commands = ca.commands_by_module()
+        for name in ca.cached_modules():
+            self.assertIn(name, commands)
+
+    def test_the_commands_are_sub_commands_the_tool_actually_has(self):
+        from glm_universal import tools
+
+        parser = tools._parser()
+        actions = [action for action in parser._actions
+                   if hasattr(action, "choices") and action.choices]
+        available = set()
+        for action in actions:
+            available.update(action.choices)
+        for command in ca.commands_by_module().values():
+            self.assertIn(command, available)
+
+    def test_the_census_adds_up(self):
+        census = ca.cache_census()
+        self.assertEqual(census["caches"], len(ca.cached_modules()))
+        self.assertEqual(census["caches"],
+                         census["fresh"] + len(census["stale"]))
+        self.assertEqual(census["holds"],
+                         not census["stale"] and not census["without_a_command"])
+
+    def test_a_stale_cache_is_described_with_its_command(self):
+        rows = ({"module": "example", "fresh": False, "command": "example",
+                 "retake": "PYTHONPATH=. python3 -m glm_universal.tools "
+                           "example --write"},)
+        lines = ca.describe({"rows": rows, "without_a_command": ()})
+        self.assertEqual(1, len(lines))
+        self.assertIn("example is stale", lines[0])
+        self.assertIn("--write", lines[0])
 
 
 if __name__ == "__main__":  # pragma: no cover

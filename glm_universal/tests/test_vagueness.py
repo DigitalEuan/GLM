@@ -1,6 +1,8 @@
 """Tests for the standing rule that decides a vague ``related_to`` triple.
 
-Two earlier rounds took the 66 vague triples the lexicon holds down to nothing
+Two earlier rounds took the vague triples the lexicon holds -- 66 then, 110
+since v0.6.0 grew the lexicon by the language probe's content words -- down to
+nothing
 waiting on a lookup: ``measure_view.relation_repair`` converts the ones the
 physics register decides, and ``data_objects/denotation.py`` decides the rest
 *by hand*.  What stayed open was the next triple -- every addition brought the
@@ -46,13 +48,13 @@ class TestEveryTripleIsRoutedExactlyOnce:
 
     def test_the_triples_are_the_lexicon_s_own(self):
         triples = vgn.related_to_triples()
-        assert len(triples) == 66
+        assert len(triples) == 110
         assert len(set(triples)) == len(triples)
 
     def test_every_triple_gets_a_route(self, report):
         routing = report["routing"]
         assert routing["every_triple_routed"] is True
-        assert len(routing["rows"]) == routing["triples"] == 66
+        assert len(routing["rows"]) == routing["triples"] == 110
 
     def test_every_route_named_is_one_of_the_four(self, report):
         for row in report["routing"]["rows"]:
@@ -60,15 +62,15 @@ class TestEveryTripleIsRoutedExactlyOnce:
 
     def test_the_counts_partition_the_triples(self, report):
         counts = report["routing"]["counts"]
-        assert sum(counts.values()) == 66
+        assert sum(counts.values()) == 110
         assert counts["dimensional"] + counts["conjugate"] + \
             counts["proposed"] == report["routing"]["decided_without_a_person"]
         assert counts["referred"] == report["routing"]["referred"]
 
     def test_the_measured_split(self, report):
         counts = report["routing"]["counts"]
-        assert counts == {"dimensional": 27, "conjugate": 1,
-                          "proposed": 6, "referred": 32}
+        assert counts == {"dimensional": 28, "conjugate": 1,
+                          "proposed": 6, "referred": 75}
 
     def test_most_of_the_hand_work_is_still_needed_and_that_is_stated(
             self, report):
@@ -90,12 +92,22 @@ class TestEveryTripleIsRoutedExactlyOnce:
 class TestTheProposerGate:
     """A rule is admitted for agreeing with every hand decision it fires on."""
 
-    def test_four_rules_are_tried(self, report):
-        assert report["proposer"]["rules_tried"] == 4
-        assert len(vgn.PROPOSER_RULES) == 4
+    def test_five_rules_are_tried(self, report):
+        assert report["proposer"]["rules_tried"] == 5
+        assert len(vgn.PROPOSER_RULES) == 5
 
     def test_one_rule_is_admitted(self, report):
-        assert report["proposer"]["admitted"] == ("verb_is_a_process",)
+        """The admitted rule is the stricter one, and it was not always.
+
+        ``verb_is_a_process`` was admitted while every verb the register had
+        decided was a doing.  v0.6.0 added ``belong`` -- a verb that holds
+        rather than happens, decided ``abstraction`` by hand -- and the gate
+        refused the rule on that one disagreement.  The replacement asks the
+        lexicon for more than the part of speech: a verb whose active/stative
+        primitive is at least 1/2.  It abstains on ``belong`` and ``mean``
+        and agrees everywhere it fires.
+        """
+        assert report["proposer"]["admitted"] == ("active_verb_is_a_process",)
 
     def test_an_admitted_rule_has_no_disagreement(self, report):
         for row in report["proposer"]["rules"]:
@@ -118,17 +130,20 @@ class TestTheProposerGate:
     def test_the_refusals_are_the_measured_ones(self, report):
         refused = {row["rule"]: row for row in report["proposer"]["rules"]
                    if not row["admitted"]}
-        assert set(refused) == {"nominalisation_of_a_verb",
+        assert set(refused) == {"verb_is_a_process",
+                                "nominalisation_of_a_verb",
                                 "abstract_noun_is_an_abstraction",
                                 "mass_noun_is_a_carrier"}
 
     def test_a_majority_would_not_have_been_enough(self, report):
-        # mass_noun_is_a_carrier agrees on 5 of 7 -- a clear majority, and
-        # still refused.  This is the gate doing work rather than describing
-        # an outcome it would have reached anyway.
+        # verb_is_a_process agrees on 26 of the 27 verbs it fires on -- an
+        # overwhelming majority, and still refused, on the single stative
+        # verb the probe vocabulary brought in.  This is the gate doing work
+        # rather than describing an outcome it would have reached anyway.
         row = next(r for r in report["proposer"]["rules"]
-                   if r["rule"] == "mass_noun_is_a_carrier")
+                   if r["rule"] == "verb_is_a_process")
         assert row["agreed"] * 2 > row["fired_on"]
+        assert row["agreed"] == row["fired_on"] - 1
         assert row["admitted"] is False
 
     def test_the_admitted_rule_never_contradicts_the_hand_register(self):
@@ -142,7 +157,7 @@ class TestTheProposerGate:
 
     def test_the_proposer_decides_some_of_the_hand_work(self, report):
         proposer = report["proposer"]
-        assert proposer["decided_by_rule"] == 10
+        assert proposer["decided_by_rule"] == 25
         assert proposer["decided_by_rule"] + proposer["still_by_hand"] == \
             proposer["decided_names"]
 
@@ -195,7 +210,7 @@ class TestTheConjugateRoute:
         conj = report["conjugate"]
         assert conj["converted_count"] + \
             conj["placed_in_different_rows_count"] + \
-            conj["unplaced_count"] == conj["triples"] == 66
+            conj["unplaced_count"] == conj["triples"] == 110
 
 
 class TestAReferralCarriesItsEvidence:

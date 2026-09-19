@@ -1350,6 +1350,68 @@ for _absent in _spec.refuses:
 '''
 
 
+def _body_field(args) -> str:
+    """Re-read one field of one row -- or the fields a row answers to.
+
+    The script rebuilds the surface from the declared tables rather than
+    from the session, so the answer is re-taken from the register itself and
+    the refusals are re-witnessed: a field the row does not hold, and a row
+    no table holds, both have to refuse for the script to pass.
+    """
+    row = str(args.get("row", ""))
+    name = str(args.get("field", ""))
+    listing = bool(args.get("list", False))
+    if listing:
+        return f'''# -- recompute -------------------------------------------------------------
+
+from glm_universal.runtime import fields as fl
+
+_surface = fl.surface()
+_held = _surface.fields({row!r})
+
+observed = {{
+    "row": _held.row,
+    "tables": ", ".join(_held.tables),
+    "fields": ", ".join(_held.names),
+    "count": str(len(_held.names)),
+}}
+
+# A row no declared table holds is refused rather than answered emptily.
+try:
+    _surface.fields("no_such_row_anywhere")
+    raise AssertionError("an unknown row was not refused")
+except fl.FieldError:
+    pass
+'''
+    return f'''# -- recompute -------------------------------------------------------------
+
+from glm_universal.runtime import fields as fl
+
+_surface = fl.surface()
+_found = _surface.field({name!r}, {row!r})
+
+observed = {{
+    "value": _found.rendered,
+    "field": _found.field,
+    "row": _found.row,
+    "table": _found.table,
+    "table_kind": _found.table_kind,
+    "derived": ("yes" if _found.derived else "no"),
+}}
+
+# The rendering is exact: the rational is carried as n/d, and a decimal is
+# written beside it only when the denominator is a product of twos and fives.
+assert _found.rendered == fl.render_value(_found.value)
+
+# A field the row does not hold is refused with what it does hold.
+try:
+    _surface.field("no_such_field_anywhere", {row!r})
+    raise AssertionError("an unknown field was not refused")
+except fl.FieldError:
+    pass
+'''
+
+
 def _body_report_language(args) -> str:
     """Recompute the question descriptions and the parser comparison."""
     return '''# -- recompute -------------------------------------------------------------
@@ -3339,6 +3401,8 @@ TEMPLATES = {
     # the one generic path, and the regeneration test.
     "derive": _body_derive,
     "report_recipe": _body_report_recipe,
+    # v1.18.0: the field surface -- one named field of one named row.
+    "field": _body_field,
     # v1.12.0: the surface language driven off the same kind of
     # description -- the question shape made an object.
     "report_language": _body_report_language,

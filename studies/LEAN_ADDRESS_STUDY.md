@@ -98,17 +98,17 @@ not written down here; it is emitted:
 <!-- generated: lean-corpus -->
 | kind | count |
 |---|---|
-| abbrev | 44 |
-| def | 842 |
-| example | 10 |
-| inductive | 22 |
+| abbrev | 45 |
+| def | 869 |
+| example | 18 |
+| inductive | 23 |
 | instance | 27 |
 | lemma | 112 |
-| structure | 41 |
-| theorem | 2,151 |
-| **total** | **3,249** |
+| structure | 43 |
+| theorem | 2,246 |
+| **total** | **3,383** |
 
-3,249 declarations across 113 files, the largest being `Gen3.lean` with 98.
+3,383 declarations across 119 files, the largest being `Gen3.lean` with 98.
 <!-- end generated -->
 
 The two `example` rows are `Denotation.lean`'s anonymous check that the physics
@@ -194,11 +194,11 @@ declarations in source order rather than asserting either:
 <!-- generated: lean-scale -->
 | scale | read back exactly | moved by the decoder | worst residual | verdict |
 |---|---|---|---|---|
-| 4 | 31 / 60 | 29 | — | **lossy** |
+| 4 | 30 / 60 | 30 | — | **lossy** |
 | 6 | 60 / 60 | 60 | 2 | lossless, non-degenerate |
 | 8 | 60 / 60 | 0 | 0 | **degenerate** |
 | **9** | **60 / 60** | **60** | **2** | **lossless, non-degenerate** |
-| 12 | 60 / 60 | 29 | 4 | lossless, partly degenerate |
+| 12 | 60 / 60 | 30 | 4 | lossless, partly degenerate |
 | 16 | 60 / 60 | 0 | 0 | **degenerate** |
 
 On the first 60 declarations in source order, decoding being the expensive step.  The chosen scale is 9.
@@ -241,11 +241,11 @@ below half a scale unit in every coordinate.
 <!-- generated: lean-readback -->
 |  | measured |
 |---|---|
-| declarations checked | 3,249 |
-| read back exactly | **3,249 / 3,249** (rate 1) |
-| coordinates checked | 77,976 |
+| declarations checked | 3,383 |
+| read back exactly | **3,383 / 3,383** (rate 1) |
+| coordinates checked | 81,192 |
 | coordinate errors | **0** |
-| moved by the decoder | 3,249 / 3,249 |
+| moved by the decoder | 3,383 / 3,383 |
 | worst observed residual | **3**, at `GLM.DeepHoleLadder.Reading.cumulative_ge_right` |
 | half a scale step | `9/2` |
 | covering radius | 4 |
@@ -268,9 +268,9 @@ declaration" is, at this point, a statement about the feature map alone.
 <!-- generated: lean-injectivity -->
 | scheme | distinct addresses | distinct feature vectors | classes | declarations conflated | quantisation adds conflation? |
 |---|---|---|---|---|---|
-| `feature` | 2,883 / 3,249 | 2,883 | 252 | 618 | no |
-| `hash_control` | **3,249 / 3,249** | 2,883 | 0 | 0 | — |
-| `shuffled` | 2,883 / 3,249 | 2,883 | 252 | 618 | no |
+| `feature` | 3,002 / 3,383 | 3,002 | 263 | 644 | no |
+| `hash_control` | **3,383 / 3,383** | 3,002 | 0 | 0 | — |
+| `shuffled` | 3,002 / 3,383 | 3,002 | 263 | 644 | no |
 <!-- end generated -->
 
 Two things to read off this table.
@@ -294,21 +294,23 @@ the sense that a reader shown only the 24 counts would also fail to tell the
 members apart:
 
 <!-- generated: lean-classes -->
-252 classes: 196 pairs, 29 triples, 15 classes of 4, 4 classes of 5, 6 classes of 6, 1 class of 7, 1 class of 16.
+263 classes: 207 pairs, 27 triples, 15 classes of 4, 6 classes of 5, 5 classes of 6, 2 classes of 7, 1 class of 15.
 
 The widest, written out, because the point they make can only be read from the names:
 
 ```
-16  GLM.Calibration.dEnergy, GLM.Calibration.dLength, GLM.Calibration.dTime,
-    GLM.Conjugate.energyDim, GLM.DimensionCarrier.Dim,
-    GLM.DimensionCarrier.energyDim, GLM.DimensionCarrier.mc4Shift,
-    GLM.Foundations.Dim, GLM.Foundations.energyDim,
-    GLM.Foundations.mc4Shift, GLM.Lightspeed.dEnergy,
-    GLM.Lightspeed.dLength, GLM.Lightspeed.dMass, GLM.Lightspeed.dSpeed,
-    GLM.Lightspeed.dTime, GLM.VOA.vac
+15  GLM.Calibration.dEnergy, GLM.Calibration.dLength, GLM.Calibration.dTime,
+    GLM.DimensionCarrier.Dim, GLM.DimensionCarrier.energyDim,
+    GLM.DimensionCarrier.mc4Shift, GLM.Foundations.Dim,
+    GLM.Foundations.energyDim, GLM.Foundations.mc4Shift,
+    GLM.Lightspeed.dEnergy, GLM.Lightspeed.dLength, GLM.Lightspeed.dMass,
+    GLM.Lightspeed.dSpeed, GLM.Lightspeed.dTime, GLM.VOA.vac
 7   GLM.Calibration.NA_pos, GLM.Calibration.cSI_pos,
     GLM.Calibration.hSI_pos, GLM.Lightspeed.NA_pos, GLM.Lightspeed.cSI_pos,
     GLM.Lightspeed.hSI_pos, GLM.Lightspeed.molarPlanck_pos
+7   GLM.Conjugate.energyDim, GLM.DimensionCarrier.mc4Dim,
+    GLM.Foundations.mc4Dim, GLM.Gen2.energy, GLM.GolayHex.w2,
+    GLM.Heisenberg.V, GLM.Semantics.energyDim
 6   GLM.Admission.ledger_refusals, GLM.Completion.ledger_coverage,
     GLM.Gen3.dimensionless_counts, GLM.GrayJump.d2_1000033_1000034,
     GLM.LatticeShortcut.d2_1000033_1000034,
@@ -318,8 +320,6 @@ The widest, written out, because the point they make can only be read from the n
 6   GLM.Calibration.cellDuration_bounds, GLM.Calibration.tick_bounds,
     GLM.Calibration.workEnergy_bounds, GLM.Lightspeed.cellDuration_bounds,
     GLM.Lightspeed.tick_bounds, GLM.Lightspeed.workEnergy_bounds
-6   GLM.DimensionCarrier.mc4Dim, GLM.Foundations.mc4Dim, GLM.Gen2.energy,
-    GLM.GolayHex.w2, GLM.Heisenberg.V, GLM.Semantics.energyDim
 ```
 <!-- end generated -->
 
@@ -366,27 +366,27 @@ The third table is on *all* pairs, not just nearest ones.
 <!-- generated: lean-neighbours -->
 | scheme | nearest shares a file | rate | mean tie size |
 |---|---|---|---|
-| `feature` | **643 / 3,249** | ≈ **19.79 %** | 1.66 |
-| `hash_control` | 32 / 3,249 | ≈ 0.98 % | 1.00 |
-| `shuffled` | 32 / 3,249 | ≈ 0.98 % | 1.66 |
-| *chance* | — | ≈ 1.15 % | — |
+| `feature` | **672 / 3,383** | ≈ **19.86 %** | 1.67 |
+| `hash_control` | 33 / 3,383 | ≈ 0.98 % | 1.00 |
+| `shuffled` | 35 / 3,383 | ≈ 1.03 % | 1.67 |
+| *chance* | — | ≈ 1.09 % | — |
 
 | scheme | nearest is cited, either way | rate |
 |---|---|---|
-| `feature` | **117 / 3,249** | ≈ **3.60 %** |
-| `hash_control` | 6 / 3,249 | ≈ 0.18 % |
-| `shuffled` | 6 / 3,249 | ≈ 0.18 % |
-| *chance* | — | ≈ 0.19 % |
+| `feature` | **120 / 3,383** | ≈ **3.55 %** |
+| `hash_control` | 6 / 3,383 | ≈ 0.18 % |
+| `shuffled` | 3 / 3,383 | ≈ 0.09 % |
+| *chance* | — | ≈ 0.18 % |
 
 | scheme | mean d² within a file | mean d² across files | ratio |
 |---|---|---|---|
-| `feature` | 5,815.1 | 6,700.5 | **0.868** |
-| `hash_control` | 54,462.2 | 54,308.8 | 1.003 |
-| `shuffled` | 6,679.7 | 6,690.5 | 0.998 |
+| `feature` | 5,805.3 | 6,717.1 | **0.864** |
+| `hash_control` | 54,429.2 | 54,272.3 | 1.003 |
+| `shuffled` | 6,706.7 | 6,707.2 | 1.000 |
 
-Against closed-form chance the feature encoding runs 17.2× on the file test and 19.0× on the citation test, from an encoding that is never shown a file name.
+Against closed-form chance the feature encoding runs 18.2× on the file test and 19.3× on the citation test, from an encoding that is never shown a file name.
 
-Over 60,648 same-file pairs and 5,215,728 cross-file pairs.  The feature encoding beats the hash control: yes; beats the seeded reshuffle: yes; beats closed-form chance: yes.
+Over 62,406 same-file pairs and 5,658,247 cross-file pairs.  The feature encoding beats the hash control: yes; beats the seeded reshuffle: yes; beats closed-form chance: yes.
 <!-- end generated -->
 
 The two controls do exactly what they are there for.
@@ -426,6 +426,40 @@ nearest-by-address is a weak retrieval signal, useful for "show me results
 shaped like this one" and not for "find the lemma I need". Second, the file
 test is a proxy — declarations in one file *are* usually about one thing, but
 the encoding is being credited for a correlation, not for understanding.
+
+**How the three tables are computed, and why they are no longer quadratic.**
+Both measurements above are over pairs, and on a corpus of this size the
+straightforward loops were the slowest thing the system did: answering
+`report lean` took about 203 seconds, of which 69 went on the all-pairs means
+and 133 on the nearest-neighbour search, and the evaluation's per-query ceiling
+of 300 seconds was close enough that a busy machine crossed it. Neither loop
+needs to be run.
+
+* The all-pairs means are a closed form. For any finite set of points,
+  `sum over i<j of |x_i - x_j|^2  =  n * sum_i |x_i|^2 - |sum_i x_i|^2` —
+  Lagrange's identity, every term an integer. The same-file total is that
+  identity applied file by file, the cross-file total is the difference, and
+  the whole third table costs one pass over the declarations instead of one
+  over their 5,720,653 pairs.
+* The nearest-neighbour search is pruned rather than rearranged, because
+  *which* declaration is nearest has no closed form. Two lower bounds do the
+  work, both exact: the addresses are held in order of their most spread-out
+  coordinate, so a scan outward from a declaration stops in a direction as soon
+  as the gap in that coordinate alone exceeds the best distance found; and
+  before the 24-coordinate distance is computed, the next three most spread-out
+  coordinates bound it from below. A bound can only discard a candidate that
+  the full distance would have discarded, so the minimum and the full set of
+  ties are the ones brute force reports. Declarations that share an address are
+  each other's nearest neighbours at distance zero, so the search runs over the
+  3,002 distinct addresses and reads the collision classes off directly.
+
+`report lean` now answers in about 77 seconds, and every number in the three
+tables above is unchanged — which is the point of preferring an identity and an
+exact bound to a tolerance. `test_lean_address.py` checks both routines
+against brute force rather than against their previous output:
+`nearest_points` against `nearest_points_exhaustive` on corpus addresses under
+all three schemes, on a tie by construction, and on repeated points, and the
+identity against the pairwise loop.
 
 ---
 

@@ -261,19 +261,19 @@ The escalation study (`studies/ESCALATION_STUDY.md`) tests the layer stack on th
 | Mathematics | 22 |
 | Harmonics | 28 |
 | Lexicon | 95 |
-| **Total** | **1,040** |
+| **Total** | **1,094** |
 
 Results:
 
 | Layer | Resolves | Loses | Largest Class |
 |---|---|---|---|
-| Substrate | 415 / 1,040 | 625 | 142 |
-| Integer | 544 / 1,040 | 496 | 118 |
-| Rational | 757 / 1,040 | 283 | 78 |
-| Griess | 757 / 1,040 | 283 | 78 |
-| Universal | 757 / 1,040 | 283 | 78 |
+| Substrate | 469 / 1,094 | 625 | 142 |
+| Integer | 598 / 1,094 | 496 | 118 |
+| Rational | 811 / 1,094 | 283 | 78 |
+| Griess | 811 / 1,094 | 283 | 78 |
+| Universal | 811 / 1,094 | 283 | 78 |
 
-The ceiling is 757 distinct carriers under 1,040 named entries. The 283 unreachable entries are almost entirely in physics — 78 are dimensionless ratios (albedo, absorptance, etc.) that share identical 24-coordinate encodings because the register carries no coordinate for *provenance*. The escalation mechanism has nothing left to offer here; a seventh coordinate, not a sixth layer, is what would help.
+The ceiling is 811 distinct carriers under 1,094 named entries. The 283 unreachable entries are almost entirely in physics — 78 are dimensionless ratios (albedo, absorptance, etc.) that share identical 24-coordinate encodings because the register carries no coordinate for *provenance*. The escalation mechanism has nothing left to offer here; a seventh coordinate, not a sixth layer, is what would help.
 
 ### 4.6 The Dyadic Tower: An Infinite Ladder
 
@@ -1129,7 +1129,7 @@ But the gap between "the substrate has structure that correlates with physical r
 | ANALOGY_LAYER_STUDY.md | A : B :: C : D query resolution |
 | DENOTATION_STUDY.md | What undimensioned names denote |
 | ECONOMICS_STUDY.md | The economic register |
-| ESCALATION_STUDY.md | Layer stack on 1,040 carriers |
+| ESCALATION_STUDY.md | Layer stack on 1,094 carriers |
 | GEOMETRIC_AMBIGUITY_STUDY.md | Six-fold Golay tie as computation |
 | GLM_COMPANION_STUDIES_AUDIT.md | Testing companion preprints |
 | GLM_STUDY_CATALOG_AUDIT.md | Testing empirical findings |

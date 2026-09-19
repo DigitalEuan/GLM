@@ -6,7 +6,7 @@
 
 **Verdict.** Yes: take the names away and the text search and the identifier address book fall to chance while the structural address holds.
 
-**Deciding figure.** At k = 5 over 813 queries the text search falls from 710 hits to 84 and the identifier address book from 388 to 48 — chance is 48 — while the structural address holds 171 of its 232.
+**Deciding figure.** At k = 5 over 838 queries the text search falls from 714 hits to 73 and the identifier address book from 411 to 44 — chance is 49 — while the structural address holds 169 of its 238.
 
 **Recomputed by.** `glm_universal.reasoning.anonymous.anonymous_report`
 
@@ -20,7 +20,7 @@ beaten decisively by a plain lexical overlap of the statement text.
 [`STACK_RELAY_STUDY.md`](STACK_RELAY_STUDY.md) then found the arrangement in
 which the address still earns its place — gated on the text layer's own
 confidence, the geometry *carries* the queries the text layer cannot read — and
-was honest about the size of it: 16 queries out of 1,626, mostly constants and
+was honest about the size of it: 14 queries out of 1,676, mostly constants and
 calibration lemmas whose identifiers say very little. The question that round
 left, in its own words, was whether the carry set is a **residue** or a
 **class**:
@@ -75,7 +75,7 @@ whose third column re-derives every figure below in a fresh interpreter.
 
 ## 1. What the renaming does to each faculty
 
-The same 813 queries, twice: once as the statement is written, once with every
+The same 838 queries, twice: once as the statement is written, once with every
 identifier outside the declared vocabulary replaced. Nothing else changes — the
 corpus, the relevance ground truth, the depth each faculty is read to and the
 window it is scored at are all the relay study's.
@@ -83,20 +83,20 @@ window it is scored at are all the relay study's.
 <!-- generated: anonymous-faculties -->
 | faculty | hit@5, names kept | hit@5, names replaced |
 |---|---|---|
-| text — exact overlap of the identifiers | 710 (87.3 %) | 84 (10.3 %) |
-| lexical — the identifier address book | 388 (47.7 %) | 48 (5.9 %) |
-| **address — the structural address book** | 232 (28.5 %) | 171 (21.0 %) |
-| name — substring search over the names | 254 (31.2 %) | 17 (2.1 %) |
-| digest — a control that knows nothing | 51 (6.3 %) | 61 (7.5 %) |
-| random — a seeded permutation | 39 (4.8 %) | 39 (4.8 %) |
+| text — exact overlap of the identifiers | 722 (85.3 %) | 73 (8.6 %) |
+| lexical — the identifier address book | 417 (49.3 %) | 44 (5.2 %) |
+| **address — the structural address book** | 236 (27.9 %) | 161 (19.0 %) |
+| name — substring search over the names | 267 (31.6 %) | 17 (2.0 %) |
+| digest — a control that knows nothing | 57 (6.7 %) | 41 (4.8 %) |
+| random — a seeded permutation | 34 (4.0 %) | 34 (4.0 %) |
 
-813 queries over a corpus of 3249 declarations; chance at k = 5 is 5.9 %.  The text search collapses: yes; the identifier address book collapses with it: yes; the structural address holds: yes; and it leads every other faculty in this register: yes.
+846 queries over a corpus of 3383 declarations; chance at k = 5 is 5.7 %.  The text search collapses: yes; the identifier address book collapses with it: yes; the structural address holds: yes; and it leads every other faculty in this register: yes.
 <!-- end generated -->
 
 In numbers, and as a sentence rather than a table: take the names away and the
-text search falls from 710 hits at k = 5 to 84 over the 813 queries; the
-identifier address book falls from 388 to 48, which is exactly the 48 hits
-chance gives at that depth; and the structural address holds 171 of its 232.
+text search falls from 714 hits at k = 5 to 73 over the 838 queries; the
+identifier address book falls from 411 to 44, at the 49 hits chance gives at
+that depth; and the structural address holds 169 of its 238.
 Yes, then, to the question at the head of this document — every faculty that
 reads identifiers falls to chance, and the structural one does not.
 
@@ -138,8 +138,8 @@ query.
 <!-- generated: anonymous-invariance -->
 | reading | queries | what it means |
 |---|---|---|
-| queries whose syntax coordinates are untouched | 780 | 95.9 % of 813 |
-| queries where a type-word coordinate moves | 33 | the declaration's own name spells `Nat`, `Int`, `Rat`, `Set` or `Decidable`, and the shipped map counts those words wherever they occur |
+| queries whose syntax coordinates are untouched | 815 | 96.3 % of 846 |
+| queries where a type-word coordinate moves | 31 | the declaration's own name spells `Nat`, `Int`, `Rat`, `Set` or `Decidable`, and the shipped map counts those words wherever they occur |
 | queries where any other syntax coordinate moves | 0 | none, which is `GLM.Anonymous.features_anonymise` holding of the code |
 
 The declared vocabulary a query keeps is 39 words.  Placeholders fresh against the corpus: yes.
@@ -153,8 +153,8 @@ including inside an identifier. So a declaration named
 `proton_relErr_bounds` contributes to the rationals-and-reals coordinate
 through the `Rat` inside `relErr`, and a renaming takes that contribution away.
 The structural map is therefore not perfectly name-blind, and the exact extent
-of the leak is now a measured number instead of an assumption: it touches 33 of
-813 queries — the 780 others keep every syntax coordinate exactly — and moves
+of the leak is now a measured number instead of an assumption: it touches 30 of
+838 queries — the 808 others keep every syntax coordinate exactly — and moves
 only those six coordinates, never a logical, numeric, bracket-depth or length
 coordinate.
 
@@ -168,8 +168,8 @@ told that this register exists.
 <!-- generated: anonymous-relay -->
 | reading | queries | gate fires on | text alone, hit@5 | the relay, hit@5 |
 |---|---|---|---|---|
-| names kept | 813 | 24 | 710 (87.3 %) | **715 (87.9 %)** |
-| names replaced | 813 | 538 | 84 (10.3 %) | **128 (15.7 %)** |
+| names kept | 846 | 32 | 722 (85.3 %) | **726 (85.8 %)** |
+| names replaced | 846 | 562 | 73 (8.6 %) | **120 (14.2 %)** |
 
 The gate is 1/10, the one the relay study already carries, not re-tuned for this register.  It hands over on most of the register: yes; and the relay beats the text leader here: yes.
 <!-- end generated -->

@@ -33,6 +33,18 @@ What is counted
     How many figures inside sentences are emitted rather than typed, and in how
     many documents -- the hand-reconciliation this round retired.
 
+``lean_blast_radius``
+    How much of the suite one edit to one Lean file makes stale.  The
+    sign-off ledger is only worth having if it is *selective*, and it was
+    not: a module that merely mentioned one ``.lean`` file in its prose
+    pulled the whole development into its closure, so any Lean edit made
+    almost every unit stale.  This counts what a single file now touches.
+    It is deliberately not part of :func:`cost_report`, which is rendered
+    into documents on every check: taking it walks every unit's closure, and
+    a check that reports the cost of checking should not be the expensive
+    part of the check.  ``tests/test_corpus.py`` is where it is held to what
+    the study says.
+
 Nothing here is a float, nothing here writes, and nothing here decodes: the
 "from nothing" figure is the number of *distinct* vectors, which is counted
 rather than paid for.
@@ -51,6 +63,7 @@ __all__ = [
     "address_book_cost",
     "planner_cost",
     "figure_cost",
+    "lean_blast_radius",
     "cost_report",
 ]
 
@@ -146,6 +159,47 @@ def figure_cost() -> Dict[str, object]:
         "registered": len(rd.FIGURES),
         "in_the_corpus": markers,
         "documents": documents,
+    }
+
+
+@memo
+def lean_blast_radius() -> Dict[str, object]:
+    """What one edit to one Lean file costs, in test units made stale.
+
+    ``units`` is the suite; ``units_naming_lean`` is how many of them name a
+    Lean file at all, which is exactly how many an edit to *any* Lean file
+    used to make stale, because a single name pulled in the whole
+    development.  ``worst_single_file`` and ``median_single_file`` are what
+    one file makes stale now, and ``units_taking_the_whole_development`` are
+    the units that name a ``*.lean`` glob -- they read the tree, so they are
+    stale whenever any of it moves, and that is not a defect.
+    """
+    from ..signoff import ledger as L
+
+    units = sorted(L.TESTS_DIR.glob("test_*.py"))
+    per_file: Dict[str, int] = {}
+    naming = 0
+    whole = 0
+    development = {path.name for path in L.lean_sources()
+                   if path.suffix == ".lean"}
+    for unit in units:
+        names = {path.name for path in L.unit_closure(unit)
+                 if path.suffix == ".lean"}
+        if names:
+            naming += 1
+        if names >= development:
+            whole += 1
+        for name in names:
+            per_file[name] = per_file.get(name, 0) + 1
+    counts = sorted(per_file.values())
+    return {
+        "units": len(units),
+        "lean_files": len(development),
+        "units_naming_lean": naming,
+        "units_taking_the_whole_development": whole,
+        "worst_single_file": counts[-1] if counts else 0,
+        "median_single_file": counts[len(counts) // 2] if counts else 0,
+        "files_named_by_some_unit": len(per_file),
     }
 
 

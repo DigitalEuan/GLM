@@ -13,31 +13,10 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-> ### Positioning — read this before starting a round
->
-> **We are not claiming that the lattice generates the universe.** The claim is
-> narrower, and it is testable: there is an *exact* substrate — the Golay code,
-> the Leech lattice and the arithmetic on them, integer and `Fraction` exact
-> throughout (D7) — and reality maps onto it with unusual fidelity, measured
-> against a control every time it is asserted.
->
-> The **Geometric Language Machine** is the experimental implementation of that
-> mapping. Can language, mathematics and program text be mapped onto the Leech
-> lattice using the Golay code and the other systems built here? Can the GLM
-> reason with what that mapping gives it? Can it be generative, and solve
-> problems, and return results that are real, accurate and checkable?
->
-> Some of what the substrate holds is hidden by the layer it is read at. Every
-> carrier here is a **projection at a stated resolution** — the 24-bit word, the
-> syndrome, the MOG cell, the Leech point, the shell — so a correspondence that
-> is invisible at one layer can be exact one layer up. **Check a claim from
-> several layers and resolutions before calling it absent.**
-> [`studies/COMBINER_STUDY.md`](studies/COMBINER_STUDY.md) and
-> [`studies/INFORMATION_LOSS_STUDY.md`](studies/INFORMATION_LOSS_STUDY.md)
-> measure what each step down actually discards.
->
-> The full note, with what follows from it in practice, is the Positioning
-> section of [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md).
+> **Positioning.** Before starting a round, read the Positioning section of
+> [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md): what is claimed, what is
+> not, and why an absence at one layer is not a refutation. It is stated once,
+> there, and every document in this repository is written under it.
 
 This document does not describe the machine. It reports what happened when the
 machine was run.
@@ -48,7 +27,7 @@ Four instruments were used, and all four can be re-run on demand:
 cd overlay
 PYTHONPATH=. python3 -m glm_universal.capabilities                    # 33 probes
 PYTHONPATH=. python3 -m glm_universal.benchmarks                      # 5 suites
-PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8             # 149 CLI cases
+PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8             # 157 CLI cases
 PYTHONPATH=. python3 -m pytest glm_universal/tests -q                 # the test suite
 ```
 
@@ -66,9 +45,9 @@ by hand twice: the counts are recomputed into
 |---|---|---|
 | capability probes | where the library stops, asked as user questions | **33 probes: 20 hold, 13 break, 0 errored, 0 surprises** |
 | benchmark suites | solver functions against curated and exhaustive task sets | **2,389 / 2,390 tasks across 5 suites; every suite beat its declared baseline** |
-| end-to-end CLI evaluation | the CLI, driven the way a user drives it | **149 cases: 148 passed** — 132 answered correctly, 16 refused as expected, 0 unexpected refusals, **0 confidently wrong**, 0 errored |
-| test suite | the package's own regression net | **<!--figure:suite-->3,695 tests across 90 of the 91 test files, 14,131 subtests, outside the document check<!--/figure-->**, zero failures |
-| Lean development | the machine-checked layer | **113 Lean files, `lake build` clean, no `sorry`** |
+| end-to-end CLI evaluation | the CLI, driven the way a user drives it | **157 cases: 157 passed** — 138 answered correctly, 19 refused as expected, 0 unexpected refusals, **0 confidently wrong**, 0 errored |
+| test suite | the package's own regression net | **<!--figure:suite-->3,924 tests across 97 of the 98 test files, 15,326 subtests, outside the document check<!--/figure-->**, zero failures |
+| Lean development | the machine-checked layer | **<!--figure:lean-files-->119 Lean files<!--/figure-->, `lake build` clean, no `sorry`** |
 
 A break in the probe report is not a failure — it is a located boundary, and
 each one names the exact place it stops. A *confidently wrong* answer in the
@@ -80,10 +59,10 @@ honest refusal is scored `+1`. There are now none.
 ## 2. The end-to-end CLI evaluation
 
 This is the instrument that measures what a user gets. It lives in
-`overlay/glm_universal/evaluation/`. Each of its 149 cases starts `GLM.py` in a
+`overlay/glm_universal/evaluation/`. Each of its 157 cases starts `GLM.py` in a
 **fresh interpreter** — one subprocess per question, no shared session, no warm
 caches — and scores the `ANSWER` or `UNSOLVED` line the process prints. The
-question set covers **all 21 query kinds** the runtime recognises and every one of its
+question set covers **all <!--figure:query-kinds-->22 query kinds<!--/figure-->** the runtime recognises and every one of its
 report subjects; the coverage is checked against the runtime's own tables by
 a test, so a new kind or subject cannot be added without a case.
 
@@ -325,13 +304,45 @@ missing or wrong triple rather than to an opaque nearest-neighbour search.
   when a name is in no register, so `coherence PbCl2` and
   `cluster PbCl2, NaCl, H2O` are answered rather than refused.
 * The machine refuses well. All 16 refusal cases were refused, and there were
-  **zero** unexpected refusals across all 149 cases — including the four the
+  **zero** unexpected refusals across all 157 cases — including the four the
   `measure` query is asked at its own boundary, where
   `GLM.Info.boundary_empty_of_unmeasured` says there is nothing to answer with.
 
-**Demonstrably not working.** No case. Every refusal in the set is now a
-`boundary` — a theorem or a deliberate commitment — and the last `gap` case,
-`coherence PbCl2`, was closed by building the carrier from the formula.
+**Demonstrably not working.** No case *in the CLI evaluation set*: every
+refusal there is now a `boundary` — a theorem or a deliberate commitment — and
+the last `gap` case, `coherence PbCl2`, was closed by building the carrier from
+the formula. That sentence used to stand alone, and it should not: the
+evaluation set is built from the query kinds the runtime recognises, so it
+cannot show what happens to a question phrased outside them. Two measurements
+taken since do show it, and both are failures rather than boundaries.
+
+* **The pre-registered natural-language probe fails its own declared mark.**
+  **<!--figure:probe-questions-->20<!--/figure-->** questions over natural
+  language, mathematics, physics, chemistry and program text, with the scoring
+  and a pass mark of **<!--figure:probe-pass-mark-->10<!--/figure-->** correct
+  declared before the run: the result is
+  **<!--figure:probe-correct-->2<!--/figure-->** correct,
+  **<!--figure:probe-wrong-->1<!--/figure-->** wrong and
+  **<!--figure:probe-refused-->17<!--/figure-->** refused. The refusals are
+  honest — the system declines rather than inventing — but the faculty being
+  measured is not there.
+  [`studies/BLOCKERS_STUDY.md`](studies/BLOCKERS_STUDY.md) names each blocker,
+  the measurement that demonstrates it and the smallest experiment that would
+  remove it.
+* **The program-text classification answers wrongly rather than refusing —
+  unless a second reading has to agree.** Read at one layer it answers
+  **<!--figure:opesc-program-wrong-->13<!--/figure-->** of
+  **<!--figure:opesc-program-queries-->576<!--/figure-->** queries wrongly,
+  which is a loss of the refusal property and is reported as a failure in
+  [`studies/OPERATION_ESCALATION_STUDY.md`](studies/OPERATION_ESCALATION_STUDY.md)
+  rather than as a footnote to the gains beside it. Requiring a second reading
+  at another layer to agree removes all thirteen and refuses 137 queries the
+  single reading answered correctly: the adopted guard answers
+  **<!--figure:secondread-program-correct-->366<!--/figure-->** with
+  **<!--figure:secondread-program-wrong-->0<!--/figure-->** wrong, and the trade
+  is measured in
+  [`studies/SECOND_READING_STUDY.md`](studies/SECOND_READING_STUDY.md) rather
+  than assumed.
 
 **Untouched.** The list below is the one kept in `archive/MASTER_PLAN_ARCHIVE.md`
 §7.9, with each entry's current state beside it rather than as it stood when

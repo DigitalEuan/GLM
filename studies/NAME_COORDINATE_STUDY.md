@@ -32,12 +32,12 @@ checks it key by key (`VERIFIED True`).
 
 [`ESCALATION_STUDY.md`](ESCALATION_STUDY.md) ran the five-layer stack on the
 machine's own data — one carrier per named object of every shipped register,
-1,040 in all — and found a hard stop:
+1,094 in all — and found a hard stop:
 
 | | |
 |---|---|
-| named entries | 1,040 |
-| distinct carriers | 757 |
+| named entries | 1,094 |
+| distinct carriers | 811 |
 | entries sharing a carrier with another | **283** |
 | collision classes | 104 |
 | classes crossing a register boundary | 0 |
@@ -90,7 +90,7 @@ Read an entry as the pair `(carrier, code)` with the exact code:
 
 | | before | after |
 |---|---|---|
-| entries resolved | 757 | **1,040** |
+| entries resolved | 811 | **1,094** |
 | unreachable | 283 | **0** |
 | recovered | — | **283** |
 
@@ -98,12 +98,12 @@ and from the *coarsest* layer in the stack, not the finest:
 
 | | entries resolved |
 |---|---|
-| 24-bit substrate alone | 415 |
-| 24-bit substrate with the name beside it | **1,040** |
+| 24-bit substrate alone | 469 |
+| 24-bit substrate with the name beside it | **1,094** |
 
 Neither number is a discovery. `GLM.Info.namedResolution_of_injective` proves
 that an injective coordinate resolves every entry of a register whatever layer
-it sits on, so 1,040 was forced before it was computed. Its worth is that it
+it sits on, so 1,094 was forced before it was computed. Its worth is that it
 fixes what the coordinate *is*: an **address**, in the sense of directive D3,
 and not a measurement. Nothing about any quantity's meaning has been added.
 

@@ -5836,7 +5836,7 @@
   "reproduces": true
  },
  "same_mechanism": true,
- "source_digest": "dce7c4c0c81efdb71c64768798b498cc4f743f881aca648b9aeb782cbc7ba702",
+ "source_digest": "2962ca534ecbc30ca27fbbf9d1559f742eeecff9548007c3e591e8cbbf816dc2",
  "spread": {
   "closest_pair": [
    "E_6^4",

@@ -51,10 +51,10 @@ geometric books answer.  `address_is_the_only_reader` states the pair of facts
 the register turns on — the structural reading is unchanged and the overlap is
 zero — as one theorem.
 
-The measured half is in `studies/ANONYMOUS_REGISTER_STUDY.md`: over 813 queries
-the text faculty falls from 710 hits at `k = 5` to 84 and the identifier
-address book from 388 to 48, which is exactly the 48 that chance gives, while
-the structural address keeps 171 of its 232 and leads every other faculty in
+The measured half is in `studies/ANONYMOUS_REGISTER_STUDY.md`: over 826 queries
+the text faculty falls from 710 hits at `k = 5` to 67 and the identifier
+address book from 395 to 44, either side of the 48 that chance gives, while
+the structural address keeps 164 of its 236 and leads every other faculty in
 the register by more than a factor of two.
 -/
 import Mathlib

@@ -1,0 +1,1108 @@
+{
+ "contract": "answer only when the rung's cell is non-empty and every carrier in it carries the same label; otherwise refuse and try the next rung. A query the whole ladder refuses is refused, never guessed.",
+ "equation": {
+  "best_rung": "Z",
+  "best_rung_score": {
+   "correct": 96,
+   "queries": 192,
+   "refused": 96,
+   "wrong": 0
+  },
+  "cases": 48,
+  "contract": "every operand must land in a cell carrying a single exponent vector; if any one does not, the whole check is refused",
+  "control_label_prior": {
+   "correct": 96,
+   "queries": 192,
+   "refused": 0,
+   "wrong": 96
+  },
+  "control_substrate_removed": {
+   "correct": 12,
+   "queries": 192,
+   "refused": 168,
+   "wrong": 12
+  },
+  "derivation": "the seven integer additions and the comparison are done by this module over the vectors the reading recovered; the register is consulted only to score the answer",
+  "escalation": {
+   "correct": 136,
+   "queries": 192,
+   "refused": 56,
+   "wrong": 0
+  },
+  "false_cases": 24,
+  "gain_over_best_rung": 40,
+  "gain_over_control": 124,
+  "gain_over_prior": 40,
+  "ladder": [
+   "8C",
+   "8A",
+   "4C",
+   "4A",
+   "2C",
+   "2A",
+   "C",
+   "A",
+   "2D",
+   "A/2",
+   "D",
+   "Z"
+  ],
+  "matches_oracle": true,
+  "operation": "equation",
+  "oracle": 136,
+  "per_rung": {
+   "2A": {
+    "correct": 0,
+    "queries": 192,
+    "refused": 192,
+    "wrong": 0
+   },
+   "2C": {
+    "correct": 0,
+    "queries": 192,
+    "refused": 192,
+    "wrong": 0
+   },
+   "2D": {
+    "correct": 80,
+    "queries": 192,
+    "refused": 112,
+    "wrong": 0
+   },
+   "4A": {
+    "correct": 0,
+    "queries": 192,
+    "refused": 192,
+    "wrong": 0
+   },
+   "4C": {
+    "correct": 0,
+    "queries": 192,
+    "refused": 192,
+    "wrong": 0
+   },
+   "8A": {
+    "correct": 0,
+    "queries": 192,
+    "refused": 192,
+    "wrong": 0
+   },
+   "8C": {
+    "correct": 0,
+    "queries": 192,
+    "refused": 192,
+    "wrong": 0
+   },
+   "A": {
+    "correct": 0,
+    "queries": 192,
+    "refused": 192,
+    "wrong": 0
+   },
+   "A/2": {
+    "correct": 59,
+    "queries": 192,
+    "refused": 133,
+    "wrong": 0
+   },
+   "C": {
+    "correct": 0,
+    "queries": 192,
+    "refused": 192,
+    "wrong": 0
+   },
+   "D": {
+    "correct": 58,
+    "queries": 192,
+    "refused": 134,
+    "wrong": 0
+   },
+   "Z": {
+    "correct": 96,
+    "queries": 192,
+    "refused": 96,
+    "wrong": 0
+   }
+  },
+  "prior_label": "False",
+  "queries": 192,
+  "question": "given three perturbed physics carriers and the claim dim(a) = dim(b) + dim(c), decide whether it holds",
+  "safe": true,
+  "title": "equation checking: does dim(a) = dim(b) + dim(c)?",
+  "true_cases": 24,
+  "verdict": "escalation helps",
+  "what_a_rung_adds": "every operand has to be read unambiguously before the arithmetic can be done, so the check refuses three times as often as a single reading and gains three times as much from a rung that reads a query the one below cannot"
+ },
+ "helped": [
+  "register",
+  "dimension",
+  "chemistry",
+  "physics",
+  "harmony",
+  "program",
+  "equation"
+ ],
+ "ladder": [
+  "8C",
+  "8A",
+  "4C",
+  "4A",
+  "2C",
+  "2A",
+  "C",
+  "A",
+  "2D",
+  "A/2",
+  "D",
+  "Z"
+ ],
+ "limits": "Each operation is measured on its own register's sample and on the four declared perturbations, so the figures are about this sample and this sweep. A wrong answer is reported separately from a refusal and is never folded into an accuracy.",
+ "no_gain": [],
+ "operations": [
+  {
+   "best_rung": "4A",
+   "best_rung_score": {
+    "correct": 415,
+    "queries": 568,
+    "refused": 153,
+    "wrong": 0
+   },
+   "carriers": 142,
+   "contract": "answer only when the rung's cell is non-empty and every carrier in it carries the same label; otherwise refuse and try the next rung. A query the whole ladder refuses is refused, never guessed.",
+   "control_label_prior": {
+    "correct": 96,
+    "queries": 568,
+    "refused": 0,
+    "wrong": 472
+   },
+   "control_substrate_removed": {
+    "correct": 43,
+    "queries": 568,
+    "refused": 336,
+    "wrong": 189
+   },
+   "escalation": {
+    "correct": 541,
+    "queries": 568,
+    "refused": 27,
+    "wrong": 0
+   },
+   "gain_over_best_rung": 126,
+   "gain_over_control": 498,
+   "gain_over_prior": 445,
+   "labels": 6,
+   "ladder": [
+    "8C",
+    "8A",
+    "4C",
+    "4A",
+    "2C",
+    "2A",
+    "C",
+    "A",
+    "2D",
+    "A/2",
+    "D",
+    "Z"
+   ],
+   "matches_oracle": true,
+   "norms": [
+    2048,
+    1024,
+    512,
+    256,
+    128,
+    64,
+    32,
+    16,
+    8,
+    4,
+    2,
+    1
+   ],
+   "operation": "register",
+   "oracle": 541,
+   "per_rung": {
+    "2A": {
+     "correct": 367,
+     "queries": 568,
+     "refused": 201,
+     "wrong": 0
+    },
+    "2C": {
+     "correct": 355,
+     "queries": 568,
+     "refused": 213,
+     "wrong": 0
+    },
+    "2D": {
+     "correct": 145,
+     "queries": 568,
+     "refused": 423,
+     "wrong": 0
+    },
+    "4A": {
+     "correct": 415,
+     "queries": 568,
+     "refused": 153,
+     "wrong": 0
+    },
+    "4C": {
+     "correct": 388,
+     "queries": 568,
+     "refused": 180,
+     "wrong": 0
+    },
+    "8A": {
+     "correct": 354,
+     "queries": 568,
+     "refused": 214,
+     "wrong": 0
+    },
+    "8C": {
+     "correct": 362,
+     "queries": 568,
+     "refused": 206,
+     "wrong": 0
+    },
+    "A": {
+     "correct": 242,
+     "queries": 568,
+     "refused": 326,
+     "wrong": 0
+    },
+    "A/2": {
+     "correct": 154,
+     "queries": 568,
+     "refused": 414,
+     "wrong": 0
+    },
+    "C": {
+     "correct": 252,
+     "queries": 568,
+     "refused": 316,
+     "wrong": 0
+    },
+    "D": {
+     "correct": 191,
+     "queries": 568,
+     "refused": 377,
+     "wrong": 0
+    },
+    "Z": {
+     "correct": 218,
+     "queries": 568,
+     "refused": 350,
+     "wrong": 0
+    }
+   },
+   "prior_label": "'chemistry'",
+   "queries": 568,
+   "question": "given a perturbed carrier, name the register it belongs to -- physics, chemistry, molecules, mathematics, harmonics or lexicon",
+   "resolving_rung": {
+    "2C": 14,
+    "2D": 9,
+    "4A": 38,
+    "4C": 59,
+    "8A": 16,
+    "8C": 362,
+    "A/2": 6,
+    "C": 16,
+    "D": 19,
+    "None": 27,
+    "Z": 2
+   },
+   "rungs_disagree": 0,
+   "safe": true,
+   "title": "meaning: which register is this?",
+   "verdict": "escalation helps",
+   "what_a_rung_adds": "a coarser rung tolerates a larger perturbation, and a register is a coarse property, so a coarse rung should answer it where a fine rung has already lost the address"
+  },
+  {
+   "best_rung": "Z",
+   "best_rung_score": {
+    "correct": 48,
+    "queries": 96,
+    "refused": 48,
+    "wrong": 0
+   },
+   "carriers": 24,
+   "contract": "answer only when the rung's cell is non-empty and every carrier in it carries the same label; otherwise refuse and try the next rung. A query the whole ladder refuses is refused, never guessed.",
+   "control_label_prior": {
+    "correct": 32,
+    "queries": 96,
+    "refused": 0,
+    "wrong": 64
+   },
+   "control_substrate_removed": {
+    "correct": 10,
+    "queries": 96,
+    "refused": 44,
+    "wrong": 42
+   },
+   "escalation": {
+    "correct": 80,
+    "queries": 96,
+    "refused": 16,
+    "wrong": 0
+   },
+   "gain_over_best_rung": 32,
+   "gain_over_control": 70,
+   "gain_over_prior": 48,
+   "labels": 16,
+   "ladder": [
+    "8C",
+    "8A",
+    "4C",
+    "4A",
+    "2C",
+    "2A",
+    "C",
+    "A",
+    "2D",
+    "A/2",
+    "D",
+    "Z"
+   ],
+   "matches_oracle": true,
+   "norms": [
+    2048,
+    1024,
+    512,
+    256,
+    128,
+    64,
+    32,
+    16,
+    8,
+    4,
+    2,
+    1
+   ],
+   "operation": "dimension",
+   "oracle": 80,
+   "per_rung": {
+    "2A": {
+     "correct": 15,
+     "queries": 96,
+     "refused": 81,
+     "wrong": 0
+    },
+    "2C": {
+     "correct": 19,
+     "queries": 96,
+     "refused": 77,
+     "wrong": 0
+    },
+    "2D": {
+     "correct": 44,
+     "queries": 96,
+     "refused": 52,
+     "wrong": 0
+    },
+    "4A": {
+     "correct": 8,
+     "queries": 96,
+     "refused": 88,
+     "wrong": 0
+    },
+    "4C": {
+     "correct": 12,
+     "queries": 96,
+     "refused": 84,
+     "wrong": 0
+    },
+    "8A": {
+     "correct": 0,
+     "queries": 96,
+     "refused": 96,
+     "wrong": 0
+    },
+    "8C": {
+     "correct": 0,
+     "queries": 96,
+     "refused": 96,
+     "wrong": 0
+    },
+    "A": {
+     "correct": 31,
+     "queries": 96,
+     "refused": 65,
+     "wrong": 0
+    },
+    "A/2": {
+     "correct": 32,
+     "queries": 96,
+     "refused": 64,
+     "wrong": 0
+    },
+    "C": {
+     "correct": 29,
+     "queries": 96,
+     "refused": 67,
+     "wrong": 0
+    },
+    "D": {
+     "correct": 34,
+     "queries": 96,
+     "refused": 62,
+     "wrong": 0
+    },
+    "Z": {
+     "correct": 48,
+     "queries": 96,
+     "refused": 48,
+     "wrong": 0
+    }
+   },
+   "prior_label": "(0, 0, 0, 0, 0, 0, 0)",
+   "queries": 96,
+   "question": "given a perturbed physics carrier, recover its seven SI dimension exponents exactly",
+   "resolving_rung": {
+    "2A": 4,
+    "2C": 11,
+    "2D": 23,
+    "4A": 4,
+    "4C": 12,
+    "A": 4,
+    "A/2": 3,
+    "C": 8,
+    "D": 8,
+    "None": 16,
+    "Z": 3
+   },
+   "rungs_disagree": 0,
+   "safe": true,
+   "title": "dimensional reasoning: what are the SI exponents?",
+   "verdict": "escalation helps",
+   "what_a_rung_adds": "the answer is a seven-integer vector, so the label prior is nearly useless and a rung has to separate the query from everything of another dimension"
+  },
+  {
+   "best_rung": "8A",
+   "best_rung_score": {
+    "correct": 94,
+    "queries": 96,
+    "refused": 2,
+    "wrong": 0
+   },
+   "carriers": 24,
+   "contract": "answer only when the rung's cell is non-empty and every carrier in it carries the same label; otherwise refuse and try the next rung. A query the whole ladder refuses is refused, never guessed.",
+   "control_label_prior": {
+    "correct": 24,
+    "queries": 96,
+    "refused": 0,
+    "wrong": 72
+   },
+   "control_substrate_removed": {
+    "correct": 2,
+    "queries": 96,
+    "refused": 70,
+    "wrong": 24
+   },
+   "escalation": {
+    "correct": 96,
+    "queries": 96,
+    "refused": 0,
+    "wrong": 0
+   },
+   "gain_over_best_rung": 2,
+   "gain_over_control": 94,
+   "gain_over_prior": 72,
+   "labels": 8,
+   "ladder": [
+    "8C",
+    "8A",
+    "4C",
+    "4A",
+    "2C",
+    "2A",
+    "C",
+    "A",
+    "2D",
+    "A/2",
+    "D",
+    "Z"
+   ],
+   "matches_oracle": true,
+   "norms": [
+    2048,
+    1024,
+    512,
+    256,
+    128,
+    64,
+    32,
+    16,
+    8,
+    4,
+    2,
+    1
+   ],
+   "operation": "chemistry",
+   "oracle": 96,
+   "per_rung": {
+    "2A": {
+     "correct": 67,
+     "queries": 96,
+     "refused": 29,
+     "wrong": 0
+    },
+    "2C": {
+     "correct": 68,
+     "queries": 96,
+     "refused": 28,
+     "wrong": 0
+    },
+    "2D": {
+     "correct": 14,
+     "queries": 96,
+     "refused": 82,
+     "wrong": 0
+    },
+    "4A": {
+     "correct": 76,
+     "queries": 96,
+     "refused": 20,
+     "wrong": 0
+    },
+    "4C": {
+     "correct": 87,
+     "queries": 96,
+     "refused": 9,
+     "wrong": 0
+    },
+    "8A": {
+     "correct": 94,
+     "queries": 96,
+     "refused": 2,
+     "wrong": 0
+    },
+    "8C": {
+     "correct": 79,
+     "queries": 96,
+     "refused": 17,
+     "wrong": 0
+    },
+    "A": {
+     "correct": 40,
+     "queries": 96,
+     "refused": 56,
+     "wrong": 0
+    },
+    "A/2": {
+     "correct": 25,
+     "queries": 96,
+     "refused": 71,
+     "wrong": 0
+    },
+    "C": {
+     "correct": 46,
+     "queries": 96,
+     "refused": 50,
+     "wrong": 0
+    },
+    "D": {
+     "correct": 24,
+     "queries": 96,
+     "refused": 72,
+     "wrong": 0
+    },
+    "Z": {
+     "correct": 24,
+     "queries": 96,
+     "refused": 72,
+     "wrong": 0
+    }
+   },
+   "prior_label": "'Nonmetal'",
+   "queries": 96,
+   "question": "given a perturbed element carrier, name its block -- nonmetal, alkali metal, halogen and so on",
+   "resolving_rung": {
+    "4C": 1,
+    "8A": 16,
+    "8C": 79
+   },
+   "rungs_disagree": 0,
+   "safe": true,
+   "title": "the chemistry register: which block of the table?",
+   "verdict": "escalation helps",
+   "what_a_rung_adds": "elements of one block are near each other in the coordinates the register uses, so a rung coarse enough to conflate two elements of one block can still answer the block"
+  },
+  {
+   "best_rung": "Z",
+   "best_rung_score": {
+    "correct": 48,
+    "queries": 96,
+    "refused": 48,
+    "wrong": 0
+   },
+   "carriers": 24,
+   "contract": "answer only when the rung's cell is non-empty and every carrier in it carries the same label; otherwise refuse and try the next rung. A query the whole ladder refuses is refused, never guessed.",
+   "control_label_prior": {
+    "correct": 24,
+    "queries": 96,
+    "refused": 0,
+    "wrong": 72
+   },
+   "control_substrate_removed": {
+    "correct": 7,
+    "queries": 96,
+    "refused": 44,
+    "wrong": 45
+   },
+   "escalation": {
+    "correct": 82,
+    "queries": 96,
+    "refused": 14,
+    "wrong": 0
+   },
+   "gain_over_best_rung": 34,
+   "gain_over_control": 75,
+   "gain_over_prior": 58,
+   "labels": 14,
+   "ladder": [
+    "8C",
+    "8A",
+    "4C",
+    "4A",
+    "2C",
+    "2A",
+    "C",
+    "A",
+    "2D",
+    "A/2",
+    "D",
+    "Z"
+   ],
+   "matches_oracle": true,
+   "norms": [
+    2048,
+    1024,
+    512,
+    256,
+    128,
+    64,
+    32,
+    16,
+    8,
+    4,
+    2,
+    1
+   ],
+   "operation": "physics",
+   "oracle": 82,
+   "per_rung": {
+    "2A": {
+     "correct": 15,
+     "queries": 96,
+     "refused": 81,
+     "wrong": 0
+    },
+    "2C": {
+     "correct": 27,
+     "queries": 96,
+     "refused": 69,
+     "wrong": 0
+    },
+    "2D": {
+     "correct": 40,
+     "queries": 96,
+     "refused": 56,
+     "wrong": 0
+    },
+    "4A": {
+     "correct": 8,
+     "queries": 96,
+     "refused": 88,
+     "wrong": 0
+    },
+    "4C": {
+     "correct": 12,
+     "queries": 96,
+     "refused": 84,
+     "wrong": 0
+    },
+    "8A": {
+     "correct": 0,
+     "queries": 96,
+     "refused": 96,
+     "wrong": 0
+    },
+    "8C": {
+     "correct": 0,
+     "queries": 96,
+     "refused": 96,
+     "wrong": 0
+    },
+    "A": {
+     "correct": 35,
+     "queries": 96,
+     "refused": 61,
+     "wrong": 0
+    },
+    "A/2": {
+     "correct": 35,
+     "queries": 96,
+     "refused": 61,
+     "wrong": 0
+    },
+    "C": {
+     "correct": 33,
+     "queries": 96,
+     "refused": 63,
+     "wrong": 0
+    },
+    "D": {
+     "correct": 34,
+     "queries": 96,
+     "refused": 62,
+     "wrong": 0
+    },
+    "Z": {
+     "correct": 48,
+     "queries": 96,
+     "refused": 48,
+     "wrong": 0
+    }
+   },
+   "prior_label": "'acoustics'",
+   "queries": 96,
+   "question": "given a perturbed physics carrier, name the sub-domain it comes from -- kinematics, thermodynamics, and so on",
+   "resolving_rung": {
+    "2C": 19,
+    "2D": 17,
+    "4A": 4,
+    "4C": 12,
+    "A/2": 12,
+    "C": 12,
+    "D": 6,
+    "None": 14
+   },
+   "rungs_disagree": 0,
+   "safe": true,
+   "title": "the physics register: which sub-domain?",
+   "verdict": "escalation helps",
+   "what_a_rung_adds": "a sub-domain is a coarser property than an identity, so it should survive a perturbation that destroys the address"
+  },
+  {
+   "best_rung": "4A",
+   "best_rung_score": {
+    "correct": 80,
+    "queries": 96,
+    "refused": 16,
+    "wrong": 0
+   },
+   "carriers": 24,
+   "contract": "answer only when the rung's cell is non-empty and every carrier in it carries the same label; otherwise refuse and try the next rung. A query the whole ladder refuses is refused, never guessed.",
+   "control_label_prior": {
+    "correct": 40,
+    "queries": 96,
+    "refused": 0,
+    "wrong": 56
+   },
+   "control_substrate_removed": {
+    "correct": 19,
+    "queries": 96,
+    "refused": 35,
+    "wrong": 42
+   },
+   "escalation": {
+    "correct": 95,
+    "queries": 96,
+    "refused": 1,
+    "wrong": 0
+   },
+   "gain_over_best_rung": 15,
+   "gain_over_control": 76,
+   "gain_over_prior": 55,
+   "labels": 5,
+   "ladder": [
+    "8C",
+    "8A",
+    "4C",
+    "4A",
+    "2C",
+    "2A",
+    "C",
+    "A",
+    "2D",
+    "A/2",
+    "D",
+    "Z"
+   ],
+   "matches_oracle": true,
+   "norms": [
+    2048,
+    1024,
+    512,
+    256,
+    128,
+    64,
+    32,
+    16,
+    8,
+    4,
+    2,
+    1
+   ],
+   "operation": "harmony",
+   "oracle": 95,
+   "per_rung": {
+    "2A": {
+     "correct": 66,
+     "queries": 96,
+     "refused": 30,
+     "wrong": 0
+    },
+    "2C": {
+     "correct": 65,
+     "queries": 96,
+     "refused": 31,
+     "wrong": 0
+    },
+    "2D": {
+     "correct": 4,
+     "queries": 96,
+     "refused": 92,
+     "wrong": 0
+    },
+    "4A": {
+     "correct": 80,
+     "queries": 96,
+     "refused": 16,
+     "wrong": 0
+    },
+    "4C": {
+     "correct": 75,
+     "queries": 96,
+     "refused": 21,
+     "wrong": 0
+    },
+    "8A": {
+     "correct": 36,
+     "queries": 96,
+     "refused": 60,
+     "wrong": 0
+    },
+    "8C": {
+     "correct": 37,
+     "queries": 96,
+     "refused": 59,
+     "wrong": 0
+    },
+    "A": {
+     "correct": 36,
+     "queries": 96,
+     "refused": 60,
+     "wrong": 0
+    },
+    "A/2": {
+     "correct": 16,
+     "queries": 96,
+     "refused": 80,
+     "wrong": 0
+    },
+    "C": {
+     "correct": 54,
+     "queries": 96,
+     "refused": 42,
+     "wrong": 0
+    },
+    "D": {
+     "correct": 33,
+     "queries": 96,
+     "refused": 63,
+     "wrong": 0
+    },
+    "Z": {
+     "correct": 47,
+     "queries": 96,
+     "refused": 49,
+     "wrong": 0
+    }
+   },
+   "prior_label": "5",
+   "queries": 96,
+   "question": "given a perturbed interval carrier, name its prime limit",
+   "resolving_rung": {
+    "2A": 1,
+    "2C": 5,
+    "4A": 11,
+    "4C": 33,
+    "8A": 7,
+    "8C": 37,
+    "A": 1,
+    "None": 1
+   },
+   "rungs_disagree": 0,
+   "safe": true,
+   "title": "small-integer structure: what is the prime limit?",
+   "verdict": "escalation helps",
+   "what_a_rung_adds": "the prime limit is carried by a single coordinate, so this operation tests whether escalation helps an operation whose answer is nearly a projection"
+  },
+  {
+   "best_rung": "2D",
+   "best_rung_score": {
+    "correct": 344,
+    "queries": 576,
+    "refused": 232,
+    "wrong": 0
+   },
+   "carriers": 144,
+   "contract": "answer only when the rung's cell is non-empty and every carrier in it carries the same label; otherwise refuse and try the next rung. A query the whole ladder refuses is refused, never guessed.",
+   "control_label_prior": {
+    "correct": 232,
+    "queries": 576,
+    "refused": 0,
+    "wrong": 344
+   },
+   "control_substrate_removed": {
+    "correct": 54,
+    "queries": 576,
+    "refused": 346,
+    "wrong": 176
+   },
+   "escalation": {
+    "correct": 503,
+    "queries": 576,
+    "refused": 60,
+    "wrong": 13
+   },
+   "gain_over_best_rung": 159,
+   "gain_over_control": 449,
+   "gain_over_prior": 271,
+   "labels": 5,
+   "ladder": [
+    "8C",
+    "8A",
+    "4C",
+    "4A",
+    "2C",
+    "2A",
+    "C",
+    "A",
+    "2D",
+    "A/2",
+    "D",
+    "Z"
+   ],
+   "matches_oracle": false,
+   "norms": [
+    2048,
+    1024,
+    512,
+    256,
+    128,
+    64,
+    32,
+    16,
+    8,
+    4,
+    2,
+    1
+   ],
+   "operation": "program",
+   "oracle": 512,
+   "per_rung": {
+    "2A": {
+     "correct": 74,
+     "queries": 576,
+     "refused": 494,
+     "wrong": 8
+    },
+    "2C": {
+     "correct": 94,
+     "queries": 576,
+     "refused": 482,
+     "wrong": 0
+    },
+    "2D": {
+     "correct": 344,
+     "queries": 576,
+     "refused": 232,
+     "wrong": 0
+    },
+    "4A": {
+     "correct": 20,
+     "queries": 576,
+     "refused": 556,
+     "wrong": 0
+    },
+    "4C": {
+     "correct": 16,
+     "queries": 576,
+     "refused": 560,
+     "wrong": 0
+    },
+    "8A": {
+     "correct": 0,
+     "queries": 576,
+     "refused": 576,
+     "wrong": 0
+    },
+    "8C": {
+     "correct": 0,
+     "queries": 576,
+     "refused": 576,
+     "wrong": 0
+    },
+    "A": {
+     "correct": 179,
+     "queries": 576,
+     "refused": 397,
+     "wrong": 0
+    },
+    "A/2": {
+     "correct": 118,
+     "queries": 576,
+     "refused": 458,
+     "wrong": 0
+    },
+    "C": {
+     "correct": 181,
+     "queries": 576,
+     "refused": 390,
+     "wrong": 5
+    },
+    "D": {
+     "correct": 226,
+     "queries": 576,
+     "refused": 350,
+     "wrong": 0
+    },
+    "Z": {
+     "correct": 288,
+     "queries": 576,
+     "refused": 288,
+     "wrong": 0
+    }
+   },
+   "prior_label": "'Calibration.lean'",
+   "queries": 576,
+   "question": "given a perturbed feature vector of a Lean declaration, name the file it is written in",
+   "resolving_rung": {
+    "2A": 28,
+    "2C": 83,
+    "2D": 170,
+    "4A": 12,
+    "4C": 16,
+    "A": 32,
+    "A/2": 12,
+    "C": 131,
+    "D": 29,
+    "None": 60,
+    "Z": 3
+   },
+   "rungs_disagree": 9,
+   "safe": false,
+   "title": "program text: which file is this declaration from?",
+   "verdict": "escalation helps",
+   "what_a_rung_adds": "declarations of one file share structure but not coordinates, so this asks whether the ladder helps where the label is only loosely carried by the geometry"
+  }
+ ],
+ "operations_measured": 7,
+ "source_digest": "75d8abe7264c4e08d1349fad8f1d705dfa1ab782f03a28d0d148adbca6898010",
+ "unsafe": [
+  "program"
+ ]
+}

@@ -58,10 +58,12 @@ def glm():
 
 class TestLexiconRegisterIsSemantic:
 
-    def test_the_lexicon_register_has_ninety_five_concepts(self, sess):
+    def test_the_lexicon_register_has_a_hundred_and_forty_nine_concepts(
+            self, sess):
         register = sess.register("lexicon")
-        # v0.5.1 grew the lexicon from 40 → 95 concepts across 10 topics.
-        assert len(register) == 95
+        # v0.5.1 grew the lexicon from 40 → 95 concepts across 10 topics;
+        # v0.6.0 added the 54 content words of the language probe.
+        assert len(register) == 149
 
     def test_every_lexicon_carrier_uses_the_semantic_layout(self, sess):
         register = sess.register("lexicon")
@@ -209,8 +211,8 @@ class TestCLI:
         out = io.StringIO()
         assert glm.main(["--list-domains"], out=out) == 0
         text = out.getvalue()
-        # v0.5.1 grew the lexicon from 40 → 95 concepts.
-        assert "95" in text
+        # v0.5.1 grew the lexicon from 40 → 95 concepts; v0.6.0 to 149.
+        assert "149" in text
 
     def test_describe_gravity_via_the_cli(self, glm):
         import io

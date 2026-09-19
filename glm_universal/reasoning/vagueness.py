@@ -48,13 +48,21 @@ now put to four routes in order, and only the last one asks a person:
 
 What the rules are, and what they cost
 --------------------------------------
-Four proposer rules are tried and three are refused, which is the useful part
+Five proposer rules are tried and four are refused, which is the useful part
 of the measurement: ``nominalisation_of_a_verb`` would call *measurement* a
-process, ``abstract_noun_is_an_abstraction`` would call *function* one, and
-``mass_noun_is_a_carrier`` would call *reaction* one.  Each is refused on a
-named disagreement rather than on judgement.  The one that survives --
-``verb_is_a_process`` -- agrees with all ten verbs the register decided by
-hand.
+process, ``abstract_noun_is_an_abstraction`` would call *function* one,
+``mass_noun_is_a_carrier`` would call *reaction* one, and ``verb_is_a_process``
+would call *belong* one.  Each is refused on a named disagreement rather than
+on judgement.
+
+``verb_is_a_process`` is the instructive one.  It was the admitted rule while
+every verb the register had decided was a doing; widening the lexicon by the
+language probe's content words added ``belong``, a verb that holds rather than
+happens, and one disagreement is enough for this gate.  The rule that replaces
+it -- ``active_verb_is_a_process`` -- asks the lexicon for more than the part
+of speech: the active/stative primitive must be at least 1/2.  It abstains on
+``belong`` and on ``mean``, fires on 25 decided names and agrees with every
+one.
 
 Exactness
 ---------
@@ -65,6 +73,7 @@ constructed.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from fractions import Fraction
 from functools import lru_cache
 from typing import Callable, Dict, List, Optional, Tuple
 
@@ -110,6 +119,19 @@ def _primitive(name: str, axis: str) -> Optional[str]:
     primitives = obj.attributes.get("primitives") or {}
     value = primitives.get(axis)
     return None if value is None else str(value)
+
+
+def _primitive_at_least(name: str, axis: str, threshold: Fraction) -> bool:
+    """Whether a primitive the lexicon records reaches ``threshold``.
+
+    The primitives are exact rationals in the carrier, so the comparison is
+    exact too; a name the lexicon does not hold, or an axis it does not set,
+    is ``False`` rather than a guess.
+    """
+    value = _primitive(name, axis)
+    if value is None:
+        return False
+    return Fraction(value) >= threshold
 
 
 @lru_cache(maxsize=1)
@@ -172,6 +194,15 @@ PROPOSER_RULES: Tuple[ProposerRule, ...] = (
         name="verb_is_a_process", verdict="process",
         evidence="the lexicon records the name's part of speech as a verb",
         test=lambda name: _pos(name) == "verb"),
+    ProposerRule(
+        name="active_verb_is_a_process", verdict="process",
+        evidence="the lexicon records the name as a verb and puts its "
+                 "active/stative primitive at 1/2 or above, which is the "
+                 "coordinate it uses for a verb that does something rather "
+                 "than holds",
+        test=lambda name: (_pos(name) == "verb"
+                           and _primitive_at_least(name, "active_stative",
+                                                   Fraction(1, 2)))),
     ProposerRule(
         name="nominalisation_of_a_verb", verdict="process",
         evidence="the name is the -ion/-ing/-ment nominalisation of a verb "

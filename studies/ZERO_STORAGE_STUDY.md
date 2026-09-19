@@ -50,14 +50,14 @@ traces are required to be byte‑identical between runs, so every quantity in
 the table is one a second run reproduces exactly.
 
 **The same question, asked of this repository.** Of the
-**<!--figure:repo-stored-bytes-->7,789,760<!--/figure--> bytes** the overlay
-keeps on disk, **<!--figure:repo-cache-bytes-->7,769,995<!--/figure-->** are
+**<!--figure:repo-stored-bytes-->8,476,034<!--/figure--> bytes** the overlay
+keeps on disk, **<!--figure:repo-cache-bytes-->8,456,269<!--/figure-->** are
 caches of things it can recompute — the two Lean address books from the Lean
 tree, the controller addresses from the register, the 98,280‑class type‑2
 table from the lattice — each stored beside the digest of the inputs it came
 from, and only **<!--figure:repo-primary-bytes-->19,765<!--/figure--> bytes**
 are primary data the package was given.
-**<!--figure:repo-cache-share-->99.7 %<!--/figure-->** of what looks like
+**<!--figure:repo-cache-share-->99.8 %<!--/figure-->** of what looks like
 storage here is already generation with a cache in front of it. Those four
 numbers are emitted rather than typed, so the ledger below cannot age while
 the tree grows.
@@ -275,7 +275,7 @@ it can recompute, and the substrate tables it does *not* keep would be
 9,449,445 bytes against the 24,648 that regenerate them. The keeping side is
 [`ITERATION_COST_STUDY.md`](ITERATION_COST_STUDY.md), which prices exactly the
 obligations listed above: rebuilding both address books from nothing decodes
-<!--figure:rebuild-decodes-from-nothing-->7,880<!--/figure--> vectors, and
+<!--figure:rebuild-decodes-from-nothing-->8,363<!--/figure--> vectors, and
 against the stored books it decodes
 <!--figure:rebuild-decodes-now-->0<!--/figure-->, because each answer is keyed
 on the feature vector it came from rather than on the whole tree; and the
