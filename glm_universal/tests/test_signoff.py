@@ -727,6 +727,13 @@ class TestTheRecordedTotals(unittest.TestCase):
     totals could never record them.
     """
 
+    #: The counts the synthetic document check carries.  It has to be a
+    #: value no legitimate total can take, because the test below asserts
+    #: that it does not reach the totals: the suite's own file count is a
+    #: moving number, and a two-digit sentinel collided with it once the
+    #: suite passed ninety-nine counted files.
+    DOC_SENTINEL = 999_983
+
     def _book(self, *, doc_status: str) -> dict:
         units = {}
         for path in L.counted_units():
@@ -734,7 +741,8 @@ class TestTheRecordedTotals(unittest.TestCase):
                                 "tests": 2, "subtests": 3}
         for name in L.DOCUMENT_CHECKS:
             units[name] = {"status": doc_status, "mode": "full",
-                           "tests": 99, "subtests": 99}
+                           "tests": self.DOC_SENTINEL,
+                           "subtests": self.DOC_SENTINEL}
         return {"units": units}
 
     def _record(self, book: dict) -> dict:
@@ -762,7 +770,7 @@ class TestTheRecordedTotals(unittest.TestCase):
         failed = self._record(self._book(doc_status="failed"))["totals"]
         for key in ("test_files", "tests", "subtests"):
             self.assertEqual(passed[key], failed[key])
-        self.assertNotIn(99, passed.values())
+        self.assertNotIn(self.DOC_SENTINEL, passed.values())
 
     def test_a_failing_counted_unit_does_block_them(self):
         book = self._book(doc_status="passed")

@@ -147,6 +147,8 @@ first and descend into the few that bear on the task.
 [`BLOCKERS_STUDY.md`](studies/BLOCKERS_STUDY.md) ·
 [`PROBE_ORACLE_STUDY.md`](studies/PROBE_ORACLE_STUDY.md) ·
 [`FIELD_SURFACE_STUDY.md`](studies/FIELD_SURFACE_STUDY.md) ·
+[`ORDERING_STUDY.md`](studies/ORDERING_STUDY.md) ·
+[`COLUMN_EXTREMUM_STUDY.md`](studies/COLUMN_EXTREMUM_STUDY.md) ·
 [`INFORMATION_LOSS_STUDY.md`](studies/INFORMATION_LOSS_STUDY.md) ·
 [`ESCALATION_STUDY.md`](studies/ESCALATION_STUDY.md) ·
 [`CUMULATIVITY_STUDY.md`](studies/CUMULATIVITY_STUDY.md) ·
@@ -199,7 +201,8 @@ first and descend into the few that bear on the task.
 [`RETRIEVED_LEAN_STUDY.md`](studies/RETRIEVED_LEAN_STUDY.md) ·
 [`SOURCE_SALVAGE_AUDIT.md`](studies/SOURCE_SALVAGE_AUDIT.md) ·
 [`SOURCE_SALVAGE_SECOND_PASS.md`](studies/SOURCE_SALVAGE_SECOND_PASS.md) ·
-[`ARCHIVE_DEEP_DIVE_STUDY.md`](studies/ARCHIVE_DEEP_DIVE_STUDY.md)
+[`ARCHIVE_DEEP_DIVE_STUDY.md`](studies/ARCHIVE_DEEP_DIVE_STUDY.md) ·
+[`NOW_RECEIPT_STUDY.md`](studies/NOW_RECEIPT_STUDY.md)
 
 **Written up as papers.**
 [`GLM_ACADEMIC_PAPER.md`](studies/GLM_ACADEMIC_PAPER.md) ·

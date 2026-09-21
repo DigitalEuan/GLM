@@ -617,22 +617,45 @@ class DeltaSigma:
 
 
 def delta_sigma_bits(target, steps: int) -> Tuple[int, ...]:
-    """The first ``steps`` bits of the modulator chasing ``target``."""
-    return DeltaSigma(_check_exact(target, "delta_sigma_bits")).run(steps)
+    """The first ``steps`` bits of the modulator chasing ``target``.
+
+    Read off the target rather than accumulated: the ``n``-th bit is
+    ``floor((n+1)*t) - floor(n*t)``, which is ``GLM.NowReceipt.const_bit_eq_floor_diff``
+    for the exact rational loop and ``GLM.Info.dsBit_eq_floor_diff`` over the
+    reals.  :meth:`DeltaSigma.run` is the raw loop and is what the closed form
+    is pinned against, target by target, in ``tests/test_now_receipt.py``.
+    """
+    modulator = DeltaSigma(_check_exact(target, "delta_sigma_bits"))
+    numerator = modulator.target.numerator
+    denominator = modulator.target.denominator
+    bits: List[int] = []
+    previous = 0
+    for tick in range(1, max(steps, 0) + 1):
+        ones = (tick * numerator) // denominator
+        bits.append(ones - previous)
+        previous = ones
+    return tuple(bits)
 
 
 def delta_sigma_average(target, steps: int) -> Fraction:
-    """The time average after ``steps`` ticks: an exact rational ``k/steps``."""
+    """The time average after ``steps`` ticks: an exact rational ``k/steps``.
+
+    The count of ones is ``floor(steps * t)`` exactly
+    (``GLM.NowReceipt.const_count_eq_floor``), so the average is read off the
+    target in constant time instead of by running the loop; the two agree by
+    theorem and are checked to agree in ``tests/test_now_receipt.py``.
+    """
     modulator = DeltaSigma(_check_exact(target, "delta_sigma_average"))
-    modulator.run(steps)
-    return modulator.average
+    if steps <= 0:
+        raise PrecisionError("DeltaSigma.average: no ticks yet")
+    ones = (steps * modulator.target.numerator) // modulator.target.denominator
+    return Fraction(ones, steps)
 
 
 def delta_sigma_error(target, steps: int) -> Fraction:
     """``|average - target|``, exactly.  Bounded by ``1/steps``."""
-    modulator = DeltaSigma(_check_exact(target, "delta_sigma_error"))
-    modulator.run(steps)
-    return modulator.error
+    exact = _check_exact(target, "delta_sigma_error")
+    return abs(delta_sigma_average(exact, steps) - exact)
 
 
 def real_delta_sigma_average(x: ExactReal, steps: int) -> Fraction:

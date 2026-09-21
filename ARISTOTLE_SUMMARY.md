@@ -1,3 +1,16 @@
+# Summary of changes for run f0244032-c357-48f2-b14b-922706c97153
+I picked the round up where the previous session stopped and closed it. The `extremum` work (one coordinate read off every row of one declared table, folded exactly or refused) was already wired and written up; what was missing was everything a new query kind invalidates, plus the release that signs the tree. All of the following was run here, not reported.
+
+**Defects found and fixed at the root, rather than worked around.**
+- Two Lean citations in the package did not resolve: the runtime's column-3 script split `GLM.ColumnExtremum.extremum_over_present_is_not_the_extremum` across two string fragments, so it was cited truncated, and an evaluation note cited the definition `trough?` rather than a theorem. Both now cite resolvable names, and the citation check passes over the whole package.
+- A test still called a helper by its old private name (`_as_exact`), which had been made public when the extremum module began sharing it.
+
+**Measurements re-taken rather than loosened.** A new query kind moves three of the readings the tree takes of itself, and each was re-measured and its prose brought into line: the sandbox planner's fallback is now taken over **14** refusals rather than 10 — it refuses all fourteen, so its utility gate still fails and it stays unpromoted (`studies/REVERSE_CALL_PLANNER_STUDY.md` updated, including the four new refusal rows); the iteration-cost blast radius moved to 101 units / 123 Lean files / 89 / 84 (`studies/ITERATION_COST_STUDY.md`); and the query-escalation cache was re-taken over the 172-case set, which had been silently stale and was failing the end-to-end run.
+
+**Documents reconciled.** 24 query kinds, 87 reasoning modules, 101 test files, 122 Lean files and 172 CLI cases now agree everywhere the drift guard reads them; `MASTER_PLAN.md` Phase 53 gains a paragraph on what the new kind moved elsewhere and the release it earned; `WHITEBOARD.md` is returned to its empty shape with the round recorded as closed and two new lessons added; historical change-log passages were left as written, since they record what was true at the time.
+
+**The tree I am handing over.** `corpus --check --all` **current**; `signoff --verify-release` reports **101 of 101 test files and 7 of 7 instruments** signed with the exhaustive cases on; the suite sentence re-measured at **4,038 tests across 100 of the 101 test files, 15,644 subtests**, zero failures; end-to-end evaluation **172 / 172** (146 answered, 26 refused as expected, all `boundary`, 0 unexpected, 0 wrong, 0 errored); benchmarks, capability probes, figures and the three Lean instruments all green; and `lake build` completes cleanly over the 122 Lean files with **no `sorry`**, the repository and overlay copies being identical. The five `ColumnExtremum` theorems in the properties table were each checked to depend only on Lean's standard axioms and are now recorded as proved. Everything is committed.
+
 # Summary of changes for run 9f436082-4983-4b3f-ade0-52db5ff6e60b
 I picked the round up where the previous session stopped, finished it, and closed it — and kept `WHITEBOARD.md` current at every step, so the state was resumable throughout rather than written up at the end.
 

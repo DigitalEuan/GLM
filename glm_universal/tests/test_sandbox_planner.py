@@ -255,11 +255,16 @@ def test_the_safety_gate_holds_and_the_utility_gate_does_not(report):
 def test_the_fallback_is_measured_over_the_whole_evaluation_set(report):
     fallback = report["fallback"]
     assert fallback["cases"] == len(ev_cases.CASES)
-    #  Four when the reading was first taken, seven since the field surface
+    #  Four when the reading was first taken, seven once the field surface
     #  added three refusals of its own (an unknown field, an unknown row and
-    #  a value the register records as missing).  The measurement moved with
+    #  a value the register records as missing), ten once the ordering query
+    #  kind added its three (an unorderable coordinate, a row the corpus does
+    #  not hold and two rows on different scales), and fourteen since the
+    #  extremum kind added its four (a column with holes in it, a column
+    #  gathered from two tables, a column that is not ordered and a
+    #  coordinate no row of the table holds).  The measurement moved with
     #  the evaluation set; what it says did not.
-    assert fallback["planner_consulted"] == 7
+    assert fallback["planner_consulted"] == 14
     assert fallback["gained"] == ()
     assert fallback["principled_refusals_offered_to_the_planner"] == ()
     assert fallback["safety_holds"] is True
@@ -305,17 +310,18 @@ def test_the_gate_is_measured_against_a_set_the_module_did_not_choose():
 def test_the_by_product_is_two_questions_the_shipped_classifier_does_not_mark():
     """The planner marks two refusals ill formed that the shipped list misses.
 
-    Seven refusals reach the planner since the field surface added three of
-    its own; all seven stop, and the two the planner marks are the two it
-    marked when four reached it, so the by-product is the same finding over a
-    larger set.
+    Fourteen refusals reach the planner since the extremum query kind added
+    four to the ordering kind's three and the field surface's three; all
+    fourteen stop, and the two the planner marks are the two it marked when
+    four reached it, so the by-product is the same finding over a larger set
+    each time the set grows.
     """
     rows = [row for row in pl.fallback_rows() if row["planner_consulted"]]
-    assert len(rows) == 7
+    assert len(rows) == 14
     stopped = [row for row in rows
                if not row["planner_answered"]
                and row["refusal_tag"] == esl.ESCALATABLE]
-    assert len(stopped) == 7
+    assert len(stopped) == 14
     marked_by_the_planner = [row["question"] for row in stopped
                              if pl.ask(str(row["question"])).refusal_tag
                              != esl.ESCALATABLE]

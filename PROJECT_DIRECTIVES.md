@@ -7,7 +7,7 @@
 
 **Verdict.** A digest addresses integrity, never meaning.
 
-**Deciding figure.** 153 of the package's 154 non-test modules contain no float site at all.
+**Deciding figure.** 201 of the package's 203 non-test modules contain no float site at all.
 
 **Recomputed by.** `glm_universal.reasoning.directives.directives_report`
 
@@ -287,13 +287,19 @@ be a tolerance elsewhere are exact here, and quantities that would be a
 logarithm elsewhere are integer bit counts. If a computation seems to need a
 float, it needs a different formulation.
 
-**Where it stands.** 153 of the package's 154 non-test modules contain no float
-site at all. The one that does is `capabilities/probes.py`, whose
+**Where it stands.** 201 of the package's 203 non-test modules contain no float
+site at all. Two contain one. The first is `capabilities/probes.py`, whose
 `carrier_rejects_floats` probe hands `0.5` and `2.0` to four entry points of
 the substrate and requires each to raise `TypeError`: the floats are the
 adversarial input, and the result of the probe is that none of them was
 accepted. That probe is also the run-time half of the rule, since a static scan
-can only show that no float is *written*.
+can only show that no float is *written*. The second is
+`reasoning/now_float_control.py`, which runs the delta-sigma loop in floating
+point beside the exact one in order to settle a supplied study's claim that a
+float substrate cannot hold the accumulator: the float is the thing under test,
+nothing the system computes with imports the module, and
+[`studies/NOW_RECEIPT_STUDY.md`](studies/NOW_RECEIPT_STUDY.md) §5 is what it
+found.
 
 **Checked by** `glm_universal.reasoning.exactness`, `tests/test_exactness.py`. The argument this rule was written with —
 what it cost to learn, and the examples current at the time — is `D7`

@@ -56,11 +56,11 @@ fields of water                      -- the field names that row answers to
 | `carrier:molecules` | `carrier` | 51 | 6 | the attributes every carrier of the molecules register keeps |
 | `carrier:physics` | `carrier` | 726 | 7 | the attributes every carrier of the physics register keeps |
 | `carrier:spatial` | `carrier` | 28 | 7 | the attributes every carrier of the spatial register keeps |
-| `lean` | `address` | 3,383 | 5 | the Lean address book: one row per declaration of the development |
-| `python` | `code` | 3,710 | 6 | the package's own top-level functions and classes, read by an AST walk |
+| `lean` | `address` | 3,455 | 5 | the Lean address book: one row per declaration of the development |
+| `python` | `code` | 3,806 | 6 | the package's own top-level functions and classes, read by an AST walk |
 | `function` | `function` | 3 | 26 | the declared zero-argument functions whose returned mapping is addressable by key |
 
-13 tables, 8,408 rows and 50,516 addressable (row, field) pairs over 193 distinct field names.
+13 tables, 8,576 rows and 51,452 addressable (row, field) pairs over 193 distinct field names.
 <!-- end generated -->
 
 Four things about that list are deliberate.

@@ -63,6 +63,7 @@ from fractions import Fraction
 from pathlib import Path
 from typing import Dict, List, Mapping, Optional, Sequence, Tuple
 
+from . import exactness
 from ..derived import memo
 from ..substrate import golay_decode as gd
 from ..substrate import isomorphism as iso
@@ -154,6 +155,19 @@ BANNED_IMPORTS: Tuple[str, ...] = (
 )
 
 
+def declared_float_sites() -> Tuple[str, ...]:
+    """The modules D11 declares as float sites, with a warrant on each.
+
+    The list lives in :mod:`glm_universal.reasoning.exactness` and is read
+    from there rather than copied, so the audit cannot drift from the
+    inventory that publishes the warrants.  A declared site is *reported*,
+    never hidden: it is excluded from the violations the UBP claim is decided
+    on and listed separately, so a float that appears in the core without a
+    warrant still refutes the claim.
+    """
+    return tuple(sorted(rel for rel, _kinds, _why in exactness.FLOAT_SITES))
+
+
 def package_root() -> str:
     """The directory of the ``glm_universal`` package itself."""
     return str(Path(__file__).resolve().parent.parent)
@@ -227,6 +241,7 @@ def ubp_source_audit() -> Dict[str, object]:
     per_module: Dict[str, Dict[str, object]] = {}
     per_package: Dict[str, Dict[str, int]] = {}
     root = Path(package_root())
+    declared = set(declared_float_sites())
 
     for sub, path in source_files():
         scan = _scan_module(path)
@@ -235,20 +250,30 @@ def ubp_source_audit() -> Dict[str, object]:
         tally = per_package.setdefault(
             sub or "(top level)",
             {"modules": 0, "banned_imports": 0, "float_literals": 0,
-             "float_calls": 0})
+             "float_calls": 0, "declared_float_literals": 0,
+             "declared_float_calls": 0, "undeclared_float_literals": 0,
+             "undeclared_float_calls": 0})
+        literals = len(scan["float_literal_lines"])  # type: ignore[arg-type]
+        calls = len(scan["float_call_lines"])        # type: ignore[arg-type]
+        is_declared = rel in declared
         tally["modules"] += 1
         tally["banned_imports"] += len(scan["banned_imports"])  # type: ignore
-        tally["float_literals"] += len(
-            scan["float_literal_lines"])            # type: ignore[arg-type]
-        tally["float_calls"] += len(
-            scan["float_call_lines"])               # type: ignore[arg-type]
+        tally["float_literals"] += literals
+        tally["float_calls"] += calls
+        tally["declared_float_literals" if is_declared
+              else "undeclared_float_literals"] += literals
+        tally["declared_float_calls" if is_declared
+              else "undeclared_float_calls"] += calls
 
-    def _violations(names: Sequence[str]) -> List[Dict[str, object]]:
+    def _sites(names: Sequence[str], want_declared: bool
+               ) -> List[Dict[str, object]]:
         out: List[Dict[str, object]] = []
         for rel in sorted(per_module):
             parts = Path(rel).parts
             sub = parts[0] if len(parts) > 1 else "(top level)"
             if names and sub not in names:
+                continue
+            if (rel in declared) != want_declared:
                 continue
             scan = per_module[rel]
             if (scan["banned_imports"] or scan["float_literal_lines"]
@@ -261,10 +286,12 @@ def ubp_source_audit() -> Dict[str, object]:
                 })
         return out
 
-    core = _violations(CORE_PACKAGES)
+    core = _sites(CORE_PACKAGES, want_declared=False)
+    core_declared = _sites(CORE_PACKAGES, want_declared=True)
     outside_names = tuple(
         sorted(set(per_package) - set(CORE_PACKAGES)))
-    outside = _violations(outside_names)
+    outside = _sites(outside_names, want_declared=False)
+    outside_declared = _sites(outside_names, want_declared=True)
 
     core_modules = sum(per_package[p]["modules"]
                        for p in CORE_PACKAGES if p in per_package)
@@ -276,11 +303,19 @@ def ubp_source_audit() -> Dict[str, object]:
         "per_package": per_package,
         "core_violations": core,
         "core_clean": not core,
+        "declared_float_sites": list(declared_float_sites()),
+        "core_declared_sites": core_declared,
         "outside_core_violations": outside,
+        "outside_core_declared_sites": outside_declared,
         "banned_imports_checked": list(BANNED_IMPORTS),
         "reading": (
-            "the six sub-packages the discipline is claimed for construct no "
-            "float and import nothing that computes in one"
+            ("the six sub-packages the discipline is claimed for construct no "
+             "float and import nothing that computes in one"
+             if not core_declared else
+             "the six sub-packages the discipline is claimed for construct no "
+             f"float outside the {len(core_declared)} declared and warranted "
+             f"{'site' if len(core_declared) == 1 else 'sites'} they are "
+             "allowed under D11, and import nothing that computes in one")
             if not core else
             "the discipline is broken inside the core, and the modules are "
             "listed"
@@ -839,7 +874,9 @@ def blueprint_ledger(width: int = 8, rounds: int = 100
             CONFIRMED if audit["core_clean"] else REFUTED,
             f"{audit['core_modules']} modules of the six core sub-packages "
             f"construct no float and import none of "
-            f"{list(BANNED_IMPORTS)}; "
+            f"{list(BANNED_IMPORTS)}, beside "
+            f"{len(audit['core_declared_sites'])} declared and warranted "  # type: ignore[arg-type]
+            f"float site; "
             f"{len(audit['outside_core_violations'])} modules outside the "  # type: ignore[arg-type]
             f"core do, and are listed",
             None if audit["core_clean"] else
@@ -859,7 +896,8 @@ def blueprint_ledger(width: int = 8, rounds: int = 100
             or "no module outside the core constructs a float",
             "the sub-packages that measure and demonstrate the core -- "
             "benchmarks, capabilities, evaluation, examples -- and the test "
-            "suite itself do construct floats, deliberately: the probes and "
+            "suite itself do construct floats, deliberately: the probes "
+            "(a declared site) and "
             "the tests feed floats in to check that they are refused, the "
             "evaluation harness times in seconds, the benchmark harness "
             "fingerprints a run with SHA-256, and the legacy example exists "

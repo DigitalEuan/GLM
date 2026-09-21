@@ -595,6 +595,16 @@ class GeometricSession(SubstrateReports, LatticeGeometryReports,
             # it derives nothing and addresses nothing, and it makes what is
             # already held reachable.
             "field": self._solve_field,            # uses fl.FieldSurface
+            # v1.19.0: one coordinate read off two rows and ordered -- the
+            # first operation over two readings.  It refuses when the two
+            # readings are not on one scale, which is the whole reason it is
+            # an operation and not a second lookup.
+            "ordering": self._solve_ordering,      # uses cord.order
+            # v1.20.0: one coordinate read off *every* row of one table --
+            # the column, not the pair.  It refuses a column with a hole in
+            # it and a column gathered from two scales, and reports every
+            # row that attains the end rather than picking one.
+            "extremum": self._solve_extremum,      # uses cx.extremum
         }
         solver = table.get(query.kind)
         if solver is None:
@@ -3606,6 +3616,190 @@ class GeometricSession(SubstrateReports, LatticeGeometryReports,
                      "table_kind": found.table_kind,
                      "derived": found.derived, "rule": found.rule,
                      "provenance": found.provenance})
+
+
+    def _solve_ordering(self, query: Query) -> Solution:
+        """``order abstract_concrete of energy and water`` -- two readings, ordered.
+
+        The field surface answers about one row.  This is the operation over
+        two of its readings: the same coordinate is read off both rows, the
+        two readings are required to be **on one scale**, and the order is
+        then taken exactly in rationals.  A coordinate held as a key of a
+        mapping field -- which is how the lexicon register holds its ten
+        semantic primitives -- is read as a coordinate of that field, and the
+        scale records the field that contains it.
+
+        It refuses in three named ways: a reading the surface does not hold,
+        a reading that is a label rather than a quantity, and two readings on
+        different scales.  The last is the point of the operation:
+        ``GLM.CoordinateOrder.naive_order_is_not_scale_free`` exhibits a
+        rescaling that flips the comparison of two raw numbers, and
+        ``order_scale_invariant`` shows that no rescaling of a shared scale
+        can.
+        """
+        from ..reasoning import coordinate_order as cord
+        name = str(query.options.get("name", "")).strip()
+        left = str(query.options.get("left", "")).strip()
+        right = str(query.options.get("right", "")).strip()
+        if not name or not left or not right:
+            raise SolverError(
+                "ordering: name one coordinate and two rows, written "
+                "'<coordinate> of <row> and <row>' -- e.g. "
+                "'order abstract_concrete of energy and water'")
+        try:
+            result = cord.order(self.field_surface, name, left, right)
+        except cord.OrderingError as error:
+            raise SolverError(f"ordering ({error.reason}): {error}") from None
+        relation = {"lt": "below", "gt": "above", "eq": "level with"}[
+            result.verdict]
+        steps = [
+            Step("both readings are addressed, not searched for",
+                 f"Each row is resolved against the declared tables of the "
+                 f"field surface and the coordinate read off it. A "
+                 f"coordinate the row holds inside a mapping field is read "
+                 f"as a coordinate of that field, and the scale says which "
+                 f"field it came from.",
+                 f"{result.left.row}: {result.left.rendered}; "
+                 f"{result.right.row}: {result.right.rendered}"),
+            Step("the two readings are required to be on one scale",
+                 f"A scale here is the table and the field a value was read "
+                 f"under. Two numbers on different scales have no common "
+                 f"order -- a positive rescaling of one of them flips the "
+                 f"comparison, which is "
+                 f"GLM.CoordinateOrder.naive_order_is_not_scale_free -- so "
+                 f"the operation refuses rather than comparing them. On one "
+                 f"scale no rescaling can: "
+                 f"GLM.CoordinateOrder.order_scale_invariant.",
+                 f"both on {result.scale}"),
+            Step("the order is taken exactly",
+                 f"The comparison is of two rationals and the gap is their "
+                 f"exact difference. Nothing is rounded and no float is "
+                 f"constructed on this path.",
+                 f"{result.left.row} is {relation} {result.right.row}"
+                 + (f", by {abs(result.difference)}"
+                    if result.verdict != "eq" else "")),
+            Step("what this is and is not",
+                 f"One exact subtraction over two addressed readings is the "
+                 f"whole of the derivation. That the coordinate *means* what "
+                 f"its poles say is the register's declaration, not this "
+                 f"operation's finding, and the answer names the pole it "
+                 f"used when the register declares one.",
+                 f"faculty = derivation and refusal; pole = "
+                 f"{result.pole or 'none declared'}"),
+        ]
+        return Solution(
+            query=query, kind="ordering",
+            answer=result.sentence,
+            steps=tuple(steps),
+            expected={"verdict": result.verdict, "scale": result.scale,
+                      "left": result.left.row, "right": result.right.row,
+                      "difference": str(result.difference),
+                      "pole_row": result.pole_row},
+            script_spec={"template": "ordering",
+                         "args": {"field": name, "left": left,
+                                  "right": right}},
+            payload={"field": result.field, "scale": result.scale,
+                     "left": result.left.row, "right": result.right.row,
+                     "left_value": result.left.rendered,
+                     "right_value": result.right.rendered,
+                     "verdict": result.verdict,
+                     "difference": str(result.difference),
+                     "pole": result.pole, "pole_row": result.pole_row,
+                     "provenance": result.left.provenance})
+
+
+    def _solve_extremum(self, query: Query) -> Solution:
+        """``largest atomic_weight_u in element`` -- a column, folded or refused.
+
+        The ordering operation composes exactly two readings.  This one names
+        no rows at all: it reads the coordinate off **every** row of one
+        declared table and returns whichever rows attain the end.  Nothing in
+        the registers holds that answer.
+
+        It refuses in four named ways, and two of them are the point of it.
+        A column with a hole in it is refused rather than answered over the
+        rows that happen to be filled in --
+        ``GLM.ColumnExtremum.extremum_over_present_is_not_the_extremum``
+        exhibits a column where those two differ, so the second is a wrong
+        answer rather than a partial one.  A column gathered without naming a
+        table can be two columns on two scales, and the extremum of two
+        scales together is a fact about neither.  The other two restate
+        boundaries the field surface already has: no row holds the
+        coordinate, and the column holds labels rather than quantities.
+
+        Every row attaining the end is named.  A tie is a fact about the
+        register, and picking one of the tied rows would be a choice the
+        register does not make.
+        """
+        from ..reasoning import column_extremum as cx
+        name = str(query.options.get("name", "")).strip()
+        end = str(query.options.get("end", "largest")).strip()
+        table = str(query.options.get("table", "")).strip()
+        if not name:
+            raise SolverError(
+                "extremum: name one coordinate and, where the column is held "
+                "by more than one table, the table it is a column of -- "
+                "'<end> <coordinate> in <table>', e.g. "
+                "'largest atomic_weight_u in element'")
+        try:
+            result = cx.extremum(self.field_surface, name, end, table or None)
+        except cx.ExtremumError as error:
+            raise SolverError(f"extremum ({error.reason}): {error}") from None
+        winners = ", ".join(r.row for r in result.winners)
+        steps = [
+            Step("every row of the table is read, not a shortlist of them",
+                 f"The column is gathered by reading the coordinate off each "
+                 f"row of the declared table through the same field surface "
+                 f"one row would be read through. A coordinate held inside a "
+                 f"mapping field is read as a coordinate of that field, and "
+                 f"the scale records the field that contains it.",
+                 f"{result.rows} rows read on {result.scale}"),
+            Step("a hole is a refusal, and so is a second scale",
+                 f"A column with a missing reading has no extremum: the "
+                 f"extremum of the rows that are filled in is a different "
+                 f"number at a different row, which is the content of "
+                 f"GLM.ColumnExtremum.extremum_over_present_is_not_the_extremum"
+                 f", so the operation names the missing rows instead "
+                 f"of folding over the rest. A column gathered from two "
+                 f"scales is refused for the reason the ordering operation "
+                 f"refuses two readings on two scales.",
+                 f"no holes; one scale ({result.scale})"),
+            Step("the fold is exact and every winner is named",
+                 f"The values are compared as rationals and nothing is "
+                 f"rounded. Every row attaining the end is reported -- a tie "
+                 f"is reported as a tie rather than resolved, which is "
+                 f"GLM.ColumnExtremum.mem_extremum_winners_iff.",
+                 f"{result.end} = {result.rendered}, attained by {winners}"),
+            Step("what this is and is not",
+                 f"A fold over addressed readings is the whole of the "
+                 f"derivation. It is derivation rather than coverage because "
+                 f"no register holds the answer, and it is not addressing: "
+                 f"the table and the coordinate are the names the question "
+                 f"already gives.",
+                 f"faculty = derivation and refusal; "
+                 f"{'derived' if result.derived else 'stored'} column"),
+        ]
+        return Solution(
+            query=query, kind="extremum",
+            answer=result.sentence,
+            steps=tuple(steps),
+            expected={"end": result.end, "scale": result.scale,
+                      "value": str(result.value), "rows": str(result.rows),
+                      "winners": winners,
+                      "gap": "" if result.gap is None else str(result.gap)},
+            script_spec={"template": "extremum",
+                         "args": {"field": name, "end": end,
+                                  "table": table}},
+            payload={"field": result.field, "table": result.table,
+                     "scale": result.scale, "end": result.end,
+                     "value": str(result.value), "rendered": result.rendered,
+                     "winners": tuple(r.row for r in result.winners),
+                     "rows": result.rows,
+                     "runner_up": (None if result.runner_up is None
+                                   else str(result.runner_up)),
+                     "gap": None if result.gap is None else str(result.gap),
+                     "derived": result.derived,
+                     "provenance": result.winners[0].provenance})
 
 
 # Keep a module-level reference so the digit-stack import is not flagged as

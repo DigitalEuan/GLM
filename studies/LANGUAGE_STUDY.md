@@ -142,7 +142,7 @@ rather than a demonstration.
 ### Which four, and why not the other sixteen
 
 A shape is *an opening, then slots separated by literal words*. Four of the
-runtime's twenty-one answerable kinds are exactly that. The rest are not, and were
+runtime's twenty-three answerable kinds are exactly that. The rest are not, and were
 left hand-written rather than forced:
 
 | kind | how it is actually recognised |

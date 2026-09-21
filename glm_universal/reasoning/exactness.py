@@ -97,6 +97,13 @@ FLOAT_SITES: Tuple[Tuple[str, Tuple[str, ...], str], ...] = (
      "points of the substrate and requires each to raise TypeError; the "
      "floats are the adversarial input, and the result of the probe is that "
      "none of them was accepted"),
+    ("reasoning/now_float_control.py", ("float-literal",),
+     "the supplied History-Recorded-in-the-Now studies claim that a "
+     "float-based system cannot hold a delta-sigma accumulator exactly; that "
+     "claim cannot be settled without running the loop in floating point, so "
+     "this module runs it beside the exact one and reports the first tick at "
+     "which they disagree (D11).  Nothing the system computes with imports "
+     "it: only the audit in reasoning/now_receipt.py reads its result"),
 )
 
 

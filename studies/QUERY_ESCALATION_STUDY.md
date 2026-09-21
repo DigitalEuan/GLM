@@ -10,7 +10,7 @@ into an answer — without moving any answer the runtime already gives?
 
 **Verdict.** Yes, and at no cost to what the runtime already does: over the whole evaluation set no answer moves and no principled refusal is converted, while four of the declared probes are resolved above the first rung and two refusals become certified absences.
 
-**Deciding figure.** Over 149 evaluation cases, 0 answers moved and 0 principled refusals were converted; of 18 declared probes, 4 resolve above the first rung.
+**Deciding figure.** Over 172 evaluation cases, 0 answers moved and 0 principled refusals were converted; of 18 declared probes, 4 resolve above the first rung.
 
 **Recomputed by.** `glm_universal.reasoning.query_escalation.query_escalation_report`
 
@@ -20,12 +20,12 @@ into an answer — without moving any answer the runtime already gives?
 
 ## 0a. The reading in one paragraph
 
-Yes, and at no cost to what the runtime already does: over the whole evaluation set no answer moves and no principled refusal is converted, while four of the declared probes are resolved above the first rung and two refusals become certified absences. Over 149 evaluation cases, 0 answers moved and 0 principled refusals were converted; of 18 declared probes, 4 resolve above the first rung.
+Yes, and at no cost to what the runtime already does: over the whole evaluation set no answer moves and no principled refusal is converted, while four of the declared probes are resolved above the first rung and two refusals become certified absences. Over 172 evaluation cases, 0 answers moved and 0 principled refusals were converted; of 18 declared probes, 4 resolve above the first rung.
 
 The same reading, recomputed rather than written:
 
 <!-- generated: queryesc-tier -->
-**Both gates hold.**  Over the whole evaluation set of 157 cases, all 140 the runtime answers directly come back identical through the loop, at the first rung and for the first rung's cost — 0 answers moved and 0 principled refusals were converted into answers.  Of the 19 declared refusals, **14** are classified non-escalatable before the ladder is climbed.
+**Both gates hold.**  Over the whole evaluation set of 172 cases, all 148 the runtime answers directly come back identical through the loop, at the first rung and for the first rung's cost — 0 answers moved and 0 principled refusals were converted into answers.  Of the 26 declared refusals, **14** are classified non-escalatable before the ladder is climbed.
 
 The loop buys something: of the 18 declared probes, 8 are answered and 4 of those are reached *above* the first rung — 'nearest to k_B', 'describe energie', 'describe oxigen', 'nearest to velocty' — at a cost of 3, 5, 5, 5 against 1 for a direct answer.  2 refusals are certified absences within the declared radius of 2 edits.
 <!-- end generated -->
@@ -183,9 +183,11 @@ it, so when a source moves the block says so and the corpus check fails.*
 | `compare` | L1 | 1 | 1 |
 | `derive` | L1 | 1 | 1 |
 | `describe` | L1 -> L2 -> L3 | 3 | 7 |
+| `extremum` | L1 | 1 | 1 |
 | `meaning` | L1 | 1 | 1 |
 | `measure` | L1 | 1 | 1 |
 | `nearest` | L1 -> L2 -> L3 | 3 | 7 |
+| `ordering` | L1 | 1 | 1 |
 | `pi_groups` | L1 -> L2 | 2 | 3 |
 | `product` | L1 | 1 | 1 |
 | `project` | L1 -> L2 | 2 | 3 |
@@ -197,7 +199,7 @@ it, so when a source moves the block says so and the corpus check fails.*
 | `unknown` | L1 | 1 | 1 |
 | `verify` | L1 -> L2 | 2 | 3 |
 
-10 of 21 declared kinds have a ladder taller than one rung, and the tallest is 3.  A one-rung ladder is a declaration that no rung of this tower reads that kind's refusals, not an omission.
+10 of 23 declared kinds have a ladder taller than one rung, and the tallest is 3.  A one-rung ladder is a declaration that no rung of this tower reads that kind's refusals, not an omission.
 <!-- end generated -->
 
 ### 7.2 Gate 1 — safety
@@ -205,8 +207,8 @@ it, so when a source moves the block says so and the corpus check fails.*
 <!-- generated: queryesc-safety -->
 | check | reading |
 |---|---|
-| evaluation cases run both ways | 157 |
-| answered by the direct path | 140 |
+| evaluation cases run both ways | 172 |
+| answered by the direct path | 148 |
 | answers that moved | 0 |
 | answers that cost more than the first rung | 0 |
 | principled refusals converted into answers | 0 |
@@ -266,18 +268,25 @@ Answered by rung: L1 4, L2 1, L3 3.  Gate 2 asks for at least one probe resolvin
 | field-unknown-field | field | absent | yes | refused at L1 |
 | field-missing-value | field | absent | yes | refused at L1 |
 | field-unknown-row | field | absent | yes | refused at L1 |
+| ordering-nominal | ordering | absent | yes | refused at L1 |
+| ordering-across-scales | ordering | absent | yes | refused at L1 |
+| ordering-unreadable | ordering | absent | yes | refused at L1 |
+| extremum-holes | extremum | absent | yes | refused at L1 |
+| extremum-two-tables | extremum | absent | yes | refused at L1 |
+| extremum-nominal | extremum | absent | yes | refused at L1 |
+| extremum-absent | extremum | absent | yes | refused at L1 |
 
-14 of 19 declared refusals are non-escalatable, decided by 14 declared markers before any rung above the first is run.  The 5 that were climbed — describe-unknown-word, report-unknown-subject, field-unknown-field, field-missing-value, field-unknown-row — are absences, and the ladder returned a refusal at the top of the tower for each of them, which is a stronger statement than the refusal at the first rung was.
+14 of 26 declared refusals are non-escalatable, decided by 14 declared markers before any rung above the first is run.  The 12 that were climbed — describe-unknown-word, report-unknown-subject, field-unknown-field, field-missing-value, field-unknown-row, ordering-nominal, ordering-across-scales, ordering-unreadable, extremum-holes, extremum-two-tables, extremum-nominal, extremum-absent — are absences, and the ladder returned a refusal at the top of the tower for each of them, which is a stronger statement than the refusal at the first rung was.
 <!-- end generated -->
 
 ### 7.5 What the round establishes
 
 <!-- generated: queryesc-establishes -->
-**Escalation is a step of the loop and costs nothing where it is not needed.**  All 140 directly answered evaluation cases come back identical, at the first rung, for the first rung's cost.
+**Escalation is a step of the loop and costs nothing where it is not needed.**  All 148 directly answered evaluation cases come back identical, at the first rung, for the first rung's cost.
 
 **A refusal now carries its layer.**  Every refusal reports the rung it was made at and whether the ladder was climbed; 2 of the probes return an absence certified within 2 edits of an enumerated index, which is a refusal that knows its own radius rather than a shrug.
 
-**The rule against converting a principled refusal holds, and it bites.**  14 of the 19 declared refusals are non-escalatable and are never climbed; none of them is answered at any rung.
+**The rule against converting a principled refusal holds, and it bites.**  14 of the 26 declared refusals are non-escalatable and are never climbed; none of them is answered at any rung.
 
 **The loop has instances rather than only machinery.**  4 declared probes resolve above the first rung: one by resolving a constant through the reference layer, the rest by a lookup that names its layer.  Each is reported as more expensive than a direct answer, which is the point of charging for rungs.
 <!-- end generated -->

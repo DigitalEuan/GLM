@@ -146,7 +146,7 @@ equation is a notation and the shipped parser preserves it too.
 
 ## What is deliberately still hand-written
 
-Fifteen of the twenty-one answerable kinds are neither shape, and are left alone
+Sixteen of the twenty-three answerable kinds are neither shape, and are left alone
 rather than forced: `describe` is a bare concept name resolving in the
 register index, `report` is a subject table, and `comparative` needs an
 operator between two *measured uses* rather than between two notations.

@@ -27,7 +27,7 @@ Four instruments were used, and all four can be re-run on demand:
 cd overlay
 PYTHONPATH=. python3 -m glm_universal.capabilities                    # 33 probes
 PYTHONPATH=. python3 -m glm_universal.benchmarks                      # 5 suites
-PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8             # 157 CLI cases
+PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8             # 172 CLI cases
 PYTHONPATH=. python3 -m pytest glm_universal/tests -q                 # the test suite
 ```
 
@@ -45,9 +45,9 @@ by hand twice: the counts are recomputed into
 |---|---|---|
 | capability probes | where the library stops, asked as user questions | **33 probes: 20 hold, 13 break, 0 errored, 0 surprises** |
 | benchmark suites | solver functions against curated and exhaustive task sets | **2,389 / 2,390 tasks across 5 suites; every suite beat its declared baseline** |
-| end-to-end CLI evaluation | the CLI, driven the way a user drives it | **157 cases: 157 passed** — 138 answered correctly, 19 refused as expected, 0 unexpected refusals, **0 confidently wrong**, 0 errored |
-| test suite | the package's own regression net | **<!--figure:suite-->3,924 tests across 97 of the 98 test files, 15,326 subtests, outside the document check<!--/figure-->**, zero failures |
-| Lean development | the machine-checked layer | **<!--figure:lean-files-->119 Lean files<!--/figure-->, `lake build` clean, no `sorry`** |
+| end-to-end CLI evaluation | the CLI, driven the way a user drives it | **172 cases: 172 passed** — 146 answered correctly, 26 refused as expected, 0 unexpected refusals, **0 confidently wrong**, 0 errored |
+| test suite | the package's own regression net | **<!--figure:suite-->4,038 tests across 100 of the 101 test files, 15,644 subtests, outside the document check<!--/figure-->**, zero failures |
+| Lean development | the machine-checked layer | **<!--figure:lean-files-->122 Lean files<!--/figure-->, `lake build` clean, no `sorry`** |
 
 A break in the probe report is not a failure — it is a located boundary, and
 each one names the exact place it stops. A *confidently wrong* answer in the
@@ -59,14 +59,14 @@ honest refusal is scored `+1`. There are now none.
 ## 2. The end-to-end CLI evaluation
 
 This is the instrument that measures what a user gets. It lives in
-`overlay/glm_universal/evaluation/`. Each of its 157 cases starts `GLM.py` in a
+`overlay/glm_universal/evaluation/`. Each of its 172 cases starts `GLM.py` in a
 **fresh interpreter** — one subprocess per question, no shared session, no warm
 caches — and scores the `ANSWER` or `UNSOLVED` line the process prints. The
-question set covers **all <!--figure:query-kinds-->22 query kinds<!--/figure-->** the runtime recognises and every one of its
+question set covers **all <!--figure:query-kinds-->24 query kinds<!--/figure-->** the runtime recognises and every one of its
 report subjects; the coverage is checked against the runtime's own tables by
 a test, so a new kind or subject cannot be added without a case.
 
-16 of the 149 questions are ones the machine **should refuse**. Answering them
+26 of the 172 questions are ones the machine **should refuse**. Answering them
 confidently is scored worse than refusing them.
 
 ### Accuracy per query kind
@@ -81,20 +81,23 @@ confidently is scored worse than refusing them.
 | `compare` | 4 / 4 | 0 | 0 | 0 |
 | `derive` | 4 / 4 | 0 | 0 | 0 |
 | `describe` | 8 / 8 | 0 | 0 | 0 |
+| `extremum` | 8 / 8 | 0 | 0 | 0 |
+| `field` | 8 / 8 | 0 | 0 | 0 |
 | `meaning` | 6 / 6 | 0 | 0 | 0 |
 | `measure` | 9 / 9 | 0 | 0 | 0 |
 | `nearest` | 4 / 4 | 0 | 0 | 0 |
+| `ordering` | 7 / 7 | 0 | 0 | 0 |
 | `pi_groups` | 2 / 2 | 0 | 0 | 0 |
 | `product` | 1 / 1 | 0 | 0 | 0 |
 | `project` | 1 / 1 | 0 | 0 | 0 |
 | `real` | 5 / 5 | 0 | 0 | 0 |
-| `report` | 66 / 66 | 0 | 0 | 0 |
+| `report` | 67 / 67 | 0 | 0 | 0 |
 | `spatial` | 2 / 2 | 0 | 0 | 0 |
 | `task` | 3 / 3 | 0 | 0 | 0 |
 | `trilinear` | 2 / 2 | 0 | 0 | 0 |
 | `unknown` | 1 / 1 | 0 | 0 | 0 |
 | `verify` | 6 / 6 | 0 | 0 | 0 |
-| **total** | **149 / 149** | 0 | 0 | 0 |
+| **total** | **172 / 172** | 0 | 0 | 0 |
 
 Two facts are worth stating plainly. `analogy` — the kind that carried every
 failure in an earlier round — is now 11 / 11, and the set has grown from 8
@@ -104,11 +107,11 @@ is not bought with over-caution.
 
 ### The refusals it got right
 
-All 16 refusal cases refused, and all 16 are **boundaries** — each is a theorem
+All 26 refusal cases refused, and all 26 are **boundaries** — each is a theorem
 or a deliberate commitment, and cannot be closed by writing more code. There
 is no longer a **gap** case: the last one is closed below.
 
-**Boundaries — 16.**
+**Boundaries — 26.**
 
 | case | question | why the refusal is correct |
 |---|---|---|
@@ -120,7 +123,7 @@ is no longer a **gap** case: the last one is closed below.
 | `report-unknown-subject` | `report nonsense subject` | The report subjects are a closed, enumerated set; the refusal prints the set. |
 | `unknown-nonsense` | `please compute the square root of a banana` | Nothing to parse into any query kind. |
 | `analogy-empty-table-position` | `Ca : Sc :: Ba : ?` | The step is well defined — `(+0 period, +1 group)` — but period 6, group 3 holds fifteen elements, because the f-block sits there. The position names no single element, and naming one would be a choice the table does not make. |
-| `analogy-cross-register` | `heat : temperature :: force : ?` | Both halves are stated. The relation the lexicon carries is `temperature related_to heat`, and `related_to` records *that* a link exists without saying which, so it transports nothing; and the three terms do not share a register, since physics holds `temperature` and `force` but not `heat`. |
+| `analogy-conjugate-unplaced` | `heat : temperature :: acceleration : ?` | The complement of the case above: the step is recognised, and `acceleration` occupies no column of the conjugate register, so `effort_of` has no side for it to enter on. The refusal names the criterion that failed — `role_typed` — and still reports the register split. |
 | `measure-large-room` | `measure large in room` | *large* measures a volume and *room* brackets a length, so the two are about different quantities and no measurement is defined. The refusal is the mismatch, not a missing entry. |
 | `measure-expensive-market` | `measure expensive in market` | *expensive* is on no measure scale at all, and the refusal names which register is missing the word rather than guessing a nearest one. |
 | `measure-hot-walking` | `measure hot in walking` | A temperature word against a velocity class: the two registers disagree about the quantity. |
@@ -128,6 +131,16 @@ is no longer a **gap** case: the last one is closed below.
 | `comparative-wrong-scale-marker` | `is fast in walking hotter than slow in airliner` | *hotter* is a temperature comparative and the pair measures velocity; a marker cannot order magnitudes of another quantity. |
 | `comparative-midpoint-word` | `is tepid in tea tepider than cold in tea` | *tepid* sits exactly at the middle of the temperature scale, so its comparative names no direction. The direction a marker asserts is read off the register rather than listed, and at the midpoint the register does not decide it. |
 | `derive-undescribed-coordinate` | `derive cents of perfect_fifth` | A cent is a logarithm, so no domain description derives it. The answerable coordinates are exactly the described ones, which is `GLM.Recipe.Spec.answer_eq_none_iff`, so the boundary is a theorem rather than a missing entry. |
+| `field-unknown-field` | `field boiling_point of carbon` | The row does not answer to that field name — it holds `boiling_point_K` — and the refusal prints the fields it does answer to rather than a blank or a guess. |
+| `field-missing-value` | `field electronegativity_pauling of He` | Helium's row records the field as missing, and the missingness mask is a fact about the register: reporting `none` as though it were a value would hide it. |
+| `field-unknown-row` | `field name of unobtainium` | No declared table holds the row, and the refusal carries the nearest row names rather than a bare failure. |
+| `ordering-nominal` | `order kind of energy and water` | `kind` is a label rather than a quantity, and a nominal coordinate has no order to read; the refusal says which reading was not a number. |
+| `ordering-across-scales` | `order line of GLM.NormFamily.family_tower and rung_audit` | `line` is held by the Lean address book and by the package's own source walk, and two readings on different scales have no common order. `GLM.CoordinateOrder.naive_order_is_not_scale_free` exhibits a rescaling that flips the comparison of the bare numbers. |
+| `ordering-unreadable` | `order atomic_weight_u of carbon and water` | The second row is held and does not carry the coordinate, so the field surface's own refusal is restated with the fields that row does answer to rather than reclassified. |
+| `extremum-holes` | `largest electronegativity_pauling in element` | 23 of the 118 rows record the coordinate as missing, and the largest of the 95 present values is the largest of the rows that happen to be filled in rather than of the column. `GLM.ColumnExtremum.extremum_over_present_is_not_the_extremum` exhibits a column where the two differ, so an answer over the present rows would be wrong rather than partial. |
+| `extremum-two-tables` | `largest line` | With no table named the column is gathered from the Lean address book and from the package's own source walk, and the largest of those numbers jointly is a fact about neither table. |
+| `extremum-nominal` | `largest name in element` | A column of labels has no extremum, and the refusal says which reading was not a quantity rather than ordering the spelling. |
+| `extremum-absent` | `largest boiling_point in element` | No row of the named table answers for the coordinate — it holds `boiling_point_K` — so there is no column to fold. |
 
 The two analogy cases were new in an earlier round, and they are the
 instructive ones: they are refusals the machine could not previously *make*,
@@ -136,9 +149,15 @@ determines no answer. Both were wrong answers before that. The three
 `comparative` cases are this round's addition, and they make the same point
 about a new query kind — two of the three refuse although *both* operands are
 fully measured, so the refusal is a statement about comparability rather than
-about coverage. The `derive` case is this round's, and it is the same kind of
+about coverage. The `derive` case is the same kind of
 statement one level up: the query surface is driven off the domain descriptions
-themselves, so what it will not answer is fixed by what they derive.
+themselves, so what it will not answer is fixed by what they derive. The ten
+newest — three `field`, three `ordering` and four `extremum` — are the same
+pattern again on the three newest surfaces: each refuses a question the
+surface can *read* and cannot *answer*, and each refusal names which of the
+stated reasons applied. Two of the four `extremum` refusals go further than
+naming a boundary: each has a proved statement of why the question it declines
+is not a question, in `GLM.ColumnExtremum`.
 
 **Gap — 0.**
 
@@ -303,8 +322,8 @@ missing or wrong triple rather than to an opaque nearest-neighbour search.
   `cluster`, `nearest` and `describe` all fall through to the formula parser
   when a name is in no register, so `coherence PbCl2` and
   `cluster PbCl2, NaCl, H2O` are answered rather than refused.
-* The machine refuses well. All 16 refusal cases were refused, and there were
-  **zero** unexpected refusals across all 157 cases — including the four the
+* The machine refuses well. All 26 refusal cases were refused, and there were
+  **zero** unexpected refusals across all 172 cases — including the four the
   `measure` query is asked at its own boundary, where
   `GLM.Info.boundary_empty_of_unmeasured` says there is nothing to answer with.
 

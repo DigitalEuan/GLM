@@ -6,7 +6,7 @@
 
 **Verdict.** Most of the cost was work repeated on things that had not moved, and a cache keyed on what it is derived from does not repeat it.
 
-**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->8,363<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
+**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->8,575<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
 
 **Recomputed by.** `glm_universal.corpus.cost.cost_report`
 
@@ -73,8 +73,8 @@ nothing.
 <!-- generated: cost-addresses -->
 | book | units | decodes from nothing | decodes now | reused |
 |---|---|---|---|---|
-| Lean declarations | 3,383 | 6,385 | 0 | 6,766 |
-| corpus sections | 1,006 | 1,978 | 0 | 2,012 |
+| Lean declarations | 3,455 | 6,525 | 0 | 6,910 |
+| corpus sections | 1,043 | 2,050 | 0 | 2,086 |
 
 Reuse is checked, not assumed: each rebuild re-decodes a sample of the answers it reused and reports any that moved (4 sampled in the declaration book, 4 in the document book, none moved).
 <!-- end generated -->
@@ -93,7 +93,7 @@ nothing and requiring the two books to be equal byte for byte.
 | reading | value |
 |---|---|
 | blocks quoting the report | 5 |
-| evaluation cases per report | 157 |
+| evaluation cases per report | 172 |
 | reports taken per check, before | 5 |
 | reports taken per check, now | 0 |
 | stored report | fresh |
@@ -122,7 +122,7 @@ works for tables and not for a sentence, and the sentences were where the drift
 lived. The block mechanism is now available at the size of a phrase:
 
 ```markdown
-the suite is <!--figure:test-files-->98 test files<!--/figure--> today
+the suite is <!--figure:test-files-->101 test files<!--/figure--> today
 ```
 
 The markers are HTML comments, so a reader sees only the number. `--refresh`
@@ -130,9 +130,9 @@ rewrites the body, `--check` fails when it has drifted, and a marker naming a
 figure nothing emits is a reported defect rather than a silent no-op.
 
 <!-- generated: cost-figures -->
-77 figures are registered and 198 markers carry them, across 19 documents.  A marker whose text is not what its figure now says is what `--refresh` rewrites and what `--check` fails on.
+95 figures are registered and 247 markers carry them, across 21 documents.  A marker whose text is not what its figure now says is what `--refresh` rewrites and what `--check` fails on.
 
-The registry: `corpus-archive-documents`, `corpus-documents`, `corpus-sections`, `corpus-state-documents`, `directive-count`, `directives`, `evaluation-case-count`, `evaluation-cases`, `fieldsurface-fields`, `fieldsurface-held`, `fieldsurface-moved`, `fieldsurface-pairs`, `fieldsurface-parsed-after`, `fieldsurface-parsed-before`, `fieldsurface-predicted`, `fieldsurface-rows`, `fieldsurface-surface-after`, `fieldsurface-surface-before`, `fieldsurface-tables`, `lean-declaration-files`, `lean-declarations`, `lean-file-count`, `lean-files`, `normesc-correct`, `normesc-family-correct`, `normesc-family-rungs`, `normesc-family-wrong`, `normesc-first-broken`, `normesc-longest-safe`, `normesc-named-correct`, `normesc-named-rungs`, `normesc-queries`, `normesc-refused`, `normesc-rungs`, `normesc-wrong`, `normfamily-norms`, `normfamily-rung-count`, `opesc-count`, `opesc-program-correct`, `opesc-program-queries`, `opesc-program-wrong`, `oracle-absent`, `oracle-english`, `oracle-parsed`, `oracle-parser-worth`, `oracle-questions`, `oracle-surface`, `planner-reports-per-check`, `probe-correct`, `probe-derived`, `probe-lexicon-held`, `probe-lexicon-words`, `probe-pass-mark`, `probe-questions`, `probe-refused`, `probe-wrong`, `query-kinds`, `reasoning-modules`, `rebuild-decodes-from-nothing`, `rebuild-decodes-now`, `registers`, `repo-cache-bytes`, `repo-cache-share`, `repo-primary-bytes`, `repo-stored-bytes`, `report-subjects`, `secondread-adopted`, `secondread-configurations`, `secondread-given-up`, `secondread-matched-removes`, `secondread-program-correct`, `secondread-program-refused`, `secondread-program-wrong`, `secondread-shipped`, `suite`, `test-file-count`, `test-files`.
+The registry: `corpus-archive-documents`, `corpus-documents`, `corpus-sections`, `corpus-state-documents`, `directive-count`, `directives`, `evaluation-case-count`, `evaluation-cases`, `extremum-answered`, `extremum-as-declared`, `extremum-declared-count`, `extremum-reasons`, `extremum-reasons-declared`, `extremum-refused`, `extremum-ties`, `fieldsurface-fields`, `fieldsurface-held`, `fieldsurface-moved`, `fieldsurface-pairs`, `fieldsurface-parsed-after`, `fieldsurface-parsed-before`, `fieldsurface-predicted`, `fieldsurface-rows`, `fieldsurface-surface-after`, `fieldsurface-surface-before`, `fieldsurface-tables`, `lean-declaration-files`, `lean-declarations`, `lean-file-count`, `lean-files`, `normesc-correct`, `normesc-family-correct`, `normesc-family-rungs`, `normesc-family-wrong`, `normesc-first-broken`, `normesc-longest-safe`, `normesc-named-correct`, `normesc-named-rungs`, `normesc-queries`, `normesc-refused`, `normesc-rungs`, `normesc-wrong`, `normfamily-norms`, `normfamily-rung-count`, `opesc-count`, `opesc-program-correct`, `opesc-program-queries`, `opesc-program-wrong`, `oracle-absent`, `oracle-english`, `oracle-parsed`, `oracle-parser-worth`, `oracle-questions`, `oracle-surface`, `ordering-answered`, `ordering-as-declared`, `ordering-declared-count`, `ordering-held`, `ordering-parsed-after`, `ordering-parsed-before`, `ordering-reasons`, `ordering-refused`, `ordering-surface-after`, `ordering-surface-before`, `ordering-surface-parsed`, `planner-reports-per-check`, `probe-correct`, `probe-derived`, `probe-lexicon-held`, `probe-lexicon-words`, `probe-pass-mark`, `probe-questions`, `probe-refused`, `probe-wrong`, `query-kinds`, `reasoning-modules`, `rebuild-decodes-from-nothing`, `rebuild-decodes-now`, `registers`, `repo-cache-bytes`, `repo-cache-share`, `repo-primary-bytes`, `repo-stored-bytes`, `report-subjects`, `secondread-adopted`, `secondread-configurations`, `secondread-given-up`, `secondread-matched-removes`, `secondread-program-correct`, `secondread-program-refused`, `secondread-program-wrong`, `secondread-shipped`, `suite`, `test-file-count`, `test-files`.
 <!-- end generated -->
 
 Two rules keep it honest. A figure must be **cheap** — a check renders every
@@ -185,18 +185,30 @@ Measured over the suite, by `glm_universal.corpus.cost.lean_blast_radius`:
 
 | | |
 |---|---|
-| test units in the suite | 98 |
-| Lean files | 120 |
-| units an edit to *any* Lean file used to make stale | 85 |
-| units one Lean file makes stale now, median | 27 |
-| units the worst single Lean file makes stale | 81 |
-| units that read the tree with a glob, so are stale whenever it moves | 27 |
+| test units in the suite | 101 |
+| Lean files | 123 |
+| units an edit to *any* Lean file used to make stale | 89 |
+| units one Lean file makes stale now, median | 26 |
+| units the worst single Lean file makes stale | 84 |
+| units that read the tree with a glob, so are stale whenever it moves | 26 |
 
-The floor of 27 is not a defect: those units name a `*.lean` glob because they
+The floor of 26 is not a defect: those units name a `*.lean` glob because they
 read the development, and a reading of the development is stale when the
-development moves. The change is that the other 58 units now depend on the
+development moves. The change is that the other 63 units now depend on the
 files they name rather than on all of them. A typical unit's closure is 129
 files, where naming one Lean file used to mean carrying all of them.
+
+**The floor has to be defended, not won once.** It was lost between §5e and
+the round that measured it again: the probe oracle reads one declaration's
+file name, it read it off the development rather than off the book, and every
+unit that reaches the probe — which is most of them, through the field surface
+— carried the whole tree again, taking the median from 26 back to **81**. The
+repair is the same one §5e describes, applied to the second reader, and the
+leak is easy to reintroduce for a reason worth stating: the closure is
+computed from *string constants*, so a docstring that writes the glob, or even
+the bare extension, is a dependency on the whole development exactly as an
+`rglob` call is. A sentence explaining the rule broke the rule while it was
+being written.
 
 ## 5b. The check that was paying for a derivation
 
@@ -233,7 +245,8 @@ approximate:
   agreement sweep, and helper by helper in `tests/test_llvq_table.py`. On 200
   targets after warm-up: **1.15 ms** a call against **10.55 ms**.
 * **The planner's reading runs on every core.** It asks the live runtime each
-  of the 149 declared evaluation cases; serially that is **955 s**, and the
+  declared evaluation case — 149 of them when this was timed, 164 now;
+  serially that is **955 s**, and the
   cases are independent. `fallback_row` takes a case by index and
   `fallback_rows` maps it across a process pool: **362 s** at eight workers.
   The speed-up is 2.6× rather than 8× because the load is uneven — the longest
@@ -420,5 +433,5 @@ that pays for it, with the storage, loading, digesting and rebuilding of the
 table counted on the table's side rather than assumed away.
 
 <!-- generated: cost-tier -->
-**Rebuilding both address books from nothing decodes 8,363 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 157 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  198 figures inside sentences, across 19 documents, are emitted rather than typed.
+**Rebuilding both address books from nothing decodes 8,575 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 172 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  247 figures inside sentences, across 21 documents, are emitted rather than typed.
 <!-- end generated -->

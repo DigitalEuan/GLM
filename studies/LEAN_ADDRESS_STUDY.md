@@ -98,17 +98,17 @@ not written down here; it is emitted:
 <!-- generated: lean-corpus -->
 | kind | count |
 |---|---|
-| abbrev | 45 |
-| def | 869 |
+| abbrev | 46 |
+| def | 885 |
 | example | 18 |
 | inductive | 23 |
 | instance | 27 |
-| lemma | 112 |
-| structure | 43 |
-| theorem | 2,246 |
-| **total** | **3,383** |
+| lemma | 129 |
+| structure | 45 |
+| theorem | 2,282 |
+| **total** | **3,455** |
 
-3,383 declarations across 119 files, the largest being `Gen3.lean` with 98.
+3,455 declarations across 122 files, the largest being `Gen3.lean` with 98.
 <!-- end generated -->
 
 The two `example` rows are `Denotation.lean`'s anonymous check that the physics
@@ -194,11 +194,11 @@ declarations in source order rather than asserting either:
 <!-- generated: lean-scale -->
 | scale | read back exactly | moved by the decoder | worst residual | verdict |
 |---|---|---|---|---|
-| 4 | 30 / 60 | 30 | — | **lossy** |
+| 4 | 29 / 60 | 31 | — | **lossy** |
 | 6 | 60 / 60 | 60 | 2 | lossless, non-degenerate |
 | 8 | 60 / 60 | 0 | 0 | **degenerate** |
 | **9** | **60 / 60** | **60** | **2** | **lossless, non-degenerate** |
-| 12 | 60 / 60 | 30 | 4 | lossless, partly degenerate |
+| 12 | 60 / 60 | 31 | 4 | lossless, partly degenerate |
 | 16 | 60 / 60 | 0 | 0 | **degenerate** |
 
 On the first 60 declarations in source order, decoding being the expensive step.  The chosen scale is 9.
@@ -241,12 +241,12 @@ below half a scale unit in every coordinate.
 <!-- generated: lean-readback -->
 |  | measured |
 |---|---|
-| declarations checked | 3,383 |
-| read back exactly | **3,383 / 3,383** (rate 1) |
-| coordinates checked | 81,192 |
+| declarations checked | 3,455 |
+| read back exactly | **3,455 / 3,455** (rate 1) |
+| coordinates checked | 82,920 |
 | coordinate errors | **0** |
-| moved by the decoder | 3,383 / 3,383 |
-| worst observed residual | **3**, at `GLM.DeepHoleLadder.Reading.cumulative_ge_right` |
+| moved by the decoder | 3,455 / 3,455 |
+| worst observed residual | **3**, at `GLM.Gen2.Meaning.pseudoscalar_parity_ne_zero` |
 | half a scale step | `9/2` |
 | covering radius | 4 |
 | bound respected | yes |
@@ -268,9 +268,9 @@ declaration" is, at this point, a statement about the feature map alone.
 <!-- generated: lean-injectivity -->
 | scheme | distinct addresses | distinct feature vectors | classes | declarations conflated | quantisation adds conflation? |
 |---|---|---|---|---|---|
-| `feature` | 3,002 / 3,383 | 3,002 | 263 | 644 | no |
-| `hash_control` | **3,383 / 3,383** | 3,002 | 0 | 0 | — |
-| `shuffled` | 3,002 / 3,383 | 3,002 | 263 | 644 | no |
+| `feature` | 3,070 / 3,455 | 3,070 | 265 | 650 | no |
+| `hash_control` | **3,455 / 3,455** | 3,070 | 0 | 0 | — |
+| `shuffled` | 3,070 / 3,455 | 3,070 | 265 | 650 | no |
 <!-- end generated -->
 
 Two things to read off this table.
@@ -294,7 +294,7 @@ the sense that a reader shown only the 24 counts would also fail to tell the
 members apart:
 
 <!-- generated: lean-classes -->
-263 classes: 207 pairs, 27 triples, 15 classes of 4, 6 classes of 5, 5 classes of 6, 2 classes of 7, 1 class of 15.
+265 classes: 208 pairs, 27 triples, 16 classes of 4, 6 classes of 5, 5 classes of 6, 2 classes of 7, 1 class of 15.
 
 The widest, written out, because the point they make can only be read from the names:
 
@@ -366,27 +366,27 @@ The third table is on *all* pairs, not just nearest ones.
 <!-- generated: lean-neighbours -->
 | scheme | nearest shares a file | rate | mean tie size |
 |---|---|---|---|
-| `feature` | **672 / 3,383** | ≈ **19.86 %** | 1.67 |
-| `hash_control` | 33 / 3,383 | ≈ 0.98 % | 1.00 |
-| `shuffled` | 35 / 3,383 | ≈ 1.03 % | 1.67 |
-| *chance* | — | ≈ 1.09 % | — |
+| `feature` | **695 / 3,455** | ≈ **20.12 %** | 1.67 |
+| `hash_control` | 33 / 3,455 | ≈ 0.96 % | 1.00 |
+| `shuffled` | 23 / 3,455 | ≈ 0.67 % | 1.67 |
+| *chance* | — | ≈ 1.06 % | — |
 
 | scheme | nearest is cited, either way | rate |
 |---|---|---|
-| `feature` | **120 / 3,383** | ≈ **3.55 %** |
-| `hash_control` | 6 / 3,383 | ≈ 0.18 % |
-| `shuffled` | 3 / 3,383 | ≈ 0.09 % |
+| `feature` | **125 / 3,455** | ≈ **3.62 %** |
+| `hash_control` | 7 / 3,455 | ≈ 0.20 % |
+| `shuffled` | 2 / 3,455 | ≈ 0.06 % |
 | *chance* | — | ≈ 0.18 % |
 
 | scheme | mean d² within a file | mean d² across files | ratio |
 |---|---|---|---|
-| `feature` | 5,805.3 | 6,717.1 | **0.864** |
-| `hash_control` | 54,429.2 | 54,272.3 | 1.003 |
-| `shuffled` | 6,706.7 | 6,707.2 | 1.000 |
+| `feature` | 5,815.5 | 6,735.7 | **0.863** |
+| `hash_control` | 54,426.6 | 54,276.5 | 1.003 |
+| `shuffled` | 6,671.3 | 6,726.6 | 0.992 |
 
-Against closed-form chance the feature encoding runs 18.2× on the file test and 19.3× on the citation test, from an encoding that is never shown a file name.
+Against closed-form chance the feature encoding runs 19.0× on the file test and 20.0× on the citation test, from an encoding that is never shown a file name.
 
-Over 62,406 same-file pairs and 5,658,247 cross-file pairs.  The feature encoding beats the hash control: yes; beats the seeded reshuffle: yes; beats closed-form chance: yes.
+Over 63,301 same-file pairs and 5,903,484 cross-file pairs.  The feature encoding beats the hash control: yes; beats the seeded reshuffle: yes; beats closed-form chance: yes.
 <!-- end generated -->
 
 The two controls do exactly what they are there for.
@@ -451,7 +451,7 @@ needs to be run.
   the full distance would have discarded, so the minimum and the full set of
   ties are the ones brute force reports. Declarations that share an address are
   each other's nearest neighbours at distance zero, so the search runs over the
-  3,002 distinct addresses and reads the collision classes off directly.
+  3,018 distinct addresses and reads the collision classes off directly.
 
 `report lean` now answers in about 77 seconds, and every number in the three
 tables above is unchanged — which is the point of preferring an identity and an

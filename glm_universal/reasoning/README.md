@@ -7,7 +7,7 @@
 
 **Verdict.** Everything is exact `int` / `fractions.Fraction` / `F_2`; nothing here imports `random`.
 
-**Deciding figure.** 83 modules, one frozen data file, and a runnable audit.
+**Deciding figure.** 87 modules, one frozen data file, and a runnable audit.
 
 **Recomputed by.** `glm_universal.reasoning.reasoning_report`
 
@@ -16,7 +16,7 @@
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 
-**Status: implemented (GLM-3+ Step 3, extended since).** **83 modules**, one
+**Status: implemented (GLM-3+ Step 3, extended since).** **87 modules**, one
 frozen data file,
 and a runnable audit. Everything is exact `int` / `fractions.Fraction` /
 `F_2`; nothing here imports `random`; nothing here imports a third-party
@@ -74,6 +74,8 @@ Sections 1–4 below describe these in detail.
 | `noise_lab.py` | noise used as the computation rather than as a representation: signal-driven and cascaded (MASH 1-1) delta-sigma loops with the `O(1/M²)` triangular-window law, closed orbits, interacting tones read by an exact Walsh spectrum, and a subtractive-dither sweep, and the vector loop whose error returns through a rational matrix (the `1/(2N)` law at the identity, the dead zone when the feedback contracts, equivariance under any permutation the matrix respects) — all exact `Fraction`, no randomness | `report noise` |
 | `wobble_landscape.py` | the pre-registered question *is alpha's gap structure distinctive?*, answered in one number: the closed-form gap spectrum from the continued fraction (Ostrowski stage by stage, checked against a run), two magnitude-matched nulls enumerated exhaustively, an exact Golay null, and the bit score `log2(1/p) - log2(m)` as a rational bracket. Exact throughout, cached behind a digest of its sources | `report landscape` |
 | `wobble.py` | the spectral signature of a constant, with the law beside every measured column: entropy, run lengths, transition rate and one-density are closed forms of the target (`Sturmian.lean`), plus the oscillator table, the exact resonance sweep and the quality-factor scan | `report signature` |
+| `now_receipt.py` | the supplied *History Recorded in the Now* studies decided rather than illustrated: what a delta-sigma accumulator records (the fractional part of the integral, and nothing else), the control those studies omit, an exhaustive collision census, the grid bound that replaces their extrapolated capacity, the seven “dimensions” reduced to three free readings, and the declared task set answered or refused with a witness (`NowReceipt.lean`) | — (study instrument) |
+| `now_float_control.py` | the second of the package's two declared float sites, and the only one in this package (D9, D11): the same loop run in `float` beside the exact one, to settle the supplied claim that a float substrate cannot hold the accumulator — nothing the system computes with imports it | — (study instrument) |
 | `drift.py` | the prime-iteration stress test in three regimes — exact rationals, an exact binary64 model, and binary64 truncated to a fixed number of displayed digits — with no float constructed anywhere | `report drift` |
 | `catalog.py` | `glm_study_findings_catalog.md` turned into a live claim ledger, in the same form as `blueprint.py`: 58 testable claims, each recomputed and given one of four verdicts | `report catalog` |
 | `containers.py` | the instrument behind the first companion study: eight constants profiled through three containers — the exact generator and the number of steps it needs to reach a stated precision (an integer comparison, no logarithm), the delta-sigma stream and its statistics, and the 24-dimensional projection tested against the convex hull of the Leech minimal vectors with a certificate on both sides rather than a sample | `report containers` |
@@ -106,6 +108,9 @@ Sections 1–4 below describe these in detail.
 | `operation_escalation.py` | the same escalation discipline applied to operations other than retrieval — the register, dimension, chemistry, physics, harmony and program-text classifications and the equation check — each with a unanimity refusal contract and each scored against a substrate-removed control and a label prior | `python3 -m glm_universal.tools operations` |
 | `second_reading.py` | a second reading required to agree before an operation answers: the code-layer reading (median binarisation, complete Golay decoding) and the metric-layer reading (exact `l1` distance with a declared margin), the strict and veto guards over them, the matched-refusal and reshuffled-label controls, and the four marks declared before the measurement | `python3 -m glm_universal.tools second-reading` |
 | `blockers.py` | what stands between the system and fuller reasoning, measured: the pre-registered natural-language probe with its questions, scoring and pass mark declared in the module, the lexicon coverage and Python feature censuses, the program-text addressing measurement against its control, and the ledger that separates table lookup from addressed lookup from derivation | `python3 -m glm_universal.tools blockers` |
+| `field_surface.py` | the field surface's own measurement: a second translation table over the ten questions the oracle called held and unreachable, scored beside the frozen one under the same locus and no-smuggling rules, with the one question declared unreachable before the run named there | `python3 -m glm_universal.tools fieldsurface` |
+| `coordinate_order.py` | the ordering operation: one coordinate read off two rows through the field surface and ordered exactly in rationals, or refused — `unreadable`, `not-ordered`, or `different-scale`, the boundary the operation exists for, since two readings are comparable only on one scale. Seven comparisons declared before they were run, and the probe question the field surface left open re-scored through the same oracle | `python3 -m glm_universal.tools ordering` |
+| `column_extremum.py` | the extremum operation: one coordinate read off every row of one declared table through the field surface and folded exactly, with every row attaining the end reported rather than one of them chosen, or refused — `no-such-column`, `mixed-scale`, `not-ordered`, or `incomplete`, the two middle-and-last being the boundaries it exists for, since a column gathered from two scales is not one column and the extremum of the rows that happen to be filled in is a wrong answer rather than a partial one. Eight columns declared before they were run | `python3 -m glm_universal.tools extremum` |
 | `probe_oracle.py` | blocker 1's own experiment, run: each of the twenty pre-registered probe questions hand-written into the query grammar, with the field that must carry the answer declared beside it, and every question classified `parsed` (a query answers it), `surface` (a register row or a shipped function holds it and no query kind returns it) or `absent` (nothing holds it). No measurement cache: twenty live queries take seconds | `python3 -m glm_universal.tools oracle` |
 
 ---
@@ -378,7 +383,7 @@ The table above is measured on seven carriers, and every one of the seven was
 chosen *because* it exhibited a boundary.  `escalation.py` asks the same
 questions of **one carrier per named object of every register the package
 ships** — physics 726, chemistry 118, molecules 51, mathematics 22, harmonics
-28, lexicon 95, **1,040** in all, nothing sampled.
+28, lexicon 149, **1,094** in all, nothing sampled.
 
 The naive audit is quadratic in the carriers and the congruence search is
 quartic, which at this size is unaffordable and also unnecessary.  Each

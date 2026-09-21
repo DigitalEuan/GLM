@@ -231,22 +231,21 @@ class TestTheRelayReport(unittest.TestCase):
     def test_the_gain_does_not_hang_on_the_threshold(self):
         #  The point is that the improvement is not a knife-edge at one
         #  fitted threshold.  Where it stops being *strict* is itself a
-        #  measurement: the gain is strict on the four thresholds from 1/20
-        #  through 1/5, and at 1/4 -- where the gate hands the geometry
-        #  queries the text layer reads perfectly well -- the relay falls
-        #  behind, by one query of the tuning set.  Both halves are
-        #  asserted, so a change in either is caught.
+        #  measurement, and it has moved twice with the corpus: the relay
+        #  once fell one query behind the text control at the top gate 1/4,
+        #  then drew level there, and now beats it, so the gain is strict on
+        #  all five thresholds of the declared band, 1/20 through 1/4.  The
+        #  gate 0 row is the control -- no query is handed to the geometry --
+        #  and it is the baseline itself, which is asserted too, because a
+        #  sweep whose zero row moved would not be measuring the gate.
         baseline = self.report["sets"]["tuning"]["leader"]["hit_rate"][5]
-        queries = self.report["sets"]["tuning"]["queries"]
         for row in self.report["sweep"]:
-            if Fraction(1, 20) <= row["gate"] <= Fraction(1, 5):
+            if Fraction(1, 20) <= row["gate"] <= Fraction(1, 4):
                 with self.subTest(gate=row["gate"], claim="strict"):
                     self.assertGreater(row["hit_at_5"], baseline)
-            elif row["gate"] == Fraction(1, 4):
-                with self.subTest(gate=row["gate"], claim="behind by one"):
-                    self.assertLess(row["hit_at_5"], baseline)
-                    self.assertGreaterEqual(
-                        row["hit_at_5"], baseline - Fraction(1, queries))
+            elif row["gate"] == 0:
+                with self.subTest(gate=row["gate"], claim="baseline"):
+                    self.assertEqual(row["hit_at_5"], baseline)
 
     def test_the_verdict_is_the_measurement(self):
         verdict = self.report["verdict"]
@@ -256,16 +255,19 @@ class TestTheRelayReport(unittest.TestCase):
         self.assertTrue(verdict["geometry_carries_more_than_control"])
         self.assertTrue(verdict["geometry_never_carries_fewer_than_control"])
         self.assertTrue(verdict["geometry_carries_more_than_name"])
-        #  The strict gain runs out before the top of the declared band,
-        #  and the verdict records where: strict on the four thresholds up
-        #  to and including 1/5, and at 1/4 below the text control.  These
-        #  two are asserted as measured rather than as hoped for -- they
-        #  have moved with the corpus before, and the test is what catches
-        #  it when they move again.
-        self.assertFalse(verdict["gain_holds_across_the_gate"])
-        self.assertFalse(verdict["gain_never_below_across_the_gate"])
-        self.assertGreaterEqual(verdict["gain_strict_gates"], 3)
-        self.assertEqual(verdict["gain_strict_to_gate"], "1/5")
+        #  The strict gain now reaches the top of the declared band, and the
+        #  verdict records where it reaches: strict on all five thresholds up
+        #  to and including 1/4.  The relay is therefore also never *below*
+        #  the control anywhere across the gate, which is the weaker claim
+        #  and is kept as its own flag, because it is the one that survived
+        #  the rounds in which the top gate fell level or behind.  These are
+        #  asserted as measured rather than as hoped for -- they have moved
+        #  with the corpus before, and the test is what catches it when they
+        #  move again.
+        self.assertTrue(verdict["gain_holds_across_the_gate"])
+        self.assertTrue(verdict["gain_never_below_across_the_gate"])
+        self.assertGreaterEqual(verdict["gain_strict_gates"], 5)
+        self.assertEqual(verdict["gain_strict_to_gate"], "1/4")
         self.assertTrue(verdict["gate_fires_rarely"])
 
     def test_every_rate_is_exact(self):

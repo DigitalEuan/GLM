@@ -283,11 +283,18 @@ def _water_molar_mass() -> str:
 
 
 def _family_tower_file() -> str:
-    from . import lean_address
-    for row in lean_address.declarations():
-        if row.name == "GLM.NormFamily.family_tower":
-            return str(row.file)
-    return ""
+    """Which file the declaration is in, read off the **stored** Lean book.
+
+    Reading it off the development instead would put the whole Lean tree
+    into this module's closure, and through this module into the closure of
+    everything that reaches the probe -- the leak
+    ``studies/ITERATION_COST_STUDY.md`` §5e is about.  The book is generated
+    from the development and is data, so a unit that reads it is still stale
+    when the book moves.
+    """
+    from . import lean_book
+    row = lean_book.declaration_rows().get("GLM.NormFamily.family_tower")
+    return str(row["file"]) if row else ""
 
 
 def _rung_audit_module() -> str:

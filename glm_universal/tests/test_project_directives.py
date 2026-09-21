@@ -162,9 +162,21 @@ class TestTheRulesThemselves(unittest.TestCase):
         self.assertEqual(offenders, [])
 
     def test_d7_the_reasoning_package_constructs_no_floats(self):
+        """Outside the declared float sites, no reasoning module writes a
+        float.  The exception list is read from
+        ``reasoning.exactness.FLOAT_SITES`` -- which D7 itself names as the
+        checker -- so a module that starts constructing floats without being
+        declared, and the reason why, still fails here.
+        """
+        from glm_universal.reasoning import exactness as EXA
+        declared = {site.split("/")[1] for site, _kinds, _why
+                    in EXA.FLOAT_SITES if site.startswith("reasoning/")}
+        self.assertEqual(declared, {"now_float_control.py"})
         root = Path(drc.PACKAGE_ROOT) / "reasoning"
         offenders = []
         for path in sorted(root.glob("*.py")):
+            if path.name in declared:
+                continue
             tree = ast.parse(path.read_text(encoding="utf-8"))
             for node in ast.walk(tree):
                 if isinstance(node, ast.Constant) and isinstance(node.value,

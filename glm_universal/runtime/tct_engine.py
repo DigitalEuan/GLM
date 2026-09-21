@@ -1412,6 +1412,109 @@ except fl.FieldError:
 '''
 
 
+def _body_ordering(args) -> str:
+    """Re-take one comparison -- and re-witness the refusal it rests on.
+
+    The script rebuilds the surface from the declared tables rather than
+    from the session, orders the same coordinate off the same two rows, and
+    then requires the operation to refuse two readings that are not on one
+    scale.  An ordering that answered everything would pass a weaker test
+    than this one.
+    """
+    field = str(args.get("field", ""))
+    left = str(args.get("left", ""))
+    right = str(args.get("right", ""))
+    return f'''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import coordinate_order as cord
+from glm_universal.runtime import fields as fl
+
+_surface = fl.surface()
+_result = cord.order(_surface, {field!r}, {left!r}, {right!r})
+
+observed = {{
+    "verdict": _result.verdict,
+    "scale": _result.scale,
+    "left": _result.left.row,
+    "right": _result.right.row,
+    "difference": str(_result.difference),
+    "pole_row": _result.pole_row,
+}}
+
+# The gap is the exact difference of the two readings, and the verdict is
+# the order of them -- nothing here rounds.
+assert _result.difference == _result.right.value - _result.left.value
+assert (_result.verdict == "lt") == (_result.left.value < _result.right.value)
+assert (_result.verdict == "eq") == (_result.left.value == _result.right.value)
+
+# Two readings that are not on one scale are refused, not compared.
+try:
+    cord.order(_surface, "line", "GLM.NormFamily.family_tower", "rung_audit")
+    raise AssertionError("two scales were compared")
+except cord.OrderingError as _error:
+    assert _error.reason == "different-scale"
+'''
+
+
+def _body_extremum(args) -> str:
+    """Re-take one column -- and re-witness the two refusals it rests on.
+
+    The script rebuilds the surface from the declared tables rather than
+    from the session, folds the same coordinate over the same table, and
+    then requires the operation to refuse a column with a hole in it and a
+    column gathered from two scales.  An extremum that answered every column
+    would pass a weaker test than this one.
+    """
+    field = str(args.get("field", ""))
+    end = str(args.get("end", "largest"))
+    table = str(args.get("table", ""))
+    named = repr(table) if table else "None"
+    return f'''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import column_extremum as cx
+from glm_universal.runtime import fields as fl
+
+_surface = fl.surface()
+_column = cx.column(_surface, {field!r}, {named})
+_result = cx.extremum(_surface, {field!r}, {end!r}, {named})
+
+observed = {{
+    "end": _result.end,
+    "scale": _result.scale,
+    "value": str(_result.value),
+    "rows": str(_result.rows),
+    "winners": ", ".join(_r.row for _r in _result.winners),
+    "gap": "" if _result.gap is None else str(_result.gap),
+}}
+
+# The value returned is a value of the column, nothing in the column is
+# past it, and every row attaining it is named -- a tie is reported rather
+# than resolved.
+_values = [_r.value for _r in _column.readings]
+assert _result.value in _values
+assert all((_v <= _result.value) if _result.end == "largest"
+           else (_v >= _result.value) for _v in _values)
+assert (sorted(_r.row for _r in _result.winners)
+        == sorted(_r.row for _r in _column.readings
+                  if _r.value == _result.value))
+
+# A column with a hole in it is refused rather than folded over the rows
+# that happen to be filled in, and a column gathered from two scales is
+# refused rather than compared across them.
+try:
+    cx.extremum(_surface, "electronegativity_pauling", "largest", "element")
+    raise AssertionError("a column with holes was folded")
+except cx.ExtremumError as _error:
+    assert _error.reason == "incomplete"
+
+try:
+    cx.extremum(_surface, "line", "largest", None)
+    raise AssertionError("two scales were folded together")
+except cx.ExtremumError as _error:
+    assert _error.reason == "mixed-scale"
+'''
+
+
 def _body_report_language(args) -> str:
     """Recompute the question descriptions and the parser comparison."""
     return '''# -- recompute -------------------------------------------------------------
@@ -3403,6 +3506,11 @@ TEMPLATES = {
     "report_recipe": _body_report_recipe,
     # v1.18.0: the field surface -- one named field of one named row.
     "field": _body_field,
+    # v1.19.0: the ordering operation -- one coordinate off two rows.
+    "ordering": _body_ordering,
+    # v1.20.0: the extremum operation -- one coordinate off every row of
+    # one table, or a refusal naming what is missing.
+    "extremum": _body_extremum,
     # v1.12.0: the surface language driven off the same kind of
     # description -- the question shape made an object.
     "report_language": _body_report_language,

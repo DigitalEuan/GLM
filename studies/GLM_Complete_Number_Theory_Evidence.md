@@ -64,10 +64,10 @@ cd overlay && PYTHONPATH=. python3 -m glm_universal.examples.number_pipeline
 python3 studies/scripts/tmm_null_model.py
 
 # the Lean development itself
-lake build          # 116 files under RequestProject/GLM/, 0 sorry
+lake build          # 122 files under RequestProject/GLM/, 0 sorry
 ```
 
-The Lean development is 119 files under `RequestProject/GLM/`, all building
+The Lean development is 122 files under `RequestProject/GLM/`, all building
 against Mathlib for Lean 4.28.0 with **no `sorry` and no `admit`**, and no
 declared axiom anywhere: every proof depends only on `propext`,
 `Classical.choice`, `Quot.sound`, and — for the theorems reached through
@@ -833,7 +833,7 @@ What is and is not being claimed of it is stated once, in the Positioning
 section of [`PROJECT_DIRECTIVES.md`](../PROJECT_DIRECTIVES.md), and this paper
 is written under it. It is a
 mathematical object with unusual fidelity to the structure of numbers, and the
-fidelity is provable (119 Lean files, 0 `sorry`) and measurable (exact integer
+fidelity is provable (122 Lean files, 0 `sorry`) and measurable (exact integer
 experiments, 24/24 Sturmian matches).
 
 ### 13.2 What it holds
@@ -1040,7 +1040,7 @@ scripts that regenerate the data on demand.
 | the exact tables of §1.3, §2.4, §9.2 | `studies/scripts/number_theory_tables.py` |
 | the worked example of §14 | `overlay/glm_universal/examples/number_pipeline.py` |
 | the TMM sweep and its null model | `studies/scripts/tmm_null_model.py` |
-| the Lean development | `RequestProject/GLM/` (119 files) and its mirror `overlay/glm_lean/` |
+| the Lean development | `RequestProject/GLM/` (122 files) and its mirror `overlay/glm_lean/` |
 | the wobble implementation | `overlay/glm_universal/reasoning/wobble.py` |
 | the constants | `overlay/glm_universal/reasoning/coherence.py` |
 | the Golay code and its decoder | `overlay/glm_universal/substrate/mog.py`, `.../golay_decode.py` |

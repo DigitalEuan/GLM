@@ -6,7 +6,7 @@
 
 **Verdict.** Orient from four short reads, run the cheapest gate that could fail, and close the round: write the finding down where it belongs.
 
-**Deciding figure.** The suite is <!--figure:test-files-->98 test files<!--/figure--> and 7 instruments, each signed against a digest of everything it depended on, so a change re-runs what it touched rather than all of it.
+**Deciding figure.** The suite is <!--figure:test-files-->101 test files<!--/figure--> and 7 instruments, each signed against a digest of everything it depended on, so a change re-runs what it touched rather than all of it.
 
 **Recomputed by.** `glm_universal.signoff.ledger.plan`
 
@@ -60,7 +60,7 @@ finding down, then refresh, check, release, commit.
 
 ```bash
 cd overlay
-python3 GLM.py -q "address of golay"                    # one query, 21 kinds
+python3 GLM.py -q "address of golay"                    # one query, 23 kinds
 python3 GLM.py -q "report lean"                         # 65 report subjects
 PYTHONPATH=. python3 -m glm_universal.corpus --ask "what bears on the Leech lattice?"
 PYTHONPATH=. python3 -m glm_universal.tools --help      # the study instruments
@@ -102,7 +102,7 @@ whole of the speed discipline; everything below is which gate that is.
 | **documents** | `python3 -m glm_universal.corpus --check` | tier-0 contract, links, coverage, generated blocks, inline figures | after any prose edit |
 | **documents, unchanged** | the same command | answers from the stored verdict in about three seconds when nothing it reads has moved; `--check --all` forces the full pass | picking the round up |
 | **changed** | `python3 -m glm_universal.signoff --run-everything --jobs 8` | every test unit and instrument whose closure moved, and nothing else | after any code, data or Lean edit |
-| **release** | `python3 -m glm_universal.signoff --release --jobs 8` | all <!--figure:test-files-->98 test files<!--/figure--> and all 7 instruments, exhaustive cases on, ledger ignored | once, closing the round |
+| **release** | `python3 -m glm_universal.signoff --release --jobs 8` | all <!--figure:test-files-->101 test files<!--/figure--> and all 7 instruments, exhaustive cases on, ledger ignored | once, closing the round |
 | **release, resumed** | `python3 -m glm_universal.signoff --release --resume --jobs 8` | the same question, paying only what is still owed: unsigned, changed, failed, or signed with the exhaustive cases off | after a release that was interrupted |
 
 All three are run from `overlay/` with `PYTHONPATH=.`.

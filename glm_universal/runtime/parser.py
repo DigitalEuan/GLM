@@ -78,7 +78,7 @@ KINDS: Tuple[str, ...] = (
     "verify", "analogy", "describe", "nearest", "product", "cluster",
     "spatial", "project", "trilinear", "coherence", "report", "angle",
     "task", "pi_groups", "meaning", "real", "compare", "measure",
-    "comparative", "derive", "field",
+    "comparative", "derive", "field", "ordering", "extremum",
     "unknown",
 )
 
@@ -173,6 +173,22 @@ VERBS: Dict[str, str] = {
     # so the word governs a question only when it opens it.
     "field": "field", "fields": "field", "field names": "field",
     "which field": "field", "value of field": "field",
+    # ordering -- one coordinate read off two rows and ordered, or refused
+    # (v1.19.0).  The surface forms are start-only for the same reason the
+    # field ones are: `order` is an ordinary noun -- `order of magnitude` --
+    # and governs a question only when it opens it.  `compare` is already a
+    # kind (exact real arithmetic), so the two-word form `compare field` is
+    # what reaches this one.
+    "order": "ordering", "orders": "ordering",
+    "compare field": "ordering", "rank field": "ordering",
+    # extremum -- one coordinate read off *every* row of one table, with the
+    # extremum returned or the column refused (v1.20.0).  Start-only for the
+    # third time and for the third version of the same reason: `largest` and
+    # `smallest` are ordinary adjectives of these registers -- `smallest
+    # vector of the Leech lattice` -- and govern a question only when they
+    # open it.  Which end is asked for is read off the keyword itself.
+    "largest": "extremum", "highest": "extremum", "maximum": "extremum",
+    "smallest": "extremum", "lowest": "extremum", "minimum": "extremum",
     "meaning": "meaning", "meaning of": "meaning", "means": "meaning",
     "denotes": "meaning", "denotation": "meaning", "refers to": "meaning",
     "ground": "meaning", "grounding": "meaning", "relate": "meaning",
@@ -200,6 +216,8 @@ DOMAIN_PRIORITY: Tuple[str, ...] = (
 #: electric field strength`` is not.
 START_ONLY: Tuple[str, ...] = (
     "field", "fields", "field names", "which field", "value of field",
+    "order", "orders", "compare field", "rank field",
+    "largest", "highest", "maximum", "smallest", "lowest", "minimum",
 )
 
 #: Applied to the raw string before tokenising.  Politeness and filler carry
@@ -1317,6 +1335,55 @@ def _build_keyword_query(text: str, cleaned: str, lowered: str,
                      domain=domain, operands=(), options=options,
                      rule=rule, trace=tuple(trace))
 
+    if kind == "ordering":
+        # 'order abstract_concrete of energy and water' -- one coordinate,
+        # two rows.  The coordinate and the rows are carried through
+        # unresolved for the same reason the field kind carries its two:
+        # a coordinate is not a register entry, and a row may be a Lean
+        # declaration or a molecule rather than a carrier.
+        head, separator, tail = _split_field_phrase(remainder)
+        pair = _split_list(tail)
+        options["name"] = head
+        options["left"] = pair[0] if len(pair) > 0 else ""
+        options["right"] = pair[1] if len(pair) > 1 else ""
+        if separator is None:
+            trace.append("no separator between the coordinate and the rows; "
+                         "the solver states the boundary")
+        elif len(pair) != 2:
+            trace.append(f"ordering needs two rows, read from {tail!r}; "
+                         f"the solver states the boundary")
+        else:
+            trace.append(f"coordinate {head!r} of rows {pair[0]!r} and "
+                         f"{pair[1]!r}, split at {separator!r}")
+        return Query(raw=text, normalised=cleaned, kind="ordering",
+                     domain=domain, operands=(), options=options,
+                     rule=rule, trace=tuple(trace))
+
+    if kind == "extremum":
+        # 'largest atomic_weight_u in element' -- one coordinate, one table,
+        # every row.  The end is read off the keyword rather than from the
+        # remainder, and the table is optional: with none named the column is
+        # gathered from every declared table that answers for the coordinate,
+        # which is how a column can turn out to be two columns and be
+        # refused.  Neither operand is resolved in the concept index, for the
+        # reasons the field and ordering kinds carry theirs unresolved.
+        options["end"] = "smallest" if keyword in _SMALLEST_KEYWORDS \
+            else "largest"
+        head, separator, tail = _split_column_phrase(remainder)
+        options["name"] = head
+        options["table"] = tail
+        if separator is None:
+            trace.append(f"no table named for column {head!r}; the column is "
+                         f"gathered from every declared table that answers "
+                         f"for it, and refused if that is more than one "
+                         f"scale")
+        else:
+            trace.append(f"the {options['end']} {head!r} over the rows of "
+                         f"{tail!r}, split at {separator!r}")
+        return Query(raw=text, normalised=cleaned, kind="extremum",
+                     domain=domain, operands=(), options=options,
+                     rule=rule, trace=tuple(trace))
+
     if kind == "angle":
         # 'angle A B' -- two operands for the cosine comparison.
         names = _split_list(_strip_connectives(remainder))
@@ -1390,6 +1457,44 @@ def _split_field_phrase(remainder: str) -> Tuple[str, Optional[str], str]:
         return body, None, ""
     idx, separator = best
     head = body[:idx].strip(" ,:")
+    tail = _strip_connectives(body[idx + len(separator):])
+    return head, separator, tail
+
+
+#: The keywords of the ``extremum`` kind that ask for the *smallest* end.
+#: Every other keyword of that kind asks for the largest, so which end was
+#: asked for is a fact about the word rather than a further operand.
+_SMALLEST_KEYWORDS: Tuple[str, ...] = ("smallest", "lowest", "minimum")
+
+#: What may stand between a column and the table it is a column of.  ``in``
+#: is the natural one -- *the largest atomic weight **in** the element table*
+#: -- and the three the field phrase admits are kept beside it so that the
+#: two operations read the same way.
+_COLUMN_SEPARATORS: Tuple[str, ...] = (" in ", " of ", " for ", " over ",
+                                       " across ")
+
+
+def _split_column_phrase(remainder: str) -> Tuple[str, Optional[str], str]:
+    """``'atomic_weight_u in element'`` -> ``('atomic_weight_u', ' in ', 'element')``.
+
+    The **last** separator cuts, as in :func:`_split_field_phrase`, so a
+    coordinate whose name contains one of the words is kept whole.  With no
+    separator present the whole remainder is the coordinate and the table is
+    empty: that is not a malformed question but a different one -- *the
+    largest `line`* names no table, and the operation answers it by refusing
+    a column gathered from two scales.
+    """
+    body = remainder.strip(" ,:")
+    lowered = body.lower()
+    best: Optional[Tuple[int, str]] = None
+    for separator in _COLUMN_SEPARATORS:
+        idx = lowered.rfind(separator)
+        if idx >= 0 and (best is None or idx > best[0]):
+            best = (idx, separator)
+    if best is None:
+        return _strip_connectives(body), None, ""
+    idx, separator = best
+    head = _strip_connectives(body[:idx])
     tail = _strip_connectives(body[idx + len(separator):])
     return head, separator, tail
 

@@ -458,6 +458,31 @@ class TestTheIterationCost(unittest.TestCase):
         self.assertLessEqual(radius["median_single_file"],
                              radius["units_naming_lean"] // 2)
 
+    def test_no_module_on_the_answering_path_reads_the_development(self):
+        """The §5e rule, pinned at the modules that have broken it.
+
+        The field surface broke it once by parsing the development on the
+        runtime's import path, and the probe oracle broke it again by reading
+        one declaration's file name off the tree rather than off the stored
+        book -- which took the median cost of a Lean edit from 26 units back
+        to 81, because nearly every unit reaches the probe.  Each of these
+        modules is on the path a query takes, so none of them may carry the
+        whole development; each reads the generated book instead, and the
+        book is data, so a unit that reads it is still stale when it moves.
+        """
+        from glm_universal.signoff import rules as R
+        development = {path for path in R.lean_sources()
+                       if path.suffix == ".lean"}
+        self.assertGreater(len(development), 100)
+        reasoning = Path(R.__file__).resolve().parents[1] / "reasoning"
+        for module in ("field_surface.py", "probe_oracle.py",
+                       "coordinate_order.py", "lean_book.py"):
+            with self.subTest(module=module):
+                closure = set(R.unit_closure(reasoning / module))
+                carried = development & closure
+                self.assertLess(len(carried), len(development),
+                                f"{module} carries the whole development")
+
     def test_no_reading_of_the_cost_is_a_float(self):
         def walk(value):
             self.assertNotIsInstance(value, float)

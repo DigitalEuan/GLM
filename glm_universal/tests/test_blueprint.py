@@ -27,6 +27,7 @@ import pytest
 
 from glm_universal.reasoning import blueprint as BP
 from glm_universal.reasoning import engine as EN
+from glm_universal.reasoning import exactness as EX
 from glm_universal.reasoning import mantissa as MN
 from glm_universal.reasoning import reversible as RV
 from glm_universal.runtime import tct_engine as tct
@@ -107,7 +108,8 @@ class TestSourceAudit:
         assert audit["modules_scanned"] == len(BP.source_files())
         assert audit["modules_scanned"] > 100
 
-    def test_the_six_core_sub_packages_construct_no_float(self, audit):
+    def test_the_six_core_sub_packages_construct_no_undeclared_float(
+            self, audit):
         assert audit["core_clean"], audit["core_violations"]
         assert audit["core_violations"] == []
 
@@ -115,8 +117,37 @@ class TestSourceAudit:
             self, audit):
         for package in BP.CORE_PACKAGES:
             assert audit["per_package"][package]["banned_imports"] == 0
-            assert audit["per_package"][package]["float_literals"] == 0
-            assert audit["per_package"][package]["float_calls"] == 0
+            assert audit["per_package"][package]["undeclared_float_literals"] == 0
+            assert audit["per_package"][package]["undeclared_float_calls"] == 0
+
+    def test_the_declared_sites_are_the_ones_the_inventory_warrants(
+            self, audit):
+        # The audit does not keep its own list: it reads the D11 inventory,
+        # so a site can only be excused where its warrant is published.
+        assert (tuple(audit["declared_float_sites"])
+                == tuple(sorted(rel for rel, _k, _w in EX.FLOAT_SITES)))
+        for entry in audit["core_declared_sites"]:
+            assert entry["module"] in audit["declared_float_sites"]
+
+    def test_the_one_declared_site_inside_the_core_is_the_float_control(
+            self, audit):
+        assert ([e["module"] for e in audit["core_declared_sites"]]
+                == ["reasoning/now_float_control.py"])
+        entry = audit["core_declared_sites"][0]
+        assert entry["banned_imports"] == []
+        assert entry["float_literal_lines"]
+        assert (audit["per_package"]["reasoning"]["declared_float_literals"]
+                == len(entry["float_literal_lines"]))
+
+    def test_a_declared_site_is_reported_rather_than_hidden(self, audit):
+        # The raw per-package tally still counts every float the scan found;
+        # only the violation list distinguishes warranted from not.
+        reasoning = audit["per_package"]["reasoning"]
+        assert (reasoning["float_literals"]
+                == reasoning["declared_float_literals"]
+                + reasoning["undeclared_float_literals"])
+        assert reasoning["float_literals"] > 0
+        assert "declared" in audit["reading"]
 
     def test_the_audit_module_is_itself_clean(self, audit):
         entry = audit["per_package"]["reasoning"]

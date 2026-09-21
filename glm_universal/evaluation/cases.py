@@ -654,7 +654,7 @@ _CASES: Tuple[EvalCase, ...] = (
             "every measured figure comes back unchanged."),
 
     _c("report-language", "report", "report language",
-       "answer", contains=("7 of 21 answerable query kinds",
+       "answer", contains=("7 of 23 answerable query kinds",
                            "derive, measure, task, compare by slot shape",
                            "verify, analogy, compare by infix shape",
                            "comparative by nested shape",
@@ -701,8 +701,8 @@ _CASES: Tuple[EvalCase, ...] = (
             "resolved above the first rung and two refusals come back as "
             "certified absences."),
     _c("report-relay", "report", "report relay",
-       "answer", contains=("362 -> 365 of 423", "64 of 1692",
-                           "carrying 14 queries it misses and losing 1"),
+       "answer", contains=("373 -> 377 of 432", "64 of 1728",
+                           "carrying 15 queries it misses and losing 1"),
        note="The faculties arranged as a stack rather than scored one at a "
             "time: below a gate of 1/10 the leading lexical search is "
             "judged to have abstained and the two geometric address books "
@@ -712,7 +712,7 @@ _CASES: Tuple[EvalCase, ...] = (
             "matched digest-and-reshuffle control carries far fewer, so "
             "the gain is the substrate's rather than the padding's."),
     _c("report-anonymous", "report", "report anonymous",
-       "answer", contains=("722 -> 73 of 846", "236 -> 161 of 846",
+       "answer", contains=("737 -> 76 of 864", "237 -> 163 of 864",
                            "class, not a residue"),
        note="The register where the geometric address is the only faculty "
             "still reading: rename every identifier of a query outside a "
@@ -892,6 +892,105 @@ _CASES: Tuple[EvalCase, ...] = (
        "refusal", classification="boundary",
        note="No declared table holds the row, and the refusal carries the "
             "nearest row names rather than a bare failure."),
+
+    # -------------------------------------------------------------- ordering
+    _c("ordering-abstractness", "ordering",
+       "order abstract_concrete of energy and water",
+       "answer", contains=("1/4", "3/4", "abstract", "energy"),
+       note="The one question the field surface declared unreachable, "
+            "closed: one coordinate read off two rows, checked to be on one "
+            "scale, and ordered exactly.  The pole is the lexicon "
+            "register's own declaration, and the answer says so."),
+    _c("ordering-atomic-weight", "ordering",
+       "order atomic_weight_u of carbon and oxygen",
+       "answer", contains=("997/250", "element:atomic_weight_u"),
+       note="The same operation over a stored coordinate of a second "
+            "table: the gap is the exact difference of two rationals."),
+    _c("ordering-derived-coordinate", "ordering",
+       "order molar_mass_u of water and ethanol",
+       "answer", contains=("14027/500", "molecule:molar_mass_u"),
+       note="Both readings are recomputed rather than stored, and a "
+            "derived coordinate is orderable on the same terms as a held "
+            "one so long as both rows are read on one scale."),
+    _c("ordering-level", "ordering",
+       "order animate_inanimate of energy and water",
+       "answer", contains=("level with",),
+       forbids=("is below", "is above"),
+       note="Two readings that are equal are reported as level and no pole "
+            "is named: the register declares an end, not a winner."),
+    _c("ordering-nominal", "ordering", "order kind of energy and water",
+       "refusal", classification="boundary",
+       note="`kind` is a label rather than a quantity, and a nominal "
+            "coordinate has no order to read; the refusal says which "
+            "reading was not a number."),
+    _c("ordering-across-scales", "ordering",
+       "order line of GLM.NormFamily.family_tower and rung_audit",
+       "refusal", classification="boundary",
+       note="The boundary the whole operation is built around: `line` is "
+            "held by the Lean address book and by the package's own source "
+            "walk, and two readings on different scales have no common "
+            "order.  `GLM.CoordinateOrder.naive_order_is_not_scale_free` "
+            "exhibits a rescaling that flips the comparison of the bare "
+            "numbers."),
+    _c("ordering-unreadable", "ordering",
+       "order atomic_weight_u of carbon and water",
+       "refusal", classification="boundary",
+       note="The second row is held and does not carry the coordinate, so "
+            "the surface's own refusal is restated with the fields that row "
+            "does answer to rather than reclassified."),
+
+    # ------------------------------------------------------------- extremum
+    _c("extremum-heaviest", "extremum",
+       "largest atomic_weight_u in element",
+       "answer", contains=("Og", "36902/125", "118 rows"),
+       note="The column rather than the pair: one coordinate read off every "
+            "row of one declared table, folded exactly, with the gap to the "
+            "next distinct value stated as a rational."),
+    _c("extremum-lightest", "extremum",
+       "smallest atomic_weight_u in element",
+       "answer", contains=("H", "126/125"),
+       note="The other end of the same column. The two ends are one "
+            "operation -- the smallest is the largest of the negated "
+            "column, which is `GLM.ColumnExtremum.trough_eq_none_iff` -- "
+            "and they name different rows."),
+    _c("extremum-derived-column", "extremum",
+       "largest molar_mass_u in molecule",
+       "answer", contains=("iron(III) sulfate", "199939/500"),
+       note="Every reading of the column is recomputed from the element "
+            "register rather than stored, and a derived column folds on the "
+            "same terms as a held one so long as it is one scale."),
+    _c("extremum-tie", "extremum",
+       "largest abstract_concrete in carrier:lexicon",
+       "answer", contains=("14 rows", "water"),
+       note="Fourteen rows sit at the concrete end of the lexicon "
+            "register's coordinate. Every one of them is named: a tie is a "
+            "fact about the register, and picking one would be a choice the "
+            "register does not make."),
+    _c("extremum-holes", "extremum",
+       "largest electronegativity_pauling in element",
+       "refusal", classification="boundary",
+       note="The refusal the operation exists for: 23 of the 118 rows "
+            "record the coordinate as missing, and the largest of the 95 "
+            "present values is the largest of the rows that happen to be "
+            "filled in rather than of the column. "
+            "`GLM.ColumnExtremum.extremum_over_present_is_not_the_extremum` "
+            "exhibits a column where the two differ, so an answer over the "
+            "present rows is wrong rather than partial."),
+    _c("extremum-two-tables", "extremum", "largest line",
+       "refusal", classification="boundary",
+       note="The ordering operation's `different-scale`, one level up: with "
+            "no table named, `line` is gathered from the Lean address book "
+            "and from the package's own source walk, and the largest of "
+            "those numbers jointly is a fact about neither table."),
+    _c("extremum-nominal", "extremum", "largest name in element",
+       "refusal", classification="boundary",
+       note="A column of labels has no extremum, and the refusal says which "
+            "reading was not a quantity rather than ordering the spelling."),
+    _c("extremum-absent", "extremum", "largest boiling_point in element",
+       "refusal", classification="boundary",
+       note="No row of the named table answers for the coordinate -- "
+            "`boiling_point_K` is the name it holds -- so there is no "
+            "column to fold."),
 )
 
 

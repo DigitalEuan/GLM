@@ -1,0 +1,586 @@
+{
+ "input_digest": "e413a91ba0100f26b12a8b8c50330b51cdca6097515a3de78f129baa1a09fe5b",
+ "name": "now_receipt_report",
+ "payload": {
+  "capacity": {
+   "bits_grow_with_the_grid_not_the_run": true,
+   "bounded_by_the_grid": true,
+   "horizons": [
+    10,
+    100,
+    1000,
+    10000
+   ],
+   "rows": [
+    {
+     "bits": 2,
+     "bound": 4,
+     "distinct_states": [
+      {
+       "distinct": 4,
+       "ticks": 10
+      },
+      {
+       "distinct": 4,
+       "ticks": 100
+      },
+      {
+       "distinct": 4,
+       "ticks": 1000
+      },
+      {
+       "distinct": 4,
+       "ticks": 10000
+      }
+     ],
+     "grid": 4,
+     "target": "3/4"
+    },
+    {
+     "bits": 3,
+     "bound": 8,
+     "distinct_states": [
+      {
+       "distinct": 8,
+       "ticks": 10
+      },
+      {
+       "distinct": 8,
+       "ticks": 100
+      },
+      {
+       "distinct": 8,
+       "ticks": 1000
+      },
+      {
+       "distinct": 8,
+       "ticks": 10000
+      }
+     ],
+     "grid": 8,
+     "target": "7/8"
+    },
+    {
+     "bits": 4,
+     "bound": 16,
+     "distinct_states": [
+      {
+       "distinct": 10,
+       "ticks": 10
+      },
+      {
+       "distinct": 16,
+       "ticks": 100
+      },
+      {
+       "distinct": 16,
+       "ticks": 1000
+      },
+      {
+       "distinct": 16,
+       "ticks": 10000
+      }
+     ],
+     "grid": 16,
+     "target": "15/16"
+    },
+    {
+     "bits": 5,
+     "bound": 32,
+     "distinct_states": [
+      {
+       "distinct": 10,
+       "ticks": 10
+      },
+      {
+       "distinct": 32,
+       "ticks": 100
+      },
+      {
+       "distinct": 32,
+       "ticks": 1000
+      },
+      {
+       "distinct": 32,
+       "ticks": 10000
+      }
+     ],
+     "grid": 32,
+     "target": "31/32"
+    }
+   ]
+  },
+  "claims": [
+   {
+    "claim": "the state is the exact integral of the history",
+    "settled_by": "receipt_levels",
+    "verdict": "holds"
+   },
+   {
+    "claim": "the state recovers the emitted count",
+    "settled_by": "receipt_levels",
+    "verdict": "holds, and so does the target and tick count alone"
+   },
+   {
+    "claim": "the coordinate alone is not the receipt",
+    "settled_by": "dimension_dependence",
+    "verdict": "holds"
+   },
+   {
+    "claim": "a 24-rational carrier holds about 10**20 ticks of history",
+    "settled_by": "grid_capacity",
+    "verdict": "refuted"
+   },
+   {
+    "claim": "float systems cannot keep the state exactly",
+    "settled_by": "now_float_control",
+    "verdict": "not supported at any scale measured"
+   },
+   {
+    "claim": "the seven dimensions are independent readings",
+    "settled_by": "dimension_dependence",
+    "verdict": "refuted"
+   },
+   {
+    "claim": "cumulative tax increases, which is the arrow of time",
+    "settled_by": "tax_arrow",
+    "verdict": "holds of any non-negative quantity"
+   },
+   {
+    "claim": "the differential tax is a strict arrow of time",
+    "settled_by": "tax_arrow",
+    "verdict": "refuted"
+   },
+   {
+    "claim": "the receipt identifies the history",
+    "settled_by": "collision_census",
+    "verdict": "refuted"
+   }
+  ],
+  "collisions": {
+   "alphabet": [
+    "0",
+    "1/4",
+    "1/2",
+    "3/4"
+   ],
+   "distinct_receipt_and_count": 19,
+   "distinct_receipts": 4,
+   "histories": 4096,
+   "largest_receipt_and_count_class": 580,
+   "largest_receipt_class": 1024,
+   "length": 6,
+   "receipt_is_injective": false,
+   "witness": [
+    [
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "1/4"
+    ],
+    [
+     "0",
+     "0",
+     "0",
+     "0",
+     "1/4",
+     "0"
+    ]
+   ]
+  },
+  "dimensions": {
+   "carriers": 128,
+   "claimed_dimensions": 7,
+   "composition_differs_on_every_pair": true,
+   "coordinate_agrees": 128,
+   "determined_by_the_composition": [
+    "coordinate",
+    "entropy",
+    "scale",
+    "tax"
+   ],
+   "determined_by_the_coordinate": [
+    "entropy"
+   ],
+   "entropy_agrees_on_every_pair": true,
+   "fibre_of_one_coordinate": 4722366482869645213696,
+   "free_dimensions": [
+    "composition",
+    "previous composition",
+    "neighbour coordinates"
+   ],
+   "grid_values_per_coordinate": 16,
+   "independent_readings": 3,
+   "labelled_dimensions": [
+    "layer",
+    "tick"
+   ],
+   "pairs_with_the_same_coordinate": 128,
+   "scale_differs_on": 25,
+   "tax_differs_on": 128
+  },
+  "float_control": {
+   "epsilon_denominator_bits": 52,
+   "first_bit_divergence": null,
+   "first_count_divergence": null,
+   "float_recovery_always_holds": true,
+   "horizon": 100000,
+   "largest_state_gap_denominator_bits": 52,
+   "largest_state_gap_numerator": 8579,
+   "rows": [
+    {
+     "exact_count": 70,
+     "float_count": 70,
+     "recovered_from_the_float_state": 70,
+     "recovery_holds": true,
+     "ticks": 100
+    },
+    {
+     "exact_count": 7071,
+     "float_count": 7071,
+     "recovered_from_the_float_state": 7071,
+     "recovery_holds": true,
+     "ticks": 10000
+    },
+    {
+     "exact_count": 70710,
+     "float_count": 70710,
+     "recovered_from_the_float_state": 70710,
+     "recovery_holds": true,
+     "ticks": 100000
+    }
+   ],
+   "target": "6369051672525773/9007199254740992"
+  },
+  "levels": {
+   "cases": 20,
+   "denominator_never_exceeds_the_target": true,
+   "level_0_predicted_the_count": 20,
+   "level_2_recovered_the_count": 20,
+   "rows": [
+    {
+     "count": 2,
+     "level_0_predicted": 2,
+     "level_2_recovered": 2,
+     "state": "0",
+     "state_denominator_bits": 0,
+     "target": "2/32",
+     "target_denominator_bits": 4,
+     "ticks": 32
+    },
+    {
+     "count": 8,
+     "level_0_predicted": 8,
+     "level_2_recovered": 8,
+     "state": "0",
+     "state_denominator_bits": 0,
+     "target": "2/32",
+     "target_denominator_bits": 4,
+     "ticks": 128
+    },
+    {
+     "count": 32,
+     "level_0_predicted": 32,
+     "level_2_recovered": 32,
+     "state": "0",
+     "state_denominator_bits": 0,
+     "target": "2/32",
+     "target_denominator_bits": 4,
+     "ticks": 512
+    },
+    {
+     "count": 64,
+     "level_0_predicted": 64,
+     "level_2_recovered": 64,
+     "state": "0",
+     "state_denominator_bits": 0,
+     "target": "2/32",
+     "target_denominator_bits": 4,
+     "ticks": 1024
+    },
+    {
+     "count": 625,
+     "level_0_predicted": 625,
+     "level_2_recovered": 625,
+     "state": "0",
+     "state_denominator_bits": 0,
+     "target": "2/32",
+     "target_denominator_bits": 4,
+     "ticks": 10000
+    },
+    {
+     "count": 3,
+     "level_0_predicted": 3,
+     "level_2_recovered": 3,
+     "state": "0",
+     "state_denominator_bits": 0,
+     "target": "3/32",
+     "target_denominator_bits": 5,
+     "ticks": 32
+    },
+    {
+     "count": 12,
+     "level_0_predicted": 12,
+     "level_2_recovered": 12,
+     "state": "0",
+     "state_denominator_bits": 0,
+     "target": "3/32",
+     "target_denominator_bits": 5,
+     "ticks": 128
+    },
+    {
+     "count": 48,
+     "level_0_predicted": 48,
+     "level_2_recovered": 48,
+     "state": "0",
+     "state_denominator_bits": 0,
+     "target": "3/32",
+     "target_denominator_bits": 5,
+     "ticks": 512
+    },
+    {
+     "count": 96,
+     "level_0_predicted": 96,
+     "level_2_recovered": 96,
+     "state": "0",
+     "state_denominator_bits": 0,
+     "target": "3/32",
+     "target_denominator_bits": 5,
+     "ticks": 1024
+    },
+    {
+     "count": 937,
+     "level_0_predicted": 937,
+     "level_2_recovered": 937,
+     "state": "1/2",
+     "state_denominator_bits": 1,
+     "target": "3/32",
+     "target_denominator_bits": 5,
+     "ticks": 10000
+    },
+    {
+     "count": 8,
+     "level_0_predicted": 8,
+     "level_2_recovered": 8,
+     "state": "0",
+     "state_denominator_bits": 0,
+     "target": "1/4",
+     "target_denominator_bits": 2,
+     "ticks": 32
+    },
+    {
+     "count": 32,
+     "level_0_predicted": 32,
+     "level_2_recovered": 32,
+     "state": "0",
+     "state_denominator_bits": 0,
+     "target": "1/4",
+     "target_denominator_bits": 2,
+     "ticks": 128
+    },
+    {
+     "count": 128,
+     "level_0_predicted": 128,
+     "level_2_recovered": 128,
+     "state": "0",
+     "state_denominator_bits": 0,
+     "target": "1/4",
+     "target_denominator_bits": 2,
+     "ticks": 512
+    },
+    {
+     "count": 256,
+     "level_0_predicted": 256,
+     "level_2_recovered": 256,
+     "state": "0",
+     "state_denominator_bits": 0,
+     "target": "1/4",
+     "target_denominator_bits": 2,
+     "ticks": 1024
+    },
+    {
+     "count": 2500,
+     "level_0_predicted": 2500,
+     "level_2_recovered": 2500,
+     "state": "0",
+     "state_denominator_bits": 0,
+     "target": "1/4",
+     "target_denominator_bits": 2,
+     "ticks": 10000
+    },
+    {
+     "count": 22,
+     "level_0_predicted": 22,
+     "level_2_recovered": 22,
+     "state": "44150546222835/70368744177664",
+     "state_denominator_bits": 46,
+     "target": "sqrt(2)/2 at 2**-53",
+     "target_denominator_bits": 51,
+     "ticks": 32
+    },
+    {
+     "count": 90,
+     "level_0_predicted": 90,
+     "level_2_recovered": 90,
+     "state": "8966174134003/17592186044416",
+     "state_denominator_bits": 44,
+     "target": "sqrt(2)/2 at 2**-53",
+     "target_denominator_bits": 51,
+     "ticks": 128
+    },
+    {
+     "count": 362,
+     "level_0_predicted": 362,
+     "level_2_recovered": 362,
+     "state": "170081111795/4398046511104",
+     "state_denominator_bits": 42,
+     "target": "sqrt(2)/2 at 2**-53",
+     "target_denominator_bits": 51,
+     "ticks": 512
+    },
+    {
+     "count": 724,
+     "level_0_predicted": 724,
+     "level_2_recovered": 724,
+     "state": "170081111795/2199023255552",
+     "state_denominator_bits": 41,
+     "target": "sqrt(2)/2 at 2**-53",
+     "target_denominator_bits": 51,
+     "ticks": 1024
+    },
+    {
+     "count": 7071,
+     "level_0_predicted": 7071,
+     "level_2_recovered": 7071,
+     "state": "9543671627587/140737488355328",
+     "state_denominator_bits": 47,
+     "target": "sqrt(2)/2 at 2**-53",
+     "target_denominator_bits": 51,
+     "ticks": 10000
+    }
+   ],
+   "state_adds_nothing": true,
+   "state_equals_the_closed_form": 20
+  },
+  "shortcut": {
+   "identical_output": true,
+   "rows": [
+    {
+     "average_closed_us": 2,
+     "average_loop_us": 2197,
+     "average_speedup": 1012,
+     "bits_closed_us": 62,
+     "bits_loop_us": 2208,
+     "bits_speedup": 35,
+     "ticks": 512
+    },
+    {
+     "average_closed_us": 2,
+     "average_loop_us": 17326,
+     "average_speedup": 7947,
+     "bits_closed_us": 468,
+     "bits_loop_us": 17366,
+     "bits_speedup": 37,
+     "ticks": 4096
+    }
+   ],
+   "shipped_tick_count": 512,
+   "theorems": [
+    "GLM.NowReceipt.const_count_eq_floor",
+    "GLM.NowReceipt.const_bit_eq_floor_diff"
+   ]
+  },
+  "tasks": {
+   "answered": [
+    "count from target and ticks",
+    "state from target and ticks",
+    "count from the integral",
+    "state from the integral",
+    "distinguish two targets"
+   ],
+   "every_refusal_carries_a_witness": true,
+   "refusals": [
+    {
+     "reason": "the receipt does not determine the history",
+     "task": "schedule from the receipt",
+     "witness": [
+      [
+       "0",
+       "1/4"
+      ],
+      [
+       "1/4",
+       "0"
+      ]
+     ]
+    },
+    {
+     "reason": "the receipt does not determine the history",
+     "task": "first tick from the receipt",
+     "witness": [
+      [
+       "0",
+       "1/4"
+      ],
+      [
+       "1/4",
+       "0"
+      ]
+     ]
+    },
+    {
+     "reason": "the receipt does not determine the history",
+     "task": "tick count from the receipt",
+     "witness": [
+      [
+       "0",
+       "1/4"
+      ],
+      [
+       "1/4",
+       "0"
+      ]
+     ]
+    },
+    {
+     "reason": "the receipt does not determine the history",
+     "task": "input from the receipt",
+     "witness": [
+      [
+       "0",
+       "1/4"
+      ],
+      [
+       "1/4",
+       "0"
+      ]
+     ]
+    }
+   ],
+   "refusals_paid": 4,
+   "refused": [
+    "schedule from the receipt",
+    "first tick from the receipt",
+    "tick count from the receipt",
+    "input from the receipt"
+   ],
+   "supplied_recipe_answers": 9,
+   "supplied_recipe_wrong_answers": 4,
+   "tasks": 9,
+   "wrong_answers_removed": 4
+  },
+  "tax": {
+   "cumulative_differential_is_flat": true,
+   "cumulative_differential_strictly_increasing": false,
+   "cumulative_monotone": true,
+   "differential_non_negative": true,
+   "per_tick_monotone": false,
+   "steps": 8,
+   "tax_first": "1455539421/536870912",
+   "tax_last": "434659056644259/3200000000000000"
+  }
+ },
+ "schema": 1
+}

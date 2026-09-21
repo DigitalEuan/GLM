@@ -2625,6 +2625,203 @@ def block_plannersandbox_promotion() -> str:
 
 
 # ===========================================================================
+#  NOW_RECEIPT_STUDY.md -- what a delta-sigma accumulator actually records
+# ===========================================================================
+
+def _now() -> Mapping[str, object]:
+    #  Cached on the digest of the module: the report carries one timing, and
+    #  a timing re-measured on every document check would drift the blocks for
+    #  no reason.  `corpus --refresh` re-takes it when the code moves.
+    from ..reasoning import now_receipt as nrc
+    return nrc.cached_now_receipt_report()
+
+
+def block_now_tier() -> str:
+    """The coarse read: what the receipt holds, and what it cannot."""
+    data = _now()
+    levels = data["levels"]
+    collisions = data["collisions"]
+    shortcut = data["shortcut"]
+    first = shortcut["rows"][0]
+    return (
+        f"**The accumulator is exactly the fractional part of the integral of "
+        f"its input, and that is all it is.**  Over {levels['cases']} runs of "
+        f"the supplied demonstrations the state recovers the emitted count "
+        f"{levels['level_2_recovered_the_count']} times out of "
+        f"{levels['cases']} — and so does the target and the tick count with "
+        f"the state withheld, {levels['level_0_predicted_the_count']} times "
+        f"out of {levels['cases']}, so the receipt adds nothing to what the "
+        f"program already says.  Enumerated exhaustively, "
+        f"{collisions['histories']:,} histories leave "
+        f"{collisions['distinct_receipts']} distinct receipts, the largest "
+        f"class holding {collisions['largest_receipt_class']:,} of them.  The "
+        f"same identity is what makes the shipped modulator cheap: at the "
+        f"{shortcut['shipped_tick_count']} ticks the `real` query kind runs, "
+        f"the average costs {first['average_closed_us']} µs read off the "
+        f"target against {first['average_loop_us']} µs run as a loop, with "
+        f"identical output.")
+
+
+def block_now_levels() -> str:
+    """The supplied recovery ladder, with the control it omits."""
+    data = _now()["levels"]
+    lines = ["| target | ticks | ones | level 2: from the state | "
+             "level 0: from the target alone | state denominator (bits) |",
+             "|---|---:|---:|---:|---:|---:|"]
+    for row in data["rows"]:
+        lines.append(
+            f"| `{row['target']}` | {row['ticks']:,} | {row['count']:,} | "
+            f"{row['level_2_recovered']:,} | {row['level_0_predicted']:,} | "
+            f"{row['state_denominator_bits']} |")
+    lines.append("")
+    lines.append(
+        f"Every row recovers the count both ways, so the state is not what "
+        f"recovers it: {data['level_0_predicted_the_count']} of "
+        f"{data['cases']} are right with the state withheld.  The state's "
+        f"denominator never exceeds the target's: "
+        f"{data['denominator_never_exceeds_the_target']}.")
+    return "\n".join(lines)
+
+
+def block_now_capacity() -> str:
+    """How many receipts a run can leave, against how long it runs."""
+    data = _now()["capacity"]
+    horizons = data["horizons"]
+    header = " | ".join(f"{value:,} ticks" for value in horizons)
+    lines = [f"| grid | target | {header} | bound | bits |",
+             "|---|---|" + "---:|" * len(horizons) + "---:|---:|"]
+    for row in data["rows"]:
+        counts = " | ".join(str(reading["distinct"])
+                            for reading in row["distinct_states"])
+        lines.append(f"| 1/{row['grid']} | `{row['target']}` | {counts} | "
+                     f"{row['bound']} | {row['bits']} |")
+    lines.append("")
+    lines.append(
+        "The count of distinct receipts saturates at the grid and stays "
+        "there: running for a thousand times as long adds none. "
+        "`GLM.NowReceipt.acc_mem_grid` is the statement and "
+        "`GLM.NowReceipt.receipt_pigeonhole` the consequence.")
+    return "\n".join(lines)
+
+
+def block_now_collisions() -> str:
+    """Every schedule of the enumerated space, grouped by its receipt."""
+    data = _now()["collisions"]
+    witness = data["witness"]
+    return (
+        f"| reading | value |\n|---|---|\n"
+        f"| alphabet | {', '.join('`' + value + '`' for value in data['alphabet'])} |\n"
+        f"| schedule length | {data['length']} |\n"
+        f"| histories enumerated | {data['histories']:,} |\n"
+        f"| distinct receipts | {data['distinct_receipts']} |\n"
+        f"| largest class of histories sharing one | "
+        f"{data['largest_receipt_class']:,} |\n"
+        f"| distinct (receipt, count) pairs | "
+        f"{data['distinct_receipt_and_count']} |\n"
+        f"| largest class sharing one of those | "
+        f"{data['largest_receipt_and_count_class']:,} |\n"
+        f"| the receipt identifies the history | "
+        f"{data['receipt_is_injective']} |\n\n"
+        f"The first colliding pair the enumeration meets is "
+        f"`({', '.join(witness[0])})` and `({', '.join(witness[1])})`.")
+
+
+def block_now_dimensions() -> str:
+    """The seven dimensions, and how many of them are free."""
+    data = _now()["dimensions"]
+    return (
+        f"| reading | value |\n|---|---|\n"
+        f"| dimensions claimed | {data['claimed_dimensions']} |\n"
+        f"| free readings | {data['independent_readings']} "
+        f"({', '.join(data['free_dimensions'])}) |\n"
+        f"| labels | {', '.join(data['labelled_dimensions'])} |\n"
+        f"| determined by the composition | "
+        f"{', '.join(data['determined_by_the_composition'])} |\n"
+        f"| determined by the coordinate | "
+        f"{', '.join(data['determined_by_the_coordinate'])} |\n"
+        f"| carrier pairs built to share a coordinate | "
+        f"{data['pairs_with_the_same_coordinate']} |\n"
+        f"| entropy reading agrees on every pair | "
+        f"{data['entropy_agrees_on_every_pair']} |\n"
+        f"| tax differs on | {data['tax_differs_on']} of them |\n"
+        f"| compositions sharing one coordinate | "
+        f"{data['fibre_of_one_coordinate']:,} on the "
+        f"{data['grid_values_per_coordinate']}-value grid |")
+
+
+def block_now_float() -> str:
+    """The float control: the comparative claim, run."""
+    data = _now()["float_control"]
+    lines = ["| ticks | exact ones | float ones | recovered from the float state |",
+             "|---:|---:|---:|---:|"]
+    for row in data["rows"]:
+        lines.append(f"| {row['ticks']:,} | {row['exact_count']:,} | "
+                     f"{row['float_count']:,} | "
+                     f"{row['recovered_from_the_float_state']:,} |")
+    lines.append("")
+    divergence = data["first_bit_divergence"]
+    lines.append(
+        f"Over {data['horizon']:,} ticks the two loops emit the same bit at "
+        f"every tick ("
+        + ("no divergence" if divergence is None
+           else f"first divergence at tick {divergence:,}")
+        + f"), and the supplied recovery holds from the float state as well "
+          f"as from the exact one: {data['float_recovery_always_holds']}.  "
+          f"What exactness buys is the bound, not this horizon.")
+    return "\n".join(lines)
+
+
+def block_now_shortcut() -> str:
+    """The loop against the closed form, on the shipped path."""
+    data = _now()["shortcut"]
+    lines = ["| ticks | average: loop | average: read off | bits: loop | "
+             "bits: read off |", "|---:|---:|---:|---:|---:|"]
+    for row in data["rows"]:
+        lines.append(
+            f"| {row['ticks']:,} | {row['average_loop_us']} µs | "
+            f"{row['average_closed_us']} µs | {row['bits_loop_us']} µs | "
+            f"{row['bits_closed_us']} µs |")
+    lines.append("")
+    lines.append(
+        f"Identical output on every case measured: {data['identical_output']}. "
+        f"The shipped `real` query kind runs {data['shipped_tick_count']} "
+        f"ticks per question, which is the first row.  The theorems are "
+        + ", ".join(f"`{name}`" for name in data["theorems"]) + ".")
+    return "\n".join(lines)
+
+
+def block_now_tasks() -> str:
+    """The declared task set: answered, or refused with a witness."""
+    data = _now()["tasks"]
+    lines = ["| task | outcome |", "|---|---|"]
+    for name in data["answered"]:
+        lines.append(f"| {name} | answered |")
+    for row in data["refusals"]:
+        lines.append(f"| {row['task']} | refused — {row['reason']} |")
+    lines.append("")
+    lines.append(
+        f"The supplied recipe answers all {data['supplied_recipe_answers']}, "
+        f"so it is wrong on {data['supplied_recipe_wrong_answers']}: the four "
+        f"questions whose answer the receipt does not determine.  Refusing "
+        f"those four removes {data['wrong_answers_removed']} wrong answers at "
+        f"a cost of {data['refusals_paid']} refusals, and every refusal "
+        f"carries the colliding pair that justifies it "
+        f"({data['every_refusal_carries_a_witness']}).")
+    return "\n".join(lines)
+
+
+def block_now_claims() -> str:
+    """Every claim of the supplied studies, and how it fell."""
+    data = _now()["claims"]
+    lines = ["| claim of the supplied studies | verdict | settled by |",
+             "|---|---|---|"]
+    for row in data:
+        lines.append(f"| {row['claim']} | **{row['verdict']}** | "
+                     f"`{row['settled_by']}` |")
+    return "\n".join(lines)
+
+
+# ===========================================================================
 #  ITERATION_COST_STUDY.md -- what one round of this repository costs
 # ===========================================================================
 
@@ -2996,6 +3193,133 @@ def block_fieldsurface_questions() -> str:
          "before", "after", "kind returned"), rows))
 
 
+_ordering_cache: Optional[Mapping[str, object]] = None
+
+
+def _ordering() -> Mapping[str, object]:
+    """What the ordering operation answers and refuses, run once per process.
+
+    Like the oracle and the field surface it keeps no measurement cache: the
+    declared comparisons and both translation tables are asked of a live
+    session in seconds, so a document that quotes this quotes what the
+    solvers do now.
+    """
+    global _ordering_cache
+    if _ordering_cache is None:
+        from ..reasoning import coordinate_order as cord
+        _ordering_cache = cord.comparison_report()
+    return _ordering_cache
+
+
+def _ordering_figure(field: str) -> str:
+    data = _ordering()
+    if field in ("declared", "answered", "refused", "as-declared"):
+        return _thousands(data[field.replace("-", "_")])   # type: ignore[index]
+    if field == "reasons":
+        return _thousands(len(data["refusal_reasons"]))    # type: ignore[arg-type]
+    if field in ("parsed-after", "surface-after"):
+        return _thousands(data["after"][field.split("-")[0]])   # type: ignore[index]
+    if field in ("parsed-before", "surface-before"):
+        return _thousands(data["before"][field.split("-")[0]])  # type: ignore[index]
+    if field == "held":
+        return _thousands(data["surface_keys"])            # type: ignore[index]
+    return _thousands(data["surface_parsed"])              # type: ignore[index]
+
+
+def block_ordering_declared() -> str:
+    """The declared comparison set: what was predicted, and what happened."""
+    data = _ordering()
+    rows = []
+    for row in data["rows"]:                              # type: ignore[union-attr]
+        rows.append((f"`{row['key']}`", f"`{row['field']}`",
+                     f"`{row['left']}` / `{row['right']}`",
+                     f"`{row['expected']}`", f"`{row['outcome']}`",
+                     "yes" if row["as_declared"] else "**no**"))
+    lines = _table(
+        ("comparison", "coordinate", "rows", "declared", "outcome",
+         "as declared"), rows)
+    lines.extend([
+        "",
+        str(data["verdict"]),
+        "",
+        str(data["caveat"]),
+    ])
+    return "\n".join(lines)
+
+
+def block_ordering_split() -> str:
+    """The twenty probe questions before the operation and after it."""
+    data = _ordering()
+    before = data["before"]                               # type: ignore[index]
+    after = data["after"]                                 # type: ignore[index]
+    rows = [(f"`{name}`", before[name], after[name],
+             _thousands(after[name] - before[name])
+             if after[name] >= before[name]
+             else str(after[name] - before[name]))
+            for name in ("parsed", "surface", "absent")]
+    lines = _table(
+        ("class", "before the operation", "after it", "change"), rows)
+    lines.extend([
+        "",
+        f"{_thousands(data['surface_parsed'])} of the "   # type: ignore[index]
+        f"{_thousands(data['surface_keys'])} questions the oracle called "
+        f"held and unreachable are now parsed; the one the field surface "
+        f"declared unreachable is the one this operation closes.",
+    ])
+    return "\n".join(lines)
+
+
+_extremum_cache: Optional[Mapping[str, object]] = None
+
+
+def _extremum() -> Mapping[str, object]:
+    """What the extremum operation folds and refuses, run once per process.
+
+    Like the ordering measurement beside it, it keeps no cache on disk: the
+    declared columns are read off a live session in seconds, so a document
+    that quotes this quotes what the operation does now.
+    """
+    global _extremum_cache
+    if _extremum_cache is None:
+        from ..reasoning import column_extremum as cx
+        _extremum_cache = cx.extremum_report()
+    return _extremum_cache
+
+
+def _extremum_figure(field: str) -> str:
+    data = _extremum()
+    if field in ("declared", "answered", "refused", "as-declared", "ties"):
+        return _thousands(data[field.replace("-", "_")])   # type: ignore[index]
+    if field == "reasons":
+        return _thousands(len(data["refusal_reasons"]))    # type: ignore[arg-type]
+    return _thousands(data["reasons_declared"])            # type: ignore[index]
+
+
+def block_extremum_declared() -> str:
+    """The declared column set: what was predicted, and what happened."""
+    data = _extremum()
+    rows = []
+    for row in data["rows"]:                              # type: ignore[union-attr]
+        winners = row.get("winners", ())
+        named = ("--" if not winners
+                 else (f"{len(winners)} rows" if len(winners) > 1
+                       else f"`{winners[0]}`"))
+        rows.append((f"`{row['key']}`", f"`{row['end']}`",
+                     f"`{row['field']}`", f"`{row['table']}`",
+                     f"`{row['expected']}`", f"`{row['outcome']}`", named,
+                     "yes" if row["as_declared"] else "**no**"))
+    lines = _table(
+        ("column", "end", "coordinate", "table", "declared", "outcome",
+         "rows at the end", "as declared"), rows)
+    lines.extend([
+        "",
+        str(data["verdict"]),
+        "",
+        str(data["caveat"]),
+    ])
+    return "\n".join(lines)
+
+
 def block_fieldsurface_tables() -> str:
     """What the surface addresses: every declared table, with its size."""
     data = _fieldsurface()
@@ -3100,6 +3424,25 @@ FIGURES: Dict[str, Callable[[], str]] = {
     "fieldsurface-rows": lambda: _fieldsurface_figure("rows"),
     "fieldsurface-fields": lambda: _fieldsurface_figure("fields"),
     "fieldsurface-pairs": lambda: _fieldsurface_figure("pairs"),
+    "ordering-declared-count": lambda: _ordering_figure("declared"),
+    "ordering-answered": lambda: _ordering_figure("answered"),
+    "ordering-refused": lambda: _ordering_figure("refused"),
+    "ordering-as-declared": lambda: _ordering_figure("as-declared"),
+    "ordering-reasons": lambda: _ordering_figure("reasons"),
+    "ordering-held": lambda: _ordering_figure("held"),
+    "ordering-surface-parsed": lambda: _ordering_figure("surface-parsed"),
+    "ordering-parsed-before": lambda: _ordering_figure("parsed-before"),
+    "ordering-parsed-after": lambda: _ordering_figure("parsed-after"),
+    "ordering-surface-before": lambda: _ordering_figure("surface-before"),
+    "ordering-surface-after": lambda: _ordering_figure("surface-after"),
+    "extremum-declared-count": lambda: _extremum_figure("declared"),
+    "extremum-answered": lambda: _extremum_figure("answered"),
+    "extremum-refused": lambda: _extremum_figure("refused"),
+    "extremum-as-declared": lambda: _extremum_figure("as-declared"),
+    "extremum-reasons": lambda: _extremum_figure("reasons"),
+    "extremum-reasons-declared": lambda: _extremum_figure(
+        "reasons-declared"),
+    "extremum-ties": lambda: _extremum_figure("ties"),
     #  The sentences the figures module already generates, now writable into
     #  a paragraph instead of quoted from a table by hand.
     "suite": lambda: _sentence("suite"),
@@ -3895,6 +4238,15 @@ BLOCKS: Dict[str, Callable[[], str]] = {
     "plannersandbox-tasks": block_plannersandbox_tasks,
     "plannersandbox-fallback": block_plannersandbox_fallback,
     "plannersandbox-promotion": block_plannersandbox_promotion,
+    "now-tier": block_now_tier,
+    "now-levels": block_now_levels,
+    "now-capacity": block_now_capacity,
+    "now-collisions": block_now_collisions,
+    "now-dimensions": block_now_dimensions,
+    "now-float": block_now_float,
+    "now-shortcut": block_now_shortcut,
+    "now-tasks": block_now_tasks,
+    "now-claims": block_now_claims,
     "cost-tier": block_cost_tier,
     "cost-addresses": block_cost_addresses,
     "cost-planner": block_cost_planner,
@@ -3919,6 +4271,9 @@ BLOCKS: Dict[str, Callable[[], str]] = {
     "fieldsurface-split": block_fieldsurface_split,
     "fieldsurface-questions": block_fieldsurface_questions,
     "fieldsurface-tables": block_fieldsurface_tables,
+    "ordering-declared": block_ordering_declared,
+    "ordering-split": block_ordering_split,
+    "extremum-declared": block_extremum_declared,
     "cost-figures": block_cost_figures,
 }
 

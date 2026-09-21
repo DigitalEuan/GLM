@@ -35,27 +35,84 @@ without recomputing anything by hand. The record of earlier rounds is in
 [`ITERATE.md`](ITERATE.md).*
 
 **Starting a new round? Read [`ITERATE.md`](ITERATE.md), then §3.4, "Named for
-the next round", before anything else.** The round just closed is
-**maintenance**, and says so: under directive **D15** it moved none of
-derivation, addressing or refusal. It picked the tree up unclosed — four
-generated artefacts stale and only 21 of 98 test units still signed, because
-the round before it had written its prose after its release — refreshed the
-generated layer and re-ran what that made stale. The release that followed
-passed every test file and failed on the evaluation, for a reason worth
-having: `report lean` had grown to about 203 seconds and crossed the harness's
-300-second ceiling. It was fixed by arithmetic rather than by a longer
-ceiling. The separation study behind that query ran two loops over the pairs
-of 3,383 declarations; the all-pairs means are now a closed form — Lagrange's
-identity, exact and integer — and the nearest-neighbour search is pruned by
-two exact lower bounds over the 3,002 distinct addresses. The query answers in
-**77 seconds** and every published figure is identical, which is checked by
-new cases that compare both routines with brute force rather than with their
-previous output. [`MASTER_PLAN.md`](MASTER_PLAN.md) Phases 21–48 are the
-record; Phase 48 is this round, and §7 of
-[`studies/LEAN_ADDRESS_STUDY.md`](studies/LEAN_ADDRESS_STUDY.md) is the
-measurement.
+the next round", before anything else.** The round just closed **moved the
+target**: under directive **D15** it moved **derivation** and **refusal**. It
+took candidate 1 of §3.4 — the column rather than the pair — and built the
+operation that closes it: `extremum`, one coordinate read off *every* row of
+one declared table and folded to its end, or refused. Four of eight declared
+columns are folded and four refused, every one of the eight as declared before
+the run, and the two refusals it was built for are the result rather than the
+cost: a column with a hole in it has no extremum, because
+`GLM.ColumnExtremum.extremum_over_present_is_not_the_extremum` exhibits a
+column whose extremum over the rows that are filled in is a different value at
+a different row, and a column gathered from two scales is not one column,
+because `extremum_not_invariant_under_one_row_rescaling` exhibits a one-row
+rescaling that moves the winner where `extremum_scale_invariant` shows that
+rescaling the shared scale cannot. Where the end is a tie every row attaining
+it is named — fourteen of them, on the lexicon register's `abstract_concrete`.
+What it does **not** move is addressing: the table and the coordinate are the
+names the question already gives.
+[`studies/COLUMN_EXTREMUM_STUDY.md`](studies/COLUMN_EXTREMUM_STUDY.md) is the
+study, `RequestProject/GLM/ColumnExtremum.lean` the proved half, and
+[`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 53 the record.
 
-Last reconciled against a full re-run on 2026-09-19.
+The round before it was **maintenance**, and said so: under directive **D15**
+it moved none of derivation, addressing or refusal. It finished the round
+before it — which
+had stopped with its counts re-taken in the working note but not written into
+the documents, and with no release run — by re-taking eight counts the tree
+quotes about itself, four of them measurements rather than tallies: the formal
+development at 3,422 declarations, the relay's strict gain now holding across
+the whole declared gate band with 19 queries carried and none lost, the
+planner consulted on ten refusals rather than four, and the end-to-end set at
+164 cases with 22 expected refusals. One unit was brittle rather than wrong —
+it asserted that a two-digit sentinel never reaches the recorded totals, and
+the suite reached 99 counted test files — and was fixed at the root. The
+release then earned: **every test file of that suite and all 7 instruments**
+signed with the exhaustive cases on. [`MASTER_PLAN.md`](MASTER_PLAN.md)
+Phase 52 is the record.
+
+The round before that **moved the target** too: under directive **D15** it
+moved **derivation** and **refusal**. It took candidate 1 of §3.4 as it then
+stood — the comparison a field surface
+could not make — and built the operation that closes it: `ordering`, one
+coordinate read off two rows and ordered exactly in rationals, or refused.
+Four of seven declared comparisons are answered and three refused, every one
+of the seven as declared before the run, and the refusals are the result
+rather than the cost — two readings are comparable only on one scale, and
+`GLM.CoordinateOrder.naive_order_is_not_scale_free` exhibits a positive
+rescaling that flips the comparison of the bare numbers where
+`order_scale_invariant` shows that no rescaling of a shared scale can. It
+closes the last of the probe's ten held-and-unreachable questions: *is energy
+more abstract than water?* is answered *energy*, by an exact `3/4`, on the
+lexicon register's own scale and its own declared poles. What it does **not**
+move is addressing, and the derivation it moves is one exact subtraction over
+two addressed readings, which is the honest size of it.
+[`studies/ORDERING_STUDY.md`](studies/ORDERING_STUDY.md) is the study,
+`RequestProject/GLM/CoordinateOrder.lean` the twelve theorems, and
+[`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 51 the record.
+
+The round before it was **maintenance**, and said so: under directive **D15**
+it moved none of derivation, addressing or refusal. It asked the release
+question the round before it had left unasked, and repaired the six units that
+failed it — the UBP source audit, which had no way to say that a float inside
+the core was a *declared* site and now reads the declared list off the D11
+inventory rather than loosening the check; the reasoning kernel's import
+audit, told about the one integer-nanosecond timing; two counts of the tree
+that had drifted; and two measurements that had moved with the corpus and were
+re-taken. [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 50 is the record.
+
+The round before *that* took the four supplied *History Recorded in the Now*
+studies seriously enough to decide them. Under directive **D15** it moved
+**refusal**, on a declared task set: the supplied recipe answers all nine
+history questions and is wrong on the four whose answer the receipt does not
+determine, and the module answers five and refuses four, each refusal carrying
+the pair of histories that share the receipt.
+[`studies/NOW_RECEIPT_STUDY.md`](studies/NOW_RECEIPT_STUDY.md) is the study and
+`RequestProject/GLM/NowReceipt.lean` the nine theorems; Phases 21–51 of
+[`MASTER_PLAN.md`](MASTER_PLAN.md) are the rest of the record.
+
+Last reconciled against a full re-run on 2026-09-21.
 
 Every count below is produced by `overlay/glm_universal/figures.py` and written
 to [`overlay/FIGURES.md`](overlay/FIGURES.md);
@@ -73,11 +130,11 @@ PYTHONPATH=. python3 -m glm_universal.figures --write
 
 | instrument | command | result |
 |---|---|---|
-| test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->3,924 tests across 97 of the 98 test files, 15,326 subtests, outside the document check<!--/figure-->**, zero failures |
-| end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->157<!--/figure--> / <!--figure:evaluation-case-count-->157<!--/figure-->** — 138 answered, 19 refused as expected (all `boundary`, no `gap`), 0 unexpected refusals, 0 confidently wrong, 0 errored |
+| test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->4,038 tests across 100 of the 101 test files, 15,644 subtests, outside the document check<!--/figure-->**, zero failures |
+| end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->172<!--/figure--> / <!--figure:evaluation-case-count-->172<!--/figure-->** — 146 answered, 26 refused as expected (all `boundary`, no `gap`), 0 unexpected refusals, 0 confidently wrong, 0 errored |
 | benchmark suites | `python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites, every suite above its baseline |
 | capability probes | `python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 errored, 0 surprises |
-| Lean development | `lake build` (repository root) | <!--figure:lean-files-->119 Lean files<!--/figure-->, **0 `sorry`** |
+| Lean development | `lake build` (repository root) | <!--figure:lean-files-->122 Lean files<!--/figure-->, **0 `sorry`** |
 | figures | `python3 -m glm_universal.figures --write` | regenerates `overlay/FIGURES.md`; every documented count |
 | corpus | `python3 -m glm_universal.corpus --check` | the tier contract, the archive partition, the coverage claim of `ENTRY.md`, every generated block and every derived cache — **current**, no drift |
 | construction ladder | `python3 -m glm_universal.tools ladder` | **462 / 568** queries named correctly with **0** wrong on the eleven-rung ladder, against **327** for the note's five rungs and **283** for the best single rung |
@@ -85,23 +142,25 @@ PYTHONPATH=. python3 -m glm_universal.figures --write
 | escalated operations | `python3 -m glm_universal.tools operations` | **<!--figure:opesc-count-->7<!--/figure-->** operations other than retrieval measured against substrate-removed controls; every one gains, and **one of them — program text — answers <!--figure:opesc-program-wrong-->13<!--/figure--> queries wrongly and is reported unsafe** |
 | second reading | `python3 -m glm_universal.tools second-reading` | **<!--figure:secondread-adopted-->1<!--/figure-->** of **<!--figure:secondread-configurations-->6<!--/figure-->** declared guard configurations is adopted — `<!--figure:secondread-shipped-->strict+margin<!--/figure-->` takes the program-text operation to **<!--figure:secondread-program-correct-->366<!--/figure-->** correct and **<!--figure:secondread-program-wrong-->0<!--/figure-->** wrong, giving up **<!--figure:secondread-given-up-->150<!--/figure-->** answers where matched refusal removes **<!--figure:secondread-matched-removes-->2<!--/figure-->** of the thirteen |
 | field surface | `python3 -m glm_universal.tools fieldsurface` | the surface answers **<!--figure:fieldsurface-moved-->9<!--/figure-->** of the **<!--figure:fieldsurface-held-->10<!--/figure-->** questions the oracle found held and unreachable — exactly the **<!--figure:fieldsurface-predicted-->9<!--/figure-->** declared reachable before the run — taking the probe from **<!--figure:fieldsurface-parsed-before-->6<!--/figure-->** parsed to **<!--figure:fieldsurface-parsed-after-->15<!--/figure-->**; it is `table`, not reasoning |
+| ordering operation | `python3 -m glm_universal.tools ordering` | the operation answers **<!--figure:ordering-answered-->4<!--/figure-->** of the **<!--figure:ordering-declared-count-->7<!--/figure-->** comparisons declared before the run and refuses **<!--figure:ordering-refused-->3<!--/figure-->** under **<!--figure:ordering-reasons-->3<!--/figure-->** named reasons — **<!--figure:ordering-as-declared-->7<!--/figure-->** of **<!--figure:ordering-declared-count-->7<!--/figure-->** as declared — and closes the last held-and-unreachable probe question, taking it to **<!--figure:ordering-parsed-after-->16<!--/figure-->** parsed |
+| extremum operation | `python3 -m glm_universal.tools extremum` | the operation folds **<!--figure:extremum-answered-->4<!--/figure-->** of the **<!--figure:extremum-declared-count-->8<!--/figure-->** columns declared before the run and refuses **<!--figure:extremum-refused-->4<!--/figure-->** under all **<!--figure:extremum-reasons-->4<!--/figure-->** of its named reasons — **<!--figure:extremum-as-declared-->8<!--/figure-->** of **<!--figure:extremum-declared-count-->8<!--/figure-->** as declared — and reports **<!--figure:extremum-ties-->1<!--/figure-->** tie as a tie rather than resolving it |
 | blockers probe | `python3 -m glm_universal.tools blockers` | the pre-registered language probe scores **<!--figure:probe-correct-->2<!--/figure-->** correct, **<!--figure:probe-wrong-->1<!--/figure-->** wrong, **<!--figure:probe-refused-->17<!--/figure-->** refused of **<!--figure:probe-questions-->20<!--/figure-->** — **below the declared pass mark of <!--figure:probe-pass-mark-->10<!--/figure-->**, a declared failure |
 
 The test-suite row is the sign-off ledger's own count, recorded by
 `python3 -m glm_universal.signoff --release`, which runs each test file in its
 own process with the `exhaustive` tests selected. One `pytest` process over the
 same tree, with `GLM_EXHAUSTIVE=1` so that nothing is deselected, collects
-**3,952 tests** — which is the ledger's 3,924 plus the 28 tests of the document
+**4,018 tests** — which is the ledger's 3,990 plus the 28 tests of the document
 check the ledger's total leaves out, because a round that adds a document or a
 figure fails that check until the documents are reconciled. Without that switch the `exhaustive`
 tests — which certify rather than sample — are reported as skipped with their
 reason rather than dropped silently, which is why the ledger's own count is
 taken from a run that selects them.
 
-The package is `glm_universal` **v1.18.0**: eleven sub-packages, 137 modules,
-**8 registers** holding 1,089 carriers (physics 726, chemistry 118, molecules
-51, mathematics 22, lexicon 95, spatial 28, harmonics 28, economics 21) beside
-a 45-class comparison register, **<!--figure:query-kinds-->22 query kinds<!--/figure-->**
+The package is `glm_universal` **v1.20.0**: eleven sub-packages, 146 modules,
+**8 registers** holding 1,143 carriers (physics 726, chemistry 118, molecules
+51, mathematics 22, lexicon 149, spatial 28, harmonics 28, economics 21) beside
+a 45-class comparison register, **<!--figure:query-kinds-->24 query kinds<!--/figure-->**
 one of which dispatches **65 report subjects**, and 3 tasks.
 
 ---
@@ -208,18 +267,18 @@ so a confident wrong answer is worse than a refusal). Write-up:
 [`CAPABILITY_ASSESSMENT.md`](CAPABILITY_ASSESSMENT.md).
 
 **The Lean development, addressed.** `reasoning/lean_address.py` gives each of
-the 3383 declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly 3383/3383 with 0 coordinate errors;
-2982 distinct addresses, and the quantiser adds no conflation of its own;
-nearest-by-address shares a file 669 times against 33 for a SHA-256 control and
-27 for a seeded reshuffle, with chance at ≈ 1.10 %. `report lean`.
+the 3455 declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly 3455/3455 with 0 coordinate errors;
+3070 distinct addresses, and the quantiser adds no conflation of its own;
+nearest-by-address shares a file 695 times against 33 for a SHA-256 control and
+23 for a seeded reshuffle, with chance at ≈ 1.06 %. `report lean`.
 Write-up: [`LEAN_ADDRESS_STUDY.md`](studies/LEAN_ADDRESS_STUDY.md).
 
 **The register where the address is the only reader.** In the anonymous
 register a query's identifiers are not the corpus's, by theorem
-(`GLM.Anonymous.overlap_anonymise_eq_zero`): over 842 queries the text search
-falls 718 → 73 and the identifier address book 414 → 44 against 48 by chance,
-where the structural address holds 238 → 168. Write-up:
+(`GLM.Anonymous.overlap_anonymise_eq_zero`): over 864 queries the text search
+falls 737 → 76 and the identifier address book 428 → 41 against 47 by chance,
+where the structural address holds 237 → 163. Write-up:
 [`ANONYMOUS_REGISTER_STUDY.md`](studies/ANONYMOUS_REGISTER_STUDY.md).
 
 **The standing rules, as instruments.**
@@ -252,8 +311,8 @@ twenty questions rather than three samples. `tools oracle`. Write-up:
 **The field surface, and what it was worth.** `runtime/fields.py` answers one
 named field of one named row — `field atomic_weight_u of carbon` — over
 <!--figure:fieldsurface-tables-->13<!--/figure--> declared tables holding
-<!--figure:fieldsurface-rows-->8,408<!--/figure--> rows and
-<!--figure:fieldsurface-pairs-->50,516<!--/figure--> addressable `(row,
+<!--figure:fieldsurface-rows-->8,576<!--/figure--> rows and
+<!--figure:fieldsurface-pairs-->51,452<!--/figure--> addressable `(row,
 field)` pairs: the element and molecule source rows, one table per register's
 carrier attributes, the Lean address book, the package's own top-level
 definitions, and a registry of declared zero-argument functions whose returned
@@ -273,6 +332,51 @@ comparison across two rows and needs an operation rather than a surface.
 `tools fieldsurface`. Write-up:
 [`FIELD_SURFACE_STUDY.md`](studies/FIELD_SURFACE_STUDY.md).
 
+**The ordering operation, and the refusal it is built around.**
+`reasoning/coordinate_order.py` reads one coordinate off *two* rows through
+the field surface and orders them exactly in rationals — `order
+abstract_concrete of energy and water`, the `ordering` query kind. Each side
+is a *reading*: a value together with the scale it was read on, `table:field`,
+and a coordinate held inside a mapping field — which is how the lexicon
+register keeps its ten semantic primitives — is read as a coordinate of that
+field. It refuses in <!--figure:ordering-reasons-->3<!--/figure--> named ways:
+a coordinate the row does not hold, a reading that is a label rather than a
+quantity, and two readings on different scales. The last is the point of it,
+and it is proved rather than asserted:
+`GLM.CoordinateOrder.naive_order_is_not_scale_free` exhibits a positive
+rescaling that flips the comparison of two raw numbers, while
+`order_scale_invariant` shows that no rescaling of a shared scale can.
+Measured on <!--figure:ordering-declared-count-->7<!--/figure--> comparisons
+declared before the run it answers <!--figure:ordering-answered-->4<!--/figure-->
+and refuses <!--figure:ordering-refused-->3<!--/figure-->, every one as
+declared, and it closes the one probe question the field surface named as
+unreachable — all <!--figure:ordering-held-->10<!--/figure-->
+held-and-unreachable questions are now parsed. `tools ordering`. Write-up:
+[`ORDERING_STUDY.md`](studies/ORDERING_STUDY.md).
+
+**The column, not the pair.** The `extremum` query kind reads one coordinate
+off **every** row of one declared table and returns the end of it, or refuses.
+The end is read off the word that opens the question — `largest`, `highest`,
+`maximum` against `smallest`, `lowest`, `minimum` — and every row attaining it
+is named rather than one of them picked: fourteen of the lexicon register's
+rows sit at the concrete end of `abstract_concrete`, and choosing between them
+would be a choice the register does not make. It refuses in
+<!--figure:extremum-reasons-->4<!--/figure--> named ways, two of them boundaries
+the system had no way to state before. A column with a hole in it has no
+extremum — 23 of the element register's 118 rows record
+`electronegativity_pauling` as missing, and
+`GLM.ColumnExtremum.extremum_over_present_is_not_the_extremum` exhibits a
+column where the extremum over the rows that are filled in is a different value
+at a different row, so an answer over the present rows is wrong rather than
+partial. A column gathered from two scales is not one column, which is the
+ordering operation's `different-scale` one level up, and
+`extremum_not_invariant_under_one_row_rescaling` is why. Measured on
+<!--figure:extremum-declared-count-->8<!--/figure--> columns declared before the
+run it folds <!--figure:extremum-answered-->4<!--/figure--> and refuses
+<!--figure:extremum-refused-->4<!--/figure-->, every one as declared.
+`tools extremum`. Write-up:
+[`COLUMN_EXTREMUM_STUDY.md`](studies/COLUMN_EXTREMUM_STUDY.md).
+
 **The round loop itself, measured and cut.** A named `.lean` file resolves to
 itself rather than to the whole development, so a median Lean file makes **26**
 units stale rather than 84 of 97, and a unit's closure is **116** files rather
@@ -290,7 +394,7 @@ This is the whole list. Nothing else in the repository is claimed as pending.
 
 ### 3.1 The evaluation finds no gap
 
-The end-to-end set is **149 of 149** and every one of its sixteen refusals is a
+The end-to-end set is **172 of 172** and every one of its twenty-six refusals is a
 `boundary` — a theorem or a stated commitment — rather than a `gap`. What
 remains open is listed below, and none of it is a question the evaluation set
 asks.
@@ -348,23 +452,79 @@ closures left behind is §3.4.
 ### 3.4 Named for the next round
 
 **Read this section first on the next development push.** The head of
-[`MASTER_PLAN.md`](MASTER_PLAN.md) names Phase 49 as where the next round
+[`MASTER_PLAN.md`](MASTER_PLAN.md) names Phase 54 as where the next round
 starts and points back here. The candidates are ordered: the first is the one that bears
 most directly on the standing target.
 
-**1. The comparison the field surface could not make — the one question it
-left, and the sharpest candidate.** *Is energy more abstract than water?* is
-still `surface`: both coordinates are in the lexicon register and no operation
-reads two of them and orders them. It was declared unreachable by a field
-surface *before* that surface was built, and it is unreachable for a reason
-worth taking seriously — it is composition, blocker 3, not coverage. What
-would close it is an operation over two readings of the same coordinate, with
-the refusal it must make when the two rows carry the coordinate on different
-scales. Unlike a field surface this is not `table`, so it is the candidate
-that bears on the standing target.
-[`FIELD_SURFACE_STUDY.md`](studies/FIELD_SURFACE_STUDY.md) §6.
+**1. The scales neither operation can bridge — the sharpest candidate.** `different-scale` is
+conservative by construction: two readings of the same quantity under two
+field names in two tables are refused even where a conversion between them
+exists, because the operation holds no conversions. What would close it is a
+**declared** table of conversions between scales — declared, so that a
+conversion is a fact someone wrote down rather than a guess from a name — with
+the measurement of how many of the refusals it removes and the proof that a
+conversion composed into the comparison leaves `order_scale_invariant`
+intact. The extremum operation inherits the same boundary one level up: a
+column gathered from two scales is refused, and the same declared table would
+be what lets it be gathered at all.
+[`ORDERING_STUDY.md`](studies/ORDERING_STUDY.md) §8,
+[`COLUMN_EXTREMUM_STUDY.md`](studies/COLUMN_EXTREMUM_STUDY.md) §7.
 
-*Closed this round (Phase 48, maintenance):* the handover the round before it
+**2. What a fold other than a maximum does with a hole.** The extremum
+operation refuses a column with a missing reading, and proves why. A rank, a
+median or a top-*k* over the same column each need their own statement of what
+a hole does to them — a median over the present rows is not the median, but it
+is wrong in a different way and by a different amount — and none of the three
+is built. The narrower question beside it is the answerable one the refusal
+declines: *of the rows that are filled in, which is the largest?* is a
+different question, and it would have to be asked as one, with the missing
+rows named in the answer rather than in the refusal.
+[`COLUMN_EXTREMUM_STUDY.md`](studies/COLUMN_EXTREMUM_STUDY.md) §7.
+
+*Closed this round (Phase 53):* candidate 1 of the last round — the column
+rather than the pair. The `extremum` query kind and
+`reasoning/column_extremum.py` read one coordinate off every row of one
+declared table and fold it exactly, naming every row that attains the end, or
+refuse under one of four named reasons, and
+`RequestProject/GLM/ColumnExtremum.lean` proves that the silence is exactly
+the second scale, the hole and the empty column, that the value returned is
+one of the column's own with nothing past it, that the rows named are exactly
+the rows attaining it, and that both refusals are results rather than
+fussiness. Under directive **D15** it moved **derivation** — a fold over
+addressed readings, which no register holds — and **refusal**, on a declared
+task set of eight columns, all eight as declared.
+[`COLUMN_EXTREMUM_STUDY.md`](studies/COLUMN_EXTREMUM_STUDY.md).
+
+*Closed in Phase 51:* candidate 1 of the last round — the comparison
+the field surface could not make. The `ordering` query kind and
+`reasoning/coordinate_order.py` read one coordinate off two rows and order it
+exactly, or refuse under one of three named reasons, and
+`RequestProject/GLM/CoordinateOrder.lean` proves that the silence is exactly
+the missing reading and the mismatched scale, that the answer is the order of
+the two values, and that *same scale* is the right side condition because a
+rescaling of one reading alone flips the comparison. Under directive **D15**
+it moved **derivation** — of the weakest interesting kind, one exact
+subtraction over two addressed readings — and **refusal**, on a declared task
+set of seven comparisons, all seven as declared. All
+<!--figure:ordering-held-->10<!--/figure--> of the probe's held-and-unreachable
+questions are now parsed. [`ORDERING_STUDY.md`](studies/ORDERING_STUDY.md).
+
+*Closed in Phase 50 (maintenance):* the release Phase 49 had not run,
+and the six units that failed it — the UBP source audit taught to read the
+declared float sites off the D11 inventory, the reasoning kernel's import
+audit, the Lean file count, the query-escalation cache, and the relay and
+anonymous measurements re-taken over the grown corpus. It moved none of
+derivation, addressing or refusal, and leaves the candidates above unchanged.
+
+*Closed in Phase 49:* the supplied *History Recorded in the Now*
+material, decided rather than illustrated — nine claims settled, three of them
+refuted, the refusal faculty moved on a declared task set, and the shipped
+modulator's loop replaced by the closed form it was always computing.
+[`NOW_RECEIPT_STUDY.md`](studies/NOW_RECEIPT_STUDY.md). It leaves two things
+named there and not taken: the v4 query-loop reading, which has no control, and
+the v4 higher-lattice escalation, which was argued rather than run.
+
+*Closed in Phase 48 (maintenance):* the handover the round before it
 left open — the generated layer refreshed and every unit re-signed — and the
 cost of `report lean`, which had grown through the evaluation's 300-second
 ceiling. It is now 77 seconds, by an exact identity and an exact pruning
@@ -389,25 +549,25 @@ before the run, and it is reported as coverage rather than reasoning:
 [`FIELD_SURFACE_STUDY.md`](studies/FIELD_SURFACE_STUDY.md), with the
 description in §2 and the proved boundary in `GLM.FieldSurface`.
 
-**2. The empty rungs of the power-of-two family.** The family is complete as a
+**3. The empty rungs of the power-of-two family.** The family is complete as a
 family and deliberately incomplete as a *ladder*: norms 2 and 256 are empty in
 the ladder actually used, because the rungs that would fill them conflate. What
 would close it is a rung at those norms that does not — Construction `A` over a
 shortened code, or the `D₄`/`E₈` layers, which the scaling does not generate.
 [`NORM_FAMILY_STUDY.md`](studies/NORM_FAMILY_STUDY.md).
 
-**3. A register that arrives anonymous on its own.** Renaming is a faithful
+**4. A register that arrives anonymous on its own.** Renaming is a faithful
 model of a cross-vocabulary goal and it is still a model. The measurement to
 want is the same table over goals from a second Lean development, or from a
 generator, scored against the same controls — a register nobody constructed.
 
-**4. The leak in the feature map.** The shipped map counts the type vocabulary
-wherever it occurs, including inside an identifier, so 30 of 826 queries lose a
+**5. The leak in the feature map.** The shipped map counts the type vocabulary
+wherever it occurs, including inside an identifier, so 36 of 864 queries lose a
 coordinate when their names go: a name creeping into a reading that is supposed
 to be structural. Either the map is narrowed to count type words only where
 they are types, or the leak is priced.
 
-**5. The separation criterion, still unmet.** `nearest_correct` in
+**6. The separation criterion, still unmet.** `nearest_correct` in
 `DeepHoleLadder.lean` says a reading names holes correctly whenever
 `ρ = 2W/B < 1`. Measured, `ρ` falls from `3.90` to **`2.59`** across the ladder
 and never crosses `1`, so a classifier that names 40 of 44 still cannot certify
@@ -417,12 +577,12 @@ no reading of this family reaches it. Its companion is
 `GLM.DeepHoleFailure.per_type_absent`, the certificate whose hypothesis is
 currently unmet, so the theorem is instantiated nowhere.
 
-**6. The thirteen unreached Niemeier types.** The ensemble reaches **10** of
+**7. The thirteen unreached Niemeier types.** The ensemble reaches **10** of
 the 23 root systems from the 14 declared centres; the other **13** are reported
 as unreached and nothing is claimed about them. Reaching them means new
 centres, and new centres mean a new pre-registration.
 
-**7. What the adopted guard costs, and why the metric reading is safe.** The
+**8. What the adopted guard costs, and why the metric reading is safe.** The
 guard refuses 137 queries it used to answer correctly. The room is in the
 *reading* rather than in the contract — the weaker guard is measured and never
 reaches safety — and the metric reading answers nothing wrongly on any of the
@@ -430,7 +590,7 @@ six operations while losing to the primary on four, which is a decomposition
 worth understanding. A margin other than twice the nearest distance is the
 obvious sweep. [`SECOND_READING_STUDY.md`](studies/SECOND_READING_STUDY.md) §9.
 
-**8. The planner's utility gate.** The reverse-call planner satisfies every
+**9. The planner's utility gate.** The reverse-call planner satisfies every
 safety line of its promotion checklist and fails the one that decides it: on
 this project's own evaluation set it gains nothing, because the refusals it is
 offered are refusals it agrees with. The question that would close it is about
@@ -439,7 +599,7 @@ could reach and the kind-driven dispatcher cannot. Until one does, directive
 **D14** keeps the planner in the sandbox, imported by nothing the system
 computes with.
 
-**9. A conflation the rational reading must make.** Read alone, the exact
+**10. A conflation the rational reading must make.** Read alone, the exact
 distance measure conflates `A_1^24` with `A_2^12`. That is a capacity boundary
 of the kind [`INFORMATION_LOSS_STUDY.md`](studies/INFORMATION_LOSS_STUDY.md) is
 about, and it is recorded as an observation rather than as a theorem. The
@@ -454,7 +614,7 @@ judgements — which brackets count as ordinary cases, which factor basis may
 explain a dimensional difference, which pole a word names, which phrasings are
 the same question — and a `Phrasing` cannot be constructed without the sentence
 that justifies it. Coverage stays two figures rather than one: three of the
-eight registers are described, and seven of the twenty-one answerable query
+eight registers are described, and seven of the twenty-three answerable query
 kinds are.
 
 ---
@@ -503,7 +663,7 @@ reach `PROJECT_DIRECTIVES.md` (about 66 minutes), 6 reach
 `signoff/ledger.py`, 1 reaches `signoff/__main__.py`.
 
 The seven instruments in the ledger beside the
-<!--figure:test-files-->98 test files<!--/figure--> are `lean-build`,
+<!--figure:test-files-->101 test files<!--/figure--> are `lean-build`,
 `lean-sorry-free`, `lean-copies-identical`, `capabilities`, `benchmarks`,
 `evaluation` and `figures`. Editing a document makes exactly the units that
 read that document stale — `test_figures.py` yes, `test_substrate.py` no — so
@@ -551,7 +711,7 @@ In order, from the repository root; the last step is the one that catches a
 document drifting from the code.
 
 ```bash
-lake build                                                   # 119 Lean files, no sorry
+lake build                                                   # 122 Lean files, no sorry
 rg -n 'sorry|admit' RequestProject/GLM                       # expect nothing
 diff -r RequestProject/GLM overlay/glm_lean/RequestProject/GLM   # the two copies agree
 
@@ -559,7 +719,7 @@ cd overlay
 PYTHONPATH=. GLM_EXHAUSTIVE=1 python3 -m pytest glm_universal/tests -q
 PYTHONPATH=. python3 -m glm_universal.capabilities           # 33 probes
 PYTHONPATH=. python3 -m glm_universal.benchmarks             # 5 suites
-PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8    # 157 CLI cases
+PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8    # 172 CLI cases
 PYTHONPATH=. python3 -m glm_universal.figures --write        # regenerate FIGURES.md
 PYTHONPATH=. python3 -m glm_universal.corpus --refresh       # every derived artefact
 PYTHONPATH=. python3 -m glm_universal.corpus --check          # exit 1 on any drift

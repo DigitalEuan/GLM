@@ -784,6 +784,81 @@ def _fieldsurface(args) -> int:
 
 
 # ---------------------------------------------------------------------------
+#  ordering
+# ---------------------------------------------------------------------------
+
+def _ordering(args) -> int:
+    """The ordering operation: what it answers, what it refuses, what it
+    closes of the probe the field surface left one question short."""
+    from .reasoning import coordinate_order as cord
+    report = cord.comparison_report()
+    if args.json:
+        print(json.dumps(
+            {"answered": report["answered"],
+             "refused": report["refused"],
+             "declared": report["declared"],
+             "as_declared": report["as_declared"],
+             "refusal_reasons": list(report["refusal_reasons"]),
+             "moved": list(report["moved"]),
+             "before": report["before"],
+             "after": report["after"],
+             "surface_parsed": report["surface_parsed"],
+             "surface_keys": report["surface_keys"]},
+            indent=1, sort_keys=True))
+        return 0
+    before, after = report["before"], report["after"]
+    print(f"declared comparisons  {report['declared']}")
+    print(f"answered / refused    {report['answered']} / {report['refused']} "
+          f"({', '.join(report['refusal_reasons'])})")
+    print(f"as declared           {report['as_declared']} of "
+          f"{report['declared']}")
+    print(f"probe before          {before['parsed']} parsed, "
+          f"{before['surface']} surface, {before['absent']} absent")
+    print(f"probe after           {after['parsed']} parsed, "
+          f"{after['surface']} surface, {after['absent']} absent")
+    print("comparison         outcome          as declared")
+    for row in report["rows"]:
+        print(f"  {row['key']:<18} {row['outcome']:<16} "
+              f"{'yes' if row['as_declared'] else 'NO'}")
+    print(report["caveat"])
+    return 0
+
+
+# ---------------------------------------------------------------------------
+#  extremum
+# ---------------------------------------------------------------------------
+
+def _extremum(args) -> int:
+    """The extremum operation: which columns it folds, which it refuses, and
+    under which of its four named reasons."""
+    from .reasoning import column_extremum as cx
+    report = cx.extremum_report()
+    if args.json:
+        print(json.dumps(
+            {"declared": report["declared"],
+             "answered": report["answered"],
+             "refused": report["refused"],
+             "as_declared": report["as_declared"],
+             "refusal_reasons": list(report["refusal_reasons"]),
+             "reasons_declared": report["reasons_declared"],
+             "ties": report["ties"]},
+            indent=1, sort_keys=True))
+        return 0
+    print(f"declared columns      {report['declared']}")
+    print(f"answered / refused    {report['answered']} / {report['refused']} "
+          f"({', '.join(report['refusal_reasons'])})")
+    print(f"as declared           {report['as_declared']} of "
+          f"{report['declared']}")
+    print(f"ties reported         {report['ties']}")
+    print("column             outcome          as declared")
+    for row in report["rows"]:
+        print(f"  {row['key']:<18} {row['outcome']:<16} "
+              f"{'yes' if row['as_declared'] else 'NO'}")
+    print(report["caveat"])
+    return 0
+
+
+# ---------------------------------------------------------------------------
 #  queryesc
 # ---------------------------------------------------------------------------
 
@@ -1055,6 +1130,18 @@ def _parser() -> argparse.ArgumentParser:
         help="what the field surface answers of the ten held and unreachable")
     surface.add_argument("--json", action="store_true")
     surface.set_defaults(handler=_fieldsurface)
+
+    ordering = sub.add_parser(
+        "ordering",
+        help="one coordinate read off two rows and ordered, or refused")
+    ordering.add_argument("--json", action="store_true")
+    ordering.set_defaults(handler=_ordering)
+
+    extremum = sub.add_parser(
+        "extremum",
+        help="one coordinate folded over every row of one table, or refused")
+    extremum.add_argument("--json", action="store_true")
+    extremum.set_defaults(handler=_extremum)
 
     loop = sub.add_parser(
         "queryesc", help="escalation as a step of the query loop")

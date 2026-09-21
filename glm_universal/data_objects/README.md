@@ -7,7 +7,7 @@
 
 **Verdict.** Eight domains, one carrier shape.
 
-**Deciding figure.** 1,089 carriers in all, every coordinate derived rather than tabulated.
+**Deciding figure.** 1,143 carriers in all, every coordinate derived rather than tabulated.
 
 **Recomputed by.** `glm_universal.figures.register_figures`
 
@@ -22,8 +22,8 @@ digit stack behind it.
 
 As loaded by the runtime (`GeometricSession.register`), the registers are
 physics **726**, chemistry **118**, **51 molecules**, mathematics **22**,
-lexicon **95** (the semantic lexicon), spatial **28**, harmonics **28**,
-economics **21** — 1,089 carriers in all.
+lexicon **149** (the semantic lexicon), spatial **28**, harmonics **28**,
+economics **21** — 1,143 carriers in all.
 The live counts are recomputed in [`../../FIGURES.md`](../../FIGURES.md) under
 *Registers*; `spatial` is built in the runtime rather than here. The tables
 below record the *verification sweep* over the frozen snapshots at the time it

@@ -64,18 +64,26 @@ an import of a random, hashing or floating-point library — are counted per
 sub-package. A `float` that appears only as the second argument of `isinstance`
 is the discipline being *enforced* rather than broken, and is not counted.
 
-* **Confirmed.** All 64 modules of the six sub-packages the discipline is
+* **Confirmed.** All 145 modules of the six sub-packages the discipline is
   claimed for — `substrate`, `data_objects`, `reasoning`, `semantics`,
   `runtime`, `migration` — construct no float and import none of `random`,
-  `secrets`, `hashlib`, `numpy`, `scipy`, `decimal`, `statistics`.
-* **Refuted, as a claim about the whole package.** 16 modules outside that core
-  do construct floats: `capabilities/probes.py` and much of the test suite feed
-  floats in precisely to check that they are refused; `evaluation/harness.py`
-  times in seconds; `benchmarks/harness.py` fingerprints a run with SHA-256;
-  `examples/scaled_carriers.py` is the legacy demonstration that exists to show
-  the damage. None of them sits on a computation path — but the ban does not
-  reach them, and the ledger says so rather than restricting the scan until the
-  claim comes out true.
+  `secrets`, `hashlib`, `numpy`, `scipy`, `decimal`, `statistics`, beside the
+  one site D11 declares inside the core and the audit therefore reports rather
+  than counts against the claim: `reasoning/now_float_control.py`, which runs
+  a delta-sigma accumulator in floating point *beside* the exact one in order
+  to settle a supplied claim about what a float accumulator loses. The audit
+  keeps no list of its own — it reads the declared sites off the D11 inventory
+  in `reasoning/exactness.py`, so a float can only be excused where its
+  warrant is published, and the raw per-package tally still counts it.
+* **Refuted, as a claim about the whole package.** 17 further modules outside
+  that core do construct floats: much of the test suite feeds floats in
+  precisely to check that they are refused; `evaluation/harness.py` times in
+  seconds; `benchmarks/harness.py` fingerprints a run with SHA-256;
+  `capabilities/probes.py` — the second declared site — feeds `0.5` and `2.0`
+  to four entry points of the substrate and requires each to raise. None of
+  them sits on a computation path — but the ban does not reach them, and the
+  ledger says so rather than restricting the scan until the claim comes out
+  true.
 
 ## Section 2 — the substrate core and the isometric bridge (all confirmed)
 

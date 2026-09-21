@@ -42,16 +42,23 @@ class TestTheFloatInventory(unittest.TestCase):
     def test_the_inventory_is_complete(self):
         self.assertTrue(self.inventory["inventory_is_complete"])
 
-    def test_the_only_float_site_is_the_rejection_probe(self):
-        """The one warranted site: floats fed in to be refused.
+    def test_the_two_float_sites_are_the_probe_and_the_control(self):
+        """The two warranted sites: floats fed in to be refused, and the
+        float under test.
 
         ``carrier_rejects_floats`` hands ``0.5`` and ``2.0`` to four entry
         points of the substrate and requires each to raise, so the floats are
         the adversarial input and the probe's result is that none of them was
-        accepted.  Every other module of the package is float-free.
+        accepted.  ``reasoning/now_float_control.py`` runs the delta-sigma
+        loop in floating point beside the exact one, because the supplied
+        study's claim that a float substrate cannot hold the accumulator
+        cannot be settled without running floating point (D11); nothing the
+        system computes with imports it.  Every other module of the package is
+        float-free.
         """
         self.assertEqual(set(self.inventory["sites"]),
-                         {"capabilities/probes.py"})
+                         {"capabilities/probes.py",
+                          "reasoning/now_float_control.py"})
         self.assertEqual(self.inventory["by_kind"]["float-call"], 0)
         self.assertEqual(self.inventory["by_kind"]["float-clock"], 0)
         self.assertEqual(self.inventory["by_kind"]["inexact-library"], 0)

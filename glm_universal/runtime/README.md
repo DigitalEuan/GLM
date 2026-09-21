@@ -7,7 +7,7 @@
 
 **Verdict.** `session.DOMAINS` is the authoritative list.
 
-**Deciding figure.** 8 registers holding 1,089 carriers, loaded lazily and cached.
+**Deciding figure.** 8 registers holding 1,143 carriers, loaded lazily and cached.
 
 **Recomputed by.** `glm_universal.figures.package_figures`
 
@@ -33,8 +33,8 @@ runtime/
 ## The registers
 
 `session.DOMAINS` is the authoritative list: **8 registers**, loaded lazily
-and cached, holding 1,089 carriers between them — physics 726, chemistry 118,
-molecules 51, mathematics 22, lexicon 95, spatial 28, harmonics 28,
+and cached, holding 1,143 carriers between them — physics 726, chemistry 118,
+molecules 51, mathematics 22, lexicon 149, spatial 28, harmonics 28,
 economics 21.  `molecules` is the
 newest: 51 molecules and ions, every coordinate derived from the element
 register rather than tabulated.  The counts here are the ones
@@ -42,7 +42,7 @@ register rather than tabulated.  The counts here are the ones
 
 ## The query kinds
 
-`parser.KINDS` is the authoritative list: **<!--figure:query-kinds-->22 query kinds<!--/figure-->** — twenty-one
+`parser.KINDS` is the authoritative list: **<!--figure:query-kinds-->24 query kinds<!--/figure-->** — twenty-three
 answering kinds plus `unknown`, the honest fallback.
 
 | Kind | Surface | What it does | Wired in |
@@ -68,6 +68,8 @@ answering kinds plus `unknown`, the honest fallback.
 | `comparative` | `is cold in stellar_surface hotter than hot in tea`, `is hot in tea as hot as hot in tea` | the comparative and the equative between two *uses*, recognised structurally rather than by keyword: both sides are read as exact rationals and compared, and the direction is the degree word's position relative to the midpoint of its scale. Refuses across quantities, on an unmeasured use, and on a word that sits exactly at the midpoint and so names no direction. The word order does not decide it — `cold` for a star is hotter than `hot` for a cup of tea — which `GLM.Info.comparative_not_determined_by_word_order` proves and `comparative_audit()` measures at 151 of 204 cross-class pairs | v1.9.0 |
 | `derive` | `derive span_ratio of tea`, `derive numerator of perfect_fifth in harmonics` | one coordinate of one object, answered off the domain descriptions in `glm_universal.recipe` rather than off a hand-written phrase: the answering path holds no rule of its own, so a new description costs no new parsing rule. The rule that computed the value and the held quantity it came from are reported beside it, and a coordinate no description derives is refused with the reason, which `GLM.Recipe.Spec.answer_eq_none_iff` says is exactly the boundary | v1.11.0 |
 | `field` | `field atomic_weight_u of carbon`, `fields of water` | one named field of one named row, over the declared tables of `glm_universal.runtime.fields`: the element and molecule source rows, each register's carrier attributes, the Lean address book, the package's own top-level definitions, and a declared registry of zero-argument functions addressable by key. The second shape names the fields a row answers to. It is `table`, the weakest faculty, and says so in every answer; it refuses an unknown row, an unknown field and a field the register records as missing, and `GLM.FieldSurface.lookup_eq_none_iff` says the answerable pairs are exactly the declared ones | v1.18.0 |
+| `ordering` | `order abstract_concrete of energy and water`, `order atomic_weight_u of carbon and oxygen` | one coordinate read off *two* rows and ordered exactly, or refused. Each side is a reading — a value with the scale it was read on, `table:field` — and a coordinate held inside a mapping field, which is how the lexicon register keeps its ten semantic primitives, is read as a coordinate of that field. It refuses in three named ways: a coordinate the row does not hold, a reading that is a label rather than a quantity, and two readings on different scales. The last is the point of it: `GLM.CoordinateOrder.naive_order_is_not_scale_free` exhibits a positive rescaling that flips the comparison of two raw numbers, and `order_scale_invariant` shows that no rescaling of a shared scale can | v1.19.0 |
+| `extremum` | `largest atomic_weight_u in element`, `largest abstract_concrete in carrier:lexicon` | one coordinate read off **every** row of one declared table and folded to its extremum, or refused. The end is read off the opening word — `largest`, `highest`, `maximum` against `smallest`, `lowest`, `minimum` — and every row attaining the end is named rather than one of them picked. It refuses in four named ways, two of them the reason it exists: a column with a hole in it, because `GLM.ColumnExtremum.extremum_over_present_is_not_the_extremum` exhibits a column whose extremum over the rows that are filled in is a different value at a different row, and a column gathered from more than one scale, because `extremum_not_invariant_under_one_row_rescaling` exhibits a one-row rescaling that moves the winner while `extremum_scale_invariant` shows that rescaling the shared scale cannot. The other two are `not-ordered` and `no-such-column` | v1.20.0 |
 | `unknown` | (fallback) | diagnostics + suggestions | v0.4.0 |
 
 ## The `report` subjects

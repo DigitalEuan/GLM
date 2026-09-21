@@ -762,14 +762,26 @@ class TestExactness:
                         path.name
 
     def test_no_float_literals_and_no_float_calls(self):
-        """No source line constructs a float, in any reasoning module.
+        """No source line constructs a float, in any reasoning module
+        except the one declared float site.
 
-        There is no longer an exception: NRCI shells 2 and 4 take their
-        square root rationally, at the declared resolution of
-        ``coherence.rational_sqrt``.
+        NRCI shells 2 and 4 take their square root rationally, at the
+        declared resolution of ``coherence.rational_sqrt``.  The single
+        exception is ``now_float_control.py``, which exists in order to run
+        the delta-sigma loop in floating point and so settle a supplied
+        study's claim about floats (D11); it is declared in
+        ``reasoning.exactness.FLOAT_SITES``, and the exception is read from
+        that inventory rather than written here, so a module that starts
+        constructing floats without being declared still fails.
         """
+        from glm_universal.reasoning import exactness as EXA
+        declared = {site.split("/")[1] for site, _kinds, _why
+                    in EXA.FLOAT_SITES if site.startswith("reasoning/")}
+        assert declared == {"now_float_control.py"}, declared
         offenders = []
         for path in sorted(REASONING_DIR.glob("*.py")):
+            if path.name in declared:
+                continue
             tree = ast.parse(path.read_text(encoding="utf-8"))
             for node in ast.walk(tree):
                 if isinstance(node, ast.Constant) and isinstance(
@@ -792,9 +804,17 @@ class TestExactness:
         # would recompute it, and checks that the pair still resolves.  That
         # is a read of the tree, not a computation, and it is what stops an
         # entry pointing at code that has since been renamed away.
+        # ``sys`` is here for one use only: the declared float site reads
+        # ``sys.float_info.epsilon`` in order to report the horizon at which
+        # a float accumulator's error bound gives out.
+        # ``time`` is here for one use only: the now-receipt audit times the
+        # delta-sigma loop against the closed form that replaced it, and it
+        # times it in integer nanoseconds (``time.monotonic_ns``), which is
+        # why the timing is not itself a float site.
         stdlib_roots = {"ast", "concurrent", "dataclasses", "fractions",
                         "functools", "importlib", "itertools", "json",
-                        "math", "pathlib", "re", "typing", "__future__"}
+                        "math", "pathlib", "re", "sys", "time", "typing",
+                        "__future__"}
         for path in sorted(REASONING_DIR.glob("*.py")):
             tree = ast.parse(path.read_text(encoding="utf-8"))
             for node in ast.walk(tree):

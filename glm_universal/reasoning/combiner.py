@@ -403,6 +403,9 @@ XOR_SITES: Tuple[Tuple[str, Tuple[str, ...], str], ...] = (
      "kept so shortcut_loss_report can count what it discarded"),
     ("reasoning/multires.py", ("group-law", "metric"),
      "the F2^4 <-> GF(4) x Z_4 fibration and its distances"),
+    ("reasoning/now_receipt.py", ("metric",),
+     "the topology reading of a captured moment is the Hamming distance from "
+     "the moment's carrier to each declared neighbour"),
     ("reasoning/pcgs.py", ("group-law",),
      "a generated linear code is the XOR closure of its rows: Reed-Muller "
      "encoding, and the Golay cross-check against the substrate's own table"),

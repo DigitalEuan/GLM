@@ -123,8 +123,12 @@ NEIGHBOURHOOD_RADIUS: int = 2
 #: answer is already a reading of the semantics layer -- ``meaning`` -- has a
 #: one-rung ladder on purpose: escalating it would be circular.  A kind whose
 #: refusals are decisions of a scale, a description or a process -- ``measure``,
-#: ``comparative``, ``derive``, ``real``, ``compare`` -- likewise, because no
-#: rung of this tower reads those.
+#: ``comparative``, ``derive``, ``real``, ``compare``, ``ordering``,
+#: ``extremum`` -- likewise, because no rung of this tower reads those.
+#: ``ordering`` is the clearest case: it refuses when two readings are on
+#: different scales, and raising the resolution of the reading cannot put them
+#: on one.  ``extremum`` refuses for the same reason one level up, and for a
+#: hole in the column, which no resolution fills either.
 LADDERS: Dict[str, Tuple[str, ...]] = {
     "describe": ("L1", "L2", "L3"),
     "nearest": ("L1", "L2", "L3"),
@@ -146,6 +150,8 @@ LADDERS: Dict[str, Tuple[str, ...]] = {
     "measure": ("L1",),
     "comparative": ("L1",),
     "derive": ("L1",),
+    "ordering": ("L1",),
+    "extremum": ("L1",),
     "unknown": ("L1",),
 }
 
