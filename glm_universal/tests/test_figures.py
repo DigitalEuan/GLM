@@ -355,7 +355,7 @@ class TestDocumentationQuotesCurrentFigures(unittest.TestCase):
             # modules; the package now holds 126 and the reasoning kernel
             # holds 71, so the bare phrase names a figure that is current
             # again and cannot be guarded without failing on the truth.
-            # The package figure is guarded by "88 modules", "92 modules",
+            # The package figure is guarded by "92 modules",
             # "96 modules", "102 modules" and "110 modules" below, which
             # collide with nothing.
             "40 report subjects", "35 Lean files", "6 registers",
@@ -392,7 +392,13 @@ class TestDocumentationQuotesCurrentFigures(unittest.TestCase):
             # a tenth sub-package, a forty-sixth report subject, a
             # twenty-first query kind and the sixtieth test file.
             "45 report subjects", "20 query kinds",
-            "nine sub-packages", "88 modules",
+            "nine sub-packages",
+            # "88 modules" was retired here when the *package* held 88
+            # modules; the reasoning kernel now holds 88, so the bare
+            # phrase names a figure that is current again and cannot be
+            # guarded without failing on the truth.  The package figure
+            # is guarded by "92 modules", "96 modules", "102 modules"
+            # and "110 modules" below.
             "59 test files", "2,656 tests", "2,656 collected tests",
             "12,074 subtests",
             # Retired in v5.17, when the question shape became an object:
@@ -666,6 +672,62 @@ class TestModuleDocstringsQuoteCurrentFigures(unittest.TestCase):
             with self.subTest(count=count):
                 self.assertEqual(int(count),
                                  len(self.session.register("physics")))
+
+
+# ===========================================================================
+# 6.  EVERY REGISTERED FIGURE IS READ BY SOMEONE
+# ===========================================================================
+
+class TestEveryRegisteredFigureIsQuoted(unittest.TestCase):
+    """The converse of D6, which nothing used to check.
+
+    D6 says every figure a document quotes is generated.  It says nothing
+    about the other direction, and the gap was real: a key could be
+    registered in :data:`glm_universal.corpus.render.FIGURES`, recomputed on
+    every release, and quoted by no document at all -- work the machine does
+    for no reader.  The wiring audit found twenty such keys in Phase 57; each
+    was quoted or retired, and this test keeps the registry and the documents
+    a single surface.
+
+    A key is *quoted* when some markdown file of the repository carries the
+    marker ``<!--figure:key-->``.  Which document quotes it is not this test's
+    business; that it is read by one is.
+    """
+
+    _MARKER = re.compile(r"<!--figure:([a-z0-9-]+)-->")
+    _SKIP_DIRS = (".git", "source_material", "__pycache__", ".lake", "build")
+
+    @classmethod
+    def setUpClass(cls):
+        from glm_universal.corpus import render
+
+        cls.registered = set(render.FIGURES)
+        quoted: set = set()
+        for dirpath, dirnames, filenames in os.walk(_REPO):
+            dirnames[:] = [d for d in dirnames if d not in cls._SKIP_DIRS]
+            for filename in filenames:
+                if not filename.endswith(".md"):
+                    continue
+                path = os.path.join(dirpath, filename)
+                quoted |= set(cls._MARKER.findall(_read(path)))
+        cls.quoted = quoted
+
+    def test_every_registered_key_is_quoted_by_a_document(self):
+        for key in sorted(self.registered):
+            with self.subTest(key=key):
+                self.assertIn(
+                    key, self.quoted,
+                    f"the figure key {key!r} is recomputed on every release "
+                    "and quoted by no document: quote it, or retire it from "
+                    "the registry")
+
+    def test_every_quoted_key_is_registered(self):
+        for key in sorted(self.quoted):
+            with self.subTest(key=key):
+                self.assertIn(
+                    key, self.registered,
+                    f"a document quotes the figure key {key!r}, which the "
+                    "registry does not hold, so nothing keeps it current")
 
 
 if __name__ == "__main__":  # pragma: no cover

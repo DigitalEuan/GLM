@@ -98,18 +98,26 @@ not written down here; it is emitted:
 <!-- generated: lean-corpus -->
 | kind | count |
 |---|---|
-| abbrev | 46 |
-| def | 885 |
+| abbrev | 52 |
+| def | 917 |
 | example | 18 |
-| inductive | 23 |
+| inductive | 27 |
 | instance | 27 |
-| lemma | 129 |
-| structure | 45 |
-| theorem | 2,282 |
-| **total** | **3,455** |
+| lemma | 163 |
+| structure | 48 |
+| theorem | 2,330 |
+| **total** | **3,582** |
 
-3,455 declarations across 122 files, the largest being `Gen3.lean` with 98.
+3,582 declarations across 126 files, the largest being `Gen3.lean` with 98.
 <!-- end generated -->
+
+Written into a sentence, so that a reader who stops here has the size of what
+follows: the reader addresses
+<!--figure:lean-declarations-->3,582<!--/figure--> declarations over
+<!--figure:lean-declaration-files-->126<!--/figure--> files, which is every
+file of <!--figure:lean-files-->126 Lean files<!--/figure--> the development
+holds — no Lean file of this repository is outside the corpus this study
+measures.
 
 The two `example` rows are `Denotation.lean`'s anonymous check that the physics
 register does not dimension the word *gravity* and one retrieved with
@@ -194,11 +202,11 @@ declarations in source order rather than asserting either:
 <!-- generated: lean-scale -->
 | scale | read back exactly | moved by the decoder | worst residual | verdict |
 |---|---|---|---|---|
-| 4 | 29 / 60 | 31 | — | **lossy** |
+| 4 | 28 / 60 | 32 | — | **lossy** |
 | 6 | 60 / 60 | 60 | 2 | lossless, non-degenerate |
 | 8 | 60 / 60 | 0 | 0 | **degenerate** |
 | **9** | **60 / 60** | **60** | **2** | **lossless, non-degenerate** |
-| 12 | 60 / 60 | 31 | 4 | lossless, partly degenerate |
+| 12 | 60 / 60 | 32 | 4 | lossless, partly degenerate |
 | 16 | 60 / 60 | 0 | 0 | **degenerate** |
 
 On the first 60 declarations in source order, decoding being the expensive step.  The chosen scale is 9.
@@ -241,11 +249,11 @@ below half a scale unit in every coordinate.
 <!-- generated: lean-readback -->
 |  | measured |
 |---|---|
-| declarations checked | 3,455 |
-| read back exactly | **3,455 / 3,455** (rate 1) |
-| coordinates checked | 82,920 |
+| declarations checked | 3,582 |
+| read back exactly | **3,582 / 3,582** (rate 1) |
+| coordinates checked | 85,968 |
 | coordinate errors | **0** |
-| moved by the decoder | 3,455 / 3,455 |
+| moved by the decoder | 3,582 / 3,582 |
 | worst observed residual | **3**, at `GLM.Gen2.Meaning.pseudoscalar_parity_ne_zero` |
 | half a scale step | `9/2` |
 | covering radius | 4 |
@@ -268,9 +276,9 @@ declaration" is, at this point, a statement about the feature map alone.
 <!-- generated: lean-injectivity -->
 | scheme | distinct addresses | distinct feature vectors | classes | declarations conflated | quantisation adds conflation? |
 |---|---|---|---|---|---|
-| `feature` | 3,070 / 3,455 | 3,070 | 265 | 650 | no |
-| `hash_control` | **3,455 / 3,455** | 3,070 | 0 | 0 | — |
-| `shuffled` | 3,070 / 3,455 | 3,070 | 265 | 650 | no |
+| `feature` | 3,183 / 3,582 | 3,183 | 273 | 672 | no |
+| `hash_control` | **3,582 / 3,582** | 3,183 | 0 | 0 | — |
+| `shuffled` | 3,183 / 3,582 | 3,183 | 273 | 672 | no |
 <!-- end generated -->
 
 Two things to read off this table.
@@ -294,7 +302,7 @@ the sense that a reader shown only the 24 counts would also fail to tell the
 members apart:
 
 <!-- generated: lean-classes -->
-265 classes: 208 pairs, 27 triples, 16 classes of 4, 6 classes of 5, 5 classes of 6, 2 classes of 7, 1 class of 15.
+273 classes: 214 pairs, 27 triples, 18 classes of 4, 5 classes of 5, 5 classes of 6, 3 classes of 7, 1 class of 15.
 
 The widest, written out, because the point they make can only be read from the names:
 
@@ -311,15 +319,16 @@ The widest, written out, because the point they make can only be read from the n
 7   GLM.Conjugate.energyDim, GLM.DimensionCarrier.mc4Dim,
     GLM.Foundations.mc4Dim, GLM.Gen2.energy, GLM.GolayHex.w2,
     GLM.Heisenberg.V, GLM.Semantics.energyDim
+7   GLM.CoordinateOrder.waterAbstractConcrete, GLM.Info.axisLayer,
+    GLM.Question.deriveDomainWord, GLM.Question.deriveOpening,
+    GLM.Question.deriveSeparator, GLM.QuestionNested.comparativeOperator,
+    GLM.Semantics.meaningLayer
 6   GLM.Admission.ledger_refusals, GLM.Completion.ledger_coverage,
     GLM.Gen3.dimensionless_counts, GLM.GrayJump.d2_1000033_1000034,
     GLM.LatticeShortcut.d2_1000033_1000034,
     GLM.Vagueness.ledger_conjugate_conversions
 6   GLM.Calibration.NA, GLM.Calibration.molarPlanck, GLM.Lightspeed.NA,
     GLM.Lightspeed.cSI, GLM.Lightspeed.hSI, GLM.Lightspeed.molarPlanck
-6   GLM.Calibration.cellDuration_bounds, GLM.Calibration.tick_bounds,
-    GLM.Calibration.workEnergy_bounds, GLM.Lightspeed.cellDuration_bounds,
-    GLM.Lightspeed.tick_bounds, GLM.Lightspeed.workEnergy_bounds
 ```
 <!-- end generated -->
 
@@ -366,27 +375,27 @@ The third table is on *all* pairs, not just nearest ones.
 <!-- generated: lean-neighbours -->
 | scheme | nearest shares a file | rate | mean tie size |
 |---|---|---|---|
-| `feature` | **695 / 3,455** | ≈ **20.12 %** | 1.67 |
-| `hash_control` | 33 / 3,455 | ≈ 0.96 % | 1.00 |
-| `shuffled` | 23 / 3,455 | ≈ 0.67 % | 1.67 |
-| *chance* | — | ≈ 1.06 % | — |
+| `feature` | **719 / 3,582** | ≈ **20.07 %** | 1.70 |
+| `hash_control` | 33 / 3,582 | ≈ 0.92 % | 1.00 |
+| `shuffled` | 23 / 3,582 | ≈ 0.64 % | 1.70 |
+| *chance* | — | ≈ 1.02 % | — |
 
 | scheme | nearest is cited, either way | rate |
 |---|---|---|
-| `feature` | **125 / 3,455** | ≈ **3.62 %** |
-| `hash_control` | 7 / 3,455 | ≈ 0.20 % |
-| `shuffled` | 2 / 3,455 | ≈ 0.06 % |
+| `feature` | **126 / 3,582** | ≈ **3.52 %** |
+| `hash_control` | 6 / 3,582 | ≈ 0.17 % |
+| `shuffled` | 2 / 3,582 | ≈ 0.06 % |
 | *chance* | — | ≈ 0.18 % |
 
 | scheme | mean d² within a file | mean d² across files | ratio |
 |---|---|---|---|
-| `feature` | 5,815.5 | 6,735.7 | **0.863** |
-| `hash_control` | 54,426.6 | 54,276.5 | 1.003 |
-| `shuffled` | 6,671.3 | 6,726.6 | 0.992 |
+| `feature` | 5,841.1 | 6,785.2 | **0.861** |
+| `hash_control` | 54,385.6 | 54,249.5 | 1.003 |
+| `shuffled` | 6,781.3 | 6,775.5 | 1.001 |
 
-Against closed-form chance the feature encoding runs 19.0× on the file test and 20.0× on the citation test, from an encoding that is never shown a file name.
+Against closed-form chance the feature encoding runs 19.7× on the file test and 19.7× on the citation test, from an encoding that is never shown a file name.
 
-Over 63,301 same-file pairs and 5,903,484 cross-file pairs.  The feature encoding beats the hash control: yes; beats the seeded reshuffle: yes; beats closed-form chance: yes.
+Over 65,366 same-file pairs and 6,348,205 cross-file pairs.  The feature encoding beats the hash control: yes; beats the seeded reshuffle: yes; beats closed-form chance: yes.
 <!-- end generated -->
 
 The two controls do exactly what they are there for.

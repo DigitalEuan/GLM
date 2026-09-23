@@ -1,0 +1,229 @@
+========================================================================
+GLM EXPERIMENTS — Procedural replay + 5 experiments
+========================================================================
+
+========================================================================
+EXPERIMENT E1 — Wide-range reasoning across 8 domains
+========================================================================
+
+  Domain: physics
+    ✓ 'verify energy = mass * speed_of_light^2'               -> energy = mass * speed_of_light^2 holds under scalar semantic
+    ✓ 'force : energy :: pressure : ?'                        -> force : energy :: pressure : adhesion_energy
+    ✗ 'compare energy and torque'                             -> unsolved: parse_real: 'energy' is not a notation this module
+    ✓ 'describe wavelength'                                   -> wavelength (physics): depth 2, plane-0 mask 0x7ffbfe, |v|^2 
+
+  Domain: chemistry
+    ✓ 'describe carbon'                                       -> C (chemistry): depth 26, plane-0 mask 0x000902, |v|^2 = 1098
+    ✓ 'describe hydrogen'                                     -> H (chemistry): depth 39, plane-0 mask 0x000800, |v|^2 = 4400
+    ✓ 'nearest 3 to oxygen'                                   -> nearest to O: N, C, Ne
+
+  Domain: molecules
+    ✓ 'describe water'                                        -> water (molecules): depth 34, plane-0 mask 0x000004, |v|^2 = 
+    ✓ 'describe methane'                                      -> methane (molecules): depth 48, plane-0 mask 0x000004, |v|^2 
+
+  Domain: mathematics
+    ✗ 'describe identity_matrix'                              -> err: [Errno 2] No such file or directory: '/home/z/my-projec
+
+  Domain: harmonics
+    ✓ 'describe perfect_fifth'                                -> perfect_fifth (harmonics): depth 23, plane-0 mask 0x000800, 
+    ✓ 'nearest 3 to major_third'                              -> nearest to major_third: major_sixth, harmonic_seventh, perfe
+
+  Domain: economics
+    ✗ 'describe spot_price'                                   -> err: [Errno 2] No such file or directory: '/home/z/my-projec
+
+  Domain: lexicon
+    ✗ 'meaning of motion'                                     -> err: [Errno 2] No such file or directory: '/home/z/my-projec
+
+  Domain: spatial
+    ✗ 'describe mog_grid'                                     -> err: [Errno 2] No such file or directory: '/home/z/my-projec
+
+  Coverage: 10/15 (66%)
+
+========================================================================
+EXPERIMENT E2 — Puzzle solving
+========================================================================
+
+  --- Odd-one-out (find the carrier that doesn't fit) ---
+    ✓ odd-one-out of energy, kinetic_energy, potential_energy, torque, wavelength
+        -> wavelength  (sum_d²=165/8 (avg=165/32))
+        expected: wavelength (different dimension; others are all L² M T⁻² or similar)
+    ✓ odd-one-out of force, pressure, momentum, energy, stress
+        -> energy  (sum_d²=75/4 (avg=75/16))
+        expected: momentum (different dim L M T⁻¹; others are L M T⁻² or L⁻¹ M T⁻²)
+    ✓ odd-one-out of speed_of_light, wavelength, frequency, mass, energy
+        -> speed_of_light  (sum_d²=150 (avg=75/2))
+        expected: mass (L⁰ M¹ T⁰; others all involve L or T)
+    ✓ odd-one-out of hydrogen, helium, lithium, beryllium, water
+        -> water  (sum_d²=10631997456484873805872572167449/180000000000000000 (avg=10631997456484873805872572167449/720000000000000000))
+        expected: water (molecule; others are elements)
+
+  --- Missing quantity (analogies a:b :: c:?) ---
+    ✓ force:energy::pressure:?  ->  adhesion_energy
+        first of 7 tied at d²=0
+    ✓ energy:mass::momentum:?  ->  linear_density
+        first of 1 tied at d²=1/4
+    ✓ speed_of_light:wavelength::gravitational_field:?  ->  alfven_speed
+        first of 23 tied at d²=0
+    ✓ force:momentum::energy:?  ->  action
+        first of 3 tied at d²=0
+
+  --- Reduce expression to register name ---
+    ○ mass * acceleration                 -> name=None
+        ext10=L M T^-2, names=('drag_force', 'force', 'lift_force')
+        expected: force
+    ○ force * distance                    -> name=None
+        err: term arithmetic: 'force * distance' is not an expression over register names: [Errno 2] No such file or directory: '/home/z/my-project/upload/extracted/output-final_aristotle/overlay/glm_universal/reasoning/_data/physics_relations.json'
+        expected: energy or work or torque
+    ○ energy / time                       -> name=None
+        ext10=L^2 M T^-3, names=('heat_flow', 'luminosity', 'metabolic_rate')
+        expected: power
+    ○ force / area                        -> name=None
+        ext10=L^-1 M T^-2, names=('blood_pressure', 'bulk_modulus', 'dynamic_pressure')
+        expected: pressure
+    ○ voltage * current                   -> name=None
+        ext10=L^2 M T^-3, names=('heat_flow', 'luminosity', 'metabolic_rate')
+        expected: power (electrical)
+    ○ mass * speed_of_light^2             -> name=None
+        ext10=L^2 M T^-2, names=('binding_energy', 'energy', 'enthalpy')
+        expected: energy (mass-energy)
+    ○ length * length * length            -> name=None
+        ext10=L^3, names=('section_modulus', 'tidal_volume', 'volume')
+        expected: volume
+
+  --- Cluster puzzles (discover structure via exact dendrogram) ---
+    ✓ cluster energy, kinetic_energy, potential_energy, enthalpy into 2
+        -> 2 clusters (single linkage): [['enthalpy'], ['energy', 'kinetic_energy', 'potential_energy']]
+        expected: enthalpy should branch off (it's the only one with a thermal component)
+    ✓ cluster H, He, Li, Be, C, N, O into 3
+        -> 3 clusters (single linkage): [['C'], ['N', 'O'], ['Be', 'H', 'He', 'Li']]
+        expected: expect H/He/Li/Be in one cluster (s-block), C/N in another (p-block nonmetals)
+    ✓ group together energy, torque, force, momentum
+        -> 2 clusters (single linkage): [['energy', 'torque'], ['force', 'momentum']]
+        expected: energy+torque share dim, force+momentum share dim → 2 groups expected
+    ✓ dendrogram speed_of_light, wavelength, frequency, energy, mass
+        -> 2 clusters (single linkage): [['speed_of_light'], ['energy', 'frequency', 'mass', 'wavelength']]
+        expected: speed_of_light should be far from the others
+
+========================================================================
+EXPERIMENT E3 — Unique data insight (GLM-only)
+========================================================================
+
+  --- (a) Dimensional coincidences (d²=0, different names) ---
+    Found 32 coincidence pairs in first 50 carriers
+      abbe_dispersion_number  ≡  birefringence  (d²=0)
+      absorptance  ≡  albedo  (d²=0)
+      absorptance  ≡  archimedes_number  (d²=0)
+      absorptance  ≡  aspect_ratio  (d²=0)
+      absorptance  ≡  atwood_number  (d²=0)
+
+  --- (b) Most isolated carrier (largest min-distance to any other) ---
+    Most isolated: angstrom
+      nearest neighbour: absorptance at d²=103/8
+
+  --- (c) Parity clusters (carriers sharing Golay codewords) ---
+    Found 3 parity clusters of size ≥ 3 (in first 100 carriers)
+      codeword 0x000000: 67 carriers — ['abbe_dispersion_number', 'absorbed_dose', 'absorptance', 'acoustic_absorption', 'acoustic_attenuation']
+      codeword 0x809a0e: 5 carriers — ['acoustic_admittance', 'acoustic_impedance', 'action_potential_amplitude', 'admittance', 'charge_mobility_product']
+      codeword 0x90340d: 4 carriers — ['alfven_speed', 'cardiac_output', 'charge', 'charge_density']
+
+  --- (d) EXT10 dimensional families (carriers per dim pattern) ---
+    Found 74 distinct EXT10 dim families (in first 200 carriers)
+      dim=dimensionless              47 carriers — ['abbe_dispersion_number', 'absorptance', 'acoustic_absorption']
+      dim=L                          16 carriers — ['angstrom', 'beam_waist', 'bohr_radius']
+      dim=T^-1                       9 carriers — ['activity', 'audio_frequency', 'bandwidth']
+      dim=L^-1 M T^-2                7 carriers — ['bar_pressure', 'blood_pressure', 'bulk_modulus']
+      dim=L^2  T^-2                  5 carriers — ['absorbed_dose', 'calorific_value', 'convective_available_potential_energy']
+
+========================================================================
+EXPERIMENT E4 — Lean / Math exploration
+========================================================================
+
+  --- (a) Buckingham-Pi dimensional analysis ---
+    ✓ pi groups force mass length time
+        -> 1 Pi group(s) over 4 quantities of rank 3: force^(1/2) * mass^(-1/2) * length^(-1/2) * tim
+    ✓ pi groups speed_of_light gravitational_constant mass
+        -> 0 Pi group(s) over 3 quantities of rank 3: none
+    ✓ pi groups energy mass speed_of_light
+        -> 1 Pi group(s) over 3 quantities of rank 2: energy^(-1/2) * mass^(1/2) * speed_of_light^(1/
+    ✓ pi groups voltage current resistance
+        -> 1 Pi group(s) over 3 quantities of rank 2: voltage^(-1/1) * current^(1/1) * resistance^(1/
+
+  --- (b) Exact-real comparisons (no leading 'compare') ---
+    ✓ sqrt(2) greater than 7/5
+        -> true: sqrt(2) > 7/5
+    ✓ sqrt(2) greater than 1.4142
+        -> true: sqrt(2) > 1.4142
+    ✓ pi less than 22/7
+        -> true: pi < 22/7
+    ✓ e less than 3
+        -> true: e < 3
+    ✓ phi greater than 1.5
+        -> true: phi > 1.5
+    ✓ real value sqrt(2)
+        -> sqrt(2) = 1.41421356237309504880 (to 20 places); no carrier holds it
+    ✓ real value pi
+        -> pi = 3.14159265358979323846 (to 20 places); no carrier holds it
+    ✓ irrational sqrt(2)
+        -> sqrt(2) = 1.41421356237309504880 (to 20 places); no carrier holds it
+
+  --- (c) Term-arithmetic reduction (exact) ---
+    ✓ energy / time
+        -> name=None, dim=L^2 M T^-3, candidates=6
+    ✓ mass * speed_of_light^2
+        -> name=None, dim=L^2 M T^-2, candidates=19
+    ✓ force / area
+        -> name=None, dim=L^-1 M T^-2, candidates=31
+    ✓ voltage * current
+        -> name=None, dim=L^2 M T^-3, candidates=6
+    ✓ mass * acceleration
+        -> name=None, dim=L M T^-2, candidates=4
+
+  --- (d) Coherence breakdown for selected carriers ---
+    ✓ coherence of energy
+        -> NRCI=0.5406 (Coherent), tax=21668713655770732267/2550000000000000000, shell0=999050430404527/12500000000000
+    ✓ coherence of speed_of_light
+        -> NRCI=0.1887 (Subcoherent), tax=221552497643845619/5156250000000000, shell0=8464675430404527/2000000000000
+    ✓ coherence of curvature
+        -> NRCI=0.8583 (OnBit), tax=9899798393336587/6000000000000000, shell0=1169026291213581/1000000000000
+    ✓ coherence of planck_constant
+        -> NRCI=0.1869 (Subcoherent), tax=62173156916522804767/1430000000000000000, shell0=5342800430404527/1250000000000
+
+========================================================================
+EXPERIMENT E5 — Procedural-replay benchmark
+========================================================================
+
+  Running 11 queries twice (1st pass = cold, 2nd = procedural replay)...
+
+Benchmark: procedural_replay
+  queries:              11
+  verified (1st pass):  10/11 (90%)
+  verified (2nd pass):  11/11 (100%)
+  procedural hits:      17
+  procedural misses:    5
+  mean latency 1st:     656326.5 µs
+  mean latency 2nd:     322176.7 µs
+  speedup:              2.04×
+
+  Per-query latency (1st vs 2nd pass):
+    force : energy :: pressure : ?                     1st=  764018µs  2nd=  378805µs  speedup= 2.02×  [✓✓]
+    energy : mass :: wavelength : ?                    1st=  370676µs  2nd=  375190µs  speedup= 0.99×  [✓✓]
+    force : momentum :: energy : ?                     1st=  383141µs  2nd=  378044µs  speedup= 1.01×  [✓✓]
+    verify energy = mass * speed_of_light^2            1st= 1789149µs  2nd=  563564µs  speedup= 3.17×  [✓✓]
+    verify force = mass * acceleration                 1st= 1406674µs  2nd=  432757µs  speedup= 3.25×  [✗✓]
+    verify power = energy / time                       1st= 1255454µs  2nd=  380876µs  speedup= 3.30×  [✓✓]
+    describe energy                                    1st=  269363µs  2nd=   56677µs  speedup= 4.75×  [✓✓]
+    describe force                                     1st=   53295µs  2nd=   53161µs  speedup= 1.00×  [✓✓]
+    describe wavelength                                1st=   72073µs  2nd=   71452µs  speedup= 1.01×  [✓✓]
+    speed_of_light : wavelength :: frequency : ?       1st=  488940µs  2nd=  487624µs  speedup= 1.00×  [✓✓]
+    pressure : force :: energy : ?                     1st=  366809µs  2nd=  365793µs  speedup= 1.00×  [✓✓]
+
+========================================================================
+FINAL STATE — Procedural memory after all experiments
+========================================================================
+  Total procedures stored: 4
+    shape=analogy:3        answer=adhesion_energy            used=10×  created_turn=0
+    shape=verify:2         answer=kinetic_energy             used=2×  created_turn=0
+    shape=verify:3         answer=heat_flow                  used=3×  created_turn=0
+    shape=describe:1       answer=kinetic_energy             used=6×  created_turn=0
+
+  Stats: {'reason_calls': 22, 'procedural_hits': 17, 'procedural_misses': 5, 'full_reason_runs': 5}

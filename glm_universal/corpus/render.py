@@ -3320,6 +3320,229 @@ def block_extremum_declared() -> str:
     return "\n".join(lines)
 
 
+_scales_cache: Optional[Mapping[str, object]] = None
+
+
+def _scales() -> Mapping[str, object]:
+    """What the declared conversion table relates, run once per process.
+
+    Like the two measurements above it, it keeps no cache on disk: the
+    declared questions are run against a live session in seconds, so a
+    document that quotes this quotes what the table does now.
+    """
+    global _scales_cache
+    if _scales_cache is None:
+        from ..reasoning import scale_conversion as sc
+        _scales_cache = sc.conversion_report()
+    return _scales_cache
+
+
+def _scales_figure(field: str) -> str:
+    data = _scales()
+    census = data["census"]                               # type: ignore[index]
+    if field in ("declared", "answered", "refused", "as-declared",
+                 "declared-rows", "quantities", "offsets"):
+        return _thousands(data[field.replace("-", "_")])  # type: ignore[index]
+    if field in ("scales", "pairs", "bridged"):
+        return _thousands(census[field])                  # type: ignore[index]
+    return _thousands(census["refused"])                  # type: ignore[index]
+
+
+def block_scales_table() -> str:
+    """The declared table itself: one row per scale, with its source."""
+    data = _scales()
+    rows = [(f"`{row['scale']}`", row["quantity"], f"`{row['unit']}`",
+             f"`{row['factor']}`", f"`{row['offset']}`", row["source"])
+            for row in data["table"]]                     # type: ignore[union-attr]
+    lines = _table(
+        ("scale", "quantity", "unit", "factor", "offset", "declared from"),
+        rows)
+    census = data["census"]                               # type: ignore[index]
+    lines.extend([
+        "",
+        f"{_thousands(data['declared_rows'])} rows over "     # type: ignore[index]
+        f"{_thousands(data['quantities'])} quantities, "      # type: ignore[index]
+        f"{_thousands(data['non_unit_factors'])} of them with a factor "  # type: ignore[index]
+        f"other than 1 and {_thousands(data['offsets'])} with an offset.  "  # type: ignore[index]
+        f"Of the {_thousands(census['pairs'])} pairs of the "  # type: ignore[index]
+        f"{_thousands(census['scales'])} numeric scales the field surface "  # type: ignore[index]
+        f"holds, the table relates {_thousands(census['bridged'])} and "  # type: ignore[index]
+        f"leaves {_thousands(census['refused'])} refused.",   # type: ignore[index]
+    ])
+    return "\n".join(lines)
+
+
+def block_scales_declared() -> str:
+    """The declared question set: what was predicted, and what happened."""
+    data = _scales()
+    rows = []
+    for row in data["rows"]:                              # type: ignore[union-attr]
+        operands = row["operands"]
+        if row["kind"] == "order":
+            asked = (f"`{operands[0]}` of `{operands[1]}` against "
+                     f"`{operands[2]}` of `{operands[3]}`")
+        else:
+            asked = f"largest `{operands[0]}`" + (
+                f" in `{operands[1]}`" if operands[1] else "")
+        rows.append((f"`{row['key']}`", asked, f"`{row['expected']}`",
+                     f"`{row['outcome']}`",
+                     f"`{row.get('unit', '')}`" if row.get("unit") else "--",
+                     "yes" if row["as_declared"] else "**no**"))
+    lines = _table(
+        ("question", "asked as", "declared", "outcome", "compared in",
+         "as declared"), rows)
+    lines.extend([
+        "",
+        str(data["verdict"]),
+        "",
+        str(data["caveat"]),
+    ])
+    return "\n".join(lines)
+
+
+_conversation_cache: Optional[Mapping[str, object]] = None
+
+
+def _conversation() -> Mapping[str, object]:
+    """What the conversation layer binds and refuses, run once per process.
+
+    Like the two measurements above it, it keeps no cache on disk: the
+    declared follow-ups are run against a live session in about ten seconds,
+    so a document that quotes this quotes what the operation does now.
+    """
+    global _conversation_cache
+    if _conversation_cache is None:
+        from ..runtime import conversation as cv
+        _conversation_cache = cv.conversation_report()
+    return _conversation_cache
+
+
+def _conversation_figure(field: str) -> str:
+    data = _conversation()
+    if field == "reasons":
+        return _thousands(len(data["refusal_reasons"]))    # type: ignore[arg-type]
+    return _thousands(data[field.replace("-", "_")])       # type: ignore[index]
+
+
+_binding_cache: Optional[Mapping[str, object]] = None
+
+
+def _binding() -> Mapping[str, object]:
+    """What a bound relation gives back, run once per process."""
+    global _binding_cache
+    if _binding_cache is None:
+        from ..reasoning import role_binding as rb
+        _binding_cache = rb.binding_report()
+    return _binding_cache
+
+
+def _binding_figure(field: str) -> str:
+    data = _binding()
+    fibres = data["fibres"]                               # type: ignore[index]
+    product = data["product"]                             # type: ignore[index]
+    if field in ("carriers", "recoverable", "ambiguous", "largest-fibre",
+                 "readings", "control-wrong"):
+        return _thousands(fibres[field.replace("-", "_")])  # type: ignore[index]
+    if field == "product-recoverable":
+        return _thousands(product["recoverable"])         # type: ignore[index]
+    if field == "product-zero":
+        return _thousands(product["with_zero_coordinate"])  # type: ignore[index]
+    if field == "reasons":
+        return _thousands(len(data["refusal_reasons"]))   # type: ignore[arg-type]
+    return _thousands(data[field.replace("-", "_")])      # type: ignore[index]
+
+
+def block_binding_declared() -> str:
+    """The declared bindings: what was predicted, and what came back."""
+    data = _binding()
+    rows = []
+    for row in data["rows"]:                              # type: ignore[union-attr]
+        rows.append((f"`{row['key']}`", f"`{row['role']}`",
+                     f"`{row['a']}` / `{row['b']}`", f"`{row['domain']}`",
+                     f"`{row['expected']}`", f"`{row['outcome']}`",
+                     f"`{row['control']}`" if row["control"] else "--",
+                     "yes" if row["as_declared"] else "**no**"))
+    lines = _table(
+        ("binding", "role", "known / filler", "register", "declared",
+         "outcome", "nearest-mask control", "as declared"), rows)
+    lines.extend(["", str(data["verdict"]), "", str(data["caveat"])])
+    return "\n".join(lines)
+
+
+def block_binding_fibres() -> str:
+    """The parity fibres of every register the session loads."""
+    fibres = _binding()["fibres"]                         # type: ignore[index]
+    rows = [(f"`{row['domain']}`", _thousands(row["carriers"]),
+             _thousands(row["readings"]), _thousands(row["recoverable"]),
+             _thousands(row["largest_fibre"]))
+            for row in fibres["rows"]]                    # type: ignore[index]
+    rows.append(("**all**", _thousands(fibres["carriers"]),   # type: ignore[index]
+                 _thousands(fibres["readings"]),             # type: ignore[index]
+                 _thousands(fibres["recoverable"]),          # type: ignore[index]
+                 _thousands(fibres["largest_fibre"])))       # type: ignore[index]
+    return "\n".join(_table(
+        ("register", "carriers", "distinct readings", "nameable",
+         "largest fibre"), rows))
+
+
+_planstore_cache: Optional[Mapping[str, object]] = None
+
+
+def _planstore() -> Mapping[str, object]:
+    """What the plan store replays, run once per process."""
+    global _planstore_cache
+    if _planstore_cache is None:
+        from ..runtime import plan_store as ps
+        _planstore_cache = ps.plan_store_report()
+    return _planstore_cache
+
+
+def _planstore_figure(field: str) -> str:
+    return _thousands(_planstore()[field.replace("-", "_")])  # type: ignore[index]
+
+
+def block_planstore_declared() -> str:
+    """The declared follow-ups, replayed: what each cost and what came back."""
+    data = _planstore()
+    rows = [(f"`{row['key']}`", f"`{row['text']}`", f"`{row['outcome']}`",
+             "yes" if row["refused"] else "no",
+             _thousands(row["trials_first"]),
+             _thousands(row["trials_replayed"]),
+             "yes" if row["replays"] else "**no**",
+             f"`{row['coarse_outcome']}`")
+            for row in data["rows"]]                      # type: ignore[union-attr]
+    lines = _table(
+        ("follow-up", "the turn asked", "outcome", "a refusal",
+         "trials first", "trials replayed", "replayed",
+         "coarse-key control"), rows)
+    lines.extend(["", str(data["verdict"]), "", str(data["caveat"])])
+    return "\n".join(lines)
+
+
+def block_conversation_declared() -> str:
+    """The declared follow-up set: what was predicted, and what happened."""
+    data = _conversation()
+    rows = []
+    for row in data["rows"]:                              # type: ignore[union-attr]
+        script = row["script"]                            # type: ignore[index]
+        rows.append((f"`{row['key']}`",
+                     f"`{script[-1]}`",
+                     _thousands(len(script) - 1),
+                     f"`{row['expected']}`", f"`{row['outcome']}`",
+                     f"`{row['control_recency']}`",
+                     "yes" if row["as_declared"] else "**no**"))
+    lines = _table(
+        ("follow-up", "the turn asked", "turns before it", "declared",
+         "outcome", "recency control", "as declared"), rows)
+    lines.extend([
+        "",
+        str(data["verdict"]),
+        "",
+        str(data["caveat"]),
+    ])
+    return "\n".join(lines)
+
+
 def block_fieldsurface_tables() -> str:
     """What the surface addresses: every declared table, with its size."""
     data = _fieldsurface()
@@ -3435,6 +3658,16 @@ FIGURES: Dict[str, Callable[[], str]] = {
     "ordering-parsed-after": lambda: _ordering_figure("parsed-after"),
     "ordering-surface-before": lambda: _ordering_figure("surface-before"),
     "ordering-surface-after": lambda: _ordering_figure("surface-after"),
+    "scales-rows": lambda: _scales_figure("declared-rows"),
+    "scales-quantities": lambda: _scales_figure("quantities"),
+    "scales-declared": lambda: _scales_figure("declared"),
+    "scales-as-declared": lambda: _scales_figure("as-declared"),
+    "scales-answered": lambda: _scales_figure("answered"),
+    "scales-refused": lambda: _scales_figure("refused"),
+    "scales-numeric": lambda: _scales_figure("scales"),
+    "scales-pairs": lambda: _scales_figure("pairs"),
+    "scales-bridged": lambda: _scales_figure("bridged"),
+    "scales-still-refused": lambda: _scales_figure("still-refused"),
     "extremum-declared-count": lambda: _extremum_figure("declared"),
     "extremum-answered": lambda: _extremum_figure("answered"),
     "extremum-refused": lambda: _extremum_figure("refused"),
@@ -3443,6 +3676,41 @@ FIGURES: Dict[str, Callable[[], str]] = {
     "extremum-reasons-declared": lambda: _extremum_figure(
         "reasons-declared"),
     "extremum-ties": lambda: _extremum_figure("ties"),
+    "binding-declared-count": lambda: _binding_figure("declared"),
+    "binding-roles": lambda: _binding_figure("roles"),
+    "binding-recovered": lambda: _binding_figure("recovered"),
+    "binding-refused": lambda: _binding_figure("refused"),
+    "binding-as-declared": lambda: _binding_figure("as-declared"),
+    "binding-reasons": lambda: _binding_figure("reasons"),
+    "binding-carriers": lambda: _binding_figure("carriers"),
+    "binding-nameable": lambda: _binding_figure("recoverable"),
+    "binding-ambiguous": lambda: _binding_figure("ambiguous"),
+    "binding-readings": lambda: _binding_figure("readings"),
+    "binding-largest-fibre": lambda: _binding_figure("largest-fibre"),
+    "binding-control-wrong": lambda: _binding_figure("control-wrong"),
+    "binding-product-recoverable":
+        lambda: _binding_figure("product-recoverable"),
+    "binding-product-zero": lambda: _binding_figure("product-zero"),
+    "planstore-declared-count": lambda: _planstore_figure("declared"),
+    "planstore-replayed": lambda: _planstore_figure("replayed"),
+    "planstore-refusals": lambda: _planstore_figure("refusals"),
+    "planstore-refusals-replayed":
+        lambda: _planstore_figure("refusals-replayed"),
+    "planstore-trials-first": lambda: _planstore_figure("trials-first"),
+    "planstore-trials-replayed":
+        lambda: _planstore_figure("trials-replayed"),
+    "planstore-worst-case": lambda: _planstore_figure("worst-case-trials"),
+    "planstore-coarse-wrong": lambda: _planstore_figure("coarse-wrong"),
+    "conversation-declared-count": lambda: _conversation_figure("declared"),
+    "conversation-answered": lambda: _conversation_figure("answered"),
+    "conversation-refused": lambda: _conversation_figure("refused"),
+    "conversation-as-declared": lambda: _conversation_figure("as-declared"),
+    "conversation-reasons": lambda: _conversation_figure("reasons"),
+    "conversation-alone": lambda: _conversation_figure("alone-answered"),
+    "conversation-control-rows": lambda: _conversation_figure(
+        "control-rows"),
+    "conversation-control-wrong": lambda: _conversation_figure(
+        "control-wrong"),
     #  The sentences the figures module already generates, now writable into
     #  a paragraph instead of quoted from a table by hand.
     "suite": lambda: _sentence("suite"),
@@ -3486,9 +3754,16 @@ FIGURES: Dict[str, Callable[[], str]] = {
     #  because the documentation quotes subsets of them too.
     "lean-declarations": _lean_declaration_count,
     "lean-declaration-files": _lean_declaration_files,
-    "corpus-documents": lambda: f"{len(inv.documents()):,}",
-    "corpus-state-documents": lambda: f"{len(inv.state_documents()):,}",
-    "corpus-archive-documents": lambda: f"{len(inv.archive_documents()):,}",
+    #  Counted over the *written* corpus, which is what ``inventory_report``
+    #  counts and what the inventory table of CORPUS_ADDRESS_STUDY.md shows:
+    #  a generated document is an output of the corpus rather than part of
+    #  it, so counting it here would put two registered measurements of "how
+    #  many documents" three apart.
+    "corpus-documents": lambda: f"{len(inv.source_documents()):,}",
+    "corpus-state-documents":
+        lambda: f"{len([d for d in inv.source_documents() if d.state]):,}",
+    "corpus-archive-documents":
+        lambda: f"{len([d for d in inv.source_documents() if d.archive]):,}",
     "corpus-sections": _corpus_sections,
 }
 
@@ -4274,6 +4549,12 @@ BLOCKS: Dict[str, Callable[[], str]] = {
     "ordering-declared": block_ordering_declared,
     "ordering-split": block_ordering_split,
     "extremum-declared": block_extremum_declared,
+    "scales-table": block_scales_table,
+    "scales-declared": block_scales_declared,
+    "conversation-declared": block_conversation_declared,
+    "binding-declared": block_binding_declared,
+    "binding-fibres": block_binding_fibres,
+    "planstore-declared": block_planstore_declared,
     "cost-figures": block_cost_figures,
 }
 

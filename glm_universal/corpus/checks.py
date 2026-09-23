@@ -11,7 +11,10 @@ never different from it*, which is the delta-sigma property applied to prose:
 
 * the verdict must appear **verbatim** below the block, or -- the *stated
   refinement* case -- every content word of it must appear below the block, so
-  that the verdict can say nothing the document does not go on to say;
+  that the verdict can say nothing the document does not go on to say.  A
+  figure the verdict quotes is removed before the comparison, marker and
+  emitted value together: it is generated rather than written, which is the
+  same reason the deciding figure's own emitted numbers are not grounded;
 * every **number** the deciding figure quotes must appear below the block, so a
   figure cannot age in the summary while the body moves on;
 * the named function must **resolve** to something importable, so "recomputed
@@ -121,6 +124,21 @@ def _written_figure(figure: str) -> str:
         lambda m: m.group("open") + m.group("close"), figure)
 
 
+def _written_verdict(verdict: str) -> str:
+    """The verdict with its inline figures removed, marker and all.
+
+    A verdict may quote a generated figure, exactly as the deciding figure
+    below it may.  Neither the emitted number nor the marker around it is a
+    word a person wrote, so neither is held to appearing in the body: the
+    number moves when the measurement moves, and the marker is machinery.
+    What remains after they are removed is the sentence someone typed, and
+    that is what the body has to go on to say.
+    """
+    from . import render
+
+    return render._FIGURE.sub("", verdict)
+
+
 def tier_report() -> Dict[str, object]:
     """Does every current-state document keep the tier contract?"""
     state = [d for d in inv.state_documents() if not d.generated]
@@ -143,9 +161,10 @@ def tier_report() -> Dict[str, object]:
         #  something the tier-0 claim helped produce.
         body = normalise("\n".join(
             inv.written_text(doc).splitlines()[doc.tier0_lines[1] - 1:]))
-        missing = [word for word in _verdict_words(tier0.verdict)
+        missing = [word for word in _verdict_words(_written_verdict(
+                       tier0.verdict))
                    if word not in body]
-        if normalise(tier0.verdict) in body:
+        if normalise(_written_verdict(tier0.verdict)) in body:
             verbatim += 1
             grounded += 1
         elif not missing:

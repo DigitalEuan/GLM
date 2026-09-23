@@ -1341,20 +1341,41 @@ def _build_keyword_query(text: str, cleaned: str, lowered: str,
         # unresolved for the same reason the field kind carries its two:
         # a coordinate is not a register entry, and a row may be a Lean
         # declaration or a molecule rather than a carrier.
-        head, separator, tail = _split_field_phrase(remainder)
-        pair = _split_list(tail)
+        # The two sides are split first and each is read as a field phrase,
+        # because the second side may name its own coordinate:
+        # 'order atomic_weight_u of carbon and molar_mass_u of water' is how
+        # one quantity held under two field names is asked about at all, and
+        # the two scales are then related only if the declared conversion
+        # table says how (v1.22.0).  With no separator on the second side
+        # this is the one-coordinate shape the kind has always had.
+        pair = _split_list(remainder)
+        head, separator, left_row = _split_field_phrase(
+            pair[0] if pair else remainder)
+        right_row = ""
+        if len(pair) > 1:
+            second_name, second_sep, second_row = _split_field_phrase(pair[1])
+            if second_sep is not None and second_row:
+                options["right_name"] = second_name
+                right_row = second_row
+            else:
+                right_row = _strip_connectives(pair[1])
         options["name"] = head
-        options["left"] = pair[0] if len(pair) > 0 else ""
-        options["right"] = pair[1] if len(pair) > 1 else ""
+        options["left"] = left_row
+        options["right"] = right_row
         if separator is None:
             trace.append("no separator between the coordinate and the rows; "
                          "the solver states the boundary")
-        elif len(pair) != 2:
-            trace.append(f"ordering needs two rows, read from {tail!r}; "
+        elif len(pair) != 2 or not right_row:
+            trace.append(f"ordering needs two rows, read from {remainder!r}; "
                          f"the solver states the boundary")
+        elif options.get("right_name"):
+            trace.append(f"coordinate {head!r} of row {options['left']!r} "
+                         f"against coordinate {options['right_name']!r} of "
+                         f"row {options['right']!r}; the two scales are "
+                         f"related only by a declared conversion")
         else:
-            trace.append(f"coordinate {head!r} of rows {pair[0]!r} and "
-                         f"{pair[1]!r}, split at {separator!r}")
+            trace.append(f"coordinate {head!r} of rows {left_row!r} and "
+                         f"{right_row!r}, split at {separator!r}")
         return Query(raw=text, normalised=cleaned, kind="ordering",
                      domain=domain, operands=(), options=options,
                      rule=rule, trace=tuple(trace))

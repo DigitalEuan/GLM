@@ -4,9 +4,9 @@
 
 **Question.** The construction ladder improves geometric addressing: given a perturbed carrier it names the carrier. Does the same escalation discipline improve any *other* faculty — meaning, dimensional reasoning, the chemistry and physics registers, small-integer structure, program text, and equation checking — or is addressing the only thing it buys?
 
-**Verdict.** All seven operations gain from escalation over their best single rung, and one of them loses the refusal contract while doing it: the program-text operation answers 503 of 576 queries correctly and 13 wrongly, which is a failure and is reported as one.
+**Verdict.** All seven operations gain from escalation over their best single rung, and one of them loses the refusal contract while doing it: the program-text operation answers <!--figure:opesc-program-correct-->503<!--/figure--> of <!--figure:opesc-program-queries-->576<!--/figure--> queries correctly and <!--figure:opesc-program-wrong-->13<!--/figure--> wrongly, which is a failure and is reported as one.
 
-**Deciding figure.** Seven operations measured; every one beats its best single rung and its substrate-removed control; one — program text — answers 13 of 576 queries wrongly.
+**Deciding figure.** <!--figure:opesc-count-->7<!--/figure--> operations measured; every one beats its best single rung and its substrate-removed control; one — program text — answers <!--figure:opesc-program-wrong-->13<!--/figure--> of <!--figure:opesc-program-queries-->576<!--/figure--> queries wrongly.
 
 **Recomputed by.** `glm_universal.reasoning.operation_escalation.measure`
 

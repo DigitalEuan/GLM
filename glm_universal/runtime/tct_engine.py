@@ -1424,13 +1424,16 @@ def _body_ordering(args) -> str:
     field = str(args.get("field", ""))
     left = str(args.get("left", ""))
     right = str(args.get("right", ""))
+    other = str(args.get("other_field", "")) or None
     return f'''# -- recompute -------------------------------------------------------------
 
 from glm_universal.reasoning import coordinate_order as cord
+from glm_universal.reasoning import scale_conversion as sc
 from glm_universal.runtime import fields as fl
 
 _surface = fl.surface()
-_result = cord.order(_surface, {field!r}, {left!r}, {right!r})
+_result = cord.order(_surface, {field!r}, {left!r}, {right!r},
+                     other_field={other!r})
 
 observed = {{
     "verdict": _result.verdict,
@@ -1441,13 +1444,20 @@ observed = {{
     "pole_row": _result.pole_row,
 }}
 
-# The gap is the exact difference of the two readings, and the verdict is
-# the order of them -- nothing here rounds.
-assert _result.difference == _result.right.value - _result.left.value
-assert (_result.verdict == "lt") == (_result.left.value < _result.right.value)
-assert (_result.verdict == "eq") == (_result.left.value == _result.right.value)
+# The gap is the exact difference of the two readings -- in the unit they
+# were compared in, which is a declared conversion of both when the two
+# scales differ -- and the verdict is the order of them; nothing here rounds.
+_lv, _rv = _result.left.value, _result.right.value
+if _result.converted:
+    _carry_left, _carry_right = sc.bridge(_result.left.scale,
+                                          _result.right.scale)
+    _lv, _rv = sc.apply(_carry_left, _lv), sc.apply(_carry_right, _rv)
+assert _result.difference == _rv - _lv
+assert (_result.verdict == "lt") == (_lv < _rv)
+assert (_result.verdict == "eq") == (_lv == _rv)
 
-# Two readings that are not on one scale are refused, not compared.
+# Two readings on two scales the conversion table does not relate are
+# refused, not compared.
 try:
     cord.order(_surface, "line", "GLM.NormFamily.family_tower", "rung_audit")
     raise AssertionError("two scales were compared")

@@ -231,7 +231,9 @@ records, mark by mark:
   on the code layer the dimension and physics operations fall to zero correct
   answers and the register operation from 541 to 176. `strict+margin` keeps
   366 and damages nothing: no other operation loses a quarter of its answers,
-  let alone half.
+  let alone half. Its refusals are the other side of that figure — it refuses
+  <!--figure:secondread-program-refused-->210<!--/figure--> of the 576
+  program-text queries, which is what buying safety costs on this sample.
 * **The guard is not just refusing more.** `strict+margin` gives up 150
   answers and removes all 13 wrong ones. Refusing 150 answers chosen by a
   digest instead removes 2. That is **M3**, and it is the mark that

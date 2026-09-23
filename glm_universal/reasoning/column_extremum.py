@@ -64,7 +64,7 @@ The machine-checked half is ``RequestProject/GLM/ColumnExtremum.lean``.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from fractions import Fraction
 from typing import Dict, List, Mapping, Optional, Sequence, Tuple
 
@@ -189,14 +189,91 @@ def _tables_holding(surface, field: str, table: Optional[str]) -> Tuple:
     return tuple(out)
 
 
+def _conversions_of(quantity: str):
+    """The declared conversions of one quantity, in the table's own order."""
+    from . import scale_conversion as sc
+    return tuple(row for row in sc.CONVERSIONS if row.quantity == quantity)
+
+
+def _quantity_column(surface, quantity: str) -> Column:
+    """One column gathered by *quantity* across every declared scale of it.
+
+    ``mass`` is held by the element register as ``atomic_weight_u`` and by
+    the molecule register as ``molar_mass_u``, both in unified atomic mass
+    units; no table holds the column of the two together, and the declared
+    conversion table (:mod:`glm_universal.reasoning.scale_conversion`) is
+    what makes it one column rather than two.  Each reading is carried into
+    the quantity's canonical unit and keeps the scale it came from in
+    :attr:`Reading.origin`.
+
+    The refusals are the column's own: a hole anywhere in any of the gathered
+    scales refuses the whole column, exactly as it does for one table.
+    """
+    from ..runtime import fields as fl
+    from . import scale_conversion as sc
+    readings: List[Reading] = []
+    labels: List[Tuple[str, str]] = []
+    holes: List[Tuple[str, str]] = []
+    names: List[str] = []
+    for carry in _conversions_of(quantity):
+        table_name, _, field_name = carry.scale.partition(":")
+        try:
+            found = surface.table_by_name(table_name)
+        except fl.FieldError:                       # pragma: no cover
+            continue
+        names.append(found.name)
+        for key in sorted(found.rows()):
+            status, payload = _row_reading(found, key, field_name)
+            if status == "read":
+                carried = sc.apply(carry, payload.value)    # type: ignore[union-attr]
+                readings.append(replace(
+                    payload, value=carried,                 # type: ignore[arg-type]
+                    rendered=fl.render_value(carried),
+                    origin=f"{payload.rendered} on {carry.scale}"))  # type: ignore[union-attr]
+            elif status == "label":
+                labels.append((key, str(payload)))
+            else:
+                holes.append((f"{found.name}:{key}", str(payload)))
+    if not readings and not labels:
+        raise ExtremumError(
+            "no-such-column",
+            f"no declared scale of {quantity!r} is held by any table here")
+    if labels:
+        row, rendered = labels[0]
+        raise ExtremumError(
+            "not-ordered",
+            f"{quantity} of {row} is {rendered!r}, which is a label rather "
+            f"than a quantity; a column of labels has no extremum")
+    if holes:
+        named = ", ".join(row for row, _why in holes[:5])
+        raise ExtremumError(
+            "incomplete",
+            f"{len(holes)} of {len(readings) + len(holes)} rows have no "
+            f"reading of {quantity!r} ({holes[0][1]}): {named}"
+            f"{', ...' if len(holes) > 5 else ''}. The extremum of the rows "
+            f"that are filled in is not the extremum of the column -- it is "
+            f"a wrong answer rather than a partial one -- so the operation "
+            f"refuses the column and names what is missing")
+    return Column(field=quantity, table=", ".join(names),
+                  scale=sc.CANONICAL[quantity], readings=tuple(readings))
+
+
 def column(surface, field: str, table: Optional[str] = None) -> Column:
     """Every reading of ``field`` down a column, or a refusal that says why.
 
     ``surface`` is a :class:`~glm_universal.runtime.fields.FieldSurface`.
     The refusals are :data:`REFUSAL_REASONS`, checked in that order: a column
-    no row holds, a column gathered from more than one scale, a column of
-    labels, and a column with a hole in it.
+    no row holds, a column gathered from more than one scale *that the
+    declared conversion table does not relate*, a column of labels, and a
+    column with a hole in it.
+
+    With no table named and ``field`` a declared quantity rather than a field
+    name, the column is gathered by quantity across every declared scale of
+    it -- see :func:`_quantity_column`.
     """
+    from . import scale_conversion as sc
+    if table is None and field in sc.QUANTITIES:
+        return _quantity_column(surface, field)
     tables = _tables_holding(surface, field, table)
     if not tables:
         raise ExtremumError(
@@ -226,14 +303,27 @@ def column(surface, field: str, table: Optional[str] = None) -> Column:
             f"{', '.join(t.name for t in tables)} "
             f"hold{'' if len(tables) > 1 else 's'} no reading of "
             f"{field!r} at all")
+    unit = ""
     if len(scales) > 1:
-        raise ExtremumError(
-            "mixed-scale",
-            f"{field!r} is read on {len(scales)} scales -- "
-            f"{', '.join(scales)} -- so the rows gathered here are not one "
-            f"column; the extremum of two scales together is a fact about "
-            f"neither, and the operation refuses rather than taking it. "
-            f"Name one table to ask for one of them")
+        from ..runtime import fields as fl
+        from . import scale_conversion as sc
+        try:
+            carried = sc.bridge_all(scales)
+        except sc.ConversionError as error:
+            raise ExtremumError(
+                "mixed-scale",
+                f"{field!r} is read on {len(scales)} scales -- "
+                f"{', '.join(scales)} -- and {error}, so the rows gathered "
+                f"here are not one column; the extremum of two scales "
+                f"together is a fact about neither, and the operation "
+                f"refuses rather than taking it. Name one table to ask for "
+                f"one of them") from None
+        by_scale = {row.scale: row for row in carried}
+        readings = [replace(
+            r, value=sc.apply(by_scale[r.scale], r.value),
+            rendered=fl.render_value(sc.apply(by_scale[r.scale], r.value)),
+            origin=f"{r.rendered} on {r.scale}") for r in readings]
+        unit = carried[0].unit
     if labels:
         row, rendered = labels[0]
         raise ExtremumError(
@@ -253,7 +343,7 @@ def column(surface, field: str, table: Optional[str] = None) -> Column:
             f"a wrong answer rather than a partial one -- so the operation "
             f"refuses the column and names what is missing")
     return Column(field=field, table=", ".join(t.name for t in tables),
-                  scale=scales[0], readings=tuple(readings))
+                  scale=unit or scales[0], readings=tuple(readings))
 
 
 # ===========================================================================

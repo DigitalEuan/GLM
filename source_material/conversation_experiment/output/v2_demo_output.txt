@@ -1,0 +1,119 @@
+========================================================================
+GLM CONVERSATION v2 — Demo (against real glm_universal)
+========================================================================
+
+1. BUG FIX #1: Intent ordering (explain before verify)
+------------------------------------------------------------------------
+  ✓ 'how does light bend near a massive object'             -> explain    (expected explain)
+  ✓ 'why does gravity affect light'                         -> explain    (expected explain)
+  ✓ 'what causes gravitational lensing'                     -> explain    (expected explain)
+  ✓ 'verify energy = mass * speed_of_light^2'               -> verify     (expected verify)
+  ✓ 'is it true that force = mass * acceleration'           -> verify     (expected verify)
+  ✓ 'what is energy'                                        -> describe   (expected describe)
+  ✓ 'does energy equal mass times c squared'                -> explore    (expected explore)
+
+2. BUG FIX #2: Float-free NRCI display (exact Fraction arithmetic)
+------------------------------------------------------------------------
+    Dimension: L^2 M T^-2
+    Coherence: NRCI = 0.5406 (Coherent)
+  (Rendered via _fmt_frac — pure integer arithmetic, no float())
+
+3. BUG FIX #3: Analogy verification (EXT10 ratio transport)
+------------------------------------------------------------------------
+  ✓ force:energy::pressure:adhesion_energy  holds=True
+      reason: EXT10 ratio transport holds: Δ(force→energy) = Δ(pressure→adhesion_energy) = (Fraction(1, …
+  ✓ force:energy::pressure:wavelength  holds=False
+      reason: EXT10 ratio transport FAILS — axes differ: ['L', 'M', 'T']. Δ(force→energy)=(Fraction(1, 1…
+  ✓ force:energy::pressure:spring_constant  holds=True
+      reason: EXT10 ratio transport holds: Δ(force→energy) = Δ(pressure→spring_constant) = (Fraction(1, …
+
+4. BUG FIX #4: Rich context summary (episodic + relations)
+------------------------------------------------------------------------
+  turns:    4
+  episodes: 4
+  relations: 6
+  Last episode:
+    turn 4, intent=verify, text='verify energy = mass * speed_of_light^2'
+    concepts: ['energy', 'mass']
+    relations asserted this turn: [('energy', 'mentioned_after', 'mass'), ('energy', 'derived_from', 'mass')]
+  All typed relations in graph:
+    [2] energy mentioned_after torque [glm_derived, high]
+    [3] force mentioned_after mass [glm_derived, high]
+    [3] mass mentioned_after acceleration [glm_derived, high]
+    [3] force derived_from mass [user_asserted, medium]
+    [4] energy mentioned_after mass [glm_derived, high]
+    [4] energy derived_from mass [user_asserted, medium]
+
+5. BUG FIX #5: Honest fallback (answer=None, hypothesis surfaced)
+------------------------------------------------------------------------
+  Query: derive speed_of_light from mass
+  answer:     None
+  hypothesis: alfven_speed  (explicitly labelled, unverified)
+  verified:   False
+  confidence: low — none verified — hypothesis: alfven_speed (unverified, do not present as fact)
+  plan failed_step: plan:2
+
+  Query: force : energy :: pressure : ?
+  answer:     adhesion_energy
+  hypothesis: None
+  verified:   True
+
+6. ARCHITECTURE: Executable reasoning plan (typed, traceable)
+------------------------------------------------------------------------
+  intent: analogy
+  steps (10):
+    ✓ [resolve ] ok         | force, energy, pressure                 
+        result: resolved 3 concept(s): force, energy, pressure
+    ? [derive  ] ambiguous  | force:energy::pressure:?                
+        result: 7 candidate(s): adhesion_energy, flux_density_jansky, fracture_energy, radiant_e
+    ✓ [verify  ] ok         | analogy force:energy::pressure:adhesion_
+        result: EXT10 ratio transport holds: Δ(force→energy) = Δ(pressure→adhesion_energy) = (Fr
+    ✓ [verify  ] ok         | analogy force:energy::pressure:flux_dens
+        result: EXT10 ratio transport holds: Δ(force→energy) = Δ(pressure→flux_density_jansky) =
+    ✓ [verify  ] ok         | analogy force:energy::pressure:fracture_
+        result: EXT10 ratio transport holds: Δ(force→energy) = Δ(pressure→fracture_energy) = (Fr
+    ✓ [verify  ] ok         | analogy force:energy::pressure:radiant_e
+        result: EXT10 ratio transport holds: Δ(force→energy) = Δ(pressure→radiant_exposure) = (F
+    ✓ [verify  ] ok         | analogy force:energy::pressure:spring_co
+        result: EXT10 ratio transport holds: Δ(force→energy) = Δ(pressure→spring_constant) = (Fr
+    ✓ [verify  ] ok         | analogy force:energy::pressure:surface_e
+        result: EXT10 ratio transport holds: Δ(force→energy) = Δ(pressure→surface_energy) = (Fra
+    ✓ [verify  ] ok         | analogy force:energy::pressure:surface_t
+        result: EXT10 ratio transport holds: Δ(force→energy) = Δ(pressure→surface_tension) = (Fr
+    ✓ [explain ] ok         | adhesion_energy                         
+        result: verified answer: adhesion_energy via analogy_transport
+
+7. ARCHITECTURE: Trace-derived explanations with provenance spans
+------------------------------------------------------------------------
+  Question: how does light bend near a massive object
+  Steps: 20
+  Showing the E=mc² step (provenance breakdown):
+  Step 17: Einstein's E = mc². A photon has energy E = hf, so effective mass m = E/c² = hf/c². Gravity affects light because photons carry energy, even though they are massless.
+    Math: E = mc² → m_eff = hf/c². verify energy = mass × c².
+    Check: energy = mass * speed_of_light^2 holds under scalar semantics...
+    Spans:
+      [derived_expression    ] node=plan:E_mc2                         
+        text: Einstein's E = mc². 
+      [explanatory_gloss     ] node=gloss:photon_effective_mass        
+        text: A photon has energy E = hf, so effective mass m = E/c² = hf/
+      [explanatory_gloss     ] node=gloss:gravity_affects_light        
+        text: Gravity affects light because photons carry energy, even tho
+
+8. ARCHITECTURE: Combined-score memory recall
+------------------------------------------------------------------------
+  S(m,q) = α·S_geometry + β·S_graph + γ·S_recency + δ·S_intent
+  Retrieving for [energy, mass] with intent='verify':
+    turn 4 (score=17/20): 'verify energy = mass * speed_of_light^2'
+    turn 3 (score=51/80): 'verify force = mass * acceleration'
+    turn 2 (score=193/400): 'Compare energy and torque'
+
+9. BACK-COMPAT: Original demo (talk/explain/reason/attend/ask)
+------------------------------------------------------------------------
+  talk() -> kind=describe, conf=identical, memory_refs=(4, 1, 2)
+  ask()  -> ok=True, conf=high
+  attend() -> 3 neighbours in 'dimension' subspace
+    top: binding_energy (d²=0)
+
+========================================================================
+DEMO COMPLETE — all 5 bug fixes + 4 architectural additions work
+========================================================================

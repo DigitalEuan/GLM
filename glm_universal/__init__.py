@@ -93,7 +93,7 @@ Design invariants, enforced package-wide
 
 from __future__ import annotations
 
-__version__ = "1.20.0"
+__version__ = "1.23.0"
 
 __all__ = ["__version__", "substrate", "data_objects", "reasoning",
            "semantics", "recipe", "language", "runtime", "migration",

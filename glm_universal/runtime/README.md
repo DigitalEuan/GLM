@@ -32,7 +32,7 @@ runtime/
 
 ## The registers
 
-`session.DOMAINS` is the authoritative list: **8 registers**, loaded lazily
+`session.DOMAINS` is the authoritative list: **<!--figure:registers-->8 registers<!--/figure-->**, loaded lazily
 and cached, holding 1,143 carriers between them — physics 726, chemistry 118,
 molecules 51, mathematics 22, lexicon 149, spatial 28, harmonics 28,
 economics 21.  `molecules` is the
@@ -74,7 +74,7 @@ answering kinds plus `unknown`, the honest fallback.
 
 ## The `report` subjects
 
-`session.REPORT_SUBJECTS` is the authoritative list: **65 report subjects**.
+`session.REPORT_SUBJECTS` is the authoritative list: **<!--figure:report-subjects-->65 report subjects<!--/figure-->**.
 Every subject recomputes its facts on demand and has a Three Column Thinking
 template that reproduces them in a fresh interpreter.
 
@@ -169,6 +169,56 @@ takes an already-parsed `Query`, which is what makes it possible to edit
 a query object and re-run it without going back through the surface
 string.  Both record an `InferenceRecord` in `sess.history`, whether or
 not the query succeeded.
+
+## A conversation over the session
+
+```python
+from glm_universal.runtime.conversation import Conversation
+
+talk = Conversation()
+talk.ask("describe carbon")
+talk.ask("describe water")
+talk.ask("field electronegativity_pauling of it")   # binds carbon, not water
+```
+
+`conversation.py` keeps an episodic register of turns in front of the
+session so that a turn may refer back to an earlier one.  Exactly three
+surface shapes are follow-ups — a pronoun (`describe it`), an end-flip
+(`and the smallest?`) and a subject substitution (`and oxygen?`) — and
+anything else is passed to `session.ask` untouched.
+
+A candidate antecedent is **licensed** when the query it produces
+actually solves, which is the only test applied: recency decides
+between turns, newest first and answer side before subject side, and
+licensing decides within one.  Where the deciding side offers two
+licensed candidates the layer raises `FollowUpError` with reason
+`ambiguous-antecedent` rather than choosing; the other two reasons are
+`no-antecedent` and `unlicensed`.  Every rewritten query is answered by
+the ordinary solver, so this layer can add an answer and never change
+one.  `GLM.Conversation` is the proved half and
+`../../../studies/CONVERSATION_STUDY.md` the measurement.
+
+### The plan store
+
+```python
+from glm_universal.runtime.conversation import Conversation
+from glm_universal.runtime.plan_store import PlanStore
+
+talk = Conversation(store=PlanStore())
+```
+
+`plan_store.py` keeps a follow-up that has already been resolved under a
+digest of **the whole conversation it was resolved in**, and a refusal is
+stored exactly as an answer is, with its reason and its wording — which
+is the case worth storing, because the follow-up that costs the most
+licensing trials here is the one that refuses.  The digest addresses
+integrity and never meaning (D3): it is taken through
+`glm_universal.integrity`, and a hit is checked against the stored plan's
+own prefix and text before it is used, so a collision costs a miss and
+cannot cost an answer.  The control is the coarse key, which keys a plan
+by its follow-up text alone and is kept so that what the exact key buys
+is measured rather than asserted.  `GLM.PlanStore` is the proved half and
+`../../../studies/SUPPLIED_PORTS_STUDY.md` §4 the measurement.
 
 ## The `GLM.py` CLI
 

@@ -1,0 +1,260 @@
+========================================================================
+GLM FOLLOW-UP EXPERIMENTS — 5 next-direction experiments
+========================================================================
+
+========================================================================
+FOLLOW-UP F1 — Domain coverage audit (correct names)
+========================================================================
+
+  Domain: physics
+    ✓ verify energy = mass * speed_of_light^2                      -> energy = mass * speed_of_light^2 holds under scalar semantic
+    ✓ force : energy :: pressure : ?                               -> force : energy :: pressure : adhesion_energy
+    ✗ compare energy and torque                                    -> err: parse_real: 'energy' is not a notation this module read
+    ✓ describe wavelength                                          -> wavelength (physics): depth 2, plane-0 mask 0x7ffbfe, |v|^2 
+    ✓ nearest 5 to energy                                          -> nearest to energy: binding_energy, enthalpy, equipartition_e
+    ✓ coherence energy                                             -> coherence energy: NRCI = 0.5406 (Coherent)
+    ✓ pi groups force mass length time                             -> 1 Pi group(s) over 4 quantities of rank 3: force^(1/2) * mas
+
+  Domain: chemistry
+    ✓ describe carbon                                              -> C (chemistry): depth 26, plane-0 mask 0x000902, |v|^2 = 1098
+    ✓ describe hydrogen                                            -> H (chemistry): depth 39, plane-0 mask 0x000800, |v|^2 = 4400
+    ✓ describe oxygen                                              -> O (chemistry): depth 37, plane-0 mask 0x000800, |v|^2 = 1309
+    ✓ nearest 3 to oxygen                                          -> nearest to O: N, C, Ne
+    ✓ mog grid carbon                                              -> C: plane-0 frame weight 3, brick weights [1, 1, 1], Golay di
+    ✓ facet carbon                                                 -> C: plane-0 frame weight 3, brick weights [1, 1, 1], Golay di
+    ✓ H : He :: Li : ?                                             -> H : He :: Li : Ne
+
+  Domain: molecules
+    ✓ describe water                                               -> water (molecules): depth 34, plane-0 mask 0x000004, |v|^2 = 
+    ✓ describe methane                                             -> methane (molecules): depth 48, plane-0 mask 0x000004, |v|^2 
+    ✓ describe hydrogen peroxide                                   -> hydrogen peroxide (molecules): depth 34, plane-0 mask 0x0000
+    ✓ nearest 3 to water                                           -> nearest to water: formaldehyde, hydrochloric acid, hydrogen 
+
+  Domain: mathematics
+    ✓ describe filled_1x24                                         -> filled_1x24 (mathematics): depth 12, plane-0 mask 0x000400, 
+    ✓ describe filled_4x6                                          -> filled_4x6 (mathematics): depth 12, plane-0 mask 0x000400, |
+    ✓ describe filled_2x12                                         -> filled_2x12 (mathematics): depth 12, plane-0 mask 0x000400, 
+    ✓ nearest 3 to filled_4x6                                      -> nearest to filled_4x6: filled_12x2, filled_1x24, filled_24x1
+    ✓ project filled_1x24                                          -> filled_1x24 (mathematics): depth 12, plane-0 mask 0x000400, 
+
+  Domain: harmonics
+    ✓ describe perfect_fifth                                       -> perfect_fifth (harmonics): depth 23, plane-0 mask 0x000800, 
+    ✓ describe major_third                                         -> major_third (harmonics): depth 34, plane-0 mask 0x000800, |v
+    ✓ nearest 3 to major_third                                     -> nearest to major_third: major_sixth, harmonic_seventh, perfe
+    ✓ unison : minor_second :: perfect_fifth : ?                   -> unison : minor_second :: perfect_fifth : minor_seventh
+    ✓ coherence perfect_fifth                                      -> coherence perfect_fifth: NRCI = 0.2501 (Subcoherent)
+
+  Domain: economics
+    ✓ describe gold_usd_per_troy_ounce@2024-Q1                     -> gold_usd_per_troy_ounce@2024-Q1 (economics): depth 13, plane
+    ✓ describe silver_usd_per_troy_ounce@2024-Q1                   -> silver_usd_per_troy_ounce@2024-Q1 (economics): depth 12, pla
+    ✓ nearest 3 to gold_usd_per_troy_ounce@2024-Q1                 -> nearest to gold_usd_per_troy_ounce@2024-Q1: gold_usd_per_tro
+    ✓ gold_usd_per_troy_ounce@2024-Q1 : gold_usd_per_troy_ounce@20 -> gold_usd_per_troy_ounce@2024-Q1 : gold_usd_per_troy_ounce@20
+
+  Domain: lexicon
+    ✓ describe motion                                              -> motion (lexicon): depth 14, plane-0 mask 0x000008, |v|^2 = 4
+
+  Domain: spatial
+    ✓ mog grid energy                                              -> energy: plane-0 frame weight 3, brick weights [1, 0, 2], Gol
+    ✓ mog grid carbon                                              -> C: plane-0 frame weight 3, brick weights [1, 1, 1], Golay di
+    ✓ facet water                                                  -> water: plane-0 frame weight 1, brick weights [1, 0, 0], Gola
+    ✓ trio energy                                                  -> energy: plane-0 frame weight 3, brick weights [1, 0, 2], Gol
+
+  TRUE coverage: 36/37 (97%)
+  Per-domain:
+    physics     : 6/7 (85%)
+    chemistry   : 7/7 (100%)
+    molecules   : 4/4 (100%)
+    mathematics : 5/5 (100%)
+    harmonics   : 5/5 (100%)
+    economics   : 4/4 (100%)
+    lexicon     : 1/1 (100%)
+    spatial     : 4/4 (100%)
+
+========================================================================
+FOLLOW-UP F2 — Lean integration via lean_address
+========================================================================
+  Every GLM carrier can be read as a Lean theorem shape.
+
+  Domain: physics
+    ✓ energy                         [exact       ] forall=2, exists=1, implication=-2, big_operator=2, kind=2, namespace_depth=5
+    ✓ force                          [exact       ] forall=1, exists=1, implication=-2, big_operator=1, kind=2, statement_size=1
+    ✓ speed_of_light                 [exact       ] forall=1, implication=-1, big_operator=1, kind=18
+    ✓ gravitational_constant         [exact       ] forall=3, exists=-1, implication=-2, big_operator=3, kind=2
+    ✓ curvature                      [exact       ] forall=-1, big_operator=-1, kind=1
+    ✓ planck_constant                [exact       ] forall=2, exists=1, implication=-1, big_operator=2, kind=13, namespace_depth=12
+    ✓ momentum                       [exact       ] forall=1, exists=1, implication=-1, big_operator=1, kind=2, statement_size=1
+    ✓ wavelength                     [exact       ] forall=1, big_operator=1, kind=1
+
+  Domain: chemistry
+    ✓ H                              [exact       ] forall=1, exists=1, implication=2, iff=120, big_operator=20, equality=14, kind=12, statement_size=4
+    ✓ He                             [exact       ] forall=2, exists=4, iff=140, big_operator=4, equality=25, kind=8, namespace_depth=2073, statement_size=4
+    ✓ C                              [exact       ] forall=6, exists=12, implication=3, iff=170, big_operator=4098, equality=11, kind=8, namespace_depth=1229, statement_size=2
+    ✓ O                              [exact       ] forall=8, exists=16, implication=3, iff=152, big_operator=90, equality=14, kind=8, namespace_depth=1128, statement_size=4
+    ✓ Fe                             [exact       ] forall=26, exists=56, implication=2, iff=194, big_operator=3134, equality=8, kind=12, namespace_depth=3185, statement_size=2
+
+  Domain: molecules
+    ✓ water                          [exact       ] forall=3, exists=2, implication=18, iff=10, big_operator=1, equality=2, kind=4, namespace_depth=4
+    ✓ methane                        [exact       ] forall=5, exists=2, implication=16, iff=10, equality=2, kind=4, namespace_depth=4
+
+  Domain: mathematics
+    ✓ filled_1x24                    [exact       ] forall=1, exists=1, implication=1, iff=1, big_operator=3, equality=8, kind=8, namespace_depth=12, statement_size=3
+    ✓ filled_4x6                     [exact       ] forall=1, exists=1, implication=1, iff=1, big_operator=3, equality=8, kind=8, namespace_depth=12, statement_size=3
+
+  Domain: harmonics
+    ✓ perfect_fifth                  [exact       ] forall=3, exists=2, implication=-1, iff=1, big_operator=7, equality=3, namespace_depth=5
+    ✓ unison                         [exact       ] forall=1, exists=1, equality=1, namespace_depth=1, statement_size=1
+
+  --- Lean reading comparison ---
+  Found 1 clusters of carriers sharing a Lean reading
+    [big_operator=3, binder=2, cited_by=22, cites=3, collection=4, conjunction=1...]
+      -> ['filled_1x24', 'filled_4x6']
+
+========================================================================
+FOLLOW-UP F3 — Higher-order analogies via multi-hop intersection
+========================================================================
+  Find X such that (a:b::c:X) AND (a:b::e:X) both hold.
+  Intersection of tied sets is the higher-order answer.
+
+  ○ (physics) force:energy :: pressure:?  AND  force:energy :: spring_constant:?
+      X must satisfy BOTH (force:energy::pressure:X) AND (force:energy::spring_constant:X)
+      analogy 1 tied (7): ['adhesion_energy', 'flux_density_jansky', 'fracture_energy', 'radiant_exposure', 'spring_constant']
+      analogy 2 tied (3): ['drag_force', 'lift_force', 'linear_energy_transfer']
+      INTERSECTION: (empty — no common carrier)
+
+  ○ (physics) energy:mass :: wavelength:?  AND  energy:mass :: frequency:?
+      X must satisfy BOTH (energy:mass::wavelength:X) AND (energy:mass::frequency:X) — wavelengt
+      analogy 1 tied (1): ['einstein_gravitational_constant']
+      analogy 2 tied (1): ['chromatic_dispersion']
+      INTERSECTION: (empty — no common carrier)
+
+  ○ (chemistry) H:He :: Li:?  AND  H:He :: Be:?
+      X must satisfy BOTH (H:He::Li:X) AND (H:He::Be:X)
+      analogy 1 tied (1): ['Be']
+      analogy 2 tied (1): ['Li']
+      INTERSECTION: (empty — no common carrier)
+
+  ✓ (physics) force:momentum :: energy:?  AND  force:momentum :: action:?
+      X must satisfy BOTH (force:momentum::energy:X) AND (force:momentum::action:X)
+      analogy 1 tied (3): ['action', 'planck_constant', 'reduced_planck_constant']
+      analogy 2 tied (9): ['area', 'body_surface_area', 'cross_section', 'hectare', 'intrinsic_permeability']
+      INTERSECTION: ['planck_constant', 'reduced_planck_constant']
+
+  --- Chained analogy: a:b :: c:d, then c:b :: e:? ---
+  ✓ (chemistry) chain H:He::Li:? -> Be; then Li:He::Be:? -> H
+      note: periodic table walk
+  ✓ (physics) chain force:energy::pressure:? -> adhesion_energy; then pressure:energy::adhesion_energy:? -> binding_energy
+      note: force:energy::pressure:? -> adhesion_energy; then pressure:energy::adhesion_energy:?
+
+========================================================================
+FOLLOW-UP F4 — Cross-domain analogies
+========================================================================
+  The substrate supports analogies within a single domain.
+  We test cross-domain by (a) trying physics:physics analogies
+  that cross sub-disciplines, (b) composing analogies across
+  domains via the lexicon register (which has 149 entries from
+  multiple domains), and (c) using 4-register memory to track
+  which domains the conversation has touched.
+
+  --- (a) Cross-sub-discipline physics analogies ---
+    ✓ force:energy::voltage:?  ->  electric_flux (tied=1)
+        mechanics → EM
+    ✓ force:energy::temperature:?  ->  angstrom (tied=50)
+        mechanics → thermo
+    ✓ force:energy::wavenumber:?  ->  abbe_dispersion_number (tied=149)
+        mechanics → quantum
+    ✓ force:energy::luminance:?  ->  acoustic_attenuation (tied=14)
+        mechanics → optics
+    ✓ force:energy::acoustic_impedance:?  ->  bulk_viscosity (tied=2)
+        mechanics → acoustics
+    ✓ speed_of_light:wavelength::gravitational_field:?  ->  alfven_speed (tied=23)
+        optics → gravity
+    ✓ energy:mass::frequency:?  ->  chromatic_dispersion (tied=1)
+        mass-energy → wave
+    ✓ energy:mass::gravitational_constant:?  ->  angstrom (tied=43)
+        mass-energy → gravity
+
+  --- (b) Cross-domain composition via 4-register memory ---
+      Querying different domains in sequence; episodic+semantic
+      memory should track the domain log.
+
+  --- 4-register memory state after cross-domain queries ---
+    episodic:    15 turns
+    semantic:    31 concepts
+    procedural:  0 procedures
+    distinct concepts in semantic memory: 5
+      sample: ['describe', 'torque', 'water', 'energy', 'gold_usd_per_troy_ounce@2024-q1']
+
+========================================================================
+FOLLOW-UP F5 — Trajectory-based verification (opt-in strict mode)
+========================================================================
+  strict_trajectory=True: unlicensed transitions demote answer → hypothesis
+  strict_trajectory=False (default): just flag, don't demote
+
+  [lenient] ✓ force : energy :: pressure : ?                    
+      answer:     adhesion_energy
+      hypothesis: None
+      verified:   True
+      confidence: high — verified via analogy_transport
+      note:       Standard analogy — should be fully licensed (no downgrade)
+      trajectory: force → surface_tension, 9 transitions, unlicensed=0, fully_licensed=True
+
+  [STRICT ] ✓ force : energy :: pressure : ?                    
+      answer:     adhesion_energy
+      hypothesis: None
+      verified:   True
+      confidence: high — replayed verified procedure shape=analogy:3 (created turn 15)
+      note:       Same analogy in strict mode — should still pass (all licensed)
+      trajectory: force → surface_tension, 9 transitions, unlicensed=0, fully_licensed=True
+
+  [lenient] ✓ verify energy = mass * speed_of_light^2           
+      answer:     kinetic_energy
+      hypothesis: None
+      verified:   True
+      confidence: high — verified via nearest d²=0
+      note:       Standard verify — fully licensed
+      trajectory: energy → gibbs_energy, 5 transitions, unlicensed=0, fully_licensed=True
+
+  [STRICT ] ✓ verify energy = mass * speed_of_light^2           
+      answer:     kinetic_energy
+      hypothesis: None
+      verified:   True
+      confidence: high — replayed verified procedure shape=verify:2 (created turn 15)
+      note:       Standard verify in strict mode
+      trajectory: energy → gibbs_energy, 5 transitions, unlicensed=0, fully_licensed=True
+
+  [lenient] ✓ describe wavelength                               
+      answer:     length
+      hypothesis: None
+      verified:   True
+      confidence: high — verified via nearest d²=1/8
+      note:       Describe query — trajectory is single-step, no transitions to license
+      trajectory: wavelength → mass_moment, 5 transitions, unlicensed=0, fully_licensed=True
+
+  [STRICT ] ✓ describe wavelength                               
+      answer:     length
+      hypothesis: None
+      verified:   True
+      confidence: high — replayed verified procedure shape=describe:1 (created turn 15)
+      note:       Describe query in strict mode
+      trajectory: wavelength → mass_moment, 5 transitions, unlicensed=0, fully_licensed=True
+
+  --- Constructed downgrade scenario ---
+  Query a verify-style with strict_trajectory=True; if the
+  trajectory has unlicensed transitions, the answer demotes.
+  strict mode result: verified=True, answer=adhesion_energy, hypothesis=None
+  confidence: high
+
+========================================================================
+SUMMARY
+========================================================================
+  F1 coverage: 36/37 (97%)
+  F2 Lean readings: 19 carriers mapped; 1 clusters share readings
+  F3 higher-order cases: 6
+  F4 cross-domain queries: 8; domain log entries: 7
+  F5 strict-trajectory cases: 6
+
+  Procedural memory after all experiments:
+    3 procedures stored
+      shape=analogy:3        used=4×
+      shape=verify:2         used=3×
+      shape=describe:1       used=3×

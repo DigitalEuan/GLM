@@ -194,6 +194,11 @@ first and descend into the few that bear on the task.
 **Tried in the sandbox, not shipped.**
 [`REVERSE_CALL_PLANNER_STUDY.md`](studies/REVERSE_CALL_PLANNER_STUDY.md)
 
+**Scales, and a conversation.**
+[`SCALE_CONVERSION_STUDY.md`](studies/SCALE_CONVERSION_STUDY.md) ·
+[`CONVERSATION_STUDY.md`](studies/CONVERSATION_STUDY.md) ·
+[`SUPPLIED_PORTS_STUDY.md`](studies/SUPPLIED_PORTS_STUDY.md)
+
 **The supplied material, audited.**
 [`GLM_STUDY_CATALOG_AUDIT.md`](studies/GLM_STUDY_CATALOG_AUDIT.md) ·
 [`GLM_UNIFICATION_BLUEPRINT_AUDIT.md`](studies/GLM_UNIFICATION_BLUEPRINT_AUDIT.md) ·

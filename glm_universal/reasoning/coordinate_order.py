@@ -127,6 +127,7 @@ class Reading:
     derived: bool
     rule: str
     provenance: str
+    origin: str = ""                 # what it read as, before a conversion
 
     @property
     def scale(self) -> str:
@@ -250,55 +251,90 @@ class Comparison:
     difference: Fraction             # right - left, exactly
     pole: str                        # the named low end, or ''
     pole_row: str                    # the row at that end, or '' when equal
+    right_field: str = ""            # the second coordinate, when it differs
+    converted: bool = False          # whether a declared conversion was used
+    conversion: str = ""             # what the conversion was, in words
 
     @property
     def sentence(self) -> str:
         """The verdict as one line, with the pole named when there is one."""
         relation = {"lt": "is below", "gt": "is above",
                     "eq": "is level with"}[self.verdict]
+        other = self.right_field or self.field
         head = (f"{self.field} of {self.left.row} = {self.left.rendered} "
-                f"{relation} {self.field} of {self.right.row} = "
+                f"{relation} {other} of {self.right.row} = "
                 f"{self.right.rendered}")
         gap = (f", by an exact {abs(self.difference)}"
                if self.verdict != "eq" else "")
         pole = (f"; the register declares 0 = {self.pole}, so {self.pole_row} "
                 f"is the more {self.pole} of the two" if self.pole_row else "")
-        return f"{head}{gap}, both read on the {self.scale} scale{pole}"
+        where = (f", compared in {self.scale} by {self.conversion}"
+                 if self.converted
+                 else f", both read on the {self.scale} scale")
+        return f"{head}{gap}{where}{pole}"
 
 
-def order(surface, field: str, left: str, right: str) -> Comparison:
+def order(surface, field: str, left: str, right: str,
+          other_field: Optional[str] = None) -> Comparison:
     """Order one coordinate across two rows, or refuse.
+
+    With ``other_field`` given, the second reading is taken under its own
+    coordinate name, which is how one quantity held under two field names --
+    ``atomic_weight_u`` and ``molar_mass_u``, both in unified atomic mass
+    units -- is asked about at all.
 
     Refuses as ``unreadable`` when either reading is not held, as
     ``not-ordered`` when either is a label, and as ``different-scale`` when
-    the two readings come from different tables or different fields -- the
-    case the whole operation is built around.
+    the two readings are on two scales *and*
+    :mod:`glm_universal.reasoning.scale_conversion` declares no conversion
+    between them -- the case the whole operation is built around.  When the
+    declared table does relate the two scales, both readings are carried into
+    the quantity's canonical unit and compared there; the verdict is then a
+    fact about the readings and the table, and the answer says so.
     """
+    from . import scale_conversion as sc
+    second = other_field or field
     one = reading(surface, field, left)
-    two = reading(surface, field, right)
+    two = reading(surface, second, right)
+    left_value, right_value = one.value, two.value
+    scale, converted, conversion = one.scale, False, ""
     if one.scale != two.scale:
-        raise OrderingError(
-            "different-scale",
-            f"{field} of {one.row} is read on the {one.scale} scale and "
-            f"{field} of {two.row} on the {two.scale} scale; two readings on "
-            f"different scales have no common order, and the operation "
-            f"refuses rather than comparing the bare numbers")
-    if one.value < two.value:
+        try:
+            carry_left, carry_right = sc.bridge(one.scale, two.scale)
+        except sc.ConversionError as error:
+            raise OrderingError(
+                "different-scale",
+                f"{field} of {one.row} is read on the {one.scale} scale and "
+                f"{second} of {two.row} on the {two.scale} scale, and "
+                f"{error}; two readings on different scales have no common "
+                f"order, and the operation refuses rather than comparing "
+                f"the bare numbers") from None
+        left_value = sc.apply(carry_left, one.value)
+        right_value = sc.apply(carry_right, two.value)
+        scale = carry_left.unit
+        converted = True
+        conversion = (
+            f"the declared conversions {carry_left.scale} "
+            f"x{carry_left.factor} and {carry_right.scale} "
+            f"x{carry_right.factor}")
+    if left_value < right_value:
         verdict = "lt"
-    elif two.value < one.value:
+    elif right_value < left_value:
         verdict = "gt"
     else:
         verdict = "eq"
-    poles = POLES.get(field, ("", ""))
+    poles = POLES.get(field, ("", "")) if second == field else ("", "")
     pole = poles[0]
     if verdict == "eq" or not pole:
         pole_row = ""
     else:
         pole_row = one.row if verdict == "lt" else two.row
     return Comparison(
-        field=field, scale=one.scale, left=one, right=two, verdict=verdict,
-        difference=two.value - one.value,
-        pole=pole if pole_row else "", pole_row=pole_row)
+        field=field, scale=scale, left=one, right=two, verdict=verdict,
+        difference=right_value - left_value,
+        pole=pole if pole_row else "", pole_row=pole_row,
+        right_field=second if second != field else "",
+        converted=converted, conversion=conversion)
 
 
 # ===========================================================================

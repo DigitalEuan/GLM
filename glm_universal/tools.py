@@ -825,6 +825,94 @@ def _ordering(args) -> int:
 
 
 # ---------------------------------------------------------------------------
+#  conversation
+# ---------------------------------------------------------------------------
+
+def _conversation(args) -> int:
+    """The conversation layer: which follow-ups bind to which antecedent,
+    which refuse, and what the two controls do on the same set."""
+    from .runtime import conversation as cv
+    report = cv.conversation_report()
+    if args.json:
+        print(json.dumps(
+            {"declared": report["declared"],
+             "answered": report["answered"],
+             "refused": report["refused"],
+             "as_declared": report["as_declared"],
+             "refusal_reasons": list(report["refusal_reasons"]),
+             "reasons_declared": report["reasons_declared"],
+             "alone_answered": report["alone_answered"],
+             "control_rows": report["control_rows"],
+             "control_wrong": report["control_wrong"]},
+            indent=1, sort_keys=True))
+        return 0
+    print(f"declared follow-ups   {report['declared']}")
+    print(f"answered / refused    {report['answered']} / {report['refused']} "
+          f"({', '.join(report['refusal_reasons'])})")
+    print(f"as declared           {report['as_declared']} of "
+          f"{report['declared']}")
+    print(f"no-context control    {report['alone_answered']} answered of "
+          f"{report['declared']}")
+    print(f"recency control       differs on {report['control_wrong']} of "
+          f"{report['control_rows']}")
+    print("follow-up                  outcome                as declared")
+    for row in report["rows"]:
+        print(f"  {row['key']:<26} {str(row['outcome']):<22} "
+              f"{'yes' if row['as_declared'] else 'NO'}")
+    print(report["caveat"])
+    return 0
+
+
+# ---------------------------------------------------------------------------
+#  binding
+# ---------------------------------------------------------------------------
+
+def _binding(args) -> int:
+    """Role-filler binding: what a bound relation gives back, what it refuses,
+    and what the nearest-mask control says instead."""
+    from .reasoning import role_binding as rb
+    report = rb.binding_report()
+    fibres, product = report["fibres"], report["product"]
+    if args.json:
+        print(json.dumps(
+            {"roles": report["roles"],
+             "declared": report["declared"],
+             "recovered": report["recovered"],
+             "refused": report["refused"],
+             "as_declared": report["as_declared"],
+             "refusal_reasons": list(report["refusal_reasons"]),
+             "control_rows": report["control_rows"],
+             "control_wrong": report["control_wrong"],
+             "carriers": fibres["carriers"],
+             "nameable": fibres["recoverable"],
+             "ambiguous": fibres["ambiguous"],
+             "largest_fibre": fibres["largest_fibre"],
+             "product_recoverable": product["recoverable"]},
+            indent=1, sort_keys=True))
+        return 0
+    print(f"declared bindings     {report['declared']} over "
+          f"{report['roles']} roles")
+    print(f"named / refused       {report['recovered']} / "
+          f"{report['refused']} "
+          f"({', '.join(report['refusal_reasons'])})")
+    print(f"as declared           {report['as_declared']} of "
+          f"{report['declared']}")
+    print(f"nameable carriers     {fibres['recoverable']} of "
+          f"{fibres['carriers']}, worst fibre {fibres['largest_fibre']} "
+          f"in {fibres['largest_fibre_domain']}")
+    print(f"product binding       recoverable from "
+          f"{product['recoverable']} of {product['carriers']} known sides")
+    print(f"nearest-mask control  names another carrier on "
+          f"{report['control_wrong']} of {report['control_rows']}")
+    print("binding                outcome              as declared")
+    for row in report["rows"]:
+        print(f"  {row['key']:<22} {str(row['outcome']):<20} "
+              f"{'yes' if row['as_declared'] else 'NO'}")
+    print(report["caveat"])
+    return 0
+
+
+# ---------------------------------------------------------------------------
 #  extremum
 # ---------------------------------------------------------------------------
 
@@ -853,6 +941,57 @@ def _extremum(args) -> int:
     print("column             outcome          as declared")
     for row in report["rows"]:
         print(f"  {row['key']:<18} {row['outcome']:<16} "
+              f"{'yes' if row['as_declared'] else 'NO'}")
+    print(report["caveat"])
+    return 0
+
+
+# ---------------------------------------------------------------------------
+#  scales
+# ---------------------------------------------------------------------------
+
+def _scales(args) -> int:
+    """The declared conversion table: what it relates, and what it leaves
+    refused."""
+    from .reasoning import scale_conversion as sc
+    report = sc.conversion_report()
+    census = report["census"]
+    if args.json:
+        print(json.dumps(
+            {"declared_rows": report["declared_rows"],
+             "quantities": report["quantities"],
+             "non_unit_factors": report["non_unit_factors"],
+             "offsets": report["offsets"],
+             "declared": report["declared"],
+             "answered": report["answered"],
+             "refused": report["refused"],
+             "as_declared": report["as_declared"],
+             "scales": census["scales"], "pairs": census["pairs"],
+             "bridged": census["bridged"], "still_refused": census["refused"],
+             "ordering_as_declared": report["ordering_as_declared"],
+             "extremum_as_declared": report["extremum_as_declared"]},
+            indent=1, sort_keys=True))
+        return 0
+    print(f"declared rows         {report['declared_rows']} over "
+          f"{report['quantities']} quantities "
+          f"({', '.join(report['quantity_names'])})")
+    print(f"factors / offsets     {report['non_unit_factors']} rows carry a "
+          f"factor other than 1; {report['offsets']} carry an offset")
+    print(f"declared questions    {report['declared']}")
+    print(f"answered / refused    {report['answered']} / {report['refused']}")
+    print(f"as declared           {report['as_declared']} of "
+          f"{report['declared']}")
+    print(f"census                {census['bridged']} of {census['pairs']} "
+          f"pairs of the {census['scales']} numeric scales are comparable; "
+          f"{census['refused']} stay refused")
+    print(f"unchanged underneath  ordering "
+          f"{report['ordering_as_declared']} of "
+          f"{report['ordering_declared']}, extremum "
+          f"{report['extremum_as_declared']} of "
+          f"{report['extremum_declared']}")
+    print("question                 outcome            as declared")
+    for row in report["rows"]:
+        print(f"  {row['key']:<24} {str(row['outcome']):<18} "
               f"{'yes' if row['as_declared'] else 'NO'}")
     print(report["caveat"])
     return 0
@@ -1142,6 +1281,26 @@ def _parser() -> argparse.ArgumentParser:
         help="one coordinate folded over every row of one table, or refused")
     extremum.add_argument("--json", action="store_true")
     extremum.set_defaults(handler=_extremum)
+
+    scales = sub.add_parser(
+        "scales",
+        help="the declared table of conversions between scales, and the "
+             "refusals it removes")
+    scales.add_argument("--json", action="store_true")
+    scales.set_defaults(handler=_scales)
+
+    conversation = sub.add_parser(
+        "conversation",
+        help="the turn that refers back to an earlier turn, bound or refused")
+    conversation.add_argument("--json", action="store_true")
+    conversation.set_defaults(handler=_conversation)
+
+    binding = sub.add_parser(
+        "binding",
+        help="a typed relation written as one word, and how much of it comes "
+             "back")
+    binding.add_argument("--json", action="store_true")
+    binding.set_defaults(handler=_binding)
 
     loop = sub.add_parser(
         "queryesc", help="escalation as a step of the query loop")

@@ -56,11 +56,11 @@ fields of water                      -- the field names that row answers to
 | `carrier:molecules` | `carrier` | 51 | 6 | the attributes every carrier of the molecules register keeps |
 | `carrier:physics` | `carrier` | 726 | 7 | the attributes every carrier of the physics register keeps |
 | `carrier:spatial` | `carrier` | 28 | 7 | the attributes every carrier of the spatial register keeps |
-| `lean` | `address` | 3,455 | 5 | the Lean address book: one row per declaration of the development |
-| `python` | `code` | 3,806 | 6 | the package's own top-level functions and classes, read by an AST walk |
+| `lean` | `address` | 3,582 | 5 | the Lean address book: one row per declaration of the development |
+| `python` | `code` | 3,914 | 6 | the package's own top-level functions and classes, read by an AST walk |
 | `function` | `function` | 3 | 26 | the declared zero-argument functions whose returned mapping is addressable by key |
 
-13 tables, 8,576 rows and 51,452 addressable (row, field) pairs over 193 distinct field names.
+13 tables, 8,811 rows and 52,735 addressable (row, field) pairs over 193 distinct field names.
 <!-- end generated -->
 
 Four things about that list are deliberate.
@@ -139,7 +139,15 @@ this is coverage, not reasoning: a field surface is `table`, the weakest of the 
 Read plainly: the surface moves the probe from six parsed to fifteen parsed,
 it answers the number declared reachable before the run and not one question
 more, the tenth needs an operation rather than a surface, and of the three
-faculties it is the weakest — `table`.
+faculties it is the weakest — `table`. Counted by the class the oracle put
+them in, the questions it called *held and unreachable* fall from
+<!--figure:fieldsurface-surface-before-->10<!--/figure--> to
+<!--figure:fieldsurface-surface-after-->1<!--/figure-->, and the surface
+reaches them by reading
+<!--figure:fieldsurface-fields-->193<!--/figure--> distinct field names across
+the tables above — the width of the instrument, and the reason a tenth
+question it cannot answer is a question about an operation rather than a
+missing field.
 
 ### Question by question
 

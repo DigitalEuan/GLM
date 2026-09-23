@@ -3641,13 +3641,15 @@ class GeometricSession(SubstrateReports, LatticeGeometryReports,
         name = str(query.options.get("name", "")).strip()
         left = str(query.options.get("left", "")).strip()
         right = str(query.options.get("right", "")).strip()
+        other = str(query.options.get("right_name", "")).strip()
         if not name or not left or not right:
             raise SolverError(
                 "ordering: name one coordinate and two rows, written "
                 "'<coordinate> of <row> and <row>' -- e.g. "
                 "'order abstract_concrete of energy and water'")
         try:
-            result = cord.order(self.field_surface, name, left, right)
+            result = cord.order(self.field_surface, name, left, right,
+                                other_field=other or None)
         except cord.OrderingError as error:
             raise SolverError(f"ordering ({error.reason}): {error}") from None
         relation = {"lt": "below", "gt": "above", "eq": "level with"}[
@@ -3661,16 +3663,21 @@ class GeometricSession(SubstrateReports, LatticeGeometryReports,
                  f"field it came from.",
                  f"{result.left.row}: {result.left.rendered}; "
                  f"{result.right.row}: {result.right.rendered}"),
-            Step("the two readings are required to be on one scale",
+            Step("the two readings are required to be on one scale, or "
+                 "carried onto one by a declared conversion",
                  f"A scale here is the table and the field a value was read "
                  f"under. Two numbers on different scales have no common "
                  f"order -- a positive rescaling of one of them flips the "
                  f"comparison, which is "
                  f"GLM.CoordinateOrder.naive_order_is_not_scale_free -- so "
-                 f"the operation refuses rather than comparing them. On one "
-                 f"scale no rescaling can: "
-                 f"GLM.CoordinateOrder.order_scale_invariant.",
-                 f"both on {result.scale}"),
+                 f"the operation refuses unless the declared conversion "
+                 f"table relates the two scales, in which case both are "
+                 f"carried into the quantity's canonical unit first. A "
+                 f"positive conversion cannot move the verdict "
+                 f"(GLM.ScaleConversion.cmpQ_apply) and never changes an "
+                 f"answer the bare operation already gave "
+                 f"(GLM.ScaleConversion.orderWith_conservative).",
+                 f"{result.conversion or 'both on ' + result.scale}"),
             Step("the order is taken exactly",
                  f"The comparison is of two rationals and the gap is their "
                  f"exact difference. Nothing is rounded and no float is "
@@ -3697,8 +3704,10 @@ class GeometricSession(SubstrateReports, LatticeGeometryReports,
                       "pole_row": result.pole_row},
             script_spec={"template": "ordering",
                          "args": {"field": name, "left": left,
-                                  "right": right}},
+                                  "right": right, "other_field": other}},
             payload={"field": result.field, "scale": result.scale,
+                     "right_field": result.right_field,
+                     "converted": result.converted,
                      "left": result.left.row, "right": result.right.row,
                      "left_value": result.left.rendered,
                      "right_value": result.right.rendered,

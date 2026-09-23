@@ -13,8 +13,9 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-**<!--figure:lean-files-->122 Lean files<!--/figure-->**, all building against Mathlib at `v4.28.0` — the
-toolchain already pinned by `glm_lean/lean-toolchain` — and all free of `sorry`.
+**<!--figure:lean-files-->126 Lean files<!--/figure-->**, all building against Mathlib at `v4.28.0` — the
+toolchain already pinned by `glm_lean/lean-toolchain` — and all
+<!--figure:lean-file-count-->126<!--/figure--> of them free of `sorry`.
 Every theorem below has been checked with `#print axioms`; none depends on
 anything beyond `propext`, `Classical.choice` and `Quot.sound`, except the
 finite exhaustive checks in `Golay/Sextet.lean` and in the five `Cube/` files

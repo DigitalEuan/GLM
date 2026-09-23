@@ -9,9 +9,9 @@ select every tool whose declared precondition the problem satisfies. Does that
 inversion buy anything the current system does not already have — and can it be
 made safe enough to promote out of a sandbox?
 
-**Verdict.** It buys something on the declared task set and nothing at all on the project's own evaluation set, and it is therefore not promoted. The safety gate holds and the utility gate does not: the planner answers five declared tasks the plain runtime refuses, every answer it gives is checked by a second tool, and no principled refusal ever reaches it — but of the fourteen evaluation refusals it is offered, it correctly refuses all fourteen, so under the declared fallback rule it would add nothing to the shipped system today.
+**Verdict.** It buys something on the declared task set and nothing at all on the project's own evaluation set, and it is therefore not promoted. The safety gate holds and the utility gate does not: the planner answers five declared tasks the plain runtime refuses, every answer it gives is checked by a second tool, and no principled refusal ever reaches it — but of the sixteen evaluation refusals it is offered, it correctly refuses all sixteen, so under the declared fallback rule it would add nothing to the shipped system today.
 
-**Deciding figure.** 10 of 15 declared tasks answered, all 10 independently checked, 5 of them beyond the plain runtime; and over 172 evaluation cases, 14 refusals offered to the planner and 0 answers gained.
+**Deciding figure.** 10 of 15 declared tasks answered, all 10 independently checked, 5 of them beyond the plain runtime; and over 177 evaluation cases, 16 refusals offered to the planner and 0 answers gained.
 
 **Recomputed by.** `glm_universal.sandbox.planner.planner_report`
 
@@ -169,16 +169,17 @@ was run:
 Under that rule the runtime's answers cannot move — not because the planner
 agrees with them, but because it is never asked. That makes the safety gate
 structural, and leaves the utility gate to carry the whole weight of the
-argument.
+argument. The set it is measured over is the whole of the project's
+evaluation, 177 cases at the last reading.
 
 <!-- generated: plannersandbox-fallback -->
 | reading | value |
 |---|---|
-| evaluation cases | 172 |
-| the runtime answers | 148 |
-| the runtime refuses | 24 |
+| evaluation cases | 177 |
+| the runtime answers | 151 |
+| the runtime refuses | 26 |
 | of those, classified principled | 10 |
-| the planner is consulted on | 14 |
+| the planner is consulted on | 16 |
 | principled refusals reaching the planner | 0 |
 | answers the runtime does not give | 0 |
 | **safety gate** | **True** |
@@ -187,9 +188,9 @@ argument.
 The rule measured is: the runtime answers first and its answers are untouched; the planner is consulted only on a refusal, and only on a refusal the escalation classifier calls escalatable.
 <!-- end generated -->
 
-**And the utility gate fails.** Of the 24 refusals in the evaluation set, 10
+**And the utility gate fails.** Of the 26 refusals in the evaluation set, 10
 are classified principled and are never offered to the planner at all. The
-remaining 14 are offered, and the planner refuses all fourteen — correctly:
+remaining 16 are offered, and the planner refuses all sixteen — correctly:
 
 | case | question | what the planner did |
 |---|---|---|
@@ -207,6 +208,8 @@ remaining 14 are offered, and the planner refuses all fourteen — correctly:
 | `extremum-two-tables` | `largest line` | refused; the column would be gathered from two tables, so it is not one scale |
 | `extremum-nominal` | `largest name in element` | refused; a nominal coordinate has no extremum to fold to |
 | `extremum-absent` | `largest boiling_point in element` | refused; no row of the table carries the coordinate named |
+| `scales-different-quantity` | `order atomic_weight_u of carbon and melting_point_K of iron` | refused; the declared conversion table relates scales of one quantity and declares none between a mass and a temperature |
+| `scales-quantity-with-holes` | `largest temperature` | refused; the conversions gather the column but 40 of the 236 rows record no reading, so the fold is over the rows that happen to be filled in |
 
 So the honest reading of this round is not *the planner is worse*; it is that
 **the evaluation set contains no headroom for it**. Every question in it that
@@ -217,7 +220,7 @@ resolves, a constant reached through the reference layer, and a layer
 comparison. None of those has a case in the evaluation set yet.
 
 A useful by-product, and a candidate change to the shipped classifier: on two
-of the fourteen — `trilinear 1 2 3` and the banana — the planner's *own* reading of
+of the sixteen — `trilinear 1 2 3` and the banana — the planner's *own* reading of
 the refusal text classifies the question as ill formed where the runtime's
 refusal text does not carry a marker that
 `glm_universal.runtime.escalation_loop.PRINCIPLED_MARKERS` recognises. Those

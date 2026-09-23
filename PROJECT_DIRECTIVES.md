@@ -127,8 +127,9 @@ face of D1 below, and the same block heads [`STATUS.md`](STATUS.md).
 
 **Standing rules for anyone — person or machine — working on this repository.**
 
-These are not style preferences. Each one exists because ignoring it has cost
-this project time or fidelity, and each one names the **instrument** that
+These are not style preferences. There are <!--figure:directive-count-->16<!--/figure-->
+of them, and each one exists because ignoring it has cost
+this project time or fidelity; each one names the **instrument** that
 enforces it, so that a directive can be checked rather than remembered.
 `glm_universal/reasoning/directives.py` parses this file, and
 `report directives` prints the table with each instrument's current verdict;
@@ -272,6 +273,14 @@ declarations, carriers — is produced by `python -m glm_universal.figures
 superseded phrases so a retired number cannot silently return. Do not type a
 figure into a document by hand; add it to `figures.py` and quote what it
 computes.
+
+**And the converse, as of Phase 57.** A registered figure key is recomputed on
+every release, so a key no document quotes is work the machine does for no
+reader. Every key of the inline-figure registry must therefore be quoted by at
+least one document, or retired from the registry;
+`tests/test_figures.py::TestEveryRegisteredFigureIsQuoted` fails when one is
+neither. The two halves together make the registry and the documents a single
+surface: nothing quoted is typed, and nothing computed is unread.
 
 **Checked by** `glm_universal.figures`, `tests/test_figures.py`. The argument this rule was written with —
 what it cost to learn, and the examples current at the time — is `D6`

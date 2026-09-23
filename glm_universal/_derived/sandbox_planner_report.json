@@ -1,5 +1,5 @@
 {
- "input_digest": "a70821279c7768eed341d79a18fa5ef56535c00319db804809e6043ea7268739",
+ "input_digest": "34b904a6fd62d6892009da9e36ffb7d26123c9590799fc9e64e52d889e9eb65d",
  "name": "sandbox_planner_report",
  "payload": {
   "answered": 10,
@@ -13,15 +13,15 @@
   "budget": 12,
   "fallback": {
    "answers_moved": [],
-   "cases": 172,
+   "cases": 177,
    "gained": [],
    "gained_unchecked": [],
-   "planner_consulted": 14,
+   "planner_consulted": 16,
    "principled_refusals": 10,
    "principled_refusals_offered_to_the_planner": [],
    "rule": "the runtime answers first and its answers are untouched; the planner is consulted only on a refusal, and only on a refusal the escalation classifier calls escalatable",
-   "runtime_answered": 148,
-   "runtime_refused": 24,
+   "runtime_answered": 151,
+   "runtime_refused": 26,
    "safety_holds": true,
    "utility_holds": false
   },
@@ -40,15 +40,15 @@
    },
    "fallback": {
     "answers_moved": [],
-    "cases": 172,
+    "cases": 177,
     "gained": [],
     "gained_unchecked": [],
-    "planner_consulted": 14,
+    "planner_consulted": 16,
     "principled_refusals": 10,
     "principled_refusals_offered_to_the_planner": [],
     "rule": "the runtime answers first and its answers are untouched; the planner is consulted only on a refusal, and only on a refusal the escalation classifier calls escalatable",
-    "runtime_answered": 148,
-    "runtime_refused": 24,
+    "runtime_answered": 151,
+    "runtime_refused": 26,
     "safety_holds": true,
     "utility_holds": false
    },

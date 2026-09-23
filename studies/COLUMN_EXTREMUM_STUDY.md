@@ -207,12 +207,16 @@ order.
   electronegative?* is still hand-translated into the system's own grammar —
   and in this case the honest answer to the English question is the refusal,
   because that column has holes in it.
-* **A column is one table.** Gathering the same quantity from two tables is
-  refused rather than converted, exactly as the ordering operation refuses two
-  readings on two scales, and for the same reason: the operation holds no
-  conversions. The declared table of conversions that would relax both is
-  candidate 2 of [`STATUS.md`](../STATUS.md) §3.4 and is a round with its own
-  pre-registration.
+* **A column was one table, and is now one table or one declared quantity.**
+  Gathering the same quantity from two tables used to be refused rather than
+  converted, exactly as the ordering operation refused two readings on two
+  scales, and for the same reason: the operation held no conversions. The
+  round after this one wrote them down, and `largest mass` now gathers the 118
+  element rows and the 51 molecule rows into one unit and folds them. The
+  refusals measured above are unchanged — all eight declared columns come out
+  as they did, and a column of two scales nobody declared is still
+  `mixed-scale`.
+  [`SCALE_CONVERSION_STUDY.md`](SCALE_CONVERSION_STUDY.md).
 * **The fold is a maximum.** A rank, a median or a top-*k* over the same
   column would each need their own statement of what a hole does to them, and
   none is built.

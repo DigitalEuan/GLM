@@ -411,6 +411,11 @@ XOR_SITES: Tuple[Tuple[str, Tuple[str, ...], str], ...] = (
      "encoding, and the Golay cross-check against the substrate's own table"),
     ("reasoning/product.py", ("group-law",),
      "the axis label of a 2A pair; the product itself is axis_product"),
+    ("reasoning/role_binding.py", ("group-law", "metric"),
+     "the role-filler binding is addition in F2^24 -- the key is the role's "
+     "permutation of a reading added to the reading, and unbinding adds it "
+     "again -- with Hamming distance between readings as the collision "
+     "measure"),
     ("reasoning/salvage.py", ("metric",),
      "Hamming distance between a candidate and the target"),
     ("reasoning/salvage_second.py", ("group-law", "metric"),

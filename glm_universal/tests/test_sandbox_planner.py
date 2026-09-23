@@ -25,6 +25,7 @@ they certify rather than sample, and the sign-off runner turns them on.
 from __future__ import annotations
 
 import ast
+import importlib
 import inspect
 from pathlib import Path
 
@@ -262,9 +263,12 @@ def test_the_fallback_is_measured_over_the_whole_evaluation_set(report):
     #  not hold and two rows on different scales), and fourteen since the
     #  extremum kind added its four (a column with holes in it, a column
     #  gathered from two tables, a column that is not ordered and a
-    #  coordinate no row of the table holds).  The measurement moved with
-    #  the evaluation set; what it says did not.
-    assert fallback["planner_consulted"] == 14
+    #  coordinate no row of the table holds), and sixteen since the declared
+    #  conversion table added its two (a comparison of two quantities the
+    #  table relates no conversion between, and a column gathered by quantity
+    #  with holes in it).  The measurement moved with the evaluation set;
+    #  what it says did not.
+    assert fallback["planner_consulted"] == 16
     assert fallback["gained"] == ()
     assert fallback["principled_refusals_offered_to_the_planner"] == ()
     assert fallback["safety_holds"] is True
@@ -310,18 +314,18 @@ def test_the_gate_is_measured_against_a_set_the_module_did_not_choose():
 def test_the_by_product_is_two_questions_the_shipped_classifier_does_not_mark():
     """The planner marks two refusals ill formed that the shipped list misses.
 
-    Fourteen refusals reach the planner since the extremum query kind added
-    four to the ordering kind's three and the field surface's three; all
-    fourteen stop, and the two the planner marks are the two it marked when
-    four reached it, so the by-product is the same finding over a larger set
-    each time the set grows.
+    Sixteen refusals reach the planner since the declared conversion table
+    added two to the extremum kind's four, the ordering kind's three and the
+    field surface's three; all sixteen stop, and the two the planner marks are
+    the two it marked when four reached it, so the by-product is the same
+    finding over a larger set each time the set grows.
     """
     rows = [row for row in pl.fallback_rows() if row["planner_consulted"]]
-    assert len(rows) == 14
+    assert len(rows) == 16
     stopped = [row for row in rows
                if not row["planner_answered"]
                and row["refusal_tag"] == esl.ESCALATABLE]
-    assert len(stopped) == 14
+    assert len(stopped) == 16
     marked_by_the_planner = [row["question"] for row in stopped
                              if pl.ask(str(row["question"])).refusal_tag
                              != esl.ESCALATABLE]
@@ -385,3 +389,70 @@ def test_the_checklist_carries_the_order_its_lines_are_read_in():
     """JSON keeps a list in order and a mapping in whatever order it likes."""
     promotion = pl.planner_report()["promotion"]
     assert tuple(promotion["order"]) == tuple(promotion["checks"])
+
+
+# ---------------------------------------------------------------------------
+#  6.  The directory's own coarse read, computed rather than asserted
+# ---------------------------------------------------------------------------
+
+def test_the_occupancy_report_names_every_module_in_the_directory():
+    """A module added here without a checklist would go unreported."""
+    from glm_universal import sandbox
+
+    on_disk = sorted(
+        path.stem for path in (PACKAGE_ROOT / "sandbox").glob("*.py")
+        if path.stem != "__init__")
+    assert sorted(sandbox.OCCUPANTS) == on_disk
+    report = sandbox.occupancy_report()
+    assert [row["module"] for row in report["occupants"]] \
+        == list(sandbox.OCCUPANTS)
+    assert report["modules"] == len(on_disk)
+
+
+def test_the_occupancy_report_counts_ready_by_the_checklists_themselves():
+    from glm_universal import sandbox
+
+    report = sandbox.occupancy_report()
+    ready = 0
+    for row in report["occupants"]:
+        module = importlib.import_module(
+            f"glm_universal.sandbox.{row['module']}")
+        checklist = module.promotion_checklist()
+        assert row["ready"] == checklist["ready"]
+        assert row["failing"] == tuple(
+            key for key in checklist["order"] if not checklist["checks"][key])
+        #  While a line is false the module stays where it is (D14).
+        assert row["ready"] or row["failing"]
+        ready += 1 if row["ready"] else 0
+    assert report["ready"] == ready
+
+
+def test_the_declared_importers_are_the_same_set_the_walls_test_pins():
+    from glm_universal import sandbox
+
+    assert set(sandbox.DECLARED_IMPORTERS) == DECLARED_IMPORTERS
+
+
+def test_no_module_that_computes_an_answer_imports_the_sandbox():
+    """The figure the directory's coarse read quotes, taken from the tree."""
+    from glm_universal import sandbox
+
+    report = sandbox.occupancy_report()
+    assert report["importers"] == ()
+    assert report["computing_importers"] == ()
+    assert report["computing_importer_count"] == 0
+    for package in sandbox.COMPUTING_PACKAGES:
+        assert (PACKAGE_ROOT / package).is_dir(), package
+
+
+def test_the_sandbox_readme_quotes_the_report_it_says_it_is_recomputed_by():
+    readme = (PACKAGE_ROOT / "sandbox" / "README.md").read_text(
+        encoding="utf-8")
+    from glm_universal import sandbox
+
+    report = sandbox.occupancy_report()
+    assert "`glm_universal.sandbox.occupancy_report`" in readme
+    assert f"{report['modules']} modules" in readme
+    assert f"{report['ready']} of them ready" in readme
+    assert (f"{report['computing_importer_count']} modules that compute an "
+            f"answer importing them") in readme

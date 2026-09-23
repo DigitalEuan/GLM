@@ -27,7 +27,7 @@ Four instruments were used, and all four can be re-run on demand:
 cd overlay
 PYTHONPATH=. python3 -m glm_universal.capabilities                    # 33 probes
 PYTHONPATH=. python3 -m glm_universal.benchmarks                      # 5 suites
-PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8             # 172 CLI cases
+PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8             # 177 CLI cases
 PYTHONPATH=. python3 -m pytest glm_universal/tests -q                 # the test suite
 ```
 
@@ -45,9 +45,9 @@ by hand twice: the counts are recomputed into
 |---|---|---|
 | capability probes | where the library stops, asked as user questions | **33 probes: 20 hold, 13 break, 0 errored, 0 surprises** |
 | benchmark suites | solver functions against curated and exhaustive task sets | **2,389 / 2,390 tasks across 5 suites; every suite beat its declared baseline** |
-| end-to-end CLI evaluation | the CLI, driven the way a user drives it | **172 cases: 172 passed** — 146 answered correctly, 26 refused as expected, 0 unexpected refusals, **0 confidently wrong**, 0 errored |
-| test suite | the package's own regression net | **<!--figure:suite-->4,038 tests across 100 of the 101 test files, 15,644 subtests, outside the document check<!--/figure-->**, zero failures |
-| Lean development | the machine-checked layer | **<!--figure:lean-files-->122 Lean files<!--/figure-->, `lake build` clean, no `sorry`** |
+| end-to-end CLI evaluation | the CLI, driven the way a user drives it | **177 cases: 177 passed** — 149 answered correctly, 28 refused as expected, 0 unexpected refusals, **0 confidently wrong**, 0 errored |
+| test suite | the package's own regression net | **<!--figure:suite-->4,180 tests across 105 of the 106 test files, 16,288 subtests, outside the document check<!--/figure-->**, zero failures |
+| Lean development | the machine-checked layer | **<!--figure:lean-files-->126 Lean files<!--/figure-->, `lake build` clean, no `sorry`** |
 
 A break in the probe report is not a failure — it is a located boundary, and
 each one names the exact place it stops. A *confidently wrong* answer in the
@@ -59,14 +59,14 @@ honest refusal is scored `+1`. There are now none.
 ## 2. The end-to-end CLI evaluation
 
 This is the instrument that measures what a user gets. It lives in
-`overlay/glm_universal/evaluation/`. Each of its 172 cases starts `GLM.py` in a
+`overlay/glm_universal/evaluation/`. Each of its 177 cases starts `GLM.py` in a
 **fresh interpreter** — one subprocess per question, no shared session, no warm
 caches — and scores the `ANSWER` or `UNSOLVED` line the process prints. The
 question set covers **all <!--figure:query-kinds-->24 query kinds<!--/figure-->** the runtime recognises and every one of its
 report subjects; the coverage is checked against the runtime's own tables by
 a test, so a new kind or subject cannot be added without a case.
 
-26 of the 172 questions are ones the machine **should refuse**. Answering them
+28 of the 177 questions are ones the machine **should refuse**. Answering them
 confidently is scored worse than refusing them.
 
 ### Accuracy per query kind
@@ -81,12 +81,12 @@ confidently is scored worse than refusing them.
 | `compare` | 4 / 4 | 0 | 0 | 0 |
 | `derive` | 4 / 4 | 0 | 0 | 0 |
 | `describe` | 8 / 8 | 0 | 0 | 0 |
-| `extremum` | 8 / 8 | 0 | 0 | 0 |
+| `extremum` | 10 / 10 | 0 | 0 | 0 |
 | `field` | 8 / 8 | 0 | 0 | 0 |
 | `meaning` | 6 / 6 | 0 | 0 | 0 |
 | `measure` | 9 / 9 | 0 | 0 | 0 |
 | `nearest` | 4 / 4 | 0 | 0 | 0 |
-| `ordering` | 7 / 7 | 0 | 0 | 0 |
+| `ordering` | 10 / 10 | 0 | 0 | 0 |
 | `pi_groups` | 2 / 2 | 0 | 0 | 0 |
 | `product` | 1 / 1 | 0 | 0 | 0 |
 | `project` | 1 / 1 | 0 | 0 | 0 |
@@ -97,7 +97,7 @@ confidently is scored worse than refusing them.
 | `trilinear` | 2 / 2 | 0 | 0 | 0 |
 | `unknown` | 1 / 1 | 0 | 0 | 0 |
 | `verify` | 6 / 6 | 0 | 0 | 0 |
-| **total** | **172 / 172** | 0 | 0 | 0 |
+| **total** | **177 / 177** | 0 | 0 | 0 |
 
 Two facts are worth stating plainly. `analogy` — the kind that carried every
 failure in an earlier round — is now 11 / 11, and the set has grown from 8
@@ -107,11 +107,11 @@ is not bought with over-caution.
 
 ### The refusals it got right
 
-All 26 refusal cases refused, and all 26 are **boundaries** — each is a theorem
+All 28 refusal cases refused, and all 28 are **boundaries** — each is a theorem
 or a deliberate commitment, and cannot be closed by writing more code. There
 is no longer a **gap** case: the last one is closed below.
 
-**Boundaries — 26.**
+**Boundaries — 28.**
 
 | case | question | why the refusal is correct |
 |---|---|---|
@@ -141,6 +141,8 @@ is no longer a **gap** case: the last one is closed below.
 | `extremum-two-tables` | `largest line` | With no table named the column is gathered from the Lean address book and from the package's own source walk, and the largest of those numbers jointly is a fact about neither table. |
 | `extremum-nominal` | `largest name in element` | A column of labels has no extremum, and the refusal says which reading was not a quantity rather than ordering the spelling. |
 | `extremum-absent` | `largest boiling_point in element` | No row of the named table answers for the coordinate — it holds `boiling_point_K` — so there is no column to fold. |
+| `scales-different-quantity` | `order atomic_weight_u of carbon and melting_point_K of iron` | The declared conversion table relates scales of **one** quantity and declares no conversion between two: a mass and a temperature are on no common scale, and the table was given the chance to license the comparison and did not. |
+| `scales-quantity-with-holes` | `largest temperature` | The conversions gather melting and boiling points into one column in kelvin, and 40 of the 236 rows record no reading, so the largest of the present rows is not the largest of the column. Widening the operation removes the scale refusal and leaves the hole refusal exactly where it was. |
 
 The two analogy cases were new in an earlier round, and they are the
 instructive ones: they are refusals the machine could not previously *make*,
@@ -322,8 +324,26 @@ missing or wrong triple rather than to an opaque nearest-neighbour search.
   `cluster`, `nearest` and `describe` all fall through to the formula parser
   when a name is in no register, so `coherence PbCl2` and
   `cluster PbCl2, NaCl, H2O` are answered rather than refused.
-* The machine refuses well. All 26 refusal cases were refused, and there were
-  **zero** unexpected refusals across all 172 cases — including the four the
+* A second turn can refer back to the first. `describe it`, `and the
+  smallest?` and `and oxygen?` are bound to what the conversation has already
+  said, and the antecedent is chosen by **licensing** — a candidate is
+  admitted when the query it produces solves — so after *describe carbon;
+  describe water*, `field electronegativity_pauling of it` binds `carbon`,
+  which the element table answers, rather than `water`, which no table
+  answers for that field.
+  **<!--figure:conversation-answered-->8<!--/figure-->** of
+  **<!--figure:conversation-declared-count-->15<!--/figure-->** declared
+  follow-ups bind and
+  **<!--figure:conversation-refused-->7<!--/figure-->** refuse, all
+  **<!--figure:conversation-as-declared-->15<!--/figure-->** as declared,
+  against **<!--figure:conversation-alone-->0<!--/figure-->** answered by a
+  session with no memory of the conversation. This is measured outside the
+  CLI evaluation set, by `tools conversation`, because the follow-ups are not
+  query kinds. It is three declared surface patterns wide and no wider:
+  *the one before that*, *both of them* and *why?* are not follow-ups to it,
+  so this is coverage rather than comprehension.
+* The machine refuses well. All 28 refusal cases were refused, and there were
+  **zero** unexpected refusals across all 177 cases — including the four the
   `measure` query is asked at its own boundary, where
   `GLM.Info.boundary_empty_of_unmeasured` says there is nothing to answer with.
 

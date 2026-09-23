@@ -5,7 +5,7 @@
 
 **Question.** What has each phase of the wiring plan delivered, and what does the next round start from?
 
-**Verdict.** Phase 53 is closed; the candidates in [`STATUS.md`](STATUS.md) §3.4 are where the next round starts.
+**Verdict.** Phase 57 is closed; the candidates in [`STATUS.md`](STATUS.md) §3.4 are where the next round starts.
 
 **Deciding figure.** Every closed phase names what was built, where it lives, and how to see it recompute itself.
 
@@ -24,8 +24,8 @@ addressing. Each item says what was built, where it lives, and how to see it
 recompute itself.
 
 Everything below is reachable from the package's public API and from the query
-runtime — **<!--figure:query-kinds-->24 query kinds<!--/figure-->**, **65 report subjects** and **8 registers** — is
-covered by the test suite (<!--figure:test-files-->101 test files<!--/figure-->),
+runtime — **<!--figure:query-kinds-->24 query kinds<!--/figure-->**, **<!--figure:report-subjects-->65 report subjects<!--/figure-->** and **<!--figure:registers-->8 registers<!--/figure-->** — is
+covered by the test suite (<!--figure:test-files-->106 test files<!--/figure-->),
 and — where it is a report or a task — has a generated column-3 script that
 recomputes the claim in a **fresh interpreter** and fails if anything differs.
 
@@ -73,11 +73,24 @@ The archive also holds three interstitial sections written between phases:
 *Directive — multi-resolution Leech addressing*, *A task for the system* and
 *Runtime surface added*.
 
-**Phase 53 closed the candidate Phase 52 named first, and §3.4 of
-[`STATUS.md`](STATUS.md) is where the next round starts** — its first
-candidate is now the one boundary both operations share: the scales neither
-can bridge, and the declared table of conversions that would let them.
-Phase 53 built the extremum over a whole column, which Phase 51 stopped short
+**Phase 57 took candidate 4 of [`STATUS.md`](STATUS.md) §3.4 — the registered
+figure keys no document quoted — and §3.4 is where Phase 58, the next round,
+starts**: it opens with what the conversation layer still cannot do, followed
+by the two halves of the conversion table Phase 55 wrote but did not earn (an
+offset no declared row uses, and a measurand the table cannot declare), the
+fold other than a maximum, and the other half of the wiring audit: the eight
+`reasoning/` modules no entry point imports. Phase 56 before it took no
+candidate from §3.4 but the four rows of
+[`studies/CONVERSATION_STUDY.md`](studies/CONVERSATION_STUDY.md) §9 — the
+supplied conversational material Phase 54 read, ran and left unported — and
+carried the wiring audit those last two candidates came from: the reading of
+which parts of the tree are tested and written up but reached by nothing the
+machine runs. Phase 55 before it took candidate 1 of §3.4, the scales neither the
+ordering nor the extremum operation could bridge. Phase 54 before that took
+the material supplied with the round rather than a candidate: it tested the
+supplied conversational GLM against the package, refuted two of its claims and
+built the turn that refers back to an earlier turn.
+Phase 53 before it built the extremum over a whole column, which Phase 51 stopped short
 of; Phase 52 closed the tail Phase 51 left; and Phase 51 closed the candidate
 that had stood first since Phase 46 — the one question the field surface could
 not reach. Phase 49 below took
@@ -170,9 +183,409 @@ as everything else: only the open phase is state.
 
 ---
 
+## Phase 57 — the measurements no reader saw: the converse of D6, decided key by key
+
+**Status: closed this round.** It took **candidate 4** of
+[`STATUS.md`](STATUS.md) §3.4. Under directive **D15** it moved **nothing**:
+no query kind, no operation, no answer that was not answerable before. What it
+moved is the honesty of the instrument — a measurement the machine takes on
+every release is now either read by a document or gone.
+
+**What the audit found.** `studies/scripts/wiring_audit.py` reads the figure
+registry the opposite way to D6. D6 requires every figure a document quotes to
+be generated; nothing required the converse, and **20** of the **135**
+registered keys were recomputed on every release and quoted by no document at
+all. Three of the twenty were bare-number spellings of sentences that *are*
+quoted (`test-file-count`, `lean-file-count`, `directive-count`); the other
+seventeen were measurements with no reader.
+
+**What was decided, key by key.** Every one of the twenty was quoted — none
+was retired, because each turned out to be a number its document was already
+trying to say by hand, or should have been saying:
+
+* the corpus's own sizes went into
+  [`studies/CORPUS_ADDRESS_STUDY.md`](studies/CORPUS_ADDRESS_STUDY.md) §1
+  (`corpus-documents`, `corpus-state-documents`, `corpus-archive-documents`,
+  `corpus-sections`);
+* the Lean corpus's size into
+  [`studies/LEAN_ADDRESS_STUDY.md`](studies/LEAN_ADDRESS_STUDY.md)
+  (`lean-declarations`, `lean-declaration-files`);
+* the three field-surface readings into
+  [`studies/FIELD_SURFACE_STUDY.md`](studies/FIELD_SURFACE_STUDY.md) §4 and
+  the three ordering readings into
+  [`studies/ORDERING_STUDY.md`](studies/ORDERING_STUDY.md) §5, in both cases
+  the class the probe question sat in before the instrument and after it;
+* `normesc-refused` into
+  [`studies/NORM_FAMILY_STUDY.md`](studies/NORM_FAMILY_STUDY.md), which states
+  what the repaired ladder pays in refusals for never answering wrongly;
+  `secondread-program-refused` into
+  [`studies/SECOND_READING_STUDY.md`](studies/SECOND_READING_STUDY.md) §6, the
+  other side of the adopted guard's 366 correct answers; and
+  `opesc-program-correct` into the tier-0 verdict of
+  [`studies/OPERATION_ESCALATION_STUDY.md`](studies/OPERATION_ESCALATION_STUDY.md),
+  which had been typing that figure by hand — a plain D6 breach found by
+  looking for the converse one;
+* `registers` and `report-subjects` into the plan header, the package readme
+  and the runtime readme, all of which stated them by hand; and the three bare
+  spellings into the directives document, the tests readme and the Lean
+  readme.
+
+**A defect the round exposed.** `corpus-documents` counted **98** documents
+while the inventory table of the corpus study — the other registered
+measurement of the same thing — counted **95**: the key counted generated
+documents, which are outputs of the corpus rather than parts of it, and which
+the digest deliberately excludes. Two registered measurements of *how many
+documents* were three apart with nothing to notice it, because neither was
+quoted. The three document-count keys are now taken over the written corpus,
+which is the set the digest guards.
+
+**What keeps it true.** The converse is now a rule with an instrument rather
+than a habit: `tests/test_figures.py::TestEveryRegisteredFigureIsQuoted` fails
+when a registered key is quoted by no document, and fails the other way too —
+when a document quotes a key the registry does not hold, so nothing keeps it
+current. **D6** in [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md) states
+both halves. Re-read the audit with `python3 studies/scripts/wiring_audit.py`:
+it now reports **135 registered, 135 quoted, 0 never quoted**.
+
+**What it does not claim.** Quoting a measurement does not make it
+interesting, and this round measured nothing new. The other reading of the
+same audit — the eight `reasoning/` modules no entry point imports — is
+untouched and stays as candidate 3 of §3.4.
+
+---
+
+## Phase 56 — the four pieces left in the crate: two shipped, one measured, one refuted
+
+**Status: closed.** Under directive **D15** it moved **addressing**
+— a relation between two named things now has an address of its own, and a
+resolved follow-up has an address that is the conversation it was resolved in
+— and it moved **refusal**, because both new surfaces refuse under named
+reasons and both replay a refusal unchanged. It did not move derivation: no
+answer here is computed that was not computable before, and it adds **no query
+kind**. It took **no candidate from [`STATUS.md`](STATUS.md) §3.4**: it took
+the four rows of [`studies/CONVERSATION_STUDY.md`](studies/CONVERSATION_STUDY.md)
+§9 instead, which named the supplied material Phase 54 had read, run and left
+unported, each with the measurement it would have to make to earn a round.
+
+**What was built — the role–filler binding.**
+`glm_universal.reasoning.role_binding` writes a typed relation between two
+named carriers as one 24-bit word. The binding is exclusive-or over the parity
+readings of the two sides, conditioned on the role:
+`bind(role, a, b) = role · parity(a) ⊕ parity(a) ⊕ parity(b)`. Because
+exclusive-or is a group operation, `unbind` is the same operation again and
+the filler's *reading* comes back unconditionally — that is a theorem, not a
+measurement. Naming the filler from its reading is a second and strictly
+weaker step, and it refuses under
+**<!--figure:binding-reasons-->3<!--/figure-->** reasons when the reading is
+carried by no carrier or by more than one.
+**<!--figure:binding-roles-->7<!--/figure-->** roles are declared.
+
+**What was built — the procedural-plan store.**
+`glm_universal.runtime.plan_store` keeps a resolved follow-up under a digest of
+the whole conversation it was resolved in, and
+`glm_universal.runtime.conversation.Conversation` takes one as an optional
+`store=`. A refusal is stored exactly as an answer is, with its reason and its
+wording, which is the difference that makes the store worth having: the
+expensive follow-up in this material is the one that refuses.
+
+**What was measured.** Both surfaces were declared before they were run. The
+binding: **<!--figure:binding-declared-count-->12<!--/figure-->** declared bindings,
+**<!--figure:binding-recovered-->6<!--/figure-->** named and
+**<!--figure:binding-refused-->6<!--/figure-->** refused,
+**<!--figure:binding-as-declared-->12<!--/figure-->** as declared. Across the
+whole surface, **<!--figure:binding-nameable-->424<!--/figure-->** of the
+**<!--figure:binding-carriers-->1,143<!--/figure-->** carriers read uniquely
+and can be named, **<!--figure:binding-ambiguous-->719<!--/figure-->** cannot,
+and the worst fibre holds
+**<!--figure:binding-largest-fibre-->136<!--/figure-->** carriers. The control
+matters: naming by nearest mask instead of by exact reading is wrong on
+**<!--figure:binding-control-wrong-->629<!--/figure-->** carriers. The supplied
+material also claimed an elementwise-product binding is recoverable; it is
+recoverable from only
+**<!--figure:binding-product-recoverable-->10<!--/figure-->** of the 1,143
+known sides, because **<!--figure:binding-product-zero-->1,133<!--/figure-->**
+carriers read zero somewhere and zero has no inverse — so that claim is
+**refuted**. The store:
+**<!--figure:planstore-declared-count-->15<!--/figure-->** declared follow-ups,
+**<!--figure:planstore-replayed-->15<!--/figure-->** replayed unchanged,
+**<!--figure:planstore-refusals-->7<!--/figure-->** refusals of which
+**<!--figure:planstore-refusals-replayed-->7<!--/figure-->** come back with
+their reason and their wording; licensing trials
+**<!--figure:planstore-trials-first-->27<!--/figure-->** →
+**<!--figure:planstore-trials-replayed-->0<!--/figure-->**, and the worst
+single follow-up **<!--figure:planstore-worst-case-->14<!--/figure-->** → 0.
+The control decides the key: keyed by the follow-up's text alone,
+**<!--figure:planstore-coarse-wrong-->8<!--/figure-->** of the fifteen come
+back with another conversation's antecedent, because six of them are the words
+*describe it* with four different things being described.
+
+**What was measured and declined.** The **four-register memory split** and the
+**Lean-source generator** are in `glm_universal/sandbox/` behind computed
+promotion checklists, and both checklists say `ready is False`. The split
+reduces, on this material, to recency plus intent — a pronoun names no concept
+— and where it gains an answer it gains it by choosing a member of an
+`ambiguous-antecedent` refusal, which is the one thing the licensing layer
+exists not to do. The generator's supplied round-trip check never reads what
+it generated: it passes for a generator that emits the empty string. Run
+against the real round trip — write the source, read it back with
+`reasoning.lean_address.parse_file`, re-quantise — **0 of 12** declarations
+round-trip, and hand elaboration of the supplied generated file reports errors
+on every one of the twelve declarations. D8 says the Lean file is the
+specification, so a generator of Lean is a generator of specifications and it
+ships only when one of them is proved.
+
+**Where it lives.** `reasoning/role_binding.py`, `runtime/plan_store.py`,
+`sandbox/memory_split.py`, `sandbox/lean_generation.py`; `tools binding`; the
+figures and the three generated blocks in `corpus/render.py`;
+`glm_universal/tests/test_role_binding.py`, `test_plan_store.py` and
+`test_supplied_sandbox.py`;
+`RequestProject/GLM/RoleBinding.lean` and `RequestProject/GLM/PlanStore.lean`
+(neither with a `sorry`); and
+[`studies/SUPPLIED_PORTS_STUDY.md`](studies/SUPPLIED_PORTS_STUDY.md).
+
+**What is proved rather than measured.** For the binding, that unbinding
+inverts binding for every role and every pair (`unbind_bind`), that binding is
+injective and surjective in the filler (`bind_injective_right`,
+`bind_surjective_right`), that two different roles can bind alike
+(`roles_differ_but_bind_alike`) so the role is not recoverable from the word,
+that recovery by name is sound and refuses exactly when the reading is not
+unique (`recover_ok_iff`, `recover_sound`, `recover_bind_of_unique`,
+`two_names_one_reading_is_ambiguous`, `no_carrier_is_refused`), and that the
+nearest-mask control names the wrong carrier
+(`nearest_names_the_wrong_carrier`). For the store, that a lookup after a
+record returns what was recorded and nothing else (`lookup_record`,
+`lookup_record_of_ne`), that soundness is preserved by recording
+(`sound_nil`, `sound_record`), that replay agrees with running
+(`replay_agrees_with_run`) and preserves a refusal
+(`refusal_survives_replay`, `replay_preserves_refusal`), that the exact key is
+injective (`exactKey_injective`) and separates two conversations that share a
+follow-up (`exact_key_separates_the_two_conversations`), and that the coarse
+key does not (`coarse_key_answers_the_wrong_question`).
+
+**What closing the round turned up, and fixed.** The round shipped its code
+before it ran the whole suite, and the suite found two real defects in it.
+`runtime/plan_store.py` imported `hashlib` directly, which breaks **D3** — a
+digest addresses integrity and never meaning, so hashing lives in
+`glm_universal.integrity` and the core does not import it; the key now goes
+through `integrity.sha256_hex`, and the source audit, the float/digest
+inventories and the directive test all pass again. `reasoning/role_binding.py`
+was an unclassified exclusive-or site: `reasoning/combiner.py` keeps a table
+saying what role every `^` in the package plays, and the binding is now
+declared there as a group-law and metric site, which is the row that makes the
+inventory complete. Both were caught by tests the round already had and never
+ran.
+
+**The wiring audit taken alongside it.** `studies/scripts/wiring_audit.py` is
+a reading of the tree rather than a measurement of the machine: what has been
+written, tested and written up, and is reached by nothing the system runs. Of
+the **89** modules in `reasoning/`, **81** are in the closure of the entry
+points; the eight outside it (`deep_dive`, `llvq`, `moonshine`, `pcgs`,
+`salvage`, `salvage_second`, `stability`, `tie_break`) are all tested, two are
+re-run when a reader recomputes a receipt, and six are reached by nothing but
+their own test files. Of **135** registered figure keys, **115** are quoted in
+a document; three of the twenty that are not are bare-number spellings of
+quoted sentences, so seventeen are measurements no reader sees. Every one of the **127** files of
+the Lean tree — the 126 under `RequestProject/GLM/` and the root `Main.lean`
+— is cited somewhere, so D8's specification always has a reader. The sandbox's own three numbers are no longer asserted either:
+`glm_universal.sandbox.occupancy_report` reads the occupants, calls each
+promotion checklist and walks the package's import graph — 3 modules, 0 ready,
+0 modules that compute an answer importing them — and it is what the sandbox
+README's coarse read is recomputed by.
+
+**What it does not claim.** The binding writes a relation down; it does not
+discover one, and the twelve declared bindings are written by hand. Naming a
+filler works for **<!--figure:binding-nameable-->424<!--/figure-->** of 1,143 carriers and no more, and the ambiguity is a
+property of the parity reading rather than a bug to be tuned away. The store
+is a cache, not a planner: it replays a plan that was resolved, never composes
+two, and a conversation that differs by one character is a different key by
+design. Nothing here is a language model, and nothing here generates prose.
+
+---
+
+## Phase 55 — the scales neither operation could bridge: a declared table of conversions
+
+**Status: closed.** Under directive **D15** it moved **refusal**
+on a declared task set and widened **derivation** to a fold over the rows of
+two tables at once; it decides nothing about addressing, and it adds **no
+query kind**. It took **candidate 1 of [`STATUS.md`](STATUS.md) §3.4**, which
+both of the rounds before it had named in the same words: the ordering
+operation refuses two readings on two scales and the extremum operation
+refuses a column gathered from two, *because the operation holds no
+conversions*.
+
+**What was built.** `glm_universal.reasoning.scale_conversion` — a table
+someone wrote down. One row per scale, naming the quantity that scale
+measures, the canonical unit of that quantity, the exact rational `factor` and
+`offset` that carry a reading into that unit, and the source the numbers came
+from. A conversion is affine and increasing (`factor > 0`), which is the whole
+of what makes it a conversion rather than a re-ordering, and it is a
+**declaration rather than an inference**: nothing guesses a conversion from a
+field name, and a scale the table does not mention is refused exactly as
+before. The shipped table is **9 rows over 4 quantities** — mass, molar
+energy, temperature and length — two of them with a factor other than `1` and
+none with an offset. The one non-unit factor is exact rather than measured:
+one electronvolt per particle is `N_A e` joules per mole, and both constants
+have been SI *definitions* since 2019, so the conversion enters as a
+`Fraction` and nothing on the path rounds.
+
+**What it buys.** Two readings of one quantity under two field names can be
+ordered (`order atomic_weight_u of carbon and molar_mass_u of water`), with
+the conversions used named on the answer and the gap exact in the unit it was
+taken in; and a column can be gathered **by quantity** across every declared
+scale of it — `largest mass` folds 118 element rows under `atomic_weight_u`
+together with 51 molecule rows under `molar_mass_u`, 169 readings in one unit,
+which no single table holds.
+
+**What was measured.** Twelve questions were declared before they were run:
+six conversions spanning all four quantities, three refusals the table must
+leave standing, and three columns. All
+**<!--figure:scales-as-declared-->12<!--/figure-->** came out as declared —
+**<!--figure:scales-answered-->7<!--/figure-->** answered and
+**<!--figure:scales-refused-->5<!--/figure-->** refused. The honest
+denominator is the whole surface: of the
+**<!--figure:scales-pairs-->7,750<!--/figure-->** pairs of the
+**<!--figure:scales-numeric-->125<!--/figure-->** numeric scales the field
+surface holds, the table relates
+**<!--figure:scales-bridged-->6<!--/figure-->** and leaves
+**<!--figure:scales-still-refused-->7,744<!--/figure-->** refused — which is
+the point rather than a disappointment, since a table that reached more would
+be a table that had guessed. The conservativity measurement matters more:
+the ordering round's seven declared comparisons and the extremum round's eight
+declared columns are re-run inside this round's report and both come out
+exactly as before.
+
+**Where it lives.** `reasoning/scale_conversion.py`; `tools scales`; the
+figures and the two generated blocks in `corpus/render.py`;
+`glm_universal/tests/test_scale_conversion.py` (43 tests);
+`RequestProject/GLM/ScaleConversion.lean` (no `sorry`); and
+[`studies/SCALE_CONVERSION_STUDY.md`](studies/SCALE_CONVERSION_STUDY.md).
+
+**What is proved rather than measured.** That a positive-affine conversion
+composed into the comparison leaves every verdict alone (`cmpQ_apply`,
+`apply_lt_iff`, `order_conversion_invariant`) while the gap moves by the
+factor (`apply_sub`); that the wider operation with no conversions declared
+*is* the operation it extends and can only ever turn a refusal into an answer
+(`orderWith_nil`, `orderWith_conservative`); that its silence is still exactly
+stated (`orderWith_eq_none_iff`, `orderWith_across_scales`); that the verdict
+does not depend on which unit of the quantity it is taken in
+(`verdict_independent_of_target_scale`), which is why one canonical unit per
+quantity is enough; that the positivity and the declaration are both
+load-bearing (`negative_factor_flips_the_verdict`,
+`the_table_carries_the_claim` — two tables order the same pair two ways); and
+at the column level, that converting a column moves the value by the map and
+keeps the winning rows, that two columns carried into one unit fold to a
+winner that is a row of one of them, and that gathering them *without* the
+conversion names the wrong row (`extremum_convert_invariant`,
+`gathered_winner_is_a_row_of_one_of_the_two_columns`,
+`raw_gather_names_the_wrong_row`).
+
+**What it does not claim.** Nine rows is a small table: it covers the
+chemistry registers and nothing else, and every other pair of scales stays
+refused. No declared row uses an offset, so the affine shape is proved and
+exercised in Lean but only its multiplicative half is shipped. The table
+declares a **unit**, not a measurand, so it cannot say that comparing an
+atomic radius with a covalent radius is a strange thing to want — only that
+both are lengths in picometres. Conversions do not compose across quantities:
+there is no derived-quantity algebra, and nothing here parses English.
+
+---
+
+## Phase 54 — the turn that refers back: a conversation, licensed rather than guessed
+
+**Status: closed.** Under directive **D15** it moved **addressing**
+and **refusal**, and it did not move derivation: no answer here is computed
+that was not computable before. It took **no candidate from
+[`STATUS.md`](STATUS.md) §3.4**, and says so — it took the material supplied
+with the round, `source_material/conversation_experiment/`.
+
+**What the material was, and what became of it.** Eight Python scripts (v1
+through v8) building a conversational GLM on this substrate, a research
+document, five output transcripts, four generated Lean files and a small
+procedure store. **All eight scripts run unmodified against the package as it
+stands** — no shimmed import, no stubbed register — which is the strongest
+evidence that the material belongs to this system rather than beside it. Two
+of its headline claims were re-run rather than believed, and both are recorded
+as refuted:
+
+* *The higher-order analogy recovers Planck's constant.*
+  `force:momentum::energy:?` alone is an **exact** hit (`d² = 0`) whose tie set
+  is `action, planck_constant, reduced_planck_constant`; the second analogy of
+  the pair has **no** exact solution (`d² = 1/4`, nine tied) and contributes no
+  satisfied constraint. What the intersection does contribute is the loss of
+  `action`, the exactly correct answer, which the second analogy excludes as
+  one of its own inputs.
+* *Atomic number Z maps exactly to the Lean `forall` count.* Coordinate 0 of
+  the element carrier **is** `z` and coordinate 1 **is** `atomic_weight_u`;
+  reading them under the Lean feature layout's names renames them, and
+  renaming is exact by construction.
+
+**What was built.** `glm_universal.runtime.conversation` — an episodic
+register of turns in front of the ordinary session, so that a turn may refer
+back to an earlier one. Three declared shapes are follow-ups and nothing else
+is: a **pronoun** (*describe it*, `field electronegativity_pauling of it`), an
+**end-flip** (*and the smallest?*) and a **subject substitution** (*and
+oxygen?*). A candidate antecedent is **licensed** exactly when the query it
+produces solves — not when it is near, not when it is recent — so the
+reference is decided by what the registers hold. Recency decides *between*
+turns, newest first, answer side before subject side; licensing decides
+*within* one.
+
+**The refusal it exists for.** Where the deciding side offers two or more
+licensed candidates the layer refuses with `ambiguous-antecedent` rather than
+choosing: after *largest abstract_concrete in carrier:lexicon*, whose end
+fourteen rows attain, *describe it* has fourteen equally good referents. The
+other two refusals are `no-antecedent` — the conversation named nothing — and
+`unlicensed` — it named things and not one of them answers.
+
+**What was measured.**
+<!--figure:conversation-declared-count-->15<!--/figure--> follow-ups were
+declared before they were run, with both controls declared with them, and all
+<!--figure:conversation-as-declared-->15<!--/figure--> came out as declared:
+<!--figure:conversation-answered-->8<!--/figure--> bound,
+<!--figure:conversation-refused-->7<!--/figure--> refused under all
+<!--figure:conversation-reasons-->3<!--/figure--> named reasons. The
+**no-context** control — the same texts asked of a session with no memory,
+which is the system as Phase 53 left it — answers
+<!--figure:conversation-alone-->0<!--/figure--> of the fifteen. The **recency**
+control — bind to the most recent mention, licensing unchecked — applies to
+<!--figure:conversation-control-rows-->10<!--/figure--> of them and differs on
+<!--figure:conversation-control-wrong-->3<!--/figure-->, in both directions
+that matter: once it loses an answer the registers hold, twice it answers
+confidently where the question has no single answer.
+
+**Where it lives.** `runtime/conversation.py`; `tools conversation`; the
+figures and the generated declared-set block in `corpus/render.py`;
+`glm_universal/tests/test_conversation.py` (37 tests, 36 subtests);
+`RequestProject/GLM/Conversation.lean` (nine theorems, no `sorry`); and
+[`studies/CONVERSATION_STUDY.md`](studies/CONVERSATION_STUDY.md).
+
+**What is proved rather than measured.** That a bound name is always licensed
+and always one the conversation mentioned; that each of the three refusals is
+exactly what it says — `resolve_noAntecedent_iff` an empty conversation,
+`resolve_unlicensed_all_refused` every candidate tried and failed,
+`resolve_ambiguous_two_licensed` a side with two that answer; that an
+intervening turn whose every name fails the licence cannot move a binding
+(`resolve_stable_under_unlicensed_turn`); and that the recency control is not
+merely less careful but *wrong*, by exhibit —
+`most_recent_mention_is_not_the_antecedent`.
+
+**What it does not claim.** No answer here is new and none is changed: every
+rewritten query is answered by the same solver that would have answered it
+written out in full, which is why this is addressing and not derivation.
+Nothing parses English beyond three declared surface patterns; recency between
+turns is a declared rule rather than a result; and licensing costs one trial
+solve per candidate, so a fourteen-row tie costs fourteen trials before it
+refuses. Six further pieces of the supplied material — the content-addressed
+procedure store, the four-register memory split, the role-filler binding, the
+trajectory licensing, the Lean generator and the missing-node proposer — are
+read, run and **not** ported; §9 of the study says what each would have to
+measure to earn a round of its own.
+
+---
+
 ## Phase 53 — the column, not the pair: one coordinate over every row, folded or refused
 
-**Status: closed this round.** Under directive **D15** it moved **derivation**
+**Status: closed.** Under directive **D15** it moved **derivation**
 and **refusal**, and it did not move addressing: the table and the coordinate
 are the names the question already gives. It took candidate 1 of
 [`STATUS.md`](STATUS.md) §3.4 — the operation Phase 51 declared itself to stop
@@ -426,7 +839,7 @@ remaining, the release. Running it failed six units, none of them noise:
 
 **What the release now says.** `signoff --verify-release` reports **99 of 99
 test files and 7 of 7 instruments** signed with the exhaustive cases on; the
-suite is **<!--figure:suite-->4,038 tests across 100 of the 101 test files, 15,644 subtests, outside the document check<!--/figure-->**,
+suite is **<!--figure:suite-->4,180 tests across 105 of the 106 test files, 16,288 subtests, outside the document check<!--/figure-->**,
 one process with `GLM_EXHAUSTIVE=1` collecting 3,979; the end-to-end
 evaluation is **157 / 157** with 19 expected refusals; `corpus --check` is
 current; and `lake build` is clean over 120 Lean files with no `sorry`.
@@ -3051,4 +3464,3 @@ with `RequestProject/GLM/Comparative.lean` behind it. See §2, "Measure words as
 relative measures",
 [`studies/RELATIVE_MEASURE_STUDY.md`](studies/RELATIVE_MEASURE_STUDY.md) and
 [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 18.
-

@@ -701,8 +701,8 @@ _CASES: Tuple[EvalCase, ...] = (
             "resolved above the first rung and two refusals come back as "
             "certified absences."),
     _c("report-relay", "report", "report relay",
-       "answer", contains=("373 -> 377 of 432", "64 of 1728",
-                           "carrying 15 queries it misses and losing 1"),
+       "answer", contains=("386 -> 395 of 448", "66 of 1792",
+                           "carrying 21 queries it misses and losing 0"),
        note="The faculties arranged as a stack rather than scored one at a "
             "time: below a gate of 1/10 the leading lexical search is "
             "judged to have abstained and the two geometric address books "
@@ -712,7 +712,7 @@ _CASES: Tuple[EvalCase, ...] = (
             "matched digest-and-reshuffle control carries far fewer, so "
             "the gain is the substrate's rather than the padding's."),
     _c("report-anonymous", "report", "report anonymous",
-       "answer", contains=("737 -> 76 of 864", "237 -> 163 of 864",
+       "answer", contains=("771 -> 82 of 896", "239 -> 169 of 896",
                            "class, not a residue"),
        note="The register where the geometric address is the only faculty "
             "still reading: rename every identifier of a query outside a "
@@ -991,6 +991,40 @@ _CASES: Tuple[EvalCase, ...] = (
        note="No row of the named table answers for the coordinate -- "
             "`boiling_point_K` is the name it holds -- so there is no "
             "column to fold."),
+
+    # ----------------------------------------------------- scale conversion
+    _c("scales-mass-across-tables", "ordering",
+       "order atomic_weight_u of carbon and molar_mass_u of water",
+       "answer", contains=("1501/250", "declared conversions", "in u"),
+       note="One quantity held under two field names in two tables. The "
+            "declared conversion table relates the two scales, both "
+            "readings are carried into unified atomic mass units and the "
+            "comparison is taken there; a positive conversion cannot move "
+            "a verdict, which is `GLM.ScaleConversion.cmpQ_apply`."),
+    _c("scales-energy-across-units", "ordering",
+       "order ionization_energy_eV of hydrogen and "
+       "homonuclear_bde_kJ_per_mol of hydrogen",
+       "answer", contains=("kJ/mol", "is above"),
+       note="The one declared conversion with a factor other than 1: an "
+            "electronvolt per atom is `N_A e` joules per mole, exact by "
+            "the 2019 SI definitions, so the comparison is exact too."),
+    _c("scales-column-by-quantity", "extremum", "largest mass",
+       "answer", contains=("iron(III) sulfate", "169 rows", " u "),
+       note="A column no table holds: the 118 element rows and the 51 "
+            "molecule rows, gathered into one unit by the declared table "
+            "and folded exactly."),
+    _c("scales-different-quantity", "ordering",
+       "order atomic_weight_u of carbon and melting_point_K of iron",
+       "refusal", classification="boundary",
+       note="The table relates scales of one quantity and declares no "
+            "conversion between two: a mass and a temperature have no "
+            "common order, and the refusal names both quantities."),
+    _c("scales-quantity-with-holes", "extremum", "largest temperature",
+       "refusal", classification="boundary",
+       note="Gathering by quantity does not weaken the hole refusal: 40 of "
+            "the 236 melting and boiling points are recorded as missing, "
+            "and the extremum of the rows that are filled in is a wrong "
+            "answer rather than a partial one."),
 )
 
 

@@ -167,7 +167,13 @@ if it breaks.
 
 Read plainly: the operation moves one question, which is the one it was built
 for; the four `absent` questions are exactly where they were; and the ten the
-oracle called held and unreachable are now all parsed.
+oracle called held and unreachable are now all parsed —
+<!--figure:ordering-surface-parsed-->10<!--/figure--> of them, with the
+`surface` class of the probe going from
+<!--figure:ordering-surface-before-->1<!--/figure--> question to
+<!--figure:ordering-surface-after-->0<!--/figure-->. That the class empties is
+the end of the reading the oracle opened, not a claim about the four questions
+it never held.
 
 ## 6. What is proved rather than measured
 
@@ -231,11 +237,19 @@ the question already gives.
   — is a different shape, and it was the round after this one that built it:
   [`COLUMN_EXTREMUM_STUDY.md`](COLUMN_EXTREMUM_STUDY.md). This operation is
   unchanged by it.
-* **`different-scale` is conservative by construction.** Two readings of the
-  same quantity in two tables under two field names are refused even when a
-  conversion between them exists, because the operation holds no conversions.
-  What would relax it is a declared table of conversions between scales, and
-  that is a round with its own pre-registration.
+* **`different-scale` was conservative by construction, and is now conservative
+  by declaration.** Two readings of the same quantity in two tables under two
+  field names used to be refused even when a conversion between them existed,
+  because the operation held no conversions. The round after this one wrote
+  the conversions down: `glm_universal.reasoning.scale_conversion` declares
+  nine scales over four quantities, the question shape grew a clause so that
+  the second reading may name its own coordinate, and the refusal now says
+  that no row of the table licenses the comparison rather than that the two
+  names differ. Everything measured above is unchanged by it — all seven
+  declared comparisons come out as they did — because a declared conversion
+  can only turn a refusal into an answer
+  (`GLM.ScaleConversion.orderWith_conservative`).
+  [`SCALE_CONVERSION_STUDY.md`](SCALE_CONVERSION_STUDY.md).
 * **The four `absent` probe questions are untouched.** *Why is the sky blue?*
   is still the declared control, and *is 91 prime?* is still arithmetic this
   system has no operation for.

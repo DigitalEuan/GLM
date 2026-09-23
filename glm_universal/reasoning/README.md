@@ -7,7 +7,7 @@
 
 **Verdict.** Everything is exact `int` / `fractions.Fraction` / `F_2`; nothing here imports `random`.
 
-**Deciding figure.** 87 modules, one frozen data file, and a runnable audit.
+**Deciding figure.** 89 modules, one frozen data file, and a runnable audit.
 
 **Recomputed by.** `glm_universal.reasoning.reasoning_report`
 
@@ -16,7 +16,7 @@
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 
-**Status: implemented (GLM-3+ Step 3, extended since).** **87 modules**, one
+**Status: implemented (GLM-3+ Step 3, extended since).** **89 modules**, one
 frozen data file,
 and a runnable audit. Everything is exact `int` / `fractions.Fraction` /
 `F_2`; nothing here imports `random`; nothing here imports a third-party
@@ -111,7 +111,9 @@ Sections 1–4 below describe these in detail.
 | `field_surface.py` | the field surface's own measurement: a second translation table over the ten questions the oracle called held and unreachable, scored beside the frozen one under the same locus and no-smuggling rules, with the one question declared unreachable before the run named there | `python3 -m glm_universal.tools fieldsurface` |
 | `coordinate_order.py` | the ordering operation: one coordinate read off two rows through the field surface and ordered exactly in rationals, or refused — `unreadable`, `not-ordered`, or `different-scale`, the boundary the operation exists for, since two readings are comparable only on one scale. Seven comparisons declared before they were run, and the probe question the field surface left open re-scored through the same oracle | `python3 -m glm_universal.tools ordering` |
 | `column_extremum.py` | the extremum operation: one coordinate read off every row of one declared table through the field surface and folded exactly, with every row attaining the end reported rather than one of them chosen, or refused — `no-such-column`, `mixed-scale`, `not-ordered`, or `incomplete`, the two middle-and-last being the boundaries it exists for, since a column gathered from two scales is not one column and the extremum of the rows that happen to be filled in is a wrong answer rather than a partial one. Eight columns declared before they were run | `python3 -m glm_universal.tools extremum` |
+| `scale_conversion.py` | the declared table of conversions between scales, and the refusals it removes: one row per scale naming the quantity it measures, its unit, and the exact rational `factor`/`offset` that carry a reading into the quantity's canonical unit, with `factor > 0`. It is a declaration, not an inference — a scale the table does not name stays refused exactly as before — and it lets the ordering operation compare two readings of one quantity under two field names, and the extremum operation gather a column by quantity across every declared scale of it | `python3 -m glm_universal.tools scales` |
 | `probe_oracle.py` | blocker 1's own experiment, run: each of the twenty pre-registered probe questions hand-written into the query grammar, with the field that must carry the answer declared beside it, and every question classified `parsed` (a query answers it), `surface` (a register row or a shipped function holds it and no query kind returns it) or `absent` (nothing holds it). No measurement cache: twenty live queries take seconds | `python3 -m glm_universal.tools oracle` |
+| `role_binding.py` | role–filler binding: a typed relation between two named carriers written as one 24-bit word, `bind(role, a, b) = role · parity(a) ⊕ parity(a) ⊕ parity(b)`. Exclusive-or is a group operation, so unbinding is the same operation again and the filler's *reading* comes back with no side condition; turning that reading into a **name** is a second and strictly weaker step, which refuses under `ambiguous-recovery` or `no-carrier` whenever the register's parity readings do not separate the filler. The supplied elementwise-product binding is kept beside it as the refuted control | `python3 -m glm_universal.tools binding` |
 
 ---
 

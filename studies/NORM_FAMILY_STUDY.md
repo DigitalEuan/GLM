@@ -180,7 +180,11 @@ than anything before it *and answers
 <!--figure:normesc-family-wrong-->1<!--/figure--> of them wrongly*. Refusing rather than
 answering wrongly is the property the escalation exists for, so a reading that
 gains three queries and loses that property has not improved; it has changed
-what it is. The rule that follows was declared before it was run, and it has two
+what it is. The repaired ladder pays for the property in refusals and states
+the price: it refuses <!--figure:normesc-refused-->101<!--/figure--> of the
+<!--figure:normesc-queries-->568<!--/figure--> queries, four more than the
+unsafe family it replaces, and each of them is a query no rung of the ladder
+answers at all. The rule that follows was declared before it was run, and it has two
 clauses: it retires a rung that answers any query wrongly, and retires a rung that
 answers nothing the rest of the ladder cannot while taking part in a
 disagreement.
