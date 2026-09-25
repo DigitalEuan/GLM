@@ -7,7 +7,7 @@
 
 **Verdict.** The system rejects floating-point arithmetic entirely, operating instead with exact rational arithmetic.
 
-**Deciding figure.** A working paper synthesised from the sub-studies, kept beside the studies it draws on.
+**Deciding figure.** A working paper over the whole system — the substrate studies of the supplied archive and the machine built on them, <!--figure:registers-->8 registers<!--/figure--> reached through <!--figure:query-kinds-->24 query kinds<!--/figure--> and checked by <!--figure:lean-files-->133 Lean files<!--/figure--> — kept beside the studies it draws on.
 
 **Recomputed by.** (hand-written argument; nothing to recompute)
 
@@ -16,9 +16,25 @@
 ## A Technical Documentation Paper
 
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand  
-**Date:** 02 September 2026  
+**Date:** 02 September 2026; revised 24 September 2026 (Phases 60 and 61)  
 **Repository:** https://github.com/DigitalEuan/GLM  
-**Status:** Working Paper — synthesised from 20+ sub-studies, 1,139 source files, and 1,310 machine-checked theorems
+**Status:** Working Paper — the whole system in one place: the substrate studies of the supplied archive (Parts I–IV) and the machine built on them through Phase 59 (Parts V–VI), with one ledger of what is proved, calibrated, measured, refuted and open (Part VII). Phase 61 brought the last small bodies of archive Lean under this repository's own build (`Distinction.lean`, `SeedRoles.lean`, `GolayMOG.lean`) and extended the supplied-material ledger of Appendix C to every part of the archive.
+
+> **Positioning.** This paper is written under the Positioning section of
+> [`PROJECT_DIRECTIVES.md`](../PROJECT_DIRECTIVES.md), which is the one place
+> it is stated: the claim is not that the lattice generates the universe, but
+> that there is an exact substrate — the Golay code, the Leech lattice and the
+> arithmetic on them — and that reality maps onto it with a fidelity that is
+> measured against a control wherever it is asserted.
+
+**How the figures in this paper are kept.** A figure written between
+`<!--figure:…-->` markers is emitted by the code that measures it and is
+rewritten by `python3 -m glm_universal.corpus --refresh`; `corpus --check`
+fails if one goes stale, so those numbers cannot age. Every other number in
+Parts V–VII is quoted from the study named beside it, where it is recomputed;
+the figures of Parts I–IV are those of the archive studies they summarise,
+and where this repository has re-measured one the re-measurement is the one
+given.
 
 ---
 
@@ -30,34 +46,59 @@ The complete chain of reasoning from first principles: how a single binary disti
 
 The system's dynamic value layer represents irrational and transcendental numbers not as static approximations but as infinite processes — deterministic Delta-Sigma feedback loops that converge on the Leech lattice. A family of thermodynamic carrier engines optimises these processes, achieving up to 60-bit precision on exotic constants while maintaining exact arithmetic throughout.
 
-Physical calibration studies anchor the substrate to measured reality: the electromagnetic scale function maps photon wavelengths to substrate units through a linear, Hamming-weight-dependent relationship; a refractive index law emerges from the substrate's symmetry tax without empirical parameters; and dimensionless ratios connecting substrate constants to particle mass ratios achieve precisions of 0.001% to 0.03%.
+Physical calibration studies anchor the substrate to measured reality: the electromagnetic scale function maps photon wavelengths to substrate units through a linear, Hamming-weight-dependent relationship; a refractive index law emerges from the substrate's symmetry tax without empirical parameters; and dimensionless ratios connecting substrate constants to particle mass ratios achieve precisions of 0.001% to 0.03% — agreements whose evidential worth the first-principles study prices, in bits, against what an arbitrary target would have received.
 
-Application studies demonstrate that encoding chemical elements as 24-bit data objects in the Leech lattice produces element-property correlations exceeding r = 0.90 for electronegativity and boiling point, and that spatial arithmetic operations on these encodings predict bond energies and bond orders with measurable accuracy. A machine-checked semantics on the MOG cube surface builds a complete micro-language — words with physical dimension, true sentences, connectives with measured meanings, and conversation with memory — verified by 1,310 Lean theorems with zero `sorry` placeholders.
+Application studies demonstrate that encoding chemical elements as 24-bit data objects in the Leech lattice produces element-property correlations exceeding r = 0.90 for electronegativity and boiling point, and that spatial arithmetic operations on these encodings predict bond energies and bond orders with measurable accuracy. A machine-checked semantics on the MOG cube surface builds a complete micro-language — words with physical dimension, true sentences, connectives with measured meanings, and conversation with memory — proved in the supplied archive's own Lean development.
 
-Throughout, we distinguish carefully between what is proved, what is calibrated, and what remains open. The paper serves as both a technical reference and an honest accounting of a research programme that spans pure mathematics, computational physics, and artificial intelligence.
+On that substrate this repository has built and measured the machine itself: a pure-standard-library Python package holding <!--figure:registers-->8 registers<!--/figure--> of exact carriers, answering <!--figure:query-kinds-->24 query kinds<!--/figure--> (one of which dispatches <!--figure:report-subjects-->65 report subjects<!--/figure-->) as three-column answers whose third column re-derives the second in a fresh interpreter, and refusing — with a named reason — wherever an answer would have been a guess. Its faculties are measured rather than described: an end-to-end evaluation of <!--figure:evaluation-cases-->177 CLI cases<!--/figure--> with no confidently wrong answer, 33 capability probes of which 13 locate a boundary, five benchmark suites, pre-registered probes for language, conversation, ordering, extremum, scale conversion, typed question plans and engineering languages, and escalation ladders read over the construction ladder and the norm family. The formal layer is a Lean 4 / Mathlib development of <!--figure:lean-files-->133 Lean files<!--/figure--> and <!--figure:lean-declarations-->3,766<!--/figure--> declarations with no `sorry`, and the repository is kept by <!--figure:directive-count-->16<!--/figure--> standing rules, each enforced by an instrument.
+
+Throughout, we distinguish carefully between what is proved, what is calibrated, what is measured, what is refuted, and what remains open. The paper serves as both a technical reference and an honest accounting of a research programme that spans pure mathematics, computational physics, and artificial intelligence.
 
 ---
 
 ## Table of Contents
 
+**Part I — Foundations**
 1. [Introduction and Scope](#1-introduction-and-scope)
 2. [The Universal Binary Principle: From Distinction to Substrate](#2-the-universal-binary-principle-from-distinction-to-substrate)
 3. [The Golay Code and Leech Lattice: The 24-Dimensional Foundation](#3-the-golay-code-and-leech-lattice-the-24-dimensional-foundation)
 4. [The Layer Stack: Resolution, Boundaries, and Escalation](#4-the-layer-stack-resolution-boundaries-and-escalation)
+
+**Part II — Dynamic Values, Carrier Engines, and Bit Dynamics**
 5. [Dynamic Value Carriers: Irrationals as Processes](#5-dynamic-value-carriers-irrationals-as-processes)
 6. [The Thermodynamic Carrier Engine Series](#6-the-thermodynamic-carrier-engine-series)
 7. [Bit Dynamics and Reversible Computing](#7-bit-dynamics-and-reversible-computing)
 8. [Higher Lattices: Beyond 24 Dimensions](#8-higher-lattices-beyond-24-dimensions)
+
+**Part III — Physical Calibration, Chemistry, and Applications**
 9. [Physical Calibration: The Electromagnetic Scale](#9-physical-calibration-the-electromagnetic-scale)
 10. [The Speed-of-Light Calibration Study](#10-the-speed-of-light-calibration-study)
 11. [Chemistry Applications: Spatial Arithmetic on Elements](#11-chemistry-applications-spatial-arithmetic-on-elements)
 12. [The MOG Cube: Encoding and Semantics](#12-the-mog-cube-encoding-and-semantics)
 13. [The Leech Lattice Shortcut](#13-the-leech-lattice-shortcut)
+
+**Part IV — Formal Verification and First Principles**
 14. [Formal Verification: The Lean Development](#14-formal-verification-the-lean-development)
 15. [First-Principles Analysis](#15-first-principles-analysis)
-16. [The Projection Sub-Seed: Where Seeds Enter](#16-the-projection-sub-study-where-seeds-enter)
-17. [Synthesis: What Is Proved, What Is Calibrated, What Is Open](#17-synthesis-what-is-proved-what-is-calibrated-what-is-open)
-18. [Conclusion and Open Questions](#18-conclusion-and-open-questions)
+16. [The Projection Sub-Study: Where Seeds Enter](#16-the-projection-sub-study-where-seeds-enter)
+
+**Part V — The Machine**
+17. [Architecture: One Carrier, Three Columns, Named Refusals](#17-architecture-one-carrier-three-columns-named-refusals)
+18. [Registers and Meaning](#18-registers-and-meaning)
+19. [The Answer Surface: From a Row to a Plan](#19-the-answer-surface-from-a-row-to-a-plan)
+20. [Escalation and Ladders](#20-escalation-and-ladders)
+21. [Addressing: The Geometry as an Index](#21-addressing-the-geometry-as-an-index)
+22. [Measured Capability](#22-measured-capability)
+23. [The Negative Results](#23-the-negative-results)
+
+**Part VI — Method**
+24. [How the Repository Keeps Itself Honest](#24-how-the-repository-keeps-itself-honest)
+
+**Part VII — Synthesis**
+25. [Synthesis: Proved, Calibrated, Measured, Refuted, Open](#25-synthesis-proved-calibrated-measured-refuted-open)
+26. [Conclusion](#26-conclusion)
+
+**Appendices** — [A: every study](#appendix-a-every-study) · [B: the Lean development by theme](#appendix-b-the-lean-development-by-theme) · [C: the supplied material, and what is still left in it](#appendix-c-the-supplied-material-and-what-is-still-left-in-it) · [D: key constants](#appendix-d-key-constants) · [E: glossary](#appendix-e-glossary)
 
 ---
 
@@ -65,13 +106,12 @@ Throughout, we distinguish carefully between what is proved, what is calibrated,
 
 ### 1.1 What This Document Is
 
-This paper synthesises GLM development research into a single coherent narrative. The source material comprises:
+This paper synthesises GLM development research into a single coherent narrative, and since its revision in Phase 60 it is the document that keeps track of the GLM as a *whole*. The source material comprises:
 
-- **20+ sub-studies** in the `studies/` and `source_material/` directories, each addressing a specific aspect of the GLM system
-- **Physical calibration studies** in `light/`, covering electromagnetic scale calibration and speed-of-light analysis
-- **Encoding experiments** in `data_object/`, testing whether 24-bit Golay/Leech encodings can represent chemical elements and predict their interactions
-- **Formal verification** in `RequestProject/` directories across the repository, comprising Lean 4 / Mathlib developments with zero `sorry` placeholders
-- **First-principles analysis** in `data_object/FirstPrinciples/` and `data_object/Projection/`, examining what the framework forces, what it chooses, and what must be brought in from outside
+- **The supplied archive** (`source_material/GLM-main.zip`): the physical calibration studies in `light/`, the encoding experiments and the MOG cube in `data_object/`, the first-principles and projection sub-studies, the `GMHGL` scripts, the Leech-lattice shortcut, the early `glm_lean` and `glm_machine` iterations and the ARC-era loop — together with the other supplied documents in `source_material/`. Parts I–IV summarise these, and Appendix C says, item by item, where each went.
+- **The machine built in this repository**: the package under `overlay/glm_universal/`, its registers, operations, instruments and tests. Part V describes it and Part VI describes the discipline it is kept under.
+- **The studies** in `studies/`, each of which measures one thing against a control and records the result, positive or negative. Appendix A lists every one.
+- **The formal verification** in `RequestProject/GLM/`: a single Lean 4 / Mathlib development that builds with `lake build`, has no `sorry`, and is mirrored byte-for-byte in `overlay/glm_lean/`. §14 and Appendix B describe it.
 
 The paper is not a copy-paste compilation. Each source document is read, its core claims extracted, and the connections between studies made explicit. Where studies contradict or correct each other, the correction is recorded. Where claims are later audited and found wanting, the audit verdict is given.
 
@@ -79,11 +119,15 @@ The paper is not a copy-paste compilation. Each source document is read, its cor
 
 The GLM project asks: **Can a computational system built entirely on exact arithmetic over a 24-dimensional geometric substrate reason about physical reality, predict measurable quantities, and support formal verification — without ever resorting to floating-point approximation?**
 
-The answer, as documented across the studies assembled here, is nuanced. The substrate's mathematical structure is genuine and deep. Its layer architecture is formally verified. Its physical calibrations achieve measurable precision. But the gap between calibration and derivation — between fitting constants and predicting them from first principles — remains the central open problem.
+The Positioning section of the directives breaks that into four questions that can each be answered by running something: can language, mathematics and program text be mapped onto the Leech lattice; can the GLM *reason* with what the mapping gives it; can it be *generative*; and can it produce results that are real, accurate and checkable. §22 gives the current measured answers.
+
+The answer, as documented across the studies assembled here, is nuanced. The substrate's mathematical structure is genuine and deep. Its layer architecture is formally verified. Its physical calibrations achieve measurable precision. The machine answers a bounded but real range of questions exactly and refuses the rest with a reason. But the gap between calibration and derivation — between fitting constants and predicting them from first principles — remains the central open problem of the physics, and the gap between *addressing* an answer and *deriving* one remains the central open problem of the machine.
 
 ### 1.3 Reading Guide
 
-Sections 2–4 establish the mathematical foundations: the binary substrate, the Golay/Leech construction, and the layer architecture. Sections 5–7 describe the dynamic machinery: how continuous values are handled, how computation is optimised, and how bit-level operations preserve information. Sections 8–12 present the applications: higher-dimensional lattices, physical calibration, chemistry, and language. Sections 13–16 document the formal verification and first-principles analysis. Section 17 synthesises the findings into a single proven/calibrated/open ledger.
+Sections 2–4 establish the mathematical foundations: the binary substrate, the Golay/Leech construction, and the layer architecture. Sections 5–8 describe the dynamic machinery: how continuous values are handled, how computation is optimised, how bit-level operations preserve information, and what lies above 24 dimensions. Sections 9–13 present the applications from the archive: physical calibration, chemistry, the MOG cube language, and the Leech shortcut. Sections 14–16 document the formal verification and the first-principles analysis. Sections 17–23 describe the machine this repository built on the substrate — its architecture, registers, operations, escalation ladders, addressing, measured capability and negative results — and §24 the method that keeps it honest. Section 25 is the single ledger; §26 concludes.
+
+A reader who wants the coarse picture and nothing else can read the tier-0 table in [`DIGEST.md`](../DIGEST.md), which states every document's verdict in one line; this paper is the long form of that table.
 
 ---
 
@@ -95,9 +139,9 @@ The Universal Binary Principle (UBP) begins from a single axiom: **there exists 
 
 This is not a metaphor. The first-principles sub-study (`data_object/FirstPrinciples/FINDINGS.md`) traces the logical chain rigorously:
 
-- **FP-1 to FP-7 (Stage 0):** From "there is a distinction" → the two-element field 𝔽₂ → the state space (ℤ/2ℤ)ⁿ → the toggle group → the Hamming metric. No choices are made; these are forced by the algebra of a two-element ring.
+- **FP-1 to FP-7 (Stage 0):** From "there is a distinction" → the two-element field 𝔽₂ → the state space (ℤ/2ℤ)ⁿ → the toggle group → the Hamming metric. No choices are made; these are forced by the algebra of a two-element ring. Since Phase 61 this stage is machine-checked here too (`Distinction.lean`): the toggle is the only non-trivial reversible operation on a cell (`GLM.Distinction.perm_bool_eq`), every ring with two elements is `ZMod 2` (`GLM.Distinction.two_element_ring_is_zmod_two`), and a group in which every element is its own inverse is abelian, so commutativity is derived rather than assumed (`GLM.Distinction.self_inverse_forces_comm`).
 
-- **FP-8 to FP-12 (Stage 1):** The Hamming metric yields the `2t+1` criterion for unique decoding, the sphere-packing bound, and — the sharpest result — the fact that a *perfect* three-error-correcting binary code can exist only at lengths 7 and 23. This is verified exhaustively for all lengths up to 2,000 inside the Lean kernel.
+- **FP-8 to FP-12 (Stage 1):** The Hamming metric yields the `2t+1` criterion for unique decoding, the sphere-packing bound, and — the sharpest result — the fact that a *perfect* three-error-correcting binary code can exist only at lengths 7 and 23. This is verified exhaustively for all lengths from 4 to 2,000 inside the Lean kernel (`perfect_triple_length`, `Packing.lean`; the arithmetic is set out in §15 of [`GLM_Complete_Number_Theory_Evidence.md`](GLM_Complete_Number_Theory_Evidence.md)).
 
 - **FP-13 to FP-18 (Stage 2):** Ball counting yields the sphere-packing bound. The numbers 7 and 23 are forced, not chosen. The 24 of the "24-bit OffBit" is the parity extension, proved to raise an odd minimum distance by exactly one (7 becomes 8), added for self-duality rather than derived.
 
@@ -111,6 +155,13 @@ The UBP enforces a strict discipline on all code that operates within it:
 | Exact arithmetic only | No XOR (except over 𝔽₂) |
 | Standard library only | No random seeds |
 | Re-derived (falsifiable) facts | |
+
+In the shipped package each of these is a standing rule with an instrument
+rather than a preference (§24): no floats is directive D7, checked by parsing
+every module; exclusive-or and every other operation that is not the
+substrate's own are allowed only at declared sites (D9, D11); and SHA-256 is
+confined to one module, `glm_universal/integrity.py`, one level above the six
+core sub-packages, where it addresses integrity and never meaning (D3).
 
 These are not preferences but structural requirements. The iteration drift study (`source_material/GLM_Iteration_Study.pdf`) demonstrates why: under the accumulative recurrence X_{n+1} = (p+1)/p · X_n − 1/p, a standard IEEE-754 float64 loses all semantic information by step 200 for p = 3 (absolute error ≈ 7.5 × 10¹⁰), while display-truncated floats — simulating AI tool loops — explode to 6.0 × 10¹⁹. The drift is deterministic, not statistical: floating-point "hallucinations" in iterative systems are a hardware consequence, not a model failure.
 
@@ -226,7 +277,7 @@ The shipped system implements five perspectives over ℚ²⁴:
 | Substrate | 24 parity bits (mod 2) | one bit of parity per coordinate | 2²⁴ = 16,777,216 |
 | Integer | 7 SI exponents + substrate parity | integer part + structural bits | unbounded |
 | Rational | the exact carrier q ∈ ℚ²⁴ | everything | unbounded |
-| Griess | carrier + Griess algebra element | algebraic structure | 196,884 dimensions |
+| Griess | carrier + an axis of the partial Norton–Sakuma 2A algebra | algebraic structure on axes | the 2A product on axes; the 196,884-dimensional Griess algebra itself is not held |
 | Universal | carrier + Griess + integer | everything available | unbounded |
 
 Resolution rises monotonically. The rational layer's view *is* the carrier, so nothing above it can gain further resolution. The chain is proved a refinement in `LayerChain.lean`: `GLM.Info.glmChain_refines_of_le`. The specific refinement theorems for each step are:
@@ -260,7 +311,7 @@ The escalation study (`studies/ESCALATION_STUDY.md`) tests the layer stack on th
 | Molecules | 51 |
 | Mathematics | 22 |
 | Harmonics | 28 |
-| Lexicon | 95 |
+| Lexicon | 149 |
 | **Total** | **1,094** |
 
 Results:
@@ -273,7 +324,7 @@ Results:
 | Griess | 811 / 1,094 | 283 | 78 |
 | Universal | 811 / 1,094 | 283 | 78 |
 
-The ceiling is 811 distinct carriers under 1,094 named entries. The 283 unreachable entries are almost entirely in physics — 78 are dimensionless ratios (albedo, absorptance, etc.) that share identical 24-coordinate encodings because the register carries no coordinate for *provenance*. The escalation mechanism has nothing left to offer here; a seventh coordinate, not a sixth layer, is what would help.
+The audit covers six of the eight registers (the spatial and economics registers are not in it). The ceiling is 811 distinct carriers under 1,094 named entries. The 283 unreachable entries are almost entirely in physics — 78 are dimensionless ratios (albedo, absorptance, etc.) that share identical 24-coordinate encodings because the register carries no coordinate for *provenance*. The escalation mechanism has nothing left to offer here; a seventh coordinate, not a sixth layer, is what would help.
 
 ### 4.6 The Dyadic Tower: An Infinite Ladder
 
@@ -425,7 +476,7 @@ depth 5: ⌊√2 · 2⁵⌋ = 45     → carrier ≈ 1.40625
 
 The GLM doesn't store the limit; it stores the *process* (the stack mechanism). Each depth is a finite carrier; the sequence of depths IS the irrational.
 
-**The Griess product as a non-associative tower.** The Griess algebra's non-associativity — (a·b)·c ≠ a·(b·c) — generates an infinite tower of higher products:
+**The Griess product as a non-associative tower.** *(A caution, from Phase 63, item E2: the runtime holds a partial Norton–Sakuma 2A axial algebra, meaning the product on axes, and not the Griess algebra. So the tower below describes the Griess algebra, not anything the runtime can climb yet.)* The Griess algebra's non-associativity — (a·b)·c ≠ a·(b·c) — generates an infinite tower of higher products:
 - Level 1: the bilinear product a·b (the Sakuma relation)
 - Level 2: the trilinear form ⟨u·v, w⟩ (operational since v0.5.3)
 - Level 3: the quadrilinear form ⟨(u·v)·w, x⟩ (not yet computed)
@@ -654,6 +705,21 @@ Re-measured with exact rational arithmetic and machine-checked in Lean:
 
 The substrate supplies dimensionless numbers; the SI supplies the dimensions. Every alignment point has the form: measured quantity ≈ (dimensionless substrate number) × (SI-defined unit). The lightspeed chain is a *calibration*, not a derivation, and it is only as good as the 190 kJ/mol fit.
 
+### 10.5 The Archive's Twenty-Phase Audit
+
+Before the Lean audit above, the archive's own twenty-phase audit
+(`light/reports/`, with its floating-point scripts in `light/scripts/` and its
+synthesis in `light/reports/LIGHTSPEED_STUDY_SYNTHESIS.md`) had already closed
+four routes, and they are recorded here so that nobody reopens them. The
+figures are the archive's and are not re-run here.
+
+- **The direct c-formula is numerology.** Its false-positive rate against random integers was 39 %: random targets were matched about as well as `c`.
+- **The dimensional anchors carry no substrate structure.** The caesium frequency Δν_Cs = 9,192,631,770 Hz has the prime factor 44,351, which no substrate count produces, and the gravitational constant fails the null model.
+- **The gravitational coupling fit has the signature of numerology.** The formula for α_G works with the archive's approximate π and fails with the true π: the approximation error was cancelling the formula's error.
+- **The muon pattern does not generalise.** `169/WOBBLE` for m_μ/m_e has no analogue for m_τ/m_e.
+
+What the audit kept — the charge anchor, the octad as the minimum-tax photon, the two mass formulas and their shared scale — is the calibrated core of §10.3 and §25.2, re-measured here with exact arithmetic.
+
 ---
 
 ## 11. Chemistry Applications: Spatial Arithmetic on Elements
@@ -760,13 +826,39 @@ Calibrated predictions (kJ/mol)
 
 Note, XOR is not generally considered a suitable function in the UBP or GLM systems as it destroys rather than carries information.
 
+### 11.7 The Discrete Layer, Machine-Checked
+
+The one Lean file of the spatial-arithmetic experiments
+(`data_object/encoding_definition_attempt_03-08.26/`) was retrieved in Phase 61
+as `GolayMOG.lean`. It does not touch the correlations above; it proves what
+is true of the encoding whatever the chemistry says, and five of its results
+are negative:
+
+| result | what it says | kind |
+|---|---|---|
+| `GLM.GolayMOG.identityAddress_injective` | the 12-bit Gray identity addresses of the 118 elements decode back to the atomic number, so no two collide | positive |
+| `GLM.GolayMOG.consecutive_identity_oneBitApart` | consecutive atomic numbers are one bit apart: the Gray layer makes the table's order local | positive |
+| `GLM.GolayMOG.mogCoordinate_bijective`, `GLM.GolayMOG.octadZoneCoordinate_bijective` | the fixed MOG cell assignment loses no coordinate, and its three column-pair regions partition the 24 | positive |
+| `GLM.GolayMOG.leechAddress_sqNorm`, `GLM.GolayMOG.leechMinimalClass_counts` | the 24 stored Leech addresses are minimal vectors, and the three shape families count 1104 + 97152 + 98304 = 196560 | positive |
+| `GLM.GolayMOG.binaryTax_mono` | on a binary vector TAX is a monotone function of Hamming weight alone, so it orders nothing the weight does not | negative |
+| `GLM.GolayMOG.binaryNRCI_above_half` | below weight 16 an NRCI above one half is automatic whenever Y < 3/16, so that threshold selects nothing | negative |
+| `GLM.GolayMOG.element_relativeCoherent_seventy_percent` | under the observed score bounds the "retain 70 % of a peer's score" rule is passed by every element | negative |
+| `GLM.GolayMOG.yTwin_injective` | the "virtual Y twin" is injective only because it keeps the original coordinates; it adds no information | negative |
+| `GLM.GolayMOG.projection24to3Q_not_injective` | the published 24-to-3 Walsh view is lossy: two coordinate basis vectors share an image | negative |
+
+The archive's own training benchmarks for the same data objects
+(`data_object/BENCHMARKS.md`, iteration 11) point the same way and are recorded
+for that reason: three-body NRCI passes, but element-pair geometry correlates
+at r = +0.05 and molecule geometry at r = 0.00 under the baseline
+specification. Those are the archive's figures, not re-run here.
+
 ---
 
 ## 12. The MOG Cube: Encoding and Semantics
 
 ### 12.1 The Cube Surface as MOG
 
-The MOG cube study (`data_object/mog_cube_1/`) establishes that the surface of a cube — 6 faces × 4 cells = 24 cells — is a natural physical realisation of the MOG (Miracle Octad Generator) grid. The key results, all proved in Lean:
+The MOG cube study (`data_object/mog_cube_1/` in the supplied archive) establishes that the surface of a cube — 6 faces × 4 cells = 24 cells — is a natural physical realisation of the MOG (Miracle Octad Generator) grid. It is also the largest Lean development in the archive: 43 files. **Where each result below is checked matters, and it is stated per subsection.** The geometric half (§12.1) was retrieved into this repository's development as `Cube/Surface.lean`, `Cube/Tax.lean`, `Cube/Stabiliser.lean`, `Cube/Three.lean`, `Cube/HexTiles.lean` and `Golay/CubeMirror.lean`, and is rebuilt by every `lake build`. The language half (§12.2–§12.6) — the integer cube, the measured words, the dialogue, the discourse corpus, cube thought and the capstone — was **not** retrieved: it is proved in the archive's own development and is quoted here from it, and Appendix C lists it as the largest body of verified material still left in the archive. The key geometric results, proved in the development:
 
 - **24 surface cells = 6 faces × 4 quadrants = the MOG grid** (`CubeMOG.IsMog`)
 - **Three-layer factorisation:** 2²⁴ → 2¹⁸ → 2¹² (`fibre_card`, `hexpass_card`, `mog_card`)
@@ -845,7 +937,7 @@ The capstone development closes four of five open items:
 
 ### 12.7 The Theorem Index
 
-The Lean development comprises 43 files with 1,310 top-level declarations (574 definitions, 736 theorems), zero `sorry`, and no added axioms. Every headline theorem depends only on Lean's three standard axioms (propext, Classical.choice, Quot.sound). `Package.lean` re-checks the axioms behind every headline result in one place, including all of Stage 5. 103 of the finite searches are discharged by `native_decide`, so those additionally trust Lean's compiler rather than the kernel alone; the axiom audit makes that boundary visible.
+The archive's MOG-cube development comprises 43 files with 1,310 top-level declarations (574 definitions, 736 theorems), zero `sorry`, and no added axioms; `Package.lean` there re-checks the axioms behind every headline result in one place, including all of Stage 5, and 103 of its finite searches are discharged by `native_decide`, so those additionally trust Lean's compiler rather than the kernel alone. These figures are the archive's own and describe that development, not this repository's: of its 43 files, the six named in §12.1 were retrieved and are rebuilt here, and the rest are not (Appendix C). This repository's development is described in §14.
 
 ---
 
@@ -874,76 +966,100 @@ The system provides a framework for evaluating the "stability" of integers throu
 ### 13.4 The Observer/Read Quantum Study
 
 The "I am Y" study (`light/aristotle_01/Y_STUDY_CLEAN_RESTATEMENT.md`) examines the cost of observation in the substrate. The vacuum is the zero state; the activation quantum is the minimum nonzero tax (8Y + 1 = 3.1174). The loop-as-syndrome interpretation connects the Delta-Sigma feedback loop to error-correction syndrome decoding, and the regime bands (tight/relaxed/skip) correspond to the turbocharger's adaptive snapping strategy.
-# Part IV: Formal Verification, First Principles, and Synthesis
+# Part IV: Formal Verification and First Principles
 
 ## 14. Formal Verification: The Lean Development
 
 ### 14.1 Scope
 
-The GLM's formal verification is spread across multiple Lean 4 / Mathlib developments in `RequestProject/` directories throughout the repository. The key developments are:
+There is one Lean development in this repository: `RequestProject/GLM/`, built from the repository root by `lake build` against Mathlib for Lean 4.28.0. It holds <!--figure:lean-files-->133 Lean files<!--/figure--> and <!--figure:lean-declarations-->3,766<!--/figure--> top-level declarations, contains no `sorry` and no `admit`, declares no axiom, and is mirrored byte-for-byte in `overlay/glm_lean/RequestProject/GLM/` so that the package's figures and its Lean citations read the same tree (`diff -r -x README.md RequestProject/GLM overlay/glm_lean/RequestProject/GLM` is empty; Phase 60 found and repaired the one time it was not).
 
-| Development | Location | Declarations | Content |
-|---|---|---|---|
-| Core GLM | `glm_lean/RequestProject/GLM/` | 1,310 | Layers, escalation, constants, Golay, Leech, delta-sigma, language |
-| Lightspeed | `light/aristotle_01/RequestProject/` | — | Speed-of-light chain, substrate constants, refractive index |
-| First Principles | `data_object/FirstPrinciples/` | — | Distinction → Golay, sphere-packing, seeds, fit capacity |
-| Projection | `data_object/Projection/` | — | Layer theorem, seed placement, fibre analysis, cost model |
-| Higher Lattices | `glm_lean/RequestProject/GLM/HigherLattices.lean` | — | Barnes-Wall 32D, ternary 48D, shell sigma |
+The development grew in three ways, and Appendix B lists every file under the theme it belongs to:
 
-Every development builds with `lake build`, contains zero `sorry` placeholders, and every headline theorem depends only on Lean's three standard axioms: `propext`, `Classical.choice`, `Quot.sound`.
+| origin | what it contributed | where it is recorded |
+|---|---|---|
+| **the early `glm_lean`** of the archive (`GLM.lean`, `GLM2.lean`, `GLM3.lean`) | the foundations, the second and third generations of the core — ported whole | `Foundations.lean`, `Gen2.lean`, `Gen3.lean` |
+| **retrieval from the archive** | the Leech shortcut, the lightspeed chain, the first-principles packing and fit-capacity results, the projection cost and seed layers, the geometric half of the MOG cube, the Golay weight enumerator and Steiner system, the GMHGL scripts' surviving claims; and, in Phase 61, the Stage 0 distinction chain, the seeds' roles, the hull and trace fibres, the φ-cheapest results and the spatial-arithmetic data object's discrete layer (`Distinction.lean`, `SeedRoles.lean`, `GolayMOG.lean`) | [`RETRIEVED_LEAN_STUDY.md`](RETRIEVED_LEAN_STUDY.md), [`SOURCE_SALVAGE_AUDIT.md`](SOURCE_SALVAGE_AUDIT.md), [`SOURCE_SALVAGE_SECOND_PASS.md`](SOURCE_SALVAGE_SECOND_PASS.md) |
+| **written in this repository** | one file per mechanism the machine relies on — the layer chain, the escalation loop, the operations and their refusals, the conversation layer, the planner, the engineering surface | the study of the round that built it (Appendix A) |
+
+One body of the archive's Lean is proved there and not rebuilt here: the language half of the MOG cube (§12), about thirty files. The two first-principles files and three projection files that the Phase 60 revision listed as left, and the spatial-arithmetic study's `GolayMOG.lean`, were retrieved in Phase 61; the archive modules they imported are not in the supplied archive, so their numerical bounds were re-derived from `FitCapacity.lean`, and the irrationality of `e`, which they assumed, is now proved (`GLM.SeedRoles.eSeed_irrational`). Where this paper quotes a theorem that is not rebuilt it says so, and Appendix C lists what remains.
 
 ### 14.2 The Verification Discipline
 
 The GLM enforces a strict separation between what is proved, what is recomputed, and what is recorded:
 
-**Proved in Lean:** Theorems that hold under the standard axioms. Examples: `GLM.Info.glmChain_refines_of_le` (the layer chain is a refinement), `UBPLightspeed.substrate_c_is_circular` (c is recovered identically), `UBPProjection.transcendental_not_trace_of_finite_order` (no finite symmetry produces a transcendental number).
+**Proved in Lean:** Theorems that hold under the standard axioms. Examples: `GLM.Info.glmChain_refines_of_le` (the layer chain is a refinement), `GLM.Lightspeed.substrate_c_is_circular` (c is recovered identically, so the chain cannot predict it), `GLM.SeedLayers.transcendental_not_trace_of_finite_order` (no finite symmetry produces a transcendental number).
 
-**Recomputed exactly, every call:** Numerical results regenerated by Python scripts with exact rational arithmetic. Examples: the code's self-duality, weight divisibility, determinant certificates, kissing number censuses.
+**Recomputed exactly, every call:** Numerical results regenerated by Python with exact rational arithmetic. Examples: the code's self-duality, weight divisibility, determinant certificates, kissing number censuses.
 
-**Recomputed only when asked (exhaustive):** Results requiring brute-force enumeration (e.g., ternary minimum distance 15 by exhausting an information set, full-weight census by 2²³ Gray-code steps). The default report flags these as `exhaustive: false`.
+**Recomputed only when asked (exhaustive):** Results requiring brute-force enumeration (e.g., ternary minimum distance 15 by exhausting an information set, full-weight census by 2²³ Gray-code steps). The default report flags these as `exhaustive: false`, and the sign-off release runs them.
 
 **Not computed at all:** Results not attempted here (e.g., the kissing number in 48 dimensions, reported as `null` with `kissing_source: "not computed here"` rather than quoting a literature value).
 
+**Where Lean and Python disagree, Lean is the specification** (directive D8). Every `GLM.…` name written anywhere in the package is looked up against the development's declaration index by `tests/test_lean_address.py`, so a module cannot cite a theorem that is not there.
+
 ### 14.3 Key Machine-Checked Results
 
-A selection of the most significant theorems, grouped by domain:
+A selection, grouped by domain; every name is a declaration in `RequestProject/GLM/`.
 
-**Layer Architecture:**
+**Layer architecture** (`Layers.lean`, `LayerChain.lean`, `Cumulative.lean`, `Tower.lean`, `Stack.lean`):
 - `GLM.Info.glmChain_refines_of_le` — the five-layer chain is a refinement (nothing true below becomes false above)
 - `GLM.Info.entryResolution_mono` — resolution rises with the layer, for any register
 - `GLM.Info.entryResolution_le_distinct` — no layer resolves more entries than there are distinct carriers
 - `GLM.Info.substrate_addition_not_congruent` — addition does not descend below the rational layer
 
-**Tax Conservation:**
+**Tax conservation** (`TaxConservation.lean`, `Constants.lean`):
 - `tax_conservation` — TAX(a ⊕ b) + 2·TAX(a ∧ b) = TAX(a) + TAX(b) on binary carriers
 - `tax_conservation_fails_at_integer_layer` — the law fails irreparably above binary
 - `Y_lt_half` — Y = 1/(π + 2/π) < 1/2, so no repair is possible
 
-**Golay Boundary:**
-- `snap_unique_of_le_three` — unique repair at distance ≤ 3
-- `snap_ambiguous_at_four` — ambiguity at distance exactly 4
-- `snap_boundary_at_three` — 3 is exactly the largest radius for uniqueness
+**Golay boundary and code** (`GolayBoundary.lean`, `Golay/Sextet.lean`, `GolayWeightEnum.lean`, `Steiner.lean`):
+- `snap_unique_of_le_three`, `snap_ambiguous_at_four`, `snap_boundary_at_three` — 3 is exactly the largest radius for uniqueness
+- `ties_card_eq_six` — the tie at distance four is exactly six
+- `golay_weight_enumerator`, `unique_octad`, `card_octads_through_four` — the enumerator 1, 759, 2576, 759, 1, the Steiner system S(5, 8, 24), and λ₄ = 5
 
-**Speed of Light:**
+**Speed of light and calibration** (`Lightspeed.lean`, `Calibration.lean`):
 - `speed_not_from_action_and_energy` — no integers a, b give (0,1,−1) from (1,2,−1) and (1,2,−2)
 - `cellLength_div_cellDuration` — ℓ_cell/T_cell = c identically (circularity)
-- `octad_min_tax` — octads uniquely minimise the codeword tax
+- `octad_min_tax` — octads minimise the codeword tax (on the code layer)
 - `refIndex_strictMono` — n(T) is strictly increasing in T
 
-**First Principles:**
-- `perfect_code_iff_seven_or_twentythree` — a perfect 3-error-correcting binary code exists only at lengths 7 and 23
+**First principles** (`Packing.lean`, `FitCapacity.lean`):
+- `perfect_triple_length` — for 4 ≤ n ≤ 2000, a perfect three-error-correcting binary code has length 7 or 23
 - `ball3_closed_form` — Σ_{i≤3} C(n,i) = (n³ + 5n + 6)/6
-- `quadratic_pisot_ge_phi` — no quadratic Pisot number is smaller than φ
+- `parityExt_min_distance` — the parity extension raises an odd minimum distance by one
+- `fit_capacity` — N candidate formulas match a target set of measure at most 2Nδ
+- `GLM.Distinction.two_element_ring_is_zmod_two`, `GLM.Distinction.perm_bool_eq` — the arithmetic and the toggle are forced by a two-state carrier
 
-**Projection:**
+**Projection** (`SeedLayers.lean`, `StepCost.lean`):
 - `transcendental_not_trace_of_finite_order` — no finite symmetry produces a transcendental invariant
 - `lattice_character_ne_pi` — unconditionally, no lattice symmetry has π as a character value
 - `phi_is_trace_of_order_ten` — φ is literally the trace of a rotation of order 10
-- `hull_map_not_injective` — the floor function over 13 cannot be inverted
+- `nrci_gauge_independent` — the coherence ladder does not depend on the value of Q
+
+**The seeds** (`SeedRoles.lean`, Phase 61):
+- `GLM.SeedRoles.eSeed_irrational` — e is irrational (Fourier's argument), so `GLM.SeedRoles.lattice_character_ne_eSeed_unconditional` holds with no hypothesis
+- `GLM.SeedRoles.seeds_not_ratio_of_counts` — no seed is a ratio of integers, so the seeds are an input to the binary principle
+- `GLM.SeedRoles.phi_unique_positive_root`, `GLM.SeedRoles.pi_least_positive_zero`, `GLM.SeedRoles.e_unique_unit_growth_base` — each seed is forced by its role
+- `GLM.SeedRoles.hull_alternatives`, `GLM.SeedRoles.three_monomials_give_thirteen`, `GLM.SeedRoles.thirteen_not_invertible` — the combining rule is free and 13 cannot be run backwards
+- `GLM.SeedRoles.quadratic_pisot_ge_phi`, `GLM.SeedRoles.plastic_lt_phi`, `GLM.SeedRoles.phi_badly_approximable` — φ is the least quadratic Pisot number, not the least Pisot number, and is badly approximable
+- `GLM.SeedRoles.pi_mul_e_dichotomy`, `GLM.SeedRoles.monad_irrational_of_pi_mul_e_transcendental` — the two branches of the π·e question, neither asserted
+
+**The machine's own guarantees** (one file per mechanism; §19–§21 give the context):
+- `GLM.Conversation.resolve_bound_licensed`, `tie_is_refused`, `most_recent_mention_is_not_the_antecedent` — a bound antecedent is always a licensed one, a tie between licensed candidates is refused, and recency alone would have chosen wrongly
+- `GLM.CoordinateOrder.naive_order_is_not_scale_free`, `order_scale_invariant` — why two readings on different scales are refused
+- `GLM.ColumnExtremum.extremum_over_present_is_not_the_extremum` — why a column with a hole has no extremum
+- `GLM.ScaleConversion.orderWith_conservative` — a declared conversion adds answers only where the table speaks
+- the files `RoleBinding.lean` and `PlanStore.lean` — the parity binding inverts unconditionally, and a stored plan replays what it stored
+- `GLM.SemanticPlan.accept_perm`, `disagreement_is_ambiguous`, `planned_conservative`, `first_licensed_order_dependent` — the planner's answering rule does not depend on the order plans are tried, refuses whenever two licensed plans disagree, only adds to what the grammar answers, and the obvious alternative (take the first plan that works) does depend on order
+- `GLM.Engineering.ohm_power_derivable`, `smith_round_trip`, `ds_rational_period_iff` — wheel derivability, the Smith map, and the least period of a delta–sigma stream
+- `GLM.Anonymous.overlap_anonymise_eq_zero` and the file `Relay.lean` — the anonymous register shares no identifier with the corpus, and what the relay's gate guarantees
+
+**Proved in the archive and not rebuilt here** (quoted in §12): the MOG-cube language results (`Dialogue.reply_true`, `IntegerCube.integer_accepts_eq_equations`, `laws_are_never_missed`). The floor and Pisot results this paragraph listed before Phase 61 are now rebuilt, under `GLM.SeedRoles`. Earlier drafts of this paper cited one of these under a name no development contains; the name used for the perfect-code result is now the one in `Packing.lean`.
 
 ### 14.4 The Axiom Audit
 
-Every headline theorem is audited by a `#print axioms` block that must report exactly `[propext, Classical.choice, Quot.sound]`. No theorem in any development rests on an added assumption. Hypotheses (such as "π is transcendental") are arguments to theorems, never `axiom` declarations.
+Every headline theorem is audited with `#print axioms`. The kernel-checked theorems depend only on `propext`, `Classical.choice` and `Quot.sound`; the finite searches discharged by `native_decide` additionally depend on `Lean.ofReduceBool` and `Lean.trustCompiler`, which is the compiler-trust boundary the audit makes visible rather than hides. No theorem rests on an added `axiom` declaration: hypotheses such as "π is transcendental" are arguments to theorems, never axioms. "e is irrational" was one such hypothesis, because the pinned Mathlib does not carry it, until Phase 61 proved it (`GLM.SeedRoles.eSeed_irrational`). The per-file audit is recorded in [`overlay/glm_lean/RequestProject/GLM/README.md`](../overlay/glm_lean/RequestProject/GLM/README.md).
 
 ---
 
@@ -957,7 +1073,7 @@ The chain divides into three parts:
 
 **Part 1 (Stages 0–2) is genuinely first-principles and genuinely works.** From "there is a distinction" you get, with no further input: the two-element field, the state space (ℤ/2ℤ)ⁿ, the toggle group, the Hamming metric, the 2t+1 criterion for unique decoding, the sphere-packing bound, and the fact that a perfect three-error-correcting binary code can exist only at lengths 7 and 23. This is the honest core of the UBP architecture.
 
-**Part 2 (Stage 3) is where the framework stops being first-principles.** Every quantity produced by Part 1 is an integer. Each of π, φ, e is irrational. Therefore no seed is obtainable from the substrate by any rational expression in its counts (FP-19): the seeds are an **input**, not an output, of the binary principle. Each seed is forced by the rôle it is given — φ by self-similarity, π by rotational closure, e by unit growth rate — but the step that multiplies them into ℳ = πφe and reads off the integer 13 is a free choice.
+**Part 2 (Stage 3) is where the framework stops being first-principles.** Every quantity produced by Part 1 is an integer. Each of π, φ, e is irrational. Therefore no seed is obtainable from the substrate by any rational expression in its counts (FP-19): the seeds are an **input**, not an output, of the binary principle. Each seed is forced by the rôle it is given — φ by self-similarity, π by rotational closure, e by unit growth rate — but the step that multiplies them into ℳ = πφe and reads off the integer 13 is a free choice. All of this is now under this repository's build: `GLM.SeedRoles.seeds_not_ratio_of_counts`; `GLM.SeedRoles.phi_unique_positive_root`, `GLM.SeedRoles.pi_least_positive_zero` and `GLM.SeedRoles.e_unique_unit_growth_base` for the three roles; and `GLM.SeedRoles.hull_alternatives` for the free choice — ⌊πe/φ⌋ = 5, ⌊πφ²e⌋ = 22 and ⌊πφe²⌋ = 37 are exactly as simple as ⌊πφe⌋ = 13.
 
 **Part 3 (Stage 4) measures the evidence.** A formula of the shape "integer plus a multiple of a small constant" is an arithmetic progression, and a progression of spacing s lands within s/2 of *any* target. Applying this to the three headline fits:
 
@@ -983,7 +1099,7 @@ Doubling the number of candidate formulas costs exactly one bit. The general sta
 
 ---
 
-## 16. The Projection Sub-Seed: Where Seeds Enter
+## 16. The Projection Sub-Study: Where Seeds Enter
 
 ### 16.1 The Layer Theorem
 
@@ -1009,7 +1125,7 @@ This forces a clean separation:
 
 ### 16.3 What Projection Destroys
 
-The trace map on SL(2,ℤ) has infinite fibres: two matrices with the same trace, determinant, and characteristic polynomial are not conjugate over ℤ. The floor function ⌊·⌋ over 13 has a fibre of measure 1, and three different seed monomials land in it: πφe = 13.817..., πφ³ = 13.308..., π⁴/e² = 13.182.... "Run 13 backwards to the seeds" is impossible, and that is a theorem.
+The trace map on SL(2,ℤ) has infinite fibres: two matrices with the same trace, determinant, and characteristic polynomial are not conjugate over ℤ. The floor function ⌊·⌋ over 13 has a fibre of measure 1, and three different seed monomials land in it: πφe = 13.817..., πφ³ = 13.308..., π⁴/e² = 13.182.... "Run 13 backwards to the seeds" is impossible, and that is a theorem (`GLM.SeedRoles.trace_fibre_infinite`, `GLM.SeedRoles.same_trace_not_conjugate`, `GLM.SeedRoles.floor_fibre_measure`, `GLM.SeedRoles.three_monomials_give_thirteen`, `GLM.SeedRoles.thirteen_not_invertible`). Every seed's number forgets something in the same way: 2π forgets the winding number (`GLM.SeedRoles.period_fibre_infinite`), and e, the time-one value of the flow f′ = f (`GLM.SeedRoles.flow_time_one`), forgets the clock (`GLM.SeedRoles.e_flow_fibre`). Which kind of motion a number comes from is decided by the trace alone (`GLM.SeedRoles.sl2_trichotomy`): elliptic for π, parabolic for the shear, hyperbolic for φ.
 
 ### 16.4 Q Is a Gauge, Not an Observable
 
@@ -1023,53 +1139,549 @@ The study is explicit about what it cannot prove:
 - The icosian construction of the Leech lattice in full
 - "Meaning", "Time", "resonance" as physics (not mathematics)
 
+### 16.6 In What Sense φ Is Cheapest
+
+The framework calls φ "the cheapest self-similarity an integer lattice
+supports". That is right in two dimensions and wrong in general. φ is a
+quadratic Pisot number (`GLM.SeedRoles.phi_isQuadPisot`), and no quadratic Pisot
+number is smaller (`GLM.SeedRoles.quadratic_pisot_ge_phi`, by a two-line integer
+case analysis). The plastic number ρ ≈ 1.3247, the real root of x³ = x + 1, is
+smaller (`GLM.SeedRoles.plastic_lt_phi`), and it is a Pisot number: its two
+complex conjugates lie strictly inside the unit disc
+(`GLM.SeedRoles.plastic_conjugates_inside_disc`). The property that actually
+makes φ extremal in packing and stability arguments is a different one: φ is
+badly approximable, |φ − p/q| ≥ 1/(3q²) for every rational p/q
+(`GLM.SeedRoles.phi_badly_approximable`; the sharp constant is 1/√5), and so it
+is not a Liouville number (`GLM.SeedRoles.phi_not_liouville`).
+
+### 16.7 The Two Branches of the Independence Question
+
+Whether π·e is transcendental is open, and the framework's claim that no seed
+is derivable from the others depends on it. What is not open is that there
+are exactly two branches (`GLM.SeedRoles.pi_mul_e_dichotomy`). If π·e is
+transcendental, the monad, the wobble and the leak are all irrational
+(`GLM.SeedRoles.monad_irrational_of_pi_mul_e_transcendental`,
+`GLM.SeedRoles.wobble_irrational_of_pi_mul_e_transcendental`). If π·e is
+algebraic, a rational monad would *force* that, which is an algebraic relation
+between π and e (`GLM.SeedRoles.pi_mul_e_isAlgebraic_of_monad_rat`). Both are
+stated with the transcendence status as a hypothesis; neither is asserted.
+
 ---
 
-## 17. Synthesis: What Is Proved, What Is Calibrated, What Is Open
+# Part V: The Machine
 
-### 17.1 The Proven Core
+Parts I–IV are the substrate and what can be proved or calibrated about it.
+This part is the machine built on it in this repository — the package
+`overlay/glm_universal/`, reached through `overlay/GLM.py` — and what it has
+been measured to do. It is written in the present tense: what the machine *is*
+now, with the study that measured each part named beside it. What each round
+*did* is the phase record in [`MASTER_PLAN.md`](../MASTER_PLAN.md); where the
+work stands is [`STATUS.md`](../STATUS.md).
 
-The following are established mathematical facts, machine-checked in Lean:
+## 17. Architecture: One Carrier, Three Columns, Named Refusals
 
-1. **The binary substrate is forced.** From "there is a distinction" → 𝔽₂ → (ℤ/2ℤ)ⁿ → Hamming metric → perfect codes exist only at lengths 7 and 23 → parity extension to 24 → Golay code → Leech lattice via A → B → C. No choices are made in this chain until the parity extension, which is chosen for self-duality.
+### 17.1 The package
+
+`glm_universal` is pure Python standard library with exact arithmetic and no
+randomness anywhere a result is computed. Its eleven sub-packages are layered
+strictly — `substrate`, `data_objects`, `reasoning`, `semantics`, `recipe`,
+`language`, `runtime`, `migration`, `benchmarks`, `capabilities`,
+`evaluation` — with the Phase 59 `engineering` surface beside them as an
+opt-in package, the `sandbox` holding what is not yet relied on, `signoff` and
+`corpus` holding the repository's own instruments, and `integrity.py` holding
+every SHA-256 use one level above the core. The reasoning kernel alone is
+<!--figure:reasoning-modules-->93<!--/figure--> modules.
+
+### 17.2 The carrier
+
+Every object the machine holds — a physical quantity, an element, a molecule, a
+musical interval, a price, a word, a Lean declaration — is one shape: a
+24-tuple of exact rationals, the **carrier** of §4.3, read at the resolution of
+whichever layer is asking. The 24-bit word, the syndrome, the MOG cell, the
+Leech point and the shell are projections of it at stated resolutions, and the
+layer chain of §4 is what licenses reading it at more than one.
+
+### 17.3 The substrate, as shipped
+
+Complete syndrome decoding with no silent tie-break (§3.4); the full Leech
+lattice in place of Construction A (kissing number 196,560); the exact 2A
+Sakuma product in place of the XOR shortcut, proved non-associative in
+`Sakuma.lean`; the six-facet orthogonal decomposition (`Facets.lean`); and a
+quantiser that decodes through the LLVQ class table — a 16-entry column table, the
+64 hexacode words, 128 classes of 32 — rather than by scanning the code, which is
+exact and is what makes a whole-corpus measurement affordable
+([`LLVQ_TABLE_STUDY.md`](LLVQ_TABLE_STUDY.md)). No substrate table is stored:
+the last one was replaced by twelve parity checks against 36 bytes, proved
+equivalent ([`ZERO_STORAGE_V5_STUDY.md`](ZERO_STORAGE_V5_STUDY.md)).
+
+### 17.4 The query, and the three columns
+
+A question enters as one of <!--figure:query-kinds-->24 query kinds<!--/figure-->
+— `verify`, `analogy`, `describe`, `nearest`, `product`, `cluster`, `spatial`,
+`project`, `trilinear`, `coherence`, `report`, `angle`, `task`, `pi_groups`,
+`meaning`, `real`, `compare`, `measure`, `comparative`, `derive`, `field`,
+`ordering`, `extremum`, and `unknown` for what matches none — and `report`
+dispatches <!--figure:report-subjects-->65 report subjects<!--/figure-->, each a
+study that recomputes itself on demand. Every answer is the three-column
+payload of §2.3: the reasoning in language, the same steps as exact equations,
+and a generated script that re-derives the second column in a fresh
+interpreter. An answer is reported verified only when the re-derivation
+agrees.
+
+### 17.5 Refusal is an answer
+
+When the machine cannot answer it says so, and it says *why*: a named reason
+from a declared set (an unknown row, a field the register records as missing,
+two readings on different scales, a column with a hole in it, two licensed
+readings that disagree). The evaluation scores this asymmetrically — an honest
+refusal `+1`, a confidently wrong answer `−1` — so the machine is built to
+prefer the first. Much of Part V is the story of refusals becoming answers one
+declared case at a time, and of refusals that were kept because the answer
+would have been a guess.
+
+## 18. Registers and Meaning
+
+### 18.1 The registers
+
+<!--figure:registers-->8 registers<!--/figure-->, holding
+<!--figure:binding-carriers-->1,143<!--/figure--> carriers between them:
+
+| register | carriers | what a row is |
+|---|---|---|
+| physics | 726 | a quantity, with EXT10 exponents and a unit string cross-checked against each other |
+| chemistry | 118 | an element, with its sparse measured fields and their provenance |
+| molecules | 51 | a species or ion, every coordinate derived from the element register at load time |
+| mathematics | 22 | a mathematical object |
+| lexicon | 149 | a concept, with ten semantic primitives and explicit relation triples |
+| spatial | 28 | a spatial configuration |
+| harmonics | 28 | a musical interval as an exact rational frequency ratio |
+| economics | 21 | a quoted price as an exact rational |
+
+Beside them sits a 45-class comparison register for measure words
+([`RELATIVE_MEASURE_STUDY.md`](RELATIVE_MEASURE_STUDY.md)) and a declared
+energy-conjugate table for cross-register analogy
+([`CONJUGATE_STUDY.md`](CONJUGATE_STUDY.md)).
+
+### 18.2 A register is not allowed to invent
+
+Sparse chemistry is decided rather than left blank: 9 fields take a rule that
+beat the field's own mean out of sample, 185 cells are filled by labelled
+estimate, and every cell still empty carries one of three stated reasons
+([`ELEMENT_COMPLETION_STUDY.md`](ELEMENT_COMPLETION_STUDY.md)). A new name is
+admitted only when a stated route gives it coordinates computed from a register
+the machine already checks ([`ADMISSION_STUDY.md`](ADMISSION_STUDY.md)); what an
+undimensioned name denotes is a vocabulary decision, recorded as one
+([`DENOTATION_STUDY.md`](DENOTATION_STUDY.md)); and a vague `related_to` triple
+is routed through four declared routes of which only the last asks a person
+([`VAGUENESS_STUDY.md`](VAGUENESS_STUDY.md)). A register can be regenerated
+from its description with every measured figure unchanged
+([`RECIPE_STUDY.md`](RECIPE_STUDY.md)).
+
+### 18.3 Meaning, not spelling
+
+The grounded graph holds 357 meanings, 1,705 notations and 12,859 edges, every
+one re-derived on demand. The inherited ARC-era concept graph, which hashed a
+spelling and snapped it near a codeword, was audited and demoted to evidence: a
+hash of a spelling identifies a string and measures nothing about what the
+string means (directive D3), and `tests/test_inherited_graph.py` walks the
+imports of every module that answers a question to keep it out
+([`Semantics/Meaning.lean`](../RequestProject/GLM/Semantics/Meaning.lean),
+[`Semantics/Grounding.lean`](../RequestProject/GLM/Semantics/Grounding.lean)).
+Torque and energy are the same in SI7 and different in EXT10, which adds plane
+angle, solid angle and information; the projection between them is lossy
+exactly where those exponents are nonzero, and the machine says which.
+
+## 19. The Answer Surface: From a Row to a Plan
+
+The surface grew outward from a single register row, one declared operation at
+a time, each measured on questions written before the code. Each step says of
+itself whether it is `table`, `address` or `derive` (§22.3).
+
+| operation | what it does | measured on its declared set | study |
+|---|---|---|---|
+| **field surface** | one named field of one named row, over <!--figure:fieldsurface-tables-->13<!--/figure--> tables, <!--figure:fieldsurface-rows-->9,248<!--/figure--> rows and <!--figure:fieldsurface-pairs-->55,173<!--/figure--> addressable pairs | answers <!--figure:fieldsurface-moved-->9<!--/figure--> of the <!--figure:fieldsurface-held-->10<!--/figure--> held-but-unreachable probe questions, exactly the <!--figure:fieldsurface-predicted-->9<!--/figure--> declared reachable | [`FIELD_SURFACE_STUDY.md`](FIELD_SURFACE_STUDY.md) |
+| **ordering** | one coordinate off two rows, ordered exactly, refused across scales | answers <!--figure:ordering-answered-->4<!--/figure--> and refuses <!--figure:ordering-refused-->3<!--/figure--> of <!--figure:ordering-declared-count-->7<!--/figure-->, every one as declared | [`ORDERING_STUDY.md`](ORDERING_STUDY.md) |
+| **extremum** | one coordinate over every row of a table, folded or refused | folds <!--figure:extremum-answered-->4<!--/figure--> and refuses <!--figure:extremum-refused-->4<!--/figure--> of <!--figure:extremum-declared-count-->8<!--/figure--> columns, every one as declared | [`COLUMN_EXTREMUM_STUDY.md`](COLUMN_EXTREMUM_STUDY.md) |
+| **scale conversion** | a declared table of <!--figure:scales-rows-->9<!--/figure--> scales over <!--figure:scales-quantities-->4<!--/figure--> quantities | answers <!--figure:scales-answered-->7<!--/figure--> and refuses <!--figure:scales-refused-->5<!--/figure--> of <!--figure:scales-declared-->12<!--/figure-->; relates <!--figure:scales-bridged-->6<!--/figure--> of <!--figure:scales-pairs-->7,750<!--/figure--> scale pairs and refuses the rest | [`SCALE_CONVERSION_STUDY.md`](SCALE_CONVERSION_STUDY.md) |
+| **conversation** | a follow-up bound to an earlier turn by licensing, not recency | binds <!--figure:conversation-answered-->8<!--/figure--> and refuses <!--figure:conversation-refused-->7<!--/figure--> of <!--figure:conversation-declared-count-->15<!--/figure--> follow-ups; a session with no memory answers <!--figure:conversation-alone-->0<!--/figure--> | [`CONVERSATION_STUDY.md`](CONVERSATION_STUDY.md) |
+| **role binding and plan store** | a typed relation as one 24-bit word; a resolved follow-up kept under a digest of the whole conversation | the filler's name recovered for <!--figure:binding-recovered-->6<!--/figure--> of <!--figure:binding-declared-count-->12<!--/figure--> bindings and refused for <!--figure:binding-refused-->6<!--/figure-->; all <!--figure:planstore-replayed-->15<!--/figure--> follow-ups replay unchanged, licensing trials <!--figure:planstore-trials-first-->27<!--/figure--> → <!--figure:planstore-trials-replayed-->0<!--/figure--> | [`SUPPLIED_PORTS_STUDY.md`](SUPPLIED_PORTS_STUDY.md) |
+| **typed question plans** | <!--figure:plans-frames-->18<!--/figure--> frames read an English question into typed plans over the operations above; answered only when every licensed plan agrees | the frozen language probe <!--figure:plans-probe-correct-->19<!--/figure--> correct, <!--figure:plans-probe-wrong-->0<!--/figure--> wrong, <!--figure:plans-probe-refused-->1<!--/figure--> refused; held-out <!--figure:plans-held-correct-->86<!--/figure--> correct and <!--figure:plans-held-correct-refusal-->22<!--/figure--> correct refusals of <!--figure:plans-held-total-->110<!--/figure-->, <!--figure:plans-held-wrong-->1<!--/figure--> wrong | [`SEMANTIC_PLAN_STUDY.md`](SEMANTIC_PLAN_STUDY.md) |
+| **engineering languages** | formula wheels as exact exponent-vector relations, the Smith chart over the Gaussian rationals, mechanical–electrical analogy, delta–sigma modulators | 63 pre-registered questions: 53 correct, 10 correct refusals, 0 wrong, where both earlier paths answered none; wheels 41 / 41, Smith chart 16 / 16, force–voltage analogy 9 / 9 each way | [`ENGINEERING_LANGUAGE_STUDY.md`](ENGINEERING_LANGUAGE_STUDY.md) |
+
+Three things about this table are worth stating outright.
+
+* **Every refusal it lists was declared before the run**, and most are
+  *proved* to be the right answer: `naive_order_is_not_scale_free` exhibits a
+  rescaling that flips a comparison of raw numbers;
+  `extremum_over_present_is_not_the_extremum` exhibits a column whose extremum
+  over its filled rows is a different value at a different row; the
+  conversation layer refuses the fourteen-way tie at the top of the lexicon's
+  `abstract_concrete` column rather than choose a referent.
+* **The planner and the engineering surface are opt-in** (`GLM.py --plan`,
+  `GLM.py --eng`), because the command line renders every answer as a
+  three-column trace and a computed plan has no trace kind yet. Making the
+  planner the default is the first named candidate for a later round.
+* **Their wrong answers are named.** The planner's one held-out error is the
+  element register holding iron's atomic weight as `55.84` where the answer key
+  uses `55.845`: a precision fault in a register, not in the planner. The
+  engineering stress set's first run is frozen at 27 correct, 1 wrong and 10
+  correct refusals, and its one "wrong" answer is a formatting mismatch of the
+  same value.
+
+## 20. Escalation and Ladders
+
+§4 proves that loss at a layer boundary is exactly gain above it. The machine
+uses that as an operating rule: when a reading at one layer cannot decide, it
+escalates to a finer one, declared before it is taken and costed (directive
+D13).
+
+### 20.1 The construction ladder and the norm family
+
+The ladder from ℤ²⁴ through D₂₄ and Constructions A, B and C, generated from
+their conditions with the scalings that fill the gaps, is eleven rungs; an
+escalated reading over it names **462** of 568 declared queries correctly with
+**0** wrong, against **327** for the five rungs the supplied note proposed and
+**283** for the best single rung
+([`CONSTRUCTION_LADDER_STUDY.md`](CONSTRUCTION_LADDER_STUDY.md)). Indexed by
+minimum squared norm it becomes a family of
+<!--figure:normfamily-rung-count-->25<!--/figure--> rungs over
+<!--figure:normfamily-norms-->12<!--/figure--> norms; the complete family is
+*not* safe — it answers <!--figure:normesc-family-wrong-->1<!--/figure--> query
+wrongly — so the declared retirement rule removes the rung at fault, and the
+repaired <!--figure:normesc-rungs-->10<!--/figure-->-rung ladder names
+<!--figure:normesc-correct-->467<!--/figure--> of
+<!--figure:normesc-queries-->568<!--/figure--> with
+<!--figure:normesc-wrong-->0<!--/figure--> wrong
+([`NORM_FAMILY_STUDY.md`](NORM_FAMILY_STUDY.md), `NormFamily.lean`).
+
+### 20.2 Operations other than retrieval, and the second reading
+
+<!--figure:opesc-count-->7<!--/figure--> operations other than retrieval were
+escalated under the same discipline against substrate-removed controls; every
+one gains, and one — program text — answered
+<!--figure:opesc-program-wrong-->13<!--/figure--> of
+<!--figure:opesc-program-queries-->576<!--/figure--> queries wrongly and was
+reported unsafe ([`OPERATION_ESCALATION_STUDY.md`](OPERATION_ESCALATION_STUDY.md)).
+Requiring a second reading at another layer to agree removes all thirteen:
+`<!--figure:secondread-shipped-->strict+margin<!--/figure-->`, the
+<!--figure:secondread-adopted-->1<!--/figure--> of
+<!--figure:secondread-configurations-->6<!--/figure--> declared configurations
+that met all four pre-registered marks, answers
+<!--figure:secondread-program-correct-->366<!--/figure--> correctly and
+<!--figure:secondread-program-wrong-->0<!--/figure--> wrongly, at a counted
+cost of <!--figure:secondread-given-up-->150<!--/figure--> answers given up
+([`SECOND_READING_STUDY.md`](SECOND_READING_STUDY.md), `SecondReading.lean`).
+
+### 20.3 Escalation inside the query loop
+
+Escalation is a step of the ordinary query loop, not a separate tool: over the
+whole evaluation set no answer moves and no principled refusal is converted,
+while four of the declared probes are resolved above the first rung
+([`QUERY_ESCALATION_STUDY.md`](QUERY_ESCALATION_STUDY.md), `EscalationLoop.lean`).
+Stalled results are registered and ranked before the next re-reading rather
+than after it ([`REVIEW_SWEEP_STUDY.md`](REVIEW_SWEEP_STUDY.md)), and a layer
+family ships only with its refinement check — declared edges verified,
+declared non-edges witnessed (directive D12,
+[`CUMULATIVITY_STUDY.md`](CUMULATIVITY_STUDY.md)).
+
+### 20.4 The deep holes
+
+The Niemeier deep holes of the Leech lattice were classified from the
+trajectories of a walk, pre-registered against controls including a
+vertex-count baseline fixed in advance: the trajectory statistic beat every
+control (15 of 44 against 11 for the vertex count), and the round stopped
+itself because its sanity check kept only 3 of 10 labels under a bare seed
+change ([`DEEP_HOLE_STUDY.md`](DEEP_HOLE_STUDY.md)). Read one layer up and
+escalated over layer × budget cells, the same question passes the sanity check
+10 of 10 and names 40 of 44 at the joint reading
+([`DEEP_HOLE_ESCALATION_STUDY.md`](DEEP_HOLE_ESCALATION_STUDY.md)); the four
+remaining failures are near misses at rank 2 and share one mechanism with the
+unmet separation criterion
+([`DEEP_HOLE_FAILURE_STUDY.md`](DEEP_HOLE_FAILURE_STUDY.md)). The census of the
+23 root systems is searched for rather than tabulated (`Niemeier.lean`).
+
+## 21. Addressing: The Geometry as an Index
+
+The second of the Positioning's four questions — can language, mathematics and
+program text be mapped onto the lattice — is asked most sharply of the Lean
+development itself, because it is a corpus whose ground truth is known.
+
+* **The Lean address book.** Each of the
+  <!--figure:lean-declarations-->3,766<!--/figure--> declarations gets a
+  deterministic Leech address computed from 24 structural counts of its
+  statement, read back exactly, with nearest-by-address sharing a source file
+  far more often than a SHA-256 control or a seeded reshuffle does
+  ([`LEAN_ADDRESS_STUDY.md`](LEAN_ADDRESS_STUDY.md)). Determinism: yes. Meaning:
+  partly — and the two are not the same thing.
+* **Against plain text it loses, and the loss is recorded.** Where the names
+  are available, retrieval by address is a real index and is beaten decisively
+  by text search ([`ADDRESS_RETRIEVAL_STUDY.md`](ADDRESS_RETRIEVAL_STUDY.md));
+  the same holds for the documents of this repository, where the address
+  contributes a shortlist complete up to a stated radius rather than a better
+  ranking ([`CORPUS_ADDRESS_STUDY.md`](CORPUS_ADDRESS_STUDY.md)). Most Leech
+  addresses in the development are not unique, and the tie class is enumerated
+  exactly ([`TIE_BREAK_STUDY.md`](TIE_BREAK_STUDY.md)).
+* **Where the names are taken away, it holds.** In the anonymous register — a
+  goal written in another formalisation's vocabulary, modelled by renaming
+  everything outside a declared vocabulary, and proved to share no identifier
+  with the corpus (`overlap_anonymise_eq_zero`) — text search and the
+  identifier address book fall to the hit rate chance gives while the
+  structural address keeps most of what it had
+  ([`ANONYMOUS_REGISTER_STUDY.md`](ANONYMOUS_REGISTER_STUDY.md)).
+* **As a stack, it helps the leader.** Given a stated confidence gate and only
+  the queries the leading text faculty cannot read, the geometry carries more
+  queries than it loses (13 against 0 over 1,658 queries), where a
+  digest-and-reshuffle relay under the same gate carries 2. The gain is
+  strict on all three query sets on the current corpus — but that standing
+  moves with the corpus: when Phase 59 added one Lean file the goal set fell
+  level, and when Phase 61 added three it rose again, and the study records
+  each move rather than the best figure
+  ([`STACK_RELAY_STUDY.md`](STACK_RELAY_STUDY.md), `Relay.lean`).
+* **Procedures are retrievable the way numbers are**: a search loop's hard gate
+  admits exactly what it can check, and the ranking's limits are measured as a
+  census ([`SEARCH_LOOP_STUDY.md`](SEARCH_LOOP_STUDY.md)); the propose–check–
+  refuse loop re-verifies every returned plan and carries a proof with each
+  refusal ([`CONTROLLER_STUDY.md`](CONTROLLER_STUDY.md)).
+
+## 22. Measured Capability
+
+### 22.1 The four instruments
+
+| instrument | what it measures | result |
+|---|---|---|
+| end-to-end CLI evaluation | the command line in a fresh interpreter per question, scored asymmetrically | <!--figure:evaluation-case-count-->177<!--/figure--> cases: 149 answered correctly, 28 refused as expected, **0 confidently wrong** |
+| capability probes | where the library stops, asked as user questions | 33 probes: 20 hold, 13 break — each break a located boundary, not a failure |
+| benchmark suites | solver functions against curated and exhaustive task sets | 2,389 / 2,390 across 5 suites, every suite above its declared baseline |
+| test suite | the package's own regression net | <!--figure:suite-->4,267 tests across 108 of the 109 test files, 16,276 subtests, outside the document check<!--/figure--> |
+
+The thirteen probe breaks are the machine's measured edges, spread over nine
+areas (algebra, carriers, dynamic carriers, layers, reals, scale, semantics,
+substrate; every runtime probe holds). The four that matter most for a user,
+in the probes' own terms: the repair radius is exactly 3 — at weight 4 six
+codewords are equally near and at weight 5 the answer is unique, confident and
+wrong, because the octads form `S(5,8,24)`; the Norton–Sakuma product is not
+associative; the TAX law is exact on binary carriers and fails over the
+naturals; and the vocabulary is exactly the registers
+([`CAPABILITY_ASSESSMENT.md`](../CAPABILITY_ASSESSMENT.md) §3). Each is the
+machine reporting a theorem of Parts I–IV back as behaviour.
+
+### 22.2 The pre-registered language probe
+
+The sharpest single measurement of what blocks fuller reasoning is a probe of
+<!--figure:probe-questions-->20<!--/figure--> English questions with a declared
+pass mark of <!--figure:probe-pass-mark-->10<!--/figure-->. Asked through the
+default path it scores <!--figure:probe-correct-->2<!--/figure--> correct,
+<!--figure:probe-wrong-->1<!--/figure--> wrong and
+<!--figure:probe-refused-->17<!--/figure--> refused — a declared failure, kept
+as one ([`BLOCKERS_STUDY.md`](BLOCKERS_STUDY.md)). Widening the lexicon to
+<!--figure:probe-lexicon-held-->57<!--/figure--> of the probe's
+<!--figure:probe-lexicon-words-->69<!--/figure--> content words moved nothing;
+translating each question into the query grammar by hand showed the refusals
+are three different failures — <!--figure:oracle-parsed-->6<!--/figure-->
+parsed, <!--figure:oracle-surface-->10<!--/figure--> held by a register but
+unreachable, <!--figure:oracle-absent-->4<!--/figure--> absent
+([`PROBE_ORACLE_STUDY.md`](PROBE_ORACLE_STUDY.md)). The field surface, the
+ordering operation and the typed planner of §19 were built against exactly
+that diagnosis, and through the planner the same frozen probe now passes its
+mark at <!--figure:plans-probe-correct-->19<!--/figure--> correct.
+
+### 22.3 Which faculty moved
+
+The standing target of the project is narrow: a round moves it when the system
+**derives** (produces an answer no register holds), **addresses** (recovers an
+answer from the geometry when the query is not the stored key) or **refuses**
+(withholds an answer that would have been wrong) better than before, under a
+perturbation declared in advance. [`BLOCKERS_STUDY.md`](BLOCKERS_STUDY.md) §1
+separates the three mechanically, and on its own count only
+<!--figure:probe-derived-->2<!--/figure--> measured results were derivation
+rather than lookup or addressing when it was taken. Across the
+<!--figure:plans-questions-->197<!--/figure--> questions asked both through the
+grammar and through the typed planner, the
+<!--figure:plans-gained-->147<!--/figure--> answers the planner gains sort into <!--figure:plans-gains-derive-->70<!--/figure-->
+derived, <!--figure:plans-gains-table-->76<!--/figure--> looked up and
+<!--figure:plans-gains-address-->1<!--/figure--> addressed
+([`SEMANTIC_PLAN_STUDY.md`](SEMANTIC_PLAN_STUDY.md) §7). Derivation is the
+scarce faculty and stays the one most worth a round.
+
+### 22.4 The four questions, answered as measurements
+
+1. **Mapping.** Yes for the registers (every carrier re-derived from its
+   source on load) and for the Lean development (every declaration read back
+   exactly from its address). For open English, only through declared frames
+   (§19); for program text, the address is a real index that loses to text
+   search when names are present and holds when they are not (§21).
+2. **Reasoning.** Addressing and refusal are strong and measured; derivation
+   is real but narrow — Buckingham-Pi from an exact nullspace, wheel
+   derivations over declared axioms, exact arithmetic and conversion inside
+   typed plans — and the probe of §22.2 is the measure of how narrow.
+3. **Generation.** The machine works with what it holds rather than only
+   recalling it wherever a declared operation composes rows (ordering,
+   extremum, conversion, plans, wheels); it does not yet compose across a union
+   of declared relations, and says so (the first candidate in `STATUS.md`
+   §3.4).
+4. **Real, accurate, checkable.** Every answer carries its own re-derivation;
+   the evaluation has no confidently wrong answer; the known wrong value in a
+   register is named rather than hidden.
+
+## 23. The Negative Results
+
+The Positioning calls a refuted claim a result, because it is the cheapest
+thing the project produces and the most easily lost. These are the ones that
+bear on the system as a whole; each is the verdict of the study named.
+
+| claim tested | verdict | study |
+|---|---|---|
+| the harmonic register's intervals are distinctive on the lattice | not reproduced against an undecoded control | [`HARMONY_STUDY.md`](HARMONY_STUDY.md) |
+| the economic register's prices are distinctive on the lattice | not reproduced; the control is not beaten | [`ECONOMICS_STUDY.md`](ECONOMICS_STUDY.md) |
+| the fine-structure constant's wobble signature is structurally distinctive | too weak to spend on (B = 1.79 bits, below the pre-registered gate), so the landscape was not enumerated | [`WOBBLE_LANDSCAPE_STUDY.md`](WOBBLE_LANDSCAPE_STUDY.md) |
+| a Leech address retrieves better than reading the words | no — beaten decisively by plain text; for documents, a complete shortlist but no better ranking | [`ADDRESS_RETRIEVAL_STUDY.md`](ADDRESS_RETRIEVAL_STUDY.md), [`CORPUS_ADDRESS_STUDY.md`](CORPUS_ADDRESS_STUDY.md) |
+| the proposed zero-storage Leech sieve is complete | sound and 99.4 % incomplete, with the one-line repair stated | [`ZERO_STORAGE_STUDY.md`](ZERO_STORAGE_STUDY.md) |
+| the supplied reverse-call planner earns promotion | safety gate holds, utility gate fails on the project's own evaluation set; not promoted | [`REVERSE_CALL_PLANNER_STUDY.md`](REVERSE_CALL_PLANNER_STUDY.md) |
+| the elementwise product binding inverts | refuted: <!--figure:binding-product-zero-->1,133<!--/figure--> of the carriers read zero somewhere | [`SUPPLIED_PORTS_STUDY.md`](SUPPLIED_PORTS_STUDY.md) |
+| the supplied conversational GLM's higher-order analogy adds a constraint | does not survive being re-run | [`CONVERSATION_STUDY.md`](CONVERSATION_STUDY.md) |
+| the accumulator is a receipt of the history | the identity holds and the reading does not: it records the integral mod 1 and nothing else | [`NOW_RECEIPT_STUDY.md`](NOW_RECEIPT_STUDY.md) |
+| the full norm family is a safe ladder | no — one wrong answer; the rung at fault is retired | [`NORM_FAMILY_STUDY.md`](NORM_FAMILY_STUDY.md) |
+| program-text escalation is safe | no — 13 wrong answers, repaired only by a second reading | [`OPERATION_ESCALATION_STUDY.md`](OPERATION_ESCALATION_STUDY.md) |
+| the deep-hole classifier is stable under a seed change | no at the first layer (3 of 10); yes one layer up (10 of 10) | [`DEEP_HOLE_STUDY.md`](DEEP_HOLE_STUDY.md) |
+| nine claims in the archive's scripts | false, and proved false in the retrieved Lean | [`RETRIEVED_LEAN_STUDY.md`](RETRIEVED_LEAN_STUDY.md) |
+| two questions the archive's deep dive asked | both negative, and both more useful than a positive | [`ARCHIVE_DEEP_DIVE_STUDY.md`](ARCHIVE_DEEP_DIVE_STUDY.md) |
+| the pre-registered language probe passes on the default path | no — 2 / 1 / 17 against a mark of 10; passes only through the planner | [`BLOCKERS_STUDY.md`](BLOCKERS_STUDY.md) |
+| the Golay/Leech encoding helps the engineering surface | no advantage found, and none claimed | [`ENGINEERING_LANGUAGE_STUDY.md`](ENGINEERING_LANGUAGE_STUDY.md) |
+| the relay's gain is a stable property of the mechanism | no — it is a measurement of the current corpus: Phase 59's added file made it tie text on the goal set (2 carried, 2 lost) with the strict band ending at 1/5, and Phase 61's three files restored a strict gain on every set (13 carried, 0 lost) | [`STACK_RELAY_STUDY.md`](STACK_RELAY_STUDY.md) |
+
+Parts I–IV carry their own negatives, which §25.4 collects: the fine-structure
+fit worth less than one bit, the substrate unable to derive c, "φ shears"
+wrong, the archive's "d² always even" and "exactly half" refuted, and the
+floor over 13 not invertible.
+
+---
+
+# Part VI: Method
+
+## 24. How the Repository Keeps Itself Honest
+
+A research programme that spans this much fails most often not by being wrong
+but by *ageing*: a figure typed into a document that the code has since moved,
+a finding written nowhere, a round re-run in full because nothing recorded what
+it depended on. The repository is built against that failure.
+
+**Standing rules with instruments.** [`PROJECT_DIRECTIVES.md`](../PROJECT_DIRECTIVES.md)
+states <!--figure:directives-->16 standing rules<!--/figure-->, each naming the
+instrument that enforces it, and `report directives` prints each instrument's
+live verdict. Among them: no floats (D7), checked by parsing every module; an
+operation that is not the substrate's own used only at declared sites (D9,
+D11); where Lean and Python disagree, Lean is the specification (D8); a layer
+ships with its refinement check (D12); an escalated re-reading is declared
+before it is taken (D13); something not yet relied on lives in the sandbox with
+a computed promotion checklist (D14); every round says which of derivation,
+addressing and refusal it moved, or that it moved none (D15).
+
+**Every figure generated.** Directive D6: every figure a document quotes is
+generated by the code that reports it. `glm_universal/figures.py` writes
+`overlay/FIGURES.md`, inline figure markers carry the live value into the prose
+(as throughout this paper), generated blocks carry whole tables, and
+`tests/test_figures.py` fails when a document and the code disagree.
+[`GLM_Complete_Number_Theory_Evidence.md`](GLM_Complete_Number_Theory_Evidence.md)
+goes further: its own test re-runs its generator and compares every table cell
+by cell.
+
+**A document is data.** Directive D10: every document is classified by rule,
+carries a tier-0 block (question, verdict, deciding figure, the function that
+recomputes it), is addressed, and is checked — the verdict must be grounded in
+the document's own words, every link must resolve, and every current-state
+document must be reachable from [`ENTRY.md`](../ENTRY.md). The corpus holds
+<!--figure:corpus-documents-->98<!--/figure--> documents, of which
+<!--figure:corpus-state-documents-->94<!--/figure--> describe the system as it
+is and <!--figure:corpus-archive-documents-->4<!--/figure--> are records of a
+round, and [`DIGEST.md`](../DIGEST.md) is their tier-0 reading, generated.
+
+**Sign off only what moved.** Directive D16 and `glm_universal/signoff`: every
+test file and instrument is signed against a digest of everything it depended
+on — its import closure computed with `ast` — so a change re-runs what it
+touched and nothing else, and a release runs everything with the exhaustive
+cases on. The cost of that loop is itself measured
+([`ITERATION_COST_STUDY.md`](ITERATION_COST_STUDY.md)).
+
+**The round.** Orient from the whiteboard and the status document, take a
+named candidate, declare the measurement before taking it, work against the
+cheapest gate that could fail, write the finding where it belongs — the study,
+the status document, the phase record, the Lean — and close with refresh,
+check and release ([`ITERATE.md`](../ITERATE.md)). Fifty-nine phases are
+recorded in [`MASTER_PLAN.md`](../MASTER_PLAN.md) and its archive, and the
+discipline above was assembled over them rather than present from the start.
+
+---
+
+# Part VII: Synthesis
+
+## 25. Synthesis: Proved, Calibrated, Measured, Refuted, Open
+
+### 25.1 The Proven Core
+
+The following are established mathematical facts, machine-checked in Lean in this repository's development unless marked otherwise:
+
+1. **The binary substrate is forced up to one choice.** From "there is a distinction" → 𝔽₂ → (ℤ/2ℤ)ⁿ → Hamming metric → perfect three-error-correcting codes exist only at lengths 7 and 23 (for n ≤ 2000, `perfect_triple_length`) → parity extension to 24 (`parityExt_min_distance`) → Golay code → Leech lattice via A → B → C. No choices are made in this chain until the parity extension, which is chosen for self-duality.
 
 2. **The layer architecture is formally verified.** The five-layer stack is a refinement chain. Information lost at a boundary is exactly new expressive power gained. The ascent is forced by capacity constraints. The dyadic tower is infinite, strictly increasing, cumulative, and exhaustive.
 
 3. **TAX conservation is exact on binary carriers and irreparably broken above.** The boundary is a single constant (Y = 1/(π + 2/π) ≠ 1/2), proved.
 
-4. **The Golay snap radius is sharp.** Unique repair at distance ≤ 3, ambiguity at 4, uncorrectable at ≥ 5. The boundary is a single integer.
+4. **The Golay snap radius is sharp.** Unique repair at distance ≤ 3, a six-fold tie at 4, uncorrectable at ≥ 5. The boundary is a single integer. The code's own numbers — the weight enumerator, `S(5,8,24)`, `λ₄ = 5` — are theorems about the development's code, not quotations.
 
-5. **No finite symmetry produces a transcendental number.** φ enters as a character value; π and e must come from flows.
+5. **No finite symmetry produces a transcendental number.** φ enters as a character value; π and e must come from flows. For a lattice symmetry the statement needs only irrationality, and it now holds unconditionally for e as well as π, because e is proved irrational (`GLM.SeedRoles.lattice_character_ne_eSeed_unconditional`).
 
-6. **The floor function is not invertible.** Three different seed monomials produce hull 13. Seed recovery is impossible.
+6. **The floor function is not invertible.** Three different seed monomials produce hull 13, so seed recovery is impossible (`GLM.SeedRoles.three_monomials_give_thirteen`, `GLM.SeedRoles.thirteen_not_invertible`; retrieved from the archive's projection development in Phase 61).
 
 7. **The refractive-index law is falsifiable.** n(T) = (24+T)/27 with no empirical parameters. Diamond falsifies it (T > 24).
 
-8. **Gray code is the optimal read channel.** Exactly one bit flip per step (`gray_step`), zero transition entropy. **Correction:** "Exactly half" is false at every finite width; the sharp statement is `2·gray = binary + 2` (`gray_two_mul_eq`).
+8. **Gray code is the optimal read channel.** Exactly one bit flip per step (`gray_single_bit`), and the jump between two states is `pop(gray(a XOR b))` (`d2_eq_pop_gray_xor`). **Correction:** "exactly half" is false at every finite width; the sharp statement is `2·gray = binary + 2` (`gray_two_mul_eq`).
 
 9. **Reversible gates perfectly conserve state.** Toffoli and Fredkin are involutions and bijections. The composition has order 3 (`round_cubed`), not order 2. Inverse rounds undo forward rounds exactly. Kink count is rotation-invariant (`kinks_rotate`) and always even (`kinks_even`); single flips move it by {-2, 0, +2}, not exactly ±2.
 
-10. **The MOG cube supports a complete verified language.** 1,310 Lean declarations, zero sorry, words with dimension, true sentences, connectives, conversation.
+10. **The delta–sigma stream is exactly characterised.** Its average converges at O(1/N) (`dsAverage_error_le`); its ones count is a floor (`dsOnes_eq_floor`); its least period is the denominator of a rational input and an irrational input never repeats (`ds_rational_period_iff`, `ds_irrational_aperiodic`); its accumulator records the integral mod 1 and nothing else (`acc_eq_iff_fract_eq`).
 
-### 17.2 The Calibrated Results
+11. **The machine's refusals are theorems.** A comparison across scales is refused because a rescaling can flip it (`naive_order_is_not_scale_free`); a column with a hole has no extremum (`extremum_over_present_is_not_the_extremum`); the planner refuses when two licensed plans disagree and its rule is order-independent (`disagreement_is_ambiguous`, `accept_perm`); a conversation tie is refused (`tie_is_refused`).
+
+12. **The MOG cube supports a complete verified micro-language** — words with dimension, true sentences, connectives, conversation, learning — proved in the archive's 43-file development; its geometric half is rebuilt here, its language half is not (§12, Appendix C).
+
+13. **The seeds are forced by their roles and by nothing below them.** No seed is a ratio of counts (`seeds_not_ratio_of_counts`); φ, π and e are each the unique number playing its role (`phi_unique_positive_root`, `pi_least_positive_zero`, `e_unique_unit_growth_base`); φ is the least quadratic Pisot number but not the least Pisot number (`quadratic_pisot_ge_phi`, `plastic_lt_phi`).
+
+### 25.2 The Calibrated Results
 
 The following are empirical calibrations, internally consistent but not derived from first principles:
 
-1. **The EM scale function** S(λ, HW) = λ/[HW × (Y + 1/8)] is validated against 48 EM references. It is derived from the substrate's definition, not curve-fit, but the substrate's definition itself contains the empirically fitted constant Y.
+1. **The EM scale function** S(λ, HW) = λ/[HW × (Y + 1/8)] is validated against 48 EM references. It is derived from the substrate's definition, not curve-fit, but the substrate's definition itself contains a chosen constant, Y = 1/(π + 2/π), whose form is not derived.
 
 2. **The mass scale** is internally consistent: m_e formula (0.00919% error), m_μ/m_e ratio (0.02938% error), cross-check m_e × ratio → m_μ (0.039% error). The WOBBLE cancels in the cross-check.
 
 3. **The proton-to-electron mass ratio** m_p/m_e = 1836 + 2L_s achieves 0.0000374% error — the most precise alignment point, worth 2–3 bits of evidence.
 
-4. **The 190 kJ/mol scale factor** matches real bond energies and places the substrate at the molecular scale.
+4. **The 190 kJ/mol scale factor** is an empirical conversion between geometric work and bond energy, fitted over 114 element pairs whose thermodynamic convention is not stated (§11.5). It places the substrate's *energy* scale in the molecular and optical range; its derived *length*, 17 μm, is not molecular.
 
 5. **Element property encoding** achieves r > 0.90 for electronegativity and boiling point from 24-bit Golay/Leech encodings.
 
 6. **Bond energy prediction** reaches r = 0.55 with warping strategies, and bond order classification reaches 86.8% accuracy.
 
-### 17.3 The Open Problems
+### 25.3 The Measured Machine
 
-1. **The mass residual (0.00919%).** The single most important open problem. If the residual is α² × (geometric factor), it would connect the UBP mass scale to QED. The corrected value (9.19×10⁻⁵, not 7.2×10⁻⁵) makes the α² hypothesis less clean (1.726α², not 1.35α²).
+The following are measurements of the machine, each against a control or a declared set, each recomputed by the instrument named in Part V:
+
+1. **No confidently wrong answer** in <!--figure:evaluation-cases-->177 CLI cases<!--/figure-->, 28 of them refusals the machine was expected to make.
+2. **The language probe passes through the planner** (<!--figure:plans-probe-correct-->19<!--/figure--> of <!--figure:probe-questions-->20<!--/figure-->) and fails on the default path (<!--figure:probe-correct-->2<!--/figure-->), which is why making the planner the default is the first open item of the machine.
+3. **Every declared operation behaves as declared**: field surface, ordering, extremum, scale conversion and conversation each answer and refuse exactly the cases declared before the run.
+4. **Escalation is safe where it is shipped**: 462 of 568 on the construction ladder and <!--figure:normesc-correct-->467<!--/figure--> on the repaired norm ladder, both with 0 wrong; the program-text operation made safe by a second reading at a counted cost.
+5. **The engineering surface** answers 53 of 63 pre-registered questions and correctly refuses the other 10, with 0 wrong.
+6. **Addressing** is deterministic and exact on the Lean corpus, loses to text search when names are present, and holds when they are not.
+
+### 25.4 The Refuted Claims
+
+Kept because a refuted claim is a result: the fine-structure fit is worth less than one bit of evidence; the substrate cannot derive c (it is recovered identically, `substrate_c_is_circular`); "φ shears" is wrong (the Fibonacci matrix is a stretch); the archive's "d² is always even" (`exists_odd_d2`) and "Gray flips exactly half" (`gray_two_mul_eq`) are false; the accumulator is not a receipt of its history (`receipt_collision`); walking a polygon is Euler's totient, not a new primality test (`subCycles_eq_zero_iff_prime`); the product binding does not invert; the harmony and economics correspondences are not reproduced against their controls; the fine-structure constant's wobble signature is too weak to spend on; the address does not beat plain text; nine claims of the archive's scripts are proved false (§23).
+
+### 25.5 The Open Problems
+
+**Of the substrate and its physics:**
+
+1. **The mass residual (0.00919%).** The single most important open problem of the physics. If the residual is α² × (geometric factor), it would connect the UBP mass scale to QED. The corrected value (9.19×10⁻⁵, not 7.2×10⁻⁵) makes the α² hypothesis less clean (1.726α², not 1.35α²).
 
 2. **Null model uniqueness.** 33 out of 50,000 random transcendental combinations match m_e within 0.01%. The formula is motivated (structural integers, precision-stable) but not proven unique.
 
@@ -1077,113 +1689,265 @@ The following are empirical calibrations, internally consistent but not derived 
 
 4. **The TAX spectrum.** Integer TAX (n ≤ 1.778) and codeword TAX (n ≤ 1.235) give different ceilings. The model must commit before it can be tested.
 
-5. **Provenance.** The 275 unreachable physics entries need a coordinate for "of" — what a quantity is a measure *of* — not a new layer.
+5. **Provenance.** The 275 unreachable physics entries of §4.5 need a coordinate for "of" — what a quantity is a measure *of* — not a new layer.
 
-6. **The VOA state-field map Y(u, z).** The Moonshine module has graded dimensions but not the operator. The first step: mode operators uₙ for n = −1, 0, 1 on the 2A subalgebra.
+6. **The VOA beyond the Griess layer.** The state–field map Y(u, z) is now built on the 2A Sakuma algebra (`VOA.lean`), and Borcherds' commutator formula is proved to fail once the discarded modes are dropped; the rank-one Heisenberg vertex algebra is built over the exact rationals (`Heisenberg.lean`). What remains open is the Moonshine module itself: the operator on the 196,884-dimensional Griess algebra, of which these are the finite and the free-boson halves.
 
-7. **Algebraic independence of π and e.** Open problem. The transcendence degree of ℚ(π,e) over ℚ is 1 or 2; both branches are formalised conditionally.
+7. **Algebraic independence of π and e.** Open problem. The transcendence degree of ℚ(π,e) over ℚ is 1 or 2; both branches of its scalar shadow, whether π·e is transcendental, are formalised conditionally in `SeedRoles.lean` (§16.7).
 
 8. **The κ fit uncertainty.** Every downstream number is proportional to 1/κ. A ±5% fit uncertainty is a ±5% uncertainty on the cell length.
 
+**Of the machine** (the candidates named in [`STATUS.md`](../STATUS.md) §3.4, sharpest first):
+
+9. **Derivation across a declared union of relations.** The engineering surface derives inside one formula wheel at a time and so refuses hydraulic power from pressure and volume flow rate, which follows across two wheels.
+10. **Typed physical operators.** Monomial wheels cannot separate real, reactive and apparent power, nor dot from cross product.
+11. **The planner as the default path**, which needs a trace kind for the planner's own computations.
+12. **A held-out set nobody on the project wrote**, with labels from outside the registers — the test that separates reach from anticipation.
+13. **The register against the world**: a discrepancy report of register values against cited standard values (the iron atomic weight is the first row), never overwriting the register.
+14. **Typed discourse state** — *the one before that*, *both of them*, and a tie carried forward as a column rather than refused.
+15. **The Lean still in the archive.** The MOG cube's language half (about thirty files) is proved in the archive and not rebuilt here, and so are the unported parts of the observer-Y file (Appendix C). The five first-principles and projection files named here before Phase 61 are now rebuilt. Retrieving the language half would put the results quoted in §12 under this repository's own `lake build`.
+
 ---
 
-## 18. Conclusion and Open Questions
+## 26. Conclusion
 
-### 18.1 What the GLM Is
+### 26.1 What the GLM Is
 
-The GLM is a mathematically rigorous 24-dimensional substrate with exact rational arithmetic, where:
+The GLM is a mathematically rigorous 24-dimensional substrate with exact rational arithmetic, and a machine built on it, where:
 - The charge scale is exact (vertex count → e/12)
 - The velocity scale is exact (MONAD/13 → v/c = 0.339, but this is a definition, not a prediction)
 - The mass scale is internally consistent (0.009% error, cross-checks pass)
-- The photon as minimum-Tax octad is a mathematical fact on the Golay layer
-- The layer architecture is formally verified with 1,310+ Lean theorems
+- The photon as minimum-Tax octad is a mathematical fact on the Golay layer (`octad_min_tax`)
+- The layer architecture, the code's arithmetic and the machine's refusals are formally verified in a development of <!--figure:lean-files-->133 Lean files<!--/figure--> with no `sorry`
 - The encoding system predicts element properties at r > 0.90
+- The machine answers <!--figure:query-kinds-->24 query kinds<!--/figure--> over <!--figure:registers-->8 registers<!--/figure-->, re-derives every answer it gives, and refuses with a named reason where an answer would be a guess
 
-### 18.2 What the GLM Is Not
+### 26.2 What the GLM Is Not
 
 The GLM is **not** a theory that derives physical constants from first principles. The first-principles analysis proved this conclusively: the seeds (π, φ, e) are inputs, not outputs; the monomial producing 13 is a choice; and two of the three headline numerical agreements are within an order of magnitude of what an arbitrary target would have received.
 
-### 18.3 The Productive Reframing
+Nor is it, yet, a general reasoner. It derives narrowly, addresses well where names are absent and poorly where they are present, and answers open English only through declared frames. Those limits are measured, and the measurements are in §22.
+
+### 26.3 The Productive Reframing
 
 **Old:** "Can the substrate derive physical constants?" → No, by Buckingham's Π.
 
 **New:** "Can substrate ratios + SI-defined anchors predict measured constants?" → Partially yes. The substrate supplies dimensionless numbers; the SI supplies the dimensions. This is calibration, not derivation, and it is only as good as the empirical anchors.
 
-### 18.4 The Path Forward
+**And for the machine:** "Can an exact substrate carry a reasoner?" → It carries one that is never confidently wrong on what it has been asked, whose every answer is re-derivable, and whose every refusal names its reason — which is a narrower thing than a general reasoner and a rarer one.
 
-The most productive direction is not to chase exact derivations of constants the SI already defines. It is to build the **computational engine** — use the calibrated substrate as a geometric stability evaluator where TAX minimisation and NRCI maximisation serve as solver logic. The MOG cube language, the chemistry encoding, and the Leech lattice shortcut are all steps in this direction.
+### 26.4 The Path Forward
 
-### 18.5 The Honest Summary
+The most productive direction is not to chase exact derivations of constants the SI already defines. It is to keep building the **computational engine** — the calibrated substrate as a geometric stability evaluator, and the machine on it widened one declared, measured operation at a time. Derivation is the scarce faculty, and §25.5 items 9–14 are the next steps toward it; item 15 brings the rest of the archive's verified material under this repository's own build.
 
-The UBP has genuine mathematical structure that deserves honest acknowledgment. The dimensionless ratios pass null-model tests. The mass scale is internally consistent. The layer architecture is formally verified. The encoding system predicts real chemistry. These are real findings, not numerology.
+### 26.5 The Honest Summary
 
-But the gap between "the substrate has structure that correlates with physical reality" and "the substrate derives physical reality from first principles" remains the central tension of the programme. The studies assembled here map that gap precisely, and the formal verification ensures that nothing is claimed that cannot be checked.
+The UBP has genuine mathematical structure that deserves honest acknowledgment. The dimensionless ratios pass null-model tests. The mass scale is internally consistent. The layer architecture is formally verified. The encoding system predicts real chemistry. The machine built on it is exact, checkable and conservative. These are real findings, not numerology.
 
----
-
-## Appendix A: Source Document Index
-
-### Studies Directory (`studies/`)
-| Document | Core Subject |
-|---|---|
-| ANALOGY_LAYER_STUDY.md | A : B :: C : D query resolution |
-| DENOTATION_STUDY.md | What undimensioned names denote |
-| ECONOMICS_STUDY.md | The economic register |
-| ESCALATION_STUDY.md | Layer stack on 1,094 carriers |
-| GEOMETRIC_AMBIGUITY_STUDY.md | Six-fold Golay tie as computation |
-| GLM_COMPANION_STUDIES_AUDIT.md | Testing companion preprints |
-| GLM_STUDY_CATALOG_AUDIT.md | Testing empirical findings |
-| GLM_UNIFICATION_BLUEPRINT_AUDIT.md | Testing the specification |
-| HARMONY_STUDY.md | The harmonic register |
-| HEXCOLOUR_STUDY.md | Hexcolour address layer |
-| HIGHER_LATTICE_STUDY.md | 32D and 48D lattices |
-| INFINITE_VALUES_STUDY.md | Irrationals in the GLM |
-| INFORMATION_LOSS_STUDY.md | Layer boundaries and refinement |
-| LANGUAGE_STUDY.md | Question shapes as objects |
-| LEAN_ADDRESS_STUDY.md | Leech addresses for Lean declarations |
-| LLVQ_TABLE_STUDY.md | O(1) Leech quantiser lookup |
-| NAME_COORDINATE_STUDY.md | Resolution ceiling for names |
-| NOISE_EXPERIMENT_STUDY.md | Wobble as computation |
-| RECIPE_STUDY.md | Recipes as objects |
-| RELATIVE_MEASURE_PROPOSAL.md | Measure words as relative measures (proposal) |
-| RELATIVE_MEASURE_STUDY.md | Measure words as relative measures (measured) |
-
-### Source Material (`source_material/`)
-| Document | Core Subject |
-|---|---|
-| glm_unification_blueprint.md | Master specification for GLM-3+ |
-| glm_study_findings_catalog.md | Empirical findings catalogue |
-| cardinal_geometry_synthesis.md | Geometry, information loss, and infinite values |
-| DYNAMIC_CARRIER_STUDY.md | Dynamic carrier processes |
-| geometric_substrate_study.py | Geometric substrate experiments |
-
-### Light Studies (`light/`)
-| Directory | Core Subject |
-|---|---|
-| aristotle_01/ | EM scale calibration, Leech shortcut, lightspeed study, observer Y study |
-| EM_calibration_1/ | Speed of light calibration (11 versions) |
-| reports/ | 20-phase audit reports |
-
-### Data Object Studies (`data_object/`)
-| Directory | Core Subject |
-|---|---|
-| encoding_definition_attempt_03-08.26/ | Spatial arithmetic experiments |
-| encoding_definition_attempt_04.08.26/ | 24-bit Golay/Leech encoding + MOG spatial chemistry |
-| mog_cube_1/ | MOG cube encoding system and semantics |
-| FirstPrinciples/ | First-principles sub-study (37 findings) |
-| Projection/ | Projection sub-study (seed placement) |
-
-### Formal Verification (`RequestProject/` directories)
-| Location | Content |
-|---|---|
-| glm_lean/RequestProject/GLM/ | 43 files, 1,310 declarations, core GLM verification |
-| light/aristotle_01/RequestProject/ | Lightspeed, substrate constants, lattice shortcut |
-| data_object/FirstPrinciples/ | Distinction, distance, packing, seeds, fit capacity |
-| data_object/Projection/ | Layers, one-parameter, fibre, cheapest, cost, surprisal |
+But the gap between "the substrate has structure that correlates with physical reality" and "the substrate derives physical reality from first principles" remains the central tension of the programme, and the gap between addressing an answer and deriving one remains the central tension of the machine. The studies assembled here map both gaps precisely, and the formal verification ensures that nothing is claimed that cannot be checked.
 
 ---
 
-## Appendix B: Key Constants
+## Appendix A: Every Study
+
+Every document in `studies/`, grouped by the part of this paper it feeds. The
+verdict of each, in one line, is in [`DIGEST.md`](../DIGEST.md); this table
+says what each is *about* and where this paper uses it.
+
+**The substrate, the layers and the values** (Parts I–II)
+
+| study | subject | used in |
+|---|---|---|
+| [`INFORMATION_LOSS_STUDY.md`](INFORMATION_LOSS_STUDY.md) | what each layer boundary loses, pair by pair, and the theorems that loss is gain | §4 |
+| [`ESCALATION_STUDY.md`](ESCALATION_STUDY.md) | the layer stack on the registers' own carriers, and the resolution ceiling | §4.5 |
+| [`CUMULATIVITY_STUDY.md`](CUMULATIVITY_STUDY.md) | three layer families checked for refinement; declared non-edges witnessed | §20.3 |
+| [`COMBINER_STUDY.md`](COMBINER_STUDY.md) | why XOR is the only coordinatewise combiner on the substrate, and what a wider output buys | §2.2, §24 |
+| [`GEOMETRIC_AMBIGUITY_STUDY.md`](GEOMETRIC_AMBIGUITY_STUDY.md) | the six-fold Golay tie as a sextet, and collapse as a measurement | §3.4 |
+| [`TIE_BREAK_STUDY.md`](TIE_BREAK_STUDY.md) | Leech addresses that are not unique, and what a tie-break cannot touch | §21 |
+| [`INFINITE_VALUES_STUDY.md`](INFINITE_VALUES_STUDY.md) | irrationals as processes, and what the machine provably cannot do with them | §5 |
+| [`NOISE_EXPERIMENT_STUDY.md`](NOISE_EXPERIMENT_STUDY.md) | the wobble as computation: cascades, closed orbits, dither, error feedback | §5.3 |
+| [`NOW_RECEIPT_STUDY.md`](NOW_RECEIPT_STUDY.md) | the accumulator as the integral mod 1, and why it is not a receipt of history | §23, §25.1 |
+| [`WOBBLE_LANDSCAPE_STUDY.md`](WOBBLE_LANDSCAPE_STUDY.md) | is the fine-structure constant structurally distinctive? pre-registered; too weak | §23 |
+| [`HIGHER_LATTICE_STUDY.md`](HIGHER_LATTICE_STUDY.md) | the 32-dimensional Barnes–Wall and 48-dimensional ternary rungs | §8 |
+| [`CONSTRUCTION_LADDER_STUDY.md`](CONSTRUCTION_LADDER_STUDY.md) | the eleven-rung ladder from ℤ²⁴ to Λ₂₄, escalated | §20.1 |
+| [`NORM_FAMILY_STUDY.md`](NORM_FAMILY_STUDY.md) | the ladder indexed by minimum norm, the unsafe rung retired | §20.1 |
+| [`LLVQ_TABLE_STUDY.md`](LLVQ_TABLE_STUDY.md) | the quantiser's scan replaced by a class-table lookup | §17.3 |
+| [`ZERO_STORAGE_STUDY.md`](ZERO_STORAGE_STUDY.md) | generating the substrate's tables instead of storing them; the sieve's incompleteness | §23 |
+| [`ZERO_STORAGE_V5_STUDY.md`](ZERO_STORAGE_V5_STUDY.md) | the last stored table removed; Golay membership as twelve parity checks | §17.3 |
+| [`HEXCOLOUR_STUDY.md`](HEXCOLOUR_STUDY.md) | a hexcolour as a rendering of a carrier, and an address as not a measurement | §21 |
+
+**The audits of supplied material** (Parts III–IV)
+
+| study | subject | used in |
+|---|---|---|
+| [`GLM_UNIFICATION_BLUEPRINT_AUDIT.md`](GLM_UNIFICATION_BLUEPRINT_AUDIT.md) | every testable sentence of the blueprint given a verdict | Appendix C |
+| [`GLM_STUDY_CATALOG_AUDIT.md`](GLM_STUDY_CATALOG_AUDIT.md) | the external findings catalogue as a live claim ledger | Appendix C |
+| [`GLM_COMPANION_STUDIES_AUDIT.md`](GLM_COMPANION_STUDIES_AUDIT.md) | the two companion preprints, claim by claim | Appendix C |
+| [`SOURCE_SALVAGE_AUDIT.md`](SOURCE_SALVAGE_AUDIT.md) | eleven retrieved Lean files, every number recomputed | §14.1 |
+| [`SOURCE_SALVAGE_SECOND_PASS.md`](SOURCE_SALVAGE_SECOND_PASS.md) | eight more results retrieved | §14.1 |
+| [`RETRIEVED_LEAN_STUDY.md`](RETRIEVED_LEAN_STUDY.md) | 25 files of Lean from the archive; nine claims found false | §14.1, §23 |
+| [`ARCHIVE_DEEP_DIVE_STUDY.md`](ARCHIVE_DEEP_DIVE_STUDY.md) | two questions asked of the archive; both negative | §23 |
+| [`PCGS_STUDY.md`](PCGS_STUDY.md) | six systems admitted against six criteria | Appendix C |
+| [`GLM_Complete_Number_Theory_Evidence.md`](GLM_Complete_Number_Theory_Evidence.md) | the number-theoretic substrate: every table generated and tested | §2.1, §24 |
+
+**Registers and meaning** (§18)
+
+| study | subject | used in |
+|---|---|---|
+| [`ELEMENT_COMPLETION_STUDY.md`](ELEMENT_COMPLETION_STUDY.md) | sparse chemistry decided cell by cell | §18.2 |
+| [`ADMISSION_STUDY.md`](ADMISSION_STUDY.md) | the door a new name comes in by | §18.2 |
+| [`DENOTATION_STUDY.md`](DENOTATION_STUDY.md) | what the undimensioned names denote | §18.2 |
+| [`VAGUENESS_STUDY.md`](VAGUENESS_STUDY.md) | a router for vague `related_to` triples | §18.2 |
+| [`NAME_COORDINATE_STUDY.md`](NAME_COORDINATE_STUDY.md) | a coordinate for the name, and the control that decides what does the work | §18 |
+| [`RELATIVE_MEASURE_PROPOSAL.md`](RELATIVE_MEASURE_PROPOSAL.md) | measure words as relative measures (the proposal) | §18.1 |
+| [`RELATIVE_MEASURE_STUDY.md`](RELATIVE_MEASURE_STUDY.md) | the comparison-class register, measured | §18.1 |
+| [`CONJUGATE_STUDY.md`](CONJUGATE_STUDY.md) | cross-register analogy through an energy-conjugate table | §18.1 |
+| [`ANALOGY_LAYER_STUDY.md`](ANALOGY_LAYER_STUDY.md) | A : B :: C : D, and why a relation is not always a displacement | §22.1 |
+| [`HARMONY_STUDY.md`](HARMONY_STUDY.md) | the harmonic register; universality not reproduced | §23 |
+| [`ECONOMICS_STUDY.md`](ECONOMICS_STUDY.md) | the economic register; not reproduced | §23 |
+| [`RECIPE_STUDY.md`](RECIPE_STUDY.md) | a register regenerated from its description | §18.2 |
+| [`LANGUAGE_STUDY.md`](LANGUAGE_STUDY.md) | the question's shape as an object; parser branches deleted | §19 |
+
+**The answer surface and the conversation** (§19)
+
+| study | subject | used in |
+|---|---|---|
+| [`BLOCKERS_STUDY.md`](BLOCKERS_STUDY.md) | what blocks fuller reasoning; the pre-registered language probe | §22.2 |
+| [`PROBE_ORACLE_STUDY.md`](PROBE_ORACLE_STUDY.md) | what a refusal is evidence of | §22.2 |
+| [`FIELD_SURFACE_STUDY.md`](FIELD_SURFACE_STUDY.md) | one field of one row, over every declared table | §19 |
+| [`ORDERING_STUDY.md`](ORDERING_STUDY.md) | two readings ordered, or refused across scales | §19 |
+| [`COLUMN_EXTREMUM_STUDY.md`](COLUMN_EXTREMUM_STUDY.md) | a column folded, or refused for a hole or a second scale | §19 |
+| [`SCALE_CONVERSION_STUDY.md`](SCALE_CONVERSION_STUDY.md) | the declared table of conversions | §19 |
+| [`CONVERSATION_STUDY.md`](CONVERSATION_STUDY.md) | the turn that refers back, licensed rather than guessed | §19 |
+| [`SUPPLIED_PORTS_STUDY.md`](SUPPLIED_PORTS_STUDY.md) | role binding and the plan store shipped; the product binding refuted | §19, §23 |
+| [`SEMANTIC_PLAN_STUDY.md`](SEMANTIC_PLAN_STUDY.md) | typed question plans, pre-registered held-out sets | §19, §22 |
+| [`ENGINEERING_LANGUAGE_STUDY.md`](ENGINEERING_LANGUAGE_STUDY.md) | formula wheels, the Smith chart, analogy, delta–sigma | §19 |
+
+**Escalation, addressing and the loop** (§20–§21)
+
+| study | subject | used in |
+|---|---|---|
+| [`OPERATION_ESCALATION_STUDY.md`](OPERATION_ESCALATION_STUDY.md) | seven operations escalated; program text unsafe | §20.2 |
+| [`SECOND_READING_STUDY.md`](SECOND_READING_STUDY.md) | the second reading that makes program text safe | §20.2 |
+| [`QUERY_ESCALATION_STUDY.md`](QUERY_ESCALATION_STUDY.md) | escalation as a step of the query loop | §20.3 |
+| [`REVIEW_SWEEP_STUDY.md`](REVIEW_SWEEP_STUDY.md) | stalled results ranked before the next re-reading | §20.3 |
+| [`DEEP_HOLE_STUDY.md`](DEEP_HOLE_STUDY.md) | Niemeier deep holes classified from trajectories | §20.4 |
+| [`DEEP_HOLE_ESCALATION_STUDY.md`](DEEP_HOLE_ESCALATION_STUDY.md) | the same question read one layer up | §20.4 |
+| [`DEEP_HOLE_FAILURE_STUDY.md`](DEEP_HOLE_FAILURE_STUDY.md) | the four remaining failures, one mechanism | §20.4 |
+| [`LEAN_ADDRESS_STUDY.md`](LEAN_ADDRESS_STUDY.md) | Leech addresses for the Lean declarations | §21 |
+| [`ADDRESS_RETRIEVAL_STUDY.md`](ADDRESS_RETRIEVAL_STUDY.md) | retrieval by address, beaten by plain text | §21, §23 |
+| [`ANONYMOUS_REGISTER_STUDY.md`](ANONYMOUS_REGISTER_STUDY.md) | take the names away and the structural address holds | §21 |
+| [`STACK_RELAY_STUDY.md`](STACK_RELAY_STUDY.md) | the faculties as a stack with a stated gate | §21 |
+| [`CORPUS_ADDRESS_STUDY.md`](CORPUS_ADDRESS_STUDY.md) | the repository's own documents, addressed | §21 |
+| [`SEARCH_LOOP_STUDY.md`](SEARCH_LOOP_STUDY.md) | a procedure retrieved the way a number is | §21 |
+| [`CONTROLLER_STUDY.md`](CONTROLLER_STUDY.md) | propose, check, refuse — six heuristics on 24 tasks | §21 |
+| [`REVERSE_CALL_PLANNER_STUDY.md`](REVERSE_CALL_PLANNER_STUDY.md) | the supplied planner, sandboxed and not promoted | §23 |
+| [`ITERATION_COST_STUDY.md`](ITERATION_COST_STUDY.md) | what a round costs, and the cache that stops it repeating work | §24 |
+| [`GLM_ACADEMIC_PAPER.md`](GLM_ACADEMIC_PAPER.md) | this paper | — |
+
+---
+
+## Appendix B: The Lean Development by Theme
+
+Every file of `RequestProject/GLM/`, grouped by what it is about. The
+statements are in the files; §14.3 names the headline theorems.
+
+| theme | files |
+|---|---|
+| foundations and the core's generations | `Foundations`, `Gen2`, `Gen3`, `Computable`, `Permutation`, `Reachable` |
+| constants, calibration, physics | `Constants`, `Calibration`, `Lightspeed`, `AlignmentPoints`, `ReadQuantum`, `StepCost`, `Stability`, `TaxConservation`, `DimensionCarrier`, `MeasureView`, `Comparative`, `Denotation` |
+| layers and escalation | `Layers`, `LayerChain`, `Cumulative`, `CumulativityRule`, `Tower`, `Stack`, `Escalation`, `EscalationLoop`, `Irrational`, `ConstructionLadder`, `ScaledLadder`, `NormFamily`, `HullExpansion`, `SecondReading` |
+| the Golay code and its decoding | `GolayMOG`, `Golay/Code`, `Golay/Census`, `Golay/Cesaro`, `Golay/Dynamics`, `Golay/Sextet`, `Golay/CubeMirror`, `GolayBoundary`, `GolayWeightEnum`, `Steiner`, `LDP`, `Relaxation`, `Endianness`, `TieBreak`, `Combiner`, `Facets`, `ZeroStorage`, `ZeroStorageV5`, `LLVQTable` |
+| the Leech lattice, higher lattices and the algebra above | `Shortcut/Substrate`, `Shortcut/Golay`, `Shortcut/GolayWeights`, `Shortcut/GrayCode`, `Shortcut/Leech`, `Shortcut/Decoder`, `Shortcut/FactorMap`, `Shortcut/Shortcut`, `GrayJump`, `HigherLattices`, `ShellSigma`, `Niemeier`, `DeepHoleClassifier`, `DeepHoleEscalation`, `DeepHoleFailure`, `Extraspecial`, `Sakuma`, `VOA`, `Heisenberg`, `Superposition`, `ModeAlgebra` |
+| the MOG cube (geometric half) | `Cube/Surface`, `Cube/Tax`, `Cube/Stabiliser`, `Cube/Three`, `Cube/HexTiles` |
+| values, streams and number theory | `DeltaSigma`, `Sturmian`, `Mantissa`, `Wobble`, `WobbleLandscape`, `Feedback`, `Cascade`, `NowReceipt`, `Transcendental`, `Reversible`, `LogBucket`, `Harmony`, `Totient`, `SpatialArithmetic`, `GridTension` |
+| first principles and projection | `Distinction`, `Packing`, `FitCapacity`, `SeedLayers`, `SeedRoles`, `Triad`, `TriadCensus`, `TriadChance`, `Platonic`, `PCGS` |
+| semantics and language | `Semantics/Grounding`, `Semantics/Meaning`, `Question`, `QuestionNested`, `Recipe`, `Admission`, `Completion`, `Conjugate`, `Vagueness`, `NameCoordinate`, `Corpus` |
+| the loop, search and addressing | `ReasoningLoop`, `SearchLoop`, `Controller`, `ConditionalInduction`, `Address`, `Retrieval`, `Relay`, `Anonymous` |
+| the answer surface and the conversation | `FieldSurface`, `ProbeOracle`, `CoordinateOrder`, `ColumnExtremum`, `ScaleConversion`, `Conversation`, `RoleBinding`, `PlanStore`, `SemanticPlan`, `EngineeringWheels` |
+
+---
+
+## Appendix C: The Supplied Material, and What Is Still Left in It
+
+This appendix is the answer to *has anything useful been left behind?* For each
+part of the supplied archive and each other supplied document it says where the
+material went. "Retrieved" means its content is in the package or the Lean
+development and is rebuilt and tested here; "audited" means its claims were
+restated and given verdicts; "left" means it has not been brought in, with the
+reason where one was recorded.
+
+### C.1 The archive, `source_material/GLM-main.zip`
+
+| part | what it is | status | where |
+|---|---|---|---|
+| `glm_lean/` | the first Lean-backed GLM (`GLM.lean`, `GLM2.lean`, `GLM3.lean`) | retrieved whole | `Foundations.lean`, `Gen2.lean`, `Gen3.lean` |
+| `GLM.py`, `README.md` (archive root) | the archive's entry point and overview | superseded by `overlay/GLM.py` and the repository's own documents | [`README.md`](../README.md) |
+| `glm_machine/`, `glm_3.1/`, `glm_universal/` | the earlier machine scripts (`glm_machine` is GLM v37) and the earlier package | folded into the package in the early phases — `glm_machine` into the runtime layer — with the frame bridge and state migration in `overlay/glm_universal/migration/` | [`archive/PACKAGE_README_ARCHIVE.md`](../archive/PACKAGE_README_ARCHIVE.md), [`archive/MASTER_PLAN_ARCHIVE.md`](../archive/MASTER_PLAN_ARCHIVE.md) |
+| `light/aristotle_01/` | EM scale calibration, the lightspeed chain, the observer-Y study, the shortcut | retrieved: `Lightspeed.lean`, the `Shortcut/` files, `ReadQuantum.lean`, and the constants and mass-scale bounds of `SubstrateConstants.lean` in `AlignmentPoints.lean` and `FitCapacity.lean`; **left in part**: `ObserverY.lean` — its tax, NRCI and regime results are rebuilt under other names in `Constants.lean` and `ReadQuantum.lean`, but its minimal-vector tax classes (classes A and B coherent, class C transitional), its loop-closure and history-additivity lemmas and its calibrated regime separation are not | §9–§10, §13.4, [`SOURCE_SALVAGE_AUDIT.md`](SOURCE_SALVAGE_AUDIT.md) |
+| `light/reports/`, `light/scripts/`, `light/source_documents/`, `light/worklogs/` | the twenty-phase floating-point audit of the lightspeed claims, its synthesis and PDF report, and the working notes behind it | summarised: its structural closures are §10.5, its calibrated core §10.3 and §25.2, its open problems §25.5 items 1–3; the scripts are floating-point and are not re-run, and the source documents are working notes rather than claims | §10, §25 |
+| `light/EM_calibration_1/` | the speed-of-light calibration, eleven versions | audited; its surviving arithmetic is in `Calibration.lean` | §10, [`SOURCE_SALVAGE_AUDIT.md`](SOURCE_SALVAGE_AUDIT.md) |
+| `leech_lattice/` | the Leech lattice shortcut | retrieved whole | `Shortcut/`, `GrayJump.lean`, §13 |
+| `data_object/encoding_definition_attempt_03-08.26/` | spatial arithmetic experiments | summarised (§11) from the archive's own reports; its one Lean file retrieved whole in Phase 61 as `GolayMOG.lean` — lossless Gray identity addresses, the MOG and Leech address tables, and five negative results | §11.7 |
+| `data_object/encoding_definition_attempt_04.08.26/` | the 24-bit Golay/Leech chemistry encoding and MOG spatial arithmetic | summarised in §11 from the archive's own reports; its correlations are the archive's figures and are not re-run here | §11 |
+| `data_object/FirstPrinciples/` | the first-principles sub-study | retrieved: `Packing.lean` (with `Distance.lean`), `FitCapacity.lean`, `Triad.lean`, and in Phase 61 `Distinction.lean` (as `Distinction.lean`) and `Seeds.lean` (into `SeedRoles.lean`, with the irrationality of e proved rather than assumed); not taken: `Findings.lean`, an index whose two bridge lemmas restate results already rebuilt | §2.1, §15 |
+| `data_object/Projection/` | the projection sub-study | retrieved: `StepCost.lean` (cost), `SeedLayers.lean` (layers and most of the one-parameter file), the surprisal ledger in `FitCapacity.lean`; and in Phase 61 `Fibre.lean`, `Cheapest.lean`, `Independence.lean` and the rest of `OneParameter.lean` (the SL(2,ℝ) trichotomy, the period and flow fibres) into `SeedRoles.lean` | §16 |
+| `data_object/` (top level) | the encoding specification, the element and molecule notes, the test ledger and calibration log of the training iterations, the training benchmarks, a MOG experiment note, a 256-dimensional Barnes–Wall note, and the scripts and JSON results behind them | summarised: the benchmarks' negative figures are recorded in §11.7; the specification and ledgers are the provenance of §11; **not taken**: the Barnes–Wall note, whose central claim — that a SHA-256 fingerprint is a physical coordinate — is the reading of a hash as meaning that directive D3 forbids | §11 |
+| `data_object/mog_cube_1/` | the MOG cube: encoding and a verified micro-language, 43 Lean files | retrieved: the geometric half (`Cube/*`, `Golay/CubeMirror.lean`, `GolayWeightEnum.lean`, `Steiner.lean`); **left**: the language half — the integer cube and measured words, sentences, paragraphs, discourse and dialogue, cube thought, relative clauses and quantifiers, causation, continuous quantities, learning, scaling, Zipf and the capstone — about thirty files, the largest body of verified material not rebuilt here | §12, §25.5 item 15 |
+| `GMHGL/` | `ubp_unified_v5.py`, `spatial_arithmetic.py`, `geometry.py`, `ldp_complete_mapping.md`, `ldp_nrci.py`, `refined_nrci.py`, `spatial_totient_kinetics.py`, the `tgic_*` scripts, the EM analog engine, the EML ALU, the genesis boot, `value_geometry.py` | retrieved where a claim survives separation from its script: `LDP.lean`, `Totient.lean`, `SpatialArithmetic.lean`, `Triad.lean`, `Shortcut/Substrate.lean`; the simulation harnesses and tabulations deliberately not, with the reasons recorded | [`RETRIEVED_LEAN_STUDY.md`](RETRIEVED_LEAN_STUDY.md) §4 |
+| `arc_agi_15/` (and 16, 17) | the ARC-era loop and grid heuristics | the architectural claim retrieved as `ReasoningLoop.lean`, the grid metrics as `GridTension.lean`, the conditional lobe as `ConditionalInduction.lean`; the ARC-specific heuristics deliberately not | [`SEARCH_LOOP_STUDY.md`](SEARCH_LOOP_STUDY.md), [`RETRIEVED_LEAN_STUDY.md`](RETRIEVED_LEAN_STUDY.md) §4 |
+| `long_term_memory/` | a knowledge note, training data and two large knowledge bases in JSON | **left**: no study reads it; as unverified text it could at most seed a register through the admission door of §18.2, never be quoted as fact | — |
+
+### C.2 The other supplied documents, `source_material/`
+
+| document | status | where |
+|---|---|---|
+| `glm_unification_blueprint.md` | audited sentence by sentence | [`GLM_UNIFICATION_BLUEPRINT_AUDIT.md`](GLM_UNIFICATION_BLUEPRINT_AUDIT.md) |
+| `glm_study_findings_catalog.md` | audited as a live claim ledger | [`GLM_STUDY_CATALOG_AUDIT.md`](GLM_STUDY_CATALOG_AUDIT.md) |
+| `cardinal_geometry_synthesis.md`, `DYNAMIC_CARRIER_STUDY.md`, `geometric_substrate_study.py` | built into the value layer and the dynamic carriers | §4–§5, [`INFINITE_VALUES_STUDY.md`](INFINITE_VALUES_STUDY.md) |
+| `GLM_Iteration_Study (1).pdf`, `GLM_Generators_Containers (2).pdf` | the two companion preprints — the float-drift demonstration and the code-to-lattice survey; the three containers of a constant — audited claim by claim | §2.2, §3.3, §5.4, [`GLM_COMPANION_STUDIES_AUDIT.md`](GLM_COMPANION_STUDIES_AUDIT.md) |
+| `Golay codes and Hadamard matrices.txt` | the constructions the ladder is generated from | [`CONSTRUCTION_LADDER_STUDY.md`](CONSTRUCTION_LADDER_STUDY.md) |
+| `glm_zero_storage_substrate_v3.txt` | generated rather than stored tables | [`ZERO_STORAGE_STUDY.md`](ZERO_STORAGE_STUDY.md), [`ZERO_STORAGE_V5_STUDY.md`](ZERO_STORAGE_V5_STUDY.md) |
+| `pcgs_glm_integration.py`, `pcgs_wider_landscape.py`, `pcgs_wider_landscape_v4.txt` | six systems admitted | [`PCGS_STUDY.md`](PCGS_STUDY.md) |
+| `glm_vision_experiments_v14.py` | the consolidated "self-inspecting agent" of fourteen vision experiments (filter, understand, cross-domain) | **left**: filed in Phase 43 and not yet run against the package or given a study | — |
+| `glm_reverse_call_planner_v2.py`, `REVERSE_CALL_PLANNER_README.md` | sandboxed, measured, not promoted | [`REVERSE_CALL_PLANNER_STUDY.md`](REVERSE_CALL_PLANNER_STUDY.md) |
+| `HISTORY_RECORDED_NOW_*.md`, `history_recorded_now.py` | the claim decided: the identity holds, the reading does not | [`NOW_RECEIPT_STUDY.md`](NOW_RECEIPT_STUDY.md) |
+| `conversation_experiment/` | eight scripts run unmodified; two claims refuted; four pieces taken | [`CONVERSATION_STUDY.md`](CONVERSATION_STUDY.md), [`SUPPLIED_PORTS_STUDY.md`](SUPPLIED_PORTS_STUDY.md) |
+| `GLM_IMPROVEMENT_ROADMAP.md` | P1 and P2 taken (typed plans, held-out evaluation); P3–P7 stand as candidates | [`SEMANTIC_PLAN_STUDY.md`](SEMANTIC_PLAN_STUDY.md), §25.5 |
+| `formula_wheel/` | the engineering-language session record | [`ENGINEERING_LANGUAGE_STUDY.md`](ENGINEERING_LANGUAGE_STUDY.md) |
+| `ToDo_01.txt` | the owner's working list; its items are carried in the phase record | [`MASTER_PLAN.md`](../MASTER_PLAN.md) |
+
+### C.3 What is still worth bringing in
+
+Phase 61 retrieved the small bodies of verified material the Phase 60 ledger
+named: the first-principles and projection files and the archive's
+`GolayMOG.lean` are now under this repository's build (§14.1). Read against
+the whole of C.1 and C.2, what remains that would add to the system rather
+than duplicate it is:
+
+1. **The MOG cube's language half** — about thirty files, a verified
+   micro-language whose dialogue never contradicts itself and whose law table
+   is *learned* rather than written. It is the nearest thing in the archive to
+   the typed discourse state that §25.5 item 14 asks for, and it is already
+   proved; it is the one large body of archive Lean still outside this build.
+2. **The rest of `ObserverY.lean`** — the tax classes of the Leech minimal
+   vectors and the calibrated regime separation. Small, and it would complete
+   §13.4.
+3. **The vision experiments' self-inspection loop** — not yet run against the
+   package; small enough for one round, and it would say whether the loop's
+   filter–understand–check trinity adds anything the controller of §21 does not
+   already do.
+4. **The improvement roadmap's P3–P7** — typed compositional derivation,
+   typed multi-turn state, external-truth validation, a program-text register,
+   and provenance-first sparse chemistry — which line up with §25.5 items 9–14.
+
+Everything else in the archive is either retrieved, summarised with its
+figures attributed, or deliberately not taken with the reason in the row that
+names it.
+
+---
+
+## Appendix D: Key Constants
 
 | Symbol | Definition | Value | Source |
 |---|---|---|---|
@@ -1198,9 +1962,12 @@ But the gap between "the substrate has structure that correlates with physical r
 | ℓ_cell | 27·c·τ | 16.9996 μm | Cell length |
 | TAX(octad) | 8Y + 1 | 3.117403 | Minimum codeword tax |
 
+The package carries Y as an exact 15-digit rational, never a float; the
+decimals above are renderings of it.
+
 ---
 
-## Appendix C: Glossary
+## Appendix E: Glossary
 
 - **Carrier:** A 24-tuple of exact rationals (q₀, ..., q₂₃) ∈ ℚ²⁴ — the fundamental data unit
 - **MOG:** Miracle Octad Generator — the 6×4 grid encoding the Golay code's structure
@@ -1220,3 +1987,12 @@ But the gap between "the substrate has structure that correlates with physical r
 - **Escalation:** The process of moving to a higher layer when the current one is insufficient
 - **Refinement:** L' refines L if L' distinguishes at least as much as L
 - **Deep hole:** A point at maximum distance from the nearest lattice point
+- **Register:** A declared table of carriers of one kind (physics, chemistry, molecules, mathematics, lexicon, spatial, harmonics, economics)
+- **Query kind:** One of the declared shapes a question can take; `report` dispatches the report subjects
+- **Licensing:** Admitting a candidate reading only when the query it produces solves; used by the conversation layer and the planner
+- **Named refusal:** A refusal that states which of a declared set of reasons applies
+- **Faculty:** One of derivation, addressing and refusal — the three things a round can move
+- **Tier 0:** The question, verdict and deciding figure every current-state document opens with; checked against the document's own body
+- **Inline figure:** A number written between figure markers, emitted by the code that measures it
+- **Sign-off ledger:** The record of which tests and instruments are signed against a digest of everything they depend on
+- **Sandbox:** Where a component not yet relied on lives, with a computed promotion checklist

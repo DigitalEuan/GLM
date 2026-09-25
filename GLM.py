@@ -291,13 +291,42 @@ def _print_solution_summary(out: Out, idx: int,
 def _batch_query(out: Out, session: GeometricSession, query: str,
                  domain: Optional[str], columns: Sequence[int],
                  fmt: str, verify: bool,
-                 exactness_check: bool) -> Tuple[int, Optional[ThreeColumnTrace]]:
-    """Run one batch query; print to ``out``; return ``(exit_code, trace)``."""
+                 exactness_check: bool,
+                 plan: bool = False, eng: bool = False
+                 ) -> Tuple[int, Optional[ThreeColumnTrace]]:
+    """Run one batch query; print to ``out``; return ``(exit_code, trace)``.
+
+    With ``plan`` the question goes through the typed planner
+    (:mod:`glm_universal.runtime.semantic_plan`) first; a planned answer that
+    no three-column trace describes -- an exact computation of the planner's
+    own -- is printed with the plan that licensed it instead of a trace.
+
+    With ``eng`` the question goes through the engineering surface
+    (:mod:`glm_universal.engineering.speak`) first, and through the planner
+    when no engineering frame reads it; an engineering answer is printed with
+    the frame that produced it and its working.
+    """
     try:
-        solution = session.ask(query, domain=domain)
+        if eng:
+            solution = session.ask_engineering(query)
+        else:
+            solution = (session.ask_planned(query) if plan
+                        else session.ask(query, domain=domain))
     except QueryError as exc:
         out.line(f"QUERY   {query}")
         out.line(f"malformed: {exc}")
+        return 1, None
+
+    if eng and "engineering" in solution.payload:
+        out.line(f"QUERY   {query}")
+        if solution.ok:
+            out.line(f"FRAME   {solution.payload['engineering']} "
+                     f"({solution.payload.get('faculty', '')})")
+            out.line(f"ANSWER  {solution.answer}")
+            for step in solution.steps:
+                out.line(f"  step  {step.language}")
+            return 0, None
+        out.line(f"REFUSED {solution.error or ''}")
         return 1, None
 
     trace: Optional[ThreeColumnTrace] = None
@@ -305,9 +334,27 @@ def _batch_query(out: Out, session: GeometricSession, query: str,
         try:
             trace = build_trace(solution)
         except TCTError as exc:
-            out.line(f"QUERY   {query}")
-            out.line(f"trace error: {exc}")
-            return 1, None
+            if plan and solution.expected.get("plan_kind") == "query":
+                # The planner read the question as one of the session's own
+                # queries: the grammar's answer to that compiled query
+                # carries the three-column trace the planner's does not.
+                compiled = session.ask(solution.expected["plan"])
+                if compiled.ok:
+                    try:
+                        trace = build_trace(compiled)
+                    except TCTError:
+                        trace = None
+            if trace is not None:
+                solution = compiled
+            elif (plan or eng) and "plan" in solution.expected:
+                out.line(f"QUERY   {query}")
+                out.line(f"PLAN    {solution.expected['plan']}")
+                out.line(f"ANSWER  {solution.answer}")
+                return 0, None
+            else:
+                out.line(f"QUERY   {query}")
+                out.line(f"trace error: {exc}")
+                return 1, None
     else:
         out.line(f"QUERY   {query}")
         out.line(f"UNSOLVED        {solution.error or ''}")
@@ -564,6 +611,16 @@ def build_parser() -> argparse.ArgumentParser:
                    help="list the available registers and exit")
     p.add_argument("--interactive", action="store_true",
                    help="enter the interactive REPL (read from --input)")
+    p.add_argument("--plan", action="store_true",
+                   help="read each question through the typed planner "
+                        "(semantic_plan) before the grammar; the default "
+                        "since Phase 63, kept so older invocations still run")
+    p.add_argument("--grammar", action="store_true",
+                   help="ask the grammar alone, without the typed planner")
+    p.add_argument("--eng", action="store_true",
+                   help="read each question through the engineering surface "
+                        "(formula wheels, Smith chart, analogies, "
+                        "delta-sigma), then the typed planner")
     p.add_argument("--no-banner", action="store_true",
                    help="suppress the interactive banner")
     p.add_argument("--input", metavar="PATH", default=None,
@@ -656,7 +713,8 @@ def main(argv: Optional[Sequence[str]] = None,
     for q in queries:
         code, trace = _batch_query(
             out_stream, session, q, args.domain, columns, args.format,
-            args.verify_tct, args.check_script_exactness)
+            args.verify_tct, args.check_script_exactness,
+            plan=_reads_through_planner(args), eng=args.eng)
         if trace is not None:
             traces.append(trace)
         worst = max(worst, code)
@@ -676,6 +734,21 @@ def main(argv: Optional[Sequence[str]] = None,
             _write_export(target, traces[-1], traces)
 
     return worst
+
+
+def _reads_through_planner(args: argparse.Namespace) -> bool:
+    """Whether a batch question is read by the typed planner first.
+
+    The planner is the default since Phase 63 (item R1 of
+    ``studies/SUBSTRATE_NATIVE_COGNITION_STUDY.md``): on the contract cases
+    it changes no outcome, and it reaches the certificate, recognition,
+    dimensional and interval frames.  ``--grammar`` asks the grammar alone,
+    and so does ``--domain``, which only the grammar honours.  ``--plan`` is
+    kept, and now only states the default.
+    """
+    if args.plan:
+        return True
+    return not args.grammar and args.domain is None
 
 
 def banner_suppressed(args: argparse.Namespace) -> bool:

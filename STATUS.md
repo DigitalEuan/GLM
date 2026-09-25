@@ -35,7 +35,85 @@ without recomputing anything by hand. The record of earlier rounds is in
 [`ITERATE.md`](ITERATE.md).*
 
 **Starting a new round? Read [`ITERATE.md`](ITERATE.md), then §3.4, "Named for
-the next round", before anything else.** The round just closed **moved the
+the next round", before anything else.**
+
+**The round just closed (Phase 63) moved the target**: under directive
+**D15** it moved **derivation** and **address**, and sharpened **refusal**. It
+was round two of
+[`SUBSTRATE_NATIVE_COGNITION_STUDY.md`](studies/SUBSTRATE_NATIVE_COGNITION_STUDY.md):
+three near misses of the first round were looked at again and refined into
+planner frames — interval consistency, rational recognition with a uniqueness
+certificate, and dimensional derivation — which answer 26 of 33 declared
+questions and refuse the other 7 as declared, with 0 wrong where the grammar
+answers none. The typed planner is now the default path of `GLM.py`
+(`--grammar` asks the grammar alone); the 177 contract cases give the same
+outcomes either way. A language model as parser (G1) is declined for good.
+[`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 63 is the record.
+
+**An earlier round (Phase 60) was a documentation round** taken at the
+owner's request: it moved none of **derivation**, **address** or **refusal**
+(D15). [`GLM_ACADEMIC_PAPER.md`](studies/GLM_ACADEMIC_PAPER.md) now covers
+the system as a whole (the machine, addressing, measured capability, negative
+results, method, and a ledger of the supplied material taken and left), and
+[`GLM_Complete_Number_Theory_Evidence.md`](studies/GLM_Complete_Number_Theory_Evidence.md)
+gained §15–§21. It also resynced the overlay Lean mirror, which Phase 59 had
+left one file short. [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 60 is the
+record.
+
+**The round before it (Phase 59) moved the target**: under directive
+**D15** it moved **derivation** and **refusal**, with five **address**
+answers and no **table**. It took the supplied formula-wheel session record
+(`source_material/formula_wheel/`) rather than a candidate of §3.4, because
+the request was to have the GLM reason in electrical and mechanical terms and
+the record's own first priority is to run its studies against the GLM's
+substrate. `glm_universal.engineering` reads formula wheels as rational spans
+with certificates, the Smith chart over Gaussian rationals, the force-voltage
+and force-current analogies as maps on laws, and the delta-sigma loop by
+theorem, and `engineering/speak.py` lets the machine be asked in words
+(`GLM.py --eng`, `GeometricSession.ask_engineering`). On 63 questions
+committed before any of that code, both existing paths refused all 53
+answerable ones; through the surface it answers **53** correctly and refuses
+**10** correctly with **0** wrong, and it reads none of the 374 questions the
+machine already answers. The register agrees with the corrected formula study
+on all 41 cases at SI7 and at EXT10, the force-voltage analogy preserves 9 of
+9 laws each way, and `RequestProject/GLM/EngineeringWheels.lean` proves the
+licensing rules (span membership, translation, the Smith disc, the periods of
+the bitstream). [`studies/ENGINEERING_LANGUAGE_STUDY.md`](studies/ENGINEERING_LANGUAGE_STUDY.md)
+is the study and [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 59 the record.
+
+**The round before that (Phase 58) moved the target**: under directive
+**D15** it moved **derivation** and **refusal**, and most of what it gained
+is **table** — coverage of operations the machine already had. It took the
+supplied roadmap (`source_material/GLM_IMPROVEMENT_ROADMAP.md`) rather than a
+candidate of §3.4, because the measurement the roadmap quotes still held: the
+frozen language probe, asked through `GeometricSession.ask`, scored two
+correct of twenty although the answers to most of it were held behind the
+formal grammar. `glm_universal.runtime.semantic_plan` reads a question into
+typed plans over the operations the session already has — each slot grounded
+against what the registers hold, each plan run, and an answer given only when
+every licensed plan agrees — and adds two things that compute rather than
+route: exact integer arithmetic and conversion between units whose relation
+is a definition. Through it the frozen probe scores
+**<!--figure:plans-probe-correct-->19<!--/figure-->** correct and
+**<!--figure:plans-probe-wrong-->0<!--/figure-->** wrong, passing the mark
+declared before the probe was first run; on the
+**<!--figure:plans-held-total-->110<!--/figure-->** held-out questions
+committed before the planner existed it answers
+**<!--figure:plans-held-correct-->86<!--/figure-->** correctly and refuses
+**<!--figure:plans-held-correct-refusal-->22<!--/figure-->** correctly with
+**<!--figure:plans-held-wrong-->1<!--/figure-->** wrong — a register holding
+iron's atomic weight to four figures where the world uses five, recorded as a
+data-truth finding rather than edited away. Two readings that disagree are
+refused, not chosen between: *does energy have the same dimensions as
+torque?* is yes in the SI projection and no in the extended vector, and the
+answer names both. It is opt-in (`GLM.py --plan`,
+`GeometricSession.ask_planned`), so the 177-case contract set is untouched.
+`RequestProject/GLM/SemanticPlan.lean` proves the licensing rule order-free,
+sound and conservative over the grammar, and refutes the first-licensed rule.
+[`studies/SEMANTIC_PLAN_STUDY.md`](studies/SEMANTIC_PLAN_STUDY.md) is the study
+and [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 58 the record.
+
+The round before these (Phase 55) **moved the
 target**: under directive **D15** it moved **refusal**, and widened
 **derivation** to a fold over rows of two tables at once. It took candidate 1
 of §3.4 — the scales neither operation could bridge — and wrote them down.
@@ -184,11 +262,11 @@ PYTHONPATH=. python3 -m glm_universal.figures --write
 
 | instrument | command | result |
 |---|---|---|
-| test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->4,180 tests across 105 of the 106 test files, 16,288 subtests, outside the document check<!--/figure-->**, zero failures |
+| test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->4,267 tests across 108 of the 109 test files, 16,276 subtests, outside the document check<!--/figure-->**, zero failures |
 | end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->177<!--/figure--> / <!--figure:evaluation-case-count-->177<!--/figure-->** — 149 answered, 28 refused as expected (all `boundary`, no `gap`), 0 unexpected refusals, 0 confidently wrong, 0 errored |
 | benchmark suites | `python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites, every suite above its baseline |
 | capability probes | `python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 errored, 0 surprises |
-| Lean development | `lake build` (repository root) | <!--figure:lean-files-->126 Lean files<!--/figure-->, **0 `sorry`** |
+| Lean development | `lake build` (repository root) | <!--figure:lean-files-->133 Lean files<!--/figure-->, **0 `sorry`** |
 | figures | `python3 -m glm_universal.figures --write` | regenerates `overlay/FIGURES.md`; every documented count |
 | corpus | `python3 -m glm_universal.corpus --check` | the tier contract, the archive partition, the coverage claim of `ENTRY.md`, every generated block and every derived cache — **current**, no drift |
 | construction ladder | `python3 -m glm_universal.tools ladder` | **462 / 568** queries named correctly with **0** wrong on the eleven-rung ladder, against **327** for the note's five rungs and **283** for the best single rung |
@@ -197,11 +275,13 @@ PYTHONPATH=. python3 -m glm_universal.figures --write
 | second reading | `python3 -m glm_universal.tools second-reading` | **<!--figure:secondread-adopted-->1<!--/figure-->** of **<!--figure:secondread-configurations-->6<!--/figure-->** declared guard configurations is adopted — `<!--figure:secondread-shipped-->strict+margin<!--/figure-->` takes the program-text operation to **<!--figure:secondread-program-correct-->366<!--/figure-->** correct and **<!--figure:secondread-program-wrong-->0<!--/figure-->** wrong, giving up **<!--figure:secondread-given-up-->150<!--/figure-->** answers where matched refusal removes **<!--figure:secondread-matched-removes-->2<!--/figure-->** of the thirteen |
 | field surface | `python3 -m glm_universal.tools fieldsurface` | the surface answers **<!--figure:fieldsurface-moved-->9<!--/figure-->** of the **<!--figure:fieldsurface-held-->10<!--/figure-->** questions the oracle found held and unreachable — exactly the **<!--figure:fieldsurface-predicted-->9<!--/figure-->** declared reachable before the run — taking the probe from **<!--figure:fieldsurface-parsed-before-->6<!--/figure-->** parsed to **<!--figure:fieldsurface-parsed-after-->15<!--/figure-->**; it is `table`, not reasoning |
 | ordering operation | `python3 -m glm_universal.tools ordering` | the operation answers **<!--figure:ordering-answered-->4<!--/figure-->** of the **<!--figure:ordering-declared-count-->7<!--/figure-->** comparisons declared before the run and refuses **<!--figure:ordering-refused-->3<!--/figure-->** under **<!--figure:ordering-reasons-->3<!--/figure-->** named reasons — **<!--figure:ordering-as-declared-->7<!--/figure-->** of **<!--figure:ordering-declared-count-->7<!--/figure-->** as declared — and closes the last held-and-unreachable probe question, taking it to **<!--figure:ordering-parsed-after-->16<!--/figure-->** parsed |
+| typed planner | `python3 -m glm_universal.tools plans` | the frozen probe through the planner scores **<!--figure:plans-probe-correct-->19<!--/figure-->** correct, **<!--figure:plans-probe-wrong-->0<!--/figure-->** wrong, **<!--figure:plans-probe-refused-->1<!--/figure-->** refused; **<!--figure:plans-held-correct-->86<!--/figure-->** correct and **<!--figure:plans-held-correct-refusal-->22<!--/figure-->** correct refusals of **<!--figure:plans-held-total-->110<!--/figure-->** held-out questions with **<!--figure:plans-held-wrong-->1<!--/figure-->** wrong; the hostile stress set **<!--figure:plans-stress-wrong-->0<!--/figure-->** wrong |
 | extremum operation | `python3 -m glm_universal.tools extremum` | the operation folds **<!--figure:extremum-answered-->4<!--/figure-->** of the **<!--figure:extremum-declared-count-->8<!--/figure-->** columns declared before the run and refuses **<!--figure:extremum-refused-->4<!--/figure-->** under all **<!--figure:extremum-reasons-->4<!--/figure-->** of its named reasons — **<!--figure:extremum-as-declared-->8<!--/figure-->** of **<!--figure:extremum-declared-count-->8<!--/figure-->** as declared — and reports **<!--figure:extremum-ties-->1<!--/figure-->** tie as a tie rather than resolving it |
 | scale conversions | `python3 -m glm_universal.tools scales` | the declared table of **<!--figure:scales-rows-->9<!--/figure-->** scales over **<!--figure:scales-quantities-->4<!--/figure-->** quantities answers **<!--figure:scales-answered-->7<!--/figure-->** of the **<!--figure:scales-declared-->12<!--/figure-->** questions declared before the run and refuses **<!--figure:scales-refused-->5<!--/figure-->** — **<!--figure:scales-as-declared-->12<!--/figure-->** of **<!--figure:scales-declared-->12<!--/figure-->** as declared — and relates **<!--figure:scales-bridged-->6<!--/figure-->** of the **<!--figure:scales-pairs-->7,750<!--/figure-->** pairs of the **<!--figure:scales-numeric-->125<!--/figure-->** numeric scales, leaving every other pair refused |
 | conversation layer | `python3 -m glm_universal.tools conversation` | the layer binds **<!--figure:conversation-answered-->8<!--/figure-->** of the **<!--figure:conversation-declared-count-->15<!--/figure-->** follow-ups declared before the run and refuses **<!--figure:conversation-refused-->7<!--/figure-->** under all **<!--figure:conversation-reasons-->3<!--/figure-->** of its named reasons — **<!--figure:conversation-as-declared-->15<!--/figure-->** of **<!--figure:conversation-declared-count-->15<!--/figure-->** as declared — against **<!--figure:conversation-alone-->0<!--/figure-->** answered by a session with no memory, and the recency control differs on **<!--figure:conversation-control-wrong-->3<!--/figure-->** of **<!--figure:conversation-control-rows-->10<!--/figure-->** |
 | role--filler binding | `python3 -m glm_universal.tools binding` | a typed relation written as one 24-bit word gives the filler's reading back with no side condition; naming the filler recovers **<!--figure:binding-recovered-->6<!--/figure-->** of the **<!--figure:binding-declared-count-->12<!--/figure-->** bindings declared before the run and refuses **<!--figure:binding-refused-->6<!--/figure-->** — **<!--figure:binding-as-declared-->12<!--/figure-->** of **<!--figure:binding-declared-count-->12<!--/figure-->** as declared — because only **<!--figure:binding-nameable-->424<!--/figure-->** of the **<!--figure:binding-carriers-->1,143<!--/figure-->** carriers read uniquely, the worst fibre holding **<!--figure:binding-largest-fibre-->136<!--/figure-->** |
 | plan store | `python3 -m glm_universal.runtime.plan_store` | a resolved follow-up kept against a digest of the whole conversation replays **<!--figure:planstore-replayed-->15<!--/figure-->** of **<!--figure:planstore-declared-count-->15<!--/figure-->** unchanged, refusals included (**<!--figure:planstore-refusals-replayed-->7<!--/figure-->** of **<!--figure:planstore-refusals-->7<!--/figure-->**), taking the licensing trials from **<!--figure:planstore-trials-first-->27<!--/figure-->** to **<!--figure:planstore-trials-replayed-->0<!--/figure-->**; keyed by the follow-up text alone it answers **<!--figure:planstore-coarse-wrong-->8<!--/figure-->** of the fifteen with another conversation's antecedent |
+| engineering surface | `python3 -m glm_universal.tools engineering` | on **63** engineering questions committed before the code: **53** correct, **10** correct refusals, **0** wrong (both existing paths: 0 correct, 53 refused); formula wheels **41 / 41** at SI7 and EXT10; Smith chart **16 / 16**; force-voltage analogy **9 / 9** laws each way; delta-sigma **6 / 6** |
 | blockers probe | `python3 -m glm_universal.tools blockers` | the pre-registered language probe scores **<!--figure:probe-correct-->2<!--/figure-->** correct, **<!--figure:probe-wrong-->1<!--/figure-->** wrong, **<!--figure:probe-refused-->17<!--/figure-->** refused of **<!--figure:probe-questions-->20<!--/figure-->** — **below the declared pass mark of <!--figure:probe-pass-mark-->10<!--/figure-->**, a declared failure |
 
 The test-suite row is the sign-off ledger's own count, recorded by
@@ -338,6 +418,20 @@ unchanged and the licensing trials fall from
 `RequestProject/GLM/PlanStore.lean`. Write-up:
 [`SUPPLIED_PORTS_STUDY.md`](studies/SUPPLIED_PORTS_STUDY.md).
 
+**Frames that derive, with a certificate.** The typed planner, the default
+reading of every command-line question since Phase 63, carries frames whose
+answers no register holds, each checked by `reasoning/certificates.py`:
+Bézout, linear Diophantine equations and bounded factorisation (Phase 62);
+consistency of a register value with a quoted value or the declared standard,
+read at the precision each is held to, with an ordering between overlapping
+readings refused; the simplest fraction a decimal pins down, answered only
+when every rival's denominator is at least twice the answer's; and dimensional
+equations solved exactly, with a certificate for unique, impossible and
+undetermined. `python3 -m glm_universal.tools cognition` runs every experiment
+of the study; the certificates are proved in
+`RequestProject/GLM/CognitionRoundTwo.lean`. Write-up:
+[`SUBSTRATE_NATIVE_COGNITION_STUDY.md`](studies/SUBSTRATE_NATIVE_COGNITION_STUDY.md).
+
 **Registers.** Eight of them. Physics (726 quantities, EXT10 exponents and
 unit strings cross-checked against each other), chemistry (118 elements),
 molecules (51 species and ions, every coordinate derived from the element
@@ -370,11 +464,11 @@ so a confident wrong answer is worse than a refusal). Write-up:
 [`CAPABILITY_ASSESSMENT.md`](CAPABILITY_ASSESSMENT.md).
 
 **The Lean development, addressed.** `reasoning/lean_address.py` gives each of
-the 3582 declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly 3582/3582 with 0 coordinate errors;
-3141 distinct addresses, and the quantiser adds no conflation of its own;
-nearest-by-address shares a file 714 times against 32 for a SHA-256 control and
-18 for a seeded reshuffle, with chance at ≈ 1.04 %. `report lean`.
+the 3766 declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly 3766/3766 with 0 coordinate errors;
+3217 distinct addresses, and the quantiser adds no conflation of its own;
+nearest-by-address shares a file 722 times against 32 for a SHA-256 control and
+32 for a seeded reshuffle, with chance at ≈ 1.00 %. `report lean`.
 Write-up: [`LEAN_ADDRESS_STUDY.md`](studies/LEAN_ADDRESS_STUDY.md).
 
 **The register where the address is the only reader.** In the anonymous
@@ -414,8 +508,8 @@ twenty questions rather than three samples. `tools oracle`. Write-up:
 **The field surface, and what it was worth.** `runtime/fields.py` answers one
 named field of one named row — `field atomic_weight_u of carbon` — over
 <!--figure:fieldsurface-tables-->13<!--/figure--> declared tables holding
-<!--figure:fieldsurface-rows-->8,811<!--/figure--> rows and
-<!--figure:fieldsurface-pairs-->52,735<!--/figure--> addressable `(row,
+<!--figure:fieldsurface-rows-->9,248<!--/figure--> rows and
+<!--figure:fieldsurface-pairs-->55,173<!--/figure--> addressable `(row,
 field)` pairs: the element and molecule source rows, one table per register's
 carrier attributes, the Lean address book, the package's own top-level
 definitions, and a registry of declared zero-argument functions whose returned
@@ -507,6 +601,20 @@ the whole field surface it relates
 refused, which is what *declared* costs. `tools scales`. Write-up:
 [`SCALE_CONVERSION_STUDY.md`](studies/SCALE_CONVERSION_STUDY.md).
 
+**Typed question plans.** `runtime/semantic_plan.py` is the bridge from an
+English question to the operations the session already has:
+**<!--figure:plans-frames-->18<!--/figure-->** frames, each of which reads one
+shape of question into a plan whose slots are grounded against the field
+surface and the row's own fields, run, and accepted only when every licensed
+plan agrees; with none licensed the answer is the grammar's own. Two frames
+compute — exact integer arithmetic, and conversion over a declared table of
+**<!--figure:plans-units-->17<!--/figure-->** units whose factors are
+definitions. Reached with `GLM.py --plan` or
+`GeometricSession.ask_planned`; measured by `tools plans` on the frozen probe
+and four sets in `evaluation/heldout.py`, three of them committed before the
+planner existed. Proved in `RequestProject/GLM/SemanticPlan.lean`. Write-up:
+[`SEMANTIC_PLAN_STUDY.md`](studies/SEMANTIC_PLAN_STUDY.md).
+
 **The round loop itself, measured and cut.** A named `.lean` file resolves to
 itself rather than to the whole development, so a median Lean file makes **26**
 units stale rather than 84 of 97, and a unit's closure is **116** files rather
@@ -536,7 +644,7 @@ Every item that used to stand on this list is closed; each is recorded in
 closures left behind is §3.4.
 
 * **The infinite-dimensional half of the VOA bridge.** `VOA.lean` builds the
-  state–field map at the Griess layer and shows where a finite model stops
+  state–field map at the Griess layer (the partial 2A axial algebra on axes) and shows where a finite model stops
   (`borcherds_commutator_fails`); `Heisenberg.lean` builds the Fock space of
   one free boson and proves `no_finite_dimensional_model`.
 * **`heat : temperature :: force : ?`** — closed by the energy-conjugate
@@ -582,9 +690,74 @@ closures left behind is §3.4.
 ### 3.4 Named for the next round
 
 **Read this section first on the next development push.** The head of
-[`MASTER_PLAN.md`](MASTER_PLAN.md) names Phase 58 as where the next round
+[`MASTER_PLAN.md`](MASTER_PLAN.md) names Phase 63 as where the next round
 starts and points back here. The candidates are ordered: the first is the one that bears
 most directly on the standing target.
+
+**H. Substrate-native cognition, round three — named by Phase 63.** In the
+order of the study's §8: demote (or narrow) the two chemistry completion rules
+that fail nested holdouts, `covalent_radius_pm` and `electron_affinity_eV`;
+semantic judgements as annotated provenance (E4); frames generated from a
+declaration rather than written by hand (E6); deeper PCGS proofs (E7); a second
+independent reading for the deep-hole fork (X1); and concept 6, which waits on
+a trilinear object in the runtime.
+[`SUBSTRATE_NATIVE_COGNITION_STUDY.md`](studies/SUBSTRATE_NATIVE_COGNITION_STUDY.md) §8.
+
+**E. Derivation across a declared union of wheels — named by Phase 59.** The
+engineering surface derives inside one wheel at a time, as the formula study's
+protocol does, and so refuses *derive power from pressure and volume flow
+rate*; across the union of the ten wheels that formula (hydraulic power)
+follows from W5 and W6. A second mode that names the union it used in the
+answer, measured on a set written for it, would say what composition gains
+and what it gets wrong. [`ENGINEERING_LANGUAGE_STUDY.md`](studies/ENGINEERING_LANGUAGE_STUDY.md) §3.
+
+**F. Typed physical operators — named by Phase 59.** Monomial wheels cannot
+separate real, reactive and apparent power (W2-03), nor dot from cross
+product. Complex power with conjugation, over the Gaussian rationals the
+Smith chart already uses, is the smallest step. The record's Priority 5.
+
+**G. The archive Lean left behind — named by Phase 60, narrowed by Phase 61.**
+Phase 61 rebuilt the small files the supplied-material ledger named —
+`GolayMOG.lean`, `Distinction.lean`, `Seeds.lean`, `Fibre.lean`,
+`Cheapest.lean` and `Independence.lean` — as `RequestProject/GLM/GolayMOG.lean`,
+`Distinction.lean` and `SeedRoles.lean`, proving the irrationality of `e` that
+they had assumed. What remains (Appendix C.3 of
+[`GLM_ACADEMIC_PAPER.md`](studies/GLM_ACADEMIC_PAPER.md)) is the language half of
+`mog_cube_1`, about thirty files, and the unported part of `ObserverY.lean`; no
+code path reads either yet. The vision experiments script
+(`glm_vision_experiments_v14.py`) is the same kind of candidate on the Python
+side.
+
+**A. The planner as the default path — done in Phase 63.** The planner now
+reads first, and `--grammar` opts out. What follows is the note as it was
+written: the typed planner was opt-in because the command line renders every answer as a three-column
+trace and a computed plan (an exact sum, a conversion, a primality witness)
+has no trace kind yet. Asked in-process, the 177 contract cases differ in two
+answers through the planner and both still pass; what remains is a trace for
+the planner's own computations, then the switch, then the contract set run
+through it. [`SEMANTIC_PLAN_STUDY.md`](studies/SEMANTIC_PLAN_STUDY.md) §8.
+
+**B. A held-out set nobody on the project wrote — named this round.** The
+held-out sets were committed before the planner and share its author; an
+independently written set of questions, with labels from outside the
+registers, is the test that would separate reach from anticipation. The
+scoring rule and the harness exist (`evaluation/heldout.py`,
+`reasoning/typed_plans.py`); only the questions are missing.
+
+**C. The register against the world — partly done in Phase 63.** A question
+can now ask whether a register value is consistent with the declared standard
+table, at the precision each is held to; the full discrepancy report over
+every row is still open. The planner's one
+wrong answer is the element register holding iron's atomic weight as `55.84`
+where the IUPAC value is `55.845`. The roadmap's external-truth layer — a
+discrepancy report of register values against cited standard values, never
+overwriting the register — would find every such row rather than the one a
+question happened to reach.
+
+**D. Discourse state, typed.** The conversation layer binds three surface
+shapes of follow-up; the planner's typed slots are the state a fourth shape
+needs (*the one before that*, *both of them*), and a set-valued referent is
+what candidate 0 below asks for.
 
 **0. The second turn, carried further — named the round before last.** The conversation
 layer binds three declared shapes of follow-up and refuses everything else,
@@ -897,7 +1070,7 @@ reach `PROJECT_DIRECTIVES.md` (about 66 minutes), 6 reach
 `signoff/ledger.py`, 1 reaches `signoff/__main__.py`.
 
 The seven instruments in the ledger beside the
-<!--figure:test-files-->106 test files<!--/figure--> are `lean-build`,
+<!--figure:test-files-->109 test files<!--/figure--> are `lean-build`,
 `lean-sorry-free`, `lean-copies-identical`, `capabilities`, `benchmarks`,
 `evaluation` and `figures`. Editing a document makes exactly the units that
 read that document stale — `test_figures.py` yes, `test_substrate.py` no — so
@@ -945,7 +1118,7 @@ In order, from the repository root; the last step is the one that catches a
 document drifting from the code.
 
 ```bash
-lake build                                                   # 126 Lean files, no sorry
+lake build                                                   # 133 Lean files, no sorry
 rg -n 'sorry|admit' RequestProject/GLM                       # expect nothing
 diff -r RequestProject/GLM overlay/glm_lean/RequestProject/GLM   # the two copies agree
 

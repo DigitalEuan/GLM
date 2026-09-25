@@ -7,7 +7,7 @@
 
 **Verdict.** Everything is exact `int` / `fractions.Fraction` / `F_2`; nothing here imports `random`.
 
-**Deciding figure.** 89 modules, one frozen data file, and a runnable audit.
+**Deciding figure.** 93 modules, one frozen data file, and a runnable audit.
 
 **Recomputed by.** `glm_universal.reasoning.reasoning_report`
 
@@ -16,7 +16,7 @@
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 
-**Status: implemented (GLM-3+ Step 3, extended since).** **89 modules**, one
+**Status: implemented (GLM-3+ Step 3, extended since).** **93 modules**, one
 frozen data file,
 and a runnable audit. Everything is exact `int` / `fractions.Fraction` /
 `F_2`; nothing here imports `random`; nothing here imports a third-party
@@ -102,6 +102,9 @@ Sections 1–4 below describe these in detail.
 | `pcgs.py` | the proof-carrying generative substrate: a generated object answers with a certificate and an exact ledger, never with a bare value — Reed–Muller `RM(1,m)` generated from its evaluation basis with the weight distribution its theorem forces, the number-theoretic transform generated from `(p, g)` with the radix-2 algorithm checked against the definition that is proved invertible, a stencil operator and a transducer, the cost algebra (operation counts and information bits, replacing CPU cycles and RAM bytes), the Landauer/CMOS physical layer in exact `Fraction`s, and the break-even query count at which a stored table starts to pay | — |
 | `combiner.py` | what XOR is doing here: the sixteen coordinatewise combiners, the eight affine ones the code is closed under, the pigeonhole bound on what a narrow output loses, and the inventory of every XOR site in the package | (library) |
 | `tie_break.py` | what a nearest-point tie is and what breaking it by index costs: the tie classes enumerated, the decoder's rule shown not to be the canonical one, and the read-back shown unchanged either way | (library) |
+| `certificates.py` | derivations that carry their proof: `bezout(a, b)` returns the gcd with integers `x, y` such that `ax + by = g`; `solve_linear(a, b, c)` returns every integer solution of `ax + by = c`, or an impossibility certificate that `gcd(a, b)` does not divide `c`; `factorise(n)` factorises by trial division with each factor certified prime, and refuses past the stated bound rather than guess. A certificate that fails its own check raises — the planner's certificate frame | `solve 12x + 18y = 30 in integers`, `bezout coefficients of 240 and 46`, `factorise 360` |
+| `substrate_cognition.py` | the nine pre-registered substrate-native cognition experiments (X1–X9): the Golay decoder's fork, two offset dyadic towers, the TAX coherence descent, reversible gates on packed words, the delta-sigma wobble, interval-valued element masses, the certificate frame, continued fractions against delta-sigma and the Weyl-vector null — each scored against its declared mark | `python3 -m glm_universal.tools cognition` |
+| `intervals.py` | exact rational intervals (item E1): `Interval` with `as_held` (a held decimal read at the precision it was written to), `compare_intervals` (which refuses with `overlap` when two intervals meet at more than one point) and `IUPAC_WEIGHTS`, the declared 30-row standard table; standard library only, so the planner's interval frames read it without importing the experiments module | `python3 -m glm_universal.tools cognition` (X6) |
 | `stability.py` | how far an address may be perturbed before it moves: exact radii and residuals, the two certificates `Stability.lean` states, and the census of the declarations at radius zero | (library) |
 | `exactness.py` | the D7/D9 inventories: every site in the package where a float could be constructed and every cryptographic digest, each declared with its reason, so an undeclared one fails the suite | (library) |
 | `norm_escalation.py` | escalation over the power-of-two norm family rather than over the named constructions: the densest rung at each minimum squared norm, a declared coarse-to-fine order, the two retirement clauses, the bounded repair that substitutes or drops a retired rung, and the length sweep that finds where safety is lost | `python3 -m glm_universal.tools normladder` |
@@ -114,6 +117,7 @@ Sections 1–4 below describe these in detail.
 | `scale_conversion.py` | the declared table of conversions between scales, and the refusals it removes: one row per scale naming the quantity it measures, its unit, and the exact rational `factor`/`offset` that carry a reading into the quantity's canonical unit, with `factor > 0`. It is a declaration, not an inference — a scale the table does not name stays refused exactly as before — and it lets the ordering operation compare two readings of one quantity under two field names, and the extremum operation gather a column by quantity across every declared scale of it | `python3 -m glm_universal.tools scales` |
 | `probe_oracle.py` | blocker 1's own experiment, run: each of the twenty pre-registered probe questions hand-written into the query grammar, with the field that must carry the answer declared beside it, and every question classified `parsed` (a query answers it), `surface` (a register row or a shipped function holds it and no query kind returns it) or `absent` (nothing holds it). No measurement cache: twenty live queries take seconds | `python3 -m glm_universal.tools oracle` |
 | `role_binding.py` | role–filler binding: a typed relation between two named carriers written as one 24-bit word, `bind(role, a, b) = role · parity(a) ⊕ parity(a) ⊕ parity(b)`. Exclusive-or is a group operation, so unbinding is the same operation again and the filler's *reading* comes back with no side condition; turning that reading into a **name** is a second and strictly weaker step, which refuses under `ambiguous-recovery` or `no-carrier` whenever the register's parity readings do not separate the filler. The supplied elementwise-product binding is kept beside it as the refuted control | `python3 -m glm_universal.tools binding` |
+| `typed_plans.py` | the typed question planner's measurement: the frozen probe, its paraphrases and the pre-registered held-out, adversarial and stress sets asked through `GeometricSession.ask` and through the planner (`runtime/semantic_plan.py`), scored against labels written before the planner existed, every gain classified as a table read, an address or a derivation; the report is stored behind a digest (`python3 -m glm_universal.tools plans --write`) |
 
 ---
 
@@ -163,6 +167,11 @@ Anyone expecting `τ_a` to permute the axes should read that paragraph twice:
 the swap is real, but it belongs to `σ`, not `τ`.
 
 ## 2. `metric.py` — the Griess metric
+
+*On the name (Phase 63, item E2):* "Griess metric" is historical. This is the
+Leech lattice's rational inner product extended to `Q^24`. It is not the
+invariant form of the 196,884-dimensional Griess algebra, which the runtime
+does not hold.
 
 `⟨u, v⟩ = (1/8) Σ u_i v_i`, extending `leech2.rational_inner` from the lattice
 to all of `Q^24`; `d(u,v)² = ⟨u−v, u−v⟩`.
@@ -313,7 +322,7 @@ All four stages are now implemented:
 
 1. **Golay** (`substrate/mog.py`): 4,096 codewords, 759 octads, MOG trio/sextet.
 2. **Leech** (`substrate/leech2.py`): 196,560 minimal vectors, 98,280 type-2 classes.
-3. **Griess** (`reasoning/product.py`): Norton-Sakuma 2A algebra, trilinear form, Griess metric.
+3. **Griess** (`reasoning/product.py`): Norton-Sakuma 2A algebra, trilinear form, Griess metric. What this layer holds is a partial Norton–Sakuma 2A axial algebra: the product on axes, not the Griess algebra.
 4. **Moonshine** (`reasoning/moonshine.py`): graded dimensions V_0..V_10, j-function q-series, Leech-to-Moonshine bridge.
 
 The VOA state-field map Y(u, z) = sum u_n z^-n-1 is the

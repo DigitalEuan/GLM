@@ -3584,6 +3584,88 @@ def _probe_figure(field: str) -> str:
 
 
 
+# ===========================================================================
+#  SEMANTIC_PLAN_STUDY.md -- typed question plans over the existing surface
+# ===========================================================================
+
+def _plans() -> Optional[Mapping[str, object]]:
+    from ..reasoning import typed_plans as tp
+    return tp.current()
+
+
+def _plans_figure(field: str) -> str:
+    data = _plans()
+    if data is None:
+        return "stale"
+    tallies = data["tallies"]                              # type: ignore[index]
+    if field.startswith("probe-"):
+        return _thousands(data["frozen_probe"][field[6:]])  # type: ignore[index]
+    if field.startswith("bare-probe-"):
+        return _thousands(data["frozen_probe_bare"][field[11:]])  # type: ignore[index]
+    if field.startswith("held-bare-"):
+        return _thousands(data["held_bare"][field[10:]])   # type: ignore[index]
+    if field.startswith("held-"):
+        key = field[5:]
+        if key == "total":
+            return _thousands(data["held_total"])          # type: ignore[index]
+        return _thousands(data["held_planned"][key])       # type: ignore[index]
+    if field.startswith("stress-first-"):
+        return _thousands(data["stress_first_run"][field[13:]])  # type: ignore[index]
+    if field.startswith("stress-bare-"):
+        return _thousands(tallies["stress"]["bare"][field[12:]])  # type: ignore[index]
+    if field.startswith("stress-"):
+        return _thousands(tallies["stress"]["planned"][field[7:]])  # type: ignore[index]
+    if field.startswith("gains-"):
+        return _thousands(data["gains"][field[6:]])        # type: ignore[index]
+    if field == "gained":
+        return _thousands(data["gained_total"])            # type: ignore[index]
+    if field == "ambiguous":
+        return _thousands(data["census"]["ambiguous"])     # type: ignore[index]
+    if field == "questions":
+        return _thousands(data["questions"])               # type: ignore[index]
+    return _thousands(data[field])                         # type: ignore[index]
+
+
+def block_plans_sets() -> str:
+    """Every set, both paths, side by side."""
+    data = _plans()
+    if data is None:
+        return ("The stored measurements of the typed-plans study do not "
+                "describe the modules as they now stand, so nothing is "
+                "reported here.  Run `python3 -m glm_universal.tools plans "
+                "--write`.")
+    rows = []
+    for name in data["sets"]:                              # type: ignore[union-attr]
+        for path in ("bare", "planned"):
+            t = data["tallies"][name][path]                # type: ignore[index]
+            rows.append((f"`{name}`" if path == "bare" else "",
+                         path, _thousands(t["correct"]), _thousands(t["wrong"]),
+                         _thousands(t["refused"]),
+                         _thousands(t["correct-refusal"])))
+    lines = _table(("set", "path", "correct", "wrong", "refused",
+                    "correct refusal"), rows)
+    lines.extend(["", str(data["verdict"]), "", str(data["caveat"])])
+    return "\n".join(lines)
+
+
+def block_plans_exceptions() -> str:
+    """Every wrong answer and every ambiguity refusal, by name."""
+    data = _plans()
+    if data is None:
+        return "stale: run `python3 -m glm_universal.tools plans --write`."
+    rows = []
+    for row in list(data["wrong_rows"]) + list(data["ambiguous_rows"]):  # type: ignore[arg-type]
+        rows.append((f"`{row['set']}`", f"`{row['key']}`", row["question"],
+                     row["planned"] if row["verdict"] != "ambiguous"
+                     else "ambiguous",
+                     (row["answer"] or row["reason"])[:160]
+                     .replace("|", "/")))
+    lines = _table(("set", "question key", "asked", "outcome",
+                    "what it said"), rows)
+    return "\n".join(lines)
+
+
+
 FIGURES: Dict[str, Callable[[], str]] = {
     #  The norm family and the escalation over it, so the sentences of
     #  NORM_FAMILY_STUDY.md quote the measurement rather than a memory of it.
@@ -3658,6 +3740,35 @@ FIGURES: Dict[str, Callable[[], str]] = {
     "ordering-parsed-after": lambda: _ordering_figure("parsed-after"),
     "ordering-surface-before": lambda: _ordering_figure("surface-before"),
     "ordering-surface-after": lambda: _ordering_figure("surface-after"),
+    "plans-probe-correct": lambda: _plans_figure("probe-correct"),
+    "plans-probe-wrong": lambda: _plans_figure("probe-wrong"),
+    "plans-probe-refused": lambda: _plans_figure("probe-refused"),
+    "plans-bare-probe-correct": lambda: _plans_figure("bare-probe-correct"),
+    "plans-bare-probe-wrong": lambda: _plans_figure("bare-probe-wrong"),
+    "plans-bare-probe-refused": lambda: _plans_figure("bare-probe-refused"),
+    "plans-held-total": lambda: _plans_figure("held-total"),
+    "plans-held-correct": lambda: _plans_figure("held-correct"),
+    "plans-held-correct-refusal": lambda: _plans_figure("held-correct-refusal"),
+    "plans-held-wrong": lambda: _plans_figure("held-wrong"),
+    "plans-held-bare-correct": lambda: _plans_figure("held-bare-correct"),
+    "plans-held-bare-correct-refusal": lambda: _plans_figure("held-bare-correct-refusal"),
+    "plans-held-bare-wrong": lambda: _plans_figure("held-bare-wrong"),
+    "plans-stress-correct": lambda: _plans_figure("stress-correct"),
+    "plans-stress-wrong": lambda: _plans_figure("stress-wrong"),
+    "plans-stress-refused": lambda: _plans_figure("stress-refused"),
+    "plans-stress-correct-refusal": lambda: _plans_figure("stress-correct-refusal"),
+    "plans-stress-first-correct": lambda: _plans_figure("stress-first-correct"),
+    "plans-stress-first-refused": lambda: _plans_figure("stress-first-refused"),
+    "plans-stress-bare-correct": lambda: _plans_figure("stress-bare-correct"),
+    "plans-stress-bare-wrong": lambda: _plans_figure("stress-bare-wrong"),
+    "plans-gains-table": lambda: _plans_figure("gains-table"),
+    "plans-gains-address": lambda: _plans_figure("gains-address"),
+    "plans-gains-derive": lambda: _plans_figure("gains-derive"),
+    "plans-gained": lambda: _plans_figure("gained"),
+    "plans-ambiguous": lambda: _plans_figure("ambiguous"),
+    "plans-questions": lambda: _plans_figure("questions"),
+    "plans-frames": lambda: _plans_figure("frames"),
+    "plans-units": lambda: _plans_figure("units"),
     "scales-rows": lambda: _scales_figure("declared-rows"),
     "scales-quantities": lambda: _scales_figure("quantities"),
     "scales-declared": lambda: _scales_figure("declared"),
@@ -4549,6 +4660,8 @@ BLOCKS: Dict[str, Callable[[], str]] = {
     "ordering-declared": block_ordering_declared,
     "ordering-split": block_ordering_split,
     "extremum-declared": block_extremum_declared,
+    "plans-sets": block_plans_sets,
+    "plans-exceptions": block_plans_exceptions,
     "scales-table": block_scales_table,
     "scales-declared": block_scales_declared,
     "conversation-declared": block_conversation_declared,

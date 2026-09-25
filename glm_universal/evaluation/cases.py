@@ -701,8 +701,8 @@ _CASES: Tuple[EvalCase, ...] = (
             "resolved above the first rung and two refusals come back as "
             "certified absences."),
     _c("report-relay", "report", "report relay",
-       "answer", contains=("386 -> 395 of 448", "66 of 1792",
-                           "carrying 21 queries it misses and losing 0"),
+       "answer", contains=("708 -> 715 of 837 (ahead)", "60 of 1674",
+                           "carrying 20 queries it misses and losing 0"),
        note="The faculties arranged as a stack rather than scored one at a "
             "time: below a gate of 1/10 the leading lexical search is "
             "judged to have abstained and the two geometric address books "
@@ -712,7 +712,7 @@ _CASES: Tuple[EvalCase, ...] = (
             "matched digest-and-reshuffle control carries far fewer, so "
             "the gain is the substrate's rather than the padding's."),
     _c("report-anonymous", "report", "report anonymous",
-       "answer", contains=("771 -> 82 of 896", "239 -> 169 of 896",
+       "answer", contains=("708 -> 63 of 837", "208 -> 148 of 837",
                            "class, not a residue"),
        note="The register where the geometric address is the only faculty "
             "still reading: rename every identifier of a query outside a "

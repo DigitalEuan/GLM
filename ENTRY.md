@@ -207,7 +207,8 @@ first and descend into the few that bear on the task.
 [`SOURCE_SALVAGE_AUDIT.md`](studies/SOURCE_SALVAGE_AUDIT.md) ·
 [`SOURCE_SALVAGE_SECOND_PASS.md`](studies/SOURCE_SALVAGE_SECOND_PASS.md) ·
 [`ARCHIVE_DEEP_DIVE_STUDY.md`](studies/ARCHIVE_DEEP_DIVE_STUDY.md) ·
-[`NOW_RECEIPT_STUDY.md`](studies/NOW_RECEIPT_STUDY.md)
+[`NOW_RECEIPT_STUDY.md`](studies/NOW_RECEIPT_STUDY.md) ·
+[`SUBSTRATE_NATIVE_COGNITION_STUDY.md`](studies/SUBSTRATE_NATIVE_COGNITION_STUDY.md)
 
 **Written up as papers.**
 [`GLM_ACADEMIC_PAPER.md`](studies/GLM_ACADEMIC_PAPER.md) ·

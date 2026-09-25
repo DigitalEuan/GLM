@@ -5,7 +5,7 @@
 
 **Question.** What has each phase of the wiring plan delivered, and what does the next round start from?
 
-**Verdict.** Phase 57 is closed; the candidates in [`STATUS.md`](STATUS.md) §3.4 are where the next round starts.
+**Verdict.** Phase 63 is closed; the candidates in [`STATUS.md`](STATUS.md) §3.4 are where the next round starts.
 
 **Deciding figure.** Every closed phase names what was built, where it lives, and how to see it recompute itself.
 
@@ -25,7 +25,7 @@ recompute itself.
 
 Everything below is reachable from the package's public API and from the query
 runtime — **<!--figure:query-kinds-->24 query kinds<!--/figure-->**, **<!--figure:report-subjects-->65 report subjects<!--/figure-->** and **<!--figure:registers-->8 registers<!--/figure-->** — is
-covered by the test suite (<!--figure:test-files-->106 test files<!--/figure-->),
+covered by the test suite (<!--figure:test-files-->109 test files<!--/figure-->),
 and — where it is a report or a task — has a generated column-3 script that
 recomputes the claim in a **fresh interpreter** and fails if anything differs.
 
@@ -183,6 +183,317 @@ as everything else: only the open phase is state.
 
 ---
 
+## Phase 63 — substrate-native cognition, round two: the near misses refined and wired
+
+**Status: closed this round.** The owner asked for a round that completes the
+open items of
+[`studies/SUBSTRATE_NATIVE_COGNITION_STUDY.md`](studies/SUBSTRATE_NATIVE_COGNITION_STUDY.md)
+(its first round was Phase 62), with one standing instruction: where a
+function came close and missed, look at it again, and either refine it or keep
+it for the narrower job it does. G1, a language model as parser, is
+**declined for good**: the GLM learns from such models' methods and translates
+them into its own terms. Declarations Y1–Y8 (study §6) and the 33-question set
+(`evaluation/cognition_heldout.py`) were committed before any frame they test.
+
+**What was built.** Three new frames of the typed planner
+(`runtime/semantic_plan.py`), each with a checkable certificate in
+`reasoning/certificates.py`:
+* **interval consistency** (Y1, item E1): *is the atomic weight of iron
+  consistent with 55.845?* reads the register at its held precision, and an
+  ordering between overlapping held intervals refuses;
+* **rational recognition** (Y2, concept 7 refined): the simplest fraction in
+  the interval a decimal or a delta-sigma window pins down, answered only when
+  every rival's denominator is at least twice the answer's;
+* **dimensional derivation** (Y3, concept 4): `M e = t` solved exactly, with a
+  certificate for unique, impossible (a separating vector) and undetermined.
+
+The planner is now the **default path** of `GLM.py` (Y8, item R1); `--grammar`
+asks the grammar alone, and `--plan` is kept as an alias. The wording sweep of
+item E2 is done in prose. `RequestProject/GLM/CognitionRoundTwo.lean` proves
+the certificates (`closed_overlap_iff`, `farey_rival_bound`,
+`monomial_impossible`, `coset_argmin_iff_nearest`), the delta-sigma stream as
+a `Stream'` with its period (C2), and the Galois connection between layers
+(`refines_iff_factors`, `ker_pair_eq_inf`, `map_comap_gc`, C1), with the
+standard axioms only.
+
+**What moved (D15).** **Derivation** and **address**: the three frames answer
+26 of the 33 declared questions and refuse the other 7 as declared, with 0
+wrong, where the grammar answers none. **Refusal** is sharper: each declared
+refusal names its reason. The 177 contract cases give the same outcomes
+through the planner as through the grammar (149 correct, 28 refused as
+expected).
+
+**Measured, not wired.** Vacuum seeking inside a coset (concepts 1 and 9) is
+exactly the complete decoder, on 3,136 of 3,136 reads. Nested holdouts (E3)
+keep 7 of the 9 chemistry completion rules; `covalent_radius_pm` and
+`electron_affinity_eV` do not survive selection.
+
+**What moved with the corpus.** The new Lean file took the declaration corpus
+from 3,747 to 3,766, and the measurements that read it moved with it. The stack
+relay now carries 20 queries and loses none (it carried 14), and it is still
+strictly ahead of the text control on all three sets; the anonymous-register
+figures now read over 837 goal queries. The evaluation cases that quote those
+figures were updated to the measured values. The interval layer was moved into
+`reasoning/intervals.py`, a module with no import beyond the standard library,
+so that the planner on the answering path does not read the experiments module
+and, through it, the whole Lean development.
+
+**Left open.** E4, E6, E7, concept 6, X1's second reading, and the demotion of
+the two rules; study §8 orders them, and they stand in
+[`STATUS.md`](STATUS.md) §3.4.
+
+---
+
+## Phase 61 — the whole-system documents made complete, and the small archive Lean brought in
+
+**Status: closed.** A second documentation round at the owner's
+request: make [`studies/GLM_ACADEMIC_PAPER.md`](studies/GLM_ACADEMIC_PAPER.md)
+and
+[`studies/GLM_Complete_Number_Theory_Evidence.md`](studies/GLM_Complete_Number_Theory_Evidence.md)
+fully current and make sure nothing useful is left behind. Under directive
+**D15** it moved none of **derivation**, **address** or **refusal**; no question
+the machine answers changed.
+
+**What was brought in.** The Lean that the Phase 60 ledger named as left, and
+that was small enough to take whole, is rebuilt under this repository's
+`lake build` and mirrored into `overlay/glm_lean/`:
+`RequestProject/GLM/Distinction.lean` (Stage 0 of the first-principles
+sub-study), `RequestProject/GLM/SeedRoles.lean` (the archive's `Seeds`,
+`Fibre`, `Cheapest`, `Independence` and the rest of `OneParameter`) and
+`RequestProject/GLM/GolayMOG.lean` (the spatial-arithmetic study's one Lean
+file). The archive modules the seed files imported are not in the supplied
+archive, so their numerical bounds were re-derived from `FitCapacity.lean`, and
+the irrationality of `e` — which Mathlib at the pinned version does not carry
+and which the archive and `SeedLayers.lean` took as a hypothesis — is proved
+(`GLM.SeedRoles.eSeed_irrational`), giving
+`GLM.SeedRoles.lattice_character_ne_eSeed_unconditional`. Every theorem was
+checked with `#print axioms`: the seed and distinction files use only the
+standard three, and `GolayMOG.lean`'s finite checks add `Lean.ofReduceBool`
+and `Lean.trustCompiler` through `native_decide`.
+
+**What the paper gained.** §10.5 (the archive's twenty-phase lightspeed audit
+and the routes it closed), §11.7 (the data object's discrete layer and the
+archive's own negative benchmarks), §16.6–§16.7 (in what sense φ is cheapest;
+the two branches of the π·e question), the retrieved theorems throughout §2,
+§14–§16 and §25, and an Appendix C that now names every part of the archive —
+including the `light/` reports and scripts, the top level of `data_object/`
+and the archive root, none of which had a row. Two statements of §25.2 were
+corrected to agree with §11.5: the 190 kJ/mol factor places the *energy* scale
+in the molecular range but not the derived 17 μm length, and `Y` is a chosen
+constant rather than an empirically fitted one.
+
+**What the number-theory document gained.** §22–§27: the seeds as numbers,
+what one distinction forces, the two-gap law and the Golay ball count, three
+counting claims audited (3-6-9, the 44 balanced octads against chance and
+relabelling, the 144° Platonic totals), the element address layer, and the
+Niemeier and higher-dimensional lattices. §24, §25 and §27 are results that
+were already proved in the development but had never been written up there.
+Its ledger and its Lean index carry every one, and
+`tests/test_number_theory_evidence.py` checks the index against the tree.
+
+**What it deliberately did not do.** The MOG cube's language half (about
+thirty files) and the unported part of `ObserverY.lean` are still left; they
+stand in [`STATUS.md`](STATUS.md) §3.4 candidate G. No new code path reads the
+new Lean files.
+
+**What moved, and the release.** The new Lean files moved the declaration
+corpus (3617 → 3730), and the measurements moved with it. The stack relay
+now carries 13 queries and loses none, and its gain over the text control is
+strict at all five gates of the declared band, up to 1/4 (in Phase 59 it
+reached only 1/5). `test_stack.py` asserted the Phase 59 verdict, so it was
+updated to the measured one. The round closed with a full release:
+`signoff --verify-release` reports 108 of 108 test files and 7 of 7
+instruments signed with the exhaustive cases run, and the suite totals were
+re-recorded as 4,239 tests across 107 of the 108 test files.
+
+---
+
+## Phase 60 — the two whole-system documents consolidated
+
+**Status: closed.** A documentation round taken at the owner's
+request rather than from a candidate of [`STATUS.md`](STATUS.md) §3.4:
+[`studies/GLM_ACADEMIC_PAPER.md`](studies/GLM_ACADEMIC_PAPER.md) and
+[`studies/GLM_Complete_Number_Theory_Evidence.md`](studies/GLM_Complete_Number_Theory_Evidence.md)
+were brought up to the system as a whole. Under directive **D15** it moved
+none of **derivation**, **address** or **refusal**, and no question the
+machine answers changed.
+
+**What was changed.** The paper gained a new abstract and introduction, Parts
+V–VII (the machine, its operations and escalation, addressing, the measured
+capability and the negative results; the method; the synthesis) and five
+appendices: every study in `studies/`, the Lean development by theme, a
+ledger of the supplied material saying what was taken and what was left, the
+constants, and a glossary. Its Lean section was corrected: the file count, the
+axiom list (which includes `Lean.ofReduceBool` where `native_decide` is used),
+a theorem name that does not exist (`perfect_code_iff_seven_or_twentythree`,
+now the real `perfect_triple_length`) and a namespace. The number-theory
+evidence document gained a coverage map (§0.5) and §15–§21 (packing
+arithmetic, the Golay enumerator and Steiner system, totients, the periods of
+a stream from `EngineeringWheels.lean` and `NowReceipt.lean`, Gray code and
+logarithmic buckets, seed layers, and an evidence ledger), with a fourth
+generated table in `studies/scripts/number_theory_tables.py` and two new tests
+in `tests/test_number_theory_evidence.py`.
+
+**A defect found and fixed.** Phase 59 added
+`RequestProject/GLM/EngineeringWheels.lean` to the tree but not to the
+overlay mirror, so every figure that reads the mirror said 127 Lean files
+while the tree held 128. The mirror is resynced; the declaration count is
+3,617 and the hand-typed counts in `README.md`, `STATUS.md` and the overlay
+READMEs, some stale since before Phase 59, now agree with it.
+
+**What the re-measurement found.** Phase 59 closed without a release, so
+the new Lean file's effect on the measurements that read the development had
+not been taken. Taking it here moved four things, each now written as
+measured: the relay (`STACK_RELAY_STUDY.md`) went from 18 carried and 0 lost
+to 9 carried and 2 lost, level with text on the goal set, with the strict
+gate band ending at 1/5 rather than 1/4 — the report's sentence now reads the
+standing off the measurement instead of asserting "beats"; the anonymous
+register's figures moved to 804 queries; the blast-radius table of
+`ITERATION_COST_STUDY.md` moved by one unit throughout; and a Lean name cited
+in `engineering/delta_sigma.py` (`ds_rational_periodic`) did not exist and is
+now the real `ds_rational_period_iff`. The test file `test_engineering.py`
+also had no row in `tests/README.md`.
+
+**What the ledger found left behind.** Appendix C of the paper names the
+supplied material that has not been retrieved: the language half of
+`mog_cube_1`, the Distinction and Seeds files of `FirstPrinciples`, the
+Fibre, Cheapest and Independence files of `Projection`, `GolayMOG.lean` from
+`encoding_definition_attempt_03-08.26`, the vision experiments script and the
+long-term memory prototype. They stand as a candidate in `STATUS.md` §3.4.
+
+**What it deliberately did not do.** No new code path, no new Lean theorem,
+no new claim beyond the re-measurements above: every figure in both documents
+is either generated or quoted from a study that carries it.
+
+---
+
+## Phase 59 — engineering languages: formula wheels, the Smith chart, analogies and delta-sigma
+
+**Status: closed.** It took the supplied formula-wheel session
+record, `source_material/formula_wheel/GLM_formula_wheel_study_session_record.md`,
+with the scripts supplied beside it, rather than a candidate of
+[`STATUS.md`](STATUS.md) §3.4, and says why: the user asked for the GLM to
+reason in electrical and mechanical terms, and the record's own Priority 1 is
+to run its studies against the GLM's substrate. Under directive **D15** it
+moved **derivation** (a wheel spoke solved from declared axioms with a
+certificate, a reflection coefficient, a resonance derived through two wheels,
+a period decided by theorem) and **refusal** (an unnamed analogy where the
+dictionaries disagree, a load and a reference of different dimensions, a
+formula the axioms do not reach). Five of its 53 correct answers are
+**address** and none is **table**.
+
+**Pre-registration first.** `overlay/glm_universal/evaluation/engineering_heldout.py`
+was committed on its own before any engineering code (63 questions, labels
+from textbook physics); both existing paths scored 0 correct and 53 refused on
+it. A 38-question stress set was written after the first run and committed
+before being run; its first run (27 correct, 10 correct refusals, 1 scored
+wrong — a label-format artifact, recorded and not edited) is frozen in
+`STRESS_FIRST_RUN`.
+
+**What was built.** `overlay/glm_universal/engineering/`: `wheels.py`
+(relation vectors, span membership with certificates, the ten wheels and 41
+cases verbatim, dimensions at the reference, EXT10 and SI7 layers),
+`smith.py` (Gaussian-rational Smith chart, 16 checks, exact L-section
+matching), `analogy.py` (force-voltage and force-current as maps on laws, a
+structure check, a scrambled control, a degeneracy guard), `delta_sigma.py`
+(periodicity by theorem, first- and second-order loops measured exactly),
+`speak.py` (seven frames, fall-through to the planner), `study.py` (the
+report and evidence envelopes). Wired as `GeometricSession.ask_engineering`,
+`GLM.py --eng` and `tools engineering`; tested by `tests/test_engineering.py`;
+proved in `RequestProject/GLM/EngineeringWheels.lean` (`derivable_consistent`,
+`translate_derivable`, `ohm_power_derivable`,
+`ohm_negative_control_not_derivable`, `smith_round_trip`,
+`smith_admittance_dual`, `smith_passive`, `smith_lossless_iff`,
+`ds_bits_periodic_iff`, `ds_rational_period_iff`, `ds_irrational_aperiodic`).
+
+**What it measured.** The register agrees with the corrected study on all 41
+cases at SI7 and at EXT10; the Ohm wheel's two axioms generate its 12 spokes
+and the ten wheels 108; one case (W6-03, hydraulic power) becomes derivable
+across the union of wheels. The Smith chart holds 16 of 16 checks. The
+force-voltage analogy preserves 9 of 9 laws each way, the force-current 8 of
+9 (the series quality factor maps to a parallel one), a scrambled control 4
+of 9. The delta-sigma checks hold 6 of 6. Through the surface the 63 questions
+score 53 correct, 10 correct refusals, 0 wrong, and none of the 374 questions
+the machine already answers is read by an engineering frame.
+[`studies/ENGINEERING_LANGUAGE_STUDY.md`](studies/ENGINEERING_LANGUAGE_STUDY.md).
+
+**Negative results, kept.** A first version of the lumped wheels named both
+stored energies `energy`, which forces every circuit to `Q = 1`; the
+uniqueness check refused to derive `Q` and exposed it. The delta-sigma
+noise-shaping check failed twice for implementation reasons (the second
+integrator read the updated state; the signal delay was scored as error)
+before it held; the checks were not changed.
+
+**What it deliberately did not do.** No Golay–Leech advantage is claimed or
+measured: the surface reads the register's exact dimension vectors and does
+its own algebra. Monomial laws only — phase, conjugation and vector products
+are outside it. The question set shares an author with the frames.
+
+## Phase 58 — typed question plans: a bridge from English to the operations already held
+
+**Status: closed this round.** It took the supplied roadmap,
+`source_material/GLM_IMPROVEMENT_ROADMAP.md` — its first two work packages, a
+typed representation between text and the session and a held-out evaluation
+the runtime did not generate — rather than a candidate of
+[`STATUS.md`](STATUS.md) §3.4, and says why: the frozen probe of
+[`studies/BLOCKERS_STUDY.md`](studies/BLOCKERS_STUDY.md), re-asked through
+`GeometricSession.ask` before any code was written, still scored 2 correct, 1
+wrong and 17 refused, although the formal grammar could by then express most
+of the twenty. Under directive **D15** it moved **derivation** (exact
+arithmetic, conversions over declared definitions, comparisons and folds
+reached from English) and **refusal** (two licensed readings that disagree
+are refused, both named), and most of its gains are **table**.
+
+**Pre-registration first.** `overlay/glm_universal/evaluation/heldout.py` was
+committed on its own at `8064795`, before the planner existed: sixty new
+phrasings of the twenty probe questions, thirty compositions of the same
+operations over rows the probe never names, and twenty adversarial questions
+whose right outcome is a refusal, every label from world knowledge rather than
+from the registers. A fourth, hostile set of forty-seven was written after
+the planner's first cut and committed at `ca257db` before it was run; its
+first run (28 correct, 13 refused, 6 correct refusals, none wrong) is frozen
+in `glm_universal.reasoning.typed_plans.STRESS_FIRST_RUN`, and every later
+figure on it is reported beside that one.
+
+**What was built.** `overlay/glm_universal/runtime/semantic_plan.py`: fourteen
+frames, a grounder that names a row only by the field surface's own aliases
+and a field only among the fields that row answers to, exact integer
+arithmetic (primality with a witness, n-ary gcd and lcm, quotients as exact
+rationals), a declared table of seventeen units whose factors are
+definitions, and the licensing rule — answer only on one agreed value, refuse
+on a disagreement, fall through to the grammar when nothing is licensed.
+Wired as `GeometricSession.ask_planned` and `GLM.py --plan`; measured by
+`reasoning/typed_plans.py` (`tools plans`, a digest-guarded cache); tested by
+`tests/test_semantic_plan.py`; proved in
+`RequestProject/GLM/SemanticPlan.lean` (`accept_perm`,
+`accept_eq_answered_iff`, `disagreement_is_ambiguous`,
+`planned_conservative`, `planned_sound`,
+`planned_refuses_only_on_disagreement`, and the two refutations of the
+first-licensed rule).
+
+**What it measured.** Through the planner the frozen probe scores 19
+correct, 0 wrong, 1 refused — the refusal is *why is the sky blue?*, whose
+right outcome it is — and passes its declared mark of ten. On the 110
+questions committed before the planner it gives 86 correct answers and 22
+correct refusals with 1 wrong, against 4, 22 and 0 through the grammar. The
+figures are generated in
+[`studies/SEMANTIC_PLAN_STUDY.md`](studies/SEMANTIC_PLAN_STUDY.md) §5.
+
+**Two findings worth the round on their own.** The one wrong answer is not a
+misreading: the element register holds iron's atomic weight as `55.84` where
+the IUPAC value is `55.845`, and the pre-registered label was not edited. And
+*does energy have the same dimensions as torque?* has two licensed readings
+that disagree — the extended vector keeps the plane angle and says no, the SI
+projection drops it and says yes — so it is refused with both named, which is
+the layers principle of [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md)
+turned into a rule the Lean file proves.
+
+**What it deliberately did not do.** The planner is opt-in, so the 177-case
+contract set is untouched (asked in-process through both paths, two answers
+differ and both still pass); it reads one question at a time; and the
+held-out sets share an author with the frames. Each is a candidate in
+[`STATUS.md`](STATUS.md) §3.4.
+
 ## Phase 57 — the measurements no reader saw: the converse of D6, decided key by key
 
 **Status: closed this round.** It took **candidate 4** of
@@ -311,7 +622,7 @@ carriers read zero somewhere and zero has no inverse — so that claim is
 **<!--figure:planstore-refusals-->7<!--/figure-->** refusals of which
 **<!--figure:planstore-refusals-replayed-->7<!--/figure-->** come back with
 their reason and their wording; licensing trials
-**<!--figure:planstore-trials-first-->27<!--/figure-->** →
+**<!--figure:planstore-trials-first-->27<!--/figure-->** → 
 **<!--figure:planstore-trials-replayed-->0<!--/figure-->**, and the worst
 single follow-up **<!--figure:planstore-worst-case-->14<!--/figure-->** → 0.
 The control decides the key: keyed by the follow-up's text alone,
@@ -839,7 +1150,7 @@ remaining, the release. Running it failed six units, none of them noise:
 
 **What the release now says.** `signoff --verify-release` reports **99 of 99
 test files and 7 of 7 instruments** signed with the exhaustive cases on; the
-suite is **<!--figure:suite-->4,180 tests across 105 of the 106 test files, 16,288 subtests, outside the document check<!--/figure-->**,
+suite is **<!--figure:suite-->4,267 tests across 108 of the 109 test files, 16,276 subtests, outside the document check<!--/figure-->**,
 one process with `GLM_EXHAUSTIVE=1` collecting 3,979; the end-to-end
 evaluation is **157 / 157** with 19 expected refusals; `corpus --check` is
 current; and `lake build` is clean over 120 Lean files with no `sorry`.
@@ -3464,3 +3775,4 @@ with `RequestProject/GLM/Comparative.lean` behind it. See §2, "Measure words as
 relative measures",
 [`studies/RELATIVE_MEASURE_STUDY.md`](studies/RELATIVE_MEASURE_STUDY.md) and
 [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 18.
+

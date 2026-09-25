@@ -470,6 +470,29 @@ class GeometricSession(SubstrateReports, LatticeGeometryReports,
             domain=query.domain, answer=solution.answer, ok=solution.ok))
         return solution
 
+    def ask_planned(self, text: str) -> Solution:
+        """Answer one question through the typed planner.
+
+        :func:`glm_universal.runtime.semantic_plan.ask_planned`: the question
+        is read into typed plans over the operations this session already
+        has, each plan is run, and an answer is given only when the licensed
+        plans agree on one value.  With no licensed plan the answer is
+        exactly :meth:`ask`'s.
+        """
+        from . import semantic_plan
+        return semantic_plan.ask_planned(self, text)
+
+    def ask_engineering(self, text: str) -> Solution:
+        """Answer one question through the engineering surface.
+
+        :func:`glm_universal.engineering.speak.ask_engineering`: formula
+        wheels, dimensional checks, the Smith chart, electro-mechanical
+        analogies, resonance and delta-sigma.  A question none of its frames
+        reads is answered exactly as :meth:`ask_planned` answers it.
+        """
+        from ..engineering import speak
+        return speak.ask_engineering(self, text)
+
     def escalate(self, text: str,
                  domain: Optional[str] = None) -> "esl.Escalated":
         """The climb itself, for a caller that wants the ladder and not the

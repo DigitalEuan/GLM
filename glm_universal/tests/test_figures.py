@@ -355,9 +355,9 @@ class TestDocumentationQuotesCurrentFigures(unittest.TestCase):
             # modules; the package now holds 126 and the reasoning kernel
             # holds 71, so the bare phrase names a figure that is current
             # again and cannot be guarded without failing on the truth.
-            # The package figure is guarded by "92 modules",
-            # "96 modules", "102 modules" and "110 modules" below, which
-            # collide with nothing.
+            # The package figure is guarded by "96 modules",
+            # "102 modules" and "110 modules" below, which collide with
+            # nothing.
             "40 report subjects", "35 Lean files", "6 registers",
             "2,205 tests", "2,183 collected tests",
             "2,309 tests", "2,309 collected tests",
@@ -397,14 +397,19 @@ class TestDocumentationQuotesCurrentFigures(unittest.TestCase):
             # modules; the reasoning kernel now holds 88, so the bare
             # phrase names a figure that is current again and cannot be
             # guarded without failing on the truth.  The package figure
-            # is guarded by "92 modules", "96 modules", "102 modules"
-            # and "110 modules" below.
+            # is guarded by "96 modules", "102 modules" and
+            # "110 modules" below.
             "59 test files", "2,656 tests", "2,656 collected tests",
             "12,074 subtests",
             # Retired in v5.17, when the question shape became an object:
             # an eleventh sub-package, a forty-seventh report subject and
             # the sixty-first test file.
-            "46 report subjects", "ten sub-packages", "92 modules",
+            # "92 modules" was retired from this list in Phase 62, when the
+            # reasoning kernel reached 92 modules: the bare phrase names a
+            # current figure again, exactly as "71 modules" and "88 modules"
+            # did.  The package figure stays guarded by "96 modules",
+            # "102 modules" and "110 modules".
+            "46 report subjects", "ten sub-packages",
             "45 Lean files", "129 cases", "129 CLI cases", "129-case",
             "60 test files", "2,746 tests", "2,746 collected tests",
             "12,508 subtests",

@@ -6,7 +6,7 @@
 
 **Verdict.** Yes: take the names away and the text search and the identifier address book fall to chance while the structural address holds.
 
-**Deciding figure.** At k = 5 over 896 queries the text search falls from 771 hits to 82 and the identifier address book from 443 to 47 — chance is 48 — while the structural address holds 169 of its 239.
+**Deciding figure.** At k = 5 over 801 queries the text search falls from 695 hits to 80 and the identifier address book from 395 to 51 — chance is 43 — while the structural address holds 153 of its 220.
 
 **Recomputed by.** `glm_universal.reasoning.anonymous.anonymous_report`
 
@@ -75,7 +75,7 @@ whose third column re-derives every figure below in a fresh interpreter.
 
 ## 1. What the renaming does to each faculty
 
-The same 896 queries, twice: once as the statement is written, once with every
+The same 801 queries, twice: once as the statement is written, once with every
 identifier outside the declared vocabulary replaced. Nothing else changes — the
 corpus, the relevance ground truth, the depth each faculty is read to and the
 window it is scored at are all the relay study's.
@@ -83,20 +83,20 @@ window it is scored at are all the relay study's.
 <!-- generated: anonymous-faculties -->
 | faculty | hit@5, names kept | hit@5, names replaced |
 |---|---|---|
-| text — exact overlap of the identifiers | 771 (86.0 %) | 82 (9.2 %) |
-| lexical — the identifier address book | 443 (49.4 %) | 47 (5.2 %) |
-| **address — the structural address book** | 239 (26.7 %) | 169 (18.9 %) |
-| name — substring search over the names | 276 (30.8 %) | 21 (2.3 %) |
-| digest — a control that knows nothing | 57 (6.4 %) | 48 (5.4 %) |
-| random — a seeded permutation | 49 (5.5 %) | 49 (5.5 %) |
+| text — exact overlap of the identifiers | 708 (84.6 %) | 63 (7.5 %) |
+| lexical — the identifier address book | 399 (47.7 %) | 44 (5.3 %) |
+| **address — the structural address book** | 208 (24.9 %) | 148 (17.7 %) |
+| name — substring search over the names | 263 (31.4 %) | 16 (1.9 %) |
+| digest — a control that knows nothing | 39 (4.7 %) | 44 (5.3 %) |
+| random — a seeded permutation | 46 (5.5 %) | 46 (5.5 %) |
 
-896 queries over a corpus of 3582 declarations; chance at k = 5 is 5.4 %.  The text search collapses: yes; the identifier address book collapses with it: yes; the structural address holds: yes; and it leads every other faculty in this register: yes.
+837 queries over a corpus of 3766 declarations; chance at k = 5 is 5.1 %.  The text search collapses: yes; the identifier address book collapses with it: yes; the structural address holds: yes; and it leads every other faculty in this register: yes.
 <!-- end generated -->
 
 In numbers, and as a sentence rather than a table: take the names away and the
-text search falls from 771 hits at k = 5 to 82 over the 896 queries; the
-identifier address book falls from 443 to 47, at the 48 hits chance gives at
-that depth; and the structural address holds 169 of its 239.
+text search falls from 695 hits at k = 5 to 80 over the 801 queries; the
+identifier address book falls from 395 to 51, near the 43 hits chance gives at
+that depth; and the structural address holds 153 of its 220.
 Yes, then, to the question at the head of this document — every faculty that
 reads identifiers falls to chance, and the structural one does not.
 
@@ -138,8 +138,8 @@ query.
 <!-- generated: anonymous-invariance -->
 | reading | queries | what it means |
 |---|---|---|
-| queries whose syntax coordinates are untouched | 853 | 95.2 % of 896 |
-| queries where a type-word coordinate moves | 43 | the declaration's own name spells `Nat`, `Int`, `Rat`, `Set` or `Decidable`, and the shipped map counts those words wherever they occur |
+| queries whose syntax coordinates are untouched | 790 | 94.4 % of 837 |
+| queries where a type-word coordinate moves | 47 | the declaration's own name spells `Nat`, `Int`, `Rat`, `Set` or `Decidable`, and the shipped map counts those words wherever they occur |
 | queries where any other syntax coordinate moves | 0 | none, which is `GLM.Anonymous.features_anonymise` holding of the code |
 
 The declared vocabulary a query keeps is 39 words.  Placeholders fresh against the corpus: yes.
@@ -153,8 +153,8 @@ including inside an identifier. So a declaration named
 `proton_relErr_bounds` contributes to the rationals-and-reals coordinate
 through the `Rat` inside `relErr`, and a renaming takes that contribution away.
 The structural map is therefore not perfectly name-blind, and the exact extent
-of the leak is now a measured number instead of an assumption: it touches 43 of
-896 queries — the 853 others keep every syntax coordinate exactly — and moves
+of the leak is now a measured number instead of an assumption: it touches 31 of
+801 queries — the 770 others keep every syntax coordinate exactly — and moves
 only those six coordinates, never a logical, numeric, bracket-depth or length
 coordinate.
 
@@ -168,8 +168,8 @@ told that this register exists.
 <!-- generated: anonymous-relay -->
 | reading | queries | gate fires on | text alone, hit@5 | the relay, hit@5 |
 |---|---|---|---|---|
-| names kept | 896 | 33 | 771 (86.0 %) | **778 (86.8 %)** |
-| names replaced | 896 | 614 | 82 (9.2 %) | **118 (13.2 %)** |
+| names kept | 837 | 30 | 708 (84.6 %) | **715 (85.4 %)** |
+| names replaced | 837 | 568 | 63 (7.5 %) | **105 (12.5 %)** |
 
 The gate is 1/10, the one the relay study already carries, not re-tuned for this register.  It hands over on most of the register: yes; and the relay beats the text leader here: yes.
 <!-- end generated -->

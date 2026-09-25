@@ -299,8 +299,8 @@ supports the quantiser may emit, not the scale.**
 Stated plainly, because the brief asks for four things and this study now
 settles three of them and takes the fourth as far as a finite model goes:
 
-* **The VOA state-field map `Y(u,z)` (concept 4) is built at the Griess layer,
-  and no further.** `VOA.lean` constructs the map on the 3-dimensional `2A`
+* **The VOA state-field map `Y(u,z)` (concept 4) is built at the Griess layer
+  (the partial 2A axial algebra on axes), and no further.** `VOA.lean` constructs the map on the 3-dimensional `2A`
   subalgebra — `mode u 1 v = u ⋆ v`, truncated, skew-symmetric, with an
   invariant form that invariance itself forces, self-adjoint modes, a
   nondegenerate pairing and the vacuum `(4/5)(e₀ + e₁ + e₂)`. It then proves

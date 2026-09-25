@@ -14,10 +14,10 @@
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand
-**Date:** 3 September 2026
+**Date:** 3 September 2026, brought up to date 24 September 2026 (Phases 60 and 61)
 **Checked against this repository:** every Lean statement quoted below was read
 back out of `RequestProject/GLM/` rather than retyped, and every number was
-recomputed by one of the two scripts named in §0.3.
+recomputed by one of the scripts named in §0.3.
 
 ---
 
@@ -54,7 +54,7 @@ step can be seen rather than described.
 ### 0.3 How to reproduce every number in this document
 
 ```bash
-# the exact tables of §1.3, §2.4 and §9.2
+# the exact tables of §1.3, §2.4, §9.2 and §18.3
 PYTHONPATH=overlay python3 studies/scripts/number_theory_tables.py
 
 # the worked example of §14 -- one number through every layer
@@ -64,10 +64,10 @@ cd overlay && PYTHONPATH=. python3 -m glm_universal.examples.number_pipeline
 python3 studies/scripts/tmm_null_model.py
 
 # the Lean development itself
-lake build          # 122 files under RequestProject/GLM/, 0 sorry
+lake build          # 133 files under RequestProject/GLM/, 0 sorry
 ```
 
-The Lean development is 126 files under `RequestProject/GLM/`, all building
+The Lean development is 133 files under `RequestProject/GLM/`, all building
 against Mathlib for Lean 4.28.0 with **no `sorry` and no `admit`**, and no
 declared axiom anywhere: every proof depends only on `propext`,
 `Classical.choice`, `Quot.sound`, and — for the theorems reached through
@@ -80,7 +80,10 @@ so the agreement is now a test:
 `overlay/glm_universal/tests/test_number_theory_evidence.py` reads this file and
 
 * re-runs `studies/scripts/number_theory_tables.py` and compares the tables of
-  §1.3, §2.4 and §9.2 **cell by cell** with the ones printed above;
+  §1.3, §2.4, §9.2 and §18.3 **cell by cell** with the ones printed in this
+  document, and checks in the last of them that the measured stream period is
+  the one Lean predicts and that the walked sub-cycle count is the closed form
+  and vanishes exactly at the primes;
 * re-runs `glm_universal.examples.number_pipeline` and compares the §14
   transcript **line for line**, and separately checks each reading §14 draws
   out of it;
@@ -95,7 +98,42 @@ so the agreement is now a test:
 That test found two things when it was first run, and both are repaired above:
 the file count had aged from 89 to 95, and the generator's prime sieve bounded
 itself with `limit ** 0.5`, which is a float in a script whose whole point is
-that it does not construct one. It is `math.isqrt` now.
+that it does not construct one. It is `math.isqrt` now. It found a third in
+Phase 60: the repository tree held one more file than the overlay mirror that
+the figures read, because the Phase 59 file had not been copied across. The
+mirror was resynced then, and Phase 61 copied its three retrieved files into
+both trees in the same step.
+
+### 0.5 What this document covers
+
+| part | sections | subject |
+|---|---|---|
+| the value layer | §1–§5 | the constants, the wobble as a Sturmian word, the mantissa wall, the irrational tower, the circle of fifths |
+| the code layer | §6–§8 | the coset census, the reversible channel, tax conservation |
+| the census and its use | §9–§12 | the binary period as a fingerprint, the three barriers and three freedoms, the spectroscopic analogy and its null model |
+| the synthesis | §13–§14 | what the substrate holds, and one number walked down every layer |
+| the arithmetic of the code | §15–§16 | why 23 and why 24, as arithmetic; the Golay code's own numbers, all proved |
+| arithmetic the machine now uses | §17–§20 | the polygon and the totient, the periods of a stream, the Gray layer, the scale bucket, and where a transcendental may enter |
+| the ledger | §21 | every result above as proved, measured or refuted, with its file |
+| the seeds and the first distinction | §22–§23 | e irrational, the seeds forced by their roles, the hull that cannot be inverted, φ as the least quadratic Pisot number, the π·e dichotomy; and what one reversible distinction forces |
+| counting claims, audited | §24–§26 | the two-gap law and the Golay ball count; 3-6-9, the 44 balanced octads against chance and relabelling, the 144° Platonic totals; the element address layer |
+| lattices beside and above | §27 | the 23 Niemeier root systems found by a proved-complete search, and the minima past 24 dimensions |
+
+§15–§21 were added in Phase 60. They collect number-theoretic results that were
+proved in the development after this document was first written — some of them
+in rounds whose subject was not number theory at all (the delta–sigma periods
+arrived with the engineering surface of Phase 59, the scale bucket with the
+economics register) — and that were therefore recorded only in the study of
+the round that produced them.
+
+§22–§27 were added in Phase 61. §22 and §23 are the archive's first-principles
+and projection files retrieved in that round (`SeedRoles.lean`,
+`Distinction.lean`), with the irrationality of e — which the archive assumed —
+now proved; §26 is the spatial-arithmetic study's `GolayMOG.lean`, retrieved in
+the same round; and §24, §25 and §27 collect number-theoretic and counting
+results that were already in the development (`WobbleLandscape.lean`, the
+`Triad*` files, `Platonic.lean`, `Niemeier.lean`, `HigherLattices.lean`) but
+had not been written up here. The ledger of §21 carries all of them.
 
 ---
 
@@ -833,7 +871,7 @@ What is and is not being claimed of it is stated once, in the Positioning
 section of [`PROJECT_DIRECTIVES.md`](../PROJECT_DIRECTIVES.md), and this paper
 is written under it. It is a
 mathematical object with unusual fidelity to the structure of numbers, and the
-fidelity is provable (126 Lean files, 0 `sorry`) and measurable (exact integer
+fidelity is provable (133 Lean files, 0 `sorry`) and measurable (exact integer
 experiments, 24/24 Sturmian matches).
 
 ### 13.2 What it holds
@@ -849,6 +887,13 @@ experiments, 24/24 Sturmian matches).
 4. **Ambiguity**, reported rather than resolved: at the snap boundary the
    substrate returns six equidistant codewords (`ties_card_eq_six`), and the
    mean coset weight is already past the unique-reading radius.
+5. **Periods**, exactly: the stream of `p/q` repeats with least period `q` and
+   an irrational stream never repeats (§18), the binary expansion repeats with
+   the order of 2, and the polygon's sub-cycles count the non-totatives (§17) —
+   three projections of one number, set side by side in §18.3.
+6. **The code's own arithmetic**, as theorems rather than quotations: the
+   weight enumerator, `S(5,8,24)`, `λ₄ = 5`, and the arithmetic accident that
+   makes 23 perfect and 24 not (§15–§16).
 
 ### 13.3 What it does not hold
 
@@ -971,6 +1016,516 @@ a unique correction. The script takes any `Fraction` in [0, 1).
 
 ---
 
+## 15. Why 23, and why 24 — as arithmetic (Lean: `Packing.lean`)
+
+§6 counts the cosets of a code that already exists. This section is the step
+before it: why a code with these parameters can exist at all, and at which
+lengths. It is the part of the first-principles chain (`data_object/FirstPrinciples/`
+in the supplied archive) that survives as pure arithmetic, and it is retrieved
+into the development whole.
+
+### 15.1 The ball of radius three
+
+A binary code that corrects three errors packs balls of radius three around
+its words. The size of such a ball has a closed form,
+`ball3_closed_form`: `Σ_{i≤3} C(n, i) = (n³ + 5n + 6)/6`. A *perfect* code —
+one whose balls tile the whole space `2ⁿ` — needs that ball size to divide a
+power of two.
+
+### 15.2 Perfection is an arithmetic accident
+
+`perfect_triple_length`: for `4 ≤ n ≤ 2000`, if `(n³ + 5n + 6)/6` divides
+`2⁴⁵` then `n = 7` or `n = 23`. The first is the repetition code; the second is
+the Golay length. The search is discharged inside the kernel by `decide`
+over all 1,997 lengths, so this is a finite theorem with a stated range, not a
+sampled observation. At the Golay length the arithmetic is exact,
+`golay23_perfect_arithmetic`: `4096 · Σ_{i≤3} C(23, i) = 2²³`, with ball size
+`ball3_at_23` = 2048.
+
+### 15.3 The 24th coordinate is a choice, and its price is exact
+
+At length 24 the same 4,096 words are *not* perfect,
+`golay24_not_perfect`, and the shortfall is exact, `golay24_deficit`:
+`2²⁴ − 4096 · 2325 = 7,254,016` words lie outside every radius-3 ball
+(`ball3_at_24` = 2325). What the extra coordinate buys is
+`parityExt_min_distance`: extending a code of *odd* minimum distance `d` by a
+parity cell gives minimum distance at least `d + 1`, so 7 becomes 8 — while the
+correction radius stays three either way. The 24 is the parity extension,
+added for self-duality and the even-distance structure the Leech construction
+needs; it is not forced by the packing argument, and the development says so.
+
+## 16. The Golay code's own numbers (Lean: `GolayWeightEnum.lean`, `Steiner.lean`, `LDP.lean`)
+
+Every number below was once quoted from the literature; each is now a theorem
+about the development's own code.
+
+### 16.1 The weight enumerator, and the cheapest codeword
+
+`card_codewords`: the code has 4,096 words. `golay_weight_enumerator`: they
+have weights `0, 8, 12, 16, 24` in the numbers `1, 759, 2576, 759, 1`, and
+`golay_doubly_even` says every weight is divisible by four. On the value layer
+this has a consequence §1 uses: `octad_min_tax` — among nonzero codewords the
+octads (weight 8) minimise the symmetry tax. This is the precise and true form
+of the archive's "the photon is the minimum-TAX octad": it holds on the *code*
+layer, and nowhere is it claimed of a physical photon.
+
+### 16.2 The Steiner system and its λ₄
+
+`card_octads`: there are 759 octads. `card_inter_le_four`: two distinct octads
+meet in at most four points. `unique_octad`: any five of the twenty-four points
+lie in exactly one octad — the Steiner system `S(5, 8, 24)`, proved over all
+`C(24, 5) = 42,504` five-sets rather than quoted. `card_octads_through_four`:
+any four points lie in exactly **five** octads, which is the `λ₄ = 5` that makes
+the weight-4 tie of §6.4 a *sextet*: the four-set itself and the complementary
+four points of each of the five octads through it are the six tetrads.
+
+### 16.3 The syndrome as an energy
+
+`LDP.lean` settles the "Literal Data Physics" table of the archive's
+`GMHGL/ldp_complete_mapping.md`, which reads the twelve parity checks as an
+energy: the energy of a word is
+the number of checks it violates. `energy_eq_zero_iff`: the ground states are
+exactly the codewords. `energy_descent`: every excited word has a neighbour one
+flip away with energy exactly one lower — the archive's sampled "100 % of
+vectors can descend", proved. `rigidity`: a one-bit flip of a codeword is never
+a codeword. `exists_relaxation`: every word reaches a codeword by flipping
+exactly as many coordinates as its energy, named in advance. `mean_energy`:
+over the 4,096 syndromes the mean energy is **6 exactly**; the archive had
+sampled `6.05`. The energy is a property of the chosen check matrix, not of
+the code, which is why it is kept distinct from the coset weight of §6.2.
+
+## 17. The polygon and the totient (Lean: `Totient.lean`)
+
+This is the retrieved content of `spatial_totient_kinetics.py`, which claimed
+that walking a polygon "derives primality". It does, and the derivation is
+Euler's totient.
+
+### 17.1 The stride
+
+`stride_orbit_card`: striding by `k` around an `n`-gon returns to the start
+after `n / gcd(n, k)` steps. `stride_proper_iff_not_coprime`: the walk closes
+*early* — traces a proper sub-polygon — exactly when `k` shares a factor with
+`n`.
+
+### 17.2 The sub-cycle count, and geometric primality
+
+Count the strides `1 ≤ k ≤ ⌊n/2⌋` whose walk closes early. `subCycles_eq`: for
+`n ≥ 3` that count is `⌊n/2⌋ − φ(n)/2`. `subCycles_eq_zero_iff_prime`: it is
+zero exactly when `n` is prime. The honest reading is the one the Lean header
+gives: this is a geometric *statement* of primality, not a new primality
+*test* — the count costs as much as knowing the factorisation. Table §18.3
+walks every stride for every `n` from 3 to 30 and finds the closed form each
+time.
+
+## 18. The periods of a stream (Lean: `EngineeringWheels.lean`, `NowReceipt.lean`)
+
+§2 describes the wobble of a rational as a Sturmian word. The engineering round
+of Phase 59 needed one more fact about it — when does the stream repeat? — and
+proved it; the "now-receipt" study of Phase 49 proved what the modulator's
+accumulator does and does not remember. Both are number theory.
+
+### 18.1 When the bitstream repeats
+
+For `t ∈ [0, 1)` the first-order bitstream is `bit(n) = ⌊(n+1)t⌋ − ⌊nt⌋`.
+`ds_bits_periodic_iff`: `P` is a period of the stream exactly when `P·t` is an
+integer. Two corollaries carry the weight:
+
+* `ds_rational_period_iff`: for `p/q` in lowest terms with `p < q`, the periods
+  are exactly the multiples of `q`, so the **least period is the denominator**;
+* `ds_irrational_aperiodic`: an irrational input is never periodic, at any
+  positive period.
+
+So periodicity is a decision procedure for rationality *on the stream*, and it
+is exact: a stream that repeats with period `P` names its own denominator as a
+divisor of `P`.
+
+### 18.2 What the accumulator records
+
+`acc_eq_fract`: after `n` ticks the accumulator is exactly the fractional part
+of the integral of the input, `fract(Σ_{i<n} t_i)`; `count_eq_floor`: the number
+of ones emitted is its floor. `acc_eq_iff_fract_eq`: two runs leave the same
+accumulator exactly when their integrals agree modulo one — so the accumulator
+records the integral mod 1 **and nothing else**. The two negative results are
+the point: `receipt_collision` exhibits two input schedules (`3/4, 3/4` and
+`1/2, 1`) that leave the same accumulator and the same count after two ticks
+while differing at the first, so the receipt does not determine the history;
+and `receipt_pigeonhole` bounds what any receipt can separate — among `q + 1`
+schedules on the `1/q` grid, two leave the same accumulator after the same
+number of ticks, however long the run.
+
+### 18.3 The three periods of 1/n
+
+A single rational carries three different periods in this development, and
+they are easy to confuse: the period of its delta–sigma stream (§18.1), the
+period of its binary expansion (the multiplicative order of 2 of §9.2), and the
+cycle structure of the polygon on its denominator (§17). The generator's fourth
+table puts them side by side. The stream period is found by search over a
+window of `4n` ticks and compared with the denominator Lean predicts; the binary
+period is the order of 2 modulo the odd part of `n` (1 when that part is 1);
+the sub-cycles are counted by walking every stride and compared with the
+closed form of §17.2.
+
+| n | stream period (measured) | stream period (Lean) | binary period | totient | sub-cycles (walked) | n/2 - totient/2 | prime |
+|---|---|---|---|---|---|---|---|
+| 3 | 3 | 3 | 2 | 2 | 0 | 0 | yes |
+| 4 | 4 | 4 | 1 | 2 | 1 | 1 | no |
+| 5 | 5 | 5 | 4 | 4 | 0 | 0 | yes |
+| 6 | 6 | 6 | 2 | 2 | 2 | 2 | no |
+| 7 | 7 | 7 | 3 | 6 | 0 | 0 | yes |
+| 8 | 8 | 8 | 1 | 4 | 2 | 2 | no |
+| 9 | 9 | 9 | 6 | 6 | 1 | 1 | no |
+| 10 | 10 | 10 | 4 | 4 | 3 | 3 | no |
+| 11 | 11 | 11 | 10 | 10 | 0 | 0 | yes |
+| 12 | 12 | 12 | 2 | 4 | 4 | 4 | no |
+| 13 | 13 | 13 | 12 | 12 | 0 | 0 | yes |
+| 14 | 14 | 14 | 3 | 6 | 4 | 4 | no |
+| 15 | 15 | 15 | 4 | 8 | 3 | 3 | no |
+| 16 | 16 | 16 | 1 | 8 | 4 | 4 | no |
+| 17 | 17 | 17 | 8 | 16 | 0 | 0 | yes |
+| 18 | 18 | 18 | 6 | 6 | 6 | 6 | no |
+| 19 | 19 | 19 | 18 | 18 | 0 | 0 | yes |
+| 20 | 20 | 20 | 4 | 8 | 6 | 6 | no |
+| 21 | 21 | 21 | 6 | 12 | 4 | 4 | no |
+| 22 | 22 | 22 | 10 | 10 | 6 | 6 | no |
+| 23 | 23 | 23 | 11 | 22 | 0 | 0 | yes |
+| 24 | 24 | 24 | 2 | 8 | 8 | 8 | no |
+| 25 | 25 | 25 | 20 | 20 | 2 | 2 | no |
+| 26 | 26 | 26 | 12 | 12 | 7 | 7 | no |
+| 27 | 27 | 27 | 18 | 18 | 4 | 4 | no |
+| 28 | 28 | 28 | 3 | 12 | 8 | 8 | no |
+| 29 | 29 | 29 | 28 | 28 | 0 | 0 | yes |
+| 30 | 30 | 30 | 4 | 8 | 11 | 11 | no |
+
+Read across a row, the three periods are three projections of one number.
+For `1/7` — the number §14 walks — the stream repeats every 7 ticks, the binary
+expansion every 3 digits, and the heptagon has no proper sub-cycle because 7
+is prime. The stream sees the denominator, the binary expansion sees the order
+of 2, and the polygon sees the factorisation; none of the three is recoverable
+from either of the others alone (`1/7` and `1/14` share a binary period and
+differ in the other two). The binary period divides the totient whenever `n`
+is odd, which the table shows and Fermat–Euler explains; nothing in the table
+is new mathematics, and what it adds is that each column is either proved in
+the development or measured against a proof.
+
+## 19. The Gray layer and the scale bucket (Lean: `GrayJump.lean`, `LogBucket.lean`)
+
+### 19.1 The Gray layer, exactly
+
+The Leech-lattice "shortcut" of the supplied archive measures the jump between
+two 24-bit states. `d2_eq_pop_gray_xor`: that jump depends only on `a XOR b` —
+it is the population count of the Gray code of the exclusive-or — so it is
+evaluated in a handful of instructions and never walks the integers between
+the two states. `d2_succ`: adjacent integers are always at distance exactly 1,
+which is the defining property of a Gray code and rules out the archive's
+"geodesic jumps" between consecutive integers on this layer. `d2_mod_two`: the
+jump is even exactly when `a` and `b` have the same parity; `exists_odd_d2`
+refutes the archive's "`d²` is always even" on the raw layer (the witness is
+the adjacent pair 1,000,033 and 1,000,034) — evenness belongs to the snapped
+states, not to the encoding.
+
+### 19.2 The magnitude bucket, exact
+
+The economics register holds prices as exact rationals and needs their order of
+magnitude without a logarithm. `exists_unique_bucket`: for a base `b > 1` and a
+positive rational `x` there is exactly one integer `k` with `bᵏ ≤ x < bᵏ⁺¹`, so
+the bucket is not a choice; `bucket_mono`: a larger value never has a smaller
+bucket; `mantissa_mem_Ico`: the part the bucket throws away is a rational in
+`[1, b)`, kept exactly. This is the exact counterpart of §3: the mantissa wall
+is what a float does to that remainder, and the bucket is what exact
+arithmetic does instead.
+
+## 20. Where a transcendental may enter (Lean: `SeedLayers.lean`, `Transcendental.lean`, `Irrational.lean`)
+
+§4 says a real is held as a process. This section says where the three seeds
+the archive multiplies — π, φ, e — can come from at all.
+
+* `transcendental_not_trace_of_finite_order`: no finite-order complex matrix,
+  in any dimension, has a transcendental trace — a finite symmetry never
+  produces a transcendental number.
+* `lattice_character_ne_pi`: unconditionally, no integer matrix — no symmetry
+  of a lattice such as Λ₂₄ — has π as its trace; irrationality suffices.
+* `phi_is_trace_of_order_ten`: φ *is* the trace of the rotation of order 10,
+  so φ is available inside the finite-symmetry layer and π and e are not.
+* `no_countable_layer_lossless` (§4.1): no layer with countably many views holds
+  every real, which is why the value layer holds processes.
+* `pos_iff_witness`: a real is positive exactly when some `1/2ᵐ` lies below it,
+  so positivity is witnessed in finitely many steps when it holds — the reason
+  the value layer *decides* strict inequalities and *refuses* equality; and
+  `exp_error_le`, `log_error_le` bound how an input error propagates through
+  the written transcendental functions.
+
+The consequence for the fits the archive reports is §10.3 and `FitCapacity.lean`:
+a seed is an input, its placement is a choice, and a coincidence is priced.
+
+## 21. The evidence ledger
+
+Every result of this document, sorted by what kind of claim it is. *Proved*
+means a theorem in `RequestProject/GLM/` under the standard axioms; *measured*
+means recomputed exactly by a script named in §0.3 and compared by the test of
+§0.4; *refuted* means a claim of the supplied material that the development
+proves false, kept because a refuted claim is a result.
+
+| result | kind | where |
+|---|---|---|
+| NRCI is 1 exactly at the vacuum; four exact tax bands | proved | §1, `Constants.lean` |
+| the wobble of a rational is a Sturmian word with closed-form counts | proved | §2, `Sturmian.lean` |
+| 24/24 odd primes below 100 match the Sturmian count law | measured | §2.4 |
+| the doubling map kills dyadic rationals and cycles odd ones | proved | §3, `Mantissa.lean` |
+| no countable layer holds every real; the tower is faithful | proved | §4, §20, `Irrational.lean`, `Tower.lean` |
+| the circle of fifths never closes | proved | §5, `Harmony.lean` |
+| the coset census and the mean coset weight | proved | §6, `Golay/Census.lean` |
+| unique repair to distance 3, the six-fold tie at 4 | proved | §6.4, `GolayBoundary.lean`, `Golay/Sextet.lean` |
+| Gray codes, reversible gates, kink parity | proved | §7, `Reversible.lean` |
+| "a Gray cycle flips exactly half the bits a binary cycle does" | refuted: the sharp relation is 2·Gray = Binary + 2 | §7, `gray_two_mul_eq` |
+| tax conservation on binary carriers, and its failure above | proved | §8, `TaxConservation.lean` |
+| 12 of the 24 odd primes below 100 are full reptend | measured | §9.2 |
+| a coincidence of spacing `s` is worth at most what `2Nδ` allows | proved | §10.3, `FitCapacity.lean` |
+| the optical Sturmian stack beats its null model | measured, floating point, outside the package | §11.7 |
+| 1/7 is absent at the code layer and intact at the syndrome | measured | §14 |
+| perfect 3-error codes only at lengths 7 and 23 (for n ≤ 2000) | proved | §15, `Packing.lean` |
+| the 24th coordinate raises distance 7 to 8 and leaves radius 3 | proved | §15.3, `Packing.lean` |
+| weight enumerator 1, 759, 2576, 759, 1; `S(5,8,24)`; `λ₄ = 5` | proved | §16, `GolayWeightEnum.lean`, `Steiner.lean` |
+| the octad is the cheapest nonzero codeword | proved (code layer only) | §16.1, `octad_min_tax` |
+| mean syndrome energy is 6 exactly (archive sampled 6.05) | proved | §16.3, `LDP.lean` |
+| sub-cycles `⌊n/2⌋ − φ(n)/2`, zero exactly at primes | proved, and walked for n ≤ 30 | §17, §18.3, `Totient.lean` |
+| "walking the polygon is a new primality test" | refuted as stated: it is Euler's totient | §17.2 |
+| least stream period of p/q is q; irrationals never repeat | proved, and measured for n ≤ 30 | §18, `EngineeringWheels.lean` |
+| the accumulator is the integral mod 1 and nothing else | proved | §18.2, `NowReceipt.lean` |
+| "the receipt records the history" | refuted | §18.2, `receipt_collision` |
+| the jump is `pop(gray(a XOR b))`; adjacent integers jump 1 | proved | §19.1, `GrayJump.lean` |
+| "`d²` is always even" on the raw layer | refuted | §19.1, `exists_odd_d2` |
+| the magnitude bucket exists, is unique and monotone | proved | §19.2, `LogBucket.lean` |
+| no finite symmetry yields a transcendental; φ is a trace of order 10 | proved | §20, `SeedLayers.lean` |
+| e is irrational; no lattice symmetry has e as a character | proved | §22.1, `SeedRoles.lean` |
+| no seed is a ratio of counts; each seed is the unique number with its role | proved | §22.1–§22.2, `SeedRoles.lean` |
+| ⌊πφe⌋ = 13 but ⌊πe/φ⌋ = 5, ⌊πφ²e⌋ = 22, ⌊πφe²⌋ = 37; three monomials share 13 | proved | §22.3, `SeedRoles.lean` |
+| "run 13 backwards to the seeds" | refuted: the fibre is `[13, 14)`, of measure one | §22.3, `thirteen_not_invertible` |
+| φ is the least quadratic Pisot number and badly approximable | proved | §22.4, `SeedRoles.lean` |
+| "φ is the cheapest self-similarity" | refuted as stated: the plastic number is smaller and Pisot | §22.4, `plastic_lt_phi` |
+| π·e is transcendental or algebraic, and each branch has a stated consequence | proved, neither branch asserted | §22.5, `SeedRoles.lean` |
+| one reversible distinction forces the toggle, `ZMod 2` and commutativity | proved | §23, `Distinction.lean` |
+| a delta–sigma gap takes one of two values; 2325/4096 of words lie within 3 of the code | proved | §24, `WobbleLandscape.lean` |
+| "3, 6, 9 is a structural discovery" | refuted: any three-element set produces it | §25.1, `Triad.lean` |
+| exactly 44 of the 759 octads are block-balanced | proved | §25.2, `TriadCensus.lean` |
+| "the 44 detects the code" | refuted: chance gives 12600/323, a swap gives 49 | §25.2, `TriadChance.lean` |
+| "144° is a Platonic constant" | refuted: it is Euler's formula, 360·V − 720 | §25.3, `Platonic.lean` |
+| the Gray identity address of the 118 elements is lossless and local | proved | §26, `GolayMOG.lean` |
+| binary TAX is a function of weight alone; the NRCI and 70 % thresholds select nothing | proved (negative) | §26, `GolayMOG.lean` |
+| exactly 23 Niemeier root systems, and the Leech lattice is none of them | proved | §27, `Niemeier.lean` |
+| the 32-dimensional construction has minimum norm 4 and a unique three-level address | proved | §27, `HigherLattices.lean` |
+
+## 22. The seeds as numbers (Lean: `SeedRoles.lean`)
+
+The archive's constants are built from π, φ and e, and §10.3 prices the
+coincidences read off them. This section says what the three numbers are,
+arithmetically, and what reading 13 out of them does and does not license.
+Everything here was retrieved in Phase 61 from the archive's `Seeds`, `Fibre`,
+`Cheapest`, `Independence` and `OneParameter` files; the modules those files
+imported are not in the supplied archive, so the numerical bounds were
+re-derived from `FitCapacity.lean`'s.
+
+### 22.1 The seeds are an input
+
+* `eSeed_irrational`: **e is irrational.** The pinned Mathlib does not carry
+  this, and the archive assumed it; the proof here is Fourier's. If e = p/q,
+  put n = q + 1: then n!·(e − Σ_{m ≤ n} 1/m!) is an integer, and the tail bound
+  puts it strictly between 0 and (n + 2)/(n + 1)² < 1.
+* `seeds_irrational`, `seeds_not_ratio_of_counts`: all three seeds are
+  irrational, so none is p/q for integers p, q. Everything a binary substrate
+  counts is an integer, so no seed is a ratio of counts: the seeds are an input
+  to the binary principle, not an output of it.
+* `phi_reachable_by_root_extraction`, `phi_isAlgebraic`: φ is a root of
+  x² − x − 1, reached from the integers by one square root; π and e are not so
+  reached unless they are algebraic, which the classical theorems (not carried
+  here) deny.
+* `lattice_character_ne_eSeed_unconditional`: so, with no hypothesis, no
+  integer matrix — no symmetry of a lattice such as Λ₂₄ — has e as its trace,
+  exactly as §20's `lattice_character_ne_pi` says for π.
+
+### 22.2 Each seed is forced by its role
+
+Given the role, the number is not a choice:
+
+| seed | role | theorem |
+|---|---|---|
+| φ | the unique positive x with x² = x + 1 (one-step self-similarity) | `phi_unique_positive_root` |
+| π | the least positive zero of sin (the first closure of a rotation) | `pi_least_positive_zero` |
+| e | the unique base a > 0 with d/dx aˣ = 1 at 0 (unit growth) | `e_unique_unit_growth_base` |
+| e | the time-one value of any f with f′ = f, f(0) = 1 | `flow_time_one` |
+
+and they are distinct: φ < e < π (`seeds_distinct`).
+
+### 22.3 The combining rule is free, and 13 cannot be inverted
+
+`hull_alternatives` proves four floors side by side:
+
+| monomial | value | floor |
+|---|---|---|
+| πφe | 13.8175… | 13 |
+| πe/φ | 5.27… | 5 |
+| πφ²e | 22.3… | 22 |
+| πφe² | 37.5… | 37 |
+
+Each monomial is as simple as the others, and only the first gives 13, so reading
+13 out of the seeds needs the monomial πφe to be chosen. Conversely, three
+different monomials give 13 (`three_monomials_give_thirteen`: πφe, πφ³ = 13.30…,
+π⁴/e² = 13.18…), the fibre of ⌊·⌋ over 13 is `[13, 14)` (`floor_fibre_thirteen`)
+of Lebesgue measure one (`floor_fibre_measure`), and so the floor cannot be run
+backwards (`thirteen_not_invertible`). The trace forgets in the same way: infinitely
+many integral motions have trace 2 (`trace_fibre_infinite`), and the shears by
+1 and by 2 are not conjugate over ℤ although trace, determinant and
+characteristic polynomial agree (`same_trace_not_conjugate`). The period 2π
+forgets the winding number (`period_fibre_infinite`) and e as a flow value
+forgets the clock (`e_flow_fibre`).
+
+### 22.4 In what sense φ is cheapest
+
+* `phi_isQuadPisot`, `quadratic_pisot_ge_phi`: φ is a quadratic Pisot number
+  (a real algebraic integer > 1 whose conjugate lies inside the unit circle),
+  and no quadratic Pisot number is smaller. The proof is integer arithmetic on
+  the trace p and norm −q of x² − px − q: p ≥ 1, the polynomial is negative at
+  1 so p + q ≥ 2, and together these make it non-positive at φ.
+* `plastic_lt_phi`, `plastic_conjugates_inside_disc`: the plastic number
+  ρ ≈ 1.3247, the real root of x³ = x + 1, is smaller than φ and is Pisot — its
+  two complex conjugates have modulus √(ρ² − 1) < 1. So φ is the cheapest
+  *quadratic* self-similarity, not the cheapest.
+* `norm_form_ne_zero`, `phi_badly_approximable`: the norm form p² − pq − q²
+  never vanishes for q > 0 (else √5 would be rational), and from that
+  |φ − p/q| ≥ 1/(3q²) for every rational — the exponent 2 with a positive
+  constant (the sharp constant is 1/√5).
+* `phi_not_liouville`: so φ is at the opposite extreme from the Liouville
+  numbers.
+
+### 22.5 The π·e question has two branches
+
+Whether π·e is transcendental is open. `pi_mul_e_dichotomy` records that it is
+one or the other. If it is transcendental, the monad, the wobble and the leak are
+all irrational (`monad_irrational_of_pi_mul_e_transcendental`,
+`wobble_irrational_of_pi_mul_e_transcendental`). If it is algebraic, nothing
+forces the monad to be rational — but a rational monad would force π·e to be
+algebraic (`pi_mul_e_isAlgebraic_of_monad_rat`), an algebraic relation between π
+and e. Neither branch is asserted.
+
+And the motions the three seeds come from are told apart by the trace alone
+(`sl2_real_eigenvalue_iff`, `sl2_trichotomy`): a motion of SL(2,ℝ) with trace t
+is elliptic (t² < 4, no real eigenvalue — the rotation, π), parabolic (t² = 4,
+one repeated eigenvalue — the shear) or hyperbolic (t² > 4, two — the stretch, φ).
+
+## 23. What one distinction forces (Lean: `Distinction.lean`)
+
+§15 starts from a binary substrate and derives 23; this is the step before it,
+Stage 0 of the first-principles sub-study, retrieved in Phase 61.
+
+* `no_information_without_distinction`: on a carrier with at most one state
+  every observable is constant.
+* `bool_card`, `surjects_onto_bool`, `bitfield_card`: two states is the
+  minimum, every carrier with two distinguishable states maps onto it, and n
+  cells hold exactly 2ⁿ states.
+* `perm_bool_card`, `perm_bool_eq`: exactly two reversible operations act on a
+  cell — the identity and the toggle.
+* `two_element_ring_is_zmod_two`: every ring with two elements is `ZMod 2`, so
+  the substrate's arithmetic is forced by its carrier.
+* `self_inverse`, `reachable`: every state is its own inverse, and any state
+  reaches any other by exactly one toggle pattern.
+* `self_inverse_forces_comm`: a group in which every element is its own inverse
+  is abelian, so the commutativity of toggling is derived, not assumed.
+
+## 24. The two-gap law and the Golay ball (Lean: `WobbleLandscape.lean`)
+
+§2 proves the wobble stream is a Sturmian word. `WobbleLandscape.lean` proves the
+two facts about it that the wobble-landscape study turns into a bit score.
+
+* `gap_lower`, `gap_upper`, `gap_mem_pair`, `gap_image_card_le_two`: the gap
+  between consecutive ones of the stream chasing t = 1/s is ⌊s⌋ or ⌊s⌋ + 1, so
+  a run shows at most two gap lengths (`gap_image_card_le_three` adds the
+  truncated boundary gap of the Three-Distance Theorem). No irrationality is
+  needed, which is why the Python module may apply it to exact rational
+  surrogates.
+* `ball_card`, `ball_disjoint`, `code_ball_card`, `golay_ball_count`,
+  `golay_ball_fraction`: balls of radius 3 around 4,096 codewords at distance
+  ≥ 7 are disjoint and hold 9,523,200 of the 16,777,216 words — exactly
+  2325/4096. So "the nearest codeword is within 3" is the majority case under a
+  uniform word, worth less than one bit.
+* `bitScore_antitone`, `bitScore_one`: a larger tail probability can only score
+  fewer bits, and a tail of one scores zero.
+
+## 25. Three counting claims, audited (Lean: `Triad.lean`, `TriadCensus.lean`, `TriadChance.lean`, `Platonic.lean`)
+
+### 25.1 3, 6, 9
+
+`tgic_counts` proves that 3, 6, 9 is one number: three axes give 6 = 3·2
+signed directions and 9 = 3² ordered pairs. `tgic_counts_generic` proves that any
+three-element set gives the same counts, so exhibiting them cannot tell the GLM
+substrate from any other three-fold structure; `twentyfour_decompositions`
+records that 24 has many such decompositions, so matching one is not evidence.
+
+### 25.2 The 44 balanced octads
+
+`axisDev_even` and `axisDev_eq_zero_iff` (`Triad.lean`) show the archive's
+three-block deviation is even and zero exactly at the balanced triple (4, 4, 4).
+`balanced_octad_count` (`TriadCensus.lean`) proves the archive's count: exactly
+44 of the 759 octads are balanced. `TriadChance.lean` then asks what 44 measures.
+Over all `C(24, 8) = 735,471` eight-sets (`card_allEight`) the census is
+`chance_census`, and 759 sets drawn without regard to the code would hold
+`759 · 37800 / 735471 = 12600/323`, just over 39, balanced ones
+(`expected_balanced`). Transposing coordinates 0 and 8 gives 49
+(`balanced_after_swap`) and an octad at deviation 10, which the runtime's
+labelling never shows (`deviation_ten_after_swap`, `no_deviation_ten`). The count
+is a property of the code together with its labelling, and close to chance.
+
+### 25.3 The 144° Platonic totals
+
+The archive reported that the face-angle totals of the five Platonic solids
+(720°, 2160°, 1440°, 6480°, 3600°) are all multiples of 144°, summing to
+14 400° = 80π (`total_eq_eighty_pi`). `faceAngleSum_eq` proves that for any
+polyhedron with regular f-gon faces the total is 360·V − 720, by Euler's
+formula alone, and `dvd_144_iff_even_vertices` that this is a multiple of 144°
+exactly when V is even. The five solids have 4, 8, 6, 20 and 12 vertices. There
+is no constant here beyond 360 and the Euler characteristic.
+
+## 26. The element address layer (Lean: `GolayMOG.lean`)
+
+The spatial-arithmetic study encoded the 118 elements as 24-bit data objects.
+Its one Lean file, retrieved in Phase 61, proves the discrete arithmetic of the
+encoding, independently of any chemistry.
+
+* `decodeIdentity_identityAddress`, `identityAddress_injective`: the reflected
+  Gray code n ⊕ (n ≫ 1) of each atomic number 1–118, held in 12 bits, decodes
+  back, so the addresses are collision-free.
+* `consecutive_identity_oneBitApart`: consecutive atomic numbers get addresses
+  one bit apart — §19.1's `d2_succ` on the element table.
+* `leechMinimalClass_counts`: C(24,2)·4 = 1104, 759·128 = 97152 and
+  24·4096 = 98304, and 1104 + 97152 + 98304 = 196560, the kissing number of
+  Λ₂₄; `leechAddress_sqNorm` and `leechMinimalClass_representative_sqNorms`
+  check that the stored addresses and one representative of each class have
+  integer-scale norm 32.
+* `binaryTax_mono`: on a binary vector TAX = w·(Y + 1/8) is a monotone function
+  of the weight w alone, so it orders nothing the weight does not.
+* `binaryNRCI_above_half`, `element_relativeCoherent_seventy_percent`: two of
+  the study's thresholds are automatic — an NRCI above 1/2 below weight 16
+  whenever Y < 3/16, and the 70 % relative-coherence rule under the observed
+  score bounds (3/5 ≤ subject, peer ≤ 4/5, and 7/10 · 4/5 = 14/25 < 3/5).
+* `projection24to3Q_not_injective`: the published 24-to-3 view is lossy.
+
+## 27. Lattices beside and above Λ₂₄ (Lean: `Niemeier.lean`, `HigherLattices.lean`)
+
+* `card_root_systems`: the set of abstract Niemeier root systems — multisets of
+  ADE components with one Coxeter number h and total rank 24 — has exactly 23
+  elements. The Python module searches rather than stores, because an earlier
+  stored table was wrong; `mem_gen` and `gen_sound` prove the search complete
+  and sound, `niemeier_names` reads the 23 back as E₈³, …, A₁²⁴, and
+  `niemeier_roots` checks the classical identity that each has 24·h roots.
+  `leech_not_root_system`: the Leech lattice, with no roots, is the 24th
+  Niemeier lattice and none of the 23 root systems.
+* `norm_ge_of_ne_zero`, `norm_dvd_eight`, `mk_injective`: the 32-dimensional
+  Construction D built from any codes with the Reed–Muller weight properties has
+  every nonzero vector of ∑xᵢ² ≥ 16 (norm 4 after scaling), is even, and gives
+  each point a unique three-level address; `even_norm_ge_eighteen` gives the
+  even part of the 48-dimensional ternary construction ∑xᵢ² ≥ 18, norm 6 after
+  scaling, which is extremal there.
+
+---
+
 ## Appendix A: Lean theorem index
 
 | File | Key theorems | Subject |
@@ -992,6 +1547,28 @@ a unique correction. The script takes any `Fraction` in [0, 1).
 | `Wobble.lean` | `sextet_cycle_avgVec`, `sextet_cycle_tendsto` | ambiguity as a moving carrier |
 | `FitCapacity.lean` | `fit_capacity` | what a numerical coincidence is worth |
 | `Shortcut/Leech.lean` | `leech_min_norm`, `golay_step_minimal_iff` | the lattice layer of §14 |
+| `Packing.lean` | `ball3_closed_form`, `perfect_triple_length`, `golay23_perfect_arithmetic`, `golay24_not_perfect`, `golay24_deficit`, `parityExt_min_distance` | §15: why 23, why 24 |
+| `GolayWeightEnum.lean` | `card_codewords`, `golay_weight_enumerator`, `golay_doubly_even`, `octad_min_tax` | §16: the enumerator, and the octad as the cheapest codeword |
+| `Steiner.lean` | `card_octads`, `card_inter_le_four`, `unique_octad`, `card_octads_through_four` | §16: `S(5,8,24)` and `λ₄ = 5` |
+| `LDP.lean` | `energy_eq_zero_iff`, `energy_descent`, `rigidity`, `exists_relaxation`, `mean_energy` | §16: the syndrome as an energy, and its mean |
+| `Totient.lean` | `stride_orbit_card`, `stride_proper_iff_not_coprime`, `subCycles_eq`, `subCycles_eq_zero_iff_prime` | §17: the polygon, the totient, and geometric primality |
+| `EngineeringWheels.lean` | `ds_bits_periodic_iff`, `ds_rational_period_iff`, `ds_irrational_aperiodic` | §18: the periods of the bitstream |
+| `NowReceipt.lean` | `acc_eq_fract`, `count_eq_floor`, `acc_eq_iff_fract_eq`, `receipt_collision`, `receipt_pigeonhole` | §18: what the accumulator records, and what it cannot |
+| `GrayJump.lean` | `d2_eq_pop_gray_xor`, `d2_succ`, `d2_mod_two`, `exists_odd_d2` | §19: the Gray layer, exactly |
+| `LogBucket.lean` | `exists_unique_bucket`, `mantissa_mem_Ico`, `bucket_mono` | §19: the magnitude bucket, exact |
+| `SeedLayers.lean` | `transcendental_not_trace_of_finite_order`, `lattice_character_ne_pi`, `phi_is_trace_of_order_ten` | §20: where a transcendental may enter |
+| `Transcendental.lean` | `pos_iff_witness`, `exp_error_le`, `log_error_le` | §20: decided inequality, refused equality |
+| `Irrational.lean` | `no_countable_layer_lossless` | §20: no finite carrier holds a real |
+| `SeedRoles.lean` | `eSeed_irrational`, `seeds_not_ratio_of_counts`, `phi_unique_positive_root`, `pi_least_positive_zero`, `e_unique_unit_growth_base`, `hull_alternatives`, `three_monomials_give_thirteen`, `thirteen_not_invertible`, `quadratic_pisot_ge_phi`, `plastic_lt_phi`, `plastic_conjugates_inside_disc`, `phi_badly_approximable`, `phi_not_liouville`, `pi_mul_e_dichotomy`, `pi_mul_e_isAlgebraic_of_monad_rat`, `sl2_trichotomy`, `lattice_character_ne_eSeed_unconditional` | §22: the seeds as numbers |
+| `Distinction.lean` | `no_information_without_distinction`, `perm_bool_eq`, `two_element_ring_is_zmod_two`, `reachable`, `self_inverse_forces_comm` | §23: what one distinction forces |
+| `WobbleLandscape.lean` | `gap_mem_pair`, `gap_image_card_le_two`, `golay_ball_count`, `golay_ball_fraction`, `bitScore_antitone` | §24: the two-gap law and the Golay ball |
+| `Triad.lean` | `tgic_counts`, `tgic_counts_generic`, `axisDev_even`, `axisDev_eq_zero_iff` | §25.1: 3, 6, 9 |
+| `TriadCensus.lean` | `balanced_octad_count` | §25.2: the 44 balanced octads |
+| `TriadChance.lean` | `card_allEight`, `chance_census`, `expected_balanced`, `balanced_after_swap`, `no_deviation_ten`, `deviation_ten_after_swap` | §25.2: the 44 against chance and relabelling |
+| `Platonic.lean` | `faceAngleSum_eq`, `dvd_144_iff_even_vertices`, `total_eq_eighty_pi` | §25.3: the 144° totals are Euler's formula |
+| `GolayMOG.lean` | `decodeIdentity_identityAddress`, `identityAddress_injective`, `consecutive_identity_oneBitApart`, `leechMinimalClass_counts`, `binaryTax_mono`, `binaryNRCI_above_half`, `projection24to3Q_not_injective` | §26: the element address layer |
+| `Niemeier.lean` | `card_root_systems`, `mem_gen`, `gen_sound`, `niemeier_names`, `niemeier_roots`, `leech_not_root_system` | §27: the 23 Niemeier root systems |
+| `HigherLattices.lean` | `norm_ge_of_ne_zero`, `norm_dvd_eight`, `mk_injective`, `even_norm_ge_eighteen` | §27: past 24 dimensions |
 
 Every name in this table was read out of the tree by
 `studies/scripts/` rather than retyped, and every statement quoted in the body
@@ -1040,7 +1617,10 @@ scripts that regenerate the data on demand.
 | the exact tables of §1.3, §2.4, §9.2 | `studies/scripts/number_theory_tables.py` |
 | the worked example of §14 | `overlay/glm_universal/examples/number_pipeline.py` |
 | the TMM sweep and its null model | `studies/scripts/tmm_null_model.py` |
-| the Lean development | `RequestProject/GLM/` (126 files) and its mirror `overlay/glm_lean/` |
+| the Lean development | `RequestProject/GLM/` (133 files) and its mirror `overlay/glm_lean/` |
+| the three-periods table of §18.3 | `studies/scripts/number_theory_tables.py` (table 4) |
+| the delta–sigma periods, in code | `overlay/glm_universal/engineering/delta_sigma.py` |
+| the scale bucket, in code | `overlay/glm_universal/data_objects/economics_register.py` |
 | the wobble implementation | `overlay/glm_universal/reasoning/wobble.py` |
 | the constants | `overlay/glm_universal/reasoning/coherence.py` |
 | the Golay code and its decoder | `overlay/glm_universal/substrate/mog.py`, `.../golay_decode.py` |

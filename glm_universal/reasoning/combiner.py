@@ -424,6 +424,9 @@ XOR_SITES: Tuple[Tuple[str, Tuple[str, ...], str], ...] = (
     # Its D1 gate compares outputs with ``!=`` on the decoded values rather
     # than by a Hamming distance on words, so the module contains no ``^`` and
     # the row was retired for the same reason as lean_address above.
+    ("reasoning/substrate_cognition.py", ("group-law",),
+     "the fork adds an error pattern to a codeword and an octad to the "
+     "truth, and the reversible gates toggle a bit by adding a control product"),
     ("reasoning/tasks.py", ("group-law",),
      "task carriers combined in F2^24"),
     ("substrate/digit_stack.py", ("group-law",),

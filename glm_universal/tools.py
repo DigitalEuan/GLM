@@ -947,6 +947,114 @@ def _extremum(args) -> int:
 
 
 # ---------------------------------------------------------------------------
+#  engineering
+# ---------------------------------------------------------------------------
+
+def _engineering(args) -> int:
+    """Formula wheels, Smith chart, analogies, delta-sigma, and the
+    engineering questions -- each producer's own figures, never pooled."""
+    from .engineering import study
+    report = study.engineering_report()
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    w, s, a, d, lang = (report["wheels"], report["smith"], report["analogy"],
+                        report["delta_sigma"], report["language"])
+    print(f"wheels            {w['wheels']} wheels, {w['cases']} cases: "
+          f"reference {w['reference_si_agree']}/{w['reference_explicit_agree']}"
+          f", register SI7 {w['register_si7_agree']} EXT10 "
+          f"{w['register_ext10_agree']} of {w['register_held']} held, "
+          f"derivable {w['derivable_agree']}")
+    print(f"                  Ohm wheel spokes {w['ohm_wheel_spokes']}, all "
+          f"wheels {w['spokes_all_wheels']}, union flips {w['union_flips']}")
+    print(f"smith             {s['passed']}/{s['checks']} checks; match "
+          f"worst |Gamma|^2 {s['match']['worst_gamma2']} (bypass "
+          f"{s['match']['bypass_gamma2']})")
+    for name in ("force-voltage", "force-current"):
+        r = a[name]
+        print(f"analogy           {name}: e->m {r['electrical_to_mechanical']}"
+              f"/{r['axioms'][0]}, m->e {r['mechanical_to_electrical']}/"
+              f"{r['axioms'][1]}")
+    print(f"                  scrambled control {a['scrambled-control']}, "
+          f"degeneracy {a['degeneracy']}")
+    print(f"delta-sigma       {d['passed']}/6 checks; gains "
+          f"{d['gains_db_floor']}")
+    print(f"language          {lang['total']} of {lang['questions']} "
+          f"(baseline {lang['baseline']})")
+    print(f"                  stress now {lang['stress_now']['counts']}, "
+          f"first run {lang['stress_first_run']}")
+    return 0
+
+
+# ---------------------------------------------------------------------------
+#  cognition
+# ---------------------------------------------------------------------------
+
+def _cognition(args) -> int:
+    """The substrate-native cognition experiments X1-X9 and Y1-Y5, each
+    against its declared pass mark."""
+    from .reasoning import substrate_cognition as sc
+    if getattr(args, "contract", False):
+        print(json.dumps(sc.planner_default_experiment(), indent=1,
+                         sort_keys=True, default=str))
+        return 0
+    report = sc.cognition_report()
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    for key, run in report["experiments"].items():
+        mark = "met" if run["passed"] else "not met"
+        print(f"{key}  pass mark {mark:<8} faculty {run['faculty']:<8} "
+              f"{run['pass_mark']}")
+    print(f"moved: {report['moved']}")
+    print(f"met but not wired: {report['met_but_unwired']}")
+    return 0
+
+
+# ---------------------------------------------------------------------------
+#  plans
+# ---------------------------------------------------------------------------
+
+def _plans(args) -> int:
+    """The typed planner on the probe and the held-out sets, both paths."""
+    from .reasoning import typed_plans as tp
+    if args.write:
+        path = tp.write_measurements()
+        print(f"wrote {path}")
+        print(f"digest {tp.module_digest()}")
+        return 0
+    condition = tp.state()
+    report = tp.current()
+    if report is None:
+        print(f"cache             {condition['verdict']}")
+        print("nothing is reported from a cache that does not describe the "
+              "sources; re-take it with --write")
+        return 1
+    if args.json:
+        print(json.dumps({k: report[k] for k in (
+            "tallies", "frozen_probe", "frozen_probe_bare", "probe_passed",
+            "held_planned", "held_bare", "census", "gains",
+            "stress_first_run", "wrong_total")}, indent=1, sort_keys=True))
+        return 0
+    print(f"cache             {condition['verdict']}")
+    probe = report["frozen_probe"]
+    print(f"frozen probe      {probe['correct']} correct, {probe['wrong']} "
+          f"wrong, {probe['refused']} refused -- passed "
+          f"{report['probe_passed']}")
+    print("set                 path      correct wrong refused right-refusal")
+    for name in report["sets"]:
+        for path in ("bare", "planned"):
+            t = report["tallies"][name][path]
+            print(f"  {name:<18} {path:<8} {t['correct']:>7} {t['wrong']:>5} "
+                  f"{t['refused']:>7} {t['correct-refusal']:>13}")
+    print(f"gains             {report['gains']}")
+    print(f"census            {report['census']}")
+    print(report["verdict"])
+    print(report["caveat"])
+    return 0
+
+
+# ---------------------------------------------------------------------------
 #  scales
 # ---------------------------------------------------------------------------
 
@@ -1281,6 +1389,32 @@ def _parser() -> argparse.ArgumentParser:
         help="one coordinate folded over every row of one table, or refused")
     extremum.add_argument("--json", action="store_true")
     extremum.set_defaults(handler=_extremum)
+
+    engineering = sub.add_parser(
+        "engineering",
+        help="formula wheels, Smith chart, analogies, delta-sigma and the "
+             "engineering questions")
+    engineering.add_argument("--json", action="store_true")
+    engineering.set_defaults(handler=_engineering)
+
+    cognition = sub.add_parser(
+        "cognition",
+        help="the substrate-native cognition experiments, each against the "
+             "pass mark declared before it ran")
+    cognition.add_argument("--json", action="store_true")
+    cognition.add_argument("--contract", action="store_true",
+                           help="Y8: the 177 contract cases through the "
+                                "grammar and through the planner (minutes)")
+    cognition.set_defaults(handler=_cognition)
+
+    plans = sub.add_parser(
+        "plans",
+        help="the typed planner on the frozen probe and the held-out sets, "
+             "against the bare grammar")
+    plans.add_argument("--write", action="store_true",
+                       help="re-take the measurement cache")
+    plans.add_argument("--json", action="store_true")
+    plans.set_defaults(handler=_plans)
 
     scales = sub.add_parser(
         "scales",

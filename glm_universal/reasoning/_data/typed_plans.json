@@ -1,0 +1,3526 @@
+{
+ "ambiguous_rows": [
+  {
+   "answer": "refused: 2 licensed readings disagree: energy = torque -> False; same-field -> True",
+   "bare": "refused",
+   "expect": [
+    "true",
+    "holds"
+   ],
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "s-verify-two",
+   "plan": "",
+   "planned": "refused",
+   "question": "does energy have the same dimensions as torque?",
+   "reason": "2 licensed readings disagree: energy = torque -> False; same-field -> True",
+   "set": "stress",
+   "verdict": "ambiguous"
+  }
+ ],
+ "caveat": "the held-out sets were written by the same author as the frames, an hour before them, so they measure phrasing the author anticipated as well as phrasing he did not; the stress set was written knowing the frames and is evidence of safety rather than of reach. Every gained answer is an operation the system already had, reached from English: the table gains are coverage, not reasoning.",
+ "census": {
+  "ambiguous": 1,
+  "answered": 155,
+  "candidates": 163,
+  "fallthrough": 35,
+  "licensed": 157,
+  "refused": 6,
+  "unlicensed": 6
+ },
+ "frames": 18,
+ "frames_used": {
+  "arithmetic": 9,
+  "compare": 12,
+  "convert": 13,
+  "count": 5,
+  "describe": 8,
+  "dimension": 7,
+  "extremum": 2,
+  "field": 56,
+  "gcd-lcm": 8,
+  "inverse-relation": 1,
+  "meaning": 5,
+  "prime": 11,
+  "relation": 5,
+  "returns": 5,
+  "verify": 8
+ },
+ "frozen_probe": {
+  "correct": 19,
+  "refused": 1,
+  "wrong": 0
+ },
+ "frozen_probe_bare": {
+  "correct": 2,
+  "refused": 17,
+  "wrong": 1
+ },
+ "gained_total": 147,
+ "gains": {
+  "address": 1,
+  "derive": 70,
+  "table": 76
+ },
+ "held_bare": {
+  "correct": 4,
+  "correct-refusal": 22,
+  "refused": 84,
+  "wrong": 0
+ },
+ "held_planned": {
+  "correct": 86,
+  "correct-refusal": 22,
+  "refused": 1,
+  "wrong": 1
+ },
+ "held_safe_coverage": "108/110",
+ "held_total": 110,
+ "pass_mark": {
+  "correct_at_least": 10,
+  "of": 20,
+  "wrong_at_most": 1
+ },
+ "preregistration": {
+  "adversarial": "8064795",
+  "compositions": "8064795",
+  "paraphrases": "8064795",
+  "stress": "ca257db"
+ },
+ "probe_passed": true,
+ "questions": 197,
+ "rows": [
+  {
+   "answer": "'velocity' denotes dimension L T^-1",
+   "bare": "refused",
+   "expect": [
+    "velocity"
+   ],
+   "faculty": "table",
+   "frame": "meaning",
+   "gained": true,
+   "key": "nl-meaning",
+   "plan": "meaning of velocity",
+   "planned": "correct",
+   "question": "what does velocity mean?",
+   "reason": "",
+   "set": "probe-canonical",
+   "verdict": "answered"
+  },
+  {
+   "answer": "derivative_of of velocity = position -- from the carrier:lexicon table (carrier), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "position"
+   ],
+   "faculty": "table",
+   "frame": "relation",
+   "gained": true,
+   "key": "nl-relation",
+   "plan": "field derivative_of of velocity",
+   "planned": "correct",
+   "question": "what is velocity the derivative of?",
+   "reason": "",
+   "set": "probe-canonical",
+   "verdict": "answered"
+  },
+  {
+   "answer": "yes, energy is more abstract than water -- abstract_concrete of energy = 1/4 is below abstract_concrete of water = 1/1, by an exact 3/4, both read on the carrier:lexicon:primitives.abstract_concrete scale; the register declares 0 = abstract, so energy is the more abstract of the two",
+   "bare": "refused",
+   "expect": [
+    "energy"
+   ],
+   "faculty": "derive",
+   "frame": "compare",
+   "gained": true,
+   "key": "nl-compare",
+   "plan": "order abstract_concrete of energy and water",
+   "planned": "correct",
+   "question": "is energy more abstract than water?",
+   "reason": "",
+   "set": "probe-canonical",
+   "verdict": "answered"
+  },
+  {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum'].",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "nl-unknown",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "why is the sky blue?",
+   "reason": "no frame read the question",
+   "set": "probe-canonical",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "2 + 2 = 4",
+   "bare": "correct",
+   "expect": [
+    "4"
+   ],
+   "faculty": "derive",
+   "frame": "arithmetic",
+   "gained": false,
+   "key": "math-add",
+   "plan": "arith",
+   "planned": "correct",
+   "question": "what is 2 + 2?",
+   "reason": "",
+   "set": "probe-canonical",
+   "verdict": "answered"
+  },
+  {
+   "answer": "no, 91 is not prime: 91 = 7 x 13",
+   "bare": "refused",
+   "expect": [
+    "no"
+   ],
+   "faculty": "derive",
+   "frame": "prime",
+   "gained": true,
+   "key": "math-prime",
+   "plan": "prime",
+   "planned": "correct",
+   "question": "is 91 prime?",
+   "reason": "",
+   "set": "probe-canonical",
+   "verdict": "answered"
+  },
+  {
+   "answer": "gcd(12, 18) = 6",
+   "bare": "refused",
+   "expect": [
+    "6"
+   ],
+   "faculty": "derive",
+   "frame": "gcd-lcm",
+   "gained": true,
+   "key": "math-gcd",
+   "plan": "gcd",
+   "planned": "correct",
+   "question": "what is the greatest common divisor of 12 and 18?",
+   "reason": "",
+   "set": "probe-canonical",
+   "verdict": "answered"
+  },
+  {
+   "answer": "prime_limit of perfect_fifth = 3 -- from the carrier:harmonics table (carrier), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "3"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "math-ratio",
+   "plan": "field prime_limit of perfect_fifth",
+   "planned": "correct",
+   "question": "what is the prime limit of the interval 3/2?",
+   "reason": "",
+   "set": "probe-canonical",
+   "verdict": "answered"
+  },
+  {
+   "answer": "speed_of_light (physics): depth 6, plane-0 mask 0x001405, |v|^2 = 41/1; gloss = speed of light in vacuum (from the carrier:physics table)",
+   "bare": "correct",
+   "expect": [
+    "speed_of_light"
+   ],
+   "faculty": "table",
+   "frame": "describe",
+   "gained": false,
+   "key": "phys-constant",
+   "plan": "describe speed_of_light",
+   "planned": "correct",
+   "question": "describe speed_of_light",
+   "reason": "",
+   "set": "probe-canonical",
+   "verdict": "answered"
+  },
+  {
+   "answer": "dimension_si7 of force = L M T^-2 -- from the carrier:physics table (carrier), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "m"
+   ],
+   "faculty": "table",
+   "frame": "dimension",
+   "gained": true,
+   "key": "phys-dimension",
+   "plan": "field dimension_si7 of force",
+   "planned": "correct",
+   "question": "what are the dimensions of force?",
+   "reason": "",
+   "set": "probe-canonical",
+   "verdict": "answered"
+  },
+  {
+   "answer": "force = mass * acceleration holds under scalar semantics",
+   "bare": "refused",
+   "expect": [
+    "true"
+   ],
+   "faculty": "derive",
+   "frame": "verify",
+   "gained": true,
+   "key": "phys-derive",
+   "plan": "force = mass * acceleration",
+   "planned": "correct",
+   "question": "is force equal to mass times acceleration dimensionally?",
+   "reason": "",
+   "set": "probe-canonical",
+   "verdict": "answered"
+  },
+  {
+   "answer": "3 metres = 1250/127 (= 9.8425 rounded to 4 places) feet -- 1 metre = 1 metre (the SI base unit) and 1 foot = 0.3048 metre (exact by the 1959 international yard and pound agreement)",
+   "bare": "refused",
+   "expect": [
+    "9.84"
+   ],
+   "faculty": "derive",
+   "frame": "convert",
+   "gained": true,
+   "key": "phys-convert",
+   "plan": "convert",
+   "planned": "correct",
+   "question": "convert 3 metres to feet",
+   "reason": "",
+   "set": "probe-canonical",
+   "verdict": "answered"
+  },
+  {
+   "answer": "C (chemistry): depth 26, plane-0 mask 0x000902, |v|^2 = 1098782843288679/8000000; name = Carbon (from the element table)",
+   "bare": "wrong",
+   "expect": [
+    "carbon"
+   ],
+   "faculty": "table",
+   "frame": "describe",
+   "gained": true,
+   "key": "chem-lookup",
+   "plan": "describe c",
+   "planned": "correct",
+   "question": "describe C",
+   "reason": "",
+   "set": "probe-canonical",
+   "verdict": "answered"
+  },
+  {
+   "answer": "atomic_weight_u of C = 12011/1000 (= 12.011) -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "12.011"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "chem-weight",
+   "plan": "field atomic_weight_u of carbon",
+   "planned": "correct",
+   "question": "what is the atomic weight of carbon?",
+   "reason": "",
+   "set": "probe-canonical",
+   "verdict": "answered"
+  },
+  {
+   "answer": "group_block of Cl = Halogen -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "halogen"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "chem-group",
+   "plan": "field group_block of chlorine",
+   "planned": "correct",
+   "question": "which block of the periodic table is chlorine in?",
+   "reason": "",
+   "set": "probe-canonical",
+   "verdict": "answered"
+  },
+  {
+   "answer": "molar_mass_u of water = 3603/200 (= 18.015) -- from the molecule table (source), recomputed on read by the rule the register declares: sum over the formula of atomic_weight_u times count, from the element register",
+   "bare": "refused",
+   "expect": [
+    "18"
+   ],
+   "faculty": "derive",
+   "frame": "field",
+   "gained": true,
+   "key": "chem-compose",
+   "plan": "field molar_mass_u of water",
+   "planned": "correct",
+   "question": "what is the molar mass of water?",
+   "reason": "",
+   "set": "probe-canonical",
+   "verdict": "answered"
+  },
+  {
+   "answer": "file of GLM.NormFamily.family_tower = NormFamily.lean -- from the lean table (address), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "normfamily.lean"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "prog-lean",
+   "plan": "field file of glm.normfamily.family_tower",
+   "planned": "correct",
+   "question": "which file is GLM.NormFamily.family_tower in?",
+   "reason": "",
+   "set": "probe-canonical",
+   "verdict": "answered"
+  },
+  {
+   "answer": "module of rung_audit = norm_escalation -- from the python table (code), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "norm_escalation"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "prog-python",
+   "plan": "field module of rung_audit",
+   "planned": "correct",
+   "question": "which module defines the function rung_audit?",
+   "reason": "",
+   "set": "probe-canonical",
+   "verdict": "answered"
+  },
+  {
+   "answer": "glm_universal.substrate.norm_family.completeness answers to 8 fields, held by function: bases_used_by_the_chain, complete, filled, gaps, max_log2, norms, rungs, why_interleaving_is_needed",
+   "bare": "refused",
+   "expect": [
+    "complete"
+   ],
+   "faculty": "table",
+   "frame": "returns",
+   "gained": true,
+   "key": "prog-behaviour",
+   "plan": "fields of glm_universal.substrate.norm_family.completeness",
+   "planned": "correct",
+   "question": "what does glm_universal.substrate.norm_family.completeness return?",
+   "reason": "",
+   "set": "probe-canonical",
+   "verdict": "answered"
+  },
+  {
+   "answer": "rungs of glm_universal.substrate.norm_family.completeness = 25 -- from the function table (function), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "25"
+   ],
+   "faculty": "table",
+   "frame": "count",
+   "gained": true,
+   "key": "prog-count",
+   "plan": "field rungs of glm_universal.substrate.norm_family.completeness",
+   "planned": "correct",
+   "question": "how many rungs does the norm family have?",
+   "reason": "",
+   "set": "probe-canonical",
+   "verdict": "answered"
+  },
+  {
+   "answer": "'velocity' denotes dimension L T^-1",
+   "bare": "correct",
+   "expect": [
+    "velocity"
+   ],
+   "faculty": "table",
+   "frame": "meaning",
+   "gained": false,
+   "key": "nl-meaning",
+   "plan": "meaning of velocity",
+   "planned": "correct",
+   "question": "explain the meaning of velocity",
+   "reason": "",
+   "set": "probe-paraphrase",
+   "verdict": "answered"
+  },
+  {
+   "answer": "derivative_of of velocity = position -- from the carrier:lexicon table (carrier), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "position"
+   ],
+   "faculty": "table",
+   "frame": "relation",
+   "gained": true,
+   "key": "nl-relation",
+   "plan": "field derivative_of of velocity",
+   "planned": "correct",
+   "question": "velocity is the derivative of what?",
+   "reason": "",
+   "set": "probe-paraphrase",
+   "verdict": "answered"
+  },
+  {
+   "answer": "energy is more abstract than water -- abstract_concrete of energy = 1/4 is below abstract_concrete of water = 1/1, by an exact 3/4, both read on the carrier:lexicon:primitives.abstract_concrete scale; the register declares 0 = abstract, so energy is the more abstract of the two",
+   "bare": "refused",
+   "expect": [
+    "energy"
+   ],
+   "faculty": "derive",
+   "frame": "compare",
+   "gained": true,
+   "key": "nl-compare",
+   "plan": "order abstract_concrete of energy and water",
+   "planned": "correct",
+   "question": "which is more abstract, energy or water?",
+   "reason": "",
+   "set": "probe-paraphrase",
+   "verdict": "answered"
+  },
+  {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum'].",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "nl-unknown",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "what makes the sky look blue?",
+   "reason": "no frame read the question",
+   "set": "probe-paraphrase",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "2 + 2 = 4",
+   "bare": "refused",
+   "expect": [
+    "4"
+   ],
+   "faculty": "derive",
+   "frame": "arithmetic",
+   "gained": true,
+   "key": "math-add",
+   "plan": "arith",
+   "planned": "correct",
+   "question": "add two and two",
+   "reason": "",
+   "set": "probe-paraphrase",
+   "verdict": "answered"
+  },
+  {
+   "answer": "no, 91 is not prime: 91 = 7 x 13",
+   "bare": "refused",
+   "expect": [
+    "no"
+   ],
+   "faculty": "derive",
+   "frame": "prime",
+   "gained": true,
+   "key": "math-prime",
+   "plan": "prime",
+   "planned": "correct",
+   "question": "is ninety-one a prime number?",
+   "reason": "",
+   "set": "probe-paraphrase",
+   "verdict": "answered"
+  },
+  {
+   "answer": "gcd(12, 18) = 6",
+   "bare": "refused",
+   "expect": [
+    "6"
+   ],
+   "faculty": "derive",
+   "frame": "gcd-lcm",
+   "gained": true,
+   "key": "math-gcd",
+   "plan": "gcd",
+   "planned": "correct",
+   "question": "gcd of 12 and 18",
+   "reason": "",
+   "set": "probe-paraphrase",
+   "verdict": "answered"
+  },
+  {
+   "answer": "prime_limit of perfect_fifth = 3 -- from the carrier:harmonics table (carrier), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "3"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "math-ratio",
+   "plan": "field prime_limit of perfect fifth",
+   "planned": "correct",
+   "question": "the prime limit of a perfect fifth",
+   "reason": "",
+   "set": "probe-paraphrase",
+   "verdict": "answered"
+  },
+  {
+   "answer": "speed_of_light (physics): depth 6, plane-0 mask 0x001405, |v|^2 = 41/1; gloss = speed of light in vacuum (from the carrier:physics table)",
+   "bare": "correct",
+   "expect": [
+    "speed_of_light"
+   ],
+   "faculty": "table",
+   "frame": "describe",
+   "gained": false,
+   "key": "phys-constant",
+   "plan": "describe speed_of_light",
+   "planned": "correct",
+   "question": "tell me about speed_of_light",
+   "reason": "",
+   "set": "probe-paraphrase",
+   "verdict": "answered"
+  },
+  {
+   "answer": "dimension_si7 of force = L M T^-2 -- from the carrier:physics table (carrier), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "m"
+   ],
+   "faculty": "table",
+   "frame": "dimension",
+   "gained": true,
+   "key": "phys-dimension",
+   "plan": "field dimension_si7 of force",
+   "planned": "correct",
+   "question": "give the dimensional formula of force",
+   "reason": "",
+   "set": "probe-paraphrase",
+   "verdict": "answered"
+  },
+  {
+   "answer": "force = mass * acceleration holds under scalar semantics",
+   "bare": "refused",
+   "expect": [
+    "true"
+   ],
+   "faculty": "derive",
+   "frame": "verify",
+   "gained": true,
+   "key": "phys-derive",
+   "plan": "force = mass * acceleration",
+   "planned": "correct",
+   "question": "check that force has the dimensions of mass times acceleration",
+   "reason": "",
+   "set": "probe-paraphrase",
+   "verdict": "answered"
+  },
+  {
+   "answer": "3 metres = 1250/127 (= 9.8425 rounded to 4 places) feet -- 1 metre = 1 metre (the SI base unit) and 1 foot = 0.3048 metre (exact by the 1959 international yard and pound agreement)",
+   "bare": "refused",
+   "expect": [
+    "9.84"
+   ],
+   "faculty": "derive",
+   "frame": "convert",
+   "gained": true,
+   "key": "phys-convert",
+   "plan": "convert",
+   "planned": "correct",
+   "question": "how many feet is 3 metres?",
+   "reason": "",
+   "set": "probe-paraphrase",
+   "verdict": "answered"
+  },
+  {
+   "answer": "C (chemistry): depth 26, plane-0 mask 0x000902, |v|^2 = 1098782843288679/8000000; name = Carbon (from the element table)",
+   "bare": "refused",
+   "expect": [
+    "carbon"
+   ],
+   "faculty": "table",
+   "frame": "describe",
+   "gained": true,
+   "key": "chem-lookup",
+   "plan": "describe c",
+   "planned": "correct",
+   "question": "tell me about the element C",
+   "reason": "",
+   "set": "probe-paraphrase",
+   "verdict": "answered"
+  },
+  {
+   "answer": "atomic_weight_u of C = 12011/1000 (= 12.011) -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "12.011"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "chem-weight",
+   "plan": "field atomic_weight_u of carbon",
+   "planned": "correct",
+   "question": "how heavy is a carbon atom?",
+   "reason": "",
+   "set": "probe-paraphrase",
+   "verdict": "answered"
+  },
+  {
+   "answer": "group_block of Cl = Halogen -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "halogen"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "chem-group",
+   "plan": "field group_block of chlorine",
+   "planned": "correct",
+   "question": "what block does chlorine belong to?",
+   "reason": "",
+   "set": "probe-paraphrase",
+   "verdict": "answered"
+  },
+  {
+   "answer": "molar_mass_u of water = 3603/200 (= 18.015) -- from the molecule table (source), recomputed on read by the rule the register declares: sum over the formula of atomic_weight_u times count, from the element register",
+   "bare": "refused",
+   "expect": [
+    "18"
+   ],
+   "faculty": "derive",
+   "frame": "field",
+   "gained": true,
+   "key": "chem-compose",
+   "plan": "field molar_mass_u of water",
+   "planned": "correct",
+   "question": "how much does a mole of water weigh?",
+   "reason": "",
+   "set": "probe-paraphrase",
+   "verdict": "answered"
+  },
+  {
+   "answer": "file of GLM.NormFamily.family_tower = NormFamily.lean -- from the lean table (address), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "normfamily.lean"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "prog-lean",
+   "plan": "field file of glm.normfamily.family_tower",
+   "planned": "correct",
+   "question": "where is the declaration GLM.NormFamily.family_tower written?",
+   "reason": "",
+   "set": "probe-paraphrase",
+   "verdict": "answered"
+  },
+  {
+   "answer": "module of rung_audit = norm_escalation -- from the python table (code), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "norm_escalation"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "prog-python",
+   "plan": "field module of rung_audit",
+   "planned": "correct",
+   "question": "where is rung_audit defined?",
+   "reason": "",
+   "set": "probe-paraphrase",
+   "verdict": "answered"
+  },
+  {
+   "answer": "glm_universal.substrate.norm_family.completeness answers to 8 fields, held by function: bases_used_by_the_chain, complete, filled, gaps, max_log2, norms, rungs, why_interleaving_is_needed",
+   "bare": "refused",
+   "expect": [
+    "complete"
+   ],
+   "faculty": "table",
+   "frame": "returns",
+   "gained": true,
+   "key": "prog-behaviour",
+   "plan": "fields of glm_universal.substrate.norm_family.completeness",
+   "planned": "correct",
+   "question": "describe what completeness returns",
+   "reason": "",
+   "set": "probe-paraphrase",
+   "verdict": "answered"
+  },
+  {
+   "answer": "rungs of glm_universal.substrate.norm_family.completeness = 25 -- from the function table (function), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "25"
+   ],
+   "faculty": "table",
+   "frame": "count",
+   "gained": true,
+   "key": "prog-count",
+   "plan": "field rungs of glm_universal.substrate.norm_family.completeness",
+   "planned": "correct",
+   "question": "count the rungs of the norm family",
+   "reason": "",
+   "set": "probe-paraphrase",
+   "verdict": "answered"
+  },
+  {
+   "answer": "'velocity' denotes dimension L T^-1",
+   "bare": "correct",
+   "expect": [
+    "velocity"
+   ],
+   "faculty": "table",
+   "frame": "meaning",
+   "gained": false,
+   "key": "p-nl-meaning-1",
+   "plan": "meaning of velocity",
+   "planned": "correct",
+   "question": "what is the meaning of velocity?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "'velocity' denotes dimension L T^-1",
+   "bare": "refused",
+   "expect": [
+    "velocity"
+   ],
+   "faculty": "table",
+   "frame": "meaning",
+   "gained": true,
+   "key": "p-nl-meaning-2",
+   "plan": "meaning of velocity",
+   "planned": "correct",
+   "question": "define velocity",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "'velocity' denotes dimension L T^-1",
+   "bare": "refused",
+   "expect": [
+    "velocity"
+   ],
+   "faculty": "table",
+   "frame": "meaning",
+   "gained": true,
+   "key": "p-nl-meaning-3",
+   "plan": "meaning of velocity",
+   "planned": "correct",
+   "question": "what does the word velocity mean?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "derivative_of of velocity = position -- from the carrier:lexicon table (carrier), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "position"
+   ],
+   "faculty": "table",
+   "frame": "relation",
+   "gained": true,
+   "key": "p-nl-relation-1",
+   "plan": "field derivative_of of velocity",
+   "planned": "correct",
+   "question": "velocity is the derivative of which quantity?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "derivative_of of velocity = position -- from the carrier:lexicon table (carrier), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "position"
+   ],
+   "faculty": "table",
+   "frame": "relation",
+   "gained": true,
+   "key": "p-nl-relation-2",
+   "plan": "field derivative_of of velocity",
+   "planned": "correct",
+   "question": "of what is velocity the derivative?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "derivative_of of velocity = position -- from the carrier:lexicon table (carrier), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "position"
+   ],
+   "faculty": "table",
+   "frame": "relation",
+   "gained": true,
+   "key": "p-nl-relation-3",
+   "plan": "field derivative_of of velocity",
+   "planned": "correct",
+   "question": "which quantity has velocity as its derivative?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "yes, water is more concrete than energy -- abstract_concrete of water = 1/1 is above abstract_concrete of energy = 1/4, by an exact 3/4, both read on the carrier:lexicon:primitives.abstract_concrete scale; the register declares 0 = abstract, so energy is the more abstract of the two",
+   "bare": "refused",
+   "expect": [
+    "water"
+   ],
+   "faculty": "derive",
+   "frame": "compare",
+   "gained": true,
+   "key": "p-nl-compare-1",
+   "plan": "order abstract_concrete of water and energy",
+   "planned": "correct",
+   "question": "is water more concrete than energy?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "energy is more abstract than water -- abstract_concrete of energy = 1/4 is below abstract_concrete of water = 1/1, by an exact 3/4, both read on the carrier:lexicon:primitives.abstract_concrete scale; the register declares 0 = abstract, so energy is the more abstract of the two",
+   "bare": "refused",
+   "expect": [
+    "energy"
+   ],
+   "faculty": "derive",
+   "frame": "compare",
+   "gained": true,
+   "key": "p-nl-compare-2",
+   "plan": "order abstract_concrete of energy and water",
+   "planned": "correct",
+   "question": "which of energy and water is more abstract?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "energy is more abstract than water -- abstract_concrete of water = 1/1 is above abstract_concrete of energy = 1/4, by an exact 3/4, both read on the carrier:lexicon:primitives.abstract_concrete scale; the register declares 0 = abstract, so energy is the more abstract of the two",
+   "bare": "refused",
+   "expect": [
+    "energy"
+   ],
+   "faculty": "derive",
+   "frame": "compare",
+   "gained": true,
+   "key": "p-nl-compare-3",
+   "plan": "order abstract_concrete of water and energy",
+   "planned": "correct",
+   "question": "between water and energy, which is the more abstract?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum'].",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "p-nl-unknown-1",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "what causes the blue colour of the sky?",
+   "reason": "no frame read the question",
+   "set": "paraphrases",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "unsolved: resolve: 'why the sky is blue' names no carrier in any enabled domain",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "p-nl-unknown-2",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "explain why the sky is blue",
+   "reason": "no frame read the question",
+   "set": "paraphrases",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum'].",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "p-nl-unknown-3",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "why does the sky appear blue during the day?",
+   "reason": "no frame read the question",
+   "set": "paraphrases",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "2 + 2 = 4",
+   "bare": "refused",
+   "expect": [
+    "4"
+   ],
+   "faculty": "derive",
+   "frame": "arithmetic",
+   "gained": true,
+   "key": "p-math-add-1",
+   "plan": "arith",
+   "planned": "correct",
+   "question": "what is two plus two?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "2 + 2 = 4",
+   "bare": "refused",
+   "expect": [
+    "4"
+   ],
+   "faculty": "derive",
+   "frame": "arithmetic",
+   "gained": true,
+   "key": "p-math-add-2",
+   "plan": "arith",
+   "planned": "correct",
+   "question": "what do you get if you add 2 and 2?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "2 + 2 = 4",
+   "bare": "refused",
+   "expect": [
+    "4"
+   ],
+   "faculty": "derive",
+   "frame": "arithmetic",
+   "gained": true,
+   "key": "p-math-add-3",
+   "plan": "arith",
+   "planned": "correct",
+   "question": "compute 2 + 2",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "no, 91 is not prime: 91 = 7 x 13",
+   "bare": "refused",
+   "expect": [
+    "not prime"
+   ],
+   "faculty": "derive",
+   "frame": "prime",
+   "gained": true,
+   "key": "p-math-prime-1",
+   "plan": "prime",
+   "planned": "correct",
+   "question": "is 91 a prime number?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "no, 91 is not prime: 91 = 7 x 13",
+   "bare": "refused",
+   "expect": [
+    "not prime"
+   ],
+   "faculty": "derive",
+   "frame": "prime",
+   "gained": true,
+   "key": "p-math-prime-2",
+   "plan": "prime",
+   "planned": "correct",
+   "question": "is the number 91 prime?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "no, 91 is not prime: 91 = 7 x 13",
+   "bare": "refused",
+   "expect": [
+    "not prime"
+   ],
+   "faculty": "derive",
+   "frame": "prime",
+   "gained": true,
+   "key": "p-math-prime-3",
+   "plan": "prime",
+   "planned": "correct",
+   "question": "tell me whether 91 is prime",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "gcd(12, 18) = 6",
+   "bare": "refused",
+   "expect": [
+    "6"
+   ],
+   "faculty": "derive",
+   "frame": "gcd-lcm",
+   "gained": true,
+   "key": "p-math-gcd-1",
+   "plan": "gcd",
+   "planned": "correct",
+   "question": "what is the gcd of 12 and 18?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "gcd(12, 18) = 6",
+   "bare": "refused",
+   "expect": [
+    "6"
+   ],
+   "faculty": "derive",
+   "frame": "gcd-lcm",
+   "gained": true,
+   "key": "p-math-gcd-2",
+   "plan": "gcd",
+   "planned": "correct",
+   "question": "find the highest common factor of 12 and 18",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "gcd(18, 12) = 6",
+   "bare": "refused",
+   "expect": [
+    "6"
+   ],
+   "faculty": "derive",
+   "frame": "gcd-lcm",
+   "gained": true,
+   "key": "p-math-gcd-3",
+   "plan": "gcd",
+   "planned": "correct",
+   "question": "greatest common divisor of 18 and 12",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "prime_limit of perfect_fifth = 3 -- from the carrier:harmonics table (carrier), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "3"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "p-math-ratio-1",
+   "plan": "field prime_limit of perfect_fifth",
+   "planned": "correct",
+   "question": "what is the prime limit of 3/2?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "prime_limit of perfect_fifth = 3 -- from the carrier:harmonics table (carrier), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "3"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "p-math-ratio-2",
+   "plan": "field prime_limit of perfect_fifth",
+   "planned": "correct",
+   "question": "what prime limit does the ratio 3/2 have?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "prime_limit of perfect_fifth = 3 -- from the carrier:harmonics table (carrier), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "3"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "p-math-ratio-3",
+   "plan": "field prime_limit of perfect fifth",
+   "planned": "correct",
+   "question": "give the prime limit of the perfect fifth",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "speed_of_light (physics): depth 6, plane-0 mask 0x001405, |v|^2 = 41/1; gloss = speed of light in vacuum (from the carrier:physics table)",
+   "bare": "correct",
+   "expect": [
+    "speed_of_light"
+   ],
+   "faculty": "table",
+   "frame": "describe",
+   "gained": false,
+   "key": "p-phys-constant-1",
+   "plan": "describe speed_of_light",
+   "planned": "correct",
+   "question": "what is speed_of_light?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "speed_of_light (physics): depth 6, plane-0 mask 0x001405, |v|^2 = 41/1; gloss = speed of light in vacuum (from the carrier:physics table)",
+   "bare": "correct",
+   "expect": [
+    "speed_of_light"
+   ],
+   "faculty": "table",
+   "frame": "describe",
+   "gained": false,
+   "key": "p-phys-constant-2",
+   "plan": "describe speed_of_light",
+   "planned": "correct",
+   "question": "describe the speed_of_light",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "speed_of_light (physics): depth 6, plane-0 mask 0x001405, |v|^2 = 41/1",
+   "bare": "correct",
+   "expect": [
+    "speed_of_light",
+    "speed of light"
+   ],
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "p-phys-constant-3",
+   "plan": "",
+   "planned": "correct",
+   "question": "tell me about the speed of light",
+   "reason": "no frame read the question",
+   "set": "paraphrases",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "dimension_si7 of force = L M T^-2 -- from the carrier:physics table (carrier), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "l m t^-2"
+   ],
+   "faculty": "table",
+   "frame": "dimension",
+   "gained": true,
+   "key": "p-phys-dimension-1",
+   "plan": "field dimension_si7 of force",
+   "planned": "correct",
+   "question": "what is the dimension of force?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "dimension_si7 of force = L M T^-2 -- from the carrier:physics table (carrier), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "l m t^-2"
+   ],
+   "faculty": "table",
+   "frame": "dimension",
+   "gained": true,
+   "key": "p-phys-dimension-2",
+   "plan": "field dimension_si7 of force",
+   "planned": "correct",
+   "question": "what dimensions does force have?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "dimension_si7 of force = L M T^-2 -- from the carrier:physics table (carrier), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "l m t^-2"
+   ],
+   "faculty": "table",
+   "frame": "dimension",
+   "gained": true,
+   "key": "p-phys-dimension-3",
+   "plan": "field dimension_si7 of force",
+   "planned": "correct",
+   "question": "give me the dimensions of force",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "force = mass * acceleration holds under scalar semantics",
+   "bare": "refused",
+   "expect": [
+    "true",
+    "holds"
+   ],
+   "faculty": "derive",
+   "frame": "verify",
+   "gained": true,
+   "key": "p-phys-derive-1",
+   "plan": "force = mass * acceleration",
+   "planned": "correct",
+   "question": "does force have the same dimensions as mass times acceleration?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "force = mass * acceleration holds under scalar semantics",
+   "bare": "refused",
+   "expect": [
+    "true",
+    "holds"
+   ],
+   "faculty": "derive",
+   "frame": "verify",
+   "gained": true,
+   "key": "p-phys-derive-2",
+   "plan": "force = mass * acceleration",
+   "planned": "correct",
+   "question": "is force dimensionally equal to mass times acceleration?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "force = mass * acceleration holds under scalar semantics",
+   "bare": "refused",
+   "expect": [
+    "true",
+    "holds"
+   ],
+   "faculty": "derive",
+   "frame": "verify",
+   "gained": true,
+   "key": "p-phys-derive-3",
+   "plan": "force = mass * acceleration",
+   "planned": "correct",
+   "question": "check whether force equals mass times acceleration dimensionally",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "3 metres = 1250/127 (= 9.8425 rounded to 4 places) feet -- 1 metre = 1 metre (the SI base unit) and 1 foot = 0.3048 metre (exact by the 1959 international yard and pound agreement)",
+   "bare": "refused",
+   "expect": [
+    "9.84"
+   ],
+   "faculty": "derive",
+   "frame": "convert",
+   "gained": true,
+   "key": "p-phys-convert-1",
+   "plan": "convert",
+   "planned": "correct",
+   "question": "how many feet are in 3 metres?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "3 metres = 1250/127 (= 9.8425 rounded to 4 places) feet -- 1 metre = 1 metre (the SI base unit) and 1 foot = 0.3048 metre (exact by the 1959 international yard and pound agreement)",
+   "bare": "refused",
+   "expect": [
+    "9.84"
+   ],
+   "faculty": "derive",
+   "frame": "convert",
+   "gained": true,
+   "key": "p-phys-convert-2",
+   "plan": "convert",
+   "planned": "correct",
+   "question": "convert 3 meters into feet",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "3 metres = 1250/127 (= 9.8425 rounded to 4 places) feet -- 1 metre = 1 metre (the SI base unit) and 1 foot = 0.3048 metre (exact by the 1959 international yard and pound agreement)",
+   "bare": "refused",
+   "expect": [
+    "9.84"
+   ],
+   "faculty": "derive",
+   "frame": "convert",
+   "gained": true,
+   "key": "p-phys-convert-3",
+   "plan": "convert",
+   "planned": "correct",
+   "question": "what is 3 metres in feet?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "name of C = Carbon -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "carbon"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "p-chem-lookup-1",
+   "plan": "field name of c",
+   "planned": "correct",
+   "question": "which element has the symbol C?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "name of C = Carbon -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "carbon"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "p-chem-lookup-2",
+   "plan": "field name of c",
+   "planned": "correct",
+   "question": "what element is C?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "name of C = Carbon -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "carbon"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "p-chem-lookup-3",
+   "plan": "field name of c",
+   "planned": "correct",
+   "question": "what is the name of the element C?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "atomic_weight_u of C = 12011/1000 (= 12.011) -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "12.011"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "p-chem-weight-1",
+   "plan": "field atomic_weight_u of carbon",
+   "planned": "correct",
+   "question": "what is the atomic mass of carbon?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "atomic_weight_u of C = 12011/1000 (= 12.011) -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "12.011"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "p-chem-weight-2",
+   "plan": "field atomic_weight_u of carbon",
+   "planned": "correct",
+   "question": "give the atomic weight of carbon",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "atomic_weight_u of C = 12011/1000 (= 12.011) -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "12.011"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "p-chem-weight-3",
+   "plan": "field atomic_weight_u of carbon",
+   "planned": "correct",
+   "question": "carbon's atomic weight?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "group_block of Cl = Halogen -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "halogen"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "p-chem-group-1",
+   "plan": "field group_block of chlorine",
+   "planned": "correct",
+   "question": "what block is chlorine in?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "group_block of Cl = Halogen -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "halogen"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "p-chem-group-2",
+   "plan": "field group_block of chlorine",
+   "planned": "correct",
+   "question": "which group does chlorine belong to?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "group_block of Cl = Halogen -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "halogen"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "p-chem-group-3",
+   "plan": "field group_block of chlorine",
+   "planned": "correct",
+   "question": "what kind of element is chlorine?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "molar_mass_u of water = 3603/200 (= 18.015) -- from the molecule table (source), recomputed on read by the rule the register declares: sum over the formula of atomic_weight_u times count, from the element register",
+   "bare": "refused",
+   "expect": [
+    "18.01"
+   ],
+   "faculty": "derive",
+   "frame": "field",
+   "gained": true,
+   "key": "p-chem-compose-1",
+   "plan": "field molar_mass_u of h2o",
+   "planned": "correct",
+   "question": "what is the molar mass of h2o?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "molar_mass_u of water = 3603/200 (= 18.015) -- from the molecule table (source), recomputed on read by the rule the register declares: sum over the formula of atomic_weight_u times count, from the element register",
+   "bare": "refused",
+   "expect": [
+    "18.01"
+   ],
+   "faculty": "derive",
+   "frame": "field",
+   "gained": true,
+   "key": "p-chem-compose-2",
+   "plan": "field molar_mass_u of water",
+   "planned": "correct",
+   "question": "give the molar mass of water",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "molar_mass_u of water = 3603/200 (= 18.015) -- from the molecule table (source), recomputed on read by the rule the register declares: sum over the formula of atomic_weight_u times count, from the element register",
+   "bare": "refused",
+   "expect": [
+    "18.01"
+   ],
+   "faculty": "derive",
+   "frame": "field",
+   "gained": true,
+   "key": "p-chem-compose-3",
+   "plan": "field molar_mass_u of water",
+   "planned": "correct",
+   "question": "what does one mole of water weigh?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "file of GLM.NormFamily.family_tower = NormFamily.lean -- from the lean table (address), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "normfamily.lean"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "p-prog-lean-1",
+   "plan": "field file of glm.normfamily.family_tower",
+   "planned": "correct",
+   "question": "in which file is GLM.NormFamily.family_tower?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "file of GLM.NormFamily.family_tower = NormFamily.lean -- from the lean table (address), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "normfamily.lean"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "p-prog-lean-2",
+   "plan": "field file of glm.normfamily.family_tower",
+   "planned": "correct",
+   "question": "where is GLM.NormFamily.family_tower declared?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "file of GLM.NormFamily.family_tower = NormFamily.lean -- from the lean table (address), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "normfamily.lean"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "p-prog-lean-3",
+   "plan": "field file of glm.normfamily.family_tower",
+   "planned": "correct",
+   "question": "what file declares GLM.NormFamily.family_tower?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "module of rung_audit = norm_escalation -- from the python table (code), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "norm_escalation"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "p-prog-python-1",
+   "plan": "field module of rung_audit",
+   "planned": "correct",
+   "question": "in which module is rung_audit defined?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "module of rung_audit = norm_escalation -- from the python table (code), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "norm_escalation"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "p-prog-python-2",
+   "plan": "field module of rung_audit",
+   "planned": "correct",
+   "question": "what module is the function rung_audit in?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "module of rung_audit = norm_escalation -- from the python table (code), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "norm_escalation"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "p-prog-python-3",
+   "plan": "field module of rung_audit",
+   "planned": "correct",
+   "question": "where does rung_audit live?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "glm_universal.substrate.norm_family.completeness answers to 8 fields, held by function: bases_used_by_the_chain, complete, filled, gaps, max_log2, norms, rungs, why_interleaving_is_needed",
+   "bare": "refused",
+   "expect": [
+    "complete"
+   ],
+   "faculty": "table",
+   "frame": "returns",
+   "gained": true,
+   "key": "p-prog-behaviour-1",
+   "plan": "fields of glm_universal.substrate.norm_family.completeness",
+   "planned": "correct",
+   "question": "what does completeness return?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "glm_universal.substrate.norm_family.completeness answers to 8 fields, held by function: bases_used_by_the_chain, complete, filled, gaps, max_log2, norms, rungs, why_interleaving_is_needed",
+   "bare": "refused",
+   "expect": [
+    "complete"
+   ],
+   "faculty": "table",
+   "frame": "returns",
+   "gained": true,
+   "key": "p-prog-behaviour-2",
+   "plan": "fields of glm_universal.substrate.norm_family.completeness",
+   "planned": "correct",
+   "question": "what fields does glm_universal.substrate.norm_family.completeness return?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "glm_universal.substrate.norm_family.completeness answers to 8 fields, held by function: bases_used_by_the_chain, complete, filled, gaps, max_log2, norms, rungs, why_interleaving_is_needed",
+   "bare": "refused",
+   "expect": [
+    "complete"
+   ],
+   "faculty": "table",
+   "frame": "returns",
+   "gained": true,
+   "key": "p-prog-behaviour-3",
+   "plan": "fields of glm_universal.substrate.norm_family.completeness",
+   "planned": "correct",
+   "question": "what is returned by glm_universal.substrate.norm_family.completeness?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "rungs of glm_universal.substrate.norm_family.completeness = 25 -- from the function table (function), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "25"
+   ],
+   "faculty": "table",
+   "frame": "count",
+   "gained": true,
+   "key": "p-prog-count-1",
+   "plan": "field rungs of glm_universal.substrate.norm_family.completeness",
+   "planned": "correct",
+   "question": "how many rungs are in the norm family?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "rungs of glm_universal.substrate.norm_family.completeness = 25 -- from the function table (function), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "25"
+   ],
+   "faculty": "table",
+   "frame": "count",
+   "gained": true,
+   "key": "p-prog-count-2",
+   "plan": "field rungs of glm_universal.substrate.norm_family.completeness",
+   "planned": "correct",
+   "question": "what is the number of rungs of the norm family?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "rungs of glm_universal.substrate.norm_family.completeness = 25 -- from the function table (function), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "25"
+   ],
+   "faculty": "table",
+   "frame": "count",
+   "gained": true,
+   "key": "p-prog-count-3",
+   "plan": "field rungs of glm_universal.substrate.norm_family.completeness",
+   "planned": "correct",
+   "question": "the norm family has how many rungs?",
+   "reason": "",
+   "set": "paraphrases",
+   "verdict": "answered"
+  },
+  {
+   "answer": "atomic_weight_u of O = 15999/1000 (= 15.999) -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "15.999"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "c-weight-oxygen",
+   "plan": "field atomic_weight_u of oxygen",
+   "planned": "correct",
+   "question": "what is the atomic weight of oxygen?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "atomic_weight_u of Na = 229897693/10000000 (= 22.9897693) -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "22.98",
+    "22.99"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "c-weight-sodium",
+   "plan": "field atomic_weight_u of sodium",
+   "planned": "correct",
+   "question": "what is the atomic weight of sodium?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "atomic_weight_u of Fe = 1396/25 (= 55.84) -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "55.845"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": false,
+   "key": "c-weight-iron",
+   "plan": "field atomic_weight_u of iron",
+   "planned": "wrong",
+   "question": "how heavy is an iron atom?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "molar_mass_u of carbon dioxide = 44009/1000 (= 44.009) -- from the molecule table (source), recomputed on read by the rule the register declares: sum over the formula of atomic_weight_u times count, from the element register",
+   "bare": "refused",
+   "expect": [
+    "44.0"
+   ],
+   "faculty": "derive",
+   "frame": "field",
+   "gained": true,
+   "key": "c-molar-co2",
+   "plan": "field molar_mass_u of carbon dioxide",
+   "planned": "correct",
+   "question": "what is the molar mass of carbon dioxide?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "molar_mass_u of methane = 16043/1000 (= 16.043) -- from the molecule table (source), recomputed on read by the rule the register declares: sum over the formula of atomic_weight_u times count, from the element register",
+   "bare": "refused",
+   "expect": [
+    "16.04"
+   ],
+   "faculty": "derive",
+   "frame": "field",
+   "gained": true,
+   "key": "c-molar-methane",
+   "plan": "field molar_mass_u of methane",
+   "planned": "correct",
+   "question": "what is the molar mass of methane?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "molar_mass_u of ammonia = 17031/1000 (= 17.031) -- from the molecule table (source), recomputed on read by the rule the register declares: sum over the formula of atomic_weight_u times count, from the element register",
+   "bare": "refused",
+   "expect": [
+    "17.03"
+   ],
+   "faculty": "derive",
+   "frame": "field",
+   "gained": true,
+   "key": "c-molar-ammonia",
+   "plan": "field molar_mass_u of ammonia",
+   "planned": "correct",
+   "question": "what is the molar mass of ammonia?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "group_block of Na = Alkali metal -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "alkali"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "c-block-sodium",
+   "plan": "field group_block of sodium",
+   "planned": "correct",
+   "question": "which block of the periodic table is sodium in?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "group_block of Ne = Noble gas -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "noble"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "c-block-neon",
+   "plan": "field group_block of neon",
+   "planned": "correct",
+   "question": "what group does neon belong to?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "group_block of F = Halogen -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "halogen"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "c-block-fluorine",
+   "plan": "field group_block of fluorine",
+   "planned": "correct",
+   "question": "which block is fluorine in?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "name of Fe = Iron -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "iron"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "c-name-fe",
+   "plan": "field name of fe",
+   "planned": "correct",
+   "question": "which element has the symbol Fe?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "name of Na = Sodium -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "sodium"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "c-name-na",
+   "plan": "field name of na",
+   "planned": "correct",
+   "question": "what element is Na?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "yes, oxygen is heavier than carbon -- atomic_weight_u of O = 15999/1000 (= 15.999) is above atomic_weight_u of C = 12011/1000 (= 12.011), by an exact 997/250, both read on the element:atomic_weight_u scale",
+   "bare": "refused",
+   "expect": [
+    "oxygen"
+   ],
+   "faculty": "derive",
+   "frame": "compare",
+   "gained": true,
+   "key": "c-heavier-o-c",
+   "plan": "order atomic_weight_u of oxygen and carbon",
+   "planned": "correct",
+   "question": "is oxygen heavier than carbon?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "copper is heavier than iron -- atomic_weight_u of Fe = 1396/25 (= 55.84) is below atomic_weight_u of Cu = 1271/20 (= 63.55), by an exact 771/100, both read on the element:atomic_weight_u scale",
+   "bare": "refused",
+   "expect": [
+    "copper"
+   ],
+   "faculty": "derive",
+   "frame": "compare",
+   "gained": true,
+   "key": "c-heavier-fe-cu",
+   "plan": "order atomic_weight_u of iron and copper",
+   "planned": "correct",
+   "question": "which is heavier, iron or copper?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "the largest atomic_weight_u over the 118 rows of element is 36902/125 (= 295.216), attained by Og, ahead of the next distinct value by an exact 201/200, every row read on the element:atomic_weight_u scale",
+   "bare": "refused",
+   "expect": [
+    "og",
+    "oganesson"
+   ],
+   "faculty": "derive",
+   "frame": "extremum",
+   "gained": true,
+   "key": "c-heaviest-element",
+   "plan": "largest atomic_weight_u in element",
+   "planned": "correct",
+   "question": "which element has the largest atomic weight?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "dimension_si7 of energy = L^2 M T^-2 -- from the carrier:physics table (carrier), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "l^2 m t^-2"
+   ],
+   "faculty": "table",
+   "frame": "dimension",
+   "gained": true,
+   "key": "c-dim-energy",
+   "plan": "field dimension_si7 of energy",
+   "planned": "correct",
+   "question": "what are the dimensions of energy?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "dimension_si7 of pressure = L^-1 M T^-2 -- from the carrier:physics table (carrier), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "l^-1 m t^-2"
+   ],
+   "faculty": "table",
+   "frame": "dimension",
+   "gained": true,
+   "key": "c-dim-pressure",
+   "plan": "field dimension_si7 of pressure",
+   "planned": "correct",
+   "question": "what are the dimensions of pressure?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "energy = force * length holds under scalar semantics",
+   "bare": "refused",
+   "expect": [
+    "true",
+    "holds"
+   ],
+   "faculty": "derive",
+   "frame": "verify",
+   "gained": true,
+   "key": "c-verify-energy",
+   "plan": "energy = force * length",
+   "planned": "correct",
+   "question": "is energy dimensionally equal to force times length?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "energy = mass * velocity does not hold under scalar semantics",
+   "bare": "refused",
+   "expect": [
+    "false",
+    "does not hold"
+   ],
+   "faculty": "derive",
+   "frame": "verify",
+   "gained": true,
+   "key": "c-verify-false",
+   "plan": "energy = mass * velocity",
+   "planned": "correct",
+   "question": "is energy dimensionally equal to mass times velocity?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "10 inches = 25.4 centimetres -- 1 inch = 0.0254 metre (exact by the 1959 international yard and pound agreement) and 1 centimetre = 0.01 metre (exact by the SI prefix definitions)",
+   "bare": "refused",
+   "expect": [
+    "25.4"
+   ],
+   "faculty": "derive",
+   "frame": "convert",
+   "gained": true,
+   "key": "c-convert-inch",
+   "plan": "convert",
+   "planned": "correct",
+   "question": "convert 10 inches to centimetres",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "1 mile = 1.609344 kilometres -- 1 mile = 1609.344 metre (exact by the 1959 international yard and pound agreement) and 1 kilometre = 1000 metre (exact by the SI prefix definitions)",
+   "bare": "refused",
+   "expect": [
+    "1.609"
+   ],
+   "faculty": "derive",
+   "frame": "convert",
+   "gained": true,
+   "key": "c-convert-mile",
+   "plan": "convert",
+   "planned": "correct",
+   "question": "how many kilometres is 1 mile?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "2 pounds = 0.90718474 kilograms -- 1 pound = 0.45359237 kilogram (exact by the 1959 international yard and pound agreement) and 1 kilogram = 1 kilogram (the SI base unit)",
+   "bare": "refused",
+   "expect": [
+    "0.907"
+   ],
+   "faculty": "derive",
+   "frame": "convert",
+   "gained": true,
+   "key": "c-convert-pound",
+   "plan": "convert",
+   "planned": "correct",
+   "question": "convert 2 pounds to kilograms",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "100 feet = 30.48 metres -- 1 foot = 0.3048 metre (exact by the 1959 international yard and pound agreement) and 1 metre = 1 metre (the SI base unit)",
+   "bare": "refused",
+   "expect": [
+    "30.48"
+   ],
+   "faculty": "derive",
+   "frame": "convert",
+   "gained": true,
+   "key": "c-convert-feet",
+   "plan": "convert",
+   "planned": "correct",
+   "question": "how many metres is 100 feet?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "yes, 97 is prime: no integer from 2 to its square root divides it",
+   "bare": "refused",
+   "expect": [
+    "is prime"
+   ],
+   "faculty": "derive",
+   "frame": "prime",
+   "gained": true,
+   "key": "c-prime-97",
+   "plan": "prime",
+   "planned": "correct",
+   "question": "is 97 prime?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "no, 51 is not prime: 51 = 3 x 17",
+   "bare": "refused",
+   "expect": [
+    "not prime"
+   ],
+   "faculty": "derive",
+   "frame": "prime",
+   "gained": true,
+   "key": "c-prime-51",
+   "plan": "prime",
+   "planned": "correct",
+   "question": "is 51 a prime number?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "gcd(24, 36) = 12",
+   "bare": "refused",
+   "expect": [
+    "12"
+   ],
+   "faculty": "derive",
+   "frame": "gcd-lcm",
+   "gained": true,
+   "key": "c-gcd-24-36",
+   "plan": "gcd",
+   "planned": "correct",
+   "question": "what is the greatest common divisor of 24 and 36?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "lcm(4, 6) = 12",
+   "bare": "refused",
+   "expect": [
+    "12"
+   ],
+   "faculty": "derive",
+   "frame": "gcd-lcm",
+   "gained": true,
+   "key": "c-lcm-4-6",
+   "plan": "lcm",
+   "planned": "correct",
+   "question": "what is the least common multiple of 4 and 6?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "7 * 8 = 56",
+   "bare": "refused",
+   "expect": [
+    "56"
+   ],
+   "faculty": "derive",
+   "frame": "arithmetic",
+   "gained": true,
+   "key": "c-mul",
+   "plan": "arith",
+   "planned": "correct",
+   "question": "what is 7 times 8?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "100 - 37 = 63",
+   "bare": "refused",
+   "expect": [
+    "63"
+   ],
+   "faculty": "derive",
+   "frame": "arithmetic",
+   "gained": true,
+   "key": "c-sub",
+   "plan": "arith",
+   "planned": "correct",
+   "question": "what is 100 minus 37?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "prime_limit of major_third = 5 -- from the carrier:harmonics table (carrier), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "5"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "c-ratio-5-4",
+   "plan": "field prime_limit of major_third",
+   "planned": "correct",
+   "question": "what is the prime limit of 5/4?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "file of GLM.CoordinateOrder.order_scale_invariant = CoordinateOrder.lean -- from the lean table (address), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "coordinateorder.lean"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "c-lean-order",
+   "plan": "field file of glm.coordinateorder.order_scale_invariant",
+   "planned": "correct",
+   "question": "which file is GLM.CoordinateOrder.order_scale_invariant in?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  },
+  {
+   "answer": "unsolved: resolve: 'capital of france' names no carrier in any enabled domain",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "a-capital",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "what is the capital of france?",
+   "reason": "no frame read the question",
+   "set": "adversarial",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "unsolved: a metre measures length and a kilogram measures mass; no conversion relates two different quantities (and the grammar: unrecognised query)",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "a-convert-dims",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "convert 3 metres to kilograms",
+   "reason": "a metre measures length and a kilogram measures mass; no conversion relates two different quantities",
+   "set": "adversarial",
+   "verdict": "refused"
+  },
+  {
+   "answer": "unsolved: 7 / 0 has no value: division by zero is undefined (and the grammar: resolve: '7 divided by 0' names no carrier in any enabled domain)",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "a-div-zero",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "what is 7 divided by 0?",
+   "reason": "7 / 0 has no value: division by zero is undefined",
+   "set": "adversarial",
+   "verdict": "refused"
+  },
+  {
+   "answer": "unsolved: resolve: 'atomic weight of unobtainium' names no carrier in any enabled domain",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "a-unobtainium",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "what is the atomic weight of unobtainium?",
+   "reason": "no frame read the question",
+   "set": "adversarial",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum'].",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "a-no-decl",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "which file is GLM.Nowhere.nothing_here in?",
+   "reason": "no frame read the question",
+   "set": "adversarial",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "unsolved: resolve: 'boiling point of velocity' names no carrier in any enabled domain",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "a-category-bp",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "what is the boiling point of velocity?",
+   "reason": "no frame read the question",
+   "set": "adversarial",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum'].",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "a-category-heavy",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "is velocity heavier than carbon?",
+   "reason": "no frame read the question",
+   "set": "adversarial",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum'].",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "a-moons",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "how many moons does jupiter have?",
+   "reason": "no frame read the question",
+   "set": "adversarial",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum'].",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "a-hamlet",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "who wrote hamlet?",
+   "reason": "no frame read the question",
+   "set": "adversarial",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum'].",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "a-incomplete",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "is energy more abstract than?",
+   "reason": "no frame read the question",
+   "set": "adversarial",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "unsolved: resolve: 'melting point of love' names no carrier in any enabled domain",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "a-love",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "what is the melting point of love?",
+   "reason": "no frame read the question",
+   "set": "adversarial",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "unsolved: resolve: 'molar mass of kryptonite' names no carrier in any enabled domain",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "a-kryptonite",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "what is the molar mass of kryptonite?",
+   "reason": "no frame read the question",
+   "set": "adversarial",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "unsolved: resolve: 'square root of -1 as a rational number' names no carrier in any enabled domain",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "a-sqrt-neg",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "what is the square root of -1 as a rational number?",
+   "reason": "no frame read the question",
+   "set": "adversarial",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum'].",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "a-moon-mass",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "how heavy is the moon?",
+   "reason": "no frame read the question",
+   "set": "adversarial",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "unsolved: resolve: 'atomic number of velocity' names no carrier in any enabled domain",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "a-atomic-number-velocity",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "what is the atomic number of velocity?",
+   "reason": "no frame read the question",
+   "set": "adversarial",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum'].",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "a-convert-empty",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "convert 5 feet to",
+   "reason": "no frame read the question",
+   "set": "adversarial",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "unsolved: primality is a property of integers, and 3/2 is not an integer (and the grammar: unrecognised query)",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "a-prime-fraction",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "is 3/2 prime?",
+   "reason": "primality is a property of integers, and 3/2 is not an integer",
+   "set": "adversarial",
+   "verdict": "refused"
+  },
+  {
+   "answer": "unsolved: resolve: 'gcd of 12' names no carrier in any enabled domain; did you mean ['ca_oh_2', 'co3_2', 'c6h12', 'ccl2f2', 'co2']?",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "a-gcd-one",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "what is the gcd of 12?",
+   "reason": "no frame read the question",
+   "set": "adversarial",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum'].",
+   "bare": "refused",
+   "expect": [
+    "same",
+    "equal",
+    "neither"
+   ],
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "a-feathers",
+   "plan": "",
+   "planned": "refused",
+   "question": "which is heavier, a kilogram of feathers or a kilogram of steel?",
+   "reason": "no frame read the question",
+   "set": "adversarial",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum'].",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "a-weather",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "will it rain tomorrow?",
+   "reason": "no frame read the question",
+   "set": "adversarial",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "no, oxygen is heavier than carbon -- atomic_weight_u of C = 12011/1000 (= 12.011) is below atomic_weight_u of O = 15999/1000 (= 15.999), by an exact 997/250, both read on the element:atomic_weight_u scale",
+   "bare": "refused",
+   "expect": [
+    "no,",
+    "oxygen is heavier"
+   ],
+   "faculty": "derive",
+   "frame": "compare",
+   "gained": true,
+   "key": "s-polar-no",
+   "plan": "order atomic_weight_u of carbon and oxygen",
+   "planned": "correct",
+   "question": "is carbon heavier than oxygen?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "false: 2 + 2 < 5",
+   "bare": "correct",
+   "expect": [
+    "false",
+    "no,",
+    "does not"
+   ],
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "s-false-sum",
+   "plan": "",
+   "planned": "correct",
+   "question": "is 2 + 2 equal to 5?",
+   "reason": "no frame read the question",
+   "set": "stress",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "unsolved: resolve: 'atomic weight of carbon dioxide' names no carrier in any enabled domain",
+   "bare": "refused",
+   "expect": [
+    "44.0"
+   ],
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "s-atomic-weight-molecule",
+   "plan": "",
+   "planned": "refused",
+   "question": "what is the atomic weight of carbon dioxide?",
+   "reason": "no frame read the question",
+   "set": "stress",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "gcd(8, 12, 18) = 2",
+   "bare": "refused",
+   "expect": [
+    "2"
+   ],
+   "faculty": "derive",
+   "frame": "gcd-lcm",
+   "gained": true,
+   "key": "s-gcd-three",
+   "plan": "gcd",
+   "planned": "correct",
+   "question": "what is the gcd of 8 and 12 and 18?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "'2 + 3 * 4' denotes number 14 [arithmetic: expression evaluates to 14]; no register entry is spelled that way, so it is described by what it denotes",
+   "bare": "correct",
+   "expect": [
+    "14"
+   ],
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "s-precedence",
+   "plan": "",
+   "planned": "correct",
+   "question": "what is 2 + 3 * 4?",
+   "reason": "no frame read the question",
+   "set": "stress",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "-7 is not prime: a prime is an integer above 1 whose only divisors are 1 and itself",
+   "bare": "refused",
+   "expect": [
+    "not prime"
+   ],
+   "faculty": "derive",
+   "frame": "prime",
+   "gained": true,
+   "key": "s-prime-negative",
+   "plan": "prime",
+   "planned": "correct",
+   "question": "is -7 prime?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "1 is not prime: a prime is an integer above 1 whose only divisors are 1 and itself",
+   "bare": "refused",
+   "expect": [
+    "not prime"
+   ],
+   "faculty": "derive",
+   "frame": "prime",
+   "gained": true,
+   "key": "s-prime-one",
+   "plan": "prime",
+   "planned": "correct",
+   "question": "is 1 prime?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "0 feet = 0 metres -- 1 foot = 0.3048 metre (exact by the 1959 international yard and pound agreement) and 1 metre = 1 metre (the SI base unit)",
+   "bare": "refused",
+   "expect": [
+    "= 0 "
+   ],
+   "faculty": "derive",
+   "frame": "convert",
+   "gained": true,
+   "key": "s-convert-zero",
+   "plan": "convert",
+   "planned": "correct",
+   "question": "convert 0 feet to metres",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum'].",
+   "bare": "refused",
+   "expect": [
+    "9.84",
+    "9 feet"
+   ],
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "s-convert-compound",
+   "plan": "",
+   "planned": "refused",
+   "question": "convert 3 metres to feet and inches",
+   "reason": "no frame read the question",
+   "set": "stress",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "3 metres = 1250/127 (= 9.8425 rounded to 4 places) feet -- 1 metre = 1 metre (the SI base unit) and 1 foot = 0.3048 metre (exact by the 1959 international yard and pound agreement)",
+   "bare": "refused",
+   "expect": [
+    "9.84"
+   ],
+   "faculty": "derive",
+   "frame": "convert",
+   "gained": true,
+   "key": "s-convert-no-aux",
+   "plan": "convert",
+   "planned": "correct",
+   "question": "how many feet in 3 metres?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "ethanol is heavier than water -- molar_mass_u of water = 3603/200 (= 18.015) is below molar_mass_u of ethanol = 46069/1000 (= 46.069), by an exact 14027/500, both read on the molecule:molar_mass_u scale",
+   "bare": "refused",
+   "expect": [
+    "ethanol"
+   ],
+   "faculty": "derive",
+   "frame": "compare",
+   "gained": true,
+   "key": "s-whats-heavier",
+   "plan": "order molar_mass_u of water and ethanol",
+   "planned": "correct",
+   "question": "what's heavier: water or ethanol?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "yes, water is heavier than carbon -- molar_mass_u of water = 3603/200 (= 18.015) is above atomic_weight_u of C = 12011/1000 (= 12.011), by an exact 1501/250, compared in u by the declared conversions molecule:molar_mass_u x1 and element:atomic_weight_u x1",
+   "bare": "refused",
+   "expect": [
+    "yes",
+    "water is heavier"
+   ],
+   "faculty": "derive",
+   "frame": "compare",
+   "gained": true,
+   "key": "s-cross-table",
+   "plan": "order molar_mass_u of water and atomic_weight_u of carbon",
+   "planned": "correct",
+   "question": "is water heavier than carbon?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "lead is heavier than gold -- atomic_weight_u of Au = 19696657/100000 (= 196.96657) is below atomic_weight_u of Pb = 207/1 (= 207), by an exact 1003343/100000, both read on the element:atomic_weight_u scale",
+   "bare": "refused",
+   "expect": [
+    "lead"
+   ],
+   "faculty": "derive",
+   "frame": "compare",
+   "gained": true,
+   "key": "s-which-element-heavier",
+   "plan": "order atomic_weight_u of gold and lead",
+   "planned": "correct",
+   "question": "which element is heavier, gold or lead?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "atomic_weight_u of Au = 19696657/100000 (= 196.96657) -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "196.9"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "s-weight-gold",
+   "plan": "field atomic_weight_u of gold",
+   "planned": "correct",
+   "question": "what is the atomic weight of gold?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "atomic_weight_u of C = 12011/1000 (= 12.011) -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "12.011"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "s-title-case",
+   "plan": "field atomic_weight_u of carbon",
+   "planned": "correct",
+   "question": "What Is The Atomic Weight Of Carbon",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "atomic_weight_u of C = 12011/1000 (= 12.011) -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "12.011"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "s-fragment",
+   "plan": "field atomic_weight_u of carbon",
+   "planned": "correct",
+   "question": "atomic weight of carbon",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "unsolved: resolve: 'atomic weight of carbon and oxygen' names no carrier in any enabled domain",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "s-two-rows",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "what is the atomic weight of carbon and oxygen?",
+   "reason": "no frame read the question",
+   "set": "stress",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "melting_point_K of Fe = 1811/1 (= 1811) -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "1811"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "s-melting-iron",
+   "plan": "field melting_point_K of iron",
+   "planned": "correct",
+   "question": "what is the melting point of iron?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "unsolved: resolve: 'boiling point of water' names no carrier in any enabled domain",
+   "bare": "refused",
+   "expect": [
+    "373"
+   ],
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "s-boiling-water",
+   "plan": "",
+   "planned": "refused",
+   "question": "what is the boiling point of water?",
+   "reason": "no frame read the question",
+   "set": "stress",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "density_g_per_cm3 of Hg = 16917/1250 (= 13.5336) -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "13.5"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "s-density-mercury",
+   "plan": "field density_g_per_cm3 of mercury",
+   "planned": "correct",
+   "question": "what is the density of mercury?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "group_block of Fe = Transition metal -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "transition"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "s-block-iron",
+   "plan": "field group_block of iron",
+   "planned": "correct",
+   "question": "which block is iron in?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "name of Au = Gold -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "gold"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "s-symbol-au",
+   "plan": "field name of au",
+   "planned": "correct",
+   "question": "which element has the symbol Au?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "name of W = Tungsten -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "tungsten"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "s-symbol-w",
+   "plan": "field name of w",
+   "planned": "correct",
+   "question": "what element is W?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "name of K = Potassium -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "potassium"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "s-symbol-k",
+   "plan": "field name of k",
+   "planned": "correct",
+   "question": "what element is K?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum'].",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "s-symbol-none",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "what element is Xq?",
+   "reason": "no frame read the question",
+   "set": "stress",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "file of GLM.CoordinateOrder.order_scale_invariant = CoordinateOrder.lean -- from the lean table (address), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "coordinateorder.lean"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": true,
+   "key": "s-file-trailing",
+   "plan": "field file of glm.coordinateorder.order_scale_invariant",
+   "planned": "correct",
+   "question": "which file is GLM.CoordinateOrder.order_scale_invariant proved in?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum'].",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "s-who-proved",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "who proved GLM.CoordinateOrder.order_scale_invariant?",
+   "reason": "no frame read the question",
+   "set": "stress",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "velocity -- the carrier:lexicon table holds (velocity, derivative_of, position), so velocity is the derivative of position",
+   "bare": "refused",
+   "expect": [
+    "velocity"
+   ],
+   "faculty": "address",
+   "frame": "inverse-relation",
+   "gained": true,
+   "key": "s-derivative-forward",
+   "plan": "inverse",
+   "planned": "correct",
+   "question": "what is the derivative of position?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "unsolved: resolve: 'velocity the integral of' names no carrier in any enabled domain",
+   "bare": "refused",
+   "expect": [
+    "acceleration"
+   ],
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "s-integral",
+   "plan": "",
+   "planned": "refused",
+   "question": "what is velocity the integral of?",
+   "reason": "no frame read the question",
+   "set": "stress",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "force = mass * velocity does not hold under scalar semantics",
+   "bare": "refused",
+   "expect": [
+    "false",
+    "does not hold"
+   ],
+   "faculty": "derive",
+   "frame": "verify",
+   "gained": true,
+   "key": "s-verify-false",
+   "plan": "force = mass * velocity",
+   "planned": "correct",
+   "question": "is force equal to mass times velocity dimensionally?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "refused: 2 licensed readings disagree: energy = torque -> False; same-field -> True",
+   "bare": "refused",
+   "expect": [
+    "true",
+    "holds"
+   ],
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "s-verify-two",
+   "plan": "",
+   "planned": "refused",
+   "question": "does energy have the same dimensions as torque?",
+   "reason": "2 licensed readings disagree: energy = torque -> False; same-field -> True",
+   "set": "stress",
+   "verdict": "ambiguous"
+  },
+  {
+   "answer": "O (chemistry): depth 37, plane-0 mask 0x000800, |v|^2 = 1309722416435648042041/8000000000000",
+   "bare": "wrong",
+   "expect": [
+    "oxygen"
+   ],
+   "faculty": "table",
+   "frame": "describe",
+   "gained": true,
+   "key": "s-describe-oxygen",
+   "plan": "describe oxygen",
+   "planned": "correct",
+   "question": "tell me about oxygen",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "Fe (chemistry): depth 28, plane-0 mask 0x000100, |v|^2 = 12517655465922549/8000000; name = Iron (from the element table)",
+   "bare": "wrong",
+   "expect": [
+    "iron"
+   ],
+   "faculty": "table",
+   "frame": "describe",
+   "gained": true,
+   "key": "s-describe-fe",
+   "plan": "describe fe",
+   "planned": "correct",
+   "question": "describe Fe",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "unsolved: resolve: 'capital of carbon' names no carrier in any enabled domain",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "s-capital-carbon",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "what is the capital of carbon?",
+   "reason": "no frame read the question",
+   "set": "stress",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum'].",
+   "bare": "refused",
+   "expect": [
+    "25"
+   ],
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "s-rungs-ladder",
+   "plan": "",
+   "planned": "refused",
+   "question": "how many rungs does the norm family ladder have?",
+   "reason": "no frame read the question",
+   "set": "stress",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "10 / 4 = 2.5",
+   "bare": "refused",
+   "expect": [
+    "2.5",
+    "5/2"
+   ],
+   "faculty": "derive",
+   "frame": "arithmetic",
+   "gained": true,
+   "key": "s-div-exact",
+   "plan": "arith",
+   "planned": "correct",
+   "question": "what is 10 divided by 4?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "1 / 3 = 1/3 (= 0.3333 rounded to 4 places)",
+   "bare": "refused",
+   "expect": [
+    "1/3"
+   ],
+   "faculty": "derive",
+   "frame": "arithmetic",
+   "gained": true,
+   "key": "s-div-repeating",
+   "plan": "arith",
+   "planned": "correct",
+   "question": "what is 1 divided by 3?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "unsolved: 12 / 0 has no value: division by zero is undefined (and the grammar: resolve: '12 over 0' names no carrier in any enabled domain; did you mean ['a_orb', 'ca_oh_2', 'convert', 'h_orb', 'kilohertz']?)",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "s-over-zero",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "what is 12 over 0?",
+   "reason": "12 / 0 has no value: division by zero is undefined",
+   "set": "stress",
+   "verdict": "refused"
+  },
+  {
+   "answer": "yes, 2 is prime: no integer from 2 to its square root divides it",
+   "bare": "refused",
+   "expect": [
+    "is prime"
+   ],
+   "faculty": "derive",
+   "frame": "prime",
+   "gained": true,
+   "key": "s-prime-two",
+   "plan": "prime",
+   "planned": "correct",
+   "question": "is 2 prime?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "yes, 1000003 is prime: no integer from 2 to its square root divides it",
+   "bare": "refused",
+   "expect": [
+    "is prime"
+   ],
+   "faculty": "derive",
+   "frame": "prime",
+   "gained": true,
+   "key": "s-prime-large",
+   "plan": "prime",
+   "planned": "correct",
+   "question": "is 1000003 prime?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "unsolved: 0 has no positive multiple, so no least common multiple is defined (and the grammar: resolve: 'lcm of 0 and 5' names no carrier in any enabled domain)",
+   "bare": "refused",
+   "expect": [
+    "= 0"
+   ],
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "s-lcm-zero",
+   "plan": "",
+   "planned": "refused",
+   "question": "what is the lcm of 0 and 5?",
+   "reason": "0 has no positive multiple, so no least common multiple is defined",
+   "set": "stress",
+   "verdict": "refused"
+  },
+  {
+   "answer": "the smallest atomic_weight_u over the 118 rows of element is 126/125 (= 1.008), attained by H, ahead of the next distinct value by an exact 14973/5000, every row read on the element:atomic_weight_u scale",
+   "bare": "refused",
+   "expect": [
+    "hydrogen",
+    "winners=h"
+   ],
+   "faculty": "derive",
+   "frame": "extremum",
+   "gained": true,
+   "key": "s-lightest-element",
+   "plan": "smallest atomic_weight_u in element",
+   "planned": "correct",
+   "question": "which element has the smallest atomic weight?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "5 kilograms = 500000000/45359237 (= 11.0231 rounded to 4 places) pounds -- 1 kilogram = 1 kilogram (the SI base unit) and 1 pound = 0.45359237 kilogram (exact by the 1959 international yard and pound agreement)",
+   "bare": "refused",
+   "expect": [
+    "11.02"
+   ],
+   "faculty": "derive",
+   "frame": "convert",
+   "gained": true,
+   "key": "s-kg-lb",
+   "plan": "convert",
+   "planned": "correct",
+   "question": "convert 5 kilograms to pounds",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "2 hours = 7200 seconds -- 1 hour = 3600 second (exact by definition) and 1 second = 1 second (the SI base unit)",
+   "bare": "refused",
+   "expect": [
+    "7200"
+   ],
+   "faculty": "derive",
+   "frame": "convert",
+   "gained": true,
+   "key": "s-seconds",
+   "plan": "convert",
+   "planned": "correct",
+   "question": "how many seconds are in 2 hours?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  },
+  {
+   "answer": "unsolved: a metre measures length and a second measures time; no conversion relates two different quantities (and the grammar: unrecognised query)",
+   "bare": "correct-refusal",
+   "expect": null,
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "s-metre-seconds",
+   "plan": "",
+   "planned": "correct-refusal",
+   "question": "convert 1 metre to seconds",
+   "reason": "a metre measures length and a second measures time; no conversion relates two different quantities",
+   "set": "stress",
+   "verdict": "refused"
+  },
+  {
+   "answer": "unsolved: resolve: 'atomic weight of carbon-14' names no carrier in any enabled domain",
+   "bare": "refused",
+   "expect": [
+    "14.003"
+   ],
+   "faculty": "",
+   "frame": "",
+   "gained": false,
+   "key": "s-carbon-14",
+   "plan": "",
+   "planned": "refused",
+   "question": "what is the atomic weight of carbon-14?",
+   "reason": "no frame read the question",
+   "set": "stress",
+   "verdict": "fallthrough"
+  },
+  {
+   "answer": "no, water is less abstract than energy -- abstract_concrete of energy = 1/4 is below abstract_concrete of water = 1/1, by an exact 3/4, both read on the carrier:lexicon:primitives.abstract_concrete scale; the register declares 0 = abstract, so energy is the more abstract of the two",
+   "bare": "refused",
+   "expect": [
+    "no,"
+   ],
+   "faculty": "derive",
+   "frame": "compare",
+   "gained": true,
+   "key": "s-less-abstract",
+   "plan": "order abstract_concrete of energy and water",
+   "planned": "correct",
+   "question": "is energy less abstract than water?",
+   "reason": "",
+   "set": "stress",
+   "verdict": "answered"
+  }
+ ],
+ "sets": [
+  "probe-canonical",
+  "probe-paraphrase",
+  "paraphrases",
+  "compositions",
+  "adversarial",
+  "stress"
+ ],
+ "source_digest": "520414b93bf40391e58004ce46fa8fdcd0cb8ea1746bf324179d4c75b50d15f8",
+ "stress_first_run": {
+  "correct": 28,
+  "correct-refusal": 6,
+  "refused": 13,
+  "wrong": 0
+ },
+ "tallies": {
+  "adversarial": {
+   "bare": {
+    "correct": 0,
+    "correct-refusal": 19,
+    "refused": 1,
+    "wrong": 0
+   },
+   "planned": {
+    "correct": 0,
+    "correct-refusal": 19,
+    "refused": 1,
+    "wrong": 0
+   }
+  },
+  "compositions": {
+   "bare": {
+    "correct": 0,
+    "correct-refusal": 0,
+    "refused": 30,
+    "wrong": 0
+   },
+   "planned": {
+    "correct": 29,
+    "correct-refusal": 0,
+    "refused": 0,
+    "wrong": 1
+   }
+  },
+  "paraphrases": {
+   "bare": {
+    "correct": 4,
+    "correct-refusal": 3,
+    "refused": 53,
+    "wrong": 0
+   },
+   "planned": {
+    "correct": 57,
+    "correct-refusal": 3,
+    "refused": 0,
+    "wrong": 0
+   }
+  },
+  "probe-canonical": {
+   "bare": {
+    "correct": 2,
+    "correct-refusal": 1,
+    "refused": 16,
+    "wrong": 1
+   },
+   "planned": {
+    "correct": 19,
+    "correct-refusal": 1,
+    "refused": 0,
+    "wrong": 0
+   }
+  },
+  "probe-paraphrase": {
+   "bare": {
+    "correct": 2,
+    "correct-refusal": 1,
+    "refused": 17,
+    "wrong": 0
+   },
+   "planned": {
+    "correct": 19,
+    "correct-refusal": 1,
+    "refused": 0,
+    "wrong": 0
+   }
+  },
+  "stress": {
+   "bare": {
+    "correct": 2,
+    "correct-refusal": 6,
+    "refused": 37,
+    "wrong": 2
+   },
+   "planned": {
+    "correct": 33,
+    "correct-refusal": 6,
+    "refused": 8,
+    "wrong": 0
+   }
+  }
+ },
+ "units": 17,
+ "verdict": "through the planner the frozen probe scores 19 correct, 0 wrong and 1 refused of 20 against the grammar's 2, 1 and 17, and passes the mark declared before the probe was first run; on the 110 held-out questions committed before the planner existed it gives 86 correct answers and 22 correct refusals with 1 wrong, against 4, 22 and 0 through the grammar.",
+ "wrong_rows": [
+  {
+   "answer": "atomic_weight_u of Fe = 1396/25 (= 55.84) -- from the element table (source), read as it is held; nothing on this path computes it",
+   "bare": "refused",
+   "expect": [
+    "55.845"
+   ],
+   "faculty": "table",
+   "frame": "field",
+   "gained": false,
+   "key": "c-weight-iron",
+   "plan": "field atomic_weight_u of iron",
+   "planned": "wrong",
+   "question": "how heavy is an iron atom?",
+   "reason": "",
+   "set": "compositions",
+   "verdict": "answered"
+  }
+ ],
+ "wrong_total": 1
+}

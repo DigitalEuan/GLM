@@ -50,7 +50,7 @@ answering kinds plus `unknown`, the honest fallback.
 | `verify` | `force = mass * acceleration` | multi-plane equation audit | v0.4.0 |
 | `analogy` | `A : B :: C : ?` | proportional analogy in a named subspace | v0.4.0 |
 | `describe` | `describe carbon` | the dossier of one carrier (with lattice projection) | v0.4.0, augmented v0.5.3 |
-| `nearest` | `nearest 5 to pressure` | ranking under the Griess metric | v0.4.0 |
+| `nearest` | `nearest 5 to pressure` | ranking under the Griess metric (the Leech inner product on Q²⁴) | v0.4.0 |
 | `product` | `sakuma product` | the Norton-Sakuma 2A algebra | v0.4.0 |
 | `cluster` | `cluster C, N, O into 2` | exact agglomerative clustering (`linkage = single \| complete`) | v0.4.0 |
 | `spatial` | `mog grid of oxygen` | the MOG presentation of a carrier | v0.4.0 |

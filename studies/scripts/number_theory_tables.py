@@ -10,7 +10,13 @@ Three tables, all exact:
    the modulator emits in 500 ticks against the closed form ``floor(500/p)``
    of ``Sturmian.dsOnes_eq_floor``, and the longest zero run against its bound;
 3. **the binary-period census** -- the multiplicative order of 2 mod p, whether
-   p is full reptend, and the wobble entropy H(1/p).
+   p is full reptend, and the wobble entropy H(1/p);
+4. **the three periods of 1/n** -- for each n from 3 to 30, the least period
+   of the delta-sigma bitstream of 1/n found by search against the ``n`` that
+   ``EngineeringWheels.ds_rational_period_iff`` predicts, the eventual period
+   of the binary expansion of 1/n, and the polygon's closed sub-cycles counted
+   by walking every stride against the closed form ``n/2 - totient(n)/2`` of
+   ``Totient.subCycles_eq``.
 
 Run it from the repository root::
 
@@ -26,7 +32,7 @@ than ``limit ** 0.5`` -- which is directive D7, and
 from __future__ import annotations
 
 from fractions import Fraction
-from math import isqrt
+from math import gcd, isqrt
 from typing import List
 
 from glm_universal.reasoning import coherence as coh
@@ -112,10 +118,59 @@ def period_table() -> None:
     print()
 
 
+def least_stream_period(target: Fraction, horizon: int) -> int:
+    """The least P with bit(i + P) = bit(i) over the whole window, by search."""
+    bits = wb.stream_bits(target, horizon)
+    for period in range(1, horizon // 2 + 1):
+        if all(bits[i + period] == bits[i] for i in range(horizon - period)):
+            return period
+    raise ValueError("no period inside the window")
+
+
+def binary_period(n: int) -> int:
+    """The eventual period of the base-2 expansion of 1/n."""
+    odd = n
+    while odd % 2 == 0:
+        odd //= 2
+    return 1 if odd == 1 else multiplicative_order_of_two(odd)
+
+
+def totient(n: int) -> int:
+    return sum(1 for k in range(1, n + 1) if gcd(n, k) == 1)
+
+
+def closes_early(n: int, stride: int) -> bool:
+    """Walk the n-gon by ``stride`` and report whether it returns early."""
+    position, steps = stride % n, 1
+    while position != 0:
+        position = (position + stride) % n
+        steps += 1
+    return steps < n
+
+
+def three_periods_table() -> None:
+    print("## 4  The three periods of 1/n")
+    print()
+    print("| n | stream period (measured) | stream period (Lean) | "
+          "binary period | totient | sub-cycles (walked) | "
+          "n/2 - totient/2 | prime |")
+    print("|---|---|---|---|---|---|---|---|")
+    for n in range(3, 31):
+        measured = least_stream_period(Fraction(1, n), 4 * n)
+        walked = sum(1 for k in range(1, n // 2 + 1) if closes_early(n, k))
+        phi = totient(n)
+        is_prime = n in primes_below(n + 1)
+        print(f"| {n} | {measured} | {n} | {binary_period(n)} | {phi} | "
+              f"{walked} | {n // 2 - phi // 2} | "
+              f"{'yes' if is_prime else 'no'} |")
+    print()
+
+
 def main() -> None:
     coherence_table()
     sturmian_table()
     period_table()
+    three_periods_table()
 
 
 if __name__ == "__main__":

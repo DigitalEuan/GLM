@@ -5,8 +5,8 @@
 **Question.** If this session stopped now, what would the next one need to
 know to carry the round on?
 
-**Verdict.** No round is in flight: Phase 57 closed with its release, and the
-next round starts from a candidate in `STATUS.md` §3.4.
+**Verdict.** No round is in flight: Phase 63 closed, and the next round starts
+from a candidate in `STATUS.md` §3.4.
 
 **Deciding figure.** 0 steps outstanding.
 
@@ -42,17 +42,28 @@ absence:
 
 ## Status
 
-**No round is in flight.** Phase 57 — the registered figure keys no document
-quoted — is closed: all twenty are quoted, none was retired, the converse of
-**D6** is now a checked rule, and the round is recorded in
-[`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 57 with the remaining candidates in
-[`STATUS.md`](STATUS.md) §3.4. The next round starts from a candidate there, or
-says in its record why not.
+**No round is in flight.** Phase 63 — round two of the substrate-native
+cognition study, which refined three near misses into planner frames and made
+the planner the default path — is closed: the study is
+[`studies/SUBSTRATE_NATIVE_COGNITION_STUDY.md`](studies/SUBSTRATE_NATIVE_COGNITION_STUDY.md)
+(§6–§8), the record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 63, and what it
+left is candidate H of [`STATUS.md`](STATUS.md) §3.4. Phase 62 ran the
+supplied list as nine declared experiments (study §1–§5). Before it, Phase 61 — a second
+documentation round taken at the owner's request — closed:
+[`studies/GLM_ACADEMIC_PAPER.md`](studies/GLM_ACADEMIC_PAPER.md) and
+[`studies/GLM_Complete_Number_Theory_Evidence.md`](studies/GLM_Complete_Number_Theory_Evidence.md)
+are current with the whole system, and the small archive Lean the Phase 60
+ledger named is rebuilt (`Distinction.lean`, `SeedRoles.lean`,
+`GolayMOG.lean`). The round is recorded in [`MASTER_PLAN.md`](MASTER_PLAN.md)
+Phase 61, with the remaining candidates in [`STATUS.md`](STATUS.md) §3.4
+(candidate G is now the MOG cube's language half and the rest of
+`ObserverY.lean`). The next round starts from a candidate there, or says in its
+record why not.
 
 ## 1. Done, committed, and checked here
 
 *Nothing in flight. The last round's record is in
-[`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 57.*
+[`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 63.*
 
 ## 2. In flight right now
 
@@ -67,10 +78,10 @@ says in its record why not.
 
 | gate | state |
 |---|---|
-| `corpus --check --all` | current at the close of Phase 57 |
-| `signoff --verify-release` | released at the close of Phase 57 |
+| `corpus --check --all` | current at the close of Phase 63 |
+| `signoff --verify-release` | released at the close of Phase 63: 109 of 109 test files and 7 of 7 instruments signed with the exhaustive cases run |
 | evaluation | 177 / 177 |
-| `lake build` | clean over the 126 files of `RequestProject/GLM/`, no `sorry` |
+| `lake build` | clean over the 133 files of `RequestProject/GLM/`, no `sorry` |
 
 ## 5. The wiring audit
 
@@ -141,6 +152,19 @@ modules stand as candidate 3 of [`STATUS.md`](STATUS.md) §3.4. Re-run it with
   quoting a generated figure in a verdict failed the tier contract; the check
   now strips the marker and its value from the verdict first, for the same
   reason the deciding figure's emitted numbers were already exempt.
+* **A new Lean file moves hand-typed counts in three documents.** The
+  number-theory paper states the `RequestProject/GLM/` file count in three
+  forms, and `README.md` and `STATUS.md` quote it too; `figures --write` fixes
+  only `FIGURES.md`.
+* **A new Lean file also moves the declaration count and the anonymous
+  register.** The count is hand-typed in `STATUS.md`, `overlay/README.md` and
+  `overlay/glm_universal/README.md`; the anonymous register's query set is a
+  stride over the corpus, so its figures move in the study's own prose and in
+  the `report-anonymous` case of `evaluation/cases.py` — which in turn needs
+  `tools queryesc --write` (over ten minutes; run it in the background).
+* **A string in the package that looks like a Lean name is audited as a
+  citation.** A literal split across lines reads as a truncated name; keep a
+  cited name on one line, and split a deliberately fake one after `GLM.`.
 * **Two registered measurements of the same thing can disagree unnoticed if
   neither is quoted.** `corpus-documents` counted the generated documents and
   the corpus inventory did not, three apart, for as long as no document read

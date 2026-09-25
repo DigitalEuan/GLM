@@ -395,6 +395,17 @@ class ReasoningReports:
             return (f"{entry['leader']['hits'][k]} -> "
                     f"{entry['relay']['hits'][k]} of {entry['queries']}")
 
+        def standing(name: str) -> str:
+            #  Read off the measurement rather than asserted: the goal set
+            #  fell level with the text control when the corpus moved in
+            #  Phase 59, and the sentence has to say so when it happens.
+            entry = sets[name]
+            before, after = entry["leader"]["hits"][k], entry["relay"]["hits"][k]
+            return ("ahead" if after > before
+                    else "level" if after == before else "behind")
+
+        every = verdict["relay_beats_text_on_every_set"]
+
         steps = [
             Step("the gate, and what it is for",
                  f"A faculty reports how much evidence it has for *this* "
@@ -410,12 +421,16 @@ class ReasoningReports:
                  f"-- which is GLM.Relay.relay_confident.",
                  f"gate {report['gate']}, quotas "
                  f"{', '.join(f'{name}:{quota}' for name, quota in report['quotas'])}"),
-            Step("the relay beats the control that beat the geometry",
-                 f"At k = {k} the relay lifts the text control on the tuning "
-                 f"stride ({pair('tuning')}), on a disjoint held-out stride "
-                 f"({pair('holdout')}) and on the goal queries "
-                 f"({pair('goal')}).  It carries {carried} queries the text "
-                 f"control misses and loses {lost}.",
+            Step("the relay beats the control that beat the geometry"
+                 if every else
+                 "the relay against the control that beat the geometry",
+                 f"At k = {k}, against the text control, the relay reads: "
+                 f"the tuning stride {pair('tuning')} ({standing('tuning')}), "
+                 f"a disjoint held-out stride {pair('holdout')} "
+                 f"({standing('holdout')}) and the goal queries "
+                 f"{pair('goal')} ({standing('goal')}).  It carries "
+                 f"{carried} queries the text control misses and loses "
+                 f"{lost}.",
                  f"tuning {pair('tuning')}, holdout {pair('holdout')}, "
                  f"goal {pair('goal')}, carried {carried}, lost {lost}"),
             Step("and the gain is the geometry's",
@@ -468,12 +483,13 @@ class ReasoningReports:
                    f"stack rather than scored one at a time.  Gated on the "
                    f"text layer's own confidence -- below {report['gate']} it "
                    f"is judged to have no evidence for the query -- the two "
-                   f"geometric address books carry it, and at k = {k} the "
-                   f"stack beats the text control on the tuning stride "
-                   f"({pair('tuning')}), on a disjoint held-out stride "
-                   f"({pair('holdout')}) and on bare goal queries "
-                   f"({pair('goal')}), carrying {carried} queries it misses "
-                   f"and losing {lost}.  The same relay to a digest and a "
+                   f"geometric address books carry it, and at k = {k} "
+                   f"against the text control the stack reads: the tuning "
+                   f"stride {pair('tuning')} ({standing('tuning')}), a "
+                   f"disjoint held-out stride {pair('holdout')} "
+                   f"({standing('holdout')}) and bare goal queries "
+                   f"{pair('goal')} ({standing('goal')}), carrying {carried} "
+                   f"queries it misses and losing {lost}.  The same relay to a digest and a "
                    f"reshuffle carries "
                    f"{sum(len(report['controls']['digest_random'][name]['carried']) for name in sets)}, "
                    f"so the gain is the substrate's rather than the list "

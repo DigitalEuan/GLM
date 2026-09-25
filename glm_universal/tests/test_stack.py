@@ -184,11 +184,21 @@ class TestTheRelayReport(unittest.TestCase):
     def setUpClass(cls):
         cls.report = sk.relay_report()
 
-    def test_the_relay_beats_the_text_control_on_every_set(self):
+    def test_the_relay_beats_the_text_control_on_two_sets_and_ties_the_goal(self):
+        #  Until Phase 59 the relay was strictly ahead on all three sets.
+        #  Adding EngineeringWheels.lean moved the corpus and the goal set
+        #  fell level at k = 5 (two carried, two lost).  Asserted as measured:
+        #  strict on the two strides, never below on the goals.  Since
+        #  Phase 61 the goal set is strictly ahead again (the verdict test
+        #  asserts that); this test keeps the weaker durable claim.
         for name, entry in self.report["sets"].items():
             with self.subTest(set=name):
-                self.assertGreater(entry["relay"]["hit_rate"][5],
-                                   entry["leader"]["hit_rate"][5])
+                if name == "goal":
+                    self.assertGreaterEqual(entry["relay"]["hit_rate"][5],
+                                            entry["leader"]["hit_rate"][5])
+                else:
+                    self.assertGreater(entry["relay"]["hit_rate"][5],
+                                       entry["leader"]["hit_rate"][5])
 
     def test_the_relay_is_never_below_the_text_control(self):
         for name, entry in self.report["sets"].items():
@@ -238,6 +248,9 @@ class TestTheRelayReport(unittest.TestCase):
         #  gate 0 row is the control -- no query is handed to the geometry --
         #  and it is the baseline itself, which is asserted too, because a
         #  sweep whose zero row moved would not be measuring the gate.
+        #  In Phase 59 the strict gain stopped at 1/5, with the relay one
+        #  query behind the control at 1/4; since Phase 61 (3730
+        #  declarations) it is strict again on all five gates, to 1/4.
         baseline = self.report["sets"]["tuning"]["leader"]["hit_rate"][5]
         for row in self.report["sweep"]:
             if Fraction(1, 20) <= row["gate"] <= Fraction(1, 4):
@@ -249,6 +262,8 @@ class TestTheRelayReport(unittest.TestCase):
 
     def test_the_verdict_is_the_measurement(self):
         verdict = self.report["verdict"]
+        #  Since Phase 61 the relay is ahead of the text leader on every
+        #  set (13 carried, 0 lost); in Phase 59 it was level on one.
         self.assertTrue(verdict["relay_beats_text_on_every_set"])
         self.assertTrue(verdict["carried_outnumber_lost"])
         self.assertTrue(verdict["relay_never_below_leader"])
@@ -264,9 +279,12 @@ class TestTheRelayReport(unittest.TestCase):
         #  asserted as measured rather than as hoped for -- they have moved
         #  with the corpus before, and the test is what catches it when they
         #  move again.
+        #  Phase 59 measured strict on four gates, to 1/5, and one query
+        #  below the control at 1/4.  Since Phase 61 it is strict on all
+        #  five, to 1/4, so both band-wide flags hold again.
         self.assertTrue(verdict["gain_holds_across_the_gate"])
         self.assertTrue(verdict["gain_never_below_across_the_gate"])
-        self.assertGreaterEqual(verdict["gain_strict_gates"], 5)
+        self.assertEqual(verdict["gain_strict_gates"], 5)
         self.assertEqual(verdict["gain_strict_to_gate"], "1/4")
         self.assertTrue(verdict["gate_fires_rarely"])
 

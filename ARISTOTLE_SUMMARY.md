@@ -1,3 +1,201 @@
+# Summary of changes for run 878c9eed-5d08-4f1e-ac1a-44d14bb6f734
+This round was round two of `studies/SUBSTRATE_NATIVE_COGNITION_STUDY.md`, recorded as Phase 63. The three new question frames answered 26 of the 33 questions written for them before they were built and refused the other 7 as planned, with 0 wrong. The grammar alone answered none of the 33. The full release check passes: 109 of 109 test files and 7 of 7 instruments are signed, and the corpus check is current.
+
+**What the study found (§6 lists the planned tests, §7 the results, §8 the next steps)**
+
+Following your point about functions that miss by a small margin, I went back to the ideas that nearly worked in round one and kept the part of each that does work:
+- **Wobble-signature analogy (concept 7)** failed as analogy but did pick out exact fractions. It is now **rational recognition**: the system finds the simplest fraction in the range a decimal (or a 512-tick delta-sigma run) pins down, and answers only when every other candidate fraction has a denominator at least twice as large. It recognised all 79 test fractions exactly. It correctly ruled out all 8 non-fractions, and every decoy got the same verdict as its target. On typed decimals it gave 7 correct answers and 3 correct refusals (2.71828, 1.41421 and 0.1).
+- **Rational intervals (E1)** can now be reached by a question, e.g. *is the atomic weight of iron consistent with 55.845?* It gave 7 correct answers and 1 correct refusal. The check that refuses to order two readings whose ranges overlap currently triggers on no element or molecule pair, so it stays in as a safeguard.
+- **Dimensional derivation (concept 4, partly done)** solves the dimension equations exactly. Each answer is labelled unique, impossible or undetermined, and each comes with a certificate. It gave 12 correct answers and 3 correct refusals. The angular-frequency question is refused because the reading with plane angle and the SI reading disagree.
+- **Using the error measure (TAX) as a loss (concepts 1 and 9)**: restricted to the set of words the read word could have been (its coset), minimising TAX gives exactly what the existing decoder gives, on 3,136 of 3,136 reads. So this is kept as a second description of decoding, not as a new ability.
+- **Nested holdouts for the chemistry estimates (E3):** 7 of the 9 estimation rules survive re-selection. `covalent_radius_pm` and `electron_affinity_eV` do not; they are listed for demotion but not yet changed.
+
+**Other changes**
+- **The planner is now the default reader** of `GLM.py` questions (R1). On the 177 contract cases it gives the same outcomes as the grammar: 149 correct and 28 refused as expected. `--grammar` switches back to the grammar alone.
+- **Wording (E2):** the documents now describe the runtime as the partial Norton–Sakuma 2A axial algebra on axes, not the Griess algebra. Code identifiers keep their names.
+- **G1 (a small language model as parser) is declined permanently**, as you asked.
+- The interval code moved to a new file, `reasoning/intervals.py`. Before the move, the answering path pulled in the experiments module and with it the whole Lean development, which broke the release check.
+- The new Lean file made the Lean corpus grow (3,747 → 3,766 declarations), so measurements that read it changed. The stack relay now carries 20 queries and loses none, up from 14. I updated the affected evaluation cases and study text to the new figures.
+
+**Lean:** `RequestProject/GLM/CognitionRoundTwo.lean` builds with standard axioms only and no `sorry`. It proves the answering rules behind the new frames (for example, when two intervals overlap and when a fraction is the only simple one in range), and that the TAX minimum over the coset is the nearest-codeword decoder. It also covers two consolidation items:
+- **C2:** the delta-sigma output written as a stream, with its period proved.
+- **C1, first step:** the links between layers are proved to form a Galois connection. The full "adjoint functors" version is not done.
+
+The six results are marked proved in the Properties table.
+
+**Still open**, in the order of study §8 and candidate H of `STATUS.md` §3.4:
+- demote or narrow the two failing chemistry rules;
+- E4 (semantic judgements with recorded provenance);
+- E6 (frames generated from a declaration instead of written by hand);
+- E7 (deeper PCGS proofs);
+- a second independent reading for the deep-hole fork;
+- concept 6.
+
+`STATUS.md`, `MASTER_PLAN.md` (Phase 63), `WHITEBOARD.md` and `README.md` are updated; `ARISTOTLE_SUMMARY.md` was not edited.
+
+# Summary of changes for run 06a72d84-5505-4b6c-b448-b0e504435e41
+I moved `substrate_native_cognitive_1.txt` into `source_material/`, turned its ideas into a numbered ToDo/Experiment list, and ran nine of them as experiments. Each experiment's pass mark was written down and committed before any measuring code existed. **5 of the 9 met their mark and 4 did not. One new capability is now reachable from a question:** a solver whose answers each come with a certificate that can be checked independently.
+
+The full write-up is `studies/SUBSTRATE_NATIVE_COGNITION_STUDY.md`, linked from `ENTRY.md`. §1 is the list, §2 the pre-set marks, §3 the results and §5 next steps.
+
+**The list** (status in brackets)
+- **R1** Make the typed planner the default reasoning loop (ToDo).
+- **R2** Exact Möbius arithmetic on continued fractions (built and met, not connected to queries).
+- **C1** The five-layer stack as adjoint functors (ToDo).
+- **C2** Infinite structures as streams (ToDo).
+- **G1** A small language model as parser (declined here: nothing here can run a model, and its output wouldn't be repeatable).
+- **G2** Embed the Leech lattice in the Lorentzian lattice II₂₅,₁ (first step proved; no dynamics claimed).
+- **E1** Interval values that refuse to compare when they overlap (built and met, not connected).
+- **E2** Call the algebra a partial Norton–Sakuma 2A algebra, not the Griess algebra (ToDo, a wording sweep).
+- **E3** Nested holdouts for the chemistry estimates (ToDo).
+- **E4** Record who made each meaning judgement and when (ToDo).
+- **E5** Derive answers no stored table holds (built, met and connected).
+- **E6** Generate the planner's question patterns from a declaration (ToDo).
+- **E7** Deeper proofs for the proof-carrying generator (ToDo).
+- **E8** Prove impossibility first (built and met in a small test space).
+- **Concepts 1–9** from the document:
+  - 1 and 9 (TAX as a loss to minimise; vacuum-seeking inference) were refuted: the loss repeats with the lattice, and minimising it erased both concepts.
+  - 2 (reversible inference) met.
+  - 3 (predicting the mass residual) declined: no proposed mechanism could be run without fitting.
+  - 4 (drive generation through Three Column Thinking) ToDo.
+  - 5 (branch at the deep hole) met, not connected.
+  - 6 (climb the Griess tower) ToDo, blocked on E2.
+  - 7 (wobble matching as analogy) refuted.
+  - 8 (abstraction down the dyadic tower) not met with one tower; two offset towers fix it, and that is proved.
+
+**Results**
+- **Decoder fork (X1):** 4,224 of 4,224 correct, 0 wrong.
+- **Reversible search (X4):** agrees with brute-force search on 32 of 32 targets, certifies 16 as impossible, and undoes exactly.
+- **Intervals (X6):** over 30 atomic weights, 0 comparisons give a wrong order; overlapping pairs are refused. The standard weights were typed in by hand from the IUPAC table.
+- **Möbius arithmetic (X8):** 82 of 82 convergents agree with the existing exact-real layer.
+- **Certificate solver (X7), the connected one:** new module `reasoning/certificates.py` handles Bézout coefficients, integer solutions of ax + by = c (or a proof there are none) and factorisation with a stated limit. On 16 questions fixed in advance it gave 13 correct answers, 3 correct refusals and 0 wrong. The existing grammar answered none of them.
+
+The experiments run with `python3 -m glm_universal.tools cognition`, and `test_substrate_cognition.py` adds 18 tests for them.
+
+**Lean:** `RequestProject/GLM/SubstrateCognition.lean` holds 14 theorems backing these results. It builds with no `sorry` and only the standard axioms, and seven of the theorems are marked proved in the Properties table.
+
+**Checks:** the full release sign-off passes (109 of 109 test files, 7 of 7 checks including the Lean build and the 177-case evaluation), and the documentation check reports current.
+
+**Changes outside the new files that you should know about:**
+- The new file shifted some older measured figures:
+  - **Relay figures:** now 721 → 726 of 833, carrying 14 queries and losing 0.
+  - **Anonymous-query figures:** now 721 → 66 of 833, and 225 → 151 of 833 for the structural address.
+  - **Stale counts:** these were updated in the documents that quote them, including `studies/STACK_RELAY_STUDY.md`, and the query-escalation measurement was re-taken.
+- One document test forbade the phrase "92 modules" as an out-of-date package count. The reasoning folder now genuinely has 92 modules, so I removed that phrase from the forbidden list, with a comment, as earlier rounds did for "71 modules" and "88 modules".
+
+The round is recorded as Phase 62 in `MASTER_PLAN.md`, `STATUS.md` and `WHITEBOARD.md`.
+
+# Summary of changes for run 905157a2-4715-4806-af76-03fe98988a9d
+I updated both documents. `studies/GLM_ACADEMIC_PAPER.md` and `studies/GLM_Complete_Number_Theory_Evidence.md` now cover the whole system, including the Lean I retrieved from the archive this round. The three new Lean files build, contain no `sorry`, and use only standard axioms. A full release check passes, and every commit is in place.
+
+**What I retrieved and proved.** Three archive Lean files were ported into `RequestProject/GLM/`, which brings the project to 131 Lean files:
+- **`Distinction.lean`** (from `FirstPrinciples`): the toggle is the only non-trivial reversible operation on one cell; every two-element ring is `ZMod 2`; and a group where every element is its own inverse is abelian.
+- **`GolayMOG.lean`** (from `encoding_definition_attempt_03-08.26`): the 12-bit Gray identity addresses of the 118 elements never collide, and consecutive elements differ in exactly one bit. It also keeps the archive's negative results: binary TAX depends only on bit count, and the 24-to-3 projection loses information. Its finite checks use `native_decide`.
+- **`SeedRoles.lean`**:
+  - **e is irrational:** a new, complete proof.
+  - **The lattice character is not the e seed:** now proved outright, with no extra assumption.
+  - **φ is "cheapest", in an exact sense:** no quadratic Pisot number is smaller, but the plastic number is.
+  - Also: φ is badly approximable, the branches for π·e, the SL₂ trichotomy, and the hull and fibre results.
+
+All five results are marked proved in the Properties table.
+
+**What the paper gained.**
+- New §10.5 on the archive's 20-phase speed-of-light audit.
+- New §11.7 on the GolayMOG discrete layer and the archive's benchmark figures.
+- New §16.6 (φ cheapest) and §16.7 (π·e branches).
+- The retrieved theorems are cited in §2.1, §14.1, §14.3, §14.4, §15.1 and §16.3.
+- Appendix B lists the new files, and Appendix C's ledger of archive folders is extended.
+
+**Corrections to the paper.**
+- §25.1 gained an item and had two updated.
+- In §25.2, items 1 and 4 were corrected.
+- In §25.5, items 7 and 15 were updated.
+- The relay text now gives the current measurement.
+
+**What the number-theory document gained.** New §22–§27 cover:
+- the seeds as numbers;
+- the distinction results;
+- the two-gap law;
+- the Triad, TriadCensus, TriadChance and Platonic audits;
+- GolayMOG;
+- the Niemeier and higher-lattice results.
+
+Its ledger and index rows were extended, and its test file passes (17 tests).
+
+**Measurements that moved.** The new Lean grew the declaration count from 3617 to 3730, and several recorded numbers moved with it. I re-measured them rather than keeping the old values:
+- **Relay:** it now carries 13 queries and loses none, and it beats the text control at all five gate settings up to 1/4. In Phase 59 it only reached 1/5.
+- **Anonymous register:** 829 queries.
+
+I updated the evaluation cases, `STACK_RELAY_STUDY.md` and `test_stack.py` to match. The relay test had been asserting the old Phase 59 verdict, so it would have failed without that change. `ITERATION_COST_STUDY.md` now gives 132 Lean files (the 131 plus `Main.lean`).
+
+**Checks.** The full release check passes: 108 of 108 test files and 7 of 7 checks are signed off with the exhaustive cases run. The suite now stands at 4,239 tests across 107 of the 108 test files, and the documents that quote this figure were regenerated to match. The document corpus check reports current. `MASTER_PLAN.md`, `STATUS.md` and `WHITEBOARD.md` record Phase 61 as closed, including the release.
+
+**Still not retrieved.** The language half of the MOG cube (about 30 files) and the rest of `ObserverY.lean` are recorded as open in `STATUS.md` §3.4, candidate G. No code path in the system uses the new Lean files yet.
+
+# Summary of changes for run 48c8ba1a-28ee-4712-a09c-fe88c0a6d77b
+The GLM can now answer questions in electrical/mechanical "wheel" language. It uses exact rational and complex arithmetic, and it refuses when it doesn't know rather than guessing. On the held-out engineering question set, the old answer paths got 0 right. The new surface gets 53 right, correctly refuses 10 and gets 0 wrong. The Lean parts build with no `sorry` and only the standard axioms.
+
+**Files:** your new scripts, the session record and `glm_smith_matching_candidates.csv` are now in `source_material/formula_wheel/`.
+
+**Do I need the missing files?** No. I rebuilt `glm_smith_chart_study.py`, `glm_smith_chart_extensions.py`, `glm_delta_sigma_audio_study.py` and the original `glm_formula_wheel_study.py` from the session record's descriptions. They would only help in two cases:
+- reproducing the record's floating-point figures byte-for-byte;
+- blind-ranking the rows of `glm_smith_matching_candidates.csv`, which needs the extensions script's load model.
+
+**What was built** (package `overlay/glm_universal/engineering/`):
+- `wheels.py`: formula wheels as exact exponent-vector relations.
+  - All 41 formulas check at their reference values, and all 41 can be derived from the axioms.
+  - The Ohm wheel has 12 spokes; there are 108 spokes in total.
+- `smith.py`: Smith chart. All 16 checks pass.
+  - An exact L-network match gets the worst-case |Γ|² down to 42365/290173, against 3469/19669 with no matching network.
+- `analogy.py`: cross-domain mechanical↔electrical translation.
+  - Force–voltage analogy: 9/9 in both directions.
+  - Force–current analogy: 8/9 (it swaps series and parallel Q).
+  - A scrambled control gets only 4/9.
+- `delta_sigma.py`: delta-sigma modulators. All 6 checks pass.
+  - Second-order beats first-order by at least 21 dB; first-order beats memoryless by at least 56 dB.
+  - I found and fixed two bugs in my own code on the way (integrator order and signal-delay alignment).
+- `speak.py`: 7 question patterns. Adding them changes 0 of the 374 existing questions.
+- `study.py`: generates the study report.
+
+**How to use it:** `GeometricSession.ask_engineering`, `GLM.py --eng`, or `python3 -m glm_universal.tools engineering`.
+
+**Tests:** the question sets are in `overlay/glm_universal/evaluation/engineering_heldout.py` and were committed before any code was written.
+- Held-out set: 63 questions (scores above).
+- A second, harder set of 38 questions was also fixed in advance. Its first run is kept as-is: 27 right, 1 wrong, 10 correct refusals. The one "wrong" answer is a formatting mismatch (`-2/5` vs `- 2/5j`), not a wrong value.
+- `tests/test_engineering.py`: all 25 tests pass. The corpus consistency check now passes; getting there meant regenerating two stored measurements that had gone out of date.
+
+**Lean** (`RequestProject/GLM/EngineeringWheels.lean`), 11 theorems:
+- Wheel derivability: consistency, and derivability survives translation between domains.
+- Ohm wheel: P = V²/R follows from V = IR and P = VI; the control P = V·R does not.
+- Smith chart: the map inverts correctly, admittance gives Γ(1/z) = −Γ(z), passive loads land in the unit disc, and on its edge exactly when lossless.
+- Delta-sigma bitstreams: input p/q has least period q, and an irrational input is never periodic.
+
+The 5 matching entries in the Properties table are marked proved.
+
+**Docs:** `studies/ENGINEERING_LANGUAGE_STUDY.md`, plus updates to STATUS.md, MASTER_PLAN.md (Phase 59) and WHITEBOARD.md. I found no advantage from the Golay/Leech encoding in this area and don't claim one.
+
+# Summary of changes for run 100ce99b-8a06-4b23-b86a-4a7368923f08
+This session added **Phase 58 — typed question plans**. It takes items P1 and P2 from `source_material/GLM_IMPROVEMENT_ROADMAP.md` and is closed and released. The roadmap's own measurement was the reason for picking it. Asked through the normal `ask` path, the frozen 20-question language probe scored only 2 correct, 1 wrong and 17 refused, even though the existing table, ordering and extremum operations already held most of the answers. What was missing was the step from English to those operations.
+
+**What was built**
+- **Test sets written before any planner code** (`overlay/glm_universal/evaluation/heldout.py`, committed on its own in `8064795`): 60 rewordings of the probe questions, 30 new combined questions, and 20 trick questions where refusing is the right answer. A harder 47-question stress set was committed in `ca257db` before its first run. Its first-run score is frozen at 28 correct, 0 wrong, 13 refused and 6 correct refusals.
+- **The typed planner** (`overlay/glm_universal/runtime/semantic_plan.py`): it turns a question into typed frames and grounds them. It does exact arithmetic, primes, gcd and lcm, and uses a declared table of 17 exact unit definitions. It answers only when every plan that works gives the same value, and refuses as ambiguous when two such plans disagree (e.g. torque vs energy). A question no plan covers goes to the existing grammar unchanged.
+- **It is opt-in:** `GLM.py --plan` or `GeometricSession.ask_planned`. The default command line and the 177-case evaluation are unchanged.
+- **Measurement and documentation:** a study module with a stored report (`reasoning/typed_plans.py`, `tools plans`), 32 tests, generated figures, `studies/SEMANTIC_PLAN_STUDY.md`, and entries in STATUS.md and MASTER_PLAN.md.
+- **Lean:** `RequestProject/GLM/SemanticPlan.lean` has 8 theorems. They show the answering rule doesn't depend on the order plans are tried, that it refuses whenever two plans disagree, and that it only adds to what the grammar already answers. They also show that the obvious alternative ("take the first plan that works") depends on order and answers the torque question the shipped rule refuses. The file builds with no `sorry` and only the standard axioms. Three entries in the Properties table are marked proved.
+
+**Results**
+- **Frozen probe:** 19 correct, 0 wrong, 1 refused with the planner (was 2 correct, 1 wrong, 17 refused).
+- **Held-out sets (110 questions):** 86 correct, 22 correct refusals, 1 wrong. The wrong answer is iron's atomic weight: the stored table holds 55.84, while the answer key uses the IUPAC value 55.845. That is a precision issue in the table, not a planner fault, and the answer key was left as written.
+- **Stress set:** 33 correct, 0 wrong, 8 refused and 6 correct refusals after later changes. Those changes were made after seeing the set, so this figure is reported as tuned; the untuned figure is the frozen first run above.
+
+**Closing the round**
+Adding the new Lean file and test file moved several numbers typed by hand into the documents: file and declaration counts, the cost table, and the anonymous-register and relay study figures together with their evaluation cases. These were updated to the current measured values. Three held-out question strings were reformatted so the check on Lean-name citations doesn't misread them; the question text itself is unchanged. The stored caches were rebuilt.
+
+The final release check passes: 107 of 107 test files and 7 of 7 instruments are signed, and the document check reports current.
+
+`WHITEBOARD.md` now says no round is in flight and has two new "things learned" notes about these knock-on updates. The next round starts from STATUS.md §3.4. Making the planner the default is listed there as a candidate.
+
 # Summary of changes for run d5cd319b-32ee-44e5-9939-74c2f0290383
 I picked the session up at the point it stopped — the Phase 56 Lean results had not reached the Properties table — finished that, and then took the next round in full and closed it.
 

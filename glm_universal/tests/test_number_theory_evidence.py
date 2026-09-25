@@ -139,6 +139,26 @@ class TestTheExactTables(unittest.TestCase):
         rows = _paper_table(("p", "ord_p(2)", "full reptend", "H(1/p)"))
         self.assertEqual(sum(1 for row in rows if row[2] == "yes"), 12)
 
+    _PERIODS = ("n", "stream period (measured)", "stream period (Lean)",
+                "binary period", "totient", "sub-cycles (walked)",
+                "n/2 - totient/2", "prime")
+
+    def test_the_three_periods_table_is_the_generated_one(self):
+        rows = _paper_table(self._PERIODS)
+        fresh = self.generated[" | ".join(self._PERIODS)]
+        self.assertEqual(rows, fresh)
+
+    def test_the_three_periods_table_keeps_both_theorems(self):
+        # ds_rational_period_iff: the least period of 1/n is n, measured;
+        # subCycles_eq and subCycles_eq_zero_iff_prime: walked = closed
+        # form, and zero exactly at the primes.
+        rows = _paper_table(self._PERIODS)
+        self.assertEqual(len(rows), 28)
+        for row in rows:
+            self.assertEqual(row[1], row[2])
+            self.assertEqual(row[5], row[6])
+            self.assertEqual(row[5] == "0", row[7] == "yes")
+
 
 class TestTheWorkedExample(unittest.TestCase):
     """§14: the transcript is the program's output, not a quotation of it."""

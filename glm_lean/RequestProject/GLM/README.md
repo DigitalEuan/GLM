@@ -13,13 +13,16 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-**<!--figure:lean-files-->126 Lean files<!--/figure-->**, all building against Mathlib at `v4.28.0` — the
+**<!--figure:lean-files-->133 Lean files<!--/figure-->**, all building against Mathlib at `v4.28.0` — the
 toolchain already pinned by `glm_lean/lean-toolchain` — and all
-<!--figure:lean-file-count-->126<!--/figure--> of them free of `sorry`.
+<!--figure:lean-file-count-->133<!--/figure--> of them free of `sorry`.
 Every theorem below has been checked with `#print axioms`; none depends on
 anything beyond `propext`, `Classical.choice` and `Quot.sound`, except the
-finite exhaustive checks in `Golay/Sextet.lean` and in the five `Cube/` files
-(and the results downstream of them), which are discharged by `native_decide`
+finite exhaustive checks discharged by `native_decide` — in `Golay/Sextet.lean`,
+`Golay/CubeMirror.lean`, the five `Cube/` files, `GolayWeightEnum.lean`,
+`GolayMOG.lean`, `Niemeier.lean`, `ConditionalInduction.lean`,
+`Relaxation.lean`, `SearchLoop.lean`, `TriadCensus.lean` and `TriadChance.lean`
+(and the results downstream of them), which
 and so additionally use `Lean.ofReduceBool` and `Lean.trustCompiler`.
 
 These files are *additive*. They live in a new `RequestProject/GLM/`
@@ -109,6 +112,9 @@ table says what each one claimed and what is now proved; the summary is:
 | `Packing.lean` | what a binary substrate forces is **23**; 24 is a parity extension, and the extra coordinate buys detection, never correction |
 | `Triad.lean` | `3, 6, 9` is one number and any three-element set produces it; 24 is decomposition-rich, so matching a decomposition of it is not evidence |
 | `SeedLayers.lean` | where each seed may enter: no finite linear symmetry has a transcendental character value, `π` is excluded from a lattice by integrality, and `φ` enters as an infinite-order stretch |
+| `Distinction.lean` | Stage 0 of the first-principles sub-study, retrieved in Phase 61: a carrier with one state carries no information, the toggle is the only non-trivial reversible operation on a cell (`perm_bool_eq`), every two-element ring is `ZMod 2` (`two_element_ring_is_zmod_two`), and a group of self-inverse elements is abelian (`self_inverse_forces_comm`) |
+| `SeedRoles.lean` | the seeds, retrieved in Phase 61 from `Seeds`, `Fibre`, `Cheapest` and `Independence`: no seed is a ratio of counts (`seeds_not_ratio_of_counts`, with `e` proved irrational here as `eSeed_irrational`); each seed is forced by its role (`phi_unique_positive_root`, `pi_least_positive_zero`, `e_unique_unit_growth_base`); the combining rule is free (`hull_alternatives`) and 13 cannot be inverted (`thirteen_not_invertible`); the `π e` question has exactly two branches; `φ` is the least quadratic Pisot number (`quadratic_pisot_ge_phi`) but the plastic number is smaller (`plastic_lt_phi`), and `φ` is badly approximable (`phi_badly_approximable`) |
+| `GolayMOG.lean` | the one Lean file of the spatial-arithmetic experiments, retrieved in Phase 61: the 12-bit Gray identity address of an element is lossless (`identityAddress_injective`) and consecutive elements are one bit apart; the MOG and octad-zone assignments are bijections; and five negative results — binary TAX is a function of weight alone (`binaryTax_mono`), the NRCI and 70 % relative-coherence thresholds select nothing, the Y twin adds no information, and the 24-to-3 view is lossy (`projection24to3Q_not_injective`) |
 | `StepCost.lean` | the coherence ladder is gauge-independent, a constant rate is not a clock, and the 13-step shortcut is a strict distortion of the word metric |
 | `SpatialArithmetic.lean` | the polygon codec is lossless with the sign in the parity of the vertex count, operator clearance is forced by the triangle inequality, and the totient sub-cycle law `⌊N/2⌋ − φ(N)/2` is proved |
 | `ReasoningLoop.lean` | the ARC-era cognitive cycle: the verification gate holds, refusal is informative, and passing the gate still does not determine the answer |
