@@ -1,0 +1,402 @@
+{
+ "all_met": false,
+ "controller": {
+  "met": true,
+  "scorers": {
+   "address": {
+    "mean_proposals": {
+     "__fraction__": "1255/6"
+    },
+    "minimal": 17,
+    "proposals": 5020,
+    "solved": 18,
+    "verified": 18
+   },
+   "carrier": {
+    "mean_proposals": {
+     "__fraction__": "1235/6"
+    },
+    "minimal": 17,
+    "proposals": 4940,
+    "solved": 17,
+    "verified": 17
+   },
+   "exponent": {
+    "mean_proposals": {
+     "__fraction__": "535/6"
+    },
+    "minimal": 24,
+    "proposals": 2140,
+    "solved": 24,
+    "verified": 24
+   },
+   "readback": {
+    "mean_proposals": {
+     "__fraction__": "535/6"
+    },
+    "minimal": 24,
+    "proposals": 2140,
+    "solved": 24,
+    "verified": 24
+   }
+  },
+  "tasks": 24
+ },
+ "declarations": {
+  "met_against_address": false,
+  "met_against_features": false,
+  "native2_against_features": true,
+  "native2_like_for_like": true,
+  "schemes": {
+   "address": {
+    "hits": {
+     "1": 50,
+     "10": 99,
+     "3": 70,
+     "5": 77
+    },
+    "mrr_at_10": {
+     "__fraction__": "31559/105840"
+    },
+    "precision_at_5": {
+     "__fraction__": "121/1050"
+    },
+    "queries": 210
+   },
+   "features": {
+    "hits": {
+     "1": 49,
+     "10": 102,
+     "3": 67,
+     "5": 80
+    },
+    "mrr_at_10": {
+     "__fraction__": "17587/58800"
+    },
+    "precision_at_5": {
+     "__fraction__": "41/350"
+    },
+    "queries": 210
+   },
+   "features2": {
+    "hits": {
+     "1": 53,
+     "10": 112,
+     "3": 72,
+     "5": 83
+    },
+    "mrr_at_10": {
+     "__fraction__": "84709/264600"
+    },
+    "precision_at_5": {
+     "__fraction__": "22/175"
+    },
+    "queries": 210
+   },
+   "native": {
+    "hits": {
+     "1": 50,
+     "10": 102,
+     "3": 68,
+     "5": 77
+    },
+    "mrr_at_10": {
+     "__fraction__": "79307/264600"
+    },
+    "precision_at_5": {
+     "__fraction__": "121/1050"
+    },
+    "queries": 210
+   },
+   "native2": {
+    "hits": {
+     "1": 53,
+     "10": 112,
+     "3": 72,
+     "5": 83
+    },
+    "mrr_at_10": {
+     "__fraction__": "84709/264600"
+    },
+    "precision_at_5": {
+     "__fraction__": "22/175"
+    },
+    "queries": 210
+   }
+  }
+ },
+ "documents": {
+  "answered": true,
+  "k": 5,
+  "met_live_ranking": true,
+  "met_native_vs_raw": false,
+  "native2_against_raw": false,
+  "native2_like_for_like": true,
+  "queries": 60,
+  "readback_checked": 1198,
+  "readback_exact": 1198,
+  "schemes": {
+   "lexical": {
+    "hits": 11,
+    "precision_at_5": {
+     "__fraction__": "1/20"
+    }
+   },
+   "lexical_native": {
+    "hits": 11,
+    "precision_at_5": {
+     "__fraction__": "1/20"
+    }
+   },
+   "lexical_native2": {
+    "hits": 11,
+    "precision_at_5": {
+     "__fraction__": "1/20"
+    }
+   },
+   "lexical_raw": {
+    "hits": 11,
+    "precision_at_5": {
+     "__fraction__": "4/75"
+    }
+   },
+   "lexical_raw2": {
+    "hits": 11,
+    "precision_at_5": {
+     "__fraction__": "1/20"
+    }
+   },
+   "text": {
+    "hits": 46,
+    "precision_at_5": {
+     "__fraction__": "29/75"
+    }
+   },
+   "text_native": {
+    "hits": 46,
+    "precision_at_5": {
+     "__fraction__": "29/75"
+    }
+   }
+  },
+  "units": 1198
+ },
+ "exactness": {
+  "checked": 3976,
+  "covering_radius": 4,
+  "exact": 3976,
+  "failures": 0,
+  "max_residual": 3,
+  "met": true
+ },
+ "goals": {
+  "lexical_readback_exact": 102,
+  "met_against_address": true,
+  "met_against_features": true,
+  "native2_against_features": true,
+  "native2_like_for_like": true,
+  "queries": 102,
+  "readback_exact": 102,
+  "schemes": {
+   "address": {
+    "hits": {
+     "1": 14,
+     "10": 36,
+     "3": 19,
+     "5": 27
+    },
+    "mrr_at_10": {
+     "__fraction__": "47921/257040"
+    },
+    "precision_at_5": {
+     "__fraction__": "41/510"
+    },
+    "queries": 102
+   },
+   "features": {
+    "hits": {
+     "1": 16,
+     "10": 37,
+     "3": 22,
+     "5": 27
+    },
+    "mrr_at_10": {
+     "__fraction__": "26213/128520"
+    },
+    "precision_at_5": {
+     "__fraction__": "43/510"
+    },
+    "queries": 102
+   },
+   "features2": {
+    "hits": {
+     "1": 18,
+     "10": 37,
+     "3": 26,
+     "5": 31
+    },
+    "mrr_at_10": {
+     "__fraction__": "9689/42840"
+    },
+    "precision_at_5": {
+     "__fraction__": "8/85"
+    },
+    "queries": 102
+   },
+   "native": {
+    "hits": {
+     "1": 16,
+     "10": 38,
+     "3": 22,
+     "5": 29
+    },
+    "mrr_at_10": {
+     "__fraction__": "3316/16065"
+    },
+    "precision_at_5": {
+     "__fraction__": "22/255"
+    },
+    "queries": 102
+   },
+   "native2": {
+    "hits": {
+     "1": 18,
+     "10": 37,
+     "3": 26,
+     "5": 31
+    },
+    "mrr_at_10": {
+     "__fraction__": "9689/42840"
+    },
+    "precision_at_5": {
+     "__fraction__": "8/85"
+    },
+    "queries": 102
+   }
+  }
+ },
+ "lean_file": "RequestProject/GLM/NativeParity.lean",
+ "ledger": {
+  "counts": {
+   "native ahead": 3,
+   "parity": 1,
+   "standard far ahead": 3,
+   "standard narrowly ahead": 1
+  },
+  "rows": [
+   {
+    "class": "parity",
+    "figure": "hit@1/3/5/10 38/61/75/93 against 37/61/74/96",
+    "native": "Leech address of the structural vector",
+    "recomputed_by": "glm_universal.reasoning.retrieval.declaration_query_report",
+    "standard": "the raw structural vector",
+    "study": "studies/ADDRESS_RETRIEVAL_STUDY.md",
+    "target": "T1",
+    "task": "Lean-corpus retrieval, declaration queries"
+   },
+   {
+    "class": "standard narrowly ahead",
+    "figure": "hit@5 14 against 16 of 60",
+    "native": "Leech address of the lexical vector",
+    "recomputed_by": "glm_universal.corpus.address.retrieval_report",
+    "standard": "the raw lexical vector",
+    "study": "studies/CORPUS_ADDRESS_STUDY.md",
+    "target": "T2",
+    "task": "document-corpus retrieval, section queries"
+   },
+   {
+    "class": "standard far ahead",
+    "figure": "solved 18 against 24 of 24 (the undecoded carrier: 17)",
+    "native": "Leech-address scorer at scale 9",
+    "recomputed_by": "glm_universal.reasoning.controller.controller_report",
+    "standard": "the exact move count",
+    "study": "studies/CONTROLLER_STUDY.md",
+    "target": "T3",
+    "task": "dimensional-derivation controller"
+   },
+   {
+    "class": "standard far ahead",
+    "figure": "hit@5 134 against 171 of 209",
+    "native": "Leech address of the identifier-letter vector",
+    "recomputed_by": "glm_universal.reasoning.retrieval.declaration_query_report",
+    "standard": "Jaccard overlap of identifier tokens",
+    "study": "studies/ADDRESS_RETRIEVAL_STUDY.md",
+    "target": "recorded",
+    "task": "Lean-corpus retrieval, identifiers"
+   },
+   {
+    "class": "standard far ahead",
+    "figure": "hit@5 14 against 42 of 60",
+    "native": "lexical Leech address",
+    "recomputed_by": "glm_universal.corpus.address.retrieval_report",
+    "standard": "Jaccard overlap of words",
+    "study": "studies/CORPUS_ADDRESS_STUDY.md",
+    "target": "recorded",
+    "task": "document-corpus retrieval, words"
+   },
+   {
+    "class": "native ahead",
+    "figure": "hit@5 374 against 367 (holdout), 387 against 379 (tuning)",
+    "native": "break by Leech-address distance",
+    "recomputed_by": "glm_universal.reasoning.stack.tiebreak_report",
+    "standard": "break by name",
+    "study": "studies/STACK_RELAY_STUDY.md",
+    "target": "recorded",
+    "task": "exact ties of the text ranking"
+   },
+   {
+    "class": "native ahead",
+    "figure": "right on 512 against 480 of 768",
+    "native": "the carried fork's escalated Leech estimate",
+    "recomputed_by": "glm_universal.reasoning.carried_fork.carried_fork_report",
+    "standard": "unconstrained soft decoding over 4,096 codewords",
+    "study": "studies/CARRIED_FORK_STUDY.md",
+    "target": "recorded",
+    "task": "soft read at the Golay deep hole"
+   },
+   {
+    "class": "native ahead",
+    "figure": "0 against 5,684 sentences with two readings",
+    "native": "the prefix-first grammar",
+    "recomputed_by": "glm_universal.reasoning.reverse_tct_script.reverse_report",
+    "standard": "the natural infix realiser",
+    "study": "studies/REVERSE_TCT_STUDY.md",
+    "target": "recorded",
+    "task": "sentences for terms"
+   }
+  ],
+  "targets": [
+   "T1",
+   "T2",
+   "T3"
+  ]
+ },
+ "marks": {
+  "N1": false,
+  "N1_address": false,
+  "N2": true,
+  "N3": true,
+  "N4a": false,
+  "N4b": true,
+  "N5": true,
+  "N6": true,
+  "N7": true,
+  "N8": false
+ },
+ "round_one": {
+  "N1": false,
+  "N1_address": false,
+  "N2": true,
+  "N3": true,
+  "N4a": false,
+  "N4b": true,
+  "N5": true
+ },
+ "round_two": {
+  "N6": true,
+  "N7": true,
+  "N8": false
+ },
+ "source_digest": "1a20d4ae1b17083961a5a1e1b9cbc4030142bbd1652db122fa961799d1c5d4af",
+ "study": "studies/NATIVE_PARITY_STUDY.md"
+}

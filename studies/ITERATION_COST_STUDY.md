@@ -6,7 +6,7 @@
 
 **Verdict.** Most of the cost was work repeated on things that had not moved, and a cache keyed on what it is derived from does not repeat it.
 
-**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->9,359<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
+**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->9,864<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
 
 **Recomputed by.** `glm_universal.corpus.cost.cost_report`
 
@@ -73,8 +73,8 @@ nothing.
 <!-- generated: cost-addresses -->
 | book | units | decodes from nothing | decodes now | reused |
 |---|---|---|---|---|
-| Lean declarations | 3,766 | 7,118 | 0 | 7,532 |
-| corpus sections | 1,140 | 2,241 | 0 | 2,280 |
+| Lean declarations | 3,976 | 7,508 | 0 | 7,952 |
+| corpus sections | 1,198 | 2,356 | 0 | 2,396 |
 
 Reuse is checked, not assumed: each rebuild re-decodes a sample of the answers it reused and reports any that moved (4 sampled in the declaration book, 4 in the document book, none moved).
 <!-- end generated -->
@@ -122,7 +122,7 @@ works for tables and not for a sentence, and the sentences were where the drift
 lived. The block mechanism is now available at the size of a phrase:
 
 ```markdown
-the suite is <!--figure:test-files-->109 test files<!--/figure--> today
+the suite is <!--figure:test-files-->116 test files<!--/figure--> today
 ```
 
 The markers are HTML comments, so a reader sees only the number. `--refresh`
@@ -185,22 +185,27 @@ Measured over the suite, by `glm_universal.corpus.cost.lean_blast_radius`:
 
 | | |
 |---|---|
-| test units in the suite | 109 |
-| Lean files | 134 |
-| units an edit to *any* Lean file used to make stale | 97 |
-| units one Lean file makes stale now, median | 30 |
-| units the worst single Lean file makes stale | 92 |
-| units that read the tree with a glob, so are stale whenever it moves | 30 |
+| test units in the suite | 116 |
+| Lean files | 141 |
+| units an edit to *any* Lean file used to make stale | 104 |
+| units one Lean file makes stale now, median | 37 |
+| units the worst single Lean file makes stale | 99 |
+| units that read the tree with a glob, so are stale whenever it moves | 37 |
 
 The Lean row counts distinct file names the ledger tracks, so it is the
-development's 132 files under `RequestProject/GLM/` plus the build's
-`Main.lean`.
+development's 140 files under `RequestProject/GLM/` plus the build's
+`Main.lean`. Phase 68 added one unit (`test_reverse_tct_two.py`) that reaches
+the router, and so the development through it, which is why the floor moved
+from 34 to 35 with the other rows; Phase 69 added another
+(`test_reverse_tct_int.py`), and the floor moved from 35 to 36; Phase 70
+added `test_native_parity.py`, which reads the Lean corpus, and the floor
+moved from 36 to 37.
 
-The floor of 30 is not a defect: those units name a `*.lean` glob because they
+The floor of 35 is not a defect: those units name a `*.lean` glob because they
 read the development, and a reading of the development is stale when the
 development moves. The change is that the other 67 units now depend on the
-files they name rather than on all of them. A typical unit's closure is 129
-files, where naming one Lean file used to mean carrying all of them.
+files they name rather than on all of them. Naming one Lean file used to mean
+carrying all of them.
 
 **The floor has to be defended, not won once.** It was lost between §5e and
 the round that measured it again: the probe oracle reads one declaration's
@@ -437,5 +442,5 @@ that pays for it, with the storage, loading, digesting and rebuilding of the
 table counted on the table's side rather than assumed away.
 
 <!-- generated: cost-tier -->
-**Rebuilding both address books from nothing decodes 9,359 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 177 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  568 figures inside sentences, across 30 documents, are emitted rather than typed.
+**Rebuilding both address books from nothing decodes 9,864 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 177 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  568 figures inside sentences, across 30 documents, are emitted rather than typed.
 <!-- end generated -->

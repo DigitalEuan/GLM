@@ -7,7 +7,7 @@
 
 **Verdict.** The system rejects floating-point arithmetic entirely, operating instead with exact rational arithmetic.
 
-**Deciding figure.** A working paper over the whole system — the substrate studies of the supplied archive and the machine built on them, <!--figure:registers-->8 registers<!--/figure--> reached through <!--figure:query-kinds-->24 query kinds<!--/figure--> and checked by <!--figure:lean-files-->133 Lean files<!--/figure--> — kept beside the studies it draws on.
+**Deciding figure.** A working paper over the whole system — the substrate studies of the supplied archive and the machine built on them, <!--figure:registers-->8 registers<!--/figure--> reached through <!--figure:query-kinds-->24 query kinds<!--/figure--> and checked by <!--figure:lean-files-->140 Lean files<!--/figure--> — kept beside the studies it draws on.
 
 **Recomputed by.** (hand-written argument; nothing to recompute)
 
@@ -16,9 +16,9 @@
 ## A Technical Documentation Paper
 
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand  
-**Date:** 02 September 2026; revised 24 September 2026 (Phases 60 and 61)  
+**Date:** 02 September 2026; revised 24 September 2026 (Phases 60 and 61) 26 September 2026 (Phases 62–66) and 27 September 2026 (Phases 67–70)  
 **Repository:** https://github.com/DigitalEuan/GLM  
-**Status:** Working Paper — the whole system in one place: the substrate studies of the supplied archive (Parts I–IV) and the machine built on them through Phase 59 (Parts V–VI), with one ledger of what is proved, calibrated, measured, refuted and open (Part VII). Phase 61 brought the last small bodies of archive Lean under this repository's own build (`Distinction.lean`, `SeedRoles.lean`, `GolayMOG.lean`) and extended the supplied-material ledger of Appendix C to every part of the archive.
+**Status:** Working Paper — the whole system in one place: the substrate studies of the supplied archive (Parts I–IV) and the machine built on them through Phase 70 (Parts V–VI), with one ledger of what is proved, calibrated, measured, refuted and open (Part VII). Phase 61 brought the last small bodies of archive Lean under this repository's own build (`Distinction.lean`, `SeedRoles.lean`, `GolayMOG.lean`) and extended the supplied-material ledger of Appendix C to every part of the archive. The revision of 26 September adds what Phases 62–66 built: three certificate-carrying planner frames and the planner as the default path, the Python dialect, the carried fork at the Golay deep hole, and the connected machine — one question path to every surface, the eight modules nothing reached made into tools, and derivation across a declared union of formula wheels (§19.1–§19.2). The revision of 27 September adds Phases 67–70: reverse Three Column Thinking, in which the mathematics generates the language column and seven semantic operations are taken on it, widened to disjunction and a loop into the planner and then to an integer sort (§19.3); and native parity, in which every place a standard method tied or narrowly beat a Golay/Leech-native one was re-measured and the native method refined until it matched or beat it (§21.1).
 
 > **Positioning.** This paper is written under the Positioning section of
 > [`PROJECT_DIRECTIVES.md`](../PROJECT_DIRECTIVES.md), which is the one place
@@ -50,7 +50,7 @@ Physical calibration studies anchor the substrate to measured reality: the elect
 
 Application studies demonstrate that encoding chemical elements as 24-bit data objects in the Leech lattice produces element-property correlations exceeding r = 0.90 for electronegativity and boiling point, and that spatial arithmetic operations on these encodings predict bond energies and bond orders with measurable accuracy. A machine-checked semantics on the MOG cube surface builds a complete micro-language — words with physical dimension, true sentences, connectives with measured meanings, and conversation with memory — proved in the supplied archive's own Lean development.
 
-On that substrate this repository has built and measured the machine itself: a pure-standard-library Python package holding <!--figure:registers-->8 registers<!--/figure--> of exact carriers, answering <!--figure:query-kinds-->24 query kinds<!--/figure--> (one of which dispatches <!--figure:report-subjects-->65 report subjects<!--/figure-->) as three-column answers whose third column re-derives the second in a fresh interpreter, and refusing — with a named reason — wherever an answer would have been a guess. Its faculties are measured rather than described: an end-to-end evaluation of <!--figure:evaluation-cases-->177 CLI cases<!--/figure--> with no confidently wrong answer, 33 capability probes of which 13 locate a boundary, five benchmark suites, pre-registered probes for language, conversation, ordering, extremum, scale conversion, typed question plans and engineering languages, and escalation ladders read over the construction ladder and the norm family. The formal layer is a Lean 4 / Mathlib development of <!--figure:lean-files-->133 Lean files<!--/figure--> and <!--figure:lean-declarations-->3,766<!--/figure--> declarations with no `sorry`, and the repository is kept by <!--figure:directive-count-->16<!--/figure--> standing rules, each enforced by an instrument.
+On that substrate this repository has built and measured the machine itself: a pure-standard-library Python package holding <!--figure:registers-->8 registers<!--/figure--> of exact carriers, answering <!--figure:query-kinds-->24 query kinds<!--/figure--> (one of which dispatches <!--figure:report-subjects-->65 report subjects<!--/figure-->) as three-column answers whose third column re-derives the second in a fresh interpreter, and refusing — with a named reason — wherever an answer would have been a guess. Its faculties are measured rather than described: an end-to-end evaluation of <!--figure:evaluation-cases-->177 CLI cases<!--/figure--> with no confidently wrong answer, 33 capability probes of which 13 locate a boundary, five benchmark suites, pre-registered probes for language, conversation, ordering, extremum, scale conversion, typed question plans, engineering languages, a Python dialect and the router that reaches all of them from one question path, and escalation ladders read over the construction ladder and the norm family. The formal layer is a Lean 4 / Mathlib development of <!--figure:lean-files-->140 Lean files<!--/figure--> and <!--figure:lean-declarations-->3,976<!--/figure--> declarations with no `sorry`, and the repository is kept by <!--figure:directive-count-->16<!--/figure--> standing rules, each enforced by an instrument.
 
 Throughout, we distinguish carefully between what is proved, what is calibrated, what is measured, what is refuted, and what remains open. The paper serves as both a technical reference and an honest accounting of a research programme that spans pure mathematics, computational physics, and artificial intelligence.
 
@@ -85,7 +85,7 @@ Throughout, we distinguish carefully between what is proved, what is calibrated,
 **Part V — The Machine**
 17. [Architecture: One Carrier, Three Columns, Named Refusals](#17-architecture-one-carrier-three-columns-named-refusals)
 18. [Registers and Meaning](#18-registers-and-meaning)
-19. [The Answer Surface: From a Row to a Plan](#19-the-answer-surface-from-a-row-to-a-plan)
+19. [The Answer Surface: From a Row to a Plan](#19-the-answer-surface-from-a-row-to-a-plan) — with [19.1 One path to every surface](#191-one-path-to-every-surface-phase-66) and [19.2 Derivation across wheels](#192-derivation-across-wheels-and-what-naive-composition-gets-wrong)
 20. [Escalation and Ladders](#20-escalation-and-ladders)
 21. [Addressing: The Geometry as an Index](#21-addressing-the-geometry-as-an-index)
 22. [Measured Capability](#22-measured-capability)
@@ -972,7 +972,7 @@ The "I am Y" study (`light/aristotle_01/Y_STUDY_CLEAN_RESTATEMENT.md`) examines 
 
 ### 14.1 Scope
 
-There is one Lean development in this repository: `RequestProject/GLM/`, built from the repository root by `lake build` against Mathlib for Lean 4.28.0. It holds <!--figure:lean-files-->133 Lean files<!--/figure--> and <!--figure:lean-declarations-->3,766<!--/figure--> top-level declarations, contains no `sorry` and no `admit`, declares no axiom, and is mirrored byte-for-byte in `overlay/glm_lean/RequestProject/GLM/` so that the package's figures and its Lean citations read the same tree (`diff -r -x README.md RequestProject/GLM overlay/glm_lean/RequestProject/GLM` is empty; Phase 60 found and repaired the one time it was not).
+There is one Lean development in this repository: `RequestProject/GLM/`, built from the repository root by `lake build` against Mathlib for Lean 4.28.0. It holds <!--figure:lean-files-->140 Lean files<!--/figure--> and <!--figure:lean-declarations-->3,976<!--/figure--> top-level declarations, contains no `sorry` and no `admit`, declares no axiom, and is mirrored byte-for-byte in `overlay/glm_lean/RequestProject/GLM/` so that the package's figures and its Lean citations read the same tree (`diff -r -x README.md RequestProject/GLM overlay/glm_lean/RequestProject/GLM` is empty; Phase 60 found and repaired the one time it was not).
 
 The development grew in three ways, and Appendix B lists every file under the theme it belongs to:
 
@@ -1190,7 +1190,7 @@ strictly — `substrate`, `data_objects`, `reasoning`, `semantics`, `recipe`,
 opt-in package, the `sandbox` holding what is not yet relied on, `signoff` and
 `corpus` holding the repository's own instruments, and `integrity.py` holding
 every SHA-256 use one level above the core. The reasoning kernel alone is
-<!--figure:reasoning-modules-->93<!--/figure--> modules.
+<!--figure:reasoning-modules-->100<!--/figure--> modules.
 
 ### 17.2 The carrier
 
@@ -1299,7 +1299,7 @@ itself whether it is `table`, `address` or `derive` (§22.3).
 
 | operation | what it does | measured on its declared set | study |
 |---|---|---|---|
-| **field surface** | one named field of one named row, over <!--figure:fieldsurface-tables-->13<!--/figure--> tables, <!--figure:fieldsurface-rows-->9,248<!--/figure--> rows and <!--figure:fieldsurface-pairs-->55,173<!--/figure--> addressable pairs | answers <!--figure:fieldsurface-moved-->9<!--/figure--> of the <!--figure:fieldsurface-held-->10<!--/figure--> held-but-unreachable probe questions, exactly the <!--figure:fieldsurface-predicted-->9<!--/figure--> declared reachable | [`FIELD_SURFACE_STUDY.md`](FIELD_SURFACE_STUDY.md) |
+| **field surface** | one named field of one named row, over <!--figure:fieldsurface-tables-->13<!--/figure--> tables, <!--figure:fieldsurface-rows-->9,794<!--/figure--> rows and <!--figure:fieldsurface-pairs-->58,239<!--/figure--> addressable pairs | answers <!--figure:fieldsurface-moved-->9<!--/figure--> of the <!--figure:fieldsurface-held-->10<!--/figure--> held-but-unreachable probe questions, exactly the <!--figure:fieldsurface-predicted-->9<!--/figure--> declared reachable | [`FIELD_SURFACE_STUDY.md`](FIELD_SURFACE_STUDY.md) |
 | **ordering** | one coordinate off two rows, ordered exactly, refused across scales | answers <!--figure:ordering-answered-->4<!--/figure--> and refuses <!--figure:ordering-refused-->3<!--/figure--> of <!--figure:ordering-declared-count-->7<!--/figure-->, every one as declared | [`ORDERING_STUDY.md`](ORDERING_STUDY.md) |
 | **extremum** | one coordinate over every row of a table, folded or refused | folds <!--figure:extremum-answered-->4<!--/figure--> and refuses <!--figure:extremum-refused-->4<!--/figure--> of <!--figure:extremum-declared-count-->8<!--/figure--> columns, every one as declared | [`COLUMN_EXTREMUM_STUDY.md`](COLUMN_EXTREMUM_STUDY.md) |
 | **scale conversion** | a declared table of <!--figure:scales-rows-->9<!--/figure--> scales over <!--figure:scales-quantities-->4<!--/figure--> quantities | answers <!--figure:scales-answered-->7<!--/figure--> and refuses <!--figure:scales-refused-->5<!--/figure--> of <!--figure:scales-declared-->12<!--/figure-->; relates <!--figure:scales-bridged-->6<!--/figure--> of <!--figure:scales-pairs-->7,750<!--/figure--> scale pairs and refuses the rest | [`SCALE_CONVERSION_STUDY.md`](SCALE_CONVERSION_STUDY.md) |
@@ -1307,6 +1307,13 @@ itself whether it is `table`, `address` or `derive` (§22.3).
 | **role binding and plan store** | a typed relation as one 24-bit word; a resolved follow-up kept under a digest of the whole conversation | the filler's name recovered for <!--figure:binding-recovered-->6<!--/figure--> of <!--figure:binding-declared-count-->12<!--/figure--> bindings and refused for <!--figure:binding-refused-->6<!--/figure-->; all <!--figure:planstore-replayed-->15<!--/figure--> follow-ups replay unchanged, licensing trials <!--figure:planstore-trials-first-->27<!--/figure--> → <!--figure:planstore-trials-replayed-->0<!--/figure--> | [`SUPPLIED_PORTS_STUDY.md`](SUPPLIED_PORTS_STUDY.md) |
 | **typed question plans** | <!--figure:plans-frames-->18<!--/figure--> frames read an English question into typed plans over the operations above; answered only when every licensed plan agrees | the frozen language probe <!--figure:plans-probe-correct-->19<!--/figure--> correct, <!--figure:plans-probe-wrong-->0<!--/figure--> wrong, <!--figure:plans-probe-refused-->1<!--/figure--> refused; held-out <!--figure:plans-held-correct-->86<!--/figure--> correct and <!--figure:plans-held-correct-refusal-->22<!--/figure--> correct refusals of <!--figure:plans-held-total-->110<!--/figure-->, <!--figure:plans-held-wrong-->1<!--/figure--> wrong | [`SEMANTIC_PLAN_STUDY.md`](SEMANTIC_PLAN_STUDY.md) |
 | **engineering languages** | formula wheels as exact exponent-vector relations, the Smith chart over the Gaussian rationals, mechanical–electrical analogy, delta–sigma modulators | 63 pre-registered questions: 53 correct, 10 correct refusals, 0 wrong, where both earlier paths answered none; wheels 41 / 41, Smith chart 16 / 16, force–voltage analogy 9 / 9 each way | [`ENGINEERING_LANGUAGE_STUDY.md`](ENGINEERING_LANGUAGE_STUDY.md) |
+| **certificate frames** (Phase 63) | interval consistency at a register's held precision; the simplest fraction a decimal or a delta–sigma window pins down, answered only with a uniqueness certificate; dimensional derivation solved exactly as unique, impossible or undetermined | 26 of 33 declared questions answered and the other 7 refused as declared, 0 wrong, where the grammar answers none | [`SUBSTRATE_NATIVE_COGNITION_STUDY.md`](SUBSTRATE_NATIVE_COGNITION_STUDY.md) |
+| **Python dialect** (Phase 64) | a deterministic subset of Python evaluated on the substrate — `Fraction` on a carrier coordinate, `int` on the dyadic tower, bitwise operations as reversible gate programs, `match` by Golay coset decoding — with a column-3 script re-run in a fresh `python3 -I` | 83 of 83 programs equal CPython in type and value, 26 of 26 refusals named, every script `VERIFIED True` and every mutated claim caught; 0 wrong over a 7,128-expression battery | [`PYTHON_SPEECH_STUDY.md`](PYTHON_SPEECH_STUDY.md) |
+| **carried fork** (Phase 65) | the six equidistant candidates of a deep-hole Golay read carried with a ledger until a later decision resolves them | 0 wrong from every certified stage: 592,268 of 658,812 declared-case reads, 4,224 of 4,224 second readings, 3,840 of 3,840 unsure-set reads; 1,771 of 1,771 ties lift to a certified A₁²⁴ Leech deep hole; two declared marks missed (85.8 % against 90 % at 32 cases; the soft estimate 512 of 768) | [`CARRIED_FORK_STUDY.md`](CARRIED_FORK_STUDY.md) |
+| **across wheels** (Phase 66) | the ten formula wheels solved together, a shared name one variable only across a declared junction | the 3 laws among 161 cross-wheel formulas answered and the 158 wrong ones refused, 0 wrong; 105 of 105 in-wheel derivations unchanged | [`CONNECTED_MACHINE_STUDY.md`](CONNECTED_MACHINE_STUDY.md) |
+| **reverse TCT** (Phase 67) | column 1 generated from column 2: an exact term or statement over ℚ realised as English by a declared prefix-first grammar and read back; `say`, `equivalent`, `paraphrase`, `negate`, `solve`, `entails`, `bounds` taken on the mathematics | 176,617 of 176,617 battery terms round-trip, 0 collisions where the infix realiser has 5,684; every declared case as declared, 0 wrong, where the default path answered 0 of 58; 94 of 94 scripts `VERIFIED True`, 69 of 69 mutated certificates rejected | [`REVERSE_TCT_STUDY.md`](REVERSE_TCT_STUDY.md) §0–§6 |
+| **reverse TCT, round two** (Phase 68) | floor quotient, remainder, `abs`, `min`, `max`, bitwise operators, Golay masks as a second sort; disjunction, so negation is closed under De Morgan; `relay:` into the planner and back | 216,723 widened and 18,500 mask terms round-trip with 0 collisions; 650 of 650 double negations certified; 20 of 20 relay cases as declared, 0 disagreements; 92 of 92 scripts `VERIFIED True`, 84 of 84 mutants rejected | [`REVERSE_TCT_STUDY.md`](REVERSE_TCT_STUDY.md) §7–§9 |
+| **the integer sort** (Phase 69) | `entails over the integers:` and `bounds over the integers of x:` — floor quotient and remainder split by residue, elimination tightened over ℤ, a refutation certified by its derivation | 29 of 29 entailment and 10 of 10 bounds cases as declared, 0 wrong; 34 of 34 scripts `VERIFIED True`, 34 of 34 mutants rejected; 116 battery questions agree with brute force; `INTEGER_UNDECIDED` named where rounded elimination stops | [`REVERSE_TCT_STUDY.md`](REVERSE_TCT_STUDY.md) §10–§12 |
 
 Three things about this table are worth stating outright.
 
@@ -1317,16 +1324,112 @@ Three things about this table are worth stating outright.
   over its filled rows is a different value at a different row; the
   conversation layer refuses the fourteen-way tie at the top of the lexicon's
   `abstract_concrete` column rather than choose a referent.
-* **The planner and the engineering surface are opt-in** (`GLM.py --plan`,
-  `GLM.py --eng`), because the command line renders every answer as a
-  three-column trace and a computed plan has no trace kind yet. Making the
-  planner the default is the first named candidate for a later round.
+* **The planner is the default path** since Phase 63 (`--grammar` asks the
+  grammar alone), and since Phase 66 one path, `GLM.py --ask`, reaches the
+  engineering surface, the Python dialect and the toolbox as well without a
+  flag (§19.1). `-q` still reads through the planner and the grammar.
 * **Their wrong answers are named.** The planner's one held-out error is the
   element register holding iron's atomic weight as `55.84` where the answer key
   uses `55.845`: a precision fault in a register, not in the planner. The
   engineering stress set's first run is frozen at 27 correct, 1 wrong and 10
   correct refusals, and its one "wrong" answer is a formatting mismatch of the
   same value.
+
+### 19.1 One path to every surface (Phase 66)
+
+Until Phase 66 each surface was reached by its own flag, so a question the
+machine could answer was refused whenever the caller chose the wrong one: the
+default path answered none of the 53 answerable engineering questions and
+none of the 83 Python programs. The **router** (`runtime/router.py`) tries
+the surfaces of a declared catalogue (`runtime/toolbox.py`) in order —
+the toolbox, the Python dialect, the engineering surface, the typed planner —
+and gives the text to the first that *reads* it; that surface's answer or
+refusal is the verdict, and `GLM.py --ask` prints its name beside it.
+
+Two design points carry the result. First, a surface in front of another
+changes a verdict only for text it reads (`route_prefix_none` in
+`RequestProject/GLM/ConnectedMachine.lean`), so "the router leaves the
+planner's answers alone" is a count, and the count is 0 of the 177 contract
+cases diverted. Second, English can parse as Python — *what is 2 + 2* is a
+comparison of a name `what` with `2 + 2` — so the Python reader asks for a
+program whose loaded names are all bound, not just for a parse. Measured over
+the four declared sets (382 questions), the router answers 136 more correctly
+than the planner alone and adds no wrong answer.
+
+The same round made the eight tested reasoning modules that nothing reached
+(the wiring audit of §24) into **tools**: `tool moonshine`, `llvq`, `pcgs`,
+`salvage`, `salvage second`, `deep dive`, and `tie break` and `stability` for
+one named Lean declaration. Each names its Lean specification and study, and
+the audit now reads 96 of 96 reasoning modules reached. This is reach and
+wiring, not a new faculty, and the study records it as that.
+
+### 19.2 Derivation across wheels, and what naive composition gets wrong
+
+The engineering surface derived inside one formula wheel at a time, and so
+refused hydraulic power from pressure and volume flow rate, which needs the
+linear-dynamics wheel and the fluid wheel together. Taken naively, the union
+of all ten wheels licenses 161 two-input formulas no single wheel does — and
+by physics labels declared before the mode was built, only 3 of them are laws.
+The other 158 go through an identification that is false: 79 equate a massive
+body's kinetic energy and momentum with a photon's (the naive union derives
+`energy = 2 * mass * speed_of_light^2`, proved in `emc2_naive`), 70 equate DC
+resistance with AC impedance, and the rest equate kinetic energy with stored
+heat. The algebra is exact every time; what is wrong is treating a shared
+name as one measurand.
+
+The *across wheels* mode splits every shared name into one copy per wheel
+except where a declared **junction** identifies it (force and velocity
+between the linear-dynamics and fluid wheels, and four more, each argued in
+the study). It answers exactly the 3 laws, each naming the wheels and the
+junction it crossed, and refuses the 158 with the naive answer and the
+identification it would need; the 105 in-wheel derivations are unchanged.
+Splitting is sound (`licensed_sound`: forgetting the copies is a linear map,
+so a split derivation is a naive one), and a linear functional certifies that
+the split union does not derive the photon conflation
+(`emc2_refused_split`). The junction table is the first declaration in the
+system that is argued rather than looked up: it declares **measurands**, which
+§25.5 item 5 asked for in another form.
+
+The new Lean file also moved the measurements that read the Lean corpus, as
+every added file has (3,838 → 3,859 declarations; the relay's goal set 853 →
+858 queries). The stack relay of §21 now carries 19 queries against 0 lost and
+is strict on all five gates of its declared band, to 1/4, where after Phase 65
+it stopped at 1/5; this is recorded as measured, not as a gain of the round.
+
+### 19.3 Reverse Three Column Thinking: the language column generated from the mathematics (Phases 67–69)
+
+Forward Three Column Thinking wrote column 1, the English caption, as a
+template filled in by the step that ran; nothing could read it back, so
+nothing could check it. Phase 67 reversed the direction on the owner's
+instruction: column 2, an exact term or statement over ℚ, *generates* column 1
+through a declared prefix-first grammar (`the sum of A and B`, `the negation
+of A`, `the fraction P over Q`), and a declared reader parses the sentence
+back. `ReverseTCT.lean` proves the realisation uniquely readable
+(`render_injective`, `renderStmt_injective`) and the natural infix realiser
+not; over a battery of 176,617 terms the round trip is exact with 0
+collisions, where the infix realiser has 5,684. With language that reads back
+exactly, semantic operations can be taken on the mathematics and spoken back:
+`equivalent` and `paraphrase` by polynomial normal form, `negate` exactly,
+`solve for x`, and `entails` and `bounds of x` by Fourier–Motzkin elimination
+with Farkas multipliers as certificates. Each answer's column-3 script
+re-reads column 1 in a fresh interpreter and re-checks the certificate; a
+mutated certificate is rejected every time.
+
+Phase 68 widened the fragment (floor quotient, remainder, `abs`, `min`, `max`,
+bitwise operators, Golay masks as a second sort with count-first literals),
+added disjunction so that negation is closed under De Morgan, and closed a
+loop: `relay:` hands what column 2 holds to the planner as a question in the
+planner's language and realises the answer back as sentences
+(`ReverseTCTTwo.lean`: the widened and clause grammars uniquely readable, case
+splits exact, Python's floor-remainder convention). Phase 69 added the integer
+sort: a floor quotient or remainder of a variable by a constant is split into
+one case per residue, each case decided by elimination with every row
+tightened over ℤ, and where rounded elimination stops the answer is the named
+refusal `INTEGER_UNDECIDED` (`ReverseTCTThree.lean`: the residue split exact
+and exhaustive, the tightenings exact, the derivation sound). Over ℚ the same
+29 integer questions get 20 refusals and 9 different answers — `x > 2` does
+not entail `x ≥ 3` there — which is the measured reason the sort is declared
+in the question rather than guessed.
 
 ## 20. Escalation and Ladders
 
@@ -1407,7 +1510,7 @@ program text be mapped onto the lattice — is asked most sharply of the Lean
 development itself, because it is a corpus whose ground truth is known.
 
 * **The Lean address book.** Each of the
-  <!--figure:lean-declarations-->3,766<!--/figure--> declarations gets a
+  <!--figure:lean-declarations-->3,976<!--/figure--> declarations gets a
   deterministic Leech address computed from 24 structural counts of its
   statement, read back exactly, with nearest-by-address sharing a source file
   far more often than a SHA-256 control or a seeded reshuffle does
@@ -1430,8 +1533,8 @@ development itself, because it is a corpus whose ground truth is known.
   ([`ANONYMOUS_REGISTER_STUDY.md`](ANONYMOUS_REGISTER_STUDY.md)).
 * **As a stack, it helps the leader.** Given a stated confidence gate and only
   the queries the leading text faculty cannot read, the geometry carries more
-  queries than it loses (13 against 0 over 1,658 queries), where a
-  digest-and-reshuffle relay under the same gate carries 2. The gain is
+  queries than it loses (18 against 0 over 1,768 queries on the current
+  corpus), where a digest-and-reshuffle relay under the same gate carries 2. The gain is
   strict on all three query sets on the current corpus — but that standing
   moves with the corpus: when Phase 59 added one Lean file the goal set fell
   level, and when Phase 61 added three it rose again, and the study records
@@ -1443,6 +1546,49 @@ development itself, because it is a corpus whose ground truth is known.
   refuse loop re-verifies every returned plan and carries a proof with each
   refusal ([`CONTROLLER_STUDY.md`](CONTROLLER_STUDY.md)).
 
+* **Native wherever it can be (Phase 70).** Where a standard method tied or
+  narrowly beat a native one, the native method was kept and refined (§21.1).
+
+### 21.1 Native parity: keeping the native method and refining it (Phase 70)
+
+The owner's instruction for Phase 70 was to retain a Golay/Leech-native method
+wherever a standard method only equals or narrowly beats it, and to refine the
+native method until it matches or beats the standard one, so that later
+systems mesh on one substrate. Every measured native/standard pair in the
+repository was put in one ledger (eight rows: three native ahead, one parity,
+one standard narrowly ahead, three standard far ahead), and the middle two
+classes were taken ([`NATIVE_PARITY_STUDY.md`](NATIVE_PARITY_STUDY.md)).
+
+The refinement rests on one fact. At scale 9 a Leech address is `9f + e`,
+with `f` the feature vector and each residue coordinate `|eᵢ| ≤ 4`, so the
+address carries two layers and the read-back `round(p/9)` recovers `f`
+exactly (`NativeParity.lean`, `readback_eq_leech`; measured exact on 3,976 of
+3,976 stored addresses and 102 of 102 live goal addresses). The shipped native
+rankings used only the raw address distance, which mixes the layers.
+
+* **One book in two layers is a draw.** Ranking by the read-back first and
+  the raw Leech distance second moves the declaration and goal figures by a
+  query or three either way as the corpus grows. That is what
+  `residue_congr` predicts: the residue is a function of the features, so a
+  Leech tie-break is as arbitrary an order inside a tie as the alphabet.
+* **Two books beat the raw features.** Reading the second native book (the
+  identifier-letter Leech book) inside the ties of the first gives 83 hits at
+  5 on 210 declaration queries against 80 for the raw structural features (MRR@10
+  0.320 against 0.299), and 31 against 27 on 102 goal queries. It is
+  identical, query for query, to the standard ranking that uses the same two
+  vectors with no lattice — the native system loses nothing to the standard
+  one because its read-back is lossless. `retrieval.retrieve` now defaults
+  to it.
+* **The controller's loss was the metric, not the information.** A scorer
+  that counts moves on the read-back of each state's Leech address solves 24
+  of 24 dimensional-derivation tasks, all minimal and verified, with exactly
+  the exact scorer's proposals, where the shipped Leech scorer solves 18.
+* **Documents.** On the document corpus the native rankings stay within one
+  relevant section of the raw lexical vector, ahead or behind by that section
+  as the documents they index are edited, and the live word-overlap ranking
+  now breaks its exact ties by Leech distance at no cost. Where the standard method is far ahead (word overlap against any
+  lexical address) the gap is a capacity result and is recorded, not taken.
+
 ## 22. Measured Capability
 
 ### 22.1 The four instruments
@@ -1452,7 +1598,7 @@ development itself, because it is a corpus whose ground truth is known.
 | end-to-end CLI evaluation | the command line in a fresh interpreter per question, scored asymmetrically | <!--figure:evaluation-case-count-->177<!--/figure--> cases: 149 answered correctly, 28 refused as expected, **0 confidently wrong** |
 | capability probes | where the library stops, asked as user questions | 33 probes: 20 hold, 13 break — each break a located boundary, not a failure |
 | benchmark suites | solver functions against curated and exhaustive task sets | 2,389 / 2,390 across 5 suites, every suite above its declared baseline |
-| test suite | the package's own regression net | <!--figure:suite-->4,267 tests across 108 of the 109 test files, 16,276 subtests, outside the document check<!--/figure--> |
+| test suite | the package's own regression net | <!--figure:suite-->4,415 tests across 115 of the 116 test files, 16,957 subtests, outside the document check<!--/figure--> |
 
 The thirteen probe breaks are the machine's measured edges, spread over nine
 areas (algebra, carriers, dynamic carriers, layers, reals, scale, semantics,
@@ -1547,6 +1693,10 @@ bear on the system as a whole; each is the verdict of the study named.
 | two questions the archive's deep dive asked | both negative, and both more useful than a positive | [`ARCHIVE_DEEP_DIVE_STUDY.md`](ARCHIVE_DEEP_DIVE_STUDY.md) |
 | the pre-registered language probe passes on the default path | no — 2 / 1 / 17 against a mark of 10; passes only through the planner | [`BLOCKERS_STUDY.md`](BLOCKERS_STUDY.md) |
 | the Golay/Leech encoding helps the engineering surface | no advantage found, and none claimed | [`ENGINEERING_LANGUAGE_STUDY.md`](ENGINEERING_LANGUAGE_STUDY.md) |
+| naive composition of true formula wheels is safe | no — 158 of the 161 cross-wheel formulas it licenses are wrong (`energy = 2 * mass * speed_of_light^2` among them); a declared junction table removes all 158 and keeps the 3 laws | [`CONNECTED_MACHINE_STUDY.md`](CONNECTED_MACHINE_STUDY.md) |
+| the carried fork's declared-case stage reaches 90 % at every case-set size | no — 85.8 % at 32 cases, with 0 wrong; and outside its closed world it misreads | [`CARRIED_FORK_STUDY.md`](CARRIED_FORK_STUDY.md) |
+| escalating a deep-hole tie to the Leech lattice resolves it without new information | no — every tie lifts to a certified A₁²⁴ deep hole, and the soft estimate is right on 512 of 768 against a 90 % mark | [`CARRIED_FORK_STUDY.md`](CARRIED_FORK_STUDY.md) |
+| minimising the error measure (TAX) inside a coset is a new decoder | no — it is exactly the complete decoder, on 3,136 of 3,136 reads | [`SUBSTRATE_NATIVE_COGNITION_STUDY.md`](SUBSTRATE_NATIVE_COGNITION_STUDY.md) |
 | the relay's gain is a stable property of the mechanism | no — it is a measurement of the current corpus: Phase 59's added file made it tie text on the goal set (2 carried, 2 lost) with the strict band ending at 1/5, and Phase 61's three files restored a strict gain on every set (13 carried, 0 lost) | [`STACK_RELAY_STUDY.md`](STACK_RELAY_STUDY.md) |
 
 Parts I–IV carry their own negatives, which §25.4 collects: the fine-structure
@@ -1590,8 +1740,8 @@ carries a tier-0 block (question, verdict, deciding figure, the function that
 recomputes it), is addressed, and is checked — the verdict must be grounded in
 the document's own words, every link must resolve, and every current-state
 document must be reachable from [`ENTRY.md`](../ENTRY.md). The corpus holds
-<!--figure:corpus-documents-->98<!--/figure--> documents, of which
-<!--figure:corpus-state-documents-->94<!--/figure--> describe the system as it
+<!--figure:corpus-documents-->103<!--/figure--> documents, of which
+<!--figure:corpus-state-documents-->99<!--/figure--> describe the system as it
 is and <!--figure:corpus-archive-documents-->4<!--/figure--> are records of a
 round, and [`DIGEST.md`](../DIGEST.md) is their tier-0 reading, generated.
 
@@ -1667,11 +1817,17 @@ The following are empirical calibrations, internally consistent but not derived 
 The following are measurements of the machine, each against a control or a declared set, each recomputed by the instrument named in Part V:
 
 1. **No confidently wrong answer** in <!--figure:evaluation-cases-->177 CLI cases<!--/figure-->, 28 of them refusals the machine was expected to make.
-2. **The language probe passes through the planner** (<!--figure:plans-probe-correct-->19<!--/figure--> of <!--figure:probe-questions-->20<!--/figure-->) and fails on the default path (<!--figure:probe-correct-->2<!--/figure-->), which is why making the planner the default is the first open item of the machine.
+2. **The language probe passes through the planner** (<!--figure:plans-probe-correct-->19<!--/figure--> of <!--figure:probe-questions-->20<!--/figure-->) and fails through the grammar alone (<!--figure:probe-correct-->2<!--/figure-->); the planner has been the default path since Phase 63.
 3. **Every declared operation behaves as declared**: field surface, ordering, extremum, scale conversion and conversation each answer and refuse exactly the cases declared before the run.
 4. **Escalation is safe where it is shipped**: 462 of 568 on the construction ladder and <!--figure:normesc-correct-->467<!--/figure--> on the repaired norm ladder, both with 0 wrong; the program-text operation made safe by a second reading at a counted cost.
 5. **The engineering surface** answers 53 of 63 pre-registered questions and correctly refuses the other 10, with 0 wrong.
 6. **Addressing** is deterministic and exact on the Lean corpus, loses to text search when names are present, and holds when they are not.
+7. **The certificate frames** answer 26 of 33 declared questions and refuse the other 7 as declared, with 0 wrong (Phase 63).
+8. **The Python dialect** equals CPython on 83 of 83 declared programs and names 26 of 26 refusals, every answer re-derived in a fresh interpreter (Phase 64).
+9. **The carried fork** resolves deep-hole reads with 0 wrong from every certified stage (Phase 65).
+10. **One question path** reaches every surface: 0 of 177 contract cases diverted, 136 more declared questions answered correctly than by the planner alone, 0 wrong added; and across wheels the licensed union answers 3 laws and refuses 158 wrong formulas, 0 wrong (Phase 66).
+11. **Reverse Three Column Thinking** generates the language column from the mathematics with 0 collisions over 176,617 terms, and answers every declared entailment, solve, bounds and equivalence case as declared with a re-checked certificate, 0 wrong — over ℚ (Phase 67), with disjunction and a loop into the planner (Phase 68), and over ℤ (Phase 69).
+12. **Native parity**: the two-book native ranking beats the raw features on both Lean query sets and equals the like-for-like standard ranking exactly; the read-back scorer solves 24 of 24 controller tasks where the shipped Leech scorer solves 18 (Phase 70).
 
 ### 25.4 The Refuted Claims
 
@@ -1699,13 +1855,15 @@ Kept because a refuted claim is a result: the fine-structure fit is worth less t
 
 **Of the machine** (the candidates named in [`STATUS.md`](../STATUS.md) §3.4, sharpest first):
 
-9. **Derivation across a declared union of relations.** The engineering surface derives inside one formula wheel at a time and so refuses hydraulic power from pressure and volume flow rate, which follows across two wheels.
+9. **Measurands, declared.** Derivation across a union of wheels is built (Phase 66, §19.2) on a declared junction table; what is open is a register of measurands behind it, so that a conversion — electrical to mechanical power through a stated efficiency — is a law of its own rather than a refusal.
 10. **Typed physical operators.** Monomial wheels cannot separate real, reactive and apparent power, nor dot from cross product.
-11. **The planner as the default path**, which needs a trace kind for the planner's own computations.
+11. **Routing `-q` itself.** The planner is the default path (Phase 63) and `GLM.py --ask` routes to every surface (Phase 66); switching `-q` to the router would change no contract answer by census, and is left to the owner.
 12. **A held-out set nobody on the project wrote**, with labels from outside the registers — the test that separates reach from anticipation.
 13. **The register against the world**: a discrepancy report of register values against cited standard values (the iron atomic weight is the first row), never overwriting the register.
-14. **Typed discourse state** — *the one before that*, *both of them*, and a tie carried forward as a column rather than refused.
+14. **Typed discourse state** — *the one before that*, *both of them*, and a tie carried forward as a column rather than refused; and follow-ups bound on every surface the router reaches, not only the planner's.
 15. **The Lean still in the archive.** The MOG cube's language half (about thirty files) is proved in the archive and not rebuilt here, and so are the unported parts of the observer-Y file (Appendix C). The five first-principles and projection files named here before Phase 61 are now rebuilt. Retrieving the language half would put the results quoted in §12 under this repository's own `lake build`.
+16. **Reverse Three Column Thinking, round four.** Strings, tuples and ranges as a third sort; a small imperative grammar; a complete integer decision for what is refused `INTEGER_UNDECIDED`; the relay loop reading the integer certificates.
+17. **Native past parity.** The native rankings now match the standard ones; beating them on the document corpus, and a native word ranking (overlap on Golay words of the tokens) where word overlap is still far ahead, are open ([`NATIVE_PARITY_STUDY.md`](NATIVE_PARITY_STUDY.md) §6).
 
 ---
 
@@ -1718,7 +1876,7 @@ The GLM is a mathematically rigorous 24-dimensional substrate with exact rationa
 - The velocity scale is exact (MONAD/13 → v/c = 0.339, but this is a definition, not a prediction)
 - The mass scale is internally consistent (0.009% error, cross-checks pass)
 - The photon as minimum-Tax octad is a mathematical fact on the Golay layer (`octad_min_tax`)
-- The layer architecture, the code's arithmetic and the machine's refusals are formally verified in a development of <!--figure:lean-files-->133 Lean files<!--/figure--> with no `sorry`
+- The layer architecture, the code's arithmetic and the machine's refusals are formally verified in a development of <!--figure:lean-files-->140 Lean files<!--/figure--> with no `sorry`
 - The encoding system predicts element properties at r > 0.90
 - The machine answers <!--figure:query-kinds-->24 query kinds<!--/figure--> over <!--figure:registers-->8 registers<!--/figure-->, re-derives every answer it gives, and refuses with a named reason where an answer would be a guess
 
@@ -1738,7 +1896,7 @@ Nor is it, yet, a general reasoner. It derives narrowly, addresses well where na
 
 ### 26.4 The Path Forward
 
-The most productive direction is not to chase exact derivations of constants the SI already defines. It is to keep building the **computational engine** — the calibrated substrate as a geometric stability evaluator, and the machine on it widened one declared, measured operation at a time. Derivation is the scarce faculty, and §25.5 items 9–14 are the next steps toward it; item 15 brings the rest of the archive's verified material under this repository's own build.
+The most productive direction is not to chase exact derivations of constants the SI already defines. It is to keep building the **computational engine** — the calibrated substrate as a geometric stability evaluator, and the machine on it widened one declared, measured operation at a time. Derivation is the scarce faculty, and §25.5 items 9–14, 16 and 17 are the next steps toward it — Phase 66 showed on the formula wheels how composition gains a derivation and what it gets wrong without declared measurands; item 15 brings the rest of the archive's verified material under this repository's own build.
 
 ### 26.5 The Honest Summary
 
@@ -1822,6 +1980,11 @@ says what each is *about* and where this paper uses it.
 | [`SUPPLIED_PORTS_STUDY.md`](SUPPLIED_PORTS_STUDY.md) | role binding and the plan store shipped; the product binding refuted | §19, §23 |
 | [`SEMANTIC_PLAN_STUDY.md`](SEMANTIC_PLAN_STUDY.md) | typed question plans, pre-registered held-out sets | §19, §22 |
 | [`ENGINEERING_LANGUAGE_STUDY.md`](ENGINEERING_LANGUAGE_STUDY.md) | formula wheels, the Smith chart, analogy, delta–sigma | §19 |
+| [`SUBSTRATE_NATIVE_COGNITION_STUDY.md`](SUBSTRATE_NATIVE_COGNITION_STUDY.md) | nine experiments in substrate-native cognition, and the certificate frames they left | §19, §23 |
+| [`PYTHON_SPEECH_STUDY.md`](PYTHON_SPEECH_STUDY.md) | the GLM evaluating a declared dialect of Python on the substrate | §19 |
+| [`CARRIED_FORK_STUDY.md`](CARRIED_FORK_STUDY.md) | the six deep-hole candidates carried until a later decision | §19, §23 |
+| [`CONNECTED_MACHINE_STUDY.md`](CONNECTED_MACHINE_STUDY.md) | one question path to every surface, the unreached modules as tools, derivation across wheels | §19.1, §19.2, §23 |
+| [`REVERSE_TCT_STUDY.md`](REVERSE_TCT_STUDY.md) | the language column generated from the mathematics; semantic operations over ℚ, with disjunction and the relay, and over ℤ | §19, §19.3 |
 
 **Escalation, addressing and the loop** (§20–§21)
 
@@ -1841,6 +2004,7 @@ says what each is *about* and where this paper uses it.
 | [`CORPUS_ADDRESS_STUDY.md`](CORPUS_ADDRESS_STUDY.md) | the repository's own documents, addressed | §21 |
 | [`SEARCH_LOOP_STUDY.md`](SEARCH_LOOP_STUDY.md) | a procedure retrieved the way a number is | §21 |
 | [`CONTROLLER_STUDY.md`](CONTROLLER_STUDY.md) | propose, check, refuse — six heuristics on 24 tasks | §21 |
+| [`NATIVE_PARITY_STUDY.md`](NATIVE_PARITY_STUDY.md) | where a standard method ties a native one, the native one refined to match or beat it | §21.1 |
 | [`REVERSE_CALL_PLANNER_STUDY.md`](REVERSE_CALL_PLANNER_STUDY.md) | the supplied planner, sandboxed and not promoted | §23 |
 | [`ITERATION_COST_STUDY.md`](ITERATION_COST_STUDY.md) | what a round costs, and the cache that stops it repeating work | §24 |
 | [`GLM_ACADEMIC_PAPER.md`](GLM_ACADEMIC_PAPER.md) | this paper | — |
@@ -1863,8 +2027,8 @@ statements are in the files; §14.3 names the headline theorems.
 | values, streams and number theory | `DeltaSigma`, `Sturmian`, `Mantissa`, `Wobble`, `WobbleLandscape`, `Feedback`, `Cascade`, `NowReceipt`, `Transcendental`, `Reversible`, `LogBucket`, `Harmony`, `Totient`, `SpatialArithmetic`, `GridTension` |
 | first principles and projection | `Distinction`, `Packing`, `FitCapacity`, `SeedLayers`, `SeedRoles`, `Triad`, `TriadCensus`, `TriadChance`, `Platonic`, `PCGS` |
 | semantics and language | `Semantics/Grounding`, `Semantics/Meaning`, `Question`, `QuestionNested`, `Recipe`, `Admission`, `Completion`, `Conjugate`, `Vagueness`, `NameCoordinate`, `Corpus` |
-| the loop, search and addressing | `ReasoningLoop`, `SearchLoop`, `Controller`, `ConditionalInduction`, `Address`, `Retrieval`, `Relay`, `Anonymous` |
-| the answer surface and the conversation | `FieldSurface`, `ProbeOracle`, `CoordinateOrder`, `ColumnExtremum`, `ScaleConversion`, `Conversation`, `RoleBinding`, `PlanStore`, `SemanticPlan`, `EngineeringWheels` |
+| the loop, search and addressing | `ReasoningLoop`, `SearchLoop`, `Controller`, `ConditionalInduction`, `Address`, `Retrieval`, `Relay`, `Anonymous`, `NativeParity` |
+| the answer surface and the conversation | `FieldSurface`, `ProbeOracle`, `CoordinateOrder`, `ColumnExtremum`, `ScaleConversion`, `Conversation`, `RoleBinding`, `PlanStore`, `SemanticPlan`, `EngineeringWheels`, `SubstrateCognition`, `CognitionRoundTwo`, `PythonSpeech`, `CarriedFork`, `ConnectedMachine`, `ReverseTCT`, `ReverseTCTTwo`, `ReverseTCTThree` |
 
 ---
 
@@ -1943,7 +2107,9 @@ than duplicate it is:
 
 Everything else in the archive is either retrieved, summarised with its
 figures attributed, or deliberately not taken with the reason in the row that
-names it.
+names it. The modules that earlier rounds retrieved from the archive but left
+unreached — `salvage`, `salvage_second`, `deep_dive` among them — are since
+Phase 66 reachable as tools (§19.1).
 
 ---
 

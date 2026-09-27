@@ -1,0 +1,709 @@
+{
+ "carrier_information": {
+  "contingency": {
+   "adjacent_not_related": 2,
+   "neither": 3025,
+   "related_and_adjacent": 2,
+   "related_not_adjacent": 374
+  },
+  "grounded_concepts": 83,
+  "mean_hamming_gap": "46971/379384",
+  "mean_hamming_related": "4547/376",
+  "mean_hamming_unrelated": "12077/1009",
+  "pairs": 3403,
+  "random_word_expectation": "12",
+  "reading": "a carrier that measured the subjects would put related pairs closer than unrelated ones; the gap here is the whole of the semantic signal the stored carriers carry",
+  "semantically_related_pairs": 376,
+  "unrelated_pairs": 3027
+ },
+ "concept_grounding": {
+  "by_sense": {
+   "compound_name": 2,
+   "element": 7,
+   "number_word": 26,
+   "operation": 13,
+   "physics": 35
+  },
+  "concepts": 4282,
+  "grounded": 83,
+  "grounded_fraction": "83/4282",
+  "refusal_reasons": {
+   "ambiguous": 1,
+   "no determinate referent": 4198
+  },
+  "ungrounded": 4199
+ },
+ "edge_grounding": {
+  "by_label": {
+   "abstracts": {
+    "endpoint_ungrounded": 1
+   },
+   "accelerates": {
+    "endpoint_ungrounded": 1
+   },
+   "accumulates": {
+    "endpoint_ungrounded": 2
+   },
+   "achieves": {
+    "endpoint_ungrounded": 1
+   },
+   "acts_on": {
+    "endpoint_ungrounded": 10
+   },
+   "alternates": {
+    "endpoint_ungrounded": 1
+   },
+   "annihilates": {
+    "endpoint_ungrounded": 1
+   },
+   "appears": {
+    "endpoint_ungrounded": 22
+   },
+   "approaches": {
+    "endpoint_ungrounded": 1
+   },
+   "assigns": {
+    "endpoint_ungrounded": 1
+   },
+   "assumes": {
+    "endpoint_ungrounded": 1
+   },
+   "attracts": {
+    "endpoint_ungrounded": 1
+   },
+   "auto_proposed": {
+    "proximity_artefact": 3157
+   },
+   "bends": {
+    "endpoint_ungrounded": 2
+   },
+   "binds": {
+    "endpoint_ungrounded": 1
+   },
+   "blocks": {
+    "endpoint_ungrounded": 1
+   },
+   "bounded_by": {
+    "endpoint_ungrounded": 1
+   },
+   "bounds": {
+    "endpoint_ungrounded": 2
+   },
+   "breaks": {
+    "endpoint_ungrounded": 1
+   },
+   "carries": {
+    "endpoint_ungrounded": 6
+   },
+   "caused_by": {
+    "endpoint_ungrounded": 2
+   },
+   "causes": {
+    "endpoint_ungrounded": 1
+   },
+   "changes": {
+    "endpoint_ungrounded": 7
+   },
+   "characterizes": {
+    "endpoint_ungrounded": 33
+   },
+   "charges": {
+    "endpoint_ungrounded": 1
+   },
+   "clarifies": {
+    "endpoint_ungrounded": 1
+   },
+   "classifies": {
+    "endpoint_ungrounded": 2
+   },
+   "clusters": {
+    "endpoint_ungrounded": 2
+   },
+   "collapses": {
+    "endpoint_ungrounded": 1
+   },
+   "combines": {
+    "endpoint_ungrounded": 9
+   },
+   "commutes_with": {
+    "endpoint_ungrounded": 3
+   },
+   "component_of": {
+    "endpoint_ungrounded": 1
+   },
+   "composed_of": {
+    "endpoint_ungrounded": 2
+   },
+   "compresses": {
+    "endpoint_ungrounded": 1
+   },
+   "computes": {
+    "endpoint_ungrounded": 2
+   },
+   "condenses": {
+    "endpoint_ungrounded": 1
+   },
+   "confirms": {
+    "endpoint_ungrounded": 1
+   },
+   "connects": {
+    "endpoint_ungrounded": 2
+   },
+   "conserves": {
+    "endpoint_ungrounded": 3
+   },
+   "constrains": {
+    "endpoint_ungrounded": 7
+   },
+   "contains": {
+    "endpoint_ungrounded": 22
+   },
+   "contracts": {
+    "endpoint_ungrounded": 1
+   },
+   "contradicts": {
+    "endpoint_ungrounded": 7
+   },
+   "converts": {
+    "endpoint_ungrounded": 1
+   },
+   "corrects": {
+    "endpoint_ungrounded": 4
+   },
+   "correlates": {
+    "endpoint_ungrounded": 1
+   },
+   "costs": {
+    "endpoint_ungrounded": 1
+   },
+   "covers": {
+    "endpoint_ungrounded": 1
+   },
+   "created": {
+    "endpoint_ungrounded": 1
+   },
+   "creates": {
+    "endpoint_ungrounded": 4
+   },
+   "curved_by": {
+    "endpoint_ungrounded": 1
+   },
+   "curves": {
+    "endpoint_ungrounded": 1
+   },
+   "decays": {
+    "endpoint_ungrounded": 3
+   },
+   "decomposes": {
+    "endpoint_ungrounded": 2
+   },
+   "defines": {
+    "endpoint_ungrounded": 6
+   },
+   "deflects": {
+    "endpoint_ungrounded": 1
+   },
+   "delays": {
+    "endpoint_ungrounded": 1
+   },
+   "departs": {
+    "endpoint_ungrounded": 1
+   },
+   "depends_on": {
+    "endpoint_ungrounded": 21
+   },
+   "derives": {
+    "endpoint_ungrounded": 2
+   },
+   "describes": {
+    "endpoint_ungrounded": 20
+   },
+   "destroys": {
+    "endpoint_ungrounded": 3
+   },
+   "detects": {
+    "endpoint_ungrounded": 1
+   },
+   "determines": {
+    "endpoint_ungrounded": 9
+   },
+   "dilates": {
+    "endpoint_ungrounded": 2
+   },
+   "dissipates": {
+    "endpoint_ungrounded": 1
+   },
+   "divides": {
+    "endpoint_ungrounded": 1
+   },
+   "dominates": {
+    "endpoint_ungrounded": 1
+   },
+   "drives": {
+    "endpoint_ungrounded": 5
+   },
+   "emerges": {
+    "endpoint_ungrounded": 1
+   },
+   "emits": {
+    "endpoint_ungrounded": 6
+   },
+   "enables": {
+    "endpoint_ungrounded": 47
+   },
+   "encodes": {
+    "endpoint_ungrounded": 7
+   },
+   "enhances": {
+    "endpoint_ungrounded": 1
+   },
+   "equates": {
+    "endpoint_ungrounded": 1
+   },
+   "equation": {
+    "endpoint_ungrounded": 1
+   },
+   "establishes": {
+    "endpoint_ungrounded": 1
+   },
+   "evolves": {
+    "endpoint_ungrounded": 1
+   },
+   "executes": {
+    "endpoint_ungrounded": 1
+   },
+   "exemplifies": {
+    "endpoint_ungrounded": 1
+   },
+   "exhibits": {
+    "endpoint_ungrounded": 5
+   },
+   "expels": {
+    "endpoint_ungrounded": 1
+   },
+   "explains": {
+    "endpoint_ungrounded": 2
+   },
+   "fills": {
+    "endpoint_ungrounded": 1
+   },
+   "flows": {
+    "endpoint_ungrounded": 1
+   },
+   "follows": {
+    "endpoint_ungrounded": 1
+   },
+   "formalizes": {
+    "endpoint_ungrounded": 1
+   },
+   "forms": {
+    "endpoint_ungrounded": 1
+   },
+   "gates": {
+    "endpoint_ungrounded": 1
+   },
+   "generalizes": {
+    "endpoint_ungrounded": 9
+   },
+   "generates": {
+    "endpoint_ungrounded": 26
+   },
+   "glm_learned": {
+    "about_the_pipeline": 8
+   },
+   "governed_by": {
+    "endpoint_ungrounded": 1
+   },
+   "governs": {
+    "endpoint_ungrounded": 13
+   },
+   "grew": {
+    "endpoint_ungrounded": 1
+   },
+   "grounds": {
+    "endpoint_ungrounded": 1
+   },
+   "guarantees": {
+    "endpoint_ungrounded": 2
+   },
+   "has": {
+    "endpoint_ungrounded": 7
+   },
+   "has_property": {
+    "endpoint_ungrounded": 67
+   },
+   "identifies": {
+    "endpoint_ungrounded": 1
+   },
+   "implements": {
+    "endpoint_ungrounded": 1
+   },
+   "implies": {
+    "endpoint_ungrounded": 2
+   },
+   "increases": {
+    "endpoint_ungrounded": 2
+   },
+   "indicates": {
+    "endpoint_ungrounded": 1
+   },
+   "infers": {
+    "endpoint_ungrounded": 1
+   },
+   "inside": {
+    "endpoint_ungrounded": 1
+   },
+   "instance_of": {
+    "endpoint_ungrounded": 1
+   },
+   "integrates": {
+    "endpoint_ungrounded": 1
+   },
+   "intersects": {
+    "endpoint_ungrounded": 1
+   },
+   "invalidates": {
+    "endpoint_ungrounded": 1
+   },
+   "inverses": {
+    "endpoint_ungrounded": 2
+   },
+   "is_a": {
+    "endpoint_ungrounded": 23
+   },
+   "is_dual_to": {
+    "endpoint_ungrounded": 2
+   },
+   "is_zero": {
+    "endpoint_ungrounded": 1
+   },
+   "learned_success": {
+    "about_the_pipeline": 16
+   },
+   "limits": {
+    "endpoint_ungrounded": 4
+   },
+   "localizes": {
+    "endpoint_ungrounded": 2
+   },
+   "locates": {
+    "endpoint_ungrounded": 1
+   },
+   "maps": {
+    "endpoint_ungrounded": 3
+   },
+   "marks": {
+    "endpoint_ungrounded": 2
+   },
+   "maximizes": {
+    "endpoint_ungrounded": 1
+   },
+   "measures": {
+    "endpoint_ungrounded": 50,
+    "not_derivable": 1
+   },
+   "mediates": {
+    "endpoint_ungrounded": 6
+   },
+   "minimizes": {
+    "endpoint_ungrounded": 5
+   },
+   "not_solved_by": {
+    "endpoint_ungrounded": 1
+   },
+   "obeys": {
+    "endpoint_ungrounded": 1
+   },
+   "opposes": {
+    "endpoint_ungrounded": 4
+   },
+   "orders": {
+    "endpoint_ungrounded": 2
+   },
+   "organizes": {
+    "endpoint_ungrounded": 1
+   },
+   "packs": {
+    "endpoint_ungrounded": 1
+   },
+   "pairs": {
+    "endpoint_ungrounded": 2
+   },
+   "part_of": {
+    "endpoint_ungrounded": 4
+   },
+   "partitions": {
+    "endpoint_ungrounded": 1
+   },
+   "permits": {
+    "endpoint_ungrounded": 1
+   },
+   "pervades": {
+    "endpoint_ungrounded": 1
+   },
+   "precedes": {
+    "endpoint_ungrounded": 2
+   },
+   "predicted": {
+    "endpoint_ungrounded": 1
+   },
+   "predicts": {
+    "endpoint_ungrounded": 3
+   },
+   "preserves": {
+    "endpoint_ungrounded": 20
+   },
+   "prevents": {
+    "endpoint_ungrounded": 1
+   },
+   "produces": {
+    "endpoint_ungrounded": 23,
+    "not_derivable": 1
+   },
+   "propagates": {
+    "endpoint_ungrounded": 1
+   },
+   "protects": {
+    "endpoint_ungrounded": 2
+   },
+   "provides": {
+    "endpoint_ungrounded": 2
+   },
+   "quantifies": {
+    "derivable": 1,
+    "endpoint_ungrounded": 40
+   },
+   "quantizes": {
+    "endpoint_ungrounded": 1
+   },
+   "recognizes": {
+    "endpoint_ungrounded": 1
+   },
+   "records": {
+    "endpoint_ungrounded": 1
+   },
+   "redshifts": {
+    "endpoint_ungrounded": 1
+   },
+   "reduces": {
+    "endpoint_ungrounded": 3
+   },
+   "relates": {
+    "endpoint_ungrounded": 7
+   },
+   "removes": {
+    "endpoint_ungrounded": 3
+   },
+   "repeats": {
+    "endpoint_ungrounded": 1
+   },
+   "represents": {
+    "endpoint_ungrounded": 4
+   },
+   "requires": {
+    "endpoint_ungrounded": 8
+   },
+   "reveals": {
+    "endpoint_ungrounded": 1
+   },
+   "reverses": {
+    "endpoint_ungrounded": 1
+   },
+   "rotates": {
+    "endpoint_ungrounded": 1
+   },
+   "run": {
+    "about_the_pipeline": 15
+   },
+   "scales": {
+    "endpoint_ungrounded": 1
+   },
+   "scales_as": {
+    "endpoint_ungrounded": 1
+   },
+   "scatters": {
+    "endpoint_ungrounded": 1
+   },
+   "seeded": {
+    "endpoint_ungrounded": 1
+   },
+   "selects": {
+    "endpoint_ungrounded": 1
+   },
+   "separates": {
+    "endpoint_ungrounded": 2
+   },
+   "signals": {
+    "endpoint_ungrounded": 1
+   },
+   "simplifies": {
+    "endpoint_ungrounded": 1
+   },
+   "solves": {
+    "endpoint_ungrounded": 2
+   },
+   "solves_via": {
+    "endpoint_ungrounded": 24
+   },
+   "solves_via_arc_density_change": {
+    "endpoint_ungrounded": 1
+   },
+   "solves_via_arc_unknown": {
+    "endpoint_ungrounded": 1
+   },
+   "solves_via_border_colour_map": {
+    "endpoint_ungrounded": 1
+   },
+   "solves_via_colour_cascade_colour_map": {
+    "endpoint_ungrounded": 1
+   },
+   "solves_via_conditional_region_unknown": {
+    "endpoint_ungrounded": 1
+   },
+   "solves_via_connected_component_colour_map": {
+    "endpoint_ungrounded": 1
+   },
+   "solves_via_count_encode_density_change": {
+    "endpoint_ungrounded": 1
+   },
+   "solves_via_diagonal_density_change": {
+    "endpoint_ungrounded": 1
+   },
+   "solves_via_object_gravity_unknown": {
+    "endpoint_ungrounded": 1
+   },
+   "solves_via_pattern_tile_unknown": {
+    "endpoint_ungrounded": 1
+   },
+   "solves_via_symmetry_unknown": {
+    "endpoint_ungrounded": 1
+   },
+   "sources": {
+    "endpoint_ungrounded": 2
+   },
+   "spreads": {
+    "endpoint_ungrounded": 1
+   },
+   "states": {
+    "endpoint_ungrounded": 1
+   },
+   "stores": {
+    "endpoint_ungrounded": 3
+   },
+   "stretched": {
+    "endpoint_ungrounded": 1
+   },
+   "stretches": {
+    "endpoint_ungrounded": 1
+   },
+   "studies": {
+    "endpoint_ungrounded": 1
+   },
+   "sums": {
+    "endpoint_ungrounded": 3
+   },
+   "supports": {
+    "endpoint_ungrounded": 1
+   },
+   "surrounds": {
+    "endpoint_ungrounded": 1
+   },
+   "transfers": {
+    "derivable": 1,
+    "endpoint_ungrounded": 1
+   },
+   "transforms": {
+    "endpoint_ungrounded": 6
+   },
+   "transforms_via": {
+    "endpoint_ungrounded": 2
+   },
+   "transitions": {
+    "endpoint_ungrounded": 1
+   },
+   "unifies": {
+    "endpoint_ungrounded": 3
+   },
+   "uses": {
+    "endpoint_ungrounded": 2
+   },
+   "validates": {
+    "endpoint_ungrounded": 1
+   },
+   "violates": {
+    "endpoint_ungrounded": 2
+   },
+   "waves": {
+    "endpoint_ungrounded": 1
+   }
+  },
+  "classes": {
+   "about_the_pipeline": 39,
+   "derivable": 2,
+   "endpoint_ungrounded": 815,
+   "not_derivable": 2,
+   "proximity_artefact": 3157
+  },
+  "distinct_labels": 199,
+  "edges": 4015
+ },
+ "kind": "glm.semantics.purge_plan",
+ "notational_variants": {
+  "mean_legacy_hamming_between_synonyms": "359/30",
+  "reading": "in the meaning space every one of these pairs is at distance 0 by construction: they are one node with several notations",
+  "semantic_hamming_between_synonyms": 0,
+  "synonym_groups": 19,
+  "synonym_pairs": 30
+ },
+ "plan": {
+  "dumped": 4013,
+  "dumped_by_reason": {
+   "about_the_pipeline": 39,
+   "endpoint_ungrounded": 815,
+   "not_derivable": 2,
+   "proximity_artefact": 3157
+  },
+  "edges": 4015,
+  "reasons": {
+   "about_the_pipeline": "the label records a pipeline event, not a relation between the subjects",
+   "endpoint_ungrounded": "at least one endpoint denotes nothing determinate, so there is nothing for the relation to hold between",
+   "not_derivable": "both endpoints denote something, but no relation between those meanings can be derived and checked here",
+   "proximity_artefact": "the label is a carrier-proximity marker, so the edge states no relation that could be true or false of the subjects"
+  },
+  "retained": 2,
+  "retained_edges": [
+   {
+    "derived": [
+     "same_meaning",
+     "same_meaning"
+    ],
+    "dst": "energy",
+    "label": "transfers",
+    "src": "work",
+    "witness": "identical meanings: dimension L^2 M T^-2"
+   },
+   {
+    "derived": [
+     "same_meaning",
+     "same_meaning"
+    ],
+    "dst": "information",
+    "label": "quantifies",
+    "src": "bit",
+    "witness": "identical meanings: dimension B"
+   }
+  ]
+ },
+ "provenance": {
+  "measured_by": "glm_universal.semantics.audit.audit_report",
+  "reads": "arc_agi_17/results/glm_state.json",
+  "writes_to_that_file": false
+ },
+ "replacement": {
+  "all_edges_reverified": true,
+  "binary_edges": 6210,
+  "meanings": 357,
+  "notations": 1705,
+  "ternary_edges": 6649
+ }
+}

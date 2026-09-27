@@ -1,0 +1,1301 @@
+{
+ "guards": [
+  "strict",
+  "veto"
+ ],
+ "ladder": [
+  "8C",
+  "8A",
+  "4C",
+  "4A",
+  "2C",
+  "2A",
+  "C",
+  "A",
+  "2D",
+  "A/2",
+  "D",
+  "Z"
+ ],
+ "limits": "The samples and the four perturbations are those of operation_escalation, and the figures inherit its limits. The margin reading computes an exact distance to every carrier, so it is a second reading and not a second index.",
+ "margin_factor": 2,
+ "marks": {
+  "M1": "safety: on the program-text operation the guarded reading answers nothing wrongly",
+  "M2": "cost: on the program-text operation the guarded reading keeps at least 252 correct answers, half of the 503 the unguarded escalation gets",
+  "M3": "better than refusing more: the guard removes strictly more wrong answers than the matched-refusal control removes for the same number of answers given up",
+  "M4": "no damage elsewhere: on each other operation the guard introduces no wrong answer and loses at most half the correct answers"
+ },
+ "marks_report": {
+  "adopted": [
+   "strict+margin"
+  ],
+  "floor_M2": 252,
+  "marks": {
+   "M1": "safety: on the program-text operation the guarded reading answers nothing wrongly",
+   "M2": "cost: on the program-text operation the guarded reading keeps at least 252 correct answers, half of the 503 the unguarded escalation gets",
+   "M3": "better than refusing more: the guard removes strictly more wrong answers than the matched-refusal control removes for the same number of answers given up",
+   "M4": "no damage elsewhere: on each other operation the guard introduces no wrong answer and loses at most half the correct answers"
+  },
+  "share_M4": "1/2",
+  "shipped": "strict+margin",
+  "verdict": "1 of 6 configurations are adopted; the cheapest by answers given up is strict+margin",
+  "verdicts": {
+   "strict+both": {
+    "M1": true,
+    "M2": false,
+    "M3": false,
+    "M4": false,
+    "adopted": false,
+    "answers_given_up": 497,
+    "damage": [
+     "register: 541 -> 176 correct",
+     "dimension: 80 -> 0 correct",
+     "chemistry: 96 -> 41 correct",
+     "physics: 82 -> 0 correct",
+     "harmony: 95 -> 16 correct"
+    ],
+    "matched_control_wrongs_removed": 13,
+    "program": {
+     "correct": 19,
+     "queries": 576,
+     "refused": 557,
+     "wrong": 0
+    },
+    "wrongs_removed": 13
+   },
+   "strict+code": {
+    "M1": true,
+    "M2": false,
+    "M3": true,
+    "M4": false,
+    "adopted": false,
+    "answers_given_up": 495,
+    "damage": [
+     "register: 541 -> 176 correct",
+     "dimension: 80 -> 0 correct",
+     "chemistry: 96 -> 41 correct",
+     "physics: 82 -> 0 correct",
+     "harmony: 95 -> 16 correct"
+    ],
+    "matched_control_wrongs_removed": 12,
+    "program": {
+     "correct": 21,
+     "queries": 576,
+     "refused": 555,
+     "wrong": 0
+    },
+    "wrongs_removed": 13
+   },
+   "strict+margin": {
+    "M1": true,
+    "M2": true,
+    "M3": true,
+    "M4": true,
+    "adopted": true,
+    "answers_given_up": 150,
+    "damage": [],
+    "matched_control_wrongs_removed": 2,
+    "program": {
+     "correct": 366,
+     "queries": 576,
+     "refused": 210,
+     "wrong": 0
+    },
+    "wrongs_removed": 13
+   },
+   "veto+both": {
+    "M1": false,
+    "M2": true,
+    "M3": true,
+    "M4": true,
+    "adopted": false,
+    "answers_given_up": 17,
+    "damage": [],
+    "matched_control_wrongs_removed": 0,
+    "program": {
+     "correct": 490,
+     "queries": 576,
+     "refused": 77,
+     "wrong": 9
+    },
+    "wrongs_removed": 4
+   },
+   "veto+code": {
+    "M1": false,
+    "M2": true,
+    "M3": false,
+    "M4": true,
+    "adopted": false,
+    "answers_given_up": 13,
+    "damage": [],
+    "matched_control_wrongs_removed": 0,
+    "program": {
+     "correct": 490,
+     "queries": 576,
+     "refused": 73,
+     "wrong": 13
+    },
+    "wrongs_removed": 0
+   },
+   "veto+margin": {
+    "M1": false,
+    "M2": true,
+    "M3": true,
+    "M4": true,
+    "adopted": false,
+    "answers_given_up": 4,
+    "damage": [],
+    "matched_control_wrongs_removed": 0,
+    "program": {
+     "correct": 503,
+     "queries": 576,
+     "refused": 64,
+     "wrong": 9
+    },
+    "wrongs_removed": 4
+   }
+  }
+ },
+ "operations": [
+  {
+   "configurations": {
+    "strict+both": {
+     "answers_given_up": 365,
+     "control_matched_refusal": {
+      "correct": 176,
+      "queries": 568,
+      "refused": 392,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 0,
+      "queries": 568,
+      "refused": 568,
+      "wrong": 0
+     },
+     "guard": "strict",
+     "reading": "both",
+     "score": {
+      "correct": 176,
+      "queries": 568,
+      "refused": 392,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "strict+code": {
+     "answers_given_up": 365,
+     "control_matched_refusal": {
+      "correct": 176,
+      "queries": 568,
+      "refused": 392,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 0,
+      "queries": 568,
+      "refused": 568,
+      "wrong": 0
+     },
+     "guard": "strict",
+     "reading": "code",
+     "score": {
+      "correct": 176,
+      "queries": 568,
+      "refused": 392,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "strict+margin": {
+     "answers_given_up": 13,
+     "control_matched_refusal": {
+      "correct": 528,
+      "queries": 568,
+      "refused": 40,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 88,
+      "queries": 568,
+      "refused": 480,
+      "wrong": 0
+     },
+     "guard": "strict",
+     "reading": "margin",
+     "score": {
+      "correct": 528,
+      "queries": 568,
+      "refused": 40,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "veto+both": {
+     "answers_given_up": 3,
+     "control_matched_refusal": {
+      "correct": 538,
+      "queries": 568,
+      "refused": 30,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 167,
+      "queries": 568,
+      "refused": 401,
+      "wrong": 0
+     },
+     "guard": "veto",
+     "reading": "both",
+     "score": {
+      "correct": 538,
+      "queries": 568,
+      "refused": 30,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "veto+code": {
+     "answers_given_up": 3,
+     "control_matched_refusal": {
+      "correct": 538,
+      "queries": 568,
+      "refused": 30,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 512,
+      "queries": 568,
+      "refused": 56,
+      "wrong": 0
+     },
+     "guard": "veto",
+     "reading": "code",
+     "score": {
+      "correct": 538,
+      "queries": 568,
+      "refused": 30,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "veto+margin": {
+     "answers_given_up": 0,
+     "control_matched_refusal": {
+      "correct": 541,
+      "queries": 568,
+      "refused": 27,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 167,
+      "queries": 568,
+      "refused": 401,
+      "wrong": 0
+     },
+     "guard": "veto",
+     "reading": "margin",
+     "score": {
+      "correct": 541,
+      "queries": 568,
+      "refused": 27,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    }
+   },
+   "operation": "register",
+   "queries": 568,
+   "readings": {
+    "code": {
+     "correct": 178,
+     "queries": 568,
+     "refused": 387,
+     "wrong": 3
+    },
+    "code_reshuffled": {
+     "correct": 0,
+     "queries": 568,
+     "refused": 539,
+     "wrong": 29
+    },
+    "margin": {
+     "correct": 539,
+     "queries": 568,
+     "refused": 29,
+     "wrong": 0
+    },
+    "margin_reshuffled": {
+     "correct": 88,
+     "queries": 568,
+     "refused": 101,
+     "wrong": 379
+    },
+    "primary": {
+     "correct": 541,
+     "queries": 568,
+     "refused": 27,
+     "wrong": 0
+    }
+   },
+   "title": "meaning: which register is this?"
+  },
+  {
+   "configurations": {
+    "strict+both": {
+     "answers_given_up": 80,
+     "control_matched_refusal": {
+      "correct": 0,
+      "queries": 96,
+      "refused": 96,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 0,
+      "queries": 96,
+      "refused": 96,
+      "wrong": 0
+     },
+     "guard": "strict",
+     "reading": "both",
+     "score": {
+      "correct": 0,
+      "queries": 96,
+      "refused": 96,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "strict+code": {
+     "answers_given_up": 80,
+     "control_matched_refusal": {
+      "correct": 0,
+      "queries": 96,
+      "refused": 96,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 0,
+      "queries": 96,
+      "refused": 96,
+      "wrong": 0
+     },
+     "guard": "strict",
+     "reading": "code",
+     "score": {
+      "correct": 0,
+      "queries": 96,
+      "refused": 96,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "strict+margin": {
+     "answers_given_up": 21,
+     "control_matched_refusal": {
+      "correct": 59,
+      "queries": 96,
+      "refused": 37,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 9,
+      "queries": 96,
+      "refused": 87,
+      "wrong": 0
+     },
+     "guard": "strict",
+     "reading": "margin",
+     "score": {
+      "correct": 59,
+      "queries": 96,
+      "refused": 37,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "veto+both": {
+     "answers_given_up": 0,
+     "control_matched_refusal": {
+      "correct": 80,
+      "queries": 96,
+      "refused": 16,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 39,
+      "queries": 96,
+      "refused": 57,
+      "wrong": 0
+     },
+     "guard": "veto",
+     "reading": "both",
+     "score": {
+      "correct": 80,
+      "queries": 96,
+      "refused": 16,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "veto+code": {
+     "answers_given_up": 0,
+     "control_matched_refusal": {
+      "correct": 80,
+      "queries": 96,
+      "refused": 16,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 80,
+      "queries": 96,
+      "refused": 16,
+      "wrong": 0
+     },
+     "guard": "veto",
+     "reading": "code",
+     "score": {
+      "correct": 80,
+      "queries": 96,
+      "refused": 16,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "veto+margin": {
+     "answers_given_up": 0,
+     "control_matched_refusal": {
+      "correct": 80,
+      "queries": 96,
+      "refused": 16,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 39,
+      "queries": 96,
+      "refused": 57,
+      "wrong": 0
+     },
+     "guard": "veto",
+     "reading": "margin",
+     "score": {
+      "correct": 80,
+      "queries": 96,
+      "refused": 16,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    }
+   },
+   "operation": "dimension",
+   "queries": 96,
+   "readings": {
+    "code": {
+     "correct": 0,
+     "queries": 96,
+     "refused": 96,
+     "wrong": 0
+    },
+    "code_reshuffled": {
+     "correct": 0,
+     "queries": 96,
+     "refused": 96,
+     "wrong": 0
+    },
+    "margin": {
+     "correct": 63,
+     "queries": 96,
+     "refused": 33,
+     "wrong": 0
+    },
+    "margin_reshuffled": {
+     "correct": 9,
+     "queries": 96,
+     "refused": 42,
+     "wrong": 45
+    },
+    "primary": {
+     "correct": 80,
+     "queries": 96,
+     "refused": 16,
+     "wrong": 0
+    }
+   },
+   "title": "dimensional reasoning: what are the SI exponents?"
+  },
+  {
+   "configurations": {
+    "strict+both": {
+     "answers_given_up": 55,
+     "control_matched_refusal": {
+      "correct": 41,
+      "queries": 96,
+      "refused": 55,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 7,
+      "queries": 96,
+      "refused": 89,
+      "wrong": 0
+     },
+     "guard": "strict",
+     "reading": "both",
+     "score": {
+      "correct": 41,
+      "queries": 96,
+      "refused": 55,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "strict+code": {
+     "answers_given_up": 55,
+     "control_matched_refusal": {
+      "correct": 41,
+      "queries": 96,
+      "refused": 55,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 7,
+      "queries": 96,
+      "refused": 89,
+      "wrong": 0
+     },
+     "guard": "strict",
+     "reading": "code",
+     "score": {
+      "correct": 41,
+      "queries": 96,
+      "refused": 55,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "strict+margin": {
+     "answers_given_up": 0,
+     "control_matched_refusal": {
+      "correct": 96,
+      "queries": 96,
+      "refused": 0,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 24,
+      "queries": 96,
+      "refused": 72,
+      "wrong": 0
+     },
+     "guard": "strict",
+     "reading": "margin",
+     "score": {
+      "correct": 96,
+      "queries": 96,
+      "refused": 0,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "veto+both": {
+     "answers_given_up": 0,
+     "control_matched_refusal": {
+      "correct": 96,
+      "queries": 96,
+      "refused": 0,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 24,
+      "queries": 96,
+      "refused": 72,
+      "wrong": 0
+     },
+     "guard": "veto",
+     "reading": "both",
+     "score": {
+      "correct": 96,
+      "queries": 96,
+      "refused": 0,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "veto+code": {
+     "answers_given_up": 0,
+     "control_matched_refusal": {
+      "correct": 96,
+      "queries": 96,
+      "refused": 0,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 65,
+      "queries": 96,
+      "refused": 31,
+      "wrong": 0
+     },
+     "guard": "veto",
+     "reading": "code",
+     "score": {
+      "correct": 96,
+      "queries": 96,
+      "refused": 0,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "veto+margin": {
+     "answers_given_up": 0,
+     "control_matched_refusal": {
+      "correct": 96,
+      "queries": 96,
+      "refused": 0,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 24,
+      "queries": 96,
+      "refused": 72,
+      "wrong": 0
+     },
+     "guard": "veto",
+     "reading": "margin",
+     "score": {
+      "correct": 96,
+      "queries": 96,
+      "refused": 0,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    }
+   },
+   "operation": "chemistry",
+   "queries": 96,
+   "readings": {
+    "code": {
+     "correct": 41,
+     "queries": 96,
+     "refused": 55,
+     "wrong": 0
+    },
+    "code_reshuffled": {
+     "correct": 7,
+     "queries": 96,
+     "refused": 58,
+     "wrong": 31
+    },
+    "margin": {
+     "correct": 96,
+     "queries": 96,
+     "refused": 0,
+     "wrong": 0
+    },
+    "margin_reshuffled": {
+     "correct": 24,
+     "queries": 96,
+     "refused": 0,
+     "wrong": 72
+    },
+    "primary": {
+     "correct": 96,
+     "queries": 96,
+     "refused": 0,
+     "wrong": 0
+    }
+   },
+   "title": "the chemistry register: which block of the table?"
+  },
+  {
+   "configurations": {
+    "strict+both": {
+     "answers_given_up": 82,
+     "control_matched_refusal": {
+      "correct": 0,
+      "queries": 96,
+      "refused": 96,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 0,
+      "queries": 96,
+      "refused": 96,
+      "wrong": 0
+     },
+     "guard": "strict",
+     "reading": "both",
+     "score": {
+      "correct": 0,
+      "queries": 96,
+      "refused": 96,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "strict+code": {
+     "answers_given_up": 82,
+     "control_matched_refusal": {
+      "correct": 0,
+      "queries": 96,
+      "refused": 96,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 0,
+      "queries": 96,
+      "refused": 96,
+      "wrong": 0
+     },
+     "guard": "strict",
+     "reading": "code",
+     "score": {
+      "correct": 0,
+      "queries": 96,
+      "refused": 96,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "strict+margin": {
+     "answers_given_up": 23,
+     "control_matched_refusal": {
+      "correct": 59,
+      "queries": 96,
+      "refused": 37,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 2,
+      "queries": 96,
+      "refused": 94,
+      "wrong": 0
+     },
+     "guard": "strict",
+     "reading": "margin",
+     "score": {
+      "correct": 59,
+      "queries": 96,
+      "refused": 37,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "veto+both": {
+     "answers_given_up": 0,
+     "control_matched_refusal": {
+      "correct": 82,
+      "queries": 96,
+      "refused": 14,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 35,
+      "queries": 96,
+      "refused": 61,
+      "wrong": 0
+     },
+     "guard": "veto",
+     "reading": "both",
+     "score": {
+      "correct": 82,
+      "queries": 96,
+      "refused": 14,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "veto+code": {
+     "answers_given_up": 0,
+     "control_matched_refusal": {
+      "correct": 82,
+      "queries": 96,
+      "refused": 14,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 82,
+      "queries": 96,
+      "refused": 14,
+      "wrong": 0
+     },
+     "guard": "veto",
+     "reading": "code",
+     "score": {
+      "correct": 82,
+      "queries": 96,
+      "refused": 14,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "veto+margin": {
+     "answers_given_up": 0,
+     "control_matched_refusal": {
+      "correct": 82,
+      "queries": 96,
+      "refused": 14,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 35,
+      "queries": 96,
+      "refused": 61,
+      "wrong": 0
+     },
+     "guard": "veto",
+     "reading": "margin",
+     "score": {
+      "correct": 82,
+      "queries": 96,
+      "refused": 14,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    }
+   },
+   "operation": "physics",
+   "queries": 96,
+   "readings": {
+    "code": {
+     "correct": 0,
+     "queries": 96,
+     "refused": 96,
+     "wrong": 0
+    },
+    "code_reshuffled": {
+     "correct": 0,
+     "queries": 96,
+     "refused": 96,
+     "wrong": 0
+    },
+    "margin": {
+     "correct": 66,
+     "queries": 96,
+     "refused": 30,
+     "wrong": 0
+    },
+    "margin_reshuffled": {
+     "correct": 2,
+     "queries": 96,
+     "refused": 43,
+     "wrong": 51
+    },
+    "primary": {
+     "correct": 82,
+     "queries": 96,
+     "refused": 14,
+     "wrong": 0
+    }
+   },
+   "title": "the physics register: which sub-domain?"
+  },
+  {
+   "configurations": {
+    "strict+both": {
+     "answers_given_up": 79,
+     "control_matched_refusal": {
+      "correct": 16,
+      "queries": 96,
+      "refused": 80,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 0,
+      "queries": 96,
+      "refused": 96,
+      "wrong": 0
+     },
+     "guard": "strict",
+     "reading": "both",
+     "score": {
+      "correct": 16,
+      "queries": 96,
+      "refused": 80,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "strict+code": {
+     "answers_given_up": 79,
+     "control_matched_refusal": {
+      "correct": 16,
+      "queries": 96,
+      "refused": 80,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 0,
+      "queries": 96,
+      "refused": 96,
+      "wrong": 0
+     },
+     "guard": "strict",
+     "reading": "code",
+     "score": {
+      "correct": 16,
+      "queries": 96,
+      "refused": 80,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "strict+margin": {
+     "answers_given_up": 0,
+     "control_matched_refusal": {
+      "correct": 95,
+      "queries": 96,
+      "refused": 1,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 39,
+      "queries": 96,
+      "refused": 57,
+      "wrong": 0
+     },
+     "guard": "strict",
+     "reading": "margin",
+     "score": {
+      "correct": 95,
+      "queries": 96,
+      "refused": 1,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "veto+both": {
+     "answers_given_up": 0,
+     "control_matched_refusal": {
+      "correct": 95,
+      "queries": 96,
+      "refused": 1,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 39,
+      "queries": 96,
+      "refused": 57,
+      "wrong": 0
+     },
+     "guard": "veto",
+     "reading": "both",
+     "score": {
+      "correct": 95,
+      "queries": 96,
+      "refused": 1,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "veto+code": {
+     "answers_given_up": 0,
+     "control_matched_refusal": {
+      "correct": 95,
+      "queries": 96,
+      "refused": 1,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 83,
+      "queries": 96,
+      "refused": 13,
+      "wrong": 0
+     },
+     "guard": "veto",
+     "reading": "code",
+     "score": {
+      "correct": 95,
+      "queries": 96,
+      "refused": 1,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    },
+    "veto+margin": {
+     "answers_given_up": 0,
+     "control_matched_refusal": {
+      "correct": 95,
+      "queries": 96,
+      "refused": 1,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 39,
+      "queries": 96,
+      "refused": 57,
+      "wrong": 0
+     },
+     "guard": "veto",
+     "reading": "margin",
+     "score": {
+      "correct": 95,
+      "queries": 96,
+      "refused": 1,
+      "wrong": 0
+     },
+     "wrongs_removed": 0
+    }
+   },
+   "operation": "harmony",
+   "queries": 96,
+   "readings": {
+    "code": {
+     "correct": 16,
+     "queries": 96,
+     "refused": 80,
+     "wrong": 0
+    },
+    "code_reshuffled": {
+     "correct": 0,
+     "queries": 96,
+     "refused": 84,
+     "wrong": 12
+    },
+    "margin": {
+     "correct": 96,
+     "queries": 96,
+     "refused": 0,
+     "wrong": 0
+    },
+    "margin_reshuffled": {
+     "correct": 40,
+     "queries": 96,
+     "refused": 0,
+     "wrong": 56
+    },
+    "primary": {
+     "correct": 95,
+     "queries": 96,
+     "refused": 1,
+     "wrong": 0
+    }
+   },
+   "title": "small-integer structure: what is the prime limit?"
+  },
+  {
+   "configurations": {
+    "strict+both": {
+     "answers_given_up": 497,
+     "control_matched_refusal": {
+      "correct": 19,
+      "queries": 576,
+      "refused": 557,
+      "wrong": 0
+     },
+     "control_matched_wrongs_removed": 13,
+     "control_reshuffled": {
+      "correct": 6,
+      "queries": 576,
+      "refused": 570,
+      "wrong": 0
+     },
+     "guard": "strict",
+     "reading": "both",
+     "score": {
+      "correct": 19,
+      "queries": 576,
+      "refused": 557,
+      "wrong": 0
+     },
+     "wrongs_removed": 13
+    },
+    "strict+code": {
+     "answers_given_up": 495,
+     "control_matched_refusal": {
+      "correct": 20,
+      "queries": 576,
+      "refused": 555,
+      "wrong": 1
+     },
+     "control_matched_wrongs_removed": 12,
+     "control_reshuffled": {
+      "correct": 10,
+      "queries": 576,
+      "refused": 566,
+      "wrong": 0
+     },
+     "guard": "strict",
+     "reading": "code",
+     "score": {
+      "correct": 21,
+      "queries": 576,
+      "refused": 555,
+      "wrong": 0
+     },
+     "wrongs_removed": 13
+    },
+    "strict+margin": {
+     "answers_given_up": 150,
+     "control_matched_refusal": {
+      "correct": 355,
+      "queries": 576,
+      "refused": 210,
+      "wrong": 11
+     },
+     "control_matched_wrongs_removed": 2,
+     "control_reshuffled": {
+      "correct": 46,
+      "queries": 576,
+      "refused": 529,
+      "wrong": 1
+     },
+     "guard": "strict",
+     "reading": "margin",
+     "score": {
+      "correct": 366,
+      "queries": 576,
+      "refused": 210,
+      "wrong": 0
+     },
+     "wrongs_removed": 13
+    },
+    "veto+both": {
+     "answers_given_up": 17,
+     "control_matched_refusal": {
+      "correct": 486,
+      "queries": 576,
+      "refused": 77,
+      "wrong": 13
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 301,
+      "queries": 576,
+      "refused": 265,
+      "wrong": 10
+     },
+     "guard": "veto",
+     "reading": "both",
+     "score": {
+      "correct": 490,
+      "queries": 576,
+      "refused": 77,
+      "wrong": 9
+     },
+     "wrongs_removed": 4
+    },
+    "veto+code": {
+     "answers_given_up": 13,
+     "control_matched_refusal": {
+      "correct": 490,
+      "queries": 576,
+      "refused": 73,
+      "wrong": 13
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 493,
+      "queries": 576,
+      "refused": 70,
+      "wrong": 13
+     },
+     "guard": "veto",
+     "reading": "code",
+     "score": {
+      "correct": 490,
+      "queries": 576,
+      "refused": 73,
+      "wrong": 13
+     },
+     "wrongs_removed": 0
+    },
+    "veto+margin": {
+     "answers_given_up": 4,
+     "control_matched_refusal": {
+      "correct": 499,
+      "queries": 576,
+      "refused": 64,
+      "wrong": 13
+     },
+     "control_matched_wrongs_removed": 0,
+     "control_reshuffled": {
+      "correct": 304,
+      "queries": 576,
+      "refused": 262,
+      "wrong": 10
+     },
+     "guard": "veto",
+     "reading": "margin",
+     "score": {
+      "correct": 503,
+      "queries": 576,
+      "refused": 64,
+      "wrong": 9
+     },
+     "wrongs_removed": 4
+    }
+   },
+   "operation": "program",
+   "queries": 576,
+   "readings": {
+    "code": {
+     "correct": 24,
+     "queries": 576,
+     "refused": 536,
+     "wrong": 16
+    },
+    "code_reshuffled": {
+     "correct": 12,
+     "queries": 576,
+     "refused": 552,
+     "wrong": 12
+    },
+    "margin": {
+     "correct": 384,
+     "queries": 576,
+     "refused": 192,
+     "wrong": 0
+    },
+    "margin_reshuffled": {
+     "correct": 50,
+     "queries": 576,
+     "refused": 319,
+     "wrong": 207
+    },
+    "primary": {
+     "correct": 503,
+     "queries": 576,
+     "refused": 60,
+     "wrong": 13
+    }
+   },
+   "title": "program text: which file is this declaration from?"
+  }
+ ],
+ "readings": [
+  "code",
+  "margin",
+  "both"
+ ],
+ "source_digest": "9963d2bff14d335f12f862eb872dba42047b991e592a403b0a4fb3b6400c4870"
+}

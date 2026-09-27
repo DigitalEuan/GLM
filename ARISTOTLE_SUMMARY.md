@@ -1,3 +1,180 @@
+# Summary of changes for run d1831aac-6d80-429e-b07f-83178e4d4fb1
+I picked up the project at the end of Phase 70 (native parity). The code, the Lean file `NativeParity.lean` and the write-up were already there and marked closed in `MASTER_PLAN.md`, `STATUS.md` and `WHITEBOARD.md`. But the round's close-out had not finished: two stored measurements were out of date and the release had not been signed. Phase 70 is now fully closed.
+
+**What I did**
+- **Lean check:** `lake build` completes with no errors or warnings, and there is no `sorry` in `RequestProject`. The Phase 70 theorems I spot-checked (`order_agrees_of_gap`, `readback_eq_leech`, `residue_congr`, `sorted_primary_of_sorted_lex`) use only the standard axioms.
+- **Documents check:** the first `corpus --check` said two stored measurements were stale (native parity and query escalation) and so were several generated blocks in the studies. I re-took both measurements, rebuilt the document address book, and ran `corpus --refresh`.
+  - The stale measurements had left placeholders in `studies/NATIVE_PARITY_STUDY.md`. Once refreshed, the study came back identical to its committed text, so the Phase 70 figures and marks stand as recorded.
+  - `studies/QUERY_ESCALATION_STUDY.md` has its generated tables filled in again.
+  - `corpus --check` now reports current.
+- **Release:** the first release attempt failed only because this environment lacked `pytest`; no test itself failed. I installed it and resumed the release. `signoff --verify-release` now reports **116 of 116 test files and 7 of 7 instruments** with signatures that still hold.
+- **Properties table:** two older rows had finished proofs but were still in progress: `GLM.Foundations.xor_blind` and `GLM.Gen2.xor_is_blind_on_rational_meanings`, the mod-2 limit results. I checked their axioms and marked them proved. I also confirmed the Phase 70 row `native-parity-readback-exact` is proved.
+- **Caveat on the table:** it is too long for me to list in full, so I can't confirm every older row is up to date.
+
+All work is committed. No new round has been started. The next round would begin from `STATUS.md` §3.4. The candidates listed first are:
+- **N, native past parity:** resampling the Lean corpus, a third native book for documents, a native word ranking, and shipping the text tie-break.
+- **M, reverse Three Column Thinking round four:** strings and tuples, a small imperative grammar, a complete integer decision, and extending the planner loop.
+
+# Summary of changes for run d074e94e-f7e4-4ce4-8b31-72572651a701
+The previous session had finished Phase 68 (reverse Three Column Thinking, round two) and signed its release, but it ran out of time before writing up its Lean results. I checked that this work still stands: `signoff --verify-release` passed, the Lean tree built with no `sorry`, and `corpus --check` was current. I then brought the properties table up to date. The round-two proofs in `ReverseTCTTwo.lean` are now marked proved: unique readability, exact negation with its simplification, and Python's floor/remainder convention. Three older rows had proofs but were still marked in progress (`NormFamily`, `Gen3`); I re-checked their axioms and marked them proved.
+
+I then took the next open item, the integer-variable part of candidate M, as **Phase 69**. The marks X1–X7 and every expected answer (`evaluation/reverse_tct_int_cases.py`) were committed before any code was written. Everything below was measured here.
+
+**What was built**
+- `overlay/glm_universal/reasoning/reverse_tct_int.py` adds two new question forms: `entails over the integers: P ; C` and `bounds over the integers of x: P`.
+  - `x // b` and `x % b` split into one case per remainder when the divisor is an integer constant with |b| ≤ 64. Over ℚ these are refused as `NOT_POLYNOMIAL`.
+  - Each case is decided over the integers by elimination, rounding every inequality to its tightest integer form.
+  - When the system has no integer solution, the answer comes with the chain of combined inequalities that rules it out.
+  - When neither that proof nor an integer solution is found, the answer is a new named refusal, `INTEGER_UNDECIDED`, because this method can miss some cases.
+- Each answer comes with its own checking script, which redoes the case split, every rounding step and every witness point with separate code.
+- You can reach it through `GLM.py --ask`, `GLM.py --reverse` and `tools reverse-tct --three`. It has 17 tests in `tests/test_reverse_tct_int.py`.
+
+**Results** (write-up in `studies/REVERSE_TCT_STUDY.md` §10–§12)
+- All 29 entailment cases and all 10 bounds cases gave the expected answer, 0 wrong.
+- All 34 checking scripts print `VERIFIED True`, and all 34 deliberately altered copies are rejected.
+- 116 test questions set inside a small range all match checking every point in that range.
+- Asked over ℚ instead, the same 29 entailment questions get 20 refusals and 9 different answers. For example, over ℚ `x > 2` does not entail `x ≥ 3`, and `2x = 1` has a solution.
+- **Limitation:** a well-known example with no integer solution (Pugh's system) is refused `INTEGER_UNDECIDED` rather than decided. A "nothing bounds x" answer is not certified by the checking script, as in the earlier rounds. The planner relay does not yet read integer answers.
+
+**Lean proofs** (`RequestProject/GLM/ReverseTCTThree.lean`, copied into `overlay/glm_lean`, standard axioms only, no `sorry`; added to your properties table as proved)
+- Python's `//` and `%` on integers are exactly the quotient and remainder of `a = b·q + r` in the right range, and these remainder cases cover every integer.
+- Both rounding steps are exact over the integers.
+- Any chain of combined inequalities that the checking script accepts keeps every integer solution, so reaching a contradiction proves there are none.
+- A system with no rational solution has no integer solution.
+- `2x = 1` has a rational solution and no integer one.
+
+**Round close-out**
+- Adding the new files moved two measured search figures, and I updated their expected values:
+  - Stack relay: 747 → 754 of 881, now carrying 18 queries (was 17) and losing 0.
+  - Anonymous reader: 747 → 82 and 244 → 175 of 881.
+- The count of 3,963 declarations, 139 Lean files and 115 test files is now current in the documents. I also brought the rebuild-cost table in `ITERATION_COST_STUDY.md` and the gate-sweep prose in the stack-relay study up to date.
+- `STATUS.md`, `MASTER_PLAN.md` (Phase 69), `WHITEBOARD.md`, the READMEs and the tool catalogue are updated. Candidate M in `STATUS.md` §3.4 now lists only its remaining items.
+- Final state: `lake build` succeeds, `corpus --check` is current, and `signoff --verify-release` reports 115 of 115 test files and 7 of 7 instruments with signatures that still hold. All work is committed.
+
+# Summary of changes for run 7722e454-1de9-4e37-833e-2da04d554cdb
+This round adds reverse Three Column Thinking as Phase 67: the GLM now writes the language column itself, working from the script and the mathematics. The round is closed and signed off: `signoff --verify-release` reports 113 of 113 test files and 7 of 7 instruments with signatures that still hold. The Lean module builds with no `sorry`.
+
+**What was built**
+- `overlay/glm_universal/reasoning/reverse_tct.py` turns an exact term, statement or set of statements into an English sentence and reads the sentence back.
+- The semantic operations work on the mathematics, not on the words:
+  - `say` (state it in English)
+  - `equivalent` and `paraphrase`, which come with a certificate
+  - `negate`
+  - `solve` (a solved form)
+  - `entails`, which returns ENTAILS, CONTRADICTS or INCONSISTENT_PREMISES with a certificate that can be checked
+  - `bounds` (the tightest bounds the statements imply)
+- `reasoning/reverse_tct_script.py` writes the column-3 script for each case. It also changes each script on purpose to confirm the checker notices, and runs a comparison against a normal infix grammar.
+- You can reach it through `GLM.py --reverse`, through `GLM.py --ask` (via a new `reverse` route in the router), or with `tools reverse-tct`.
+- There are 23 tests in `tests/test_reverse_tct.py`. The study, with its plan written before the code, is `studies/REVERSE_TCT_STUDY.md`.
+
+**Measured results**
+- All 176,617 terms in the test set turn into sentences and read back correctly, and no two terms share a sentence. The infix grammar used for comparison gives 5,684 sentences that stand for more than one term.
+- All the planned cases give the planned answers, with 0 wrong: 34 `entails`, 14 `solve`, 10 `bounds`, 18 `equivalent`, 4 `negate`, and 36 `say` cases (24 + 7 + 5), five of which correctly refuse.
+- All 94 generated scripts pass their check, and all 69 deliberately broken versions are caught.
+- A reader that only has the sentences answers 0 of the 58 comparison questions; the operations answer all 58.
+
+**Lean proofs** (`RequestProject/GLM/ReverseTCT.lean`, standard axioms only, added to your properties table as proved)
+- The English grammar is unambiguous: no sentence is the start of another, and different terms, statements and sets of statements always give different sentences.
+- The infix grammar is ambiguous.
+- `negate` is exact.
+- The Farkas certificate behind `entails` does rule out every point that would satisfy the statements.
+- The grid check the scripts use proves two polynomials are equal.
+
+**Round close-out**
+- The new study and code grew the searched Lean collection to 3,900 declarations. That moved two figures elsewhere, and the expected answers were updated to the new values:
+  - **Stack relay:** it now carries 18 queries the single wheel misses (19 before) and loses 0, scoring 737 → 744 of 867 queries. It is still strictly ahead on all five gates up to 1/4.
+  - **Anonymous reader:** it now scores 737 → 81 and 239 → 170 of 867.
+- The query-escalation measurement was re-taken. Documents quoting counts were brought up to date: 3,900 declarations, 137 Lean files, the rebuild-cost table in `ITERATION_COST_STUDY.md`, the suite totals, and README entries for the new modules and test file.
+- `pytest` was missing from the environment and was installed. The previous round had not taken its release; this round took it.
+- `STATUS.md`, `MASTER_PLAN.md` (Phase 67, with a note on the moved figures) and `WHITEBOARD.md` are updated. A next step is listed as candidate L in `STATUS.md` §3.4.
+- All work is committed.
+
+# Summary of changes for run a444cc38-5499-4476-b134-4657cb395dd1
+**Phase 65 ("carried fork") is done and committed: the release signs off at 111 of 111 test files and 7 of 7 instruments.** It does what you asked for the ambiguous Golay items. The GLM no longer stops with `AMBIGUOUS` when it hits the six equally close candidates at coset weight 4. It keeps all six, plus a ledger of why each one is still in play or has been dropped, until a later step picks one, filters them out, or proves them wrong. Escalation to the Leech lattice is tested alongside.
+
+**What was built**
+- `studies/CARRIED_FORK_STUDY.md`: the claims (K1–K4) were written down before any code, then the results, the wiring and next steps.
+- `overlay/glm_universal/reasoning/carried_fork.py`: the carried-fork object and its ways of narrowing the set:
+  - **context:** restrict to the known cases;
+  - **second reading:** intersect with the candidates from a second observation;
+  - **unsure set:** rule out candidates whose error pattern doesn't fit the coordinates flagged as unreliable.
+- Two Leech escalations sit beside the fork:
+  - **hard lift:** proves that each tie lifts to a deep hole of type A₁²⁴ in the Leech lattice;
+  - **soft estimate:** ranks candidates by how reliable the read was.
+- Python dialect (`GLM.py --python`): four new builtins, `nearest`, `resolve`, `agree` and `resolve_unsure`. They return the resolution or a refusal that says why.
+- A `carried-fork` subcommand in `tools.py`, and 18 new tests in `tests/test_carried_fork.py`, including one exhaustive test.
+
+**Results (from the study's tool, all exact counts)**
+- **K1, context:** 592,268 of 658,812 answered, 0 wrong. **Target missed:** 85.8% at k=32 against a 90% target. This only holds when the true answer is known to be among the listed cases; without that assumption, misreads do occur (14 to 112 per 768).
+- **K2, second reading:** 4,224 of 4,224 resolved, 0 wrong. Met.
+- **K3, unsure set:** 3,840 of 3,840 resolved, 0 wrong. Met.
+- **K4a, hard lift:** all 1,771 cosets confirmed as A₁²⁴ deep holes with 48 vertices each. Met.
+- **K4b, soft estimate:** **Target missed.** Right on 512 of 768 reads, wrong on 96, tied on 160. For comparison, snapping to the nearest point got 154, soft maximum-likelihood 480, and an unconstrained Leech decoder 560. This is why the soft estimate stays a side estimate and the fork is still carried.
+- **K4c:** 448 answered, 0 wrong. Met.
+- **After the fact:** a second reading resolved 35,872 of 48,320 open forks, with 0 wrong.
+
+**Lean**
+`RequestProject/GLM/CarriedFork.lean` builds with only the standard axioms and contains no `sorry`. It is mirrored to `overlay/glm_lean/`. It proves 14 theorems:
+- the correct answer is never pruned (`truth_survives`);
+- a fork narrowed to one candidate gives the correct answer (`resolved_eq_truth`);
+- a candidate that contradicts the evidence is ruled out (`contradicted_refutes`);
+- at most one candidate fits (`at_most_one_fits`), and a small enough unsure set resolves the fork (`unsure_resolves`);
+- the soft-reading cost formula (`soft_cost_coord`, `soft_cost_sum`);
+- the distance bounds behind the Leech lift (`even_lift_coord`, `even_lift_dist`, `odd_lift_dist`);
+- basic facts about the ledger and the live set.
+
+Four of these are recorded as proved in the Properties table. The 48-vertex count and the check over all 1,771 cosets are exact computations, not Lean theorems.
+
+**Other changes this round**
+- Adding this round's files changed some existing figures, and the affected documents were updated:
+  - the stack-relay figures, now recorded as a strict gain only at 1/5 (at 1/4 it is below the control);
+  - the evaluation expectations;
+  - the iteration-cost table;
+  - the suite and corpus figures.
+- STATUS, MASTER_PLAN (Phase 65), WHITEBOARD, ENTRY and the READMEs are updated. The sign-off check (`signoff --verify-release`) passes.
+
+# Summary of changes for run cdc2e4ef-d262-4bc0-aa93-45cde9cba108
+The GLM can now "speak" a deterministic subset of Python. It was recorded as Phase 64. Every symbolic operation produces a three-column payload: the reasoning in plain language, the same steps as exact equations over ℚ, ℤ or F₂, and a generated re-derivation script. That script runs in a fresh, isolated `python3 -I` process and has to print `VERIFIED True`. The pass marks and all test cases were written down and committed before any of the implementation code (`studies/PYTHON_SPEECH_STUDY.md` §0–2, `overlay/glm_universal/evaluation/python_speech_cases.py`).
+
+**What was built**
+- `overlay/glm_universal/reasoning/python_substrate.py` maps Python constructs onto the substrate:
+  - `Fraction` → a coordinate in ℚ²⁴; `int` → the dyadic tower; `bool` → one F₂ bit.
+  - `&`, `|`, `^`, `~` run as gate programs on the 8 vertical 3-bit Toffoli/Fredkin sub-registers. `<<` and `>>` are moves up and down the dyadic tower.
+  - Slices are exact index maps; `frozenset` becomes a 24-bit mask.
+  - `match`/`case` is decided by Golay decoding: a unique branch at distance ≤ 3, AMBIGUOUS at 4, UNCORRECTABLE at ≥ 5.
+  - AST expressions get a structural address.
+- `overlay/glm_universal/reasoning/python_speech.py` holds the evaluator, the named refusals and the payload builder. The refusals cover floats, non-determinism (`hash`, `random`, clock), the deep hole at distance 4, uncorrectable distances, and comparisons across mismatched or undeclared unit scales.
+- `overlay/glm_universal/runtime/python_tct.py` runs the isolated subprocess. It sits in the runtime layer because reasoning modules are not allowed to start processes.
+- Entry points: `GLM.py --python SOURCE` / `--python-file`, the `tools python-speech` subcommand, and `tests/test_python_speech.py` with 25 tests.
+
+**Measured results** (all six pass marks P1–P6 met)
+- 83 of 83 value programs answered correctly; 26 of 26 refusal cases refused under the right name.
+- Every generated script re-derived its answer to `VERIFIED True`. A copy of each value script with a deliberately wrong final claim was rejected every time.
+- 80 of 80 register operations were correct and reversible.
+- Around one declared case set, 12,951 test points gave 2,325 branches, 10,626 AMBIGUOUS refusals and 0 wrong branches.
+- 10 of 10 declared equivalent-expression pairs got the same address, with 0 collisions among 57 distinct expressions.
+- A generated battery of 7,128 expressions: 2,830 answered, 0 wrong, the rest refused.
+- For comparison, the existing question interface (`GLM.py -q`) solves 0 of the 83 value programs.
+
+**Lean:** `RequestProject/GLM/PythonSpeech.lean` builds with no `sorry` and only the standard axioms. It proves:
+- the gate programs are bijective and match the bitwise operations;
+- `<<` is multiplication by 2ᵏ and `>>` is floor division by 2ᵏ, including for negative integers;
+- the slice index map is exact;
+- the `match` classification always gives exactly one of branch, AMBIGUOUS or UNCORRECTABLE, for any code with minimum distance 8.
+
+Four properties are marked proved in the Properties table.
+
+**Checks:** the full release sign-off passes, with 110 of 110 test files and 7 of 7 checks signed and the exhaustive cases run; `--verify-release` confirms it. `corpus --check` reports current. The suite count is now 4,292 tests across 109 of the 110 test files. To get there I made two fixes:
+- A test that looks for outdated counts in the documents was matching the retired "34 Lean files" inside the correct "134 Lean files". It now matches whole numbers only.
+- `^` was used in the two new modules without being classified, which the check forbids. I added both to the classification list.
+
+**Limits:**
+- "Zero entropy" here means the gate operations are proved bijective; no thermodynamic claim is made.
+- The Golay code has covering radius 4, so the UNCORRECTABLE (distance ≥ 5) verdict can only happen against the declared cases, never against the whole code.
+- Two expressions get the same address only up to reordering of commutative operations, variable renaming and parentheses. It is not a general test of whether two programs mean the same thing.
+- Only the Python subset listed in the study is supported; anything outside it is refused.
+- The negative-step slicing case is not covered by the Lean proofs.
+
 # Summary of changes for run 878c9eed-5d08-4f1e-ac1a-44d14bb6f734
 This round was round two of `studies/SUBSTRATE_NATIVE_COGNITION_STUDY.md`, recorded as Phase 63. The three new question frames answered 26 of the 33 questions written for them before they were built and refused the other 7 as planned, with 0 wrong. The grammar alone answered none of the 33. The full release check passes: 109 of 109 test files and 7 of 7 instruments are signed, and the corpus check is current.
 

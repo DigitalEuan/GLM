@@ -1,0 +1,1239 @@
+{
+ "source": "workflow/GLM/glm_lean/glm2/glm2_library.py :: RELATIONS, TENSOR_RELATIONS, ALIASES",
+ "note": "Statements only.  glm_universal.reasoning.verifier re-implements the operator algebra and re-derives every verdict from glm_universal's own frozen 660-concept register; this file is not an oracle.",
+ "scalar_semantics": "both sides must agree in the ten EXT10 exponents and in the decimal scale",
+ "tensor_semantics": "both sides must additionally agree in tensor rank and in the effective P, T and C gradings",
+ "operators": {
+  "cross": 2,
+  "curl": 1,
+  "ddt": 1,
+  "div": 1,
+  "dot": 2,
+  "grad": 1,
+  "integral_dV": 1,
+  "integral_dt": 1,
+  "laplacian": 1,
+  "moment": 2,
+  "rot": 1
+ },
+ "aliases": {
+  "absorbance": "optical_density",
+  "barn_dim": "cross_section",
+  "baud": "symbol_rate",
+  "becquerel": "activity",
+  "bit": "information",
+  "bitrate": "information_rate",
+  "candela": "luminous_intensity",
+  "celerity": "speed",
+  "dioptre": "optical_power_dioptre",
+  "displacement": "position",
+  "distance": "length",
+  "duration": "time",
+  "edm": "particle_electric_dipole_moment",
+  "elastic_modulus": "youngs_modulus",
+  "electric_current": "current",
+  "emf": "voltage",
+  "flow_rate": "volumetric_flow",
+  "gamma_factor": "lorentz_factor",
+  "gray": "absorbed_dose",
+  "heat": "energy",
+  "hertz": "frequency",
+  "jounce": "snap",
+  "len": "length",
+  "lumen": "luminous_flux",
+  "lux": "illuminance",
+  "molarity": "concentration",
+  "moment": "torque",
+  "nit": "luminance",
+  "plane_angle": "angle",
+  "potential": "voltage",
+  "radian": "angle",
+  "shannon": "information",
+  "sievert": "equivalent_dose",
+  "spin_rate": "angular_velocity",
+  "steradian": "solid_angle",
+  "stiffness": "spring_constant",
+  "substance": "amount",
+  "temp": "temperature",
+  "weight": "force",
+  "work": "energy"
+ },
+ "scalar_count": 222,
+ "tensor_count": 71,
+ "scalar_relations": [
+  [
+   "speed",
+   "length / time"
+  ],
+  [
+   "acceleration",
+   "speed / time"
+  ],
+  [
+   "jerk",
+   "acceleration / time"
+  ],
+  [
+   "snap",
+   "jerk / time"
+  ],
+  [
+   "force",
+   "mass * acceleration"
+  ],
+  [
+   "momentum",
+   "mass * speed"
+  ],
+  [
+   "impulse",
+   "force * time"
+  ],
+  [
+   "energy",
+   "force * length"
+  ],
+  [
+   "energy",
+   "mass * speed^2"
+  ],
+  [
+   "power",
+   "energy / time"
+  ],
+  [
+   "action",
+   "energy * time"
+  ],
+  [
+   "pressure",
+   "force / area"
+  ],
+  [
+   "energy_density",
+   "energy / volume"
+  ],
+  [
+   "density",
+   "mass / volume"
+  ],
+  [
+   "torque",
+   "energy / angle"
+  ],
+  [
+   "angular_momentum",
+   "action / angle"
+  ],
+  [
+   "moment_of_inertia",
+   "mass * area / angle^2"
+  ],
+  [
+   "angular_velocity",
+   "angle / time"
+  ],
+  [
+   "angular_momentum",
+   "moment_of_inertia * angular_velocity"
+  ],
+  [
+   "energy",
+   "moment_of_inertia * angular_velocity^2"
+  ],
+  [
+   "power",
+   "torque * angular_velocity"
+  ],
+  [
+   "reduced_planck",
+   "planck_constant / angle"
+  ],
+  [
+   "surface_tension",
+   "energy / area"
+  ],
+  [
+   "dynamic_viscosity",
+   "pressure * time"
+  ],
+  [
+   "kinematic_viscosity",
+   "dynamic_viscosity / density"
+  ],
+  [
+   "gravitational_constant",
+   "force * area / mass^2"
+  ],
+  [
+   "gravitational_potential",
+   "energy / mass"
+  ],
+  [
+   "fracture_toughness",
+   "stress * length^(1/2)"
+  ],
+  [
+   "charge",
+   "current * time"
+  ],
+  [
+   "voltage",
+   "power / current"
+  ],
+  [
+   "resistance",
+   "voltage / current"
+  ],
+  [
+   "conductance",
+   "current / voltage"
+  ],
+  [
+   "capacitance",
+   "charge / voltage"
+  ],
+  [
+   "inductance",
+   "magnetic_flux / current"
+  ],
+  [
+   "magnetic_flux",
+   "voltage * time"
+  ],
+  [
+   "magnetic_flux_density",
+   "magnetic_flux / area"
+  ],
+  [
+   "electric_field",
+   "voltage / length"
+  ],
+  [
+   "electric_field",
+   "force / charge"
+  ],
+  [
+   "permittivity",
+   "capacitance / length"
+  ],
+  [
+   "permeability",
+   "inductance / length"
+  ],
+  [
+   "resistivity",
+   "resistance * length"
+  ],
+  [
+   "conductivity",
+   "1 / resistivity"
+  ],
+  [
+   "current_density",
+   "current / area"
+  ],
+  [
+   "poynting_vector",
+   "electric_field * magnetic_field_h"
+  ],
+  [
+   "electron_mobility",
+   "speed / electric_field"
+  ],
+  [
+   "entropy",
+   "energy / temperature"
+  ],
+  [
+   "specific_heat_capacity",
+   "heat_capacity / mass"
+  ],
+  [
+   "molar_heat_capacity",
+   "heat_capacity / amount"
+  ],
+  [
+   "thermal_conductivity",
+   "power / (length * temperature)"
+  ],
+  [
+   "thermal_diffusivity",
+   "thermal_conductivity / (density * specific_heat_capacity)"
+  ],
+  [
+   "heat_flux",
+   "power / area"
+  ],
+  [
+   "stefan_boltzmann",
+   "heat_flux / temperature^4"
+  ],
+  [
+   "gas_constant",
+   "boltzmann_constant * avogadro_constant"
+  ],
+  [
+   "chemical_potential",
+   "energy / amount"
+  ],
+  [
+   "molar_mass",
+   "mass / amount"
+  ],
+  [
+   "concentration",
+   "amount / volume"
+  ],
+  [
+   "faraday_constant",
+   "charge * avogadro_constant"
+  ],
+  [
+   "catalytic_activity",
+   "amount / time"
+  ],
+  [
+   "luminous_flux",
+   "luminous_intensity * solid_angle"
+  ],
+  [
+   "illuminance",
+   "luminous_flux / area"
+  ],
+  [
+   "luminance",
+   "luminous_intensity / area"
+  ],
+  [
+   "luminous_efficacy",
+   "luminous_flux / power"
+  ],
+  [
+   "radiant_intensity",
+   "radiant_flux / solid_angle"
+  ],
+  [
+   "irradiance",
+   "radiant_flux / area"
+  ],
+  [
+   "radiance",
+   "irradiance / solid_angle"
+  ],
+  [
+   "radiant_exposure",
+   "irradiance * time"
+  ],
+  [
+   "absorbed_dose",
+   "energy / mass"
+  ],
+  [
+   "dose_rate",
+   "absorbed_dose / time"
+  ],
+  [
+   "exposure_xray",
+   "charge / mass"
+  ],
+  [
+   "mass_attenuation",
+   "linear_attenuation / density"
+  ],
+  [
+   "linear_energy_transfer",
+   "energy / length"
+  ],
+  [
+   "information_rate",
+   "information / time"
+  ],
+  [
+   "landauer_energy",
+   "energy / information"
+  ],
+  [
+   "spectral_efficiency",
+   "information_rate / bandwidth"
+  ],
+  [
+   "thermodynamic_bit_entropy",
+   "entropy / information"
+  ],
+  [
+   "dynamic_pressure",
+   "density * speed^2"
+  ],
+  [
+   "circulation",
+   "speed * length"
+  ],
+  [
+   "vorticity",
+   "rot(velocity)"
+  ],
+  [
+   "hydraulic_conductivity",
+   "intrinsic_permeability * density * gravitational_field / dynamic_viscosity"
+  ],
+  [
+   "sound_intensity",
+   "sound_pressure * particle_velocity"
+  ],
+  [
+   "acoustic_impedance",
+   "sound_pressure / particle_velocity"
+  ],
+  [
+   "sound_exposure",
+   "sound_pressure^2 * time"
+  ],
+  [
+   "flux_density_jansky",
+   "irradiance / bandwidth"
+  ],
+  [
+   "surface_brightness",
+   "irradiance / solid_angle"
+  ],
+  [
+   "gravitational_parameter",
+   "gravitational_constant * mass"
+  ],
+  [
+   "specific_angular_momentum",
+   "angular_momentum / mass"
+  ],
+  [
+   "proper_motion",
+   "angle / time"
+  ],
+  [
+   "bohr_magneton",
+   "energy / magnetic_flux_density"
+  ],
+  [
+   "gyromagnetic_ratio",
+   "angular_velocity / magnetic_flux_density"
+  ],
+  [
+   "magnetic_flux_quantum",
+   "action / charge"
+  ],
+  [
+   "von_klitzing_constant",
+   "1 / conductance_quantum"
+  ],
+  [
+   "josephson_constant",
+   "1 / magnetic_flux_quantum"
+  ],
+  [
+   "decay_constant",
+   "1 / mean_lifetime"
+  ],
+  [
+   "wavefunction_3d",
+   "volume^(-1/2)"
+  ],
+  [
+   "density_of_states",
+   "1 / energy"
+  ],
+  [
+   "seebeck_coefficient",
+   "voltage / temperature"
+  ],
+  [
+   "piezoelectric_d",
+   "charge / force"
+  ],
+  [
+   "specific_stiffness",
+   "youngs_modulus / density"
+  ],
+  [
+   "wear_rate",
+   "volume / energy"
+  ],
+  [
+   "seismic_moment",
+   "shear_modulus * area * length"
+  ],
+  [
+   "geothermal_gradient",
+   "temperature / length"
+  ],
+  [
+   "kilometre",
+   "1000 * length"
+  ],
+  [
+   "gram",
+   "mass / 1000"
+  ],
+  [
+   "megapascal",
+   "1000000 * pressure"
+  ],
+  [
+   "gigabit_per_second",
+   "1000000000 * information / time"
+  ],
+  [
+   "rest_energy",
+   "mass * speed^2"
+  ],
+  [
+   "schwarzschild_radius",
+   "gravitational_constant * mass / speed^2"
+  ],
+  [
+   "einstein_gravitational_constant",
+   "gravitational_constant / speed^4"
+  ],
+  [
+   "surface_gravity",
+   "gravitational_constant * mass / area"
+  ],
+  [
+   "hawking_temperature",
+   "energy / boltzmann_constant"
+  ],
+  [
+   "ricci_scalar",
+   "1 / area"
+  ],
+  [
+   "kretschmann_scalar",
+   "ricci_scalar^2"
+  ],
+  [
+   "christoffel_symbol",
+   "1 / length"
+  ],
+  [
+   "stress_energy_tensor",
+   "energy / volume"
+  ],
+  [
+   "einstein_gravitational_constant",
+   "ricci_scalar / stress_energy_tensor"
+  ],
+  [
+   "planck_length",
+   "(planck_constant * gravitational_constant / speed^3)^(1/2)"
+  ],
+  [
+   "planck_time",
+   "(planck_constant * gravitational_constant / speed^5)^(1/2)"
+  ],
+  [
+   "planck_mass",
+   "(planck_constant * speed / gravitational_constant)^(1/2)"
+  ],
+  [
+   "planck_energy",
+   "planck_mass * speed^2"
+  ],
+  [
+   "planck_temperature",
+   "planck_energy / boltzmann_constant"
+  ],
+  [
+   "planck_charge",
+   "(vacuum_permittivity * planck_constant * speed)^(1/2)"
+  ],
+  [
+   "planck_time",
+   "planck_length / speed"
+  ],
+  [
+   "bekenstein_hawking_entropy",
+   "boltzmann_constant * area / planck_length^2"
+  ],
+  [
+   "four_momentum",
+   "mass * four_velocity"
+  ],
+  [
+   "faraday_tensor",
+   "magnetic_flux_density"
+  ],
+  [
+   "alfven_speed",
+   "magnetic_flux_density / (vacuum_permeability * density)^(1/2)"
+  ],
+  [
+   "magnetic_pressure",
+   "magnetic_flux_density^2 / vacuum_permeability"
+  ],
+  [
+   "magnetic_energy_density",
+   "magnetic_pressure"
+  ],
+  [
+   "plasma_beta",
+   "pressure / magnetic_pressure"
+  ],
+  [
+   "magnetic_diffusivity",
+   "resistivity / vacuum_permeability"
+  ],
+  [
+   "ion_sound_speed",
+   "(boltzmann_constant * electron_temperature / mass)^(1/2)"
+  ],
+  [
+   "cyclotron_frequency",
+   "charge * magnetic_flux_density * angle / mass"
+  ],
+  [
+   "bohm_diffusivity",
+   "boltzmann_constant * electron_temperature / (charge * magnetic_flux_density)"
+  ],
+  [
+   "magnetic_helicity",
+   "magnetic_vector_potential * magnetic_flux_density * volume"
+  ],
+  [
+   "electron_number_density",
+   "1 / volume"
+  ],
+  [
+   "plasma_skin_depth",
+   "speed * angle / plasma_frequency"
+  ],
+  [
+   "magnetic_tension_force_density",
+   "magnetic_pressure / length"
+  ],
+  [
+   "radiation_pressure",
+   "energy_density"
+  ],
+  [
+   "collision_frequency",
+   "1 / time"
+  ],
+  [
+   "optical_power_dioptre",
+   "1 / focal_length"
+  ],
+  [
+   "etendue",
+   "area * solid_angle"
+  ],
+  [
+   "rayleigh_range",
+   "beam_waist^2 / wavelength"
+  ],
+  [
+   "chromatic_dispersion",
+   "time / (length * wavelength)"
+  ],
+  [
+   "responsivity",
+   "current / radiant_flux"
+  ],
+  [
+   "nonlinear_index",
+   "1 / irradiance"
+  ],
+  [
+   "coherence_length",
+   "speed * coherence_time"
+  ],
+  [
+   "free_spectral_range",
+   "speed / optical_path_length"
+  ],
+  [
+   "optical_path_length",
+   "refractive_index * length"
+  ],
+  [
+   "group_velocity",
+   "speed / group_index"
+  ],
+  [
+   "beam_divergence",
+   "wavelength * angle / beam_waist"
+  ],
+  [
+   "verdet_constant",
+   "angle / (magnetic_flux_density * length)"
+  ],
+  [
+   "photon_irradiance",
+   "photon_flux / area"
+  ],
+  [
+   "saturation_intensity",
+   "irradiance"
+  ],
+  [
+   "laser_gain_coefficient",
+   "1 / length"
+  ],
+  [
+   "spectral_linewidth",
+   "1 / coherence_time"
+  ],
+  [
+   "sampling_rate",
+   "1 / sample_period"
+  ],
+  [
+   "natural_frequency",
+   "angle / time"
+  ],
+  [
+   "slew_rate",
+   "voltage / time"
+  ],
+  [
+   "voltage_noise_density",
+   "voltage / frequency^(1/2)"
+  ],
+  [
+   "current_noise_density",
+   "current / frequency^(1/2)"
+  ],
+  [
+   "power_spectral_density_voltage",
+   "voltage_noise_density^2"
+  ],
+  [
+   "power_spectral_density_voltage",
+   "voltage^2 / frequency"
+  ],
+  [
+   "phase_noise_density",
+   "angle^2 / frequency"
+  ],
+  [
+   "symbol_rate",
+   "1 / time"
+  ],
+  [
+   "group_delay",
+   "angle / (angle / time)"
+  ],
+  [
+   "number_density",
+   "1 / volume"
+  ],
+  [
+   "mean_free_path",
+   "1 / (number_density * cross_section)"
+  ],
+  [
+   "collision_rate",
+   "number_density * cross_section * speed"
+  ],
+  [
+   "relaxation_rate",
+   "1 / correlation_time"
+  ],
+  [
+   "phase_space_volume",
+   "action^3"
+  ],
+  [
+   "entropy_per_particle",
+   "boltzmann_constant"
+  ],
+  [
+   "free_energy_density",
+   "energy / volume"
+  ],
+  [
+   "fugacity",
+   "pressure"
+  ],
+  [
+   "specific_gas_constant",
+   "gas_constant / molar_mass"
+  ],
+  [
+   "boltzmann_factor",
+   "energy / (boltzmann_constant * temperature)"
+  ],
+  [
+   "thermal_de_broglie_wavelength",
+   "planck_constant / (mass * boltzmann_constant * temperature)^(1/2)"
+  ],
+  [
+   "correlation_length",
+   "speed * correlation_time"
+  ],
+  [
+   "metabolic_rate",
+   "energy / time"
+  ],
+  [
+   "specific_absorption_rate",
+   "power / mass"
+  ],
+  [
+   "cardiac_output",
+   "volume / time"
+  ],
+  [
+   "vascular_resistance",
+   "blood_pressure / cardiac_output"
+  ],
+  [
+   "membrane_capacitance_area",
+   "capacitance / area"
+  ],
+  [
+   "nerve_conduction_speed",
+   "length / time"
+  ],
+  [
+   "drug_clearance",
+   "volume / time"
+  ],
+  [
+   "tissue_perfusion",
+   "volumetric_flow / volume"
+  ],
+  [
+   "oxygen_uptake",
+   "amount / time"
+  ],
+  [
+   "binding_affinity",
+   "1 / michaelis_constant"
+  ],
+  [
+   "michaelis_constant",
+   "concentration"
+  ],
+  [
+   "bone_mineral_density",
+   "mass / area"
+  ],
+  [
+   "receptor_density",
+   "1 / area"
+  ],
+  [
+   "wall_shear_stress",
+   "dynamic_viscosity * strain_rate"
+  ],
+  [
+   "osmotic_pressure",
+   "concentration * gas_constant * temperature"
+  ],
+  [
+   "enzyme_turnover_number",
+   "1 / time"
+  ],
+  [
+   "precipitation_rate",
+   "volume / (area * time)"
+  ],
+  [
+   "evaporation_rate",
+   "mass / (area * time)"
+  ],
+  [
+   "lapse_rate",
+   "temperature / length"
+  ],
+  [
+   "geopotential",
+   "energy / mass"
+  ],
+  [
+   "scale_height",
+   "specific_gas_constant * temperature / gravitational_field"
+  ],
+  [
+   "coriolis_parameter",
+   "angular_velocity"
+  ],
+  [
+   "brunt_vaisala_frequency",
+   "angle / time"
+  ],
+  [
+   "radiative_forcing",
+   "power / area"
+  ],
+  [
+   "wind_stress",
+   "air_density * wind_speed^2"
+  ],
+  [
+   "cloud_liquid_water_content",
+   "mass / volume"
+  ],
+  [
+   "eddy_diffusivity",
+   "length * wind_speed"
+  ],
+  [
+   "convective_available_potential_energy",
+   "energy / mass"
+  ],
+  [
+   "greenhouse_gas_concentration",
+   "concentration"
+  ],
+  [
+   "vapour_pressure",
+   "pressure"
+  ],
+  [
+   "electrode_potential",
+   "voltage"
+  ],
+  [
+   "overpotential",
+   "voltage"
+  ],
+  [
+   "tafel_slope",
+   "voltage"
+  ],
+  [
+   "exchange_current_density",
+   "current / area"
+  ],
+  [
+   "molar_conductivity",
+   "electrolyte_conductivity / concentration"
+  ],
+  [
+   "ionic_mobility",
+   "speed / electric_field"
+  ],
+  [
+   "electrochemical_equivalent",
+   "molar_mass / faraday_constant"
+  ],
+  [
+   "specific_capacity",
+   "charge / mass"
+  ],
+  [
+   "double_layer_capacitance_area",
+   "capacitance / area"
+  ],
+  [
+   "corrosion_rate",
+   "length / time"
+  ],
+  [
+   "electrolyte_conductivity",
+   "conductivity"
+  ],
+  [
+   "energy_density_gravimetric",
+   "energy / mass"
+  ],
+  [
+   "power_density_gravimetric",
+   "power / mass"
+  ],
+  [
+   "ionic_strength",
+   "concentration"
+  ],
+  [
+   "faraday_constant",
+   "elementary_charge * avogadro_constant"
+  ]
+ ],
+ "tensor_relations": [
+  [
+   "velocity",
+   "ddt(position)"
+  ],
+  [
+   "acceleration",
+   "ddt(velocity)"
+  ],
+  [
+   "jerk",
+   "ddt(acceleration)"
+  ],
+  [
+   "snap",
+   "ddt(jerk)"
+  ],
+  [
+   "velocity",
+   "moment(angular_velocity, position)"
+  ],
+  [
+   "angular_acceleration",
+   "ddt(angular_velocity)"
+  ],
+  [
+   "momentum",
+   "mass * velocity"
+  ],
+  [
+   "force",
+   "ddt(momentum)"
+  ],
+  [
+   "force",
+   "mass * acceleration"
+  ],
+  [
+   "yank",
+   "ddt(force)"
+  ],
+  [
+   "impulse",
+   "integral_dt(force)"
+  ],
+  [
+   "energy",
+   "dot(force, position)"
+  ],
+  [
+   "energy",
+   "integral_dt(power)"
+  ],
+  [
+   "power",
+   "dot(force, velocity)"
+  ],
+  [
+   "angular_momentum",
+   "moment(position, momentum)"
+  ],
+  [
+   "torque",
+   "moment(position, force)"
+  ],
+  [
+   "torque",
+   "ddt(angular_momentum)"
+  ],
+  [
+   "gravitational_field",
+   "grad(gravitational_potential)"
+  ],
+  [
+   "gravitational_field",
+   "ddt(velocity)"
+  ],
+  [
+   "vorticity",
+   "rot(velocity)"
+  ],
+  [
+   "energy",
+   "integral_dV(energy_density)"
+  ],
+  [
+   "pressure_gradient",
+   "grad(pressure)"
+  ],
+  [
+   "temperature_gradient",
+   "grad(temperature)"
+  ],
+  [
+   "current_density",
+   "curl(magnetization)"
+  ],
+  [
+   "charge_density",
+   "div(electric_displacement)"
+  ],
+  [
+   "current_density",
+   "curl(magnetic_field_h)"
+  ],
+  [
+   "current_density",
+   "ddt(electric_displacement)"
+  ],
+  [
+   "current_density",
+   "charge_density * velocity"
+  ],
+  [
+   "magnetic_flux_density",
+   "curl(magnetic_vector_potential)"
+  ],
+  [
+   "electric_field",
+   "grad(voltage)"
+  ],
+  [
+   "electric_field",
+   "ddt(magnetic_vector_potential)"
+  ],
+  [
+   "poynting_vector",
+   "cross(electric_field, magnetic_field_h)"
+  ],
+  [
+   "charge",
+   "integral_dV(charge_density)"
+  ],
+  [
+   "electric_dipole_moment",
+   "charge * position"
+  ],
+  [
+   "magnetization",
+   "magnetic_dipole_moment / volume"
+  ],
+  [
+   "polarization",
+   "electric_displacement"
+  ],
+  [
+   "force",
+   "charge * electric_field"
+  ],
+  [
+   "force",
+   "charge * cross(velocity, magnetic_flux_density)"
+  ],
+  [
+   "electric_field",
+   "cross(velocity, magnetic_flux_density)"
+  ],
+  [
+   "torque",
+   "moment(magnetic_dipole_moment, magnetic_flux_density)"
+  ],
+  [
+   "torque",
+   "moment(electric_dipole_moment, electric_field)"
+  ],
+  [
+   "energy",
+   "dot(electric_dipole_moment, electric_field)"
+  ],
+  [
+   "energy_density",
+   "dot(electric_displacement, electric_field)"
+  ],
+  [
+   "energy_density",
+   "dot(magnetic_field_h, magnetic_flux_density)"
+  ],
+  [
+   "power_density",
+   "dot(current_density, electric_field)"
+  ],
+  [
+   "current_density",
+   "conductivity * electric_field"
+  ],
+  [
+   "magnetic_field_h",
+   "curl(magnetic_vector_potential) / vacuum_permeability"
+  ],
+  [
+   "charge_density",
+   "permittivity * div(electric_field)"
+  ],
+  [
+   "charge_density",
+   "permittivity * laplacian(voltage)"
+  ],
+  [
+   "heat_current_density",
+   "thermal_conductivity * grad(temperature)"
+  ],
+  [
+   "entropy_flux_density",
+   "heat_current_density / temperature"
+  ],
+  [
+   "heat_current_density",
+   "entropy_flux_density * temperature"
+  ],
+  [
+   "diffusion_flux",
+   "diffusion_coefficient * grad(concentration)"
+  ],
+  [
+   "seepage_velocity",
+   "hydraulic_conductivity * grad(hydraulic_head)"
+  ],
+  [
+   "number_flux_density",
+   "number_density * velocity"
+  ],
+  [
+   "mass_current_density",
+   "density * velocity"
+  ],
+  [
+   "probability_current",
+   "probability_density_3d * velocity"
+  ],
+  [
+   "mass_source_density",
+   "div(mass_current_density)"
+  ],
+  [
+   "strain_rate",
+   "div(velocity)"
+  ],
+  [
+   "acceleration",
+   "kinematic_viscosity * laplacian(velocity)"
+  ],
+  [
+   "pressure_gradient",
+   "density * acceleration"
+  ],
+  [
+   "magnetic_tension_force_density",
+   "pressure_gradient"
+  ],
+  [
+   "ddt(temperature)",
+   "thermal_diffusivity * laplacian(temperature)"
+  ],
+  [
+   "ddt(concentration)",
+   "diffusion_coefficient * laplacian(concentration)"
+  ],
+  [
+   "ddt(magnetic_flux_density)",
+   "magnetic_diffusivity * laplacian(magnetic_flux_density)"
+  ],
+  [
+   "ddt(vorticity)",
+   "kinematic_viscosity * laplacian(vorticity)"
+  ],
+  [
+   "ddt(ddt(velocity_potential))",
+   "sound_speed^2 * laplacian(velocity_potential)"
+  ],
+  [
+   "ddt(ddt(electric_field))",
+   "speed^2 * laplacian(electric_field)"
+  ],
+  [
+   "ddt(ddt(position))",
+   "acceleration"
+  ],
+  [
+   "div(heat_current_density)",
+   "power_density"
+  ],
+  [
+   "div(current_density)",
+   "ddt(charge_density)"
+  ]
+ ]
+}

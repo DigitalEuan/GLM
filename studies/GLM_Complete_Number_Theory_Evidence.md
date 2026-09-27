@@ -14,7 +14,7 @@
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand
-**Date:** 3 September 2026, brought up to date 24 September 2026 (Phases 60 and 61)
+**Date:** 3 September 2026, brought up to date 24 September 2026 (Phases 60 and 61) and 27 September 2026 (Phases 62–70)
 **Checked against this repository:** every Lean statement quoted below was read
 back out of `RequestProject/GLM/` rather than retyped, and every number was
 recomputed by one of the scripts named in §0.3.
@@ -64,10 +64,10 @@ cd overlay && PYTHONPATH=. python3 -m glm_universal.examples.number_pipeline
 python3 studies/scripts/tmm_null_model.py
 
 # the Lean development itself
-lake build          # 133 files under RequestProject/GLM/, 0 sorry
+lake build          # 140 files under RequestProject/GLM/, 0 sorry
 ```
 
-The Lean development is 133 files under `RequestProject/GLM/`, all building
+The Lean development is 140 files under `RequestProject/GLM/`, all building
 against Mathlib for Lean 4.28.0 with **no `sorry` and no `admit`**, and no
 declared axiom anywhere: every proof depends only on `propext`,
 `Classical.choice`, `Quot.sound`, and — for the theorems reached through
@@ -118,6 +118,8 @@ both trees in the same step.
 | the seeds and the first distinction | §22–§23 | e irrational, the seeds forced by their roles, the hull that cannot be inverted, φ as the least quadratic Pisot number, the π·e dichotomy; and what one reversible distinction forces |
 | counting claims, audited | §24–§26 | the two-gap law and the Golay ball count; 3-6-9, the 44 balanced octads against chance and relabelling, the 144° Platonic totals; the element address layer |
 | lattices beside and above | §27 | the 23 Niemeier root systems found by a proved-complete search, and the minima past 24 dimensions |
+| integer arithmetic the machine now decides | §28 | Python's floor quotient and remainder, the residue split, and tightening over ℤ |
+| the address read back | §29 | rounding at scale 9 inside the covering radius, and what the residue can and cannot carry |
 
 §15–§21 were added in Phase 60. They collect number-theoretic results that were
 proved in the development after this document was first written — some of them
@@ -134,6 +136,14 @@ the same round; and §24, §25 and §27 collect number-theoretic and counting
 results that were already in the development (`WobbleLandscape.lean`, the
 `Triad*` files, `Platonic.lean`, `Niemeier.lean`, `HigherLattices.lean`) but
 had not been written up here. The ledger of §21 carries all of them.
+
+§28 and §29 were added in the update of 27 September 2026. Phases 62–66 proved
+nothing number-theoretic that is not already here; Phases 67–69 (reverse Three
+Column Thinking) proved the integer arithmetic that the entailment and bounds
+operations decide over ℤ (`ReverseTCTTwo.lean`, `ReverseTCTThree.lean`), and
+Phase 70 (native parity) proved that a Leech address at scale 9 reads back to
+its feature vector by rounding (`NativeParity.lean`). The ledger of §21 carries
+both.
 
 ---
 
@@ -871,7 +881,7 @@ What is and is not being claimed of it is stated once, in the Positioning
 section of [`PROJECT_DIRECTIVES.md`](../PROJECT_DIRECTIVES.md), and this paper
 is written under it. It is a
 mathematical object with unusual fidelity to the structure of numbers, and the
-fidelity is provable (133 Lean files, 0 `sorry`) and measurable (exact integer
+fidelity is provable (140 Lean files, 0 `sorry`) and measurable (exact integer
 experiments, 24/24 Sturmian matches).
 
 ### 13.2 What it holds
@@ -1313,6 +1323,12 @@ proves false, kept because a refuted claim is a result.
 | binary TAX is a function of weight alone; the NRCI and 70 % thresholds select nothing | proved (negative) | §26, `GolayMOG.lean` |
 | exactly 23 Niemeier root systems, and the Leech lattice is none of them | proved | §27, `Niemeier.lean` |
 | the 32-dimensional construction has minimum norm 4 and a unique three-level address | proved | §27, `HigherLattices.lean` |
+| Python's floor quotient and remainder satisfy `b·(a // b) + a % b = a`, the remainder taking the divisor's sign | proved | §28.1, `ReverseTCTTwo.lean` |
+| the residue split of a floor quotient is exact and exhaustive, for either sign of divisor | proved | §28.2, `ReverseTCTThree.lean` |
+| strict rows and gcd division with the constant rounded up keep exactly the integer points | proved | §28.3, `ReverseTCTThree.lean` |
+| `2x = 1` has a rational and no integer solution | proved | §28.3, `two_x_eq_one` |
+| a Leech address at scale 9 reads back to its features by rounding, whenever the residue is within 4 | proved, and measured on 3,976 of 3,976 addresses | §29, `NativeParity.lean` |
+| "the Leech residue is extra information about the query" | refuted: the residue is a function of the features | §29, `residue_congr` |
 
 ## 22. The seeds as numbers (Lean: `SeedRoles.lean`)
 
@@ -1524,6 +1540,75 @@ encoding, independently of any chemistry.
   even part of the 48-dimensional ternary construction ∑xᵢ² ≥ 18, norm 6 after
   scaling, which is extremal there.
 
+## 28. Integer arithmetic the machine now decides (Lean: `ReverseTCTTwo.lean`, `ReverseTCTThree.lean`)
+
+Reverse Three Column Thinking (Phases 67–69) realises an exact statement as
+English, reads it back, and decides entailment and bounds on it. Over ℤ that
+needs three pieces of elementary number theory, each proved as used.
+
+### 28.1 Python's convention
+
+* `floor_mod_identity`: for rationals, `b * pyFloorDiv a b + pyMod a b = a` —
+  the division identity with Python's floor quotient.
+* `mod_sign_bounds`, `mod_sign_bounds_neg`: the remainder lies in `[0, b)` for
+  a positive divisor and in `(b, 0]` for a negative one — it takes the sign of
+  the divisor, which is Python's convention and not C's.
+  `py_floor_example`, `py_mod_example`: `−17 // 5 = −4` and `−17 % 5 = 3`.
+
+### 28.2 The residue split
+
+A floor quotient `a // b` of an integer-valued term by a nonzero integer
+constant is replaced by a fresh integer `q` and a residue `r`, one case per
+residue.
+
+* `residue_split_pos`, `residue_split_neg`: `a // b = q` and `a % b = r`
+  exactly when `a = b·q + r` with `0 ≤ r < b` (for `b > 0`), or `b < r ≤ 0`
+  (for `b < 0`). The split is exact.
+* `residue_exists_pos`, `residue_exists_neg`: some residue case always holds.
+  The split is exhaustive, so deciding every case decides the statement.
+
+### 28.3 Tightening over ℤ
+
+* `strict_tighten`: over ℤ, `e < 0` is `e + 1 ≤ 0`.
+* `gcd_tighten`: for `g > 0`, `g·t + k ≤ 0` holds exactly when
+  `t + ⌈k/g⌉ ≤ 0` — dividing a row by the common factor of its coefficients
+  and rounding the constant up keeps exactly its integer points. This is the
+  step that makes elimination over ℤ stronger than over ℚ.
+* `derivation_sound`, `refuted_no_point`, `rational_refutation_suffices`: a
+  derivation of a row with no variables and a positive constant refutes the
+  system over ℤ, and a rational refutation is already an integer one.
+* `two_x_eq_one`: `2x = 1` has the rational solution `1/2` and no integer
+  one; its two rows tighten to `x ≤ 0` and `x ≥ 1`. This is the smallest case
+  where the domain changes the answer, and the measured reason the machine
+  asks for the domain in the question: over ℚ 20 of the 29 declared integer
+  questions are refused and the other 9 answered differently.
+
+## 29. The address read back (Lean: `NativeParity.lean`)
+
+The Lean corpus and the document corpus are addressed by quantising a scaled
+integer feature vector `9f` to the Leech lattice. Phase 70 used the fact that
+the address `p` carries `f` exactly.
+
+* `round_magnitude`: if `|q − s·m| ≤ ρ` and `2ρ < s`, then
+  `(2q + s) / (2s) = m` in integer division — rounding half away from zero
+  recovers `m`, with no sign condition.
+* `readbackCoord_eq`, `readback_eq`: the signed coordinate-wise rounding of
+  `p` is `f` whenever each `|pᵢ − s·fᵢ| ≤ ρ` and `2ρ < s`.
+  `readback_eq_leech` is the instance the machine uses: scale 9, and 4 for the
+  residue bound in the integer model (`2·4 < 9`). Measured: the read-back is
+  exact on 3,976 of 3,976 stored addresses of the Lean corpus and on 102 of
+  102 live goal addresses, the largest residue coordinate 3.
+  `readback_examples`: `round(31/9) = 3`, `round(−22/9) = −2`,
+  `round(3/9) = 0`, by `decide`.
+* `residue_congr`: the residue `Q(s·f) − s·f` of a deterministic quantiser is
+  a function of `f`. So a tie of the feature distance broken by the Leech
+  distance is broken by nothing the features did not already fix — which is
+  why, measured, that tie-break wins some queries and loses others.
+* `order_agrees_of_gap`: if a quantiser moves every point by at most `ρ`, a
+  comparison of distances with a gap of more than `4ρ` survives quantisation.
+  The raw address distance can disagree with the feature distance only inside
+  that band.
+
 ---
 
 ## Appendix A: Lean theorem index
@@ -1569,6 +1654,9 @@ encoding, independently of any chemistry.
 | `GolayMOG.lean` | `decodeIdentity_identityAddress`, `identityAddress_injective`, `consecutive_identity_oneBitApart`, `leechMinimalClass_counts`, `binaryTax_mono`, `binaryNRCI_above_half`, `projection24to3Q_not_injective` | §26: the element address layer |
 | `Niemeier.lean` | `card_root_systems`, `mem_gen`, `gen_sound`, `niemeier_names`, `niemeier_roots`, `leech_not_root_system` | §27: the 23 Niemeier root systems |
 | `HigherLattices.lean` | `norm_ge_of_ne_zero`, `norm_dvd_eight`, `mk_injective`, `even_norm_ge_eighteen` | §27: past 24 dimensions |
+| `ReverseTCTTwo.lean` | `floor_mod_identity`, `mod_sign_bounds`, `mod_sign_bounds_neg`, `py_floor_example`, `py_mod_example` | §28.1: Python's floor quotient and remainder |
+| `ReverseTCTThree.lean` | `residue_split_pos`, `residue_split_neg`, `residue_exists_pos`, `residue_exists_neg`, `strict_tighten`, `gcd_tighten`, `derivation_sound`, `refuted_no_point`, `rational_refutation_suffices`, `two_x_eq_one` | §28.2–§28.3: the residue split and tightening over ℤ |
+| `NativeParity.lean` | `round_magnitude`, `readbackCoord_eq`, `readback_eq`, `readback_eq_leech`, `readback_examples`, `residue_congr`, `order_agrees_of_gap` | §29: the address read back |
 
 Every name in this table was read out of the tree by
 `studies/scripts/` rather than retyped, and every statement quoted in the body
@@ -1617,7 +1705,7 @@ scripts that regenerate the data on demand.
 | the exact tables of §1.3, §2.4, §9.2 | `studies/scripts/number_theory_tables.py` |
 | the worked example of §14 | `overlay/glm_universal/examples/number_pipeline.py` |
 | the TMM sweep and its null model | `studies/scripts/tmm_null_model.py` |
-| the Lean development | `RequestProject/GLM/` (133 files) and its mirror `overlay/glm_lean/` |
+| the Lean development | `RequestProject/GLM/` (140 files) and its mirror `overlay/glm_lean/` |
 | the three-periods table of §18.3 | `studies/scripts/number_theory_tables.py` (table 4) |
 | the delta–sigma periods, in code | `overlay/glm_universal/engineering/delta_sigma.py` |
 | the scale bucket, in code | `overlay/glm_universal/data_objects/economics_register.py` |

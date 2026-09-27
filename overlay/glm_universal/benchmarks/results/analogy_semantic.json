@@ -1,0 +1,100 @@
+{
+  "baseline": "0/1",
+  "findings": [
+    {
+      "detail": "none",
+      "key": "misses",
+      "statement": "0 of 10 analogies resolve to the wrong carrier."
+    }
+  ],
+  "measurements": {
+    "baseline_hits": "0/10",
+    "domain": "lexicon"
+  },
+  "name": "analogy_semantic",
+  "outcomes": [
+    {
+      "expected": "slow",
+      "note": "",
+      "observed": "slow",
+      "passed": true,
+      "task": "hot : cold :: fast : ?"
+    },
+    {
+      "expected": "weak",
+      "note": "",
+      "observed": "weak",
+      "passed": true,
+      "task": "large : small :: strong : ?"
+    },
+    {
+      "expected": "cold",
+      "note": "",
+      "observed": "cold",
+      "passed": true,
+      "task": "fast : slow :: hot : ?"
+    },
+    {
+      "expected": "small",
+      "note": "",
+      "observed": "small",
+      "passed": true,
+      "task": "strong : weak :: large : ?"
+    },
+    {
+      "expected": "cold",
+      "note": "",
+      "observed": "cold",
+      "passed": true,
+      "task": "north : south :: hot : ?"
+    },
+    {
+      "expected": "gas",
+      "note": "",
+      "observed": "gas",
+      "passed": true,
+      "task": "solid : liquid :: liquid : ?"
+    },
+    {
+      "expected": "small",
+      "note": "",
+      "observed": "small",
+      "passed": true,
+      "task": "heavy : light_adj :: large : ?"
+    },
+    {
+      "expected": "acceleration",
+      "note": "",
+      "observed": "acceleration",
+      "passed": true,
+      "task": "cause : effect :: force : ?"
+    },
+    {
+      "expected": "south",
+      "note": "",
+      "observed": "south",
+      "passed": true,
+      "task": "electron : proton :: north : ?"
+    },
+    {
+      "expected": "move",
+      "note": "",
+      "observed": "move",
+      "passed": true,
+      "task": "accelerate : move :: rotate : ?"
+    }
+  ],
+  "passed": 10,
+  "question": "Do antonym and scale analogies resolve to the right word?",
+  "score": "1/1",
+  "tier": {
+    "baseline": "answer with the nearest carrier to C, ignoring the displacement A -> B entirely",
+    "ground_truth": "ordinary English: the fourth word is fixed by the relation the first two stand in",
+    "null_result": "a score at or below that baseline; in particular an encoding that placed antonyms at the same point could not beat it",
+    "pass_criterion": "the solver's answer is that word, exactly",
+    "population": "10 four-term analogies over the 95-word semantic register: five antonym pairs, one phase-of-matter succession, one part-whole pair, one cause-effect pair, one polarity pair and one manner-of-motion pair",
+    "tier": "curated"
+  },
+  "total": 10,
+  "verdict": "pass"
+}

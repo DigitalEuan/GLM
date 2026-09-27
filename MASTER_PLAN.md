@@ -5,7 +5,7 @@
 
 **Question.** What has each phase of the wiring plan delivered, and what does the next round start from?
 
-**Verdict.** Phase 63 is closed; the candidates in [`STATUS.md`](STATUS.md) §3.4 are where the next round starts.
+**Verdict.** Phase 70 is closed; the candidates in [`STATUS.md`](STATUS.md) §3.4 are where the next round starts.
 
 **Deciding figure.** Every closed phase names what was built, where it lives, and how to see it recompute itself.
 
@@ -25,7 +25,7 @@ recompute itself.
 
 Everything below is reachable from the package's public API and from the query
 runtime — **<!--figure:query-kinds-->24 query kinds<!--/figure-->**, **<!--figure:report-subjects-->65 report subjects<!--/figure-->** and **<!--figure:registers-->8 registers<!--/figure-->** — is
-covered by the test suite (<!--figure:test-files-->109 test files<!--/figure-->),
+covered by the test suite (<!--figure:test-files-->116 test files<!--/figure-->),
 and — where it is a report or a task — has a generated column-3 script that
 recomputes the claim in a **fresh interpreter** and fails if anything differs.
 
@@ -180,6 +180,504 @@ The detail of each — what was built, where it lives and what recomputes it —
 is in [`archive/MASTER_PLAN_ARCHIVE.md`](archive/MASTER_PLAN_ARCHIVE.md), kept as it was
 written.  A phase is a record of a round, so it is archived by the same rule
 as everything else: only the open phase is state.
+
+---
+
+## Phase 70 — native parity: where a standard method ties a native one, keep the native one and refine it
+
+**Status: closed this round.** The owner: *where a "standard" method/function
+is equal to or only slightly better than a Golay-Leech or 24D or other
+"native" GLM method I would like to retain the GLM native method and see if it
+can be refined to match or beat the standard method — I aim to have a
+"native" system wherever possible so later different systems mesh well.* The
+ledger of every measured native/standard pair and the marks N1–N5 were
+committed before any measuring code; the round-two marks N6–N8 were committed
+after round one's figures and before any round-two code
+([`studies/NATIVE_PARITY_STUDY.md`](studies/NATIVE_PARITY_STUDY.md) §1–§2.1).
+
+**What was built.** `reasoning/native_parity.py`: the ledger (8 rows, classed
+native ahead / parity / standard narrowly ahead / standard far ahead), the
+exactness report (the read-back of every stored and live address), the
+declaration, goal, document and controller comparisons, the marks, and a
+digest-keyed cache (`reasoning/_data/native_parity.json`). `retrieval.py`:
+`readback`, `native_key` and the rankings `native` (read-back distance, then
+raw Leech distance, then name), `native2` (structural book, then
+identifier-letter book, each in two layers) and the like-for-like standard
+`features2`; `DEFAULT_SCHEME` is `native2`. `corpus/address.py`: the rankings
+`lexical_native`, `lexical_native2`, `lexical_raw2` and `text_native`; the
+live `retrieve()` breaks word-overlap ties by lexical Leech distance.
+`controller.py`: the `readback` heuristic. `tools native-parity` (`--write`,
+`--json`, `--live`), the toolbox tool `native parity` (so `GLM.py --ask "tool
+native parity"`), four generated blocks, and `tests/test_native_parity.py`.
+`RequestProject/GLM/NativeParity.lean` proves the read-back exact
+(`round_magnitude`, `readbackCoord_eq`, `readback_eq`, `readback_eq_leech`,
+`readback_examples`), the residue a function of the features
+(`residue_congr`), that a lexicographic refinement reorders only inside ties
+(`sortedBy_map_primary_eq`, `take_map_primary_eq`,
+`sorted_primary_of_sorted_lex`, `lex_fst_le`), and that a comparison with a
+gap of more than four residue bounds survives quantisation
+(`order_agrees_of_gap`), with the standard axioms only.
+
+**What it measured.** N1 (`native` ≥ `features`, declarations): not met, 77
+against 80 hits at 5 on the final tree — a draw that moved with the corpus (on
+the tree before this round's Lean file it was level at 5 and ahead at 1).
+N2 (goals): met. N3: 3,976 of 3,976 stored and 102 of 102 goal read-backs
+exact — met. N4a (`lexical_native` ≥ `lexical_raw`): flips between met and
+missed by one relevant section at equal hits as the documents it indexes are
+edited — a draw.
+N4b (`text_native` ≥ `text`): met at parity.
+N5 (read-back scorer 24 of 24, minimal, same proposals as `exponent`): met.
+N6 (`native2` ≥ `features`, both sets): met — 53/72/83/112 against
+49/67/80/102 on the declarations, 18/26/31/37 against 16/22/27/37 on the
+goals. N7 (`native2` ≥ `features2`): met, with equality. N8
+(`lexical_native2` ≥ `lexical_raw`, `lexical_raw2`): the same — equal hits at
+every reading, precision within one relevant section. The
+ledger's row 2 (the shipped Leech ranking two queries behind the raw vector)
+was re-measured: two ahead at the first full reading, level later.
+
+**D15.** Address moved: the native index now ranks at least as well as the
+standard one on every declared Lean-corpus set, with its exactness guarantees
+intact, and the retrieval default is native.
+
+**What moved with the corpus.** This round's study, code and Lean file moved
+the corpus measurements (3,976 declarations in 140 files, was 3,963 in 139),
+and the pinned figures that read them were brought to the new measurement.
+The new Lean file and test file moved the hand-written counts (116 test
+files, 140 Lean files).
+
+**Named for the next round:** candidate N of [`STATUS.md`](STATUS.md) §3.4
+(native past parity), beside M.
+
+---
+
+## Phase 69 — reverse Three Column Thinking, round three: the integer sort
+
+**Status: closed.** The third item of candidate M of
+[`STATUS.md`](STATUS.md) §3.4 (the study's §9): *an integer sort, so that floor
+quotient and remainder over a variable split into finitely many residue cases
+instead of being refused `NOT_POLYNOMIAL`.* The marks X1–X7 and every declared
+case (`evaluation/reverse_tct_int_cases.py`) were committed before any
+round-three code ([`studies/REVERSE_TCT_STUDY.md`](studies/REVERSE_TCT_STUDY.md)
+§10). The previous session had closed Phase 68 but not reached its report or
+the properties table; this session confirmed the Phase 68 release still holds
+(`signoff --verify-release`: 114 of 114 test files, 7 of 7 instruments),
+rebuilt the Lean tree clean, and brought the table up to date before starting.
+
+**What was built.** `reasoning/reverse_tct_int.py`: two question forms,
+`entails over the integers: P ; C` and `bounds over the integers of x: P`, over
+the sentences of round two with every variable an integer. A floor quotient or
+remainder of an integer-valued linear term by a nonzero integer constant
+(|b| ≤ 64) is replaced by a fresh integer quotient and split into one case per
+residue in Python's sign convention, the equation `A = b·q + r` joining the
+case, innermost first. Each case is decided by elimination over ℤ: rows scaled
+to integer coefficients, strict rows made non-strict by one, every row divided
+by its gcd with the constant rounded up; exact substitution through an
+equation with a unit coefficient, Fourier–Motzkin otherwise, every derived row
+tightened. A refutation's certificate is its derivation, pruned to the
+ancestry of the contradiction; otherwise an integer witness is found by
+back-substitution or a bounded search and checked exactly; otherwise the new
+named refusal `INTEGER_UNDECIDED`. Bounds are certified by a refutation beyond
+them and an integer witness at them, moving inward past refuted values. The
+module renders its own column-3 script, which re-derives the case split,
+re-checks every tightening and combination and every witness, and
+`runtime/python_tct.reverse_int_scripts` runs them. `reverse_tct.reads` and
+`answer` send the two forms there, so the router's reverse surface, `GLM.py
+--ask`, `GLM.py --reverse` and `tools reverse-tct --three` reach it;
+`tests/test_reverse_tct_int.py` holds it. `RequestProject/GLM/ReverseTCTThree.lean`
+proves the residue split exact and exhaustive with Python's convention
+(`residue_split_pos`, `residue_split_neg`, `residue_exists_pos`,
+`residue_exists_neg`), both tightenings exact (`strict_tighten`,
+`gcd_tighten`), the derivation sound (`combine_sound`, `step_sound`,
+`derivation_sound`, `refuted_no_point`), `rational_refutation_suffices` and
+`two_x_eq_one`, with the standard axioms only.
+
+**What it measured.** X1: 29 of 29 entailment cases as declared (24 verdicts,
+5 refusals by name) — met. X2: 10 of 10 bounds answers word for word — met.
+X3: 34 of 34 scripts `VERIFIED True`, 34 of 34 mutated certificates rejected —
+met. X4: 102 entailment and 14 bounds battery questions against enumeration of
+the box, all answered, 0 disagreements — met. X5 (counted): over ℚ 20 of the 29
+entailment cases are refused `NOT_POLYNOMIAL` and the other 9 get a different
+answer, and 5 of the 10 bounds cases are refused and 5 get the rational bounds;
+none answered the same. X6: proved. X7: the Phase 67 and 68 tests pass with the
+exhaustive cases on.
+
+**D15.** Derivation (verdicts and bounds over ℤ, with floor quotient and
+remainder of a variable) and refusal (the domain named in the question, and
+`INTEGER_UNDECIDED` where elimination with rounding stops — Pugh's system is
+the recorded example) moved.
+
+**What moved with the corpus.** The corpus refresh that admitted this round's
+study, code and Lean file (3,963 declarations in 139 files, was 3,946 in 138)
+moved two measured figures, and the declared evaluation cases were updated to
+the new measurements: the stack relay now carries 18 queries the single wheel
+misses (was 17) and loses 0, 747 -> 754 of 881 (was 742 -> 748 of 877), gate
+at 72 of 1,762, still strictly ahead on all five gates up to 1/4; the
+anonymous reader reads 747 -> 82 and 244 -> 175 of 881 (was 742 -> 76 and
+240 -> 170 of 877). The stale prose of the stack-relay study's gate sweep was
+brought to its generated table. The new Lean file and test file moved the
+hand-written counts (115 test files, 139 Lean files, 99 reasoning modules, the
+iteration-cost table with the glob floor 35 → 36, the number-theory paper's
+file count), and those were brought to the measurement.
+
+**Named for the next round:** candidate M of [`STATUS.md`](STATUS.md) §3.4,
+narrowed to its remaining items.
+
+---
+
+## Phase 68 — reverse Three Column Thinking, round two: the wider fragment, disjunction, and the loop into the planner
+
+**Status: closed.** Candidate L of [`STATUS.md`](STATUS.md) §3.4,
+on the owner's three notes: widen the realiser to floor division, modulus,
+`min`/`max` and Golay binary masks, so that more of the Phase 64 programs fall
+inside (8 of 83 did); add disjunction, so that negation is closed under
+De Morgan and a compound negation is no longer refused `NOT_IN_FRAGMENT`; and
+connect Reverse TCT to the planner, so that generated questions become
+verified input for a downstream layer. The marks W1–W8, the widened objects
+and every declared case (`evaluation/reverse_tct_two_cases.py`, with the four
+Phase 67 cases the widening changes on purpose listed as `SUPERSEDED`) were
+committed before any round-two code
+([`studies/REVERSE_TCT_STUDY.md`](studies/REVERSE_TCT_STUDY.md) §7).
+
+**What was built.** `reasoning/reverse_tct.py`: new term kinds (floor
+quotient, remainder, minimum, maximum, absolute value, the bitwise operators,
+complement, shifts, negative exponents) and Golay masks as a second sort
+(count-first literals, intersection, union, symmetric and set difference,
+size, Hamming distance, `in`, subset), with a sort check and the new refusals
+`NOT_INTEGER`, `NEGATIVE_SHIFT`, `SORT_MISMATCH`; statements as conjunctions
+of `either …, or …` clauses, the dialect's `and`/`or`/`not` read into that
+form by distribution; `negate` by De Morgan followed by a meaning-preserving
+simplification (duplicate atoms, tautologies, duplicate clauses, absorption);
+case splitting of disjunctions and of `abs`, `min`, `max` for `entails`,
+`bounds` and `equivalent`; closed subterms folded first.
+`reasoning/reverse_tct_script.py`: the column-3 script widened to evaluate all
+of it independently, the affine check made a grid identity, the mutations
+extended, and the round's report and batteries. `runtime/reverse_relay.py`:
+`relay: Q` answers Q and hands its closed values, relations and witnesses to
+the planner as questions in the planner's own input language (`approximate v
+to 20 places`, `what fraction rounds to R`, `is a less than b`), reads each
+answer back into column 2 (`AGREES`, `CONSISTENT`, `DISAGREES`, `UNREAD`),
+realises it as reverse-grammar sentences, and refuses `NOTHING_TO_RELAY` and
+`OUT_OF_RANGE` by name. The router's reverse surface, `GLM.py --reverse` and
+`tools reverse-tct --two` reach it; `tests/test_reverse_tct_two.py` holds it.
+`RequestProject/GLM/ReverseTCTTwo.lean` proves the widened term grammar and
+the clause grammar uniquely readable (`render_injective`,
+`renderClause_prefix_free`, `renderCNF_injective`), negation by distribution
+exact (`negate_product_exact`), the simplification meaning-preserving
+(`simplify_preserves`), the case splits exact, case refutation sufficient for
+entailment, Python's floor-remainder convention, and why the planner chained
+to itself loses 2/3 (`chain_floor_misses`), with the standard axioms only.
+
+**What it measured.** W1: 216,723 widened terms and 18,500 mask terms round-trip
+with 0 collisions, the Phase 67 battery still does, 29 of 29 sentences word
+for word, 9 of 9 and 7 of 7 refusals — met. W2: 36 of the 83 dialect programs
+inside, all 36 agreeing with the dialect's value — met. W3: 7 of 7 negations
+as declared; over 650 normal forms every negation answered, every double
+negation certified, every negation exact on the 121-point grid — met (the
+first run certified 250 of 650; the simplification was added, and proved,
+rather than the battery cut). W4: entails 29 of 29, bounds 8 of 8, equivalent
+12 of 12 — met. W5: 92 of 92 round-two scripts `VERIFIED True`, 84 of 84
+mutants rejected; Phase 67 95 of 95 and 80 of 80 — met (one Phase 67 script,
+e30, first failed on a syntactic affine check; the check was made a grid
+identity). W6: 20 of 20 relay cases as declared, 32 handoffs all agreeing or
+consistent, 0 disagreements, every handoff question reading back — met;
+controls: the relayed sentences given verbatim answered 0 of 15, the planner
+chained to itself recovered 11 of 13. W7: proved. W8: 111 of 111 Phase 67
+cases right, 4 superseded — met.
+
+**D15.** Derivation (verdicts, bounds and equivalences over disjunctions and
+piecewise terms; values carried across a surface boundary and checked on the
+far side) and refusal (five new named refusals, and the compound-negation
+refusal removed because it is now answered) moved.
+
+**What moved with the corpus.** The corpus refresh that admitted this
+round's study, code and Lean file (3,946 declarations in 138 files, was 3,900
+in 137) moved two measured figures, and the declared evaluation cases were
+updated to the new measurements: the stack relay now carries 17 queries the
+single wheel misses (was 18) and loses 0, 742 -> 748 of 877 (was 737 -> 744
+of 867), gate at 70 of 1,754, still strictly ahead on all five gates down to
+1/4; the anonymous reader reads 742 -> 76 and 240 -> 170 of 877 (was
+737 -> 81 and 239 -> 170 of 867). The Lean address figures in `STATUS.md` §2
+had drifted by hand and were brought to the current measurement (3,503
+distinct addresses; nearest shares a file 771 times against 33 and 16 for the
+controls). The query-escalation measurement was re-taken for the same
+reason.
+
+**Also this round.** The first release run caught two things the round's
+own tests had not: `reverse_tct.py` imported `operator` and
+`reverse_relay.py` imported `math`, which the exactness inventories of the
+reasoning and runtime layers do not allow (the second counted as a float
+site). Both were rewritten with plain comparisons and exact floor division.
+The new Lean file and test file moved hand-written counts in the number-theory
+evidence paper, the package readmes and the iteration-cost table (114 units,
+139 tracked Lean files, the glob floor 34 → 35 because the new unit reaches the
+router), and those were brought to the measurement.
+
+**Named for the next round:** candidate M of [`STATUS.md`](STATUS.md) §3.4.
+
+---
+
+## Phase 67 — reverse Three Column Thinking: the language column generated from the mathematics
+
+**Status: closed.** The owner: *try a reverse three column
+thinking function where the script and math generate the language column (if
+possible), as it may allow new extended semantic operations.* Forward TCT's
+column 1 was a template caption filled in by the step that ran; nothing could
+read it back, so nothing could check it. The marks V1–V8, the grammar and
+every declared case (`evaluation/reverse_tct_cases.py`) were committed before
+any realiser, reader or operation code existed
+([`studies/REVERSE_TCT_STUDY.md`](studies/REVERSE_TCT_STUDY.md) §0–§2).
+
+**What was built.** `reasoning/reverse_tct.py`: exact terms and statements
+over ℚ read off dialect source (column 3) or off a sentence; a prefix-first
+realiser (`the sum of A and B`, `the negation of A`, number words, `the
+fraction P over Q`) and a recursive-descent reader that accepts only
+canonical spellings; a polynomial normal form; Fourier–Motzkin elimination
+with Farkas multipliers and witness back-substitution; and seven operations —
+`say`, `equivalent`, `paraphrase`, `negate`, `solve for x`, `entails`,
+`bounds of x` — each realising its answer back into a sentence with a
+certificate, and eight named refusals. `reasoning/reverse_tct_script.py`: the
+column-3 script (re-read column 1, tie every certified statement to a
+sentence of column 1, re-check the certificate with its own evaluator), the
+certificate mutation, the infix control and the battery.
+`runtime/python_tct.py` runs the scripts and the control. The router has a
+fifth surface, `reverse`, which reads a text by its colon-carrying prefix;
+`GLM.py --reverse TEXT` prints the three columns; `tools reverse-tct`
+re-takes the measurement; `tests/test_reverse_tct.py` holds it.
+`RequestProject/GLM/ReverseTCT.lean` proves unique readability
+(`render_prefix_free`, `render_injective`, `renderStmt_injective`,
+`renderConj_injective`), that the infix control is not injective, that
+negation is exact, that a Farkas certificate refutes a system, the pairing
+and solved-form lemmas, and the grid identity check, with the standard axioms
+only.
+
+**What it measured.** V1: 176,617 of 176,617 battery terms round-trip; 24 of
+24 declared sentences word for word; 7 of 7 and 5 of 5 declared refusals —
+met. V2: 0 collisions, where the infix realiser has 5,684 — met. V3: 94 of 94
+scripts `VERIFIED True`, 69 of 69 mutated certificates rejected — met (two
+mutants that first escaped were still valid certificates, and the mutation
+was corrected rather than the count). V4: 34 of 34 entailment cases as
+declared, 0 wrong; the default path without the surface answers 0 of the 58
+entailment, solve and bounds questions, the surface 58 — met. V5: 14 of 14
+solve and 10 of 10 bounds cases, 0 wrong — met. V6: 18 of 18 equivalence
+cases, 0 wrong; every paraphrase certified, at least two per case — met. V7:
+proved. V8: 8 of the 83 Phase 64 value programs are inside the fragment and
+all 8 agree — met, and the 75 outside are the next round's work.
+
+**D15.** Derivation (a solved form, the tightest implied bounds, an
+entailment verdict with its certificate — answers no register holds, spoken
+as sentences nobody wrote) and refusal (eight named refusals, among them the
+equivalence the operation declines to decide) moved. The grammar is the
+footing, not a faculty.
+
+**Also this round.** The previous round had closed its documents but not its
+release, and the environment had no `pytest`, which the sign-off runner
+needs; `pytest` was installed before the release was taken.
+
+**What moved with the corpus.** The corpus refresh that admitted this round's
+study and code moved two measured figures, and the declared cases were
+updated to the new measurements rather than the old ones: the stack relay now
+carries 18 queries the single wheel misses (was 19) and loses 0, 737 -> 744 of
+867 (was 727 -> 734 of 858), gate at 72 of 1,734, still strictly ahead on all
+five gates down to 1/4 (380/434 vs 375/434 at 1/4); the anonymous reader reads
+737 -> 81 and 239 -> 170 of 867 (was 727 -> 86 and 234 -> 167 of 858). The
+query-escalation measurement was re-taken for the same reason.
+
+**Named for the next round:** candidate L of [`STATUS.md`](STATUS.md) §3.4.
+
+---
+
+## Phase 66 — the connected machine: one question path, every tool on it, and derivation across wheels
+
+**Status: closed.** The owner: *experiment with the concepts and
+find if there is a way to obtain increased GLM capability, and ensure the
+working parts are connected and available to the GLM as needed.* Two things
+stood in the way. The surfaces were reached by flag (`-q`, `--eng`,
+`--python`), so the default path answered none of the 53 answerable
+engineering questions and none of the 83 Python programs; and the wiring
+audit's eight tested reasoning modules (candidate 3 of
+[`STATUS.md`](STATUS.md) §3.4) were reached by nothing. For capability the
+round took candidate E, derivation across a declared union of formula wheels.
+The marks C1–C4 and U1–U4, the junction table, the physics labels and the
+question sets (`evaluation/connected_cases.py`) were committed before any
+router, toolbox or union code existed
+([`studies/CONNECTED_MACHINE_STUDY.md`](studies/CONNECTED_MACHINE_STUDY.md) §2).
+
+**What was built.** `runtime/router.py`: surfaces tried in a declared order —
+toolbox, Python dialect, engineering, planner — each either reading the text
+(and then its answer or refusal is the verdict) or passing it on; the Python
+reader asks for a parse *and* bound names, so *what is 2 + 2* stays with the
+planner. `runtime/toolbox.py`: the catalogue of the four surfaces and eight
+tools, one per unreached module (`tool moonshine`, `llvq`, `pcgs`,
+`salvage`, `salvage second`, `deep dive`, `tie break NAME`,
+`stability NAME`), each naming its Lean specification and study.
+`engineering/union.py` and the eighth engineering frame, *derive X from Y and
+Z across wheels*: the ten wheels' axioms taken together with every shared
+name split per wheel except where a declared junction identifies it (force
+and velocity between W5 and W6, and four more). `GLM.py --ask TEXT` (`-a`)
+is the connected path; `tools connected` re-takes the measurement;
+`tests/test_connected_machine.py` holds it.
+`RequestProject/GLM/ConnectedMachine.lean` proves the router's rule
+(`route_prefix_none`, `route_append_of_some`, `route_total`), the soundness
+of splitting (`licensed_sound`, `derivable_mono`,
+`not_derivable_of_functional`), that the naive union of W5 and W10 derives
+`energy = 2 * mass * speed_of_light^2` (`emc2_naive`) and the split union
+does not (`emc2_refused_split`, `emc2_refused_split_photon`), and hydraulic
+power across the junction (`hydraulic_licensed`), with the standard axioms
+only.
+
+**What it measured.** C1: 0 of the 177 contract cases are read by a surface
+in front of the planner, so all 177 keep the planner's verdict — met. C2:
+through the router, engineering 53 correct, 10 correct refusals, 0 wrong;
+Python 83 of 83 values equal to CPython and 26 of 26 refusals named; the 33
+cognition questions stay with the planner — met. C3: 136 more correct
+answers on the default path, none wrong added (the planner alone answered two
+engineering questions only up to a dimensionless constant and two Python
+float programs as exact rationals) — met. C4: the wiring audit reads 96 of 96
+reasoning modules reached, 0 not, and all eight tool questions answer inside
+60 seconds — met. U1: the naive union of the ten wheels licenses 161
+two-input formulas no single wheel does, 3 of them laws and 158 wrong
+(79 through W5/W10, 70 through W1/W2). U2: the licensed union answers the 3
+and refuses the 158, 0 wrong — met. U3: 105 of 105 in-wheel derivations
+agree, and the 63 engineering questions still score 53/10/0 — met. U4: proved.
+
+**D15.** Derivation (hydraulic power across two wheels, with its
+certificate) and refusal (158 wrong cross-wheel formulas refused, each naming
+the identification it would need) moved. The router is reach, not a new
+faculty, and the eight tools are wiring; both are recorded as that.
+
+**What moved with the corpus.** The new Lean file took the declaration
+corpus from 3,838 to 3,859 and the relay's goal set from 853 to 858 queries.
+The relay now carries 19 queries against 0 lost (it carried 10), the gate
+firing on 72 of 1,716, and the edge of its strict gain moved forward again:
+strict on all five gates of the declared band, to 1/4 (372/429 against the
+text control's 367/429 at the top gate). The anonymous register reads
+727 → 86 for the text search and 234 → 167 for the structural address over 858
+queries. `test_stack.py`, `STACK_RELAY_STUDY.md` and the two evaluation cases
+that quote these figures were updated to the measured values.
+
+**Left for the owner.** `-q` is unchanged. The census says routing it would
+change no contract answer; switching the interface every earlier document
+describes is the owner's call, and is candidate K1 of
+[`STATUS.md`](STATUS.md) §3.4.
+
+**Named for the next round:** candidate K of [`STATUS.md`](STATUS.md) §3.4.
+
+---
+
+## Phase 65 — the carried fork: six Golay candidates carried until a later decision
+
+**Status: closed this round.** The owner, on the `AMBIGUOUS` Golay reads:
+*all six are carried until resolved by a later decision, pruned or proven
+incorrect, and escalation to the Leech lattice may extend what the GLM can do
+with the information.* The pieces existed and none was reachable: the
+`Superposition` object and `collapse` of `substrate/superposition.py`, and
+X1's second reading (met, not wired, Phase 62). Four experiments K1–K4 were
+declared and committed before the measuring module existed
+([`studies/CARRIED_FORK_STUDY.md`](studies/CARRIED_FORK_STUDY.md) §2).
+
+**What was built.** `reasoning/carried_fork.py`: the `CarriedFork` — the
+candidates, the live set and a ledger in which every removal names its stage,
+its reason and the assumption that makes it sound — with three certified
+stages (the declared cases under a named closed-world assumption, a second
+reading, an unsure set), the Leech lift of the tie and its certification by
+`deep_holes.hole_diagram`, and a soft-reading escalation returned beside the
+fork as an estimate and never written into its ledger. The Python dialect
+gains `nearest`, `resolve`, `agree` and `resolve_unsure`, each a Three Column
+payload re-derived in a fresh `python3 -I` and refusing by name; `classify`
+is unchanged. `tools carried-fork` re-takes the measurement and
+`tests/test_carried_fork.py` holds it. `RequestProject/GLM/CarriedFork.lean`
+proves that carrying through more stages only shrinks the fork and in any
+order, that the ledger partitions the candidates, that a resolved fork holds
+the truth when every stage is true of it, that an unsure set of fewer than
+eight coordinates always resolves, the soft-cost identity (a candidate pays
+the reliability of its tetrad), and the lower bounds behind the Leech lift.
+
+**What it measured.** K1: 592,268 of 658,812 declared-case reads answered,
+0 wrong, where `classify` answers none — the declared mark of 90 % at every
+case-set size is **not met** (85.8 % at 32 cases); on reads of undeclared
+codewords the stage answers 14 to 112 of 768, all wrong, which is the price of
+the closed world and why it is `resolve` and not `classify`. K2: 4,224 of
+4,224 double reads, 0 wrong, the witness refused — met. K3: 3,840 of 3,840
+unsure-set reads, 0 wrong — met. K4a: 1,771 of 1,771 ties lift to a certified
+A₁²⁴ deep hole of 48 vertices — met; escalation without new information
+resolves nothing. K4b: the soft estimate right on 512 of 768, wrong on 96,
+tied on 160 — **not met** (declared 90 %). K4c: the certified cut from the
+same reading resolves 448, 0 wrong — met. Post hoc and not scored: carrying
+K1's open forks to a second read resolves 35,872 of 48,320 more, 0 wrong.
+
+**D15.** Refusal and address moved; derivation moved conditionally (the
+closed world); the soft escalation moved nothing certified.
+
+**What moved with the corpus.** The new Lean file took the declaration corpus
+from 3,822 to 3,838 and the relay's goal set from 850 to 853 queries. The
+relay still carries more than it loses on every set — 10 queries carried
+(it carried 20), 0 lost, with the gate firing on 44 of 1,706 — but the edge of its strict gain moved back to where Phase 59 left it:
+strict on four gates, to 1/5, and two tuning queries below the text control at
+1/4. `test_stack.py` and `STACK_RELAY_STUDY.md` record it as measured. The
+anonymous register now reads 736 → 59 for the text search and 232 → 160 for
+the structural address over 853 queries; the two evaluation cases that quote
+these figures were updated to the measured values.
+
+**Named for the next round:** candidate J of [`STATUS.md`](STATUS.md) §3.4.
+
+---
+
+## Phase 64 — Python speech: the GLM evaluating Python on the substrate
+
+**Status: closed this round.** The owner asked for a study and, if it worked,
+an implementation of the GLM "speaking" Python: each construct placed on the
+substrate (fractions as carrier coordinates, ints on the dyadic tower, bools
+as `F₂` bits, strings and slices on the MOG grid, bitwise operations on the
+eight vertical 3-bit Toffoli/Fredkin sub-registers, tuples as carriers,
+frozensets as Golay masks, `match` as coset decoding, the AST as a structural
+address), every operation answered as a Three Column payload, and a refusal
+contract for floats, non-determinism, the deep hole, uncorrectable distance
+and cross-scale comparison. The pass marks P1–P6 and the corpus
+(`evaluation/python_speech_cases.py`) were committed before the measuring
+module existed ([`studies/PYTHON_SPEECH_STUDY.md`](studies/PYTHON_SPEECH_STUDY.md) §2).
+
+**What was built.** `reasoning/python_substrate.py` (the registers and their
+gate programs, the two's-complement register tower, dyadic moves, slice index
+maps with MOG cells, masks, `classify` on the complete decoder, AST canonical
+forms and addresses, and the plain-Python prelude) and
+`reasoning/python_speech.py` (the evaluator, the static refusal gate, the
+payload and its column-3 script with a mutation control, the measurement,
+the differential battery and the question-surface control). `GLM.py --python
+SOURCE` and `--python-file PATH` reach it; `tools python-speech` re-takes the
+measurement; `tests/test_python_speech.py` holds it.
+`RequestProject/GLM/PythonSpeech.lean` proves the gate programs compute their
+functions and are bijections, that bitwise operations act window by window,
+that `>>` is floor division, the slice index map, and that the `classify`
+verdicts are exhaustive and exclusive for any code of minimum distance 8.
+
+**What it measured.** P1: 83 of 83 value programs equal CPython in type and
+value. P2: 26 of 26 refusals named as declared. P3: 83 of 83 column-3
+scripts exact and `VERIFIED True` in a fresh `python3 -I`, and 83 of 83
+mutated claims caught. P4: 6 of 6 gate programs compute and invert on all 8
+lane states; 80 of 80 register operations equal CPython. P5: over the
+12951-word radius-4 ball, 2325 branched and 10626 refused `AMBIGUOUS` with six
+candidates, 0 wrong. P6: 10 of 10 equivalent pairs share an address, 0
+collisions over 57 distinct expressions. The post-hoc battery: 7128
+expressions, 2830 answered, 0 differ from CPython. The control: the existing
+question surface solves 0 of the 83.
+
+**D15.** Derivation (P1, P3, P4), refusal (P2, P5) and address (P6) all
+moved. **Said plainly** (study §6): `d ≥ 5` never occurs against the whole
+Golay code, whose covering radius is 4, so `UNCORRECTABLE` is relative to the
+declared cases; "zero entropy" is measured as a bijection of lane states, not
+as heat; the address decides equivalence only up to commutative reordering,
+parentheses and renaming.
+
+**What moved with the corpus.** The new Lean file took the declaration corpus
+from 3,766 to 3,822, and the measurements that read it moved with it. The
+stack relay still carries 20 queries and loses none, and is still strictly
+ahead of the text control on all three sets, now over 850 goal queries with
+the gate firing on 56 of 1,700; the anonymous-register figures read 718 → 76
+for the text search and 210 → 153 for the structural address over 850
+queries. The two evaluation cases that quote those figures were updated to the
+measured values.
+
+**Named for the next round:** candidate I of [`STATUS.md`](STATUS.md) §3.4.
 
 ---
 
@@ -1150,7 +1648,7 @@ remaining, the release. Running it failed six units, none of them noise:
 
 **What the release now says.** `signoff --verify-release` reports **99 of 99
 test files and 7 of 7 instruments** signed with the exhaustive cases on; the
-suite is **<!--figure:suite-->4,267 tests across 108 of the 109 test files, 16,276 subtests, outside the document check<!--/figure-->**,
+suite is **<!--figure:suite-->4,415 tests across 115 of the 116 test files, 16,957 subtests, outside the document check<!--/figure-->**,
 one process with `GLM_EXHAUSTIVE=1` collecting 3,979; the end-to-end
 evaluation is **157 / 157** with 19 expected refusals; `corpus --check` is
 current; and `lake build` is clean over 120 Lean files with no `sorry`.

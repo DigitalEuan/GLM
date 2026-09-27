@@ -1,0 +1,646 @@
+# '../' - TOP REPOSITORY LEVEL TIER ROOT README 
+
+
+## Tier 0 — the coarse read
+
+**Question.** What does this repository hold, folder by folder, and how does the data flow through it?
+
+**Verdict.** The GLM is a substrate-native cognitive architecture.
+
+**Deciding figure.** Five layers, in the order they take over: substrate, integer, rational, Griess, universal.
+
+**Recomputed by.** (hand-written argument; nothing to recompute)
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+**Version:** 5.37 (18 September 2026)  
+**Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand  
+**Parent:** None - Top Level
+
+## UPDATE THIS README
+if changes are made in this folder or systems in sub-folders need rewiring within the repository and effect this README file's structure.
+
+*Changed in 5.37:* the experiment the blockers study had been declaring for
+four rounds is **run**, and it is in `reasoning/probe_oracle.py`. Each of the
+twenty pre-registered probe questions is hand-written into the system's own
+query grammar and asked again, which splits the probe's seventeen refusals
+three ways: <!--figure:oracle-parsed-->6<!--/figure--> of twenty are answered
+by a query that already exists (against
+<!--figure:oracle-english-->2<!--/figure--> asked in English),
+<!--figure:oracle-surface-->10<!--/figure--> are held by a register row or a
+shipped function that no query kind returns, and
+<!--figure:oracle-absent-->4<!--/figure--> are held nowhere. So **the parser
+is worth <!--figure:oracle-parser-worth-->4<!--/figure--> questions and a
+field surface is worth ten** — a statement about coverage, not about
+reasoning, since a field surface is `table`, the weakest faculty. It ships as
+`tools oracle`, two generated blocks and
+[`../studies/PROBE_ORACLE_STUDY.md`](../studies/PROBE_ORACLE_STUDY.md), with
+`RequestProject/GLM/ProbeOracle.lean` proving the three classes partition the
+sample. It keeps **no measurement cache**: twenty live queries take seconds,
+so nothing new can go stale. Two smaller things came with it: the count of
+reasoning modules in the chain below is a generated figure rather than a
+hand-typed number, and the state the previous round left — 291 tracked `.pyc`
+files, two stale derived caches and a ledger signed for only five of the
+suite's files —
+is cleared.
+
+*Changed in 5.36:* the round the gates were made fast is **closed**, and two
+things that had been left half-done are finished. The sign-off machinery is
+split into the **rule** and the **record**: `signoff/rules.py` says what a
+closure is, what a digest covers and how a unit is run, and is in every
+closure; `signoff/ledger.py` keeps the plan, the signatures, the runner and
+the reporting, and is in none but the six units that import it. Editing the
+reporting used to re-run all 96 units and now runs 6, which is why two new
+instruments were worth adding: `signoff --why` names the *kind* of file that
+moved behind each stale unit (documents, code, data, Lean, scaffolding), and
+`signoff --impact PATH` says what an edit to a file *would* cost before it is
+made. [`../studies/ITERATION_COST_STUDY.md`](../studies/ITERATION_COST_STUDY.md)
+§5c is the measurement. A second gap closed with it: the ten study
+**measurement caches** — figures too expensive to take while rendering, kept
+beside the digest of their sources — were enumerated by nothing, so a stale
+one surfaced only when something happened to read it. `corpus --check` now
+takes a census of them (found by shape, with the re-taking command read out of
+`tools.py`) and names each stale one and its command, in the half-minute it
+already cost; §5d is that one. Alongside them: the count of standing rules is now a
+generated figure rather than a hand-written word — two documents said
+"fourteen" and "sixteen" at the same time — and the compiled `.pyc` files the
+last two rounds meant to stop tracking are untracked, with `__pycache__/` in
+`.gitignore` so they stay that way.
+
+*Changed in 5.35:* the **gates are fast now**, and this file says how. A
+documents check no longer recomputes a stale derivation — it names it and the
+command that rebuilds it, so `corpus --check` is half a minute rather than a
+quarter of an hour; the lattice quantiser decodes on scaled integers and is
+about nine times faster for the same points; and the planner's reading of the
+evaluation set, the expensive half of a refresh, runs on every core. The
+workflow block below is the order to run them in. Three documents moved with
+it: [`../STATUS.md`](../STATUS.md) is back to the present tense (the
+round-by-round narrative is in [`../MASTER_PLAN.md`](../MASTER_PLAN.md), Phase
+43), [`../PROJECT_DIRECTIVES.md`](../PROJECT_DIRECTIVES.md) states each rule
+and its instrument with the long-form argument moved to
+[`../archive/PROJECT_DIRECTIVES_RATIONALE_ARCHIVE.md`](../archive/PROJECT_DIRECTIVES_RATIONALE_ARCHIVE.md),
+and the reasoning sub-package is 80 modules rather than the 60 this file used
+to say.
+
+*Changed in 5.34:* this file says plainly **what is in this folder** and
+what is in the repository it is dropped over, because the two had drifted
+apart — the folder map below describes the parent repository, and only four of
+its branches are carried here. The README chain gained `corpus/`, `sandbox/`
+and `signoff/`; the operating manual
+[`../ITERATE.md`](../ITERATE.md) is named as the place a session starts; and
+the positioning note, which used to be repeated at the head of five documents,
+is now stated once in [`../PROJECT_DIRECTIVES.md`](../PROJECT_DIRECTIVES.md).
+
+## What is in this folder, and what is not
+
+This folder is the **overlay**: the part of the system that is developed and
+verified here, laid out so it can be dropped over the GLM repository the map
+further down describes. Everything in it is live — there is no inert copy.
+
+| here | what it is |
+|---|---|
+| `glm_universal/` | the active runtime and every study instrument — the substrate, the registers, the reasoning modules, the query runtime, the corpus tools, the sign-off ledger and the tests |
+| `glm_lean/RequestProject/GLM/` | the **generated mirror** of the Lean development. The source is `../RequestProject/GLM/`; `tools lean-mirror --write` regenerates this copy and an instrument checks the two are identical. Never edit this one |
+| `arc_agi_17/` | the puzzle data and the stored run state the grid register reads |
+| `GLM.py` | the command line: `python3 GLM.py -q "..."` |
+| `FIGURES.md` | every documented count, regenerated by `python3 -m glm_universal.figures --write` |
+| `REASONING_CAPABILITY.md` | whether the machine reasons, answered against the measurements rather than described |
+| `conftest.py` | the test harness scaffolding |
+
+What is **not** here, and is one level up: the standing rules
+([`../PROJECT_DIRECTIVES.md`](../PROJECT_DIRECTIVES.md)), the reading order
+([`../ENTRY.md`](../ENTRY.md)), the operating manual
+([`../ITERATE.md`](../ITERATE.md)), the current state
+([`../STATUS.md`](../STATUS.md)), the history
+([`../MASTER_PLAN.md`](../MASTER_PLAN.md)), the studies (`../studies/`), the
+Lean source (`../RequestProject/`) and the supplied material
+(`../source_material/`).
+
+**Starting a round?** [`../ITERATE.md`](../ITERATE.md) is the manual: the four
+short reads that orient a session, the three gates and which to run when, and
+where a finding is written down.
+
+## The GLM is a substrate-native cognitive architecture. 
+It grows with each iteration rather than starting again over and over. Not a solver pipeline — a system that perceives, reasons, and acts using a 24-dimensional mathematical substrate built on the Universal Binary Principle (UBP).
+
+## The layered projection perspective
+This system's development is not about leaving older systems behind.  Each
+older GLM iteration is true within its own range, then becomes untrue only
+when the next dimension layer is required to take over.  The current
+`glm_universal` runtime can run a branch of operations at any lower layer
+and, when needed, trigger a higher-perspective branch and re-run through
+again for multiple perspectives.
+
+> There are 'Dimensional Projection' perspectives to the GLM — one is from
+> the most recent system showing where previous systems failed and the fix
+> for the situation, this is the highest dimension perspective, the other
+> is from each iteration which seems to show an alignment up to a point but
+> then is superseded by the next higher dimension perspective — a layered
+> projection perspective where each layer is both true from its limited
+> perspective and works to that degree of implementation then becomes untrue
+> when the next dimension layer is required to take over.  This layering
+> makes more sense of the system — it could run a branch of operations
+> (scripts, functions) and when needed it triggers a higher perspective
+> branch then re-runs through again for multiple perspectives.
+
+The five layers, in the order they take over: **substrate** (Golay/MOG
+binary, GLM-0) → **integer** (SI7 exponents, GLM-1) → **rational** (EXT10
+exponents + Leech carrier, GLM-2) → **Griess** (V₂ algebra + Monster,
+GLM-3) → **universal** (all layers at once, GLM-3+).  Each is implemented in
+`glm_universal/reasoning/dimension_layers.py` and is reachable from the
+runtime session via the `project A B` query kind (see "GLM-3+ v0.5.3"
+section near the bottom of this README).
+
+---
+
+## The README chain
+
+Every folder's README names its parent and its children, so the documentation
+reads as one chain from this file down to the individual modules. Following it
+from here:
+
+Every count quoted below is recomputed by `glm_universal/figures.py` and
+written to [`FIGURES.md`](FIGURES.md); `tests/test_figures.py` fails if this
+file and that computation disagree, so none of these numbers has to be
+checked by hand.
+
+After a change, one command brings every derived document back to the tree:
+
+```bash
+cd overlay
+PYTHONPATH=. python3 -m glm_universal.corpus --check             # exit 1 on any drift, ~30 s
+PYTHONPATH=. python3 -m glm_universal.corpus --refresh           # the whole chain, in order
+PYTHONPATH=. python3 -m glm_universal.tools lean-mirror --write  # regenerate the Lean mirror
+```
+
+And three that price the work instead of doing it — each answers in under a
+minute and none of them runs a test:
+
+```bash
+PYTHONPATH=. python3 -m glm_universal.signoff --plan              # what is stale, and what it costs
+PYTHONPATH=. python3 -m glm_universal.signoff --why               # which kind of file moved, per unit
+PYTHONPATH=. python3 -m glm_universal.signoff --impact ../STATUS.md  # the cost of an edit, before it
+```
+
+Check first, refresh only if it asks you to. `--check` runs with recomputation
+forbidden: a derivation kept beside the digest of its code — the planner's
+reading of the evaluation set, the type-2 class table, the economic lattice
+points — is *reported* stale, together with the command that rebuilds it,
+rather than silently rebuilt inside a check. `--refresh` is where that cost is
+paid, once, and its expensive half runs on every core (`GLM_PLANNER_JOBS=1`
+makes it serial).
+
+`--refresh` rebuilds the Lean address book, the document address book, the
+measurement cache and then the generated documents, blocks and inline figures,
+in that order — the only order in which one pass converges — and ends with a
+fixed-point check. `lean-mirror` generates `glm_lean/RequestProject/GLM/` from
+`RequestProject/GLM/`, the copy `lake build` compiles, so the two copies are no
+longer kept in step by hand; without `--write` it only reports whether they
+agree.
+
+```
+README.md  (this file, the top tier)
+└── glm_universal/README.md          v1.23.0 — the active runtime, the map of the eleven sub-packages
+    ├── substrate/README.md          Golay, MOG, Leech, the digit stack, decoding, the frame bridge
+    ├── data_objects/README.md       the 8 registers and the two-legged losslessness contract
+    ├── reasoning/README.md          the <!--figure:reasoning-modules-->100<!--/figure--> reasoning modules, and what each one is reachable as
+    ├── semantics/README.md          the meaning space, reference, derived relations, the audit
+    ├── recipe/README.md             the domain description, the one generic path, the three domains regenerated
+    ├── language/README.md           the question description, the three generic matchers, and the seven kinds read off them
+    ├── runtime/README.md            the 24 query kinds, the 65 report subjects, the session API
+    ├── migration/README.md          the repository's stored state, brought in literally
+    ├── benchmarks/README.md         the 5 suites, their baselines and their findings
+    ├── capabilities/README.md       the 33 probes and the boundary each one locates
+    ├── evaluation/README.md         the <!--figure:evaluation-case-count-->177<!--/figure-->-case end-to-end CLI evaluation, and how it scores
+    ├── corpus/README.md             the documents read as data: the tier contract, the
+    │                                address book, the generated blocks and inline figures,
+    │                                and what one iteration costs
+    ├── sandbox/README.md            what is run but not relied on, with its computed
+    │                                promotion checklist (directive D14)
+    ├── signoff/ (in the package README) the ledger: a digest of everything each test file
+    │                                and each instrument depended on, so nothing unchanged
+    │                                is checked twice — `rules.py` is the rule (and is in
+    │                                every closure), `ledger.py` the record, and `--why`
+    │                                and `--impact` say what moved and what an edit costs
+    ├── tests/README.md              <!--figure:test-files-->116 test files<!--/figure-->: what each one checks, and why
+    └── examples/README.md           the six demonstration scripts and the generated transcript
+
+FIGURES.md                              every documented count, regenerated by
+                                        `python -m glm_universal.figures --write`
+glm_lean/RequestProject/GLM/README.md   the Lean 4 development: <!--figure:lean-files-->140 Lean files<!--/figure-->, no sorry
+INFORMATION_LOSS_STUDY.md               the information-loss-at-boundaries study
+INFINITE_VALUES_STUDY.md                infinite values and irrational numbers: what the
+                                        value layer can hold, and where it provably stops
+GEOMETRIC_AMBIGUITY_STUDY.md            ambiguity as a value: the six-fold tie at a deep
+                                        hole, bundling, and contextual collapse
+CAPABILITY_ASSESSMENT.md                what the machine can actually do, measured: the
+                                        probes, the benchmarks and the CLI evaluation
+ANALOGY_LAYER_STUDY.md                  analogy by named relation: why the vector-offset
+                                        model failed, and what replaced it
+NOISE_EXPERIMENT_STUDY.md               noise used as the computation: cascaded loops, closed
+                                        orbits, interacting tones, dither and error feedback
+                                        through a matrix, all exact
+GLM_UNIFICATION_BLUEPRINT_AUDIT.md      the unification blueprint read as a live claim ledger:
+                                        every testable sentence recomputed and given a verdict
+GLM_STUDY_CATALOG_AUDIT.md              the external study findings recomputed, claim by claim:
+                                        58 claims, 33 confirmed, 14 refuted, 7 not reproduced,
+                                        4 not implemented
+GLM_COMPANION_STUDIES_AUDIT.md          the two companion preprints tested against the
+                                        definitions they state: 49 claims, 26 confirmed,
+                                        17 refuted, 5 not reproduced, 1 not implemented
+HIGHER_LATTICE_STUDY.md                 above 24 dimensions: the 32-dimensional Barnes-Wall
+                                        rung and its three-resolution address, the
+                                        48-dimensional ternary rung, and delta-sigma run
+                                        against a Leech shell
+LEAN_ADDRESS_STUDY.md                   a deterministic Leech address for each of the 3976
+                                        Lean declarations, scored on read-back fidelity and
+                                        against a digest control and a seeded reshuffle
+HARMONY_STUDY.md                        the harmonic register — 28 intervals as exact ratios —
+                                        and the musical third of the catalogue's universality
+                                        claim, measured against a control it does not beat
+ECONOMICS_STUDY.md                      the economic register — 21 quoted prices as exact
+                                        rationals — and the last third of the same claim:
+                                        an exact magnitude decided by integer comparison,
+                                        and a control the lattice does not beat
+HEXCOLOUR_STUDY.md                      the hexcolour address layer audited on the shipped
+                                        data: 4,680 distinct addresses, read-back, agreement
+                                        with the stored masks, and lookup by address
+RELATIVE_MEASURE_STUDY.md               measure words as relative measures: the 45-class
+                                        comparison register, the widening measured over 56
+                                        uses, the comparative between two uses, and the
+                                        queries that refuse at their boundary
+DENOTATION_STUDY.md                     what the undimensioned names denote: the factor
+                                        basis swept, the 36-entry denotation register, and
+                                        the `related_to` residue finished as a vocabulary
+                                        decision rather than a failed lookup
+RECIPE_STUDY.md                         the recipe made into an object: a domain
+                                        description, the one generic path from it, and
+                                        three registers regenerated from their
+                                        descriptions alone, 94 of 94 carriers identical
+LANGUAGE_STUDY.md                       the question shape made into an object: seven
+                                        query kinds read off descriptions across three
+                                        shape families, with the branches they replaced
+                                        frozen beside them as the thing to agree with
+LLVQ_TABLE_STUDY.md                     the quantiser's search replaced by a lookup: the
+                                        MOG's 16-entry column table, 128 classes of 32,
+                                        the class minimum and the bounded search proved
+                                        in Lean, and 2,118 corpus addresses unchanged
+RETRIEVED_LEAN_STUDY.md                 the 25 files of Lean retrieved from the supplied
+                                        archive, one row each: what every one of them
+                                        proves, and the nine results that are negative
+SOURCE_SALVAGE_AUDIT.md                 the first reading of the archive: eleven results
+                                        recomputed from the substrate, and three
+                                        corrections to the archive's own figures
+SOURCE_SALVAGE_SECOND_PASS.md           the second reading: eight more results, ending in
+                                        the parity count that caps the free symmetries of
+                                        the cube surface at 24
+ARCHIVE_DEEP_DIVE_STUDY.md              the two questions that first reading left open —
+                                        the 44 balanced octads and the relaxation — both
+                                        answered no, with the controls
+COMBINER_STUDY.md                       what XOR is doing here: the code closed under
+                                        exactly the affine combiners, and the pigeonhole
+                                        bound on what a narrow output loses
+SEARCH_LOOP_STUDY.md                    the archive's search loop read as a program space:
+                                        what the hard gate admits, and what the ranking
+                                        cannot separate
+TIE_BREAK_STUDY.md                      what a nearest-point tie is, and what breaking it
+                                        by index costs
+PROJECT_DIRECTIVES.md                   the standing rules, each naming the
+                                        instrument that enforces it, the positioning
+                                        note stated once, and the standing target
+ITERATE.md                              the operating manual: the three gates, and
+                                        where a finding is written down
+STATUS.md                               the current state: what is done now, what is
+                                        open, and how to re-verify it
+MASTER_PLAN.md                          the history: the phases, and what every round
+                                        delivered
+```
+
+That list is a reading path through the studies this README was written
+alongside, not an index: the **complete** one is [`ENTRY.md`](../ENTRY.md),
+which states the reading order and the coverage claim, and
+[`DIGEST.md`](../DIGEST.md), which is that list at tier 0 and is *generated*
+from the documents' own tier-0 blocks, so it cannot drift from them.  The
+studies added since — among them the deep-hole rounds and their failure
+diagnosis, cumulativity as a shipping condition, escalation as a step of the
+query loop, the reverse-call planner in its sandbox and the review-sweep
+register — are reached from there.
+
+Each of the other top-level folders keeps its own README as before; the tree
+below is the index to them.
+
+## This repository is a system 
+
+each folder has a README.md wiring the folders together like a script with
+dependencies. **The map below is of the parent GLM repository**, which is what
+this overlay is dropped over; of its branches, the ones carried here are
+`glm_universal/`, `glm_lean/`, `arc_agi_17/` and the root CLI. The rest are
+described as they stand upstream, and the material salvaged from them is
+audited in `../studies/SOURCE_SALVAGE_AUDIT.md`,
+`../studies/SOURCE_SALVAGE_SECOND_PASS.md` and
+`../studies/ARCHIVE_DEEP_DIVE_STUDY.md`.
+
+```
+https://github.com/DigitalEuan/GLM (../)                     FOUNDATION the director and collector. 
+  ├──→ GMHGL/           UBP SYSTEM - Golay engine, TAX, NRCI 
+  │                     (exact rational math - NO Floats wherever possible)
+  │
+  ├──→ data_object/     ENCODING
+  │                     1) 'data_object/' - how to encode subjects as 24-bit Data Objects - 118 elements, 82 molecules, 36 bonds, 95 words
+  │                     2) 'encoding_definition_attempt_03-08.26/' - Gas-phase diatomic interaction pilot and structured Element Object v4
+  │                     3) 'encoding_definition_attempt_04.08.26/' - Empirical calibration: 190 kJ/mol per work unit. Tick=2.10 fs, Cell=17 μm. + Dual-warp architecture: graduated for energy, flip for classification.
+  │
+  │
+  ├──→ light/           SCALE CALIBRATION
+  │                     1) Speed of light study (UBP ↔ real-world)
+  │                     2) 'aristotle_01/' - Lattice walking shortcut method + Lean4 verified UBP including 'Y' constant, Symmetry TAX, NRCI +
+  │                     3) 'EM_calibration_1/' (substrate-unit-to-meters conversion)
+  │                     4) UBP-to-Realworld Scale: S(λ, HW) = λ / [HW × (Y + 1/8)]
+  │                        (from arc_agi_17 EM propagation study, v1-v9)
+  │                     5) light/aristotle_01/Y_STUDY_CLEAN_RESTATEMENT.md - Lean4 verified Y, TAX, NRCI +
+  │
+  ├──→ glm_machine/     THE GLM MIND
+  │                     Perceives, reasons, acts,
+  │                     Lingo (GLM language) language, conditional reasoning
+  │                     dev/glm_v37_grown.py — latest runtime (crystallization, adversarial, gap words)
+  │
+  ├──→ glm_lean/        LEAN-VERIFIED GLM (3 generations)
+  │                     GLM-1: 43 claims, integer exponents, Golay/MOG carrier
+  │                     GLM-2: 58 claims, rational exponents, Leech carrier, Co₀
+  │                     GLM-3: 64 claims, full Griess algebra (196,884 dims), Monster
+  │                     Each: paper + reasoner + Lean 4 proofs (no sorry)
+  │
+  ├──→ glm_universal/        collective active version for development/growth
+  │                         **v1.23.0 — feature complete.** Eleven sub-packages,
+  │                         each with its own README: substrate/ data_objects/
+  │                         reasoning/ semantics/ recipe/ language/ runtime/
+  │                         migration/ benchmarks/ capabilities/ evaluation/
+  │                         (plus tests/ and examples/). GLM.py CLI at repo root.
+  │                         24 query kinds, 65 report subjects, 8 registers
+  │                         (physics 726, chemistry 118, molecules 51,
+  │                         mathematics 22, lexicon 149, spatial 28,
+  │                         harmonics 28, economics 21)
+  │                         holding 1,143 carriers. The repository's stored
+  │                         state migrated in literally (4,282 concepts,
+  │                         4,014 CRG edges) and then audited: 83 of those
+  │                         concepts denote anything determinate, and the
+  │                         grounded graph that replaces it holds 357
+  │                         meanings, 1,705 notations and 12,859 edges, each
+  │                         re-derived on demand. 5 benchmark suites, 2,390
+  │                         scored tasks, every suite above its baseline.
+  │                         Reals held as processes, written arithmetic over
+  │                         them including exp/log/sin/cos/tan and real
+  │                         powers, and 33 probes that report where the
+  │                         machine stops: 20 hold, 13 break, 0 errored.
+  │                         A <!--figure:evaluation-case-count-->177<!--/figure-->-case end-to-end evaluation drives GLM.py in
+  │                         a fresh interpreter over every query kind and
+  │                         every report subject.
+  │                         <!--figure:suite-->4,415 tests across 115 of the 116 test files, 16,957 subtests, outside the document check<!--/figure-->,
+  │                         zero failures. Every figure here is regenerated
+  │                         into `FIGURES.md`.
+  │                         Nothing unchanged is checked twice: the sign-off
+  │                         ledger `.glm_signoff.json` records, for each test
+  │                         file and each of the 7 instruments (lake build,
+  │                         the sorry scan, the two-copy diff, the probes,
+  │                         the benchmarks, the evaluation, the figures
+  │                         check), a digest of everything its last passing
+  │                         result depended on — imports, data, the documents
+  │                         and Lean sources it names, the scaffolding and
+  │                         the interpreter — and re-runs only what moved.
+  │                         `python -m glm_universal.signoff --verify`.
+  │                         Start at `glm_universal/README.md`.
+  │
+  ├──→ long_term_memory/   THE GLM MEMORY
+  │                        glm_training_data.json (all GLM training data)
+  │                        GLM_KNOWLEDGE.md (all GLM knowledge from training)
+  │     
+  ├──→ arc_agi_15/      ARC AGI v15 SOLVER EDITION 
+  │                     Leaves off at 'FOR_USER_v065.md'
+  │          
+  ├──→ arc_agi_16/      ARC AGI v16 EXPERIMENTS EDITION 
+  │                     Focussed on training the GLM, perhaps doesn't use this system well
+  │
+  ├──→ arc_agi_17/      ARC AGI v17 SUBSTRATE-NATIVE COGNITIVE ARCHITECTURE
+  │                     GLM mind + lattice perception + imagination + growth system
+  │                     Best: 105/181 (23% ARC + 100% diverse types) | CRG: 4,015 edges | 217 runs
+  │                     Key: scripts/arc_v35_pipeline.py (latest) or scripts/arc_v32_pipeline.py (self-contained)
+  │                     11 puzzle types, 197 simplicial faces, physics-corrected (Gray code, Symmetry Tax, 2Δv)
+  │
+  ├──→ arc_agi_(version_number)/      THE NEXT ARC AGI attempt
+  │
+  ├──→ leech_lattice/      fast way to map and measure integers within the Leech lattice
+  │
+  └──→ CATALOG.md          full repository catalog (all files, all folders 20.08.26)
+
+```
+
+---
+
+## What Each Folder Is
+
+| Folder | Intended Purpose | Current ARC AGI Score | Current Key File | Experiment and Development Work Needed |
+|--------|---------|-------|----------|----------|
+| **ROOT Top Tier repository folder** | Collect, define and conduct use of all sub-folders, files within folders and scripts throughout the whole of this repository and system, to direct experiments and studies that use the UBP and or GLM systems | — | 'README.md' (this file) | Organise all folders and their contents so no scripts are repeated and all systems use a single source ('GMHGL/' and 'glm_machine/') for operations, 'data_object/' for encoding, 'light/' for scale calibration and 'long_term_memory/' for all GLM training and learning. As of v2.9 the active runtime is `glm_universal/` plus the `GLM.py` CLI at the repo root — see "GLM-3+ v0.5.0" section near the bottom. |
+| **GMHGL/** | Foundation — Golay engine, TAX, NRCI | — | `ubp_unified_v5.py` | Extend existing capacity/capabilities if possible. Note: `snap_to_codeword` has a Lean-verified bug (only corrects weight ≤ 3, not 4). Fix documented in light/EM_calibration_1/reports/snap_to_codeword_FIX.md |
+| **data_object/** | Encoding — Subjects → 24-bit Data Objects | — | `encoding_definition_attempt_04.08.26/README.md` | Use in studies/experiments. Warping (rotate_3 + flip) and geometric work (190 kJ/mol calibration) now integrated into arc_agi_17 |
+| **glm_machine/** | Active Geometric Language Machine system | — | `dev/glm_v37_grown.py` | Growth and development alongside the ARC AGI developments. v37 features (crystallization, adversarial testing, gap word derivation, deliberative reasoning) now integrated into arc_agi_17 |
+| **arc_agi_17/** | Substrate-native cognitive architecture — GLM mind with lattice perception, imagination, growth, diverse puzzles, simplicial faces | 105/181 (23% ARC + 100% diverse) | `scripts/arc_v35_pipeline.py` | Continue growth. Target: 5,000 CRG edges (current: 4,015), 30%+ ARC. 217 cumulative runs. 11 puzzle types. Physics-corrected (Gray code, Symmetry Tax, 2Δv). Self-contained pipeline available at `scripts/arc_v32_pipeline.py`. |
+| **arc_agi_15/** | Solver — Working Solvers (3/9 mind solved / 6/9 Solvers solved) | 9/50 | `consolidated_mind.py` | Leave as record of attempting #15 and for parts if needed rather than rebuilding scripts from scratch |
+| **arc_agi_16/** | Experiments | 9/50 | `arc_learning_mind.py` | Leave as record of attempting #16 and parts if needed rather than rebuilding scripts from scratch |
+| **light/** | Calibration — UBP ↔ real world | — | `aristotle_01/lattice_shortcut.py` and `aristotle_01/LATTICE_SHORTCUT_METHOD.md`, 'Y_STUDY_CLEAN_RESTATEMENT.md' | Add more calibration anchors through various scales of reality. UBP-to-Realworld Scale: S(λ, HW) = λ / [HW × (Y + 1/8)] established in arc_agi_17 study |
+| **long_term_memory/** | Archive — all GLM training data + knowledge | — | `glm_training_data.json` | Needs proper implementation so this becomes an on-going GLM training method. arc_agi_17 now reads from this and writes learning patterns persistently |
+| **glm_lean/** | Lean-verified GLM — 3 generations of exact composable meaning on a lattice carrier | — | `glm3/glm3_paper.py` | Independent verification of GLM concepts via Lean 4 + Mathlib proofs (no sorry). GLM-1 (43 claims), GLM-2 (58 claims), GLM-3 (64 claims, full Griess algebra). See `CATALOG.md` for full file listing. |
+
+---
+
+## Data Flow
+
+```
+Subjects (elements, molecules, words)
+for Elements: ubp_system_kb.json (118 elements)
+    ↓ encode via elements_data_object_system.py
+24-bit Data Objects (EN×10, BP÷40, MP÷40, Rho×10)
+    ↓ warp via graduated_activation_warp / rotate_3+flip
+Warped Data Objects (Activation row modified for BO≥2)
+    ↓ interact via AND/XOR + geometric work
+Feature vectors (24 features per pair)
+    ↓ predict via Random Forest / k-NN
+Bond Energy (r=0.55) + Bond Order (86.8%)
+    ↓ calibrate via 190 kJ/mol scale factor
+Real thermodynamic values (kJ/mol)
+    ↓ compute on via GMHGL/
+Metrics (TAX, NRCI, AND, XOR, snap cost)
+    ↓ reason about via glm_machine/
+Decisions (perceive → interpret → propose → inspect)
+    ↓ solve via arc_agi_17/ (GLM mind + lattice perception + imagination)
+Results (solved tasks, experience, grown CRG)
+    ↓ archive to long_term_memory/ + arc_agi_17/results/glm_state.json
+Training Data + Knowledge (grows with each run — 217 cumulative runs)
+```
+
+---
+
+## The Constants
+
+| Structural term | Symbol | Type | Operational meaning |
+|---|---|---|---|
+| Perfect space | `0` | pattern | no active coordinate |
+| Zero vector | `0` | pattern | no disturbance, no information |
+| Raw information | `v` | `Fin n → ℤ` | an integer pattern on `n = 24` coordinates |
+| Primitive difference "2" | `Δ` | `ℝ` = 2 | the numerator of the read operator |
+| Capacity / zone-share | `Z★` | `ℝ` = 1/8 | cost of occupying a permitted zone |
+| Body | 24 coordinates | index set | the coordinate space |
+| Loop-check (numeric) | `Π` | `ℝ` = π | the argument of the read operator |
+| Loop-check (structural) | `σ(v)` | 12 bits | the Golay syndrome |
+| Not-quite-closed loop | `σ(v) ≠ 0` | — | history, gap, syndrome |
+| MOG | nearest-codeword reading | — | the grammar that turns a pattern into a lawful one |
+| Golay | `[24,12,8]` code | — | protection: minimum distance 8 |
+| Leech | `Λ₂₄` | — | embodiment: the 24-dimensional geometry |
+| Observer / read quantum | `Y` | `ℝ` | `1/(π + 2/π) = 0.2646754…` |
+| Activation quantum | `Q` | `ℝ` | `Y + 1/8 = 0.3896754…` |
+| TAX | `TAX(v)` | `ℝ` | `HW(v)·Y + ‖v‖²/8` |
+| Coherence budget | `B` | `ℝ` = 10 | the unit in which tax is measured |
+| NRCI | `NRCI(v)` | `ℝ` | `B/(B + TAX(v))` |
+| CoherenceRegime | one of four | — | a band of `NRCI`, equivalently of `TAX` |
+
+### Lightspeed calibration
+- Charge: 1 vertex step = e/12 C (exact)
+- Velocity: v/c = 0.339 (exact, from γ = MONAD/13)
+- Mass: m_e = Y² × WOBBLE × 24⁴ × 29⁴ × h × Δν_Cs / c² (0.007% - 0.009% error results vary currently)
+- **UBP-to-Realworld Scale**: S(λ, HW) = λ / [HW × (Y + 1/8)] (arc_agi_17 v9)
+  - HW=8: S = λ/3.1174 (gamma/X-ray/EUV)
+  - HW=12: S = λ/4.6761 (optical/IR/microwave)
+  - HW=16: S = λ/6.2348 (radio/ELF)
+- **TAX conservation law**: TAX(a⊕b) = TAX(a) + TAX(b) − 2×TAX(a∧b) (arc_agi_17 v10)
+The mass residual is an open problem.
+
+### (π calibrated) Y Constant
+- Y = 1/(π + 2/π) ≈ 0.264675
+- Entropic wobble — cost per active coordinate
+- Activation quantum: Y + 1/8 = 0.389675
+- Now available as exact Fraction (via math_atlas continued fractions) — no float drift
+
+### TAX and NRCI
+- TAX = HW·Y + ‖v‖²/8 (topological + geometric cost)
+- NRCI = 10/(10 + TAX) (coherence measure, 0-1)
+- NRCI=1.0 for zero vector (perfect coherence, vacuum)
+- CoherenceRegime: OnBit (≥0.8), Coherent (≥0.5), Transitional (≥0.3), Subcoherent (<0.3)
+
+---
+
+## What We've Learned
+
+### Elements (118)
+1. **Element identity is well-encoded** (EN r=0.92, BP r=0.95)
+2. **The Activation row is the bond formation layer** (diff_A r=0.50)
+3. **Warping the Activation row creates distinct bond-order sectors** (r=0.55)
+4. **Geometric work (path integral) carries independent signal** (partial r=0.33)
+5. **The snap process is part of the interaction mechanism** (snap energy monotonic with BO)
+6. **Bond order classification: 86.8% accuracy** (k-NN with flip_act_all)
+7. **The 190 kJ/mol scale factor matches real bond energies** (Br-Br = 190 kJ/mol)
+- see 'encoding_definition_attempt_04.08.26/README.md' for latest
+
+### Molecules (82)
+- Best encoding: M (log2), MP (div40)
+- r(ΔH) = +0.96
+- Details: `data_object/molecules.md`
+
+### Patterns (29 synthetic)
+- 19/29 (66%) with substrate knowledge
+- Resonant (tiling): 4/4, Geodesic (mirrors): 4/4
+
+### ARC-AGI (arc_agi_17)
+- **Best: 105/181** (v35, 23% ARC + 100% diverse types)
+- **217 cumulative training runs** (state persists across all)
+- **4,015 CRG edges** (target: 5,000 per major epoch)
+- **66 hexcolour addresses** (persistent lattice memory) — *superseded: the
+  shipped table `arc_agi_17/results/hexcolour_addresses.json` holds **15**
+  per-task addresses, all fifteen Golay codewords and all fifteen
+  round-tripping.  The figure of 66 is the upstream v35 run's own count and
+  is kept here as the historical record.  The audited, live count is the one
+  `report state migration` prints: 4,680 concept addresses, all distinct,
+  beside the 15 legacy per-task ones.*
+- **197 simplicial faces** (2-simplices in CRG)
+- **14 generative components** (0 passive)
+- **11 puzzle types** (ARC + 10 diverse: symmetry, border, colour_cascade, conditional_region, connected_component, count_encode, diagonal, noise_clean, object_gravity, pattern_tile)
+- **6 solve modes**: lattice_perception, deliberative_reasoning, hexcolour_analogical, glm_mind, glm_mind_refined, fallback_solver
+- **5-layer perception**: encoding → active perception → adaptive resolution → Golay snap → differential transition (2Δv)
+- **v37 features**: crystallization, adversarial testing, gap word derivation, deliberative reasoning, applied imagination
+
+### Older ARC-AGI (v15/v16)
+- 9/50 (18%) — 3 by mind, 6 by toolkit
+- Experience routing table built (150 entries)
+
+---
+
+## Driving Styles
+
+| Style | Goal | Best For |
+|-------|------|----------|
+| Machining | Minimise TAX | High noise |
+| Resonant | Maximise NRCI | Patterns, tiling |
+| Differential | Minimise Δ | Movement, colour |
+| Geodesic | Shortest path | Rotation, reflection |
+| Entropic | Equilibrium | Simplification |
+| Flow | Vector field | Expansion, fill |
+| **Lattice Perception** | Compute 2Δv | ARC transformation rules |
+| **Deliberative** | Step-by-step synthesis | Complex transformations |
+| **Imagination** | Imagine → check coherence → adjust | Proposal refinement |
+
+---
+
+## Sub-Documents can be used to store Subject-specific GLM training material, data and records
+
+| Folder | Documents |
+|--------|-----------|
+| data_object/ | `elements.md`, `molecules.md`, `CALIBRATION_LOG.md` |
+| glm_machine/ | README with full architecture docs |
+| GMHGL/ | `ubp_checkpoint_v5.4.1.md` |
+| long_term_memory/ | `GLM_KNOWLEDGE.md` |
+| arc_agi_17/ | `README.md` (full architecture + version history + change log) |
+| arc_agi_17/reports/ | `v17_report.md` through `v35_report.md` (one per version) |
+| glm_lean/glm/ | `DEVELOPMENT_CATALOG.md`, `glm_paper.py` (43 claims verified) |
+| glm_lean/glm2/ | `glm2_paper.py` (58 claims verified) |
+| glm_lean/glm3/ | `glm3_paper.py` (64 claims verified) |
+
+---
+
+## Resources
+
+- GLM language unified resource (15MB): 'https://github.com/DigitalEuan/UBP_Repo/blob/main/core_studio_v4.0/GLM/glm_unified_resource.json'
+- GLM Concept Relation Graph: 'https://github.com/DigitalEuan/UBP_Repo/blob/main/core_studio_v4.0/GLM/GLM_CRG_EXPANDED.py'
+- Database of words and explanation: 'https://github.com/DigitalEuan/UBP_Repo/blob/main/core_studio_v4.0/core/ubp_lang_kb_combined_v4.json'
+
+- Currently under/unused datasets and scripts in 'glm_machine/'
+   - 'GLM_CRG_MASSIVE.py' 10KB — **NOW INTEGRATED** into arc_agi_17 (250 edges)
+   - 'GLM15_physics_pack.py' 33KB - physics definitions
+   - 'color_space_data.json' 183KB
+   - 'corpus.txt' 500KB chat conversation for language training
+   - 'glm_learned_state.json' 12KB
+   - 'GLM21_generator.py' - GENERATION loop — it produces novel sequences, not just recalled templates.
+   - 'GLM22_ontological_grammar.py' - UBP ontological layers (Reality, Information, Activation, Potential) map to grammatical categories:
+1. Reality    (M_*)  → NOUN      (concrete things that exist)
+2. Information (I_*) → ADJECTIVE  (relational qualities)
+3. Activation (A_*)  → VERB       (processes, actions)
+4. Potential  (P_*)  → OPERATOR   (logical/abstract relations)
+   - 'GLM39_agent_loop.py'
+   - 'golden_cases.json' 13KB
+   - 'idea_meta_graph.json' 77KB
+   - 'dev/glm_v37_grown.py' — **v37 FEATURES NOW INTEGRATED** into arc_agi_17 (crystallization, adversarial, gap words, deliberative)
+   - 'GLM_geometric_compute.py' — **NOW INTEGRATED** into arc_agi_17 (GeometricNumber, GeometricArithmetic)
+   - 'math_atlas.py' — **NOW INTEGRATED** into arc_agi_17 (exact π, e, φ via continued fractions)
+   - 'physics.py' — **NOW INTEGRATED** into arc_agi_17 (exact NRCI, coherence regimes)
+   - 'GLM_sandbox.py' — **NOW INTEGRATED** into arc_agi_17 (verification, observation memory)
+
+- ARC AGI Attempts before v15: 'https://github.com/DigitalEuan/ARC_AGI'
+
+---
+
+<!-- figures:history -->
+
+*Everything below this line was an archive: the change log, and the write-up
+of each round as it was finished.  It now lives in
+[`../archive/PACKAGE_README_ARCHIVE.md`](../archive/PACKAGE_README_ARCHIVE.md), unchanged — the counts in it were
+true when the row was written and are deliberately left alone.  For the
+package as it is now, see [`FIGURES.md`](FIGURES.md), which is regenerated
+from the code.*

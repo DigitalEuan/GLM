@@ -5,7 +5,7 @@
 **Question.** If this session stopped now, what would the next one need to
 know to carry the round on?
 
-**Verdict.** No round is in flight: Phase 63 closed, and the next round starts
+**Verdict.** No round is in flight: Phase 70 closed, and the next round starts
 from a candidate in `STATUS.md` §3.4.
 
 **Deciding figure.** 0 steps outstanding.
@@ -42,7 +42,49 @@ absence:
 
 ## Status
 
-**No round is in flight.** Phase 63 — round two of the substrate-native
+**No round is in flight.** Phase 70 — native parity: every place a standard
+method tied or narrowly beat a Golay/Leech-native one re-measured, and the
+native method kept and refined (two native Leech books read in two layers for
+retrieval, the read-back scorer for the controller) — is closed: the study is
+[`studies/NATIVE_PARITY_STUDY.md`](studies/NATIVE_PARITY_STUDY.md), the record
+is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 70, and what it left is candidate
+N of [`STATUS.md`](STATUS.md) §3.4. Phase 69 — reverse Three Column Thinking, round
+three: an integer sort, asked for by `entails over the integers:` and `bounds
+over the integers of x:`, with floor quotient and remainder split into residue
+cases and each case decided by elimination tightened over ℤ, the refutation
+certified by its derivation — is closed: the study is
+[`studies/REVERSE_TCT_STUDY.md`](studies/REVERSE_TCT_STUDY.md) §10–§12, the
+record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 69, and what it left is
+candidate M of [`STATUS.md`](STATUS.md) §3.4, narrowed. Phase 68 — reverse Three Column Thinking, round
+two: the grammar widened to the integer layer, the bitwise operators and Golay
+masks, disjunction so that negation is closed under De Morgan, and `relay:`
+handing the mathematics to the planner as questions and reading the answers
+back — is closed: the study is
+[`studies/REVERSE_TCT_STUDY.md`](studies/REVERSE_TCT_STUDY.md) §7–§9, the
+record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 68, and what it left was
+candidate M, partly taken by Phase 69. Phase 67 — reverse Three Column Thinking: the
+mathematics and the script generate the language column through a declared,
+uniquely readable grammar, and seven semantic operations (`say`,
+`equivalent`, `paraphrase`, `negate`, `solve`, `entails`, `bounds`) are taken
+on the mathematics and realised back into checked sentences — is closed: the
+study is [`studies/REVERSE_TCT_STUDY.md`](studies/REVERSE_TCT_STUDY.md), the
+record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 67, and what it left was
+candidate L, taken by Phase 68. Phase 66 — the connected machine: one question
+path (`GLM.py --ask`) to every surface, the eight unreached modules as tools,
+and derivation across a declared union of formula wheels — is closed: the
+study is [`studies/CONNECTED_MACHINE_STUDY.md`](studies/CONNECTED_MACHINE_STUDY.md),
+the record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 66, and what it left is
+candidate K of [`STATUS.md`](STATUS.md) §3.4. Phase 65 — the six deep-hole Golay candidates
+carried as a fork until a later decision resolves them, and the tie escalated
+to the Leech lattice — is closed: the study is
+[`studies/CARRIED_FORK_STUDY.md`](studies/CARRIED_FORK_STUDY.md), the record
+is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 65, and what it left is candidate J
+of [`STATUS.md`](STATUS.md) §3.4. Phase 64 — the GLM speaking Python, evaluated
+exactly on the substrate with Three Column payloads and named refusals — is
+closed: the study is
+[`studies/PYTHON_SPEECH_STUDY.md`](studies/PYTHON_SPEECH_STUDY.md), the record
+is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 64, and what it left is candidate I
+of [`STATUS.md`](STATUS.md) §3.4. Phase 63 — round two of the substrate-native
 cognition study, which refined three near misses into planner frames and made
 the planner the default path — is closed: the study is
 [`studies/SUBSTRATE_NATIVE_COGNITION_STUDY.md`](studies/SUBSTRATE_NATIVE_COGNITION_STUDY.md)
@@ -63,7 +105,7 @@ record why not.
 ## 1. Done, committed, and checked here
 
 *Nothing in flight. The last round's record is in
-[`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 63.*
+[`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 67.*
 
 ## 2. In flight right now
 
@@ -78,17 +120,17 @@ record why not.
 
 | gate | state |
 |---|---|
-| `corpus --check --all` | current at the close of Phase 63 |
-| `signoff --verify-release` | released at the close of Phase 63: 109 of 109 test files and 7 of 7 instruments signed with the exhaustive cases run |
+| `corpus --check --all` | current at the close of Phase 67 |
+| `signoff --verify-release` | released at the close of Phase 67: every test file and all 7 instruments signed with the exhaustive cases run |
 | evaluation | 177 / 177 |
-| `lake build` | clean over the 133 files of `RequestProject/GLM/`, no `sorry` |
+| `lake build` | clean over the 137 files of `RequestProject/GLM/`, no `sorry` |
 
 ## 5. The wiring audit
 
 *Taken in Phase 56 and written into [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase
-56; its figure-registry half was closed by Phase 57 and now reads 135
-registered, 135 quoted, 0 never quoted, while its eight unreached reasoning
-modules stand as candidate 3 of [`STATUS.md`](STATUS.md) §3.4. Re-run it with
+56; its figure-registry half was closed by Phase 57, and its eight unreached
+reasoning modules by Phase 66, which made each a tool: the audit now reads 96
+of 96 reasoning modules reached. Re-run it with
 `python3 studies/scripts/wiring_audit.py`.*
 
 ## 6. Things learned worth not re-learning
@@ -109,6 +151,12 @@ modules stand as candidate 3 of [`STATUS.md`](STATUS.md) §3.4. Re-run it with
   parity readings is a group operation and inverts unconditionally;
   elementwise product inverts only where nothing reads zero, and 1,133 of
   1,143 carriers read zero somewhere.
+* **English can parse as Python.** *what is 2 + 2* is a comparison of a name
+  `what` with `2 + 2`; a reader that asks only for a parse would take two
+  contract questions from the planner. Ask for bound names as well.
+* **A union of true axioms can derive a false law.** Naive composition of
+  the ten formula wheels gives `energy = 2 * mass * speed_of_light^2`; the
+  algebra is exact and the identification of a shared name is what is wrong.
 * **A round that ends without its release hands the next session a puzzle,
   not a state.** Run `signoff --verify` first, and believe it over the prose.
 * **A drift guard can collide with the truth.** `test_figures.py` forbids
@@ -162,6 +210,18 @@ modules stand as candidate 3 of [`STATUS.md`](STATUS.md) §3.4. Re-run it with
   stride over the corpus, so its figures move in the study's own prose and in
   the `report-anonymous` case of `evaluation/cases.py` — which in turn needs
   `tools queryesc --write` (over ten minutes; run it in the background).
+* **Never edit a document while `corpus --refresh` or `--write` runs.** The
+  refresh reads every document when it starts and writes each one back with
+  its blocks regenerated, so a hand edit made in between is silently
+  overwritten. Phase 66 lost its `MASTER_PLAN.md`, `STATUS.md` and paper
+  edits that way and restored them from the commit. Edit, commit, then
+  refresh.
+* **A relay figure quoted as unchanged must be re-taken after the refresh.**
+  The measurement caches are rebuilt by `corpus --refresh`; before it, the
+  relay and anonymous register still read the old corpus.
+* **A new pass-mark study needs its tier-0 words in its body.** The verdict
+  check compares words, not meaning: write the verdict last, from the body's
+  own phrases, and quote every deciding figure in the body too.
 * **A string in the package that looks like a Lean name is audited as a
   citation.** A literal split across lines reads as a truncated name; keep a
   cited name on one line, and split a deliberately fake one after `GLM.`.
