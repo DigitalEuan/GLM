@@ -4705,6 +4705,125 @@ def block_nativeparity_marks() -> str:
     return "\n".join(lines)
 
 
+# ---------------------------------------------------------------------------
+#  Native words (Phase 71, studies/NATIVE_WORDS_STUDY.md)
+# ---------------------------------------------------------------------------
+
+def _native_words() -> Optional[Mapping[str, object]]:
+    from ..reasoning import native_words as nwd
+    return nwd.current()
+
+
+def _native_words_stale() -> str:
+    return ("The native-words measurements do not describe the sources, the "
+            "Lean tree and the corpus as they now stand, so nothing is "
+            "reported here.  Run `PYTHONPATH=. python3 -m glm_universal.tools "
+            "native-words --write`.")
+
+
+_NATIVE_WORDS_LABELS = {
+    "text": "*text* — token overlap, ties by name (the standard)",
+    "text_leech": "*text_leech* — token overlap, ties by Leech distance",
+    "words_native": "**words_native** — Golay names, then part letter words, then classes, then Leech distance",
+    "letters": "**letters** — part letter words alone, then classes, then Leech distance",
+    "classes": "*classes* — Golay classes alone, then Leech distance",
+    "lexical": "*lexical* — the lexical Leech address (ledger rows 4 and 5)",
+    "text_shipped": "*text*, as shipped by the document layer (a control on the one above)",
+    "parts": "*parts* — the parts as strings, then Leech distance (post-hoc control for `letters`)",
+    "text_parts": "*text_parts* — token overlap, then parts as strings, then Leech distance (post-hoc control for `words_native`)",
+}
+
+
+def block_nativewords_lean() -> str:
+    """W1, W2, W4-W6 on the Lean corpus."""
+    data = _native_words()
+    if data is None:
+        return _native_words_stale()
+    lean = data["lean"]  # type: ignore[index]
+    rows = []
+    for label in ("declarations", "goals"):
+        for scheme, entry in lean[label]["schemes"].items():
+            hits = entry["hits"]
+            rows.append([label, _NATIVE_WORDS_LABELS.get(scheme, scheme)]
+                        + [_hits_cell(hits, k) for k in (1, 3, 5, 10)]
+                        + [per_cent(Fraction(entry["precision_at_5"])),
+                           _three_places(Fraction(entry["mrr_at_10"]))])
+    lines = _table(("queries", "ranking", "hit@1", "hit@3", "hit@5", "hit@10",
+                    "precision@5", "MRR@10"), rows)
+    decl, goal = lean["declarations"], lean["goals"]
+    lines.extend([
+        "",
+        f"{decl['queries']} declaration queries and {goal['queries']} goal "
+        f"queries over {_thousands(lean['declarations_in_corpus'])} "
+        f"declarations and a vocabulary of {_thousands(lean['vocabulary'])} "
+        f"tokens.  The Golay names are injective on the vocabulary: "
+        f"{'yes' if lean['injective'] else 'no'}; the top ten of "
+        f"`words_native` carry the overlaps of the top ten of `text` on "
+        f"{decl['top_values_agree']} of {decl['queries']} declaration queries "
+        f"and {goal['top_values_agree']} of {goal['queries']} goal queries.",
+    ])
+    return "\n".join(lines)
+
+
+def block_nativewords_documents() -> str:
+    """W1, W3-W5 on the document corpus."""
+    data = _native_words()
+    if data is None:
+        return _native_words_stale()
+    docs = data["documents"]  # type: ignore[index]
+    if not docs.get("answered"):
+        return ("The document address book was stale when the native-words "
+                "measurements were taken; re-take them after "
+                "`python3 -m glm_universal.corpus --write`.")
+    rows = [(_NATIVE_WORDS_LABELS.get(scheme, scheme),
+             f"{entry['hits']} / {docs['queries']}",
+             per_cent(Fraction(entry["precision_at_5"])))
+            for scheme, entry in docs["schemes"].items()]
+    lines = _table(("ranking", "queries with a hit at 5", "precision@5"), rows)
+    lines.extend([
+        "",
+        f"{docs['queries']} section queries over {_thousands(docs['units'])} "
+        f"sections and a vocabulary of {_thousands(docs['vocabulary'])} words. "
+        f" The Golay names are injective: {'yes' if docs['injective'] else 'no'}"
+        f"; the top five of `words_native` carry the overlaps of the top five "
+        f"of `text` on {docs['top_values_agree']} of {docs['queries']} "
+        f"queries.",
+    ])
+    return "\n".join(lines)
+
+
+def block_nativewords_marks() -> str:
+    """Every declared mark of the native-words study, met or not."""
+    data = _native_words()
+    if data is None:
+        return _native_words_stale()
+    marks = data["marks"]  # type: ignore[index]
+    said = {"W1": "Golay names injective; `words_native` carries the token overlaps of `text`",
+            "W2": "`words_native` ≥ `text` at every k and MRR@10 (declarations and goals)",
+            "W3": "`words_native` ≥ `text` (documents, hit@5 and precision@5)",
+            "W4": "`words_native` ≥ `text_leech` at hit@5 on all three sets",
+            "W5": "`letters` > the lexical Leech address at hit@5 (declarations and documents)",
+            "W6": "`text_leech` ≥ `text` at every k (declarations and goals)"}
+    rows = [(f"**{mark}**", said.get(mark, mark), "met" if met else "**not met**")
+            for mark, met in marks.items()]
+    met = sum(1 for value in marks.values() if value)
+    lines = _table(("mark", "what it asks", "outcome"), rows)
+    lines.extend(["", f"{met} of {len(marks)} marks met."])
+    observed = data.get("observed") or {}  # type: ignore[union-attr]
+    said_obs = {"letters_vs_text": "`letters` ≥ `text` in hits at every k, on all three sets",
+                "letters_vs_parts": "`letters` ≥ `parts` in hits at every k, on all three sets",
+                "words_native_vs_text_parts": "`words_native` ≥ `text_parts` in hits at every k, on all three sets"}
+    if observed:
+        lines.extend(["", "Reported beside the marks and not counted among "
+                      "them, because they were not declared before the "
+                      "measurement:", ""])
+        lines.extend(_table(("comparison", "outcome"),
+                            [(said_obs.get(key, key), "holds" if value
+                              else "**does not hold**")
+                             for key, value in observed.items()]))
+    return "\n".join(lines)
+
+
 BLOCKS: Dict[str, Callable[[], str]] = {
     "corpus-inventory": block_corpus_inventory,
     "corpus-largest": block_corpus_largest,
@@ -4827,6 +4946,9 @@ BLOCKS: Dict[str, Callable[[], str]] = {
     "nativeparity-documents": block_nativeparity_documents,
     "nativeparity-controller": block_nativeparity_controller,
     "nativeparity-marks": block_nativeparity_marks,
+    "nativewords-lean": block_nativewords_lean,
+    "nativewords-documents": block_nativewords_documents,
+    "nativewords-marks": block_nativewords_marks,
 }
 
 

@@ -181,7 +181,7 @@ def tree_digest() -> str:
 
 _DECL = re.compile(
     r"^(?:@\[[^\]]*\]\s*)?"
-    r"(?:(?:private|protected|noncomputable|partial|unsafe|scoped)\s+)*"
+    r"(?:(?:public|private|protected|noncomputable|partial|unsafe|scoped)\s+)*"
     r"(theorem|lemma|def|abbrev|structure|inductive|instance|example)\b"
     r"(?:\s+([^\s:({\[\]]+))?")
 

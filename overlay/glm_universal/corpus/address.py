@@ -596,6 +596,21 @@ def rank(query: str, k: int = 5, scheme: str = "lexical",
     """The ``k`` units a scheme puts first.  Ranking, not guarantee."""
     query_words = distinctive_words(query)
     scored: List[Tuple[object, Found]] = []
+    if scheme == "words_native":
+        # Phase 71: the word overlap computed on Golay words of the tokens --
+        # Golay names, then part letter words, then their Golay classes, then
+        # the lexical Leech distance (``studies/NATIVE_WORDS_STUDY.md``).
+        from ..reasoning import native_words as nw
+        by_name = {unit.name: unit for unit in units()}
+        table = addresses("lexical")
+        point = la.quantise(lexical_vector(query))
+        out = []
+        for name, overlap in nw.rank_documents(query, k=k, exclude=exclude):
+            unit = by_name[name]
+            out.append(Found(unit.name, unit.document, unit.heading,
+                             la.squared_distance(point, table[unit.name]),
+                             overlap))
+        return tuple(out)
     if scheme in ("text", "text_native"):
         tokens = token_table()
         # ``text_native`` (Phase 70): an exact tie of the word overlap is
@@ -693,22 +708,25 @@ def retrieve(query: str, k: int = 5, feature_radius: int = 2
 
     The honest division of labour, stated in the payload: the *shortlist* is
     complete up to the radius and the *ranking* inside it is lexical, because
-    that is what the retrieval study measured to work.  Since Phase 70 an
-    exact tie of the word overlap is broken by the lexical Leech distance
-    rather than the alphabet (``text_native``; ``studies/NATIVE_PARITY_STUDY.md``
-    mark N4b), so the one free choice in the ranking is a native one.
+    that is what the retrieval study measured to work.  Since Phase 71 the
+    overlap is computed on Golay words of the tokens (``words_native``;
+    ``studies/NATIVE_WORDS_STUDY.md`` marks W1 and W3): the Golay names carry
+    exactly the word overlap, and an exact tie is decided by the parts'
+    letter words, their Golay classes and the lexical Leech distance, so the
+    whole ranking is read from substrate objects.
     """
     certified = shortlist(query, feature_radius=feature_radius)
-    ranked = rank(query, k=k, scheme="text_native")
+    ranked = rank(query, k=k, scheme="words_native")
     return {
         "query": query,
         "shortlist": certified,
         "ranked": ranked,
-        "ranking_scheme": "text_native",
+        "ranking_scheme": "words_native",
         "shortlist_scheme": "lexical",
         "note": ("the address supplies completeness up to the radius; the "
-                 "lexical overlap supplies the order, and the lexical "
-                 "address breaks its ties"),
+                 "word overlap, computed on Golay names of the words, "
+                 "supplies the order, and the parts' Golay words and the "
+                 "lexical address break its ties"),
     }
 
 

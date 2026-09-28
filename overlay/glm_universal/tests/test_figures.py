@@ -443,7 +443,11 @@ class TestDocumentationQuotesCurrentFigures(unittest.TestCase):
             "48 report subjects", "63 test files", "73 Lean files",
             "131 cases", "131 CLI cases", "131-case",
             "2,880 tests", "2,880 collected tests", "11,814 subtests",
-            "102 modules", "49 reasoning modules", "20,996 lines",
+            # "102 modules" was retired from this list in Phase 72, when the
+            # reasoning kernel reached 102 modules, for the reason given for
+            # "92 modules" above; the package figure stays guarded by
+            # "110 modules".
+            "49 reasoning modules", "20,996 lines",
             # Retired in v5.22, when the address book was made to do work:
             # `report retrieval` and `report controller` are the fiftieth and
             # fifty-first report subjects and the evaluation's hundred and

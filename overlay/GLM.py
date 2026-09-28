@@ -633,13 +633,23 @@ def build_parser() -> argparse.ArgumentParser:
                         "SOURCE', 'equivalent: A ; B', 'paraphrase: S', "
                         "'negate: S', 'solve for x: S', 'entails: P ; C', "
                         "'bounds of x: P' (repeatable)")
+    p.add_argument("--steps", action="append", default=[], metavar="TEXT",
+                   help="the stepwise planner: read TEXT as a chain of "
+                        "planner steps -- a compound question ('is the "
+                        "atomic number of iron prime'), a goal over the "
+                        "formula wheels ('given voltage = 12 and resistance "
+                        "= 4, what is the power') or a narrative ('given "
+                        "..., find A, then B') -- with three columns per "
+                        "step (repeatable; successive texts are one "
+                        "conversation, so 'then ...' and 'why?' follow on)")
     p.add_argument("-a", "--ask", action="append", default=[], metavar="TEXT",
                    help="the connected path: give TEXT to the first surface "
                         "that reads it -- the toolbox ('tools', 'tool "
                         "<name>'), reverse TCT ('say:', 'entails:', ...), "
                         "the Python dialect, the engineering "
-                        "surface, then the typed planner -- and name the "
-                        "surface (repeatable)")
+                        "surface, then the typed planner, which hands a "
+                        "question it refuses to the stepwise planner -- and "
+                        "name the surface (repeatable)")
     p.add_argument("--no-banner", action="store_true",
                    help="suppress the interactive banner")
     p.add_argument("--input", metavar="PATH", default=None,
@@ -716,6 +726,11 @@ def main(argv: Optional[Sequence[str]] = None,
     if args.reverse:
         return _speak_reverse(out_stream, args.reverse, columns, args.format,
                               args.verify_tct)
+
+    # ----- the stepwise planner -----
+    if args.steps:
+        return _speak_steps(out_stream, args.steps, columns, args.format,
+                            args.verify_tct)
 
     # ----- the connected path: every surface, no flag -----
     if args.ask:
@@ -872,6 +887,71 @@ def _speak_reverse(out: "Out", texts: Sequence[str], columns: Sequence[int],
     return worst
 
 
+def _print_chain(out: "Out", a, columns: Sequence[int],
+                 verify: bool) -> Optional[bool]:
+    """Print one stepwise verdict: every step with its columns, the answer,
+    and under ``--verify-tct`` the chain's script run in a fresh
+    interpreter."""
+    from glm_universal.reasoning import stepwise_script as ss
+    from glm_universal.runtime.python_tct import run_column3
+    from glm_universal.runtime.tct_engine import package_root
+    out.line("STEPWISE: " + a.text)
+    if not a.answered:
+        out.line(("REFUSED AMBIGUOUS: " if a.verdict == "ambiguous"
+                  else f"REFUSED {a.refusal}: ") + a.reason)
+        return None
+    chain = a.chain
+    out.line(f"ANSWER  {a.value}")
+    for s in chain.steps:
+        tag = "" if s.origin in ("asked", "given") else f"  [{s.origin}]"
+        if 1 in columns:
+            out.line(f"  {ss.sentence(s)}{tag}")
+        if 2 in columns:
+            out.line(f"      {ss.equation(s, chain.steps)}")
+    if 1 in columns:
+        out.line("  " + ss.answer_sentence(chain))
+    for note in chain.notes:
+        out.line("  note: " + note)
+    script = ss.render_script(chain, str(package_root()))
+    if 3 in columns:
+        out.line("COLUMN 3 — CHECKING SCRIPT")
+        for line in script.splitlines():
+            out.line("  " + line)
+    if verify:
+        got = run_column3(script)
+        for line in got["stdout"].splitlines():
+            if line.startswith("STEP") or line.startswith("ALIGNED"):
+                out.line("  " + line)
+        out.line(f"VERIFIED {got['verified']}")
+        return bool(got["verified"])
+    return None
+
+
+def _speak_steps(out: "Out", texts: Sequence[str], columns: Sequence[int],
+                 fmt: str, verify: bool) -> int:
+    """The stepwise planner (Phase 72) on each text, as one conversation.
+
+    Exit code 0 when every text was answered (and verified); 1 otherwise.
+    """
+    from glm_universal.runtime.stepwise import StepwiseConversation
+    conv = StepwiseConversation(GeometricSession())
+    worst = 0
+    payloads = []
+    for text in texts:
+        a = conv.ask(text)
+        if fmt == "json":
+            payloads.append(a.as_dict())
+            worst = max(worst, 0 if a.answered else 1)
+            continue
+        verified = _print_chain(out, a, columns, verify)
+        if not a.answered or verified is False:
+            worst = 1
+        out.line("")
+    if fmt == "json":
+        out.line(json.dumps(payloads, indent=1, ensure_ascii=False))
+    return worst
+
+
 def _ask_connected(out: "Out", texts: Sequence[str], columns: Sequence[int],
                    fmt: str, verify: bool, exactness_check: bool) -> int:
     """Give each text to the first surface that reads it (Phase 66).
@@ -898,11 +978,33 @@ def _ask_connected(out: "Out", texts: Sequence[str], columns: Sequence[int],
         else:
             if session is None:
                 session = GeometricSession()
-            code, _ = _batch_query(out, session, text, None, columns, fmt,
-                                   verify, exactness_check, plan=True,
-                                   eng=surface == "engineering")
+            stepped = None
+            if surface == "planner":
+                stepped = router._stepwise(session, text) \
+                    if not _planner_answers(session, text) else None
+            if stepped is not None and fmt != "json":
+                verified = _print_chain(out, stepped.payload, columns, verify)
+                code = 0 if stepped.answered and verified is not False else 1
+            elif stepped is not None:
+                out.line(json.dumps(stepped.payload.as_dict(), indent=1,
+                                    ensure_ascii=False))
+                code = 0 if stepped.answered else 1
+            else:
+                code, _ = _batch_query(out, session, text, None, columns,
+                                       fmt, verify, exactness_check,
+                                       plan=True,
+                                       eng=surface == "engineering")
         worst = max(worst, code)
     return worst
+
+
+def _planner_answers(session: GeometricSession, text: str) -> bool:
+    """Whether the typed planner (and the grammar behind it) answers."""
+    from glm_universal.runtime.parser import QueryError
+    try:
+        return bool(session.ask_planned(text).ok)
+    except QueryError:
+        return False
 
 
 def _reads_through_planner(args: argparse.Namespace) -> bool:

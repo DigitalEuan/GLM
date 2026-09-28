@@ -285,7 +285,7 @@ class TestTheCertifiedShortlist(unittest.TestCase):
 
     def test_retrieve_ranks_lexically_inside_the_guarantee(self):
         answer = ad.retrieve("what does the archive rule do?", k=5)
-        self.assertEqual("text_native", answer["ranking_scheme"])
+        self.assertEqual("words_native", answer["ranking_scheme"])
         self.assertEqual("lexical", answer["shortlist_scheme"])
         self.assertLessEqual(len(answer["ranked"]), 5)
 

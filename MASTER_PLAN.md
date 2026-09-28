@@ -5,7 +5,7 @@
 
 **Question.** What has each phase of the wiring plan delivered, and what does the next round start from?
 
-**Verdict.** Phase 70 is closed; the candidates in [`STATUS.md`](STATUS.md) §3.4 are where the next round starts.
+**Verdict.** Phase 73 is closed; the candidates in [`STATUS.md`](STATUS.md) §3.4 are where the next round starts.
 
 **Deciding figure.** Every closed phase names what was built, where it lives, and how to see it recompute itself.
 
@@ -25,7 +25,7 @@ recompute itself.
 
 Everything below is reachable from the package's public API and from the query
 runtime — **<!--figure:query-kinds-->24 query kinds<!--/figure-->**, **<!--figure:report-subjects-->65 report subjects<!--/figure-->** and **<!--figure:registers-->8 registers<!--/figure-->** — is
-covered by the test suite (<!--figure:test-files-->116 test files<!--/figure-->),
+covered by the test suite (<!--figure:test-files-->119 test files<!--/figure-->),
 and — where it is a report or a task — has a generated column-3 script that
 recomputes the claim in a **fresh interpreter** and fails if anything differs.
 
@@ -183,9 +183,226 @@ as everything else: only the open phase is state.
 
 ---
 
+## Phase 73 — stepwise planner, round two: frames, givens with units, and the register in the wheels
+
+**Status: closed this round.** Items O2 and O4 of candidate O of
+[`STATUS.md`](STATUS.md) §3.4, the first candidate: the four kinds of question
+round one's §4.1 could not read (*how many more*, parity, averages, givens
+with units) and a register value feeding a wheel derivation. O1 (a question
+set written outside the project) is not something a round can supply for
+itself, and O3 (the reverse relay into the chain) is left named. The objects,
+the corpus (21 frame, 18 unit, 14 register questions, 2 narratives, 2
+follow-ups) and the marks T1–T8 were committed before any code of the round
+([`studies/STEPWISE_TWO_STUDY.md`](studies/STEPWISE_TWO_STUDY.md) §1–§2); no
+amendment was needed.
+
+**What was built.** `runtime/quantity_units.py`: a declared exact unit table
+(spelled-out names, exact SI prefixes, the planner's own length, mass and time
+table, `per` / `square` / `cubic` / `squared` / products), each unit's
+dimension derived from the register's unit definitions by
+`reasoning.units.dimension_of_symbol` and compared under the SI policy with
+the wheel quantity's reference dimension; named refusals for unknown,
+mismatched, inexact (π, the dalton) and offset (Celsius, Fahrenheit) units;
+and `scale_into_si`, carrying a Phase 55 scale into SI (`SCALE_UNDECLARED`
+for a field on no declared scale). `runtime/stepwise.py`: the difference
+frame (*how many more X does A have than B* through the declared count noun
+`protons`, *how much larger / higher / lower is A than B*, refused
+`DIFFERENCE_REVERSED` when negative), the parity predicate, the mean (with the
+distributive plural), and `parse_goal_two` / `goal_two`, which convert givens
+written with units, register values (`name = <phrase>` or the bare phrase,
+named by its scale's quantity) and targets asked `in unit` and hand the SI
+values to round one's derivation, vetoes and narrative unchanged
+(`_goal_core`). `reasoning/stepwise_script.py`: templates, equations and
+readers for `measured`, `si`, `unit_out`, `parity` and `mean`; the script
+re-reads each unit or scale from the declared tables and re-derives the
+factor and the dimension; a sixth mutation, `unit-lie`.
+`runtime/stepwise_two.py` measures it (`tools stepwise-two`),
+`tests/test_stepwise_two.py` pins the marks, and the router needed no change:
+every new question reaches the stepwise planner from `GLM.py --ask` after the
+planner refuses. `RequestProject/GLM/StepwiseFrames.lean` proves the mean
+order-free and bounded (`mean_perm`, `le_mean`, `mean_le`), the parity witness
+(`parity_witness`), the difference refusal exact (`more_eq_none_iff`), that a
+change of base units multiplies a monomial by the powers of its degrees so a
+monomial law is unit-invariant exactly when it is dimensionally homogeneous
+(`monomial_rescale`, `invariant_iff_homogeneous`), that an offset is no
+multiplication and changes a product law (`offset_not_multiplicative`,
+`offset_changes_product`), that conversion leaves the veto alone
+(`veto_unit_free`), and that a register feed is sound when the register is
+right (`register_feed_sound`), with the standard axioms only; `IsModel` in
+`StepwisePlanner.lean` became `@[expose]` for the last.
+
+**What it measured.** All eight marks met on the first reading: 21 of 21
+frame, 18 of 18 unit and 14 of 14 register cases as declared, 0 wrong, where
+round one's reader answers 0 of the 53; 2 of 2 narratives and 2 of 2
+follow-ups; the strip-the-units control is wrong on 6 answered cases (12 more
+it gets right only because prefixes cancel) and answers 7 of the unit
+refusals; 39 of 39 chain scripts verified, 178 of 178 steps aligned, every
+mutation rejected including 22 of 22 unit lies; round one's corpus, controls
+and 43 scripts unchanged, and the router's 273 declared questions unchanged.
+Post hoc and not counted: 14 of 17 further probes answered, 0 wrong, every
+script verified.
+
+**A defect found.** Round one's column-3 script re-read a decimal given as
+its integer part and so rejected a right chain (`voltage = 1.5`); the script
+now re-reads the question item by item (study §4.2).
+
+**What else moved.** This round's Lean file moved the stride samples (203
+declaration and 102 goal queries), and with them Phases 70 and 71's draws: the
+native word ranking is still ahead of the standard at every k (178 against 175
+at 5 on the declarations, 89 against 86 on the goals, level at 46 of 60 on the
+documents), with W4 still missed by one query and W6 met; native parity's N6
+and N7 still hold (94 against 86 and 37 against 30 at 5), and N8 swung back to
+met (12 hits at 5 for `lexical_native2` and both raw rankings) while N4a stays
+missed by one document section. The re-readings are in `NATIVE_WORDS_STUDY.md`
+§3.3 and `NATIVE_PARITY_STUDY.md` §3.5. The same new declarations grew the goal-query
+set of the relay and anonymous-register reports from 806 to 810 queries, so the
+evaluation cases that quote them were re-pinned to the new reading (text
+699 → 64 and structural address 212 → 150 when renamed; the stack 699 → 705,
+still ahead); the claims themselves did not change.
+
+**D15.** Derive moved: every answered chain computes a value no register
+holds — a difference, a mean, a parity verdict, a wheel quantity from
+converted givens and register values. Refuse moved: six new named refusals
+withhold the seven answers a unit-blind reading gives where units or scales
+do not license one.
+
+---
+
+## Phase 72 — stepwise planner: the typed planner as the executive of a chain of steps
+
+**Status: closed.** The owner's request to push the reasoning of
+the typed planner: make it the shared executive of multi-step reasoning, with
+the three columns carried step by step, unknown steps found and stitched, and
+follow-ups replayed. The objects, the corpus and the marks S1–S8 were
+committed before any stepwise code
+([`studies/STEPWISE_PLANNER_STUDY.md`](studies/STEPWISE_PLANNER_STUDY.md)
+§1–§2); one amendment (a named refusal `PRECISION_OVERLAP` when a given and a
+derived value only agree to the given's precision) is recorded there.
+
+**What was built.** `runtime/stepwise.py`: the composition grammar (operator
+words, function forms, predicates, verb forms over *it*, `then`), each leaf
+one question to the typed planner with register values re-read exactly, the
+all-readings agreement rule (`AMBIGUOUS` when readings differ), the goal and
+narrative modes over the split union of the wheels (every acyclic derivation
+tree of a target; an axiom solved only for a variable of power ±1 through
+non-zero values), the consistency veto (`INCONSISTENT_GIVENS`,
+`DERIVATIONS_DISAGREE`), the deferral-and-stitch agenda that looks ahead for a
+step that can be found and works back to the one that could not, the
+follow-up conversation keyed by SHA-256 of the history (`then …`, `why?`), and
+`stepwise_report`. `reasoning/stepwise_script.py`: the step and the chain,
+declared column-1 and column-2 templates with readers, an in-process step
+gate, and a column-3 script that re-derives every step in a fresh
+interpreter, printing `STEP k ALIGNED` per step and `VERIFIED` for the whole,
+with five mutations. Wiring: the router's planner surface hands a text to the
+stepwise planner only after the planner and the grammar refused
+(`router._stepwise`); `GLM.py --ask` prints the chain, `GLM.py --steps TEXT`
+asks it directly, `tools stepwise` measures it, and
+`tests/test_stepwise.py` pins the marks.
+`RequestProject/GLM/StepwisePlanner.lean` proves that an admissible
+derivation evaluates to the model's value (`eval_eq_model`), that
+disagreement or a re-derived given leaves no model
+(`disagreement_refutes_model`, `rederived_given_refutes_model`), that solving
+for a power ±1 is exact (`solve_power_one`), that bracketings of a sum or
+product agree and the two refused cases do not, that the agreement over
+readings is order-free (`agreed_perm`), that the local step gate is exactly
+recomputation (`checked_iff_recomputed`) and that the fallback is
+conservative (`fallback_conservative`), with the standard axioms only.
+
+**What it measured.** All eight marks met on the first reading: 30 of 30
+composition cases as declared (the bare planner answers 0), 21 of 21 goal
+cases, 6 of 6 narratives, 4 of 4 follow-ups, 0 wrong; the first-found control
+answers the 3 goal cases the veto refuses and the naive union answers the
+ambiguous one; 43 of 43 chain scripts verified in a fresh interpreter, 149 of
+149 steps aligned, every declared mutation rejected; 11 of 273 questions of
+the earlier sets are read by the stepwise layer, all answered by the planner
+first. Post hoc and not counted: 15 of 19 further probes answered, 0 wrong.
+
+**What else moved.** This round's Lean file moved the stride samples (202
+declaration and 101 goal queries), and with them Phases 70 and 71's draws: the
+native word ranking is still ahead of the standard at every k (177 against 174
+at 5 on the declarations, 89 against 85 on the goals, level on the documents),
+but the two Leech tie-break marks swapped (W6 now met, W4 missed by one query);
+native parity's N6 and N7 still hold (93 against 86 and 36 against 31 at 5),
+while N4a and N8 are missed by one document section. The re-readings are in
+`NATIVE_WORDS_STUDY.md` §3.3 and `NATIVE_PARITY_STUDY.md` §3.5, and
+`test_native_words.py` no longer pins W4.
+
+**D15.** Derive moved: every answered chain computes a value no register
+holds, with every step shown and re-checked. Refuse moved: the veto refuses
+what the first-found derivation answers wrongly.
+
+---
+
+## Phase 71 — native words: word overlap computed on Golay words of the tokens
+
+**Status: closed this round.** Candidate N of [`STATUS.md`](STATUS.md) §3.4,
+items N3 (a native word ranking) and N4 (ledger row 6 on the live Lean
+ranking), under the owner's standing instruction to keep the native method
+and refine it. The objects, the five rankings and the marks W1–W6 were
+committed before any measuring code
+([`studies/NATIVE_WORDS_STUDY.md`](studies/NATIVE_WORDS_STUDY.md) §1–§2); one
+amendment (camel case is not a part boundary, because the standard's tokens
+are lower-cased) was made before any code was written.
+
+**What was built.** `reasoning/native_words.py`: a token's parts (split at
+`_`, `.`, `'` and digits), a part's **letter word** (the 24-bit mask of its
+letter buckets under the lexical book's folding), its **Golay class** (every
+nearest codeword from the complete syndrome decoder, no tie broken) and the
+**Golay name** of a token (its letter word and its index among the
+vocabulary's tokens with that word, injective by construction); the rankings
+`text`, `text_leech`, `words_native` (names, then part letter words, then
+classes, then Leech distance), `letters` and `classes`, and two post-hoc
+like-for-like controls, `parts` and `text_parts`; the Lean-corpus and
+document measurements, the marks, and a digest-keyed cache
+(`reasoning/_data/native_words.json`). `retrieval.rank` and
+`retrieval.retrieve` accept the word schemes by name (`WORD_SCHEMES`);
+`corpus/address.py` accepts `words_native`, and the live `retrieve()` ranks by
+it. `tools native-words` (`--write`, `--json`, `--live`), the toolbox tool
+`native words` (so `GLM.py --ask "tool native words succ_le_iff"`), three
+generated blocks, and `tests/test_native_words.py`.
+`RequestProject/GLM/NativeWords.lean` proves that a Jaccard overlap is
+unchanged by a relabelling injective on the union (`jaccard_image_of_injOn`,
+`jaccard_image`), that a word-and-index name is injective and so carries the
+token overlap exactly (`name_injOn`, `index_separates`, `jaccard_names`),
+that two rankings sorted by the same overlap agree on every prefix's overlaps
+(`take_map_overlap_eq`, `sorted_overlap_of_sorted_lex`), that a shared Golay
+class inside the packing radius is a near letter set (`hamming_triangle`,
+`shared_class_near`), and that a letter word reads only the set of letters
+(`letterWord_congr`, `letterWord_anagram`, `bucket_fold`), with the standard
+axioms only.
+
+**What it measured.** W1 (the names exact): met — injective on both
+vocabularies, and every top ten carries the standard's overlaps. W2
+(`words_native` ≥ `text`, Lean): met — 152/183/190/197 against 151/175/182/189
+on the 211 declaration queries, 78/91/94/97 against 75/87/92/96 on the 103
+goal queries, MRR@10 ahead on both (the first reading, before this round's
+Lean file moved the stride sample, was 180 against 173 and 91 against 88 at
+5). W3 (documents): met at parity, the same hits at 5 and the same precision.
+W4 (`words_native` ≥ `text_leech` at 5): met. W5 (`letters` > the lexical
+Leech address): met, 187 against 147 on the declarations and more than three
+times the address's hits on the documents. W6 (`text_leech` ≥ `text` at
+every k): not met — five queries behind at k = 1 — so the Leech tie-break
+alone is not shipped on the Lean corpus. Post hoc and not counted: `letters`
+alone, reading no token, is ahead of `text` on hits on the Lean corpus and
+at least level on the documents, ahead of the part strings on the Lean corpus
+and behind them on the documents.
+
+**What else moved.** This round's Lean file moved the stride samples, and
+with them Phase 70's single-book marks, as that round predicted: N1 and N4a
+are now met and N2 missed by one query at k = 3; N6 and N7 still hold (95
+against 87 and 30 against 26 at 5). `test_native_parity.py` no longer pins
+the draws. The re-reading is in `NATIVE_PARITY_STUDY.md` §3.5.
+
+**D15.** Address moved: the live document ranking is now computed on
+substrate objects and ranks at least as well as the standard; on the Lean
+corpus the native word ranking is ahead of the standard on both declared
+sets. It adds no derivation and no refusal.
+
+---
+
 ## Phase 70 — native parity: where a standard method ties a native one, keep the native one and refine it
 
-**Status: closed this round.** The owner: *where a "standard" method/function
+**Status: closed.** The owner: *where a "standard" method/function
 is equal to or only slightly better than a Golay-Leech or 24D or other
 "native" GLM method I would like to retain the GLM native method and see if it
 can be refined to match or beat the standard method — I aim to have a
@@ -1648,7 +1865,7 @@ remaining, the release. Running it failed six units, none of them noise:
 
 **What the release now says.** `signoff --verify-release` reports **99 of 99
 test files and 7 of 7 instruments** signed with the exhaustive cases on; the
-suite is **<!--figure:suite-->4,415 tests across 115 of the 116 test files, 16,957 subtests, outside the document check<!--/figure-->**,
+suite is **<!--figure:suite-->4,481 tests across 118 of the 119 test files, 17,085 subtests, outside the document check<!--/figure-->**,
 one process with `GLM_EXHAUSTIVE=1` collecting 3,979; the end-to-end
 evaluation is **157 / 157** with 19 expected refusals; `corpus --check` is
 current; and `lake build` is clean over 120 Lean files with no `sorry`.

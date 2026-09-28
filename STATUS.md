@@ -37,7 +37,85 @@ without recomputing anything by hand. The record of earlier rounds is in
 **Starting a new round? Read [`ITERATE.md`](ITERATE.md), then §3.4, "Named for
 the next round", before anything else.**
 
-**The round just closed (Phase 70) moved the target**: under directive
+**The round just closed (Phase 73) moved the target**: under directive
+**D15** it moved **derivation** and **refusal**. It took items two and four
+of candidate O below — the frames the stepwise planner's leaves lacked, givens
+written with units, and register values fed to the wheels
+([`STEPWISE_TWO_STUDY.md`](studies/STEPWISE_TWO_STUDY.md)). The stepwise
+planner now reads *how many more protons does iron have than carbon* (20;
+the reverse order is refused `DIFFERENCE_REVERSED`), *is the atomic number of
+gold odd* (with the witness `79 = 2 x 39 + 1`) and *the average of the
+melting points of iron, copper and gold* (45061/30). A given may be written
+with a unit (*voltage = 12 kilovolts*, *36 kilometres per hour*) and a target
+asked in one (*the current in milliamperes*): the unit is read through a
+declared exact table whose dimensions are derived from the register's own
+unit definitions (`runtime/quantity_units.py`), checked against the wheel
+quantity's dimension and converted into SI, and a unit that is unknown, of
+another dimension, inexact (π, the dalton) or offset (degrees Celsius) is
+refused by name. A given may be a register value (*temperature = the melting
+point of iron*), carried into SI through the Phase 55 scale table, so the
+entropy of 2 kg at iron's melting point is derived with the stored heat
+stitched in. Every new step has its own three columns and the chain's script
+re-derives each conversion factor from the tables. On 53 declared questions,
+2 narratives and 2 follow-ups: all as declared, 0 wrong, where round one's
+reader answers 0 of the 53; a strip-the-units reading gets 6 of them wrong and
+answers 7 of the unit refusals; 39 of 39 scripts verified and 22 of 22 unit
+lies rejected; round one's corpus unchanged. It also fixed a round-one defect:
+a decimal given failed its own script. `RequestProject/GLM/StepwiseFrames.lean`
+proves the mean order-free and bounded, a monomial law unit-invariant exactly
+when dimensionally homogeneous, an offset no multiplication, and a register
+feed sound when the register is right. [`MASTER_PLAN.md`](MASTER_PLAN.md)
+Phase 73 is the record.
+
+**The round before (Phase 72) moved the target**: under directive
+**D15** it moved **derivation** and **refusal**. It took the owner's request
+to push the reasoning of the typed planner — make it the shared executive of a
+chain of steps — rather than a candidate of §3.4
+([`STEPWISE_PLANNER_STUDY.md`](studies/STEPWISE_PLANNER_STUDY.md)). The
+stepwise planner (`runtime/stepwise.py`) composes the planner's own answers
+(*is the atomic number of iron prime?*, *the lcm of the atomic numbers of
+carbon and oxygen*, `… then multiply it by 3, then is it prime?`), asking each
+leaf of the planner and answering only when every reading of the composition
+agrees; it finds the steps a question does not ask for (*given voltage = 12
+and resistance = 4, what is the power?* — the current first, then the power)
+over the split union of the wheels, deferring a step it cannot yet take and
+stitching it in once a later step supplies its input; and it refuses by name
+when two derivations disagree or a given re-derives otherwise
+(`DERIVATIONS_DISAGREE`, `INCONSISTENT_GIVENS`). Every step carries its own
+three columns: column 1 and column 2 are read back and checked against each
+other per step, and one column-3 script re-derives every step in a fresh
+interpreter (`STEP k ALIGNED`, then `VERIFIED`). On 57 declared questions and
+4 follow-ups: all as declared, 0 wrong, where the planner alone answers none of
+the 30 compound questions; 43 of 43 scripts verified, 149 of 149 steps aligned,
+every mutation rejected. The router hands a text to it only after the planner
+refused, so no earlier answer changes. `RequestProject/GLM/StepwisePlanner.lean`
+proves derivations sound in every model, disagreement model-refuting, the
+agreement order-free, the step gate exact and the fallback conservative.
+[`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 72 is the record.
+
+**An earlier round (Phase 71) moved the target**: under directive
+**D15** it moved **address**. It took items N3 and N4 of candidate N
+([`NATIVE_WORDS_STUDY.md`](studies/NATIVE_WORDS_STUDY.md)): the word-overlap
+ranking — the standard method Phase 70's ledger left far ahead of every
+lexical address — computed on Golay words of the tokens. A token's parts
+(split at `_`, `.`, `'` and digits) each give a **letter word**, the 24-bit
+mask of their letter buckets, whose **Golay class** is every nearest codeword
+of the complete decoder; a token's **Golay name** is its letter word and an
+index that separates the vocabulary's tokens sharing it. The names carry the
+token overlap exactly (W1; `jaccard_names`), so the native ranking
+`words_native` — names, then part letter words, then classes, then Leech
+distance — can move a candidate only inside a tie of the standard's overlap
+(`take_map_overlap_eq`), and it moves them well: 190 against 182 hits at 5 on
+211 declaration queries, 94 against 92 on 103 goal queries, and level on 60
+document queries. The live document ranking (`corpus.address.retrieve`)
+now reads it. Overlap on Golay letter words alone beats the lexical Leech
+address of ledger rows 4 and 5 (187 against 147 on the declarations). The
+Leech tie-break alone (`text_leech`) loses five queries at k = 1 and is not shipped
+(W6). `RequestProject/GLM/NativeWords.lean` proves the name overlap exact, the
+refinement confined to ties and a shared Golay class a near letter set.
+[`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 71 is the record.
+
+**An earlier round (Phase 70) moved the target**: under directive
 **D15** it moved **address**. It took the owner's instruction — *where a
 standard method is equal to or only slightly better than a Golay-Leech or 24D
 native method, retain the native method and refine it to match or beat the
@@ -62,7 +140,7 @@ proves the read-back exact, the residue a function of the features, and that
 a refinement can reorder only inside ties. [`MASTER_PLAN.md`](MASTER_PLAN.md)
 Phase 70 is the record.
 
-**The round before (Phase 69) moved the target**: under directive
+**An earlier round (Phase 69) moved the target**: under directive
 **D15** it moved **derivation** and **refusal**. It took the integer-sort item
 of candidate M ([`REVERSE_TCT_STUDY.md`](studies/REVERSE_TCT_STUDY.md)
 §10–§12). `entails over the integers:` and `bounds over the integers of x:`
@@ -408,11 +486,11 @@ PYTHONPATH=. python3 -m glm_universal.figures --write
 
 | instrument | command | result |
 |---|---|---|
-| test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->4,415 tests across 115 of the 116 test files, 16,957 subtests, outside the document check<!--/figure-->**, zero failures |
+| test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->4,481 tests across 118 of the 119 test files, 17,085 subtests, outside the document check<!--/figure-->**, zero failures |
 | end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->177<!--/figure--> / <!--figure:evaluation-case-count-->177<!--/figure-->** — 149 answered, 28 refused as expected (all `boundary`, no `gap`), 0 unexpected refusals, 0 confidently wrong, 0 errored |
 | benchmark suites | `python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites, every suite above its baseline |
 | capability probes | `python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 errored, 0 surprises |
-| Lean development | `lake build` (repository root) | <!--figure:lean-files-->140 Lean files<!--/figure-->, **0 `sorry`** |
+| Lean development | `lake build` (repository root) | <!--figure:lean-files-->143 Lean files<!--/figure-->, **0 `sorry`** |
 | figures | `python3 -m glm_universal.figures --write` | regenerates `overlay/FIGURES.md`; every documented count |
 | corpus | `python3 -m glm_universal.corpus --check` | the tier contract, the archive partition, the coverage claim of `ENTRY.md`, every generated block and every derived cache — **current**, no drift |
 | construction ladder | `python3 -m glm_universal.tools ladder` | **462 / 568** queries named correctly with **0** wrong on the eleven-rung ladder, against **327** for the note's five rungs and **283** for the best single rung |
@@ -431,8 +509,11 @@ PYTHONPATH=. python3 -m glm_universal.figures --write
 | carried fork | `python3 -m glm_universal.tools carried-fork` | the six deep-hole candidates carried until a later decision: **0 wrong** from every certified stage; 592,268 of 658,812 declared-case reads answered (the 90 % mark missed at 32 cases), 4,224 / 4,224 second readings, 3,840 / 3,840 unsure-set reads; 1,771 / 1,771 ties lift to a certified A₁²⁴ Leech deep hole; the soft estimate right on 512 / 768 (mark missed) |
 | connected machine | `python3 -m glm_universal.tools connected` | one path (`GLM.py --ask`) to the toolbox, Python, engineering and the planner: **0** of 177 contract cases diverted; **136** more declared questions answered correctly than by the planner alone, **0** wrong added; **8 / 8** tools answer; wiring audit **0** of 96 reasoning modules unreached; across wheels, naive union **3** right / **158** wrong, licensed union **3** right / **0** wrong |
 | reverse TCT | `python3 -m glm_universal.tools reverse-tct` | the language column generated from the mathematics: **176,617 / 176,617** battery terms round-trip, **0** collisions (infix control **5,684**); every declared `say`, `entails`, `solve`, `bounds`, `equivalent`, `negate` case as declared, **0** wrong; **94 / 94** column-3 scripts `VERIFIED True`, **69 / 69** mutated certificates rejected; the default path without the surface answers **0** of 58 |
-| native parity | `python3 -m glm_universal.tools native-parity` | where a standard method ties a native one, the native one refined: the two-book native ranking **83** hits at 5 against **80** for the raw features (210 declaration queries) and **31** against **27** (102 goal queries), equal to the like-for-like standard; the read-back scorer **24 / 24** controller tasks against **18**; read-back exact on **3,976 / 3,976** addresses |
+| native parity | `python3 -m glm_universal.tools native-parity` | where a standard method ties a native one, the native one refined: the two-book native ranking **94** hits at 5 against **86** for the raw features (203 declaration queries) and **37** against **30** (102 goal queries), equal to the like-for-like standard; the read-back scorer **24 / 24** controller tasks against **18**; read-back exact on **4,048 / 4,048** addresses |
+| native words | `python3 -m glm_universal.tools native-words` | word overlap computed on Golay words of the tokens: the Golay names carry the token overlap exactly, and the native word ranking has **178** hits at 5 against **175** for the standard (203 declaration queries), **89** against **86** (102 goal queries) and level on the 60 document queries; overlap on Golay letter words alone **176** against **134** for the lexical Leech address; 5 of 6 marks met (at the Phase 72 and 73 re-readings W4 missed by one query and W6 met, the reverse of Phase 71's close) |
 | reverse TCT, round two | `python3 -m glm_universal.tools reverse-tct --two` | the widened fragment, disjunction and the planner loop: **216,723 / 216,723** widened and **18,500 / 18,500** mask terms round-trip, **0** collisions; **36** of 83 dialect programs inside, **36** agree; **650 / 650** negated normal forms certified; every declared case as declared, **0** wrong; relay **20 / 20**, **32 / 32** handoffs agree or consistent, **0** disagree (verbatim control **0 / 15**); **92 / 92** scripts `VERIFIED True`, **84 / 84** mutants rejected |
+| stepwise planner | `python3 -m glm_universal.tools stepwise` | the typed planner as the executive of a chain of steps: **30 / 30** composition cases, **21 / 21** goal cases, **6 / 6** narratives and **4 / 4** follow-ups as declared, **0** wrong (the planner alone answers 0 of the 30 compound cases); the first-found control answers the **3** cases the veto refuses; **43 / 43** chain scripts `VERIFIED`, **149 / 149** steps aligned, every mutation rejected; 8 of 8 marks met |
+| stepwise planner, round two | `python3 -m glm_universal.tools stepwise-two` | *how many more*, parity, averages, givens with units and register values in the wheels: **21 / 21** frame, **18 / 18** unit and **14 / 14** register cases, **2 / 2** narratives and **2 / 2** follow-ups as declared, **0** wrong (round one's reader answers 0 of the 53); strip-the-units control wrong on **6** answered cases and answers **7** unit refusals; **39 / 39** chain scripts `VERIFIED`, **178 / 178** steps aligned, every mutation rejected (unit lie **22 / 22**); round one's corpus unchanged; 8 of 8 marks met |
 | blockers probe | `python3 -m glm_universal.tools blockers` | the pre-registered language probe scores **<!--figure:probe-correct-->2<!--/figure-->** correct, **<!--figure:probe-wrong-->1<!--/figure-->** wrong, **<!--figure:probe-refused-->17<!--/figure-->** refused of **<!--figure:probe-questions-->20<!--/figure-->** — **below the declared pass mark of <!--figure:probe-pass-mark-->10<!--/figure-->**, a declared failure |
 
 The test-suite row is the sign-off ledger's own count, recorded by
@@ -539,6 +620,26 @@ variable only where a declared junction identifies it
 (`engineering/union.py`). Recomputed by `tools connected`; proved in
 `RequestProject/GLM/ConnectedMachine.lean`. Write-up:
 [`CONNECTED_MACHINE_STUDY.md`](studies/CONNECTED_MACHINE_STUDY.md).
+
+**Chains of steps, each step in three columns.** When the typed planner
+refuses, the router hands the text to `runtime/stepwise.py`, which composes
+planner answers (operator words, function forms, predicates, `then`), finds
+unasked steps over the wheels (goal and narrative questions), refuses by name
+where readings or derivations disagree, and remembers the chain for `then …`
+and `why?` under a SHA-256 digest of the conversation. Each step is checked in
+columns 1 and 2, and `reasoning/stepwise_script.py` writes one column-3 script
+that re-derives every step in a fresh interpreter. `GLM.py --steps TEXT` asks
+it directly; recomputed by `tools stepwise`; proved in
+`RequestProject/GLM/StepwisePlanner.lean`. Write-up:
+[`STEPWISE_PLANNER_STUDY.md`](studies/STEPWISE_PLANNER_STUDY.md). Since
+Phase 73 its leaves also read *how many more … than*, *how much larger (higher,
+lower) … than*, *is … odd / even* and *the average of …*, and its goal mode
+reads givens and targets written with units — through the declared exact unit
+table of `runtime/quantity_units.py`, dimension-checked and converted into SI
+— and givens read from the register through the Phase 55 scale table;
+recomputed by `tools stepwise-two`; proved in
+`RequestProject/GLM/StepwiseFrames.lean`. Write-up:
+[`STEPWISE_TWO_STUDY.md`](studies/STEPWISE_TWO_STUDY.md).
 
 **Reverse Three Column Thinking.** `reasoning/reverse_tct.py` runs Three
 Column Thinking backwards: the mathematics (column 2), given directly or read
@@ -672,8 +773,8 @@ so a confident wrong answer is worse than a refusal). Write-up:
 [`CAPABILITY_ASSESSMENT.md`](CAPABILITY_ASSESSMENT.md).
 
 **The Lean development, addressed.** `reasoning/lean_address.py` gives each of
-the 3976 declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly 3976/3976 with 0 coordinate errors;
+the 4048 declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly 4048/4048 with 0 coordinate errors;
 3503 distinct addresses, and the quantiser adds no conflation of its own;
 nearest-by-address shares a file 771 times against 33 for a SHA-256 control and
 16 for a seeded reshuffle, with chance at ≈ 0.93 %. `report lean`.
@@ -716,8 +817,8 @@ twenty questions rather than three samples. `tools oracle`. Write-up:
 **The field surface, and what it was worth.** `runtime/fields.py` answers one
 named field of one named row — `field atomic_weight_u of carbon` — over
 <!--figure:fieldsurface-tables-->13<!--/figure--> declared tables holding
-<!--figure:fieldsurface-rows-->9,794<!--/figure--> rows and
-<!--figure:fieldsurface-pairs-->58,239<!--/figure--> addressable `(row,
+<!--figure:fieldsurface-rows-->9,991<!--/figure--> rows and
+<!--figure:fieldsurface-pairs-->59,349<!--/figure--> addressable `(row,
 field)` pairs: the element and molecule source rows, one table per register's
 carrier attributes, the Lean address book, the package's own top-level
 definitions, and a registry of declared zero-argument functions whose returned
@@ -898,20 +999,46 @@ closures left behind is §3.4.
 ### 3.4 Named for the next round
 
 **Read this section first on the next development push.** The head of
-[`MASTER_PLAN.md`](MASTER_PLAN.md) names Phase 70 as where the next round
+[`MASTER_PLAN.md`](MASTER_PLAN.md) names Phase 73 as where the next round
 starts and points back here. The candidates are ordered: the first is the one that bears
 most directly on the standing target.
 
-**N. Native past parity — named by Phase 70.** In the order of
-[`NATIVE_PARITY_STUDY.md`](studies/NATIVE_PARITY_STUDY.md) §6: (N1) a declared
-resampling of the Lean corpus (every sub-corpus that drops one file), to say
-whether the single-book figures are draws or small effects; (N2) a third
-native book for the documents — a section's position in the document tree as
-a Golay word — to move the document rankings past parity with the raw
-vector; (N3) a native word ranking, the overlap computed on Golay words of
-the tokens, where word overlap is still far ahead of any lexical address
-(ledger rows 4 and 5); (N4) the stack relay's text tie-break, which ledger
-row 6 records as native ahead, shipped on the live Lean-corpus text ranking.
+**O. The stepwise planner, round three — named by Phase 72, narrowed by
+Phase 73.** In order: (O1) a held-out set of compound, goal, unit and register
+questions written by someone outside the project (the corpora and the module
+share an author, and every mark of both rounds was met on the first reading;
+this is candidate B's point, sharpest here); (O3) the reverse relay into the
+chain, so that `relay:` hands a column-2 value to the stepwise planner and its
+multi-step answer chooses the next reverse operation (the last item of
+candidate M); (O5) measurands rather than units — the unit check compares
+dimensions, so it cannot tell a torque from an energy, and the scale table's
+`length` is not the wheels' `wavelength`; a declared map from register
+measurands to wheel quantities (candidate K2, candidate 1's second half) is
+what would let *the atomic radius of iron* feed a wavelength by name; (O6)
+carrying a register value's stated precision through a derivation rather
+than treating it as exact; (O7) the widenings of
+[`STEPWISE_TWO_STUDY.md`](studies/STEPWISE_TWO_STUDY.md) §6 (tera and pico,
+*heavier* with a declared field, folds over a whole column).
+[`STEPWISE_PLANNER_STUDY.md`](studies/STEPWISE_PLANNER_STUDY.md) §6,
+[`STEPWISE_TWO_STUDY.md`](studies/STEPWISE_TWO_STUDY.md) §6. *O2 (the frames
+and givens with units) and O4 (register values feeding a wheel derivation)
+were taken by Phase 73 and are met: every mark of the round-two study is
+met.*
+
+**N. Native past parity — named by Phase 70, narrowed by Phase 71.** In
+order: (N1) a declared resampling of the Lean corpus (every sub-corpus that
+drops one file), to say whether the single-book figures of
+[`NATIVE_PARITY_STUDY.md`](studies/NATIVE_PARITY_STUDY.md) and the post-hoc
+readings of [`NATIVE_WORDS_STUDY.md`](studies/NATIVE_WORDS_STUDY.md) §3.3 —
+Golay letter words alone ahead of the token overlap on hits, and ahead of the
+part strings on the Lean corpus — are draws or effects; (N2) a third native
+book for the documents — a section's position in the document tree as a Golay
+word — to move the document rankings past parity with the raw vector; (N5) a
+native word ranking with the part letter words as its **first** layer, which
+would change the order outside the standard's ties, and a document letter word
+that collides less on prose (study §6). *N3 (the native word ranking) was
+taken by Phase 71 and is met; N4 (ledger row 6 on the live Lean ranking) was
+measured there and missed at k = 1 (mark W6), so it is recorded, not shipped.*
 *The owner's standing instruction: where a standard method ties or narrowly
 beats a native one, keep the native one and refine it.*
 
@@ -1339,7 +1466,7 @@ reach `PROJECT_DIRECTIVES.md` (about 66 minutes), 6 reach
 `signoff/ledger.py`, 1 reaches `signoff/__main__.py`.
 
 The seven instruments in the ledger beside the
-<!--figure:test-files-->116 test files<!--/figure--> are `lean-build`,
+<!--figure:test-files-->119 test files<!--/figure--> are `lean-build`,
 `lean-sorry-free`, `lean-copies-identical`, `capabilities`, `benchmarks`,
 `evaluation` and `figures`. Editing a document makes exactly the units that
 read that document stale — `test_figures.py` yes, `test_substrate.py` no — so
@@ -1387,7 +1514,7 @@ In order, from the repository root; the last step is the one that catches a
 document drifting from the code.
 
 ```bash
-lake build                                                   # 140 Lean files, no sorry
+lake build                                                   # 143 Lean files, no sorry
 rg -n 'sorry|admit' RequestProject/GLM                       # expect nothing
 diff -r RequestProject/GLM overlay/glm_lean/RequestProject/GLM   # the two copies agree
 

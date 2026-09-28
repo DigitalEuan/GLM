@@ -7,7 +7,7 @@
 
 **Verdict.** Everything is exact `int` / `fractions.Fraction` / `F_2`; nothing here imports `random`.
 
-**Deciding figure.** 100 modules, one frozen data file, and a runnable audit.
+**Deciding figure.** 102 modules, one frozen data file, and a runnable audit.
 
 **Recomputed by.** `glm_universal.reasoning.reasoning_report`
 
@@ -16,7 +16,7 @@
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 
-**Status: implemented (GLM-3+ Step 3, extended since).** **100 modules**, one
+**Status: implemented (GLM-3+ Step 3, extended since).** **102 modules**, one
 frozen data file,
 and a runnable audit. Everything is exact `int` / `fractions.Fraction` /
 `F_2`; nothing here imports `random`; nothing here imports a third-party
@@ -575,4 +575,45 @@ themselves live in `retrieval.py`, `corpus/address.py` and `controller.py`;
 `retrieval.retrieve` defaults to `native2`. The measurement is cached in
 `_data/native_parity.json` under a digest of its sources. Reachable as `tools
 native-parity` and the toolbox tool `native parity`.
+
+## `native_words.py` — word overlap computed on Golay words of the tokens
+
+Native words (Phase 71, [`../../../studies/NATIVE_WORDS_STUDY.md`](../../../studies/NATIVE_WORDS_STUDY.md)).
+A token's parts (split at `_`, `.`, `'` and digits), each part's letter word
+(the 24-bit mask of its letter buckets under the lexical book's folding), the
+letter word's Golay class (every nearest codeword of the complete decoder, no
+tie broken) and the token's Golay name (its letter word and an index that
+separates the vocabulary's tokens sharing it). The rankings `text`,
+`text_leech`, `words_native`, `letters`, `classes` and the post-hoc controls
+`parts` and `text_parts` are lexicographic keys over these, measured on the
+Lean corpus and the documents against marks W1–W6.
+`RequestProject/GLM/NativeWords.lean` proves the name overlap equal to the
+token overlap and the refinement confined to ties. `retrieval.rank` accepts
+the word schemes by name, and `corpus.address.retrieve` ranks by
+`words_native`. The measurement is cached in `_data/native_words.json` under a
+digest of its sources. Reachable as `tools native-words` and the toolbox tool
+`native words`.
+
+## `stepwise_script.py` — a chain of steps in three columns
+
+The stepwise planner's proof-carrying chain (Phase 72,
+[`../../../studies/STEPWISE_PLANNER_STUDY.md`](../../../studies/STEPWISE_PLANNER_STUDY.md)).
+A `Step` holds its operation, inputs, value and its column-1 and column-2
+lines, each written from a declared template and read back by a declared
+reader; the in-process step gate accepts a step only when both columns read
+back to the same operation and value. The chain's column-3 script re-derives
+every step in a fresh `python3 -I` with its own readers and arithmetic
+(re-reading register values, re-parsing givens and the wheels' axioms),
+printing `STEP k ALIGNED` per step and `VERIFIED` for the whole. The declared
+mutations — a value lie, column 1 alone changed, steps reordered, the answer
+changed, a read lie — must each be rejected. `RequestProject/GLM/StepwisePlanner.lean`
+proves the local step gate equivalent to recomputation from scratch.
+
+Round two (Phase 73) adds the operations `measured` (a given read with its
+unit), `si` (scaled into SI by the declared factor), `unit_out` (the answer
+written back in the asked unit), `parity` and `mean`, each with its template,
+reader and recomputation in the script, and the mutation `unit-lie` (a
+conversion factor changed) which must be rejected like the others.
+`RequestProject/GLM/StepwiseFrames.lean` proves the frames, the unit
+round trip and the register feed sound.
 

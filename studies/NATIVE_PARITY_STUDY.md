@@ -6,7 +6,7 @@
 
 **Verdict.** On the Lean corpus the native ranking that reads two Leech books, each in its two layers, matches the like-for-like standard ranking exactly and beats the raw feature vector, and on the document corpus the native and standard rankings stay within one relevant section of each other, so the native method is kept.
 
-**Deciding figure.** Hits at 5 on 210 declaration queries, 83 for the two-book native ranking against 80 for the raw features; on 102 goal queries, 31 against 27; on the 24 controller tasks the read-back scorer solves 24 against 18 for the shipped Leech scorer.
+**Deciding figure.** Hits at 5 on 211 declaration queries, 95 for the two-book native ranking against 87 for the raw features; on 103 goal queries, 30 against 26; on the 24 controller tasks the read-back scorer solves 24 against 18 for the shipped Leech scorer.
 
 **Recomputed by.** `glm_universal.reasoning.native_parity.native_parity_report`
 
@@ -233,32 +233,32 @@ current reading. The document mark is a draw, not a result either way.
 <!-- generated: nativeparity-lean -->
 | queries | ranking | hit@1 | hit@3 | hit@5 | hit@10 | precision@5 | MRR@10 |
 |---|---|---|---|---|---|---|---|
-| declarations | *address* — the shipped raw Leech distance | 50 | 70 | 77 | 99 | 11.5 % | 0.298 |
-| declarations | *features* — the raw structural vector (the standard) | 49 | 67 | 80 | 102 | 11.7 % | 0.299 |
-| declarations | *features2* — raw structural, then raw lexical (like for like) | 53 | 72 | 83 | 112 | 12.6 % | 0.320 |
-| declarations | **native** — read-back, then Leech distance, then name | 50 | 68 | 77 | 102 | 11.5 % | 0.300 |
-| declarations | **native2** — structural book, then lexical book, each in two layers | 53 | 72 | 83 | 112 | 12.6 % | 0.320 |
-| goals | *address* — the shipped raw Leech distance | 14 | 19 | 27 | 36 | 8.0 % | 0.186 |
-| goals | *features* — the raw structural vector (the standard) | 16 | 22 | 27 | 37 | 8.4 % | 0.204 |
-| goals | *features2* — raw structural, then raw lexical (like for like) | 18 | 26 | 31 | 37 | 9.4 % | 0.226 |
-| goals | **native** — read-back, then Leech distance, then name | 16 | 22 | 29 | 38 | 8.6 % | 0.206 |
-| goals | **native2** — structural book, then lexical book, each in two layers | 18 | 26 | 31 | 37 | 9.4 % | 0.226 |
+| declarations | *address* — the shipped raw Leech distance | 48 | 67 | 88 | 109 | 12.8 % | 0.314 |
+| declarations | *features* — the raw structural vector (the standard) | 48 | 69 | 86 | 109 | 13.2 % | 0.316 |
+| declarations | *features2* — raw structural, then raw lexical (like for like) | 60 | 77 | 94 | 113 | 14.5 % | 0.364 |
+| declarations | **native** — read-back, then Leech distance, then name | 49 | 70 | 89 | 112 | 13.0 % | 0.322 |
+| declarations | **native2** — structural book, then lexical book, each in two layers | 60 | 77 | 94 | 113 | 14.5 % | 0.364 |
+| goals | *address* — the shipped raw Leech distance | 15 | 20 | 26 | 39 | 7.6 % | 0.202 |
+| goals | *features* — the raw structural vector (the standard) | 15 | 23 | 30 | 41 | 8.2 % | 0.210 |
+| goals | *features2* — raw structural, then raw lexical (like for like) | 17 | 25 | 37 | 43 | 9.8 % | 0.236 |
+| goals | **native** — read-back, then Leech distance, then name | 14 | 22 | 29 | 41 | 7.8 % | 0.202 |
+| goals | **native2** — structural book, then lexical book, each in two layers | 17 | 25 | 37 | 43 | 9.8 % | 0.238 |
 
-210 declaration queries and 102 goal queries over 3,976 declarations.  The read-back is exact for 3,976 of 3,976 stored addresses and 102 of 102 goal addresses (largest residue 3, covering radius 4).  `native` at least matches `features` on the declarations: no; on the goals: yes.  `native2` at least matches `features`: yes and yes; and `features2`, like for like: yes and yes.
+203 declaration queries and 102 goal queries over 4,048 declarations.  The read-back is exact for 4,048 of 4,048 stored addresses and 102 of 102 goal addresses (largest residue 3, covering radius 4).  `native` at least matches `features` on the declarations: yes; on the goals: no.  `native2` at least matches `features`: yes and yes; and `features2`, like for like: yes and yes.
 <!-- end generated -->
 
 <!-- generated: nativeparity-documents -->
 | ranking | queries with a hit at 5 | precision@5 |
 |---|---|---|
-| *lexical* — the shipped raw Leech distance | 11 / 60 | 5.0 % |
-| **lexical_native** — read-back, then Leech distance, then name | 11 / 60 | 5.0 % |
-| **lexical_native2** — lexical book, then structural book, each in two layers | 11 / 60 | 5.0 % |
-| *lexical_raw* — the raw lexical vector (the standard) | 11 / 60 | 5.3 % |
-| *lexical_raw2* — raw lexical, then raw structural (like for like) | 11 / 60 | 5.0 % |
-| *text* — word overlap, ties by name (the shipped live ranking) | 46 / 60 | 38.7 % |
-| **text_native** — word overlap, ties by lexical Leech distance | 46 / 60 | 38.7 % |
+| *lexical* — the shipped raw Leech distance | 12 / 60 | 6.7 % |
+| **lexical_native** — read-back, then Leech distance, then name | 11 / 60 | 6.7 % |
+| **lexical_native2** — lexical book, then structural book, each in two layers | 12 / 60 | 7.0 % |
+| *lexical_raw* — the raw lexical vector (the standard) | 12 / 60 | 7.0 % |
+| *lexical_raw2* — raw lexical, then raw structural (like for like) | 12 / 60 | 7.0 % |
+| *text* — word overlap, ties by name (the shipped live ranking) | 46 / 60 | 36.7 % |
+| **text_native** — word overlap, ties by lexical Leech distance | 46 / 60 | 36.7 % |
 
-60 section queries over 1,198 sections; the read-back is exact for 1,198 of 1,198 lexical addresses.  `lexical_native` at least matches `lexical_raw`: no; `lexical_native2` at least matches it: no, and `lexical_raw2` like for like: yes; `text_native` at least matches `text`: yes.
+60 section queries over 1,227 sections; the read-back is exact for 1,227 of 1,227 lexical addresses.  `lexical_native` at least matches `lexical_raw`: no; `lexical_native2` at least matches it: yes, and `lexical_raw2` like for like: yes; `text_native` at least matches `text`: yes.
 <!-- end generated -->
 
 ### 3.3 The live document ranking
@@ -296,19 +296,49 @@ The read-back scorer meets its mark (24 of 24, all minimal, all verified, the sa
 <!-- generated: nativeparity-marks -->
 | mark | what it asks | outcome |
 |---|---|---|
-| **N1** | `native` ≥ `features` at every k and MRR@10 (declarations) | **not met** |
-| **N1_address** | `native` ≥ the shipped `address` (declarations) | **not met** |
-| **N2** | `native` ≥ `features` at every k (goals) | met |
+| **N1** | `native` ≥ `features` at every k and MRR@10 (declarations) | met |
+| **N1_address** | `native` ≥ the shipped `address` (declarations) | met |
+| **N2** | `native` ≥ `features` at every k (goals) | **not met** |
 | **N3** | every read-back exact (stored and goal addresses) | met |
 | **N4a** | `lexical_native` ≥ `lexical_raw` (documents) | **not met** |
 | **N4b** | `text_native` ≥ `text` (documents, the live ranking) | met |
 | **N5** | `readback` scorer: 24 of 24, minimal, verified, same proposals | met |
 | **N6** | `native2` ≥ `features` (declarations and goals) | met |
 | **N7** | `native2` ≥ `features2`, like for like | met |
-| **N8** | `lexical_native2` ≥ `lexical_raw` and `lexical_raw2` | **not met** |
+| **N8** | `lexical_native2` ≥ `lexical_raw` and `lexical_raw2` | met |
 
-6 of 10 marks met.
+8 of 10 marks met.
 <!-- end generated -->
+
+**Re-read at the close of Phase 71.** Phase 71's Lean file moved the corpus
+and with it the stride samples (211 declaration and 103 goal queries). On that
+tree `native2` has 61, 79, 95 and 119 hits at k = 1/3/5/10 on the declarations
+against 51, 73, 87 and 110 for `features`, and 13, 26, 30 and 40 on the goals
+against 11, 20, 26 and 35 — N6 and N7 still met, with the like-for-like
+equality intact. The single-book marks moved as round one predicted: N1 and
+N4a are now met and N2 missed, by one query at k = 3 — the draw §3.1 recorded,
+flipping with the corpus.
+
+**Re-read at the close of Phase 72.** Phase 72's Lean file
+(`StepwisePlanner.lean`) moved the corpus again, and the stride samples to 202
+declaration and 101 goal queries. On that tree `native2` has 58, 76, 93 and
+111 hits at k = 1/3/5/10 on the declarations against 44, 69, 86 and 106 for
+`features`, and 16, 25, 36 and 43 on the goals against 13, 22, 31 and 41 — N6
+and N7 still met, `native2` still equal to `features2`. The document draws
+moved by one section: `lexical_raw` has 17 hits at 5 against 16 for every
+other lexical ranking, so N4a and N8 are missed at this reading, as §3.1 and
+§3.2 said they could be. N1 still met, N2 still missed.
+
+**Re-read at the close of Phase 73.** Phase 73's Lean file
+(`StepwiseFrames.lean`) moved the stride samples to 203 declaration and 102
+goal queries. `native2` has 60, 77, 94 and 113 hits at k = 1/3/5/10 on the
+declarations against 48, 69, 86 and 109 for `features`, and 17, 25, 37 and 43
+on the goals against 15, 23, 30 and 41 — N6 and N7 still met, `native2` still
+equal to `features2`. The document draws moved back by one section:
+`lexical_native2`, `lexical_raw` and `lexical_raw2` each have 12 hits at 5 with
+precision 7/100, so **N8 is met** at this reading, while `lexical_native` has
+11 against 12 for `lexical`, so N4a is still missed. N1 still met, N2 still
+missed.
 
 **The verdict, in words.** On the Lean corpus the native ranking that reads two
 Leech books, each in its two layers, matches the like-for-like standard

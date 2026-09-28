@@ -63,8 +63,8 @@ received.
 The package holds **8 registers** of carriers, reached through
 **<!--figure:query-kinds-->24 query kinds<!--/figure-->** one of which
 dispatches **65 report subjects**, and is checked by
-**<!--figure:test-files-->116 test files<!--/figure-->** alongside
-**<!--figure:lean-files-->140 Lean files<!--/figure-->**.
+**<!--figure:test-files-->119 test files<!--/figure-->** alongside
+**<!--figure:lean-files-->143 Lean files<!--/figure-->**.
 
 Every count in this repository's documentation is recomputed by
 `overlay/glm_universal/figures.py` and written to
@@ -85,7 +85,7 @@ PYTHONPATH=. python3 -m glm_universal.corpus --check
 ```
 
 ```bash
-lake build          # RequestProject/GLM/*.lean, 140 Lean files, no sorry
+lake build          # RequestProject/GLM/*.lean, 143 Lean files, no sorry
 ```
 
 ## 1. The GLM system
@@ -118,6 +118,20 @@ lake build          # RequestProject/GLM/*.lean, 140 Lean files, no sorry
   both query sets while equalling the like-for-like standard ranking; the
   controller's read-back scorer solves 24 of 24 tasks
   ([`NATIVE_PARITY_STUDY.md`](studies/NATIVE_PARITY_STUDY.md)).
+* **Word overlap on Golay words (Phase 71).** The word-overlap ranking is
+  computed on Golay words of the tokens: Golay names that carry the token
+  overlap exactly, then the parts' 24-bit letter words and their Golay classes
+  inside the ties. It ranks ahead of the standard on the Lean corpus and level
+  with it on the documents, whose live ranking now reads it
+  ([`NATIVE_WORDS_STUDY.md`](studies/NATIVE_WORDS_STUDY.md)).
+* **Chains of steps, checked step by step (Phase 72).** When the typed
+  planner refuses, the stepwise planner composes its answers (*is the atomic
+  number of iron prime?*), finds the steps a question does not ask for (*given
+  voltage = 12 and resistance = 4, what is the power?*) and stitches them,
+  refusing by name where readings or derivations disagree; every step carries
+  its own three columns, re-derived by one script in a fresh interpreter
+  (`GLM.py --steps`,
+  [`STEPWISE_PLANNER_STUDY.md`](studies/STEPWISE_PLANNER_STUDY.md)).
 * **The legacy `snap` decoder is retired.** Complete syndrome decoding
   (`substrate/golay_decode.py`) returns *every* nearest codeword and a status;
   no tie is broken silently. Weight-5 miscorrection is shown, via the Steiner
@@ -420,7 +434,7 @@ archive/                      records of closed rounds, kept as they were writte
 studies/                      the write-ups produced here — see ENTRY.md for the full list
   scripts/                    the standalone scripts two of those studies are about
 source_material/              what was supplied, kept as received
-RequestProject/               the Lean 4 development (140 Lean files, no sorry)
+RequestProject/               the Lean 4 development (143 Lean files, no sorry)
   GLM/                        one file per result; GLM/README.md indexes them
 overlay/                      the GLM repository, with the finished package
   GLM.py                      the CLI

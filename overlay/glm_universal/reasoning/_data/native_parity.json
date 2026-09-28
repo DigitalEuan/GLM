@@ -43,85 +43,85 @@
   "tasks": 24
  },
  "declarations": {
-  "met_against_address": false,
-  "met_against_features": false,
+  "met_against_address": true,
+  "met_against_features": true,
   "native2_against_features": true,
   "native2_like_for_like": true,
   "schemes": {
    "address": {
     "hits": {
-     "1": 50,
-     "10": 99,
-     "3": 70,
-     "5": 77
+     "1": 48,
+     "10": 109,
+     "3": 67,
+     "5": 88
     },
     "mrr_at_10": {
-     "__fraction__": "31559/105840"
+     "__fraction__": "40133/127890"
     },
     "precision_at_5": {
-     "__fraction__": "121/1050"
+     "__fraction__": "26/203"
     },
-    "queries": 210
+    "queries": 203
    },
    "features": {
     "hits": {
-     "1": 49,
-     "10": 102,
-     "3": 67,
-     "5": 80
+     "1": 48,
+     "10": 109,
+     "3": 69,
+     "5": 86
     },
     "mrr_at_10": {
-     "__fraction__": "17587/58800"
+     "__fraction__": "23063/73080"
     },
     "precision_at_5": {
-     "__fraction__": "41/350"
+     "__fraction__": "134/1015"
     },
-    "queries": 210
+    "queries": 203
    },
    "features2": {
     "hits": {
-     "1": 53,
-     "10": 112,
-     "3": 72,
-     "5": 83
+     "1": 60,
+     "10": 113,
+     "3": 77,
+     "5": 94
     },
     "mrr_at_10": {
-     "__fraction__": "84709/264600"
+     "__fraction__": "15499/42630"
     },
     "precision_at_5": {
-     "__fraction__": "22/175"
+     "__fraction__": "21/145"
     },
-    "queries": 210
+    "queries": 203
    },
    "native": {
     "hits": {
-     "1": 50,
-     "10": 102,
-     "3": 68,
-     "5": 77
+     "1": 49,
+     "10": 112,
+     "3": 70,
+     "5": 89
     },
     "mrr_at_10": {
-     "__fraction__": "79307/264600"
+     "__fraction__": "3919/12180"
     },
     "precision_at_5": {
-     "__fraction__": "121/1050"
+     "__fraction__": "132/1015"
     },
-    "queries": 210
+    "queries": 203
    },
    "native2": {
     "hits": {
-     "1": 53,
-     "10": 112,
-     "3": 72,
-     "5": 83
+     "1": 60,
+     "10": 113,
+     "3": 77,
+     "5": 94
     },
     "mrr_at_10": {
-     "__fraction__": "84709/264600"
+     "__fraction__": "15499/42630"
     },
     "precision_at_5": {
-     "__fraction__": "22/175"
+     "__fraction__": "21/145"
     },
-    "queries": 210
+    "queries": 203
    }
   }
  },
@@ -130,69 +130,69 @@
   "k": 5,
   "met_live_ranking": true,
   "met_native_vs_raw": false,
-  "native2_against_raw": false,
+  "native2_against_raw": true,
   "native2_like_for_like": true,
   "queries": 60,
-  "readback_checked": 1198,
-  "readback_exact": 1198,
+  "readback_checked": 1227,
+  "readback_exact": 1227,
   "schemes": {
    "lexical": {
-    "hits": 11,
+    "hits": 12,
     "precision_at_5": {
-     "__fraction__": "1/20"
+     "__fraction__": "1/15"
     }
    },
    "lexical_native": {
     "hits": 11,
     "precision_at_5": {
-     "__fraction__": "1/20"
+     "__fraction__": "1/15"
     }
    },
    "lexical_native2": {
-    "hits": 11,
+    "hits": 12,
     "precision_at_5": {
-     "__fraction__": "1/20"
+     "__fraction__": "7/100"
     }
    },
    "lexical_raw": {
-    "hits": 11,
+    "hits": 12,
     "precision_at_5": {
-     "__fraction__": "4/75"
+     "__fraction__": "7/100"
     }
    },
    "lexical_raw2": {
-    "hits": 11,
+    "hits": 12,
     "precision_at_5": {
-     "__fraction__": "1/20"
+     "__fraction__": "7/100"
     }
    },
    "text": {
     "hits": 46,
     "precision_at_5": {
-     "__fraction__": "29/75"
+     "__fraction__": "11/30"
     }
    },
    "text_native": {
     "hits": 46,
     "precision_at_5": {
-     "__fraction__": "29/75"
+     "__fraction__": "11/30"
     }
    }
   },
-  "units": 1198
+  "units": 1227
  },
  "exactness": {
-  "checked": 3976,
+  "checked": 4048,
   "covering_radius": 4,
-  "exact": 3976,
+  "exact": 4048,
   "failures": 0,
   "max_residual": 3,
   "met": true
  },
  "goals": {
   "lexical_readback_exact": 102,
-  "met_against_address": true,
-  "met_against_features": true,
+  "met_against_address": false,
+  "met_against_features": false,
   "native2_against_features": true,
   "native2_like_for_like": true,
   "queries": 102,
@@ -200,76 +200,76 @@
   "schemes": {
    "address": {
     "hits": {
-     "1": 14,
-     "10": 36,
-     "3": 19,
-     "5": 27
+     "1": 15,
+     "10": 39,
+     "3": 20,
+     "5": 26
     },
     "mrr_at_10": {
-     "__fraction__": "47921/257040"
+     "__fraction__": "51893/257040"
     },
     "precision_at_5": {
-     "__fraction__": "41/510"
+     "__fraction__": "13/170"
     },
     "queries": 102
    },
    "features": {
     "hits": {
-     "1": 16,
-     "10": 37,
-     "3": 22,
-     "5": 27
+     "1": 15,
+     "10": 41,
+     "3": 23,
+     "5": 30
     },
     "mrr_at_10": {
-     "__fraction__": "26213/128520"
+     "__fraction__": "9007/42840"
     },
     "precision_at_5": {
-     "__fraction__": "43/510"
+     "__fraction__": "7/85"
     },
     "queries": 102
    },
    "features2": {
     "hits": {
-     "1": 18,
-     "10": 37,
-     "3": 26,
-     "5": 31
+     "1": 17,
+     "10": 43,
+     "3": 25,
+     "5": 37
     },
     "mrr_at_10": {
-     "__fraction__": "9689/42840"
+     "__fraction__": "1733/7344"
     },
     "precision_at_5": {
-     "__fraction__": "8/85"
+     "__fraction__": "5/51"
     },
     "queries": 102
    },
    "native": {
     "hits": {
-     "1": 16,
-     "10": 38,
+     "1": 14,
+     "10": 41,
      "3": 22,
      "5": 29
     },
     "mrr_at_10": {
-     "__fraction__": "3316/16065"
+     "__fraction__": "26017/128520"
     },
     "precision_at_5": {
-     "__fraction__": "22/255"
+     "__fraction__": "4/51"
     },
     "queries": 102
    },
    "native2": {
     "hits": {
-     "1": 18,
-     "10": 37,
-     "3": 26,
-     "5": 31
+     "1": 17,
+     "10": 43,
+     "3": 25,
+     "5": 37
     },
     "mrr_at_10": {
-     "__fraction__": "9689/42840"
+     "__fraction__": "8743/36720"
     },
     "precision_at_5": {
-     "__fraction__": "8/85"
+     "__fraction__": "5/51"
     },
     "queries": 102
    }
@@ -372,21 +372,21 @@
   ]
  },
  "marks": {
-  "N1": false,
-  "N1_address": false,
-  "N2": true,
+  "N1": true,
+  "N1_address": true,
+  "N2": false,
   "N3": true,
   "N4a": false,
   "N4b": true,
   "N5": true,
   "N6": true,
   "N7": true,
-  "N8": false
+  "N8": true
  },
  "round_one": {
-  "N1": false,
-  "N1_address": false,
-  "N2": true,
+  "N1": true,
+  "N1_address": true,
+  "N2": false,
   "N3": true,
   "N4a": false,
   "N4b": true,
@@ -395,8 +395,8 @@
  "round_two": {
   "N6": true,
   "N7": true,
-  "N8": false
+  "N8": true
  },
- "source_digest": "1a20d4ae1b17083961a5a1e1b9cbc4030142bbd1652db122fa961799d1c5d4af",
+ "source_digest": "5e4c09ce89a6db7fd6a8496aa294518cda779c6d1180711fe1a1555ec516ce38",
  "study": "studies/NATIVE_PARITY_STUDY.md"
 }

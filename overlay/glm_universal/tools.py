@@ -1222,6 +1222,102 @@ def _native_parity(args) -> int:
     return 0
 
 
+def _native_words(args) -> int:
+    """Native words (Phase 71): word overlap computed on Golay words of the
+    tokens, against the marks declared in ``studies/NATIVE_WORDS_STUDY.md``
+    before the module existed."""
+    from .reasoning import native_words as nwd
+    if args.write:
+        target = nwd.write_measurements()
+        print(f"wrote {target}")
+        print(f"native words: {nwd.state()['verdict']}")
+        return 0
+    report = nwd.current() if not args.live else None
+    if report is None:
+        report = nwd.native_words_report()
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    for label in ("declarations", "goals"):
+        for scheme, row in report["lean"][label]["schemes"].items():
+            hits = row["hits"]
+            print(f"lean {label:<12} {scheme:<12} hits "
+                  + " ".join(f"{hits[k]:>3}" for k in sorted(hits, key=int))
+                  + f"  MRR@10 {_per_mille(Fraction(row['mrr_at_10']))}")
+    docs = report["documents"]
+    if docs.get("answered"):
+        for scheme, row in docs["schemes"].items():
+            print(f"documents {scheme:<12} hits {row['hits']:>3} of "
+                  f"{docs['queries']}  precision@5 "
+                  f"{_per_mille(Fraction(row['precision_at_5']))}")
+    for mark, met in report["marks"].items():
+        print(f"{mark:<4} {'met' if met else 'NOT met'}")
+    return 0
+
+
+def _stepwise(args) -> int:
+    """The stepwise planner (Phase 72): S1-S7 against the marks declared in
+    ``studies/STEPWISE_PLANNER_STUDY.md`` before the module existed."""
+    from .runtime import stepwise as sw
+    report = sw.stepwise_report(scripts=not args.no_scripts)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    for key in ("composition", "goals", "narratives", "follow_ups"):
+        r = report[key]
+        print(f"{key:<12} {r['met']} of {r['cases']} as declared")
+    c = report["composition"]
+    print(f"composition  wrong {c['wrong']}; the bare planner answers "
+          f"{c['bare_planner_answers']} of {c['cases']}")
+    k = report["controls"]
+    print(f"controls     first-found answers {k['first_found_answers_refused']}"
+          f" refused goal cases; naive union answers "
+          f"{k['naive_answers_ambiguous']} ambiguous")
+    i = report["interference"]
+    print(f"interference {i['read']} of {i['questions']} declared questions "
+          f"read; turned into answers: {len(i['turned_into_answers'])}")
+    if "scripts" in report:
+        s = report["scripts"]
+        print(f"scripts      {s['verified']} of {s['chains']} verified, "
+              f"{s['aligned']} of {s['steps']} steps aligned")
+        for kind, n in s["mutants"].items():
+            print(f"  mutation {kind:<10} caught {s['caught'][kind]} of {n}")
+    return 0
+
+
+def _stepwise_two(args) -> int:
+    """The stepwise planner, round two (Phase 73): T1-T7 against the marks
+    declared in ``studies/STEPWISE_TWO_STUDY.md`` before any code."""
+    from .runtime import stepwise_two as st
+    report = st.stepwise_two_report(scripts=not args.no_scripts)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    for key in ("frames", "units", "register"):
+        r = report[key]
+        print(f"{key:<12} {r['met']} of {r['cases']} as declared, wrong "
+              f"{r['wrong']}; round one's reader answers "
+              f"{r['round_one_answers']}")
+    k = report["controls"]
+    print(f"controls     strip-the-units wrong on {len(k['naive_wrong'])} "
+          f"answered cases, answers {len(k['naive_answers_unit_refusals'])} "
+          f"unit refusals")
+    for key in ("narratives", "follow_ups"):
+        r = report[key]
+        print(f"{key:<12} {r['met']} of {r['cases']} as declared")
+    i = report["interference"]
+    print(f"interference round one held: {i['round_one_held']}; "
+          f"{i['router_read']} of {i['router_questions']} router questions "
+          f"read; turned into answers: {len(i['turned_into_answers'])}")
+    if "scripts" in report:
+        s = report["scripts"]
+        print(f"scripts      {s['verified']} of {s['chains']} verified, "
+              f"{s['aligned']} of {s['steps']} steps aligned")
+        for kind, n in s["mutants"].items():
+            print(f"  mutation {kind:<10} caught {s['caught'][kind]} of {n}")
+    return 0
+
+
 def _carried_fork(args) -> int:
     """The carried fork: K1-K4 against the marks declared in
     ``studies/CARRIED_FORK_STUDY.md`` before the module existed."""
@@ -1710,6 +1806,38 @@ def _parser() -> argparse.ArgumentParser:
                         help="measure now instead of reading the stored "
                              "measurements")
     parity.set_defaults(handler=_native_parity)
+
+    words = sub.add_parser(
+        "native-words",
+        help="word overlap computed on Golay words of the tokens, against "
+             "the marks of the native-words study")
+    words.add_argument("--json", action="store_true")
+    words.add_argument("--write", action="store_true",
+                       help="re-take the measurements and store them beside "
+                            "their digest")
+    words.add_argument("--live", action="store_true",
+                       help="measure now instead of reading the stored "
+                            "measurements")
+    words.set_defaults(handler=_native_words)
+
+    steps = sub.add_parser(
+        "stepwise",
+        help="the stepwise planner: the planner as the executive of a "
+             "chain of steps, against the marks of the stepwise study")
+    steps.add_argument("--json", action="store_true")
+    steps.add_argument("--no-scripts", action="store_true",
+                       help="skip running the column-3 scripts (mark S5)")
+    steps.set_defaults(handler=_stepwise)
+
+    steps2 = sub.add_parser(
+        "stepwise-two",
+        help="the stepwise planner, round two: how many more, parity, "
+             "averages, givens with units and register values in the "
+             "wheels, against the marks of the round-two study")
+    steps2.add_argument("--json", action="store_true")
+    steps2.add_argument("--no-scripts", action="store_true",
+                        help="skip running the column-3 scripts (mark T5)")
+    steps2.set_defaults(handler=_stepwise_two)
 
     fork = sub.add_parser(
         "carried-fork",

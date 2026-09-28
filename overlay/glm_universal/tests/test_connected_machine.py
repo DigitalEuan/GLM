@@ -93,12 +93,13 @@ class TestTheToolbox(unittest.TestCase):
     """C4: the eight modules the wiring audit found unreached."""
 
     def test_one_tool_per_module(self):
-        # The eight modules of Phase 66, and the native-parity instrument
-        # added by Phase 70.
+        # The eight modules of Phase 66, the native-parity instrument added
+        # by Phase 70 and the native-words reader added by Phase 71.
         modules = {t.module.split(".")[-1] for t in toolbox.TOOLS}
         self.assertEqual(modules, {"deep_dive", "llvq", "moonshine", "pcgs",
                                    "salvage", "salvage_second", "stability",
-                                   "tie_break", "native_parity"})
+                                   "tie_break", "native_parity",
+                                   "native_words"})
 
     def test_every_tool_names_a_lean_file_and_a_study_that_exist(self):
         for t in toolbox.TOOLS:

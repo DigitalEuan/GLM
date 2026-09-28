@@ -29,7 +29,12 @@ The readers
                  refuses by name.  *what is 2 + 2* parses (a comparison of
                  ``what`` with ``2 + 2``) and is not read: ``what`` is unbound;
 ``engineering``  a question one of its frames reads;
-``planner``      everything else.
+``planner``      everything else.  When the planner and the grammar both
+                 refuse, the stepwise planner
+                 (:mod:`glm_universal.runtime.stepwise`) reads the text as a
+                 chain of planner steps -- composition, goals over the
+                 formula wheels, narratives -- and its verdict stands; it is
+                 never consulted on text the planner answered.
 
 Exact, deterministic, float-free; no surface is given text another surface
 read.
@@ -163,10 +168,31 @@ def route(session, text: str) -> Routed:
     from .parser import QueryError
     try:
         sol = session.ask_planned(text)
+        refused = None if sol.ok else sol
     except QueryError as exc:
-        return Routed("planner", False, f"refused: {exc}",
+        sol, refused = None, exc
+    if refused is not None or sol is None:
+        stepped = _stepwise(session, text)
+        if stepped is not None:
+            return stepped
+    if sol is None:
+        return Routed("planner", False, f"refused: {refused}",
                       faculty="refusal")
     return Routed("planner", bool(sol.ok), sol.answer, solution=sol)
+
+
+def _stepwise(session, text: str) -> Optional[Routed]:
+    """The planner as the executive of a chain (Phase 72): consulted only
+    after the planner and the grammar refused, so it never changes an
+    answer they gave (``GLM.StepwisePlanner.fallback_conservative``)."""
+    from . import stepwise as sw
+    a = sw.answer(session, text)
+    if a.verdict == "unread":
+        return None
+    return Routed("planner", a.answered,
+                  a.value if a.answered else a.summary(),
+                  solution=sw.chain_solution(a), payload=a,
+                  faculty="derive" if a.answered else "refusal")
 
 
 def ask_routed(session, text: str):

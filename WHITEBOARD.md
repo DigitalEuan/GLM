@@ -5,7 +5,7 @@
 **Question.** If this session stopped now, what would the next one need to
 know to carry the round on?
 
-**Verdict.** No round is in flight: Phase 70 closed, and the next round starts
+**Verdict.** No round is in flight: Phase 73 closed, and the next round starts
 from a candidate in `STATUS.md` §3.4.
 
 **Deciding figure.** 0 steps outstanding.
@@ -42,7 +42,27 @@ absence:
 
 ## Status
 
-**No round is in flight.** Phase 70 — native parity: every place a standard
+**No round is in flight.** Phase 73 — stepwise planner round two: the
+frames *how many more*, parity and averages, givens and targets written with
+units (a declared unit table, dimension checks, SI scaling and refusals), and
+register values feeding a wheel derivation, every step still in three columns
+with one fresh-interpreter script — is closed: the study is
+[`studies/STEPWISE_TWO_STUDY.md`](studies/STEPWISE_TWO_STUDY.md), the record
+is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 73, and what it left is candidate
+O of [`STATUS.md`](STATUS.md) §3.4, narrowed. Phase 72 — the stepwise planner: the typed
+planner as the executive of a chain of steps (composition of its own answers,
+unasked steps found over the wheels and stitched, every step in three columns
+with a per-step alignment check and one fresh-interpreter script) — is closed:
+the study is
+[`studies/STEPWISE_PLANNER_STUDY.md`](studies/STEPWISE_PLANNER_STUDY.md), the
+record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 72, and what it left is
+candidate O of [`STATUS.md`](STATUS.md) §3.4. Phase 71 — native words: the word-overlap ranking
+computed on Golay words of the tokens (Golay names that carry the token
+overlap exactly, then the parts' letter words and their Golay classes inside
+the ties), shipped as the live document ranking — is closed: the study is
+[`studies/NATIVE_WORDS_STUDY.md`](studies/NATIVE_WORDS_STUDY.md), the record
+is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 71, and what it left is candidate
+N of [`STATUS.md`](STATUS.md) §3.4, narrowed. Phase 70 — native parity: every place a standard
 method tied or narrowly beat a Golay/Leech-native one re-measured, and the
 native method kept and refined (two native Leech books read in two layers for
 retrieval, the read-back scorer for the controller) — is closed: the study is

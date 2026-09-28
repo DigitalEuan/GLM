@@ -205,7 +205,7 @@ def chance_hit_rate(relatives_count: int, corpus_size: int, k: int
 
 _HEAD = re.compile(
     r"^\s*(?:@\[[^\]]*\]\s*)?"
-    r"(?:(?:private|protected|noncomputable|partial|unsafe|scoped)\s+)*"
+    r"(?:(?:public|private|protected|noncomputable|partial|unsafe|scoped)\s+)*"
     r"(?:theorem|lemma|def|abbrev|structure|inductive|instance|example)\s+\S+")
 
 _IDENT = re.compile(r"[A-Za-z_][A-Za-z0-9_']*")
@@ -381,6 +381,13 @@ def lexical_addresses() -> Dict[str, Tuple[int, ...]]:
 SCHEMES: Tuple[str, ...] = (
     "address", "features", "lexical", "text", "name", "digest", "shuffled",
     "random")
+
+#: The word-overlap schemes computed on Golay words of the tokens (Phase 71,
+#: ``studies/NATIVE_WORDS_STUDY.md``); ``words_native`` carries exactly the
+#: token overlap in its first layer (mark W1) and ranks at least as well as
+#: ``text`` on the declared sets (mark W2).
+WORD_SCHEMES: Tuple[str, ...] = ("words_native", "letters", "classes",
+                                 "text_leech")
 
 #: The schemes that read a point of the lattice.
 POINT_SCHEMES: Tuple[str, ...] = ("address", "lexical", "digest", "shuffled")
@@ -658,6 +665,19 @@ def rank(scheme: str, *, text: str = "", point: Optional[Sequence[int]] = None,
     ``point`` is required for the point schemes and ignored otherwise;
     ``text`` is required for ``text`` and ``name``.
     """
+    if scheme in WORD_SCHEMES:
+        # Phase 71: word overlap computed on Golay words of the tokens
+        # (``studies/NATIVE_WORDS_STUDY.md``).  Imported here because the
+        # module reads this one.
+        from . import native_words as nw
+        if candidates is None:
+            return nw.rank_lean(text, k=k, scheme=scheme, exclude=exclude,
+                                point=point)
+        allowed = set(candidates)
+        return tuple(c for c in nw.rank_lean(text, k=len(corpus()),
+                                             scheme=scheme, exclude=exclude,
+                                             point=point)
+                     if c.name in allowed)[:k]
     if scheme == "native2":
         if point is None or lexical_point is None:
             raise ValueError("scheme 'native2' needs a point and a lexical point")
@@ -709,7 +729,7 @@ def retrieve(query: str, k: int = K_DEFAULT, scheme: str = DEFAULT_SCHEME
         point: Optional[Tuple[int, ...]]
         lexical_point = (lexical_addresses().get(decl.name)
                          if scheme == "native2" else None)
-        if scheme in ("address", "native", "native2"):
+        if scheme in ("address", "native", "native2") + WORD_SCHEMES:
             point = la.addresses("feature").get(decl.name)
         elif scheme == "features":
             book = la.address_book()
@@ -728,7 +748,7 @@ def retrieve(query: str, k: int = K_DEFAULT, scheme: str = DEFAULT_SCHEME
         text = strip_declaration_head(query)
         lexical_point = (la.quantise(lexical_vector(text))
                          if scheme == "native2" else None)
-        if scheme in ("address", "native", "native2"):
+        if scheme in ("address", "native", "native2") + WORD_SCHEMES:
             point = goal_address(text)
         elif scheme == "features":
             point = goal_features(text)

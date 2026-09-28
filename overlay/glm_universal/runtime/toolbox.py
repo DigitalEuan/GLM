@@ -93,9 +93,14 @@ SURFACES: Tuple[Surface, ...] = (
             "derive", ("RequestProject/GLM/EngineeringWheels.lean",
                        "RequestProject/GLM/ConnectedMachine.lean"),
             "studies/ENGINEERING_LANGUAGE_STUDY.md"),
-    Surface("planner", "everything else: the typed planner, then the grammar",
-            "GLM.py --ask TEXT, or -q TEXT", "derive, address, refusal",
-            ("RequestProject/GLM/SemanticPlan.lean",),
+    Surface("planner", "everything else: the typed planner, then the "
+            "grammar, then -- only on a refusal -- the stepwise planner, "
+            "which reads the text as a chain of planner steps",
+            "GLM.py --ask TEXT, -q TEXT, or --steps TEXT",
+            "derive, address, refusal",
+            ("RequestProject/GLM/SemanticPlan.lean",
+             "RequestProject/GLM/StepwisePlanner.lean",
+             "RequestProject/GLM/StepwiseFrames.lean"),
             "studies/SEMANTIC_PLAN_STUDY.md"),
 )
 
@@ -235,6 +240,22 @@ def _native_parity(arg: str) -> ToolResult:
                        "readback_checked": r["readback_checked"]})
 
 
+def _native_words(arg: str) -> ToolResult:
+    from ..reasoning import native_words as nwd
+    r = nwd.tool_summary(arg)
+    rows = r["tokens"]
+    if not rows:
+        return ToolResult(False, "native words: give a fragment of text to "
+                          "read its tokens as Golay words", {"tokens": []})
+    said = "; ".join(f"{row['token']} -> "
+                     + ", ".join(f"{part} {word}" for part, word
+                                 in zip(row["parts"], row["letter_words"]))
+                     for row in rows)
+    return ToolResult(True, "native words: each part's letter word, as a "
+                      "24-bit Golay-space word in hexadecimal: " + said,
+                      {"tokens": rows})
+
+
 TOOLS: Tuple[Tool, ...] = (
     Tool("moonshine", "reasoning.moonshine", "graded dimensions of the "
          "moonshine module and the Leech bridge", "address",
@@ -273,6 +294,11 @@ TOOLS: Tuple[Tool, ...] = (
          "ties or narrowly beats a native one, and the native refinement",
          "address", ("RequestProject/GLM/NativeParity.lean",),
          "studies/NATIVE_PARITY_STUDY.md", _native_parity),
+    Tool("native words", "reasoning.native_words", "a text's tokens read as "
+         "Golay words: the parts' letter words the native word ranking uses",
+         "address", ("RequestProject/GLM/NativeWords.lean",),
+         "studies/NATIVE_WORDS_STUDY.md", _native_words,
+         takes="a fragment of text"),
 )
 
 

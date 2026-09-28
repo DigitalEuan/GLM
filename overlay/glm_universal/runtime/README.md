@@ -221,6 +221,40 @@ by its follow-up text alone and is kept so that what the exact key buys
 is measured rather than asserted.  `GLM.PlanStore` is the proved half and
 `../../../studies/SUPPLIED_PORTS_STUDY.md` §4 the measurement.
 
+### The stepwise planner
+
+```python
+from glm_universal.runtime.stepwise import answer, StepwiseConversation
+```
+
+`stepwise.py` makes the typed planner the executive of a chain of steps
+(Phase 72).  A compound question is split by a declared composition grammar
+(operator words, function forms, predicates, verb forms over *it*, `then`);
+every leaf is one question to the planner, and a composition is answered
+only when every reading of it agrees (`AMBIGUOUS` otherwise).  A goal or
+narrative question (*given voltage = 12 and resistance = 4, what is the
+power?*) is solved over the split union of the wheels: every acyclic
+derivation is enumerated, a step that cannot yet be taken is deferred and
+stitched in once a later step supplies its input, and disagreement between
+derivations or a given re-derived otherwise is refused by name
+(`DERIVATIONS_DISAGREE`, `INCONSISTENT_GIVENS`).  `StepwiseConversation`
+keeps the chain under a SHA-256 digest of the history for `then …` and
+`why?`.  The router reaches it only after the planner refused
+(`router._stepwise`).  Every step is checked in columns 1 and 2 and the
+chain's column-3 script is written by `reasoning/stepwise_script.py`.
+`GLM.StepwisePlanner` is the proved half and
+`../../../studies/STEPWISE_PLANNER_STUDY.md` the measurement.
+
+Round two (Phase 73) adds the frames *how many more* (`DIFFERENCE_REVERSED`
+when the smaller is named first), parity and averages; givens and targets
+written with units, read by `quantity_units.py` (a declared unit table,
+`read_unit`, `check_dimension`, `scale_into_si`; a unit that does not fit the
+quantity is refused with `UnitRefused` rather than stripped); and register
+values (*the protons of carbon*) feeding a wheel derivation. `stepwise_two.py`
+is the report and its controls (round one's reader, naive strip-the-units);
+`GLM.StepwiseFrames` is the proved half and
+`../../../studies/STEPWISE_TWO_STUDY.md` the measurement.
+
 ## The `GLM.py` CLI
 
 The CLI entry point lives at the **repo root** (`../../GLM.py`), not in
