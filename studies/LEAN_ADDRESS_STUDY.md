@@ -28,7 +28,7 @@ Code:
 Query: `report lean`.
 Command line: `python3 -m glm_universal.tools lean-address`.
 Formal development:
-[`RequestProject/GLM/Address.lean`](../RequestProject/GLM/Address.lean).
+[`RequestProject/GLM/Address.lean`](../overlay/glm_lean/RequestProject/GLM/Address.lean).
 Tests: `overlay/glm_universal/tests/test_lean_address.py` (54 tests).
 
 ---
@@ -99,23 +99,23 @@ not written down here; it is emitted:
 | kind | count |
 |---|---|
 | abbrev | 56 |
-| def | 1,037 |
-| example | 18 |
+| def | 1,062 |
+| example | 19 |
 | inductive | 39 |
 | instance | 27 |
-| lemma | 169 |
+| lemma | 176 |
 | structure | 54 |
-| theorem | 2,648 |
-| **total** | **4,048** |
+| theorem | 2,757 |
+| **total** | **4,190** |
 
-4,048 declarations across 143 files, the largest being `Gen3.lean` with 98.
+4,190 declarations across 156 files, the largest being `Gen3.lean` with 98.
 <!-- end generated -->
 
 Written into a sentence, so that a reader who stops here has the size of what
 follows: the reader addresses
-<!--figure:lean-declarations-->4,048<!--/figure--> declarations over
-<!--figure:lean-declaration-files-->143<!--/figure--> files, which is every
-file of <!--figure:lean-files-->143 Lean files<!--/figure--> the development
+<!--figure:lean-declarations-->4,190<!--/figure--> declarations over
+<!--figure:lean-declaration-files-->156<!--/figure--> files, which is every
+file of <!--figure:lean-files-->156 Lean files<!--/figure--> the development
 holds — no Lean file of this repository is outside the corpus this study
 measures.
 
@@ -202,11 +202,11 @@ declarations in source order rather than asserting either:
 <!-- generated: lean-scale -->
 | scale | read back exactly | moved by the decoder | worst residual | verdict |
 |---|---|---|---|---|
-| 4 | 30 / 60 | 30 | — | **lossy** |
+| 4 | 28 / 60 | 32 | — | **lossy** |
 | 6 | 60 / 60 | 60 | 2 | lossless, non-degenerate |
 | 8 | 60 / 60 | 0 | 0 | **degenerate** |
 | **9** | **60 / 60** | **60** | **2** | **lossless, non-degenerate** |
-| 12 | 60 / 60 | 30 | 4 | lossless, partly degenerate |
+| 12 | 60 / 60 | 32 | 4 | lossless, partly degenerate |
 | 16 | 60 / 60 | 0 | 0 | **degenerate** |
 
 On the first 60 declarations in source order, decoding being the expensive step.  The chosen scale is 9.
@@ -249,11 +249,11 @@ below half a scale unit in every coordinate.
 <!-- generated: lean-readback -->
 |  | measured |
 |---|---|
-| declarations checked | 4,048 |
-| read back exactly | **4,048 / 4,048** (rate 1) |
-| coordinates checked | 97,152 |
+| declarations checked | 4,190 |
+| read back exactly | **4,190 / 4,190** (rate 1) |
+| coordinates checked | 100,560 |
 | coordinate errors | **0** |
-| moved by the decoder | 4,048 / 4,048 |
+| moved by the decoder | 4,190 / 4,190 |
 | worst observed residual | **3**, at `GLM.Gen2.Meaning.pseudoscalar_parity_ne_zero` |
 | half a scale step | `9/2` |
 | covering radius | 4 |
@@ -276,9 +276,9 @@ declaration" is, at this point, a statement about the feature map alone.
 <!-- generated: lean-injectivity -->
 | scheme | distinct addresses | distinct feature vectors | classes | declarations conflated | quantisation adds conflation? |
 |---|---|---|---|---|---|
-| `feature` | 3,599 / 4,048 | 3,599 | 300 | 749 | no |
-| `hash_control` | **4,048 / 4,048** | 3,599 | 0 | 0 | — |
-| `shuffled` | 3,599 / 4,048 | 3,599 | 300 | 749 | no |
+| `feature` | 3,733 / 4,190 | 3,733 | 307 | 764 | no |
+| `hash_control` | **4,190 / 4,190** | 3,733 | 0 | 0 | — |
+| `shuffled` | 3,733 / 4,190 | 3,733 | 307 | 764 | no |
 <!-- end generated -->
 
 Two things to read off this table.
@@ -302,7 +302,7 @@ the sense that a reader shown only the 24 counts would also fail to tell the
 members apart:
 
 <!-- generated: lean-classes -->
-300 classes: 226 pairs, 33 triples, 26 classes of 4, 8 classes of 5, 4 classes of 6, 1 class of 7, 1 class of 8, 1 class of 15.
+307 classes: 232 pairs, 34 triples, 26 classes of 4, 8 classes of 5, 4 classes of 6, 1 class of 7, 1 class of 8, 1 class of 15.
 
 The widest, written out, because the point they make can only be read from the names:
 
@@ -376,27 +376,27 @@ The third table is on *all* pairs, not just nearest ones.
 <!-- generated: lean-neighbours -->
 | scheme | nearest shares a file | rate | mean tie size |
 |---|---|---|---|
-| `feature` | **776 / 4,048** | ≈ **19.17 %** | 1.70 |
-| `hash_control` | 34 / 4,048 | ≈ 0.84 % | 1.00 |
-| `shuffled` | 20 / 4,048 | ≈ 0.49 % | 1.70 |
-| *chance* | — | ≈ 0.90 % | — |
+| `feature` | **801 / 4,190** | ≈ **19.12 %** | 1.69 |
+| `hash_control` | 34 / 4,190 | ≈ 0.81 % | 1.00 |
+| `shuffled` | 23 / 4,190 | ≈ 0.55 % | 1.69 |
+| *chance* | — | ≈ 0.85 % | — |
 
 | scheme | nearest is cited, either way | rate |
 |---|---|---|
-| `feature` | **134 / 4,048** | ≈ **3.31 %** |
-| `hash_control` | 6 / 4,048 | ≈ 0.15 % |
-| `shuffled` | 4 / 4,048 | ≈ 0.10 % |
+| `feature` | **139 / 4,190** | ≈ **3.32 %** |
+| `hash_control` | 6 / 4,190 | ≈ 0.14 % |
+| `shuffled` | 5 / 4,190 | ≈ 0.12 % |
 | *chance* | — | ≈ 0.15 % |
 
 | scheme | mean d² within a file | mean d² across files | ratio |
 |---|---|---|---|
-| `feature` | 5,847.3 | 6,879.8 | **0.850** |
-| `hash_control` | 54,277.7 | 54,168.8 | 1.002 |
-| `shuffled` | 6,753.1 | 6,871.6 | 0.983 |
+| `feature` | 5,864.7 | 7,006.4 | **0.837** |
+| `hash_control` | 54,261.2 | 54,136.6 | 1.002 |
+| `shuffled` | 6,972.2 | 6,997.0 | 0.996 |
 
-Against closed-form chance the feature encoding runs 21.4× on the file test and 21.6× on the citation test, from an encoding that is never shown a file name.
+Against closed-form chance the feature encoding runs 22.6× on the file test and 22.3× on the citation test, from an encoding that is never shown a file name.
 
-Over 73,349 same-file pairs and 8,117,779 cross-file pairs.  The feature encoding beats the hash control: yes; beats the seeded reshuffle: yes; beats closed-form chance: yes.
+Over 74,314 same-file pairs and 8,701,641 cross-file pairs.  The feature encoding beats the hash control: yes; beats the seeded reshuffle: yes; beats closed-form chance: yes.
 <!-- end generated -->
 
 The two controls do exactly what they are there for.

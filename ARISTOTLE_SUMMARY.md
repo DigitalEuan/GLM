@@ -1,3 +1,227 @@
+# Summary of changes for run 3bfcbd0e-1fe3-443c-b3fe-725815acf8d8
+**Merging and ordering the remaining tasks** (full table in `studies/ROADMAP_STUDY.md`; STATUS §3.4 now starts with this order)
+
+I put all 49 open items from STATUS §3.4 in one table and reduced them to 7 tracks. Six groups turned out to be the same piece of work under different names:
+- **Measurand register:** K2, O5b, O5c, O5d, 1a and 1b
+- **Reasoning loop:** K4, I2 and O3 (O3 is the same item as M3)
+- **Discourse:** D (same as 0a), 0b and K3
+- **Third sort:** I1 and M1
+- **Held-out question set:** B and O1 are the same item
+- J2 goes together with H-X1
+
+Suggested order, where each step feeds the next:
+1. Measurands (done this round)
+2. The loop, then re-read L9
+3. Typed operators (F)
+4. H-E6, then O7r and 2r
+5. Discourse
+6. C together with H1
+7. Third sort
+8. Second readings (J3 can now be stated properly because of Phase 82)
+9. Retrieval, starting with N1
+
+Some items can't move without you or outside material:
+- **Needs your decision:** K1 and the two contract changes under P.
+- **Needs an outside question set:** B, O1 and L4.
+- **Proposed for retirement:** P-c and H-c6.
+
+I asked about both of these during the run and got no answer, so they are deferred.
+
+**Built: Phase 87, the measurand register (step 1)**
+- **Result:** all 30 declared cases pass and all 8 declared targets are met. The machine answered 2 of the 30 cases before this phase and 18 after. A naive comparison version, which skips the register, attempts 7 of the conversion cases and gets all 7 wrong. Earlier rounds still pass. All 18 chain scripts check out (123 steps).
+- **New files:**
+  - `overlay/glm_universal/runtime/measurand_register.py`
+  - `runtime/measurand_register_report.py`
+  - `evaluation/measurand_register_cases.py`
+  - `tests/test_measurand_register.py` (16 tests)
+  - `overlay/glm_lean/RequestProject/GLM/MeasurandRegister.lean`: 7 theorems with no `sorry`, using only the standard axioms
+  - `studies/MEASURAND_REGISTER_STUDY.md`
+- **Changed files:** the stepwise planner gained conversion laws C1–C4 and register readings, the elementary charge and percent units were added, and efficiency is now treated as having no units. There is a new `measurand-register` tool command.
+- **Not shipped:** the offset row of the scale table (item 1a), because no register holds a Celsius reading yet.
+
+**Recorded miss:** with 4,190 declarations, the anonymous-register claim that text lands within twice chance failed: 78 hits against 37.39 expected, or 2.09×. `studies/ANONYMOUS_REGISTER_STUDY.md` records it as a miss, and the test lists it as a known miss instead of loosening the claim.
+
+**Checks:**
+- The whole Lean project builds (8,183 jobs).
+- The final sign-off run passed with the exhaustive cases on: 132 of 132 test files and 6 of 6 instruments.
+- The corpus check reports current.
+- STATUS, MASTER_PLAN, WHITEBOARD, the READMEs and the generated figures are updated; the suite figure is now 4,703 tests across 131 of the 132 test files.
+- All work is committed.
+
+# Summary of changes for run 0b2a7a19-ef7b-4719-a479-cd0068c1e7fc
+This round (recorded as Phase 86) did a quick tidy of candidate P and then took candidate O5, measurands rather than units, in the stepwise planner. A full `lake build RequestProject` succeeds with no `sorry` and only the standard axioms. The round is closed: 131 of 131 test files and 6 of 6 checks are signed, and `corpus --check` reports the documents up to date. Everything is committed.
+
+**1. P tidy: fixes for the soft confidence floor, measured but not adopted.** I tested each fix the earlier round had proposed for the floor's failures at a fixed error rate, over the same 525 cells. The new code is `reasoning/rate_posterior_marks.py` §5, run with `tools rate-posterior --repairs`; the write-up is `studies/RATE_POSTERIOR_STUDY.md` §4.
+- A finer grid leaves 37 cells broken and a higher guard point leaves 35, so neither fixes anything.
+- An "upper-credible" rate rule removes both breaks on the grid (32 broken, 0 on the grid). The cost: the share of right answers kept falls from 0.8790 to 0.8561 in one example cell.
+- The breaks at rate 1/5, above the grid, remain under every rule tried. An exact identity, checked on every broken cell, explains why.
+- I left the runtime unchanged, because adopting the rule changes its contract and that is your decision.
+- Proved in `RateRepair.lean` (`fixed_rate_wrong_eq`, `fixed_rate_keep`, `fixed_rate_break`).
+
+**2. Main item: measurands.** Until now the unit check only compared dimensions. It couldn't tell a torque from an energy, a frequency from an angular velocity, or a temperature level from a temperature difference. Following the standard method in the SI Brochure, the planner now does three new things (`runtime/measurands.py`, `runtime/stepwise.py`):
+- **Units of the wrong kind:** it refuses `KIND_MISMATCH` where a unit has the right dimension but the SI restricts it to another kind (hertz is not an angular velocity; newton metre is not an energy).
+- **Temperatures:** it reads Celsius and Fahrenheit as a level or a difference, depending on the law that uses the value. It refuses the mix-ups by name: `LEVEL_AS_DIFFERENCE`, `DIFFERENCE_AS_LEVEL`, `KIND_CONFLATION`, and `BELOW_ABSOLUTE_ZERO` for a reading below absolute zero.
+- **Constants:** it supplies the exact Planck constant and speed of light, but only when the givens alone can't derive the answer.
+
+**Results** (`tools measurands`; write-up `studies/MEASURANDS_STUDY.md`):
+- 31 of 31 declared questions answered or refused as declared, with 0 wrong. All 7 checks I set before writing the code pass.
+- With the kind check switched off, the old dimension check answers all 5 kind mismatches with a number.
+- Through `GLM.py --ask`, answers went from 10 to 5 on the kind questions (the five wrong-kind answers are gone), from 5 to 8 on temperatures, and from 0 to 4 on constants.
+- Rounds one to four of the planner are otherwise unchanged. All 17 generated check scripts verify and reject every deliberately corrupted version.
+
+**Two changes to earlier results you should know about:**
+- **Five old answers were wrong.** Five declared answers from stepwise round two (u13, g01, g03, g11, m02) fed a melting or boiling point, which is a temperature level, into `energy = mass · specific heat · temperature`, which needs a temperature change. They are now refused `LEVEL_AS_DIFFERENCE`, and each is recorded with its reason (addendum in `STEPWISE_TWO_STUDY.md` §7).
+- **Held-precision check H3 no longer passes.** Both of its examples were this same level/difference mix-up (addendum in `HELD_PRECISION_STUDY.md` §4).
+
+**Lean:** `MeasurandKinds.lean` proves six facts, including `level_as_difference_depends_on_zero`, `fahrenheit_kelvin`, `absolute_zero_celsius` and `hertz_as_angular_velocity_wrong`.
+
+**Updated documents:** `STATUS.md` (head, §1, §2 and §3.4; P and O5 are narrowed), `MASTER_PLAN.md` (Phase 86 recorded; the next round starts at Phase 87), `WHITEBOARD.md`, the tests README, the iteration-cost study, and the Lean-file and declaration counts.
+
+**What's still open (MEASURANDS_STUDY §6, STATUS §3.4 O5):**
+- Mapping register measurands to the formula wheels' quantities by name, so that, for example, the atomic radius of iron can feed a wavelength.
+- Conversions through a stated efficiency.
+- The elementary charge as a supplied constant.
+
+# Summary of changes for run 1fe79e21-fe71-48aa-84c9-77e5a6ac49f2
+I finished Phase 85, "folds with a hole", taken from the candidate list in `STATUS.md` §3.4. It is built, tested, backed by a Lean proof, documented and closed out. All work is committed; the last commit is "Phase 85 release closed".
+
+**What the phase adds.** The stepwise planner can now answer order questions about a column that has missing readings. Examples are "what is the second smallest…", a rank, or a median when some rows are unmeasured. Where a gap could change the answer, it gives the bounds that hold however the gaps are filled. Where no bound holds on one side, it refuses and names the reason. This follows the design in `studies/HOLE_FOLDS_STUDY.md`, whose success criteria H1–H8 are all met. The code is in `runtime/stepwise.py`, `reasoning/stepwise_script.py`, the new `runtime/stepwise_four.py`, and a new `tools stepwise-four` command.
+
+**Results:**
+- All 34 of the declared cases and both follow-up questions are answered, with no wrong answers.
+- Before this phase the machine answered none of these cases; through the router it now answers 25.
+- 9 of 9 completions and 4 of 4 refusals come out as expected.
+- 26 of 26 scripted plans run (843 of 843 steps), and all 15 deliberately corrupted plans (the "hole-lie" mutation) are caught.
+- Existing behaviour is undisturbed: the router picks up this phase's wording in only 11 of the 273 other queries tested.
+- The new `tests/test_stepwise_four.py` has 22 tests, all passing.
+
+**Lean.** `overlay/glm_lean/RequestProject/GLM/HoleBounds.lean` proves the bounds the planner quotes:
+- A reading's rank among the present values is off by at most the number of missing values.
+- The k-th smallest value is bounded in the same way, and both bounds can actually be reached.
+- A side is genuinely open whenever filling every gap with the same value can move the answer to that value. This is why the largest value of a column with a gap is always refused.
+
+The whole Lean library builds with no `sorry` and only the standard axioms. The library now has 153 files and 4,171 declarations. The Properties table lists the 2 definitions and 8 theorems from this file, with the theorems marked proved.
+
+**Knock-on changes.** The phase added new queries to the shared query set, which shifted two existing evaluation cases, so I updated their expected answers:
+- **`report-anonymous`:** now 708 → 74 and 214 → 131 of 835.
+- **`report-relay`:** now 708 → 711 of 835; the gate fires on 64 of 1670 queries; the relay still carries 12 queries the text search misses and loses 1. The relay still beats the text control on every set.
+
+I also re-took the query-escalation measurement and regenerated `FIGURES.md`. The suite figure now reads 4,668 tests across 129 of the 130 test files. `STATUS.md`, `MASTER_PLAN.md`, the whiteboard, the iteration-cost study and the READMEs are updated, with Phase 86 recorded as next.
+
+**Release check.** `corpus --check` reports the documents current. The full release sign-off passes, with 130 of 130 test files and 6 of 6 instruments signed under the exhaustive run.
+
+# Summary of changes for run 5503c723-fe7b-4b3f-b2b0-7c78b2ff9346
+This session did two things. It signed off the release left open by the previous run (Phases 81–83), then completed one development round from `STATUS.md` §3.4: Phase 84, which is item O7 of candidate O, the third round of the stepwise planner. The final release close passes: all 129 of 129 test files and 6 of 6 instruments hold under the exhaustive release run, and `corpus --check` reports the documents current. Everything is committed; the last commit is "Phase 84 release closed".
+
+**Phases 81–83 sign-off.** Every test had been reported as failing in about 0.1 s. The cause was that `pytest` was not installed in the environment, not a fault in the code. With it installed, the close passed 128/128 test files and 6/6 instruments. I also stopped git from tracking `__pycache__/` folders by adding them to `.gitignore`.
+
+**Phase 84: the stepwise planner, round three** (`studies/STEPWISE_THREE_STUDY.md`). The test cases were written and committed before the code. The planner can now read four new kinds of question:
+- **Comparatives** read through a declared data field, e.g. *which is denser, gold or lead* or *how much heavier is gold than iron*.
+- ***How many more*** for electrons and valence electrons.
+- **The tera- and pico- prefixes.**
+- **Sums, means and odd/even counts over a whole column**, either over every element or over a declared class of them.
+
+It refuses by name when a comparative has no declared field, when a value or a column reading is missing, or when a class isn't one the register declares. The new code is `runtime/declared_frames.py` and `runtime/stepwise_three.py`, plus changes to the existing planner, units, script-checking and toolbox modules. There is a new `stepwise-three` command and a new test file, `tests/test_stepwise_three.py`.
+
+Results, from `tools stepwise-three`; all 8 declared targets were met:
+- **Questions:** 47 of 47 declared questions and 2 of 2 follow-ups answered as declared, with 0 wrong. The round-two reader answers 0 of these 47; the whole system answered 6 of them before this round and 32 after.
+- **Scripts:** 34 of 34 chain scripts verified (327 of 327 steps), and every deliberately corrupted variant was rejected.
+- **Earlier rounds:** results from rounds one and two still hold.
+
+**Lean:** the new file `overlay/glm_lean/RequestProject/GLM/StepwiseWiden.lean` holds 8 theorems. They include: a mean over a column with one reading missing equals the full mean only when the missing value happens to equal it, which is why such a fold is refused. The file builds with no `sorry` and only the standard axioms. The 8 theorems are listed as proved in the Properties table.
+
+**Counts that moved with this round.** Adding a Lean file and a test file changed some figures quoted in the documents, and I updated them:
+- the Lean development is now 152 files and 4146 declarations;
+- the rebuild-cost table in `ITERATION_COST_STUDY.md` gained a Phase 84 line;
+- the suite totals are now 4,646 tests across 128 of the 129 test files.
+
+One behaviour change came from this. In the anonymous-register study, the claim that text search without names stays under twice chance had failed narrowly at 4137 declarations. It now holds again (74 hits against a chance level of 37.35). I stopped recording it as a known miss in `tests/test_anonymous.py`; that test now checks the claim stays between 1.5 and 2 times chance, and the study text says so.
+
+`STATUS.md`, `MASTER_PLAN.md`, `WHITEBOARD.md` and the READMEs record Phase 84 as closed and name Phase 85 as next. I did not edit `ARISTOTLE_SUMMARY.md`.
+
+# Summary of changes for run 4987e969-b193-429e-a0e1-f0d5282faa8d
+I ran Phase 80 on item P3 of candidate P in `STATUS.md` §3.4 (the confidence floor), doing what you asked: I tested a range of thresholds to find one that works, and where none does, the reading now gives a confidence score instead of refusing. The round is closed and the release is signed: 125 of 125 test files and 6 of 6 instruments. `corpus --check` reports current, `lake build RequestProject` succeeds with no `sorry`, and all work is committed.
+
+**What "working" means.** I wrote this down in `studies/CONFIDENCE_FLOOR_STUDY.md` before writing any code. A threshold `t` works at a bit-flip rate when two things hold for the decoder and for the carried fork over each of the five case sets (2, 4, 8, 16 and 32 cases):
+- its promise holds: P(wrong | answered) ≤ 1 − t;
+- it keeps at least 90 % of the right answers.
+
+I tested 7 thresholds (9/10, 19/20, 49/50, 99/100, 199/200, 999/1000, 9999/10000) at 5 rates (1/1000, 1/100, 1/50, 1/20, 1/10). Every probability is computed exactly over every possible received word, not sampled.
+
+**What the hunt found:**
+- **The working threshold** is 9999/10000 at 1/1000, 1/100 and 1/50, and 999/1000 at 1/20. So both of your candidates, 99 % and 99.9 %, work up to a rate of 1/20.
+- **At a rate of 1/10 no threshold works.** The plain decoder is the reason. Its confidence has only one value per error weight, so any floor has to drop every read of that weight. At 1/10 even a 90 % floor loses 28 % of its right answers, and a 99 % floor loses 63 %.
+- **What happens instead at 1/10:** as you suggested, the answer comes with its confidence rather than being refused.
+- **Before any floor,** the plain decoder at 1/10 gives a wrong answer 6.7 % of the time.
+- **Not in the original plan, so not counted:** each case set of the carried fork does have a working floor at 1/10 on its own (999/1000 for up to 8 cases).
+- **The promise held** in all 210 combinations. It also held in all 210 when the declared rate was double the true one. When the true rate was double the declared one, it broke in 30. So if you are unsure of the rate, declare the higher one.
+
+**What was built:**
+- `reasoning/confidence_floor.py`, plus four new commands in the Python dialect:
+  - `resolve_at` and `agree_at` return the answer and its exact confidence together, with a word for how sure it is (near-certain, confident, probable, uncertain). They never refuse on confidence.
+  - `resolve_floor` and `agree_floor` refuse with `BELOW_FLOOR` and state the confidence the answer had. A floor that is not a fraction in (0, 1] is refused with `FLOOR_OUT_OF_RANGE`.
+- `reasoning/confidence_floor_marks.py` holds the exact calculation and the threshold test. It is run with `tools confidence-floor`, which takes about 20 seconds.
+- `tests/test_confidence_floor.py` (22 tests).
+- The existing `resolve`, `agree`, `decode_confidence` and `agree_confidence` give exactly the same answers as before.
+
+**Results:** 6 of 7 targets met. The one miss was a mistake in what I predicted for one of the 16 test programs, not a wrong answer. I predicted a two-case `resolve_floor` at 1/10 would refuse, based on the decoder's 78 % figure. With only two cases the answer is actually 6561/6562 sure, so it answered. I've recorded this as missed rather than changing the prediction afterwards.
+
+**Lean** (`RequestProject/GLM/ConfidenceFloor.lean`, all in the Properties table as proved, using only the standard axioms):
+- `floor_error_le`: a floor keeps its promise.
+- `floor_retention_antitone`: raising the floor never raises the right answers it keeps.
+- `posterior_antitone_rate`: the answer's confidence falls as the rate rises.
+- `floor_pass_lower_rate`: an answer that passes the floor at the declared rate also passes at any lower true rate.
+- `floor_safe_overdeclared`: over the whole channel, overstating the rate keeps the promise.
+
+**Two fixes to earlier work:**
+- Phase 79's `integer_decision.py` imported `copy`, which a standing test forbids (only a fixed list of standard-library modules is allowed). I replaced it with a small copy function that behaves the same.
+- A test that stops documents quoting outdated counts treated "110 modules" as out of date, but the reasoning package really does have 110 modules now. I removed that phrase from its list, the same way "102 modules" was removed in Phase 72.
+
+**Documents updated:** `MASTER_PLAN.md` (Phase 80), `STATUS.md` (candidate P narrowed), `WHITEBOARD.md`, the READMEs, and the counts that moved (149 Lean files, 4126 declarations, the iteration-cost table).
+
+**Still open under candidate P:** an exact measure for the second reading (`agree`) so it can join the threshold test; estimating the rate from the system's own readings instead of having the caller declare it; and P2 (the 106 unresolved laws, which need a knowledge-base file that hasn't been supplied).
+
+# Summary of changes for run b2c0b8c4-351a-44d2-a513-54042a0d5c07
+This session finished the item left open last time (Phase 78, faster iteration) and delivered one new development round, Phase 79. Both are closed: `corpus --check` reports **current**, and `signoff --verify` shows **124 of 124 test files and 6 of 6 instruments** signed with the exhaustive cases run. `lake build` of the `RequestProject` library succeeds, there is no `sorry` in the Lean development, and all work is committed.
+
+**Phase 78 (faster iteration), finished.** The tests README now quotes the generated test-file figure instead of a hand-written sentence. After a refresh and a close, the sign-off ledger was fully signed. `__pycache__` directories are no longer tracked and are listed in `.gitignore`.
+
+**Phase 79: complete integer decision (the next part of candidate M in `STATUS.md` §3.4).** Before, the integer side of Reverse Three Column Thinking could only refuse questions it could not settle. It now decides them completely, and every answer comes with a certificate that is checked independently.
+- **What was added:**
+  - The study, with its success marks (Z1–Z6) written down before any results: `studies/INTEGER_DECISION_STUDY.md`.
+  - A fixed set of 22 questions: `evaluation/integer_decision_cases.py`.
+  - The decision procedure, its certificate checker and a mutation checker: `reasoning/integer_decision.py`.
+  - The procedure is used as a fallback in `reverse_tct_int.py`, and there is a new `integer-decision` tool.
+  - Tests: `test_integer_decision.py` is new and `test_reverse_tct_int.py` was updated.
+- **Lean:** `RequestProject/GLM/IntegerDecision.lean` covers the method's key facts: the exact shadow, the dark-shadow gap, the splinter count and cover, bijective substitution, and Pugh's example having no integer point. Its theorems use only Lean's standard axioms, and five Properties entries are recorded as proved.
+- **Results:**
+  - All 22 of the 22 study questions are decided. The previous version left all of them undecided.
+  - On 600 random problems, the new procedure agrees with the reference 600 times.
+  - All 22 certificates check, and every deliberately corrupted certificate is caught.
+  - Every mark written before the round was met.
+- **Documents updated:** `MASTER_PLAN.md`, `STATUS.md` (candidate M is narrowed to what remains), `WHITEBOARD.md`, the READMEs, and the Lean file count (now 148 files). The count of Lean declarations is now 4118 everywhere it is quoted. The dependency table in `ITERATION_COST_STUDY.md` has been re-measured: the median Lean edit now makes 40 test units stale, and 39 units are stale whenever any Lean file changes.
+
+**Still open:** the remaining candidates in `STATUS.md` §3.4 are the starting point for the next round. My earlier question about the P3 threshold (99% / 99.9% / skip) was not answered, so that item has not been started.
+
+# Summary of changes for run c433ce05-bd2a-4f99-9187-3a2ad10c73cf
+The previous session had finished all the actual work for its last round, Phase 74 (the law register: re-reading the 65 retained UBP laws from `source_material/UBP_LAW_GLM_REVIEW.md` and `source_material/retained_laws_verified_65.csv`). The code, `RequestProject/GLM/LawRegister.lean`, the study `studies/LAW_REGISTER_STUDY.md`, the `MASTER_PLAN.md`/`STATUS.md`/`WHITEBOARD.md` write-ups and the Properties table entries were already there. One thing was left: the release sign-off for the round was never completed.
+
+**What was left and what I did**
+- `signoff --verify-release` reported 120 of 120 test files but only **6 of 7 instruments**: the `evaluation` instrument's signature was recorded as *failed*.
+- I re-ran the end-to-end evaluation by itself: **177/177 passed** (149 answered correctly, 28 refused as expected, 0 wrong, 0 errors).
+- I then resumed the release (`signoff --release --resume`). It re-ran only that instrument, which passed. `--verify-release` now reports **120 of 120 test files and 7 of 7 instruments**.
+- I did not find out why the earlier run failed, since it passed when re-run. It took about 237 s against the instrument's expected 240 s, but I did not find a time limit in the sign-off code, so it was not simply a timeout.
+
+**Checks run here**
+- **Lean:** `lake build` of the whole `RequestProject` library completes with no `sorry` in the Lean tree. The nine Phase 74 theorems (`unique_leader_iff`, `wt_four_refused`, `wt_five_coset_three`, `and_not_closed`, `or_not_closed`, `moment_agree`, `moment_eight_differs`, `nrci_means_differ`, `nrci_floor`) use only Lean's standard axioms, plus the ones added by `native_decide` where it is used.
+- **Documents:** `corpus --check --all` reports **current**, and all 13 stored measurements are fresh.
+- **Law register:** `tools law-register` reports its marks R2–R9 as met (only the tail of the output was captured, so R1 is not shown here). I couldn't run its test file directly because `pytest` isn't installed here; it is covered by the verified release.
+
+**One edit I reverted**
+The gate table in `WHITEBOARD.md` §4 still says "close of Phase 67". I tried updating it to Phase 74, but any document edit makes the stored native-parity and native-words measurements stale, so I put the table back as it was rather than disturb a verified tree. It is only a wording lag: the current gate state is as listed above.
+
+No new round was started. The next round begins from a candidate in `STATUS.md` §3.4, with candidate P (the law register, round two) listed there by Phase 74. All work is committed, and `ARISTOTLE_SUMMARY.md` was not edited.
+
 # Summary of changes for run 7d5f9f35-2361-4b83-9d68-ba8b613c484a
 From `STATUS.md` §3.4 I took candidate O, round two of the stepwise planner (Phase 73). It adds question types round one could not read, plus unit handling. Everything is committed, the release sign-off passes (119 of 119 test files and 7 of 7 instruments), and the new Lean file builds with no `sorry` and only the standard axioms.
 

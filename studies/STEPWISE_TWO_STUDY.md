@@ -148,7 +148,7 @@ and so rejected a right chain.
 * **Wiring.** Nothing new: the router already hands a planner refusal to the
   stepwise planner, so every new question is reachable from `GLM.py --ask`
   and `GLM.py --steps`, with its three columns and `--verify-tct`.
-* [`RequestProject/GLM/StepwiseFrames.lean`](../RequestProject/GLM/StepwiseFrames.lean)
+* [`RequestProject/GLM/StepwiseFrames.lean`](../overlay/glm_lean/RequestProject/GLM/StepwiseFrames.lean)
   — §5.
 
 ## 4. Results
@@ -283,7 +283,33 @@ standard axioms only (`propext`, `Classical.choice`, `Quot.sound`).
   rational the register holds; its stated precision (the ordering frame's
   interval) is not carried through the wheels. An answer derived from 77.36 K
   is exact for 77.36 and says nothing about 77.355.
-* **Widening.** The tera- and pico- prefixes, *heavier / lighter / older* as
+* **Widening** — *taken by Phase 84*
+  ([`STEPWISE_THREE_STUDY.md`](STEPWISE_THREE_STUDY.md)): declared
+  comparatives, *electrons* and *valence electrons*, tera and pico, and folds
+  over every element or a declared class; neutrons still wait on a nuclide
+  register. As written: the tera- and pico- prefixes, *heavier / lighter / older* as
   comparatives with a declared field, parity and averages over a whole
   column (candidate 2's folds), and *how many more* over further count nouns
   (electrons need a charge state; neutrons need a nuclide register).
+
+## 7. Addendum (Phase 86): five verdicts amended
+
+The measurands round ([`MEASURANDS_STUDY.md`](MEASURANDS_STUDY.md)) changed
+five declared verdicts of this round, each to `LEVEL_AS_DIFFERENCE`, and
+records each in `evaluation/measurand_cases.py` (`AMENDED`) with its reason;
+the original corpus is kept as `ORIGINAL_*` in
+`evaluation/stepwise_two_cases.py`, and the report checks that each case takes
+its original verdict with the kinds switched off.
+
+| case | was | now | why |
+|---|---|---|---|
+| u13 | refused `OFFSET_UNIT` | `LEVEL_AS_DIFFERENCE` | 25 °C is a level (298.15 K); the heat law reads a difference |
+| g01 | answered 1629900 | `LEVEL_AS_DIFFERENCE` | the melting point of iron is a level, fed to the heat law |
+| g03 | answered 900 | `LEVEL_AS_DIFFERENCE` | as g01; the 900 was the entropy of heating from absolute zero, which diverges |
+| g11 | answered 12177/100 | `LEVEL_AS_DIFFERENCE` | as g01, with the boiling point of oxygen |
+| m02 | answered 900 and 1629900 | `LEVEL_AS_DIFFERENCE` | the narrative form of g03 |
+
+The *measurands, not units* item of §6 is taken by that round for kinds of
+quantity and temperature levels; the map from register measurands to wheel
+quantities by name is still open.
+

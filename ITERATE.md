@@ -4,9 +4,9 @@
 
 **Question.** How does a session pick this repository up, make a change that holds, and close the round without re-running everything?
 
-**Verdict.** Orient from four short reads, run the cheapest gate that could fail, and close the round: write the finding down where it belongs.
+**Verdict.** Orient from four short reads, run the cheapest gate that could fail, and close the round with one incremental command: write the finding down, refresh, check, `signoff --close`.
 
-**Deciding figure.** The suite is <!--figure:test-files-->119 test files<!--/figure--> and 7 instruments, each signed against a digest of everything it depended on, so a change re-runs what it touched rather than all of it.
+**Deciding figure.** The suite is <!--figure:test-files-->132 test files<!--/figure--> and 6 instruments, each signed against a digest of everything it depended on, so a change re-runs what it touched rather than all of it.
 
 **Recomputed by.** `glm_universal.signoff.ledger.plan`
 
@@ -45,16 +45,16 @@ PYTHONPATH=. python3 -m glm_universal.signoff --why       # if anything is stale
 * **`--verify` reports unsigned units** — the last round did not close. Fix
   that first: `signoff --run-everything --jobs 8`, and record it. An unclosed
   round is the one thing that makes the next three rounds slower.
-* **`--verify-release` reports `partial` units, or a release ran out of
-  time** — resume it rather than restarting it:
-  `signoff --release --resume --jobs 8` runs only the units the release
-  question still calls stale, because every signature is written as it is
-  earned, not at the end. `--verify-release` still decides the round.
+* **`--verify-release` reports `partial` units, or a close ran out of
+  time** — run `signoff --close --jobs 8` again. It runs only the units the
+  release question still calls stale, because every signature is written as
+  it is earned, not at the end, and it ends with `--verify-release`, which
+  decides the round.
 
 Before a wide edit, price it: `signoff --impact ../PROJECT_DIRECTIVES.md`
 names the units that edit would make stale and what they last cost. After the
 edit, run the cheapest gate that could fail (§2). To close, §4 — write the
-finding down, then refresh, check, release, commit.
+finding down, then refresh, check, close, commit.
 
 **Using the system itself**, rather than maintaining it:
 
@@ -102,8 +102,8 @@ whole of the speed discipline; everything below is which gate that is.
 | **documents** | `python3 -m glm_universal.corpus --check` | tier-0 contract, links, coverage, generated blocks, inline figures | after any prose edit |
 | **documents, unchanged** | the same command | answers from the stored verdict in about three seconds when nothing it reads has moved; `--check --all` forces the full pass | picking the round up |
 | **changed** | `python3 -m glm_universal.signoff --run-everything --jobs 8` | every test unit and instrument whose closure moved, and nothing else | after any code, data or Lean edit |
-| **release** | `python3 -m glm_universal.signoff --release --jobs 8` | all <!--figure:test-files-->119 test files<!--/figure--> and all 7 instruments, exhaustive cases on, ledger ignored | once, closing the round |
-| **release, resumed** | `python3 -m glm_universal.signoff --release --resume --jobs 8` | the same question, paying only what is still owed: unsigned, changed, failed, or signed with the exhaustive cases off | after a release that was interrupted |
+| **close** | `python3 -m glm_universal.signoff --close --jobs 8` | the release question -- every unit and instrument signed with the exhaustive cases on -- paying only what is owed: unsigned, changed, failed, or signed fast; then `--verify-release` | once, closing the round, and again if it was interrupted |
+| **release, from scratch** | `python3 -m glm_universal.signoff --release --jobs 8` | all <!--figure:test-files-->132 test files<!--/figure--> and all 6 instruments, ledger ignored | only when the rule itself changed (`signoff/rules.py`), or on purpose; never as a routine close |
 
 All three are run from `overlay/` with `PYTHONPATH=.`.
 
@@ -154,10 +154,10 @@ why, and `--verify` re-checks every signature without running anything.
 
 **What makes a lot of units stale, and how to pay it once.**
 
-* Editing `PROJECT_DIRECTIVES.md` makes almost every unit stale — 93 of 96,
-  about 66 minutes of work: the rules are cited in the prose of a module
-  nearly everything imports. Batch directive edits into one pass rather than
-  trickling them through the round. `--impact` says this before the edit; ask
+* Editing `PROJECT_DIRECTIVES.md` makes 32 of the 123 units stale (it was
+  120 before Phase 78: the file was named in the prose of modules nearly
+  everything imports, and prose no longer counts). Still batch directive
+  edits into one pass rather than trickling them through the round. `--impact` says this before the edit; ask
   it of anything you are about to touch widely.
 * `--why` is the other half: after the edit it names the *kind* of file that
   moved for each stale unit — `changed: documents` is prose and will pass,
@@ -177,17 +177,49 @@ why, and `--verify` re-checks every signature without running anything.
 * So: **make the edits, then run the gate once.** Running it between edits is
   the single most common way a round loses an hour.
 
+**What no longer makes anything stale** (Phase 78,
+[`studies/ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) §5g):
+
+* **A refreshed figure or generated block.** A unit is signed against the
+  *written* part of each document: the value between
+  `<!--figure:NAME-->` and `<!--/figure-->`, and a generated block's body, are
+  left out of its digest. Only the units that read rendered regions (their
+  closure holds `corpus/render.py`, `corpus/checks.py` or `figures.py`) are
+  signed against raw bytes. So `corpus --refresh` moving a number in twenty
+  documents re-runs the document checks, not the suite.
+* **A document or Lean file named only in a docstring.** Prose is not a read;
+  code that opens a file names it outside a docstring.
+* **A data file no module names.** A `_data/` file is in a closure only when
+  a module of that closure names it, so re-taking one measurement cache
+  re-runs the units that read it (about 22) instead of every unit that
+  reaches any reasoning module (117).
+* **The corpus moving under a self-measurement.** The native-parity and
+  native-words figures are taken over the repository's own documents and
+  Lean files. They are current while their *code* is unchanged; a moved
+  corpus is printed as a `note:` by `corpus --check`, never as a failure.
+  Re-take them (`tools native-parity --write`, `tools native-words --write`)
+  at the *start* of a round if the round wants fresh figures -- never during
+  the close, because the close is what writes the documents they read.
+
 ## 3. Keep the generated layer generated
 
-Never hand-edit a number that a generator emits, and never edit the Lean
-mirror. One command puts the derived layer back, in the only order that
-converges in one pass:
+Never hand-edit a number that a generator emits. One command puts the derived
+layer back, in the only order that converges in one pass:
 
 ```bash
-PYTHONPATH=. python3 -m glm_universal.corpus --refresh           # address books, caches, documents, blocks, figures
-PYTHONPATH=. python3 -m glm_universal.tools lean-mirror --write  # overlay/glm_lean/ from RequestProject/GLM/
-PYTHONPATH=. python3 -m glm_universal.figures --write            # FIGURES.md
+PYTHONPATH=. python3 -m glm_universal.corpus --refresh           # address books, caches, documents, blocks, figures, FIGURES.md
 ```
+
+(`figures --write` still rewrites `FIGURES.md` on its own; since Phase 78 the
+refresh does it too, so it is not a second step. A measurement cache such as
+`tools native-parity --write` refuses to store a reading taken while the
+document address book is stale — run the refresh first.)
+
+The Lean development has **one copy**, `overlay/glm_lean/RequestProject/GLM/`.
+The repository's `lakefile.toml` builds it in place (`srcDir =
+"overlay/glm_lean"`), so `lake build` at the repository root compiles exactly
+the files the package reads. There is no mirror to regenerate and no second
+copy to compare.
 
 Order matters at the end of a round: **edit the documents first, refresh
 last.** A refresh taken before the final edit is stale again the moment the
@@ -213,7 +245,7 @@ was not here can find out what happened and check it.
 | what the system *is* now | [`STATUS.md`](STATUS.md) §2, replacing the previous round's entries |
 | what is open, and what the next round should take | [`STATUS.md`](STATUS.md) §3.2–§3.4 |
 | the record of the round, and of every round before it | [`MASTER_PLAN.md`](MASTER_PLAN.md) — a new phase, and the delivered record |
-| a statement proved rather than measured | `RequestProject/GLM/`, mirrored into `overlay/glm_lean/` |
+| a statement proved rather than measured | `overlay/glm_lean/RequestProject/GLM/` (the only copy; `lake build` from the repository root) |
 
 **`STATUS.md` holds the present tense and `MASTER_PLAN.md` holds the past
 tense.** When a round closes, move the round record out of the status document
@@ -228,10 +260,13 @@ Then, in order:
 cd overlay
 PYTHONPATH=. python3 -m glm_universal.corpus --refresh
 PYTHONPATH=. python3 -m glm_universal.corpus --check
-PYTHONPATH=. python3 -m glm_universal.signoff --release --jobs 8
+PYTHONPATH=. python3 -m glm_universal.signoff --close --jobs 8
 ```
 
-and commit. Commit **after each completed step**, not once at the end (D1): a
+and commit. Nothing after the close may edit a document: the close signs the
+tree it ran on. If a document must change afterwards, run the three commands
+again -- with the masking above, a prose edit costs the few units that read
+that document. Commit **after each completed step**, not once at the end (D1): a
 step is anything that leaves the tree working, and an interrupted session that
 has been committing hands over something that runs.
 
@@ -267,7 +302,7 @@ record should say so in those words rather than dressing it as progress.
 | `signoff --plan` says almost everything is stale | a directive, a widely named document or the harness moved | expected; run the gate once and move on |
 | `lake build` is slow after one Lean edit | it is incremental; the first build of a session is not | let it run, and use the time on the documents |
 | a measurement in a test no longer holds | the corpus grew and the measurement moved with it | re-take it, write what it *is*, and say in the record that it moved |
-| the release did not finish | it is resumable: signatures are written unit by unit | `signoff --release --resume --jobs 8`, then `--verify-release` |
+| the close did not finish | it is resumable: signatures are written unit by unit | `signoff --close --jobs 8` again |
 | `corpus --check` names a stale *measurement cache* | a study module's sources moved under its stored figures | the `tools ... --write` command it names; a check never re-takes one itself |
 
 The last row is the important one. A measurement that has moved is not a test

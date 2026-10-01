@@ -1,0 +1,2986 @@
+{
+ "anonymous": {
+  "anonymous": {
+   "address": [
+    {
+     "hit_rate": {
+      "__fraction__": "32/419"
+     },
+     "hits": 64,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "59/419"
+     },
+     "hits": 118,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "139/838"
+     },
+     "hits": 139,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "98/419"
+     },
+     "hits": 196,
+     "k": 10
+    }
+   ],
+   "digest": [
+    {
+     "hit_rate": {
+      "__fraction__": "3/419"
+     },
+     "hits": 6,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "13/838"
+     },
+     "hits": 13,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "16/419"
+     },
+     "hits": 32,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "59/838"
+     },
+     "hits": 59,
+     "k": 10
+    }
+   ],
+   "lexical": [
+    {
+     "hit_rate": {
+      "__fraction__": "7/419"
+     },
+     "hits": 14,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "16/419"
+     },
+     "hits": 32,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "45/838"
+     },
+     "hits": 45,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "59/838"
+     },
+     "hits": 59,
+     "k": 10
+    }
+   ],
+   "name": [
+    {
+     "hit_rate": {
+      "__fraction__": "9/838"
+     },
+     "hits": 9,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "8/419"
+     },
+     "hits": 16,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "21/838"
+     },
+     "hits": 21,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "16/419"
+     },
+     "hits": 32,
+     "k": 10
+    }
+   ],
+   "random": [
+    {
+     "hit_rate": {
+      "__fraction__": "10/419"
+     },
+     "hits": 20,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "15/419"
+     },
+     "hits": 30,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "39/838"
+     },
+     "hits": 39,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "65/838"
+     },
+     "hits": 65,
+     "k": 10
+    }
+   ],
+   "text": [
+    {
+     "hit_rate": {
+      "__fraction__": "25/838"
+     },
+     "hits": 25,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "53/838"
+     },
+     "hits": 53,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "39/419"
+     },
+     "hits": 78,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "59/419"
+     },
+     "hits": 118,
+     "k": 10
+    }
+   ]
+  },
+  "chance_at_5": {
+   "__fraction__": "400965176625168151/8986228409458569906"
+  },
+  "corpus": 4190,
+  "gate": {
+   "__fraction__": "1/10"
+  },
+  "invariant_queries": 796,
+  "k": 5,
+  "k_ladder": [
+   1,
+   3,
+   5,
+   10
+  ],
+  "kept_vocabulary": 39,
+  "moved_outside_the_type_vocabulary": 0,
+  "plain": {
+   "address": [
+    {
+     "hit_rate": {
+      "__fraction__": "101/838"
+     },
+     "hits": 101,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "82/419"
+     },
+     "hits": 164,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "102/419"
+     },
+     "hits": 204,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "269/838"
+     },
+     "hits": 269,
+     "k": 10
+    }
+   ],
+   "digest": [
+    {
+     "hit_rate": {
+      "__fraction__": "5/838"
+     },
+     "hits": 5,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "21/838"
+     },
+     "hits": 21,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "22/419"
+     },
+     "hits": 44,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "41/419"
+     },
+     "hits": 82,
+     "k": 10
+    }
+   ],
+   "lexical": [
+    {
+     "hit_rate": {
+      "__fraction__": "103/419"
+     },
+     "hits": 206,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "335/838"
+     },
+     "hits": 335,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "194/419"
+     },
+     "hits": 388,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "479/838"
+     },
+     "hits": 479,
+     "k": 10
+    }
+   ],
+   "name": [
+    {
+     "hit_rate": {
+      "__fraction__": "147/838"
+     },
+     "hits": 147,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "187/838"
+     },
+     "hits": 187,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "217/838"
+     },
+     "hits": 217,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "139/419"
+     },
+     "hits": 278,
+     "k": 10
+    }
+   ],
+   "random": [
+    {
+     "hit_rate": {
+      "__fraction__": "10/419"
+     },
+     "hits": 20,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "15/419"
+     },
+     "hits": 30,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "39/838"
+     },
+     "hits": 39,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "65/838"
+     },
+     "hits": 65,
+     "k": 10
+    }
+   ],
+   "text": [
+    {
+     "hit_rate": {
+      "__fraction__": "587/838"
+     },
+     "hits": 587,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "689/838"
+     },
+     "hits": 689,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "360/419"
+     },
+     "hits": 720,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "743/838"
+     },
+     "hits": 743,
+     "k": 10
+    }
+   ]
+  },
+  "queries": 838,
+  "relay_anonymous": {
+   "carried": [
+    "GLM.Calibration.molarPlanck_pos",
+    "GLM.Calibration.cellLength_eq",
+    "GLM.Calibration.cellLength_div_cellDuration",
+    "GLM.Calibration.dAction",
+    "GLM.Calibration.Y_bounds",
+    "GLM.Calibration.minimalVectorTax",
+    "GLM.Feedback.quant_err_abs_le",
+    "GLM.Gen2.matsuo_3C",
+    "GLM.Harmony.pythagorean_comma_eq",
+    "GLM.Heisenberg.lie_create_create_apply",
+    "GLM.MeasurandRegister.derived_efficiency_gt_one",
+    "GLM.PythonSpeech.andnotP",
+    "GLM.Relay.interleave_nodup",
+    "GLM.ReverseTCT.render",
+    "GLM.ReverseTCT.renderStmt_prefix_free",
+    "GLM.ReverseTCT.Rel.negate",
+    "GLM.ReverseTCT.pairing_lt_neg",
+    "GLM.SeedLayers.lattice_character_ne_eSeed",
+    "GLM.Info.resolution_rational",
+    "GLM.Info.glmStack_layer_one",
+    "GLM.Landscape.gap_lower",
+    "GLM.Admission.ledger_vocabulary",
+    "GLM.Calibration.cSI_pos",
+    "GLM.Calibration.taxVacuum",
+    "GLM.Calibration.cellDuration_bounds",
+    "GLM.Calibration.dMass",
+    "GLM.Calibration.time_from_action_and_energy",
+    "GLM.Calibration.refIndex_tax_eight",
+    "GLM.Calibration.octad_min_tax_strict",
+    "GLM.Gen2.Meaning.add_exps",
+    "GLM.Gen2.fusion_eta_eta",
+    "GLM.Gen3.octad_censuses",
+    "GLM.GrayJump.bit_xor",
+    "GLM.Heisenberg.mode_truncated",
+    "GLM.NowReceipt.schedB_mem",
+    "GLM.PCGS.landauerEnergy_mono",
+    "GLM.PythonSpeech.andP",
+    "GLM.PythonSpeech.and_div_two_pow",
+    "GLM.Golay24.descend_within_five",
+    "GLM.Retrieval.filterRadius_eq_nil_certifies_absence",
+    "GLM.ReverseTCT.infixRender",
+    "GLM.ReverseTCT.solve_le_neg",
+    "GLM.Shell.sState_norm_le",
+    "GLM.Shell.shState_norm_le",
+    "GLM.Info.substrate_perceive",
+    "GLM.Info.boundary_above_rational_empty",
+    "GLM.Info.ds_one_run_lt",
+    "GLM.Vagueness.route_eq_referred_iff",
+    "GLM.Landscape.golay_ball_majority"
+   ],
+   "fired": 559,
+   "leader": [
+    {
+     "hit_rate": {
+      "__fraction__": "25/838"
+     },
+     "hits": 25,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "53/838"
+     },
+     "hits": 53,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "39/419"
+     },
+     "hits": 78,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "59/419"
+     },
+     "hits": 118,
+     "k": 10
+    }
+   ],
+   "lost": [
+    "GLM.DeepHoleLadder.Reading.dist_nonneg",
+    "GLM.QuestionNested.NestedSpec",
+    "GLM.TieBreak.mem_nearest",
+    "GLM.Anonymous.relay_hands_over",
+    "GLM.Foundations.no_injective_additive_into_char_two",
+    "GLM.Gen3.even_part_dimension",
+    "GLM.RoleBinding.bind_eq_iff_role_agrees"
+   ],
+   "queries": 838,
+   "relay": [
+    {
+     "hit_rate": {
+      "__fraction__": "25/838"
+     },
+     "hits": 25,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "63/838"
+     },
+     "hits": 63,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "60/419"
+     },
+     "hits": 120,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "81/419"
+     },
+     "hits": 162,
+     "k": 10
+    }
+   ]
+  },
+  "relay_plain": {
+   "carried": [
+    "GLM.Harmony.pythagorean_comma_eq",
+    "GLM.Admission.ledger_vocabulary",
+    "GLM.Calibration.taxVacuum",
+    "GLM.Gen3.octad_censuses",
+    "GLM.Landscape.golay_ball_majority"
+   ],
+   "fired": 23,
+   "leader": [
+    {
+     "hit_rate": {
+      "__fraction__": "587/838"
+     },
+     "hits": 587,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "689/838"
+     },
+     "hits": 689,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "360/419"
+     },
+     "hits": 720,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "743/838"
+     },
+     "hits": 743,
+     "k": 10
+    }
+   ],
+   "lost": [
+    "GLM.Gen3.even_part_dimension"
+   ],
+   "queries": 838,
+   "relay": [
+    {
+     "hit_rate": {
+      "__fraction__": "587/838"
+     },
+     "hits": 587,
+     "k": 1
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "345/419"
+     },
+     "hits": 690,
+     "k": 3
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "362/419"
+     },
+     "hits": 724,
+     "k": 5
+    },
+    {
+     "hit_rate": {
+      "__fraction__": "374/419"
+     },
+     "hits": 748,
+     "k": 10
+    }
+   ]
+  },
+  "verdict": {
+   "address_holds": true,
+   "address_is_above_twice_chance": true,
+   "address_is_the_clear_leader": true,
+   "address_stays_above_the_control": true,
+   "gate_hands_over": true,
+   "lexical_collapses_too": true,
+   "only_the_type_vocabulary_moves": true,
+   "placeholders_are_fresh": true,
+   "relay_beats_text_in_the_register": true,
+   "text_collapses_without_the_names": true,
+   "text_is_within_twice_chance": false,
+   "text_leads_when_the_names_are_there": true
+  }
+ },
+ "available": true,
+ "classes": {
+  "classes": 307,
+  "largest": [
+   [
+    "GLM.Calibration.dEnergy",
+    "GLM.Calibration.dLength",
+    "GLM.Calibration.dTime",
+    "GLM.DimensionCarrier.Dim",
+    "GLM.DimensionCarrier.energyDim",
+    "GLM.DimensionCarrier.mc4Shift",
+    "GLM.Foundations.Dim",
+    "GLM.Foundations.energyDim",
+    "GLM.Foundations.mc4Shift",
+    "GLM.Lightspeed.dEnergy",
+    "GLM.Lightspeed.dLength",
+    "GLM.Lightspeed.dMass",
+    "GLM.Lightspeed.dSpeed",
+    "GLM.Lightspeed.dTime",
+    "GLM.VOA.vac"
+   ],
+   [
+    "GLM.GolayMOG.leechAddress_injective",
+    "GLM.Info.staticLayer_indist_hot_uses",
+    "GLM.Info.wobbleEntropy_continuous",
+    "GLM.Lightspeed.codewordTax_strictMono",
+    "GLM.PythonSpeech.andnotP_bijective",
+    "GLM.PythonSpeech.notP_bijective",
+    "GLM.PythonSpeech.orP_bijective",
+    "GLM.PythonSpeech.xorP_bijective"
+   ],
+   [
+    "GLM.Conjugate.energyDim",
+    "GLM.DimensionCarrier.mc4Dim",
+    "GLM.Foundations.mc4Dim",
+    "GLM.Gen2.energy",
+    "GLM.GolayHex.w2",
+    "GLM.Heisenberg.V",
+    "GLM.Semantics.energyDim"
+   ],
+   [
+    "GLM.Admission.ledger_refusals",
+    "GLM.Completion.ledger_coverage",
+    "GLM.Gen3.dimensionless_counts",
+    "GLM.GrayJump.d2_1000033_1000034",
+    "GLM.LatticeShortcut.d2_1000033_1000034",
+    "GLM.Vagueness.ledger_conjugate_conversions"
+   ],
+   [
+    "GLM.Calibration.NA",
+    "GLM.Calibration.molarPlanck",
+    "GLM.Lightspeed.NA",
+    "GLM.Lightspeed.cSI",
+    "GLM.Lightspeed.hSI",
+    "GLM.Lightspeed.molarPlanck"
+   ],
+   [
+    "GLM.Calibration.NA_pos",
+    "GLM.Calibration.cSI_pos",
+    "GLM.Calibration.hSI_pos",
+    "GLM.Lightspeed.NA_pos",
+    "GLM.Lightspeed.cSI_pos",
+    "GLM.Lightspeed.hSI_pos"
+   ]
+  ],
+  "profile": {
+   "15": 1,
+   "2": 232,
+   "3": 34,
+   "4": 26,
+   "5": 8,
+   "6": 4,
+   "7": 1,
+   "8": 1
+  },
+  "scheme": "feature"
+ },
+ "corpus": {
+  "by_kind": {
+   "abbrev": 56,
+   "def": 1062,
+   "example": 19,
+   "inductive": 39,
+   "instance": 27,
+   "lemma": 176,
+   "structure": 54,
+   "theorem": 2757
+  },
+  "declarations": 4190,
+  "files": 156,
+  "largest_file": "Gen3.lean",
+  "largest_file_declarations": 98
+ },
+ "guarantee": {
+  "available": true,
+  "bound_respected": true,
+  "covering_radius": 4,
+  "declarations": 4190,
+  "half_step": {
+   "__fraction__": "9/2"
+  },
+  "lossless": true,
+  "moved_by_the_decoder": 4190,
+  "scale": 9,
+  "scale_is_at_least_twice_radius": true,
+  "worst_declaration": "GLM.Gen2.Meaning.pseudoscalar_parity_ne_zero",
+  "worst_observed_residual": 3
+ },
+ "lean_digest": "44a8fa2231512573b2d72f4689e0cc00eea80af9fde86cfd2b9d12d1af4efd0f",
+ "retrieval": {
+  "chance": [
+   {
+    "k": 1,
+    "rate": {
+     "__fraction__": "1336/146615"
+    }
+   },
+   {
+    "k": 3,
+    "rate": {
+     "__fraction__": "69502521587/2570916896940"
+    }
+   },
+   {
+    "k": 5,
+    "rate": {
+     "__fraction__": "10034822049418753/225191881382613327"
+    }
+   },
+   {
+    "k": 10,
+    "rate": {
+     "__fraction__": "2753503514355730356736421053649/31751899111632945233425027210620"
+    }
+   }
+  ],
+  "corpus": 4190,
+  "declaration_rows": [
+   {
+    "cells": [
+     {
+      "hit_rate": {
+       "__fraction__": "23/105"
+      },
+      "hits": 46,
+      "k": 1,
+      "mrr": {
+       "__fraction__": "23/105"
+      },
+      "precision": {
+       "__fraction__": "23/105"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "12/35"
+      },
+      "hits": 72,
+      "k": 3,
+      "mrr": {
+       "__fraction__": "23/84"
+      },
+      "precision": {
+       "__fraction__": "7/45"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "43/105"
+      },
+      "hits": 86,
+      "k": 5,
+      "mrr": {
+       "__fraction__": "81/280"
+      },
+      "precision": {
+       "__fraction__": "22/175"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "10/21"
+      },
+      "hits": 100,
+      "k": 10,
+      "mrr": {
+       "__fraction__": "157571/529200"
+      },
+      "precision": {
+       "__fraction__": "61/700"
+      }
+     }
+    ],
+    "scheme": "address"
+   },
+   {
+    "cells": [
+     {
+      "hit_rate": {
+       "__fraction__": "1/5"
+      },
+      "hits": 42,
+      "k": 1,
+      "mrr": {
+       "__fraction__": "1/5"
+      },
+      "precision": {
+       "__fraction__": "1/5"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "12/35"
+      },
+      "hits": 72,
+      "k": 3,
+      "mrr": {
+       "__fraction__": "67/252"
+      },
+      "precision": {
+       "__fraction__": "10/63"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "27/70"
+      },
+      "hits": 81,
+      "k": 5,
+      "mrr": {
+       "__fraction__": "869/3150"
+      },
+      "precision": {
+       "__fraction__": "13/105"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "53/105"
+      },
+      "hits": 106,
+      "k": 10,
+      "mrr": {
+       "__fraction__": "3151/10800"
+      },
+      "precision": {
+       "__fraction__": "47/525"
+      }
+     }
+    ],
+    "scheme": "features"
+   },
+   {
+    "cells": [
+     {
+      "hit_rate": {
+       "__fraction__": "83/210"
+      },
+      "hits": 83,
+      "k": 1,
+      "mrr": {
+       "__fraction__": "83/210"
+      },
+      "precision": {
+       "__fraction__": "83/210"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "39/70"
+      },
+      "hits": 117,
+      "k": 3,
+      "mrr": {
+       "__fraction__": "293/630"
+      },
+      "precision": {
+       "__fraction__": "61/210"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "64/105"
+      },
+      "hits": 128,
+      "k": 5,
+      "mrr": {
+       "__fraction__": "752/1575"
+      },
+      "precision": {
+       "__fraction__": "124/525"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "143/210"
+      },
+      "hits": 143,
+      "k": 10,
+      "mrr": {
+       "__fraction__": "128663/264600"
+      },
+      "precision": {
+       "__fraction__": "88/525"
+      }
+     }
+    ],
+    "scheme": "lexical"
+   },
+   {
+    "cells": [
+     {
+      "hit_rate": {
+       "__fraction__": "53/70"
+      },
+      "hits": 159,
+      "k": 1,
+      "mrr": {
+       "__fraction__": "53/70"
+      },
+      "precision": {
+       "__fraction__": "53/70"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "13/15"
+      },
+      "hits": 182,
+      "k": 3,
+      "mrr": {
+       "__fraction__": "29/36"
+      },
+      "precision": {
+       "__fraction__": "419/630"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "191/210"
+      },
+      "hits": 191,
+      "k": 5,
+      "mrr": {
+       "__fraction__": "367/450"
+      },
+      "precision": {
+       "__fraction__": "106/175"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "97/105"
+      },
+      "hits": 194,
+      "k": 10,
+      "mrr": {
+       "__fraction__": "61777/75600"
+      },
+      "precision": {
+       "__fraction__": "1013/2100"
+      }
+     }
+    ],
+    "scheme": "text"
+   },
+   {
+    "cells": [
+     {
+      "hit_rate": {
+       "__fraction__": "37/210"
+      },
+      "hits": 37,
+      "k": 1,
+      "mrr": {
+       "__fraction__": "37/210"
+      },
+      "precision": {
+       "__fraction__": "37/210"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "7/30"
+      },
+      "hits": 49,
+      "k": 3,
+      "mrr": {
+       "__fraction__": "1/5"
+      },
+      "precision": {
+       "__fraction__": "13/90"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "29/105"
+      },
+      "hits": 58,
+      "k": 5,
+      "mrr": {
+       "__fraction__": "883/4200"
+      },
+      "precision": {
+       "__fraction__": "23/175"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "37/105"
+      },
+      "hits": 74,
+      "k": 10,
+      "mrr": {
+       "__fraction__": "11579/52920"
+      },
+      "precision": {
+       "__fraction__": "7/60"
+      }
+     }
+    ],
+    "scheme": "name"
+   },
+   {
+    "cells": [
+     {
+      "hit_rate": {
+       "__fraction__": "1/105"
+      },
+      "hits": 2,
+      "k": 1,
+      "mrr": {
+       "__fraction__": "1/105"
+      },
+      "precision": {
+       "__fraction__": "1/105"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "1/30"
+      },
+      "hits": 7,
+      "k": 3,
+      "mrr": {
+       "__fraction__": "13/630"
+      },
+      "precision": {
+       "__fraction__": "1/90"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "11/210"
+      },
+      "hits": 11,
+      "k": 5,
+      "mrr": {
+       "__fraction__": "157/6300"
+      },
+      "precision": {
+       "__fraction__": "11/1050"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "3/35"
+      },
+      "hits": 18,
+      "k": 10,
+      "mrr": {
+       "__fraction__": "2167/75600"
+      },
+      "precision": {
+       "__fraction__": "19/2100"
+      }
+     }
+    ],
+    "scheme": "digest"
+   },
+   {
+    "cells": [
+     {
+      "hit_rate": {
+       "__fraction__": "2/105"
+      },
+      "hits": 4,
+      "k": 1,
+      "mrr": {
+       "__fraction__": "2/105"
+      },
+      "precision": {
+       "__fraction__": "2/105"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "1/30"
+      },
+      "hits": 7,
+      "k": 3,
+      "mrr": {
+       "__fraction__": "31/1260"
+      },
+      "precision": {
+       "__fraction__": "1/90"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "1/21"
+      },
+      "hits": 10,
+      "k": 5,
+      "mrr": {
+       "__fraction__": "349/12600"
+      },
+      "precision": {
+       "__fraction__": "1/105"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "2/21"
+      },
+      "hits": 20,
+      "k": 10,
+      "mrr": {
+       "__fraction__": "179/5292"
+      },
+      "precision": {
+       "__fraction__": "1/100"
+      }
+     }
+    ],
+    "scheme": "shuffled"
+   },
+   {
+    "cells": [
+     {
+      "hit_rate": {
+       "__fraction__": "1/42"
+      },
+      "hits": 5,
+      "k": 1,
+      "mrr": {
+       "__fraction__": "1/42"
+      },
+      "precision": {
+       "__fraction__": "1/42"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "1/30"
+      },
+      "hits": 7,
+      "k": 3,
+      "mrr": {
+       "__fraction__": "1/36"
+      },
+      "precision": {
+       "__fraction__": "1/90"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "1/21"
+      },
+      "hits": 10,
+      "k": 5,
+      "mrr": {
+       "__fraction__": "389/12600"
+      },
+      "precision": {
+       "__fraction__": "1/105"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "17/210"
+      },
+      "hits": 17,
+      "k": 10,
+      "mrr": {
+       "__fraction__": "18469/529200"
+      },
+      "precision": {
+       "__fraction__": "17/2100"
+      }
+     }
+    ],
+    "scheme": "random"
+   }
+  ],
+  "goal_features_reproduced": 0,
+  "goal_queries": 103,
+  "goal_rows": [
+   {
+    "cells": [
+     {
+      "hit_rate": {
+       "__fraction__": "16/103"
+      },
+      "hits": 16,
+      "k": 1,
+      "mrr": {
+       "__fraction__": "16/103"
+      },
+      "precision": {
+       "__fraction__": "16/103"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "25/103"
+      },
+      "hits": 25,
+      "k": 3,
+      "mrr": {
+       "__fraction__": "119/618"
+      },
+      "precision": {
+       "__fraction__": "28/309"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "28/103"
+      },
+      "hits": 28,
+      "k": 5,
+      "mrr": {
+       "__fraction__": "247/1236"
+      },
+      "precision": {
+       "__fraction__": "37/515"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "41/103"
+      },
+      "hits": 41,
+      "k": 10,
+      "mrr": {
+       "__fraction__": "28141/129780"
+      },
+      "precision": {
+       "__fraction__": "61/1030"
+      }
+     }
+    ],
+    "scheme": "address"
+   },
+   {
+    "cells": [
+     {
+      "hit_rate": {
+       "__fraction__": "26/103"
+      },
+      "hits": 26,
+      "k": 1,
+      "mrr": {
+       "__fraction__": "26/103"
+      },
+      "precision": {
+       "__fraction__": "26/103"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "37/103"
+      },
+      "hits": 37,
+      "k": 3,
+      "mrr": {
+       "__fraction__": "94/309"
+      },
+      "precision": {
+       "__fraction__": "20/103"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "48/103"
+      },
+      "hits": 48,
+      "k": 5,
+      "mrr": {
+       "__fraction__": "2039/6180"
+      },
+      "precision": {
+       "__fraction__": "18/103"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "56/103"
+      },
+      "hits": 56,
+      "k": 10,
+      "mrr": {
+       "__fraction__": "7379/21630"
+      },
+      "precision": {
+       "__fraction__": "61/515"
+      }
+     }
+    ],
+    "scheme": "lexical"
+   },
+   {
+    "cells": [
+     {
+      "hit_rate": {
+       "__fraction__": "73/103"
+      },
+      "hits": 73,
+      "k": 1,
+      "mrr": {
+       "__fraction__": "73/103"
+      },
+      "precision": {
+       "__fraction__": "73/103"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "87/103"
+      },
+      "hits": 87,
+      "k": 3,
+      "mrr": {
+       "__fraction__": "159/206"
+      },
+      "precision": {
+       "__fraction__": "199/309"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "91/103"
+      },
+      "hits": 91,
+      "k": 5,
+      "mrr": {
+       "__fraction__": "161/206"
+      },
+      "precision": {
+       "__fraction__": "302/515"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "92/103"
+      },
+      "hits": 92,
+      "k": 10,
+      "mrr": {
+       "__fraction__": "242/309"
+      },
+      "precision": {
+       "__fraction__": "497/1030"
+      }
+     }
+    ],
+    "scheme": "text"
+   },
+   {
+    "cells": [
+     {
+      "hit_rate": {
+       "__fraction__": "20/103"
+      },
+      "hits": 20,
+      "k": 1,
+      "mrr": {
+       "__fraction__": "20/103"
+      },
+      "precision": {
+       "__fraction__": "20/103"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "25/103"
+      },
+      "hits": 25,
+      "k": 3,
+      "mrr": {
+       "__fraction__": "131/618"
+      },
+      "precision": {
+       "__fraction__": "16/103"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "35/103"
+      },
+      "hits": 35,
+      "k": 5,
+      "mrr": {
+       "__fraction__": "289/1236"
+      },
+      "precision": {
+       "__fraction__": "74/515"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "42/103"
+      },
+      "hits": 42,
+      "k": 10,
+      "mrr": {
+       "__fraction__": "1570/6489"
+      },
+      "precision": {
+       "__fraction__": "117/1030"
+      }
+     }
+    ],
+    "scheme": "name"
+   },
+   {
+    "cells": [
+     {
+      "hit_rate": {
+       "__fraction__": "1/103"
+      },
+      "hits": 1,
+      "k": 1,
+      "mrr": {
+       "__fraction__": "1/103"
+      },
+      "precision": {
+       "__fraction__": "1/103"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "5/103"
+      },
+      "hits": 5,
+      "k": 3,
+      "mrr": {
+       "__fraction__": "8/309"
+      },
+      "precision": {
+       "__fraction__": "5/309"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "9/103"
+      },
+      "hits": 9,
+      "k": 5,
+      "mrr": {
+       "__fraction__": "52/1545"
+      },
+      "precision": {
+       "__fraction__": "9/515"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "13/103"
+      },
+      "hits": 13,
+      "k": 10,
+      "mrr": {
+       "__fraction__": "167/4326"
+      },
+      "precision": {
+       "__fraction__": "13/1030"
+      }
+     }
+    ],
+    "scheme": "digest"
+   },
+   {
+    "cells": [
+     {
+      "hit_rate": {
+       "__fraction__": "2/103"
+      },
+      "hits": 2,
+      "k": 1,
+      "mrr": {
+       "__fraction__": "2/103"
+      },
+      "precision": {
+       "__fraction__": "2/103"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "2/103"
+      },
+      "hits": 2,
+      "k": 3,
+      "mrr": {
+       "__fraction__": "2/103"
+      },
+      "precision": {
+       "__fraction__": "2/309"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "3/103"
+      },
+      "hits": 3,
+      "k": 5,
+      "mrr": {
+       "__fraction__": "11/515"
+      },
+      "precision": {
+       "__fraction__": "3/515"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "6/103"
+      },
+      "hits": 6,
+      "k": 10,
+      "mrr": {
+       "__fraction__": "719/28840"
+      },
+      "precision": {
+       "__fraction__": "3/515"
+      }
+     }
+    ],
+    "scheme": "random"
+   }
+  ],
+  "guarantee": {
+   "address_radius_squared": 676,
+   "bound_holds": true,
+   "covering_radius": 4,
+   "feature_radius": 2,
+   "mean_feature_close": {
+    "__fraction__": "338/17"
+   },
+   "mean_shortlist": {
+    "__fraction__": "4343/51"
+   },
+   "mean_shortlist_fraction": {
+    "__fraction__": "4343/213690"
+   },
+   "pairs_checked": 213639,
+   "queries": 51,
+   "scale": 9,
+   "violations": 0,
+   "worst_slack": 64
+  },
+  "hybrid": {
+   "any_shortlist_beats_text": false,
+   "k": 5,
+   "queries": 210,
+   "rows": [
+    {
+     "fraction_of_corpus": {
+      "__fraction__": "5/419"
+     },
+     "hit_rate": {
+      "__fraction__": "19/30"
+     },
+     "precision": {
+      "__fraction__": "271/1050"
+     },
+     "shortlist": 50
+    },
+    {
+     "fraction_of_corpus": {
+      "__fraction__": "10/419"
+     },
+     "hit_rate": {
+      "__fraction__": "24/35"
+     },
+     "precision": {
+      "__fraction__": "313/1050"
+     },
+     "shortlist": 100
+    },
+    {
+     "fraction_of_corpus": {
+      "__fraction__": "20/419"
+     },
+     "hit_rate": {
+      "__fraction__": "151/210"
+     },
+     "precision": {
+      "__fraction__": "59/175"
+     },
+     "shortlist": 200
+    },
+    {
+     "fraction_of_corpus": {
+      "__fraction__": "40/419"
+     },
+     "hit_rate": {
+      "__fraction__": "27/35"
+     },
+     "precision": {
+      "__fraction__": "141/350"
+     },
+     "shortlist": 400
+    },
+    {
+     "fraction_of_corpus": {
+      "__fraction__": "80/419"
+     },
+     "hit_rate": {
+      "__fraction__": "17/21"
+     },
+     "precision": {
+      "__fraction__": "479/1050"
+     },
+     "shortlist": 800
+    }
+   ],
+   "text_alone": {
+    "hit_rate": {
+     "__fraction__": "191/210"
+    },
+    "precision": {
+     "__fraction__": "106/175"
+    }
+   }
+  },
+  "k": 5,
+  "k_ladder": [
+   1,
+   3,
+   5,
+   10
+  ],
+  "mean_relatives": {
+   "__fraction__": "1336/35"
+  },
+  "queries": 210,
+  "times_chance": {
+   "__fraction__": "461107185688208241/50174110247093765"
+  },
+  "verdict": {
+   "address_beats_chance": true,
+   "address_beats_digest": true,
+   "address_beats_name": true,
+   "address_beats_random": true,
+   "address_beats_shuffled": true,
+   "address_beats_text": false,
+   "guarantee_holds": true,
+   "hybrid_beats_text": false,
+   "lattice_matches_raw_features": false,
+   "lexical_beats_structural": true,
+   "lexical_beats_text": false,
+   "text_beats_address": true
+  }
+ },
+ "round_trip": {
+  "checked": 4190,
+  "coordinate_errors": 0,
+  "coordinates_checked": 100560,
+  "exact": 4190,
+  "exact_rate": {
+   "__fraction__": "1/1"
+  },
+  "worst_coordinate_errors": 0,
+  "worst_declaration": ""
+ },
+ "scale": 9,
+ "scale_sweep": {
+  "chosen": 9,
+  "rows": [
+   {
+    "degenerate": false,
+    "distinct": 59,
+    "exact": 28,
+    "exact_rate": {
+     "__fraction__": "7/15"
+    },
+    "lossless": false,
+    "moved_by_the_decoder": 32,
+    "sample": 60,
+    "scale": 4,
+    "worst_residual": 0
+   },
+   {
+    "degenerate": false,
+    "distinct": 59,
+    "exact": 60,
+    "exact_rate": {
+     "__fraction__": "1/1"
+    },
+    "lossless": true,
+    "moved_by_the_decoder": 60,
+    "sample": 60,
+    "scale": 6,
+    "worst_residual": 2
+   },
+   {
+    "degenerate": true,
+    "distinct": 59,
+    "exact": 60,
+    "exact_rate": {
+     "__fraction__": "1/1"
+    },
+    "lossless": true,
+    "moved_by_the_decoder": 0,
+    "sample": 60,
+    "scale": 8,
+    "worst_residual": 0
+   },
+   {
+    "degenerate": false,
+    "distinct": 59,
+    "exact": 60,
+    "exact_rate": {
+     "__fraction__": "1/1"
+    },
+    "lossless": true,
+    "moved_by_the_decoder": 60,
+    "sample": 60,
+    "scale": 9,
+    "worst_residual": 2
+   },
+   {
+    "degenerate": false,
+    "distinct": 59,
+    "exact": 60,
+    "exact_rate": {
+     "__fraction__": "1/1"
+    },
+    "lossless": true,
+    "moved_by_the_decoder": 32,
+    "sample": 60,
+    "scale": 12,
+    "worst_residual": 4
+   },
+   {
+    "degenerate": true,
+    "distinct": 59,
+    "exact": 60,
+    "exact_rate": {
+     "__fraction__": "1/1"
+    },
+    "lossless": true,
+    "moved_by_the_decoder": 0,
+    "sample": 60,
+    "scale": 16,
+    "worst_residual": 0
+   }
+  ]
+ },
+ "separation": {
+  "feature": {
+   "injectivity": {
+    "collision_classes": 307,
+    "declarations": 4190,
+    "declarations_conflated": 764,
+    "distinct_addresses": 3733,
+    "distinct_feature_vectors": 3733,
+    "distinct_rate": {
+     "__fraction__": "3733/4190"
+    },
+    "injective": false,
+    "largest_class": [
+     "GLM.Calibration.dEnergy",
+     "GLM.Calibration.dLength",
+     "GLM.Calibration.dTime",
+     "GLM.DimensionCarrier.Dim",
+     "GLM.DimensionCarrier.energyDim",
+     "GLM.DimensionCarrier.mc4Shift",
+     "GLM.Foundations.Dim",
+     "GLM.Foundations.energyDim",
+     "GLM.Foundations.mc4Shift",
+     "GLM.Lightspeed.dEnergy",
+     "GLM.Lightspeed.dLength",
+     "GLM.Lightspeed.dMass",
+     "GLM.Lightspeed.dSpeed",
+     "GLM.Lightspeed.dTime",
+     "GLM.VOA.vac"
+    ],
+    "largest_class_size": 15,
+    "quantisation_adds_no_conflation": true
+   },
+   "neighbours": {
+    "declarations": 4190,
+    "linked_chance": {
+     "__fraction__": "13056/8775955"
+    },
+    "linked_nearest": 139,
+    "linked_rate": {
+     "__fraction__": "139/4190"
+    },
+    "mean_tie_size": {
+     "__fraction__": "7089/4190"
+    },
+    "same_file_chance": {
+     "__fraction__": "74314/8775955"
+    },
+    "same_file_nearest": 801,
+    "same_file_rate": {
+     "__fraction__": "801/4190"
+    }
+   },
+   "pairs": {
+    "cross_file_mean_squared_distance": {
+     "__fraction__": "60967446736/8701641"
+    },
+    "cross_file_pairs": 8701641,
+    "ratio": {
+     "__fraction__": "412936373655/493329141631"
+    },
+    "same_file_mean_squared_distance": {
+     "__fraction__": "217913360/37157"
+    },
+    "same_file_pairs": 74314
+   }
+  },
+  "hash_control": {
+   "injectivity": {
+    "collision_classes": 0,
+    "declarations": 4190,
+    "declarations_conflated": 0,
+    "distinct_addresses": 4190,
+    "distinct_feature_vectors": 3733,
+    "distinct_rate": {
+     "__fraction__": "1/1"
+    },
+    "injective": true,
+    "largest_class": [
+     "GLM.Address.Conflates"
+    ],
+    "largest_class_size": 1,
+    "quantisation_adds_no_conflation": false
+   },
+   "neighbours": {
+    "declarations": 4190,
+    "linked_chance": {
+     "__fraction__": "13056/8775955"
+    },
+    "linked_nearest": 6,
+    "linked_rate": {
+     "__fraction__": "3/2095"
+    },
+    "mean_tie_size": {
+     "__fraction__": "841/838"
+    },
+    "same_file_chance": {
+     "__fraction__": "74314/8775955"
+    },
+    "same_file_nearest": 34,
+    "same_file_rate": {
+     "__fraction__": "17/2095"
+    }
+   },
+   "pairs": {
+    "cross_file_mean_squared_distance": {
+     "__fraction__": "471076970432/8701641"
+    },
+    "cross_file_pairs": 8701641,
+    "ratio": {
+     "__fraction__": "1096505503520427/1093987936896364"
+    },
+    "same_file_mean_squared_distance": {
+     "__fraction__": "2016181552/37157"
+    },
+    "same_file_pairs": 74314
+   }
+  },
+  "shuffled": {
+   "injectivity": {
+    "collision_classes": 307,
+    "declarations": 4190,
+    "declarations_conflated": 764,
+    "distinct_addresses": 3733,
+    "distinct_feature_vectors": 3733,
+    "distinct_rate": {
+     "__fraction__": "3733/4190"
+    },
+    "injective": false,
+    "largest_class": [
+     "GLM.Info.mState_succ",
+     "GLM.GolayHex.hexacode_card",
+     "GLM.ThreeCube.RuleB",
+     "GLM.DeepHole.sortedProfile",
+     "GLM.Distinction.no_information_without_distinction",
+     "GLM.Distinction.reachable",
+     "GLM.EscalationLoop.Verdict.isAnswered",
+     "GLM.FitCapacity.logb_two_two",
+     "GLM.Golay24.abs_chi",
+     "GLM.Heisenberg.mode_truncated",
+     "GLM.Info.unitAt_of_ne",
+     "GLM.NativeWords.hamming",
+     "GLM.ReadQuantum.tax_signed",
+     "GLM.RoleBinding.two_names_one_reading_is_ambiguous",
+     "GLM.Semantics.natOf_natCast"
+    ],
+    "largest_class_size": 15,
+    "quantisation_adds_no_conflation": true
+   },
+   "neighbours": {
+    "declarations": 4190,
+    "linked_chance": {
+     "__fraction__": "13056/8775955"
+    },
+    "linked_nearest": 5,
+    "linked_rate": {
+     "__fraction__": "1/838"
+    },
+    "mean_tie_size": {
+     "__fraction__": "7089/4190"
+    },
+    "same_file_chance": {
+     "__fraction__": "74314/8775955"
+    },
+    "same_file_nearest": 23,
+    "same_file_rate": {
+     "__fraction__": "23/4190"
+    }
+   },
+   "pairs": {
+    "cross_file_mean_squared_distance": {
+     "__fraction__": "60885144928/8701641"
+    },
+    "cross_file_pairs": 8701641,
+    "ratio": {
+     "__fraction__": "281785527657153/282788666261212"
+    },
+    "same_file_mean_squared_distance": {
+     "__fraction__": "259064264/37157"
+    },
+    "same_file_pairs": 74314
+   }
+  }
+ },
+ "stack": {
+  "controls": {
+   "digest_random": {
+    "goal": {
+     "carried": [
+      "GLM.Gen3.octad_censuses",
+      "GLM.Gen3.full_ledger"
+     ],
+     "fired": 23,
+     "leader": [
+      {
+       "hit_rate": {
+        "__fraction__": "587/838"
+       },
+       "hits": 587,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "689/838"
+       },
+       "hits": 689,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "360/419"
+       },
+       "hits": 720,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "743/838"
+       },
+       "hits": 743,
+       "k": 10
+      }
+     ],
+     "leader_precision": {
+      "__fraction__": "2363/4190"
+     },
+     "lost": [],
+     "queries": 838,
+     "relay": [
+      {
+       "hit_rate": {
+        "__fraction__": "587/838"
+       },
+       "hits": 587,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "689/838"
+       },
+       "hits": 689,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "361/419"
+       },
+       "hits": 722,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "745/838"
+       },
+       "hits": 745,
+       "k": 10
+      }
+     ],
+     "relay_precision": {
+      "__fraction__": "2363/4190"
+     }
+    },
+    "holdout": {
+     "carried": [
+      "GLM.Gen3.octad_censuses",
+      "GLM.Gen3.full_ledger"
+     ],
+     "fired": 13,
+     "leader": [
+      {
+       "hit_rate": {
+        "__fraction__": "285/419"
+       },
+       "hits": 285,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "336/419"
+       },
+       "hits": 336,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "353/419"
+       },
+       "hits": 353,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "362/419"
+       },
+       "hits": 362,
+       "k": 10
+      }
+     ],
+     "leader_precision": {
+      "__fraction__": "1149/2095"
+     },
+     "lost": [],
+     "queries": 419,
+     "relay": [
+      {
+       "hit_rate": {
+        "__fraction__": "285/419"
+       },
+       "hits": 285,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "336/419"
+       },
+       "hits": 336,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "355/419"
+       },
+       "hits": 355,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "364/419"
+       },
+       "hits": 364,
+       "k": 10
+      }
+     ],
+     "relay_precision": {
+      "__fraction__": "1149/2095"
+     }
+    },
+    "tuning": {
+     "carried": [],
+     "fired": 10,
+     "leader": [
+      {
+       "hit_rate": {
+        "__fraction__": "302/419"
+       },
+       "hits": 302,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "353/419"
+       },
+       "hits": 353,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "367/419"
+       },
+       "hits": 367,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "381/419"
+       },
+       "hits": 381,
+       "k": 10
+      }
+     ],
+     "leader_precision": {
+      "__fraction__": "1214/2095"
+     },
+     "lost": [],
+     "queries": 419,
+     "relay": [
+      {
+       "hit_rate": {
+        "__fraction__": "302/419"
+       },
+       "hits": 302,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "353/419"
+       },
+       "hits": 353,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "367/419"
+       },
+       "hits": 367,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "381/419"
+       },
+       "hits": 381,
+       "k": 10
+      }
+     ],
+     "relay_precision": {
+      "__fraction__": "1214/2095"
+     }
+    }
+   },
+   "name": {
+    "goal": {
+     "carried": [],
+     "fired": 23,
+     "leader": [
+      {
+       "hit_rate": {
+        "__fraction__": "587/838"
+       },
+       "hits": 587,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "689/838"
+       },
+       "hits": 689,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "360/419"
+       },
+       "hits": 720,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "743/838"
+       },
+       "hits": 743,
+       "k": 10
+      }
+     ],
+     "leader_precision": {
+      "__fraction__": "2363/4190"
+     },
+     "lost": [],
+     "queries": 838,
+     "relay": [
+      {
+       "hit_rate": {
+        "__fraction__": "587/838"
+       },
+       "hits": 587,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "689/838"
+       },
+       "hits": 689,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "360/419"
+       },
+       "hits": 720,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "743/838"
+       },
+       "hits": 743,
+       "k": 10
+      }
+     ],
+     "relay_precision": {
+      "__fraction__": "2363/4190"
+     }
+    },
+    "holdout": {
+     "carried": [],
+     "fired": 13,
+     "leader": [
+      {
+       "hit_rate": {
+        "__fraction__": "285/419"
+       },
+       "hits": 285,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "336/419"
+       },
+       "hits": 336,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "353/419"
+       },
+       "hits": 353,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "362/419"
+       },
+       "hits": 362,
+       "k": 10
+      }
+     ],
+     "leader_precision": {
+      "__fraction__": "1149/2095"
+     },
+     "lost": [],
+     "queries": 419,
+     "relay": [
+      {
+       "hit_rate": {
+        "__fraction__": "285/419"
+       },
+       "hits": 285,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "336/419"
+       },
+       "hits": 336,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "353/419"
+       },
+       "hits": 353,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "362/419"
+       },
+       "hits": 362,
+       "k": 10
+      }
+     ],
+     "relay_precision": {
+      "__fraction__": "1149/2095"
+     }
+    },
+    "tuning": {
+     "carried": [],
+     "fired": 10,
+     "leader": [
+      {
+       "hit_rate": {
+        "__fraction__": "302/419"
+       },
+       "hits": 302,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "353/419"
+       },
+       "hits": 353,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "367/419"
+       },
+       "hits": 367,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "381/419"
+       },
+       "hits": 381,
+       "k": 10
+      }
+     ],
+     "leader_precision": {
+      "__fraction__": "1214/2095"
+     },
+     "lost": [],
+     "queries": 419,
+     "relay": [
+      {
+       "hit_rate": {
+        "__fraction__": "302/419"
+       },
+       "hits": 302,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "353/419"
+       },
+       "hits": 353,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "367/419"
+       },
+       "hits": 367,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "381/419"
+       },
+       "hits": 381,
+       "k": 10
+      }
+     ],
+     "relay_precision": {
+      "__fraction__": "1214/2095"
+     }
+    }
+   }
+  },
+  "corpus": 4190,
+  "gate": {
+   "__fraction__": "1/10"
+  },
+  "k_ladder": [
+   1,
+   3,
+   5,
+   10
+  ],
+  "quotas": [
+   [
+    "text",
+    2
+   ],
+   [
+    "lexical",
+    2
+   ],
+   [
+    "address",
+    1
+   ]
+  ],
+  "sets": {
+   "goal": {
+    "carried": [
+     "GLM.Harmony.pythagorean_comma_eq",
+     "GLM.Admission.ledger_vocabulary",
+     "GLM.Calibration.taxVacuum",
+     "GLM.Gen3.octad_censuses",
+     "GLM.Landscape.golay_ball_majority"
+    ],
+    "fired": 23,
+    "leader": [
+     {
+      "hit_rate": {
+       "__fraction__": "587/838"
+      },
+      "hits": 587,
+      "k": 1
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "689/838"
+      },
+      "hits": 689,
+      "k": 3
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "360/419"
+      },
+      "hits": 720,
+      "k": 5
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "743/838"
+      },
+      "hits": 743,
+      "k": 10
+     }
+    ],
+    "leader_precision": {
+     "__fraction__": "2363/4190"
+    },
+    "lost": [
+     "GLM.Gen3.even_part_dimension"
+    ],
+    "queries": 838,
+    "relay": [
+     {
+      "hit_rate": {
+       "__fraction__": "587/838"
+      },
+      "hits": 587,
+      "k": 1
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "345/419"
+      },
+      "hits": 690,
+      "k": 3
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "362/419"
+      },
+      "hits": 724,
+      "k": 5
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "374/419"
+      },
+      "hits": 748,
+      "k": 10
+     }
+    ],
+    "relay_precision": {
+     "__fraction__": "1183/2095"
+    }
+   },
+   "holdout": {
+    "carried": [
+     "GLM.Admission.ledger_vocabulary",
+     "GLM.AlignmentPoints.vOverC",
+     "GLM.Gen3.octad_censuses"
+    ],
+    "fired": 13,
+    "leader": [
+     {
+      "hit_rate": {
+       "__fraction__": "285/419"
+      },
+      "hits": 285,
+      "k": 1
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "336/419"
+      },
+      "hits": 336,
+      "k": 3
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "353/419"
+      },
+      "hits": 353,
+      "k": 5
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "362/419"
+      },
+      "hits": 362,
+      "k": 10
+     }
+    ],
+    "leader_precision": {
+     "__fraction__": "1149/2095"
+    },
+    "lost": [],
+    "queries": 419,
+    "relay": [
+     {
+      "hit_rate": {
+       "__fraction__": "285/419"
+      },
+      "hits": 285,
+      "k": 1
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "339/419"
+      },
+      "hits": 339,
+      "k": 3
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "356/419"
+      },
+      "hits": 356,
+      "k": 5
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "365/419"
+      },
+      "hits": 365,
+      "k": 10
+     }
+    ],
+    "relay_precision": {
+     "__fraction__": "1154/2095"
+    }
+   },
+   "tuning": {
+    "carried": [
+     "GLM.Conversation.Licence",
+     "GLM.FitCapacity.monad",
+     "GLM.FitCapacity.muonPred",
+     "GLM.Harmony.pythagorean_comma_eq"
+    ],
+    "fired": 10,
+    "leader": [
+     {
+      "hit_rate": {
+       "__fraction__": "302/419"
+      },
+      "hits": 302,
+      "k": 1
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "353/419"
+      },
+      "hits": 353,
+      "k": 3
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "367/419"
+      },
+      "hits": 367,
+      "k": 5
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "381/419"
+      },
+      "hits": 381,
+      "k": 10
+     }
+    ],
+    "leader_precision": {
+     "__fraction__": "1214/2095"
+    },
+    "lost": [],
+    "queries": 419,
+    "relay": [
+     {
+      "hit_rate": {
+       "__fraction__": "302/419"
+      },
+      "hits": 302,
+      "k": 1
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "355/419"
+      },
+      "hits": 355,
+      "k": 3
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "371/419"
+      },
+      "hits": 371,
+      "k": 5
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "385/419"
+      },
+      "hits": 385,
+      "k": 10
+     }
+    ],
+    "relay_precision": {
+     "__fraction__": "1219/2095"
+    }
+   }
+  },
+  "sweep": [
+   {
+    "carried": 0,
+    "fired": 0,
+    "gate": {
+     "__fraction__": "0/1"
+    },
+    "hit_at_5": {
+     "__fraction__": "367/419"
+    },
+    "lost": 0,
+    "precision_at_5": {
+     "__fraction__": "1214/2095"
+    }
+   },
+   {
+    "carried": 4,
+    "fired": 10,
+    "gate": {
+     "__fraction__": "1/20"
+    },
+    "hit_at_5": {
+     "__fraction__": "371/419"
+    },
+    "lost": 0,
+    "precision_at_5": {
+     "__fraction__": "1219/2095"
+    }
+   },
+   {
+    "carried": 4,
+    "fired": 10,
+    "gate": {
+     "__fraction__": "1/10"
+    },
+    "hit_at_5": {
+     "__fraction__": "371/419"
+    },
+    "lost": 0,
+    "precision_at_5": {
+     "__fraction__": "1219/2095"
+    }
+   },
+   {
+    "carried": 4,
+    "fired": 11,
+    "gate": {
+     "__fraction__": "3/20"
+    },
+    "hit_at_5": {
+     "__fraction__": "371/419"
+    },
+    "lost": 0,
+    "precision_at_5": {
+     "__fraction__": "1218/2095"
+    }
+   },
+   {
+    "carried": 4,
+    "fired": 15,
+    "gate": {
+     "__fraction__": "1/5"
+    },
+    "hit_at_5": {
+     "__fraction__": "371/419"
+    },
+    "lost": 0,
+    "precision_at_5": {
+     "__fraction__": "1213/2095"
+    }
+   },
+   {
+    "carried": 4,
+    "fired": 29,
+    "gate": {
+     "__fraction__": "1/4"
+    },
+    "hit_at_5": {
+     "__fraction__": "370/419"
+    },
+    "lost": 1,
+    "precision_at_5": {
+     "__fraction__": "1206/2095"
+    }
+   },
+   {
+    "carried": 6,
+    "fired": 175,
+    "gate": {
+     "__fraction__": "1/2"
+    },
+    "hit_at_5": {
+     "__fraction__": "361/419"
+    },
+    "lost": 12,
+    "precision_at_5": {
+     "__fraction__": "1073/2095"
+    }
+   }
+  ],
+  "tiebreak": {
+   "holdout": {
+    "address": {
+     "hits": [
+      {
+       "hit_rate": {
+        "__fraction__": "280/419"
+       },
+       "hits": 280,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "342/419"
+       },
+       "hits": 342,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "350/419"
+       },
+       "hits": 350,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "362/419"
+       },
+       "hits": 362,
+       "k": 10
+      }
+     ],
+     "precision_at_5": {
+      "__fraction__": "228/419"
+     }
+    },
+    "lexical": {
+     "hits": [
+      {
+       "hit_rate": {
+        "__fraction__": "286/419"
+       },
+       "hits": 286,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "345/419"
+       },
+       "hits": 345,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "354/419"
+       },
+       "hits": 354,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "364/419"
+       },
+       "hits": 364,
+       "k": 10
+      }
+     ],
+     "precision_at_5": {
+      "__fraction__": "1157/2095"
+     }
+    },
+    "name": {
+     "hits": [
+      {
+       "hit_rate": {
+        "__fraction__": "284/419"
+       },
+       "hits": 284,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "335/419"
+       },
+       "hits": 335,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "351/419"
+       },
+       "hits": 351,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "360/419"
+       },
+       "hits": 360,
+       "k": 10
+      }
+     ],
+     "precision_at_5": {
+      "__fraction__": "229/419"
+     }
+    }
+   },
+   "tuning": {
+    "address": {
+     "hits": [
+      {
+       "hit_rate": {
+        "__fraction__": "305/419"
+       },
+       "hits": 305,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "357/419"
+       },
+       "hits": 357,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "368/419"
+       },
+       "hits": 368,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "383/419"
+       },
+       "hits": 383,
+       "k": 10
+      }
+     ],
+     "precision_at_5": {
+      "__fraction__": "244/419"
+     }
+    },
+    "lexical": {
+     "hits": [
+      {
+       "hit_rate": {
+        "__fraction__": "304/419"
+       },
+       "hits": 304,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "358/419"
+       },
+       "hits": 358,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "367/419"
+       },
+       "hits": 367,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "383/419"
+       },
+       "hits": 383,
+       "k": 10
+      }
+     ],
+     "precision_at_5": {
+      "__fraction__": "1218/2095"
+     }
+    },
+    "name": {
+     "hits": [
+      {
+       "hit_rate": {
+        "__fraction__": "302/419"
+       },
+       "hits": 302,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "353/419"
+       },
+       "hits": 353,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "367/419"
+       },
+       "hits": 367,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "381/419"
+       },
+       "hits": 381,
+       "k": 10
+      }
+     ],
+     "precision_at_5": {
+      "__fraction__": "1214/2095"
+     }
+    }
+   }
+  },
+  "tiebreak_verdict": {
+   "beats_name_tiebreak_on_hits": false,
+   "beats_name_tiebreak_on_precision": false
+  },
+  "verdict": {
+   "carried_outnumber_lost": true,
+   "gain_holds_across_the_gate": true,
+   "gain_never_below_across_the_gate": true,
+   "gain_strict_gates": 5,
+   "gain_strict_to_gate": "1/4",
+   "gate_fires_rarely": true,
+   "geometry_carries_more_than_control": true,
+   "geometry_carries_more_than_name": true,
+   "geometry_never_carries_fewer_than_control": true,
+   "relay_beats_text_on_every_set": true,
+   "relay_never_below_leader": true
+  }
+ },
+ "verdict": {
+  "feature_beats_chance": true,
+  "feature_beats_hash_control": true,
+  "feature_beats_shuffle": true,
+  "hash_is_chance_like": true,
+  "linked_beats_chance": true
+ }
+}

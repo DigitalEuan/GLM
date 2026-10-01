@@ -29,7 +29,7 @@ Query: `report denotations` (aliases `report denotation`, `report residue`,
 `report related_to`, `report vocabulary`; the same subject as `report measure`,
 whose §§10–12 are this study).
 Formal development:
-[`RequestProject/GLM/Denotation.lean`](../RequestProject/GLM/Denotation.lean).
+[`RequestProject/GLM/Denotation.lean`](../overlay/glm_lean/RequestProject/GLM/Denotation.lean).
 Tests: `overlay/glm_universal/tests/test_denotation.py` (26 tests, 187
 subtests).
 Companion: [`RELATIVE_MEASURE_STUDY.md`](RELATIVE_MEASURE_STUDY.md), whose §4

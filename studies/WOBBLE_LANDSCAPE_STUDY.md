@@ -46,7 +46,7 @@ signature unusual against a stated null? — and answers with one number.
 The delta–sigma modulator chasing a constant `t` in `(0, 1)` emits
 `b_n = floor((n+1)t) - floor(n t)`, which is the **Sturmian (mechanical) word of
 slope `t`**. That identity is `GLM.Info.dsBit_eq_floor_diff` in
-[`RequestProject/GLM/Sturmian.lean`](../RequestProject/GLM/Sturmian.lean), and
+[`RequestProject/GLM/Sturmian.lean`](../overlay/glm_lean/RequestProject/GLM/Sturmian.lean), and
 everything below is a consequence of it rather than an experimental finding.
 
 Write `s = 1/t`. The `j`-th one sits at `n_j = ceil(j*s) - 1`, so the gap
@@ -61,7 +61,7 @@ gap lengths**, which is the two-distance form of the Three-Distance Theorem for
 the first-return map. (The three-distance count appears at finite `N` only
 because the last, truncated gap is counted as a third length.) The bound is a
 theorem, not an observation:
-[`RequestProject/GLM/WobbleLandscape.lean`](../RequestProject/GLM/WobbleLandscape.lean),
+[`RequestProject/GLM/WobbleLandscape.lean`](../overlay/glm_lean/RequestProject/GLM/WobbleLandscape.lean),
 `GLM.Landscape.gap_mem_pair`.
 
 The multiplicities are closed-form too. With `a_0 = floor(s)` and
@@ -327,7 +327,7 @@ distance 8, so the balls of radius 3 about the codewords are disjoint and
 
 giving `Pr[d_min <= 3] = 9523200 / 16777216 = 2325 / 4096` exactly, which is
 about 0.82 bits. The identity is `GLM.Landscape.golay_ball_count` in
-[`RequestProject/GLM/WobbleLandscape.lean`](../RequestProject/GLM/WobbleLandscape.lean).
+[`RequestProject/GLM/WobbleLandscape.lean`](../overlay/glm_lean/RequestProject/GLM/WobbleLandscape.lean).
 The full coset-weight distribution — 1, 24, 276, 2024, 1771 cosets of weight 0,
 1, 2, 3, 4 — is recomputed from the code itself, so the tail at any observed
 distance is exact.

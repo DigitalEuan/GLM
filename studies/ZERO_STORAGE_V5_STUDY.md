@@ -28,8 +28,8 @@ Code: [`glm_zero_storage_substrate_v5.py`](scripts/glm_zero_storage_substrate_v5
 [`glm_zero_storage_substrate_v4.py`](scripts/glm_zero_storage_substrate_v4.py) so
 the two can be run side by side).
 Formal development:
-[`RequestProject/GLM/ZeroStorageV5.lean`](../RequestProject/GLM/ZeroStorageV5.lean),
-building on [`ZeroStorage.lean`](../RequestProject/GLM/ZeroStorage.lean).
+[`RequestProject/GLM/ZeroStorageV5.lean`](../overlay/glm_lean/RequestProject/GLM/ZeroStorageV5.lean),
+building on [`ZeroStorage.lean`](../overlay/glm_lean/RequestProject/GLM/ZeroStorage.lean).
 Run: `python3 studies/scripts/glm_zero_storage_substrate_v5.py --test` (about six seconds,
 exits 0), `--ledger`, `--demo`, `--report`, and `--test --full` for the
 sixteen-million-word sweep.

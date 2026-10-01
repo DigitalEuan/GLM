@@ -5,8 +5,8 @@
 **Question.** If this session stopped now, what would the next one need to
 know to carry the round on?
 
-**Verdict.** No round is in flight: Phase 73 closed, and the next round starts
-from a candidate in `STATUS.md` §3.4.
+**Verdict.** No round is in flight: Phase 87 closed, and the next round starts
+from round 2 of the order of work at the head of `STATUS.md` §3.4.
 
 **Deciding figure.** 0 steps outstanding.
 
@@ -42,7 +42,102 @@ absence:
 
 ## Status
 
-**No round is in flight.** Phase 73 — stepwise planner round two: the
+**No round is in flight.** Phase 87 — the open candidates merged into
+seven tracks and ordered ([`studies/ROADMAP_STUDY.md`](studies/ROADMAP_STUDY.md)),
+then round 1 of that order, the measurand register: register values read
+through what they measure, conversions through a stated efficiency in (0, 1]
+(`EFFICIENCY_OUT_OF_RANGE`, `EFFICIENCY_UNDECLARED`), and the elementary charge
+as an exact unit — is closed: the study is
+[`studies/MEASURAND_REGISTER_STUDY.md`](studies/MEASURAND_REGISTER_STUDY.md),
+the record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 87, and the next round
+is round 2 of the order (the loop through the planner).
+Phase 86 — measurands: kinds of quantity
+checked beside dimensions (`KIND_MISMATCH`), Celsius and Fahrenheit
+temperatures read as a level or a difference with the conflations refused by
+name, and the SI's defining constants `h` and `c` supplied when the givens
+alone derive nothing; five earlier verdicts amended; begun with a quick
+measurement of the soft floor's named repairs (candidate P) — is closed: the
+study is [`studies/MEASURANDS_STUDY.md`](studies/MEASURANDS_STUDY.md) (and
+§4 of [`studies/RATE_POSTERIOR_STUDY.md`](studies/RATE_POSTERIOR_STUDY.md)),
+the record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 86, and what it left is
+the study's §6, named under candidate O5 of [`STATUS.md`](STATUS.md) §3.4.
+Phase 85 — folds with a hole: the median, the
+largest and the smallest value and the rank of a row over a declared set, a
+median or a rank over a column with holes answered as the exact interval over
+every completion (one value when it closes, `COLUMN_HOLE` when a side is
+open), and the present-rows question asked as its own with the missing rows
+named, with `NOT_A_MEMBER` and `COLUMN_EMPTY` — is closed: the study is
+[`studies/HOLE_FOLDS_STUDY.md`](studies/HOLE_FOLDS_STUDY.md), the record is
+[`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 85, and what it left is the study's
+§6, named under candidates 2 and O of [`STATUS.md`](STATUS.md) §3.4.
+Phase 84 — the stepwise planner, round three:
+comparatives through a declared register field, *how many more* electrons and
+valence electrons, tera and pico, and sums, means and parity counts over every
+element or a declared class, with `COMPARATIVE_UNDECLARED`, `VALUE_MISSING`,
+`COLUMN_HOLE` and `SET_UNDECLARED` — is closed: the study is
+[`studies/STEPWISE_THREE_STUDY.md`](studies/STEPWISE_THREE_STUDY.md), the
+record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 84, and what it left is
+candidate O of [`STATUS.md`](STATUS.md) §3.4, narrowed. It began by signing
+Phases 81–83's release, which had been written up but not closed.
+Phases 81–83 — the second reading's exact
+channel measure and its place in the hunt, the rate estimated from the
+machine's own reads, and the 106 unresolved knowledge-base laws triaged under
+a service rule — are closed: the studies are
+[`studies/AGREE_CHANNEL_STUDY.md`](studies/AGREE_CHANNEL_STUDY.md),
+[`studies/RATE_POSTERIOR_STUDY.md`](studies/RATE_POSTERIOR_STUDY.md) and
+[`studies/LAW_TRIAGE_STUDY.md`](studies/LAW_TRIAGE_STUDY.md), the record is
+[`MASTER_PLAN.md`](MASTER_PLAN.md) Phases 81–83, and candidate P of
+[`STATUS.md`](STATUS.md) §3.4 is closed with what it leaves named there.
+Phase 80 — the confidence floor, hunted: a
+declared grid of thresholds measured at five rates over an exact channel
+census against a declared meaning of *working*, the working threshold named
+per rate, and a graded answer (the value with its confidence) where no
+threshold works — is closed: the study is
+[`studies/CONFIDENCE_FLOOR_STUDY.md`](studies/CONFIDENCE_FLOOR_STUDY.md), the
+record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 80, and what it left is
+candidate P of [`STATUS.md`](STATUS.md) §3.4, narrowed. It also removed a
+`copy` import Phase 79 had put into `integer_decision.py`, which the
+standard-library rule of `test_reasoning.py` refuses.
+Phase 79 — the integer decision, completed: the
+Omega test behind round three's `INTEGER_UNDECIDED`, every refutation a tree
+of combinations, fresh-variable substitutions and splits that the column-3
+script checks — is closed: the study is
+[`studies/INTEGER_DECISION_STUDY.md`](studies/INTEGER_DECISION_STUDY.md), the
+record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 79, and what it left is
+candidate M of [`STATUS.md`](STATUS.md) §3.4, narrowed. It began by
+completing Phase 78's release, which had been written up but not signed.
+Phase 78 — the cost of an iteration: one Lean copy
+(`overlay/glm_lean`, built in place), closures that follow what a unit reads
+with generated figure regions masked, derivations keyed on code, and
+`signoff --close` as the one closing command — is closed: the study is
+[`studies/ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) §5g and
+the record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 78. It began by closing
+Phase 77, whose release had not been completed. Phase 77 — decoder confidence: the confidence law
+Phase 75 absorbed attached to the decoder's own readings (the complete decoder,
+the carried fork's context stage, the second reading), at a declared bit-flip
+rate, with two dialect builtins — is closed: the study is
+[`studies/DECODER_CONFIDENCE_STUDY.md`](studies/DECODER_CONFIDENCE_STUDY.md),
+the record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 77, and what it left is
+candidate P of [`STATUS.md`](STATUS.md) §3.4, narrowed. It began by closing
+Phase 76, whose release had never been completed. Phase 76 — held precision: a register value's
+stated precision carried through a goal or narrative derivation as the exact
+interval of its answer — is closed: the study is
+[`studies/HELD_PRECISION_STUDY.md`](studies/HELD_PRECISION_STUDY.md), the
+record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 76, and what it left is
+candidate O of [`STATUS.md`](STATUS.md) §3.4, narrowed. Phase 75 — the laws
+absorbed: each of the 65 retained laws tested, improved where it could be,
+and the eleven of use absorbed as computed substrate facts the typed planner
+answers from — is closed: the study is
+[`studies/LAW_ABSORPTION_STUDY.md`](studies/LAW_ABSORPTION_STUDY.md), the
+record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 75, and what it left is
+candidate P of [`STATUS.md`](STATUS.md) §3.4, reworded. Phase 74 — the law register: the owner's two
+supplied files (`source_material/UBP_LAW_GLM_REVIEW.md`,
+`source_material/retained_laws_verified_65.csv`) re-read row by row, the exact
+rows re-graded, the decoder's outcomes and the refusal priced, the numeric
+rows run through a look-elsewhere test — is closed: the study is
+[`studies/LAW_REGISTER_STUDY.md`](studies/LAW_REGISTER_STUDY.md), the record is
+[`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 74, and what it left is candidate P
+of [`STATUS.md`](STATUS.md) §3.4. Phase 73 — stepwise planner round two: the
 frames *how many more*, parity and averages, givens and targets written with
 units (a declared unit table, dimension checks, SI scaling and refusals), and
 register values feeding a wheel derivation, every step still in three columns
@@ -125,7 +220,7 @@ record why not.
 ## 1. Done, committed, and checked here
 
 *Nothing in flight. The last round's record is in
-[`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 67.*
+[`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 85.*
 
 ## 2. In flight right now
 
@@ -140,10 +235,10 @@ record why not.
 
 | gate | state |
 |---|---|
-| `corpus --check --all` | current at the close of Phase 67 |
-| `signoff --verify-release` | released at the close of Phase 67: every test file and all 7 instruments signed with the exhaustive cases run |
+| `corpus --check --all` | current at the close of Phase 85 |
+| `signoff --verify-release` | released at the close of Phase 85 (`signoff --close`): every test file and all 6 instruments signed with the exhaustive cases run |
 | evaluation | 177 / 177 |
-| `lake build` | clean over the 137 files of `RequestProject/GLM/`, no `sorry` |
+| `lake build` | clean over the 156 files of `overlay/glm_lean/RequestProject/GLM/` (the only copy), no `sorry` |
 
 ## 5. The wiring audit
 
@@ -155,6 +250,45 @@ of 96 reasoning modules reached. Re-run it with
 
 ## 6. Things learned worth not re-learning
 
+* **A frame reads the text after the planner has normalised it.** Phase 85's
+  *the noble gases that have one* reached the frame as *… that have 1*: the
+  planner writes number words as numerals before any reader sees them. Test a
+  new phrase through `sw.split_then` first, not as typed.
+* **A fallback that refuses can still do harm.** Phase 84's first
+  `COMPARATIVE_UNDECLARED` turned no refusal into an answer, yet it replaced
+  the vagueness reader's specific refusal (*different quantities are not
+  comparable*) with a generic one on three declared questions. The router
+  census (how many declared questions the stepwise layer *reads*) caught it
+  when the verdict counts did not: a new refusal belongs only where the claim
+  it makes is this layer's to make.
+* **pytest is not always installed.** A fresh environment lacked it, and
+  `signoff --close` recorded every unit it ran as *failed* in 0.1 s; install
+  it (`pip install pytest`) before closing, and read a wall of 0-test
+  failures as an environment fault, not a regression.
+
+* **A declared outcome must be computed for the reading it names.** Phase 80
+  declared a two-case `resolve_floor` at 1/10 to refuse, reasoning from the
+  decoder's 78 % at weight 3; with two cases the rival lies further away and
+  the read is 6561/6562 sure. Work the declared value out for the program as
+  written before committing it.
+* **A release written up is not a release signed.** Phase 78's documents said
+  the round had closed; `signoff --verify` said 22 of 123. Believe the ledger,
+  and run `signoff --close` before writing the word *closed*.
+* **A headline check wants its phrase inside one span.** `test_figures.py`
+  looks for the literal phrase `N test files`; a sentence that splits the
+  number from its noun with a figure marker passes the figure registry and
+  fails the headline check. Quote the `test-files` figure, whose value carries
+  the noun.
+
+* **An import can leak the development as surely as a glob.** Phase 75 put
+  `law_absorption.py` on the planner's path; three imports down, `salvage.py`
+  named archive Lean files the development does not hold, and an unresolved
+  Lean name is hashed as the whole development. Every session unit carried all
+  of it until Phase 77 rewrote the labels. After adding an import to the
+  answering path, run `test_corpus.py -k IterationCost`.
+* **A declared posterior must say what it is conditioned on.** Phase 77
+  declared the second reading's witness at exactly 1/2 each; over all 4096
+  codewords each survivor is just below 1/2. Conditioned on the fork, 1/2.
 * **A supplied "round-trip check" may never read what it generated.** The
   generator's own check re-quantises the *carrier* and compares it with
   itself; the comment above it says it cannot parse the generated source. A

@@ -1,0 +1,22 @@
+identifier,sector,priced_quantity,quoting_unit,quoting_multiplier,denominator_physical_quantity,is_dimensionless_currency,numeric_price_fraction,observation_window,precision_sig_figs,retrieval_date,reference_source
+gold_usd_per_troy_ounce,Precious Metals,gold,USD/troy_ounce,1,mass,False,2070/1,2024-Q1,4,2026-08-31,LBMA via World Bank Pink Sheet
+gold_usd_per_troy_ounce,Precious Metals,gold,USD/troy_ounce,1,mass,False,2338/1,2024-Q2,4,2026-08-31,LBMA via World Bank Pink Sheet
+gold_usd_per_troy_ounce,Precious Metals,gold,USD/troy_ounce,1,mass,False,2478/1,2024-Q3,4,2026-08-31,LBMA via World Bank Pink Sheet
+silver_usd_per_troy_ounce,Precious Metals,silver,USD/troy_ounce,1,mass,False,47/2,2024-Q1,3,2026-08-31,LBMA via World Bank Pink Sheet
+silver_usd_per_troy_ounce,Precious Metals,silver,USD/troy_ounce,1,mass,False,57/2,2024-Q2,3,2026-08-31,LBMA via World Bank Pink Sheet
+silver_usd_per_troy_ounce,Precious Metals,silver,USD/troy_ounce,1,mass,False,59/2,2024-Q3,3,2026-08-31,LBMA via World Bank Pink Sheet
+crude_oil_wti_usd_per_barrel,Energy,crude_oil_wti,USD/barrel,1,volume,False,77/1,2024-Q1,2,2026-08-31,"FRED (Cushing, OK WTI)"
+crude_oil_wti_usd_per_barrel,Energy,crude_oil_wti,USD/barrel,1,volume,False,81/1,2024-Q2,2,2026-08-31,"FRED (Cushing, OK WTI)"
+crude_oil_wti_usd_per_barrel,Energy,crude_oil_wti,USD/barrel,1,volume,False,377/5,2024-Q3,3,2026-08-31,"FRED (Cushing, OK WTI)"
+natural_gas_henry_hub_usd_per_mmbtu,Energy,natural_gas,USD/MMBtu,1,energy,False,11/5,2024-Q1,2,2026-08-31,FRED (Henry Hub)
+natural_gas_henry_hub_usd_per_mmbtu,Energy,natural_gas,USD/MMBtu,1,energy,False,43/20,2024-Q2,2,2026-08-31,FRED (Henry Hub)
+natural_gas_henry_hub_usd_per_mmbtu,Energy,natural_gas,USD/MMBtu,1,energy,False,47/20,2024-Q3,2,2026-08-31,FRED (Henry Hub)
+wheat_us_hrw_usd_per_metric_ton,Agriculture,wheat_hrw,USD/metric_ton,1,mass,False,275/1,2024-Q1,3,2026-08-31,CBOT via World Bank Pink Sheet
+wheat_us_hrw_usd_per_metric_ton,Agriculture,wheat_hrw,USD/metric_ton,1,mass,False,282/1,2024-Q2,3,2026-08-31,CBOT via World Bank Pink Sheet
+wheat_us_hrw_usd_per_metric_ton,Agriculture,wheat_hrw,USD/metric_ton,1,mass,False,1302/5,2024-Q3,4,2026-08-31,CBOT via World Bank Pink Sheet
+japanese_yen_usd_exchange_rate,Currency,jpy_base,USD/JPY,100,dimensionless,True,66/100,2024-Q1,2,2026-08-31,ECB via FRED
+japanese_yen_usd_exchange_rate,Currency,jpy_base,USD/JPY,100,dimensionless,True,64/100,2024-Q2,2,2026-08-31,ECB via FRED
+japanese_yen_usd_exchange_rate,Currency,jpy_base,USD/JPY,100,dimensionless,True,137/200,2024-Q3,3,2026-08-31,ECB via FRED
+euro_usd_exchange_rate,Currency,eur_base,USD/EUR,1,dimensionless,True,109/100,2024-Q1,3,2026-08-31,ECB via FRED
+euro_usd_exchange_rate,Currency,eur_base,USD/EUR,1,dimensionless,True,108/100,2024-Q2,3,2026-08-31,ECB via FRED
+euro_usd_exchange_rate,Currency,eur_base,USD/EUR,1,dimensionless,True,546/500,2024-Q3,3,2026-08-31,ECB via FRED

@@ -27,7 +27,7 @@ Code:
 [`overlay/glm_universal/reasoning/tie_break.py`](../overlay/glm_universal/reasoning/tie_break.py).
 Query: `report tiebreak`.
 Formal development:
-[`RequestProject/GLM/TieBreak.lean`](../RequestProject/GLM/TieBreak.lean).
+[`RequestProject/GLM/TieBreak.lean`](../overlay/glm_lean/RequestProject/GLM/TieBreak.lean).
 Tests: `overlay/glm_universal/tests/test_tie_break.py`.
 The decoder it describes:
 [`overlay/glm_universal/reasoning/analogy.py`](../overlay/glm_universal/reasoning/analogy.py)
@@ -300,7 +300,7 @@ have saved.
 
 ## 8. What is proved, and what is only measured
 
-Proved, in [`RequestProject/GLM/TieBreak.lean`](../RequestProject/GLM/TieBreak.lean),
+Proved, in [`RequestProject/GLM/TieBreak.lean`](../overlay/glm_lean/RequestProject/GLM/TieBreak.lean),
 against no assumption about this corpus:
 
 | Lean name | what it says | what it licenses here |

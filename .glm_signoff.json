@@ -1,2042 +1,2447 @@
 {
  "checks": {
   "benchmarks": {
-   "digest": "a187333297f94ef8098e611eaebe560aba8c3f675159477a64a088fd7cb507ce",
-   "milliseconds": 5998,
+   "digest": "4519bd78ba1fc0311bd7bb35a46d94bd868bbca237f2c0665bbcfbf89e479c74",
+   "milliseconds": 6315,
    "output_tail": " 2325\n    finding [weight_4_is_ambiguous]: 10626 of 10626 weight-4 patterns are equidistant from six codewords.\n    finding [weight_5_is_confidently_wrong]: 42504 of 42504 weight-5 patterns decode to a unique, wrong codeword.\n\n  physics_equations  [curated]\n    Does the verifier accept true dimensional equations and refuse false ones?\n    score 29/30 = 29/30, baseline 2/3, verdict pass\n    false_cases: 10\n    false_refused: 10\n    scalar_full_divergences: 3\n    true_accepted: 19\n    true_cases: 20\n    finding [scalar_vs_full_semantics]: 3 of 30 equations are accepted under scalar semantics and refused under full tensor semantics.\n    finding [ext10_refuses_angular_momentum]: EXT10 refuses the textbook identity `angular_momentum = momentum * length`.\n\nevery suite beat its declared baseline\n",
    "python": "python3.11.14",
    "returncode": 0,
-   "signed_at": "2026-09-25T12:39:49Z",
+   "signed_at": "2026-09-29T21:40:19Z",
    "status": "passed"
   },
   "capabilities": {
-   "digest": "dca4e8df48334d1189aafb268c8df058180590006a11ae0e0a7270af3833602b",
-   "milliseconds": 5202,
+   "digest": "e6d5cdd6118521a0ba60c389cff0616e3e12c17cd1cfb0deb50935dbe5d19ef0",
+   "milliseconds": 5565,
    "output_tail": "bstrate_repair_radius  [substrate]\n    How much damage can a 24-bit reading take and still be repaired?\n      the repair radius is exactly 3\n      At weight 4 six codewords are equally near and the reading is ambiguous; at weight 5 the answer is unique, confident and wrong, because the octads form a Steiner system S(5,8,24)\n      No better decoder exists -- the boundary is a theorem about the code\n\n  tax_conservation_above_bits  [layers]\n    Does the TAX conservation law survive above binary carriers?\n      the conservation law is exact on binary carriers and fails as soon as the coordinates are naturals: the only repair would need the coherence constant Y to be 1/2, and it is strictly between 1/4 and 1/2\n      The boundary is where the geometry stops being a bijection with the arithmetic\n",
    "python": "python3.11.14",
    "returncode": 0,
-   "signed_at": "2026-09-25T12:39:48Z",
+   "signed_at": "2026-09-29T21:40:19Z",
    "status": "passed"
   },
   "evaluation": {
-   "digest": "3b4c3df7c82f1f8ec5ba2f3a65b8b8d1e41dbef3efd2b67ab37238d50057bb5a",
-   "milliseconds": 216232,
-   "output_tail": "re           9/9   wrong 0   refused 0   errors 0\n  nearest           4/4   wrong 0   refused 0   errors 0\n  ordering        10/10   wrong 0   refused 0   errors 0\n  pi_groups         2/2   wrong 0   refused 0   errors 0\n  product           1/1   wrong 0   refused 0   errors 0\n  project           1/1   wrong 0   refused 0   errors 0\n  real              5/5   wrong 0   refused 0   errors 0\n  report          67/67   wrong 0   refused 0   errors 0\n  spatial           2/2   wrong 0   refused 0   errors 0\n  task              3/3   wrong 0   refused 0   errors 0\n  trilinear         2/2   wrong 0   refused 0   errors 0\n  unknown           1/1   wrong 0   refused 0   errors 0\n  verify            6/6   wrong 0   refused 0   errors 0\n\nno failures\n\nexpected refusals: 28 boundary, 0 gap\nran in 215.7s\n",
+   "digest": "f392a2666086ce333bd13cd8cf3f7703975ab691beae1c34947ea2176f363a2c",
+   "milliseconds": 224940,
+   "output_tail": "re           9/9   wrong 0   refused 0   errors 0\n  nearest           4/4   wrong 0   refused 0   errors 0\n  ordering        10/10   wrong 0   refused 0   errors 0\n  pi_groups         2/2   wrong 0   refused 0   errors 0\n  product           1/1   wrong 0   refused 0   errors 0\n  project           1/1   wrong 0   refused 0   errors 0\n  real              5/5   wrong 0   refused 0   errors 0\n  report          67/67   wrong 0   refused 0   errors 0\n  spatial           2/2   wrong 0   refused 0   errors 0\n  task              3/3   wrong 0   refused 0   errors 0\n  trilinear         2/2   wrong 0   refused 0   errors 0\n  unknown           1/1   wrong 0   refused 0   errors 0\n  verify            6/6   wrong 0   refused 0   errors 0\n\nno failures\n\nexpected refusals: 28 boundary, 0 gap\nran in 224.6s\n",
    "python": "python3.11.14",
    "returncode": 0,
-   "signed_at": "2026-09-25T12:43:24Z",
+   "signed_at": "2026-09-30T18:26:51Z",
    "status": "passed"
   },
   "figures": {
-   "digest": "c5a13b38c50e78e8d856455e08f01e7824038592b25a31ddc7b0de44a433d060",
-   "milliseconds": 16359,
+   "digest": "c31295d8004b6d63e11e7bbfb174f1d4d60817620c569997e93149b3a337dc2c",
+   "milliseconds": 20185,
    "output_tail": "/workspace/request-project/overlay/FIGURES.md matches a fresh computation\n",
    "python": "python3.11.14",
    "returncode": 0,
-   "signed_at": "2026-09-25T12:55:17Z",
+   "signed_at": "2026-10-01T05:48:15Z",
    "status": "passed"
   },
   "lean-build": {
-   "digest": "fed0bbd23336b118a2d88225e90e1f8de3df6c2f42a717bdb64e3954c2374f3c",
-   "milliseconds": 11818,
-   "output_tail": "Build completed successfully (8160 jobs).\n",
+   "digest": "64c9d39c9828bbc6b4c20a27734cfcbbd7c6b053cbf2c16340407e6aba0b464e",
+   "milliseconds": 16150,
+   "output_tail": "Build completed successfully (8183 jobs).\n",
    "python": "python3.11.14",
    "returncode": 0,
-   "signed_at": "2026-09-25T12:39:55Z",
-   "status": "passed"
-  },
-  "lean-copies-identical": {
-   "digest": "0858f2e3ca8c22fb734beb29924da46efbd07de2ee3a27f0ace982d150b90b78",
-   "milliseconds": 48,
-   "output_tail": "",
-   "python": "python3.11.14",
-   "returncode": 0,
-   "signed_at": "2026-09-25T12:39:43Z",
+   "signed_at": "2026-10-01T03:57:41Z",
    "status": "passed"
   },
   "lean-sorry-free": {
-   "digest": "3071cde0e3d34c59674a63a800675c6089cc740e57e3df9f7298ebd5ca7394ed",
-   "milliseconds": 38,
+   "digest": "40c5b1f90c30c28965c78d68691fcd11ff9a39bd85d9d971083a5854fd1652f2",
+   "milliseconds": 94,
    "output_tail": "",
    "python": "python3.11.14",
    "returncode": 1,
-   "signed_at": "2026-09-25T12:39:43Z",
+   "signed_at": "2026-10-01T03:57:25Z",
    "status": "passed"
   }
  },
  "python": "python3.11.14",
- "schema": 3,
- "superseded_schema": 2,
+ "schema": 4,
+ "superseded_schema": 3,
  "totals": {
   "excludes": [
    "test_figures.py"
   ],
   "mode": "full",
   "python": "python3.11.14",
-  "recorded_at": "2026-09-25T12:55:00Z",
-  "subtests": 16276,
-  "test_files": 108,
-  "tests": 4267
+  "recorded_at": "2026-10-01T05:47:54Z",
+  "subtests": 17825,
+  "test_files": 131,
+  "tests": 4703
  },
  "units": {
   "test_admission.py": {
-   "digest": "ff9afb5c439f418b708ffa8d860b5fd5425966bf0987cf18dd9c00f9ae5037f9",
+   "digest": "b763b865cca73286e50f28bb2322f0eaadc1ae8bf36e2a4520913c95bdaf74b0",
    "failures": 0,
    "groups": {
-    "code": "235a8325ae3df395fac00362323ffd8054bc702e9bb719ad968e573cbaa80ca4",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "60a1ca935dae388f72aee7abe42912707278e24983840343ff53c1d4d1d21434",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 1465,
+   "milliseconds": 2111,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:28:11Z",
+   "signed_at": "2026-10-01T03:37:51Z",
    "status": "passed",
    "subtests": 0,
    "tests": 37
   },
-  "test_analogy_models.py": {
-   "digest": "d6eab42e3bf84b4133b55d57e895d66b93f228824d6a1ef8a38c73c53c4f5418",
+  "test_agree_channel.py": {
+   "digest": "cf7f960daca1690fda1e00ddd4193f3be2722e487f1ba8bb5745a4c669727b74",
    "failures": 0,
    "groups": {
-    "code": "498429cb0459dc55d5586d4c3f520b89806d5f425c71687ed2b09000523434bc",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "5276b44c26ff8fbc20ba3b847be0aaf6edfee58139f9c82616cbe10d700b2595",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "4cc2acfceaae970c7e64da57c10489cec41764988ead04b5e7379d23204b23cf",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 2167,
+   "milliseconds": 11025,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:28:12Z",
+   "signed_at": "2026-10-01T05:30:50Z",
+   "status": "passed",
+   "subtests": 0,
+   "tests": 14
+  },
+  "test_analogy_models.py": {
+   "digest": "ae8000ffbda59333123233fc40268c466c180234f9e80b14667792b62f71f107",
+   "failures": 0,
+   "groups": {
+    "code": "0fb94e615f9005b1f15bf3b39ce9e9c8ee79dd6171d0fca6c96dfa32ba303cfe",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
+   },
+   "milliseconds": 3060,
+   "mode": "full",
+   "python": "python3.11.14",
+   "signed_at": "2026-10-01T03:37:52Z",
    "status": "passed",
    "subtests": 98,
    "tests": 53
   },
   "test_anonymous.py": {
-   "digest": "735fcada2f2dcf751d6906ffe46c464e29ae6904fe5685aa856301650c346d8c",
+   "digest": "333f2284e6399444f30b48aaa2bc4107a25dc78cba4d99299c819430bda4a67d",
    "failures": 0,
    "groups": {
-    "code": "7d95037ea304a5cfbb324833b4287b062b47999f3eaf0692a9456e3d6d22e000",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "48d05782acbbd2bbacd2465e9ce154bfc7e86c8feae8d6212f6070b46bbfd71a",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "2ac221737201c5c3cbcd5850c1f681bcea4aa95f9d29d0532e128bf24f3abf15",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "82c15939c30a359533635eb7f91e011ce09e5f3b09bb0613ccaa436359a5399c",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 226106,
+   "milliseconds": 262666,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:49:37Z",
+   "signed_at": "2026-10-01T05:35:03Z",
    "status": "passed",
-   "subtests": 149,
-   "tests": 27
+   "subtests": 146,
+   "tests": 28
   },
   "test_benchmarks.py": {
-   "digest": "69422e754ad95fa5240cb9cf45d198cb06b233f097b0bab3f7ff036555214fd6",
+   "digest": "9274715d61cb65239cdb9d84171be64d3ce9dfe342eb0589c319bda0968f2ffb",
    "failures": 0,
    "groups": {
-    "code": "7b67e6afb564dbf49e85e279d85d4249e3e1deb53152198b3863945023f5fc8a",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "c244475f5e7b9273c25014e6508537e4beafac7f26ea5551594e6dc51e4c7268",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 62800,
+   "milliseconds": 75732,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:29:13Z",
+   "signed_at": "2026-10-01T03:39:04Z",
    "status": "passed",
    "subtests": 0,
    "tests": 67
   },
   "test_blockers.py": {
-   "digest": "c7b4c9598299f4de35dcb20483e090558e85be89cbfeaae92f36e9f15bcab4ee",
+   "digest": "585076fd832eb017ae396d597492837f8f3e3f6bed6e19f31a37f180dd044a30",
    "failures": 0,
    "groups": {
-    "code": "81879af8be5921fdc2486861761cfe1c56e3cf07b1c58a0969781a2cc346e945",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "bd7bc6623b7d53488d7b518f797336f4be0d7d99367ff7f540063855378bad1f",
-    "lean": "1a495ba99f5eec61255e0935ca76360eb13a61c3bbc359614db6b4aeca238992",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "5abb1b26583bfca2da8600febed17d25a1dc3c7fc03a976cbbc981827c7a3596",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "bc414bbff25f660620ed0148dcfdf403e66584cbc5fcc746622496892fcb2fa9",
+    "lean": "f0624ea1f10e6e37f834bb3dede83accac149d88ba4dfd49d4c52ba4bbb64214",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 1096,
+   "milliseconds": 1588,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:28:11Z",
+   "signed_at": "2026-10-01T03:37:50Z",
    "status": "passed",
    "subtests": 0,
    "tests": 14
   },
   "test_blueprint.py": {
-   "digest": "03ab031023bd8e636fa1e324ad25d65e3f279a7c88b33e3af5a91a59a3dd7b68",
+   "digest": "b720509236204cc226c03ef8d4758b6033929ab01316b1e50d0be47befaf786d",
    "failures": 0,
    "groups": {
-    "code": "c0e63cfa47bc49610da4f1ee5bbefb807bc7640b4a55b12075170ebfbb23ede4",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "9ad1a263490164e4f12001541dd02457ef3544ba6de4e4351b8b422a15efaa8a",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "d9cb2939c2fc994e68ab4adf79ddd90e267bbdf82fc2818fa7eee6ec9d11a742",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "cd72eeb5fc7aa6cc8f8e2c3450949bbc99c813fe9c3425aa5b4949b4c90b9954",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 30659,
+   "milliseconds": 38557,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:46:21Z",
+   "signed_at": "2026-10-01T05:31:18Z",
    "status": "passed",
    "subtests": 0,
    "tests": 80
   },
   "test_capabilities.py": {
-   "digest": "8e801eb23d5dbfeff47237684758829e4804f3669d789014a18975632f09644f",
+   "digest": "856ea9dc1db38dafdc6c020e928553fd607a36c3f1989464ada687b71af2fa39",
    "failures": 0,
    "groups": {
-    "code": "76afdf39a1a3af685736704e509d523d3c631bea54b92083818d05a4c96d68af",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "5d9dc521ac22dfe30bc3d87b7e4c56133551be009a48cf2420c828b21b71e2c1",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 18465,
+   "milliseconds": 23207,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:28:28Z",
+   "signed_at": "2026-10-01T03:38:12Z",
    "status": "passed",
    "subtests": 0,
    "tests": 56
   },
-  "test_catalog.py": {
-   "digest": "ba8c21636fe238107fa7831d89ac181ba6f83e6679c90872a59074469dba4023",
+  "test_carried_fork.py": {
+   "digest": "bec632f1b258612d9854f6ed50f0f028cc2e88e8a14c6f4b310ea80880fe4e62",
    "failures": 0,
    "groups": {
-    "code": "b391a7c17353215a988fa76c59551cdfd9519d3dc0ca1bccde29175833ec0832",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "9ad1a263490164e4f12001541dd02457ef3544ba6de4e4351b8b422a15efaa8a",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "a7b95bfb064a024f321fda986af80f5c70c3c3861fbea05b48dfc04c96cd2473",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "80698cd7e957c893d9315ee9f3919bb33933aa7e82dedc8de0bd75f7bafa0b1e",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 58772,
+   "milliseconds": 334064,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:46:49Z",
+   "signed_at": "2026-10-01T05:36:14Z",
+   "status": "passed",
+   "subtests": 0,
+   "tests": 18
+  },
+  "test_catalog.py": {
+   "digest": "fbbcd522c6da82f4c9a498f92484d3049a7fcf4f189a2c3b74ada0454923175b",
+   "failures": 0,
+   "groups": {
+    "code": "a0c0426b0a6ee35a47627d35f7f82c9d925dce0ff1defd302d12cd79b7593b12",
+    "data": "39064ab483b6cfd8e38e5e250dc19ee11c08e11fc6c3c5ee2dbd02ca1dff00e2",
+    "documents": "cd72eeb5fc7aa6cc8f8e2c3450949bbc99c813fe9c3425aa5b4949b4c90b9954",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
+   },
+   "milliseconds": 71665,
+   "mode": "full",
+   "python": "python3.11.14",
+   "signed_at": "2026-10-01T05:31:51Z",
    "status": "passed",
    "subtests": 0,
    "tests": 31
   },
   "test_coherence.py": {
-   "digest": "0eca33b111c899fc78a31860930f7e388aa4e2a915d61098ce0b0882d66b8309",
+   "digest": "6801872e8e26dcd13f64b47869a81dd4852046ffa4a23ff7ead3e816cb87bb36",
    "failures": 0,
    "groups": {
     "code": "fb0bc0c7e0d761db1548b43c5a3db1193214bb2e5cb14927265f6378f6d94740",
-    "data": "269ba9b0d617f63eebf69089301a8d0c82a5c2b58e3231206e51a6366ae25ffe",
+    "data": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "documents": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "lean": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 995,
+   "milliseconds": 1408,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:28:12Z",
+   "signed_at": "2026-09-29T21:22:36Z",
    "status": "passed",
    "subtests": 0,
    "tests": 58
   },
   "test_column_extremum.py": {
-   "digest": "6c74fc4282a0abae9f52a7a32973ddc6041437dc347f561d249e78e81fa0139a",
+   "digest": "8d09c230d875e3165a9404f51b82c1c2a67a5ca33f979ec9c9fbc70fa5ffeb01",
    "failures": 0,
    "groups": {
-    "code": "ae18d77010de5f69cb2d59376f73e79e09ed98bef0c4a9e9dd81be3a9132d733",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "bd7bc6623b7d53488d7b518f797336f4be0d7d99367ff7f540063855378bad1f",
-    "lean": "d20e5e3e6970eefdbd1d2743d1b6a5991df341dc4949d01571fc6b38478bde49",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "87688a25aa89fecc68a3ca92477d67741113e700f8ac4b63eae9ac1f88f843e4",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "bc414bbff25f660620ed0148dcfdf403e66584cbc5fcc746622496892fcb2fa9",
+    "lean": "d8702a9ae0f6e669b6e147328f412914401caa4fc6da22ba62bfcc8f1aaa84bf",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 5630,
+   "milliseconds": 8684,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:28:17Z",
+   "signed_at": "2026-10-01T03:38:01Z",
    "status": "passed",
    "subtests": 35,
    "tests": 48
   },
   "test_combiner.py": {
-   "digest": "f301cbf0b38e4346215b37095a6e6af945a96fbc4ad2ab899e9601a53cf4cbef",
+   "digest": "dad2db2f1960034ab0ff83712ea369cce1e17667793e36142c5f5a7f5bb60ce3",
    "failures": 0,
    "groups": {
-    "code": "1327eb21cfab712f319bdf4ef6c701ab46b8dcb5e91a29d5205af3095110168a",
-    "data": "269ba9b0d617f63eebf69089301a8d0c82a5c2b58e3231206e51a6366ae25ffe",
-    "documents": "d7f682262ed0400ac9e661e6812bdda6a08eca246eb4c7b1d1f23771c3cc83bc",
-    "lean": "7d80f0178fc20da7349e11789aaf600b4cc32df421473c25b0d530a1ec40c7b7",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "52b54ff16f54f66f832aa0b40d01e559d45da485432d00c35da2e8f31f769615",
+    "data": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "documents": "796f5134988ec6c2b535e03d52d35eb191b93a82a8c89dae88f4c55eea0a4604",
+    "lean": "3c3c877ded456b0a56b27cbf67550ac57adc993f279358a4b2e19424a711b162",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 5687,
+   "milliseconds": 7203,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:28:18Z",
+   "signed_at": "2026-09-30T07:15:36Z",
    "status": "passed",
    "subtests": 0,
    "tests": 24
   },
   "test_companion.py": {
-   "digest": "d8ce383d9d7b75de41722b760a6b2fba99e8db6f82b8375bbcbb9788f8d6a418",
+   "digest": "1d3a9c6a74e8175a4aa5c0bae41307d27d56cc7437b67bea9a664ec1ee318923",
    "failures": 0,
    "groups": {
-    "code": "50bd82338aac27cea2c86f39bae018981dcebf402814802c173f478a96f3ff1e",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "9ad1a263490164e4f12001541dd02457ef3544ba6de4e4351b8b422a15efaa8a",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "8f8d11b5aa5a0d7802bfe0dc4d70ba227d0e1ae607153892b0e987ad36ae8525",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "cd72eeb5fc7aa6cc8f8e2c3450949bbc99c813fe9c3425aa5b4949b4c90b9954",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 31445,
+   "milliseconds": 38467,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:46:22Z",
+   "signed_at": "2026-10-01T05:31:18Z",
    "status": "passed",
    "subtests": 0,
    "tests": 27
   },
   "test_comparative.py": {
-   "digest": "c6c7c2b2385f367c3d468b535ba62172bbca024120baf48d7f19c42d024e0e8c",
+   "digest": "d825cb2470b566cc74398315688bad402f6f1669a0649a724ce12b56a5b7b8d5",
    "failures": 0,
    "groups": {
-    "code": "9f0cb25c5e5444653654aa6f7d06c1c5eb3ff1778e17c9bd1361e09b313eefc0",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "4238a83389b8c5a7081f505bf5c52ebd27fadd48a222ed6b560ec97027606f77",
-    "lean": "c40072157f0f169153d98d072cc8b32f44408029fa87da17f7b431b2ffffc842",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "26314e7daa2e1c6f98c7a2fd6311726bd9df00127251b3a7e84cbe4ab5827773",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 2049,
+   "milliseconds": 3078,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:28:20Z",
+   "signed_at": "2026-10-01T03:38:04Z",
    "status": "passed",
    "subtests": 84,
    "tests": 69
   },
   "test_comparison_classes.py": {
-   "digest": "106ef7901898d56aee7c428ef5cecb312e3a30483ee4705d46c448152d025da0",
+   "digest": "a0b391e3e5cb6adc5d5aea193f19f109a3fcb21384fa8258b44a7d1b79fda5d2",
    "failures": 0,
    "groups": {
     "code": "a6a14d53be4d4bf542018b5b3d7de479700e94e1bd149c1564af029168162e50",
-    "data": "a17266175b1a70e9110c8d664c4af08a075387645ead2a8bb7d798c1bad61b4a",
-    "documents": "7a2cea35e26a5483f0d9060ef217691051e3b20dac02b8a329afe1f9e96fc782",
+    "data": "9d997486a60948da220ca4a4f3371b270632ec8f6376d3cc177452554b5ee4d9",
+    "documents": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "lean": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 1948,
+   "milliseconds": 2004,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:28:20Z",
+   "signed_at": "2026-09-29T21:22:48Z",
    "status": "passed",
    "subtests": 327,
    "tests": 40
   },
-  "test_conjugate.py": {
-   "digest": "de01cf3b465931a68e6813d99e407bca5f367fd2c452a46a1a3fc279f9b69f98",
+  "test_confidence_floor.py": {
+   "digest": "712e1791268a90d9f54baade607f27a8fc06531f0f2a377f2077724dd92780f9",
    "failures": 0,
    "groups": {
-    "code": "645b9b20bfed4a426803fc98ed10e089e2ed02472620e5266d1a59e1f657e9b4",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "a5ac22a6e6e48c002cfc842e83ad0aa99a940c0acc36529c9074497a8c37b6a9",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "91399ee24384eedce935806ecbc5aaebdb848ad72141fbc978481f6a1e5ac70d",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 1200,
+   "milliseconds": 23946,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:28:21Z",
+   "signed_at": "2026-10-01T05:31:03Z",
+   "status": "passed",
+   "subtests": 0,
+   "tests": 22
+  },
+  "test_conjugate.py": {
+   "digest": "674aad98ead75e4344979bcc8729cdeedbe52cb862b401d5a1269a00a4187612",
+   "failures": 0,
+   "groups": {
+    "code": "c874cd5ae07db8419a0aed7c8b932f55094c036e01e846808bdca1488a56df33",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
+   },
+   "milliseconds": 1634,
+   "mode": "full",
+   "python": "python3.11.14",
+   "signed_at": "2026-10-01T03:38:14Z",
    "status": "passed",
    "subtests": 15,
    "tests": 27
   },
-  "test_construction_ladder.py": {
-   "digest": "9bec9e3b4c821b9b4c1a5f5b2399dfe8b39495aa6e1b751843db940f546ede5d",
+  "test_connected_machine.py": {
+   "digest": "9e2fcc4b04c2b047bca5f7609c639418e2f9a9531de06665eb6c470540f5f0c2",
    "failures": 0,
    "groups": {
-    "code": "420b3b0903406241817b0575dce4e2b644ab902519a46687d146650a89198f01",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "8a3af76734e854521519ece69843013febd44233d9a66f166ae9cd0e0d51be63",
-    "lean": "4b6828eb3b6412e742cff7267b2811f0919375a30e73673434f6a038fc312133",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "5333e7463b6b2a49c7a8b90222a44b89a9f8f7502d01065a1f59621e6173630c",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "80698cd7e957c893d9315ee9f3919bb33933aa7e82dedc8de0bd75f7bafa0b1e",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 6228,
+   "milliseconds": 190846,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:28:26Z",
+   "signed_at": "2026-10-01T05:33:50Z",
+   "status": "passed",
+   "subtests": 63,
+   "tests": 27
+  },
+  "test_construction_ladder.py": {
+   "digest": "7dc46544ad44ea132cc931933a256eba827287892c99eb3dc20eb91658eecd21",
+   "failures": 0,
+   "groups": {
+    "code": "5b8243e9feb8dc6b0ff786d3bee0c563d46f5587cb0d92af7aa9c6803d2bff38",
+    "data": "040004bb67c4ca71afbb0cc4ed6f9945a9cf7a5d03702b3de7c5867105f710cf",
+    "documents": "7226377365b770e3c7133a42bb35e7025855902b8a96f98db065840bd9a11467",
+    "lean": "3c3c877ded456b0a56b27cbf67550ac57adc993f279358a4b2e19424a711b162",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
+   },
+   "milliseconds": 6805,
+   "mode": "full",
+   "python": "python3.11.14",
+   "signed_at": "2026-09-30T07:16:01Z",
    "status": "passed",
    "subtests": 0,
    "tests": 47
   },
   "test_containers.py": {
-   "digest": "c97eed6a8adbf4ae9b8ea2cb47c22d84e2d6e546f7f1b3c113d8e7c016ea5a48",
+   "digest": "1040f652e8049148151ac481fb914c689b6f4f3ea83199f5f2adc1d63c08dfae",
    "failures": 0,
    "groups": {
-    "code": "482e07b1973c8dadc5ce2ec7365caf94e8b381b4b67cd89546a0fe1a0ca7e03e",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "7085657b46a9881aedf7b2d34fd9fde979e910d56d67e40195f0cf2bcade06aa",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 6632,
+   "milliseconds": 8708,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:28:28Z",
+   "signed_at": "2026-10-01T03:38:36Z",
    "status": "passed",
    "subtests": 0,
    "tests": 52
   },
   "test_controller.py": {
-   "digest": "fdab4177771f23f8b093dd51a54db33b4f3117bc63b54e6fc82a9a910d195433",
+   "digest": "d80534d2554330d2b4e831ba05591867aab4a9fddb3303eaa5d75c88e12dde57",
    "failures": 0,
    "groups": {
-    "code": "6225d24fdefa12ba6ff595aa121e8a76c429386a82a067baee6842f45e5cc94a",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "6744ddba8a5af8806967d6d155c9e28a41ff95a61f611b3e3aad1507afb24ab6",
-    "lean": "ae3eb45ab1c335f6717d0c723c123156582b95dc9c631c700164c2f83fe50557",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "cff38c644db9c07d957593d84cd2ecb589934e0a5acc26f0a9a342614adb821a",
+    "data": "66eba75991e8d17fc3fe51df0d261dacd49638ad1d4ea71d1f53d50b637b4631",
+    "documents": "4556541dd6ab0b9b54b05f399ef8b0977c1d1bd10e461f5c3ae579c89b8584ae",
+    "lean": "809b5c3e00f368bc3e5c113ae1586b72adcfdaac47ab1896f35d9af61f3cfd2c",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 1814,
+   "milliseconds": 2049,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:28:28Z",
+   "signed_at": "2026-09-29T21:23:10Z",
    "status": "passed",
    "subtests": 181,
    "tests": 25
   },
   "test_conversation.py": {
-   "digest": "c36b1bd2feef0b4ecce82b8e822fbd4895ebaff9d94818269c09876735067dfb",
+   "digest": "90fe96970d39d894573990b9f8f961b573a098cc09fef53be5191fdf85669325",
    "failures": 0,
    "groups": {
-    "code": "95599048653d7fd590e9a59dbce525f1aed49daae97072d96deb2087a8cc266a",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "f76bb06a41ab378c4538a26a35b4ce696fd682d06d0fc65b7a453e605d2ddcb2",
-    "lean": "9d0eaa96aa8183d4d8991eb6778df7d3493cba1cac067aa09cbf4627aba8493c",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "eca52317efe7281ade3375621305b8b3122a36b7c4489eca75c0c481f2718c25",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "bc414bbff25f660620ed0148dcfdf403e66584cbc5fcc746622496892fcb2fa9",
+    "lean": "d00dbdbdf0ff28fdf2e68d0c7cd9496533dbe1ded655acc2753a7e9d81fbba7c",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 15459,
+   "milliseconds": 19995,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:28:43Z",
+   "signed_at": "2026-10-01T03:38:49Z",
    "status": "passed",
    "subtests": 36,
    "tests": 37
   },
   "test_coordinate_order.py": {
-   "digest": "bf6a91a7f7d519f2b860a34ba33f62b510c49f72261dc67d093cc28448269f20",
+   "digest": "182bcbc98d8583b2a798ef818e45fb0e1d53885d721d82f6081a28f37c626770",
    "failures": 0,
    "groups": {
-    "code": "14dbea1215ecc9a5b0b68820e4b5cfd66ea44dec3958a5edb5bde369b2960fbf",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "bd7bc6623b7d53488d7b518f797336f4be0d7d99367ff7f540063855378bad1f",
-    "lean": "57dffd45f514ec527866dde30d533bce0c08bda4d220fa2e948959ecaa125e4c",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "9ee9f48de17a094019713c11eb2edb004bf7933b4deff4f4630dbc7c6b245515",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "bc414bbff25f660620ed0148dcfdf403e66584cbc5fcc746622496892fcb2fa9",
+    "lean": "01fa43be8caf7b8c03891522f1b28b5b973b01afb4c8aa06546dc033635b2ac0",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 13570,
+   "milliseconds": 17637,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:28:42Z",
+   "signed_at": "2026-10-01T03:38:54Z",
    "status": "passed",
    "subtests": 151,
    "tests": 38
   },
   "test_corpus.py": {
-   "digest": "cc8a8dc12660fc34d543cd7de825d2b90b33c48c52af14bb6e56ad9c3d4052b2",
+   "digest": "76ad126055fdad007f41f44476e2290e15949485d42ebfc8e9f28c2215aee6b1",
    "failures": 0,
    "groups": {
-    "code": "b4a9d0262233c753baae3bd32ca2a0ce2b79657745243636bb80a93672b09058",
-    "data": "90f598b22025301fa550e0e7c9b4d4fe2129a837e81f02c85ea4a9e6bbe12cb5",
-    "documents": "5eb6b43787bc3cbae069026685ac15d36981f16c3511ce8f930730213d1cbf1f",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "919784dba2b2cb31cb2a28263ccd0bfcde93ab0752e9bc32252ebf0824c72cfa",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "c98df668620aa766893840801d5c1a567aa7a1ed901568561f2a89bdea5d41a7",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 147965,
+   "milliseconds": 148206,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:48:19Z",
+   "signed_at": "2026-10-01T05:33:19Z",
    "status": "passed",
    "subtests": 10,
    "tests": 67
   },
   "test_cumulativity.py": {
-   "digest": "992ee4c7afb7763baea8b19503c8e3dd7f059149d1d9b760993e71e45cb57b06",
+   "digest": "0e6e853a8e26f31f08643ee4f9dec2d3570375bd10f7404933b2456b7267998f",
    "failures": 0,
    "groups": {
-    "code": "68c17ab58eb2d4c180239384b68e8f38c7547961d7ff4363f05e5ed7a65ed12d",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "b4aef6f8c7222021bf4e50ebed24dc57846994ec10c66828f2de06f7b5133bc3",
-    "lean": "da275cbef6866dd74a79246fe1448b1e48c871629c31a0d57b489a2a3d27d945",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "b05b419c3b9013cff991f6f5ababe9756f5a17f72f0f60cdda6363135a78fc04",
+    "data": "6c86d32973c737d93700943721807860cc9114c9eeefe521cd785ac70de7397a",
+    "documents": "89ed48678b35bd6fb59353f106b787612960d794c1a2a137950f893f958ccdd7",
+    "lean": "5ef2ff25f5c4b8b408f92f7c4a31338cc7bca040b07672cdff9e856946f0f4d6",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 4071,
+   "milliseconds": 4916,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:45:54Z",
+   "signed_at": "2026-10-01T04:16:59Z",
    "status": "passed",
    "subtests": 0,
    "tests": 23
   },
   "test_data_objects.py": {
-   "digest": "b9f5d1b4d19fa83546803bb6095cce8983414e63fe5288c08dbe9e49652546f1",
+   "digest": "4ad074d3a682ccff4841bc53dcbf2543037610e4c5ece5ab2d7906732ace0d43",
    "failures": 0,
    "groups": {
     "code": "684b4003245d50330838f6b2541cc9a25276748f38f667f466f2d571edcd190f",
-    "data": "a17266175b1a70e9110c8d664c4af08a075387645ead2a8bb7d798c1bad61b4a",
-    "documents": "571ffc394657b935d4e31bbd9c1e8269f343e171cb509c2f614ae8211e623418",
+    "data": "51da1d7bfbaa0d572274e9d88cc336d061da7fbc2049a6e9ec2f1c719cf9a150",
+    "documents": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "lean": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 2983,
+   "milliseconds": 4145,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:28:45Z",
+   "signed_at": "2026-09-29T21:23:31Z",
    "status": "passed",
    "subtests": 5506,
    "tests": 81
   },
-  "test_deep_dive.py": {
-   "digest": "9d2362869f014f10f8930cd1347cfa3b164e612a96794aec8ce15acc281b4dd6",
+  "test_decoder_confidence.py": {
+   "digest": "b858ee3a10737c34f2bde0c9d2d02deb5c00674d10ba09cfc6183de09527418d",
    "failures": 0,
    "groups": {
-    "code": "cdeff43edfa8b746d4ad579aef3e6065faf34478cc96bb9f12a915e59e9e73f6",
-    "data": "269ba9b0d617f63eebf69089301a8d0c82a5c2b58e3231206e51a6366ae25ffe",
-    "documents": "7e1fb3cd1a04ab208833da6cb590314684b8f8d99eeda7b6abd1bdb114e3332e",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "ccb34b6bf98810fab0d0bbab4411c5303aadb96af588b5ae567e325c2deb7b48",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "989faf54b94bad1286174f160baf7891161b15d550683cec3ae129582825e74c",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 3006,
+   "milliseconds": 2691,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:28:46Z",
+   "signed_at": "2026-10-01T05:31:06Z",
+   "status": "passed",
+   "subtests": 7,
+   "tests": 15
+  },
+  "test_deep_dive.py": {
+   "digest": "76f497d405d76f31dc0a374201d7094b6c04fe7523a45e5985df1762f9e2d765",
+   "failures": 0,
+   "groups": {
+    "code": "bcb231baa37f0ca4a67fe317421d2cd950bbc6b38ac286f8b69497f89da2495a",
+    "data": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "documents": "d89af7bc4aa970b06cc91ca02b223623ef1a5d311682fb841bc31d270c80947b",
+    "lean": "6c2cb0db2022a738ae22d0fcea5b13c7b1c58a5d41dec0acab8e0000f5845e43",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
+   },
+   "milliseconds": 3577,
+   "mode": "full",
+   "python": "python3.11.14",
+   "signed_at": "2026-09-29T21:23:34Z",
    "status": "passed",
    "subtests": 0,
    "tests": 23
   },
   "test_deep_hole_classifier.py": {
-   "digest": "de855b2e86b9b34fa49f808544972062fc926ba9e459b8a4b47b927b88f0cca0",
+   "digest": "ce24fd23591a74ad0dd3904c7b24c32f8c41332dde3372c5f1418f465a1ca6da",
    "failures": 0,
    "groups": {
-    "code": "4d241e81430a79546242f9f92fd9510222f1d60efad20aca64236479a21dd3ef",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "b4aef6f8c7222021bf4e50ebed24dc57846994ec10c66828f2de06f7b5133bc3",
-    "lean": "da275cbef6866dd74a79246fe1448b1e48c871629c31a0d57b489a2a3d27d945",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "bbd3a01c879f7b2bbf59ad317bd55c85704771a79c48a085bc5abcc00f3fa5e5",
+    "data": "5801144ec6c3f0b1180c1c67b12103ac80e030fb8092fd35e670925bb5f13cc2",
+    "documents": "89ed48678b35bd6fb59353f106b787612960d794c1a2a137950f893f958ccdd7",
+    "lean": "5ef2ff25f5c4b8b408f92f7c4a31338cc7bca040b07672cdff9e856946f0f4d6",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 4847,
+   "milliseconds": 5877,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:45:55Z",
+   "signed_at": "2026-10-01T04:17:03Z",
    "status": "passed",
    "subtests": 0,
    "tests": 25
   },
   "test_deep_hole_escalation.py": {
-   "digest": "b8167098e246961f34f002e4e05b1ded3765059cd2e78856ef2d920f3ace74b0",
+   "digest": "468479bc10dcde125297c9a94925e97b0aac1df7425657e9d130ad7d12e387c2",
    "failures": 0,
    "groups": {
-    "code": "3e32cfe0546575d822a925d9cb60e46fb2ab43d05f1b597f49d3745f3a13e6e7",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "b4aef6f8c7222021bf4e50ebed24dc57846994ec10c66828f2de06f7b5133bc3",
-    "lean": "da275cbef6866dd74a79246fe1448b1e48c871629c31a0d57b489a2a3d27d945",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "879bf83ef73e015d5f697615b0a9cd797433d7ec6d3cd6b2e719b7ff57624ba9",
+    "data": "6c86d32973c737d93700943721807860cc9114c9eeefe521cd785ac70de7397a",
+    "documents": "89ed48678b35bd6fb59353f106b787612960d794c1a2a137950f893f958ccdd7",
+    "lean": "5ef2ff25f5c4b8b408f92f7c4a31338cc7bca040b07672cdff9e856946f0f4d6",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 261797,
+   "milliseconds": 225162,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:50:12Z",
+   "signed_at": "2026-10-01T04:20:45Z",
    "status": "passed",
    "subtests": 0,
    "tests": 32
   },
   "test_deep_hole_failures.py": {
-   "digest": "429d554a281e9fd8d692766ec0200e79d6b5f2da586ad76429436864d2382bfa",
+   "digest": "b7e141033e1bce9d4d8edcb337365eb62e9f64ee1faaf85ee99964a73ffb8cce",
    "failures": 0,
    "groups": {
-    "code": "3d90f59d8c30c7ddb000311bc5f3f315bc69b322e9e0faea107d2d5f27bc0274",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "b4aef6f8c7222021bf4e50ebed24dc57846994ec10c66828f2de06f7b5133bc3",
-    "lean": "da275cbef6866dd74a79246fe1448b1e48c871629c31a0d57b489a2a3d27d945",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "e4ea460110568110d36f613dae495f8f25be13992ea5ac5282aca0ddcda53c57",
+    "data": "25171b4deb02729fb874c5c3465c06825fadcc890a8723961680069a217c1766",
+    "documents": "89ed48678b35bd6fb59353f106b787612960d794c1a2a137950f893f958ccdd7",
+    "lean": "5ef2ff25f5c4b8b408f92f7c4a31338cc7bca040b07672cdff9e856946f0f4d6",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 1134,
+   "milliseconds": 1398,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:45:56Z",
+   "signed_at": "2026-10-01T04:17:05Z",
    "status": "passed",
    "subtests": 0,
    "tests": 29
   },
   "test_deep_holes.py": {
-   "digest": "bcabf5ce039902960f680fb4ce1bee8b12d1865263cb04ac575c243f49e3dbe3",
+   "digest": "0653f0ac4d9e2cb12b555e37648788835c7e51f1b98fdbb5b54f31e730f46af3",
    "failures": 0,
    "groups": {
     "code": "f853ba1eda282e13c717c66af8c3c1dff5bb12d987ecbd629cf8077d858eabf9",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "282bc35ea3ce84998029407d98e7becc1deb91f652f6720bb2ddfee38a9bb681",
+    "data": "51da1d7bfbaa0d572274e9d88cc336d061da7fbc2049a6e9ec2f1c719cf9a150",
+    "documents": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "lean": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 85436,
+   "milliseconds": 91900,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:30:12Z",
+   "signed_at": "2026-09-29T21:25:10Z",
    "status": "passed",
    "subtests": 38,
    "tests": 25
   },
   "test_denotation.py": {
-   "digest": "6ebd97eb12ad3ffffa4075593f97e562d63c6fe41279ae0a4cd199895833972f",
+   "digest": "2f5789c420ffacb0a7fc31fa0530aaf4bb3351614400dfca91f7c2b25f67f3e7",
    "failures": 0,
    "groups": {
-    "code": "c50a81cb7953dfdf5174792fc692cbc7571fb06124fb212d66e0a33f757f562e",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "46775c475fecf9aaa2ff1497c059f5ac2dde34bff0d0476f8dd976b3f792c4c5",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 128381,
+   "milliseconds": 159517,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:30:55Z",
+   "signed_at": "2026-10-01T03:41:42Z",
    "status": "passed",
    "subtests": 419,
    "tests": 26
   },
   "test_derived.py": {
-   "digest": "960fd89134fe95b0efdb0abc2209373ba1413decff560a0ef5273489e1b74b11",
+   "digest": "772efeefdacabf7e0cc7e9e13abb06d2becb0971833598dfb3d1acab9feadd58",
    "failures": 0,
    "groups": {
-    "code": "f9ff43c186808d4e734dd08ac7f8f2714c094b883f2591d932f024acd6b32fff",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "da9fec125b4ffd8bb4dfa0fcce8ee479ee6784d9042b31329d62b593198ce69f",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "aad52a99dbee530a6211d597e605064cd31eed9cd2242abde23cac0062b5fbee",
+    "data": "9f685be94a23630261db9bf3d2c9f895eb368a557a644f97fac2cc64428216ed",
+    "documents": "9288e9c1e83070e42ca6643b9e517edd973b0ab05cc92ee3547eb4f8e61398e2",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 31547,
+   "milliseconds": 38919,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:46:27Z",
+   "signed_at": "2026-10-01T04:43:40Z",
    "status": "passed",
    "subtests": 0,
    "tests": 39
   },
   "test_directive.py": {
-   "digest": "a0bf9e5cb810f8b2c1d66a53a620290c76e90b125dd3a5677df4b5c89ef202bd",
+   "digest": "8c2eb8518b59fb8f409d1a0ced4bf5df037b978d3e010d1d43d46947c5d9e8bf",
    "failures": 0,
    "groups": {
     "code": "ecbb96f97f72880322648fcc2f7f0f5e46b3502a502ee069520c3f83013cf91d",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "282bc35ea3ce84998029407d98e7becc1deb91f652f6720bb2ddfee38a9bb681",
+    "data": "51da1d7bfbaa0d572274e9d88cc336d061da7fbc2049a6e9ec2f1c719cf9a150",
+    "documents": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "lean": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 1348,
+   "milliseconds": 1629,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:29:09Z",
+   "signed_at": "2026-09-29T21:24:21Z",
    "status": "passed",
    "subtests": 23,
    "tests": 31
   },
   "test_drift.py": {
-   "digest": "85e9ecf636644df0102b87ee739b33824ba5e81b8c9e007d2198a5f2a1dbbfc8",
+   "digest": "7e0774269e97a57637f84c3bd4fa6ac3fc3c6973d566f4e596be9013752b2cea",
    "failures": 0,
    "groups": {
-    "code": "70da94c2a51c9da1a139e02acae5c3db4f6eb7ff3cc04cb5dcc6d96fd9a844b9",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "6eaf21fa1e159601e9de121c61794c5ad945288bcedf43230d15490a97bd5f38",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "88303a39de75852b5e096bde59f067b22f3b961b6b6422f19aacda54d661ff6c",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 13991,
+   "milliseconds": 17984,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:29:23Z",
+   "signed_at": "2026-10-01T03:39:23Z",
    "status": "passed",
    "subtests": 0,
    "tests": 26
   },
   "test_economics.py": {
-   "digest": "a1a55c4d8cde4c8a9cf082c562734fdd871dad40fd77aeec970bebbede33067b",
+   "digest": "1d3165fe2e7ea6e94fc7fa24af699cad927eb99248548816d517df3919b86658",
    "failures": 0,
    "groups": {
-    "code": "a2921eb0f148f12f3213e6565db46dd3fe66b9de619e415f5ef2c2cab642466b",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "9ad1a263490164e4f12001541dd02457ef3544ba6de4e4351b8b422a15efaa8a",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "0fea379491763a97f9297a4194550bb306a302e3d03dd8a3fa65606039d0ee58",
+    "data": "39064ab483b6cfd8e38e5e250dc19ee11c08e11fc6c3c5ee2dbd02ca1dff00e2",
+    "documents": "cd72eeb5fc7aa6cc8f8e2c3450949bbc99c813fe9c3425aa5b4949b4c90b9954",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 29218,
+   "milliseconds": 35115,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:46:25Z",
+   "signed_at": "2026-10-01T05:31:42Z",
    "status": "passed",
    "subtests": 0,
    "tests": 28
   },
   "test_element_completion.py": {
-   "digest": "5361d88f11651f1241e65bf038bd07af3310df9ef627ec3cd96fcf15bea5196c",
+   "digest": "52248eeae91bf67d2510dd83951b7d5bf06d1662256ac7532521cb06868df8e1",
    "failures": 0,
    "groups": {
-    "code": "03716a81154401872aa723fb0398259735043db920b89bcfdd77d44573204c79",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "2eeeb415042e93b7d52072ee6966f9c545f8bb24e242d6d7300cc5df60d0f4ba",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "6e86bd3c6fb4c26e2072f193e37e52226b29d52c505d5788f5c7f94ebcd95e5a",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 1406,
+   "milliseconds": 2137,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:29:20Z",
+   "signed_at": "2026-10-01T03:39:45Z",
    "status": "passed",
    "subtests": 9,
    "tests": 24
   },
   "test_element_coverage.py": {
-   "digest": "72dbdfee79f281ff7c4af45c997ea4cb04c6b20eb4b7c59df32f1c002e449111",
+   "digest": "222357e0c755d0bb1c2d42362d973e1e130298b7d396b1df143727af1f93db30",
    "failures": 0,
    "groups": {
-    "code": "b588a7b0c8f67630742ff22849a26c35b7901ba14ffff939373afa39dd9de090",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "ecd089e9eaedab95500967e23a6d54aaabbd79f551a61e6412eb2f7ef472f482",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 1977,
+   "milliseconds": 2171,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:29:22Z",
+   "signed_at": "2026-10-01T03:39:47Z",
    "status": "passed",
    "subtests": 722,
    "tests": 40
   },
   "test_engineering.py": {
-   "digest": "9bd91a1158d4329bf2452bee9c9bd9f0513c9ca40b4e540648518f03b67c656f",
+   "digest": "bc1854e25ca69e80b055dfddb1e444567c6f10b658be9390aa1c9391712e5d01",
    "failures": 0,
    "groups": {
-    "code": "2ed94096882eb2bbbb0586ade834f712012aa6b1301424c4101c6527b5a2f39c",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "fb96b37391b01b2930ba16541ccf8e17aa9664f7ce84ab2d85ac3db0fe4482b4",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "32a71787a39d0d342423deb5f5bea6df635c25fbd82495d3688dde744fbc4324",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 9355,
+   "milliseconds": 12340,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:46:30Z",
+   "signed_at": "2026-10-01T03:39:59Z",
    "status": "passed",
    "subtests": 0,
    "tests": 25
   },
   "test_escalation.py": {
-   "digest": "fd47c8df0ed546e7461e34bedc44690571277587d55741c16fdadcd08b2cc034",
+   "digest": "da888137418963ce3e16620ed9eb55c25e96dae0a96cc8ca04d1f74e26b806a3",
    "failures": 0,
    "groups": {
-    "code": "7784039da50723889311a51f772a63f3939f2043a60c8f4932f0385384825d8b",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "4f3e8f423aa1632646b836524fd6e85ea9cfba8aef8f532c1c07cb4d151f068e",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 32505,
+   "milliseconds": 40683,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:29:56Z",
+   "signed_at": "2026-10-01T03:40:39Z",
    "status": "passed",
    "subtests": 32,
    "tests": 34
   },
   "test_evaluation.py": {
-   "digest": "826bfae676bf81008a1f4ce53258757a2bb9df4d980a84a3971586d13dd722cd",
+   "digest": "69a520b38cdf6e6a2e53e5399c38adc3d6db344ee8f59fcabf71c9eaf8cd5c2d",
    "failures": 0,
    "groups": {
-    "code": "5e9f21ac51ee350882354d64e0fdfd35ff0efa532c869fbe6d0ab42ff50e599d",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "aa53ffdc0e1bc007c4aab5d603dde3aed5223201e0773574ab47cca4d03f7ec0",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "4398995c15052d934ee6f23025e778af03e0dc23f4ccbfab2c6ff9a27d206e0d",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 12051,
+   "milliseconds": 16541,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:46:34Z",
+   "signed_at": "2026-10-01T03:40:16Z",
    "status": "passed",
    "subtests": 0,
    "tests": 20
   },
   "test_exact_real.py": {
-   "digest": "0018cd2fbaccb040597b5828aba279e83707b56e636601d1d333db1ab5d5b1ca",
+   "digest": "6e9ccfd8778dcfb29670ed29fa6f17a85dc9d2c84313afa238aa4129c111e56a",
    "failures": 0,
    "groups": {
-    "code": "4c95a49a985b73b2cd535647b39a11a2e80086c12745e4d185a3a53da2e7911c",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "12731756f6c48f43abea7a276fd099d116158daa57c13556276d88093f9e6589",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "d191cb6c5f67120c7495f2e033ca8bac3815fdbc57ae6ff0833822d0bace3195",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 4916,
+   "milliseconds": 6267,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:29:46Z",
+   "signed_at": "2026-10-01T03:40:23Z",
    "status": "passed",
    "subtests": 0,
    "tests": 90
   },
   "test_exactness.py": {
-   "digest": "019b7786b747502bf7112541d6e6534b09edca40a288a3d3f678d7b8d8078679",
+   "digest": "a62e73853735a4a2f66fd2aa967315ddd5847e592f5599bfe8b26036f35b8b0f",
    "failures": 0,
    "groups": {
-    "code": "70c9c05554787e0245db44576a5a44ba72b5c62f91706cbe94e65d9313f09bb3",
-    "data": "269ba9b0d617f63eebf69089301a8d0c82a5c2b58e3231206e51a6366ae25ffe",
-    "documents": "5977761630cdb3d1a0f5e54f2816acd05e897e8e4d792c6eb5b96ca370f4f496",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "6ad5f31cd73603560f9ef5cfd9d7d42a3ae9b43d9d0001dfb2c7dfa7d1845afe",
+    "data": "174489825036a425447fa9ca593b7e55bc68d4acf54a94792acdb81f099afcdb",
+    "documents": "52f8041a42d28ef928105e25a0bb7b9a0b4a56e7010a6ac002512d758e7b7ba1",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 64939,
+   "milliseconds": 71107,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:47:30Z",
+   "signed_at": "2026-10-01T05:32:29Z",
    "status": "passed",
    "subtests": 0,
    "tests": 27
   },
   "test_field_surface.py": {
-   "digest": "7be069302087ba3026f40f689e98a66ff9c51fbfe4e777e58b46cff6b2b8a80a",
+   "digest": "838418bfbcf21574defb453f59af7bd955dae64dddc727d97c8dcad8e1738359",
    "failures": 0,
    "groups": {
-    "code": "6149e931ccedfef3904920ae88a72be7c3446bf82e119343595636ba9078fb85",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "bd7bc6623b7d53488d7b518f797336f4be0d7d99367ff7f540063855378bad1f",
-    "lean": "1a495ba99f5eec61255e0935ca76360eb13a61c3bbc359614db6b4aeca238992",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "27fffcf078d6b32e4542f57e1410c766028b698c759ed74ca6d7bc38de2eccf8",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "bc414bbff25f660620ed0148dcfdf403e66584cbc5fcc746622496892fcb2fa9",
+    "lean": "f0624ea1f10e6e37f834bb3dede83accac149d88ba4dfd49d4c52ba4bbb64214",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 24635,
+   "milliseconds": 32201,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:30:11Z",
+   "signed_at": "2026-10-01T03:41:11Z",
    "status": "passed",
    "subtests": 0,
    "tests": 36
   },
   "test_figures.py": {
-   "digest": "486fae583fd838fbb25aa8eb30a4a7353267c9371c97a0ce27b74404b2a6d45c",
+   "digest": "4d3e67ecd702d84efa834ee6477e0392d2c42e93c6d2866c656fb9051d93e02b",
    "failures": 0,
    "groups": {
-    "code": "b4ab60f67e9fdd18e63c07dd8d72ab3e4df552205cc4e47dd0e1ac5d948ed696",
-    "data": "90f598b22025301fa550e0e7c9b4d4fe2129a837e81f02c85ea4a9e6bbe12cb5",
-    "documents": "a090d9b9cf36885327d328ca6bb1408beba21352a68c25f2383fdd0e008c564c",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "fde5e0a78f4cdd96810121270fe66d0bfbadb9f9c6aa27daf0abb9875e191fd6",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "c81d1656bc7683e7e8c3334ab3e3cb3938022b5c511cf7c8a9d07de7341f6b7e",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 30979,
+   "milliseconds": 41210,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:46:58Z",
+   "signed_at": "2026-10-01T05:31:59Z",
    "status": "passed",
-   "subtests": 2864,
+   "subtests": 2819,
    "tests": 30
   },
   "test_fusion.py": {
-   "digest": "0af7df3eb2a961fddf483555380a212beac7ea9dfb68a12fd576e84e59593702",
+   "digest": "53c487a17364f1b6a8ebd00a8865130e27033a29ae3d638654cf20ee12167622",
    "failures": 0,
    "groups": {
-    "code": "051dc2a2c011ab2eef46277acd090da3ec5b6d10f2d076e733c62f17a30e95d9",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "3a1492dad5b7a54854adb8d66e633e8048aae79f6d75eeffc1730cf7188095a6",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 3106,
+   "milliseconds": 4466,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:30:14Z",
+   "signed_at": "2026-10-01T03:41:19Z",
    "status": "passed",
    "subtests": 0,
    "tests": 23
   },
   "test_fwht_decode.py": {
-   "digest": "97208481b2f230ecb16bb0facb3434048aca5d8c81d4f937b45fe52d0fb7c2eb",
+   "digest": "4ad6b74fb572564949417f5c8b938aebd4bc5bc7434a18a64b37617989054aac",
    "failures": 0,
    "groups": {
     "code": "6ab096059d8b1af882a7a43a92107a0132b4e8ca6550bd20ec53c5537cd7be0e",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "282bc35ea3ce84998029407d98e7becc1deb91f652f6720bb2ddfee38a9bb681",
+    "data": "51da1d7bfbaa0d572274e9d88cc336d061da7fbc2049a6e9ec2f1c719cf9a150",
+    "documents": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "lean": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 9993,
+   "milliseconds": 10989,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:30:22Z",
+   "signed_at": "2026-09-29T21:25:56Z",
    "status": "passed",
    "subtests": 1043,
    "tests": 20
   },
   "test_generative.py": {
-   "digest": "bd2095c198599a20ef1858b0af37480a849c6547ff6db7389958c5c35577bb4e",
+   "digest": "01ee4d6b505bb7f67f00c01be2562438bdb6c1986c4a945ad370637c7ff88cdf",
    "failures": 0,
    "groups": {
-    "code": "d333cf483b1e7bc263bab0cce1838e86674320bce9f6c209d3dfe3aafa018c21",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "cfabd9a5724bb8e6fab23506d988401a018cd87224ca0364fcac4bea7a1dc0ab",
-    "lean": "d7361a9ac31dfe891c10edc17d1fe55d2143d1dbc10ed2521dab86509c5cfddf",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "0fc1b3b3c48edc7802a4b311f7c239160515885e2c39bdc84365484daab7678e",
+    "data": "9fd6637f3d56c8df7f511d89f3a9e340aad838fda2725dfc1b1ff85c085b7818",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 34946,
+   "milliseconds": 42905,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:30:47Z",
+   "signed_at": "2026-10-01T03:41:58Z",
    "status": "passed",
    "subtests": 0,
    "tests": 16
   },
   "test_harmonics.py": {
-   "digest": "3375570a80cece7bfb8eff3751e26fbd701e2a1aeccd7537924cdb8d73326d3d",
+   "digest": "7415e4d07c27f46812663b32713c037ec07e9c6af0a9445d208f22bad9bf950f",
    "failures": 0,
    "groups": {
-    "code": "56580a0acd40547403697beb4f863905db9f0a28b2754f11ab1aed33891e0615",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "4263b14a6b978c40e5d972cfeff07d467f2935bd139026f78ab99b64e92d79d0",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 80196,
+   "milliseconds": 94954,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:31:35Z",
+   "signed_at": "2026-10-01T03:42:54Z",
    "status": "passed",
    "subtests": 0,
    "tests": 99
   },
-  "test_information_loss.py": {
-   "digest": "1dff72b466135cafed7d554110bec1df0b295b29de5e28d5f1e4029739263055",
+  "test_held_precision.py": {
+   "digest": "21294a3c11a7f5b542d9f1a7d4fc6a329ad525e5b61a3b362d5cf75564776884",
    "failures": 0,
    "groups": {
-    "code": "7679ef7b929ce51896de6af9a256d0852198017bcc76b8f81005bff35b54d9ab",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "69a950c66511f0205505824fa1f06708e6568616ec64c909cc72c5c330d48366",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "efcead37467ecef2dde65db59ed136480f3b915cc132a89db744baef98024e93",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "80698cd7e957c893d9315ee9f3919bb33933aa7e82dedc8de0bd75f7bafa0b1e",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 12926,
+   "milliseconds": 11137,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:30:35Z",
+   "signed_at": "2026-10-01T05:31:53Z",
+   "status": "passed",
+   "subtests": 0,
+   "tests": 7
+  },
+  "test_information_loss.py": {
+   "digest": "3b08bce667666598abbf12d0ee93c89482d1a0ae8d07db3e9341e26d6072993f",
+   "failures": 0,
+   "groups": {
+    "code": "55282402ad062fa68ce7e9a5afcf5605279c54f86ca495890798d7c9c692342d",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
+   },
+   "milliseconds": 16901,
+   "mode": "full",
+   "python": "python3.11.14",
+   "signed_at": "2026-10-01T03:41:59Z",
    "status": "passed",
    "subtests": 0,
    "tests": 60
   },
   "test_inherited_graph.py": {
-   "digest": "a671748b7708933c3eee5e9f576eba2629118811ecacc5e5d72401d150b1229e",
+   "digest": "ebbeea6e0a202afa6de744b745f54b07a9e530dfa800a4e9ff9cb6ea6c0d21ec",
    "failures": 0,
    "groups": {
-    "code": "0cd1a4eebcd9e246823175cb930461f1a804714b380564a2346640bdf25d3a55",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "29324a8af40dcb2cad4dc9d5d8bcfc51efa962dec2b6e215d9a4c259d22ea429",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 4638,
+   "milliseconds": 6311,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:30:31Z",
+   "signed_at": "2026-10-01T03:41:54Z",
    "status": "passed",
    "subtests": 11,
    "tests": 7
   },
-  "test_language.py": {
-   "digest": "55f662f33341420fe45535736e9e3067183ff296bb1caf210189c3a93c70f472",
+  "test_integer_decision.py": {
+   "digest": "7ef6e682592a6ecfdd7d0cd671841f2733a8d76b3060688d6a861c1c384a5b2c",
    "failures": 0,
    "groups": {
-    "code": "258767b3662734c6c8821dbe2c7513bdcf4419c9ae5ed5be64e365a6c2b6dcd1",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "bd0509ccd035d4dafecd4f234b9270170031bc6eeaa228e84a6f98efba56e522",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "80698cd7e957c893d9315ee9f3919bb33933aa7e82dedc8de0bd75f7bafa0b1e",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 3021,
+   "milliseconds": 90995,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:30:35Z",
+   "signed_at": "2026-10-01T05:33:22Z",
+   "status": "passed",
+   "subtests": 436,
+   "tests": 13
+  },
+  "test_language.py": {
+   "digest": "14a4be4f5d70213bbb766ccfe2e5aa54d4dbccae8f71ad716c9522840ebc4fb4",
+   "failures": 0,
+   "groups": {
+    "code": "6f21409139b4de51238b81f962bf0b48575ed6745e6c176353994d25393c129e",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
+   },
+   "milliseconds": 5515,
+   "mode": "full",
+   "python": "python3.11.14",
+   "signed_at": "2026-10-01T03:42:01Z",
    "status": "passed",
    "subtests": 0,
    "tests": 122
   },
   "test_lattice_high.py": {
-   "digest": "9daab1e1158d58a55758fb45e596b5e210f48f420d2b71242cf077cf5dfd972b",
+   "digest": "5e4a3e32d1f8c439262cdcc4e9996802f5a62b6823ba71ddfe92fc8d58dbb39c",
    "failures": 0,
    "groups": {
-    "code": "db455deb585c986d9f8cbcd1f8eff8accdcb31d32c8e0aa369e4fff598ffc7ae",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "818ebed5ed23fed17d3fd4753312570db6c5b0abb4b04888a25c4621db880d93",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "06a977a2956ad24ae3b3e5dbee5241f9d021c9fd7c20196ab4b00ed9ac4f01bb",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 23573,
+   "milliseconds": 30628,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:30:58Z",
+   "signed_at": "2026-10-01T03:42:27Z",
    "status": "passed",
    "subtests": 0,
    "tests": 30
   },
-  "test_lean_address.py": {
-   "digest": "e00d29c868e17e4dc36202ad738d8b9b6658df72a002cf2f44d833a1f1f0d7eb",
+  "test_law_absorption.py": {
+   "digest": "dd5a4cc331ff5dd4db99f7787928383c9d4e78d5fbdbc406771bbace51fcbc12",
    "failures": 0,
    "groups": {
-    "code": "e10bfdad79de5de6dd9927c2920953961479589596f085e7e361f640f24d6a8d",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "beef785a2ed17be5f75af128d2954bd427d2e6bb3483d10427f78379430c5141",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "8aa71c5e464be4e3f9afdd828d9c88df490c1ca7d724a9710a28e56ec5c50908",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 140226,
+   "milliseconds": 28513,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:48:51Z",
+   "signed_at": "2026-10-01T03:42:27Z",
+   "status": "passed",
+   "subtests": 0,
+   "tests": 17
+  },
+  "test_law_register.py": {
+   "digest": "b6cb7f041731439ee516fc401ba208317a312df1cb1701e9b543db67dfc1d5fe",
+   "failures": 0,
+   "groups": {
+    "code": "7072f93925b178f6c5541fc8f526144eaf1dfce0415dc164a1131087bcee8f24",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "0878ca6df979d9e54b5d46ff5e9cb8754d4430a7014ae186e3aa0bf2071ced8b",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
+   },
+   "milliseconds": 18844,
+   "mode": "full",
+   "python": "python3.11.14",
+   "signed_at": "2026-10-01T05:32:12Z",
+   "status": "passed",
+   "subtests": 0,
+   "tests": 27
+  },
+  "test_law_triage.py": {
+   "digest": "38b76bac206df215890c65b30b0c4f5e46bfdac72a84a1e5550b5d82f4c14863",
+   "failures": 0,
+   "groups": {
+    "code": "819f8a19a969ccd703003cf2f5544715cde2acbceef6be762af4bf48b66c1cba",
+    "data": "5bb3f37e55a1e7ffb80b19294b46dc282e81418f88256563b85f048050fabed1",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
+   },
+   "milliseconds": 1551,
+   "mode": "full",
+   "python": "python3.11.14",
+   "signed_at": "2026-10-01T03:42:03Z",
+   "status": "passed",
+   "subtests": 0,
+   "tests": 11
+  },
+  "test_lean_address.py": {
+   "digest": "bd922659d991754763e108d7d246139cd3a8f063fcd900766962e6f8cac7ca25",
+   "failures": 0,
+   "groups": {
+    "code": "5ff5e5e1331a83bdb8ebd887acbd99db9733ac5e0ba27ab8f8b0b03113d1df35",
+    "data": "13966c2000eb3da6bd3854b832a7203b0a60ed02ecabe68134a3311101a36e8a",
+    "documents": "4123e856acaf867b8181c950286be3f3ff842415708129aba180f9128cc1620e",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
+   },
+   "milliseconds": 132555,
+   "mode": "full",
+   "python": "python3.11.14",
+   "signed_at": "2026-10-01T04:20:31Z",
    "status": "passed",
    "subtests": 7,
    "tests": 67
   },
   "test_lexicon_subspaces.py": {
-   "digest": "1dfb67cc447f91797d99be84904f42b9c1ccc3c2a7e7a320a64fd882a4b640ef",
+   "digest": "78a775fe537df469cc8f25c8e883f0d22172070a4bdefbd2461e5eb0372f35dd",
    "failures": 0,
    "groups": {
     "code": "9d5f609c6c5c06cd0b8b973e2a9c7d601e4e4509a9f16f3e08b7f28d55821bc1",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "571ffc394657b935d4e31bbd9c1e8269f343e171cb509c2f614ae8211e623418",
+    "data": "51da1d7bfbaa0d572274e9d88cc336d061da7fbc2049a6e9ec2f1c719cf9a150",
+    "documents": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "lean": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 883,
+   "milliseconds": 1416,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:30:43Z",
+   "signed_at": "2026-09-29T21:26:31Z",
    "status": "passed",
    "subtests": 0,
    "tests": 8
   },
   "test_llvq_table.py": {
-   "digest": "79682b267c32c1962b13f5cca86a3af77320d842d5b2df40c405d74e8900db6e",
+   "digest": "8219e9bd1a6a7cc6ac96678e38d98f263dc91182327e2668090617c1c792c92f",
    "failures": 0,
    "groups": {
-    "code": "f4a10f4060c8fb89f46f29ec917d0c212bce6f21e4eedcb99fbe71f9d7857c1a",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "45ffa9827dd65707d7a97ea946ff4736a6c8689dabfe3a49ddc5d3264ddefa18",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "5c6419cb193d0b53598b0cc89138cbdbfd6be024fcafe097891988711ab96aff",
+    "data": "13966c2000eb3da6bd3854b832a7203b0a60ed02ecabe68134a3311101a36e8a",
+    "documents": "9c45363ed6bc1078b381bcd8abca0d2aa2c4af5cbe8e25fa38b0d98a3303e008",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 38855,
+   "milliseconds": 48422,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:47:13Z",
+   "signed_at": "2026-10-01T03:42:58Z",
    "status": "passed",
    "subtests": 686,
    "tests": 23
   },
-  "test_measure_words.py": {
-   "digest": "479958ed4a1ce0ab99f7c14906003e6383b5693b1c823c60f99bd5330f04923b",
+  "test_measurand_register.py": {
+   "digest": "b1f3244297a177aae694160d077a0fc6617935012c3589f324eb2c02fb18977c",
    "failures": 0,
    "groups": {
-    "code": "004f48c5d9f49b38b6c7a3fbeb28a849e8d4919c4c44ad0ad49767d0491b7b4c",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "05f98b002a91f9040168c3f42aca96cc44efe325334442b5384c557eac034dc6",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "8a8508d6d3f8471abcb1aa84a9c674ffd99b3a51b945b7203203cb8252c5e09f",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "8d44813ed0a2169934fc4471bff0ea2946f16dcf7d558897e193f5067f744a91",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 372461,
+   "milliseconds": 75413,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:37:00Z",
+   "signed_at": "2026-10-01T05:33:15Z",
+   "status": "passed",
+   "subtests": 0,
+   "tests": 16
+  },
+  "test_measurands.py": {
+   "digest": "d1d31500b13bbdc05c8f05aea052f0ca8b3475479d87bdb4eb618c94b9fcda82",
+   "failures": 0,
+   "groups": {
+    "code": "d0e64b3a914416050a189861ec518e613cf7f24f9716766b9a2987f23132f6e7",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "8d44813ed0a2169934fc4471bff0ea2946f16dcf7d558897e193f5067f744a91",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
+   },
+   "milliseconds": 65477,
+   "mode": "full",
+   "python": "python3.11.14",
+   "signed_at": "2026-10-01T05:33:18Z",
+   "status": "passed",
+   "subtests": 0,
+   "tests": 13
+  },
+  "test_measure_words.py": {
+   "digest": "c54a58ed7f1253e5c6df0329aa93b29a3d1f65631f67d12bfdee19492f25f4a0",
+   "failures": 0,
+   "groups": {
+    "code": "f25305dfffb4cbb79a44f5c29bc40bf5992ccd5290480afe41368018e1b184b3",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
+   },
+   "milliseconds": 489762,
+   "mode": "full",
+   "python": "python3.11.14",
+   "signed_at": "2026-10-01T03:50:37Z",
    "status": "passed",
    "subtests": 2338,
    "tests": 52
   },
   "test_molecules.py": {
-   "digest": "67bfdad6c4ed62409225fa2e1c096242ad06d6f3c52d43f85e54e227bf1722e1",
+   "digest": "8bba2aeeffce97c0819404c5e04c2efc8d7911edfb7f864b64e3e097f7570e92",
    "failures": 0,
    "groups": {
-    "code": "b3c6faeee9e506b8d4b28ec3edfc5619410cc42ba472e152cb4b54f0100d558c",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "8af0639b736bd2640e40bc43b8ef795222e02748886268c1a8bd116a219c4ecf",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 2742,
+   "milliseconds": 3829,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:30:54Z",
+   "signed_at": "2026-10-01T03:42:46Z",
    "status": "passed",
    "subtests": 435,
    "tests": 44
   },
   "test_multires_tasks.py": {
-   "digest": "981d5218a2be7eb692263cc5ba526d5db21ade77f0c883690be271bb658378f4",
+   "digest": "0b73026abbd19458d9445765146943b4f0044bae72a9836c199cf804e307d5af",
    "failures": 0,
    "groups": {
-    "code": "4359f377d08cd48e02b5e98d67db31d1be9dfcbb2e71fbb3fba54b16c555e3e2",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "f8b875326ccc85d04d1fc68d794eef218ced074158b3a751cb5a514b7a34fc43",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 15273,
+   "milliseconds": 17787,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:31:10Z",
+   "signed_at": "2026-10-01T03:43:04Z",
    "status": "passed",
    "subtests": 0,
    "tests": 40
   },
   "test_name_coordinate.py": {
-   "digest": "96719711b732416f722d29ee39a012e0083d09901bcb4a2e129735eff2b62500",
+   "digest": "4fbb654da24920d343cbd8dcf0d1d77b18f62352d1cc132eb2271bf13ac8e681",
    "failures": 0,
    "groups": {
-    "code": "6dd79191a392898832d602b3ade1569fbb1ea3da07e65d346e3ad671c46774d5",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "fc6152f4abd714e8e377e9be5169774a8e25f9558617068f53796029d2aab975",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "08ccc90ed5ded93b7b42c5cc5287d4480aec9d9adb60689f77c3f46f159c3efd",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 2236,
+   "milliseconds": 2945,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:30:57Z",
+   "signed_at": "2026-10-01T03:42:57Z",
    "status": "passed",
    "subtests": 32,
    "tests": 30
   },
-  "test_noise_lab.py": {
-   "digest": "41f5da5f6ed54abeeebd5be8ff1a3053c72597615c2b276167c6291007d92d05",
+  "test_native_parity.py": {
+   "digest": "a4905d45b27627d9e18b0f476d602326fd60a58b53ffda57d9c6c7223623797f",
    "failures": 0,
    "groups": {
-    "code": "4718728d63cc38b97e42def6b9f987c6229e5e9cc62bb00c96ae4bc835582f11",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "5ea8082dac520eeecd0fdd2e956a3311234a1a4932f61ca5ce5ac98f550967a4",
-    "lean": "8496d05ea2ca01b138340d9e4269686a98362524883eeb6b830a9611562e9477",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "122d1fec60778e59e8bb96432b9ff9cec2f78b6539f14b169484795c4783e6ce",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "0878ca6df979d9e54b5d46ff5e9cb8754d4430a7014ae186e3aa0bf2071ced8b",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 3273,
+   "milliseconds": 4698,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:31:01Z",
+   "signed_at": "2026-10-01T05:32:34Z",
+   "status": "passed",
+   "subtests": 51,
+   "tests": 16
+  },
+  "test_native_words.py": {
+   "digest": "7c9052207027cd9e764aad3e385a1c900087235ba2e7fc8ae2be61b1c7f13e33",
+   "failures": 0,
+   "groups": {
+    "code": "620c0e7c4378f21dda416aa00cede88318dd5d37b02d99c82d91f1d0c7f38279",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "0878ca6df979d9e54b5d46ff5e9cb8754d4430a7014ae186e3aa0bf2071ced8b",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
+   },
+   "milliseconds": 7240,
+   "mode": "full",
+   "python": "python3.11.14",
+   "signed_at": "2026-10-01T05:32:41Z",
+   "status": "passed",
+   "subtests": 20,
+   "tests": 16
+  },
+  "test_noise_lab.py": {
+   "digest": "971494f98901ea1fc50a2c752b937d90baad0e5fd635eaefe112da430cd24195",
+   "failures": 0,
+   "groups": {
+    "code": "d907b196907090178e3b24255c798c56490fc89897b3ff79dedb99796eca8f56",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
+   },
+   "milliseconds": 4350,
+   "mode": "full",
+   "python": "python3.11.14",
+   "signed_at": "2026-10-01T03:43:07Z",
    "status": "passed",
    "subtests": 0,
    "tests": 50
   },
   "test_norm_family.py": {
-   "digest": "e51ca3c506e5d4760c4d6ad9515037220b3b57448857f38675dfc140eb805989",
+   "digest": "771103fb2e866441961a15deb095db61e9a980d137be5c6d8eb40eaf251805c6",
    "failures": 0,
    "groups": {
-    "code": "671346150f6357f517ac054c566db94c56e1d0538f3516577fa4c6b7093bdb5d",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "8a3af76734e854521519ece69843013febd44233d9a66f166ae9cd0e0d51be63",
-    "lean": "4b6828eb3b6412e742cff7267b2811f0919375a30e73673434f6a038fc312133",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "59157cc381c3ae60e9eb95b3140583feb20df5b82053b19959ed4dd5f4bd0853",
+    "data": "dfc3115802c32bc449216d94500e4c8d1c9fd2018c12ba6f6b6555e1d587d50f",
+    "documents": "7226377365b770e3c7133a42bb35e7025855902b8a96f98db065840bd9a11467",
+    "lean": "3c3c877ded456b0a56b27cbf67550ac57adc993f279358a4b2e19424a711b162",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 5650,
+   "milliseconds": 5923,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:31:04Z",
+   "signed_at": "2026-09-30T07:19:29Z",
    "status": "passed",
    "subtests": 0,
    "tests": 40
   },
   "test_now_receipt.py": {
-   "digest": "2e1634543dc8968c24583707558d6e36c4976fdc323f9388cdd7b949e0642a11",
+   "digest": "4f539f55818494e0543e7615de071e5947e7a9b8d50e47b33b77b2c0df2bde8f",
    "failures": 0,
    "groups": {
-    "code": "7b91d9f432803ac54c2607cba4557dc086bc8e20e3534a4e33fac0d8b20439e5",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "d4f8d8330bcbbff075d49b75df39318c86c6e5a6af90f55161a137c1ee2e63f3",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "51d629a81e3e153f573b04ddd7a600b4a3457a4c39415659bc8f209787caa727",
+    "data": "9f685be94a23630261db9bf3d2c9f895eb368a557a644f97fac2cc64428216ed",
+    "documents": "e9b10a3c8fbda9e6d6d8983b3421ac7dfffef9dfd1767c9a3adca82001bde5e7",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 13155,
+   "milliseconds": 16655,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:47:02Z",
+   "signed_at": "2026-10-01T04:44:51Z",
    "status": "passed",
    "subtests": 0,
    "tests": 24
   },
   "test_number_theory_evidence.py": {
-   "digest": "6451ba7ba52b403f4eb7208a8c198c4c1243199b688874736779841c0fb75273",
+   "digest": "9499fd205e4ac894fc481344d1179a931c770708e385a25db65d56c167dd5b00",
    "failures": 0,
    "groups": {
-    "code": "a1e6c09c4185b8ee7164841dfd0b0cd2ecf50ccc457241b581a44b0cbfa6c074",
-    "data": "269ba9b0d617f63eebf69089301a8d0c82a5c2b58e3231206e51a6366ae25ffe",
-    "documents": "42f32b49819b9f4ed2ad65bd9ec7b1331ff86d10d1ba121a8db231587bf34e64",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "c7ce206dd9c6f526b4fd79a8eab4db01d393c8c2a10b25e16ae3197f08d2c0f0",
+    "data": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "documents": "20ad2ff61cc32c8721a086f6110d7bc17a1d60a88cc314e4506936260e1996b1",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 4947,
+   "milliseconds": 6926,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:31:09Z",
+   "signed_at": "2026-10-01T04:44:58Z",
    "status": "passed",
    "subtests": 0,
    "tests": 17
   },
   "test_operation_escalation.py": {
-   "digest": "69ca2fdabbb62249776537cbe6cb8312c1e84ef212f509381c67d742de1083a6",
+   "digest": "a83602bee84f624e227d6ff42037f103918eba1eceb4119da7d78c809b48d2c5",
    "failures": 0,
    "groups": {
-    "code": "976817118cc615cf9914fffdfd23fa6886521ea85434ac4845f6c9a0d4cdfd55",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "d406e0a43d32ed41dc8534f77c76301e73a19b2567d166eeb9843b507b915b3b",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "bd421f1ab63151d58ceea660adf28d048abee62c27fe9f130fd01b3c2ee67239",
+    "data": "3d509d57fbdd946776cb23cd70dd45cb8a4312e83077f58d7b3e199bfe6655a2",
+    "documents": "71522348b2bc9b431b2ad63477351cfb2e99756636b5629f9d3bbfd6ac8f71bb",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 857,
+   "milliseconds": 1205,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:46:59Z",
+   "signed_at": "2026-10-01T03:43:08Z",
    "status": "passed",
    "subtests": 0,
    "tests": 12
   },
   "test_pcgs.py": {
-   "digest": "122d9644ff2ebf73535286e13dc1bebbaa96c4f868e7158ace3e9fddf30cc88a",
+   "digest": "0e3f9453c6c9ff0b32a72489a1f57526e198861d56ee7f5e6a54df5f117d561c",
    "failures": 0,
    "groups": {
     "code": "c19f1cd7b3d6e9b4fe0cb1825424ae1c87f6b5c3028992e612d0f65b7505559e",
-    "data": "269ba9b0d617f63eebf69089301a8d0c82a5c2b58e3231206e51a6366ae25ffe",
-    "documents": "740b20105bf2fdd0a1640cc4ec62275acefdaf1d91d5f2536cb3798aa4aa5a7e",
-    "lean": "48288f47de854f1f2770648721986607c021f8946dc58ef47165d936b7d00ab2",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "data": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "documents": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lean": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 1800,
+   "milliseconds": 2346,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:31:11Z",
+   "signed_at": "2026-09-29T21:27:09Z",
    "status": "passed",
    "subtests": 1048,
    "tests": 45
   },
   "test_phase1_migration.py": {
-   "digest": "beaad452869a59671171d524857e49b1618606c0845253bde49e852374de684e",
+   "digest": "317e62588bb819cfac55c45dc762158228514baa2412440e5cef7d0a0b0095cf",
    "failures": 0,
    "groups": {
-    "code": "1f458db4ce520489112c3448095a2952ca2238eac229bd1ddc3f74111835eadf",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "ab992c1f69c938165221b509ab9135ddc352e53700f47cc1fd9b243c9f6b520f",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 8826,
+   "milliseconds": 10958,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:31:19Z",
+   "signed_at": "2026-10-01T03:43:19Z",
    "status": "passed",
    "subtests": 0,
    "tests": 44
   },
   "test_phase2_algebra.py": {
-   "digest": "1693f9a9bfde83568202b4efc9f58b269c38aa8a0170f2786ce2659d87a8f9b1",
+   "digest": "88f5e5e6f9d948ad2bf88e1068cbe26a76921aeab25ddd2697b4a6cadba3f26b",
    "failures": 0,
    "groups": {
-    "code": "b1481a9535586a1a2c761597a2492193a0fe886c0c405adfd3f32bd4dd03f810",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "9540d7da0088f0eaadaff47337e5ab6b121e7a74c1f505f4a2be6a75d473a02d",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 30871,
+   "milliseconds": 38427,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:31:42Z",
+   "signed_at": "2026-10-01T03:43:52Z",
    "status": "passed",
    "subtests": 0,
    "tests": 41
   },
   "test_physics_constants.py": {
-   "digest": "3ab792a7a82856f4636392992f5dfb963f20df2e70c6bf29581abb8d86d5fb32",
+   "digest": "b06755623dea8ea625f9d688a320a2b3a2061cfc43e5c6ff82713ecb72d3959f",
    "failures": 0,
    "groups": {
-    "code": "9500354ae6bff95678d9235b12ff7b924de14da5fbffbd53da01af4dfe4ef889",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "07fa66168109fd65a146ed6d68c6ce3a026c401464997bdb9acbd7258d86e6b9",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 1814,
+   "milliseconds": 2471,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:31:16Z",
+   "signed_at": "2026-10-01T03:43:22Z",
    "status": "passed",
    "subtests": 36,
    "tests": 12
   },
   "test_physics_expansion.py": {
-   "digest": "d39387c36ced01eb6c4f31c06d28d059557e9fd41a3b6523c058cc653288ea26",
+   "digest": "c0ebeb4a3d113ade0c66556f3e0779168f98d85e525602c735eff9663836074a",
    "failures": 0,
    "groups": {
     "code": "25ded213b7fef30bb8bb7c58c9eb709547ecb4e786ba6ba4aa76291d0f32d344",
-    "data": "a17266175b1a70e9110c8d664c4af08a075387645ead2a8bb7d798c1bad61b4a",
-    "documents": "571ffc394657b935d4e31bbd9c1e8269f343e171cb509c2f614ae8211e623418",
+    "data": "9d997486a60948da220ca4a4f3371b270632ec8f6376d3cc177452554b5ee4d9",
+    "documents": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "lean": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 841,
+   "milliseconds": 925,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:31:17Z",
+   "signed_at": "2026-09-29T21:27:12Z",
    "status": "passed",
    "subtests": 141,
    "tests": 9
   },
   "test_physics_expansion_v2.py": {
-   "digest": "8fb875dfd2b343496b0a247afd946389f7726608313863353e835d221a307927",
+   "digest": "b20a6e676e249419291a3e2e794e645b324e88abf157e6b29588dfcf1e59957f",
    "failures": 0,
    "groups": {
     "code": "deb33c0aa6f97a8b3eed1719146db784e439689e33b1b03d72c52402926affce",
-    "data": "a17266175b1a70e9110c8d664c4af08a075387645ead2a8bb7d798c1bad61b4a",
-    "documents": "571ffc394657b935d4e31bbd9c1e8269f343e171cb509c2f614ae8211e623418",
+    "data": "9d997486a60948da220ca4a4f3371b270632ec8f6376d3cc177452554b5ee4d9",
+    "documents": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "lean": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 791,
+   "milliseconds": 918,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:31:18Z",
+   "signed_at": "2026-09-29T21:27:13Z",
    "status": "passed",
    "subtests": 53,
    "tests": 4
   },
   "test_pipeline.py": {
-   "digest": "a6cd66fc941c724d98f3744a9d861056cc9af4be121bfb4c91622ef1fca8e032",
+   "digest": "7ae33ce17cb518b7d2e1480d966991e6f931d2da51c75e78b11113dbe973bc8d",
    "failures": 0,
    "groups": {
-    "code": "7f6de96d3f31515965d8c59c964b3fce513e224ffb5cc47d085888c113312ecb",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "8a2b040729923c4c321bbdd43c1f43f8df58c5ca460baeb874478d5c350fa4da",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "b3debdb90398133eb1fd2ef1cbf11fcc1ace089235b61bbb631a3cf07b61a255",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "6929d56e69fe89fb8900d9c64e0ace6b1a9ab91ef6d968ff37320b2acff0fd80",
+    "lean": "35f598a3dd68c59982bffb8f6ecebb39e8e26122b5bda94eeea97482b24199b7",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 4068,
+   "milliseconds": 4842,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:47:03Z",
+   "signed_at": "2026-10-01T04:19:54Z",
    "status": "passed",
    "subtests": 0,
    "tests": 31
   },
   "test_plan_store.py": {
-   "digest": "c7c165b7bd46ebda5340890cc73c550b411facb42c5297ceafdce29a422320aa",
+   "digest": "87fdb1d5b1fa02a42e56c3c5cbd38dc749aafe68cd48b2dc86a94b8ec94542e1",
    "failures": 0,
    "groups": {
-    "code": "af54b2e2a918245e59317459ac0a896c86fd58630a6382f6f94c1445a2ee6f56",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "f76bb06a41ab378c4538a26a35b4ce696fd682d06d0fc65b7a453e605d2ddcb2",
-    "lean": "cbcdc459934605d169febcb06569b3b9b3364c6db4b14978d01bd677f7c9136c",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "0b9db318405e1fd98dee47d46f54c7963ffa88fecb17ac40f8c4a4be59a4284d",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "bc414bbff25f660620ed0148dcfdf403e66584cbc5fcc746622496892fcb2fa9",
+    "lean": "73c30b2260164bfc660f19ea56fa079a682b91a4107747457a8c8ff91ff2593c",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 16531,
+   "milliseconds": 21824,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:31:36Z",
+   "signed_at": "2026-10-01T03:43:44Z",
    "status": "passed",
    "subtests": 54,
    "tests": 18
   },
   "test_probe_oracle.py": {
-   "digest": "f3fe8933bf33ac61d26b1e9efeadae1b308cbeb5b3de152da16a61ca5fbac63a",
+   "digest": "05336cf5e6b456185960a4735ffaea7c90126141b47c14f74630b5d281b58869",
    "failures": 0,
    "groups": {
-    "code": "e990844013f5369cc34d77166e43b2d2c7555cc9d1c2ff99468adc1219f5bbfd",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "bd7bc6623b7d53488d7b518f797336f4be0d7d99367ff7f540063855378bad1f",
-    "lean": "1a495ba99f5eec61255e0935ca76360eb13a61c3bbc359614db6b4aeca238992",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "45e155ade3cc5fc9fc603c0f6b66a07211694a9a3b9a3a26bd9954382a877d9d",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "bc414bbff25f660620ed0148dcfdf403e66584cbc5fcc746622496892fcb2fa9",
+    "lean": "f0624ea1f10e6e37f834bb3dede83accac149d88ba4dfd49d4c52ba4bbb64214",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 9425,
+   "milliseconds": 13378,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:31:31Z",
+   "signed_at": "2026-10-01T03:43:39Z",
    "status": "passed",
    "subtests": 0,
    "tests": 18
   },
   "test_project_directives.py": {
-   "digest": "2d2fd96479a78152be0bf6331639a47f2a2b08aeff8f45aab6b32af830824066",
+   "digest": "7acf5564ac94e5ec57f9e4da7fc43cc8936c4e2f61aac4f094640b0bac3e121b",
    "failures": 0,
    "groups": {
-    "code": "353a86c0867be932dd22a0fbb38df31363cc01b60f89fed4a07671aeba4ff61d",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "b4aef6f8c7222021bf4e50ebed24dc57846994ec10c66828f2de06f7b5133bc3",
-    "lean": "da275cbef6866dd74a79246fe1448b1e48c871629c31a0d57b489a2a3d27d945",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "1af5edf8cc0dfbc96556436c9083c768952f0b3e6825e587170ff744468e71ea",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "89ed48678b35bd6fb59353f106b787612960d794c1a2a137950f893f958ccdd7",
+    "lean": "5ef2ff25f5c4b8b408f92f7c4a31338cc7bca040b07672cdff9e856946f0f4d6",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 2947,
+   "milliseconds": 4297,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:47:05Z",
+   "signed_at": "2026-10-01T04:19:58Z",
    "status": "passed",
    "subtests": 0,
    "tests": 20
   },
-  "test_query_escalation.py": {
-   "digest": "bb7c929514ab5d02122baf369e3dae4f868bce8bb0e3575aaff75b33e3069f12",
+  "test_python_speech.py": {
+   "digest": "f761938aaea687fc17da40bb163493a672c912578441fdfebac7efb52d20884a",
    "failures": 0,
    "groups": {
-    "code": "48f4eeb66b426dd29401fe4a9d06ff48b5cc61f88e2c9260b32d2e19cad156ff",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "e9c8974cf483b541f74c7c3509e8450f8ee43e765d1f69d1125545a36efcb481",
-    "lean": "da275cbef6866dd74a79246fe1448b1e48c871629c31a0d57b489a2a3d27d945",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "bc501fef2cdd19c8bdcaafd0abae6bced67a9891bc38e1c51fcf9f0f7bf235d0",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "dacfd06dde2799f918bb863d9126f488ea6a7fc3aa9c406335b20cd4e553e072",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 2685,
+   "milliseconds": 6072,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:47:06Z",
+   "signed_at": "2026-10-01T05:32:48Z",
+   "status": "passed",
+   "subtests": 137,
+   "tests": 25
+  },
+  "test_query_escalation.py": {
+   "digest": "3de53b64924cf6edb5407c326b55d01adc066f559deef2e290584d13974f0682",
+   "failures": 0,
+   "groups": {
+    "code": "b4452707c811a86db1c8146af1e29fcca3abed0dcadf8daf8105dacef3c3657c",
+    "data": "387a3d59176750047649a43a39e1c84c03c8906a02b6c030ec51beece1ec72b6",
+    "documents": "89ed48678b35bd6fb59353f106b787612960d794c1a2a137950f893f958ccdd7",
+    "lean": "5ef2ff25f5c4b8b408f92f7c4a31338cc7bca040b07672cdff9e856946f0f4d6",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
+   },
+   "milliseconds": 3668,
+   "mode": "full",
+   "python": "python3.11.14",
+   "signed_at": "2026-10-01T04:19:58Z",
    "status": "passed",
    "subtests": 0,
    "tests": 28
   },
-  "test_reasoning.py": {
-   "digest": "d31ec59f2fcfef32e2fb5216b94480672b6910f78f5768f4f08e51614929db49",
+  "test_rate_posterior.py": {
+   "digest": "b8ad8dcb55a48d42dfc5af27e802bcda47dfbd0f3adf9b69c4582439a1c6d4d1",
    "failures": 0,
    "groups": {
-    "code": "091ba018ed5f5ba33fefad7f1fb7b3885ba423abbe9c36c575bea0f3a5e16d58",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "d7f682262ed0400ac9e661e6812bdda6a08eca246eb4c7b1d1f23771c3cc83bc",
-    "lean": "eac859db3198b44b7253440caea385d8c6f0bb8dc93672ef5050ae1b3382f9f2",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "6ae6d5215d548383aed73a6e95641db2206c1d4b26153de5d442a4caee7c983a",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "5775358c5272d4f7a0159e24890967175f46bed24d423e7b5d60e878da8e1296",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 10133,
+   "milliseconds": 1696,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:31:39Z",
+   "signed_at": "2026-10-01T05:32:50Z",
+   "status": "passed",
+   "subtests": 0,
+   "tests": 21
+  },
+  "test_reasoning.py": {
+   "digest": "7828c1d465b75ecabf8d6d51f9547a5dabfa45347b69b5f9aca20420ca807d65",
+   "failures": 0,
+   "groups": {
+    "code": "5899395c36db4b8fecd1d1024d5aa12578e17c3991e89283e058ce974b3a97c0",
+    "data": "106d96f32dabcbe60e02786540d92716c21fec4a70b05e5999827c7b423c0d93",
+    "documents": "796f5134988ec6c2b535e03d52d35eb191b93a82a8c89dae88f4c55eea0a4604",
+    "lean": "3c3c877ded456b0a56b27cbf67550ac57adc993f279358a4b2e19424a711b162",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
+   },
+   "milliseconds": 12128,
+   "mode": "full",
+   "python": "python3.11.14",
+   "signed_at": "2026-09-30T08:04:33Z",
    "status": "passed",
    "subtests": 0,
    "tests": 94
   },
   "test_reasoning_showcase.py": {
-   "digest": "601e431af74f9069707f8b9f9f57aeb399b8c72890e43efdb62e34900f74de71",
+   "digest": "af1c2f9d6d24fd5cf8dc0fe364093d702be39066492d07ab75c7db071ce30acb",
    "failures": 0,
    "groups": {
-    "code": "a9ce979885c118c452ee206317b37a4a370ba2bb6153b4f82445e8830d5bda1e",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "a56584a20e9ed35a6daca93a4ad8ad26ee45a178d322a823eec3f132b7d966db",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "ad951fdff7d4f4c79957030f891752aff84865f4afdf25a47932471a2a28bfd8",
+    "lean": "1a7703cc3f418345cad39e69c33acddf9adba4ed8cfc91099212c838d1ecb8f7",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 14712,
+   "milliseconds": 17761,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:31:46Z",
+   "signed_at": "2026-10-01T04:20:16Z",
    "status": "passed",
    "subtests": 150,
    "tests": 14
   },
   "test_recipe.py": {
-   "digest": "0ae99813b105fce2302565dc2cd66a0d3c49b9adebf9b3442949a7992dc7aa02",
+   "digest": "42aaa29e495228f87146b94a6af8766e145dbd4afbcef1ec999908d1c567e233",
    "failures": 0,
    "groups": {
-    "code": "d0becd624be4702ba9c618e0da15e9f05e39804b9c6bf7888120dffd86ec4085",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "7077d840379da29b8235a9650699731f7d08015e9ca350661a139df8e3e6cbe4",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "7f39f83e812d12ca76d02281136bc4699d401541afe1915408fe63b4e596814c",
+    "data": "39064ab483b6cfd8e38e5e250dc19ee11c08e11fc6c3c5ee2dbd02ca1dff00e2",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 202746,
+   "milliseconds": 223107,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:34:57Z",
+   "signed_at": "2026-10-01T03:47:18Z",
    "status": "passed",
    "subtests": 0,
    "tests": 87
   },
   "test_retrieval.py": {
-   "digest": "092c05f6befeffc13773be5e47489238fa1b489979a725f8e6b7d98a88610e31",
+   "digest": "a7f2d88a816948f83567e8de450a4f3c4c68ca44f0a1099d916d40d4b06eb65e",
    "failures": 0,
    "groups": {
-    "code": "c052ffa082d1e5c0231a8e7768eb36c14e82b1dc028079ac736aee8c3cdfa351",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "3282ac4bb7e0271d31d1b6f295f0c653b795552c452485fd1dcad61e3bcdf6a1",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "7ab0f9933c658ffe5b5087f584fb065bcde028fb30c3b5c6b0993bc189c84724",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "c81d1656bc7683e7e8c3334ab3e3cb3938022b5c511cf7c8a9d07de7341f6b7e",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 81485,
+   "milliseconds": 81670,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:48:27Z",
+   "signed_at": "2026-10-01T05:34:12Z",
    "status": "passed",
-   "subtests": 336,
+   "subtests": 494,
    "tests": 42
   },
   "test_retrieved_lean.py": {
-   "digest": "eb89a661abb8303a30c9a2ccdd894062ff835e5c4baa80eaef6cbf9a9cb0b0be",
+   "digest": "da01b5290749eb1cd6491d93474ab145addf1179a660e1dfaa7a643855034fdd",
    "failures": 0,
    "groups": {
-    "code": "71ee759ec8f9fbc28264992c2f954cff0488e04f85579aa5ad7953b51ec1794a",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "3fa0d73e8ae28300f23269d46502cb3414c0dca00f9c2bc307a7dcba6e02fa27",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "74537e87098d219ff3c23dc31bd8a847115ed3d6600e2b3b428039bb61d4e181",
+    "data": "13966c2000eb3da6bd3854b832a7203b0a60ed02ecabe68134a3311101a36e8a",
+    "documents": "ad02616dc57f7cc127898ae2450953e66ea16c46738dc4bdae6516b1399c35b7",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 1358,
+   "milliseconds": 1716,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:47:08Z",
+   "signed_at": "2026-10-01T03:43:40Z",
    "status": "passed",
    "subtests": 149,
    "tests": 8
   },
-  "test_review_sweep.py": {
-   "digest": "5d0503c19f577056207a30133edaa2004ac456350ef2d511e0db171a7dcf05ab",
+  "test_reverse_tct.py": {
+   "digest": "c7280fb31a18be26b78961928038740628bb216f8d811367ca9b356e126ec5e8",
    "failures": 0,
    "groups": {
-    "code": "3d7daae461a1d0ee3e74d67d2b6ecc25771c9c261673bbda64180f8f14ce6e09",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "e714734fa6fdd24a411abf818fabf606ee0aea04c5b38708a2412c1b1a14e18e",
-    "lean": "da275cbef6866dd74a79246fe1448b1e48c871629c31a0d57b489a2a3d27d945",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "488da17f5f3a4775c326501ad39332a6f990a7af00b6b0eaea4967ba77216593",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "80698cd7e957c893d9315ee9f3919bb33933aa7e82dedc8de0bd75f7bafa0b1e",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 1275,
+   "milliseconds": 258407,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:47:09Z",
+   "signed_at": "2026-10-01T05:37:34Z",
+   "status": "passed",
+   "subtests": 134,
+   "tests": 23
+  },
+  "test_reverse_tct_int.py": {
+   "digest": "bf367babe904eef46ea505d94f0bec9999d7b961b96b4e63362cb6159a0b004c",
+   "failures": 0,
+   "groups": {
+    "code": "35992a8b60810dbbdcc26b122e2fe07899c6ec57e7305febfd1417fc2e1a0fb6",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "80698cd7e957c893d9315ee9f3919bb33933aa7e82dedc8de0bd75f7bafa0b1e",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
+   },
+   "milliseconds": 75584,
+   "mode": "full",
+   "python": "python3.11.14",
+   "signed_at": "2026-10-01T05:34:35Z",
+   "status": "passed",
+   "subtests": 52,
+   "tests": 17
+  },
+  "test_reverse_tct_two.py": {
+   "digest": "d0329cb65b0125089e8e9fcca0f9b43aef87f05cc46dcf1e23249dbca17e7ea1",
+   "failures": 0,
+   "groups": {
+    "code": "63a3d742b29c4bbe06816aee6ee0c5f7af7afcb73cc26a0f70e9630af80eaac2",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "80698cd7e957c893d9315ee9f3919bb33933aa7e82dedc8de0bd75f7bafa0b1e",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
+   },
+   "milliseconds": 257960,
+   "mode": "full",
+   "python": "python3.11.14",
+   "signed_at": "2026-10-01T05:37:38Z",
+   "status": "passed",
+   "subtests": 108,
+   "tests": 22
+  },
+  "test_review_sweep.py": {
+   "digest": "a5a2c0fda856a5a3f93ec20e4ae227ca5a7f4c9cc4bd78cf1357822a9f47e16a",
+   "failures": 0,
+   "groups": {
+    "code": "bf4735d8c76c86af9e15dae9492ba225c813859440616dc2a8c76bb05456996f",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "254be9fdce7c4caea9a9cb0f79d071a7a72b3198df87afef66a2140b5f880d82",
+    "lean": "5ef2ff25f5c4b8b408f92f7c4a31338cc7bca040b07672cdff9e856946f0f4d6",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
+   },
+   "milliseconds": 1325,
+   "mode": "full",
+   "python": "python3.11.14",
+   "signed_at": "2026-10-01T04:20:33Z",
    "status": "passed",
    "subtests": 0,
    "tests": 19
   },
   "test_role_binding.py": {
-   "digest": "1814fbe7e80327cba265208ad9f0a4a2c17bb003061d82e41a799d1d5c4d5838",
+   "digest": "98884a42c642a5a061e4b99a70ba9fccc8597ab2a390d546af234881d04b1e35",
    "failures": 0,
    "groups": {
-    "code": "9c71723963726b54a38b3d3511be29023d1ebf2862b4b734b40d0e638755bee0",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "f76bb06a41ab378c4538a26a35b4ce696fd682d06d0fc65b7a453e605d2ddcb2",
-    "lean": "13f5bd7f4ffba0686c64f35b4da4a56a9d25ee87958f33d2a07ecd5b17a3d1c3",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "5c1b60fede35ee8b0cf19b1c08da3eab1b70849ffc22aa9ef24e86c0ac86a026",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "bc414bbff25f660620ed0148dcfdf403e66584cbc5fcc746622496892fcb2fa9",
+    "lean": "5a4bd4cd484fe1448fedfbb996e7f5c6f7803cf94b895bfa32ae7eb7b0b2c902",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 1666,
+   "milliseconds": 2348,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:31:44Z",
+   "signed_at": "2026-10-01T03:43:57Z",
    "status": "passed",
    "subtests": 355,
    "tests": 23
   },
   "test_runtime.py": {
-   "digest": "c47ab8c948fb6b4474e95126f7c2118bd661027bc5f1aee8d11ad4c0e07865c5",
+   "digest": "2119087a1e00f46daea383146f7f1f2e70739febdcb3d591fdac738742a5b74f",
    "failures": 0,
    "groups": {
-    "code": "c2d96d97f996213420f0287937cf258c6635946e7e32bfa0f4bbfa7b743aa26a",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "8a25f20efcb847defc77a151aaee497e5491cc88cfed966fd183053b6c69ea6b",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 75636,
+   "milliseconds": 84466,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:32:59Z",
+   "signed_at": "2026-10-01T03:45:22Z",
    "status": "passed",
    "subtests": 0,
    "tests": 205
   },
   "test_salvage.py": {
-   "digest": "a111442cb990eb0bff7d6b12538924d7043ab0a0a04f18d10eb25716a48b856c",
+   "digest": "4c72cbb2ebb0b3ccfb1b1e6a81befd32f6e9f299e648b9ef525f7fd0103a6de2",
    "failures": 0,
    "groups": {
-    "code": "d15251707e30c782a6f97e0a98d8594b615a384d57686651296ce9c39c5646e5",
-    "data": "269ba9b0d617f63eebf69089301a8d0c82a5c2b58e3231206e51a6366ae25ffe",
-    "documents": "9575b04a2d59b2372251f4d678b4c54c0fa5103e631679807d7a526978b709f0",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "c16d135b19fb0936ea17ab63fe1cd8243ce41fe05fd1d26c47f2325858b000a0",
+    "data": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "documents": "876374a87038851e2b32fe3c6e9b8f0c71915a8f020d5853b89ff15d7c99d920",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 1268,
+   "milliseconds": 1686,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:31:45Z",
+   "signed_at": "2026-10-01T03:44:20Z",
    "status": "passed",
    "subtests": 0,
    "tests": 24
   },
   "test_salvage_second.py": {
-   "digest": "cc0200e06ef4c2215e00b3841155e9518653de3a6689ca48f4b6cf8b9dd773b1",
+   "digest": "4a2c69374c5452aa2f50748ca707e2a05a459438696f9eb1d8ab86fb5acf7a41",
    "failures": 0,
    "groups": {
     "code": "81c0125b01fd0db586ba072c7baf661337b9b448cefcf8b669a485f7f3394b2f",
-    "data": "269ba9b0d617f63eebf69089301a8d0c82a5c2b58e3231206e51a6366ae25ffe",
-    "documents": "e06ddb044db2a0aea001271f3cf56aeedcac7d24a1543b398d5cde544f843a85",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "data": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "documents": "86ca8cc047fe0e6a5a5cfcc624de0bce17adda31243cd810cfa04947c158feef",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 2588,
+   "milliseconds": 3511,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:31:48Z",
+   "signed_at": "2026-10-01T03:44:24Z",
    "status": "passed",
    "subtests": 0,
    "tests": 39
   },
   "test_sandbox_planner.py": {
-   "digest": "8951297ea2f0a323e3fc9a4d70be5ee4e82fe6903ccdd739347afcbbcc6db7a7",
+   "digest": "51eb66c8841f1c76a93bbfe501cb3096f779690aeb978c055383ad3289e24bd2",
    "failures": 0,
    "groups": {
-    "code": "9ab9eaca09ccf9a8a0eb364b65cb2a8286fce0aa13896788d2a14bd258540cb5",
-    "data": "90f598b22025301fa550e0e7c9b4d4fe2129a837e81f02c85ea4a9e6bbe12cb5",
-    "documents": "19e20765143bdc1027417d36173e00e82c9d4c9f668724b41462a8e6d9e68e6e",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "5db18e371b10b3bd1cce8fc4c59cb2a19c1114b2d48390ba0ad4c09cef69b9b9",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "82c15939c30a359533635eb7f91e011ce09e5f3b09bb0613ccaa436359a5399c",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 326164,
+   "milliseconds": 470436,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:52:35Z",
+   "signed_at": "2026-10-01T05:41:13Z",
    "status": "passed",
    "subtests": 0,
    "tests": 32
   },
   "test_scale_conversion.py": {
-   "digest": "986a7d25b2585d8542420a3fcf23af9382a2801da809dfb9c39dfb9063d0f778",
+   "digest": "d40dfce41f86fa9e21079df78cf2d757acfae618f0d5218038f84fcd0240546c",
    "failures": 0,
    "groups": {
-    "code": "f8546972a6b3abfa4a5ba2c3dbadcc08f113b7c69840df856722ec11132bbe44",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "bd7bc6623b7d53488d7b518f797336f4be0d7d99367ff7f540063855378bad1f",
-    "lean": "c3745e2d77cd1357f1b8af185bc41248ab5a269ea9d775882bf5151c3f34b570",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "423da6da9cb9e35c589ff5c2a5212c949e9a31950dbb0b6d3a8cfb26e85a1ee0",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "bc414bbff25f660620ed0148dcfdf403e66584cbc5fcc746622496892fcb2fa9",
+    "lean": "1d8013cf9466683cba93350e81cf3094beef1189b1d56f5ac46ddb574f787025",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 36336,
+   "milliseconds": 48146,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:32:24Z",
+   "signed_at": "2026-10-01T03:45:19Z",
    "status": "passed",
    "subtests": 65,
    "tests": 43
   },
   "test_search_loop.py": {
-   "digest": "66395458de7fb24df5d933f51b75d8738797dca4b2a58fb868e690f31843eb18",
+   "digest": "babfcfc7ff20aeb89e931ca172da1212ba901d954cb6190ba05b0b5e045bc31e",
    "failures": 0,
    "groups": {
-    "code": "45be13624988d909f6e32e8d211ef84e0f455563b9f3f6f460094d8d3b88fcb6",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "996770d6089419185262e8fc9ce777e620285311358bc02eec1ed7c5f4f771a0",
-    "lean": "b6889351d23a58d387e6b1afc8b7458fb9cb893ba198efa7eb70a724f7997d48",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "7d50f5ac09161c97abf087d57e01b22aefafb76258419cb749586db8b69e6deb",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "432b4719d4e1d0436e546b79b7aa77fe4509211ea189459130c674da16a9e937",
+    "lean": "55e03436bc557e11251ebb4ba0ee17e4aae2aa51e5f2a2d2b7bb69ea71782abb",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 1817,
+   "milliseconds": 4198,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:31:50Z",
+   "signed_at": "2026-10-01T03:44:45Z",
    "status": "passed",
    "subtests": 0,
    "tests": 30
   },
   "test_second_reading.py": {
-   "digest": "e9aceb1930c402a37bcf3617454c090c4ea3f85f07e2528e203d1732ef90684b",
+   "digest": "143ad0b3ddf0881451eaa11e92f6013419fe48715ae7d50810055927a0778c62",
    "failures": 0,
    "groups": {
-    "code": "873c06cb865affad2887b960ca10993df821b534bfa48a80a4ec0efc8d0bcb6e",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "6e5723f02db513f853b1a904125dde2cf719af41740bb49bc4a472123e8d56d7",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "337b3289c8e44374485579bf028d87fdbb0afb0a992bc2d26bacda8894d07ed4",
+    "data": "01d0d2d880746163254211bdf09d3bf741b8a612407dc740247a8e0bccc0118e",
+    "documents": "71522348b2bc9b431b2ad63477351cfb2e99756636b5629f9d3bbfd6ac8f71bb",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 849,
+   "milliseconds": 2009,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:47:14Z",
+   "signed_at": "2026-10-01T03:44:48Z",
    "status": "passed",
    "subtests": 0,
    "tests": 20
   },
   "test_semantic_lexicon.py": {
-   "digest": "dc8104951590e3ce569dec4e55f07a1682d25c20c80eb84d3f7f44ab9cc92cb0",
+   "digest": "6d2b36d864ebcad4bb204ffe7ff815aa88d3eb5efe5cc8088462171237bc15c9",
    "failures": 0,
    "groups": {
     "code": "f9500c0cd531b189ab43f03f83def79ec9029abf0831e5bccfe35378ff1ac724",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "571ffc394657b935d4e31bbd9c1e8269f343e171cb509c2f614ae8211e623418",
+    "data": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "documents": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "lean": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 1109,
+   "milliseconds": 1995,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:31:53Z",
+   "signed_at": "2026-09-29T21:28:35Z",
    "status": "passed",
    "subtests": 298,
    "tests": 39
   },
   "test_semantic_lexicon_runtime.py": {
-   "digest": "2c7fb50603830617587e15cc8ad11743564cbfc029850f1a2546ef715aead562",
+   "digest": "26949cf0c112dc21c67fb1d7c05b64a203afef806d293f691b4dcb0b50980812",
    "failures": 0,
    "groups": {
-    "code": "78788dcf9acd6f21db416541ea833ccb16c58095cba19510e00ea5e3b8083dfc",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "f56adebfbf5485bfa8cb2ea679eaa3fd074dbfbdc5e4652ac617c16fce30b134",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 21290,
+   "milliseconds": 26089,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:32:14Z",
+   "signed_at": "2026-10-01T03:45:15Z",
    "status": "passed",
    "subtests": 0,
    "tests": 22
   },
   "test_semantic_plan.py": {
-   "digest": "3938954ca677563283c46102f57c84987d7093efb183e4feb13cee4851bc39ae",
+   "digest": "a9d0ddd5768ca739cc7d07fb78d48b7c47cc9881e763ce3d737faa1c2734d696",
    "failures": 0,
    "groups": {
-    "code": "053eb882fec530455d5e6889531d3fb0bcc50da51eb449bc4b59e70126445664",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "fb96b37391b01b2930ba16541ccf8e17aa9664f7ce84ab2d85ac3db0fe4482b4",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "cc72d5eb5bbbf699afb4fa6add1cd2717065e1727c379441e5fc2250baf22400",
+    "data": "e4e5d3ba30b0b44673c340c674a5c44624be834e29b26b6083767c09192704ed",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "b47922c9907ecc7df35a872832db48881edf8d40ea6e78ba428d04bde5cd5b5a",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 10133,
+   "milliseconds": 15284,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:47:24Z",
+   "signed_at": "2026-10-01T03:45:30Z",
    "status": "passed",
    "subtests": 17,
    "tests": 32
   },
   "test_semantics.py": {
-   "digest": "8381e3b081b2c4fa026b8f264dfd8b85c9d5e08554d7df1b2e87ccd28cbad99f",
+   "digest": "8606e39f62c3c41b2125e85e3950b76288eb6e4f4af81a6959d26934e52fed76",
    "failures": 0,
    "groups": {
-    "code": "380b5ca96dbe7f933db4dbdd7a27b357b4ccf461a08df41c855efe35fa05f17c",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "a6ab943626b64593a8e97f6adca3effb62fa210ec28c412b23be32891922761f",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 11628,
+   "milliseconds": 14986,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:32:36Z",
+   "signed_at": "2026-10-01T03:45:35Z",
    "status": "passed",
    "subtests": 232,
    "tests": 52
   },
   "test_shell_sigma.py": {
-   "digest": "7a0c0ba8aa29d3872cf6effc2aac775eac6951cbee8a200baed30d58fd78402f",
+   "digest": "b890f9668995e595e04f65456131f416f3eca33f6fb6ff9f5d59c2554b3236cc",
    "failures": 0,
    "groups": {
-    "code": "254be5155bddc05c00d943f33972db2ad0b18eedd69d1bc5a222f4e65c2fdef7",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "a252d5185d4a3fc353033e8587d05b99a40b07b0b7b168a6a782df69a678b28f",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "0657b4b037245cb08e2ebc07697b2971b6df5233377116209df7d9bf8cced05c",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 14576,
+   "milliseconds": 17981,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:32:39Z",
+   "signed_at": "2026-10-01T03:45:40Z",
    "status": "passed",
    "subtests": 0,
    "tests": 26
   },
   "test_signoff.py": {
-   "digest": "a98386229a8042c59ec43aab9a186c984caafb0e026b1afd3b09a280019fd919",
+   "digest": "9e39ce61034750d2e5a57fe480373dc28a3b40ac3b11b3e2cda7254e2db4b54f",
    "failures": 0,
    "groups": {
-    "code": "c867a1c76c6d725e13324b9c2f34929d62adbc883a385356b2bcd067b26ad678",
+    "code": "00dd487465a58692425d6881c80c760130f34ff416a08656e9d7a1737cf083b4",
     "data": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "documents": "9d473ea29928bb67b567133c5089a318442a82f2f805c020730481cfea40f6b3",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "documents": "77ecfc39c1fe92c792c063797f927b58a93b42e241a8e952d5c967ae1e2108f6",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 455961,
+   "milliseconds": 843898,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:55:00Z",
+   "signed_at": "2026-10-01T05:47:54Z",
    "status": "passed",
-   "subtests": 139,
-   "tests": 85
+   "subtests": 162,
+   "tests": 84
   },
   "test_stability.py": {
-   "digest": "0d917a133e36cc3cce6d85212391d4762764cc187ad74a020f1746c0b389dd9e",
+   "digest": "b049f1f014588a4af1b733c74e6ecfadf406134c499a8a07463e0ae85c256b04",
    "failures": 0,
    "groups": {
-    "code": "ed849e41ef8190a78cca88859b448c94295792f124789e0fae4edc90025ac362",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "d69549dd6780a22655be6b9ef3f04c32f70763daf90401de8773a5b9752d5acf",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "ebcb8ee7147ebc77f74292a4fdbbf0925ace7344e7cacdd3aebc8ca9ffc02343",
+    "data": "13966c2000eb3da6bd3854b832a7203b0a60ed02ecabe68134a3311101a36e8a",
+    "documents": "7216d0c1274264b9ac25b66bbc1d4a5e53facf073179fd3020029ede1dbd77c0",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 118711,
+   "milliseconds": 136662,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:49:29Z",
+   "signed_at": "2026-10-01T03:47:52Z",
    "status": "passed",
    "subtests": 45,
    "tests": 17
   },
   "test_stack.py": {
-   "digest": "894b22c5cddda885bf4ab7c7ebd5751230d1e86275038a6d70854aee40b9264a",
+   "digest": "49dbc66b530f81fd53a426adb61b8f9c07dfa9fbb7bb7fa1e462ba57600c05a3",
    "failures": 0,
    "groups": {
-    "code": "46e6e133f7425860738967abae2ccadefc5de64774c7107213f60bbc9715f386",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "10588ce4afdf847207e30cf7622b1a52a2dbf6476a99605764b3dd68725251cc",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "5ca1f7179445540d44e6e7026894ec9854518584ad9ac733dd7ea64d78db6685",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "c81d1656bc7683e7e8c3334ab3e3cb3938022b5c511cf7c8a9d07de7341f6b7e",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 215252,
+   "milliseconds": 337693,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:51:54Z",
+   "signed_at": "2026-10-01T05:39:51Z",
    "status": "passed",
    "subtests": 124,
    "tests": 37
   },
   "test_state_migration.py": {
-   "digest": "8293b762a5fab08f0e99c48f766b594220abd75edbd3a9780e1b17d9e16a5f37",
+   "digest": "dac1e06e7c91c6f2a3135645bad87dc0241a118a533b5cdb55d7c657afa94c39",
    "failures": 0,
    "groups": {
-    "code": "d7b9fab87a8e02acb3c00656b55a7c7bf89f89887cb71781ed9826ad96062ad2",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "74eea8ce3e5462141edc94d2aa7d2c2ed08b57316b632aa5396c087733eeef59",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "1507eb7e32479671f2aa77739b507e080c74b033ff3e6bcc63b1869afd94fac7",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 19034,
+   "milliseconds": 18541,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:33:09Z",
+   "signed_at": "2026-10-01T03:47:37Z",
    "status": "passed",
    "subtests": 0,
    "tests": 64
   },
-  "test_substantive.py": {
-   "digest": "8ba2f24653bd05455dac565344c1d9908f32a66229c3b33e7fe9ed1cf049857d",
+  "test_stepwise.py": {
+   "digest": "94856202834a915096547f72d3c6f6c43809ff4ec3790a4b3edfc59eef0686c9",
    "failures": 0,
    "groups": {
-    "code": "eec7c09e7698cb75f29462268bee93e2b9d8595b9bd1a1b2a4df63a71635e298",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "d548db52b4172ea10d1ee14307ca98d1a51d109e4c61ec3b726fbb93c1e93211",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "80698cd7e957c893d9315ee9f3919bb33933aa7e82dedc8de0bd75f7bafa0b1e",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 5367,
+   "milliseconds": 278341,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:33:05Z",
+   "signed_at": "2026-10-01T05:39:13Z",
+   "status": "passed",
+   "subtests": 76,
+   "tests": 23
+  },
+  "test_stepwise_four.py": {
+   "digest": "49c699b4c3dbe27f633f68cb5929ce12da121dbe8c0b0f6af6ddffe371853835",
+   "failures": 0,
+   "groups": {
+    "code": "56026a1c31e4d2ceb98bbf1f6c399f3af7f45eed08e270031b9db318e5047399",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "8d44813ed0a2169934fc4471bff0ea2946f16dcf7d558897e193f5067f744a91",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
+   },
+   "milliseconds": 298491,
+   "mode": "full",
+   "python": "python3.11.14",
+   "signed_at": "2026-10-01T05:40:02Z",
+   "status": "passed",
+   "subtests": 61,
+   "tests": 22
+  },
+  "test_stepwise_three.py": {
+   "digest": "795938b26c54b51fe9562a0f1b379108577622c71ed61b3d0791dfc01c10ebb6",
+   "failures": 0,
+   "groups": {
+    "code": "8f3aabe4dee36f43ed5962cc4c55347d9ac4e285398e216d889467d98886a0a3",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "80698cd7e957c893d9315ee9f3919bb33933aa7e82dedc8de0bd75f7bafa0b1e",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
+   },
+   "milliseconds": 262382,
+   "mode": "full",
+   "python": "python3.11.14",
+   "signed_at": "2026-10-01T05:40:37Z",
+   "status": "passed",
+   "subtests": 71,
+   "tests": 24
+  },
+  "test_stepwise_two.py": {
+   "digest": "8682c7c13791c6dca15c656262feb0ffecea0c0f23c7e1b4245614086d8eff9e",
+   "failures": 0,
+   "groups": {
+    "code": "d967360ab5e2ea6c284f2dc2dd677365d4a1cf07336c73cc8b75c736ed4fcf56",
+    "data": "15ff0e031c49f426247be026db5abc0e4d92707761bc461208d930d4a96045a3",
+    "documents": "80698cd7e957c893d9315ee9f3919bb33933aa7e82dedc8de0bd75f7bafa0b1e",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
+   },
+   "milliseconds": 196112,
+   "mode": "full",
+   "python": "python3.11.14",
+   "signed_at": "2026-10-01T05:40:50Z",
+   "status": "passed",
+   "subtests": 103,
+   "tests": 27
+  },
+  "test_substantive.py": {
+   "digest": "3de72614d982e8ae55baef554d7d77f53e4bafc3ac5a9d10dadd09ed6545d22f",
+   "failures": 0,
+   "groups": {
+    "code": "57b4fd6cb53833131df8c053e540c19b460ce4aac5735f755a3dc71302720b41",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
+   },
+   "milliseconds": 4566,
+   "mode": "full",
+   "python": "python3.11.14",
+   "signed_at": "2026-10-01T03:50:42Z",
    "status": "passed",
    "subtests": 0,
    "tests": 28
   },
   "test_substrate.py": {
-   "digest": "1f1422a05ee2798a75214d5516ba3edc57d859e449b8cfb64390f2f530767dea",
+   "digest": "ae0da67d7e07fd9fe7968a7b85d7f182225e184c0f9a491e0f110212be9887c7",
    "failures": 0,
    "groups": {
     "code": "19bd6f6ef631f6af9655b305e44d3f5f194424a599a0d78af8980b86c29c376d",
     "data": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "documents": "571ffc394657b935d4e31bbd9c1e8269f343e171cb509c2f614ae8211e623418",
+    "documents": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "lean": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 8982,
+   "milliseconds": 8426,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:33:14Z",
+   "signed_at": "2026-09-29T21:31:43Z",
    "status": "passed",
    "subtests": 0,
    "tests": 96
   },
   "test_substrate_cognition.py": {
-   "digest": "39636e0f9612c260fdbbc1c8cef7faa52c3f2761fc39600ef30548078863b25b",
+   "digest": "29986bb1f98f41de569b585cb310619023534e3e6eec911b7115c56371eb00da",
    "failures": 0,
    "groups": {
-    "code": "933a62c63b317ad10d27a5082eae164557532352be643e826491c5b047012468",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "7eabaf94cc11112fe354ab48f4f445ee8bfa7dae4821397361cae707043c7cfe",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "764fcd1eb52ad7991d10d2ddc0b47a9b487c697e1e2f54ad4159e4ba2e080d82",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 96700,
+   "milliseconds": 82275,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:50:04Z",
+   "signed_at": "2026-10-01T03:52:04Z",
    "status": "passed",
    "subtests": 0,
    "tests": 28
   },
   "test_superposition.py": {
-   "digest": "bacf8be1143d3981c73823b500c9171da59e61bd9b1ec6842f35a8ec14e296c8",
+   "digest": "e39571516e03d96092cd6c24d8e76052c8821b200022ce79de343dc8c8a0b738",
    "failures": 0,
    "groups": {
-    "code": "21b91d34989966520b2cf08792b02a44e1f15b923cbca620771c0e79799a2741",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "b7237c5126cb403f42835407085bb9bb42af203e672e2534c0eb17d3e5317059",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "3c7c192a6fc52b145528b2ad67e4140f5a28fb73bcafec875ca7e4893a530b62",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 10021,
+   "milliseconds": 7540,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:33:24Z",
+   "signed_at": "2026-10-01T03:51:24Z",
    "status": "passed",
    "subtests": 0,
    "tests": 61
   },
   "test_supplied_sandbox.py": {
-   "digest": "1dbc969af6d2517a90277db4fa7a58dd95293da5e610ccacc8a08bdb683a66ad",
+   "digest": "f372a4760168a6093a3a17a700f3f8a94baddd411cbddfbbcc9ac3fd8328e214",
    "failures": 0,
    "groups": {
-    "code": "4b5fd4265af4f61c1ada5f2c947be03bc6c8d02aafe4866a5fec8a09126775d5",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "b9ff701fa7f5372a59695c244ee3a1c350fa8ab3229a526d10d252579ad307fd",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "12bb44a13c5f756e46c01dbb45b9a948816878b40e20a76265ca0bdd2d9e0524",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "12490e622e1e8d20c640bc6c905520db3b8053bdde960ed93df1e507c6904f54",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 19976,
+   "milliseconds": 16793,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:49:11Z",
+   "signed_at": "2026-10-01T03:51:41Z",
    "status": "passed",
-   "subtests": 241,
+   "subtests": 289,
    "tests": 16
   },
   "test_term_arithmetic.py": {
-   "digest": "2a7b3026597e2f6f46600249445a21192c95b89d44dc437c2d7fff8b561aeacb",
+   "digest": "76e132091d8610c3279913e80c44a72553c84cf601cd8f47bfb4c250df04333c",
    "failures": 0,
    "groups": {
-    "code": "1904f89d43e96f4d6c6b57555fcbc1478ea7825aea5752c72566f8b9684c4456",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "4f82ff2944c90831d6567d46e0416ed2574151154abaa3a16c2b97a3eab84123",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 5907,
+   "milliseconds": 4220,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:33:51Z",
+   "signed_at": "2026-10-01T03:51:35Z",
    "status": "passed",
    "subtests": 0,
    "tests": 40
   },
   "test_tie_break.py": {
-   "digest": "fa3ba4629d4ec6f3b25177ad35d1d36f916426df3010bd3aca449317330e5fef",
+   "digest": "9b6af061243d659002bf6efe9cf746f1c557f01a769afe865cb8477c07139f18",
    "failures": 0,
    "groups": {
-    "code": "95d1abda375e9eb57f250c6531faf16115ea99e753e1e03b623f849810b4c46f",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "b56b149b77a45202e322f9124d82ab8412eff85b9acf4cecee87289365f65e6a",
-    "lean": "82c053e09da974d90a090b9b99c2622008263795ad895b2889ddebb02acd70a0",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "a3bd062672a14a93669edc353fe83ad6c4a6e6efe071349a14b74737e751c299",
+    "data": "13966c2000eb3da6bd3854b832a7203b0a60ed02ecabe68134a3311101a36e8a",
+    "documents": "9b3cda838f6f3987c5d5fc36ea430149bafd488e9a12d88012ca374f7c21a588",
+    "lean": "7034c6c1e9cae4ef378fd63edb27c2b3ed2ea7ff5856509de6b0078d9cb7654f",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 41651,
+   "milliseconds": 35522,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:49:53Z",
+   "signed_at": "2026-10-01T03:52:09Z",
    "status": "passed",
-   "subtests": 373,
+   "subtests": 377,
    "tests": 17
   },
   "test_transcendental.py": {
-   "digest": "80195394939dce1b533b7fbdf582c2a2d1f5466c15e4afac8290215035cd31f3",
+   "digest": "832ddcfa78cf510575846c46ae9ed73c80663e0353457f63d34e9177e2b445ca",
    "failures": 0,
    "groups": {
     "code": "6e1ddcfa37115e0d5c154b77fe8340f15bf1972bf0d7ddf7bcd51bd6e846b47e",
-    "data": "269ba9b0d617f63eebf69089301a8d0c82a5c2b58e3231206e51a6366ae25ffe",
-    "documents": "25f7d01e1c404d9b324ab90d33cb770480de621f81d5e560fd8b709618db7a1c",
-    "lean": "384cf52610bf591a07b0a9a49b5c7ca9e71b87b85f6c9263169d50b093ff10fe",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "data": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "documents": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lean": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 1165,
+   "milliseconds": 2689,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:34:33Z",
+   "signed_at": "2026-09-29T21:33:09Z",
    "status": "passed",
    "subtests": 0,
    "tests": 83
   },
   "test_units.py": {
-   "digest": "806f7b2e4ca098a2f766ec7a89441d7ca61f7aaffba30bcc3f4312dc70d03242",
+   "digest": "81fbd42bf519213358e6a21d51708f74155081f23ec8916537fe2791d6c4e0a9",
    "failures": 0,
    "groups": {
     "code": "c9a66a38d58e73d7c7c347a35fd4238fb307cf095a133318b9385ea1d01a2e70",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "571ffc394657b935d4e31bbd9c1e8269f343e171cb509c2f614ae8211e623418",
+    "data": "9d997486a60948da220ca4a4f3371b270632ec8f6376d3cc177452554b5ee4d9",
+    "documents": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "lean": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 2741,
+   "milliseconds": 2940,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:34:36Z",
+   "signed_at": "2026-09-29T21:33:10Z",
    "status": "passed",
    "subtests": 33,
    "tests": 24
   },
   "test_vagueness.py": {
-   "digest": "7176d30ff92b76fba4c80bcdb910569896006859f9d951c7298b9447ddedd2eb",
+   "digest": "5c0495bcd227740dd53b9b95c24cc53aa7fa3fd78e7fdc54a781fdc5809b3b01",
    "failures": 0,
    "groups": {
-    "code": "44cc43e0dd3f8e2dcaf0f409f0635e4628e81fda5d838b60e2e1635d7ef56198",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "24014041ae34f35946af163fa171e8a35ca9f49fe161948f86d214ad28a7995e",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 2975,
+   "milliseconds": 2955,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:34:39Z",
+   "signed_at": "2026-10-01T03:51:38Z",
    "status": "passed",
    "subtests": 0,
    "tests": 33
   },
   "test_wiring.py": {
-   "digest": "2d46043d8255387053f14d7df95b69a16aa78121148b717c5d65246352c6de24",
+   "digest": "bff61a72d1fc18f835cd279a8270a973f0520ef61ff2f24a3b50ac620ce7fc6f",
    "failures": 0,
    "groups": {
-    "code": "0320a54566352533c5bc0cf6797421d4936f29db15f9d67fb75cc695aaec99f5",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "612d23601287ddd65297758015287108ece235466039fa98f6d9b89369c663a1",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 10141,
+   "milliseconds": 9339,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:34:47Z",
+   "signed_at": "2026-10-01T03:51:48Z",
    "status": "passed",
    "subtests": 0,
    "tests": 57
   },
   "test_wobble.py": {
-   "digest": "591d9846d5e41c4e8b749c5d4dc366fcf31cc8c6ce0b0944957b6fdb3e2fdf80",
+   "digest": "52bd0b99025d19f981c2183157b6946e6815aba6b2536b6f6db94e62ebc17bc0",
    "failures": 0,
    "groups": {
-    "code": "2217f2e3e477ba4c345464282ed577a819c51c0be78385cfb8ef9bd0765db684",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "000b6d53d775164d85b71c33c48066d5a978806e5b4edf33cf449135526ec177",
-    "lean": "937de6e4ee9ad3b439a34d184abe000adbf4174e6ce7aa40e57d9b533df9e34e",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "ca05c4daf8d4e78016b6601065aca254596c5a7ec23e0b8dd61e0f0522c6152c",
+    "data": "19bca7f72bb0110137d0836e0b4febd0af49ed0687daf40542f20d59946c17fd",
+    "documents": "dd2ce1cbfdbc6a6cd309661ce1de8a7246ea755b8d18fcc7c23f99e65594e8dc",
+    "lean": "1bad2d06e9ca0362e03d4fce6cc82400b2f309f7be43bb49ab0fabeb073533ea",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 10682,
+   "milliseconds": 9463,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:34:50Z",
+   "signed_at": "2026-10-01T03:51:50Z",
    "status": "passed",
    "subtests": 0,
    "tests": 33
   },
   "test_wobble_landscape.py": {
-   "digest": "6ec6e5e3f1a81513fb449510efab76dd8ddd052ee47e80d6df0f9b14172fe44c",
+   "digest": "e21c62a6aefacf2b88a7424b6b01f4cb2b05c26c4c8794479ddf9bcd21e14fc0",
    "failures": 0,
    "groups": {
-    "code": "0d4ec820013f18809eb2c703a1d78fdada6f2a6e706a5e954aca75a8c4115a21",
-    "data": "c299b5f59d292ad202ad5575e19be63fc6bda9d6be617cd6d6fb262cf054deb2",
-    "documents": "cfa7b31f3274cef94a481024403419a111ef2e09526c6b13deb28ce6cdb5182d",
-    "lean": "1a495ba99f5eec61255e0935ca76360eb13a61c3bbc359614db6b4aeca238992",
-    "scaffolding": "e7119d25bafe4db8ce87f7ebe7bd6cf12ffa7cf62c86672c3411fc4d6f405f27"
+    "code": "55f3fd6c446398737c37750ab7755e2484ab385e14b242cacaa5c6d0dff88a1a",
+    "data": "a7fb91c67464184612104afc956f23a30e0817e026556e16d7f8cfa9c7dcb239",
+    "documents": "bc414bbff25f660620ed0148dcfdf403e66584cbc5fcc746622496892fcb2fa9",
+    "lean": "f0624ea1f10e6e37f834bb3dede83accac149d88ba4dfd49d4c52ba4bbb64214",
+    "scaffolding": "0341f739a0c322dc9d678ea133a05c7fec51ce10449c550e1e3140c15176182b"
    },
-   "milliseconds": 2638,
+   "milliseconds": 2299,
    "mode": "full",
    "python": "python3.11.14",
-   "signed_at": "2026-09-25T12:34:50Z",
+   "signed_at": "2026-10-01T03:51:50Z",
    "status": "passed",
    "subtests": 0,
    "tests": 35

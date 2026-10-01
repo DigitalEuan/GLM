@@ -179,9 +179,12 @@ it; nothing below replaces reading that once.
    `studies/*_STUDY.md`; what the system *is* now in [`STATUS.md`](STATUS.md)
    §2; what is open in §3; the round itself as a phase in
    [`MASTER_PLAN.md`](MASTER_PLAN.md); anything proved rather than measured in
-   `RequestProject/GLM/`. Name which faculty moved, or that none did.
+   `overlay/glm_lean/RequestProject/GLM/`, the one copy of the Lean
+   development. Name which faculty moved, or that none did.
 6. **Close** with `corpus --refresh`, then `corpus --check`, then
-   `signoff --release`, in that order, and commit.
+   `signoff --close`, in that order, and commit. `--close` asks the release
+   question but pays only for what moved; a from-scratch `--release` is for
+   a change to the sign-off rule itself.
 
 **What a round is judged on**, again, because it is the only thing that
 matters: did the system *derive*, *address* or *refuse* better than it did?
@@ -449,7 +452,8 @@ in [`archive/PROJECT_DIRECTIVES_RATIONALE_ARCHIVE.md`](archive/PROJECT_DIRECTIVE
 **The rule.** Work against the cheapest check that could fail on what was just
 changed, and let the sign-off ledger decide what to re-run. Three gates, in
 [`ITERATE.md`](ITERATE.md) §2: the document check after prose, the changed-unit
-run after code or Lean, and the full release once, at the close of the round.
+run after code or Lean, and `signoff --close` once, at the close of the round
+-- the release question, answered incrementally.
 Never re-run a unit whose closure has not moved, and never skip one whose
 closure has.
 

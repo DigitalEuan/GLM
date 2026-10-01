@@ -143,7 +143,7 @@ value), was added beside the four declared ones and is reported separately.
   step. `GLM.py --steps TEXT` asks the stepwise planner directly, and
   successive `--steps` are one conversation, so `then …` and `why?` follow on.
   `tools stepwise` takes the measurement.
-* [`RequestProject/GLM/StepwisePlanner.lean`](../RequestProject/GLM/StepwisePlanner.lean)
+* [`RequestProject/GLM/StepwisePlanner.lean`](../overlay/glm_lean/RequestProject/GLM/StepwisePlanner.lean)
   — §5.
 * `tests/test_stepwise.py` — the marks, a three-chain sample of S5 by default
   and the full script census as an exhaustive case.

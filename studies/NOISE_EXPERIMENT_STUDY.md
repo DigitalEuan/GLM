@@ -21,8 +21,8 @@ theorem.*
 Code: [`overlay/glm_universal/reasoning/noise_lab.py`](../overlay/glm_universal/reasoning/noise_lab.py).
 Query: `report noise` (aliases `report wobble`, `report wiggle`,
 `report dither`, `report cascade`).
-Formal development: [`RequestProject/GLM/Cascade.lean`](../RequestProject/GLM/Cascade.lean)
-and [`RequestProject/GLM/Feedback.lean`](../RequestProject/GLM/Feedback.lean).
+Formal development: [`RequestProject/GLM/Cascade.lean`](../overlay/glm_lean/RequestProject/GLM/Cascade.lean)
+and [`RequestProject/GLM/Feedback.lean`](../overlay/glm_lean/RequestProject/GLM/Feedback.lean).
 Tests: `overlay/glm_universal/tests/test_noise_lab.py`.
 
 ---

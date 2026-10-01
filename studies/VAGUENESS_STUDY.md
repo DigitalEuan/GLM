@@ -126,7 +126,7 @@ record of why asking is necessary.
 
 ## 6. The formal side
 
-[`RequestProject/GLM/Vagueness.lean`](../RequestProject/GLM/Vagueness.lean)
+[`RequestProject/GLM/Vagueness.lean`](../overlay/glm_lean/RequestProject/GLM/Vagueness.lean)
 carries the part that is not a measurement:
 
 * the router is **total** — every triple gets a route, so a referral cannot be

@@ -6,7 +6,7 @@
 
 **Verdict.** Most of the cost was work repeated on things that had not moved, and a cache keyed on what it is derived from does not repeat it.
 
-**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->10,061<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
+**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->10,565<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
 
 **Recomputed by.** `glm_universal.corpus.cost.cost_report`
 
@@ -73,8 +73,8 @@ nothing.
 <!-- generated: cost-addresses -->
 | book | units | decodes from nothing | decodes now | reused |
 |---|---|---|---|---|
-| Lean declarations | 4,048 | 7,647 | 0 | 8,096 |
-| corpus sections | 1,227 | 2,414 | 0 | 2,454 |
+| Lean declarations | 4,190 | 7,923 | 0 | 8,380 |
+| corpus sections | 1,343 | 2,642 | 0 | 2,686 |
 
 Reuse is checked, not assumed: each rebuild re-decodes a sample of the answers it reused and reports any that moved (4 sampled in the declaration book, 4 in the document book, none moved).
 <!-- end generated -->
@@ -122,7 +122,7 @@ works for tables and not for a sentence, and the sentences were where the drift
 lived. The block mechanism is now available at the size of a phrase:
 
 ```markdown
-the suite is <!--figure:test-files-->119 test files<!--/figure--> today
+the suite is <!--figure:test-files-->132 test files<!--/figure--> today
 ```
 
 The markers are HTML comments, so a reader sees only the number. `--refresh`
@@ -130,7 +130,7 @@ rewrites the body, `--check` fails when it has drifted, and a marker naming a
 figure nothing emits is a reported defect rather than a silent no-op.
 
 <!-- generated: cost-figures -->
-164 figures are registered and 568 markers carry them, across 30 documents.  A marker whose text is not what its figure now says is what `--refresh` rewrites and what `--check` fails on.
+164 figures are registered and 569 markers carry them, across 30 documents.  A marker whose text is not what its figure now says is what `--refresh` rewrites and what `--check` fails on.
 
 The registry: `binding-ambiguous`, `binding-as-declared`, `binding-carriers`, `binding-control-wrong`, `binding-declared-count`, `binding-largest-fibre`, `binding-nameable`, `binding-product-recoverable`, `binding-product-zero`, `binding-readings`, `binding-reasons`, `binding-recovered`, `binding-refused`, `binding-roles`, `conversation-alone`, `conversation-answered`, `conversation-as-declared`, `conversation-control-rows`, `conversation-control-wrong`, `conversation-declared-count`, `conversation-reasons`, `conversation-refused`, `corpus-archive-documents`, `corpus-documents`, `corpus-sections`, `corpus-state-documents`, `directive-count`, `directives`, `evaluation-case-count`, `evaluation-cases`, `extremum-answered`, `extremum-as-declared`, `extremum-declared-count`, `extremum-reasons`, `extremum-reasons-declared`, `extremum-refused`, `extremum-ties`, `fieldsurface-fields`, `fieldsurface-held`, `fieldsurface-moved`, `fieldsurface-pairs`, `fieldsurface-parsed-after`, `fieldsurface-parsed-before`, `fieldsurface-predicted`, `fieldsurface-rows`, `fieldsurface-surface-after`, `fieldsurface-surface-before`, `fieldsurface-tables`, `lean-declaration-files`, `lean-declarations`, `lean-file-count`, `lean-files`, `normesc-correct`, `normesc-family-correct`, `normesc-family-rungs`, `normesc-family-wrong`, `normesc-first-broken`, `normesc-longest-safe`, `normesc-named-correct`, `normesc-named-rungs`, `normesc-queries`, `normesc-refused`, `normesc-rungs`, `normesc-wrong`, `normfamily-norms`, `normfamily-rung-count`, `opesc-count`, `opesc-program-correct`, `opesc-program-queries`, `opesc-program-wrong`, `oracle-absent`, `oracle-english`, `oracle-parsed`, `oracle-parser-worth`, `oracle-questions`, `oracle-surface`, `ordering-answered`, `ordering-as-declared`, `ordering-declared-count`, `ordering-held`, `ordering-parsed-after`, `ordering-parsed-before`, `ordering-reasons`, `ordering-refused`, `ordering-surface-after`, `ordering-surface-before`, `ordering-surface-parsed`, `planner-reports-per-check`, `plans-ambiguous`, `plans-bare-probe-correct`, `plans-bare-probe-refused`, `plans-bare-probe-wrong`, `plans-frames`, `plans-gained`, `plans-gains-address`, `plans-gains-derive`, `plans-gains-table`, `plans-held-bare-correct`, `plans-held-bare-correct-refusal`, `plans-held-bare-wrong`, `plans-held-correct`, `plans-held-correct-refusal`, `plans-held-total`, `plans-held-wrong`, `plans-probe-correct`, `plans-probe-refused`, `plans-probe-wrong`, `plans-questions`, `plans-stress-bare-correct`, `plans-stress-bare-wrong`, `plans-stress-correct`, `plans-stress-correct-refusal`, `plans-stress-first-correct`, `plans-stress-first-refused`, `plans-stress-refused`, `plans-stress-wrong`, `plans-units`, `planstore-coarse-wrong`, `planstore-declared-count`, `planstore-refusals`, `planstore-refusals-replayed`, `planstore-replayed`, `planstore-trials-first`, `planstore-trials-replayed`, `planstore-worst-case`, `probe-correct`, `probe-derived`, `probe-lexicon-held`, `probe-lexicon-words`, `probe-pass-mark`, `probe-questions`, `probe-refused`, `probe-wrong`, `query-kinds`, `reasoning-modules`, `rebuild-decodes-from-nothing`, `rebuild-decodes-now`, `registers`, `repo-cache-bytes`, `repo-cache-share`, `repo-primary-bytes`, `repo-stored-bytes`, `report-subjects`, `scales-answered`, `scales-as-declared`, `scales-bridged`, `scales-declared`, `scales-numeric`, `scales-pairs`, `scales-quantities`, `scales-refused`, `scales-rows`, `scales-still-refused`, `secondread-adopted`, `secondread-configurations`, `secondread-given-up`, `secondread-matched-removes`, `secondread-program-correct`, `secondread-program-refused`, `secondread-program-wrong`, `secondread-shipped`, `suite`, `test-file-count`, `test-files`.
 <!-- end generated -->
@@ -185,15 +185,15 @@ Measured over the suite, by `glm_universal.corpus.cost.lean_blast_radius`:
 
 | | |
 |---|---|
-| test units in the suite | 119 |
-| Lean files | 144 |
-| units an edit to *any* Lean file used to make stale | 107 |
-| units one Lean file makes stale now, median | 40 |
-| units the worst single Lean file makes stale | 102 |
-| units that read the tree with a glob, so are stale whenever it moves | 40 |
+| test units in the suite | 132 |
+| Lean files | 157 |
+| units an edit to *any* Lean file used to make stale | 118 |
+| units one Lean file makes stale now, median | 46 |
+| units the worst single Lean file makes stale | 113 |
+| units that read the tree with a glob, so are stale whenever it moves | 46 |
 
 The Lean row counts distinct file names the ledger tracks, so it is the
-development's 143 files under `RequestProject/GLM/` plus the build's
+development's 156 files under `RequestProject/GLM/` plus the build's
 `Main.lean`. Phase 68 added one unit (`test_reverse_tct_two.py`) that reaches
 the router, and so the development through it, which is why the floor moved
 from 34 to 35 with the other rows; Phase 69 added another
@@ -203,7 +203,55 @@ moved from 36 to 37; Phase 71 added `test_native_words.py`, which reads it
 too, and the floor moved from 37 to 38; Phase 72 added `test_stepwise.py`,
 which reaches the router and cites its Lean file, and the floor moved from 38
 to 39; Phase 73 added `test_stepwise_two.py`, which does the same for
-`StepwiseFrames.lean`, and the floor moved from 39 to 40.
+`StepwiseFrames.lean`, and the floor moved from 39 to 40; Phase 74 added
+`test_law_register.py`, which cites `LawRegister.lean` and reads the
+development, and the floor moved from 40 to 41.
+
+Phases 75 and 76 added `test_law_absorption.py` and `test_held_precision.py`
+without moving the floor, but they reintroduced the leak the next paragraph
+describes: the substrate frame put `law_absorption.py` on the planner's import
+path, it imports `law_register.py`, which imports `deep_dive.py`, which imports
+`salvage.py` — and three provenance labels in `salvage.py` named archive Lean
+files the development does not hold, which the closure resolves to the whole
+development. Every unit that builds a session carried all of it (the median
+Lean edit went to 103 units). The labels now name the archive folder and the
+file in words, and the median is back to 42. Phase 77 added
+`test_decoder_confidence.py`, which reaches the router through the Python
+dialect as `test_python_speech.py` does, and the floor moved from 41 to 42
+and the median from 42 to 43 with it.
+Phase 78's closure rules (§5g) — docstrings no longer dependencies, Lean
+names that do not exist ignored rather than widened to the whole development —
+moved the floor from 42 to 38, the median from 43 to 39, and the units that
+name any Lean file from 111 to 109.
+Phase 79 added `test_integer_decision.py`, which reaches the router and
+cites `IntegerDecision.lean`, and the floor moved from 38 to 39, the median
+from 39 to 40, and the units that name any Lean file from 109 to 110.
+Phase 80 added `test_confidence_floor.py`, which reaches the router through
+the Python dialect and cites `ConfidenceFloor.lean`, and the floor moved from
+39 to 40, the median from 40 to 41, and the units that name any Lean file from
+110 to 111.
+Phases 81–83 added `test_agree_channel.py`, `test_rate_posterior.py` and
+`test_law_triage.py`; the first two reach the router through the Python
+dialect and cite `Agree.lean` and `RatePosterior.lean`, and the floor moved
+from 40 to 42, the median from 41 to 42, the worst single file from 106 to
+109, and the units that name any Lean file from 111 to 114.
+Phase 84 added `test_stepwise_three.py`, which reaches the router and cites
+`StepwiseWiden.lean`, and the floor moved from 42 to 43, the median from 42
+to 43, the worst single file from 109 to 110, and the units that name any
+Lean file from 114 to 115.
+Phase 85 added `test_stepwise_four.py`, which reaches the router and cites
+`HoleBounds.lean`, and the floor moved from 43 to 44, the median from 43
+to 44, the worst single file from 110 to 111, and the units that name any
+Lean file from 115 to 116.
+Phase 86 added `test_measurands.py`, which reaches the router and cites
+`MeasurandKinds.lean` (and added `RateRepair.lean`, cited by
+`test_rate_posterior.py`), and the floor moved from 44 to 45, the median from
+44 to 45, the worst single file from 111 to 112, and the units that name any
+Lean file from 116 to 117.
+Phase 87 added `test_measurand_register.py`, which reaches the router and
+cites `MeasurandRegister.lean`, and the floor moved from 45 to 46, the median
+from 45 to 46, the worst single file from 112 to 113, and the units that name
+any Lean file from 117 to 118.
 
 The floor of 35 is not a defect: those units name a `*.lean` glob because they
 read the development, and a reading of the development is stale when the
@@ -426,6 +474,91 @@ The measurement is `glm_universal.corpus.gate`, and
 that a failure is never skippable, and that a record written under another rule
 is ignored rather than trusted.
 
+## 5g. The round that invalidated itself
+
+**The problem, as the owner put it.** Every round had to re-check most of the
+repository, rounds ran out of time before the close, and during a close some
+numbers moved again, so the close had to be repeated. Measured on the tree at
+the start of Phase 78, with the ledger's own closure rule:
+
+* the tree held **two copies of the Lean development** (`RequestProject/GLM/`
+  at the repository root and `overlay/glm_lean/RequestProject/GLM/`), both
+  hashed into every closure that named a Lean file, kept in step by a
+  generator and checked by a seventh instrument;
+* a unit's closure averaged **284 files**;
+* every `_data/` directory beside a module was hashed whole, so re-taking
+  **one** measurement cache made **117 of 123** units stale (about 82 CPU
+  minutes), because `reasoning/_data/` holds eighteen files and nearly every
+  unit reaches some reasoning module;
+* a document named anywhere in a module's string constants was a dependency,
+  docstrings included, so `PROJECT_DIRECTIVES.md` was in **120** closures;
+* a document was hashed whole, so `corpus --refresh` rewriting a figure inside
+  a sentence made every unit that named that document stale, although nothing
+  a person wrote had moved;
+* the native-parity and native-words caches were keyed on the repository's own
+  documents and Lean tree. Writing the round up moved that corpus, so the
+  caches went stale; re-taking them could move a tie; the study reporting the
+  tie then had to change, which moved the corpus again. That is the circular
+  close.
+
+**What changed.** Six edits, all computed rather than listed:
+
+1. **One Lean copy.** `lakefile.toml` builds `overlay/glm_lean` in place
+   (`srcDir`); the repository-root copy, the mirror generator
+   (`tools lean-mirror`, `signoff/mirror.py`) and the `lean-copies-identical`
+   instrument are gone. `lake build` compiles the files the package reads.
+2. **Data by name** (`signoff/rules.py`, `_data_files_for`). A data file is in
+   a closure when a module of that closure names it, or names a file pattern
+   with its suffix (`*.json`). Re-taking one cache now stales the units that
+   read it: **22** for `native_parity.json`, **23** for `typed_plans.json`.
+3. **Docstrings are prose** (`_string_constants(docstrings=False)`). A
+   document or Lean file mentioned only in a docstring is not a dependency,
+   unless the closure holds a module that reads docstrings (`__doc__`,
+   `get_docstring`). One descriptive `note=` string in
+   `evaluation/cases.py` that named the directives file was reworded.
+   `PROJECT_DIRECTIVES.md` is now in **32** closures (was 120),
+   `MASTER_PLAN.md` in 30 (was 38), `STATUS.md` in 24 (was 39), and a
+   commonly cited Lean file such as `Sturmian.lean` in 47 (was 103).
+4. **Generated regions are masked** (`document_digest`). A unit is signed
+   against a document's written part: inline figure values and generated
+   block bodies are emptied, markers kept. The **19** units whose closure
+   holds the renderer, the document checks or the figure registry are still
+   signed against raw bytes, since those regions are what they check; the
+   other **104** are not re-run by a refresh that only moved numbers.
+5. **Self-measurements are dated, not gated** (`native_parity`,
+   `native_words`). Their `module_digest` covers the measuring code only; the
+   corpus they were taken over is stored as `corpus_digest`, and a moved
+   corpus is a `note:` in `corpus --check`, never a failure. They are re-taken
+   when their code moves or when a round decides to, at its start.
+6. **Derivations do not key on the harness** (`code_store`). A derived store
+   such as the planner's reading of the evaluation set no longer includes
+   the test scaffolding and the sign-off rule in its key, so an edit to the
+   rule stops costing a re-derivation.
+
+And one change of procedure: a round closes with **`signoff --close`** — the
+release question (every unit and instrument signed with the exhaustive cases
+on), paid incrementally, then `--verify-release`. A from-scratch `--release`
+ignores the ledger and re-runs about 97 CPU minutes of tests plus the
+instruments; it is now reserved for a change to the rule itself. The ledger's
+plan also got cheaper to compute: tokens, module paths and repository paths
+are memoised per process, which roughly halved `signoff --plan` on this
+machine.
+
+**Measured after the change**, same tree, same 123 units: the mean closure is
+**183 files**, against 284 before: removing the second Lean copy accounts for
+284 → 213 and the new closure rules for 213 → 183.
+What one rule change costs is unchanged by design: this round bumped the
+ledger schema, so this round's close re-ran everything once.
+
+**What it does not fix.** The package's import graph is still dense: about
+ninety units reach the same core of roughly a hundred modules, so a code edit
+in that core still re-runs most of the suite, and `lean_addresses.json`, which
+the runtime's field surface reads, is in **99** closures — a new Lean file,
+once the refresh rebuilds the book, still re-runs those units. Cutting that
+is a refactor of the package (lazy imports on the hub modules and a
+declaration book the session loads on demand), and is named for a later
+round rather than claimed here.
+
 ## 6. What this does not establish
 
 It does not make anything faster that was not repetition. The measurement cache
@@ -446,5 +579,5 @@ that pays for it, with the storage, loading, digesting and rebuilding of the
 table counted on the table's side rather than assumed away.
 
 <!-- generated: cost-tier -->
-**Rebuilding both address books from nothing decodes 10,061 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 177 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  568 figures inside sentences, across 30 documents, are emitted rather than typed.
+**Rebuilding both address books from nothing decodes 10,565 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 177 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  569 figures inside sentences, across 30 documents, are emitted rather than typed.
 <!-- end generated -->

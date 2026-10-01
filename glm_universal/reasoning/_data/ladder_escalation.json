@@ -1,0 +1,1893 @@
+{
+ "agreement": {
+  "queries_named_by_some_rung": 462,
+  "rungs_disagree": 0,
+  "why_it_matters": "when the rungs that name a carrier all name the same one, every visiting order returns the same answer, whatever the stopping rule -- which is GLM.ConstructionLadder.firstNamed_order_independent"
+ },
+ "before": {
+  "agreement": {
+   "queries_named_by_some_rung": 327,
+   "rungs_disagree": 0,
+   "why_it_matters": "when the rungs that name a carrier all name the same one, every visiting order returns the same answer, whatever the stopping rule -- which is GLM.ConstructionLadder.firstNamed_order_independent"
+  },
+  "best_fixed_rung": {
+   "correct": 205,
+   "cost": 4707584,
+   "refused": 363,
+   "rung": "C",
+   "wrong": 0
+  },
+  "best_rung_per_setting": [
+   {
+    "best_correct": 101,
+    "best_rung": "Z",
+    "oracle": 124,
+    "perturbation": "8 coordinates by 1/8"
+   },
+   {
+    "best_correct": 93,
+    "best_rung": "Z",
+    "oracle": 122,
+    "perturbation": "8 coordinates by 1/4"
+   },
+   {
+    "best_correct": 39,
+    "best_rung": "A",
+    "oracle": 51,
+    "perturbation": "8 coordinates by 1/2"
+   },
+   {
+    "best_correct": 20,
+    "best_rung": "A",
+    "oracle": 30,
+    "perturbation": "8 coordinates by 3/4"
+   }
+  ],
+  "carriers": 142,
+  "cheapest_order": "fine_to_coarse",
+  "fixed_rungs": {
+   "agreement": {
+    "queries_named_by_some_rung": 327,
+    "rungs_disagree": 0,
+    "why_it_matters": "when the rungs that name a carrier all name the same one, every visiting order returns the same answer, whatever the stopping rule -- which is GLM.ConstructionLadder.firstNamed_order_independent"
+   },
+   "settings": [
+    {
+     "best_correct": 101,
+     "best_rung": "Z",
+     "oracle": 124,
+     "perturbation": "8 coordinates by 1/8",
+     "queries_named_by_some_rung": 124,
+     "rungs": {
+      "A": {
+       "correct": 75,
+       "cost": 588448,
+       "queries": 142,
+       "refused": 67,
+       "rungs_visited": 142,
+       "wrong": 0
+      },
+      "B": {
+       "correct": 76,
+       "cost": 588937,
+       "queries": 142,
+       "refused": 66,
+       "rungs_visited": 142,
+       "wrong": 0
+      },
+      "C": {
+       "correct": 86,
+       "cost": 1176896,
+       "queries": 142,
+       "refused": 56,
+       "rungs_visited": 142,
+       "wrong": 0
+      },
+      "D": {
+       "correct": 88,
+       "cost": 3474,
+       "queries": 142,
+       "refused": 54,
+       "rungs_visited": 142,
+       "wrong": 0
+      },
+      "Z": {
+       "correct": 101,
+       "cost": 3408,
+       "queries": 142,
+       "refused": 41,
+       "rungs_visited": 142,
+       "wrong": 0
+      }
+     },
+     "rungs_disagree": 0
+    },
+    {
+     "best_correct": 93,
+     "best_rung": "Z",
+     "oracle": 122,
+     "perturbation": "8 coordinates by 1/4",
+     "queries_named_by_some_rung": 122,
+     "rungs": {
+      "A": {
+       "correct": 62,
+       "cost": 588448,
+       "queries": 142,
+       "refused": 80,
+       "rungs_visited": 142,
+       "wrong": 0
+      },
+      "B": {
+       "correct": 64,
+       "cost": 588965,
+       "queries": 142,
+       "refused": 78,
+       "rungs_visited": 142,
+       "wrong": 0
+      },
+      "C": {
+       "correct": 67,
+       "cost": 1176896,
+       "queries": 142,
+       "refused": 75,
+       "rungs_visited": 142,
+       "wrong": 0
+      },
+      "D": {
+       "correct": 76,
+       "cost": 3470,
+       "queries": 142,
+       "refused": 66,
+       "rungs_visited": 142,
+       "wrong": 0
+      },
+      "Z": {
+       "correct": 93,
+       "cost": 3408,
+       "queries": 142,
+       "refused": 49,
+       "rungs_visited": 142,
+       "wrong": 0
+      }
+     },
+     "rungs_disagree": 0
+    },
+    {
+     "best_correct": 39,
+     "best_rung": "A",
+     "oracle": 51,
+     "perturbation": "8 coordinates by 1/2",
+     "queries_named_by_some_rung": 51,
+     "rungs": {
+      "A": {
+       "correct": 39,
+       "cost": 588448,
+       "queries": 142,
+       "refused": 103,
+       "rungs_visited": 142,
+       "wrong": 0
+      },
+      "B": {
+       "correct": 32,
+       "cost": 589073,
+       "queries": 142,
+       "refused": 110,
+       "rungs_visited": 142,
+       "wrong": 0
+      },
+      "C": {
+       "correct": 33,
+       "cost": 1176896,
+       "queries": 142,
+       "refused": 109,
+       "rungs_visited": 142,
+       "wrong": 0
+      },
+      "D": {
+       "correct": 0,
+       "cost": 3468,
+       "queries": 142,
+       "refused": 142,
+       "rungs_visited": 142,
+       "wrong": 0
+      },
+      "Z": {
+       "correct": 0,
+       "cost": 3408,
+       "queries": 142,
+       "refused": 142,
+       "rungs_visited": 142,
+       "wrong": 0
+      }
+     },
+     "rungs_disagree": 0
+    },
+    {
+     "best_correct": 20,
+     "best_rung": "A",
+     "oracle": 30,
+     "perturbation": "8 coordinates by 3/4",
+     "queries_named_by_some_rung": 30,
+     "rungs": {
+      "A": {
+       "correct": 20,
+       "cost": 588448,
+       "queries": 142,
+       "refused": 122,
+       "rungs_visited": 142,
+       "wrong": 0
+      },
+      "B": {
+       "correct": 15,
+       "cost": 589052,
+       "queries": 142,
+       "refused": 127,
+       "rungs_visited": 142,
+       "wrong": 0
+      },
+      "C": {
+       "correct": 19,
+       "cost": 1176896,
+       "queries": 142,
+       "refused": 123,
+       "rungs_visited": 142,
+       "wrong": 0
+      },
+      "D": {
+       "correct": 0,
+       "cost": 3482,
+       "queries": 142,
+       "refused": 142,
+       "rungs_visited": 142,
+       "wrong": 0
+      },
+      "Z": {
+       "correct": 0,
+       "cost": 3408,
+       "queries": 142,
+       "refused": 142,
+       "rungs_visited": 142,
+       "wrong": 0
+      }
+     },
+     "rungs_disagree": 0
+    }
+   ],
+   "totals": {
+    "A": {
+     "correct": 196,
+     "cost": 2353792,
+     "refused": 372,
+     "wrong": 0
+    },
+    "B": {
+     "correct": 187,
+     "cost": 2356027,
+     "refused": 381,
+     "wrong": 0
+    },
+    "C": {
+     "correct": 205,
+     "cost": 4707584,
+     "refused": 363,
+     "wrong": 0
+    },
+    "D": {
+     "correct": 164,
+     "cost": 13894,
+     "refused": 404,
+     "wrong": 0
+    },
+    "Z": {
+     "correct": 194,
+     "cost": 13632,
+     "refused": 374,
+     "wrong": 0
+    },
+    "oracle": {
+     "correct": 327
+    }
+   }
+  },
+  "ladder": [
+   "B",
+   "C",
+   "A",
+   "D",
+   "Z"
+  ],
+  "ladder_length": 5,
+  "ladder_over_best_fixed": {
+   "correct": 122,
+   "wrong": 0
+  },
+  "limits": "The sample is the first 24 named objects of each of six registers, and the perturbations are four declared settings, so the figures are about this sample and this sweep. A wrong answer is reported separately from a refusal and is never folded into an accuracy.",
+  "method": "Every carrier of the declared sample is indexed at all 5 rungs; a query is the carrier with a deterministic offset added; a rung answers only when its cell holds exactly one carrier; the three orders differ only in which rung is tried first.",
+  "oracle": 327,
+  "order_cost": {
+   "coarse_to_fine": 6953146,
+   "fine_to_coarse": 4735504,
+   "middle_out": 5867885
+  },
+  "order_facts": {
+   "ladder": [
+    "2A",
+    "4D",
+    "4Z",
+    "B",
+    "C",
+    "A",
+    "2D",
+    "2Z",
+    "A/2",
+    "D",
+    "Z"
+   ],
+   "lean": "GLM.ConstructionLadder.middleOut_nodup, GLM.ConstructionLadder.middleOut_length, GLM.ConstructionLadder.middleOut_head",
+   "middle": "A",
+   "middle_out": [
+    "A",
+    "2D",
+    "C",
+    "2Z",
+    "B",
+    "A/2",
+    "4Z",
+    "D",
+    "4D",
+    "Z",
+    "2A"
+   ],
+   "starts_in_the_middle": true,
+   "visits_every_rung_once": true
+  },
+  "orders": {
+   "occupancy": [
+    {
+     "cells": 116,
+     "conflated": 32,
+     "largest_cell": 14,
+     "rung": "B",
+     "separated": 110
+    },
+    {
+     "cells": 117,
+     "conflated": 31,
+     "largest_cell": 13,
+     "rung": "C",
+     "separated": 111
+    },
+    {
+     "cells": 115,
+     "conflated": 33,
+     "largest_cell": 14,
+     "rung": "A",
+     "separated": 109
+    },
+    {
+     "cells": 129,
+     "conflated": 17,
+     "largest_cell": 8,
+     "rung": "D",
+     "separated": 125
+    },
+    {
+     "cells": 129,
+     "conflated": 17,
+     "largest_cell": 8,
+     "rung": "Z",
+     "separated": 125
+    }
+   ],
+   "rungs": [
+    "B",
+    "C",
+    "A",
+    "D",
+    "Z"
+   ],
+   "settings": [
+    {
+     "magnitude": "1/8",
+     "orders": {
+      "coarse_to_fine": {
+       "correct": 124,
+       "cost": 1361495,
+       "queries": 142,
+       "refused": 18,
+       "rungs_visited": 335,
+       "wrong": 0
+      },
+      "fine_to_coarse": {
+       "correct": 124,
+       "cost": 360833,
+       "queries": 142,
+       "refused": 18,
+       "rungs_visited": 251,
+       "wrong": 0
+      },
+      "middle_out": {
+       "correct": 124,
+       "cost": 930533,
+       "queries": 142,
+       "refused": 18,
+       "rungs_visited": 284,
+       "wrong": 0
+      }
+     },
+     "perturbation": "8 coordinates by 1/8",
+     "resolving_rung": {
+      "coarse_to_fine": {
+       "A": 6,
+       "B": 76,
+       "C": 12,
+       "D": 23,
+       "Z": 7,
+       "none": 18
+      },
+      "fine_to_coarse": {
+       "A": 14,
+       "D": 9,
+       "Z": 101,
+       "none": 18
+      },
+      "middle_out": {
+       "A": 75,
+       "C": 7,
+       "D": 35,
+       "Z": 7,
+       "none": 18
+      }
+     },
+     "support": 8
+    },
+    {
+     "magnitude": "1/4",
+     "orders": {
+      "coarse_to_fine": {
+       "correct": 122,
+       "cost": 1519457,
+       "queries": 142,
+       "refused": 20,
+       "rungs_visited": 380,
+       "wrong": 0
+      },
+      "fine_to_coarse": {
+       "correct": 122,
+       "cost": 439773,
+       "queries": 142,
+       "refused": 20,
+       "rungs_visited": 274,
+       "wrong": 0
+      },
+      "middle_out": {
+       "correct": 122,
+       "cost": 1005620,
+       "queries": 142,
+       "refused": 20,
+       "rungs_visited": 314,
+       "wrong": 0
+      }
+     },
+     "perturbation": "8 coordinates by 1/4",
+     "resolving_rung": {
+      "coarse_to_fine": {
+       "A": 7,
+       "B": 64,
+       "C": 10,
+       "D": 30,
+       "Z": 11,
+       "none": 20
+      },
+      "fine_to_coarse": {
+       "A": 19,
+       "C": 2,
+       "D": 8,
+       "Z": 93,
+       "none": 20
+      },
+      "middle_out": {
+       "A": 62,
+       "C": 8,
+       "D": 40,
+       "Z": 12,
+       "none": 20
+      }
+     },
+     "support": 8
+    },
+    {
+     "magnitude": "1/2",
+     "orders": {
+      "coarse_to_fine": {
+       "correct": 51,
+       "cost": 1927849,
+       "queries": 142,
+       "refused": 91,
+       "rungs_visited": 536,
+       "wrong": 0
+      },
+      "fine_to_coarse": {
+       "correct": 51,
+       "cost": 1851358,
+       "queries": 142,
+       "refused": 91,
+       "rungs_visited": 626,
+       "wrong": 0
+      },
+      "middle_out": {
+       "correct": 51,
+       "cost": 1849328,
+       "queries": 142,
+       "refused": 91,
+       "rungs_visited": 542,
+       "wrong": 0
+      }
+     },
+     "perturbation": "8 coordinates by 1/2",
+     "resolving_rung": {
+      "coarse_to_fine": {
+       "A": 11,
+       "B": 32,
+       "C": 8,
+       "none": 91
+      },
+      "fine_to_coarse": {
+       "A": 39,
+       "B": 6,
+       "C": 6,
+       "none": 91
+      },
+      "middle_out": {
+       "A": 39,
+       "B": 6,
+       "C": 6,
+       "none": 91
+      }
+     },
+     "support": 8
+    },
+    {
+     "magnitude": "3/4",
+     "orders": {
+      "coarse_to_fine": {
+       "correct": 30,
+       "cost": 2144345,
+       "queries": 142,
+       "refused": 112,
+       "rungs_visited": 613,
+       "wrong": 0
+      },
+      "fine_to_coarse": {
+       "correct": 30,
+       "cost": 2083540,
+       "queries": 142,
+       "refused": 112,
+       "rungs_visited": 663,
+       "wrong": 0
+      },
+      "middle_out": {
+       "correct": 30,
+       "cost": 2082404,
+       "queries": 142,
+       "refused": 112,
+       "rungs_visited": 616,
+       "wrong": 0
+      }
+     },
+     "perturbation": "8 coordinates by 3/4",
+     "resolving_rung": {
+      "coarse_to_fine": {
+       "A": 8,
+       "B": 15,
+       "C": 7,
+       "none": 112
+      },
+      "fine_to_coarse": {
+       "A": 20,
+       "B": 3,
+       "C": 7,
+       "none": 112
+      },
+      "middle_out": {
+       "A": 20,
+       "B": 3,
+       "C": 7,
+       "none": 112
+      }
+     },
+     "support": 8
+    }
+   ],
+   "totals": {
+    "coarse_to_fine": {
+     "correct": 327,
+     "cost": 6953146,
+     "refused": 241,
+     "rungs_visited": 1864,
+     "wrong": 0
+    },
+    "fine_to_coarse": {
+     "correct": 327,
+     "cost": 4735504,
+     "refused": 241,
+     "rungs_visited": 1814,
+     "wrong": 0
+    },
+    "middle_out": {
+     "correct": 327,
+     "cost": 5867885,
+     "refused": 241,
+     "rungs_visited": 1756,
+     "wrong": 0
+    }
+   }
+  },
+  "perturbations": [
+   {
+    "label": "8 coordinates by 1/8",
+    "magnitude": "1/8",
+    "support": 8
+   },
+   {
+    "label": "8 coordinates by 1/4",
+    "magnitude": "1/4",
+    "support": 8
+   },
+   {
+    "label": "8 coordinates by 1/2",
+    "magnitude": "1/2",
+    "support": 8
+   },
+   {
+    "label": "8 coordinates by 3/4",
+    "magnitude": "3/4",
+    "support": 8
+   }
+  ],
+  "registers": [
+   "chemistry",
+   "harmonics",
+   "lexicon",
+   "mathematics",
+   "molecules",
+   "physics"
+  ]
+ },
+ "best_fixed_rung": {
+  "correct": 283,
+  "cost": 2381056,
+  "refused": 285,
+  "rung": "2A",
+  "wrong": 0
+ },
+ "best_rung_per_setting": [
+  {
+   "best_correct": 101,
+   "best_rung": "Z",
+   "oracle": 125,
+   "perturbation": "8 coordinates by 1/8"
+  },
+  {
+   "best_correct": 93,
+   "best_rung": "Z",
+   "oracle": 125,
+   "perturbation": "8 coordinates by 1/4"
+  },
+  {
+   "best_correct": 67,
+   "best_rung": "2A",
+   "oracle": 110,
+   "perturbation": "8 coordinates by 1/2"
+  },
+  {
+   "best_correct": 63,
+   "best_rung": "4Z",
+   "oracle": 102,
+   "perturbation": "8 coordinates by 3/4"
+  }
+ ],
+ "carriers": 142,
+ "cheapest_order": "coarse_to_fine",
+ "fixed_rungs": {
+  "agreement": {
+   "queries_named_by_some_rung": 462,
+   "rungs_disagree": 0,
+   "why_it_matters": "when the rungs that name a carrier all name the same one, every visiting order returns the same answer, whatever the stopping rule -- which is GLM.ConstructionLadder.firstNamed_order_independent"
+  },
+  "settings": [
+   {
+    "best_correct": 101,
+    "best_rung": "Z",
+    "oracle": 125,
+    "perturbation": "8 coordinates by 1/8",
+    "queries_named_by_some_rung": 125,
+    "rungs": {
+     "2A": {
+      "correct": 82,
+      "cost": 595264,
+      "queries": 142,
+      "refused": 60,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "2D": {
+      "correct": 35,
+      "cost": 10288,
+      "queries": 142,
+      "refused": 107,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "2Z": {
+      "correct": 31,
+      "cost": 10224,
+      "queries": 142,
+      "refused": 111,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "4D": {
+      "correct": 72,
+      "cost": 10284,
+      "queries": 142,
+      "refused": 70,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "4Z": {
+      "correct": 71,
+      "cost": 10224,
+      "queries": 142,
+      "refused": 71,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "A": {
+      "correct": 75,
+      "cost": 588448,
+      "queries": 142,
+      "refused": 67,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "A/2": {
+      "correct": 67,
+      "cost": 595264,
+      "queries": 142,
+      "refused": 75,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "B": {
+      "correct": 76,
+      "cost": 588937,
+      "queries": 142,
+      "refused": 66,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "C": {
+      "correct": 86,
+      "cost": 1176896,
+      "queries": 142,
+      "refused": 56,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "D": {
+      "correct": 88,
+      "cost": 3474,
+      "queries": 142,
+      "refused": 54,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "Z": {
+      "correct": 101,
+      "cost": 3408,
+      "queries": 142,
+      "refused": 41,
+      "rungs_visited": 142,
+      "wrong": 0
+     }
+    },
+    "rungs_disagree": 0
+   },
+   {
+    "best_correct": 93,
+    "best_rung": "Z",
+    "oracle": 125,
+    "perturbation": "8 coordinates by 1/4",
+    "queries_named_by_some_rung": 125,
+    "rungs": {
+     "2A": {
+      "correct": 81,
+      "cost": 595264,
+      "queries": 142,
+      "refused": 61,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "2D": {
+      "correct": 33,
+      "cost": 10288,
+      "queries": 142,
+      "refused": 109,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "2Z": {
+      "correct": 30,
+      "cost": 10224,
+      "queries": 142,
+      "refused": 112,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "4D": {
+      "correct": 69,
+      "cost": 10285,
+      "queries": 142,
+      "refused": 73,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "4Z": {
+      "correct": 69,
+      "cost": 10224,
+      "queries": 142,
+      "refused": 73,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "A": {
+      "correct": 62,
+      "cost": 588448,
+      "queries": 142,
+      "refused": 80,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "A/2": {
+      "correct": 55,
+      "cost": 595264,
+      "queries": 142,
+      "refused": 87,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "B": {
+      "correct": 64,
+      "cost": 588965,
+      "queries": 142,
+      "refused": 78,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "C": {
+      "correct": 67,
+      "cost": 1176896,
+      "queries": 142,
+      "refused": 75,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "D": {
+      "correct": 76,
+      "cost": 3470,
+      "queries": 142,
+      "refused": 66,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "Z": {
+      "correct": 93,
+      "cost": 3408,
+      "queries": 142,
+      "refused": 49,
+      "rungs_visited": 142,
+      "wrong": 0
+     }
+    },
+    "rungs_disagree": 0
+   },
+   {
+    "best_correct": 67,
+    "best_rung": "2A",
+    "oracle": 110,
+    "perturbation": "8 coordinates by 1/2",
+    "queries_named_by_some_rung": 110,
+    "rungs": {
+     "2A": {
+      "correct": 67,
+      "cost": 595264,
+      "queries": 142,
+      "refused": 75,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "2D": {
+      "correct": 24,
+      "cost": 10291,
+      "queries": 142,
+      "refused": 118,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "2Z": {
+      "correct": 23,
+      "cost": 10224,
+      "queries": 142,
+      "refused": 119,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "4D": {
+      "correct": 64,
+      "cost": 10287,
+      "queries": 142,
+      "refused": 78,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "4Z": {
+      "correct": 64,
+      "cost": 10224,
+      "queries": 142,
+      "refused": 78,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "A": {
+      "correct": 39,
+      "cost": 588448,
+      "queries": 142,
+      "refused": 103,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "A/2": {
+      "correct": 15,
+      "cost": 595264,
+      "queries": 142,
+      "refused": 127,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "B": {
+      "correct": 32,
+      "cost": 589073,
+      "queries": 142,
+      "refused": 110,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "C": {
+      "correct": 33,
+      "cost": 1176896,
+      "queries": 142,
+      "refused": 109,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "D": {
+      "correct": 0,
+      "cost": 3468,
+      "queries": 142,
+      "refused": 142,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "Z": {
+      "correct": 0,
+      "cost": 3408,
+      "queries": 142,
+      "refused": 142,
+      "rungs_visited": 142,
+      "wrong": 0
+     }
+    },
+    "rungs_disagree": 0
+   },
+   {
+    "best_correct": 63,
+    "best_rung": "4Z",
+    "oracle": 102,
+    "perturbation": "8 coordinates by 3/4",
+    "queries_named_by_some_rung": 102,
+    "rungs": {
+     "2A": {
+      "correct": 53,
+      "cost": 595264,
+      "queries": 142,
+      "refused": 89,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "2D": {
+      "correct": 21,
+      "cost": 10289,
+      "queries": 142,
+      "refused": 121,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "2Z": {
+      "correct": 21,
+      "cost": 10224,
+      "queries": 142,
+      "refused": 121,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "4D": {
+      "correct": 61,
+      "cost": 10286,
+      "queries": 142,
+      "refused": 81,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "4Z": {
+      "correct": 63,
+      "cost": 10224,
+      "queries": 142,
+      "refused": 79,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "A": {
+      "correct": 20,
+      "cost": 588448,
+      "queries": 142,
+      "refused": 122,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "A/2": {
+      "correct": 0,
+      "cost": 595264,
+      "queries": 142,
+      "refused": 142,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "B": {
+      "correct": 15,
+      "cost": 589052,
+      "queries": 142,
+      "refused": 127,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "C": {
+      "correct": 19,
+      "cost": 1176896,
+      "queries": 142,
+      "refused": 123,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "D": {
+      "correct": 0,
+      "cost": 3482,
+      "queries": 142,
+      "refused": 142,
+      "rungs_visited": 142,
+      "wrong": 0
+     },
+     "Z": {
+      "correct": 0,
+      "cost": 3408,
+      "queries": 142,
+      "refused": 142,
+      "rungs_visited": 142,
+      "wrong": 0
+     }
+    },
+    "rungs_disagree": 0
+   }
+  ],
+  "totals": {
+   "2A": {
+    "correct": 283,
+    "cost": 2381056,
+    "refused": 285,
+    "wrong": 0
+   },
+   "2D": {
+    "correct": 113,
+    "cost": 41156,
+    "refused": 455,
+    "wrong": 0
+   },
+   "2Z": {
+    "correct": 105,
+    "cost": 40896,
+    "refused": 463,
+    "wrong": 0
+   },
+   "4D": {
+    "correct": 266,
+    "cost": 41142,
+    "refused": 302,
+    "wrong": 0
+   },
+   "4Z": {
+    "correct": 267,
+    "cost": 40896,
+    "refused": 301,
+    "wrong": 0
+   },
+   "A": {
+    "correct": 196,
+    "cost": 2353792,
+    "refused": 372,
+    "wrong": 0
+   },
+   "A/2": {
+    "correct": 137,
+    "cost": 2381056,
+    "refused": 431,
+    "wrong": 0
+   },
+   "B": {
+    "correct": 187,
+    "cost": 2356027,
+    "refused": 381,
+    "wrong": 0
+   },
+   "C": {
+    "correct": 205,
+    "cost": 4707584,
+    "refused": 363,
+    "wrong": 0
+   },
+   "D": {
+    "correct": 164,
+    "cost": 13894,
+    "refused": 404,
+    "wrong": 0
+   },
+   "Z": {
+    "correct": 194,
+    "cost": 13632,
+    "refused": 374,
+    "wrong": 0
+   },
+   "oracle": {
+    "correct": 462
+   }
+  }
+ },
+ "ladder": [
+  "2A",
+  "4D",
+  "4Z",
+  "B",
+  "C",
+  "A",
+  "2D",
+  "2Z",
+  "A/2",
+  "D",
+  "Z"
+ ],
+ "ladder_length": 11,
+ "ladder_over_best_fixed": {
+  "correct": 179,
+  "wrong": 0
+ },
+ "length_sweep": {
+  "best_correct": 475,
+  "first_broken": 15,
+  "lengths": [
+   5,
+   7,
+   9,
+   11,
+   13,
+   15
+  ],
+  "longest_safe": 13,
+  "rows": [
+   {
+    "correct": {
+     "coarse_to_fine": 327,
+     "fine_to_coarse": 327,
+     "middle_out": 327
+    },
+    "cost": {
+     "coarse_to_fine": 6953146,
+     "fine_to_coarse": 4735504,
+     "middle_out": 5867885
+    },
+    "ladder": [
+     "B",
+     "C",
+     "A",
+     "D",
+     "Z"
+    ],
+    "length": 5,
+    "matches_oracle": true,
+    "middle": "A",
+    "oracle": 327,
+    "order_independent": true,
+    "refused": {
+     "coarse_to_fine": 241,
+     "fine_to_coarse": 241,
+     "middle_out": 241
+    },
+    "rungs_disagree": 0,
+    "wrong": {
+     "coarse_to_fine": 0,
+     "fine_to_coarse": 0,
+     "middle_out": 0
+    }
+   },
+   {
+    "correct": {
+     "coarse_to_fine": 432,
+     "fine_to_coarse": 432,
+     "middle_out": 432
+    },
+    "cost": {
+     "coarse_to_fine": 4195968,
+     "fine_to_coarse": 4092396,
+     "middle_out": 5901824
+    },
+    "ladder": [
+     "4Z",
+     "B",
+     "C",
+     "A",
+     "2D",
+     "D",
+     "Z"
+    ],
+    "length": 7,
+    "matches_oracle": true,
+    "middle": "A",
+    "oracle": 432,
+    "order_independent": true,
+    "refused": {
+     "coarse_to_fine": 136,
+     "fine_to_coarse": 136,
+     "middle_out": 136
+    },
+    "rungs_disagree": 0,
+    "wrong": {
+     "coarse_to_fine": 0,
+     "fine_to_coarse": 0,
+     "middle_out": 0
+    }
+   },
+   {
+    "correct": {
+     "coarse_to_fine": 439,
+     "fine_to_coarse": 439,
+     "middle_out": 439
+    },
+    "cost": {
+     "coarse_to_fine": 3955162,
+     "fine_to_coarse": 4044487,
+     "middle_out": 6082460
+    },
+    "ladder": [
+     "4D",
+     "4Z",
+     "B",
+     "C",
+     "A",
+     "2D",
+     "2Z",
+     "D",
+     "Z"
+    ],
+    "length": 9,
+    "matches_oracle": true,
+    "middle": "A",
+    "oracle": 439,
+    "order_independent": true,
+    "refused": {
+     "coarse_to_fine": 129,
+     "fine_to_coarse": 129,
+     "middle_out": 129
+    },
+    "rungs_disagree": 0,
+    "wrong": {
+     "coarse_to_fine": 0,
+     "fine_to_coarse": 0,
+     "middle_out": 0
+    }
+   },
+   {
+    "correct": {
+     "coarse_to_fine": 462,
+     "fine_to_coarse": 462,
+     "middle_out": 462
+    },
+    "cost": {
+     "coarse_to_fine": 5809935,
+     "fine_to_coarse": 5931993,
+     "middle_out": 7678479
+    },
+    "ladder": [
+     "2A",
+     "4D",
+     "4Z",
+     "B",
+     "C",
+     "A",
+     "2D",
+     "2Z",
+     "A/2",
+     "D",
+     "Z"
+    ],
+    "length": 11,
+    "matches_oracle": true,
+    "middle": "A",
+    "oracle": 462,
+    "order_independent": true,
+    "refused": {
+     "coarse_to_fine": 106,
+     "fine_to_coarse": 106,
+     "middle_out": 106
+    },
+    "rungs_disagree": 0,
+    "wrong": {
+     "coarse_to_fine": 0,
+     "fine_to_coarse": 0,
+     "middle_out": 0
+    }
+   },
+   {
+    "correct": {
+     "coarse_to_fine": 475,
+     "fine_to_coarse": 475,
+     "middle_out": 475
+    },
+    "cost": {
+     "coarse_to_fine": 3840822,
+     "fine_to_coarse": 5946409,
+     "middle_out": 8915073
+    },
+    "ladder": [
+     "8D",
+     "8Z",
+     "2A",
+     "4D",
+     "4Z",
+     "B",
+     "C",
+     "A",
+     "2D",
+     "2Z",
+     "A/2",
+     "D",
+     "Z"
+    ],
+    "length": 13,
+    "matches_oracle": true,
+    "middle": "C",
+    "oracle": 475,
+    "order_independent": true,
+    "refused": {
+     "coarse_to_fine": 93,
+     "fine_to_coarse": 93,
+     "middle_out": 93
+    },
+    "rungs_disagree": 0,
+    "wrong": {
+     "coarse_to_fine": 0,
+     "fine_to_coarse": 0,
+     "middle_out": 0
+    }
+   },
+   {
+    "correct": {
+     "coarse_to_fine": 475,
+     "fine_to_coarse": 476,
+     "middle_out": 476
+    },
+    "cost": {
+     "coarse_to_fine": 6995298,
+     "fine_to_coarse": 6721929,
+     "middle_out": 8490834
+    },
+    "ladder": [
+     "8A",
+     "4A",
+     "8D",
+     "8Z",
+     "2A",
+     "4D",
+     "4Z",
+     "B",
+     "C",
+     "A",
+     "2D",
+     "2Z",
+     "A/2",
+     "D",
+     "Z"
+    ],
+    "length": 15,
+    "matches_oracle": true,
+    "middle": "B",
+    "oracle": 476,
+    "order_independent": false,
+    "refused": {
+     "coarse_to_fine": 92,
+     "fine_to_coarse": 92,
+     "middle_out": 92
+    },
+    "rungs_disagree": 1,
+    "wrong": {
+     "coarse_to_fine": 1,
+     "fine_to_coarse": 0,
+     "middle_out": 0
+    }
+   }
+  ],
+  "why_it_breaks": "a rung coarse enough to hold two carriers in one cell can still hold exactly one -- the wrong one -- in the cell a perturbed query lands in, and then the rungs disagree and the answer depends on which rung was asked first"
+ },
+ "limits": "The sample is the first 24 named objects of each of six registers, and the perturbations are four declared settings, so the figures are about this sample and this sweep. A wrong answer is reported separately from a refusal and is never folded into an accuracy.",
+ "method": "Every carrier of the declared sample is indexed at all 11 rungs; a query is the carrier with a deterministic offset added; a rung answers only when its cell holds exactly one carrier; the three orders differ only in which rung is tried first.",
+ "oracle": 462,
+ "order_cost": {
+  "coarse_to_fine": 5809935,
+  "fine_to_coarse": 5931993,
+  "middle_out": 7678479
+ },
+ "order_facts": {
+  "ladder": [
+   "2A",
+   "4D",
+   "4Z",
+   "B",
+   "C",
+   "A",
+   "2D",
+   "2Z",
+   "A/2",
+   "D",
+   "Z"
+  ],
+  "lean": "GLM.ConstructionLadder.middleOut_nodup, GLM.ConstructionLadder.middleOut_length, GLM.ConstructionLadder.middleOut_head",
+  "middle": "A",
+  "middle_out": [
+   "A",
+   "2D",
+   "C",
+   "2Z",
+   "B",
+   "A/2",
+   "4Z",
+   "D",
+   "4D",
+   "Z",
+   "2A"
+  ],
+  "starts_in_the_middle": true,
+  "visits_every_rung_once": true
+ },
+ "orders": {
+  "occupancy": [
+   {
+    "cells": 105,
+    "conflated": 42,
+    "largest_cell": 19,
+    "rung": "2A",
+    "separated": 100
+   },
+   {
+    "cells": 116,
+    "conflated": 32,
+    "largest_cell": 14,
+    "rung": "4D",
+    "separated": 110
+   },
+   {
+    "cells": 115,
+    "conflated": 33,
+    "largest_cell": 14,
+    "rung": "4Z",
+    "separated": 109
+   },
+   {
+    "cells": 116,
+    "conflated": 32,
+    "largest_cell": 14,
+    "rung": "B",
+    "separated": 110
+   },
+   {
+    "cells": 117,
+    "conflated": 31,
+    "largest_cell": 13,
+    "rung": "C",
+    "separated": 111
+   },
+   {
+    "cells": 115,
+    "conflated": 33,
+    "largest_cell": 14,
+    "rung": "A",
+    "separated": 109
+   },
+   {
+    "cells": 118,
+    "conflated": 29,
+    "largest_cell": 12,
+    "rung": "2D",
+    "separated": 113
+   },
+   {
+    "cells": 119,
+    "conflated": 28,
+    "largest_cell": 12,
+    "rung": "2Z",
+    "separated": 114
+   },
+   {
+    "cells": 125,
+    "conflated": 21,
+    "largest_cell": 8,
+    "rung": "A/2",
+    "separated": 121
+   },
+   {
+    "cells": 129,
+    "conflated": 17,
+    "largest_cell": 8,
+    "rung": "D",
+    "separated": 125
+   },
+   {
+    "cells": 129,
+    "conflated": 17,
+    "largest_cell": 8,
+    "rung": "Z",
+    "separated": 125
+   }
+  ],
+  "rungs": [
+   "2A",
+   "4D",
+   "4Z",
+   "B",
+   "C",
+   "A",
+   "2D",
+   "2Z",
+   "A/2",
+   "D",
+   "Z"
+  ],
+  "settings": [
+   {
+    "magnitude": "1/8",
+    "orders": {
+     "coarse_to_fine": {
+      "correct": 125,
+      "cost": 1309799,
+      "queries": 142,
+      "refused": 17,
+      "rungs_visited": 482,
+      "wrong": 0
+     },
+     "fine_to_coarse": {
+      "correct": 125,
+      "cost": 509491,
+      "queries": 142,
+      "refused": 17,
+      "rungs_visited": 361,
+      "wrong": 0
+     },
+     "middle_out": {
+      "correct": 125,
+      "cost": 1419702,
+      "queries": 142,
+      "refused": 17,
+      "rungs_visited": 484,
+      "wrong": 0
+     }
+    },
+    "perturbation": "8 coordinates by 1/8",
+    "resolving_rung": {
+     "coarse_to_fine": {
+      "2A": 82,
+      "2D": 3,
+      "4D": 19,
+      "4Z": 2,
+      "A": 1,
+      "A/2": 4,
+      "B": 5,
+      "C": 1,
+      "D": 7,
+      "Z": 1,
+      "none": 17
+     },
+     "fine_to_coarse": {
+      "2Z": 1,
+      "A": 3,
+      "A/2": 11,
+      "D": 9,
+      "Z": 101,
+      "none": 17
+     },
+     "middle_out": {
+      "2D": 15,
+      "4Z": 6,
+      "A": 75,
+      "A/2": 7,
+      "C": 14,
+      "D": 7,
+      "Z": 1,
+      "none": 17
+     }
+    },
+    "support": 8
+   },
+   {
+    "magnitude": "1/4",
+    "orders": {
+     "coarse_to_fine": {
+      "correct": 125,
+      "cost": 1343584,
+      "queries": 142,
+      "refused": 17,
+      "rungs_visited": 498,
+      "wrong": 0
+     },
+     "fine_to_coarse": {
+      "correct": 125,
+      "cost": 585873,
+      "queries": 142,
+      "refused": 17,
+      "rungs_visited": 402,
+      "wrong": 0
+     },
+     "middle_out": {
+      "correct": 125,
+      "cost": 1605480,
+      "queries": 142,
+      "refused": 17,
+      "rungs_visited": 562,
+      "wrong": 0
+     }
+    },
+    "perturbation": "8 coordinates by 1/4",
+    "resolving_rung": {
+     "coarse_to_fine": {
+      "2A": 81,
+      "2D": 4,
+      "4D": 20,
+      "4Z": 2,
+      "A/2": 3,
+      "B": 3,
+      "C": 1,
+      "D": 9,
+      "Z": 2,
+      "none": 17
+     },
+     "fine_to_coarse": {
+      "2D": 1,
+      "2Z": 2,
+      "4Z": 1,
+      "A": 8,
+      "A/2": 12,
+      "D": 8,
+      "Z": 93,
+      "none": 17
+     },
+     "middle_out": {
+      "2D": 18,
+      "4Z": 10,
+      "A": 62,
+      "A/2": 8,
+      "B": 2,
+      "C": 11,
+      "D": 12,
+      "Z": 2,
+      "none": 17
+     }
+    },
+    "support": 8
+   },
+   {
+    "magnitude": "1/2",
+    "orders": {
+     "coarse_to_fine": {
+      "correct": 110,
+      "cost": 1516704,
+      "queries": 142,
+      "refused": 32,
+      "rungs_visited": 582,
+      "wrong": 0
+     },
+     "fine_to_coarse": {
+      "correct": 110,
+      "cost": 2250248,
+      "queries": 142,
+      "refused": 32,
+      "rungs_visited": 1088,
+      "wrong": 0
+     },
+     "middle_out": {
+      "correct": 110,
+      "cost": 2163757,
+      "queries": 142,
+      "refused": 32,
+      "rungs_visited": 810,
+      "wrong": 0
+     }
+    },
+    "perturbation": "8 coordinates by 1/2",
+    "resolving_rung": {
+     "coarse_to_fine": {
+      "2A": 67,
+      "2D": 7,
+      "2Z": 2,
+      "4D": 25,
+      "4Z": 2,
+      "A": 1,
+      "A/2": 2,
+      "B": 2,
+      "C": 2,
+      "none": 32
+     },
+     "fine_to_coarse": {
+      "2A": 9,
+      "2D": 4,
+      "2Z": 15,
+      "4D": 1,
+      "4Z": 30,
+      "A": 26,
+      "A/2": 15,
+      "B": 6,
+      "C": 4,
+      "none": 32
+     },
+     "middle_out": {
+      "2A": 9,
+      "2D": 15,
+      "2Z": 2,
+      "4D": 1,
+      "4Z": 30,
+      "A": 39,
+      "A/2": 3,
+      "B": 6,
+      "C": 5,
+      "none": 32
+     }
+    },
+    "support": 8
+   },
+   {
+    "magnitude": "3/4",
+    "orders": {
+     "coarse_to_fine": {
+      "correct": 102,
+      "cost": 1639848,
+      "queries": 142,
+      "refused": 40,
+      "rungs_visited": 652,
+      "wrong": 0
+     },
+     "fine_to_coarse": {
+      "correct": 102,
+      "cost": 2586381,
+      "queries": 142,
+      "refused": 40,
+      "rungs_visited": 1203,
+      "wrong": 0
+     },
+     "middle_out": {
+      "correct": 102,
+      "cost": 2489540,
+      "queries": 142,
+      "refused": 40,
+      "rungs_visited": 957,
+      "wrong": 0
+     }
+    },
+    "perturbation": "8 coordinates by 3/4",
+    "resolving_rung": {
+     "coarse_to_fine": {
+      "2A": 53,
+      "2D": 6,
+      "2Z": 2,
+      "4D": 33,
+      "4Z": 3,
+      "A": 2,
+      "B": 1,
+      "C": 2,
+      "none": 40
+     },
+     "fine_to_coarse": {
+      "2A": 11,
+      "2D": 3,
+      "2Z": 21,
+      "4D": 2,
+      "4Z": 40,
+      "A": 15,
+      "B": 3,
+      "C": 7,
+      "none": 40
+     },
+     "middle_out": {
+      "2A": 11,
+      "2D": 17,
+      "2Z": 2,
+      "4D": 2,
+      "4Z": 40,
+      "A": 20,
+      "B": 3,
+      "C": 7,
+      "none": 40
+     }
+    },
+    "support": 8
+   }
+  ],
+  "totals": {
+   "coarse_to_fine": {
+    "correct": 462,
+    "cost": 5809935,
+    "refused": 106,
+    "rungs_visited": 2214,
+    "wrong": 0
+   },
+   "fine_to_coarse": {
+    "correct": 462,
+    "cost": 5931993,
+    "refused": 106,
+    "rungs_visited": 3054,
+    "wrong": 0
+   },
+   "middle_out": {
+    "correct": 462,
+    "cost": 7678479,
+    "refused": 106,
+    "rungs_visited": 2813,
+    "wrong": 0
+   }
+  }
+ },
+ "perturbations": [
+  {
+   "label": "8 coordinates by 1/8",
+   "magnitude": "1/8",
+   "support": 8
+  },
+  {
+   "label": "8 coordinates by 1/4",
+   "magnitude": "1/4",
+   "support": 8
+  },
+  {
+   "label": "8 coordinates by 1/2",
+   "magnitude": "1/2",
+   "support": 8
+  },
+  {
+   "label": "8 coordinates by 3/4",
+   "magnitude": "3/4",
+   "support": 8
+  }
+ ],
+ "registers": [
+  "chemistry",
+  "harmonics",
+  "lexicon",
+  "mathematics",
+  "molecules",
+  "physics"
+ ],
+ "source_digest": "88bfa2e57939ab5caf554414d4cef9ff95be9758f604d42611d716a2403b6548"
+}

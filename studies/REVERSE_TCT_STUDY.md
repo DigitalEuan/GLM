@@ -653,7 +653,9 @@ kinds of rounds one and two.
   §9's first two items, still open.
 * **A complete integer decision.** The Omega test's dark shadow and splinters
   would decide what `INTEGER_UNDECIDED` now refuses, with certificates of the
-  same derivation shape plus finitely many splinter cases.
+  same derivation shape plus finitely many splinter cases. *Taken by Phase
+  79: [`INTEGER_DECISION_STUDY.md`](INTEGER_DECISION_STUDY.md), every mark
+  met.*
 * **The loop, further.** Let `relay:` read the integer certificate kinds (a
   bound's witness, an `INDEPENDENT` verdict's two integer points), and hand an
   `INDEPENDENT` verdict's witness to the question layer as a follow-up.

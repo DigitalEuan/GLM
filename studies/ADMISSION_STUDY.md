@@ -149,7 +149,7 @@ malformed unit — which would be noise dressed up as a finding.
 
 ## 7. The formal side
 
-[`RequestProject/GLM/Admission.lean`](../RequestProject/GLM/Admission.lean)
+[`RequestProject/GLM/Admission.lean`](../overlay/glm_lean/RequestProject/GLM/Admission.lean)
 models the door as three partial functions from a name to something a register
 computed. There is deliberately no fourth field: the door **cannot make** a
 coordinate, only pass one on, which is the `grounded` clause expressed as a

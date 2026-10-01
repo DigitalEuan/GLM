@@ -59,7 +59,7 @@ those belong to the language and to Mathlib rather than to this development.
 All four hold. Every table below is a **generated block**, emitted from the
 measurement cache that `python3 -m glm_universal.corpus --remeasure` fills,
 guarded by the digest of the Lean sources it was taken from. The formal half is
-[`RequestProject/GLM/Anonymous.lean`](../RequestProject/GLM/Anonymous.lean);
+[`RequestProject/GLM/Anonymous.lean`](../overlay/glm_lean/RequestProject/GLM/Anonymous.lean);
 the computational half is `glm_universal.reasoning.anonymous`; the test that
 pins the two against each other is
 `overlay/glm_universal/tests/test_anonymous.py`; and the report prints with
@@ -83,14 +83,14 @@ window it is scored at are all the relay study's.
 <!-- generated: anonymous-faculties -->
 | faculty | hit@5, names kept | hit@5, names replaced |
 |---|---|---|
-| text — exact overlap of the identifiers | 699 (86.3 %) | 64 (7.9 %) |
-| lexical — the identifier address book | 376 (46.4 %) | 41 (5.1 %) |
-| **address — the structural address book** | 212 (26.2 %) | 150 (18.5 %) |
-| name — substring search over the names | 238 (29.4 %) | 23 (2.8 %) |
-| digest — a control that knows nothing | 38 (4.7 %) | 41 (5.1 %) |
-| random — a seeded permutation | 44 (5.4 %) | 44 (5.4 %) |
+| text — exact overlap of the identifiers | 720 (85.9 %) | 78 (9.3 %) |
+| lexical — the identifier address book | 388 (46.3 %) | 45 (5.4 %) |
+| **address — the structural address book** | 204 (24.3 %) | 139 (16.6 %) |
+| name — substring search over the names | 217 (25.9 %) | 21 (2.5 %) |
+| digest — a control that knows nothing | 44 (5.3 %) | 32 (3.8 %) |
+| random — a seeded permutation | 39 (4.7 %) | 39 (4.7 %) |
 
-810 queries over a corpus of 4048 declarations; chance at k = 5 is 4.7 %.  The text search collapses: yes; the identifier address book collapses with it: yes; the structural address holds: yes; and it leads every other faculty in this register: yes.
+838 queries over a corpus of 4190 declarations; chance at k = 5 is 4.5 %.  The text search collapses: yes; the identifier address book collapses with it: yes; the structural address holds: yes; and it leads every other faculty in this register: yes.
 <!-- end generated -->
 
 In numbers, and as a sentence rather than a table: take the names away and the
@@ -138,8 +138,8 @@ query.
 <!-- generated: anonymous-invariance -->
 | reading | queries | what it means |
 |---|---|---|
-| queries whose syntax coordinates are untouched | 771 | 95.2 % of 810 |
-| queries where a type-word coordinate moves | 39 | the declaration's own name spells `Nat`, `Int`, `Rat`, `Set` or `Decidable`, and the shipped map counts those words wherever they occur |
+| queries whose syntax coordinates are untouched | 796 | 95.0 % of 838 |
+| queries where a type-word coordinate moves | 42 | the declaration's own name spells `Nat`, `Int`, `Rat`, `Set` or `Decidable`, and the shipped map counts those words wherever they occur |
 | queries where any other syntax coordinate moves | 0 | none, which is `GLM.Anonymous.features_anonymise` holding of the code |
 
 The declared vocabulary a query keeps is 39 words.  Placeholders fresh against the corpus: yes.
@@ -168,8 +168,8 @@ told that this register exists.
 <!-- generated: anonymous-relay -->
 | reading | queries | gate fires on | text alone, hit@5 | the relay, hit@5 |
 |---|---|---|---|---|
-| names kept | 810 | 21 | 699 (86.3 %) | **705 (87.0 %)** |
-| names replaced | 810 | 541 | 64 (7.9 %) | **111 (13.7 %)** |
+| names kept | 838 | 23 | 720 (85.9 %) | **724 (86.4 %)** |
+| names replaced | 838 | 559 | 78 (9.3 %) | **120 (14.3 %)** |
 
 The gate is 1/10, the one the relay study already carries, not re-tuned for this register.  It hands over on most of the register: yes; and the relay beats the text leader here: yes.
 <!-- end generated -->
@@ -199,9 +199,33 @@ it.
 | `placeholders_are_fresh` | holds |
 | `relay_beats_text_in_the_register` | holds |
 | `text_collapses_without_the_names` | holds |
-| `text_is_within_twice_chance` | holds |
+| `text_is_within_twice_chance` | **fails** |
 | `text_leads_when_the_names_are_there` | holds |
 <!-- end generated -->
+
+**One claim moves with the corpus (Phases 81–82, 84, 85 and 87).** The query set
+is a stride over the corpus, so adding declarations shifts which declarations
+are queried. With the two Lean files of Phases 81–82 the corpus was 4137
+declarations and the stride 828 queries, and the text search, names replaced,
+scored 77 hits at k = 5 against a chance of 4.5 % (37.4 hits): 2.06 times
+chance, just over the declared line of twice chance, where it had been under
+it at 4126 declarations, so `text_is_within_twice_chance` failed by about two
+queries. With the Lean file of Phase 84 the corpus is 4146 declarations and
+the stride 830 queries, and the same search scores 74 hits against a chance of
+37.35: 1.98 times chance, under the line again, and the claim holds. With the
+Lean file of Phase 85 the corpus is 4171 declarations and the stride 835
+queries, and the search still scores 74 hits, against a chance of 37.6: 1.97
+times chance, and the claim holds. With the Lean file of Phase 87 the
+corpus is 4190 declarations and the stride 838 queries, and the search scores
+78 hits against a chance of 37.39: 2.09 times chance, over the line, so
+`text_is_within_twice_chance` fails again, by about four queries, and is
+recorded as a miss at this count rather than re-read. The claims
+that carry the study — the text search collapses, the identifier address book
+collapses with it, the structural address holds and leads every other faculty
+— held at every count. Recorded, not re-read: `tests/test_anonymous.py` pins
+the margin of this one claim (at least one and a half times chance, and under
+two and a quarter since Phase 87, when it crossed two) and records the miss,
+rather than letting it drift silently.
 
 ---
 

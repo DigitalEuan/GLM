@@ -37,7 +37,7 @@ undetermined. This study is that, and the measurement is the part the archive
 never had.
 
 The formal half is
-[`RequestProject/GLM/SearchLoop.lean`](../RequestProject/GLM/SearchLoop.lean),
+[`RequestProject/GLM/SearchLoop.lean`](../overlay/glm_lean/RequestProject/GLM/SearchLoop.lean),
 the computational half is `glm_universal.reasoning.search_loop`, the test that
 pins the two against each other is
 `overlay/glm_universal/tests/test_search_loop.py`, and the report prints with

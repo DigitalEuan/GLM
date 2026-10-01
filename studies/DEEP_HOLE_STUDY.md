@@ -29,7 +29,7 @@ already.
 
 The question is *not* "what are the deep holes of a Niemeier lattice" — that is
 tabulated, and
-[`RequestProject/GLM/Golay/Census.lean`](../RequestProject/GLM/Golay/Census.lean)
+[`RequestProject/GLM/Golay/Census.lean`](../overlay/glm_lean/RequestProject/GLM/Golay/Census.lean)
 already carries a census for one lattice. The question is whether the
 **distribution of trajectories that reach a hole** carries enough structure to
 *name* the hole, so that the classification is a measurement of the substrate

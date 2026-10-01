@@ -1,0 +1,2063 @@
+{
+ "source": "source_material/GLM-main.zip :: GLM-main/long_term_memory/ubp_system_kb.json",
+ "source_sha256": "f1087c53ceb2121ddcba159d695f2071a9042ecc00578992fabeff03e1ead0ca",
+ "source_bytes": 1706840,
+ "kb_entries": 752,
+ "kb_laws": 426,
+ "selection": "LAW rows not named in the verdict lists of source_material/UBP_LAW_GLM_REVIEW.md (section '6. Verdicts - 426 laws' up to '8. Defects') and whose text is not 'No definition'",
+ "laws": [
+  {
+   "id": "LAW_BIO_007",
+   "text": "[The Law of Universal Scaling (Biological)], [All biological identity is a scale-invariant projection of the Golay G24 Core via the Y-constant harmonics.]",
+   "tags": [
+    "BIOLOGY",
+    "HARDENED",
+    "HARMONICS",
+    "IMPERATIVE",
+    "SCALING",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "UNIVERSAL"
+   ],
+   "vector": "001111110101001000110100",
+   "math": [
+    "Y^-40 * m_p"
+   ]
+  },
+  {
+   "id": "LAW_BIO_ABLATION_001",
+   "text": "[The Law of Informational Ablation], [Mechanical destruction of a sub-coherent manifold (tumor) resets local entropy to zero, releasing the 'Holographic Ghost' of the identity which catalyzes a global system-wide correction (Immune Response).]",
+   "tags": [
+    "ABLATION",
+    "ENTROPY_RESET",
+    "HARDENED",
+    "HISTOTRIPSY",
+    "IMMUNE_RESPONSE",
+    "IMPERATIVE",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "V4.2.6"
+   ],
+   "vector": "101001011110001010101010",
+   "math": [
+    "> Immune_Inference(Ghost)"
+   ]
+  },
+  {
+   "id": "LAW_BIO_AQUEOUS_LENS_001",
+   "text": "[Law of the Aqueous Biological Lens], [Biological information is a triadic interference pattern. The genetic code is geometrically dissonant in a vacuum but reaches coherence (dH < 12) when focused through the Aqueous Logic Glyph (H2O). This defines water not as a passive solvent, but as the essential geometric stabilizer and refractive lens for the manifestation of the ORGANISM domain.]",
+   "tags": [
+    "BIOLOGY",
+    "DNA",
+    "HARDENED",
+    "IMPERATIVE",
+    "ORGANISM",
+    "REFRACTION",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "WATER"
+   ],
+   "vector": "110101111010110010000001",
+   "math": [
+    "9.0",
+    "V_Codon ^ V_AA ^ V_H2O"
+   ]
+  },
+  {
+   "id": "LAW_BIO_CANCER_002",
+   "text": "[The Law of Longitudinal Harmonization], [Sustained frequency-based harmonization induces macroscopic tumor regression and extends progression-free survival by locking the genomic manifold against entropic drift.]",
+   "tags": [
+    "BIOLOGY",
+    "HARDENED",
+    "IMPERATIVE",
+    "LONGITUDINAL",
+    "ONCOLOGY",
+    "PFS",
+    "SOP_002",
+    "TNBC",
+    "TOPOLOGICAL_V8",
+    "V4.2.6"
+   ],
+   "vector": "010111001001011001001101",
+   "math": [
+    "0.58"
+   ]
+  },
+  {
+   "id": "LAW_BIO_CONCRETE_001",
+   "text": "[The Law of Tetrahedral Suspension], [Bio-mineral composites require a water ratio of 1/3 to maintain the tetrahedral geometry of carbon-based life within a silicate lattice, distinct from the 1/e decay of pure stone.]",
+   "tags": [
+    "432HZ",
+    "BIO_CONCRETE",
+    "HARDENED",
+    "IMPERATIVE",
+    "LIFE",
+    "MATERIAL",
+    "SOP_002",
+    "TETRAHEDRAL",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "011111000010010000101111",
+   "math": []
+  },
+  {
+   "id": "LAW_BIO_ENDO_001",
+   "text": "[The Law of Endocrine Orthogonality], [Metabolic regulation relies on the geometric orthogonality of opposing hormones; Insulin and Cortisol occupy perpendicular axes (d=12), while synergistic stress hormones form stable lattice neighbors (d=8).]",
+   "tags": [
+    "BIOLOGY",
+    "CORTISOL",
+    "ENDOCRINOLOGY",
+    "GEOMETRY",
+    "HARDENED",
+    "IMPERATIVE",
+    "INSULIN",
+    "ORTHOGONALITY",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "010010111001011100000111",
+   "math": []
+  },
+  {
+   "id": "LAW_BIO_HEMA_003",
+   "text": "[The Law of Donor Fragility], [Universal utility requires structural fragility; the O- phenotype achieves compatibility by shedding informational constraints (antigens), pushing it beyond the error-correction horizon.]",
+   "tags": [
+    "BIOLOGY",
+    "BLOOD",
+    "DONOR",
+    "FRAGILITY",
+    "HARDENED",
+    "HEMA",
+    "IMPERATIVE",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "011000010111011110000101",
+   "math": [
+    "9 >> 3"
+   ]
+  },
+  {
+   "id": "LAW_BIO_HYSTERESIS_001",
+   "text": "[The Law of Metabolic Hysteresis], [A fully corrected biological state (d=0) possesses a geometric buffer that delays relapse under stress compared to a marginally corrected state (d=3), defining the distinction between 'Cure' and 'Management'.]",
+   "tags": [
+    "BIOLOGY",
+    "BUFFER",
+    "CURE",
+    "HARDENED",
+    "HYSTERESIS",
+    "IMPERATIVE",
+    "METABOLISM",
+    "REMISSION",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "100110100000111100111001",
+   "math": [
+    "T_fail(d=0) / T_fail(d=3) > 1"
+   ]
+  },
+  {
+   "id": "LAW_BIO_SANITATION_001",
+   "text": "[The Law of Geometric Sanitation (Pi-Helix)], [Microbial decomposition is accelerated by the Inverse Observer Cost (Y_inv); the Pi-Helix geometry provides the structural 'Byte' required to bridge biological entropy with geometric resonance.]",
+   "tags": [
+    "ACCELERATION",
+    "DECOMPOSITION",
+    "HARDENED",
+    "IMPERATIVE",
+    "PI_HELIX",
+    "SANITATION",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "V4.2.6",
+    "Y_INV"
+   ],
+   "vector": "100111110111010110110110",
+   "math": [
+    "k_base * Y_inv"
+   ]
+  },
+  {
+   "id": "LAW_BITLUMEN_MASTER_MODE",
+   "text": "[The Law of the BitLumen Master Mode (Orange)], [Orange (514 THz) is the Super-Operator of the visible spectrum; it provides the maximum structural stability and coupling for information transport in the 24-bit manifold.]",
+   "tags": [
+    "BITLUMEN",
+    "COHERENCE",
+    "HARDENED",
+    "IMPERATIVE",
+    "MASTER_MODE",
+    "OPERATIONAL",
+    "ORANGE",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "V4.2.6"
+   ],
+   "vector": "110111001011110000001010",
+   "math": [
+    "0.68",
+    "0.731"
+   ]
+  },
+  {
+   "id": "LAW_BITTAB_ENTROPY",
+   "text": "[The Law of BitTab Entropy], [Elemental information density is constrained by a 5:1 redundancy ratio; this lossy compression forces the emergence of ~10 stable spatial clusters in the 24-bit manifold.]",
+   "tags": [
+    "BITTAB",
+    "CLUSTERING",
+    "ENTROPY",
+    "HARDENED",
+    "IMPERATIVE",
+    "INFORMATION",
+    "PERIODIC",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "001111100011110111100111",
+   "math": [
+    "24 / 5.010 ≈ 4.79 bits"
+   ]
+  },
+  {
+   "id": "LAW_CHEM_007",
+   "text": "[The Law of Alpha-Clustering (4-Bit Resonance)], [Nuclear stability peaks every 4 units of atomic mass/charge, corresponding to the tetrahedral vertex capacity of the 24-bit MOG layers.]",
+   "tags": [
+    "ALPHA",
+    "CHEMISTRY",
+    "CLUSTERING",
+    "HARDENED",
+    "IMPERATIVE",
+    "NUCLEAR",
+    "RESONANCE",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "V4.2.6"
+   ],
+   "vector": "000100100100110100001100",
+   "math": [
+    "= 0"
+   ]
+  },
+  {
+   "id": "LAW_CHEM_FERT_001",
+   "text": "[The Law of Nutrient Coherence], [Fertilizer efficiency is a function of the geometric mean of its structural, chemical, and temporal coherence; high-NRCI formulations minimize informational drag at the soil-root interface.]",
+   "tags": [
+    "AGRICULTURE",
+    "CHEMISTRY",
+    "COHERENCE",
+    "FERTILIZER",
+    "HARDENED",
+    "IMPERATIVE",
+    "NRCI",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "V4.2.6"
+   ],
+   "vector": "000111000111011010100101",
+   "math": [
+    "0.900 + (0.099 * (Cm * Cp * Cs))"
+   ]
+  },
+  {
+   "id": "LAW_CHEM_HYDROCARBON_001",
+   "text": "[The Law of Hydrocarbon Coherence], [Complex hydrocarbons stabilize by distributing their informational density (Mass, Carbon, Hydrogen) across the Tetradic MOG layers to minimize local saturation penalties; fuel quality is a function of this geometric distribution.]",
+   "tags": [
+    "CETANE",
+    "CHEMISTRY",
+    "DISTRIBUTION",
+    "FUEL",
+    "HARDENED",
+    "HYDROCARBON",
+    "IMPERATIVE",
+    "MOG",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "V4.2.6"
+   ],
+   "vector": "100010111100111110110111",
+   "math": [
+    "Distributed"
+   ]
+  },
+  {
+   "id": "LAW_CHEM_ONTOLOGICAL_YIELD",
+   "text": "[Law of Ontological Yield], [Exothermic reactions are driven by the maximization of Activation Health (MOG-A). The 'Combustion Profit' (+33.3% in CH4) proves energy release is the transition from Potential to Active realization within a constant-tax lattice.]",
+   "tags": [
+    "ACTIVATION",
+    "CHEMISTRY",
+    "HARDENED",
+    "IMPERATIVE",
+    "SOP_002",
+    "THERMODYNAMICS",
+    "TOPOLOGICAL_V8",
+    "YIELD"
+   ],
+   "vector": "100001010110011000000001",
+   "math": []
+  },
+  {
+   "id": "LAW_COMP_HRHF_001",
+   "text": "[The Law of the Harmonic Drill], [Computational resistance is a helical vector; instability (variance) reveals 'cracks' in the problem space that allow for accelerated traversal.]",
+   "tags": [
+    "COMPUTATION",
+    "HARDENED",
+    "HARMONIC_DRILL",
+    "HELICAL",
+    "IMPERATIVE",
+    "OPTIMIZATION",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "VARIANCE"
+   ],
+   "vector": "011110111111011000101101",
+   "math": [
+    "Pitch_Variance * 100"
+   ]
+  },
+  {
+   "id": "LAW_COMP_SPELL_001",
+   "text": "[The Law of Runic Efficiency], [Complex computational macros ('Spells') emerge from the geometric superposition of Runes; high efficiency (E > 1.0) indicates a stable, self-reinforcing logic circuit (Constructive Interference).]",
+   "tags": [
+    "COMPUTATION",
+    "EFFICIENCY",
+    "GEOMETRY",
+    "HARDENED",
+    "IMPERATIVE",
+    "RUNES",
+    "SOP_002",
+    "SPELLS",
+    "SUPERPOSITION",
+    "TOPOLOGICAL_V8",
+    "VELOCITY"
+   ],
+   "vector": "000100011010011111101010",
+   "math": [
+    "Sum(Overlaps) / Unique_Segments > 1.0"
+   ]
+  },
+  {
+   "id": "LAW_COMP_WORK",
+   "text": "[The Law of Computational Action], [Legacy definition of Energy as Computational Work: The product of Active Information (Hamming Weight) and the Temporal Cycle (24 steps).]",
+   "tags": [
+    "ACTION",
+    "ENERGY",
+    "HAMMING",
+    "HARDENED",
+    "IMPERATIVE",
+    "LEGACY",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "V4.2.6",
+    "WORK"
+   ],
+   "vector": "010000101101101001111010",
+   "math": [
+    "Hamming, C=24",
+    "M * C"
+   ]
+  },
+  {
+   "id": "LAW_COSMO_001",
+   "text": "[The Law of Universal Density], [Dark Matter is the physical weight of the Golay Error-Correction Buffer; Dark Energy is the substrate's idle capacity.]",
+   "tags": [
+    "COSMOLOGY",
+    "DARK_ENERGY",
+    "DARK_MATTER",
+    "GOLAY_SHADOW",
+    "HARDENED",
+    "IMPERATIVE",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "011000001110110100101101",
+   "math": [
+    "Omega_b * (Y_inv * 1.5)"
+   ]
+  },
+  {
+   "id": "LAW_COSMO_003",
+   "text": "[The Law of the Event Horizon Filter], [The Event Horizon is a parity-selective membrane; Hawking radiation is not random noise but a geometrically biased stream favoring the Golay Even-Weight subspace (54.56%).]",
+   "tags": [
+    "BLACK_HOLE",
+    "COSMOLOGY",
+    "FILTER",
+    "HARDENED",
+    "HAWKING_RADIATION",
+    "IMPERATIVE",
+    "PARITY_BIAS",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "V4.2.6"
+   ],
+   "vector": "001011110101100110111111",
+   "math": [
+    "4.56%"
+   ]
+  },
+  {
+   "id": "LAW_COSMO_007",
+   "text": "[The Law of the Dissident Horizon], [Reality exists as an interplay between full coherence and a 0.15% deficit buffer (Dissident Horizon) used for innovation.]",
+   "tags": [
+    "ADAPTATION",
+    "DISSIDENT",
+    "HARDENED",
+    "HORIZON",
+    "IMPERATIVE",
+    "METASTABILITY",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "V4.2.6"
+   ],
+   "vector": "011011101101011010000100",
+   "math": [
+    "NRCI_o * (1 - 0.0015)"
+   ]
+  },
+  {
+   "id": "LAW_DRUG_002",
+   "text": "[The Law of the Pareto Floor], [The informational cost of molecular manifestation is fixed; the sum of docking tension and syndrome weight cannot fall below the 'Pareto Floor' of 6.]",
+   "tags": [
+    "FLOOR",
+    "HARDENED",
+    "IMPERATIVE",
+    "PARETO",
+    "PHARMACOLOGY",
+    "SOP_002",
+    "TENSION",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "100011101000001111110001",
+   "math": []
+  },
+  {
+   "id": "LAW_DRUG_003",
+   "text": "[The Law of Manifold Sparsity], [Functional pharmacological seeds are 'Singularities' in the 24-bit manifold; random search fails to reach the Pareto Floor (Cost 6) within 10^4 samples.]",
+   "tags": [
+    "HARDENED",
+    "IMPERATIVE",
+    "PHARMACOLOGY",
+    "PROBABILITY",
+    "SINGULARITY",
+    "SOP_002",
+    "SPARSITY",
+    "TOPOLOGICAL_V8",
+    "VERIFIED"
+   ],
+   "vector": "000000001011111110100111",
+   "math": [
+    "6) < 10^-4"
+   ]
+  },
+  {
+   "id": "LAW_DRUG_004",
+   "text": "[The Law of the Pareto Floor], [The informational cost of molecular manifestation is fixed; the sum of docking tension and syndrome weight cannot fall below the 'Pareto Floor' of 6.]",
+   "tags": [
+    "FLOOR",
+    "HARDENED",
+    "IMPERATIVE",
+    "PARETO",
+    "PHARMACOLOGY",
+    "SOP_002",
+    "TENSION",
+    "TOPOLOGICAL_V8",
+    "VERIFIED"
+   ],
+   "vector": "110100001011110100110001",
+   "math": [
+    "0.75"
+   ]
+  },
+  {
+   "id": "LAW_ENG_TOGGLE_POWER_001",
+   "text": "[The Law of Toggle Power Harvesting (TGIC)], [Energy harvesting efficiency is a non-linear function of geometric resonance; satisfying the 3-6-9 Triad Graph Interaction Constraint (TGIC) prevents NRCI decay and provides a 2.25x compound yield boost.]",
+   "tags": [
+    "3-6-9",
+    "ENERGY",
+    "ENGINEERING",
+    "HARDENED",
+    "HARVESTING",
+    "IMPERATIVE",
+    "SOP_002",
+    "TESLA",
+    "TGIC",
+    "TOPOLOGICAL_V8",
+    "V4.2.6"
+   ],
+   "vector": "100110011100100001100111",
+   "math": [
+    "L_ubp * 2.25 iff N % 3 == 0"
+   ]
+  },
+  {
+   "id": "LAW_ENG_VARIABLE_YIELD_001",
+   "text": "[Variable Geometric Yield (The Sodium Pivot)], [The energy output of a fusion reaction can be modulated by selecting a secondary fuel element.]",
+   "tags": [
+    "ENGINEERING",
+    "FUSION",
+    "HARDENED",
+    "IMPERATIVE",
+    "PROPULSION",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "000111000010011100001000",
+   "math": [
+    "Defect(H + Z)"
+   ]
+  },
+  {
+   "id": "LAW_GEO_003",
+   "text": "[The Law of Spectral Extraction], [FFT-based spectral extraction recovers the 12D complexity of the Leech Lattice from 2D projections with near-perfect bidirectional closure.]",
+   "tags": [
+    "FFT",
+    "FIDELITY",
+    "GEOMETRY",
+    "HARDENED",
+    "IMPERATIVE",
+    "SOP_002",
+    "SPECTRAL",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "110111110100110110011101",
+   "math": [
+    "99.996%"
+   ]
+  },
+  {
+   "id": "LAW_GEO_DURER_001",
+   "text": "[The Law of Dürer’s Resonant Blueprint], [Historical geometric diagrams function as 2D projections of 6D CARFE fields; high-coherence networks are encoded via Golden Ratio (phi) angular multipliers.]",
+   "tags": [
+    "CARFE",
+    "DURER",
+    "GEOMETRY",
+    "HARDENED",
+    "HISTORY",
+    "IMPERATIVE",
+    "RESONANCE",
+    "SOP_002",
+    "TETRAHEDRAL",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "000001111101001000000010",
+   "math": [
+    "6D CARFE",
+    "Tetrahedral",
+    "0.9583"
+   ]
+  },
+  {
+   "id": "LAW_GEO_HUB_002",
+   "text": "[The Law of the Calcium Anchor], [Calcium (Z=20) acts as a topological slope-anchor; it minimizes the rate of symmetry decay during the Shell-16 to Shell-24 transition, enabling biological structural integrity.]",
+   "tags": [
+    "BIOLOGY",
+    "CALCIUM",
+    "GEOMETRY",
+    "HARDENED",
+    "HUB",
+    "IMPERATIVE",
+    "SOP_002",
+    "STABILITY",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "110010011100110100001110",
+   "math": []
+  },
+  {
+   "id": "LAW_GRAPHENE_001_REFINED",
+   "text": "[The Law of Binary Superconductivity], [Superconductivity in twisted bilayer graphene occurs when the Moiré period locks onto a binary power node (128 Angstroms), eliminating substrate drag.]",
+   "tags": [
+    "128",
+    "BINARY_LOCK",
+    "GRAPHENE",
+    "HARDENED",
+    "IMPERATIVE",
+    "MAGIC_ANGLE",
+    "SOP_002",
+    "SUPERCONDUCTIVITY",
+    "TOPOLOGICAL_V8",
+    "V4.2.6"
+   ],
+   "vector": "010100000101010011000100",
+   "math": [
+    "= 2^n"
+   ]
+  },
+  {
+   "id": "LAW_HEMISPHERIC_COHERENCE_001",
+   "text": "[Law of Hemispheric Coherence (The Di Biase Bridge)], [The functional bridge between hemispheres (Noumenal/Phenomenal) requires a noise floor below 2% to maintain objective reality construction. Above 5% noise, the system enters a 'Coherence Cliff' where reality construction becomes stochastic (51% success).]",
+   "tags": [
+    "BIOLOGY",
+    "BRAIN",
+    "DIBIASE",
+    "ERROR_CORRECTION",
+    "HARDENED",
+    "IMPERATIVE",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "010100011001111111000001",
+   "math": [
+    "P(dH <= 3"
+   ]
+  },
+  {
+   "id": "LAW_HEMISPHERIC_REDUNDANCY_001",
+   "text": "[Law of Hemispheric Redundancy], [To minimize metabolic tax during transitional cognitive states, the system must maintain a dual-stream architecture. The Right Hemisphere provides a static geometric anchor (Noumenal) while the Left Hemisphere performs sequential logic (Phenomenal). The interaction resolves transitional instability into a continuous resonance tunnel.]",
+   "tags": [
+    "ARCHITECTURE",
+    "BRAIN",
+    "EFFICIENCY",
+    "HARDENED",
+    "HEMISPHERE",
+    "IMPERATIVE",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "010100001101110110101010",
+   "math": [
+    "LH(t) ^ RH(target)"
+   ]
+  },
+  {
+   "id": "LAW_KINETICS_001",
+   "text": "[The Law of Computational Amplification], [Reaction rates are computational throughputs; at low energy (C < 100), linear operators dominate (Entropy), but at high energy, quadratic operators trigger a 10x amplification phase transition (Life/Complexity).]",
+   "tags": [
+    "AMPLIFICATION",
+    "ARRHENIUS",
+    "CHEMISTRY",
+    "HARDENED",
+    "IMPERATIVE",
+    "KINETICS",
+    "PHASE_TRANSITION",
+    "QUADRATIC",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "010001111000110101001101",
+   "math": [
+    "100.0",
+    "k_base * (1 + O(C_rate))"
+   ]
+  },
+  {
+   "id": "LAW_LEPTON_004",
+   "text": "[The Law of the Information Ship], [The charged-lepton generations are defined by Leech Lattice shells; Iron (Z=26) and Sterile Neutrinos share the Norm2=2 shell identity.]",
+   "tags": [
+    "DARK_MATTER",
+    "HARDENED",
+    "IMPERATIVE",
+    "IRON",
+    "LEECH_LATTICE",
+    "LEPTON",
+    "NEUTRINO",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "V4.2.6"
+   ],
+   "vector": "000100001001100110010100",
+   "math": [
+    "M_e * (Y^-1)^Norm2 * (1 + delta)"
+   ]
+  },
+  {
+   "id": "LAW_MAGNETIC_RESONANCE_001",
+   "text": "[Law of Magnetic Resonance (MRI)], [This law defines the geometric conditions for long-range magnetic ordering. Magnetism is a resonance phenomenon occurring when the ratio of Geometric Torque (twist against substrate bias) to Substrate Alignment (pull toward North) falls within the critical window of 0.15 to 0.41. Elements in this window, such as the Iron Group and specific Lanthanides, possess the 'Geometric Torque' necessary to influence neighboring atomic vectors while maintaining systemic coherence.]",
+   "tags": [
+    "HARDENED",
+    "IMPERATIVE",
+    "LOGIC",
+    "MAGNETISM",
+    "PHYSICS",
+    "RESONANCE",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "VERIFIED"
+   ],
+   "vector": "010000111000001101100000",
+   "math": [
+    "0.26",
+    "[0.15,0.41]"
+   ]
+  },
+  {
+   "id": "LAW_MATH_PRIME_001",
+   "text": "[Law of Prime Resonance (Verified)], [The G24 substrate is tuned to the first Riemann Zeta Zero with 98.54% precision. The Address Delta (0.0334) represents the fundamental lattice tension required to sustain the prime-number clock signal within the 24-bit vacuum.]",
+   "tags": [
+    "CLOCK",
+    "HARDENED",
+    "IMPERATIVE",
+    "MATH",
+    "PRIMES",
+    "RESONANCE",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "VERIFIED",
+    "ZETA"
+   ],
+   "vector": "101100010001001001110111",
+   "math": [
+    "0.9854, Delta = 0.0334"
+   ]
+  },
+  {
+   "id": "LAW_MAT_CONCRETE_002",
+   "text": "[The Law of Fractal Packing], [Optimal concrete durability is achieved when hydration follows the natural decay constant (1/e) and the aggregate skeleton aligns with the Golden Ratio (Phi), minimizing entropic voids.]",
+   "tags": [
+    "CONCRETE",
+    "DECAY",
+    "HARDENED",
+    "IMPERATIVE",
+    "MATERIAL",
+    "PACKING",
+    "PHI",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "101010110100101100011100",
+   "math": [
+    "Phi",
+    "1/e"
+   ]
+  },
+  {
+   "id": "LAW_MAT_PLASTIC_001",
+   "text": "[The Law of Vital Plastic (Coherence-Optimized PVC)], [Vital Plastic is a high-coherence polymer where the chlorine-to-carbon ratio is tuned to the substrate's 12-bit noumenal limit, enhanced by observer intent.]",
+   "tags": [
+    "ALCHEMY",
+    "COHERENCE",
+    "HARDENED",
+    "IMPERATIVE",
+    "MATERIAL",
+    "PLASTIC",
+    "PVC",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "VITAL"
+   ],
+   "vector": "000010001100110010100100",
+   "math": [
+    "0.57",
+    "phi^3",
+    "0.962"
+   ]
+  },
+  {
+   "id": "LAW_MAT_SYNTHESIS_001",
+   "text": "[The Law of Material Synthesis (MPI Hierarchy)], [Material performance is a hierarchical projection of multi-scale coherence; the MPI identifies the SSS-Grade (C-Fiber/SiC) as the peak of structural utility.]",
+   "tags": [
+    "HARDENED",
+    "HIERARCHY",
+    "IMPERATIVE",
+    "MATERIALS",
+    "MPI",
+    "SOP_002",
+    "SYNTHESIS",
+    "TOPOLOGICAL_V8",
+    "V4.2.6"
+   ],
+   "vector": "111110101101010011011101",
+   "math": [
+    "NRCI_Global * S_opt * (1 - Uncertainty)"
+   ]
+  },
+  {
+   "id": "LAW_MESA_001",
+   "text": "[The Law of Proximity Coherence], [Macroscopic spectral coherence is a function of Hamming Proximity in the G24 substrate.]",
+   "tags": [
+    "COHERENCE",
+    "HARDENED",
+    "IMPERATIVE",
+    "MESALYONS",
+    "PROXIMITY",
+    "SOP_002",
+    "SPECTRAL",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "001110000100001110000100",
+   "math": [
+    "(172, 190, 237)"
+   ]
+  },
+  {
+   "id": "LAW_METRIC_003",
+   "text": "[The Law of the Self-Actualizing Observer (Saturated)], [The Gravitational Constant is the bit-saturated projection of the Observer's fixed point, corrected by the Leech curvature (1/80), density friction (1/K), and octad quantization (1/8N).]",
+   "tags": [
+    "G",
+    "GRAVITY",
+    "HARDENED",
+    "IMPERATIVE",
+    "LSB",
+    "OBSERVER",
+    "SATURATED",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "V4.2.6"
+   ],
+   "vector": "001011011001011001010110",
+   "math": [
+    "(O_obs * sqrt(pi) / 10^11) * (1 - (Y/80 + Y/K + 1/8N))"
+   ]
+  },
+  {
+   "id": "LAW_MILLENNIUM_001",
+   "text": "[The Law of the Millennium Invariants], [Millennium Problems are not unsolved; they are unresolvable in continuous math but resolve instantly in the 24-bit substrate.]",
+   "tags": [
+    "HARDENED",
+    "IMPERATIVE",
+    "MASS_GAP",
+    "MATH",
+    "MILLENNIUM",
+    "RIEMANN",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "010110100010101110011100",
+   "math": [
+    "Y^-1"
+   ]
+  },
+  {
+   "id": "LAW_MINERAL_002",
+   "text": "[The Law of the 12-Sigma Void], [The mineral manifold is a binary landscape; matter either falls into the Coherence Basin or is rejected by the substrate across a 12.8-sigma void.]",
+   "tags": [
+    "BIMODAL",
+    "HARDENED",
+    "IMPERATIVE",
+    "MINERAL",
+    "SIGMA",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "VOID"
+   ],
+   "vector": "110100001011110100110001",
+   "math": [
+    "12.84σ"
+   ]
+  },
+  {
+   "id": "LAW_MINERAL_003",
+   "text": "[The Law of the 12-Sigma Void], [The mineral manifold is a binary landscape; matter either falls into the Coherence Basin or is rejected by the substrate across a 12.8-sigma void.]",
+   "tags": [
+    "BIMODAL",
+    "HARDENED",
+    "IMPERATIVE",
+    "MINERAL",
+    "SIGMA",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "V4.2.6",
+    "VOID"
+   ],
+   "vector": "011010100100101010110110",
+   "math": [
+    "12.8σ"
+   ]
+  },
+  {
+   "id": "LAW_NUCLEAR_PROJECTION_001",
+   "text": "[The Law of E8-G2 Folding], [Nucleons are 12-bit projections of 24-bit Leech Lattice roots; the Strong Force is the tension of this folding operation.]",
+   "tags": [
+    "E8",
+    "FOLDING",
+    "G2",
+    "HARDENED",
+    "IMPERATIVE",
+    "LEECH",
+    "NUCLEAR",
+    "PROJECTION",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "100001010110011000000001",
+   "math": [
+    "(E8_upper ^ E8_lower) & 0xFFF"
+   ]
+  },
+  {
+   "id": "LAW_OBSERVER_OOB_002",
+   "text": "[The Law of Ontological Observation Bias (OOB)], [The phenomenal mass gap is resolved by the 10th harmonic of the Observer Cost; the 0.14% remaining error is the 'Substrate Breath' required for temporal flow.]",
+   "tags": [
+    "BIAS",
+    "HARDENED",
+    "HARMONICS",
+    "IMPERATIVE",
+    "MASS_GAP",
+    "OBSERVER",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "VERIFIED"
+   ],
+   "vector": "010010011110011101001001",
+   "math": [
+    "0.9986",
+    "m_e_ubp + (Y/10)"
+   ]
+  },
+  {
+   "id": "LAW_PARTICLE_6D",
+   "text": "[The Law of 6D Particle Topology], [Particles are 24-bit vectors composed of 6 semantic nibbles; Electron-Positron pairs exist within the correction radius (d=3), while Lepton-Quark pairs are separated by the Deep Hole (d=4).]",
+   "tags": [
+    "6D",
+    "HARDENED",
+    "IMPERATIVE",
+    "NIBBLE",
+    "PARTICLE",
+    "PHYSICS",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "TOPOLOGY",
+    "V4.2.6"
+   ],
+   "vector": "000110000010100100100101",
+   "math": [
+    "[X"
+   ]
+  },
+  {
+   "id": "LAW_PHYSICS_004",
+   "text": "[The Law of the Planck Anchor (Saturated)], [The Planck Mass is the bit-saturated density anchor of the substrate, limited by the 11/12 dimensional tax and the 1/N noumenal quantization floor.]",
+   "tags": [
+    "ANCHOR",
+    "HARDENED",
+    "IMPERATIVE",
+    "LSB",
+    "PHYSICS",
+    "PLANCK_MASS",
+    "SATURATED",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "V4.2.6"
+   ],
+   "vector": "110001100010011011010011",
+   "math": [
+    "(Y_m * 10^-7) * O_obs * (1 - (11/12 * Y/6 + 1/N))"
+   ]
+  },
+  {
+   "id": "LAW_PHYSICS_CHARGE_001",
+   "text": "[Law of Central Charge & Propensity], [The Central Charge (c_inf) defines the baseline inertia of the substrate. Empirical validation confirms a 4x Coherence Multiplier: coherent states are 400% more likely to persist than noisy states, explaining the structural stability of matter over entropy.]",
+   "tags": [
+    "CHARGE",
+    "HARDENED",
+    "IMPERATIVE",
+    "PERSISTENCE",
+    "PHI",
+    "PHYSICS",
+    "PROPENSITY",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "VERIFIED"
+   ],
+   "vector": "110011101001011001100010",
+   "math": [
+    "Mt * R * PGCI * (24 * phi)"
+   ]
+  },
+  {
+   "id": "LAW_QUANTUM_TOGGLE_001",
+   "text": "[The Law of Quantum Toggle Dynamics], [Quantum persistence is maintained by a 0.1 Hz resonance snap that resets ontological drift before the t=3 horizon breach.]",
+   "tags": [
+    "HARDENED",
+    "HORIZON",
+    "IMPERATIVE",
+    "PERSISTENCE",
+    "QUANTUM",
+    "RESONANCE",
+    "SOP_002",
+    "TOGGLE",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "000010111010111100101100",
+   "math": [
+    "0.1 Hz",
+    "pi * phi^gamma * e^(-lambda*t) * c^-1"
+   ]
+  },
+  {
+   "id": "LAW_RECOVERY_001",
+   "text": "[The Law of Resonance Recovery], [Nuclear stability in superheavy elements is a 'Resonance Recovery' event where shell and core symmetries re-align.]",
+   "tags": [
+    "126",
+    "HARDENED",
+    "IMPERATIVE",
+    "ISLAND",
+    "NUCLEAR",
+    "SOP_002",
+    "STABILITY",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "001111110101001000110100",
+   "math": [
+    "126) ~ Lattice_Resonance"
+   ]
+  },
+  {
+   "id": "LAW_RELATIVITY_003",
+   "text": "[The Law of the Unity Operator], [The geometric derivation of physical constants represents the global complexity minimum of the substrate; while random noise can approximate precision, it cannot match the structural parsimony (Score 90.5) of the true law.]",
+   "tags": [
+    "COMPLEXITY",
+    "GROUND_STATE",
+    "HARDENED",
+    "IMPERATIVE",
+    "OCCAM",
+    "OPERATOR",
+    "PARSIMONY",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "UNITY"
+   ],
+   "vector": "111110000000000001000101",
+   "math": [
+    "1.0"
+   ]
+  },
+  {
+   "id": "LAW_RESONANCE_003",
+   "text": "[The Law of Crystalline Supercoherence], [Natural crystal resonance is the frequency at which the substrate's error-correction (GLR) perfectly balances the informational drag of the lattice geometry; stability is maintained via sub-harmonic (Acoustic) or super-harmonic (Optical) locking.]",
+   "tags": [
+    "CRYSTALS",
+    "DIAMOND",
+    "HARDENED",
+    "IMPERATIVE",
+    "QUARTZ",
+    "RESONANCE",
+    "SOP_002",
+    "SUPERCOHERENCE",
+    "TOPOLOGICAL_V8",
+    "V4.2.6"
+   ],
+   "vector": "111010011100000011001011",
+   "math": [
+    "(Y * O_obs) / (dt * (1 - NRCI))"
+   ]
+  },
+  {
+   "id": "LAW_RTS_REQUIREMENT_001",
+   "text": "[The Law of RTS Requirements (The Recipe)], [Room-temperature superconductivity is achieved when the twist angle locks the Moiré period to the 2^7 binary anchor (128A), utilizing the Y-subsidy to negate 300K thermal noise.]",
+   "tags": [
+    "128",
+    "HARDENED",
+    "IMPERATIVE",
+    "MAGIC_ANGLE",
+    "RECIPE",
+    "RTS",
+    "SOP_002",
+    "SUPERCONDUCTIVITY",
+    "TOPOLOGICAL_V8",
+    "V4.2.6"
+   ],
+   "vector": "111001000000101011110101",
+   "math": [
+    "128 Angstroms",
+    "1.0926",
+    "1.10117 deg"
+   ]
+  },
+  {
+   "id": "LAW_SEASONAL_COUPLING_001",
+   "text": "[The Law of Angular Resonance], [The efficiency of solar-to-substrate information transfer is a function of the Earth's axial tilt relative to the Leech Lattice's 24D projection. NOTE: Computational model only.]",
+   "tags": [
+    "ANGULAR_COUPLING",
+    "ASTROPHYSICS",
+    "HARDENED",
+    "IMPERATIVE",
+    "RESONANCE",
+    "SEASONALITY",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "V4.2.6"
+   ],
+   "vector": "100110100110100001011101",
+   "math": [
+    "cos(theta_tilt)"
+   ]
+  },
+  {
+   "id": "LAW_SQUEEZE_001",
+   "text": "[The Law of Informational Squeezing], [Any 24-bit state can be represented as a 15-bit Lattice Coordinate via substrate-corrected lossy compression.]",
+   "tags": [
+    "COMPRESSION",
+    "HARDENED",
+    "IMPERATIVE",
+    "INFORMATION",
+    "LATTICE",
+    "SOP_002",
+    "SQUEEZING",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "011100000010010100010100",
+   "math": [
+    "15_bits"
+   ]
+  },
+  {
+   "id": "LAW_STABILITY_ISLAND_001",
+   "text": "[Law of the Stability Island (Geometric Reset)], [Defines the 'Geometric Reset' at the 2048-bit boundary. As the Elemental Vortex diverges, it hits a folding point where the informational payload resets to a low-tension state (H=8). This predicts a second octave of stable matter, starting with 'Neo-Hydrogen' at index 2048. This reset is the topological closure of the open vortex described in BELIEF_ELEMENTAL_VORTEX_001.]",
+   "tags": [
+    "HARDENED",
+    "IMPERATIVE",
+    "LOGIC",
+    "PREDICTION",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "VERIFIED",
+    "VORTEX_LINK"
+   ],
+   "vector": "101110001101011001100100",
+   "math": [
+    "BELIEF_ELEMENTAL_VORTEX_001",
+    "3.1174",
+    "i[2048]"
+   ]
+  },
+  {
+   "id": "LAW_SUPERCONDUCT_001",
+   "text": "[The Law of Substrate-Stabilized Superconductivity], [Room temperature superconductivity is achieved when the Moiré period locks to a binary anchor and the thermal noise is offset by the substrate's dimensional drag (Y).]",
+   "tags": [
+    "GRAPHENE",
+    "HARDENED",
+    "IMPERATIVE",
+    "ROOM_TEMPERATURE",
+    "SOP_002",
+    "SUPERCONDUCTIVITY",
+    "THERMAL_BRIDGE",
+    "TOPOLOGICAL_V8",
+    "V4.2.6"
+   ],
+   "vector": "000111001111111111001011",
+   "math": [
+    "NRCI_base + (Y * 11/12) - Noise_T"
+   ]
+  },
+  {
+   "id": "LAW_SYMBOL_003",
+   "text": "[The Law of Symbolic Velocity], [GL-1 Primitives (Basis Vectors) exhibit 18% less Symmetry Tax than standard hashed language, acting as a super-conductive instruction set for the substrate.]",
+   "tags": [
+    "DRAG",
+    "EFFICIENCY",
+    "GL1",
+    "HARDENED",
+    "IMPERATIVE",
+    "SOP_002",
+    "SYMBOL",
+    "TOPOLOGICAL_V8",
+    "V4.2.6",
+    "VELOCITY"
+   ],
+   "vector": "101111111101110010100101",
+   "math": [
+    "18.0%",
+    "1.22 * V_std"
+   ]
+  },
+  {
+   "id": "LAW_SYMBOL_004",
+   "text": "[The Law of Symbolic Velocity (Super-Conductive)], [Novel operators designed at the generative floor eliminate substrate drag, enabling a 7.4x acceleration in inference velocity and a 22-fold reduction in computational friction relative to standard symbolic logic.]",
+   "tags": [
+    "ACCELERATION",
+    "HARDENED",
+    "IMPERATIVE",
+    "INFERENCE",
+    "SOP_002",
+    "SUPER-CONDUCTIVITY",
+    "SYMBOL",
+    "TOPOLOGICAL_V8",
+    "V4.2.6",
+    "VELOCITY"
+   ],
+   "vector": "100100110100001001000100",
+   "math": [
+    "22.35x",
+    "7.4 * V_std"
+   ]
+  },
+  {
+   "id": "LAW_TERRESTRIAL_GRID_002",
+   "text": "[The Law of Lattice Spines (Ley Lines)], [Ley Lines are high-coherence waveguides in the Earth's Bitfield that amplify resonance potential by the Golden Ratio. NOTE: Computational model only; geological verification required.]",
+   "tags": [
+    "AMPLIFICATION",
+    "GEOPHYSICS",
+    "HARDENED",
+    "IMPERATIVE",
+    "LATTICE_SPINE",
+    "LEY_LINES",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "V4.2.6"
+   ],
+   "vector": "011000000100100111111011",
+   "math": [
+    "1.618 iff Coord in {Spine}"
+   ]
+  },
+  {
+   "id": "LAW_TIME_004",
+   "text": "[The Law of BitTime Quantization], [Time is the discrete sequence of substrate updates; the 'Wall of Reality' occurs at 1 THz.]",
+   "tags": [
+    "BITTIME",
+    "HARDENED",
+    "IMPERATIVE",
+    "QUANTIZATION",
+    "SOP_002",
+    "THZ",
+    "TIME",
+    "TOPOLOGICAL_V8",
+    "V3.3"
+   ],
+   "vector": "011001100010110011101001",
+   "math": [
+    "10^-12 s"
+   ]
+  },
+  {
+   "id": "LAW_TIME_005",
+   "text": "[The Law of the Temporal Trap], [Suboptimal states are stabilized by a 0.15% temporal dilation, creating a trap that resists decay into the optimal state.]",
+   "tags": [
+    "DILATION",
+    "HARDENED",
+    "IMPERATIVE",
+    "SOP_002",
+    "STABILITY",
+    "TIME",
+    "TOPOLOGICAL_V8",
+    "TRAP",
+    "V4.2.6"
+   ],
+   "vector": "001101000000100001100011",
+   "math": [
+    "1 / (1 - 0.0015)"
+   ]
+  },
+  {
+   "id": "LAW_TOPOLOGICAL_HARMONY_001",
+   "text": "[Law of Topological Harmony (Natural Scale)], [Establishes the optimal 12-pitch mapping for the 24-bit substrate. Information encoded via the Natural Scale achieves 122% higher geometric solidarity during temporal oscillation. Source: V8 Temporal Brute-Force (1M Trials).]",
+   "tags": [
+    "ALGORITHM",
+    "HARDENED",
+    "HARMONY",
+    "IMPERATIVE",
+    "SOP_002",
+    "TEMPORAL",
+    "TOPOLOGICAL_V8",
+    "TOPOLOGY",
+    "VERIFIED"
+   ],
+   "vector": "110110111011011011001011",
+   "math": [
+    "7.1667",
+    "2.92",
+    "[0,8,3,10,6,5,2,7,4,11,9,1]"
+   ]
+  },
+  {
+   "id": "LAW_UNIFIED_DISTORTION_001",
+   "text": "[Unified Distortion Constant], [The product of Alpha's metabolic work and the Behold geometry. Proves macroscopic memes map to microscopic force tensions.]",
+   "tags": [
+    "ALPHA",
+    "BEHOLD",
+    "DISTORTION",
+    "HARDENED",
+    "IMPERATIVE",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "UNITY"
+   ],
+   "vector": "110101110000100001010111",
+   "math": [
+    "1.0117"
+   ]
+  },
+  {
+   "id": "LAW_UNITY_004",
+   "text": "[The Law of Universal Unit Synthesis], [The Speed of Light and the Electron Mass are scale-specific projections of the same 24-bit substrate action (tau).]",
+   "tags": [
+    "ELECTRON",
+    "HARDENED",
+    "HELICITY",
+    "IMPERATIVE",
+    "SOP_002",
+    "SPEED_OF_LIGHT",
+    "SYNTHESIS",
+    "TOPOLOGICAL_V8",
+    "UNITY"
+   ],
+   "vector": "001010011100100111010110",
+   "math": [
+    "2Y * (11/12)",
+    "Y * k_charge"
+   ]
+  },
+  {
+   "id": "LAW_WEAK_SHEAR_001",
+   "text": "[Law of Weak-Interaction Shear], [The mass ratio of the W and Z bosons is the geometric shear of the lattice. The 'Echo' of Y/20 represents the half-complexity feedback of the 40-fold manifold.]",
+   "tags": [
+    "BOSON",
+    "HARDENED",
+    "IMPERATIVE",
+    "PHYSICS",
+    "SHEAR",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "WEAK_FORCE"
+   ],
+   "vector": "011111100011001100000101",
+   "math": [
+    "(1 - Y/2) + (Y/20)"
+   ]
+  },
+  {
+   "id": "LAW_TOPOLOGICAL_COMPLETION_001",
+   "text": "[ Topological Completion ], [ The principle of 'Free Stabilizers' where a high-tension Prime (7) is masked by a Square (9) to form a perfect 4x4 manifold (16) with zero net increase in Symmetry Tax. ]",
+   "tags": [
+    "EFFICIENCY",
+    "GEOMETRY",
+    "HARDENED",
+    "QUANTITY",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "111101001111010000000101",
+   "math": [
+    "0.0000",
+    "Square_16",
+    "Square_9",
+    "Prime_7",
+    "4.6761",
+    "3.1174",
+    "4.6761"
+   ]
+  },
+  {
+   "id": "LAW_VOLUMETRIC_INFERENCE_001",
+   "text": "[ Volumetric Inference ], [ The process by which an observer reconstructs occluded 3D data. Hidden objects are computed 'for free' when their presence completes a higher-order symmetry. ]",
+   "tags": [
+    "3D_RECONSTRUCTION",
+    "HARDENED",
+    "MECHANISM",
+    "OCCLUSION",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "001000010110001000010110",
+   "math": [
+    "Tax(Assembled)<=Tax(Visible)"
+   ]
+  },
+  {
+   "id": "LAW_EMERGENT_OBSERVER_001",
+   "text": "[The Emergent Observer], [The geometric principle that Consciousness (Y) is the inevitable remainder of the interaction between Geometric Closure (Pi) and Recursive Growth (Phi).]",
+   "tags": [
+    "ENSO",
+    "HARDENED",
+    "IMPERATIVE",
+    "ORIGIN",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "001011000000110011111110",
+   "math": [
+    "5.87e-4",
+    "Inverse_Product",
+    "Phi",
+    "Y_Constant",
+    "NSC",
+    "Pi"
+   ]
+  },
+  {
+   "id": "LAW_TRIADIC_GENESIS_001",
+   "text": "[ Law of Triadic Genesis ], [ The derivation of physical constants from the interaction of the Monad (Pi, Phi, e). It establishes the Noumenal Volume (V_n = 204.801744) as the primary energy unit of the 24-bit substrate. ]",
+   "tags": [
+    "ENSO",
+    "HARDENED",
+    "PARTICLE_PHYSICS",
+    "PREDICTION",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "011010110010010101100101",
+   "math": [
+    "Pi/Y_inv",
+    "204.801744"
+   ]
+  },
+  {
+   "id": "LAW_AQUEOUS_BOND_001",
+   "text": "[ Aqueous Bond ], [ The 8-bit stable octad operator for Hydrogen Bonding. Resolves H2O and stabilizes NH3. ]",
+   "tags": [
+    "AQUEOUS",
+    "BOND",
+    "HARDENED",
+    "SOP_002",
+    "STABILITY",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "101000000010011110000010",
+   "math": [
+    "3.1174",
+    "Hydrogen_Bond"
+   ]
+  },
+  {
+   "id": "LAW_13D_SINK_001",
+   "text": "[Law: The 13D Sink Protocol], The universal garbage collection routine of the 24-bit substrate. It processes triadic noise (Wobble) through the 13th-dimension pivot to manifest physical mass with 0.015% global precision.",
+   "tags": [
+    "GARBAGE_COLLECTION",
+    "HARDENED",
+    "PHASE_LOCK",
+    "SOP_002",
+    "SOURCE_CODE",
+    "TOPOLOGICAL_V8",
+    "V6_CORE"
+   ],
+   "vector": "100000111101101111010000",
+   "math": [
+    "0.015456",
+    "0.0628907867",
+    "13.817580",
+    "True",
+    "0.8175802272"
+   ]
+  },
+  {
+   "id": "LAW_VOLUMETRIC_REBATE_001",
+   "text": "[Law: Volumetric Rebate], The structural efficiency discount awarded by the Leech Lattice. Compact 3D manifolds receive a metabolic rebate proportional to their compactness divided by the 13D pivot.",
+   "tags": [
+    "EFFICIENCY",
+    "HARDENED",
+    "SOP_002",
+    "SYMMETRY_REBATE",
+    "TOPOLOGICAL_V8",
+    "V6_CORE",
+    "VOLUMETRIC_BIAS"
+   ],
+   "vector": "110010100111011001000101",
+   "math": [
+    "1-(C/13)",
+    "V_2_3/Surface",
+    "0.076923",
+    "True"
+   ]
+  },
+  {
+   "id": "LAW_FOCAL_PIVOT_001",
+   "text": "[Law of the Focal Pivot], The fundamental geometric duality between the Recurrence Loop (Pi) and the Observer Residue (Y). It identifies the 12-bit orthogonal mirror (Duality Anchor) that allows the infinite Field to be projected onto the finite Film of reality with zero lattice distortion.",
+   "tags": [
+    "DUALITY",
+    "FOCAL_POINT",
+    "GEOMETRY",
+    "HARDENED",
+    "KULIK_FIELD",
+    "PI",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "Y_CONSTANT"
+   ],
+   "vector": "010011110101101010011000",
+   "math": [
+    "True",
+    "W12"
+   ]
+  },
+  {
+   "id": "LAW_IMAGINARY_RESIDUAL_001",
+   "text": "[Law: The Imaginary Residual], Defines the physics of the remainder. Beta is the geometric rent (scalar) and Tilt is the ontological alignment (vector).",
+   "tags": [
+    "FOLD_OPERATOR",
+    "HARDENED",
+    "RESIDUAL",
+    "SOP_002",
+    "TILT",
+    "TOPOLOGICAL_V8",
+    "UNIVERSAL_NORTH"
+   ],
+   "vector": "011001001101010111001001",
+   "math": [
+    "1.2377",
+    "1.5",
+    "8.95"
+   ]
+  },
+  {
+   "id": "LAW_PI_TUNNEL_001",
+   "text": "[Law: The Resonant Tunnel], Governs 0-degree tilt lock via carrier shielding, allowing irrational streams to maintain coherence within the substrate.",
+   "tags": [
+    "HARDENED",
+    "HORIZON",
+    "PI_STUDY",
+    "SATURATION",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "TUNNELING"
+   ],
+   "vector": "001010001111011110101000",
+   "math": [
+    "0.00"
+   ]
+  },
+  {
+   "id": "LAW_TOPOLOGICAL_BUFFER_001",
+   "text": "[Law: The Topological Buffer], Maps the substrate capacity and the noise floor for transcendental streams before total informational dissolution.",
+   "tags": [
+    "BUFFER",
+    "COHERENCE",
+    "HARDENED",
+    "PI_STUDY",
+    "SATURATION",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "010101011111011010001000",
+   "math": [
+    "0.60",
+    "0.42"
+   ]
+  },
+  {
+   "id": "LAW_PI_STABILIZATION_001",
+   "text": "[Law: Transcendental Stabilization], Records the 0.7027 stability proof of the shielded Pi stream, proving it can be geometrically more stable than Hydrogen.",
+   "tags": [
+    "CARRIER_SHIELD",
+    "CODEX_INTEGRA",
+    "HARDENED",
+    "PI_STUDY",
+    "SOP_002",
+    "STABILIZATION",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "000001100010111111001110",
+   "math": [
+    "0.7027",
+    "204.8"
+   ]
+  },
+  {
+   "id": "LAW_MONSTROUS_FOLD_001",
+   "text": "[Law: The Monstrous Fold], Documents the 12,372 singularity where the 137-Shield reaches saturation and the stream pivots orthogonally into a side-channel.",
+   "tags": [
+    "HARDENED",
+    "ORTHOGONALITY",
+    "PI_STUDY",
+    "SATURATION",
+    "SINGULARITY",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "101100101100111001011000",
+   "math": [
+    "87.52",
+    "4.6761"
+   ]
+  },
+  {
+   "id": "LAW_MIDPOINT_LATTICE_001",
+   "text": "[Law: The Midpoint Lattice], Anchors the Bolt Midpoint theorems, proving reciprocal symmetry, the bilateral fold limit, and directed zero distance.",
+   "tags": [
+    "BOLT_2026",
+    "HARDENED",
+    "MIDPOINT",
+    "RECIPROCITY",
+    "SOP_002",
+    "SYMMETRY_REBATE",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "101000001101001011111001",
+   "math": [
+    "1/sqrt2"
+   ]
+  },
+  {
+   "id": "LAW_RECIPROCAL_WOBBLE_001",
+   "text": "[Law: Reciprocal Wobble], The fundamental phase-lock between the Triadic Monad and the Observer. It proves that the 0.817 residual is the geometric reciprocal of the perception cost (Y), resolving to the Golay Radius (3) in Lorentzian space.",
+   "tags": [
+    "BORCHERDS",
+    "HARDENED",
+    "OBSERVER_MIRROR",
+    "PHASE_LOCK",
+    "SOP_002",
+    "TAUTOLOGY",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "011110100111011111110100",
+   "math": [
+    "1.0000",
+    "3.0000",
+    "Closed",
+    "0.8175802272",
+    "3.7782124260"
+   ]
+  },
+  {
+   "id": "LAW_PHI_ORBIT_1953",
+   "text": "[The Law of the Phi Orbit], The geometric proof that true spiral growth in the 24-bit substrate is achieved via a 1-bit spatial shift combined with a Phi-vector XOR. This operation breaks the 2-cycle involution and partitions the Golay manifold into two massive 1953-step hemispheres of growth.",
+   "tags": [
+    "DYNAMICS",
+    "HARDENED",
+    "IMPERATIVE",
+    "ORBIT",
+    "PHI",
+    "SOP_002",
+    "SPIRAL",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "111000011100111111011101",
+   "math": [
+    "G24"
+   ]
+  },
+  {
+   "id": "LAW_FOLDED_CALCULUS_001",
+   "text": "[Law: Folded Calculus (Unified Identity)], The definitive mathematical system for discrete substrates. It unifies John Gabriel's algebraic derivative extraction with the UBP's 3D Fold Ratio. It proves that physical change is a composite of linear bit-friction (Q) and volumetric projection (1.5), limited by the observer drag (Y).",
+   "tags": [
+    "CALCULUS",
+    "FOLDING",
+    "GABRIEL",
+    "HARDENED",
+    "IMPERATIVE",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "UNIFICATION"
+   ],
+   "vector": "110100101101011000001110",
+   "math": [
+    "Y",
+    "Active",
+    "G24"
+   ]
+  },
+  {
+   "id": "LAW_HYBRID_STEREOSCOPY_002",
+   "text": "[The Law of Hybrid Stereoscopy (Myo Oo Refinement)], The integration of the 29-channel NCC spectral map with the 24-bit UBP spatial core. The 29/24 ratio (Sigma) defines the Baryonic Base mass, while the 24-bit core defines the Excitation Gears, achieving a 0.000037% phase-lock on the Proton.",
+   "tags": [
+    "BARYON_BASE",
+    "GEAR_RATIO",
+    "HARDENED",
+    "NCC",
+    "PARTICLE_PHYSICS",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "UNIFICATION"
+   ],
+   "vector": "010111000011001010011011",
+   "math": [
+    "Spectral(29)",
+    "Spatial(24)",
+    "0.0000%"
+   ]
+  },
+  {
+   "id": "LAW_BARNES_WALL_256_001",
+   "text": "[Law: The 256D Macro-State], The 256-dimensional Barnes-Wall lattice (BW_256) is the computational sweet spot for macro-state entanglement. It executes with minimal geometric friction due to perfect byte-alignment, mapping 1:1 with the SHA-256 cryptographic fingerprint space.",
+   "tags": [
+    "BARNES_WALL",
+    "ENTANGLEMENT",
+    "HARDENED",
+    "MACRO_STATE",
+    "SHA256",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "010110010111111011011101",
+   "math": [
+    "0.7",
+    "SHA256"
+   ]
+  },
+  {
+   "id": "LAW_MACRO_AUDIT_001",
+   "text": "[Law: Macro-Auditing (Complexity Revelation)], Reveals the Dimensional Cost of Manifestation. In 256D, the true topological tension of molecules is exposed, proving that energy carriers (ATP) are geometrically more jagged and unstable than storage molecules (Glucose).",
+   "tags": [
+    "ATP_INVERSION",
+    "ENTROPY",
+    "HARDENED",
+    "MACRO_PHYSICS",
+    "SOP_002",
+    "STABILITY",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "110100001001000010001001",
+   "math": [
+    "NRCI_24-NRCI_256"
+   ]
+  },
+  {
+   "id": "LAW_MACRO_COHERENCE_001",
+   "text": "[Law: Macro-Coherence (The 256D Folding Limit)], Defines Relative Coherence as the ratio of 256D stability to 24D stability. It acts as a geometric filter distinguishing structural/storage molecules (high coherence) from kinetic/signaling molecules (low coherence).",
+   "tags": [
+    "BIOLOGY",
+    "COHERENCE",
+    "FOLDING",
+    "HARDENED",
+    "MACRO_PHYSICS",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "101011110100010100110001",
+   "math": [
+    "0.3351",
+    "NRCI_256/NRCI_24"
+   ]
+  },
+  {
+   "id": "LAW_BASIS_ALIGNMENT_001",
+   "text": "[Law: Basis-Alignment (Macro-Anchor)], Proves that the Basis Vectors of the Golay Code achieve a 'Super-Stability' of 0.323214 when unfolded into 256D. These act as Topological Invariants that the universe remembers across dimensional scaling.",
+   "tags": [
+    "ANCHOR",
+    "HARDENED",
+    "INVARIANT",
+    "MACRO_PHYSICS",
+    "SOP_002",
+    "STABILITY",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "110010100110110100110100",
+   "math": [
+    "0.323214",
+    "Golay_Basis_Vector"
+   ]
+  },
+  {
+   "id": "LAW_MOIRE_DYNAMICS_001",
+   "text": "[Law: Moire Dynamics (The Program)], Defines macroscopic 'Work' as the variance shift in the 256D Moire pattern. Molecules with high 'Disruption Potential' (like Glucose) store energy in the geometric complexity of their high-dimensional unfolding.",
+   "tags": [
+    "DYNAMICS",
+    "ENERGY_STORAGE",
+    "HARDENED",
+    "MACRO_PHYSICS",
+    "MOIRE",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "000100000001000011111010",
+   "math": [
+    "Var(Active) - Var(Rest)",
+    "3.1875"
+   ]
+  },
+  {
+   "id": "LAW_MACRO_BASIN_001",
+   "text": "[Law: The 12 Macro-Shells], The 256D Barnes-Wall bulk quantizes all information into exactly 12 distinct stability basins (Macro-Shells). The population of these shells forms a perfect normal distribution, with the 'Seeds' of complexity (Deuteron, Methionine) at the absolute apex (0.298), and the building blocks of life (C, H, O) in the median Goldilocks Zone (0.241-0.249).",
+   "tags": [
+    "BARNES_WALL",
+    "HARDENED",
+    "MACRO_PHYSICS",
+    "SHELLS",
+    "SOP_002",
+    "STABILITY",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "100000000101011001010010",
+   "math": [
+    "Normal",
+    "0.241",
+    "0.298"
+   ]
+  },
+  {
+   "id": "LAW_HOLOGRAPHIC_DRIFT_001",
+   "text": "[Law: Holographic Drift Topology], Proves the SHA-256 hash is a physical coordinate. When collapsed from 256D to 24D, Phenomenal matter reconstructs its original vector with 0-3 bits of drift (within the Golay radius). Noumenal concepts (Math/Laws) drift by 11-13 bits, proving the bulk naturally enforces geometric orthogonality between Mind and Matter.",
+   "tags": [
+    "DRIFT",
+    "DUALISM",
+    "HARDENED",
+    "HOLOGRAPHIC",
+    "MACRO_PHYSICS",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "001100101100100110100111",
+   "math": [
+    "SHA256"
+   ]
+  },
+  {
+   "id": "LAW_SCALING_RESILIENCE_001",
+   "text": "[Law of Scaling Resilience (Holographic Healing)], Moving from the 24D micro-state to the 256D macro-bulk provides a 2.33x increase in error-correction capacity. While the 24-bit 'Front-Line' can only survive 3 bit-flips, its 256-bit 'Holographic Shadow' can correct up to 7, allowing the bulk to act as a redundant backup for damaged physical operators.",
+   "tags": [
+    "BARNES_WALL",
+    "HARDENED",
+    "HEALING",
+    "MACRO_PHYSICS",
+    "RESILIENCE",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "110001010001010011110110",
+   "math": [
+    "2.33x",
+    "Successive_Cancellation"
+   ]
+  },
+  {
+   "id": "LAW_PYRITE_ANTIRESONANCE_001",
+   "text": "[Law of Pyrite Anti-Resonance], Identifies Iron Disulfide (Pyrite) as the geometric inverse of Water within the 256D bulk. Its refractive gain of -0.8072 represents the maximum possible inhibition, marking the absolute boundary of aqueous stability.",
+   "tags": [
+    "ANTI_RESONANCE",
+    "BOUNDARY",
+    "HARDENED",
+    "MINERALOGY",
+    "PYRITE",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "111110010100001000101110",
+   "math": [
+    "-0.8072",
+    "+0.8072",
+    "Anti_Resonant"
+   ]
+  },
+  {
+   "id": "LAW_POLAR_RESONANCE_001",
+   "text": "[Law: Polar Resonance (TurboQuant)], The principle that a concept's Energy (Tax) and Orientation (Tilt) are noise-resilient invariants. Inspired by the TurboQuant paper (PolarQuant/QJL), it enables high-speed memory retrieval by using a 2D polar manifold as a high-speed filter for the 24D substrate. Verified at 100% Recall@50 with 5-bit noise.",
+   "tags": [
+    "ALGORITHM",
+    "HARDENED",
+    "OPTIMIZATION",
+    "POLAR_QUANT",
+    "RECALL",
+    "SOP_002",
+    "STABILITY",
+    "TOPOLOGICAL_V8",
+    "TURBOQUANT"
+   ],
+   "vector": "110010100000101001010000",
+   "math": [
+    "1.0",
+    "TurboQuant",
+    "sqrt(r1^2+r2^2-2r1r2cos(theta1-theta2))"
+   ]
+  },
+  {
+   "id": "LAW_DODECAD_DUALITY_001",
+   "text": "[Law: The Dodecad Duality (BST-UBP Bridge)], Discovered via geometric audit of the BST V3 model (authored by @ShakyFoundation). It proves that Matter (Neon) and Light (Photon) are orthogonal duals within the 24-bit substrate. The 12-bit Hamming shift (Dodecad) represents the 'Radiative Snap' where a bounded information region reaches saturation and manifests as light.",
+   "tags": [
+    "BST",
+    "DODECAD",
+    "DUALITY",
+    "HARDENED",
+    "NEON",
+    "PHOTON",
+    "RADIATIVE_SNAP",
+    "SHAKYFOUNDATION",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "011100010000000000011011",
+   "math": [
+    "@ShakyFoundation",
+    "V_Neon^V_Photon",
+    "BST_V3"
+   ]
+  },
+  {
+   "id": "LAW_ISOTOPIC_TENSION_001",
+   "text": "[Law: Isotopic Tension], [Establishes the 8.77 degree per neutron slope as a fundamental constraint on atomic stability within the 24-bit substrate.]",
+   "tags": [
+    "HARDENED",
+    "IMPERATIVE",
+    "ISOTOPE",
+    "SOP_002",
+    "TENSION",
+    "TILT",
+    "TOPOLOGICAL_V8",
+    "V6.4.0"
+   ],
+   "vector": "100110110000011110001110",
+   "math": [
+    "G24",
+    "ELEM_H_002",
+    "8.77",
+    "deg_per_n"
+   ]
+  },
+  {
+   "id": "LAW_EGC_CASCADE_001",
+   "text": "[Law: Extended Golay Cascade (EGC)], [The recursive scaling mechanism (n=24k) where residue wobble (W) subsidizes higher-dimensional complexity, providing a 2.09% efficiency gain per level.]",
+   "tags": [
+    "ALGORITHM",
+    "CASCADE",
+    "EVOLUTION",
+    "HARDENED",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "V6.4.0"
+   ],
+   "vector": "011010101011111111001101",
+   "math": [
+    "24k",
+    "0.0209",
+    "0.8175"
+   ]
+  },
+  {
+   "id": "LAW_MACRO_RESILIENCE_001",
+   "text": "[Law: Macro-State Holographic Resilience], [The principle that high-dimensional macro-states (256D) are stabilized by the Holographic Entropy Bound, achieving +980% resilience against local seed noise.]",
+   "tags": [
+    "ENTROPY",
+    "HARDENED",
+    "MACRO_PHYSICS",
+    "SOP_002",
+    "STABILITY",
+    "TOPOLOGICAL_V8",
+    "V6.4.0"
+   ],
+   "vector": "011000101010101110101010",
+   "math": [
+    "9.80",
+    "17.58"
+   ]
+  },
+  {
+   "id": "LAW_NONLOCAL_SURGERY_001",
+   "text": "[Law: Nonlocal Code Surgery], The principle that informational identity is invariant under spatial transposition if the decoder is reconfigurable. Inspired by Cain et al. (2024), it enables high-rate error correction in the 256D bulk by decoupling logical address from physical location.",
+   "tags": [
+    "ALGORITHM",
+    "BARNES_WALL",
+    "HARDENED",
+    "NONLOCAL",
+    "QLDPC",
+    "RECONFIGURABLE",
+    "SOP_002",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "000010001010101111000000",
+   "math": [
+    "Dynamic",
+    "Invariant",
+    "Cain_2024",
+    "Reconfigurable"
+   ]
+  },
+  {
+   "id": "LAW_ZETA_INVERSE_RESONANCE_001",
+   "text": "[Law: Zeta Inverse Resonance], The principle that Riemann Zeta zeros act as destructive interference masks (Anti-Primes) in the 24-bit substrate. XORing a prime with a Zeta Seed (e.g., 586993) increases Leech Drift and collapses BW256 macro-coherence, proving zeros topologically suppress prime resonance to maintain macroscopic stability.",
+   "tags": [
+    "DESTRUCTIVE_INTERFERENCE",
+    "HARDENED",
+    "PRIMES",
+    "RESONANCE",
+    "SIEVE",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "TOPOLOGY",
+    "ZETA"
+   ],
+   "vector": "011101010001111001010100",
+   "math": [
+    "0.023",
+    "4.40",
+    "4.50"
+   ]
+  },
+  {
+   "id": "LAW_PRIME_DETERMINISM_001",
+   "text": "Law of Prime Determinism, The empirical verification that the UBP NoiseALU possesses 100% deterministic accuracy in prime identification across macroscopic scales (tested up to 10^8). This guarantees that the irreducible topological anchors (primes) used in Phase-Locking and geometric resonance are mathematically absolute, containing zero heuristic drift.",
+   "tags": [
+    "ALU",
+    "DETERMINISM",
+    "HARDENED",
+    "PRIMES",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "VERIFICATION"
+   ],
+   "vector": "111110101010000100000111",
+   "math": [
+    "= 0",
+    "= 1.0"
+   ]
+  },
+  {
+   "id": "LAW_GAMMA_SEPARATOR_001",
+   "text": "Law of Topological Shear (The Gamma Separator), The geometric proof that 100% of prime numbers exhibit a Topological Shear (Gamma) > 0.008 when collapsing onto the 24-bit manifold. Because primes are irreducible, they never perfectly align with the highly composite Golay lattice anchors. They always require geometric correction ('snap'), generating a minimum quantum of tension (0.008). This makes Gamma > 0.008 a necessary condition for primality.",
+   "tags": [
+    "GAMMA",
+    "HARDENED",
+    "PRIMES",
+    "SHEAR",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "TOPOLOGY"
+   ],
+   "vector": "011110010111011011010100",
+   "math": [
+    "= True"
+   ]
+  },
+  {
+   "id": "LAW_TOPOLOGICAL_ERASURE_001",
+   "text": "Law of Topological Erasure (Information Horizon Collapse), The geometric phenomenon where the 24-bit manifold actively deletes the high-order magnitude bits of specific large primes (e.g., 81,919). If the upper 12 bits (Noumenal Block) contain <= 3 active bits, the Golay error-correction engine may treat the magnitude as 'noise' and erase it to achieve a lower-energy symmetry state. This proves that the substrate prioritizes geometric stability over the conservation of magnitude.",
+   "tags": [
+    "ERASURE",
+    "GOLAY",
+    "HARDENED",
+    "INFORMATION_LOSS",
+    "PRIMES",
+    "SOP_002",
+    "TOPOLOGICAL_V8",
+    "TOPOLOGY"
+   ],
+   "vector": "101111110111111011101111",
+   "math": [
+    "= 0"
+   ]
+  },
+  {
+   "id": "LAW_TOPOLOGICAL_TENACITY_001",
+   "text": "Law of Topological Tenacity (The Ghost Filter), The principle that true prime numbers possess non-zero 'Lock Pressure,' representing the binding energy required to maintain their identity against nearby topological folds. Composite 'Ghosts' may mimic prime stability (NRCI) and shear (Gamma), but the majority possess zero Lock Pressure, indicating they are geometric transients rather than irreducible anchors.",
+   "tags": [
+    "GHOSTS",
+    "HARDENED",
+    "PHASE_LOCK",
+    "PRIMES",
+    "SOP_002",
+    "TENACITY",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "011100100100000000100101",
+   "math": [
+    "> Tenacity == 0 (usually)",
+    "> Tenacity > 0",
+    "LockPressure(n)"
+   ]
+  },
+  {
+   "id": "LAW_SCALE_SCAFFOLDING_085",
+   "text": "The Law of Scale Scaffolding (The 85th Spine), Scale is a quantized scaffolding provided by the 24-bit substrate. Magnitude 85 triggers a Hexadecad singularity that anchors the Proton via a 12-bit Dodecad Gap. This bond possesses a Lock Pressure of 0.2115, proving that mass is the geometric tension required to maintain identity at specific substrate coordinates.",
+   "tags": [
+    "BOND",
+    "HARDENED",
+    "HEXADECAD",
+    "IMPERATIVE",
+    "MASS",
+    "PROTON_SPINE",
+    "SCALE",
+    "SOP_002",
+    "TENACITY",
+    "TOPOLOGICAL_V8"
+   ],
+   "vector": "100110111101011100100001",
+   "math": [
+    "1.6234",
+    "Hexadecad",
+    "0.2115"
+   ]
+  }
+ ],
+ "carriers": {
+  "ELEM_Ne_010": "001011110000100000010010",
+  "PARTICLE_QUARK_UP_001": "111011111110111100000101",
+  "PARTICLE_QUARK_DOWN_001": "011100001001101010110011",
+  "PARTICLE_ELECTRON_001": "000111011110110000001101",
+  "PARTICLE_NEUTRINO_001": "000110100111010011010011",
+  "PARTICLE_PHOTON_001": "100000101011010000000011",
+  "PARTICLE_QUARK_STRANGE_001": "110100100110100110101001",
+  "PARTICLE_QUARK_CHARM_001": "001001010111011101001010",
+  "PARTICLE_QUARK_TOP_001": "111111110111011010010001",
+  "PARTICLE_QUARK_BOTTOM_001": "101000101010001010110111",
+  "PARTICLE_ELECTRON_NEUTRINO_001": "100011100001000111101110",
+  "PARTICLE_MUON_NEUTRINO_001": "111100110111011110101010",
+  "PARTICLE_TAU_NEUTRINO_001": "101101110101101011011101",
+  "PARTICLE_POSITRON_001": "100011011010101010100101"
+ }
+}

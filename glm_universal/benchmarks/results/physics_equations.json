@@ -1,0 +1,223 @@
+{
+  "baseline": "2/3",
+  "findings": [
+    {
+      "detail": "energy = force * length; pressure = force / area; velocity = length / time",
+      "key": "scalar_vs_full_semantics",
+      "statement": "3 of 30 equations are accepted under scalar semantics and refused under full tensor semantics."
+    },
+    {
+      "detail": "This is the basis boundary, not an arithmetic error: EXT10 carries plane angle as a dimension, so angular momentum is L^2 M T^-1 A^-1 while momentum times length is L^2 M T^-1.  The identity is true in SI7, where the angle exponent does not exist, and false in EXT10, which is exactly the layer handoff the information-loss study describes: a statement true at one resolution and untrue at the next.",
+      "key": "ext10_refuses_angular_momentum",
+      "statement": "EXT10 refuses the textbook identity `angular_momentum = momentum * length`."
+    }
+  ],
+  "measurements": {
+    "false_cases": "10",
+    "false_refused": "10",
+    "scalar_full_divergences": "3",
+    "true_accepted": "19",
+    "true_cases": "20"
+  },
+  "name": "physics_equations",
+  "outcomes": [
+    {
+      "expected": "holds",
+      "note": "lhs L^2 M T^-1 A^-1 vs rhs L^2 M T^-1",
+      "observed": "refused",
+      "passed": false,
+      "task": "angular_momentum = momentum * length"
+    },
+    {
+      "expected": "holds",
+      "note": "",
+      "observed": "holds",
+      "passed": true,
+      "task": "force = mass * acceleration"
+    },
+    {
+      "expected": "holds",
+      "note": "",
+      "observed": "holds",
+      "passed": true,
+      "task": "energy = force * length"
+    },
+    {
+      "expected": "holds",
+      "note": "",
+      "observed": "holds",
+      "passed": true,
+      "task": "power = energy / time"
+    },
+    {
+      "expected": "holds",
+      "note": "",
+      "observed": "holds",
+      "passed": true,
+      "task": "pressure = force / area"
+    },
+    {
+      "expected": "holds",
+      "note": "",
+      "observed": "holds",
+      "passed": true,
+      "task": "momentum = mass * velocity"
+    },
+    {
+      "expected": "holds",
+      "note": "",
+      "observed": "holds",
+      "passed": true,
+      "task": "charge = current * time"
+    },
+    {
+      "expected": "holds",
+      "note": "",
+      "observed": "holds",
+      "passed": true,
+      "task": "velocity = length / time"
+    },
+    {
+      "expected": "holds",
+      "note": "",
+      "observed": "holds",
+      "passed": true,
+      "task": "acceleration = velocity / time"
+    },
+    {
+      "expected": "holds",
+      "note": "",
+      "observed": "holds",
+      "passed": true,
+      "task": "density = mass / volume"
+    },
+    {
+      "expected": "holds",
+      "note": "",
+      "observed": "holds",
+      "passed": true,
+      "task": "voltage = power / current"
+    },
+    {
+      "expected": "holds",
+      "note": "",
+      "observed": "holds",
+      "passed": true,
+      "task": "resistance = voltage / current"
+    },
+    {
+      "expected": "holds",
+      "note": "",
+      "observed": "holds",
+      "passed": true,
+      "task": "capacitance = charge / voltage"
+    },
+    {
+      "expected": "holds",
+      "note": "",
+      "observed": "holds",
+      "passed": true,
+      "task": "frequency = 1 / time"
+    },
+    {
+      "expected": "holds",
+      "note": "",
+      "observed": "holds",
+      "passed": true,
+      "task": "area = length * length"
+    },
+    {
+      "expected": "holds",
+      "note": "",
+      "observed": "holds",
+      "passed": true,
+      "task": "volume = area * length"
+    },
+    {
+      "expected": "holds",
+      "note": "",
+      "observed": "holds",
+      "passed": true,
+      "task": "action = energy * time"
+    },
+    {
+      "expected": "holds",
+      "note": "",
+      "observed": "holds",
+      "passed": true,
+      "task": "entropy = energy / temperature"
+    },
+    {
+      "expected": "holds",
+      "note": "",
+      "observed": "holds",
+      "passed": true,
+      "task": "magnetic_flux = voltage * time"
+    },
+    {
+      "expected": "holds",
+      "note": "",
+      "observed": "holds",
+      "passed": true,
+      "task": "inductance = magnetic_flux / current"
+    },
+    {
+      "expected": "refused",
+      "note": "",
+      "observed": "refused",
+      "passed": true,
+      "task": "force = mass * velocity"
+    },
+    {
+      "expected": "refused",
+      "note": "",
+      "observed": "refused",
+      "passed": true,
+      "task": "energy = mass * velocity"
+    },
+    {
+      "expected": "refused",
+      "note": "",
+      "observed": "refused",
+      "passed": true,
+      "task": "power = energy * time"
+    },
+    {
+      "expected": "refused",
+      "note": "",
+      "observed": "refused",
+      "passed": true,
+      "task": "pressure = force * area"
+    },
+    {
+      "expected": "refused",
+      "note": "",
+      "observed": "refused",
+      "passed": true,
+      "task": "velocity = acceleration"
+    },
+    {
+      "expected": "refused",
+      "note": "",
+      "observed": "refused",
+      "passed": true,
+      "task": "charge = current / time"
+    }
+  ],
+  "outcomes_note": "every failing outcome is written; passing outcomes are sampled to the first 25.  The score, the run id and the claims are computed from all 30.",
+  "outcomes_total": 30,
+  "outcomes_written": 26,
+  "passed": 29,
+  "question": "Does the verifier accept true dimensional equations and refuse false ones?",
+  "score": "29/30",
+  "tier": {
+    "baseline": "accept every equation, which scores exactly the true fraction of the population; a verifier that beats it is discriminating and not merely agreeable",
+    "ground_truth": "standard SI dimensional analysis, written down before the verifier was run; the false cases are minimal mutations of true ones (a factor moved from numerator to denominator, a quantity replaced by one of different dimension)",
+    "null_result": "a score at or below the baseline, meaning the verifier cannot refuse a false equation",
+    "pass_criterion": "the verifier's scalar-semantics verdict equals the declared truth value",
+    "population": "20 dimensionally true equations and 10 dimensionally false ones, listed in this module",
+    "tier": "curated"
+  },
+  "total": 30,
+  "verdict": "pass"
+}

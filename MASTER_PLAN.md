@@ -5,7 +5,7 @@
 
 **Question.** What has each phase of the wiring plan delivered, and what does the next round start from?
 
-**Verdict.** Phase 73 is closed; the candidates in [`STATUS.md`](STATUS.md) §3.4 are where the next round starts.
+**Verdict.** Phase 87 is closed; the order of work at the head of [`STATUS.md`](STATUS.md) §3.4 is where the next round starts, Phase 88.
 
 **Deciding figure.** Every closed phase names what was built, where it lives, and how to see it recompute itself.
 
@@ -25,7 +25,7 @@ recompute itself.
 
 Everything below is reachable from the package's public API and from the query
 runtime — **<!--figure:query-kinds-->24 query kinds<!--/figure-->**, **<!--figure:report-subjects-->65 report subjects<!--/figure-->** and **<!--figure:registers-->8 registers<!--/figure-->** — is
-covered by the test suite (<!--figure:test-files-->119 test files<!--/figure-->),
+covered by the test suite (<!--figure:test-files-->132 test files<!--/figure-->),
 and — where it is a report or a task — has a generated column-3 script that
 recomputes the claim in a **fresh interpreter** and fails if anything differs.
 
@@ -182,6 +182,649 @@ written.  A phase is a record of a round, so it is archived by the same rule
 as everything else: only the open phase is state.
 
 ---
+
+## Phase 87 — the open candidates merged and ordered; and the measurand register: register values read through what they measure, conversions through a stated efficiency, and the elementary charge
+
+**Status: closed this round.** At the owner's request it began by reading the
+remaining development tasks together, to see which can be combined and in
+what order one supports the next
+([`studies/ROADMAP_STUDY.md`](studies/ROADMAP_STUDY.md)), and then took the
+first round of the order it set. The study of the round is
+[`studies/MEASURAND_REGISTER_STUDY.md`](studies/MEASURAND_REGISTER_STUDY.md),
+its corpus `evaluation/measurand_register_cases.py` (30 questions) and marks
+R1–R8, committed before any code.
+
+**Step 1: the order of work.** The 49 open items of `STATUS.md` §3.4 reduce
+to seven tracks. Six items are the measurand register (K2, O5b, O5c, O5d,
+1a, 1b), four the loop through the planner (K4, I2, O3 = M3), four the
+discourse state (D = 0a, 0b, K3), two the third sort (I1, M1) and two the
+held-out set (B = O1). Six are gated on the owner (K1 and P's two contract
+changes) or on outside material (B, O1, item 4); two are proposed for
+retirement (P's PIPELINE laws, H's concept 6). The order: measurands, the
+loop, typed operators, planner widenings, discourse state, the register
+against the world, the third sort, second readings, retrieval. `STATUS.md`
+§3.4 now opens with it.
+
+**What was built.** `runtime/measurand_register.py` (9 register measurands
+with the argument for each, 4 conversion laws `C1`–`C4` as pseudo-wheels,
+the elementary charge and the percent as units, the comparability census,
+and the switches `ACTIVE`, `RESTRICT`, `NAIVE`); in `runtime/stepwise.py`
+the efficiency reading and its two refusals (`EFFICIENCY_OUT_OF_RANGE`,
+`EFFICIENCY_UNDECLARED`), the laws in scope only for a question that names an
+efficiency, the register reading of a value per entity, and the wheel
+restriction of a measurand read by name; in `runtime/quantity_units.py` the
+two units; in `reasoning/stepwise_script.py` the law and the measurand
+reading checked by the column-3 script; the measurement
+`runtime/measurand_register_report.py`, `tools measurand-register`,
+`tests/test_measurand_register.py`; and
+`RequestProject/GLM/MeasurandRegister.lean`.
+
+**What it measured.** 8 of 8 marks met. 12 of 12 register, 14 of 14
+conversion and 4 of 4 charge cases as declared, 0 wrong; through `GLM.py
+--ask` the machine answered 2 of the 30 before and 18 after. The naive
+control (each conversion read as an identity) answers 7 conversion cases,
+all 7 wrongly; the unrestricted control answers the declared restriction case
+`r09`. Phase 86's corpus and rounds one to four held; 18 of 18 chain scripts
+verified (123 of 123 steps), every mutation rejected; 6 of 6 related pairs of
+the unit table are pairs of one kind, none withdrawn. Not shipped: the scale
+table's offset row, for want of a register holding a Celsius reading.
+
+**Lean.** `efficiency_out_le_in`, `naive_identity_wrong`,
+`derived_efficiency_gt_one`, `efficiency_range_of_powers`,
+`conversion_compose`, `photon_threshold_frequency_monotone`,
+`capacitor_energy_half_QV`; no `sorry`, standard axioms only.
+
+## Phase 86 — measurands: kinds of quantity, temperature levels and differences, and the SI's defining constants; and the rate-posterior repairs measured
+
+**Status: closed.** At the owner's direction it began with a
+quick tidy of candidate P and then took candidate O5 (measurands rather than
+units; candidate K2 and the offset half of candidate 1 before it). The study
+is [`studies/MEASURANDS_STUDY.md`](studies/MEASURANDS_STUDY.md), its corpus
+(`evaluation/measurand_cases.py`, 31 questions and 5 declared amendments) and
+marks M1–M7; the P tidy is §4 of
+[`studies/RATE_POSTERIOR_STUDY.md`](studies/RATE_POSTERIOR_STUDY.md).
+
+**Step 1: the P tidy.** The repairs Phase 82 named for the soft floor's
+fixed-rate misses were each measured with its own engine
+(`reasoning/rate_posterior_marks.py` §5, `tools rate-posterior --repairs`)
+over the same 525 cells: a finer grid and a higher guard point repair
+nothing (37 and 35 broken cells); an upper-credible rate rule removes both
+on-grid breaks (32 broken, 0 on the grid) at a cost in retention (at rate
+1/20, floor 999/1000, n = 20, from 0.8790 to 0.8561);
+the breaks at 1/5, above the grid, are unrepairable by any rule tried, and the
+exact identity the engine checks on every broken cell says why. The runtime
+contract was not changed (the owner's call). `RequestProject/GLM/RateRepair.lean`
+(`fixed_rate_wrong_eq`, `fixed_rate_keep`, `fixed_rate_break`).
+
+**What was built.** `runtime/measurands.py` (the SI Brochure's restrictions
+on special unit names, slot kinds of the wheel laws, Celsius and Fahrenheit
+read as a level or a difference, the defining constants `h` and `c`, behind
+`ACTIVE`); in `runtime/stepwise.py` the kind check, the offset reading, the
+constants fallback (only when every attempt fails `NO_DERIVATION`) and five
+refusals — `KIND_MISMATCH`, `LEVEL_AS_DIFFERENCE`, `DIFFERENCE_AS_LEVEL`,
+`KIND_CONFLATION`, `BELOW_ABSOLUTE_ZERO`; a `constant` step and offset unit
+steps in `reasoning/stepwise_script.py`; the measurement
+`runtime/measurand_report.py`, `tools measurands`, `tests/test_measurands.py`;
+and `RequestProject/GLM/MeasurandKinds.lean`.
+
+**What it measured.** 7 of 7 marks met. 10 of 10 kind, 15 of 15 temperature
+and 6 of 6 constant cases as declared, 0 wrong; with the kinds off the
+dimension check answers all 5 declared `KIND_MISMATCH` refusals with a number.
+Through `GLM.py --ask`: kind questions 10 answered before and 5 after (the
+five wrong-kind answers gone), temperatures 5 and 8, constants 0 and 4. Five
+earlier declared verdicts of stepwise round two (u13, g01, g03, g11, m02) are
+amended to `LEVEL_AS_DIFFERENCE`: they fed a register melting or boiling point,
+a temperature level, to the heat law, which reads a difference. As a
+consequence mark H3 of the held-precision study is no longer met: both of its
+witnesses were that conflation. Rounds one to four otherwise held; 17 of 17
+chain scripts verified, every mutation rejected.
+
+**Lean.** `offset_difference_free`, `level_as_difference_depends_on_zero`,
+`difference_law_zero_free`, `fahrenheit_kelvin`, `absolute_zero_celsius`,
+`hertz_as_angular_velocity_wrong`; no `sorry`, standard axioms only.
+
+## Phase 85 — folds with a hole: the median, the ends and the rank of a column, bounded where the register is silent, and the present-rows question asked as its own
+
+**Status: closed.** It took candidate 2 of
+[`STATUS.md`](STATUS.md) §3.4 (what a fold other than a maximum does with a
+hole) and the last item of O7 (the present-rows question asked as its own).
+The study is [`studies/HOLE_FOLDS_STUDY.md`](studies/HOLE_FOLDS_STUDY.md), its
+corpus (`evaluation/stepwise_four_cases.py`, 34 questions and 2 follow-ups)
+and marks H1–H8 committed before any code. The session began by installing
+`pytest`, which the environment lacked, and by stopping git from tracking
+`__pycache__/` again.
+
+**What was built.** Behind `ROUND_FOUR` in `runtime/stepwise.py`: the order
+words, the present-rows phrases, the rank frame and `_build_fold4`, with
+`NOT_A_MEMBER` and `COLUMN_EMPTY`; in `reasoning/stepwise_script.py`:
+`fold_value` (the rule: with `h` readings missing, the `k`-th smallest of the
+column lies between the `(k − h)`-th and the `k`-th smallest present reading,
+a rank between the present rank and that plus `h`), the new fold templates
+with the missing rows in column 1, both columns' readers, the script's own
+`order_fold` re-deriving the class and its holes from the register, and the
+mutation `hole-lie`; the measurement `runtime/stepwise_four.py`, `tools
+stepwise-four`, `tests/test_stepwise_four.py`; and
+`RequestProject/GLM/HoleBounds.lean`, cited by the planner's surface.
+
+**What it measured.** 8 of 8 marks met. 11 of 11 order, 8 of 8 bounded, 8 of 8
+rank and 7 of 7 present-rows cases and 2 of 2 follow-ups as declared, 0 wrong;
+round three's reader answers 0 of the 34, and through `GLM.py --ask` the
+machine answered 0 before the round and 25 after. Two medians close to one
+value despite their holes (the valence electrons of the transition metals, and
+of all the elements: `2`). Every one of 9 bounded answers held on each of 200
+completions with both ends attained; the 4 order refusals move by at least a
+million between their extreme completions. 26 of 26 chain scripts verified,
+843 of 843 steps aligned, every mutation rejected (hole lie 15 of 15). Round
+three's corpus, rounds one and two and the router census are unchanged. Four
+present-rows questions were unread on the first run — the planner writes
+*one* as `1` before the frames read it — and the reader, not the corpus, was
+fixed.
+
+**Lean.** `kth_le_iff`, `kth_mem`, `kth_append_le`, `le_kth_append`,
+`kth_append_eq_low`, `kth_append_eq_high`, `kth_fill_below`,
+`kth_fill_const_low`, `kth_fill_const_high`, `rank_append_bounds`,
+`rank_append_eq_low`, `rank_append_eq_high`, `mid_bounds`; no `sorry`,
+standard axioms only.
+
+## Phase 84 — the stepwise planner, round three: declared comparatives, count nouns, tera and pico, and folds over a column
+
+**Status: closed.** It began by closing Phases 81–83, whose
+release had been written up but not signed: `signoff --close` re-ran the 29
+test files and one instrument the ledger still called stale and signed 128 of
+128 test files and 6 of 6 instruments. It then took item O7 of candidate O
+([`STATUS.md`](STATUS.md) §3.4): the widenings round two named. The study is
+[`studies/STEPWISE_THREE_STUDY.md`](studies/STEPWISE_THREE_STUDY.md), its
+corpus (`evaluation/stepwise_three_cases.py`, 47 questions and 2 follow-ups)
+and marks V1–V8 committed before any code.
+
+**What was built.** `runtime/declared_frames.py` (the declared comparatives,
+count nouns and classes, and the column and membership readers);
+the frames and the `comparative` and `fold` steps in `runtime/stepwise.py`
+behind `ROUND_THREE`, with `VALUE_MISSING`, `COMPARATIVE_UNDECLARED`,
+`COLUMN_HOLE` and `SET_UNDECLARED`; tera and pico in
+`runtime/quantity_units.py` behind `WIDEN`; the three columns of the new steps
+and the mutations `member-lie` and `word-lie` in
+`reasoning/stepwise_script.py`; the measurement `runtime/stepwise_three.py`,
+`tools stepwise-three`, `tests/test_stepwise_three.py`; and
+`RequestProject/GLM/StepwiseWiden.lean` (`mean` in `StepwiseFrames.lean` made
+`@[expose]` for it).
+
+**What it measured.** 8 of 8 marks met. 18 of 18 comparative, 6 of 6
+count-noun, 6 of 6 prefix and 17 of 17 fold cases and 2 of 2 follow-ups as
+declared, 0 wrong; round two's reader answers 0 of the 47. Through `GLM.py
+--ask` the machine answered 6 of the 47 before the round (the typed planner's
+ordering frame already read *heavier* and *lighter*) and 32 after, refusing
+the other 15 by name. The present-rows control answers all 3 declared holes;
+the ten declared classes partition the 118 rows and agree with the whole
+column on its 4 complete numeric columns. 34 of 34 chain scripts verified, 327
+of 327 steps aligned, every mutation rejected. Rounds one and two keep every
+verdict. The router census found a regression in the first version — a
+generic `COMPARATIVE_UNDECLARED` replacing the vagueness reader's specific
+refusal on three declared questions — and it was fixed before the close by
+making the refusal only between two element rows (study §4.2).
+
+**Lean.** `winner_swap`, `winner_flip_ne`, `winner_eq_none_iff`,
+`fold_sum_partition`, `even_sum_iff_even_odd_count`,
+`odd_count_add_even_count`, `mean_cons_eq_iff`, `hole_mean_injective`; no
+`sorry`, standard axioms only.
+
+## Phase 83 — the 106 unresolved laws triaged: a law comes in only if it does measurable work
+
+**Status: closed this round.** It took item P2 of candidate P
+([`STATUS.md`](STATUS.md) §3.4): the 106 knowledge-base laws the law review
+left `UNRESOLVED-UBP`. The owner's rule: the laws are not to become large parts
+of the GLM unless they provide a measurably useful service. The study is
+[`studies/LAW_TRIAGE_STUDY.md`](studies/LAW_TRIAGE_STUDY.md), its service rule
+(S1 computable from the substrate, S2 new, S3 useful), fates and marks B1–B5
+declared before the module; the rows were read before the declarations, and
+that is disclosed.
+
+**What was built.** `reasoning/law_triage.py`: one fate per law, eight
+declared checks computed exactly from the substrate, the callables of the
+*already served* laws run, and the frozen rows
+(`reasoning/_data/unresolved_laws_106.json`) checked against the knowledge
+base inside `source_material/GLM-main.zip`. `tools law-triage` (and
+`--law ID`). The GLM does not consult it at run time.
+
+**What it measured.** 5 of 5 marks met. 0 absorbed, 3 already served
+(`LAW_DODECAD_DUALITY_001`, `LAW_TOPOLOGICAL_COMPLETION_001`,
+`LAW_SQUEEZE_001`), 3 refuted (`LAW_HEMISPHERIC_COHERENCE_001` — the decoder
+is right with probability 0.9702 at 1/20, not 51%; `LAW_PARTICLE_6D` — the
+carriers are codewords 8 or more apart; `LAW_LEPTON_004` — the Leech lattice
+has no norm-2 vector), 100 retired: 42 PIPELINE, 31 WORLD, 12 NUMEROLOGY, 12
+UNDERSPECIFIED, 1 DEFINITION, 2 DUPLICATE.
+
+## Phase 82 — the rate from the machine's own reads: a posterior over declared rates, and the soft channel
+
+**Status: closed this round.** It took item P5 of candidate P (candidate J's
+soft-channel item): estimate the bit-flip rate from the reads instead of
+having the caller declare it. The study is
+[`studies/RATE_POSTERIOR_STUDY.md`](studies/RATE_POSTERIOR_STUDY.md), marks
+J1–J9 declared before the module.
+
+**What was built.** `reasoning/rate_posterior.py`: the exact posterior over
+the grid `1/1000, 1/100, 1/50, 1/20, 1/10` plus a guard point `1/5`
+(uniform prior; a cautious prior for sensitivity), the soft reading's marginal
+confidence, and the refusal `RATE_GRID_EXCEEDED` when the guard is most
+probable. The Python dialect reaches it as `decode_soft`, `decode_soft_floor`
+and `agree_soft`, each answer with a fresh-interpreter script.
+`reasoning/rate_posterior_marks.py` measures it exactly over every count
+vector of coset weights — no sampling. `tools rate-posterior`.
+
+**What it measured.** 7 of 7 marks met. The soft floor keeps its promise on
+the prior average in 35 of 35 cells. At a fixed true rate, 525 cells: 37
+broken — 35 at 1/5, above the hunted grid (the edge refusal catches 44–61% of
+calls there), and 2 on the grid (1/10, floor 9999/10000, `n` = 2 and 5), so
+the declared expectation *the promise holds on the grid for n ≥ 5* failed.
+The soft floor is more conservative than the oracle at small `n` (at 1/20 and
+999/1000, retention 0.301 at `n` = 1 against 0.9112, 0.879 at `n` = 20).
+
+**Lean.** `RequestProject/GLM/RatePosterior.lean`: `soft_floor_error_le`,
+`rate_posterior_prod`, `naive_rate_underestimates`,
+`read_marginal_eq_coset_mass`.
+
+## Phase 81 — the second reading's channel: an exact measure for `agree`, and its place in the hunt
+
+**Status: closed this round.** It took item P4 of candidate P: the second
+reading had no exact channel measure. The study is
+[`studies/AGREE_CHANNEL_STUDY.md`](studies/AGREE_CHANNEL_STUDY.md), marks G1–G8
+declared before the module (a scoping prototype had been run first; that is
+disclosed).
+
+**What was built.** `reasoning/agree_channel_marks.py`: a census of every
+pair of reads of one carrier (pair model (a), the runtime's), reduced by code
+automorphisms it finds and verifies to 5 × 12,951 rows and 28
+rate-independent histograms; `agree` placed in Phase 80's hunt.
+`tools agree-channel`.
+
+**What it measured.** 8 of 8 marks met. 164,051,805 resolved pairs; the
+owner's factorization equals the census where they overlap; the class
+collapse holds on a five-integer key (the owner's three-integer key splits 9
+of 53). The second reading's working threshold is 9999/10000 up to 1/20 and
+999/1000 at 1/10 (retention 0.9796, residual 4.61e-5), where the decoder alone
+has none; the seven-reading grid still has none at 1/10. None of the case sets
+`S_2 … S_32` is a subgroup.
+
+**Lean.** `RequestProject/GLM/Agree.lean`: `agree_answered_sq`,
+`agree_residual_le_single`, `agree_conf_sum`, `pair_distance_split`.
+
+## Phase 80 — the confidence floor, hunted: which threshold works, and a confidence score where none does
+
+**Status: closed.** It took item P3 of candidate P
+([`STATUS.md`](STATUS.md) §3.4;
+[`DECODER_CONFIDENCE_STUDY.md`](studies/DECODER_CONFIDENCE_STUDY.md) §3): a
+confidence floor as a refusal, and the confidence printed beside every
+`resolve` and `agree` answer. Phase 77 had asked the owner for the threshold
+(99 %, 99.9 %, or skip). The owner's answer: test threshold variations, hunt
+for the working one, and where there is none give a confidence score rather
+than a refusal. The study is
+[`studies/CONFIDENCE_FLOOR_STUDY.md`](studies/CONFIDENCE_FLOOR_STUDY.md), its
+marks F1–F7 — including what *working* means — declared before any code of
+the round.
+
+**What was built.** `reasoning/confidence_floor.py`: the graded answer
+(`graded_resolve`, `graded_agree` — the value, its exact confidence and a band
+word, never refused on confidence) and the floor (`floor_resolve`,
+`floor_agree` — `BELOW_FLOOR` under a declared floor, naming the confidence;
+`FLOOR_OUT_OF_RANGE` for a floor outside `(0, 1]`). The Python dialect reaches
+them as `resolve_at`, `agree_at`, `resolve_floor` and `agree_floor`, each
+answer with a fresh-interpreter script that recomputes the confidence by a
+brute-force sum, and each `BELOW_FLOOR` with a certificate its script checks.
+`reasoning/confidence_floor_marks.py` holds an exact channel census — every
+probability a sum over every received word, not a sample — for the complete
+decoder and the context stage over K1's five case sets, and the hunt over a
+declared grid of five rates and seven thresholds. `tools confidence-floor`
+re-takes the marks in about twenty seconds.
+
+**What it measured.** 6 of 7 marks met. A threshold *works* at a rate when it
+keeps its promise (`P(wrong | answered) ≤ 1 − t`) and keeps at least 9/10 of
+the right answers, for every reading. The working threshold is 9999/10000 at
+1/1000, 1/100 and 1/50, 999/1000 at 1/20, and none at 1/10 — so both of the
+owner's candidates work up to 1/20 and neither at 1/10. At every rate the
+complete decoder is the reading that binds: its confidence takes one value
+per coset weight, so a floor can only drop a whole weight, and at 1/10 that
+costs 28 % of its right answers even at a floor of 9/10. At 1/10 the owner's
+fallback applies: the graded answer, not a refusal. Not declared: each case
+set of the context stage has a working floor at 1/10 on its own (999/1000
+over up to 8 cases). The promise holds in 210 of 210 cells, and in 210 of 210
+with the rate overdeclared; with the rate underdeclared (read at twice the
+declared rate) it breaks in 30. The miss (F5) is one program whose declared
+refusal was wrong: with two cases, a weight-3 read at 1/10 is 6561/6562 sure,
+not the decoder's 78 %; recorded, not re-read.
+
+**Lean.** `RequestProject/GLM/ConfidenceFloor.lean` proves the floor's
+promise (`floor_error_le`), that raising the floor never raises what it keeps
+(`floor_retention_antitone`), that a nearest survivor's posterior falls as the
+rate rises (`posterior_antitone_rate`, through `posterior_eq_ratio`), and hence
+that a floor passed at a declared rate is passed at every lower true rate
+(`floor_pass_lower_rate`) and keeps its promise over a whole channel
+(`floor_safe_overdeclared`).
+
+**A repair on the way.** The round's first full gate found that Phase 79's
+`integer_decision.py` imported `copy` (for one `deepcopy` of a refutation
+tree), which the standard-library rule of `test_reasoning.py` refuses; the
+copy is now a four-line structural copy in the module, and the mutation it
+feeds is unchanged.
+The reasoning kernel reached 110 modules with this round's two, which is a
+count `test_figures.py` still held as a retired package figure; it is retired
+from that guard list as "102 modules" was in Phase 72.
+
+**Under D15** the round moved **refusal**: a floor now removes wrong answers
+at a cost in right ones that is known exactly before it is chosen (at 1/20, a
+floor at 999/1000 removes 97.4 % of the decoder's wrong answers for 8.9 % of
+its right ones), and where no floor is worth its cost the answer says how far
+it can be trusted instead of being refused. Nothing previously answered moved.
+
+## Phase 79 — the integer decision, completed: the Omega test behind `INTEGER_UNDECIDED`
+
+**Status: closed.** It took the third item of candidate M
+([`STATUS.md`](STATUS.md) §3.4; [`REVERSE_TCT_STUDY.md`](studies/REVERSE_TCT_STUDY.md)
+§12): a complete integer decision for the integer sort of Reverse Three Column
+Thinking. The study is
+[`studies/INTEGER_DECISION_STUDY.md`](studies/INTEGER_DECISION_STUDY.md), its
+marks Z1–Z6 declared with a 22-question corpus and a 300-system battery before
+any code of the round.
+
+**It began by closing Phase 78.** The tree was handed over with the Phase 78
+release written up as done but not signed: 101 of 123 test files and two
+instruments were stale or unsigned. `signoff --close` re-ran them; the figures
+check then failed on a documentation sentence that no longer quoted the suite
+("123 test files" had become a bare figure), which was fixed, the derived
+layer refreshed, and the close run again: 123 of 123 test files and 6 of 6
+instruments signed. The repository had also been re-imported with its Python
+bytecode caches tracked; they are untracked and ignored now.
+
+**What was built.** `reasoning/integer_decision.py`: `decide_rows` decides a
+system of tightened integer rows by the Omega test — equalities solved exactly
+by a remainder substitution of a fresh variable, exact elimination where a
+variable's coefficients allow it, and otherwise the real shadow, the dark
+shadow and the splinters — returning an integer point or a refutation tree of
+combinations, substitutions and splits that `check_node` verifies by arithmetic
+alone. `reverse_tct_int.decide_case` hands it a case only when round three's
+elimination and witness search have both left the case open, so no existing
+answer or certificate moves; the column-3 script carries its own copy of the
+tree checker. `INTEGER_UNDECIDED` is kept only for a case past the declared
+limit of 5000 search steps. `tools integer-decision` re-takes the marks.
+
+**What it measured.** 22 of 22 declared questions answered as declared, 0
+wrong (round three refused all 22); the battery's 600 questions agree with
+enumeration of the box, 0 undecided (round three: 11 `entails` and 20 `bounds`
+undecided, 0 wrong); 22 of 22 scripts `VERIFIED True` and 22 of 22 mutated
+Omega trees rejected; round three's own corpus and battery unchanged. Of the
+22, 18 are settled by solving an equality with no unit coefficient exactly —
+the step round three's elimination lacked — two by the Omega test's choice of
+elimination, and two (Pugh's parallelogram among them) by splinters.
+
+**Lean.** `RequestProject/GLM/IntegerDecision.lean` proves the facts the search
+relies on: the integer shadow equals the real shadow at a unit coefficient
+(`exact_shadow`), the dark-shadow row guarantees an integer
+(`dark_shadow_gap`), an integer point outside every splinter satisfies the dark
+shadow (`splinter_count`, `splinter_tail`), a split misses no integer
+(`split_cover`), and the substitution is a bijection of the integer points
+(`substitution_bijective`); Pugh's example is checked by exhaustion.
+
+**Under D15** the round moved **refusal into derivation**: every question the
+round-three refusal covered in the measured sets is now answered, with a
+checkable certificate, and nothing previously answered moved.
+
+## Phase 78 — the cost of an iteration: one Lean copy, closures that follow what a unit reads, and a closing command
+
+**Status: closed this round.** Taken at the owner's request: the two rounds
+before it ran out of time, and each round's check of the whole tree cost more
+than the round's own work. The measurements are
+[`studies/ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) §5g; the
+procedure is [`ITERATE.md`](ITERATE.md).
+
+**One Lean copy.** The development was held twice — `RequestProject/` at the
+root and `overlay/glm_lean/RequestProject/` — with an instrument that checked
+they were identical and a `tools lean-mirror` step that copied one onto the
+other. The root copy is gone; `lakefile.toml` builds the overlay copy in place
+(`srcDir = "overlay/glm_lean"`), and the mirror step and the
+`lean-copies-identical` instrument are retired (six instruments remain). Every
+path that named the root copy (tests, the decoder-confidence, held-precision
+and law-absorption marks, study links) now names the overlay copy.
+
+**Closures follow what a unit reads.** A unit's closure no longer takes in a
+data file or a Lean file merely because a docstring mentions it: data files
+enter when named (or read with a glob), docstrings are not dependencies, and a
+Lean name that does not exist is ignored rather than widened to the whole
+development. The generated regions of a document — every
+`<!--figure:…-->` span and every `<!-- generated … -->` block — are masked
+from the digest of any unit that only reads the document; only the three
+modules that render those regions digest them raw. So the counts that change
+every round live in one registry (`corpus/render.py`, recomputed into
+[`overlay/FIGURES.md`](overlay/FIGURES.md)), and a sign-off that moves a count
+no longer makes the units that quote it stale — the circular re-check the
+owner described.
+
+**Derivations are keyed on code, not on the corpus.** The native-parity and
+native-words caches are keyed on the code they run; a move in the corpus they
+measure is reported as a dated note by `corpus --check`, not a failure.
+
+**A closing command.** `signoff --close` runs the incremental release and then
+verifies it, so a round ends with one command that re-runs only the stale
+units, and resumes where it stopped if interrupted.
+
+**What it measured.** The mean closure fell from 284 files to 183; retaking the
+measurement caches re-runs 22 units rather than 117; an edit to
+`PROJECT_DIRECTIVES.md` makes 32 units stale rather than 120, `STATUS.md` 24
+rather than 39, `MASTER_PLAN.md` 30 rather than 38, and a commonly cited Lean
+file (`Sturmian.lean`) 47 rather than 103. `lean_addresses.json` is still in 99
+closures; it is named in the study as the next thing to cut.
+
+**Also repaired.** Two XOR sites Phase 77 added were unclassified in the
+combiner's inventory; `tools decoder-confidence` printed floats (D7) and now
+prints exact decimals; bytecode caches are no longer tracked. The
+native-parity cache had been stored while the document address book was stale,
+so it recorded "not answered" as its document result and two marks failed;
+both native caches now refuse to store such a reading, and were retaken.
+`corpus --refresh` now rewrites `FIGURES.md` as well, so the derived layer is
+one command rather than two.
+
+## Phase 77 — decoder confidence: the absorbed law attached to the decoder's own readings
+
+**Status: closed.** Item P1 of candidate P of
+[`STATUS.md`](STATUS.md) §3.4. The object, the marks C1–C6 and the Lean
+statements were committed before any code
+([`studies/DECODER_CONFIDENCE_STUDY.md`](studies/DECODER_CONFIDENCE_STUDY.md)
+§1); C3's brute-force check was narrowed to a declared stride before any code
+was written, and says so.
+
+**The round began by closing Phase 76, which had not closed.** The tree it
+left did not pass its own gates: `corpus --check` named a stale derivation,
+the query-escalation cache was stale against `evaluation/cases.py`, three
+hand-typed counts lagged (146 Lean files, 4,098 declarations, 105 reasoning
+modules), and `test_corpus.py` and `test_signoff.py` failed on a closure leak:
+the substrate frame had put `law_absorption.py` on the planner's import path,
+and through `law_register.py` → `deep_dive.py` → `salvage.py` three provenance
+labels naming archive Lean files the development does not hold pulled the whole
+development into every unit that builds a session (a median Lean edit made 103
+units stale). The labels now name the archive folder and the file in words;
+the median is back to 42 ([`studies/ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) §5).
+
+**What was built.** `reasoning/decoder_confidence.py`: `decode_confidence`
+(the complete decoder's answer with the absorbed law's posterior, `TIE` at a
+deep hole; with declared cases, the carried fork's context stage with the
+survivor's posterior among the cases under the closed world) and
+`agree_confidence` (the second reading, the posterior of the product of the
+reads' likelihoods), both in integers, with `brute_posterior` as the
+`Fraction` check. The Python dialect's builtins `decode_confidence(rate, s,
+*cases)` and `agree_confidence(rate, *reads)`, their plain-Python prelude
+twins (brute-force sums, so column 3 is an independent computation), and the
+refusal names `TIE` and `RATE_OUT_OF_RANGE`.
+`reasoning/decoder_confidence_marks.py` measures the marks; `tools
+decoder-confidence`; `tests/test_decoder_confidence.py` (15 tests).
+`RequestProject/GLM/DecoderConfidence.lean`: `posterior_sum_one`,
+`posterior_restrict_le`, `equal_weight_equal_posterior`, `resolved_bound`,
+`bsc_ratio`, `bsc_anti`, `fork_confidence_bound`; standard axioms only.
+
+**What it measured.** 5 of 6 marks met. The decoder: 2,112 reads, 0
+disagreements with the law and a brute-force sum; a read at coset weight 3 is
+right with probability 0.9978602 at 1/100 and 0.7775457 at 1/10. The context
+stage: 1,776,804 resolved-fork readings (592,268 per rate), each equal to the
+brute-force posterior over its case set and at least the proved floor
+`1/(1 + (k − 1)(p/q)^2)`, attained with one rival; below 99 %: 0 at 1/100,
+43,136 at 1/20, 294,976 at 1/10, the least 0.9088391 with 32 cases. The second
+reading: 4,224 of 4,224 at each rate, 0 wrong, least 0.9500759 at 1/10. The
+runtime: 15 of 15 declared programs as declared, every answer's script
+verified. C3 is not met: its witness clause declared exactly 1/2 for each of
+the two survivors, and they are exactly equal but each just below 1/2 (the
+other codewords keep some mass) — a wrong declaration, recorded as missed.
+
+**What the new Lean file moved elsewhere.** `DecoderConfidence.lean` added two
+goal queries (820 → 822) and re-dealt the two strides. The stack relay is
+still ahead of the text control on every set, 702 → 707 of 822 bare goals, and
+now carries 13 queries and loses one (`GLM.Gen3.m24_orbit_stabiliser`; it lost
+none at Phase 76). The anonymous register is unchanged in kind: text 702 → 61
+and the structural address 219 → 158 of 822. The two evaluation cases were
+re-pinned to these figures.
+
+**Against the target (D15).** Refusal: a tie is now refused with the proof
+that it is exact, and a resolved answer says how far it can be trusted.
+Derivation: the confidence is derived from the channel, not looked up.
+
+## Phase 76 — held precision: a register value's stated precision carried through a derivation
+
+**Status: closed this round.** Item O6 of candidate O of
+[`STATUS.md`](STATUS.md) §3.4. The object, the marks H1–H5 and the Lean
+statement were committed before any code
+([`studies/HELD_PRECISION_STUDY.md`](studies/HELD_PRECISION_STUDY.md) §1).
+
+**What was built.** `reasoning/held_precision.py`: `composite` writes a goal
+or narrative chain's answer as one monomial `C · Π leafₖ^eₖ` in its leaves
+(wheel axioms, SI steps and unit-out steps compose exactly);
+`leaf_intervals` reads each register lookup at the precision it was written to
+(`Interval.as_held`) and each given as exact; `answer_interval` takes the two
+corners; `stepwise_interval` is the step-by-step control; `chain_precision` and
+`precision_note` put the result on the chain. `runtime/stepwise.py` appends the
+note to every goal and narrative chain that reads a register value. `tools
+held-precision`, `tests/test_held_precision.py` (7 tests).
+`RequestProject/GLM/HeldPrecision.lean`: `monomial_corner_bounds`,
+`scaled_corner_bounds`, `corner_mem`, `cancelled_leaf`,
+`stepwise_strictly_wider`; standard axioms only.
+
+**What it measured.** 5 of 5 marks met. 8 of 39 goal and narrative chains read
+a register value and carry an exact interval (`1629900` → `[1629450,
+1630350]` for the energy from the melting point of iron); 2 are exact because
+the held value cancels (the entropy question reads the melting point into the
+energy and divides it out), where step-by-step interval arithmetic reports a
+spread; every verdict and value of both stepwise corpora unchanged.
+
+**Against the target (D15).** Derivation: a derived answer now says how far
+its register inputs let it move, and says *exact* only when it is.
+
+**What else moved.** The Lean files of Phases 75 and 76 moved the stride
+samples to 205 declaration and 103 goal queries, and with them the earlier
+rounds' draws. Native parity: `native2` ahead of the raw features at every
+cut-off on both sets (90 against 82 at 5 on the declarations, 30 against 27
+on the goals), so N6 is met again; N7, N4a, N4b and N8 met. Native words:
+level at 5 on the declarations (171 each), ahead on the goals (85 against 83)
+and the documents (45 against 44), but W2 is missed by four declaration
+queries at k = 1, so `test_native_words.py` now pins W3 (on which the live
+document ranking rests) and the cut-offs where the native ranking holds, and
+records W2 as measured. The re-readings are in `NATIVE_WORDS_STUDY.md` §3.3
+and `NATIVE_PARITY_STUDY.md` §3.5.
+
+## Phase 75 — the laws absorbed: each retained law tested, improved where it can be, and put to use
+
+**Status: closed this round.** Candidate P of [`STATUS.md`](STATUS.md) §3.4,
+reworded at the owner's direction: not a second law subsystem, but each of the
+65 laws tested, improved where possible and absorbed into the GLM where it is
+of real use. The fates, the 36 declared substrate questions and the marks
+A1–A8 were committed before any code
+([`studies/LAW_ABSORPTION_STUDY.md`](studies/LAW_ABSORPTION_STUDY.md) §1); one
+declared value was wrong in its sixth decimal and is recorded as such.
+
+**What was built.** `reasoning/law_absorption.py`: `FACTS`, each computed
+live from the running substrate (codewords, rate, weight counts, minimum
+distance, covering radius, errors corrected, decoding outcome and exact
+probability, always-right, confidence at a distance, unique-reading fraction,
+perfectness, kissing number, XOR closure, descent); `ABSORPTION()` gives every
+law its fate and reason; `read_question` reads a substrate question.
+`runtime/semantic_plan.py` gains the `substrate` frame, so the typed planner
+answers these questions and names the law each answer was absorbed from.
+`evaluation/law_absorption_cases.py` (36 cases), `tools law-absorption`,
+`tests/test_law_absorption.py` (17 tests).
+`RequestProject/GLM/LawAbsorption.lean`: `total_prob`, `right_prob_lt_one`,
+`right_prob_eq_one_iff`, `worst_case_integrity` (the storage law, corrected),
+`leader_most_likely`, `equal_weight_equal_prob`, `tie_posterior_le_sixth`,
+`card_symmDiff_parity`, `odd_error_never_refused`, `odd_heavy_miscorrected`;
+standard axioms only.
+
+**What it measured.** 8 of 8 marks met. 11 laws absorbed, 2 already GLM
+definitions, 3 retested in dimensionless form and refused (`FORCE_003`
+p = 0.9077, `FORCE_005` p = 0.9925, `CHEM_002` p = 0.4705), 49 retired. 36 of
+36 declared substrate questions through the planner as declared, 0 wrong,
+against 0 answered before; 0 of 4,687 existing evaluation texts read by the new
+frame. New, and proved: an odd-weight error is never refused, and one of
+weight 5 or more is always miscorrected.
+
+**Against the target (D15).** Derivation: questions about the GLM's own
+substrate answered by computing, each citing its law. Refusal: out-of-domain
+substrate questions and the six-way tie refused by name.
+
+## Phase 74 — the law register: sixty-five retained UBP laws, re-read
+
+**Status: closed this round.** Taken on the owner's instruction rather than
+from `STATUS.md` §3.4: put `UBP_LAW_GLM_REVIEW.md` and
+`retained_laws_verified_65.csv` into `source_material/`, then review them —
+do they hold up, can they be improved, is anything in them useful to the GLM in
+a measurable way — without getting stuck on the particle physics. The
+declarations R1–R9 and the templates of the look-elsewhere test were committed
+before any measuring code
+([`studies/LAW_REGISTER_STUDY.md`](studies/LAW_REGISTER_STUDY.md) §1).
+
+**What was built.** `reasoning/law_register.py`, reading the frozen copy
+`reasoning/_data/law_register_65.csv`: the sixteen exact rows re-graded with
+per-row evidence (the supplied file's evidence column is one identical
+sentence for all sixteen); the decoder outcome table from the coset weight
+enumerators (`decoder_outcomes`, `outcome_probabilities`, `refusal_price`,
+`storage_hardened`); `moment_census`, `nrci_means`, `closure_census`,
+`descent_check`; the forty-nine numeric rows categorised and the external
+formulas run through `look_elsewhere`, with `admit(law_id)` as the verdict.
+`tools law-register`, the toolbox tool `law register` (faculty *refusal*),
+`tests/test_law_register.py` (27 tests).
+`RequestProject/GLM/LawRegister.lean`: `unique_leader_iff` (the decoder is
+right exactly when the error has weight ≤ 3), `wt_four_refused`,
+`wt_five_coset_three` (through the Steiner system), `and_not_closed`,
+`or_not_closed`, `moment_agree` / `moment_eight_differs` (the first seven
+weight moments of the code are binomial, the eighth is not),
+`nrci_means_differ` and `nrci_floor`; standard axioms only.
+
+**What it measured.** 9 of 9 marks met. Exact rows: 8 structural, 2
+overclaimed (`LOGIC_GEO_001`: XOR only, 15/379 of octad pairs have a codeword
+AND; `PATH_LEAST_ACTION`: 792 cosets have no descent as short as their
+distance), 3 definitional, 2 arithmetic, 1 near-miss. Decoder: right iff
+weight ≤ 3, all weight-4 errors refused, all weight-5 errors wrong;
+`LAW_STORAGE_HARDENED_001` refuted (at 3% noise 0.005321 not right, 0.0005925
+wrong); refusal at a six-way tie withholds 5.00, 5.06, 5.18 wrong answers per
+right answer given up at 1%, 3%, 5%. The review's two "equal" NRCI means
+differ by 0.000000023478. Numeric rows: 19 external, 7 unit-dependent, 3
+not-a-measurement, 14 KB-internal, 1 restatement, 4 duplicate, 1 structural;
+2 of 21 external formulas admitted at p < 1/100 (`LEPTON_001` p = 0.0006,
+`PHYSICS_MUON_002` p = 0.0042), `FORCE_002` refused at p = 0.3858. Post hoc,
+not counted: the decoy control admits 1 and 2 of 100 decoys, and the two
+admitted formulas miss m_μ/m_e by 158 and 13204 standard deviations.
+
+**What else moved.** This round's Lean file moved the corpus to 4,070
+declarations and the stride samples to 204 declaration and 102 goal queries,
+and with them the earlier rounds' draws. The native word ranking is still at
+least level with the standard at every k (176 against 174 at 5 on the
+declarations, 89 against 86 on the goals, level at 38 of 60 on the documents),
+but both Leech tie-break marks are missed by one query (W4 and W6). Native
+parity's N7 still holds; N6 is missed by one goal query at k = 3 (23 against
+24, while 37 against 31 at 5), so `test_native_parity.py` no longer pins it;
+N4a, N4b and N8 are met. The re-readings are in `NATIVE_WORDS_STUDY.md` §3.3
+and `NATIVE_PARITY_STUDY.md` §3.5.
+The same new declarations grew the goal-query set of the relay and
+anonymous-register reports from 810 to 814 queries, so the evaluation cases
+that quote them were re-pinned to the new reading (the stack 696 → 703, still
+ahead, carrying 14 and losing 0; renamed, text 696 → 60 and structural address
+207 → 153); the claims themselves did not change.
+
+**Against the target (D15).** Refusal: 47 of the 49 "verified" numeric laws
+refused by name, and the decoder's refusal priced. No derivation: the
+structural laws were already GLM mathematics.
 
 ## Phase 73 — stepwise planner, round two: frames, givens with units, and the register in the wheels
 
@@ -1865,7 +2508,7 @@ remaining, the release. Running it failed six units, none of them noise:
 
 **What the release now says.** `signoff --verify-release` reports **99 of 99
 test files and 7 of 7 instruments** signed with the exhaustive cases on; the
-suite is **<!--figure:suite-->4,481 tests across 118 of the 119 test files, 17,085 subtests, outside the document check<!--/figure-->**,
+suite is **<!--figure:suite-->4,703 tests across 131 of the 132 test files, 17,825 subtests, outside the document check<!--/figure-->**,
 one process with `GLM_EXHAUSTIVE=1` collecting 3,979; the end-to-end
 evaluation is **157 / 157** with 19 expected refusals; `corpus --check` is
 current; and `lake build` is clean over 120 Lean files with no `sorry`.

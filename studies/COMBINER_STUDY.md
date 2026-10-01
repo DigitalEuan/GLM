@@ -21,7 +21,7 @@ justified rather than assumed. So: is XOR a *choice*, and could something else
 be used?
 
 This document is the answer. It has three parts, and each is a theorem in
-[`RequestProject/GLM/Combiner.lean`](../RequestProject/GLM/Combiner.lean)
+[`RequestProject/GLM/Combiner.lean`](../overlay/glm_lean/RequestProject/GLM/Combiner.lean)
 rather than an argument here. The computational half is
 `glm_universal.reasoning.combiner`, the test that pins it is
 `overlay/glm_universal/tests/test_combiner.py`, and the whole thing prints with

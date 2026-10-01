@@ -39,7 +39,7 @@ of them hold.
 
 * **A frame** recognises one shape of question — *the F of X*, *is A more P
   than B*, *which element has the largest F*, *convert Q U to U*, *is N
-  prime*, fourteen in all (<!--figure:plans-frames-->18<!--/figure-->) — and
+  prime*, fourteen in all (<!--figure:plans-frames-->19<!--/figure-->) — and
   emits a plan: an intent, typed slots (row, field, table, number, unit,
   comparative), and for each slot the words it was read from and the rule that
   grounded them.

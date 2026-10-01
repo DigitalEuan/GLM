@@ -1,0 +1,721 @@
+{
+ "blockers": [
+  {
+   "experiment": "take the twenty probe questions and hand-write the query each one should become; measure how many of the twenty the existing solvers then answer. That separates 'cannot parse' from 'cannot answer' without building a parser -- run in reasoning/probe_oracle.py, which finds the parser worth 4 of the 20 and a surface onto what the registers already hold worth 10",
+   "key": "parse",
+   "measurement": "probe.canonical.refused and probe.unrecognised",
+   "statement": "the session recognises a fixed grammar of query kinds; a question outside it is not misunderstood, it is not understood at all",
+   "title": "there is no parser from open natural language to a query"
+  },
+  {
+   "experiment": "add the missing content words of the probe to the lexicon with their primitives, and re-run the probe; if the score does not move, the blocker is the parser and not the vocabulary",
+   "key": "vocabulary",
+   "measurement": "lexicon.coverage",
+   "statement": "words the lexicon does not hold cannot be grounded, and most words of an ordinary question are not in it",
+   "title": "the lexicon is small and closed"
+  },
+  {
+   "experiment": "extend the equation operation from checking a claim to solving one -- given two operands and the claim, emit the third exponent vector -- and measure exactness against the register",
+   "key": "composition",
+   "measurement": "faculty.derived_count",
+   "statement": "the registers hold values; the system has one measured operation that composes two of them into a third, and it composes exponents only",
+   "title": "answers are fields, not compositions"
+  },
+  {
+   "experiment": "paraphrase each probe question three ways rather than one and report the spread; a faculty that is stable under paraphrase would show equal scores",
+   "key": "paraphrase",
+   "measurement": "probe.stable",
+   "statement": "the same question in two phrasings is not the same query to the system",
+   "title": "surface form decides whether a question is answered"
+  },
+  {
+   "experiment": "the experiment in python_addressing is that smallest experiment, run here: address 240 functions by 24 syntax counts and measure nearest-neighbour module agreement against a digest control and chance",
+   "key": "python",
+   "measurement": "python.nearest_shares_module",
+   "statement": "the Lean development is addressed; this package's own Python is not addressed by anything, and nothing reads a script as a carrier",
+   "title": "program text is a register the system does not have"
+  },
+  {
+   "experiment": "measure whether a second, independent reading -- the lexical address book -- answers any of the queries the ladder refuses, which would show refusals are a single-channel limit rather than an information limit",
+   "key": "safety-vs-coverage",
+   "measurement": "escalation.refused",
+   "statement": "the ladder refuses rather than answering wrongly, and the price is the refused queries; nothing in the system reduces that price except a better reading",
+   "title": "the refusal contract buys safety at the cost of coverage"
+  }
+ ],
+ "claim": "what is demonstrated here is coverage and mechanism, not reasoning: the probe measures how much open natural language the system takes at all, the ledger says which of table lookup, geometric addressing and derivation each measured result actually is, and the blockers name what stands between the two.",
+ "figures": {
+  "escalation.refused": 101,
+  "faculty.derived_count": 2,
+  "lexicon.coverage": "19/23",
+  "lexicon.coverage_with_forms": "1",
+  "lexicon.out_of_lexicon": 12,
+  "probe.canonical.correct": 2,
+  "probe.canonical.refused": 17,
+  "probe.canonical.wrong": 1,
+  "probe.stable": 17,
+  "probe.unrecognised": 11,
+  "python.chance": "1259/7170",
+  "python.digest_control": 34,
+  "python.nearest_shares_module": 112,
+  "vocabulary.prediction_held": true,
+  "vocabulary.score_moved_by": 0,
+  "vocabulary.words_added": 54
+ },
+ "ledger": [
+  {
+   "class": "table",
+   "measured_in": "glm_universal.runtime.session",
+   "result": "register lookup by exact name (the describe solver)",
+   "why": "the name is matched against the register index; no quantisation happens and no geometry is consulted"
+  },
+  {
+   "class": "addressed",
+   "measured_in": "glm_universal.reasoning.norm_escalation",
+   "result": "retrieval of a perturbed carrier over the norm ladder",
+   "why": "the query is not the stored key -- it is the key plus a declared offset -- and the lattice cell is what recovers the identity"
+  },
+  {
+   "class": "addressed",
+   "measured_in": "glm_universal.reasoning.operation_escalation",
+   "result": "register, chemistry, physics, harmony and program-text classification of a perturbed carrier",
+   "why": "the same mechanism answering a coarser question; the answer is still a label the register holds"
+  },
+  {
+   "class": "addressed",
+   "measured_in": "glm_universal.reasoning.operation_escalation",
+   "result": "dimensional exponent recovery",
+   "why": "the exponents are read out of the cell, not computed; what the geometry supplies is the reading"
+  },
+  {
+   "class": "derived",
+   "measured_in": "glm_universal.reasoning.operation_escalation",
+   "result": "equation checking over recovered exponent vectors",
+   "why": "the seven integer additions and the comparison are done by the system over values it recovered; no register holds the answer to the claim being checked"
+  },
+  {
+   "class": "derived",
+   "measured_in": "glm_universal.substrate.norm_family",
+   "result": "the containment order of the norm family",
+   "why": "every containment is composed from a handful of relative rules and then checked on generated points; none is stored"
+  }
+ ],
+ "lexicon": {
+  "content_words": 69,
+  "coverage": {
+   "__fraction__": "19/23"
+  },
+  "coverage_with_forms": {
+   "__fraction__": "1/1"
+  },
+  "declared_forms": 93,
+  "held": [
+   "abstract",
+   "acceleration",
+   "add",
+   "atom",
+   "atomic",
+   "belong",
+   "block",
+   "blue",
+   "carbon",
+   "check",
+   "chlorine",
+   "common",
+   "completeness",
+   "convert",
+   "count",
+   "declaration",
+   "derivative",
+   "describe",
+   "dimensional",
+   "divisor",
+   "element",
+   "energy",
+   "equal",
+   "explain",
+   "family",
+   "fifth",
+   "file",
+   "force",
+   "formula",
+   "function",
+   "gcd",
+   "give",
+   "greatest",
+   "heavy",
+   "interval",
+   "limit",
+   "look",
+   "mass",
+   "mean",
+   "meaning",
+   "module",
+   "molar",
+   "mole",
+   "norm",
+   "number",
+   "perfect",
+   "periodic",
+   "prime",
+   "return",
+   "sky",
+   "table",
+   "tell",
+   "two",
+   "velocity",
+   "water",
+   "weigh",
+   "weight"
+  ],
+  "in_lexicon": 57,
+  "in_lexicon_with_forms": 69,
+  "lexicon_size": 149,
+  "missing": [
+   "c",
+   "defined",
+   "defines",
+   "dimensionally",
+   "dimensions",
+   "feet",
+   "makes",
+   "metres",
+   "returns",
+   "rungs",
+   "times",
+   "written"
+  ],
+  "missing_after_forms": [],
+  "missing_resolved_by_a_declared_form": [
+   "c",
+   "defined",
+   "defines",
+   "dimensionally",
+   "dimensions",
+   "feet",
+   "makes",
+   "metres",
+   "returns",
+   "rungs",
+   "times",
+   "written"
+  ],
+  "out_of_lexicon": 12,
+  "out_of_lexicon_with_forms": 0
+ },
+ "probe": {
+  "by_domain": {
+   "chemistry": {
+    "correct": 0,
+    "refused": 3,
+    "wrong": 1
+   },
+   "mathematics": {
+    "correct": 1,
+    "refused": 3,
+    "wrong": 0
+   },
+   "natural language": {
+    "correct": 0,
+    "refused": 4,
+    "wrong": 0
+   },
+   "physics": {
+    "correct": 1,
+    "refused": 3,
+    "wrong": 0
+   },
+   "program text": {
+    "correct": 0,
+    "refused": 4,
+    "wrong": 0
+   }
+  },
+  "canonical": {
+   "correct": 2,
+   "refused": 17,
+   "wrong": 1
+  },
+  "paraphrased": {
+   "correct": 2,
+   "refused": 18,
+   "wrong": 0
+  },
+  "pass_mark": {
+   "correct_at_least": 10,
+   "of": 20,
+   "wrong_at_most": 1
+  },
+  "passed": false,
+  "questions": 20,
+  "reading": "a refusal costs the probe a point and is not a failure of the refusal contract; a wrong answer is both. The probe measures coverage of natural language, and the pass mark was declared before the run.",
+  "rows": [
+   {
+    "canonical": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "domain": "natural language",
+    "expect": "velocity",
+    "key": "nl-meaning",
+    "paraphrase": "explain the meaning of velocity",
+    "paraphrased": {
+     "detail": "'velocity' denotes dimension L T^-1",
+     "kind": "meaning",
+     "verdict": "correct"
+    },
+    "question": "what does velocity mean?",
+    "stable": false,
+    "why": "a meaning question about a word the lexicon holds"
+   },
+   {
+    "canonical": {
+     "detail": "resolve: 'velocity the derivative of' names no carrier in any enabled domain",
+     "kind": "describe",
+     "verdict": "refused"
+    },
+    "domain": "natural language",
+    "expect": "position",
+    "key": "nl-relation",
+    "paraphrase": "velocity is the derivative of what?",
+    "paraphrased": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "question": "what is velocity the derivative of?",
+    "stable": true,
+    "why": "a relation the lexicon holds as a triple"
+   },
+   {
+    "canonical": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "domain": "natural language",
+    "expect": "energy",
+    "key": "nl-compare",
+    "paraphrase": "which is more abstract, energy or water?",
+    "paraphrased": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "question": "is energy more abstract than water?",
+    "stable": true,
+    "why": "a comparison over a semantic primitive both words carry"
+   },
+   {
+    "canonical": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "domain": "natural language",
+    "expect": "rayleigh",
+    "key": "nl-unknown",
+    "paraphrase": "what makes the sky look blue?",
+    "paraphrased": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "question": "why is the sky blue?",
+    "stable": true,
+    "why": "a question nothing in the system holds -- the right outcome is a refusal, and answering it would be wrong"
+   },
+   {
+    "canonical": {
+     "detail": "'2 + 2' denotes number 4 [arithmetic: expression evaluates to 4]; no register entry is spelled that way, so it is described by what it denotes",
+     "kind": "describe",
+     "verdict": "correct"
+    },
+    "domain": "mathematics",
+    "expect": "4",
+    "key": "math-add",
+    "paraphrase": "add two and two",
+    "paraphrased": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "question": "what is 2 + 2?",
+    "stable": false,
+    "why": "arithmetic the term layer can ground"
+   },
+   {
+    "canonical": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "domain": "mathematics",
+    "expect": "no",
+    "key": "math-prime",
+    "paraphrase": "is ninety-one a prime number?",
+    "paraphrased": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "question": "is 91 prime?",
+    "stable": true,
+    "why": "a decidable arithmetic fact needing a computation"
+   },
+   {
+    "canonical": {
+     "detail": "resolve: 'greatest common divisor of 12 and 18' names no carrier in any enabled domain",
+     "kind": "describe",
+     "verdict": "refused"
+    },
+    "domain": "mathematics",
+    "expect": "6",
+    "key": "math-gcd",
+    "paraphrase": "gcd of 12 and 18",
+    "paraphrased": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "question": "what is the greatest common divisor of 12 and 18?",
+    "stable": true,
+    "why": "a two-argument arithmetic function"
+   },
+   {
+    "canonical": {
+     "detail": "resolve: 'prime limit of the interval 3/2' names no carrier in any enabled domain",
+     "kind": "describe",
+     "verdict": "refused"
+    },
+    "domain": "mathematics",
+    "expect": "3",
+    "key": "math-ratio",
+    "paraphrase": "the prime limit of a perfect fifth",
+    "paraphrased": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "question": "what is the prime limit of the interval 3/2?",
+    "stable": true,
+    "why": "a property the harmonics register holds"
+   },
+   {
+    "canonical": {
+     "detail": "speed_of_light (physics): depth 6, plane-0 mask 0x001405, |v|^2 = 41/1",
+     "kind": "describe",
+     "verdict": "correct"
+    },
+    "domain": "physics",
+    "expect": "speed_of_light",
+    "key": "phys-constant",
+    "paraphrase": "tell me about speed_of_light",
+    "paraphrased": {
+     "detail": "speed_of_light (physics): depth 6, plane-0 mask 0x001405, |v|^2 = 41/1",
+     "kind": "describe",
+     "verdict": "correct"
+    },
+    "question": "describe speed_of_light",
+    "stable": true,
+    "why": "a register lookup by exact name -- the easiest case"
+   },
+   {
+    "canonical": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "domain": "physics",
+    "expect": "M",
+    "key": "phys-dimension",
+    "paraphrase": "give the dimensional formula of force",
+    "paraphrased": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "question": "what are the dimensions of force?",
+    "stable": true,
+    "why": "a dimensional fact the physics register carries"
+   },
+   {
+    "canonical": {
+     "detail": "parse_real: 'force' is not a notation this module reads; it understands sqrt(<rational>), pi, e, phi, <integer>, <numerator>/<denominator>, and any arithmetic combination of those, e.g. (1+sqrt(5))/2 ",
+     "kind": "compare",
+     "verdict": "refused"
+    },
+    "domain": "physics",
+    "expect": "true",
+    "key": "phys-derive",
+    "paraphrase": "check that force has the dimensions of mass times acceleration",
+    "paraphrased": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "question": "is force equal to mass times acceleration dimensionally?",
+    "stable": true,
+    "why": "a derivation over two register facts, not a lookup"
+   },
+   {
+    "canonical": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "domain": "physics",
+    "expect": "9.84",
+    "key": "phys-convert",
+    "paraphrase": "how many feet is 3 metres?",
+    "paraphrased": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "question": "convert 3 metres to feet",
+    "stable": true,
+    "why": "a unit conversion needing a factor the register does not hold"
+   },
+   {
+    "canonical": {
+     "detail": "C (chemistry): depth 26, plane-0 mask 0x000902, |v|^2 = 1098782843288679/8000000",
+     "kind": "describe",
+     "verdict": "wrong"
+    },
+    "domain": "chemistry",
+    "expect": "carbon",
+    "key": "chem-lookup",
+    "paraphrase": "tell me about the element C",
+    "paraphrased": {
+     "detail": "resolve: 'element C' names no carrier in any enabled domain; did you mean ['element', 'lam_c', 'momentum', 'v_rest_c', 'aluminum']?",
+     "kind": "describe",
+     "verdict": "refused"
+    },
+    "question": "describe C",
+    "stable": false,
+    "why": "a register lookup by symbol"
+   },
+   {
+    "canonical": {
+     "detail": "resolve: 'atomic weight of carbon' names no carrier in any enabled domain",
+     "kind": "describe",
+     "verdict": "refused"
+    },
+    "domain": "chemistry",
+    "expect": "12.011",
+    "key": "chem-weight",
+    "paraphrase": "how heavy is a carbon atom?",
+    "paraphrased": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "question": "what is the atomic weight of carbon?",
+    "stable": true,
+    "why": "a field of a register row, asked in English"
+   },
+   {
+    "canonical": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "domain": "chemistry",
+    "expect": "halogen",
+    "key": "chem-group",
+    "paraphrase": "what block does chlorine belong to?",
+    "paraphrased": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "question": "which block of the periodic table is chlorine in?",
+    "stable": true,
+    "why": "a classification the register holds as an attribute"
+   },
+   {
+    "canonical": {
+     "detail": "resolve: 'molar mass of water' names no carrier in any enabled domain",
+     "kind": "describe",
+     "verdict": "refused"
+    },
+    "domain": "chemistry",
+    "expect": "18",
+    "key": "chem-compose",
+    "paraphrase": "how much does a mole of water weigh?",
+    "paraphrased": {
+     "detail": "measure: 'does a mole of water weigh' is neither a lexicon adjective nor a word on any measure scale, so there is nothing to measure it with",
+     "kind": "measure",
+     "verdict": "refused"
+    },
+    "question": "what is the molar mass of water?",
+    "stable": true,
+    "why": "a quantity derived from the element register"
+   },
+   {
+    "canonical": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "domain": "program text",
+    "expect": "NormFamily.lean",
+    "key": "prog-lean",
+    "paraphrase": "where is the declaration GLM.NormFamily.family_tower written?",
+    "paraphrased": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "question": "which file is GLM.NormFamily.family_tower in?",
+    "stable": true,
+    "why": "a program-text question the Lean address book can answer"
+   },
+   {
+    "canonical": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "domain": "program text",
+    "expect": "norm_escalation",
+    "key": "prog-python",
+    "paraphrase": "where is rung_audit defined?",
+    "paraphrased": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "question": "which module defines the function rung_audit?",
+    "stable": true,
+    "why": "the same question about this package's own Python"
+   },
+   {
+    "canonical": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "domain": "program text",
+    "expect": "complete",
+    "key": "prog-behaviour",
+    "paraphrase": "describe what completeness returns",
+    "paraphrased": {
+     "detail": "resolve: 'what completeness returns' names no carrier in any enabled domain",
+     "kind": "describe",
+     "verdict": "refused"
+    },
+    "question": "what does glm_universal.substrate.norm_family.completeness return?",
+    "stable": true,
+    "why": "a question about what code does, not where it is"
+   },
+   {
+    "canonical": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "domain": "program text",
+    "expect": "25",
+    "key": "prog-count",
+    "paraphrase": "count the rungs of the norm family",
+    "paraphrased": {
+     "detail": "unrecognised query",
+     "kind": "unknown",
+     "verdict": "refused"
+    },
+    "question": "how many rungs does the norm family have?",
+    "stable": true,
+    "why": "a question whose answer is computed by the code itself"
+   }
+  ],
+  "stable": 17
+ },
+ "python": {
+  "beats_chance": true,
+  "beats_control": true,
+  "chance": {
+   "__fraction__": "1259/7170"
+  },
+  "digest_control": 34,
+  "expected_by_chance": {
+   "__fraction__": "10072/239"
+  },
+  "features": [
+   "arguments",
+   "defaults",
+   "returns",
+   "ifs",
+   "fors",
+   "whiles",
+   "trys",
+   "withs",
+   "calls",
+   "assignments",
+   "comparisons",
+   "boolean_ops",
+   "comprehensions",
+   "lambdas",
+   "raises",
+   "asserts",
+   "yields",
+   "decorators",
+   "nested_defs",
+   "statements",
+   "max_depth",
+   "constants",
+   "attributes",
+   "name_length"
+  ],
+  "functions": 240,
+  "modules": 12,
+  "nearest_shares_module": 112,
+  "rate": {
+   "__fraction__": "7/15"
+  },
+  "reading": "the vector holds syntax counts only -- no name, no module, no path -- so a rate above chance is the geometry carrying something about the code",
+  "usable": true
+ },
+ "source_digest": "4a7ef4083a6733a785b4cada572c724d9eba6e94fbb3523c2ee6867fdd59d573",
+ "unrecognised": 11,
+ "vocabulary": {
+  "baseline": {
+   "content_words": 69,
+   "correct": 2,
+   "in_lexicon": 10,
+   "lexicon_size": 95,
+   "refused": 17,
+   "wrong": 1
+  },
+  "carried_out": true,
+  "coverage_after": {
+   "__fraction__": "19/23"
+  },
+  "coverage_after_with_forms": {
+   "__fraction__": "1/1"
+  },
+  "coverage_before": {
+   "__fraction__": "10/69"
+  },
+  "prediction": "the probe's canonical score does not move by more than one asking: the refusals are the session failing to recognise a query kind, not the lexicon failing to hold a word",
+  "prediction_held": true,
+  "reading": "coverage must rise by at least half of the words that were missing for the experiment to have been carried out at all; if it does and the canonical score moves by at most one asking, the vocabulary is not the binding constraint and blocker `parse` is",
+  "score_after": {
+   "correct": 2,
+   "refused": 17,
+   "wrong": 1
+  },
+  "score_before": {
+   "correct": 2,
+   "refused": 17,
+   "wrong": 1
+  },
+  "score_moved_by": 0,
+  "verdict": "the vocabulary is not the binding constraint: the register now holds the probe's words and the probe scores the same",
+  "was_missing": 59,
+  "words_added": 54,
+  "words_gained": 47
+ }
+}

@@ -24,7 +24,7 @@ Code:
 [`overlay/glm_universal/reasoning/llvq_table.py`](../overlay/glm_universal/reasoning/llvq_table.py).
 Query: `report llvq`.
 Formal development:
-[`RequestProject/GLM/LLVQTable.lean`](../RequestProject/GLM/LLVQTable.lean).
+[`RequestProject/GLM/LLVQTable.lean`](../overlay/glm_lean/RequestProject/GLM/LLVQTable.lean).
 Tests: `overlay/glm_universal/tests/test_llvq_table.py`.
 The reference it must agree with:
 [`overlay/glm_universal/reasoning/analogy.py`](../overlay/glm_universal/reasoning/analogy.py)
@@ -115,7 +115,7 @@ cheaper pattern in every column, and if the resulting parity is wrong, pay the
 **smallest of the six differences**.
 
 That is not asserted here — it is
-[`LLVQTable.lean`](../RequestProject/GLM/LLVQTable.lean):
+[`LLVQTable.lean`](../overlay/glm_lean/RequestProject/GLM/LLVQTable.lean):
 
 | theorem | what it says |
 |---|---|

@@ -165,7 +165,7 @@ wants only measurements asks for measurements and gets them.
 
 ## 7. The formal side
 
-[`RequestProject/GLM/Completion.lean`](../RequestProject/GLM/Completion.lean)
+[`RequestProject/GLM/Completion.lean`](../overlay/glm_lean/RequestProject/GLM/Completion.lean)
 proves what the layering claims, so that the claims do not rest on the
 implementation being careful:
 

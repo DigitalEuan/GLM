@@ -67,7 +67,7 @@ The answer, before the tables:
    seconds.
 
 The formal half is
-[`RequestProject/GLM/Controller.lean`](../RequestProject/GLM/Controller.lean),
+[`RequestProject/GLM/Controller.lean`](../overlay/glm_lean/RequestProject/GLM/Controller.lean),
 the computational half is `glm_universal.reasoning.controller`, the test that
 pins them together is `overlay/glm_universal/tests/test_controller.py`
 (25 tests, 181 subtests), and the report prints with

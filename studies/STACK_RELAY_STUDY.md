@@ -78,7 +78,7 @@ a preferred result:
 Every table below is a **generated block**, emitted from the measurement cache
 that `python3 -m glm_universal.corpus --remeasure` fills, guarded by the digest
 of the Lean sources it was taken from. The formal half is
-[`RequestProject/GLM/Relay.lean`](../RequestProject/GLM/Relay.lean); the
+[`RequestProject/GLM/Relay.lean`](../overlay/glm_lean/RequestProject/GLM/Relay.lean); the
 computational half is `glm_universal.reasoning.stack` and
 `glm_universal.reasoning.vision_stack`; the test that pins the two against each
 other is `overlay/glm_universal/tests/test_stack.py`; and the report prints
@@ -115,14 +115,14 @@ occurrence of each name.
 <!-- generated: stack-sets -->
 | query set | who answers | queries | hit@1 | hit@3 | hit@5 | hit@10 | precision@5 |
 |---|---|---|---|---|---|---|---|
-| goal — both strides again, asked as bare goals | text alone | 810 | 571 (70.5 %) | 669 (82.6 %) | 699 (86.3 %) | 724 (89.4 %) | 56.1 % |
-| goal — both strides again, asked as bare goals | **the relay** | 810 | **571 (70.5 %)** | **670 (82.7 %)** | **705 (87.0 %)** | **730 (90.1 %)** | 56.3 % |
-| holdout — a disjoint stride, never looked at while choosing | text alone | 405 | 286 (70.6 %) | 342 (84.4 %) | 356 (87.9 %) | 367 (90.6 %) | 55.7 % |
-| holdout — a disjoint stride, never looked at while choosing | **the relay** | 405 | **286 (70.6 %)** | **345 (85.2 %)** | **361 (89.1 %)** | **372 (91.9 %)** | 56.0 % |
-| tuning — the stride the gate was chosen on | text alone | 405 | 285 (70.4 %) | 327 (80.7 %) | 343 (84.7 %) | 357 (88.1 %) | 56.6 % |
-| tuning — the stride the gate was chosen on | **the relay** | 405 | **285 (70.4 %)** | **328 (81.0 %)** | **344 (84.9 %)** | **358 (88.4 %)** | 56.7 % |
+| goal — both strides again, asked as bare goals | text alone | 838 | 587 (70.0 %) | 689 (82.2 %) | 720 (85.9 %) | 743 (88.7 %) | 56.4 % |
+| goal — both strides again, asked as bare goals | **the relay** | 838 | **587 (70.0 %)** | **690 (82.3 %)** | **724 (86.4 %)** | **748 (89.3 %)** | 56.5 % |
+| holdout — a disjoint stride, never looked at while choosing | text alone | 419 | 285 (68.0 %) | 336 (80.2 %) | 353 (84.2 %) | 362 (86.4 %) | 54.8 % |
+| holdout — a disjoint stride, never looked at while choosing | **the relay** | 419 | **285 (68.0 %)** | **339 (80.9 %)** | **356 (85.0 %)** | **365 (87.1 %)** | 55.1 % |
+| tuning — the stride the gate was chosen on | text alone | 419 | 302 (72.1 %) | 353 (84.2 %) | 367 (87.6 %) | 381 (90.9 %) | 57.9 % |
+| tuning — the stride the gate was chosen on | **the relay** | 419 | **302 (72.1 %)** | **355 (84.7 %)** | **371 (88.5 %)** | **385 (91.9 %)** | 58.2 % |
 
-The gate is 1/10 and fires on 42 of 1620 queries.  Across the three sets the geometry carries **12** queries the text control misses at k = 5 and loses **0**.  The relay beats the text control on every set: yes; it is never below the text control at any k: yes.
+The gate is 1/10 and fires on 46 of 1676 queries.  Across the three sets the geometry carries **12** queries the text control misses at k = 5 and loses **1**.  The relay beats the text control on every set: yes; it is never below the text control at any k: yes.
 <!-- end generated -->
 
 Three readings, in the order of how much they matter.
@@ -162,9 +162,9 @@ of "another part takes the hit", stated as a theorem rather than hoped for.
 <!-- generated: stack-carried -->
 | query set | gate fired | carried by the geometry | lost |
 |---|---|---|---|
-| goal — both strides again, asked as bare goals | 21 | `GLM.Gen3.pair_census`, `GLM.Admission.ledger_vocabulary`, `GLM.Calibration.kappaBond`, `GLM.Gen3.pairwise_counts`, `GLM.Harmony.pythagorean_comma_ne_one`, `GLM.ReverseTCTTwo.chain_floor_misses` | none |
-| holdout — a disjoint stride, never looked at while choosing | 16 | `GLM.Admission.ledger_vocabulary`, `GLM.Calibration.kappaBond`, `GLM.FitCapacity.protonPred`, `GLM.Gen3.pairwise_counts`, `GLM.Harmony.pythagorean_comma_ne_one` | none |
-| tuning — the stride the gate was chosen on | 5 | `GLM.Gen3.pair_census` | none |
+| goal — both strides again, asked as bare goals | 23 | `GLM.Harmony.pythagorean_comma_eq`, `GLM.Admission.ledger_vocabulary`, `GLM.Calibration.taxVacuum`, `GLM.Gen3.octad_censuses`, `GLM.Landscape.golay_ball_majority` | `GLM.Gen3.even_part_dimension` |
+| holdout — a disjoint stride, never looked at while choosing | 13 | `GLM.Admission.ledger_vocabulary`, `GLM.AlignmentPoints.vOverC`, `GLM.Gen3.octad_censuses` | none |
+| tuning — the stride the gate was chosen on | 10 | `GLM.Conversation.Licence`, `GLM.FitCapacity.monad`, `GLM.FitCapacity.muonPred`, `GLM.Harmony.pythagorean_comma_eq` | none |
 
 A *carried* query is one the text control misses at k = 5 and the relay hits; a *lost* query is the reverse, which is the column the gate exists to keep empty.
 <!-- end generated -->
@@ -185,9 +185,9 @@ it asks the geometry only there.
 <!-- generated: stack-controls -->
 | query set | carried by the two address books | carried by digest + reshuffle | carried by name search |
 |---|---|---|---|
-| goal — both strides again, asked as bare goals | 6 | 1 | 1 |
-| holdout — a disjoint stride, never looked at while choosing | 5 | 2 | 1 |
-| tuning — the stride the gate was chosen on | 1 | 0 | 0 |
+| goal — both strides again, asked as bare goals | 5 | 2 | 0 |
+| holdout — a disjoint stride, never looked at while choosing | 3 | 2 | 0 |
+| tuning — the stride the gate was chosen on | 4 | 0 | 0 |
 
 Over the three sets the geometry carries more than the digest-and-reshuffle control: yes; it never carries fewer on a set: yes; it carries more than the name search: yes.
 <!-- end generated -->
@@ -209,13 +209,13 @@ nothing mostly matches nothing in a name either.
 <!-- generated: stack-sweep -->
 | gate | queries it fires on | hit@5 | precision@5 | carried | lost |
 |---|---|---|---|---|---|
-| 0 | 0 | 84.7 % | 56.6 % | 0 | 0 |
-| 1/20 | 5 | 84.9 % | 56.7 % | 1 | 0 |
-| 1/10 | 5 | 84.9 % | 56.7 % | 1 | 0 |
-| 3/20 | 5 | 84.9 % | 56.7 % | 1 | 0 |
-| 1/5 | 8 | 84.9 % | 56.6 % | 1 | 0 |
-| 1/4 | 16 | 84.9 % | 55.9 % | 1 | 0 |
-| 1/2 | 168 | 84.7 % | 50.9 % | 5 | 5 |
+| 0 | 0 | 87.6 % | 57.9 % | 0 | 0 |
+| 1/20 | 10 | 88.5 % | 58.2 % | 4 | 0 |
+| 1/10 | 10 | 88.5 % | 58.2 % | 4 | 0 |
+| 3/20 | 11 | 88.5 % | 58.1 % | 4 | 0 |
+| 1/5 | 15 | 88.5 % | 57.9 % | 4 | 0 |
+| 1/4 | 29 | 88.3 % | 57.6 % | 4 | 1 |
+| 1/2 | 175 | 86.2 % | 51.2 % | 6 | 12 |
 
 On the tuning set.  The gain is strict on 5 of the thresholds from 1/20 to 1/4, up to and including 1/4; across the whole of that band the relay is never below the text control: yes.
 <!-- end generated -->
@@ -240,14 +240,14 @@ is drawn.
 <!-- generated: stack-tiebreak -->
 | query set | tie-break | hit@1 | hit@3 | hit@5 | hit@10 | precision@5 |
 |---|---|---|---|---|---|---|
-| holdout | address | 287 (70.9 %) | 346 (85.4 %) | 359 (88.6 %) | 371 (91.6 %) | 56.0 % |
-| holdout | lexical | 282 (69.6 %) | 343 (84.7 %) | 357 (88.1 %) | 369 (91.1 %) | 55.9 % |
-| holdout | name | 286 (70.6 %) | 342 (84.4 %) | 356 (87.9 %) | 367 (90.6 %) | 55.7 % |
-| tuning | address | 282 (69.6 %) | 334 (82.5 %) | 346 (85.4 %) | 360 (88.9 %) | 56.7 % |
-| tuning | lexical | 284 (70.1 %) | 338 (83.5 %) | 347 (85.7 %) | 361 (89.1 %) | 56.6 % |
-| tuning | name | 285 (70.4 %) | 327 (80.7 %) | 343 (84.7 %) | 357 (88.1 %) | 56.6 % |
+| holdout | address | 280 (66.8 %) | 342 (81.6 %) | 350 (83.5 %) | 362 (86.4 %) | 54.4 % |
+| holdout | lexical | 286 (68.3 %) | 345 (82.3 %) | 354 (84.5 %) | 364 (86.9 %) | 55.2 % |
+| holdout | name | 284 (67.8 %) | 335 (80.0 %) | 351 (83.8 %) | 360 (85.9 %) | 54.7 % |
+| tuning | address | 305 (72.8 %) | 357 (85.2 %) | 368 (87.8 %) | 383 (91.4 %) | 58.2 % |
+| tuning | lexical | 304 (72.6 %) | 358 (85.4 %) | 367 (87.6 %) | 383 (91.4 %) | 58.1 % |
+| tuning | name | 302 (72.1 %) | 353 (84.2 %) | 367 (87.6 %) | 381 (90.9 %) | 57.9 % |
 
-Ranking by text overlap and breaking the many exact ties by address distance instead of by name.  It beats the shipped name tie-break on hits: yes; on precision: yes.
+Ranking by text overlap and breaking the many exact ties by address distance instead of by name.  It beats the shipped name tie-break on hits: no; on precision: no.
 <!-- end generated -->
 
 The relay is not the only way to put two faculties together. An exact Jaccard
@@ -317,7 +317,7 @@ which is the only sense in which "solved" is used here.
 ## 7. What is proved
 
 The measurements above can move with the corpus. The following cannot, because
-they are theorems of [`RequestProject/GLM/Relay.lean`](../RequestProject/GLM/Relay.lean)
+they are theorems of [`RequestProject/GLM/Relay.lean`](../overlay/glm_lean/RequestProject/GLM/Relay.lean)
 about the relay itself, and they hold in whichever register it is instantiated.
 
 | statement | what it says | Lean |

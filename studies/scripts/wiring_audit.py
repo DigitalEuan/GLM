@@ -259,7 +259,7 @@ def figure_reach() -> dict:
 
 def lean_reach() -> dict:
     """Reading 4 — Lean modules named in no document and no Python source."""
-    lean_root = os.path.join(REPO, "RequestProject")
+    lean_root = os.path.join(REPO, "overlay", "glm_lean", "RequestProject")
     files: List[str] = []
     for dirpath, dirnames, filenames in os.walk(lean_root):
         dirnames[:] = [d for d in dirnames if d not in (".lake", "build")]

@@ -26,8 +26,8 @@ Code:
 [`overlay/glm_universal/reasoning/shell_sigma.py`](../overlay/glm_universal/reasoning/shell_sigma.py).
 Queries: `report lattices`, `report shells`.
 Formal development:
-[`RequestProject/GLM/HigherLattices.lean`](../RequestProject/GLM/HigherLattices.lean),
-[`RequestProject/GLM/ShellSigma.lean`](../RequestProject/GLM/ShellSigma.lean).
+[`RequestProject/GLM/HigherLattices.lean`](../overlay/glm_lean/RequestProject/GLM/HigherLattices.lean),
+[`RequestProject/GLM/ShellSigma.lean`](../overlay/glm_lean/RequestProject/GLM/ShellSigma.lean).
 Tests: `overlay/glm_universal/tests/test_lattice32.py`,
 `test_lattice48.py`, `test_higher_lattices.py`, `test_shell_sigma.py`.
 

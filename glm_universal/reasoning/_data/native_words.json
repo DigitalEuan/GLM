@@ -1,0 +1,343 @@
+{
+ "all_met": false,
+ "corpus_digest": "cdaf67d666d4d9a5c11f018e333ec9f9995df51df1ccaf3e86285d55b9c98192",
+ "documents": {
+  "answered": true,
+  "injective": true,
+  "k": 5,
+  "queries": 60,
+  "schemes": {
+   "classes": {
+    "hits": 30,
+    "precision_at_5": {
+     "__fraction__": "19/100"
+    }
+   },
+   "letters": {
+    "hits": 49,
+    "precision_at_5": {
+     "__fraction__": "26/75"
+    }
+   },
+   "lexical": {
+    "hits": 16,
+    "precision_at_5": {
+     "__fraction__": "1/15"
+    }
+   },
+   "parts": {
+    "hits": 50,
+    "precision_at_5": {
+     "__fraction__": "109/300"
+    }
+   },
+   "text": {
+    "hits": 52,
+    "precision_at_5": {
+     "__fraction__": "39/100"
+    }
+   },
+   "text_leech": {
+    "hits": 52,
+    "precision_at_5": {
+     "__fraction__": "39/100"
+    }
+   },
+   "text_parts": {
+    "hits": 52,
+    "precision_at_5": {
+     "__fraction__": "39/100"
+    }
+   },
+   "text_shipped": {
+    "hits": 52,
+    "precision_at_5": {
+     "__fraction__": "39/100"
+    }
+   },
+   "words_native": {
+    "hits": 52,
+    "precision_at_5": {
+     "__fraction__": "39/100"
+    }
+   }
+  },
+  "top_values_agree": 60,
+  "units": 1258,
+  "vocabulary": 10971
+ },
+ "lean": {
+  "declarations": {
+   "queries": 206,
+   "schemes": {
+    "classes": {
+     "hits": {
+      "1": 110,
+      "10": 153,
+      "3": 136,
+      "5": 145
+     },
+     "mrr_at_10": {
+      "__fraction__": "314023/519120"
+     },
+     "precision_at_5": {
+      "__fraction__": "192/515"
+     },
+     "queries": 206
+    },
+    "letters": {
+     "hits": {
+      "1": 151,
+      "10": 189,
+      "3": 175,
+      "5": 183
+     },
+     "mrr_at_10": {
+      "__fraction__": "45841/57680"
+     },
+     "precision_at_5": {
+      "__fraction__": "589/1030"
+     },
+     "queries": 206
+    },
+    "lexical": {
+     "hits": {
+      "1": 88,
+      "10": 135,
+      "3": 111,
+      "5": 120
+     },
+     "mrr_at_10": {
+      "__fraction__": "127769/259560"
+     },
+     "precision_at_5": {
+      "__fraction__": "25/103"
+     },
+     "queries": 206
+    },
+    "parts": {
+     "hits": {
+      "1": 149,
+      "10": 190,
+      "3": 175,
+      "5": 183
+     },
+     "mrr_at_10": {
+      "__fraction__": "68567/86520"
+     },
+     "precision_at_5": {
+      "__fraction__": "296/515"
+     },
+     "queries": 206
+    },
+    "text": {
+     "hits": {
+      "1": 149,
+      "10": 187,
+      "3": 169,
+      "5": 182
+     },
+     "mrr_at_10": {
+      "__fraction__": "5659/7210"
+     },
+     "precision_at_5": {
+      "__fraction__": "299/515"
+     },
+     "queries": 206
+    },
+    "text_leech": {
+     "hits": {
+      "1": 153,
+      "10": 190,
+      "3": 177,
+      "5": 185
+     },
+     "mrr_at_10": {
+      "__fraction__": "104677/129780"
+     },
+     "precision_at_5": {
+      "__fraction__": "303/515"
+     },
+     "queries": 206
+    },
+    "text_parts": {
+     "hits": {
+      "1": 153,
+      "10": 189,
+      "3": 177,
+      "5": 185
+     },
+     "mrr_at_10": {
+      "__fraction__": "104467/129780"
+     },
+     "precision_at_5": {
+      "__fraction__": "302/515"
+     },
+     "queries": 206
+    },
+    "words_native": {
+     "hits": {
+      "1": 155,
+      "10": 188,
+      "3": 177,
+      "5": 183
+     },
+     "mrr_at_10": {
+      "__fraction__": "41917/51912"
+     },
+     "precision_at_5": {
+      "__fraction__": "603/1030"
+     },
+     "queries": 206
+    }
+   },
+   "top_values_agree": 206
+  },
+  "declarations_in_corpus": 4110,
+  "goals": {
+   "queries": 101,
+   "schemes": {
+    "classes": {
+     "hits": {
+      "1": 45,
+      "10": 66,
+      "3": 60,
+      "5": 65
+     },
+     "mrr_at_10": {
+      "__fraction__": "3199/6060"
+     },
+     "precision_at_5": {
+      "__fraction__": "164/505"
+     },
+     "queries": 101
+    },
+    "letters": {
+     "hits": {
+      "1": 64,
+      "10": 87,
+      "3": 77,
+      "5": 84
+     },
+     "mrr_at_10": {
+      "__fraction__": "60433/84840"
+     },
+     "precision_at_5": {
+      "__fraction__": "256/505"
+     },
+     "queries": 101
+    },
+    "lexical": {
+     "hits": {
+      "1": 23,
+      "10": 54,
+      "3": 33,
+      "5": 47
+     },
+     "mrr_at_10": {
+      "__fraction__": "79859/254520"
+     },
+     "precision_at_5": {
+      "__fraction__": "83/505"
+     },
+     "queries": 101
+    },
+    "parts": {
+     "hits": {
+      "1": 64,
+      "10": 89,
+      "3": 79,
+      "5": 85
+     },
+     "mrr_at_10": {
+      "__fraction__": "60721/84840"
+     },
+     "precision_at_5": {
+      "__fraction__": "266/505"
+     },
+     "queries": 101
+    },
+    "text": {
+     "hits": {
+      "1": 67,
+      "10": 89,
+      "3": 79,
+      "5": 83
+     },
+     "mrr_at_10": {
+      "__fraction__": "9371/12726"
+     },
+     "precision_at_5": {
+      "__fraction__": "52/101"
+     },
+     "queries": 101
+    },
+    "text_leech": {
+     "hits": {
+      "1": 69,
+      "10": 90,
+      "3": 82,
+      "5": 86
+     },
+     "mrr_at_10": {
+      "__fraction__": "21241/28280"
+     },
+     "precision_at_5": {
+      "__fraction__": "54/101"
+     },
+     "queries": 101
+    },
+    "text_parts": {
+     "hits": {
+      "1": 66,
+      "10": 90,
+      "3": 81,
+      "5": 86
+     },
+     "mrr_at_10": {
+      "__fraction__": "62533/84840"
+     },
+     "precision_at_5": {
+      "__fraction__": "273/505"
+     },
+     "queries": 101
+    },
+    "words_native": {
+     "hits": {
+      "1": 67,
+      "10": 90,
+      "3": 79,
+      "5": 85
+     },
+     "mrr_at_10": {
+      "__fraction__": "15677/21210"
+     },
+     "precision_at_5": {
+      "__fraction__": "264/505"
+     },
+     "queries": 101
+    }
+   },
+   "top_values_agree": 101
+  },
+  "injective": true,
+  "vocabulary": 5277
+ },
+ "lean_file": "RequestProject/GLM/NativeWords.lean",
+ "marks": {
+  "W1": true,
+  "W2": true,
+  "W3": true,
+  "W4": false,
+  "W5": true,
+  "W6": true
+ },
+ "met": 5,
+ "observed": {
+  "letters_vs_parts": false,
+  "letters_vs_text": false,
+  "words_native_vs_text_parts": false
+ },
+ "source_digest": "59d768fc0ade689bf6fd21437f98daf3a863a99706759dd26ac699c786aa81fc",
+ "study": "studies/NATIVE_WORDS_STUDY.md"
+}

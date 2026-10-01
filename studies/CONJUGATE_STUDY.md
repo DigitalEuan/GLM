@@ -171,7 +171,7 @@ factor's role.
 
 ## 8. The formal side
 
-[`RequestProject/GLM/Conjugate.lean`](../RequestProject/GLM/Conjugate.lean)
+[`RequestProject/GLM/Conjugate.lean`](../overlay/glm_lean/RequestProject/GLM/Conjugate.lean)
 carries the part of the argument that is not a measurement:
 
 * the register is sound — a row's effort and extent exponents sum to energy's,

@@ -25,7 +25,7 @@ development as Lean that builds against the current Mathlib, with no `sorry`.
 Where the claim turned out to be false, the refutation was retrieved instead.*
 
 Lean: 25 files, 7,230 lines, 854 declarations, all under
-[`RequestProject/GLM/`](../RequestProject/GLM/) and mirrored in
+[`RequestProject/GLM/`](../overlay/glm_lean/RequestProject/GLM/) and mirrored in
 `overlay/glm_lean/`.
 Checked by: `lake build`, the sorry scan, the two-copy diff and
 `overlay/glm_universal/tests/test_retrieved_lean.py`.
