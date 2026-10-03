@@ -69,15 +69,49 @@ class TestTheRuntime(unittest.TestCase):
         self.assertEqual(cm.exception.name, "TIE")
 
     def test_floor(self):
+        # Phase 82's marginal rule: below the floor
+        with self.assertRaises(ConfidenceRefusal) as cm:
+            rp.decode_soft_floor(Fraction(999, 1000), _w(5, 0b111),
+                                 [_w(6, 0b1), _w(7, 0b11)], rule="marginal")
+        self.assertEqual(cm.exception.name, "BELOW_FLOOR")
+        # the production rule (Phase 89): the credible set reaches the guard
         with self.assertRaises(ConfidenceRefusal) as cm:
             rp.decode_soft_floor(Fraction(999, 1000), _w(5, 0b111),
                                  [_w(6, 0b1), _w(7, 0b11)])
-        self.assertEqual(cm.exception.name, "BELOW_FLOOR")
+        self.assertEqual(cm.exception.name, "RATE_GRID_EXCEEDED")
 
     def test_agree_soft_answers_the_carrier(self):
-        r = rp.agree_soft(_w(12, 0b111), _w(12, 0b111000))
+        # Phase 82's contract (the marginal rule, now set aside, still callable)
+        r = rp.agree_soft(_w(12, 0b111), _w(12, 0b111000), rule="marginal")
         self.assertEqual(r["value"], GOLAY_MASKS[12])
         self.assertGreater(r["confidence"], Fraction(999, 1000))
+
+    def test_agree_soft_production_rule_needs_evidence(self):
+        # Phase 89's production rule (upper credible): one lone pair leaves
+        # the guard rate inside the credible set, so it refuses at the edge;
+        # a clean session history lets it answer
+        with self.assertRaises(ConfidenceRefusal) as cm:
+            rp.agree_soft(_w(12, 0b111), _w(12, 0b111000))
+        self.assertEqual(cm.exception.name, "RATE_GRID_EXCEEDED")
+        r = rp.agree_soft(_w(12, 0b111), _w(12, 0b111000),
+                          history=[_w(i, 0) for i in range(1, 9)])
+        self.assertEqual(r["value"], GOLAY_MASKS[12])
+        self.assertEqual(r["rule"], "upper")
+        self.assertEqual(r["session_reads"], 8)
+
+    def test_session_history_is_evidence(self):
+        # the same subject, with and without a clean session behind it
+        alone = rp.decode_soft(_w(5, 0b111), [_w(6, 0), _w(7, 0), _w(8, 1)])
+        backed = rp.decode_soft(_w(5, 0b111), [_w(6, 0), _w(7, 0), _w(8, 1)],
+                                history=[_w(i, 0) for i in range(9, 20)])
+        self.assertGreaterEqual(backed["confidence"], alone["confidence"])
+        self.assertLessEqual(backed["rate"], alone["rate"])
+
+    def test_marginal_rule_still_callable(self):
+        r = rp.decode_soft(_w(5, 0b111), [_w(6, 0), _w(7, 0), _w(8, 1)],
+                           rule="marginal")
+        self.assertIsNone(r["rate"])
+        self.assertEqual(r["rule"], "marginal")
 
 
 class TestTheOperatingCharacteristics(unittest.TestCase):

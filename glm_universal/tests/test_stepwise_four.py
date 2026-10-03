@@ -15,6 +15,8 @@ from pathlib import Path
 
 import pytest
 
+from glm_universal.runtime.frame_declarations import declared_verdict
+
 from glm_universal.evaluation import stepwise_four_cases as C
 from glm_universal.reasoning import stepwise_script as ss
 from glm_universal.runtime import router, stepwise as sw
@@ -84,6 +86,7 @@ class TestOrders(unittest.TestCase):
 
     def test_every_declared_order_case(self):
         for cid, q, want in C.ORDER_CASES:
+            want = declared_verdict("stepwise_four", cid, want)
             with self.subTest(case=cid):
                 got = verdict(sw.answer(session(), q))
                 self.assertEqual(want, got[:len(want)])

@@ -40,7 +40,9 @@ from typing import Dict, List, Optional, Tuple
 
 __all__ = ["COMPARATIVES", "COUNT_NOUNS", "DECLARED_SETS", "FOLD_FUNCTIONS",
            "comparative", "set_key", "resolve_field", "members",
-           "names_an_element", "names_a_column", "ELEMENT_TABLE"]
+           "names_an_element", "names_a_column", "ELEMENT_TABLE",
+           "UNION_SETS", "TABLE_COMPARATIVES", "MOLECULE_TABLE",
+           "declared_set_names", "in_set", "names_a_molecule"]
 
 #: The register table folds and comparatives read.
 ELEMENT_TABLE = "element"
@@ -82,6 +84,57 @@ DECLARED_SETS: Dict[str, Optional[str]] = {
     "nonmetals": "Nonmetal",
 }
 
+#: Round five (Phase 91, ``studies/DECLARED_FRAMES_STUDY.md``): classes the
+#: register does not hold as one value, each declared as a union of its
+#: ``group_block`` values and named rows, and argued for there.
+#: ``plural name -> (group_block values, extra row keys)``.
+UNION_SETS: Dict[str, Tuple[Tuple[str, ...], Tuple[str, ...]]] = {
+    # the six classes the register names as metals, or whose members are all
+    # metals; the metalloids are not metals under this declaration
+    "metals": (("Alkali metal", "Alkaline earth metal", "Transition metal",
+                "Post-transition metal", "Lanthanide", "Actinide"), ()),
+    # IUPAC: the fifteen lanthanides with scandium and yttrium
+    "rare earths": (("Lanthanide",), ("Sc", "Y")),
+    "rare earth elements": (("Lanthanide",), ("Sc", "Y")),
+}
+
+#: Round five: the declared comparatives over a table other than the element
+#: table.  ``table -> {word -> (register phrase, direction, gloss)}``; a
+#: declared comparative with no entry for a table is undeclared there.
+TABLE_COMPARATIVES: Dict[str, Dict[str, Tuple[str, str, str]]] = {
+    "molecule": {
+        "heavier": ("molar mass", ">", "the larger molar mass"),
+        "lighter": ("molar mass", "<", "the smaller molar mass"),
+    },
+}
+
+MOLECULE_TABLE = "molecule"
+
+
+def _five() -> bool:
+    from .frame_declarations import five
+    return five()
+
+
+def declared_set_names() -> List[str]:
+    """Every declared set name read now: round three's, and round five's
+    unions while round five's entries are read."""
+    names = list(DECLARED_SETS)
+    if _five():
+        names += list(UNION_SETS)
+    return names
+
+
+def in_set(key: str, row, set_name: str) -> bool:
+    """Whether the element row ``key`` (its register record ``row``) is a
+    member of the declared set ``set_name``."""
+    if set_name in DECLARED_SETS:
+        want = DECLARED_SETS[set_name]
+        return want is None or row.get("group_block") == want
+    blocks, extra = UNION_SETS[set_name]
+    return row.get("group_block") in blocks or key in extra
+
+
 #: The folds: ``name -> the words column 1 writes it with``.
 FOLD_FUNCTIONS: Dict[str, str] = {
     "sum": "sum", "mean": "mean", "odd": "count of odd values",
@@ -112,6 +165,20 @@ def names_an_element(phrase: str) -> bool:
     return normalise(p) in _ELEMENT_ALIASES[0]
 
 
+_MOLECULE_ALIASES: List[frozenset] = []
+
+
+def names_a_molecule(phrase: str) -> bool:
+    """Whether a phrase is a row of the molecule table (round five)."""
+    from .fields import surface
+    from .parser import normalise
+    if not _MOLECULE_ALIASES:
+        table = surface().table_by_name(MOLECULE_TABLE)
+        _MOLECULE_ALIASES.append(frozenset(table.aliases()))
+    p = re.sub(r"^the\s+", "", phrase.strip().lower())
+    return normalise(p) in _MOLECULE_ALIASES[0]
+
+
 _SURFACE: List[object] = []
 
 
@@ -133,7 +200,7 @@ def set_key(phrase: str) -> Tuple[Optional[str], bool]:
     p = re.sub(r"\s+", " ", phrase.strip().lower())
     introduced = bool(re.match(r"(?:all|the)\b", p))
     p = re.sub(r"^(?:all of the|all the|all|the)\s+", "", p)
-    if p in DECLARED_SETS:
+    if p in DECLARED_SETS or (p in UNION_SETS and _five()):
         return p, True
     return None, introduced and p.endswith("s") and " of " not in p
 
@@ -163,7 +230,6 @@ def resolve_field(field_surface, phrase: str) -> Optional[str]:
 def members(field_surface, set_name: str) -> List[Tuple[str, str]]:
     """``[(row key, row name), ...]`` of a declared set, in the register's
     order."""
-    want = DECLARED_SETS[set_name]
     rows = field_surface.table_by_name(ELEMENT_TABLE).rows()
     return [(k, str(v.get("name", k))) for k, v in rows.items()
-            if want is None or v.get("group_block") == want]
+            if in_set(k, v, set_name)]

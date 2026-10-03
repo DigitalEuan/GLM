@@ -98,24 +98,24 @@ not written down here; it is emitted:
 <!-- generated: lean-corpus -->
 | kind | count |
 |---|---|
-| abbrev | 56 |
-| def | 1,062 |
-| example | 19 |
-| inductive | 39 |
+| abbrev | 58 |
+| def | 1,144 |
+| example | 21 |
+| inductive | 49 |
 | instance | 27 |
-| lemma | 176 |
-| structure | 54 |
-| theorem | 2,757 |
-| **total** | **4,190** |
+| lemma | 207 |
+| structure | 59 |
+| theorem | 2,928 |
+| **total** | **4,493** |
 
-4,190 declarations across 156 files, the largest being `Gen3.lean` with 98.
+4,493 declarations across 166 files, the largest being `Gen3.lean` with 98.
 <!-- end generated -->
 
 Written into a sentence, so that a reader who stops here has the size of what
 follows: the reader addresses
-<!--figure:lean-declarations-->4,190<!--/figure--> declarations over
-<!--figure:lean-declaration-files-->156<!--/figure--> files, which is every
-file of <!--figure:lean-files-->156 Lean files<!--/figure--> the development
+<!--figure:lean-declarations-->4,493<!--/figure--> declarations over
+<!--figure:lean-declaration-files-->166<!--/figure--> files, which is every
+file of <!--figure:lean-files-->166 Lean files<!--/figure--> the development
 holds — no Lean file of this repository is outside the corpus this study
 measures.
 
@@ -202,11 +202,11 @@ declarations in source order rather than asserting either:
 <!-- generated: lean-scale -->
 | scale | read back exactly | moved by the decoder | worst residual | verdict |
 |---|---|---|---|---|
-| 4 | 28 / 60 | 32 | — | **lossy** |
+| 4 | 34 / 60 | 26 | — | **lossy** |
 | 6 | 60 / 60 | 60 | 2 | lossless, non-degenerate |
 | 8 | 60 / 60 | 0 | 0 | **degenerate** |
 | **9** | **60 / 60** | **60** | **2** | **lossless, non-degenerate** |
-| 12 | 60 / 60 | 32 | 4 | lossless, partly degenerate |
+| 12 | 60 / 60 | 26 | 4 | lossless, partly degenerate |
 | 16 | 60 / 60 | 0 | 0 | **degenerate** |
 
 On the first 60 declarations in source order, decoding being the expensive step.  The chosen scale is 9.
@@ -249,12 +249,12 @@ below half a scale unit in every coordinate.
 <!-- generated: lean-readback -->
 |  | measured |
 |---|---|
-| declarations checked | 4,190 |
-| read back exactly | **4,190 / 4,190** (rate 1) |
-| coordinates checked | 100,560 |
+| declarations checked | 4,493 |
+| read back exactly | **4,493 / 4,493** (rate 1) |
+| coordinates checked | 107,832 |
 | coordinate errors | **0** |
-| moved by the decoder | 4,190 / 4,190 |
-| worst observed residual | **3**, at `GLM.Gen2.Meaning.pseudoscalar_parity_ne_zero` |
+| moved by the decoder | 4,493 / 4,493 |
+| worst observed residual | **3**, at `GLM.DeepHoleLadder.Reading.cumulative_ge_right` |
 | half a scale step | `9/2` |
 | covering radius | 4 |
 | bound respected | yes |
@@ -276,9 +276,9 @@ declaration" is, at this point, a statement about the feature map alone.
 <!-- generated: lean-injectivity -->
 | scheme | distinct addresses | distinct feature vectors | classes | declarations conflated | quantisation adds conflation? |
 |---|---|---|---|---|---|
-| `feature` | 3,733 / 4,190 | 3,733 | 307 | 764 | no |
-| `hash_control` | **4,190 / 4,190** | 3,733 | 0 | 0 | — |
-| `shuffled` | 3,733 / 4,190 | 3,733 | 307 | 764 | no |
+| `feature` | 4,009 / 4,493 | 4,009 | 323 | 807 | no |
+| `hash_control` | **4,493 / 4,493** | 4,009 | 0 | 0 | — |
+| `shuffled` | 4,009 / 4,493 | 4,009 | 323 | 807 | no |
 <!-- end generated -->
 
 Two things to read off this table.
@@ -302,34 +302,34 @@ the sense that a reader shown only the 24 counts would also fail to tell the
 members apart:
 
 <!-- generated: lean-classes -->
-307 classes: 232 pairs, 34 triples, 26 classes of 4, 8 classes of 5, 4 classes of 6, 1 class of 7, 1 class of 8, 1 class of 15.
+323 classes: 242 pairs, 40 triples, 26 classes of 4, 5 classes of 5, 7 classes of 6, 2 classes of 8, 1 class of 16.
 
 The widest, written out, because the point they make can only be read from the names:
 
 ```
-15  GLM.Calibration.dEnergy, GLM.Calibration.dLength, GLM.Calibration.dTime,
-    GLM.DimensionCarrier.Dim, GLM.DimensionCarrier.energyDim,
-    GLM.DimensionCarrier.mc4Shift, GLM.Foundations.Dim,
-    GLM.Foundations.energyDim, GLM.Foundations.mc4Shift,
-    GLM.Lightspeed.dEnergy, GLM.Lightspeed.dLength, GLM.Lightspeed.dMass,
-    GLM.Lightspeed.dSpeed, GLM.Lightspeed.dTime, GLM.VOA.vac
+16  GLM.Calibration.dEnergy, GLM.Calibration.dLength, GLM.Calibration.dTime,
+    GLM.Conjugate.energyDim, GLM.DimensionCarrier.Dim,
+    GLM.DimensionCarrier.energyDim, GLM.DimensionCarrier.mc4Shift,
+    GLM.Foundations.Dim, GLM.Foundations.energyDim,
+    GLM.Foundations.mc4Shift, GLM.Lightspeed.dEnergy,
+    GLM.Lightspeed.dLength, GLM.Lightspeed.dMass, GLM.Lightspeed.dSpeed,
+    GLM.Lightspeed.dTime, GLM.VOA.vac
+8   GLM.Gen2.Exps, GLM.Gen2.mass, GLM.Gen2.torque, GLM.GolayHex.w,
+    GLM.Info.tea, GLM.QuestionSetBMatrix.A, GLM.QuestionSetBMatrix.B,
+    GLM.QuestionSetBMatrix.C
 8   GLM.GolayMOG.leechAddress_injective,
     GLM.Info.staticLayer_indist_hot_uses, GLM.Info.wobbleEntropy_continuous,
     GLM.Lightspeed.codewordTax_strictMono,
     GLM.PythonSpeech.andnotP_bijective, GLM.PythonSpeech.notP_bijective,
     GLM.PythonSpeech.orP_bijective, GLM.PythonSpeech.xorP_bijective
-7   GLM.Conjugate.energyDim, GLM.DimensionCarrier.mc4Dim,
-    GLM.Foundations.mc4Dim, GLM.Gen2.energy, GLM.GolayHex.w2,
-    GLM.Heisenberg.V, GLM.Semantics.energyDim
-6   GLM.Admission.ledger_refusals, GLM.Completion.ledger_coverage,
-    GLM.Gen3.dimensionless_counts, GLM.GrayJump.d2_1000033_1000034,
-    GLM.LatticeShortcut.d2_1000033_1000034,
-    GLM.Vagueness.ledger_conjugate_conversions
 6   GLM.Calibration.NA, GLM.Calibration.molarPlanck, GLM.Lightspeed.NA,
     GLM.Lightspeed.cSI, GLM.Lightspeed.hSI, GLM.Lightspeed.molarPlanck
 6   GLM.Calibration.NA_pos, GLM.Calibration.cSI_pos,
     GLM.Calibration.hSI_pos, GLM.Lightspeed.NA_pos, GLM.Lightspeed.cSI_pos,
     GLM.Lightspeed.hSI_pos
+6   GLM.Calibration.dAction, GLM.Question.deriveDomainWord,
+    GLM.Question.deriveOpening, GLM.Question.deriveSeparator,
+    GLM.QuestionNested.comparativeOperator, GLM.Semantics.meaningLayer
 ```
 <!-- end generated -->
 
@@ -376,27 +376,27 @@ The third table is on *all* pairs, not just nearest ones.
 <!-- generated: lean-neighbours -->
 | scheme | nearest shares a file | rate | mean tie size |
 |---|---|---|---|
-| `feature` | **801 / 4,190** | ≈ **19.12 %** | 1.69 |
-| `hash_control` | 34 / 4,190 | ≈ 0.81 % | 1.00 |
-| `shuffled` | 23 / 4,190 | ≈ 0.55 % | 1.69 |
-| *chance* | — | ≈ 0.85 % | — |
+| `feature` | **820 / 4,493** | ≈ **18.25 %** | 1.69 |
+| `hash_control` | 35 / 4,493 | ≈ 0.78 % | 1.00 |
+| `shuffled` | 25 / 4,493 | ≈ 0.56 % | 1.69 |
+| *chance* | — | ≈ 0.79 % | — |
 
 | scheme | nearest is cited, either way | rate |
 |---|---|---|
-| `feature` | **139 / 4,190** | ≈ **3.32 %** |
-| `hash_control` | 6 / 4,190 | ≈ 0.14 % |
-| `shuffled` | 5 / 4,190 | ≈ 0.12 % |
+| `feature` | **133 / 4,493** | ≈ **2.96 %** |
+| `hash_control` | 6 / 4,493 | ≈ 0.13 % |
+| `shuffled` | 3 / 4,493 | ≈ 0.07 % |
 | *chance* | — | ≈ 0.15 % |
 
 | scheme | mean d² within a file | mean d² across files | ratio |
 |---|---|---|---|
-| `feature` | 5,864.7 | 7,006.4 | **0.837** |
-| `hash_control` | 54,261.2 | 54,136.6 | 1.002 |
-| `shuffled` | 6,972.2 | 6,997.0 | 0.996 |
+| `feature` | 6,083.0 | 7,267.8 | **0.837** |
+| `hash_control` | 54,246.3 | 54,117.7 | 1.002 |
+| `shuffled` | 7,154.2 | 7,259.2 | 0.986 |
 
-Against closed-form chance the feature encoding runs 22.6× on the file test and 22.3× on the citation test, from an encoding that is never shown a file name.
+Against closed-form chance the feature encoding runs 23.0× on the file test and 20.3× on the citation test, from an encoding that is never shown a file name.
 
-Over 74,314 same-file pairs and 8,701,641 cross-file pairs.  The feature encoding beats the hash control: yes; beats the seeded reshuffle: yes; beats closed-form chance: yes.
+Over 80,216 same-file pairs and 10,011,062 cross-file pairs.  The feature encoding beats the hash control: yes; beats the seeded reshuffle: yes; beats closed-form chance: yes.
 <!-- end generated -->
 
 The two controls do exactly what they are there for.

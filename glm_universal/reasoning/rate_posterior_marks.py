@@ -414,7 +414,10 @@ def j7_refusals_are_evidence() -> Dict[str, object]:
 def _predict(kind: str, floor: Optional[Fraction], reads: Sequence[int]
              ) -> Tuple[str, Optional[Fraction]]:
     """A program's outcome computed by the count-vector engine (single
-    reads) or the pair histogram, before the runtime is run."""
+    reads) or the pair histogram, before the runtime is run -- under the
+    production rule (since Phase 89 the upper-credible rule,
+    ``studies/CONTRACT_MATRIX_STUDY.md``; each declared program is one call,
+    so its session holds no earlier read)."""
     if kind == "agree":
         from .decoder_confidence import agree_confidence
         try:
@@ -422,18 +425,25 @@ def _predict(kind: str, floor: Optional[Fraction], reads: Sequence[int]
         except ConfidenceRefusal as e:
             return (e.name, None)
         post = rp.rate_posterior(reads[2:], [(reads[0], reads[1])])
-        if rp.GUARD in rp.most_probable(post):
-            return ("RATE_GRID_EXCEEDED", None)
-        conf = sum((x * agree_confidence(list(reads[:2]), p)["confidence"]
-                    for x, p in zip(post, rp.GRID)), Fraction(0))
+        try:
+            conf, _at = rp.rule_confidence(
+                post, lambda p: agree_confidence(list(reads[:2]), p)
+                ["confidence"])
+        except ConfidenceRefusal as e:
+            return (e.name, None)
         return ("answer", conf)
     classes = [decode_complete(y).weight for y in reads]
     if classes[0] == 4:
         return ("TIE", None)
     counts = tuple(classes.count(d) for d in range(5))
-    edge, conf = _answer(counts, classes[0], "uniform")
-    if edge:
-        return ("RATE_GRID_EXCEEDED", None)
+    if rp.PRODUCTION_RULE == "upper":
+        conf = _repair_answer("R4 upper credible", counts, classes[0])
+        if conf is None:
+            return ("RATE_GRID_EXCEEDED", None)
+    else:
+        edge, conf = _answer(counts, classes[0], "uniform")
+        if edge:
+            return ("RATE_GRID_EXCEEDED", None)
     if floor is not None and conf < floor:
         return ("BELOW_FLOOR", conf)
     return ("answer", conf)

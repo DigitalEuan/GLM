@@ -924,50 +924,6 @@ def coset_descent_experiment(codewords: int = 64,
 
 # -- Y5: nested holdouts -----------------------------------------------------
 
-def _loo_linear(pairs: Sequence[Tuple[Fraction, Fraction]]
-                ) -> Optional[Fraction]:
-    """Leave-one-out mean error of the least-squares line, closed form."""
-    from .element_completion import _fit
-    n = len(pairs)
-    sx = sum(x for x, _ in pairs)
-    sy = sum(y for _, y in pairs)
-    sxx = sum(x * x for x, _ in pairs)
-    sxy = sum(x * y for x, y in pairs)
-    errors: List[Fraction] = []
-    for x, y in pairs:
-        rest = _fit((n - 1, sx - x, sy - y, sxx - x * x, sxy - x * y))
-        if rest is not None:
-            errors.append(abs(y - (rest[0] * x + rest[1])))
-    return sum(errors) / len(errors) if errors else None
-
-
-def _group_predict(known: Dict[int, List[Tuple[int, Fraction]]], group: int,
-                   period: int) -> Optional[Fraction]:
-    """The group rule of ``element_completion``, over a given known set."""
-    pool = known.get(group, [])
-    if not pool:
-        return None
-    below = [k for k in pool if k[0] < period]
-    above = [k for k in pool if k[0] > period]
-    if below and above:
-        low, high = max(below), min(above)
-    else:
-        near = sorted(below or above,
-                      key=lambda k: (abs(k[0] - period), k[0]))[:2]
-        if len(near) == 1:
-            return near[0][1]
-        low, high = sorted(near)
-    if high[0] == low[0]:
-        return None
-    return low[1] + (high[1] - low[1]) * Fraction(period - low[0],
-                                                  high[0] - low[0])
-
-
-def _mean_rest_error(values: Sequence[Fraction]) -> Optional[Fraction]:
-    from .element_completion import _mean_error
-    return _mean_error(values)
-
-
 def nested_holdout_experiment() -> Dict[str, object]:
     """Y5: choose the rule again without the held-out element, then score.
 
@@ -978,96 +934,19 @@ def nested_holdout_experiment() -> Dict[str, object]:
     leave-one-out skill and gated the same way; the winner, fitted on the
     remaining elements, predicts the held-out one.  The constant rule (the
     mean of the remaining elements) is scored on the same folds.
+
+    Since Phase 93 the computation lives in
+    :func:`glm_universal.reasoning.element_completion.nested_holdout`, because
+    the completion gate now reads it; this is the same measurement of the
+    first-gate rules over every element, figure for figure.
     """
     from . import element_completion as ec
-    from ..data_objects import elements as _el
-    elements = _el.load_element_register()
-    positions = ec._positions()
-    rows = []
-    for field, rule in sorted(ec.admitted_rules().items()):
-        have = [e for e in elements if ec._value(e, field) is not None]
-        outer_err: List[Fraction] = []
-        const_err: List[Fraction] = []
-        same_rule = no_rule = no_input = 0
-        for held in have:
-            rest = [e for e in have if e is not held]
-            y_rest = [ec._value(e, field) for e in rest]
-            base = _mean_rest_error(y_rest)
-            best: Optional[Tuple[Fraction, str, str]] = None
-            for predictor in ec.FIELDS:
-                if predictor == field:
-                    continue
-                pairs = [(ec._value(e, predictor), ec._value(e, field))
-                         for e in rest if ec._value(e, predictor) is not None]
-                if len(pairs) < ec.GATE_MINIMUM:
-                    continue
-                loo = _loo_linear(pairs)
-                pb = _mean_rest_error([y for _, y in pairs])
-                if loo is None or not pb:
-                    continue
-                cand = (loo / pb, "linear", predictor)
-                if best is None or cand < best:
-                    best = cand
-            # the group rule, scored leave-one-out on the rest alone
-            known: Dict[int, List[Tuple[int, Fraction]]] = {}
-            for e in rest:
-                p = positions.get(e.symbol)
-                if p is not None:
-                    known.setdefault(p.group, []).append(
-                        (p.period, ec._value(e, field)))
-            g_err: List[Fraction] = []
-            for e in rest:
-                p = positions.get(e.symbol)
-                if p is None:
-                    continue
-                v = ec._value(e, field)
-                pool = {k: [x for x in lst if not (k == p.group and x ==
-                                                  (p.period, v))]
-                        for k, lst in known.items() if k == p.group}
-                pred = _group_predict(pool, p.group, p.period)
-                if pred is not None:
-                    g_err.append(abs(v - pred))
-            if len(g_err) >= ec.GATE_MINIMUM and base:
-                cand = (sum(g_err) / len(g_err) / base, "group",
-                        "group and period")
-                if best is None or cand < best:
-                    best = cand
-            if best is None or best[0] > ec.GATE_SKILL:
-                no_rule += 1
-                continue
-            same_rule += (best[1], best[2]) == (rule.family, rule.predictor)
-            actual = ec._value(held, field)
-            if best[1] == "linear":
-                xh = ec._value(held, best[2])
-                pairs = [(ec._value(e, best[2]), ec._value(e, field))
-                         for e in rest if ec._value(e, best[2]) is not None]
-                n = len(pairs)
-                fit = ec._fit((n, sum(x for x, _ in pairs),
-                               sum(y for _, y in pairs),
-                               sum(x * x for x, _ in pairs),
-                               sum(x * y for x, y in pairs)))
-                pred = None if xh is None or fit is None else \
-                    fit[0] * xh + fit[1]
-            else:
-                p = positions.get(held.symbol)
-                pred = None if p is None else \
-                    _group_predict(known, p.group, p.period)
-            if pred is None:
-                no_input += 1
-                continue
-            outer_err.append(abs(actual - pred))
-            const_err.append(abs(actual - sum(y_rest) / len(y_rest)))
-        nested = (sum(outer_err) / sum(const_err)) if outer_err and \
-            sum(const_err) else None
-        rows.append({
-            "field": field, "rule": f"{rule.family}:{rule.predictor}",
-            "reported_skill_3dp": ec.round_to_thousandths(rule.skill),
-            "nested_skill_3dp": ec.round_to_thousandths(nested),
-            "folds": len(have), "scored_folds": len(outer_err),
-            "same_rule_chosen": same_rule, "no_rule_passed": no_rule,
-            "inputs_absent": no_input,
-            "survives": nested is not None and nested <= ec.GATE_SKILL,
-        })
+    keys = ("field", "rule", "reported_skill_3dp", "nested_skill_3dp",
+            "folds", "scored_folds", "same_rule_chosen", "no_rule_passed",
+            "inputs_absent", "survives")
+    table = ec.nested_gate_table()
+    rows = [{k: table[field]["every"][k] for k in keys}   # type: ignore[index]
+            for field in sorted(ec.first_gate_rules())]
     return {"fields": len(rows), "rows": tuple(rows),
             "surviving": sum(1 for r in rows if r["survives"]),
             "pass_mark": "none: a measurement of how much selection "

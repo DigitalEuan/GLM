@@ -38,9 +38,14 @@ class TestW1TheWidenedGrammar(unittest.TestCase):
                 self.assertEqual(rt.read(want), rt.from_source(src))
 
     def test_refusals_carry_their_names(self):
+        # Phase 95 (IMPERATIVE_GRAMMAR_STUDY.md, mark I7, not met and
+        # recorded): the imperative grammar reads ``a, b = b, 1`` and names
+        # the real fault, ``b`` read before assignment, so this one refusal
+        # moved from NOT_IN_FRAGMENT to UNBOUND.  It is still a refusal.
+        moved = {"unpack-self": "UNBOUND"}
         for cid, src, name in C.SAY_REFUSALS:
             with self.subTest(case=cid):
-                self.assertEqual(rt.say(src).refusal, name)
+                self.assertEqual(rt.say(src).refusal, moved.get(cid, name))
         for cid, s in C.READ_REFUSALS:
             with self.subTest(case=cid):
                 with self.assertRaises(rt.ReverseRefusal) as ctx:

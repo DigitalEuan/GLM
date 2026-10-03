@@ -706,8 +706,18 @@ _CASES: Tuple[EvalCase, ...] = (
        # ahead on every set, and now loses one query (was 0) while carrying 13.
        # Re-pinned at Phase 85: the goal-query set grew to 835 (HoleBounds.lean)
        # and the gate now fires on 64 of 1670; still ahead, carrying 12, losing 1.
-       "answer", contains=("708 -> 711 of 835 (ahead)", "64 of 1670",
-                           "carrying 12 queries it misses and losing 1"),
+       # Re-pinned at Phase 88: the goal-query set grew to 841 (PlannerLoop.lean)
+       # and the gate now fires on 56 of 1682; still ahead on every set,
+       # carrying 11, losing 1.
+       # Re-pinned at Phase 89: the goal-query set grew to 844 (QuestionSetB.lean)
+       # and the gate now fires on 52 of 1688; still ahead on every set,
+       # carrying 14, losing 1.
+       # Re-pinned at Phase 92: with TypedOperators, DeclaredFrames and
+       # DiscourseState the corpus is 4416 declarations, the stride 4416 // 400
+       # = 11 (was 10), so the goal-query set is 803 and the gate fires on 42
+       # of 1606; still ahead on every set, carrying 13, losing 1.
+       "answer", contains=("676 -> 679 of 803 (ahead)", "42 of 1606",
+                           "carrying 13 queries it misses and losing 1"),
        note="The faculties arranged as a stack rather than scored one at a "
             "time: below a gate of 1/10 the leading lexical search is "
             "judged to have abstained and the two geometric address books "
@@ -719,7 +729,13 @@ _CASES: Tuple[EvalCase, ...] = (
     _c("report-anonymous", "report", "report anonymous",
        # Re-pinned at Phase 85 (queries 822 -> 835 as the Lean corpus grew
        # to 4171 declarations); claim unchanged.
-       "answer", contains=("708 -> 74 of 835", "214 -> 131 of 835",
+       # Re-pinned at Phase 88 (queries 835 -> 841 with PlannerLoop.lean);
+       # claim unchanged: text and identifier book to chance, structure holds.
+       # Re-pinned at Phase 89 (queries 841 -> 844 with QuestionSetB.lean);
+       # claim unchanged.
+       # Re-pinned at Phase 92 (queries 844 -> 803: 4416 declarations, the
+       # stride 11 where it was 10); claim unchanged.
+       "answer", contains=("676 -> 63 of 803", "183 -> 125 of 803",
                            "class, not a residue"),
        note="The register where the geometric address is the only faculty "
             "still reading: rename every identifier of a query outside a "

@@ -5,7 +5,7 @@
 
 **Question.** What has each phase of the wiring plan delivered, and what does the next round start from?
 
-**Verdict.** Phase 87 is closed; the order of work at the head of [`STATUS.md`](STATUS.md) §3.4 is where the next round starts, Phase 88.
+**Verdict.** Phase 95 is closed; the order of work at the head of [`STATUS.md`](STATUS.md) §3.4 is where the next round starts, Phase 96 (round 8 of the order, second readings).
 
 **Deciding figure.** Every closed phase names what was built, where it lives, and how to see it recompute itself.
 
@@ -25,7 +25,7 @@ recompute itself.
 
 Everything below is reachable from the package's public API and from the query
 runtime — **<!--figure:query-kinds-->24 query kinds<!--/figure-->**, **<!--figure:report-subjects-->65 report subjects<!--/figure-->** and **<!--figure:registers-->8 registers<!--/figure-->** — is
-covered by the test suite (<!--figure:test-files-->132 test files<!--/figure-->),
+covered by the test suite (<!--figure:test-files-->141 test files<!--/figure-->),
 and — where it is a report or a task — has a generated column-3 script that
 recomputes the claim in a **fresh interpreter** and fails if anything differs.
 
@@ -183,9 +183,392 @@ as everything else: only the open phase is state.
 
 ---
 
+## Phase 95 — the imperative grammar: programs with state in the reverse grammar, run with counted steps and replayed by a fresh interpreter
+
+**Status: closed this round.** It took the second half of round 7 of the
+order of work at the head of `STATUS.md` §3.4 — M's imperative grammar:
+sentences for assignment, loops and branches, so that the 7 Phase 64
+programs with state have sentences. The study of the round is
+[`studies/IMPERATIVE_GRAMMAR_STUDY.md`](studies/IMPERATIVE_GRAMMAR_STUDY.md),
+its corpus `evaluation/imperative_cases.py` (13 hand-worked sentences, the 7
+Phase 64 programs with state, 21 further programs, 14 refusals, 7 unreadable
+sentences) and marks I1–I9 and L, committed with the frozen baseline
+`reasoning/_data/imperative_baseline.json` before any code.
+
+**What was built.** `reasoning/reverse_tct_imp.py` — the grammar (program,
+block, `set`, `set together`, `for each`, `while`, `if … otherwise`,
+`return`, `define`, `match` with literal, wildcard, capture, or- and sequence
+patterns and guards; the terms *the call of* and *the choice of*; *is
+nonzero*; *the variable* x for a grammar-word name), its realiser (earlier
+terms spelled through the earlier realisers with children realised here), a
+reader extending the third sort's, the translation from CPython's AST with a
+flow-insensitive sort pass, an interpreter with CPython's semantics for the
+fragment, counted steps (100,000) and bounded depth (200), `say_imperative`
+with a trace of the first 24 assignments, the final values and the result in
+column 1, its own column-3 script and mutation, and the battery.
+`reasoning/reverse_tct.py` asks it after the third sort cannot read the text;
+`reasoning/reverse_tct_script.py` renders certificates of kind `say-imp`.
+`runtime/imperative_report.py`, `tools imperative`,
+`tests/test_imperative_grammar.py`, and
+`RequestProject/GLM/ImperativeGrammar.lean`.
+
+**What it measured.** I1 13 of 13 sentences word for word, values equal
+CPython, 0 wrong; I2 7 of 7 Phase 64 programs with state said, read back and
+equal CPython (0 before); I3 21 of 21 further programs, 0 wrong; I4 14 of 14
+refusals by name, 7 of 7 sentences `UNREADABLE`; I5 41 of 41 read back, the
+battery 1412 of 1412 programs with 1412 distinct sentences; I6 41 of 41
+scripts verified, 41 of 41 mutants rejected; I7 **not met**: 0 of 109 frozen
+Phase 64 answers moved but the 7 declared, and of 69 earlier declared `say:`
+cases one moved — Phase 68's `unpack-self` refusal is now `UNBOUND` rather
+than `NOT_IN_FRAGMENT`; I8 0 of 55 declared programs said before the round;
+I9 0 of 41 answers changed with both limits ×10. Post hoc, a deterministic
+battery of 600 programs: 450 imperative answers, 0 wrong; it also found a
+crash on a value too large to speak, now the refusal `SIZE_LIMIT`. The first
+measurement of I7 found two defects, fixed: true division answered as an
+exact quotient where CPython gives a float (`float-in-loop`; now refused),
+and a loop over a mask refused under the wrong name (now `ORDER_UNDEFINED`).
+8 of 9 marks met.
+
+**Lean.** `iterDec_encList`, `depth_lt_of_mem`, `decT_encT`,
+`encT_injective` (count-first trees uniquely readable), `exec_mono`,
+`exec_agree` (a step limit only withholds), `euclidLoop_gcd`,
+`euclidLoop_1071_462`, `sum_telescope`, `loop_acc_value`, `factFuel_eq`; no
+`sorry`, standard axioms only.
+
+## Phase 94 — the third sort: strings, tuples and ranges in the reverse grammar, and the Python dialect widened to string methods, lists and dicts as snapshots
+
+**Status: closed.** It took the first half of round 7 of the order
+of work at the head of `STATUS.md` §3.4 — the third sort: candidate I1 (string
+methods over code points; list and dict literals as immutable snapshots) with
+M's strings, tuples and ranges (a third sort for the reverse grammar with
+count-first literals). The study of the round is
+[`studies/THIRD_SORT_STUDY.md`](studies/THIRD_SORT_STUDY.md), its corpus
+`evaluation/third_sort_cases.py` (28 say cases, 10 refusals, 9 unreadable
+sentences, the battery atoms, 21 dialect programs declared inside and one
+outside, 63 dialect value cases, 17 dialect refusals, the two Phase 64
+refusals declared superseded) and marks T1–T6, D1–D4 and L, committed before
+any code. M's imperative grammar, the second half of the round's track, was
+not declared and is where the next round starts.
+
+**What was built.** `reasoning/reverse_tct_seq.py` — the third sort's terms
+and statements, the realiser (characters spelled by name, every literal count
+first), a reader extending the Phase 67 reader that refuses non-canonical
+spellings, the translation from CPython's AST, an exact evaluator with its own
+slice clamping and code-point arithmetic, `say_third_sort`, its own column-3
+script and mutation, and the depth-two battery. `say` in
+`reasoning/reverse_tct.py` falls to it only when the earlier grammar refuses
+`NOT_IN_FRAGMENT` or `UNREADABLE`; `reasoning/reverse_tct_script.py` renders
+certificates of kind `say-seq`. `reasoning/python_containers.py` and the
+widened `reasoning/python_speech.py` — string methods, list and dict displays,
+`list`, `sorted`, dict views where consumed, every in-place change refused
+`MUTABLE_CONTAINER`; the substrate prelude's `same` compares lists and dicts.
+`evaluation/python_speech_cases.py` keeps `PHASE64_REFUSAL_CASES` and names
+`SUPERSEDED_BY_PHASE94`. `runtime/third_sort_report.py`, `tools third-sort`,
+`tests/test_third_sort.py`, and `RequestProject/GLM/ThirdSort.lean`.
+
+**What it measured.** T1 28 of 28 say cases as declared, 0 wrong (0 of 28
+said before); T2 10 of 10 refusals by name, 9 of 9 sentences `UNREADABLE`; T3
+28 of 28 read back, the battery 1116 of 1116 terms read back with 1116
+distinct sentences; T4 28 of 28 scripts verified, 28 of 28 mutants rejected;
+T5 21 of 21 dialect programs inside, `tuple-concat` outside as declared; T6
+69 earlier say cases unmoved, W2 inside 36. D1 63 of 63 dialect cases equal
+CPython in type and value (strings 24, lists 23, dicts 16; 0 of 63 answered
+before); D2 17 of 17 refusals by name, 2 of 2 superseded answered, the other
+24 Phase 64 refusals kept; D3 63 scripts verified, 63 mutants rejected; D4 0
+of 83 Phase 64 values moved, the differential battery 0 wrong of 2830
+answered. 10 of 10 marks met.
+
+**Lean.** `decItems_encItems`, `decLit_encLit`, `listCode`,
+`encLit_injective`, `length_rangeList`, `lt_rangeLen_iff`,
+`mem_rangeList_iff`, `two_mul_sum_rangeList`, `clampIdx_bounds`,
+`length_slicePos`, `slicePos_mem_bounds`, `sliceNeg_mem_bounds`,
+`upper_lower_of_lower`, `lower_upper_of_upper`, `upper_idem`,
+`length_mapUpper`; no `sorry`, standard axioms only.
+
+## Phase 93 — the register against the world: every element row read against cited outside values, and a completion gate that survives its own selection
+
+**Status: closed.** It took round 6 of the order of work at the
+head of `STATUS.md` §3.4 — the register against the world: candidate C (a
+discrepancy report of register values against cited standard values, never
+overwriting the register) with H's first item (demote or narrow the two
+chemistry completion rules that fail nested holdouts). The study of the round
+is [`studies/REGISTER_WORLD_STUDY.md`](studies/REGISTER_WORLD_STUDY.md), its
+corpus `evaluation/register_world_cases.py` (six verdicts per cell, 24
+question cases, the completion gate's declared outcome, one earlier verdict
+declared to move) and marks R1–R8, committed before any code. Two outside
+sources were frozen first, with URL, retrieval date and digest:
+`data_objects/_data/world_ciaaw_2024.json` (CIAAW 2024 standard atomic
+weights, 118 rows) and `data_objects/_data/world_nist_ie.json` (NIST ASD first
+ionization energies and ground configurations, H–Hs).
+
+**What was built.** `runtime/register_world.py` — the per-cell comparison at
+the precision each side is held to (`compare_number`, the configuration as an
+occupation), the report over all 354 cells, the molecule cells, the mutation
+audit and the register's digest; in `runtime/semantic_plan.py` the widened
+consistency frame (any element, any of the three fields) and a list frame
+(*which elements have an … inconsistent with the standard value*), with the
+refusals `WORLD_SILENT`, `REGISTER_SILENT` and `STANDARD_UNDECLARED`. In
+`reasoning/element_completion.py` the nested gate (`first_gate_rules`,
+`nested_holdout`, `nested_gate_table`, rule domains): a rule is admitted only
+if it also halves the error when its own selection is held out, or is
+narrowed to a declared domain on which it does; `report completion` gains the
+step. `runtime/register_world_report.py`, `tools register-world`,
+`tests/test_register_world.py`, and `RequestProject/GLM/RegisterWorld.lean`.
+
+**What it measured.** 354 of 354 cells decided: atomic weight 73 agree / 11 at
+the register's stated precision / 0 discrepant / 34 world-silent; ionization
+energy 10 / 68 / 24 discrepant / 6 register-silent / 10 both-silent;
+configuration 107 / 1 discrepant (lawrencium) / 10 world-silent. 24 of 24
+questions as declared, 0 wrong, where the machine answered 2 before. 186 of
+186 injected errors caught, 0 of 186 world values flagged; 51 of 51 molecules
+decided. Phase 63's eight interval questions hold but the declared move (iron,
+now *yes* at stated precision). The gate: `covalent_radius_pm` demoted,
+`electron_affinity_eV` narrowed to the main group (nested skill 0.187, 31 of
+31 folds); the completed view 1,442 → 1,344 cells (98 estimates withdrawn),
+the measured layer unchanged at 1,257. The register's digest is unchanged.
+
+**Lean.** `meets_iff_exists`, `compare_cases`, `compare_agrees_iff`,
+`compare_discrepant_iff`, `compare_atPrecision_iff`,
+`not_discrepant_of_correct_rounding`, `discrepant_of_above`,
+`discrepant_of_below`, `sum_meets`, `exists_disjoint_of_sum_disjoint`,
+`sum_mem`, `occ_perm`, `occ_append`, `filled_of_restrict`,
+`coverage_restrict`, `measured_restrict`, `world_ledger`, `nested_ledger`,
+`nested_loss`; no `sorry`, standard axioms only.
+
+## Phase 92 — discourse state: a tie carried as a column, the fourth shape of follow-up, and follow-ups bound on every surface
+
+**Status: closed.** It took round 5 of the order of work at the
+head of `STATUS.md` §3.4 — discourse state: candidate 0b (a tie carried as a
+column) first, then D = 0a (the fourth shape: *the one before that*, *both of
+them*, *why?*), then K3 (follow-ups bound on every surface). The study of the
+round is
+[`studies/DISCOURSE_STATE_STUDY.md`](studies/DISCOURSE_STATE_STUDY.md), its
+corpus `evaluation/discourse_cases.py` (29 conversations: 7 column, 16
+fourth-shape, 6 surface; one earlier outcome declared to move) and marks
+D1–D8, committed before any code, with the statement of *the answer for
+several rows at once* candidate 0 asked for at its head.
+
+**What was built.** `runtime/discourse.py` — `Discourse`, a subclass of Phase
+55's `Conversation`: a fold's tie and a column turn are a set the turn
+produced, and *it* or *them* names it, asked of every row and answered as a
+column (`ColumnBinding`), refused `column-incomplete` when some row does not
+answer; the shapes `why`, `prior` and `plural` ahead of the three old ones,
+with `number-mismatch`; a refusal recorded as a turn; the router as the
+licence (`surfaces=True`), with the register rows read from a routed
+question; and whole first, so a text the machine answers as written is
+answered as written. `carry=False` is the switch. `GLM.py --converse`;
+`runtime/discourse_report.py`, `tools discourse-state`,
+`tests/test_discourse_state.py`, and `RequestProject/GLM/DiscourseState.lean`.
+
+**What it measured.** 29 of 29 as declared, 0 wrong (7 column, 16
+fourth-shape, 6 surface). Phase 55's layer gives 0 of the 20 new-behaviour
+cases their declared outcome; the first-winner rule answers 10 of 10 columns
+with one row, dropping 22; the recency rule differs on 2 of 4 *one before
+that* cases; the session alone answers 0 of the 5 surface answers;
+`carry=False` returns 4 of 4 ties to `ambiguous-antecedent`. 15 of 15 of
+Phase 55's follow-ups keep their outcome but the declared move. 32 of 32
+column cells and 7 of 7 single answers equal the answer asked alone. Of 3056
+earlier declared strings, 15 carry a new phrasing and the machine answers 0
+of them alone; none is released.
+
+**Lean.** `resolveD_eq_lift_resolve`, `resolveD_column_licensed`,
+`resolveD_column_produced`, `resolveD_column_two_le`,
+`resolveD_incomplete_hole`, `column_cell_eq_alone`, `resolvePlural_both_two`,
+`resolvePlural_never_single`, `resolvePlural_column_licensed`,
+`resolvePrior_cons_deciding`, `resolvePrior_stable_under_dead_turn`,
+`tie_is_a_column`, `comparison_still_ambiguous`,
+`tie_with_a_hole_is_incomplete`, `dead_set_walked_past`,
+`prior_walks_past_unlicensed`, `both_across_turns`, `them_one_row`,
+`both_of_three`; no `sorry`, standard axioms only.
+
+## Phase 91 — frames from a declaration: the stepwise planner's folds generated from one table, and the widenings written as entries in it
+
+**Status: closed.** It took round 4 of the order of work at the
+head of `STATUS.md` §3.4 — the planner widenings: H's E6 (frames generated
+from a declaration) first, then O7's remainder and candidate 2's §6. The
+study of the round is
+[`studies/DECLARED_FRAMES_STUDY.md`](studies/DECLARED_FRAMES_STUDY.md), its
+corpus `evaluation/stepwise_five_cases.py` (54 single-turn cases: 12 order,
+12 superlative, 12 bound, 6 class, 6 prefix, 6 molecule; 2 follow-ups; and
+three earlier verdicts declared to move) and marks D1–D9, committed before
+any code.
+
+**What was built.** `runtime/frame_declarations.py` — the declaration (10
+frame entries by round, the vocabularies, 5 superlatives, 2 argued physical
+ranges, ordinals and count words) and the reader generated from it, live
+behind `GENERATED`, with the hand-written readers of rounds three and four
+kept as the control. In `runtime/declared_frames.py` the union sets (*the
+metals*, *the rare earths*) and the comparatives per table (*heavier* and
+*lighter* over the molecule table); in `runtime/quantity_units.py` the
+twelve remaining exact SI prefixes. In `runtime/stepwise.py` the builders
+`_build_top` and `_build_bounds` and the refusals `ORDER_OUT_OF_RANGE`,
+`TOP_K_TIE`, `RANGE_UNDECLARED`, `TABLE_MISMATCH` and
+`COMPARATIVE_UNDECLARED`; in `reasoning/stepwise_script.py` the order
+positions, the top rows, the range-aware fold and the script's own
+re-derivations. `runtime/stepwise_five.py`, `tools stepwise-five`,
+`tests/test_stepwise_five.py`, and `RequestProject/GLM/DeclaredFrames.lean`.
+
+**What it measured.** 638 of 638 texts read alike by the generated and the
+hand-written readers; with the declaration emptied, 0 fold questions read.
+54 of 54 cases and 2 of 2 follow-ups as declared, 0 wrong; round four's
+reader answers 0 of the 54, and with the round-five entries removed every
+case gets round four's verdict. Through `GLM.py --ask` 5 of the 54 were
+answered before the round and 41 after. 10 of 10 bounded answers hold over
+200 completions with both ends attained; 41 of 41 scripts verify (858 of 858
+steps aligned) and every mutation kind is rejected. Rounds one to four held,
+3 of 3 declared moves, and on the router's 273 declared questions no row
+changed.
+
+**Lean.** `countP_append_bounds`, `countP_fill_low`, `countP_fill_high`,
+`oddCount_fill_even`, `oddCount_fill_odd`, `oddCount_append_bounds`,
+`sum_append_bounds`, `sum_fill_const`, `mean_append_bounds`,
+`quartilePositions_lt`, `quartile_halves`, `kthLargest_pos_lt`,
+`orderStat_bounds`, `top_open`, `top_drops`; no `sorry`, standard axioms
+only.
+
+## Phase 90 — typed operators: real, reactive and apparent power from phasors and the power triangle, kind-restricted power units, and the dot against the cross product
+
+**Status: closed.** It took round 3 of the order of work at the
+head of `STATUS.md` §3.4 — candidate F, on the measurand register of Phases
+86 and 87. The study of the round is
+[`studies/TYPED_OPERATORS_STUDY.md`](studies/TYPED_OPERATORS_STUDY.md), its
+corpus `evaluation/typed_operator_cases.py` (43 cases: 22 phasor, 9 kind, 12
+vector) and marks T1–T8, committed before any code.
+
+**What was built.** `runtime/typed_operators.py` — complex power `S = V *
+conj(I)` over the Smith chart's Gaussian rationals (and through an impedance,
+`S = |I|^2 Z = |V|^2 / conj(Z)`), real, reactive and apparent power and the
+power factor with its sense as exact values and surds, the power triangle
+solved from any two sides, the watt, the var and the volt-ampere as
+kind-restricted names (`KIND_MISMATCH`), the dot product (work, mechanical
+power) against the cross product (torque, a vector), and the refusals
+`PF_SENSE_UNDECLARED`, `POWER_TRIANGLE_VIOLATED`,
+`POWER_FACTOR_OUT_OF_RANGE` and `VECTOR_LENGTH_MISMATCH`; each reading's
+column-3 script recomputes the answer from the givens and asserts the claim.
+In `runtime/question_frames.py` the frame `typed_operator`, read ahead of the
+planner's *given* phrasing, so the router and `GLM.py -q` reach it, gated.
+`runtime/typed_operators_report.py`, `tools typed-operators`,
+`tests/test_typed_operators.py`, and `RequestProject/GLM/TypedOperators.lean`.
+
+**What it measured.** 43 of 43 as declared, 0 wrong (22 phasor, 9 kind, 12
+vector); through the router 0 of 43 as declared before the round, 43 after.
+The naive monomial control answers 19 cases and 15 of them wrongly (floor 12).
+The typed reader reads 0 of 2971 earlier questions. 43 of 43 scripts verify,
+and 29 of 29 mutated claims are rejected. The census holds over 2401 phasor
+pairs and 7569 vector pairs with 0 violations.
+
+**Lean.** `complex_power_normSq`, `power_triangle`, `real_power_le_apparent`,
+`reactive_power_le_apparent`, `power_factor_mem`, `complex_power_impedance`,
+`complex_power_admittance`, `reactive_sign_undetermined`,
+`naive_real_power_wrong`, `lagrange_identity`, `cross_orthogonal_left`,
+`cross_orthogonal_right`, `cross_anticomm'`, `dot3_comm`,
+`naive_torque_wrong`, `case_a01`; no `sorry`, standard axioms only. The round
+also completed `RequestProject/GLM/QuestionSetBAnswers.lean`, which Phase 89
+had left unbuilt. It needed three proof repairs and is now built: 40 theorems
+proving the framed Outside O1 answers, with no `sorry` and standard axioms
+only (`studies/QUESTION_SET_B_STUDY.md` §7).
+
+## Phase 89 — the outside question sets: declared question frames, each answer gated by its own script, and a Capability Failure Matrix; `-q` through the router; and candidate P's two contract changes decided by a 4-way matrix
+
+**Status: closed.** Out of the order of `STATUS.md` §3.4, at the
+owner's request: the owner supplied two outside question sets
+(`source_material/Improved_Question_Set_B_Benchmark_Suite.txt`, "Set B", 14
+items; `source_material/Outside_Question_Set_B_candidate_O1.txt`, "Outside
+O1", 112 questions) and released the gated items K1 and P's two contract
+changes. The studies of the round are
+[`studies/QUESTION_SET_B_STUDY.md`](studies/QUESTION_SET_B_STUDY.md) and
+[`studies/CONTRACT_MATRIX_STUDY.md`](studies/CONTRACT_MATRIX_STUDY.md).
+
+**What was built.** `runtime/question_frames.py` — declared frames for
+questions written outside the project (Routh ranges, per-unit, regions of
+convergence, reflection and VSWR, Nyquist, fringes, Arrhenius, Nernst,
+entropy, equilibrium, FOPDT, Kalman rank, aliasing, z-transforms,
+convolution, bilinear transform, decimation, Wiener taps, entropies, Huffman,
+channel capacity, water-filling, the Golay perfect and quasi-perfect codes
+and the coset-weight-4 tie, and every Set B item), each answer re-derived by
+its own column-3 script before output, with a gate that refuses a reading
+whose script fails; the router's `frames` surface; `evaluation/question_set_b.py`
+and `evaluation/question_set_b_cases.py` (the audit and the boundary classes
+written before the frames ran); `GLM.py -q` through the multi-surface router
+(K1, Option A), with `--plan` keeping the typed planner's path and
+`--cross-check` asking it after a routed answer; `reasoning/contract_matrix.py`
+(the four variants A–D, exact over 525 cells in two frames) and
+`rate_posterior.PRODUCTION_RULE = "upper"` with the session's reads;
+`tools question-set-b`, `tools contract-matrix`;
+`tests/test_question_frames.py`, `tests/test_contract_matrix.py`; and
+`RequestProject/GLM/QuestionSetB.lean`.
+
+**What it measured.** Before any frame the router read none of the 126
+questions. Set B: 14 of 14 by audit; protocol +10 (11 right, 2 refusals under
+a code other than the file's, 1 answer where the file expects a refusal — for
+`3x + 5y = 1`, which `gcd(3, 5) = 1` decides). Outside O1: 27 of 112 framed and
+correct, **0 confidently wrong**, 85 located boundaries — explanations 32,
+derivations and proofs 18, meta 18, symbolic parameters 13, designs 3,
+transcendental 1 — with the by-section matrix and every question's row in the
+study's §4; two vacuous denotation answers of the planner recorded as a
+defect. K1: 177 of 177 contract questions identical through the routed `-q`
+and `--plan`; the typed planner as a cross-check answers 0 of the 41 framed
+questions and stays set aside. The 4-way matrix: on-grid breaks in frame I
+A 2, B 0, C 2, D 0 and in frame II A 0, B 0, C 2, D 0; mean on-grid retention
+A 0.7420, B 0.5562, C 0.8003, D 0.6881; the prior-averaged promise kept in all
+35 cells by all four; **D is the production baseline**, B and C set aside; the
+breaks at 1/5 remain under every variant; D's printed confidence overstates
+its accuracy by at most 0.00002621 in its worst on-grid cell. On the 41 framed
+questions the four variants give identical verdicts.
+
+**Lean.** `int_linear_solvable_iff`, `three_five_witness`, `int_entails_ceil`,
+`rat_not_entails`, `weight_five_miscorrects`, `routh_marginal_root`,
+`nyquist_inconsistent`, `upper_rule_safe`, `golay23_perfect`,
+`golay24_not_perfect`, `deep_hole_cosets`, `fringe_least`, `wiener_taps`,
+`per_unit_rebase`, `reflection_coefficient`, `vswr_value`; no `sorry`,
+standard axioms only.
+
+## Phase 88 — the loop through the planner: `derive`, `ask` and `solve` as values a program can use, a Python expression as a planner question, and the planner's answer choosing the next operation
+
+**Status: closed.** It took round 2 of the order of work at the
+head of `STATUS.md` §3.4 — candidates K4, I2 and O3 = M3 — and then re-read
+item 9, the utility gate. The study of the round is
+[`studies/PLANNER_LOOP_STUDY.md`](studies/PLANNER_LOOP_STUDY.md), its corpus
+`evaluation/planner_loop_cases.py` (44 cases: derive, ask, solve, loop and
+frame, with English paraphrases of the loop questions) and marks W1–W8,
+committed before any code.
+
+**What was built.** In `reasoning/python_speech.py` the builtins `derive`,
+`ask` and `solve`, evaluated through a bridge handed to the evaluator, and
+the column-3 block that re-runs each sub-answer's own script, checks the
+value against its record (a solve's root substituted back and shown unique)
+and re-runs the program under CPython against the checked table; in
+`reasoning/python_substrate.py` the prelude versions and the refusals
+`BRIDGE_UNAVAILABLE`, `DERIVE_REFUSED`, `ASK_REFUSED`, `SOLVE_REFUSED`;
+`runtime/planner_bridge.py` (the bridge to the stepwise planner's goal mode,
+one stepwise question and the reverse surface's linear solve, the declared
+frames *what does `E` return* and *is `E` true*, and the mutations); the
+router's Python surface and `GLM.py` speaking through it, with switches for
+the bridge and the frames; the measurement `runtime/planner_loop_report.py`,
+`tools planner-loop`, `tests/test_planner_loop.py`; and
+`RequestProject/GLM/PlannerLoop.lean`.
+
+**What it measured.** 8 of 8 marks met. 12 of 12 derive, 8 of 8 ask, 6 of 6
+solve, 8 of 8 loop and 10 of 10 frame cases as declared, 0 wrong; the loop
+`while derive("current", ("voltage", 12), ("resistance", r)) >= 1` answers 13.
+With the bridge off the dialect answers 0 of the 34 bridge cases and refuses
+each by name. 22 of 22 bridge programs' scripts verified, re-running 47
+sub-answer scripts; 66 of 66 mutations rejected. Through the router 29 of the
+29 answer cases are answered, 0 before. 0 of 530 earlier declared questions
+change surface; 83 of 83 dialect values, 26 of 26 refusals and the 7,128-pair
+differential battery (0 wrong) unchanged. Item 9 re-read: the loop's English
+paraphrases are answered by no surface (0 of 5), the first measured instance
+of the reach the utility gate asked for; the supplied planner stays in the
+sandbox (D14).
+
+**Lean.** `run_eq_of_agree`, `run_restrict`, `isSome_of_run_eq_some`,
+`run_eq_none_of_refused`, `affine_slope_ne_zero`, `affine_root_unique`,
+`affine_second_difference`, `least_resistance_thirteen`; no `sorry`, standard
+axioms only.
+
 ## Phase 87 — the open candidates merged and ordered; and the measurand register: register values read through what they measure, conversions through a stated efficiency, and the elementary charge
 
-**Status: closed this round.** At the owner's request it began by reading the
+**Status: closed.** At the owner's request it began by reading the
 remaining development tasks together, to see which can be combined and in
 what order one supports the next
 ([`studies/ROADMAP_STUDY.md`](studies/ROADMAP_STUDY.md)), and then took the
@@ -2508,7 +2891,7 @@ remaining, the release. Running it failed six units, none of them noise:
 
 **What the release now says.** `signoff --verify-release` reports **99 of 99
 test files and 7 of 7 instruments** signed with the exhaustive cases on; the
-suite is **<!--figure:suite-->4,703 tests across 131 of the 132 test files, 17,825 subtests, outside the document check<!--/figure-->**,
+suite is **<!--figure:suite-->4,904 tests across 140 of the 141 test files, 18,026 subtests, outside the document check<!--/figure-->**,
 one process with `GLM_EXHAUSTIVE=1` collecting 3,979; the end-to-end
 evaluation is **157 / 157** with 19 expected refusals; `corpus --check` is
 current; and `lake build` is clean over 120 Lean files with no `sorry`.

@@ -85,9 +85,10 @@ are no longer silent.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from fractions import Fraction
 from functools import lru_cache
+from pathlib import Path
 from typing import Dict, List, Optional, Sequence, Tuple
 
 from ..data_objects import elements as el
@@ -99,6 +100,8 @@ __all__ = [
     "GATE_SKILL", "GATE_MINIMUM", "DISPOSITIONS", "FIELDS", "NOT_DERIVABLE",
     "Rule", "Cell",
     "round_to_thousandths",
+    "NESTED_GATE", "NARROWING_DOMAINS", "in_domain", "nested_holdout",
+    "first_gate_rules", "nested_gate_table",
     "linear_rule", "group_rule", "rules_for_field", "admitted_rules",
     "empty_cells_by_field",
     "rule_table", "estimate", "completed_table", "coverage",
@@ -114,6 +117,23 @@ GATE_SKILL: Fraction = Fraction(1, 2)
 
 #: And only if it was scored on at least this many elements.
 GATE_MINIMUM: int = 20
+
+#: The second gate (Phase 93, H's first item of the substrate-cognition
+#: study): each rule was chosen as the best of about fourteen on the same
+#: leave-one-out errors it then reports, so its reported skill is flattered
+#: by the choice.  A rule is admitted only if the *nested* holdout -- the
+#: rule re-chosen without the held-out element, by the same gate, then scored
+#: on it -- is also at most :data:`GATE_SKILL`.
+NESTED_GATE: Fraction = GATE_SKILL
+
+#: The one declared domain a rule failing the nested gate over every element
+#: may be narrowed to: the main-group elements, by their derived group.  It
+#: is admitted there only if the nested skill re-measured inside the domain
+#: passes, on at least :data:`GATE_MINIMUM` scored folds, and the selection
+#: inside the domain chose the field's own rule on every scored fold.
+NARROWING_DOMAINS: Dict[str, Tuple[int, ...]] = {
+    "main group": (1, 2, 13, 14, 15, 16, 17, 18),
+}
 
 #: The four decisions an empty cell may receive.  Every empty cell receives
 #: exactly one, which is the claim :func:`dispositions` measures.
@@ -161,6 +181,9 @@ class Rule:
     baseline_error: Optional[Fraction]
     skill: Optional[Fraction]
     statement: str
+    #: The declared domain the rule is admitted on: empty for every element,
+    #: else a key of :data:`NARROWING_DOMAINS` (Phase 93).
+    domain: str = ""
 
     @property
     def admitted(self) -> bool:
@@ -187,6 +210,7 @@ class Rule:
             "baseline_error_3dp": round_to_thousandths(self.baseline_error),
             "skill_3dp": round_to_thousandths(self.skill),
             "admitted": self.admitted, "statement": self.statement,
+            "domain": self.domain or "every element",
         }
 
 
@@ -383,14 +407,255 @@ def rules_for_field(field: str) -> Tuple[Rule, ...]:
 
 
 @memo
-def admitted_rules() -> Dict[str, Rule]:
-    """The rule each field takes, for the fields where one passes the gate."""
+def first_gate_rules() -> Dict[str, Rule]:
+    """The rule each field takes under the first gate alone (Phase 61).
+
+    This was ``admitted_rules`` until Phase 93; it is kept under its own name
+    because the nested holdout of the substrate-cognition study (Y5) is a
+    measurement *of these rules*, and because the second gate is read
+    against it.
+    """
     out: Dict[str, Rule] = {}
     for field in FIELDS:
         for rule in rules_for_field(field):
             if rule.admitted:
                 out[field] = rule
                 break
+    return out
+
+
+def in_domain(symbol: str, domain: str) -> bool:
+    """Whether an element lies in a declared narrowing domain ("" is all)."""
+    if not domain:
+        return True
+    place = _positions().get(symbol)
+    return place is not None and place.group in NARROWING_DOMAINS[domain]
+
+
+def _loo_linear(pairs: Sequence[Tuple[Fraction, Fraction]]
+                ) -> Optional[Fraction]:
+    """Leave-one-out mean error of the least-squares line, closed form."""
+    n = len(pairs)
+    sx = sum(x for x, _ in pairs)
+    sy = sum(y for _, y in pairs)
+    sxx = sum(x * x for x, _ in pairs)
+    sxy = sum(x * y for x, y in pairs)
+    errors: List[Fraction] = []
+    for x, y in pairs:
+        rest = _fit((n - 1, sx - x, sy - y, sxx - x * x, sxy - x * y))
+        if rest is not None:
+            errors.append(abs(y - (rest[0] * x + rest[1])))
+    return sum(errors) / len(errors) if errors else None
+
+
+def _group_predict(known: Dict[int, List[Tuple[int, Fraction]]], group: int,
+                   period: int) -> Optional[Fraction]:
+    """The group rule over a given known set (what ``_group_estimate`` does)."""
+    pool = known.get(group, [])
+    if not pool:
+        return None
+    below = [k for k in pool if k[0] < period]
+    above = [k for k in pool if k[0] > period]
+    if below and above:
+        low, high = max(below), min(above)
+    else:
+        near = sorted(below or above,
+                      key=lambda k: (abs(k[0] - period), k[0]))[:2]
+        if len(near) == 1:
+            return near[0][1]
+        low, high = sorted(near)
+    if high[0] == low[0]:
+        return None
+    return low[1] + (high[1] - low[1]) * Fraction(period - low[0],
+                                                  high[0] - low[0])
+
+
+def nested_holdout(field: str, rule: Rule, domain: str = ""
+                   ) -> Dict[str, object]:
+    """The rule re-chosen without each held-out element, then scored on it.
+
+    Every element of ``domain`` that carries the field is held out in turn;
+    on the remaining ones alone every candidate rule (a line on each other
+    field, and the group rule) is scored by the same leave-one-out skill and
+    gated the same way; the winner, fitted on the remaining elements,
+    predicts the held-out one.  The constant rule (the mean of the remaining
+    elements) is scored on the same folds, and the nested skill is the ratio
+    of the two summed errors.  This is the measurement Y5 of
+    ``studies/SUBSTRATE_NATIVE_COGNITION_STUDY.md`` made, moved here in
+    Phase 93 so that the gate can read it; over every element it gives Y5's
+    figures exactly.
+    """
+    elements = tuple(e for e in el.load_element_register()
+                     if in_domain(e.symbol, domain))
+    positions = _positions()
+    have = [e for e in elements if _value(e, field) is not None]
+    outer_err: List[Fraction] = []
+    const_err: List[Fraction] = []
+    same_rule = no_rule = no_input = 0
+    for held in have:
+        rest = [e for e in have if e is not held]
+        y_rest = [_value(e, field) for e in rest]
+        base = _mean_error(y_rest)            # type: ignore[arg-type]
+        best: Optional[Tuple[Fraction, str, str]] = None
+        for predictor in FIELDS:
+            if predictor == field:
+                continue
+            pairs = [(_value(e, predictor), _value(e, field))
+                     for e in rest if _value(e, predictor) is not None]
+            if len(pairs) < GATE_MINIMUM:
+                continue
+            loo = _loo_linear(pairs)          # type: ignore[arg-type]
+            pb = _mean_error([y for _, y in pairs])  # type: ignore[misc]
+            if loo is None or not pb:
+                continue
+            cand = (loo / pb, "linear", predictor)
+            if best is None or cand < best:
+                best = cand
+        known: Dict[int, List[Tuple[int, Fraction]]] = {}
+        for e in rest:
+            p = positions.get(e.symbol)
+            if p is not None:
+                known.setdefault(p.group, []).append(
+                    (p.period, _value(e, field)))   # type: ignore[arg-type]
+        g_err: List[Fraction] = []
+        for e in rest:
+            p = positions.get(e.symbol)
+            if p is None:
+                continue
+            v = _value(e, field)
+            pool = {k: [x for x in lst if not (k == p.group and x ==
+                                              (p.period, v))]
+                    for k, lst in known.items() if k == p.group}
+            pred = _group_predict(pool, p.group, p.period)
+            if pred is not None:
+                g_err.append(abs(v - pred))   # type: ignore[operator]
+        if len(g_err) >= GATE_MINIMUM and base:
+            cand = (sum(g_err) / len(g_err) / base, "group",
+                    "group and period")
+            if best is None or cand < best:
+                best = cand
+        if best is None or best[0] > GATE_SKILL:
+            no_rule += 1
+            continue
+        same_rule += (best[1], best[2]) == (rule.family, rule.predictor)
+        actual = _value(held, field)
+        if best[1] == "linear":
+            xh = _value(held, best[2])
+            pairs = [(_value(e, best[2]), _value(e, field))
+                     for e in rest if _value(e, best[2]) is not None]
+            n = len(pairs)
+            fit = _fit((n, sum(x for x, _ in pairs),      # type: ignore[misc]
+                        sum(y for _, y in pairs),         # type: ignore[misc]
+                        sum(x * x for x, _ in pairs),     # type: ignore[misc]
+                        sum(x * y for x, y in pairs)))    # type: ignore[misc]
+            pred = None if xh is None or fit is None else \
+                fit[0] * xh + fit[1]
+        else:
+            p = positions.get(held.symbol)
+            pred = None if p is None else \
+                _group_predict(known, p.group, p.period)
+        if pred is None:
+            no_input += 1
+            continue
+        outer_err.append(abs(actual - pred))           # type: ignore[operator]
+        const_err.append(abs(actual - sum(y_rest) / len(y_rest)))  # type: ignore
+    nested = (sum(outer_err) / sum(const_err)) if outer_err and \
+        sum(const_err) else None
+    return {
+        "field": field, "rule": f"{rule.family}:{rule.predictor}",
+        "domain": domain or "every element",
+        "reported_skill": rule.skill, "nested_skill": nested,
+        "reported_skill_3dp": round_to_thousandths(rule.skill),
+        "nested_skill_3dp": round_to_thousandths(nested),
+        "folds": len(have), "scored_folds": len(outer_err),
+        "same_rule_chosen": same_rule, "no_rule_passed": no_rule,
+        "inputs_absent": no_input,
+        "survives": nested is not None and nested <= NESTED_GATE,
+    }
+
+
+def _nested_inputs() -> Tuple[Path, ...]:
+    package = Path(__file__).resolve().parent.parent
+    return (Path(__file__).resolve(),
+            package / "reasoning" / "periodic_table.py",
+            package / "data_objects" / "elements.py",
+            package / "data_objects" / "_data" / "elements_118.json")
+
+
+def _q(x: Optional[Fraction]) -> Optional[str]:
+    return None if x is None else f"{x.numerator}/{x.denominator}"
+
+
+def _unq(x: object) -> Optional[Fraction]:
+    return None if x is None else Fraction(str(x))
+
+
+@memo
+def nested_gate_table() -> Dict[str, Dict[str, object]]:
+    """Field -> the nested holdout over every element, and over each
+    narrowing domain when the first fails.
+
+    About half a minute of exact arithmetic, so it is kept beside the digest
+    of the files it reads (:class:`glm_universal.derived.DerivedStore`) and
+    recomputed only when one of them moves.
+    """
+    from ..derived import DerivedStore
+    store = DerivedStore("completion_nested_gate", _nested_inputs, schema=1)
+
+    def compute() -> Dict[str, object]:
+        out: Dict[str, object] = {}
+        for field, rule in sorted(first_gate_rules().items()):
+            rows = [nested_holdout(field, rule)]
+            if not rows[0]["survives"]:
+                rows += [nested_holdout(field, rule, domain)
+                         for domain in NARROWING_DOMAINS]
+            out[field] = [
+                {k: (_q(v) if isinstance(v, Fraction) else v)
+                 for k, v in row.items()} for row in rows]
+        return out
+
+    payload = store.cached(compute)
+    table: Dict[str, Dict[str, object]] = {}
+    for field, rows in dict(payload).items():          # type: ignore[arg-type]
+        parsed = []
+        for row in rows:
+            row = dict(row)
+            for key in ("reported_skill", "nested_skill",
+                        "reported_skill_3dp", "nested_skill_3dp"):
+                row[key] = _unq(row[key])
+            parsed.append(row)
+        table[field] = {"every": parsed[0], "domains": tuple(parsed[1:])}
+    return table
+
+
+def _narrowing(field: str) -> Optional[Dict[str, object]]:
+    """The declared domain a field's rule survives in, if any."""
+    for row in nested_gate_table()[field]["domains"]:   # type: ignore[union-attr]
+        if (row["survives"] and int(row["scored_folds"]) >= GATE_MINIMUM
+                and row["same_rule_chosen"] == row["scored_folds"]):
+            return row
+    return None
+
+
+@memo
+def admitted_rules() -> Dict[str, Rule]:
+    """The rule each field takes: both gates passed, or narrowed (Phase 93).
+
+    A first-gate rule whose nested holdout over every element passes is
+    admitted as it was.  One whose nested holdout fails is admitted only on
+    a declared narrowing domain it survives in (:func:`_narrowing`), and is
+    demoted otherwise -- its field's empty cells become
+    ``no_admitted_rule``, with both skills quoted.
+    """
+    out: Dict[str, Rule] = {}
+    table = nested_gate_table()
+    for field, rule in first_gate_rules().items():
+        if table[field]["every"]["survives"]:            # type: ignore[index]
+            out[field] = rule
+            continue
+        narrowed = _narrowing(field)
+        if narrowed is not None:
+            out[field] = replace(rule, domain=str(narrowed["domain"]))
     return out
 
 
@@ -414,7 +679,13 @@ def rule_table() -> Tuple[Dict[str, object], ...]:
                                if best else None),
             "scored_on": best[0].scored_on if best else 0,
             "admitted": field in admitted,
+            "first_gate": field in first_gate_rules(),
         }
+        if field in first_gate_rules():
+            nested = nested_gate_table()[field]
+            row["nested_skill_3dp"] = nested["every"]["nested_skill_3dp"]  # type: ignore[index]
+            row["domain"] = (admitted[field].domain or "every element"
+                             if field in admitted else "demoted")
         if field in admitted:
             row["statement"] = admitted[field].statement
         rows.append(row)
@@ -453,7 +724,7 @@ def estimate(symbol: str, field: str) -> Optional[Fraction]:
     if _value(element, field) is not None:
         return None
     rule = admitted_rules().get(field)
-    if rule is None:
+    if rule is None or not in_domain(symbol, rule.domain):
         return None
     if rule.family == "group":
         return _group_estimate(field, symbol)
@@ -472,6 +743,26 @@ def _cell(element: el.Element, field: str) -> Cell:
         return Cell(element.symbol, field, None, "", "not_derivable",
                     NOT_DERIVABLE[field])
     rule = admitted_rules().get(field)
+    first = first_gate_rules().get(field)
+    if rule is None and first is not None:
+        nested = nested_gate_table()[field]["every"]     # type: ignore[index]
+        return Cell(element.symbol, field, None, "", "no_admitted_rule",
+                    f"the best rule tried ({first.family} on "
+                    f"{first.predictor}) passes the first gate at skill "
+                    f"{round_to_thousandths(first.skill)}, but re-chosen "
+                    f"without each held-out element it scores "
+                    f"{nested['nested_skill_3dp']} against the nested gate "
+                    f"of {NESTED_GATE}, in every declared domain: demoted "
+                    f"(Phase 93)")
+    if rule is not None and not in_domain(element.symbol, rule.domain):
+        nested = nested_gate_table()[field]["every"]     # type: ignore[index]
+        return Cell(element.symbol, field, None, "", "no_admitted_rule",
+                    f"the rule for {field} ({rule.family} on "
+                    f"{rule.predictor}) is admitted only on the "
+                    f"{rule.domain} elements; {element.symbol} lies outside, "
+                    f"where re-chosen without each held-out element the "
+                    f"rule scores {nested['nested_skill_3dp']} against the "
+                    f"nested gate of {NESTED_GATE}")
     if rule is None:
         best = rules_for_field(field)
         detail = ("no rule was scored on enough elements" if not best else
@@ -486,9 +777,12 @@ def _cell(element: el.Element, field: str) -> Cell:
                    if rule.family == "group"
                    else f"{element.symbol} carries no {rule.predictor}")
         return Cell(element.symbol, field, None, "", "inputs_absent", missing)
+    where = f", admitted on the {rule.domain} elements" if rule.domain \
+        else ""
     return Cell(element.symbol, field, value, "estimated", "",
-                f"{rule.statement}; leave-one-out error {rule.loo_error} "
-                f"against {rule.baseline_error} for the field's mean")
+                f"{rule.statement}{where}; leave-one-out error "
+                f"{rule.loo_error} against {rule.baseline_error} for the "
+                f"field's mean")
 
 
 @memo
@@ -601,7 +895,25 @@ def element_completion_report() -> Dict[str, object]:
                      "the field's mean, scored on at least 20 elements.  The "
                      "control is the constant rule, so admission is a claim "
                      "that the rule found something rather than that it fits "
-                     "closely.")},
+                     "closely.  Since Phase 93 its nested holdout -- the rule "
+                     "re-chosen without each held-out element -- must pass "
+                     "the same half, or the rule is narrowed to the one "
+                     "declared domain it passes in, or demoted.")},
+        "nested_gate": {
+            field: {"reported_3dp": row["every"]["reported_skill_3dp"],
+                    "nested_3dp": row["every"]["nested_skill_3dp"],
+                    "survives": row["every"]["survives"],
+                    "domains": tuple(
+                        {"domain": d["domain"],
+                         "nested_3dp": d["nested_skill_3dp"],
+                         "scored_folds": d["scored_folds"],
+                         "same_rule_chosen": d["same_rule_chosen"],
+                         "survives": d["survives"]}
+                        for d in row["domains"])}
+            for field, row in sorted(nested_gate_table().items())},
+        "demoted": tuple(sorted(set(first_gate_rules()) - set(admitted))),
+        "narrowed": {k: v.domain for k, v in sorted(admitted.items())
+                     if v.domain},
         "coverage": cover,
         "rules": table,
         "admitted_rules": {k: v.as_dict() for k, v in sorted(admitted.items())},

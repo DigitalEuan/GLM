@@ -83,14 +83,14 @@ window it is scored at are all the relay study's.
 <!-- generated: anonymous-faculties -->
 | faculty | hit@5, names kept | hit@5, names replaced |
 |---|---|---|
-| text — exact overlap of the identifiers | 720 (85.9 %) | 78 (9.3 %) |
-| lexical — the identifier address book | 388 (46.3 %) | 45 (5.4 %) |
-| **address — the structural address book** | 204 (24.3 %) | 139 (16.6 %) |
-| name — substring search over the names | 217 (25.9 %) | 21 (2.5 %) |
-| digest — a control that knows nothing | 44 (5.3 %) | 32 (3.8 %) |
-| random — a seeded permutation | 39 (4.7 %) | 39 (4.7 %) |
+| text — exact overlap of the identifiers | 680 (83.2 %) | 57 (7.0 %) |
+| lexical — the identifier address book | 346 (42.4 %) | 35 (4.3 %) |
+| **address — the structural address book** | 183 (22.4 %) | 129 (15.8 %) |
+| name — substring search over the names | 233 (28.5 %) | 20 (2.4 %) |
+| digest — a control that knows nothing | 40 (4.9 %) | 37 (4.5 %) |
+| random — a seeded permutation | 31 (3.8 %) | 31 (3.8 %) |
 
-838 queries over a corpus of 4190 declarations; chance at k = 5 is 4.5 %.  The text search collapses: yes; the identifier address book collapses with it: yes; the structural address holds: yes; and it leads every other faculty in this register: yes.
+817 queries over a corpus of 4493 declarations; chance at k = 5 is 4.3 %.  The text search collapses: yes; the identifier address book collapses with it: yes; the structural address holds: yes; and it leads every other faculty in this register: yes.
 <!-- end generated -->
 
 In numbers, and as a sentence rather than a table: take the names away and the
@@ -138,7 +138,7 @@ query.
 <!-- generated: anonymous-invariance -->
 | reading | queries | what it means |
 |---|---|---|
-| queries whose syntax coordinates are untouched | 796 | 95.0 % of 838 |
+| queries whose syntax coordinates are untouched | 775 | 94.9 % of 817 |
 | queries where a type-word coordinate moves | 42 | the declaration's own name spells `Nat`, `Int`, `Rat`, `Set` or `Decidable`, and the shipped map counts those words wherever they occur |
 | queries where any other syntax coordinate moves | 0 | none, which is `GLM.Anonymous.features_anonymise` holding of the code |
 
@@ -168,8 +168,8 @@ told that this register exists.
 <!-- generated: anonymous-relay -->
 | reading | queries | gate fires on | text alone, hit@5 | the relay, hit@5 |
 |---|---|---|---|---|
-| names kept | 838 | 23 | 720 (85.9 %) | **724 (86.4 %)** |
-| names replaced | 838 | 559 | 78 (9.3 %) | **120 (14.3 %)** |
+| names kept | 817 | 22 | 680 (83.2 %) | **683 (83.6 %)** |
+| names replaced | 817 | 557 | 57 (7.0 %) | **94 (11.5 %)** |
 
 The gate is 1/10, the one the relay study already carries, not re-tuned for this register.  It hands over on most of the register: yes; and the relay beats the text leader here: yes.
 <!-- end generated -->
@@ -199,11 +199,11 @@ it.
 | `placeholders_are_fresh` | holds |
 | `relay_beats_text_in_the_register` | holds |
 | `text_collapses_without_the_names` | holds |
-| `text_is_within_twice_chance` | **fails** |
+| `text_is_within_twice_chance` | holds |
 | `text_leads_when_the_names_are_there` | holds |
 <!-- end generated -->
 
-**One claim moves with the corpus (Phases 81–82, 84, 85 and 87).** The query set
+**One claim moves with the corpus (Phases 81–82, 84, 85, 87, 91 and 92).** The query set
 is a stride over the corpus, so adding declarations shifts which declarations
 are queried. With the two Lean files of Phases 81–82 the corpus was 4137
 declarations and the stride 828 queries, and the text search, names replaced,
@@ -219,12 +219,19 @@ times chance, and the claim holds. With the Lean file of Phase 87 the
 corpus is 4190 declarations and the stride 838 queries, and the search scores
 78 hits against a chance of 37.39: 2.09 times chance, over the line, so
 `text_is_within_twice_chance` fails again, by about four queries, and is
-recorded as a miss at this count rather than re-read. The claims
+recorded as a miss at this count rather than re-read. With the Lean file of
+Phase 91 the corpus is 4358 declarations and the stride 872 queries, and the
+search scores 66 hits against a chance of 37.91: 1.74 times chance, under the
+line again, so the claim holds and the miss is no longer recorded. With the
+Lean file of Phase 92 the corpus is 4416 declarations, the stride over it
+rises from 10 to 11 and the query set falls to 803, and the search scores 63
+hits against a chance of 35.48: 1.78 times chance, and the claim holds. The claims
 that carry the study — the text search collapses, the identifier address book
 collapses with it, the structural address holds and leads every other faculty
 — held at every count. Recorded, not re-read: `tests/test_anonymous.py` pins
 the margin of this one claim (at least one and a half times chance, and under
-two and a quarter since Phase 87, when it crossed two) and records the miss,
+two and a quarter since Phase 87, when it crossed two) and recorded the miss
+while it stood,
 rather than letting it drift silently.
 
 ---

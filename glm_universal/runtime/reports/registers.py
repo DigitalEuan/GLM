@@ -777,7 +777,9 @@ class RegisterReports:
         counts = ledger["counts"]
         rules = ", ".join(
             f"{name} by {rule['family']} on {rule['predictor']} "
-            f"(skill {q(rule['skill_3dp'])})"
+            f"(skill {q(rule['skill_3dp'])}"
+            + ("" if rule["domain"] == "every element"
+               else f", on the {rule['domain']} elements only") + ")"
             for name, rule in sorted(report["admitted_rules"].items()))
         steps = [
             Step("the sparsity",
@@ -797,11 +799,26 @@ class RegisterReports:
                  f"other field being tried as a predictor and the best "
                  f"scoring one kept.",
                  rules),
+            Step("the nested gate",
+                 "Each rule was chosen as the best of about fourteen on the "
+                 "errors it then reports, so since Phase 93 it must also pass "
+                 "when re-chosen without each held-out element.  A rule "
+                 "failing that over every element is narrowed to the one "
+                 "declared domain it passes in, or demoted.",
+                 "demoted = " + (", ".join(report["demoted"]) or "none")
+                 + "; narrowed = " + (", ".join(
+                     f"{k} to the {v} elements"
+                     for k, v in report["narrowed"].items()) or "none")
+                 + "; nested skill " + ", ".join(
+                     f"{k} {q(v['nested_3dp'])}"
+                     for k, v in report["nested_gate"].items())),
             Step("every empty cell decided",
                  f"{counts['estimated']} cells are filled by an admitted "
                  f"rule, {counts['inputs_absent']} are named as lacking the "
-                 f"rule's inputs, {counts['no_admitted_rule']} belong to a "
-                 f"field where every rule failed the gate, and "
+                 f"rule's inputs, {counts['no_admitted_rule']} have no "
+                 f"admitted rule (every rule for the field failed a gate, "
+                 f"or the cell lies outside the one domain its rule is "
+                 f"admitted on), and "
                  f"{counts['not_derivable']} to a field no rule over this "
                  f"register could reach.  None is left as a failed lookup.",
                  f"accounted = {ledger['accounted']}, "

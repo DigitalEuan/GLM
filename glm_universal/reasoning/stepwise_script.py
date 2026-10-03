@@ -63,18 +63,39 @@ FOLD_WORDS: Dict[str, str] = {"sum": "sum", "mean": "mean",
                               "even": "count of even values",
                               # round four (Phase 85): the order folds
                               "median": "median", "max": "largest value",
-                              "min": "smallest value"}
+                              "min": "smallest value",
+                              # round five (Phase 91): the quartiles
+                              "q1": "lower quartile", "q3": "upper quartile"}
 
 #: The order folds of round four (Phase 85, ``studies/HOLE_FOLDS_STUDY.md``):
 #: the ones a hole bounds rather than frees.
 ORDER_FOLDS: Tuple[str, ...] = ("median", "max", "min", "rank")
 
 
+def is_order(fn: str) -> bool:
+    """An order fold of round four or five (bounded, not freed, by a
+    hole)."""
+    return fn in ORDER_FOLDS or fn in ("q1", "q3") or \
+        bool(re.fullmatch(r"(?:max|min):\d+", fn))
+
+
+def _ordinal(k: int) -> str:
+    return f"{k}" + ("th" if 10 <= k % 100 <= 20 else
+                     {1: "st", 2: "nd", 3: "rd"}.get(k % 10, "th"))
+
+
 def fold_words(d: Mapping[str, object]) -> str:
     """The words column 1 writes a fold with; a rank names its row."""
-    if d["fn"] == "rank":
+    fn = str(d["fn"])
+    if fn == "rank":
         return f"rank of {d['row']} (largest first)"
-    return FOLD_WORDS[str(d["fn"])]
+    if fn == "top":
+        return f"top {d['k']} by {d['word']}"
+    m = re.fullmatch(r"(max|min):(\d+)", fn)
+    if m:
+        side = "largest" if m.group(1) == "max" else "smallest"
+        return f"{_ordinal(int(m.group(2)))} {side} value"
+    return FOLD_WORDS[fn]
 
 
 def fold_scope(d: Mapping[str, object]) -> str:
@@ -83,6 +104,11 @@ def fold_scope(d: Mapping[str, object]) -> str:
     missing = ", ".join(d.get("missing", ())) or "none"
     if d.get("present"):
         return f" that have a reading (missing: {missing})"
+    if d.get("bounded") and d.get("range"):
+        lo, hi = d["range"]
+        return (f" with {len(d['missing'])} missing ({missing}), each "
+                f"within the declared range {lo} to {hi}, bounded over "
+                f"every completion")
     if d.get("bounded"):
         return (f" with {len(d['missing'])} missing ({missing}), bounded "
                 f"over every completion")
@@ -99,6 +125,8 @@ def fold_tag(d: Mapping[str, object]) -> str:
         out += f"; present, missing {missing}"
     elif d.get("bounded"):
         out += f"; holes {missing}"
+    if d.get("range"):
+        out += f"; range {d['range'][0]} to {d['range'][1]}"
     return out
 
 
@@ -107,14 +135,71 @@ def _between(lo: Fraction, hi: Fraction) -> object:
         f"between {render_value(lo)} and {render_value(hi)}"
 
 
+def order_positions(fn: str, n: int) -> Optional[List[int]]:
+    """The 0-based positions, in ascending order, whose readings an order
+    fold averages over a column of ``n`` (round five, Phase 91): the median,
+    the ends, the quartiles (the median of the lower or upper half, the
+    middle value left out of both when ``n`` is odd) and the ``k``-th
+    largest or smallest; ``None`` when the fold is past the column."""
+    def mid(m: int) -> List[int]:
+        return [m // 2] if m % 2 else [m // 2 - 1, m // 2]
+    if n <= 0:
+        return None
+    if fn == "median":
+        return mid(n)
+    if fn == "max":
+        return [n - 1]
+    if fn == "min":
+        return [0]
+    if fn in ("q1", "q3"):
+        m = n // 2
+        if m == 0:
+            return None
+        off = n - m if fn == "q3" else 0
+        return [off + p for p in mid(m)]
+    mk = re.fullmatch(r"(max|min):(\d+)", fn)
+    if mk:
+        k = int(mk.group(2))
+        if k < 1 or k > n:
+            return None
+        return [n - k] if mk.group(1) == "max" else [k - 1]
+    return None
+
+
+def top_rows(pairs: Sequence[Tuple[Fraction, str]], k: int,
+             symbol: str) -> Optional[List[str]]:
+    """The ``k`` rows first by value (``>``: largest first; ``<``: smallest
+    first), ties kept in the register's order inside the top; ``None`` when
+    the ``k``-th and the ``(k + 1)``-th tie (round five)."""
+    ranked = sorted(pairs, key=lambda t: t[0], reverse=(symbol == ">"))
+    if k < 1 or k > len(ranked):
+        return None
+    if k < len(ranked) and ranked[k - 1][0] == ranked[k][0]:
+        return None
+    return [row for _v, row in ranked[:k]]
+
+
 def fold_value(fn: str, vals: Sequence[Fraction], holes: int = 0,
-               x: Optional[Fraction] = None) -> object:
+               x: Optional[Fraction] = None,
+               rng: Optional[Tuple[Fraction, Fraction]] = None,
+               bounds: bool = False) -> object:
     """A fold's value over the readings that are present, with ``holes``
     readings missing: exact when ``holes`` is 0; for the median and the rank
     the interval every completion lands in (a single value when it closes),
     by the rule of ``GLM.HoleBounds``; ``None`` when a side is left open.
     Sums, means and parity counts have no bound under a hole (``None``)."""
     vals = [Fraction(v) for v in vals]
+    if bounds and holes and fn in ("odd", "even"):
+        want = 1 if fn == "odd" else 0
+        c = sum(1 for v in vals if v.numerator % 2 == want)
+        return _between(Fraction(c), Fraction(c + holes))
+    if bounds and holes and fn in ("sum", "mean") and rng is not None:
+        total = sum(vals, Fraction(0))
+        lo, hi = total + holes * rng[0], total + holes * rng[1]
+        if fn == "mean":
+            n = len(vals) + holes
+            lo, hi = lo / n, hi / n
+        return _between(lo, hi)
     if fn in ("sum", "mean", "odd", "even") and holes:
         return None
     if fn == "sum":
@@ -139,6 +224,14 @@ def fold_value(fn: str, vals: Sequence[Fraction], holes: int = 0,
         if n == 0:
             return None
         ks = [n // 2] if n % 2 else [n // 2 - 1, n // 2]
+        if any(k - holes < 0 or k >= len(p) for k in ks):
+            return None
+        lo = sum((p[k - holes] for k in ks), Fraction(0)) / len(ks)
+        hi = sum((p[k] for k in ks), Fraction(0)) / len(ks)
+        return _between(lo, hi)
+    ks = order_positions(fn, len(vals) + holes)
+    if ks is not None:
+        p = sorted(vals)
         if any(k - holes < 0 or k >= len(p) for k in ks):
             return None
         lo = sum((p[k - holes] for k in ks), Fraction(0)) / len(ks)
@@ -470,6 +563,9 @@ def read_sentence(text: str) -> Optional[Tuple[int, str, Tuple[int, ...],
     ]
     mf = re.fullmatch(r"Step (\d+): the (?:sum|mean|count of odd values|count "
                       r"of even values|median|largest value|smallest value|"
+                      r"lower quartile|upper quartile|"
+                      r"\d+(?:st|nd|rd|th) (?:largest|smallest) value|"
+                      r"top \d+ by \w+|"
                       r"rank of \S+ \(largest first\)) of \S+ over the .+, "
                       r"from ((?:step \d+)"
                       r"(?:(?:, | and )step \d+)*), is " + _VAL + r"\.", text)
@@ -512,7 +608,7 @@ def read_equation(text: str) -> Optional[Tuple[int, str, Tuple[int, ...],
     if not m:
         return None
     k, rest = int(m.group(1)), m.group(2)
-    m2 = re.fullmatch(r"(?:sum|mean|odd|even|median|max|min|rank)\[[^\]]+\]"
+    m2 = re.fullmatch(r"(?:sum|mean|odd|even|median|max|min|rank|q1|q3|top|(?:max|min):\d+)\[[^\]]+\]"
                       r"\(((?:s\d+)(?:, s\d+)*)\) = (.+)", rest)
     if m2:
         ins = tuple(int(x) for x in re.findall(r"s(\d+)", m2.group(1)))
@@ -649,7 +745,18 @@ def recompute(s: Step, steps: Sequence[Step]) -> object:
     if s.op == "fold":
         d = s.detail
         fn = d["fn"]
-        if fn in ORDER_FOLDS or d.get("present") or d.get("bounded"):
+        if fn == "top":
+            rows = [steps[j - 1].detail.get("row") for j in s.inputs]
+            got = top_rows(list(zip(vals, rows)), int(d["k"]), d["symbol"])
+            if got is None:
+                return None
+            return ", ".join(d["names"][r] for r in got)
+        if d.get("bounds"):
+            holes = len(d.get("missing", ())) if d.get("bounded") else 0
+            rng = tuple(parse_value(v) for v in d["range"]) \
+                if d.get("range") else None
+            return fold_value(fn, vals, holes, rng=rng, bounds=True)
+        if is_order(fn) or d.get("present") or d.get("bounded"):
             x = None
             if fn == "rank":
                 x = next((steps[j - 1].value for j in s.inputs
@@ -808,6 +915,9 @@ def read1(t):
     ]
     m = re.fullmatch(r"Step (\d+): the (?:sum|mean|count of odd values|count "
                      r"of even values|median|largest value|smallest value|"
+                     r"lower quartile|upper quartile|"
+                     r"\d+(?:st|nd|rd|th) (?:largest|smallest) value|"
+                     r"top \d+ by \w+|"
                      r"rank of \S+ \(largest first\)) of \S+ over the .+, "
                      r"from ((?:step \d+)"
                      r"(?:(?:, | and )step \d+)*), is " + VAL + r"\.", t)
@@ -848,7 +958,7 @@ def read2(t):
     if not m:
         return None
     k, rest = int(m.group(1)), m.group(2)
-    m2 = re.fullmatch(r"(?:sum|mean|odd|even|median|max|min|rank)\[[^\]]+\]"
+    m2 = re.fullmatch(r"(?:sum|mean|odd|even|median|max|min|rank|q1|q3|top|(?:max|min):\d+)\[[^\]]+\]"
                       r"\(((?:s\d+)(?:, s\d+)*)\) = (.+)", rest)
     if m2:
         return [k, "fold", [int(x) for x in re.findall(r"s(\d+)",
@@ -998,10 +1108,36 @@ def session_surface():
     return SESSION[0].field_surface
 
 
-def declared_comparative(word, symbol):
+def top_of(d, srcs, v, held):
+    """This script's own top k: the declared superlative's column and
+    direction, the inputs ranked, no tie across the boundary, the rows
+    named as the register names them."""
+    from glm_universal.runtime import declared_frames as df
+    from glm_universal.runtime import frame_declarations as fd
+    assert fd.SUPERLATIVES.get(d["word"]) == d["comparative"], \
+        "not a declared superlative"
+    phrase, sym, _gloss = df.COMPARATIVES[d["comparative"]]
+    assert sym == d["symbol"], "the recorded direction is not the declared one"
+    assert df.resolve_field(session_surface(), phrase) == d["field"], \
+        "the recorded column is not the superlative's"
+    pairs = [(v[i], s["detail"]["row"]) for i, s in enumerate(srcs)]
+    ranked = sorted(pairs, key=lambda t: t[0], reverse=(sym == ">"))
+    k = int(d["k"])
+    assert 1 <= k <= len(ranked), "a top k past the set"
+    if k < len(ranked):
+        assert ranked[k - 1][0] != ranked[k][0], "a tie across the boundary"
+    return ", ".join(str(held[row]["name"]).lower() for _y, row in ranked[:k])
+
+
+def declared_comparative(word, symbol, table=None):
     """The declared table's reading of a comparative word, checked against
     the recorded direction."""
     from glm_universal.runtime import declared_frames as df
+    if table is not None:
+        assert word in df.TABLE_COMPARATIVES[table], "not declared there"
+        phrase, sym, _gloss = df.TABLE_COMPARATIVES[table][word]
+        assert sym == symbol, "the recorded direction is not the declared one"
+        return phrase
     assert word in df.COMPARATIVES, "not a declared comparative"
     phrase, sym, _gloss = df.COMPARATIVES[word]
     assert sym == symbol, "the recorded direction is not the declared one"
@@ -1031,11 +1167,54 @@ def between(lo, hi):
     return lo if lo == hi else "between %s and %s" % (show(lo), show(hi))
 
 
-def order_fold(fn, v, holes, x):
+def positions(fn, n):
+    """This script's own positions of an order fold over n readings: the
+    median, the ends, the quartiles (the median of each half, the middle
+    left out of both when n is odd), the k-th largest or smallest."""
+    def mid(m):
+        return [m // 2] if m % 2 == 1 else [m // 2 - 1, m // 2]
+    assert n > 0, "an order fold over no rows"
+    if fn == "median":
+        return mid(n)
+    if fn == "max":
+        return [n - 1]
+    if fn == "min":
+        return [0]
+    if fn in ("q1", "q3"):
+        half = n // 2
+        assert half > 0, "a quartile of fewer than two readings"
+        start = n - half if fn == "q3" else 0
+        return [start + q for q in mid(half)]
+    side, k = fn.split(":")
+    k = int(k)
+    assert 1 <= k <= n, "an order statistic past the column"
+    return [n - k] if side == "max" else [k - 1]
+
+
+def order_fold(fn, v, holes, x, rng=None, bounds=False):
     """This script's own fold over the present readings with ``holes``
     missing: the k-th smallest of the completed column lies between the
     (k - holes)-th and the k-th smallest present reading; a rank between
-    the present rank and that plus ``holes``."""
+    the present rank and that plus ``holes``; under the bounds frame a
+    parity count between the present count and that plus ``holes``, and a
+    sum or mean between every hole at the declared range's low end and
+    every hole at its high end."""
+    if bounds and holes and fn in ("odd", "even"):
+        parity = 1 if fn == "odd" else 0
+        c = sum(1 for y in v if as_int(y) % 2 == parity)
+        return between(Fraction(c), Fraction(c + holes))
+    if bounds and holes and fn in ("sum", "mean"):
+        assert rng is not None, "a sum or mean under a hole with no range"
+        total = Fraction(0)
+        for y in v:
+            assert rng[0] <= y <= rng[1], "a reading outside the range"
+            total += y
+        lo = total + holes * rng[0]
+        hi = total + holes * rng[1]
+        if fn == "mean":
+            lo = lo / (len(v) + holes)
+            hi = hi / (len(v) + holes)
+        return between(lo, hi)
     if fn in ("sum", "mean", "odd", "even"):
         assert holes == 0, "a sum, mean or count has no bound under a hole"
         total = Fraction(0)
@@ -1060,7 +1239,7 @@ def order_fold(fn, v, holes, x):
         assert holes == 0, "an end of a column with a hole is unbounded"
         return p[-1] if fn == "max" else p[0]
     n = len(p) + holes
-    mids = [n // 2] if n % 2 == 1 else [n // 2 - 1, n // 2]
+    mids = positions(fn, n)
     for k in mids:
         assert k - holes >= 0 and k < len(p), "a side left open by the holes"
     lo = Fraction(0)
@@ -1165,11 +1344,11 @@ def value_of(step, done):
     if op == "compare":
         from glm_universal.runtime import declared_frames as df
         if d["relation"] in df.COMPARATIVES:
-            declared_comparative(d["relation"], d["symbol"])
+            declared_comparative(d["relation"], d["symbol"], d.get("table"))
         return str({">": v[0] > v[1], "<": v[0] < v[1],
                     "=": v[0] == v[1]}[d["symbol"]])
     if op == "comparative":
-        phrase = declared_comparative(d["word"], d["symbol"])
+        phrase = declared_comparative(d["word"], d["symbol"], d.get("table"))
         assert phrase == d["phrase"], "the recorded column is not declared"
         for j, row_name in zip(step["inputs"], d["rows"]):
             input_of_row(j, phrase, row_name)
@@ -1179,10 +1358,8 @@ def value_of(step, done):
         return d["rows"][0] if first else d["rows"][1]
     if op == "fold":
         from glm_universal.runtime import declared_frames as df
-        want = df.DECLARED_SETS[d["set"]]
         held = session_surface().table_by_name(d["table"]).rows()
-        rows = [k for k, r in held.items()
-                if want is None or r.get("group_block") == want]
+        rows = [k for k, r in held.items() if df.in_set(k, r, d["set"])]
         holes = [k for k in rows if held[k].get(d["field"]) is None]
         if d.get("present") or d.get("bounded"):
             assert list(d["missing"]) == holes, \
@@ -1195,7 +1372,20 @@ def value_of(step, done):
             "a fold input that is not the column looked up"
         assert [x["detail"]["row"] for x in srcs] == rows, \
             "the inputs are not exactly the members of the set"
-        if d["fn"] in ("median", "max", "min", "rank") or d.get("present"):
+        if d["fn"] == "top":
+            return top_of(d, srcs, v, held)
+        if d.get("bounds"):
+            from glm_universal.runtime import frame_declarations as fd
+            rng = None
+            if d.get("range"):
+                want = fd.RANGES[d["field"]]
+                rng = (num(d["range"][0]), num(d["range"][1]))
+                assert rng == (want[0], want[1]), \
+                    "the recorded range is not the declared one"
+            if holes and d["fn"] in ("sum", "mean"):
+                assert rng is not None, "a hole bounded with no range"
+            return order_fold(d["fn"], v, len(holes), None, rng, True)
+        if d["fn"] not in ("sum", "mean", "odd", "even") or d.get("present"):
             x = None
             if d["fn"] == "rank":
                 assert d["row"] in rows, "the ranked row is not a present member"

@@ -6,7 +6,7 @@
 
 **Verdict.** Most of the cost was work repeated on things that had not moved, and a cache keyed on what it is derived from does not repeat it.
 
-**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->10,565<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
+**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->11,332<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
 
 **Recomputed by.** `glm_universal.corpus.cost.cost_report`
 
@@ -73,8 +73,8 @@ nothing.
 <!-- generated: cost-addresses -->
 | book | units | decodes from nothing | decodes now | reused |
 |---|---|---|---|---|
-| Lean declarations | 4,190 | 7,923 | 0 | 8,380 |
-| corpus sections | 1,343 | 2,642 | 0 | 2,686 |
+| Lean declarations | 4,493 | 8,502 | 0 | 8,986 |
+| corpus sections | 1,439 | 2,830 | 0 | 2,878 |
 
 Reuse is checked, not assumed: each rebuild re-decodes a sample of the answers it reused and reports any that moved (4 sampled in the declaration book, 4 in the document book, none moved).
 <!-- end generated -->
@@ -122,7 +122,7 @@ works for tables and not for a sentence, and the sentences were where the drift
 lived. The block mechanism is now available at the size of a phrase:
 
 ```markdown
-the suite is <!--figure:test-files-->132 test files<!--/figure--> today
+the suite is <!--figure:test-files-->141 test files<!--/figure--> today
 ```
 
 The markers are HTML comments, so a reader sees only the number. `--refresh`
@@ -185,16 +185,31 @@ Measured over the suite, by `glm_universal.corpus.cost.lean_blast_radius`:
 
 | | |
 |---|---|
-| test units in the suite | 132 |
-| Lean files | 157 |
-| units an edit to *any* Lean file used to make stale | 118 |
-| units one Lean file makes stale now, median | 46 |
-| units the worst single Lean file makes stale | 113 |
-| units that read the tree with a glob, so are stale whenever it moves | 46 |
+| test units in the suite | 141 |
+| Lean files | 167 |
+| units an edit to *any* Lean file used to make stale | 127 |
+| units one Lean file makes stale now, median | 55 |
+| units the worst single Lean file makes stale | 122 |
+| units that read the tree with a glob, so are stale whenever it moves | 55 |
 
 The Lean row counts distinct file names the ledger tracks, so it is the
-development's 156 files under `RequestProject/GLM/` plus the build's
-`Main.lean`. Phase 68 added one unit (`test_reverse_tct_two.py`) that reaches
+development's 166 files under `RequestProject/GLM/` plus the build's
+`Main.lean`. Phases 89 and 90 added three Lean files (`QuestionSetB.lean`,
+`QuestionSetBAnswers.lean`, `TypedOperators.lean`). Phase 90 also added one
+unit, `test_typed_operators.py`, which reaches the router and cites its Lean
+file, so every row but the file count moved by one. Phase 91 added one Lean
+file (`DeclaredFrames.lean`) and one unit, `test_stepwise_five.py`, which
+reaches the router and cites its Lean file, so every row moved by one. Phase
+92 added one Lean file (`DiscourseState.lean`) and one unit,
+`test_discourse_state.py`, which reaches the router and cites its Lean file,
+so every row moved by one again. Phase 93 added one Lean file
+(`RegisterWorld.lean`) and one unit, `test_register_world.py`, which reaches
+the router and cites its Lean file, so every row moved by one once more. Phase
+94 added one Lean file (`ThirdSort.lean`) and one unit, `test_third_sort.py`,
+which reaches the router and cites its Lean file, so every row moved by one
+again. Phase 95 added one Lean file (`ImperativeGrammar.lean`) and one unit,
+`test_imperative_grammar.py`, which reaches the router and cites its Lean
+file, so every row moved by one once more. Phase 68 added one unit (`test_reverse_tct_two.py`) that reaches
 the router, and so the development through it, which is why the floor moved
 from 34 to 35 with the other rows; Phase 69 added another
 (`test_reverse_tct_int.py`), and the floor moved from 35 to 36; Phase 70
@@ -252,6 +267,14 @@ Phase 87 added `test_measurand_register.py`, which reaches the router and
 cites `MeasurandRegister.lean`, and the floor moved from 45 to 46, the median
 from 45 to 46, the worst single file from 112 to 113, and the units that name
 any Lean file from 117 to 118.
+Phase 88 added `test_planner_loop.py`, which reaches the router through the
+Python dialect and cites `PlannerLoop.lean`, and the floor moved from 46 to
+47, the median from 46 to 47, the worst single file from 113 to 114, and the
+units that name any Lean file from 118 to 119.
+Phase 89 added `test_question_frames.py`, which reaches the router and cites
+`QuestionSetB.lean`, and `test_contract_matrix.py`, and the floor moved from
+47 to 49, the median from 47 to 49, the worst single file from 114 to 116, and
+the units that name any Lean file from 119 to 121.
 
 The floor of 35 is not a defect: those units name a `*.lean` glob because they
 read the development, and a reading of the development is stale when the
@@ -579,5 +602,5 @@ that pays for it, with the storage, loading, digesting and rebuilding of the
 table counted on the table's side rather than assumed away.
 
 <!-- generated: cost-tier -->
-**Rebuilding both address books from nothing decodes 10,565 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 177 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  569 figures inside sentences, across 30 documents, are emitted rather than typed.
+**Rebuilding both address books from nothing decodes 11,332 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 177 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  569 figures inside sentences, across 30 documents, are emitted rather than typed.
 <!-- end generated -->

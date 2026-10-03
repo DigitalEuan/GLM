@@ -64,9 +64,15 @@ INTERVAL_QUESTIONS: Tuple[HeldOut, ...] = (
     _q("y1-oxygen-standard",
        "is the atomic weight of oxygen consistent with the standard value",
        "yes", note="[15.9985, 15.9995] meets [15.99903, 15.99977]"),
+    # Amended in Phase 93 (round 6 of the order, the register against the
+    # world, ``studies/REGISTER_WORLD_STUDY.md``): the declared move of that
+    # round.  The standard is now the frozen CIAAW table of all 118 rows, so
+    # gold, which the 30-row table did not hold, is answered.
     _q("y1-gold-standard",
        "is the atomic weight of gold consistent with the standard value",
-       note="gold is not in the declared 30-row standard table; refused"),
+       "yes",
+       note="refused until Phase 93 (gold was not in the declared 30-row "
+            "table); now 196.96657 lies inside CIAAW's 196.966570(4)"),
 )
 
 FRACTION_QUESTIONS: Tuple[HeldOut, ...] = (

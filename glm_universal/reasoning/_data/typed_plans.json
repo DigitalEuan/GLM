@@ -29,7 +29,7 @@
   "refused": 6,
   "unlicensed": 6
  },
- "frames": 19,
+ "frames": 20,
  "frames_used": {
   "arithmetic": 9,
   "compare": 12,
@@ -3408,7 +3408,7 @@
   "adversarial",
   "stress"
  ],
- "source_digest": "d778f042a186dc56d6bbc9aa9b97245eb4c3ce0e89f3f76aecc6ed13e0f6647a",
+ "source_digest": "8a7baddec59120396eb37b1d43f68ff21c5cc0f1e52bcbf498eb45876a1db927",
  "stress_first_run": {
   "correct": 28,
   "correct-refusal": 6,

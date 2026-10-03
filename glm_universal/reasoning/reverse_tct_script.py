@@ -679,7 +679,23 @@ def _read_back_pairs(a: Answer) -> List[List[object]]:
     return out
 
 
+def _third_sort(a: Answer) -> bool:
+    return isinstance(a.certificate, dict) and \
+        a.certificate.get("kind") == "say-seq"
+
+
+def _imperative(a: Answer) -> bool:
+    return isinstance(a.certificate, dict) and \
+        a.certificate.get("kind") == "say-imp"
+
+
 def render_script(a: Answer, root: str, certificate=None) -> str:
+    if _imperative(a):
+        from .reverse_tct_imp import render_script as imperative_script
+        return imperative_script(a, root, certificate)
+    if _third_sort(a):
+        from .reverse_tct_seq import render_script as third_sort_script
+        return third_sort_script(a, root, certificate)
     data = {"read_back": _read_back_pairs(a),
             "certificate": a.certificate if certificate is None
             else certificate}
@@ -828,6 +844,12 @@ def _mutate(c):
 def mutated_script(a: Answer, root: str) -> Optional[str]:
     """The same script with a mutated certificate, or ``None`` when the
     answer carries no number to mutate."""
+    if _imperative(a):
+        from .reverse_tct_imp import mutated_script as imperative_mutant
+        return imperative_mutant(a, root)
+    if _third_sort(a):
+        from .reverse_tct_seq import mutated_script as third_sort_mutant
+        return third_sort_mutant(a, root)
     m = _mutate(a.certificate)
     if m is None:
         return None

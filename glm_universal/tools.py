@@ -1516,6 +1516,82 @@ def _rate_posterior(args) -> int:
     return 0
 
 
+def _contract_matrix(args) -> int:
+    """Candidate P's two contract changes tested four ways (Phase 89): the
+    control, the upper-credible rate rule alone, the session-marginal
+    confidence alone, and both -- exact retention, soft-floor breaks and
+    residual bounds in two frames (``studies/CONTRACT_MATRIX_STUDY.md``)."""
+    from fractions import Fraction
+    from .reasoning import contract_matrix as cm
+    from .reasoning.coherence import decimal_str
+
+    def d(value, places: int = 4) -> str:
+        return decimal_str(Fraction(value), places)
+
+    m = cm.matrix()
+    if args.json:
+        print(json.dumps(m, indent=1, sort_keys=True, default=str))
+        return 0
+    print(f"the 4-way matrix: {m['cells_each']} fixed-rate cells per variant "
+          f"and frame; sessions {', '.join(str(s) for s in m['sessions'])}")
+    for r in m["rows"]:
+        one = r["frame_one"]
+        ret = ", ".join(f"{k} {d(v)}" for k, v in r["retention"].items())
+        lo, hi = r["calibration_excess"]
+        print(f"{r['variant']}  {r['label']}")
+        print(f"   frame I  (a call with its own corpus): broken "
+              f"{one['broken']} (on grid {one['on_grid']}, at 1/5 "
+              f"{one['at_one_fifth']}); worst residual/(1-t) "
+              f"{d(one['worst_factor'], 2)}")
+        print(f"   frame II (a session of plain calls):  broken "
+              f"{r['broken']} (on grid {r['on_grid']}, at 1/5 "
+              f"{r['at_one_fifth']}); worst residual/(1-t) "
+              f"{d(r['worst_factor'], 2)}, on grid "
+              f"{d(r['worst_grid_factor'], 4)}")
+        print(f"   retention S=20: {ret}; mean on grid "
+              f"{d(r['mean_grid_retention'])}")
+        print(f"   prior promise broken {r['prior_broken']} of "
+              f"{r['prior_cells']} (worst {d(r['worst_prior_factor'])}); "
+              f"printed-confidence excess at most {d(hi, 8)}")
+    print(f"qualified: {', '.join(m['qualified']) or 'none'}; production: "
+          f"{m['production']}")
+    return 0
+
+
+def _question_set_b(args) -> int:
+    """The two outside question sets of Phase 89 through the router: Set B
+    scored by protocol and by audit, Outside O1 classed into the Capability
+    Failure Matrix, and the four candidate-P variants re-run on every framed
+    question (``studies/QUESTION_SET_B_STUDY.md``)."""
+    from .evaluation import question_set_b as qb
+    rep = qb.report(variants=not args.no_variants)
+    if args.json:
+        print(json.dumps(rep, indent=1, sort_keys=True, default=str))
+        return 0
+    b = rep["set_b"]
+    print(f"Set B (14): protocol {b['protocol']:+d} ({b['plus']} right, "
+          f"{b['minus']} confidently wrong); audited {b['audited']:+d} "
+          f"({b['audited_plus']} right, {b['audited_minus']} wrong)")
+    for r in b["rows"]:
+        print(f"  {r['id']} {r['surface']:<9} {r['frame'] or '-':<20} "
+              f"{'ANSWER' if r['answered'] else 'REFUSED ' + str(r['code'])}"
+              f"  protocol {r['protocol']:+d} audited {r['audited_score']:+d}")
+    o = rep["outside"]
+    print(f"Outside O1 (112): score {o['score']:+d}; framed and correct "
+          f"{o['framed_correct']}; confidently wrong {o['wrong']}")
+    print(f"  boundary classes: {o['classes']}")
+    for sec, c in o["by_section"].items():
+        print(f"  {sec[:44]:<44} {c}")
+    if "variants" in rep:
+        v = rep["variants"]
+        print(f"candidate P on the {v['items']} framed questions:")
+        for name, row in v["variants"].items():
+            print(f"  {name}: answered {row['answered']}, refused "
+                  f"{row['refused']} {row['codes']}")
+        print(f"  verdicts differing from A: {v['differ_from_A']}")
+    return 0
+
+
 def _law_triage(args) -> int:
     """The 106 unresolved laws triaged (Phase 83): one fate per law under the
     service rule of ``studies/LAW_TRIAGE_STUDY.md``, the declared checks
@@ -1699,6 +1775,52 @@ def _stepwise_three(args) -> int:
     return 0
 
 
+def _stepwise_five(args) -> int:
+    """The stepwise planner, round five (Phase 91): frames generated from a
+    declaration, and the widenings as entries in it, D1-D8 against the marks
+    declared in ``studies/DECLARED_FRAMES_STUDY.md`` before any code."""
+    from .runtime import stepwise_five as s5
+    report = s5.stepwise_five_report(scripts=not args.no_scripts)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    g = report["generated"]
+    print(f"generated     {g['identical']} of {g['texts']} texts read alike "
+          f"by the generated and the hand-written readers "
+          f"({g['fold_texts']} with a fold); emptied declaration reads "
+          f"{g['emptied_fold_reads']} folds")
+    for key in ("orders", "superlatives", "bounds", "classes", "prefixes",
+                "molecules"):
+        r = report[key]
+        print(f"{key:<13} {r['met']} of {r['cases']} as declared, wrong "
+              f"{r['wrong']}; round four's reader answers "
+              f"{r['round_four_answers']}; the machine answered "
+              f"{r['machine_answered_before']} before and "
+              f"{r['machine_answers_now']} now")
+    w = report["widenings"]
+    print(f"widenings     {w['hold']} of {w['cases']} get round four's verdict "
+          f"with the round-five entries removed")
+    r = report["follow_ups"]
+    print(f"follow_ups    {r['met']} of {r['cases']} as declared")
+    c = report["completions"]
+    print(f"completions   {sum(x['ok'] for x in c['bounded'])} of "
+          f"{len(c['bounded'])} bounded answers sound and sharp over "
+          f"{c['per_answer']} completions each")
+    i = report["interference"]
+    print(f"interference  round four held {i['round_four_held']}, three "
+          f"{i['round_three_held']}, two {i['round_two_held']}, one "
+          f"{i['round_one_held']}; moves {i['moved']['met']} of "
+          f"{i['moved']['cases']}; router rows changed "
+          f"{len(i['router_rows_changed'])}")
+    if "scripts" in report:
+        s = report["scripts"]
+        print(f"scripts       {s['verified']} of {s['chains']} verified, "
+              f"{s['aligned']} of {s['steps']} steps aligned")
+        for kind, n in s["mutants"].items():
+            print(f"  mutation {kind:<10} caught {s['caught'][kind]} of {n}")
+    return 0
+
+
 def _stepwise_four(args) -> int:
     """The stepwise planner, round four (Phase 85): folds with a hole, H1-H7
     against the marks declared in ``studies/HOLE_FOLDS_STUDY.md`` before any
@@ -1818,6 +1940,263 @@ def _measurand_register(args) -> int:
         s = report["scripts"]
         print(f"scripts      {s['verified']} of {s['chains']} verified, "
               f"{s['aligned']} of {s['steps']} steps aligned")
+        for kind, n in s["mutants"].items():
+            print(f"  mutation {kind:<10} caught {s['caught'][kind]} of {n}")
+    return 0
+
+
+def _discourse_state(args) -> int:
+    """Discourse state (Phase 92): a tie carried as a column, the fourth
+    shape of follow-up and follow-ups bound on every surface, D1-D8 against
+    the marks declared in ``studies/DISCOURSE_STATE_STUDY.md`` before any
+    code."""
+    from .runtime import discourse_report as dr
+    report = dr.discourse_report(census=not args.no_census)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    for key, g in report["groups"].items():
+        print(f"{key:<8} {g['met']} of {g['cases']} as declared, wrong "
+              f"{len(g['wrong'])}, refusals {g['refusals']}")
+    c = report["control"]
+    print(f"control  Phase 55's layer gives {len(c['base']['new_as_declared'])}"
+          f" of the {c['base']['new_cases']} new-behaviour cases as declared;"
+          f" first winner answers {c['first_winner']['answered']} of "
+          f"{c['first_winner']['cases']} columns, dropping "
+          f"{c['first_winner']['rows_dropped']} rows; recency differs on "
+          f"{len(c['recency']['differs'])} of {c['recency']['cases']} prior "
+          f"cases; the session alone answers "
+          f"{len(c['session_alone']['answers_as_declared'])} of the surface "
+          f"cases; carry off reverts {len(c['carry_off']['reverted'])} of "
+          f"{c['carry_off']['ties']} ties")
+    e = report["earlier"]
+    print(f"earlier  {e['met_count']} of {e['cases']} of Phase 55's follow-ups"
+          f" as declared now; moved {', '.join(e['moved']) or 'none'}")
+    k = report["cells"]
+    print(f"cells    {k['cells']} cells and {k['singles']} single answers, "
+          f"{len(k['differ'])} differ from the text asked alone")
+    if report["census"]:
+        n = report["census"]
+        print(f"census   {n['taken_count']} of {n['strings']} earlier strings "
+              f"carry a new phrasing ({n['distinct_taken']} distinct), "
+              f"{n['taken_answered_alone']} of them answered alone; "
+              f"{n['released_count']} released")
+    print("marks    " + ", ".join(f"{m} {'met' if v else 'MISSED'}"
+                                  for m, v in report["marks"].items()
+                                  if v is not None))
+    return 0
+
+
+def _imperative(args) -> int:
+    """The imperative grammar (Phase 95): programs with state -- assignment,
+    loops, branches, functions and ``match`` -- in the reverse grammar, I1-I9
+    against the marks declared in ``studies/IMPERATIVE_GRAMMAR_STUDY.md``
+    before any code."""
+    from .runtime import imperative_report as ir
+    report = ir.imperative_report(run_scripts=not args.no_scripts)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    m = report["marks"]
+    for k in ("I1", "I2", "I3"):
+        print(f"{k} said        {m[k]['right']} of {m[k]['cases']} said, read "
+              f"back and equal to CPython; wrong {len(m[k]['wrong_ids'])}")
+    print(f"I4 refusals   {m['I4']['right']} of {m['I4']['refusals']} by name; "
+          f"{m['I4']['unreadable']} of {m['I4']['read_refusals']} sentences "
+          "UNREADABLE")
+    b = m["I5"]["battery"]
+    print(f"I5 read back  {m['I5']['read_back']['right']} of "
+          f"{m['I5']['read_back']['of']}; battery {b['read_back']} of "
+          f"{b['programs']} programs, {b['distinct_sentences']} distinct "
+          "sentences")
+    print(f"I6 scripts    {m['I6']['verified']} of {m['I6']['of']} VERIFIED, "
+          f"{m['I6']['mutants_rejected']} mutants rejected")
+    print(f"I7 regression moved {m['I7']['moved']}; as declared "
+          f"{len(m['I7']['moved_as_declared'])}; earlier declared cases moved "
+          f"{m['I7']['earlier_moved']}")
+    print(f"I8 before     {m['I8']['said_before']} of {m['I8']['cases']} said")
+    print(f"I9 limits x{m['I9']['scale']}  {len(m['I9']['changed'])} of "
+          f"{m['I9']['answers']} answers changed; "
+          f"{m['I9']['limit_refusals_still_refused']} of 2 limit refusals "
+          "still refused")
+    d = report["differential"]
+    print(f"post hoc      differential battery: {d['imperative_answers']} "
+          f"imperative answers of {d['programs']} programs, {d['wrong']} "
+          "wrong")
+    print("met      " + ", ".join(report["met"]))
+    print("not met  " + (", ".join(report["not_met"]) or "none"))
+    return 0
+
+
+def _third_sort(args) -> int:
+    """The third sort (Phase 94): strings, tuples and ranges in the reverse
+    grammar with count-first literals, and the dialect widened to string
+    methods, lists and dicts -- T1-T6 and D1-D4 against the marks declared in
+    ``studies/THIRD_SORT_STUDY.md`` before any code."""
+    from .runtime import third_sort_report as tr
+    report = tr.third_sort_report(run_scripts=not args.no_scripts)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    m = report["marks"]
+    print(f"T1 say       {m['T1']['right']} of {m['T1']['cases']} sentences "
+          f"and values as declared")
+    print(f"T2 refusals  {m['T2']['right']} of {m['T2']['refusals']} by name; "
+          f"{m['T2']['unreadable']} of {m['T2']['read_refusals']} sentences "
+          "UNREADABLE")
+    b = m["T3"]["battery"]
+    print(f"T3 read back {m['T3']['read_back']['right']} of "
+          f"{m['T3']['read_back']['of']}; battery {b['read_back']} of "
+          f"{b['terms']} terms, {b['distinct_sentences']} distinct sentences")
+    print(f"T4 scripts   {m['T4']['verified']} of {m['T4']['scripts']} "
+          f"VERIFIED, {m['T4']['caught']} of {m['T4']['mutants']} mutants "
+          "rejected")
+    print(f"T5 dialect   {m['T5']['agree']} of {m['T5']['declared']} programs "
+          f"inside and agreeing; outside {', '.join(m['T5']['outside'])}")
+    print(f"T6 earlier   {m['T6']['cases']} say cases, moved "
+          f"{', '.join(m['T6']['moved']) or 'none'}; W2 inside "
+          f"{m['T6']['w2_inside']}")
+    d1 = m["D1"]
+    print(f"D1 values    {d1['right']} of {d1['total']} equal CPython "
+          f"(strings {d1['string']['right']}, lists {d1['list']['right']}, "
+          f"dicts {d1['dict']['right']})")
+    print(f"D2 refusals  {m['D2']['right']} of {m['D2']['refusals']} by name; "
+          f"{m['D2']['superseded_answered']} of {m['D2']['superseded']} "
+          f"superseded answered; Phase 64 kept {m['D2']['phase64_kept']} of "
+          f"{m['D2']['phase64_in_force']}")
+    print(f"D3 scripts   {m['D3']['verified']} VERIFIED, {m['D3']['caught']} "
+          "mutants rejected")
+    print(f"D4 earlier   {len(m['D4']['values_moved'])} of "
+          f"{m['D4']['values']} Phase 64 values moved; battery "
+          f"{m['D4']['battery_wrong']} wrong of {m['D4']['battery_answered']} "
+          "answered")
+    print(f"met {', '.join(report['met'])}; not met "
+          f"{', '.join(report['not_met']) or 'none'}")
+    return 0 if not report["not_met"] else 1
+
+
+def _register_world(args) -> int:
+    """The register against the world (Phase 93): every element row, in the
+    three fields an outside source holds, compared with the frozen CIAAW and
+    NIST tables and never written; and the completion gate's nested holdout
+    -- R1-R7 against the marks declared in
+    ``studies/REGISTER_WORLD_STUDY.md`` before any code."""
+    from .runtime import register_world_report as rr
+    report = rr.register_world_report()
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    w = report["world"]
+    for source in w["sources"]:
+        print(f"source   {source['file']}: {source['rows']} rows, "
+              f"retrieved {source['retrieved']}, sha256 "
+              f"{source['raw_sha256'][:16]}...")
+    for field, counts in w["counts"].items():
+        shown = ", ".join(f"{k} {v}" for k, v in counts.items() if v)
+        print(f"{field:<24} {shown}")
+    for field, rows in w["discrepant"].items():
+        if rows:
+            print(f"discrepant {field}: {', '.join(rows)}")
+    m = w["molecules"]
+    print(f"molecules {m['rows']}: " + ", ".join(
+        f"{k} {v}" for k, v in m["counts"].items() if v))
+    q = report["questions"]
+    print(f"questions {q['met']} of {q['cases']} as declared, wrong "
+          f"{q['wrong']}")
+    a = report["audit"]
+    print(f"audit    {a['caught']} of {a['injected']} injected errors "
+          f"caught; {a['flagged']} of {a['honest']} world values flagged")
+    e = report["earlier"]
+    print(f"earlier  {e['correct']} of {e['cases']} interval questions "
+          f"correct; moved {', '.join(e['moved']) or 'none'}")
+    g = report["gate"]
+    print(f"gate     demoted {', '.join(g['outcome']['demoted']) or 'none'};"
+          f" narrowed " + (", ".join(f"{k} to the {v}" for k, v in
+                                    g["outcome"]["narrowed"].items())
+                           or "none")
+          + f"; estimated {g['first_gate_estimated']} -> "
+          f"{g['coverage']['estimated']} ({g['lost_cells']} lost)")
+    print("marks    " + ", ".join(f"{k} {'met' if v else 'MISSED'}"
+                                  for k, v in report["marks"].items()
+                                  if v is not None))
+    return 0
+
+
+def _typed_operators(args) -> int:
+    """Typed operators (Phase 90): real, reactive and apparent power and the
+    power factor from phasors and the power triangle, the dot against the
+    cross product, T1-T7 against the marks declared in
+    ``studies/TYPED_OPERATORS_STUDY.md`` before any code."""
+    from .runtime import typed_operators_report as tr
+    report = tr.typed_operators_report(scripts=not args.no_scripts,
+                                       route=not args.no_route)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    for key, g in report["groups"].items():
+        print(f"{key:<8} {g['met']} of {g['cases']} as declared, wrong "
+              f"{len(g['wrong'])}; through the router as declared "
+              f"{g['routed_before']} before and {g['routed_after']} now")
+    c = report["control"]
+    print(f"control  naive answers {c['naive_answers']}, wrongly "
+          f"{c['naive_wrong']} (" + ", ".join(f"{i} as {v}" for i, v in
+                                              c["wrong_ids"]) + ")")
+    e = report["earlier"]
+    print(f"earlier  {len(e['read'])} of {e['strings']} earlier questions "
+          f"read by the typed reader")
+    s = report["scripts"]
+    if s:
+        print(f"scripts  {s['verified']} of {s['scripts']} verified; "
+              f"mutations caught {s['caught']} of {s['mutants']}")
+    k = report["census"]
+    print(f"census   {k['phasor_pairs']} phasor pairs, "
+          f"{k['phasor_violations']} violations; {k['vector_pairs']} vector "
+          f"pairs, {k['vector_violations']} violations")
+    print("marks    " + " ".join(f"{m}={'met' if v else ('-' if v is None else 'NOT MET')}"
+                                 for m, v in report["marks"].items()))
+    return 0 if all(v is not False for v in report["marks"].values()) else 1
+
+
+def _planner_loop(args) -> int:
+    """The loop through the planner (Phase 88): ``derive``, ``ask`` and
+    ``solve`` as dialect values, programs whose control flow is the loop,
+    and questions about a Python expression through a frame, W1-W7 against
+    the marks declared in ``studies/PLANNER_LOOP_STUDY.md`` before any
+    code."""
+    from .runtime import planner_loop_report as lr
+    report = lr.planner_loop_report(scripts=not args.no_scripts)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    for key in ("derive", "ask", "solve", "loop", "frames"):
+        r = report[key]
+        print(f"{key:<12} {r['met']} of {r['cases']} as declared, wrong "
+              f"{r['wrong']}; the machine answered "
+              f"{r['machine_answered_before']} before and "
+              f"{r['machine_answers_now']} now")
+    b = report["bridge_off"]
+    print(f"bridge off   {b['answered']} of {b['bridge_cases']} bridge cases "
+          f"answered; {b['refused_by_name']} refused by name "
+          f"({b['unavailable']} BRIDGE_UNAVAILABLE)")
+    c = report["census"]
+    print(f"census       {len(c['moved'])} of {c['questions']} earlier "
+          f"questions change surface")
+    e = report["earlier"]
+    print(f"earlier      dialect values moved {len(e['python_values_moved'])}"
+          f", refusals moved {len(e['python_refusals_moved'])}, battery "
+          f"wrong {e['battery_wrong']} of {e['battery_total']}; stepwise "
+          f"earlier rounds held: {e['stepwise_earlier_held']}")
+    m = report["machine"]
+    print(f"machine      {m['answered_now']} of {m['answer_cases']} ANSWER "
+          f"cases answered through the router (before: "
+          f"{m['answered_before']})")
+    g = report["paraphrases"]
+    print(f"item 9       the router answers {g['answered']} of "
+          f"{g['questions']} English paraphrases of the loop programs")
+    if "scripts" in report:
+        s = report["scripts"]
+        print(f"scripts      {s['verified']} of {s['programs']} verified, "
+              f"{s['sub_scripts']} sub-answer scripts re-run")
         for kind, n in s["mutants"].items():
             print(f"  mutation {kind:<10} caught {s['caught'][kind]} of {n}")
     return 0
@@ -2332,6 +2711,23 @@ def _parser() -> argparse.ArgumentParser:
                            "(Phase 86, about two minutes)")
     soft.set_defaults(handler=_rate_posterior)
 
+    matrix = sub.add_parser(
+        "contract-matrix",
+        help="candidate P's two contract changes tested four ways: control, "
+             "upper-credible rule, session-marginal confidence, both "
+             "(Phase 89, about two minutes)")
+    matrix.add_argument("--json", action="store_true")
+    matrix.set_defaults(handler=_contract_matrix)
+
+    qsb = sub.add_parser(
+        "question-set-b",
+        help="the two outside question sets through the router: Set B "
+             "scored, Outside O1's Capability Failure Matrix, candidate P on "
+             "the framed questions (Phase 89, about two minutes)")
+    qsb.add_argument("--json", action="store_true")
+    qsb.add_argument("--no-variants", action="store_true")
+    qsb.set_defaults(handler=_question_set_b)
+
     triage = sub.add_parser(
         "law-triage",
         help="the 106 unresolved knowledge-base laws, one fate each under "
@@ -2396,6 +2792,17 @@ def _parser() -> argparse.ArgumentParser:
                         help="skip running the column-3 scripts (mark H6)")
     steps4.set_defaults(handler=_stepwise_four)
 
+    steps5 = sub.add_parser(
+        "stepwise-five",
+        help="the stepwise planner, round five: fold frames generated from "
+             "a declaration, and order statistics, superlatives, bounds, "
+             "classes, prefixes and molecule comparatives as entries in it, "
+             "against the marks of the declared-frames study")
+    steps5.add_argument("--json", action="store_true")
+    steps5.add_argument("--no-scripts", action="store_true",
+                        help="skip running the column-3 scripts (mark D7)")
+    steps5.set_defaults(handler=_stepwise_five)
+
     kinds = sub.add_parser(
         "measurands",
         help="kinds of quantity: special units kept to their kind, "
@@ -2416,6 +2823,69 @@ def _parser() -> argparse.ArgumentParser:
     mreg.add_argument("--no-scripts", action="store_true",
                       help="skip running the column-3 scripts (mark R6)")
     mreg.set_defaults(handler=_measurand_register)
+
+    loop = sub.add_parser(
+        "planner-loop",
+        help="the loop through the planner: derive, ask and solve as dialect "
+             "values, programs whose control flow is the loop, and questions "
+             "about a Python expression through a frame, against the marks "
+             "of the planner-loop study")
+    loop.add_argument("--json", action="store_true")
+    loop.add_argument("--no-scripts", action="store_true",
+                      help="skip running the column-3 scripts (mark W5)")
+    loop.set_defaults(handler=_planner_loop)
+
+    disc = sub.add_parser(
+        "discourse-state",
+        help="discourse state: a tie carried as a column, the fourth shape "
+             "of follow-up and follow-ups bound on every surface, against "
+             "the marks of the discourse-state study")
+    disc.add_argument("--json", action="store_true")
+    disc.add_argument("--no-census", action="store_true",
+                      help="skip the shape census over the earlier corpora "
+                           "(mark D8)")
+    disc.set_defaults(handler=_discourse_state)
+
+    imp = sub.add_parser(
+        "imperative",
+        help="the imperative grammar: programs with state (assignment, "
+             "loops, branches, functions, match) in the reverse grammar, "
+             "against the marks of the imperative-grammar study")
+    imp.add_argument("--json", action="store_true")
+    imp.add_argument("--no-scripts", action="store_true",
+                     help="skip running the column-3 scripts (I6)")
+    imp.set_defaults(handler=_imperative)
+
+    third = sub.add_parser(
+        "third-sort",
+        help="the third sort: strings, tuples and ranges in the reverse "
+             "grammar, and the dialect widened to string methods, lists and "
+             "dicts, against the marks of the third-sort study")
+    third.add_argument("--json", action="store_true")
+    third.add_argument("--no-scripts", action="store_true",
+                       help="skip running the column-3 scripts (T4, D3)")
+    third.set_defaults(handler=_third_sort)
+
+    world = sub.add_parser(
+        "register-world",
+        help="the register against the world: every element row against the "
+             "frozen CIAAW and NIST tables, never written, and the completion "
+             "gate's nested holdout, against the marks of the register-world "
+             "study")
+    world.add_argument("--json", action="store_true")
+    world.set_defaults(handler=_register_world)
+
+    typed = sub.add_parser(
+        "typed-operators",
+        help="typed operators: real, reactive and apparent power, the power "
+             "factor, and the dot against the cross product, against the "
+             "marks of the typed-operators study")
+    typed.add_argument("--json", action="store_true")
+    typed.add_argument("--no-scripts", action="store_true",
+                       help="skip running the column-3 scripts (mark T6)")
+    typed.add_argument("--no-route", action="store_true",
+                       help="skip routing every case before and after")
+    typed.set_defaults(handler=_typed_operators)
 
     fork = sub.add_parser(
         "carried-fork",

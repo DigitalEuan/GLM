@@ -40,7 +40,9 @@ from dataclasses import dataclass, field
 from fractions import Fraction
 from typing import Dict, List, Optional, Sequence, Tuple
 
+from . import python_containers as pcn
 from . import python_substrate as ps
+from .python_containers import View
 from .python_substrate import PythonRefusal
 
 __all__ = [
@@ -53,19 +55,27 @@ __all__ = [
 BUILTINS: Tuple[str, ...] = (
     "len", "abs", "sum", "max", "min", "divmod", "pow", "ord", "chr",
     "tuple", "frozenset", "range", "Fraction", "int", "bool", "unit",
+    # Phase 94 (studies/THIRD_SORT_STUDY.md): lists as immutable snapshots.
+    "list", "sorted",
     "classify", "golay_encode", "hamming", "ds_bits", "plane",
     "nearest", "resolve", "agree", "resolve_unsure",
     "decode_confidence", "agree_confidence",
     "resolve_at", "agree_at", "resolve_floor", "agree_floor",
     "decode_soft", "decode_soft_floor", "agree_soft",
+    # Phase 88 (studies/PLANNER_LOOP_STUDY.md): the rest of the machine as
+    # values -- a derivation over the wheels, a stepwise question, a reverse
+    # solve.  Each is answered through the runtime's bridge, or refused
+    # BRIDGE_UNAVAILABLE when there is none.
+    "derive", "ask", "solve",
 )
 FLOAT_NAMES = ("float", "complex")
 NONDETERMINISTIC_NAMES = ("hash", "id", "input", "globals", "locals", "vars",
                           "dir")
 NONDETERMINISTIC_MODULES = ("random", "time", "secrets", "os", "uuid",
                             "datetime", "sys")
-MUTABLE_NODES = (ast.List, ast.Dict, ast.Set, ast.ListComp, ast.SetComp,
-                 ast.DictComp)
+#: Phase 94 admits list and dict displays as immutable snapshots; a set
+#: display and every comprehension stay refused.
+MUTABLE_NODES = (ast.Set, ast.ListComp, ast.SetComp, ast.DictComp)
 
 MAX_STEPS = 4000
 MAX_COST = 200_000
@@ -105,7 +115,7 @@ class _Module:
 @dataclass(frozen=True)
 class _Method:
     attr: str
-    receiver: int
+    receiver: object
 
 
 class _Return(Exception):
@@ -147,6 +157,13 @@ def literal(v) -> str:
     if isinstance(v, tuple):
         inner = ", ".join(literal(x) for x in v)
         return f"({inner},)" if len(v) == 1 else f"({inner})"
+    if isinstance(v, list):
+        return "[" + ", ".join(literal(x) for x in v) + "]"
+    if isinstance(v, dict):
+        return "{" + ", ".join(f"{literal(k)}: {literal(x)}"
+                               for k, x in v.items()) + "}"
+    if isinstance(v, View):
+        return f"{literal(dict(v.pairs))}.{v.kind}()"
     if isinstance(v, frozenset):
         if not v:
             return "frozenset()"
@@ -232,7 +249,14 @@ class Evaluator:
     """Runs one program exactly, recording a :class:`Step` per operation."""
 
     def __init__(self, max_steps: int = MAX_STEPS,
-                 max_cost: int = MAX_COST) -> None:
+                 max_cost: int = MAX_COST, bridge=None) -> None:
+        self.bridge = bridge
+        #: Phase 89: every read the program's plain readings and soft
+        #: builtins have seen, in call order -- the session the
+        #: session-marginal confidence reads the rate off.
+        self.session_reads: List[int] = []
+        self.bridge_records: List[Dict[str, object]] = []
+        self._bridge_seen: Dict[str, object] = {}
         self.max_steps = max_steps
         self.max_cost = max_cost
         self.steps: List[Step] = []
@@ -276,6 +300,10 @@ class Evaluator:
         if isinstance(value, (_Function, _Builtin, _Module, _Method)):
             raise PythonRefusal("UNSUPPORTED", "a function is not a value "
                                                "the dialect returns")
+        if isinstance(value, View):
+            raise PythonRefusal("UNSUPPORTED", "a dict view is not a value "
+                                "the dialect returns; turn it into a list or "
+                                "a tuple")
         return value
 
     def exec_block(self, stmts: Sequence[ast.stmt], env: Dict) -> None:
@@ -296,6 +324,11 @@ class Evaluator:
                 raise PythonRefusal("MUTABLE_CONTAINER",
                                     "only names are rebound in place")
             old = self.lookup(s.target.id, env)
+            if isinstance(old, (list, dict)):
+                raise PythonRefusal("MUTABLE_CONTAINER", "an augmented "
+                                    "assignment to a list or a dict changes "
+                                    "it in place, through every alias; write "
+                                    "the new value out")
             self.bind(s.target, self.binop(s.op, old, self.eval(s.value, env)),
                       env)
         elif isinstance(s, ast.If):
@@ -368,6 +401,12 @@ class Evaluator:
             for t, v in zip(target.elts, items):
                 self.bind(t, v, env)
         else:
+            if isinstance(target, ast.Subscript):
+                held = self.eval(target.value, env)
+                if isinstance(held, (list, dict)):
+                    raise PythonRefusal("MUTABLE_CONTAINER", "an item "
+                                        "assignment changes a list or a dict "
+                                        "in place; build a new one instead")
             raise self.error("TypeError", "object does not support item "
                                           "assignment (every value here is "
                                           "immutable)")
@@ -419,7 +458,7 @@ class Evaluator:
                     return True
             return False
         if isinstance(p, ast.MatchSequence):
-            if not isinstance(subject, (tuple, range)):
+            if not isinstance(subject, (tuple, range, list)):
                 return False
             items = list(subject)
             stars = [k for k, q in enumerate(p.patterns)
@@ -462,6 +501,17 @@ class Evaluator:
         if isinstance(node, ast.Tuple):
             out = tuple(self.eval(e, env) for e in node.elts)
             return self.carrier_tuple(out)
+        if isinstance(node, ast.List):
+            if any(isinstance(e, ast.Starred) for e in node.elts):
+                raise PythonRefusal("UNSUPPORTED", "starred list items")
+            return pcn.carrier_list([self.eval(e, env) for e in node.elts])
+        if isinstance(node, ast.Dict):
+            if any(k is None for k in node.keys):
+                raise PythonRefusal("UNSUPPORTED", "** unpacking in a dict "
+                                                   "display")
+            pairs = [(self.eval(k, env), self.eval(v, env))
+                     for k, v in zip(node.keys, node.values)]
+            return pcn.build_dict(self, pairs)
         if isinstance(node, ast.BinOp):
             return self.binop(node.op, self.eval(node.left, env),
                               self.eval(node.right, env))
@@ -517,8 +567,10 @@ class Evaluator:
             return v
         if _is_num(v):
             return v != 0
-        if isinstance(v, (str, tuple, range)):
+        if isinstance(v, (str, tuple, range, list, dict)):
             return len(v) > 0
+        if isinstance(v, View):
+            return len(v.pairs) > 0
         if isinstance(v, frozenset):
             return bool(ps.mask_of_frozenset(v))
         if v is None:
@@ -538,6 +590,17 @@ class Evaluator:
             a, _Function) and not isinstance(b, _Function) else None
         if isinstance(a, Quantity) or isinstance(b, Quantity):
             return self.quantity_op(name, sym, a, b)
+        if isinstance(a, View) or isinstance(b, View) or (
+                name == "BitOr" and isinstance(a, dict)
+                and isinstance(b, dict)):
+            raise PythonRefusal("UNSUPPORTED", "set algebra on dict views "
+                                "and the dict merge operator")
+        if isinstance(a, (list, dict)) or isinstance(b, (list, dict)):
+            if name in ("Add", "Mult") and not (isinstance(a, dict)
+                                                or isinstance(b, dict)):
+                return self.sequence_op(name, sym, a, b, expr)
+            raise self.error("TypeError", f"unsupported operand types for "
+                             f"{sym}: {_tname(a)} and {_tname(b)}")
         if name in ("BitAnd", "BitOr", "BitXor") or (
                 name == "Sub" and isinstance(a, frozenset)):
             return self.bitwise(name, sym, a, b)
@@ -622,23 +685,26 @@ class Evaluator:
         return value
 
     def sequence_op(self, name: str, sym: str, a, b, expr: str):
-        if name == "Add" and type(a) is type(b) and isinstance(a, (str, tuple)):
-            value = a + b if isinstance(a, str) else self.carrier_tuple(
-                tuple(a) + tuple(b))
+        if name == "Add" and type(a) is type(b) and isinstance(
+                a, (str, tuple, list)):
+            value = a + b if isinstance(a, str) else (
+                pcn.carrier_list(a + b) if isinstance(a, list)
+                else self.carrier_tuple(tuple(a) + tuple(b)))
             self.step("rational", f"Concatenate: the second block follows the "
                       f"first ({len(a)} + {len(b)} positions).",
                       f"|u ⧺ v| = {len(a)} + {len(b)} = {len(value)}",
                       f"same({expr}, {literal(value)})")
             return value
         if name == "Mult":
-            seq, n = (a, b) if isinstance(a, (str, tuple)) else (b, a)
-            if not (_is_int(n) and isinstance(seq, (str, tuple))):
+            seq, n = (a, b) if isinstance(a, (str, tuple, list)) else (b, a)
+            if not (_is_int(n) and isinstance(seq, (str, tuple, list))):
                 raise self.error("TypeError", f"can't multiply sequence by "
                                  f"{_tname(n)}")
             n = max(int(n), 0)
             self.tick(n * len(seq))
-            value = seq * n if isinstance(seq, str) else self.carrier_tuple(
-                tuple(seq) * n)
+            value = seq * n if isinstance(seq, str) else (
+                pcn.carrier_list(seq * n) if isinstance(seq, list)
+                else self.carrier_tuple(tuple(seq) * n))
             self.step("rational", f"Repeat a block of {len(seq)} positions "
                       f"{n} times.", f"|u^{n}| = {n} · {len(seq)} = "
                       f"{len(value)}", f"same({expr}, {literal(value)})")
@@ -749,6 +815,19 @@ class Evaluator:
         if isinstance(a, tuple) and isinstance(b, tuple):
             return len(a) == len(b) and all(self.equal(x, y)
                                             for x, y in zip(a, b))
+        if isinstance(a, list) and isinstance(b, list):
+            return len(a) == len(b) and all(self.equal(x, y)
+                                            for x, y in zip(a, b))
+        if isinstance(a, dict) and isinstance(b, dict):
+            if len(a) != len(b):
+                return False
+            for k, v in a.items():
+                found, w = pcn.dict_lookup(self, b, k)
+                if not found or not self.equal(v, w):
+                    return False
+            return True
+        if isinstance(a, View) or isinstance(b, View):
+            raise PythonRefusal("UNSUPPORTED", "comparing dict views")
         if isinstance(a, frozenset) and isinstance(b, frozenset):
             return ps.mask_of_frozenset(a) == ps.mask_of_frozenset(b)
         if isinstance(a, range) and isinstance(b, range):
@@ -769,11 +848,14 @@ class Evaluator:
                 if ord(x) != ord(y):
                     return 1 if ord(x) > ord(y) else -1
             return (len(a) > len(b)) - (len(a) < len(b))
-        if isinstance(a, tuple) and isinstance(b, tuple):
+        if (isinstance(a, tuple) and isinstance(b, tuple)) or (
+                isinstance(a, list) and isinstance(b, list)):
             for x, y in zip(a, b):
                 if not self.equal(x, y):
                     return self.order(x, y)
             return (len(a) > len(b)) - (len(a) < len(b))
+        if isinstance(a, View) or isinstance(b, View):
+            raise PythonRefusal("UNSUPPORTED", "ordering dict views")
         raise self.error("TypeError", f"'<' not supported between "
                          f"{_tname(a)} and {_tname(b)}")
 
@@ -820,8 +902,16 @@ class Evaluator:
             n, m = len(container), len(item)
             self.tick(max(n - m + 1, 1))
             return any(container[i:i + m] == item for i in range(n - m + 1))
-        if isinstance(container, tuple):
+        if isinstance(container, (tuple, list)):
             return any(self.equal(item, x) for x in container)
+        if isinstance(container, dict):
+            return pcn.dict_lookup(self, container, item)[0]
+        if isinstance(container, View):
+            if container.kind == "values":
+                return any(self.equal(item, x) for x in container.items_())
+            if container.kind == "keys":
+                return pcn.dict_lookup(self, dict(container.pairs), item)[0]
+            raise PythonRefusal("UNSUPPORTED", "membership in an items view")
         if isinstance(container, frozenset):
             if _is_num(item) and Fraction(item).denominator == 1 \
                     and 0 <= int(item) < ps.WIDTH:
@@ -846,6 +936,12 @@ class Evaluator:
         if isinstance(v, (tuple, str, range)):
             self.tick(0)
             return v
+        if isinstance(v, list):
+            return tuple(v)
+        if isinstance(v, dict):
+            return tuple(v)
+        if isinstance(v, View):
+            return tuple(v.items_())
         if isinstance(v, frozenset):
             raise PythonRefusal("ORDER_UNDEFINED", "CPython does not promise "
                                 "an iteration order for a set; sort it into "
@@ -869,13 +965,14 @@ class Evaluator:
                           f"same({literal(v)}[{self._sl(parts)}], "
                           f"{literal(value)})")
                 return value
-            if not isinstance(v, (str, tuple)):
+            if not isinstance(v, (str, tuple, list)):
                 raise self.error("TypeError", f"{_tname(v)} object is not "
                                               "subscriptable")
             idx = ps.slice_indices(len(v), *parts)
             self.tick(len(idx))
-            value = "".join(v[i] for i in idx) if isinstance(v, str) else \
-                tuple(v[i] for i in idx)
+            value = "".join(v[i] for i in idx) if isinstance(v, str) else (
+                [v[i] for i in idx] if isinstance(v, list)
+                else tuple(v[i] for i in idx))
             start = idx[0] if idx else "∅"
             step = 1 if parts[2] is None else parts[2]
             cells = ", ".join("c%d(%d,%d)" % ps.cell_of_position(i)
@@ -891,7 +988,15 @@ class Evaluator:
                       f"{literal(value)})")
             return value
         i = self.eval(s, env)
-        if isinstance(v, (str, tuple, range)):
+        if isinstance(v, dict):
+            found, value = pcn.dict_lookup(self, v, i)
+            if not found:
+                raise self.error("KeyError", literal(i))
+            self.step("rational", "Read the value held at one key.",
+                      f"d[{_m(i)}] = {_m(value)}",
+                      f"same({literal(v)}[{literal(i)}], {literal(value)})")
+            return value
+        if isinstance(v, (str, tuple, range, list)):
             if not _is_int(i):
                 raise self.error("TypeError", "indices must be integers")
             n = len(v)
@@ -927,6 +1032,14 @@ class Evaluator:
             return value
         if _is_int(v) and attr in ("bit_length", "bit_count"):
             return _Method(attr, int(v))
+        if isinstance(v, str) and attr in pcn.STR_METHODS:
+            return _Method(attr, v)
+        if isinstance(v, list) and attr in (pcn.LIST_METHODS
+                                            + pcn.LIST_MUTATORS):
+            return _Method(attr, v)
+        if isinstance(v, dict) and attr in (pcn.DICT_METHODS
+                                            + pcn.DICT_MUTATORS):
+            return _Method(attr, v)
         raise PythonRefusal("UNSUPPORTED", f"attribute .{attr} of a "
                                            f"{_tname(v)}")
 
@@ -935,6 +1048,13 @@ class Evaluator:
         if node.keywords or any(isinstance(a, ast.Starred) for a in node.args):
             raise PythonRefusal("UNSUPPORTED", "keyword or starred arguments")
         f = self.eval(node.func, env)
+        if isinstance(f, _Method) and not _is_int(f.receiver):
+            margs = [self.eval(a, env) for a in node.args]
+            if isinstance(f.receiver, str):
+                return pcn.str_method(self, f.attr, f.receiver, margs)
+            if isinstance(f.receiver, list):
+                return pcn.list_method(self, f.attr, f.receiver, margs)
+            return pcn.dict_method(self, f.attr, f.receiver, margs)
         if isinstance(f, _Method):
             attr, n = f.attr, f.receiver
             if node.args:
@@ -1000,8 +1120,11 @@ class Evaluator:
         if isinstance(v, frozenset):
             value = len(ps.frozenset_of_mask(ps.mask_of_frozenset(v)))
             math = f"wt(mask) = {value}"
-        elif isinstance(v, (str, tuple, range)):
+        elif isinstance(v, (str, tuple, range, list, dict)):
             value = len(v)
+            math = f"|v| = {value}"
+        elif isinstance(v, View):
+            value = len(v.pairs)
             math = f"|v| = {value}"
         else:
             raise self.error("TypeError", f"object of type {_tname(v)} has "
@@ -1157,6 +1280,50 @@ class Evaluator:
                   "coordinates, in order.", f"(q_0 … q_{max(len(value)-1, 0)})"
                   f" = {literal(value)}",
                   f"same(tuple({literal(args[0])}), {literal(value)})")
+        return value
+
+    def b_list(self, *args):
+        self._need(args, 0, 1, "list")
+        if not args:
+            return []
+        if isinstance(args[0], frozenset):
+            raise PythonRefusal("ORDER_UNDEFINED", "CPython does not promise "
+                                "an iteration order for a set; use sorted()")
+        value = pcn.carrier_list(list(self.iterate(args[0])))
+        self.tick(len(value))
+        self.step("rational", f"Snapshot {len(value)} values as a list, in "
+                  "order.", f"[q_0 … q_{max(len(value) - 1, 0)}] = "
+                  f"{literal(value)}", f"same(list({literal(args[0])}), "
+                  f"{literal(value)})")
+        return value
+
+    def b_sorted(self, *args):
+        self._need(args, 1, 1, "sorted")
+        v = args[0]
+        if isinstance(v, frozenset):
+            items = list(ps.frozenset_of_mask(ps.mask_of_frozenset(v)))
+            items.sort()
+        else:
+            items = list(self.iterate(v))
+        pcn.carrier_list(items)
+
+        def merge(xs):
+            if len(xs) <= 1:
+                return list(xs)
+            mid = len(xs) // 2
+            left, right = merge(xs[:mid]), merge(xs[mid:])
+            out = []
+            while left and right:
+                self.tick()
+                if self.order(right[0], left[0]) < 0:
+                    out.append(right.pop(0))
+                else:
+                    out.append(left.pop(0))
+            return out + left + right
+        value = merge(items)
+        self.step("rational", f"Merge-sort {len(value)} values by exact "
+                  "comparison (stable).", f"sorted = {literal(value)}",
+                  f"same(sorted({literal(v)}), {literal(value)})")
         return value
 
     def b_frozenset(self, *args):
@@ -1325,7 +1492,14 @@ class Evaluator:
         cases = [self._mask_arg(c) for c in args[1:]]
         r = ps.resolve(subject, cases)
         call = ", ".join(str(x) for x in [subject] + cases)
+        history = list(self.session_reads)
+        self.session_reads.append(subject)
         if r.verdict == "resolved":
+            from .decoder_confidence import decode_confidence as _dc
+            lang, math, check = self._session_note(
+                lambda p: _dc(subject, p, list(cases))["confidence"],
+                history, [subject],
+                f"session_resolve_conf({literal(tuple(history))}, {call})")
             gone = len(r.candidates) - len(r.live)
             basis = ("inside the packing radius, the decoder's own answer"
                      if r.coset_weight <= 3 else
@@ -1335,9 +1509,10 @@ class Evaluator:
                      "case")
             self.step("substrate", f"Carry the fork of the read (coset weight "
                       f"{r.coset_weight}) and prune it to the declared cases: "
-                      f"{basis}. Case {r.index} survives alone.",
-                      f"N(s) ∩ cases = {{{r.value:#x}}} ⇒ case {r.index}",
-                      f"same(resolve({call}), {r.index})")
+                      f"{basis}. Case {r.index} survives alone.{lang}",
+                      f"N(s) ∩ cases = {{{r.value:#x}}} ⇒ case {r.index}"
+                      f"{math}",
+                      f"same(_resolve0({call}), {r.index}) and {check}")
             return r.index
         self._fork_refusal(r, "the declared cases",
                            f"len([c for c in nearest({subject}) if c in "
@@ -1349,14 +1524,20 @@ class Evaluator:
         reads = [self._mask_arg(x) for x in args]
         r = ps.agree(reads)
         call = ", ".join(str(x) for x in reads)
+        history = list(self.session_reads)
+        self.session_reads.extend(reads)
         if r.verdict == "resolved":
+            from .decoder_confidence import agree_confidence as _ac
+            lang, math, check = self._session_note(
+                lambda p: _ac(list(reads), p)["confidence"], history, reads,
+                f"session_agree_conf({literal(tuple(history))}, {call})")
             self.step("substrate", f"Carry the fork of each of the "
                       f"{len(reads)} read(s) of one carrier and keep only the "
                       "codewords every read allows (the second-reading "
                       "stage): one survives, and since the carrier lies in "
-                      "every fork it is the carrier.",
-                      f"⋂ N(r_i) = {{{r.value:#x}}}",
-                      f"same(agree({call}), {r.value})")
+                      f"every fork it is the carrier.{lang}",
+                      f"⋂ N(r_i) = {{{r.value:#x}}}{math}",
+                      f"same(_agree0({call}), {r.value}) and {check}")
             return r.value
         self._fork_refusal(r, "every read",
                            f"len(set.intersection(*[set(nearest(r)) for r in "
@@ -1547,31 +1728,63 @@ class Evaluator:
                   f"same(agree_floor({call}), {r['value']})")
         return r["value"]
 
+    # -- the session-marginal confidence (Phase 89) -------------------------
+    def _session_note(self, conf_at, history, carrier, call: str
+                      ) -> Tuple[str, str, str]:
+        """What a plain reading prints beside its answer: the confidence at
+        the upper end of the credible set of rates read off the session's
+        earlier reads and this call's, or why none is stated.  Returns
+        ``(language suffix, mathematics suffix, check)``."""
+        sc = ps.session_confidence(conf_at, history, carrier)
+        if sc is None:
+            return (" No confidence is stated: the session's reads put the "
+                    "credible set of rates at the guard rate 1/5.",
+                    "; conf_session: none (credible set reaches the guard)",
+                    f"same({call}, None)")
+        return (f" Session-marginal confidence {_decimal7(sc['confidence'])}"
+                f" ({sc['band']}), read at rate {sc['rate']}, the upper end "
+                f"of the credible set over {len(history)} earlier session "
+                f"read(s) and this call's.",
+                f"; conf_session = P(c | reads, p = {sc['rate']}) = "
+                f"{sc['confidence']}",
+                f"same({call}, {literal(sc['confidence'])})")
+
     # -- the rate posterior (studies/RATE_POSTERIOR_STUDY.md) ----------------
     def _soft_language(self, r, what: str) -> Tuple[str, str]:
         post = ", ".join(f"{p}: {_decimal7(x)}"
                          for p, x in zip(ps.SOFT_GRID, r["posterior"]))
-        language = (f"{what}; read the bit-flip rate off the call's own "
-                    f"{r['reads']} read(s) over the declared grid (uniform "
-                    f"prior; most probable {', '.join(str(p) for p in r['most_probable'])}), "
-                    f"and weigh the confidence at each rate by its posterior: "
-                    f"{r['value']:#x} is the one sent with marginal probability "
+        if r.get("rule") == "upper":
+            how = (f"answer with the confidence at the upper end of the "
+                   f"credible set (posterior at least 1/100), rate "
+                   f"{r['rate']}")
+            sumline = f"P(c | reads, p = {r['rate']}) = {r['confidence']}"
+        else:
+            how = "weigh the confidence at each rate by its posterior"
+            sumline = (f"Σ_p P(p | reads) · P(c | reads, p) = "
+                       f"{r['confidence']}")
+        language = (f"{what}; read the bit-flip rate off the session's "
+                    f"{r.get('session_reads', 0)} earlier read(s) and the "
+                    f"call's own {r['reads']} read(s) over the declared grid "
+                    f"(uniform prior; most probable "
+                    f"{', '.join(str(p) for p in r['most_probable'])}), and "
+                    f"{how}: {r['value']:#x} is the one sent with probability "
                     f"{_decimal7(r['confidence'])} — {r['band']}.")
         math = (f"P(p | reads) ∝ Π_obs (1/4096) Σ_c p^D(c) q^(n−D(c)) = "
-                f"{{{post}}}; Σ_p P(p | reads) · P(c | reads, p) = "
-                f"{r['confidence']}")
+                f"{{{post}}}; {sumline}")
         return language, math
 
     def b_decode_soft(self, *args):
         if len(args) < 1:
             raise self.error("TypeError", "decode_soft() needs a subject")
         reads = [self._mask_arg(x) for x in args]
-        r = ps.decode_soft(reads[0], reads[1:])
-        call = ", ".join(str(x) for x in reads)
+        history = list(self.session_reads)
+        self.session_reads.extend(reads)
+        r = ps.decode_soft(reads[0], reads[1:], history)
+        call = ", ".join([literal(tuple(history))] + [str(x) for x in reads])
         language, math = self._soft_language(
             r, f"Decode the subject (coset weight {r['coset_weight']})")
         self.step("substrate", language, math,
-                  f"same(decode_soft({call}), ({r['value']}, "
+                  f"same(decode_soft_h({call}), ({r['value']}, "
                   f"{literal(r['confidence'])}))")
         return self.carrier_tuple((r["value"], r["confidence"]))
 
@@ -1581,17 +1794,21 @@ class Evaluator:
                                           "and a subject")
         floor = self._rate_arg(args[0], "decode_soft_floor")
         reads = [self._mask_arg(x) for x in args[1:]]
-        at = ", ".join(str(x) for x in reads)
-        call = ", ".join([literal(floor)] + [str(x) for x in reads])
+        history = list(self.session_reads)
+        self.session_reads.extend(reads)
+        at = ", ".join([literal(tuple(history))] + [str(x) for x in reads])
+        call = ", ".join([literal(tuple(history)), literal(floor)]
+                         + [str(x) for x in reads])
         try:
-            r = ps.decode_soft_floor(floor, reads[0], reads[1:])
+            r = ps.decode_soft_floor(floor, reads[0], reads[1:], history)
         except PythonRefusal as exc:
-            self._floor_refusal(exc, f"decode_soft({at})[1] < {literal(floor)}")
+            self._floor_refusal(exc,
+                                f"decode_soft_h({at})[1] < {literal(floor)}")
         language, math = self._soft_language(
             r, f"Decode the subject (coset weight {r['coset_weight']})")
         self.step("substrate", language[:-1] + f", at or above the declared "
                   f"floor {floor}.", math + f" ≥ {floor}",
-                  f"same(decode_soft_floor({call}), {r['value']})")
+                  f"same(decode_soft_floor_h({call}), {r['value']})")
         return r["value"]
 
     def b_agree_soft(self, *args):
@@ -1599,15 +1816,102 @@ class Evaluator:
             raise self.error("TypeError", "agree_soft() needs two reads of one "
                                           "carrier")
         reads = [self._mask_arg(x) for x in args]
-        r = ps.agree_soft(reads[0], reads[1], reads[2:])
-        call = ", ".join(str(x) for x in reads)
+        history = list(self.session_reads)
+        self.session_reads.extend(reads)
+        r = ps.agree_soft(reads[0], reads[1], reads[2:], history)
+        call = ", ".join([literal(tuple(history))] + [str(x) for x in reads])
         language, math = self._soft_language(
             r, "Carry the forks of the two reads of one carrier and keep the "
                "one codeword both allow")
         self.step("substrate", language, math,
-                  f"same(agree_soft({call}), ({r['value']}, "
+                  f"same(agree_soft_h({call}), ({r['value']}, "
                   f"{literal(r['confidence'])}))")
         return self.carrier_tuple((r["value"], r["confidence"]))
+
+    # -- the bridge (Phase 88) ----------------------------------------------
+    def _bridge_text(self, v, what: str) -> str:
+        if isinstance(v, Quantity):
+            return self._bridge_text(v.value, what) + " " + v.name
+        if isinstance(v, bool) or not _is_num(v):
+            raise self.error("TypeError", f"{what} must be an int, a Fraction "
+                                          f"or a unit(...), not {_tname(v)}")
+        v = Fraction(v)
+        return (str(v.numerator) if v.denominator == 1
+                else f"{v.numerator}/{v.denominator}")
+
+    def _pairs(self, pairs, name: str) -> List[Tuple[str, object]]:
+        out = []
+        for p in pairs:
+            if not (isinstance(p, tuple) and len(p) == 2
+                    and isinstance(p[0], str)):
+                raise self.error("TypeError", f"{name}() takes (name, value) "
+                                              f"pairs, not {_m(p)}")
+            out.append(p)
+        return out
+
+    def _bridged(self, op: str, question: str, meta: Dict[str, object],
+                 call: str):
+        key = op + "|" + question
+        if self.bridge is None:
+            raise PythonRefusal("BRIDGE_UNAVAILABLE",
+                                f"{op}() needs the runtime's bridge to the "
+                                "rest of the machine; the dialect alone has "
+                                "none")
+        if key in self._bridge_seen:
+            value, record = self._bridge_seen[key]
+        else:
+            self.tick(50)
+            value, record = self.bridge.call(op, question, meta)
+            self._bridge_seen[key] = (value, record)
+            self.bridge_records.append(record)
+        surface = {"derive": "the stepwise planner's goal mode",
+                   "ask": "the stepwise planner",
+                   "solve": "the reverse surface"}[op]
+        self.step("bridge", f"Ask {surface}: “{question}”; it answers "
+                  f"{_m(value)} with its own checked record "
+                  f"({record.get('steps', 0)} steps).",
+                  f"{op}[{question}] = {_m(value)}   "
+                  f"[{record.get('summary', '')}]",
+                  f"same({call}, {literal(value)})")
+        return value
+
+    def b_derive(self, *args):
+        if len(args) < 2 or not isinstance(args[0], str):
+            raise self.error("TypeError", "derive() takes a target name and "
+                                          "at least one (name, value) pair")
+        pairs = self._pairs(args[1:], "derive")
+        parts = [f"{n} = {self._bridge_text(v, 'a given')}" for n, v in pairs]
+        body = (", ".join(parts[:-1]) + " and " + parts[-1]
+                if len(parts) > 1 else parts[0])
+        question = f"given {body}, what is the {args[0]}"
+        call = "derive(" + ", ".join(literal(a) for a in args) + ")"
+        return self._bridged("derive", question, {"target": args[0]}, call)
+
+    def b_ask(self, *args):
+        self._need(args, 1, 1, "ask")
+        if not isinstance(args[0], str):
+            raise self.error("TypeError", f"ask() takes a question, not "
+                                          f"{_tname(args[0])}")
+        return self._bridged("ask", args[0].strip(), {},
+                             f"ask({literal(args[0])})")
+
+    def b_solve(self, *args):
+        import re
+        if (len(args) < 2 or not isinstance(args[0], str)
+                or not isinstance(args[1], str)):
+            raise self.error("TypeError", "solve() takes a variable, an "
+                                          "equation and (name, value) pairs")
+        var, equation = args[0], args[1]
+        for n, v in self._pairs(args[2:], "solve"):
+            t = self._bridge_text(v, "a binding")
+            if not re.fullmatch("[0-9]+", t):
+                t = "(" + t + ")"
+            equation = re.sub("(?<![A-Za-z0-9_])" + re.escape(n)
+                              + "(?![A-Za-z0-9_])", t, equation)
+        question = f"solve for {var}: {equation}"
+        call = "solve(" + ", ".join(literal(a) for a in args) + ")"
+        return self._bridged("solve", question,
+                             {"var": var, "equation": equation}, call)
 
     def b_ds_bits(self, *args):
         self._need(args, 2, 2, "ds_bits")
@@ -1661,6 +1965,7 @@ class SpeechPayload:
     column1: List[str] = field(default_factory=list)
     column2: List[str] = field(default_factory=list)
     column3: str = ""
+    bridge: List[Dict[str, object]] = field(default_factory=list)
 
     def as_dict(self) -> Dict[str, object]:
         return {"source": self.source, "answered": self.answered,
@@ -1689,9 +1994,12 @@ def _carrier_line(v) -> Optional[str]:
     return None
 
 
-def speak(source: str, max_steps: int = MAX_STEPS) -> SpeechPayload:
-    """Evaluate ``source`` and build its three columns."""
-    ev = Evaluator(max_steps=max_steps)
+def speak(source: str, max_steps: int = MAX_STEPS,
+          bridge=None) -> SpeechPayload:
+    """Evaluate ``source`` and build its three columns.  ``bridge`` is the
+    runtime's bridge to the rest of the machine (``derive``, ``ask``,
+    ``solve``); without it those builtins refuse ``BRIDGE_UNAVAILABLE``."""
+    ev = Evaluator(max_steps=max_steps, bridge=bridge)
     payload = SpeechPayload(source=source, answered=False)
     try:
         value = ev.run(source)
@@ -1711,6 +2019,7 @@ def speak(source: str, max_steps: int = MAX_STEPS) -> SpeechPayload:
         payload.refusal, payload.reason = "PYTHON_ERROR", f"SyntaxError: {exc}"
         payload.error_class = "SyntaxError"
     payload.steps, payload.cost = list(ev.steps), ev.cost
+    payload.bridge = list(ev.bridge_records)
     try:
         tree = ast.parse(source)
         if tree.body and isinstance(tree.body[-1], ast.Expr):
@@ -1772,10 +2081,115 @@ def check(n, ok):
 '''
 
 
-def render_script(p: SpeechPayload, claimed: Optional[str] = None) -> str:
-    """The column-3 script; ``claimed`` overrides the final claim."""
+_SCRIPT_BRIDGE = r"""
+# -- the bridge (Phase 88): every answer another surface gave the program is
+# re-checked by that surface's own column-3 script, in a fresh interpreter,
+# and bound to the program only after it is.
+import json as _json
+
+BRIDGE = _json.loads(@@BRIDGE@@)
+
+
+def _run_sub(text):
+    import os
+    import subprocess
+    import tempfile
+    fd, path = tempfile.mkstemp(suffix=".py", prefix="glm_sub_")
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as fh:
+            fh.write(text)
+        proc = subprocess.run([sys.executable, "-I", path],
+                              capture_output=True, text=True, timeout=600,
+                              env={})
+        return proc.returncode == 0 and "VERIFIED True" in proc.stdout
+    finally:
+        os.unlink(path)
+
+
+def _data_line(rec):
+    line = ("\nDATA = json.loads("
+            + repr(_json.dumps(rec["data"], sort_keys=True)) + ")\n")
+    return line in rec["script"]
+
+
+def _sides(equation, var, x):
+    import ast as _ast
+    tree = _ast.parse(equation, mode="eval")
+    body = tree.body
+    if not (isinstance(body, _ast.Compare) and len(body.ops) == 1
+            and isinstance(body.ops[0], _ast.Eq)):
+        raise ValueError("not one equation")
+
+    class _Lift(_ast.NodeTransformer):
+        def visit_Constant(self, node):
+            if isinstance(node.value, int) and not isinstance(node.value,
+                                                              bool):
+                return _ast.Call(_ast.Name("Fraction", _ast.Load()),
+                                 [node], [])
+            return node
+
+    env = {"Fraction": Fraction, "abs": abs, var: x}
+    out = []
+    for side in (body.left, body.comparators[0]):
+        e = _ast.fix_missing_locations(_ast.Expression(_Lift().visit(side)))
+        out.append(eval(compile(e, "<eq>", "eval"), {"__builtins__": {}},
+                        env))
+    return out[0] - out[1]
+
+
+def _chain_value(last):
+    words = {"prime": True, "not prime": False, "True": True,
+             "False": False}
+    if last in words:
+        return words[last]
+    try:
+        return Fraction(last)
+    except ValueError:
+        return last
+
+
+def _bound(rec):
+    v = eval(rec["value"], {"Fraction": Fraction, "__builtins__": {}})
+    if rec["kind"] == "chain":
+        return (rec["data"]["question"] == rec["question"]
+                and same(v, _chain_value(rec["data"]["steps"][-1]["value"])))
+    cert = rec["data"]["certificate"]
+    second = cert.get("second") or []
+    if (cert.get("kind") != "statement" or len(second) != 4
+            or second[:3] != ["rel", "=", ["var", rec["var"]]]
+            or second[3][0] != "lit"):
+        return False
+    if rec["question"] != "solve for " + rec["var"] + ": " + rec["equation"]:
+        return False
+    f0, f1, f2 = (_sides(rec["equation"], rec["var"], Fraction(k))
+                  for k in (0, 1, 2))
+    return (same(v, Fraction(second[3][1]))
+            and _sides(rec["equation"], rec["var"], v) == 0
+            and f1 != f0 and f2 - 2 * f1 + f0 == 0)
+
+"""
+
+
+def render_script(p: SpeechPayload, claimed: Optional[str] = None,
+                  bridge: Optional[List[Dict[str, object]]] = None) -> str:
+    """The column-3 script; ``claimed`` overrides the final claim and
+    ``bridge`` the bridge records (the mutations use both)."""
+    import json
+    records = p.bridge if bridge is None else bridge
     lines = [_SCRIPT_HEAD, ps.PRELUDE, _SCRIPT_CHECK % {"source": p.source}]
     n = 0
+    if records:
+        lines.append(_SCRIPT_BRIDGE.replace(
+            "@@BRIDGE@@", repr(json.dumps(records, sort_keys=True))))
+        for i, _rec in enumerate(records):
+            lines.append(f"_rec = BRIDGE[{i}]")
+            lines.append(f"check({n + 1}, _data_line(_rec))")
+            lines.append(f"check({n + 2}, _run_sub(_rec['script']))")
+            lines.append(f"check({n + 3}, _bound(_rec))")
+            lines.append("_BRIDGE[_rec['op'] + '|' + _rec['question']] = "
+                         "eval(_rec['value'], {'Fraction': Fraction, "
+                         "'__builtins__': {}})")
+            n += 3
     for s in p.steps:
         n += 1
         lines.append(f"check({n}, {s.check})")
@@ -1814,6 +2228,10 @@ def mutated_script(p: SpeechPayload) -> str:
         claim = repr(v + "!")
     elif isinstance(v, tuple):
         claim = literal(v + (0,))
+    elif isinstance(v, list):
+        claim = literal(v + [0])
+    elif isinstance(v, dict):
+        claim = literal({**v, "mutant!": 0})
     elif isinstance(v, frozenset):
         claim = literal(v ^ frozenset({0}))
     else:

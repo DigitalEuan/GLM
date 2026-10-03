@@ -1,0 +1,606 @@
+{
+ "before": {
+  "def-fact": "NOT_IN_FRAGMENT",
+  "def-harmonic": "NOT_IN_FRAGMENT",
+  "if-else": "NOT_IN_FRAGMENT",
+  "imp-choice": "NOT_IN_FRAGMENT",
+  "imp-def": "NOT_IN_FRAGMENT",
+  "imp-for-sum": "NOT_IN_FRAGMENT",
+  "imp-if-else": "NOT_IN_FRAGMENT",
+  "imp-if-no-else": "NOT_IN_FRAGMENT",
+  "imp-match": "NOT_IN_FRAGMENT",
+  "imp-nested-loop": "NOT_IN_FRAGMENT",
+  "imp-recursive-fib": "NOT_IN_FRAGMENT",
+  "imp-reserved-name": "NOT_IN_FRAGMENT",
+  "imp-string-loop": "NOT_IN_FRAGMENT",
+  "imp-swap": "NOT_IN_FRAGMENT",
+  "imp-two-params": "NOT_IN_FRAGMENT",
+  "imp-while-halve": "NOT_IN_FRAGMENT",
+  "loop-acc": "NOT_IN_FRAGMENT",
+  "match-guard": "NOT_IN_FRAGMENT",
+  "match-literal": "NOT_IN_FRAGMENT",
+  "p-ackermann": "NOT_IN_FRAGMENT",
+  "p-basel-partial": "NOT_IN_FRAGMENT",
+  "p-binary-digits": "NOT_IN_FRAGMENT",
+  "p-choice-nested": "NOT_IN_FRAGMENT",
+  "p-collatz": "NOT_IN_FRAGMENT",
+  "p-count-vowels": "NOT_IN_FRAGMENT",
+  "p-digit-sum": "NOT_IN_FRAGMENT",
+  "p-elif": "NOT_IN_FRAGMENT",
+  "p-every-other": "NOT_IN_FRAGMENT",
+  "p-fact-iter": "NOT_IN_FRAGMENT",
+  "p-fib-iter": "NOT_IN_FRAGMENT",
+  "p-gcd-func": "NOT_IN_FRAGMENT",
+  "p-match-seq": "NOT_IN_FRAGMENT",
+  "p-match-str": "NOT_IN_FRAGMENT",
+  "p-max-loop": "NOT_IN_FRAGMENT",
+  "p-power-mod": "NOT_IN_FRAGMENT",
+  "p-reverse-string": "NOT_IN_FRAGMENT",
+  "p-subtract-loop": "NOT_IN_FRAGMENT",
+  "p-sum-of-squares": "NOT_IN_FRAGMENT",
+  "p-triangle": "NOT_IN_FRAGMENT",
+  "p-tuple-build": "NOT_IN_FRAGMENT",
+  "r-arity": "NOT_IN_FRAGMENT",
+  "r-break": "NOT_IN_FRAGMENT",
+  "r-depth": "NOT_IN_FRAGMENT",
+  "r-div-zero": "NOT_IN_FRAGMENT",
+  "r-index": "NOT_IN_FRAGMENT",
+  "r-method-call": "NOT_IN_FRAGMENT",
+  "r-nested-def": "NOT_IN_FRAGMENT",
+  "r-no-result": "NOT_IN_FRAGMENT",
+  "r-return-top": "NOT_IN_FRAGMENT",
+  "r-step-limit": "NOT_IN_FRAGMENT",
+  "r-sum-of-strings": "NOT_IN_FRAGMENT",
+  "r-truthy-string": "NOT_IN_FRAGMENT",
+  "r-unbound-local": "NOT_IN_FRAGMENT",
+  "r-unbound-loop": "NOT_IN_FRAGMENT",
+  "while-gcd": "NOT_IN_FRAGMENT"
+ },
+ "phase64_say": {
+  "refusal:deep-hole": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "refusal:float-call": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "refusal:float-frac-pow": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "refusal:float-fraction-of-float": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "refusal:float-in-loop": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "refusal:float-literal": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "refusal:float-neg-pow": [
+   "SAID",
+   "the power of two with exponent negative one",
+   ""
+  ],
+  "refusal:float-truediv": [
+   "SAID",
+   "the quotient of seven and two",
+   ""
+  ],
+  "refusal:fs-outside": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "refusal:fs-outside-range": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "refusal:list-literal": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "refusal:nondet-hash": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "refusal:nondet-id": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "refusal:nondet-random": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "refusal:nondet-time": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "refusal:runaway-loop": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "refusal:scale-mismatch": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "refusal:scale-undeclared": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "refusal:set-iteration": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "refusal:shift-negative": [
+   "NEGATIVE_SHIFT",
+   "",
+   "NEGATIVE_SHIFT"
+  ],
+  "refusal:step-zero": [
+   "ZERO_STEP",
+   "",
+   "ZERO_STEP"
+  ],
+  "refusal:tuple-overflow": [
+   "SAID",
+   "the entries of the range from zero to twenty-five by one",
+   ""
+  ],
+  "refusal:uncorrectable": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "refusal:unsupported-attribute": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "refusal:unsupported-lambda": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "refusal:zero-division": [
+   "DIVISION_BY_ZERO",
+   "",
+   "DIVISION_BY_ZERO"
+  ],
+  "value:bit-and": [
+   "SAID",
+   "the bitwise and of fifty-four and twenty-seven",
+   ""
+  ],
+  "value:bit-mixed-bool": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:bit-neg": [
+   "SAID",
+   "the bitwise and of negative six and two hundred fifty-five",
+   ""
+  ],
+  "value:bit-neg-or": [
+   "SAID",
+   "the bitwise or of negative one hundred and thirty-seven",
+   ""
+  ],
+  "value:bit-not": [
+   "SAID",
+   "the complement of ten",
+   ""
+  ],
+  "value:bit-or": [
+   "SAID",
+   "the bitwise or of fifty-four and twenty-seven",
+   ""
+  ],
+  "value:bit-wide": [
+   "SAID",
+   "the exclusive or of the sum of the power of two with exponent fifty and twelve thousand three hundred forty-five and the sum of the power of two with exponent forty and nine hundred ninety-nine",
+   ""
+  ],
+  "value:bit-xor": [
+   "SAID",
+   "the exclusive or of eleven million two hundred fifty-nine thousand three hundred seventy-five and one million one hundred ninety-three thousand forty-six",
+   ""
+  ],
+  "value:bool-and": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:bool-arith": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:classify-corrected": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:classify-exact": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:classify-match": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:cmp-mixed": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:comprehension-free": [
+   "TRUE",
+   "the product of the length of the string of three characters small a, small b, small c and eight equals twenty-four",
+   ""
+  ],
+  "value:def-fact": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:def-harmonic": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:ds-bits": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:ds-sum": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:frac-abs": [
+   "SAID",
+   "the absolute value of the fraction negative five over seven",
+   ""
+  ],
+  "value:frac-add": [
+   "SAID",
+   "the sum of the fraction one over three and the fraction one over six",
+   ""
+  ],
+  "value:frac-chain": [
+   "TRUE",
+   "the fraction one over three is less than the fraction one over two, and the fraction one over two is at most the fraction one over two, and the fraction one over two does not equal one",
+   ""
+  ],
+  "value:frac-compare": [
+   "TRUE",
+   "the fraction one over three is less than the fraction seventeen over fifty",
+   ""
+  ],
+  "value:frac-div": [
+   "SAID",
+   "the quotient of the fraction seven over three and the fraction fourteen over nine",
+   ""
+  ],
+  "value:frac-floor": [
+   "SAID",
+   "the floor quotient of the fraction negative seven over two and one",
+   ""
+  ],
+  "value:frac-int-div": [
+   "SAID",
+   "the quotient of five and two",
+   ""
+  ],
+  "value:frac-max": [
+   "SAID",
+   "the maximum of the fraction two over seven and the maximum of the fraction three over ten and the fraction five over seventeen",
+   ""
+  ],
+  "value:frac-mixed": [
+   "SAID",
+   "the product of the sum of the fraction one over three and two and three",
+   ""
+  ],
+  "value:frac-mod": [
+   "SAID",
+   "the remainder of the fraction seven over two and the fraction four over three",
+   ""
+  ],
+  "value:frac-neg-pow": [
+   "SAID",
+   "the power of the fraction two over three with exponent negative two",
+   ""
+  ],
+  "value:frac-parts": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:frac-pow": [
+   "SAID",
+   "the power of the fraction two over three with exponent five",
+   ""
+  ],
+  "value:frac-string": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:frac-sum": [
+   "SAID",
+   "the sum of the sum of the fraction one over two and the fraction one over three and the fraction one over six",
+   ""
+  ],
+  "value:fs-and": [
+   "SAID",
+   "the intersection of the mask of four positions one, two, three, four and the mask of three positions three, four, five",
+   ""
+  ],
+  "value:fs-diff": [
+   "SAID",
+   "the set difference of the mask of three positions one, two, three and the mask of one position two",
+   ""
+  ],
+  "value:fs-hamming": [
+   "SAID",
+   "the distance between the mask of three positions one, two, three and the mask of two positions three, four",
+   ""
+  ],
+  "value:fs-len": [
+   "SAID",
+   "the size of the mask of three positions seven, eight, nine",
+   ""
+  ],
+  "value:fs-member": [
+   "TRUE",
+   "five is in the mask of three positions one, five, nine",
+   ""
+  ],
+  "value:fs-or": [
+   "SAID",
+   "the union of the mask of two positions zero, twenty-three and the mask of one position five",
+   ""
+  ],
+  "value:fs-subset": [
+   "TRUE",
+   "the mask of two positions one, two is contained in the mask of three positions one, two, three",
+   ""
+  ],
+  "value:fs-xor": [
+   "SAID",
+   "the symmetric difference of the mask of three positions one, two, three and the mask of three positions two, three, four",
+   ""
+  ],
+  "value:if-else": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:int-big": [
+   "SAID",
+   "the sum of the power of two with exponent one hundred and one",
+   ""
+  ],
+  "value:int-bit-count": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:int-bit-length": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:int-divmod": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:int-floordiv-neg": [
+   "SAID",
+   "the floor quotient of negative seventeen and five",
+   ""
+  ],
+  "value:int-mod-neg": [
+   "SAID",
+   "the remainder of negative seventeen and five",
+   ""
+  ],
+  "value:int-plane": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:int-plane-neg": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:int-pow-mod": [
+   "SAID",
+   "the remainder of the power of three with exponent two hundred and one million three",
+   ""
+  ],
+  "value:int-shift-left": [
+   "SAID",
+   "the left shift of thirty-seven and five",
+   ""
+  ],
+  "value:int-shift-neg": [
+   "SAID",
+   "the right shift of negative one thousand and three",
+   ""
+  ],
+  "value:int-shift-right": [
+   "SAID",
+   "the right shift of one thousand and three",
+   ""
+  ],
+  "value:loop-acc": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:match-guard": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:match-literal": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:range-index": [
+   "SAID",
+   "the item of the range from zero to one thousand by seven at fifty",
+   ""
+  ],
+  "value:range-len": [
+   "SAID",
+   "the length of the range from ten to negative ten by negative three",
+   ""
+  ],
+  "value:range-sum": [
+   "SAID",
+   "the total of the range from three to one hundred by seven",
+   ""
+  ],
+  "value:range-tuple": [
+   "SAID",
+   "the entries of the range from five to zero by negative two",
+   ""
+  ],
+  "value:str-chr": [
+   "SAID",
+   "the concatenation of the character of nine hundred fifty-five and the character of sixty-five",
+   ""
+  ],
+  "value:str-clamp": [
+   "SAID",
+   "the slice of the string of five characters small s, small h, small o, small r, small t from one to one hundred by one",
+   ""
+  ],
+  "value:str-compare": [
+   "TRUE",
+   "the string of five characters small a, small p, small p, small l, small e is less than the string of seven characters small a, small p, small r, small i, small c, small o, small t",
+   ""
+  ],
+  "value:str-concat": [
+   "SAID",
+   "the concatenation of the concatenation of the string of three characters capital m, capital o, capital g and the string of one character code point forty-five and the repetition of the string of four characters small c, small u, small b, small e times two",
+   ""
+  ],
+  "value:str-in": [
+   "TRUE",
+   "the string of seven characters small l, small a, small t, small t, small i, small c, small e is in the string of seventeen characters small t, small h, small e, space, capital l, small e, small e, small c, small h, space, small l, small a, small t, small t, small i, small c, small e",
+   ""
+  ],
+  "value:str-index": [
+   "SAID",
+   "the item of the string of five characters capital g, small o, small l, small a, small y at negative one",
+   ""
+  ],
+  "value:str-len": [
+   "SAID",
+   "the length of the string of seventeen characters capital m, small a, small t, small h, small i, small e, small u, space, small g, small r, small o, small u, small p, space, capital m, digit two, digit four",
+   ""
+  ],
+  "value:str-long-slice": [
+   "SAID",
+   "the slice of the repetition of the string of ten characters digit zero, digit one, digit two, digit three, digit four, digit five, digit six, digit seven, digit eight, digit nine times five from seven to forty-five by six",
+   ""
+  ],
+  "value:str-neg-slice": [
+   "SAID",
+   "the slice of the string of ten characters small a, small b, small c, small d, small e, small f, small g, small h, small i, small j from negative two to one by negative three",
+   ""
+  ],
+  "value:str-ord": [
+   "SAID",
+   "the code point of the string of one character code point nine hundred twenty-three",
+   ""
+  ],
+  "value:str-reverse": [
+   "SAID",
+   "the slice of the string of thirteen characters capital l, small e, small e, small c, small h, space, small l, small a, small t, small t, small i, small c, small e from the default to the default by negative one",
+   ""
+  ],
+  "value:str-slice": [
+   "SAID",
+   "the slice of the string of twenty-six characters small g, small e, small o, small m, small e, small t, small r, small i, small c, space, small l, small a, small n, small g, small u, small a, small g, small e, space, small m, small a, small c, small h, small i, small n, small e from two to twenty by three",
+   ""
+  ],
+  "value:tuple-compare": [
+   "TRUE",
+   "the tuple of three entries one, two, three is less than the tuple of three entries one, two, four",
+   ""
+  ],
+  "value:tuple-concat": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:tuple-len": [
+   "SAID",
+   "the length of the entries of the range from zero to twenty-four by one",
+   ""
+  ],
+  "value:tuple-nested": [
+   "SAID",
+   "the item of the item of the item of the tuple of two entries the tuple of two entries one, two, the tuple of two entries three, the tuple of two entries four, five at one at one at zero",
+   ""
+  ],
+  "value:tuple-slice": [
+   "SAID",
+   "the slice of the tuple of eight entries one, two, three, four, five, six, seven, eight from one to the default by two",
+   ""
+  ],
+  "value:tuple-unpack": [
+   "SAID",
+   "let a be three. let b be the fraction one over four. the result is the product of a and b.",
+   ""
+  ],
+  "value:unit-add": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:unit-compare": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ],
+  "value:while-gcd": [
+   "NOT_IN_FRAGMENT",
+   "",
+   "NOT_IN_FRAGMENT"
+  ]
+ }
+}

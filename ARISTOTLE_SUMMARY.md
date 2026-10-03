@@ -1,3 +1,263 @@
+# Summary of changes for run 34565c74-162b-414c-b465-37f587eedd3e
+I completed Phase 95: the imperative grammar, which is the second half of round 7 in `STATUS.md` §3.4. With it, the GLM can now say, read back, run and certify Python programs that keep state: assignment (including assigning several names at once), `for` loops over ranges, strings and tuples, `while` loops, branches, functions with `return`, and structural `match`.
+
+**What was built**
+- `overlay/glm_universal/reasoning/reverse_tct_imp.py` holds the grammar, the reader, an exact interpreter and the column-3 script. Column 1 includes a trace of each assignment, and a fresh interpreter replays it.
+- `say:` only uses the new grammar when the three earlier sorts refuse a program.
+- Supporting pieces: `runtime/imperative_report.py`, the `tools imperative` subcommand and `tests/test_imperative_grammar.py` (19 tests).
+- The declared cases (`evaluation/imperative_cases.py`) and the frozen baseline were committed before any code.
+
+**Measured results** (8 of 9 declared marks met)
+- 13 of 13 declared sentences were reproduced word for word, all 7 Phase 64 programs with state now work, and 21 of 21 further programs were answered. Each answer equals what CPython gives.
+- 41 of 41 column-3 scripts verify, and all 41 deliberately broken copies are rejected.
+- A battery of 1,412 programs reads back with 1,412 distinct sentences.
+- Raising both the step and call-depth limits tenfold changes 0 of 41 answers.
+- **Mark I7 (no regression) is not met as declared.** One Phase 68 refusal (`a, b = b, 1`) is now refused as `UNBOUND` (`b` is read before it is assigned) instead of `NOT_IN_FRAGMENT`. It is still a refusal, just a more specific one. This is recorded in the study, the paper and `STATUS.md`. The older tests now list it as a recorded later change rather than hiding it.
+
+**Defects found and fixed**
+- True division `/` used to return an exact fraction where CPython gives a float. It is now refused.
+- A loop over a mask was refused under the wrong name. It is now `ORDER_UNDEFINED`.
+- During sign-off, the source audit flagged a `random` import in a core module, which the project's rules don't allow. I replaced it with an integer-only generator.
+- That new generator exposed a crash: repeated squaring produced a number too large for `say:` to put into words. Values are now capped. A number with a numerator or denominator over 4096 bits, or a string over 4096 characters, is refused by name as `SIZE_LIMIT`. I re-measured all nine marks after this fix and none changed.
+- An extra battery of 600 generated programs, written after the main measurement, gave 450 imperative answers with 0 wrong.
+
+**Lean**
+`overlay/glm_lean/RequestProject/GLM/ImperativeGrammar.lean` builds with no `sorry` and only the standard axioms. It proves:
+- distinct programs get distinct encodings (`encT_injective`);
+- running the interpreter longer never changes an answer (`exec_mono`, `exec_agree`);
+- Euclid's loop computes the gcd (`euclidLoop_gcd`), with 1071, 462 giving 21;
+- the factorial loop computes \(n!\) (`factFuel_eq`);
+- the accumulated sum telescopes to \(n/(n+1)\) (`sum_telescope`), with 10 terms giving 10/11.
+
+These are in the Properties table as proved.
+
+**Documentation and sign-off**
+- New study: `studies/IMPERATIVE_GRAMMAR_STUDY.md`.
+- `studies/GLM_ACADEMIC_PAPER.md` now has a §19.11 section covering Phases 94–95, plus updated status, capabilities, open items and appendices. `STATUS.md`, `MASTER_PLAN.md`, `WHITEBOARD.md` and the READMEs are updated too.
+- I regenerated the counts that are quoted throughout the documents (now 141 test files, 166 Lean files, 4,493 declarations).
+- The round was closed with the full sign-off: 141 of 141 test files and 6 of 6 checks pass, including the Lean build. The document checks report everything current. All work is committed.
+
+The next step, per `STATUS.md` §3.4 item 8, is round 8: second readings.
+
+# Summary of changes for run ad1d5f48-2c48-4da4-ac54-03bd1d290bf8
+I finished closing Phase 93 and then completed Phase 94, the first half of round 7 in the order of work in `STATUS.md` §3.4 ("the third sort"). Everything is committed. The full test suite was re-run and signed off at the end: 140 of 140 test files and 6 of 6 instruments pass. The document checks report the corpus current, and the Lean project builds with no `sorry`.
+
+**What Phase 94 adds**
+- **Strings, tuples and ranges in the reverse grammar** (`overlay/glm_universal/reasoning/reverse_tct_seq.py`). The grammar can now turn these values into English sentences and read the sentences back. Each character is spelled by name, and every literal states its item count before its items. Slices, item lookup, concatenation, repetition, `len`, `sum`, `ord`, `chr`, `min` and `max` are supported. The new sort has its own exact evaluator and its own verification script (column 3). `say:` only falls through to the new sort when the earlier grammar refuses a question, so no earlier answer can change.
+  - Example: `sum(range(1, 11))` is said as "the total of the range from one to eleven by one", which equals fifty-five.
+- **A wider Python dialect** (`reasoning/python_containers.py`, plus changes to `python_speech.py`):
+  - String methods are computed over code points.
+  - Methods that would need Unicode's case or whitespace tables (`upper`, `lower`, `isdigit`, `isalpha`, `split`/`strip` with no argument) work only on ASCII. Above code point 127 they are refused as `OUTSIDE_SUBSTRATE`.
+  - Lists and dicts are treated as fixed snapshots. Any change in place (such as `append`, `update` or item assignment) is refused by name as `MUTABLE_CONTAINER`.
+  - `list` and `sorted` are now available.
+- `python3 -m glm_universal.tools third-sort` recomputes every result. `tests/test_third_sort.py` adds 36 tests.
+
+**Results** (written down before any code, all 10 targets met; details in `studies/THIRD_SORT_STUDY.md`)
+- **Sentences:** 28 of 28 declared cases are said and valued as declared; none were said before the round.
+- **Read-back:** all 1116 terms in the depth-two test battery read back to themselves, and no two share a sentence.
+- **Dialect programs inside the grammar:** 21 of 21.
+- **Dialect values:** 63 of 63 cases match CPython in both type and value (24 string, 23 list, 16 dict); none were answered before.
+- **Verification scripts:** every script verifies, and every deliberately altered copy is rejected.
+- **No regression:**
+  - None of the 83 earlier Python value cases changed.
+  - The comparison battery against CPython has 0 wrong answers out of 2830 answered.
+  - Two earlier refusals are now answered, as declared beforehand. The other 24 refusals are unchanged.
+
+**Proved in Lean** (`overlay/glm_lean/RequestProject/GLM/ThirdSort.lean`, standard axioms only)
+- **Unique readability:** writing a list as its count followed by its items can always be read back. This holds for any item spelling that can itself be read back, so nested literals work too. No two lists share a spelling.
+- **Ranges:** an entry of a range is characterised exactly (membership and length), and the closed form for the sum of a range is proved.
+- **Slices:** CPython's slice indices always stay inside the sequence, for either sign of step. A positive-step slice reads the ceiling of (stop − start) / step items.
+- **ASCII case mapping:** it keeps the length and undoes itself on letters.
+
+Four of these are recorded as proved in the Properties table.
+
+**Changes to existing code and documents**
+- The router's census still counts all 26 original Phase 64 refusal programs. The Python-through-router test now expects 24 refusals, because two of the 26 are now answered.
+- One mutation helper was rewritten to avoid a XOR that the project's XOR-site check would have flagged as unclassified.
+- I updated the stale figures in the documents (test-file, Lean-file and declaration counts, and the iteration-cost table).
+- `STATUS.md`, `MASTER_PLAN.md` (new Phase 94 section) and `WHITEBOARD.md` record the round.
+
+**Not done in this round:** the second half of round 7, M's imperative grammar (sentences for assignment, loops and branches, so that the 7 earlier Python programs with state get sentences). That is where the next round starts.
+
+# Summary of changes for run 366f2b3c-c82b-4cbe-852c-f00eae26eea5
+
+
+## Suggested follow-up
+
+I reached this run’s time limit. Send “continue” to pick up where I left off.
+
+# Summary of changes for run af2e3080-34d3-42ac-8bb6-449a210a606b
+I finished round 5 of the work order in `STATUS.md`, discourse state, recorded as **Phase 92**. All 29 test conversations, written down before any code, came out as declared, with 0 wrong answers. The round-close sign-off passed: 138 of 138 test files and 6 of 6 instruments are signed, the corpus check is current, and the full Lean build (8,190 jobs) succeeds with no `sorry`.
+
+**What changed.** Until now, the conversation layer could only swap a single name into a follow-up, and it refused when a question's top value was shared by several rows (a tie). The new layer is in `overlay/glm_universal/runtime/discourse.py`. It handles the three items queued for round 5:
+- **A tie answered as a column (0b).** When the top value is shared by several rows, a later *it* or *them* refers to all of them. The question is asked of each row separately, and the answer is a list with one answer per row. Before any code, I wrote down what an answer for several rows at once should be (the head of `evaluation/discourse_cases.py`):
+  - If any row has no answer, the whole list is refused (`column-incomplete`), just as missing readings already block a sum or average over a column.
+  - If no row answers at all, the layer looks further back in the conversation instead.
+  - The two rows of a comparison don't count as a tie, so *describe it* after one is still refused as ambiguous.
+- **New kinds of follow-up (D = 0a):**
+  - *the one before that*;
+  - *them*, *both of them*, *each of them* and *all of them*. A plural with only one row to refer to, or *both* with other than two, is refused (`number-mismatch`);
+  - *why?*, which explains the previous turn from what was recorded and computes nothing new.
+- **Follow-ups on every surface (K3).** A follow-up now counts as answerable if any part of the machine answers it, not just the basic session. A text the machine can already answer on its own is answered on its own, so this layer never changes an existing answer.
+- **New command:** `python3 GLM.py --converse "smallest charge in molecule" --converse "what is the molar mass of it" --converse "why?"`. The `-q`, `--ask` and `--steps` options are unchanged.
+
+**Results** (`python3 -m glm_universal.tools discourse-state`):
+- 7 of 7 tie/list cases, 16 of 16 new follow-up cases and 6 of 6 cross-surface cases came out as declared.
+- The old conversation layer gets 0 of the 20 cases that depend on new behaviour right. Licensing through the basic session alone answers 0 of the 5 cross-surface questions. With the new tie behaviour switched off, all 4 tie cases go back to being refused.
+- The old layer's 15 declared follow-ups all keep their results except one, the tie case, whose change was declared in advance.
+- Every one of the 32 list entries matches the answer that row gets when asked on its own.
+- Of 3,056 earlier test strings, 15 contain *them*. The machine refuses all 15 on its own, so no earlier answer changes.
+
+**Lean.** The new file `RequestProject/GLM/DiscourseState.lean` builds with no `sorry` and only standard axioms. It proves:
+- where no turn produced a tie, the new layer gives exactly the old layer's result;
+- a list answer is the full set an earlier turn produced, has at least two rows, and every row answers;
+- a `column-incomplete` refusal means the set has one row that answers and one that doesn't;
+- each list entry is that row asked on its own;
+- *both* always gives exactly two rows or a refusal, and no plural ever binds to a single row;
+- *the one before that* is decided only by turns older than the one *that* refers to;
+- the real test cases, checked by computation.
+
+I added these to the Properties table as proved.
+
+**Documents.** The write-up is `studies/DISCOURSE_STATE_STUDY.md`. `STATUS.md`, `MASTER_PLAN.md` (Phase 92), `WHITEBOARD.md` and the academic paper (§19.9, result 21) are updated. `STATUS.md` now says round 6, *the register against the world*, is where the next round starts. What this round leaves open is in the study's §7: feeding a list into the planner's sums and comparisons, answering over only the rows that have a value, further phrasings, and an outside multi-turn question set. The test cases and the code share an author, so this measures what the declared set reaches, not an independent test.
+
+**Stale counts, fixed as part of the close.** These follow from the Lean files added since Phase 89:
+- the stated declaration and file counts (now 4,416 declarations and 163 Lean files);
+- the iteration-cost table and one number-theory paper;
+- two evaluation answers that depend on how many Lean declarations there are. More declarations raise a sampling step from 10 to 11, which shrinks the query set from 844 to 803. The underlying claims still hold, including the anonymous-register claim, which now sits at 1.78 times chance;
+- one stored measurement, which I re-took.
+
+I had to install `pytest`, which was missing again.
+
+# Summary of changes for run 33b3a92f-8835-49fe-b819-9286e1c213bb
+I finished the round `STATUS.md` named next: round 4 of the order of work, the planner widenings, recorded as Phase 91. Every one of the declared test questions came out as declared, with 0 wrong answers. The full sign-off has run: 137 of 137 test files and 6 of 6 instruments are signed, and the corpus check reports current.
+
+**What changed.** Until now, every widening of the stepwise planner was a frame written by hand. Its fold frames are now generated from one declaration in `overlay/glm_universal/runtime/frame_declarations.py`. The test that this changed nothing: on 638 earlier questions (rounds one to five plus the router's declared sets), the generated reader gives exactly the same readings as the old hand-written readers. With the declaration emptied, it reads none of the fold questions.
+
+**New question types.** These were added as entries in that declaration, not as new code paths:
+- **Order statistics:** the k-th largest or smallest value of a column, and the quartiles. When readings are missing, these are answered as an exact range.
+- **Superlatives and the top k**, such as "the heaviest noble gas" or "the three heaviest alkali metals". A tie is refused (`TOP_K_TIE`), and so is a top k over a column with missing readings.
+- **"What are the bounds on…"** a sum, a mean or a parity count when readings are missing. A sum or mean can only be bounded if its column has a declared physical range. Two ranges are declared, each with its reasoning: Pauling electronegativity from 0 to 3.98, and first ionization energy from 0 to 24.587 eV. Any other column is refused `RANGE_UNDECLARED`.
+- **Counting over present readings only**, such as "how many of the transition metals that have one have an odd year discovered".
+- **Two groups the element table doesn't hold as one class:** "the metals" and "the rare earths".
+- **The twelve remaining exact SI prefixes**, from peta to quetta and femto to quecto.
+- **"Heavier" and "lighter" between molecules**, by molar mass.
+
+**Results**, from `python3 -m glm_universal.tools stepwise-five`:
+- 54 of 54 questions as declared (12 order, 12 superlative, 12 bounds, 6 class, 6 prefix, 6 molecule), plus 2 of 2 follow-ups, with 0 wrong. The previous round's reader answers none of the 54.
+- Through `GLM.py --ask`, the machine answered 5 of the 54 before this round and 41 after.
+- Removing the new entries gives every case its earlier answer back.
+- All 10 range answers were checked against 200 possible fillings of the missing readings each: every result fell inside the range, and both ends were reached.
+- 41 of 41 answer chains re-checked themselves step by step, and every deliberately falsified chain was rejected.
+- The earlier rounds' results still hold. Three earlier refusals now get answers, and these changes were declared before any code was written: two questions about "the metals" and one about exavolts.
+
+**One disagreement inside the machine.** For "which is heavier, water or iron", the planner refuses because the two come from different tables (`TABLE_MISMATCH`). An existing comparison feature in the machine still answers it, as it did before, by treating molar mass and atomic weight as the same unit. I recorded this in the study rather than changing either behaviour.
+
+**Lean.** The new file `RequestProject/GLM/DeclaredFrames.lean` builds with no `sorry` and only the standard axioms. It proves:
+- the parity-count bounds and the bounds on a sum or mean given a declared range, with both ends reached;
+- that the positions the quartiles and the k-th largest read lie inside the column, and that the existing bound for missing readings applies at each of them;
+- why a top k with missing readings can't be answered: a missing reading filled high pushes a present one down the ranking.
+
+**Documents.**
+- The study is `studies/DECLARED_FRAMES_STUDY.md`, written up through §6. Its §6 lists what is still open: comparing across tables, differences between molecules, a register of isotopes (neutron counts), one-sided ranges, and the top k with missing readings.
+- `STATUS.md` now says round 5, discourse state, is where the next round starts. `MASTER_PLAN.md` has the Phase 91 record, `WHITEBOARD.md` is reset, and the academic paper gains §19.8.
+
+**Counts updated because a Lean file and a test file were added.** I updated the stated file and declaration counts, and the iteration-cost table. One earlier claim in the anonymous-register study now holds again, so its recorded miss was removed. The text search, with names replaced, scores 1.74 times chance against the declared limit of 2; it had crossed that limit in Phase 87.
+
+To run the test suite, I had to install `pytest`; it was missing from this environment.
+
+# Summary of changes for run fa5f4e88-d878-4b6c-b305-38bd7849f4c5
+This session finished round 3 of the project's work order, the typed operators (candidate F). It is recorded as **Phase 90**. It also repaired a Lean file left broken by the previous session. Everything is committed, and the Lean library builds with no `sorry` and only standard axioms.
+
+**Phase 90: typed operators**
+- **Test cases:** 43 cases were written down before the work began, along with what would count as success (marks T1–T8). They live in `overlay/glm_universal/evaluation/typed_operator_cases.py`: 22 are phasor cases, 9 are kind cases and 12 are vector cases. The study write-up is `studies/TYPED_OPERATORS_STUDY.md`.
+- **What the new code handles** (`overlay/glm_universal/runtime/typed_operators.py`):
+  - **Complex power:** S = V·conj(I), including through an impedance.
+  - **Power triangle:** solved from any two of its sides.
+  - **Power factor:** reported with whether it is leading or lagging.
+  - **Units:** the watt, the var and the VA each apply only to their own kind of power, so mixing them is refused.
+  - **Vectors:** dot product versus cross product.
+- **Refusals:** it declines to answer when:
+  - the power factor doesn't say leading or lagging;
+  - the triangle's sides don't fit together;
+  - the power factor is outside [0, 1];
+  - two vectors have different lengths.
+- **Checkable answers:** each answer comes with a script that can be checked independently.
+- **Where it plugs in:** the reader is a new question frame, so the normal question router and `GLM.py -q` both use it.
+
+**Results** (all from the project's own test runs):
+- **Accuracy:** all 43 cases come out as declared, with 0 wrong answers.
+- **Through the router:** 0 of the 43 were answered before this round; all 43 are answered now.
+- **Naive baseline:** a simple method that just multiplies quantities together and ignores their type answers 19 of the cases and gets 15 of those wrong.
+- **No side effects:** none of the 2,971 earlier questions is picked up by the new reader.
+- **Checking the answers:** all 43 answer scripts pass the check, and all 29 deliberately corrupted versions are rejected.
+- **Exhaustive search:** a sweep over 2,401 phasor pairs and 7,569 vector pairs found no violations.
+- **Lean proofs:** `overlay/glm_lean/RequestProject/GLM/TypedOperators.lean` has 16 theorems. They cover the power triangle, the power-factor range, impedance power, sign behaviour and why the naive method fails, and the difference between dot and cross products.
+
+**To rerun the round:** `cd overlay; PYTHONPATH=. python3 -m glm_universal.tools typed-operators`.
+
+**Example:** `python3 GLM.py -q "Given apparent power = 500 VA and power factor = 3/5 lagging, what is the reactive power?"` answers 400 var.
+
+**Repaired Lean file:** `QuestionSetBAnswers.lean` (40 theorems), left over from the previous session, did not build. Three proofs were fixed (a z-transform coefficient, the binary symmetric channel capacity value, and water-filling) along with one linter warning. It now builds; the repair is recorded in the Question Set B study, §7, and in `MASTER_PLAN.md`.
+
+**Project records and checks**
+- **Documents updated:** `STATUS.md`, `MASTER_PLAN.md`, `WHITEBOARD.md` and the academic paper (§19.7, result 19). Several stale figures were corrected: 161 Lean files, 4,336 declarations, and the iteration-cost table.
+- **Checks passed:**
+  - the full Lean build (8,188 jobs, up to date);
+  - the corpus check;
+  - the round-close sign-off, which signed 136 of 136 test files and 6 of 6 instruments.
+- **Test suite:** 4,764 tests across 135 of 136 files, plus 17,861 subtests.
+
+**Next:** round 4 of the order, the planner widenings.
+
+# Summary of changes for run 0b209b88-ee52-4092-bc19-a1514f2ad12f
+
+
+## Suggested follow-up
+
+I reached this run’s time limit. Send “continue” to pick up where I left off.
+
+# Summary of changes for run abe04a37-e3f0-4749-a99f-68772da60283
+
+
+## Suggested follow-up
+
+I reached this run’s time limit. Send “continue” to pick up where I left off.
+
+# Summary of changes for run 0b85cd21-8394-40fb-98f1-23df080968f1
+This round (Phase 88) lets one part of the GLM use another part's answer as the input to its next step, which is a loop of reasoning. Before it, every part of the machine answered its question on its own. I also updated `studies/GLM_ACADEMIC_PAPER.md` so it describes the whole system again. Your owner-gated items were left alone, as you asked. The round follows round 2 of the order in `STATUS.md` §3.4 (items K4, I2 and O3 = M3, plus a re-read of item 9).
+
+**What changed in the reasoning**
+- The GLM's Python dialect has three new built-in functions that call the rest of the machine and return exact values:
+  - `derive(target, (name, value), …)` runs the stepwise planner's goal mode.
+  - `ask(question)` asks one stepwise question, such as a register lookup or a comparison.
+  - `solve(var, equation, …)` runs the linear solver.
+- The program's own control flow now does the looping. For example, `while derive("current", ("voltage", 12), ("resistance", r)) >= 1: r = r + 1` answers 13.
+- A fixed set of question patterns (*what does `E` return*, *is `E` true*) now sends a question about a Python expression to the evaluator.
+- The checking script trusts none of these calls. For each one it re-runs that answer's own check in a fresh interpreter and confirms the value belongs to that record. For a solve, it substitutes the value back and shows it is the only root. It then re-runs the whole program under standard Python against the checked values.
+
+**Results** (the 44 test questions and 8 success criteria were committed before any code; `studies/PLANNER_LOOP_STUDY.md`)
+- 44 of 44 test questions came out as declared, with 0 wrong answers, and all 8 criteria were met.
+- Through the main question router, 29 of 29 questions that expect an answer are now answered; before this round it answered 0.
+- With the new functions switched off, 0 of 34 are answered and each is refused with a named reason.
+- 66 of 66 deliberately planted errors (a false value, a false but self-consistent sub-answer, a changed final claim) were caught.
+- Nothing earlier changed: 0 of 530 earlier questions moved, and all earlier results still hold.
+- Item 9 re-read: the same questions asked in plain English are answered by nothing in the machine (0 of 5). That is the gap item 9 asked about, now measured. The supplied reverse-call planner is still not promoted, because it does not reach these questions either.
+
+**Lean proofs**
+- `RequestProject/GLM/PlannerLoop.lean` proves why the check is enough. If the checked values agree with the real answers on every question the program asks, the program gives the same result. It also proves that no answer can rest on a refused call, and that a solved value is the unique root.
+- It builds with no `sorry` and only the standard axioms. Four results are marked proved in the Properties table.
+
+**The paper**
+- New sections cover the retained laws (§18.4), the stepwise planner across its six widening rounds (§19.4), the loop (§19.5), confidence and the error rate (§20.5), native words (§21.2), and the cost and ordering of work (§24.1).
+- Also updated: the integer decision (§19.3), the abstract, five new rows of negative results (§23), measured items 13–18 (§25.3), the refuted claims (§25.4) and the open problems (§25.5).
+- Appendix A now lists all 18 studies it was missing, and Appendix B all 17 missing Lean files.
+
+**Closing the round**
+- `STATUS.md`, `MASTER_PLAN.md`, `WHITEBOARD.md`, the tests README and the iteration-cost table are updated. The next round is round 3, typed operators.
+- The larger Lean development shifted two stored measurements that only quote the corpus. I re-recorded them with notes, and their conclusions are unchanged.
+- The final sign-off passed: 133 of 133 test files and 6 of 6 checks, with the exhaustive cases on. Everything is committed.
+
 # Summary of changes for run 3bfcbd0e-1fe3-443c-b3fe-725815acf8d8
 **Merging and ordering the remaining tasks** (full table in `studies/ROADMAP_STUDY.md`; STATUS §3.4 now starts with this order)
 

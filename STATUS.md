@@ -37,7 +37,203 @@ without recomputing anything by hand. The record of earlier rounds is in
 **Starting a new round? Read [`ITERATE.md`](ITERATE.md), then §3.4, "Named for
 the next round", before anything else.**
 
-**The round just closed (Phase 87) began by reading the open candidates
+**The round just closed (Phase 95) took the second half of round 7 of the
+order, M's imperative grammar** ([`IMPERATIVE_GRAMMAR_STUDY.md`](studies/IMPERATIVE_GRAMMAR_STUDY.md))
+— sentences for assignment, simultaneous assignment, `for` and `while`
+loops, branches, conditional expressions, functions with recursion and
+`match`. `reasoning/reverse_tct_imp.py` spells every construct head first
+with every list counted (*the program of two steps: …; while b is nonzero,
+do one step: set together two names a, b to b, the remainder of a and b. the
+result is a.*), reads it back, runs it on an interpreter with CPython's
+semantics for the fragment, counted steps and bounded depth (`STEP_LIMIT`,
+`DEPTH_LIMIT`, `NO_RESULT`, `UNBOUND`, `ARITY`), and puts a trace of the
+first 24 assignments, the final values and the result in column 1, which its
+own column-3 script replays. `say:` asks it only after the third sort cannot
+read the text. All 7 Phase 64 programs with state are said (0 before), 13 of
+13 declared sentences word for word, 21 of 21 further programs equal CPython,
+41 of 41 scripts verified and 41 mutants rejected, a battery of 1412
+programs with 1412 distinct sentences, 0 of 41 answers moved by limits ×10,
+and 0 wrong of 450 on a post-hoc battery of 600 programs (values past 4096
+bits or characters are refused `SIZE_LIMIT`). 8 of 9 marks met:
+I7 is not met as declared, because Phase 68's `unpack-self` refusal is now
+the more specific `UNBOUND`. Proved in
+`RequestProject/GLM/ImperativeGrammar.lean`: any grammar whose every
+construct is a head with a counted list of parts is uniquely readable, a
+step limit only withholds, and the Euclid loop, the telescoping accumulation
+and the factorial recursion of the Phase 64 programs compute what they say.
+Round 8 of the order, second readings, is where the next round starts.
+[`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 95 is the record.
+
+**The round before it (Phase 94) took the first half of round 7 of the
+order, the third sort** ([`THIRD_SORT_STUDY.md`](studies/THIRD_SORT_STUDY.md))
+— I1 with M's strings, tuples and ranges. `reasoning/reverse_tct_seq.py` adds
+a third sort beside numbers and Golay masks to the reverse grammar: strings
+(every character spelled by name), tuples of any sort and ranges, each literal
+spelled with its count first, with slices, items, concatenation, repetition,
+`len`, `sum`, `ord`, `chr`, `min` and `max`, an exact evaluator and its own
+column-3 script. `say:` asks the earlier grammar first, so no earlier answer
+can move. The Python dialect now answers string methods over code points
+(ASCII where Unicode tables would be needed) and admits lists and dicts as
+immutable snapshots, refusing every in-place change `MUTABLE_CONTAINER`
+(`reasoning/python_containers.py`). 28 of 28 say cases as declared (0 before);
+the depth-two battery of 1116 terms reads back with 1116 distinct sentences;
+21 of 21 dialect programs inside the grammar; 63 of 63 dialect cases equal
+CPython in type and value (0 before), every script verified and every mutant
+rejected; the differential battery 0 wrong of 2830 answered; 10 of 10 marks
+met. Proved in `RequestProject/GLM/ThirdSort.lean`: count-first literals are
+uniquely readable for any item spelling that is, ranges and slices read what
+the evaluator says. M's imperative grammar, the second half of round 7, was
+left to the next round, which took it (Phase 95). [`MASTER_PLAN.md`](MASTER_PLAN.md)
+Phase 94 is the record.
+
+**The round before that (Phase 93) took round 6 of the order, the register
+against the world** ([`REGISTER_WORLD_STUDY.md`](studies/REGISTER_WORLD_STUDY.md))
+— candidate C with H's first item. Two outside sources were fetched once and
+frozen with their URL, date and digest (CIAAW 2024 standard atomic weights;
+NIST ASD first ionization energies and ground configurations).
+`runtime/register_world.py` reads every one of the register's 354 cells of
+atomic weight, ionization energy and configuration against them at the
+precision each side is held to, with six verdicts (agrees, agrees at the
+register's stated precision, discrepant, and three silences), and never writes
+to the register: atomic weight 73 / 11 / 0 discrepant / 34 world-silent,
+ionization energy 10 / 68 / 24 discrepant / 6 register-silent / 10 both-silent,
+configuration 107 / 1 discrepant (lawrencium) / 10 world-silent. The
+consistency frame now answers any element and any of the three fields, and a
+list frame returns a field's discrepancies from one question. 24 of 24 declared
+questions came out as declared, with 0 wrong (2 before); 186 of 186 injected
+errors are caught and 0 of 186 world values flagged. The completion gate now
+reads the nested holdout as well: the covalent-radius rule is demoted and the
+electron-affinity rule narrowed to the main group (nested skill 0.187, 31 of
+31 folds), so the completed view is 1,344 rather than 1,442 — 98 estimates
+withdrawn. The one declared move is Phase 63's iron question, now answered
+*yes* at the register's stated precision. Proved in
+`RequestProject/GLM/RegisterWorld.lean`. [`MASTER_PLAN.md`](MASTER_PLAN.md)
+Phase 93 is the record.
+
+**The round before that (Phase 92) took round 5 of the order, discourse
+state** ([`DISCOURSE_STATE_STUDY.md`](studies/DISCOURSE_STATE_STUDY.md)) —
+0b first, then D = 0a, then K3. The conversation layer of Phase 55 bound one
+substituted name or refused, and its sharpest refusal was the tie.
+`runtime/discourse.py` reads a fold's tie as a set the turn **produced**: *it*
+or *them* names the set, the question is asked of every row by the asker that
+would answer it written out, and the answer is the column of their answers —
+refused `column-incomplete` when some row does not answer, as a hole refuses
+a fold. The fourth shape is read: *the one before that* (the deciding turn
+before the one *that* names), *them* and *both of them* (a set, the rows a
+turn was about, or for *both* two single-row turns; `number-mismatch`
+otherwise) and *why?* (the turn before, explained from the record). With the
+router as the licence a follow-up whose rewritten question only the typed or
+the stepwise planner answers is bound, and a text the machine answers as
+written is answered as written (whole first). `GLM.py --converse` holds one
+conversation over every surface. 29 of 29 declared follow-ups came out as
+declared, with 0 wrong; Phase 55's layer gives 0 of the 20 new-behaviour
+cases as declared, the session alone as the licence 0 of the 5 surface
+answers, and `carry=False` returns every tie to the refusal. 15 of 15 of
+Phase 55's follow-ups hold but the one declared move, 32 of 32 column cells
+equal the answer asked alone, and no answer to any of 3056 earlier strings changes. Proved in
+`RequestProject/GLM/DiscourseState.lean`. [`MASTER_PLAN.md`](MASTER_PLAN.md)
+Phase 92 is the record.
+
+**The round before that (Phase 91) took round 4 of the order, the planner
+widenings** ([`DECLARED_FRAMES_STUDY.md`](studies/DECLARED_FRAMES_STUDY.md))
+— H's E6 first, then O7's remainder and candidate 2's §6. Every widening of
+the stepwise planner before it was a hand-written frame. Its fold frames are
+now generated from one declaration (`runtime/frame_declarations.py`): 638 of
+638 texts of rounds one to five and of the router's declared sets read alike
+by the generated and the hand-written readers, and with the declaration
+emptied no fold question is read. The widenings are entries in it: the
+`k`-th largest and smallest value and the quartiles (bounded under holes by
+round four's rule), superlatives and the top `k` (`TOP_K_TIE`; refused
+`COLUMN_HOLE` under a hole), *the bounds on* a sum, a mean or a parity count
+(a sum or a mean only through a declared, argued physical range —
+electronegativity and ionization energy — else `RANGE_UNDECLARED`), the
+present-rows parity count, *the metals* and *the rare earths*, the twelve
+remaining exact SI prefixes, and *heavier*/*lighter* over the molecule table.
+54 of 54 declared questions and 2 of 2 follow-ups came out as declared, with
+0 wrong; round four's reader answers 0 of them, and the whole machine
+answered 5 before and 41 after. Removing the round-five entries returns
+every case to round four's verdict. 10 of 10 bounded answers hold over 200
+completions with both ends attained, 41 of 41 scripts verify, every mutation
+is rejected, and three earlier refusals move as declared. Proved in
+`RequestProject/GLM/DeclaredFrames.lean`. [`MASTER_PLAN.md`](MASTER_PLAN.md)
+Phase 91 is the record.
+
+**The round before that (Phase 90) took round 3 of the order, typed
+operators** ([`TYPED_OPERATORS_STUDY.md`](studies/TYPED_OPERATORS_STUDY.md))
+— candidate F. Monomial wheels multiply magnitudes, so they could not tell
+real, reactive and apparent power apart, nor the work (a dot product) from
+the torque (a cross product). `runtime/typed_operators.py` computes complex
+power `S = V * conj(I)` over the Smith chart's Gaussian rationals (and
+through an impedance), the real power, reactive power, apparent power and
+power factor with its sense as exact values and surds, the power triangle
+from any two sides, and the dot against the cross product of rational
+vectors. The watt, the var and the volt-ampere are kind-restricted names, so
+*the reactive power in watts* is refused `KIND_MISMATCH`. A reactive power
+whose sign the question leaves open is refused `PF_SENSE_UNDECLARED`. A
+declared frame read ahead of the planner's *given* phrasing reaches all of it
+through the router and `GLM.py -q`, gated by each reading's own column-3
+script. 43 of 43 declared cases came out as declared, with 0 wrong. Through
+the router 0 were answered before and 43 after. The naive monomial control
+answers 19 and gets 15 of them wrong. 0 of 2971 earlier questions are read,
+43 of 43 scripts verify, and 29 of 29 mutated claims are rejected. Proved in
+`RequestProject/GLM/TypedOperators.lean`. [`MASTER_PLAN.md`](MASTER_PLAN.md)
+Phase 90 is the record.
+
+**The round before that (Phase 89) took the owner's outside material and
+gated decisions** ([`QUESTION_SET_B_STUDY.md`](studies/QUESTION_SET_B_STUDY.md),
+[`CONTRACT_MATRIX_STUDY.md`](studies/CONTRACT_MATRIX_STUDY.md)) — out of the
+order of §3.4, at the owner's request. Two outside question sets were
+supplied: Set B (14 items, each with an expected status and refusal code) and
+Outside O1 (112 questions written to find boundaries). Before this round the
+router read none of the 126. Declared question frames
+(`runtime/question_frames.py`), each answer re-derived by its own column-3
+script before output, now read every Set B item — 14 of 14 by audit (protocol
++10: 11 right, two refusals under a code other than the file's, and one
+answer where the file expects a refusal, which the audit finds right:
+`3x + 5y = 1` is decided by `gcd(3, 5) = 1`) — and 27 of the
+112 outside questions, answered or correctly refused exactly, with **0
+confidently wrong**. The other 85 are located boundaries, classed in a
+Capability Failure Matrix: explanations 32, derivations and proofs 18, meta
+questions about the GLM's own engineering 18, symbolic parameters 13,
+designs 3, one transcendental equation. K1 is taken: `GLM.py -q` goes through
+the multi-surface router, and all 177 contract questions give byte-identical
+output through the routed `-q` and the old `--plan` path. Candidate P's two
+contract changes were run as a 4-way matrix over 525 exact cells in two
+frames: the combined change (variant D, the upper-credible rule over the
+session's reads) breaks no on-grid cell in either frame and keeps more right
+answers than the upper rule alone (mean on-grid retention 0.6881 against
+0.5562), so it is the production baseline; the control and the
+session-marginal confidence alone each break 2 on-grid cells. On the 41
+framed questions the four variants give identical verdicts. Proved in
+`RequestProject/GLM/QuestionSetB.lean`. [`MASTER_PLAN.md`](MASTER_PLAN.md)
+Phase 89 is the record.
+
+**The round before that (Phase 88) took round 2 of the order, the loop
+through the planner** ([`PLANNER_LOOP_STUDY.md`](studies/PLANNER_LOOP_STUDY.md))
+— candidates K4, I2 and O3 = M3, then a re-reading of item 9. Every surface
+answered its question alone; a question whose next step depends on the value
+of the last answer had no reader. The Python dialect now has three builtins
+that call the rest of the machine and return exact values — `derive(target,
+(name, value), …)` (the stepwise planner's goal mode), `ask(question)` (one
+stepwise question) and `solve(var, equation, …)` (the reverse surface's
+linear solve) — and a declared frame (*what does `E` return*, *is `E` true*)
+hands a question about a Python expression to the evaluator, so a loop is the
+program's own control flow: `while derive("current", ("voltage", 12),
+("resistance", r)) >= 1: r = r + 1` answers 13. The program's column-3 script
+re-runs every sub-answer's own script in a fresh interpreter, checks the
+value is bound to that record (a solve's root substituted back and shown
+unique), and re-runs the program under CPython against the checked table.
+44 of 44 declared cases as declared, 0 wrong; through the router 29 of 29
+answer cases answered where 0 were before; with the bridge off 0 of 34; all 66
+declared mutations rejected, each at the check written for it; the contract
+census unmoved (0 of 530); earlier rounds unchanged. Item 9 re-read: the same
+questions asked in English are answered by no surface — the first measured
+instance of a tool a problem-driven front end reaches and the kind-driven
+dispatcher does not; the reverse-call planner is still not promoted (D14).
+Proved in `RequestProject/GLM/PlannerLoop.lean`. [`MASTER_PLAN.md`](MASTER_PLAN.md)
+Phase 88 is the record.
+
+**Earlier, Phase 87 began by reading the open candidates
 together** ([`ROADMAP_STUDY.md`](studies/ROADMAP_STUDY.md)), at the owner's
 request: the 49 open items of §3.4 reduce to seven tracks, several items are
 one piece of work under two or three letters, and the rounds are now ordered
@@ -64,7 +260,7 @@ not shipped: no register holds a Celsius reading. Proved in
 `RequestProject/GLM/MeasurandRegister.lean`. [`MASTER_PLAN.md`](MASTER_PLAN.md)
 Phase 87 is the record.
 
-**The round before it (Phase 86) began with a quick tidy of candidate P
+**The round before that (Phase 86) began with a quick tidy of candidate P
 and then took candidate O5** ([`MEASURANDS_STUDY.md`](studies/MEASURANDS_STUDY.md)):
 measurands rather than units. The unit check compared dimensions only, so it
 could not tell a torque from an energy or a frequency from an angular
@@ -702,11 +898,11 @@ PYTHONPATH=. python3 -m glm_universal.figures --write
 
 | instrument | command | result |
 |---|---|---|
-| test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->4,703 tests across 131 of the 132 test files, 17,825 subtests, outside the document check<!--/figure-->**, zero failures |
+| test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->4,904 tests across 140 of the 141 test files, 18,026 subtests, outside the document check<!--/figure-->**, zero failures |
 | end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->177<!--/figure--> / <!--figure:evaluation-case-count-->177<!--/figure-->** — 149 answered, 28 refused as expected (all `boundary`, no `gap`), 0 unexpected refusals, 0 confidently wrong, 0 errored |
 | benchmark suites | `python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites, every suite above its baseline |
 | capability probes | `python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 errored, 0 surprises |
-| Lean development | `lake build` (repository root) | <!--figure:lean-files-->156 Lean files<!--/figure-->, **0 `sorry`** |
+| Lean development | `lake build` (repository root) | <!--figure:lean-files-->166 Lean files<!--/figure-->, **0 `sorry`** |
 | figures | `python3 -m glm_universal.figures --write` | regenerates `overlay/FIGURES.md`; every documented count |
 | corpus | `python3 -m glm_universal.corpus --check` | the tier contract, the archive partition, the coverage claim of `ENTRY.md`, every generated block and every derived cache — **current**, no drift |
 | construction ladder | `python3 -m glm_universal.tools ladder` | **462 / 568** queries named correctly with **0** wrong on the eleven-rung ladder, against **327** for the note's five rungs and **283** for the best single rung |
@@ -719,6 +915,7 @@ PYTHONPATH=. python3 -m glm_universal.figures --write
 | extremum operation | `python3 -m glm_universal.tools extremum` | the operation folds **<!--figure:extremum-answered-->4<!--/figure-->** of the **<!--figure:extremum-declared-count-->8<!--/figure-->** columns declared before the run and refuses **<!--figure:extremum-refused-->4<!--/figure-->** under all **<!--figure:extremum-reasons-->4<!--/figure-->** of its named reasons — **<!--figure:extremum-as-declared-->8<!--/figure-->** of **<!--figure:extremum-declared-count-->8<!--/figure-->** as declared — and reports **<!--figure:extremum-ties-->1<!--/figure-->** tie as a tie rather than resolving it |
 | scale conversions | `python3 -m glm_universal.tools scales` | the declared table of **<!--figure:scales-rows-->9<!--/figure-->** scales over **<!--figure:scales-quantities-->4<!--/figure-->** quantities answers **<!--figure:scales-answered-->7<!--/figure-->** of the **<!--figure:scales-declared-->12<!--/figure-->** questions declared before the run and refuses **<!--figure:scales-refused-->5<!--/figure-->** — **<!--figure:scales-as-declared-->12<!--/figure-->** of **<!--figure:scales-declared-->12<!--/figure-->** as declared — and relates **<!--figure:scales-bridged-->6<!--/figure-->** of the **<!--figure:scales-pairs-->7,750<!--/figure-->** pairs of the **<!--figure:scales-numeric-->125<!--/figure-->** numeric scales, leaving every other pair refused |
 | conversation layer | `python3 -m glm_universal.tools conversation` | the layer binds **<!--figure:conversation-answered-->8<!--/figure-->** of the **<!--figure:conversation-declared-count-->15<!--/figure-->** follow-ups declared before the run and refuses **<!--figure:conversation-refused-->7<!--/figure-->** under all **<!--figure:conversation-reasons-->3<!--/figure-->** of its named reasons — **<!--figure:conversation-as-declared-->15<!--/figure-->** of **<!--figure:conversation-declared-count-->15<!--/figure-->** as declared — against **<!--figure:conversation-alone-->0<!--/figure-->** answered by a session with no memory, and the recency control differs on **<!--figure:conversation-control-wrong-->3<!--/figure-->** of **<!--figure:conversation-control-rows-->10<!--/figure-->** |
+| discourse state | `python3 -m glm_universal.tools discourse-state` | a tie carried as a column, the fourth shape and follow-ups on every surface: **7 / 7** column, **16 / 16** fourth-shape and **6 / 6** surface cases as declared, **0** wrong; Phase 55's layer gives 0 of the 20 new-behaviour cases as declared, the session alone 0 of the 5 surface answers; **15 / 15** of Phase 55's follow-ups hold but the 1 declared move; **32 / 32** column cells equal the answer asked alone; no answer to any of 3056 earlier strings changes; 8 of 8 marks met |
 | role--filler binding | `python3 -m glm_universal.tools binding` | a typed relation written as one 24-bit word gives the filler's reading back with no side condition; naming the filler recovers **<!--figure:binding-recovered-->6<!--/figure-->** of the **<!--figure:binding-declared-count-->12<!--/figure-->** bindings declared before the run and refuses **<!--figure:binding-refused-->6<!--/figure-->** — **<!--figure:binding-as-declared-->12<!--/figure-->** of **<!--figure:binding-declared-count-->12<!--/figure-->** as declared — because only **<!--figure:binding-nameable-->424<!--/figure-->** of the **<!--figure:binding-carriers-->1,143<!--/figure-->** carriers read uniquely, the worst fibre holding **<!--figure:binding-largest-fibre-->136<!--/figure-->** |
 | plan store | `python3 -m glm_universal.runtime.plan_store` | a resolved follow-up kept against a digest of the whole conversation replays **<!--figure:planstore-replayed-->15<!--/figure-->** of **<!--figure:planstore-declared-count-->15<!--/figure-->** unchanged, refusals included (**<!--figure:planstore-refusals-replayed-->7<!--/figure-->** of **<!--figure:planstore-refusals-->7<!--/figure-->**), taking the licensing trials from **<!--figure:planstore-trials-first-->27<!--/figure-->** to **<!--figure:planstore-trials-replayed-->0<!--/figure-->**; keyed by the follow-up text alone it answers **<!--figure:planstore-coarse-wrong-->8<!--/figure-->** of the fifteen with another conversation's antecedent |
 | engineering surface | `python3 -m glm_universal.tools engineering` | on **63** engineering questions committed before the code: **53** correct, **10** correct refusals, **0** wrong (both existing paths: 0 correct, 53 refused); formula wheels **41 / 41** at SI7 and EXT10; Smith chart **16 / 16**; force-voltage analogy **9 / 9** laws each way; delta-sigma **6 / 6** |
@@ -730,6 +927,7 @@ PYTHONPATH=. python3 -m glm_universal.figures --write
 | reverse TCT, round two | `python3 -m glm_universal.tools reverse-tct --two` | the widened fragment, disjunction and the planner loop: **216,723 / 216,723** widened and **18,500 / 18,500** mask terms round-trip, **0** collisions; **36** of 83 dialect programs inside, **36** agree; **650 / 650** negated normal forms certified; every declared case as declared, **0** wrong; relay **20 / 20**, **32 / 32** handoffs agree or consistent, **0** disagree (verbatim control **0 / 15**); **92 / 92** scripts `VERIFIED True`, **84 / 84** mutants rejected |
 | stepwise planner | `python3 -m glm_universal.tools stepwise` | the typed planner as the executive of a chain of steps: **30 / 30** composition cases, **21 / 21** goal cases, **6 / 6** narratives and **4 / 4** follow-ups as declared, **0** wrong (the planner alone answers 0 of the 30 compound cases); the first-found control answers the **3** cases the veto refuses; **43 / 43** chain scripts `VERIFIED`, **149 / 149** steps aligned, every mutation rejected; 8 of 8 marks met |
 | stepwise planner, round three | `python3 -m glm_universal.tools stepwise-three` | declared comparatives, further count nouns, tera and pico, and folds over a column: **18 / 18** comparative, **6 / 6** count-noun, **6 / 6** prefix and **17 / 17** fold cases and **2 / 2** follow-ups as declared, **0** wrong (round two's reader answers 0 of the 47; the machine answered 6 before the round and 32 after); the present-rows control answers all **3** declared holes; the classes partition the column; **34 / 34** chain scripts `VERIFIED`, **327 / 327** steps aligned, every mutation rejected (member lie **13 / 13**, word lie **11 / 11**); rounds one and two unchanged; 8 of 8 marks met |
+| stepwise planner, round five | `python3 -m glm_universal.tools stepwise-five` | frames generated from a declaration: **638 / 638** texts read alike by the generated and hand-written readers; **12 / 12** order, **12 / 12** superlative, **12 / 12** bound, **6 / 6** class, **6 / 6** prefix and **6 / 6** molecule cases and **2 / 2** follow-ups as declared, **0** wrong (round four's reader answers 0 of the 54; the machine answered 5 before the round and 41 after); **10 / 10** bounded answers sound and sharp over 200 completions; **41 / 41** chain scripts `VERIFIED`, **858 / 858** steps aligned, every mutation rejected; **3 / 3** declared moves; 9 of 9 marks met |
 | stepwise planner, round two | `python3 -m glm_universal.tools stepwise-two` | *how many more*, parity, averages, givens with units and register values in the wheels: **21 / 21** frame, **18 / 18** unit and **14 / 14** register cases, **2 / 2** narratives and **2 / 2** follow-ups as declared, **0** wrong (round one's reader answers 0 of the 53); strip-the-units control wrong on **6** answered cases and answers **7** unit refusals; **39 / 39** chain scripts `VERIFIED`, **178 / 178** steps aligned, every mutation rejected (unit lie **22 / 22**); round one's corpus unchanged; 8 of 8 marks met |
 | law register | `python3 -m glm_universal.tools law-register` | the 65 retained UBP laws re-read: the 16 exact rows **8** structural, **2** overclaimed, **3** definitional, **2** arithmetic, **1** near-miss, every structural row citing Lean; the decoder right exactly up to error weight 3 (refused at 4, wrong at 5), `LAW_STORAGE_HARDENED_001` refuted, refusal at a six-way tie withholding **5** wrong answers per right answer given up; of the 49 numeric rows **30** not predictions and **2** of **21** external formulas admitted by the look-elsewhere test; 9 of 9 marks met |
 | law absorption | `python3 -m glm_universal.tools law-absorption` | each retained law tested and given a fate: **11** absorbed as computed substrate facts, **2** already GLM definitions, **3** retested and refused, **49** retired; **36 / 36** declared substrate questions through the typed planner as declared, **0** wrong (0 answered before the round); **0** of 4,687 existing evaluation texts read by the new frame; odd errors never refused, proved; 8 of 8 marks met |
@@ -896,7 +1094,31 @@ through a stated efficiency in (0, 1] (`EFFICIENCY_OUT_OF_RANGE`,
 `EFFICIENCY_UNDECLARED`), and the elementary charge and the percent are
 exact units; recomputed by `tools measurand-register`; proved in
 `RequestProject/GLM/MeasurandRegister.lean`. Write-up:
-[`MEASURAND_REGISTER_STUDY.md`](studies/MEASURAND_REGISTER_STUDY.md).
+[`MEASURAND_REGISTER_STUDY.md`](studies/MEASURAND_REGISTER_STUDY.md). Since
+Phase 91 its fold frames are generated from one declaration
+(`runtime/frame_declarations.py`) rather than written by hand, and the
+widenings are entries in it: the `k`-th largest and smallest value and the
+quartiles over a declared set, superlatives and the top `k`, *the bounds on* a
+sum, a mean (through a declared physical range) or a parity count under holes,
+the present-rows parity count, *the metals* and *the rare earths*, the twelve
+remaining exact SI prefixes and *heavier*/*lighter* over the molecule table,
+refusing `ORDER_OUT_OF_RANGE`, `TOP_K_TIE`, `RANGE_UNDECLARED`,
+`TABLE_MISMATCH` and `COMPARATIVE_UNDECLARED`; recomputed by `tools
+stepwise-five`; proved in `RequestProject/GLM/DeclaredFrames.lean`. Write-up:
+[`DECLARED_FRAMES_STUDY.md`](studies/DECLARED_FRAMES_STUDY.md).
+
+**The loop through the planner.** Since Phase 88 the Python dialect calls
+the rest of the machine: `derive`, `ask` and `solve` return exact values from
+the stepwise planner's goal mode, one stepwise question and the reverse
+surface's linear solve (`runtime/planner_bridge.py`, builtins in
+`reasoning/python_speech.py`), refusing `BRIDGE_UNAVAILABLE`,
+`DERIVE_REFUSED`, `ASK_REFUSED` or `SOLVE_REFUSED`; a declared frame hands a
+question about a Python expression to the evaluator; the router's Python
+surface and `GLM.py` speak through it. The column-3 script re-runs each
+sub-answer's own script, checks the value against its record and re-runs the
+program under CPython against the checked table; recomputed by `tools
+planner-loop`; proved in `RequestProject/GLM/PlannerLoop.lean`. Write-up:
+[`PLANNER_LOOP_STUDY.md`](studies/PLANNER_LOOP_STUDY.md).
 
 **The law register.** `reasoning/law_register.py` re-reads the 65 laws an
 older GLM-lens review of the UBP knowledge base retained, frozen as
@@ -1007,7 +1229,16 @@ language (`approximate v to 20 places`, `what fraction rounds to R`, `is a
 less than b`), reads each answer back into column 2 (`AGREES`, `CONSISTENT`,
 `DISAGREES`, `UNREAD`) and realises it as sentences of the reverse grammar,
 which the column-3 script re-checks. Recomputed by `tools reverse-tct --two`;
-proved in `RequestProject/GLM/ReverseTCTTwo.lean`.
+proved in `RequestProject/GLM/ReverseTCTTwo.lean`. Since Phase 94 the
+grammar has a third sort — strings, tuples and ranges with count-first
+literals (`reasoning/reverse_tct_seq.py`, `tools third-sort`,
+`RequestProject/GLM/ThirdSort.lean`) — and since Phase 95 an imperative
+grammar for programs with state (`reasoning/reverse_tct_imp.py`: assignment,
+loops, branches, functions and `match`, run with counted steps and bounded
+depth, a trace of assignments in column 1 replayed by the script; `tools
+imperative`, `RequestProject/GLM/ImperativeGrammar.lean`). Write-ups:
+[`THIRD_SORT_STUDY.md`](studies/THIRD_SORT_STUDY.md),
+[`IMPERATIVE_GRAMMAR_STUDY.md`](studies/IMPERATIVE_GRAMMAR_STUDY.md).
 
 **A conversation, and what a reference costs.** `runtime/conversation.py` puts
 an episodic register of turns in front of the session, so that a turn may
@@ -1027,7 +1258,15 @@ where a session with no memory answers
 **<!--figure:conversation-alone-->0<!--/figure-->**. No answer is new: every
 rewritten query is answered by the solver that would have answered it written
 out in full. Proved in `RequestProject/GLM/Conversation.lean`. Write-up:
-[`CONVERSATION_STUDY.md`](studies/CONVERSATION_STUDY.md).
+[`CONVERSATION_STUDY.md`](studies/CONVERSATION_STUDY.md). Since Phase 92
+`runtime/discourse.py` carries the state further: a fold's tie is a set the
+turn produced and *it* names it, answered as a column of the rows' own
+answers (`column-incomplete` under a hole); *the one before that*, *them*,
+*both of them* (`number-mismatch`) and *why?* are read; the router is the
+licence, so a follow-up any surface answers is bound; and `GLM.py --converse`
+holds the conversation over every surface; recomputed by `tools
+discourse-state`; proved in `RequestProject/GLM/DiscourseState.lean`.
+Write-up: [`DISCOURSE_STATE_STUDY.md`](studies/DISCOURSE_STATE_STUDY.md).
 
 **A relation written as one word, and a resolved follow-up kept.**
 `reasoning/role_binding.py` writes a typed relation *R(A, B)* into a single
@@ -1079,6 +1318,20 @@ measurement; the substrate operations are proved in
 `RequestProject/GLM/PythonSpeech.lean`. Write-up:
 [`PYTHON_SPEECH_STUDY.md`](studies/PYTHON_SPEECH_STUDY.md).
 
+**Question frames, for questions written outside the project.**
+`runtime/question_frames.py` holds declared frames that read a question as
+written by someone else — a Routh range, a per-unit rebase, a reflection
+coefficient, an aliasing fold, an entropy, a Huffman code, a water-filling
+allocation, a Golay coset question, and the Set B items — and each answer is
+re-derived by its own column-3 script before it is printed. `GLM.py -q` goes
+through the multi-surface router (`--plan` keeps the typed planner's path).
+The plain readings print their confidence under the production contract of
+the 4-way matrix: the upper-credible rate rule over the session's reads
+(`reasoning/contract_matrix.py`, `rate_posterior.PRODUCTION_RULE`).
+Recomputed by `tools question-set-b` and `tools contract-matrix`. Write-ups:
+[`QUESTION_SET_B_STUDY.md`](studies/QUESTION_SET_B_STUDY.md),
+[`CONTRACT_MATRIX_STUDY.md`](studies/CONTRACT_MATRIX_STUDY.md).
+
 **Registers.** Eight of them. Physics (726 quantities, EXT10 exponents and
 unit strings cross-checked against each other), chemistry (118 elements),
 molecules (51 species and ions, every coordinate derived from the element
@@ -1111,11 +1364,11 @@ so a confident wrong answer is worse than a refusal). Write-up:
 [`CAPABILITY_ASSESSMENT.md`](CAPABILITY_ASSESSMENT.md).
 
 **The Lean development, addressed.** `reasoning/lean_address.py` gives each of
-the 4190 declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly 4190/4190 with 0 coordinate errors;
-3714 distinct addresses, and the quantiser adds no conflation of its own;
-nearest-by-address shares a file 795 times against 34 for a SHA-256 control and
-28 for a seeded reshuffle, with chance at ≈ 0.85 %. `report lean`.
+the 4493 declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly 4493/4493 with 0 coordinate errors;
+3989 distinct addresses, and the quantiser adds no conflation of its own;
+nearest-by-address shares a file 817 times against 35 for a SHA-256 control and
+29 for a seeded reshuffle, with chance at ≈ 0.80 %. `report lean`.
 Write-up: [`LEAN_ADDRESS_STUDY.md`](studies/LEAN_ADDRESS_STUDY.md).
 
 **The register where the address is the only reader.** In the anonymous
@@ -1155,8 +1408,8 @@ twenty questions rather than three samples. `tools oracle`. Write-up:
 **The field surface, and what it was worth.** `runtime/fields.py` answers one
 named field of one named row — `field atomic_weight_u of carbon` — over
 <!--figure:fieldsurface-tables-->13<!--/figure--> declared tables holding
-<!--figure:fieldsurface-rows-->10,543<!--/figure--> rows and
-<!--figure:fieldsurface-pairs-->62,519<!--/figure--> addressable `(row,
+<!--figure:fieldsurface-rows-->11,250<!--/figure--> rows and
+<!--figure:fieldsurface-pairs-->66,458<!--/figure--> addressable `(row,
 field)` pairs: the element and molecule source rows, one table per register's
 carrier attributes, the Lean address book, the package's own top-level
 definitions, and a registry of declared zero-argument functions whose returned
@@ -1250,7 +1503,7 @@ refused, which is what *declared* costs. `tools scales`. Write-up:
 
 **Typed question plans.** `runtime/semantic_plan.py` is the bridge from an
 English question to the operations the session already has:
-**<!--figure:plans-frames-->19<!--/figure-->** frames, each of which reads one
+**<!--figure:plans-frames-->20<!--/figure-->** frames, each of which reads one
 shape of question into a plan whose slots are grounded against the field
 surface and the row's own fields, run, and accepted only when every licensed
 plan agrees; with none licensed the answer is the grammar's own. Two frames
@@ -1328,9 +1581,11 @@ closures left behind is §3.4.
   vague triple ([`DENOTATION_STUDY.md`](studies/DENOTATION_STUDY.md),
   [`VAGUENESS_STUDY.md`](studies/VAGUENESS_STUDY.md)).
 * **Sparse chemistry.** 1,257 of 1,652 element cells are measured; the
-  completed view reaches 1,442 by rules admitted only for halving the field's
-  own out-of-sample mean, and each of the remaining 210 carries one of three
-  stated reasons. Nothing is written back into the register, deliberately. What
+  completed view reaches 1,344 by rules admitted only for halving the field's
+  own out-of-sample mean and for surviving a nested holdout of their own
+  selection (Phase 93), and each of the remaining 308 carries a stated
+  reason. The register is read against cited outside values, never written
+  ([`REGISTER_WORLD_STUDY.md`](studies/REGISTER_WORLD_STUDY.md)). Nothing is written back into the register, deliberately. What
   stays ongoing is the data
   ([`ELEMENT_COMPLETION_STUDY.md`](studies/ELEMENT_COMPLETION_STUDY.md)).
 
@@ -1350,26 +1605,71 @@ each reads what the one before built:
 1. **The measurand register** — K2, O5b, O5c, O5d, 1a and 1b, one round:
    **taken by Phase 87** ([`MEASURAND_REGISTER_STUDY.md`](studies/MEASURAND_REGISTER_STUDY.md));
    all but 1a met, and 1a waits on a register that holds a Celsius reading.
-   **Round 2, the loop, is where the next round starts.**
 2. **The loop through the planner** — K4 (`derive` as a value), I2 (a Python
    expression as a planner question), O3 = M3 (the planner's answer chooses
-   the next reverse operation); then re-read item 9, the utility gate.
-3. **Typed operators** — F, on the measurand register.
+   the next reverse operation); then re-read item 9, the utility gate:
+   **taken by Phase 88** ([`PLANNER_LOOP_STUDY.md`](studies/PLANNER_LOOP_STUDY.md));
+   every mark met. Item 9 re-read: the loop's questions asked in English are
+   answered by no surface, so the problem-driven reach item 9 asked about
+   now exists and is measured; promoting the supplied planner is still not
+   earned.
+3. **Typed operators** — F, on the measurand register: **taken by Phase 90**
+   ([`TYPED_OPERATORS_STUDY.md`](studies/TYPED_OPERATORS_STUDY.md)); every
+   mark met.
 4. **Planner widenings** — H's E6 (frames from a declaration) first, then
-   O7's remainder and candidate 2's §6.
+   O7's remainder and candidate 2's §6: **taken by Phase 91**
+   ([`DECLARED_FRAMES_STUDY.md`](studies/DECLARED_FRAMES_STUDY.md)); every
+   mark met. What it leaves is that study's §6 (cross-table comparison,
+   differences between molecules, a nuclide register, one-sided ranges, the
+   top `k` under a hole).
 5. **Discourse state** — 0b (a tie carried as a column, now that set folds
-   exist), then D = 0a, then K3.
-6. **The register against the world** — C with H's first item.
+   exist), then D = 0a, then K3: **taken by Phase 92**
+   ([`DISCOURSE_STATE_STUDY.md`](studies/DISCOURSE_STATE_STUDY.md)); every
+   mark met. What it leaves is that study's §7 (the column handed to the
+   planner's folds, a present-rows column, further phrasings, the plan store
+   for the new shapes, an outside multi-turn set).
+6. **The register against the world** — C with H's first item: **taken by
+   Phase 93** ([`REGISTER_WORLD_STUDY.md`](studies/REGISTER_WORLD_STUDY.md));
+   every mark met. What it leaves is that study's §6 (sources for the other
+   fields — electron affinity, melting and boiling points; isotope masses for
+   the 34 world-silent weights; a held-out check of the narrowing; the owner's
+   decision on writing any discrepancy back).
 7. **The third sort** — I1 with M's strings, tuples and ranges; then M's
-   imperative grammar.
+   imperative grammar. The first half is **taken by Phase 94**
+   ([`THIRD_SORT_STUDY.md`](studies/THIRD_SORT_STUDY.md)); every mark met.
+   What it leaves is that study's §6 (Unicode case and whitespace tables as a
+   register, booleans as a term of the grammar, sets and comprehensions).
+   M's imperative grammar is **taken by Phase 95**
+   ([`IMPERATIVE_GRAMMAR_STUDY.md`](studies/IMPERATIVE_GRAMMAR_STUDY.md));
+   8 of 9 marks met (I7 not met: one earlier refusal made more specific).
+   What it leaves is that study's §6 (`break`, closures, the truth of
+   sequences, a trace inside calls, a program with state handed to the
+   planner as a sentence).
 8. **Second readings** — J2 with H's X1, then J1, then J3 (now well-posed
    on Phase 82's rate posterior); the lattice items 3, 6, 7 and 10 beside it.
+   **This is where the next round starts.**
 9. **Retrieval** — N1 first, then item 5, then N2, N5 and I3.
 
-Gated on the owner: K1 and P's two contract changes. Gated on outside
-material: B = O1 and item 4. Proposed for retirement: P's 42 PIPELINE laws
-and H's concept 6. The letters below are the record of what each item
-is.
+**Taken out of order by Phase 89, at the owner's request**
+([`QUESTION_SET_B_STUDY.md`](studies/QUESTION_SET_B_STUDY.md),
+[`CONTRACT_MATRIX_STUDY.md`](studies/CONTRACT_MATRIX_STUDY.md)): the gated
+items the owner released — K1 (`-q` routed through the multi-surface router,
+Option A; the contract set gives 177 of 177 identical verdicts through the
+command line), P's two contract changes (run as a 4-way matrix; the combined
+change, variant D, is the production baseline and the other two are set
+aside), and B = O1 (two outside question sets supplied: Set B 14 of 14 by
+audit, Outside O1 27 of 112 framed and correct with 0 confidently wrong and
+85 located boundaries). The boundaries it located are new tracks, ordered in
+that study's §8: symbolic parameters (13), derivations and proofs (18), meta
+questions about the GLM's own engineering (18), explanations (32), designs
+and one transcendental equation, and the planner's two vacuous denotation
+answers. **Round 8 of the order, second readings, is where the next round
+starts** (round 7 was taken by Phases 94 and 95),
+unless the owner prefers the §8 boundary tracks first.
+
+Gated on outside material: item 4. Proposed
+for retirement: P's 42 PIPELINE laws and H's concept 6. The letters below
+are the record of what each item is.
 
 The candidates as they were named follow.
 
@@ -1385,7 +1685,12 @@ removes every on-grid break at a small retention cost, and the breaks above
 the grid remain; adopting the upper-credible rule is a change of contract and
 the owner's call; the
 plain `resolve` and `agree` printing a session-marginal confidence (a change
-of contract, the owner's call); and the 42 PIPELINE laws, which could only be
+of contract, the owner's call) — *both decided by Phase 89's 4-way matrix*
+([`CONTRACT_MATRIX_STUDY.md`](studies/CONTRACT_MATRIX_STUDY.md)): the combined
+change (D) breaks no on-grid cell in either frame and keeps more right answers
+than the upper rule alone, so it is the production baseline; the upper rule
+alone and the session-marginal confidence alone are set aside; the breaks at
+1/5 remain under every variant; and the 42 PIPELINE laws, which could only be
 re-read through UBP pipelines the GLM does not implement.
 [`AGREE_CHANNEL_STUDY.md`](studies/AGREE_CHANNEL_STUDY.md) §3,
 [`RATE_POSTERIOR_STUDY.md`](studies/RATE_POSTERIOR_STUDY.md) §3,
@@ -1398,7 +1703,9 @@ share an author, and every mark of both rounds was met on the first reading;
 this is candidate B's point, sharpest here); (O3) the reverse relay into the
 chain, so that `relay:` hands a column-2 value to the stepwise planner and its
 multi-step answer chooses the next reverse operation (the last item of
-candidate M); (O5) measurands by name — Phase 86 took the kinds of quantity
+candidate M) — *taken by Phase 88* as a program: a branch on a derived value
+chooses which reverse equation `solve` reads
+([`PLANNER_LOOP_STUDY.md`](studies/PLANNER_LOOP_STUDY.md)); (O5) measurands by name — Phase 86 took the kinds of quantity
 (a torque is no longer an energy, a temperature level no longer a
 difference: [`MEASURANDS_STUDY.md`](studies/MEASURANDS_STUDY.md)), and
 Phase 87 took the rest — the declared map from register measurands to wheel
@@ -1415,10 +1722,13 @@ were taken by Phase 73 and are met: every mark of the round-two study is
 met. O7's first widenings (declared comparatives, *electrons* and *valence
 electrons*, tera and pico, folds over every element or a declared class) were
 taken by Phase 84 and are met ([`STEPWISE_THREE_STUDY.md`](studies/STEPWISE_THREE_STUDY.md));
-what O7 still holds is its §6 — the molecule table, neutrons, further
-prefixes and classes the register does not hold as one value; the present-rows
-question asked as its own was taken by Phase 85 and is met
-([`HOLE_FOLDS_STUDY.md`](studies/HOLE_FOLDS_STUDY.md)). O6 (a register value's stated precision carried through a derivation)
+the present-rows question asked as its own was taken by Phase 85 and is met
+([`HOLE_FOLDS_STUDY.md`](studies/HOLE_FOLDS_STUDY.md)); the molecule table's
+comparatives, further prefixes and the classes the register does not hold as
+one value were taken by Phase 91 and are met
+([`DECLARED_FRAMES_STUDY.md`](studies/DECLARED_FRAMES_STUDY.md)); what O7
+still holds is neutrons (a nuclide register) and differences between
+molecules. O6 (a register value's stated precision carried through a derivation)
 was taken by Phase 76 and is met ([`HELD_PRECISION_STUDY.md`](studies/HELD_PRECISION_STUDY.md)).*
 
 **N. Native past parity — named by Phase 70, narrowed by Phase 71.** In
@@ -1439,7 +1749,7 @@ measured there and missed at k = 1 (mark W6), so it is recorded, not shipped.*
 beats a native one, keep the native one and refine it.*
 
 **M. Reverse Three Column Thinking, round four — named by Phase 68, narrowed
-by Phases 69 and 79.** In the order of the study's §12: strings, tuples and
+by Phases 69 and 79; its first two items taken by Phases 94 and 95.** In the order of the study's §12: strings, tuples and
 ranges as a third sort with count-first literals (22 of the 47 dialect
 programs still outside act on them); a small imperative grammar, so that the
 7 programs with state have sentences; and the loop further — let `relay:` read the integer certificate kinds, hand an
@@ -1456,13 +1766,19 @@ Phase 68 and is closed: every mark of the study's §7.2 is met (§8).*
 
 **K. The connected machine, round two — named by Phase 66.** In the order of
 the study's §6: (K1) route `-q` itself, once the owner agrees, and re-run the
-contract set through the command line rather than by census; (K2) a register
+contract set through the command line rather than by census — *taken by
+Phase 89* on the owner's Option A: 177 of 177 contract questions identical
+through the routed `-q` and `--plan`
+([`QUESTION_SET_B_STUDY.md`](studies/QUESTION_SET_B_STUDY.md) §5); (K2) a register
 of **measurands** — *taken by Phase 87*: conversions through a stated
 efficiency are laws across the junction table's non-identities
 ([`MEASURAND_REGISTER_STUDY.md`](studies/MEASURAND_REGISTER_STUDY.md));
-(K3) bind conversation follow-ups on every surface, not only the planner's;
+(K3) bind conversation follow-ups on every surface, not only the planner's —
+*taken by Phase 92*: the router is the licence, and `GLM.py --converse` holds
+the conversation ([`DISCOURSE_STATE_STUDY.md`](studies/DISCOURSE_STATE_STUDY.md));
 (K4) a Python builtin `derive(target, y, z)` so a derivation is a value a
-program can use. [`CONNECTED_MACHINE_STUDY.md`](studies/CONNECTED_MACHINE_STUDY.md) §6.
+program can use — *taken by Phase 88*
+([`PLANNER_LOOP_STUDY.md`](studies/PLANNER_LOOP_STUDY.md)). [`CONNECTED_MACHINE_STUDY.md`](studies/CONNECTED_MACHINE_STUDY.md) §6.
 
 **J. The carried fork, round two — named by Phase 65.** In the order of
 the study's §6: declare and measure the composition of stages (the declared
@@ -1477,14 +1793,18 @@ formula. [`CARRIED_FORK_STUDY.md`](studies/CARRIED_FORK_STUDY.md) §6.
 study's §7: widen the dialect where the refusals cluster (string methods over
 code points; list and dict literals as immutable snapshots); route a
 question about a Python expression through a typed planner frame to the
-evaluator; and index the AST address beside the Lean corpus addresses as a
+evaluator (*taken by Phase 88*,
+[`PLANNER_LOOP_STUDY.md`](studies/PLANNER_LOOP_STUDY.md)); and index the AST address beside the Lean corpus addresses as a
 retrieval key. [`PYTHON_SPEECH_STUDY.md`](studies/PYTHON_SPEECH_STUDY.md) §7.
 
 **H. Substrate-native cognition, round three — named by Phase 63.** In the
 order of the study's §8: demote (or narrow) the two chemistry completion rules
-that fail nested holdouts, `covalent_radius_pm` and `electron_affinity_eV`;
+that fail nested holdouts, `covalent_radius_pm` and `electron_affinity_eV`
+(*taken by Phase 93 and met*: the first demoted, the second narrowed to the
+main group, [`REGISTER_WORLD_STUDY.md`](studies/REGISTER_WORLD_STUDY.md));
 semantic judgements as annotated provenance (E4); frames generated from a
-declaration rather than written by hand (E6); deeper PCGS proofs (E7); a second
+declaration rather than written by hand (E6, *taken by Phase 91 and met*,
+[`DECLARED_FRAMES_STUDY.md`](studies/DECLARED_FRAMES_STUDY.md)); deeper PCGS proofs (E7); a second
 independent reading for the deep-hole fork (X1); and concept 6, which waits on
 a trilinear object in the runtime.
 [`SUBSTRATE_NATIVE_COGNITION_STUDY.md`](studies/SUBSTRATE_NATIVE_COGNITION_STUDY.md) §8.
@@ -1499,10 +1819,15 @@ follows from W5 and W6. A second mode that names the union it used in the
 answer, measured on a set written for it, would say what composition gains
 and what it gets wrong. [`ENGINEERING_LANGUAGE_STUDY.md`](studies/ENGINEERING_LANGUAGE_STUDY.md) §3.
 
-**F. Typed physical operators — named by Phase 59.** Monomial wheels cannot
-separate real, reactive and apparent power (W2-03), nor dot from cross
-product. Complex power with conjugation, over the Gaussian rationals the
-Smith chart already uses, is the smallest step. The record's Priority 5.
+**F. Typed physical operators — named by Phase 59, taken by Phase 90: closed.**
+Monomial wheels cannot separate real, reactive and apparent power (W2-03),
+nor dot from cross product. Complex power with conjugation, over the Gaussian
+rationals the Smith chart already uses, is the smallest step. The record's
+Priority 5. *Taken by Phase 90* ([`TYPED_OPERATORS_STUDY.md`](studies/TYPED_OPERATORS_STUDY.md)):
+every mark met. What it leaves is that study's §6: polar phasors, three-phase
+power and power-factor correction, the planner's own DC `power` with an
+alternating question (an earlier verdict, the owner's call), and the
+verifier's rank algebra joined to the typed values.
 
 **G. The archive Lean left behind — named by Phase 60, narrowed by Phase 61.**
 Phase 61 rebuilt the small files the supplied-material ledger named —
@@ -1530,9 +1855,18 @@ held-out sets were committed before the planner and share its author; an
 independently written set of questions, with labels from outside the
 registers, is the test that would separate reach from anticipation. The
 scoring rule and the harness exist (`evaluation/heldout.py`,
-`reasoning/typed_plans.py`); only the questions are missing.
+`reasoning/typed_plans.py`). *Taken by Phase 89 with the owner's two outside
+sets* ([`QUESTION_SET_B_STUDY.md`](studies/QUESTION_SET_B_STUDY.md)): before
+any frame the router read none of the 126 questions; with declared question
+frames Set B is 14 of 14 by audit and Outside O1 27 of 112, 0 confidently
+wrong. What it leaves is that study's §8, the located boundaries.
 
-**C. The register against the world — partly done in Phase 63.** A question
+**C. The register against the world — partly done in Phase 63, taken by
+Phase 93** ([`REGISTER_WORLD_STUDY.md`](studies/REGISTER_WORLD_STUDY.md): all
+354 cells of atomic weight, ionization energy and configuration read against
+frozen CIAAW and NIST sources; 24 ionization energies and one configuration
+discrepant; the register never written). What follows is the note as it was
+written. A question
 can now ask whether a register value is consistent with the declared standard
 table, at the precision each is held to; the full discrepancy report over
 every row is still open. The planner's one
@@ -1542,12 +1876,17 @@ discrepancy report of register values against cited standard values, never
 overwriting the register — would find every such row rather than the one a
 question happened to reach.
 
-**D. Discourse state, typed.** The conversation layer binds three surface
-shapes of follow-up; the planner's typed slots are the state a fourth shape
+**D. Discourse state, typed — taken by Phase 92**
+([`DISCOURSE_STATE_STUDY.md`](studies/DISCOURSE_STATE_STUDY.md): *the one
+before that*, the plurals and *why?* are read). The conversation layer bound
+three surface shapes of follow-up; the planner's typed slots are the state a fourth shape
 needs (*the one before that*, *both of them*), and a set-valued referent is
 what candidate 0 below asks for.
 
-**0. The second turn, carried further — named the round before last.** The conversation
+**0. The second turn, carried further — named the round before last; both
+halves taken by Phase 92** ([`DISCOURSE_STATE_STUDY.md`](studies/DISCOURSE_STATE_STUDY.md):
+the tie is carried as a column, refused `column-incomplete` under a hole, and
+the fourth shape is read). The conversation
 layer binds three declared shapes of follow-up and refuses everything else,
 and the two things it most obviously cannot do are each a round: a **fourth
 shape** that is not a surface pattern at all — *the one before that*, *both of
@@ -1590,7 +1929,10 @@ over a column with holes is the exact interval every completion lands in,
 proved sharp in `RequestProject/GLM/HoleBounds.lean`; the ends are refused as
 open; the present-rows question is answered as its own with the missing rows
 named. What it leaves is the study's §6: top-*k* and other quantiles as
-frames, a mean bounded by a declared range, and present-rows parity counts.
+frames, a mean bounded by a declared range, and present-rows parity counts —
+all three taken by Phase 91 and met
+([`DECLARED_FRAMES_STUDY.md`](studies/DECLARED_FRAMES_STUDY.md)), the top
+*k* under a hole refused whole.
 What follows is the note as it was written. The extremum
 operation refuses a column with a missing reading, and proves why. A rank, a
 median or a top-*k* over the same column each need their own statement of what
@@ -1808,7 +2150,12 @@ offered are refusals it agrees with. The question that would close it is about
 the **tool registry** — whether a tool exists that a problem-driven front end
 could reach and the kind-driven dispatcher cannot. Until one does, directive
 **D14** keeps the planner in the sandbox, imported by nothing the system
-computes with.
+computes with. *Re-read by Phase 88*
+([`PLANNER_LOOP_STUDY.md`](studies/PLANNER_LOOP_STUDY.md)): the loop's
+questions are answered when written as programs and by no surface when asked
+in English — the first measured instance of the reach this item asks for. The
+promotion line is still failed, because the supplied planner itself does not
+reach them; reading such a question from English is the next measurable step.
 
 **10. A conflation the rational reading must make.** Read alone, the exact
 distance measure conflates `A_1^24` with `A_2^12`. That is a capacity boundary
@@ -1874,7 +2221,7 @@ units reach `PROJECT_DIRECTIVES.md` (120 before Phase 78; see
 [`studies/ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) §5g).
 
 The six instruments in the ledger beside the
-<!--figure:test-files-->132 test files<!--/figure--> are `lean-build`,
+<!--figure:test-files-->141 test files<!--/figure--> are `lean-build`,
 `lean-sorry-free`, `capabilities`, `benchmarks`, `evaluation` and `figures`.
 (The seventh, `lean-copies-identical`, went with the second copy of the Lean
 tree in Phase 78: the development lives only in `overlay/glm_lean/`.) Editing a document makes exactly the units that

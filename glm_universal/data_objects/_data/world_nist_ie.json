@@ -1,0 +1,1100 @@
+{
+ "source": "NIST Atomic Spectra Database, Ionization Energies Data (neutral atoms, spectra H I to Og I)",
+ "url": "https://physics.nist.gov/cgi-bin/ASD/ie.pl?spectra=H-Og+i&units=1&format=2&order=0&at_num_out=on&sp_name_out=on&ion_charge_out=on&el_name_out=on&shells_out=on&level_out=on&e_out=0&unc_out=on&biblio=on",
+ "retrieved": "2026-10-03",
+ "raw_sha256": "716e2a37da3316f6f544ace8607ab26b1e71b6e62ab0c132c005f87e231665a4",
+ "reading": "ionization_energy_eV with uncertainty_eV is the standard interval value +/- uncertainty; a value with no stated uncertainty is read at the precision it is quoted to. mark '()' is a theoretical value and '[]' a semi-empirical (interpolated or extrapolated) one, as the database marks them. ground_shells is the database's ground-state configuration; the core abbreviations are expanded by the cores it lists.",
+ "cores": {
+  "He": "1s2",
+  "Ne": "1s2.2s2.2p6",
+  "Ar": "1s2.2s2.2p6.3s2.3p6",
+  "Kr": "1s2.2s2.2p6.3s2.3p6.3d10.4s2.4p6",
+  "Cd": "1s2.2s2.2p6.3s2.3p6.3d10.4s2.4p6.4d10.5s2",
+  "Xe": "1s2.2s2.2p6.3s2.3p6.3d10.4s2.4p6.4d10.5s2.5p6",
+  "Hg": "1s2.2s2.2p6.3s2.3p6.3d10.4s2.4p6.4d10.5s2.5p6.4f14.5d10.6s2",
+  "Rn": "1s2.2s2.2p6.3s2.3p6.3d10.4s2.4p6.4d10.5s2.5p6.4f14.5d10.6s2.6p6"
+ },
+ "count": 108,
+ "spectra": [
+  {
+   "z": 1,
+   "spectrum": "H I",
+   "ground_shells": "1s",
+   "ground_level": "2S<1/2>",
+   "mark": "()",
+   "ionization_energy_eV": "13.598434599702",
+   "uncertainty_eV": "0.000000000012",
+   "references": "HDEL"
+  },
+  {
+   "z": 2,
+   "spectrum": "He I",
+   "ground_shells": "1s2",
+   "ground_level": "1S0",
+   "mark": "",
+   "ionization_energy_eV": "24.587389011",
+   "uncertainty_eV": "0.000000025",
+   "references": "L17714"
+  },
+  {
+   "z": 3,
+   "spectrum": "Li I",
+   "ground_shells": "1s2.2s",
+   "ground_level": "2S<1/2>",
+   "mark": "",
+   "ionization_energy_eV": "5.391714996",
+   "uncertainty_eV": "0.000000022",
+   "references": "L12261"
+  },
+  {
+   "z": 4,
+   "spectrum": "Be I",
+   "ground_shells": "1s2.2s2",
+   "ground_level": "1S0",
+   "mark": "",
+   "ionization_energy_eV": "9.322699",
+   "uncertainty_eV": "0.000007",
+   "references": "L5964"
+  },
+  {
+   "z": 5,
+   "spectrum": "B I",
+   "ground_shells": "1s2.2s2.2p",
+   "ground_level": "2P*<1/2>",
+   "mark": "",
+   "ionization_energy_eV": "8.298019",
+   "uncertainty_eV": "0.000003",
+   "references": "L12312"
+  },
+  {
+   "z": 6,
+   "spectrum": "C I",
+   "ground_shells": "1s2.2s2.2p2",
+   "ground_level": "3P0",
+   "mark": "",
+   "ionization_energy_eV": "11.2602880",
+   "uncertainty_eV": "0.0000011",
+   "references": "L20057"
+  },
+  {
+   "z": 7,
+   "spectrum": "N I",
+   "ground_shells": "1s2.2s2.2p3",
+   "ground_level": "4S*<3/2>",
+   "mark": "",
+   "ionization_energy_eV": "14.53413",
+   "uncertainty_eV": "0.00004",
+   "references": "L1411"
+  },
+  {
+   "z": 8,
+   "spectrum": "O I",
+   "ground_shells": "1s2.2s2.2p4",
+   "ground_level": "3P<2>",
+   "mark": "",
+   "ionization_energy_eV": "13.618055",
+   "uncertainty_eV": "0.000007",
+   "references": "L74,L3760"
+  },
+  {
+   "z": 9,
+   "spectrum": "F I",
+   "ground_shells": "1s2.2s2.2p5",
+   "ground_level": "2P*<3/2>",
+   "mark": "",
+   "ionization_energy_eV": "17.42282",
+   "uncertainty_eV": "0.00005",
+   "references": "L7481,L526"
+  },
+  {
+   "z": 10,
+   "spectrum": "Ne I",
+   "ground_shells": "1s2.2s2.2p6",
+   "ground_level": "1S0",
+   "mark": "",
+   "ionization_energy_eV": "21.564541",
+   "uncertainty_eV": "0.000007",
+   "references": "L8826,L1407"
+  },
+  {
+   "z": 11,
+   "spectrum": "Na I",
+   "ground_shells": "[Ne].3s",
+   "ground_level": "2S<1/2>",
+   "mark": "",
+   "ionization_energy_eV": "5.13907696",
+   "uncertainty_eV": "0.00000025",
+   "references": "L10921,L9648"
+  },
+  {
+   "z": 12,
+   "spectrum": "Mg I",
+   "ground_shells": "[Ne].3s2",
+   "ground_level": "1S0",
+   "mark": "",
+   "ionization_energy_eV": "7.646236",
+   "uncertainty_eV": "0.000004",
+   "references": "L10635,L6969"
+  },
+  {
+   "z": 13,
+   "spectrum": "Al I",
+   "ground_shells": "[Ne].3s2.3p",
+   "ground_level": "2P*<1/2>",
+   "mark": "",
+   "ionization_energy_eV": "5.985769",
+   "uncertainty_eV": "0.000003",
+   "references": "L7215,L10321"
+  },
+  {
+   "z": 14,
+   "spectrum": "Si I",
+   "ground_shells": "[Ne].3s2.3p2",
+   "ground_level": "3P0",
+   "mark": "",
+   "ionization_energy_eV": "8.15168",
+   "uncertainty_eV": "0.00003",
+   "references": "L5815"
+  },
+  {
+   "z": 15,
+   "spectrum": "P I",
+   "ground_shells": "[Ne].3s2.3p3",
+   "ground_level": "4S*<3/2>",
+   "mark": "",
+   "ionization_energy_eV": "10.486686",
+   "uncertainty_eV": "0.000015",
+   "references": "L5148"
+  },
+  {
+   "z": 16,
+   "spectrum": "S I",
+   "ground_shells": "[Ne].3s2.3p4",
+   "ground_level": "3P<2>",
+   "mark": "",
+   "ionization_energy_eV": "10.3600167",
+   "uncertainty_eV": "0.0000014",
+   "references": "L23116"
+  },
+  {
+   "z": 17,
+   "spectrum": "Cl I",
+   "ground_shells": "[Ne].3s2.3p5",
+   "ground_level": "2P*<3/2>",
+   "mark": "",
+   "ionization_energy_eV": "12.967633",
+   "uncertainty_eV": "0.000016",
+   "references": "L19191"
+  },
+  {
+   "z": 18,
+   "spectrum": "Ar I",
+   "ground_shells": "[Ne].3s2.3p6",
+   "ground_level": "1S0",
+   "mark": "",
+   "ionization_energy_eV": "15.7596119",
+   "uncertainty_eV": "0.0000005",
+   "references": "L9217"
+  },
+  {
+   "z": 19,
+   "spectrum": "K I",
+   "ground_shells": "[Ar].4s",
+   "ground_level": "2S<1/2>",
+   "mark": "",
+   "ionization_energy_eV": "4.34066373",
+   "uncertainty_eV": "0.00000009",
+   "references": "L5451,L5783,L7185"
+  },
+  {
+   "z": 20,
+   "spectrum": "Ca I",
+   "ground_shells": "[Ar].4s2",
+   "ground_level": "1S0",
+   "mark": "",
+   "ionization_energy_eV": "6.1131549210",
+   "uncertainty_eV": "0.0000000005",
+   "references": "L22848"
+  },
+  {
+   "z": 21,
+   "spectrum": "Sc I",
+   "ground_shells": "[Ar].3d.4s2",
+   "ground_level": "2D<3/2>",
+   "mark": "",
+   "ionization_energy_eV": "6.56149",
+   "uncertainty_eV": "0.00006",
+   "references": "L7185,L2110"
+  },
+  {
+   "z": 22,
+   "spectrum": "Ti I",
+   "ground_shells": "[Ar].3d2.4s2",
+   "ground_level": "3F<2>",
+   "mark": "",
+   "ionization_energy_eV": "6.828120",
+   "uncertainty_eV": "0.000012",
+   "references": "L17996"
+  },
+  {
+   "z": 23,
+   "spectrum": "V I",
+   "ground_shells": "[Ar].3d3.4s2",
+   "ground_level": "4F<3/2>",
+   "mark": "",
+   "ionization_energy_eV": "6.746187",
+   "uncertainty_eV": "0.000021",
+   "references": "L17712,L20010"
+  },
+  {
+   "z": 24,
+   "spectrum": "Cr I",
+   "ground_shells": "[Ar].3d5.4s",
+   "ground_level": "7S<3>",
+   "mark": "",
+   "ionization_energy_eV": "6.76651",
+   "uncertainty_eV": "0.00004",
+   "references": "L7185,L2832"
+  },
+  {
+   "z": 25,
+   "spectrum": "Mn I",
+   "ground_shells": "[Ar].3d5.4s2",
+   "ground_level": "6S<5/2>",
+   "mark": "",
+   "ionization_energy_eV": "7.4340380",
+   "uncertainty_eV": "0.0000012",
+   "references": "L19057"
+  },
+  {
+   "z": 26,
+   "spectrum": "Fe I",
+   "ground_shells": "[Ar].3d6.4s2",
+   "ground_level": "5D<4>",
+   "mark": "",
+   "ionization_energy_eV": "7.9024681",
+   "uncertainty_eV": "0.0000012",
+   "references": "L7743c109"
+  },
+  {
+   "z": 27,
+   "spectrum": "Co I",
+   "ground_shells": "[Ar].3d7.4s2",
+   "ground_level": "4F<9/2>",
+   "mark": "",
+   "ionization_energy_eV": "7.88101",
+   "uncertainty_eV": "0.00012",
+   "references": "L10545"
+  },
+  {
+   "z": 28,
+   "spectrum": "Ni I",
+   "ground_shells": "[Ar].3d8.4s2",
+   "ground_level": "3F<4>",
+   "mark": "",
+   "ionization_energy_eV": "7.639878",
+   "uncertainty_eV": "0.000017",
+   "references": "L12369"
+  },
+  {
+   "z": 29,
+   "spectrum": "Cu I",
+   "ground_shells": "[Ar].3d10.4s",
+   "ground_level": "2S<1/2>",
+   "mark": "",
+   "ionization_energy_eV": "7.726380",
+   "uncertainty_eV": "0.000004",
+   "references": "L14897"
+  },
+  {
+   "z": 30,
+   "spectrum": "Zn I",
+   "ground_shells": "[Ar].3d10.4s2",
+   "ground_level": "1S0",
+   "mark": "",
+   "ionization_energy_eV": "9.394197",
+   "uncertainty_eV": "0.000006",
+   "references": "L13951"
+  },
+  {
+   "z": 31,
+   "spectrum": "Ga I",
+   "ground_shells": "[Ar].3d10.4s2.4p",
+   "ground_level": "2P*<1/2>",
+   "mark": "",
+   "ionization_energy_eV": "5.9993020",
+   "uncertainty_eV": "0.0000012",
+   "references": "L5566"
+  },
+  {
+   "z": 32,
+   "spectrum": "Ge I",
+   "ground_shells": "[Ar].3d10.4s2.4p2",
+   "ground_level": "3P0",
+   "mark": "",
+   "ionization_energy_eV": "7.899435",
+   "uncertainty_eV": "0.000012",
+   "references": "L3935,L12369"
+  },
+  {
+   "z": 33,
+   "spectrum": "As I",
+   "ground_shells": "[Ar].3d10.4s2.4p3",
+   "ground_level": "4S*<3/2>",
+   "mark": "",
+   "ionization_energy_eV": "9.78855",
+   "uncertainty_eV": "0.00025",
+   "references": "L1351"
+  },
+  {
+   "z": 34,
+   "spectrum": "Se I",
+   "ground_shells": "[Ar].3d10.4s2.4p4",
+   "ground_level": "3P<2>",
+   "mark": "",
+   "ionization_energy_eV": "9.752368",
+   "uncertainty_eV": "0.000006",
+   "references": "L21645"
+  },
+  {
+   "z": 35,
+   "spectrum": "Br I",
+   "ground_shells": "[Ar].3d10.4s2.4p5",
+   "ground_level": "2P*<3/2>",
+   "mark": "",
+   "ionization_energy_eV": "11.81381",
+   "uncertainty_eV": "0.00006",
+   "references": "L351,L67"
+  },
+  {
+   "z": 36,
+   "spectrum": "Kr I",
+   "ground_shells": "[Ar].3d10.4s2.4p6",
+   "ground_level": "1S0",
+   "mark": "",
+   "ionization_energy_eV": "13.9996055",
+   "uncertainty_eV": "0.0000020",
+   "references": "L12196"
+  },
+  {
+   "z": 37,
+   "spectrum": "Rb I",
+   "ground_shells": "[Kr].5s",
+   "ground_level": "2S<1/2>",
+   "mark": "",
+   "ionization_energy_eV": "4.1771281",
+   "uncertainty_eV": "0.0000012",
+   "references": "L4740,L5783"
+  },
+  {
+   "z": 38,
+   "spectrum": "Sr I",
+   "ground_shells": "[Kr].5s2",
+   "ground_level": "1S0",
+   "mark": "",
+   "ionization_energy_eV": "5.69486745",
+   "uncertainty_eV": "0.00000012",
+   "references": "L15350,L5644"
+  },
+  {
+   "z": 39,
+   "spectrum": "Y I",
+   "ground_shells": "[Kr].4d.5s2",
+   "ground_level": "2D<3/2>",
+   "mark": "",
+   "ionization_energy_eV": "6.21726",
+   "uncertainty_eV": "0.00010",
+   "references": "L8844,L2111,L9735"
+  },
+  {
+   "z": 40,
+   "spectrum": "Zr I",
+   "ground_shells": "[Kr].4d2.5s2",
+   "ground_level": "3F<2>",
+   "mark": "",
+   "ionization_energy_eV": "6.634126",
+   "uncertainty_eV": "0.000005",
+   "references": "L21107"
+  },
+  {
+   "z": 41,
+   "spectrum": "Nb I",
+   "ground_shells": "[Kr].4d4.5s",
+   "ground_level": "6D<1/2>",
+   "mark": "",
+   "ionization_energy_eV": "6.75885",
+   "uncertainty_eV": "0.00004",
+   "references": "L6829"
+  },
+  {
+   "z": 42,
+   "spectrum": "Mo I",
+   "ground_shells": "[Kr].4d5.5s",
+   "ground_level": "7S<3>",
+   "mark": "",
+   "ionization_energy_eV": "7.09243",
+   "uncertainty_eV": "0.00004",
+   "references": "L6829"
+  },
+  {
+   "z": 43,
+   "spectrum": "Tc I",
+   "ground_shells": "[Kr].4d5.5s2",
+   "ground_level": "6S<5/2>",
+   "mark": "",
+   "ionization_energy_eV": "7.11938",
+   "uncertainty_eV": "0.00003",
+   "references": "L15237"
+  },
+  {
+   "z": 44,
+   "spectrum": "Ru I",
+   "ground_shells": "[Kr].4d7.5s",
+   "ground_level": "5F<5>",
+   "mark": "",
+   "ionization_energy_eV": "7.36050",
+   "uncertainty_eV": "0.00005",
+   "references": "L10032"
+  },
+  {
+   "z": 45,
+   "spectrum": "Rh I",
+   "ground_shells": "[Kr].4d8.5s",
+   "ground_level": "4F<9/2>",
+   "mark": "",
+   "ionization_energy_eV": "7.45890",
+   "uncertainty_eV": "0.00005",
+   "references": "L10032"
+  },
+  {
+   "z": 46,
+   "spectrum": "Pd I",
+   "ground_shells": "[Kr].4d10",
+   "ground_level": "1S0",
+   "mark": "",
+   "ionization_energy_eV": "8.336839",
+   "uncertainty_eV": "0.000010",
+   "references": "L20363"
+  },
+  {
+   "z": 47,
+   "spectrum": "Ag I",
+   "ground_shells": "[Kr].4d10.5s",
+   "ground_level": "2S<1/2>",
+   "mark": "",
+   "ionization_energy_eV": "7.576234",
+   "uncertainty_eV": "0.000025",
+   "references": "L11835"
+  },
+  {
+   "z": 48,
+   "spectrum": "Cd I",
+   "ground_shells": "[Kr].4d10.5s2",
+   "ground_level": "1S0",
+   "mark": "",
+   "ionization_energy_eV": "8.993820",
+   "uncertainty_eV": "0.000016",
+   "references": "L18843"
+  },
+  {
+   "z": 49,
+   "spectrum": "In I",
+   "ground_shells": "[Cd].5p",
+   "ground_level": "2P*<1/2>",
+   "mark": "",
+   "ionization_energy_eV": "5.7863558",
+   "uncertainty_eV": "0.0000005",
+   "references": "L21649"
+  },
+  {
+   "z": 50,
+   "spectrum": "Sn I",
+   "ground_shells": "[Cd].5p2",
+   "ground_level": "3P0",
+   "mark": "",
+   "ionization_energy_eV": "7.343918",
+   "uncertainty_eV": "0.000012",
+   "references": "L3936"
+  },
+  {
+   "z": 51,
+   "spectrum": "Sb I",
+   "ground_shells": "[Cd].5p3",
+   "ground_level": "4S*<3/2>",
+   "mark": "",
+   "ionization_energy_eV": "8.608389",
+   "uncertainty_eV": "0.000012",
+   "references": "L8844,L6684"
+  },
+  {
+   "z": 52,
+   "spectrum": "Te I",
+   "ground_shells": "[Cd].5p4",
+   "ground_level": "3P<2>",
+   "mark": "",
+   "ionization_energy_eV": "9.009808",
+   "uncertainty_eV": "0.000006",
+   "references": "L21109"
+  },
+  {
+   "z": 53,
+   "spectrum": "I I",
+   "ground_shells": "[Cd].5p5",
+   "ground_level": "2P*<3/2>",
+   "mark": "",
+   "ionization_energy_eV": "10.451236",
+   "uncertainty_eV": "0.000025",
+   "references": "L13998,L22518"
+  },
+  {
+   "z": 54,
+   "spectrum": "Xe I",
+   "ground_shells": "[Cd].5p6",
+   "ground_level": "1S0",
+   "mark": "",
+   "ionization_energy_eV": "12.1298437",
+   "uncertainty_eV": "0.0000015",
+   "references": "L12013,L9794,L6426"
+  },
+  {
+   "z": 55,
+   "spectrum": "Cs I",
+   "ground_shells": "[Xe].6s",
+   "ground_level": "2S<1/2>",
+   "mark": "",
+   "ionization_energy_eV": "3.89390572743",
+   "uncertainty_eV": "0.00000000017",
+   "references": "L19479"
+  },
+  {
+   "z": 56,
+   "spectrum": "Ba I",
+   "ground_shells": "[Xe].6s2",
+   "ground_level": "1S0",
+   "mark": "",
+   "ionization_energy_eV": "5.2116646",
+   "uncertainty_eV": "0.0000012",
+   "references": "L6347,L9224"
+  },
+  {
+   "z": 57,
+   "spectrum": "La I",
+   "ground_shells": "[Xe].5d.6s2",
+   "ground_level": "2D<3/2>",
+   "mark": "",
+   "ionization_energy_eV": "5.5769",
+   "uncertainty_eV": "0.0006",
+   "references": "L3974,L16228"
+  },
+  {
+   "z": 58,
+   "spectrum": "Ce I",
+   "ground_shells": "[Xe].4f.5d.6s2",
+   "ground_level": "1G*<4>",
+   "mark": "",
+   "ionization_energy_eV": "5.5386",
+   "uncertainty_eV": "0.0004",
+   "references": "L4277"
+  },
+  {
+   "z": 59,
+   "spectrum": "Pr I",
+   "ground_shells": "[Xe].4f3.6s2",
+   "ground_level": "4I*<9/2>",
+   "mark": "[]",
+   "ionization_energy_eV": "5.4702",
+   "uncertainty_eV": "0.0004",
+   "references": "L19006"
+  },
+  {
+   "z": 60,
+   "spectrum": "Nd I",
+   "ground_shells": "[Xe].4f4.6s2",
+   "ground_level": "5I<4>",
+   "mark": "",
+   "ionization_energy_eV": "5.52475",
+   "uncertainty_eV": "0.00005",
+   "references": "L23155"
+  },
+  {
+   "z": 61,
+   "spectrum": "Pm I",
+   "ground_shells": "[Xe].4f5.6s2",
+   "ground_level": "6H*<5/2>",
+   "mark": "",
+   "ionization_energy_eV": "5.58187",
+   "uncertainty_eV": "0.00004",
+   "references": "L20992"
+  },
+  {
+   "z": 62,
+   "spectrum": "Sm I",
+   "ground_shells": "[Xe].4f6.6s2",
+   "ground_level": "7F0",
+   "mark": "",
+   "ionization_energy_eV": "5.643722",
+   "uncertainty_eV": "0.000021",
+   "references": "L21624"
+  },
+  {
+   "z": 63,
+   "spectrum": "Eu I",
+   "ground_shells": "[Xe].4f7.6s2",
+   "ground_level": "8S*<7/2>",
+   "mark": "",
+   "ionization_energy_eV": "5.670385",
+   "uncertainty_eV": "0.000005",
+   "references": "L13382"
+  },
+  {
+   "z": 64,
+   "spectrum": "Gd I",
+   "ground_shells": "[Xe].4f7.5d.6s2",
+   "ground_level": "9D*<2>",
+   "mark": "",
+   "ionization_energy_eV": "6.14980",
+   "uncertainty_eV": "0.00004",
+   "references": "L11798"
+  },
+  {
+   "z": 65,
+   "spectrum": "Tb I",
+   "ground_shells": "[Xe].4f9.6s2",
+   "ground_level": "6H*<15/2>",
+   "mark": "",
+   "ionization_energy_eV": "5.8638",
+   "uncertainty_eV": "0.0006",
+   "references": "L4277"
+  },
+  {
+   "z": 66,
+   "spectrum": "Dy I",
+   "ground_shells": "[Xe].4f10.6s2",
+   "ground_level": "5I<8>",
+   "mark": "",
+   "ionization_energy_eV": "5.939061",
+   "uncertainty_eV": "0.000006",
+   "references": "L22122"
+  },
+  {
+   "z": 67,
+   "spectrum": "Ho I",
+   "ground_shells": "[Xe].4f11.6s2",
+   "ground_level": "4I*<15/2>",
+   "mark": "",
+   "ionization_energy_eV": "6.0215",
+   "uncertainty_eV": "0.0006",
+   "references": "L4277"
+  },
+  {
+   "z": 68,
+   "spectrum": "Er I",
+   "ground_shells": "[Xe].4f12.6s2",
+   "ground_level": "3H<6>",
+   "mark": "",
+   "ionization_energy_eV": "6.1077",
+   "uncertainty_eV": "0.0010",
+   "references": "L4277"
+  },
+  {
+   "z": 69,
+   "spectrum": "Tm I",
+   "ground_shells": "[Xe].4f13.6s2",
+   "ground_level": "2F*<7/2>",
+   "mark": "",
+   "ionization_energy_eV": "6.184402",
+   "uncertainty_eV": "0.000009",
+   "references": "L22274"
+  },
+  {
+   "z": 70,
+   "spectrum": "Yb I",
+   "ground_shells": "[Xe].4f14.6s2",
+   "ground_level": "1S0",
+   "mark": "",
+   "ionization_energy_eV": "6.254160",
+   "uncertainty_eV": "0.000012",
+   "references": "L4980"
+  },
+  {
+   "z": 71,
+   "spectrum": "Lu I",
+   "ground_shells": "[Xe].4f14.5d.6s2",
+   "ground_level": "2D<3/2>",
+   "mark": "",
+   "ionization_energy_eV": "5.425871",
+   "uncertainty_eV": "0.000012",
+   "references": "L10494,L1638"
+  },
+  {
+   "z": 72,
+   "spectrum": "Hf I",
+   "ground_shells": "[Xe].4f14.5d2.6s2",
+   "ground_level": "3F<2>",
+   "mark": "",
+   "ionization_energy_eV": "6.825070",
+   "uncertainty_eV": "0.000012",
+   "references": "L14027,L10033"
+  },
+  {
+   "z": 73,
+   "spectrum": "Ta I",
+   "ground_shells": "[Xe].4f14.5d3.6s2",
+   "ground_level": "4F<3/2>",
+   "mark": "",
+   "ionization_energy_eV": "7.549571",
+   "uncertainty_eV": "0.000025",
+   "references": "L13153"
+  },
+  {
+   "z": 74,
+   "spectrum": "W I",
+   "ground_shells": "[Xe].4f14.5d4.6s2",
+   "ground_level": "5D0",
+   "mark": "",
+   "ionization_energy_eV": "7.86403",
+   "uncertainty_eV": "0.00010",
+   "references": "L11604"
+  },
+  {
+   "z": 75,
+   "spectrum": "Re I",
+   "ground_shells": "[Xe].4f14.5d5.6s2",
+   "ground_level": "6S<5/2>",
+   "mark": "",
+   "ionization_energy_eV": "7.83352",
+   "uncertainty_eV": "0.00011",
+   "references": "L11604"
+  },
+  {
+   "z": 76,
+   "spectrum": "Os I",
+   "ground_shells": "[Xe].4f14.5d6.6s2",
+   "ground_level": "5D<4>",
+   "mark": "",
+   "ionization_energy_eV": "8.43823",
+   "uncertainty_eV": "0.00020",
+   "references": "L8105"
+  },
+  {
+   "z": 77,
+   "spectrum": "Ir I",
+   "ground_shells": "[Xe].4f14.5d7.6s2",
+   "ground_level": "4F<9/2>",
+   "mark": "",
+   "ionization_energy_eV": "8.96702",
+   "uncertainty_eV": "0.00022",
+   "references": "L8105"
+  },
+  {
+   "z": 78,
+   "spectrum": "Pt I",
+   "ground_shells": "[Xe].4f14.5d9.6s",
+   "ground_level": "3D<3>",
+   "mark": "",
+   "ionization_energy_eV": "8.95883",
+   "uncertainty_eV": "0.00010",
+   "references": "L9735,L11689"
+  },
+  {
+   "z": 79,
+   "spectrum": "Au I",
+   "ground_shells": "[Xe].4f14.5d10.6s",
+   "ground_level": "2S<1/2>",
+   "mark": "",
+   "ionization_energy_eV": "9.225554",
+   "uncertainty_eV": "0.000004",
+   "references": "L12088"
+  },
+  {
+   "z": 80,
+   "spectrum": "Hg I",
+   "ground_shells": "[Xe].4f14.5d10.6s2",
+   "ground_level": "1S0",
+   "mark": "",
+   "ionization_energy_eV": "10.437504",
+   "uncertainty_eV": "0.000006",
+   "references": "L11931,L11984"
+  },
+  {
+   "z": 81,
+   "spectrum": "Tl I",
+   "ground_shells": "[Hg].6p",
+   "ground_level": "2P*<1/2>",
+   "mark": "",
+   "ionization_energy_eV": "6.1082873",
+   "uncertainty_eV": "0.0000012",
+   "references": "L16353"
+  },
+  {
+   "z": 82,
+   "spectrum": "Pb I",
+   "ground_shells": "[Hg].6p2",
+   "ground_level": "(1/2,1/2)0",
+   "mark": "",
+   "ionization_energy_eV": "7.4166799",
+   "uncertainty_eV": "0.0000006",
+   "references": "L11569"
+  },
+  {
+   "z": 83,
+   "spectrum": "Bi I",
+   "ground_shells": "[Hg].6p3",
+   "ground_level": "4S*<3/2>",
+   "mark": "",
+   "ionization_energy_eV": "7.285516",
+   "uncertainty_eV": "0.000006",
+   "references": "L10664,L6247"
+  },
+  {
+   "z": 84,
+   "spectrum": "Po I",
+   "ground_shells": "[Hg].6p4",
+   "ground_level": "3P<2>",
+   "mark": "",
+   "ionization_energy_eV": "8.418070",
+   "uncertainty_eV": "0.000004",
+   "references": "L20887,L20886"
+  },
+  {
+   "z": 85,
+   "spectrum": "At I",
+   "ground_shells": "[Hg].6p5",
+   "ground_level": "2P*<3/2>",
+   "mark": "",
+   "ionization_energy_eV": "9.31751",
+   "uncertainty_eV": "0.00008",
+   "references": "L18394"
+  },
+  {
+   "z": 86,
+   "spectrum": "Rn I",
+   "ground_shells": "[Hg].6p6",
+   "ground_level": "1S0",
+   "mark": "",
+   "ionization_energy_eV": "10.74850",
+   "uncertainty_eV": null,
+   "references": "L272,L7432"
+  },
+  {
+   "z": 87,
+   "spectrum": "Fr I",
+   "ground_shells": "[Rn].7s",
+   "ground_level": "2S<1/2>",
+   "mark": "",
+   "ionization_energy_eV": "4.0727411",
+   "uncertainty_eV": "0.0000011",
+   "references": "L10714"
+  },
+  {
+   "z": 88,
+   "spectrum": "Ra I",
+   "ground_shells": "[Rn].7s2",
+   "ground_level": "1S0",
+   "mark": "",
+   "ionization_energy_eV": "5.2784239",
+   "uncertainty_eV": "0.0000025",
+   "references": "L4979"
+  },
+  {
+   "z": 89,
+   "spectrum": "Ac I",
+   "ground_shells": "[Rn].6d.7s2",
+   "ground_level": "2D<3/2>",
+   "mark": "",
+   "ionization_energy_eV": "5.380235",
+   "uncertainty_eV": "0.000012",
+   "references": "L22136,L17893"
+  },
+  {
+   "z": 90,
+   "spectrum": "Th I",
+   "ground_shells": "[Rn].6d2.7s2",
+   "ground_level": "3F<2>",
+   "mark": "",
+   "ionization_energy_eV": "6.30670",
+   "uncertainty_eV": "0.00025",
+   "references": "L15992"
+  },
+  {
+   "z": 91,
+   "spectrum": "Pa I",
+   "ground_shells": "[Rn].5f2.6d.7s2",
+   "ground_level": "4K<11/2>",
+   "mark": "[]",
+   "ionization_energy_eV": "5.89",
+   "uncertainty_eV": "0.12",
+   "references": "L16359"
+  },
+  {
+   "z": 92,
+   "spectrum": "U I",
+   "ground_shells": "[Rn].5f3.6d.7s2",
+   "ground_level": "5L*<6>",
+   "mark": "",
+   "ionization_energy_eV": "6.19405",
+   "uncertainty_eV": "0.00006",
+   "references": "L5494,L7765"
+  },
+  {
+   "z": 93,
+   "spectrum": "Np I",
+   "ground_shells": "[Rn].5f4.6d.7s2",
+   "ground_level": "6L<11/2>",
+   "mark": "",
+   "ionization_energy_eV": "6.265608",
+   "uncertainty_eV": "0.000019",
+   "references": "L23048"
+  },
+  {
+   "z": 94,
+   "spectrum": "Pu I",
+   "ground_shells": "[Rn].5f6.7s2",
+   "ground_level": "7F0",
+   "mark": "",
+   "ionization_energy_eV": "6.02576",
+   "uncertainty_eV": "0.00025",
+   "references": "L15992,L11260"
+  },
+  {
+   "z": 95,
+   "spectrum": "Am I",
+   "ground_shells": "[Rn].5f7.7s2",
+   "ground_level": "8S*<7/2>",
+   "mark": "",
+   "ionization_energy_eV": "5.97381",
+   "uncertainty_eV": "0.00025",
+   "references": "L15992"
+  },
+  {
+   "z": 96,
+   "spectrum": "Cm I",
+   "ground_shells": "[Rn].5f7.6d.7s2",
+   "ground_level": "9D*<2>",
+   "mark": "",
+   "ionization_energy_eV": "5.992241",
+   "uncertainty_eV": "0.000020",
+   "references": "L22423"
+  },
+  {
+   "z": 97,
+   "spectrum": "Bk I",
+   "ground_shells": "[Rn].5f9.7s2",
+   "ground_level": "6H*<15/2>",
+   "mark": "",
+   "ionization_energy_eV": "6.19785",
+   "uncertainty_eV": "0.00025",
+   "references": "L15992"
+  },
+  {
+   "z": 98,
+   "spectrum": "Cf I",
+   "ground_shells": "[Rn].5f10.7s2",
+   "ground_level": "5I<8>",
+   "mark": "",
+   "ionization_energy_eV": "6.281878",
+   "uncertainty_eV": "0.000006",
+   "references": "L22260"
+  },
+  {
+   "z": 99,
+   "spectrum": "Es I",
+   "ground_shells": "[Rn].5f11.7s2",
+   "ground_level": "4I*<15/2>",
+   "mark": "",
+   "ionization_energy_eV": "6.36840",
+   "uncertainty_eV": "0.00006",
+   "references": "L22449"
+  },
+  {
+   "z": 100,
+   "spectrum": "Fm I",
+   "ground_shells": "[Rn].5f12.7s2",
+   "ground_level": "3H<6>",
+   "mark": "[]",
+   "ionization_energy_eV": "6.50",
+   "uncertainty_eV": "0.07",
+   "references": "L16359"
+  },
+  {
+   "z": 101,
+   "spectrum": "Md I",
+   "ground_shells": "[Rn].5f13.7s2",
+   "ground_level": "2F*<7/2>",
+   "mark": "[]",
+   "ionization_energy_eV": "6.58",
+   "uncertainty_eV": "0.07",
+   "references": "L16359"
+  },
+  {
+   "z": 102,
+   "spectrum": "No I",
+   "ground_shells": "[Rn].5f14.7s2",
+   "ground_level": "1S0",
+   "mark": "",
+   "ionization_energy_eV": "6.62621",
+   "uncertainty_eV": "0.00005",
+   "references": "L20870"
+  },
+  {
+   "z": 103,
+   "spectrum": "Lr I",
+   "ground_shells": "[Rn].5f14.7s2.7p",
+   "ground_level": "2P*<1/2>",
+   "mark": "",
+   "ionization_energy_eV": "4.96",
+   "uncertainty_eV": "0.05",
+   "references": "L21372"
+  },
+  {
+   "z": 104,
+   "spectrum": "Rf I",
+   "ground_shells": "[Rn].5f14.6d2.7s2",
+   "ground_level": "3F<2>",
+   "mark": "()",
+   "ionization_energy_eV": "6.02",
+   "uncertainty_eV": "0.04",
+   "references": "L19691"
+  },
+  {
+   "z": 105,
+   "spectrum": "Db I",
+   "ground_shells": "[Rn].5f14.6d3.7s2",
+   "ground_level": "4F<3/2>",
+   "mark": "()",
+   "ionization_energy_eV": "6.8",
+   "uncertainty_eV": "0.5",
+   "references": "L12825"
+  },
+  {
+   "z": 106,
+   "spectrum": "Sg I",
+   "ground_shells": "[Rn].5f14.6d4.7s2",
+   "ground_level": "0",
+   "mark": "[]",
+   "ionization_energy_eV": "7.8",
+   "uncertainty_eV": "0.5",
+   "references": "L7830"
+  },
+  {
+   "z": 107,
+   "spectrum": "Bh I",
+   "ground_shells": "[Rn].5f14.6d5.7s2",
+   "ground_level": "<5/2>",
+   "mark": "[]",
+   "ionization_energy_eV": "7.7",
+   "uncertainty_eV": "0.5",
+   "references": "L13544"
+  },
+  {
+   "z": 108,
+   "spectrum": "Hs I",
+   "ground_shells": "[Rn].5f14.6d6.7s2",
+   "ground_level": "<4>",
+   "mark": "[]",
+   "ionization_energy_eV": "7.6",
+   "uncertainty_eV": "0.5",
+   "references": "L13544"
+  }
+ ]
+}

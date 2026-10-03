@@ -16,6 +16,8 @@ from pathlib import Path
 
 import pytest
 
+from glm_universal.runtime.frame_declarations import declared_verdict
+
 from glm_universal.evaluation import stepwise_three_cases as C
 from glm_universal.reasoning import stepwise_script as ss
 from glm_universal.runtime import declared_frames as df
@@ -105,10 +107,12 @@ class TestPrefixes(unittest.TestCase):
 
     def test_every_declared_prefix_case(self):
         for cid, q, want, stitch in C.PREFIX_CASES:
+            moved = declared_verdict("stepwise_three", cid, want) != want
+            want = declared_verdict("stepwise_three", cid, want)
             with self.subTest(case=cid):
                 a = sw.answer(session(), q)
                 self.assertEqual(want, verdict(a)[:len(want)])
-                if a.answered:
+                if a.answered and not moved:
                     self.assertEqual(stitch, sw.stitched_of(a))
 
     def test_the_prefixes_are_exact_and_switchable(self):
@@ -126,6 +130,7 @@ class TestFolds(unittest.TestCase):
 
     def test_every_declared_fold_case(self):
         for cid, q, want in C.FOLD_CASES:
+            want = declared_verdict("stepwise_three", cid, want)
             with self.subTest(case=cid):
                 got = verdict(sw.answer(session(), q))
                 self.assertEqual(want, got[:len(want)])

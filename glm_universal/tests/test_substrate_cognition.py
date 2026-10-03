@@ -230,8 +230,10 @@ class TestRoundTwoExperiments(unittest.TestCase):
 
     def test_y1_interval_questions(self):
         r = sc.interval_wired_experiment(self.session)
-        self.assertEqual(r["planner"], {"correct": 7, "correct-refusal": 1})
-        self.assertEqual(r["grammar"], {"correct-refusal": 1, "refused": 7})
+        # Phase 93 moved y1-gold-standard, as declared, from a correct
+        # refusal (gold outside the 30-row table) to a correct answer.
+        self.assertEqual(r["planner"], {"correct": 8})
+        self.assertEqual(r["grammar"], {"refused": 8})
         self.assertEqual(r["guard_element_overlaps"], 0)
         self.assertEqual(r["guard_molecule_overlaps"], 0)
         self.assertTrue(r["passed"])

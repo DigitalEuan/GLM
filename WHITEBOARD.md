@@ -5,8 +5,9 @@
 **Question.** If this session stopped now, what would the next one need to
 know to carry the round on?
 
-**Verdict.** No round is in flight: Phase 87 closed, and the next round starts
-from round 2 of the order of work at the head of `STATUS.md` §3.4.
+**Verdict.** No round is in flight: Phase 95 closed, and the next round starts
+from round 8 of the order of work at the head of `STATUS.md` §3.4 (second
+readings).
 
 **Deciding figure.** 0 steps outstanding.
 
@@ -42,7 +43,77 @@ absence:
 
 ## Status
 
-**No round is in flight.** Phase 87 — the open candidates merged into
+**No round is in flight.** Phase 95 — the imperative grammar: programs with
+state (assignment, simultaneous assignment, loops, branches, conditional
+expressions, functions with recursion and `match`) spoken head first with
+every list counted, read back, run with counted steps and bounded depth, and
+replayed with a trace by a fresh interpreter — is closed: the study is
+[`studies/IMPERATIVE_GRAMMAR_STUDY.md`](studies/IMPERATIVE_GRAMMAR_STUDY.md),
+the record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 95, 8 of 9 marks are
+met (I7 not met: one earlier refusal made more specific), and the next round
+is round 8 of the order (second readings).
+Phase 94 — the third sort: strings, tuples and
+ranges in the reverse grammar with count-first literals, and the Python
+dialect widened to string methods over code points and lists and dicts as
+immutable snapshots, every in-place change refused by name — is closed: the
+study is [`studies/THIRD_SORT_STUDY.md`](studies/THIRD_SORT_STUDY.md), the
+record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 94, and the next round is
+the second half of round 7 of the order (M's imperative grammar).
+Phase 93 — the register against the world: every
+one of the element register's 354 cells of atomic weight, ionization energy
+and configuration read against frozen, cited outside values (CIAAW 2024, NIST
+ASD) at the precision each side is held to, never writing to the register,
+and the chemistry completion gate made to read the nested holdout
+(`covalent_radius_pm` demoted, `electron_affinity_eV` narrowed to the main
+group) — is closed: the study is
+[`studies/REGISTER_WORLD_STUDY.md`](studies/REGISTER_WORLD_STUDY.md), the
+record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 93, and the next round is
+round 7 of the order (the third sort).
+Phase 92 — discourse state: a fold's tie carried
+as a column of the rows' own answers (`column-incomplete` under a hole), the
+fourth shape of follow-up (*the one before that*, *them*, *both of them*,
+*why?*) and follow-ups licensed by every surface through the router, held by
+`GLM.py --converse` — is closed: the study is
+[`studies/DISCOURSE_STATE_STUDY.md`](studies/DISCOURSE_STATE_STUDY.md), the
+record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 92, and the next round is
+round 6 of the order (the register against the world).
+Phase 91 — frames from a declaration: the
+stepwise planner's fold frames generated from one declaration, and the
+widenings written as entries in it (further order statistics, superlatives
+and the top `k`, bounds through a declared physical range, the present-rows
+parity count, *the metals* and *the rare earths*, the remaining exact SI
+prefixes and the molecule table's comparatives) — is closed: the study is
+[`studies/DECLARED_FRAMES_STUDY.md`](studies/DECLARED_FRAMES_STUDY.md), the
+record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 91.
+Phase 90 — typed operators: real, reactive and
+apparent power and the power factor from phasors, an impedance or the power
+triangle, the watt, the var and the volt-ampere as kind-restricted names, and
+the dot against the cross product, through a declared frame the router reaches
+— is closed: the study is
+[`studies/TYPED_OPERATORS_STUDY.md`](studies/TYPED_OPERATORS_STUDY.md), the
+record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 90, and the next round is
+round 4 of the order (the planner widenings).
+Phase 89 — the owner's two outside question sets
+read through declared question frames, each answer gated by its own column-3
+script (Set B 14 of 14 by audit; Outside O1 27 of 112 framed and correct, 0
+confidently wrong, 85 located boundaries in a Capability Failure Matrix),
+`-q` routed through the multi-surface router (K1), and candidate P's two
+contract changes decided by a 4-way matrix (variant D is the production
+baseline) — is closed: the studies are
+[`studies/QUESTION_SET_B_STUDY.md`](studies/QUESTION_SET_B_STUDY.md) and
+[`studies/CONTRACT_MATRIX_STUDY.md`](studies/CONTRACT_MATRIX_STUDY.md), the
+record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 89, and the next round is
+round 3 of the order (typed operators), unless the owner prefers the located
+boundaries of the question-set study's §8 first.
+Phase 88 — the loop through the planner: the
+Python dialect's `derive`, `ask` and `solve` builtins returning exact values
+from the stepwise planner, one stepwise question and the reverse surface's
+solve, a declared frame handing a question about a Python expression to the
+evaluator, and a column-3 script that re-runs every sub-answer's own script
+before re-running the program against the checked table — is closed: the
+study is [`studies/PLANNER_LOOP_STUDY.md`](studies/PLANNER_LOOP_STUDY.md),
+the record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 88.
+Phase 87 — the open candidates merged into
 seven tracks and ordered ([`studies/ROADMAP_STUDY.md`](studies/ROADMAP_STUDY.md)),
 then round 1 of that order, the measurand register: register values read
 through what they measure, conversions through a stated efficiency in (0, 1]
@@ -238,7 +309,7 @@ record why not.
 | `corpus --check --all` | current at the close of Phase 85 |
 | `signoff --verify-release` | released at the close of Phase 85 (`signoff --close`): every test file and all 6 instruments signed with the exhaustive cases run |
 | evaluation | 177 / 177 |
-| `lake build` | clean over the 156 files of `overlay/glm_lean/RequestProject/GLM/` (the only copy), no `sorry` |
+| `lake build` | clean over the 158 files of `overlay/glm_lean/RequestProject/GLM/` (the only copy), no `sorry` |
 
 ## 5. The wiring audit
 
@@ -250,6 +321,11 @@ of 96 reasoning modules reached. Re-run it with
 
 ## 6. Things learned worth not re-learning
 
+* **A follow-up layer in front of every surface must answer whole first.**
+  Phase 92's shape detector takes any text holding *them* for a plural
+  follow-up, and 15 earlier declared strings hold it; asking the text as
+  written first, and binding only what the machine refuses, is what keeps
+  every earlier answer where it was (`tools discourse-state`, mark D8).
 * **A frame reads the text after the planner has normalised it.** Phase 85's
   *the noble gases that have one* reached the frame as *… that have 1*: the
   planner writes number words as numerals before any reader sees them. Test a

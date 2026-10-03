@@ -7,7 +7,7 @@
 
 **Verdict.** Everything is exact `int` / `fractions.Fraction` / `F_2`; nothing here imports `random`.
 
-**Deciding figure.** 114 modules, one frozen data file, and a runnable audit.
+**Deciding figure.** 119 modules, one frozen data file, and a runnable audit.
 
 **Recomputed by.** `glm_universal.reasoning.reasoning_report`
 
@@ -16,7 +16,7 @@
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 
-**Status: implemented (GLM-3+ Step 3, extended since).** **114 modules**, one
+**Status: implemented (GLM-3+ Step 3, extended since).** **119 modules**, one
 frozen data file,
 and a runnable audit. Everything is exact `int` / `fractions.Fraction` /
 `F_2`; nothing here imports `random`; nothing here imports a third-party
@@ -562,6 +562,29 @@ limit of search steps. The module renders its own column-3 script;
 the proofs are in `RequestProject/GLM/ReverseTCTThree.lean`, and `tools
 reverse-tct --three` re-takes the round.
 
+The third sort (Phase 94, [`../../../studies/THIRD_SORT_STUDY.md`](../../../studies/THIRD_SORT_STUDY.md))
+is `reverse_tct_seq.py`: strings (every character spelled by name), tuples of
+any sort and ranges, each literal spelled with its count first, with slices,
+items, concatenation, repetition, `len`, `sum`, `ord`, `chr`, `min` and `max`.
+`say` falls to it only when the earlier grammar refuses, so no earlier answer
+moves; it carries its own evaluator and column-3 script, and the proofs are in
+`RequestProject/GLM/ThirdSort.lean`. Its companion `python_containers.py`
+widens the Python dialect: string methods over code points, lists and dicts as
+immutable snapshots, every in-place change refused `MUTABLE_CONTAINER`.
+`tools third-sort` re-takes the round.
+
+The imperative grammar (Phase 95, [`../../../studies/IMPERATIVE_GRAMMAR_STUDY.md`](../../../studies/IMPERATIVE_GRAMMAR_STUDY.md))
+is `reverse_tct_imp.py`: programs with state — assignment and simultaneous
+assignment, `for` over ranges, strings and tuples, `while`, branches,
+functions with `return` and structural `match` — said as *the program of n
+steps: …*, read back uniquely, and run by an exact interpreter whose steps,
+call depth and value size are bounded (`STEP_LIMIT`, `DEPTH_LIMIT`,
+`SIZE_LIMIT`, each a named refusal). Column 1 carries the trace of
+assignments; column 3 is a fresh interpreter that replays it. `say` falls to it
+only when the three earlier sorts refuse; the proofs are in
+`RequestProject/GLM/ImperativeGrammar.lean`, and `tools imperative` re-takes
+the round.
+
 ## `integer_decision.py` — the integer decision, completed
 
 The Omega test behind round three's `INTEGER_UNDECIDED` (Phase 79,
@@ -767,3 +790,23 @@ conversion factor changed) which must be rejected like the others.
 `RequestProject/GLM/StepwiseFrames.lean` proves the frames, the unit
 round trip and the register feed sound.
 
+
+## `contract_matrix.py` — candidate P's two contract changes, tested four ways
+
+Phase 89
+([`../../../studies/CONTRACT_MATRIX_STUDY.md`](../../../studies/CONTRACT_MATRIX_STUDY.md)):
+the control (A), the upper-credible rate rule alone (B), the session-marginal
+confidence alone (C) and both (D), each measured exactly over 525 fixed-rate
+cells in two frames — a call passing its own corpus, and a session of plain
+calls (`session_cell`, `frame_one`, `prior_cell`, `calibration_cell`,
+`matrix`). The declared decision rule chose D (`PRODUCTION`); B and C are
+`SET_ASIDE`, still callable. Reachable as `tools contract-matrix`.
+
+## `exact_forms.py` — the closed forms the question frames answer in
+
+Phase 89
+([`../../../studies/QUESTION_SET_B_STUDY.md`](../../../studies/QUESTION_SET_B_STUDY.md)):
+`Surd` (`a + b√c`), `LogForm` (a rational plus rational multiples of
+logarithms of primes, checked by `log_identity_holds` in integers only) and
+`Poly` (rational polynomials, Routh's cubic condition, and exact root
+isolation by Sturm sequences). No float anywhere.

@@ -208,9 +208,12 @@ class TestTheRegisterAsMeasured(unittest.TestCase):
     #: declarations (Phases 81-82) it was just over the line; at 4146
     #: (Phase 84) it is back under it, and at 4171 (Phase 85) it stays there;
     #: at 4190 (Phase 87) it is over it again, 78 hits against a chance of
-    #: 37.39, and is recorded as a miss (ANONYMOUS_REGISTER_STUDY.md
-    #: section 4).
-    RECORDED_MISSES = ("text_is_within_twice_chance",)
+    #: 37.39, and is recorded as a miss; at 4358 (Phase 91) it is back under
+    #: it, 66 hits against a chance of 37.91, and the miss is no longer
+    #: recorded; at 4416 (Phase 92) the stride rises to 11 and it scores 63
+    #: against a chance of 35.48, and still holds
+    #: (ANONYMOUS_REGISTER_STUDY.md section 4).
+    RECORDED_MISSES: tuple = ()
 
     def test_every_declared_verdict_holds(self):
         for key, value in self.report["verdict"].items():

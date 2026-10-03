@@ -612,9 +612,14 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--interactive", action="store_true",
                    help="enter the interactive REPL (read from --input)")
     p.add_argument("--plan", action="store_true",
-                   help="read each question through the typed planner "
-                        "(semantic_plan) before the grammar; the default "
-                        "since Phase 63, kept so older invocations still run")
+                   help="read each -q question through the typed planner "
+                        "(semantic_plan) and the grammar only, as before "
+                        "Phase 89 -- since Phase 89 (K1) -q goes through "
+                        "the multi-surface router by default")
+    p.add_argument("--cross-check", action="store_true",
+                   help="after a routed -q answer from a surface other than "
+                        "the planner, ask the typed planner the same text "
+                        "and report whether it answers (Phase 89)")
     p.add_argument("--grammar", action="store_true",
                    help="ask the grammar alone, without the typed planner")
     p.add_argument("--eng", action="store_true",
@@ -650,6 +655,15 @@ def build_parser() -> argparse.ArgumentParser:
                         "surface, then the typed planner, which hands a "
                         "question it refuses to the stepwise planner -- and "
                         "name the surface (repeatable)")
+    p.add_argument("--converse", action="append", default=[],
+                   metavar="TEXT",
+                   help="discourse state (Phase 92): successive texts are "
+                        "one conversation over every surface -- 'describe "
+                        "it', 'and oxygen?', 'the one before that', 'both "
+                        "of them', 'them' and 'why?' bind to earlier turns, "
+                        "a tie is carried as a column, and a follow-up that "
+                        "cannot be bound is refused with its reason "
+                        "(repeatable)")
     p.add_argument("--no-banner", action="store_true",
                    help="suppress the interactive banner")
     p.add_argument("--input", metavar="PATH", default=None,
@@ -732,6 +746,10 @@ def main(argv: Optional[Sequence[str]] = None,
         return _speak_steps(out_stream, args.steps, columns, args.format,
                             args.verify_tct)
 
+    # ----- discourse state: one conversation over every surface -----
+    if args.converse:
+        return _converse(out_stream, args.converse)
+
     # ----- the connected path: every surface, no flag -----
     if args.ask:
         return _ask_connected(out_stream, args.ask, columns, args.format,
@@ -766,11 +784,18 @@ def main(argv: Optional[Sequence[str]] = None,
     session = GeometricSession()
     traces: List[ThreeColumnTrace] = []
     worst = 0
+    routed = _reads_through_router(args)
     for q in queries:
-        code, trace = _batch_query(
-            out_stream, session, q, args.domain, columns, args.format,
-            args.verify_tct, args.check_script_exactness,
-            plan=_reads_through_planner(args), eng=args.eng)
+        if routed:
+            code, trace = _routed_query(
+                out_stream, session, q, columns, args.format,
+                args.verify_tct, args.check_script_exactness,
+                cross_check=args.cross_check)
+        else:
+            code, trace = _batch_query(
+                out_stream, session, q, args.domain, columns, args.format,
+                args.verify_tct, args.check_script_exactness,
+                plan=_reads_through_planner(args), eng=args.eng)
         if trace is not None:
             traces.append(trace)
         worst = max(worst, code)
@@ -801,12 +826,13 @@ def _speak_python(out: "Out", sources: Sequence[str], columns: Sequence[int],
     was refused or failed verification.
     """
     from glm_universal.reasoning import python_speech as sp
+    from glm_universal.runtime.planner_bridge import bridge_for, speak_text
     worst = 0
     payloads = []
     for src in sources:
-        p = sp.speak(src)
+        p, answered, body = speak_text(src, bridge_for(None))
         verdict = sp.verify_payload(p) if verify else None
-        if not p.answered or (verdict is not None and not verdict["verified"]):
+        if not answered or (verdict is not None and not verdict["verified"]):
             worst = 1
         if fmt == "json":
             d = p.as_dict()
@@ -815,6 +841,8 @@ def _speak_python(out: "Out", sources: Sequence[str], columns: Sequence[int],
             payloads.append(d)
             continue
         out.line("PYTHON: " + src.replace("\n", " ⏎ "))
+        if not answered and p.answered:
+            out.line("REFUSED " + body)
         if 1 in columns:
             out.line("COLUMN 1 — LANGUAGE")
             for line in p.column1:
@@ -952,6 +980,41 @@ def _speak_steps(out: "Out", texts: Sequence[str], columns: Sequence[int],
     return worst
 
 
+def _converse(out: "Out", texts: Sequence[str]) -> int:
+    """Answer successive texts as one conversation (Phase 92).
+
+    :class:`glm_universal.runtime.discourse.Discourse` with the router as its
+    licence: a text the machine answers as written is answered as written;
+    a follow-up is bound to an earlier turn, or refused with its reason.
+    """
+    from glm_universal.runtime.conversation import FollowUpError
+    from glm_universal.runtime.discourse import Discourse
+    conversation = Discourse(GeometricSession(), surfaces=True)
+    worst = 0
+    for text in texts:
+        out.line(f"TURN    {len(conversation.turns)}")
+        out.line(f"QUERY   {text}")
+        try:
+            solution = conversation.ask(text)
+        except FollowUpError as error:
+            out.line(f"REFUSED {error.reason}: {error}")
+            worst = 1
+            continue
+        turn = conversation.turns[-1]
+        if turn.binding is not None:
+            out.line(f"BOUND   {turn.binding.sentence}")
+        if solution.kind == "column":
+            out.line(f"COLUMN  {solution.payload['binding']}")
+            for cell in solution.payload["cells"]:
+                out.line(f"  {cell['row']}: {cell['answer']}")
+            continue
+        out.line(("ANSWER  " if solution.ok else "REFUSED ")
+                 + str(solution.answer))
+        if not solution.ok:
+            worst = 1
+    return worst
+
+
 def _ask_connected(out: "Out", texts: Sequence[str], columns: Sequence[int],
                    fmt: str, verify: bool, exactness_check: bool) -> int:
     """Give each text to the first surface that reads it (Phase 66).
@@ -975,6 +1038,8 @@ def _ask_connected(out: "Out", texts: Sequence[str], columns: Sequence[int],
             code = _speak_reverse(out, [text], columns, fmt, verify)
         elif surface == "python":
             code = _speak_python(out, [text], columns, fmt, verify)
+        elif surface == "frames":
+            code = _speak_frames(out, text, columns, fmt)
         else:
             if session is None:
                 session = GeometricSession()
@@ -996,6 +1061,74 @@ def _ask_connected(out: "Out", texts: Sequence[str], columns: Sequence[int],
                                        eng=surface == "engineering")
         worst = max(worst, code)
     return worst
+
+
+def _speak_frames(out: "Out", text: str, columns: Sequence[int],
+                  fmt: str) -> int:
+    """Print a question frame's reading (Phase 89): the verdict, the frame,
+    the three columns, and the column-3 gate's line -- the gate already ran
+    the script under ``python3 -I`` before anything here is printed."""
+    from glm_universal.runtime import question_frames as qf
+    rd = qf.read(text)
+    if fmt == "json":
+        out.line(json.dumps(rd.as_dict(), indent=1, ensure_ascii=False))
+        return 0 if rd.answered else 1
+    out.line(f"QUERY   {text}")
+    out.line(f"FRAME   {rd.frame} (computed by {rd.backing})")
+    out.line(("ANSWER  " + rd.value) if rd.answered
+             else f"REFUSED {rd.code}: {rd.value}")
+    if 1 in columns:
+        out.line("COLUMN 1 — LANGUAGE")
+        out.line("  " + rd.column1)
+    if 2 in columns:
+        out.line("COLUMN 2 — MATHEMATICS")
+        out.line("  " + rd.column2)
+    if 3 in columns:
+        out.line("COLUMN 3 — RE-DERIVATION SCRIPT")
+        for line in rd.script.splitlines():
+            out.line("  " + line)
+    if rd.gate is not None:
+        out.line(f"VERIFIED {rd.gate[0]} (python3 -I: {rd.gate[1]})")
+    for d in rd.disputes:
+        out.line(f"DISPUTED {d}")
+    out.line("")
+    return 0 if rd.answered else 1
+
+
+def _routed_query(out: "Out", session: GeometricSession, text: str,
+                  columns: Sequence[int], fmt: str, verify: bool,
+                  exactness_check: bool, cross_check: bool = False
+                  ) -> Tuple[int, Optional[ThreeColumnTrace]]:
+    """K1 (Phase 89, the owner's Option A): ``-q`` goes through the
+    multi-surface router.  A question the planner reads is answered exactly
+    as before (its trace kept for ``--export-trace``), with the stepwise
+    planner consulted only on a refusal; any other surface prints as
+    ``--ask`` prints it.  ``cross_check`` asks the typed planner the same
+    text afterwards and prints whether it agrees -- the set-aside planner as
+    a validation check (``studies/QUESTION_SET_B_STUDY.md`` §5)."""
+    from glm_universal.runtime import router
+    surface = router.reader_of(text)
+    if surface != "planner":
+        code = _ask_connected(out, [text], columns, fmt, verify,
+                              exactness_check)
+        if cross_check:
+            out.line("CROSS-CHECK typed planner: " +
+                     ("answers" if _planner_answers(session, text)
+                      else "refuses (no check available)"))
+        return code, None
+    if not _planner_answers(session, text):
+        stepped = router._stepwise(session, text)
+        if stepped is not None:
+            out.line("SURFACE planner (stepwise)")
+            if fmt != "json":
+                verified = _print_chain(out, stepped.payload, columns, verify)
+                return (0 if stepped.answered and verified is not False
+                        else 1), None
+            out.line(json.dumps(stepped.payload.as_dict(), indent=1,
+                                ensure_ascii=False))
+            return (0 if stepped.answered else 1), None
+    return _batch_query(out, session, text, None, columns, fmt, verify,
+                        exactness_check, plan=True)
 
 
 def _planner_answers(session: GeometricSession, text: str) -> bool:
@@ -1020,6 +1153,15 @@ def _reads_through_planner(args: argparse.Namespace) -> bool:
     if args.plan:
         return True
     return not args.grammar and args.domain is None
+
+
+def _reads_through_router(args: argparse.Namespace) -> bool:
+    """Whether a batch ``-q`` question goes through the multi-surface router
+    (K1, Phase 89: the default).  ``--plan`` keeps the pre-Phase-89 typed
+    planner path, ``--grammar`` and ``--domain`` the grammar alone, and
+    ``--eng`` the engineering-first path."""
+    return not (args.plan or args.grammar or args.eng
+                or args.domain is not None)
 
 
 def banner_suppressed(args: argparse.Namespace) -> bool:

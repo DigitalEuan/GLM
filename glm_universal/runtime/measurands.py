@@ -53,7 +53,8 @@ from typing import Dict, FrozenSet, Optional, Tuple
 
 __all__ = ["ACTIVE", "UNIT_FORBIDS", "SLOT_KINDS", "DIFFERENCE_NAMES",
            "OFFSET_READINGS", "DEFINED_CONSTANTS", "TEMPERATURE",
-           "unit_forbids", "offset_reading", "difference_name",
+           "unit_forbids", "offset_reading", "difference_name", "KELVIN_LEVEL",
+           "is_kelvin",
            "scale_kind", "slot_kind", "constant_value"]
 
 #: Whether the kinds are read at all (off: the dimension check alone, as
@@ -166,6 +167,19 @@ def offset_reading(phrase: str, kind: str
     word = "celsius" if m.group(1) == "centigrade" else m.group(1)
     factor, offset = OFFSET_READINGS[word][kind]
     return factor, offset, _OFFSET_SOURCE[word]
+
+
+#: Phase 89 (``studies/QUESTION_SET_B_STUDY.md``): a given named plainly
+#: ``temperature`` and stated in kelvins is a thermodynamic temperature, a
+#: level; before, it was neutral.  Off: Phase 86's reading.
+KELVIN_LEVEL = True
+
+
+def is_kelvin(phrase: str) -> bool:
+    """Whether a unit phrase (as :mod:`.quantity_units` reads it) is the
+    kelvin."""
+    text = re.sub(r"\s+", " ", str(phrase).strip().lower())
+    return text in ("k", "kelvin", "kelvins")
 
 
 def difference_name(name: Optional[str]) -> bool:

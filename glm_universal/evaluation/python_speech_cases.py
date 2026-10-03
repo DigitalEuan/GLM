@@ -22,7 +22,8 @@ from __future__ import annotations
 
 from typing import Tuple
 
-__all__ = ["VALUE_CASES", "REFUSAL_CASES", "EQUIVALENT_PAIRS",
+__all__ = ["VALUE_CASES", "REFUSAL_CASES", "PHASE64_REFUSAL_CASES",
+           "SUPERSEDED_BY_PHASE94", "EQUIVALENT_PAIRS",
            "DISTINCT_EXPRESSIONS", "BITWISE_OPERANDS"]
 
 
@@ -122,7 +123,7 @@ VALUE_CASES: Tuple[Tuple[str, str], ...] = (
 )
 
 
-REFUSAL_CASES: Tuple[Tuple[str, str, str], ...] = (
+PHASE64_REFUSAL_CASES: Tuple[Tuple[str, str, str], ...] = (
     ("float-literal", "1.5 + 2", "FLOAT"),
     ("float-call", "float(3)", "FLOAT"),
     ("float-truediv", "7 / 2", "FLOAT"),
@@ -150,6 +151,15 @@ REFUSAL_CASES: Tuple[Tuple[str, str, str], ...] = (
     ("unsupported-lambda", "(lambda x: x)(3)", "UNSUPPORTED"),
     ("unsupported-attribute", "'abc'.upper()", "UNSUPPORTED"),
 )
+
+#: Phase 94 (``studies/THIRD_SORT_STUDY.md``, ``third_sort_cases.
+#: SUPERSEDED_REFUSALS``) admits list literals and string methods, so these
+#: two Phase 64 refusals are answered on purpose; the record above is kept
+#: as it was declared, and :data:`REFUSAL_CASES` is the set still in force.
+SUPERSEDED_BY_PHASE94: Tuple[str, ...] = ("list-literal",
+                                          "unsupported-attribute")
+REFUSAL_CASES: Tuple[Tuple[str, str, str], ...] = tuple(
+    c for c in PHASE64_REFUSAL_CASES if c[0] not in SUPERSEDED_BY_PHASE94)
 
 
 EQUIVALENT_PAIRS: Tuple[Tuple[str, str], ...] = (

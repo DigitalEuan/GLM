@@ -6,7 +6,7 @@
 
 **Verdict.** Orient from four short reads, run the cheapest gate that could fail, and close the round with one incremental command: write the finding down, refresh, check, `signoff --close`.
 
-**Deciding figure.** The suite is <!--figure:test-files-->132 test files<!--/figure--> and 6 instruments, each signed against a digest of everything it depended on, so a change re-runs what it touched rather than all of it.
+**Deciding figure.** The suite is <!--figure:test-files-->141 test files<!--/figure--> and 6 instruments, each signed against a digest of everything it depended on, so a change re-runs what it touched rather than all of it.
 
 **Recomputed by.** `glm_universal.signoff.ledger.plan`
 
@@ -103,7 +103,7 @@ whole of the speed discipline; everything below is which gate that is.
 | **documents, unchanged** | the same command | answers from the stored verdict in about three seconds when nothing it reads has moved; `--check --all` forces the full pass | picking the round up |
 | **changed** | `python3 -m glm_universal.signoff --run-everything --jobs 8` | every test unit and instrument whose closure moved, and nothing else | after any code, data or Lean edit |
 | **close** | `python3 -m glm_universal.signoff --close --jobs 8` | the release question -- every unit and instrument signed with the exhaustive cases on -- paying only what is owed: unsigned, changed, failed, or signed fast; then `--verify-release` | once, closing the round, and again if it was interrupted |
-| **release, from scratch** | `python3 -m glm_universal.signoff --release --jobs 8` | all <!--figure:test-files-->132 test files<!--/figure--> and all 6 instruments, ledger ignored | only when the rule itself changed (`signoff/rules.py`), or on purpose; never as a routine close |
+| **release, from scratch** | `python3 -m glm_universal.signoff --release --jobs 8` | all <!--figure:test-files-->141 test files<!--/figure--> and all 6 instruments, ledger ignored | only when the rule itself changed (`signoff/rules.py`), or on purpose; never as a routine close |
 
 All three are run from `overlay/` with `PYTHONPATH=.`.
 

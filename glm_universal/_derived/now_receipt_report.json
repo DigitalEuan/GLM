@@ -1,5 +1,5 @@
 {
- "input_digest": "905046ba22f86be754071b93a626003bc7fc339f4829684b5012fa8fa81d3e45",
+ "input_digest": "e8540df5403ec8162c40a114dc03965d10f140a88c7b27f4c8d313330c6bcf3c",
  "name": "now_receipt_report",
  "payload": {
   "capacity": {
@@ -469,20 +469,20 @@
    "rows": [
     {
      "average_closed_us": 2,
-     "average_loop_us": 2586,
-     "average_speedup": 1010,
-     "bits_closed_us": 71,
-     "bits_loop_us": 2557,
-     "bits_speedup": 35,
+     "average_loop_us": 2282,
+     "average_speedup": 967,
+     "bits_closed_us": 86,
+     "bits_loop_us": 2255,
+     "bits_speedup": 26,
      "ticks": 512
     },
     {
      "average_closed_us": 2,
-     "average_loop_us": 20498,
-     "average_speedup": 7347,
-     "bits_closed_us": 532,
-     "bits_loop_us": 20471,
-     "bits_speedup": 38,
+     "average_loop_us": 17505,
+     "average_speedup": 7324,
+     "bits_closed_us": 512,
+     "bits_loop_us": 17587,
+     "bits_speedup": 34,
      "ticks": 4096
     }
    ],

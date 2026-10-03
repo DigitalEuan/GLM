@@ -463,6 +463,9 @@ XOR_SITES: Tuple[Tuple[str, Tuple[str, ...], str], ...] = (
      "truth, and the reversible gates toggle a bit by adding a control product"),
     ("reasoning/tasks.py", ("group-law",),
      "task carriers combined in F2^24"),
+    ("runtime/question_frames.py", ("group-law",),
+     "row reduction of the Golay basis the question frames read, with the "
+     "code's own addition in the scripts they emit"),
     ("substrate/digit_stack.py", ("group-law",),
      "the digit stack adds words cube by cube"),
     ("substrate/golay_decode.py", ("group-law",),

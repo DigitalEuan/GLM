@@ -28,6 +28,17 @@ The readers
                  names it assigns, dialect builtins, or names the dialect
                  refuses by name.  *what is 2 + 2* parses (a comparison of
                  ``what`` with ``2 + 2``) and is not read: ``what`` is unbound;
+                 Since Phase 88 it also reads a question about a Python
+                 expression in a declared frame -- *what does `E` return*,
+                 *is `E` true* (:func:`glm_universal.runtime.planner_bridge.
+                 frame_of`) -- and hands the dialect the runtime's bridge,
+                 so ``derive``, ``ask`` and ``solve`` answer;
+``frames``       a question one of the declared question frames of
+                 :mod:`glm_universal.runtime.question_frames` reads (Phase
+                 89: the outside question sets' kinds -- the agree channel
+                 at a floor, declared error weights, Routh cubics, entropies
+                 of rational distributions, ...); every reading's column-3
+                 script is run under ``python3 -I`` before it is output;
 ``engineering``  a question one of its frames reads;
 ``planner``      everything else.  When the planner and the grammar both
                  refuse, the stepwise planner
@@ -50,6 +61,20 @@ from . import toolbox as tb
 
 __all__ = ["Routed", "python_reads", "reader_of", "route", "ask_routed",
            "connected_report", "ORDER"]
+
+#: Phase 88 (``studies/PLANNER_LOOP_STUDY.md``): the python surface hands
+#: the dialect the runtime's bridge, so ``derive``, ``ask`` and ``solve``
+#: answer.  Switched off only by the round's own control.
+BRIDGE = True
+
+#: Phase 88, candidate I2: a question about a Python expression in a declared
+#: frame (*what does `E` return*) is read by the python surface.
+FRAMES = True
+
+#: Phase 89 (``studies/QUESTION_SET_B_STUDY.md``): the declared question
+#: frames of :mod:`glm_universal.runtime.question_frames` read the outside
+#: question sets' kinds of question, each answer gated by its column-3 script.
+QUESTION_FRAMES = True
 
 #: The surfaces in the order they are tried.
 ORDER: Tuple[str, ...] = tuple(s.name for s in tb.SURFACES)
@@ -114,6 +139,14 @@ def reader_of(text: str) -> str:
         return "reverse"
     if python_reads(text):
         return "python"
+    if FRAMES:
+        from .planner_bridge import frame_of
+        if frame_of(text) is not None:
+            return "python"
+    if QUESTION_FRAMES:
+        from . import question_frames as qf
+        if qf.reads(text):
+            return "frames"
     if es.answer(text)[0] != "unread":
         return "engineering"
     return "planner"
@@ -154,12 +187,16 @@ def route(session, text: str) -> Routed:
         return Routed("reverse", a.answered, body, payload=a,
                       faculty="derive" if a.answered else "refusal")
     if surface == "python":
-        from ..reasoning import python_speech as sp
-        p = sp.speak(text)
-        body = (f"{p.value_literal}" if p.answered
-                else f"refused: {p.refusal}: {p.reason}")
-        return Routed("python", p.answered, body, payload=p,
-                      faculty="derive" if p.answered else "refusal")
+        from .planner_bridge import bridge_for, speak_text
+        p, answered, body = speak_text(
+            text, bridge_for(session) if BRIDGE else None)
+        return Routed("python", answered, body, payload=p,
+                      faculty="derive" if answered else "refusal")
+    if surface == "frames":
+        from . import question_frames as qf
+        rd = qf.read(text)
+        return Routed("frames", rd.answered, rd.body(), payload=rd,
+                      faculty="derive" if rd.answered else "refusal")
     if surface == "engineering":
         sol = session.ask_engineering(text)
         return Routed("engineering", bool(sol.ok), sol.answer, solution=sol,
@@ -211,6 +248,11 @@ def ask_routed(session, text: str):
         steps = tuple(Step("python", a, b) for a, b in
                       zip(p.column1, p.column2)) or (
             Step("python", r.text, r.text),)
+    elif r.surface == "frames":
+        rd = r.payload
+        steps = (Step("column 1", rd.column1, rd.column1),
+                 Step("column 2", rd.column2, rd.column2),
+                 Step("column 3", rd.script, rd.gate[1] if rd.gate else ""))
     elif r.surface == "reverse":
         a = r.payload
         col2 = list(a.column2) + [""] * len(a.column1)
@@ -242,8 +284,11 @@ def _declared_sets() -> Dict[str, List[str]]:
                                            ch.FRACTION_QUESTIONS,
                                            ch.DIMENSION_QUESTIONS)
                       for q in s],
+        #  Every Phase 64 program is a Python program whatever its verdict,
+        #  so the census reads the original 26 refusal sources, including the
+        #  two Phase 94 answers (``pc.SUPERSEDED_BY_PHASE94``).
         "python": ([s for _, s in pc.VALUE_CASES]
-                   + [s for _, s, _ in pc.REFUSAL_CASES]),
+                   + [s for _, s, _ in pc.PHASE64_REFUSAL_CASES]),
     }
 
 

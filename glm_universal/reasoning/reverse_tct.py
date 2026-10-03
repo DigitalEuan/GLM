@@ -1625,6 +1625,19 @@ def say(text: str) -> Answer:
             cert["truth"] = verdict == "TRUE"
         return Answer("say", verdict, col1[0], col1, col2, cert)
     except ReverseRefusal as exc:
+        if exc.name in ("NOT_IN_FRAGMENT", "UNREADABLE"):
+            # Phase 94: the third sort (strings, tuples, ranges) is asked
+            # only where this grammar refuses, so no earlier answer moves.
+            from .reverse_tct_seq import say_third_sort
+            got = say_third_sort(text)
+            if got is not None:
+                return got
+            # Phase 95: the imperative grammar, asked only where the third
+            # sort cannot read the text either.
+            from .reverse_tct_imp import say_imperative
+            got = say_imperative(text)
+            if got is not None:
+                return got
         return _refused("say", exc)
 
 

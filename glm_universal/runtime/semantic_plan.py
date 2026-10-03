@@ -441,9 +441,11 @@ def _held_interval(value: object):
 
 def _compute_consistent(session, field_name: str, row: str,
                         quoted: str) -> Tuple[str, str]:
-    """Is a held value consistent with a quoted decimal, or with the
-    declared standard table (round two, Y1)?"""
+    """Is a held value consistent with a quoted decimal (round two, Y1), or
+    with the declared outside source (round 6 of the order, Phase 93)?"""
     from ..reasoning import intervals as _iv
+    if quoted == "standard":
+        return _compute_world(session, field_name, row)
     try:
         held = session.field_surface.field(field_name, row)
     except FieldError as error:
@@ -451,26 +453,13 @@ def _compute_consistent(session, field_name: str, row: str,
     mine = _held_interval(held.value)
     if mine is None:
         raise Refusal(f"{field_name} of {row} is not a held number")
-    if quoted == "standard":
-        if field_name != "atomic_weight_u":
-            raise Refusal(f"a standard value is declared only for atomic "
-                          f"weights, not for {field_name}")
-        rows = {r[0]: r for r in _iv.IUPAC_WEIGHTS}
-        if held.row not in rows:
-            raise Refusal(f"no standard value is declared for {held.row}: "
-                          f"the declared table holds {len(rows)} elements")
-        other, _central = _iv.standard_interval(rows[held.row])
-        what = (f"the declared standard value [{_cert._dec(other.lo)}, "
-                f"{_cert._dec(other.hi)}] (transcribed from the IUPAC/CIAAW "
-                f"table)")
-    else:
-        try:
-            _v, lo, hi = _cert._decimal_interval(quoted)
-        except _cert.CertificateRefusal as why:
-            raise Refusal(str(why)) from None
-        other = _iv.Interval(lo, hi, "quoted")
-        what = (f"{quoted} as written, [{_cert._dec(lo)}, "
-                f"{_cert._dec(hi)}]")
+    try:
+        _v, lo, hi = _cert._decimal_interval(quoted)
+    except _cert.CertificateRefusal as why:
+        raise Refusal(str(why)) from None
+    other = _iv.Interval(lo, hi, "quoted")
+    what = (f"{quoted} as written, [{_cert._dec(lo)}, "
+            f"{_cert._dec(hi)}]")
     held_text = (f"{field_name} of {held.row} is held as {held.rendered}, "
                  f"read at its stated precision as [{_cert._dec(mine.lo)}, "
                  f"{_cert._dec(mine.hi)}]")
@@ -482,6 +471,109 @@ def _compute_consistent(session, field_name: str, row: str,
     side = "below" if mine.hi < other.lo else "above"
     return "False", (f"no, inconsistent -- {held_text}, which lies wholly "
                      f"{side} {what}; no value both allow exists")
+
+
+def _world_symbol(row: str) -> Optional[str]:
+    """The element symbol a row reference names, or ``None``."""
+    from ..data_objects import elements as _el
+    for element in _el.load_element_register():
+        if row in (element.symbol, element.name) or \
+                row.lower() == element.name.lower():
+            return element.symbol
+    return None
+
+
+def _compute_world(session, field_name: str, row: str) -> Tuple[str, str]:
+    """Is a register cell consistent with the declared outside source?
+
+    Round 6 of the order (Phase 93): the frozen CIAAW and NIST tables of
+    :mod:`glm_universal.runtime.register_world`, for every element, in the
+    three fields they hold, and a molecule's molar mass through the standard
+    weights of its elements.  A side that holds nothing is refused by name
+    (``WORLD_SILENT``, ``REGISTER_SILENT``), and a field no source is
+    declared for is refused ``STANDARD_UNDECLARED``.  The register is read,
+    never written.
+    """
+    from . import register_world as _rw
+    if field_name == "molar_mass_u":
+        try:
+            held = session.field_surface.field(field_name, row)
+        except FieldError as error:
+            raise Refusal(str(error)) from None
+        try:
+            got = _rw.molecule_cell(str(held.row))
+        except (KeyError, ValueError) as error:
+            raise Refusal(f"STANDARD_UNDECLARED: {held.row} is not a "
+                          f"molecule of the register ({error})") from None
+        verdict = str(got["verdict"])
+        if verdict == "world_silent":
+            raise Refusal(f"WORLD_SILENT: CIAAW gives no standard atomic "
+                          f"weight for {', '.join(got['silent_elements'])}")
+        if verdict == "register_silent":
+            raise Refusal(f"REGISTER_SILENT: the register holds no atomic "
+                          f"weight for an element of {held.row}")
+        lo, hi = got["held"]                  # type: ignore[misc]
+        wlo, whi = got["world"]               # type: ignore[misc]
+        held_text = (f"molar_mass_u of {held.row} ({got['formula']}) is "
+                     f"{_cert._dec(got['point'])} from the register's "
+                     f"weights, [{_cert._dec(lo)}, {_cert._dec(hi)}] at "
+                     f"their stated precision")
+        what = (f"[{_cert._dec(wlo)}, {_cert._dec(whi)}] from the CIAAW "
+                f"standard atomic weights of its elements")
+    else:
+        if field_name not in _rw.WORLD_FIELDS:
+            raise Refusal(f"STANDARD_UNDECLARED: no outside source is "
+                          f"declared for {field_name}; the declared ones "
+                          f"are {', '.join(_rw.WORLD_FIELDS)}")
+        symbol = _world_symbol(row)
+        if symbol is None:
+            try:
+                symbol = str(session.field_surface.field(field_name,
+                                                         row).row)
+            except FieldError as error:
+                raise Refusal(str(error)) from None
+        got_cell = _rw.cell(symbol, field_name)
+        verdict = got_cell.verdict
+        source = _rw.WORLD_FIELDS[field_name]
+        if verdict in ("world_silent", "both_silent"):
+            raise Refusal(f"WORLD_SILENT: the declared source ({source}) "
+                          f"holds no value for {symbol}")
+        if verdict == "register_silent":
+            raise Refusal(f"REGISTER_SILENT: the register holds no "
+                          f"{field_name} for {symbol}, so there is nothing "
+                          f"to compare with {got_cell.world} ({source})")
+        held_text = f"{field_name} of {symbol} is held as {got_cell.register}"
+        what = f"{got_cell.world} ({source})"
+    if verdict == "agrees" and field_name == "electron_configuration":
+        return "True", (f"yes, consistent exactly -- {held_text}, the same "
+                        f"occupation as {what}")
+    if verdict == "agrees":
+        return "True", (f"yes, consistent exactly -- {held_text}, inside "
+                        f"{what}")
+    if verdict == "agrees_at_stated_precision":
+        return "True", (f"yes, consistent at the register's stated precision "
+                        f"-- {held_text}, and it meets {what}")
+    if field_name == "electron_configuration":
+        return "False", (f"no, inconsistent -- {held_text}, and {what} "
+                         f"differs: {got_cell.detail.split(': ', 1)[-1]}")
+    return "False", (f"no, inconsistent -- {held_text}, which meets no "
+                     f"value of {what}; no value both allow exists")
+
+
+def _compute_world_list(field_name: str) -> Tuple[str, str]:
+    """*Which elements have an X inconsistent with the standard value?*"""
+    from . import register_world as _rw
+    try:
+        rows = _rw.discrepant_rows(field_name)
+    except _rw.WorldRefusal as why:
+        raise Refusal(str(why)) from None
+    source = _rw.WORLD_FIELDS.get(field_name, "the CIAAW standard weights")
+    if not rows:
+        return "none", (f"none -- no row of the register holds a value of "
+                        f"{field_name} inconsistent with {source}")
+    return ", ".join(rows), (f"{len(rows)}: {', '.join(rows)} -- each holds "
+                             f"a value of {field_name} inconsistent with "
+                             f"{source}")
 
 
 def _compute_arith(op: str, a: Fraction, b: Fraction) -> Tuple[str, str]:
@@ -1043,6 +1135,24 @@ def frame_consistent(t: str, g: Grounder) -> List[Plan]:
     return []
 
 
+def frame_world_list(t: str, g: Grounder) -> List[Plan]:
+    """*Which elements have an ionization energy inconsistent with the
+    standard value?* (round 6 of the order, Phase 93): the discrepant rows of
+    the register-against-the-world report, for one field."""
+    m = re.fullmatch(r"which elements (?:have|hold) (?:an? |the )?(.+?) "
+                     r"(?:inconsistent with|that disagrees? with) (?:the )?"
+                     r"(?:standard (?:value|atomic weight)|iupac value|"
+                     r"declared standard)", t)
+    if not m:
+        return []
+    fslot = g.field(m.group(1), "Fe")
+    if fslot is None:
+        return []
+    return [Plan("world-list", "compute",
+                 (fslot, Slot("set", "element", "elements", "register")),
+                 compute="world-list", args=(fslot.value,))]
+
+
 def frame_convert(t: str, g: Grounder) -> List[Plan]:
     n = _NUMBER
     u = r"([a-z]+)"
@@ -1456,6 +1566,7 @@ FRAMES: Tuple[Tuple[str, Frame], ...] = (
     ("recognise", frame_recognise),
     ("dimensional", frame_dimensional),
     ("consistent", frame_consistent),
+    ("world-list", frame_world_list),
     ("convert", frame_convert),
     ("meaning", frame_meaning),
     ("verify", frame_verify),
@@ -1606,6 +1717,8 @@ def run_plan(session, plan: Plan) -> Outcome:
                 value, answer = _compute_monomial(session, *plan.args)  # type: ignore[arg-type]
             elif plan.compute == "consistent":
                 value, answer = _compute_consistent(session, *plan.args)  # type: ignore[arg-type]
+            elif plan.compute == "world-list":
+                value, answer = _compute_world_list(*plan.args)  # type: ignore[arg-type]
             elif plan.compute == "substrate":
                 from ..reasoning import law_absorption as la
                 try:

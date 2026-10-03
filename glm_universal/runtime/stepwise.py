@@ -79,7 +79,11 @@ class Refused(Exception):
 PRECEDENCE: Tuple[str, ...] = (
     "INCONSISTENT_GIVENS", "DERIVATIONS_DISAGREE", "DIVISION_BY_ZERO",
     "NOT_AN_INTEGER", "DIFFERENCE_REVERSED", "PRECISION_OVERLAP",
-    "COLUMN_HOLE", "COLUMN_EMPTY", "NOT_A_MEMBER", "VALUE_MISSING", "NOT_A_NUMBER", "TOO_MANY_READINGS", "UNKNOWN_QUANTITY", "NO_DERIVATION",
+    "COLUMN_HOLE", "COLUMN_EMPTY", "NOT_A_MEMBER", "VALUE_MISSING", "NOT_A_NUMBER",
+    # round five (Phase 91)
+    "ORDER_OUT_OF_RANGE", "TOP_K_TIE", "RANGE_UNDECLARED", "TABLE_MISMATCH",
+    "COMPARATIVE_UNDECLARED",
+    "TOO_MANY_READINGS", "UNKNOWN_QUANTITY", "NO_DERIVATION",
     "UNKNOWN_STEP",
 )
 
@@ -112,6 +116,20 @@ def _three() -> bool:
 
 def _four() -> bool:
     return _three() and ROUND_FOUR
+
+
+def _rounds() -> frozenset:
+    """The rounds whose declared frames are read now (round five's switch
+    lives in :mod:`glm_universal.runtime.frame_declarations`)."""
+    from . import frame_declarations as fd
+    out = set()
+    if _three():
+        out.add(3)
+    if _four():
+        out.add(4)
+        if fd.ROUND_FIVE:
+            out.add(5)
+    return frozenset(out)
 
 
 @dataclass
@@ -311,14 +329,21 @@ def _function_readings(span: str, depth: int) -> List[tuple]:
                 for b in expression_readings(rest[i + 5:], depth + 1):
                     out.append(("fn" if op in ("gcd", "lcm") else "bin", op,
                                 a, b))
-    if _four():
-        fold = _fold4_readings(s)
-        if fold is not None:
-            return fold
-    if _three():
-        fold = _fold_readings(s)
-        if fold is not None:
-            return fold
+    from . import frame_declarations as fd
+    if fd.GENERATED:
+        if _three():
+            fold = fd.read(s, _rounds(), "expression")
+            if fold is not None:
+                return fold
+    else:
+        if _four():
+            fold = _fold4_readings(s)
+            if fold is not None:
+                return fold
+        if _three():
+            fold = _fold_readings(s)
+            if fold is not None:
+                return fold
     m = re.fullmatch(r"(?:average|mean|arithmetic mean) of (.+)", s)
     if m and ROUND_TWO:
         out.extend(_mean_readings(m.group(1), depth))
@@ -394,15 +419,19 @@ def _fold_set(phrase: str, column: str) -> Optional[str]:
     """The declared set a phrase names; None when it names no set;
     ``SET_UNDECLARED`` when it looks like a set the table does not declare
     and the fold is over a column of the element table."""
-    from .declared_frames import DECLARED_SETS, names_a_column, set_key
+    from .declared_frames import (DECLARED_SETS, declared_set_names,
+                                  names_a_column, set_key)
     key, looks = set_key(phrase)
     if key is not None:
         return key
     if looks and names_a_column(column):
+        unions = sorted(set(declared_set_names()) - set(DECLARED_SETS))
+        more = (f", and the declared unions {', '.join(unions)}"
+                if unions else "")
         raise Refused("SET_UNDECLARED",
                       f"{phrase!r} is no class the register declares; a fold "
                       f"ranges over "
-                      f"{', '.join(sorted(DECLARED_SETS))}")
+                      f"{', '.join(sorted(DECLARED_SETS))}{more}")
     return None
 
 
@@ -590,12 +619,18 @@ def segment_readings(seg: str) -> List[tuple]:
         comp = _comparative_readings(seg)
         if comp is not None:
             return comp
-        m = re.fullmatch(r"how many of (.+?) (?:have|has) an? (odd|even) "
-                         r"(.+)", seg)
-        if m:
-            key = _fold_set(m.group(1), m.group(3))
-            if key is not None:
-                return [("fold", m.group(2), key, m.group(3))]
+        from . import frame_declarations as fd
+        if fd.GENERATED:
+            got = fd.read(seg, _rounds(), "segment")
+            if got is not None:
+                return got
+        else:
+            m = re.fullmatch(r"how many of (.+?) (?:have|has) an? (odd|even) "
+                             r"(.+)", seg)
+            if m:
+                key = _fold_set(m.group(1), m.group(3))
+                if key is not None:
+                    return [("fold", m.group(2), key, m.group(3))]
     m = re.fullmatch(r"is (.+) (?:a )?prime(?: number)?", seg)
     if m:
         return [("prime", a) for a in expression_readings(m.group(1))]
@@ -877,6 +912,10 @@ def _build(tree: tuple, b: Builder, leaves: Leaves, it: Optional[int],
         return _build_fold(tree, b, session)
     if kind == "fold4":
         return _build_fold4(tree, b, session)
+    if kind == "top":
+        return _build_top(tree, b, session)
+    if kind == "bounds":
+        return _build_bounds(tree, b, session)
     if kind in ("cmp", "larger"):
         if kind == "cmp":
             _, sym, rel, ta, tb = tree
@@ -910,6 +949,10 @@ def _build_comparative(tree: tuple, b: Builder, leaves: Leaves,
     from .declared_frames import COMPARATIVES
     kind, word, ra, rb = tree
     phrase, sym, _gloss = COMPARATIVES[word]
+    table = _comparative_table(word, ra, rb)
+    if table is not None:
+        from .declared_frames import TABLE_COMPARATIVES
+        phrase, sym, _gloss = TABLE_COMPARATIVES[table][word]
     la, lb = f"the {phrase} of {ra}", f"the {phrase} of {rb}"
     oa, va, da = leaves.get(la)
     i = b.add(oa, (), va, la, da)
@@ -919,17 +962,46 @@ def _build_comparative(tree: tuple, b: Builder, leaves: Leaves,
     overlap = _held_overlap(session, b, i, j)
     if overlap and x != y:
         raise Refused("PRECISION_OVERLAP", overlap)
+    extra = {"table": table} if table is not None else {}
     if kind == "cmpw":
         value = str(x > y if sym == ">" else x < y)
         return b.add("compare", (i, j), value, f"step {i} {sym} step {j}",
-                     {"symbol": sym, "relation": word})
+                     dict({"symbol": sym, "relation": word}, **extra))
     if x == y:
         value = "equal"
     else:
         value = ra if (x > y) == (sym == ">") else rb
     return b.add("comparative", (i, j), value, f"{word} of {ra}, {rb}",
-                 {"word": word, "phrase": phrase, "symbol": sym,
-                  "rows": [ra, rb]})
+                 dict({"word": word, "phrase": phrase, "symbol": sym,
+                       "rows": [ra, rb]}, **extra))
+
+
+def _comparative_table(word: str, ra: str, rb: str) -> Optional[str]:
+    """Round five: the table other than the element table a declared
+    comparative is read over -- the molecule table when both rows are
+    molecules -- or None (the element table, as round three read it).  A
+    row of each table is refused ``TABLE_MISMATCH``; a comparative with no
+    declared column on the molecule table ``COMPARATIVE_UNDECLARED``."""
+    from . import frame_declarations as fd
+    if not (fd.five() and _four()):
+        return None
+    from .declared_frames import (MOLECULE_TABLE, TABLE_COMPARATIVES,
+                                  names_a_molecule, names_an_element)
+    ma, mb = names_a_molecule(ra), names_a_molecule(rb)
+    ea, eb = names_an_element(ra), names_an_element(rb)
+    if ma and mb and not (ea and eb):
+        if word not in TABLE_COMPARATIVES[MOLECULE_TABLE]:
+            raise Refused("COMPARATIVE_UNDECLARED",
+                          f"{word!r} names no column of the molecule table "
+                          f"(declared there: "
+                          f"{', '.join(sorted(TABLE_COMPARATIVES[MOLECULE_TABLE]))})")
+        return MOLECULE_TABLE
+    if (ma and eb and not ea) or (ea and mb and not ma):
+        raise Refused("TABLE_MISMATCH",
+                      f"{ra!r} and {rb!r} are rows of different tables (one "
+                      f"an element, one a molecule); a declared comparative "
+                      f"compares rows of one table")
+    return None
 
 
 def _build_fold(tree: tuple, b: Builder, session) -> int:
@@ -1043,6 +1115,12 @@ def _build_fold4(tree: tuple, b: Builder, session) -> int:
             x = v
         vals.append(v)
     holes = 0 if present else len(missing)
+    if fn not in ("median", "max", "min", "rank") and fn not in \
+            ("sum", "mean", "odd", "even") and \
+            ss.order_positions(fn, len(vals) + holes) is None:
+        raise Refused("ORDER_OUT_OF_RANGE",
+                      f"the {ss.fold_words({'fn': fn})} of {len(vals) + holes} "
+                      f"readings ({key}) is past the end of the column")
     value = ss.fold_value(fn, vals, holes, x)
     if value is None:
         side = {"max": "above", "min": "below"}.get(fn, "on one side")
@@ -1069,6 +1147,150 @@ def _build_fold4(tree: tuple, b: Builder, session) -> int:
         detail["row"] = row_key
     what = f"{fn} over the {key}" + (" that have one" if present else "")
     return b.add("fold", tuple(idx), value, what, detail)
+
+
+def _element_column(session, phrase: str, key: str):
+    """``(field, table rows, member rows, missing keys)`` of a column over
+    a declared set, or refuse a phrase that names no column."""
+    from . import declared_frames as df
+    fs = session.field_surface
+    field_name = df.resolve_field(fs, phrase)
+    if field_name is None:
+        raise Refused("UNKNOWN_STEP", f"no column of the element table is "
+                                      f"named {phrase!r}")
+    table = fs.table_by_name(df.ELEMENT_TABLE).rows()
+    rows = df.members(fs, key)
+    missing = [k for k, _n in rows if table[k].get(field_name) is None]
+    return field_name, table, rows, missing
+
+
+def _reading(table, k: str, field_name: str) -> Fraction:
+    v = table[k][field_name]
+    if isinstance(v, bool) or not isinstance(v, (int, Fraction)):
+        raise Refused("NOT_A_NUMBER", f"{field_name} of {k} is {v!r}, "
+                                      f"not a number")
+    return Fraction(v)
+
+
+def _build_top(tree: tuple, b: Builder, session) -> int:
+    """Round five: the row, or the ``k`` rows, a declared superlative names
+    over a declared set, first to last.  A hole refuses the column (a
+    missing reading can be filled into the top ``k``) unless the question
+    asks for the present rows; the ``k``-th and ``(k + 1)``-th rows tying
+    is refused ``TOP_K_TIE``."""
+    from . import declared_frames as df
+    from . import frame_declarations as fd
+    _, word, k, key, present = tree
+    comp, phrase, sym = fd.superlative(word)
+    field_name, table, rows, missing = _element_column(session, phrase, key)
+    shown = ", ".join(missing[:8]) + (" ..." if len(missing) > 8 else "")
+    if missing and not present:
+        raise Refused("COLUMN_HOLE",
+                      f"the register records {field_name} as missing for "
+                      f"{len(missing)} of the {len(rows)} {key} ({shown}); "
+                      f"a missing reading can be filled into the top {k}, so "
+                      f"no rows from the readings present are the {word} "
+                      f"of the {key}")
+    present_rows = [(kk, n) for kk, n in rows if kk not in missing]
+    if not present_rows:
+        raise Refused("COLUMN_EMPTY",
+                      f"the register records {field_name} as missing for "
+                      f"all {len(rows)} of the {key}; there are no rows "
+                      f"that have one")
+    if k > len(present_rows):
+        raise Refused("ORDER_OUT_OF_RANGE",
+                      f"the {k} {word} of {len(present_rows)} {key} is past "
+                      f"the end of the set")
+    single = phrase
+    idx, pairs = [], []
+    names = {}
+    for kk, name in present_rows:
+        v = _reading(table, kk, field_name)
+        pairs.append((v, kk))
+        names[kk] = name.lower()
+    order = ss.top_rows(pairs, k, sym)
+    if order is None:
+        ranked = sorted(pairs, key=lambda t: t[0], reverse=(sym == ">"))
+        tie = ranked[k - 1][0]
+        tied = [kk for v, kk in ranked if v == tie]
+        raise Refused("TOP_K_TIE",
+                      f"{', '.join(tied)} tie at {ss.render_value(tie)} "
+                      f"({field_name}) across the boundary of the {word} "
+                      f"{k}, so no {k} rows are the {word}")
+    for kk, name in present_rows:
+        label = f"the {single} of {name.lower()}"
+        idx.append(b.add("lookup", (), Fraction(table[kk][field_name]), label,
+                         {"table": df.ELEMENT_TABLE, "row": kk,
+                          "field": field_name,
+                          "question": f"what is {label}"}))
+    value = ", ".join(names[kk] for kk in order)
+    detail = {"fn": "top", "k": k, "word": word, "comparative": comp,
+              "symbol": sym, "set": key, "field": field_name,
+              "table": df.ELEMENT_TABLE, "present": bool(present),
+              "bounded": False, "missing": list(missing) if present else [],
+              "names": names}
+    what = f"top {k} by {word} over the {key}" + \
+        (" that have one" if present else "")
+    return b.add("fold", tuple(idx), value, what, detail)
+
+
+def _build_bounds(tree: tuple, b: Builder, session) -> int:
+    """Round five: the bounds on a sum, a mean or a parity count over a
+    declared set.  A parity count under ``h`` holes lies between the
+    present count and that plus ``h``; a sum or a mean only through the
+    column's declared range (``RANGE_UNDECLARED`` without one).  With no
+    hole the bounds close on the fold's value."""
+    from . import declared_frames as df
+    from . import frame_declarations as fd
+    _, fn, key, phrase = tree
+    field_name, table, rows, missing = _element_column(session, phrase, key)
+    rng = fd.declared_range(field_name)
+    shown = ", ".join(missing[:8]) + (" ..." if len(missing) > 8 else "")
+    if missing and fn in ("sum", "mean") and rng is None:
+        raise Refused("RANGE_UNDECLARED",
+                      f"the register records {field_name} as missing for "
+                      f"{len(missing)} of the {len(rows)} {key} ({shown}), "
+                      f"and no physical range of {field_name} is declared, "
+                      f"so a missing reading can be anything and the "
+                      f"{fn} has no bound (declared ranges: "
+                      f"{', '.join(sorted(fd.RANGES))})")
+    single = phrase[:-1] if phrase.endswith("s") and not \
+        phrase.endswith("ss") and df.resolve_field(
+            session.field_surface, phrase[:-1]) == field_name else phrase
+    idx, vals = [], []
+    for k, name in rows:
+        if k in missing:
+            continue
+        v = _reading(table, k, field_name)
+        if fn in ("odd", "even") and v.denominator != 1:
+            raise Refused("NOT_AN_INTEGER",
+                          f"{field_name} of {k} is {ss.render_value(v)}, "
+                          f"not an integer, so it is neither odd nor even")
+        if missing and rng is not None and fn in ("sum", "mean") and \
+                not rng[0] <= v <= rng[1]:
+            raise Refused("RANGE_UNDECLARED",
+                          f"{field_name} of {k} is {ss.render_value(v)}, "
+                          f"outside the declared range, so the declaration "
+                          f"does not hold of the column")
+        vals.append(v)
+    use = rng if (missing and fn in ("sum", "mean")) else None
+    value = ss.fold_value(fn, vals, len(missing), rng=use, bounds=True)
+    for k, name in rows:
+        if k in missing:
+            continue
+        label = f"the {single} of {name.lower()}"
+        idx.append(b.add("lookup", (), Fraction(table[k][field_name]), label,
+                         {"table": df.ELEMENT_TABLE, "row": k,
+                          "field": field_name,
+                          "question": f"what is {label}"}))
+    detail = {"fn": fn, "set": key, "field": field_name,
+              "table": df.ELEMENT_TABLE, "present": False,
+              "bounded": bool(missing), "missing": list(missing),
+              "bounds": True}
+    if use is not None:
+        detail["range"] = [ss.render_value(use[0]), ss.render_value(use[1])]
+    return b.add("fold", tuple(idx), value, f"bounds on the {fn} over the "
+                                            f"{key}", detail)
 
 
 def _describe(tree: tuple) -> str:
@@ -1104,6 +1326,11 @@ def _describe(tree: tuple) -> str:
         return f"[{tree[2]} {tree[1]} than {tree[3]}]"
     if k == "fold":
         return f"{tree[1]}[{tree[2]}]({tree[3]})"
+    if k == "top":
+        scope = f"{tree[3]}, present" if tree[4] else tree[3]
+        return f"top{tree[2]}[{scope}]({tree[1]})"
+    if k == "bounds":
+        return f"bounds {tree[1]}[{tree[2]}]({tree[3]})"
     if k == "fold4":
         scope = f"{tree[2]}, present" if tree[4] else tree[2]
         of = f"{tree[5]} by " if tree[1] == "rank" else ""
@@ -1112,7 +1339,7 @@ def _describe(tree: tuple) -> str:
 
 
 def compose(session, text: str, prefix: Sequence[Step] = (),
-            leaves: Optional[Leaves] = None) -> StepAnswer:
+            leaves: Optional[Leaves] = None, single: bool = False) -> StepAnswer:
     """The composition mode: every reading of every ``then``-segment, the
     agreement rule over readings, and the chain of the first licensed one.
 
@@ -1130,7 +1357,7 @@ def compose(session, text: str, prefix: Sequence[Step] = (),
         return StepAnswer(text, "unread")
     structured = (len(segments) > 1 or bool(prefix)
                   or any(_has_structure(t) for t in per_segment[0]))
-    if not structured:
+    if not structured and not single:
         return StepAnswer(text, "unread")
     if not prefix and any(_uses_it(t) for t in per_segment[0]):
         return StepAnswer(text, "unread")
@@ -1699,6 +1926,13 @@ def _goal_two_inner(session, text: str, parsed=None) -> StepAnswer:
                 qu.check_dimension(name, read.dimension,
                                    f"{ss.render_value(amount)} {unit}")
                 _kind_check(name, unit, f"{ss.render_value(amount)} {unit}")
+                if (ms.ACTIVE and ms.KELVIN_LEVEL and tkind is None
+                        and name == ms.TEMPERATURE
+                        and ms.is_kelvin(read.phrase)):
+                    # Phase 89: a thermodynamic temperature stated in kelvins
+                    # is a level (ISO 80000-5's T); a difference is named as
+                    # one (``temperature change = 10 kelvins``)
+                    tkind = "level"
                 sourced.append((name, amount * read.factor,
                                 {"kind": "unit", "amount": amount,
                                  "unit": read.phrase,

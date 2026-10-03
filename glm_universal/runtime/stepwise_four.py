@@ -74,6 +74,8 @@ def _rows(session, cases) -> Dict[str, object]:
             routed_before = router.route(session, q)
         routed = router.route(session, q)
         got = _verdict(a)
+        from .frame_declarations import declared_verdict
+        want = declared_verdict("stepwise_four", cid, want)
         rows.append({"id": cid, "want": list(want), "got": list(got),
                      "ok": _ok(got, want),
                      "round_three": list(_verdict(before)),

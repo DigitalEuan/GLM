@@ -75,6 +75,8 @@ def _rows(session, cases, stitched: bool = False) -> Dict[str, object]:
             routed_before = router.route(session, q)
         routed = router.route(session, q)
         got = _verdict(a)
+        from .frame_declarations import declared_verdict
+        want = declared_verdict("stepwise_three", cid, want)
         ok = _ok(got, want)
         row = {"id": cid, "want": list(want), "got": list(got),
                "round_two": list(_verdict(before)),
@@ -83,8 +85,11 @@ def _rows(session, cases, stitched: bool = False) -> Dict[str, object]:
                "machine_now": routed.text if routed.answered else None,
                "machine_by": getattr(routed.solution, "kind", None)
                if routed.answered else None}
-        if stitched:
+        moved = tuple(want) != tuple(case[2])
+        if stitched and not moved:
+            # a case Phase 91 declared moved declares its verdict only
             ok = ok and (not a.answered or sw.stitched_of(a) == case[3])
+        if stitched:
             row["stitched"] = list(sw.stitched_of(a))
             row["want_stitched"] = list(case[3])
         row["ok"] = ok

@@ -90,6 +90,10 @@ REFUSAL_NAMES: Tuple[str, ...] = (
     # Phase 82 (the rate-posterior study): the reads make the guard rate the
     # most probable of the declared grid.
     "RATE_GRID_EXCEEDED",
+    # Phase 88 (the planner-loop study): a call to the rest of the machine
+    # with no bridge to it, and the three surfaces' refusals carried into
+    # the program by name.
+    "BRIDGE_UNAVAILABLE", "DERIVE_REFUSED", "ASK_REFUSED", "SOLVE_REFUSED",
 )
 
 
@@ -545,26 +549,42 @@ SOFT_GRID: Tuple[Fraction, ...] = (Fraction(1, 1000), Fraction(1, 100),
                                    Fraction(1, 10), Fraction(1, 5))
 
 
-def decode_soft(subject: int, corpus: Sequence[int]) -> Dict[str, object]:
-    """The decoder's value with its confidence marginalized over the rate
-    read off the call's own reads (:mod:`.rate_posterior`)."""
+def decode_soft(subject: int, corpus: Sequence[int],
+                history: Sequence[int] = ()) -> Dict[str, object]:
+    """The decoder's value with its confidence read off the rate posterior of
+    the session's earlier reads and the call's own, under the production
+    rule (:mod:`.rate_posterior`)."""
     from .rate_posterior import decode_soft as soft
-    return _floor_call(soft, subject, list(corpus))
+    return _floor_call(soft, subject, list(corpus), None, list(history))
 
 
-def decode_soft_floor(floor, subject: int,
-                      corpus: Sequence[int]) -> Dict[str, object]:
-    """:func:`decode_soft` answered only at a marginal confidence of at least
+def decode_soft_floor(floor, subject: int, corpus: Sequence[int],
+                      history: Sequence[int] = ()) -> Dict[str, object]:
+    """:func:`decode_soft` answered only at a confidence of at least
     ``floor``; otherwise ``BELOW_FLOOR``."""
     from .rate_posterior import decode_soft_floor as soft
-    return _floor_call(soft, floor, subject, list(corpus))
+    return _floor_call(soft, floor, subject, list(corpus), None,
+                       list(history))
 
 
-def agree_soft(r1: int, r2: int, corpus: Sequence[int]) -> Dict[str, object]:
-    """``agree``'s value with its confidence marginalized over the rate read
-    off the pair and the corpus."""
+def agree_soft(r1: int, r2: int, corpus: Sequence[int],
+               history: Sequence[int] = ()) -> Dict[str, object]:
+    """``agree``'s value with its confidence read off the rate posterior of
+    the session's earlier reads, the pair and the corpus."""
     from .rate_posterior import agree_soft as soft
-    return _floor_call(soft, r1, r2, list(corpus))
+    return _floor_call(soft, r1, r2, list(corpus), None, list(history))
+
+
+def session_confidence(conf_at, history: Sequence[int],
+                       carrier: Sequence[int]) -> Optional[Dict[str, object]]:
+    """The session-marginal confidence a plain reading prints (Phase 89), or
+    ``None`` when the session's reads put the credible set at the guard."""
+    from .decoder_confidence import ConfidenceRefusal
+    from .rate_posterior import session_confidence as sc
+    try:
+        return sc(conf_at, list(history), list(carrier))
+    except ConfidenceRefusal:
+        return None
 
 
 def ds_bits(t, n: int) -> Tuple[int, ...]:
@@ -866,7 +886,7 @@ def _survivor(live, what):
     raise GLMRefusal("UNCORRECTABLE", "no candidate survives %%s" %% what)
 
 
-def resolve(subject, *cases):
+def _resolve0(subject, *cases):
     cases = [_mask(c) for c in cases]
     for c in cases:
         if c not in _codewords():
@@ -876,11 +896,21 @@ def resolve(subject, *cases):
     return cases.index(value)
 
 
-def agree(*reads):
+def _agree0(*reads):
     live = set(nearest(reads[0]))
     for r in reads[1:]:
         live &= set(nearest(r))
     return _survivor(live, "every read")
+
+
+def resolve(subject, *cases):
+    _SESSION.append(_mask(subject))
+    return _resolve0(subject, *cases)
+
+
+def agree(*reads):
+    _SESSION.extend(_mask(r) for r in reads)
+    return _agree0(*reads)
 
 
 def resolve_unsure(subject, unsure):
@@ -935,7 +965,7 @@ def decode_confidence(rate, subject, *cases):
 def agree_confidence(rate, *reads):
     rate = _rate(rate)
     reads = [_mask(r) for r in reads]
-    value = agree(*reads)
+    value = _agree0(*reads)
     return _posterior(reads, value, sorted(_codewords()), rate)
 
 
@@ -950,12 +980,12 @@ def _floor(floor):
 
 def resolve_at(rate, subject, *cases):
     rate = _rate(rate)
-    return (resolve(subject, *cases), decode_confidence(rate, subject, *cases))
+    return (_resolve0(subject, *cases), decode_confidence(rate, subject, *cases))
 
 
 def agree_at(rate, *reads):
     rate = _rate(rate)
-    return (agree(*[_mask(r) for r in reads]), agree_confidence(rate, *reads))
+    return (_agree0(*[_mask(r) for r in reads]), agree_confidence(rate, *reads))
 
 
 def resolve_floor(rate, floor, subject, *cases):
@@ -985,7 +1015,15 @@ def _carrier_mass(reads, rate):
     return total / len(_codewords())
 
 
-def _soft_confidence(carriers, reads, value):
+# Phase 89 (studies/CONTRACT_MATRIX_STUDY.md): the production contract is the
+# upper-credible rule over every read the session has seen.  _SESSION holds
+# the reads of the plain readings and the soft builtins, in call order; the
+# _h forms take that history explicitly and change nothing.
+_SESSION = []
+_UPPER_EPS = Fraction(1, 100)
+
+
+def _soft_posterior(carriers):
     unnorm = []
     for rate in _SOFT_GRID:
         x = Fraction(1, len(_SOFT_GRID))
@@ -993,39 +1031,85 @@ def _soft_confidence(carriers, reads, value):
             x *= _carrier_mass(carrier, rate)
         unnorm.append(x)
     total = sum(unnorm)
-    post = [x / total for x in unnorm]
+    return [x / total for x in unnorm]
+
+
+def _upper_rate(carriers):
+    post = _soft_posterior(carriers)
     if post[-1] == max(post):
-        raise GLMRefusal("RATE_GRID_EXCEEDED", "the guard rate is the most probable")
-    conf = Fraction(0)
-    for x, rate in zip(post, _SOFT_GRID):
-        conf += x * _posterior(reads, value, sorted(_codewords()), rate)
-    return conf
+        return None
+    hi = max(rate for x, rate in zip(post, _SOFT_GRID) if x >= _UPPER_EPS)
+    return None if hi == _SOFT_GRID[-1] else hi
 
 
-def decode_soft(subject, *corpus):
+def _soft_confidence(carriers, reads, value):
+    hi = _upper_rate(carriers)
+    if hi is None:
+        raise GLMRefusal("RATE_GRID_EXCEEDED", "the credible set of rates reaches the guard")
+    return _posterior(reads, value, sorted(_codewords()), hi)
+
+
+def decode_soft_h(history, subject, *corpus):
     subject = _mask(subject)
     corpus = [_mask(r) for r in corpus]
     fork = nearest(subject)
     if len(fork) != 1:
         raise GLMRefusal("TIE", "%%d codewords are equally near" %% len(fork))
-    carriers = [[subject]] + [[r] for r in corpus]
+    carriers = [[r] for r in history] + [[subject]] + [[r] for r in corpus]
     return (fork[0], _soft_confidence(carriers, [subject], fork[0]))
 
 
-def decode_soft_floor(floor, subject, *corpus):
+def decode_soft(subject, *corpus):
+    reads = [_mask(subject)] + [_mask(r) for r in corpus]
+    history = list(_SESSION)
+    _SESSION.extend(reads)
+    return decode_soft_h(history, subject, *corpus)
+
+
+def decode_soft_floor_h(history, floor, subject, *corpus):
     floor = _floor(floor)
-    value, confidence = decode_soft(subject, *corpus)
+    value, confidence = decode_soft_h(history, subject, *corpus)
     if confidence < floor:
         raise GLMRefusal("BELOW_FLOOR", "%%s is below the floor" %% confidence)
     return value
 
 
-def agree_soft(r1, r2, *corpus):
+def decode_soft_floor(floor, subject, *corpus):
+    floor = _floor(floor)
+    reads = [_mask(subject)] + [_mask(r) for r in corpus]
+    history = list(_SESSION)
+    _SESSION.extend(reads)
+    return decode_soft_floor_h(history, floor, subject, *corpus)
+
+
+def agree_soft_h(history, r1, r2, *corpus):
     r1, r2 = _mask(r1), _mask(r2)
     corpus = [_mask(r) for r in corpus]
-    value = agree(r1, r2)
-    carriers = [[r1, r2]] + [[r] for r in corpus]
+    value = _agree0(r1, r2)
+    carriers = [[r] for r in history] + [[r1, r2]] + [[r] for r in corpus]
     return (value, _soft_confidence(carriers, [r1, r2], value))
+
+
+def agree_soft(r1, r2, *corpus):
+    reads = [_mask(r1), _mask(r2)] + [_mask(r) for r in corpus]
+    history = list(_SESSION)
+    _SESSION.extend(reads)
+    return agree_soft_h(history, r1, r2, *corpus)
+
+
+def session_resolve_conf(history, subject, *cases):
+    hi = _upper_rate([[r] for r in history] + [[_mask(subject)]])
+    if hi is None:
+        return None
+    return decode_confidence(hi, subject, *cases)
+
+
+def session_agree_conf(history, *reads):
+    reads = [_mask(r) for r in reads]
+    hi = _upper_rate([[r] for r in history] + [reads])
+    if hi is None:
+        return None
+    return agree_confidence(hi, *reads)
 
 
 def ds_bits(t, n):
@@ -1046,12 +1130,74 @@ def plane(q, k):
     return (q * 2 ** k) // 1 if k >= 0 else (q / 2 ** (-k)) // 1
 
 
+# -- the bridge to the rest of the machine (Phase 88) -------------------------
+# The column-3 script fills _BRIDGE only with answers whose own scripts it
+# has just re-run; a call whose answer is not there is refused by name.
+
+_BRIDGE = {}
+_BRIDGE_REFUSAL = {"derive": "DERIVE_REFUSED", "ask": "ASK_REFUSED",
+                   "solve": "SOLVE_REFUSED"}
+
+
+def _bridge_text(v):
+    if isinstance(v, unit):
+        return _bridge_text(v.value) + " " + v.name
+    if isinstance(v, bool) or not isinstance(v, (int, Fraction)):
+        raise GLMRefusal("FLOAT", "a bridge value must be exact")
+    v = Fraction(v)
+    if v.denominator == 1:
+        return str(v.numerator)
+    return str(v.numerator) + "/" + str(v.denominator)
+
+
+def derive_question(target, givens):
+    parts = [str(n) + " = " + _bridge_text(v) for n, v in givens]
+    if len(parts) > 1:
+        body = ", ".join(parts[:-1]) + " and " + parts[-1]
+    else:
+        body = "".join(parts)
+    return "given " + body + ", what is the " + target
+
+
+def solve_question(var, equation, bindings):
+    import re as _re
+    for n, v in bindings:
+        t = _bridge_text(v)
+        if not _re.fullmatch("[0-9]+", t):
+            t = "(" + t + ")"
+        equation = _re.sub("(?<![A-Za-z0-9_])" + _re.escape(n)
+                           + "(?![A-Za-z0-9_])", t, equation)
+    return "solve for " + var + ": " + equation
+
+
+def _bridged(op, question):
+    key = op + "|" + question
+    if key not in _BRIDGE:
+        raise GLMRefusal(_BRIDGE_REFUSAL[op], question)
+    return _BRIDGE[key]
+
+
+def derive(target, *givens):
+    return _bridged("derive", derive_question(target, givens))
+
+
+def ask(question):
+    return _bridged("ask", question.strip())
+
+
+def solve(var, equation, *bindings):
+    return _bridged("solve", solve_question(var, equation, bindings))
+
+
 def same(x, y):
     """Equal in type and value, all the way down."""
     if type(x) is not type(y):
         return False
-    if isinstance(x, tuple):
+    if isinstance(x, (tuple, list)):
         return len(x) == len(y) and all(same(a, b) for a, b in zip(x, y))
+    if isinstance(x, dict):
+        return (len(x) == len(y) and all(same(a, b) for a, b in zip(x, y))
+                and all(same(x[a], y[b]) for a, b in zip(x, y)))
     if isinstance(x, unit):
         return x.name == y.name and same(x.value, y.value)
     return x == y
@@ -1085,5 +1231,6 @@ PRELUDE_NAMES = {"Fraction": Fraction, "unit": unit, "classify": classify,
                  "resolve_floor": resolve_floor, "agree_floor": agree_floor,
                  "decode_soft": decode_soft,
                  "decode_soft_floor": decode_soft_floor,
-                 "agree_soft": agree_soft}
+                 "agree_soft": agree_soft, "derive": derive, "ask": ask,
+                 "solve": solve}
 ''' % {"rows": _GOLAY_ROWS}

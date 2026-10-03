@@ -47,7 +47,9 @@ from .confidence_floor import band, floor_check
 from .decoder_confidence import ConfidenceRefusal, N, agree_confidence
 
 __all__ = [
-    "GRID", "GUARD", "PRIORS", "COSET_COUNTS", "ASSUMPTION",
+    "GRID", "GUARD", "PRIORS", "COSET_COUNTS", "ASSUMPTION", "RULES",
+    "PRODUCTION_RULE", "UPPER_EPS", "rule_confidence", "session_confidence",
+    "carrier_likelihood", "upper_rate",
     "coset_class_mass", "read_likelihood", "pair_likelihood",
     "rate_posterior", "most_probable", "decode_soft", "agree_soft",
     "decode_soft_floor",
@@ -67,6 +69,19 @@ PRIORS: Dict[str, Tuple[Fraction, ...]] = {
 }
 #: How many cosets have each weight 0..4.
 COSET_COUNTS: Tuple[int, ...] = (1, 24, 276, 2024, 1771)
+
+#: The confidence rules (``studies/CONTRACT_MATRIX_STUDY.md``, Phase 89):
+#: ``marginal`` -- Phase 82's posterior-weighted confidence; ``upper`` -- the
+#: confidence at the largest grid rate of posterior mass at least
+#: :data:`UPPER_EPS` (Phase 86's R4), refused at the edge when that rate is
+#: the guard.
+RULES: Tuple[str, ...] = ("marginal", "upper")
+#: The production rule since Phase 89: variant D of the contract matrix (the
+#: upper-credible rule over the session's reads) qualified and kept the most
+#: right answers; ``marginal`` is set aside, still callable by name.
+PRODUCTION_RULE = "upper"
+#: The credible-set threshold of the ``upper`` rule.
+UPPER_EPS = Fraction(1, 100)
 
 ASSUMPTION = ("one unknown rate for every read of the call, from the declared "
               "grid under the uniform prior; each bit of each read flips "
@@ -156,62 +171,140 @@ def _masks(xs: Sequence[object]) -> List[int]:
     return out
 
 
-def decode_soft(subject: int, corpus: Sequence[int] = ()
+def _rule(rule: Optional[str]) -> str:
+    rule = PRODUCTION_RULE if rule is None else rule
+    if rule not in RULES:
+        raise ValueError(f"unknown confidence rule {rule!r}")
+    return rule
+
+
+def upper_rate(post: Sequence[Fraction]) -> Fraction:
+    """The upper end of the credible set: the largest grid rate whose
+    posterior mass is at least :data:`UPPER_EPS`."""
+    return max(p for x, p in zip(post, GRID) if x >= UPPER_EPS)
+
+
+def rule_confidence(post: Sequence[Fraction], conf_at, rule: Optional[str]
+                    = None) -> Tuple[Fraction, Optional[Fraction]]:
+    """``(confidence, rate it was read at or None for the marginal)`` under a
+    rule; ``conf_at(p)`` is the reading's confidence at rate ``p``.  Refuses
+    ``RATE_GRID_EXCEEDED`` where the rule's edge refuses."""
+    rule = _rule(rule)
+    _check_grid(post)
+    if rule == "marginal":
+        return (sum((x * conf_at(p) for x, p in zip(post, GRID)),
+                    Fraction(0)), None)
+    hi = upper_rate(post)
+    if hi == GUARD:
+        raise ConfidenceRefusal(
+            "RATE_GRID_EXCEEDED",
+            f"the credible set of rates (posterior mass at least {UPPER_EPS})"
+            f" reaches the guard rate {GUARD}: the rate may lie above every "
+            f"rate a floor was hunted at")
+    return (conf_at(hi), hi)
+
+
+def carrier_likelihood(reads: Sequence[int], p: Fraction) -> Fraction:
+    """``P(reads | p) = (1/4096) sum_c prod_i p^d(r_i,c) q^(24-d(r_i,c))`` for
+    any number of reads of one carrier (one read: the coset mass; two: the
+    pair likelihood)."""
+    hist: Dict[int, int] = {}
+    for c in GOLAY_MASKS:
+        d = sum((r ^ c).bit_count() for r in reads)
+        hist[d] = hist.get(d, 0) + 1
+    q = 1 - p
+    k = len(reads)
+    return sum((n * p ** d * q ** (k * N - d) for d, n in hist.items()),
+               Fraction(0)) / len(GOLAY_MASKS)
+
+
+def session_confidence(conf_at, history: Sequence[int] = (),
+                       carrier: Sequence[int] = (),
+                       rule: Optional[str] = None
+                       ) -> Dict[str, object]:
+    """A reading's confidence with the rate read off every read the session
+    has seen (``history``, each its own carrier) and the call's own reads of
+    one carrier (``carrier``) -- the session-marginal confidence of candidate
+    P-b (Phase 89)."""
+    hist = _masks(history)
+    carrier = _masks(carrier)
+    weights = PRIORS["uniform"]
+    unnorm = []
+    for w, p in zip(weights, GRID):
+        x = w
+        for y in hist:
+            x *= read_likelihood(y, p)
+        if carrier:
+            x *= carrier_likelihood(carrier, p)
+        unnorm.append(x)
+    total = sum(unnorm, Fraction(0))
+    post = tuple(x / total for x in unnorm)
+    conf, at = rule_confidence(post, conf_at, rule)
+    return {"confidence": conf, "band": band(conf), "rate": at,
+            "posterior": post, "most_probable": most_probable(post),
+            "session_reads": len(hist), "rule": _rule(rule)}
+
+
+def decode_soft(subject: int, corpus: Sequence[int] = (),
+                rule: Optional[str] = None, history: Sequence[int] = ()
                 ) -> Dict[str, object]:
-    """The complete decoder's value for ``subject`` with its confidence
-    marginalized over the rate posterior of the subject and the corpus."""
+    """The complete decoder's value for ``subject`` with its confidence read
+    off the rate posterior of the session's earlier reads (``history``), the
+    subject and the corpus, under ``rule`` (the production rule by
+    default)."""
     subject, = _masks([subject])
     corpus = _masks(corpus)
+    hist = _masks(history)
     d = decode_complete(subject)
     if d.corrected is None:
         raise ConfidenceRefusal(
             "TIE", f"coset weight {d.weight}: {len(d.candidates)} codewords "
             f"are equally near and, at any rate, equally likely")
-    post = rate_posterior([subject] + corpus)
-    _check_grid(post)
-    conf = sum((x * la.confidence(d.weight, p) for x, p in zip(post, GRID)),
-               Fraction(0))
+    post = rate_posterior(hist + [subject] + corpus)
+    conf, at = rule_confidence(post, lambda p: la.confidence(d.weight, p),
+                               rule)
     return {"reading": "decoder, soft", "value": d.corrected,
             "coset_weight": d.weight, "reads": 1 + len(corpus),
+            "session_reads": len(hist), "rule": _rule(rule), "rate": at,
             "posterior": post, "most_probable": most_probable(post),
             "confidence": conf, "band": band(conf),
             "assumption": ASSUMPTION}
 
 
-def agree_soft(r1: int, r2: int, corpus: Sequence[int] = ()
+def agree_soft(r1: int, r2: int, corpus: Sequence[int] = (),
+               rule: Optional[str] = None, history: Sequence[int] = ()
                ) -> Dict[str, object]:
     """``agree``'s value for two reads of one carrier with its confidence
-    marginalized over the rate posterior of the pair and the corpus."""
+    read off the rate posterior of the session's earlier reads, the pair and
+    the corpus, under ``rule``."""
     r1, r2 = _masks([r1, r2])
     corpus = _masks(corpus)
+    hist = _masks(history)
     #  the reading's own refusals first (at any rate: the fork does not
     #  depend on the rate)
-    agree_confidence([r1, r2], GRID[0])
-    post = rate_posterior(corpus, [(r1, r2)])
-    _check_grid(post)
-    value = None
-    conf = Fraction(0)
-    for x, p in zip(post, GRID):
-        r = agree_confidence([r1, r2], p)
-        value = r["value"]
-        conf += x * r["confidence"]
+    value = agree_confidence([r1, r2], GRID[0])["value"]
+    post = rate_posterior(hist + corpus, [(r1, r2)])
+    conf, at = rule_confidence(
+        post, lambda p: agree_confidence([r1, r2], p)["confidence"], rule)
     return {"reading": "second reading, soft", "value": value,
-            "reads": 2 + len(corpus), "posterior": post,
+            "reads": 2 + len(corpus), "session_reads": len(hist),
+            "rule": _rule(rule), "rate": at, "posterior": post,
             "most_probable": most_probable(post), "confidence": conf,
             "band": band(conf), "assumption": ASSUMPTION}
 
 
-def decode_soft_floor(t: object, subject: int, corpus: Sequence[int] = ()
-                      ) -> Dict[str, object]:
-    """:func:`decode_soft` answered only at a marginal confidence of at least
-    ``t``; otherwise ``BELOW_FLOOR``."""
+def decode_soft_floor(t: object, subject: int, corpus: Sequence[int] = (),
+                      rule: Optional[str] = None,
+                      history: Sequence[int] = ()) -> Dict[str, object]:
+    """:func:`decode_soft` answered only at a confidence of at least ``t``;
+    otherwise ``BELOW_FLOOR``."""
     t = floor_check(t)
-    r = decode_soft(subject, corpus)
+    r = decode_soft(subject, corpus, rule, history)
     if r["confidence"] < t:
         raise ConfidenceRefusal(
-            "BELOW_FLOOR", f"the answer is the codeword sent with marginal "
-            f"probability {r['confidence']} ({r['band']}), below the declared "
-            f"floor {t}")
+            "BELOW_FLOOR", f"the answer is the codeword sent with "
+            f"probability {r['confidence']} ({r['band']}, {r['rule']} rule), "
+            f"below the declared floor {t}")
     out = dict(r)
     out["floor"] = t
     return out

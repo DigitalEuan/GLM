@@ -1,0 +1,273 @@
+Outside Question Set B (also tracked as candidate O1)
+
+All questions are in blocks of 10 'Medium', 'Hard' and 'Very Hard' Difficulty.
+
+Question Table of Contents:
+* Electrical, Physics, Chemistry and chemical, Process control and dynamics, Signal processing, Information Theory
+* Conceptual, thought-provoking questions: the Elements, Nuclear Physics & Isotopes, Logic
+* Questions designed to match the GLM benchmark, 12 critical engineering questions designed to stress-test the GLM
+
+Use 'Outside_Question_Set_B_candidate_O1.txt' as the Capability Failure Matrix to log open blockers and drive subsequent development phases.
+* Purpose: Pushes the system outside its comfort zone with uninhibited, natural human language across advanced domains
+* Role: Identifies exact system boundaries and reveals where the machine stops
+* Expected Outcome: High failure/refusal rate today. Under Directive D15, a "break" or refusal on an advanced prompt is treated as a located boundary rather than an error, providing the exact empirical baseline needed to design future engineering tracks
+
+---
+
+Electrical engineering:
+
+## Medium Difficulty
+
+   1. AC Circuit Analysis: A series RLC circuit operates at resonance. If the driving frequency is increased slightly above the resonant frequency, explain what happens to the magnitude of the total impedance and determine whether the overall circuit behavior becomes inductive or capacitive.
+   2. Control Systems: Consider a unity feedback control system with an open-loop transfer function $G(s) = \frac{K}{s(s + 2)(s + 4)}$. Using the Routh-Hurwitz criterion, find the range of gain K for which the system remains stable, and calculate the marginal value of K that causes sustained oscillations.
+   3. Power Systems: A three-phase power transformer has a leakage reactance of 0.10 p.u. on its own rating base of 50 MVA and 13.8 kV. Calculate its new per-unit reactance scaled to a system base of 100 MVA and 13.8 kV.
+   4. Digital Electronics: Design a synchronous 3-bit binary up-counter using negative-edge-triggered T flip-flops. Derive the simplified excitation equations for each flip-flop input using Karnaugh maps.
+
+## Hard Difficulty
+
+   1. Semiconductor Physics: When a p-n junction diode is subjected to a strong forward bias, explain the physical mechanism behind the separation of the electron and hole quasi-Fermi levels across the space-charge (depletion) region, and express this separation as a function of the applied voltage.
+   2. Signal Processing: A continuous-time LTI system has a rational system function $H(s) = \frac{s - 2}{(s + 1)(s - 3)}$. If the system is explicitly known to be Bounded-Input Bounded-Output (BIBO) stable, define its exact Region of Convergence (ROC) and determine whether the system is causal or non-causal.
+   3. Electromagnetics: A lossless transmission line with a characteristic impedance of Z₀ = 50 Ω is terminated with a complex load impedance of $Z_L = 25 - j25\ \Omega$. Calculate the complex voltage reflection coefficient $\Gamma_L$ at the load, and determine the resulting Voltage Standing Wave Ratio (VSWR).
+   4. Analog Microelectronics: Explain the physical origin of the body effect in an n-channel MOSFET. Mathematically demonstrate how a positive source-to-body voltage ($V_{SB} > 0$) alters the device's threshold voltage ($V_t$).
+
+## Very Hard Difficulty
+
+   1. Advanced Electromagnetics: At a planar interface separating two linear, isotropic, and lossless dielectric media with permittivities ε₁ and ε₂, a static electric field $\mathbf{E}_1$ hits the boundary at an angle θ₁ relative to the surface normal. Prove the boundary condition relationship $\frac{\tan\theta_1}{\tan\theta_2} = \frac{\epsilon_1}{\epsilon_2}$ by invoking Maxwell's boundary equations for tangential $\mathbf{E}$ and normal $\mathbf{D}$ fields.
+   2. Advanced Control Systems: The Nyquist plot of a stable open-loop system G(s)H(s) completely encircles the critical point (-1 + j0) exactly twice in the counter-clockwise direction (N = -2). If the open-loop system has zero poles (P = 0) in the right-half s-plane, deduce the stability of the closed-loop system and calculate the exact number of closed-loop poles residing in the right-half s-plane.
+
+---
+
+Physics:
+
+## Medium Difficulty
+
+   1. Classical Mechanics: A uniform solid cylinder of mass M and radius R rolls without slipping down an inclined plane making an angle θ with the horizontal. Find the linear acceleration of the cylinder's center of mass and the minimum coefficient of static friction required to prevent slipping.
+   2. Thermodynamics: One mole of an ideal monatomic gas undergoes an adiabatic expansion from an initial volume V₀ to a final volume 2V₀. Calculate the total work done by the gas during this process and express your answer in terms of the initial temperature T₀ and the universal gas constant R.
+   3. Electromagnetism: An infinitely long, straight wire carries a uniform line charge density λ. Surrounding this wire is a coaxial, uncharged, conducting cylindrical shell with inner radius a and outer radius b. Use Gauss's Law to find the electric field in all three regions: inside the shell, within the conducting material, and outside the shell.
+   4. Optics: A double-slit interference experiment is illuminated by light containing two wavelengths, λ₁ = 600 nm and λ₂ = 450 nm. Determine the lowest order m₁ of the bright fringe for λ₁ that completely coincides with a bright fringe for λ₂.
+
+## Hard Difficulty
+
+   1. Special Relativity: A particle of rest mass m₀ moving at a relativistic speed v collides head-on with an identical particle at rest. The two particles fuse together to form a single, stationary composite particle. Calculate the rest mass M of the resulting composite particle in terms of m₀ and the Lorentz factor γ.
+   2. Quantum Mechanics: A particle of mass m is trapped in a one-dimensional infinite potential well of width L (from x = 0 to x = L). If the particle is in its first excited state (n = 2), calculate the exact probability of finding the particle between x = 0 and x = L/4.
+   3. Statistical Mechanics: Consider a system of N non-interacting, distinguishable particles, where each particle can occupy one of two energy levels: 0 or ε. Derive the canonical partition function for this system and find the expression for the total internal energy as a function of temperature T.
+   4. Electrodynamics: A circular loop of wire with radius a and resistance R lies flat in the xy-plane. A time-dependent, spatially uniform magnetic field is applied perpendicular to the loop, given by $\mathbf{B}(t) = B_0 e^{-\alpha t} \hat{\mathbf{z}}$. Derive the expression for the total electrical energy dissipated as heat in the loop from t = 0 to t → ∞.
+
+## Very Hard Difficulty
+
+   1. Advanced Classical Mechanics: A double pendulum consists of two identical bobs of mass m suspended by two massless strings of identical length l in a uniform gravitational field g. Formulate the Lagrangian of the system using the angular displacements θ₁ and θ₂, and derive the coupled equations of motion using the small-angle approximation.
+   2. Advanced Quantum Mechanics: A quantum mechanical particle of mass m and energy E > 0 is incident from the left (x < 0) on a delta-function potential barrier given by V(x) = α δ(x), where α > 0. Set up the time-independent Schrödinger equation, apply the appropriate boundary and discontinuity conditions at x = 0, and calculate the exact transmission coefficient T as a function of E.
+
+---
+
+Chemistry and chemical:
+
+## Medium Difficulty
+
+   1. Chemical Kinetics: A first-order reaction A → B has an activation energy of 65 kJ/mol. If the rate constant is 3.2 × 10⁻³ s⁻¹ at 298 K, calculate the temperature required to triple the rate of the reaction.
+   2. Analytical Electrochemistry: Consider a galvanic cell operating at 298 K based on the reaction $\text{Zn}(s) + \text{Cu}^{2+}(aq) \rightleftharpoons \text{Zn}^{2+}(aq) + \text{Cu}(s)$. If the initial concentrations are $[\text{Cu}^{2+}] = 0.015\text{ M}$ and $[\text{Zn}^{2+}] = 0.85\text{ M}$, calculate the cell potential using the Nernst equation given standard reduction potentials $E^\circ_{\text{Cu}^{2+}/\text{Cu}} = +0.34\text{ V}$ and $E^\circ_{\text{Zn}^{2+}/\text{Zn}} = -0.76\text{ V}$.
+   3. Chemical Thermodynamics: Calculate the change in molar entropy (Δ S) when 2.0 moles of an ideal gas are heated reversibly at constant volume from 300 K to 450 K, given that the constant-volume molar heat capacity is $C_{V,m} = \frac{3}{2}R$.
+   4. Organic Synthesis: Predict the major organic product and outline the step-by-step mechanism for the reaction of cyclohexanone with pyrrolidine in the presence of an acid catalyst, followed by reaction with allyl bromide and subsequent aqueous hydrolysis.
+
+## Hard Difficulty
+
+   1. Transport Phenomena: Derive the steady-state concentration profile of a reactant A diffusing through a stagnant spherical gas film of inner radius R₁ and outer radius R₂, assuming no chemical reaction takes place within the film itself, and the boundary concentrations are fixed at $C_{A1}$ and $C_{A2}$.
+   2. Chemical Equilibrium: At 1000 K, the equilibrium constant $K_p$ for the gas-phase decomposition of sulfur trioxide ($2\text{SO}_3(g) \rightleftharpoons 2\text{SO}_2(g) + \text{O}_2(g)$) is 0.338 atm. If a rigid reactor is initially charged with pure SO₃ at a pressure of 2.0 atm, calculate the equilibrium partial pressure of each gas component.
+   3. Statistical Thermodynamics: For a diatomic molecule modeled as a rigid rotor, write down the expression for the rotational partition function ($q_{\text{rot}}$) at high temperatures. Use it to derive an expression for the rotational contribution to the molar constant-volume heat capacity ($C_{V,m}$) and explain why this value changes at cryogenic temperatures.
+   4. Coordination Chemistry: Using Crystal Field Theory (CFT), sketch the d-orbital splitting diagram for a low-spin d⁶ octahedral complex versus a tetrahedral complex of the same metal ion. Calculate the Crystal Field Stabilization Energy (CFSE) for both configurations in terms of $\Delta_o$ or $\Delta_t$ and pairing energy (P).
+
+## Very Hard Difficulty
+
+   1. Quantum Chemistry: Consider a particle of mass m moving on a ring of radius R (the rigid rotor in a 2D plane) described by the Hamiltonian $\hat{H} = -\frac{\hbar^2}{2I}\frac{d^2}{d\phi^2}$, where I = mR². Solve the Schrödinger equation to find the normalized angular wavefunctions and show that the energy eigenvalues are quantized as $E_m = \frac{m^2\hbar^2}{2I}$, clearly stating the allowed boundary conditions for the quantum number m.
+   2. Advanced Reactor Engineering: A non-isothermal liquid-phase second-order irreversible reaction 2A → B takes place in a continuous stirred-tank reactor (CSTR). The reaction is highly exothermic. Formulate the coupled material and energy balance equations under steady-state conditions, and explain mathematically how these equations can lead to multiple steady states (the "ignition" and "extinction" phenomena).
+
+---
+
+Process control and dynamics:
+
+## Medium Difficulty
+
+   1. Transfer Function Derivation: A perfectly mixed, constant-volume heating tank has a liquid feed entering at a volumetric flow rate $F$ and temperature $T_i(t)$. The tank contains a total liquid volume $V$, and heat is supplied by an electrical heater at a rate $Q(t)$. Assuming constant density $\rho$ and heat capacity $C_p$, derive the dynamic differential equation for the tank temperature $T(t)$ and find the transfer functions relating the output $T(s)$ to the inputs $T_i(s)$ and $Q(s)$ in deviation variables.
+   2. First-Order Plus Dead Time (FOPDT): A process is modeled by the transfer function $G(s) = \frac{3 e^{-2s}}{5s + 1}$. Sketch the open-loop response of this system to a unit step input occurring at $t = 0$. Calculate the exact values of the output at $t = 2$, $t = 7$, and $t \to \infty$.
+   3. PID Controller Modes: Explain the specific physical and mathematical limitations of using pure derivative action in a PID controller. Describe how industrial controllers modify the derivative term with a filter to mitigate these issues, and explain the concept of "derivative kick."
+   4. Block Diagram Algebra: Consider a standard negative feedback loop with a process $G_p(s)$, an actuator $G_v(s)$, a sensor/transmitter $G_m(s)$, and a controller $G_c(s)$. If a load disturbance $d(t)$ enters the loop through a disturbance transfer function $G_d(s)$ immediately after the actuator, derive the closed-loop transfer function relating the controlled variable $Y(s)$ to the disturbance $D(s)$ when the setpoint change is zero ($Y_{sp} = 0$).
+
+## Hard Difficulty
+
+   1. Controller Tuning & Stability: A process has an open-loop transfer function $G(s) = \frac{4}{(s+1)(2s+1)(3s+1)}$. If a proportional-only controller ($G_c = K_c$) is implemented in a unity negative feedback loop, utilize the Routh-Hurwitz criterion to determine the ultimate gain $K_{cu}$ and the ultimate period $P_u$ of the system.
+   2. Frequency Response Analysis: For the open-loop transfer function $G(s) = \frac{e^{-0.5s}}{s+1}$, calculate the exact crossover frequency $\omega_{co}$ where the phase angle equals $-180^\circ$. Use this to determine the amplitude ratio at this frequency and calculate the gain margin of the system under unity feedback.
+   3. Cascade Control: Draw a conceptual block diagram for a cascade control system used to regulate the exit temperature of a process fluid leaving a shell-and-tube heat exchanger, where the manipulated variable is the steam valve position. Explicitly identify the primary (outer) loop, secondary (inner) loop, master controller, slave controller, and explain why this configuration handles steam pressure fluctuations better than a single-loop feedback system.
+   4. Feedforward Control Design: A process output $Y(s)$ responds to a manipulated variable $U(s)$ and a measurable disturbance $D(s)$ via the relationship $Y(s) = G_p(s)U(s) + G_d(s)D(s)$, where $G_p(s) = \frac{2}{4s+1}$ and $G_d(s) = \frac{1 e^{-s}}{2s+1}$. Design an ideal feedforward controller $G_f(s)$ that completely eliminates the effect of changes in $D(s)$ on $Y(s)$. Discuss whether this controller is physically realizable and how it must be modified for implementation.
+
+## Very Hard Difficulty
+
+   1. State-Space Multi-Variable Control: A multi-input, multi-output (MIMO) system is described by the following linear state-space matrices:
+   $$\dot{\mathbf{x}} = \begin{bmatrix} -2 & 1 \\ 0 & -3 \end{bmatrix} \mathbf{x} + \begin{bmatrix} 1 \\ 1 \end{bmatrix} \mathbf{u}, \quad \mathbf{y} = \begin{bmatrix} 1 & 0 \end{bmatrix} \mathbf{x}$$ 
+   Determine whether this system is completely state controllable and completely observable using the Kalman controllability and observability rank conditions.
+   2. Advanced Model Predictive Control (MPC): Explain mathematically how Model Predictive Control handles process constraints differently than conventional PID or cascade control. Formulate the generic optimization objective function (cost function) for a linear MPC controller over a prediction horizon $P$ and control horizon $M$, defining the role of the state error weights, input move suppression weights, and how hard physical limitations on valve saturation are embedded into the problem statement.
+
+---
+
+Signal processing:
+
+## Medium Difficulty
+
+   1. Sampling Theorem and Aliasing: A continuous-time signal $x(t) = 5 \cos(2\pi \cdot 300 t) + 3 \sin(2\pi \cdot 800 t)$ is sampled at a rate of $f_s = 1000\text{ Hz}$. Determine the exact frequencies (in Hz) of the sinusoidal components present in the reconstructed signal after passing through an ideal low-pass filter with a cutoff frequency of 500 Hz.
+   2. DTFT and Z-Transform: Find the Z-transform and the corresponding Region of Convergence (ROC) for the discrete-time sequence $x[n] = \left(\frac{1}{2}\right)^n u[n] - \left(-3\right)^n u[-n-1]$. Determine whether the Discrete-Time Fourier Transform (DTFT) of this sequence exists based on your ROC analysis.
+   3. Linear vs. Circular Convolution: Consider two finite-length sequences: $x[n] = \{1, 2, 3\}$ and $h[n] = \{1, -1\}$. Compute the linear convolution $y_L[n] = x[n] * h[n]$. Then, compute the 3-point circular convolution $y_C[n] = x[n] \circledast_3 h[n]$ and explain the mathematical relationship between the two results.
+   4. Windowing in FIR Filter Design: Explain the trade-offs between using a rectangular window versus a Kaiser window when designing a linear-phase Finite Impulse Response (FIR) low-pass filter using the window method. Specifically discuss the impact on transition bandwidth and passband/stopband ripple.
+
+## Hard Difficulty
+
+   1. Bilnear Transformation (IIR Filters): An analog low-pass filter has a transfer function $H_a(s) = \frac{1}{s + 2}$. Use the bilinear transformation with a sampling period T = 0.5 seconds to map this into a digital Infinite Impulse Response (IIR) transfer function H(z). Show how the continuous frequency Ω = ∞ maps to the discrete domain.
+   2. The Discrete Fourier Transform (DFT) Leakage: A discrete-time signal consists of a single pure sinusoid $x[n] = \cos(\omega_0 n)$ and is observed over an N-point rectangular window before taking an N-point DFT. Mathematically demonstrate under what exact condition for ω₀ spectral leakage will be entirely avoided, and derive the expression for the DFT magnitudes when leakage does occur.
+   3. Multirate Signal Processing (Decimation): A discrete-time signal $x[n]$ with a spectrum bandlimited to ± π/3 radians is passed through a 3-fold decimator (downsampler by M=3). Derive the expression for the spectrum of the downsampled signal $y[n] = x[3n]$ and sketch or mathematically demonstrate whether aliasing occurs in the baseband (-π to π).
+   4. Stochastic Signals & LTI Systems: Wide-Sense Stationary (WSS) white noise $w[n]$ with zero mean and variance σ² = 1 is passed through a first-order stable filter with impulse response $h[n] = a^n u[n]$ where |a| < 1. Derive the Autocorrelation Function $R_{yy}[m]$ and the Power Spectral Density $S_{yy}(e^{j\omega})$ of the output signal $y[n]$.
+
+## Very Hard Difficulty
+
+   1. Optimal Filtering (The Wiener Filter): Consider a discrete-time signal $x[n] = s[n] + v[n]$, where $s[n]$ is a target signal and $v[n]$ is uncorrelated zero-mean white noise. The autocorrelation of the signal is $R_{ss}[m] = 0.8^{\vert{}m\vert{}}$ and the noise variance is $\sigma_v^2 = 0.5$. Derive the Wiener-Hopf equations for a 2-tap causal FIR Wiener filter $h[n] = h_0 \delta[n] + h_1 \delta[n-1]$ designed to minimize the mean-squared error between the filter output and $s[n]$, and solve for the optimal coefficients h₀ and h₁.
+   2. The Fast Fourier Transform (FFT) Decimation-in-Frequency: Mathematically derive the Radix-2 Decimation-in-Frequency (DIF) Cooley-Tukey FFT algorithm for an N-point DFT, where N is a power of 2. Explicitly show how splitting the input sequence into its first half and second half in the time domain decouples the calculation into even and odd indexed frequency samples, and draw the fundamental butterfly structure including the twiddle factors.
+
+---
+
+Information Theory:
+
+## Medium Difficulty
+
+   1. Entropy of a Joint Distribution: Let X and Y be two binary random variables with a joint probability mass function where $P(X=0, Y=0) = \frac{1}{2}$, $P(X=0, Y=1) = \frac{1}{4}$, $P(X=1, Y=0) = \frac{1}{4}$, and P(X=1, Y=1) = 0. Calculate the marginal entropies H(X) and H(Y), the joint entropy H(X,Y), and the conditional entropy H(Y|X).
+   2. Huffman Coding & Efficiency: A discrete memoryless source emits symbols from an alphabet $\mathcal{X} = \{A, B, C, D\}$ with probabilities p(A) = 0.5, p(B) = 0.25, p(C) = 0.15, and p(D) = 0.10. Construct a binary Huffman code for this source, calculate the average codeword length L, and determine the coding efficiency relative to the source entropy H(X).
+   3. Mutual Information Properties: Prove that the mutual information I(X;Y) is always non-negative (I(X;Y) ≥ 0). Under what exact condition does I(X;Y) = 0? Express your proof using the properties of Kullback-Leibler divergence.
+   4. Binary Symmetric Channel (BSC): A Binary Symmetric Channel has an error probability (crossover probability) of p = 0.11. Calculate the maximum transmission rate (channel capacity C) in bits per channel use, and find the input probability distribution that achieves this capacity.
+
+## Hard Difficulty
+
+   1. The Data Processing Inequality: Consider a Markov chain X → Y → Z where X, Y, and Z are random variables. Prove the Data Processing Inequality, which states that I(X;Y) ≥ I(X;Z). Explain the physical significance of this inequality regarding processing or filtering data.
+   2. Differential Entropy of a Gaussian: Derive the mathematical expression for the differential entropy H(X) of a continuous random variable X that follows a one-dimensional Gaussian distribution with mean μ and variance σ². Show that for a fixed variance, the Gaussian distribution maximizes differential entropy.
+   3. Kraft-McMillan Inequality: State the Kraft-McMillan Inequality for uniquely decodable codes. Prove that if a set of codeword lengths $l_1, l_2, \dots, l_m$ satisfies the Kraft inequality for a prefix code, it must also hold true for any uniquely decodable code, and explain why this constraint restricts code design.
+   4. Channel Capacity with Memory: Consider a channel with a binary input $X_i \in \{0,1\}$ and a binary output $Y_i \in \{0,1\}$. Instead of being memoryless, the noise behaves such that the channel acts as an error-free identity channel ($Y_i = X_i$) on even time steps ($i = 2, 4, 6\dots$), but acts as a purely random BSC with crossover probability p=0.5 on odd time steps ($i = 1, 3, 5\dots$). Calculate the average capacity per channel use over a long horizon.
+
+## Very Hard Difficulty
+
+   1. AWGN Channel Capacity with Parallel Paths (Water-Filling): A transmitter sends a signal over three independent, parallel Additive White Gaussian Noise (AWGN) channels simultaneously. The total available transmission power is $P_{\text{total}} = 10\text{ W}$. The noise variances on the three channels are σ₁² = 1 W, σ₂² = 3 W, and σ₃² = 7 W. Use the Kuhn-Tucker optimization conditions (the "water-filling" algorithm) to determine the optimal allocation of power P₁, P₂, P₃ across the channels to maximize total capacity, and compute that maximum capacity.
+   2. Rate-Distortion Function for a Binary Source: Consider a Bernoulli(p) source X where P(X=1) = p ≤ 0.5. We wish to compress this source under a Hamming distortion metric $d(x, \hat{x})$ such that the maximum allowable average distortion is D. Mathematically derive the rate-distortion function R(D) for this source for the range 0 ≤ D ≤ p, and explain what happens to R(D) when D > p.
+
+---
+
+Conceptual, thought-provoking questions about the elements. These are designed to bypass simple rote memorisation and instead force a system to synthesise periodic trends, quantum mechanics, and chemical behavior:
+
+## Medium Difficulty
+
+   1. The Inertia of Helium: Helium has a closed $1s^2$ shell, making it famously inert. However, the alkaline earth metal beryllium also has a closed-shell configuration ($1s^2 2s^2$). Explain quantum mechanically why beryllium readily forms covalent and ionic bonds (like $\text{BeCl}_2$) while helium resists bonding entirely, despite both having completely filled outer $s$-orbitals.
+   2. The Density Paradox: Osmium ($Z=76$) is the densest naturally occurring element on Earth, narrowly beating iridium ($Z=77$). Since density generally increases down and right across a transition metal row due to increasing atomic mass, explain the physical and electronic factors that cause the density trend to peak at osmium and begin decreasing as you move further right.
+   3. The Boundary of Oxidation: Fluorine is notoriously restricted to an oxidation state of $-1$ in all its compounds (excluding elemental $\text{F}_2$). Meanwhile, the elements immediately surrounding it—oxygen, chlorine, and nitrogen—exhibit a vast range of both positive and negative oxidation states. Explain what unique atomic and electronic parameters restrict fluorine to this singular, negative state.
+   4. The Conductivity Divergence: Within Group 14, carbon (as diamond) is an electrical insulator, silicon and germanium are semiconductors, and tin and lead are metallic conductors. If all these elements share the exact same number of valence electrons ($ns^2 np^2$), explain the structural and quantum mechanical transition that shifts them from insulators to metals down the group.
+
+## Hard Difficulty
+
+   1. The Color of Gold and Liquid Mercury: Gold ($Z=79$) has a distinct yellowish hue, while its immediate neighbor mercury ($Z=80$) is a liquid at room temperature. Both of these anomalous physical properties stem from the exact same underlying physics: relativistic effects on the $6s$ electron shell. Explain how Einstein's special relativity alters these orbital energies to simultaneously cause gold's color and mercury's low melting point.
+   2. The Missing Element (Technetium): Technetium ($Z=43$) is a light element surrounded entirely by stable neighbors (ruthenium, molybdenum, niobium, etc.), yet it has no stable isotopes and is entirely radioactive. Invoke Mattauch's isobar rule and nuclear shell models to explain why the universe fundamentally forbids a stable arrangement of 43 protons and its matching neutrons.
+   3. The Fluoride Volatility Inversion: Consider the fluorides of the Group 5 and 6 transition metals. Tantalum pentafluoride ($\text{TaF}_5$) melts at 95°C, while tungsten hexafluoride ($\text{WF}_6$) is a gas at room temperature (boiling point 17°C). Explain why adding more heavy halogen atoms to a metal center results in a drastically lower boiling point and a more volatile compound.
+   4. The Lanthanide Contraction and Secondary Periodicity: Hafnium ($Z=72$) and zirconium ($Z=40$) have virtually identical ionic radii ($0.71\,\text{Å}$ vs $0.72\,\text{Å}$), making them famously difficult to separate chemically. Explain why the insertion of the $4f$ block causes this radical flattening of atomic radii, and predict how a similar "contraction" manifests between the 2nd and 3rd periods (e.g., Al vs Ga) due to the $3d$ block.
+
+## Very Hard Difficulty
+
+   1. The Ceasing of the Octet Rule: For light elements, the octet rule dictates stable molecular structures. For transition metals, the "18-electron rule" takes over. For the actinides, however, predicting stable coordination spheres and oxidation states using basic electron-counting rules falls apart entirely. Detail the energetic shifts of the $5f$, $6d$, $7s$, and $7p$ orbitals that render valence-counting rules useless in heavy actinide chemistry.
+   2. The Relativity Break of Group 18: Oganesson ($Z=118$) sits at the very bottom of the noble gas column. However, advanced relativistic quantum calculations predict that oganesson is highly polarisable, likely a semiconductor or metal at room temperature, and possesses a positive electron affinity (meaning it can form a stable negative ion). Explain how extreme spin-orbit coupling and the "smearing" of electron shells into a continuous Fermi-like gas completely destroy the expected "noble gas" behavior of Element 118.
+
+---
+
+Nuclear Physics & Isotopes:
+
+## Medium Difficulty
+
+   1. The Limit of the Deuteron: The deuteron ($^2\text{H}$) is the simplest bound nuclear system, consisting of one proton and one neutron. However, its mirror pairs—the diproton ($^2\text{He}$) and the dineutron ($^2\text{n}$)—are entirely unbound. Explain how the spin-dependent nature of the strong nuclear force and the Pauli exclusion principle conspire to prevent a stable diproton or dineutron, even before accounting for Coulomb repulsion.
+   2. The Mirror Nuclei Binding Energy Discrepancy: Consider the mirror nuclei pairs Carbon-11 ($^{11}\text{C}$) and Boron-11 ($^{11}\text{B}$). They share the exact same mass number, meaning they have identical layouts of nucleons under the charge-independent strong force. Yet, their binding energies differ by roughly $2.76\text{ MeV}$. Detail the electro- and quantum-mechanical mechanisms that cause this energy gap.
+   3. The Stable Lead-208 Anomaly: Lead-208 ($^{208}\text{Pb}$) has an exceptionally high binding energy per nucleon compared to its immediate neighbors on the chart of nuclides. Explain how the nuclear shell model accounts for this extreme stability, and describe the physical structural phenomenon known as a "neutron skin" that develops in this specific isotope.
+   4. The Beryllium-8 Bottleneck: Beryllium-8 ($^8\text{Be}$) is famously unstable, spontaneously undergoing alpha fission into two $^4\text{He}$ nuclei with a half-life of less than a femtosecond ($10^{-16}\text{ s}$). If the alpha particle is the gold standard of nuclear stability, explain why binding two alpha particles together results in a completely unbound, highly transient state.
+
+## Hard Difficulty
+
+   1. The Neutrinoless Double-Beta Decay Threshold: Normal double-beta decay ($2\nu\beta\beta$) is a rare, Standard Model-allowed second-order weak process. However, if neutrinos are their own antiparticles (Majorana fermions), neutrinoless double-beta decay ($0\nu\beta\beta$) becomes possible. Describe how observing the kinetic energy spectrum of the emitted electrons would differentiate between these two decay modes, and explain why this observation would prove lepton number violation.
+   2. The Giant Dipole Resonance: When a heavy nucleus is hit by a high-energy gamma-ray photon, it can exhibit a collective excitation known as the Giant Dipole Resonance (GDR). Describe the physical mechanics of this resonance in terms of the macroscopic liquid drop model (the relative motion of protons versus neutrons) and explain how its characteristic frequency scales with the mass number $A$.
+   3. The Island of Stability Mechanics: Superheavy elements ($Z > 110$) are highly unstable, decaying rapidly via spontaneous fission or alpha emission. However, nuclear theory predicts an "island of stability" around $Z=114/120$ and $N=184$. Explain how shell-correction energies counteract the enormous, destructive macroscopic Coulomb repulsion to create these theoretical pockets of relatively long-lived isotopes.
+   4. The r-Process vs. s-Process Boundary: Heavy elements beyond Iron ($Z=26$) are synthesized via neutron capture. Contrast the astrophysical conditions (neutron flux, temperature) required for the slow (s-process) versus the rapid (r-process). Explain why certain stable isotopes, like Tin-124 ($^{124}\text{Sn}$), can only be forged by the r-process, while others like Tin-112 ($^{112}\text{Sn}$) are bypassed entirely by neutron capture.
+
+## Very Hard Difficulty
+
+   1. The Primordial Lithium Problem: Standard Big Bang Nucleosynthesis (BBN) models are highly successful at predicting the cosmic abundances of Deuterium, Helium-3, and Helium-4. However, these same models overpredict the abundance of Lithium-7 ($^7\text{Li}$) by a factor of roughly three when compared to observations of metal-poor Population III stars. Detail the nuclear reaction paths ($^7\text{Be}$ electron capture) responsible for primordial Lithium production and outline the leading nuclear or cosmological hypotheses attempting to resolve this mismatch.
+   2. The Astrophysical Anthropic Fine-Tuning of the Hoyle State: Because $^8\text{Be}$ is so unstable, the synthesis of Carbon-12 ($^{12}\text{C}$) in stars requires a highly improbable, simultaneous collision of three alpha particles (the triple-alpha process). This process only yields carbon because of a specific, excited $0^+$ state in the Carbon-12 nucleus known as the Hoyle State. Explain why this state acts as a resonant amplifier, and calculate or describe how a microscopic shift of just a few percent in the strength of the strong nuclear force would alter this energy state, effectively quenching the carbon-based lifecycle of the universe.
+
+---
+
+Logic:
+
+## Medium Difficulty
+
+   1. The Material Implication Paradox: In classical formal logic, the material implication operator (P → Q) is logically equivalent to $\neg P \vee Q$. This leads to the "paradoxes of material implication," where a false premise makes any conditional statement vacuously true (e.g., "If the moon is made of cheese, then Paris is in Japan" is a true statement). Explain the philosophical and formal limitations of using material implication to model natural-language reasoning, and introduce how relevant logic or modal strict implication attempts to resolve this.
+   2. Compactness Theorem and Infinite Models: The Compactness Theorem for first-order logic states that a set of sentences has a model if and only if every finite subset of it has a model. Use this theorem to prove that if a first-order theory has arbitrarily large finite models, it must also possess an infinite model.
+   3. Soundness vs. Completeness: Clearly delineate the conceptual difference between the Soundness of a deductive system ($\vdash \implies \models$) and its Completeness ($\models \implies \vdash$). Explain what it means for a logic to possess one but structurally lack the other, and provide an example of a logic (such as certain second-order logics) where full semantic completeness fails.
+   4. Intuitionistic Logic and the Law of Excluded Middle: In Intuitionistic (or constructive) logic, the Law of the Excluded Middle ($P \vee \neg P$) is rejected as an axiom. Explain the philosophical underpinning of this rejection regarding the concept of mathematical truth (proof vs. absolute truth), and explain why the double negation elimination ($\neg\neg P \to P$) is also invalid in this framework.
+
+## Hard Difficulty
+
+   1. The Skolem Paradox: The Löwenheim–Skolem Theorem states that if a countable first-order theory has an infinite model, it has a countably infinite model. Cantor's Theorem, however, proves that uncountable sets (like the real numbers) strictly exist. When we axiomatise set theory (ZFC) in first-order logic, it yields a "Skolem Paradox": the theory can assert the existence of an uncountable set, yet the theory itself must possess a countable model. Resolve this paradox by distinguishing between the "absolute" view from outside the model and the "relativised" view from within the model.
+   2. The Curry Paradox: Consider a self-referential sentence C, defined as: "If this sentence is true, then Santa Claus exists" ($C \iff (C \to F)$). Show how, using only standard rules of inference (Conditional Proof and Modus Ponens) and without using negation, you can logically prove that Santa Claus exists. Explain how this poses a deeper threat to naive structural logic than the classic Liar Paradox ("This statement is false").
+   3. Tarski’s Undefinability of Truth: Tarski's theorem states that arithmetical truth cannot be defined within arithmetic itself. Outline the proof of this theorem using the Diagonal Lemma (similar to Gödel's Incompleteness proofs). Explain why a language's truth predicate must always reside in a higher-level metalanguage.
+   4. Fuzzy Logic vs. Probability: Both Fuzzy Logic and Probability Theory assign values between 0 and 1 to statements. However, they model entirely different types of uncertainty. Explain the formal semantic difference between saying a cup of water has a probability of 0.7 of being potable versus saying the water has a fuzzy membership degree of 0.7 in the set of potable liquids. Focus your answer on how the two systems handle truth-functional operations (conjunction/disjunction).
+
+## Very Hard Difficulty
+
+   1. Gödel's Second Incompleteness Theorem and Self-Justification: Gödel's Second Incompleteness Theorem proves that any consistent, sufficiently powerful formal arithmetic system cannot prove its own consistency ($\text{PA} \not\vdash \text{Con(PA)}$). However, if a system were inconsistent, it could easily prove its own consistency (via the principle of explosion). Detail the mechanics of the formula $\text{Con(PA)}$, and explain why a formal system announcing "I am consistent!" is a logical red flag rather than a proof of stability.
+   2. The Lindström Theorems and the Boundary of First-Order Logic: Lindström's Theorem provides a profound meta-logical characterisation of first-order logic. It states that first-order logic is the only logical system (satisfying certain basic regularities) that simultaneously possesses both the Countable Compactness Property and the Downward Löwenheim–Skolem Property. Explain the structural consequences of this theorem: what do we fundamentally lose in terms of model-theoretic control if we try to extend first-order logic to capture uncountability (e.g., passing to $\mathcal{L}_{\omega_1, \omega}$ or second-order logic)?
+
+---
+
+Questions designed to match the GLM benchmark:
+
+## Medium Difficulty
+
+   1. Golay Code Perfect Decoding Boundaries: The extended binary Golay code $[24, 12, 8]$ is a famously prize-winning code, but it is the unextended $[23, 12, 7]$ code that is strictly "perfect." Prove why adding a parity check bit to form the $[24, 12, 8]$ code shifts it from a perfect code to a quasi-perfect code. Define what this structural shift means for the geometric distribution of "deep holes" (vectors at maximum distance from the code) in $\mathbb{F}_2^{24}$.
+   2. The Exact Rational Representation of Orifice Flows: In standard engineering, fluid velocity through an orifice is modeled using floating-point approximations of Torricelli's Law ($v = \sqrt{2gh}$). To map this into a zero-drift $\mathbb{Q}$ substrate, the system cannot use square roots. Describe an algebraic transformation or state-space formulation that allows a process control loop to evaluate boundary threshold crossings ($v > v_{\text{crit}}$) using purely rational inequalities over $\mathbb{Q}$, completely avoiding irrational numbers.
+   3. The Miracle Octad Generator (MOG): Curt Curtis’s Miracle Octad Generator is used to visually and algorithmically handle coordinates in the extended Golay code and the Leech Lattice. Suppose an input state carrier vector yields a coset weight of exactly 4. Explain mathematically why this vector represents an AMBIGUOUS refusal state, detailing how many equidistant nearest Golay codewords exist in the MOG sextet to prevent a unique decoding solution.
+   4. The Omega Test Splinter Limits: Your benchmark references the INTEGER_UNDECIDED refusal code when the Omega test (an integer linear programming decision procedure) hits splinter search depth caps. Explain how the elimination of variables in the Omega test differs from standard Fourier-Motzkin elimination over $\mathbb{Q}$, and why the introduction of "shadow graphs" forces exponential splintering searches when verifying bounds over $\mathbb{Z}$.
+
+## Hard Difficulty
+
+   1. Leech Lattice Deep Holes vs. Close Holes: In the 24-dimensional Leech Lattice Λ₂₄, the covering radius dictates how far a point in $\mathbb{R}^{24}$ can possibly be from the nearest lattice point. There are two distinct types of holes at this maximum distance: "deep holes" (whose coordinates are intimately tied to the Golay code) and "close holes." Describe the structural differences between these holes' Voronoi cells, and explain why an input vector landing precisely on a close hole does not trigger the same AMBIGUOUS weight-4 error profile as a deep hole.
+   2. The Bit-Flip Rate Grid Overflow: The RATE_GRID_EXCEEDED refusal code triggers when empirical error density exceeds a calibrated channel bound of p = 1/10. Derive the posterior probability density function for a memoryless binary symmetric channel after observing k errors across n bits. Mathematically demonstrate why an error density exceeding 10% causes the maximum guard point to peak at the boundary, rendering exact rational calculation of the channel census unstable.
+   3. Diophantine Equations and Tarski-Seidenberg Elimination: Quantifier elimination over the real numbers ($\mathbb{R}$) is decidable via the Tarski-Seidenberg theorem. However, your system operates over $\mathbb{Q}$ and $\mathbb{Z}$. Explain why an LTI system verification query that transforms into a multivariate Diophantine equation cannot rely on Tarski-Seidenberg, and identify the algorithmic boundary (Matiyasevich's Theorem) that forces the INTEGER_UNDECIDED or INCONSISTENT_GIVENS states.
+   4. Automated Theorem Proving in Lean 4 Kernels: Your architecture validates TCT payload states using automated subprocess execution alongside Lean 4 kernel proofs. If a candidate response outputs a state transition matrix over $\mathbb{Q}^{24}$, describe how a Lean 4 dependent type system ensures that the proof of matrix inversion contains no hidden floating-point roundoff assertions, focusing on how Lean treats the structural conservation laws of exact fractions.
+
+## Very Hard Difficulty
+
+   1. Conway’s Group Co₀ and Fractional Automorphisms: The automorphism group of the Leech lattice, Co₀ (Conway's largest sporadic group), acts transitively on various configurations of lattice vectors. Suppose a multi-surface routing algorithm must rotate a state carrier vector across geometric boundaries without leaving the $\mathbb{Q}^{24}$ substrate. Prove that any rotation matrix derived from the generators of Co₀ can be expressed entirely using rational fractions, and explain how a non-exact rotational vector would break the zero-drift invariant of the machine, resulting in a runtime execution exception (Score -1).
+   2. The Conway-Sloane Uniqueness Radius Breakthrough: Under the UNCORRECTABLE refusal code, error weights ≥ 5 exceed the covering radius of the S(5,8,24) Steiner system. Prove mathematically that if a 24-dimensional noise vector introduces 5 or more coordinate alterations, it crosses the unique decoding sphere boundary. Show that the vector now lies closer to a completely different, valid Leech lattice point, making silent repair structurally impossible and forcing a deterministic, named refusal code over the channel census.
+
+---
+
+12 critical engineering questions designed to stress-test the GLM development across frameworks:
+
+## Tier 1: Hardware-Free Exact Rational Geometry ($\mathbb{Q}^{24}$)
+
+   1. Efficient Rational Norm Calculations Without Square Roots: In $\mathbb{Q}^{24}$, verifying boundary thresholds requires comparing vector distances ($\Vert{}\mathbf{x} - \mathbf{y}\Vert{}$). However, calculating the true Euclidean norm introduces irrational square roots ($\mathbb{R}$), breaking the exact fraction invariant. How can the GLM safely evaluate distance-bound inequalities without leaving the rational domain?
+   2. Preventing Integer Overflow in Arbitrary-Precision Rational Operations: Multi-step cascade control matrix multiplications over $\mathbb{Q}^{24}$ cause the numerators (p) and denominators (q) of fractions to grow exponentially (the "bit-explosion" phenomenon), leading to severe performance degradation. What exact reduction architecture mitigates this without losing precision?
+   3. Mapping Continuous Rotations (SO(24)) to Purely Rational Matrices: Physical process models require state vector rotations. Standard rotation matrices rely on sines and cosines, which are transcendental and irrational. How can the GLM execute exact spatial re-orientations while staying strictly inside $\mathbb{Q}^{24 \times 24}$?
+
+## Tier 2: Leech Lattice (Λ₂₄) & Golay Decoding Logic
+
+   1. Algorithmic Resolution of AMBIGUOUS Coset Weight 4 Deep Holes: When an input vector hits a deep hole of coset weight 4 in the extended Golay code, unique decoding fails because there are exactly 6 equidistant nearest codewords. What deterministic tie-breaking protocol resolves this without arbitrary non-determinism?
+   2. Exploiting the S(5,8,24) Steiner System for Fast Error Localization: Scanning the 24-dimensional space to find the nearest Leech lattice point is computationally heavy. How can the properties of the S(5,8,24) Steiner system be used to instantly triage error weight?
+   3. Determining the Real-Time Boundary of the Unique Decoding Radius: What is the exact mathematical proof condition that dictates when a 24-dimensional perturbation shifts from a repairable state to an UNCORRECTABLE state?
+
+## Tier 3: Zero-Drift Process Control & Constraints
+
+   1. Eliminating Roundoff Errors in Exact Multi-Surface Routing: When routing a process control variable across multiple intersecting geometric boundary surfaces, floating-point systems suffer from "surface skipping" due to rounding errors. How does the GLM guarantee that a state vector lands exactly on a surface interface?
+   2. Exact Rational Emulation of Transcendental PID Transfer Functions: Traditional industrial controllers utilize exponential tuning parameters ($e^{-L s}$) and continuous integrals. How can these be emulated within the GLM's strict rational framework?
+   3. Algorithmic Handling of the INTEGER_UNDECIDED Omega Test Splinter Cap: During integer state verification ($\mathbb{Z}$), the Omega test can splinter exponentially into an infinite search tree, triggering the INTEGER_UNDECIDED refusal. How do we programmatically handle this boundary condition safely?
+
+## Tier 4: Pipeline Execution & Validation (TCT Frame)
+
+   1. Isolated Subprocess Execution (python3 -I) Sandboxing Without Overhead: Column 3 of your TCT frame requires spinning up an isolated Python subprocess (python3 -I) to verify the math within a strict 5.0-second window. Doing this per token or per step introduces immense OS fork overhead. How do you maintain isolation while achieving low latency?
+   2. Constructing Lean 4 Kernel Proof Verification Templates for Q24 Matrices: How should Column 2 (Math) format its output so that a Lean 4 dependent type checker can instantly verify the correctness of a 24-dimensional rational matrix state inversion?
+   3. Automating Asymmetric Scoring for Confidently Wrong Responses (-1): Your scoring protocol penalizes confidently wrong answers with a strict -1, while rewarding correct answers and certified refusals with +1. How can the pipeline distinguish between an unparsed answer (Score 0) and a confidently wrong answer (Score -1) when parsing messy textual outputs?

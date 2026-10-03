@@ -87,6 +87,15 @@ SURFACES: Tuple[Surface, ...] = (
             ("RequestProject/GLM/PythonSpeech.lean",
              "RequestProject/GLM/CarriedFork.lean"),
             "studies/PYTHON_SPEECH_STUDY.md"),
+    Surface("frames", "a question one of the declared question frames reads "
+            "(Phase 89: agree channel at a floor, declared error weight, rate "
+            "grid, Routh cubic, reflection/VSWR, aliasing, convolution, "
+            "Wiener taps, entropies, Huffman, Kalman rank, Golay deep holes, "
+            "...); each answer gated by its column-3 script under python3 -I",
+            "GLM.py --ask TEXT, or -q TEXT", "derive, refusal",
+            ("RequestProject/GLM/QuestionSetB.lean",
+             "RequestProject/GLM/ConnectedMachine.lean"),
+            "studies/QUESTION_SET_B_STUDY.md"),
     Surface("engineering", "a question one of the eight engineering frames "
             "reads (derive, across wheels, wheel, check, Smith, analogy, "
             "resonance, delta-sigma)", "GLM.py --ask TEXT, or --eng -q TEXT",
@@ -102,7 +111,8 @@ SURFACES: Tuple[Surface, ...] = (
              "RequestProject/GLM/StepwisePlanner.lean",
              "RequestProject/GLM/StepwiseFrames.lean",
              "RequestProject/GLM/StepwiseWiden.lean",
-             "RequestProject/GLM/HoleBounds.lean"),
+             "RequestProject/GLM/HoleBounds.lean",
+             "RequestProject/GLM/DeclaredFrames.lean"),
             "studies/SEMANTIC_PLAN_STUDY.md"),
 )
 

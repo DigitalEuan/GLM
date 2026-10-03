@@ -46,8 +46,8 @@ by hand twice: the counts are recomputed into
 | capability probes | where the library stops, asked as user questions | **33 probes: 20 hold, 13 break, 0 errored, 0 surprises** |
 | benchmark suites | solver functions against curated and exhaustive task sets | **2,389 / 2,390 tasks across 5 suites; every suite beat its declared baseline** |
 | end-to-end CLI evaluation | the CLI, driven the way a user drives it | **177 cases: 177 passed** — 149 answered correctly, 28 refused as expected, 0 unexpected refusals, **0 confidently wrong**, 0 errored |
-| test suite | the package's own regression net | **<!--figure:suite-->4,703 tests across 131 of the 132 test files, 17,825 subtests, outside the document check<!--/figure-->**, zero failures |
-| Lean development | the machine-checked layer | **<!--figure:lean-files-->156 Lean files<!--/figure-->, `lake build` clean, no `sorry`** |
+| test suite | the package's own regression net | **<!--figure:suite-->4,904 tests across 140 of the 141 test files, 18,026 subtests, outside the document check<!--/figure-->**, zero failures |
+| Lean development | the machine-checked layer | **<!--figure:lean-files-->166 Lean files<!--/figure-->, `lake build` clean, no `sorry`** |
 
 A break in the probe report is not a failure — it is a located boundary, and
 each one names the exact place it stops. A *confidently wrong* answer in the

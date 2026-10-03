@@ -66,7 +66,7 @@ class TestTheRouterReadsOnlyWhatItShould(unittest.TestCase):
 
     def test_the_order_is_the_catalogues(self):
         self.assertEqual(router.ORDER, ("toolbox", "reverse", "python",
-                                        "engineering", "planner"))
+                                        "frames", "engineering", "planner"))
 
 
 class TestPythonThroughTheRouter(unittest.TestCase):
@@ -76,7 +76,9 @@ class TestPythonThroughTheRouter(unittest.TestCase):
         got = router.python_through_router()
         self.assertEqual(got["values_ok"], got["values"])
         self.assertEqual(got["refusals_ok"], got["refusals"])
-        self.assertEqual((got["values"], got["refusals"]), (83, 26))
+        #  26 until Phase 94, which answers two of them
+        #  (``SUPERSEDED_BY_PHASE94``); the census above still reads all 26.
+        self.assertEqual((got["values"], got["refusals"]), (83, 24))
 
 
 class TestEngineeringThroughTheRouter(unittest.TestCase):

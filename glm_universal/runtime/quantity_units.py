@@ -42,7 +42,7 @@ from typing import Dict, List, Optional, Tuple
 __all__ = ["UnitRefused", "ReadUnit", "NAMED_UNITS", "PREFIXES",
            "INEXACT_UNITS", "OFFSET_UNITS", "SCALE_TO_SI", "read_unit",
            "quantity_dimension", "check_dimension", "scale_into_si",
-           "SI_AXES", "WIDE_PREFIXES", "prefixes"]
+           "SI_AXES", "WIDE_PREFIXES", "prefixes", "FIFTH_PREFIXES"]
 
 #: The axes compared: the SI projection of the EXT10 basis.
 SI_AXES: Tuple[str, ...] = ("L", "M", "T", "I", "H", "N", "J")
@@ -108,10 +108,28 @@ WIDE_PREFIXES: Dict[str, int] = {"tera": 12, "pico": -12}
 WIDEN = True
 
 
+#: The exact SI prefixes round five of the stepwise planner adds (Phase 91,
+#: ``studies/DECLARED_FRAMES_STUDY.md``): every remaining prefix of the SI
+#: brochure above tera and below pico, including the four adopted in 2022.
+#: Read only while round five's entries are
+#: (:func:`glm_universal.runtime.frame_declarations.five`).
+FIFTH_PREFIXES: Dict[str, int] = {
+    "peta": 15, "exa": 18, "zetta": 21, "yotta": 24, "ronna": 27,
+    "quetta": 30, "femto": -15, "atto": -18, "zepto": -21, "yocto": -24,
+    "ronto": -27, "quecto": -30,
+}
+
+
 def prefixes() -> Dict[str, int]:
-    """The prefixes read: :data:`PREFIXES`, and :data:`WIDE_PREFIXES` while
-    :data:`WIDEN` is on."""
-    return dict(PREFIXES, **WIDE_PREFIXES) if WIDEN else dict(PREFIXES)
+    """The prefixes read: :data:`PREFIXES`, :data:`WIDE_PREFIXES` while
+    :data:`WIDEN` is on, and :data:`FIFTH_PREFIXES` while round five's
+    entries are read."""
+    out = dict(PREFIXES, **WIDE_PREFIXES) if WIDEN else dict(PREFIXES)
+    if WIDEN:
+        from .frame_declarations import five
+        if five():
+            out.update(FIFTH_PREFIXES)
+    return out
 
 #: Units named and refused ``UNIT_INEXACT``, with the reason.
 INEXACT_UNITS: Dict[str, str] = {
