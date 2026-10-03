@@ -6,7 +6,7 @@
 
 **Verdict.** Most of the cost was work repeated on things that had not moved, and a cache keyed on what it is derived from does not repeat it.
 
-**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->11,332<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
+**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->11,463<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
 
 **Recomputed by.** `glm_universal.corpus.cost.cost_report`
 
@@ -73,8 +73,8 @@ nothing.
 <!-- generated: cost-addresses -->
 | book | units | decodes from nothing | decodes now | reused |
 |---|---|---|---|---|
-| Lean declarations | 4,493 | 8,502 | 0 | 8,986 |
-| corpus sections | 1,439 | 2,830 | 0 | 2,878 |
+| Lean declarations | 4,539 | 8,593 | 0 | 9,078 |
+| corpus sections | 1,460 | 2,870 | 0 | 2,920 |
 
 Reuse is checked, not assumed: each rebuild re-decodes a sample of the answers it reused and reports any that moved (4 sampled in the declaration book, 4 in the document book, none moved).
 <!-- end generated -->
@@ -122,7 +122,7 @@ works for tables and not for a sentence, and the sentences were where the drift
 lived. The block mechanism is now available at the size of a phrase:
 
 ```markdown
-the suite is <!--figure:test-files-->141 test files<!--/figure--> today
+the suite is <!--figure:test-files-->143 test files<!--/figure--> today
 ```
 
 The markers are HTML comments, so a reader sees only the number. `--refresh`
@@ -185,15 +185,15 @@ Measured over the suite, by `glm_universal.corpus.cost.lean_blast_radius`:
 
 | | |
 |---|---|
-| test units in the suite | 141 |
-| Lean files | 167 |
-| units an edit to *any* Lean file used to make stale | 127 |
-| units one Lean file makes stale now, median | 55 |
-| units the worst single Lean file makes stale | 122 |
-| units that read the tree with a glob, so are stale whenever it moves | 55 |
+| test units in the suite | 143 |
+| Lean files | 169 |
+| units an edit to *any* Lean file used to make stale | 129 |
+| units one Lean file makes stale now, median | 57 |
+| units the worst single Lean file makes stale | 124 |
+| units that read the tree with a glob, so are stale whenever it moves | 57 |
 
 The Lean row counts distinct file names the ledger tracks, so it is the
-development's 166 files under `RequestProject/GLM/` plus the build's
+development's 168 files under `RequestProject/GLM/` plus the build's
 `Main.lean`. Phases 89 and 90 added three Lean files (`QuestionSetB.lean`,
 `QuestionSetBAnswers.lean`, `TypedOperators.lean`). Phase 90 also added one
 unit, `test_typed_operators.py`, which reaches the router and cites its Lean
@@ -209,7 +209,12 @@ the router and cites its Lean file, so every row moved by one once more. Phase
 which reaches the router and cites its Lean file, so every row moved by one
 again. Phase 95 added one Lean file (`ImperativeGrammar.lean`) and one unit,
 `test_imperative_grammar.py`, which reaches the router and cites its Lean
-file, so every row moved by one once more. Phase 68 added one unit (`test_reverse_tct_two.py`) that reaches
+file, so every row moved by one once more. Phase 96 added one Lean file
+(`SecondView.lean`) and one unit, `test_second_view.py`, which reaches the
+router and cites its Lean file, so every row moved by one again. Phase 97
+added one Lean file (`OnDemandView.lean`) and one unit, `test_unpacking.py`,
+which reaches the router and cites its Lean file, so every row moved by one
+once more. Phase 68 added one unit (`test_reverse_tct_two.py`) that reaches
 the router, and so the development through it, which is why the floor moved
 from 34 to 35 with the other rows; Phase 69 added another
 (`test_reverse_tct_int.py`), and the floor moved from 35 to 36; Phase 70
@@ -602,5 +607,5 @@ that pays for it, with the storage, loading, digesting and rebuilding of the
 table counted on the table's side rather than assumed away.
 
 <!-- generated: cost-tier -->
-**Rebuilding both address books from nothing decodes 11,332 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 177 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  569 figures inside sentences, across 30 documents, are emitted rather than typed.
+**Rebuilding both address books from nothing decodes 11,463 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 177 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  569 figures inside sentences, across 30 documents, are emitted rather than typed.
 <!-- end generated -->

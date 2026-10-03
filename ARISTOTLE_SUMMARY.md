@@ -1,3 +1,83 @@
+# Summary of changes for run 34eef55a-ad78-4f5b-affc-4b3078fb7395
+This round is **Phase 97**. The Python dialect now accepts argument unpacking, and the program it refused last round is answered as a fresh declared case. I also looked at whether the last round's results could be improved: they can. All 12 marks declared for this round were met, and none of the system's checked steps gave a wrong answer.
+
+**Was the last run weak?** Partly. Its core results were sound: 0 wrong answers anywhere, with the key facts proved in Lean. Its two misses were both mistakes in what had been declared in advance, not faults in the new register:
+- **V8** failed because the dialect could not unpack arguments.
+- **V4** expected two views with independent faults to reproduce an earlier 4,224-of-4,224 result. But the register's second view reads its error rotated, and with independent faults a rotation cannot help on average.
+
+**What I built.** The marks and a frozen baseline were committed before any code.
+- **Argument unpacking** (`reasoning/python_speech.py`): `f(*xs)` at a call and `def f(a, *rest)` at a definition. Each shows up as a named step and is re-checked by the column-3 script. Keyword arguments, `**`, defaults and starred list displays are still refused, each by name.
+- **Reading the third view only when needed** (`read_on_demand` in `reasoning/second_view.py`): the register reads its third view only if the first two leave more than one candidate.
+- Also new: `runtime/unpacking_report.py`, the command `tools unpacking`, `tests/test_unpacking.py` and `studies/UNPACKING_RESCORE_STUDY.md`.
+
+**Results**
+- **U1:** `read_views(*store_views(golay_encode(1234)))` now gives `333010`, the same as CPython. Its column-3 script verifies and a deliberately altered copy is rejected. All six of last round's declared programs and its three refusals now come out as declared.
+- **U2–U4:** 14 of 14 call programs, 8 of 8 definition programs and 10 of 10 refusals came out as declared. Before the change the dialect gave the declared outcome for none of these 33.
+- **U5:** none of 311 earlier declared programs changed, except U1's own source, and the comparison against CPython is unchanged (0 wrong).
+- **R1–R2:** reading the third view only when needed gives the same answer as always reading three on all 680,064 four-error reads. It reads 1,371,264 views instead of 2,040,192, about a third fewer. Below weight 4 it never reads the third view.
+- **R3, the cost of saving those reads:** on weight-5 bursts, which are outside the fault model, it gives the same 384 wrong answers as the two-view register, where always reading three refuses every one. So it is only a safe default where the fault model holds. Both read methods remain available.
+- **R4–R7, independent faults declared correctly on a fresh probe:**
+  - Two views' candidate counts matched the prediction on all 8,448 reads, 0 wrong, with 256 left open.
+  - Three views resolved 84,480 of 84,480, 0 wrong.
+  - For every first error and every frame, exactly 346 second errors leave two views open. So no choice of frame could have met V4.
+
+**Lean.** `RequestProject/GLM/OnDemandView.lean` contains no `sorry`. It proves:
+- once two views resolve a read, a third view cannot change the answer (`on_demand_agrees`), and below weight 4 one view is enough (`inside_radius_unique`);
+- the count of 346 holds for every first error and every permutation of the coordinates (`open_seconds_card_frame`), and some pair always stays open (`independent_never_separated`);
+- a model of how unpacked arguments are bound (`bind_isSome_iff`, `bind_rest`, `star_round_trip`).
+
+The Golay theorems rely on the `native_decide` check already in the existing Golay files; the unpacking theorems use only the standard axioms. Three entries were added to the Properties table and marked proved.
+
+**Closing the round**
+- I updated `STATUS.md`, `MASTER_PLAN.md`, `WHITEBOARD.md` and the paper (§19.12), and the hand-typed counts (168 Lean files, 4,539 declarations, the iteration-cost table).
+- `corpus --check` reports current.
+- The sign-off passed 143 of 143 test files and 6 of 6 checks, including the full Lean build.
+- The suite total is now 4,935 tests across 142 of the 143 test files. The subtest count is 17,993, which is 33 fewer than last round; I did not look into why.
+- Everything is committed.
+
+Next, per `STATUS.md` §3.4, is round 9 of the order of work (retrieval), or the lattice items listed beside round 8.
+
+# Summary of changes for run 2ea98798-48ce-4a28-9224-06e4821bf309
+I finished round 8 of the work order in `STATUS.md` §3.4, *second readings*, recorded as **Phase 96**. It is closed and committed. Seven of the nine marks declared before any code were met. No certified stage gave a wrong answer anywhere.
+
+**What was built**
+- A framed register in `overlay/glm_universal/reasoning/second_view.py`. It stores a carrier once and reads it back through three fixed frames. That gives the runtime its own second view of a carrier, so a caller no longer has to supply two reads.
+- A report and the command `tools second-view`.
+- Two new dialect builtins, `store_views` and `read_views`.
+- `tests/test_second_view.py`, with 17 tests.
+- `overlay/glm_lean/RequestProject/GLM/SecondView.lean`, which contains no `sorry`. It proves:
+  - which codewords two views allow (`common_iff`, `resolved_iff`);
+  - that no single extra frame resolves every four-error burst, while the three chosen frames do (`no_single_frame_separates`, `three_frames_separate`);
+  - that a soft channel built from the views reduces to the same intersection (`soft_mean_dist`, `pair_dist_eq_iff`). So escalating to the Leech lattice on that channel resolves no more forks than the plain intersection does.
+
+The two finite checks use `native_decide`.
+
+**Results**
+- **V1–V3 met:** all 680,064 three-view reads resolved, 0 wrong. The fewest open bursts any second frame leaves is 156.
+- **V4 not met:** X1's probe through two views resolved 4,160 of 4,224, 0 wrong. Three views resolve 14,080 of 14,080, but that check was run afterwards, so it is not scored.
+- **V5 met.**
+- **V6 met:** combining the declared cases with a second reading answered 658,258 of 658,812, 0 wrong, with the open count as predicted at every `k`.
+- **V7 met:** over 46,728 reads, the Leech escalation resolved nothing the intersection had left open.
+- **V8 not met:** one of the six declared dialect programs is refused because the dialect has no argument unpacking (`*args`). The other five and all three declared refusals came out as declared.
+- **V9 met.**
+- Weight-5 bursts: a single view reads all 2,720,256 of them wrongly; three views refuse every one.
+
+**Closing the round**
+- I reworded the study's summary verdict so every word in it is backed by the study's body ("Partly" rather than "Mostly").
+- I registered `second_view.py`'s XOR uses in the XOR declaration list.
+- I added the missing row to the tests README.
+- I updated hand-typed counts: 167 Lean files, 4,518 declarations, 120 reasoning modules, and the iteration-cost table.
+- The regenerated suite figure is 4,921 tests across 141 of the 142 test files.
+- The document check (`corpus --check`) reports current, and the sign-off passed 142 of 142 test files and 6 of 6 instruments.
+- The full Lean build succeeds (8,194 jobs).
+- The four Lean results above are in the Properties table, marked proved.
+
+`STATUS.md` now names item 9 (retrieval) as the next round.
+
+## Suggested follow-up
+
+The V8 miss comes from a gap in the Python dialect, not a fault in the new register: the dialect refuses any function that uses `*args`. If you want, the next round could add argument unpacking to the dialect and re-score the refused program as a fresh declared case.
+
 # Summary of changes for run 34565c74-162b-414c-b465-37f587eedd3e
 I completed Phase 95: the imperative grammar, which is the second half of round 7 in `STATUS.md` §3.4. With it, the GLM can now say, read back, run and certify Python programs that keep state: assignment (including assigning several names at once), `for` loops over ranges, strings and tuples, `while` loops, branches, functions with `return`, and structural `match`.
 

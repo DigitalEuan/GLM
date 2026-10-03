@@ -2235,6 +2235,106 @@ def _carried_fork(args) -> int:
     return 0
 
 
+def _second_view(args) -> int:
+    """Second readings (Phase 96): the framed register against the marks
+    V1-V9 declared in ``studies/SECOND_VIEW_STUDY.md`` before any code."""
+    from .runtime import second_view_report as svr
+    report = svr.second_view_full_report(full=not args.quick,
+                                         run_scripts=not args.no_scripts)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    v1, v2, v3, v4, v5 = (report[k] for k in ("V1", "V2", "V3", "V4", "V5"))
+    print(f"frames        {report['frames']}")
+    print(f"V1  two views   reads {v1['reads']}  resolved {v1['resolved']}  "
+          f"wrong {v1['wrong']}  live count off prediction {v1['mismatched']}"
+          f"  open bursts {v1['open_bursts']}")
+    print(f"V2  three views reads {v2['reads']}  resolved {v2['resolved']}  "
+          f"wrong {v2['wrong']}")
+    print(f"V3  single second frames: least open {v3['least_open']} "
+          f"(k = 1..23: {sorted(v3['open_by_frame'].values())})")
+    print(f"V4  X1 through the register: reads {v4['reads']}  resolved "
+          f"{v4['resolved']}  wrong {v4['wrong']}")
+    print(f"V5  weight <= 3: two {v5['two']['right']}/{v5['two']['reads']}  "
+          f"three {v5['three']['right']}/{v5['three']['reads']}")
+    for name, row in report["weight5"].items():
+        print(f"    weight 5 ({name}): answered {row['answered']}  wrong "
+              f"{row['wrong']}  open {row['open']}  contradicted "
+              f"{row['contradicted']} of {row['reads']}")
+    ph = report["post_hoc_x1_three"]
+    print(f"    post hoc: X1 through three views, independent faults: "
+          f"{ph['resolved']}/{ph['reads']} resolved, {ph['wrong']} wrong")
+    for row in report["V6"]["rows"]:
+        print(f"V6  k={row['k']:<3} reads {row['reads']:>7}  context alone "
+              f"{row['context_answered']:>7}  composed {row['answered']:>7}  "
+              f"wrong {row['wrong']}  open {row['open']} (predicted "
+              f"{row['predicted_open']})")
+    for name, row in report["V7"]["rows"].items():
+        print(f"V7  {name:<5} reads {row['reads']:>6}  escalation = "
+              f"intersection {row['equal']}  rate ranking = D ranking "
+              f"{row['rate_equal']}  resolved beyond {row['gained']}")
+    v8 = report["V8"]
+    print(f"V8  dialect cases answered "
+          f"{sum(1 for r in v8['cases'] if r['answered'])}/{len(v8['cases'])}"
+          f"  refusals as declared "
+          f"{sum(1 for r in v8['refusals'] if r['as_declared'])}/"
+          f"{len(v8['refusals'])}")
+    for key, ok in report["marks"].items():
+        print(f"{key:<4} mark {'met' if ok else 'not met'}")
+    return 0
+
+
+def _unpacking(args) -> int:
+    """Argument unpacking and the third view on demand (Phase 97): the marks
+    U1-U5 and R1-R7 declared in ``studies/UNPACKING_RESCORE_STUDY.md``
+    before any code."""
+    from .runtime import unpacking_report as ur
+    report = ur.unpacking_report(full=not args.quick,
+                                 run_scripts=not args.no_scripts)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    u1 = report["U1"]
+    print(f"U1  re-scored {u1['case']['id']}: answered "
+          f"{u1['case']['answered']}  equal {u1['case'].get('equal')}  "
+          f"Phase 96 cases {u1['phase96_cases']}/6  refusals "
+          f"{u1['phase96_refusals']}/3")
+    for key in ("U2", "U3", "U4"):
+        print(f"{key}  {report[key]['passed']}/{report[key]['of']} as declared")
+    u5 = report["U5"]
+    print(f"U5  earlier programs {u5['programs']}  moved {u5['moved']}  "
+          f"moved as declared {u5['moved_as_declared']}  battery unchanged "
+          f"{u5['battery'] == u5['battery_before']}")
+    b = report["before"]
+    print(f"    before the round: {b['answered_before']}/{b['programs']} "
+          f"answered, refusals {b['refusals_before']}")
+    r1, r2, r3 = report["R1"], report["R2"], report["R3"]
+    print(f"R1  on demand: reads {r1['reads']}  same as three views "
+          f"{r1['same_as_three']}  third view read {r1['third_reads']}  "
+          f"views read {r1['views_read']} (three views: {3 * r1['reads']})")
+    print(f"R2  weight <= 3: right {r2['right']}/{r2['reads']}  third view "
+          f"read {r2['third_reads']}")
+    print(f"R3  weight 5: wrong {r3['wrong']}  contradicted "
+          f"{r3['contradicted']} of {r3['reads']}  same as two views "
+          f"{r3['same_as_two']}")
+    r4, r5, r6 = report["R4"], report["R5"], report["R6"]
+    print(f"R4  independent, two views: reads {r4['reads']}  resolved "
+          f"{r4['resolved']}  open {r4['open']}  wrong {r4['wrong']}  live "
+          f"count off prediction {r4['mismatched']}")
+    print(f"R5  independent, three views: reads {r5['reads']}  resolved "
+          f"{r5['resolved']}  wrong {r5['wrong']}  off prediction "
+          f"{r5['mismatched']}")
+    print(f"R6  independent, on demand: same as three {r6['same_as_three']}"
+          f"/{r6['reads']}  third view read {r6['third_reads']}")
+    r7 = report["R7"]
+    print(f"R7  {r7['first_errors']} first errors x {r7['frames']} frames: "
+          f"open second errors {sorted({c for r in r7['rows'] for c in r['counts']})}"
+          f" (declared {r7['declared']})")
+    for key, ok in report["marks"].items():
+        print(f"{key:<4} mark {'met' if ok else 'not met'}")
+    return 0
+
+
 def _cognition(args) -> int:
     """The substrate-native cognition experiments X1-X9 and Y1-Y5, each
     against its declared pass mark."""
@@ -2896,6 +2996,30 @@ def _parser() -> argparse.ArgumentParser:
                       help="sample the hard-lift census and skip the full "
                            "Leech decoder")
     fork.set_defaults(handler=_carried_fork)
+
+    views = sub.add_parser(
+        "second-view",
+        help="second readings: one carrier read through the framed "
+             "register's views, against the marks of the second-view study")
+    views.add_argument("--json", action="store_true")
+    views.add_argument("--quick", action="store_true",
+                       help="one probe codeword instead of 64; a sampled "
+                            "composition and soft channel")
+    views.add_argument("--no-scripts", action="store_true",
+                       help="skip running the column-3 scripts (mark V8)")
+    views.set_defaults(handler=_second_view)
+
+    unpack = sub.add_parser(
+        "unpacking",
+        help="argument unpacking in the dialect and the framed register's "
+             "third view on demand, against the marks of the unpacking study")
+    unpack.add_argument("--json", action="store_true")
+    unpack.add_argument("--quick", action="store_true",
+                        help="one probe codeword instead of 64; two census "
+                             "first errors instead of 24")
+    unpack.add_argument("--no-scripts", action="store_true",
+                        help="skip running the column-3 scripts")
+    unpack.set_defaults(handler=_unpacking)
 
     cognition = sub.add_parser(
         "cognition",

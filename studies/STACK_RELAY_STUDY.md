@@ -115,14 +115,14 @@ occurrence of each name.
 <!-- generated: stack-sets -->
 | query set | who answers | queries | hit@1 | hit@3 | hit@5 | hit@10 | precision@5 |
 |---|---|---|---|---|---|---|---|
-| goal — both strides again, asked as bare goals | text alone | 817 | 553 (67.7 %) | 648 (79.3 %) | 680 (83.2 %) | 709 (86.8 %) | 53.8 % |
-| goal — both strides again, asked as bare goals | **the relay** | 817 | **553 (67.7 %)** | **649 (79.4 %)** | **683 (83.6 %)** | **713 (87.3 %)** | 53.9 % |
-| holdout — a disjoint stride, never looked at while choosing | text alone | 408 | 271 (66.4 %) | 317 (77.7 %) | 337 (82.6 %) | 349 (85.5 %) | 53.9 % |
-| holdout — a disjoint stride, never looked at while choosing | **the relay** | 408 | **271 (66.4 %)** | **318 (77.9 %)** | **340 (83.3 %)** | **352 (86.3 %)** | 54.1 % |
-| tuning — the stride the gate was chosen on | text alone | 409 | 282 (68.9 %) | 331 (80.9 %) | 343 (83.9 %) | 360 (88.0 %) | 53.7 % |
-| tuning — the stride the gate was chosen on | **the relay** | 409 | **282 (68.9 %)** | **333 (81.4 %)** | **349 (85.3 %)** | **366 (89.5 %)** | 54.1 % |
+| goal — both strides again, asked as bare goals | text alone | 826 | 559 (67.7 %) | 664 (80.4 %) | 693 (83.9 %) | 725 (87.8 %) | 54.2 % |
+| goal — both strides again, asked as bare goals | **the relay** | 826 | **559 (67.7 %)** | **665 (80.5 %)** | **696 (84.3 %)** | **729 (88.3 %)** | 54.3 % |
+| holdout — a disjoint stride, never looked at while choosing | text alone | 413 | 280 (67.8 %) | 332 (80.4 %) | 350 (84.7 %) | 368 (89.1 %) | 54.8 % |
+| holdout — a disjoint stride, never looked at while choosing | **the relay** | 413 | **280 (67.8 %)** | **333 (80.6 %)** | **354 (85.7 %)** | **372 (90.1 %)** | 55.1 % |
+| tuning — the stride the gate was chosen on | text alone | 413 | 279 (67.6 %) | 332 (80.4 %) | 343 (83.1 %) | 357 (86.4 %) | 53.7 % |
+| tuning — the stride the gate was chosen on | **the relay** | 413 | **279 (67.6 %)** | **335 (81.1 %)** | **350 (84.7 %)** | **364 (88.1 %)** | 54.0 % |
 
-The gate is 1/10 and fires on 44 of 1634 queries.  Across the three sets the geometry carries **13** queries the text control misses at k = 5 and loses **1**.  The relay beats the text control on every set: yes; it is never below the text control at any k: yes.
+The gate is 1/10 and fires on 42 of 1652 queries.  Across the three sets the geometry carries **15** queries the text control misses at k = 5 and loses **1**.  The relay beats the text control on every set: yes; it is never below the text control at any k: yes.
 <!-- end generated -->
 
 Three readings, in the order of how much they matter.
@@ -162,9 +162,9 @@ of "another part takes the hit", stated as a theorem rather than hoped for.
 <!-- generated: stack-carried -->
 | query set | gate fired | carried by the geometry | lost |
 |---|---|---|---|
-| goal — both strides again, asked as bare goals | 22 | `GLM.Admission.ledger_refusals`, `GLM.Gen3.odd_block_dimensions`, `GLM.Harmony.pythagorean_comma_ne_one`, `GLM.Calibration.hSI` | `GLM.Gen3.even_part_dimension` |
-| holdout — a disjoint stride, never looked at while choosing | 12 | `GLM.Calibration.hSI`, `GLM.FitCapacity.protonRatioTarget`, `GLM.Gen3.constant_minus_coherent` | none |
-| tuning — the stride the gate was chosen on | 10 | `GLM.Admission.ledger_refusals`, `GLM.AlignmentPoints.vOverC`, `GLM.FitCapacity.leak`, `GLM.Gen3.odd_block_dimensions`, `GLM.Harmony.pythagorean_comma_ne_one`, `GLM.QuestionSetBAnswers.huffman_kraft` | none |
+| goal — both strides again, asked as bare goals | 21 | `GLM.Admission.ledger_refusals`, `GLM.Gen3.odd_block_dimensions`, `GLM.Harmony.pythagorean_comma_ne_one`, `GLM.Calibration.hSI` | `GLM.Gen3.even_part_dimension` |
+| holdout — a disjoint stride, never looked at while choosing | 10 | `GLM.Calibration.hSI`, `GLM.FitCapacity.protonRatioTarget`, `GLM.Gen3.constant_minus_coherent`, `GLM.Packing.radius_of_seven` | none |
+| tuning — the stride the gate was chosen on | 11 | `GLM.Admission.ledger_refusals`, `GLM.AlignmentPoints.vOverC`, `GLM.FitCapacity.leak`, `GLM.Gen3.odd_block_dimensions`, `GLM.Harmony.pythagorean_comma_ne_one`, `GLM.QuestionSetBAnswers.huffman_length`, `GLM.RegisterWorld.nested_ledger` | none |
 
 A *carried* query is one the text control misses at k = 5 and the relay hits; a *lost* query is the reverse, which is the column the gate exists to keep empty.
 <!-- end generated -->
@@ -186,8 +186,8 @@ it asks the geometry only there.
 | query set | carried by the two address books | carried by digest + reshuffle | carried by name search |
 |---|---|---|---|
 | goal — both strides again, asked as bare goals | 4 | 0 | 0 |
-| holdout — a disjoint stride, never looked at while choosing | 3 | 0 | 0 |
-| tuning — the stride the gate was chosen on | 6 | 1 | 0 |
+| holdout — a disjoint stride, never looked at while choosing | 4 | 0 | 0 |
+| tuning — the stride the gate was chosen on | 7 | 0 | 0 |
 
 Over the three sets the geometry carries more than the digest-and-reshuffle control: yes; it never carries fewer on a set: yes; it carries more than the name search: yes.
 <!-- end generated -->
@@ -209,13 +209,13 @@ nothing mostly matches nothing in a name either.
 <!-- generated: stack-sweep -->
 | gate | queries it fires on | hit@5 | precision@5 | carried | lost |
 |---|---|---|---|---|---|
-| 0 | 0 | 83.9 % | 53.7 % | 0 | 0 |
-| 1/20 | 10 | 85.3 % | 54.1 % | 6 | 0 |
-| 1/10 | 10 | 85.3 % | 54.1 % | 6 | 0 |
-| 3/20 | 10 | 85.3 % | 54.1 % | 6 | 0 |
-| 1/5 | 12 | 85.3 % | 54.0 % | 6 | 0 |
-| 1/4 | 22 | 85.1 % | 53.6 % | 6 | 1 |
-| 1/2 | 173 | 85.1 % | 48.9 % | 13 | 8 |
+| 0 | 0 | 83.1 % | 53.7 % | 0 | 0 |
+| 1/20 | 11 | 84.7 % | 54.0 % | 7 | 0 |
+| 1/10 | 11 | 84.7 % | 54.0 % | 7 | 0 |
+| 3/20 | 11 | 84.7 % | 54.0 % | 7 | 0 |
+| 1/5 | 15 | 84.7 % | 53.9 % | 7 | 0 |
+| 1/4 | 24 | 84.5 % | 53.6 % | 7 | 1 |
+| 1/2 | 182 | 83.8 % | 47.8 % | 13 | 10 |
 
 On the tuning set.  The gain is strict on 5 of the thresholds from 1/20 to 1/4, up to and including 1/4; across the whole of that band the relay is never below the text control: yes.
 <!-- end generated -->
@@ -240,12 +240,12 @@ is drawn.
 <!-- generated: stack-tiebreak -->
 | query set | tie-break | hit@1 | hit@3 | hit@5 | hit@10 | precision@5 |
 |---|---|---|---|---|---|---|
-| holdout | address | 271 (66.4 %) | 329 (80.6 %) | 340 (83.3 %) | 351 (86.0 %) | 53.9 % |
-| holdout | lexical | 272 (66.7 %) | 325 (79.7 %) | 338 (82.8 %) | 352 (86.3 %) | 54.0 % |
-| holdout | name | 271 (66.4 %) | 317 (77.7 %) | 336 (82.4 %) | 348 (85.3 %) | 53.8 % |
-| tuning | address | 282 (68.9 %) | 337 (82.4 %) | 349 (85.3 %) | 364 (89.0 %) | 54.2 % |
-| tuning | lexical | 280 (68.5 %) | 338 (82.6 %) | 348 (85.1 %) | 364 (89.0 %) | 54.5 % |
-| tuning | name | 282 (68.9 %) | 331 (80.9 %) | 343 (83.9 %) | 360 (88.0 %) | 53.7 % |
+| holdout | address | 277 (67.1 %) | 344 (83.3 %) | 356 (86.2 %) | 370 (89.6 %) | 55.1 % |
+| holdout | lexical | 283 (68.5 %) | 342 (82.8 %) | 353 (85.5 %) | 368 (89.1 %) | 54.9 % |
+| holdout | name | 280 (67.8 %) | 332 (80.4 %) | 349 (84.5 %) | 367 (88.9 %) | 54.8 % |
+| tuning | address | 277 (67.1 %) | 339 (82.1 %) | 352 (85.2 %) | 363 (87.9 %) | 54.3 % |
+| tuning | lexical | 278 (67.3 %) | 339 (82.1 %) | 351 (85.0 %) | 366 (88.6 %) | 54.7 % |
+| tuning | name | 279 (67.6 %) | 332 (80.4 %) | 343 (83.1 %) | 357 (86.4 %) | 53.7 % |
 
 Ranking by text overlap and breaking the many exact ties by address distance instead of by name.  It beats the shipped name tie-break on hits: yes; on precision: yes.
 <!-- end generated -->

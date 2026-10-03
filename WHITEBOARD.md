@@ -5,9 +5,9 @@
 **Question.** If this session stopped now, what would the next one need to
 know to carry the round on?
 
-**Verdict.** No round is in flight: Phase 95 closed, and the next round starts
-from round 8 of the order of work at the head of `STATUS.md` §3.4 (second
-readings).
+**Verdict.** No round is in flight: Phase 97 closed, and the next round starts
+from round 9 of the order of work at the head of `STATUS.md` §3.4 (retrieval),
+or from the lattice items beside round 8.
 
 **Deciding figure.** 0 steps outstanding.
 
@@ -43,7 +43,27 @@ absence:
 
 ## Status
 
-**No round is in flight.** Phase 95 — the imperative grammar: programs with
+**No round is in flight.** Phase 97 — argument unpacking and the third
+view on demand: Phase 96's two misses re-declared and re-scored at the
+owner's request; the dialect admits `f(*xs)` and `def f(a, *rest)` and
+answers the program Phase 96 refused; the framed register reads its third
+view only while the fork is open; independent faults re-declared, with three
+views 0 wrong and no frame able to help two — is closed: the study is
+[`studies/UNPACKING_RESCORE_STUDY.md`](studies/UNPACKING_RESCORE_STUDY.md),
+the record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 97, 12 of 12 marks are
+met, and the next round is round 9 of the order (retrieval) or the lattice
+items beside round 8.
+Phase 96 — second readings: a framed register
+that stores a codeword in views rotated by `0, 1, 3` and reads one carrier
+through all of them, so the second reading is produced by the runtime; J1's
+composition declared and met on a fresh probe; J3 closed in the negative by a
+theorem (the Leech escalation on the views' own soft reading is the
+intersection) — is closed: the study is
+[`studies/SECOND_VIEW_STUDY.md`](studies/SECOND_VIEW_STUDY.md), the record is
+[`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 96, 7 of 9 marks are met (V4 and V8
+not met), and the next round is round 9 of the order (retrieval) or the
+lattice items beside round 8.
+Phase 95 — the imperative grammar: programs with
 state (assignment, simultaneous assignment, loops, branches, conditional
 expressions, functions with recursion and `match`) spoken head first with
 every list counted, read back, run with counted steps and bounded depth, and

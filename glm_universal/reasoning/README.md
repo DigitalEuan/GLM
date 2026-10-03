@@ -7,7 +7,7 @@
 
 **Verdict.** Everything is exact `int` / `fractions.Fraction` / `F_2`; nothing here imports `random`.
 
-**Deciding figure.** 119 modules, one frozen data file, and a runnable audit.
+**Deciding figure.** 120 modules, one frozen data file, and a runnable audit.
 
 **Recomputed by.** `glm_universal.reasoning.reasoning_report`
 
@@ -16,7 +16,7 @@
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 
-**Status: implemented (GLM-3+ Step 3, extended since).** **119 modules**, one
+**Status: implemented (GLM-3+ Step 3, extended since).** **120 modules**, one
 frozen data file,
 and a runnable audit. Everything is exact `int` / `fractions.Fraction` /
 `F_2`; nothing here imports `random`; nothing here imports a third-party

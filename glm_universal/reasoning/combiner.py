@@ -376,6 +376,9 @@ XOR_SITES: Tuple[Tuple[str, Tuple[str, ...], str], ...] = (
      "stored masks recombined in F2^24"),
     ("reasoning/carried_fork.py", ("group-law", "metric"),
      "the tetrad separating a read from a candidate, and the sure-set test"),
+    ("reasoning/second_view.py", ("group-law", "metric"),
+     "an error burst added to each stored view in F2^24, and the octad "
+     "gaps between declared cases"),
     ("reasoning/catalog.py", ("group-law",),
      "study addresses combined in F2^24"),
     ("reasoning/coherence.py", ("metric",),

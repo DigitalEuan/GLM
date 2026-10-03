@@ -64,7 +64,8 @@ __all__ = [
     "classify", "golay_encode", "ds_bits", "canonical_form",
     "ast_address", "PRELUDE", "Resolution", "nearest", "resolve", "agree",
     "decode_confidence", "agree_confidence",
-    "resolve_unsure", "resolve_at", "agree_at", "resolve_floor",
+    "resolve_unsure", "store_views", "read_views",
+    "resolve_at", "agree_at", "resolve_floor",
     "agree_floor", "SOFT_GRID", "decode_soft", "decode_soft_floor",
     "agree_soft",
 ]
@@ -481,6 +482,26 @@ def resolve_unsure(subject: int, unsure: int) -> Resolution:
     from .carried_fork import carry
     fork = carry(subject).rule_out_sure(unsure)
     return _fork_resolution(fork, "UNCORRECTABLE")
+
+
+def store_views(codeword: int) -> Tuple[int, ...]:
+    """The stored words of ``codeword`` in the framed register's views
+    (:mod:`.second_view`)."""
+    from .second_view import store_views as stored
+    if not GOLAY.is_codeword(codeword):
+        raise PythonRefusal("OUTSIDE_SUBSTRATE",
+                            f"{codeword} is not a Golay codeword")
+    return stored(codeword)
+
+
+def read_views(views: Sequence[int]) -> Resolution:
+    """One carrier read through its views in frame order: the fork of view 0
+    pruned by every further view (:mod:`.second_view`)."""
+    from .second_view import FRAMES, read_views as read
+    if not views or len(views) > len(FRAMES):
+        raise PythonRefusal("PYTHON_ERROR", f"TypeError: read_views() takes "
+                            f"1..{len(FRAMES)} views, {len(views)} given")
+    return _fork_resolution(read(list(views)), "UNCORRECTABLE")
 
 
 def decode_confidence(rate, subject: int, cases: Sequence[int] = ()
@@ -919,6 +940,31 @@ def resolve_unsure(subject, unsure):
                      "the sure coordinates")
 
 
+_FRAMES = (0, 1, 3)
+
+
+def _rot(word, k):
+    k = k %% 24
+    return ((word << k) | (word >> (24 - k))) & 0xFFFFFF
+
+
+def store_views(c):
+    c = _mask(c)
+    if c not in _codewords():
+        raise GLMRefusal("OUTSIDE_SUBSTRATE", "the stored value is not a codeword")
+    return tuple(_rot(c, -k) for k in _FRAMES)
+
+
+def read_views(*views):
+    if not views or len(views) > len(_FRAMES):
+        raise TypeError("read_views() takes 1..%%d views" %% len(_FRAMES))
+    live = None
+    for k, w in zip(_FRAMES, views):
+        allowed = set(nearest(_rot(_mask(w), k)))
+        live = allowed if live is None else live & allowed
+    return _survivor(live, "every view")
+
+
 def _rate(rate):
     if isinstance(rate, bool) or not isinstance(rate, (int, Fraction)):
         raise GLMRefusal("RATE_OUT_OF_RANGE", "the rate must be exact")
@@ -1225,6 +1271,7 @@ PRELUDE_NAMES = {"Fraction": Fraction, "unit": unit, "classify": classify,
                  "ds_bits": ds_bits, "plane": plane, "nearest": nearest,
                  "resolve": resolve, "agree": agree,
                  "resolve_unsure": resolve_unsure,
+                 "store_views": store_views, "read_views": read_views,
                  "decode_confidence": decode_confidence,
                  "agree_confidence": agree_confidence,
                  "resolve_at": resolve_at, "agree_at": agree_at,

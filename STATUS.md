@@ -37,7 +37,62 @@ without recomputing anything by hand. The record of earlier rounds is in
 **Starting a new round? Read [`ITERATE.md`](ITERATE.md), then §3.4, "Named for
 the next round", before anything else.**
 
-**The round just closed (Phase 95) took the second half of round 7 of the
+**The round just closed (Phase 97) re-scored round 8's two misses, at the
+owner's request** ([`UNPACKING_RESCORE_STUDY.md`](studies/UNPACKING_RESCORE_STUDY.md))
+— Phase 96's V8 was a gap in the dialect and its V4 a declaration on a false
+analogy. The Python dialect now admits argument unpacking: `f(*xs)` at a
+call, spliced in place through the same iteration a `for` loop uses, and
+`def f(a, *rest)` at a definition, each a named step re-checked in column 3;
+keywords, `**`, defaults and starred displays stay refused by name. The
+program Phase 96 refused, `read_views(*store_views(golay_encode(1234)))`, is
+answered equal to CPython as a fresh declared case, beside 21 further
+programs and 10 refusals as declared (0 of the 33 before); none of 311
+earlier declared programs moves but U1's own source, and the differential
+battery is unchanged. The framed register gains `read_on_demand`, which
+reads the third view only while two views leave the fork open: on Phase 96's
+full common-mode probe it gives the three-view answer on 680,064 of 680,064
+reads while reading 1,371,264 views instead of 2,040,192, and on weight-5
+bursts, outside the fault model, it costs Phase 96's two-view 384 wrong
+answers where three views refuse. Independent faults, declared correctly on
+a fresh probe: two views' live count predicted on all 8,448 reads, three
+views resolve 84,480 of 84,480, 0 wrong, and for every first error exactly
+346 second errors leave two views open whatever the frame — so no frame
+could have met V4. 12 of 12 marks met. Proved in
+`RequestProject/GLM/OnDemandView.lean`: a third view cannot change a read
+two views resolve, the 346 for every permutation, and the binding of
+unpacked arguments. Round 9 of the order, retrieval, or the lattice items 3,
+6, 7 and 10 beside round 8, is where the next round starts.
+[`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 97 is the record.
+
+**The round before it (Phase 96) took round 8 of the order, second
+readings** ([`SECOND_VIEW_STUDY.md`](studies/SECOND_VIEW_STUDY.md)) — J2 with
+H's X1, then J1, then J3. `reasoning/second_view.py` is a framed register: a
+codeword stored in views rotated by `0, 1, 3`, read by carrying the fork of
+view 0 and pruning it by every further view, so the second reading is a path
+the runtime takes on its own rather than a read the caller supplies; the
+dialect reaches it as `store_views` and `read_views`. Under a common-mode
+four-error burst, two views leave 174 of 10,626 bursts open (each with
+exactly two live candidates, as predicted on all 680,064 reads) and three
+views resolve 680,064 of 680,064 with 0 wrong; no single second frame can
+resolve every burst. J1's composition, declared this time and run on a fresh
+probe, answers 658,258 of 658,812 with 0 wrong and leaves open exactly the
+predicted 2, 8, 32, 128 and 384. J3 is closed in the negative: the Leech
+escalation on the views' own soft reading equals the intersection on 46,728
+of 46,728 reads and resolves nothing beyond it, and that is a theorem.
+On weight-5 bursts outside the fault model one view is wrong on every read
+and three views refuse every read. 7 of 9 marks met: V4 (X1's probe through
+two views, 4,160 of 4,224, 0 wrong — the register's second view reads X1's
+second error rotated) and V8 (one declared program uses argument unpacking,
+which the dialect refuses) are not. Proved in
+`RequestProject/GLM/SecondView.lean`: the fork of a four-error read is the
+truth and the truth plus each octad through the error, so views allow exactly
+the octads through the union of their errors; no permutation suffices as one
+second frame; the frames `(0, 1, 3)` separate every burst; the views' soft
+channel ranks as the summed view distance, whose minimum is the
+intersection. Its two misses were re-scored by the next round (Phase 97).
+[`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 96 is the record.
+
+**The round before that (Phase 95) took the second half of round 7 of the
 order, M's imperative grammar** ([`IMPERATIVE_GRAMMAR_STUDY.md`](studies/IMPERATIVE_GRAMMAR_STUDY.md))
 — sentences for assignment, simultaneous assignment, `for` and `while`
 loops, branches, conditional expressions, functions with recursion and
@@ -61,10 +116,10 @@ the more specific `UNBOUND`. Proved in
 construct is a head with a counted list of parts is uniquely readable, a
 step limit only withholds, and the Euclid loop, the telescoping accumulation
 and the factorial recursion of the Phase 64 programs compute what they say.
-Round 8 of the order, second readings, is where the next round starts.
-[`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 95 is the record.
+Round 8 of the order, second readings, was taken by the next round
+(Phase 96). [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 95 is the record.
 
-**The round before it (Phase 94) took the first half of round 7 of the
+**The round before that (Phase 94) took the first half of round 7 of the
 order, the third sort** ([`THIRD_SORT_STUDY.md`](studies/THIRD_SORT_STUDY.md))
 — I1 with M's strings, tuples and ranges. `reasoning/reverse_tct_seq.py` adds
 a third sort beside numbers and Golay masks to the reverse grammar: strings
@@ -898,11 +953,11 @@ PYTHONPATH=. python3 -m glm_universal.figures --write
 
 | instrument | command | result |
 |---|---|---|
-| test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->4,904 tests across 140 of the 141 test files, 18,026 subtests, outside the document check<!--/figure-->**, zero failures |
+| test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->4,935 tests across 142 of the 143 test files, 17,993 subtests, outside the document check<!--/figure-->**, zero failures |
 | end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->177<!--/figure--> / <!--figure:evaluation-case-count-->177<!--/figure-->** — 149 answered, 28 refused as expected (all `boundary`, no `gap`), 0 unexpected refusals, 0 confidently wrong, 0 errored |
 | benchmark suites | `python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites, every suite above its baseline |
 | capability probes | `python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 errored, 0 surprises |
-| Lean development | `lake build` (repository root) | <!--figure:lean-files-->166 Lean files<!--/figure-->, **0 `sorry`** |
+| Lean development | `lake build` (repository root) | <!--figure:lean-files-->168 Lean files<!--/figure-->, **0 `sorry`** |
 | figures | `python3 -m glm_universal.figures --write` | regenerates `overlay/FIGURES.md`; every documented count |
 | corpus | `python3 -m glm_universal.corpus --check` | the tier contract, the archive partition, the coverage claim of `ENTRY.md`, every generated block and every derived cache — **current**, no drift |
 | construction ladder | `python3 -m glm_universal.tools ladder` | **462 / 568** queries named correctly with **0** wrong on the eleven-rung ladder, against **327** for the note's five rungs and **283** for the best single rung |
@@ -920,6 +975,8 @@ PYTHONPATH=. python3 -m glm_universal.figures --write
 | plan store | `python3 -m glm_universal.runtime.plan_store` | a resolved follow-up kept against a digest of the whole conversation replays **<!--figure:planstore-replayed-->15<!--/figure-->** of **<!--figure:planstore-declared-count-->15<!--/figure-->** unchanged, refusals included (**<!--figure:planstore-refusals-replayed-->7<!--/figure-->** of **<!--figure:planstore-refusals-->7<!--/figure-->**), taking the licensing trials from **<!--figure:planstore-trials-first-->27<!--/figure-->** to **<!--figure:planstore-trials-replayed-->0<!--/figure-->**; keyed by the follow-up text alone it answers **<!--figure:planstore-coarse-wrong-->8<!--/figure-->** of the fifteen with another conversation's antecedent |
 | engineering surface | `python3 -m glm_universal.tools engineering` | on **63** engineering questions committed before the code: **53** correct, **10** correct refusals, **0** wrong (both existing paths: 0 correct, 53 refused); formula wheels **41 / 41** at SI7 and EXT10; Smith chart **16 / 16**; force-voltage analogy **9 / 9** laws each way; delta-sigma **6 / 6** |
 | carried fork | `python3 -m glm_universal.tools carried-fork` | the six deep-hole candidates carried until a later decision: **0 wrong** from every certified stage; 592,268 of 658,812 declared-case reads answered (the 90 % mark missed at 32 cases), 4,224 / 4,224 second readings, 3,840 / 3,840 unsure-set reads; 1,771 / 1,771 ties lift to a certified A₁²⁴ Leech deep hole; the soft estimate right on 512 / 768 (mark missed) |
+| second view | `python3 -m glm_universal.tools second-view` | one carrier read through the framed register's views: three views resolve **680,064 / 680,064** common-mode four-error reads, **0 wrong**; two views leave 174 of 10,626 bursts open, as predicted on every read; the composition with the declared cases **658,258 / 658,812**, 0 wrong, open as predicted; the Leech escalation on the views' soft reading equals the intersection on **46,728 / 46,728** reads; 7 of 9 marks met (V4, V8 not met) |
+| unpacking and the third view on demand | `python3 -m glm_universal.tools unpacking` | argument unpacking in the dialect: Phase 96's refused program answered equal to CPython, **33 / 33** declared programs and refusals as declared (0 before), 0 of 311 earlier programs moved; the third view on demand gives the three-view answer on **680,064 / 680,064** reads with **1,371,264** views read instead of 2,040,192; independent faults, three views **84,480 / 84,480**, 0 wrong; 346 open second errors for every frame; 12 of 12 marks met |
 | connected machine | `python3 -m glm_universal.tools connected` | one path (`GLM.py --ask`) to the toolbox, Python, engineering and the planner: **0** of 177 contract cases diverted; **136** more declared questions answered correctly than by the planner alone, **0** wrong added; **8 / 8** tools answer; wiring audit **0** of 96 reasoning modules unreached; across wheels, naive union **3** right / **158** wrong, licensed union **3** right / **0** wrong |
 | reverse TCT | `python3 -m glm_universal.tools reverse-tct` | the language column generated from the mathematics: **176,617 / 176,617** battery terms round-trip, **0** collisions (infix control **5,684**); every declared `say`, `entails`, `solve`, `bounds`, `equivalent`, `negate` case as declared, **0** wrong; **94 / 94** column-3 scripts `VERIFIED True`, **69 / 69** mutated certificates rejected; the default path without the surface answers **0** of 58 |
 | native parity | `python3 -m glm_universal.tools native-parity` | where a standard method ties a native one, the native one refined: the two-book native ranking **90** hits at 5 against **82** for the raw features (205 declaration queries) and **30** against **27** (103 goal queries), equal to the like-for-like standard and ahead of the raw features at every cut-off at the Phase 76 re-reading (N6 met again); the read-back scorer **24 / 24** controller tasks against **18**; read-back exact on **4,070 / 4,070** addresses |
@@ -1195,6 +1252,25 @@ exactly over every count vector. Recomputed by `tools rate-posterior`; proved
 in `RequestProject/GLM/RatePosterior.lean`. Write-up:
 [`RATE_POSTERIOR_STUDY.md`](studies/RATE_POSTERIOR_STUDY.md).
 
+**The framed register.** `reasoning/second_view.py` stores a codeword in
+views rotated by `0, 1, 3` and reads it by carrying the fork of view 0 and
+pruning it by every further view, so a second reading of one carrier is
+produced by the runtime itself; three views resolve every common-mode
+four-error burst. The dialect reaches it as `store_views` and `read_views`.
+Recomputed by `tools second-view`; proved in
+`RequestProject/GLM/SecondView.lean`. Write-up:
+[`SECOND_VIEW_STUDY.md`](studies/SECOND_VIEW_STUDY.md).
+
+**The third view on demand, and argument unpacking.** `read_on_demand`
+reads a framed register's first two views and the third only while the fork
+is open: the three-view answer on every read inside the fault model, for
+about two views a read; outside it, it answers where two views answer, so
+the caller chooses it only where the fault model is trusted. The Python
+dialect admits argument unpacking, `f(*xs)` and `def f(a, *rest)`, each a
+named step re-derived in column 3. Recomputed by `tools unpacking`; proved
+in `RequestProject/GLM/OnDemandView.lean`. Write-up:
+[`UNPACKING_RESCORE_STUDY.md`](studies/UNPACKING_RESCORE_STUDY.md).
+
 **The unresolved laws, triaged.** `reasoning/law_triage.py` gives each of the
 106 `UNRESOLVED-UBP` knowledge-base laws one fate under a service rule (0
 absorbed, 3 already served, 3 refuted, 100 retired with a reason). A record,
@@ -1364,8 +1440,8 @@ so a confident wrong answer is worse than a refusal). Write-up:
 [`CAPABILITY_ASSESSMENT.md`](CAPABILITY_ASSESSMENT.md).
 
 **The Lean development, addressed.** `reasoning/lean_address.py` gives each of
-the 4493 declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly 4493/4493 with 0 coordinate errors;
+the 4539 declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly 4539/4539 with 0 coordinate errors;
 3989 distinct addresses, and the quantiser adds no conflation of its own;
 nearest-by-address shares a file 817 times against 35 for a SHA-256 control and
 29 for a seeded reshuffle, with chance at ≈ 0.80 %. `report lean`.
@@ -1408,8 +1484,8 @@ twenty questions rather than three samples. `tools oracle`. Write-up:
 **The field surface, and what it was worth.** `runtime/fields.py` answers one
 named field of one named row — `field atomic_weight_u of carbon` — over
 <!--figure:fieldsurface-tables-->13<!--/figure--> declared tables holding
-<!--figure:fieldsurface-rows-->11,250<!--/figure--> rows and
-<!--figure:fieldsurface-pairs-->66,458<!--/figure--> addressable `(row,
+<!--figure:fieldsurface-rows-->11,345<!--/figure--> rows and
+<!--figure:fieldsurface-pairs-->66,982<!--/figure--> addressable `(row,
 field)` pairs: the element and molecule source rows, one table per register's
 carrier attributes, the Lean address book, the package's own top-level
 definitions, and a registry of declared zero-argument functions whose returned
@@ -1647,8 +1723,23 @@ each reads what the one before built:
    planner as a sentence).
 8. **Second readings** — J2 with H's X1, then J1, then J3 (now well-posed
    on Phase 82's rate posterior); the lattice items 3, 6, 7 and 10 beside it.
-   **This is where the next round starts.**
-9. **Retrieval** — N1 first, then item 5, then N2, N5 and I3.
+   J2, X1, J1 and J3 are **taken by Phase 96**
+   ([`SECOND_VIEW_STUDY.md`](studies/SECOND_VIEW_STUDY.md)); 7 of 9 marks met
+   (V4 and V8 not met). J3 is closed in the negative by a theorem: a soft
+   channel built from the machine's own views adds nothing to the second
+   reading. What it leaves is that study's §6 (framing an existing register
+   by default, a soft channel with reliabilities from outside the views), and
+   the lattice items 3, 6, 7 and 10, not taken. Its two misses were
+   **re-scored by Phase 97** at the owner's request
+   ([`UNPACKING_RESCORE_STUDY.md`](studies/UNPACKING_RESCORE_STUDY.md)):
+   argument unpacking added to the dialect and the refused program answered;
+   independent faults re-declared (three views, 0 wrong; no frame helps two);
+   the third view read on demand; 12 of 12 marks met. What it leaves is that
+   study's §6 (keywords and defaults, starred displays, unpacking in the
+   imperative grammar).
+9. **Retrieval** — N1 first, then item 5, then N2, N5 and I3. **This is where
+   the next round starts**, unless the owner prefers the lattice items
+   beside round 8 first.
 
 **Taken out of order by Phase 89, at the owner's request**
 ([`QUESTION_SET_B_STUDY.md`](studies/QUESTION_SET_B_STUDY.md),
@@ -1663,9 +1754,9 @@ audit, Outside O1 27 of 112 framed and correct with 0 confidently wrong and
 that study's §8: symbolic parameters (13), derivations and proofs (18), meta
 questions about the GLM's own engineering (18), explanations (32), designs
 and one transcendental equation, and the planner's two vacuous denotation
-answers. **Round 8 of the order, second readings, is where the next round
-starts** (round 7 was taken by Phases 94 and 95),
-unless the owner prefers the §8 boundary tracks first.
+answers. **Round 9 of the order, retrieval, is where the next round starts** (round 8
+was taken by Phase 96), unless the owner prefers the §8 boundary tracks or
+the lattice items beside round 8 first.
 
 Gated on outside material: item 4. Proposed
 for retirement: P's 42 PIPELINE laws and H's concept 6. The letters below
@@ -1788,6 +1879,11 @@ view of one carrier so the second reading is routine rather than supplied by
 the caller; and test the Leech escalation on a soft channel whose
 reliabilities come from the machine's own readings rather than a declared
 formula. [`CARRIED_FORK_STUDY.md`](studies/CARRIED_FORK_STUDY.md) §6.
+*All three taken by Phase 96*
+([`SECOND_VIEW_STUDY.md`](studies/SECOND_VIEW_STUDY.md)): the composition
+declared and met on a fresh probe, the second view produced by a framed
+register, and the soft channel of the machine's own views proved to add
+nothing to the second reading.
 
 **I. Python speech, round two — named by Phase 64.** In the order of the
 study's §7: widen the dialect where the refusals cluster (string methods over
@@ -1805,7 +1901,8 @@ main group, [`REGISTER_WORLD_STUDY.md`](studies/REGISTER_WORLD_STUDY.md));
 semantic judgements as annotated provenance (E4); frames generated from a
 declaration rather than written by hand (E6, *taken by Phase 91 and met*,
 [`DECLARED_FRAMES_STUDY.md`](studies/DECLARED_FRAMES_STUDY.md)); deeper PCGS proofs (E7); a second
-independent reading for the deep-hole fork (X1); and concept 6, which waits on
+independent reading for the deep-hole fork (X1, *taken by Phase 96*: the
+framed register produces it); and concept 6, which waits on
 a trilinear object in the runtime.
 [`SUBSTRATE_NATIVE_COGNITION_STUDY.md`](studies/SUBSTRATE_NATIVE_COGNITION_STUDY.md) §8.
 
@@ -2221,7 +2318,7 @@ units reach `PROJECT_DIRECTIVES.md` (120 before Phase 78; see
 [`studies/ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) §5g).
 
 The six instruments in the ledger beside the
-<!--figure:test-files-->141 test files<!--/figure--> are `lean-build`,
+<!--figure:test-files-->143 test files<!--/figure--> are `lean-build`,
 `lean-sorry-free`, `capabilities`, `benchmarks`, `evaluation` and `figures`.
 (The seventh, `lean-copies-identical`, went with the second copy of the Lean
 tree in Phase 78: the development lives only in `overlay/glm_lean/`.) Editing a document makes exactly the units that

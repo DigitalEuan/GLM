@@ -59,6 +59,8 @@ BUILTINS: Tuple[str, ...] = (
     "list", "sorted",
     "classify", "golay_encode", "hamming", "ds_bits", "plane",
     "nearest", "resolve", "agree", "resolve_unsure",
+    # Phase 96 (studies/SECOND_VIEW_STUDY.md): the framed register.
+    "store_views", "read_views",
     "decode_confidence", "agree_confidence",
     "resolve_at", "agree_at", "resolve_floor", "agree_floor",
     "decode_soft", "decode_soft_floor", "agree_soft",
@@ -100,6 +102,8 @@ class _Function:
     name: str
     params: Tuple[str, ...]
     body: Tuple[ast.stmt, ...]
+    #: The ``*rest`` parameter's name, or ``None`` (Phase 97).
+    rest: Optional[str] = None
 
 
 @dataclass(frozen=True)
@@ -369,12 +373,14 @@ class Evaluator:
             raise _Return(None if s.value is None else self.eval(s.value, env))
         elif isinstance(s, ast.FunctionDef):
             a = s.args
-            if (s.decorator_list or a.vararg or a.kwarg or a.kwonlyargs
+            if (s.decorator_list or a.kwarg or a.kwonlyargs
                     or a.defaults or a.posonlyargs):
                 raise PythonRefusal("UNSUPPORTED", "only plain positional "
-                                                   "parameters")
+                                                   "parameters and one "
+                                                   "*rest parameter")
             env[s.name] = _Function(s.name, tuple(p.arg for p in a.args),
-                                    tuple(s.body))
+                                    tuple(s.body),
+                                    a.vararg.arg if a.vararg else None)
         elif isinstance(s, ast.Match):
             self.exec_match(s, env)
         elif isinstance(s, ast.Assert):
@@ -1045,11 +1051,12 @@ class Evaluator:
 
     # -- calls -----------------------------------------------------------------
     def call(self, node: ast.Call, env: Dict):
-        if node.keywords or any(isinstance(a, ast.Starred) for a in node.args):
-            raise PythonRefusal("UNSUPPORTED", "keyword or starred arguments")
+        if node.keywords:
+            raise PythonRefusal("UNSUPPORTED", "keyword arguments (and "
+                                               "** unpacking)")
         f = self.eval(node.func, env)
         if isinstance(f, _Method) and not _is_int(f.receiver):
-            margs = [self.eval(a, env) for a in node.args]
+            margs = self.call_args(node.args, env)
             if isinstance(f.receiver, str):
                 return pcn.str_method(self, f.attr, f.receiver, margs)
             if isinstance(f.receiver, list):
@@ -1057,7 +1064,7 @@ class Evaluator:
             return pcn.dict_method(self, f.attr, f.receiver, margs)
         if isinstance(f, _Method):
             attr, n = f.attr, f.receiver
-            if node.args:
+            if self.call_args(node.args, env):
                 raise self.error("TypeError", f"{attr}() takes no arguments")
             if attr == "bit_length":
                 value = abs(n).bit_length()
@@ -1074,21 +1081,70 @@ class Evaluator:
                 and isinstance(node.args[0], ast.Set)):
             items = [self.eval(e, env) for e in node.args[0].elts]
             return self.make_frozenset(items)
-        args = [self.eval(a, env) for a in node.args]
+        args = self.call_args(node.args, env)
         if isinstance(f, _Function):
             return self.call_function(f, args)
         if isinstance(f, _Builtin):
             return getattr(self, "b_" + f.name)(*args)
         raise self.error("TypeError", f"{_tname(f)} object is not callable")
 
+    def call_args(self, nodes: Sequence[ast.expr], env: Dict) -> List:
+        """The positional arguments of a call, left to right, with every
+        ``*value`` unpacked in place (Phase 97).  The unpacked value is
+        iterated as a ``for`` loop iterates it, so a set is refused
+        ``ORDER_UNDEFINED`` and a non-iterable is CPython's ``TypeError``."""
+        args: List = []
+        for a in nodes:
+            if not isinstance(a, ast.Starred):
+                args.append(self.eval(a, env))
+                continue
+            value = self.eval(a.value, env)
+            if not isinstance(value, (tuple, str, range, list, dict, View,
+                                      frozenset)):
+                raise self.error("TypeError", f"argument after * must be an "
+                                              f"iterable, not {_tname(value)}")
+            items = tuple(self.iterate(value))
+            self.tick(len(items))
+            try:
+                check = (f"same(tuple({literal(value)}), "
+                         f"{literal(tuple(items))})")
+            except PythonRefusal:
+                check = "True"
+            shown = _m(value) if check != "True" else "the value"
+            self.step("substrate", f"Unpack {shown} in place into "
+                      f"{len(items)} positional "
+                      f"argument{'s' if len(items) != 1 else ''}, in "
+                      "iteration order.",
+                      f"*v ↦ {len(items)} argument"
+                      f"{'s' if len(items) != 1 else ''}", check)
+            args.extend(items)
+        return args
+
     def call_function(self, f: _Function, args: List):
-        if len(args) != len(f.params):
+        n = len(f.params)
+        if f.rest is None and len(args) != n:
             raise self.error("TypeError", f"{f.name}() takes "
-                             f"{len(f.params)} arguments, {len(args)} given")
+                             f"{n} arguments, {len(args)} given")
+        if f.rest is not None and len(args) < n:
+            raise self.error("TypeError", f"{f.name}() takes at least "
+                             f"{n} arguments, {len(args)} given")
         self.depth += 1
         if self.depth > MAX_DEPTH:
             raise PythonRefusal("BUDGET", f"recursion deeper than {MAX_DEPTH}")
         local: Dict[str, object] = dict(zip(f.params, args))
+        if f.rest is not None:
+            extra = self.carrier_tuple(tuple(args[n:]))
+            try:
+                check = (f"same(len({literal(extra)}), {len(extra)})")
+            except PythonRefusal:
+                check = "True"
+            self.step("substrate", f"Pack the {len(extra)} argument"
+                      f"{'s' if len(extra) != 1 else ''} past the "
+                      f"{n} positional parameter{'s' if n != 1 else ''} of "
+                      f"{f.name} into the tuple {f.rest}.",
+                      f"{f.rest} = args[{n}:], |{f.rest}| = {len(extra)}",
+                      check)
+            local[f.rest] = extra
         try:
             self.exec_block(f.body, local)
             value = None
@@ -1542,6 +1598,42 @@ class Evaluator:
         self._fork_refusal(r, "every read",
                            f"len(set.intersection(*[set(nearest(r)) for r in "
                            f"{reads}])) == {len(r.live)}")
+
+    # -- the framed register (studies/SECOND_VIEW_STUDY.md) ------------------
+    def b_store_views(self, *args):
+        self._need(args, 1, 1, "store_views")
+        c = self._mask_arg(args[0])
+        value = ps.store_views(c)
+        self.step("substrate", "Store the codeword in the framed register's "
+                  f"{len(value)} views: view k holds it rotated down by k "
+                  "coordinates (frames 0, 1, 3), so a burst on the same "
+                  "stored positions reads differently through each view.",
+                  "w_k = rot(c, -k), k in (0, 1, 3)",
+                  f"same(store_views({c}), {value!r})")
+        return self.carrier_tuple(value)
+
+    def b_read_views(self, *args):
+        from .second_view import FRAMES
+        if not 1 <= len(args) <= len(FRAMES):
+            raise self.error("TypeError", f"read_views() takes 1..{len(FRAMES)}"
+                                          f" views, {len(args)} given")
+        views = [self._mask_arg(x) for x in args]
+        r = ps.read_views(views)
+        call = ", ".join(str(x) for x in views)
+        if r.verdict == "resolved":
+            self.step("substrate", f"Read one stored carrier through its "
+                      f"{len(views)} view(s): align each view by its frame, "
+                      "carry the fork of view 0 and keep only the codewords "
+                      "every view allows (the second reading, produced by the "
+                      "register itself); one survives, and since the carrier "
+                      "lies in every view's fork it is the carrier.",
+                      f"⋂ N(rot(w_k, k)) = {{{r.value:#x}}}",
+                      f"same(read_views({call}), {r.value})")
+            return r.value
+        self._fork_refusal(r, "every view",
+                           f"len(set.intersection(*[set(nearest(_rot(w, k))) "
+                           f"for w, k in zip({views}, _FRAMES)])) == "
+                           f"{len(r.live)}")
 
     def b_resolve_unsure(self, *args):
         self._need(args, 2, 2, "resolve_unsure")

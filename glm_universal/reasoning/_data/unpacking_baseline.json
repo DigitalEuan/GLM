@@ -1,0 +1,1392 @@
+{
+ "battery": {
+  "answered": 2830,
+  "budget": 34,
+  "declined": 4,
+  "error_class_differs": 32,
+  "float_or_complex": 78,
+  "same_error": 4150,
+  "total": 7128,
+  "wrong": 0
+ },
+ "before": {
+  "U1:views-clean-rescored": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U2:star-dict": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U2:star-divmod": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U2:star-empty": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U2:star-fraction": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U2:star-method": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U2:star-mixed": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U2:star-pow": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U2:star-range": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U2:star-returned": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U2:star-string": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U2:star-two": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U2:star-user-fn": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U2:star-views-slice": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U2:star-views-two": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U3:vararg-after": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U3:vararg-fraction": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U3:vararg-loop": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U3:vararg-none": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U3:vararg-recursive": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U3:vararg-string": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U3:vararg-tuple": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U3:vararg-views": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U4:default-def": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U4:kwargs-call": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U4:kwargs-def": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U4:kwonly-def": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U4:star-display": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U4:star-not-iterable": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U4:star-set": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U4:star-too-many": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U4:vararg-missing": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "U4:vararg-overflow": [
+   "refusal",
+   "UNSUPPORTED"
+  ]
+ },
+ "earlier": {
+  "p64-refusal:deep-hole": [
+   "refusal",
+   "AMBIGUOUS"
+  ],
+  "p64-refusal:float-call": [
+   "refusal",
+   "FLOAT"
+  ],
+  "p64-refusal:float-frac-pow": [
+   "refusal",
+   "FLOAT"
+  ],
+  "p64-refusal:float-fraction-of-float": [
+   "refusal",
+   "FLOAT"
+  ],
+  "p64-refusal:float-in-loop": [
+   "refusal",
+   "FLOAT"
+  ],
+  "p64-refusal:float-literal": [
+   "refusal",
+   "FLOAT"
+  ],
+  "p64-refusal:float-neg-pow": [
+   "refusal",
+   "FLOAT"
+  ],
+  "p64-refusal:float-truediv": [
+   "refusal",
+   "FLOAT"
+  ],
+  "p64-refusal:fs-outside": [
+   "refusal",
+   "OUTSIDE_SUBSTRATE"
+  ],
+  "p64-refusal:fs-outside-range": [
+   "refusal",
+   "OUTSIDE_SUBSTRATE"
+  ],
+  "p64-refusal:list-literal": [
+   "value",
+   "[1, 2, 3]"
+  ],
+  "p64-refusal:nondet-hash": [
+   "refusal",
+   "NONDETERMINISTIC"
+  ],
+  "p64-refusal:nondet-id": [
+   "refusal",
+   "NONDETERMINISTIC"
+  ],
+  "p64-refusal:nondet-random": [
+   "refusal",
+   "NONDETERMINISTIC"
+  ],
+  "p64-refusal:nondet-time": [
+   "refusal",
+   "NONDETERMINISTIC"
+  ],
+  "p64-refusal:runaway-loop": [
+   "refusal",
+   "BUDGET"
+  ],
+  "p64-refusal:scale-mismatch": [
+   "refusal",
+   "SCALE_MISMATCH"
+  ],
+  "p64-refusal:scale-undeclared": [
+   "refusal",
+   "SCALE_MISMATCH"
+  ],
+  "p64-refusal:set-iteration": [
+   "refusal",
+   "ORDER_UNDEFINED"
+  ],
+  "p64-refusal:shift-negative": [
+   "refusal",
+   "PYTHON_ERROR"
+  ],
+  "p64-refusal:step-zero": [
+   "refusal",
+   "PYTHON_ERROR"
+  ],
+  "p64-refusal:tuple-overflow": [
+   "refusal",
+   "CARRIER_OVERFLOW"
+  ],
+  "p64-refusal:uncorrectable": [
+   "refusal",
+   "UNCORRECTABLE"
+  ],
+  "p64-refusal:unsupported-attribute": [
+   "value",
+   "'ABC'"
+  ],
+  "p64-refusal:unsupported-lambda": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "p64-refusal:zero-division": [
+   "refusal",
+   "PYTHON_ERROR"
+  ],
+  "p64-value:bit-and": [
+   "value",
+   "18"
+  ],
+  "p64-value:bit-mixed-bool": [
+   "value",
+   "False"
+  ],
+  "p64-value:bit-neg": [
+   "value",
+   "250"
+  ],
+  "p64-value:bit-neg-or": [
+   "value",
+   "-67"
+  ],
+  "p64-value:bit-not": [
+   "value",
+   "-11"
+  ],
+  "p64-value:bit-or": [
+   "value",
+   "63"
+  ],
+  "p64-value:bit-wide": [
+   "value",
+   "1126999418483678"
+  ],
+  "p64-value:bit-xor": [
+   "value",
+   "12188089"
+  ],
+  "p64-value:bool-and": [
+   "value",
+   "True"
+  ],
+  "p64-value:bool-arith": [
+   "value",
+   "2"
+  ],
+  "p64-value:classify-corrected": [
+   "value",
+   "0"
+  ],
+  "p64-value:classify-exact": [
+   "value",
+   "1"
+  ],
+  "p64-value:classify-match": [
+   "value",
+   "'second'"
+  ],
+  "p64-value:cmp-mixed": [
+   "value",
+   "True"
+  ],
+  "p64-value:comprehension-free": [
+   "value",
+   "True"
+  ],
+  "p64-value:def-fact": [
+   "value",
+   "15511210043330985984000000"
+  ],
+  "p64-value:def-harmonic": [
+   "value",
+   "Fraction(86021, 27720)"
+  ],
+  "p64-value:ds-bits": [
+   "value",
+   "(0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1)"
+  ],
+  "p64-value:ds-sum": [
+   "value",
+   "6"
+  ],
+  "p64-value:frac-abs": [
+   "value",
+   "Fraction(5, 7)"
+  ],
+  "p64-value:frac-add": [
+   "value",
+   "Fraction(1, 2)"
+  ],
+  "p64-value:frac-chain": [
+   "value",
+   "True"
+  ],
+  "p64-value:frac-compare": [
+   "value",
+   "True"
+  ],
+  "p64-value:frac-div": [
+   "value",
+   "Fraction(3, 2)"
+  ],
+  "p64-value:frac-floor": [
+   "value",
+   "-4"
+  ],
+  "p64-value:frac-int-div": [
+   "value",
+   "Fraction(5, 2)"
+  ],
+  "p64-value:frac-max": [
+   "value",
+   "Fraction(3, 10)"
+  ],
+  "p64-value:frac-mixed": [
+   "value",
+   "Fraction(7, 1)"
+  ],
+  "p64-value:frac-mod": [
+   "value",
+   "Fraction(5, 6)"
+  ],
+  "p64-value:frac-neg-pow": [
+   "value",
+   "Fraction(9, 4)"
+  ],
+  "p64-value:frac-parts": [
+   "value",
+   "-498"
+  ],
+  "p64-value:frac-pow": [
+   "value",
+   "Fraction(32, 243)"
+  ],
+  "p64-value:frac-string": [
+   "value",
+   "Fraction(1, 2)"
+  ],
+  "p64-value:frac-sum": [
+   "value",
+   "Fraction(1, 1)"
+  ],
+  "p64-value:fs-and": [
+   "value",
+   "frozenset({3, 4})"
+  ],
+  "p64-value:fs-diff": [
+   "value",
+   "frozenset({1, 3})"
+  ],
+  "p64-value:fs-hamming": [
+   "value",
+   "3"
+  ],
+  "p64-value:fs-len": [
+   "value",
+   "3"
+  ],
+  "p64-value:fs-member": [
+   "value",
+   "True"
+  ],
+  "p64-value:fs-or": [
+   "value",
+   "frozenset({0, 5, 23})"
+  ],
+  "p64-value:fs-subset": [
+   "value",
+   "True"
+  ],
+  "p64-value:fs-xor": [
+   "value",
+   "frozenset({1, 4})"
+  ],
+  "p64-value:if-else": [
+   "value",
+   "'big'"
+  ],
+  "p64-value:int-big": [
+   "value",
+   "1267650600228229401496703205377"
+  ],
+  "p64-value:int-bit-count": [
+   "value",
+   "6"
+  ],
+  "p64-value:int-bit-length": [
+   "value",
+   "70"
+  ],
+  "p64-value:int-divmod": [
+   "value",
+   "(-4, 3)"
+  ],
+  "p64-value:int-floordiv-neg": [
+   "value",
+   "-4"
+  ],
+  "p64-value:int-mod-neg": [
+   "value",
+   "3"
+  ],
+  "p64-value:int-plane": [
+   "value",
+   "26"
+  ],
+  "p64-value:int-plane-neg": [
+   "value",
+   "-27"
+  ],
+  "p64-value:int-pow-mod": [
+   "value",
+   "333986"
+  ],
+  "p64-value:int-shift-left": [
+   "value",
+   "1184"
+  ],
+  "p64-value:int-shift-neg": [
+   "value",
+   "-125"
+  ],
+  "p64-value:int-shift-right": [
+   "value",
+   "125"
+  ],
+  "p64-value:loop-acc": [
+   "value",
+   "Fraction(10, 11)"
+  ],
+  "p64-value:match-guard": [
+   "value",
+   "(-1, 0, 1)"
+  ],
+  "p64-value:match-literal": [
+   "value",
+   "('zero', 'small', 'pair', 'other')"
+  ],
+  "p64-value:range-index": [
+   "value",
+   "350"
+  ],
+  "p64-value:range-len": [
+   "value",
+   "7"
+  ],
+  "p64-value:range-sum": [
+   "value",
+   "679"
+  ],
+  "p64-value:range-tuple": [
+   "value",
+   "(5, 3, 1)"
+  ],
+  "p64-value:str-chr": [
+   "value",
+   "'\u03bbA'"
+  ],
+  "p64-value:str-clamp": [
+   "value",
+   "'hort'"
+  ],
+  "p64-value:str-compare": [
+   "value",
+   "True"
+  ],
+  "p64-value:str-concat": [
+   "value",
+   "'MOG-cubecube'"
+  ],
+  "p64-value:str-in": [
+   "value",
+   "True"
+  ],
+  "p64-value:str-index": [
+   "value",
+   "'y'"
+  ],
+  "p64-value:str-len": [
+   "value",
+   "17"
+  ],
+  "p64-value:str-long-slice": [
+   "value",
+   "'7395173'"
+  ],
+  "p64-value:str-neg-slice": [
+   "value",
+   "'ifc'"
+  ],
+  "p64-value:str-ord": [
+   "value",
+   "923"
+  ],
+  "p64-value:str-reverse": [
+   "value",
+   "'ecittal hceeL'"
+  ],
+  "p64-value:str-slice": [
+   "value",
+   "'otcaue'"
+  ],
+  "p64-value:tuple-compare": [
+   "value",
+   "True"
+  ],
+  "p64-value:tuple-concat": [
+   "value",
+   "(1, Fraction(1, 2), True, 'x')"
+  ],
+  "p64-value:tuple-len": [
+   "value",
+   "24"
+  ],
+  "p64-value:tuple-nested": [
+   "value",
+   "4"
+  ],
+  "p64-value:tuple-slice": [
+   "value",
+   "(2, 4, 6, 8)"
+  ],
+  "p64-value:tuple-unpack": [
+   "value",
+   "Fraction(3, 4)"
+  ],
+  "p64-value:unit-add": [
+   "value",
+   "True"
+  ],
+  "p64-value:unit-compare": [
+   "value",
+   "True"
+  ],
+  "p64-value:while-gcd": [
+   "value",
+   "21"
+  ],
+  "p83-confidence:0": [
+   "value",
+   "Fraction(785678140807218961624989385416233772020578757601, 785678140807283587272098813913827209872133328896)"
+  ],
+  "p83-confidence:1": [
+   "value",
+   "Fraction(834513761450087614416078625185528201, 836303282829748788017582304825757696)"
+  ],
+  "p83-confidence:10": [
+   "refusal",
+   "OUTSIDE_SUBSTRATE"
+  ],
+  "p83-confidence:11": [
+   "value",
+   "Fraction(7249803359578536423176877919796123149018480047318581831044956801, 7250543815094842511861580667105085586822675280634038809757290496)"
+  ],
+  "p83-confidence:12": [
+   "refusal",
+   "MUTABLE_CONTAINER"
+  ],
+  "p83-confidence:13": [
+   "value",
+   "Fraction(37589973457545958193355601, 37612466798796210106372096)"
+  ],
+  "p83-confidence:14": [
+   "value",
+   "True"
+  ],
+  "p83-confidence:2": [
+   "value",
+   "Fraction(150094635296999121, 193036414974201856)"
+  ],
+  "p83-confidence:3": [
+   "refusal",
+   "TIE"
+  ],
+  "p83-confidence:4": [
+   "value",
+   "Fraction(96059601, 96059602)"
+  ],
+  "p83-confidence:5": [
+   "value",
+   "Fraction(531441, 531604)"
+  ],
+  "p83-confidence:6": [
+   "refusal",
+   "UNCORRECTABLE"
+  ],
+  "p83-confidence:7": [
+   "refusal",
+   "MUTABLE_CONTAINER"
+  ],
+  "p83-confidence:8": [
+   "refusal",
+   "RATE_OUT_OF_RANGE"
+  ],
+  "p83-confidence:9": [
+   "refusal",
+   "RATE_OUT_OF_RANGE"
+  ],
+  "p84-floor:0": [
+   "value",
+   "(0, Fraction(96059601, 96059602))"
+  ],
+  "p84-floor:1": [
+   "value",
+   "(0, Fraction(531441, 531604))"
+  ],
+  "p84-floor:10": [
+   "value",
+   "0"
+  ],
+  "p84-floor:11": [
+   "refusal",
+   "FLOOR_OUT_OF_RANGE"
+  ],
+  "p84-floor:12": [
+   "refusal",
+   "FLOOR_OUT_OF_RANGE"
+  ],
+  "p84-floor:13": [
+   "value",
+   "3026953"
+  ],
+  "p84-floor:14": [
+   "refusal",
+   "BELOW_FLOOR"
+  ],
+  "p84-floor:15": [
+   "value",
+   "True"
+  ],
+  "p84-floor:2": [
+   "value",
+   "(0, Fraction(6561, 6562))"
+  ],
+  "p84-floor:3": [
+   "refusal",
+   "UNCORRECTABLE"
+  ],
+  "p84-floor:4": [
+   "refusal",
+   "MUTABLE_CONTAINER"
+  ],
+  "p84-floor:5": [
+   "refusal",
+   "RATE_OUT_OF_RANGE"
+  ],
+  "p84-floor:6": [
+   "value",
+   "(6049797, Fraction(7249803359578536423176877919796123149018480047318581831044956801, 7250543815094842511861580667105085586822675280634038809757290496))"
+  ],
+  "p84-floor:7": [
+   "refusal",
+   "MUTABLE_CONTAINER"
+  ],
+  "p84-floor:8": [
+   "value",
+   "0"
+  ],
+  "p84-floor:9": [
+   "value",
+   "0"
+  ],
+  "p89-ASK_CASES:a01": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-ASK_CASES:a02": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-ASK_CASES:a03": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-ASK_CASES:a04": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-ASK_CASES:a05": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-ASK_CASES:a06": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-ASK_CASES:a07": [
+   "refusal",
+   "PYTHON_ERROR"
+  ],
+  "p89-ASK_CASES:a08": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-DERIVE_CASES:d01": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-DERIVE_CASES:d02": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-DERIVE_CASES:d03": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-DERIVE_CASES:d04": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-DERIVE_CASES:d05": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-DERIVE_CASES:d06": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-DERIVE_CASES:d07": [
+   "refusal",
+   "FLOAT"
+  ],
+  "p89-DERIVE_CASES:d08": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-DERIVE_CASES:d09": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-DERIVE_CASES:d10": [
+   "refusal",
+   "PYTHON_ERROR"
+  ],
+  "p89-DERIVE_CASES:d11": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-DERIVE_CASES:d12": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-LOOP_CASES:l01": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-LOOP_CASES:l02": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-LOOP_CASES:l03": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-LOOP_CASES:l04": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-LOOP_CASES:l05": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-LOOP_CASES:l06": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-LOOP_CASES:l07": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-LOOP_CASES:l08": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-SOLVE_CASES:s01": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-SOLVE_CASES:s02": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-SOLVE_CASES:s03": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-SOLVE_CASES:s04": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-SOLVE_CASES:s05": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p89-SOLVE_CASES:s06": [
+   "refusal",
+   "BRIDGE_UNAVAILABLE"
+  ],
+  "p94-DICT_CASES:bound": [
+   "value",
+   "'two'"
+  ],
+  "p94-DICT_CASES:equal-keys": [
+   "value",
+   "{1: 'b'}"
+  ],
+  "p94-DICT_CASES:get": [
+   "value",
+   "1"
+  ],
+  "p94-DICT_CASES:get-default": [
+   "value",
+   "0"
+  ],
+  "p94-DICT_CASES:index": [
+   "value",
+   "2"
+  ],
+  "p94-DICT_CASES:items": [
+   "value",
+   "(('a', 1), ('b', 2))"
+  ],
+  "p94-DICT_CASES:keys": [
+   "value",
+   "['a']"
+  ],
+  "p94-DICT_CASES:len": [
+   "value",
+   "2"
+  ],
+  "p94-DICT_CASES:list-keys": [
+   "value",
+   "['b', 'a']"
+  ],
+  "p94-DICT_CASES:list-value": [
+   "value",
+   "2"
+  ],
+  "p94-DICT_CASES:loop": [
+   "value",
+   "3"
+  ],
+  "p94-DICT_CASES:member": [
+   "value",
+   "True"
+  ],
+  "p94-DICT_CASES:order-free-equality": [
+   "value",
+   "True"
+  ],
+  "p94-DICT_CASES:sorted-keys": [
+   "value",
+   "['a', 'b']"
+  ],
+  "p94-DICT_CASES:tuple-key": [
+   "value",
+   "'pair'"
+  ],
+  "p94-DICT_CASES:values": [
+   "value",
+   "7"
+  ],
+  "p94-LIST_CASES:concat": [
+   "value",
+   "[1, Fraction(1, 2), 3]"
+  ],
+  "p94-LIST_CASES:equal": [
+   "value",
+   "True"
+  ],
+  "p94-LIST_CASES:index": [
+   "value",
+   "3"
+  ],
+  "p94-LIST_CASES:len": [
+   "value",
+   "3"
+  ],
+  "p94-LIST_CASES:list-range": [
+   "value",
+   "[0, 1, 2, 3]"
+  ],
+  "p94-LIST_CASES:list-string": [
+   "value",
+   "['a', 'b', 'c']"
+  ],
+  "p94-LIST_CASES:literal": [
+   "value",
+   "[1, 2, 3]"
+  ],
+  "p94-LIST_CASES:loop": [
+   "value",
+   "12"
+  ],
+  "p94-LIST_CASES:max": [
+   "value",
+   "11"
+  ],
+  "p94-LIST_CASES:member": [
+   "value",
+   "True"
+  ],
+  "p94-LIST_CASES:nested": [
+   "value",
+   "'b'"
+  ],
+  "p94-LIST_CASES:not-a-tuple": [
+   "value",
+   "False"
+  ],
+  "p94-LIST_CASES:order": [
+   "value",
+   "True"
+  ],
+  "p94-LIST_CASES:repeat": [
+   "value",
+   "[0, 0, 0, 0]"
+  ],
+  "p94-LIST_CASES:reverse": [
+   "value",
+   "[9, 3, 5]"
+  ],
+  "p94-LIST_CASES:snapshot": [
+   "value",
+   "([1, 2], [1, 2, 3])"
+  ],
+  "p94-LIST_CASES:sorted": [
+   "value",
+   "[1, 2, 3]"
+  ],
+  "p94-LIST_CASES:sorted-string": [
+   "value",
+   "['a', 'g', 'l', 'o', 'y']"
+  ],
+  "p94-LIST_CASES:sorted-tuples": [
+   "value",
+   "[(1, 'z'), (2, 'a'), (2, 'b')]"
+  ],
+  "p94-LIST_CASES:split-then-add": [
+   "value",
+   "['a', 'b', 'c']"
+  ],
+  "p94-LIST_CASES:sum": [
+   "value",
+   "Fraction(5, 6)"
+  ],
+  "p94-LIST_CASES:to-tuple": [
+   "value",
+   "(1, 2)"
+  ],
+  "p94-LIST_CASES:unpack": [
+   "value",
+   "3"
+  ],
+  "p94-STRING_METHOD_CASES:count": [
+   "value",
+   "2"
+  ],
+  "p94-STRING_METHOD_CASES:count-empty": [
+   "value",
+   "7"
+  ],
+  "p94-STRING_METHOD_CASES:count-overlap": [
+   "value",
+   "2"
+  ],
+  "p94-STRING_METHOD_CASES:endswith": [
+   "value",
+   "True"
+  ],
+  "p94-STRING_METHOD_CASES:find": [
+   "value",
+   "10"
+  ],
+  "p94-STRING_METHOD_CASES:find-empty": [
+   "value",
+   "0"
+  ],
+  "p94-STRING_METHOD_CASES:find-missing": [
+   "value",
+   "-1"
+  ],
+  "p94-STRING_METHOD_CASES:index": [
+   "value",
+   "2"
+  ],
+  "p94-STRING_METHOD_CASES:isalpha": [
+   "value",
+   "False"
+  ],
+  "p94-STRING_METHOD_CASES:isdigit": [
+   "value",
+   "True"
+  ],
+  "p94-STRING_METHOD_CASES:join-list": [
+   "value",
+   "'xy'"
+  ],
+  "p94-STRING_METHOD_CASES:join-tuple": [
+   "value",
+   "'a-b-c'"
+  ],
+  "p94-STRING_METHOD_CASES:lower": [
+   "value",
+   "'mog cube'"
+  ],
+  "p94-STRING_METHOD_CASES:replace": [
+   "value",
+   "'bANANa'"
+  ],
+  "p94-STRING_METHOD_CASES:replace-empty": [
+   "value",
+   "'-a-b-'"
+  ],
+  "p94-STRING_METHOD_CASES:replace-shrink": [
+   "value",
+   "'misisippi'"
+  ],
+  "p94-STRING_METHOD_CASES:split-empty-fields": [
+   "value",
+   "['a', 'b', '', 'c']"
+  ],
+  "p94-STRING_METHOD_CASES:split-sep": [
+   "value",
+   "['a', 'b', 'c']"
+  ],
+  "p94-STRING_METHOD_CASES:split-whitespace": [
+   "value",
+   "['spaced', 'out', 'words']"
+  ],
+  "p94-STRING_METHOD_CASES:startswith": [
+   "value",
+   "True"
+  ],
+  "p94-STRING_METHOD_CASES:strip": [
+   "value",
+   "'pad'"
+  ],
+  "p94-STRING_METHOD_CASES:strip-chars": [
+   "value",
+   "'hi'"
+  ],
+  "p94-STRING_METHOD_CASES:upper": [
+   "value",
+   "'GOLAY CODE'"
+  ],
+  "p94-STRING_METHOD_CASES:upper-lower": [
+   "value",
+   "True"
+  ],
+  "p94-refusal:dict-assign": [
+   "refusal",
+   "MUTABLE_CONTAINER"
+  ],
+  "p94-refusal:dict-missing": [
+   "refusal",
+   "PYTHON_ERROR"
+  ],
+  "p94-refusal:dict-update": [
+   "refusal",
+   "MUTABLE_CONTAINER"
+  ],
+  "p94-refusal:dict-view-value": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "p94-refusal:index-missing": [
+   "refusal",
+   "PYTHON_ERROR"
+  ],
+  "p94-refusal:join-non-string": [
+   "refusal",
+   "PYTHON_ERROR"
+  ],
+  "p94-refusal:list-append": [
+   "refusal",
+   "MUTABLE_CONTAINER"
+  ],
+  "p94-refusal:list-augassign": [
+   "refusal",
+   "MUTABLE_CONTAINER"
+  ],
+  "p94-refusal:list-comprehension": [
+   "refusal",
+   "MUTABLE_CONTAINER"
+  ],
+  "p94-refusal:list-item-assign": [
+   "refusal",
+   "MUTABLE_CONTAINER"
+  ],
+  "p94-refusal:list-overflow": [
+   "refusal",
+   "CARRIER_OVERFLOW"
+  ],
+  "p94-refusal:list-unhashable": [
+   "refusal",
+   "PYTHON_ERROR"
+  ],
+  "p94-refusal:method-unsupported": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "p94-refusal:set-literal": [
+   "refusal",
+   "MUTABLE_CONTAINER"
+  ],
+  "p94-refusal:split-empty-sep": [
+   "refusal",
+   "PYTHON_ERROR"
+  ],
+  "p94-refusal:split-non-ascii": [
+   "refusal",
+   "OUTSIDE_SUBSTRATE"
+  ],
+  "p94-refusal:upper-non-ascii": [
+   "refusal",
+   "OUTSIDE_SUBSTRATE"
+  ],
+  "p95-program:p-ackermann": [
+   "value",
+   "9"
+  ],
+  "p95-program:p-basel-partial": [
+   "value",
+   "Fraction(1968329, 1270080)"
+  ],
+  "p95-program:p-binary-digits": [
+   "value",
+   "'100101'"
+  ],
+  "p95-program:p-choice-nested": [
+   "value",
+   "'pos'"
+  ],
+  "p95-program:p-collatz": [
+   "value",
+   "111"
+  ],
+  "p95-program:p-count-vowels": [
+   "value",
+   "8"
+  ],
+  "p95-program:p-digit-sum": [
+   "value",
+   "45"
+  ],
+  "p95-program:p-elif": [
+   "value",
+   "('A', 'B', 'C')"
+  ],
+  "p95-program:p-every-other": [
+   "value",
+   "'ltie'"
+  ],
+  "p95-program:p-fact-iter": [
+   "value",
+   "2432902008176640000"
+  ],
+  "p95-program:p-fib-iter": [
+   "value",
+   "12586269025"
+  ],
+  "p95-program:p-gcd-func": [
+   "value",
+   "21"
+  ],
+  "p95-program:p-match-seq": [
+   "value",
+   "(1, 6, 0)"
+  ],
+  "p95-program:p-match-str": [
+   "value",
+   "(1, 2, 0)"
+  ],
+  "p95-program:p-max-loop": [
+   "value",
+   "9"
+  ],
+  "p95-program:p-power-mod": [
+   "value",
+   "333986"
+  ],
+  "p95-program:p-reverse-string": [
+   "value",
+   "'yaloG'"
+  ],
+  "p95-program:p-subtract-loop": [
+   "value",
+   "1"
+  ],
+  "p95-program:p-sum-of-squares": [
+   "value",
+   "385"
+  ],
+  "p95-program:p-triangle": [
+   "value",
+   "5050"
+  ],
+  "p95-program:p-tuple-build": [
+   "value",
+   "(0, 1, 4, 9, 16)"
+  ],
+  "p95-say-refusal:r-arity": [
+   "refusal",
+   "PYTHON_ERROR"
+  ],
+  "p95-say-refusal:r-break": [
+   "value",
+   "0"
+  ],
+  "p95-say-refusal:r-depth": [
+   "refusal",
+   "BUDGET"
+  ],
+  "p95-say-refusal:r-div-zero": [
+   "refusal",
+   "PYTHON_ERROR"
+  ],
+  "p95-say-refusal:r-index": [
+   "refusal",
+   "PYTHON_ERROR"
+  ],
+  "p95-say-refusal:r-method-call": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "p95-say-refusal:r-nested-def": [
+   "value",
+   "1"
+  ],
+  "p95-say-refusal:r-no-result": [
+   "value",
+   "None"
+  ],
+  "p95-say-refusal:r-return-top": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "p95-say-refusal:r-step-limit": [
+   "refusal",
+   "BUDGET"
+  ],
+  "p95-say-refusal:r-sum-of-strings": [
+   "value",
+   "'abab'"
+  ],
+  "p95-say-refusal:r-truthy-string": [
+   "value",
+   "'b'"
+  ],
+  "p95-say-refusal:r-unbound-local": [
+   "refusal",
+   "PYTHON_ERROR"
+  ],
+  "p95-say-refusal:r-unbound-loop": [
+   "refusal",
+   "PYTHON_ERROR"
+  ],
+  "p95-say:imp-choice": [
+   "value",
+   "'big'"
+  ],
+  "p95-say:imp-def": [
+   "value",
+   "81"
+  ],
+  "p95-say:imp-for-sum": [
+   "value",
+   "6"
+  ],
+  "p95-say:imp-if-else": [
+   "value",
+   "'o'"
+  ],
+  "p95-say:imp-if-no-else": [
+   "value",
+   "3"
+  ],
+  "p95-say:imp-match": [
+   "value",
+   "'n'"
+  ],
+  "p95-say:imp-nested-loop": [
+   "value",
+   "3"
+  ],
+  "p95-say:imp-recursive-fib": [
+   "value",
+   "55"
+  ],
+  "p95-say:imp-reserved-name": [
+   "value",
+   "8"
+  ],
+  "p95-say:imp-string-loop": [
+   "value",
+   "'ba'"
+  ],
+  "p95-say:imp-swap": [
+   "value",
+   "(5, 3)"
+  ],
+  "p95-say:imp-two-params": [
+   "value",
+   "12"
+  ],
+  "p95-say:imp-while-halve": [
+   "value",
+   "5"
+  ],
+  "p96-case:views-burst": [
+   "value",
+   "333010"
+  ],
+  "p96-case:views-burst-spread": [
+   "value",
+   "True"
+  ],
+  "p96-case:views-clean": [
+   "refusal",
+   "UNSUPPORTED"
+  ],
+  "p96-case:views-count": [
+   "value",
+   "3"
+  ],
+  "p96-case:views-small": [
+   "value",
+   "16777215"
+  ],
+  "p96-case:views-two": [
+   "value",
+   "11567404"
+  ],
+  "p96-refusal:views-none": [
+   "refusal",
+   "PYTHON_ERROR"
+  ],
+  "p96-refusal:views-not-codeword": [
+   "refusal",
+   "OUTSIDE_SUBSTRATE"
+  ],
+  "p96-refusal:views-too-many": [
+   "refusal",
+   "PYTHON_ERROR"
+  ]
+ }
+}

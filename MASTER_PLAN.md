@@ -5,7 +5,7 @@
 
 **Question.** What has each phase of the wiring plan delivered, and what does the next round start from?
 
-**Verdict.** Phase 95 is closed; the order of work at the head of [`STATUS.md`](STATUS.md) §3.4 is where the next round starts, Phase 96 (round 8 of the order, second readings).
+**Verdict.** Phase 97 is closed; the order of work at the head of [`STATUS.md`](STATUS.md) §3.4 is where the next round starts, Phase 98 (round 9 of the order, retrieval, or the lattice items beside round 8).
 
 **Deciding figure.** Every closed phase names what was built, where it lives, and how to see it recompute itself.
 
@@ -25,7 +25,7 @@ recompute itself.
 
 Everything below is reachable from the package's public API and from the query
 runtime — **<!--figure:query-kinds-->24 query kinds<!--/figure-->**, **<!--figure:report-subjects-->65 report subjects<!--/figure-->** and **<!--figure:registers-->8 registers<!--/figure-->** — is
-covered by the test suite (<!--figure:test-files-->141 test files<!--/figure-->),
+covered by the test suite (<!--figure:test-files-->143 test files<!--/figure-->),
 and — where it is a report or a task — has a generated column-3 script that
 recomputes the claim in a **fresh interpreter** and fails if anything differs.
 
@@ -183,9 +183,125 @@ as everything else: only the open phase is state.
 
 ---
 
+## Phase 97 — argument unpacking and the third view on demand: Phase 96's two misses re-declared and re-scored
+
+**Status: closed this round.** Taken at the owner's request before round 9:
+Phase 96 closed with 7 of 9 marks, and its two misses were misses of the
+declaration — V8 a gap in the dialect (argument unpacking refused), V4 a
+false analogy (the register's second view reads X1's second error rotated).
+The study of the round is
+[`studies/UNPACKING_RESCORE_STUDY.md`](studies/UNPACKING_RESCORE_STUDY.md).
+Its marks U1–U5 and R1–R7 and the frozen baseline
+`reasoning/_data/unpacking_baseline.json` (311 earlier dialect programs, the
+differential battery, this round's 33 programs as the old dialect answered
+them) were committed in `evaluation/unpacking_cases.py` before any code.
+
+**What was built.** The dialect (`reasoning/python_speech.py`) splices every
+`*value` of a call in place (`Evaluator.call_args`, through the iteration a
+`for` loop uses, a named step re-checked in column 3) and binds a `*rest`
+parameter to the arguments past the positional ones (`_Function.rest`,
+`call_function`). The framed register (`reasoning/second_view.py`) gains
+`read_on_demand` and `FramedRegister.read_on_demand`, and the marks R1–R7.
+Around them are `runtime/unpacking_report.py`, `tools unpacking`,
+`tests/test_unpacking.py` and `RequestProject/GLM/OnDemandView.lean`.
+`tests/test_second_view.py` records Phase 96's `views-clean` as a later
+change.
+
+**What it measured.**
+* U1: the refused program answered `333010`, equal to CPython, script
+  verified, mutant rejected; Phase 96's V8 now 6 of 6 and 3 of 3.
+* U2, U3, U4: 14 of 14 call programs, 8 of 8 definition programs, 10 of 10
+  refusals by name (0 of the 33 answered or refused as declared before).
+* U5: 0 of 311 earlier programs moved (one declared move, U1's own source);
+  the differential battery unchanged (2,830 answered, 0 wrong).
+* R1: the on-demand register equals three views on 680,064 of 680,064
+  common-mode reads, reading the third view on 11,136 — 1,371,264 views
+  instead of 2,040,192.
+* R2: 148,800 of 148,800 below weight 4, third view never read.
+* R3: on weight 5 it gives the two-view verdict on all 2,720,256 reads — 384
+  wrong where three views refuse every one: the price of the saving outside
+  the fault model.
+* R4, R5, R6: independent faults on a fresh probe — two views' live count
+  predicted on 8,448 of 8,448 (256 open), three views 84,480 of 84,480
+  resolved, on demand equal to three views on all 84,480 with the third view
+  read exactly where two were open; 0 wrong throughout.
+* R7: 346 open second errors for each of 24 first errors and all 23
+  frames.
+
+12 of 12 marks met.
+
+**Lean.** The file proves `on_demand_agrees` and `inside_radius_unique` (a
+third view cannot change a read two views resolve; below weight 4 one view
+suffices), `open_seconds_card` and `open_seconds_card_frame` (346 open second
+errors for every first error and every permutation), `independent_never_separated`,
+and the unpacking model (`flatten_length`, `bind_isSome_iff`, `bind_rest`,
+`star_round_trip`). It has no `sorry`.
+
+## Phase 96 — second readings: a framed register that reads one carrier through its own views, the composition declared, and the Leech escalation on the views' soft channel proved to add nothing
+
+**Status: closed; its two misses re-scored by Phase 97.** It took round 8 of the order of work at the
+head of `STATUS.md` §3.4: *second readings*, that is J2 with H's X1, then J1,
+then J3. The lattice items 3, 6, 7 and 10 that sit beside the track were not
+taken. The study of the round is
+[`studies/SECOND_VIEW_STUDY.md`](studies/SECOND_VIEW_STUDY.md). Its marks
+V1–V9, its probes and the frames chosen by a scoping search (reported as
+such) were committed in `evaluation/second_view_cases.py` before any code.
+
+**What was built.** `reasoning/second_view.py` is the framed register. View
+`k` stores a codeword rotated down by `k`, with frames `(0, 1, 3)`. A read
+aligns every view, carries the fork of view 0 and prunes it by every further
+view, and the ledger names the frame behind each elimination. The module also
+holds `soft_mean` (the views' own soft reading), `FramedRegister` with
+common-mode and independent fault injection, the marks V1–V7 and the
+weight-5 report. The dialect gains `store_views` and `read_views`, each
+answered with a column-3 script. Around them are
+`runtime/second_view_report.py` (V8, V9), `tools second-view`,
+`tests/test_second_view.py` and `RequestProject/GLM/SecondView.lean`.
+
+**What it measured.**
+* V1: two views leave 174 of the 10,626 common-mode four-error bursts open,
+  each with exactly 2 live candidates. The live count matched the prediction
+  on all 680,064 reads, with 0 wrong.
+* V2: three views resolve 680,064 of 680,064, 0 wrong.
+* V3: every single second frame leaves bursts open (least 156).
+* V4 **not met**: X1's probe through two views with independent faults
+  resolves 4,160 of 4,224, 0 wrong. The register's second view reads X1's
+  second error rotated by one, and one pair of the twelve shares an octad.
+  Post hoc, three views resolve 14,080 of 14,080.
+* V5: 148,800 of 148,800 reads below weight 4, for both the two- and the
+  three-view register.
+* V6, J1's composition on a fresh probe: 658,258 of 658,812 answered,
+  0 wrong. The open counts were exactly as predicted (2, 8, 32, 128, 384),
+  and the share at `k = 32` was 99.89 %.
+* V7, J3: the Leech escalation on the views' mean equals the intersection on
+  46,728 of 46,728 reads, and resolves 0 beyond it. At every rate of
+  Phase 82's grid the likelihood ranks as the summed view distance does.
+* V8 **not met**: 5 of 6 declared programs (one uses argument unpacking,
+  which the dialect refuses `UNSUPPORTED`) and 3 of 3 refusals.
+* V9: K2 unchanged.
+* Reported, not a mark: on weight-5 common-mode bursts a single view is
+  wrong on all 2,720,256 reads, and three views refuse all of them, 0 wrong.
+
+7 of 9 marks met.
+
+**Lean.** The file proves:
+* `dist_ge_four` and `dist_eq_four_iff` (the fork of a four-error read);
+* `common_iff`, `resolved_iff`, `five_leaves_one` and
+  `through_eq_empty_of_nine` (what two views allow);
+* `pair_dist_ge`, `pair_dist_eq_iff`, `soft_mean_dist` and
+  `pair_likelihood_strictAnti` (the views' soft channel is the second
+  reading);
+* `no_single_frame_separates` (no permutation suffices as a single second
+  frame);
+* `three_frames_separate`, `pair_frame_open_count` and `noOctadAbove_iff`
+  (the frames `(0, 1, 3)` separate every burst; offset 1 alone leaves 174).
+
+It has no `sorry`. The two finite checks use `native_decide`, as
+`Golay/Sextet.lean` does.
+
 ## Phase 95 — the imperative grammar: programs with state in the reverse grammar, run with counted steps and replayed by a fresh interpreter
 
-**Status: closed this round.** It took the second half of round 7 of the
+**Status: closed.** It took the second half of round 7 of the
 order of work at the head of `STATUS.md` §3.4 — M's imperative grammar:
 sentences for assignment, loops and branches, so that the 7 Phase 64
 programs with state have sentences. The study of the round is
@@ -2891,7 +3007,7 @@ remaining, the release. Running it failed six units, none of them noise:
 
 **What the release now says.** `signoff --verify-release` reports **99 of 99
 test files and 7 of 7 instruments** signed with the exhaustive cases on; the
-suite is **<!--figure:suite-->4,904 tests across 140 of the 141 test files, 18,026 subtests, outside the document check<!--/figure-->**,
+suite is **<!--figure:suite-->4,935 tests across 142 of the 143 test files, 17,993 subtests, outside the document check<!--/figure-->**,
 one process with `GLM_EXHAUSTIVE=1` collecting 3,979; the end-to-end
 evaluation is **157 / 157** with 19 expected refusals; `corpus --check` is
 current; and `lake build` is clean over 120 Lean files with no `sorry`.
