@@ -1089,6 +1089,17 @@ def unit_factor(kind, source, quantity):
     return factor
 
 
+def scale_affine(source, quantity):
+    """The exact SI factor and offset of a register scale that carries an
+    offset (degrees Celsius), from the declared table, with the dimension
+    checked against the quantity."""
+    from glm_universal.runtime import quantity_units as qu
+    factor, offset, dim, _q = qu.scale_into_si_affine(source)
+    assert tuple(dim) == qu.quantity_dimension(quantity), \
+        "the unit is not of the quantity's dimension"
+    return factor, offset
+
+
 SESSION = []
 
 
@@ -1277,6 +1288,18 @@ def value_of(step, done):
         from glm_universal.runtime.measurands import DEFINED_CONSTANTS
         assert d["name"] in DEFINED_CONSTANTS, "not a defined constant"
         return DEFINED_CONSTANTS[d["name"]][0]
+    if op == "si" and "offset" in d and d["kind"] == "scale":
+        from glm_universal.runtime import measurands as ms
+        src = DATA["steps"][step["inputs"][0] - 1]
+        assert src["op"] == "lookup" and "%s:%s" % (
+            src["detail"]["table"], src["detail"]["field"]) == d["from"], \
+            "the conversion is not of the register entry's scale"
+        assert d["quantity"] == ms.TEMPERATURE, "an offset on a non-temperature"
+        assert d["reading"] == "level", "a register reading is a level"
+        f, o = scale_affine(d["from"], d["quantity"])
+        assert show(f) == d["factor"] and show(o) == d["offset"], \
+            "the recorded conversion is not the table's"
+        return v[0] * f + o
     if op == "si" and "offset" in d:
         from glm_universal.runtime import measurands as ms
         src = DATA["steps"][step["inputs"][0] - 1]

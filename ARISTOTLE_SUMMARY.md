@@ -1,3 +1,111 @@
+# Summary of changes for run 20a14a16-c1d0-4574-a988-27e72d4feaa1
+I updated the out-of-date Celsius note and then did round 9's first item (retrieval, candidate N1), recorded as **Phase 100**. Six of its seven marks were met; the control I declared failed. It also turned up an older defect in how the Lean corpus records citations. All work is committed.
+
+**1. The note you asked about.** Item 1 of `STATUS.md` §3.4 still said "the scale table itself still has no offset row". It now says that item is closed: Phase 87 did the measurand half and Phase 99 the offset half. It records what Phase 99 shipped, the follow-ups listed in §7 of the Celsius study, and your pending decision on aluminium. The original text is kept beneath it. The Phase 87 paragraph now says the offset row was later shipped by Phase 99.
+
+**2. What N1 asked.** The native-parity and native-words studies were re-checked at several later rounds, and some of their small leads flipped by one query as the corpus grew. N1 asks which of those leads are real and which are noise. The rule and marks were committed before any measuring code (`studies/CORPUS_RESAMPLE_STUDY.md`). I ranked every one of the 4,572 declarations once, under ten rankings, both as a declaration query and as a goal query. From that one ranking I read off:
+- each of the 171 sub-corpora that leaves out one Lean file;
+- every offset of the query sampling stride (22 for declaration queries, 45 for goal queries).
+
+A lead counts as real if it holds in at least 95 % of both sets. New code: `reasoning/corpus_resample.py`, the command `tools corpus-resample`, and `tests/test_corpus_resample.py`.
+
+**3. Results.**
+- **One lead out of 18 is real:** the two-book native ranking (`native2`) has at least the raw structural ranking's hits on declaration queries. It holds in 99.4 % of file drops and 95.5 % of offsets.
+- **The same lead on goal queries just misses** the 95 % threshold (96.5 % and 93.3 %).
+- **Everything else is noise as stated.** That includes the single-book marks N1 and N2, the tie-break marks W4 and W6, and the three after-the-fact readings in the native-words study. It also includes the shipped words mark W2: it fails at the top rank, but at ranks 3, 5 and 10 it is at least level in at least 88.9 % of every set.
+- **The control I declared failed.** I predicted `native2` and `features2` would always give the same hits. They share only their first two sort keys, so their hits differ in 11.7 % to 24.4 % of resamples. That mark (M4) is recorded as not met.
+- **No default ranking changed.** The verdicts are written into both earlier studies, next to the readings they settle.
+
+**4. The defect it found.** The citation index treats any token matching a unique short name as a citation. Ten declarations have one-letter names, so every variable `a`, `A`, `e`, … in the corpus counts as citing one of them. That is 3,231 of 15,012 citation edges; `GLM.Heisenberg.a` alone is "cited" by 1,920 declarations.
+
+This leak affects two things: two coordinates of every structural address, and the lists of related declarations that every retrieval score is checked against. Comparisons between rankings stay fair, because both sides use the same lists, but absolute hit rates are inflated by an unmeasured amount. I did not fix it: fixing it changes every retrieval figure. `STATUS.md` now pairs it with item 5 (a similar leak in the feature map) as the next round.
+
+**5. Lean.** `RequestProject/GLM/CorpusResample.lean` builds with no `sorry` and only the standard axioms. It proves:
+- leaving candidates out of a ranking gives the same list as ranking what is left (`sorted_perm_filter_eq`);
+- 108 places per query are enough to read any sub-corpus off the full ranking (`take_filter_take`);
+- the stride offsets split the corpus into disjoint parts that cover it once (`stride_offsets_card`);
+- the exact sign-test values the study prints, checked by the kernel.
+
+These four results are in the Properties table, marked proved.
+
+**6. Closing the round.**
+- I updated `STATUS.md`, `MASTER_PLAN.md`, `WHITEBOARD.md`, the tests README and the hand-typed counts: 171 Lean files, 4,576 declarations, 122 reasoning modules, and the iteration-cost table.
+- `corpus --check` reports current.
+- `signoff --close` passes 146 of 146 test files and 6 of 6 instruments, and the full `lake build` succeeds.
+- I had to install `pytest` again; sign-off needs it.
+- Because Python cache files were already tracked in the repository, refreshed `__pycache__` files are in these commits.
+
+## Suggested follow-up
+
+There is a likely bug in your citation index (`lean_address.citation_index`). It matches a bound variable such as `a`, `A` or `e` to a declaration with that one-letter name, so about a fifth of all citation edges are spurious. Those edges also feed the related-declaration lists that retrieval is scored against. I can take this next, together with item 5: stop one-letter variables from counting as citations, then re-take the Lean-corpus retrieval figures and keep the old ones as the record.
+
+# Summary of changes for run 7c54aff6-01d4-4b76-adc0-d8713bfb5c99
+Phase 99 is done: the GLM now has a register that holds Celsius readings. All 8 success criteria I wrote down before starting (C1–C8 in `studies/CELSIUS_REGISTER_STUDY.md`) were met, and the work is committed.
+
+**What was added**
+- **The register:** `data_objects/fixed_points.py` holds 14 ITS-90 fixed points (international reference temperatures). Each stores only its Celsius temperature, as an exact fraction. It has an `ACTIVE` on/off switch.
+- **Conversion to kelvin:** a new `fixed_point` field table in `runtime/fields.py`. `reasoning/scale_conversion.py` gets a scale row with an offset: K = °C + 273.15, held exactly as 27315/100. That file also gains an `OFFSETS` switch.
+- **Supporting changes:**
+  - Ordering results now name the converted values whenever an offset is involved.
+  - The old multiply-only unit conversion now refuses offset rows, and a separate function, `scale_into_si_affine`, handles them.
+  - The planner and its generated scripts treat Celsius as a level that needs the offset.
+  - The measurand register gets an `offset` field.
+  - "temperature" and "celsius temperature" are added as recognised words.
+- **Report, command and tests:** `runtime/celsius_register_report.py`, the command `tools celsius-register`, and `tests/test_celsius_register.py` (15 tests).
+- **Lean:** `overlay/glm_lean/RequestProject/GLM/CelsiusRegister.lean` builds with no `sorry` and uses only the standard axioms. The whole Lean library builds cleanly.
+
+**Results**
+- All 14 fixed points convert exactly onto the kelvin column.
+- Prepared test cases: 10 of 10 ordering, 3 of 3 column and 9 of 9 planner cases came out as declared, with none wrong.
+- Through the full machine, 6 questions are now answered that got no answer before.
+- As a control, dropping the offset flips 3 ordering cases and gets all 6 planner answers wrong, so the offset is doing real work.
+- Earlier test sets are unchanged. All 6 generated scripts check out, and every deliberately altered script or false offset was rejected.
+
+**For you to decide:** I compared the register against the existing element register. 10 of 13 shared points agree within 0.005 K. The aluminium entry there (933.437 K) is 0.036 K below the ITS-90 value of 933.473 K, which looks like two swapped digits. I left it unchanged.
+
+**Documentation:** STATUS.md, MASTER_PLAN.md (Phase 99), WHITEBOARD.md and the hand-typed counts are updated. Section 6 of the study gives a step-by-step recipe for adding the next register, wheel or junction, for the further additions you mentioned. The final checks passed: the corpus check reports current, and sign-off covers all 145 test files and all 6 measurement tools.
+
+# Summary of changes for run 69712d75-c8ba-4618-88c1-60f948001482
+Phase 98 is closed. The GLM can now answer questions whose answer is a formula in letters, such as `a = (2/3)*g*sin(theta)`. You asked for better reasoning, so I took tracks S (formulas in letters) and T (the one transcendental equation) from Question Set B §8 instead of round 9 (retrieval). Retrieval is still next. All eight marks were met, but one only after a fix (details below).
+
+**What was built** (all under `overlay/glm_universal/`)
+- **`reasoning/symbolic.py`**: exact algebra of polynomials and fractions of polynomials in named letters, using exact fractions and no floats. Square roots, `sin`, `cos`, `tan`, `exp` and `ln` are handled as named symbols.
+- **A new operation** (`runtime/symbolic_frames.py`): `solve symbolically for T: EQ; EQ`. It removes unknowns by substitution and prints the formula with the nonzero conditions it assumed. When it can't solve a system it refuses by name (underdetermined, inconsistent, nonlinear, and so on).
+- **Square linear systems of four or more unknowns** are solved by Cramer's rule, with determinants computed without fractions.
+- **14 question frames** (`runtime/symbolic_outside.py`): one for each of the 13 class-S outside questions and one for the transcendental crossover question.
+- **Command:** `tools symbolic` runs the measurement; add `--battery` for the random-system check.
+
+**Results** (marks written down before the code)
+- 13 of 13 class-S questions answered and checked, 0 wrong.
+- 13 of 13 re-worded variants, 18 of 18 hand-solved systems, 8 of 8 refusals.
+- 27 of 27 earlier framed answers and 14 of 14 Set B verdicts unchanged.
+- Crossover frequency pinned between 3.6731 and 3.6732.
+- Wrong-answer controls: 43 of 44 caught on the first run. The miss was the control's fault: doubling an answer of zero changes nothing. After making that control add an offset instead, 44 of 44. The study records this mark as not met as declared, met after repair.
+
+**What the random battery found** (90 random linear systems in letters, run after the marks)
+- **Speed:** the first run had not finished after 20 minutes. Simplifying fractions in many letters blew up. With three fixes, a 4-unknown system takes about 0.02 s (it was over 5 minutes) and the whole battery about 6 s.
+- **A real bug the marks missed:** 34 of 87 answers failed their own check. The maths was right but the printer was wrong. When a denominator had a number in front of a sum, it wrote `2*r^2 - p` where it meant `2*(r^2 - p)`. After the fix, 87 of 87 pass. A new test checks that the printed formula reads back to itself.
+
+**Lean.** `overlay/glm_lean/RequestProject/GLM/SymbolicParameters.lean` builds with no `sorry` and only the standard axioms. It proves:
+- the rolling-body result for every moment of inertia;
+- the invariant mass, the disturbance loop and the tangent law at an interface;
+- the AR(1) autocorrelation series;
+- that two polynomials agreeing at enough points are equal (why the point checks are evidence);
+- `cramer_solves`: with a nonzero determinant, Cramer's rule gives exactly the solutions.
+
+These are listed as proved in the Properties table.
+
+**Records and checks.**
+- Write-up: `studies/SYMBOLIC_PARAMETERS_STUDY.md`. `STATUS.md`, `MASTER_PLAN.md` and `WHITEBOARD.md` are updated.
+- Updated hand-typed counts: 169 Lean files, 4,548 declarations, 121 reasoning modules, and the iteration-cost table.
+- New tests: `tests/test_symbolic.py`.
+- `corpus --check` reports current. `signoff --close` passed 144 of 144 test files and 6 of 6 checks, including the Lean build.
+
+**Things you should know.**
+- I had to install `pytest`, which was missing here; sign-off needs it.
+- I changed two existing tests in `test_question_frames.py` so that this phase's own cases and the newly answered questions count as an intended change, not a regression.
+- Still not handled: systems that are genuinely nonlinear in the unknowns are refused; tracks P, M and E are untouched.
+
 # Summary of changes for run 34eef55a-ad78-4f5b-affc-4b3078fb7395
 This round is **Phase 97**. The Python dialect now accepts argument unpacking, and the program it refused last round is answered as a fresh declared case. I also looked at whether the last round's results could be improved: they can. All 12 marks declared for this round were met, and none of the system's checked steps gave a wrong answer.
 

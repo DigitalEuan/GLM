@@ -312,6 +312,11 @@ def _molecule_rows() -> Mapping[str, Mapping[str, object]]:
     return out
 
 
+def _fixed_point_rows() -> Mapping[str, Mapping[str, object]]:
+    from ..data_objects import fixed_points
+    return fixed_points.fixed_point_rows()
+
+
 def _carrier_rows(objects: Sequence) -> Mapping[str, Mapping[str, object]]:
     """The attributes of every carrier of one register, by carrier name.
 
@@ -454,6 +459,15 @@ class FieldSurface:
                 "glm_universal.data_objects.molecules.load_molecule_register",
                 derived=MOLECULE_DERIVED),
         ]
+        from ..data_objects import fixed_points as _fixed
+        if _fixed.ACTIVE:
+            out.append(FieldTable(
+                "fixed_point", "source",
+                "the 14 ITS-90 defining fixed points, each temperature held "
+                "in degrees Celsius",
+                _fixed_point_rows,
+                "glm_universal.data_objects.fixed_points"
+                ".load_fixed_point_register"))
         if self._registers is None:
             pairs = [(domain, lambda loader=loader: _standalone_carrier(loader))
                      for domain, loader in _STANDALONE_CARRIERS]

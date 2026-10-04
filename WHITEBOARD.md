@@ -5,9 +5,10 @@
 **Question.** If this session stopped now, what would the next one need to
 know to carry the round on?
 
-**Verdict.** No round is in flight: Phase 97 closed, and the next round starts
-from round 9 of the order of work at the head of `STATUS.md` §3.4 (retrieval),
-or from the lattice items beside round 8.
+**Verdict.** No round is in flight: Phase 100 closed, and the next round starts
+from round 9 of the order of work at the head of `STATUS.md` §3.4 (retrieval,
+continued: item 5 with the citation leak), or from the lattice items beside
+round 8.
 
 **Deciding figure.** 0 steps outstanding.
 
@@ -43,7 +44,38 @@ absence:
 
 ## Status
 
-**No round is in flight.** Phase 97 — argument unpacking and the third
+**No round is in flight.** Phase 100 — the declared resampling: every
+sub-corpus that drops one Lean file and every stride offset, read off one
+census of the Lean corpus under ten retrieval rankings; one lead is an effect
+(the two-book native ranking on declaration queries), the rest draws; the
+declared control failed (a near identity); a citation leak found in the
+citation index — is closed: the study is
+[`studies/CORPUS_RESAMPLE_STUDY.md`](studies/CORPUS_RESAMPLE_STUDY.md), the
+record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 100, 6 of 7 marks are met,
+and the next round is item 5 of round 9 with the citation leak, or the
+lattice items beside round 8.
+Phase 99 — the Celsius register: the fourteen
+ITS-90 fixed points held in degrees Celsius, the scale table's first offset
+row (273.15) carrying them onto ITS-90's kelvin column, and the ordering,
+extremum and stepwise-planner operations reading them, at the owner's request
+for a register that holds a Celsius reading; 10 of 10 ordering, 3 of 3
+column and 9 of 9 planner cases as declared, 0 wrong — is closed: the study
+is [`studies/CELSIUS_REGISTER_STUDY.md`](studies/CELSIUS_REGISTER_STUDY.md),
+the record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 99, 8 of 8 marks are
+met, and the next round is round 9 of the order (retrieval) or the lattice
+items beside round 8.
+Phase 98 — symbolic parameters: answers that are
+formulas in letters, by an exact algebra of rational functions over named
+parameters and the operation `solve symbolically for`, taken from boundary
+tracks S and T of Question Set B at the owner's request for more reasoning
+ability; 13 of 13 class-S outside questions and the class-T crossover
+answered and verified, 0 wrong; a post-hoc battery found and repaired a
+printer fault and a speed limit at four unknowns — is closed: the study is
+[`studies/SYMBOLIC_PARAMETERS_STUDY.md`](studies/SYMBOLIC_PARAMETERS_STUDY.md),
+the record is [`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 98, 8 of 8 marks are
+met (S5 after a control repair), and the next round is round 9 of the order
+(retrieval) or the lattice items beside round 8.
+Phase 97 — argument unpacking and the third
 view on demand: Phase 96's two misses re-declared and re-scored at the
 owner's request; the dialect admits `f(*xs)` and `def f(a, *rest)` and
 answers the program Phase 96 refused; the framed register reads its third

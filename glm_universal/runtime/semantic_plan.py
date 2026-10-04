@@ -708,6 +708,8 @@ FIELD_SYNONYMS: Dict[str, Tuple[str, ...]] = {
     "number of rungs": ("rungs",),
     "melting point": ("melting_point_K",),
     "boiling point": ("boiling_point_K",),
+    "temperature": ("temperature_C",),
+    "celsius temperature": ("temperature_C",),
     "formula": ("formula",),
     "unit": ("unit",),
     "symbol": ("symbol",),

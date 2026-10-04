@@ -4,88 +4,88 @@
    "address": [
     {
      "hit_rate": {
-      "__fraction__": "24/413"
+      "__fraction__": "1/16"
      },
-     "hits": 48,
+     "hits": 52,
      "k": 1
     },
     {
      "hit_rate": {
-      "__fraction__": "95/826"
+      "__fraction__": "47/416"
      },
-     "hits": 95,
+     "hits": 94,
      "k": 3
     },
     {
      "hit_rate": {
-      "__fraction__": "62/413"
+      "__fraction__": "125/832"
      },
-     "hits": 124,
+     "hits": 125,
      "k": 5
     },
     {
      "hit_rate": {
-      "__fraction__": "25/118"
+      "__fraction__": "177/832"
      },
-     "hits": 175,
+     "hits": 177,
      "k": 10
     }
    ],
    "digest": [
     {
      "hit_rate": {
-      "__fraction__": "5/826"
+      "__fraction__": "1/208"
      },
-     "hits": 5,
+     "hits": 4,
      "k": 1
     },
     {
      "hit_rate": {
-      "__fraction__": "23/826"
+      "__fraction__": "19/832"
      },
-     "hits": 23,
+     "hits": 19,
      "k": 3
     },
     {
      "hit_rate": {
-      "__fraction__": "23/413"
+      "__fraction__": "17/416"
      },
-     "hits": 46,
+     "hits": 34,
      "k": 5
     },
     {
      "hit_rate": {
-      "__fraction__": "40/413"
+      "__fraction__": "67/832"
      },
-     "hits": 80,
+     "hits": 67,
      "k": 10
     }
    ],
    "lexical": [
     {
      "hit_rate": {
-      "__fraction__": "11/826"
+      "__fraction__": "1/64"
      },
-     "hits": 11,
+     "hits": 13,
      "k": 1
     },
     {
      "hit_rate": {
-      "__fraction__": "12/413"
+      "__fraction__": "3/104"
      },
      "hits": 24,
      "k": 3
     },
     {
      "hit_rate": {
-      "__fraction__": "37/826"
+      "__fraction__": "17/416"
      },
-     "hits": 37,
+     "hits": 34,
      "k": 5
     },
     {
      "hit_rate": {
-      "__fraction__": "26/413"
+      "__fraction__": "1/16"
      },
      "hits": 52,
      "k": 10
@@ -94,28 +94,28 @@
    "name": [
     {
      "hit_rate": {
-      "__fraction__": "5/826"
+      "__fraction__": "3/416"
      },
-     "hits": 5,
+     "hits": 6,
      "k": 1
     },
     {
      "hit_rate": {
-      "__fraction__": "11/826"
+      "__fraction__": "3/208"
      },
-     "hits": 11,
+     "hits": 12,
      "k": 3
     },
     {
      "hit_rate": {
-      "__fraction__": "19/826"
+      "__fraction__": "19/832"
      },
      "hits": 19,
      "k": 5
     },
     {
      "hit_rate": {
-      "__fraction__": "15/413"
+      "__fraction__": "15/416"
      },
      "hits": 30,
      "k": 10
@@ -124,72 +124,72 @@
    "random": [
     {
      "hit_rate": {
-      "__fraction__": "1/118"
+      "__fraction__": "5/832"
      },
-     "hits": 7,
+     "hits": 5,
      "k": 1
     },
     {
      "hit_rate": {
-      "__fraction__": "10/413"
+      "__fraction__": "15/832"
      },
-     "hits": 20,
+     "hits": 15,
      "k": 3
     },
     {
      "hit_rate": {
-      "__fraction__": "22/413"
+      "__fraction__": "21/832"
      },
-     "hits": 44,
+     "hits": 21,
      "k": 5
     },
     {
      "hit_rate": {
-      "__fraction__": "57/826"
+      "__fraction__": "69/832"
      },
-     "hits": 57,
+     "hits": 69,
      "k": 10
     }
    ],
    "text": [
     {
      "hit_rate": {
-      "__fraction__": "3/118"
+      "__fraction__": "27/832"
      },
-     "hits": 21,
+     "hits": 27,
      "k": 1
     },
     {
      "hit_rate": {
-      "__fraction__": "37/826"
+      "__fraction__": "47/832"
      },
-     "hits": 37,
+     "hits": 47,
      "k": 3
     },
     {
      "hit_rate": {
-      "__fraction__": "4/59"
+      "__fraction__": "33/416"
      },
-     "hits": 56,
+     "hits": 66,
      "k": 5
     },
     {
      "hit_rate": {
-      "__fraction__": "51/413"
+      "__fraction__": "109/832"
      },
-     "hits": 102,
+     "hits": 109,
      "k": 10
     }
    ]
   },
   "chance_at_5": {
-   "__fraction__": "566819650543667575/13217944535087101992"
+   "__fraction__": "189068854367645731/4621965810373853760"
   },
-  "corpus": 4539,
+  "corpus": 4576,
   "gate": {
    "__fraction__": "1/10"
   },
-  "invariant_queries": 781,
+  "invariant_queries": 795,
   "k": 5,
   "k_ladder": [
    1,
@@ -203,185 +203,185 @@
    "address": [
     {
      "hit_rate": {
-      "__fraction__": "39/413"
+      "__fraction__": "81/832"
      },
-     "hits": 78,
+     "hits": 81,
      "k": 1
     },
     {
      "hit_rate": {
-      "__fraction__": "10/59"
+      "__fraction__": "141/832"
      },
-     "hits": 140,
+     "hits": 141,
      "k": 3
     },
     {
      "hit_rate": {
-      "__fraction__": "181/826"
+      "__fraction__": "187/832"
      },
-     "hits": 181,
+     "hits": 187,
      "k": 5
     },
     {
      "hit_rate": {
-      "__fraction__": "251/826"
+      "__fraction__": "129/416"
      },
-     "hits": 251,
+     "hits": 258,
      "k": 10
     }
    ],
    "digest": [
     {
      "hit_rate": {
-      "__fraction__": "11/826"
+      "__fraction__": "1/208"
      },
-     "hits": 11,
+     "hits": 4,
      "k": 1
     },
     {
      "hit_rate": {
-      "__fraction__": "3/118"
+      "__fraction__": "1/64"
      },
-     "hits": 21,
+     "hits": 13,
      "k": 3
     },
     {
      "hit_rate": {
-      "__fraction__": "20/413"
+      "__fraction__": "31/832"
      },
-     "hits": 40,
+     "hits": 31,
      "k": 5
     },
     {
      "hit_rate": {
-      "__fraction__": "75/826"
+      "__fraction__": "15/208"
      },
-     "hits": 75,
+     "hits": 60,
      "k": 10
     }
    ],
    "lexical": [
     {
      "hit_rate": {
-      "__fraction__": "201/826"
+      "__fraction__": "211/832"
      },
-     "hits": 201,
+     "hits": 211,
      "k": 1
     },
     {
      "hit_rate": {
-      "__fraction__": "151/413"
+      "__fraction__": "159/416"
      },
-     "hits": 302,
+     "hits": 318,
      "k": 3
     },
     {
      "hit_rate": {
-      "__fraction__": "179/413"
+      "__fraction__": "187/416"
      },
-     "hits": 358,
+     "hits": 374,
      "k": 5
     },
     {
      "hit_rate": {
-      "__fraction__": "435/826"
+      "__fraction__": "451/832"
      },
-     "hits": 435,
+     "hits": 451,
      "k": 10
     }
    ],
    "name": [
     {
      "hit_rate": {
-      "__fraction__": "149/826"
+      "__fraction__": "17/104"
      },
-     "hits": 149,
+     "hits": 136,
      "k": 1
     },
     {
      "hit_rate": {
-      "__fraction__": "103/413"
+      "__fraction__": "183/832"
      },
-     "hits": 206,
+     "hits": 183,
      "k": 3
     },
     {
      "hit_rate": {
-      "__fraction__": "125/413"
+      "__fraction__": "111/416"
      },
-     "hits": 250,
+     "hits": 222,
      "k": 5
     },
     {
      "hit_rate": {
-      "__fraction__": "149/413"
+      "__fraction__": "291/832"
      },
-     "hits": 298,
+     "hits": 291,
      "k": 10
     }
    ],
    "random": [
     {
      "hit_rate": {
-      "__fraction__": "1/118"
+      "__fraction__": "5/832"
      },
-     "hits": 7,
+     "hits": 5,
      "k": 1
     },
     {
      "hit_rate": {
-      "__fraction__": "10/413"
+      "__fraction__": "15/832"
      },
-     "hits": 20,
+     "hits": 15,
      "k": 3
     },
     {
      "hit_rate": {
-      "__fraction__": "22/413"
+      "__fraction__": "21/832"
      },
-     "hits": 44,
+     "hits": 21,
      "k": 5
     },
     {
      "hit_rate": {
-      "__fraction__": "57/826"
+      "__fraction__": "69/832"
      },
-     "hits": 57,
+     "hits": 69,
      "k": 10
     }
    ],
    "text": [
     {
      "hit_rate": {
-      "__fraction__": "559/826"
+      "__fraction__": "291/416"
      },
-     "hits": 559,
+     "hits": 582,
      "k": 1
     },
     {
      "hit_rate": {
-      "__fraction__": "332/413"
+      "__fraction__": "669/832"
      },
-     "hits": 664,
+     "hits": 669,
      "k": 3
     },
     {
      "hit_rate": {
-      "__fraction__": "99/118"
+      "__fraction__": "27/32"
      },
-     "hits": 693,
+     "hits": 702,
      "k": 5
     },
     {
      "hit_rate": {
-      "__fraction__": "725/826"
+      "__fraction__": "743/832"
      },
-     "hits": 725,
+     "hits": 743,
      "k": 10
     }
    ]
   },
-  "queries": 826,
+  "queries": 832,
   "relay_anonymous": {
    "carried": [
     "GLM.Admission.ledger_refusals",
@@ -390,28 +390,6 @@
     "GLM.Calibration.substrate_c_is_circular",
     "GLM.Calibration.dSpeed_ne_zero",
     "GLM.Calibration.signalSpeed_vacuum",
-    "GLM.SubstrateCognition.monomial_unique",
-    "GLM.Extraspecial.sing_twelve",
-    "GLM.Gen2.tGrade_add",
-    "GLM.Gen3.odd_block_dimensions",
-    "GLM.Harmony.pythagorean_comma_ne_one",
-    "GLM.Heisenberg.Yfield_vac",
-    "GLM.MeasurandRegister.efficiency_range_of_powers",
-    "GLM.PythonSpeech.xorP",
-    "GLM.ReadQuantum.Q_bounds",
-    "GLM.ReverseTCT.Rel.negate",
-    "GLM.ReverseTCT.pairing_le_neg",
-    "GLM.Shell.sState_zero",
-    "GLM.Info.lossCount_rational",
-    "GLM.Info.ds_one_run_lt",
-    "GLM.TypedOperators.reactive_power_le_apparent",
-    "GLM.ZeroStorageV5.quadQ_step_bound",
-    "GLM.Calibration.hSI",
-    "GLM.Calibration.ticksPerCell",
-    "GLM.Calibration.cellDuration_bounds",
-    "GLM.Calibration.dLength",
-    "GLM.Calibration.speed_from_length_and_time",
-    "GLM.Calibration.exactTicksPerCell_bounds",
     "GLM.Feedback.efErr_equivariant",
     "GLM.Gen2.Meaning.add_exps",
     "GLM.Gen2.matsuo_3C",
@@ -423,79 +401,98 @@
     "GLM.Golay24.descend_within_five",
     "GLM.Info.substrate_perceive",
     "GLM.Info.card_region",
-    "GLM.Landscape.gap_lower"
+    "GLM.SymbolicParameters.invariant_mass_sq_identical",
+    "GLM.Landscape.gap_mem_pair",
+    "GLM.Calibration.hSI",
+    "GLM.Calibration.ticksPerCell",
+    "GLM.Calibration.cellDuration_bounds",
+    "GLM.Calibration.dLength",
+    "GLM.Calibration.speed_from_length_and_time",
+    "GLM.Calibration.exactTicksPerCell_bounds",
+    "GLM.Gen2.momentE_angle",
+    "GLM.Gen2.fusion_eta_eta",
+    "GLM.Harmony.pythagorean_comma_eq",
+    "GLM.Heisenberg.annihilate_apply",
+    "GLM.HigherLattices.BarnesWall.norm_ge_of_ne_zero",
+    "GLM.LogBucket.le_iff_num_le_neg",
+    "GLM.MeasurandRegister.derived_efficiency_gt_one",
+    "GLM.PCGS.landauerEnergy_mono",
+    "GLM.PythonSpeech.andP",
+    "GLM.ReverseTCT.pairing_lt_neg",
+    "GLM.SearchLoop.score_gate_unsound",
+    "GLM.Info.lossCount_integer",
+    "GLM.Info.ds_zero_run_length_lt",
+    "GLM.Vagueness.route_eq_proposed_iff",
+    "GLM.ZeroStorageV5.quad_step_bound"
    ],
-   "fired": 549,
+   "fired": 565,
    "leader": [
     {
      "hit_rate": {
-      "__fraction__": "3/118"
+      "__fraction__": "27/832"
      },
-     "hits": 21,
+     "hits": 27,
      "k": 1
     },
     {
      "hit_rate": {
-      "__fraction__": "37/826"
+      "__fraction__": "47/832"
      },
-     "hits": 37,
+     "hits": 47,
      "k": 3
     },
     {
      "hit_rate": {
-      "__fraction__": "4/59"
+      "__fraction__": "33/416"
      },
-     "hits": 56,
+     "hits": 66,
      "k": 5
     },
     {
      "hit_rate": {
-      "__fraction__": "51/413"
+      "__fraction__": "109/832"
      },
-     "hits": 102,
+     "hits": 109,
      "k": 10
     }
    ],
    "lost": [
-    "GLM.Info.inv_error_le",
-    "GLM.CubeStab.oCode_rotations_free",
-    "GLM.Info.Layer.cumulative",
-    "GLM.Facets.proj",
-    "GLM.CubeMirror.fibre_card_dvd_six",
-    "GLM.NowReceipt.acc_eq_iff_fract_eq",
-    "GLM.Conjugate._example_185",
     "GLM.Extraspecial.QG",
     "GLM.Gen3.even_part_dimension",
-    "GLM.ReverseTCT.ITok"
+    "GLM.ReverseTCT.ITok",
+    "GLM.ThirdSort.encItems",
+    "GLM.ConditionalInduction.missedObs",
+    "GLM.GolayMOG.yTwin_injective",
+    "GLM.Retrieval.address_dist_le"
    ],
-   "queries": 826,
+   "queries": 832,
    "relay": [
     {
      "hit_rate": {
-      "__fraction__": "3/118"
+      "__fraction__": "27/832"
      },
-     "hits": 21,
+     "hits": 27,
      "k": 1
     },
     {
      "hit_rate": {
-      "__fraction__": "22/413"
+      "__fraction__": "7/104"
      },
-     "hits": 44,
+     "hits": 56,
      "k": 3
     },
     {
      "hit_rate": {
-      "__fraction__": "43/413"
+      "__fraction__": "99/832"
      },
-     "hits": 86,
+     "hits": 99,
      "k": 5
     },
     {
      "hit_rate": {
-      "__fraction__": "69/413"
+      "__fraction__": "9/52"
      },
-     "hits": 138,
+     "hits": 144,
      "k": 10
     }
    ]
@@ -503,72 +500,71 @@
   "relay_plain": {
    "carried": [
     "GLM.Admission.ledger_refusals",
-    "GLM.Gen3.odd_block_dimensions",
-    "GLM.Harmony.pythagorean_comma_ne_one",
-    "GLM.Calibration.hSI"
+    "GLM.Calibration.hSI",
+    "GLM.Harmony.pythagorean_comma_eq"
    ],
    "fired": 21,
    "leader": [
     {
      "hit_rate": {
-      "__fraction__": "559/826"
+      "__fraction__": "291/416"
      },
-     "hits": 559,
+     "hits": 582,
      "k": 1
     },
     {
      "hit_rate": {
-      "__fraction__": "332/413"
+      "__fraction__": "669/832"
      },
-     "hits": 664,
+     "hits": 669,
      "k": 3
     },
     {
      "hit_rate": {
-      "__fraction__": "99/118"
+      "__fraction__": "27/32"
      },
-     "hits": 693,
+     "hits": 702,
      "k": 5
     },
     {
      "hit_rate": {
-      "__fraction__": "725/826"
+      "__fraction__": "743/832"
      },
-     "hits": 725,
+     "hits": 743,
      "k": 10
     }
    ],
    "lost": [
     "GLM.Gen3.even_part_dimension"
    ],
-   "queries": 826,
+   "queries": 832,
    "relay": [
     {
      "hit_rate": {
-      "__fraction__": "559/826"
+      "__fraction__": "291/416"
      },
-     "hits": 559,
+     "hits": 582,
      "k": 1
     },
     {
      "hit_rate": {
-      "__fraction__": "95/118"
+      "__fraction__": "335/416"
      },
-     "hits": 665,
+     "hits": 670,
      "k": 3
     },
     {
      "hit_rate": {
-      "__fraction__": "348/413"
+      "__fraction__": "11/13"
      },
-     "hits": 696,
+     "hits": 704,
      "k": 5
     },
     {
      "hit_rate": {
-      "__fraction__": "729/826"
+      "__fraction__": "373/416"
      },
-     "hits": 729,
+     "hits": 746,
      "k": 10
     }
    ]
@@ -669,16 +665,16 @@
  "corpus": {
   "by_kind": {
    "abbrev": 58,
-   "def": 1151,
+   "def": 1155,
    "example": 21,
    "inductive": 50,
    "instance": 27,
    "lemma": 207,
    "structure": 59,
-   "theorem": 2966
+   "theorem": 2999
   },
-  "declarations": 4539,
-  "files": 168,
+  "declarations": 4576,
+  "files": 171,
   "largest_file": "Gen3.lean",
   "largest_file_declarations": 98
  },
@@ -686,99 +682,99 @@
   "available": true,
   "bound_respected": true,
   "covering_radius": 4,
-  "declarations": 4539,
+  "declarations": 4576,
   "half_step": {
    "__fraction__": "9/2"
   },
   "lossless": true,
-  "moved_by_the_decoder": 4539,
+  "moved_by_the_decoder": 4576,
   "scale": 9,
   "scale_is_at_least_twice_radius": true,
   "worst_declaration": "GLM.DeepHoleLadder.Reading.cumulative_ge_right",
   "worst_observed_residual": 3
  },
- "lean_digest": "b8bb0d5d0fb3913ac1b076bbf7cc73fb7b2750834a207d5bacc5f5e760b0d1d3",
+ "lean_digest": "b887032f73c691c925603b1787e8603b6a6868dcd8853ef472a2d631b04cf13e",
  "retrieval": {
   "chance": [
    {
     "k": 1,
     "rate": {
-     "__fraction__": "3281/313122"
+     "__fraction__": "2003/237900"
     }
    },
    {
     "k": 3,
     "rate": {
-     "__fraction__": "4439829233/153428527512"
+     "__fraction__": "82900050257/3317420657200"
     }
    },
    {
     "k": 5,
     "rate": {
-     "__fraction__": "25287472869252749/552081218475187674"
+     "__fraction__": "142847867368645373/3466474357780390320"
     }
    },
    {
     "k": 10,
     "rate": {
-     "__fraction__": "540294383814539030566327665433/6339116039101711471866875927949"
+     "__fraction__": "140805702740690561270342533633/1753853141374228654544977839048"
     }
    }
   ],
-  "corpus": 4539,
+  "corpus": 4576,
   "declaration_rows": [
    {
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "32/207"
+       "__fraction__": "5/26"
       },
-      "hits": 32,
+      "hits": 40,
       "k": 1,
       "mrr": {
-       "__fraction__": "32/207"
+       "__fraction__": "5/26"
       },
       "precision": {
-       "__fraction__": "32/207"
+       "__fraction__": "5/26"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "55/207"
+       "__fraction__": "7/26"
       },
-      "hits": 55,
+      "hits": 56,
       "k": 3,
       "mrr": {
-       "__fraction__": "251/1242"
+       "__fraction__": "35/156"
       },
       "precision": {
-       "__fraction__": "80/621"
+       "__fraction__": "3/26"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "26/69"
+       "__fraction__": "17/52"
       },
-      "hits": 78,
+      "hits": 68,
       "k": 5,
       "mrr": {
-       "__fraction__": "2843/12420"
+       "__fraction__": "371/1560"
       },
       "precision": {
-       "__fraction__": "8/69"
+       "__fraction__": "99/1040"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "95/207"
+       "__fraction__": "21/52"
       },
-      "hits": 95,
+      "hits": 84,
       "k": 10,
       "mrr": {
-       "__fraction__": "20813/86940"
+       "__fraction__": "4993/20160"
       },
       "precision": {
-       "__fraction__": "28/345"
+       "__fraction__": "7/104"
       }
      }
     ],
@@ -788,54 +784,54 @@
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "32/207"
+       "__fraction__": "21/104"
       },
-      "hits": 32,
+      "hits": 42,
       "k": 1,
       "mrr": {
-       "__fraction__": "32/207"
+       "__fraction__": "21/104"
       },
       "precision": {
-       "__fraction__": "32/207"
+       "__fraction__": "21/104"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "62/207"
+       "__fraction__": "55/208"
       },
-      "hits": 62,
+      "hits": 55,
       "k": 3,
       "mrr": {
-       "__fraction__": "269/1242"
+       "__fraction__": "71/312"
       },
       "precision": {
-       "__fraction__": "89/621"
+       "__fraction__": "73/624"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "74/207"
+       "__fraction__": "71/208"
       },
-      "hits": 74,
+      "hits": 71,
       "k": 5,
       "mrr": {
-       "__fraction__": "1429/6210"
+       "__fraction__": "59/240"
       },
       "precision": {
-       "__fraction__": "13/115"
+       "__fraction__": "5/52"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "97/207"
+       "__fraction__": "87/208"
       },
-      "hits": 97,
+      "hits": 87,
       "k": 10,
       "mrr": {
-       "__fraction__": "25561/104328"
+       "__fraction__": "66907/262080"
       },
       "precision": {
-       "__fraction__": "173/2070"
+       "__fraction__": "11/160"
       }
      }
     ],
@@ -845,54 +841,54 @@
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "26/69"
+       "__fraction__": "9/26"
       },
-      "hits": 78,
+      "hits": 72,
       "k": 1,
       "mrr": {
-       "__fraction__": "26/69"
+       "__fraction__": "9/26"
       },
       "precision": {
-       "__fraction__": "26/69"
+       "__fraction__": "9/26"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "35/69"
+       "__fraction__": "51/104"
       },
-      "hits": 105,
+      "hits": 102,
       "k": 3,
       "mrr": {
-       "__fraction__": "539/1242"
+       "__fraction__": "509/1248"
       },
       "precision": {
-       "__fraction__": "176/621"
+       "__fraction__": "163/624"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "5/9"
+       "__fraction__": "59/104"
       },
-      "hits": 115,
+      "hits": 118,
       "k": 5,
       "mrr": {
-       "__fraction__": "5537/12420"
+       "__fraction__": "1063/2496"
       },
       "precision": {
-       "__fraction__": "76/345"
+       "__fraction__": "229/1040"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "131/207"
+       "__fraction__": "37/52"
       },
-      "hits": 131,
+      "hits": 148,
       "k": 10,
       "mrr": {
-       "__fraction__": "6613/14490"
+       "__fraction__": "12939/29120"
       },
       "precision": {
-       "__fraction__": "65/414"
+       "__fraction__": "343/2080"
       }
      }
     ],
@@ -902,54 +898,54 @@
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "15/23"
+       "__fraction__": "75/104"
       },
-      "hits": 135,
+      "hits": 150,
       "k": 1,
       "mrr": {
-       "__fraction__": "15/23"
+       "__fraction__": "75/104"
       },
       "precision": {
-       "__fraction__": "15/23"
+       "__fraction__": "75/104"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "55/69"
+       "__fraction__": "85/104"
       },
-      "hits": 165,
+      "hits": 170,
       "k": 3,
       "mrr": {
-       "__fraction__": "889/1242"
+       "__fraction__": "953/1248"
       },
       "precision": {
-       "__fraction__": "364/621"
+       "__fraction__": "379/624"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "169/207"
+       "__fraction__": "181/208"
       },
-      "hits": 169,
+      "hits": 181,
       "k": 5,
       "mrr": {
-       "__fraction__": "8941/12420"
+       "__fraction__": "4843/6240"
       },
       "precision": {
-       "__fraction__": "176/345"
+       "__fraction__": "29/52"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "59/69"
+       "__fraction__": "191/208"
       },
-      "hits": 177,
+      "hits": 191,
       "k": 10,
       "mrr": {
-       "__fraction__": "378101/521640"
+       "__fraction__": "410359/524160"
       },
       "precision": {
-       "__fraction__": "416/1035"
+       "__fraction__": "889/2080"
       }
      }
     ],
@@ -959,54 +955,54 @@
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "34/207"
+       "__fraction__": "9/52"
       },
-      "hits": 34,
+      "hits": 36,
       "k": 1,
       "mrr": {
-       "__fraction__": "34/207"
+       "__fraction__": "9/52"
       },
       "precision": {
-       "__fraction__": "34/207"
+       "__fraction__": "9/52"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "47/207"
+       "__fraction__": "49/208"
       },
-      "hits": 47,
+      "hits": 49,
       "k": 3,
       "mrr": {
-       "__fraction__": "79/414"
+       "__fraction__": "83/416"
       },
       "precision": {
-       "__fraction__": "28/207"
+       "__fraction__": "4/39"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "20/69"
+       "__fraction__": "61/208"
       },
-      "hits": 60,
+      "hits": 61,
       "k": 5,
       "mrr": {
-       "__fraction__": "853/4140"
+       "__fraction__": "17/80"
       },
       "precision": {
-       "__fraction__": "41/345"
+       "__fraction__": "7/80"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "8/23"
+       "__fraction__": "71/208"
       },
-      "hits": 72,
+      "hits": 71,
       "k": 10,
       "mrr": {
-       "__fraction__": "36997/173880"
+       "__fraction__": "114743/524160"
       },
       "precision": {
-       "__fraction__": "98/1035"
+       "__fraction__": "1/13"
       }
      }
     ],
@@ -1016,54 +1012,54 @@
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "1/69"
-      },
-      "hits": 3,
-      "k": 1,
-      "mrr": {
-       "__fraction__": "1/69"
-      },
-      "precision": {
-       "__fraction__": "1/69"
-      }
-     },
-     {
-      "hit_rate": {
-       "__fraction__": "4/207"
+       "__fraction__": "1/52"
       },
       "hits": 4,
+      "k": 1,
+      "mrr": {
+       "__fraction__": "1/52"
+      },
+      "precision": {
+       "__fraction__": "1/52"
+      }
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "3/104"
+      },
+      "hits": 6,
       "k": 3,
       "mrr": {
-       "__fraction__": "7/414"
+       "__fraction__": "29/1248"
       },
       "precision": {
-       "__fraction__": "4/621"
+       "__fraction__": "1/104"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "8/207"
+       "__fraction__": "3/52"
       },
-      "hits": 8,
+      "hits": 12,
       "k": 5,
       "mrr": {
-       "__fraction__": "29/1380"
+       "__fraction__": "371/12480"
       },
       "precision": {
-       "__fraction__": "1/115"
+       "__fraction__": "3/260"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "13/207"
+       "__fraction__": "15/208"
       },
-      "hits": 13,
+      "hits": 15,
       "k": 10,
       "mrr": {
-       "__fraction__": "1433/57960"
+       "__fraction__": "2797/87360"
       },
       "precision": {
-       "__fraction__": "1/115"
+       "__fraction__": "1/130"
       }
      }
     ],
@@ -1073,54 +1069,54 @@
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "2/207"
+       "__fraction__": "1/104"
       },
       "hits": 2,
       "k": 1,
       "mrr": {
-       "__fraction__": "2/207"
+       "__fraction__": "1/104"
       },
       "precision": {
-       "__fraction__": "2/207"
+       "__fraction__": "1/104"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "4/207"
+       "__fraction__": "1/52"
       },
       "hits": 4,
       "k": 3,
       "mrr": {
-       "__fraction__": "17/1242"
+       "__fraction__": "1/78"
       },
       "precision": {
-       "__fraction__": "2/207"
+       "__fraction__": "1/156"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "2/69"
+       "__fraction__": "7/208"
       },
-      "hits": 6,
+      "hits": 7,
       "k": 5,
       "mrr": {
-       "__fraction__": "197/12420"
+       "__fraction__": "101/6240"
       },
       "precision": {
-       "__fraction__": "8/1035"
+       "__fraction__": "7/1040"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "13/207"
+       "__fraction__": "21/208"
       },
-      "hits": 13,
+      "hits": 21,
       "k": 10,
       "mrr": {
-       "__fraction__": "127/6210"
+       "__fraction__": "6583/262080"
       },
       "precision": {
-       "__fraction__": "17/2070"
+       "__fraction__": "23/2080"
       }
      }
     ],
@@ -1130,54 +1126,54 @@
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "1/207"
+       "__fraction__": "1/104"
       },
-      "hits": 1,
+      "hits": 2,
       "k": 1,
       "mrr": {
-       "__fraction__": "1/207"
+       "__fraction__": "1/104"
       },
       "precision": {
-       "__fraction__": "1/207"
+       "__fraction__": "1/104"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "2/69"
+       "__fraction__": "5/208"
       },
-      "hits": 6,
+      "hits": 5,
       "k": 3,
       "mrr": {
-       "__fraction__": "17/1242"
+       "__fraction__": "5/312"
       },
       "precision": {
-       "__fraction__": "2/207"
+       "__fraction__": "5/624"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "10/207"
+       "__fraction__": "3/104"
       },
-      "hits": 10,
+      "hits": 6,
       "k": 5,
       "mrr": {
-       "__fraction__": "221/12420"
+       "__fraction__": "43/2496"
       },
       "precision": {
-       "__fraction__": "2/207"
+       "__fraction__": "3/520"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "14/207"
+       "__fraction__": "17/208"
       },
-      "hits": 14,
+      "hits": 17,
       "k": 10,
       "mrr": {
-       "__fraction__": "3599/173880"
+       "__fraction__": "1619/65520"
       },
       "precision": {
-       "__fraction__": "17/2070"
+       "__fraction__": "17/2080"
       }
      }
     ],
@@ -1185,60 +1181,60 @@
    }
   ],
   "goal_features_reproduced": 0,
-  "goal_queries": 101,
+  "goal_queries": 102,
   "goal_rows": [
    {
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "11/101"
+       "__fraction__": "7/51"
       },
-      "hits": 11,
+      "hits": 14,
       "k": 1,
       "mrr": {
-       "__fraction__": "11/101"
+       "__fraction__": "7/51"
       },
       "precision": {
-       "__fraction__": "11/101"
+       "__fraction__": "7/51"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "19/101"
+       "__fraction__": "11/51"
       },
-      "hits": 19,
+      "hits": 22,
       "k": 3,
       "mrr": {
-       "__fraction__": "14/101"
+       "__fraction__": "26/153"
       },
       "precision": {
-       "__fraction__": "7/101"
+       "__fraction__": "29/306"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "26/101"
+       "__fraction__": "13/51"
       },
       "hits": 26,
       "k": 5,
       "mrr": {
-       "__fraction__": "311/2020"
+       "__fraction__": "547/3060"
       },
       "precision": {
-       "__fraction__": "31/505"
+       "__fraction__": "4/51"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "29/101"
+       "__fraction__": "16/51"
       },
-      "hits": 29,
+      "hits": 32,
       "k": 10,
       "mrr": {
-       "__fraction__": "6703/42420"
+       "__fraction__": "48043/257040"
       },
       "precision": {
-       "__fraction__": "19/505"
+       "__fraction__": "31/510"
       }
      }
     ],
@@ -1248,54 +1244,54 @@
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "26/101"
+       "__fraction__": "4/17"
       },
-      "hits": 26,
+      "hits": 24,
       "k": 1,
       "mrr": {
-       "__fraction__": "26/101"
+       "__fraction__": "4/17"
       },
       "precision": {
-       "__fraction__": "26/101"
+       "__fraction__": "4/17"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "40/101"
+       "__fraction__": "35/102"
       },
-      "hits": 40,
+      "hits": 35,
       "k": 3,
       "mrr": {
-       "__fraction__": "193/606"
+       "__fraction__": "173/612"
       },
       "precision": {
-       "__fraction__": "62/303"
+       "__fraction__": "3/17"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "44/101"
+       "__fraction__": "15/34"
       },
-      "hits": 44,
+      "hits": 45,
       "k": 5,
       "mrr": {
-       "__fraction__": "496/1515"
+       "__fraction__": "467/1530"
       },
       "precision": {
-       "__fraction__": "79/505"
+       "__fraction__": "83/510"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "57/101"
+       "__fraction__": "1/2"
       },
-      "hits": 57,
+      "hits": 51,
       "k": 10,
       "mrr": {
-       "__fraction__": "1945/5656"
+       "__fraction__": "575/1836"
       },
       "precision": {
-       "__fraction__": "59/505"
+       "__fraction__": "9/85"
       }
      }
     ],
@@ -1305,54 +1301,54 @@
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "71/101"
+       "__fraction__": "2/3"
       },
-      "hits": 71,
+      "hits": 68,
       "k": 1,
       "mrr": {
-       "__fraction__": "71/101"
+       "__fraction__": "2/3"
       },
       "precision": {
-       "__fraction__": "71/101"
+       "__fraction__": "2/3"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "84/101"
+       "__fraction__": "40/51"
       },
-      "hits": 84,
+      "hits": 80,
       "k": 3,
       "mrr": {
-       "__fraction__": "77/101"
+       "__fraction__": "110/153"
       },
       "precision": {
-       "__fraction__": "191/303"
+       "__fraction__": "89/153"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "88/101"
+       "__fraction__": "41/51"
       },
-      "hits": 88,
+      "hits": 82,
       "k": 5,
       "mrr": {
-       "__fraction__": "1559/2020"
+       "__fraction__": "443/612"
       },
       "precision": {
-       "__fraction__": "57/101"
+       "__fraction__": "55/102"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "92/101"
+       "__fraction__": "5/6"
       },
-      "hits": 92,
+      "hits": 85,
       "k": 10,
       "mrr": {
-       "__fraction__": "98843/127260"
+       "__fraction__": "3119/4284"
       },
       "precision": {
-       "__fraction__": "469/1010"
+       "__fraction__": "109/255"
       }
      }
     ],
@@ -1362,54 +1358,54 @@
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "21/101"
+       "__fraction__": "13/102"
       },
-      "hits": 21,
+      "hits": 13,
       "k": 1,
       "mrr": {
-       "__fraction__": "21/101"
+       "__fraction__": "13/102"
       },
       "precision": {
-       "__fraction__": "21/101"
+       "__fraction__": "13/102"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "25/101"
+       "__fraction__": "10/51"
       },
-      "hits": 25,
+      "hits": 20,
       "k": 3,
       "mrr": {
-       "__fraction__": "45/202"
+       "__fraction__": "95/612"
       },
       "precision": {
-       "__fraction__": "43/303"
+       "__fraction__": "31/306"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "28/101"
+       "__fraction__": "13/51"
       },
-      "hits": 28,
+      "hits": 26,
       "k": 5,
       "mrr": {
-       "__fraction__": "116/505"
+       "__fraction__": "26/153"
       },
       "precision": {
-       "__fraction__": "12/101"
+       "__fraction__": "49/510"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "32/101"
+       "__fraction__": "31/102"
       },
-      "hits": 32,
+      "hits": 31,
       "k": 10,
       "mrr": {
-       "__fraction__": "7451/31815"
+       "__fraction__": "4531/25704"
       },
       "precision": {
-       "__fraction__": "97/1010"
+       "__fraction__": "8/85"
       }
      }
     ],
@@ -1432,41 +1428,41 @@
      },
      {
       "hit_rate": {
-       "__fraction__": "4/101"
+       "__fraction__": "1/34"
       },
-      "hits": 4,
+      "hits": 3,
       "k": 3,
       "mrr": {
-       "__fraction__": "3/202"
+       "__fraction__": "1/102"
       },
       "precision": {
-       "__fraction__": "4/303"
+       "__fraction__": "1/102"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "8/101"
+       "__fraction__": "5/102"
       },
-      "hits": 8,
+      "hits": 5,
       "k": 5,
       "mrr": {
-       "__fraction__": "47/2020"
+       "__fraction__": "29/2040"
       },
       "precision": {
-       "__fraction__": "9/505"
+       "__fraction__": "1/102"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "8/101"
+       "__fraction__": "7/102"
       },
-      "hits": 8,
+      "hits": 7,
       "k": 10,
       "mrr": {
-       "__fraction__": "47/2020"
+       "__fraction__": "301/18360"
       },
       "precision": {
-       "__fraction__": "9/1010"
+       "__fraction__": "7/1020"
       }
      }
     ],
@@ -1476,54 +1472,54 @@
     "cells": [
      {
       "hit_rate": {
-       "__fraction__": "1/101"
+       "__fraction__": "0/1"
       },
-      "hits": 1,
+      "hits": 0,
       "k": 1,
       "mrr": {
-       "__fraction__": "1/101"
+       "__fraction__": "0/1"
       },
       "precision": {
-       "__fraction__": "1/101"
+       "__fraction__": "0/1"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "1/101"
+       "__fraction__": "1/51"
       },
-      "hits": 1,
+      "hits": 2,
       "k": 3,
       "mrr": {
-       "__fraction__": "1/101"
+       "__fraction__": "5/612"
       },
       "precision": {
-       "__fraction__": "1/303"
+       "__fraction__": "1/153"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "3/101"
+       "__fraction__": "2/51"
       },
-      "hits": 3,
+      "hits": 4,
       "k": 5,
       "mrr": {
-       "__fraction__": "29/2020"
+       "__fraction__": "77/6120"
       },
       "precision": {
-       "__fraction__": "3/505"
+       "__fraction__": "2/255"
       }
      },
      {
       "hit_rate": {
-       "__fraction__": "5/101"
+       "__fraction__": "5/51"
       },
-      "hits": 5,
+      "hits": 10,
       "k": 10,
       "mrr": {
-       "__fraction__": "209/12120"
+       "__fraction__": "2693/128520"
       },
       "precision": {
-       "__fraction__": "1/202"
+       "__fraction__": "1/102"
       }
      }
     ],
@@ -1536,15 +1532,15 @@
    "covering_radius": 4,
    "feature_radius": 2,
    "mean_feature_close": {
-    "__fraction__": "370/17"
+    "__fraction__": "1151/51"
    },
    "mean_shortlist": {
-    "__fraction__": "1775/17"
+    "__fraction__": "96/1"
    },
    "mean_shortlist_fraction": {
-    "__fraction__": "1775/77163"
+    "__fraction__": "3/143"
    },
-   "pairs_checked": 231438,
+   "pairs_checked": 233325,
    "queries": 51,
    "scale": 9,
    "violations": 0,
@@ -1553,75 +1549,75 @@
   "hybrid": {
    "any_shortlist_beats_text": false,
    "k": 5,
-   "queries": 207,
+   "queries": 208,
    "rows": [
     {
      "fraction_of_corpus": {
-      "__fraction__": "50/4539"
+      "__fraction__": "25/2288"
      },
      "hit_rate": {
-      "__fraction__": "37/69"
+      "__fraction__": "53/104"
      },
      "precision": {
-      "__fraction__": "41/207"
+      "__fraction__": "21/104"
      },
      "shortlist": 50
     },
     {
      "fraction_of_corpus": {
-      "__fraction__": "100/4539"
+      "__fraction__": "25/1144"
      },
      "hit_rate": {
-      "__fraction__": "118/207"
+      "__fraction__": "123/208"
      },
      "precision": {
-      "__fraction__": "79/345"
+      "__fraction__": "51/208"
      },
      "shortlist": 100
     },
     {
      "fraction_of_corpus": {
-      "__fraction__": "200/4539"
+      "__fraction__": "25/572"
      },
      "hit_rate": {
-      "__fraction__": "134/207"
+      "__fraction__": "11/16"
      },
      "precision": {
-      "__fraction__": "286/1035"
+      "__fraction__": "153/520"
      },
      "shortlist": 200
     },
     {
      "fraction_of_corpus": {
-      "__fraction__": "400/4539"
+      "__fraction__": "25/286"
      },
      "hit_rate": {
-      "__fraction__": "16/23"
+      "__fraction__": "19/26"
      },
      "precision": {
-      "__fraction__": "112/345"
+      "__fraction__": "177/520"
      },
      "shortlist": 400
     },
     {
      "fraction_of_corpus": {
-      "__fraction__": "800/4539"
+      "__fraction__": "25/143"
      },
      "hit_rate": {
-      "__fraction__": "152/207"
+      "__fraction__": "81/104"
      },
      "precision": {
-      "__fraction__": "398/1035"
+      "__fraction__": "413/1040"
      },
      "shortlist": 800
     }
    ],
    "text_alone": {
     "hit_rate": {
-     "__fraction__": "169/207"
+     "__fraction__": "181/208"
     },
     "precision": {
-     "__fraction__": "176/345"
+     "__fraction__": "29/52"
     }
    }
   },
@@ -1633,11 +1629,11 @@
    10
   ],
   "mean_relatives": {
-   "__fraction__": "3281/69"
+   "__fraction__": "2003/52"
   },
-  "queries": 207,
+  "queries": 208,
   "times_chance": {
-   "__fraction__": "208030604063114196/25287472869252749"
+   "__fraction__": "1133270463120512220/142847867368645373"
   },
   "verdict": {
    "address_beats_chance": true,
@@ -1655,10 +1651,10 @@
   }
  },
  "round_trip": {
-  "checked": 4539,
+  "checked": 4576,
   "coordinate_errors": 0,
-  "coordinates_checked": 108936,
-  "exact": 4539,
+  "coordinates_checked": 109824,
+  "exact": 4576,
   "exact_rate": {
    "__fraction__": "1/1"
   },
@@ -1753,12 +1749,12 @@
   "feature": {
    "injectivity": {
     "collision_classes": 325,
-    "declarations": 4539,
+    "declarations": 4576,
     "declarations_conflated": 810,
-    "distinct_addresses": 4054,
-    "distinct_feature_vectors": 4054,
+    "distinct_addresses": 4091,
+    "distinct_feature_vectors": 4091,
     "distinct_rate": {
-     "__fraction__": "4054/4539"
+     "__fraction__": "4091/4576"
     },
     "injective": false,
     "largest_class": [
@@ -1783,46 +1779,46 @@
     "quantisation_adds_no_conflation": true
    },
    "neighbours": {
-    "declarations": 4539,
+    "declarations": 4576,
     "linked_chance": {
-     "__fraction__": "14893/10298991"
+     "__fraction__": "1363/951600"
     },
-    "linked_nearest": 137,
+    "linked_nearest": 143,
     "linked_rate": {
-     "__fraction__": "137/4539"
+     "__fraction__": "1/32"
     },
     "mean_tie_size": {
-     "__fraction__": "7696/4539"
+     "__fraction__": "7783/4576"
     },
     "same_file_chance": {
-     "__fraction__": "80726/10298991"
+     "__fraction__": "5059/654225"
     },
-    "same_file_nearest": 821,
+    "same_file_nearest": 829,
     "same_file_rate": {
-     "__fraction__": "821/4539"
+     "__fraction__": "829/4576"
     }
    },
    "pairs": {
     "cross_file_mean_squared_distance": {
-     "__fraction__": "74173249136/10218265"
+     "__fraction__": "4749120273/649166"
     },
-    "cross_file_pairs": 10218265,
+    "cross_file_pairs": 10386656,
     "ratio": {
-     "__fraction__": "313423912482885/374231856859546"
+     "__fraction__": "20002041770396/24025799461107"
     },
     "same_file_mean_squared_distance": {
-     "__fraction__": "245383272/40363"
+     "__fraction__": "30811906/5059"
     },
-    "same_file_pairs": 80726
+    "same_file_pairs": 80944
    }
   },
   "hash_control": {
    "injectivity": {
     "collision_classes": 0,
-    "declarations": 4539,
+    "declarations": 4576,
     "declarations_conflated": 0,
-    "distinct_addresses": 4539,
-    "distinct_feature_vectors": 4054,
+    "distinct_addresses": 4576,
+    "distinct_feature_vectors": 4091,
     "distinct_rate": {
      "__fraction__": "1/1"
     },
@@ -1834,103 +1830,103 @@
     "quantisation_adds_no_conflation": false
    },
    "neighbours": {
-    "declarations": 4539,
+    "declarations": 4576,
     "linked_chance": {
-     "__fraction__": "14893/10298991"
+     "__fraction__": "1363/951600"
     },
     "linked_nearest": 6,
     "linked_rate": {
-     "__fraction__": "2/1513"
+     "__fraction__": "3/2288"
     },
     "mean_tie_size": {
-     "__fraction__": "1519/1513"
+     "__fraction__": "2297/2288"
     },
     "same_file_chance": {
-     "__fraction__": "80726/10298991"
+     "__fraction__": "5059/654225"
     },
     "same_file_nearest": 35,
     "same_file_rate": {
-     "__fraction__": "35/4539"
+     "__fraction__": "35/4576"
     }
    },
    "pairs": {
     "cross_file_mean_squared_distance": {
-     "__fraction__": "552850917872/10218265"
+     "__fraction__": "35122892863/649166"
     },
-    "cross_file_pairs": 10218265,
+    "cross_file_pairs": 10386656,
     "ratio": {
-     "__fraction__": "2796296444605405/2789340199758442"
+     "__fraction__": "178127655290256/177686714993917"
     },
     "same_file_mean_squared_distance": {
-     "__fraction__": "2189253416/40363"
+     "__fraction__": "274394616/5059"
     },
-    "same_file_pairs": 80726
+    "same_file_pairs": 80944
    }
   },
   "shuffled": {
    "injectivity": {
     "collision_classes": 325,
-    "declarations": 4539,
+    "declarations": 4576,
     "declarations_conflated": 810,
-    "distinct_addresses": 4054,
-    "distinct_feature_vectors": 4054,
+    "distinct_addresses": 4091,
+    "distinct_feature_vectors": 4091,
     "distinct_rate": {
-     "__fraction__": "4054/4539"
+     "__fraction__": "4091/4576"
     },
     "injective": false,
     "largest_class": [
-     "GLM.Anonymous._example_241",
-     "GLM.Info.firstOrder_double_sum_half",
-     "GLM.ThreeCube.heavyWord",
-     "GLM.DeepHoleFailure.per_type_correct",
-     "GLM.Info.addCarrier_vacuum_half",
-     "GLM.Gen3.bform_injective",
-     "GLM.Harmony.pythagorean_comma_ne_one",
-     "GLM.Info.Layer",
-     "GLM.Info.Stack.escalate",
-     "GLM.Packing.parityExt",
-     "GLM.PythonSpeech.tofRA",
-     "GLM.ReverseTCTTwo.render_injective",
-     "GLM.Reversible.flipCount_allones",
-     "GLM.SeedRoles.trace_conj_eq",
-     "GLM.StepCost.wordLen_le",
-     "GLM.Triad.tgic_counts"
+     "GLM.SubstrateCognition.ker_trivial_of_rank",
+     "GLM.ConnectedMachine.route",
+     "GLM.Golay.bitReverse",
+     "GLM.Extraspecial.QG.sq_eq_one_iff",
+     "GLM.Foundations.mathieu_order_arithmetic",
+     "GLM.Golay24.ties_pairwise_disjoint_diffs",
+     "GLM.Heisenberg.create_apply",
+     "GLM.HoleBounds.kth_append_eq_high",
+     "GLM.Lightspeed.refIndex_self",
+     "GLM.Golay.permute",
+     "GLM.QuestionSetBMatrix.score",
+     "GLM.Info.avgVec_periodic",
+     "GLM.Semantics.notation_split_not_semantic",
+     "GLM.Semantics.maxFormulaSlots",
+     "GLM.Shell.shState",
+     "GLM.SymbolicParameters.poly_eq_of_agree"
     ],
     "largest_class_size": 16,
     "quantisation_adds_no_conflation": true
    },
    "neighbours": {
-    "declarations": 4539,
+    "declarations": 4576,
     "linked_chance": {
-     "__fraction__": "14893/10298991"
+     "__fraction__": "1363/951600"
     },
-    "linked_nearest": 7,
+    "linked_nearest": 4,
     "linked_rate": {
-     "__fraction__": "7/4539"
+     "__fraction__": "1/1144"
     },
     "mean_tie_size": {
-     "__fraction__": "7696/4539"
+     "__fraction__": "7783/4576"
     },
     "same_file_chance": {
-     "__fraction__": "80726/10298991"
+     "__fraction__": "5059/654225"
     },
-    "same_file_nearest": 26,
+    "same_file_nearest": 25,
     "same_file_rate": {
-     "__fraction__": "26/4539"
+     "__fraction__": "25/4576"
     }
    },
    "pairs": {
     "cross_file_mean_squared_distance": {
-     "__fraction__": "74083753136/10218265"
+     "__fraction__": "4743398927/649166"
     },
-    "cross_file_pairs": 10218265,
+    "cross_file_pairs": 10386656,
     "ratio": {
-     "__fraction__": "370579777760385/373780315978546"
+     "__fraction__": "23716145067832/23996855171693"
     },
     "same_file_mean_squared_distance": {
-     "__fraction__": "290131272/40363"
+     "__fraction__": "36533252/5059"
     },
-    "same_file_pairs": 80726
+    "same_file_pairs": 80944
    }
   }
  },
@@ -1943,218 +1939,221 @@
      "leader": [
       {
        "hit_rate": {
-        "__fraction__": "559/826"
+        "__fraction__": "291/416"
        },
-       "hits": 559,
+       "hits": 582,
        "k": 1
       },
       {
        "hit_rate": {
-        "__fraction__": "332/413"
+        "__fraction__": "669/832"
        },
-       "hits": 664,
+       "hits": 669,
        "k": 3
       },
       {
        "hit_rate": {
-        "__fraction__": "99/118"
+        "__fraction__": "27/32"
        },
-       "hits": 693,
+       "hits": 702,
        "k": 5
       },
       {
        "hit_rate": {
-        "__fraction__": "725/826"
+        "__fraction__": "743/832"
        },
-       "hits": 725,
+       "hits": 743,
        "k": 10
       }
      ],
      "leader_precision": {
-      "__fraction__": "32/59"
+      "__fraction__": "2283/4160"
      },
      "lost": [
       "GLM.Gen3.even_part_dimension"
      ],
-     "queries": 826,
+     "queries": 832,
      "relay": [
       {
        "hit_rate": {
-        "__fraction__": "559/826"
+        "__fraction__": "291/416"
        },
-       "hits": 559,
+       "hits": 582,
        "k": 1
       },
       {
        "hit_rate": {
-        "__fraction__": "332/413"
+        "__fraction__": "669/832"
        },
-       "hits": 664,
+       "hits": 669,
        "k": 3
       },
       {
        "hit_rate": {
-        "__fraction__": "346/413"
+        "__fraction__": "701/832"
        },
-       "hits": 692,
+       "hits": 701,
        "k": 5
       },
       {
        "hit_rate": {
-        "__fraction__": "725/826"
+        "__fraction__": "743/832"
        },
-       "hits": 725,
+       "hits": 743,
        "k": 10
       }
      ],
      "relay_precision": {
-      "__fraction__": "2239/4130"
+      "__fraction__": "1141/2080"
      }
     },
     "holdout": {
-     "carried": [],
-     "fired": 10,
+     "carried": [
+      "GLM.FitCapacity.wobble",
+      "GLM.QuestionSetBAnswers.huffman_kraft"
+     ],
+     "fired": 11,
      "leader": [
       {
        "hit_rate": {
-        "__fraction__": "40/59"
+        "__fraction__": "37/52"
        },
-       "hits": 280,
+       "hits": 296,
        "k": 1
       },
       {
        "hit_rate": {
-        "__fraction__": "332/413"
+        "__fraction__": "335/416"
        },
-       "hits": 332,
+       "hits": 335,
        "k": 3
       },
       {
        "hit_rate": {
-        "__fraction__": "50/59"
-       },
-       "hits": 350,
-       "k": 5
-      },
-      {
-       "hit_rate": {
-        "__fraction__": "368/413"
-       },
-       "hits": 368,
-       "k": 10
-      }
-     ],
-     "leader_precision": {
-      "__fraction__": "1132/2065"
-     },
-     "lost": [
-      "GLM.Gen3.even_part_dimension"
-     ],
-     "queries": 413,
-     "relay": [
-      {
-       "hit_rate": {
-        "__fraction__": "40/59"
-       },
-       "hits": 280,
-       "k": 1
-      },
-      {
-       "hit_rate": {
-        "__fraction__": "332/413"
-       },
-       "hits": 332,
-       "k": 3
-      },
-      {
-       "hit_rate": {
-        "__fraction__": "349/413"
+        "__fraction__": "349/416"
        },
        "hits": 349,
        "k": 5
       },
       {
        "hit_rate": {
-        "__fraction__": "368/413"
+        "__fraction__": "369/416"
        },
-       "hits": 368,
-       "k": 10
-      }
-     ],
-     "relay_precision": {
-      "__fraction__": "1131/2065"
-     }
-    },
-    "tuning": {
-     "carried": [],
-     "fired": 11,
-     "leader": [
-      {
-       "hit_rate": {
-        "__fraction__": "279/413"
-       },
-       "hits": 279,
-       "k": 1
-      },
-      {
-       "hit_rate": {
-        "__fraction__": "332/413"
-       },
-       "hits": 332,
-       "k": 3
-      },
-      {
-       "hit_rate": {
-        "__fraction__": "49/59"
-       },
-       "hits": 343,
-       "k": 5
-      },
-      {
-       "hit_rate": {
-        "__fraction__": "51/59"
-       },
-       "hits": 357,
+       "hits": 369,
        "k": 10
       }
      ],
      "leader_precision": {
-      "__fraction__": "1108/2065"
+      "__fraction__": "577/1040"
      },
      "lost": [],
-     "queries": 413,
+     "queries": 416,
      "relay": [
       {
        "hit_rate": {
-        "__fraction__": "279/413"
+        "__fraction__": "37/52"
        },
-       "hits": 279,
+       "hits": 296,
        "k": 1
       },
       {
        "hit_rate": {
-        "__fraction__": "332/413"
+        "__fraction__": "21/26"
        },
-       "hits": 332,
+       "hits": 336,
        "k": 3
       },
       {
        "hit_rate": {
-        "__fraction__": "49/59"
+        "__fraction__": "27/32"
        },
-       "hits": 343,
+       "hits": 351,
        "k": 5
       },
       {
        "hit_rate": {
-        "__fraction__": "51/59"
+        "__fraction__": "371/416"
        },
-       "hits": 357,
+       "hits": 371,
        "k": 10
       }
      ],
      "relay_precision": {
-      "__fraction__": "1108/2065"
+      "__fraction__": "289/520"
+     }
+    },
+    "tuning": {
+     "carried": [],
+     "fired": 10,
+     "leader": [
+      {
+       "hit_rate": {
+        "__fraction__": "11/16"
+       },
+       "hits": 286,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "167/208"
+       },
+       "hits": 334,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "353/416"
+       },
+       "hits": 353,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "187/208"
+       },
+       "hits": 374,
+       "k": 10
+      }
+     ],
+     "leader_precision": {
+      "__fraction__": "1129/2080"
+     },
+     "lost": [
+      "GLM.Gen3.even_part_dimension"
+     ],
+     "queries": 416,
+     "relay": [
+      {
+       "hit_rate": {
+        "__fraction__": "11/16"
+       },
+       "hits": 286,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "167/208"
+       },
+       "hits": 334,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "11/13"
+       },
+       "hits": 352,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "187/208"
+       },
+       "hits": 374,
+       "k": 10
+      }
+     ],
+     "relay_precision": {
+      "__fraction__": "141/260"
      }
     }
    },
@@ -2165,219 +2164,219 @@
      "leader": [
       {
        "hit_rate": {
-        "__fraction__": "559/826"
+        "__fraction__": "291/416"
        },
-       "hits": 559,
+       "hits": 582,
        "k": 1
       },
       {
        "hit_rate": {
-        "__fraction__": "332/413"
+        "__fraction__": "669/832"
        },
-       "hits": 664,
+       "hits": 669,
        "k": 3
       },
       {
        "hit_rate": {
-        "__fraction__": "99/118"
+        "__fraction__": "27/32"
        },
-       "hits": 693,
+       "hits": 702,
        "k": 5
       },
       {
        "hit_rate": {
-        "__fraction__": "725/826"
+        "__fraction__": "743/832"
        },
-       "hits": 725,
+       "hits": 743,
        "k": 10
       }
      ],
      "leader_precision": {
-      "__fraction__": "32/59"
+      "__fraction__": "2283/4160"
      },
      "lost": [],
-     "queries": 826,
+     "queries": 832,
      "relay": [
       {
        "hit_rate": {
-        "__fraction__": "559/826"
+        "__fraction__": "291/416"
        },
-       "hits": 559,
+       "hits": 582,
        "k": 1
       },
       {
        "hit_rate": {
-        "__fraction__": "332/413"
+        "__fraction__": "669/832"
        },
-       "hits": 664,
+       "hits": 669,
        "k": 3
       },
       {
        "hit_rate": {
-        "__fraction__": "99/118"
+        "__fraction__": "27/32"
        },
-       "hits": 693,
+       "hits": 702,
        "k": 5
       },
       {
        "hit_rate": {
-        "__fraction__": "725/826"
+        "__fraction__": "743/832"
        },
-       "hits": 725,
+       "hits": 743,
        "k": 10
       }
      ],
      "relay_precision": {
-      "__fraction__": "32/59"
+      "__fraction__": "2283/4160"
      }
     },
     "holdout": {
-     "carried": [],
-     "fired": 10,
-     "leader": [
-      {
-       "hit_rate": {
-        "__fraction__": "40/59"
-       },
-       "hits": 280,
-       "k": 1
-      },
-      {
-       "hit_rate": {
-        "__fraction__": "332/413"
-       },
-       "hits": 332,
-       "k": 3
-      },
-      {
-       "hit_rate": {
-        "__fraction__": "50/59"
-       },
-       "hits": 350,
-       "k": 5
-      },
-      {
-       "hit_rate": {
-        "__fraction__": "368/413"
-       },
-       "hits": 368,
-       "k": 10
-      }
-     ],
-     "leader_precision": {
-      "__fraction__": "1132/2065"
-     },
-     "lost": [],
-     "queries": 413,
-     "relay": [
-      {
-       "hit_rate": {
-        "__fraction__": "40/59"
-       },
-       "hits": 280,
-       "k": 1
-      },
-      {
-       "hit_rate": {
-        "__fraction__": "332/413"
-       },
-       "hits": 332,
-       "k": 3
-      },
-      {
-       "hit_rate": {
-        "__fraction__": "50/59"
-       },
-       "hits": 350,
-       "k": 5
-      },
-      {
-       "hit_rate": {
-        "__fraction__": "368/413"
-       },
-       "hits": 368,
-       "k": 10
-      }
-     ],
-     "relay_precision": {
-      "__fraction__": "1132/2065"
-     }
-    },
-    "tuning": {
      "carried": [],
      "fired": 11,
      "leader": [
       {
        "hit_rate": {
-        "__fraction__": "279/413"
+        "__fraction__": "37/52"
        },
-       "hits": 279,
+       "hits": 296,
        "k": 1
       },
       {
        "hit_rate": {
-        "__fraction__": "332/413"
+        "__fraction__": "335/416"
        },
-       "hits": 332,
+       "hits": 335,
        "k": 3
       },
       {
        "hit_rate": {
-        "__fraction__": "49/59"
+        "__fraction__": "349/416"
        },
-       "hits": 343,
+       "hits": 349,
        "k": 5
       },
       {
        "hit_rate": {
-        "__fraction__": "51/59"
+        "__fraction__": "369/416"
        },
-       "hits": 357,
+       "hits": 369,
        "k": 10
       }
      ],
      "leader_precision": {
-      "__fraction__": "1108/2065"
+      "__fraction__": "577/1040"
      },
      "lost": [],
-     "queries": 413,
+     "queries": 416,
      "relay": [
       {
        "hit_rate": {
-        "__fraction__": "279/413"
+        "__fraction__": "37/52"
        },
-       "hits": 279,
+       "hits": 296,
        "k": 1
       },
       {
        "hit_rate": {
-        "__fraction__": "332/413"
+        "__fraction__": "335/416"
        },
-       "hits": 332,
+       "hits": 335,
        "k": 3
       },
       {
        "hit_rate": {
-        "__fraction__": "49/59"
+        "__fraction__": "349/416"
        },
-       "hits": 343,
+       "hits": 349,
        "k": 5
       },
       {
        "hit_rate": {
-        "__fraction__": "51/59"
+        "__fraction__": "369/416"
        },
-       "hits": 357,
+       "hits": 369,
        "k": 10
       }
      ],
      "relay_precision": {
-      "__fraction__": "1108/2065"
+      "__fraction__": "577/1040"
+     }
+    },
+    "tuning": {
+     "carried": [],
+     "fired": 10,
+     "leader": [
+      {
+       "hit_rate": {
+        "__fraction__": "11/16"
+       },
+       "hits": 286,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "167/208"
+       },
+       "hits": 334,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "353/416"
+       },
+       "hits": 353,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "187/208"
+       },
+       "hits": 374,
+       "k": 10
+      }
+     ],
+     "leader_precision": {
+      "__fraction__": "1129/2080"
+     },
+     "lost": [],
+     "queries": 416,
+     "relay": [
+      {
+       "hit_rate": {
+        "__fraction__": "11/16"
+       },
+       "hits": 286,
+       "k": 1
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "167/208"
+       },
+       "hits": 334,
+       "k": 3
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "353/416"
+       },
+       "hits": 353,
+       "k": 5
+      },
+      {
+       "hit_rate": {
+        "__fraction__": "187/208"
+       },
+       "hits": 374,
+       "k": 10
+      }
+     ],
+     "relay_precision": {
+      "__fraction__": "1129/2080"
      }
     }
    }
   },
-  "corpus": 4539,
+  "corpus": 4576,
   "gate": {
    "__fraction__": "1/10"
   },
@@ -2405,85 +2404,161 @@
    "goal": {
     "carried": [
      "GLM.Admission.ledger_refusals",
-     "GLM.Gen3.odd_block_dimensions",
-     "GLM.Harmony.pythagorean_comma_ne_one",
-     "GLM.Calibration.hSI"
+     "GLM.Calibration.hSI",
+     "GLM.Harmony.pythagorean_comma_eq"
     ],
     "fired": 21,
     "leader": [
      {
       "hit_rate": {
-       "__fraction__": "559/826"
+       "__fraction__": "291/416"
       },
-      "hits": 559,
+      "hits": 582,
       "k": 1
      },
      {
       "hit_rate": {
-       "__fraction__": "332/413"
+       "__fraction__": "669/832"
       },
-      "hits": 664,
+      "hits": 669,
       "k": 3
      },
      {
       "hit_rate": {
-       "__fraction__": "99/118"
+       "__fraction__": "27/32"
       },
-      "hits": 693,
+      "hits": 702,
       "k": 5
      },
      {
       "hit_rate": {
-       "__fraction__": "725/826"
+       "__fraction__": "743/832"
       },
-      "hits": 725,
+      "hits": 743,
       "k": 10
      }
     ],
     "leader_precision": {
-     "__fraction__": "32/59"
+     "__fraction__": "2283/4160"
     },
     "lost": [
      "GLM.Gen3.even_part_dimension"
     ],
-    "queries": 826,
+    "queries": 832,
     "relay": [
      {
       "hit_rate": {
-       "__fraction__": "559/826"
+       "__fraction__": "291/416"
       },
-      "hits": 559,
+      "hits": 582,
       "k": 1
      },
      {
       "hit_rate": {
-       "__fraction__": "95/118"
+       "__fraction__": "335/416"
       },
-      "hits": 665,
+      "hits": 670,
       "k": 3
      },
      {
       "hit_rate": {
-       "__fraction__": "348/413"
+       "__fraction__": "11/13"
       },
-      "hits": 696,
+      "hits": 704,
       "k": 5
      },
      {
       "hit_rate": {
-       "__fraction__": "729/826"
+       "__fraction__": "373/416"
       },
-      "hits": 729,
+      "hits": 746,
       "k": 10
      }
     ],
     "relay_precision": {
-     "__fraction__": "1122/2065"
+     "__fraction__": "1143/2080"
     }
    },
    "holdout": {
     "carried": [
      "GLM.Calibration.hSI",
+     "GLM.Harmony.pythagorean_comma_eq",
+     "GLM.QuestionSetBAnswers.huffman_kraft"
+    ],
+    "fired": 11,
+    "leader": [
+     {
+      "hit_rate": {
+       "__fraction__": "37/52"
+      },
+      "hits": 296,
+      "k": 1
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "335/416"
+      },
+      "hits": 335,
+      "k": 3
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "349/416"
+      },
+      "hits": 349,
+      "k": 5
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "369/416"
+      },
+      "hits": 369,
+      "k": 10
+     }
+    ],
+    "leader_precision": {
+     "__fraction__": "577/1040"
+    },
+    "lost": [],
+    "queries": 416,
+    "relay": [
+     {
+      "hit_rate": {
+       "__fraction__": "37/52"
+      },
+      "hits": 296,
+      "k": 1
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "335/416"
+      },
+      "hits": 335,
+      "k": 3
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "11/13"
+      },
+      "hits": 352,
+      "k": 5
+     },
+     {
+      "hit_rate": {
+       "__fraction__": "93/104"
+      },
+      "hits": 372,
+      "k": 10
+     }
+    ],
+    "relay_precision": {
+     "__fraction__": "89/160"
+    }
+   },
+   "tuning": {
+    "carried": [
+     "GLM.Admission.ledger_refusals",
+     "GLM.AlignmentPoints.vOverC",
      "GLM.FitCapacity.protonRatioTarget",
      "GLM.Gen3.constant_minus_coherent",
      "GLM.Packing.radius_of_seven"
@@ -2492,150 +2567,70 @@
     "leader": [
      {
       "hit_rate": {
-       "__fraction__": "40/59"
+       "__fraction__": "11/16"
       },
-      "hits": 280,
+      "hits": 286,
       "k": 1
      },
      {
       "hit_rate": {
-       "__fraction__": "332/413"
+       "__fraction__": "167/208"
       },
-      "hits": 332,
+      "hits": 334,
       "k": 3
      },
      {
       "hit_rate": {
-       "__fraction__": "50/59"
+       "__fraction__": "353/416"
       },
-      "hits": 350,
+      "hits": 353,
       "k": 5
      },
      {
       "hit_rate": {
-       "__fraction__": "368/413"
+       "__fraction__": "187/208"
       },
-      "hits": 368,
+      "hits": 374,
       "k": 10
      }
     ],
     "leader_precision": {
-     "__fraction__": "1132/2065"
+     "__fraction__": "1129/2080"
     },
     "lost": [],
-    "queries": 413,
+    "queries": 416,
     "relay": [
      {
       "hit_rate": {
-       "__fraction__": "40/59"
+       "__fraction__": "11/16"
       },
-      "hits": 280,
+      "hits": 286,
       "k": 1
      },
      {
       "hit_rate": {
-       "__fraction__": "333/413"
+       "__fraction__": "21/26"
       },
-      "hits": 333,
+      "hits": 336,
       "k": 3
      },
      {
       "hit_rate": {
-       "__fraction__": "6/7"
+       "__fraction__": "179/208"
       },
-      "hits": 354,
+      "hits": 358,
       "k": 5
      },
      {
       "hit_rate": {
-       "__fraction__": "372/413"
+       "__fraction__": "379/416"
       },
-      "hits": 372,
+      "hits": 379,
       "k": 10
      }
     ],
     "relay_precision": {
-     "__fraction__": "1138/2065"
-    }
-   },
-   "tuning": {
-    "carried": [
-     "GLM.Admission.ledger_refusals",
-     "GLM.AlignmentPoints.vOverC",
-     "GLM.FitCapacity.leak",
-     "GLM.Gen3.odd_block_dimensions",
-     "GLM.Harmony.pythagorean_comma_ne_one",
-     "GLM.QuestionSetBAnswers.huffman_length",
-     "GLM.RegisterWorld.nested_ledger"
-    ],
-    "fired": 11,
-    "leader": [
-     {
-      "hit_rate": {
-       "__fraction__": "279/413"
-      },
-      "hits": 279,
-      "k": 1
-     },
-     {
-      "hit_rate": {
-       "__fraction__": "332/413"
-      },
-      "hits": 332,
-      "k": 3
-     },
-     {
-      "hit_rate": {
-       "__fraction__": "49/59"
-      },
-      "hits": 343,
-      "k": 5
-     },
-     {
-      "hit_rate": {
-       "__fraction__": "51/59"
-      },
-      "hits": 357,
-      "k": 10
-     }
-    ],
-    "leader_precision": {
-     "__fraction__": "1108/2065"
-    },
-    "lost": [],
-    "queries": 413,
-    "relay": [
-     {
-      "hit_rate": {
-       "__fraction__": "279/413"
-      },
-      "hits": 279,
-      "k": 1
-     },
-     {
-      "hit_rate": {
-       "__fraction__": "335/413"
-      },
-      "hits": 335,
-      "k": 3
-     },
-     {
-      "hit_rate": {
-       "__fraction__": "50/59"
-      },
-      "hits": 350,
-      "k": 5
-     },
-     {
-      "hit_rate": {
-       "__fraction__": "52/59"
-      },
-      "hits": 364,
-      "k": 10
-     }
-    ],
-    "relay_precision": {
-     "__fraction__": "1116/2065"
+     "__fraction__": "1137/2080"
     }
    }
   },
@@ -2647,95 +2642,95 @@
      "__fraction__": "0/1"
     },
     "hit_at_5": {
-     "__fraction__": "49/59"
+     "__fraction__": "353/416"
     },
     "lost": 0,
     "precision_at_5": {
-     "__fraction__": "1108/2065"
+     "__fraction__": "1129/2080"
     }
    },
    {
-    "carried": 7,
-    "fired": 11,
+    "carried": 5,
+    "fired": 10,
     "gate": {
      "__fraction__": "1/20"
     },
     "hit_at_5": {
-     "__fraction__": "50/59"
+     "__fraction__": "179/208"
     },
     "lost": 0,
     "precision_at_5": {
-     "__fraction__": "1116/2065"
+     "__fraction__": "1137/2080"
     }
    },
    {
-    "carried": 7,
-    "fired": 11,
+    "carried": 5,
+    "fired": 10,
     "gate": {
      "__fraction__": "1/10"
     },
     "hit_at_5": {
-     "__fraction__": "50/59"
+     "__fraction__": "179/208"
     },
     "lost": 0,
     "precision_at_5": {
-     "__fraction__": "1116/2065"
+     "__fraction__": "1137/2080"
     }
    },
    {
-    "carried": 7,
+    "carried": 5,
     "fired": 11,
     "gate": {
      "__fraction__": "3/20"
     },
     "hit_at_5": {
-     "__fraction__": "50/59"
+     "__fraction__": "179/208"
     },
     "lost": 0,
     "precision_at_5": {
-     "__fraction__": "1116/2065"
+     "__fraction__": "567/1040"
     }
    },
    {
-    "carried": 7,
-    "fired": 15,
+    "carried": 5,
+    "fired": 19,
     "gate": {
      "__fraction__": "1/5"
     },
     "hit_at_5": {
-     "__fraction__": "50/59"
+     "__fraction__": "89/104"
     },
-    "lost": 0,
+    "lost": 2,
     "precision_at_5": {
-     "__fraction__": "1114/2065"
+     "__fraction__": "113/208"
     }
    },
    {
-    "carried": 7,
-    "fired": 24,
+    "carried": 5,
+    "fired": 29,
     "gate": {
      "__fraction__": "1/4"
     },
     "hit_at_5": {
-     "__fraction__": "349/413"
+     "__fraction__": "89/104"
     },
-    "lost": 1,
+    "lost": 2,
     "precision_at_5": {
-     "__fraction__": "158/295"
+     "__fraction__": "7/13"
     }
    },
    {
-    "carried": 13,
-    "fired": 182,
+    "carried": 9,
+    "fired": 188,
     "gate": {
      "__fraction__": "1/2"
     },
     "hit_at_5": {
-     "__fraction__": "346/413"
+     "__fraction__": "27/32"
     },
-    "lost": 10,
+    "lost": 11,
     "precision_at_5": {
-     "__fraction__": "988/2065"
+     "__fraction__": "31/65"
     }
    }
   ],
@@ -2745,105 +2740,105 @@
      "hits": [
       {
        "hit_rate": {
-        "__fraction__": "277/413"
+        "__fraction__": "291/416"
        },
-       "hits": 277,
+       "hits": 291,
        "k": 1
       },
       {
        "hit_rate": {
-        "__fraction__": "344/413"
+        "__fraction__": "21/26"
        },
-       "hits": 344,
+       "hits": 336,
        "k": 3
       },
       {
        "hit_rate": {
-        "__fraction__": "356/413"
+        "__fraction__": "347/416"
        },
-       "hits": 356,
+       "hits": 347,
        "k": 5
       },
       {
        "hit_rate": {
-        "__fraction__": "370/413"
+        "__fraction__": "93/104"
        },
-       "hits": 370,
+       "hits": 372,
        "k": 10
       }
      ],
      "precision_at_5": {
-      "__fraction__": "1138/2065"
+      "__fraction__": "29/52"
      }
     },
     "lexical": {
      "hits": [
       {
        "hit_rate": {
-        "__fraction__": "283/413"
+        "__fraction__": "295/416"
        },
-       "hits": 283,
+       "hits": 295,
        "k": 1
       },
       {
        "hit_rate": {
-        "__fraction__": "342/413"
+        "__fraction__": "173/208"
        },
-       "hits": 342,
+       "hits": 346,
        "k": 3
       },
       {
        "hit_rate": {
-        "__fraction__": "353/413"
+        "__fraction__": "359/416"
        },
-       "hits": 353,
+       "hits": 359,
        "k": 5
       },
       {
        "hit_rate": {
-        "__fraction__": "368/413"
+        "__fraction__": "187/208"
        },
-       "hits": 368,
+       "hits": 374,
        "k": 10
       }
      ],
      "precision_at_5": {
-      "__fraction__": "1133/2065"
+      "__fraction__": "1171/2080"
      }
     },
     "name": {
      "hits": [
       {
        "hit_rate": {
-        "__fraction__": "40/59"
+        "__fraction__": "37/52"
        },
-       "hits": 280,
+       "hits": 296,
        "k": 1
       },
       {
        "hit_rate": {
-        "__fraction__": "332/413"
+        "__fraction__": "335/416"
        },
-       "hits": 332,
+       "hits": 335,
        "k": 3
       },
       {
        "hit_rate": {
-        "__fraction__": "349/413"
+        "__fraction__": "349/416"
        },
        "hits": 349,
        "k": 5
       },
       {
        "hit_rate": {
-        "__fraction__": "367/413"
+        "__fraction__": "369/416"
        },
-       "hits": 367,
+       "hits": 369,
        "k": 10
       }
      ],
      "precision_at_5": {
-      "__fraction__": "1131/2065"
+      "__fraction__": "577/1040"
      }
     }
    },
@@ -2852,111 +2847,111 @@
      "hits": [
       {
        "hit_rate": {
-        "__fraction__": "277/413"
+        "__fraction__": "9/13"
        },
-       "hits": 277,
+       "hits": 288,
        "k": 1
       },
       {
        "hit_rate": {
-        "__fraction__": "339/413"
+        "__fraction__": "345/416"
        },
-       "hits": 339,
+       "hits": 345,
        "k": 3
       },
       {
        "hit_rate": {
-        "__fraction__": "352/413"
+        "__fraction__": "359/416"
        },
-       "hits": 352,
+       "hits": 359,
        "k": 5
       },
       {
        "hit_rate": {
-        "__fraction__": "363/413"
+        "__fraction__": "189/208"
        },
-       "hits": 363,
+       "hits": 378,
        "k": 10
       }
      ],
      "precision_at_5": {
-      "__fraction__": "1122/2065"
+      "__fraction__": "1137/2080"
      }
     },
     "lexical": {
      "hits": [
       {
        "hit_rate": {
-        "__fraction__": "278/413"
+        "__fraction__": "287/416"
        },
-       "hits": 278,
+       "hits": 287,
        "k": 1
       },
       {
        "hit_rate": {
-        "__fraction__": "339/413"
+        "__fraction__": "345/416"
        },
-       "hits": 339,
+       "hits": 345,
        "k": 3
       },
       {
        "hit_rate": {
-        "__fraction__": "351/413"
+        "__fraction__": "355/416"
        },
-       "hits": 351,
+       "hits": 355,
        "k": 5
       },
       {
        "hit_rate": {
-        "__fraction__": "366/413"
+        "__fraction__": "375/416"
        },
-       "hits": 366,
+       "hits": 375,
        "k": 10
       }
      ],
      "precision_at_5": {
-      "__fraction__": "1129/2065"
+      "__fraction__": "283/520"
      }
     },
     "name": {
      "hits": [
       {
        "hit_rate": {
-        "__fraction__": "279/413"
+        "__fraction__": "11/16"
        },
-       "hits": 279,
+       "hits": 286,
        "k": 1
       },
       {
        "hit_rate": {
-        "__fraction__": "332/413"
+        "__fraction__": "167/208"
        },
-       "hits": 332,
+       "hits": 334,
        "k": 3
       },
       {
        "hit_rate": {
-        "__fraction__": "49/59"
+        "__fraction__": "11/13"
        },
-       "hits": 343,
+       "hits": 352,
        "k": 5
       },
       {
        "hit_rate": {
-        "__fraction__": "51/59"
+        "__fraction__": "373/416"
        },
-       "hits": 357,
+       "hits": 373,
        "k": 10
       }
      ],
      "precision_at_5": {
-      "__fraction__": "1108/2065"
+      "__fraction__": "141/260"
      }
     }
    }
   },
   "tiebreak_verdict": {
-   "beats_name_tiebreak_on_hits": true,
+   "beats_name_tiebreak_on_hits": false,
    "beats_name_tiebreak_on_precision": true
   },
   "verdict": {

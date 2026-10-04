@@ -274,6 +274,13 @@ class Comparison:
         return f"{head}{gap}{where}{pole}"
 
 
+def _exact_text(value: Fraction) -> str:
+    """An exact rational with its finite decimal when it has one."""
+    from ..runtime.fields import exact_decimal
+    dec = exact_decimal(value)
+    return f"{value} (= {dec})" if dec and dec != str(value) else str(value)
+
+
 def order(surface, field: str, left: str, right: str,
           other_field: Optional[str] = None) -> Comparison:
     """Order one coordinate across two rows, or refuse.
@@ -315,8 +322,15 @@ def order(surface, field: str, left: str, right: str,
         converted = True
         conversion = (
             f"the declared conversions {carry_left.scale} "
-            f"x{carry_left.factor} and {carry_right.scale} "
-            f"x{carry_right.factor}")
+            f"{sc.carry_text(carry_left)} and {carry_right.scale} "
+            f"{sc.carry_text(carry_right)}")
+        if sc.OFFSETS and (carry_left.offset or carry_right.offset):
+            # Phase 99: an offset row (degrees Celsius) -- the raw readings
+            # alone do not show the order, so the carried values are named
+            conversion += (
+                f", which carry the two readings to "
+                f"{_exact_text(left_value)} and {_exact_text(right_value)} "
+                f"{scale}")
     if left_value < right_value:
         verdict = "lt"
     elif right_value < left_value:

@@ -99,23 +99,23 @@ not written down here; it is emitted:
 | kind | count |
 |---|---|
 | abbrev | 58 |
-| def | 1,151 |
+| def | 1,155 |
 | example | 21 |
 | inductive | 50 |
 | instance | 27 |
 | lemma | 207 |
 | structure | 59 |
-| theorem | 2,966 |
-| **total** | **4,539** |
+| theorem | 2,999 |
+| **total** | **4,576** |
 
-4,539 declarations across 168 files, the largest being `Gen3.lean` with 98.
+4,576 declarations across 171 files, the largest being `Gen3.lean` with 98.
 <!-- end generated -->
 
 Written into a sentence, so that a reader who stops here has the size of what
 follows: the reader addresses
-<!--figure:lean-declarations-->4,539<!--/figure--> declarations over
-<!--figure:lean-declaration-files-->168<!--/figure--> files, which is every
-file of <!--figure:lean-files-->168 Lean files<!--/figure--> the development
+<!--figure:lean-declarations-->4,576<!--/figure--> declarations over
+<!--figure:lean-declaration-files-->171<!--/figure--> files, which is every
+file of <!--figure:lean-files-->171 Lean files<!--/figure--> the development
 holds — no Lean file of this repository is outside the corpus this study
 measures.
 
@@ -249,11 +249,11 @@ below half a scale unit in every coordinate.
 <!-- generated: lean-readback -->
 |  | measured |
 |---|---|
-| declarations checked | 4,539 |
-| read back exactly | **4,539 / 4,539** (rate 1) |
-| coordinates checked | 108,936 |
+| declarations checked | 4,576 |
+| read back exactly | **4,576 / 4,576** (rate 1) |
+| coordinates checked | 109,824 |
 | coordinate errors | **0** |
-| moved by the decoder | 4,539 / 4,539 |
+| moved by the decoder | 4,576 / 4,576 |
 | worst observed residual | **3**, at `GLM.DeepHoleLadder.Reading.cumulative_ge_right` |
 | half a scale step | `9/2` |
 | covering radius | 4 |
@@ -276,9 +276,9 @@ declaration" is, at this point, a statement about the feature map alone.
 <!-- generated: lean-injectivity -->
 | scheme | distinct addresses | distinct feature vectors | classes | declarations conflated | quantisation adds conflation? |
 |---|---|---|---|---|---|
-| `feature` | 4,054 / 4,539 | 4,054 | 325 | 810 | no |
-| `hash_control` | **4,539 / 4,539** | 4,054 | 0 | 0 | — |
-| `shuffled` | 4,054 / 4,539 | 4,054 | 325 | 810 | no |
+| `feature` | 4,091 / 4,576 | 4,091 | 325 | 810 | no |
+| `hash_control` | **4,576 / 4,576** | 4,091 | 0 | 0 | — |
+| `shuffled` | 4,091 / 4,576 | 4,091 | 325 | 810 | no |
 <!-- end generated -->
 
 Two things to read off this table.
@@ -376,27 +376,27 @@ The third table is on *all* pairs, not just nearest ones.
 <!-- generated: lean-neighbours -->
 | scheme | nearest shares a file | rate | mean tie size |
 |---|---|---|---|
-| `feature` | **821 / 4,539** | ≈ **18.09 %** | 1.70 |
-| `hash_control` | 35 / 4,539 | ≈ 0.77 % | 1.00 |
-| `shuffled` | 26 / 4,539 | ≈ 0.57 % | 1.70 |
-| *chance* | — | ≈ 0.78 % | — |
+| `feature` | **829 / 4,576** | ≈ **18.12 %** | 1.70 |
+| `hash_control` | 35 / 4,576 | ≈ 0.76 % | 1.00 |
+| `shuffled` | 25 / 4,576 | ≈ 0.55 % | 1.70 |
+| *chance* | — | ≈ 0.77 % | — |
 
 | scheme | nearest is cited, either way | rate |
 |---|---|---|
-| `feature` | **137 / 4,539** | ≈ **3.02 %** |
-| `hash_control` | 6 / 4,539 | ≈ 0.13 % |
-| `shuffled` | 7 / 4,539 | ≈ 0.15 % |
+| `feature` | **143 / 4,576** | ≈ **3.13 %** |
+| `hash_control` | 6 / 4,576 | ≈ 0.13 % |
+| `shuffled` | 4 / 4,576 | ≈ 0.09 % |
 | *chance* | — | ≈ 0.14 % |
 
 | scheme | mean d² within a file | mean d² across files | ratio |
 |---|---|---|---|
-| `feature` | 6,079.4 | 7,258.9 | **0.838** |
-| `hash_control` | 54,239.1 | 54,104.2 | 1.002 |
-| `shuffled` | 7,188.1 | 7,250.1 | 0.991 |
+| `feature` | 6,090.5 | 7,315.7 | **0.833** |
+| `hash_control` | 54,238.9 | 54,104.6 | 1.002 |
+| `shuffled` | 7,221.4 | 7,306.9 | 0.988 |
 
-Against closed-form chance the feature encoding runs 23.1× on the file test and 20.9× on the citation test, from an encoding that is never shown a file name.
+Against closed-form chance the feature encoding runs 23.4× on the file test and 21.8× on the citation test, from an encoding that is never shown a file name.
 
-Over 80,726 same-file pairs and 10,218,265 cross-file pairs.  The feature encoding beats the hash control: yes; beats the seeded reshuffle: yes; beats closed-form chance: yes.
+Over 80,944 same-file pairs and 10,386,656 cross-file pairs.  The feature encoding beats the hash control: yes; beats the seeded reshuffle: yes; beats closed-form chance: yes.
 <!-- end generated -->
 
 The two controls do exactly what they are there for.

@@ -5,7 +5,7 @@
 
 **Question.** What has each phase of the wiring plan delivered, and what does the next round start from?
 
-**Verdict.** Phase 97 is closed; the order of work at the head of [`STATUS.md`](STATUS.md) §3.4 is where the next round starts, Phase 98 (round 9 of the order, retrieval, or the lattice items beside round 8).
+**Verdict.** Phase 100 is closed; the order of work at the head of [`STATUS.md`](STATUS.md) §3.4 is where the next round starts, Phase 101 (round 9 of the order continued: item 5 with the citation leak Phase 100 found, then N2, N5 and I3; or the lattice items beside round 8).
 
 **Deciding figure.** Every closed phase names what was built, where it lives, and how to see it recompute itself.
 
@@ -25,7 +25,7 @@ recompute itself.
 
 Everything below is reachable from the package's public API and from the query
 runtime — **<!--figure:query-kinds-->24 query kinds<!--/figure-->**, **<!--figure:report-subjects-->65 report subjects<!--/figure-->** and **<!--figure:registers-->8 registers<!--/figure-->** — is
-covered by the test suite (<!--figure:test-files-->143 test files<!--/figure-->),
+covered by the test suite (<!--figure:test-files-->146 test files<!--/figure-->),
 and — where it is a report or a task — has a generated column-3 script that
 recomputes the claim in a **fresh interpreter** and fails if anything differs.
 
@@ -183,9 +183,163 @@ as everything else: only the open phase is state.
 
 ---
 
+## Phase 100 — the declared resampling: which retrieval leads are effects and which are draws
+
+**Status: closed this round.** Round 9 of the order of work, retrieval, took
+its first item, candidate N1. The study of the round is
+[`studies/CORPUS_RESAMPLE_STUDY.md`](studies/CORPUS_RESAMPLE_STUDY.md); its
+two families, ten readings, rule and marks M1–M7 were committed before any
+measuring code. Before the round the owner asked for the stale note on the
+conversion table's offset row in `STATUS.md` §3.4 (item 1) to be brought up
+to date with Phase 99; that note now records both halves as closed and keeps
+the original text beneath.
+
+**What was built.** `reasoning/corpus_resample.py` — a census of every
+declaration asked as a declaration query and as a goal query under the six
+native-words and four native-parity rankings, 108 places down; the 171
+file-drop sub-corpora and the 22 and 45 stride offsets read off it; the rule;
+the exact sign test; the faithfulness, filter and held-fixed checks. The
+measurement is stored in `reasoning/_data/corpus_resample.json` beside the
+digest of the measuring code. `tools corpus-resample`,
+`tests/test_corpus_resample.py` and `RequestProject/GLM/CorpusResample.lean`.
+
+**What it measured.**
+* M1: offset 0 reproduces both studies' figures exactly (0 mismatches over 20
+  rows). M2: 1,034 direct re-rankings over five sub-corpora equal the
+  filtered census under all ten rankings. M3: 171 file drops, every offset,
+  4,572 census queries.
+* The verdicts: 1 effect among 18 reading-and-set pairs — `native2` at least
+  `features` on the declaration queries (N6), in 99.4 % of file drops and
+  95.5 % of offsets, census 185 : 29 at 5. Draws: N6 on the goals (96.5 % and
+  93.3 %), N1, N2, W2 (failing at `k = 1`; at 3, 5 and 10 level or ahead in at
+  least 88.9 % of every family), W4, W6, and the three post-hoc readings of
+  the native-words study.
+* M4 not met: the control `native2` = `features2` holds in 88.3 % and 77.3 %
+  (declarations), 83.0 % and 75.6 % (goals) — the two share their first two
+  keys and differ in the third, so they are a near identity.
+* M5: rebuilding the citation counts without each file would change 12,541
+  structural feature vectors over 167 of the 171 drops, 1,880 for
+  `Heisenberg.lean`. The cause is a citation leak: the index resolves a
+  one-letter bound variable to one of ten one-letter declarations, 3,231 of
+  15,012 citation edges, and the retrieval relevance sets read those edges.
+  Named for the next round with item 5, not repaired here.
+* M6: the Lean file, no sorry. M7: the native-words and native-parity
+  modules and measurements untouched.
+
+6 of 7 marks met. No default changed. Under directive D15 it moved none of
+the three faculties: it decided which recorded retrieval figures are results.
+
+**Lean.** `sorted_perm_filter_eq`, `take_sorted_perm_filter_eq`,
+`length_filter_take_ge`, `take_filter_take`, `stride_slice_iff`,
+`stride_offsets_card`, `stride_offsets_disjoint`, `signTest_symm`,
+`signTest_le_one`, `census_signs_small`, `census_sign_d_declarations`,
+`census_signs_large` and `census_signs_control`. It has no `sorry`.
+
+## Phase 99 — the Celsius register: the ITS-90 fixed points held in degrees Celsius, and the scale table's first offset row
+
+**Status: closed.** Taken at the owner's request for a register
+that holds a Celsius reading, ahead of round 9 (retrieval): it closes round
+1's item 1a and candidate 1's first half, which waited on such a register.
+The study of the round is
+[`studies/CELSIUS_REGISTER_STUDY.md`](studies/CELSIUS_REGISTER_STUDY.md). Its
+marks C1–C8, the register's 14 values with ITS-90's kelvin column beside
+them, 10 ordering, 3 column and 9 planner cases were committed in
+`evaluation/celsius_register_cases.py` before any code.
+
+**What was built.** `data_objects/fixed_points.py` (the 14 ITS-90 defining
+fixed points with an assigned temperature, `temperature_C` only, exact); the
+field surface's table `fixed_point`; the scale table's row
+`fixed_point:temperature_C` (factor 1, offset 273.15) and the switch
+`OFFSETS`; `quantity_units.scale_into_si_affine`, with `scale_into_si` now
+refusing an offset row `OFFSET_UNIT` by name; the stepwise planner reading a
+register value on an offset scale as a level, with the column-3 script
+recomputing that step from the row; the register's measurand row and an
+`offset` field on every measurand row; the field words `temperature` and
+`celsius temperature`; an ordering across an offset row naming the carried
+values. `runtime/celsius_register_report.py`, `tools celsius-register`,
+`tests/test_celsius_register.py` and `RequestProject/GLM/CelsiusRegister.lean`.
+
+**What it measured.**
+* C1: 14 of 14 points carried by the offset row onto ITS-90's kelvin column;
+  all above absolute zero, strictly increasing.
+* C2, C3, C4: 10 of 10 ordering, 3 of 3 column and 9 of 9 planner cases as
+  declared, 0 wrong; through `GLM.py --ask` the machine answered 0 of the 9
+  planner questions before and 6 after.
+* C5: with the offset dropped, `o02`, `o03` and `o04` flip and 6 of 6
+  planner answers are wrong; with the register absent, 0 of 9 answered.
+* C6: the scale table's 12 of 12, the ordering and extremum operations' 7 of
+  7 and 8 of 8, the measurand register's 30 of 30 and Phase 86's 36 of 36,
+  unchanged.
+* C7: 6 of 6 chain scripts verified (25 of 25 steps), every mutation and
+  every offset lie rejected.
+* C8: the Lean file, no sorry.
+* Reported, not scored: 10 of 13 fixed points lie within 0.005 K of the
+  element register's melting point; the element register's aluminium value
+  (933.437 K) is 0.036 K below ITS-90's 933.473 K, a transposition of the last
+  two digits, left for the owner.
+
+8 of 8 marks met. The study's §6 writes down how the next register, wheel or
+junction goes in.
+
+**Lean.** `celsiusRow_apply`, `register_carries_to_its90_kelvin`,
+`register_above_absolute_zero`, `register_strictly_increasing`,
+`celsius_row_keeps_verdicts`, `celsius_row_order_invariant`,
+`dropping_the_offset_flips_a_verdict`, `naive_level_wrong`,
+`planner_answers` and `aluminium_gap`. It has no `sorry`.
+
+## Phase 98 — symbolic parameters: answers that are formulas in letters, and the one transcendental equation
+
+**Status: closed.** Taken at the owner's request for more
+reasoning ability, before round 9 (retrieval): boundary tracks S (13 outside
+questions whose answer is a closed formula in letters) and T (one
+transcendental equation) of [`QUESTION_SET_B_STUDY.md`](studies/QUESTION_SET_B_STUDY.md)
+§8. The study of the round is
+[`studies/SYMBOLIC_PARAMETERS_STUDY.md`](studies/SYMBOLIC_PARAMETERS_STUDY.md).
+Its marks S1–S8, 18 systems, 8 refusals, 13 outside fragments and 13 variants
+were committed in `evaluation/symbolic_cases.py` before any code.
+
+**What was built.** `reasoning/symbolic.py`: exact polynomials and rational
+functions over named parameters (multivariate gcd with a sound trivial-gcd
+certificate, radicals and `sin`/`cos`/`tan`/`exp`/`ln` as named atoms with
+declared relations, a parser and a printer), `solve_system` (declared
+substitution with Bareiss pivot stripping; Cramer's rule with Bareiss
+determinants for square linear systems of four or more), `diff`, `entails`
+and the column-3 script writer. `runtime/symbolic_frames.py` (the operation
+`solve symbolically for T[, ..] [in terms of P..]: EQ; EQ`, routed before the
+typed frame), `runtime/symbolic_outside.py` (13 class-S frames and
+`crossover_frequency`, with their mutants), `runtime/symbolic_report.py`
+(marks and the post-hoc `random_battery`), `tools symbolic`,
+`tests/test_symbolic.py` and `RequestProject/GLM/SymbolicParameters.lean`.
+
+**What it measured.**
+* S1: 13 of 13 class-S outside questions answered through the router and
+  gate-verified with the declared fragment, 0 wrong.
+* S2, S3, S4: 13 of 13 variants, 18 of 18 systems as identities, 8 of 8
+  refusals by code.
+* S5: 43 of 44 mutants rejected as first measured (a ×2 control of the zero
+  CFSE answer altered nothing); 44 of 44 after the control was made additive.
+* S6: 27 of 27 framed outside answers, 14 of 14 Set B verdicts unchanged; the
+  new frames read 0 of 494 earlier texts.
+* S7: ω_co in [3.6731, 3.6732], the root of `0.5ω + arctan ω = π`, by exact
+  bounds; amplitude ratio 0.2626, gain margin 3.8067.
+* S8: the Lean file, no sorry.
+* Post hoc, not a mark: 90 random linear systems first hung for more than
+  20 minutes (multivariate gcd growth); after the gcd certificate, pivot
+  stripping and the Cramer path they run in about 6 s. They then showed 53 of
+  87 answers failing their gate: a printer fault (a denominator's numeric
+  factor written before a sum without brackets), invisible to every declared
+  case. After the repair, 87 of 87 verified, 0 singular systems answered.
+
+8 of 8 marks met, S5 after a control repair.
+
+**Lean.** `rolling_acceleration`, `rolling_friction_ratio`,
+`invariant_mass_sq`, `invariant_mass_sq_identical`, `disturbance_transfer`,
+`interface_tangent_ratio`, `ar1_autocorrelation`, `poly_eq_of_agree` and
+`cramer_solves`. It has no `sorry`.
+
 ## Phase 97 — argument unpacking and the third view on demand: Phase 96's two misses re-declared and re-scored
 
-**Status: closed this round.** Taken at the owner's request before round 9:
+**Status: closed; Phase 98 followed it.** Taken at the owner's request before round 9:
 Phase 96 closed with 7 of 9 marks, and its two misses were misses of the
 declaration — V8 a gap in the dialect (argument unpacking refused), V4 a
 false analogy (the register's second view reads X1's second error rotated).
@@ -2611,11 +2765,11 @@ leave standing, and three columns. All
 **<!--figure:scales-answered-->7<!--/figure-->** answered and
 **<!--figure:scales-refused-->5<!--/figure-->** refused. The honest
 denominator is the whole surface: of the
-**<!--figure:scales-pairs-->7,750<!--/figure-->** pairs of the
-**<!--figure:scales-numeric-->125<!--/figure-->** numeric scales the field
+**<!--figure:scales-pairs-->7,875<!--/figure-->** pairs of the
+**<!--figure:scales-numeric-->126<!--/figure-->** numeric scales the field
 surface holds, the table relates
-**<!--figure:scales-bridged-->6<!--/figure-->** and leaves
-**<!--figure:scales-still-refused-->7,744<!--/figure-->** refused — which is
+**<!--figure:scales-bridged-->8<!--/figure-->** and leaves
+**<!--figure:scales-still-refused-->7,867<!--/figure-->** refused — which is
 the point rather than a disappointment, since a table that reached more would
 be a table that had guessed. The conservativity measurement matters more:
 the ordering round's seven declared comparisons and the extremum round's eight
@@ -3007,7 +3161,7 @@ remaining, the release. Running it failed six units, none of them noise:
 
 **What the release now says.** `signoff --verify-release` reports **99 of 99
 test files and 7 of 7 instruments** signed with the exhaustive cases on; the
-suite is **<!--figure:suite-->4,935 tests across 142 of the 143 test files, 17,993 subtests, outside the document check<!--/figure-->**,
+suite is **<!--figure:suite-->4,975 tests across 145 of the 146 test files, 18,072 subtests, outside the document check<!--/figure-->**,
 one process with `GLM_EXHAUSTIVE=1` collecting 3,979; the end-to-end
 evaluation is **157 / 157** with 19 expected refusals; `corpus --check` is
 current; and `lake build` is clean over 120 Lean files with no `sorry`.

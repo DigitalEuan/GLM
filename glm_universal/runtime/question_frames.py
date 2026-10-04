@@ -967,7 +967,8 @@ TYPED_FRAME = Frame("typed_operator", "real / reactive / apparent power, "
 
 def _all_frames() -> Tuple[Frame, ...]:
     from .outside_frames import OUTSIDE_FRAMES
-    return SET_B_FRAMES + OUTSIDE_FRAMES
+    from .symbolic_outside import OUTSIDE_S_FRAMES
+    return SET_B_FRAMES + OUTSIDE_FRAMES + OUTSIDE_S_FRAMES
 
 
 #: Every frame, in the order they are tried (filled on first use).
@@ -983,6 +984,9 @@ def frames() -> Tuple[Frame, ...]:
 def frame_of(text: str) -> Optional[Tuple[Frame, dict]]:
     """The first frame that reads ``text``, with its givens."""
     t = normalise(text)
+    if text.strip().lower().startswith("solve symbolically for "):
+        from .symbolic_frames import SYMBOLIC_FRAME
+        return (SYMBOLIC_FRAME, {"raw": text.strip()})
     if "\n" not in text.strip():
         try:
             typed = TYPED_FRAME.match(t)

@@ -1677,6 +1677,37 @@ def _native_words(args) -> int:
     return 0
 
 
+def _corpus_resample(args) -> int:
+    """The declared resampling (Phase 100): every sub-corpus that drops one
+    Lean file and every stride offset, against the rule declared in
+    ``studies/CORPUS_RESAMPLE_STUDY.md`` before the module existed."""
+    from .reasoning import corpus_resample as crs
+    if args.write:
+        target = crs.write_measurements()
+        print(f"wrote {target}")
+        print(f"corpus resample: {crs.state()['verdict']}")
+        return 0
+    report = crs.current() if not args.live else None
+    if report is None:
+        report = crs.corpus_resample_report()
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    print(f"census {report['census']} queries over {report['pool']} "
+          f"declarations; {report['files']} file drops; strides "
+          f"{report['strides']}")
+    for rid, block in report["verdicts"].items():
+        for mode, v in block.items():
+            d = v["discordance"]
+            print(f"{rid} {mode:<12} {v['verdict']:<16} file drops "
+                  f"{_per_mille(Fraction(v['share_file_drops']))}  offsets "
+                  f"{_per_mille(Fraction(v['share_offsets']))}  census "
+                  f"{d['first_only']}:{d['second_only']}")
+    for mark, met in report["marks"].items():
+        print(f"{mark:<4} {'met' if met else 'NOT met'}")
+    return 0
+
+
 def _stepwise(args) -> int:
     """The stepwise planner (Phase 72): S1-S7 against the marks declared in
     ``studies/STEPWISE_PLANNER_STUDY.md`` before the module existed."""
@@ -1942,6 +1973,60 @@ def _measurand_register(args) -> int:
               f"{s['aligned']} of {s['steps']} steps aligned")
         for kind, n in s["mutants"].items():
             print(f"  mutation {kind:<10} caught {s['caught'][kind]} of {n}")
+    return 0
+
+
+def _celsius_register(args) -> int:
+    """The Celsius register (Phase 99): the ITS-90 fixed points held in
+    degrees Celsius, the scale table's offset row, and the planner reading a
+    Celsius register value as a level, C1-C7 against the marks declared in
+    ``studies/CELSIUS_REGISTER_STUDY.md`` before any code."""
+    from .runtime import celsius_register_report as cr
+    report = cr.celsius_register_report(scripts=not args.no_scripts)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    g = report["register"]
+    print(f"register  {g['rows']} rows, exact {g['exact']}; the offset row "
+          f"carries {g['carried_match']} of {g['rows']} onto ITS-90's kelvin "
+          f"column; increasing {g['increasing']}; above absolute zero "
+          f"{g['above_absolute_zero']}; met: {g['met']}")
+    o = report["order"]
+    print(f"order     {o['met']} of {o['cases']} as declared, wrong "
+          f"{o['wrong']}")
+    k = report["column"]
+    print(f"column    {k['met']} of {k['cases']} as declared")
+    p = report["planner"]
+    print(f"planner   {p['met']} of {p['cases']} as declared, wrong "
+          f"{p['wrong']}; the machine answered "
+          f"{p['machine_answered_before']} before and "
+          f"{p['machine_answers_now']} now")
+    c = report["control"]
+    print(f"control   offset dropped flips {', '.join(c['flips'])}; answers "
+          f"{len(c['naive_planner_wrong'])} of "
+          f"{c['naive_planner_declared']} planner cases wrongly; register "
+          f"absent answers {c['register_absent_answers']}; met: {c['met']}")
+    e = report["earlier"]
+    print(f"earlier   scale table {e['scale_table']['as_declared']} of "
+          f"{e['scale_table']['declared']}; ordering "
+          f"{e['ordering']['as_declared']} of {e['ordering']['declared']}; "
+          f"extremum {e['extremum']['as_declared']} of "
+          f"{e['extremum']['declared']}; measurand register "
+          f"{e['measurand_register']['met']} of "
+          f"{e['measurand_register']['cases']}; met: {e['met']}")
+    a = report["agreement"]
+    print(f"agreement {a['within_rounding']} of {a['compared']} fixed points "
+          f"within 0.005 K of the element register's melting point; outside: "
+          + (", ".join(f"{n} by {g} K" for n, g in a["outside"]) or "none"))
+    if "scripts" in report:
+        s = report["scripts"]
+        print(f"scripts   {s['verified']} of {s['chains']} verified, "
+              f"{s['aligned']} of {s['steps']} steps aligned; offset lies "
+              f"caught {s['offset_lies_caught']} of {s['offset_lies']}")
+        for kind, n in s["mutants"].items():
+            if n:
+                print(f"  mutation {kind:<10} caught {s['caught'][kind]} "
+                      f"of {n}")
     return 0
 
 
@@ -2281,6 +2366,50 @@ def _second_view(args) -> int:
           f"{len(v8['refusals'])}")
     for key, ok in report["marks"].items():
         print(f"{key:<4} mark {'met' if ok else 'not met'}")
+    return 0
+
+
+def _symbolic(args) -> int:
+    """Symbolic parameters (Phase 98): the marks S1-S8 declared in
+    ``studies/SYMBOLIC_PARAMETERS_STUDY.md`` before any code."""
+    from .runtime import symbolic_report as sr
+    report = sr.symbolic_report(run_scripts=not args.no_scripts,
+                                regression=not args.quick)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    s1 = report["S1"]
+    print(f"S1  class-S outside questions {s1['correct']}/{s1['of']} "
+          f"answered and verified, {s1['wrong']} wrong")
+    for r in s1["rows"]:
+        print(f"      O{r['index']:03d} {str(r['frame']):<20} "
+              f"{'ok' if r['answered'] and r['gate'] and r['fragment'] else '--'}"
+              f"  {r['headline'][:90]}")
+    for key in ("S2", "S3", "S4"):
+        print(f"{key}  {report[key]['passed']}/{report[key]['of']} as declared")
+    s5 = report["S5"]
+    if not s5.get("skipped"):
+        print(f"S5  mutants rejected {s5['rejected']}/{s5['mutants']}")
+    s6 = report["S6"]
+    if not s6.get("skipped"):
+        print(f"S6  framed outside {s6['framed_ok']}/{s6['framed_of']}, "
+              f"Set B {s6['set_b_audited_plus']}/{s6['set_b_of']}, new frames "
+              f"read {len(s6['new_frame_reads']['read_by_new'])} of "
+              f"{s6['new_frame_reads']['texts']} earlier texts; outside "
+              f"classes {s6['outside_classes']}")
+    s7 = report["S7"]
+    print(f"S7  {s7['headline']}")
+    print(f"S8  Lean {report['S8']}")
+    for key, ok in report["marks"].items():
+        print(f"{key:<4} mark {'met' if ok else ('skipped' if ok is None else 'not met')}")
+    if args.battery:
+        b = sr.random_battery(run_scripts=not args.no_scripts)
+        print(f"battery (post hoc, not a mark): {b['systems']} random linear "
+              f"systems, {b['nonsingular']} nonsingular, {b['answered']} "
+              f"answered, {b['answered_verified']} verified, "
+              f"{b['answered_singular']} singular answered, "
+              f"{b['refused_nonsingular']} nonsingular refused; refusals "
+              f"{b['refusal_codes']}")
     return 0
 
 
@@ -2759,6 +2888,19 @@ def _parser() -> argparse.ArgumentParser:
                             "measurements")
     words.set_defaults(handler=_native_words)
 
+    resample = sub.add_parser(
+        "corpus-resample",
+        help="the declared resampling of the Lean-corpus retrieval figures: "
+             "every sub-corpus that drops one file and every stride offset")
+    resample.add_argument("--json", action="store_true")
+    resample.add_argument("--write", action="store_true",
+                          help="re-take the measurements and store them "
+                               "beside their digest")
+    resample.add_argument("--live", action="store_true",
+                          help="measure now instead of reading the stored "
+                               "measurements")
+    resample.set_defaults(handler=_corpus_resample)
+
     laws = sub.add_parser(
         "law-register",
         help="the 65 retained UBP laws re-graded through the GLM, against the "
@@ -2924,6 +3066,17 @@ def _parser() -> argparse.ArgumentParser:
                       help="skip running the column-3 scripts (mark R6)")
     mreg.set_defaults(handler=_measurand_register)
 
+    celsius = sub.add_parser(
+        "celsius-register",
+        help="the Celsius register: the ITS-90 fixed points held in degrees "
+             "Celsius, the scale table's offset row and the planner reading "
+             "a Celsius value as a level, against the marks of the "
+             "celsius-register study")
+    celsius.add_argument("--json", action="store_true")
+    celsius.add_argument("--no-scripts", action="store_true",
+                         help="skip running the column-3 scripts (mark C7)")
+    celsius.set_defaults(handler=_celsius_register)
+
     loop = sub.add_parser(
         "planner-loop",
         help="the loop through the planner: derive, ask and solve as dialect "
@@ -3020,6 +3173,21 @@ def _parser() -> argparse.ArgumentParser:
     unpack.add_argument("--no-scripts", action="store_true",
                         help="skip running the column-3 scripts")
     unpack.set_defaults(handler=_unpacking)
+
+    symb = sub.add_parser(
+        "symbolic",
+        help="formulas in letters: the solve-symbolically operation and the "
+             "class-S outside frames, against the marks of the symbolic "
+             "parameters study")
+    symb.add_argument("--json", action="store_true")
+    symb.add_argument("--quick", action="store_true",
+                      help="skip the regression mark (S6)")
+    symb.add_argument("--no-scripts", action="store_true",
+                      help="skip running the column-3 scripts and mutants")
+    symb.add_argument("--battery", action="store_true",
+                      help="also run the post-hoc random linear-system "
+                           "battery (evidence, not a mark)")
+    symb.set_defaults(handler=_symbolic)
 
     cognition = sub.add_parser(
         "cognition",

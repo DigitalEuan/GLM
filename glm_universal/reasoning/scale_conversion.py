@@ -27,8 +27,12 @@ machine-checked half: ``GLM.ScaleConversion.cmpQ_apply`` shows that a positive
 conversion composed into the comparison leaves every verdict alone, and
 ``negative_factor_flips_the_verdict`` shows what a negative one does.  The
 offset is admitted because a temperature scale that does not start at absolute
-zero needs one; every row declared here happens to have offset ``0``, which is
-reported rather than hidden.
+zero needs one.  Until Phase 99 every declared row had offset ``0``; the
+ITS-90 fixed-point register (``studies/CELSIUS_REGISTER_STUDY.md``) holds its
+temperatures in degrees Celsius, and its row ``fixed_point:temperature_C`` is
+the table's one offset, ``273.15``.  The report counts offset rows rather than
+hiding them, and :data:`OFFSETS` switches the offset off for the study's
+control.
 
 A conversion is a **declaration**, not an inference.  Nothing here guesses a
 conversion from a field name, and a scale the table does not mention is
@@ -72,7 +76,8 @@ from typing import Dict, List, Mapping, Optional, Sequence, Tuple
 
 __all__ = [
     "ConversionError", "Conversion", "CONVERSIONS", "CANONICAL", "QUANTITIES",
-    "EV_PER_MOLE_IN_KJ", "declared", "quantity_of", "relates", "bridge",
+    "EV_PER_MOLE_IN_KJ", "CELSIUS_ZERO_IN_K", "OFFSETS", "carry_text",
+    "declared", "quantity_of", "relates", "bridge",
     "apply", "scales_of_quantity", "census", "DECLARED_BRIDGES",
     "conversion_report",
 ]
@@ -97,6 +102,15 @@ class ConversionError(ValueError):
 #: per mole, both exact -- so their product is an exact rational and no
 #: measurement enters this number.
 EV_PER_MOLE_IN_KJ: Fraction = Fraction(1602176634 * 602214076, 10 ** 16)
+
+
+#: The zero of the Celsius scale in kelvins, exactly: ``273.15``.  The only
+#: offset the table declares (Phase 99, ``studies/CELSIUS_REGISTER_STUDY.md``).
+CELSIUS_ZERO_IN_K: Fraction = Fraction(27315, 100)
+
+#: Whether a row's offset is applied.  Off is the study's control: a Celsius
+#: reading taken as though it were in kelvins, the offset dropped.
+OFFSETS = True
 
 
 @dataclass(frozen=True)
@@ -128,7 +142,7 @@ CANONICAL: Mapping[str, str] = {
 }
 
 
-#: **The declared table.**  Nine scales over four quantities, each row written
+#: **The declared table.**  Ten scales over four quantities, each row written
 #: down with its source.  A scale that is not here is not converted, and a
 #: quantity that is not here is not a quantity as far as this system is
 #: concerned.
@@ -165,6 +179,12 @@ CONVERSIONS: Tuple[Conversion, ...] = (
         "element:boiling_point_K", "temperature", "K", Fraction(1),
         Fraction(0),
         "the register holds thermodynamic temperatures in kelvin"),
+    Conversion(
+        "fixed_point:temperature_C", "temperature", "K", Fraction(1),
+        CELSIUS_ZERO_IN_K,
+        "t / degree Celsius = T / K - 273.15, exact (SI Brochure, 9th "
+        "edition, 2.3.1); the ITS-90 register holds t90 in degrees Celsius, "
+        "and its Table 1 states T90 = t90 + 273.15 for every fixed point"),
     Conversion(
         "element:atomic_radius_pm", "length", "pm", Fraction(1), Fraction(0),
         "the register holds radii in picometres"),
@@ -210,7 +230,17 @@ def relates(left: str, right: str) -> bool:
 
 def apply(conversion: Conversion, value: Fraction) -> Fraction:
     """``value`` carried into the canonical unit, exactly."""
-    return conversion.factor * value + conversion.offset
+    offset = conversion.offset if OFFSETS else Fraction(0)
+    return conversion.factor * value + offset
+
+
+def carry_text(conversion: Conversion) -> str:
+    """The row as it is applied, for an answer sentence: ``x1`` or
+    ``x1 + 5463/20``."""
+    out = f"x{conversion.factor}"
+    if conversion.offset != 0 and OFFSETS:
+        out += f" + {conversion.offset}"
+    return out
 
 
 def bridge(left: str, right: str) -> Tuple[Conversion, Conversion]:

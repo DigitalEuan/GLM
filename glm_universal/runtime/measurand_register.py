@@ -84,6 +84,8 @@ class RegisterMeasurand:
     by_name: Optional[str]          # the wheel quantity it is read as
     wheels: Tuple[str, ...]         # whose copy (empty: every copy)
     argument: str                   # why
+    offset: Fraction = Fraction(0)  # added after the factor (a level in
+                                    # degrees Celsius: 273.15 K; Phase 99)
 
 
 _PHOTON = ("one photon of this energy is the least that ")
@@ -119,6 +121,15 @@ REGISTER_MEASURANDS: Tuple[RegisterMeasurand, ...] = (
         "thermodynamic temperature", "substance", Fraction(1), "K",
         "temperature", (),
         "a thermodynamic temperature (a level), read by name as temperature"),
+    RegisterMeasurand(
+        "fixed_point:temperature_C", "ITS-90 fixed-point temperature",
+        "thermodynamic temperature", "substance", Fraction(1), "K",
+        "temperature", (),
+        "an assigned thermodynamic temperature (a level) held in degrees "
+        "Celsius, read by name as temperature; a level in degrees Celsius is "
+        "carried into kelvins by the factor 1 and the offset 273.15, exactly "
+        "(Phase 99, studies/CELSIUS_REGISTER_STUDY.md)",
+        Fraction(27315, 100)),
     RegisterMeasurand(
         "element:atomic_radius_pm", "atomic radius", "length", "atom",
         Fraction(1, 10 ** 12), "m", None, (),

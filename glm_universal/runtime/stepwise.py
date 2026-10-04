@@ -1947,7 +1947,7 @@ def _goal_two_inner(session, text: str, parsed=None) -> StepAnswer:
                     f"{phrase!r} is computed by the planner, not held by the "
                     f"register on a declared scale")
             scale = f"{detail['table']}:{detail['field']}"
-            factor, dim, quantity = qu.scale_into_si(scale)
+            factor, offset, dim, quantity = qu.scale_into_si_affine(scale)
             reading = _register_reading(scale, factor, dim)
             restrict: Tuple[str, ...] = ()
             if reading is not None:
@@ -1994,11 +1994,16 @@ def _goal_two_inner(session, text: str, parsed=None) -> StepAnswer:
                               f"{phrase} is a thermodynamic temperature (a "
                               f"level), and {written.replace('_', ' ')} "
                               f"names a temperature difference")
-            sourced.append((name, value * factor,
-                            {"kind": "scale", "value": value,
-                             "phrase": phrase, "detail": detail,
-                             "scale": scale, "factor": factor,
-                             "temp_kind": tkind or skind}))
+            src = {"kind": "scale", "value": value,
+                   "phrase": phrase, "detail": detail,
+                   "scale": scale, "factor": factor,
+                   "temp_kind": tkind or skind}
+            if offset != 0:
+                # Phase 99: a register reading on an offset scale (degrees
+                # Celsius) is a level, carried by the factor and the offset
+                src["offset"] = offset
+                src["reading"] = "level"
+            sourced.append((name, value * factor + offset, src))
         names, outs = [], {}
         for tname, unit in targets:
             if not copies(tname):
@@ -2205,6 +2210,13 @@ def _given_steps(b: Builder, base: str, v: Fraction,
         i = b.add("lookup", (), source["value"], source["phrase"],
                   source["detail"], origin="given")
         frm = source["scale"]
+        if "offset" in source:
+            return b.add("si", (i,), v, base,
+                         {"from": frm, "kind": source["kind"],
+                          "factor": ss.render_value(source["factor"]),
+                          "offset": ss.render_value(source["offset"]),
+                          "reading": source["reading"],
+                          "quantity": base}, origin="given")
     return b.add("si", (i,), v, base,
                  {"from": frm, "kind": source["kind"],
                   "factor": ss.render_value(source["factor"]),

@@ -42,6 +42,7 @@ from typing import Dict, List, Optional, Tuple
 __all__ = ["UnitRefused", "ReadUnit", "NAMED_UNITS", "PREFIXES",
            "INEXACT_UNITS", "OFFSET_UNITS", "SCALE_TO_SI", "read_unit",
            "quantity_dimension", "check_dimension", "scale_into_si",
+           "scale_into_si_affine",
            "SI_AXES", "WIDE_PREFIXES", "prefixes", "FIFTH_PREFIXES"]
 
 #: The axes compared: the SI projection of the EXT10 basis.
@@ -293,6 +294,34 @@ def check_dimension(quantity: str, dimension: Tuple[Fraction, ...],
                           f"{_render_dim(want)}")
 
 
+def scale_into_si_affine(scale: str) -> Tuple[Fraction, Fraction,
+                                              Tuple[Fraction, ...], str]:
+    """``(factor, offset, dimension, quantity)`` carrying a register scale
+    into SI as ``SI = factor * reading + offset``, or refuse (Phase 99,
+    ``studies/CELSIUS_REGISTER_STUDY.md``): the one reader of a scale that
+    may carry an offset, such as the ITS-90 register's degrees Celsius.
+
+    The offset is the declared row's, in the row's canonical unit, carried
+    into SI by that unit's factor; with
+    :data:`glm_universal.reasoning.scale_conversion.OFFSETS` off (the
+    study's control) it is dropped."""
+    from ..reasoning import scale_conversion as sc
+    row = sc.declared(scale)
+    if row is None:
+        raise UnitRefused("SCALE_UNDECLARED",
+                          f"{scale} is on no declared scale, so nothing says "
+                          f"what it measures or in which unit")
+    si = SCALE_TO_SI.get(row.unit)
+    if si is None:
+        raise UnitRefused("UNIT_INEXACT", _SCALE_INEXACT.get(
+            row.unit, f"no exact factor carries {row.unit} into SI"))
+    symbol, factor, _src = si
+    from ..reasoning.units import parse_unit
+    dim = tuple(parse_unit(symbol, steradian=False)[:7])
+    offset = row.offset * factor if sc.OFFSETS else Fraction(0)
+    return row.factor * factor, offset, dim, row.quantity
+
+
 def scale_into_si(scale: str) -> Tuple[Fraction, Tuple[Fraction, ...], str]:
     """``(factor, dimension, quantity)`` carrying a register scale (a
     ``table:field`` of the Phase 55 table) into SI, or refuse."""
@@ -302,8 +331,13 @@ def scale_into_si(scale: str) -> Tuple[Fraction, Tuple[Fraction, ...], str]:
         raise UnitRefused("SCALE_UNDECLARED",
                           f"{scale} is on no declared scale, so nothing says "
                           f"what it measures or in which unit")
-    if row.offset != 0:                               # pragma: no cover
-        raise UnitRefused("OFFSET_UNIT", f"{scale} has an offset")
+    if row.offset != 0:
+        raise UnitRefused(
+            "OFFSET_UNIT",
+            f"{scale} has an offset ({row.offset} {row.unit}): a reading on "
+            f"it is carried into SI by a factor and an offset, and a caller "
+            f"that takes a factor alone would read a level as though it "
+            f"started at zero; read it with scale_into_si_affine")
     si = SCALE_TO_SI.get(row.unit)
     if si is None:
         raise UnitRefused("UNIT_INEXACT", _SCALE_INEXACT.get(

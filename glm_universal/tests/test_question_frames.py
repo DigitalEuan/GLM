@@ -115,11 +115,15 @@ class TestOutside(unittest.TestCase):
                 self.assertIn(OUTSIDE_AUDITED[i], rd.body())
 
     def test_unframed_questions_are_classed(self):
+        # Phase 98 frames the class-S questions and the class-T question
+        # (``symbolic_cases.OUTSIDE_S`` and ``OUTSIDE_T``) as a later change.
+        from glm_universal.evaluation import symbolic_cases as sc
+        later = set(sc.OUTSIDE_S) | set(sc.OUTSIDE_T)
         items = qc.outside()
         for it in items:
             framed = qf.reads(it.text)
-            self.assertEqual(framed, it.index in qc.EXPECTED_FRAME,
-                             it.text[:80])
+            self.assertEqual(framed, it.index in qc.EXPECTED_FRAME
+                             or it.index in later, it.text[:80])
             if not framed:
                 self.assertIn(qc.BOUNDARY[it.index], qc.BOUNDARY_CLASSES)
 
@@ -194,8 +198,9 @@ class TestNonInterference(unittest.TestCase):
         hits = []
         for f in glob.glob(os.path.join(OVERLAY, "glm_universal",
                                         "evaluation", "*.py")):
-            if "question_set_b" in f or "typed_operator_cases" in f:
-                continue     # the frames' own corpora (Phases 89 and 90)
+            if "question_set_b" in f or "typed_operator_cases" in f or \
+                    "symbolic_cases" in f:
+                continue     # the frames' own corpora (Phases 89, 90, 98)
             for node in ast.walk(ast.parse(open(f, encoding="utf-8").read())):
                 if isinstance(node, ast.Constant) and \
                         isinstance(node.value, str) and " " in node.value \

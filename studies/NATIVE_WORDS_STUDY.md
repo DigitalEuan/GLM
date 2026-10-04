@@ -306,6 +306,20 @@ as measured rather than pinned — the k = 1 gap is the same kind of
 tie-order draw the tie-break marks already are, and it is reported here
 rather than hidden.
 
+**Resampled by Phase 100** ([`CORPUS_RESAMPLE_STUDY.md`](CORPUS_RESAMPLE_STUDY.md)).
+Every sub-corpus that drops one Lean file (171) and every offset of the query
+stride (22 and 45), under a rule declared before the measurement: a reading
+is an effect if it holds in at least 95 % of both families. None of this
+study's readings is. W2 holds in 77.2 % and 77.3 % of the two families on the
+declarations and fails at `k = 1`; at `k = 3, 5, 10` `words_native` is at
+least the standard in at least 88.9 % of every family, and over all 4,572
+queries it hits at 5 where the standard misses 129 times against 33. W4 and
+W6 are draws, W6 failing at `k = 1` and near-universal at `k ≥ 3`. The three
+post-hoc readings of §3.3 are draws: `letters` ≥ `text` (18.1 % and 40.9 %),
+`letters` ≥ `parts` (6.4 % and 9.1 %) and `words_native` ≥ `text_parts`
+(35.1 % and 18.2 %), the last two leaning the other way over all queries
+(44 : 59 and 23 : 40 at 5).
+
 ### 3.4 The verdict, in words
 
 The word-overlap ranking computed on Golay words of the tokens carries the
@@ -356,7 +370,9 @@ closed, and is W4 at the Phase 72 re-reading.
 
 ## 6. Next round
 
-* **Declare the post-hoc readings and resample.** `letters` ahead of `text`
+* **Declare the post-hoc readings and resample** — *taken by Phase 100*
+  ([`CORPUS_RESAMPLE_STUDY.md`](CORPUS_RESAMPLE_STUDY.md)): all three are
+  draws. What follows is the item as it was written. `letters` ahead of `text`
   and of `parts` on the Lean corpus were seen, not declared. A declared
   resampling (every sub-corpus that drops one Lean file, candidate N1) would
   say whether they are effects or draws.

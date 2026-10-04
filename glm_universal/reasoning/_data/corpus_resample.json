@@ -1,0 +1,3065 @@
+{
+ "census": 4572,
+ "corpus_digest": "1f71bc7fa3564e766eb33c034e1d95e7935ffc738205f314415cd3f9decd0fb9",
+ "depth": 108,
+ "drop_queries": {
+  "declarations": [
+   208,
+   207,
+   208,
+   208,
+   207,
+   205,
+   208,
+   207,
+   208,
+   207,
+   207,
+   207,
+   206,
+   207,
+   208,
+   207,
+   208,
+   207,
+   207,
+   207,
+   207,
+   207,
+   207,
+   207,
+   207,
+   208,
+   207,
+   206,
+   205,
+   207,
+   206,
+   207,
+   208,
+   207,
+   208,
+   207,
+   207,
+   208,
+   207,
+   207,
+   207,
+   206,
+   208,
+   208,
+   208,
+   207,
+   208,
+   206,
+   207,
+   207,
+   208,
+   206,
+   206,
+   205,
+   204,
+   207,
+   207,
+   207,
+   208,
+   207,
+   207,
+   208,
+   206,
+   207,
+   207,
+   208,
+   208,
+   207,
+   208,
+   207,
+   207,
+   207,
+   207,
+   208,
+   207,
+   207,
+   207,
+   208,
+   207,
+   206,
+   206,
+   205,
+   208,
+   208,
+   208,
+   208,
+   206,
+   206,
+   208,
+   208,
+   207,
+   205,
+   208,
+   208,
+   207,
+   206,
+   207,
+   208,
+   207,
+   208,
+   208,
+   208,
+   206,
+   206,
+   206,
+   208,
+   205,
+   207,
+   208,
+   208,
+   208,
+   207,
+   208,
+   207,
+   207,
+   206,
+   207,
+   207,
+   206,
+   208,
+   206,
+   206,
+   207,
+   208,
+   207,
+   208,
+   206,
+   207,
+   207,
+   206,
+   206,
+   207,
+   207,
+   207,
+   207,
+   208,
+   208,
+   207,
+   208,
+   207,
+   208,
+   207,
+   208,
+   207,
+   208,
+   206,
+   208,
+   207,
+   207,
+   207,
+   208,
+   206,
+   208,
+   207,
+   208,
+   207,
+   207,
+   207,
+   208,
+   208,
+   208,
+   208,
+   208,
+   208,
+   207,
+   207,
+   207,
+   208,
+   207,
+   207,
+   206
+  ],
+  "goals": [
+   102,
+   101,
+   102,
+   102,
+   102,
+   101,
+   102,
+   101,
+   102,
+   102,
+   101,
+   102,
+   101,
+   102,
+   102,
+   101,
+   102,
+   101,
+   102,
+   101,
+   101,
+   102,
+   101,
+   102,
+   102,
+   102,
+   102,
+   101,
+   103,
+   101,
+   101,
+   101,
+   102,
+   102,
+   102,
+   102,
+   101,
+   102,
+   102,
+   101,
+   101,
+   101,
+   102,
+   102,
+   102,
+   102,
+   102,
+   101,
+   102,
+   101,
+   102,
+   101,
+   101,
+   101,
+   102,
+   102,
+   101,
+   102,
+   102,
+   101,
+   101,
+   102,
+   101,
+   101,
+   102,
+   102,
+   102,
+   101,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   101,
+   102,
+   102,
+   102,
+   101,
+   101,
+   101,
+   102,
+   102,
+   102,
+   102,
+   101,
+   101,
+   102,
+   102,
+   102,
+   101,
+   102,
+   102,
+   102,
+   101,
+   101,
+   102,
+   102,
+   102,
+   102,
+   102,
+   101,
+   101,
+   101,
+   102,
+   101,
+   101,
+   102,
+   102,
+   102,
+   102,
+   102,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   102,
+   101,
+   101,
+   101,
+   102,
+   101,
+   102,
+   101,
+   101,
+   102,
+   101,
+   101,
+   102,
+   101,
+   101,
+   101,
+   102,
+   102,
+   102,
+   102,
+   101,
+   102,
+   102,
+   102,
+   102,
+   102,
+   101,
+   102,
+   101,
+   102,
+   101,
+   102,
+   101,
+   102,
+   102,
+   102,
+   102,
+   101,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   101,
+   102,
+   102,
+   102,
+   102,
+   101
+  ]
+ },
+ "faithfulness": {
+  "corpus": 4572,
+  "met": true,
+  "mismatches": [],
+  "pool": 4572
+ },
+ "files": 171,
+ "filter_check": {
+  "files": [
+   {
+    "differ": 0,
+    "file": "Gen3.lean",
+    "queries": 204
+   },
+   {
+    "differ": 0,
+    "file": "RateRepair.lean",
+    "queries": 208
+   },
+   {
+    "differ": 0,
+    "file": "Address.lean",
+    "queries": 208
+   },
+   {
+    "differ": 0,
+    "file": "MeasurandRegister.lean",
+    "queries": 208
+   },
+   {
+    "differ": 0,
+    "file": "ZeroStorageV5.lean",
+    "queries": 206
+   }
+  ],
+  "met": true
+ },
+ "held_fixed": {
+  "baseline_changed": 0,
+  "files": [
+   {
+    "changed": 69,
+    "file": "Address.lean"
+   },
+   {
+    "changed": 90,
+    "file": "Admission.lean"
+   },
+   {
+    "changed": 1,
+    "file": "Agree.lean"
+   },
+   {
+    "changed": 14,
+    "file": "AlignmentPoints.lean"
+   },
+   {
+    "changed": 18,
+    "file": "Anonymous.lean"
+   },
+   {
+    "changed": 96,
+    "file": "Calibration.lean"
+   },
+   {
+    "changed": 6,
+    "file": "CarriedFork.lean"
+   },
+   {
+    "changed": 4,
+    "file": "Cascade.lean"
+   },
+   {
+    "changed": 4,
+    "file": "CelsiusRegister.lean"
+   },
+   {
+    "changed": 6,
+    "file": "CognitionRoundTwo.lean"
+   },
+   {
+    "changed": 86,
+    "file": "ColumnExtremum.lean"
+   },
+   {
+    "changed": 2,
+    "file": "Combiner.lean"
+   },
+   {
+    "changed": 216,
+    "file": "Comparative.lean"
+   },
+   {
+    "changed": 76,
+    "file": "Completion.lean"
+   },
+   {
+    "changed": 2,
+    "file": "Computable.lean"
+   },
+   {
+    "changed": 22,
+    "file": "ConditionalInduction.lean"
+   },
+   {
+    "changed": 4,
+    "file": "ConfidenceFloor.lean"
+   },
+   {
+    "changed": 200,
+    "file": "Conjugate.lean"
+   },
+   {
+    "changed": 4,
+    "file": "ConnectedMachine.lean"
+   },
+   {
+    "changed": 149,
+    "file": "Constants.lean"
+   },
+   {
+    "changed": 19,
+    "file": "ConstructionLadder.lean"
+   },
+   {
+    "changed": 23,
+    "file": "Controller.lean"
+   },
+   {
+    "changed": 65,
+    "file": "Conversation.lean"
+   },
+   {
+    "changed": 48,
+    "file": "CoordinateOrder.lean"
+   },
+   {
+    "changed": 10,
+    "file": "Corpus.lean"
+   },
+   {
+    "changed": 0,
+    "file": "CorpusResample.lean"
+   },
+   {
+    "changed": 294,
+    "file": "Cube/HexTiles.lean"
+   },
+   {
+    "changed": 13,
+    "file": "Cube/Stabiliser.lean"
+   },
+   {
+    "changed": 66,
+    "file": "Cube/Surface.lean"
+   },
+   {
+    "changed": 44,
+    "file": "Cube/Tax.lean"
+   },
+   {
+    "changed": 25,
+    "file": "Cube/Three.lean"
+   },
+   {
+    "changed": 28,
+    "file": "Cumulative.lean"
+   },
+   {
+    "changed": 43,
+    "file": "CumulativityRule.lean"
+   },
+   {
+    "changed": 8,
+    "file": "DeclaredFrames.lean"
+   },
+   {
+    "changed": 9,
+    "file": "DecoderConfidence.lean"
+   },
+   {
+    "changed": 26,
+    "file": "DeepHoleClassifier.lean"
+   },
+   {
+    "changed": 134,
+    "file": "DeepHoleEscalation.lean"
+   },
+   {
+    "changed": 1,
+    "file": "DeepHoleFailure.lean"
+   },
+   {
+    "changed": 47,
+    "file": "DeltaSigma.lean"
+   },
+   {
+    "changed": 74,
+    "file": "Denotation.lean"
+   },
+   {
+    "changed": 22,
+    "file": "DimensionCarrier.lean"
+   },
+   {
+    "changed": 39,
+    "file": "DiscourseState.lean"
+   },
+   {
+    "changed": 7,
+    "file": "Distinction.lean"
+   },
+   {
+    "changed": 7,
+    "file": "Endianness.lean"
+   },
+   {
+    "changed": 2,
+    "file": "EngineeringWheels.lean"
+   },
+   {
+    "changed": 29,
+    "file": "Escalation.lean"
+   },
+   {
+    "changed": 41,
+    "file": "EscalationLoop.lean"
+   },
+   {
+    "changed": 679,
+    "file": "Extraspecial.lean"
+   },
+   {
+    "changed": 53,
+    "file": "Facets.lean"
+   },
+   {
+    "changed": 0,
+    "file": "Feedback.lean"
+   },
+   {
+    "changed": 107,
+    "file": "FieldSurface.lean"
+   },
+   {
+    "changed": 66,
+    "file": "FitCapacity.lean"
+   },
+   {
+    "changed": 35,
+    "file": "Foundations.lean"
+   },
+   {
+    "changed": 196,
+    "file": "Gen2.lean"
+   },
+   {
+    "changed": 988,
+    "file": "Gen3.lean"
+   },
+   {
+    "changed": 26,
+    "file": "Golay/Census.lean"
+   },
+   {
+    "changed": 17,
+    "file": "Golay/Cesaro.lean"
+   },
+   {
+    "changed": 290,
+    "file": "Golay/Code.lean"
+   },
+   {
+    "changed": 5,
+    "file": "Golay/CubeMirror.lean"
+   },
+   {
+    "changed": 132,
+    "file": "Golay/Dynamics.lean"
+   },
+   {
+    "changed": 116,
+    "file": "Golay/Sextet.lean"
+   },
+   {
+    "changed": 6,
+    "file": "GolayBoundary.lean"
+   },
+   {
+    "changed": 1,
+    "file": "GolayMOG.lean"
+   },
+   {
+    "changed": 73,
+    "file": "GolayWeightEnum.lean"
+   },
+   {
+    "changed": 183,
+    "file": "GrayJump.lean"
+   },
+   {
+    "changed": 4,
+    "file": "GridTension.lean"
+   },
+   {
+    "changed": 1,
+    "file": "Harmony.lean"
+   },
+   {
+    "changed": 1880,
+    "file": "Heisenberg.lean"
+   },
+   {
+    "changed": 1,
+    "file": "HeldPrecision.lean"
+   },
+   {
+    "changed": 86,
+    "file": "HigherLattices.lean"
+   },
+   {
+    "changed": 8,
+    "file": "HoleBounds.lean"
+   },
+   {
+    "changed": 11,
+    "file": "HullExpansion.lean"
+   },
+   {
+    "changed": 15,
+    "file": "ImperativeGrammar.lean"
+   },
+   {
+    "changed": 1,
+    "file": "IntegerDecision.lean"
+   },
+   {
+    "changed": 6,
+    "file": "Irrational.lean"
+   },
+   {
+    "changed": 83,
+    "file": "LDP.lean"
+   },
+   {
+    "changed": 99,
+    "file": "LLVQTable.lean"
+   },
+   {
+    "changed": 6,
+    "file": "LawAbsorption.lean"
+   },
+   {
+    "changed": 19,
+    "file": "LawRegister.lean"
+   },
+   {
+    "changed": 42,
+    "file": "LayerChain.lean"
+   },
+   {
+    "changed": 206,
+    "file": "Layers.lean"
+   },
+   {
+    "changed": 95,
+    "file": "Lightspeed.lean"
+   },
+   {
+    "changed": 6,
+    "file": "LogBucket.lean"
+   },
+   {
+    "changed": 1,
+    "file": "Mantissa.lean"
+   },
+   {
+    "changed": 1,
+    "file": "MeasurandKinds.lean"
+   },
+   {
+    "changed": 1,
+    "file": "MeasurandRegister.lean"
+   },
+   {
+    "changed": 89,
+    "file": "MeasureView.lean"
+   },
+   {
+    "changed": 5,
+    "file": "ModeAlgebra.lean"
+   },
+   {
+    "changed": 2,
+    "file": "NameCoordinate.lean"
+   },
+   {
+    "changed": 1,
+    "file": "NativeParity.lean"
+   },
+   {
+    "changed": 15,
+    "file": "NativeWords.lean"
+   },
+   {
+    "changed": 188,
+    "file": "Niemeier.lean"
+   },
+   {
+    "changed": 20,
+    "file": "NormFamily.lean"
+   },
+   {
+    "changed": 7,
+    "file": "NowReceipt.lean"
+   },
+   {
+    "changed": 32,
+    "file": "OnDemandView.lean"
+   },
+   {
+    "changed": 270,
+    "file": "PCGS.lean"
+   },
+   {
+    "changed": 89,
+    "file": "Packing.lean"
+   },
+   {
+    "changed": 16,
+    "file": "Permutation.lean"
+   },
+   {
+    "changed": 36,
+    "file": "PlanStore.lean"
+   },
+   {
+    "changed": 11,
+    "file": "PlannerLoop.lean"
+   },
+   {
+    "changed": 0,
+    "file": "Platonic.lean"
+   },
+   {
+    "changed": 68,
+    "file": "ProbeOracle.lean"
+   },
+   {
+    "changed": 236,
+    "file": "PythonSpeech.lean"
+   },
+   {
+    "changed": 75,
+    "file": "Question.lean"
+   },
+   {
+    "changed": 131,
+    "file": "QuestionNested.lean"
+   },
+   {
+    "changed": 6,
+    "file": "QuestionSetB.lean"
+   },
+   {
+    "changed": 57,
+    "file": "QuestionSetBAnswers.lean"
+   },
+   {
+    "changed": 822,
+    "file": "QuestionSetBMatrix.lean"
+   },
+   {
+    "changed": 9,
+    "file": "RatePosterior.lean"
+   },
+   {
+    "changed": 0,
+    "file": "RateRepair.lean"
+   },
+   {
+    "changed": 68,
+    "file": "Reachable.lean"
+   },
+   {
+    "changed": 10,
+    "file": "ReadQuantum.lean"
+   },
+   {
+    "changed": 4,
+    "file": "ReasoningLoop.lean"
+   },
+   {
+    "changed": 131,
+    "file": "Recipe.lean"
+   },
+   {
+    "changed": 58,
+    "file": "RegisterWorld.lean"
+   },
+   {
+    "changed": 9,
+    "file": "Relaxation.lean"
+   },
+   {
+    "changed": 37,
+    "file": "Relay.lean"
+   },
+   {
+    "changed": 9,
+    "file": "Retrieval.lean"
+   },
+   {
+    "changed": 143,
+    "file": "ReverseTCT.lean"
+   },
+   {
+    "changed": 5,
+    "file": "ReverseTCTThree.lean"
+   },
+   {
+    "changed": 33,
+    "file": "ReverseTCTTwo.lean"
+   },
+   {
+    "changed": 60,
+    "file": "Reversible.lean"
+   },
+   {
+    "changed": 144,
+    "file": "RoleBinding.lean"
+   },
+   {
+    "changed": 217,
+    "file": "Sakuma.lean"
+   },
+   {
+    "changed": 141,
+    "file": "ScaleConversion.lean"
+   },
+   {
+    "changed": 19,
+    "file": "ScaledLadder.lean"
+   },
+   {
+    "changed": 25,
+    "file": "SearchLoop.lean"
+   },
+   {
+    "changed": 6,
+    "file": "SecondReading.lean"
+   },
+   {
+    "changed": 18,
+    "file": "SecondView.lean"
+   },
+   {
+    "changed": 16,
+    "file": "SeedLayers.lean"
+   },
+   {
+    "changed": 17,
+    "file": "SeedRoles.lean"
+   },
+   {
+    "changed": 5,
+    "file": "SemanticPlan.lean"
+   },
+   {
+    "changed": 5,
+    "file": "Semantics/Grounding.lean"
+   },
+   {
+    "changed": 43,
+    "file": "Semantics/Meaning.lean"
+   },
+   {
+    "changed": 2,
+    "file": "ShellSigma.lean"
+   },
+   {
+    "changed": 89,
+    "file": "Shortcut/Decoder.lean"
+   },
+   {
+    "changed": 5,
+    "file": "Shortcut/FactorMap.lean"
+   },
+   {
+    "changed": 48,
+    "file": "Shortcut/Golay.lean"
+   },
+   {
+    "changed": 23,
+    "file": "Shortcut/GolayWeights.lean"
+   },
+   {
+    "changed": 183,
+    "file": "Shortcut/GrayCode.lean"
+   },
+   {
+    "changed": 37,
+    "file": "Shortcut/Leech.lean"
+   },
+   {
+    "changed": 12,
+    "file": "Shortcut/Shortcut.lean"
+   },
+   {
+    "changed": 9,
+    "file": "Shortcut/Substrate.lean"
+   },
+   {
+    "changed": 11,
+    "file": "SpatialArithmetic.lean"
+   },
+   {
+    "changed": 78,
+    "file": "Stability.lean"
+   },
+   {
+    "changed": 24,
+    "file": "Stack.lean"
+   },
+   {
+    "changed": 75,
+    "file": "Steiner.lean"
+   },
+   {
+    "changed": 36,
+    "file": "StepCost.lean"
+   },
+   {
+    "changed": 105,
+    "file": "StepwiseFrames.lean"
+   },
+   {
+    "changed": 63,
+    "file": "StepwisePlanner.lean"
+   },
+   {
+    "changed": 1,
+    "file": "StepwiseWiden.lean"
+   },
+   {
+    "changed": 13,
+    "file": "Sturmian.lean"
+   },
+   {
+    "changed": 1,
+    "file": "SubstrateCognition.lean"
+   },
+   {
+    "changed": 46,
+    "file": "Superposition.lean"
+   },
+   {
+    "changed": 1,
+    "file": "SymbolicParameters.lean"
+   },
+   {
+    "changed": 20,
+    "file": "TaxConservation.lean"
+   },
+   {
+    "changed": 45,
+    "file": "ThirdSort.lean"
+   },
+   {
+    "changed": 6,
+    "file": "TieBreak.lean"
+   },
+   {
+    "changed": 2,
+    "file": "Totient.lean"
+   },
+   {
+    "changed": 6,
+    "file": "Tower.lean"
+   },
+   {
+    "changed": 2,
+    "file": "Transcendental.lean"
+   },
+   {
+    "changed": 61,
+    "file": "Triad.lean"
+   },
+   {
+    "changed": 31,
+    "file": "TriadCensus.lean"
+   },
+   {
+    "changed": 8,
+    "file": "TriadChance.lean"
+   },
+   {
+    "changed": 4,
+    "file": "TypedOperators.lean"
+   },
+   {
+    "changed": 128,
+    "file": "VOA.lean"
+   },
+   {
+    "changed": 35,
+    "file": "Vagueness.lean"
+   },
+   {
+    "changed": 8,
+    "file": "Wobble.lean"
+   },
+   {
+    "changed": 46,
+    "file": "WobbleLandscape.lean"
+   },
+   {
+    "changed": 46,
+    "file": "ZeroStorage.lean"
+   },
+   {
+    "changed": 85,
+    "file": "ZeroStorageV5.lean"
+   }
+  ],
+  "files_with_change": 167,
+  "largest": 1880,
+  "total": 12541
+ },
+ "lean_file": "RequestProject/GLM/CorpusResample.lean",
+ "marks": {
+  "M1": true,
+  "M2": true,
+  "M3": true,
+  "M4": false,
+  "M5": true
+ },
+ "met": 4,
+ "offset_queries": {
+  "declarations": [
+   208,
+   208,
+   208,
+   208,
+   208,
+   208,
+   208,
+   208,
+   208,
+   208,
+   208,
+   208,
+   208,
+   208,
+   208,
+   208,
+   208,
+   208,
+   207,
+   207,
+   207,
+   207
+  ],
+  "goals": [
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   102,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101,
+   101
+  ]
+ },
+ "pool": 4572,
+ "source_digest": "4d8310e853d964c29528e728d588317d0c623c5f395a0328f004ee7fe867c50d",
+ "strides": {
+  "declarations": 22,
+  "goals": 45
+ },
+ "study": "studies/CORPUS_RESAMPLE_STUDY.md",
+ "verdicts": {
+  "a": {
+   "declarations": {
+    "discordance": {
+     "first_only": 161,
+     "second_only": 94,
+     "sign_test": {
+      "__fraction__": "940218113746204387888587141739642515884212132266876636146654914629493957/28948022309329048855892746252171976963317496166410141009864396001978282409984"
+     }
+    },
+    "opposite_file_drops": {
+     "__fraction__": "13/57"
+    },
+    "opposite_offsets": {
+     "__fraction__": "1/22"
+    },
+    "per_k": {
+     "1": {
+      "ge_file_drops": {
+       "__fraction__": "97/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "6/11"
+      },
+      "gt_file_drops": {
+       "__fraction__": "71/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "5/11"
+      },
+      "lt_file_drops": {
+       "__fraction__": "74/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "5/11"
+      }
+     },
+     "10": {
+      "ge_file_drops": {
+       "__fraction__": "91/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "19/22"
+      },
+      "gt_file_drops": {
+       "__fraction__": "73/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "9/11"
+      },
+      "lt_file_drops": {
+       "__fraction__": "80/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "3/22"
+      }
+     },
+     "3": {
+      "ge_file_drops": {
+       "__fraction__": "125/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "9/11"
+      },
+      "gt_file_drops": {
+       "__fraction__": "10/19"
+      },
+      "gt_offsets": {
+       "__fraction__": "17/22"
+      },
+      "lt_file_drops": {
+       "__fraction__": "46/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "2/11"
+      }
+     },
+     "5": {
+      "ge_file_drops": {
+       "__fraction__": "73/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "19/22"
+      },
+      "gt_file_drops": {
+       "__fraction__": "47/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "19/22"
+      },
+      "lt_file_drops": {
+       "__fraction__": "98/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "3/22"
+      }
+     }
+    },
+    "share_file_drops": {
+     "__fraction__": "31/171"
+    },
+    "share_offsets": {
+     "__fraction__": "9/22"
+    },
+    "verdict": "draw"
+   },
+   "goals": {
+    "discordance": {
+     "first_only": 140,
+     "second_only": 92,
+     "sign_test": {
+      "__fraction__": "1696299626872925736777115120868177072213920986387615358153221866475/862718293348820473429344482784628181556388621521298319395315527974912"
+     }
+    },
+    "opposite_file_drops": {
+     "__fraction__": "1/19"
+    },
+    "opposite_offsets": {
+     "__fraction__": "4/45"
+    },
+    "per_k": {
+     "1": {
+      "ge_file_drops": {
+       "__fraction__": "1/3"
+      },
+      "ge_offsets": {
+       "__fraction__": "26/45"
+      },
+      "gt_file_drops": {
+       "__fraction__": "10/57"
+      },
+      "gt_offsets": {
+       "__fraction__": "19/45"
+      },
+      "lt_file_drops": {
+       "__fraction__": "2/3"
+      },
+      "lt_offsets": {
+       "__fraction__": "19/45"
+      }
+     },
+     "10": {
+      "ge_file_drops": {
+       "__fraction__": "157/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "7/9"
+      },
+      "gt_file_drops": {
+       "__fraction__": "136/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "2/3"
+      },
+      "lt_file_drops": {
+       "__fraction__": "14/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "2/9"
+      }
+     },
+     "3": {
+      "ge_file_drops": {
+       "__fraction__": "140/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "7/9"
+      },
+      "gt_file_drops": {
+       "__fraction__": "118/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "26/45"
+      },
+      "lt_file_drops": {
+       "__fraction__": "31/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "2/9"
+      }
+     },
+     "5": {
+      "ge_file_drops": {
+       "__fraction__": "157/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "34/45"
+      },
+      "gt_file_drops": {
+       "__fraction__": "7/9"
+      },
+      "gt_offsets": {
+       "__fraction__": "28/45"
+      },
+      "lt_file_drops": {
+       "__fraction__": "14/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "11/45"
+      }
+     }
+    },
+    "share_file_drops": {
+     "__fraction__": "4/19"
+    },
+    "share_offsets": {
+     "__fraction__": "1/3"
+    },
+    "verdict": "draw"
+   }
+  },
+  "b": {
+   "declarations": {
+    "discordance": {
+     "first_only": 44,
+     "second_only": 59,
+     "sign_test": {
+      "__fraction__": "106130455511131290985634037125/633825300114114700748351602688"
+     }
+    },
+    "opposite_file_drops": {
+     "__fraction__": "1/9"
+    },
+    "opposite_offsets": {
+     "__fraction__": "7/22"
+    },
+    "per_k": {
+     "1": {
+      "ge_file_drops": {
+       "__fraction__": "140/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "5/11"
+      },
+      "gt_file_drops": {
+       "__fraction__": "124/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "7/22"
+      },
+      "lt_file_drops": {
+       "__fraction__": "31/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "6/11"
+      }
+     },
+     "10": {
+      "ge_file_drops": {
+       "__fraction__": "20/57"
+      },
+      "ge_offsets": {
+       "__fraction__": "1/2"
+      },
+      "gt_file_drops": {
+       "__fraction__": "8/57"
+      },
+      "gt_offsets": {
+       "__fraction__": "3/11"
+      },
+      "lt_file_drops": {
+       "__fraction__": "37/57"
+      },
+      "lt_offsets": {
+       "__fraction__": "1/2"
+      }
+     },
+     "3": {
+      "ge_file_drops": {
+       "__fraction__": "10/57"
+      },
+      "ge_offsets": {
+       "__fraction__": "4/11"
+      },
+      "gt_file_drops": {
+       "__fraction__": "11/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "3/22"
+      },
+      "lt_file_drops": {
+       "__fraction__": "47/57"
+      },
+      "lt_offsets": {
+       "__fraction__": "7/11"
+      }
+     },
+     "5": {
+      "ge_file_drops": {
+       "__fraction__": "109/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "1/2"
+      },
+      "gt_file_drops": {
+       "__fraction__": "46/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "2/11"
+      },
+      "lt_file_drops": {
+       "__fraction__": "62/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "1/2"
+      }
+     }
+    },
+    "share_file_drops": {
+     "__fraction__": "11/171"
+    },
+    "share_offsets": {
+     "__fraction__": "1/11"
+    },
+    "verdict": "draw"
+   },
+   "goals": {
+    "discordance": {
+     "first_only": 49,
+     "second_only": 57,
+     "sign_test": {
+      "__fraction__": "5037688035913222760646450939755/10141204801825835211973625643008"
+     }
+    },
+    "opposite_file_drops": {
+     "__fraction__": "5/9"
+    },
+    "opposite_offsets": {
+     "__fraction__": "14/45"
+    },
+    "per_k": {
+     "1": {
+      "ge_file_drops": {
+       "__fraction__": "71/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "3/5"
+      },
+      "gt_file_drops": {
+       "__fraction__": "2/19"
+      },
+      "gt_offsets": {
+       "__fraction__": "2/5"
+      },
+      "lt_file_drops": {
+       "__fraction__": "100/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "2/5"
+      }
+     },
+     "10": {
+      "ge_file_drops": {
+       "__fraction__": "43/57"
+      },
+      "ge_offsets": {
+       "__fraction__": "29/45"
+      },
+      "gt_file_drops": {
+       "__fraction__": "28/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "1/5"
+      },
+      "lt_file_drops": {
+       "__fraction__": "14/57"
+      },
+      "lt_offsets": {
+       "__fraction__": "16/45"
+      }
+     },
+     "3": {
+      "ge_file_drops": {
+       "__fraction__": "59/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "23/45"
+      },
+      "gt_file_drops": {
+       "__fraction__": "7/57"
+      },
+      "gt_offsets": {
+       "__fraction__": "14/45"
+      },
+      "lt_file_drops": {
+       "__fraction__": "112/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "22/45"
+      }
+     },
+     "5": {
+      "ge_file_drops": {
+       "__fraction__": "44/57"
+      },
+      "ge_offsets": {
+       "__fraction__": "29/45"
+      },
+      "gt_file_drops": {
+       "__fraction__": "49/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "14/45"
+      },
+      "lt_file_drops": {
+       "__fraction__": "13/57"
+      },
+      "lt_offsets": {
+       "__fraction__": "16/45"
+      }
+     }
+    },
+    "share_file_drops": {
+     "__fraction__": "16/171"
+    },
+    "share_offsets": {
+     "__fraction__": "2/15"
+    },
+    "verdict": "draw"
+   }
+  },
+  "c": {
+   "declarations": {
+    "discordance": {
+     "first_only": 129,
+     "second_only": 33,
+     "sign_test": {
+      "__fraction__": "37993690453287245639917253391784483/2923003274661805836407369665432566039311865085952"
+     }
+    },
+    "opposite_file_drops": {
+     "__fraction__": "0/1"
+    },
+    "opposite_offsets": {
+     "__fraction__": "0/1"
+    },
+    "per_k": {
+     "1": {
+      "ge_file_drops": {
+       "__fraction__": "47/57"
+      },
+      "ge_offsets": {
+       "__fraction__": "17/22"
+      },
+      "gt_file_drops": {
+       "__fraction__": "115/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "15/22"
+      },
+      "lt_file_drops": {
+       "__fraction__": "10/57"
+      },
+      "lt_offsets": {
+       "__fraction__": "5/22"
+      }
+     },
+     "10": {
+      "ge_file_drops": {
+       "__fraction__": "1/1"
+      },
+      "ge_offsets": {
+       "__fraction__": "1/1"
+      },
+      "gt_file_drops": {
+       "__fraction__": "163/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "21/22"
+      },
+      "lt_file_drops": {
+       "__fraction__": "0/1"
+      },
+      "lt_offsets": {
+       "__fraction__": "0/1"
+      }
+     },
+     "3": {
+      "ge_file_drops": {
+       "__fraction__": "170/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "1/1"
+      },
+      "gt_file_drops": {
+       "__fraction__": "170/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "21/22"
+      },
+      "lt_file_drops": {
+       "__fraction__": "1/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "0/1"
+      }
+     },
+     "5": {
+      "ge_file_drops": {
+       "__fraction__": "160/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "1/1"
+      },
+      "gt_file_drops": {
+       "__fraction__": "119/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "21/22"
+      },
+      "lt_file_drops": {
+       "__fraction__": "11/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "0/1"
+      }
+     }
+    },
+    "share_file_drops": {
+     "__fraction__": "44/57"
+    },
+    "share_offsets": {
+     "__fraction__": "17/22"
+    },
+    "verdict": "draw"
+   },
+   "goals": {
+    "discordance": {
+     "first_only": 109,
+     "second_only": 30,
+     "sign_test": {
+      "__fraction__": "107276908332618577675545766307/10889035741470030830827987437816582766592"
+     }
+    },
+    "opposite_file_drops": {
+     "__fraction__": "1/171"
+    },
+    "opposite_offsets": {
+     "__fraction__": "2/45"
+    },
+    "per_k": {
+     "1": {
+      "ge_file_drops": {
+       "__fraction__": "154/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "34/45"
+      },
+      "gt_file_drops": {
+       "__fraction__": "130/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "26/45"
+      },
+      "lt_file_drops": {
+       "__fraction__": "17/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "11/45"
+      }
+     },
+     "10": {
+      "ge_file_drops": {
+       "__fraction__": "56/57"
+      },
+      "ge_offsets": {
+       "__fraction__": "1/1"
+      },
+      "gt_file_drops": {
+       "__fraction__": "157/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "7/9"
+      },
+      "lt_file_drops": {
+       "__fraction__": "1/57"
+      },
+      "lt_offsets": {
+       "__fraction__": "0/1"
+      }
+     },
+     "3": {
+      "ge_file_drops": {
+       "__fraction__": "166/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "8/9"
+      },
+      "gt_file_drops": {
+       "__fraction__": "163/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "34/45"
+      },
+      "lt_file_drops": {
+       "__fraction__": "5/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "1/9"
+      }
+     },
+     "5": {
+      "ge_file_drops": {
+       "__fraction__": "169/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "14/15"
+      },
+      "gt_file_drops": {
+       "__fraction__": "158/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "7/9"
+      },
+      "lt_file_drops": {
+       "__fraction__": "2/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "1/15"
+      }
+     }
+    },
+    "share_file_drops": {
+     "__fraction__": "149/171"
+    },
+    "share_offsets": {
+     "__fraction__": "28/45"
+    },
+    "verdict": "draw"
+   }
+  },
+  "d": {
+   "declarations": {
+    "discordance": {
+     "first_only": 23,
+     "second_only": 40,
+     "sign_test": {
+      "__fraction__": "193459082416763/4503599627370496"
+     }
+    },
+    "opposite_file_drops": {
+     "__fraction__": "20/171"
+    },
+    "opposite_offsets": {
+     "__fraction__": "4/11"
+    },
+    "per_k": {
+     "1": {
+      "ge_file_drops": {
+       "__fraction__": "52/57"
+      },
+      "ge_offsets": {
+       "__fraction__": "7/11"
+      },
+      "gt_file_drops": {
+       "__fraction__": "46/57"
+      },
+      "gt_offsets": {
+       "__fraction__": "3/11"
+      },
+      "lt_file_drops": {
+       "__fraction__": "5/57"
+      },
+      "lt_offsets": {
+       "__fraction__": "4/11"
+      }
+     },
+     "10": {
+      "ge_file_drops": {
+       "__fraction__": "94/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "15/22"
+      },
+      "gt_file_drops": {
+       "__fraction__": "20/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "7/22"
+      },
+      "lt_file_drops": {
+       "__fraction__": "77/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "7/22"
+      }
+     },
+     "3": {
+      "ge_file_drops": {
+       "__fraction__": "115/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "6/11"
+      },
+      "gt_file_drops": {
+       "__fraction__": "65/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "2/11"
+      },
+      "lt_file_drops": {
+       "__fraction__": "56/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "5/11"
+      }
+     },
+     "5": {
+      "ge_file_drops": {
+       "__fraction__": "139/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "5/11"
+      },
+      "gt_file_drops": {
+       "__fraction__": "110/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "2/11"
+      },
+      "lt_file_drops": {
+       "__fraction__": "32/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "6/11"
+      }
+     }
+    },
+    "share_file_drops": {
+     "__fraction__": "20/57"
+    },
+    "share_offsets": {
+     "__fraction__": "2/11"
+    },
+    "verdict": "draw"
+   },
+   "goals": {
+    "discordance": {
+     "first_only": 31,
+     "second_only": 34,
+     "sign_test": {
+      "__fraction__": "7418514928350709373/9223372036854775808"
+     }
+    },
+    "opposite_file_drops": {
+     "__fraction__": "7/57"
+    },
+    "opposite_offsets": {
+     "__fraction__": "2/9"
+    },
+    "per_k": {
+     "1": {
+      "ge_file_drops": {
+       "__fraction__": "43/57"
+      },
+      "ge_offsets": {
+       "__fraction__": "7/9"
+      },
+      "gt_file_drops": {
+       "__fraction__": "91/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "19/45"
+      },
+      "lt_file_drops": {
+       "__fraction__": "14/57"
+      },
+      "lt_offsets": {
+       "__fraction__": "2/9"
+      }
+     },
+     "10": {
+      "ge_file_drops": {
+       "__fraction__": "158/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "38/45"
+      },
+      "gt_file_drops": {
+       "__fraction__": "109/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "4/15"
+      },
+      "lt_file_drops": {
+       "__fraction__": "13/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "7/45"
+      }
+     },
+     "3": {
+      "ge_file_drops": {
+       "__fraction__": "43/57"
+      },
+      "ge_offsets": {
+       "__fraction__": "5/9"
+      },
+      "gt_file_drops": {
+       "__fraction__": "16/57"
+      },
+      "gt_offsets": {
+       "__fraction__": "13/45"
+      },
+      "lt_file_drops": {
+       "__fraction__": "14/57"
+      },
+      "lt_offsets": {
+       "__fraction__": "4/9"
+      }
+     },
+     "5": {
+      "ge_file_drops": {
+       "__fraction__": "4/9"
+      },
+      "ge_offsets": {
+       "__fraction__": "3/5"
+      },
+      "gt_file_drops": {
+       "__fraction__": "22/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "14/45"
+      },
+      "lt_file_drops": {
+       "__fraction__": "5/9"
+      },
+      "lt_offsets": {
+       "__fraction__": "2/5"
+      }
+     }
+    },
+    "share_file_drops": {
+     "__fraction__": "34/171"
+    },
+    "share_offsets": {
+     "__fraction__": "11/45"
+    },
+    "verdict": "draw"
+   }
+  },
+  "e": {
+   "declarations": {
+    "discordance": {
+     "first_only": 42,
+     "second_only": 53,
+     "sign_test": {
+      "__fraction__": "3019436679644048294170370513/9903520314283042199192993792"
+     }
+    },
+    "opposite_file_drops": {
+     "__fraction__": "43/57"
+    },
+    "opposite_offsets": {
+     "__fraction__": "8/11"
+    },
+    "per_k": {
+     "1": {
+      "ge_file_drops": {
+       "__fraction__": "155/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "8/11"
+      },
+      "gt_file_drops": {
+       "__fraction__": "16/19"
+      },
+      "gt_offsets": {
+       "__fraction__": "1/2"
+      },
+      "lt_file_drops": {
+       "__fraction__": "16/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "3/11"
+      }
+     },
+     "10": {
+      "ge_file_drops": {
+       "__fraction__": "34/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "6/11"
+      },
+      "gt_file_drops": {
+       "__fraction__": "1/19"
+      },
+      "gt_offsets": {
+       "__fraction__": "5/22"
+      },
+      "lt_file_drops": {
+       "__fraction__": "137/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "5/11"
+      }
+     },
+     "3": {
+      "ge_file_drops": {
+       "__fraction__": "15/19"
+      },
+      "ge_offsets": {
+       "__fraction__": "6/11"
+      },
+      "gt_file_drops": {
+       "__fraction__": "115/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "4/11"
+      },
+      "lt_file_drops": {
+       "__fraction__": "4/19"
+      },
+      "lt_offsets": {
+       "__fraction__": "5/11"
+      }
+     },
+     "5": {
+      "ge_file_drops": {
+       "__fraction__": "103/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "13/22"
+      },
+      "gt_file_drops": {
+       "__fraction__": "14/57"
+      },
+      "gt_offsets": {
+       "__fraction__": "3/11"
+      },
+      "lt_file_drops": {
+       "__fraction__": "68/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "9/22"
+      }
+     }
+    },
+    "share_file_drops": {
+     "__fraction__": "103/171"
+    },
+    "share_offsets": {
+     "__fraction__": "13/22"
+    },
+    "verdict": "draw"
+   },
+   "goals": {
+    "discordance": {
+     "first_only": 47,
+     "second_only": 49,
+     "sign_test": {
+      "__fraction__": "18198273875099509671280586809/19807040628566084398385987584"
+     }
+    },
+    "opposite_file_drops": {
+     "__fraction__": "113/171"
+    },
+    "opposite_offsets": {
+     "__fraction__": "2/3"
+    },
+    "per_k": {
+     "1": {
+      "ge_file_drops": {
+       "__fraction__": "146/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "34/45"
+      },
+      "gt_file_drops": {
+       "__fraction__": "124/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "22/45"
+      },
+      "lt_file_drops": {
+       "__fraction__": "25/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "11/45"
+      }
+     },
+     "10": {
+      "ge_file_drops": {
+       "__fraction__": "154/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "2/3"
+      },
+      "gt_file_drops": {
+       "__fraction__": "130/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "14/45"
+      },
+      "lt_file_drops": {
+       "__fraction__": "17/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "1/3"
+      }
+     },
+     "3": {
+      "ge_file_drops": {
+       "__fraction__": "49/57"
+      },
+      "ge_offsets": {
+       "__fraction__": "22/45"
+      },
+      "gt_file_drops": {
+       "__fraction__": "122/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "19/45"
+      },
+      "lt_file_drops": {
+       "__fraction__": "8/57"
+      },
+      "lt_offsets": {
+       "__fraction__": "23/45"
+      }
+     },
+     "5": {
+      "ge_file_drops": {
+       "__fraction__": "49/57"
+      },
+      "ge_offsets": {
+       "__fraction__": "29/45"
+      },
+      "gt_file_drops": {
+       "__fraction__": "58/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "1/3"
+      },
+      "lt_file_drops": {
+       "__fraction__": "8/57"
+      },
+      "lt_offsets": {
+       "__fraction__": "16/45"
+      }
+     }
+    },
+    "share_file_drops": {
+     "__fraction__": "49/57"
+    },
+    "share_offsets": {
+     "__fraction__": "29/45"
+    },
+    "verdict": "draw"
+   }
+  },
+  "f": {
+   "declarations": {
+    "discordance": {
+     "first_only": 138,
+     "second_only": 31,
+     "sign_test": {
+      "__fraction__": "1203619618259559952592843391949303/46768052394588893382517914646921056628989841375232"
+     }
+    },
+    "opposite_file_drops": {
+     "__fraction__": "0/1"
+    },
+    "opposite_offsets": {
+     "__fraction__": "0/1"
+    },
+    "per_k": {
+     "1": {
+      "ge_file_drops": {
+       "__fraction__": "83/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "9/11"
+      },
+      "gt_file_drops": {
+       "__fraction__": "53/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "17/22"
+      },
+      "lt_file_drops": {
+       "__fraction__": "88/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "2/11"
+      }
+     },
+     "10": {
+      "ge_file_drops": {
+       "__fraction__": "1/1"
+      },
+      "ge_offsets": {
+       "__fraction__": "1/1"
+      },
+      "gt_file_drops": {
+       "__fraction__": "1/1"
+      },
+      "gt_offsets": {
+       "__fraction__": "1/1"
+      },
+      "lt_file_drops": {
+       "__fraction__": "0/1"
+      },
+      "lt_offsets": {
+       "__fraction__": "0/1"
+      }
+     },
+     "3": {
+      "ge_file_drops": {
+       "__fraction__": "170/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "1/1"
+      },
+      "gt_file_drops": {
+       "__fraction__": "164/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "21/22"
+      },
+      "lt_file_drops": {
+       "__fraction__": "1/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "0/1"
+      }
+     },
+     "5": {
+      "ge_file_drops": {
+       "__fraction__": "163/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "1/1"
+      },
+      "gt_file_drops": {
+       "__fraction__": "119/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "1/1"
+      },
+      "lt_file_drops": {
+       "__fraction__": "8/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "0/1"
+      }
+     }
+    },
+    "share_file_drops": {
+     "__fraction__": "80/171"
+    },
+    "share_offsets": {
+     "__fraction__": "9/11"
+    },
+    "verdict": "draw"
+   },
+   "goals": {
+    "discordance": {
+     "first_only": 111,
+     "second_only": 30,
+     "sign_test": {
+      "__fraction__": "21541282227840712442194081381/5444517870735015415413993718908291383296"
+     }
+    },
+    "opposite_file_drops": {
+     "__fraction__": "1/57"
+    },
+    "opposite_offsets": {
+     "__fraction__": "1/45"
+    },
+    "per_k": {
+     "1": {
+      "ge_file_drops": {
+       "__fraction__": "11/19"
+      },
+      "ge_offsets": {
+       "__fraction__": "5/9"
+      },
+      "gt_file_drops": {
+       "__fraction__": "49/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "4/9"
+      },
+      "lt_file_drops": {
+       "__fraction__": "8/19"
+      },
+      "lt_offsets": {
+       "__fraction__": "4/9"
+      }
+     },
+     "10": {
+      "ge_file_drops": {
+       "__fraction__": "166/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "1/1"
+      },
+      "gt_file_drops": {
+       "__fraction__": "116/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "7/9"
+      },
+      "lt_file_drops": {
+       "__fraction__": "5/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "0/1"
+      }
+     },
+     "3": {
+      "ge_file_drops": {
+       "__fraction__": "56/57"
+      },
+      "ge_offsets": {
+       "__fraction__": "41/45"
+      },
+      "gt_file_drops": {
+       "__fraction__": "151/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "37/45"
+      },
+      "lt_file_drops": {
+       "__fraction__": "1/57"
+      },
+      "lt_offsets": {
+       "__fraction__": "4/45"
+      }
+     },
+     "5": {
+      "ge_file_drops": {
+       "__fraction__": "55/57"
+      },
+      "ge_offsets": {
+       "__fraction__": "43/45"
+      },
+      "gt_file_drops": {
+       "__fraction__": "50/57"
+      },
+      "gt_offsets": {
+       "__fraction__": "38/45"
+      },
+      "lt_file_drops": {
+       "__fraction__": "2/57"
+      },
+      "lt_offsets": {
+       "__fraction__": "2/45"
+      }
+     }
+    },
+    "share_file_drops": {
+     "__fraction__": "29/57"
+    },
+    "share_offsets": {
+     "__fraction__": "7/15"
+    },
+    "verdict": "draw"
+   }
+  },
+  "g": {
+   "declarations": {
+    "discordance": {
+     "first_only": 72,
+     "second_only": 50,
+     "sign_test": {
+      "__fraction__": "9441288614057728437384966634144361/166153499473114484112975882535043072"
+     }
+    },
+    "opposite_file_drops": {
+     "__fraction__": "2/171"
+    },
+    "opposite_offsets": {
+     "__fraction__": "2/11"
+    },
+    "per_k": {
+     "1": {
+      "ge_file_drops": {
+       "__fraction__": "56/57"
+      },
+      "ge_offsets": {
+       "__fraction__": "17/22"
+      },
+      "gt_file_drops": {
+       "__fraction__": "52/57"
+      },
+      "gt_offsets": {
+       "__fraction__": "5/11"
+      },
+      "lt_file_drops": {
+       "__fraction__": "1/57"
+      },
+      "lt_offsets": {
+       "__fraction__": "5/22"
+      }
+     },
+     "10": {
+      "ge_file_drops": {
+       "__fraction__": "148/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "13/22"
+      },
+      "gt_file_drops": {
+       "__fraction__": "140/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "6/11"
+      },
+      "lt_file_drops": {
+       "__fraction__": "23/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "9/22"
+      }
+     },
+     "3": {
+      "ge_file_drops": {
+       "__fraction__": "136/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "15/22"
+      },
+      "gt_file_drops": {
+       "__fraction__": "32/57"
+      },
+      "gt_offsets": {
+       "__fraction__": "3/11"
+      },
+      "lt_file_drops": {
+       "__fraction__": "35/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "7/22"
+      }
+     },
+     "5": {
+      "ge_file_drops": {
+       "__fraction__": "56/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "8/11"
+      },
+      "gt_file_drops": {
+       "__fraction__": "10/57"
+      },
+      "gt_offsets": {
+       "__fraction__": "6/11"
+      },
+      "lt_file_drops": {
+       "__fraction__": "115/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "3/11"
+      }
+     }
+    },
+    "share_file_drops": {
+     "__fraction__": "35/171"
+    },
+    "share_offsets": {
+     "__fraction__": "2/11"
+    },
+    "verdict": "draw"
+   }
+  },
+  "h": {
+   "goals": {
+    "discordance": {
+     "first_only": 47,
+     "second_only": 60,
+     "sign_test": {
+      "__fraction__": "311704272559677233311864383085/1267650600228229401496703205376"
+     }
+    },
+    "opposite_file_drops": {
+     "__fraction__": "17/171"
+    },
+    "opposite_offsets": {
+     "__fraction__": "13/45"
+    },
+    "per_k": {
+     "1": {
+      "ge_file_drops": {
+       "__fraction__": "157/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "31/45"
+      },
+      "gt_file_drops": {
+       "__fraction__": "122/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "1/5"
+      },
+      "lt_file_drops": {
+       "__fraction__": "14/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "14/45"
+      }
+     },
+     "10": {
+      "ge_file_drops": {
+       "__fraction__": "35/57"
+      },
+      "ge_offsets": {
+       "__fraction__": "28/45"
+      },
+      "gt_file_drops": {
+       "__fraction__": "61/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "14/45"
+      },
+      "lt_file_drops": {
+       "__fraction__": "22/57"
+      },
+      "lt_offsets": {
+       "__fraction__": "17/45"
+      }
+     },
+     "3": {
+      "ge_file_drops": {
+       "__fraction__": "50/57"
+      },
+      "ge_offsets": {
+       "__fraction__": "32/45"
+      },
+      "gt_file_drops": {
+       "__fraction__": "74/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "7/15"
+      },
+      "lt_file_drops": {
+       "__fraction__": "7/57"
+      },
+      "lt_offsets": {
+       "__fraction__": "13/45"
+      }
+     },
+     "5": {
+      "ge_file_drops": {
+       "__fraction__": "143/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "26/45"
+      },
+      "gt_file_drops": {
+       "__fraction__": "86/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "11/45"
+      },
+      "lt_file_drops": {
+       "__fraction__": "28/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "19/45"
+      }
+     }
+    },
+    "share_file_drops": {
+     "__fraction__": "80/171"
+    },
+    "share_offsets": {
+     "__fraction__": "1/5"
+    },
+    "verdict": "draw"
+   }
+  },
+  "i": {
+   "declarations": {
+    "discordance": {
+     "first_only": 185,
+     "second_only": 29,
+     "sign_test": {
+      "__fraction__": "87546869815864560085761523933135559/1645504557321206042154969182557350504982735865633579863348609024"
+     }
+    },
+    "opposite_file_drops": {
+     "__fraction__": "0/1"
+    },
+    "opposite_offsets": {
+     "__fraction__": "0/1"
+    },
+    "per_k": {
+     "1": {
+      "ge_file_drops": {
+       "__fraction__": "170/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "21/22"
+      },
+      "gt_file_drops": {
+       "__fraction__": "170/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "21/22"
+      },
+      "lt_file_drops": {
+       "__fraction__": "1/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "1/22"
+      }
+     },
+     "10": {
+      "ge_file_drops": {
+       "__fraction__": "1/1"
+      },
+      "ge_offsets": {
+       "__fraction__": "1/1"
+      },
+      "gt_file_drops": {
+       "__fraction__": "1/1"
+      },
+      "gt_offsets": {
+       "__fraction__": "1/1"
+      },
+      "lt_file_drops": {
+       "__fraction__": "0/1"
+      },
+      "lt_offsets": {
+       "__fraction__": "0/1"
+      }
+     },
+     "3": {
+      "ge_file_drops": {
+       "__fraction__": "1/1"
+      },
+      "ge_offsets": {
+       "__fraction__": "1/1"
+      },
+      "gt_file_drops": {
+       "__fraction__": "1/1"
+      },
+      "gt_offsets": {
+       "__fraction__": "1/1"
+      },
+      "lt_file_drops": {
+       "__fraction__": "0/1"
+      },
+      "lt_offsets": {
+       "__fraction__": "0/1"
+      }
+     },
+     "5": {
+      "ge_file_drops": {
+       "__fraction__": "1/1"
+      },
+      "ge_offsets": {
+       "__fraction__": "1/1"
+      },
+      "gt_file_drops": {
+       "__fraction__": "167/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "1/1"
+      },
+      "lt_file_drops": {
+       "__fraction__": "0/1"
+      },
+      "lt_offsets": {
+       "__fraction__": "0/1"
+      }
+     }
+    },
+    "share_file_drops": {
+     "__fraction__": "170/171"
+    },
+    "share_offsets": {
+     "__fraction__": "21/22"
+    },
+    "verdict": "effect"
+   },
+   "goals": {
+    "discordance": {
+     "first_only": 162,
+     "second_only": 28,
+     "sign_test": {
+      "__fraction__": "3112050690541039148744289792410395/784637716923335095479473677900958302012794430558004314112"
+     }
+    },
+    "opposite_file_drops": {
+     "__fraction__": "0/1"
+    },
+    "opposite_offsets": {
+     "__fraction__": "0/1"
+    },
+    "per_k": {
+     "1": {
+      "ge_file_drops": {
+       "__fraction__": "1/1"
+      },
+      "ge_offsets": {
+       "__fraction__": "1/1"
+      },
+      "gt_file_drops": {
+       "__fraction__": "161/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "34/45"
+      },
+      "lt_file_drops": {
+       "__fraction__": "0/1"
+      },
+      "lt_offsets": {
+       "__fraction__": "0/1"
+      }
+     },
+     "10": {
+      "ge_file_drops": {
+       "__fraction__": "170/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "44/45"
+      },
+      "gt_file_drops": {
+       "__fraction__": "52/57"
+      },
+      "gt_offsets": {
+       "__fraction__": "41/45"
+      },
+      "lt_file_drops": {
+       "__fraction__": "1/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "1/45"
+      }
+     },
+     "3": {
+      "ge_file_drops": {
+       "__fraction__": "56/57"
+      },
+      "ge_offsets": {
+       "__fraction__": "43/45"
+      },
+      "gt_file_drops": {
+       "__fraction__": "125/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "4/5"
+      },
+      "lt_file_drops": {
+       "__fraction__": "1/57"
+      },
+      "lt_offsets": {
+       "__fraction__": "2/45"
+      }
+     },
+     "5": {
+      "ge_file_drops": {
+       "__fraction__": "169/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "44/45"
+      },
+      "gt_file_drops": {
+       "__fraction__": "47/57"
+      },
+      "gt_offsets": {
+       "__fraction__": "8/9"
+      },
+      "lt_file_drops": {
+       "__fraction__": "2/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "1/45"
+      }
+     }
+    },
+    "share_file_drops": {
+     "__fraction__": "55/57"
+    },
+    "share_offsets": {
+     "__fraction__": "14/15"
+    },
+    "verdict": "draw"
+   }
+  },
+  "j": {
+   "declarations": {
+    "discordance": {
+     "first_only": 3,
+     "second_only": 0,
+     "sign_test": {
+      "__fraction__": "1/4"
+     }
+    },
+    "opposite_file_drops": {
+     "__fraction__": "151/171"
+    },
+    "opposite_offsets": {
+     "__fraction__": "17/22"
+    },
+    "per_k": {
+     "1": {
+      "ge_file_drops": {
+       "__fraction__": "56/57"
+      },
+      "ge_offsets": {
+       "__fraction__": "21/22"
+      },
+      "gt_file_drops": {
+       "__fraction__": "1/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "1/22"
+      },
+      "lt_file_drops": {
+       "__fraction__": "1/57"
+      },
+      "lt_offsets": {
+       "__fraction__": "1/22"
+      }
+     },
+     "10": {
+      "ge_file_drops": {
+       "__fraction__": "56/57"
+      },
+      "ge_offsets": {
+       "__fraction__": "21/22"
+      },
+      "gt_file_drops": {
+       "__fraction__": "0/1"
+      },
+      "gt_offsets": {
+       "__fraction__": "0/1"
+      },
+      "lt_file_drops": {
+       "__fraction__": "1/57"
+      },
+      "lt_offsets": {
+       "__fraction__": "1/22"
+      }
+     },
+     "3": {
+      "ge_file_drops": {
+       "__fraction__": "1/1"
+      },
+      "ge_offsets": {
+       "__fraction__": "1/1"
+      },
+      "gt_file_drops": {
+       "__fraction__": "0/1"
+      },
+      "gt_offsets": {
+       "__fraction__": "0/1"
+      },
+      "lt_file_drops": {
+       "__fraction__": "0/1"
+      },
+      "lt_offsets": {
+       "__fraction__": "0/1"
+      }
+     },
+     "5": {
+      "ge_file_drops": {
+       "__fraction__": "1/1"
+      },
+      "ge_offsets": {
+       "__fraction__": "1/1"
+      },
+      "gt_file_drops": {
+       "__fraction__": "16/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "3/22"
+      },
+      "lt_file_drops": {
+       "__fraction__": "0/1"
+      },
+      "lt_offsets": {
+       "__fraction__": "0/1"
+      }
+     }
+    },
+    "share_file_drops": {
+     "__fraction__": "151/171"
+    },
+    "share_offsets": {
+     "__fraction__": "17/22"
+    },
+    "verdict": "fails"
+   },
+   "goals": {
+    "discordance": {
+     "first_only": 2,
+     "second_only": 2,
+     "sign_test": {
+      "__fraction__": "1/1"
+     }
+    },
+    "opposite_file_drops": {
+     "__fraction__": "142/171"
+    },
+    "opposite_offsets": {
+     "__fraction__": "34/45"
+    },
+    "per_k": {
+     "1": {
+      "ge_file_drops": {
+       "__fraction__": "170/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "43/45"
+      },
+      "gt_file_drops": {
+       "__fraction__": "8/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "1/45"
+      },
+      "lt_file_drops": {
+       "__fraction__": "1/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "2/45"
+      }
+     },
+     "10": {
+      "ge_file_drops": {
+       "__fraction__": "170/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "44/45"
+      },
+      "gt_file_drops": {
+       "__fraction__": "0/1"
+      },
+      "gt_offsets": {
+       "__fraction__": "0/1"
+      },
+      "lt_file_drops": {
+       "__fraction__": "1/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "1/45"
+      }
+     },
+     "3": {
+      "ge_file_drops": {
+       "__fraction__": "167/171"
+      },
+      "ge_offsets": {
+       "__fraction__": "41/45"
+      },
+      "gt_file_drops": {
+       "__fraction__": "8/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "2/45"
+      },
+      "lt_file_drops": {
+       "__fraction__": "4/171"
+      },
+      "lt_offsets": {
+       "__fraction__": "4/45"
+      }
+     },
+     "5": {
+      "ge_file_drops": {
+       "__fraction__": "56/57"
+      },
+      "ge_offsets": {
+       "__fraction__": "43/45"
+      },
+      "gt_file_drops": {
+       "__fraction__": "5/171"
+      },
+      "gt_offsets": {
+       "__fraction__": "2/45"
+      },
+      "lt_file_drops": {
+       "__fraction__": "1/57"
+      },
+      "lt_offsets": {
+       "__fraction__": "2/45"
+      }
+     }
+    },
+    "share_file_drops": {
+     "__fraction__": "142/171"
+    },
+    "share_offsets": {
+     "__fraction__": "34/45"
+    },
+    "verdict": "fails"
+   }
+  }
+ }
+}

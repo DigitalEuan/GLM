@@ -162,7 +162,8 @@ measurand read by name is kept to the wheel it is.
 * **The scale table's offset row** (candidate 1's first half) is still not
   shipped: no register holds a reading in degrees Celsius, so there is no row
   to declare. Phase 86 reads offsets for givens; the register would take an
-  offset row the day such a register arrives.
+  offset row the day such a register arrives. *(Shipped by Phase 99:
+  [`CELSIUS_REGISTER_STUDY.md`](CELSIUS_REGISTER_STUDY.md).)*
 * **More measurands by name.** The bond dissociation energy is declared
   (a molar energy, no wheel by name) but the planner has no phrase that
   reaches it; a photodissociation threshold per molecule would follow from the

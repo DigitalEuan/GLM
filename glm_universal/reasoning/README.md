@@ -7,7 +7,7 @@
 
 **Verdict.** Everything is exact `int` / `fractions.Fraction` / `F_2`; nothing here imports `random`.
 
-**Deciding figure.** 120 modules, one frozen data file, and a runnable audit.
+**Deciding figure.** 122 modules, one frozen data file, and a runnable audit.
 
 **Recomputed by.** `glm_universal.reasoning.reasoning_report`
 
@@ -16,7 +16,7 @@
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 
-**Status: implemented (GLM-3+ Step 3, extended since).** **120 modules**, one
+**Status: implemented (GLM-3+ Step 3, extended since).** **122 modules**, one
 frozen data file,
 and a runnable audit. Everything is exact `int` / `fractions.Fraction` /
 `F_2`; nothing here imports `random`; nothing here imports a third-party
@@ -572,6 +572,18 @@ moves; it carries its own evaluator and column-3 script, and the proofs are in
 widens the Python dialect: string methods over code points, lists and dicts as
 immutable snapshots, every in-place change refused `MUTABLE_CONTAINER`.
 `tools third-sort` re-takes the round.
+
+Formulas in letters (Phase 98, [`../../../studies/SYMBOLIC_PARAMETERS_STUDY.md`](../../../studies/SYMBOLIC_PARAMETERS_STUDY.md))
+are `symbolic.py`: exact polynomials and rational functions over named
+parameters, kept in lowest terms by a multivariate gcd (with a sound
+trivial-gcd certificate), radicals and `sin`, `cos`, `tan`, `exp`, `ln` as
+named atoms, a parser and a printer that read each other back. `solve_system`
+eliminates unknowns by declared substitution, or by Cramer's rule with
+Bareiss determinants for a square linear system of four or more, and returns
+the formula with the nonzero conditions it was derived under or a named
+refusal. Its column-3 script checks every law at six rational points; the
+proofs are in `RequestProject/GLM/SymbolicParameters.lean`, and `tools
+symbolic` re-takes the round.
 
 The imperative grammar (Phase 95, [`../../../studies/IMPERATIVE_GRAMMAR_STUDY.md`](../../../studies/IMPERATIVE_GRAMMAR_STUDY.md))
 is `reverse_tct_imp.py`: programs with state — assignment and simultaneous

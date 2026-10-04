@@ -6,7 +6,7 @@
 
 **Verdict.** It answers seven of the twelve questions declared before the run and refuses five, every one of the twelve as declared, and it removes nothing the two operations underneath it already did: both come out on their own declared sets exactly as before. A conversion is a row someone wrote down, so the table reaches nine scales of four quantities and leaves every other pair of scales refused.
 
-**Deciding figure.** <!--figure:scales-as-declared-->12<!--/figure--> of <!--figure:scales-declared-->12<!--/figure--> declared questions came out as declared, <!--figure:scales-answered-->7<!--/figure--> answered and <!--figure:scales-refused-->5<!--/figure--> refused, off a table of <!--figure:scales-rows-->9<!--/figure--> rows that relates <!--figure:scales-bridged-->6<!--/figure--> of the <!--figure:scales-pairs-->7,750<!--/figure--> pairs of the <!--figure:scales-numeric-->125<!--/figure--> numeric scales the field surface holds.
+**Deciding figure.** <!--figure:scales-as-declared-->12<!--/figure--> of <!--figure:scales-declared-->12<!--/figure--> declared questions came out as declared, <!--figure:scales-answered-->7<!--/figure--> answered and <!--figure:scales-refused-->5<!--/figure--> refused, off a table of <!--figure:scales-rows-->10<!--/figure--> rows that relates <!--figure:scales-bridged-->8<!--/figure--> of the <!--figure:scales-pairs-->7,875<!--/figure--> pairs of the <!--figure:scales-numeric-->126<!--/figure--> numeric scales the field surface holds.
 
 **Recomputed by.** `glm_universal.reasoning.scale_conversion.conversion_report`
 
@@ -88,10 +88,11 @@ gives the same verdict.
 | `element:homonuclear_bde_kJ_per_mol` | molar energy | `kJ/mol` | `1` | `0` | the element register's bond dissociation energies are already per mole, in kilojoules |
 | `element:melting_point_K` | temperature | `K` | `1` | `0` | the register holds thermodynamic temperatures in kelvin |
 | `element:boiling_point_K` | temperature | `K` | `1` | `0` | the register holds thermodynamic temperatures in kelvin |
+| `fixed_point:temperature_C` | temperature | `K` | `1` | `5463/20` | t / degree Celsius = T / K - 273.15, exact (SI Brochure, 9th edition, 2.3.1); the ITS-90 register holds t90 in degrees Celsius, and its Table 1 states T90 = t90 + 273.15 for every fixed point |
 | `element:atomic_radius_pm` | length | `pm` | `1` | `0` | the register holds radii in picometres |
 | `element:covalent_radius_pm` | length | `pm` | `1` | `0` | the register holds radii in picometres |
 
-9 rows over 4 quantities, 2 of them with a factor other than 1 and 0 with an offset.  Of the 7,750 pairs of the 125 numeric scales the field surface holds, the table relates 6 and leaves 7,744 refused.
+10 rows over 4 quantities, 2 of them with a factor other than 1 and 1 with an offset.  Of the 7,875 pairs of the 126 numeric scales the field surface holds, the table relates 8 and leaves 7,867 refused.
 <!-- end generated -->
 
 The one factor in the table that is not `1` is worth stating separately,
@@ -155,7 +156,7 @@ measurement is whether the outcome is that one.
 | `column-temperature` | largest `temperature` | `incomplete` | `incomplete` | -- | yes |
 | `column-line` | largest `line` | `mixed-scale` | `mixed-scale` | -- | yes |
 
-the declared table is 9 rows over 4 quantities, 2 of them with a factor other than 1 and 0 with an offset. It answers 7 of the 12 declared questions and refuses 5, every one of them as declared before the run. Of the 7750 pairs of the 125 numeric scales the field surface holds it makes 6 comparable and leaves 7744 refused. The two operations it widens are unchanged on their own declared sets: 7 of 7 comparisons and 8 of 8 columns, exactly as before.
+the declared table is 10 rows over 4 quantities, 2 of them with a factor other than 1 and 1 with an offset. It answers 7 of the 12 declared questions and refuses 5, every one of them as declared before the run. Of the 7875 pairs of the 126 numeric scales the field surface holds it makes 8 comparable and leaves 7867 refused. The two operations it widens are unchanged on their own declared sets: 7 of 7 comparisons and 8 of 8 columns, exactly as before.
 
 a conversion here is a declaration and not a derivation: the factor and the offset are written down with a source, and a scale the table does not mention is refused exactly as it was. The table declares a unit rather than a measurand, so a comparison across two measurements of one quantity -- an atomic radius against a covalent radius -- is answered with both field names named, and whether that comparison is interesting is the reader's judgement rather than the operation's. Nothing here parses English.
 <!-- end generated -->
@@ -163,11 +164,11 @@ a conversion here is a declaration and not a derivation: the factor and the offs
 ## 6. What it removes, measured rather than asserted
 
 The honest denominator is the whole surface. The field surface holds
-<!--figure:scales-numeric-->125<!--/figure--> numeric scales — every
+<!--figure:scales-numeric-->126<!--/figure--> numeric scales — every
 `table:field` on which at least one row answers with a quantity — which is
-<!--figure:scales-pairs-->7,750<!--/figure--> unordered pairs. The declared
-table relates <!--figure:scales-bridged-->6<!--/figure--> of them and leaves
-<!--figure:scales-still-refused-->7,744<!--/figure--> refused.
+<!--figure:scales-pairs-->7,875<!--/figure--> unordered pairs. The declared
+table relates <!--figure:scales-bridged-->8<!--/figure--> of them and leaves
+<!--figure:scales-still-refused-->7,867<!--/figure--> refused.
 
 That ratio is the point rather than a disappointment. A conversion is admitted
 one row at a time, with a source; nothing here infers a conversion from a

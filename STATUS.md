@@ -37,7 +37,80 @@ without recomputing anything by hand. The record of earlier rounds is in
 **Starting a new round? Read [`ITERATE.md`](ITERATE.md), then §3.4, "Named for
 the next round", before anything else.**
 
-**The round just closed (Phase 97) re-scored round 8's two misses, at the
+**The round just closed (Phase 100) took round 9 of the order, retrieval,
+starting with candidate N1, the declared resampling**
+([`CORPUS_RESAMPLE_STUDY.md`](studies/CORPUS_RESAMPLE_STUDY.md)). The
+native-parity and native-words studies had re-read their small leads at five
+later closes and seen several flip by a query; each reading was one draw.
+`reasoning/corpus_resample.py` ranks every one of the 4,572 declarations as a
+declaration query and as a goal query under ten rankings, once, and reads off
+that census every sub-corpus that drops one Lean file (171, each with its
+query sample re-drawn) and every offset of the query stride (22 and 45), under
+a rule declared before the code: an effect holds in at least 95 % of both
+families. Of 18 reading-and-set pairs one is an effect: the two-book native
+ranking at least the raw structural vector on the declarations (N6; 99.4 %
+and 95.5 %, census 185 : 29 at 5). Everything else is a draw as stated — the
+single-book marks N1 and N2, the tie-break marks W4 and W6, the three
+post-hoc readings of the native-words study, and the shipped words mark W2,
+which fails at the top rank while at least level at 3, 5 and 10 in at least
+88.9 % of every resample. The declared control failed: `native2` and
+`features2` share two keys, not three, and their hits differ in 11.7 % to
+24.4 % of resamples (M4, 6 of 7 marks met). Pricing the held-fixed
+addresses found a defect older than the round: the citation index reads a
+bound variable `a`, `A`, `e`, … as a citation of the ten declarations with a
+one-letter name, 3,231 of 15,012 citation edges, and the retrieval relevance
+sets inherit it. No default changes. Proved in
+`RequestProject/GLM/CorpusResample.lean`. [`MASTER_PLAN.md`](MASTER_PLAN.md)
+Phase 100 is the record.
+
+**The round before that (Phase 99) added a register that holds a Celsius
+reading, at the owner's request** ([`CELSIUS_REGISTER_STUDY.md`](studies/CELSIUS_REGISTER_STUDY.md))
+— the item round 1 of the order (1a) and candidate 1 had waited on. The
+register is the fourteen ITS-90 defining fixed points with an assigned
+temperature (`data_objects/fixed_points.py`, the field surface's table
+`fixed_point`), holding `temperature_C` only; the scale table's first offset
+row, `fixed_point:temperature_C` (factor 1, offset 273.15), carries all 14
+onto ITS-90's own kelvin column exactly. The ordering and extremum
+operations compare it with the element register's kelvins (*order
+temperature_C of water triple point and melting_point_K of mercury* is `gt`,
+273.16 K against 234.32 K), and the stepwise planner reads a Celsius register
+value as a level through `scale_into_si_affine` (*given the temperature of
+the water triple point and energy = 2731600, what is the entropy* is 10000,
+its column-3 script recomputing the offset from the row), refusing it
+`LEVEL_AS_DIFFERENCE` where a law reads a difference. 10 of 10 ordering, 3 of
+3 column and 9 of 9 planner cases as declared, 0 wrong; the machine answered
+0 of the 9 planner questions before and 6 after; with the offset dropped 3
+ordering verdicts flip and 6 of 6 planner answers are wrong; earlier corpora
+unchanged; 8 of 8 marks met. Reported beside it: the element register's
+aluminium melting point (933.437 K) is 0.036 K below ITS-90's 933.473 K, a
+transposition left for the owner. The study's §6 is how the next register,
+wheel or junction goes in. Proved in `RequestProject/GLM/CelsiusRegister.lean`.
+Round 9 of the order, retrieval, is still where the next round starts.
+[`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 99 is the record.
+
+**The round before that (Phase 98) took boundary tracks S and T of Question
+Set B, at the owner's request for more reasoning ability**
+([`SYMBOLIC_PARAMETERS_STUDY.md`](studies/SYMBOLIC_PARAMETERS_STUDY.md)) —
+answers that are formulas in letters. `reasoning/symbolic.py` is an exact
+algebra of rational functions over named parameters (radicals and `sin`,
+`cos`, `tan`, `exp`, `ln` as named atoms, no float), and the new operation
+`solve symbolically for T: EQ; EQ` eliminates the unknowns by declared
+substitution (Cramer's rule with Bareiss determinants for square linear
+systems of four or more), printing the formula with the nonzero conditions it
+was derived under, and refusing by name what it cannot solve. Fourteen outside
+frames use it: 13 of 13 class-S questions answered and verified, 0 wrong;
+13 of 13 variants; 18 of 18 declared systems; 8 of 8 refusals; the class-T
+crossover bracketed to 1/10000 (ω_co in [3.6731, 3.6732]); 27 of 27 earlier
+framed answers and 14 of 14 Set B verdicts unchanged. S5 was 43 of 44 as first
+measured (a ×2 control of a zero answer altered nothing) and 44 of 44 after
+the control was repaired. A post-hoc battery of 90 random systems then found
+a printer fault no mark had seen (53 of 87 verified) and a speed limit at four
+unknowns; both repaired, 87 of 87 verified. Proved in
+`RequestProject/GLM/SymbolicParameters.lean`, including `cramer_solves`.
+Round 9 of the order, retrieval, is still where the next round starts.
+[`MASTER_PLAN.md`](MASTER_PLAN.md) Phase 98 is the record.
+
+**The round before it (Phase 97) re-scored round 8's two misses, at the
 owner's request** ([`UNPACKING_RESCORE_STUDY.md`](studies/UNPACKING_RESCORE_STUDY.md))
 — Phase 96's V8 was a gap in the dialect and its V4 a declaration on a false
 analogy. The Python dialect now admits argument unpacking: `f(*xs)` at a
@@ -310,8 +383,9 @@ and an efficiency outside that range, stated or derived, is refused
 declared questions as declared, 0 wrong; through `GLM.py --ask` the machine
 answered 2 of the 30 before and 18 after; the naive control (the conversion
 read as an identity) answers 7 conversion cases, all wrongly; earlier rounds
-unchanged. The scale table's offset row (candidate 1's first half) is still
-not shipped: no register holds a Celsius reading. Proved in
+unchanged. The scale table's offset row (candidate 1's first half) was then
+still not shipped, for want of a register holding a Celsius reading; Phase 99
+shipped it ([`CELSIUS_REGISTER_STUDY.md`](studies/CELSIUS_REGISTER_STUDY.md)). Proved in
 `RequestProject/GLM/MeasurandRegister.lean`. [`MASTER_PLAN.md`](MASTER_PLAN.md)
 Phase 87 is the record.
 
@@ -953,11 +1027,11 @@ PYTHONPATH=. python3 -m glm_universal.figures --write
 
 | instrument | command | result |
 |---|---|---|
-| test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->4,935 tests across 142 of the 143 test files, 17,993 subtests, outside the document check<!--/figure-->**, zero failures |
+| test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->4,975 tests across 145 of the 146 test files, 18,072 subtests, outside the document check<!--/figure-->**, zero failures |
 | end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->177<!--/figure--> / <!--figure:evaluation-case-count-->177<!--/figure-->** — 149 answered, 28 refused as expected (all `boundary`, no `gap`), 0 unexpected refusals, 0 confidently wrong, 0 errored |
 | benchmark suites | `python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites, every suite above its baseline |
 | capability probes | `python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 errored, 0 surprises |
-| Lean development | `lake build` (repository root) | <!--figure:lean-files-->168 Lean files<!--/figure-->, **0 `sorry`** |
+| Lean development | `lake build` (repository root) | <!--figure:lean-files-->171 Lean files<!--/figure-->, **0 `sorry`** |
 | figures | `python3 -m glm_universal.figures --write` | regenerates `overlay/FIGURES.md`; every documented count |
 | corpus | `python3 -m glm_universal.corpus --check` | the tier contract, the archive partition, the coverage claim of `ENTRY.md`, every generated block and every derived cache — **current**, no drift |
 | construction ladder | `python3 -m glm_universal.tools ladder` | **462 / 568** queries named correctly with **0** wrong on the eleven-rung ladder, against **327** for the note's five rungs and **283** for the best single rung |
@@ -968,7 +1042,8 @@ PYTHONPATH=. python3 -m glm_universal.figures --write
 | ordering operation | `python3 -m glm_universal.tools ordering` | the operation answers **<!--figure:ordering-answered-->4<!--/figure-->** of the **<!--figure:ordering-declared-count-->7<!--/figure-->** comparisons declared before the run and refuses **<!--figure:ordering-refused-->3<!--/figure-->** under **<!--figure:ordering-reasons-->3<!--/figure-->** named reasons — **<!--figure:ordering-as-declared-->7<!--/figure-->** of **<!--figure:ordering-declared-count-->7<!--/figure-->** as declared — and closes the last held-and-unreachable probe question, taking it to **<!--figure:ordering-parsed-after-->16<!--/figure-->** parsed |
 | typed planner | `python3 -m glm_universal.tools plans` | the frozen probe through the planner scores **<!--figure:plans-probe-correct-->19<!--/figure-->** correct, **<!--figure:plans-probe-wrong-->0<!--/figure-->** wrong, **<!--figure:plans-probe-refused-->1<!--/figure-->** refused; **<!--figure:plans-held-correct-->86<!--/figure-->** correct and **<!--figure:plans-held-correct-refusal-->22<!--/figure-->** correct refusals of **<!--figure:plans-held-total-->110<!--/figure-->** held-out questions with **<!--figure:plans-held-wrong-->1<!--/figure-->** wrong; the hostile stress set **<!--figure:plans-stress-wrong-->0<!--/figure-->** wrong |
 | extremum operation | `python3 -m glm_universal.tools extremum` | the operation folds **<!--figure:extremum-answered-->4<!--/figure-->** of the **<!--figure:extremum-declared-count-->8<!--/figure-->** columns declared before the run and refuses **<!--figure:extremum-refused-->4<!--/figure-->** under all **<!--figure:extremum-reasons-->4<!--/figure-->** of its named reasons — **<!--figure:extremum-as-declared-->8<!--/figure-->** of **<!--figure:extremum-declared-count-->8<!--/figure-->** as declared — and reports **<!--figure:extremum-ties-->1<!--/figure-->** tie as a tie rather than resolving it |
-| scale conversions | `python3 -m glm_universal.tools scales` | the declared table of **<!--figure:scales-rows-->9<!--/figure-->** scales over **<!--figure:scales-quantities-->4<!--/figure-->** quantities answers **<!--figure:scales-answered-->7<!--/figure-->** of the **<!--figure:scales-declared-->12<!--/figure-->** questions declared before the run and refuses **<!--figure:scales-refused-->5<!--/figure-->** — **<!--figure:scales-as-declared-->12<!--/figure-->** of **<!--figure:scales-declared-->12<!--/figure-->** as declared — and relates **<!--figure:scales-bridged-->6<!--/figure-->** of the **<!--figure:scales-pairs-->7,750<!--/figure-->** pairs of the **<!--figure:scales-numeric-->125<!--/figure-->** numeric scales, leaving every other pair refused |
+| scale conversions | `python3 -m glm_universal.tools scales` | the declared table of **<!--figure:scales-rows-->10<!--/figure-->** scales over **<!--figure:scales-quantities-->4<!--/figure-->** quantities answers **<!--figure:scales-answered-->7<!--/figure-->** of the **<!--figure:scales-declared-->12<!--/figure-->** questions declared before the run and refuses **<!--figure:scales-refused-->5<!--/figure-->** — **<!--figure:scales-as-declared-->12<!--/figure-->** of **<!--figure:scales-declared-->12<!--/figure-->** as declared — and relates **<!--figure:scales-bridged-->8<!--/figure-->** of the **<!--figure:scales-pairs-->7,875<!--/figure-->** pairs of the **<!--figure:scales-numeric-->126<!--/figure-->** numeric scales, leaving every other pair refused |
+| corpus resample | `python3 -m glm_universal.tools corpus-resample` | every sub-corpus that drops one Lean file (**171**) and every stride offset (**22** and **45**), read off one census of **4,572** declaration and **4,572** goal queries under ten rankings: **1** effect among **18** reading-and-set pairs (`native2` ≥ `features` on the declarations, **99.4 %** / **95.5 %**); W2, W4, W6, N1, N2 and the three post-hoc readings draws; the control `native2` = `features2` holds in **88.3 %** / **77.3 %**; **6 / 7** marks met; the citation index reads one-letter bound variables as citations (**3,231** of **15,012** edges) |
 | conversation layer | `python3 -m glm_universal.tools conversation` | the layer binds **<!--figure:conversation-answered-->8<!--/figure-->** of the **<!--figure:conversation-declared-count-->15<!--/figure-->** follow-ups declared before the run and refuses **<!--figure:conversation-refused-->7<!--/figure-->** under all **<!--figure:conversation-reasons-->3<!--/figure-->** of its named reasons — **<!--figure:conversation-as-declared-->15<!--/figure-->** of **<!--figure:conversation-declared-count-->15<!--/figure-->** as declared — against **<!--figure:conversation-alone-->0<!--/figure-->** answered by a session with no memory, and the recency control differs on **<!--figure:conversation-control-wrong-->3<!--/figure-->** of **<!--figure:conversation-control-rows-->10<!--/figure-->** |
 | discourse state | `python3 -m glm_universal.tools discourse-state` | a tie carried as a column, the fourth shape and follow-ups on every surface: **7 / 7** column, **16 / 16** fourth-shape and **6 / 6** surface cases as declared, **0** wrong; Phase 55's layer gives 0 of the 20 new-behaviour cases as declared, the session alone 0 of the 5 surface answers; **15 / 15** of Phase 55's follow-ups hold but the 1 declared move; **32 / 32** column cells equal the answer asked alone; no answer to any of 3056 earlier strings changes; 8 of 8 marks met |
 | role--filler binding | `python3 -m glm_universal.tools binding` | a typed relation written as one 24-bit word gives the filler's reading back with no side condition; naming the filler recovers **<!--figure:binding-recovered-->6<!--/figure-->** of the **<!--figure:binding-declared-count-->12<!--/figure-->** bindings declared before the run and refuses **<!--figure:binding-refused-->6<!--/figure-->** — **<!--figure:binding-as-declared-->12<!--/figure-->** of **<!--figure:binding-declared-count-->12<!--/figure-->** as declared — because only **<!--figure:binding-nameable-->424<!--/figure-->** of the **<!--figure:binding-carriers-->1,143<!--/figure-->** carriers read uniquely, the worst fibre holding **<!--figure:binding-largest-fibre-->136<!--/figure-->** |
@@ -977,6 +1052,8 @@ PYTHONPATH=. python3 -m glm_universal.figures --write
 | carried fork | `python3 -m glm_universal.tools carried-fork` | the six deep-hole candidates carried until a later decision: **0 wrong** from every certified stage; 592,268 of 658,812 declared-case reads answered (the 90 % mark missed at 32 cases), 4,224 / 4,224 second readings, 3,840 / 3,840 unsure-set reads; 1,771 / 1,771 ties lift to a certified A₁²⁴ Leech deep hole; the soft estimate right on 512 / 768 (mark missed) |
 | second view | `python3 -m glm_universal.tools second-view` | one carrier read through the framed register's views: three views resolve **680,064 / 680,064** common-mode four-error reads, **0 wrong**; two views leave 174 of 10,626 bursts open, as predicted on every read; the composition with the declared cases **658,258 / 658,812**, 0 wrong, open as predicted; the Leech escalation on the views' soft reading equals the intersection on **46,728 / 46,728** reads; 7 of 9 marks met (V4, V8 not met) |
 | unpacking and the third view on demand | `python3 -m glm_universal.tools unpacking` | argument unpacking in the dialect: Phase 96's refused program answered equal to CPython, **33 / 33** declared programs and refusals as declared (0 before), 0 of 311 earlier programs moved; the third view on demand gives the three-view answer on **680,064 / 680,064** reads with **1,371,264** views read instead of 2,040,192; independent faults, three views **84,480 / 84,480**, 0 wrong; 346 open second errors for every frame; 12 of 12 marks met |
+| symbolic parameters | `python3 -m glm_universal.tools symbolic` | formulas in letters: **13 / 13** class-S outside questions answered and verified, **0** wrong; **13 / 13** variants, **18 / 18** systems, **8 / 8** refusals, **44 / 44** mutants rejected; the class-T crossover bracketed to 1/10000; 27 / 27 framed outside answers and 14 / 14 Set B verdicts unchanged; `--battery` 87 / 87 random systems verified; 8 of 8 marks met (S5 after a control repair) |
+| Celsius register | `python3 -m glm_universal.tools celsius-register` | the ITS-90 fixed points held in degrees Celsius and the scale table's offset row: **14 / 14** points carried onto ITS-90's kelvin column; **10 / 10** ordering, **3 / 3** column and **9 / 9** planner cases as declared, **0** wrong; offset dropped: 3 verdicts flip, **6 / 6** planner answers wrong; **6 / 6** chain scripts verified, every mutation and offset lie rejected; 8 of 8 marks met |
 | connected machine | `python3 -m glm_universal.tools connected` | one path (`GLM.py --ask`) to the toolbox, Python, engineering and the planner: **0** of 177 contract cases diverted; **136** more declared questions answered correctly than by the planner alone, **0** wrong added; **8 / 8** tools answer; wiring audit **0** of 96 reasoning modules unreached; across wheels, naive union **3** right / **158** wrong, licensed union **3** right / **0** wrong |
 | reverse TCT | `python3 -m glm_universal.tools reverse-tct` | the language column generated from the mathematics: **176,617 / 176,617** battery terms round-trip, **0** collisions (infix control **5,684**); every declared `say`, `entails`, `solve`, `bounds`, `equivalent`, `negate` case as declared, **0** wrong; **94 / 94** column-3 scripts `VERIFIED True`, **69 / 69** mutated certificates rejected; the default path without the surface answers **0** of 58 |
 | native parity | `python3 -m glm_universal.tools native-parity` | where a standard method ties a native one, the native one refined: the two-book native ranking **90** hits at 5 against **82** for the raw features (205 declaration queries) and **30** against **27** (103 goal queries), equal to the like-for-like standard and ahead of the raw features at every cut-off at the Phase 76 re-reading (N6 met again); the read-back scorer **24 / 24** controller tasks against **18**; read-back exact on **4,070 / 4,070** addresses |
@@ -1408,6 +1485,39 @@ Recomputed by `tools question-set-b` and `tools contract-matrix`. Write-ups:
 [`QUESTION_SET_B_STUDY.md`](studies/QUESTION_SET_B_STUDY.md),
 [`CONTRACT_MATRIX_STUDY.md`](studies/CONTRACT_MATRIX_STUDY.md).
 
+**Formulas in letters.** `reasoning/symbolic.py` computes exactly with
+rational functions of named parameters; `solve symbolically for T: EQ; EQ`
+(`runtime/symbolic_frames.py`) eliminates unknowns by declared substitution,
+or by Cramer's rule with Bareiss determinants for a square linear system of
+four or more, and prints the formula with its nonzero conditions; its
+column-3 script checks every law at six rational points. Fourteen outside
+frames (`runtime/symbolic_outside.py`) answer the class-S questions and the
+class-T crossover. Recomputed by `tools symbolic`; proved in
+`RequestProject/GLM/SymbolicParameters.lean`. Write-up:
+[`SYMBOLIC_PARAMETERS_STUDY.md`](studies/SYMBOLIC_PARAMETERS_STUDY.md).
+
+**Temperatures on two scales.** The field surface's table `fixed_point`
+holds the fourteen ITS-90 fixed points in degrees Celsius
+(`data_objects/fixed_points.py`), and the scale table's row
+`fixed_point:temperature_C` is its one offset row (273.15): the ordering and
+extremum operations carry a Celsius reading into kelvins before comparing,
+and the stepwise planner reads it as a level through
+`quantity_units.scale_into_si_affine`, while `scale_into_si` (a factor alone)
+refuses an offset row `OFFSET_UNIT`. Recomputed by `tools celsius-register`;
+proved in `RequestProject/GLM/CelsiusRegister.lean`. Write-up:
+[`CELSIUS_REGISTER_STUDY.md`](studies/CELSIUS_REGISTER_STUDY.md).
+
+**Which retrieval leads are results.** `reasoning/corpus_resample.py` ranks
+every declaration of the Lean corpus as a query under the native-words and
+native-parity rankings once, and reads off that census every sub-corpus that
+drops one file and every offset of the query stride
+(`GLM.CorpusResample.sorted_perm_filter_eq` is why filtering is exact,
+`take_filter_take` why 108 places are enough). Under the declared rule the
+two-book native ranking's lead over the raw structural vector on declaration
+queries is an effect, and the other resampled leads are draws. Recomputed by
+`tools corpus-resample`; proved in `RequestProject/GLM/CorpusResample.lean`.
+Write-up: [`CORPUS_RESAMPLE_STUDY.md`](studies/CORPUS_RESAMPLE_STUDY.md).
+
 **Registers.** Eight of them. Physics (726 quantities, EXT10 exponents and
 unit strings cross-checked against each other), chemistry (118 elements),
 molecules (51 species and ions, every coordinate derived from the element
@@ -1440,8 +1550,8 @@ so a confident wrong answer is worse than a refusal). Write-up:
 [`CAPABILITY_ASSESSMENT.md`](CAPABILITY_ASSESSMENT.md).
 
 **The Lean development, addressed.** `reasoning/lean_address.py` gives each of
-the 4539 declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly 4539/4539 with 0 coordinate errors;
+the 4576 declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly 4576/4576 with 0 coordinate errors;
 3989 distinct addresses, and the quantiser adds no conflation of its own;
 nearest-by-address shares a file 817 times against 35 for a SHA-256 control and
 29 for a seeded reshuffle, with chance at ≈ 0.80 %. `report lean`.
@@ -1483,9 +1593,9 @@ twenty questions rather than three samples. `tools oracle`. Write-up:
 
 **The field surface, and what it was worth.** `runtime/fields.py` answers one
 named field of one named row — `field atomic_weight_u of carbon` — over
-<!--figure:fieldsurface-tables-->13<!--/figure--> declared tables holding
-<!--figure:fieldsurface-rows-->11,345<!--/figure--> rows and
-<!--figure:fieldsurface-pairs-->66,982<!--/figure--> addressable `(row,
+<!--figure:fieldsurface-tables-->14<!--/figure--> declared tables holding
+<!--figure:fieldsurface-rows-->11,547<!--/figure--> rows and
+<!--figure:fieldsurface-pairs-->68,129<!--/figure--> addressable `(row,
 field)` pairs: the element and molecule source rows, one table per register's
 carrier attributes, the Lean address book, the package's own top-level
 definitions, and a registry of declared zero-argument functions whose returned
@@ -1554,7 +1664,7 @@ run it folds <!--figure:extremum-answered-->4<!--/figure--> and refuses
 declared table the two operations above did not have: one row per scale,
 naming the quantity it measures, the canonical unit of that quantity and the
 exact positive-affine map into it, together with the source the numbers came
-from. <!--figure:scales-rows-->9<!--/figure--> rows over
+from. <!--figure:scales-rows-->10<!--/figure--> rows over
 <!--figure:scales-quantities-->4<!--/figure--> quantities — mass in `u`, molar
 energy in `kJ·mol⁻¹`, temperature in `K`, length in `pm`. The ordering
 operation consults it when the two readings are on different scales and the
@@ -1571,9 +1681,9 @@ things it must not do are `negative_factor_flips_the_verdict` and
 it answers <!--figure:scales-answered-->7<!--/figure--> and refuses
 <!--figure:scales-refused-->5<!--/figure-->, every one as declared, and across
 the whole field surface it relates
-<!--figure:scales-bridged-->6<!--/figure--> of
-<!--figure:scales-pairs-->7,750<!--/figure--> pairs of
-<!--figure:scales-numeric-->125<!--/figure--> numeric scales — the rest stay
+<!--figure:scales-bridged-->8<!--/figure--> of
+<!--figure:scales-pairs-->7,875<!--/figure--> pairs of
+<!--figure:scales-numeric-->126<!--/figure--> numeric scales — the rest stay
 refused, which is what *declared* costs. `tools scales`. Write-up:
 [`SCALE_CONVERSION_STUDY.md`](studies/SCALE_CONVERSION_STUDY.md).
 
@@ -1680,7 +1790,8 @@ each reads what the one before built:
 
 1. **The measurand register** — K2, O5b, O5c, O5d, 1a and 1b, one round:
    **taken by Phase 87** ([`MEASURAND_REGISTER_STUDY.md`](studies/MEASURAND_REGISTER_STUDY.md));
-   all but 1a met, and 1a waits on a register that holds a Celsius reading.
+   all but 1a met; 1a, which waited on a register holding a Celsius reading,
+   **taken by Phase 99** ([`CELSIUS_REGISTER_STUDY.md`](studies/CELSIUS_REGISTER_STUDY.md)).
 2. **The loop through the planner** — K4 (`derive` as a value), I2 (a Python
    expression as a planner question), O3 = M3 (the planner's answer chooses
    the next reverse operation); then re-read item 9, the utility gate:
@@ -1737,9 +1848,16 @@ each reads what the one before built:
    the third view read on demand; 12 of 12 marks met. What it leaves is that
    study's §6 (keywords and defaults, starred displays, unpacking in the
    imperative grammar).
-9. **Retrieval** — N1 first, then item 5, then N2, N5 and I3. **This is where
-   the next round starts**, unless the owner prefers the lattice items
-   beside round 8 first.
+9. **Retrieval** — N1 first, then item 5, then N2, N5 and I3. N1 is **taken
+   by Phase 100** ([`CORPUS_RESAMPLE_STUDY.md`](studies/CORPUS_RESAMPLE_STUDY.md));
+   6 of 7 marks met (M4 not met: the control `native2` = `features2` is a
+   near identity, not an identity). One lead is an effect (N6 on the
+   declarations); the rest are draws. It found the **citation leak** — the
+   citation index reads a one-letter bound variable as a citation, 3,231 of
+   15,012 edges, and the retrieval relevance sets inherit it — which joins
+   item 5 as the same kind of leak. **Item 5 with the citation leak is where
+   the next round starts**, then N2, N5 and I3, unless the owner prefers the
+   lattice items beside round 8 first.
 
 **Taken out of order by Phase 89, at the owner's request**
 ([`QUESTION_SET_B_STUDY.md`](studies/QUESTION_SET_B_STUDY.md),
@@ -1754,9 +1872,15 @@ audit, Outside O1 27 of 112 framed and correct with 0 confidently wrong and
 that study's §8: symbolic parameters (13), derivations and proofs (18), meta
 questions about the GLM's own engineering (18), explanations (32), designs
 and one transcendental equation, and the planner's two vacuous denotation
-answers. **Round 9 of the order, retrieval, is where the next round starts** (round 8
-was taken by Phase 96), unless the owner prefers the §8 boundary tracks or
-the lattice items beside round 8 first.
+answers. Tracks S (symbolic parameters) and T (the transcendental equation)
+were **taken by Phase 98** at the owner's request
+([`SYMBOLIC_PARAMETERS_STUDY.md`](studies/SYMBOLIC_PARAMETERS_STUDY.md));
+8 of 8 marks met, S5 after a control repair. What it leaves is that study's
+§6 (nonlinear systems by resultants, the P, M and E tracks, the two vacuous
+answers). **Round 9 of the order, retrieval, is where the next round starts** (round 8
+was taken by Phase 96; round 9's N1 by Phase 100, so item 5 with the citation
+leak is next), unless the owner prefers the remaining §8 boundary
+tracks or the lattice items beside round 8 first.
 
 Gated on outside material: item 4. Proposed
 for retirement: P's 42 PIPELINE laws and H's concept 6. The letters below
@@ -1822,7 +1946,8 @@ still holds is neutrons (a nuclide register) and differences between
 molecules. O6 (a register value's stated precision carried through a derivation)
 was taken by Phase 76 and is met ([`HELD_PRECISION_STUDY.md`](studies/HELD_PRECISION_STUDY.md)).*
 
-**N. Native past parity — named by Phase 70, narrowed by Phase 71.** In
+**N. Native past parity — named by Phase 70, narrowed by Phase 71; N1 taken
+by Phase 100.** In
 order: (N1) a declared resampling of the Lean corpus (every sub-corpus that
 drops one file), to say whether the single-book figures of
 [`NATIVE_PARITY_STUDY.md`](studies/NATIVE_PARITY_STUDY.md) and the post-hoc
@@ -1833,7 +1958,10 @@ book for the documents — a section's position in the document tree as a Golay
 word — to move the document rankings past parity with the raw vector; (N5) a
 native word ranking with the part letter words as its **first** layer, which
 would change the order outside the standard's ties, and a document letter word
-that collides less on prose (study §6). *N3 (the native word ranking) was
+that collides less on prose (study §6). *N1 was taken by Phase 100
+([`CORPUS_RESAMPLE_STUDY.md`](studies/CORPUS_RESAMPLE_STUDY.md)): the
+single-book figures and the post-hoc readings are draws, N6 on the
+declarations an effect. N3 (the native word ranking) was
 taken by Phase 71 and is met; N4 (ledger row 6 on the live Lean ranking) was
 measured there and missed at k = 1 (mark W6), so it is recorded, not shipped.*
 *The owner's standing instruction: where a standard method ties or narrowly
@@ -1998,15 +2126,34 @@ records the outcome of every piece of the supplied material: four were taken
 in Phase 56 — two shipped, one measured into the sandbox and one refuted — and
 the rest stand with what they would have to measure to earn a round.
 
-**1. The two halves of the conversion table that are not yet earned — named
-by Phase 55; the offset half partly shipped by Phase 86; the measurand half
-taken by Phase 87** ([`MEASURAND_REGISTER_STUDY.md`](studies/MEASURAND_REGISTER_STUDY.md):
+**1. The two halves of the conversion table — named by Phase 55; the
+measurand half taken by Phase 87, the offset half by Phase 99: closed.**
+*The measurand half* ([`MEASURAND_REGISTER_STUDY.md`](studies/MEASURAND_REGISTER_STUDY.md)):
 every scale of the table has a declared measurand, and every pair the table
-relates is a pair of one kind, so none is withdrawn). What stays open is the
-offset row, which waits on a register holding a Celsius reading. Phase 86 reads
-Celsius and Fahrenheit givens in the stepwise planner with their offsets, as
-a level or a difference ([`MEASURANDS_STUDY.md`](studies/MEASURANDS_STUDY.md));
-the scale table itself still has no offset row. The declared table relates nine scales over four quantities, and two
+relates is a pair of one kind, so none is withdrawn. *The offset half*
+([`CELSIUS_REGISTER_STUDY.md`](studies/CELSIUS_REGISTER_STUDY.md)): a
+register now holds a Celsius reading — the fourteen ITS-90 defining fixed
+points in `data_objects/fixed_points.py`, the field surface's table
+`fixed_point`, `temperature_C` only — and the scale table has its first
+offset row, `fixed_point:temperature_C` (factor 1, offset 27315/100). That
+row carries 14 of 14 points onto ITS-90's own kelvin column exactly, so the
+offset half of `GLM.ScaleConversion.cmpQ_apply` is now exercised by a
+declared row rather than proved and unshipped
+(`RequestProject/GLM/CelsiusRegister.lean`). The ordering and extremum
+operations carry a Celsius reading into kelvins before comparing; the
+stepwise planner reads it as a level through `scale_into_si_affine` and
+refuses it `LEVEL_AS_DIFFERENCE` where a law reads a difference; the
+factor-only `scale_into_si` refuses an offset row `OFFSET_UNIT`. Phase 86's
+Celsius and Fahrenheit *givens* in the planner
+([`MEASURANDS_STUDY.md`](studies/MEASURANDS_STUDY.md)) are unchanged beside
+it. What it leaves is that study's §7: a register in degrees Fahrenheit (a
+declaration — factor 5/9, offset 45967/180 — that
+`GLM.MeasurandKinds.fahrenheit_kelvin` already states), an answer *stated* in
+degrees Celsius (a level out through the offset), the ITS-90 vapour-pressure
+ranges as values with an interval, and the owner's decision on the element
+register's aluminium melting point (933.437 K, 0.036 K below ITS-90's
+933.473 K). What follows is the note as it was written, before either half
+was taken. The declared table relates nine scales over four quantities, and two
 of its commitments are written but untested. The affine shape admits an
 **offset** and no declared row uses one, so the half of
 `GLM.ScaleConversion.cmpQ_apply` that the offset exercises is proved and not
@@ -2215,7 +2362,17 @@ generator, scored against the same controls — a register nobody constructed.
 wherever it occurs, including inside an identifier, so 39 of 883 queries lose a
 coordinate when their names go: a name creeping into a reading that is supposed
 to be structural. Either the map is narrowed to count type words only where
-they are types, or the leak is priced.
+they are types, or the leak is priced. *Phase 100 found its twin in the
+citation index* ([`CORPUS_RESAMPLE_STUDY.md`](studies/CORPUS_RESAMPLE_STUDY.md)
+§4.4): a token resolves to a declaration by a unique short name, and ten
+declarations have one-letter short names, so every bound variable `a`, `A`,
+`e`, … counts as a citation — 3,231 of 15,012 citation edges, 2,448
+declarations carrying one, `GLM.Heisenberg.a` "cited" by 1,920. It reaches
+the `cites` and `cited by` coordinates of the structural address and the
+retrieval relevance sets (a citation in either direction is relevance). The
+two are one round: narrow both readings, then re-take every Lean-corpus
+retrieval figure under the repaired relevance, keeping the old ones as the
+record.
 
 **6. The separation criterion, still unmet.** `nearest_correct` in
 `DeepHoleLadder.lean` says a reading names holes correctly whenever
@@ -2318,7 +2475,7 @@ units reach `PROJECT_DIRECTIVES.md` (120 before Phase 78; see
 [`studies/ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) §5g).
 
 The six instruments in the ledger beside the
-<!--figure:test-files-->143 test files<!--/figure--> are `lean-build`,
+<!--figure:test-files-->146 test files<!--/figure--> are `lean-build`,
 `lean-sorry-free`, `capabilities`, `benchmarks`, `evaluation` and `figures`.
 (The seventh, `lean-copies-identical`, went with the second copy of the Lean
 tree in Phase 78: the development lives only in `overlay/glm_lean/`.) Editing a document makes exactly the units that

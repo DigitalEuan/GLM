@@ -365,6 +365,18 @@ On the documents N4a, N4b and N8 are met (`lexical_native`,
 `lexical_native2` and both raw rankings each at 15 hits at 5 against 17 for
 `lexical`; `text_native` level with `text` at 44). N1 and N2 still missed.
 
+**Resampled by Phase 100** ([`CORPUS_RESAMPLE_STUDY.md`](CORPUS_RESAMPLE_STUDY.md)).
+Under a rule declared before the measurement — an effect holds in at least
+95 % of the 171 sub-corpora that drop one Lean file and of every stride
+offset — N1 (20.5 % and 18.2 %) and N2 (46.8 % and 20.0 %) are draws, as §3.1
+said. N6 is an effect on the declarations (99.4 % and 95.5 %; over all 4,572
+queries `native2` hits at 5 where `features` misses 185 times against 29)
+and a draw on the goals by a margin (96.5 % and 93.3 %). The equality N7
+records is not an identity: `native2` and `features2` share their first two
+keys and differ in the third, and the two rankings' hits differ in 11.7 % of
+file drops and 22.7 % of offsets on the declarations; over all 4,572 queries
+they differ at 5 on 3 declaration queries and 4 goal queries.
+
 **The verdict, in words.** On the Lean corpus the native ranking that reads two
 Leech books, each in its two layers, matches the like-for-like standard
 ranking exactly and beats the raw feature vector, and on the document corpus
@@ -414,7 +426,10 @@ is recorded, not taken.
 
 ## 6. Next round
 
-* **Robustness of the goal and single-book figures.** The round-one figures
+* **Robustness of the goal and single-book figures** — *taken by Phase 100*
+  ([`CORPUS_RESAMPLE_STUDY.md`](CORPUS_RESAMPLE_STUDY.md)): N1 and N2 are
+  draws; N6 is an effect on the declarations. What follows is the item as it
+  was written. The round-one figures
   move with the corpus. A declared resampling — every sub-corpus that drops one
   Lean file — would say whether N1 and N2 are draws or small effects.
 * **The documents past parity.** Every lexical ranking, native or standard,
