@@ -7,7 +7,7 @@
 
 **Verdict.** `session.DOMAINS` is the authoritative list.
 
-**Deciding figure.** 8 registers holding 1,143 carriers, loaded lazily and cached.
+**Deciding figure.** <!--figure:registers-->8 registers<!--/figure--> holding 1,143 carriers, loaded lazily and cached.
 
 **Recomputed by.** `glm_universal.figures.package_figures`
 
@@ -75,7 +75,7 @@ answering kinds plus `unknown`, the honest fallback.
 
 ## The `report` subjects
 
-`session.REPORT_SUBJECTS` is the authoritative list: **<!--figure:report-subjects-->65 report subjects<!--/figure-->**.
+`session.REPORT_SUBJECTS` is the authoritative list: **<!--figure:report-subjects-->67 report subjects<!--/figure-->**.
 Every subject recomputes its facts on demand and has a Three Column Thinking
 template that reproduces them in a fresh interpreter.
 

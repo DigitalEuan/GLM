@@ -25,7 +25,7 @@ Yes, and at no cost to what the runtime already does: over the whole evaluation 
 The same reading, recomputed rather than written:
 
 <!-- generated: queryesc-tier -->
-**Both gates hold.**  Over the whole evaluation set of 177 cases, all 151 the runtime answers directly come back identical through the loop, at the first rung and for the first rung's cost — 0 answers moved and 0 principled refusals were converted into answers.  Of the 28 declared refusals, **14** are classified non-escalatable before the ladder is climbed.
+**Both gates hold.**  Over the whole evaluation set of 179 cases, all 153 the runtime answers directly come back identical through the loop, at the first rung and for the first rung's cost — 0 answers moved and 0 principled refusals were converted into answers.  Of the 28 declared refusals, **14** are classified non-escalatable before the ladder is climbed.
 
 The loop buys something: of the 18 declared probes, 8 are answered and 4 of those are reached *above* the first rung — 'nearest to k_B', 'describe energie', 'describe oxigen', 'nearest to velocty' — at a cost of 3, 5, 5, 5 against 1 for a direct answer.  2 refusals are certified absences within the declared radius of 2 edits.
 <!-- end generated -->
@@ -207,8 +207,8 @@ it, so when a source moves the block says so and the corpus check fails.*
 <!-- generated: queryesc-safety -->
 | check | reading |
 |---|---|
-| evaluation cases run both ways | 177 |
-| answered by the direct path | 151 |
+| evaluation cases run both ways | 179 |
+| answered by the direct path | 153 |
 | answers that moved | 0 |
 | answers that cost more than the first rung | 0 |
 | principled refusals converted into answers | 0 |
@@ -284,7 +284,7 @@ Answered by rung: L1 4, L2 1, L3 3.  Gate 2 asks for at least one probe resolvin
 ### 7.5 What the round establishes
 
 <!-- generated: queryesc-establishes -->
-**Escalation is a step of the loop and costs nothing where it is not needed.**  All 151 directly answered evaluation cases come back identical, at the first rung, for the first rung's cost.
+**Escalation is a step of the loop and costs nothing where it is not needed.**  All 153 directly answered evaluation cases come back identical, at the first rung, for the first rung's cost.
 
 **A refusal now carries its layer.**  Every refusal reports the rung it was made at and whether the ladder was climbed; 2 of the probes return an absence certified within 2 edits of an enumerated index, which is a refusal that knows its own radius rather than a shrug.
 

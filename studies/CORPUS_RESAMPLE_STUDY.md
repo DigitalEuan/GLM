@@ -6,7 +6,7 @@
 
 **Verdict.** One lead is an effect: the two-book native ranking ahead of the raw structural vector on the declaration queries; every other resampled reading, the shipped words mark W2 included, is a draw as stated, and the declared control failed.
 
-**Deciding figure.** 1 effect among 18 reading-and-set pairs (`native2` ≥ `features` on the declarations, holding in 99.4 % of 171 file drops and 95.5 % of 22 stride offsets, census discordance 185 : 29); the control `native2` = `features2` holds in 88.3 % and 77.3 %; 6 of 7 marks met (M4 not met).
+**Deciding figure.** 1 effect among 18 reading-and-set pairs (`native2` ≥ `features` on the declarations, holding in 99.4 % of 171 file drops and 95.5 % of 22 stride offsets, census discordance 185 : 29; re-taken under Phase 101's scoped citation reader, 95.3 % of 172 file drops, 95.5 % of offsets, 227 : 29 — still the one effect); the control `native2` = `features2` holds in 88.3 % and 77.3 % (Phase 101: 77.9 % and 59.1 %); 6 of 7 marks met (M4 not met).
 
 **Recomputed by.** `glm_universal.reasoning.corpus_resample.corpus_resample_report`
 
@@ -316,6 +316,47 @@ the other way on the census (44 : 59 and 23 : 40). The single-book marks N1
 and N2 are draws, as Phase 70 said they were. And the declared control
 failed: `native2` and `features2` are a near identity, not an identity.
 
+### 4.7 Re-taken under the scoped citation reader (Phase 101)
+
+Phase 101 repaired the leak of §4.4 ([`CITATION_SCOPE_STUDY.md`](CITATION_SCOPE_STUDY.md)):
+citations are read in Lean's scope, so a bound variable is no longer a
+citation of a one-letter declaration, and the type words count whole
+identifiers. The census was re-taken on that tree — 4,596 queries over 172
+files (Phase 101 adds `CitationScope.lean`), strides 22 and 45 — under the
+same declared rule. The tables of §4.1 and §4.2 are kept as the record of the
+leaky relevance.
+
+| id | set | file drops | offsets | census at 5 | verdict |
+|---|---|---|---|---|---|
+| a | declarations / goals | 15.1 % / 8.1 % | 54.5 % / 37.8 % | 160 : 95 / 136 : 95 | **draw** |
+| b | declarations / goals | 0.0 % / 4.7 % | 0.0 % / 13.3 % | 32 : 60 / 48 : 54 | **draw** |
+| c (W2) | declarations / goals | 47.1 % / 34.3 % | 77.3 % / 57.8 % | 128 : 35 / 106 : 33 | **draw** |
+| d | declarations / goals | 25.6 % / 22.1 % | 13.6 % / 31.1 % | 19 : 38 / 33 : 29 | **draw** |
+| e (W4) | declarations / goals | 51.7 % / 87.8 % | 45.5 % / 66.7 % | 32 : 52 / 50 : 46 | **draw** |
+| f (W6) | declarations / goals | 46.5 % / 25.0 % | 81.8 % / 55.6 % | 144 : 31 / 107 : 38 | **draw** |
+| g (N1) | declarations | 17.4 % | 27.3 % | 68 : 57 | **draw** |
+| h (N2) | goals | 5.8 % | 17.8 % | 43 : 59 | **draw** |
+| i (N6) | declarations | 95.3 % | 95.5 % | 227 : 29 | **effect** |
+| i (N6) | goals | 83.7 % | 75.6 % | 122 : 36 | **draw** |
+| j (N7) | declarations / goals | 77.9 % / 86.6 % | 59.1 % / 73.3 % | 2 : 1 / 1 : 4 | **fails** |
+
+Every verdict of §4.1 survives the repaired relevance: the one effect is
+still `native2` ahead of `features` on the declarations — its census lead
+widens (227 : 29 against 185 : 29) while its share of file drops falls to
+just above the rule (95.3 %), because the address book itself gained most
+from the repair (hits at 5 on the 209-query sample 77 → 79, at 10 89 → 101)
+and the raw vector is a closer competitor than it was. The goal half of N6
+moves further from the rule (83.7 % and 75.6 %). The control still fails.
+M1, M2, M3 and M5 are met; M4 is still not.
+
+**M5 after the repair.** With nothing dropped, 0 rebuilt vectors differ from
+the stored ones. 109 of the 172 file drops change at least one structural
+feature vector outside the file, **1,881 in all, the largest 343** (dropping
+`Golay/Code.lean`, which many results genuinely cite) — against 12,541 over
+167 drops and a largest of 1,880 (`Heisenberg.lean`, the one-letter sink)
+under the leaky reader. What remains is the cost of holding addresses fixed
+under real citations.
+
 ## 5. The Lean file
 
 `RequestProject/GLM/CorpusResample.lean` proves, on the standard axioms only:
@@ -344,12 +385,9 @@ and that none of the post-hoc readings is an effect.
 
 ## 7. What this leaves
 
-* **The citation leak (§4.4).** A citation index that does not resolve a
-  bound variable to a one-letter declaration — resolving short names only
-  when the token is not bound in the statement, or not at all below some
-  length — then every relevance set and every retrieval figure re-taken under
-  it, with the old figures kept as a record. It is item 5's kind of leak and
-  belongs with it.
+* ~~**The citation leak (§4.4).**~~ *Closed by Phase 101*: citations are read
+  in Lean's scope and checked against the elaborator (99.1 % precision), and
+  this study's census re-taken under it (§4.7).
 * **File drops at every offset**, to separate the two kinds of draw the
   families mix (§4.5); read off the same census, it costs no new ranking.
 * **The goal half of N6** sits at 93.3 % of offsets; a resampling of a larger

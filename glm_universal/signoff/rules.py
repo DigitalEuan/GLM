@@ -61,7 +61,7 @@ TOTALS_PATH = PROJECT_ROOT / ".glm_suite_totals.json"
 
 #: Bumped whenever the meaning of a digest changes.  A ledger written under an
 #: older schema signs nothing.
-SCHEMA = 4
+SCHEMA = 5
 
 TESTS_DIR = PACKAGE_ROOT / "tests"
 
@@ -117,7 +117,7 @@ def file_digest(path: Path) -> str:
 
 
 def tree_digest(paths: Iterable[Path], root: Optional[Path] = None,
-                masked: bool = False) -> str:
+                masked: bool = False, mode: Optional[str] = None) -> str:
     """A canonical digest of a set of files.
 
     Sorted by path relative to ``root`` so the result does not depend on the
@@ -127,7 +127,16 @@ def tree_digest(paths: Iterable[Path], root: Optional[Path] = None,
     ``masked=True`` hashes every Markdown document by
     :func:`document_digest` -- its *written* content, with the generated
     regions emptied -- instead of its raw bytes.  See that function for why.
+
+    ``mode`` names the reading outright and overrides ``masked``: one of
+    :data:`DIGEST_MODES` -- ``"written"`` (the same as ``masked=True``),
+    ``"rendered"`` (raw bytes with only the run-measured figures emptied,
+    :func:`rendered_text`) or ``"raw"`` (the same as ``masked=False``).
     """
+    if mode is None:
+        mode = "written" if masked else "raw"
+    if mode not in DIGEST_MODES:
+        raise ValueError(f"unknown digest mode {mode!r}")
     base = root or PROJECT_ROOT
     entries = sorted({Path(p).resolve() for p in paths})
     h = _hasher()
@@ -138,8 +147,12 @@ def tree_digest(paths: Iterable[Path], root: Optional[Path] = None,
             relative = path
         h.update(str(relative).encode("utf-8"))
         h.update(b"\0")
-        digest = (document_digest(path) if masked and path.suffix == ".md"
-                  else file_digest(path))
+        if path.suffix == ".md" and mode == "written":
+            digest = document_digest(path)
+        elif path.suffix == ".md" and mode == "rendered":
+            digest = rendered_digest(path)
+        else:
+            digest = file_digest(path)
         h.update(digest.encode("ascii"))
         h.update(b"\0")
     return h.hexdigest()
@@ -217,6 +230,112 @@ def reads_rendered_regions(closure: Iterable[Path]) -> bool:
     """Whether a closure holds a module that reads generated regions."""
     readers = {(PACKAGE_ROOT / name).resolve() for name in RENDER_READERS}
     return any(Path(p).resolve() in readers for p in closure)
+
+
+# ---------------------------------------------------------------------------
+#  The run-measured figures, and the three readings of a document
+# ---------------------------------------------------------------------------
+#
+#  Most figures are a property of the *sources* -- how many test files, how
+#  many Lean files -- and ``corpus --refresh`` writes them before a close
+#  starts.  One is a property of a *run*: the suite totals (*N tests across M
+#  of the T test files, K subtests*), which the close itself records and only
+#  a refresh *after* the close can write into the documents.  Signing every
+#  render reader against that region was what made a close take three passes:
+#  the close recorded new totals, the refresh wrote them into a dozen
+#  documents, and all 51 render readers -- 49 of which never look at the
+#  totals -- went stale and ran again (Phase 109, ITERATION_COST_STUDY §5h).
+#
+#  So there are three readings of a document, and a unit is signed against
+#  exactly one of them (:func:`digest_mode`):
+#
+#  * ``"written"`` -- every generated region emptied: a unit that reads no
+#    rendered region at all;
+#  * ``"rendered"`` -- raw bytes with only the *run-measured* regions emptied:
+#    a unit that reaches the renderer but is not a document check;
+#  * ``"raw"`` -- every byte: the document checks themselves
+#    (:data:`DOCUMENT_CHECKS`), whose subject is whether each region is
+#    current, and the ``figures`` instrument.
+
+#: The digest modes, from loosest to strictest.
+DIGEST_MODES: Tuple[str, ...] = ("written", "rendered", "raw")
+
+#: Inline figures whose value is recorded by a run rather than read off the
+#: sources.  ``tests/test_signoff.py`` holds this equal to the figures that
+#: :mod:`glm_universal.figures` marks as measured by a run.
+RUN_FIGURES: Tuple[str, ...] = ("suite",)
+
+#: The section of ``FIGURES.md`` that holds the recorded totals, and the row
+#: of its sentence table that quotes them.  Both are written by
+#: :mod:`glm_universal.figures`; the test above pins the title to it.
+RUN_SECTION_TITLE = "What a complete run counted"
+
+_RUN_FIGURE_REGION = _re.compile(
+    r"(<!--figure:(?:" + "|".join(_re.escape(n) for n in RUN_FIGURES)
+    + r")-->).*?(<!--/figure-->)", _re.DOTALL)
+_RUN_SENTENCE_ROW = _re.compile(
+    r"^\| `(?:" + "|".join(_re.escape(n) for n in RUN_FIGURES)
+    + r")` \|.*$", _re.MULTILINE)
+_RUN_SECTION = _re.compile(
+    r"^## " + _re.escape(RUN_SECTION_TITLE) + r"\n.*?(?=^## |\Z)",
+    _re.MULTILINE | _re.DOTALL)
+
+
+def rendered_text(text: str) -> str:
+    """``text`` with only the run-measured regions emptied.
+
+    The inline run figures lose their value (markers kept), and in
+    ``FIGURES.md`` the recorded-totals section and the sentence row quoting
+    them are dropped.  Every other byte, including every other figure and
+    generated block, is kept.
+    """
+    text = _RUN_FIGURE_REGION.sub(r"\1\2", text)
+    text = _RUN_SECTION.sub("", text)
+    return _RUN_SENTENCE_ROW.sub("", text)
+
+
+_rendered_digest_cache: Dict[Tuple[str, int, int], str] = {}
+
+
+def rendered_digest(path: Path) -> str:
+    """SHA-256 of :func:`rendered_text` of one document."""
+    resolved = Path(path)
+    try:
+        stat = resolved.stat()
+        key = (str(resolved), stat.st_mtime_ns, stat.st_size)
+    except OSError:  # pragma: no cover - defensive
+        key = None
+    if key is not None and key in _rendered_digest_cache:
+        return _rendered_digest_cache[key]
+    try:
+        text = resolved.read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError):  # pragma: no cover - defensive
+        return file_digest(resolved)
+    digest = sha256_hex(rendered_text(text).encode("utf-8"))
+    if key is not None:
+        _rendered_digest_cache[key] = digest
+    return digest
+
+
+def digest_mode(test_path: Path, closure: Iterable[Path]) -> str:
+    """Which reading of the documents a unit is signed against."""
+    if Path(test_path).name in DOCUMENT_CHECKS:
+        return "raw"
+    if reads_rendered_regions(closure):
+        return "rendered"
+    return "written"
+
+
+#: Working notes rewritten *between* rounds, outside any round's control:
+#: the session summary is replaced every time a session ends, so a unit
+#: signed against it was stale at the start of every round -- 51 units, an
+#: hour and a quarter of serial running, re-paid for a file no test reads.
+#: Since Phase 111 it is in no closure at all and outside
+#: the corpus (``corpus/inventory.py`` leaves it out of the documents), so the
+#: document checks, the address book and ``DIGEST.md`` no longer go stale when
+#: it is rewritten either: a round that closed is still closed at the next
+#: pick-up.
+SESSION_NOTES: Tuple[str, ...] = ("ARISTOTLE_SUMMARY.md",)
 
 
 def interpreter_tag() -> str:
@@ -497,6 +616,32 @@ def document_index() -> Dict[str, Tuple[Path, ...]]:
     return _document_index_cache
 
 
+def written_documents() -> Tuple[Path, ...]:
+    """Every document the corpus walk reads: the ``.md`` files of the
+    repository outside ``source_material/``, without the session notes.
+
+    The same set :func:`glm_universal.corpus.inventory.document_paths`
+    enumerates, taken from :func:`document_index` so that nothing is walked
+    twice.  It is the closure of what *reads the whole corpus* -- the two
+    document checks and the documents gate -- which depend on a document by
+    its being there, not by being named.  Until Phase 111 they held only the
+    documents some module happened to mention, which a docstring reader in
+    the closure made most of them; a document nothing mentions could move
+    without re-running the check whose subject it is.
+    """
+    out: List[Path] = []
+    material = (REPOSITORY_ROOT / "source_material").resolve()
+    for paths in document_index().values():
+        for path in paths:
+            if path.suffix != ".md" or path.name in SESSION_NOTES \
+                    and path.parent == REPOSITORY_ROOT.resolve():
+                continue
+            if material in path.parents:
+                continue
+            out.append(path)
+    return tuple(sorted(out))
+
+
 _lean_sources_cache: Optional[Tuple[Path, ...]] = None
 
 
@@ -598,6 +743,16 @@ def _reads_docstrings(path: Path) -> bool:
 
     A closure holding such a module keeps the documents its docstrings
     mention, since for it a docstring is data.
+
+    Decided on the syntax tree, not on the text: the module must *use* the
+    name -- ``x.__doc__``, a bare ``__doc__``, or a reference to
+    ``get_docstring`` -- rather than merely spell it in a string or a comment.
+    Until Phase 111 this was a substring test, and this very module, which
+    spells both names in its own prose and in the test below, read as a
+    docstring reader; since nearly every derivation imports it through
+    :func:`code_store`, a mention of ``STATUS.md`` or ``MASTER_PLAN.md`` in any
+    docstring put that document in about sixty closures, and every round's
+    close re-ran them for an edit to the status document or the plan.
     """
     try:
         key = (str(path), path.stat().st_mtime_ns)
@@ -609,9 +764,28 @@ def _reads_docstrings(path: Path) -> bool:
             source = path.read_text(encoding="utf-8")
         except (OSError, UnicodeDecodeError):  # pragma: no cover
             source = ""
-        cached = "__doc__" in source or "get_docstring" in source
+        cached = _uses_docstrings(source)
         _docstring_reader_cache[key] = cached
     return cached
+
+
+def _uses_docstrings(source: str) -> bool:
+    """Does this source *use* ``__doc__`` or ``get_docstring`` as a name?"""
+    if "__doc__" not in source and "get_docstring" not in source:
+        return False
+    try:
+        tree = ast.parse(source)
+    except (SyntaxError, ValueError):  # pragma: no cover - defensive
+        return True                     # unreadable: over-hash (D4)
+    wanted = {"__doc__", "get_docstring"}
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Attribute) and node.attr in wanted:
+            return True
+        if isinstance(node, ast.Name) and node.id in wanted:
+            return True
+        if isinstance(node, ast.alias) and node.name in wanted:
+            return True
+    return False
 
 
 _path_cache: Dict[str, Optional[Path]] = {}
@@ -746,7 +920,13 @@ def unit_closure(test_path: Path, include_documents: bool = True,
                 frontier.append(resolved)
     seen.update(p.resolve() for p in _data_files_for(seen))
     if include_documents:
-        seen.update(p.resolve() for p in referenced_documents(tuple(seen)))
+        seen.update(p.resolve() for p in referenced_documents(tuple(seen))
+                    if p.name not in SESSION_NOTES)
+        if test_path.name in DOCUMENT_CHECKS:
+            #  A document check reads every written document through the
+            #  corpus walk, not by name, so naming is not how it depends on
+            #  them: it holds them all (:func:`written_documents`).
+            seen.update(written_documents())
     if include_scaffolding:
         seen.update(p.resolve() for p in scaffolding_paths())
     return tuple(sorted(seen))
@@ -784,12 +964,12 @@ def code_store(name: str, module_file: str, schema: int = 1,
 def unit_digest(test_path: Path) -> str:
     """The signature of a test file: its closure, the schema, the interpreter."""
     closure = unit_closure(test_path)
-    masked = not reads_rendered_regions(closure)
+    mode = digest_mode(test_path, closure)
     h = _hasher()
     h.update(f"schema={SCHEMA}\0".encode("ascii"))
     h.update(f"python={interpreter_tag()}\0".encode("ascii"))
-    h.update(f"masked={masked}\0".encode("ascii"))
-    h.update(tree_digest(closure, masked=masked).encode("ascii"))
+    h.update(f"mode={mode}\0".encode("ascii"))
+    h.update(tree_digest(closure, mode=mode).encode("ascii"))
     return h.hexdigest()
 
 
@@ -802,7 +982,7 @@ def test_units() -> Tuple[Path, ...]:
 
 #: The test files whose subject is the documentation, excluded from the
 #: recorded suite totals.  See :func:`counted_units` for why.
-DOCUMENT_CHECKS: Tuple[str, ...] = ("test_figures.py",)
+DOCUMENT_CHECKS: Tuple[str, ...] = ("test_corpus.py", "test_figures.py")
 
 
 def counted_units() -> Tuple[Path, ...]:
@@ -957,9 +1137,9 @@ def group_digests(test_path: Path) -> Dict[str, str]:
     stale unit is reported against the groups whose digest moved.
     """
     groups = closure_groups(test_path)
-    masked = not reads_rendered_regions(
-        [p for paths in groups.values() for p in paths])
-    return {name: tree_digest(paths, masked=masked)
+    mode = digest_mode(test_path,
+                       [p for paths in groups.values() for p in paths])
+    return {name: tree_digest(paths, mode=mode)
             for name, paths in groups.items()}
 
 

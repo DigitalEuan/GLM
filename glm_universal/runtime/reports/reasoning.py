@@ -34,6 +34,70 @@ class ReasoningReports:
     it holds no state of its own.
     """
 
+    # -- the route choices (Phase 109) -------------------------------------
+
+    def _report_routes(self, query: Query) -> Solution:
+        """Wires route_report.route_report -- every decision point, its
+        routes and the conditions they need, and the route each reference
+        problem takes.
+
+        Until Phase 109 a route choice showed only in column 2 of the answer
+        that made it.  This subject lists them all in one place, and runs one
+        reference problem per route so a route that stops being reached is a
+        changed row rather than silence.
+        """
+        from .. import route_report as rr
+        report = rr.route_report()
+        steps = []
+        for point in report["points"]:
+            rows = "; ".join(
+                f"{r['route']}{' (disabled)' if r['disabled'] else ''}: "
+                f"{r['condition']}" for r in point["routes"])
+            how = "; ".join(
+                f"{d['decider']}{' (disabled)' if d['disabled'] else ''}: "
+                f"{d['how']}" for d in point["deciders"])
+            steps.append(Step(
+                f"decision point {point['point']}",
+                "routes in the order tried, each with the fact that makes it "
+                "sound: " + rows + (f". The fact is decided by: {how}"
+                                    if how else ""),
+                " > ".join(r["route"] for r in point["routes"])))
+        steps.append(Step(
+            "the reference problems, run now",
+            "; ".join(f"{r['problem']} -> {r['point']}:{r['taken']}"
+                      + ("" if r["as_expected"] else
+                         f" (expected {r['expected']})")
+                      for r in report["reference"]),
+            f"{report['as_expected']} of {report['reference_count']} take "
+            f"the route expected; unreached routes: "
+            + (", ".join(report["unreached"]) or "none")))
+        steps.append(Step(
+            "what is switched off",
+            "Routes and deciders are switched off only to read an earlier "
+            "round's measurement on that round's own code.",
+            ", ".join(report["disabled"]) or "nothing"))
+        expected = {
+            "points": str(report["point_count"]),
+            "routes": str(report["route_count"]),
+            "reference": str(report["reference_count"]),
+            "as_expected": str(report["as_expected"]),
+            "unreached": ",".join(report["unreached"]),
+            "holds": str(report["holds"]),
+            "taken": ",".join(f"{r['point']}:{r['taken']}"
+                              for r in report["reference"]),
+        }
+        return Solution(
+            query=query, kind="report",
+            answer=f"report routes: {report['point_count']} decision points "
+                   f"with {report['route_count']} routes; "
+                   f"{report['as_expected']} of {report['reference_count']} "
+                   f"reference problems take the route expected"
+                   + (f"; unreached: {', '.join(report['unreached'])}"
+                      if report["unreached"] else "; every route reached"),
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "report_routes", "args": {}},
+            payload={"report": jsonable(report)})
+
     # -- the archive's search loop, measured ------------------------------
 
     def _report_searchloop(self, query: Query) -> Solution:

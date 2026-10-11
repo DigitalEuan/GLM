@@ -98,24 +98,24 @@ not written down here; it is emitted:
 <!-- generated: lean-corpus -->
 | kind | count |
 |---|---|
-| abbrev | 58 |
-| def | 1,155 |
+| abbrev | 62 |
+| def | 1,242 |
 | example | 21 |
-| inductive | 50 |
+| inductive | 56 |
 | instance | 27 |
-| lemma | 207 |
+| lemma | 233 |
 | structure | 59 |
-| theorem | 2,999 |
-| **total** | **4,576** |
+| theorem | 3,275 |
+| **total** | **4,975** |
 
-4,576 declarations across 171 files, the largest being `Gen3.lean` with 98.
+4,975 declarations across 199 files, the largest being `Gen3.lean` with 98.
 <!-- end generated -->
 
 Written into a sentence, so that a reader who stops here has the size of what
 follows: the reader addresses
-<!--figure:lean-declarations-->4,576<!--/figure--> declarations over
-<!--figure:lean-declaration-files-->171<!--/figure--> files, which is every
-file of <!--figure:lean-files-->171 Lean files<!--/figure--> the development
+<!--figure:lean-declarations-->4,975<!--/figure--> declarations over
+<!--figure:lean-declaration-files-->199<!--/figure--> files, which is every
+file of <!--figure:lean-files-->199 Lean files<!--/figure--> the development
 holds — no Lean file of this repository is outside the corpus this study
 measures.
 
@@ -249,12 +249,12 @@ below half a scale unit in every coordinate.
 <!-- generated: lean-readback -->
 |  | measured |
 |---|---|
-| declarations checked | 4,576 |
-| read back exactly | **4,576 / 4,576** (rate 1) |
-| coordinates checked | 109,824 |
+| declarations checked | 4,975 |
+| read back exactly | **4,975 / 4,975** (rate 1) |
+| coordinates checked | 119,400 |
 | coordinate errors | **0** |
-| moved by the decoder | 4,576 / 4,576 |
-| worst observed residual | **3**, at `GLM.DeepHoleLadder.Reading.cumulative_ge_right` |
+| moved by the decoder | 4,975 / 4,975 |
+| worst observed residual | **3**, at `GLM.CoherenceRegime` |
 | half a scale step | `9/2` |
 | covering radius | 4 |
 | bound respected | yes |
@@ -276,9 +276,9 @@ declaration" is, at this point, a statement about the feature map alone.
 <!-- generated: lean-injectivity -->
 | scheme | distinct addresses | distinct feature vectors | classes | declarations conflated | quantisation adds conflation? |
 |---|---|---|---|---|---|
-| `feature` | 4,091 / 4,576 | 4,091 | 325 | 810 | no |
-| `hash_control` | **4,576 / 4,576** | 4,091 | 0 | 0 | — |
-| `shuffled` | 4,091 / 4,576 | 4,091 | 325 | 810 | no |
+| `feature` | 4,247 / 4,975 | 4,247 | 459 | 1,187 | no |
+| `hash_control` | **4,975 / 4,975** | 4,247 | 0 | 0 | — |
+| `shuffled` | 4,247 / 4,975 | 4,247 | 459 | 1,187 | no |
 <!-- end generated -->
 
 Two things to read off this table.
@@ -302,34 +302,49 @@ the sense that a reader shown only the 24 counts would also fail to tell the
 members apart:
 
 <!-- generated: lean-classes -->
-325 classes: 244 pairs, 41 triples, 25 classes of 4, 5 classes of 5, 7 classes of 6, 2 classes of 8, 1 class of 16.
+459 classes: 340 pairs, 61 triples, 33 classes of 4, 12 classes of 5, 2 classes of 6, 1 class of 7, 4 classes of 8, 1 class of 9, 1 class of 11, 1 class of 12, 1 class of 14, 1 class of 16, 1 class of 19.
 
 The widest, written out, because the point they make can only be read from the names:
 
 ```
-16  GLM.Calibration.dEnergy, GLM.Calibration.dLength, GLM.Calibration.dTime,
-    GLM.Conjugate.energyDim, GLM.DimensionCarrier.Dim,
-    GLM.DimensionCarrier.energyDim, GLM.DimensionCarrier.mc4Shift,
-    GLM.Foundations.Dim, GLM.Foundations.energyDim,
-    GLM.Foundations.mc4Shift, GLM.Lightspeed.dEnergy,
-    GLM.Lightspeed.dLength, GLM.Lightspeed.dMass, GLM.Lightspeed.dSpeed,
-    GLM.Lightspeed.dTime, GLM.VOA.vac
-8   GLM.Gen2.Exps, GLM.Gen2.mass, GLM.Gen2.torque, GLM.GolayHex.w,
-    GLM.Info.tea, GLM.QuestionSetBMatrix.A, GLM.QuestionSetBMatrix.B,
-    GLM.QuestionSetBMatrix.C
-8   GLM.GolayMOG.leechAddress_injective,
-    GLM.Info.staticLayer_indist_hot_uses, GLM.Info.wobbleEntropy_continuous,
-    GLM.Lightspeed.codewordTax_strictMono,
-    GLM.PythonSpeech.andnotP_bijective, GLM.PythonSpeech.notP_bijective,
-    GLM.PythonSpeech.orP_bijective, GLM.PythonSpeech.xorP_bijective
-6   GLM.Calibration.NA, GLM.Calibration.molarPlanck, GLM.Lightspeed.NA,
-    GLM.Lightspeed.cSI, GLM.Lightspeed.hSI, GLM.Lightspeed.molarPlanck
-6   GLM.Calibration.NA_pos, GLM.Calibration.cSI_pos,
-    GLM.Calibration.hSI_pos, GLM.Lightspeed.NA_pos, GLM.Lightspeed.cSI_pos,
-    GLM.Lightspeed.hSI_pos
-6   GLM.Calibration.dAction, GLM.Question.deriveDomainWord,
+19  GLM.Calibration.dLength, GLM.Conjugate.energyDim,
+    GLM.CoordinateOrder.energyAbstractConcrete,
+    GLM.CoordinateOrder.waterAbstractConcrete,
+    GLM.DimensionCarrier.mc4Shift, GLM.Foundations.mc4Shift, GLM.Gen2.mc4,
+    GLM.GolayHex.w2, GLM.Heisenberg.vac, GLM.LawRegister.row1,
+    GLM.LawRegister.row2, GLM.Lightspeed.dLength, GLM.Lightspeed.dMass,
+    GLM.Question.courtesyWords, GLM.Question.deriveDomainWord,
     GLM.Question.deriveOpening, GLM.Question.deriveSeparator,
-    GLM.QuestionNested.comparativeOperator, GLM.Semantics.meaningLayer
+    GLM.Question.interrogativeWords, GLM.QuestionNested.comparativeOperator
+16  GLM.Hull.golayVecs_subset_scaled, GLM.Info.staticLayer_indist_hot_uses,
+    GLM.Info.towerView_injective, GLM.LawRegister.row1_codeword,
+    GLM.LawRegister.row2_codeword, GLM.Lightspeed.codewordTax_strictMono,
+    GLM.PythonSpeech.andP_bijective, GLM.PythonSpeech.andnotP_bijective,
+    GLM.PythonSpeech.copyP_bijective, GLM.PythonSpeech.notP_bijective,
+    GLM.PythonSpeech.orP_bijective, GLM.PythonSpeech.xorP_bijective,
+    GLM.Recipe.ratioSpec_full_lossless,
+    GLM.ShareSeparation.local_can_certify_when_global_fails,
+    GLM.SpatialArithmetic.nodeCount_injective, GLM.ZeroStorage.octad_isGolay
+14  GLM.Calibration.dEnergy, GLM.DimensionCarrier.energyDim,
+    GLM.DimensionCarrier.mc4Dim, GLM.Foundations.energyDim,
+    GLM.Foundations.mc4Dim, GLM.Gen2.mass, GLM.Gen2.torque,
+    GLM.Golay24.octadA, GLM.Golay24.octadB, GLM.Info.large, GLM.Info.small,
+    GLM.Lightspeed.dAction, GLM.Lightspeed.dEnergy, GLM.QuestionSetBMatrix.B
+12  GLM.Calibration.dMass, GLM.Calibration.dTime,
+    GLM.ConditionalInduction.twoSurvivorObs, GLM.CubeMirror.sigmaD,
+    GLM.CubeStab.quarterTurn, GLM.CubeTax.synZero, GLM.Gen2.unitT,
+    GLM.Golay24.onesSyn, GLM.GolayHex.w, GLM.Info.fast, GLM.Info.walking,
+    GLM.Lightspeed.dTime
+11  GLM.GolayMOG.leechAddress_injective,
+    GLM.GolayMOG.mogCoordinate_bijective, GLM.Info.wobbleEntropy_continuous,
+    GLM.PlanStore.exactKey_injective, GLM.PythonSpeech.fredkin_involutive,
+    GLM.PythonSpeech.toffoli_involutive, GLM.Reversible.fredkin_bijective,
+    GLM.Reversible.fredkin_involutive, GLM.Reversible.toffoli_bijective,
+    GLM.Reversible.toffoli_involutive,
+    GLM.SpatialArithmetic.operatorCode_injective
+9   GLM.CitationScope.LName, GLM.Conversation.Licence, GLM.CubeStab.Cell,
+    GLM.CubeStab.CubeSym, GLM.GolayHex.F4, GLM.ModeAlgebra.Cat,
+    GLM.PythonSpeech.Lane, GLM.Question.Token, GLM.ThreeCube.Cube
 ```
 <!-- end generated -->
 
@@ -376,27 +391,27 @@ The third table is on *all* pairs, not just nearest ones.
 <!-- generated: lean-neighbours -->
 | scheme | nearest shares a file | rate | mean tie size |
 |---|---|---|---|
-| `feature` | **829 / 4,576** | ≈ **18.12 %** | 1.70 |
-| `hash_control` | 35 / 4,576 | ≈ 0.76 % | 1.00 |
-| `shuffled` | 25 / 4,576 | ≈ 0.55 % | 1.70 |
-| *chance* | — | ≈ 0.77 % | — |
+| `feature` | **1,062 / 4,975** | ≈ **21.35 %** | 1.91 |
+| `hash_control` | 34 / 4,975 | ≈ 0.68 % | 1.00 |
+| `shuffled` | 34 / 4,975 | ≈ 0.68 % | 1.91 |
+| *chance* | — | ≈ 0.69 % | — |
 
 | scheme | nearest is cited, either way | rate |
 |---|---|---|
-| `feature` | **143 / 4,576** | ≈ **3.13 %** |
-| `hash_control` | 6 / 4,576 | ≈ 0.13 % |
-| `shuffled` | 4 / 4,576 | ≈ 0.09 % |
-| *chance* | — | ≈ 0.14 % |
+| `feature` | **185 / 4,975** | ≈ **3.72 %** |
+| `hash_control` | 4 / 4,975 | ≈ 0.08 % |
+| `shuffled` | 3 / 4,975 | ≈ 0.06 % |
+| *chance* | — | ≈ 0.09 % |
 
 | scheme | mean d² within a file | mean d² across files | ratio |
 |---|---|---|---|
-| `feature` | 6,090.5 | 7,315.7 | **0.833** |
-| `hash_control` | 54,238.9 | 54,104.6 | 1.002 |
-| `shuffled` | 7,221.4 | 7,306.9 | 0.988 |
+| `feature` | 5,801.4 | 7,055.5 | **0.822** |
+| `hash_control` | 54,224.8 | 54,055.7 | 1.003 |
+| `shuffled` | 7,088.4 | 7,046.6 | 1.006 |
 
-Against closed-form chance the feature encoding runs 23.4× on the file test and 21.8× on the citation test, from an encoding that is never shown a file name.
+Against closed-form chance the feature encoding runs 31.2× on the file test and 43.6× on the citation test, from an encoding that is never shown a file name.
 
-Over 80,944 same-file pairs and 10,386,656 cross-file pairs.  The feature encoding beats the hash control: yes; beats the seeded reshuffle: yes; beats closed-form chance: yes.
+Over 84,778 same-file pairs and 12,288,047 cross-file pairs.  The feature encoding beats the hash control: yes; beats the seeded reshuffle: yes; beats closed-form chance: yes.
 <!-- end generated -->
 
 The two controls do exactly what they are there for.

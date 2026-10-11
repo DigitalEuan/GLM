@@ -580,7 +580,7 @@ class TestGeneratedSentencesAreTheOnesQuoted(unittest.TestCase):
             self.skipTest("no complete run has recorded the suite totals")
         self.assertRegex(self.sentences["suite"],
                          r"^[\d,]+ tests across \d+ of the \d+ test files, "
-                         r"[\d,]+ subtests, outside the document check$")
+                         r"[\d,]+ subtests, outside the document checks?$")
 
     def test_the_suite_sentence_states_the_whole_suite_it_was_taken_from(self):
         """The two file counts must agree rather than compete.
@@ -612,7 +612,12 @@ class TestGeneratedSentencesAreTheOnesQuoted(unittest.TestCase):
         counted = [path.name for path in sl.counted_units()]
         self.assertIn("test_figures.py", suite)
         self.assertNotIn("test_figures.py", counted)
-        self.assertEqual(len(counted) + 1, len(suite))
+        #  Since Phase 109 the corpus check is left out too, for the same
+        #  reason: it checks that every inline figure -- the totals among
+        #  them -- is current, and its subtests run per document.
+        self.assertIn("test_corpus.py", sl.DOCUMENT_CHECKS)
+        self.assertNotIn("test_corpus.py", counted)
+        self.assertEqual(len(counted) + len(sl.DOCUMENT_CHECKS), len(suite))
 
 
 # ===========================================================================

@@ -1,0 +1,243 @@
+{
+ "books": {
+  "documents": 136,
+  "least_place_distance": 8,
+  "met": false,
+  "non_codewords": 0,
+  "path_injective": true,
+  "place_words": 61,
+  "place_words_naming_one_document": 3,
+  "words": 136
+ },
+ "census": {
+  "folder3": {
+   "hit@1": 113,
+   "hit@5": 324,
+   "precision@5": {
+    "__fraction__": "413/7530"
+   },
+   "relatives@5": 413
+  },
+  "lexical_native2": {
+   "hit@1": 113,
+   "hit@5": 324,
+   "precision@5": {
+    "__fraction__": "413/7530"
+   },
+   "relatives@5": 413
+  },
+  "lexical_native3": {
+   "hit@1": 113,
+   "hit@5": 324,
+   "precision@5": {
+    "__fraction__": "413/7530"
+   },
+   "relatives@5": 413
+  },
+  "lexical_place2": {
+   "hit@1": 112,
+   "hit@5": 319,
+   "precision@5": {
+    "__fraction__": "41/753"
+   },
+   "relatives@5": 410
+  },
+  "lexical_raw": {
+   "hit@1": 107,
+   "hit@5": 323,
+   "precision@5": {
+    "__fraction__": "69/1255"
+   },
+   "relatives@5": 414
+  },
+  "lexical_raw3": {
+   "hit@1": 113,
+   "hit@5": 324,
+   "precision@5": {
+    "__fraction__": "413/7530"
+   },
+   "relatives@5": 413
+  },
+  "path3": {
+   "hit@1": 113,
+   "hit@5": 325,
+   "precision@5": {
+    "__fraction__": "69/1255"
+   },
+   "relatives@5": 414
+  },
+  "path_first": {
+   "hit@1": 1506,
+   "hit@5": 1506,
+   "precision@5": {
+    "__fraction__": "3731/3765"
+   },
+   "relatives@5": 7462
+  }
+ },
+ "discordances": {
+  "folder3_vs_native2": {
+   "first": "folder3",
+   "first_only": 0,
+   "second": "lexical_native2",
+   "second_only": 0,
+   "sign_test": {
+    "__fraction__": "1/1"
+   }
+  },
+  "native2_vs_raw": {
+   "first": "lexical_native2",
+   "first_only": 7,
+   "second": "lexical_raw",
+   "second_only": 6,
+   "sign_test": {
+    "__fraction__": "1/1"
+   }
+  },
+  "native3_vs_native2": {
+   "first": "lexical_native3",
+   "first_only": 0,
+   "second": "lexical_native2",
+   "second_only": 0,
+   "sign_test": {
+    "__fraction__": "1/1"
+   }
+  },
+  "native3_vs_raw": {
+   "first": "lexical_native3",
+   "first_only": 7,
+   "second": "lexical_raw",
+   "second_only": 6,
+   "sign_test": {
+    "__fraction__": "1/1"
+   }
+  },
+  "path3_vs_native2": {
+   "first": "path3",
+   "first_only": 1,
+   "second": "lexical_native2",
+   "second_only": 0,
+   "sign_test": {
+    "__fraction__": "1/1"
+   }
+  },
+  "place2_vs_raw": {
+   "first": "lexical_place2",
+   "first_only": 3,
+   "second": "lexical_raw",
+   "second_only": 7,
+   "sign_test": {
+    "__fraction__": "11/32"
+   }
+  }
+ },
+ "documents": 136,
+ "folders": 21,
+ "marks": {
+  "F1": {
+   "asks": "snapshot intact, read-back exact, re-taken figures equal the stored ones",
+   "outcome": "met",
+   "re_taken_equals_stored": true,
+   "readback_failures": 0
+  },
+  "F2": {
+   "asks": "every tree word a codeword, path injective, no place word naming one document",
+   "outcome": "not met"
+  },
+  "F3": {
+   "asks": "path_first has a hit at 1 on every census query",
+   "outcome": "met"
+  },
+  "F4": {
+   "asks": "lexical_native3 >= lexical_raw on hit@5 and precision@5, discordance its way, sign test <= 0.05",
+   "outcome": "not met"
+  },
+  "F5": {
+   "asks": "lexical_native3 >= lexical_raw3 (like for like)",
+   "outcome": "met"
+  },
+  "F6": {
+   "asks": "lexical_place2 hit@5 >= lexical_raw",
+   "outcome": "not met"
+  }
+ },
+ "readback": {
+  "addresses": 3012,
+  "failures": 0
+ },
+ "sample": {
+  "folder3": {
+   "hit@1": 7,
+   "hit@5": 15,
+   "precision@5": {
+    "__fraction__": "7/100"
+   },
+   "relatives@5": 21
+  },
+  "lexical_native2": {
+   "hit@1": 7,
+   "hit@5": 15,
+   "precision@5": {
+    "__fraction__": "7/100"
+   },
+   "relatives@5": 21
+  },
+  "lexical_native3": {
+   "hit@1": 7,
+   "hit@5": 15,
+   "precision@5": {
+    "__fraction__": "7/100"
+   },
+   "relatives@5": 21
+  },
+  "lexical_place2": {
+   "hit@1": 7,
+   "hit@5": 15,
+   "precision@5": {
+    "__fraction__": "7/100"
+   },
+   "relatives@5": 21
+  },
+  "lexical_raw": {
+   "hit@1": 6,
+   "hit@5": 15,
+   "precision@5": {
+    "__fraction__": "7/100"
+   },
+   "relatives@5": 21
+  },
+  "lexical_raw3": {
+   "hit@1": 7,
+   "hit@5": 15,
+   "precision@5": {
+    "__fraction__": "7/100"
+   },
+   "relatives@5": 21
+  },
+  "path3": {
+   "hit@1": 7,
+   "hit@5": 15,
+   "precision@5": {
+    "__fraction__": "7/100"
+   },
+   "relatives@5": 21
+  },
+  "path_first": {
+   "hit@1": 60,
+   "hit@5": 60,
+   "precision@5": {
+    "__fraction__": "99/100"
+   },
+   "relatives@5": 297
+  }
+ },
+ "sample_size": 60,
+ "snapshot_digest": "5fefdc91256c2325422123320a592c9a4dfd7055447907c9f2cdd0c7b0c09ac4",
+ "source_digest": "91191362f53698b4aad749dc0bbd61c2cd57e6c01896e0bfd7970e87e53da6d1",
+ "ties": {
+  "queries": 1506,
+  "tie_at_boundary": 30,
+  "top5_changed_by_place": 7
+ },
+ "units": 1506
+}

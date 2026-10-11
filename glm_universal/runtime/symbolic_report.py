@@ -42,7 +42,7 @@ def _mutant_rejected(frame_name: str, text: str) -> bool:
     from .symbolic_frames import mutated
     from .symbolic_outside import mutated_reading
     if frame_name == "symbolic_system":
-        m = mutated(text)
+        m = mutated(text, phase=103)
     else:
         got = qf.frame_of(text)
         if got is None:
@@ -124,7 +124,7 @@ def system_marks(run_scripts: bool = True) -> Dict[str, object]:
                 else:
                     got = v if k == 1 else None
                 same = same and got is not None and got == want
-            rd = read_system(q)
+            rd = read_system(q, phase=103)
             gate = qf.run_gate(rd.script) if run_scripts else (True, "")
             row.update(ok=same and gate[0], identity=same, gate=gate[0],
                        answer=rd.value[:200])
@@ -138,11 +138,13 @@ def system_marks(run_scripts: bool = True) -> Dict[str, object]:
 
 
 def refusal_marks() -> Dict[str, object]:
-    """S4: every declared refusal by its code."""
+    """S4: every declared refusal by its code -- the operation as Phase 98
+    shipped it (Phase 103's nonlinear layer answers the two ``NONLINEAR``
+    cases; ``nonlinear_report`` scores that)."""
     from .symbolic_frames import read_system
     rows = []
     for cid, q, code in C.REFUSALS:
-        rd = read_system(q)
+        rd = read_system(q, nonlinear=False)
         rows.append({"id": cid, "expected": code, "got": rd.code,
                      "ok": (not rd.answered) and rd.code == code})
     passed = sum(1 for r in rows if r["ok"])
@@ -310,7 +312,7 @@ def random_battery(count: int = 90, seed: int = 9803,
                  for row in coefs]
             if _det(m) != 0:
                 singular = False
-        rd = read_system(q)
+        rd = read_system(q, nonlinear=False)
         gate = qf.run_gate(rd.script)[0] if (run_scripts and
                                               rd.answered) else None
         rows.append({"n": n, "singular": singular, "answered": rd.answered,

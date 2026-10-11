@@ -1,0 +1,1610 @@
+{
+ "new_cases": [
+  "report-hole-configuration"
+ ],
+ "rows": [
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "verify-newton",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "verify-power",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "verify-pressure",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "verify-false",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "verify-scaled-false",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "verify-angular-momentum",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "analogy-alkali",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "analogy-antonym",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "analogy-halogen",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "analogy-reciprocal",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "analogy-noble-gas",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "analogy-boron-carbon",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "analogy-states-of-matter",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "analogy-scale",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "analogy-empty-table-position",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "analogy-cross-register",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "analogy-conjugate-unplaced",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "nearest-molecule",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "nearest-unregistered-molecule",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "describe-carbon",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "describe-energy",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "describe-water",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "describe-unknown-word",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "describe-formula",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "describe-registered-formula",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "describe-arithmetic",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "describe-numeral-arithmetic",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "nearest-pressure",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "nearest-carbon",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "product-sakuma",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "cluster-cno",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "spatial-oxygen",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "project-carbon-oxygen",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "trilinear-triple",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "trilinear-nonaxes",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "coherence-carbon",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "angle-carbon-oxygen",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "task-grid",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "task-physics",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "task-concepts",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "pi-groups-force",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "pi-groups-energy",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "meaning-water",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "meaning-numeral",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "meaning-roman",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "meaning-relate-synonyms",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "meaning-relate-conflated",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "meaning-open-vocabulary",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "real-sqrt2",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "real-pi",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "real-e",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "real-phi",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "real-divide-by-zero",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "compare-pi-355",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "compare-sqrt2-1_5",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "compare-2pi-9",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "compare-equality",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "unknown-nonsense",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "coherence-unregistered-molecule",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "spatial-unregistered-molecule",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "angle-unregistered-molecule",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "cluster-unregistered-molecule",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-relations",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-leech-distribution",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-theta",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-subalgebra",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-information-loss",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-golay-decoding",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-superposition",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-leech-construction",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-facets",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-monster-stack",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-multiresolution",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-migration",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-state-migration",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-concept-store",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-fusion",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-benchmarks",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-semantics",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-infinite-values",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-analogies",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-completion",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-vagueness",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-admission",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-conjugates",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-transform-decoder",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-units",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-deep-holes",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-capabilities",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-molecules",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-chemistry-coverage",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-noise",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-lattices",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-shells",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-llvq",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-signature",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-drift",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-catalog",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-containers",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-companion",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-blueprint",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-engine",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-mantissa",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-reversible",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": "the tree: the Lean declaration count, measured live",
+   "id": "report-lean",
+   "present": true,
+   "same_status": true,
+   "same_text": false
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-directives",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-searchloop",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-controller",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-landscape",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-hole-classifier",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-hole-ladder",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": "the tree: the address-book index over the Lean declarations, measured live",
+   "id": "report-retrieval",
+   "present": true,
+   "same_status": true,
+   "same_text": false
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": "the tree: the overlay's stored bytes, measured live",
+   "id": "report-generated",
+   "present": true,
+   "same_status": true,
+   "same_text": false
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": "this round: the pipeline gains the lattice-completion row",
+   "id": "report-pipeline",
+   "present": true,
+   "same_status": true,
+   "same_text": false
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-harmony",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-economics",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-escalation",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-names",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": "this round: the list of report subjects in the refusal gains 'hole configuration'",
+   "id": "report-unknown-subject",
+   "present": true,
+   "same_status": true,
+   "same_text": false
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-measure",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-denotations",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-recipe",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": "this round: the count of evaluation questions of the undescribed kinds gains the new case",
+   "id": "report-language",
+   "present": true,
+   "same_status": true,
+   "same_text": false
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-cumulativity",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-hole-failures",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-query-escalation",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": "the tree: the stack relay's query strides are drawn from the Lean declarations",
+   "id": "report-relay",
+   "present": true,
+   "same_status": true,
+   "same_text": false
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": "the tree: the anonymous register's queries are the relay's strides",
+   "id": "report-anonymous",
+   "present": true,
+   "same_status": true,
+   "same_text": false
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-review-sweep",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "report-routes",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "measure-hot-tea",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "measure-hot-star",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "measure-hot-across-classes",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "measure-magnitude-in-tea",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "measure-large-room-volume",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "measure-dark-indoor",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "measure-large-room",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "measure-expensive-market",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "measure-hot-walking",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "comparative-cold-star-hotter-than-hot-tea",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "comparative-hot-tea-hotter-than-cold-tea",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "comparative-false-claim",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "comparative-equative",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "comparative-cross-quantity",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "comparative-wrong-scale-marker",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "comparative-midpoint-word",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "derive-span-ratio-tea",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "derive-numerator-perfect-fifth",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "derive-euler-gradus",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "derive-undescribed-coordinate",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "field-atomic-weight-carbon",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "field-group-block-chlorine",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "field-molar-mass-water",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "field-lean-declaration-file",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "field-listing-shape",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "field-unknown-field",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "field-missing-value",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "field-unknown-row",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "ordering-abstractness",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "ordering-atomic-weight",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "ordering-derived-coordinate",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "ordering-level",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "ordering-nominal",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "ordering-across-scales",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "ordering-unreadable",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "extremum-heaviest",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "extremum-lightest",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "extremum-derived-column",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "extremum-tie",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "extremum-holes",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "extremum-two-tables",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "extremum-nominal",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "extremum-absent",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "scales-mass-across-tables",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "scales-energy-across-units",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": true,
+   "before_ok": true,
+   "cause": null,
+   "id": "scales-column-by-quantity",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "scales-different-quantity",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  },
+  {
+   "after_ok": false,
+   "before_ok": false,
+   "cause": null,
+   "id": "scales-quantity-with-holes",
+   "present": true,
+   "same_status": true,
+   "same_text": true
+  }
+ ],
+ "source_digest": "72a6b2f8a47f3c983085c8609f5fd02603b6b0f6c16d5fcf041dac5a79b54dce"
+}

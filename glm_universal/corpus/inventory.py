@@ -13,6 +13,13 @@ Three rules, and nothing else, decide what this module says about a file.
 outside the caches, and outside the Lean build tree.  Nothing is listed by
 hand, so a document cannot be forgotten by an index.
 
+**The session note is not a document.**  ``ARISTOTLE_SUMMARY.md`` at the
+repository root is rewritten after every session has closed, outside any
+round's control.  Kept in the corpus, it made the address book, ``DIGEST.md``
+and both document checks stale at the start of every round, so a round that
+closed was never found closed by the next one.  It is left out of the walk
+(:data:`SESSION_NOTES`); it is still a file, so a link to it is not broken.
+
 **Which documents are archive.**  A document is a *record of a round* -- not a
 description of the state now -- exactly when its name ends ``_ARCHIVE.md``, or
 it is the working note ``ARISTOTLE_SUMMARY.md``, or it lives under a directory
@@ -79,6 +86,11 @@ SKIP_DIRECTORIES = frozenset({
     "source_material", "lake-packages", ".ipynb_checkpoints",
 })
 
+#: Root-level working notes rewritten between sessions; never part of the
+#: corpus.  The same tuple as ``glm_universal.signoff.rules.SESSION_NOTES``,
+#: which keeps them out of every closure.
+SESSION_NOTES = frozenset({"ARISTOTLE_SUMMARY.md"})
+
 #: A document larger than this is a data dump, not prose.
 MAX_DOCUMENT_BYTES = 4 * 1024 * 1024
 
@@ -131,6 +143,8 @@ def document_paths(root: Optional[Path] = None) -> Tuple[str, ...]:
                     stack.append(entry)
                 continue
             if entry.suffix != ".md":
+                continue
+            if current == base and entry.name in SESSION_NOTES:
                 continue
             try:
                 if entry.stat().st_size > MAX_DOCUMENT_BYTES:

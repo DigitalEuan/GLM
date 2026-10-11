@@ -61,6 +61,40 @@ GATE = True
 #: The gate's budget per script, in seconds.
 GATE_SECONDS = 5
 
+#: Phase 101: questions about what a Lean result rests on
+#: (``runtime/dependency_frames.py``).  ``False`` restores the frame layer
+#: as it was before.
+DEPENDENCIES = True
+
+#: Phase 105: where a structurally equal expression is computed
+#: (``runtime/ast_index_frames.py``).  ``False`` restores the frame layer as
+#: it was before.
+AST_INDEX = True
+
+#: Phase 106: derivations and proofs -- ``prove:``, equations of motion,
+#: transfer functions, profiles by two quadratures, and the class-P outside
+#: frames (``runtime/derivation_frames.py``).  ``False`` restores the frame
+#: layer as it was before.
+DERIVATIONS = True
+
+#: Phase 107: the rest of track P -- information inequalities, codes, rate
+#: distortion, maximum entropy, eigenvalue problems, transmission, the FFT,
+#: the rate posterior, and the remaining class-P outside frames
+#: (``runtime/derivation_two_frames.py``).  ``False`` restores the frame
+#: layer as it was before.
+DERIVATIONS_TWO = True
+
+#: Phase 117: questions about the GLM's own engineering, answered from the
+#: project's own documents (``runtime/meta_frames.py``).  ``False`` restores
+#: the frame layer as it was before.
+META = True
+
+#: Phase 120: the outside questions that ask why, answered where a register
+#: or an exact derivation decides them and refused EXPLANATION where they
+#: ask for an account (``runtime/explanation_frames.py``).  ``False``
+#: restores the frame layer as it was before.
+EXPLANATIONS = True
+
 #: The candidate-P contract variant the soft readings use (``None``: the
 #: production variant :data:`glm_universal.reasoning.contract_matrix.
 #: PRODUCTION`); the question-set scorer sets it to run the 4-way matrix.
@@ -968,7 +1002,13 @@ TYPED_FRAME = Frame("typed_operator", "real / reactive / apparent power, "
 def _all_frames() -> Tuple[Frame, ...]:
     from .outside_frames import OUTSIDE_FRAMES
     from .symbolic_outside import OUTSIDE_S_FRAMES
-    return SET_B_FRAMES + OUTSIDE_FRAMES + OUTSIDE_S_FRAMES
+    from .derivation_frames import OUTSIDE_P_FRAMES
+    from .derivation_two_frames import OUTSIDE_P2_FRAMES
+    from .meta_frames import META_FRAMES
+    from .explanation_frames import EXPLANATION_FRAMES
+    return SET_B_FRAMES + OUTSIDE_FRAMES + OUTSIDE_S_FRAMES + \
+        OUTSIDE_P_FRAMES + OUTSIDE_P2_FRAMES + META_FRAMES + \
+        EXPLANATION_FRAMES
 
 
 #: Every frame, in the order they are tried (filled on first use).
@@ -987,6 +1027,33 @@ def frame_of(text: str) -> Optional[Tuple[Frame, dict]]:
     if text.strip().lower().startswith("solve symbolically for "):
         from .symbolic_frames import SYMBOLIC_FRAME
         return (SYMBOLIC_FRAME, {"raw": text.strip()})
+    # sharpening pass: plain phrasings of the operation ("solve EQ for x",
+    # "roots of EQ") rewritten to its own form
+    from .symbolic_frames import SYMBOLIC_FRAME, canonical
+    canon = canonical(text)
+    if canon is not None:
+        return (SYMBOLIC_FRAME, {"raw": canon})
+    if DERIVATIONS:
+        from .derivation_frames import OPERATION_FRAME, match_raw as der_raw
+        op = der_raw(text)
+        if op is not None:
+            return (OPERATION_FRAME, op)
+    if DERIVATIONS_TWO:
+        from .derivation_two_frames import OPERATION_FRAME as OP2, \
+            match_raw as der2_raw
+        op2 = der2_raw(text)
+        if op2 is not None:
+            return (OP2, op2)
+    if DEPENDENCIES:
+        from .dependency_frames import DEPENDENCY_FRAME, match_raw
+        dep = match_raw(text)
+        if dep is not None:
+            return (DEPENDENCY_FRAME, dep)
+    if AST_INDEX:
+        from .ast_index_frames import AST_INDEX_FRAME, match_raw as ast_raw
+        where = ast_raw(text)
+        if where is not None:
+            return (AST_INDEX_FRAME, where)
     if "\n" not in text.strip():
         try:
             typed = TYPED_FRAME.match(t)
@@ -997,6 +1064,14 @@ def frame_of(text: str) -> Optional[Tuple[Frame, dict]]:
     if t.startswith("given ") or "\n" in text.strip():
         return None          # the planner's phrasing, or a program
     for f in frames():
+        if f.source == "P" and not DERIVATIONS:
+            continue
+        if f.source == "P2" and not DERIVATIONS_TWO:
+            continue
+        if f.source == "M" and not META:
+            continue
+        if f.source == "E" and not EXPLANATIONS:
+            continue
         try:
             g = f.match(t)
         except (ValueError, ZeroDivisionError):

@@ -25,7 +25,7 @@ process's exit code and the `ANSWER` or `UNSOLVED` line it printed.
 
 ```bash
 cd overlay
-PYTHONPATH=. python3 -m glm_universal.evaluation                     # all 177 cases
+PYTHONPATH=. python3 -m glm_universal.evaluation                     # all 179 cases
 PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8            # in parallel
 PYTHONPATH=. python3 -m glm_universal.evaluation --only analogy      # one query kind
 PYTHONPATH=. python3 -m glm_universal.evaluation --case report-superposition
@@ -38,9 +38,9 @@ harness can be used as a gate.
 
 ## The question set
 
-`cases.py` holds **<!--figure:evaluation-cases-->177 CLI cases<!--/figure-->**. Between them they cover **all <!--figure:query-kinds-->24 query kinds<!--/figure-->**
+`cases.py` holds **<!--figure:evaluation-cases-->179 CLI cases<!--/figure-->**. Between them they cover **all <!--figure:query-kinds-->24 query kinds<!--/figure-->**
 the runtime recognises (including `unknown`, the kind a question gets when
-nothing else claims it) and **all 65 report subjects**. Coverage is not
+nothing else claims it) and **all <!--figure:report-subjects-->67 report subjects<!--/figure-->**. Coverage is not
 asserted in prose: `test_evaluation.py` compares `KINDS_COVERED` and
 `SUBJECTS_COVERED` against the runtime's own tables and fails when a kind or a
 subject is added without a case.
@@ -109,7 +109,7 @@ its outcome and, for a failure, the exact point at which it stops (`stops_at`).
 
 | file | what it holds |
 |---|---|
-| `cases.py` | the 177 cases, `cases_by_kind`, `KINDS_COVERED`, `SUBJECTS_COVERED` |
+| `cases.py` | the 179 cases, `cases_by_kind`, `KINDS_COVERED`, `SUBJECTS_COVERED` |
 | `harness.py` | `run_case`, `run_all`, `evaluation_report`, `format_report`, `write_json` |
 | `__main__.py` | the command line above |
 

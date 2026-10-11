@@ -372,7 +372,9 @@ def _write_totals_sidecar(counts: Mapping[str, int],
 def run_plan(all_units: bool = False, dry_run: bool = False,
              ledger_path: Optional[Path] = None,
              jobs: int = 1,
-             exhaustive: Optional[bool] = None) -> Dict[str, object]:
+             exhaustive: Optional[bool] = None,
+             only: Optional[Sequence[str]] = None,
+             exclude: Sequence[str] = ()) -> Dict[str, object]:
     """Run the stale units (or all of them) and update the ledger.
 
     ``jobs`` runs that many test files at once.  Each one is a separate
@@ -383,12 +385,22 @@ def run_plan(all_units: bool = False, dry_run: bool = False,
     ``exhaustive`` turns the opt-in cases on; it defaults to ``all_units``, so
     a release check (``--run-all``) runs everything there is and a routine run
     does not.  What was covered is recorded with the signature.
+
+    ``only`` restricts the run to the named units and ``exclude`` leaves the
+    named ones out; :func:`glm_universal.signoff.__main__` uses both to run a
+    close in two stages, the package before the document checks.
     """
     if exhaustive is None:
         exhaustive = all_units
     book = load_ledger(ledger_path)
     rows = plan(book, full=exhaustive)
     chosen = list(rows) if all_units else [u for u in rows if u.stale]
+    if only is not None:
+        wanted = set(only)
+        chosen = [u for u in chosen if u.name in wanted]
+    if exclude:
+        unwanted = set(exclude)
+        chosen = [u for u in chosen if u.name not in unwanted]
     skipped = [u for u in rows if u not in chosen]
     results: List[Dict[str, object]] = []
     started = time.monotonic_ns()
@@ -425,9 +437,13 @@ def run_plan(all_units: bool = False, dry_run: bool = False,
         with ThreadPoolExecutor(max_workers=workers) as pool:
             results = list(pool.map(one, chosen))
     elapsed_ms = (time.monotonic_ns() - started) // 1_000_000
+    totals_before = book.get("totals", {}) or {}
     if exhaustive:
         _record_totals(book, "full")
     save_ledger(book, ledger_path)
+    totals_after = book.get("totals", {}) or {}
+    moved = any(totals_before.get(k) != totals_after.get(k)
+                for k in ("test_files", "tests", "subtests", "excludes"))
     return {
         "ran": len(chosen),
         "skipped": len(skipped),
@@ -438,7 +454,27 @@ def run_plan(all_units: bool = False, dry_run: bool = False,
         "mode": "full" if exhaustive else "fast",
         "seconds": Fraction(elapsed_ms, 1000),
         "results": tuple(results),
+        "totals_moved": moved,
+        "totals_recorded": bool(totals_after),
     }
+
+
+def counted_failures(ledger: Optional[Mapping[str, object]] = None
+                     ) -> Tuple[str, ...]:
+    """The counted units not signed *passed* with the exhaustive cases on.
+
+    Empty exactly when :func:`_record_totals` would record: the condition
+    the second stage of a close waits for.
+    """
+    units = dict((ledger if ledger is not None else load_ledger())
+                 .get("units", {}))
+    out = []
+    for path in counted_units():
+        entry = units.get(path.name)
+        if (entry is None or entry.get("status") != "passed"
+                or entry.get("mode", "fast") != "full"):
+            out.append(path.name)
+    return tuple(out)
 
 
 def verify(ledger_path: Optional[Path] = None,

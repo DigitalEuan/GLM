@@ -3447,6 +3447,57 @@ else:
 '''
 
 
+def _body_report_hole_configuration(args: Mapping[str, object]) -> str:
+    """Recompute the configuration classifier and the census from the stores."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.reasoning import lattice_completion as ltc
+
+report = ltc.lattice_completion_report()
+classifier = report["classifier"]
+census = report["census"]
+
+if not classifier["available"] or not census["available"]:
+    observed = {"cache": "stale"}
+else:
+    ten = classifier["ten"]
+    wide = classifier["twenty_three"]
+    top = census["cells"][-1]
+    observed = {
+        "joint_correct": str(ten["joint_correct"]),
+        "queries": str(ten["queries"]),
+        "correct": str(ten["correct"]),
+        "wrong": str(ten["wrong"]),
+        "refused": str(ten["refused"]),
+        "absences": str(ten["absences"]),
+        "false_absences": str(ten["false_absences"]),
+        "types_reached": str(census["types_reached"]),
+        "q0_top": str(top["q0"]),
+        "wide_wrong": str(wide["wrong"]) if wide is not None else "n/a",
+    }
+'''
+
+def _body_report_routes(args: Mapping[str, object]) -> str:
+    """Recompute the decision points and the reference problems' routes."""
+    return '''# -- recompute -------------------------------------------------------------
+
+from glm_universal.runtime import route_report as rr
+
+report = rr.route_report()
+
+observed = {
+    "points": str(report["point_count"]),
+    "routes": str(report["route_count"]),
+    "reference": str(report["reference_count"]),
+    "as_expected": str(report["as_expected"]),
+    "unreached": ",".join(report["unreached"]),
+    "holds": str(report["holds"]),
+    "taken": ",".join(str(r["point"]) + ":" + str(r["taken"])
+                      for r in report["reference"]),
+}
+'''
+
+
 def _body_report_review_sweep(args: Mapping[str, object]) -> str:
     """Recompute the register of stalled results and the order it ranks in."""
     return '''# -- recompute -------------------------------------------------------------
@@ -3588,8 +3639,10 @@ TEMPLATES = {
     "report_hole_classifier": _body_report_hole_classifier,
     "report_hole_ladder": _body_report_hole_ladder,
     "report_hole_failures": _body_report_hole_failures,
+    "report_hole_configuration": _body_report_hole_configuration,
     "report_cumulativity": _body_report_cumulativity,
     "report_review_sweep": _body_report_review_sweep,
+    "report_routes": _body_report_routes,
     "report_query_escalation": _body_report_query_escalation,
     "report_units": _body_report_units,
     # v1.4.0: the molecules register and the chemistry-coverage widening.

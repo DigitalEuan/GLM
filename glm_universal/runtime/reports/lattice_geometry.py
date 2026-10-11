@@ -20,6 +20,7 @@ from __future__ import annotations
 from ...reasoning import deep_hole_classifier as dhc
 from ...reasoning import deep_hole_escalation as esc
 from ...reasoning import deep_hole_failures as dhf
+from ...reasoning import lattice_completion as ltc
 from ...reasoning import deep_holes as dhl
 from ...reasoning import facets as fa
 from ...reasoning import fwht_decode as fdc
@@ -1362,3 +1363,127 @@ class LatticeGeometryReports:
                                 "queries": rep["queries"],
                                 "certified_types": list(
                                     per_type["certified"])}})
+
+    def _report_hole_configuration(self, query: Query) -> Solution:
+        """Wires the configuration reading ``L5`` into the deep-hole answers.
+
+        Phase 123 (``studies/LATTICE_COMPLETION_STUDY.md``): the escalation
+        round's 44 queries are named by ``L5`` under a declared answer rule
+        -- answer the nearest type only inside half its distance to the
+        nearest other reference, else refuse -- which
+        `GLM.LatticeCompletion.config_answer_sound` makes a certificate, and
+        every other type outside its certified radius is issued as a
+        certified absence (`GLM.LatticeCompletion.config_absent`, which is
+        `GLM.DeepHoleFailure.per_type_absent` at ``L5``).  The census of all
+        23 Niemeier types is read beside it.
+
+        Read from the stored profiles, which carry the digest of the sources
+        they were taken from (D4): a stale store is reported as stale.
+        """
+        report = ltc.lattice_completion_report()
+        classifier = report["classifier"]
+        census = report["census"]
+        if not classifier["available"] or not census["available"]:
+            reason = (classifier.get("reason") if not classifier["available"]
+                      else census.get("reason"))
+            return Solution(
+                query=query, kind="report",
+                answer=f"report hole configuration: the stored measurement "
+                       f"is not current, so no figure is reported rather "
+                       f"than one taken from code that has moved; {reason}",
+                steps=(Step("the store is not current",
+                            "D4: a stored result is reused only against a "
+                            "recorded digest of everything it depended on, "
+                            "and this one no longer matches.",
+                            str(reason)),),
+                expected={"cache": "stale"},
+                script_spec={"template": "report_hole_configuration",
+                             "args": {}},
+                payload={"report": {"cache": "stale"}})
+        ten = classifier["ten"]
+        wide = classifier["twenty_three"]
+        top = census["cells"][-1]
+        steps = [
+            Step("the reading, and the rule it answers by",
+                 "The configuration reading L5 keys each arrival vertex by "
+                 "its component size and degree in the hole's affine "
+                 "diagram.  A query is answered with its nearest reference "
+                 "only when it lies inside half that reference's distance "
+                 "to the nearest other one; inside that radius the answer "
+                 "is provably the strict nearest reference "
+                 "(GLM.LatticeCompletion.config_answer_sound), and outside "
+                 "it the classifier refuses.",
+                 f"{classifier['starts']} starts, {ten['references']} "
+                 f"references"),
+            Step("the stopping rule: the query set reproduces",
+                 "The joint reading must name the escalation round's 40 of "
+                 "44 on the rebuilt queries before anything else is read.",
+                 f"joint reading {ten['joint_correct']} of {ten['queries']}"),
+            Step("the answers",
+                 "Every query through the rule, against the ten references.",
+                 f"{ten['correct']} correct, {ten['wrong']} wrong, "
+                 f"{ten['refused']} refused of {ten['queries']}; the nearest "
+                 f"reference is right for {ten['nearest_correct']}"),
+            Step("the absences",
+                 "Every other type further than its certified radius is "
+                 "issued as an absence -- per_type_absent at L5, a theorem "
+                 "under faithfulness, which the held-out queries test: a "
+                 "query outside its own radius would draw a false absence.",
+                 f"{ten['absences']} certified absences of "
+                 f"{ten['absence_slots']} slots; {ten['false_absences']} "
+                 f"false; {ten['within_radius']} of {ten['queries']} queries "
+                 f"inside their own radius"),
+            Step("all 23 Niemeier types",
+                 "A reference centre for every type, reached by the walk, a "
+                 "cycle construction or the pilot's seeds, each certified by "
+                 "the frozen path, and the reading over all of them.",
+                 f"{census['types_reached']} of {census['catalogue']} types; "
+                 f"at {top['starts']} starts Q0 = {top['q0']} of "
+                 f"{top['gate']}, per-hole {top['locally_certified']} of "
+                 f"{top['gate']}"),
+        ]
+        if wide is not None:
+            steps.append(Step(
+                "the same queries against all 23 references",
+                "More references can only make the rule refuse more often; "
+                "it must still answer nothing wrongly.",
+                f"{wide['correct']} correct, {wide['wrong']} wrong, "
+                f"{wide['refused']} refused of {wide['queries']}"))
+        post_hoc = census.get("post_hoc") or {}
+        post_hoc_note = (
+            f" ({post_hoc['types_reached']} with the post-hoc patience "
+            f"follow-up, which reads {post_hoc['cells'][-1]['q0']} of "
+            f"{post_hoc['cells'][-1]['gate']})"
+            if post_hoc.get("available") else "")
+        expected = {
+            "joint_correct": str(ten["joint_correct"]),
+            "queries": str(ten["queries"]),
+            "correct": str(ten["correct"]),
+            "wrong": str(ten["wrong"]),
+            "refused": str(ten["refused"]),
+            "absences": str(ten["absences"]),
+            "false_absences": str(ten["false_absences"]),
+            "types_reached": str(census["types_reached"]),
+            "q0_top": str(top["q0"]),
+            "wide_wrong": str(wide["wrong"]) if wide is not None else "n/a",
+        }
+        return Solution(
+            query=query, kind="report",
+            answer=f"report hole configuration: under the configuration "
+                   f"reading's answer rule the {ten['queries']} deep-hole "
+                   f"queries are answered {ten['correct']} correctly, "
+                   f"{ten['wrong']} wrongly and {ten['refused']} refused "
+                   f"(the joint reading named {ten['joint_correct']}), with "
+                   f"{ten['absences']} certified absences and "
+                   f"{ten['false_absences']} false; "
+                   f"{census['types_reached']} of {census['catalogue']} "
+                   f"Niemeier types have a certified reference centre"
+                   f"{post_hoc_note}, and "
+                   f"at {top['starts']} starts the reading recognises "
+                   f"{top['q0']} of {top['gate']} under a seed change",
+            steps=tuple(steps), expected=expected,
+            script_spec={"template": "report_hole_configuration", "args": {}},
+            payload={"report": {"correct": ten["correct"],
+                                "wrong": ten["wrong"],
+                                "refused": ten["refused"],
+                                "types_reached": census["types_reached"]}})

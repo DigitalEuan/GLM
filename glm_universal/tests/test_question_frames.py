@@ -116,9 +116,21 @@ class TestOutside(unittest.TestCase):
 
     def test_unframed_questions_are_classed(self):
         # Phase 98 frames the class-S questions and the class-T question
-        # (``symbolic_cases.OUTSIDE_S`` and ``OUTSIDE_T``) as a later change.
+        # (``symbolic_cases.OUTSIDE_S`` and ``OUTSIDE_T``) as a later change,
+        # Phase 106 four class-P questions (``derivation_cases.
+        # OUTSIDE_P``) and Phase 107 eleven more (``derivation_two_cases.
+        # OUTSIDE_P2``); Phase 117 the eighteen class-M questions
+        # (``meta_question_cases.META_QUESTIONS``); Phase 120 thirty-five
+        # that ask why (``explanation_cases.EXPLANATION_QUESTIONS``).
+        from glm_universal.evaluation import derivation_cases as dc
+        from glm_universal.evaluation import explanation_cases as xc
+        from glm_universal.evaluation import meta_question_cases as mq
+        from glm_universal.evaluation import derivation_two_cases as d2
         from glm_universal.evaluation import symbolic_cases as sc
-        later = set(sc.OUTSIDE_S) | set(sc.OUTSIDE_T)
+        later = set(sc.OUTSIDE_S) | set(sc.OUTSIDE_T) | \
+            {i for i, _ in dc.OUTSIDE_P} | {i for i, _ in d2.OUTSIDE_P2} | \
+            {x[0] for x in mq.META_QUESTIONS} | \
+            {x[0] for x in xc.EXPLANATION_QUESTIONS}
         items = qc.outside()
         for it in items:
             framed = qf.reads(it.text)
@@ -190,6 +202,17 @@ class TestTheGate(unittest.TestCase):
 class TestNonInterference(unittest.TestCase):
     """The frames surface reads no declared question of any earlier set."""
 
+    def test_meta_evidence_normalises_as_the_frames_do(self):
+        # Phase 117: the evidence layer restates the frames' normalisation
+        # so that it stays below them; the two must agree
+        from glm_universal.evaluation import meta_question_cases as mq
+        from glm_universal.reasoning import meta_evidence as me
+        texts = [it.text for it in qc.outside()] + \
+            [t for _, t, _ in mq.PARAPHRASES + mq.HELD_OUT] + \
+            list(mq.NOT_READ)
+        for t in texts:
+            self.assertEqual(me.normalise(t), qf.normalise(t), t[:60])
+
     def test_reads_census(self):
         for name, counts in router.reads_census().items():
             self.assertEqual(counts["frames"], 0, name)
@@ -199,8 +222,23 @@ class TestNonInterference(unittest.TestCase):
         for f in glob.glob(os.path.join(OVERLAY, "glm_universal",
                                         "evaluation", "*.py")):
             if "question_set_b" in f or "typed_operator_cases" in f or \
-                    "symbolic_cases" in f:
-                continue     # the frames' own corpora (Phases 89, 90, 98)
+                    "symbolic_cases" in f or "nonlinear_cases" in f or \
+                    "cubic_radical_cases" in f or "ast_index_cases" in f \
+                    or "derivation_cases" in f \
+                    or "derivation_two_cases" in f \
+                    or "derivation_three_cases" in f \
+                    or "derivation_four_cases" in f \
+                    or "cubic_trig_cases" in f \
+                    or "quintic_radical_cases" in f \
+                    or "frobenius_radical_cases" in f \
+                    or "primitive_radical_cases" in f \
+                    or "composed_radical_cases" in f \
+                    or "primitive_degree_cases" in f \
+                    or "meta_question_cases" in f \
+                    or "explanation_cases" in f:
+                continue     # the frames' own corpora (Phases 89, 90, 98,
+                             # 103, 104, 105, 106, 107, 108, 112, 113, 114,
+                             # 115, 116, 117, 118, 120)
             for node in ast.walk(ast.parse(open(f, encoding="utf-8").read())):
                 if isinstance(node, ast.Constant) and \
                         isinstance(node.value, str) and " " in node.value \

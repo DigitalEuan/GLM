@@ -248,14 +248,7 @@ def goal_features(text: str, exclude: Optional[str] = None) -> Tuple[int, ...]:
     """
     decl = la.Declaration(name="?query", kind="theorem", file="", line=0,
                           namespace="", statement=text, body="")
-    index = la.citation_index()
-    cites = set()
-    for token in la._TOKEN.findall(text):
-        target = index.get(token)
-        if target is None and "." in token:
-            target = index.get(token.rsplit(".", 1)[-1])
-        if target is not None and target != exclude:
-            cites.add(target)
+    cites = la.goal_citations(text, exclude)
     return la.features_of(decl, len(cites), 0)
 
 
@@ -669,7 +662,7 @@ def rank(scheme: str, *, text: str = "", point: Optional[Sequence[int]] = None,
         # Phase 71: word overlap computed on Golay words of the tokens
         # (``studies/NATIVE_WORDS_STUDY.md``).  Imported here because the
         # module reads this one.
-        from . import native_words as nw
+        from . import golay_words as nw
         if candidates is None:
             return nw.rank_lean(text, k=k, scheme=scheme, exclude=exclude,
                                 point=point)

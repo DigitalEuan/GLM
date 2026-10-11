@@ -395,6 +395,33 @@ def _count(text: str, *needles: str) -> int:
     return sum(text.count(n) for n in needles)
 
 
+#: The type vocabulary the six carrier coordinates read (Phase 101).
+TYPE_WORDS: Tuple[str, ...] = ("Nat", "Int", "Rat", "Real", "Fin", "Finset",
+                               "Set", "List", "Multiset", "Prop", "Bool",
+                               "Decidable")
+
+#: An identifier, split at dots: exactly the tokens the anonymous register
+#: renames (``reasoning/anonymous.py``), so a type word is counted only where
+#: a renaming that keeps the type vocabulary would keep it too.
+_WORD = re.compile(r"[A-Za-z_][A-Za-z0-9_']*")
+
+
+def type_words(text: str) -> Dict[str, int]:
+    """How often each type word occurs as a *whole* identifier of ``text``.
+
+    Up to Phase 100 the carrier coordinates counted the word wherever it
+    occurred, so ``natCast`` or ``IntervalSet`` added to a type count and a
+    declaration whose *name* spelled a type lost the count when the name was
+    renamed -- item 5 of ``STATUS.md`` §3.4, the leak in the feature map.
+    ``Nat.succ`` still counts ``Nat``: a type's namespace is type vocabulary.
+    """
+    counts = {word: 0 for word in TYPE_WORDS}
+    for token in _WORD.findall(text):
+        if token in counts:
+            counts[token] += 1
+    return counts
+
+
 def _statement_equalities(text: str) -> int:
     """``=`` signs that are genuine equalities, not part of another token."""
     total = 0
@@ -445,10 +472,323 @@ def citation_index() -> Dict[str, str]:
 
 
 @memo
-def citation_graph() -> Dict[str, frozenset]:
-    """For every declaration, the set of development declarations it names."""
+def legacy_citation_graph() -> Dict[str, frozenset]:
+    """The citation graph as it was read up to Phase 100 -- kept as the record.
+
+    Every identifier token of the statement and body, comments included, is
+    looked up by its full name, its namespace-qualified tail, or -- when that
+    fails -- by its *unique short name anywhere in the development*, and a dotted
+    token falls back to its last component.  That last-resort lookup is the
+    leak Phase 100 found (``studies/CORPUS_RESAMPLE_STUDY.md`` §4.4): a bound
+    variable ``a`` resolves to ``GLM.Heisenberg.a``, ``Nat.zero`` to
+    ``GLM.PCGS.Cost.zero``, a word in a comment to whatever declaration
+    happens to carry it.  :func:`citation_graph` is the repaired reader;
+    ``studies/CITATION_SCOPE_STUDY.md`` measures both against the elaborator.
+    """
     index = citation_index()
     return {d.name: _cited_names(d, index) for d in declarations()}
+
+
+# ===========================================================================
+#  Scope-aware citations (Phase 101)
+# ===========================================================================
+#
+# Lean resolves an identifier in a fixed order, and the repaired reader follows
+# the parts of that order a line reader can see:
+#
+# 1. a **local** -- a name bound by the declaration itself (a signature binder,
+#    a quantifier, a ``fun``, a tactic that introduces a hypothesis, a match
+#    arm) or by a ``variable`` line of the file -- shadows every declaration;
+# 2. otherwise ``x`` names ``P.x`` for the *longest* prefix ``P`` of the
+#    citing declaration's own name that makes ``P.x`` a declaration, then any
+#    namespace an ``open`` line of the file has made visible, then the root;
+# 3. a dotted token ``h.trans`` whose head is a local is field notation on a
+#    local, whose target depends on a type the reader cannot see: not read.
+#
+# Nothing is resolved by a short name that is not in scope, and no text inside
+# a comment or a string literal is read at all.
+
+_BINDER_GROUP = re.compile(
+    r"[({⦃\[]\s*((?:[A-Za-z_][\w'!?]*\s+)*[A-Za-z_][\w'!?]*)\s*:(?!=)")
+_QUANT = re.compile(
+    r"(?:(?<![\w'])(?:fun|λ)|∀|∃!|∃|∑|∏|⋃|⋂|⨆|⨅|Σ|Π)"
+    r"((?:\s*(?:[A-Za-z_][\w'!?]*|[⟨⟩(),_]))+?)\s*(?:,|=>|↦|:|∈|∉|⊆|<|≤|>|≥|\bin\b)")
+_TACTIC_BINDER = re.compile(
+    r"(?<![\w.'])(?:intro|intros|rintro|introv|obtain|rcases|cases'|"
+    r"induction'|with|let|have|set|generalize|refine'?|choose|lift|"
+    r"by_cases|by_contra|by_contra!|contrapose!|push_neg\s+at|ext|funext|"
+    r"rename_i|next|case)\b([^\n:=;]*)")
+_MATCH_ARM = re.compile(r"\|\s*([^\n=|]*?)=>")
+_IDENT_ONLY = re.compile(r"[A-Za-z_][\w'!?]*")
+_STRING = re.compile(r'"(?:[^"\\\n]|\\.)*"')
+_OPEN = re.compile(r"^\s*open\s+(?:scoped\s+)?([^\n]*?)(?:\s+in)?\s*$")
+_VARIABLE = re.compile(r"^\s*variable\b(.*)$")
+
+#: Words that can follow a binder keyword without being bound.
+_NOT_BOUND = frozenset({
+    "fun", "at", "using", "only", "with", "in", "this", "from", "by", "then",
+    "else", "if", "do", "Type", "Sort", "Prop", "show", "rfl", "simp", "_",
+})
+
+
+def strip_comments_and_strings(text: str) -> str:
+    """``text`` with every comment and string literal replaced by spaces.
+
+    Block comments nest (``/- /- -/ -/``), a documentation comment is one of
+    them, and a line comment runs to the end of its line.  Line breaks are
+    kept so the line structure the binder readers rely on survives.
+    """
+    out: List[str] = []
+    depth = 0
+    i = 0
+    n = len(text)
+    while i < n:
+        if depth == 0 and text.startswith("--", i):
+            j = text.find("\n", i)
+            if j < 0:
+                break
+            i = j
+            continue
+        if text.startswith("/-", i):
+            depth += 1
+            i += 2
+            out.append("  ")
+            continue
+        if depth > 0 and text.startswith("-/", i):
+            depth -= 1
+            i += 2
+            out.append("  ")
+            continue
+        ch = text[i]
+        out.append(ch if depth == 0 or ch == "\n" else " ")
+        i += 1
+    code = "".join(out)
+    return _STRING.sub(lambda m: " " * len(m.group(0)), code)
+
+
+def _idents(fragment: str) -> List[str]:
+    return [t for t in _IDENT_ONLY.findall(fragment) if t not in _NOT_BOUND]
+
+
+def bound_names(text: str) -> frozenset:
+    """Every name a fragment of Lean binds locally, as a line reader sees it.
+
+    Signature and instance binders ``(x y : T)``, ``{x}``-style groups with a
+    type, quantifier and lambda binders up to their delimiter, the names a
+    tactic introduces (``intro``, ``obtain``, ``rcases``, ``with``, ``have``,
+    ``let``, ``set``, ...) and the variables of a match arm.  It over-binds
+    rather than under-binds -- a type ascription ``(f x : T)`` reads ``f`` as
+    bound -- and :func:`citation_audit` measures what that costs against the
+    elaborator.
+    """
+    found = set()
+    for match in _BINDER_GROUP.finditer(text):
+        found.update(_idents(match.group(1)))
+    for match in _QUANT.finditer(text):
+        found.update(_idents(match.group(1)))
+    for match in _TACTIC_BINDER.finditer(text):
+        found.update(_idents(match.group(1)))
+    for match in _MATCH_ARM.finditer(text):
+        words = _idents(match.group(1))
+        # ``| ctor a b =>`` binds what follows the constructor; ``| a =>`` and
+        # ``| a, b =>`` bind their variables
+        if len(words) > 1 and "," not in match.group(1):
+            words = words[1:]
+        found.update(words)
+    return frozenset(found)
+
+
+@dataclass(frozen=True)
+class FileScope:
+    """What a file makes visible to one of its declarations."""
+
+    opens: Tuple[str, ...]        # namespaces made visible by ``open``
+    variables: frozenset          # names bound by ``variable`` lines
+
+
+_scope_cache: Optional[Dict[Tuple[str, int], FileScope]] = None
+
+
+def file_scopes() -> Dict[Tuple[str, int], FileScope]:
+    """For every declaration ``(file, line)``, the opens and variables above it.
+
+    A line reader again: every ``open`` and ``variable`` line at or above the
+    declaration in the same file counts, whatever section it sat in.  An
+    ``open X in`` that governs a single declaration counts for the rest of the
+    file.  Both approximations widen the scope, never narrow it.
+    """
+    global _scope_cache
+    if _scope_cache is not None:
+        return _scope_cache
+    root = lean_root()
+    out: Dict[Tuple[str, int], FileScope] = {}
+    if root is None:
+        _scope_cache = out
+        return out
+    lines_of: Dict[str, List[str]] = {}
+    for d in declarations():
+        if d.file not in lines_of:
+            text = strip_comments_and_strings(
+                (root / d.file).read_text(encoding="utf-8"))
+            lines_of[d.file] = text.splitlines()
+    for file, lines in lines_of.items():
+        opens: List[str] = []
+        variables: set = set()
+        stack: List[str] = []
+        marks: Dict[int, FileScope] = {}
+        for number, line in enumerate(lines, 1):
+            m = _OPEN.match(line)
+            if m:
+                for name in m.group(1).split():
+                    if name in ("scoped", "in") or name.startswith("("):
+                        continue
+                    opens.append(name)
+                    # an ``open`` inside a namespace also opens it relative
+                    # to that namespace
+                    for k in range(len(stack), 0, -1):
+                        opens.append(".".join(stack[:k]) + "." + name)
+            v = _VARIABLE.match(line)
+            if v:
+                for match in _BINDER_GROUP.finditer(v.group(1)):
+                    variables.update(_idents(match.group(1)))
+            if line.startswith("namespace "):
+                stack.extend(line.split()[1].split("."))
+            elif line.startswith("end ") and stack:
+                closing = line.split()[1].split(".")
+                if stack[-len(closing):] == closing:
+                    del stack[-len(closing):]
+            marks[number] = FileScope(tuple(dict.fromkeys(opens)),
+                                      frozenset(variables))
+        for d in declarations():
+            if d.file == file:
+                out[(file, d.line)] = marks.get(
+                    d.line, FileScope((), frozenset()))
+    _scope_cache = out
+    return out
+
+
+def resolve_in_scope(token: str, scope_name: str, opens: Sequence[str],
+                     full: "frozenset | set") -> Optional[str]:
+    """The declaration ``token`` names from inside ``scope_name``, or ``None``.
+
+    Tries ``P.token`` for every prefix ``P`` of ``scope_name`` from the
+    longest down, then ``O.token`` for every opened namespace ``O``, then
+    ``token`` at the root -- Lean's order for a name that is not a local.
+    """
+    parts = scope_name.split(".") if scope_name else []
+    for k in range(len(parts), 0, -1):
+        candidate = ".".join(parts[:k]) + "." + token
+        if candidate in full:
+            return candidate
+    for opened in opens:
+        candidate = opened + "." + token
+        if candidate in full:
+            return candidate
+    if token in full:
+        return token
+    return None
+
+
+def scoped_candidates(decl: Declaration, full: "frozenset | set",
+                      scope: Optional[FileScope] = None
+                      ) -> Tuple[Tuple[str, ...], ...]:
+    """For each identifier ``decl`` reads that is not a local, every
+    declaration it could denote, in Lean's order.
+
+    :func:`scoped_cited_names` takes the first of each list.  A reader of a
+    sub-corpus takes the first that survives in it -- which is how
+    ``corpus_resample.held_fixed_report`` rebuilds the graph without a file
+    exactly, without re-reading any source.
+    """
+    scope = scope or FileScope((), frozenset())
+    text = strip_comments_and_strings(decl.statement + "\n" + decl.body)
+    local = bound_names(text) | scope.variables
+    own = decl.name.rsplit(".", 1)[0] if "." in decl.name else ""
+    parts = own.split(".") if own else []
+    prefixes = [".".join(parts[:k]) for k in range(len(parts), 0, -1)]
+    out = []
+    for token in set(_TOKEN.findall(text)):
+        token = token.rstrip(".")
+        if not token or token.split(".", 1)[0] in local:
+            continue
+        found = [c for c in ([p + "." + token for p in prefixes]
+                             + [o + "." + token for o in scope.opens]
+                             + [token]) if c in full]
+        # a token whose first reading is the declaration itself is a
+        # recursive call, not a citation, whatever else it could denote
+        if found and found[0] != decl.name:
+            out.append(tuple(c for c in dict.fromkeys(found)
+                             if c != decl.name))
+    return tuple(sorted(out))
+
+
+def scoped_cited_names(decl: Declaration, full: "frozenset | set",
+                       scope: Optional[FileScope] = None) -> frozenset:
+    """Which declarations of the development ``decl`` names, in Lean's scope.
+
+    Comments and strings are dropped, locals shadow, and every remaining
+    identifier is resolved by :func:`resolve_in_scope` from the declaration's
+    own name (Lean opens that prefix for the body: ``theorem Foo.bar`` sees
+    ``Foo``'s declarations unqualified).
+    """
+    scope = scope or FileScope((), frozenset())
+    text = strip_comments_and_strings(decl.statement + "\n" + decl.body)
+    local = bound_names(text) | scope.variables
+    own = decl.name.rsplit(".", 1)[0] if "." in decl.name else ""
+    found = set()
+    for token in _TOKEN.findall(text):
+        token = token.rstrip(".")
+        head = token.split(".", 1)[0]
+        if head in local:
+            continue
+        target = resolve_in_scope(token, own, scope.opens, full)
+        if target is not None and target != decl.name:
+            found.add(target)
+    return frozenset(found)
+
+
+@memo
+def declaration_names() -> frozenset:
+    """Every full name of the development, as a set."""
+    return frozenset(d.name for d in declarations())
+
+
+#: The scope a free goal is read in: the root, with the development's own
+#: namespace open -- what a goal stated "against the GLM development" sees.
+GOAL_OPENS: Tuple[str, ...] = ("GLM",)
+
+
+def goal_citations(text: str, exclude: Optional[str] = None) -> frozenset:
+    """The declarations a free goal names, read in :data:`GOAL_OPENS` scope.
+
+    A goal has no namespace of its own, so nothing resolves through a prefix;
+    locals of the goal shadow as in a declaration.
+    """
+    full = declaration_names()
+    code = strip_comments_and_strings(text)
+    local = bound_names(code)
+    found = set()
+    for token in _TOKEN.findall(code):
+        token = token.rstrip(".")
+        if token.split(".", 1)[0] in local:
+            continue
+        target = resolve_in_scope(token, "", GOAL_OPENS, full)
+        if target is not None and target != exclude:
+            found.add(target)
+    return frozenset(found)
+
+
+@memo
+def citation_graph() -> Dict[str, frozenset]:
+    """For every declaration, the set of development declarations it names.
+
+    Read in Lean's scope since Phase 101 (:func:`scoped_cited_names`); the
+    reading before it is :func:`legacy_citation_graph`, kept as the record.
+    """
+    full = declaration_names()
+    scopes = file_scopes()
+    return {d.name: scoped_cited_names(d, full, scopes.get((d.file, d.line)))
+            for d in declarations()}
 
 
 def _clamp(value: int) -> int:
@@ -465,6 +805,7 @@ def features_of(decl: Declaration, cites: int = 0, cited_by: int = 0
     are supplied by the caller, which has the graph.
     """
     s = decl.statement
+    words = type_words(s)
     vector = (
         _count(s, "∀"),
         _count(s, "∃"),
@@ -479,12 +820,12 @@ def features_of(decl: Declaration, cites: int = 0, cited_by: int = 0
         _count(s, "∑", "∏"),
         len(_NUMERAL.findall(s)),
         s.count("("),
-        _count(s, "ℕ", "Nat"),
-        _count(s, "ℤ", "Int"),
-        _count(s, "ℚ", "ℝ", "Rat", "Real"),
-        _count(s, "Fin "),
-        _count(s, "Finset", "Set ", "List", "Multiset"),
-        _count(s, "Prop", "Bool", "Decidable"),
+        _count(s, "ℕ") + words["Nat"],
+        _count(s, "ℤ") + words["Int"],
+        _count(s, "ℚ", "ℝ") + words["Rat"] + words["Real"],
+        words["Fin"],
+        words["Finset"] + words["Set"] + words["List"] + words["Multiset"],
+        words["Prop"] + words["Bool"] + words["Decidable"],
         len(s.split()) // 4,
         cites,
         cited_by,

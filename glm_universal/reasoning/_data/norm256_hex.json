@@ -1,0 +1,484 @@
+{
+ "base": {
+  "correct": 467,
+  "ladder": [
+   "8C",
+   "8A",
+   "4C",
+   "2C",
+   "2A",
+   "C",
+   "A",
+   "2D",
+   "A/2",
+   "D12^2",
+   "Z"
+  ],
+  "matches_oracle": true,
+  "oracle": 467,
+  "order_independent": true,
+  "refused": 101,
+  "safe": true,
+  "totals": {
+   "coarse_to_fine": {
+    "correct": 467,
+    "refused": 101,
+    "wrong": 0
+   },
+   "fine_to_coarse": {
+    "correct": 467,
+    "refused": 101,
+    "wrong": 0
+   },
+   "middle_out": {
+    "correct": 467,
+    "refused": 101,
+    "wrong": 0
+   }
+  },
+  "wrong": 0
+ },
+ "facts": [
+  {
+   "holds": true,
+   "key": "R256",
+   "kissing_by": "rotLeech_min_norm and normSq_add_rot",
+   "norm": 256,
+   "quantiser_failures": 0
+  },
+  {
+   "enumerated_kissing": 48,
+   "enumerated_norm": 256,
+   "holds": true,
+   "key": "16Z",
+   "norm": 256,
+   "quantiser_failures": 0
+  },
+  {
+   "enumerated_kissing": 48,
+   "enumerated_norm": 256,
+   "holds": true,
+   "key": "H16",
+   "norm": 256,
+   "quantiser_failures": 0
+  }
+ ],
+ "filling": {
+  "kept": "H16",
+  "ladder": [
+   "8C",
+   "8A",
+   "4C",
+   "H16",
+   "2C",
+   "2A",
+   "C",
+   "A",
+   "2D",
+   "A/2",
+   "D12^2",
+   "Z"
+  ],
+  "trials": [
+   {
+    "candidate": "R256",
+    "kept": false,
+    "ladder": [
+     "8C",
+     "8A",
+     "4C",
+     "R256",
+     "2C",
+     "2A",
+     "C",
+     "A",
+     "2D",
+     "A/2",
+     "D12^2",
+     "Z"
+    ],
+    "retired": [
+     {
+      "clause": 1,
+      "rung": "R256",
+      "why": "it answers 2 queries wrongly, which is the one thing the escalation is supposed not to do; it uniquely answers 3, and that is the price of retiring it"
+     }
+    ],
+    "row": {
+     "correct": 269,
+     "disagrees": 2,
+     "minimum_norm": 256,
+     "refused": 297,
+     "rung": "R256",
+     "unique_correct": 3,
+     "wrong": 2
+    }
+   },
+   {
+    "candidate": "16Z",
+    "kept": false,
+    "ladder": [
+     "8C",
+     "8A",
+     "4C",
+     "16Z",
+     "2C",
+     "2A",
+     "C",
+     "A",
+     "2D",
+     "A/2",
+     "D12^2",
+     "Z"
+    ],
+    "retired": [
+     {
+      "clause": 1,
+      "rung": "16Z",
+      "why": "it answers 4 queries wrongly, which is the one thing the escalation is supposed not to do; it uniquely answers 2, and that is the price of retiring it"
+     },
+     {
+      "clause": 2,
+      "rung": "D12^2",
+      "why": "it answers no query the rest of the ladder cannot (unique_correct = 0) and takes part in 2 disagreement(s)"
+     }
+    ],
+    "row": {
+     "correct": 305,
+     "disagrees": 3,
+     "minimum_norm": 256,
+     "refused": 259,
+     "rung": "16Z",
+     "unique_correct": 2,
+     "wrong": 4
+    }
+   },
+   {
+    "candidate": "H16",
+    "kept": true,
+    "ladder": [
+     "8C",
+     "8A",
+     "4C",
+     "H16",
+     "2C",
+     "2A",
+     "C",
+     "A",
+     "2D",
+     "A/2",
+     "D12^2",
+     "Z"
+    ],
+    "retired": [],
+    "row": {
+     "correct": 119,
+     "disagrees": 0,
+     "minimum_norm": 256,
+     "refused": 449,
+     "rung": "H16",
+     "unique_correct": 0,
+     "wrong": 0
+    }
+   }
+  ]
+ },
+ "final": {
+  "correct": 467,
+  "ladder": [
+   "8C",
+   "8A",
+   "4C",
+   "H16",
+   "2C",
+   "2A",
+   "C",
+   "A",
+   "2D",
+   "A/2",
+   "D12^2",
+   "Z"
+  ],
+  "matches_oracle": true,
+  "oracle": 467,
+  "order_independent": true,
+  "refused": 101,
+  "safe": true,
+  "totals": {
+   "coarse_to_fine": {
+    "correct": 467,
+    "refused": 101,
+    "wrong": 0
+   },
+   "fine_to_coarse": {
+    "correct": 467,
+    "refused": 101,
+    "wrong": 0
+   },
+   "middle_out": {
+    "correct": 467,
+    "refused": 101,
+    "wrong": 0
+   }
+  },
+  "wrong": 0
+ },
+ "held_out": {
+  "H1": true,
+  "H2": false,
+  "alone": {
+   "16Z": {
+    "correct": 260,
+    "disagrees": 0,
+    "minimum_norm": 256,
+    "refused": 305,
+    "rung": "16Z",
+    "unique_correct": 260,
+    "wrong": 3
+   },
+   "H16": {
+    "correct": 77,
+    "disagrees": 0,
+    "minimum_norm": 256,
+    "refused": 491,
+    "rung": "H16",
+    "unique_correct": 77,
+    "wrong": 0
+   },
+   "R256": {
+    "correct": 235,
+    "disagrees": 0,
+    "minimum_norm": 256,
+    "refused": 330,
+    "rung": "R256",
+    "unique_correct": 235,
+    "wrong": 3
+   }
+  },
+  "base": {
+   "correct": 439,
+   "ladder": [
+    "8C",
+    "8A",
+    "4C",
+    "2C",
+    "2A",
+    "C",
+    "A",
+    "2D",
+    "A/2",
+    "D12^2",
+    "Z"
+   ],
+   "matches_oracle": false,
+   "oracle": 439,
+   "order_independent": false,
+   "refused": 125,
+   "safe": false,
+   "totals": {
+    "coarse_to_fine": {
+     "correct": 435,
+     "refused": 125,
+     "wrong": 8
+    },
+    "fine_to_coarse": {
+     "correct": 439,
+     "refused": 125,
+     "wrong": 4
+    },
+    "middle_out": {
+     "correct": 435,
+     "refused": 125,
+     "wrong": 8
+    }
+   },
+   "wrong": 8
+  },
+  "final": {
+   "correct": 440,
+   "ladder": [
+    "8C",
+    "8A",
+    "4C",
+    "H16",
+    "2C",
+    "2A",
+    "C",
+    "A",
+    "2D",
+    "A/2",
+    "D12^2",
+    "Z"
+   ],
+   "matches_oracle": false,
+   "oracle": 440,
+   "order_independent": false,
+   "refused": 124,
+   "safe": false,
+   "totals": {
+    "coarse_to_fine": {
+     "correct": 436,
+     "refused": 124,
+     "wrong": 8
+    },
+    "fine_to_coarse": {
+     "correct": 440,
+     "refused": 124,
+     "wrong": 4
+    },
+    "middle_out": {
+     "correct": 436,
+     "refused": 124,
+     "wrong": 8
+    }
+   },
+   "wrong": 8
+  },
+  "final_rows": [
+   {
+    "correct": 284,
+    "disagrees": 0,
+    "minimum_norm": 2048,
+    "refused": 284,
+    "rung": "8C",
+    "unique_correct": 2,
+    "wrong": 0
+   },
+   {
+    "correct": 285,
+    "disagrees": 0,
+    "minimum_norm": 1024,
+    "refused": 283,
+    "rung": "8A",
+    "unique_correct": 2,
+    "wrong": 0
+   },
+   {
+    "correct": 295,
+    "disagrees": 0,
+    "minimum_norm": 512,
+    "refused": 273,
+    "rung": "4C",
+    "unique_correct": 9,
+    "wrong": 0
+   },
+   {
+    "correct": 77,
+    "disagrees": 0,
+    "minimum_norm": 256,
+    "refused": 491,
+    "rung": "H16",
+    "unique_correct": 1,
+    "wrong": 0
+   },
+   {
+    "correct": 179,
+    "disagrees": 0,
+    "minimum_norm": 128,
+    "refused": 389,
+    "rung": "2C",
+    "unique_correct": 2,
+    "wrong": 0
+   },
+   {
+    "correct": 180,
+    "disagrees": 0,
+    "minimum_norm": 64,
+    "refused": 388,
+    "rung": "2A",
+    "unique_correct": 3,
+    "wrong": 0
+   },
+   {
+    "correct": 95,
+    "disagrees": 3,
+    "minimum_norm": 32,
+    "refused": 469,
+    "rung": "C",
+    "unique_correct": 1,
+    "wrong": 4
+   },
+   {
+    "correct": 86,
+    "disagrees": 1,
+    "minimum_norm": 16,
+    "refused": 481,
+    "rung": "A",
+    "unique_correct": 2,
+    "wrong": 1
+   },
+   {
+    "correct": 37,
+    "disagrees": 3,
+    "minimum_norm": 8,
+    "refused": 529,
+    "rung": "2D",
+    "unique_correct": 6,
+    "wrong": 2
+   },
+   {
+    "correct": 19,
+    "disagrees": 2,
+    "minimum_norm": 4,
+    "refused": 548,
+    "rung": "A/2",
+    "unique_correct": 0,
+    "wrong": 1
+   },
+   {
+    "correct": 45,
+    "disagrees": 2,
+    "minimum_norm": 2,
+    "refused": 523,
+    "rung": "D12^2",
+    "unique_correct": 0,
+    "wrong": 0
+   },
+   {
+    "correct": 76,
+    "disagrees": 2,
+    "minimum_norm": 1,
+    "refused": 491,
+    "rung": "Z",
+    "unique_correct": 7,
+    "wrong": 1
+   }
+  ],
+  "queries": 568
+ },
+ "marks": {
+  "C1": true,
+  "F1": true,
+  "F2": true,
+  "H1": true,
+  "H2": false,
+  "X1": true,
+  "X2": true
+ },
+ "shortcut": {
+  "X1": true,
+  "X2": true,
+  "agree": 1000,
+  "basis_colours": [
+   "#14606a",
+   "#d743fc",
+   "#53290c",
+   "#78858c",
+   "#e43c30",
+   "#5f8db0",
+   "#5a5bc0",
+   "#6d3180",
+   "#9ed180",
+   "#d2c6c0",
+   "#3c5c80",
+   "#7f8d00"
+  ],
+  "colours": 4096,
+  "dimension": 12,
+  "members_among_sample": 0,
+  "points": 1000,
+  "rung_points_said_yes": 1000,
+  "totally_singular": true
+ },
+ "source_digest": "b5449a6cd17c5c3e8f8508f007166217a7186bf833fb20f22ba237e4cb64c060"
+}

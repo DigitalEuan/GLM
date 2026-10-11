@@ -472,6 +472,7 @@ establish.
 | `lexicon.py` | `Vocabulary`, `Concept`, `LexiconCodec` (index-based, legacy; still tested, no longer loaded by the runtime) |
 | `semantic_lexicon.py` | `SemanticConcept`, `SemanticLexiconCodec` — the 95 meaning-based concepts the `lexicon` register actually holds: 10 semantic primitives in 1/8 gradations, POS, arity, up to four (predicate, object) slots, a 20-bit checksum |
 | `comparison_classes.py` | `ComparisonClass`, `ComparisonClassCodec`, `COMPARISON_LAYOUT`, `DegreeWord`, `MeasureScale`, `comparison_classes`, `class_by_name`, `classes_for_quantity`, `measure_scales`, `scale_for_quantity`, `degree_word`, `lexicon_agreement`, `register_summary` — the 45 comparison classes and the 11 scales, every dimension derived from the physics register |
+| `nuclides.py` | `Nuclide`, `register`, `sources`, `nuclide`, `mass_excess`, `binding`, `binding_per_nucleon`, `q_value`, `separation_n`, `is_stable`, `half_life_seconds`, `isotopes`, `isobars`, `parse_ame`, `parse_nubase`, `freeze` — the nuclide register (Phase 120): the AME2020 mass table and NUBASE2020 ground states (3558, 253 stable) frozen in `_data/world_ame2020.json` with the SHA-256 of each raw IAEA file; mass excesses exact, a value from systematics (`#`) refused unless asked for. Read by the explanation anchors only; not one of the codec registers |
 | `_data/` | Frozen exact-rational snapshots; regenerate with `workflow/08a_ingest_registers.py` |
 
 ## Depends on

@@ -1,0 +1,127 @@
+{
+ "decl": {
+  "chance": {
+   "1": "7754/960355",
+   "10": "18476412956246168994700857779251/239321832928517486024126664200214",
+   "3": "80986634193/3377287150985",
+   "5": "35215813472254185/889994192803880549"
+  },
+  "hits": {
+   "address": {
+    "1": 41,
+    "10": 89,
+    "3": 64,
+    "5": 77
+   },
+   "digest": {
+    "1": 3,
+    "10": 13,
+    "3": 5,
+    "5": 7
+   },
+   "features": {
+    "1": 43,
+    "10": 87,
+    "3": 64,
+    "5": 75
+   },
+   "lexical": {
+    "1": 71,
+    "10": 126,
+    "3": 98,
+    "5": 108
+   },
+   "name": {
+    "1": 31,
+    "10": 59,
+    "3": 42,
+    "5": 48
+   },
+   "random": {
+    "1": 4,
+    "10": 18,
+    "3": 7,
+    "5": 10
+   },
+   "shuffled": {
+    "1": 0,
+    "10": 17,
+    "3": 2,
+    "5": 6
+   },
+   "text": {
+    "1": 145,
+    "10": 182,
+    "3": 168,
+    "5": 178
+   }
+  },
+  "mrr10": {
+   "address": "1954/7315",
+   "digest": "232/9405",
+   "features": "9511/35112",
+   "lexical": "220387/526680",
+   "name": "96281/526680",
+   "random": "8837/263340",
+   "shuffled": "1279/87780",
+   "text": "396917/526680"
+  },
+  "queries": 209
+ },
+ "declarations": 4596,
+ "edges": 15036,
+ "goal": {
+  "hits": {
+   "address": {
+    "1": 7,
+    "10": 25,
+    "3": 14,
+    "5": 18
+   },
+   "digest": {
+    "1": 0,
+    "10": 8,
+    "3": 0,
+    "5": 1
+   },
+   "lexical": {
+    "1": 24,
+    "10": 52,
+    "3": 35,
+    "5": 42
+   },
+   "name": {
+    "1": 15,
+    "10": 34,
+    "3": 23,
+    "5": 26
+   },
+   "random": {
+    "1": 2,
+    "10": 9,
+    "3": 3,
+    "5": 4
+   },
+   "text": {
+    "1": 69,
+    "10": 90,
+    "3": 83,
+    "5": 85
+   }
+  },
+  "queries": 103,
+  "reproduced": 0
+ },
+ "injectivity": {
+  "collision_classes": 325,
+  "distinct_addresses": 4109,
+  "largest_class_size": 16
+ },
+ "mean_relatives": "7754/209",
+ "neighbours": {
+  "linked_nearest": 141,
+  "same_file_nearest": 831
+ },
+ "taken_by": "the Phase 100 code (commit e138e28) on the Phase 101 tree, with RequestProject/GLM/CitationScope.lean added so the two records read the same 4,596 declarations; the address and lexical books rebuilt there under the Phase 100 feature map",
+ "tree": "3b88c8060eec77b9d567a9a0c9893068e0ca0e958efaeb2ca9b9b61def8a214f"
+}

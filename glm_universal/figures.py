@@ -504,7 +504,7 @@ SENTENCE_PATTERNS: Tuple[Tuple[str, str, str], ...] = (
     ("lean_files", r"\b\d+ Lean files\b", "the Lean development"),
     ("directives", r"\b\d+ standing rules\b", "how many rules there are"),
     ("suite", r"\b[\d,]+ tests across \d+(?: of the \d+)? test files, "
-     r"[\d,]+ subtests(?:, outside the document check)?",
+     r"[\d,]+ subtests(?:, outside the document checks?)?",
      "what a complete run counts"),
 )
 
@@ -570,8 +570,19 @@ def sentences(data: Optional[Mapping[str, object]] = None
                         f"{get('suite', 'test_files')} of the "
                         f"{get('suite', 'of_test_files')} test files, "
                         f"{_thousands(get('suite', 'subtests'))} subtests, "
-                        f"outside the document check")
+                        f"outside the document check"
+                        f"{'s' if _excluded_count(data) > 1 else ''}")
     return out
+
+
+def _excluded_count(data: Mapping[str, object]) -> int:
+    """How many test files the recorded totals leave out (the document
+    checks), read off the ``suite`` section's ``excludes`` row."""
+    suite = data.get("suite") or {}
+    excludes = suite.get("excludes") if isinstance(suite, Mapping) else None
+    if not excludes or excludes == "(nothing)":
+        return 0
+    return len([name for name in str(excludes).split(",") if name.strip()])
 
 
 def _row(name: str, value: object) -> str:

@@ -1526,11 +1526,11 @@
    "same_answer": true
   },
   {
-   "answer": "report completion: 1257 of 1652 element cells are measured; 185 more are filled by rules that beat the field's own mean out of sample, taking the completed view to 1442, and all 395 empty cells are decided ({'estimated': 185, 'inputs_absent': 100, 'no_admitted_rule': 97, 'not_derivable': 13}) with the register itself unchanged",
+   "answer": "report completion: 1257 of 1652 element cells are measured; 87 more are filled by rules that beat the field's own mean out of sample, taking the completed view to 1344, and all 395 empty cells are decided ({'estimated': 87, 'inputs_absent': 62, 'no_admitted_rule': 233, 'not_derivable': 13}) with the register itself unchanged",
    "answered": true,
    "comparable": true,
    "cost": 1,
-   "direct_answer": "report completion: 1257 of 1652 element cells are measured; 185 more are filled by rules that beat the field's own mean out of sample, taking the completed view to 1442, and all 395 empty cells are decided ({'estimated': 185, 'inputs_absent': 100, 'no_admitted_rule': 97, 'not_derivable': 13}) with the register itself unchanged",
+   "direct_answer": "report completion: 1257 of 1652 element cells are measured; 87 more are filled by rules that beat the field's own mean out of sample, taking the completed view to 1344, and all 395 empty cells are decided ({'estimated': 87, 'inputs_absent': 62, 'no_admitted_rule': 233, 'not_derivable': 13}) with the register itself unchanged",
    "direct_ok": true,
    "escalated": false,
    "expect": "answer",
@@ -1871,11 +1871,11 @@
    "same_answer": true
   },
   {
-   "answer": "report lean: 4416 declarations of the Lean development carry a deterministic Leech address, read back exactly 4416/4416 times with 0 coordinate errors; 3934 addresses are distinct and the quantiser adds no conflation of its own; the nearest declaration by address shares a file 812 times against 35 for a SHA-256 control and a chance rate of 7925/974832",
+   "answer": "report lean: 4936 declarations of the Lean development carry a deterministic Leech address, read back exactly 4936/4936 times with 0 coordinate errors; 4214 addresses are distinct and the quantiser adds no conflation of its own; the nearest declaration by address shares a file 1054 times against 34 for a SHA-256 control and a chance rate of 84037/12179580",
    "answered": true,
    "comparable": true,
    "cost": 1,
-   "direct_answer": "report lean: 4416 declarations of the Lean development carry a deterministic Leech address, read back exactly 4416/4416 times with 0 coordinate errors; 3934 addresses are distinct and the quantiser adds no conflation of its own; the nearest declaration by address shares a file 812 times against 35 for a SHA-256 control and a chance rate of 7925/974832",
+   "direct_answer": "report lean: 4936 declarations of the Lean development carry a deterministic Leech address, read back exactly 4936/4936 times with 0 coordinate errors; 4214 addresses are distinct and the quantiser adds no conflation of its own; the nearest declaration by address shares a file 1054 times against 34 for a SHA-256 control and a chance rate of 84037/12179580",
    "direct_ok": true,
    "escalated": false,
    "expect": "answer",
@@ -1976,11 +1976,11 @@
    "same_answer": true
   },
   {
-   "answer": "report retrieval: the address book used as an index over 4416 Lean declarations, scored on 201 queries against every control.  The address finds a relative in its top 5 for 90 of them -- 947/100 times the closed-form chance of 47/1000 -- and beats the digest (5/201), the seeded reshuffle (8/201), a random ranking (2/67) and name search (58/201).  It is beaten decisively by a plain lexical search over the statement text (169/201), ranking the raw feature vectors without any lattice scores 85/201, and an address book built from the identifiers rather than the syntax reaches 112/201 -- so the separation is the feature map's and the ceiling is the projection into twenty four capped integers, not the decoder.  No address shortlist improves on the text control at any size.  What the lattice does earn is exactness: the completeness bound of RequestProject/GLM/Retrieval.lean holds on 225165 pairs with 0 violations, so a radius search prunes the corpus to 5777/225216 of itself while provably keeping every feature-close declaration, and an empty shortlist is a proof of absence",
+   "answer": "report retrieval: the address book used as an index over 4936 Lean declarations, scored on 206 queries against every control.  The address finds a relative in its top 5 for 85 of them -- 297/25 times the closed-form chance of 7/200 -- and beats the digest (5/206), the seeded reshuffle (3/206), a random ranking (4/103) and name search (57/206).  It is beaten decisively by a plain lexical search over the statement text (87/103), ranking the raw feature vectors without any lattice scores 91/206, and an address book built from the identifiers rather than the syntax reaches 113/206 -- so the separation is the feature map's and the ceiling is the projection into twenty four capped integers, not the decoder.  No address shortlist improves on the text control at any size.  What the lattice does earn is exactness: the completeness bound of RequestProject/GLM/Retrieval.lean holds on 251685 pairs with 0 violations, so a radius search prunes the corpus to 7901/251736 of itself while provably keeping every feature-close declaration, and an empty shortlist is a proof of absence",
    "answered": true,
    "comparable": true,
    "cost": 1,
-   "direct_answer": "report retrieval: the address book used as an index over 4416 Lean declarations, scored on 201 queries against every control.  The address finds a relative in its top 5 for 90 of them -- 947/100 times the closed-form chance of 47/1000 -- and beats the digest (5/201), the seeded reshuffle (8/201), a random ranking (2/67) and name search (58/201).  It is beaten decisively by a plain lexical search over the statement text (169/201), ranking the raw feature vectors without any lattice scores 85/201, and an address book built from the identifiers rather than the syntax reaches 112/201 -- so the separation is the feature map's and the ceiling is the projection into twenty four capped integers, not the decoder.  No address shortlist improves on the text control at any size.  What the lattice does earn is exactness: the completeness bound of RequestProject/GLM/Retrieval.lean holds on 225165 pairs with 0 violations, so a radius search prunes the corpus to 5777/225216 of itself while provably keeping every feature-close declaration, and an empty shortlist is a proof of absence",
+   "direct_answer": "report retrieval: the address book used as an index over 4936 Lean declarations, scored on 206 queries against every control.  The address finds a relative in its top 5 for 85 of them -- 297/25 times the closed-form chance of 7/200 -- and beats the digest (5/206), the seeded reshuffle (3/206), a random ranking (4/103) and name search (57/206).  It is beaten decisively by a plain lexical search over the statement text (87/103), ranking the raw feature vectors without any lattice scores 91/206, and an address book built from the identifiers rather than the syntax reaches 113/206 -- so the separation is the feature map's and the ceiling is the projection into twenty four capped integers, not the decoder.  No address shortlist improves on the text control at any size.  What the lattice does earn is exactness: the completeness bound of RequestProject/GLM/Retrieval.lean holds on 251685 pairs with 0 violations, so a radius search prunes the corpus to 7901/251736 of itself while provably keeping every feature-close declaration, and an empty shortlist is a proof of absence",
    "direct_ok": true,
    "escalated": false,
    "expect": "answer",
@@ -1991,11 +1991,11 @@
    "same_answer": true
   },
   {
-   "answer": "report generated: how much of the substrate can be generated instead of stored, and whether the generated copy is the same object.  Generating is right in principle -- the stored tables audited here cost 9449445 bytes against 24648 for their generators, a ratio of 3149815/8216 to one, every regenerated object checked identical -- and 9911364/9931129 of the overlay's own stored bytes are already caches with a digest.  But the proposed on-the-fly Leech sieve is sound and badly incomplete: it keeps 1152 of the 196560 minimal vectors, because 'all coordinates agree mod 4' is not the Golay condition of Construction C; the repaired sieve agrees with the package's membership test on all 196656 vectors tested.  The snap built on it returned a non-lattice point on 4 of 4 targets in general position, where an exact coset decoder is always inside and within the covering radius.  Of the script's closed-form constants 0 of 3 accuracy claims hold.  The general statements are proved in RequestProject/GLM/ZeroStorage.lean",
+   "answer": "report generated: how much of the substrate can be generated instead of stored, and whether the generated copy is the same object.  Generating is right in principle -- the stored tables audited here cost 9449445 bytes against 24648 for their generators, a ratio of 3149815/8216 to one, every regenerated object checked identical -- and 10661267/10681032 of the overlay's own stored bytes are already caches with a digest.  But the proposed on-the-fly Leech sieve is sound and badly incomplete: it keeps 1152 of the 196560 minimal vectors, because 'all coordinates agree mod 4' is not the Golay condition of Construction C; the repaired sieve agrees with the package's membership test on all 196656 vectors tested.  The snap built on it returned a non-lattice point on 4 of 4 targets in general position, where an exact coset decoder is always inside and within the covering radius.  Of the script's closed-form constants 0 of 3 accuracy claims hold.  The general statements are proved in RequestProject/GLM/ZeroStorage.lean",
    "answered": true,
    "comparable": true,
    "cost": 1,
-   "direct_answer": "report generated: how much of the substrate can be generated instead of stored, and whether the generated copy is the same object.  Generating is right in principle -- the stored tables audited here cost 9449445 bytes against 24648 for their generators, a ratio of 3149815/8216 to one, every regenerated object checked identical -- and 9911364/9931129 of the overlay's own stored bytes are already caches with a digest.  But the proposed on-the-fly Leech sieve is sound and badly incomplete: it keeps 1152 of the 196560 minimal vectors, because 'all coordinates agree mod 4' is not the Golay condition of Construction C; the repaired sieve agrees with the package's membership test on all 196656 vectors tested.  The snap built on it returned a non-lattice point on 4 of 4 targets in general position, where an exact coset decoder is always inside and within the covering radius.  Of the script's closed-form constants 0 of 3 accuracy claims hold.  The general statements are proved in RequestProject/GLM/ZeroStorage.lean",
+   "direct_answer": "report generated: how much of the substrate can be generated instead of stored, and whether the generated copy is the same object.  Generating is right in principle -- the stored tables audited here cost 9449445 bytes against 24648 for their generators, a ratio of 3149815/8216 to one, every regenerated object checked identical -- and 10661267/10681032 of the overlay's own stored bytes are already caches with a digest.  But the proposed on-the-fly Leech sieve is sound and badly incomplete: it keeps 1152 of the 196560 minimal vectors, because 'all coordinates agree mod 4' is not the Golay condition of Construction C; the repaired sieve agrees with the package's membership test on all 196656 vectors tested.  The snap built on it returned a non-lattice point on 4 of 4 targets in general position, where an exact coset decoder is always inside and within the covering radius.  Of the script's closed-form constants 0 of 3 accuracy claims hold.  The general statements are proved in RequestProject/GLM/ZeroStorage.lean",
    "direct_ok": true,
    "escalated": false,
    "expect": "answer",
@@ -2006,11 +2006,11 @@
    "same_answer": true
   },
   {
-   "answer": "report pipeline: 32 of 32 rows have passed all six stages",
+   "answer": "report pipeline: 33 of 33 rows have passed all six stages",
    "answered": true,
    "comparable": true,
    "cost": 1,
-   "direct_answer": "report pipeline: 32 of 32 rows have passed all six stages",
+   "direct_answer": "report pipeline: 33 of 33 rows have passed all six stages",
    "direct_ok": true,
    "escalated": false,
    "expect": "answer",
@@ -2081,11 +2081,11 @@
    "same_answer": true
   },
   {
-   "answer": "report: unknown subject 'nonsense subject'.  Try one of: relations, leech distribution, theta, subalgebra, information loss, golay decoding, superposition, leech construction, facets, monster stack, multiresolution, migration, state migration, concept store, fusion, benchmarks, semantics, infinite values, capabilities, analogies, conjugates, completion, vagueness, admission, transform decoder, deep holes, units, molecules, chemistry coverage, blueprint, reversible, mantissa, engine, noise, signature, drift, catalog, containers, companion, lattices, shells, llvq, harmony, economics, lean, directives, pipeline, escalation, measure, names, recipe, language, searchloop, retrieval, relay, anonymous, controller, generated, landscape, hole classifier, hole ladder, hole failures, cumulativity, query escalation, review sweep",
+   "answer": "report: unknown subject 'nonsense subject'.  Try one of: relations, leech distribution, theta, subalgebra, information loss, golay decoding, superposition, leech construction, facets, monster stack, multiresolution, migration, state migration, concept store, fusion, benchmarks, semantics, infinite values, capabilities, analogies, conjugates, completion, vagueness, admission, transform decoder, deep holes, units, molecules, chemistry coverage, blueprint, reversible, mantissa, engine, noise, signature, drift, catalog, containers, companion, lattices, shells, llvq, harmony, economics, lean, directives, pipeline, escalation, measure, names, recipe, language, searchloop, retrieval, relay, anonymous, controller, generated, landscape, hole classifier, hole ladder, hole failures, hole configuration, cumulativity, query escalation, review sweep, routes",
    "answered": false,
    "comparable": true,
    "cost": 1,
-   "direct_answer": "report: unknown subject 'nonsense subject'.  Try one of: relations, leech distribution, theta, subalgebra, information loss, golay decoding, superposition, leech construction, facets, monster stack, multiresolution, migration, state migration, concept store, fusion, benchmarks, semantics, infinite values, capabilities, analogies, conjugates, completion, vagueness, admission, transform decoder, deep holes, units, molecules, chemistry coverage, blueprint, reversible, mantissa, engine, noise, signature, drift, catalog, containers, companion, lattices, shells, llvq, harmony, economics, lean, directives, pipeline, escalation, measure, names, recipe, language, searchloop, retrieval, relay, anonymous, controller, generated, landscape, hole classifier, hole ladder, hole failures, cumulativity, query escalation, review sweep",
+   "direct_answer": "report: unknown subject 'nonsense subject'.  Try one of: relations, leech distribution, theta, subalgebra, information loss, golay decoding, superposition, leech construction, facets, monster stack, multiresolution, migration, state migration, concept store, fusion, benchmarks, semantics, infinite values, capabilities, analogies, conjugates, completion, vagueness, admission, transform decoder, deep holes, units, molecules, chemistry coverage, blueprint, reversible, mantissa, engine, noise, signature, drift, catalog, containers, companion, lattices, shells, llvq, harmony, economics, lean, directives, pipeline, escalation, measure, names, recipe, language, searchloop, retrieval, relay, anonymous, controller, generated, landscape, hole classifier, hole ladder, hole failures, hole configuration, cumulativity, query escalation, review sweep, routes",
    "direct_ok": false,
    "escalated": false,
    "expect": "refusal",
@@ -2141,11 +2141,11 @@
    "same_answer": true
   },
   {
-   "answer": "report language: 7 of 23 answerable query kinds -- derive, measure, task, compare by slot shape, verify, analogy, compare by infix shape and comparative by nested shape -- are described rather than hand-written, in 7 slots and 8 operands over 47 and 39 surface forms that cost 15, 13 and 4 decisions about English, all of them counted; every one of those kinds is now read off its description by the runtime with its hand-written branch deleted and frozen in `language.legacy`, and over corpora of 947, 201 and 628 questions generated from the registers that reading gives the same kind and the same options as the deleted branches 947, 201 and 480 times with 0 disagreements, declines all 157 evaluation questions of the undescribed kinds and all 20 narrowing witnesses the branches misread, and round-trips every written question back to the slots it was written from; the 148 questions the nested shape reads and its branch did not are the one declared widening, accounted for with 0 left over, so the round is recorded as described",
+   "answer": "report language: 7 of 23 answerable query kinds -- derive, measure, task, compare by slot shape, verify, analogy, compare by infix shape and comparative by nested shape -- are described rather than hand-written, in 7 slots and 8 operands over 47 and 39 surface forms that cost 15, 13 and 4 decisions about English, all of them counted; every one of those kinds is now read off its description by the runtime with its hand-written branch deleted and frozen in `language.legacy`, and over corpora of 947, 201 and 628 questions generated from the registers that reading gives the same kind and the same options as the deleted branches 947, 201 and 480 times with 0 disagreements, declines all 159 evaluation questions of the undescribed kinds and all 20 narrowing witnesses the branches misread, and round-trips every written question back to the slots it was written from; the 148 questions the nested shape reads and its branch did not are the one declared widening, accounted for with 0 left over, so the round is recorded as described",
    "answered": true,
    "comparable": true,
    "cost": 1,
-   "direct_answer": "report language: 7 of 23 answerable query kinds -- derive, measure, task, compare by slot shape, verify, analogy, compare by infix shape and comparative by nested shape -- are described rather than hand-written, in 7 slots and 8 operands over 47 and 39 surface forms that cost 15, 13 and 4 decisions about English, all of them counted; every one of those kinds is now read off its description by the runtime with its hand-written branch deleted and frozen in `language.legacy`, and over corpora of 947, 201 and 628 questions generated from the registers that reading gives the same kind and the same options as the deleted branches 947, 201 and 480 times with 0 disagreements, declines all 157 evaluation questions of the undescribed kinds and all 20 narrowing witnesses the branches misread, and round-trips every written question back to the slots it was written from; the 148 questions the nested shape reads and its branch did not are the one declared widening, accounted for with 0 left over, so the round is recorded as described",
+   "direct_answer": "report language: 7 of 23 answerable query kinds -- derive, measure, task, compare by slot shape, verify, analogy, compare by infix shape and comparative by nested shape -- are described rather than hand-written, in 7 slots and 8 operands over 47 and 39 surface forms that cost 15, 13 and 4 decisions about English, all of them counted; every one of those kinds is now read off its description by the runtime with its hand-written branch deleted and frozen in `language.legacy`, and over corpora of 947, 201 and 628 questions generated from the registers that reading gives the same kind and the same options as the deleted branches 947, 201 and 480 times with 0 disagreements, declines all 159 evaluation questions of the undescribed kinds and all 20 narrowing witnesses the branches misread, and round-trips every written question back to the slots it was written from; the 148 questions the nested shape reads and its branch did not are the one declared widening, accounted for with 0 left over, so the round is recorded as described",
    "direct_ok": true,
    "escalated": false,
    "expect": "answer",
@@ -2186,6 +2186,21 @@
    "same_answer": true
   },
   {
+   "answer": "report hole configuration: under the configuration reading's answer rule the 44 deep-hole queries are answered 44 correctly, 0 wrongly and 0 refused (the joint reading named 40), with 396 certified absences and 0 false; 20 of 23 Niemeier types have a certified reference centre (23 with the post-hoc patience follow-up, which reads 23 of 23), and at 7680 starts the reading recognises 20 of 20 under a seed change",
+   "answered": true,
+   "comparable": true,
+   "cost": 1,
+   "direct_answer": "report hole configuration: under the configuration reading's answer rule the 44 deep-hole queries are answered 44 correctly, 0 wrongly and 0 refused (the joint reading named 40), with 396 certified absences and 0 false; 20 of 23 Niemeier types have a certified reference centre (23 with the post-hoc patience follow-up, which reads 23 of 23), and at 7680 starts the reading recognises 20 of 20 under a seed change",
+   "direct_ok": true,
+   "escalated": false,
+   "expect": "answer",
+   "id": "report-hole-configuration",
+   "kind": "report",
+   "layer": "L1",
+   "refusal_tag": null,
+   "same_answer": true
+  },
+  {
    "answer": "report query escalation: the stored measurement is stale, so no figure is reported rather than one taken from code that has moved; run `python3 -m glm_universal.tools queryesc --write` to re-take it",
    "answered": true,
    "comparable": true,
@@ -2201,11 +2216,11 @@
    "same_answer": true
   },
   {
-   "answer": "report relay: the machine's faculties arranged as a stack rather than scored one at a time.  Gated on the text layer's own confidence -- below 1/10 it is judged to have no evidence for the query -- the two geometric address books carry it, and at k = 5 against the text control the stack reads: the tuning stride 333 -> 338 of 402 (ahead), a disjoint held-out stride 343 -> 347 of 401 (ahead) and bare goal queries 676 -> 679 of 803 (ahead), carrying 13 queries it misses and losing 1.  The same relay to a digest and a reshuffle carries 0, so the gain is the substrate's rather than the list padding's, and the gate fires on only 42 of 1606 queries.  In the grid register the same mechanism runs over 50 ARC puzzles with a generator, a visual filter and a cross-domain check: the filter removes 346/363 of the proposals before the verification gate sees them, and the relay solves 2 against the leading faculty's 1",
+   "answer": "report relay: the machine's faculties arranged as a stack rather than scored one at a time.  Gated on the text layer's own confidence -- below 1/10 it is judged to have no evidence for the query -- the two geometric address books carry it, and at k = 5 against the text control the stack reads: the tuning stride 355 -> 358 of 412 (ahead), a disjoint held-out stride 355 -> 357 of 411 (ahead) and bare goal queries 710 -> 712 of 823 (ahead), carrying 7 queries it misses and losing 0.  The same relay to a digest and a reshuffle carries 2, so the gain is the substrate's rather than the list padding's, and the gate fires on only 44 of 1646 queries.  In the grid register the same mechanism runs over 50 ARC puzzles with a generator, a visual filter and a cross-domain check: the filter removes 346/363 of the proposals before the verification gate sees them, and the relay solves 2 against the leading faculty's 1",
    "answered": true,
    "comparable": true,
    "cost": 1,
-   "direct_answer": "report relay: the machine's faculties arranged as a stack rather than scored one at a time.  Gated on the text layer's own confidence -- below 1/10 it is judged to have no evidence for the query -- the two geometric address books carry it, and at k = 5 against the text control the stack reads: the tuning stride 333 -> 338 of 402 (ahead), a disjoint held-out stride 343 -> 347 of 401 (ahead) and bare goal queries 676 -> 679 of 803 (ahead), carrying 13 queries it misses and losing 1.  The same relay to a digest and a reshuffle carries 0, so the gain is the substrate's rather than the list padding's, and the gate fires on only 42 of 1606 queries.  In the grid register the same mechanism runs over 50 ARC puzzles with a generator, a visual filter and a cross-domain check: the filter removes 346/363 of the proposals before the verification gate sees them, and the relay solves 2 against the leading faculty's 1",
+   "direct_answer": "report relay: the machine's faculties arranged as a stack rather than scored one at a time.  Gated on the text layer's own confidence -- below 1/10 it is judged to have no evidence for the query -- the two geometric address books carry it, and at k = 5 against the text control the stack reads: the tuning stride 355 -> 358 of 412 (ahead), a disjoint held-out stride 355 -> 357 of 411 (ahead) and bare goal queries 710 -> 712 of 823 (ahead), carrying 7 queries it misses and losing 0.  The same relay to a digest and a reshuffle carries 2, so the gain is the substrate's rather than the list padding's, and the gate fires on only 44 of 1646 queries.  In the grid register the same mechanism runs over 50 ARC puzzles with a generator, a visual filter and a cross-domain check: the filter removes 346/363 of the proposals before the verification gate sees them, and the relay solves 2 against the leading faculty's 1",
    "direct_ok": true,
    "escalated": false,
    "expect": "answer",
@@ -2216,11 +2231,11 @@
    "same_answer": true
   },
   {
-   "answer": "report anonymous: the register where the geometric address is the only faculty left reading.  Rename every identifier of a query outside a declared vocabulary and at k = 5 over 803 queries the text search falls 676 -> 63 of 803 and the identifier address book 358 -> 37 of 803, both to the 35 hits chance gives, while the structural address holds 183 -> 125 of 803 -- more than twice any other faculty here.  A renaming cannot move a count of the syntax (764 of 803 queries keep every syntax coordinate, and the rest move only the six that count type words), so the stack's existing gate fires on 554 of 803 and lifts the leader 63 -> 96.  The carry set is a class, not a residue",
+   "answer": "report anonymous: the register where the geometric address is the only faculty left reading.  Rename every identifier of a query outside a declared vocabulary and at k = 5 over 823 queries the text search falls 710 -> 52 of 823 and the identifier address book 378 -> 33 of 823, both to the 28 hits chance gives, while the structural address holds 163 -> 161 of 823 -- more than twice any other faculty here.  A renaming cannot move a count of the syntax (823 of 823 queries keep every syntax coordinate, and the rest move only the six that count type words), so the stack's existing gate fires on 570 of 823 and lifts the leader 52 -> 93.  The carry set is a class, not a residue",
    "answered": true,
    "comparable": true,
    "cost": 1,
-   "direct_answer": "report anonymous: the register where the geometric address is the only faculty left reading.  Rename every identifier of a query outside a declared vocabulary and at k = 5 over 803 queries the text search falls 676 -> 63 of 803 and the identifier address book 358 -> 37 of 803, both to the 35 hits chance gives, while the structural address holds 183 -> 125 of 803 -- more than twice any other faculty here.  A renaming cannot move a count of the syntax (764 of 803 queries keep every syntax coordinate, and the rest move only the six that count type words), so the stack's existing gate fires on 554 of 803 and lifts the leader 63 -> 96.  The carry set is a class, not a residue",
+   "direct_answer": "report anonymous: the register where the geometric address is the only faculty left reading.  Rename every identifier of a query outside a declared vocabulary and at k = 5 over 823 queries the text search falls 710 -> 52 of 823 and the identifier address book 378 -> 33 of 823, both to the 28 hits chance gives, while the structural address holds 163 -> 161 of 823 -- more than twice any other faculty here.  A renaming cannot move a count of the syntax (823 of 823 queries keep every syntax coordinate, and the rest move only the six that count type words), so the stack's existing gate fires on 570 of 823 and lifts the leader 52 -> 93.  The carry set is a class, not a residue",
    "direct_ok": true,
    "escalated": false,
    "expect": "answer",
@@ -2240,6 +2255,21 @@
    "escalated": false,
    "expect": "answer",
    "id": "report-review-sweep",
+   "kind": "report",
+   "layer": "L1",
+   "refusal_tag": null,
+   "same_answer": true
+  },
+  {
+   "answer": "report routes: 3 decision points with 8 routes; 9 of 9 reference problems take the route expected; every route reached",
+   "answered": true,
+   "comparable": true,
+   "cost": 1,
+   "direct_answer": "report routes: 3 decision points with 8 routes; 9 of 9 reference problems take the route expected; every route reached",
+   "direct_ok": true,
+   "escalated": false,
+   "expect": "answer",
+   "id": "report-routes",
    "kind": "report",
    "layer": "L1",
    "refusal_tag": null,
@@ -2741,11 +2771,11 @@
    "same_answer": true
   },
   {
-   "answer": "unsolved: ordering (different-scale): line of GLM.NormFamily.family_tower is read on the lean:line scale and line of rung_audit on the python:line scale, and the conversion table declares no unit for 'lean:line' or 'python:line'; a conversion is a fact someone wrote down, not a guess from a field name, and the 9 scales it does declare are element:atomic_weight_u, molecule:molar_mass_u, element:ionization_energy_eV, element:electron_affinity_eV, element:homonuclear_bde_kJ_per_mol, element:melting_point_K, element:boiling_point_K, element:atomic_radius_pm, element:covalent_radius_pm; two readings on different scales have no common order, and the operation refuses rather than comparing the bare numbers",
+   "answer": "unsolved: ordering (different-scale): line of GLM.NormFamily.family_tower is read on the lean:line scale and line of rung_audit on the python:line scale, and the conversion table declares no unit for 'lean:line' or 'python:line'; a conversion is a fact someone wrote down, not a guess from a field name, and the 10 scales it does declare are element:atomic_weight_u, molecule:molar_mass_u, element:ionization_energy_eV, element:electron_affinity_eV, element:homonuclear_bde_kJ_per_mol, element:melting_point_K, element:boiling_point_K, fixed_point:temperature_C, element:atomic_radius_pm, element:covalent_radius_pm; two readings on different scales have no common order, and the operation refuses rather than comparing the bare numbers",
    "answered": false,
    "comparable": true,
    "cost": 1,
-   "direct_answer": "unsolved: ordering (different-scale): line of GLM.NormFamily.family_tower is read on the lean:line scale and line of rung_audit on the python:line scale, and the conversion table declares no unit for 'lean:line' or 'python:line'; a conversion is a fact someone wrote down, not a guess from a field name, and the 9 scales it does declare are element:atomic_weight_u, molecule:molar_mass_u, element:ionization_energy_eV, element:electron_affinity_eV, element:homonuclear_bde_kJ_per_mol, element:melting_point_K, element:boiling_point_K, element:atomic_radius_pm, element:covalent_radius_pm; two readings on different scales have no common order, and the operation refuses rather than comparing the bare numbers",
+   "direct_answer": "unsolved: ordering (different-scale): line of GLM.NormFamily.family_tower is read on the lean:line scale and line of rung_audit on the python:line scale, and the conversion table declares no unit for 'lean:line' or 'python:line'; a conversion is a fact someone wrote down, not a guess from a field name, and the 10 scales it does declare are element:atomic_weight_u, molecule:molar_mass_u, element:ionization_energy_eV, element:electron_affinity_eV, element:homonuclear_bde_kJ_per_mol, element:melting_point_K, element:boiling_point_K, fixed_point:temperature_C, element:atomic_radius_pm, element:covalent_radius_pm; two readings on different scales have no common order, and the operation refuses rather than comparing the bare numbers",
    "direct_ok": false,
    "escalated": false,
    "expect": "refusal",
@@ -2951,11 +2981,11 @@
    "same_answer": true
   },
   {
-   "answer": "unsolved: extremum (incomplete): 40 of 236 rows have no reading of 'temperature' (the register records it as missing): element:Bh, element:Cn, element:Db, element:Ds, element:Fl, .... The extremum of the rows that are filled in is not the extremum of the column -- it is a wrong answer rather than a partial one -- so the operation refuses the column and names what is missing",
+   "answer": "unsolved: extremum (incomplete): 40 of 250 rows have no reading of 'temperature' (the register records it as missing): element:Bh, element:Cn, element:Db, element:Ds, element:Fl, .... The extremum of the rows that are filled in is not the extremum of the column -- it is a wrong answer rather than a partial one -- so the operation refuses the column and names what is missing",
    "answered": false,
    "comparable": true,
    "cost": 1,
-   "direct_answer": "unsolved: extremum (incomplete): 40 of 236 rows have no reading of 'temperature' (the register records it as missing): element:Bh, element:Cn, element:Db, element:Ds, element:Fl, .... The extremum of the rows that are filled in is not the extremum of the column -- it is a wrong answer rather than a partial one -- so the operation refuses the column and names what is missing",
+   "direct_answer": "unsolved: extremum (incomplete): 40 of 250 rows have no reading of 'temperature' (the register records it as missing): element:Bh, element:Cn, element:Db, element:Ds, element:Fl, .... The extremum of the rows that are filled in is not the extremum of the column -- it is a wrong answer rather than a partial one -- so the operation refuses the column and names what is missing",
    "direct_ok": false,
    "escalated": false,
    "expect": "refusal",
@@ -3521,14 +3551,14 @@
  ],
  "radius": 2,
  "safety": {
-  "answered_directly": 151,
+  "answered_directly": 153,
   "answers_costing_more_than_the_first_rung": [],
   "answers_moved": [],
-  "cases": 177,
+  "cases": 179,
   "holds": true,
   "principled_refusals_converted": []
  },
- "source_digest": "72dcbc9cd3ec691a619b6d83a0d22450b22aa53377448a1cbe78684a69b26b7f",
+ "source_digest": "d8eca98d9c5c98ac1c493a8e76beb18eb3a1971085a7861c3fe648754980ed6a",
  "tallest_ladder": 3,
  "utility": {
   "answered": 8,

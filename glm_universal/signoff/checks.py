@@ -177,14 +177,28 @@ def check_closure(check: Check) -> Tuple[Path, ...]:
     return tuple(sorted(out))
 
 
+#: The instruments whose subject is the documents themselves.  They are
+#: signed against every byte; the others against the documents with the
+#: run-measured figures emptied (``rules.rendered_text``), since no
+#: instrument but these reads the suite totals a close records.
+DOCUMENT_INSTRUMENTS: Tuple[str, ...] = ("figures",)
+
+
+def check_digest_mode(check: Check) -> str:
+    """Which reading of the documents an instrument is signed against."""
+    return "raw" if check.name in DOCUMENT_INSTRUMENTS else "rendered"
+
+
 def check_digest(check: Check) -> str:
     """The signature of an instrument: closure, schema, interpreter, command."""
     h = L._hasher()
     h.update(f"schema={L.SCHEMA}\0".encode("ascii"))
     h.update(f"python={L.interpreter_tag()}\0".encode("ascii"))
     h.update(("command=" + " ".join(check.command) + "\0").encode("utf-8"))
-    h.update(L.tree_digest(check_closure(check),
-                           root=L.REPOSITORY_ROOT).encode("ascii"))
+    mode = check_digest_mode(check)
+    h.update(f"mode={mode}\0".encode("ascii"))
+    h.update(L.tree_digest(check_closure(check), root=L.REPOSITORY_ROOT,
+                           mode=mode).encode("ascii"))
     return h.hexdigest()
 
 
@@ -277,7 +291,8 @@ def run_checks(all_units: bool = False, names: Sequence[str] = (),
                dry_run: bool = False,
                ledger_path: Optional[Path] = None,
                jobs: int = 1,
-               exhaustive: Optional[bool] = None) -> Dict[str, object]:
+               exhaustive: Optional[bool] = None,
+               exclude: Sequence[str] = ()) -> Dict[str, object]:
     """Run the stale instruments (or all of them) and update the ledger.
 
     ``jobs`` runs that many instruments at once.  They are independent
@@ -296,6 +311,9 @@ def run_checks(all_units: bool = False, names: Sequence[str] = (),
         chosen = list(rows)
     else:
         chosen = [u for u in rows if u.stale]
+    if exclude:
+        unwanted = set(exclude)
+        chosen = [u for u in chosen if u.name not in unwanted]
     skipped = [u for u in rows if u not in chosen]
     results: List[Dict[str, object]] = []
     started = time.monotonic_ns()

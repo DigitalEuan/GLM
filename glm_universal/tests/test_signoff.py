@@ -429,6 +429,28 @@ class TestDocumentClosure(unittest.TestCase):
         self.assertNotIn("native_parity.json", closure)
         self.assertNotIn("typed_plans.json", closure)
 
+    def test_the_toolbox_does_not_reach_the_document_address_book(self):
+        """Phase 114: the planner's units do not hold the document address book.
+
+        Every document edit rewrites ``corpus/_data/document_addresses.json``;
+        56 units used to hold it through the toolbox's two native tools, the
+        retrieval layer's word schemes and the AST index's sign test, none of
+        which reads it.  Those reaches now import ``golay_words``,
+        ``native_ledger`` and ``sign_test``, which name no document.
+        """
+        for unit in ("test_connected_machine.py", "test_question_frames.py",
+                     "test_stepwise.py", "test_retrieval.py",
+                     "test_ast_index.py"):
+            with self.subTest(unit=unit):
+                closure = {p.name for p in
+                           L.unit_closure(L.TESTS_DIR / unit)}
+                self.assertNotIn("document_addresses.json", closure)
+        for unit in ("test_native_words.py", "test_corpus.py"):
+            with self.subTest(unit=unit):
+                closure = {p.name for p in
+                           L.unit_closure(L.TESTS_DIR / unit)}
+                self.assertIn("document_addresses.json", closure)
+
     def test_the_document_index_is_by_name_and_holds_every_copy(self):
         index = L.document_index()
         self.assertIn("STATUS.md", index)
@@ -866,11 +888,11 @@ class TestWhyAUnitIsStale(unittest.TestCase):
         again = L.group_digests(self.unit_path())
         self.assertEqual(digests, again)
         groups = L.closure_groups(self.unit_path())
-        masked = not R.reads_rendered_regions(
-            [p for paths in groups.values() for p in paths])
+        mode = R.digest_mode(self.unit_path(),
+                             [p for paths in groups.values() for p in paths])
         for name, value in digests.items():
             self.assertEqual(
-                value, L.tree_digest(groups[name], masked=masked),
+                value, L.tree_digest(groups[name], mode=mode),
                 f"the {name} digest is not its group's tree digest")
 
     def test_the_reason_names_the_group_that_moved(self):
@@ -927,3 +949,228 @@ class TestWhyAUnitIsStale(unittest.TestCase):
 
 if __name__ == "__main__":  # pragma: no cover
     unittest.main()
+
+
+class TestTheCloseSettlesInOnePass(unittest.TestCase):
+    """Phase 109: a close no longer needs a second and third pass.
+
+    Three things made a close go round: the session summary sat in 51
+    closures and was rewritten between rounds; every render reader was
+    signed against the suite totals a close itself records; and the close
+    ran the document checks in the same pass as the units whose totals
+    they check.  Each is pinned here.
+    """
+
+    def test_a_run_figure_does_not_move_a_rendered_digest(self):
+        with tempfile.TemporaryDirectory() as folder:
+            doc = Path(folder) / "NOTE.md"
+            doc.write_text("<!--figure:suite-->5 tests<!--/figure--> and "
+                           "<!--figure:test-files-->2 test files"
+                           "<!--/figure-->\n", encoding="utf-8")
+            before = R.rendered_digest(doc)
+            doc.write_text("<!--figure:suite-->6 tests<!--/figure--> and "
+                           "<!--figure:test-files-->2 test files"
+                           "<!--/figure-->\n", encoding="utf-8")
+            self.assertEqual(before, R.rendered_digest(doc))
+            # any other figure is still read, byte for byte
+            doc.write_text("<!--figure:suite-->6 tests<!--/figure--> and "
+                           "<!--figure:test-files-->3 test files"
+                           "<!--/figure-->\n", encoding="utf-8")
+            self.assertNotEqual(before, R.rendered_digest(doc))
+
+    def test_the_recorded_totals_section_of_figures_md_is_left_out(self):
+        text = ("| `suite` | 5 tests across 1 of the 2 test files | x | y |\n"
+                "| `test_files` | 2 test files | x | y |\n\n"
+                "## The test suite\n\n| `collected` | 9 |\n\n"
+                f"## {R.RUN_SECTION_TITLE}\n\n| `tests` | 5 |\n")
+        rendered = R.rendered_text(text)
+        self.assertNotIn("`suite`", rendered)
+        self.assertNotIn("| `tests` | 5 |", rendered)
+        self.assertIn("| `test_files` | 2 test files", rendered)
+        self.assertIn("| `collected` | 9 |", rendered)
+
+    def test_the_section_title_is_the_one_figures_writes(self):
+        from glm_universal import figures as fg
+        titles = dict(fg._SECTION_TITLES)
+        for name in R.RUN_FIGURES:
+            self.assertIn(name, titles)
+        self.assertEqual(titles["suite"], R.RUN_SECTION_TITLE)
+
+    def test_the_three_readings_are_assigned_by_rule(self):
+        corpus = L.TESTS_DIR / "test_corpus.py"
+        self.assertEqual(R.digest_mode(corpus, L.unit_closure(corpus)), "raw")
+        plain = L.TESTS_DIR / "test_wobble.py"
+        closure = L.unit_closure(plain)
+        self.assertFalse(R.reads_rendered_regions(closure))
+        self.assertEqual(R.digest_mode(plain, closure), "written")
+        reader = R.PACKAGE_ROOT / "corpus" / "render.py"
+        self.assertEqual(R.digest_mode(plain, closure + (reader,)),
+                         "rendered")
+        self.assertEqual(C.check_digest_mode(C.checks_by_name()["figures"]),
+                         "raw")
+        self.assertEqual(
+            C.check_digest_mode(C.checks_by_name()["evaluation"]),
+            "rendered")
+
+    def test_a_docstring_reader_is_one_that_uses_the_name(self):
+        # Spelling ``__doc__`` in prose or in a string is not reading it:
+        # the substring test this replaced made the ledger's own rules a
+        # docstring reader, and so put every document any docstring
+        # mentions into some sixty closures.
+        self.assertFalse(R._uses_docstrings('"""Reads __doc__."""\nX = 1\n'))
+        self.assertFalse(R._uses_docstrings('S = "get_docstring"\n'))
+        self.assertTrue(R._uses_docstrings("import m\nD = m.__doc__\n"))
+        self.assertTrue(R._uses_docstrings("print(__doc__)\n"))
+        self.assertTrue(R._uses_docstrings(
+            "from ast import get_docstring\n"))
+        self.assertFalse(R._reads_docstrings(R.PACKAGE_ROOT / "signoff"
+                                             / "rules.py"))
+
+    def test_the_document_checks_hold_every_written_document(self):
+        # They read the corpus by walking it, so a document nobody names is
+        # still one of their inputs.
+        from glm_universal.corpus import inventory as inv
+        written = {(L.REPOSITORY_ROOT / p).resolve()
+                   for p in inv.document_paths()}
+        self.assertEqual(written, set(R.written_documents()))
+        for name in L.DOCUMENT_CHECKS:
+            closure = set(L.unit_closure(L.TESTS_DIR / name))
+            self.assertLessEqual(written, closure, name)
+
+    def test_the_status_document_is_in_few_closures(self):
+        status = (L.REPOSITORY_ROOT / "STATUS.md").resolve()
+        for name in ("test_symbolic.py", "test_stack.py"):
+            self.assertNotIn(status, L.unit_closure(L.TESTS_DIR / name),
+                             name)
+
+    def test_the_session_notes_are_in_no_closure(self):
+        note = R.SESSION_NOTES[0]
+        for name in ("test_corpus.py", "test_figures.py",
+                     "test_symbolic.py", "test_stack.py"):
+            closure = {p.name for p in L.unit_closure(L.TESTS_DIR / name)}
+            self.assertNotIn(note, closure, name)
+
+    def test_the_document_checks_are_not_counted(self):
+        counted = {p.name for p in L.counted_units()}
+        for name in L.DOCUMENT_CHECKS:
+            self.assertNotIn(name, counted)
+        self.assertEqual(set(C.DOCUMENT_INSTRUMENTS), {"figures"})
+
+    def test_counted_failures_is_the_recording_condition(self):
+        units = {p.name: {"status": "passed", "mode": "full"}
+                 for p in L.counted_units()}
+        self.assertEqual(L.counted_failures({"units": units}), ())
+        first = L.counted_units()[0].name
+        units[first] = {"status": "failed", "mode": "full"}
+        self.assertEqual(L.counted_failures({"units": units}), (first,))
+
+    def _patched_close(self, *, owed, stale_docs, moved=(), caches=()):
+        """Run ``_close`` with the runners replaced by a recorder."""
+        from glm_universal.signoff import __main__ as M
+        calls = []
+        saved = {name: getattr(M, name) for name in
+                 ("_run", "_run_checks", "_refresh_corpus", "_stale_names",
+                  "_print_verify", "_stale_caches", "_retake_caches")}
+        saved_owed = M.L.counted_failures
+        state = {"docs": list(stale_docs), "moved": list(moved),
+                 "caches": list(caches)}
+
+        def retake():
+            calls.append(("retake", tuple(m for m, _ in state["caches"])))
+            state["caches"] = []
+            return 0
+
+        def run(all_units, jobs=1, exhaustive=None, only=None, exclude=()):
+            calls.append(("run", tuple(only) if only else None,
+                          tuple(exclude)))
+            if only:
+                state["docs"] = []
+            return 0
+
+        def run_checks(all_units, jobs=1, exhaustive=None, names=(),
+                       exclude=()):
+            calls.append(("checks", tuple(names), tuple(exclude)))
+            return 0
+
+        def stale(exclude_units=(), exclude_checks=(), only_units=None,
+                  only_checks=None):
+            if only_units is not None:
+                return tuple(state["docs"])
+            out, state["moved"] = tuple(state["moved"]), []
+            return out
+
+        M._run, M._run_checks = run, run_checks
+        M._refresh_corpus = lambda: calls.append(("refresh",)) or 0
+        M._stale_names = stale
+        M._print_verify = lambda full=False: 0
+        M._stale_caches = lambda: tuple(state["caches"])
+        M._retake_caches = retake
+        M.L.counted_failures = lambda ledger=None: tuple(owed)
+        try:
+            code = M._close(jobs=2)
+        finally:
+            for name, value in saved.items():
+                setattr(M, name, value)
+            M.L.counted_failures = saved_owed
+        return code, calls
+
+    def test_a_close_runs_package_then_refresh_then_document_checks(self):
+        code, calls = self._patched_close(
+            owed=(), stale_docs=("test_figures.py", "figures"))
+        kinds = [c[0] for c in calls]
+        self.assertEqual(kinds, ["run", "checks", "refresh", "run", "checks"])
+        self.assertEqual(calls[0][2], tuple(L.DOCUMENT_CHECKS))
+        self.assertEqual(calls[3][1], tuple(L.DOCUMENT_CHECKS))
+        self.assertEqual(calls[4][1], ("figures",))
+        self.assertEqual(code, 0)
+
+    def test_a_stale_cache_is_re_taken_before_the_package_runs(self):
+        code, calls = self._patched_close(
+            owed=(), stale_docs=("test_figures.py",),
+            caches=(("query_escalation", "queryesc"),))
+        kinds = [c[0] for c in calls]
+        self.assertEqual(kinds, ["retake", "run", "checks", "refresh", "run"])
+        self.assertEqual(calls[0][1], ("query_escalation",))
+        self.assertEqual(code, 0)
+
+    def test_no_cache_stale_means_no_stage_zero(self):
+        _, calls = self._patched_close(owed=(), stale_docs=())
+        self.assertNotIn("retake", [c[0] for c in calls])
+
+    def test_the_re_taking_command_is_the_census_command(self):
+        from glm_universal.corpus import caches as ca
+        from glm_universal.signoff import __main__ as M
+        commands = ca.commands_by_module()
+        for module, command in M._stale_caches():
+            if module == "citation_reference":
+                self.assertEqual(command, M.REFERENCE_COMMAND)
+                continue
+            self.assertEqual(commands[module], command)
+
+    def test_the_reference_command_is_one_the_tool_has(self):
+        from glm_universal import tools
+        from glm_universal.signoff import __main__ as M
+        name, flag = M.REFERENCE_COMMAND.split()
+        args = tools._parser().parse_args([name, flag])
+        self.assertTrue(args.reference)
+
+    def test_a_failing_counted_unit_defers_the_document_checks(self):
+        code, calls = self._patched_close(
+            owed=("test_query_escalation.py",),
+            stale_docs=("test_figures.py",))
+        self.assertEqual([c[0] for c in calls], ["run", "checks"])
+        self.assertEqual(code, 1)
+
+    def test_a_refresh_that_moves_a_package_unit_runs_it_again(self):
+        code, calls = self._patched_close(
+            owed=(), stale_docs=("test_corpus.py",),
+            moved=("test_symbolic.py",))
+        kinds = [c[0] for c in calls]
+        self.assertEqual(kinds, ["run", "checks", "refresh", "run", "checks",
+                                 "refresh", "run"])
+        self.assertEqual(code, 0)
+
+    def test_nothing_stale_in_the_documents_means_no_refresh(self):
+        code, calls = self._patched_close(owed=(), stale_docs=())
+        self.assertNotIn(("refresh",), calls)
+        self.assertEqual(code, 0)

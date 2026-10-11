@@ -7,7 +7,7 @@
 
 **Verdict.** Everything is exact `int` / `fractions.Fraction` / `F_2`; nothing here imports `random`.
 
-**Deciding figure.** 122 modules, one frozen data file, and a runnable audit.
+**Deciding figure.** 169 modules, one frozen data file, and a runnable audit.
 
 **Recomputed by.** `glm_universal.reasoning.reasoning_report`
 
@@ -16,7 +16,7 @@
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 
-**Status: implemented (GLM-3+ Step 3, extended since).** **122 modules**, one
+**Status: implemented (GLM-3+ Step 3, extended since).** **169 modules**, one
 frozen data file,
 and a runnable audit. Everything is exact `int` / `fractions.Fraction` /
 `F_2`; nothing here imports `random`; nothing here imports a third-party
@@ -67,6 +67,24 @@ Sections 1–4 below describe these in detail.
 | `deep_holes.py` | the Niemeier type of the hole a carrier sits in, read off the walk's trajectory and certified, against a derived catalogue | `report deep holes` |
 | `deep_hole_classifier.py` | the pre-registered question *can the distribution of trajectories arriving at a hole name the hole?*: a declared 240-start ensemble, the arrival-share profile as the statistic, a nearest-reference rule with a stated refusal, and four controls of which the plain vertex count is the competitor that matters. Exact throughout, cached behind a digest of its sources | `report hole classifier` |
 | `deep_hole_escalation.py` | the second deep-hole round: was the first round's failure the geometry or the layer it was read at?  A ladder of four readings — the first round's arrival shares, those shares widened by the strays it discarded, the exact rational measure of emission distances, and the two joined — at 240, 480, 960 and 1920 nested starts, with one gate: every reference hole recognises itself under a bare seed change.  The bottom rung reproduces the first round at 3 of 10, the best pre-registered cell reaches 9, and the extension rung reaches the gate at 10 of 10, where the full query set is 40 of 44 against 12 for the vertex count | `report hole ladder` |
+| `stray_blind.py` | lattice item 10 (Phase 110): which pairs of deep holes a reading of distances alone must conflate.  The distance profile of an emission record is the arrivals at the one covering radius plus the stray spectrum, so two records of equal size are conflated exactly when their stray spectra agree, whatever their types (`GLM.StrayBlind.distances_eq_iff`); the census checks that prediction against the escalation ladder's own ensembles at every size — one radius for all ten holes, the predicted pairs equal the measured `L₃` conflations (`A_1^24`/`A_2^12`), so the `L₃` ratio is undefined wherever they persist | `tools stray-blind` |
+| `share_ensemble.py` | lattice item 6 (Phase 121): the escalation ladder's ensembles extended from 1920 to 30720 starts at both seeds for the ten reference holes, run by `deep_hole_escalation.emissions` unchanged and stored as sufficient statistics (each emitted point with its exact squared distance and count, at every prefix size) beside the digest of the code that emitted them | `tools share-ensemble --write` |
+| `share_separation.py` | lattice item 6 (Phase 121): the ladder's readings and cell statistics (`Q0`, `W`, `B`, `rho`) applied to the stored ensembles at every size from 240 to 30720, the per-hole ratio (`GLM.ShareSeparation.nearest_correct_local`) and the bound of `share_shift_le_matched` (sorted shift at most the vertex-matched shift) at every hole and size; the ladder's sixteen cells reproduced exactly | `tools share-separation` |
+| `configuration_reading.py` | lattice item 6, the 28-vertex pair (Phase 122): the configuration reading `L5` — the arrival vertices joined as the hole's affine Dynkin diagram (one edge at squared distance `3r²`, two at `4r²`), each keyed by its component size and degree, the arrival shares pushed forward along the key — applied to the stored ensembles at every size, with the ladder's cell statistics, the control against the declared diagrams, the bound against the vertex-matched shift and the uniform-limit distances of all 23 Niemeier types | `tools configuration-reading`; `RequestProject/GLM/ConfigurationReading.lean` |
+| `hole_census.py` | lattice item 7 (Phase 123): a reference centre for each of the thirteen Niemeier types the ten reference holes do not cover, in three declared stages (the declared walk continued for 2,048 seeds, the `Ã_n` cycle construction for a type with an `A_n` component, the pilot's seeds), each certified by the frozen path, and every new reference's ensemble at both seeds to 7680 starts stored as sufficient statistics | `tools hole-census --write` |
+| `configuration_queries.py` | Phase 123, part B: the `L5` profiles of the escalation round's 44 deep-hole queries and of the ten references at 1920 starts, with the joint reading's verdict on each query (the stopping rule), stored beside the digest of their sources | `tools configuration-classifier --write` |
+| `configuration_classifier.py` | Phase 123, part B: `L5` in the deep-hole answering path — answer the nearest reference only inside half its distance to the nearest other reference (`GLM.LatticeCompletion.config_answer_sound`), else refuse; every other type outside its certified radius issued as a certified absence (`config_absent`, which is `GLM.DeepHoleFailure.per_type_absent` at `L5`); against the ten references and against all 23 | `tools configuration-classifier`; `report hole configuration`; `RequestProject/GLM/LatticeCompletion.lean` |
+| `empty_rungs.py` | lattice item 3 (Phase 123): Construction A candidates for the empty norms 2 and 256 of the power-of-two ladder (`D12^2`, `D8^3`, `D4^6`; `8E8^3`, `8D4^6`), their minimum norms and kissing numbers by enumeration, exact block-by-block quantisers checked locally, and the declared filling rule run through the norm family's audit and retirement rule | `tools empty-rungs --write` |
+| `lattice_completion.py` | Phase 123: the `L5` cell over all 23 reference holes at every size, the control on the new holes, and every mark of the lattice round, read from the three stores | `report hole configuration` |
+| `patience_census.py` | Phase 123, part A, post hoc: the three census centres the second certifying reading could not finish, re-read with 1,600 probes and a patience of 240 starts; all three certified as the type the walk named, and their ensembles taken to 7680 starts | `tools patience-census` |
+| `frozen_path.py` | Phase 123, mark B5: every evaluation case before the round, as the query-escalation store recorded it, asked again; status kept for 178 of 178, and every moved text listed with a declared cause | `tools frozen-path` |
+| `probe_budget.py` | Phase 124: the certifying reading with no barren stop and a budget of 1056 starts (`GLM.ProbeBudget.budget_serves_every_type`); the share hypothesis on the stored ensembles, the 23 references and 256 held-out walks under the rule and under the census convention | `tools probe-budget` |
+| `ops_ladder.py` | Phase 125: the owner's DevOps-ladder note as a register — 97 terms in ten tiers, each a declared composition of lower ones; the relation reader (part of, shared parts, least common terms, ground overlap), a carrier and codec per term, the projection onto the Geometric–Cybernetic ladder and 14 cross-overs to objects the package already held | `tool ladder`; `tools ops-ladder` |
+| `batch_machine.py` | Phase 125: GLM-BAT, a declared fragment of the batch language, and its machine over an in-memory file system; the control-state cycle certificate (`GLM.OperationsLadder.never_halts_of_projected_repeat`), idempotence in state, drift and the reconciling program, pipelines with rollback, unreachable lines; Phase 126 added `inert_variables`, `is_closed_inert` and the forgetful re-reading of an undecided run (`GLM.InertCounter.never_halts_of_inert_repeat`) | `tool machine` |
+| `batch_speech.py` | Phase 125: each GLM-BAT instruction as one English sentence and back, programs written in English, the questions a program can be asked, and column 3 — a standalone Python transpilation run under `python3 -I`, with its mutations | `tool machine` |
+| `inert_counter.py` | Phase 126: the inert-variable battery N1–N10, its questions, the `never_inert` certificates and mutations, the non-interference on Phase 125 and the soundness control (marks I2–I6); the rule itself is `batch_machine.inert_variables` | `tools inert-counter` |
+| `norm256_hex.py` | Phase 127: the norm-256 rung of the power-of-two family — the candidates `R256`, `16Z` and `H16` (first-hex-digit reading, proved nearest by `GLM.HexRung.floor_bucket_nearest`), the hex-colour membership shortcut for the rotated Leech rung, the filled ladder and its held-out reading (marks H1–H8) | `tools norm256-hex [--write]` |
+| `operations.py` | Phase 125: the battery M1–M25, E1–E6, Q1–Q18 and R1–R5, the marks O2–O9, and the post-hoc agreement of the machine and column 3 on generated programs | `tools ops-ladder [--agreement]` |
 | `blueprint.py` | `glm_unification_blueprint.md` turned into a live claim ledger: every testable sentence recomputed against the package, each given one of four verdicts | `report blueprint` |
 | `engine.py` | the thermo-dynamic carrier engine of Part III assembled from parts the package already had — cam, accumulator, escapement, lattice snap, radiator, turbocharger, gearbox — so the section's headline precision figure is measured rather than quoted | `report engine` |
 | `mantissa.py` | IEEE-754 binary64 modelled exactly in integers and `Fraction` (no float is ever constructed) and its bit allocation compared against the exact binary expansion, so floating-point drift is *located* | `report mantissa` |
@@ -822,3 +840,214 @@ Phase 89
 logarithms of primes, checked by `log_identity_holds` in integers only) and
 `Poly` (rational polynomials, Routh's cubic condition, and exact root
 isolation by Sturm sequences). No float anywhere.
+
+## `citation_reference.py`, `citation_scope.py`, `proof_dependency.py` — citations in Lean's scope, and what rests on what
+
+Phase 101
+([`../../../studies/CITATION_SCOPE_STUDY.md`](../../../studies/CITATION_SCOPE_STUDY.md)):
+`lean_address.citation_graph` reads citations in Lean's scope — comments and
+strings stripped, bound names (binders, quantifiers, lambdas, tactic
+introductions, match arms, `variable` lines) never citations, short names
+resolved through the enclosing namespaces and `open` lines — and
+`legacy_citation_graph` keeps the Phase 100 reader, whose context-free
+`citation_index` read a bound `a` as `GLM.Heisenberg.a`.
+`citation_reference.py` stores the elaborator's own constant graph (written
+by `glm_lean/tools/CitationReference.lean`) beside the tree digest and audits
+any reader against it; `citation_scope.py` is the measurement (`tools
+citation-scope`). `proof_dependency.py` answers *does A rest on B*, *what does
+A rest on* and *what rests on A* from the reference, with a witness path and
+a column-3 script that re-checks it, refusing an unknown or ambiguous name or
+a stale reference (`tools dependency`; framed by
+`runtime/dependency_frames.py`).
+
+## `document_tree.py` — the document tree as a third native book, on a frozen corpus
+
+Phase 102
+([`../../../studies/DOCUMENT_TREE_STUDY.md`](../../../studies/DOCUMENT_TREE_STUDY.md)):
+a digest-guarded snapshot of the written corpus
+(`_data/document_tree_frozen.json`) that every figure is read from, so the
+document benchmark no longer moves with the documents; three Golay tree words
+(`path`, the document; `folder`; `place`, the section's ordinal counted from
+both ends); and the census of eight rankings with every unit a query. The
+`path` word reads the relevance relation (the leak control); the `place` word
+in the third layer changes no hit. `tools document-tree` (`--freeze`,
+`--write`).
+
+## `ast_index.py` — where an expression is already computed
+
+Phase 105
+([`../../../studies/AST_INDEX_STUDY.md`](../../../studies/AST_INDEX_STUDY.md)):
+a digest-guarded snapshot (`_data/ast_index_frozen.json`) of every
+statement-level expression that computes something in the live code and in
+the archived GLM tree; a structural form that keeps keywords and exact
+constants and treats a method's receiver as a variable; a bucket key that no
+renaming and no commutation can move; a backtracking matcher that returns the
+witnessing renaming; and a separately written brute-force reference that
+every column-3 script carries. The operation *where is `EXPR` computed?* is
+framed by `runtime/ast_index_frames.py`; `tools ast-index` (`--freeze`,
+`--write`, `--ask`).
+
+## `proof_search.py` — propositional proofs and countermodels
+
+Phase 106
+([`../../../studies/DERIVATION_STUDY.md`](../../../studies/DERIVATION_STUDY.md)):
+formulas and sequents, a G4ip prover (Dyckhoff's contraction-free calculus:
+the search terminates and is complete for intuitionistic propositional
+logic), truth tables, Kripke countermodels of at most four worlds, an
+independent rule-by-rule proof checker, and a classical proof from the
+fewest instances of excluded middle when no constructive one exists. The
+operation `prove: PREMISES |- GOAL` is framed by
+`runtime/derivation_frames.py`; `tools derivation`.
+
+## `routes.py` — choosing a method by what is decided
+
+Sharpening pass after Phase 108 (recorded in
+[`../../../STATUS.md`](../../../STATUS.md) and
+[`../../../MASTER_PLAN.md`](../../../MASTER_PLAN.md)): a decision point names
+its candidate routes, each with the fact that makes it sound here, and
+`choose` takes the first whose fact holds, records it, and the caller writes
+the reason into column 2. `facts(...)` lets a caller state what it knows that
+the callee cannot see (the equations of motion state that a definite pencil's
+roots are real); `disabled(...)` and `as_shipped(...)` switch a route off for
+a measurement, so a round's marks are read on the code that round shipped.
+Two decision points so far: `cubic.letters` (Viète, Cardano, or both regimes
+as cases) in `symbolic_nonlinear.py`, and `modes.cubic` (the stepwise cubic,
+or the branch layer) in `derivation.py`. `describe()` lists them.
+
+## `derivation.py` — equations of motion, transfer functions, profiles
+
+Phase 106
+([`../../../studies/DERIVATION_STUDY.md`](../../../studies/DERIVATION_STUDY.md)):
+Euler–Lagrange equations by exact symbolic differentiation, each divided by
+a stated nonzero factor; linearisation about the origin and normal modes
+through `symbolic_nonlinear`; transfer functions of a model linearised about
+its steady state; and flux-form boundary value profiles by two quadratures.
+Framed by `runtime/derivation_frames.py`, whose column-3 scripts
+(`runtime/derivation_scripts.py`) re-decide every answer in exact arithmetic
+without importing the package; `tools derivation`.
+
+## `symbolic_factor.py` — factoring past degree six, and roots with no radical form
+
+Phase 112
+([`../../../studies/QUINTIC_RADICAL_STUDY.md`](../../../studies/QUINTIC_RADICAL_STUDY.md)):
+Zassenhaus's algorithm over the integers (modular factoring by distinct- and
+equal-degree splitting, Hensel lifting past twice the Mignotte bound,
+recombination by exact division), which `symbolic_algebraic.factor_rational`
+calls past degree 6; and the radical-free certificate (irreducible, prime
+degree at least 5, exactly two non-real roots), which
+`symbolic_nonlinear.py` states for a root and, for a polynomial in letters,
+at a specialised point. Proved in `RequestProject/GLM/QuinticRadicals.lean`;
+`tools quintic-radical`. Phase 113
+([`../../../studies/FROBENIUS_RADICAL_STUDY.md`](../../../studies/FROBENIUS_RADICAL_STUDY.md))
+added the Frobenius certificate: the factor degrees modulo a prime not
+dividing the discriminant, read as the cycle type of a Frobenius element
+(Dedekind, not proved in Lean), and when that shape is not affine, no root is
+expressible in radicals by Galois's theorem on groups of prime degree.
+Proved in `RequestProject/GLM/FrobeniusRadicals.lean`;
+`tools frobenius-radical`.
+Phase 116
+([`../../../studies/PRIMITIVE_DEGREE_STUDY.md`](../../../studies/PRIMITIVE_DEGREE_STUDY.md))
+added `radical_free_degree`: in a degree that is not a prime power, one
+Frobenius element of cycle type `(n - 1, 1)` makes the group primitive, and a
+solvable primitive group has prime-power degree, so no root is expressible in
+radicals. Proved in `RequestProject/GLM/PrimitiveDegree.lean`;
+`tools primitive-degree`. The exact objects its marks read — `PGL(2, 5)` and
+`PSL(2, 5)` as permutations, the Cayley sextics, the reach battery — are in
+`primitive_degree_groups.py`, kept apart from the report so its tests stay
+below the frames.
+
+## `info_inequality.py` — information inequalities
+
+Phase 107
+([`../../../studies/DERIVATION_TWO_STUDY.md`](../../../studies/DERIVATION_TWO_STUDY.md)):
+a linear inequality in entropies and mutual informations of up to four
+variables, written in joint entropies and decided three ways — a
+Shannon-type certificate found by an exact rational simplex, a distribution
+of linear functions of fair bits (GF(2)) that violates it, or, when neither
+exists, a Farkas polymatroid witness and the verdict `NOT_SHANNON`. Framed by
+`runtime/derivation_two_frames.py` (`prove information inequality: GIVENS
+|- CLAIM`); `tools derivation-two`.
+
+## `coding_theory.py` — codes, rate distortion, the rate posterior
+
+Phase 107: Sardinas–Patterson with the shortest ambiguous string, Kraft
+sums and canonical prefix codes; the Hamming rate–distortion function by the
+Shannon lower bound and its backward test channel, printed only where the
+bound is tight (`NOT_TIGHT` on the gap); the BSC rate posterior read on the
+machine's rate grid.
+
+## `maxent.py`, `spectral.py`, `fft_derivation.py`
+
+Phase 107: maximum-entropy densities with their entropies; eigenvalue
+problems `y'' + λy = 0` with separated or periodic conditions, the sign cases
+of `λ` settled by the determinant of the boundary rows, and transmission
+through a delta and/or a step at one point by complex Cramer's rule; the
+radix-2 FFT split, butterflies and bit-reversed order. Column-3 scripts in
+`runtime/derivation_two_scripts.py`; proved facts in
+`RequestProject/GLM/DerivationsTwo.lean`.
+
+## `non_shannon.py`, `hamming_rd.py`, `robin.py` — past the second derivation study
+
+Phase 118
+([`../../../studies/DERIVATION_THREE_STUDY.md`](../../../studies/DERIVATION_THREE_STUDY.md)):
+`non_shannon.py` takes a claim `info_inequality.py` leaves `NOT_SHANNON` and
+tries a certificate that also uses the Zhang–Yeung inequality, each instance
+certified by the copy lemma over five variables (`proved_non_shannon`), then a
+pool of rational distributions whose entropies — rational combinations of
+logarithms of primes — are compared exactly (`NOT_VALID_ENTROPIC`).
+`hamming_rd.py` gives the Hamming rate–distortion function on the whole range
+`0 ≤ D ≤ D_max`, piece by piece, with a rational test channel and dual point
+meeting exactly (Blahut–Arimoto kept only as a cross-check). `robin.py` solves
+`y'' + λy = 0` with one Robin end and a Dirichlet or Neumann end: the
+characteristic equation, the interval of each root, the negative eigenvalue
+when there is one, and rational enclosures from fixed-point series with
+bounded remainders. Framed by `runtime/derivation_three_frames.py` (handed
+over from the Phase 107 operations); column-3 scripts in
+`runtime/derivation_three_scripts.py`; `tools derivation-three`; proved facts
+in `RequestProject/GLM/NonShannon.lean`.
+
+## `copy_chain.py`, `general_rd.py`, `robin_two.py` — past the third derivation study
+
+Phase 119
+([`../../../studies/DERIVATION_FOUR_STUDY.md`](../../../studies/DERIVATION_FOUR_STUDY.md)):
+`copy_chain.py` takes a claim Zhang–Yeung leaves undecided and searches for a
+Shannon-type certificate over two chained copies (`proved_by_copies`), and
+runs the exact search on five variables; the copy lemma it rests on is proved
+for every finite distribution in `RequestProject/GLM/CopyLemma.lean`.
+`general_rd.py` gives rigorous rational enclosures of the rate–distortion
+function for any finite distortion matrix, an upper bound from a test channel
+and a lower bound from a dual point. `robin_two.py` solves `y'' + λy = 0` with
+Robin conditions at both ends (both coefficients positive), with a symbolic
+coefficient at the far end, and with closed-form arctangent bounds on a
+symbolic interval (`RequestProject/GLM/RobinBoth.lean`). Framed by
+`runtime/derivation_four_frames.py`; column-3 scripts in
+`runtime/derivation_four_scripts.py`; `tools derivation-four`.
+
+## `meta_evidence.py` — questions about the machine, answered from its documents
+
+Phase 117
+([`../../../studies/META_QUESTIONS_STUDY.md`](../../../studies/META_QUESTIONS_STUDY.md)):
+eighteen topics, each a cue, the sentences it quotes from six studies (found
+by a declared fragment when the question is read, as the sentence, table row
+or list item that holds it, with its section heading), the Lean declarations
+it cites (found in the stored address book `_data/lean_addresses.json`, never
+the tree), code facts, the premises the documents contradict and a column-3
+script. A fragment or declaration that has moved makes the reading the
+refusal `CITATION_MOVED`. Framed by `runtime/meta_frames.py`, last among the
+frames; `tools meta-questions`; proved facts in
+`RequestProject/GLM/MetaAnswers.lean`.
+
+## `explanation_anchors.py` — why questions, answered in the part that is decided
+
+Phase 120
+([`../../../studies/EXPLANATION_ANCHOR_STUDY.md`](../../../studies/EXPLANATION_ANCHOR_STUDY.md)):
+thirty-five topics, one per declared outside question that asks *why*. Each
+answers the part a register or an exact derivation decides — values read from
+the element register or the nuclide register (`data_objects/nuclides.py`,
+AME2020 and NUBASE2020) with the rows named, closed statements derived with
+outward-rounded rational enclosures for roots, logarithms, exponentials, π
+and the sine integral — states the account it asks for as refused
+`EXPLANATION`, reports a register that contradicts the premise as a dispute,
+and carries a column-3 script that embeds the rows it read. Framed by
+`runtime/explanation_frames.py`, after the meta frames; `tools explanations`;
+proved facts in `RequestProject/GLM/ExplanationAnchors.lean`.

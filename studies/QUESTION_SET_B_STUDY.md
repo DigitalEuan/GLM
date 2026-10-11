@@ -191,7 +191,10 @@ refuses AMBIGUOUS and carries the fork.
 **Two vacuous answers** (71, 82): the planner's denotation frame "answers"
 that the question's text denotes nothing determinate. Not a wrong value, but
 an answer where a refusal is due — a located defect of the planner, recorded
-for the next round.
+for the next round. *Phase 114 fixed it:* the meaning frame now reads a
+remainder that is a whole sentence as an unknown question, so both are
+refused; the score of the set is unchanged. The table below keeps the
+reading as it was measured.
 
 ### 4.1 Every question
 | # | set | diff | n | class | reader | verdict (first words) |
@@ -405,17 +408,23 @@ already is from it:
    scoring rule, the `python3 -I` sandbox, Lean templates, overflow in exact
    arithmetic, the splinter cap. The answers exist in the studies; a frame
    that answers from the project's own documents (the address book and the
-   corpus) is the route.
+   corpus) is the route. Taken in Phase 117: all eighteen are answered from
+   the studies, the code and the Lean development, with quotes checked when
+   read ([`META_QUESTIONS_STUDY.md`](META_QUESTIONS_STUDY.md)).
 4. **E, explanations (32).** The Elements, nuclear physics and logic
    sections ask *why*. No exact frame answers them; the honest reading is the
    current refusal. The periodic-table and nuclide registers could anchor
    the factual parts (Z, N, magic numbers, binding energies), leaving the
-   explanation as a refusal.
+   explanation as a refusal. Taken in Phase 120, with questions 29, 39 and 96:
+   all thirty-five are answered in the part the element register, a new
+   nuclide register (AME2020 and NUBASE2020) or an exact derivation decides,
+   the account refused `EXPLANATION`
+   ([`EXPLANATION_ANCHOR_STUDY.md`](EXPLANATION_ANCHOR_STUDY.md)).
 5. **D (3), T (1).** Designs and diagrams stay refusals; arctan would close
    the one transcendental equation (`ω_co` of `e^{−0.5s}/(s+1)` solves
    `0.5ω + arctan ω = π`), and is a small addition to `transcendental.py`.
 6. **The two vacuous answers** — the planner's denotation frame should refuse
-   a text that is a question rather than a term.
+   a text that is a question rather than a term. Done in Phase 114 (`runtime/parser.py`).
 
 ## 9. Re-running
 

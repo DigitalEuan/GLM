@@ -246,6 +246,13 @@ REGISTRY: Tuple[Row, ...] = (
         ("reasoning/deep_hole_failures.py",),
         "hole failures",
         ("DeepHoleFailure.lean",)),
+    Row("lattice-completion", "the configuration reading answers, all 23 "
+        "Niemeier types are reached, and the empty norms are tried",
+        "LATTICE_COMPLETION_STUDY.md",
+        ("reasoning/lattice_completion.py",
+         "reasoning/configuration_classifier.py"),
+        "hole configuration",
+        ("LatticeCompletion.lean",)),
     Row("cumulativity", "a layer ships with its refinement check",
         "CUMULATIVITY_STUDY.md",
         ("reasoning/cumulativity.py",),

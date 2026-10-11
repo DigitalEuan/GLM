@@ -387,6 +387,8 @@ XOR_SITES: Tuple[Tuple[str, Tuple[str, ...], str], ...] = (
      "this module: the classification itself, and the fibre census"),
     ("reasoning/deep_dive.py", ("metric",),
      "Hamming separation between the layers of a dive"),
+    ("reasoning/document_tree.py", ("metric",),
+     "Hamming distance between Golay tree words of two sections"),
     ("reasoning/agree_channel_marks.py", ("group-law", "metric"),
      "translates an error pair by a codeword in F2^24 and reads the summed "
      "distances from the two reads to every codeword"),
@@ -411,6 +413,9 @@ XOR_SITES: Tuple[Tuple[str, Tuple[str, ...], str], ...] = (
      "from the received word to the fork's cases"),
     ("reasoning/python_speech.py", ("group-law",),
      "Python's own ^ on ints and frozensets, spoken as addition in F2^n"),
+    ("reasoning/ast_index.py", ("group-law",),
+     "Python's own ^ on ints, evaluating an indexed expression that uses it "
+     "(the soundness check of the AST index, Phase 105)"),
     ("reasoning/python_substrate.py", ("group-law", "metric"),
      "sub-register xor gates and Golay masks; Hamming distance for match"),
     ("reasoning/dimension_layers.py", ("group-law", "metric"),
@@ -427,6 +432,8 @@ XOR_SITES: Tuple[Tuple[str, Tuple[str, ...], str], ...] = (
     # contains no ``^`` at all and the row was retired: a declared site that
     # the tree no longer contains is reported as stale by xor_inventory, which
     # is exactly the drift the inventory exists to catch.
+    ("reasoning/info_inequality.py", ("group-law",),
+     "GF(2) rank of linear forms: Gaussian elimination adds rows in F2^n"),
     ("reasoning/law_absorption.py", ("group-law", "metric"),
      "adds an error pattern to a codeword in F2^24 and reads the decoding "
      "confidence as Hamming distances to every codeword (the brute check)"),
@@ -435,6 +442,9 @@ XOR_SITES: Tuple[Tuple[str, Tuple[str, ...], str], ...] = (
      "outcomes and weight moments as Hamming distances"),
     ("reasoning/llvq_table.py", ("group-law",),
      "coset representatives of the lookup table"),
+    ("reasoning/meta_evidence.py", ("group-law",),
+     "row-reducing the Golay masks to twelve generators for a column-3 "
+     "script (Phase 117)"),
     ("reasoning/monster_stack.py", ("group-law", "retired"),
      "plane-wise group law, and compose_xor -- the retired Sakuma shortcut, "
      "kept so shortcut_loss_report can count what it discarded"),

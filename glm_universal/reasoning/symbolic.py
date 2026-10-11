@@ -384,6 +384,15 @@ def poly_gcd(a: Poly, b: Poly) -> Poly:
         return _monic(a)
     if a.is_const() or b.is_const():
         return Poly.const(1)
+    if len(a.t) == 1 or len(b.t) == 1:
+        # a monomial divides only monomials: the gcd is the common part of
+        # the two monomial contents (sharpening pass: a monomial leading
+        # coefficient, as a chain pendulum's, made every division in
+        # Cardano's coefficients a full recursive gcd)
+        da, db = dict(a.monomial_content()), dict(b.monomial_content())
+        common = {v: min(e, db[v]) for v, e in da.items() if v in db}
+        return Poly({tuple(sorted((v, e) for v, e in common.items()
+                                  if e)): Fraction(1)})
     if not (a.vars() & b.vars()):
         # no shared variable: only a common factor in the shared-free
         # contents could remain, i.e. monomial-free polynomials are coprime
@@ -917,6 +926,10 @@ def _mono_text(m: Mono, py: Optional[Dict[str, str]] = None) -> str:
             continue
         if e == 1:
             parts.append(name)
+        elif py is None and "^" in name:
+            # a power of a radical atom: (2^(1/4))^2, never 2^(1/4)^2, which
+            # reads as 2^(1/16) (found in Phase 104)
+            parts.append(f"({name})^{e}")
         else:
             parts.append(f"{name}**{e}" if py is not None else f"{name}^{e}")
     return "*".join(parts)

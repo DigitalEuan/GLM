@@ -87,7 +87,8 @@ class TestSolveSymbolically(unittest.TestCase):
 
     def test_refusals_by_name(self):
         for cid, q, code in C.REFUSALS:
-            self.assertEqual(SF.read_system(q).code, code, cid)
+            self.assertEqual(SF.read_system(q, nonlinear=False).code, code,
+                             cid)
 
     def test_four_unknowns_by_cramer(self):
         q = ("solve symbolically for a, b, c, d, e: a + b = p; b + c = q; "

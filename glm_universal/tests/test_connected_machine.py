@@ -33,7 +33,10 @@ class TestTheRouterReadsOnlyWhatItShould(unittest.TestCase):
     def test_no_contract_case_is_diverted(self):
         c = self.census["contract"]
         self.assertEqual(c["planner"], sum(c.values()))
-        self.assertEqual(c["planner"], 177)
+        # 177 -> 178 at Phase 109: the evaluation case report-routes.
+        # 178 -> 179 at Phase 123: the evaluation case
+        # report-hole-configuration.
+        self.assertEqual(c["planner"], 179)
 
     def test_every_engineering_question_reaches_engineering(self):
         self.assertEqual(self.census["engineering"]["engineering"], 63)
@@ -97,12 +100,14 @@ class TestTheToolbox(unittest.TestCase):
     def test_one_tool_per_module(self):
         # The eight modules of Phase 66, the native-parity instrument added
         # by Phase 70, the native-words reader added by Phase 71 and the law
-        # register added by Phase 74.
+        # register added by Phase 74, and the operations ladder and GLM-BAT
+        # added by Phase 125.
         modules = {t.module.split(".")[-1] for t in toolbox.TOOLS}
         self.assertEqual(modules, {"deep_dive", "llvq", "moonshine", "pcgs",
                                    "salvage", "salvage_second", "stability",
                                    "tie_break", "native_parity",
-                                   "native_words", "law_register"})
+                                   "native_words", "law_register",
+                                   "ops_ladder", "batch_speech"})
 
     def test_every_tool_names_a_lean_file_and_a_study_that_exist(self):
         for t in toolbox.TOOLS:

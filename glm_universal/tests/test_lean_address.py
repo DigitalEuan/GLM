@@ -490,11 +490,18 @@ class TestEveryCitedTheoremExists(unittest.TestCase):
     #: ``GLM.py`` is the command line script, and ``GLM.lean`` is a file in
     #: the supplied archive that ``salvage.py`` names as a source; neither is a
     #: citation of a declaration.
-    IGNORED = {"GLM.py", "GLM.lean"}
+    #: ``GLM.Sakuma.third._proof_1`` is an auxiliary constant the elaborator
+    #: generates, named in ``citation_reference.py`` as an example of what the
+    #: reference holds and the source parser does not.
+    IGNORED = {"GLM.py", "GLM.lean", "GLM.Sakuma.third._proof_1"}
 
     #: This file deliberately cites names that do not exist, to check that
     #: they are refused, and is therefore excluded from its own audit.
     SELF = "test_lean_address.py"
+
+    #: Files whose ``GLM....`` names are fixtures of a toy development, not
+    #: citations of this one (Phase 101's scoped-reader tests).
+    FIXTURES = frozenset({"test_citation_scope.py"})
 
     CITATION = re.compile(r"\bGLM(?:\.[A-Za-z_][A-Za-z0-9_']*)+")
 
@@ -514,7 +521,8 @@ class TestEveryCitedTheoremExists(unittest.TestCase):
         root = Path(la.__file__).resolve().parent.parent
         stale = {}
         for path in sorted(root.rglob("*.py")):
-            if "__pycache__" in str(path) or path.name == self.SELF:
+            if ("__pycache__" in str(path) or path.name == self.SELF
+                    or path.name in self.FIXTURES):
                 continue
             for cited in self.CITATION.findall(path.read_text(encoding="utf-8")):
                 if cited in self.IGNORED or self.known(cited):
@@ -543,11 +551,19 @@ class TestDocumentsQuoteTheCurrentCorpus(unittest.TestCase):
     """The corpus size moves whenever a Lean file is added.
 
     Every count in the write-up and in the READMEs is then out of date at
-    once, and nothing in the text says so.  This holds the four documents
-    that state the corpus size to the size the parser actually finds; the
+    once, and nothing in the text says so.  This holds the documents that
+    state the corpus size to the size the parser actually finds; the
     per-phase record in ``MASTER_PLAN.md`` is left out on purpose, because a
     phase record states what was measured at the time.
+
+    Since Phase 111 every one of these counts is an inline figure
+    (``lean-declarations``), so ``corpus --refresh`` keeps it current and no
+    close has to hand-edit it.  The phrase is therefore read with the figure
+    markers taken out, and the count may be written with or without a
+    thousands separator -- the figure renders it with one.
     """
+
+    _MARKER = re.compile(r"<!--\s*/?figure(?::[a-z0-9-]+)?\s*-->")
 
     @classmethod
     def setUpClass(cls):
@@ -556,28 +572,30 @@ class TestDocumentsQuoteTheCurrentCorpus(unittest.TestCase):
         cls.repo = Path(__file__).resolve().parents[3]
 
     def claims(self):
-        n = self.count
         return [
-            ("STATUS.md", f"the {n} declarations"),
-            ("STATUS.md", f"Read back exactly {n}/{n}"),
-            ("overlay/README.md", f"for each of the {n}"),
-            ("overlay/glm_universal/README.md", f"**{n}/{n}**"),
+            ("SYSTEM.md", "the {n} declarations"),
+            ("SYSTEM.md", "Read back exactly {n}/{n}"),
+            ("overlay/README.md", "for each of the {n}"),
+            ("overlay/glm_universal/README.md", "**{n}/{n}**"),
             # That row is a generated block, and the generator writes counts
             # with a thousands separator, so the phrase is checked in the
             # form the study actually renders.
             ("studies/LEAN_ADDRESS_STUDY.md",
-             f"| declarations checked | {n:,} |"),
+             "| declarations checked | {n} |"),
         ]
 
     def test_the_documents_state_the_corpus_as_it_is_parsed(self):
-        for relative, phrase in self.claims():
+        n = self.count
+        for relative, shape in self.claims():
             with self.subTest(document=relative):
                 path = self.repo / relative
                 self.assertTrue(path.is_file(), f"{relative} is missing")
-                self.assertIn(
-                    phrase, path.read_text(encoding="utf-8"),
+                text = self._MARKER.sub("", path.read_text(encoding="utf-8"))
+                forms = {shape.format(n=f"{n}"), shape.format(n=f"{n:,}")}
+                self.assertTrue(
+                    any(form in text for form in forms),
                     f"{relative} does not state the current corpus size: "
-                    f"expected the phrase {phrase!r}")
+                    f"expected one of the phrases {sorted(forms)!r}")
 
 
 if __name__ == "__main__":  # pragma: no cover

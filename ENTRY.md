@@ -25,18 +25,20 @@ PYTHONPATH=. python3 -m glm_universal.corpus --ask "what bears on the Golay code
 
 1. Read [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md) — the Positioning
    section, the target, the <!--figure:directives-->16 standing rules<!--/figure--> and *The round, end to end*.
-2. Read [`STATUS.md`](STATUS.md) §1 (where the work stands) and §3.4 (the
-   candidates, sharpest first). **Take one of those.**
+2. Read [`STATUS.md`](STATUS.md) — the To-Do list: §1 (where the work
+   stands) and §2.1 (the next round, sharpest first). **Take one of those.**
 3. Use [`DIGEST.md`](DIGEST.md) to find the two or three studies that bear on
    it, and descend into those only.
 4. Work, running the cheapest gate that could fail ([`ITERATE.md`](ITERATE.md)
    §2). After a prose edit that is `corpus --check`; after a code edit it is
    `corpus --refresh` once, then `signoff --run-everything --jobs 8`.
-5. Write the finding into a `studies/*_STUDY.md`, the present tense into
+5. Write the finding into a `studies/*_STUDY.md`, what the system now is
+   into [`SYSTEM.md`](SYSTEM.md), the To-Do lines taken and left into
    [`STATUS.md`](STATUS.md), the round into [`MASTER_PLAN.md`](MASTER_PLAN.md),
    and anything proved into `RequestProject/GLM/`.
-6. Close with `corpus --refresh`, `corpus --check`,
-   `signoff --release --jobs 8`, and commit.
+6. Close with the checklist of [`ITERATE.md`](ITERATE.md) §4 —
+   `corpus --refresh`, `corpus --check`, `signoff --close --jobs 8` — and
+   commit.
 
 Everything below says *what to read*; [`ITERATE.md`](ITERATE.md) says *what to
 do* at length.
@@ -86,8 +88,10 @@ needed to understand the state now, and nothing in it has been deleted.
 2. [`DIGEST.md`](DIGEST.md) — the whole corpus at tier 0, one row per document.
 3. [`README.md`](README.md) — the repository's front door: what the system is,
    and what has been built.
-4. [`STATUS.md`](STATUS.md) — where the work stands, what is open, and how to
-   re-verify it.
+4. [`STATUS.md`](STATUS.md) — the To-Do list: what is open, where the work
+   stands in one screen, and how a run is closed.
+   [`SYSTEM.md`](SYSTEM.md) — what the system is now, every instrument with
+   its current figure, and how to re-verify it.
 5. [`CAPABILITY_ASSESSMENT.md`](CAPABILITY_ASSESSMENT.md) — what the machine
    can do, measured rather than described.
 6. [`MASTER_PLAN.md`](MASTER_PLAN.md) — the phases, what each delivered, and
@@ -199,6 +203,9 @@ first and descend into the few that bear on the task.
 [`CONVERSATION_STUDY.md`](studies/CONVERSATION_STUDY.md) ·
 [`SUPPLIED_PORTS_STUDY.md`](studies/SUPPLIED_PORTS_STUDY.md)
 
+**Old-style operations, learnt as a language.**
+[`OPERATIONS_LADDER_STUDY.md`](studies/OPERATIONS_LADDER_STUDY.md)
+
 **The supplied material, audited.**
 [`GLM_STUDY_CATALOG_AUDIT.md`](studies/GLM_STUDY_CATALOG_AUDIT.md) ·
 [`GLM_UNIFICATION_BLUEPRINT_AUDIT.md`](studies/GLM_UNIFICATION_BLUEPRINT_AUDIT.md) ·
@@ -224,6 +231,9 @@ made against a list rather than a hope.
 
 * [`archive/MASTER_PLAN_ARCHIVE.md`](archive/MASTER_PLAN_ARCHIVE.md) — the
   closed phases, as they were written.
+* [`archive/STATUS_ROUNDS_ARCHIVE.md`](archive/STATUS_ROUNDS_ARCHIVE.md) —
+  the running account the status document carried up to Phase 110, and its
+  candidate list as named, moved out when it became a To-Do list.
 * [`archive/PACKAGE_README_ARCHIVE.md`](archive/PACKAGE_README_ARCHIVE.md) —
   the package change log, row by row.
 * [`archive/PROJECT_DIRECTIVES_RATIONALE_ARCHIVE.md`](archive/PROJECT_DIRECTIVES_RATIONALE_ARCHIVE.md)
@@ -232,7 +242,8 @@ made against a list rather than a hope.
   [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md); only the rationale is here,
   and its figures are frozen at the round that measured them.
 * [`ARISTOTLE_SUMMARY.md`](ARISTOTLE_SUMMARY.md) — the working notes left by
-  the sessions that built this repository.
+  the sessions that built this repository. Rewritten after every session, so
+  since Phase 111 it is outside the corpus the checks read.
 * `source_material/` — what was supplied rather than written here, kept exactly
   as received.
 

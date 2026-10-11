@@ -32,10 +32,22 @@ from .reasoning import pipeline as ppl
 from .reasoning import deep_hole_classifier as dhc
 from .reasoning import deep_hole_escalation as esc
 from .reasoning import deep_hole_failures as dhf
+from .reasoning import configuration_queries as cfq
+from .reasoning import empty_rungs as emr
+from .reasoning import norm256_hex as n256
+from .reasoning import probe_budget as prb
+from .reasoning import patience_census as pcs
+from .reasoning import frozen_path as frp
+from .reasoning import hole_census as hcs
+from .reasoning import lattice_completion as ltc
 from .reasoning import cumulativity as cml
 from .reasoning import ladder_escalation as lesc
 from .reasoning import query_escalation as qesc
 from .reasoning import review_sweep as rvs
+from .reasoning import stray_blind as sbl
+from .reasoning import share_ensemble as shens
+from .reasoning import share_separation as shsep
+from .reasoning import configuration_reading as confr
 from .reasoning import wobble_landscape as wls
 from .signoff import checks as chk
 from .signoff import ledger as sgn
@@ -293,6 +305,160 @@ def _deepholes(args: argparse.Namespace) -> int:
 
 
 # ---------------------------------------------------------------------------
+#  stray-blind
+# ---------------------------------------------------------------------------
+
+def _stray_blind(args: argparse.Namespace) -> int:
+    """Lattice item 10: which pairs a distance-only reading must conflate.
+
+    ``--write`` re-takes the census over the ladder's own ensembles (a
+    quarter of an hour of exact decoding); without it the stored census is
+    read and its freshness reported, never silently recomputed.
+    """
+    if args.write:
+        path = sbl.write_measurements()
+        print(f"wrote {path}")
+        print(f"digest {sbl.module_digest()}")
+        return 0
+    condition = sbl.state()
+    report = sbl.current()
+    if report is None:
+        print(f"cache             {condition['verdict']}")
+        print("nothing is reported from a cache that does not describe the "
+              "sources; re-take it with --write")
+        return 1
+    if args.json:
+        print(json.dumps({
+            "cache": condition["verdict"],
+            "agree_everywhere": report["agree_everywhere"],
+            "common_radius_everywhere": report["common_radius_everywhere"],
+            "rows": [{"starts": row["starts"],
+                      "radius": str(row["radius"]),
+                      "predicted": [list(pair) for pair in row["predicted"]],
+                      "measured": [list(pair) for pair in row["measured"]],
+                      "stray_free": list(row["stray_free"])}
+                     for row in report["rows"]],
+        }, indent=1, sort_keys=True))
+        return 0
+    print(f"cache             {condition['verdict']}")
+    print(f"theorem           {report['lean']}")
+    print(f"one radius        {report['common_radius_everywhere']}")
+    print(f"predicted = measured at every size: {report['agree_everywhere']}")
+    for row in report["rows"]:
+        pairs = ", ".join("/".join(pair) for pair in row["measured"]) or "none"
+        print(f"  {row['starts']:>4} starts   radius {row['radius']}   "
+              f"conflated {pairs}   stray-free "
+              f"{', '.join(row['stray_free']) or 'none'}")
+    return 0
+
+
+# ---------------------------------------------------------------------------
+#  share-ensemble / share-separation
+# ---------------------------------------------------------------------------
+
+def _share_ensemble(args: argparse.Namespace) -> int:
+    """Lattice item 6: the ladder's ensembles extended to 30720 starts.
+
+    ``--write`` re-takes them (614,400 exact decodes, on every core); without
+    it the stored ensembles' freshness is reported, never recomputed.
+    """
+    if args.write:
+        path = shens.write_measurements(jobs=args.jobs)
+        print(f"wrote {path}")
+        print(f"digest {shens.module_digest()}")
+        return 0
+    condition = shens.state()
+    print(f"cache             {condition['verdict']}")
+    print(f"sizes             {', '.join(str(n) for n in shens.SIZES)}")
+    return 0 if condition["fresh"] else 1
+
+
+def _share_separation(args: argparse.Namespace) -> int:
+    """Lattice item 6: the separation criterion for the share-carrying rungs,
+    read off the stored ensembles."""
+    report = shsep.share_separation_report()
+    if not report["available"]:
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps({
+            "marks": report["marks"], "marks_met": report["marks_met"],
+            "best_share_cell": {k: str(v) for k, v in
+                                report["best_share_cell"].items()},
+            "first_below_one": (None if report["first_below_one"] is None
+                                else {k: str(v) for k, v in
+                                      report["first_below_one"].items()}),
+            "cells": [{"layer": c["layer"], "starts": c["starts"],
+                       "q0": c["q0"], "spread": str(c["spread"]),
+                       "separation": str(c["separation"]),
+                       "ratio": None if c["ratio"] is None else str(c["ratio"]),
+                       "locally_certified": c["locally_certified"]}
+                      for c in report["cells"]],
+        }, indent=1, sort_keys=True))
+        return 0
+    print(f"theorem           {report['lean']}")
+    print(f"reproduced        {report['reproduced_cells']} of "
+          f"{report['ladder_cells']} ladder cells")
+    print(f"bound holds       {report['bound_holds']} of "
+          f"{report['bound_instances']}")
+    for c in report["cells"]:
+        ratio = "n/a" if c["ratio"] is None else esc.rounded(c["ratio"], 4)
+        print(f"  {c['layer']:<9}{c['starts']:>6}  Q0 {c['q0']:>2}/{c['gate']}"
+              f"  W {esc.rounded(c['spread'], 4)}"
+              f"  B {esc.rounded(c['separation'], 4)}  rho {ratio}"
+              f"  per-hole {c['locally_certified']}/{c['gate']}")
+    print("marks             " + ", ".join(
+        f"{k} {'met' if v else 'missed'}" for k, v in report["marks"].items()))
+    return 0
+
+
+# ---------------------------------------------------------------------------
+#  configuration-reading
+# ---------------------------------------------------------------------------
+
+def _configuration_reading(args: argparse.Namespace) -> int:
+    """Lattice item 6, the 28-vertex pair: the configuration reading ``L5``,
+    read off the stored ensembles (Phase 122)."""
+    report = confr.configuration_report()
+    if not report["available"]:
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps({
+            "marks": report["marks"], "marks_met": report["marks_met"],
+            "first_below_one": report["first_below_one"],
+            "cells": [{"starts": c["starts"], "q0": c["q0"],
+                       "spread": str(c["spread"]),
+                       "separation": str(c["separation"]),
+                       "closest_pair": list(c["closest_pair"] or ()),
+                       "ratio": None if c["ratio"] is None else str(c["ratio"]),
+                       "locally_certified": c["locally_certified"],
+                       "pair_distance": str(c["pair_distance"])}
+                      for c in report["cells"]],
+        }, indent=1, sort_keys=True))
+        return 0
+    print(f"theorem           {report['lean']}")
+    print(f"control           {report['control_holds']} of "
+          f"{len(report['control'])} (hole, seed) diagrams read as declared")
+    print(f"bound holds       {report['bound_holds']} of "
+          f"{report['bound_instances']}")
+    closest = report["uniform_closest"]
+    print(f"uniform limit     closest {closest['pair'][0]}/{closest['pair'][1]} "
+          f"at {closest['distance']}; 28-vertex pair at "
+          f"{report['uniform_pair']['distance']}")
+    for c in report["cells"]:
+        ratio = "n/a" if c["ratio"] is None else esc.rounded(c["ratio"], 4)
+        print(f"  L5 {c['starts']:>6}  Q0 {c['q0']:>2}/{c['gate']}"
+              f"  W {esc.rounded(c['spread'], 4)}"
+              f"  B {esc.rounded(c['separation'], 4)}  rho {ratio}"
+              f"  per-hole {c['locally_certified']}/{c['gate']}"
+              f"  E6^4/D6^4 {esc.rounded(c['pair_distance'], 4)}")
+    print("marks             " + ", ".join(
+        f"{k} {'met' if v else 'missed'}" for k, v in report["marks"].items()))
+    return 0
+
+
+# ---------------------------------------------------------------------------
 #  escalation
 # ---------------------------------------------------------------------------
 
@@ -398,6 +564,380 @@ def _failures(args: argparse.Namespace) -> int:
     print(f"rho               {dhf.rounded(spread['rho_seed'], 4)} (seed), "
           f"{dhf.rounded(spread['rho_all'], 4)} (all perturbations)")
     print(f"same mechanism    {report['same_mechanism']}")
+    return 0
+
+
+# ---------------------------------------------------------------------------
+#  the lattice round (Phase 123)
+# ---------------------------------------------------------------------------
+
+def _plain(value: object) -> object:
+    """Fractions as strings, so a report prints as JSON."""
+    if isinstance(value, Fraction):
+        return str(value)
+    if isinstance(value, dict):
+        return {str(k): _plain(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_plain(v) for v in value]
+    return value
+
+
+def _hole_census(args: argparse.Namespace) -> int:
+    """All 23 Niemeier types: the census, the control and the L5 cells.
+
+    ``--write`` re-takes the census and the ensembles (long); without it the
+    stored one is read and its freshness reported.
+    """
+    if args.write:
+        path = hcs.write_measurements(jobs=args.jobs)
+        print(f"wrote {path}")
+        print(f"digest {hcs.module_digest()}")
+        return 0
+    condition = hcs.state()
+    report = ltc.hole_census_report()
+    if not report["available"]:
+        print(f"cache             {condition['verdict']}")
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps(_plain({
+            "cache": condition["verdict"],
+            "types_reached": report["types_reached"],
+            "catalogue": report["catalogue"],
+            "by_stage": report["by_stage"],
+            "unreached": report["unreached"],
+            "control_holds": report["control_holds"],
+            "cells": [{k: c[k] for k in ("starts", "q0", "gate", "ratio",
+                                          "locally_certified")}
+                      for c in report["cells"]],
+            "marks": report["marks"],
+        }), indent=1, sort_keys=True))
+        return 0
+    print(f"cache             {condition['verdict']}")
+    print(f"types reached     {report['types_reached']} of "
+          f"{report['catalogue']}  by stage {report['by_stage']}")
+    print(f"control           {report['control_holds']} of "
+          f"{len(report['control'])} hold")
+    for c in report["cells"]:
+        print(f"  n={c['starts']:<5} Q0 {c['q0']}/{c['gate']}  ratio "
+              f"{c['ratio']}  per-hole {c['locally_certified']}")
+    print(f"marks             {report['marks']}")
+    return 0
+
+
+def _patience_census(args: argparse.Namespace) -> int:
+    """The post-hoc follow-up of the hole census (Phase 123): the three
+    centres the census left uncertified, re-read with a longer patience.
+
+    ``--write`` re-takes it (long); without it the stored one is read.
+    """
+    if args.write:
+        path = pcs.write_measurements(jobs=args.jobs)
+        print(f"wrote {path}")
+        print(f"digest {pcs.module_digest()}")
+        return 0
+    condition = pcs.state()
+    report = ltc.hole_census_report()
+    post_hoc = report.get("post_hoc", {}) if report["available"] else {}
+    if not post_hoc.get("available"):
+        print(f"cache             {condition['verdict']}")
+        print(post_hoc.get("reason", report.get("reason", "")))
+        return 1
+    top = post_hoc["cells"][-1]
+    if args.json:
+        print(json.dumps(_plain({
+            "cache": condition["verdict"],
+            "probes": post_hoc["probes"], "patience": post_hoc["patience"],
+            "entries": [{k: e[k] for k in ("type", "certified", "vertex_count",
+                                           "starts_run")}
+                        for e in post_hoc["entries"]],
+            "types_reached": post_hoc["types_reached"],
+            "control_holds": post_hoc["control_holds"],
+            "top": {k: top[k] for k in ("starts", "q0", "gate", "ratio",
+                                        "locally_certified")},
+            "marks": post_hoc["marks"],
+        }), indent=1, sort_keys=True))
+        return 0
+    print(f"cache             {condition['verdict']}  (post hoc)")
+    print(f"probes, patience  {post_hoc['probes']}, {post_hoc['patience']}")
+    for e in post_hoc["entries"]:
+        print(f"  {e['type']}: certified {e['certified']}, "
+              f"{e['vertex_count']} vertices after {e['starts_run']} starts")
+    print(f"types reached     {post_hoc['types_reached']}")
+    print(f"control           {post_hoc['control_holds']} of "
+          f"{len(post_hoc['control'])} hold")
+    print(f"at {top['starts']} starts  Q0 {top['q0']}/{top['gate']}  ratio "
+          f"{top['ratio']}  per-hole {top['locally_certified']}")
+    return 0
+
+
+def _probe_budget(args: argparse.Namespace) -> int:
+    """The certifying reading's stopping rule (Phase 124): no barren stop and
+    a proved budget, on the 23 references and the held-out walks."""
+    if args.write:
+        path = prb.write_measurements(jobs=args.jobs)
+        print(f"wrote {path}")
+        print(f"digest {prb.module_digest()}")
+        return 0
+    condition = prb.state()
+    report = prb.probe_budget_report()
+    if not report["available"]:
+        print(f"cache             {condition['verdict']}")
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps(_plain({k: v for k, v in report.items()
+                                 if k not in ("references", "shares")}),
+                         indent=1, sort_keys=True))
+        return 0
+    print(f"cache             {condition['verdict']}")
+    print(f"budget            {report['budget']} starts, no barren stop")
+    print(f"shares            k * min share >= 1/2 at every hole and seed: "
+          f"{report['shares']['holds']} (least {report['shares']['least']})")
+    print(f"references        {report['references_certified']} of "
+          f"{len(report['references'])} certified as recorded")
+    print(f"held-out walks    {report['reached']} of {report['walks']} reach "
+          f"a deep hole; the rule certifies {report['rule_certified']}, the "
+          f"census convention {report['census_certified']}")
+    print(f"starts            median {report['median_starts']}, max "
+          f"{report['max_starts']}")
+    print(f"marks             {report['marks']}")
+    return 0
+
+
+def _ops_ladder(args: argparse.Namespace) -> int:
+    """The operations ladder and GLM-BAT (Phase 125): the declared battery,
+    the marks, hypothesis H, and the post-hoc agreement of the two
+    interpreters."""
+    from .reasoning import operations as ops
+    report = ops.operations_report(scripts=not args.fast)
+    agreement = ops.interpreter_agreement() if args.agreement else None
+    if args.json:
+        out = {"marks": report["marks"], "hypothesis_H":
+               report["hypothesis_H"], "certificates": report["certificates"],
+               "projection": {k: v for k, v in
+                              report["ladder"]["projection"].items()
+                              if k != "inverted"},
+               "carrier": report["ladder"]["carrier"]}
+        if agreement is not None:
+            out["agreement"] = agreement
+        print(json.dumps(_plain(out), indent=1, sort_keys=True))
+        return 0
+    lad, mac, eng, que = (report["ladder"], report["machine"],
+                          report["english"], report["questions"])
+    note, car, proj = lad["note"], lad["carrier"], lad["projection"]
+    print(f"register          {note['terms']} terms (the note holds "
+          f"{note['terms_in_note']}), {len(note['layering_violations'])} "
+          f"layering violations, {len(note['ungrounded'])} ungrounded, "
+          f"{len(note['idle_primitives'])} idle primitives")
+    print(f"carrier           {car['round_trips']} round trips, "
+          f"{car['distinct']} distinct; {car['distinct_ground_sets']} "
+          f"distinct ground sets")
+    print(f"machine battery   {mac['as_declared']} of {mac['runs']} as "
+          f"declared, {mac['wrong']} wrong")
+    print(f"language          {eng['read_back']} of {eng['lines_said']} lines "
+          f"read back; {eng['programs_as_declared']} of 6 English programs")
+    print(f"questions         {que['as_declared']} of {que['questions']} as "
+          f"declared, {que['wrong']} wrong")
+    c = report["certificates"]
+    print(f"column 3          {c['verified']} of {c['scripts']} scripts "
+          f"verify; {c['rejected']} of {c['mutations']} mutations rejected")
+    print(f"relations         {lad['relations']}")
+    print(f"cross-overs       {sum(r['resolves'] for r in lad['crossovers'])} "
+          f"of {len(lad['crossovers'])} resolve")
+    print(f"hypothesis H      {proj['monotone']} of {proj['edges']} edges "
+          f"monotone ({proj['share']}, threshold {proj['threshold']}): "
+          f"{'holds' if proj['holds'] else 'missed'}")
+    if agreement is not None:
+        print(f"agreement         {agreement['agree']} of "
+              f"{agreement['programs'] - agreement['undecided']} decided "
+              f"generated programs ({agreement['halted']} halted, "
+              f"{agreement['never']} never, {agreement['undecided']} "
+              f"undecided); {agreement['lines_read_back']} of "
+              f"{agreement['lines']} lines read back")
+    print(f"marks             {report['marks']}")
+    return 0 if all(report["marks"].values()) else 1
+
+
+def _inert_counter(args: argparse.Namespace) -> int:
+    """Inert variables (Phase 126): the battery, the questions, column 3, the
+    non-interference on Phase 125 and the soundness control."""
+    from .reasoning import inert_counter as ic
+    report = ic.inert_counter_report()
+    if args.json:
+        out = {k: v for k, v in report.items()
+               if k not in ("battery", "questions")}
+        print(json.dumps(_plain(out), indent=1, sort_keys=True))
+        return 0
+    bat, que, cer = report["battery"], report["questions"], report["certificates"]
+    ni, snd = report["noninterference"], report["soundness"]
+    for row in bat["rows"]:
+        print(f"{row['id']:<4} {'as declared' if row['as_declared'] else 'WRONG':<12}"
+              f" {row['got']}")
+    print(f"battery           {bat['programs'] - bat['wrong']} of "
+          f"{bat['programs']} as declared")
+    print(f"questions         {que['questions'] - que['wrong']} of "
+          f"{que['questions']} as declared")
+    print(f"column 3          {cer['verified']} of {cer['scripts']} scripts "
+          f"verify; {cer['rejected']} of {cer['mutations']} mutations rejected")
+    print(f"phase 125         {ni['runs'] - ni['machine_wrong']} of "
+          f"{ni['runs']} runs, {ni['questions'] - ni['questions_wrong']} of "
+          f"{ni['questions']} questions, {ni['english']} of 6 English "
+          f"programs; generated: {ni['generated_kept']} kept, "
+          f"{ni['generated_changed']} changed, "
+          f"{ni['generated_newly_certified']} newly certified, "
+          f"{ni['generated_still_undecided']} still undecided")
+    print(f"soundness         {len(snd['certified'])} certified, "
+          f"{len(snd['halted_within_long_budget'])} halt within "
+          f"{ic.LONG_BUDGET} steps; N3 halts after {snd['n3_steps']} steps "
+          f"and is {'refused' if snd['n3_refused'] else 'NOT refused'}")
+    print(f"marks             {report['marks']}")
+    return 0 if all(report["marks"].values()) else 1
+
+
+def _configuration_classifier(args: argparse.Namespace) -> int:
+    """The L5 answer rule over the 44 deep-hole queries, with absences."""
+    if args.write:
+        path = cfq.write_measurements()
+        print(f"wrote {path}")
+        print(f"digest {cfq.module_digest()}")
+        return 0
+    condition = cfq.state()
+    report = ltc.lattice_completion_report()["classifier"]
+    if not report["available"]:
+        print(f"cache             {condition['verdict']}")
+        print(report["reason"])
+        return 1
+    ten = {k: v for k, v in report["ten"].items() if k != "rows"}
+    wide = (None if report["twenty_three"] is None else
+            {k: v for k, v in report["twenty_three"].items() if k != "rows"})
+    if args.json:
+        print(json.dumps(_plain({"cache": condition["verdict"], "ten": ten,
+                                 "twenty_three": wide,
+                                 "marks": report["marks"]}),
+                         indent=1, sort_keys=True))
+        return 0
+    print(f"cache             {condition['verdict']}")
+    print(f"ten references    {ten['correct']} correct, {ten['wrong']} wrong, "
+          f"{ten['refused']} refused of {ten['queries']} (joint "
+          f"{ten['joint_correct']})")
+    print(f"absences          {ten['absences']} of {ten['absence_slots']}, "
+          f"{ten['false_absences']} false")
+    if wide is not None:
+        print(f"23 references     {wide['correct']} correct, {wide['wrong']} "
+              f"wrong, {wide['refused']} refused")
+    print(f"marks             {report['marks']}")
+    return 0
+
+
+def _frozen_path(args: argparse.Namespace) -> int:
+    """The lattice round's frozen-path comparison (mark B5)."""
+    if args.write:
+        path = frp.write_measurements()
+        print(f"wrote {path}")
+        print(f"digest {frp.module_digest()}")
+        return 0
+    condition = frp.state()
+    report = frp.frozen_path_report()
+    if not report["available"]:
+        print(f"cache             {condition['verdict']}")
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0
+    print(f"cache             {condition['verdict']}")
+    print(f"cases             {report['present']} of {report['cases']} present")
+    print(f"same status       {report['same_status']} of {report['cases']}")
+    print(f"same text         {report['same_text']} of {report['present']}")
+    for row in report["moved"]:
+        print(f"  moved           {row['id']}: {row['cause']}")
+    print(f"new cases         {', '.join(report['new_cases']) or 'none'}")
+    print(f"B5                {report['holds']}")
+    return 0 if report["holds"] else 1
+
+
+def _empty_rungs(args: argparse.Namespace) -> int:
+    """The norm-2 and norm-256 candidates and the declared filling."""
+    if args.write:
+        path = emr.write_measurements()
+        print(f"wrote {path}")
+        print(f"digest {emr.module_digest()}")
+        return 0
+    condition = emr.state()
+    report = emr.current()
+    if report is None:
+        print(f"cache             {condition['verdict']}")
+        print("nothing is reported from a cache that does not describe the "
+              "sources; re-take it with --write")
+        return 1
+    filling = report["filling"]
+    trials = [{"norm": t["norm"], "candidate": t["candidate"],
+               "kept": t["kept"], "retired": t["retired"]}
+              for t in filling["trials"]]
+    final = {k: report["final"][k] for k in ("correct", "wrong", "refused")
+             if k in report["final"]}
+    if args.json:
+        print(json.dumps(_plain({"cache": condition["verdict"],
+                                 "reproduces": report["reproduces"],
+                                 "filled": filling["filled"],
+                                 "trials": trials, "final": final,
+                                 "marks": report["marks"]}),
+                         indent=1, sort_keys=True))
+        return 0
+    print(f"cache             {condition['verdict']}")
+    print(f"reproduces        {report['reproduces']}")
+    for t in trials:
+        print(f"  norm {t['norm']:<4} {t['candidate']:<8} kept {t['kept']}")
+    print(f"filled            {filling['filled']}")
+    print(f"final ladder      {final}")
+    print(f"marks             {report['marks']}")
+    return 0
+
+
+def _norm256_hex(args: argparse.Namespace) -> int:
+    """Norm 256 and the hex colour (Phase 127): the three candidates, the
+    filling, the held-out set and the hex shortcut."""
+    if args.write:
+        path = n256.write_measurements()
+        print(f"wrote {path}")
+        print(f"digest {n256.module_digest()}")
+        return 0
+    condition = n256.state()
+    report = n256.current()
+    if report is None:
+        print(f"cache             {condition['verdict']}")
+        print("nothing is reported from a cache that does not describe the "
+              "sources; re-take it with --write")
+        return 1
+    filling, held, short = (report["filling"], report["held_out"],
+                            report["shortcut"])
+    trials = [{"candidate": t["candidate"], "kept": t["kept"],
+               "wrong": t["row"]["wrong"], "correct": t["row"]["correct"],
+               "unique_correct": t["row"]["unique_correct"]}
+              for t in filling["trials"]]
+    if args.json:
+        print(json.dumps(_plain({"cache": condition["verdict"],
+                                 "kept": filling["kept"], "trials": trials,
+                                 "marks": report["marks"]}),
+                         indent=1, sort_keys=True))
+        return 0
+    print(f"cache             {condition['verdict']}")
+    for t in trials:
+        print(f"  {t['candidate']:<5} correct {t['correct']:<4} wrong "
+              f"{t['wrong']:<3} unique {t['unique_correct']:<3} kept {t['kept']}")
+    print(f"kept              {filling['kept']}")
+    for key in ("correct", "wrong", "refused"):
+        print(f"  568 queries     {key:<8} {report['final'][key]}")
+    for key, row in held["alone"].items():
+        print(f"  held out {key:<5} correct {row['correct']:<4} wrong "
+              f"{row['wrong']}")
+    print(f"held-out ladder   correct {held['final']['correct']} wrong "
+          f"{held['final']['wrong']} (base: {held['base']['correct']} / "
+          f"{held['base']['wrong']})")
+    print(f"hex shortcut      W has {short['colours']} colours; "
+          f"{short['agree']} of {short['points']} agree")
+    print(f"marks             {report['marks']}")
     return 0
 
 
@@ -1708,6 +2248,166 @@ def _corpus_resample(args) -> int:
     return 0
 
 
+def _ast_index_freeze() -> int:
+    """Take the AST index snapshot (Phase 105): every admitted
+    statement-level expression of ``overlay/glm_universal`` (``live``) and
+    of ``source_material/GLM-main.zip`` (``archive``), in that order, files
+    sorted, sites by line and column."""
+    import zipfile
+    from pathlib import Path
+    from .reasoning import ast_index as ai
+    root = Path(__file__).resolve().parents[2]
+    rows = []
+    files = {"live": {"read": 0, "skipped": 0},
+             "archive": {"read": 0, "skipped": 0}}
+    live = sorted(p for p in (root / "overlay" / "glm_universal").rglob("*.py")
+                  if "__pycache__" not in p.parts and "_derived" not in p.parts)
+    for path in live:
+        got = ai.sites_of_source(path.read_text(encoding="utf-8"))
+        name = path.relative_to(root).as_posix()
+        files["live"]["read" if got is not None else "skipped"] += 1
+        rows.extend(["live", name, ln, col, text] for ln, col, text in got or ())
+    with zipfile.ZipFile(root / "source_material" / "GLM-main.zip") as z:
+        for name in sorted(n for n in z.namelist() if n.endswith(".py")):
+            src = z.read(name).decode("utf-8", errors="replace")
+            got = ai.sites_of_source(src)
+            files["archive"]["read" if got is not None else "skipped"] += 1
+            rows.extend(["archive", name, ln, col, text]
+                        for ln, col, text in got or ())
+    target = ai.write_snapshot(rows, files)
+    print(f"froze {target}")
+    print(f"snapshot: {ai.frozen_state()}")
+    return 0
+
+
+def _ast_index(args) -> int:
+    """The AST address as a retrieval key (Phase 105), on the frozen index
+    declared in ``studies/AST_INDEX_STUDY.md``."""
+    if args.freeze:
+        return _ast_index_freeze()
+    from .runtime import ast_index_report as air
+    if args.write:
+        target = air.write_measurements()
+        print(f"wrote {target}")
+        return 0
+    if args.ask:
+        from .runtime import ast_index_frames as aif
+        from .runtime import question_frames as qf
+        reading = qf.read(args.ask)
+        print(reading.body() if reading is not None else "no frame reads it")
+        return 0
+    report = air.current() if not args.live else None
+    if report is None:
+        report = air.ast_index_report(run_scripts=not args.no_scripts)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    print(air.summary_text(report))
+    return 0
+
+
+def _document_tree(args) -> int:
+    """The document tree as a third native book (Phase 102), on the frozen
+    corpus declared in ``studies/DOCUMENT_TREE_STUDY.md``."""
+    from .reasoning import document_tree as dtr
+    if args.freeze:
+        target = dtr.freeze()
+        print(f"froze {target}")
+        print(f"snapshot: {dtr.frozen_state()}")
+        return 0
+    if args.write:
+        target = dtr.write_measurements()
+        print(f"wrote {target}")
+        print(f"document tree: {dtr.state()['verdict']}")
+        return 0
+    report = dtr.current() if not args.live else None
+    if report is None:
+        report = dtr.document_tree_report()
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    print(f"{report['units']} census queries over {report['documents']} "
+          f"documents (snapshot {str(report['snapshot_digest'])[:12]})")
+    for rid, line in dtr.RANKINGS:
+        row = report["census"][rid]
+        print(f"  {rid:16} hit@1 {row['hit@1']:5}  hit@5 {row['hit@5']:5}  "
+              f"relatives@5 {row['relatives@5']:5}   {line}")
+    for name, mark in report["marks"].items():
+        print(f"  {name}: {mark['outcome']}")
+    return 0
+
+
+def _citation_scope(args) -> int:
+    """Citations read in Lean's scope (Phase 101): both citation readers
+    against the elaborator, the type-word repair, and the Lean-corpus
+    retrieval figures re-taken beside the legacy record, against the marks
+    declared in ``studies/CITATION_SCOPE_STUDY.md``."""
+    from .reasoning import citation_reference as cr
+    from .reasoning import citation_scope as cs
+    if args.reference:
+        target = cr.write_reference()
+        print(f"wrote {target}")
+    if args.write:
+        target = cs.write_measurements()
+        print(f"wrote {target}")
+        print(f"citation scope: {cs.state()['verdict']}")
+        return 0
+    report = cs.current() if not args.live else None
+    if report is None:
+        report = cs.citation_scope_report()
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    print(f"reference: {report['reference']['verdict']} "
+          f"({report['constants']} constants)")
+    for reader in ("legacy", "scoped"):
+        a = report["audit"][reader]
+        if not a:
+            continue
+        print(f"{reader:<7} edges {a['edges']:>6}  precision "
+              f"{_per_mille(Fraction(a['precision']))}  visible recall "
+              f"{_per_mille(Fraction(a['recall_visible']))}  one-letter "
+              f"{a['one_letter_edges']} ({a['one_letter_unconfirmed']} "
+              f"unconfirmed)")
+    w = report["type_words"]
+    print(f"type words: {w['moved_legacy']} of {w['queries']} goals moved "
+          f"before, {w['moved_repaired']} after")
+    old, new = report["legacy"], report["headline"]
+    for mode in ("decl", "goal"):
+        for scheme, row in new[mode]["hits"].items():
+            before = old[mode]["hits"].get(scheme) if old else None
+            print(f"{mode:<4} {scheme:<9} " + "  ".join(
+                f"@{k} {row[k]:>3}" + (f" (was {before[k]})" if before else "")
+                for k in sorted(row)))
+    for mark, met in report["marks"].items():
+        print(f"{mark:<4} {'met' if met else 'NOT met'}")
+    return 0
+
+
+def _dependency(args) -> int:
+    """What a Lean result rests on (Phase 101): the declared questions, the
+    column-3 gates and their mutations, and the named refusals, against the
+    marks of ``studies/CITATION_SCOPE_STUDY.md`` §2.1."""
+    from .runtime import dependency_report as dr
+    report = dr.dependency_report()
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    print(f"reference: {report['reference']}")
+    for row in report["declared"]:
+        print(f"{'ok ' if row['got'] == row['declared'] else 'BAD'} "
+              f"gate {row['gate']!s:<5} mutation rejected "
+              f"{row['mutation_rejected']!s:<5} {row['question']}")
+    first = report["as_declared"]
+    print(f"as declared: {first['right']} right, {first['wrong']} wrong, "
+          f"{first['refused']} refused {first['codes']}")
+    for row in report["refusals"]:
+        print(f"refusal {row['expected']:<20} got {row['got']}")
+    for mark, met in report["marks"].items():
+        print(f"{mark:<16} {'met' if met else 'NOT met'}")
+    return 0
+
+
 def _stepwise(args) -> int:
     """The stepwise planner (Phase 72): S1-S7 against the marks declared in
     ``studies/STEPWISE_PLANNER_STUDY.md`` before the module existed."""
@@ -2369,6 +3069,651 @@ def _second_view(args) -> int:
     return 0
 
 
+def _nonlinear(args) -> int:
+    """Nonlinear elimination (Phase 103): the marks E1-E7 declared in
+    ``evaluation/nonlinear_cases.py`` before any code."""
+    from .runtime import nonlinear_report as nr
+    report = nr.nonlinear_report(run_scripts=not args.no_scripts,
+                                 battery=not args.quick)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    for r in report["systems"]:
+        print(f"      {r['id']:<22} {r['layer']:<13} branches "
+              f"{r['matched']}/{r['declared']} (machine {r['machine']})"
+              f"{'' if r.get('gate', True) else '  GATE FAILED'}")
+    e1, e2, e3 = report["E1"], report["E2"], report["E3"]
+    print(f"E1  {e1['passed']}/{e1['of']} systems with exactly the declared "
+          f"branches")
+    print(f"E2  {e2['passed']}/{e2['of']} refusals by the declared code")
+    if not e3.get("skipped"):
+        print(f"E3  {e3['verified']}/{e3['answered']} scripts verify, "
+              f"{e3['mutants_rejected']}/{e3['answered']} mutants rejected")
+    e4 = report["E4"]
+    print(f"E4  {e4['same']}/{e4['questions']} Phase 98 questions unchanged, "
+          f"{e4['nonlinear_now_read']} NONLINEAR refusals now read, "
+          f"{e4['changed_otherwise']} changed otherwise; Phase 98 refusals "
+          f"with the layer off {e4['phase98_refusals']}")
+    e5 = report["E5"]
+    if not e5.get("skipped"):
+        print(f"E5  planted battery: {e5['answered']}/{e5['systems']} "
+              f"answered, planted point in {e5['planted']}, {e5['wrong']} "
+              f"wrong; refused {e5['refused']}")
+    e6 = report["E6"]
+    print(f"E6  {e6['refused_nonlinear']}/{e6['of']} declared systems refused "
+          f"NONLINEAR with the layer off")
+    print(f"E7  Lean {report['E7']}")
+    for key, ok in report["marks"].items():
+        print(f"{key:<4} mark "
+              f"{'met' if ok else ('skipped' if ok is None else 'not met')}")
+    return 0
+
+
+def _derivation(args) -> int:
+    """Derivations and proofs (Phase 106): the marks R1-R9 declared in
+    ``evaluation/derivation_cases.py`` before any code."""
+    from .runtime import derivation_report as dr
+    report = dr.derivation_report(run_scripts=not args.no_scripts,
+                                  battery=200 if args.quick else None)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    m = report["marks"]
+    for key in ("R1", "R2", "R3", "R4"):
+        for r in m[key]["rows"]:
+            flags = "" if r.get("gate", True) else "  GATE FAILED"
+            if r.get("mutant_rejected") is False:
+                flags += "  MUTANT ACCEPTED"
+            print(f"      {key} {r['id']:<26} "
+                  f"{'as declared' if r['as_declared'] else 'MISSED'}{flags}")
+    names = {"R1": "proofs", "R2": "equations of motion",
+             "R3": "transfer models", "R4": "profiles", "R5": "refusals"}
+    for key in ("R1", "R2", "R3", "R4", "R5"):
+        print(f"{key}  {m[key]['as_declared']}/{m[key]['of']} {names[key]} "
+              f"as declared")
+    if m["R6"].get("met") is not None:
+        print(f"R6  {m['R6']['verified']}/{m['R6']['readings']} scripts "
+              f"verify, {m['R6']['mutants_rejected']}/{m['R6']['readings']} "
+              f"mutants rejected")
+    b = m["R7"]
+    print(f"R7  {b['formulas']} random formulas: {b['kinds']}; unsound "
+          f"{b['unsound']}, gaps {b['gaps']}, script failures "
+          f"{b['script_failures']}; classical with a Kripke countermodel "
+          f"{b['classical_with_kripke']}")
+    o = m["R8"]
+    print(f"R8  outside class P: {o['answered']}/{o['of']} answered with "
+          f"fragment and gate; {len(o['moved'])} of {o['texts_checked']} "
+          f"other texts moved")
+    print(f"R9  Lean {m['R9']}")
+    for key, mk in m.items():
+        print(f"{key:<4} mark {'met' if mk.get('met') else 'not met'}")
+    print(f"{report['met']} of {report['of']} marks met")
+    return 0
+
+
+def _derivation_two(args) -> int:
+    """The rest of track P (Phase 107): information inequalities, codes,
+    rate distortion, maximum entropy, eigenvalue problems, transmission,
+    the FFT and the rate posterior -- the marks Q1-Q11 declared in
+    ``evaluation/derivation_two_cases.py`` before any code."""
+    from .runtime import derivation_two_report as dr
+    report = dr.derivation_two_report(run_scripts=not args.no_scripts,
+                                      battery=100 if args.quick else None)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    m = report["marks"]
+    for key in ("Q1", "Q2", "Q3", "Q4", "Q5", "Q6"):
+        for r in m[key]["rows"]:
+            flags = "" if r.get("gate", True) else "  GATE FAILED"
+            if r.get("mutant_rejected") is False:
+                flags += "  MUTANT ACCEPTED"
+            print(f"      {key} {r['id']:<28} "
+                  f"{'as declared' if r['as_declared'] else 'MISSED'}{flags}")
+    names = {"Q1": "information inequalities", "Q2": "codes",
+             "Q3": "rate-distortion questions", "Q4": "maximum-entropy laws",
+             "Q5": "eigenvalue problems",
+             "Q6": "transmission, FFT and posterior questions",
+             "Q7": "refusals"}
+    for key in ("Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7"):
+        print(f"{key}  {m[key]['as_declared']}/{m[key]['of']} {names[key]} "
+              f"as declared")
+    if m["Q8"].get("met") is not None:
+        print(f"Q8  {m['Q8']['verified']}/{m['Q8']['readings']} scripts "
+              f"verify, {m['Q8']['mutants_rejected']}/{m['Q8']['readings']} "
+              f"mutants rejected")
+    a, b = m["Q9"]["inequalities"], m["Q9"]["codes"]
+    print(f"Q9  {a['inequalities']} random inequalities: {a['kinds']}; "
+          f"unsound {a['unsound']}, undecided {a['undecided']}, script "
+          f"failures {a['script_failures']}")
+    print(f"    {b['codes']} random codes: {b['uniquely_decodable']} uniquely "
+          f"decodable; disagreements {b['disagreements']}, Kraft violations "
+          f"{b['kraft_violations']}, construction failures "
+          f"{b['construction_failures']}")
+    o = m["Q10"]
+    print(f"Q10 outside: {o['answered']}/{o['of']} answered with fragment "
+          f"and gate; still refused {o['stays_refused']}; "
+          f"{len(o['moved'])} of {o['texts_checked']} other texts moved")
+    print(f"Q11 Lean {m['Q11']}")
+    for key, mk in m.items():
+        print(f"{key:<4} mark {'met' if mk.get('met') else 'not met'}")
+    print(f"{report['met']} of {report['of']} marks met")
+    return 0
+
+
+def _derivation_three(args) -> int:
+    """Past the limits of the second derivation study (Phase 118):
+    information inequalities past the Shannon cone, rate distortion past the
+    tight range, Robin eigenvalue problems -- the marks N1-N10 declared in
+    ``evaluation/derivation_three_cases.py`` before any code."""
+    from .runtime import derivation_three_report as dr
+    report = dr.derivation_three_report(battery=30 if args.quick else None,
+                                        outside=not args.quick)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    m = report["marks"]
+    for r in m["N5"]["rows"]:
+        flags = "" if r["gate"] else "  GATE FAILED"
+        if not r["mutant_rejected"]:
+            flags += "  MUTANT ACCEPTED"
+        print(f"      N5 {r['id']:<28} {'answered' if r['answered'] else 'refused ' + str(r['code'])}{flags}")
+    names = {"N1": "information inequalities", "N2": "rate-distortion sources",
+             "N3": "Robin problems"}
+    for key in ("N1", "N2", "N3"):
+        print(f"{key}  {m[key]['as_declared']}/{m[key]['of']} {names[key]} "
+              f"as declared")
+    n4 = m["N4"]
+    print(f"N4  {n4['layer']['as_declared']}/{n4['layer']['of']} refusals as "
+          f"declared at the layer, {n4['frames']['as_declared']}/"
+          f"{n4['frames']['of']} through the frames")
+    n5 = m["N5"]
+    print(f"N5  {n5['verified']}/{n5['readings']} scripts verify, "
+          f"{n5['mutants_rejected']}/{n5['readings']} mutants rejected")
+    a = m["N6"]
+    print(f"N6  {a['claims']} random claims: {a['kinds']}; unsound "
+          f"{a['unsound']}, inconsistent {a['inconsistent']}, script failures "
+          f"{a['script_failures']}, left NOT_SHANNON {a['undecided']}")
+    b = m["N7"]
+    print(f"N7  {b['sources']} random sources ({b['past_the_bound']} past the "
+          f"bound): tiling {b['tiling_failures']}, discontinuities "
+          f"{b['discontinuities']}, SLB mismatches {b['slb_mismatches']}, "
+          f"below the bound {b['below_slb']}, script failures "
+          f"{b['script_failures']}, Blahut-Arimoto failures "
+          f"{b['blahut_arimoto_failures']} (worst {b['blahut_arimoto_worst']})")
+    c = m["N8"]
+    print(f"N8  {c['problems']} random Robin problems {c['cases']}: script "
+          f"failures {c['script_failures']}, Newton outside "
+          f"{c['newton_outside']}, negative eigenvalue wrong "
+          f"{c['negative_wrong']}, interval failures {c['interval_failures']}")
+    n9 = m["N9"]
+    if n9.get("met") is not None:
+        print(f"N9  Phase 107: {n9['phase_107']['met_marks']} of "
+              f"{n9['phase_107']['of']} marks; "
+              f"{len(n9['unmoved']['moved'])} of "
+              f"{n9['unmoved']['texts_checked']} other texts moved "
+              f"({n9['unmoved']['read_both_ways']} read both ways)")
+    print(f"N10 Lean {m['N10']}")
+    for key, mk in m.items():
+        print(f"{key:<4} mark {'met' if mk.get('met') else 'not met'}")
+    print(f"{report['met']} of {report['of']} marks met")
+    return 0
+
+
+def _derivation_four(args) -> int:
+    """Past the limits of the third derivation study (Phase 119): chained
+    copies past Zhang-Yeung and five-variable inequalities, rate distortion
+    for any distortion matrix, Robin problems at both ends and with a
+    symbolic coefficient -- the marks P1-P10 declared in
+    ``evaluation/derivation_four_cases.py`` before any code."""
+    from .runtime import derivation_four_report as dr
+    report = dr.derivation_four_report(battery=10 if args.quick else None,
+                                       outside=not args.quick)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    m = report["marks"]
+    for r in m["P5"]["rows"]:
+        flags = "" if r["gate"] else "  GATE FAILED"
+        if not r["mutant_rejected"]:
+            flags += "  MUTANT ACCEPTED"
+        print(f"      P5 {r['id']:<34} {'answered' if r['answered'] else 'refused ' + str(r['code'])}{flags}")
+    names = {"P1": "information inequalities", "P2": "rate-distortion sources",
+             "P3": "Robin problems"}
+    for key in ("P1", "P2", "P3"):
+        print(f"{key}  {m[key]['as_declared']}/{m[key]['of']} {names[key]} "
+              f"as declared")
+    p4 = m["P4"]
+    print(f"P4  {p4['layer']['as_declared']}/{p4['layer']['of']} refusals as "
+          f"declared at the layer, {p4['frames']['as_declared']}/"
+          f"{p4['frames']['of']} through the frames")
+    p5 = m["P5"]
+    print(f"P5  {p5['verified']}/{p5['readings']} scripts verify, "
+          f"{p5['mutants_rejected']}/{p5['readings']} mutants rejected")
+    a, b = m["P6"]["five"], m["P6"]["phase_118"]
+    print(f"P6  {a['claims']} random five-variable claims: {a['kinds']}; "
+          f"unsound {a['unsound']}, inconsistent {a['inconsistent']}, script "
+          f"failures {a['script_failures']}; Phase 118's battery: "
+          f"{b['decided_by_copies']} of its {len(b['not_shannon'])} "
+          f"NOT_SHANNON claims decided by copies")
+    c = m["P7"]
+    print(f"P7  {c['sources']} random sources ({c['degenerate']} with D_min "
+          f"= D_max, {c['hamming']} Hamming): failures {c['failures']}")
+    d = m["P8"]
+    print(f"P8  {d['problems']} random Robin problems: failures "
+          f"{d['failures']}")
+    p9 = m["P9"]
+    if p9.get("met") is not None:
+        print(f"P9  Phase 118: {p9['phase_118']['met_marks']} of "
+              f"{p9['phase_118']['of']} marks; "
+              f"{len(p9['unmoved']['moved'])} of "
+              f"{p9['unmoved']['texts_checked']} other texts moved "
+              f"({p9['unmoved']['read_both_ways']} read both ways)")
+    print(f"P10 Lean {m['P10']}")
+    for key, mk in m.items():
+        print(f"{key:<4} mark {'met' if mk.get('met') else 'not met'}")
+    print(f"{report['met']} of {report['of']} marks met")
+    return 0
+
+
+def _cubic_trig(args) -> int:
+    """A cubic in letters with three real roots (Phase 108): the marks
+    T1-T9 declared in ``evaluation/cubic_trig_cases.py`` before any code."""
+    from .runtime import cubic_trig_report as ct
+    report = ct.cubic_trig_report(run_scripts=not args.no_scripts,
+                                  battery=not args.quick,
+                                  outside=not args.quick)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    m = report["marks"]
+    for key in ("T1", "T2"):
+        for r in m[key]["rows"]:
+            print(f"      {key} {r['id']:<30} "
+                  f"{'ok' if r['ok'] else 'MISSED'}"
+                  f"{'' if r.get('gate', True) else '  GATE FAILED'}")
+            print(f"         {r['value'][:160]}")
+    print(f"T1  {m['T1']['passed']}/{m['T1']['of']} homogeneous cubics with "
+          f"exactly the declared branches")
+    print(f"T2  {m['T2']['passed']}/{m['T2']['of']} Viete cubics with exactly "
+          f"the declared branches, the condition and the form stated")
+    if m["T3"].get("met") is not None:
+        print(f"T3  {m['T3']['verified']}/{m['T3']['answered']} scripts "
+              f"verify, {m['T3']['mutants_rejected']}/{m['T3']['answered']} "
+              f"mutants rejected")
+    for r in m["T4"]["rows"]:
+        print(f"T4  {r['id']}: {r['matched']}/{r['declared']} squared "
+              f"frequencies, gate {r['gate']}, mutant rejected "
+              f"{r['mutant_rejected']}: {', '.join(r['frequencies'])}")
+    t5 = m["T5"]
+    print(f"T5  unchanged readings moved {len(t5['unchanged_moved'])}, "
+          f"motion cases moved {len(t5['motion_moved'])}/"
+          f"{t5['motion_checked']}; Phase 104 marks "
+          f"{t5.get('phase104', 'skipped')}")
+    for key, name in (("T6", "Viete"), ("T7", "homogeneous")):
+        if not m[key].get("skipped"):
+            print(f"{key}  {name} battery: {m[key]['passed']}/"
+                  f"{m[key]['count']} (seed {m[key]['seed']})")
+    print(f"T8  Lean {m['T8']}")
+    if not m["T9"].get("skipped"):
+        t9 = m["T9"]
+        print(f"T9  {t9['texts_checked']} texts read with the switch off and "
+              f"on: moved {t9['moved']} (allowed {t9['moved_allowed']})")
+    print(f"{report['met']} of {report['of']} marks met")
+    return 0
+
+
+def _quintic_radical(args) -> int:
+    """Factoring past degree 6 and roots with no expression in radicals
+    (Phase 112): the marks R1-R7 of ``evaluation/quintic_radical_cases.py``."""
+    from .runtime import quintic_radical_report as qr
+    report = qr.quintic_radical_report(run_scripts=not args.no_scripts,
+                                       battery=not args.quick)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    m = report["marks"]
+    for r in m["R1"]["rows"]:
+        print(f"      R1 {r['id']:<26} "
+              f"{'ok' if r['ok'] else 'MISSED'}  "
+              f"{r.get('branches', 0)}/{r['declared']} real roots")
+    for r in m["R4"]["rows"]:
+        print(f"      R4 {r['id']:<26} {'ok' if r['ok'] else 'MISSED'}  "
+              f"reason {'given' if r['reason'] else 'not given'}")
+    print(f"R1  {m['R1']['passed']}/{m['R1']['of']} high-degree questions "
+          f"with the declared real roots, every bracket sound")
+    print(f"R2  {m['R2']['passed']}/{m['R2']['of']} certificate questions "
+          f"carry the radical-free statement")
+    print(f"R3  {m['R3']['passed']}/{m['R3']['of']} controls do not")
+    print(f"R4  {m['R4']['passed']}/{m['R4']['of']} letter questions "
+          f"refused with the declared reason")
+    if not m["R5"].get("skipped"):
+        print(f"R5  planted battery: {m['R5']['answered']}/{m['R5']['of']} "
+              f"answered, {m['R5']['wrong']} wrong")
+    if not m["R6"].get("skipped"):
+        print(f"R6  Zassenhaus = Kronecker on {m['R6']['agree']}/"
+              f"{m['R6']['of']} polynomials of degree 4 to 6 "
+              f"({m['R6']['split']} reducible)")
+    print(f"R7  Lean {m['R7']}")
+    print(f"{report['met']} of {report['of']} marks met")
+    return 0
+
+
+def _frobenius_radical(args) -> int:
+    """Roots with no expression in radicals, read from one Frobenius element
+    (Phase 113): the marks F1-F9 of
+    ``evaluation/frobenius_radical_cases.py``."""
+    from .runtime import frobenius_radical_report as fr
+    report = fr.frobenius_radical_report(battery=not args.quick)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    m = report["marks"]
+    for key in ("F1", "F2", "F3"):
+        for r in m[key]["rows"]:
+            print(f"      {key} {'ok' if r['ok'] else 'MISSED'}  "
+                  f"{r['question'].split(':', 1)[1].strip()}")
+    for r in m["F4"]["rows"]:
+        print(f"      F4 {r['id']:<26} {'ok' if r['ok'] else 'MISSED'}  "
+              f"reason {r['reason'] or 'none'}")
+    print(f"F1  {m['F1']['passed']}/{m['F1']['of']} non-solvable questions "
+          f"carry the Frobenius statement")
+    print(f"F2  {m['F2']['passed']}/{m['F2']['of']} solvable controls carry "
+          f"no radical-free statement")
+    print(f"F3  {m['F3']['passed']}/{m['F3']['of']} declared limit "
+          f"(composite degree) silent")
+    print(f"F4  {m['F4']['passed']}/{m['F4']['of']} letter questions refused "
+          f"with the declared reason")
+    if not m["F5"].get("skipped"):
+        print(f"F5  soundness battery: {m['F5']['certified']} of "
+              f"{m['F5']['of']} solvable polynomials certified")
+        print(f"F6  reach battery: {m['F6']['frobenius']}/{m['F6']['of']} "
+              f"certified by Frobenius, {m['F6']['conjugation']} by "
+              f"conjugation, all of those also by Frobenius: "
+              f"{m['F6']['conjugation_also_frobenius'] == m['F6']['conjugation']}")
+        print(f"F7  distinct-degree reading = complete factorisation on "
+              f"{m['F7']['agree']}/{m['F7']['of']} (polynomial, prime) pairs; "
+              f"shape test right on {m['F7']['shapes_ok']}/"
+              f"{m['F7']['shapes']} cycle types")
+    print(f"F8  Lean {m['F8']}")
+    if not m["F9"].get("skipped"):
+        print(f"F9  Phase 112 report: {m['F9']['met_of']}")
+    print(f"{report['met']} of {report['of']} marks met")
+    return 0
+
+
+def _primitive_radical(args) -> int:
+    """Roots with no expression in radicals in composite degree, read from
+    two Frobenius elements, and on the ``modes.higher`` route (Phase 114):
+    the marks P1-P10 of ``evaluation/primitive_radical_cases.py``."""
+    from .runtime import primitive_radical_report as pr
+    report = pr.primitive_radical_report(battery=not args.quick)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    m = report["marks"]
+    for key in ("P1", "P2", "P3"):
+        for r in m[key]["rows"]:
+            print(f"      {key} {'ok' if r['ok'] else 'MISSED'}  "
+                  f"{r['question'].split(':', 1)[1].strip()}")
+    for r in m["P4"]["rows"]:
+        print(f"      P4 {r['id']:<26} {'ok' if r['ok'] else 'MISSED'}  "
+              f"reason {r['reason'] or 'none'}")
+    for r in m["P9"]["rows"]:
+        print(f"      P9 {'ok' if r['ok'] else 'MISSED'}  {r['question']}")
+    print(f"P1  {m['P1']['passed']}/{m['P1']['of']} non-solvable questions "
+          f"of composite degree carry the primitive statement")
+    print(f"P2  {m['P2']['passed']}/{m['P2']['of']} solvable controls carry "
+          f"no radical-free statement")
+    print(f"P3  {m['P3']['passed']}/{m['P3']['of']} declared limit "
+          f"(imprimitive, not solvable) silent")
+    print(f"P4  {m['P4']['passed']}/{m['P4']['of']} letter questions with "
+          f"the declared reason")
+    if not m["P5"].get("skipped"):
+        print(f"P5  soundness battery: {m['P5']['certified']} of "
+              f"{m['P5']['of']} solvable polynomials certified")
+        print(f"P6  reach battery: {m['P6']['certified']}/{m['P6']['of']} "
+              f"certified ({m['P6']['by_degree']})")
+    print(f"P7  shape tests right on {m['P7']['ok']}/{m['P7']['shapes']} "
+          f"cycle types")
+    print(f"P8  Lean {m['P8']}")
+    print(f"P9  {m['P9']['passed']}/{m['P9']['of']} chain pendulums state "
+          f"why their modes have no radical formula")
+    if not m["P10"].get("skipped"):
+        print(f"P10 Phase 113 report: {m['P10']['met_of']}")
+    print(f"{report['met']} of {report['of']} marks met")
+    return 0
+
+
+def _composed_radical(args) -> int:
+    """Roots with no expression in radicals through a composition
+    ``g(h(x))`` (Phase 115): the marks C1-C8 of
+    ``evaluation/composed_radical_cases.py``."""
+    from .runtime import composed_radical_report as cr
+    report = cr.composed_radical_report(battery=not args.quick)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    m = report["marks"]
+    for key in ("C1", "C2"):
+        for r in m[key]["rows"]:
+            print(f"      {key} {'ok' if r['ok'] else 'MISSED'}  "
+                  f"{r['question'].split(':', 1)[1].strip()}")
+    for r in m["C3"]["rows"]:
+        print(f"      C3 {r['id']:<28} {'ok' if r['ok'] else 'MISSED'}  "
+              f"reason {r['reason'] or 'none'}")
+    print(f"C1  {m['C1']['passed']}/{m['C1']['of']} compositions with a "
+          f"non-solvable outer polynomial carry the composition statement")
+    print(f"C2  {m['C2']['passed']}/{m['C2']['of']} solvable controls carry "
+          f"no radical-free statement")
+    print(f"C3  {m['C3']['passed']}/{m['C3']['of']} letter questions with "
+          f"the declared reason")
+    if not m["C4"].get("skipped"):
+        print(f"C4  soundness battery: {m['C4']['certified']} of "
+              f"{m['C4']['of']} solvable polynomials certified")
+        print(f"C5  reach battery: {m['C5']['certified']}/{m['C5']['of']} "
+              f"certified ({m['C5']['by_shape']})")
+        print(f"C6  decompositions exact on {m['C6']['exact']}/"
+              f"{m['C6']['of']} built compositions")
+    print(f"C7  Lean {m['C7']}")
+    if not m["C8"].get("skipped"):
+        print(f"C8  Phase 114 report: {m['C8']['phase_114']}; Phase 112 "
+              f"report: {m['C8']['phase_112']}")
+    print(f"{report['met']} of {report['of']} marks met")
+    return 0
+
+
+def _meta_questions(args) -> int:
+    """Questions about the GLM's own engineering, answered from the
+    project's own documents (Phase 117, track M): the marks T1-T7 of
+    ``evaluation/meta_question_cases.py``."""
+    from .runtime import meta_report as mr
+    report = mr.meta_report(mutations=not args.quick)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    m = report["marks"]
+    for r in report["rows"]:
+        print(f"      {r['index']:>3} {'ok' if r['read'] and r['fragment'] and r['gate'] else 'MISSED'}  "
+              f"{r['topic']}: {r['headline'][:90]}")
+    print(f"T1  {m['T1']['passed']}/{m['T1']['of']} class-M questions read by "
+          f"their topic through the router and answered with the declared "
+          f"fragment")
+    print(f"T2  {m['T2']['passed']}/{m['T2']['of']} with every declared "
+          f"quote ({m['T2']['quotes']}) and theorem ({m['T2']['theorems']}) "
+          f"found at read time")
+    print(f"T3  {m['T3']['passed']}/{m['T3']['of']} with exactly the "
+          f"declared disputed premises ({m['T3']['disputes']})")
+    mut = m["T4"]["mutations"]
+    print(f"T4  {m['T4']['scripts']}/{m['T4']['of']} scripts VERIFIED; "
+          + ("mutations skipped" if mut.get("skipped") else
+             "mutations caught " + ", ".join(
+                 f"{k} {v}/{mut['of']}" for k, v in mut["caught"].items())))
+    print(f"T5  {m['T5']['passed']}/{m['T5']['of']} declared paraphrases; "
+          f"held out {report['held_out']['passed']}/"
+          f"{report['held_out']['of']} (missed: "
+          f"{', '.join(report['held_out']['missed']) or 'none'})")
+    print(f"T6  meta frames read {len(m['T6']['read_by_meta'])} of "
+          f"{m['T6']['texts_checked']} other texts; {len(m['T6']['moved'])} "
+          f"changed frame")
+    print(f"T7  Lean file: missing {m['T7'].get('missing')}, sorry "
+          f"{m['T7'].get('sorry')}")
+    print(f"{report['met']} of {report['of']} marks met")
+    return 0
+
+
+def _explanations(args) -> int:
+    """Outside questions that ask *why* (Phase 120, track E): answered
+    where a register or an exact derivation decides them, the account
+    refused EXPLANATION; the marks E1-E10 of
+    ``evaluation/explanation_cases.py``."""
+    from .runtime import explanation_report as er
+    report = er.explanation_report(mutations=not args.quick)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    m = report["marks"]
+    for r in report["rows"]:
+        ok = r["read"] and r["answered"] and r["fragment"] and r["gate"]
+        print(f"      {r['index']:>3} {'ok' if ok else 'MISSED'}  "
+              f"{r['scope']:<8} {r['topic']}: {r['headline'][:80]}")
+    print(f"E1  {m['E1']['passed']}/{m['E1']['of']} read by their topic "
+          f"through the router and answered with the declared fragment")
+    print(f"E2  {m['E2']['passed']}/{m['E2']['of']} with the declared scope "
+          f"({m['E2']['full']} FULL, the rest refused EXPLANATION in part)")
+    print(f"E3  {m['E3']['passed']}/{m['E3']['of']} naming their registers "
+          f"({m['E3']['reading_a_register']} read a register)")
+    mut = m["E4"]["mutations"]
+    print(f"E4  {m['E4']['scripts']}/{m['E4']['of']} scripts VERIFIED; "
+          + ("mutations skipped" if mut.get("skipped") else
+             "mutations caught " + ", ".join(
+                 f"{k} {mut['caught'][k]}/{mut['applies'][k]}"
+                 for k in mut["caught"])))
+    print(f"E5  {m['E5']['passed']}/{m['E5']['of']} with exactly the "
+          f"declared disputed premises ({m['E5']['disputes']})")
+    ho = report["held_out"]
+    print(f"E6  {m['E6']['passed']}/{m['E6']['of']} declared paraphrases; "
+          f"held out {ho['passed']}/{ho['of']} "
+          f"({len(ho['wrong_frame'])} read by a wrong frame)")
+    print(f"E7  explanation frames read {len(m['E7']['read_by_explanation'])}"
+          f" of {m['E7']['texts_checked']} other texts; "
+          f"{len(m['E7']['moved'])} changed frame")
+    e8 = m["E8"]
+    print(f"E8  nuclide register: {e8['ground_states']} ground states, "
+          f"{e8['stable']} stable, peak {e8['peak']} {e8['peak_keV']} keV, "
+          f"deuteron {e8['deuteron_keV']} keV; checks "
+          + ", ".join(k for k, v in e8["checks"].items() if v))
+    print(f"E9  Lean file: missing {m['E9'].get('missing')}, sorry "
+          f"{m['E9'].get('sorry')}")
+    print(f"E10 previously refused now answered: {m['E10']['answered']} of "
+          f"{m['E10']['of']}")
+    print(f"{report['met']} of {report['of']} marks met")
+    return 0
+
+
+def _primitive_degree(args) -> int:
+    """Roots with no expression in radicals in a degree that is not a prime
+    power, from one Frobenius element (Phase 116): the marks D1-D8 of
+    ``evaluation/primitive_degree_cases.py``."""
+    from .runtime import primitive_degree_report as pd
+    report = pd.primitive_degree_report(battery=not args.quick)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    m = report["marks"]
+    for key in ("D1", "D2"):
+        for r in m[key]["rows"]:
+            print(f"      {key} {'ok' if r['ok'] else 'MISSED'}  "
+                  f"{r['question'].split(':', 1)[1].strip()}")
+    print(f"D1  {m['D1']['passed']}/{m['D1']['of']} declared sextics (groups "
+          f"PGL(2,5), PSL(2,5)) carry the new statement")
+    print(f"D2  {m['D2']['passed']}/{m['D2']['of']} solvable controls carry "
+          f"no radical-free statement")
+    groups = m["D3"]["groups"]
+    print("D3  " + "; ".join(
+        f"{name}: order {g['order']}, transitive {g['transitive']}, (5, 1) "
+        f"element {g['long_cycle']}, Jordan elements {len(g['jordan'])}"
+        for name, g in groups.items()) +
+        f"; Phase 114 silent on {m['D3']['phase_114_silent']} declared")
+    if not m["D4"].get("skipped"):
+        print(f"D4  soundness battery: {m['D4']['certified']} of "
+              f"{m['D4']['of']} solvable polynomials certified")
+        print(f"D5  reach battery: {m['D5']['certified']}/{m['D5']['of']} "
+              f"Cayley sextics certified, {m['D5']['by_phase_114']} by "
+              f"Phase 114")
+        print(f"D6  degree gate: {m['D6']['range']}; fired on "
+              f"{m['D6']['fired']} of {m['D6']['prime_power_degree_polys']} "
+              f"polynomials of degree 8 or 9")
+    print(f"D7  Lean {m['D7']}")
+    if not m["D8"].get("skipped"):
+        print(f"D8  Phase 115 report: {m['D8']['phase_115']}")
+    print(f"{report['met']} of {report['of']} marks met")
+    return 0
+
+
+def _cubic_radical(args) -> int:
+    """Cubics, nested square roots and the positive-root dual track
+    (Phase 104): the marks K1-K9 declared in
+    ``evaluation/cubic_radical_cases.py`` before any code."""
+    from .runtime import cubic_radical_report as cr
+    report = cr.cubic_radical_report(run_scripts=not args.no_scripts,
+                                     battery=not args.quick)
+    if args.json:
+        print(json.dumps(report, indent=1, sort_keys=True, default=str))
+        return 0
+    for key in ("K1", "K2", "K5"):
+        for r in report[key]["rows"]:
+            print(f"      {key} {r.get('id', '?'):<26} "
+                  f"{'ok' if r.get('ok', r.get('passed')) else 'MISSED'}"
+                  f"{'' if r.get('gate', True) else '  GATE FAILED'}")
+    k = report
+    print(f"K1  {k['K1']['passed']}/{k['K1']['of']} algebraic systems with "
+          f"exactly the declared branches")
+    print(f"K2  {k['K2']['passed']}/{k['K2']['of']} radical systems with "
+          f"exactly the declared branches")
+    print(f"K3  {k['K3']['passed']}/{k['K3']['of']} refusals by the declared "
+          f"code")
+    if not k["K4"].get("skipped"):
+        print(f"K4  {k['K4']['verified']}/{k['K4']['answered']} scripts "
+              f"verify, {k['K4']['mutants_rejected']}/{k['K4']['answered']} "
+              f"mutants rejected")
+    print(f"K5  {k['K5']['passed']}/{k['K5']['of']} dual-track questions")
+    k6 = k["K6"]
+    print(f"K6  Phase 103 mode: systems {k6['phase103_systems']}, refusals "
+          f"{k6['phase103_refusals']}; branch sets kept "
+          f"{k6['phase103_branch_sets_kept']}; Phase 98 questions "
+          f"{k6['phase98_same']}/{k6['phase98_questions']} the same, "
+          f"{k6['phase98_moved_by_convention']} moved by the convention, "
+          f"{k6['phase98_moved_otherwise']} moved otherwise")
+    if not k["K7"].get("skipped"):
+        for seed in sorted(x for x in k["K7"] if x != "met"):
+            b = k["K7"][seed]
+            print(f"K7  battery {seed}: {b['answered']}/{b['systems']} "
+                  f"answered, planted point in {b['planted']}, {b['wrong']} "
+                  f"wrong; independent count agrees {b['independent_agree']}, "
+                  f"disagrees {b['independent_disagree']}")
+    if not k["K8"].get("skipped"):
+        print(f"K8  {k['K8']['passed']}/{k['K8']['of']} cubics "
+              f"({k['K8']['three']} with three real roots)")
+    print(f"K9  Lean {k['K9']}")
+    if args.explore:
+        ex = cr.exploration()
+        print(f"post hoc: {ex['hard_answered']}/{len(ex['hard'])} harder "
+              f"systems answered, {ex['hard_verified']} verified, "
+              f"{ex['hard_mutants_rejected']} mutants rejected")
+        rnd = ex["random"]
+        print(f"post hoc: {rnd['pairs']} random conic pairs (seed "
+              f"{rnd['seed']}): {rnd['readings']}; gate failures "
+              f"{rnd['gate_failed']}; independent count agrees "
+              f"{rnd['independent_agree']}, disagrees "
+              f"{rnd['independent_disagree']}, undecided "
+              f"{rnd['independent_undecided']}")
+    for key, ok in report["marks"].items():
+        print(f"{key:<4} mark "
+              f"{'met' if ok else ('skipped' if ok is None else 'not met')}")
+    return 0
+
+
 def _symbolic(args) -> int:
     """Symbolic parameters (Phase 98): the marks S1-S8 declared in
     ``studies/SYMBOLIC_PARAMETERS_STUDY.md`` before any code."""
@@ -2745,12 +4090,116 @@ def _parser() -> argparse.ArgumentParser:
     ladder.add_argument("--json", action="store_true")
     ladder.set_defaults(handler=_escalation)
 
+    blind = sub.add_parser(
+        "stray-blind",
+        help="lattice item 10: the pairs a distance-only reading conflates")
+    blind.add_argument("--write", action="store_true",
+                       help="re-take the measurement cache")
+    blind.add_argument("--json", action="store_true")
+    blind.set_defaults(handler=_stray_blind)
+
+    shares = sub.add_parser(
+        "share-ensemble",
+        help="lattice item 6: the ladder's ensembles to 30720 starts")
+    shares.add_argument("--write", action="store_true",
+                        help="re-take the measurement cache")
+    shares.add_argument("--jobs", type=int, default=None)
+    shares.set_defaults(handler=_share_ensemble)
+
+    separation = sub.add_parser(
+        "share-separation",
+        help="lattice item 6: the criterion for the share-carrying rungs")
+    separation.add_argument("--json", action="store_true")
+    separation.set_defaults(handler=_share_separation)
+
+    configuration = sub.add_parser(
+        "configuration-reading",
+        help="lattice item 6: the configuration reading for the 28-vertex pair")
+    configuration.add_argument("--json", action="store_true")
+    configuration.set_defaults(handler=_configuration_reading)
+
     four = sub.add_parser(
         "failures", help="the four failures and the spread that gates them")
     four.add_argument("--write", action="store_true",
                       help="re-take the measurement cache")
     four.add_argument("--json", action="store_true")
     four.set_defaults(handler=_failures)
+
+    hcen = sub.add_parser(
+        "hole-census", help="all 23 Niemeier types and the L5 cells")
+    hcen.add_argument("--write", action="store_true",
+                      help="re-take the measurement cache (long)")
+    hcen.add_argument("--jobs", type=int, default=None)
+    hcen.add_argument("--json", action="store_true")
+    hcen.set_defaults(handler=_hole_census)
+
+    pcen = sub.add_parser(
+        "patience-census",
+        help="the hole census's three uncertified centres, re-read post hoc")
+    pcen.add_argument("--write", action="store_true",
+                      help="re-take the measurement cache (long)")
+    pcen.add_argument("--jobs", type=int, default=None)
+    pcen.add_argument("--json", action="store_true")
+    pcen.set_defaults(handler=_patience_census)
+
+    prbg = sub.add_parser(
+        "probe-budget",
+        help="the certifying reading's stopping rule: no barren stop, a "
+             "proved budget")
+    prbg.add_argument("--write", action="store_true",
+                      help="re-take the measurement cache (long)")
+    prbg.add_argument("--jobs", type=int, default=None)
+    prbg.add_argument("--json", action="store_true")
+    prbg.set_defaults(handler=_probe_budget)
+
+    opsp = sub.add_parser(
+        "ops-ladder",
+        help="the operations ladder and GLM-BAT: the declared battery, the "
+             "marks and hypothesis H")
+    opsp.add_argument("--fast", action="store_true",
+                      help="skip the column-3 scripts and their mutations")
+    opsp.add_argument("--agreement", action="store_true",
+                      help="also run the post-hoc agreement of the two "
+                           "interpreters on 300 generated programs")
+    opsp.add_argument("--json", action="store_true")
+    opsp.set_defaults(handler=_ops_ladder)
+
+    inrt = sub.add_parser(
+        "inert-counter",
+        help="GLM-BAT's inert-variable certificate: the battery and the marks")
+    inrt.add_argument("--json", action="store_true")
+    inrt.set_defaults(handler=_inert_counter)
+
+    cfcl = sub.add_parser(
+        "configuration-classifier",
+        help="the L5 answer rule over the 44 deep-hole queries")
+    cfcl.add_argument("--write", action="store_true",
+                      help="re-take the measurement cache")
+    cfcl.add_argument("--json", action="store_true")
+    cfcl.set_defaults(handler=_configuration_classifier)
+
+    frzp = sub.add_parser(
+        "frozen-path",
+        help="the lattice round's frozen-path comparison of the evaluation")
+    frzp.add_argument("--write", action="store_true",
+                      help="re-take the comparison (asks every case)")
+    frzp.add_argument("--json", action="store_true")
+    frzp.set_defaults(handler=_frozen_path)
+
+    erun = sub.add_parser(
+        "empty-rungs", help="the norm-2 and norm-256 rungs of the ladder")
+    erun.add_argument("--write", action="store_true",
+                      help="re-take the measurement cache")
+    erun.add_argument("--json", action="store_true")
+    erun.set_defaults(handler=_empty_rungs)
+
+    n256p = sub.add_parser(
+        "norm256-hex",
+        help="norm 256 and the hex colour: the candidates and the shortcut")
+    n256p.add_argument("--write", action="store_true",
+                       help="re-take the measurement cache")
+    n256p.add_argument("--json", action="store_true")
+    n256p.set_defaults(handler=_norm256_hex)
 
     cumul = sub.add_parser(
         "cumulativity", help="the refinement check every layer family passes")
@@ -2900,6 +4349,65 @@ def _parser() -> argparse.ArgumentParser:
                           help="measure now instead of reading the stored "
                                "measurements")
     resample.set_defaults(handler=_corpus_resample)
+
+    astx = sub.add_parser(
+        "ast-index",
+        help="the AST address as a retrieval key: where a structurally equal "
+             "expression is computed, in the live code and the archive "
+             "(Phase 105)")
+    astx.add_argument("--json", action="store_true")
+    astx.add_argument("--freeze", action="store_true",
+                      help="take the snapshot of the two corpora (once)")
+    astx.add_argument("--write", action="store_true",
+                      help="re-take the measurement from the snapshot and "
+                           "store it beside its digest")
+    astx.add_argument("--live", action="store_true",
+                      help="measure now instead of reading the stored "
+                           "measurement")
+    astx.add_argument("--no-scripts", action="store_true",
+                      help="skip running the column-3 scripts and mutants")
+    astx.add_argument("--ask", metavar="QUESTION", default=None,
+                      help="ask the operation one question")
+    astx.set_defaults(handler=_ast_index)
+
+    tree = sub.add_parser(
+        "document-tree",
+        help="the document tree as a third native book for the documents, "
+             "measured on a frozen copy of the corpus (Phase 102)")
+    tree.add_argument("--json", action="store_true")
+    tree.add_argument("--freeze", action="store_true",
+                      help="take the snapshot of the written corpus (once)")
+    tree.add_argument("--write", action="store_true",
+                      help="re-take the measurement from the snapshot and "
+                           "store it beside its digest")
+    tree.add_argument("--live", action="store_true",
+                      help="measure now instead of reading the stored "
+                           "measurement")
+    tree.set_defaults(handler=_document_tree)
+
+    scope = sub.add_parser(
+        "citation-scope",
+        help="citations read in Lean's scope: both readers against the "
+             "elaborator, the type-word repair, and the retrieval figures "
+             "re-taken beside the legacy record")
+    scope.add_argument("--json", action="store_true")
+    scope.add_argument("--write", action="store_true",
+                       help="re-take the measurement and store it beside "
+                            "its digest")
+    scope.add_argument("--reference", action="store_true",
+                       help="re-take the elaborator's citation graph first "
+                            "(needs the compiled library)")
+    scope.add_argument("--live", action="store_true",
+                       help="measure now instead of reading the stored "
+                            "measurement")
+    scope.set_defaults(handler=_citation_scope)
+
+    dependency = sub.add_parser(
+        "dependency",
+        help="what a Lean result rests on: the declared dependency "
+             "questions, their gates and mutations, and the refusals")
+    dependency.add_argument("--json", action="store_true")
+    dependency.set_defaults(handler=_dependency)
 
     laws = sub.add_parser(
         "law-register",
@@ -3173,6 +4681,172 @@ def _parser() -> argparse.ArgumentParser:
     unpack.add_argument("--no-scripts", action="store_true",
                         help="skip running the column-3 scripts")
     unpack.set_defaults(handler=_unpacking)
+
+    nonl = sub.add_parser(
+        "nonlinear",
+        help="systems in letters that substitution cannot isolate: the "
+             "branch layer against the marks of the nonlinear elimination "
+             "study")
+    nonl.add_argument("--json", action="store_true")
+    nonl.add_argument("--quick", action="store_true",
+                      help="skip the planted battery (E5)")
+    nonl.add_argument("--no-scripts", action="store_true",
+                      help="skip running the column-3 scripts and mutants")
+    nonl.set_defaults(handler=_nonlinear)
+
+    deriv = sub.add_parser(
+        "derivation",
+        help="derivations and proofs: propositional proof search, "
+             "Euler-Lagrange, transfer functions and profiles, against the "
+             "marks of the derivation study")
+    deriv.add_argument("--json", action="store_true")
+    deriv.add_argument("--quick", action="store_true",
+                       help="a battery of 200 formulas instead of 2000")
+    deriv.add_argument("--no-scripts", action="store_true",
+                       help="skip running the column-3 scripts and mutants")
+    deriv.set_defaults(handler=_derivation)
+
+    deriv2 = sub.add_parser(
+        "derivation-two",
+        help="the rest of track P: information inequalities, codes, rate "
+             "distortion, maximum entropy, eigenvalue problems, "
+             "transmission, FFT and the rate posterior, against the marks "
+             "of the second derivation study")
+    deriv2.add_argument("--json", action="store_true")
+    deriv2.add_argument("--quick", action="store_true",
+                        help="batteries of 100 instead of 400 and 600")
+    deriv2.add_argument("--no-scripts", action="store_true",
+                        help="skip running the column-3 scripts and mutants")
+    deriv2.set_defaults(handler=_derivation_two)
+
+    deriv3 = sub.add_parser(
+        "derivation-three",
+        help="past the second derivation study's limits: inequalities past "
+             "the Shannon cone, rate distortion past the tight range, Robin "
+             "eigenvalue problems, against the marks of the third "
+             "derivation study")
+    deriv3.add_argument("--json", action="store_true")
+    deriv3.add_argument("--quick", action="store_true",
+                        help="batteries of 30, and no Phase 107 or "
+                             "outside comparison")
+    deriv3.set_defaults(handler=_derivation_three)
+
+    deriv4 = sub.add_parser(
+        "derivation-four",
+        help="past the third derivation study's limits: chained copies and "
+             "five-variable inequalities, rate distortion for any distortion "
+             "matrix, Robin problems at both ends and with a symbolic "
+             "coefficient, against the marks of the fourth derivation study")
+    deriv4.add_argument("--json", action="store_true")
+    deriv4.add_argument("--quick", action="store_true",
+                        help="batteries of 10, and no Phase 118 or "
+                             "outside comparison")
+    deriv4.set_defaults(handler=_derivation_four)
+
+    cubr = sub.add_parser(
+        "cubic-radical",
+        help="cubics, nested square roots and the positive-root dual track: "
+             "the branch layer against the marks of the cubic radical study")
+    cubr.add_argument("--json", action="store_true")
+    cubr.add_argument("--quick", action="store_true",
+                      help="skip the batteries (K7, K8)")
+    cubr.add_argument("--explore", action="store_true",
+                      help="also run the post hoc exploration (harder "
+                           "systems, random conic pairs)")
+    cubr.add_argument("--no-scripts", action="store_true",
+                      help="skip running the column-3 scripts and mutants")
+    cubr.set_defaults(handler=_cubic_radical)
+
+    quir = sub.add_parser(
+        "quintic-radical",
+        help="factoring past degree 6 and roots with no expression in "
+             "radicals: the branch layer against the marks of the quintic "
+             "radical study")
+    quir.add_argument("--json", action="store_true")
+    quir.add_argument("--quick", action="store_true",
+                      help="skip the batteries (R5, R6)")
+    quir.add_argument("--no-scripts", action="store_true",
+                      help="skip running the column-3 scripts")
+    quir.set_defaults(handler=_quintic_radical)
+
+    frob = sub.add_parser(
+        "frobenius-radical",
+        help="roots with no expression in radicals read from one Frobenius "
+             "element: the branch layer against the marks of the Frobenius "
+             "radical study")
+    frob.add_argument("--json", action="store_true")
+    frob.add_argument("--quick", action="store_true",
+                      help="skip the batteries and the Phase 112 regression "
+                           "(F5-F7, F9)")
+    frob.set_defaults(handler=_frobenius_radical)
+
+    prim = sub.add_parser(
+        "primitive-radical",
+        help="roots with no expression in radicals in composite degree, read "
+             "from two Frobenius elements, and on the modes route: the marks "
+             "of the primitive radical study")
+    prim.add_argument("--json", action="store_true")
+    prim.add_argument("--quick", action="store_true",
+                      help="skip the batteries and the Phase 113 regression "
+                           "(P5, P6, P10)")
+    prim.set_defaults(handler=_primitive_radical)
+
+    comp = sub.add_parser(
+        "composed-radical",
+        help="roots with no expression in radicals through a composition "
+             "g(h(x)): the marks of the composed radical study")
+    comp.add_argument("--json", action="store_true")
+    comp.add_argument("--quick", action="store_true",
+                      help="skip the batteries and the Phase 114 and 112 "
+                           "regressions (C4-C6, C8)")
+    comp.set_defaults(handler=_composed_radical)
+
+    metq = sub.add_parser(
+        "meta-questions",
+        help="questions about the GLM's own engineering (scoring, the "
+             "sandbox, Lean templates, the decoding radius, ...), answered "
+             "from the project's own documents: the marks of the meta "
+             "questions study")
+    metq.add_argument("--json", action="store_true")
+    metq.add_argument("--quick", action="store_true",
+                      help="skip the mutation controls of T4")
+    metq.set_defaults(handler=_meta_questions)
+
+    expl = sub.add_parser(
+        "explanations",
+        help="outside questions that ask why (resonance, nuclear binding, "
+             "periodic trends, logic): the part a register or an exact "
+             "derivation decides, the account refused EXPLANATION; the "
+             "marks of the explanation anchor study")
+    expl.add_argument("--json", action="store_true")
+    expl.add_argument("--quick", action="store_true",
+                      help="skip the mutation controls of E4")
+    expl.set_defaults(handler=_explanations)
+
+    pdeg = sub.add_parser(
+        "primitive-degree",
+        help="roots with no expression in radicals in a degree that is not a "
+             "prime power, from one Frobenius element (Galois: a solvable "
+             "primitive group has prime-power degree): the marks of the "
+             "primitive degree study")
+    pdeg.add_argument("--json", action="store_true")
+    pdeg.add_argument("--quick", action="store_true",
+                      help="skip the batteries and the Phase 115 regression "
+                           "(D4-D6, D8)")
+    pdeg.set_defaults(handler=_primitive_degree)
+
+    cubt = sub.add_parser(
+        "cubic-trig",
+        help="a cubic in letters with three real roots: the homogeneous "
+             "route and Viete's trigonometric form against the marks of the "
+             "cubic trig study")
+    cubt.add_argument("--json", action="store_true")
+    cubt.add_argument("--quick", action="store_true",
+                      help="skip the batteries, the Phase 104 re-read and "
+                           "the outside texts (T5 partly, T6, T7, T9)")
+    cubt.add_argument("--no-scripts", action="store_true",
+                      help="skip running the column-3 scripts and mutants")
+    cubt.set_defaults(handler=_cubic_trig)
 
     symb = sub.add_parser(
         "symbolic",

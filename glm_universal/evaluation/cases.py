@@ -692,6 +692,15 @@ _CASES: Tuple[EvalCase, ...] = (
             "spread stalls the separation ratio is the type they belong "
             "to, so the failures and the unmet criterion are one "
             "mechanism."),
+    _c("report-hole-configuration", "report", "report hole configuration",
+       "answer", contains=("44 correctly, 0 wrongly and 0 refused",
+                           "0 false", "the joint reading named 40"),
+       note="The configuration reading in the deep-hole answering path: "
+            "the escalation round's 44 queries answered under a declared "
+            "rule that answers only inside half the distance to the nearest "
+            "other reference (a certificate, by "
+            "GLM.LatticeCompletion.config_answer_sound) and issues every "
+            "other type outside its certified radius as an absence."),
     _c("report-query-escalation", "report", "report query escalation",
        "answer", contains=("{CASES} evaluation cases", "no answer moves",
                            "4 of 18 declared probes"),
@@ -716,8 +725,28 @@ _CASES: Tuple[EvalCase, ...] = (
        # DiscourseState the corpus is 4416 declarations, the stride 4416 // 400
        # = 11 (was 10), so the goal-query set is 803 and the gate fires on 42
        # of 1606; still ahead on every set, carrying 13, losing 1.
-       "answer", contains=("676 -> 679 of 803 (ahead)", "42 of 1606",
-                           "carrying 13 queries it misses and losing 1"),
+       # Re-pinned in the sharpening pass after Phase 108: the Lean corpus
+       # at 4676 declarations (Phase 108) makes the goal-query set 851 and
+       # the gate fires on 60 of 1702; still ahead on every set, carrying
+       # 15, losing 0.
+       # Re-pinned in the Phase 109 close: QuarticResolvent.lean and
+       # SignFactor.lean (4691 declarations) make the goal-query set 853 and
+       # the gate fires on 58 of 1706; still ahead on every set, carrying
+       # 18, losing 0.
+       # Re-pinned at Phase 110: StrayBlind.lean (4706 declarations) makes
+       # the goal-query set 856 and the gate fires on 64 of 1712; still
+       # ahead on every set, carrying 20, losing 0.
+       # Re-pinned at Phase 123: the corpus at 4903 declarations (Phases
+       # 111-123) makes the goal-query set 818 and the gate fires on 46 of
+       # 1636; still ahead on every set, carrying 8, losing 0.
+       # Re-pinned at Phase 125: OperationsLadder.lean (the corpus refreshed
+       # with it) makes the goal-query set 822 and the gate fires on 54 of
+       # 1644; still ahead on every set, carrying 10, losing 0.
+       # Re-pinned at Phase 126: InertCounter.lean (the corpus refreshed
+       # with it) makes the goal-query set 823 and the gate fires on 44 of
+       # 1646; still ahead on every set, carrying 7, losing 0.
+       "answer", contains=("710 -> 712 of 823 (ahead)", "44 of 1646",
+                           "carrying 7 queries it misses and losing 0"),
        note="The faculties arranged as a stack rather than scored one at a "
             "time: below a gate of 1/10 the leading lexical search is "
             "judged to have abstained and the two geometric address books "
@@ -735,7 +764,24 @@ _CASES: Tuple[EvalCase, ...] = (
        # claim unchanged.
        # Re-pinned at Phase 92 (queries 844 -> 803: 4416 declarations, the
        # stride 11 where it was 10); claim unchanged.
-       "answer", contains=("676 -> 63 of 803", "183 -> 125 of 803",
+       # Re-pinned in the sharpening pass after Phase 108 (queries 803 ->
+       # 851 as the Lean corpus grew to 4676 declarations by Phase 108,
+       # which left this pin unmoved): text 699 -> 68, structure 192 -> 188;
+       # claim unchanged.
+       # Re-pinned at Phase 109 (queries 851 -> 853 with QuarticResolvent.lean
+       # and SignFactor.lean, 4691 declarations): text 711 -> 65, structure
+       # 180 -> 175; claim unchanged.
+       # Re-pinned at Phase 110 (queries 853 -> 856 with StrayBlind.lean,
+       # 4706 declarations): text 708 -> 67, structure 184 -> 181; claim
+       # unchanged.
+       # Re-pinned at Phase 123 (queries 856 -> 818, 4903 declarations):
+       # text 693 -> 51, structure 149 -> 145; claim unchanged.
+       # Re-pinned at Phase 125 (queries 818 -> 822 with
+       # OperationsLadder.lean): text 691 -> 48, structure 149 -> 146;
+       # claim unchanged.
+       # Re-pinned at Phase 126 (queries 822 -> 823 with InertCounter.lean):
+       # text 710 -> 52, structure 163 -> 161; claim unchanged.
+       "answer", contains=("710 -> 52 of 823", "163 -> 161 of 823",
                            "class, not a residue"),
        note="The register where the geometric address is the only faculty "
             "still reading: rename every identifier of a query outside a "
@@ -750,6 +796,15 @@ _CASES: Tuple[EvalCase, ...] = (
             "of stalled results ranked by whether the coarse reading "
             "discarded an identifiable quantity, written before the next "
             "re-reading rather than after it."),
+    _c("report-routes", "report", "report routes",
+       "answer", contains=("3 decision points with 8 routes",
+                           "9 of 9 reference problems",
+                           "every route reached"),
+       note="Phase 109: the route choices that showed only in column 2 of "
+            "the answer making them, listed in one place -- every decision "
+            "point, its routes and deciders, and one reference problem per "
+            "route run live, so a route that stops being reached is a "
+            "changed row rather than silence."),
 
     # --------------------------------------------------------------- measure
     _c("measure-hot-tea", "measure", "measure hot in tea",

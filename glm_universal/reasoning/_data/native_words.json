@@ -1,6 +1,6 @@
 {
  "all_met": false,
- "corpus_digest": "cdaf67d666d4d9a5c11f018e333ec9f9995df51df1ccaf3e86285d55b9c98192",
+ "corpus_digest": "9e8b922ce85d83191517d0c499e0000fa64fde4d31e8d2059aab1d21e6d86f50",
  "documents": {
   "answered": true,
   "injective": true,
@@ -8,312 +8,312 @@
   "queries": 60,
   "schemes": {
    "classes": {
-    "hits": 30,
+    "hits": 40,
     "precision_at_5": {
-     "__fraction__": "19/100"
+     "__fraction__": "17/75"
     }
    },
    "letters": {
     "hits": 49,
     "precision_at_5": {
-     "__fraction__": "26/75"
+     "__fraction__": "7/20"
     }
    },
    "lexical": {
-    "hits": 16,
+    "hits": 15,
     "precision_at_5": {
-     "__fraction__": "1/15"
+     "__fraction__": "19/300"
     }
    },
    "parts": {
-    "hits": 50,
+    "hits": 46,
     "precision_at_5": {
-     "__fraction__": "109/300"
+     "__fraction__": "101/300"
     }
    },
    "text": {
-    "hits": 52,
+    "hits": 46,
     "precision_at_5": {
-     "__fraction__": "39/100"
+     "__fraction__": "19/50"
     }
    },
    "text_leech": {
-    "hits": 52,
+    "hits": 47,
     "precision_at_5": {
-     "__fraction__": "39/100"
+     "__fraction__": "23/60"
     }
    },
    "text_parts": {
-    "hits": 52,
+    "hits": 46,
     "precision_at_5": {
-     "__fraction__": "39/100"
+     "__fraction__": "19/50"
     }
    },
    "text_shipped": {
-    "hits": 52,
+    "hits": 46,
     "precision_at_5": {
-     "__fraction__": "39/100"
+     "__fraction__": "19/50"
     }
    },
    "words_native": {
-    "hits": 52,
+    "hits": 46,
     "precision_at_5": {
-     "__fraction__": "39/100"
+     "__fraction__": "19/50"
     }
    }
   },
   "top_values_agree": 60,
-  "units": 1258,
-  "vocabulary": 10971
+  "units": 1613,
+  "vocabulary": 12695
  },
  "lean": {
   "declarations": {
-   "queries": 206,
+   "queries": 207,
    "schemes": {
     "classes": {
      "hits": {
-      "1": 110,
-      "10": 153,
-      "3": 136,
-      "5": 145
+      "1": 107,
+      "10": 156,
+      "3": 134,
+      "5": 143
      },
      "mrr_at_10": {
-      "__fraction__": "314023/519120"
+      "__fraction__": "154517/260820"
      },
      "precision_at_5": {
-      "__fraction__": "192/515"
+      "__fraction__": "79/207"
      },
-     "queries": 206
+     "queries": 207
     },
     "letters": {
      "hits": {
-      "1": 151,
-      "10": 189,
-      "3": 175,
+      "1": 146,
+      "10": 190,
+      "3": 171,
       "5": 183
      },
      "mrr_at_10": {
-      "__fraction__": "45841/57680"
+      "__fraction__": "101399/130410"
      },
      "precision_at_5": {
-      "__fraction__": "589/1030"
+      "__fraction__": "118/207"
      },
-     "queries": 206
+     "queries": 207
     },
     "lexical": {
      "hits": {
       "1": 88,
-      "10": 135,
-      "3": 111,
-      "5": 120
+      "10": 138,
+      "3": 112,
+      "5": 125
      },
      "mrr_at_10": {
-      "__fraction__": "127769/259560"
+      "__fraction__": "129083/260820"
      },
      "precision_at_5": {
-      "__fraction__": "25/103"
+      "__fraction__": "50/207"
      },
-     "queries": 206
+     "queries": 207
     },
     "parts": {
      "hits": {
-      "1": 149,
+      "1": 148,
       "10": 190,
-      "3": 175,
-      "5": 183
+      "3": 173,
+      "5": 185
      },
      "mrr_at_10": {
-      "__fraction__": "68567/86520"
+      "__fraction__": "34213/43470"
      },
      "precision_at_5": {
-      "__fraction__": "296/515"
+      "__fraction__": "119/207"
      },
-     "queries": 206
+     "queries": 207
     },
     "text": {
      "hits": {
-      "1": 149,
-      "10": 187,
-      "3": 169,
-      "5": 182
+      "1": 145,
+      "10": 191,
+      "3": 174,
+      "5": 183
      },
      "mrr_at_10": {
-      "__fraction__": "5659/7210"
+      "__fraction__": "404851/521640"
      },
      "precision_at_5": {
-      "__fraction__": "299/515"
+      "__fraction__": "199/345"
      },
-     "queries": 206
+     "queries": 207
     },
     "text_leech": {
      "hits": {
-      "1": 153,
+      "1": 149,
       "10": 190,
       "3": 177,
       "5": 185
      },
      "mrr_at_10": {
-      "__fraction__": "104677/129780"
+      "__fraction__": "1144/1449"
      },
      "precision_at_5": {
-      "__fraction__": "303/515"
+      "__fraction__": "119/207"
      },
-     "queries": 206
+     "queries": 207
     },
     "text_parts": {
      "hits": {
-      "1": 153,
-      "10": 189,
-      "3": 177,
+      "1": 148,
+      "10": 190,
+      "3": 176,
       "5": 185
      },
      "mrr_at_10": {
-      "__fraction__": "104467/129780"
+      "__fraction__": "397/504"
      },
      "precision_at_5": {
-      "__fraction__": "302/515"
+      "__fraction__": "599/1035"
      },
-     "queries": 206
+     "queries": 207
     },
     "words_native": {
      "hits": {
-      "1": 155,
-      "10": 188,
-      "3": 177,
-      "5": 183
+      "1": 147,
+      "10": 190,
+      "3": 173,
+      "5": 182
      },
      "mrr_at_10": {
-      "__fraction__": "41917/51912"
+      "__fraction__": "408361/521640"
      },
      "precision_at_5": {
-      "__fraction__": "603/1030"
+      "__fraction__": "119/207"
      },
-     "queries": 206
+     "queries": 207
     }
    },
-   "top_values_agree": 206
+   "top_values_agree": 207
   },
-  "declarations_in_corpus": 4110,
+  "declarations_in_corpus": 4739,
   "goals": {
    "queries": 101,
    "schemes": {
     "classes": {
      "hits": {
-      "1": 45,
-      "10": 66,
-      "3": 60,
-      "5": 65
+      "1": 55,
+      "10": 76,
+      "3": 67,
+      "5": 74
      },
      "mrr_at_10": {
-      "__fraction__": "3199/6060"
+      "__fraction__": "11237/18180"
      },
      "precision_at_5": {
-      "__fraction__": "164/505"
+      "__fraction__": "199/505"
      },
      "queries": 101
     },
     "letters": {
      "hits": {
-      "1": 64,
-      "10": 87,
-      "3": 77,
-      "5": 84
+      "1": 63,
+      "10": 89,
+      "3": 78,
+      "5": 83
      },
      "mrr_at_10": {
-      "__fraction__": "60433/84840"
+      "__fraction__": "18055/25452"
      },
      "precision_at_5": {
-      "__fraction__": "256/505"
+      "__fraction__": "251/505"
      },
      "queries": 101
     },
     "lexical": {
      "hits": {
-      "1": 23,
-      "10": 54,
-      "3": 33,
-      "5": 47
+      "1": 22,
+      "10": 45,
+      "3": 31,
+      "5": 39
      },
      "mrr_at_10": {
-      "__fraction__": "79859/254520"
+      "__fraction__": "36431/127260"
      },
      "precision_at_5": {
-      "__fraction__": "83/505"
+      "__fraction__": "68/505"
      },
      "queries": 101
     },
     "parts": {
      "hits": {
-      "1": 64,
-      "10": 89,
-      "3": 79,
-      "5": 85
+      "1": 62,
+      "10": 88,
+      "3": 77,
+      "5": 81
      },
      "mrr_at_10": {
-      "__fraction__": "60721/84840"
+      "__fraction__": "1979/2828"
      },
      "precision_at_5": {
-      "__fraction__": "266/505"
+      "__fraction__": "254/505"
      },
      "queries": 101
     },
     "text": {
      "hits": {
-      "1": 67,
-      "10": 89,
-      "3": 79,
-      "5": 83
+      "1": 63,
+      "10": 87,
+      "3": 80,
+      "5": 80
      },
      "mrr_at_10": {
-      "__fraction__": "9371/12726"
+      "__fraction__": "89771/127260"
      },
      "precision_at_5": {
-      "__fraction__": "52/101"
+      "__fraction__": "254/505"
      },
      "queries": 101
     },
     "text_leech": {
      "hits": {
-      "1": 69,
-      "10": 90,
-      "3": 82,
-      "5": 86
+      "1": 62,
+      "10": 89,
+      "3": 80,
+      "5": 81
      },
      "mrr_at_10": {
-      "__fraction__": "21241/28280"
+      "__fraction__": "18013/25452"
      },
      "precision_at_5": {
-      "__fraction__": "54/101"
+      "__fraction__": "259/505"
      },
      "queries": 101
     },
     "text_parts": {
      "hits": {
-      "1": 66,
-      "10": 90,
-      "3": 81,
-      "5": 86
+      "1": 61,
+      "10": 89,
+      "3": 78,
+      "5": 82
      },
      "mrr_at_10": {
-      "__fraction__": "62533/84840"
+      "__fraction__": "1487/2121"
      },
      "precision_at_5": {
-      "__fraction__": "273/505"
+      "__fraction__": "259/505"
      },
      "queries": 101
     },
     "words_native": {
      "hits": {
-      "1": 67,
+      "1": 63,
       "10": 90,
-      "3": 79,
-      "5": 85
+      "3": 80,
+      "5": 83
      },
      "mrr_at_10": {
-      "__fraction__": "15677/21210"
+      "__fraction__": "182479/254520"
      },
      "precision_at_5": {
-      "__fraction__": "264/505"
+      "__fraction__": "259/505"
      },
      "queries": 101
     }
@@ -321,23 +321,23 @@
    "top_values_agree": 101
   },
   "injective": true,
-  "vocabulary": 5277
+  "vocabulary": 6136
  },
  "lean_file": "RequestProject/GLM/NativeWords.lean",
  "marks": {
   "W1": true,
-  "W2": true,
+  "W2": false,
   "W3": true,
   "W4": false,
   "W5": true,
-  "W6": true
+  "W6": false
  },
- "met": 5,
+ "met": 3,
  "observed": {
   "letters_vs_parts": false,
   "letters_vs_text": false,
   "words_native_vs_text_parts": false
  },
- "source_digest": "59d768fc0ade689bf6fd21437f98daf3a863a99706759dd26ac699c786aa81fc",
+ "source_digest": "19d9218d6d8d9894876242f05634020f5764f27ec4bf1ef231833ca866cab58d",
  "study": "studies/NATIVE_WORDS_STUDY.md"
 }

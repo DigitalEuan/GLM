@@ -376,6 +376,12 @@ The gate is reached at L4 - the joint reading, L2 and L3 together with 1920 star
 The criterion `rho < 1` is *sufficient* for the gate — that is `GLM.DeepHoleLadder.nearest_correct`, proved rather than assumed — so a cell can reach the gate without the criterion holding, but not the other way round.  The best cell is `joint` at 1920 starts.  A rung marked *extension* was added after the twelve pre-registered cells had been measured and the count was seen to be climbing; it is counted in the multiplicity correction and is never read as a pre-registered result.
 <!-- end generated -->
 
+**Later record (Phase 121).** The gate reached at `(L₄, 1920)` did not hold
+at larger ensembles: extended to 30720 starts, `Q₀` at `L₄` is 9 of 10 at
+3840, 7680 and 15360 starts and 10 again at 30720, and no share-carrying cell
+reaches `ρ < 1` (best 2.3508). See
+[`SHARE_SEPARATION_STUDY.md`](SHARE_SEPARATION_STUDY.md) §7.6.
+
 ### 12.2 The reproduction check
 
 <!-- generated: deepholeesc-reproduction -->

@@ -6,7 +6,7 @@
 
 **Verdict.** Most of the cost was work repeated on things that had not moved, and a cache keyed on what it is derived from does not repeat it.
 
-**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->11,597<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
+**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->12,637<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
 
 **Recomputed by.** `glm_universal.corpus.cost.cost_report`
 
@@ -73,8 +73,8 @@ nothing.
 <!-- generated: cost-addresses -->
 | book | units | decodes from nothing | decodes now | reused |
 |---|---|---|---|---|
-| Lean declarations | 4,576 | 8,667 | 0 | 9,152 |
-| corpus sections | 1,490 | 2,930 | 0 | 2,980 |
+| Lean declarations | 4,975 | 9,222 | 0 | 9,950 |
+| corpus sections | 1,739 | 3,415 | 0 | 3,478 |
 
 Reuse is checked, not assumed: each rebuild re-decodes a sample of the answers it reused and reports any that moved (4 sampled in the declaration book, 4 in the document book, none moved).
 <!-- end generated -->
@@ -93,7 +93,7 @@ nothing and requiring the two books to be equal byte for byte.
 | reading | value |
 |---|---|
 | blocks quoting the report | 5 |
-| evaluation cases per report | 177 |
+| evaluation cases per report | 179 |
 | reports taken per check, before | 5 |
 | reports taken per check, now | 0 |
 | stored report | fresh |
@@ -122,7 +122,7 @@ works for tables and not for a sentence, and the sentences were where the drift
 lived. The block mechanism is now available at the size of a phrase:
 
 ```markdown
-the suite is <!--figure:test-files-->146 test files<!--/figure--> today
+the suite is <!--figure:test-files-->177 test files<!--/figure--> today
 ```
 
 The markers are HTML comments, so a reader sees only the number. `--refresh`
@@ -130,7 +130,7 @@ rewrites the body, `--check` fails when it has drifted, and a marker naming a
 figure nothing emits is a reported defect rather than a silent no-op.
 
 <!-- generated: cost-figures -->
-164 figures are registered and 569 markers carry them, across 30 documents.  A marker whose text is not what its figure now says is what `--refresh` rewrites and what `--check` fails on.
+164 figures are registered and 598 markers carry them, across 32 documents.  A marker whose text is not what its figure now says is what `--refresh` rewrites and what `--check` fails on.
 
 The registry: `binding-ambiguous`, `binding-as-declared`, `binding-carriers`, `binding-control-wrong`, `binding-declared-count`, `binding-largest-fibre`, `binding-nameable`, `binding-product-recoverable`, `binding-product-zero`, `binding-readings`, `binding-reasons`, `binding-recovered`, `binding-refused`, `binding-roles`, `conversation-alone`, `conversation-answered`, `conversation-as-declared`, `conversation-control-rows`, `conversation-control-wrong`, `conversation-declared-count`, `conversation-reasons`, `conversation-refused`, `corpus-archive-documents`, `corpus-documents`, `corpus-sections`, `corpus-state-documents`, `directive-count`, `directives`, `evaluation-case-count`, `evaluation-cases`, `extremum-answered`, `extremum-as-declared`, `extremum-declared-count`, `extremum-reasons`, `extremum-reasons-declared`, `extremum-refused`, `extremum-ties`, `fieldsurface-fields`, `fieldsurface-held`, `fieldsurface-moved`, `fieldsurface-pairs`, `fieldsurface-parsed-after`, `fieldsurface-parsed-before`, `fieldsurface-predicted`, `fieldsurface-rows`, `fieldsurface-surface-after`, `fieldsurface-surface-before`, `fieldsurface-tables`, `lean-declaration-files`, `lean-declarations`, `lean-file-count`, `lean-files`, `normesc-correct`, `normesc-family-correct`, `normesc-family-rungs`, `normesc-family-wrong`, `normesc-first-broken`, `normesc-longest-safe`, `normesc-named-correct`, `normesc-named-rungs`, `normesc-queries`, `normesc-refused`, `normesc-rungs`, `normesc-wrong`, `normfamily-norms`, `normfamily-rung-count`, `opesc-count`, `opesc-program-correct`, `opesc-program-queries`, `opesc-program-wrong`, `oracle-absent`, `oracle-english`, `oracle-parsed`, `oracle-parser-worth`, `oracle-questions`, `oracle-surface`, `ordering-answered`, `ordering-as-declared`, `ordering-declared-count`, `ordering-held`, `ordering-parsed-after`, `ordering-parsed-before`, `ordering-reasons`, `ordering-refused`, `ordering-surface-after`, `ordering-surface-before`, `ordering-surface-parsed`, `planner-reports-per-check`, `plans-ambiguous`, `plans-bare-probe-correct`, `plans-bare-probe-refused`, `plans-bare-probe-wrong`, `plans-frames`, `plans-gained`, `plans-gains-address`, `plans-gains-derive`, `plans-gains-table`, `plans-held-bare-correct`, `plans-held-bare-correct-refusal`, `plans-held-bare-wrong`, `plans-held-correct`, `plans-held-correct-refusal`, `plans-held-total`, `plans-held-wrong`, `plans-probe-correct`, `plans-probe-refused`, `plans-probe-wrong`, `plans-questions`, `plans-stress-bare-correct`, `plans-stress-bare-wrong`, `plans-stress-correct`, `plans-stress-correct-refusal`, `plans-stress-first-correct`, `plans-stress-first-refused`, `plans-stress-refused`, `plans-stress-wrong`, `plans-units`, `planstore-coarse-wrong`, `planstore-declared-count`, `planstore-refusals`, `planstore-refusals-replayed`, `planstore-replayed`, `planstore-trials-first`, `planstore-trials-replayed`, `planstore-worst-case`, `probe-correct`, `probe-derived`, `probe-lexicon-held`, `probe-lexicon-words`, `probe-pass-mark`, `probe-questions`, `probe-refused`, `probe-wrong`, `query-kinds`, `reasoning-modules`, `rebuild-decodes-from-nothing`, `rebuild-decodes-now`, `registers`, `repo-cache-bytes`, `repo-cache-share`, `repo-primary-bytes`, `repo-stored-bytes`, `report-subjects`, `scales-answered`, `scales-as-declared`, `scales-bridged`, `scales-declared`, `scales-numeric`, `scales-pairs`, `scales-quantities`, `scales-refused`, `scales-rows`, `scales-still-refused`, `secondread-adopted`, `secondread-configurations`, `secondread-given-up`, `secondread-matched-removes`, `secondread-program-correct`, `secondread-program-refused`, `secondread-program-wrong`, `secondread-shipped`, `suite`, `test-file-count`, `test-files`.
 <!-- end generated -->
@@ -185,16 +185,16 @@ Measured over the suite, by `glm_universal.corpus.cost.lean_blast_radius`:
 
 | | |
 |---|---|
-| test units in the suite | 146 |
-| Lean files | 172 |
-| units an edit to *any* Lean file used to make stale | 132 |
-| units one Lean file makes stale now, median | 60 |
-| units the worst single Lean file makes stale | 127 |
-| units that read the tree with a glob, so are stale whenever it moves | 60 |
+| test units in the suite | 177 |
+| Lean files | 201 |
+| units an edit to *any* Lean file used to make stale | 163 |
+| units one Lean file makes stale now, median | 78 |
+| units the worst single Lean file makes stale | 149 |
+| units that read the tree with a glob, so are stale whenever it moves | 78 |
 
 The Lean row counts distinct file names the ledger tracks, so it is the
-development's 171 files under `RequestProject/GLM/` plus the build's
-`Main.lean`. Phases 89 and 90 added three Lean files (`QuestionSetB.lean`,
+development's 182 files under `RequestProject/GLM/`, the reference tool and
+the build's `Main.lean`. Phases 89 and 90 added three Lean files (`QuestionSetB.lean`,
 `QuestionSetBAnswers.lean`, `TypedOperators.lean`). Phase 90 also added one
 unit, `test_typed_operators.py`, which reaches the router and cites its Lean
 file, so every row but the file count moved by one. Phase 91 added one Lean
@@ -218,7 +218,93 @@ once more. Phase 99 added one Lean file (`CelsiusRegister.lean`) and one
 unit, `test_celsius_register.py`, which reaches the router and cites its Lean
 file, so every row moved by one again. Phase 100 added one Lean file
 (`CorpusResample.lean`) and one unit, `test_corpus_resample.py`, which reads
-the Lean corpus and cites its Lean file, so every row moved by one once more. Phase 68 added one unit (`test_reverse_tct_two.py`) that reaches
+the Lean corpus and cites its Lean file, so every row moved by one once more.
+Phase 101 added one Lean file (`CitationScope.lean`), the elaborator's
+reference tool (`glm_lean/tools/CitationReference.lean`, which the ledger
+also tracks) and two units, `test_citation_scope.py` and
+`test_proof_dependency.py`; Phase 102 added one Lean file (`DocumentTree.lean`)
+and one unit, `test_document_tree.py`, which cites its Lean file. Together they
+moved the file count by three and every other row by three. Phase 105 added one
+Lean file (`AstIndex.lean`) and one unit, `test_ast_index.py`, which cites its
+Lean file, so every row moved by one. Phase 106 added one Lean file
+(`Derivations.lean`) and one unit, `test_derivation.py`, which reaches the
+router and cites its Lean file, so every row moved by one again. Phase 107
+added one Lean file (`DerivationsTwo.lean`) and one unit,
+`test_derivation_two.py`, which reaches the router and cites its Lean file,
+and every row moved by one once more. Phase 108 added one Lean file
+(`CubicTrig.lean`) and one unit, `test_cubic_trig.py`, which reaches the
+router and cites its Lean file, and every row moved by one again. The
+sharpening pass after Phase 108 added no Lean file and one unit,
+`test_sharpening.py`, which reaches the router (and through it the Lean
+files its frames cite), so every row but the file count moved by one.
+Phases 109 and 110 together added three Lean files (`QuarticResolvent.lean`,
+`SignFactor.lean`, `StrayBlind.lean`) and two units, `test_route_choices.py`,
+which reaches the router, and `test_stray_blind.py`, which reads its own Lean
+file. The unit count and the any-Lean-file row moved by two, and the median,
+the worst single file and the glob row by one each. Phase 113 added one Lean
+file (`FrobeniusRadicals.lean`) and one unit, `test_frobenius_radical.py`,
+which reaches the router and cites its Lean file, so every row moved by one.
+Phases 114 and 115 added one Lean file each (`PrimitiveRadicals.lean`,
+`ComposedRadicals.lean`) and one unit each, `test_primitive_radical.py` and
+`test_composed_radical.py`, which reach the router and cite their Lean files,
+so every row moved by two — and the median passed half of the any-Lean-file
+row for the first time (§5k). Phase 116 added one Lean file
+(`PrimitiveDegree.lean`) and one unit, `test_primitive_degree.py`, which
+cites its Lean file but was written to stay below the frames (it checks the
+wiring at the branch layer instead), so it does not reach the router: the
+unit count, the file count and the any-Lean-file row moved by one, and the
+median, the worst single file and the glob row did not move. Phase 117 added one Lean
+file (`MetaAnswers.lean`) and one unit, `test_meta_questions.py`, which also
+stays below the frames (it reads the evidence layer, `reasoning/meta_evidence.py`),
+so the same three rows moved by one and the other three did not; the median
+now stands at exactly half the any-Lean-file row, so the recorded excess is
+not used. The cost Phase 117 did add is elsewhere: the router now holds the
+six studies its meta frames quote, so editing one of them makes about 48
+units stale where it used to make two or three
+([`META_QUESTIONS_STUDY.md`](META_QUESTIONS_STUDY.md) §6). Phase 118 added
+one Lean file (`NonShannon.lean`, which imports `DerivationsTwo.lean`) and
+one unit, `test_derivation_three.py`, which stays below the frames too (it
+reads the reasoning layer and `runtime/derivation_three_marks.py`): the unit
+count, the file count, the any-Lean-file row and the worst single file moved
+by one, and the median and the glob row did not. Phase 119 added two Lean
+files (`CopyLemma.lean` and `RobinBoth.lean`) and one unit,
+`test_derivation_four.py`, which is held below the router in what it asks but
+imports `runtime/derivation_four_frames.py`, and through it takes the whole
+development: the file count moved by two and every other row by one.
+Phase 120 added one Lean file (`ExplanationAnchors.lean`) and one unit,
+`test_explanations.py`, which stays below the frames (it reads
+`reasoning/explanation_anchors.py` and the nuclide register): the unit count,
+the file count and the any-Lean-file row moved by one, and the median, the
+worst single file and the glob row did not.
+Phase 121 added one Lean file (`ShareSeparation.lean`) and one unit,
+`test_share_separation.py`, which reads its own Lean file and the stored
+ensembles and does not reach the router: the unit count, the file count and
+the any-Lean-file row moved by one, and the median, the worst single file and
+the glob row did not.
+Phase 122 added one Lean file (`ConfigurationReading.lean`) and one unit,
+`test_configuration_reading.py`, which reads its own Lean file and the same
+stored ensembles and does not reach the router: again the unit count, the
+file count and the any-Lean-file row moved by one, and the other three did
+not.
+Phase 123 added one Lean file (`LatticeCompletion.lean`) and four units
+(`test_hole_census.py`, `test_configuration_classifier.py`,
+`test_empty_rungs.py`, `test_frozen_path.py`): the unit count and the
+any-Lean-file row moved by four, the file count by one and the worst single
+file by three (147); the median and the glob row did not.
+Phase 124 added one Lean file (`ProbeBudget.lean`) and one unit,
+`test_probe_budget.py`, which reads its own Lean file and the stored
+readings and does not reach the router: the unit count, the file count and
+the any-Lean-file row moved by one, and the other three did not.
+Phase 125 added one Lean file (`OperationsLadder.lean`) and one unit,
+`test_operations.py`, which reaches the toolbox and through it the router
+and cites its Lean file, so every row moved by one.
+Phase 126 added one Lean file (`InertCounter.lean`) and one unit,
+`test_inert_counter.py`, which reaches the operations module and through it
+the router and cites its Lean file, so every row moved by one.
+Phase 127 added one Lean file (`HexRung.lean`) and one unit,
+`test_norm256_hex.py`, which reads the Lean corpus and cites its Lean file,
+so the suite, file and any-Lean-file rows moved by one.
+Phase 68 added one unit (`test_reverse_tct_two.py`) that reaches
 the router, and so the development through it, which is why the floor moved
 from 34 to 35 with the other rows; Phase 69 added another
 (`test_reverse_tct_int.py`), and the floor moved from 35 to 36; Phase 70
@@ -591,6 +677,188 @@ is a refactor of the package (lazy imports on the hub modules and a
 declaration book the session loads on demand), and is named for a later
 round rather than claimed here.
 
+## 5h. The close that had to be run three times
+
+Through Phase 108 a round's close typically took two or three passes of
+`signoff --close`, each re-running units that had just passed. Three
+couplings did it, and each is cut in Phase 109:
+
+* **The session notes in 51 closures.** `ARISTOTLE_SUMMARY.md` is rewritten
+  between sessions and was named by documents that 51 units read, so each
+  new session began with 51 stale units. It is now excluded from every unit
+  closure except the document checks (`rules.SESSION_NOTES`).
+* **The totals a close records, read by the units it signs.** A unit that
+  reads rendered regions was signed against documents that quote the suite
+  totals, and recording those totals made it stale. Its digest is now taken
+  over the *rendered* text with the run-measured regions emptied
+  (`rules.rendered_text`, the `rendered` digest mode); `test_corpus`,
+  `test_figures` and the `figures` instrument, which exist to check those
+  figures, keep the `raw` digest.
+* **The document checks in the same pass as what they check.** They ran
+  beside the units whose totals they compare, failed until a refresh, and
+  the refresh needed every counted unit to have passed. `--close` now runs
+  the counted units first, defers the document checks if one fails, runs
+  `corpus --refresh` itself when they are owed, and runs them last. A stale
+  measurement cache -- the case that made `test_query_escalation` fail
+  inside a close after `evaluation/cases.py` changed -- is re-taken in a
+  stage 0 before anything runs.
+
+The ledger schema moved to 5 for the new digest modes, so the Phase 109 close
+re-ran everything once; from then on a close is one pass unless a counted
+unit genuinely fails.
+
+## 5i. The two edits every round makes, and the round that was never closed
+
+Phase 111 measured what a close pays for the two documents *every* round
+edits — the status document and the plan — and what the next session pays
+before it has done anything. Both were larger than they needed to be, and
+for two reasons the earlier cuts had missed:
+
+* **The ledger's own rules read as a docstring reader.** A closure keeps the
+  documents its docstrings mention only when some module of it *reads*
+  docstrings. The test was a substring search for `__doc__` and
+  `get_docstring`, and `signoff/rules.py` spells both in its own prose and in
+  the test itself. Nearly every derivation imports it through `code_store`,
+  so every docstring mention of `STATUS.md` or `MASTER_PLAN.md` counted. The
+  test now reads the syntax tree and asks whether the name is *used*
+  (`rules._uses_docstrings`). Measured with `signoff --impact` before and
+  after, on the same tree:
+
+  | edit | units before | units after |
+  |---|---|---|
+  | `STATUS.md`, by name | 57 (5,604 s serial) | 5 (1,667 s) |
+  | `MASTER_PLAN.md`, by name | 63 (5,627 s) | 16 (2,147 s) |
+  | `PROJECT_DIRECTIVES.md` | 63 | 63 — named in code by `reasoning/directives.py`, a real read |
+  | a usual round: both, plus the document address book they move | 64 | 62 |
+
+  The last row is the one a close pays, and it barely moved. **The floor is
+  the document address book**: any document edit makes the refresh rewrite
+  `corpus/_data/document_addresses.json` (its stored corpus digest changes
+  even when no address does), and 54 units hold that file, because the
+  toolbox reaches `reasoning/native_parity.py`, `reasoning/native_words.py`
+  and `corpus/address.py`, all of which name it. Measured: a one-line edit to
+  `WHITEBOARD.md` after a finished close cost 1,636 s of `signoff --close` on
+  8 jobs. Removing a single path does not help — 53 of the 54 still reach
+  the book with `native_words` taken out — so the cut is either a digest that
+  reads the addresses rather than the file's bytes, or a toolbox whose reach
+  into the document corpus is declared rather than imported. It is left as a
+  To-Do line, measured.
+
+* **The session note was still in the corpus.** Phase 109 took
+  `ARISTOTLE_SUMMARY.md` out of the counted closures but left it in the
+  corpus and in the closure of the two document checks. It is rewritten after
+  the session that closed a round has ended, so the next session found the
+  address book, `DIGEST.md`, `test_corpus` and `test_figures` stale before it
+  had changed anything: the pick-up `corpus --check` failed and took two
+  minutes instead of three seconds, and `signoff --verify` reported 156 of 158.
+  It is now outside the corpus walk (`inventory.SESSION_NOTES`) and in no
+  closure at all.
+
+* **What reads the whole corpus now depends on the whole corpus.** Cutting
+  the false docstring reader exposed what it had been hiding: the two
+  document checks and the documents gate read every document by walking the
+  corpus, but their closures held only the documents some module *named* —
+  most of them while every docstring counted, 72 and 62 of 147 for
+  `test_corpus` and `test_figures` and 22 for the gate once it did not. A
+  document nothing names could then move without re-running the check whose
+  subject it is. They now hold every written document
+  (`rules.written_documents`, the set the corpus walk reads), 147 of 147.
+  It costs nothing in practice: every round edits a document those checks
+  already held, so they re-run at every close anyway.
+
+The third cut is in the documents rather than the code: the counts that
+broke earlier closes when quoted by hand — report subjects, registers, Lean
+files, query kinds, CLI cases, and the Lean declaration count — are inline
+figures in every state document that quotes them, so `corpus --refresh`
+keeps them and no close has to find them. The resulting close, step by step
+with its cost, is [`ITERATE.md`](../ITERATE.md) §4.
+
+## 5j. The address book's reach, cut where it was imported
+
+Phase 114 took the To-Do line §5i left: the 54 units (56 by the time the
+round started) that held `corpus/_data/document_addresses.json`. The line
+named two ways out — digest the addresses rather than the file's bytes, or
+cut the toolbox's reach. The first would not have helped: every document edit
+moves the lexical vectors of the sections it touched, so the addresses move
+with the bytes. The second was measured unit by unit, by walking each
+unit's imports breadth-first to the first module that names the book, and it
+was almost all one path:
+
+| first module reached | units | what the caller actually needed |
+|---|---|---|
+| `native_parity` through `runtime/toolbox.py` | 40 | the ledger and the read-back check, which read no document |
+| `native_words` through `reasoning/retrieval.py` | 5 | the Lean-corpus word ranking, which reads no document (one of the five, the corpus resample study, also reaches the book directly) |
+| `native_parity` through `ast_index.py` → `corpus_resample.py` | 1 first, and nearly all of the toolbox 40 once that path was cut (through the question frames) | the exact sign test, a five-line function |
+| `tools.py`, `corpus/render.py`, the corpus itself, the document studies | 10 | the book itself, or the instruments that measure it |
+
+None of the first three reads the book; each imported a module that also
+holds a document measurement. So the cut is three moves, each re-exported
+unchanged from where it was:
+
+* `reasoning/golay_words.py` — the Golay words of tokens, the rankings and
+  the Lean-corpus ranking out of `native_words.py`; the toolbox's
+  `native words` tool and the retrieval layer's word schemes import it;
+* `reasoning/native_ledger.py` — the ledger, the read-back check and the
+  toolbox view out of `native_parity.py`; the toolbox's `native parity` tool
+  imports it;
+* `reasoning/sign_test.py` — the exact two-sided sign test out of
+  `corpus_resample.py`; the AST index imports it.
+
+The measurement caches that read the moved code name the new modules in
+their sources, so a change to them still re-takes the cache.
+
+Measured with `signoff --impact` on the same tree, before and after:
+
+| edit | units before | units after |
+|---|---|---|
+| `corpus/_data/document_addresses.json` (what every document edit rewrites) | 56 (4,855 s serial) | 11 (1,576 s serial) |
+
+The eleven that remain are the two document checks, the two native studies,
+the corpus resample and document-tree studies, the sandbox planner (which
+reaches the renderer), `test_exactness` (which scans every module), and the
+three units that import `tools.py` — the instrument CLI, which imports every
+study lazily and so reaches the book honestly. `test_signoff` pins the cut:
+the planner's, the frames' and the retrieval units' closures must not hold
+the book, and the native-words and corpus units' must.
+
+## 5k. The half-line the router's reach crossed
+
+`tests/test_corpus.py` holds the property §5a's table is evidence for: one
+Lean file makes stale at most half the units that name any Lean file. Every
+unit that reaches the router takes the whole development, because the router
+reaches `reasoning/lean_address.py`, and `lean_address.py` walks the tree with
+a `*.lean` glob to build the address book (it also serves the stored book,
+which is data). So each new frame test moves the median and the any-Lean-file
+row by one together, and the half-line by a half; the margin has been
+shrinking by a half per frame round. At Phase 115 it ran out: the median is
+75 and half of 148 is 74.
+
+What would cut it is the same move §5j made for the document address book:
+split the tree walker out of `lean_address.py`, so that the modules on the
+answering path, which read only the stored book, stop naming the glob, and
+only the units that build the book or digest the tree keep the whole
+development. `reasoning/citation_reference.py` names `.lean` only as the
+suffix of a temporary file it writes, which the rule reads as a walk; it
+imports `lean_address.py` as well, so fixing that alone moves nothing. The
+split touches a module most of the suite reaches, so it is a round of its
+own, and it is a To-Do line in [`STATUS.md`](../STATUS.md) §2.2. Until then
+the test records the excess (`RECORDED_MEDIAN_EXCESS = 1`) rather than
+hiding it, and a larger one fails.
+
+Phase 116 met that line from the other side. Its first test file read the
+declared questions through the frames, as the radical rounds before it had,
+and the median went to 76 against half of 149, an excess of two, which the
+test rejected. The router's dependency on the tree is not an
+over-approximation that a split would remove: `toolbox._declaration` and
+`proof_dependency` call `lean_address.feature_table()` and
+`declaration_names()`, which parse the development when asked. So the round
+kept its unit below the frames instead — the pure objects the marks read
+moved to `reasoning/primitive_degree_groups.py`, and the layer's wiring is
+checked at `symbolic_nonlinear.solve_nonlinear`, which the frame calls — and
+the end-to-end reading stays with the instrument (`tools primitive-degree`).
+The excess is back to one. Serving the router's two Lean lookups from the
+stored book is still the cut that would retire the line.
+
 ## 6. What this does not establish
 
 It does not make anything faster that was not repetition. The measurement cache
@@ -611,5 +879,5 @@ that pays for it, with the storage, loading, digesting and rebuilding of the
 table counted on the table's side rather than assumed away.
 
 <!-- generated: cost-tier -->
-**Rebuilding both address books from nothing decodes 11,597 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 177 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  569 figures inside sentences, across 30 documents, are emitted rather than typed.
+**Rebuilding both address books from nothing decodes 12,637 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 179 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  598 figures inside sentences, across 32 documents, are emitted rather than typed.
 <!-- end generated -->

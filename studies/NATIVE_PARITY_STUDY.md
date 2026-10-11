@@ -233,32 +233,32 @@ current reading. The document mark is a draw, not a result either way.
 <!-- generated: nativeparity-lean -->
 | queries | ranking | hit@1 | hit@3 | hit@5 | hit@10 | precision@5 | MRR@10 |
 |---|---|---|---|---|---|---|---|
-| declarations | *address* — the shipped raw Leech distance | 62 | 82 | 93 | 112 | 13.5 % | 0.366 |
-| declarations | *features* — the raw structural vector (the standard) | 62 | 83 | 95 | 115 | 14.0 % | 0.369 |
-| declarations | *features2* — raw structural, then raw lexical (like for like) | 63 | 87 | 100 | 120 | 15.0 % | 0.381 |
-| declarations | **native** — read-back, then Leech distance, then name | 63 | 84 | 93 | 115 | 13.8 % | 0.372 |
-| declarations | **native2** — structural book, then lexical book, each in two layers | 63 | 87 | 100 | 120 | 15.0 % | 0.381 |
-| goals | *address* — the shipped raw Leech distance | 7 | 15 | 18 | 27 | 4.8 % | 0.127 |
-| goals | *features* — the raw structural vector (the standard) | 10 | 17 | 22 | 33 | 5.9 % | 0.155 |
-| goals | *features2* — raw structural, then raw lexical (like for like) | 10 | 19 | 26 | 38 | 7.1 % | 0.173 |
-| goals | **native** — read-back, then Leech distance, then name | 9 | 17 | 22 | 32 | 5.9 % | 0.150 |
-| goals | **native2** — structural book, then lexical book, each in two layers | 10 | 19 | 26 | 38 | 6.9 % | 0.173 |
+| declarations | *address* — the shipped raw Leech distance | 49 | 66 | 77 | 97 | 11.4 % | 0.298 |
+| declarations | *features* — the raw structural vector (the standard) | 49 | 71 | 81 | 99 | 12.2 % | 0.306 |
+| declarations | *features2* — raw structural, then raw lexical (like for like) | 56 | 80 | 87 | 108 | 13.1 % | 0.343 |
+| declarations | **native** — read-back, then Leech distance, then name | 51 | 69 | 79 | 99 | 11.8 % | 0.307 |
+| declarations | **native2** — structural book, then lexical book, each in two layers | 56 | 80 | 87 | 108 | 13.1 % | 0.343 |
+| goals | *address* — the shipped raw Leech distance | 5 | 8 | 8 | 14 | 2.6 % | 0.069 |
+| goals | *features* — the raw structural vector (the standard) | 5 | 10 | 11 | 16 | 3.2 % | 0.078 |
+| goals | *features2* — raw structural, then raw lexical (like for like) | 7 | 11 | 14 | 18 | 3.6 % | 0.099 |
+| goals | **native** — read-back, then Leech distance, then name | 5 | 9 | 10 | 17 | 3.0 % | 0.075 |
+| goals | **native2** — structural book, then lexical book, each in two layers | 7 | 11 | 14 | 18 | 3.6 % | 0.099 |
 
-206 declaration queries and 101 goal queries over 4,110 declarations.  The read-back is exact for 4,110 of 4,110 stored addresses and 101 of 101 goal addresses (largest residue 3, covering radius 4).  `native` at least matches `features` on the declarations: no; on the goals: no.  `native2` at least matches `features`: yes and yes; and `features2`, like for like: yes and yes.
+207 declaration queries and 101 goal queries over 4,739 declarations.  The read-back is exact for 4,739 of 4,739 stored addresses and 101 of 101 goal addresses (largest residue 3, covering radius 4).  `native` at least matches `features` on the declarations: no; on the goals: no.  `native2` at least matches `features`: yes and yes; and `features2`, like for like: yes and yes.
 <!-- end generated -->
 
 <!-- generated: nativeparity-documents -->
 | ranking | queries with a hit at 5 | precision@5 |
 |---|---|---|
-| *lexical* — the shipped raw Leech distance | 16 / 60 | 6.7 % |
-| **lexical_native** — read-back, then Leech distance, then name | 15 / 60 | 6.3 % |
-| **lexical_native2** — lexical book, then structural book, each in two layers | 14 / 60 | 6.0 % |
-| *lexical_raw* — the raw lexical vector (the standard) | 14 / 60 | 6.3 % |
-| *lexical_raw2* — raw lexical, then raw structural (like for like) | 14 / 60 | 6.0 % |
-| *text* — word overlap, ties by name (the shipped live ranking) | 52 / 60 | 39.0 % |
-| **text_native** — word overlap, ties by lexical Leech distance | 52 / 60 | 39.0 % |
+| *lexical* — the shipped raw Leech distance | 15 / 60 | 6.3 % |
+| **lexical_native** — read-back, then Leech distance, then name | 17 / 60 | 7.0 % |
+| **lexical_native2** — lexical book, then structural book, each in two layers | 17 / 60 | 7.0 % |
+| *lexical_raw* — the raw lexical vector (the standard) | 17 / 60 | 7.0 % |
+| *lexical_raw2* — raw lexical, then raw structural (like for like) | 17 / 60 | 7.0 % |
+| *text* — word overlap, ties by name (the shipped live ranking) | 46 / 60 | 38.0 % |
+| **text_native** — word overlap, ties by lexical Leech distance | 47 / 60 | 38.3 % |
 
-60 section queries over 1,258 sections; the read-back is exact for 1,258 of 1,258 lexical addresses.  `lexical_native` at least matches `lexical_raw`: yes; `lexical_native2` at least matches it: no, and `lexical_raw2` like for like: yes; `text_native` at least matches `text`: yes.
+60 section queries over 1,613 sections; the read-back is exact for 1,613 of 1,613 lexical addresses.  `lexical_native` at least matches `lexical_raw`: yes; `lexical_native2` at least matches it: yes, and `lexical_raw2` like for like: yes; `text_native` at least matches `text`: yes.
 <!-- end generated -->
 
 ### 3.3 The live document ranking
@@ -305,9 +305,9 @@ The read-back scorer meets its mark (24 of 24, all minimal, all verified, the sa
 | **N5** | `readback` scorer: 24 of 24, minimal, verified, same proposals | met |
 | **N6** | `native2` ≥ `features` (declarations and goals) | met |
 | **N7** | `native2` ≥ `features2`, like for like | met |
-| **N8** | `lexical_native2` ≥ `lexical_raw` and `lexical_raw2` | **not met** |
+| **N8** | `lexical_native2` ≥ `lexical_raw` and `lexical_raw2` | met |
 
-7 of 10 marks met.
+8 of 10 marks met.
 <!-- end generated -->
 
 **Re-read at the close of Phase 71.** Phase 71's Lean file moved the corpus
@@ -377,6 +377,22 @@ keys and differ in the third, and the two rankings' hits differ in 11.7 % of
 file drops and 22.7 % of offsets on the declarations; over all 4,572 queries
 they differ at 5 on 3 declaration queries and 4 goal queries.
 
+**Re-read at the close of Phase 101** ([`CITATION_SCOPE_STUDY.md`](CITATION_SCOPE_STUDY.md)).
+Phase 101 changed what the Lean-side readers see: citations are read in Lean's
+scope (a bound variable `a` is no longer a citation of a declaration named
+`a`), and the type words count whole identifiers only. On that tree (209
+declaration and 103 goal queries) `native2` has 65, 80, 91 and 112 hits at
+k = 1/3/5/10 on the declarations against 53, 70, 84 and 102 for `features`
+(both higher than before the repair, the address book most: 41/64/77/89 →
+54/70/79/101), and 9, 16, 19 and 31 on the goals against 9, 15, 20 and 28.
+**N6 is missed at this reading** by one goal query at k = 5 — on the goals,
+the draw Phase 100's resampling already called it; on the declarations it is
+met at every cut-off, as the resampled effect says. N7 holds (`native2` equal
+to `features2` on both sets). On the documents N4a, N4b and N8 are met
+(`lexical_native`, `lexical_native2` and both raw rankings at 15 hits at 5
+against 14 for `lexical`; `text_native` level with `text` at 47). N1 and N2
+still missed; N3 and N5 hold.
+
 **The verdict, in words.** On the Lean corpus the native ranking that reads two
 Leech books, each in its two layers, matches the like-for-like standard
 ranking exactly and beats the raw feature vector, and on the document corpus
@@ -432,7 +448,12 @@ is recorded, not taken.
   was written. The round-one figures
   move with the corpus. A declared resampling — every sub-corpus that drops one
   Lean file — would say whether N1 and N2 are draws or small effects.
-* **The documents past parity.** Every lexical ranking, native or standard,
+* **The documents past parity** — *taken by Phase 102*
+  ([`DOCUMENT_TREE_STUDY.md`](DOCUMENT_TREE_STUDY.md)) and closed in the
+  negative: the full tree position reads the relevance relation, and the
+  leak-free position inside a document changes no hit, because the two books
+  tie at the top-five boundary on only 30 of 1,506 census queries. What
+  follows is the item as it was written. Every lexical ranking, native or standard,
   stays within one relevant section of the others on the document corpus. Whether a third native book — the
   section's position in the document tree as a Golay word — can move the
   document figures past parity, measured on a frozen copy of the corpus so

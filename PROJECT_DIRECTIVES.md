@@ -123,6 +123,13 @@ uncommitted: a commit is cheap, and an interrupted session that has been
 committing as it goes hands over something that runs. This is the practical
 face of D1 below, and the same block heads [`STATUS.md`](STATUS.md).
 
+**Keep the paper current, every run.**
+[`studies/GLM_ACADEMIC_PAPER.md`](studies/GLM_ACADEMIC_PAPER.md) is the record
+of the GLM as a whole, and the owner's standing instruction (Phase 119) is that
+it is brought up to date in every development run: a subsection for what the
+round built, and the synthesis (Part VII) and the appendices brought level with
+it. It is on the close checklist of [`ITERATE.md`](ITERATE.md) §4.1.
+
 ---
 
 **Standing rules for anyone — person or machine — working on this repository.**
@@ -163,11 +170,11 @@ The whole loop, in one place. [`ITERATE.md`](ITERATE.md) is the long form of
 it; nothing below replaces reading that once.
 
 1. **Orient.** This section and the target above; [`STATUS.md`](STATUS.md) §1
-   for where the work stands and §3.4 for the candidates, sharpest first;
+   for where the work stands and §2 for the To-Do list, sharpest first;
    [`DIGEST.md`](DIGEST.md) to find the two or three studies that bear on the
    one you take. Confirm the tree is where the last round left it with
    `corpus --check` and `signoff --verify`.
-2. **Take a candidate from §3.4, or say in the record why not.** A round aimed
+2. **Take a To-Do line from `STATUS.md` §2, or say in the record why not.** A round aimed
    at nothing on that list is a round that will be hard to judge against the
    target.
 3. **Declare before you measure.** The ladder, the controls, the pass mark and
@@ -176,8 +183,8 @@ it; nothing below replaces reading that once.
 4. **Work against the cheapest gate that could fail** (D16), and make the edits
    in one batch before running it rather than gate-checking between them.
 5. **Record it where it belongs** (D1, D15): the finding and its controls in a
-   `studies/*_STUDY.md`; what the system *is* now in [`STATUS.md`](STATUS.md)
-   §2; what is open in §3; the round itself as a phase in
+   `studies/*_STUDY.md`; what the system *is* now in [`SYSTEM.md`](SYSTEM.md);
+   what is open in the To-Do list of [`STATUS.md`](STATUS.md); the round itself as a phase in
    [`MASTER_PLAN.md`](MASTER_PLAN.md); anything proved rather than measured in
    `overlay/glm_lean/RequestProject/GLM/`, the one copy of the Lean
    development. Name which faculty moved, or that none did.

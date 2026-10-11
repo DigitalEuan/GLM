@@ -479,6 +479,22 @@ class TestRuntimeMeaning(unittest.TestCase):
             with self.subTest(text=text):
                 self.assertEqual(PA.parse_query(text).kind, "meaning")
 
+    def test_a_sentence_is_not_a_meaning_query(self):
+        """Phase 114: the keyword inside a paragraph (outside questions 71
+        and 82) no longer hands a sentence to the resolver, which answered
+        vacuously that it "denotes nothing determinate"."""
+        for text in ("They share the exact same mass number, meaning they "
+                     "have identical layouts of nucleons. Detail why.",
+                     "Soundness vs. Completeness: explain what it means for "
+                     "a logic to possess one but lack the other.",
+                     "meaning of $x^2$"):
+            with self.subTest(text=text[:40]):
+                self.assertEqual(PA.parse_query(text).kind, "unknown")
+        for text in ("meaning of justice", "relate energy torque",
+                     "meaning of 42.5"):
+            with self.subTest(text=text):
+                self.assertEqual(PA.parse_query(text).kind, "meaning")
+
     def test_parser_passes_terms_verbatim(self):
         query = PA.parse_query("meaning of qwertyuiop")
         self.assertEqual(tuple(query.options["terms"]), ("qwertyuiop",))

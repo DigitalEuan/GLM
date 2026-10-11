@@ -112,14 +112,14 @@ class TestTheLeanPromisesHoldOfTheCode(unittest.TestCase):
         self.assertEqual(
             report["queries_moved_outside_the_type_vocabulary"], ())
 
-    def test_the_type_vocabulary_can_move_and_that_is_reported(self):
-        #  The audit finding: the shipped map reads the type words inside
-        #  identifiers too, so a declaration whose name spells one loses the
-        #  count.  It is measured, not hidden.
+    def test_the_type_vocabulary_no_longer_moves(self):
+        #  The audit finding was that the shipped map read the type words
+        #  inside identifiers too, so a declaration whose name spelled one
+        #  lost the count.  Phase 101 (studies/CITATION_SCOPE_STUDY.md, mark
+        #  L4) made the type words count whole identifiers only, so no goal
+        #  loses a structural coordinate when its names go.
         report = an.anonymous_report()
-        self.assertLess(report["invariant_queries"], report["queries"])
-        self.assertGreater(report["invariant_queries"],
-                           report["queries"] * 9 // 10)
+        self.assertEqual(report["invariant_queries"], report["queries"])
 
     def test_an_anonymised_query_shares_no_identifier_with_the_corpus(self):
         #  GLM.Anonymous.overlap_anonymise_eq_zero: the text faculty's
@@ -211,8 +211,26 @@ class TestTheRegisterAsMeasured(unittest.TestCase):
     #: 37.39, and is recorded as a miss; at 4358 (Phase 91) it is back under
     #: it, 66 hits against a chance of 37.91, and the miss is no longer
     #: recorded; at 4416 (Phase 92) the stride rises to 11 and it scores 63
-    #: against a chance of 35.48, and still holds
+    #: against a chance of 35.48, and still holds; at 4610 (Phase 103) the
+    #: stride is 839 queries and it scores 69 against a chance of 32.22,
+    #: over the line again, and is recorded as a miss; at 4636 (Phase 105)
+    #: the stride is 843 queries and it scores 59 against a chance of 32.15,
+    #: back under the line, and the miss is no longer recorded; at 4676
+    #: (Phase 108) the stride is 851 queries and it scores 68 against a
+    #: chance of 31.88, over the line again, and is recorded as a miss; at
+    #: 4736 (Phase 113) the stride is 862 queries and it scores 57 against a
+    #: chance of 31.66, back under the line, and the miss is no longer
+    #: recorded; at 4739 (Phase 114) the stride is 862 queries and it scores
+    #: 64 against a chance of 31.57, over the line again; at 4742 (Phase 115)
+    #: the stride is 863 queries and it scores 51 against a chance of 31.91,
+    #: back under the line, so no miss is recorded; at 4821 (Phase 119)
+    #: the stride is 804 queries and it scores 58 against a chance of
+    #: 28.95, just over the line again, and is recorded as a miss
     #: (ANONYMOUS_REGISTER_STUDY.md section 4).
+    #  Phase 119 (4821 declarations) recorded text_is_within_twice_chance as
+    #  a miss; with Phase 122's Lean file (4881 declarations, 814 queries) the
+    #  text search scores 53 hits against a chance of 28.91, 1.83 times
+    #  chance, under the line again, so no miss is recorded.
     RECORDED_MISSES: tuple = ()
 
     def test_every_declared_verdict_holds(self):

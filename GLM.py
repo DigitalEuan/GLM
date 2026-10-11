@@ -1027,7 +1027,7 @@ def _ask_connected(out: "Out", texts: Sequence[str], columns: Sequence[int],
     session: Optional[GeometricSession] = None
     worst = 0
     for text in texts:
-        surface = router.reader_of(text)
+        surface = router.handed_surface(text, router.reader_of(text))
         out.line(f"SURFACE {surface}")
         if surface == "toolbox":
             got = toolbox.run_tool(text)

@@ -1256,6 +1256,19 @@ def _build_keyword_query(text: str, cleaned: str, lowered: str,
                 names = tuple(ws_parts[:2])
         if not names:
             names = (_strip_connectives(remainder),)
+        # Phase 114 (outside questions 71 and 82 of Question Set B): the
+        # keyword can sit inside a paragraph ("... meaning they have ...",
+        # "Explain what it means ..."), and a sentence handed to the
+        # resolver came back as the vacuous answer "denotes nothing
+        # determinate".  A notation is short and holds no sentence break,
+        # so a text whose remainder is a sentence is not a meaning query.
+        if _is_sentence(remainder):
+            trace.append(f"meaning keyword inside a sentence, not before a "
+                         f"term: {remainder.strip()[:60]!r} is not a "
+                         f"notation")
+            return Query(raw=text, normalised=cleaned, kind="unknown",
+                         domain=domain, operands=(remainder,), rule=rule,
+                         trace=tuple(trace))
         options["terms"] = tuple(names[:2])
         trace.append(f"meaning terms {tuple(names[:2])!r} pass to the "
                      f"reference resolver unchanged")
@@ -1535,6 +1548,19 @@ def _strip_connectives(text: str) -> str:
                 lowered = out.lower()
                 changed = True
     return out
+
+
+#: Longest notation, in words, that the meaning frame reads as a term.
+_MAX_TERM_WORDS = 8
+_SENTENCE_BREAK = re.compile(r"[.:;?!]\s|\$")
+
+
+def _is_sentence(term: str) -> bool:
+    """A text that is a sentence (or a paragraph) rather than a notation:
+    more than :data:`_MAX_TERM_WORDS` words, a sentence break inside it, or
+    TeX.  Phase 114."""
+    return (len(term.split()) > _MAX_TERM_WORDS
+            or bool(_SENTENCE_BREAK.search(term.strip())))
 
 
 def _split_list(text: str) -> Tuple[str, ...]:

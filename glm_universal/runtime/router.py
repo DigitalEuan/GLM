@@ -184,6 +184,10 @@ def route(session, text: str) -> Routed:
         a = answer_any(text, session)
         body = (f"{a.verdict}: {a.sentence}" if a.answered
                 else f"refused: {a.refusal}: {a.reason}")
+        if not a.answered:
+            handed = _handover(text, f"reverse refused {a.refusal}")
+            if handed is not None:
+                return handed
         return Routed("reverse", a.answered, body, payload=a,
                       faculty="derive" if a.answered else "refusal")
     if surface == "python":
@@ -216,6 +220,40 @@ def route(session, text: str) -> Routed:
         return Routed("planner", False, f"refused: {refused}",
                       faculty="refusal")
     return Routed("planner", bool(sol.ok), sol.answer, solution=sol)
+
+
+def _handover(text: str, why: str) -> Optional[Routed]:
+    """A refusal handed to the frame that can read the same words
+    (sharpening pass): ``solve for x: x^3 + p*x = q`` is the reverse
+    surface's prefix, but its body is algebra the dialect does not hold.
+    Consulted only after a refusal, and kept only if it answers, so it
+    never changes an answer a surface gave."""
+    from . import question_frames as qf
+    from .symbolic_frames import canonical
+    if canonical(text) is None:
+        return None
+    rd = qf.read(text)
+    if rd is None or not rd.answered:
+        return None
+    rd.column2 = f"handed over ({why}); " + rd.column2
+    return Routed("frames", True, rd.body(), payload=rd, faculty="derive")
+
+
+def handed_surface(text: str, surface: str) -> str:
+    """The surface whose verdict is shown for ``text``: ``surface`` itself,
+    unless it is the reverse surface, it refuses, and :func:`_handover`
+    answers (the command line asks this so that it prints what
+    :func:`route` returns)."""
+    if surface != "reverse":
+        return surface
+    from .symbolic_frames import canonical
+    if canonical(text) is None:
+        return surface
+    from .reverse_relay import answer_any
+    if answer_any(text, None).answered:
+        return surface
+    return "frames" if _handover(text, "reverse refused") is not None \
+        else surface
 
 
 def _stepwise(session, text: str) -> Optional[Routed]:

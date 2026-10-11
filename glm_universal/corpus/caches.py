@@ -1,15 +1,15 @@
 """``glm_universal.corpus.caches`` -- every stored measurement, and whether it
 still describes the code it was taken from.
 
-Ten study modules keep a **measurement cache**: a JSON file of figures that
-cost minutes to take, stored beside the digest of the sources they were taken
-from, with a ``current()`` that returns the figures when the digest still
-holds and ``None`` when it does not.  That is the right discipline -- a stale
-measurement is refused rather than quoted -- but it was only *discovered* by
-whatever happened to read it.  A round could change a module, pass
-``corpus --check`` in half a minute, and learn twenty minutes later, from a
-failing end-to-end evaluation, that a cache it had never heard of needed
-re-taking.
+The study modules, and one report module, keep a **measurement cache**: a JSON
+file of figures that cost minutes to take, stored beside the digest of the
+sources they were taken from, with a ``current()`` that returns the figures
+when the digest still holds and ``None`` when it does not.  That is the right
+discipline -- a stale measurement is refused rather than quoted -- but it was
+only *discovered* by whatever happened to read it.  A round could change a
+module, pass ``corpus --check`` in half a minute, and learn twenty minutes
+later, from a failing end-to-end evaluation, that a cache it had never heard
+of needed re-taking.
 
 This module makes the census cheap and total: which caches exist, which are
 current, and the exact command that re-takes each stale one.  ``--check`` runs
@@ -48,6 +48,15 @@ PACKAGE_ROOT = Path(__file__).resolve().parent.parent
 
 REASONING = PACKAGE_ROOT / "reasoning"
 
+RUNTIME = PACKAGE_ROOT / "runtime"
+
+#: Where a measurement cache may live: the study modules, then the report
+#: modules.
+CACHE_DIRECTORIES = (REASONING, RUNTIME)
+
+#: The names a module may give the digest its stored figures are held to.
+DIGESTS = frozenset({"module_digest", "source_digest"})
+
 TOOLS = PACKAGE_ROOT / "tools.py"
 
 __all__ = [
@@ -55,30 +64,50 @@ __all__ = [
     "cache_states",
     "cached_modules",
     "commands_by_module",
+    "module_path",
 ]
 
 
-def cached_modules() -> Tuple[str, ...]:
-    """The reasoning modules that hold a measurement cache, by module name.
+def _qualifies(path: Path) -> bool:
+    """Does the source at ``path`` define a cache: a digest and ``current``?"""
+    try:
+        tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+    except (SyntaxError, UnicodeDecodeError):  # pragma: no cover - defensive
+        return False
+    names = {node.name for node in tree.body
+             if isinstance(node, ast.FunctionDef)}
+    return "current" in names and bool(names & DIGESTS)
 
-    A module qualifies when its source defines both ``module_digest`` (the
-    digest of what the figures were taken from) and ``current`` (the figures,
-    or ``None`` when the digest has moved).  Read with :mod:`ast`: nothing is
-    imported to decide whether it belongs here.
+
+def cached_modules() -> Tuple[str, ...]:
+    """The modules that hold a measurement cache, by module name.
+
+    A module qualifies when its source defines ``current`` (the figures, or
+    ``None`` when the digest has moved) and a digest of what the figures were
+    taken from (``module_digest``, or ``source_digest`` in a report module).
+    Read with :mod:`ast`: nothing is imported to decide whether it belongs
+    here.  A study module in ``reasoning`` is named by its stem; a report
+    module in ``runtime`` by ``runtime.<stem>`` -- the AST index report of
+    Phase 105 lives there, and the census missed it until Phase 115, so a
+    change to a module it digests left it stale through the close's stage 0.
     """
     out = []
-    for path in sorted(REASONING.glob("*.py")):
-        if path.name.startswith("_"):
-            continue
-        try:
-            tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
-        except (SyntaxError, UnicodeDecodeError):  # pragma: no cover - defensive
-            continue
-        names = {node.name for node in tree.body
-                 if isinstance(node, ast.FunctionDef)}
-        if {"module_digest", "current"} <= names:
-            out.append(path.stem)
+    for directory in CACHE_DIRECTORIES:
+        for path in sorted(directory.glob("*.py")):
+            if path.name.startswith("_") or not _qualifies(path):
+                continue
+            out.append(path.stem if directory == REASONING
+                       else f"{directory.name}.{path.stem}")
     return tuple(out)
+
+
+def module_path(name: str) -> Path:
+    """The source file of a cached module named as :func:`cached_modules`
+    names it."""
+    if "." in name:
+        package, stem = name.split(".", 1)
+        return PACKAGE_ROOT / package / f"{stem}.py"
+    return REASONING / f"{name}.py"
 
 
 def _aliases_in(nodes) -> Dict[str, str]:
@@ -90,10 +119,17 @@ def _aliases_in(nodes) -> Dict[str, str]:
     """
     aliases: Dict[str, str] = {}
     for node in nodes:
-        if isinstance(node, ast.ImportFrom) and (node.module or "").endswith(
-                "reasoning"):
-            for alias in node.names:
-                aliases[alias.asname or alias.name] = alias.name
+        if not isinstance(node, ast.ImportFrom):
+            continue
+        source = node.module or ""
+        if source.endswith("reasoning"):
+            prefix = ""
+        elif source.endswith("runtime"):
+            prefix = "runtime."
+        else:
+            continue
+        for alias in node.names:
+            aliases[alias.asname or alias.name] = prefix + alias.name
     return aliases
 
 
@@ -172,7 +208,19 @@ def cache_states() -> Tuple[Dict[str, object], ...]:
     commands = commands_by_module()
     rows = []
     for name in cached_modules():
-        module = importlib.import_module(f"glm_universal.reasoning.{name}")
+        module = importlib.import_module(
+            f"glm_universal.{name}" if "." in name
+            else f"glm_universal.reasoning.{name}")
+        # Read the file again rather than the module's memo: stage 0 of the
+        # close re-takes a cache in a subprocess, and a census taken before
+        # it had memoised the stale figures, so the re-taken cache was
+        # reported "still stale" (Phase 109's close; fixed in Phase 110).
+        reread = getattr(module, "measurements", None)
+        if callable(reread):
+            try:
+                reread(refresh=True)
+            except Exception:  # pragma: no cover - a cache that cannot be read
+                pass
         try:
             fresh = module.current() is not None
         except Exception:  # pragma: no cover - a cache that cannot be read

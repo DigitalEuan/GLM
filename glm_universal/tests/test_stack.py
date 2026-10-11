@@ -255,11 +255,17 @@ class TestTheRelayReport(unittest.TestCase):
         #  two tuning queries below the control at 1/4 (52/61 against 6/7).
         #  Phase 66 (3859 declarations, 858 queries) moved it forward again:
         #  strict on all five gates, 372/429 against 367/429 at 1/4.
+        #  Phase 122 (4881 declarations, 407 tuning queries) moved it back: strict
+        #  to 1/5, and level with the control at 1/4 (348/407 each), so the
+        #  top gate is asserted never below rather than strict.
         baseline = self.report["sets"]["tuning"]["leader"]["hit_rate"][5]
         for row in self.report["sweep"]:
-            if Fraction(1, 20) <= row["gate"] <= Fraction(1, 4):
+            if Fraction(1, 20) <= row["gate"] <= Fraction(1, 5):
                 with self.subTest(gate=row["gate"], claim="strict"):
                     self.assertGreater(row["hit_at_5"], baseline)
+            elif row["gate"] == Fraction(1, 4):
+                with self.subTest(gate=row["gate"], claim="never below"):
+                    self.assertGreaterEqual(row["hit_at_5"], baseline)
             elif row["gate"] == 0:
                 with self.subTest(gate=row["gate"], claim="baseline"):
                     self.assertEqual(row["hit_at_5"], baseline)
@@ -291,10 +297,19 @@ class TestTheRelayReport(unittest.TestCase):
         #  band-wide flags are false again -- recorded as measured.
         #  Phase 66 moved it forward: strict on all five gates, to 1/4, so
         #  both band-wide flags hold once more.
-        self.assertTrue(verdict["gain_holds_across_the_gate"])
+        #  Phase 122 moved it back: strict on four gates, to 1/5, and level
+        #  with the control at 1/4, so the strict band-wide flag is false and
+        #  the never-below flag holds -- recorded as measured.
+        #  Phase 123 (4903 declarations) moved it forward again: strict on
+        #  all five gates, to 1/4, so both band-wide flags hold.
+        #  Phase 127 (HexRung.lean's declarations) moved it back: strict on
+        #  four gates, to 1/5, never below the control at 1/4, so the strict
+        #  band-wide flag is false and the never-below flag holds -- recorded
+        #  as measured.
+        self.assertFalse(verdict["gain_holds_across_the_gate"])
         self.assertTrue(verdict["gain_never_below_across_the_gate"])
-        self.assertEqual(verdict["gain_strict_gates"], 5)
-        self.assertEqual(verdict["gain_strict_to_gate"], "1/4")
+        self.assertEqual(verdict["gain_strict_gates"], 4)
+        self.assertEqual(verdict["gain_strict_to_gate"], "1/5")
         self.assertTrue(verdict["gate_fires_rarely"])
 
     def test_every_rate_is_exact(self):

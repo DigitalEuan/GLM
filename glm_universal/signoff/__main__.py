@@ -63,7 +63,7 @@ from __future__ import annotations
 
 import sys
 from fractions import Fraction
-from typing import Optional, Sequence
+from typing import Optional, Sequence, Set, Tuple
 
 from . import checks as C
 from . import ledger as L
@@ -195,9 +195,12 @@ def _print_verify(full: bool = False) -> int:
 
 
 def _run(all_units: bool, jobs: int = 1,
-         exhaustive: Optional[bool] = None) -> int:
+         exhaustive: Optional[bool] = None,
+         only: Optional[Sequence[str]] = None,
+         exclude: Sequence[str] = ()) -> int:
     before = L.predicted_saving()
-    result = L.run_plan(all_units=all_units, jobs=jobs, exhaustive=exhaustive)
+    result = L.run_plan(all_units=all_units, jobs=jobs, exhaustive=exhaustive,
+                        only=only, exclude=exclude)
     for row in result["results"]:
         status = row.get("status", "?")
         print(f"{row['name']:<40} {status:<8} "
@@ -219,10 +222,13 @@ def _run(all_units: bool, jobs: int = 1,
 
 
 def _run_checks(all_units: bool, jobs: int = 1,
-                exhaustive: Optional[bool] = None) -> int:
+                exhaustive: Optional[bool] = None,
+                names: Sequence[str] = (),
+                exclude: Sequence[str] = ()) -> int:
     before = C.predicted_check_saving()
     result = C.run_checks(all_units=all_units, jobs=jobs,
-                          exhaustive=exhaustive)
+                          exhaustive=exhaustive, names=names,
+                          exclude=exclude)
     for row in result["results"]:
         status = row.get("status", "?")
         print(f"{row['name']:<24} {status:<8} rc={row.get('returncode')} "
@@ -261,7 +267,262 @@ def _closure(name: str) -> int:
     return 2
 
 
+#: How many times a close may go round stage 1 and the refresh before it
+#: stops and says so.  One pass is the normal case; a second is needed only
+#: when the refresh moved something a package unit reads (a figure the
+#: session did not refresh before closing); a third would mean the refresh
+#: is not converging, which is a defect to report, not to loop on.
+_CLOSE_PASSES = 3
+
+
+def _stale_names(exclude_units: Sequence[str] = (),
+                 exclude_checks: Sequence[str] = (),
+                 only_units: Optional[Sequence[str]] = None,
+                 only_checks: Optional[Sequence[str]] = None) -> Tuple[str, ...]:
+    """The units and instruments the release question calls stale."""
+    out = []
+    for unit in L.plan(full=True):
+        if not unit.stale or unit.name in exclude_units:
+            continue
+        if only_units is not None and unit.name not in only_units:
+            continue
+        out.append(unit.name)
+    for unit in C.check_plan():
+        if not unit.stale or unit.name in exclude_checks:
+            continue
+        if only_checks is not None and unit.name not in only_checks:
+            continue
+        out.append(unit.name)
+    return tuple(out)
+
+
+def _refresh_corpus(attempts: int = 2) -> int:
+    """``corpus --refresh``, in its own interpreter, from ``overlay/``.
+
+    A refresh can end ``not current`` with a block still stale that reads a
+    block the same refresh wrote (seen in Phase 109: the corpus-address
+    study's block after the digest blocks moved); a second refresh settles
+    it.  So a refresh that does not end current is run once more before the
+    close reports a defect -- a genuine defect fails both times.
+    """
+    import os
+    import subprocess
+    env = dict(os.environ)
+    env["PYTHONPATH"] = str(L.PROJECT_ROOT) + (
+        os.pathsep + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
+    code = 0
+    for attempt in range(1, attempts + 1):
+        completed = subprocess.run(
+            (sys.executable, "-m", "glm_universal.corpus", "--refresh"),
+            cwd=str(L.PROJECT_ROOT), env=env, capture_output=True,
+            text=True)
+        tail = (completed.stdout + completed.stderr).strip().splitlines()[-12:]
+        for line in tail:
+            print(f"  {line}")
+        code = completed.returncode
+        if code == 0:
+            break
+        if attempt < attempts:
+            print("  the refresh did not end current; refreshing once more")
+    return code
+
+
+def _stale_caches() -> Tuple[Tuple[str, str], ...]:
+    """``(module, sub-command)`` for every stale measurement cache that has
+    a re-taking command (:mod:`glm_universal.corpus.caches`)."""
+    from ..corpus import caches as ca
+    out = [(str(row["module"]), str(row["command"]))
+           for row in ca.cache_states()
+           if not row["fresh"] and row["command"]]
+    # The elaborator's citation reference is guarded by the digest of the
+    # Lean tree rather than by ``module_digest``/``current``, so the census
+    # does not see it; a new Lean file made it stale and failed
+    # test_citation_scope and test_proof_dependency inside the Phase 109
+    # close.  Re-taking it needs the compiled library (``lake env lean``)
+    # and costs about twenty seconds.
+    try:
+        from ..reasoning import citation_reference as cr
+        # Forget the memoised reference first: stage 0 re-takes it in a
+        # subprocess, and the memo of the census taken before that made the
+        # re-taken reference read "still stale" (Phase 110's close).
+        cr._cache = None
+        if cr.state().get("verdict") == "stale":
+            out.append(("citation_reference", REFERENCE_COMMAND))
+    except Exception:  # pragma: no cover - a reference that cannot be read
+        pass
+    return tuple(out)
+
+
+#: The sub-command (with its flag) that re-takes the citation reference.
+REFERENCE_COMMAND = "citation-scope --reference"
+
+
+def _retake_caches() -> int:
+    """Stage 0 of the close: re-take every stale measurement cache.
+
+    A cache is guarded by the digest of the sources it was taken from, and
+    the unit that reads it fails while the digest has moved -- so a round
+    that edits ``evaluation/cases.py`` or ``runtime/session.py`` made
+    ``test_query_escalation`` fail *inside* the close, which then deferred
+    the totals and the document checks, and the round paid a whole extra
+    close after re-taking the cache by hand.  Re-taking first means the
+    units that read a cache run once, against figures that are current.
+    A cache that is still stale after its command ran is reported and left
+    to fail its unit (which says why).  Two passes: one cache's figures may
+    be read by another's measurement.
+    """
+    import os
+    import subprocess
+    env = dict(os.environ)
+    env["PYTHONPATH"] = str(L.PROJECT_ROOT) + (
+        os.pathsep + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
+    status = 0
+    tried: Set[str] = set()
+    for _ in range(2):
+        stale = [(m, c) for m, c in _stale_caches() if m not in tried]
+        if not stale:
+            break
+        for module, command in stale:
+            tried.add(module)
+            if module == "citation_reference":
+                # the reference is read off the compiled library
+                subprocess.run(("lake", "build"),
+                               cwd=str(L.PROJECT_ROOT.parent),
+                               capture_output=True, text=True)
+            argv = tuple(command.split()) if " " in command else \
+                (command, "--write")
+            print(f"  re-taking {module}: tools {' '.join(argv)}")
+            done = subprocess.run(
+                (sys.executable, "-m", "glm_universal.tools") + argv,
+                cwd=str(L.PROJECT_ROOT), env=env, capture_output=True,
+                text=True)
+            if done.returncode != 0:
+                status = 1
+                tail = (done.stdout + done.stderr).strip().splitlines()[-6:]
+                for line in tail:
+                    print(f"    {line}")
+    left = [m for m, _ in _stale_caches()]
+    if left:
+        print(f"  still stale after re-taking: {', '.join(left)}")
+        status = 1
+    return status
+
+
+def _close(jobs: int, settle: bool = True, retake: bool = True) -> int:
+    """Close the round in one command: package, refresh, document checks.
+
+    The order is what removes the loop.  The suite totals are recorded from
+    the *counted* units -- every unit except the document checks
+    (``rules.DOCUMENT_CHECKS``) -- and the document checks are exactly what
+    asks whether the documents quote those totals.  So:
+
+    1. **the package** -- every stale unit and instrument except the
+       document checks, with the exhaustive cases on.  If a counted unit
+       fails, the totals cannot be recorded, and the document checks would
+       only fail on figures that are about to move: they are *deferred*, not
+       run, and the close says which units are owed.  Nothing earned is lost.
+    2. **the refresh** -- ``corpus --refresh``, which writes the totals just
+       recorded (and anything else stale) into ``FIGURES.md`` and the inline
+       figures.  The package units are signed against the documents with
+       the run-measured figures emptied, so this does not make them stale;
+       if the refresh moved anything else they read, stage 1 runs again for
+       just those.
+    3. **the document checks** -- ``test_corpus``, ``test_figures`` and the
+       ``figures`` instrument, now against documents that are current.
+
+    Before all three, **stage 0** re-takes every stale measurement cache
+    (:func:`_retake_caches`), so a unit that reads one does not fail stage 1
+    on a digest the round moved and defer everything after it.
+
+    Then ``--verify-release`` decides, as before.  ``settle=False``
+    (``--no-refresh``) skips step 2 for a session that has just refreshed;
+    ``retake=False`` (``--no-retake``) skips stage 0.
+    """
+    doc_units = tuple(L.DOCUMENT_CHECKS)
+    doc_checks = tuple(C.DOCUMENT_INSTRUMENTS)
+    status = 0
+    if retake and _stale_caches():
+        names = ", ".join(m for m, _ in _stale_caches())
+        print(f"stage 0: re-taking the stale measurement caches ({names}) "
+              f"before the units that read them run")
+        if _retake_caches() != 0:
+            print("a cache could not be re-taken (above); the units that "
+                  "read it will fail in stage 1 and say why")
+        print()
+    for attempt in range(1, _CLOSE_PASSES + 1):
+        print(f"stage 1, pass {attempt}: the package -- every stale unit and "
+              f"instrument except the document checks "
+              f"({', '.join(doc_units + doc_checks)})")
+        status |= (_run(all_units=False, jobs=jobs, exhaustive=True,
+                        exclude=doc_units)
+                   | _run_checks(all_units=False, jobs=min(jobs, 3),
+                                 exhaustive=True, exclude=doc_checks))
+        owed = L.counted_failures()
+        if owed:
+            print()
+            print(f"document checks deferred: the suite totals are recorded "
+                  f"only once every counted unit has passed with the "
+                  f"exhaustive cases on, and {len(owed)} has not: "
+                  f"{', '.join(owed)}.")
+            print("fix those and run --close again; it pays only for what is "
+                  "still owed, then refreshes and runs the document checks.")
+            print()
+            return 1 | _print_verify(full=True)
+        pending = _stale_names(only_units=doc_units, only_checks=doc_checks)
+        if not pending:
+            break
+        if settle:
+            print()
+            print(f"stage 2: corpus --refresh, so the document checks "
+                  f"({', '.join(pending)}) read the figures just recorded")
+            if _refresh_corpus() != 0:
+                print("the refresh found a defect in the documents (above); "
+                      "fix it and run --close again")
+                return 1 | _print_verify(full=True)
+        moved = _stale_names(exclude_units=doc_units,
+                             exclude_checks=doc_checks)
+        if not moved:
+            break
+        print(f"the refresh moved what {len(moved)} package unit(s) read: "
+              f"{', '.join(moved)}; running them again")
+        if attempt == _CLOSE_PASSES:
+            print(f"the close did not settle in {_CLOSE_PASSES} passes; "
+                  f"report this -- the refresh is not converging")
+            return 1 | _print_verify(full=True)
+    pending = _stale_names(only_units=doc_units, only_checks=doc_checks)
+    if pending:
+        print()
+        print(f"stage 3: the document checks ({', '.join(pending)})")
+        status |= _run(all_units=False, jobs=jobs, exhaustive=True,
+                       only=doc_units)
+        instruments = [n for n in doc_checks if n in pending]
+        if instruments:
+            status |= _run_checks(all_units=False, jobs=min(jobs, 3),
+                                  exhaustive=True, names=instruments)
+    print()
+    return status | _print_verify(full=True)
+
+
+#: The commands that run test files (each under ``python3 -m pytest``).
+_RUNS = ("--close", "--release", "--run-everything", "--run-all", "--run")
+
+
+def _pytest_missing() -> bool:
+    """Whether the test runner is absent from this interpreter.  pytest is
+    not part of the standard library and is not installed in every
+    environment the repository is opened in; without it every unit fails
+    and the failure reads as a broken suite (Phase 107's first close)."""
+    import importlib.util
+    return importlib.util.find_spec("pytest") is None
+
+
 def main(argv: Sequence[str]) -> int:
+    if any(a in argv for a in _RUNS) and _pytest_missing():
+        print("pytest is not installed in this environment, and every test "
+              "file runs under it.  Install it first:\n"
+              "    python3 -m pip install pytest\n"
+              "then run the same command again.  (ITERATE.md §0)")
+        return 2
     jobs = _jobs(argv)
     exhaustive = True if "--exhaustive" in argv else None
     if not argv or "--plan" in argv:
@@ -279,12 +540,11 @@ def main(argv: Sequence[str]) -> int:
     if "--verify" in argv:
         return _print_verify()
     if "--close" in argv:
-        print("closing: the release question, paying only what moved; "
+        print("closing: the release question, paying only what moved -- the "
+              "package, then the refresh, then the document checks; "
               "--verify-release decides")
-        ran = (_run(all_units=False, jobs=jobs, exhaustive=True)
-               | _run_checks(all_units=False, jobs=min(jobs, 3),
-                             exhaustive=True))
-        return ran | _print_verify(full=True)
+        return _close(jobs, settle="--no-refresh" not in argv,
+                      retake="--no-retake" not in argv)
     if "--release" in argv:
         resume = "--resume" in argv
         if resume:

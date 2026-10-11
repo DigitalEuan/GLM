@@ -239,7 +239,7 @@ def _stability(arg: str) -> ToolResult:
 
 
 def _native_parity(arg: str) -> ToolResult:
-    from ..reasoning import native_parity as npar
+    from ..reasoning import native_ledger as npar
     r = npar.tool_summary()
     counts = r["counts"]
     return ToolResult(True, "native parity: the ledger holds "
@@ -253,7 +253,7 @@ def _native_parity(arg: str) -> ToolResult:
 
 
 def _native_words(arg: str) -> ToolResult:
-    from ..reasoning import native_words as nwd
+    from ..reasoning import golay_words as nwd
     r = nwd.tool_summary(arg)
     rows = r["tokens"]
     if not rows:
@@ -286,6 +286,71 @@ def _law_register(arg: str) -> ToolResult:
                       f"{r['formulas_admitted']} pass the look-elsewhere test "
                       f"({', '.join(r['admitted'])})",
                       {k: v for k, v in r.items()})
+
+
+def _ladder(arg: str) -> ToolResult:
+    """The operations ladder (Phase 125): one term, the relation between two,
+    or the census."""
+    from ..reasoning import ops_ladder as ol
+    text = arg.strip()
+    if not text:
+        note = ol.note_check()
+        h = ol.projection_census()
+        return ToolResult(True, f"ladder: {note['terms']} terms in 10 tiers, "
+                          f"every one grounded in the 10 machine primitives, "
+                          f"{len(note['layering_violations'])} layering "
+                          f"violations; {len(ol.CROSSOVERS)} cross-overs to "
+                          f"what the GLM already holds; the projection onto "
+                          f"the Geometric-Cybernetic ladder is monotone on "
+                          f"{h['monotone']} of {h['edges']} composition edges",
+                          {"terms": note["terms"], "monotone": h["monotone"],
+                           "edges": h["edges"]})
+    import re as _re
+    m = _re.match(r"^(?:relation\s+(?:between\s+)?)?(.+?)\s+and\s+(.+)$",
+                  text, _re.IGNORECASE)
+    if m:
+        a, b = ol.resolve(m.group(1)), ol.resolve(m.group(2))
+        if a is None or b is None:
+            missing = m.group(1) if a is None else m.group(2)
+            return ToolResult(False, f"refused: {missing!r} is not a term of "
+                              "the operations ladder", {})
+        return ToolResult(True, "ladder: " + ol.relation_sentence(a, b),
+                          {"relation": ol.relation(a, b)["kind"]})
+    term = ol.resolve(text)
+    if term is None:
+        return ToolResult(False, f"refused: {text!r} is not a term of the "
+                          "operations ladder", {})
+    return ToolResult(True, "ladder: " + ol.term_sentence(term),
+                      {"term": term, "tier": ol.tier_of(term)})
+
+
+def _machine(arg: str) -> ToolResult:
+    """GLM-BAT (Phase 125): ``QUESTION :: PROGRAM [:: file PATH=a // b]
+    [:: env NAME=value]``; program lines are separated by newlines or
+    ``;;``, and may be written as English sentences."""
+    from ..reasoning import batch_speech as bs
+    parts = [p.strip() for p in arg.split("::")]
+    if len(parts) < 2 or not parts[0] or not parts[1]:
+        return ToolResult(False, "refused: give QUESTION :: PROGRAM, e.g. "
+                          "tool machine what does it print? :: ECHO hello", {})
+    env: Dict[str, str] = {}
+    files: Dict[str, List[str]] = {}
+    for extra in parts[2:]:
+        kind, _, rest = extra.partition(" ")
+        name, _, value = rest.partition("=")
+        if kind.lower() == "env" and name:
+            env[name.strip()] = value.strip()
+        elif kind.lower() == "file" and name:
+            files[name.strip()] = [v.strip() for v in value.split("//")]
+        else:
+            return ToolResult(False, f"refused: {extra!r} is neither "
+                              "'env NAME=value' nor 'file PATH=a // b'", {})
+    a = bs.answer(parts[0], parts[1], env, files)
+    tail = (" [column 3 verified]" if a.verified else "")
+    return ToolResult(a.answered, "machine: " + a.body() + tail,
+                      {"refusal": a.refusal, "faculty": a.faculty,
+                       "sentences": a.column1, "program": a.column2,
+                       "claim": a.claim})
 
 
 TOOLS: Tuple[Tool, ...] = (
@@ -337,6 +402,19 @@ TOOLS: Tuple[Tool, ...] = (
          ("RequestProject/GLM/LawRegister.lean",),
          "studies/LAW_REGISTER_STUDY.md", _law_register,
          takes="a law id, or nothing for the census"),
+    Tool("ladder", "reasoning.ops_ladder", "the operations ladder: 97 terms "
+         "each built from lower ones, the relation between two computed from "
+         "their closures, the projection onto the Geometric-Cybernetic ladder "
+         "and the cross-overs", "derive",
+         ("RequestProject/GLM/OperationsLadder.lean",),
+         "studies/OPERATIONS_LADDER_STUDY.md", _ladder,
+         takes="a term, 'A and B', or nothing for the census"),
+    Tool("machine", "reasoning.batch_speech", "GLM-BAT, an old-style batch "
+         "machine learnt as a language: a question about a program, answered "
+         "from a run with a certificate, or refused by name", "derive",
+         ("RequestProject/GLM/OperationsLadder.lean",),
+         "studies/OPERATIONS_LADDER_STUDY.md", _machine,
+         takes="QUESTION :: PROGRAM"),
 )
 
 

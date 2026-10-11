@@ -139,7 +139,15 @@ class TestTheMarks:
     def test_the_census_releases_nothing(self):
         census = R.census_report()
         assert census["met"], census
-        assert census["taken_answered_alone"] == 0
+        # Phase 120's explanation frames answer two of the taken texts alone
+        # (outside question 67 and a rewording of 80); answered whole first,
+        # they never reach the layer as follow-ups.  Every other taken text
+        # is still refused alone.
+        from glm_universal.runtime import question_frames as qf
+        alone = [t for _, _, t in census["taken"]
+                 if (qf.frame_of(t) or (None,))[0] is not None
+                 and qf.frame_of(t)[0].name.startswith("explain_")]
+        assert census["taken_answered_alone"] == len(alone) == 2
 
 
 class TestTheCommandLine:

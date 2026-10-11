@@ -815,9 +815,35 @@ class TestExactness:
         # delta-sigma loop against the closed form that replaced it, and it
         # times it in integer nanoseconds (``time.monotonic_ns``), which is
         # why the timing is not itself a float site.
-        stdlib_roots = {"ast", "concurrent", "csv", "dataclasses", "fractions",
-                        "functools", "importlib", "itertools", "json",
-                        "math", "pathlib", "re", "sys", "time", "typing",
+        # ``os`` is here for one use only: the declared resampling (Phase
+        # 100) reads ``GLM_RESAMPLE_JOBS`` and the core count to size its
+        # process pool; the census rows come back in the declared order, so
+        # the number of workers changes how long it takes and nothing else.
+        # ``array`` and ``collections`` are containers of integers and
+        # nothing else: the resampling census stores its ranks as unsigned
+        # 16-bit arrays to fit in memory, and the dependency search
+        # (Phase 101) walks the elaborator's graph breadth first with a
+        # ``deque``.  Neither computes a value.
+        # ``subprocess`` and ``tempfile`` are here for one use only: the
+        # citation reference (Phase 101) runs Lean once, from ``tools
+        # citation-scope --reference``, to read the elaborator's own constant
+        # graph out of the compiled library.  That is a read of the tree, as
+        # ``importlib``'s is, not a computation; ``os`` also removes its
+        # temporary file.
+        # ``heapq`` is an ordering of tuples of integers and strings: the
+        # shortest-ambiguous-string search of ``coding_theory`` (Phase 107)
+        # takes dangling suffixes shortest first.  It orders; it computes no
+        # value.
+        # contextlib: the route switches of reasoning/routes.py are context
+        # managers (sharpening pass after Phase 108); they compute nothing.
+        # ``operator`` supplies ``mul`` to the hole census's integer
+        # ``reduce``; it is the ``*`` of the integers by name (recorded in
+        # Phase 125, when this check was found failing on that import).
+        stdlib_roots = {"array", "ast", "collections", "concurrent",
+                        "contextlib", "csv", "dataclasses", "fractions", "functools", "heapq",
+                        "importlib",
+                        "itertools", "json", "math", "operator", "os", "pathlib", "re",
+                        "subprocess", "sys", "tempfile", "time", "typing",
                         "__future__"}
         for path in sorted(REASONING_DIR.glob("*.py")):
             tree = ast.parse(path.read_text(encoding="utf-8"))

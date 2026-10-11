@@ -36,7 +36,6 @@ import json
 import os
 from array import array
 from fractions import Fraction
-from math import comb
 from pathlib import Path
 from typing import Dict, List, Mapping, Optional, Sequence, Tuple
 
@@ -45,6 +44,7 @@ from .. import integrity
 from . import lean_address as la
 from . import native_words as nw
 from . import retrieval as rt
+from .sign_test import sign_test  # noqa: F401  (Phase 114: its own module)
 
 __all__ = [
     "SCHEMES", "READINGS", "depth", "census", "file_drop_family",
@@ -128,8 +128,8 @@ def _warm() -> None:
     rt.readback_table("lexical")
     rt.lexical_table()
     rt.relative_table()
-    la.citation_index()
     la.declarations()
+    la.citation_graph()
     file_members()
 
 
@@ -347,14 +347,6 @@ def stride_offset_family() -> Dict[str, object]:
 #  The sign test and the verdicts
 # ===========================================================================
 
-def sign_test(b: int, c: int) -> Fraction:
-    """``min(1, 2 · Σ_{i ≤ min(b, c)} C(b + c, i) / 2^(b + c))``, exactly
-    (``GLM.CorpusResample.signTest``)."""
-    n = b + c
-    tail = sum(comb(n, i) for i in range(min(b, c) + 1))
-    return min(Fraction(1), Fraction(2 * tail, 2 ** n))
-
-
 @memo
 def discordance() -> Dict[str, Dict[str, Dict[str, object]]]:
     """For every reading on every set, the census discordance at ``k = 5``."""
@@ -527,38 +519,33 @@ def filter_check() -> Dict[str, object]:
 def held_fixed_report() -> Dict[str, object]:
     """M5: how many structural feature vectors a rebuilt sub-corpus changes.
 
-    For each file, the citation index, the citation graph and the fan-in are
-    rebuilt over the declarations outside it, exactly as
-    ``lean_address.feature_table`` builds them, and every declaration of the
-    pool outside the file whose clamped feature vector differs is counted.
+    For each file, the citation graph and the fan-in are rebuilt over the
+    declarations outside it, exactly as ``lean_address.feature_table`` builds
+    them (since Phase 101 the scoped reader: each identifier names the first
+    of its candidates in Lean's order that survives the drop,
+    ``lean_address.scoped_candidates``), and every declaration of the pool
+    outside the file whose clamped feature vector differs is counted.
     """
     decls = la.declarations()
     pool = set(_names())
     stored = rt._point_table("features")
-    tokens = {d.name: frozenset(la._TOKEN.findall(d.statement + "\n" + d.body))
-              for d in decls}
+    full_names = la.declaration_names()
+    scopes = la.file_scopes()
+    candidates = {d.name: la.scoped_candidates(d, full_names,
+                                               scopes.get((d.file, d.line)))
+                  for d in decls}
+
     def changed_without(f: Optional[str]) -> int:
         kept = [d for d in decls if d.file != f]
-        full = {d.name for d in kept}
-        short_counts: Dict[str, int] = {}
-        for d in kept:
-            short_counts[d.short] = short_counts.get(d.short, 0) + 1
-        index: Dict[str, str] = {name: name for name in full}
-        for d in kept:
-            if short_counts[d.short] == 1:
-                index.setdefault(d.short, d.name)
-            tail = d.name.split(".")
-            if len(tail) >= 2:
-                index.setdefault(".".join(tail[-2:]), d.name)
+        gone = {d.name for d in decls if d.file == f}
         graph: Dict[str, set] = {}
         for d in kept:
             found = set()
-            for token in tokens[d.name]:
-                target = index.get(token)
-                if target is None and "." in token:
-                    target = index.get(token.rsplit(".", 1)[-1])
-                if target is not None and target != d.name:
-                    found.add(target)
+            for options in candidates[d.name]:
+                for target in options:
+                    if target not in gone:
+                        found.add(target)
+                        break
             graph[d.name] = found
         fan_in: Dict[str, int] = {name: 0 for name in graph}
         for targets in graph.values():
@@ -638,7 +625,10 @@ DATA_PATH = Path(__file__).resolve().parent / "_data" / "corpus_resample.json"
 _SOURCES: Tuple[str, ...] = (
     "reasoning/corpus_resample.py",
     "reasoning/native_words.py",
+    "reasoning/golay_words.py",
     "reasoning/native_parity.py",
+    "reasoning/native_ledger.py",
+    "reasoning/sign_test.py",
     "reasoning/retrieval.py",
     "reasoning/lean_address.py",
     "substrate/golay_decode.py",

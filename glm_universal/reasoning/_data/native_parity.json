@@ -42,7 +42,7 @@
   },
   "tasks": 24
  },
- "corpus_digest": "d5a90c15b8859513fd6b5bd4bf4b150396bab550b790f28b2c4ff588f737ba20",
+ "corpus_digest": "a5a8c74a8f96bae15b1de84d5a2b538903f26ab54e6dddf93e14fdc2e7c2ac62",
  "declarations": {
   "met_against_address": true,
   "met_against_features": false,
@@ -51,78 +51,78 @@
   "schemes": {
    "address": {
     "hits": {
-     "1": 62,
-     "10": 112,
-     "3": 82,
-     "5": 93
+     "1": 49,
+     "10": 97,
+     "3": 66,
+     "5": 77
     },
     "mrr_at_10": {
-     "__fraction__": "189893/519120"
+     "__fraction__": "38923/130410"
     },
     "precision_at_5": {
-     "__fraction__": "139/1030"
+     "__fraction__": "118/1035"
     },
-    "queries": 206
+    "queries": 207
    },
    "features": {
     "hits": {
-     "1": 62,
-     "10": 115,
-     "3": 83,
-     "5": 95
+     "1": 49,
+     "10": 99,
+     "3": 71,
+     "5": 81
     },
     "mrr_at_10": {
-     "__fraction__": "27371/74160"
+     "__fraction__": "53231/173880"
     },
     "precision_at_5": {
-     "__fraction__": "72/515"
+     "__fraction__": "14/115"
     },
-    "queries": 206
+    "queries": 207
    },
    "features2": {
     "hits": {
-     "1": 63,
-     "10": 120,
-     "3": 87,
-     "5": 100
+     "1": 56,
+     "10": 108,
+     "3": 80,
+     "5": 87
     },
     "mrr_at_10": {
-     "__fraction__": "3141/8240"
+     "__fraction__": "44687/130410"
     },
     "precision_at_5": {
-     "__fraction__": "31/206"
+     "__fraction__": "136/1035"
     },
-    "queries": 206
+    "queries": 207
    },
    "native": {
     "hits": {
-     "1": 63,
-     "10": 115,
-     "3": 84,
-     "5": 93
+     "1": 51,
+     "10": 99,
+     "3": 69,
+     "5": 79
     },
     "mrr_at_10": {
-     "__fraction__": "9191/24720"
+     "__fraction__": "160283/521640"
     },
     "precision_at_5": {
-     "__fraction__": "71/515"
+     "__fraction__": "122/1035"
     },
-    "queries": 206
+    "queries": 207
    },
    "native2": {
     "hits": {
-     "1": 63,
-     "10": 120,
-     "3": 87,
-     "5": 100
+     "1": 56,
+     "10": 108,
+     "3": 80,
+     "5": 87
     },
     "mrr_at_10": {
-     "__fraction__": "3141/8240"
+     "__fraction__": "44687/130410"
     },
     "precision_at_5": {
-     "__fraction__": "31/206"
+     "__fraction__": "136/1035"
     },
-    "queries": 206
+    "queries": 207
    }
   }
  },
@@ -131,61 +131,61 @@
   "k": 5,
   "met_live_ranking": true,
   "met_native_vs_raw": true,
-  "native2_against_raw": false,
+  "native2_against_raw": true,
   "native2_like_for_like": true,
   "queries": 60,
-  "readback_checked": 1258,
-  "readback_exact": 1258,
+  "readback_checked": 1613,
+  "readback_exact": 1613,
   "schemes": {
    "lexical": {
-    "hits": 16,
-    "precision_at_5": {
-     "__fraction__": "1/15"
-    }
-   },
-   "lexical_native": {
     "hits": 15,
     "precision_at_5": {
      "__fraction__": "19/300"
     }
    },
-   "lexical_native2": {
-    "hits": 14,
+   "lexical_native": {
+    "hits": 17,
     "precision_at_5": {
-     "__fraction__": "3/50"
+     "__fraction__": "7/100"
+    }
+   },
+   "lexical_native2": {
+    "hits": 17,
+    "precision_at_5": {
+     "__fraction__": "7/100"
     }
    },
    "lexical_raw": {
-    "hits": 14,
+    "hits": 17,
     "precision_at_5": {
-     "__fraction__": "19/300"
+     "__fraction__": "7/100"
     }
    },
    "lexical_raw2": {
-    "hits": 14,
+    "hits": 17,
     "precision_at_5": {
-     "__fraction__": "3/50"
+     "__fraction__": "7/100"
     }
    },
    "text": {
-    "hits": 52,
+    "hits": 46,
     "precision_at_5": {
-     "__fraction__": "39/100"
+     "__fraction__": "19/50"
     }
    },
    "text_native": {
-    "hits": 52,
+    "hits": 47,
     "precision_at_5": {
-     "__fraction__": "39/100"
+     "__fraction__": "23/60"
     }
    }
   },
-  "units": 1258
+  "units": 1613
  },
  "exactness": {
-  "checked": 4110,
+  "checked": 4739,
   "covering_radius": 4,
-  "exact": 4110,
+  "exact": 4739,
   "failures": 0,
   "max_residual": 3,
   "met": true
@@ -201,76 +201,76 @@
   "schemes": {
    "address": {
     "hits": {
-     "1": 7,
-     "10": 27,
-     "3": 15,
-     "5": 18
+     "1": 5,
+     "10": 14,
+     "3": 8,
+     "5": 8
     },
     "mrr_at_10": {
-     "__fraction__": "2159/16968"
+     "__fraction__": "2491/36360"
     },
     "precision_at_5": {
-     "__fraction__": "24/505"
+     "__fraction__": "13/505"
     },
     "queries": 101
    },
    "features": {
     "hits": {
-     "1": 10,
-     "10": 33,
-     "3": 17,
-     "5": 22
+     "1": 5,
+     "10": 16,
+     "3": 10,
+     "5": 11
     },
     "mrr_at_10": {
-     "__fraction__": "39343/254520"
+     "__fraction__": "19939/254520"
     },
     "precision_at_5": {
-     "__fraction__": "6/101"
+     "__fraction__": "16/505"
     },
     "queries": 101
    },
    "features2": {
     "hits": {
-     "1": 10,
-     "10": 38,
-     "3": 19,
-     "5": 26
+     "1": 7,
+     "10": 18,
+     "3": 11,
+     "5": 14
     },
     "mrr_at_10": {
-     "__fraction__": "29/168"
+     "__fraction__": "1046/10605"
     },
     "precision_at_5": {
-     "__fraction__": "36/505"
+     "__fraction__": "18/505"
     },
     "queries": 101
    },
    "native": {
     "hits": {
-     "1": 9,
-     "10": 32,
-     "3": 17,
-     "5": 22
+     "1": 5,
+     "10": 17,
+     "3": 9,
+     "5": 10
     },
     "mrr_at_10": {
-     "__fraction__": "5437/36360"
+     "__fraction__": "1063/14140"
     },
     "precision_at_5": {
-     "__fraction__": "6/101"
+     "__fraction__": "3/101"
     },
     "queries": 101
    },
    "native2": {
     "hits": {
-     "1": 10,
-     "10": 38,
-     "3": 19,
-     "5": 26
+     "1": 7,
+     "10": 18,
+     "3": 11,
+     "5": 14
     },
     "mrr_at_10": {
-     "__fraction__": "29/168"
+     "__fraction__": "1046/10605"
     },
     "precision_at_5": {
-     "__fraction__": "7/101"
+     "__fraction__": "18/505"
     },
     "queries": 101
    }
@@ -382,7 +382,7 @@
   "N5": true,
   "N6": true,
   "N7": true,
-  "N8": false
+  "N8": true
  },
  "round_one": {
   "N1": false,
@@ -396,8 +396,8 @@
  "round_two": {
   "N6": true,
   "N7": true,
-  "N8": false
+  "N8": true
  },
- "source_digest": "69a8fa56216b2ba6e9ce0e350fee10a1b3c283b024d842824d0f11604bd7d8ea",
+ "source_digest": "eaad60c27a5cbe2296d539a24b4780e0124976804920d09457de03231fce53bc",
  "study": "studies/NATIVE_PARITY_STUDY.md"
 }

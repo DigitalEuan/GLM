@@ -175,8 +175,8 @@ evaluation, 177 cases at the last reading.
 <!-- generated: plannersandbox-fallback -->
 | reading | value |
 |---|---|
-| evaluation cases | 177 |
-| the runtime answers | 151 |
+| evaluation cases | 179 |
+| the runtime answers | 153 |
 | the runtime refuses | 26 |
 | of those, classified principled | 10 |
 | the planner is consulted on | 16 |

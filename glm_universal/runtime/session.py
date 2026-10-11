@@ -141,8 +141,9 @@ REPORT_SUBJECTS: Tuple[str, ...] = (
     "names", "recipe", "language", "searchloop", "retrieval",
     "relay", "anonymous",
     "controller", "generated", "landscape", "hole classifier",
-    "hole ladder", "hole failures", "cumulativity", "query escalation",
-    "review sweep",
+    "hole ladder", "hole failures", "hole configuration", "cumulativity",
+    "query escalation",
+    "review sweep", "routes",
 )
 
 #: The canonical names of the worked end-to-end tasks ``task <name>`` runs.
@@ -2228,12 +2229,19 @@ class GeometricSession(SubstrateReports, LatticeGeometryReports,
         if subject in ("hole failures", "hole failure", "deep hole failures",
                          "the four failures", "failures"):
             return self._report_hole_failures(query)
+        if subject in ("hole configuration", "configuration classifier",
+                         "configuration reading", "deep hole configuration",
+                         "niemeier census"):
+            return self._report_hole_configuration(query)
         if subject in ("cumulativity", "refinement check", "layer families",
                          "refinement edges", "cumulativity rule"):
             return self._report_cumulativity(query)
         if subject in ("review sweep", "review register", "re-reading",
                          "rereading", "stalled results", "sweep"):
             return self._report_review_sweep(query)
+        if subject in ("routes", "route", "route choices", "decision points",
+                         "routes taken", "methods"):
+            return self._report_routes(query)
         if subject in ("query escalation", "escalation loop",
                          "query loop escalation", "escalated queries",
                          "escalation in the loop"):

@@ -1,0 +1,375 @@
+{
+ "audit": {
+  "legacy": {
+   "confirmed": 7951,
+   "declarations": 4692,
+   "edges": 15578,
+   "found_visible": 7933,
+   "one_letter_edges": 3387,
+   "one_letter_unconfirmed": 3312,
+   "precision": {
+    "__fraction__": "7951/15578"
+   },
+   "recall_visible": {
+    "__fraction__": "7933/10997"
+   },
+   "reference_edges": 13057,
+   "unconfirmed": 7627,
+   "visible_edges": 10997
+  },
+  "scoped": {
+   "confirmed": 9997,
+   "declarations": 4692,
+   "edges": 10087,
+   "found_visible": 9997,
+   "one_letter_edges": 153,
+   "one_letter_unconfirmed": 4,
+   "precision": {
+    "__fraction__": "9997/10087"
+   },
+   "recall_visible": {
+    "__fraction__": "9997/10997"
+   },
+   "reference_edges": 13057,
+   "unconfirmed": 90,
+   "visible_edges": 10997
+  }
+ },
+ "constants": 12288,
+ "headline": {
+  "decl": {
+   "chance": {
+    "1": {
+     "__fraction__": "3721/490383"
+    },
+    "10": {
+     "__fraction__": "23438556653619884923522933454837/322129373218629534908045074119312"
+    },
+    "3": {
+     "__fraction__": "27565423637/1222384896384"
+    },
+    "5": {
+     "__fraction__": "51011175884048603/1370017821052329408"
+    }
+   },
+   "hits": {
+    "address": {
+     "1": 49,
+     "10": 97,
+     "3": 66,
+     "5": 77
+    },
+    "digest": {
+     "1": 3,
+     "10": 11,
+     "3": 5,
+     "5": 5
+    },
+    "features": {
+     "1": 49,
+     "10": 99,
+     "3": 71,
+     "5": 81
+    },
+    "lexical": {
+     "1": 88,
+     "10": 138,
+     "3": 112,
+     "5": 125
+    },
+    "name": {
+     "1": 29,
+     "10": 53,
+     "3": 35,
+     "5": 43
+    },
+    "random": {
+     "1": 3,
+     "10": 19,
+     "3": 5,
+     "5": 7
+    },
+    "shuffled": {
+     "1": 2,
+     "10": 12,
+     "3": 4,
+     "5": 6
+    },
+    "text": {
+     "1": 145,
+     "10": 191,
+     "3": 174,
+     "5": 183
+    }
+   },
+   "mrr10": {
+    "address": {
+     "__fraction__": "38923/130410"
+    },
+    "digest": {
+     "__fraction__": "277/12420"
+    },
+    "features": {
+     "__fraction__": "53231/173880"
+    },
+    "lexical": {
+     "__fraction__": "129083/260820"
+    },
+    "name": {
+     "__fraction__": "43529/260820"
+    },
+    "random": {
+     "__fraction__": "206/7245"
+    },
+    "shuffled": {
+     "__fraction__": "10153/521640"
+    },
+    "text": {
+     "__fraction__": "404851/521640"
+    }
+   },
+   "queries": 207
+  },
+  "declarations": 4739,
+  "edges": 10159,
+  "goal": {
+   "hits": {
+    "address": {
+     "1": 5,
+     "10": 14,
+     "3": 8,
+     "5": 8
+    },
+    "digest": {
+     "1": 1,
+     "10": 6,
+     "3": 1,
+     "5": 4
+    },
+    "lexical": {
+     "1": 22,
+     "10": 45,
+     "3": 31,
+     "5": 39
+    },
+    "name": {
+     "1": 21,
+     "10": 41,
+     "3": 29,
+     "5": 34
+    },
+    "random": {
+     "1": 1,
+     "10": 9,
+     "3": 3,
+     "5": 4
+    },
+    "text": {
+     "1": 63,
+     "10": 87,
+     "3": 80,
+     "5": 80
+    }
+   },
+   "queries": 101,
+   "reproduced": 0
+  },
+  "injectivity": {
+   "collision_classes": 445,
+   "distinct_addresses": 4038,
+   "largest_class_size": 19
+  },
+  "mean_relatives": {
+   "__fraction__": "7442/207"
+  },
+  "neighbours": {
+   "linked_nearest": 168,
+   "same_file_nearest": 1015
+  },
+  "tree": "bbc14f43ead69506482b2b017470210f2e9eeb95bdac6a424d8e6b04aa401563"
+ },
+ "lean_file": "RequestProject/GLM/CitationScope.lean",
+ "legacy": {
+  "decl": {
+   "chance": {
+    "1": {
+     "__fraction__": "7754/960355"
+    },
+    "10": {
+     "__fraction__": "18476412956246168994700857779251/239321832928517486024126664200214"
+    },
+    "3": {
+     "__fraction__": "80986634193/3377287150985"
+    },
+    "5": {
+     "__fraction__": "35215813472254185/889994192803880549"
+    }
+   },
+   "hits": {
+    "address": {
+     "1": 41,
+     "10": 89,
+     "3": 64,
+     "5": 77
+    },
+    "digest": {
+     "1": 3,
+     "10": 13,
+     "3": 5,
+     "5": 7
+    },
+    "features": {
+     "1": 43,
+     "10": 87,
+     "3": 64,
+     "5": 75
+    },
+    "lexical": {
+     "1": 71,
+     "10": 126,
+     "3": 98,
+     "5": 108
+    },
+    "name": {
+     "1": 31,
+     "10": 59,
+     "3": 42,
+     "5": 48
+    },
+    "random": {
+     "1": 4,
+     "10": 18,
+     "3": 7,
+     "5": 10
+    },
+    "shuffled": {
+     "1": 0,
+     "10": 17,
+     "3": 2,
+     "5": 6
+    },
+    "text": {
+     "1": 145,
+     "10": 182,
+     "3": 168,
+     "5": 178
+    }
+   },
+   "mrr10": {
+    "address": {
+     "__fraction__": "1954/7315"
+    },
+    "digest": {
+     "__fraction__": "232/9405"
+    },
+    "features": {
+     "__fraction__": "9511/35112"
+    },
+    "lexical": {
+     "__fraction__": "220387/526680"
+    },
+    "name": {
+     "__fraction__": "96281/526680"
+    },
+    "random": {
+     "__fraction__": "8837/263340"
+    },
+    "shuffled": {
+     "__fraction__": "1279/87780"
+    },
+    "text": {
+     "__fraction__": "396917/526680"
+    }
+   },
+   "queries": 209
+  },
+  "declarations": 4596,
+  "edges": 15036,
+  "goal": {
+   "hits": {
+    "address": {
+     "1": 7,
+     "10": 25,
+     "3": 14,
+     "5": 18
+    },
+    "digest": {
+     "1": 0,
+     "10": 8,
+     "3": 0,
+     "5": 1
+    },
+    "lexical": {
+     "1": 24,
+     "10": 52,
+     "3": 35,
+     "5": 42
+    },
+    "name": {
+     "1": 15,
+     "10": 34,
+     "3": 23,
+     "5": 26
+    },
+    "random": {
+     "1": 2,
+     "10": 9,
+     "3": 3,
+     "5": 4
+    },
+    "text": {
+     "1": 69,
+     "10": 90,
+     "3": 83,
+     "5": 85
+    }
+   },
+   "queries": 103,
+   "reproduced": 0
+  },
+  "injectivity": {
+   "collision_classes": 325,
+   "distinct_addresses": 4109,
+   "largest_class_size": 16
+  },
+  "mean_relatives": {
+   "__fraction__": "7754/209"
+  },
+  "neighbours": {
+   "linked_nearest": 141,
+   "same_file_nearest": 831
+  },
+  "taken_by": "the Phase 100 code (commit e138e28) on the Phase 101 tree, with RequestProject/GLM/CitationScope.lean added so the two records read the same 4,596 declarations; the address and lexical books rebuilt there under the Phase 100 feature map",
+  "tree": "3b88c8060eec77b9d567a9a0c9893068e0ca0e958efaeb2ca9b9b61def8a214f"
+ },
+ "marks": {
+  "L1": true,
+  "L2": true,
+  "L3": true,
+  "L4": true,
+  "L5": true,
+  "L6": false
+ },
+ "reference": {
+  "fresh": false,
+  "live_digest": "bbc14f43ead69506482b2b017470210f2e9eeb95bdac6a424d8e6b04aa401563",
+  "present": true,
+  "stored_digest": "22f3b1c42fbe2609c22aa3d25107c4080eccabe4a63fa2e8f5b39cae274945e9",
+  "verdict": "stale"
+ },
+ "source_digest": "da83faa29fdcbeafe67f01c9f54b0ac347a4e7933012c20148051387ad257f19",
+ "study": "studies/CITATION_SCOPE_STUDY.md",
+ "type_words": {
+  "examples_legacy": [
+   "GLM.CarriedFork.ledger_partition",
+   "GLM.SubstrateCognition.ker_trivial_of_rank",
+   "GLM.CoordinateOrder.Reading",
+   "GLM.DecoderConfidence.fork_confidence_bound",
+   "GLM.DeepHole.sortedProfile_reindex"
+  ],
+  "examples_repaired": [],
+  "moved_legacy": 48,
+  "moved_repaired": 0,
+  "queries": 862
+ }
+}

@@ -5,7 +5,7 @@
 
 **Question.** What has each phase of the wiring plan delivered, and what does the next round start from?
 
-**Verdict.** Phase 100 is closed; the order of work at the head of [`STATUS.md`](STATUS.md) §3.4 is where the next round starts, Phase 101 (round 9 of the order continued: item 5 with the citation leak Phase 100 found, then N2, N5 and I3; or the lattice items beside round 8).
+**Verdict.** Phase 127 (norm 256 and the hex colour: the empty norm-256 rung filled by `H16`, the first hex digit of each coordinate, safe on the 568 queries and on 568 held-out ones but uniquely answering none of the 568; the rotated Leech rung retired; the hex shortcut held on every point checked; and the held-out set showed the existing ladder answering 8 of 568 wrongly; 7 of 8 marks) is closed, after Phase 126 (inert variables, 7 of 7 marks); Phase 128 starts from the To-Do list in [`STATUS.md`](STATUS.md) §2. Round 9's remaining retrieval items are parked at the owner's direction.
 
 **Deciding figure.** Every closed phase names what was built, where it lives, and how to see it recompute itself.
 
@@ -24,8 +24,8 @@ addressing. Each item says what was built, where it lives, and how to see it
 recompute itself.
 
 Everything below is reachable from the package's public API and from the query
-runtime — **<!--figure:query-kinds-->24 query kinds<!--/figure-->**, **<!--figure:report-subjects-->65 report subjects<!--/figure-->** and **<!--figure:registers-->8 registers<!--/figure-->** — is
-covered by the test suite (<!--figure:test-files-->146 test files<!--/figure-->),
+runtime — **<!--figure:query-kinds-->24 query kinds<!--/figure-->**, **<!--figure:report-subjects-->67 report subjects<!--/figure-->** and **<!--figure:registers-->8 registers<!--/figure-->** — is
+covered by the test suite (<!--figure:test-files-->177 test files<!--/figure-->),
 and — where it is a report or a task — has a generated column-3 script that
 recomputes the claim in a **fresh interpreter** and fails if anything differs.
 
@@ -183,9 +183,1803 @@ as everything else: only the open phase is state.
 
 ---
 
+## Phase 127 — norm 256 and the hex colour (lattice item 3)
+
+**Status: closed this session.** Taken from `STATUS.md` §2.1 item 1, *norm 256
+of the power-of-two family* (Phase 123 retired both scaled `√2`-lattice
+candidates there), with the owner's note that norm 256 could align with hex
+colour. The pre-registration
+([`studies/NORM_256_HEX_STUDY.md`](studies/NORM_256_HEX_STUDY.md) §§0–6:
+marks L1, C1, F1, F2, H1, H2, X1, X2; three candidates; a held-out query set)
+was committed with the Lean file and before the module. It says plainly that
+the three candidates had each been run once over the 568 queries during
+exploration, so the filling there is a reproduction; the held-out set was
+generated and read only after the commit. **7 of 8 marks were met** (H2
+missed). Tests: `tests/test_norm256_hex.py` (11).
+
+**What was built.**
+* `RequestProject/GLM/HexRung.lean` (no `sorry`, standard axioms): a signed
+  permutation over a fixed-point-free involution with signs opposite on each
+  pair squares to `-1`, is orthogonal to the identity, and makes `1 + rot`
+  a `√2`-similarity (`rot_rot`, `inner_rot_self`, `normSq_add_rot`,
+  `sub_rot_add_rot`, `min_norm_doubles`, `nearest_transfer`); the concrete
+  `hexP`/`hexS` is a Golay automorphism with a dodecad transversal
+  (`golay_perm_closed`, kernel-checked over 4096 messages) and maps the Leech
+  lattice to itself (`hexRot_isLeech`), so `R256 = (1 + hexRot)(2Λ₂₄)` has
+  minimum norm 256 (`rotLeech_min_norm`); the hex bucket `⌊v/16⌋` is the
+  nearest point of `16ℤ + 8` (`floor_bucket_nearest`); `hex_counts`.
+* `reasoning/norm256_hex.py`: the candidates `R256`, `16Z` (nearest hex digit)
+  and `H16` (first hex digit), their quantisers, the declared filling over
+  Phase 123's ladder, the held-out set (four new perturbations, codeword index
+  `i + 2048`), the hex shortcut (`w_basis`, `in_w`, `shortcut_check`) and the
+  measurement cache; `tools norm256-hex [--write] [--json]`.
+
+**Measured.** `R256` answers 2 of 568 wrongly and `16Z` 4: both retired under
+clause 1. `H16` answers 119 correctly and none wrongly, uniquely answers
+none, takes part in no disagreement and is kept, so norm 256 is filled; the
+filled ladder is 467 correct, 0 wrong, 101 refused, as before (F1, F2). On the
+held-out set `H16` answers 77 correctly and none wrongly (H1), but the filled
+ladder answers 8 wrongly — and so does the ladder without `H16` (H2 missed):
+three carrier pairs sit across cell walls at the rungs `C`, `A`, `A/2`, `2D`
+and `Z`. The image of `1 + hexRot` on `Λ₂₄/2Λ₂₄` is a 12-dimensional,
+totally singular subspace of 4096 hex colours, and membership of a `2C` point
+in `R256` is decided by it on 2,000 of 2,000 points (X1, X2). The answering
+path is untouched, so the evaluation is unchanged.
+
+**Left.** The ladder's safety on held-out perturbations; `H16` in the
+answering path; a use for the 4096-colour subspace (study §7.5, now
+`STATUS.md` §2).
+
+## Phase 126 — inert variables: a non-termination certificate past the control state (GLM-BAT, the rest)
+
+**Status: closed.** Taken from `STATUS.md` §2.2, *GLM-BAT, the
+rest* (Phase 125 left M15, `SET /A N=0 / :UP / SET /A N=N+1 / GOTO UP`,
+refused `UNDECIDED_WITHIN_BUDGET`: its counter is part of the control state,
+which therefore never recurs). The pre-registration
+([`studies/INERT_COUNTER_STUDY.md`](studies/INERT_COUNTER_STUDY.md) §§0–6:
+marks I1–I7, battery N1–N10, nine questions) was committed with the Lean file
+and before any code. **7 of 7 marks were met.** Tests:
+`tests/test_inert_counter.py` (11); `tests/test_operations.py` re-pinned for
+M15.
+
+**What was built.**
+* `RequestProject/GLM/InertCounter.lean` (no `sorry`, standard axioms): a
+  machine whose state splits into a read part and an inert store — the next
+  read part and whether there is one depend on the read part only — never
+  halts once the read part recurs (`inert_step_commutes`, `inert_run_fst`,
+  `never_halts_of_inert_repeat`; the last is Phase 125's
+  `never_halts_of_projected_repeat` with the forgetful projection).
+* `reasoning/batch_machine.py`: `inert_variables` (the largest set of names
+  every mention of which is a lone `SET`/`SET /A` assignment to the set, with
+  no `/` or `%` in an arithmetic update and no redirection, pipe or chain) and
+  `is_closed_inert`; `run_program` re-reads a run that is undecided with those
+  names left out of the control state, and reports the recurrence with
+  `Run.forgotten`. A program the Phase 125 run decides is never re-read.
+* `reasoning/batch_speech.py`: the answer ("no, it never halts: with N
+  forgotten (no instruction reads it except to update a forgotten variable),
+  the control state before step 2 recurs before step 4"), the column-3 claim
+  kind `never_inert` — whose script checks the closure from the program text
+  with its own reading and re-runs the forgetful recurrence — and its five
+  mutations.
+* `reasoning/inert_counter.py` and `tools inert-counter [--json]`.
+
+**Measured.** 10 of 10 battery programs and 9 of 9 questions as declared,
+0 wrong (I2, I3); 8 of 8 `never_inert` scripts verify and 40 of 40
+mutations fail (I4); Phase 125's 25 runs, 18 questions and 6 English programs
+as declared with M15 and Q6 moved to *never*, and 299 of 299 decided generated
+programs unchanged (I5); none of the 4 certified programs halts within 200000
+steps, and N3, which halts after 40003, is refused (I6); all 179 evaluation
+cases pass with 0 confidently wrong, `report relay` and `report anonymous`
+re-pinned because `InertCounter.lean` took their goal-query sample from 822
+to 823, claims unchanged (I7). Generated program 206, the one Phase 125 left
+undecided, stays refused: its counter is read by an arithmetic update with
+`%` on a line no control path reaches.
+
+**Left.** A ranking-function certificate for *halts*; forgetting variables
+only the output reads; a closure that reads only reachable lines (study §7.4,
+now `STATUS.md` §2).
+
+## Phase 125 — the operations ladder: an old-style machine, learnt as a language (owner's direction)
+
+**Status: closed.** The owner asked for more domains and wheels,
+and for "older-style computer operations" the GLM could use to *consider* or
+*work things out* — a sandbox, but learnt as a language it can reason with —
+starting from the supplied note
+([`source_material/devops_ladder/DevOps-Ladder.txt`](source_material/devops_ladder/DevOps-Ladder.txt)).
+The round is not on the To-Do list; it was taken at the owner's direction.
+The note was moved into `source_material/` first, then the pre-registration
+([`studies/OPERATIONS_LADDER_STUDY.md`](studies/OPERATIONS_LADDER_STUDY.md)
+§§0–6: marks O1–O9, hypothesis H, battery M1–M25, E1–E6, Q1–Q18, R1–R5) was
+committed with the register's data and before the machine, the sentences or
+the battery. **9 of 9 marks were met; H held narrowly.** Tests:
+`tests/test_operations.py` (12).
+
+**What was built.**
+* `RequestProject/GLM/OperationsLadder.lean` (no `sorry`, standard axioms):
+  a machine that never halts once a state — or any projection of it the step
+  respects — recurs (`never_halts_of_repeat`,
+  `never_halts_of_projected_repeat`); `&&`/`||` associate
+  (`andThen_assoc`, `orElse_assoc`); reconciliation is idempotent, leaves no
+  drift and fixes exactly the converged states (`reconcile_idempotent`,
+  `reconcile_no_drift`, `reconcile_eq_self_iff`); a rollback restores
+  (`rollback_restores`); a layered ladder is well founded (`layered_wf`,
+  `lex_rank_wf`); a pipeline promotes iff every stage passes
+  (`promoted_iff_all_pass`); `FIND` and `SORT` are idempotent filters
+  (`find_find`, `sort_sort`).
+* `reasoning/ops_ladder.py`: the note's 97 terms as a register (ten tiers,
+  every term a declared composition of lower ones), the relation reader
+  (*part of*, shared parts, least common terms, ground overlap), a carrier
+  and codec per term, the projection onto the Geometric–Cybernetic ladder and
+  14 declared cross-overs to objects the GLM already held.
+* `reasoning/batch_machine.py`: GLM-BAT, a declared fragment of the batch
+  language (`ECHO`, `SET`, `SET /A`, `IF`, `GOTO`, `CALL`, `FOR`, `TYPE`,
+  `FIND`, `SORT`, `MKDIR`, `COPY`, `DEL`, redirection, pipes, `&&`/`||`), its
+  machine over an in-memory file system, the control-state cycle certificate,
+  idempotence in state, drift and the reconciling program, pipelines with
+  rollback, unreachable lines.
+* `reasoning/batch_speech.py`: each instruction as one English sentence and
+  back, programs written in English, the questions (*what does it print /
+  leave / exit with, does it halt, is it idempotent, which lines are
+  unreachable, what does it use, …*), and column 3 — a transpilation to a
+  standalone Python script run under `python3 -I`, with mutations.
+* `reasoning/operations.py` and `tools ops-ladder [--fast] [--agreement]
+  [--json]`; tools `tool ladder …` and `tool machine QUESTION :: PROGRAM` on
+  the connected path.
+
+**Results.** Register = note (O2); 97 distinct carriers (O3); 25 of 25
+battery runs, 18 of 18 questions, 6 of 6 English programs, 0 wrong (O4–O6);
+78 of 78 lines read back; 41 of 41 column-3 scripts verify and 158 of 158
+mutations fail (O7); 14 of 14 cross-overs resolve (O8); the router and the
+evaluation are untouched (O9; two retrieval pins, `report relay` and `report anonymous`, re-pinned because the new Lean file took their goal-query sample from 818 to 822, claims unchanged). H: 185 of 242 composition edges monotone
+under the projection (threshold 3/4), while the mean projected tier is not
+monotone in the DevOps tier. Post hoc, 299 of 299 decided generated programs
+agree between the machine and column 3. Separately, the standard-library
+check of `test_reasoning.py` was found failing on `hole_census.py`'s
+`from operator import mul` (present since the first commit); `operator` was
+added to its list with the reason.
+
+**Left.** The ladder in the planner and the session under a frozen-path
+comparison; more of the batch fragment (`2>&1`, `SORT` options, `FOR /F`,
+`SETLOCAL`); a ranking-function certificate for *halts* (study §7.4, now
+`STATUS.md` §2).
+
+## Phase 124 — the probe budget: a stopping rule for the certifying reading (item 2 of §2.1)
+
+**Status: closed this session**, after Phase 123's close in the same session.
+The owner asked for To-Do items to be taken once Phase 123 was finished; the
+round took item 2 of §2.1, the patience Phase 123 needed post hoc. The Lean
+file was written first, then the pre-registration
+([`studies/PROBE_BUDGET_STUDY.md`](studies/PROBE_BUDGET_STUDY.md) §§0–6, six
+marks and numerical predictions) was committed before the module and before
+any reading under the new rule or any held-out walk. **6 of 6 marks were
+met.** Tests: `tests/test_probe_budget.py` (8). Under D15 the round moved
+refusal: a deep hole the patience left without a type is now certified, and
+the stop is a declared budget with a proved bound instead of a convention.
+
+**What was built.**
+* `RequestProject/GLM/ProbeBudget.lean` (no `sorry`, standard axioms, 6
+  theorems): the union bound under a budget (`miss_bound`), its monotonicity
+  in the vertex count (`budget_mono`), every deep hole has at most 48 vertices
+  (`niemeier_vertexCount_le`, read off `GLM.LatticeCompletion`'s catalogue),
+  and with `c = 1/2`, `δ = 1/1000` the budget 1056 serves every Niemeier type
+  (`budget_serves_every_type`).
+* `reasoning/probe_budget.py`: the rule (no barren stop, 1056 starts at most),
+  the share check on the stored ensembles, the 23 references and 256 held-out
+  walks (declared indices 3000–3255) under the rule and the census
+  convention; `tools probe-budget [--write]`.
+
+**Results.** The model's hypothesis holds on all 46 (hole, seed) pairs (least
+`k · p_min` 101/160, at `A_1^24`) (P2). The rule certifies all 23 references
+as recorded (P3, foregone by determinism, as declared) and all 256 held-out
+deep holes (P4), agrees with the census convention wherever that certifies
+(P5), and never runs to the budget: median 96 starts, maximum 254 (P6). The
+census convention missed 4 of the 256 (one vertex short each, on types with
+25 to 27 vertices); it had been predicted to miss 5–15 %, on types with 28 or
+more vertices, which was wrong. The walk's own reading (patience 40)
+certified 225 of the 256.
+
+**Left.** The rule in the walk and in `classify_carrier`'s default, under a
+frozen-path comparison; a statement about the deterministic sweep itself
+(study §7.4, now `STATUS.md` §2.1).
+
+## Phase 123 — the lattice round: `L5` answers, all 23 types reached, the empty norms tried (lattice items 3 and 7)
+
+**Status: closed** (the measurement was taken in one session and the round
+closed in the next, which also took Phase 124). The owner asked for the three lattice lines of
+[`STATUS.md`](STATUS.md) §2.1 to be taken as one round. The pre-registration
+([`studies/LATTICE_COMPLETION_STUDY.md`](studies/LATTICE_COMPLETION_STUDY.md)
+§§0–6, fourteen marks and numerical predictions) was committed after the Lean
+file and before any `L5` reading of a query, any ensemble of a new hole and any
+audit over a new rung. **10 of 14 marks were met as declared** (A1, A3, A4 and
+C2 missed). Tests: `tests/test_hole_census.py`,
+`tests/test_configuration_classifier.py`, `tests/test_empty_rungs.py`,
+`tests/test_frozen_path.py`. Under D15 the round moved answering and refusal:
+the deep-hole path has a reading whose answers are certificates, and absences
+are now issued as theorems under a stated faithfulness hypothesis.
+
+**What was built.**
+* `RequestProject/GLM/LatticeCompletion.lean` (no `sorry`, standard axioms,
+  10 theorems): `L5` as a `Reading` (`configReading`); the answer rule is sound
+  (`config_answer_sound`); an absence under faithfulness (`config_absent`,
+  which is `per_type_absent` at `L5`, so that declaration is now instantiated);
+  the 23 Niemeier types and their affine keys, all 253 pairs at least `4/9`
+  apart in the uniform limit (`uniform_floor`); Construction A has minimum
+  norm `min 4 d` (`constructionA_normSq_ge`).
+* `reasoning/hole_census.py` (the declared walk continued, the cycle
+  construction and the pilot seeds; the new ensembles to 7680 starts),
+  `reasoning/patience_census.py` (the post-hoc follow-up),
+  `reasoning/configuration_queries.py` and `reasoning/configuration_classifier.py`
+  (the 44 queries' `L5` profiles and the answer rule),
+  `reasoning/empty_rungs.py` (the five Construction A candidates and the
+  declared filling), `reasoning/frozen_path.py` (B5) and
+  `reasoning/lattice_completion.py` (every mark); `tools hole-census |
+  patience-census | configuration-classifier | empty-rungs | frozen-path`.
+* A report subject, `report hole configuration`, answered from the stored
+  profiles under their digests, with its column-3 template, an evaluation
+  case and a pipeline row.
+
+**Results.** Part B: the stopping rule reproduced the joint reading's 40 of 44;
+the answer rule answers 44 of 44 correctly with no refusal (B2), `L5`'s nearest
+reference is right for all 44 (B3), every query reads inside its own type's
+certified radius so none of the 396 absences is false (B4), and against the
+larger reference tables nothing is answered wrongly (B6). The frozen path held
+(B5): 178 of 178 earlier evaluation cases keep their status, the text is
+identical for 169 and each of the nine that moved has a declared cause (four
+self-describing counts this round added to, five figures the tree measures of
+itself). Part A: the walk named all thirteen new types within 1,280 walks, but
+the census's second certifying reading (patience 60) could not finish three
+centres, so 20 of 23 types are certified as declared (A1 missed) and A3/A4 are
+missed as declared although the cell over the 20 has `Q0 = 20`, `ρ = 0.1720`
+and the per-hole criterion certifies all 20. Post hoc, with a patience of 240,
+the three (`A_17 E_7`, `A_5^4 D_4`, `D_4^6`) are certified, the control holds
+26 of 26, and over all 23 `Q0 = 23`, `ρ = 0.1929`, per-hole 23 of 23. Part C:
+norm 2 is filled by `D12^2` (no rung retired); both norm-256 candidates answer
+six queries wrongly and are retired, so norm 256 stays empty (C2 missed, as
+predicted); the filled ladder is safe, order-independent and matches the
+oracle's 467 (C3).
+
+**Measured claims that moved with the corpus** (4903 declarations): the
+relay and anonymous-register strides are now 818 queries; the relay is still
+ahead of the text control on every set and loses none, and the text search is
+still within twice chance in the anonymous register (51 against 28). The
+evaluation pins were re-pinned; the claims are unchanged. The relay's strict
+gain moved forward again: strict on all five gates of the declared band, to
+1/4, where Phase 122 measured it level at 1/4 (`tests/test_stack.py`,
+`STACK_RELAY_STUDY.md`), recorded as measured.
+
+**Tidy-up.** The repository import had again put 594 Python bytecode files
+into git; they are untracked and `.gitignore` excludes them again.
+
+**Left.** Norm 256; a patience set from the vertex count; `L5` in the other
+deep-hole report subjects (study §7.6, now `STATUS.md` §2.1).
+
+## Phase 122 — the configuration reading for the 28-vertex pair (lattice item 6)
+
+**Status: closed this session.** The owner asked for development to continue
+from [`STATUS.md`](STATUS.md). The pick-up checks passed: the corpus check
+answered from its stored verdict and `signoff --verify` found 168 of 168 test
+files and 6 of 6 instruments signed, so Phase 121's close held. The one
+tidy-up: the repository import had again added 585 Python bytecode files to
+git and dropped their `.gitignore` rule; they are untracked and ignored again. The round took
+item 1 of §2.1, the 28-vertex pair of lattice item 6. The pre-registration
+([`studies/CONFIGURATION_READING_STUDY.md`](studies/CONFIGURATION_READING_STUDY.md)
+§§0–6, six marks and a numerical prediction) was committed before the module,
+the Lean file and any configuration reading of the stored ensembles. 6 of 6
+marks were met. Tests: `tests/test_configuration_reading.py` (11). Under D15
+the round moved certification: the two holes Phase 121 left uncertified now
+carry the per-hole certificate, and the ladder has a rung with `ρ < 1`.
+
+**What was built.**
+* `RequestProject/GLM/ConfigurationReading.lean` (no `sorry`, standard axioms,
+  12 theorems): pushing shares forward along any key map is non-expansive in
+  L1 (`push_shift_le`), so the configuration reading's seed shift is at most
+  the vertex-matched shift (`config_shift_le_matched`); the affine diagrams
+  `Ẽ_6`, `D̃_6`, `Ẽ_8`, `D̃_8` as edge lists, their degree counts, and the
+  uniform-limit distances `4/7` (`e6_d6_uniform_distance`) and `4/9`
+  (`e8_d8_uniform_distance`); the separation floor (`separation_floor`,
+  `e6_d6_separation_floor`: at least `4/7 − δ_E − δ_D`) and its corollary
+  `e6_d6_separated`.
+* `reasoning/configuration_reading.py`: the rung `L₅` — the arrival vertices
+  joined with multiplicity 1 or 2 at squared distance `3r²` or `4r²`, each
+  keyed by its component size and degree, the arrival shares pushed forward
+  along the key — read off Phase 121's stored ensembles at all eight sizes,
+  with the ladder's cell statistics, the control against the declared
+  diagrams and the bound; `tools configuration-reading`.
+
+**Results.** The control read every declared diagram back (K2, 20 of 20); the
+bound held at 80 of 80 instances (K3). `ρ = 0.1261` at `(L₅, 30720)` (K4),
+with `W = 0.0274` and `B = 0.4351`, the closest pair `E_8^3`/`D_8^3` against
+its proved uniform limit `4/9`, inside the declared prediction (`B` about
+0.44, `ρ` between 0.1 and 0.5). The per-hole criterion certifies all 10 holes
+(K5); `E_6^4` and `D_6^4` are 0.5768 apart with per-hole ratios 0.0294 and
+0.0293. `Q₀ = 10` and `ρ < 1` at every size from 1920 (K6); the one cell above
+the criterion is at 480 starts. Post hoc: the uniform limits of all 23
+Niemeier types are pairwise apart, the least distance `4/9`.
+
+**Two measured claims moved with the corpus** (4881 declarations after the
+new Lean file), and both are recorded as measured. The anonymous-register
+claim `text_is_within_twice_chance` holds again (53 hits against a chance of
+28.91, 1.83 times chance), so Phase 119's recorded miss is withdrawn
+(`tests/test_anonymous.py`, `ANONYMOUS_REGISTER_STUDY.md` §4). The stack
+relay's strict gain stops at 1/5 again and is level with the text control at
+1/4 (348/407 each), never below (`tests/test_stack.py`,
+`STACK_RELAY_STUDY.md`).
+
+**Left.** Wiring `L₅` into the deep-hole classifier's answering path under a
+frozen-path comparison; lattice item 7 can now be read with `L₅` (study §7.6,
+now `STATUS.md` §2.1).
+
+## Phase 121 — the separation criterion for the share-carrying rungs (lattice item 6)
+
+**Status: closed this session.** The owner asked for the previous run to be
+tidied if needed and for the next round's items to be taken. The pick-up
+checks passed: the corpus check answered from its stored verdict, and
+`signoff --verify-release` found 167 of 167 test files and 6 of 6
+instruments signed, so Phase 120's close held. The one tidy-up: the repository import had again
+added 583 Python bytecode files to git; they are untracked, and `.gitignore`
+now excludes them.
+The round took item 1 of §2.1, lattice item 6 for the share-carrying rungs.
+The pre-registration
+([`studies/SHARE_SEPARATION_STUDY.md`](studies/SHARE_SEPARATION_STUDY.md)
+§§0–6, six marks and a numerical prediction) was committed before any code,
+Lean file or emission past 1920 starts. 3 of 6 marks were met. Tests:
+`tests/test_share_separation.py` (10). Under D15 the round moved refusal: a
+gate the ladder recorded as passed is shown not to be certified, and eight
+holes now carry a certificate where the ladder had an observation.
+
+**What was built.**
+* `RequestProject/GLM/ShareSeparation.lean` (no `sorry`, standard axioms,
+  10 theorems): the four-point inequality and the swap argument
+  (`l1_le_perm`), so sorting is non-expansive in L1 (`l1_rearranged_le`,
+  `l1_sort_le` with Mathlib's `Tuple.sort`); the share part's seed shift at
+  most the vertex-matched shift (`share_shift_le_matched`); the per-hole
+  criterion (`nearest_correct_local`), implied by the global one
+  (`resolves_local`) and strictly weaker
+  (`local_can_certify_when_global_fails`).
+* `reasoning/share_ensemble.py`: the ladder's ensembles to 30720 starts,
+  614,400 exact decodes on eight cores, stored as sufficient statistics
+  beside the digest of the emitting code; `reasoning/share_separation.py`:
+  the ladder's readings at every size, the per-hole ratio and the bound;
+  `tools share-ensemble`, `tools share-separation`.
+
+**Results.** The ladder's 16 cells reproduced exactly (H2); the bound held
+at 80 of 80 instances (H3). No share-carrying cell reached `ρ < 1` (H4
+missed): the least ratio is 2.3508, at `(L₄, 7680)`, against a declared
+prediction of about 0.92 at 15360 and 0.65 at 30720. The spread did not fall
+at every doubling (H5 missed: up at 3840), and `Q₀` at `L₄` was 9 at 3840,
+7680 and 15360 starts (H6 missed), so the escalation study's gate at
+`(L₄, 1920)` was not stable. The cause is measured: the separation `B` falls
+with the spread, because the starts sit far inside the covering radius and
+the arrival shares approach a near-uniform profile, `1/k` for a hole of `k`
+vertices; at all 8
+share-carrying extension cells the closest pair has equal vertex counts.
+The per-hole criterion, certifying 8 of 10 holes at `(L₄, 15360)` and
+`(L₄, 30720)`, leaves two holes; the two it leaves are the 28-vertex pair `E_6^4`/`D_6^4`.
+
+**Left.** Lattice item 6 narrowed to the 28-vertex pair: a reading of the
+vertex configuration rather than a sorted list of shares, and whether the
+equal-count pairs' separation has a positive limit (study §7.8, now
+`STATUS.md` §2.1).
+
+## Phase 120 — explanations anchored in the registers (track E)
+
+**Status: closed this session.** The owner asked for the next round to start
+from the To-Do list in [`STATUS.md`](STATUS.md). The pick-up checks passed
+(the corpus check current, every test file and instrument signed). The round
+took item 1 of §2.1, "Explanations anchored in the registers" (track E of
+[`QUESTION_SET_B_STUDY.md`](studies/QUESTION_SET_B_STUDY.md) §8). The line
+said 32 questions including 29, 39 and 96; class E holds 32 and those three
+are class P, so the round declared thirty-five. The study is
+[`studies/EXPLANATION_ANCHOR_STUDY.md`](studies/EXPLANATION_ANCHOR_STUDY.md),
+with 10 of 10 marks met. Tests: `tests/test_explanations.py` (15), held below
+the frames. Under D15 the round moved refusal (an account refused by name
+inside an answer that gives what is decided; false premises disputed with a
+register's figures) and grounding (a second outside register).
+
+**What was built.**
+* A nuclide register: `data_objects/nuclides.py` and
+  `data_objects/_data/world_ame2020.json`, the AME2020 mass table and
+  NUBASE2020 as published by the IAEA, frozen with the SHA-256 of each raw
+  file — 3558 ground states, 253 stable, mass excesses as exact rationals,
+  values from systematics kept marked and refused by default.
+* `RequestProject/GLM/ExplanationAnchors.lean` (no `sorry`, standard axioms,
+  21 theorems): the RLC reactance and impedance above resonance, the filtered
+  derivative's bounded gain, the nucleon-pair channels, Kripke countermodels
+  for excluded middle and double-negation elimination, strict implication,
+  the Fréchet bound against fuzzy conjunction, an inconsistent theory proving
+  everything, downward Löwenheim–Skolem, `x^2 = 2` with a real and no
+  rational root, an exact MPC instance, and two register certificates
+  (`be8_unbound`, `technetium_unstable` over 28 AME2020 rows).
+* `reasoning/explanation_anchors.py` (35 topics, exact outward-rounded
+  enclosures, column-3 scripts that embed the rows they read),
+  `runtime/explanation_frames.py` (source `E`, after the meta frames, behind
+  `question_frames.EXPLANATIONS`), `runtime/explanation_report.py`,
+  `tools explanations`.
+
+**Results.** 35 of 35 answered with the declared fragment (3 FULL, 32 with
+the account refused); 25 read a register; 35 of 35 scripts verify,
+script-claim 35 of 35 and register-row 21 of 21 caught; 3 of 3 disputes,
+the register contradictions of the questions' premises (oganesson's standard state, lead-208's binding per nucleon, the cause of
+`INTEGER_UNDECIDED`); 35 of 35 paraphrases; 0 of 279 other texts read or
+moved; the register's five read-back checks; questions 29, 39 and 96
+answered.
+
+**The held-out record.** Written after the first run and before any cue
+change, run once: 5 of 35 read by their topic, 30 read by no frame, none by
+a wrong one. Reported, not redeclared.
+
+**Left.** Recognition of rewordings (30 of 35 held-out texts unread); *why*
+questions outside the declared 35; explanations themselves, still refused;
+excited states, isomers and abundances, which the nuclide register does not
+hold (study §5, now `STATUS.md` §2.2).
+
+## Phase 119 — past the third derivation study: the copy lemma in Lean, chained copies, five variables, any distortion matrix, Robin at both ends
+
+**Status: closed this session.** The owner asked for the work to be
+continued with reasoning ability and scope as the goal, for the items Phase
+118 left open to be cleaned up first, and for
+[`GLM_ACADEMIC_PAPER.md`](studies/GLM_ACADEMIC_PAPER.md) to be kept up to date
+in every development run as the record of the GLM as a whole. The pick-up
+check of `ITERATE.md` §4.4 passed (Phase 118's close held). The round took the
+line "Derivations, the rest" of [`STATUS.md`](STATUS.md) §2.2 — the four
+limits [`DERIVATION_THREE_STUDY.md`](studies/DERIVATION_THREE_STUDY.md) §6
+drew. The study is
+[`studies/DERIVATION_FOUR_STUDY.md`](studies/DERIVATION_FOUR_STUDY.md), with
+10 of 10 marks met. Tests: `tests/test_derivation_four.py` (11), held below the
+router. Under D15 the round moved derivation (four refusals replaced by
+answers with scripts, and a claim past Zhang–Yeung proved by two copies) and
+refusal (`NOT_SHANNON` narrower; a refused Robin problem names its reason).
+
+**What was built.**
+* `RequestProject/GLM/CopyLemma.lean` (no `sorry`, standard axioms):
+  Shannon's inequalities for every entropy function, the copy lemma for every
+  finite distribution, and `zhang_yeung_entropic` — Zhang–Yeung with nothing
+  assumed. `RequestProject/GLM/RobinBoth.lean`: the two-ended roots and
+  eigenfunctions, and the arctangent bounds on a symbolic interval.
+* `reasoning/copy_chain.py` (chained copies; the five-variable layer),
+  `reasoning/general_rd.py` (rigorous rate-distortion enclosures for any
+  finite distortion matrix), `reasoning/robin_two.py` (Robin at both ends, a
+  symbolic coefficient, a negative coefficient on a symbolic interval, the
+  bounds); `reasoning/info_inequality.py` gained `max_variables`.
+* `runtime/derivation_four_scripts.py`, `runtime/derivation_four_frames.py`
+  (handed over from `derivation_two_frames` on `TOO_MANY_VARIABLES`, after
+  Phase 118's `NOT_SHANNON`, and on `UNSUPPORTED` rate distortion; from
+  `derivation_three_frames` on a refused Robin problem, and appended to a
+  Dirichlet-Robin reading on a symbolic interval), `runtime/derivation_four_marks.py`,
+  `runtime/derivation_four_report.py`, `tools derivation-four`.
+* Phase 118's mark N4 narrowed by `PHASE_118_NARROWED` (declared in the case
+  file before the reasoning code); Phase 107's mark Q7 applies the same
+  narrowing to the two of those texts it also declared word for word — a
+  decision taken after the case file, recorded in the study.
+* The paper: §19.15–§19.17, §20.6, §21.5 and §24.2 written (Phases 102–119),
+  the date and status lines, Part VII and Appendices A and B brought level.
+  The standing instruction is a row of `ITERATE.md` §4.1, a line of
+  `STATUS.md` and a paragraph of `PROJECT_DIRECTIVES.md`.
+
+**Results.** Inequalities 9 of 9, sources 6 of 6, Robin problems 10 of 10,
+refusals 6 of 6; 25 of 25 scripts verify, 25 of 25 mutants rejected; 40 random
+five-variable claims, 0 unsound (8 left `NOT_SHANNON`); Phase 118's three
+undecided claims: 0 decided by copies (reported); 60 random sources and 40
+random Robin problems, 0 failures; Phase 118 10 of 10, 0 of 304 other texts
+moved.
+
+**Defects found on the way.** A straight piece of `R(D)` (two equally likely
+letters leaving the reproduction together) left the first enclosure with no
+channel below `D`; and an enclosure straddling a six-decimal rounding boundary
+was rightly refused by its script. Both repaired in `general_rd.py` before the
+marks were taken (study §4). At the close the one corpus-moving claim of the
+anonymous-register study, `text_is_within_twice_chance`, crossed its line
+again (58 hits against a chance of 28.95 at 4821 declarations) and is
+recorded as a miss in `tests/test_anonymous.py`
+([`ANONYMOUS_REGISTER_STUDY.md`](studies/ANONYMOUS_REGISTER_STUDY.md) §4).
+
+**Left.** Six or more variables; claims neither Zhang–Yeung nor two copies
+decide; a symbolic source; Robin at both ends with coefficients of opposite
+sign; variable coefficients (study §6, now `STATUS.md` §2.2).
+
+## Phase 118 — past the second derivation study: non-Shannon inequalities, rate distortion on the whole range, Robin spectra
+
+**Status: closed this session.** The owner asked for the work to be
+continued with the GLM's reasoning and scope as the goal. The pick-up check
+of `ITERATE.md` §4.4 passed (Phase 117's close held: corpus current, the
+sign-off ledger verified). The round took item 2 of
+[`STATUS.md`](STATUS.md) §2.1, the limits
+[`DERIVATION_TWO_STUDY.md`](studies/DERIVATION_TWO_STUDY.md) §6 drew that
+are derivations: information inequalities past the Shannon cone through
+Zhang–Yeung and exact entropic counterexamples, Hamming rate distortion on
+the whole range, and eigenvalue problems with a Robin end, every answer
+re-decided by its own script. The study is
+[`studies/DERIVATION_THREE_STUDY.md`](studies/DERIVATION_THREE_STUDY.md), with
+10 of 10 marks met. Tests: `tests/test_derivation_three.py` (13), held below
+the frames. Under D15 the round moved derivation (two refusals replaced by
+exact proofs, one by certified enclosures) and refusal (`NOT_SHANNON` now a
+narrower claim).
+
+**What was built.** `reasoning/non_shannon.py` (a linear program over the
+elemental inequalities, the givens and the twelve Zhang–Yeung instances,
+each instance certified by the copy lemma over five variables; and a pool
+of 37,941 rational laws whose entropies are compared exactly as sums of
+logarithms of primes), `reasoning/hamming_rd.py` (the pieces of `R(D)` past
+the Shannon lower bound, with a rational test channel and a rational dual
+point meeting exactly; Blahut–Arimoto only as a cross-check),
+`reasoning/robin.py` (six Dirichlet/Neumann-Robin cases, the negative
+eigenvalue, and enclosures from fixed-point series with bounded
+remainders). `runtime/derivation_three_scripts.py`,
+`runtime/derivation_three_frames.py` (handed over from Phase 107's
+operations at three points, behind `ENABLED`),
+`runtime/derivation_three_marks.py`, `runtime/derivation_three_report.py`,
+CLI `tools derivation-three`. The cases, marks and the one Phase 107 case
+superseded (`eigen-robin`) were committed before any code
+(`evaluation/derivation_three_cases.py`); Phase 107's mark Q7 is narrowed to
+that declaration.
+
+**The Lean file** (`RequestProject/GLM/NonShannon.lean`, no `sorry`,
+standard axioms only): `zhang_yeung_of_copy`, `zhang_yeung_not_shannon`,
+`ingleton_violated`, `rd_dual_lower_bound`, `robin_root_exists`,
+`robin_eigenfunction`.
+
+**Results.** Inequalities 8 of 8, sources 5 of 5, Robin problems 8 of 8,
+refusals 5 of 5; 21 of 21 scripts verify, 21 of 21 mutants rejected; on the
+batteries 0 unsound, 0 inconsistent, 0 failures (12 of 120 random claims
+proved only through Zhang–Yeung, 3 left `NOT_SHANNON`); Phase 107 still 11 of
+11, 0 of 304 other texts moved.
+
+**Iteration cost.** The test unit stays below the frames, so of the Lean
+blast-radius rows only the unit count, the file count, the any-Lean-file row
+and the worst single file moved, by one each
+([`ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) re-measured).
+
+**Left for later.** The copy lemma itself in Lean; non-Shannon inequalities
+beyond Zhang–Yeung and five or more variables; non-Hamming distortion;
+Robin at both ends and a symbolic `h` (study §6, now a line of
+[`STATUS.md`](STATUS.md) §2.2).
+
+**Housekeeping.** The repository import had once more tracked the Python
+bytecode files; they are untracked, and `.gitignore` now also ignores the
+`__pycache__` directories and the Lean scratch file. The first close attempt
+failed four units on the no-float rule (D7): the pool screen, the
+Blahut–Arimoto cross-check and Newton's method had been written in floating
+point, and the runtime marks imported `math`. All three now run in integer
+fixed point; the full measurement was re-taken with the same figures.
+
+## Phase 117 — meta questions answered from the project's own documents (track M)
+
+**Status: closed this session.** The owner asked for the work to be
+continued and suggested track M. The pick-up check of `ITERATE.md` §4.4
+passed (Phase 116's close held). The round took item 3 of
+[`QUESTION_SET_B_STUDY.md`](studies/QUESTION_SET_B_STUDY.md) §8: the eighteen
+class-M outside questions (indices 91–94, 97–102, 104–111), which ask about
+the GLM's own engineering. The study is
+[`studies/META_QUESTIONS_STUDY.md`](studies/META_QUESTIONS_STUDY.md), with 6
+of 7 marks met. Tests: `tests/test_meta_questions.py` (14), and the meta
+questions and a normalise-agreement test in `test_question_frames.py`. Under
+D15 the round moved addressing (an answer recovered from the corpus by a cue,
+its citations checked at read time) and refusal (a false premise disputed in
+the document's words, `CITATION_MOVED` when the evidence has gone).
+
+**What was built.** `reasoning/meta_evidence.py`, the evidence layer below
+the frames: eighteen topics, each with a cue, quotes taken from six studies
+by declared fragment (sentence, table row or list item, with its section),
+Lean declarations looked up in the stored address book, code facts, disputed
+premises and a column-3 script. `runtime/meta_frames.py` (source `M`, last in
+`_all_frames`, behind `question_frames.META`), `runtime/meta_report.py`, CLI
+`tools meta-questions`. The cases and marks were committed before any code
+(`evaluation/meta_question_cases.py`), the held-out rewordings after the
+first run and before any cue change.
+
+**The Lean file** (`RequestProject/GLM/MetaAnswers.lean`, no `sorry`,
+standard axioms only): distance by squares (`euclid_le_iff`, `euclid_lt_iff`,
+`euclid_le_euclid_iff`), `torricelli_crossing`, the Cayley transform of a
+rational skew-symmetric matrix (`isUnit_det_one_sub_of_skew`,
+`cayley_orthogonal`, `cayley_det`), `lattice_map_rational`, and inverse
+certificates (`inverse_of_certificate`, `certificate_example`). The address
+book was rebuilt (4763 declarations).
+
+**Results.** 18 of 18 answered with the declared fragment, 30 quotes and 24
+theorems found at read time, exactly the 11 declared disputes, every script
+verified and every mutation kind caught on every question, 0 of 296 other
+texts read. Missed: T5, 35 of 36 paraphrases (p92a goes to the earlier
+`deep_hole_tie` frame, which answers it correctly); held out 17 of 18 (h92 is
+not read). The first run found two cue hits masked by earlier frames
+(questions 35 and 95); those cues were narrowed. Question 101, first expected
+to be refused, is answered from the symbolic-parameters study (Bareiss).
+
+**Iteration cost.** The test unit stays below the frames, so the Lean
+blast-radius rows moved as Phase 116's did and the median stands at half the
+any-Lean-file row. The router now holds the six cited studies: editing the
+paper, the integer-decision study or the symbolic-parameters study makes 48
+units stale where it made two or three (study §6;
+[`ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) re-measured).
+
+**Left for later.** Two follow-ups: the recognition gap of the meta frames
+on rewordings (the rest of track M), and the cost of the studies the router
+holds.
+
+**Housekeeping.** The repository import had once more tracked the 550
+Python bytecode files; they are untracked, and `.gitignore` ignores them.
+The first close attempt failed two units, both in this round's work: the
+evidence layer's row reduction of the Golay masks is a XOR the combiner's
+inventory did not yet classify (now a `group-law` row in
+`combiner.XOR_SITES`), and a test named a deliberately missing declaration
+in full, which the package-wide citation check read as a stale citation (the
+name is now built from two parts).
+
+## Phase 116 — roots with no expression in radicals from one Frobenius element, in a degree that is not a prime power
+
+**Status: closed.** The owner asked for the work to be
+continued, toward more reasoning reach. The pick-up check of `ITERATE.md`
+§4.4 passed (Phase 115's close held: 162 of 162 test files and 6 of 6
+instruments signed). The round took the next part of *Radicals, the rest*
+from `STATUS.md` §2.2: the primitive groups that hold no element with a power
+that is a transposition or a 3-cycle, the declared silent case of
+[`PRIMITIVE_RADICAL_STUDY.md`](studies/PRIMITIVE_RADICAL_STUDY.md) §4
+(`PGL(2, 5)` on six points). The study is
+[`studies/PRIMITIVE_DEGREE_STUDY.md`](studies/PRIMITIVE_DEGREE_STUDY.md),
+with 8 of 8 marks met. Tests: `tests/test_primitive_degree.py` (16), and the
+skip list of `test_question_frames.py`. Under D15 the round moved refusal
+once: a root of a polynomial whose degree is not a prime power and whose
+Galois group is primitive without a Jordan element is now said to have no
+expression in radicals, with a proved reason, where the layer said nothing.
+
+**The certificate** (`reasoning/symbolic_factor.py`, new functions
+`is_prime_power`, `long_cycle_prime`, `radical_free_degree`). For an
+irreducible polynomial of a degree `n ≥ 6` that is not a prime power, one
+prime below 1000 at which the factor degrees are `1, n - 1` makes the group
+primitive (Phase 114's argument), and a solvable primitive group has
+prime-power degree, so the group is not solvable. Wired into
+`radical_free_galois` after Phase 114's two-element test (whose wording is
+kept wherever it applies) and before Phase 115's composition certificate, so
+the branch layer, the letter search, the modes route and the outer reason of
+a composition all carry it. Report `runtime/primitive_degree_report.py`, CLI
+`tools primitive-degree`; the cases and marks were committed before the code
+(`evaluation/primitive_degree_cases.py`).
+
+**The Lean file** (`RequestProject/GLM/PrimitiveDegree.lean`, no `sorry`,
+standard axioms only): `isPrimePow_card_of_isPreprimitive_of_isSolvable`
+(Galois's theorem, the half needed, through a nontrivial normal `p`-subgroup
+of the solvable group and the transitivity of normal subgroups of a primitive
+group), and `no_radical_root_of_long_cycle_of_not_isPrimePow`, the
+certificate the layer cites.
+
+**The test cases.** The declared sextics are Cayley's sextic resolvents of
+the quintics `x^5 - x - 1`, `x^5 + 2x - 1` (group `S5`, so `PGL(2, 5)` on six
+points) and `x^5 + 20x + 16` (group `A5`, so `PSL(2, 5)`), from a closed
+formula for the resolvent of `x^5 + a x + b` read off numerical roots and
+fixed by weight. The reach battery is 60 such resolvents of random
+trinomials, both irreducible: all 60 certified by the new statement, none by
+Phase 114's. `PGL(2, 5)` and `PSL(2, 5)` are built as permutation groups and
+checked to hold a `(5, 1)` element and no Jordan element.
+
+**Controls and limits.** No certificate on 6 solvable controls or on 201
+polynomials solvable by construction; silent on all 100 polynomials of
+degree 8 or 9 in Phase 114's reach battery, where solvable primitive groups
+exist; Phase 115's report still meets 8 of 8. Limits: prime-power degree
+(`PSL(2, 7)` on eight points stays silent), primitive groups with no
+`(n - 1, 1)` element (`S5` on the ten pairs of five points), and the limits
+Phases 114 and 115 left.
+
+**Iteration cost.** The round's first test file read the declared questions
+through the frames and so took the whole Lean development, which put the
+median cost of one Lean edit two units over half the any-Lean-file row, past
+the excess Phase 115 recorded; `test_corpus` rejected it. The unit now stays
+below the frames (the marks' exact objects moved to
+`reasoning/primitive_degree_groups.py`; the wiring is checked at the branch
+layer), and the excess is back to one
+([`ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) §5k, with the
+blast-radius table re-measured).
+
+**Housekeeping.** The repository import had again tracked 550 Python
+bytecode files and dropped the `.gitignore` lines for them; they are
+untracked and ignored again. The elaborator's citation reference was re-taken
+for the new Lean file.
+
+## Phase 115 — roots with no expression in radicals through a composition, and the Phase 114 close finished
+
+**Status: closed.** The owner asked for the work to be
+continued. The pick-up check of `ITERATE.md` §4.4 failed: Phase 114's close
+had not finished (`signoff --verify` reported 150 of 161 test files and 5 of
+6 instruments signed), so finishing it came first, and the round then took
+the first limit of [`PRIMITIVE_RADICAL_STUDY.md`](studies/PRIMITIVE_RADICAL_STUDY.md)
+§4. The study is
+[`studies/COMPOSED_RADICAL_STUDY.md`](studies/COMPOSED_RADICAL_STUDY.md),
+with 8 of 8 marks met. Tests: `tests/test_composed_radical.py` (16), and
+changed tests in `test_primitive_radical.py`, `test_corpus.py`,
+`test_native_words.py`, `test_citation_scope.py` and `test_question_frames.py`
+(and a comment in `test_anonymous.py`).
+Under D15 the round moved refusal once: a root of a composition whose outer
+polynomial has no root in radicals is now said to have none, with a proved
+reason, where the layer said nothing.
+
+**Finishing Phase 114's close.** Four failures, none in Phase 114's own
+work:
+
+* **A cache the census could not see.** Phase 114 moved
+  `reasoning/sign_test.py` out of `corpus_resample.py`, and the AST index
+  report (`runtime/ast_index_report.py`, Phase 105) digests it; its stored
+  figures went stale, and stage 0 of the close never re-took them, because
+  `corpus/caches.py` looked for caches only in `reasoning/`. Re-taken with
+  `tools ast-index --write` (only the digest changed), and the census now
+  scans `runtime/` too and accepts a report module's `source_digest`: 18
+  caches, all current. `test_corpus` pins that the AST index report is in
+  the census.
+* **The citation-scope record's tree.** Phase 114's edit to
+  `reasoning/retrieval.py` (its import of the Golay words moved to
+  `golay_words.py`) made the close re-take the citation-scope headline on
+  the tree of the day (4,739 declarations), and
+  its mark L6 (headline and legacy figures on one tree) can no longer hold:
+  the legacy figures were taken by Phase 100's code, which is gone. L6 is
+  recorded as a miss by construction and the legacy record is kept
+  ([`CITATION_SCOPE_STUDY.md`](studies/CITATION_SCOPE_STUDY.md) §3.3).
+* **Two figures that move with the corpus.** At 4,739 declarations the
+  anonymous register's text search scored 64 against a chance of 31.57
+  (2.03 times chance), over its line again; with this round's Lean file
+  (4,742) it scores 51 against 31.91 (1.60 times), under it, so no miss is
+  recorded ([`ANONYMOUS_REGISTER_STUDY.md`](studies/ANONYMOUS_REGISTER_STUDY.md) §4).
+  The native word ranking falls one query behind the standard at
+  k = 3, 5 and 10 on the declarations, inside the draw Phase 100's
+  resampling found, so the declarations are now measured rather than pinned,
+  as the goals already were
+  ([`NATIVE_WORDS_STUDY.md`](studies/NATIVE_WORDS_STUDY.md)).
+
+**The certificate** (`reasoning/symbolic_factor.py`, new functions
+`compose`, `decompose`, `decompositions`, `radical_free_composed`). For an
+irreducible polynomial of composite degree at least 10 on which Phase 114's
+certificate is silent, every decomposition `f = g(h(x))` with `h` monic,
+`h(0) = 0` and `g` of degree at least 5 is found exactly (the approximate
+`r`-th root fixes `h`, the `h`-adic expansion gives `g`, and the result is
+recomposed before it is used), and `g` — irreducible because `f` is — is
+certified by the earlier certificates. Wired into `radical_free_galois`, so
+the branch layer, the letter search (`x^10 + a*x^2 = b` is refused with a
+rational point and the reason) and the `modes.higher` route all carry it.
+Report `runtime/composed_radical_report.py`, CLI `tools composed-radical`;
+the cases and marks were committed before the code
+(`evaluation/composed_radical_cases.py`).
+
+**The Lean file** (`RequestProject/GLM/ComposedRadicals.lean`, no `sorry`,
+standard axioms only): `no_radical_root_of_comp`, the certificate the layer
+cites; `no_radical_root_of_comp_X_pow`; and `decic_no_radical_root`, no root
+of `x^10 - 4x^2 + 2` is solvable by radicals, with no unproved step.
+
+**Controls and limits.** No certificate on 6 solvable controls or on 201
+polynomials solvable by construction; 120 of 120 random irreducible
+compositions certified; 180 of 180 decompositions exact. Phase 114's mark
+P3 (the declared silent `x^10 - x^2 - 1`) now reads Phase 114's own
+citation, and its report still meets 10 of 10; Phase 112's meets 7 of 7.
+Limits: an outer polynomial of degree below 5 with the obstruction in the
+inner one, imprimitive groups that are not compositions over the rationals,
+and the limits Phase 114 left.
+
+**What the close found.** The reasoning README still said 140 modules (Phase
+114's three moved modules made 143); it now says 143, which `test_figures`
+holds it to. And the ledger's selectivity property — one Lean file makes stale
+at most half the units that name any Lean file — failed by one: every frame
+test takes the whole development through `reasoning/lean_address.py`'s tree
+walker, and the two radical rounds' tests took the median to 75 against half
+of 148. The excess is recorded in `test_corpus.py`, and splitting the walker
+out is a To-Do line
+([`ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) §5k, which also
+carries the re-measured blast-radius table).
+
+**Housekeeping.** The Python bytecode files were tracked by git again; they
+are untracked, and `.gitignore` excludes them and the pytest cache.
+
+## Phase 114 — roots with no expression in radicals in composite degree, the address book's reach cut, and the meaning frame's vacuous answers
+
+**Status: closed; its close was finished in Phase 115.** The owner asked
+for the project to be continued from `STATUS.md`, taking a few To-Do items and the loose ends near
+them. The round took three lines from §2.2: "Radicals, the rest", "The
+close's floor: the document address book" and "The planner's two vacuous
+denotation answers". The study for the first is
+[`studies/PRIMITIVE_RADICAL_STUDY.md`](studies/PRIMITIVE_RADICAL_STUDY.md),
+with 10 of 10 marks met; the second is written up in
+[`studies/ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) §5j.
+Tests: `tests/test_primitive_radical.py` (14), one new test in
+`tests/test_signoff.py`, one in `tests/test_semantics.py`. Under D15 the round
+moved refusal twice: composite-degree roots with no expression in radicals
+are now said to have none, with a proved reason, where the layer said nothing;
+and two questions that used to get a vacuous answer are now refused.
+
+**The certificate** (`reasoning/symbolic_factor.py`, new functions
+`jordan_power`, `is_long_cycle`, `primitive_pattern`,
+`radical_free_primitive`, `radical_free_galois`). For an irreducible factor of
+any degree n ≥ 5, the factor degrees modulo primes below 1000 not dividing the
+discriminant are read as before. If one prime shows the cycle type
+`(n - 1, 1)` and some prime shows a cycle type with a power that is a single
+transposition or 3-cycle, the group is primitive and holds that element, so it
+contains the alternating group and no root is expressible in radicals. Phase
+113's prime-degree test and Phase 112's conjugation certificate are tried
+first, so their wording is unchanged where they apply. Wired into the branch
+layer of `symbolic_nonlinear`, its letter search (now composite-capable, so
+`x^6 + a*x = b` is refused with a rational point and the reason), and the
+`modes.higher` route of `derivation.py`, where a characteristic polynomial of
+degree five or more is tested at a positive rational point of its letters:
+the chain pendulums of five and six links carry the reason, and the chain
+frame now reads six links. Report `runtime/primitive_radical_report.py`, CLI
+`tools primitive-radical`; the cases and marks were committed before the code
+(`evaluation/primitive_radical_cases.py`).
+
+**The Lean file** (`RequestProject/GLM/PrimitiveRadicals.lean`, no `sorry`,
+standard axioms only): `isPreprimitive_of_isCycle_fixing_one` (primitivity
+from the long cycle),
+`not_solvable_of_long_cycle_of_swap_or_three_cycle` (Jordan's theorem from
+Mathlib) and `no_radical_root_of_primitive_pattern`, the certificate the layer
+cites. Dedekind's theorem is used, not proved.
+
+**Controls and limits.** No certificate on 7 solvable controls of composite
+degree or on 141 polynomials solvable by construction; all 200 random
+irreducible polynomials of degree 6, 8, 9 and 10 certified; the shape tests
+right on all 182 cycle types of degree 6, 8, 9, 10 and 12. Phase 113's mark F3
+(the sextic declared silent) now reads Phase 113's own citation, and its report
+still meets 9 of 9. Limits: imprimitive groups that are not solvable
+(`x^10 - x^2 - 1`), primitive groups with no transposition or 3-cycle power
+(`PGL(2, 5)` on six points), no positive statement, Dedekind not in Lean.
+
+**The address book's reach.** Every document edit rewrites
+`corpus/_data/document_addresses.json`, and 56 units held it, almost all
+through the toolbox. Three pieces of code that read no document were moved out
+of the modules that do and re-exported unchanged: `reasoning/golay_words.py`
+(from `native_words.py`), `reasoning/native_ledger.py` (from
+`native_parity.py`) and `reasoning/sign_test.py` (from `corpus_resample.py`).
+Measured with `signoff --impact`: 56 units (4,855 s serial) before, 11
+(1,576 s) after. `ITERATE.md` §4.3 carries the new figures, and
+`test_signoff` pins the cut.
+
+**The meaning frame.** "What does … mean" took everything after "does" as the
+term, so outside questions 71 and 82 of
+[`QUESTION_SET_B_STUDY.md`](studies/QUESTION_SET_B_STUDY.md) got an empty
+denotation answer for a whole sentence. `runtime/parser.py` now reads a
+remainder that is a sentence (more than eight words, or an inner sentence
+break) as an unknown question, refused. The question set's score is unchanged.
+
+**Housekeeping.** The Python bytecode files and the pytest cache are
+untracked and ignored again.
+
+## Phase 113 — roots with no expression in radicals, read from one Frobenius element
+
+**Status: closed.** The owner asked for the project to be
+continued from `STATUS.md`, toward more reasoning ability and scope. The
+round took "Radicals, the rest" from §2.2, the limit Phase 112 left first:
+its radical-free certificate was sufficient and not necessary, silent on
+`x^5 - x - 1`. The study is
+[`studies/FROBENIUS_RADICAL_STUDY.md`](studies/FROBENIUS_RADICAL_STUDY.md),
+with 9 of 9 marks met. Tests: `tests/test_frobenius_radical.py` (15). Under
+D15 it moved refusal: a root that has no expression in radicals is now said
+to have none, with a proved reason, in cases where the layer used to say
+nothing.
+
+**The certificate** (`reasoning/symbolic_factor.py`, new functions).
+For an irreducible factor of prime degree, the factor degrees modulo each
+prime below 1000 that does not divide the discriminant are read by
+distinct-degree factorisation. By Dedekind's theorem they are the cycle type
+of a Frobenius element. When that shape is not affine (not the identity, not
+a single full cycle, not one fixed point with all other cycles of one
+length), a power of the element moves some roots and fixes two. A solvable
+group of prime degree has no such element (Galois). The conjugation
+certificate of Phase 112 is still tried first, so its wording is unchanged
+wherever it applies. The letter search runs a second pass with the Frobenius
+test, so `x^7 + a*x = b`, refused with no reason before, is now refused with
+a rational point where no root is expressible in radicals.
+
+**The Lean file** (`RequestProject/GLM/FrobeniusRadicals.lean`, no `sorry`,
+standard axioms only). It has three sections. First, a power of a permutation
+with one `ℓ`-cycle is an `ℓ`-cycle, and a group containing the alternating
+group on five or more letters is not solvable. Second, Jordan's theorem
+applied to a Galois group: a transposition or a 3-cycle rules out roots in
+radicals. Third, Galois's theorem: in a solvable transitive group of prime
+degree only the identity fixes two points. From it,
+`no_radical_root_of_frobenius_shape`, the certificate the layer cites.
+Dedekind's theorem is used, not proved.
+
+**How it went.** The Jordan form came first and left Trinks's septic
+`x^7 - 7x + 3` (group `PSL(2, 7)`) as a declared limit. Writing that limit
+down showed that Galois's theorem would reach it, so the theorem was proved
+and the layer moved onto it. Trinks's septic became a certified case, and a
+composite-degree sextic became the declared limit. The study records this
+order.
+
+**Controls and limits.** No certificate on 5 solvable controls or on 178
+polynomials solvable by construction (De Moivre's quintic at integer points,
+pure powers). All 200 random irreducible quintics and septics certified, and
+every one the conjugation certificate certifies is certified by Frobenius too.
+The modular reading agrees with the complete factorisation on 2,561 of 2,561
+pairs, and the shape test is right on all 179 cycle types of degree 5, 7, 11
+and 13. Phase 112's R2–R4 marks now read the conjugation certificate by its
+own words, because the new certificate reaches two of its controls; its report
+still meets 7 of 7. Limits: composite degree; no positive statement of
+solvability; Dedekind not in Lean; the `modes.higher` route.
+
+**Housekeeping.** The repository import had re-added the Python bytecode
+files to git and dropped the `.gitignore` lines for them; they are untracked
+again and ignored. The anonymous-register study's one moving claim moved back:
+with this round's Lean file the corpus is 4736 declarations, and the text
+search with names replaced scores 57 hits against a chance of 31.66 (1.80
+times chance), under the line of twice chance, so the miss recorded since
+Phase 108 is no longer recorded (`tests/test_anonymous.py`,
+`studies/ANONYMOUS_REGISTER_STUDY.md` §4).
+
+## Phase 112 — past degree six, and roots with no expression in radicals
+
+**Status: closed.** The owner asked for the project to be
+continued from `STATUS.md`. The round took item 4 of §2.1, the rest of the
+cubic radical study's §8: numeric degree above 6, and the quintic in letters.
+The study is
+[`studies/QUINTIC_RADICAL_STUDY.md`](studies/QUINTIC_RADICAL_STUDY.md), with 7
+of 7 marks met. Tests: `tests/test_quintic_radical.py` (17). Under D15 it
+moved derivation (answers past degree 6 that were refused) and refusal (a
+refusal that now carries a proved reason).
+
+**Factoring past degree 6** (`reasoning/symbolic_factor.py`, new).
+Zassenhaus's algorithm, with modular factoring by distinct-degree and
+equal-degree splitting, Hensel lifting past twice the Mignotte bound, and
+recombination by exact division. The splitting's trials come from the
+package's deterministic generator, never `random`. `factor_rational` keeps
+Phase 104's Kronecker path up to degree 6 and calls the new module past it,
+or when Kronecker's budget runs out. Caps: degree 24, 16 modular factors.
+`x^7 - 3*x + 1 = 0`, refused before, now reads three isolated real roots.
+
+**No root in radicals.** An irreducible factor of prime degree at least 5
+with exactly two non-real roots (counted by Sturm) now carries, in column 2,
+the statement that none of its roots is expressible in radicals, citing
+`GLM.QuinticRadicals.no_radical_root_of_prime_degree`. A polynomial in letters
+of prime degree at least 5 that is refused now has its letters specialised to
+small integers, at most 400 points, smallest first. When a point passes the
+certificate, the refusal names it: *"no formula in radicals of p, q exists:
+at p = -3, q = 1 …"*. The code stays `NONLINEAR`, so every pinned refusal
+keeps its code.
+
+**The Lean file** (`RequestProject/GLM/QuinticRadicals.lean`, no `sorry`,
+standard axioms only): the certificate; the trinomial family `x^5 - a x + b`
+after the Abel–Ruffini example in Mathlib's `Archive`, which cannot be
+imported; and `quintic_in_letters_no_radical_formula`.
+
+**Controls and limits.** De Moivre's quintic in letters, solvable for every
+value of its letters, gets no reason, as it must. `x^5 - x - 1` has Galois
+group `S5` but one real root, so the certificate, which is sufficient and not
+necessary, says nothing. The septic trinomial in letters never has two
+non-real roots at small points, so it keeps the old wording. Phase 104's
+report reads as before (8 of 9, K6 the known miss). Zassenhaus equals
+Kronecker on 200 of 200 polynomials of degree 4 to 6.
+
+**Order of work.** The code was tried on a handful of questions before the
+cases were written down, and the study says so. The declared values come from
+the mathematics: planted factors, the theorem, and a Sturm count on the
+product.
+
+**Housekeeping.** The repository import had re-added 529 Python bytecode
+files to git; they are untracked again, and `.gitignore` now names
+`__pycache__/` and `*.pyc`.
+
+## Phase 111 — the status document cut to a To-Do list, and the close written down as one exact checklist
+
+**Status: closed this session.** The owner asked for `STATUS.md` to be
+cleaned up into a list of what is still to do, and for the optimal close of a
+run to be worked out and recorded so that each close is faster. It took no
+item from the To-Do list, and says so: under directive **D15** it moved none
+of derivation, addressing or refusal. It is a round that cleaned up, and a
+round that cut what every later round pays.
+
+**The status document.** `STATUS.md` had reached 2,992 lines, most of it a
+stack of "the round before" paragraphs (Phases 46–110) and a candidate list
+whose items were nearly all closed. It is now a To-Do list: the instrument
+table in one screen, the open items grouped (the next round; follow-ups left
+by closed studies; waiting on the owner; parked and ongoing), each line
+naming the study section that states it and the old name (`lattice item 6`,
+`track M`) that earlier records cite. Nothing was deleted: the standing
+description (the old §1 table, §2, §3.1, §3.3 and §4) moved unchanged to a new
+state document, [`SYSTEM.md`](SYSTEM.md); the round-by-round account, the
+closed §3.2 and the candidate list as named moved to
+[`archive/STATUS_ROUNDS_ARCHIVE.md`](archive/STATUS_ROUNDS_ARCHIVE.md), with
+its figure markers taken out (a record holds no live figure). `ENTRY.md`,
+`README.md`, `ITERATE.md` and `PROJECT_DIRECTIVES.md` point at the new shape.
+
+**The close, made shorter** ([`ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) §5i):
+
+* **The ledger's rules read as a docstring reader.** The test for a module
+  that reads docstrings was a substring search, and `signoff/rules.py` spells
+  `__doc__` in its own prose; since nearly every derivation imports it, every
+  docstring mention of a document counted. The test now reads the syntax
+  tree (`rules._uses_docstrings`). An edit to `STATUS.md` now re-runs 5 units
+  instead of 57, and an edit to `MASTER_PLAN.md` 16 instead of 63 — the two
+  edits every round makes.
+* **The session note out of the corpus.** `ARISTOTLE_SUMMARY.md` is rewritten
+  after a session ends; still in the corpus and in the document checks'
+  closures, it made the address book, `DIGEST.md`, `test_corpus` and
+  `test_figures` stale at every pick-up. It is now outside the corpus walk and
+  every closure (`inventory.SESSION_NOTES`, `rules.SESSION_NOTES`).
+* **The document checks hold the whole corpus.** With the false docstring
+  reader gone, `test_corpus`, `test_figures` and the documents gate held only
+  the documents some module names (72, 62 and 22 of 147), though each reads
+  all of them by walking the corpus. They now hold every written document
+  (`rules.written_documents`). The first close of this round found it:
+  `test_corpus` failed on the gate's closure no longer holding `STATUS.md`.
+* **No hand-typed moving counts.** The counts earlier closes had to hunt down
+  by hand — report subjects, registers, Lean files, query kinds, CLI cases
+  and the Lean declaration count — are inline figures in every state document
+  that quotes them; `tests/test_lean_address.py` reads the declaration count
+  through the figure markers.
+* **The close itself**, step by step with what each document edit costs, is
+  [`ITERATE.md`](ITERATE.md) §4: the write-down checklist, the three
+  commands, the cost table, and the pick-up that proves it.
+
+**What it did not cut.** A one-line edit to `WHITEBOARD.md` after the close,
+made on purpose to measure the cheapest possible re-close, cost 32 minutes:
+any document edit rewrites the document address book, and 54 units hold it
+through the toolbox. So a usual round's close re-runs 62 units where it re-ran
+64 — the docstring fix is real for an edit to the status document or the
+plan by name, but the address book is the floor. Cutting that coupling is now
+a To-Do line (`STATUS.md` §2.2), with the measurement in
+[`ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) §5i.
+
+Changing `signoff/rules.py` is the one edit that re-runs the whole suite, so
+this round's close paid for every unit — twice, because the document-check
+fix above was itself a change to the rule: the first `signoff --close` took
+67 minutes on 8 jobs (the Lean build and the end-to-end evaluation included)
+and signed 157 of 158, `test_corpus` failing on two assertions the round had
+moved (the gate's closure, and the share of tier-0 verdicts that are literal
+quotations, which the two new verdicts had pushed below half; both verdicts
+are now quoted in their bodies); the second took 44.5 minutes
+with the Lean build already current and signed 158 of 158 test files and 6
+of 6 instruments. Tests: `tests/test_signoff.py` (the session note in
+no closure; a docstring reader is one that uses the name; the status document
+in few closures; the document checks hold every written document).
+
+---
+
+## Phase 110 — which pairs a stray-blind reading must conflate (lattice item 10), and the close of Phase 109
+
+**Status: closed this session.** The owner asked for the interrupted close
+to be finished and for another item to be taken alongside it. The item is
+lattice item 10 of `STATUS.md` §3.4, one of the two lattice items the roadmap
+marks as theorems to attempt in Lean. The study is
+[`studies/STRAY_BLIND_STUDY.md`](studies/STRAY_BLIND_STUDY.md), with 4 of 4
+marks met. Tests: `tests/test_stray_blind.py` (8).
+
+**The theorem** (`RequestProject/GLM/StrayBlind.lean`, no `sorry`, standard
+axioms only). An emission record read at a hole of squared covering radius
+`r2` has a distance profile made of `A` copies of `r2` plus its stray spectrum
+(`distances_decomp`). So two records of equal size have the same profile
+exactly when their stray spectra agree (`distances_eq_iff`). The pairs a
+distance-only reading must conflate are therefore the pairs with equal strays,
+whatever their types. Two corollaries follow: every stray-free pair is
+conflated (`strayFree_conflate`), and a reading blind to strays as well is
+one point mass for every hole (`arrivalMeasure_const`). The same holds for any
+ladder rung whose distance depends only on the profiles
+(`distanceReading_indist`). A conflated pair of references with different
+labels makes `Resolves` fail at every spread (`not_resolves_of_indist`).
+
+**The check** (`reasoning/stray_blind.py`, `tools stray-blind`, cache
+`_data/stray_blind.json`). The check reads the ladder's own ensembles at 240,
+480, 960 and 1920 starts. At every size, all ten reference holes reach one
+minimum squared distance (16), and the predicted conflation set (equal stray
+spectra) equals the measured one (`L₃` distance exactly `0`). That set is the
+single pair `A_1^24`/`A_2^12`, the only two stray-free holes. The prediction
+was first compared with the ensembles by an exploratory script, and the study
+says so; the proof does not depend on it.
+
+**Item 6.** The `L₃` rung cannot reach `ρ < 1` at any measured size. The
+share-carrying rungs (`L₂`, `L₄`) separate the pair, and
+`cumulative_can_break_criterion` rules out a monotone argument for them, so
+item 6 stays open and is narrowed to those rungs.
+
+**The close of Phase 109.** The previous session ended inside its close.
+This session finished it:
+
+* **pytest.** Installed pytest, which was again missing from the
+  environment.
+* **Evaluation pin.** Re-pinned `report-relay`, the one evaluation case the
+  Phase 109 corpus growth moved (853 goal queries; the gate fires on 58 of
+  1706; the stack carries 18 queries and loses 0).
+* **Hand-quoted counts.** Brought into line: report subjects, CLI cases, test
+  files, Lean files, modules, and the iteration-cost table.
+* **Tests README.** Added the missing `test_route_choices.py` row.
+
+The close also turned up a bug in stage 0. The census of measurement caches
+reused each module's memoised figures, so a cache re-taken in a subprocess
+was reported "still stale". `corpus/caches.cache_states` now re-reads each
+cache file. The citation reference had the same memo problem, and
+`signoff/__main__._stale_caches` now forgets that memo too. Separately, 527 Python bytecode files were still tracked by git;
+they are now untracked and ignored.
+
+## Phase 109 — four or more degrees of freedom stepwise, the discriminant's sign by factorisation, `report routes`, and a one-pass close
+
+**Status: closed (its close finished by Phase 110).** At the owner's request: the three items
+the sharpening pass left, and the sign-off loop that made a close take two
+or three passes. Tests: `tests/test_route_choices.py` (18) and new cases in
+`tests/test_signoff.py` (`TestTheCloseSettlesInOnePass`). Lean:
+`RequestProject/GLM/QuarticResolvent.lean` and
+`RequestProject/GLM/SignFactor.lean`, no sorry.
+
+**1. Four or more degrees of freedom.** `derivation._linearise` sent the
+characteristic polynomial of any system to the branch layer; for a quartic
+in letters that ran for minutes in its gcds, and a quintic has no radical
+form at all. A new decision point `modes.higher` (in `reasoning/routes.py`)
+is consulted for `n >= 4`: **ferrari** when `n = 4` and `M` is plainly
+positive definite -- the quartic `w^4 + a w^3 + b w^2 + c w + d` is
+depressed (`w = y - a/4`), its resolvent cubic is solved by Viète (its
+roots are real, being sums of squares of real differences), and the four
+roots are half-sums of the square roots of the resolvent's roots
+(`ferrari_roots` in `QuarticResolvent.lean`); **named** when `n >= 5` --
+the roots are named `w2_1 >= ... >= w2_n`, stated real and positive by the
+definiteness, with their sum and product read off the coefficients;
+**solver** otherwise (an indefinite or unreadable pair keeps the branch
+layer). The chain-pendulum frame reads quadruple, quintuple, four-, five-
+and `N`-link chains. The column-3 check generalises the cubic check to any
+degree: it rebuilds `det(K - w^2 M)`, compares coefficients, counts the
+real positive roots by Sturm, and for a quartic also checks the resolvent.
+The quadruple and quintuple pendulums (identical or not) answer and verify
+in 2 to 4 seconds.
+
+**2. The sign by factorisation.** The surface test (every coefficient one
+sign) cannot decide `-(a - b)^2*(...)`-shaped discriminants once expanded.
+`reasoning/sign_factor.py` computes the square-free factorisation by Yun's
+algorithm and decides the sign when the constant is signed, every odd-power
+factor is plainly signed and every even-power factor contributes a
+non-negative square (`factored_nonneg`, `factored_nonpos` in
+`SignFactor.lean`). `symbolic_nonlinear._cardano` uses it when the surface
+test fails, through the decider `cubic.letters:factor`; it is capped at
+`MAX_TERMS = 400` terms and still only a plain-sign test on each factor --
+a factor that is not plainly signed leaves the sign undecided and the case
+split stands. The cubic radical and cubic trig measurements switch the
+decider off so their as-shipped readings are unchanged.
+
+**3. `report routes`.** `runtime/route_report.py`: every decision point,
+its routes in order with the condition each needs, the deciders, what is
+disabled, and nine reference problems run live (one or more per route).
+3 decision points, 8 routes, 9 of 9 reference problems take the expected
+route, every route reached. Column 3 recomputes the report in a fresh
+interpreter. Added to the evaluation set as `report-routes`.
+
+**4. A close in one pass.** Three causes made `signoff --close` go round:
+(a) the session notes (`ARISTOTLE_SUMMARY.md`) sat in 51 unit closures and
+were rewritten between sessions; (b) every unit that reads rendered regions
+was signed against the suite totals that a close itself records; (c) the
+close ran `test_corpus` and `test_figures` in the same pass as the units
+whose totals they check, and a stale measurement cache (for example
+`query_escalation` after `evaluation/cases.py` changed) failed a counted
+unit inside the close, deferring the totals. Now: the session notes are
+excluded from every closure but the document checks; the run-measured
+figures are masked from the rendered digest (`rules.rendered_text`); and
+`--close` runs **stage 0** (re-take every stale measurement cache, found
+by the census in `corpus/caches.py`, and the elaborator's citation
+reference, which a new Lean file makes stale and which failed
+`test_citation_scope` and `test_proof_dependency` in this round's first
+close), **stage 1** (every stale counted
+unit and instrument, document checks held back; if a counted unit fails,
+the document checks are deferred and the close says what is owed),
+**stage 2** (`corpus --refresh`, only when a document check is owed; any
+package unit the refresh moved is re-run, at most three passes) and
+**stage 3** (the document checks). `--no-refresh` and `--no-retake` skip
+stages 2 and 0.
+
+---
+
+## Sharpening pass after Phase 108 — route selection, the case split, the unequal triple pendulum, and a review of the wiring
+
+**Status: closed.** Not a numbered round and not a study: at
+the owner's request, a pass of sharpening and refinement recorded in the
+standard notes (here, `STATUS.md` and `WHITEBOARD.md`), with a test file
+(`tests/test_sharpening.py`, 17 tests) and no new Lean file. The owner asked
+for four things: a note that pytest is missing from this environment; the
+cubic routes chosen by the GLM rather than reached through a switch, in a way
+that can widen; the case split when the sign of the discriminant is not
+decided; and the triple pendulum with unequal masses and lengths, which ran
+for more than fifteen minutes in Phase 108 — plus a review of the wiring
+itself.
+
+**1. pytest.** It is not installed in this environment by default. The note
+is at the head of `ITERATE.md` §0, in `STATUS.md` §4.1 and in the tests
+README; and `python3 -m glm_universal.signoff` now checks for it before any
+command that runs tests, and stops with the install line (`python3 -m pip
+install pytest`) instead of failing every unit.
+
+**2. Routes chosen, not switched.** `reasoning/routes.py` (new): a decision
+point names its candidate routes, each with the fact that makes it sound
+*here*; `choose` takes the first whose fact holds, records it with its
+reason, and the reason is written into column 2 (`route cases at
+cubic.letters: the sign of the discriminant is not decided, ...`). A caller
+can state what it knows that the callee cannot see (`facts(real_roots=True)`),
+and a route can be disabled for a measurement (`disabled`, `as_shipped`), so
+the A/B reading a switch gave is still one line. Two decision points use it:
+`cubic.letters` in `symbolic_nonlinear._cardano` (Viète when three real roots
+are known — a plainly negative discriminant or stated real roots; Cardano
+when the discriminant is plainly positive; both as cases otherwise) and
+`modes.cubic` in `derivation._linearise` (below). `TRIG` stays as Phase 108's
+measurement switch (off is still Phase 104 exactly); the Phase 104 and 108
+reports read their marks with the later split disabled, so their declared
+marks remain statements about their own rounds.
+
+**3. The case split.** A cubic in letters whose discriminant's sign is not
+decided (`x^3 + p*x = q`) is now answered by cases, each branch under its own
+condition: `when 4p^3 + 27q^2 > 0`, Cardano's one real root; `when
+4p^3 + 27q^2 < 0`, Viète's three roots in decreasing order. The symbolic
+frame prints the cases separately rather than one merged list of conditions.
+The column-3 script checks every branch formally; for the Viète branches it
+draws signed sample points where the cubic's discriminant is positive (the
+positive points of the formal check never reach `p < 0`) and asserts three
+real roots there by Sturm. When `P^3/Q^2` is a number the homogeneous route
+answers alone, since it is exact whatever the sign.
+
+**4. The unequal triple pendulum — a computational problem, worked
+around.** Profiling showed the time going into `poly_gcd` inside rational
+function arithmetic in seven letters: every division in Cardano's
+coefficients ran the full recursive gcd although the leading coefficient,
+`m1*m2*l1*l2*l3`, is a monomial; and once past that, Cardano's root was
+being formed under a condition (`D > 0`) a pendulum never meets. Three
+changes:
+* `poly_gcd` has a monomial fast path (a monomial divides only monomials, so
+  the gcd is the common part of the two monomial contents);
+* `derivation._linearise` reads the symmetric pair `M`, `K` off the
+  Lagrangian's Hessian at the origin and decides by Sylvester's criterion,
+  with every leading minor's coefficients positive, that `M` (and here `K`)
+  is positive definite for positive letters — so every `w^2` is real (and
+  positive). That fact is passed to the solver as a stated fact
+  (`facts(real_roots=...)`), and for a three-degree-of-freedom system whose
+  coefficients do not scale together it selects the **stepwise** route:
+  the cubic's coefficients `a, b, c, d` printed once, then
+  `P = (3ac - b^2)/(3a^2)`, `Q = (2b^3 - 9abc + 27a^2 d)/(27a^3)`,
+  `K = (3Q/(2P))*sqrt(-3/P)`, and
+  `w2_k = -b/(3a) + 2*sqrt(-P/3)*cos(acos(K)/3 - 2*pi*k/3)`, with the sum and
+  product of the three `w^2` (for equal masses and lengths they reduce to
+  Phase 108's `9g/l` and `6g^3/l^3`). The theorem the last step rests on is
+  `vieta_roots_iff` in `RequestProject/GLM/CubicTrig.lean` (Phase 108);
+* the motion script (`runtime/derivation_scripts.py`) checks the printed cubic
+  against its *own* `det(K - w^2 M)` from its own Euler–Lagrange equations at
+  three rational points and five values of `w^2`, and counts three distinct
+  roots in `(0, B]` by Sturm; a mutated coefficient is rejected.
+
+The unequal triple pendulum is now answered and verified in about two
+seconds, as is three unequal masses on four unequal springs. The identical
+systems keep the solver route and their Phase 108 answers. The "pendulum
+mechanism" the owner remembered is this chain-pendulum frame (Phase 106,
+`runtime/derivation_frames.py`), which writes its answer in the three
+columns; the archive's only other pendulum is the dimensional relation
+`f^2 L / g` in the GLM-main README, and no separate older pendulum script was
+found in `source_material/GLM-main.zip`.
+
+**5. The wiring review.** A static census of the package's imports (every
+module reached from `GLM.py`, from `tools.py`, from the tests, or from none)
+found 286 of 352 modules on the answering path, 48 reached only by the study
+instruments (measurements — correct where they are), 9 only by tests and 9
+entry points and examples reached by nothing; the four reasoning modules off
+the answering path (`citation_scope`, `document_tree`, `law_triage`,
+`substrate_cognition`) are measurements by design. Static reachability is not
+operational reachability, so the review then asked the GLM plain questions
+and followed each refusal to its cause. What it found and fixed:
+* **The symbolic operation answered only to its exact words.** `solve
+  x^3 - 3*x + 1 = 0`, `what are the roots of x^3 + p*x = q?` and `solve EQ
+  for x` were refused by the planner. `runtime/symbolic_frames.canonical`
+  now rewrites those phrasings to the operation's own form; it reads only
+  equations and names (prose such as `solve 12x + 18y = 30 in integers`
+  stays with its own surface — the non-interference test holds).
+* **A refusal on one surface was final even when another surface reads the
+  same words.** `solve for x: x^3 + p*x = q` is the reverse surface's prefix
+  but its body is algebra the dialect does not hold. `router._handover`
+  hands such a refusal to the symbolic frame, consulted only after a refusal
+  and kept only if it answers, so it never changes an answer a surface gave.
+* **The command line duplicated the router's dispatch**, so a fallback added
+  to `router.route` was invisible to `GLM.py -q`. `GLM.py` now asks
+  `router.handed_surface`, which applies the same handover.
+* **The chain-pendulum frame read only texts that said "Lagrangian".**
+  `Find the normal modes of a triple pendulum with masses m1, m2, m3 and
+  lengths l1, l2, l3` was unrecognised; asking for normal modes, equations of
+  motion or small oscillations now reads the same derivation.
+* **The double pendulum with unequal masses failed its own check** (`a
+  frequency outside one quadratic field`): its frequencies hold the square
+  root of an expression in the letters, and the motion script evaluated only
+  square roots of numbers. The radicand is now evaluated at the point first.
+* **Python bytecode was tracked by git** (520 files under `__pycache__`)
+  although the Phase 103 record says it had been stopped; `.gitignore` now
+  names `__pycache__/`, `*.pyc` and `.pytest_cache/` and the files are
+  untracked.
+* **Two evaluation pins had aged.** `report anonymous` and `report relay`
+  are pinned to the Lean corpus's query set, which grew from 803 to 851
+  queries as the corpus reached 4,676 declarations by Phase 108; the pins in
+  `evaluation/cases.py` are re-taken (text 699 -> 68 of 851, structure
+  192 -> 188; the stack 699 -> 703 of 851, ahead, carrying 15 and losing 0)
+  and both claims still hold.
+
+The module switches (`GATE`, `DEPENDENCIES`, `AST_INDEX`, `DERIVATIONS`, ...,
+some twenty in all) were read too: every one is on, and each is the
+measurement handle of the round that added it; none hides a route the GLM
+needs. They are left as they are; a route that must be *chosen* per problem
+goes through `routes.py`.
+
+**What it leaves.** The stepwise route covers three degrees of freedom; four
+or more (a quartic or higher characteristic polynomial in letters) would
+state the roots real and positive and name them through the coefficients,
+but is not built. The discriminant test is still syntactic (`plainly`
+positive or negative); a sign decided by a factorisation is not looked for.
+A report subject for the route trace is not added (it would move the frozen
+escalation data that lists the subjects); `routes.describe()` and column 2
+carry it.
+
+---
+
+## Phase 108 — a cubic in letters with three real roots: the homogeneous route and Viète's trigonometric form
+
+**Status: closed this round.** Taken while Phase 107's close was finished,
+at the owner's request for another `STATUS.md` item: the first limit of
+[`CUBIC_RADICAL_STUDY.md`](studies/CUBIC_RADICAL_STUDY.md) §8, a cubic in
+letters with three real roots, which Phase 104 refused (`NONLINEAR`) and
+which blocked the normal modes of three-degree-of-freedom systems. The study
+is [`studies/CUBIC_TRIG_STUDY.md`](studies/CUBIC_TRIG_STUDY.md); the cases
+and marks T1–T9 (`evaluation/cubic_trig_cases.py`) were written before any
+code. The next round, Phase 109, starts from track M or E, the second
+derivation study's §6, the rest of the cubic radical study's §8 or the cubic
+trig study's §5, or the lattice items beside round 8.
+
+**What was built.**
+* `reasoning/symbolic_nonlinear.py` — `_three_real` behind the switch
+  `TRIG`: when the square root of the depressed cubic's discriminant is not
+  real, or minus the discriminant is plainly a sum of even powers, a cubic
+  with `P^3/Q^2` a number is answered as a ratio of the letters times a root
+  of a rational cubic, and any other by Viète's form
+  `2*sqrt(-P/3)*cos(acos(K)/3 - 2*pi*k/3)`, each root a generator whose
+  relation is the cubic; the inverse modulo a relation that holds its own
+  generator; a Sturm check of three real roots in the column-3 script.
+* `reasoning/derivation.py`, `runtime/derivation_frames.py`,
+  `runtime/derivation_scripts.py` — a squared frequency holding an algebraic
+  number is checked by the motion script in `Q[t]/f`.
+* `runtime/cubic_trig_report.py`, `tools cubic-trig`,
+  `tests/test_cubic_trig.py`, `RequestProject/GLM/CubicTrig.lean`.
+
+**What it measured.** 9 of 9 marks met: 4 of 4 homogeneous and 3 of 3 Viète
+cubics with exactly the declared branches; 7 of 7 scripts verify and 7 of 7
+mutants rejected; the identical triple pendulum (`w^2 = g*λ/l`,
+`λ^3 - 9λ^2 + 18λ - 6 = 0`) and three masses on four springs with 3 of 3
+squared frequencies each; 0 of 5 declared readings and 0 of 8 Phase 106
+motion cases moved, Phase 104's K1–K5 and K8 still met; batteries 30 of 30
+(Viète) and 30 of 30 (homogeneous); 303 texts read with the switch off and
+on, 0 moved. A Phase 104 reading that printed Cardano's root under a
+condition no value of the letters meets is now answered by the
+trigonometric form.
+
+**Lean.** `vieta_root`, `vieta_arg_le_one`, `vieta_arg_lt_one`,
+`vieta_cos_strictly_ordered`, `cubic_three_roots_complete`,
+`vieta_roots_iff`, `scaled_root`, `scaled_root_iff` in
+`RequestProject/GLM/CubicTrig.lean`; no sorry, standard axioms.
+
+**Also in this round.** Phase 107's close was finished: the corpus refreshed,
+the test runner installed where it was missing, the suite's collected count
+re-taken in `FIGURES.md`, and every unit signed.
+
+---
+
+## Phase 107 — the rest of track P: information inequalities, codes, rate distortion, maximum entropy, eigenvalue problems, transmission, the FFT and the diagonal argument
+
+**Status: closed.** Taken at the owner's direction: the rest of
+track **P** (outside questions 19, 28, 29, 39, 49, 52, 54, 55, 56, 59, 81,
+86, 95 and 96). The study is
+[`studies/DERIVATION_TWO_STUDY.md`](studies/DERIVATION_TWO_STUDY.md); the
+cases and marks Q1–Q11 (`evaluation/derivation_two_cases.py`) were committed
+before any code, including the declaration that 29, 39 and 96 — accounts,
+not derivations — stay refused. The next round, Phase 108, starts from track M or E, the
+second derivation study's §6, the cubic radical study's §8, or the lattice
+items beside round 8.
+
+**What was built.**
+* `reasoning/info_inequality.py` (new) — linear information inequalities of
+  up to four variables: Shannon-type certificates by an exact rational
+  simplex, GF(2) linear-distribution counterexamples, and a Farkas
+  polymatroid witness for `NOT_SHANNON`.
+* `reasoning/coding_theory.py` (new) — Sardinas–Patterson with the shortest
+  ambiguous string, Kraft sums, canonical prefix codes, the Hamming
+  rate–distortion function by the Shannon lower bound and its backward test
+  channel (`NOT_TIGHT` where it is not met), and the BSC rate posterior on
+  the machine's grid.
+* `reasoning/maxent.py`, `reasoning/spectral.py` (eigenvalue problems by the
+  determinant of the boundary rows; transmission at one point by complex
+  Cramer), `reasoning/fft_derivation.py` (new).
+* `runtime/derivation_two_scripts.py`, `runtime/derivation_two_frames.py`
+  (ten operation prefixes and eleven outside frames),
+  `runtime/derivation_two_report.py`, `tools derivation-two`,
+  `tests/test_derivation_two.py`, the switch `DERIVATIONS_TWO` in
+  `runtime/question_frames.py`, and `RequestProject/GLM/DerivationsTwo.lean`.
+
+**What it measured.** 11 of 11 marks met: 16 of 16 inequalities, 11 of 11
+codes, 5 of 5 rate-distortion questions, 4 of 4 maximum-entropy laws, 6 of
+6 eigenvalue problems, 13 of 13 transmission, FFT and posterior questions,
+14 of 14 refusals as declared; 55 of 55 column-3 scripts verify and 55 of
+55 mutants rejected; 400 random inequalities (293 not valid, 107 proved), 0
+unsound, 0 undecided; 600 random codes (256 uniquely decodable), 0
+disagreements with brute force, 0 Kraft violations; outside questions 19,
+28, 49, 52, 54, 55, 56, 59, 81, 86 and 95 answered, 29, 39 and 96 still
+refused, 0 of 292 other texts moved.
+
+Under directive D15 the round moves **derivation**, and **refusal** at the
+named codes `NOT_SHANNON`, `NOT_TIGHT` and `EXPLANATION`. Three answers (56,
+81, 86) are *Lean-anchored*: their general statement is a Lean theorem the
+reading cites, not something the frame derived.
+
+**Lean.** `gibbs_inequality`, `mutual_information_nonneg`,
+`shannon_certificate_sound`, `data_processing`, `kraft_mcmillan`,
+`dif_even`, `dif_odd`, `posterior_increasing`, `rd_test_channel`,
+`delta_transmission`, `delta_transmission_energy`, `ring_eigenfunction`,
+`dirichlet_eigenfunction`, `lawvere_fixed_point`, `tarski_undefinability`,
+`infinite_model_of_large_finite_models` in
+`RequestProject/GLM/DerivationsTwo.lean`; no sorry, standard axioms.
+
+---
+
+## Phase 106 — derivations and proofs: propositional proof search, Euler–Lagrange, transfer functions and boundary value profiles
+
+**Status: closed.** Taken at the owner's direction: the open
+retrieval items of round 9 (N5, the AST index study's §8, the citation-scope
+study's §6, the document-tree study's §6) were judged not to be producing
+strong results and are **parked**, each study carrying a *Disposition (Phase
+106)* section; every operation round 9 built stays. The round is track
+**P** of [`QUESTION_SET_B_STUDY.md`](studies/QUESTION_SET_B_STUDY.md) §8. The
+study is [`studies/DERIVATION_STUDY.md`](studies/DERIVATION_STUDY.md); the
+cases and marks R1–R9 (`evaluation/derivation_cases.py`) were committed
+before any code. The next round starts from the rest of track P, track M or
+E, the cubic radical study's §8, or the lattice items beside round 8.
+
+**What was built.**
+* `reasoning/proof_search.py` (new) — formulas, a G4ip prover (terminating,
+  complete for intuitionistic propositional logic), truth tables, Kripke
+  countermodels of at most four worlds, an independent rule-by-rule proof
+  checker, and classical proofs from the fewest excluded-middle instances.
+* `reasoning/derivation.py` (new) — Euler–Lagrange equations with the
+  dynamic-free divisor stated, linearisation about the origin and normal
+  modes (through `symbolic_nonlinear`), transfer functions of a linearised
+  model in deviation variables, and flux-form boundary value profiles.
+* `runtime/derivation_scripts.py`, `runtime/derivation_frames.py` (the
+  operations `prove:`, `derive equations of motion for …`, `derive transfer
+  functions from … to …`, `solve boundary value problem for …`, and four
+  outside frames), `runtime/derivation_report.py`, `tools derivation`,
+  `tests/test_derivation.py`, the switch `DERIVATIONS` in
+  `runtime/question_frames.py`, and `RequestProject/GLM/Derivations.lean`.
+
+**What it measured.** 9 of 9 marks met: 16 of 16 proofs, 8 of 8 equations
+of motion, 6 of 6 transfer models, 6 of 6 profiles, 8 of 8 refusals as
+declared; 36 of 36 column-3 scripts verify and 36 of 36 mutants rejected;
+2000 random formulas (1769 not valid, 149 intuitionistic, 82 classical, each
+classical one with a Kripke countermodel), 0 unsound, 0 gaps; outside
+questions 18, 24, 30 and 85 answered, 0 of 299 other texts moved.
+
+**Defects found.** `symbolic_nonlinear._cardano` crashed with a `TypeError`
+on a cubic in casus irreducibilis (the triple pendulum); it now refuses
+`NONLINEAR`. The first motion script assumed a constant ratio between claim
+and Euler–Lagrange expression; the answer now states its divisor and the
+script checks it.
+
+Under directive D15 the round moves **derivation** (and refusal, at the
+repaired crash).
+
+**Lean.** `g4ip_sound`, `curry_derivation`, `slab_profile`,
+`cylinder_profile`, `sphere_profile`, `double_pendulum_modes` in
+`RequestProject/GLM/Derivations.lean`; no sorry, standard axioms.
+
+---
+
+## Phase 105 — the AST address as a retrieval key: where an expression is already computed, in the live code and the archive
+
+**Status: closed.** Round 9 of the order of work, retrieval,
+continued: item **I3** of [`STATUS.md`](STATUS.md) §3.4 (named by Phase 64,
+[`PYTHON_SPEECH_STUDY.md`](studies/PYTHON_SPEECH_STUDY.md) §7). The study is
+[`studies/AST_INDEX_STUDY.md`](studies/AST_INDEX_STUDY.md); its §0–§2 and
+the cases and marks A1–A7 (`evaluation/ast_index_cases.py`) were committed
+before any measuring code, and the snapshot was taken after them. The next
+round starts from N5, the AST index study's §8, the citation-scope study's
+§6, the lattice items beside round 8, or the cubic radical study's §8.
+
+**What was built.**
+* `reasoning/_data/ast_index_frozen.json` — the frozen index: every
+  statement-level expression (assignment, augmented or annotated
+  assignment, `return`) that computes something, 3,438 from
+  `overlay/glm_universal` and 8,231 from `source_material/GLM-main.zip`,
+  with its file, line and text, beside the SHA-256 of its content
+  (`tools ast-index --freeze`).
+* `reasoning/ast_index.py` (new) — the structural form (keywords and exact
+  constants kept, a method's receiver a variable), the bucket key (variables
+  erased, commutative operands sorted), the backtracking matcher that
+  returns the witnessing renaming, a separately written brute-force
+  reference carried by every script, the perturbations, and the measurement.
+* `runtime/ast_index_frames.py` (new) — *where is `EXPR` computed?*, *where
+  else …*, *where in the archive …*, *where in the live code …*, joined to
+  `question_frames.frame_of` behind the switch `AST_INDEX`; refusals
+  `NOT_AN_EXPRESSION`, `OUTSIDE_INDEX`, `NO_ARITHMETIC`, `TOO_SMALL`,
+  `TOO_LARGE`.
+* `runtime/ast_index_report.py`, `tools ast-index` (`--freeze`, `--write`,
+  `--live`, `--ask`), the stored report `reasoning/_data/ast_index.json`,
+  `tests/test_ast_index.py`, `RequestProject/GLM/AstIndex.lean`.
+
+**What it measured.** 11,669 sites in 4,818 buckets and 4,864 structural
+classes, 307 shared by both corpora. On 467 query sites, the bucket key and
+the matcher hold under rename, commute and both on 467 of 467; the Phase 64
+canonical form on 373, 464 and 373 (every failure a method receiver kept as
+text). Under both, hit@1: structural key 467, Phase 64 address 456, its
+carrier 412, token overlap 343 (discordance 124 : 0). The Phase 64 address
+merges 23 classes over 146 sites that are not structurally equal (dropped
+keywords and constant values). The matcher and the reference agree on 40 of
+40 declared pairs and 8,398 of 8,398 measurement calls; 106 integer classes,
+670 pairs, 3,350 evaluations, 0 failures. 12 of 12 questions answered with
+scripts verifying and mutants failing, 5 of 5 refusals by code. 5 of 7
+marks met: A2 not met (one declared verdict wrong: `(a + b) + c` and
+`a + (b + c)` are equal by a renaming), A4 not met (373 of 467 against 95 %,
+as the study's §0 predicted from reading the code).
+
+**Defects found.** The rename perturbation renamed called function names,
+which the relation fixes; repaired before any mark was read. The
+reference's first draft yielded nothing for a renamed pair; caught by the
+declared pairs.
+
+Under directive D15 the round moves **address**: an expression is found
+where it is computed, in the system's own code and in the archive, when the
+query is not its stored spelling.
+
+**Lean.** `structEq_sound`, `bucket_complete` (with `key_rename`,
+`key_commEq`), `key_sub_ne_add`, `sub_not_comm`, `string_append_not_comm`,
+`assoc_by_renaming` in `RequestProject/GLM/AstIndex.lean`; no sorry,
+standard axioms.
+
+---
+
+## Phase 104 — cubics, nested square roots and the positive-root dual track
+
+**Status: closed.** Taken at the owner's request: the follow-ups
+named in [`studies/NONLINEAR_ELIMINATION_STUDY.md`](studies/NONLINEAR_ELIMINATION_STUDY.md)
+§6 — the cubic left by most pairs of conics, nested radicals, and whether a
+positive-root reading should go through the branch layer. The owner's rule
+for the last: keep both tracks active, and default to the stronger answer.
+The study is [`studies/CUBIC_RADICAL_STUDY.md`](studies/CUBIC_RADICAL_STUDY.md);
+its cases and marks K1–K9 were committed before any code
+(`evaluation/cubic_radical_cases.py`). The next round starts from round 9 of
+the order (N5 and I3), the citation-scope study's §6, the lattice items
+beside round 8, or the cubic radical study's §8.
+
+**What was built.**
+* `reasoning/symbolic_algebraic.py` (new) — exact real algebra on rational
+  coefficient lists: Sturm chains and real-root isolation with rational
+  brackets, factoring over the rationals up to degree 6 (distinct-degree
+  factoring modulo small primes, then Kronecker's search), interval sign of a
+  polynomial in an algebraic number.
+* `reasoning/symbolic_nonlinear.py`, `extended=True` — bracketed algebraic
+  numbers `root(f, lo, hi)` for numeric polynomials of degree 3 or more;
+  towers of square roots (a quadratic whose coefficients hold a generator),
+  rationalised from the top down; the even quartic factored when its constant
+  term is a square; Cardano's root in Vieta form for a cubic in letters, with
+  `P ≠ 0` assumed and "D > 0 (then it is the only real root)" stated; a gcd
+  step with the other equations; stated real conditions on radicands in
+  letters; exact sign of a constant radicand, so a non-real conjugate is
+  dropped. `extended=False` reproduces Phase 103 exactly.
+* `runtime/symbolic_frames.py`, `PHASE = 104` — `convention(sol)` detects a
+  substitution reading given by the positive-root convention or holding an
+  unknown it does not print; `_two_tracks` then gives the branch set as the
+  default answer and keeps the substitution reading beside it when its own
+  script verifies, or keeps the substitution reading with the refusal noted
+  when the branch layer refuses. `read_system(..., phase=103)` is the
+  operation as Phase 103 shipped it; the Phase 98 and 103 reports read their
+  own phase, so their figures are the record.
+* A Phase 98 printing fix: a power of a radical prints `(2^(1/4))^2`, not
+  `2^(1/4)^2`.
+* `runtime/cubic_radical_report.py` (with an independent numeric count of the
+  real solutions, in fixed point, and a post hoc `exploration`), `tools cubic-radical`,
+  `tests/test_cubic_radical.py`, `RequestProject/GLM/CubicRadicals.lean`.
+
+**What it measured.** 6 of 6 algebraic and 4 of 4 radical systems with
+exactly the declared branches; 4 of 4 refusals by code; 16 of 16 scripts
+verified and 16 of 16 mutants rejected; 6 of 6 dual-track questions, each
+with the substitution answer among the branches; both planted conic
+batteries (seeds 10301 and 10401) 60 of 60 answered with the planted point
+and 0 wrong, the independent count agreeing on 119 of 120 and undecided on
+1 (Phase 103: 19 of 60); 40 of 40 cubics, 12 with three real roots. K6 not
+met: of 26 Phase 98 questions 22 are unchanged, 3 moved by the convention as
+intended, and 1 (`x^2 + x = c`) gained a stated real condition with its
+branches unchanged, where the mark declared "unchanged". 8 of 9 marks met.
+*Circle and line* now gives both points, neither unknown in terms of the
+other, and no `m ≠ 0` condition. Post hoc: 11 of 11 harder systems answered
+and verified; 100 random conic pairs (seed 777) 62 answered, 38 refused, the
+independent count agreeing on 100 of 100.
+
+**Defects found.** A non-real conjugate printed as a branch
+(`sqrt(1 - 2^(1/2))`), and the ambiguous Phase 98 radical-power print that
+made a script fail; both repaired before the marks were taken.
+
+Under directive D15 the round moves **derivation**: every real solution of
+systems the operation refused or answered by convention, computed and
+checked by the system.
+
+**Lean.** `cardano_root`, `depressed_cubic_unique_real_root`,
+`biquadratic_iff`, `even_quartic_factor`,
+`cubic_irreducible_of_no_rational_root`, `root_of_sign_change` in
+`RequestProject/GLM/CubicRadicals.lean`; no sorry, standard axioms.
+
+**Housekeeping.** The remaining tracked Python bytecode caches are untracked,
+and `__pycache__/` and `*.pyc` are ignored.
+
+---
+
+## Phase 103 — nonlinear elimination: systems in letters substitution cannot isolate
+
+**Status: closed.** Taken ahead of round 9's N5 and I3 because
+the owner asked this push to broaden the GLM's reasoning: the first limit
+named in [`studies/SYMBOLIC_PARAMETERS_STUDY.md`](studies/SYMBOLIC_PARAMETERS_STUDY.md)
+§6, a system where an unknown appears in a product or in two powers, which
+Phase 98 refuses `NONLINEAR` even when it has a closed answer. The study is
+[`studies/NONLINEAR_ELIMINATION_STUDY.md`](studies/NONLINEAR_ELIMINATION_STUDY.md);
+its cases and marks E1–E7 were committed before any code
+(`evaluation/nonlinear_cases.py`).
+
+**What was built.**
+* `reasoning/symbolic_nonlinear.py` — a second layer of the
+  `solve symbolically` operation, consulted only on a `NONLINEAR` refusal:
+  isolation through a coefficient free of unknowns, the roots of an equation
+  left in one unknown (content, the root 0, the squarefree part, rational
+  roots, then linear or quadratic: a square discriminant gives two rational
+  branches, otherwise a named generator `sqrt(R)` with `sqrt(R)^2 = R`), a
+  case split on a coefficient holding unknowns, and elimination by the
+  Sylvester resultant; every branch is checked against every original
+  equation, and the conjugate of a verified branch is a branch.
+* `runtime/symbolic_frames.py` — the reading of the branches (one column-3
+  script per branch, run together; the mutant doubles every branch's first
+  target), `solve_branches`, and `read_system(..., nonlinear=False)`, the
+  operation as Phase 98 shipped it; an even root of a negative constant is
+  now refused `NO_REAL_ROOT` (it crashed the script generator before).
+* `runtime/nonlinear_report.py`, `tools nonlinear`, `tests/test_nonlinear.py`,
+  `RequestProject/GLM/NonlinearElimination.lean`.
+
+**What it measured.** 9 of 10 declared systems answered with exactly the
+declared branches (the quadratic, a product of unknowns in numbers and in
+letters, the elastic collision, the projectile's time at a height, the
+rectangle, two quartics that split over the rationals, and two conics
+eliminated by the resultant with four extraneous pairs discarded); 5 of 5
+refusals by name; 10 of 10 scripts verified and 10 of 10 mutants rejected;
+24 of 26 Phase 98 questions unchanged, the other 2 its two `NONLINEAR`
+refusals, and Phase 98's refusal mark 8 of 8 with the layer off. E1, E5 and
+E6 not met: *circle and line* was mis-declared (Phase 98 answers it, with the
+positive root only, so the layer never sees it), and the planted battery
+answered 19 of 60 with 0 wrong — 37 refused on a cubic left by the
+resultant, 4 on a nested radical — against a declared floor of 45. 4 of 7
+marks met.
+
+**The defect the battery found.** As first written the layer isolated
+through a coefficient holding unknowns and only recorded it as nonzero; two
+planted systems lost their planted point (`(x - 1)(3x + 5 + 3y)` loses
+`x = 1`). The step now splits on the coefficient, and the marks were taken
+after the repair.
+
+Under directive D15 the round moves **derivation**: answers no register
+holds — every real solution of a nonlinear system in letters — computed and
+checked by the system, where the operation refused before.
+
+**Lean.** `quadratic_branches`, `conj` / `conj_root` / `conj_conj` /
+`conjugate_branch`, `resultant_eq_zero_of_common_root`,
+`elastic_collision_iff`, `sum_product_iff` in
+`RequestProject/GLM/NonlinearElimination.lean`; no sorry, standard axioms.
+
+**Housekeeping.** The 479 Python bytecode caches that were tracked in git
+are untracked and ignored (they changed on every run and made every commit
+carry binary churn).
+
+---
+
+## Phase 102 — the document tree as a third native book, on a frozen corpus
+
+**Status: closed.** Round 9 of the order of work, retrieval,
+continued with candidate N2: whether a section's position in the document
+tree, held as a Golay word, moves the document rankings past parity with the
+raw lexical vector, measured on a frozen copy of the corpus. The study is
+[`studies/DOCUMENT_TREE_STUDY.md`](studies/DOCUMENT_TREE_STUDY.md); its marks
+F1–F6 were committed before any measuring code, and the snapshot was taken
+after the declaration and before the measurement. Before declaring, the round
+read the benchmark's relevance relation: a section is relevant exactly when
+it shares the query's document, so the literal tree book names the answer.
+It was declared as the leak control rather than as the subject.
+
+**What was built.**
+* `reasoning/document_tree.py` — the frozen snapshot of the written corpus
+  (`reasoning/_data/document_tree_frozen.json`, 1,506 units in 136 documents,
+  digest-guarded), three Golay tree words (`path`: the document; `folder`;
+  `place`: the section's ordinal counted from both ends, capped at 7), eight
+  rankings, the census measurement and the marks.
+* `tools document-tree` (`--freeze`, `--write`), the stored measurement
+  `reasoning/_data/document_tree.json`, `tests/test_document_tree.py`,
+  `RequestProject/GLM/DocumentTree.lean`.
+
+**What it measured.** On the 1,506-query census, hit@5 / relatives in the top
+five: `lexical_raw` 323 / 414, `lexical_native2` 324 / 413, `lexical_native3`
+(the place word in the third layer) 324 / 413 — identical to
+`lexical_native2` on every query (discordance 0 : 0), 7 : 6 against the raw
+vector. The first two books tie across the top-five boundary on only 30
+queries, so a third layer has almost nothing to act on: the oracle third
+layer `path3` gains one query (325 / 414). `path_first` scores 1,506 hits at
+1 — the leak, as declared and as `separating_key_head` proves it must.
+F1 (frozen, exact, re-taken equal), F3 (the leak) and F5 (like for like) met;
+F2 not met (the one three-section document's three place words name it), F4
+not met (one relevant section behind on precision@5), F6 not met (319).
+
+N2 is closed in the negative by its ceiling. Under directive D15 the round
+moves nothing — no derivation, addressing or refusal — and says so; it leaves
+the frozen document benchmark as an instrument.
+
+**Repairs at the close.** The close found Phase 101's own close unfinished,
+and repaired it: the elaborator's reference is re-taken whenever a Lean file
+is added (it was stale under the new file); two tests that still stated the pre-repair behaviour were brought up
+to date (`test_anonymous.py`: no goal's type vocabulary moves now;
+`test_citation_scope.py`: the legacy record is compared with the stored
+headline it was taken beside); the scoped-reader fixtures are no longer read
+as citations of this development (`test_lean_address.py`); the standard
+library audit names the five standard modules it had not been told about
+(`os` and `array` for the resampling's pool and census, `collections` for the
+dependency search, `subprocess` and `tempfile` for the one run of Lean that
+takes the elaborator's reference); and the hand-typed corpus counts were moved to 173 Lean
+files and 4,601 declarations. The stored citation-scope measurement is kept as
+the Phase 101 record and not re-taken (its measuring code is unchanged, so it
+stays current).
+
+**Lean.** `separating_key_head`, `injective_word_separates`,
+`map_eq_of_perm_sorted`, `take_perm_of_gap` and `census_signs`. It has no
+`sorry`.
+
+## Phase 101 — citations read in Lean's scope, checked against the elaborator; the dependency operation
+
+**Status: closed.** At the owner's request the round took item 5
+of `STATUS.md` §3.4 together with the citation leak Phase 100 found:
+`lean_address.citation_index` resolved a bound variable such as `a`, `A` or
+`e` to a declaration with that one-letter name. The study is
+[`studies/CITATION_SCOPE_STUDY.md`](studies/CITATION_SCOPE_STUDY.md); its
+marks L1–L7 were committed before the elaborator's reference was taken, and
+the dependency operation's marks D1–D4 before any of its code.
+
+**What was built.**
+* `reasoning/lean_address.py` — the scoped reader: comments and strings
+  stripped; the names a declaration binds (binders, quantifiers, lambdas,
+  tactic introductions, match arms, `variable` lines) never read as
+  citations; a short name resolved through the enclosing namespaces and the
+  file's `open` lines in Lean's order (`resolve_in_scope`,
+  `scoped_cited_names`, `goal_citations`). `citation_graph` is that reader;
+  `legacy_citation_graph` keeps the old one as the record. The type words of
+  the carrier coordinates count whole identifiers (`type_words`).
+* `glm_lean/tools/CitationReference.lean` and
+  `reasoning/citation_reference.py` — the elaborator's own constant graph
+  (11,790 constants) stored beside the Lean tree's digest, and the audit of
+  any reader against it.
+* `reasoning/citation_scope.py`, `tools citation-scope` — the measurement,
+  with the Phase 100 reader's figures frozen as the legacy record.
+* `reasoning/proof_dependency.py`, `runtime/dependency_frames.py`,
+  `runtime/dependency_report.py`, `tools dependency` — *does A rest on B*,
+  *what does A rest on*, *what rests on A*, answered from the elaborator's
+  graph with a witness path and a column-3 script that re-checks it; refusals
+  `UNKNOWN_DECLARATION`, `AMBIGUOUS_NAME`, `REFERENCE_STALE`.
+* `tests/test_citation_scope.py`, `tests/test_proof_dependency.py`,
+  `RequestProject/GLM/CitationScope.lean`.
+
+**What it measured.**
+* L1–L3: precision against the elaborator 99.1 % (9,834 of 9,920 edges)
+  against 52.1 % for the legacy reader (7,795 of 14,949); visible recall
+  90.9 % against 71.9 %; edges into the ten one-letter declarations that the
+  elaborator does not confirm 4 against 3,162.
+* L4: goals that lose a structural coordinate under anonymisation 0 of 836
+  (41 before).
+* L5, L6: every Lean-corpus retrieval figure re-taken under the repaired
+  relevance, the legacy figures kept. Address hits at 1/3/5/10 on 209
+  declaration queries 41/64/77/89 → 54/70/79/101, features at 5 75 → 84, text
+  178 → 177. Every qualitative verdict survives; the resampling's one effect
+  holds (95.3 % and 95.5 %, census 227 : 29) and M5 falls from 12,541 to
+  1,881 (largest 343). Native parity: N6 missed by one goal query; native
+  words: W2 and W6 missed by one query at k = 1 — draws, as Phase 100's
+  resampling had called them; W2's goal pin was released.
+* L7: the Lean file, no sorry.
+* D1 not met as declared: 7 of 12 questions answered, 0 wrong, 5 refused
+  `AMBIGUOUS_NAME` (`resolve`, `candidates` are short names of two
+  declarations each). Read in the scope of the other name of the question —
+  as Lean would read it — 12 of 12. D2 (every answer's gate passes, 15 of 15
+  mutations rejected), D3 (the refusals) and D4 (the earlier frames
+  unchanged) met.
+
+7 of 7 L marks met; D1 met only after the repair. Under directive D15 it
+moved the reasoning faculty: the machine answers a new kind of question
+about its own Lean development, with a checkable witness.
+
+**Lean.** `resolve_bound`, `resolve_mem`, `resolve_first`, `cites_mem`,
+`cites_ne_self`, `cites_antitone`, `legacy_reads_bound_variable`,
+`scoped_ignores_bound_variable`, `scoped_reads_in_scope`,
+`typeCount_rename` and `infixCount_not_rename_invariant`. It has no `sorry`.
+
 ## Phase 100 — the declared resampling: which retrieval leads are effects and which are draws
 
-**Status: closed this round.** Round 9 of the order of work, retrieval, took
+**Status: closed.** Round 9 of the order of work, retrieval, took
 its first item, candidate N1. The study of the round is
 [`studies/CORPUS_RESAMPLE_STUDY.md`](studies/CORPUS_RESAMPLE_STUDY.md); its
 two families, ten readings, rule and marks M1–M7 were committed before any
@@ -3161,7 +4955,7 @@ remaining, the release. Running it failed six units, none of them noise:
 
 **What the release now says.** `signoff --verify-release` reports **99 of 99
 test files and 7 of 7 instruments** signed with the exhaustive cases on; the
-suite is **<!--figure:suite-->4,975 tests across 145 of the 146 test files, 18,072 subtests, outside the document check<!--/figure-->**,
+suite is **<!--figure:suite-->5,334 tests across 175 of the 177 test files, 18,873 subtests, outside the document checks<!--/figure-->**,
 one process with `GLM_EXHAUSTIVE=1` collecting 3,979; the end-to-end
 evaluation is **157 / 157** with 19 expected refusals; `corpus --check` is
 current; and `lake build` is clean over 120 Lean files with no `sorry`.

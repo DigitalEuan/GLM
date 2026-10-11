@@ -55,8 +55,14 @@ _COMMAND = rules.PROJECT_ROOT / "glm_universal" / "corpus" / "__main__.py"
 
 
 def _closure() -> Iterable[Path]:
-    """Every file the documents check can read."""
-    return rules.unit_closure(_COMMAND)
+    """Every file the documents check can read.
+
+    The ledger's closure of the command, plus every written document: the
+    check walks the whole corpus, so it reads a document by its being there
+    rather than by a module naming it (:func:`rules.written_documents`).
+    """
+    return tuple(sorted(set(rules.unit_closure(_COMMAND))
+                        | set(rules.written_documents())))
 
 
 def inputs_digest() -> str:

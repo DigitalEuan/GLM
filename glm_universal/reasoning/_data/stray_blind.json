@@ -1,0 +1,241 @@
+{
+ "agree_everywhere": true,
+ "common_radius_everywhere": true,
+ "holes": 10,
+ "lean": "RequestProject/GLM/StrayBlind.lean",
+ "rows": [
+  {
+   "agree": true,
+   "common_radius": true,
+   "declared": true,
+   "measured": [
+    [
+     "A_1^24",
+     "A_2^12"
+    ]
+   ],
+   "minima": {
+    "A_12^2": {
+     "__fraction__": "16/1"
+    },
+    "A_1^24": {
+     "__fraction__": "16/1"
+    },
+    "A_2^12": {
+     "__fraction__": "16/1"
+    },
+    "D_10 E_7^2": {
+     "__fraction__": "16/1"
+    },
+    "D_16 E_8": {
+     "__fraction__": "16/1"
+    },
+    "D_24": {
+     "__fraction__": "16/1"
+    },
+    "D_6^4": {
+     "__fraction__": "16/1"
+    },
+    "D_8^3": {
+     "__fraction__": "16/1"
+    },
+    "E_6^4": {
+     "__fraction__": "16/1"
+    },
+    "E_8^3": {
+     "__fraction__": "16/1"
+    }
+   },
+   "predicted": [
+    [
+     "A_1^24",
+     "A_2^12"
+    ]
+   ],
+   "radius": {
+    "__fraction__": "16/1"
+   },
+   "rho_defined": false,
+   "starts": 240,
+   "stray_free": [
+    "A_1^24",
+    "A_2^12"
+   ]
+  },
+  {
+   "agree": true,
+   "common_radius": true,
+   "declared": true,
+   "measured": [
+    [
+     "A_1^24",
+     "A_2^12"
+    ]
+   ],
+   "minima": {
+    "A_12^2": {
+     "__fraction__": "16/1"
+    },
+    "A_1^24": {
+     "__fraction__": "16/1"
+    },
+    "A_2^12": {
+     "__fraction__": "16/1"
+    },
+    "D_10 E_7^2": {
+     "__fraction__": "16/1"
+    },
+    "D_16 E_8": {
+     "__fraction__": "16/1"
+    },
+    "D_24": {
+     "__fraction__": "16/1"
+    },
+    "D_6^4": {
+     "__fraction__": "16/1"
+    },
+    "D_8^3": {
+     "__fraction__": "16/1"
+    },
+    "E_6^4": {
+     "__fraction__": "16/1"
+    },
+    "E_8^3": {
+     "__fraction__": "16/1"
+    }
+   },
+   "predicted": [
+    [
+     "A_1^24",
+     "A_2^12"
+    ]
+   ],
+   "radius": {
+    "__fraction__": "16/1"
+   },
+   "rho_defined": false,
+   "starts": 480,
+   "stray_free": [
+    "A_1^24",
+    "A_2^12"
+   ]
+  },
+  {
+   "agree": true,
+   "common_radius": true,
+   "declared": true,
+   "measured": [
+    [
+     "A_1^24",
+     "A_2^12"
+    ]
+   ],
+   "minima": {
+    "A_12^2": {
+     "__fraction__": "16/1"
+    },
+    "A_1^24": {
+     "__fraction__": "16/1"
+    },
+    "A_2^12": {
+     "__fraction__": "16/1"
+    },
+    "D_10 E_7^2": {
+     "__fraction__": "16/1"
+    },
+    "D_16 E_8": {
+     "__fraction__": "16/1"
+    },
+    "D_24": {
+     "__fraction__": "16/1"
+    },
+    "D_6^4": {
+     "__fraction__": "16/1"
+    },
+    "D_8^3": {
+     "__fraction__": "16/1"
+    },
+    "E_6^4": {
+     "__fraction__": "16/1"
+    },
+    "E_8^3": {
+     "__fraction__": "16/1"
+    }
+   },
+   "predicted": [
+    [
+     "A_1^24",
+     "A_2^12"
+    ]
+   ],
+   "radius": {
+    "__fraction__": "16/1"
+   },
+   "rho_defined": false,
+   "starts": 960,
+   "stray_free": [
+    "A_1^24",
+    "A_2^12"
+   ]
+  },
+  {
+   "agree": true,
+   "common_radius": true,
+   "declared": false,
+   "measured": [
+    [
+     "A_1^24",
+     "A_2^12"
+    ]
+   ],
+   "minima": {
+    "A_12^2": {
+     "__fraction__": "16/1"
+    },
+    "A_1^24": {
+     "__fraction__": "16/1"
+    },
+    "A_2^12": {
+     "__fraction__": "16/1"
+    },
+    "D_10 E_7^2": {
+     "__fraction__": "16/1"
+    },
+    "D_16 E_8": {
+     "__fraction__": "16/1"
+    },
+    "D_24": {
+     "__fraction__": "16/1"
+    },
+    "D_6^4": {
+     "__fraction__": "16/1"
+    },
+    "D_8^3": {
+     "__fraction__": "16/1"
+    },
+    "E_6^4": {
+     "__fraction__": "16/1"
+    },
+    "E_8^3": {
+     "__fraction__": "16/1"
+    }
+   },
+   "predicted": [
+    [
+     "A_1^24",
+     "A_2^12"
+    ]
+   ],
+   "radius": {
+    "__fraction__": "16/1"
+   },
+   "rho_defined": false,
+   "starts": 1920,
+   "stray_free": [
+    "A_1^24",
+    "A_2^12"
+   ]
+  }
+ ],
+ "source_digest": "839dcdcaa6df4eca316c82290db3110cdf4e20845a101ac9b8d2fecd299e1ae6"
+}
