@@ -44,6 +44,8 @@ __all__ = [
     "BUDGET", "idempotence", "drift", "reconcile_program", "run_pipeline",
     "unreachable_lines", "ladder_profile", "render_line", "uses_undefined",
     "files_written", "COMMANDS", "inert_variables", "is_closed_inert",
+    "counters", "first_change", "jumped_run", "plain_run", "MAX_JUMPS",
+    "AFFINE_OUTPUT_CAP", "growth_diagnosis", "GROWTH_WINDOW",
 ]
 
 #: Steps a run may take before the machine refuses to say whether it halts.
@@ -759,6 +761,17 @@ class Run:
     undefined: Tuple[str, ...] = ()
     controls: Tuple[Tuple, ...] = field(default=(), repr=False)
     forgotten: Tuple[str, ...] = ()  # inert names left out of the certificate
+    #: Phase 130: the passes jumped, ``(i, j, m, d, line, w)`` -- the pass
+    #: from step ``i`` to step ``j`` adds ``d`` to the counters and was taken
+    #: ``m`` times, until the test on ``line`` changed; it writes ``w`` lines
+    #: (Phase 131; 0 under Phase 130's reading, which jumps no writing pass).
+    jumps: Tuple[Tuple, ...] = ()
+    #: Phase 130: for a ``never`` verdict by a counter lasso, the pass's ``d``.
+    lasso: Tuple[Tuple[str, int], ...] = ()
+    #: Phase 132: for an ``undecided`` jumped run, why no jump was taken:
+    #: ``("no_recurrence",)``, ``("line", n)``, ``("cap", lines)`` or
+    #: ``("jumps",)``.
+    blocked: Tuple = ()
 
     @property
     def halted(self) -> bool:
@@ -774,7 +787,8 @@ def run_program(program: Sequence[object], env: Optional[Mapping[str, str]] = No
                 files: Optional[Mapping[str, Sequence[str]]] = None,
                 dirs: Sequence[str] = (), budget: int = BUDGET,
                 keep_controls: bool = False, inert: bool = True,
-                forget: Sequence[str] = ()) -> Run:
+                forget: Sequence[str] = (), jump: bool = True,
+                extended: bool = True, affine: bool = True) -> Run:
     """Run a parsed program from the given environment and files.
 
     The control state is recorded *before* each step; the first recurrence
@@ -784,17 +798,59 @@ def run_program(program: Sequence[object], env: Optional[Mapping[str, str]] = No
     control state (``inert``, Phase 126); a recurrence there ends it as
     ``never`` with the forgotten names in ``Run.forgotten``.  ``forget``
     names the variables to leave out directly (the re-reading itself).
+    If both readings are undecided, the run is read a third time with the
+    counters masked (:func:`jumped_run`, ``jump``, Phase 130); ``extended``
+    adds Phase 131's constant operands and writing passes to that reading,
+    and ``affine`` (which needs ``extended``) Phase 132's passes that write a
+    counter and its output bound of :data:`AFFINE_OUTPUT_CAP` lines.
     """
     first = _run(program, env, files, dirs, budget, keep_controls,
                  frozenset(n.upper() for n in forget))
     if first.status != "undecided" or not inert or forget:
         return first
     names = inert_variables(program)
-    if not names:
+    if names:
+        second = _run(program, env, files, dirs, budget, keep_controls,
+                      frozenset(names))
+        if second.status == "never":
+            return second
+    if not jump:
         return first
-    second = _run(program, env, files, dirs, budget, keep_controls,
-                  frozenset(names))
-    return second if second.status == "never" else first
+    third = jumped_run(program, env, files, dirs, budget, extended=extended,
+                       affine=affine)
+    return third if third.status != "undecided" else first
+
+
+def _exec_step(program: Sequence[object], labels: Mapping[str, int],
+               ctx: _Ctx, pc: int, stack: Tuple[int, ...]
+               ) -> Tuple[int, Tuple[int, ...], Optional[int]]:
+    """Execute the instruction at ``pc``: ``(next pc, next stack, exit code
+    if the run halts here else None)``."""
+    ins = program[pc]
+    if isinstance(ins, (Label, Rem)):
+        return pc + 1, stack, None
+    _ok, effect = _run_stmt(ins, ctx, {})
+    if effect is None:
+        return pc + 1, stack, None
+    kind, arg = effect
+    if kind == "exit":
+        ctx.errorlevel = arg
+        return pc, stack, arg
+    if kind == "exitb" or (kind == "goto" and arg == ":EOF"):
+        if kind == "exitb" and arg is not None:
+            ctx.errorlevel = arg
+        if stack:
+            return stack[-1], stack[:-1], None
+        return pc, stack, ctx.errorlevel
+    target = labels.get(str(arg).upper())
+    if target is None:
+        ctx.err.append("The system cannot find the batch label specified "
+                       f"- {arg}")
+        ctx.errorlevel = 1
+        return pc, stack, 1
+    if kind == "call":
+        stack = stack + (pc + 1,)
+    return target + 1, stack, None
 
 
 def _run(program: Sequence[object], env: Optional[Mapping[str, str]],
@@ -825,37 +881,10 @@ def _run(program: Sequence[object], env: Optional[Mapping[str, str]],
             break
         steps += 1
         trace.append(pc + 1)
-        ins = program[pc]
-        if isinstance(ins, (Label, Rem)):
-            pc += 1
-            continue
-        _ok, effect = _run_stmt(ins, ctx, {})
-        if effect is None:
-            pc += 1
-            continue
-        kind, arg = effect
-        if kind == "exit":
-            ctx.errorlevel = arg
-            exit_code, status = arg, "halted"
+        pc, stack, code = _exec_step(program, labels, ctx, pc, stack)
+        if code is not None:
+            exit_code, status = code, "halted"
             break
-        if kind == "exitb" or (kind == "goto" and arg == ":EOF"):
-            if kind == "exitb" and arg is not None:
-                ctx.errorlevel = arg
-            if stack:
-                pc, stack = stack[-1], stack[:-1]
-                continue
-            exit_code, status = ctx.errorlevel, "halted"
-            break
-        target = labels.get(str(arg).upper())
-        if target is None:
-            ctx.err.append("The system cannot find the batch label specified "
-                           f"- {arg}")
-            ctx.errorlevel = 1
-            exit_code, status = 1, "halted"
-            break
-        if kind == "call":
-            stack = stack + (pc + 1,)
-        pc = target + 1
     return Run(status, steps, tuple(ctx.out), tuple(ctx.err), exit_code,
                dict(ctx.env), dict(ctx.files), tuple(sorted(ctx.dirs)),
                tuple(trace), cert, tuple(dict.fromkeys(ctx.undefined)),
@@ -917,6 +946,437 @@ def inert_variables(program: Sequence[object]) -> Tuple[str, ...]:
                 F -= hit
                 changed = True
     return tuple(sorted(F))
+
+
+# ---------------------------------------------------------------------------
+# Counter lassos (Phase 130, studies/COUNTER_LASSO_STUDY.md section 2)
+# ---------------------------------------------------------------------------
+
+#: Jumps one jumped run may take.
+MAX_JUMPS = 100
+
+#: Phase 131: the most lines (standard output and standard error together) a
+#: run may hold after a jump over a writing pass.
+OUTPUT_CAP = 100_000
+
+#: Phase 132: the same bound under the affine reading
+#: (``studies/AFFINE_OUTPUT_STUDY.md`` section 2).
+AFFINE_OUTPUT_CAP = 1_000_000
+
+#: What a counter's canonical integer value is replaced by in the masked
+#: state.
+_INT_TAG = "\x00int"
+
+_CMP_TRUTH = {"EQU": lambda e: e == 0, "NEQ": lambda e: e != 0,
+              "LSS": lambda e: e < 0, "LEQ": lambda e: e <= 0,
+              "GTR": lambda e: e > 0, "GEQ": lambda e: e >= 0}
+
+
+def _counter_update(ins: object) -> Optional[Tuple[str, int]]:
+    """``(V, k)`` when ``ins`` is a lone ``SET /A V=V+k`` or ``SET /A
+    V=V-k`` with ``k`` a decimal literal; otherwise ``None``."""
+    if not isinstance(ins, Cmd) or ins.redirs or ins.name != "SETA":
+        return None
+    m = re.match(rf"^({_NAME})([+-])(\d+)$", ins.args[1])
+    name = ins.args[0].upper()
+    if m is None or m.group(1).upper() != name or name == "ERRORLEVEL":
+        return None
+    k = int(m.group(3))
+    return name, (k if m.group(2) == "+" else -k)
+
+
+def counters(program: Sequence[object]) -> Tuple[str, ...]:
+    """The counters of a program, sorted (section 2 of the study)."""
+    return tuple(sorted({u[0] for u in map(_counter_update, program) if u}))
+
+
+def _canonical(value: Optional[str]) -> bool:
+    return value is not None and re.match(r"^-?\d+$", value) is not None \
+        and str(int(value)) == value
+
+
+def _masked(ctx: _Ctx, pc: int, stack: Tuple[int, ...],
+            names: Sequence[str]) -> Tuple:
+    env = tuple(sorted((k, _INT_TAG if k in names and _canonical(v) else v)
+                       for k, v in ctx.env.items()))
+    return (pc, env, tuple(sorted(ctx.files.items())),
+            tuple(sorted(ctx.dirs)), stack, ctx.errorlevel)
+
+
+def _has_for(s: object) -> bool:
+    if isinstance(s, For):
+        return True
+    if isinstance(s, If):
+        return _has_for(s.body)
+    if isinstance(s, Chain):
+        return _has_for(s.left) or _has_for(s.right)
+    return False
+
+
+def _operand(text: str, live: Sequence[str],
+             consts: Optional[Mapping[str, Optional[str]]] = None
+             ) -> Optional[Tuple[str, int]]:
+    """``(counter, 0)`` for ``%V%`` with ``V`` live, ``("", n)`` for a decimal
+    integer literal, ``None`` otherwise.  With ``consts`` (Phase 131), also
+    ``("", n)`` for ``%L%`` with ``L`` not live, not ``ERRORLEVEL``, and
+    bound at this step to the canonical integer ``n``
+    (``GLM.ConstantBound.const_bound_linear``)."""
+    m = re.match(rf"^%({_NAME})%$", text)
+    if m and m.group(1).upper() in live:
+        return m.group(1).upper(), 0
+    if m and consts is not None:
+        name = m.group(1).upper()
+        if name != "ERRORLEVEL" and _canonical(consts.get(name)):
+            return "", int(consts[name])
+    if re.match(r"^-?\d+$", text):
+        return "", int(text)
+    return None
+
+
+def _operand_names(ins: object) -> Tuple[str, ...]:
+    """The names ``L`` of the operands ``%L%`` of a comparison."""
+    if not isinstance(ins, If) or ins.cond[0] != "cmp":
+        return ()
+    out = []
+    for text in (ins.cond[1], ins.cond[3]):
+        m = re.match(rf"^%({_NAME})%$", text)
+        if m:
+            out.append(m.group(1).upper())
+    return tuple(out)
+
+
+def _line_kind(ins: object, live: Sequence[str],
+               consts: Optional[Mapping[str, Optional[str]]] = None) -> str:
+    """How a line may sit on a pass: ``free`` (label, remark, or no live
+    counter mentioned), ``add``, ``test``, ``echo`` (output only, for a
+    *never* verdict), or ``no``."""
+    if isinstance(ins, (Label, Rem)):
+        return "free"
+    line = render_line(ins)
+    if re.search(r"\bFOR\b", line, re.IGNORECASE) or _has_for(ins):
+        return "no"
+    mentioned = [n for n in live if _mentions(line, n)]
+    if not mentioned:
+        return "free"
+    upd = _counter_update(ins)
+    if upd and upd[0] in live:
+        return "add"
+    if isinstance(ins, If) and ins.cond[0] == "cmp":
+        a, b = (_operand(ins.cond[1], live, consts),
+                _operand(ins.cond[3], live, consts))
+        body = render_line(ins.body)
+        if a and b and not any(_mentions(body, n) for n in live) \
+                and not _has_for(ins.body):
+            return "test"
+    if isinstance(ins, Cmd) and ins.name == "ECHO" and not ins.redirs \
+            and not re.search(r"[<>|&]", line):
+        return "echo"
+    return "no"
+
+
+def first_change(e0: int, b: int, op: str) -> Optional[int]:
+    """The least ``m >= 1`` with ``e0 + b*m OP 0`` other than at ``m = 0``,
+    or ``None``.  The sign of ``e0 + b*m`` is constant on each side of
+    ``-e0/b`` (``GLM.CounterLasso.linear_neg_stable``,
+    ``linear_nonneg_stable``, ``linear_zero_unique``), so the first change is
+    ``1`` or one of the two integers just past ``-e0/b``."""
+    truth = _CMP_TRUTH[op]
+    t0 = truth(e0)
+    if b == 0:
+        return None
+    fl = (-e0) // b
+    for m in sorted({1, fl, fl + 1, fl + 2}):
+        if m >= 1 and truth(e0 + b * m) != t0:
+            return m
+    return None
+
+
+@dataclass(frozen=True)
+class _Snap:
+    step: int                      # the global step this state is before
+    pc: int
+    values: Tuple[Tuple[str, Optional[str]], ...]
+    out: int
+    err: int
+    #: Phase 131: the values of the comparison's operand names at this step.
+    consts: Tuple[Tuple[str, Optional[str]], ...] = ()
+    #: Phase 132: for an ``ECHO`` line, its text as a template -- literal
+    #: pieces, and ``(name,)`` for a hole naming a counter.
+    tmpl: Optional[Tuple[object, ...]] = None
+
+
+def _template(ctx: _Ctx, text: str, names: Sequence[str]) -> Tuple[object, ...]:
+    """The text of an ``ECHO`` as a template (``GLM.AffineOutput.render``):
+    each ``%V%`` with ``V`` a counter is a hole ``(V,)``; every other
+    ``%X%`` is its value now, read as :meth:`_Ctx.expand` reads it but
+    without recording an undefined read; the rest is literal."""
+    parts: List[object] = []
+    pos = 0
+    for m in _VAR.finditer(text):
+        parts.append(text[pos:m.start()])
+        name = m.group(1).upper()
+        if name in names:
+            parts.append((name,))
+        elif name in ctx.env:
+            parts.append(ctx.env[name])
+        elif name == "ERRORLEVEL":
+            parts.append(str(ctx.errorlevel))
+        else:
+            parts.append("")
+        pos = m.end()
+    parts.append(text[pos:])
+    return tuple(parts)
+
+
+def _render(tmpl: Sequence[object], values: Mapping[str, int]) -> str:
+    """A template with each hole filled by its counter's value."""
+    return "".join(str(values[p[0]]) if isinstance(p, tuple) else p
+                   for p in tmpl)
+
+
+def _snap(ctx: _Ctx, step: int, pc: int, names: Sequence[str],
+          program: Sequence[object] = (), extended: bool = False,
+          affine: bool = False) -> _Snap:
+    consts: Tuple[Tuple[str, Optional[str]], ...] = ()
+    tmpl = None
+    if extended and pc < len(program):
+        consts = tuple((n, ctx.env.get(n)) for n in _operand_names(program[pc]))
+        ins = program[pc]
+        if affine and isinstance(ins, Cmd) and ins.name == "ECHO" \
+                and not ins.redirs:
+            tmpl = _template(ctx, ins.args[0], names)
+    return _Snap(step, pc, tuple((n, ctx.env.get(n)) for n in names),
+                 len(ctx.out), len(ctx.err), consts, tmpl)
+
+
+def _read_pass(program: Sequence[object], names: Sequence[str],
+               hist: Sequence[_Snap], end: _Snap,
+               extended: bool = False,
+               why: Optional[List[int]] = None) -> Optional[Dict[str, object]]:
+    """Read the pass ``hist[0] -> end``: ``None`` if it is not admissible,
+    else its ``d``, its first change ``m`` (or ``None``), the line of the test
+    that changes first, whether it writes output, and whether a line on it
+    writes a counter (``echoes``).  ``extended`` reads constant operands
+    (Phase 131)."""
+    start = dict(hist[0].values)
+    stop = dict(end.values)
+    live = tuple(n for n in names if _canonical(start.get(n)))
+    d = {n: int(stop[n]) - int(start[n]) for n in live}
+    best: Optional[Tuple[int, int]] = None
+    echoes = False
+    for snap in hist:
+        ins = program[snap.pc]
+        consts = dict(snap.consts) if extended else None
+        kind = _line_kind(ins, live, consts)
+        if kind == "no":
+            if why is not None:
+                why.append(snap.pc + 1)
+            return None
+        if kind == "echo":
+            echoes = True
+        if kind != "test":
+            continue
+        vals = dict(snap.values)
+        (na, ka), (nb, kb) = (_operand(ins.cond[1], live, consts),
+                              _operand(ins.cond[3], live, consts))
+        a = int(vals[na]) if na else ka
+        bv = int(vals[nb]) if nb else kb
+        slope = (d[na] if na else 0) - (d[nb] if nb else 0)
+        m = first_change(a - bv, slope, ins.cond[2])
+        if m is not None and (best is None or m < best[0]):
+            best = (m, snap.pc + 1)
+    writes = echoes or end.out != hist[0].out or end.err != hist[0].err
+    # Phase 132: the counters the echo lines name, and whether every hole of
+    # every echo template names a live counter.
+    named: set = set()
+    holes_live = True
+    for snap in hist:
+        if snap.tmpl is not None and _line_kind(
+                program[snap.pc], live,
+                dict(snap.consts) if extended else None) == "echo":
+            for part in snap.tmpl:
+                if isinstance(part, tuple):
+                    named.add(part[0])
+                    holes_live = holes_live and part[0] in live
+        elif _line_kind(program[snap.pc], live,
+                        dict(snap.consts) if extended else None) == "echo":
+            holes_live = False
+    first_echo = next((s.pc + 1 for s in hist if _line_kind(
+        program[s.pc], live, dict(s.consts) if extended else None) == "echo"),
+        None)
+    return {"d": tuple(sorted(d.items())), "live": live,
+            "m": best[0] if best else None,
+            "line": best[1] if best else None, "writes": writes,
+            "echoes": echoes, "named": tuple(sorted(named)),
+            "holes_live": holes_live, "first_echo": first_echo}
+
+
+def jumped_run(program: Sequence[object],
+               env: Optional[Mapping[str, str]] = None,
+               files: Optional[Mapping[str, Sequence[str]]] = None,
+               dirs: Sequence[str] = (), budget: int = BUDGET,
+               max_jumps: int = MAX_JUMPS, extended: bool = True,
+               affine: bool = True) -> Run:
+    """The third reading (Phase 130): run with the counters masked; at each
+    first recurrence of the masked state read the pass, and either certify
+    that the run never halts (no test on the pass ever changes), or jump the
+    passes up to the first change (``GLM.CounterLasso.lasso_accelerate``)
+    when the pass writes no output, or go on.  At most ``budget`` concrete
+    steps and ``max_jumps`` jumps.
+
+    ``extended`` (Phase 131, ``studies/CONSTANT_BOUND_STUDY.md`` section 2)
+    reads a comparison with a non-counter bound at that step as a literal,
+    and jumps a writing pass none of whose lines writes a counter, appending
+    its blocks ``m - 1`` times (``GLM.ConstantBound.lasso_output``) while the
+    output stays within :data:`OUTPUT_CAP` lines.
+
+    ``affine`` (Phase 132, ``studies/AFFINE_OUTPUT_STUDY.md`` section 2, needs
+    ``extended``) also jumps a pass whose ``ECHO`` lines name live counters:
+    each such line is a template, and skipped pass ``t`` writes it with every
+    hole filled by the counter's value at that step plus ``t`` times its step
+    (``GLM.AffineOutput.templated_block``, ``lasso_output_affine``); the
+    bound is then :data:`AFFINE_OUTPUT_CAP` lines.  An undecided run records
+    in ``Run.blocked`` why it took no further jump."""
+    affine = affine and extended
+    cap = AFFINE_OUTPUT_CAP if affine else OUTPUT_CAP
+    ctx = _Ctx(env or {}, files or {}, dirs)
+    labels = _labels(program)
+    names = counters(program)
+    pc, stack = 0, ()
+    seen: Dict[Tuple, int] = {}
+    hist: List[_Snap] = []
+    trace: List[int] = []
+    jumps: List[Tuple] = []
+    steps = offset = 0
+    exit_code: Optional[int] = None
+    status = "undecided"
+    cert = None
+    lasso: Tuple = ()
+    blocked: Tuple = ("no_recurrence",)
+    while True:
+        if pc >= len(program):
+            exit_code, status = ctx.errorlevel, "halted"
+            break
+        state = _masked(ctx, pc, stack, names)
+        snap = _snap(ctx, steps + offset, pc, names, program, extended, affine)
+        if state in seen and names:
+            k = seen[state]
+            why: List[int] = []
+            read = _read_pass(program, names, hist[k:], snap, extended, why)
+            if read is not None and read["m"] is None:
+                status, cert = "never", (hist[k].step, snap.step)
+                lasso = read["d"]
+                break
+            block_out = ctx.out[hist[k].out:snap.out]
+            block_err = ctx.err[hist[k].err:snap.err]
+            width = len(block_out) + len(block_err)
+            if read is None:
+                blocked = ("line", why[0] if why else None)
+                jumpable = False
+            elif not read["writes"]:
+                jumpable = True
+            elif not extended or (read["echoes"] and not (
+                    affine and read["holes_live"])):
+                blocked = ("line", read["first_echo"])
+                jumpable = False
+            elif len(ctx.out) + len(ctx.err) + (read["m"] - 1) * width > cap:
+                blocked = ("cap", cap)
+                jumpable = False
+            else:
+                jumpable = True
+            if jumpable and len(jumps) >= max_jumps:
+                blocked = ("jumps",)
+            if jumpable and len(jumps) < max_jumps:
+                m = read["m"]
+                if m > 1:
+                    start = dict(hist[k].values)
+                    d = dict(read["d"])
+                    length = snap.step - hist[k].step
+                    if read["echoes"]:
+                        # Pass t writes the first pass's lines, each echo
+                        # line read from its template at the counters
+                        # translated by t * d (GLM.AffineOutput).
+                        span = hist[k:] + [snap]
+                        steps_out = []
+                        for r in range(len(span) - 1):
+                            a, b = span[r], span[r + 1]
+                            lines_out = ctx.out[a.out:b.out]
+                            lines_err = ctx.err[a.err:b.err]
+                            tmpl = a.tmpl if a.tmpl is not None and any(
+                                isinstance(p, tuple) for p in a.tmpl) else None
+                            vals = {n: int(v) for n, v in a.values
+                                    if n in d}
+                            if tmpl is not None and (
+                                    lines_out != [_render(tmpl, vals)]
+                                    or lines_err):
+                                raise AssertionError(  # pragma: no cover
+                                    "an echo line wrote other than its "
+                                    "template")
+                            steps_out.append((tmpl, vals, lines_out, lines_err))
+                        for t in range(1, m):
+                            for tmpl, vals, lines_out, lines_err in steps_out:
+                                if tmpl is None:
+                                    ctx.out.extend(lines_out)
+                                    ctx.err.extend(lines_err)
+                                else:
+                                    ctx.out.append(_render(tmpl, {
+                                        n: v + t * d[n]
+                                        for n, v in vals.items()}))
+                    elif width:
+                        ctx.out.extend(block_out * (m - 1))
+                        ctx.err.extend(block_err * (m - 1))
+                    for n, dn in read["d"]:
+                        ctx.env[n] = str(int(start[n]) + m * dn)
+                    jumps.append((hist[k].step, snap.step, m, read["d"],
+                                  read["line"], width, read["named"]))
+                    offset += (m - 1) * length
+                seen, hist = {}, []
+                continue
+        seen[state] = len(hist)
+        hist.append(snap)
+        if steps >= budget:
+            break
+        steps += 1
+        trace.append(pc + 1)
+        pc, stack, code = _exec_step(program, labels, ctx, pc, stack)
+        if code is not None:
+            exit_code, status = code, "halted"
+            break
+    return Run(status, steps + offset, tuple(ctx.out), tuple(ctx.err),
+               exit_code, dict(ctx.env), dict(ctx.files),
+               tuple(sorted(ctx.dirs)), tuple(trace), cert,
+               tuple(dict.fromkeys(ctx.undefined)), (), (),
+               tuple(jumps) if status != "undecided" else (), lasso,
+               blocked if status == "undecided" else ())
+
+
+def plain_run(program: Sequence[object],
+              env: Optional[Mapping[str, str]] = None,
+              files: Optional[Mapping[str, Sequence[str]]] = None,
+              dirs: Sequence[str] = (), budget: int = BUDGET) -> Run:
+    """Run without any certificate: ``halted`` or ``undecided`` after
+    ``budget`` steps.  The soundness control (mark C6) of the study."""
+    ctx = _Ctx(env or {}, files or {}, dirs)
+    labels = _labels(program)
+    pc, stack = 0, ()
+    steps = 0
+    exit_code: Optional[int] = None
+    status = "undecided"
+    while steps < budget:
+        if pc >= len(program):
+            exit_code, status = ctx.errorlevel, "halted"
+            break
+        steps += 1
+        pc, stack, code = _exec_step(program, labels, ctx, pc, stack)
+        if code is not None:
+            exit_code, status = code, "halted"
+            break
+    else:
+        if pc >= len(program):
+            exit_code, status = ctx.errorlevel, "halted"
+    return Run(status, steps, tuple(ctx.out), tuple(ctx.err), exit_code,
+               dict(ctx.env), dict(ctx.files), tuple(sorted(ctx.dirs)), (),
+               None, tuple(dict.fromkeys(ctx.undefined)))
 
 
 def uses_undefined(run: Run) -> bool:
@@ -1131,3 +1591,154 @@ def ladder_profile(program: Sequence[object]) -> Tuple[str, ...]:
             _profile_stmt(ins, used)
     order = [t for t in ol.term_ids() if t in used]
     return tuple(order)
+
+
+# ---------------------------------------------------------------------------
+# The diagnosis of a refusal (Phase 132, studies/AFFINE_OUTPUT_STUDY.md s. 2)
+# ---------------------------------------------------------------------------
+
+#: Visits of the loop head the diagnosis reads.
+GROWTH_WINDOW = 32
+
+#: Fewer visits than this and there is no loop to diagnose.
+_MIN_VISITS = 8
+
+
+def growth_shape(values: Sequence[int]) -> Tuple[str, Optional[int]]:
+    """The shape of an integer sequence that is not constant, by exact
+    differences: ``("translation", d)`` (``GLM.AffineOutput.
+    const_diff_closed_form``), ``("quadratic", c)`` (``const_second_diff_
+    closed_form``, ``c != 0``), ``("geometric", r)`` (``const_ratio_closed_
+    form``, non-zero values), or ``("irregular", None)``."""
+    d1 = [b - a for a, b in zip(values, values[1:])]
+    if len(set(d1)) == 1:
+        return "translation", d1[0]
+    d2 = [b - a for a, b in zip(d1, d1[1:])]
+    if len(d2) >= 1 and len(set(d2)) == 1 and d2[0] != 0:
+        return "quadratic", d2[0]
+    if all(v != 0 for v in values) and values[1] % values[0] == 0:
+        r = values[1] // values[0]
+        if all(b == r * a for a, b in zip(values, values[1:])):
+            return "geometric", r
+    return "irregular", None
+
+
+def predict(shape: Tuple[str, Optional[int]], values: Sequence[int],
+            ahead: int) -> List[int]:
+    """The next ``ahead`` values the closed form of ``shape`` gives from the
+    window ``values`` (mark A6 of the study)."""
+    kind, p = shape
+    t0 = len(values) - 1
+    x0 = values[0]
+    if kind == "translation":
+        return [x0 + (t0 + s) * p for s in range(1, ahead + 1)]
+    if kind == "quadratic":
+        d0 = values[1] - values[0]
+        out = []
+        for s in range(1, ahead + 1):
+            t = t0 + s
+            out.append((2 * x0 + 2 * t * d0 + p * t * (t - 1)) // 2)
+        return out
+    if kind == "geometric":
+        return [x0 * p ** (t0 + s) for s in range(1, ahead + 1)]
+    raise ValueError(kind)
+
+
+def line_nrci(values: Sequence[int]):
+    """The NRCI ``1 - sqrt(sum r^2 / sum x^2)`` of the least-squares straight
+    line through ``values`` at ``t = 0, 1, ...`` (the definition written down
+    in Phase 29), as ``(ratio, micro)`` with ``ratio = sum r^2 / sum x^2`` an
+    exact :class:`~fractions.Fraction` and ``micro`` the NRCI in millionths,
+    rounded to the nearest from an integer square root (no float is formed;
+    :func:`nrci_decimal` prints it); ``None`` when every value is 0.  A diagnosis only: nothing decides by it
+    (``GLM.SearchLoop.score_gate_unsound``)."""
+    from fractions import Fraction
+    from math import isqrt
+    n = len(values)
+    sxx = sum(v * v for v in values)
+    if sxx == 0:
+        return None
+    tbar = Fraction(n - 1, 2)
+    xbar = Fraction(sum(values), n)
+    stt = sum((t - tbar) ** 2 for t in range(n))
+    stx = sum((t - tbar) * (v - xbar) for t, v in enumerate(values))
+    slope = stx / stt
+    icpt = xbar - slope * tbar
+    srr = sum((v - (icpt + slope * t)) ** 2 for t, v in enumerate(values))
+    ratio = Fraction(srr) / sxx
+    a, b = ratio.numerator, ratio.denominator
+    root = isqrt(10 ** 12 * a // b)          # floor(10^6 * sqrt(ratio))
+    if (2 * root + 1) ** 2 * b <= 4 * 10 ** 12 * a:
+        root += 1                            # round to the nearest
+    return ratio, 10 ** 6 - root
+
+
+def nrci_decimal(micro: int, places: int = 6) -> str:
+    """An NRCI held in millionths, printed with ``places`` decimals (rounded
+    half up), by integer arithmetic only."""
+    q = 10 ** (6 - places)
+    r = (micro + q // 2) // q
+    whole, frac = divmod(r, 10 ** places)
+    return f"{whole}.{frac:0{places}d}" if places else str(whole)
+
+
+def growth_diagnosis(program: Sequence[object],
+                     env: Optional[Mapping[str, str]] = None,
+                     files: Optional[Mapping[str, Sequence[str]]] = None,
+                     dirs: Sequence[str] = (), budget: int = BUDGET,
+                     window: int = GROWTH_WINDOW,
+                     run: Optional[Run] = None) -> Dict[str, object]:
+    """Why a run is undecided (section 2 of the study): the loop head (the
+    line executed most often in a plain run of ``budget`` steps, ties to the
+    earliest), the shape of every variable and file that changes over its
+    last ``window`` visits, why the counter-lasso reading took no jump, and
+    the NRCI of a straight line through each variable that is not a
+    translation.  It answers no question about the run and admits nothing."""
+    ctx = _Ctx(env or {}, files or {}, dirs)
+    labels = _labels(program)
+    pc, stack = 0, ()
+    counts: Dict[int, int] = {}
+    visits: Dict[int, List[Tuple[Dict[str, str], Dict[str, Tuple[str, ...]]]]] = {}
+    steps = 0
+    while steps < budget and pc < len(program):
+        counts[pc] = counts.get(pc, 0) + 1
+        visits.setdefault(pc, []).append((dict(ctx.env), dict(ctx.files)))
+        if len(visits[pc]) > 2 * window + 2:
+            del visits[pc][:window]
+        steps += 1
+        pc, stack, code = _exec_step(program, labels, ctx, pc, stack)
+        if code is not None:
+            break
+    if run is None:
+        run = jumped_run(program, env, files, dirs, budget)
+    out: Dict[str, object] = {"budget": budget, "window": window,
+                              "blocked": run.blocked}
+    if not counts or max(counts.values()) < _MIN_VISITS:
+        out.update(head=None, visits=max(counts.values()) if counts else 0,
+                   shapes={}, files=(), nrci={}, series={})
+        return out
+    top = max(counts.values())
+    head = min(p for p, c in counts.items() if c == top)
+    win = visits[head][-window:]
+    shapes: Dict[str, Tuple[str, Optional[int]]] = {}
+    series: Dict[str, Tuple[int, ...]] = {}
+    nrci: Dict[str, object] = {}
+    names = sorted({n for e, _f in win for n in e})
+    for name in names:
+        vals = [e.get(name) for e, _f in win]
+        if len(set(vals)) == 1:
+            continue
+        if all(_canonical(v) for v in vals):
+            ints = tuple(int(v) for v in vals)
+            shapes[name] = growth_shape(ints)
+            series[name] = ints
+            if shapes[name][0] != "translation":
+                nrci[name] = line_nrci(ints)
+        else:
+            shapes[name] = ("text", None)
+    paths = sorted({p for _e, f in win for p in f})
+    changing = tuple(p for p in paths
+                     if len({f.get(p) for _e, f in win}) > 1)
+    out.update(head=head + 1, visits=top, shapes=shapes, files=changing,
+               nrci=nrci, series=series)
+    return out

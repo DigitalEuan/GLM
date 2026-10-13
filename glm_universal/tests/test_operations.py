@@ -110,11 +110,20 @@ def test_refusals_are_named():
         "UNREAD_QUESTION"
     # Phase 126 (studies/INERT_COUNTER_STUDY.md, I5): M15's counter is inert,
     # so M15 is certified never to halt; a growing counter that a line reads
-    # is still refused.
+    # is still refused by that rule.  Phase 130
+    # (studies/COUNTER_LASSO_STUDY.md, C5) moves that loop (N2): its counter
+    # comes back translated, and no comparison on the pass changes, so it is
+    # certified never to halt by a counter lasso; a growing variable that is
+    # not a counter is still refused.
     assert bs.answer("does it halt?", "\n".join(op.M15)).claim["kind"] == \
         "never_inert"
-    assert bs.answer("does it halt?", "SET /A N=0\n:UP\nSET /A N=N+1\n"
-                     "ECHO %N%\nGOTO UP").refusal == "UNDECIDED_WITHIN_BUDGET"
+    n2 = "SET /A N=0\n:UP\nSET /A N=N+1\nECHO %N%\nGOTO UP"
+    assert bs.answer("does it halt?", n2, jump=False).refusal == \
+        "UNDECIDED_WITHIN_BUDGET"
+    assert bs.answer("does it halt?", n2).claim["kind"] == "never_lasso"
+    assert bs.answer("does it halt?", "SET /A A=0\nSET /A B=0\n:UP\n"
+                     "SET /A A=A+1\nSET /A B=B+A\nIF %B% GTR -1 GOTO UP"
+                     ).refusal == "UNDECIDED_WITHIN_BUDGET"
     assert bs.answer("what does it print?", "\n".join(op.M13)).refusal == \
         "NEVER_HALTS"
     assert set(bs.REFUSALS) >= {"UNKNOWN_COMMAND", "UNDEFINED_VARIABLE",

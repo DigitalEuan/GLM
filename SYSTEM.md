@@ -28,11 +28,11 @@ account is in
 
 | instrument | command | result |
 |---|---|---|
-| test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->5,334 tests across 175 of the 177 test files, 18,873 subtests, outside the document checks<!--/figure-->**, zero failures |
+| test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->5,397 tests across 181 of the 183 test files, 18,972 subtests, outside the document checks<!--/figure-->**, zero failures |
 | end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->179<!--/figure--> / <!--figure:evaluation-case-count-->179<!--/figure-->** — 149 answered, 28 refused as expected (all `boundary`, no `gap`), 0 unexpected refusals, 0 confidently wrong, 0 errored |
 | benchmark suites | `python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites, every suite above its baseline |
 | capability probes | `python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 errored, 0 surprises |
-| Lean development | `lake build` (repository root) | <!--figure:lean-files-->199 Lean files<!--/figure-->, **0 `sorry`** |
+| Lean development | `lake build` (repository root) | <!--figure:lean-files-->205 Lean files<!--/figure-->, **0 `sorry`** |
 | figures | `python3 -m glm_universal.figures --write` | regenerates `overlay/FIGURES.md`; every documented count |
 | corpus | `python3 -m glm_universal.corpus --check` | the tier contract, the archive partition, the coverage claim of `ENTRY.md`, every generated block and every derived cache — **current**, no drift |
 | construction ladder | `python3 -m glm_universal.tools ladder` | **462 / 568** queries named correctly with **0** wrong on the eleven-rung ladder, against **327** for the note's five rungs and **283** for the best single rung |
@@ -58,13 +58,19 @@ account is in
 | the probe budget (the certifying reading's stopping rule) | `python3 -m glm_universal.tools probe-budget` | no barren stop and a budget of 1056 starts, proved enough for every type under a union-bound model (`GLM.ProbeBudget.budget_serves_every_type`); the model's share hypothesis holds on **46 / 46** (hole, seed) pairs; **23 / 23** references and **256 / 256** held-out deep holes certified, against **252 / 256** under a 60-start patience; median **96**, maximum **254** starts; 6 of 6 marks ([`PROBE_BUDGET_STUDY.md`](studies/PROBE_BUDGET_STUDY.md)) |
 | the operations ladder and GLM-BAT (an old-style machine learnt as a language) | `python3 -m glm_universal.tools ops-ladder` | the owner's DevOps note as a **97**-term register (0 layering violations, 97 distinct carriers, **14 / 14** cross-overs resolve); **25 / 25** machine runs, **18 / 18** English questions and **6 / 6** English-written programs as declared, 0 wrong; **78 / 78** lines read back; **41 / 41** column-3 scripts verify, **158 / 158** mutations rejected; H **185 / 242** edges monotone; 9 of 9 marks ([`OPERATIONS_LADDER_STUDY.md`](studies/OPERATIONS_LADDER_STUDY.md)) |
 | GLM-BAT's inert-variable certificate (a loop with a growing counter, certified never to halt) | `python3 -m glm_universal.tools inert-counter` | **10 / 10** battery programs and **9 / 9** questions as declared, 0 wrong; **8 / 8** `never_inert` scripts verify, **40 / 40** mutations rejected; Phase 125's answers unchanged but M15's, **299 / 299** decided generated programs unchanged; **0 / 4** certified programs halt within 200000 steps; 7 of 7 marks ([`INERT_COUNTER_STUDY.md`](studies/INERT_COUNTER_STUDY.md)) |
+| GLM-BAT's counter-lasso certificates (halting and non-termination past the budget) | `python3 -m glm_universal.tools counter-lasso` | **12 / 12** battery programs and **17 / 17** questions as declared, 0 wrong — six loops of 40,003 to 2,000,003 steps answered *halts* with exact steps, outputs and exit code, two *never*; **20 / 20** `run_jump` and `never_lasso` scripts verify, **112 / 112** mutations rejected; Phases 125 and 126 unchanged but N2 and N3, **299 / 299** decided generated programs unchanged, program 206 newly certified *never*; every verdict agrees with a plain run (up to 2,500,000 steps); 7 of 7 marks ([`COUNTER_LASSO_STUDY.md`](studies/COUNTER_LASSO_STUDY.md)) |
+| GLM-BAT's constant bounds and repeated output (two more counter lassos) | `python3 -m glm_universal.tools constant-bound` | **10 / 10** battery programs with the declared verdict, steps, outputs and exit code (**8 / 10** exactly, K6 and K10 jumping a different pass than declared by hand) and **15 / 15** questions as declared — L10 and L11 now *halt* after 60,002 and 40,003 steps; **18 / 18** scripts verify, **112 / 112** mutations rejected; every earlier answer and all **300** generated programs unchanged; every verdict agrees with a plain run; 6 of 7 marks ([`CONSTANT_BOUND_STUDY.md`](studies/CONSTANT_BOUND_STUDY.md)) |
+| GLM-BAT's passes that print a counter, long output, and the diagnosis of a refusal | `python3 -m glm_universal.tools affine-output` | **10 / 10** battery programs exactly as declared — K5 and K4 now *halt* after 60,002 and 1,500,004 steps, the second in a 208-byte run-form claim; **19 / 20** questions as declared (P8's printed text in other segments than hand-worked); **8 / 8** refusals diagnosed as declared, closed forms predictive on **8 / 8** shaped variables, the NRCI reported beside them and read by nothing; **33 / 33** scripts verify, **167 / 167** mutations rejected; every earlier answer and all **300** generated programs unchanged; every verdict agrees with a plain run; 7 of 9 marks ([`AFFINE_OUTPUT_STUDY.md`](studies/AFFINE_OUTPUT_STUDY.md)) |
 | norm 256 and the hex colour (lattice item 3) | `python3 -m glm_universal.tools norm256-hex` | the norm-256 rung filled by `H16` (each coordinate read by its first hex digit): **0** wrong on the 568 queries and **0** on 568 held-out ones (119 and 77 correct), no answer added on the 568; the `√2`-rotated Leech rung `R256` (2 wrong) and `16Z` (4 wrong) retired; the hex shortcut — a `2C` point is on `R256` exactly when the hex colour of its half lies in a **4096**-colour subspace — agrees on **2,000 / 2,000** points; the ladder answers **8 / 568** held-out queries wrongly, with or without `H16` |
+| the cell guard (the ladder on held-out perturbations) | `python3 -m glm_universal.tools cell-guard` | a ladder answer certified to be the strictly nearest carrier from two distances and the packing radius (`GLM.CellGuard.guarded_strict_nearest`): **0** wrong on the standard, held-out and third sets, but only **30**, **12** and **12** correct against the unguarded ladder's 467/0, 435/8 and 426/1; the retirement rule read on two sets keeps the five coarse rungs, **388 / 0** on the third set; 8 of 9 marks ([`CELL_GUARD_STUDY.md`](studies/CELL_GUARD_STUDY.md)) |
+| the placement guard (a certified-nearest ladder) | `python3 -m glm_universal.tools placement-guard` | the cell guard with a per-cell radius read from the carriers (`GLM.PlacementGuard.placed_strict_nearest`, no hypothesis on the quantiser): **0** wrong on all four query sets, keeping **445 / 467**, **402 / 435**, **393 / 426** and **402 / 441** of the unguarded ladder's correct answers (which answers 0, 8, 1 and 2 wrongly); order-independent; the coarse-only ladder **386 / 0** on the fourth set; 9 of 9 marks ([`PLACEMENT_GUARD_STUDY.md`](studies/PLACEMENT_GUARD_STUDY.md)) |
 | conversation layer | `python3 -m glm_universal.tools conversation` | the layer binds **<!--figure:conversation-answered-->8<!--/figure-->** of the **<!--figure:conversation-declared-count-->15<!--/figure-->** follow-ups declared before the run and refuses **<!--figure:conversation-refused-->7<!--/figure-->** under all **<!--figure:conversation-reasons-->3<!--/figure-->** of its named reasons — **<!--figure:conversation-as-declared-->15<!--/figure-->** of **<!--figure:conversation-declared-count-->15<!--/figure-->** as declared — against **<!--figure:conversation-alone-->0<!--/figure-->** answered by a session with no memory, and the recency control differs on **<!--figure:conversation-control-wrong-->3<!--/figure-->** of **<!--figure:conversation-control-rows-->10<!--/figure-->** |
 | discourse state | `python3 -m glm_universal.tools discourse-state` | a tie carried as a column, the fourth shape and follow-ups on every surface: **7 / 7** column, **16 / 16** fourth-shape and **6 / 6** surface cases as declared, **0** wrong; Phase 55's layer gives 0 of the 20 new-behaviour cases as declared, the session alone 0 of the 5 surface answers; **15 / 15** of Phase 55's follow-ups hold but the 1 declared move; **32 / 32** column cells equal the answer asked alone; no answer to any of 3056 earlier strings changes; 8 of 8 marks met |
 | role--filler binding | `python3 -m glm_universal.tools binding` | a typed relation written as one 24-bit word gives the filler's reading back with no side condition; naming the filler recovers **<!--figure:binding-recovered-->6<!--/figure-->** of the **<!--figure:binding-declared-count-->12<!--/figure-->** bindings declared before the run and refuses **<!--figure:binding-refused-->6<!--/figure-->** — **<!--figure:binding-as-declared-->12<!--/figure-->** of **<!--figure:binding-declared-count-->12<!--/figure-->** as declared — because only **<!--figure:binding-nameable-->424<!--/figure-->** of the **<!--figure:binding-carriers-->1,143<!--/figure-->** carriers read uniquely, the worst fibre holding **<!--figure:binding-largest-fibre-->136<!--/figure-->** |
 | plan store | `python3 -m glm_universal.runtime.plan_store` | a resolved follow-up kept against a digest of the whole conversation replays **<!--figure:planstore-replayed-->15<!--/figure-->** of **<!--figure:planstore-declared-count-->15<!--/figure-->** unchanged, refusals included (**<!--figure:planstore-refusals-replayed-->7<!--/figure-->** of **<!--figure:planstore-refusals-->7<!--/figure-->**), taking the licensing trials from **<!--figure:planstore-trials-first-->27<!--/figure-->** to **<!--figure:planstore-trials-replayed-->0<!--/figure-->**; keyed by the follow-up text alone it answers **<!--figure:planstore-coarse-wrong-->8<!--/figure-->** of the fifteen with another conversation's antecedent |
 | engineering surface | `python3 -m glm_universal.tools engineering` | on **63** engineering questions committed before the code: **53** correct, **10** correct refusals, **0** wrong (both existing paths: 0 correct, 53 refused); formula wheels **41 / 41** at SI7 and EXT10; Smith chart **16 / 16**; force-voltage analogy **9 / 9** laws each way; delta-sigma **6 / 6** |
 | carried fork | `python3 -m glm_universal.tools carried-fork` | the six deep-hole candidates carried until a later decision: **0 wrong** from every certified stage; 592,268 of 658,812 declared-case reads answered (the 90 % mark missed at 32 cases), 4,224 / 4,224 second readings, 3,840 / 3,840 unsure-set reads; 1,771 / 1,771 ties lift to a certified A₁²⁴ Leech deep hole; the soft estimate right on 512 / 768 (mark missed) |
+| designed substrate | `python3 -m glm_universal.tools designed-substrate` | the owner's substrate study brought in: two new certified fork stages — the seven-bit **sender tag** resolves **680,064 / 680,064** tied reads, 0 wrong (the hard word alone resolves 0), and the **soft certificate** resolves **768 / 768** reads of the gentle ensemble, 0 wrong, and refuses all 768 of K4b; the eight declared alternative codes each miscorrect 2,695–4,480 four-flip corruptions silently, the GLM's code 0; 7 of 8 marks ([`DESIGNED_SUBSTRATE_STUDY.md`](studies/DESIGNED_SUBSTRATE_STUDY.md)) |
 | second view | `python3 -m glm_universal.tools second-view` | one carrier read through the framed register's views: three views resolve **680,064 / 680,064** common-mode four-error reads, **0 wrong**; two views leave 174 of 10,626 bursts open, as predicted on every read; the composition with the declared cases **658,258 / 658,812**, 0 wrong, open as predicted; the Leech escalation on the views' soft reading equals the intersection on **46,728 / 46,728** reads; 7 of 9 marks met (V4, V8 not met) |
 | unpacking and the third view on demand | `python3 -m glm_universal.tools unpacking` | argument unpacking in the dialect: Phase 96's refused program answered equal to CPython, **33 / 33** declared programs and refusals as declared (0 before), 0 of 311 earlier programs moved; the third view on demand gives the three-view answer on **680,064 / 680,064** reads with **1,371,264** views read instead of 2,040,192; independent faults, three views **84,480 / 84,480**, 0 wrong; 346 open second errors for every frame; 12 of 12 marks met |
 | symbolic parameters | `python3 -m glm_universal.tools symbolic` | formulas in letters: **13 / 13** class-S outside questions answered and verified, **0** wrong; **13 / 13** variants, **18 / 18** systems, **8 / 8** refusals, **44 / 44** mutants rejected; the class-T crossover bracketed to 1/10000; 27 / 27 framed outside answers and 14 / 14 Set B verdicts unchanged; `--battery` 87 / 87 random systems verified; 8 of 8 marks met (S5 after a control repair) |
@@ -740,6 +746,70 @@ names in the answer and a column-3 script that re-checks both the closure and
 the recurrence; `RequestProject/GLM/InertCounter.lean` proves the forgetful
 recurrence sufficient. Recomputed by `tools inert-counter`. Write-up:
 [`INERT_COUNTER_STUDY.md`](studies/INERT_COUNTER_STUDY.md).
+Since Phase 130 a run both readings leave undecided is read a third time with
+its *counters* masked — the names some line updates as `SET /A V=V+k` — and a
+pass whose counters come back translated by a fixed step, every line of it a
+counter update, a comparison of counters and literals, or a line that reads
+no counter, is either jumped up to the first pass at which one of its
+comparisons changes (computed exactly) or, if none ever changes, certified
+never to halt. So a loop past the 10,000-step budget is answered *halts after
+n steps* with its exact outputs, values and exit code, or *never halts*, each
+with a column-3 script that re-derives every jump with its own reading of the
+lines; `RequestProject/GLM/CounterLasso.lean` proves a jump and a lasso
+sufficient (`halts_of_jump`, `never_halts_of_lasso`). Recomputed by
+`tools counter-lasso`. Write-up:
+[`COUNTER_LASSO_STUDY.md`](studies/COUNTER_LASSO_STUDY.md).
+Since Phase 131 that reading also jumps a pass that writes output, provided
+no line on it writes a counter, appending the skipped standard-output and
+standard-error blocks once per skipped pass while the output stays within
+100,000 lines, and reads a comparison operand `%L%` whose name is not a counter
+as the literal of its integer value at that step; the answer to *what does it
+print?* after such a jump states runs of equal lines as `"tick" (50000
+times)`. `RequestProject/GLM/ConstantBound.lean` proves the repeated output
+(`lasso_output`, `halts_of_jump_output`) and the constant bound
+(`testC_equivariant`, `const_bound_linear`). Phase 130's reading is kept as
+`extended=False`. Recomputed by `tools constant-bound`. Write-up:
+[`CONSTANT_BOUND_STUDY.md`](studies/CONSTANT_BOUND_STUDY.md).
+Since Phase 132 it also jumps a pass whose `ECHO` lines name a counter: each
+such line is read as a template, and every skipped pass writes it with each
+hole filled by the counter's value at that step plus the pass number times
+its step; the output bound under this reading is 1,000,000 lines, and a claim
+of more than 100,000 lines states its streams in run form (blocks repeated
+with their integers advancing by fixed steps), which the second interpreter
+decodes itself. *What does it print?* after such a jump answers in segments,
+e.g. `"1" … "20000" (20000 lines; the number steps by 1)`. A run that is still
+undecided can be asked *why is it undecided?*: the answer names the loop
+head, the exact shape of every changing variable over its last 32 visits
+(translation, quadratic, geometric, irregular or text) and file, why the
+counter-lasso reading took no jump, and — as a diagnosis that no verdict,
+refusal or jump reads — the Non-Random Coherence Index of a straight line
+through each variable that is not a translation.
+`RequestProject/GLM/AffineOutput.lean` proves the templated output
+(`lasso_output_affine`, `templated_block`) and the closed forms of the shapes
+(`const_second_diff_closed_form`, `const_ratio_closed_form`,
+`quadratic_not_translation`). Phase 131's reading is kept as `affine=False`.
+Recomputed by `tools affine-output`. Write-up:
+[`AFFINE_OUTPUT_STUDY.md`](studies/AFFINE_OUTPUT_STUDY.md).
+
+**The designed substrate.** Since Phase 133 the GLM's own Lean development
+answers whether its Golay carrier is optimal:
+`RequestProject/GLM/DesignedSubstrate.lean` proves that no design of 4,096
+words in 24 bits, with any decoder, decodes correctly more often on the
+bit-flip channel than the GLM's code with a nearest-codeword decoder
+(`golay_optimal`, from `decoder_sum_le` and `golay_attains`), that every such
+design leaves at least 7,254,016 received words at distance 4 or more
+(`negative_space_floor_4096`), and that one correcting three flips corrects at
+most one sixth of the four-flip corruptions (`weight4_resolved_le_4096`). The
+carried fork gains two stages in `reasoning/designed_substrate.py`, kept
+beside it rather than in the answering path: `sender tag` keeps the
+candidates whose seven parities match a tag the sender stored with the
+carrier (`tag_resolves`; assumption: the tag arrived intact), and
+`soft certificate` keeps a candidate only if its ±1 image is within squared
+distance 8 of a soft reading (`soft_certificate`, radius sharp; assumption:
+the reading is that close to the sent carrier). The owner's study itself is
+kept as supplied in `source_material/substrate_study/`. Recomputed by
+`tools designed-substrate`. Write-up:
+[`DESIGNED_SUBSTRATE_STUDY.md`](studies/DESIGNED_SUBSTRATE_STUDY.md).
 
 **Norm 256 and the hex colour.** Since Phase 127 the power-of-two family has
 a rung at norm 256, measured beside the ladder rather than in the answering
@@ -752,6 +822,22 @@ shortcut it carries: the classes of `Λ₂₄/2Λ₂₄` are the 2²⁴ hex colo
 `2C` point lies on the rotated rung exactly when the colour of its half is in
 a 4096-colour subspace. Recomputed by `tools norm256-hex`. Write-up:
 [`NORM_256_HEX_STUDY.md`](studies/NORM_256_HEX_STUDY.md).
+
+**A certified-nearest ladder.** Since Phase 129 each rung of the escalation
+ladder can be read under the *placement guard*, measured beside the ladder
+rather than in the answering path: a rung names the single carrier `i` of the
+cell `p` a query `q` falls in only when `‖q − c_i‖ + ‖q − p‖` is below the
+distance from `p` to the nearest other carrier, a radius stored once per cell.
+`RequestProject/GLM/PlacementGuard.lean` proves the answer is then the strictly
+nearest carrier and the guarded ladder order-independent, on top of
+`RequestProject/GLM/CellGuard.lean` (Phase 128), whose guard used the packing
+radius instead and was nearly silent. On four query sets — three of them
+perturbations the ladder was never chosen on, where it answers 8, 1 and 2
+queries wrongly — the guarded ladder answers none wrongly and keeps 91 to 95
+per cent of the correct answers. Recomputed by `tools placement-guard` and
+`tools cell-guard`. Write-ups:
+[`CELL_GUARD_STUDY.md`](studies/CELL_GUARD_STUDY.md),
+[`PLACEMENT_GUARD_STUDY.md`](studies/PLACEMENT_GUARD_STUDY.md).
 
 **Temperatures on two scales.** The field surface's table `fixed_point`
 holds the fourteen ITS-90 fixed points in degrees Celsius
@@ -807,8 +893,8 @@ so a confident wrong answer is worse than a refusal). Write-up:
 [`CAPABILITY_ASSESSMENT.md`](CAPABILITY_ASSESSMENT.md).
 
 **The Lean development, addressed.** `reasoning/lean_address.py` gives each of
-the <!--figure:lean-declarations-->4,975<!--/figure--> declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly <!--figure:lean-declarations-->4,975<!--/figure-->/<!--figure:lean-declarations-->4,975<!--/figure--> with 0 coordinate errors;
+the <!--figure:lean-declarations-->5,067<!--/figure--> declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly <!--figure:lean-declarations-->5,067<!--/figure-->/<!--figure:lean-declarations-->5,067<!--/figure--> with 0 coordinate errors;
 3989 distinct addresses, and the quantiser adds no conflation of its own;
 nearest-by-address shares a file 817 times against 35 for a SHA-256 control and
 29 for a seeded reshuffle, with chance at ≈ 0.80 %. `report lean`.
@@ -851,8 +937,8 @@ twenty questions rather than three samples. `tools oracle`. Write-up:
 **The field surface, and what it was worth.** `runtime/fields.py` answers one
 named field of one named row — `field atomic_weight_u of carbon` — over
 <!--figure:fieldsurface-tables-->14<!--/figure--> declared tables holding
-<!--figure:fieldsurface-rows-->13,190<!--/figure--> rows and
-<!--figure:fieldsurface-pairs-->77,588<!--/figure--> addressable `(row,
+<!--figure:fieldsurface-rows-->13,401<!--/figure--> rows and
+<!--figure:fieldsurface-pairs-->78,762<!--/figure--> addressable `(row,
 field)` pairs: the element and molecule source rows, one table per register's
 carrier attributes, the Lean address book, the package's own top-level
 definitions, and a registry of declared zero-argument functions whose returned
@@ -1049,7 +1135,7 @@ units reach `PROJECT_DIRECTIVES.md` (120 before Phase 78; see
 [`studies/ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) §5g).
 
 The six instruments in the ledger beside the
-<!--figure:test-files-->177 test files<!--/figure--> are `lean-build`,
+<!--figure:test-files-->183 test files<!--/figure--> are `lean-build`,
 `lean-sorry-free`, `capabilities`, `benchmarks`, `evaluation` and `figures`.
 (The seventh, `lean-copies-identical`, went with the second copy of the Lean
 tree in Phase 78: the development lives only in `overlay/glm_lean/`.) Editing a document makes exactly the units that

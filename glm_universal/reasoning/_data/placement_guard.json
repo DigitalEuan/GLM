@@ -1,0 +1,807 @@
+{
+ "ladder": [
+  "8C",
+  "8A",
+  "4C",
+  "2C",
+  "2A",
+  "C",
+  "A",
+  "2D",
+  "A/2",
+  "D12^2",
+  "Z"
+ ],
+ "marks": {
+  "K1": true,
+  "N1": true,
+  "P1": true,
+  "S1": true,
+  "S2": true,
+  "S3": true,
+  "S4": true,
+  "U2": true
+ },
+ "radii": [
+  {
+   "below_packing": 0,
+   "cells": 83,
+   "norm": 2048,
+   "rung": "8C",
+   "smallest": {
+    "__fraction__": "281092774044866576159809/303256405652583481344"
+   }
+  },
+  {
+   "below_packing": 0,
+   "cells": 82,
+   "norm": 1024,
+   "rung": "8A",
+   "smallest": {
+    "__fraction__": "10693/16"
+   }
+  },
+  {
+   "below_packing": 0,
+   "cells": 95,
+   "norm": 512,
+   "rung": "4C",
+   "smallest": {
+    "__fraction__": "224/1"
+   }
+  },
+  {
+   "below_packing": 0,
+   "cells": 102,
+   "norm": 128,
+   "rung": "2C",
+   "smallest": {
+    "__fraction__": "64/1"
+   }
+  },
+  {
+   "below_packing": 0,
+   "cells": 100,
+   "norm": 64,
+   "rung": "2A",
+   "smallest": {
+    "__fraction__": "38/1"
+   }
+  },
+  {
+   "below_packing": 0,
+   "cells": 111,
+   "norm": 32,
+   "rung": "C",
+   "smallest": {
+    "__fraction__": "10/1"
+   }
+  },
+  {
+   "below_packing": 0,
+   "cells": 109,
+   "norm": 16,
+   "rung": "A",
+   "smallest": {
+    "__fraction__": "9/1"
+   }
+  },
+  {
+   "below_packing": 0,
+   "cells": 113,
+   "norm": 8,
+   "rung": "2D",
+   "smallest": {
+    "__fraction__": "2/1"
+   }
+  },
+  {
+   "below_packing": 0,
+   "cells": 121,
+   "norm": 4,
+   "rung": "A/2",
+   "smallest": {
+    "__fraction__": "1/1"
+   }
+  },
+  {
+   "below_packing": 0,
+   "cells": 125,
+   "norm": 2,
+   "rung": "D12^2",
+   "smallest": {
+    "__fraction__": "1/1"
+   }
+  },
+  {
+   "below_packing": 0,
+   "cells": 125,
+   "norm": 1,
+   "rung": "Z",
+   "smallest": {
+    "__fraction__": "456556204465/940839860961"
+   }
+  }
+ ],
+ "read": {
+  "fourth": {
+   "cell": {
+    "correct": 13,
+    "order_independent": true,
+    "refused": 555,
+    "totals": {
+     "coarse_to_fine": {
+      "correct": 13,
+      "refused": 555,
+      "wrong": 0
+     },
+     "fine_to_coarse": {
+      "correct": 13,
+      "refused": 555,
+      "wrong": 0
+     },
+     "middle_out": {
+      "correct": 13,
+      "refused": 555,
+      "wrong": 0
+     }
+    },
+    "wrong": 0
+   },
+   "kept_share": {
+    "__fraction__": "134/147"
+   },
+   "n1_violations": 0,
+   "nearest": {
+    "correct": 497,
+    "tie": 57,
+    "wrong": 14
+   },
+   "p1_violations": 0,
+   "per_rung": {
+    "2A": {
+     "answered": 178,
+     "cell": 3,
+     "placed": 169,
+     "placed_wrong": 0
+    },
+    "2C": {
+     "answered": 180,
+     "cell": 3,
+     "placed": 172,
+     "placed_wrong": 0
+    },
+    "2D": {
+     "answered": 45,
+     "cell": 0,
+     "placed": 33,
+     "placed_wrong": 0
+    },
+    "4C": {
+     "answered": 300,
+     "cell": 8,
+     "placed": 292,
+     "placed_wrong": 0
+    },
+    "8A": {
+     "answered": 292,
+     "cell": 4,
+     "placed": 288,
+     "placed_wrong": 0
+    },
+    "8C": {
+     "answered": 307,
+     "cell": 8,
+     "placed": 303,
+     "placed_wrong": 0
+    },
+    "A": {
+     "answered": 88,
+     "cell": 0,
+     "placed": 82,
+     "placed_wrong": 0
+    },
+    "A/2": {
+     "answered": 32,
+     "cell": 0,
+     "placed": 22,
+     "placed_wrong": 0
+    },
+    "C": {
+     "answered": 95,
+     "cell": 2,
+     "placed": 87,
+     "placed_wrong": 0
+    },
+    "D12^2": {
+     "answered": 49,
+     "cell": 0,
+     "placed": 40,
+     "placed_wrong": 0
+    },
+    "Z": {
+     "answered": 64,
+     "cell": 0,
+     "placed": 48,
+     "placed_wrong": 0
+    }
+   },
+   "placed": {
+    "correct": 402,
+    "order_independent": true,
+    "refused": 166,
+    "totals": {
+     "coarse_to_fine": {
+      "correct": 402,
+      "refused": 166,
+      "wrong": 0
+     },
+     "fine_to_coarse": {
+      "correct": 402,
+      "refused": 166,
+      "wrong": 0
+     },
+     "middle_out": {
+      "correct": 402,
+      "refused": 166,
+      "wrong": 0
+     }
+    },
+    "wrong": 0
+   },
+   "placed_wrong_answers": [],
+   "plain": {
+    "correct": 442,
+    "order_independent": false,
+    "refused": 125,
+    "totals": {
+     "coarse_to_fine": {
+      "correct": 441,
+      "refused": 125,
+      "wrong": 2
+     },
+     "fine_to_coarse": {
+      "correct": 442,
+      "refused": 125,
+      "wrong": 1
+     },
+     "middle_out": {
+      "correct": 441,
+      "refused": 125,
+      "wrong": 2
+     }
+    },
+    "wrong": 2
+   },
+   "queries": 568
+  },
+  "held_out": {
+   "cell": {
+    "correct": 12,
+    "order_independent": true,
+    "refused": 556,
+    "totals": {
+     "coarse_to_fine": {
+      "correct": 12,
+      "refused": 556,
+      "wrong": 0
+     },
+     "fine_to_coarse": {
+      "correct": 12,
+      "refused": 556,
+      "wrong": 0
+     },
+     "middle_out": {
+      "correct": 12,
+      "refused": 556,
+      "wrong": 0
+     }
+    },
+    "wrong": 0
+   },
+   "kept_share": {
+    "__fraction__": "134/145"
+   },
+   "n1_violations": 0,
+   "nearest": {
+    "correct": 489,
+    "tie": 66,
+    "wrong": 13
+   },
+   "p1_violations": 0,
+   "per_rung": {
+    "2A": {
+     "answered": 180,
+     "cell": 1,
+     "placed": 168,
+     "placed_wrong": 0
+    },
+    "2C": {
+     "answered": 179,
+     "cell": 4,
+     "placed": 170,
+     "placed_wrong": 0
+    },
+    "2D": {
+     "answered": 39,
+     "cell": 0,
+     "placed": 23,
+     "placed_wrong": 0
+    },
+    "4C": {
+     "answered": 295,
+     "cell": 9,
+     "placed": 285,
+     "placed_wrong": 0
+    },
+    "8A": {
+     "answered": 285,
+     "cell": 4,
+     "placed": 281,
+     "placed_wrong": 0
+    },
+    "8C": {
+     "answered": 284,
+     "cell": 6,
+     "placed": 281,
+     "placed_wrong": 0
+    },
+    "A": {
+     "answered": 87,
+     "cell": 0,
+     "placed": 75,
+     "placed_wrong": 0
+    },
+    "A/2": {
+     "answered": 20,
+     "cell": 0,
+     "placed": 14,
+     "placed_wrong": 0
+    },
+    "C": {
+     "answered": 99,
+     "cell": 2,
+     "placed": 88,
+     "placed_wrong": 0
+    },
+    "D12^2": {
+     "answered": 45,
+     "cell": 0,
+     "placed": 37,
+     "placed_wrong": 0
+    },
+    "Z": {
+     "answered": 77,
+     "cell": 0,
+     "placed": 62,
+     "placed_wrong": 0
+    }
+   },
+   "placed": {
+    "correct": 402,
+    "order_independent": true,
+    "refused": 166,
+    "totals": {
+     "coarse_to_fine": {
+      "correct": 402,
+      "refused": 166,
+      "wrong": 0
+     },
+     "fine_to_coarse": {
+      "correct": 402,
+      "refused": 166,
+      "wrong": 0
+     },
+     "middle_out": {
+      "correct": 402,
+      "refused": 166,
+      "wrong": 0
+     }
+    },
+    "wrong": 0
+   },
+   "placed_wrong_answers": [],
+   "plain": {
+    "correct": 439,
+    "order_independent": false,
+    "refused": 125,
+    "totals": {
+     "coarse_to_fine": {
+      "correct": 435,
+      "refused": 125,
+      "wrong": 8
+     },
+     "fine_to_coarse": {
+      "correct": 439,
+      "refused": 125,
+      "wrong": 4
+     },
+     "middle_out": {
+      "correct": 435,
+      "refused": 125,
+      "wrong": 8
+     }
+    },
+    "wrong": 8
+   },
+   "queries": 568
+  },
+  "standard": {
+   "cell": {
+    "correct": 30,
+    "order_independent": true,
+    "refused": 538,
+    "totals": {
+     "coarse_to_fine": {
+      "correct": 30,
+      "refused": 538,
+      "wrong": 0
+     },
+     "fine_to_coarse": {
+      "correct": 30,
+      "refused": 538,
+      "wrong": 0
+     },
+     "middle_out": {
+      "correct": 30,
+      "refused": 538,
+      "wrong": 0
+     }
+    },
+    "wrong": 0
+   },
+   "kept_share": {
+    "__fraction__": "445/467"
+   },
+   "n1_violations": 0,
+   "nearest": {
+    "correct": 506,
+    "tie": 61,
+    "wrong": 1
+   },
+   "p1_violations": 0,
+   "per_rung": {
+    "2A": {
+     "answered": 283,
+     "cell": 5,
+     "placed": 278,
+     "placed_wrong": 0
+    },
+    "2C": {
+     "answered": 273,
+     "cell": 6,
+     "placed": 269,
+     "placed_wrong": 0
+    },
+    "2D": {
+     "answered": 113,
+     "cell": 3,
+     "placed": 107,
+     "placed_wrong": 0
+    },
+    "4C": {
+     "answered": 328,
+     "cell": 12,
+     "placed": 325,
+     "placed_wrong": 0
+    },
+    "8A": {
+     "answered": 286,
+     "cell": 4,
+     "placed": 286,
+     "placed_wrong": 0
+    },
+    "8C": {
+     "answered": 302,
+     "cell": 12,
+     "placed": 299,
+     "placed_wrong": 0
+    },
+    "A": {
+     "answered": 196,
+     "cell": 4,
+     "placed": 192,
+     "placed_wrong": 0
+    },
+    "A/2": {
+     "answered": 137,
+     "cell": 6,
+     "placed": 130,
+     "placed_wrong": 0
+    },
+    "C": {
+     "answered": 205,
+     "cell": 6,
+     "placed": 199,
+     "placed_wrong": 0
+    },
+    "D12^2": {
+     "answered": 127,
+     "cell": 0,
+     "placed": 126,
+     "placed_wrong": 0
+    },
+    "Z": {
+     "answered": 194,
+     "cell": 0,
+     "placed": 187,
+     "placed_wrong": 0
+    }
+   },
+   "placed": {
+    "correct": 445,
+    "order_independent": true,
+    "refused": 123,
+    "totals": {
+     "coarse_to_fine": {
+      "correct": 445,
+      "refused": 123,
+      "wrong": 0
+     },
+     "fine_to_coarse": {
+      "correct": 445,
+      "refused": 123,
+      "wrong": 0
+     },
+     "middle_out": {
+      "correct": 445,
+      "refused": 123,
+      "wrong": 0
+     }
+    },
+    "wrong": 0
+   },
+   "placed_wrong_answers": [],
+   "plain": {
+    "correct": 467,
+    "order_independent": true,
+    "refused": 101,
+    "totals": {
+     "coarse_to_fine": {
+      "correct": 467,
+      "refused": 101,
+      "wrong": 0
+     },
+     "fine_to_coarse": {
+      "correct": 467,
+      "refused": 101,
+      "wrong": 0
+     },
+     "middle_out": {
+      "correct": 467,
+      "refused": 101,
+      "wrong": 0
+     }
+    },
+    "wrong": 0
+   },
+   "queries": 568
+  },
+  "third": {
+   "cell": {
+    "correct": 12,
+    "order_independent": true,
+    "refused": 556,
+    "totals": {
+     "coarse_to_fine": {
+      "correct": 12,
+      "refused": 556,
+      "wrong": 0
+     },
+     "fine_to_coarse": {
+      "correct": 12,
+      "refused": 556,
+      "wrong": 0
+     },
+     "middle_out": {
+      "correct": 12,
+      "refused": 556,
+      "wrong": 0
+     }
+    },
+    "wrong": 0
+   },
+   "kept_share": {
+    "__fraction__": "131/142"
+   },
+   "n1_violations": 0,
+   "nearest": {
+    "correct": 499,
+    "tie": 62,
+    "wrong": 7
+   },
+   "p1_violations": 0,
+   "per_rung": {
+    "2A": {
+     "answered": 160,
+     "cell": 2,
+     "placed": 152,
+     "placed_wrong": 0
+    },
+    "2C": {
+     "answered": 177,
+     "cell": 3,
+     "placed": 171,
+     "placed_wrong": 0
+    },
+    "2D": {
+     "answered": 24,
+     "cell": 0,
+     "placed": 17,
+     "placed_wrong": 0
+    },
+    "4C": {
+     "answered": 286,
+     "cell": 8,
+     "placed": 276,
+     "placed_wrong": 0
+    },
+    "8A": {
+     "answered": 287,
+     "cell": 4,
+     "placed": 283,
+     "placed_wrong": 0
+    },
+    "8C": {
+     "answered": 290,
+     "cell": 7,
+     "placed": 284,
+     "placed_wrong": 0
+    },
+    "A": {
+     "answered": 59,
+     "cell": 0,
+     "placed": 55,
+     "placed_wrong": 0
+    },
+    "A/2": {
+     "answered": 20,
+     "cell": 0,
+     "placed": 18,
+     "placed_wrong": 0
+    },
+    "C": {
+     "answered": 91,
+     "cell": 2,
+     "placed": 84,
+     "placed_wrong": 0
+    },
+    "D12^2": {
+     "answered": 63,
+     "cell": 0,
+     "placed": 50,
+     "placed_wrong": 0
+    },
+    "Z": {
+     "answered": 62,
+     "cell": 0,
+     "placed": 48,
+     "placed_wrong": 0
+    }
+   },
+   "placed": {
+    "correct": 393,
+    "order_independent": true,
+    "refused": 175,
+    "totals": {
+     "coarse_to_fine": {
+      "correct": 393,
+      "refused": 175,
+      "wrong": 0
+     },
+     "fine_to_coarse": {
+      "correct": 393,
+      "refused": 175,
+      "wrong": 0
+     },
+     "middle_out": {
+      "correct": 393,
+      "refused": 175,
+      "wrong": 0
+     }
+    },
+    "wrong": 0
+   },
+   "placed_wrong_answers": [],
+   "plain": {
+    "correct": 426,
+    "order_independent": true,
+    "refused": 141,
+    "totals": {
+     "coarse_to_fine": {
+      "correct": 426,
+      "refused": 141,
+      "wrong": 1
+     },
+     "fine_to_coarse": {
+      "correct": 426,
+      "refused": 141,
+      "wrong": 1
+     },
+     "middle_out": {
+      "correct": 426,
+      "refused": 141,
+      "wrong": 1
+     }
+    },
+    "wrong": 1
+   },
+   "queries": 568
+  }
+ },
+ "source_digest": "1efc9a9a06e41b8c67724a51013812d2c3fd4d973b0c69204dd3c0b670f60f41",
+ "union": {
+  "ladder": [
+   "8C",
+   "8A",
+   "4C",
+   "2C",
+   "2A"
+  ],
+  "retired": [
+   {
+    "clause": 1,
+    "rung": "C",
+    "why": "it answers 4 queries wrongly, which is the one thing the escalation is supposed not to do; it uniquely answers 4, and that is the price of retiring it"
+   },
+   {
+    "clause": 1,
+    "rung": "A",
+    "why": "it answers 1 query wrongly, which is the one thing the escalation is supposed not to do; it uniquely answers 3, and that is the price of retiring it"
+   },
+   {
+    "clause": 1,
+    "rung": "2D",
+    "why": "it answers 2 queries wrongly, which is the one thing the escalation is supposed not to do; it uniquely answers 12, and that is the price of retiring it"
+   },
+   {
+    "clause": 1,
+    "rung": "A/2",
+    "why": "it answers 1 query wrongly, which is the one thing the escalation is supposed not to do; it uniquely answers 3, and that is the price of retiring it"
+   },
+   {
+    "clause": 2,
+    "rung": "D12^2",
+    "why": "it answers no query the rest of the ladder cannot (unique_correct = 0) and takes part in 2 disagreement(s)"
+   },
+   {
+    "clause": 1,
+    "rung": "Z",
+    "why": "it answers 1 query wrongly, which is the one thing the escalation is supposed not to do; it uniquely answers 14, and that is the price of retiring it"
+   }
+  ]
+ },
+ "union_fourth": {
+  "correct": 386,
+  "ladder": [
+   "8C",
+   "8A",
+   "4C",
+   "2C",
+   "2A"
+  ],
+  "matches_oracle": true,
+  "oracle": 386,
+  "order_independent": true,
+  "refused": 182,
+  "safe": true,
+  "totals": {
+   "coarse_to_fine": {
+    "correct": 386,
+    "refused": 182,
+    "wrong": 0
+   },
+   "fine_to_coarse": {
+    "correct": 386,
+    "refused": 182,
+    "wrong": 0
+   },
+   "middle_out": {
+    "correct": 386,
+    "refused": 182,
+    "wrong": 0
+   }
+  },
+  "wrong": 0
+ }
+}

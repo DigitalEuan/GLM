@@ -5,12 +5,10 @@
 **Question.** If this session stopped now, what would the next one need to
 know to carry the round on?
 
-**Verdict.** No round is in flight: Phase 127 (norm 256 and the hex colour:
-the empty norm-256 rung filled by the first-hex-digit reading, the rotated
-Leech rung retired, the hex shortcut held on every point checked, and the
-ladder found answering 8 of 568 held-out queries wrongly; 7 of 8 marks) and
-Phase 126 (inert variables, 7 of 7 marks) are closed and recorded in
-`MASTER_PLAN.md`. The next round starts from the To-Do list, `STATUS.md` §2.1.
+**Verdict.** No round is in flight: Phase 133 (the designed substrate: the
+owner's study of whether the Golay–Leech substrate is optimal, brought in;
+7 of 8 marks) is closed and recorded in `MASTER_PLAN.md`. The next round
+starts from the To-Do list, `STATUS.md` §2.1.
 
 **Deciding figure.** 0 steps outstanding.
 
@@ -46,12 +44,15 @@ absence:
 
 ## Status
 
-**No round is in flight.** Phase 127 is closed (norm 256 and the hex colour,
-taken from `STATUS.md` §2.1 item 1 with the owner's note): the
-pre-registration and `RequestProject/GLM/HexRung.lean` first, then
-`reasoning/norm256_hex.py`; the measurement is `tools norm256-hex` (cache
-re-taken with `--write`). The study is
-[`studies/NORM_256_HEX_STUDY.md`](studies/NORM_256_HEX_STUDY.md), 7 of 8
-marks. The record is [`MASTER_PLAN.md`](MASTER_PLAN.md), "Phase 127". The
-next round starts from the To-Do list, `STATUS.md` §2.1; 0 steps of Phase 127
-are outstanding.
+**No round is in flight.** Phase 133 is closed (the designed substrate,
+taken at the owner's request): the supplied study moved into
+`source_material/substrate_study/`, the pre-registration and its Lean
+statements first (`RequestProject/GLM/DesignedSubstrate.lean`, now proved),
+then the stages and the measurement (`reasoning/designed_substrate.py`,
+`tools designed-substrate`). The study is
+[`studies/DESIGNED_SUBSTRATE_STUDY.md`](studies/DESIGNED_SUBSTRATE_STUDY.md),
+7 of 8 marks; the record is [`MASTER_PLAN.md`](MASTER_PLAN.md), "Phase 133".
+The next round starts from the To-Do list, `STATUS.md` §2.1; 0 steps of the
+phase are outstanding.
+In one line: Phase 133 proves the GLM's Golay carrier optimal among all
+4,096-word designs and adds two certified ways to resolve its six-way tie.

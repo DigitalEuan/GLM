@@ -5,7 +5,7 @@
 
 **Question.** What has each phase of the wiring plan delivered, and what does the next round start from?
 
-**Verdict.** Phase 127 (norm 256 and the hex colour: the empty norm-256 rung filled by `H16`, the first hex digit of each coordinate, safe on the 568 queries and on 568 held-out ones but uniquely answering none of the 568; the rotated Leech rung retired; the hex shortcut held on every point checked; and the held-out set showed the existing ladder answering 8 of 568 wrongly; 7 of 8 marks) is closed, after Phase 126 (inert variables, 7 of 7 marks); Phase 128 starts from the To-Do list in [`STATUS.md`](STATUS.md) §2. Round 9's remaining retrieval items are parked at the owner's direction.
+**Verdict.** Phase 133 (the designed substrate: the owner's separate study of whether the Golay–Leech substrate is optimal for the GLM, brought in — the GLM's own Lean development now proves that no 4,096-word design with any decoder decodes correctly more often than its Golay code on the bit-flip channel, that the six-way tie's negative space and its one-sixth cap belong to the parameters, and that a seven-bit sender tag and a soft certificate are sound new fork stages; measured, the tag resolves every one of 680,064 tied reads with 0 wrong; 7 of 8 marks, S7 missed on a wrongly declared sample figure) is closed, after Phase 132 (passes that print a counter, long output and the diagnosis of a refusal; 7 of 9 marks) and Phase 131 (constant bounds and repeated output; 6 of 7 marks); Phase 134 starts from the To-Do list in [`STATUS.md`](STATUS.md) §2. Round 9's remaining retrieval items are parked at the owner's direction.
 
 **Deciding figure.** Every closed phase names what was built, where it lives, and how to see it recompute itself.
 
@@ -25,7 +25,7 @@ recompute itself.
 
 Everything below is reachable from the package's public API and from the query
 runtime — **<!--figure:query-kinds-->24 query kinds<!--/figure-->**, **<!--figure:report-subjects-->67 report subjects<!--/figure-->** and **<!--figure:registers-->8 registers<!--/figure-->** — is
-covered by the test suite (<!--figure:test-files-->177 test files<!--/figure-->),
+covered by the test suite (<!--figure:test-files-->183 test files<!--/figure-->),
 and — where it is a report or a task — has a generated column-3 script that
 recomputes the claim in a **fresh interpreter** and fails if anything differs.
 
@@ -183,9 +183,394 @@ as everything else: only the open phase is state.
 
 ---
 
+## Phase 133 — the designed substrate: is the Golay carrier optimal, and what resolves its ties?
+
+**Status: closed this session.** Taken at the owner's request rather than
+from `STATUS.md` §2.1: the owner supplied a separate study, *Designed
+Dimensions × GLM* (now
+[`source_material/substrate_study/`](source_material/substrate_study/README.md)),
+asking whether Golay–Leech/24D is optimal for GLM use or whether a designed
+dimensional system could surpass it, and whether bringing it in measurably
+increases the GLM's reasoning abilities or scope. Its record concludes that
+in the GLM's regime Golay is optimal and the freedom left lies in how the
+six-way tie is resolved. The pre-registration
+([`studies/DESIGNED_SUBSTRATE_STUDY.md`](studies/DESIGNED_SUBSTRATE_STUDY.md)
+§§0–6: marks S1–S8) was committed with the Lean statements and before any
+code, with two explorations disclosed. **7 of 8 marks were met**; S7 was
+missed on how a sample figure was declared (below). Tests:
+`tests/test_designed_substrate.py` (14).
+
+*Found on arrival.* The supplied files had been unpacked over the repository
+root: the substrate study's package README had replaced the GLM's front-door
+`README.md`, its theorem index sat at the root as `THEOREMS.md`, and its
+reference implementation and self-test sat beside them. They were moved into
+`source_material/substrate_study/` (`README.md`, `glm_package/README.md`,
+`glm_package/THEOREMS.md`, `glm_package/glm_substrate.py`,
+`glm_package/test_glm_substrate.py`; its self-test passes 12 of 12), and the
+front-door `README.md` was rewritten from the current state documents.
+
+**What was built.**
+* `RequestProject/GLM/DesignedSubstrate.lean` (no `sorry`; `native_decide`
+  through the existing Golay census and one tag check): for every finite set
+  of words and every decoder into it, the decoder's total channel weight is
+  bounded by filling the radius-3 balls and spending the rest at distance 4
+  (`decoder_sum_le`), the GLM's code with any nearest-codeword decoder meets
+  the bound (`golay_attains`), so no 4,096-word design decodes correctly more
+  often at any flip rate `p ≤ 1/2` (`golay_optimal`); every design leaves at
+  least `2²⁴ − |C|·2325` received words at distance ≥ 4
+  (`negative_space_floor`, 7,254,016 for 4,096 words), and one that corrects
+  three flips corrects at most that many four-flip pairs, one sixth
+  (`weight4_resolved_le`, `weight4_resolved_le_4096`); a seven-bit linear tag
+  is non-zero on every octad (`tag_nonzero_on_octads`), so two codewords
+  within distance 4 of one word with one tag are equal (`tag_resolves`); and a
+  soft reading within squared distance 8 of one codeword's ±1 image is more
+  than 8 from every other (`soft_certificate`), with 8 sharp
+  (`soft_certificate_sharp`).
+* `reasoning/designed_substrate.py`: the stages `sender tag` and
+  `soft certificate` over `carried_fork.CarriedFork` (ordinary ledger
+  records; `carried_fork.py` not edited), the gentle soft ensemble, the
+  one-bit extensions of the punctured code and their silent-miscorrection
+  count, and `designed_substrate_report`; `tools designed-substrate [--json]`.
+
+**Measured.** S2: the tag resolves 680,064 of 680,064 tied reads (64 probe
+codewords × every four-flip error), 0 wrong; the hard word alone resolves 0.
+S3: masks equal to the Lean file's, 759 of 759 octads tagged, six candidates
+pairwise at squared distance 32 on every read. S4: the certificate refuses all
+768 K4b reads (the sent carrier is never within the radius). S5: it resolves
+768 of 768 reads of the gentle ensemble, 0 wrong, each to the least reliable
+tetrad. S6: silent four-flip miscorrections 0 for the GLM's code against
+2,695 (`λ = 1, 2, 4, 8`), 3,920 (`λ = 3, 4095`), 4,375 (`λ = 7`) and 4,480
+(`λ = 15`). S7: 7,254,016 received words at distance 4, equal to the floor,
+but the legacy decoder corrects 120,604 weight-4 reads on the probe, not the
+declared 113,344 — one sixth holds over all 4,096 codewords together, not on a
+sample, so the mark is missed on its declaration. S8: no existing reasoning
+module edited; the carried fork's K4b figures unchanged. Controls: a tag with
+one bit flipped contradicts 651,968 reads and resolves 28,096 wrongly; the
+closed world over 32 cases resolves 85.7 % of its reads. The new Lean file
+also moved the stack relay's gate sweep forward again (strict on all five
+gates, to 1/4: 354 against 350 of 423), recorded as measured in
+`test_stack.py` and `studies/STACK_RELAY_STUDY.md`; and the new module was
+added to the exactness check's XOR inventory, which the close caught.
+
+**What it answers.** Inside the GLM's regime Golay–Leech/24D is optimal, by a
+theorem of the GLM's own development; the six-way tie's negative space and its
+one-sixth cap belong to the parameters, so no designed substrate of the same
+size removes the tie; the gain is in resolving it, where the tag and the soft
+certificate are new certified stages. Outside the regime the theorem is
+silent, and the 32- and 48-dimensional rungs are measured elsewhere.
+
+**Left.** The stages in the answering path, a protected tag, the
+certificate's acceptance on a soft reading the GLM produces itself — `STATUS.md`
+§2.2, *The designed substrate, the rest*.
+
+## Phase 132 — passes that print a counter, long output, and the diagnosis of a refusal (GLM-BAT, the rest)
+
+**Status: closed this session.** Taken from `STATUS.md` §2.2, two lines of
+*GLM-BAT, the rest* that Phase 131 left
+([`studies/CONSTANT_BOUND_STUDY.md`](studies/CONSTANT_BOUND_STUDY.md) §7.4):
+passes that print a counter (K5) and jumps whose output passes 100,000 lines
+(K4), both refused although both halt; and, at the owner's suggestion that
+the Non-Random Coherence Index (NRCI) might serve where an additional layer of
+diagnosis is required, a diagnosis of the refusals that remain. §2.1's items
+each change answers the evaluation pins and need a frozen-path comparison of
+the answering path; the round took, like Phases 130 and 131, a faculty the
+machine lacked. The pre-registration
+([`studies/AFFINE_OUTPUT_STUDY.md`](studies/AFFINE_OUTPUT_STUDY.md) §§0–6:
+marks A1–A9, battery P1–P10, a diagnosis battery of eight, twenty questions)
+was committed with the Lean file and before any code. **7 of 9 marks were
+met**; A3 and A4 were missed on how two hand-worked expectations were stated
+(below). Tests: `tests/test_affine_output.py` (13).
+
+**What was built.**
+* `RequestProject/GLM/AffineOutput.lean` (no `sorry`, standard axioms): with
+  no hypothesis on what a step writes, a pass from a translate writes the
+  first pass's lines as read from the translated states
+  (`wrun_pass_shifted`), so `K` passes write pass `m`'s block read at
+  `m • d` (`passOutput`, `lasso_output_affine`, `halts_of_jump_affine`); a
+  line written from a template fills each hole with `x_i + m·d_i`
+  (`render`, `render_hole`, `render_append`, `render_const`,
+  `templated_block`); constant first differences, constant second
+  differences and a constant ratio have the closed forms `x₀ + tΔ`,
+  `2x_t = 2x₀ + 2tΔ₀ + c·t(t−1)` and `x₀rᵗ` (`const_diff_closed_form`,
+  `const_second_diff_closed_form`, `const_ratio_closed_form`), and a non-zero
+  constant second difference is never a translation
+  (`quadratic_not_translation`).
+* `reasoning/batch_machine.py`: `jumped_run(..., affine=True)` reads an
+  `ECHO` (no redirection) as a template whose holes name counters and jumps a
+  pass that writes one, rendering each skipped pass's lines at the translated
+  counters; the output bound under this reading is `AFFINE_OUTPUT_CAP`
+  (1,000,000 lines); an undecided jumped run records why it took no jump
+  (`Run.blocked`); `growth_diagnosis` finds the loop head, the exact shape of
+  every changing variable and file over its last 32 visits, and the NRCI of a
+  straight line through each variable that is not a translation
+  (`growth_shape`, `predict`, `line_nrci`). Phase 131's reading is
+  `affine=False`, threaded through `run_program`.
+* `reasoning/batch_speech.py`: the second interpreter reads templates with
+  its own regular expressions and re-derives the `growth` claim with its own
+  plain run; a claim over 100,000 lines states its streams as `out_runs` and
+  `err_runs` (`output_runs`, `decode_runs`), which the checker decodes
+  itself; *what does it print?* states such output in segments (`say_runs`);
+  "(naming N)" in a jump's description; the question *why is it
+  undecided?* (`say_diagnosis`, refusal `NOT_UNDECIDED` for a decided run);
+  mutations for run-form and `growth` claims; `answer(..., affine=False)`.
+* `reasoning/affine_output.py` and `tools affine-output [--json]`;
+  `reasoning/constant_bound.py` now reads with `affine=False`, so that it
+  keeps measuring the rule it declared.
+
+**Measured.** All 10 battery programs exactly as declared, 0 wrong: P1 (K5)
+halts after 60,002 steps printing `1` to `20000`, P2 (K4) after 1,500,004
+printing `tick` 500,000 times with a 208-byte run-form claim, P3, P4, P5, P7,
+P8 and P9 after 120,002, 60,035, 40,003, 75,003, 15,002 and 60,002 steps,
+each with the declared jump; P6 and P10 refused (A2). 19 of 20 questions as
+declared; P8's printed text took the encoder's 16-line blocks where the hand
+computation expected 9 single lines (A3 missed). 33 of 33 scripts verify, 167
+of 167 mutations fail, but P2's script is 27,251 bytes against a declared
+10,000 because the checker it carries is 26,819 (A4 missed). The eight
+diagnoses as declared, and the NRCI of a straight line through L12's
+quadratic counter 0.999993 (A5); the closed forms predict the next 32 visits
+of all 8 shaped variables (A6); every earlier answer of Phases 125, 126, 130
+and 131 kept but K4 and K5, which give P2's and P1's runs, and all 300
+generated programs unchanged with no new jump (A7); every jumped *halts*
+equals a plain run, and P6 and P10 halt plainly after 3,600,002 and 60,002
+steps (A8); all 179 evaluation cases pass after re-pinning only the two
+retrieval figures that count Lean goal queries (837 -> 840) (A9). The new Lean
+file also moved the stack relay's gate sweep back to where Phase 59 left it
+(strict to 1/5, one query behind the control at 1/4), recorded as measured;
+and the first NRCI was computed with a float inside `reasoning/`, which the
+frozen-path check caught through `report blueprint` and which is now an
+integer square root with every figure unchanged.
+
+**The NRCI, as asked.** Reported beside the exact shape and read by nothing,
+it describes growth usefully (0.999993 for a quadratic counter, 0.12–0.25 for
+geometric and Fibonacci growth), and the same figure shows why it must stay a
+diagnosis: as a gate it would have accepted the quadratic counter as a
+straight line (study §7.4).
+
+**Left.** Jumps over quadratic and geometric growth (the closed forms are
+proved; no verdict reads them), the encoder's choice of block, output past
+1,000,000 lines, and the rest of the batch fragment (study §7.5, now
+`STATUS.md` §2.2).
+
+## Phase 131 — constant bounds and repeated output: two more counter lassos (GLM-BAT, the rest)
+
+**Status: closed this session.** Taken from `STATUS.md` §2.2, two lines of
+*GLM-BAT, the rest* that Phase 130 left
+([`studies/COUNTER_LASSO_STUDY.md`](studies/COUNTER_LASSO_STUDY.md) §7.4):
+passes that write output (L10) and counters compared with a variable that is
+not a counter (L11), both refused although both halt. §2.1's items each
+change answers the evaluation pins and need a frozen-path comparison of the
+answering path; the round took, like Phase 130, a faculty the machine lacked.
+The pre-registration
+([`studies/CONSTANT_BOUND_STUDY.md`](studies/CONSTANT_BOUND_STUDY.md) §§0–6:
+marks B1–B7, battery K1–K10, fifteen questions) was committed with the Lean
+file and before any code. **6 of 7 marks were met**; B2 was missed on the
+jump coordinates of two hand-worked programs (below). Tests:
+`tests/test_constant_bound.py` (12).
+
+**What was built.**
+* `RequestProject/GLM/ConstantBound.lean` (no `sorry`, standard axioms): a
+  run that collects the lines each step writes (`wrun`; `wrun_fst`,
+  `wrun_add`); a pass whose steps commute with the translation and whose
+  written lines read no counter writes the first pass's block on every pass,
+  so `K` passes write it `K` times over (`wrun_pass`, `lasso_output`), and a
+  halting run after the jump has written exactly the run in, the block `K`
+  times and the run out (`halts_of_jump_output`); a translation never moves
+  the part of the state that is not a counter (`shift_fst`), a test reading
+  that part commutes with a translation exactly while its outcome is
+  unchanged (`testC_equivariant`), and a counter against such a bound is
+  Phase 130's linear form with the bound in the constant term
+  (`const_bound_linear`, `const_bound_linear'`).
+* `reasoning/batch_machine.py`: `jumped_run(..., extended=True)` — a
+  comparison operand `%L%` with `L` not a live counter and not `ERRORLEVEL`,
+  bound at that step to a canonical integer, is read as that literal; a
+  writing pass is jumped when no line on it is an `ECHO` naming a live
+  counter and the output stays within `OUTPUT_CAP` (100,000 lines), the
+  skipped standard-output and standard-error blocks appended once per
+  skipped pass. A jump now records the lines its pass writes. Phase 130's
+  reading is `extended=False`, threaded through `run_program`.
+* `reasoning/batch_speech.py`: the second interpreter's two clauses, read
+  with its own regular expressions; ", writing *k* lines each time" in the
+  jump's description; *what does it print?* after a writing jump states runs
+  of equal lines (`"tick" (50000 times)`); a mutation dropping one copy of a
+  repeated output line; `run_script` hands the script to `python3 -I -` on
+  standard input (a claim of 50,001 lines is past one argument's length);
+  `answer(..., extended=False)`.
+* `reasoning/constant_bound.py` and `tools constant-bound [--json]`;
+  `reasoning/counter_lasso.py` now reads with `extended=False`, so that it
+  keeps measuring the rule it declared.
+
+**Measured.** All 10 battery programs with the declared verdict, steps,
+outputs, standard error, exit code and values, 0 wrong: K1 (L10) halts after
+60,002 steps printing `tick` 20,000 times, K2 (L11) after 40,003, K3 after
+150,004 printing 50,001 lines, K6 after 90,004, K9 after 120,004 printing
+40,001 lines, K10 after 90,002 with 30,000 lines of standard error and exit 1;
+K7 never; K4, K5 and K8 refused (B2's ends). K6 and K10 jump `(4, 7, 29999)`
+where the hand computation declared `(6, 9, 29998)` and `(5, 8, 29998)`: the
+masked state first recurs one line after the label's line, past the line that
+makes the first pass differ, so B2 is missed and recorded. 15 of 15 questions
+(B3); 18 of 18 scripts verify, 112 of 112 mutations fail (B4); every earlier
+answer of Phases 125, 126 and 130 kept but L10 and L11, all 300 generated
+programs unchanged and none with a new jump (B5); every jumped *halts* equals
+a plain run, neither *never* halts in 200,000 plain steps, and the refused
+controls behave as declared — K4 and K5 halt, K8 does not (B6); the full
+evaluation passes 179 of 179 with 0 confidently wrong after re-pinning only
+`report relay` and `report anonymous`, whose goal-query set grew from 835 to
+837 with the new Lean file (B7).
+
+**Left.** Passes that print a counter, jumps whose output passes 100,000
+lines, constants read through `ERRORLEVEL`, growth that is not a translation,
+and the rest of the batch fragment (study §7.4, now `STATUS.md` §2.2).
+
+## Phase 130 — counter lassos: halting and non-termination past the budget (GLM-BAT, the rest)
+
+**Status: closed this session.** Taken from `STATUS.md` §2.2, the halting
+part of *GLM-BAT, the rest* (Phases 125 and 126 left N3, a loop that halts
+after 40,003 steps, and N2, a loop whose counter only the output reads,
+refused `UNDECIDED_WITHIN_BUDGET`). §2.1 item 1 was read first and not taken:
+no module a query loads imports the ladder the placement guard protects, so
+it has no answering path yet; the correction is in `STATUS.md` and the
+study's §0. The pre-registration
+([`studies/COUNTER_LASSO_STUDY.md`](studies/COUNTER_LASSO_STUDY.md) §§0–6:
+marks C1–C7, battery L1–L12, seventeen questions) was committed with the Lean
+file and before any code. **7 of 7 marks were met.** Tests:
+`tests/test_counter_lasso.py` (10); `tests/test_operations.py` re-pinned for
+N2.
+
+**What was built.**
+* `RequestProject/GLM/CounterLasso.lean` (no `sorry`, standard axioms): on a
+  state split into a part `C` and integer counters, a pass whose every step
+  commutes with translating the counters by `m • d` repeats from every
+  translate (`lasso_iterate`), `K` passes are one jump (`lasso_accelerate`),
+  a pass that repeats for every `m` means the machine never halts
+  (`never_halts_of_lasso`), and a run that halts after a jump halts from the
+  start after exactly `i + K * p + n` steps (`halts_of_jump`); the three line
+  kinds a pass may hold commute with translation (`indep_equivariant`,
+  `add_equivariant`, `test_equivariant` — a test exactly while its outcome is
+  unchanged), and a comparison `e₀ + b·m ⋈ 0` keeps its outcome between two
+  passes where it agrees (`linear_neg_stable`, `linear_nonneg_stable`,
+  `linear_zero_unique`).
+* `reasoning/batch_machine.py`: `counters` (names some line updates as a lone
+  `SET /A V=V±k`), the masked control state, `first_change` (the first pass at
+  which a comparison changes, exactly), `jumped_run` — the third reading, used
+  only when the Phase 125 run and the Phase 126 re-reading are undecided: at
+  each first recurrence of the masked state it reads the pass, certifies
+  *never* if no comparison on it ever changes, jumps the passes up to the
+  first change if the pass writes no output, or goes on (at most the budget of
+  concrete steps and 100 jumps) — and `plain_run`, a run with no certificate.
+  `_exec_step` was factored out of the run loop so that all three readings
+  execute a line the same way.
+* `reasoning/batch_speech.py`: the answers ("yes, it halts after 40003 steps
+  with exit code 0 (the pass from step 2 to step 4 adds 1 to N, and was taken
+  19999 times in one jump, until IF %N% LSS 20000 GOTO UP changed)"; "no, it
+  never halts: the pass from step 2 to step 5 adds 1 to N, and no comparison
+  on it ever changes"), the column-3 claim kinds `run_jump` and `never_lasso`
+  — whose second interpreter re-derives the counters, every masked
+  recurrence, admissibility, every first change and every jump with its own
+  reading of the lines — and their mutations; `answer(..., jump=False)` reads
+  as Phase 126 did, which `reasoning/inert_counter.py` now uses so that it
+  keeps measuring the rule it declared.
+* `reasoning/counter_lasso.py` and `tools counter-lasso [--json]`.
+
+**Measured.** 12 of 12 battery programs and 17 of 17 questions as declared,
+0 wrong (C2, C3): six loops of 40,003 to 2,000,003 steps answered *halts*
+with exact steps, outputs and exit codes, two *never*, four controls refused;
+20 of 20 scripts verify and 112 of 112 mutations fail (C4); Phase 125's
+answers and Phase 126's other than N2 and N3 unchanged, 299 of 299 decided
+generated programs unchanged, and generated program 206, which Phase 126 left
+undecided, now certified never to halt (C5); every jumped *halts* equals a
+plain run of up to 2,500,000 steps and no *never* halts within 200,000, while
+the three refused controls L9–L11 halt plainly (C6); the full evaluation passes 179 of 179 with 0
+confidently wrong after re-pinning only `report relay` and `report anonymous`,
+whose goal-query set grew from 823 to 835 with the new Lean file (C7).
+
+**Left.** Passes that write output, comparisons with a variable that is not a
+counter, growth that is not a translation, and the rest of the batch fragment
+(study §7.4, now `STATUS.md` §2.2).
+
+## Phase 129 — the placement guard: a certified-nearest ladder on four query sets
+
+**Status: closed this session.** Taken from the follow-up Phase 128 left
+([`studies/CELL_GUARD_STUDY.md`](studies/CELL_GUARD_STUDY.md) §7.4 (ii) and
+(iii)): replace the cell guard's packing radius by the radius that is true of
+the carriers, and read the coarse-only ladder on a fourth set. The
+pre-registration
+([`studies/PLACEMENT_GUARD_STUDY.md`](studies/PLACEMENT_GUARD_STUDY.md)
+§§0–6: marks L1, P1, N1, S1–S4, K1, U2; a fourth query set) was committed
+with the Lean file and before the module; the guard had been computed on no
+query and the fourth set had not been generated. **9 of 9 marks were met.**
+Tests: `tests/test_placement_guard.py` (7).
+
+**What was built.**
+* `RequestProject/GLM/PlacementGuard.lean` (no `sorry`, standard axioms), on
+  top of `CellGuard.lean`: if every carrier other than `i` is at least `ρ`
+  from `p` and `dist(q, c_i) + dist(q, p) < ρ`, then `c_i` is the strictly
+  nearest carrier, with no hypothesis on the quantiser
+  (`placed_strict_nearest`); for a nearest-point quantiser the stored radius
+  is at least the packing radius (`placement_radius_ge`), so the cell guard's
+  answers are kept (`cellGuard_imp_placed`); the guarded ladder is
+  order-independent (`placed_firstNamed_agree`).
+* `reasoning/placement_guard.py`: the per-cell radii (1,166 single-carrier
+  cells over 11 rungs), the guard, the fourth set (codeword index `i + 1024`)
+  and the measurement cache; `tools placement-guard [--write] [--json]`.
+
+**Measured.** The placement-guarded ladder answers 445, 402, 393 and 402
+queries correctly and **none wrongly** on the standard, held-out, third and
+fourth sets, where the unguarded ladder gives 467/0, 435/8, 426/1 and 441/2
+in the middle-out order: every wrong answer removed, 91 to 95 per cent of the
+correct ones kept. Every guarded answer is the strictly nearest carrier, and
+none of the 1, 13, 7 and 14 queries on which the nearest carrier alone is
+wrong passes the guard. The coarse-only ladder is safe on the fourth set too
+(386 correct). The answering path is untouched, so the evaluation is
+unchanged. Adding the two Lean files (4990 declarations) moved one existing
+measurement: the stack relay is strict on all five gates again, to 1/4,
+recorded as measured in `test_stack.py` and `STACK_RELAY_STUDY.md`.
+
+**Left.** The guard in the answering path, under a frozen-path comparison,
+with the radius table kept beside the digest of the carriers (study §7.4, now
+`STATUS.md` §2).
+
+## Phase 128 — the cell guard, and the retirement rule read on two sets (the ladder on held-out perturbations)
+
+**Status: closed this session.** Taken from `STATUS.md` §2.1 item 1, *the
+ladder on held-out perturbations* (Phase 127's held-out set found the ladder
+Phase 123 left answering 8 of 568 wrongly). The pre-registration
+([`studies/CELL_GUARD_STUDY.md`](studies/CELL_GUARD_STUDY.md) §§0–6: marks
+L1, Q1, N1, N2, S1–S3, K1, U1; two candidates; a third query set) was
+committed with the Lean file and before the module. **8 of 9 marks were met**
+(K1 missed). Tests: `tests/test_cell_guard.py` (7).
+
+**What was built.**
+* `RequestProject/GLM/CellGuard.lean` (no `sorry`, standard axioms): a
+  nearest-point quantiser of a `2r`-separated set is forced within `r`
+  (`quantise_eq_of_dist_lt`); a rung answer whose cell holds only `i` and with
+  `dist(q, c_i) + dist(q, Q q) < r` is the strictly nearest carrier
+  (`guarded_strict_nearest`); guarded rungs never disagree and a guarded
+  ladder is order-independent (`guarded_agree`, `firstNamed_agree`); a guarded
+  answer is right when the perturbation is shorter than half the true
+  carrier's distance to every other (`guarded_correct_of_close`); and
+  `√A + √B < √R ↔ A + B < R ∧ 4AB < (R − A − B)²` (`sqrt_add_lt_sqrt_iff`),
+  the exact test the code applies.
+* `reasoning/cell_guard.py`: the guard, the quantiser hypothesis check, the
+  nearest-carrier reading, the union retirement, the third set (codeword index
+  `i + 3072`), the placement counts and the measurement cache;
+  `tools cell-guard [--write] [--json]`.
+
+**Measured.** The guard answers nothing wrongly on any of the three sets and
+every guarded answer is the strictly nearest carrier, but it keeps only 30,
+12 and 12 of the ladder's correct answers (467, 435, 426): a carrier outside
+the inscribed ball of its own cell can never pass it, and from 1 to 58 of the
+142 carriers per rung are both inside that ball and alone in their cell. On
+the third set the unguarded ladder answers 1 query wrongly, reproducing Phase
+127's finding on unseen data. The retirement rule read on the standard and
+held-out sets together retires every fine rung; the coarse-only ladder
+`8C 8A 4C 2C 2A` answers 388 of the third set correctly and none wrongly.
+
+**Left.** A radius read from the carriers instead of the packing radius, and
+a fourth set (taken by Phase 129).
+
 ## Phase 127 — norm 256 and the hex colour (lattice item 3)
 
-**Status: closed this session.** Taken from `STATUS.md` §2.1 item 1, *norm 256
+**Status: closed.** Taken from `STATUS.md` §2.1 item 1, *norm 256
 of the power-of-two family* (Phase 123 retired both scaled `√2`-lattice
 candidates there), with the owner's note that norm 256 could align with hex
 colour. The pre-registration
@@ -4955,7 +5340,7 @@ remaining, the release. Running it failed six units, none of them noise:
 
 **What the release now says.** `signoff --verify-release` reports **99 of 99
 test files and 7 of 7 instruments** signed with the exhaustive cases on; the
-suite is **<!--figure:suite-->5,334 tests across 175 of the 177 test files, 18,873 subtests, outside the document checks<!--/figure-->**,
+suite is **<!--figure:suite-->5,397 tests across 181 of the 183 test files, 18,972 subtests, outside the document checks<!--/figure-->**,
 one process with `GLM_EXHAUSTIVE=1` collecting 3,979; the end-to-end
 evaluation is **157 / 157** with 19 expected refusals; `corpus --check` is
 current; and `lake build` is clean over 120 Lean files with no `sorry`.

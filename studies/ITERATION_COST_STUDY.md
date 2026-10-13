@@ -6,7 +6,7 @@
 
 **Verdict.** Most of the cost was work repeated on things that had not moved, and a cache keyed on what it is derived from does not repeat it.
 
-**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->12,637<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
+**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->12,934<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
 
 **Recomputed by.** `glm_universal.corpus.cost.cost_report`
 
@@ -73,8 +73,8 @@ nothing.
 <!-- generated: cost-addresses -->
 | book | units | decodes from nothing | decodes now | reused |
 |---|---|---|---|---|
-| Lean declarations | 4,975 | 9,222 | 0 | 9,950 |
-| corpus sections | 1,739 | 3,415 | 0 | 3,478 |
+| Lean declarations | 5,067 | 9,405 | 0 | 10,134 |
+| corpus sections | 1,798 | 3,529 | 0 | 3,596 |
 
 Reuse is checked, not assumed: each rebuild re-decodes a sample of the answers it reused and reports any that moved (4 sampled in the declaration book, 4 in the document book, none moved).
 <!-- end generated -->
@@ -122,7 +122,7 @@ works for tables and not for a sentence, and the sentences were where the drift
 lived. The block mechanism is now available at the size of a phrase:
 
 ```markdown
-the suite is <!--figure:test-files-->177 test files<!--/figure--> today
+the suite is <!--figure:test-files-->183 test files<!--/figure--> today
 ```
 
 The markers are HTML comments, so a reader sees only the number. `--refresh`
@@ -130,7 +130,7 @@ rewrites the body, `--check` fails when it has drifted, and a marker naming a
 figure nothing emits is a reported defect rather than a silent no-op.
 
 <!-- generated: cost-figures -->
-164 figures are registered and 598 markers carry them, across 32 documents.  A marker whose text is not what its figure now says is what `--refresh` rewrites and what `--check` fails on.
+164 figures are registered and 593 markers carry them, across 32 documents.  A marker whose text is not what its figure now says is what `--refresh` rewrites and what `--check` fails on.
 
 The registry: `binding-ambiguous`, `binding-as-declared`, `binding-carriers`, `binding-control-wrong`, `binding-declared-count`, `binding-largest-fibre`, `binding-nameable`, `binding-product-recoverable`, `binding-product-zero`, `binding-readings`, `binding-reasons`, `binding-recovered`, `binding-refused`, `binding-roles`, `conversation-alone`, `conversation-answered`, `conversation-as-declared`, `conversation-control-rows`, `conversation-control-wrong`, `conversation-declared-count`, `conversation-reasons`, `conversation-refused`, `corpus-archive-documents`, `corpus-documents`, `corpus-sections`, `corpus-state-documents`, `directive-count`, `directives`, `evaluation-case-count`, `evaluation-cases`, `extremum-answered`, `extremum-as-declared`, `extremum-declared-count`, `extremum-reasons`, `extremum-reasons-declared`, `extremum-refused`, `extremum-ties`, `fieldsurface-fields`, `fieldsurface-held`, `fieldsurface-moved`, `fieldsurface-pairs`, `fieldsurface-parsed-after`, `fieldsurface-parsed-before`, `fieldsurface-predicted`, `fieldsurface-rows`, `fieldsurface-surface-after`, `fieldsurface-surface-before`, `fieldsurface-tables`, `lean-declaration-files`, `lean-declarations`, `lean-file-count`, `lean-files`, `normesc-correct`, `normesc-family-correct`, `normesc-family-rungs`, `normesc-family-wrong`, `normesc-first-broken`, `normesc-longest-safe`, `normesc-named-correct`, `normesc-named-rungs`, `normesc-queries`, `normesc-refused`, `normesc-rungs`, `normesc-wrong`, `normfamily-norms`, `normfamily-rung-count`, `opesc-count`, `opesc-program-correct`, `opesc-program-queries`, `opesc-program-wrong`, `oracle-absent`, `oracle-english`, `oracle-parsed`, `oracle-parser-worth`, `oracle-questions`, `oracle-surface`, `ordering-answered`, `ordering-as-declared`, `ordering-declared-count`, `ordering-held`, `ordering-parsed-after`, `ordering-parsed-before`, `ordering-reasons`, `ordering-refused`, `ordering-surface-after`, `ordering-surface-before`, `ordering-surface-parsed`, `planner-reports-per-check`, `plans-ambiguous`, `plans-bare-probe-correct`, `plans-bare-probe-refused`, `plans-bare-probe-wrong`, `plans-frames`, `plans-gained`, `plans-gains-address`, `plans-gains-derive`, `plans-gains-table`, `plans-held-bare-correct`, `plans-held-bare-correct-refusal`, `plans-held-bare-wrong`, `plans-held-correct`, `plans-held-correct-refusal`, `plans-held-total`, `plans-held-wrong`, `plans-probe-correct`, `plans-probe-refused`, `plans-probe-wrong`, `plans-questions`, `plans-stress-bare-correct`, `plans-stress-bare-wrong`, `plans-stress-correct`, `plans-stress-correct-refusal`, `plans-stress-first-correct`, `plans-stress-first-refused`, `plans-stress-refused`, `plans-stress-wrong`, `plans-units`, `planstore-coarse-wrong`, `planstore-declared-count`, `planstore-refusals`, `planstore-refusals-replayed`, `planstore-replayed`, `planstore-trials-first`, `planstore-trials-replayed`, `planstore-worst-case`, `probe-correct`, `probe-derived`, `probe-lexicon-held`, `probe-lexicon-words`, `probe-pass-mark`, `probe-questions`, `probe-refused`, `probe-wrong`, `query-kinds`, `reasoning-modules`, `rebuild-decodes-from-nothing`, `rebuild-decodes-now`, `registers`, `repo-cache-bytes`, `repo-cache-share`, `repo-primary-bytes`, `repo-stored-bytes`, `report-subjects`, `scales-answered`, `scales-as-declared`, `scales-bridged`, `scales-declared`, `scales-numeric`, `scales-pairs`, `scales-quantities`, `scales-refused`, `scales-rows`, `scales-still-refused`, `secondread-adopted`, `secondread-configurations`, `secondread-given-up`, `secondread-matched-removes`, `secondread-program-correct`, `secondread-program-refused`, `secondread-program-wrong`, `secondread-shipped`, `suite`, `test-file-count`, `test-files`.
 <!-- end generated -->
@@ -185,15 +185,15 @@ Measured over the suite, by `glm_universal.corpus.cost.lean_blast_radius`:
 
 | | |
 |---|---|
-| test units in the suite | 177 |
-| Lean files | 201 |
-| units an edit to *any* Lean file used to make stale | 163 |
-| units one Lean file makes stale now, median | 78 |
-| units the worst single Lean file makes stale | 149 |
-| units that read the tree with a glob, so are stale whenever it moves | 78 |
+| test units in the suite | 183 |
+| Lean files | 207 |
+| units an edit to *any* Lean file used to make stale | 169 |
+| units one Lean file makes stale now, median | 81 |
+| units the worst single Lean file makes stale | 153 |
+| units that read the tree with a glob, so are stale whenever it moves | 81 |
 
 The Lean row counts distinct file names the ledger tracks, so it is the
-development's 182 files under `RequestProject/GLM/`, the reference tool and
+development's 184 files under `RequestProject/GLM/`, the reference tool and
 the build's `Main.lean`. Phases 89 and 90 added three Lean files (`QuestionSetB.lean`,
 `QuestionSetBAnswers.lean`, `TypedOperators.lean`). Phase 90 also added one
 unit, `test_typed_operators.py`, which reaches the router and cites its Lean
@@ -304,6 +304,25 @@ the router and cites its Lean file, so every row moved by one.
 Phase 127 added one Lean file (`HexRung.lean`) and one unit,
 `test_norm256_hex.py`, which reads the Lean corpus and cites its Lean file,
 so the suite, file and any-Lean-file rows moved by one.
+Phases 128 and 129 added two Lean files (`CellGuard.lean`,
+`PlacementGuard.lean`) and two units, `test_cell_guard.py` and
+`test_placement_guard.py`, each of which reads its own Lean file and the
+stored measurement: the unit count, the file count and the any-Lean-file
+row moved by two, and the other three did not.
+Phase 130 added one Lean file (`CounterLasso.lean`) and one unit,
+`test_counter_lasso.py`, which reaches the operations module and through it
+the router and cites its Lean file, so every row moved by one.
+Phase 131 added one Lean file (`ConstantBound.lean`) and one unit,
+`test_constant_bound.py`, which reaches the operations module through
+`counter_lasso.py` and cites its Lean file, so again every row moved by one.
+Phase 132 added one Lean file (`AffineOutput.lean`) and one unit,
+`test_affine_output.py`, which reaches the operations module and cites its
+Lean file, so every row moved by one once more.
+Phase 133 added one Lean file (`DesignedSubstrate.lean`) and one unit,
+`test_designed_substrate.py`, which reaches the carried fork and cites its
+Lean file but does not read the tree with a glob, so the unit count, the
+file count, the any-Lean-file row and the worst single file moved by one,
+and the median and the glob row did not.
 Phase 68 added one unit (`test_reverse_tct_two.py`) that reaches
 the router, and so the development through it, which is why the floor moved
 from 34 to 35 with the other rows; Phase 69 added another
@@ -879,5 +898,5 @@ that pays for it, with the storage, loading, digesting and rebuilding of the
 table counted on the table's side rather than assumed away.
 
 <!-- generated: cost-tier -->
-**Rebuilding both address books from nothing decodes 12,637 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 179 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  598 figures inside sentences, across 32 documents, are emitted rather than typed.
+**Rebuilding both address books from nothing decodes 12,934 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 179 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  593 figures inside sentences, across 32 documents, are emitted rather than typed.
 <!-- end generated -->

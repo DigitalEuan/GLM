@@ -1131,11 +1131,11 @@
   {
    "after_ok": true,
    "before_ok": true,
-   "cause": null,
+   "cause": "this round: the query-escalation report counts the evaluation cases, which gain the new one, and it is re-taken over them",
    "id": "report-query-escalation",
    "present": true,
    "same_status": true,
-   "same_text": true
+   "same_text": false
   },
   {
    "after_ok": true,
@@ -1606,5 +1606,5 @@
    "same_text": true
   }
  ],
- "source_digest": "72a6b2f8a47f3c983085c8609f5fd02603b6b0f6c16d5fcf041dac5a79b54dce"
+ "source_digest": "6a7f00e7fc855c0e188251e20af36359baf295003332b565b8b776727285bb42"
 }

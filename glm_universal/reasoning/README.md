@@ -7,7 +7,7 @@
 
 **Verdict.** Everything is exact `int` / `fractions.Fraction` / `F_2`; nothing here imports `random`.
 
-**Deciding figure.** 169 modules, one frozen data file, and a runnable audit.
+**Deciding figure.** 175 modules, one frozen data file, and a runnable audit.
 
 **Recomputed by.** `glm_universal.reasoning.reasoning_report`
 
@@ -16,7 +16,7 @@
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 
-**Status: implemented (GLM-3+ Step 3, extended since).** **169 modules**, one
+**Status: implemented (GLM-3+ Step 3, extended since).** **175 modules**, one
 frozen data file,
 and a runnable audit. Everything is exact `int` / `fractions.Fraction` /
 `F_2`; nothing here imports `random`; nothing here imports a third-party
@@ -80,10 +80,16 @@ Sections 1–4 below describe these in detail.
 | `frozen_path.py` | Phase 123, mark B5: every evaluation case before the round, as the query-escalation store recorded it, asked again; status kept for 178 of 178, and every moved text listed with a declared cause | `tools frozen-path` |
 | `probe_budget.py` | Phase 124: the certifying reading with no barren stop and a budget of 1056 starts (`GLM.ProbeBudget.budget_serves_every_type`); the share hypothesis on the stored ensembles, the 23 references and 256 held-out walks under the rule and under the census convention | `tools probe-budget` |
 | `ops_ladder.py` | Phase 125: the owner's DevOps-ladder note as a register — 97 terms in ten tiers, each a declared composition of lower ones; the relation reader (part of, shared parts, least common terms, ground overlap), a carrier and codec per term, the projection onto the Geometric–Cybernetic ladder and 14 cross-overs to objects the package already held | `tool ladder`; `tools ops-ladder` |
-| `batch_machine.py` | Phase 125: GLM-BAT, a declared fragment of the batch language, and its machine over an in-memory file system; the control-state cycle certificate (`GLM.OperationsLadder.never_halts_of_projected_repeat`), idempotence in state, drift and the reconciling program, pipelines with rollback, unreachable lines; Phase 126 added `inert_variables`, `is_closed_inert` and the forgetful re-reading of an undecided run (`GLM.InertCounter.never_halts_of_inert_repeat`) | `tool machine` |
+| `batch_machine.py` | Phase 125: GLM-BAT, a declared fragment of the batch language, and its machine over an in-memory file system; the control-state cycle certificate (`GLM.OperationsLadder.never_halts_of_projected_repeat`), idempotence in state, drift and the reconciling program, pipelines with rollback, unreachable lines; Phase 126 added `inert_variables`, `is_closed_inert` and the forgetful re-reading of an undecided run (`GLM.InertCounter.never_halts_of_inert_repeat`); Phase 130 added `counters`, `first_change`, `jumped_run` (the counter-lasso reading: a pass whose counters come back translated is jumped up to its first changing comparison, or certified never to halt — `GLM.CounterLasso.halts_of_jump`, `never_halts_of_lasso`) and `plain_run` | `tool machine` |
 | `batch_speech.py` | Phase 125: each GLM-BAT instruction as one English sentence and back, programs written in English, the questions a program can be asked, and column 3 — a standalone Python transpilation run under `python3 -I`, with its mutations | `tool machine` |
 | `inert_counter.py` | Phase 126: the inert-variable battery N1–N10, its questions, the `never_inert` certificates and mutations, the non-interference on Phase 125 and the soundness control (marks I2–I6); the rule itself is `batch_machine.inert_variables` | `tools inert-counter` |
+| `counter_lasso.py` | Phase 130: the counter-lasso battery L1–L12, its seventeen questions, the `run_jump` and `never_lasso` certificates and mutations, the non-interference on Phases 125 and 126 and the soundness control against plain runs (marks C2–C6); the rule itself is `batch_machine.jumped_run` | `tools counter-lasso` |
+| `constant_bound.py` | Phase 131: constant bounds and repeated output — the battery K1–K10, its fifteen questions, the certificates and mutations, the non-interference on Phases 125, 126 and 130 and the soundness control (marks B2–B6); the rule is `batch_machine.jumped_run` with `extended=True` | `tools constant-bound` |
+| `affine_output.py` | Phase 132: passes that print a counter, long output and the diagnosis of a refusal — the battery P1–P10, the diagnosis battery, twenty questions, the certificates and mutations, the closed-form predictions, the non-interference on Phases 125, 126, 130 and 131 and the soundness control (marks A2–A8); the rule is `batch_machine.jumped_run` with `affine=True` and `batch_machine.growth_diagnosis` | `tools affine-output` |
+| `designed_substrate.py` | Phase 133: the designed substrate — the `sender tag` and `soft certificate` stages over `carried_fork.CarriedFork`, the gentle soft ensemble, the one-bit extensions of the punctured code and their silent miscorrections, the negative-space floor and the controls (marks S1–S8); proved facts in `RequestProject/GLM/DesignedSubstrate.lean` | `tools designed-substrate` |
 | `norm256_hex.py` | Phase 127: the norm-256 rung of the power-of-two family — the candidates `R256`, `16Z` and `H16` (first-hex-digit reading, proved nearest by `GLM.HexRung.floor_bucket_nearest`), the hex-colour membership shortcut for the rotated Leech rung, the filled ladder and its held-out reading (marks H1–H8) | `tools norm256-hex [--write]` |
+| `cell_guard.py` | Phase 128: the cell guard — a rung answers its cell's single carrier only when the query's distance to it plus its distance to the cell's centre is below the packing radius, which makes the answer the strictly nearest carrier (`GLM.CellGuard.guarded_strict_nearest`); the quantiser hypothesis, the nearest-carrier reading, the retirement rule read on two sets, the third query set and the placement counts (marks Q1–U1) | `tools cell-guard [--write]` |
+| `placement_guard.py` | Phase 129: the placement guard — the cell guard with a radius stored per cell, the distance from the centre to the nearest other carrier (`GLM.PlacementGuard.placed_strict_nearest`); the radii, the fourth query set and the four-set reading beside the cell guard and the unguarded ladder (marks P1–U2) | `tools placement-guard [--write]` |
 | `operations.py` | Phase 125: the battery M1–M25, E1–E6, Q1–Q18 and R1–R5, the marks O2–O9, and the post-hoc agreement of the machine and column 3 on generated programs | `tools ops-ladder [--agreement]` |
 | `blueprint.py` | `glm_unification_blueprint.md` turned into a live claim ledger: every testable sentence recomputed against the package, each given one of four verdicts | `report blueprint` |
 | `engine.py` | the thermo-dynamic carrier engine of Part III assembled from parts the package already had — cam, accumulator, escapement, lattice snap, radiator, turbocharger, gearbox — so the section's headline precision figure is measured rather than quoted | `report engine` |

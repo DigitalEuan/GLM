@@ -133,6 +133,7 @@ form of every row here is generated into [`DIGEST.md`](DIGEST.md); read that
 first and descend into the few that bear on the task.
 
 **The substrate, and what it costs.**
+[`DESIGNED_SUBSTRATE_STUDY.md`](studies/DESIGNED_SUBSTRATE_STUDY.md) ·
 [`ZERO_STORAGE_STUDY.md`](studies/ZERO_STORAGE_STUDY.md) ·
 [`ZERO_STORAGE_V5_STUDY.md`](studies/ZERO_STORAGE_V5_STUDY.md) ·
 [`PCGS_STUDY.md`](studies/PCGS_STUDY.md) ·

@@ -1,5 +1,5 @@
 {
-"constants": 12720,
+"constants": 12881,
 "graph": {
 "GLM.Address.Conflates": [
 "GLM.Address.Quantiser",
@@ -199,6 +199,70 @@
 "GLM.Admission.Door",
 "GLM.Admission.Route",
 "GLM.Admission.route"
+],
+"GLM.AffineOutput.const_diff_closed_form": [
+"GLM.AffineOutput.diff"
+],
+"GLM.AffineOutput.const_ratio_closed_form": [],
+"GLM.AffineOutput.const_second_diff_closed_form": [
+"GLM.AffineOutput.const_diff_closed_form",
+"GLM.AffineOutput.diff"
+],
+"GLM.AffineOutput.diff": [],
+"GLM.AffineOutput.halts_of_jump_affine": [
+"GLM.AffineOutput.lasso_output_affine",
+"GLM.AffineOutput.passOutput",
+"GLM.ConstantBound.wrun",
+"GLM.ConstantBound.wrun_add",
+"GLM.ConstantBound.wrun_fst",
+"GLM.CounterLasso.shift",
+"GLM.OperationsLadder.Halts",
+"GLM.OperationsLadder.run"
+],
+"GLM.AffineOutput.lasso_output_affine": [
+"GLM.AffineOutput.passOutput",
+"GLM.AffineOutput.passOutput_succ",
+"GLM.AffineOutput.wrun_pass_shifted",
+"GLM.ConstantBound.block",
+"GLM.ConstantBound.wrun",
+"GLM.ConstantBound.wrun_add",
+"GLM.CounterLasso.shift",
+"GLM.CounterLasso.shift_zero"
+],
+"GLM.AffineOutput.passOutput": [
+"GLM.ConstantBound.block",
+"GLM.CounterLasso.shift"
+],
+"GLM.AffineOutput.passOutput_succ": [
+"GLM.AffineOutput.passOutput",
+"GLM.ConstantBound.block",
+"GLM.CounterLasso.shift"
+],
+"GLM.AffineOutput.quadratic_not_translation": [
+"GLM.AffineOutput.diff"
+],
+"GLM.AffineOutput.render": [],
+"GLM.AffineOutput.render_append": [
+"GLM.AffineOutput.render"
+],
+"GLM.AffineOutput.render_const": [
+"GLM.AffineOutput.render"
+],
+"GLM.AffineOutput.render_hole": [
+"GLM.AffineOutput.render"
+],
+"GLM.AffineOutput.templated_block": [
+"GLM.AffineOutput.render",
+"GLM.ConstantBound.block",
+"GLM.CounterLasso.shift"
+],
+"GLM.AffineOutput.wrun_pass_shifted": [
+"GLM.ConstantBound.block",
+"GLM.ConstantBound.block_succ",
+"GLM.ConstantBound.wrun",
+"GLM.ConstantBound.wrun_add",
+"GLM.CounterLasso.shift",
+"GLM.CounterLasso.shift_shift"
 ],
 "GLM.Agree.agree_answered_sq": [],
 "GLM.Agree.agree_conf_sum": [
@@ -888,6 +952,41 @@
 ],
 "GLM.CarriedFork.unsure_resolves": [
 "GLM.CarriedFork.at_most_one_fits"
+],
+"GLM.CellGuard.IsNearest": [],
+"GLM.CellGuard.Separated": [],
+"GLM.CellGuard.StrictNearest": [],
+"GLM.CellGuard.firstNamed_agree": [
+"GLM.CellGuard.StrictNearest",
+"GLM.CellGuard.strictNearest_unique"
+],
+"GLM.CellGuard.guarded_agree": [
+"GLM.CellGuard.IsNearest",
+"GLM.CellGuard.Separated",
+"GLM.CellGuard.guarded_isStrictNearest",
+"GLM.CellGuard.strictNearest_unique"
+],
+"GLM.CellGuard.guarded_correct_of_close": [
+"GLM.CellGuard.StrictNearest"
+],
+"GLM.CellGuard.guarded_isStrictNearest": [
+"GLM.CellGuard.IsNearest",
+"GLM.CellGuard.Separated",
+"GLM.CellGuard.StrictNearest",
+"GLM.CellGuard.guarded_strict_nearest"
+],
+"GLM.CellGuard.guarded_strict_nearest": [
+"GLM.CellGuard.IsNearest",
+"GLM.CellGuard.Separated",
+"GLM.CellGuard.quantise_eq_of_dist_lt"
+],
+"GLM.CellGuard.quantise_eq_of_dist_lt": [
+"GLM.CellGuard.IsNearest",
+"GLM.CellGuard.Separated"
+],
+"GLM.CellGuard.sqrt_add_lt_sqrt_iff": [],
+"GLM.CellGuard.strictNearest_unique": [
+"GLM.CellGuard.StrictNearest"
 ],
 "GLM.CelsiusRegister.aluminium_gap": [
 "GLM.CelsiusRegister.celsiusRow",
@@ -1853,6 +1952,58 @@
 "GLM.ConnectedMachine.route_cons_some"
 ],
 "GLM.ConnectedMachine.splitW5W10": [],
+"GLM.ConstantBound.block": [],
+"GLM.ConstantBound.block_succ": [
+"GLM.ConstantBound.block"
+],
+"GLM.ConstantBound.const_bound_linear": [
+"GLM.CounterLasso.shift"
+],
+"GLM.ConstantBound.const_bound_linear'": [
+"GLM.CounterLasso.shift"
+],
+"GLM.ConstantBound.halts_of_jump_output": [
+"GLM.ConstantBound.block",
+"GLM.ConstantBound.lasso_output",
+"GLM.ConstantBound.wrun",
+"GLM.ConstantBound.wrun_add",
+"GLM.ConstantBound.wrun_fst",
+"GLM.CounterLasso.shift",
+"GLM.OperationsLadder.Halts",
+"GLM.OperationsLadder.run"
+],
+"GLM.ConstantBound.lasso_output": [
+"GLM.ConstantBound.block",
+"GLM.ConstantBound.wrun",
+"GLM.ConstantBound.wrun_add",
+"GLM.ConstantBound.wrun_pass",
+"GLM.CounterLasso.shift",
+"GLM.CounterLasso.shift_zero"
+],
+"GLM.ConstantBound.shift_fst": [
+"GLM.CounterLasso.shift"
+],
+"GLM.ConstantBound.testC_equivariant": [
+"GLM.ConstantBound.testStepC",
+"GLM.CounterLasso.shift"
+],
+"GLM.ConstantBound.testStepC": [],
+"GLM.ConstantBound.wrun": [],
+"GLM.ConstantBound.wrun_add": [
+"GLM.ConstantBound.wrun"
+],
+"GLM.ConstantBound.wrun_fst": [
+"GLM.ConstantBound.wrun",
+"GLM.OperationsLadder.run"
+],
+"GLM.ConstantBound.wrun_pass": [
+"GLM.ConstantBound.block",
+"GLM.ConstantBound.block_succ",
+"GLM.ConstantBound.wrun",
+"GLM.ConstantBound.wrun_add",
+"GLM.CounterLasso.shift",
+"GLM.CounterLasso.shift_shift"
+],
 "GLM.ConstructionLadder.IsA": [
 "GLM.LatticeShortcut.IsGolay",
 "GLM.LatticeShortcut.maskOf"
@@ -2767,6 +2918,61 @@
 ],
 "GLM.CorpusResample.take_sorted_perm_filter_eq": [
 "GLM.CorpusResample.sorted_perm_filter_eq"
+],
+"GLM.CounterLasso.addStep": [],
+"GLM.CounterLasso.add_equivariant": [
+"GLM.CounterLasso.addStep",
+"GLM.CounterLasso.shift"
+],
+"GLM.CounterLasso.halts_of_jump": [
+"GLM.CounterLasso.lasso_accelerate",
+"GLM.CounterLasso.shift",
+"GLM.OperationsLadder.Halts",
+"GLM.OperationsLadder.run",
+"GLM.OperationsLadder.run_add"
+],
+"GLM.CounterLasso.indepStep": [],
+"GLM.CounterLasso.indep_equivariant": [
+"GLM.CounterLasso.indepStep",
+"GLM.CounterLasso.shift"
+],
+"GLM.CounterLasso.lasso_accelerate": [
+"GLM.CounterLasso.shift",
+"GLM.CounterLasso.shift_zero",
+"GLM.OperationsLadder.run",
+"GLM.OperationsLadder.run_add"
+],
+"GLM.CounterLasso.lasso_iterate": [
+"GLM.CounterLasso.run_succ'",
+"GLM.CounterLasso.shift",
+"GLM.CounterLasso.shift_shift",
+"GLM.OperationsLadder.run"
+],
+"GLM.CounterLasso.linear_neg_stable": [],
+"GLM.CounterLasso.linear_nonneg_stable": [],
+"GLM.CounterLasso.linear_zero_unique": [],
+"GLM.CounterLasso.never_halts_of_lasso": [
+"GLM.CounterLasso.lasso_accelerate",
+"GLM.CounterLasso.shift",
+"GLM.OperationsLadder.Halts",
+"GLM.OperationsLadder.run",
+"GLM.OperationsLadder.run_add"
+],
+"GLM.CounterLasso.run_succ'": [
+"GLM.OperationsLadder.run",
+"GLM.OperationsLadder.run_add"
+],
+"GLM.CounterLasso.shift": [],
+"GLM.CounterLasso.shift_shift": [
+"GLM.CounterLasso.shift"
+],
+"GLM.CounterLasso.shift_zero": [
+"GLM.CounterLasso.shift"
+],
+"GLM.CounterLasso.testStep": [],
+"GLM.CounterLasso.test_equivariant": [
+"GLM.CounterLasso.shift",
+"GLM.CounterLasso.testStep"
 ],
 "GLM.CubeMOG.Col": [],
 "GLM.CubeMOG.Grid": [
@@ -6725,6 +6931,11 @@
 "GLM.Golay24.energy",
 "GLM.Golay24.flip"
 ],
+"GLM.Golay24.IsNearestDecoder": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Word",
+"GLM.Golay24.hdist"
+],
 "GLM.Golay24.IsProb": [
 "GLM.Golay24.Law",
 "GLM.Golay24.Syn"
@@ -6769,6 +6980,16 @@
 "GLM.Golay24.Word",
 "GLM.Golay24.apply2"
 ],
+"GLM.Golay24.ball_eq_image": [
+"GLM.Golay24.Word",
+"GLM.Golay24.hdist",
+"GLM.Golay24.hdist_comm",
+"GLM.Golay24.hdist_eq_wt_symmDiff",
+"GLM.Golay24.mem_small",
+"GLM.Golay24.small",
+"GLM.Golay24.symmDiff_symmDiff_self",
+"GLM.Golay24.wt"
+],
 "GLM.Golay24.bestDrop": [
 "GLM.Golay24.Syn",
 "GLM.Golay24.bestNext",
@@ -6789,6 +7010,10 @@
 "GLM.Golay24.Syn",
 "GLM.Golay24.col",
 "GLM.Golay24.synWt"
+],
+"GLM.Golay24.bscWeight": [],
+"GLM.Golay24.bscWeight_antitone": [
+"GLM.Golay24.bscWeight"
 ],
 "GLM.Golay24.bundleF2": [
 "GLM.Golay24.Word",
@@ -6898,6 +7123,13 @@
 "GLM.Golay24.candidates",
 "GLM.Golay24.sextetOf",
 "GLM.Golay24.sextetOf_card"
+],
+"GLM.Golay24.card_ball": [
+"GLM.Golay24.Word",
+"GLM.Golay24.ball_eq_image",
+"GLM.Golay24.card_small",
+"GLM.Golay24.hdist",
+"GLM.Golay24.small"
 ],
 "GLM.Golay24.card_biUnion_fiveSubsets": [
 "GLM.Golay24.IsCodeword",
@@ -7020,6 +7252,11 @@
 "GLM.Golay24.through_insert",
 "GLM.Golay24.wt"
 ],
+"GLM.Golay24.card_small": [
+"GLM.Golay24.Word",
+"GLM.Golay24.pcDisj",
+"GLM.Golay24.small"
+],
 "GLM.Golay24.card_symmDiff_add_two_inter": [],
 "GLM.Golay24.card_symmDiff_eq": [
 "GLM.Golay24.Word"
@@ -7040,6 +7277,9 @@
 ],
 "GLM.Golay24.card_univ_syn": [
 "GLM.Golay24.Syn"
+],
+"GLM.Golay24.card_univ_word": [
+"GLM.Golay24.Word"
 ],
 "GLM.Golay24.census_total": [
 "GLM.Golay24.Syn"
@@ -7300,6 +7540,15 @@
 "GLM.Golay24.encode",
 "GLM.Golay24.mem_encode"
 ],
+"GLM.Golay24.decoder_sum_le": [
+"GLM.Golay24.Word",
+"GLM.Golay24.card_univ_word",
+"GLM.Golay24.hdist",
+"GLM.Golay24.small",
+"GLM.Golay24.sum_ball",
+"GLM.Golay24.sum_inside_split",
+"GLM.Golay24.wt"
+],
 "GLM.Golay24.descendCount": [
 "GLM.Golay24.Syn",
 "GLM.Golay24.dpLevel",
@@ -7542,6 +7791,15 @@
 "GLM.Golay24.exists_large_fibre": [
 "GLM.Golay24.Word"
 ],
+"GLM.Golay24.exists_nearestDecoder": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.IsNearestDecoder",
+"GLM.Golay24.Word",
+"GLM.Golay24.codewords",
+"GLM.Golay24.hdist",
+"GLM.Golay24.isCodeword_empty",
+"GLM.Golay24.mem_codewords"
+],
 "GLM.Golay24.exists_octad": [
 "GLM.Golay24.IsCodeword",
 "GLM.Golay24.Word",
@@ -7680,6 +7938,22 @@
 "GLM.Golay24.wt"
 ],
 "GLM.Golay24.getD_range_map": [],
+"GLM.Golay24.golay_attains": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.IsNearestDecoder",
+"GLM.Golay24.Word",
+"GLM.Golay24.card_codewords",
+"GLM.Golay24.card_univ_word",
+"GLM.Golay24.codewords",
+"GLM.Golay24.covering_radius_le_four",
+"GLM.Golay24.hdist",
+"GLM.Golay24.mem_codewords",
+"GLM.Golay24.small",
+"GLM.Golay24.sum_ball",
+"GLM.Golay24.sum_inside_split",
+"GLM.Golay24.unique_nearest_of_le_three",
+"GLM.Golay24.wt"
+],
 "GLM.Golay24.golay_doubly_even": [
 "GLM.Golay24.IsCodeword",
 "GLM.Golay24.Word",
@@ -7707,6 +7981,18 @@
 "GLM.Golay24.syn",
 "GLM.Golay24.syn_empty",
 "GLM.Golay24.syn_eq_of_split",
+"GLM.Golay24.wt"
+],
+"GLM.Golay24.golay_optimal": [
+"GLM.Golay24.IsNearestDecoder",
+"GLM.Golay24.Word",
+"GLM.Golay24.bscWeight",
+"GLM.Golay24.bscWeight_antitone",
+"GLM.Golay24.decoder_sum_le",
+"GLM.Golay24.golay_attains",
+"GLM.Golay24.hdist",
+"GLM.Golay24.small",
+"GLM.Golay24.successProb",
 "GLM.Golay24.wt"
 ],
 "GLM.Golay24.golay_weight_enumerator": [
@@ -8087,6 +8373,17 @@
 "GLM.Golay24.neg_self": [
 "GLM.Golay24.Syn"
 ],
+"GLM.Golay24.negative_space_floor": [
+"GLM.Golay24.Word",
+"GLM.Golay24.card_ball",
+"GLM.Golay24.card_univ_word",
+"GLM.Golay24.hdist"
+],
+"GLM.Golay24.negative_space_floor_4096": [
+"GLM.Golay24.Word",
+"GLM.Golay24.hdist",
+"GLM.Golay24.negative_space_floor"
+],
 "GLM.Golay24.not_descend_five_pair": [
 "GLM.Golay24.CanDescend",
 "GLM.Golay24.Word",
@@ -8186,6 +8483,7 @@
 "GLM.Golay24.parity_conservation": [
 "GLM.Golay24.card_symmDiff_add_two_inter"
 ],
+"GLM.Golay24.pcDisj": [],
 "GLM.Golay24.perturb_correct_returns": [
 "GLM.Golay24.IsCodeword",
 "GLM.Golay24.Word",
@@ -8197,6 +8495,9 @@
 "GLM.Golay24.syn",
 "GLM.Golay24.unique_nearest_of_le_three",
 "GLM.Golay24.wt"
+],
+"GLM.Golay24.pm": [
+"GLM.Golay24.Word"
 ],
 "GLM.Golay24.prob_unif_critical_band": [
 "GLM.Golay24.Syn",
@@ -8338,6 +8639,35 @@
 "GLM.Golay24.tkeys_not_mem_skeys",
 "GLM.Golay24.wt"
 ],
+"GLM.Golay24.soft_certificate": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Word",
+"GLM.Golay24.golay_min_weight",
+"GLM.Golay24.hdist",
+"GLM.Golay24.isCodeword_symmDiff",
+"GLM.Golay24.pm",
+"GLM.Golay24.sqd",
+"GLM.Golay24.sqd_pm",
+"GLM.Golay24.wt"
+],
+"GLM.Golay24.soft_certificate_sharp": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Word",
+"GLM.Golay24.golay_min_distance_eight",
+"GLM.Golay24.isCodeword_empty",
+"GLM.Golay24.pm",
+"GLM.Golay24.sqd",
+"GLM.Golay24.wt"
+],
+"GLM.Golay24.sqd": [
+"GLM.Golay24.Word",
+"GLM.Golay24.pm"
+],
+"GLM.Golay24.sqd_pm": [
+"GLM.Golay24.Word",
+"GLM.Golay24.hdist",
+"GLM.Golay24.pm"
+],
 "GLM.Golay24.stationary_unique": [
 "GLM.Golay24.IsProb",
 "GLM.Golay24.Law",
@@ -8372,6 +8702,21 @@
 "GLM.Golay24.step",
 "GLM.Golay24.unif"
 ],
+"GLM.Golay24.successProb": [
+"GLM.Golay24.Word",
+"GLM.Golay24.bscWeight",
+"GLM.Golay24.hdist"
+],
+"GLM.Golay24.sum_ball": [
+"GLM.Golay24.Word",
+"GLM.Golay24.ball_eq_image",
+"GLM.Golay24.hdist",
+"GLM.Golay24.hdist_comm",
+"GLM.Golay24.hdist_eq_wt_symmDiff",
+"GLM.Golay24.small",
+"GLM.Golay24.symmDiff_symmDiff_self",
+"GLM.Golay24.wt"
+],
 "GLM.Golay24.sum_chi": [
 "GLM.Golay24.Syn",
 "GLM.Golay24.chi",
@@ -8389,8 +8734,18 @@
 "GLM.Golay24.cosetWt_le_four",
 "GLM.Golay24.coset_census"
 ],
+"GLM.Golay24.sum_inside_split": [
+"GLM.Golay24.Word",
+"GLM.Golay24.hdist"
+],
 "GLM.Golay24.sum_shift": [
 "GLM.Golay24.Syn"
+],
+"GLM.Golay24.sum_small_eq": [
+"GLM.Golay24.Word",
+"GLM.Golay24.pcDisj",
+"GLM.Golay24.small",
+"GLM.Golay24.wt"
 ],
 "GLM.Golay24.sum_synWt": [
 "GLM.Golay24.Syn",
@@ -8529,6 +8884,41 @@
 "GLM.Golay24.Word",
 "GLM.Golay24.syn",
 "GLM.Golay24.syn_symmDiff"
+],
+"GLM.Golay24.tagCol": [
+"GLM.Golay24.tagMasks"
+],
+"GLM.Golay24.tagMasks": [],
+"GLM.Golay24.tagOf": [
+"GLM.Golay24.Word",
+"GLM.Golay24.tagCol"
+],
+"GLM.Golay24.tagOf_symmDiff": [
+"GLM.Golay24.Word",
+"GLM.Golay24.tagCol",
+"GLM.Golay24.tagOf",
+"GLM.Golay24.tag_neg_self"
+],
+"GLM.Golay24.tag_neg_self": [],
+"GLM.Golay24.tag_nonzero_on_octads": [
+"GLM.Golay24.encode",
+"GLM.Golay24.tagOf",
+"GLM.Golay24.wt"
+],
+"GLM.Golay24.tag_resolves": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Word",
+"GLM.Golay24.encode",
+"GLM.Golay24.exists_encode",
+"GLM.Golay24.golay_min_weight",
+"GLM.Golay24.golay_weight_mem",
+"GLM.Golay24.hdist",
+"GLM.Golay24.hdist_comm",
+"GLM.Golay24.isCodeword_symmDiff",
+"GLM.Golay24.tagOf",
+"GLM.Golay24.tagOf_symmDiff",
+"GLM.Golay24.tag_nonzero_on_octads",
+"GLM.Golay24.wt"
 ],
 "GLM.Golay24.tax_indicator_eq": [
 "GLM.Calibration.codewordTax",
@@ -8687,6 +9077,23 @@
 "GLM.Golay24.Syn",
 "GLM.Golay24.packSyn",
 "GLM.Golay24.unpackSyn"
+],
+"GLM.Golay24.weight4_resolved_le": [
+"GLM.Golay24.Word",
+"GLM.Golay24.card_small",
+"GLM.Golay24.card_univ_word",
+"GLM.Golay24.mem_small",
+"GLM.Golay24.mem_tetrads",
+"GLM.Golay24.small",
+"GLM.Golay24.symmDiff_symmDiff_self",
+"GLM.Golay24.tetrads",
+"GLM.Golay24.wt"
+],
+"GLM.Golay24.weight4_resolved_le_4096": [
+"GLM.Golay24.Word",
+"GLM.Golay24.tetrads",
+"GLM.Golay24.weight4_resolved_le",
+"GLM.Golay24.wt"
 ],
 "GLM.Golay24.wt": [
 "GLM.Golay24.Word"
@@ -15276,6 +15683,19 @@
 "GLM.Packing.unique_decoding": [
 "GLM.Packing.Bits",
 "GLM.Packing.MinDist"
+],
+"GLM.PlacementGuard.cellGuard_imp_placed": [],
+"GLM.PlacementGuard.placed_firstNamed_agree": [
+"GLM.CellGuard.firstNamed_agree",
+"GLM.PlacementGuard.placed_strict_nearest"
+],
+"GLM.PlacementGuard.placed_strict_nearest": [
+"GLM.CellGuard.StrictNearest"
+],
+"GLM.PlacementGuard.placement_radius_ge": [
+"GLM.CellGuard.IsNearest",
+"GLM.CellGuard.Separated",
+"GLM.CellGuard.quantise_eq_of_dist_lt"
 ],
 "GLM.PlanStore.Outcome": [],
 "GLM.PlanStore.Outcome.isRefusal": [
@@ -22416,5 +22836,5 @@
 "GLM.w2": []
 },
 "schema": 1,
-"tree_digest": "5011032c518824ac9bfd9e2a189c53166782f3515b1bb346db685b575e1382df"
+"tree_digest": "8c7283784f341c15a4fc15e31016bdbb4e42a3e462b545122ea53540776f5ee7"
 }

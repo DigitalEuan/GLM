@@ -745,8 +745,14 @@ _CASES: Tuple[EvalCase, ...] = (
        # Re-pinned at Phase 126: InertCounter.lean (the corpus refreshed
        # with it) makes the goal-query set 823 and the gate fires on 44 of
        # 1646; still ahead on every set, carrying 7, losing 0.
-       "answer", contains=("710 -> 712 of 823 (ahead)", "44 of 1646",
-                           "carrying 7 queries it misses and losing 0"),
+       # Re-pinned at Phase 130: CounterLasso.lean (the corpus refreshed
+       # with it) makes the goal-query set 835 and the gate fires on 56 of
+       # 1670; still ahead on every set, carrying 14, losing 0.
+       # Re-pinned at Phase 132: AffineOutput.lean (the corpus refreshed
+       # with it) makes the goal-query set 840 and the gate fires on 44 of
+       # 1680; still ahead on every set, carrying 8, losing 0.
+       "answer", contains=("699 -> 701 of 840 (ahead)", "44 of 1680",
+                           "carrying 8 queries it misses and losing 0"),
        note="The faculties arranged as a stack rather than scored one at a "
             "time: below a gate of 1/10 the leading lexical search is "
             "judged to have abstained and the two geometric address books "
@@ -781,7 +787,11 @@ _CASES: Tuple[EvalCase, ...] = (
        # claim unchanged.
        # Re-pinned at Phase 126 (queries 822 -> 823 with InertCounter.lean):
        # text 710 -> 52, structure 163 -> 161; claim unchanged.
-       "answer", contains=("710 -> 52 of 823", "163 -> 161 of 823",
+       # Re-pinned at Phase 130 (queries 823 -> 835 with CounterLasso.lean):
+       # text 686 -> 53, structure 165 -> 163; claim unchanged.
+       # Re-pinned at Phase 132 (queries 837 -> 840 with AffineOutput.lean):
+       # text 699 -> 53, structure 153 -> 150; claim unchanged.
+       "answer", contains=("699 -> 53 of 840", "153 -> 150 of 840",
                            "class, not a residue"),
        note="The register where the geometric address is the only faculty "
             "still reading: rename every identifier of a query outside a "

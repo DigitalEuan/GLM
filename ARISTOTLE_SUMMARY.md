@@ -1,3 +1,151 @@
+# Summary of changes for run 158464cf-6196-4bd0-b726-fe3eb724cf4c
+I brought your substrate study into the GLM as Phase 133, a pre-registered study at `studies/DESIGNED_SUBSTRATE_STUDY.md`. The short answer: **within the regime the GLM uses (4,096 carriers in 24 bits, random bit flips), Golay–Leech/24D is optimal, and this is now proved in Lean. No differently designed substrate of that size removes the six-way tie. What the study adds is two new ways to resolve that tie, and they measurably widen what the GLM can decode.**
+
+**Where the files went.** The uploaded files had been unpacked over the repository root, and their README had replaced the GLM's main `README.md`. I moved them all to `source_material/substrate_study/`. That folder holds the study's README plus `glm_package/` with its README, `THEOREMS.md`, `glm_substrate.py` and its self-test. The self-test passes 12 of 12. I rewrote the root `README.md` from the current GLM state documents.
+
+**Proved in Lean** (`overlay/glm_lean/RequestProject/GLM/DesignedSubstrate.lean`; builds with no `sorry`, using only standard axioms plus those from `native_decide`):
+- **No better design exists** (`golay_optimal`): no set of 4,096 words in 24 bits, linear or not, with any decoder, decodes correctly more often than the GLM's Golay code at any flip rate \(p \le 1/2\).
+- **The tie is fixed by the parameters, not the design:**
+  - `negative_space_floor_4096`: every such design leaves at least 7,254,016 received words at distance 4 or more from any codeword.
+  - `weight4_resolved_le_4096`: a design that corrects 3 flips can correct at most one sixth of the 4-flip cases.
+- **Sender tag** (`tag_resolves`): a 7-bit tag (seven parity checks the sender computes from the carrier) picks out the true carrier from up to 4 flips. This settles every six-way tie.
+- **Soft certificate** (`soft_certificate`, with `soft_certificate_sharp` showing the radius 8 cannot be widened): a soft reading within squared distance 8 of one carrier is more than 8 from every other.
+
+**Added to the system and measured.** A new module, `overlay/glm_universal/reasoning/designed_substrate.py`, adds two decoding stages: "sender tag" and "soft certificate". It comes with `tools designed-substrate` and 14 tests.
+- **Sender tag:** resolves 680,064 of 680,064 tied reads with 0 wrong. The received word alone resolves none of them.
+- **Soft certificate:** resolves 768 of 768 gentle soft reads with 0 wrong. On the existing hard case (K4b) it correctly refuses all 768 reads rather than guessing.
+- **Alternative codes:** the Golay code makes 0 silent wrong corrections on 4-flip errors. The one-bit extensions tried instead make between 2,695 and 4,480.
+- **Controls:**
+  - A tag with one bit corrupted gives a wrong answer on 28,096 reads. So the tag must be stored or sent somewhere it cannot be corrupted.
+  - Without a tag, the closed-world method resolves 85.7% of reads.
+
+**Marks: 7 of 8 met.** S7 was missed because of how I wrote it, not because the result failed. I declared the one-sixth cap would hold on a 64-carrier sample, but it holds only over all 4,096 carriers together. The sample gave 120,604, not the declared 113,344.
+
+**Side effects, recorded as measured.** Adding the Lean file moved the stack relay's threshold sweep, as new Lean files have done before. It is now strict on all five thresholds up to 1/4 (354 against 350 of 423). I updated `test_stack.py`, `studies/STACK_RELAY_STUDY.md`, the iteration-cost table, the exactness inventory and the reasoning module list (now 175 modules) to match. The full test suite and release check pass: 183 of 183 test files and 6 of 6 instruments.
+
+The plan, status, system description, paper and test index are updated, and `ARISTOTLE_SUMMARY.md` was not touched. The row for the measurement is still marked in progress in the results table, because it is a measured result rather than a Lean proof.
+
+**What's left** (listed in `STATUS.md` §2.2, "The designed substrate, the rest"):
+- putting the two new stages into the GLM's answering path;
+- a tag protected by its own code;
+- testing the soft certificate on soft readings the GLM produces itself.
+
+The optimality proof covers only this regime. Outside it the theorem says nothing; the 32- and 48-dimensional options are measured in other studies.
+
+# Summary of changes for run 36ac83b8-72d9-46dc-a49a-682d3c59ba4d
+I closed Phase 132 of the GLM project. The goal was to widen what the batch-program reasoner (GLM-BAT) can decide and explain. The full sign-off now passes: all 182 test files and all 6 instruments carry current signatures, and all 179 evaluation cases pass.
+
+**What was built**
+- **Lean file:** `overlay/glm_lean/RequestProject/GLM/AffineOutput.lean` builds with no `sorry` and uses only the standard axioms. Its main results are in the Properties table, marked proved:
+  - `lasso_output_affine` and `halts_of_jump_affine`: skipping \(K\) passes of a loop whose printed lines include a counter is a valid proof, with the skipped output written in closed form.
+  - `templated_block`: the closed form of what pass \(m\) prints.
+  - `const_second_diff_closed_form`: a sequence with a constant second difference is a quadratic.
+  - `quadratic_not_translation`: such a quadratic never has a fixed step.
+- **Reasoner:**
+  - It now skips ahead through loops whose `ECHO` lines print a counter.
+  - Output over 100,000 lines is stated in a short, checkable "run" form.
+  - It answers a new question, *"why is it undecided?"*. The answer names the loop head and the growth shape of each changing variable (fixed step, quadratic, geometric, irregular).
+- **Study:** `studies/AFFINE_OUTPUT_STUDY.md` was written and committed before any code. **7 of its 9 declared marks were met.** Both misses come from how I worked out the expected answers by hand, not from a wrong answer:
+  - **A3 (19/20):** for one question, P8's printed text came out in different but valid segments from the ones I expected.
+  - **A4:** P2's checking script is 27,251 bytes against a declared 10,000, because the checker it carries is 26,819 bytes on its own. All 33 scripts verify and all 167 deliberate mutations are rejected.
+  - **Other battery results:** 10 of 10 programs exactly as declared, including K5 halting after 60,002 steps and K4 after 1,500,004. All 8 refused programs were diagnosed as declared, and the closed forms predicted the next 32 visits of all 8 variables with a shape. Every earlier answer and all 300 generated programs are unchanged. Every "halts" verdict matches a plain run.
+
+**Things that came up while closing**
+- **A float in the core code.** My first coherence-index (NRCI) code computed with a float inside `reasoning/`, which breaks the project's no-float rule for core code. The existing frozen-answer check caught it. The NRCI is now computed exactly with integers, every figure is unchanged, and the core reads clean again.
+- **Two evaluation figures moved and were re-pinned.** The new Lean file grew the set of Lean goal queries from 837 to 840, which moved `report relay` and `report anonymous`. Both conclusions still hold.
+- **The stack relay result moved back.** Its threshold sweep returned to the Phase 59 result: strictly better than the text search up to a threshold of 1/5, and one query behind it (350 vs 351 of 420) at 1/4. This is recorded as measured in `test_stack.py` and `STACK_RELAY_STUDY.md`; no retrieval code changed.
+
+**Your question: is the NRCI useful as an extra diagnostic layer?**
+Yes, but only as a description, never as a deciding gate. It is now shown beside the exact growth shape, and nothing in the reasoner acts on it.
+- **It describes growth well:** about 0.999993 for a quadratic counter, and 0.12–0.25 for geometric and Fibonacci growth.
+- **It would be unsound as a gate.** For the straight line fitted through L12's quadratic counter the NRCI is 0.999993, so a gate would have accepted a quadratic as a fixed-step loop. `quadratic_not_translation` proves such a sequence never has a fixed step. This agrees with the project's earlier results `score_gate_unsound` and `gate_blind`.
+
+The Phase 133 to-do list is in `STATUS.md` §2.
+
+# Summary of changes for run ee013526-a3c9-49f0-8144-7168915b2d72
+I completed Phase 131, which takes two items from `STATUS.md` §2.2 ("GLM-BAT, the rest"). It is closed under the repository's own procedure: `corpus --check` passes, `signoff --close` signs 181 of 181 test files and 6 of 6 instruments (the full Lean build included), and everything is committed.
+
+**What changed.** Phase 130's halting reading refused two loops that do in fact halt:
+- **L10**, a loop that prints a line on every pass. The batch machine can now skip ahead over such a loop and write out the skipped lines exactly. This applies only when no printed line names a counter, and only while the output stays within 100,000 lines.
+- **L11**, a loop whose counter is compared with an ordinary variable. That variable is now treated as a fixed number, using its integer value at that step.
+
+So L10 is now answered "halts after 60,002 steps, printing `tick` 20,000 times", and L11 "halts after 40,003 steps". *What does it print?* now groups repeated lines, e.g. `"tick" (50000 times), "50000"`.
+
+**Lean.** `overlay/glm_lean/RequestProject/GLM/ConstantBound.lean` builds with no `sorry` and only the standard axioms.
+- `halts_of_jump_output`: skipping \(K\) passes writes exactly the first pass's lines \(K\) times, with the exact step count \(i + Kp + n\).
+- `testC_equivariant` and `const_bound_linear`: a comparison against a variable that is not a counter behaves like a comparison against a fixed number.
+
+Lean does not check that the Python reads each line correctly; a second, independent interpreter script re-checks every answer.
+
+**Results** (`studies/CONSTANT_BOUND_STUDY.md`; the test plan was committed before any code). 6 of the 7 planned checks were met.
+- **One check missed (B2):** all 10 test programs ended exactly as planned (verdict, step count, output, error output, exit code), but for two of them (K6, K10) I had worked out by hand the wrong pass to be skipped. The machine skips one pass earlier and still ends at the planned place. This is recorded as a miss and explained in §7.3 of the study.
+- **Questions and certificates:** 15 of 15 questions came out as planned. All 18 certificate scripts pass the second interpreter, and all 112 deliberately corrupted versions fail.
+- **Earlier answers:** every earlier answer is unchanged except L10 and L11, and all 300 generated programs keep their answers.
+- **Cross-check against plain runs:** every new *halts* matches a plain step-by-step run.
+- **Whole system:** the full evaluation passes 179 of 179. Two expected numbers had to be updated, `report relay` and `report anonymous`, because the new Lean file grew the set of test queries drawn from the Lean development from 835 to 837; both claims still hold.
+
+**Other changes:**
+- New module `reasoning/constant_bound.py`, a `tools constant-bound` command, and `tests/test_constant_bound.py` (12 tests).
+- Phase 130's original reading is kept behind a switch (`extended=False`), so its own measurement still checks the rule it was given.
+- Certificate scripts are now handed to Python on standard input, because a 50,000-line answer is too long to pass as a command-line argument.
+- STATUS, MASTER_PLAN, SYSTEM, WHITEBOARD, the paper (§19.22), the READMEs and the cost study are updated.
+- Python bytecode files had been committed to git again; I removed them from tracking and added them to `.gitignore`.
+
+**Properties table:** the two Lean theorems are marked proved. The round's overall result is a measurement, so it stays in progress.
+
+**Still open** (`STATUS.md`): loops that print their counter, output over 100,000 lines from a skip, growth that isn't a fixed step, and the rest of the batch-file language.
+
+# Summary of changes for run 22068175-583e-411c-a9c9-b16a80bb27a7
+Phase 130 ("counter lassos") is finished and closed by the repository's own sign-off procedure. This round extends the batch-file reasoning part of the system (the halting work listed under GLM-BAT in `STATUS.md` §2.2). The GLM can now answer *does it halt?* for counting loops far longer than its step budget. A loop that halts is answered with its exact step count, output and exit code. A loop that never halts gets a certificate saying so. Either answer comes with a script that a second interpreter re-checks.
+
+**Lean.** `overlay/glm_lean/RequestProject/GLM/CounterLasso.lean` builds with no `sorry` and uses only the standard axioms. It proves the two certificates the machine relies on:
+- `never_halts_of_lasso`: if one pass of the loop moves the counters by a fixed amount and comes back to the same control state, the machine never halts.
+- `halts_of_jump`: a run can skip ahead \(K\) whole passes at once and still give the exact halting step \(i + Kp + n\).
+
+**Code.** `reasoning/batch_machine.py` gains the jump-ahead run, and `reasoning/batch_speech.py` turns it into answers and checkable claims. There is a new measurement module `reasoning/counter_lasso.py`, a `tools counter-lasso` command, and `tests/test_counter_lasso.py` (10 tests).
+
+**Results** (`studies/COUNTER_LASSO_STUDY.md` §7; the test plan was committed before any code). All seven planned checks C1–C7 were met:
+- **Battery and questions:** 12 of 12 test programs and 17 of 17 questions came out as planned, with 0 wrong. Six loops of 40,003 to 2,000,003 steps are answered *halts* exactly, two are shown never to halt, and four control programs are declined.
+- **Certificates:** 20 of 20 certificate scripts pass the second interpreter, and all 112 deliberately corrupted versions fail.
+- **Earlier answers:** all 299 generated programs that earlier phases decided keep their verdicts. Program 206, which earlier phases could not decide, is now shown never to halt.
+- **Cross-check against plain runs:** every jump-ahead *halts* answer matches a plain step-by-step run. None of the *never* programs halts within 200,000 steps. The three declined controls do halt, which shows what the rule's caution costs.
+- **Whole system (C7):** the full evaluation passes 179 of 179 cases with 0 confidently wrong. Two expected numbers had to be updated, `report relay` and `report anonymous`: the new Lean file grew the set of test queries drawn from the Lean development from 823 to 835. Both claims still hold, and the updates are commented in `evaluation/cases.py`.
+
+**Closing.** The corpus refresh and document check pass, and `signoff --close` signs 180 of 180 test files and 6 of 6 instruments. Getting there needed two stale stored measurements re-taken (query-escalation and frozen-path) and one hand-typed count corrected: the module count in `reasoning/README.md`, now 172. `MASTER_PLAN.md`, `STATUS.md`, `SYSTEM.md`, the paper and the other documents are updated, and everything is committed.
+
+**Properties table.** The two Lean certificates are marked proved. The round's overall result is a measurement rather than a theorem, so it stays in progress.
+
+**Still open** (now listed in `STATUS.md`): loops whose pass prints output, comparisons against a variable that isn't a counter, growth that isn't a fixed step (quadratic or doubling), and the rest of the batch-file language.
+
+No build targets are listed: the Lean file is part of the repository's own Lean project under `overlay/glm_lean` and was built and checked there.
+
+# Summary of changes for run 6f6f8340-286c-4e02-a7dc-51f8da3bea44
+I completed two rounds this session. Both are closed under the repository's own procedure: `corpus --check` passes, `signoff --close` signs 179 of 179 test files and 6 of 6 instruments (the full Lean build included), and everything is committed.
+
+**Phase 128 – the cell guard (STATUS To-Do item 1, "the ladder on held-out perturbations"; 8 of 9 marks).** The study (`studies/CELL_GUARD_STUDY.md`) was written down with its marks, and committed, before any code. The new Lean file `RequestProject/GLM/CellGuard.lean` has no `sorry` and uses only the standard axioms.
+- **What is proved:** suppose the cell a query falls into holds just one carrier \(c_i\), and the query's distance to \(c_i\) plus its distance to the cell's centre is less than the packing radius. Then \(c_i\) is strictly nearer to the query than every other carrier (`guarded_strict_nearest`).
+- It follows that a guarded ladder gives the same answer whatever order its steps are visited in (`firstNamed_agree`).
+- `sqrt_add_lt_sqrt_iff` lets the code make this test exactly, in rational arithmetic, without taking any square root.
+- **Measured:** on three query sets the guarded ladder answered 0 wrong, but it kept only 30, 12 and 12 of the unguarded ladder's correct answers. Most carriers sit outside the inscribed ball of their own cell, so they can never pass.
+- The third query set was new; on it the unguarded ladder again answered 1 wrongly, repeating last round's finding.
+- The retirement rule, read on two query sets instead of one, leaves only the five coarse steps of the ladder. That ladder got 388 right and 0 wrong on the third set.
+
+**Phase 129 – the placement guard (9 of 9 marks).** This replaces the packing radius with a radius stored once per cell: the distance from the cell's centre to the nearest *other* carrier. It is set out in `studies/PLACEMENT_GUARD_STUDY.md`, which was also committed before any code or any new query set existed. The Lean file is `RequestProject/GLM/PlacementGuard.lean`.
+- **What is proved:** a guarded answer is the strictly nearest carrier, with no assumption about how points are rounded to the lattice (`placed_strict_nearest`).
+- The stored radius is never smaller than the packing radius (`placement_radius_ge`), so every answer the Phase 128 guard gave is kept.
+- The guarded ladder also answers the same way in any order (`placed_firstNamed_agree`).
+- **Measured on four query sets of 568 each.** The unguarded ladder answers 0, 8, 1 and 2 wrongly. The guarded ladder answers **0 wrong on all four**, with 445, 402, 393 and 402 correct, which is 91–95% of the unguarded ladder's correct answers.
+- The coarse-only ladder from Phase 128 was also safe on the fourth set (386 right, 0 wrong).
+- **The limit:** the guard certifies the *nearest* carrier, not the *correct* one. Neither guard is in the answering path yet; putting the placement guard into it is now STATUS item 1.
+
+**Code and records:**
+- New code: `reasoning/cell_guard.py` and `reasoning/placement_guard.py`; the tools `tools cell-guard` and `tools placement-guard`; tests in `tests/test_cell_guard.py` and `tests/test_placement_guard.py`.
+- `GLM_ACADEMIC_PAPER.md` has new §20.12 and §20.13, plus an updated date line, Part VII (including a correction that the ladder's 0-wrong claim held only on the query set it was chosen on) and the appendices.
+- Also updated: STATUS, MASTER_PLAN, SYSTEM, WHITEBOARD, the READMEs and the cost study.
+- **One existing measurement moved.** Adding the two Lean files changed the stack relay result: it is strict on all five gates again, up to 1/4. I recorded this as measured in `test_stack.py` and `STACK_RELAY_STUDY.md`.
+
+In the Properties table, the three Lean theorems are marked proved. The four-set measurement is a measurement rather than a theorem, so it stays in progress.
+
 # Summary of changes for run 7bc9156b-204f-44b1-b0f6-ff57c9157b3a
 I took your hex-colour note as Phase 127: filling the norm-256 rung, the item still open in the power-of-two family (STATUS §2.1). Before the blind run I wrote down what would count as success in `studies/NORM_256_HEX_STUDY.md`. The full results are in §7 of that study.
 

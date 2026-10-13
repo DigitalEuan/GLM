@@ -18,6 +18,11 @@ takes the marks:
   rule, and N3 halts there;
 * I1 and I7 are pinned by the tests and the evaluation.
 
+Every run here is read with ``jump=False``: the module measures the Phase 126
+rule as it was declared.  Phase 130's counter-lasso reading
+(``studies/COUNTER_LASSO_STUDY.md``) moves N2 and N3, and is measured by
+:mod:`counter_lasso`.
+
 Exact and deterministic: no randomness, no floating point.
 """
 
@@ -97,7 +102,7 @@ def battery_marks() -> Dict[str, object]:
     """I2: each battery program as declared."""
     rows: List[Dict[str, object]] = []
     for ident, lines, exp in BATTERY:
-        run = bm.run_program(bm.parse_program(lines))
+        run = bm.run_program(bm.parse_program(lines), jump=False)
         if "refusal" in exp:
             ok = run.status == "undecided"
             got: object = run.status
@@ -121,7 +126,8 @@ def question_marks() -> Dict[str, object]:
     """I3: the questions asked of the battery."""
     rows: List[Dict[str, object]] = []
     for ident, question, check in QUESTIONS:
-        a = bs.answer(question, "\n".join(_battery_lines(ident)), verify=False)
+        a = bs.answer(question, "\n".join(_battery_lines(ident)), verify=False,
+                      jump=False)
         if check[0] == "refused":
             ok = (not a.answered) and a.refusal == check[1]
         else:
@@ -140,14 +146,15 @@ def certificate_marks() -> Dict[str, object]:
     """I4: the ``never_inert`` claims of I2 and I3, scripts and mutations."""
     claims: List[Tuple[Sequence[str], Dict[str, object]]] = []
     for ident, lines, exp in BATTERY:
-        run = bm.run_program(bm.parse_program(lines))
+        run = bm.run_program(bm.parse_program(lines), jump=False)
         if run.status == "never" and run.forgotten:
             canon = [bm.render_line(i) for i in bm.parse_program(lines)]
             claims.append((canon, bs.never_claim(run)))
     for ident, question, check in QUESTIONS:
         if check[0] != "never":
             continue
-        a = bs.answer(question, "\n".join(_battery_lines(ident)), verify=False)
+        a = bs.answer(question, "\n".join(_battery_lines(ident)), verify=False,
+                      jump=False)
         canon = [bm.render_line(i)
                  for i in bm.parse_program(_battery_lines(ident))]
         claims.append((canon, dict(a.claim)))
@@ -177,7 +184,7 @@ def noninterference_marks() -> Dict[str, object]:
     for i in range(op.FUZZ_COUNT):
         program = bm.parse_program(op.generated_program(i))
         old = bm.run_program(program, inert=False)
-        new = bm.run_program(program)
+        new = bm.run_program(program, jump=False)
         if old.status == "undecided":
             if new.status == "never":
                 newly += 1
@@ -211,12 +218,12 @@ def soundness_marks() -> Dict[str, object]:
     certified: List[Tuple[str, Tuple]] = []
     for ident, lines, _ in BATTERY:
         program = bm.parse_program(lines)
-        run = bm.run_program(program)
+        run = bm.run_program(program, jump=False)
         if run.status == "never" and run.forgotten:
             certified.append((ident, program))
     for i in range(op.FUZZ_COUNT):
         program = bm.parse_program(op.generated_program(i))
-        run = bm.run_program(program)
+        run = bm.run_program(program, jump=False)
         if run.status == "never" and run.forgotten:
             certified.append((f"G{i}", program))
     halted = [ident for ident, program in certified
@@ -224,7 +231,7 @@ def soundness_marks() -> Dict[str, object]:
                                 inert=False).halted]
     n3 = bm.parse_program(_battery_lines("N3"))
     long_run = bm.run_program(n3, budget=LONG_BUDGET, inert=False)
-    short = bm.run_program(n3)
+    short = bm.run_program(n3, jump=False)
     n3_ok = (long_run.halted and long_run.steps == 40003
              and short.status == "undecided")
     return {"certified": tuple(i for i, _ in certified),

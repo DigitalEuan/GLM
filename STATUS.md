@@ -52,21 +52,28 @@ standing instruction; it is a row of the close checklist, `ITERATE.md` §4.1).
 
 **Starting a new round? Read [`ITERATE.md`](ITERATE.md) §0, then §2 below.**
 
-**Just closed: Phase 127** (the record is [`MASTER_PLAN.md`](MASTER_PLAN.md),
-"Phase 127"; the study is
-[`NORM_256_HEX_STUDY.md`](studies/NORM_256_HEX_STUDY.md), 7 of 8 marks),
-norm 256 of the power-of-two family, taken with the owner's note that norm
-256 could align with hex colour. The empty rung is filled by `H16`, the
-reading that keeps the first hex digit of each coordinate: it answers none of
-the 568 queries and none of 568 held-out queries wrongly, but adds no answer
-on the 568. The Leech lattice rotated by `√2` (`RequestProject/GLM/HexRung.lean`,
-`hexRot_isLeech`, `rotLeech_min_norm`) and the nearest-hex-digit rung were
-retired for wrong answers. The hex shortcut held on every point checked:
-a point of `2C` is on the rotated rung exactly when the hex colour of its half
-lies in a 4096-colour subspace. The held-out set also found that the ladder
-Phase 123 left answers 8 of 568 new queries wrongly, with or without the new
-rung — now item 1 below. **Before it, Phase 126** (7 of 7 marks): inert
-variables in GLM-BAT.
+**Just closed: Phase 133** (the record is [`MASTER_PLAN.md`](MASTER_PLAN.md),
+"Phase 133"; the study is
+[`DESIGNED_SUBSTRATE_STUDY.md`](studies/DESIGNED_SUBSTRATE_STUDY.md), 7 of 8
+marks), the designed substrate — the owner's separate study of whether the
+Golay–Leech substrate is optimal for the GLM, brought in as
+`source_material/substrate_study/` and taken at the owner's request rather
+than from §2.1. `RequestProject/GLM/DesignedSubstrate.lean` proves, on the
+GLM's own code and for every 4,096-word design with any decoder, that none
+decodes correctly more often on the bit-flip channel (`golay_optimal`), that
+every one leaves at least 7,254,016 received words at distance 4 or more
+(`negative_space_floor_4096`), and that none correcting three flips corrects
+more than one sixth of the four-flip corruptions
+(`weight4_resolved_le_4096`); and it proves two new certified fork stages
+sound, a seven-bit sender tag (`tag_resolves`) and a soft certificate of
+radius 8 (`soft_certificate`, sharp). Measured: the tag resolves 680,064 of
+680,064 tied reads, 0 wrong, where the hard word alone resolves none; the
+certificate resolves every read of a gentle soft ensemble and refuses every
+read of K4b; the eight declared alternative codes each miscorrect 2,695 to
+4,480 four-flip corruptions silently, the GLM's code none. S7 was missed on a
+declaration that expected one sixth on a 64-codeword sample. **Before it,
+Phase 132** (7 of 9 marks): passes that print a counter, long output, and the
+diagnosis of a refusal.
 
 ---
 
@@ -74,19 +81,19 @@ variables in GLM-BAT.
 
 | instrument | command | result |
 |---|---|---|
-| test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->5,334 tests across 175 of the 177 test files, 18,873 subtests, outside the document checks<!--/figure-->**, zero failures |
+| test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->5,397 tests across 181 of the 183 test files, 18,972 subtests, outside the document checks<!--/figure-->**, zero failures |
 | end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->179<!--/figure-->** cases — 0 confidently wrong, every refusal a `boundary` |
 | benchmark suites | `python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites |
 | capability probes | `python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 surprises |
-| Lean development | `lake build` (repository root) | <!--figure:lean-files-->199 Lean files<!--/figure-->, **0 `sorry`** |
+| Lean development | `lake build` (repository root) | <!--figure:lean-files-->205 Lean files<!--/figure-->, **0 `sorry`** |
 | corpus | `python3 -m glm_universal.corpus --check` | the tier contract, the coverage claim of `ENTRY.md`, every generated block and every derived cache |
 
 The package holds **<!--figure:registers-->8 registers<!--/figure-->** beside a 45-class comparison register,
 **<!--figure:query-kinds-->24 query kinds<!--/figure-->** one of which
 dispatches **<!--figure:report-subjects-->67 report subjects<!--/figure-->**, and 3 tasks. The Lean development is
 addressed declaration by declaration: `reasoning/lean_address.py` gives each of
-the <!--figure:lean-declarations-->4,975<!--/figure--> declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly <!--figure:lean-declarations-->4,975<!--/figure-->/<!--figure:lean-declarations-->4,975<!--/figure--> with 0 coordinate errors
+the <!--figure:lean-declarations-->5,067<!--/figure--> declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly <!--figure:lean-declarations-->5,067<!--/figure-->/<!--figure:lean-declarations-->5,067<!--/figure--> with 0 coordinate errors
 (`report lean`). The other forty-odd instruments, each with its command and its
 current figure, are the table in [`SYSTEM.md`](SYSTEM.md) §1.
 
@@ -102,13 +109,20 @@ record the round in `MASTER_PLAN.md`.
 
 ### 2.1 The next round — take one of these
 
-1. **The ladder on held-out perturbations** (left by Phase 127). On 568
-   held-out queries (four new perturbations) the ladder Phase 123 left answers
-   8 wrongly in the middle-out order, from three carrier pairs that sit across
-   cell walls at `C`, `A`, `A/2`, `2D` and `Z`; its retirement rule had only
-   ever been read on the original 568. Measure a margin guard, or a retirement
-   read on both sets, under a new pre-registration with a third, unseen set.
-   [`NORM_256_HEX_STUDY.md`](studies/NORM_256_HEX_STUDY.md) §7.3, §7.5.
+1. **The placement guard in the answering path** (left by Phase 129). The
+   answering path reads the ladder unguarded, and the unguarded ladder
+   answers 8, 1 and 2 queries wrongly on three held-out perturbation sets;
+   the placement guard removed all of them on four sets at a cost of 5 to 9
+   per cent of the correct answers. Putting it in changes answers the
+   evaluation pins, so it needs a frozen-path comparison, and the per-cell
+   radius table must be kept beside the digest of the carriers it came from.
+   [`PLACEMENT_GUARD_STUDY.md`](studies/PLACEMENT_GUARD_STUDY.md) §7.4.
+   *Correction (Phase 130):* no module a query loads imports the ladder the
+   guard protects (`ladder_escalation`, `cell_guard` and `placement_guard`
+   are reached only from `tools.py` and other measurement modules), so the
+   first step of this item is a query kind that reads a carrier by its
+   address; only then is there an answering path to guard
+   ([`COUNTER_LASSO_STUDY.md`](studies/COUNTER_LASSO_STUDY.md) §0).
 2. **The budget rule in the walk and the answering path** (left by Phase
    124). The walk's own reading (patience 40) certified 225 of 256 held-out
    deep holes, and `classify_carrier` still defaults to a patience of 60;
@@ -134,21 +148,40 @@ record the round in `MASTER_PLAN.md`.
 Each is a section a closed study ends on; any of them can be folded into a
 round from §2.1 or taken as a short round of its own.
 
+* **The designed substrate, the rest** (left by Phase 133). The sender-tag
+  and soft-certificate stages are measured beside the carried fork only: no
+  query kind reads a carrier together with its tag or a soft reading, and
+  adding one needs its own evaluation cases. A corrupted tag resolves 4.1 %
+  of tied reads wrongly, so the tag wants a small code of its own. The
+  certificate's acceptance rate is measured on declared ensembles, not on a
+  soft reading the GLM produces itself. The substrate study's other results
+  (the four-label mirror, the 86–128-value Golay tag, the Delsarte bound) are
+  cited, not re-proved.
+  [`DESIGNED_SUBSTRATE_STUDY.md`](studies/DESIGNED_SUBSTRATE_STUDY.md) §7.5.
+
 * **Norm 256 and the hex colour, the rest** (left by Phase 127). `H16` is
   measured beside the ladder only; putting it into the answering path needs a
   frozen-path comparison. The 4096-colour subspace that decides membership of
   the rotated Leech rung has no use yet, because that rung was retired; other
   rotations of the Leech lattice were deliberately not compared on the 568
   queries. [`NORM_256_HEX_STUDY.md`](studies/NORM_256_HEX_STUDY.md) §7.5.
-* **GLM-BAT, the rest** (left by Phases 125 and 126). Stream merging
-  (`2>&1`), `SORT` options, `FOR /F`, `SETLOCAL`/`ENDLOCAL` and delayed
-  expansion are refused. A ranking-function certificate (the Lean side is
-  `layered_wf`, `lex_rank_wf`) would let the machine say *halts* for a loop
-  like N3 without running it out. The inert-variable closure is conservative:
-  a variable only the output reads (N2), and a read on a line no control path
-  reaches (generated program 206), keep a never-halting loop refused.
-  [`OPERATIONS_LADDER_STUDY.md`](studies/OPERATIONS_LADDER_STUDY.md) §7.4,
-  [`INERT_COUNTER_STUDY.md`](studies/INERT_COUNTER_STUDY.md) §7.4.
+* **GLM-BAT, the rest** (left by Phases 125, 126, 130, 131 and 132). Stream
+  merging (`2>&1`), `SORT` options, `FOR /F`, `SETLOCAL`/`ENDLOCAL` and
+  delayed expansion are refused. The counter-lasso reading refuses growth that
+  is not a translation (L12, N5, N6: quadratic or geometric; L12 never
+  halts) — since Phase 132 it *diagnoses* them, and the closed forms are
+  proved (`const_second_diff_closed_form`, `const_ratio_closed_form`), so the
+  next step is a jump over a pass whose comparison is quadratic in the pass
+  number; a jump whose output would pass 1,000,000 lines (P6); an `ECHO`
+  with redirection or inside a chain or test body on a pass (P10); a constant
+  read through `ERRORLEVEL`; and comparisons of text. The run encoder takes
+  the block covering the most lines even when it has only two copies, so
+  P8's printed text opens with two 16-line blocks; asking for three copies
+  would state it as the hand computation expected.
+  [`AFFINE_OUTPUT_STUDY.md`](studies/AFFINE_OUTPUT_STUDY.md) §7.5,
+  [`CONSTANT_BOUND_STUDY.md`](studies/CONSTANT_BOUND_STUDY.md) §7.4,
+  [`COUNTER_LASSO_STUDY.md`](studies/COUNTER_LASSO_STUDY.md) §7.4,
+  [`OPERATIONS_LADDER_STUDY.md`](studies/OPERATIONS_LADDER_STUDY.md) §7.4.
 * **Radicals, the rest** (left by Phases 114, 115 and 116). Compositions whose
   outer polynomial has degree below 5, with the obstruction in the inner
   polynomial, and imprimitive groups that are not compositions over the

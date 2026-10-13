@@ -1,0 +1,816 @@
+{
+ "hypothesis": [
+  {
+   "failures": 0,
+   "holds": true,
+   "norm": 2048,
+   "rung": "8C",
+   "vectors": 200
+  },
+  {
+   "failures": 0,
+   "holds": true,
+   "norm": 1024,
+   "rung": "8A",
+   "vectors": 200
+  },
+  {
+   "failures": 0,
+   "holds": true,
+   "norm": 512,
+   "rung": "4C",
+   "vectors": 200
+  },
+  {
+   "failures": 0,
+   "holds": true,
+   "norm": 128,
+   "rung": "2C",
+   "vectors": 200
+  },
+  {
+   "failures": 0,
+   "holds": true,
+   "norm": 64,
+   "rung": "2A",
+   "vectors": 200
+  },
+  {
+   "failures": 0,
+   "holds": true,
+   "norm": 32,
+   "rung": "C",
+   "vectors": 200
+  },
+  {
+   "failures": 0,
+   "holds": true,
+   "norm": 16,
+   "rung": "A",
+   "vectors": 200
+  },
+  {
+   "failures": 0,
+   "holds": true,
+   "norm": 8,
+   "rung": "2D",
+   "vectors": 200
+  },
+  {
+   "failures": 0,
+   "holds": true,
+   "norm": 4,
+   "rung": "A/2",
+   "vectors": 200
+  },
+  {
+   "failures": 0,
+   "holds": true,
+   "norm": 2,
+   "rung": "D12^2",
+   "vectors": 200
+  },
+  {
+   "failures": 0,
+   "holds": true,
+   "norm": 1,
+   "rung": "Z",
+   "vectors": 200
+  }
+ ],
+ "ladder": [
+  "8C",
+  "8A",
+  "4C",
+  "2C",
+  "2A",
+  "C",
+  "A",
+  "2D",
+  "A/2",
+  "D12^2",
+  "Z"
+ ],
+ "marks": {
+  "K1": false,
+  "N1": true,
+  "N2": true,
+  "Q1": true,
+  "S1": true,
+  "S2": true,
+  "S3": true,
+  "U1": true
+ },
+ "placement": [
+  {
+   "alone": 83,
+   "carriers": 142,
+   "inside": 43,
+   "inside_and_alone": 4,
+   "norm": 2048,
+   "rung": "8C"
+  },
+  {
+   "alone": 82,
+   "carriers": 142,
+   "inside": 39,
+   "inside_and_alone": 1,
+   "norm": 1024,
+   "rung": "8A"
+  },
+  {
+   "alone": 95,
+   "carriers": 142,
+   "inside": 32,
+   "inside_and_alone": 5,
+   "norm": 512,
+   "rung": "4C"
+  },
+  {
+   "alone": 102,
+   "carriers": 142,
+   "inside": 31,
+   "inside_and_alone": 2,
+   "norm": 128,
+   "rung": "2C"
+  },
+  {
+   "alone": 100,
+   "carriers": 142,
+   "inside": 26,
+   "inside_and_alone": 2,
+   "norm": 64,
+   "rung": "2A"
+  },
+  {
+   "alone": 111,
+   "carriers": 142,
+   "inside": 17,
+   "inside_and_alone": 5,
+   "norm": 32,
+   "rung": "C"
+  },
+  {
+   "alone": 109,
+   "carriers": 142,
+   "inside": 17,
+   "inside_and_alone": 2,
+   "norm": 16,
+   "rung": "A"
+  },
+  {
+   "alone": 113,
+   "carriers": 142,
+   "inside": 15,
+   "inside_and_alone": 4,
+   "norm": 8,
+   "rung": "2D"
+  },
+  {
+   "alone": 121,
+   "carriers": 142,
+   "inside": 11,
+   "inside_and_alone": 6,
+   "norm": 4,
+   "rung": "A/2"
+  },
+  {
+   "alone": 125,
+   "carriers": 142,
+   "inside": 30,
+   "inside_and_alone": 25,
+   "norm": 2,
+   "rung": "D12^2"
+  },
+  {
+   "alone": 125,
+   "carriers": 142,
+   "inside": 66,
+   "inside_and_alone": 58,
+   "norm": 1,
+   "rung": "Z"
+  }
+ ],
+ "read": {
+  "held_out": {
+   "guard_evaluations": 1590,
+   "guarded": {
+    "correct": 12,
+    "order_independent": true,
+    "refused": 556,
+    "totals": {
+     "coarse_to_fine": {
+      "correct": 12,
+      "refused": 556,
+      "wrong": 0
+     },
+     "fine_to_coarse": {
+      "correct": 12,
+      "refused": 556,
+      "wrong": 0
+     },
+     "middle_out": {
+      "correct": 12,
+      "refused": 556,
+      "wrong": 0
+     }
+    },
+    "wrong": 0
+   },
+   "kept_share": {
+    "__fraction__": "4/145"
+   },
+   "n1_violations": 0,
+   "n2_violations": 0,
+   "nearest": {
+    "correct": 489,
+    "tie": 66,
+    "wrong": 13
+   },
+   "per_rung": {
+    "2A": {
+     "answered": 180,
+     "guarded": 1,
+     "guarded_correct": 1,
+     "guarded_wrong": 0
+    },
+    "2C": {
+     "answered": 179,
+     "guarded": 4,
+     "guarded_correct": 4,
+     "guarded_wrong": 0
+    },
+    "2D": {
+     "answered": 39,
+     "guarded": 0,
+     "guarded_correct": 0,
+     "guarded_wrong": 0
+    },
+    "4C": {
+     "answered": 295,
+     "guarded": 9,
+     "guarded_correct": 9,
+     "guarded_wrong": 0
+    },
+    "8A": {
+     "answered": 285,
+     "guarded": 4,
+     "guarded_correct": 4,
+     "guarded_wrong": 0
+    },
+    "8C": {
+     "answered": 284,
+     "guarded": 6,
+     "guarded_correct": 6,
+     "guarded_wrong": 0
+    },
+    "A": {
+     "answered": 87,
+     "guarded": 0,
+     "guarded_correct": 0,
+     "guarded_wrong": 0
+    },
+    "A/2": {
+     "answered": 20,
+     "guarded": 0,
+     "guarded_correct": 0,
+     "guarded_wrong": 0
+    },
+    "C": {
+     "answered": 99,
+     "guarded": 2,
+     "guarded_correct": 2,
+     "guarded_wrong": 0
+    },
+    "D12^2": {
+     "answered": 45,
+     "guarded": 0,
+     "guarded_correct": 0,
+     "guarded_wrong": 0
+    },
+    "Z": {
+     "answered": 77,
+     "guarded": 0,
+     "guarded_correct": 0,
+     "guarded_wrong": 0
+    }
+   },
+   "plain": {
+    "correct": 439,
+    "order_independent": false,
+    "refused": 125,
+    "totals": {
+     "coarse_to_fine": {
+      "correct": 435,
+      "refused": 125,
+      "wrong": 8
+     },
+     "fine_to_coarse": {
+      "correct": 439,
+      "refused": 125,
+      "wrong": 4
+     },
+     "middle_out": {
+      "correct": 435,
+      "refused": 125,
+      "wrong": 8
+     }
+    },
+    "wrong": 8
+   },
+   "queries": 568,
+   "unguarded_wrong": [
+    {
+     "guarded_answer": null,
+     "named": "acoustic_attenuation",
+     "rung": "A/2",
+     "truth": "acoustic_impedance"
+    },
+    {
+     "guarded_answer": null,
+     "named": "axis_root_e0",
+     "rung": "Z",
+     "truth": "high_denominator_2x3"
+    },
+    {
+     "guarded_answer": null,
+     "named": "hexacode_word_3",
+     "rung": "C",
+     "truth": "hexacode_word_2"
+    },
+    {
+     "guarded_answer": null,
+     "named": "acoustic_attenuation",
+     "rung": "2D",
+     "truth": "acoustic_impedance"
+    },
+    {
+     "guarded_answer": null,
+     "named": "hexacode_word_3",
+     "rung": "C",
+     "truth": "hexacode_word_2"
+    },
+    {
+     "guarded_answer": null,
+     "named": "hexacode_word_3",
+     "rung": "C",
+     "truth": "hexacode_word_2"
+    },
+    {
+     "guarded_answer": null,
+     "named": "acoustic_attenuation",
+     "rung": "2D",
+     "truth": "acoustic_impedance"
+    },
+    {
+     "guarded_answer": null,
+     "named": "hexacode_word_3",
+     "rung": "C",
+     "truth": "hexacode_word_2"
+    }
+   ]
+  },
+  "standard": {
+   "guard_evaluations": 2444,
+   "guarded": {
+    "correct": 30,
+    "order_independent": true,
+    "refused": 538,
+    "totals": {
+     "coarse_to_fine": {
+      "correct": 30,
+      "refused": 538,
+      "wrong": 0
+     },
+     "fine_to_coarse": {
+      "correct": 30,
+      "refused": 538,
+      "wrong": 0
+     },
+     "middle_out": {
+      "correct": 30,
+      "refused": 538,
+      "wrong": 0
+     }
+    },
+    "wrong": 0
+   },
+   "kept_share": {
+    "__fraction__": "30/467"
+   },
+   "n1_violations": 0,
+   "n2_violations": 0,
+   "nearest": {
+    "correct": 506,
+    "tie": 61,
+    "wrong": 1
+   },
+   "per_rung": {
+    "2A": {
+     "answered": 283,
+     "guarded": 5,
+     "guarded_correct": 5,
+     "guarded_wrong": 0
+    },
+    "2C": {
+     "answered": 273,
+     "guarded": 6,
+     "guarded_correct": 6,
+     "guarded_wrong": 0
+    },
+    "2D": {
+     "answered": 113,
+     "guarded": 3,
+     "guarded_correct": 3,
+     "guarded_wrong": 0
+    },
+    "4C": {
+     "answered": 328,
+     "guarded": 12,
+     "guarded_correct": 12,
+     "guarded_wrong": 0
+    },
+    "8A": {
+     "answered": 286,
+     "guarded": 4,
+     "guarded_correct": 4,
+     "guarded_wrong": 0
+    },
+    "8C": {
+     "answered": 302,
+     "guarded": 12,
+     "guarded_correct": 12,
+     "guarded_wrong": 0
+    },
+    "A": {
+     "answered": 196,
+     "guarded": 4,
+     "guarded_correct": 4,
+     "guarded_wrong": 0
+    },
+    "A/2": {
+     "answered": 137,
+     "guarded": 6,
+     "guarded_correct": 6,
+     "guarded_wrong": 0
+    },
+    "C": {
+     "answered": 205,
+     "guarded": 6,
+     "guarded_correct": 6,
+     "guarded_wrong": 0
+    },
+    "D12^2": {
+     "answered": 127,
+     "guarded": 0,
+     "guarded_correct": 0,
+     "guarded_wrong": 0
+    },
+    "Z": {
+     "answered": 194,
+     "guarded": 0,
+     "guarded_correct": 0,
+     "guarded_wrong": 0
+    }
+   },
+   "plain": {
+    "correct": 467,
+    "order_independent": true,
+    "refused": 101,
+    "totals": {
+     "coarse_to_fine": {
+      "correct": 467,
+      "refused": 101,
+      "wrong": 0
+     },
+     "fine_to_coarse": {
+      "correct": 467,
+      "refused": 101,
+      "wrong": 0
+     },
+     "middle_out": {
+      "correct": 467,
+      "refused": 101,
+      "wrong": 0
+     }
+    },
+    "wrong": 0
+   },
+   "queries": 568,
+   "unguarded_wrong": []
+  },
+  "third": {
+   "guard_evaluations": 1519,
+   "guarded": {
+    "correct": 12,
+    "order_independent": true,
+    "refused": 556,
+    "totals": {
+     "coarse_to_fine": {
+      "correct": 12,
+      "refused": 556,
+      "wrong": 0
+     },
+     "fine_to_coarse": {
+      "correct": 12,
+      "refused": 556,
+      "wrong": 0
+     },
+     "middle_out": {
+      "correct": 12,
+      "refused": 556,
+      "wrong": 0
+     }
+    },
+    "wrong": 0
+   },
+   "kept_share": {
+    "__fraction__": "2/71"
+   },
+   "n1_violations": 0,
+   "n2_violations": 0,
+   "nearest": {
+    "correct": 499,
+    "tie": 62,
+    "wrong": 7
+   },
+   "per_rung": {
+    "2A": {
+     "answered": 160,
+     "guarded": 2,
+     "guarded_correct": 2,
+     "guarded_wrong": 0
+    },
+    "2C": {
+     "answered": 177,
+     "guarded": 3,
+     "guarded_correct": 3,
+     "guarded_wrong": 0
+    },
+    "2D": {
+     "answered": 24,
+     "guarded": 0,
+     "guarded_correct": 0,
+     "guarded_wrong": 0
+    },
+    "4C": {
+     "answered": 286,
+     "guarded": 8,
+     "guarded_correct": 8,
+     "guarded_wrong": 0
+    },
+    "8A": {
+     "answered": 287,
+     "guarded": 4,
+     "guarded_correct": 4,
+     "guarded_wrong": 0
+    },
+    "8C": {
+     "answered": 290,
+     "guarded": 7,
+     "guarded_correct": 7,
+     "guarded_wrong": 0
+    },
+    "A": {
+     "answered": 59,
+     "guarded": 0,
+     "guarded_correct": 0,
+     "guarded_wrong": 0
+    },
+    "A/2": {
+     "answered": 20,
+     "guarded": 0,
+     "guarded_correct": 0,
+     "guarded_wrong": 0
+    },
+    "C": {
+     "answered": 91,
+     "guarded": 2,
+     "guarded_correct": 2,
+     "guarded_wrong": 0
+    },
+    "D12^2": {
+     "answered": 63,
+     "guarded": 0,
+     "guarded_correct": 0,
+     "guarded_wrong": 0
+    },
+    "Z": {
+     "answered": 62,
+     "guarded": 0,
+     "guarded_correct": 0,
+     "guarded_wrong": 0
+    }
+   },
+   "plain": {
+    "correct": 426,
+    "order_independent": true,
+    "refused": 141,
+    "totals": {
+     "coarse_to_fine": {
+      "correct": 426,
+      "refused": 141,
+      "wrong": 1
+     },
+     "fine_to_coarse": {
+      "correct": 426,
+      "refused": 141,
+      "wrong": 1
+     },
+     "middle_out": {
+      "correct": 426,
+      "refused": 141,
+      "wrong": 1
+     }
+    },
+    "wrong": 1
+   },
+   "queries": 568,
+   "unguarded_wrong": [
+    {
+     "guarded_answer": null,
+     "named": "axis_root_e0",
+     "rung": "Z",
+     "truth": "high_denominator_2x3"
+    }
+   ]
+  }
+ },
+ "source_digest": "43299c629c4aa4079a39b3f182bd153b3ff16bc46f22c73187b5be052129173d",
+ "union": {
+  "ladder": [
+   "8C",
+   "8A",
+   "4C",
+   "2C",
+   "2A"
+  ],
+  "queries": 1136,
+  "retired": [
+   {
+    "clause": 1,
+    "rung": "C",
+    "why": "it answers 4 queries wrongly, which is the one thing the escalation is supposed not to do; it uniquely answers 4, and that is the price of retiring it"
+   },
+   {
+    "clause": 1,
+    "rung": "A",
+    "why": "it answers 1 query wrongly, which is the one thing the escalation is supposed not to do; it uniquely answers 3, and that is the price of retiring it"
+   },
+   {
+    "clause": 1,
+    "rung": "2D",
+    "why": "it answers 2 queries wrongly, which is the one thing the escalation is supposed not to do; it uniquely answers 12, and that is the price of retiring it"
+   },
+   {
+    "clause": 1,
+    "rung": "A/2",
+    "why": "it answers 1 query wrongly, which is the one thing the escalation is supposed not to do; it uniquely answers 3, and that is the price of retiring it"
+   },
+   {
+    "clause": 2,
+    "rung": "D12^2",
+    "why": "it answers no query the rest of the ladder cannot (unique_correct = 0) and takes part in 2 disagreement(s)"
+   },
+   {
+    "clause": 1,
+    "rung": "Z",
+    "why": "it answers 1 query wrongly, which is the one thing the escalation is supposed not to do; it uniquely answers 14, and that is the price of retiring it"
+   }
+  ],
+  "rows": [
+   {
+    "correct": 586,
+    "disagrees": 0,
+    "minimum_norm": 2048,
+    "refused": 550,
+    "rung": "8C",
+    "unique_correct": 5,
+    "wrong": 0
+   },
+   {
+    "correct": 571,
+    "disagrees": 0,
+    "minimum_norm": 1024,
+    "refused": 565,
+    "rung": "8A",
+    "unique_correct": 3,
+    "wrong": 0
+   },
+   {
+    "correct": 623,
+    "disagrees": 0,
+    "minimum_norm": 512,
+    "refused": 513,
+    "rung": "4C",
+    "unique_correct": 16,
+    "wrong": 0
+   },
+   {
+    "correct": 452,
+    "disagrees": 0,
+    "minimum_norm": 128,
+    "refused": 684,
+    "rung": "2C",
+    "unique_correct": 4,
+    "wrong": 0
+   },
+   {
+    "correct": 463,
+    "disagrees": 0,
+    "minimum_norm": 64,
+    "refused": 673,
+    "rung": "2A",
+    "unique_correct": 5,
+    "wrong": 0
+   },
+   {
+    "correct": 300,
+    "disagrees": 3,
+    "minimum_norm": 32,
+    "refused": 832,
+    "rung": "C",
+    "unique_correct": 4,
+    "wrong": 4
+   },
+   {
+    "correct": 282,
+    "disagrees": 1,
+    "minimum_norm": 16,
+    "refused": 853,
+    "rung": "A",
+    "unique_correct": 3,
+    "wrong": 1
+   },
+   {
+    "correct": 150,
+    "disagrees": 3,
+    "minimum_norm": 8,
+    "refused": 984,
+    "rung": "2D",
+    "unique_correct": 12,
+    "wrong": 2
+   },
+   {
+    "correct": 156,
+    "disagrees": 2,
+    "minimum_norm": 4,
+    "refused": 979,
+    "rung": "A/2",
+    "unique_correct": 3,
+    "wrong": 1
+   },
+   {
+    "correct": 172,
+    "disagrees": 2,
+    "minimum_norm": 2,
+    "refused": 964,
+    "rung": "D12^2",
+    "unique_correct": 0,
+    "wrong": 0
+   },
+   {
+    "correct": 270,
+    "disagrees": 2,
+    "minimum_norm": 1,
+    "refused": 865,
+    "rung": "Z",
+    "unique_correct": 14,
+    "wrong": 1
+   }
+  ]
+ },
+ "union_third": {
+  "correct": 388,
+  "ladder": [
+   "8C",
+   "8A",
+   "4C",
+   "2C",
+   "2A"
+  ],
+  "matches_oracle": true,
+  "oracle": 388,
+  "order_independent": true,
+  "refused": 180,
+  "safe": true,
+  "totals": {
+   "coarse_to_fine": {
+    "correct": 388,
+    "refused": 180,
+    "wrong": 0
+   },
+   "fine_to_coarse": {
+    "correct": 388,
+    "refused": 180,
+    "wrong": 0
+   },
+   "middle_out": {
+    "correct": 388,
+    "refused": 180,
+    "wrong": 0
+   }
+  },
+  "wrong": 0
+ }
+}

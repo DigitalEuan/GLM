@@ -408,6 +408,9 @@ XOR_SITES: Tuple[Tuple[str, Tuple[str, ...], str], ...] = (
     ("reasoning/decoder_confidence.py", ("metric",),
      "the confidence of a reading is a function of the Hamming distances "
      "from the reads to each candidate codeword"),
+    ("reasoning/designed_substrate.py", ("group-law", "metric"),
+     "adds an error pattern to a codeword in F2^24, flips a tag bit and an "
+     "extension bit, and reads Hamming distances between candidates"),
     ("reasoning/decoder_confidence_marks.py", ("group-law", "metric"),
      "adds an error pattern to a codeword in F2^24 and reads the distances "
      "from the received word to the fork's cases"),

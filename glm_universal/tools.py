@@ -35,6 +35,8 @@ from .reasoning import deep_hole_failures as dhf
 from .reasoning import configuration_queries as cfq
 from .reasoning import empty_rungs as emr
 from .reasoning import norm256_hex as n256
+from .reasoning import cell_guard as cgd
+from .reasoning import placement_guard as plg
 from .reasoning import probe_budget as prb
 from .reasoning import patience_census as pcs
 from .reasoning import frozen_path as frp
@@ -795,6 +797,161 @@ def _inert_counter(args: argparse.Namespace) -> int:
     return 0 if all(report["marks"].values()) else 1
 
 
+def _designed_substrate(args: argparse.Namespace) -> int:
+    """The designed substrate, brought in (Phase 133): the sender-tag and
+    soft-certificate fork stages, the designed alternatives, the floor and
+    the marks of ``studies/DESIGNED_SUBSTRATE_STUDY.md``."""
+    from .reasoning import designed_substrate as dsub
+    report = dsub.designed_substrate_report()
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0
+    s2, s4, s5 = report["S2"], report["S4"], report["S5"]
+    bad = s2["corrupted_tag"]
+    print(f"sender tag        {s2['resolved']} of {s2['reads']} weight-4 reads "
+          f"resolved, {s2['wrong']} wrong ({s2['tag_bits_per_carrier']} bits "
+          f"per carrier; the hard word alone resolves "
+          f"{s2['hard_word_alone_resolved']})")
+    print(f"corrupted tag     {bad['contradicted']} contradicted, "
+          f"{bad['wrong']} wrong")
+    print(f"soft, K4b         {s4['resolved']} of {s4['reads']} resolved, "
+          f"{s4['contradicted']} refused (truth within radius on "
+          f"{s4['truth_within_radius']})")
+    print(f"soft, gentle G    {s5['resolved']} of {s5['reads']} resolved, "
+          f"{s5['wrong']} wrong")
+    for row in report["S6"]["rows"]:
+        print(f"extension {row['lambda']:<5}   {row['silent']} silent "
+              f"weight-4 miscorrections")
+    print(f"GLM code          {report['S6']['golay']['silent']} silent")
+    s7 = report["S7"]
+    print(f"floor             {s7['received_at_distance_four']} received "
+          f"words at distance 4 (floor {s7['floor']}); snap on the probe "
+          f"{s7['snap_right']} (declared {s7['one_sixth']})")
+    print(f"marks             {report['marks']}")
+    return 0 if not report["not_met"] else 1
+
+
+def _affine_output(args: argparse.Namespace) -> int:
+    """Passes that print a counter, long output and the diagnosis of a
+    refusal (Phase 132): the batteries, the questions, column 3, the
+    non-interference and the soundness control."""
+    from .reasoning import affine_output as ao
+    report = ao.affine_output_report()
+    if args.json:
+        out = {k: v for k, v in report.items()
+               if k not in ("battery", "questions")}
+        print(json.dumps(_plain(out), indent=1, sort_keys=True))
+        return 0
+    for row in report["battery"]["rows"]:
+        print(f"{row['id']:<4} {'as declared' if row['as_declared'] else 'WRONG'}"
+              f"  {row['got']}")
+    for row in report["diagnosis"]["rows"]:
+        print(f"{row['id']:<4} {'as declared' if row['as_declared'] else 'WRONG'}"
+              f"  {row['got']}")
+    que, cer = report["questions"], report["certificates"]
+    print(f"questions         {que['questions'] - que['wrong']} of "
+          f"{que['questions']} as declared; missed {que['missed']}")
+    print(f"NRCI (diagnosis)  {report['diagnosis']['nrci']}")
+    print(f"closed forms      {report['prediction']['held']} of "
+          f"{report['prediction']['variables']} predict the next visits")
+    print(f"column 3          {cer['verified']} of {cer['scripts']} verify; "
+          f"{cer['rejected']} of {cer['mutations']} mutations rejected; "
+          f"P2 script {cer['p2_script_bytes']} bytes (claim "
+          f"{cer['p2_claim_bytes']}, checker {cer['checker_bytes']})")
+    ni, snd = report["noninterference"], report["soundness"]
+    print(f"non-interference  battery {ni['battery_kept']}/{ni['battery_total']}"
+          f", questions {ni['questions_kept']}/{ni['questions_total']}, "
+          f"generated {ni['generated_kept']}/300")
+    print(f"soundness         {len(snd['halts_agree'])} halts agree, "
+          f"{len(snd['halts_disagree'])} disagree; controls {snd['controls']}")
+    print(f"marks             {report['marks']}")
+    return 0 if all(report["marks"].values()) else 1
+
+
+def _constant_bound(args: argparse.Namespace) -> int:
+    """Constant bounds and repeated output (Phase 131): the battery, the
+    questions, column 3, the non-interference on Phases 125, 126 and 130 and
+    the soundness control."""
+    from .reasoning import constant_bound as cb
+    report = cb.constant_bound_report()
+    if args.json:
+        out = {k: v for k, v in report.items()
+               if k not in ("battery", "questions")}
+        print(json.dumps(_plain(out), indent=1, sort_keys=True))
+        return 0
+    bat, que, cer = report["battery"], report["questions"], report["certificates"]
+    ni, snd = report["noninterference"], report["soundness"]
+    for row in bat["rows"]:
+        label = ("as declared" if row["as_declared"] else
+                 "JUMPS DIFFER" if row["as_declared_but_jumps"] else "WRONG")
+        print(f"{row['id']:<4} {label:<13} {row['got']}")
+    print(f"battery           {bat['programs'] - bat['wrong']} of "
+          f"{bat['programs']} as declared; "
+          f"{bat['programs'] - bat['wrong_apart_from_jumps']} as declared "
+          f"apart from the pass jumped")
+    print(f"questions         {que['questions'] - que['wrong']} of "
+          f"{que['questions']} as declared")
+    print(f"column 3          {cer['verified']} of {cer['scripts']} scripts "
+          f"verify; {cer['rejected']} of {cer['mutations']} mutations rejected")
+    print(f"phases 125-130    {ni['runs'] - ni['machine_wrong']} of "
+          f"{ni['runs']} runs, {ni['questions'] - ni['questions_wrong']} of "
+          f"{ni['questions']} questions, {ni['english']} of 6 English "
+          f"programs; Phases 126 and 130: {ni['battery_kept']} of "
+          f"{ni['battery_total']} programs and {ni['questions_kept']} of "
+          f"{ni['questions_total']} questions kept; L10, L11 as K1, K2: "
+          f"{ni['l10_l11_as_k1_k2']}; generated: {ni['generated_kept']} kept, "
+          f"{ni['generated_changed']} changed, {ni['generated_new_jumps']} "
+          f"with new jumps")
+    print(f"soundness         halts agreeing with a plain run: "
+          f"{', '.join(snd['halts_agree'])} (disagreeing: "
+          f"{len(snd['halts_disagree'])}); never, holding: "
+          f"{', '.join(snd['never_hold'])} (halting: {len(snd['never_halt'])});"
+          f" refused controls, plainly: {snd['controls']}")
+    print(f"marks             {report['marks']}")
+    return 0 if all(report["marks"].values()) else 1
+
+
+def _counter_lasso(args: argparse.Namespace) -> int:
+    """Counter lassos (Phase 130): the battery, the questions, column 3, the
+    non-interference on Phases 125 and 126 and the soundness control."""
+    from .reasoning import counter_lasso as cl
+    report = cl.counter_lasso_report()
+    if args.json:
+        out = {k: v for k, v in report.items()
+               if k not in ("battery", "questions")}
+        print(json.dumps(_plain(out), indent=1, sort_keys=True))
+        return 0
+    bat, que, cer = report["battery"], report["questions"], report["certificates"]
+    ni, snd = report["noninterference"], report["soundness"]
+    for row in bat["rows"]:
+        print(f"{row['id']:<4} {'as declared' if row['as_declared'] else 'WRONG':<12}"
+              f" {row['got']}")
+    print(f"battery           {bat['programs'] - bat['wrong']} of "
+          f"{bat['programs']} as declared")
+    print(f"questions         {que['questions'] - que['wrong']} of "
+          f"{que['questions']} as declared")
+    print(f"column 3          {cer['verified']} of {cer['scripts']} scripts "
+          f"verify; {cer['rejected']} of {cer['mutations']} mutations rejected")
+    print(f"phases 125, 126   {ni['runs'] - ni['machine_wrong']} of "
+          f"{ni['runs']} runs, {ni['questions'] - ni['questions_wrong']} of "
+          f"{ni['questions']} questions, {ni['english']} of 6 English "
+          f"programs; Phase 126: {ni['inert_kept']} of {ni['inert_total']} "
+          f"programs and {ni['inert_questions_kept']} of "
+          f"{ni['inert_questions']} questions kept; generated: "
+          f"{ni['generated_kept']} kept, {ni['generated_changed']} changed, "
+          f"{ni['generated_newly_decided']} newly decided "
+          f"{list(ni['generated_newly_decided_ids'])}, "
+          f"{ni['generated_still_undecided']} still undecided")
+    print(f"soundness         halts agreeing with a plain run of up to "
+          f"{cl.LONG_BUDGET} steps: {', '.join(snd['halts_agree'])} "
+          f"(disagreeing: {len(snd['halts_disagree'])}); never, holding for "
+          f"{cl.NEVER_BUDGET} plain steps: {', '.join(snd['never_hold'])} "
+          f"(halting: {len(snd['never_halt'])}); refused controls, plainly: "
+          f"{snd['controls']}")
+    print(f"marks             {report['marks']}")
+    return 0 if all(report["marks"].values()) else 1
+
+
 def _configuration_classifier(args: argparse.Namespace) -> int:
     """The L5 answer rule over the 44 deep-hole queries, with absences."""
     if args.write:
@@ -937,6 +1094,86 @@ def _norm256_hex(args: argparse.Namespace) -> int:
           f"{held['base']['wrong']})")
     print(f"hex shortcut      W has {short['colours']} colours; "
           f"{short['agree']} of {short['points']} agree")
+    print(f"marks             {report['marks']}")
+    return 0
+
+
+def _cell_guard(args: argparse.Namespace) -> int:
+    """The cell guard (Phase 128): the ladder's answers certified to be the
+    nearest carrier, on three query sets, beside the union retirement."""
+    if args.write:
+        path = cgd.write_measurements()
+        print(f"wrote {path}")
+        print(f"digest {cgd.module_digest()}")
+        return 0
+    condition = cgd.state()
+    report = cgd.current()
+    if report is None:
+        print(f"cache             {condition['verdict']}")
+        print("nothing is reported from a cache that does not describe the "
+              "sources; re-take it with --write")
+        return 1
+    rows = {name: {"plain_correct": r["plain"]["correct"],
+                   "plain_wrong": r["plain"]["wrong"],
+                   "guarded_correct": r["guarded"]["correct"],
+                   "guarded_wrong": r["guarded"]["wrong"],
+                   "nearest": r["nearest"]}
+            for name, r in report["read"].items()}
+    union = {"ladder": report["union"]["ladder"],
+             "third_correct": report["union_third"]["correct"],
+             "third_wrong": report["union_third"]["wrong"]}
+    if args.json:
+        print(json.dumps(_plain({"cache": condition["verdict"], "sets": rows,
+                                 "union": union, "marks": report["marks"]}),
+                         indent=1, sort_keys=True))
+        return 0
+    print(f"cache             {condition['verdict']}")
+    for name, r in rows.items():
+        print(f"  {name:<9} ladder {r['plain_correct']:>3} correct "
+              f"{r['plain_wrong']:>2} wrong   guarded {r['guarded_correct']:>3}"
+              f" correct {r['guarded_wrong']:>2} wrong   nearest carrier "
+              f"{r['nearest']['correct']} / {r['nearest']['wrong']} wrong / "
+              f"{r['nearest']['tie']} tie")
+    print(f"union retirement  {' '.join(union['ladder'])}: third set "
+          f"{union['third_correct']} correct {union['third_wrong']} wrong")
+    print(f"marks             {report['marks']}")
+    return 0
+
+
+def _placement_guard(args: argparse.Namespace) -> int:
+    """The placement guard (Phase 129): the cell guard with a radius read
+    from the carriers, on four query sets, beside the union retirement."""
+    if args.write:
+        path = plg.write_measurements()
+        print(f"wrote {path}")
+        print(f"digest {plg.module_digest()}")
+        return 0
+    condition = plg.state()
+    report = plg.current()
+    if report is None:
+        print(f"cache             {condition['verdict']}")
+        print("nothing is reported from a cache that does not describe the "
+              "sources; re-take it with --write")
+        return 1
+    rows = {name: {kind: [r[kind]["correct"], r[kind]["wrong"]]
+                   for kind in ("plain", "cell", "placed")}
+            for name, r in report["read"].items()}
+    union = {"ladder": report["union"]["ladder"],
+             "fourth_correct": report["union_fourth"]["correct"],
+             "fourth_wrong": report["union_fourth"]["wrong"]}
+    if args.json:
+        print(json.dumps(_plain({"cache": condition["verdict"], "sets": rows,
+                                 "union": union, "marks": report["marks"]}),
+                         indent=1, sort_keys=True))
+        return 0
+    print(f"cache             {condition['verdict']}")
+    for name, r in rows.items():
+        print(f"  {name:<9} ladder {r['plain'][0]:>3}/{r['plain'][1]:<2} "
+              f"cell guard {r['cell'][0]:>3}/{r['cell'][1]:<2} "
+              f"placement guard {r['placed'][0]:>3}/{r['placed'][1]:<2}"
+              f" (correct/wrong)")
+    print(f"union retirement  {' '.join(union['ladder'])}: fourth set "
+          f"{union['fourth_correct']} correct {union['fourth_wrong']} wrong")
     print(f"marks             {report['marks']}")
     return 0
 
@@ -4170,6 +4407,36 @@ def _parser() -> argparse.ArgumentParser:
     inrt.add_argument("--json", action="store_true")
     inrt.set_defaults(handler=_inert_counter)
 
+    clso = sub.add_parser(
+        "counter-lasso",
+        help="GLM-BAT's counter-lasso certificates: halting and "
+             "non-termination past the budget; the battery and the marks")
+    clso.add_argument("--json", action="store_true")
+    clso.set_defaults(handler=_counter_lasso)
+
+    cbnd = sub.add_parser(
+        "constant-bound",
+        help="GLM-BAT's constant bounds and repeated output: two more "
+             "counter lassos; the battery and the marks")
+    cbnd.add_argument("--json", action="store_true")
+    cbnd.set_defaults(handler=_constant_bound)
+
+    afo = sub.add_parser(
+        "affine-output",
+        help="GLM-BAT's passes that print a counter, long output in run "
+             "form, and the diagnosis of a refusal; the batteries and the "
+             "marks")
+    afo.add_argument("--json", action="store_true")
+    afo.set_defaults(handler=_affine_output)
+
+    dsub = sub.add_parser(
+        "designed-substrate",
+        help="the owner's substrate study brought in: sender-tag and "
+             "soft-certificate fork stages, designed alternatives, the "
+             "negative-space floor; the marks")
+    dsub.add_argument("--json", action="store_true")
+    dsub.set_defaults(handler=_designed_substrate)
+
     cfcl = sub.add_parser(
         "configuration-classifier",
         help="the L5 answer rule over the 44 deep-hole queries")
@@ -4200,6 +4467,22 @@ def _parser() -> argparse.ArgumentParser:
                        help="re-take the measurement cache")
     n256p.add_argument("--json", action="store_true")
     n256p.set_defaults(handler=_norm256_hex)
+
+    cgp = sub.add_parser(
+        "cell-guard",
+        help="the cell guard: ladder answers certified nearest, three sets")
+    cgp.add_argument("--write", action="store_true",
+                     help="re-take the measurement cache")
+    cgp.add_argument("--json", action="store_true")
+    cgp.set_defaults(handler=_cell_guard)
+
+    plgp = sub.add_parser(
+        "placement-guard",
+        help="the placement guard: a radius read from the carriers, four sets")
+    plgp.add_argument("--write", action="store_true",
+                      help="re-take the measurement cache")
+    plgp.add_argument("--json", action="store_true")
+    plgp.set_defaults(handler=_placement_guard)
 
     cumul = sub.add_parser(
         "cumulativity", help="the refinement check every layer family passes")
