@@ -46,12 +46,18 @@ Four readings, each independent
    specification, so a Lean module named in no document and no Python source
    is a specification with no reader.
 
+5. **Reached from the answering path** (Phase 136).  Reading 1 counts the
+   measurement command line as an entry point; this one takes the closure
+   from ``glm_universal.runtime`` alone, by
+   ``glm_universal.runtime.toolbox.wiring_census``, and lists any module
+   neither reached nor declared in ``toolbox.MEASUREMENT_ONLY``.
+
 Run it from the repository root::
 
     python3 studies/scripts/wiring_audit.py
 
 It reads only; it writes nothing and imports nothing from the package except
-the three sandbox occupants and the figure registry.
+the three sandbox occupants, the figure registry and the toolbox's census.
 """
 
 from __future__ import annotations
@@ -320,6 +326,21 @@ def main() -> None:
     )
     for name in lean["uncited"]:
         print("     " + name)
+
+    # Reading 5 (Phase 136): the narrower question -- reached from the
+    # answering path, not from any entry point.  The census is the toolbox's
+    # own, so the script and the test that guards it cannot disagree.
+    sys.path.insert(0, OVERLAY)
+    from glm_universal.runtime import toolbox
+    census = toolbox.wiring_census()
+    print("5. reached from the answering path")
+    print(
+        "   %d of %d reasoning modules, %d declared measurement-only, "
+        "%d undeclared" % (census["reached"], census["reasoning"],
+                           len(census["declared"]), len(census["undeclared"]))
+    )
+    for name in census["undeclared"]:
+        print("     undeclared: " + name)
 
 
 if __name__ == "__main__":

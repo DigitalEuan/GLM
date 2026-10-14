@@ -6,7 +6,7 @@
 
 **Verdict.** Most of the cost was work repeated on things that had not moved, and a cache keyed on what it is derived from does not repeat it.
 
-**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->12,934<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
+**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->13,230<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
 
 **Recomputed by.** `glm_universal.corpus.cost.cost_report`
 
@@ -73,8 +73,8 @@ nothing.
 <!-- generated: cost-addresses -->
 | book | units | decodes from nothing | decodes now | reused |
 |---|---|---|---|---|
-| Lean declarations | 5,067 | 9,405 | 0 | 10,134 |
-| corpus sections | 1,798 | 3,529 | 0 | 3,596 |
+| Lean declarations | 5,167 | 9,596 | 0 | 10,334 |
+| corpus sections | 1,851 | 3,634 | 0 | 3,702 |
 
 Reuse is checked, not assumed: each rebuild re-decodes a sample of the answers it reused and reports any that moved (4 sampled in the declaration book, 4 in the document book, none moved).
 <!-- end generated -->
@@ -93,7 +93,7 @@ nothing and requiring the two books to be equal byte for byte.
 | reading | value |
 |---|---|
 | blocks quoting the report | 5 |
-| evaluation cases per report | 179 |
+| evaluation cases per report | 188 |
 | reports taken per check, before | 5 |
 | reports taken per check, now | 0 |
 | stored report | fresh |
@@ -122,7 +122,7 @@ works for tables and not for a sentence, and the sentences were where the drift
 lived. The block mechanism is now available at the size of a phrase:
 
 ```markdown
-the suite is <!--figure:test-files-->183 test files<!--/figure--> today
+the suite is <!--figure:test-files-->188 test files<!--/figure--> today
 ```
 
 The markers are HTML comments, so a reader sees only the number. `--refresh`
@@ -185,15 +185,15 @@ Measured over the suite, by `glm_universal.corpus.cost.lean_blast_radius`:
 
 | | |
 |---|---|
-| test units in the suite | 183 |
-| Lean files | 207 |
-| units an edit to *any* Lean file used to make stale | 169 |
-| units one Lean file makes stale now, median | 81 |
-| units the worst single Lean file makes stale | 153 |
-| units that read the tree with a glob, so are stale whenever it moves | 81 |
+| test units in the suite | 186 |
+| Lean files | 210 |
+| units an edit to *any* Lean file used to make stale | 172 |
+| units one Lean file makes stale now, median | 82 |
+| units the worst single Lean file makes stale | 156 |
+| units that read the tree with a glob, so are stale whenever it moves | 82 |
 
 The Lean row counts distinct file names the ledger tracks, so it is the
-development's 184 files under `RequestProject/GLM/`, the reference tool and
+development's 185 files under `RequestProject/GLM/`, the reference tool and
 the build's `Main.lean`. Phases 89 and 90 added three Lean files (`QuestionSetB.lean`,
 `QuestionSetBAnswers.lean`, `TypedOperators.lean`). Phase 90 also added one
 unit, `test_typed_operators.py`, which reaches the router and cites its Lean
@@ -323,6 +323,17 @@ Phase 133 added one Lean file (`DesignedSubstrate.lean`) and one unit,
 Lean file but does not read the tree with a glob, so the unit count, the
 file count, the any-Lean-file row and the worst single file moved by one,
 and the median and the glob row did not.
+Phase 134 added one Lean file (`ProtectedTag.lean`) and one unit,
+`test_carrier_read.py`, which reaches the carrier read and cites its Lean
+file without a glob, so the same four rows moved by one and the median and
+the glob row did not.
+Phase 135 added one Lean file (`ShortestTag.lean`) and one unit,
+`test_shortest_tag.py`, and Phase 136 one Lean file (`CertifiedStreams.lean`)
+and one unit, `test_connected_two.py`, which reaches the router and the
+toolbox's wiring census; together the unit count, the file count, the
+any-Lean-file row and the worst single file moved by two, and the median and
+the glob row by one (re-measured at Phase 136; Phase 135 left the table
+unmoved).
 Phase 68 added one unit (`test_reverse_tct_two.py`) that reaches
 the router, and so the development through it, which is why the floor moved
 from 34 to 35 with the other rows; Phase 69 added another
@@ -898,5 +909,5 @@ that pays for it, with the storage, loading, digesting and rebuilding of the
 table counted on the table's side rather than assumed away.
 
 <!-- generated: cost-tier -->
-**Rebuilding both address books from nothing decodes 12,934 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 179 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  593 figures inside sentences, across 32 documents, are emitted rather than typed.
+**Rebuilding both address books from nothing decodes 13,230 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 188 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  593 figures inside sentences, across 32 documents, are emitted rather than typed.
 <!-- end generated -->

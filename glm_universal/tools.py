@@ -797,6 +797,183 @@ def _inert_counter(args: argparse.Namespace) -> int:
     return 0 if all(report["marks"].values()) else 1
 
 
+def _shortest_tag(args: argparse.Namespace) -> int:
+    """The shortest tag (Phase 135): the proved floors, the census of the
+    constructions, and the search on the gap of
+    ``studies/SHORTEST_TAG_STUDY.md``."""
+    from .reasoning import shortest_tag as stg
+    report = stg.shortest_tag_report(moves=args.moves)
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0
+    s2, s3, s4, s5 = (report[k] for k in ("S2", "S3", "S4", "S5"))
+    print(f"floor, any tag    D=1: {report['floor_general'][1]}, "
+          f"D=3: {report['floor_general'][3]}, D=5: {report['floor_general'][5]} bits")
+    print(f"floor, built on 7 D=1: {report['floor_built'][1]}, "
+          f"D=3: {report['floor_built'][3]}, D=5: {report['floor_built'][5]} bits")
+    print(f"constructions     least octad weight {s2['min_weight']} at "
+          f"{s2['lengths']} bits")
+    print(f"7-bit kernel      {s3['kernel']} codewords, {s3['kernel_octads']} "
+          f"octads, at most {s3['most_avoiding_one_coordinate']} avoid a "
+          f"coordinate (cap 24)")
+    print(f"7-bit values      {s4['values']} of 127 taken by octads, "
+          f"multiplicities {s4['multiplicities']}")
+    for key, v in s5["control"].items():
+        print(f"control {key:<9} found by {v['found']} of {v['of']} seeds, "
+              f"ranks {v['ranks']}")
+    for key, v in s5["gap"].items():
+        print(f"gap     {key:<9} least deficit {v}")
+    print(f"marks             {report['marks']}")
+    return 0 if all(report["marks"].values()) else 1
+
+
+def _connected_two(args: argparse.Namespace) -> int:
+    """The second connected-machine round (Phase 136): the wiring census, the
+    stream tools against independent references, non-interference, the
+    phrased and tool batteries -- the marks of
+    ``studies/CONNECTED_MACHINE_TWO_STUDY.md``."""
+    from .evaluation import connected_two_cases as c2
+    report = c2.measure()
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0
+    m = report["marks"]
+    w = m["W1"]["census"]
+    print(f"W1 wiring         {w['reached']} of {w['reasoning']} reasoning "
+          f"modules reached, {len(w['declared'])} declared, undeclared "
+          f"{w['undeclared']}, stale {w['stale_declarations']}")
+    print(f"W2 Lean           {m['W2']['file']}: missing {m['W2']['missing']}, "
+          f"sorry {m['W2']['sorry']}")
+    print(f"W3 cf             {m['W3']['surds_agree']} of {m['W3']['surds']} "
+          f"surds agree; pi {m['W3']['pi']}, e {m['W3']['e']}, "
+          f"phi {m['W3']['phi']}")
+    print(f"W4 mobius         {m['W4']['agree']} of {m['W4']['cases']} agree "
+          f"with the quadratic recurrence, {m['W4']['direct_agree']} with "
+          "the direct expansion")
+    for r in m["W5"]["rows"]:
+        print(f"W5 rational       {r['text']}: {r['emitted']} term(s) "
+              f"emitted, sound {r['sound']}, complete {r['complete']}")
+    print(f"W6 interference   {m['W6']['matched']} of "
+          f"{m['W6']['declared_texts']} declared texts match an opening")
+    print(f"W7 phrased        {m['W7']['as_declared']} of "
+          f"{m['W7']['questions']} as declared ({m['W7']['answered']} "
+          "answered)")
+    print(f"W8 tools          {m['W8']['tool_as_declared']} of "
+          f"{m['W8']['tool_cases']} as declared; gate certificate equals "
+          f"search on {m['W8']['gate_agree']} of {m['W8']['gate_pairs']}")
+    print(f"marks met         {report['met']} of {report['taken']}")
+    return 0 if report["met"] == report["taken"] else 1
+
+
+def _tool_verdicts(args: argparse.Namespace) -> int:
+    """The tool-verdicts round (Phase 138): a tool's yes/no answer as a
+    planner step, conditionals, the unrolled search, the Farey certificate --
+    the marks of ``studies/TOOL_VERDICTS_STUDY.md``."""
+    from .evaluation import tool_verdicts_cases as tvd
+    report = tvd.measure(scripts=not args.no_scripts)
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0
+    m = report["marks"]
+    print(f"T1 Lean           {m['T1']['file']}: missing {m['T1']['missing']}, "
+          f"sorry {m['T1']['sorry']}")
+    print(f"T2 verdicts       {m['T2']['as_expected']} of "
+          f"{m['T2']['questions']} held-out questions as expected")
+    t3 = m["T3"]
+    if t3.get("skipped"):
+        print("T3 column 3       skipped (--no-scripts)")
+    else:
+        print(f"T3 column 3       {t3['verified']} of {t3['chains']} chains "
+              f"verified; {t3['caught']} of {t3['mutants']} mutants caught")
+    print(f"T4 rewordings     {m['T4']['right']} of {m['T4']['questions']} "
+          f"right, {m['T4']['read']} read, {len(m['T4']['wrong'])} wrong; "
+          f"Phase 137 misses now right {m['T4']['phase137_now_right']} of "
+          f"{m['T4']['phase137_misses']}")
+    print(f"T5 interference   {len(m['T5']['matched'])} of "
+          f"{m['T5']['declared_texts']} declared texts read; "
+          f"{len(m['T5']['moved'])} of {m['T5']['corpus']} stepwise cases "
+          "moved")
+    print(f"T6 certificate    {m['T6']['grid_agree']} of {m['T6']['grid']} "
+          f"grid cases agree with the exhaustive search; "
+          f"{m['T6']['large_certified']} of {m['T6']['large']} bounds up to "
+          "10^60 certified")
+    print(f"marks met         {report['met']} of {report['taken']}")
+    return 0 if report["met"] == report["taken"] else 1
+
+
+def _tool_values(args: argparse.Namespace) -> int:
+    """The tool-values round (Phase 137): a tool's number composed by the
+    stepwise planner, the convergent and best-approximation tools against
+    independent references, non-interference, the held-out rewordings -- the
+    marks of ``studies/TOOL_VALUES_STUDY.md``."""
+    from .evaluation import tool_values_cases as tvc
+    report = tvc.measure(scripts=not args.no_scripts)
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0
+    m = report["marks"]
+    print(f"V1 Lean           {m['V1']['file']}: missing {m['V1']['missing']}, "
+          f"sorry {m['V1']['sorry']}")
+    print(f"V2 composed       {m['V2']['as_declared']} of "
+          f"{m['V2']['questions']} as declared ({m['V2']['answered']} "
+          "answered)")
+    v3 = m["V3"]
+    if v3.get("skipped"):
+        print("V3 column 3       skipped (--no-scripts)")
+    else:
+        print(f"V3 column 3       {v3['verified']} of {v3['chains']} chains "
+              f"verified; {v3['caught']} of {v3['mutants']} mutants caught")
+    print(f"V4 convergents    {m['V4']['surd_agree']} of "
+          f"{m['V4']['surd_cases']} surd cases and {m['V4']['pi_agree']} of "
+          f"{m['V4']['pi_cases']} pi cases agree with the references")
+    print(f"V5 nearest        {m['V5']['agree']} of {m['V5']['cases']} agree "
+          "with the exhaustive search")
+    print(f"V6 interference   {m['V6']['matched']} of "
+          f"{m['V6']['declared_texts']} declared texts read; "
+          f"{len(m['V6']['moved'])} of {m['V6']['corpus']} stepwise cases "
+          "moved")
+    print(f"V7 single         {m['V7']['as_declared']} of "
+          f"{m['V7']['questions']} as declared")
+    print(f"V8 held out       {m['V8']['read']} of {m['V8']['questions']} "
+          f"read, {m['V8']['right']} right, {len(m['V8']['wrong'])} wrong; "
+          f"{m['V8']['rederived']} of {m['V8']['corrected']} corrected "
+          "sheet values re-derived")
+    print(f"marks met         {report['met']} of {report['taken']}")
+    return 0 if report["met"] == report["taken"] else 1
+
+
+def _protected_tag(args: argparse.Namespace) -> int:
+    """The protected tag and the carrier read (Phase 134): the tied battery
+    through the eleven- and fifteen-bit tags, the seven-bit control, three
+    flips past the radius, heavy corruption, and the marks of
+    ``studies/PROTECTED_TAG_STUDY.md``."""
+    from .reasoning import carrier_read as crd
+    report = crd.protected_tag_report()
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0
+    p2, p3, p4, p5, p6 = (report[k] for k in ("P2", "P3", "P4", "P5", "P6"))
+    print(f"octad tag weight  least {p2['min_weight_7']} (7 bits), "
+          f"{p2['min_weight_11']} (11 bits), {p2['min_weight_15']} (15 bits)")
+    for key, label in (("tag15_radius2", "15-bit, radius 2"),
+                       ("tag11_radius1", "11-bit, radius 1")):
+        t = p3[key]
+        print(f"{label:<18}{t['resolved']} of {p3['reads']} tied reads "
+              f"resolved, {t['wrong']} wrong")
+    t = p4["tag7_one_flip"]
+    print(f"7-bit, one flip   {t['wrong']} wrong, {t['contradicted']} "
+          f"contradicted")
+    for key in ("radius2", "radius1"):
+        t, h = p5[key], p5["post_hoc_consecutive"][key]
+        print(f"3 flips, {key:<9}{t['wrong']} wrong as declared; "
+              f"{h['wrong']} wrong with consecutive flips (post hoc)")
+    print(f"heavy, 5-7 flips  decoder alone {p6['wrong_decoder_alone']} "
+          f"wrong; intact 7-bit tag {p6['wrong_tag7_intact']}; 15-bit tag "
+          f"{p6['wrong_tag15_radius2']}")
+    print(f"marks             {report['marks']}")
+    return 0 if all(report["marks"].values()) else 1
+
+
 def _designed_substrate(args: argparse.Namespace) -> int:
     """The designed substrate, brought in (Phase 133): the sender-tag and
     soft-certificate fork stages, the designed alternatives, the floor and
@@ -4436,6 +4613,45 @@ def _parser() -> argparse.ArgumentParser:
              "negative-space floor; the marks")
     dsub.add_argument("--json", action="store_true")
     dsub.set_defaults(handler=_designed_substrate)
+
+    ptag = sub.add_parser(
+        "protected-tag",
+        help="the sender tag with a code of its own and the carrier read: "
+             "the tied battery, the seven-bit control, three flips past the "
+             "radius, heavy corruption; the marks")
+    ptag.add_argument("--json", action="store_true")
+    ptag.set_defaults(handler=_protected_tag)
+
+    stag = sub.add_parser(
+        "shortest-tag",
+        help="how many tag bits a tie needs: the proved floors, the "
+             "constructions, the search on the gap; the marks")
+    stag.add_argument("--moves", type=int, default=2_000_000)
+    stag.add_argument("--json", action="store_true")
+    stag.set_defaults(handler=_shortest_tag)
+
+    ctwo = sub.add_parser(
+        "connected-two",
+        help="the second connected-machine round: the wiring census, the "
+             "stream tools, the phrased and tool batteries; the marks")
+    ctwo.add_argument("--json", action="store_true")
+    ctwo.set_defaults(handler=_connected_two)
+
+    tval = sub.add_parser(
+        "tool-values",
+        help="a tool's number composed by the stepwise planner; the "
+             "convergent and best-approximation tools; the marks")
+    tval.add_argument("--json", action="store_true")
+    tval.add_argument("--no-scripts", action="store_true")
+    tval.set_defaults(handler=_tool_values)
+
+    tvrd = sub.add_parser(
+        "tool-verdicts",
+        help="a tool's yes/no answer as a planner step, conditionals and the "
+             "unrolled search; the Farey certificate; the marks")
+    tvrd.add_argument("--json", action="store_true")
+    tvrd.add_argument("--no-scripts", action="store_true")
+    tvrd.set_defaults(handler=_tool_verdicts)
 
     cfcl = sub.add_parser(
         "configuration-classifier",

@@ -36,7 +36,8 @@ class TestTheRouterReadsOnlyWhatItShould(unittest.TestCase):
         # 177 -> 178 at Phase 109: the evaluation case report-routes.
         # 178 -> 179 at Phase 123: the evaluation case
         # report-hole-configuration.
-        self.assertEqual(c["planner"], 179)
+        # 179 -> 188 at Phase 134: the nine cases of the carrier kind.
+        self.assertEqual(c["planner"], 188)
 
     def test_every_engineering_question_reaches_engineering(self):
         self.assertEqual(self.census["engineering"]["engineering"], 63)
@@ -107,7 +108,15 @@ class TestTheToolbox(unittest.TestCase):
                                    "salvage", "salvage_second", "stability",
                                    "tie_break", "native_parity",
                                    "native_words", "law_register",
-                                   "ops_ladder", "batch_speech"})
+                                   "ops_ladder", "batch_speech",
+                                   # Phase 136: the stream tools, the
+                                   # binding, the gates, the tag floors and
+                                   # the wiring census.
+                                   "substrate_cognition", "role_binding",
+                                   "shortest_tag", "toolbox",
+                                   # Phase 137: the convergent and the
+                                   # best approximation.
+                                   "rational_approx"})
 
     def test_every_tool_names_a_lean_file_and_a_study_that_exist(self):
         for t in toolbox.TOOLS:

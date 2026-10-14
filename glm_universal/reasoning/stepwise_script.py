@@ -411,12 +411,33 @@ def sentence(s: Step) -> str:
     if s.op == "larger":
         return (f"Step {k}: the {s.detail['relation']} of step {i[0]} and "
                 f"step {i[1]} is {v}.")
+    if s.op == "choose":
+        return (f"Step {k}: as step {i[0]} is {s.detail['test']}, the "
+                f"{s.detail['branch']} branch gives step {i[1]}, which is "
+                f"{v}.")
+    if s.op == "first":
+        tests = _step_list(i[:-1])
+        return (f"Step {k}: the first of {tests} to hold is step {i[-2]}, so "
+                f"step {i[-1]} gives {v}.")
     if s.op == "axiom":
         d = s.detail
         ins = " and ".join(f"step {j}" for j in i)
         return (f"Step {k}: {s.label} is {v}, by {d['axiom']} in "
                 f"{d['wheel']}, from {ins}.")
     raise ValueError(f"no template for {s.op!r}")
+
+
+def _step_list(ins: Sequence[int]) -> str:
+    """``step a``, ``step a and step b``, ``step a, step b and step c``."""
+    words = [f"step {j}" for j in ins]
+    if len(words) == 1:
+        return words[0]
+    return ", ".join(words[:-1]) + " and " + words[-1]
+
+
+#: The verdict values a ``choose`` step branches on (Phase 138).
+VERDICT_TRUE = ("True", "prime")
+VERDICT_FALSE = ("False", "not prime")
 
 
 def _ref(steps: Sequence[Step], j: int) -> str:
@@ -499,6 +520,12 @@ def equation(s: Step, steps: Sequence[Step]) -> str:
         fn = "argmax" if s.detail["relation"] == "larger" else "argmin"
         return (f"s{k} = {fn}(s{i[0]}, s{i[1]}) = {fn}({_ref(steps, i[0])}, "
                 f"{_ref(steps, i[1])}) = {v}")
+    if s.op == "choose":
+        return (f"s{k} = {s.detail['branch']}(s{i[0]} = {s.detail['test']}) "
+                f"-> s{i[1]} = {v}")
+    if s.op == "first":
+        refs = ", ".join(f"s{j}" for j in i[:-1])
+        return f"s{k} = first({refs}) -> s{i[-1]} = {v}"
     if s.op == "axiom":
         d = s.detail
         env = ", ".join(f"{name}=s{j}" for name, j in d["names"])
@@ -561,6 +588,19 @@ def read_sentence(text: str) -> Optional[Tuple[int, str, Tuple[int, ...],
          r"is " + _VAL + r"\.", "larger", 2),
         (r"Step (\d+): step (\d+) is " + _VAL + r"\.", "prime", 1),
     ]
+    mx = re.fullmatch(r"Step (\d+): as step (\d+) is (?:True|False|prime|not "
+                      r"prime), the (?:then|otherwise) branch gives step "
+                      r"(\d+), which is " + _VAL + r"\.", text)
+    if mx:
+        return (int(mx.group(1)), "choose",
+                (int(mx.group(2)), int(mx.group(3))), mx.group(4))
+    mx = re.fullmatch(r"Step (\d+): the first of ((?:step \d+)(?:(?:, | and )"
+                      r"step \d+)*) to hold is step \d+, so step (\d+) gives "
+                      + _VAL + r"\.", text)
+    if mx:
+        ins = tuple(int(x) for x in re.findall(r"step (\d+)", mx.group(2)))
+        return (int(mx.group(1)), "first", ins + (int(mx.group(3)),),
+                mx.group(4))
     mf = re.fullmatch(r"Step (\d+): the (?:sum|mean|count of odd values|count "
                       r"of even values|median|largest value|smallest value|"
                       r"lower quartile|upper quartile|"
@@ -608,6 +648,14 @@ def read_equation(text: str) -> Optional[Tuple[int, str, Tuple[int, ...],
     if not m:
         return None
     k, rest = int(m.group(1)), m.group(2)
+    m2 = re.fullmatch(r"(?:then|otherwise)\(s(\d+) = (?:True|False|prime|not "
+                      r"prime)\) -> s(\d+) = (.+)", rest)
+    if m2:
+        return k, "choose", (int(m2.group(1)), int(m2.group(2))), m2.group(3)
+    m2 = re.fullmatch(r"first\(((?:s\d+)(?:, s\d+)*)\) -> s(\d+) = (.+)", rest)
+    if m2:
+        ins = tuple(int(x) for x in re.findall(r"s(\d+)", m2.group(1)))
+        return k, "first", ins + (int(m2.group(2)),), m2.group(3)
     m2 = re.fullmatch(r"(?:sum|mean|odd|even|median|max|min|rank|q1|q3|top|(?:max|min):\d+)\[[^\]]+\]"
                       r"\(((?:s\d+)(?:, s\d+)*)\) = (.+)", rest)
     if m2:
@@ -777,6 +825,20 @@ def recompute(s: Step, steps: Sequence[Step]) -> object:
             return "equal"
         want_a = (a > b) == (s.detail["relation"] == "larger")
         return la if want_a else lb
+    if s.op == "choose":
+        test, branch = render_value(vals[0]), s.detail.get("branch")
+        if test != s.detail.get("test"):
+            return None
+        if (branch == "then" and test in VERDICT_TRUE) or \
+                (branch == "otherwise" and test in VERDICT_FALSE):
+            return vals[1]
+        return None
+    if s.op == "first":
+        tests = [render_value(v) for v in vals[:-1]]
+        if tests and tests[-1] == "True" and all(t == "False"
+                                                 for t in tests[:-1]):
+            return vals[-1]
+        return None
     if s.op == "axiom":
         env = {name: steps[j - 1].value for name, j in s.detail["names"]}
         env[s.detail["solved_for"]] = s.value
@@ -913,6 +975,19 @@ def read1(t):
          r"is " + VAL + r"\.", "larger", 2),
         (r"Step (\d+): step (\d+) is " + VAL + r"\.", "prime", 1),
     ]
+    m = re.fullmatch(r"Step (\d+): as step (\d+) is (?:True|False|prime|not "
+                     r"prime), the (?:then|otherwise) branch gives step "
+                     r"(\d+), which is " + VAL + r"\.", t)
+    if m:
+        return [int(m.group(1)), "choose", [int(m.group(2)), int(m.group(3))],
+                m.group(4)]
+    m = re.fullmatch(r"Step (\d+): the first of ((?:step \d+)(?:(?:, | and )"
+                     r"step \d+)*) to hold is step \d+, so step (\d+) gives "
+                     + VAL + r"\.", t)
+    if m:
+        return [int(m.group(1)), "first",
+                [int(x) for x in re.findall(r"step (\d+)", m.group(2))]
+                + [int(m.group(3))], m.group(4)]
     m = re.fullmatch(r"Step (\d+): the (?:sum|mean|count of odd values|count "
                      r"of even values|median|largest value|smallest value|"
                      r"lower quartile|upper quartile|"
@@ -958,6 +1033,17 @@ def read2(t):
     if not m:
         return None
     k, rest = int(m.group(1)), m.group(2)
+    m2 = re.fullmatch(r"(?:then|otherwise)\(s(\d+) = (?:True|False|prime|not "
+                      r"prime)\) -> s(\d+) = (.+)", rest)
+    if m2:
+        return [k, "choose", [int(m2.group(1)), int(m2.group(2))],
+                m2.group(3)]
+    m2 = re.fullmatch(r"first\(((?:s\d+)(?:, s\d+)*)\) -> s(\d+) = (.+)",
+                      rest)
+    if m2:
+        return [k, "first", [int(x) for x in re.findall(r"s(\d+)",
+                                                        m2.group(1))]
+                + [int(m2.group(2))], m2.group(3)]
     m2 = re.fullmatch(r"(?:sum|mean|odd|even|median|max|min|rank|q1|q3|top|(?:max|min):\d+)\[[^\]]+\]"
                       r"\(((?:s\d+)(?:, s\d+)*)\) = (.+)", rest)
     if m2:
@@ -1261,6 +1347,53 @@ def order_fold(fn, v, holes, x, rng=None, bounds=False):
     return between(lo / len(mids), hi / len(mids))
 
 
+def tool_value(text, sel):
+    """Re-run a tool in this interpreter and pick its number out with this
+    script's own reading of the selector (Phase 137)."""
+    from glm_universal.runtime.toolbox import run_tool
+    got = run_tool(text)
+    assert got.ok, "the tool refuses now: %s" % got.text
+    kind, fig = sel[0], got.figures[sel[1]]
+    if kind == "index":
+        return num(str(fig[int(sel[2])]))
+    if kind == "fold":
+        vals = [num(str(v)) for v in fig[:int(sel[3])]]
+        assert len(vals) == int(sel[3]), "too few entries to fold"
+        if sel[2] == "sum":
+            return sum(vals, Fraction(0))
+        if sel[2] == "product":
+            out = Fraction(1)
+            for v in vals:
+                out *= v
+            return out
+        if sel[2] == "mean":
+            return sum(vals, Fraction(0)) / len(vals)
+        return max(vals) if sel[2] == "max" else min(vals)
+    if kind == "value":
+        return num(str(fig))
+    if kind == "part":
+        q = num(str(fig))
+        return Fraction(q.numerator if sel[2] == "numerator"
+                        else q.denominator)
+    if kind == "entry":
+        return num(str(fig[sel[2]]))
+    raise AssertionError("no selector %r" % kind)
+
+
+def tool_verdict(text, test):
+    """Re-run a tool and apply the verdict test with this script's own
+    reading (Phase 138): a boolean figure, its negation, or a selected number
+    compared with a stated one."""
+    from glm_universal.runtime.toolbox import run_tool
+    got = run_tool(text)
+    if test[0] in ("flag", "flag-not"):
+        flag = got.figures.get(test[1])
+        assert isinstance(flag, bool), "the tool gives no verdict now"
+        return str(flag if test[0] == "flag" else not flag)
+    assert test[0] == "equals", "no verdict test %r" % test[0]
+    return str(tool_value(text, test[1:-1]) == num(test[-1]))
+
+
 def value_of(step, done):
     op, d = step["op"], step["detail"]
     v = [done[j] for j in step["inputs"]]
@@ -1271,6 +1404,10 @@ def value_of(step, done):
     if op == "planned":
         r = d.get("recompute")
         assert r, "a planned step with nothing to recompute"
+        if r[0] == "tool":
+            return tool_value(r[1], r[2:])
+        if r[0] == "verdict":
+            return tool_verdict(r[1], r[2:])
         if r[0] == "convert":
             return num(r[1]) * num(r[2]) / num(r[3])
         a, b = num(r[2]), num(r[3])
@@ -1430,6 +1567,22 @@ def value_of(step, done):
         labels = [DATA["steps"][j - 1]["label"] for j in step["inputs"]]
         first = (v[0] > v[1]) == (d["relation"] == "larger")
         return labels[0] if first else labels[1]
+    if op == "choose":
+        test = show(v[0])
+        assert test == d["test"], "the recorded test is not the step's value"
+        if d["branch"] == "then":
+            assert test in ("True", "prime"), "the then branch on a false test"
+        else:
+            assert d["branch"] == "otherwise", "no such branch"
+            assert test in ("False", "not prime"), \
+                "the otherwise branch on a true test"
+        return v[1]
+    if op == "first":
+        tests = [show(x) for x in v[:-1]]
+        assert tests and tests[-1] == "True", "the last test does not hold"
+        assert all(x == "False" for x in tests[:-1]), \
+            "an earlier test already holds"
+        return v[-1]
     if op == "axiom":
         from glm_universal.engineering import wheels
         from glm_universal.runtime import measurand_register as mreg

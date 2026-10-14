@@ -110,6 +110,26 @@ ROUND_THREE = True
 ROUND_FOUR = True
 
 
+#: Phase 137 (``studies/TOOL_VALUES_STUDY.md``): a part the typed planner
+#: refuses may be read as one number a tool computes
+#: (:mod:`glm_universal.runtime.tool_values`).  Switched off only by the
+#: round's own control.
+TOOL_VALUES = True
+
+
+#: Phase 138 (``studies/TOOL_VERDICTS_STUDY.md``): a tool's yes/no answer as
+#: a step (*is 0xff reachable from 0x0*), a conditional that branches on any
+#: verdict step and builds only the branch it takes (*if A, B, otherwise C*),
+#: and a search unrolled into steps until its test first holds (*the first
+#: convergent of pi whose denominator is above 1000*).  Switched off only by
+#: the round's own control.
+TOOL_VERDICTS = True
+
+#: The relation words of the search's stopping test (all strict ``>``).
+_ABOVE = r"(?:is )?(?:above|over|greater than|more than|larger than|bigger " \
+    r"than|exceeds|exceeding)"
+
+
 def _three() -> bool:
     return ROUND_TWO and ROUND_THREE
 
@@ -602,11 +622,44 @@ def _difference_readings(seg: str) -> Optional[List[tuple]]:
     return out
 
 
+def _declarative_test(text: str) -> str:
+    """``113 is prime`` -> ``is 113 prime``: the condition of a conditional
+    asked as the question the readers already read."""
+    t = text.strip()
+    if re.match(r"(?:is|can|does) ", t):
+        return t
+    return re.sub(r"^(.+?) is ", r"is \1 ", t, count=1)
+
+
+def _verdict_readings(seg: str) -> Optional[List[tuple]]:
+    """Phase 138: a conditional, a tool verdict, or a search; ``None`` when
+    the segment is none of them."""
+    m = re.fullmatch(r"if (.+?), (.+), (?:otherwise|else) (.+)", seg)
+    if m:
+        conds = segment_readings(_declarative_test(m.group(1)))
+        yes, no = segment_readings(m.group(2)), segment_readings(m.group(3))
+        out = [("choose", c, a, b) for c in conds for a in yes for b in no]
+        return out or None
+    m = re.fullmatch(r"(?:the )?first convergent (?:of|to|for) (?:the )?(.+?),? "
+                     r"(?:whose|with|with a|having a?) denominator " + _ABOVE
+                     + r" (\d+)", seg)
+    if m:
+        return [("search", m.group(1).strip(), Fraction(int(m.group(2))))]
+    from . import tool_values as tv
+    if tv.read_verdict(seg) is not None:
+        return [("verdict", seg)]
+    return None
+
+
 def segment_readings(seg: str) -> List[tuple]:
     """Every reading of one ``then``-segment: a predicate, a verb form over
     *it*, or an expression."""
     seg = _LEADS.sub("", seg.strip())
     out: List[tuple] = []
+    if TOOL_VERDICTS and seg.startswith("if "):
+        got = _verdict_readings(seg)
+        if got is not None:
+            return got
     if ROUND_TWO:
         m = re.fullmatch(r"is (.+?) (?:an? )?(odd|even)(?: number)?", seg)
         if m:
@@ -680,6 +733,10 @@ def segment_readings(seg: str) -> List[tuple]:
             else:
                 out.append(("bin", "sub", ("num", Fraction(0)), a))
         return out
+    if TOOL_VERDICTS:
+        got = _verdict_readings(seg)
+        if got is not None:
+            return got
     return expression_readings(seg)
 
 
@@ -745,6 +802,9 @@ class Leaves:
                 raise Refused("VALUE_MISSING",
                               f"the register records {phrase!r} as missing "
                               f"({why})")
+            tool = self._tool_value(phrase, q) if TOOL_VALUES else None
+            if tool is not None:
+                return tool
             raise Refused("UNKNOWN_STEP",
                           f"the planner does not answer {q!r} ({why})")
         o = planned.chosen
@@ -781,12 +841,47 @@ class Leaves:
                      "recompute": ["arith", op, ss.render_value(Fraction(a)),
                                    ss.render_value(Fraction(b))]})
         v = ss.parse_value(str(o.value).split(" ")[0])
+        if isinstance(v, Fraction) and TOOL_VALUES:
+            # Phase 137: the typed planner holds the number but this chain
+            # cannot re-derive its computation; a tool that computes the same
+            # number gives the chain a step it can re-run -- and only if the
+            # two agree.
+            tool = self._tool_value(phrase, q)
+            if tool is not None:
+                if tool[1] != v:
+                    raise Refused("DERIVATIONS_DISAGREE",
+                                  f"the planner answers {q!r} with "
+                                  f"{ss.render_value(v)}, but "
+                                  f"`{tool[2]['recompute'][1]}` gives "
+                                  f"{ss.render_value(tool[1])}")
+                tool[2]["planner_agrees"] = ss.render_value(v)
+                return tool
         if isinstance(v, Fraction):
             raise Refused("UNKNOWN_STEP",
                           f"the planner answers {q!r} by a computation this "
                           f"chain cannot re-derive")
         raise Refused("NOT_A_NUMBER",
                       f"{phrase!r} is {o.value!r}, which is not a number")
+
+
+    def _tool_value(self, phrase: str, q: str):
+        """A part the typed planner refused, read as one number a tool
+        computes (Phase 137, :mod:`glm_universal.runtime.tool_values`).
+        ``None`` when no pattern reads it; a tool's refusal is the step's
+        refusal, by name."""
+        from . import tool_values as tv
+        found = tv.read_value(phrase)
+        if found is None:
+            return None
+        try:
+            value, got = tv.evaluate(found)
+        except ValueError as e:
+            raise Refused("UNKNOWN_STEP",
+                          f"`{found.tool_text}` gives no number for "
+                          f"{phrase!r}: {e}")
+        return ("planned", value,
+                {"computation": f"tool {found.tool_name}", "question": q,
+                 "recompute": found.as_list(), "tool_answer": got.text})
 
 
 def _as_int(v: object, what: str) -> int:
@@ -838,7 +933,14 @@ def _build(tree: tuple, b: Builder, leaves: Leaves, it: Optional[int],
         return it
     if kind == "leaf":
         op, value, detail = leaves.get(tree[1])
-        return b.add(op, (), value, tree[1], detail)
+        label = tree[1]
+        if str(detail.get("computation", "")).startswith("tool ") and \
+                re.match(r"the number\b", label):
+            # Phase 137: "the number of gate moves ..." would read back as
+            # the literal template ("Step k: the number ..."), so the step
+            # gate refuses it; the tool step drops the article instead.
+            label = label[len("the "):]
+        return b.add(op, (), value, label, detail)
     if kind == "bin":
         _, op, ta, tb = tree
         i = _build(ta, b, leaves, it, session)
@@ -939,7 +1041,86 @@ def _build(tree: tuple, b: Builder, leaves: Leaves, it: Optional[int],
             value = b.steps[i - 1].label if first else b.steps[j - 1].label
         return b.add("larger", (i, j), value, f"{rel} of steps {i}, {j}",
                      {"relation": rel})
+    if kind == "verdict":
+        return _build_verdict(tree[1], b)
+    if kind == "choose":
+        _, tc, ty, tn = tree
+        i = _build(tc, b, leaves, it, session)
+        test = ss.render_value(b.value(i))
+        if test in ss.VERDICT_TRUE:
+            branch, chosen = "then", ty
+        elif test in ss.VERDICT_FALSE:
+            branch, chosen = "otherwise", tn
+        else:
+            raise Refused("NOT_A_VERDICT",
+                          f"the condition (step {i}) is {test!r}, not a "
+                          f"yes/no answer")
+        # only the branch taken is built: the other may name a value no tool
+        # gives (the moves to an unreachable word), and is never asked
+        j = _build(chosen, b, leaves, it, session)
+        return b.add("choose", (i, j), b.value(j),
+                     f"{branch} branch of step {i}",
+                     {"branch": branch, "test": test})
+    if kind == "search":
+        return _build_search(tree[1], tree[2], b, leaves)
     raise Refused("UNKNOWN_STEP", f"no step for {kind}")  # pragma: no cover
+
+
+def _build_verdict(phrase: str, b: Builder) -> int:
+    """A tool's yes/no answer as a ``planned`` step whose column 3 re-runs
+    the tool and applies the same test (Phase 138)."""
+    from . import tool_values as tv
+    found = tv.read_verdict(phrase)
+    if found is None:                                # pragma: no cover
+        raise Refused("UNKNOWN_STEP", f"no tool verdict reads {phrase!r}")
+    try:
+        value, got = tv.decide(found)
+    except ValueError as e:
+        raise Refused("UNKNOWN_STEP", f"`{found.tool_text}` gives no verdict "
+                      f"for {phrase!r}: {e}")
+    return b.add("planned", (), value, f"that {found.claim}",
+                 {"computation": f"tool {found.tool_name} verdict",
+                  "question": phrase, "recompute": found.as_list(),
+                  "tool_answer": got.text})
+
+
+def _build_search(x: str, bound: Fraction, b: Builder, leaves: Leaves) -> int:
+    """*The first convergent of X whose denominator is above N*, unrolled:
+    for k = 1, 2, ... the denominator of convergent k (a tool value) and the
+    test ``> N`` (a ``compare`` step), until the test first holds; then the
+    convergent itself, and a ``first`` step that checks every earlier test
+    failed and the last held.
+
+    There is no iteration cap.  The loop is admitted because it has a proved
+    measure: past the first two, every convergent denominator is at least the
+    sum of the two before it (``GLM.NearestFraction.conv_denominators_fib``),
+    so it passes ``N`` within about ``log_phi N`` rounds.  If the expansion
+    ends first (a fraction written as an expression) or the tool cannot
+    certify the next term, the tool's refusal is the step's refusal.
+    """
+    lit = b.add("literal", (), bound, ss.render_value(bound))
+    tests: List[int] = []
+    k = 0
+    while True:
+        k += 1
+        phrase = f"the denominator of convergent {k} of {x}"
+        op, value, detail = leaves.get(phrase)
+        d = b.add(op, (), value, phrase[len("the "):], detail)
+        if not isinstance(value, Fraction):          # pragma: no cover
+            raise Refused("NOT_A_NUMBER", f"{phrase!r} is {value!r}")
+        t = b.add("compare", (d, lit), str(value > bound),
+                  f"step {d} > step {lit}",
+                  {"symbol": ">", "relation": "larger"})
+        tests.append(t)
+        if value > bound:
+            break
+    phrase = f"convergent {k} of {x}"
+    op, value, detail = leaves.get(phrase)
+    c = b.add(op, (), value, phrase, detail)
+    return b.add("first", tuple(tests) + (c,), value,
+                 f"first of steps {tests[0]}..{tests[-1]}",
+                 {"searched": "convergent", "of": x,
+                  "bound": ss.render_value(bound)})
 
 
 def _build_comparative(tree: tuple, b: Builder, leaves: Leaves,
@@ -1335,6 +1516,14 @@ def _describe(tree: tuple) -> str:
         scope = f"{tree[2]}, present" if tree[4] else tree[2]
         of = f"{tree[5]} by " if tree[1] == "rank" else ""
         return f"{tree[1]}[{scope}]({of}{tree[3]})"
+    if k == "verdict":
+        return f"verdict[{tree[1]}]"
+    if k == "choose":
+        return (f"if {_describe(tree[1])} then {_describe(tree[2])} else "
+                f"{_describe(tree[3])}")
+    if k == "search":
+        return f"first[convergent of {tree[1]}, denominator > " \
+               f"{ss.render_value(tree[2])}]"
     return str(tree)                                  # pragma: no cover
 
 

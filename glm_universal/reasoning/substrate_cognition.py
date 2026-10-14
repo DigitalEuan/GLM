@@ -83,7 +83,7 @@ __all__ = [
     "dyadic_experiment", "tax_experiment", "gate_orbit_distances",
     "reachability_certificate", "reversible_experiment", "wobble_experiment",
     "Interval", "compare_intervals", "IUPAC_WEIGHTS", "interval_experiment",
-    "certificate_experiment", "cf_terms", "mobius_stream",
+    "certificate_experiment", "cf_terms", "cf_certified", "mobius_stream",
     "mobius_experiment", "lorentzian_experiment", "held_overlap_census",
     "interval_wired_experiment", "RECOGNITION_TICKS", "RECOGNITION_MAX_DEN",
     "recognition_experiment", "dimensional_experiment",
@@ -619,6 +619,39 @@ def cf_terms(x: "xr.ExactReal", count: int, start: int = 64) -> Tuple[int, ...]:
             common.append(a)
         if len(common) >= count:
             return tuple(common[:count])
+        k *= 2
+
+
+def cf_certified(x: "xr.ExactReal", count: int, start: int = 64,
+                 max_bits: int = 4096) -> Tuple[Tuple[int, ...], int, bool]:
+    """:func:`cf_terms` with a precision cap, for a caller (Phase 136).
+
+    Returns ``(terms, bits, complete)``: the terms certified at the last
+    precision tried (``2^-bits``), and whether ``count`` of them were.  A
+    value whose expansion ends -- a rational written as an expression -- never
+    certifies a term past its last one, so :func:`cf_terms` would double its
+    precision for ever; here the doubling stops at ``max_bits`` and the
+    shorter prefix is returned with ``complete`` false.  Every term returned
+    is a term of ``x`` by ``GLM.CertifiedStreams.cfPrefix_certified``.
+    """
+    k = start
+    best: Tuple[int, ...] = ()
+    while True:
+        mid = x.at(k)
+        eps = Fraction(1, 1 << k)
+        lo, hi = xr.continued_fraction(mid - eps, count + 2), \
+            xr.continued_fraction(mid + eps, count + 2)
+        common: List[int] = []
+        for a, b in zip(lo[:-1], hi[:-1]):
+            if a != b:
+                break
+            common.append(a)
+        if len(common) > len(best):
+            best = tuple(common)
+        if len(best) >= count:
+            return best[:count], k, True
+        if 2 * k > max_bits:
+            return best, k, False
         k *= 2
 
 

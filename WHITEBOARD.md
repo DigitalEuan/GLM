@@ -5,10 +5,12 @@
 **Question.** If this session stopped now, what would the next one need to
 know to carry the round on?
 
-**Verdict.** No round is in flight: Phase 133 (the designed substrate: the
-owner's study of whether the Golay–Leech substrate is optimal, brought in;
-7 of 8 marks) is closed and recorded in `MASTER_PLAN.md`. The next round
-starts from the To-Do list, `STATUS.md` §2.1.
+**Verdict.** No round is in flight: Phase 138 (tool verdicts, conditionals
+and the unrolled search in the stepwise planner; the classical
+closest-fraction theorem in `NearestFraction.lean`, so the nearest-fraction
+tool has no bound; 6 of 6 marks) is closed and recorded in
+`MASTER_PLAN.md`. The next round starts from the To-Do list,
+`STATUS.md` §2.1. The test-file sign-off is still owed (no pytest here).
 
 **Deciding figure.** 0 steps outstanding.
 
@@ -44,15 +46,27 @@ absence:
 
 ## Status
 
-**No round is in flight.** Phase 133 is closed (the designed substrate,
-taken at the owner's request): the supplied study moved into
-`source_material/substrate_study/`, the pre-registration and its Lean
-statements first (`RequestProject/GLM/DesignedSubstrate.lean`, now proved),
-then the stages and the measurement (`reasoning/designed_substrate.py`,
-`tools designed-substrate`). The study is
-[`studies/DESIGNED_SUBSTRATE_STUDY.md`](studies/DESIGNED_SUBSTRATE_STUDY.md),
-7 of 8 marks; the record is [`MASTER_PLAN.md`](MASTER_PLAN.md), "Phase 133".
-The next round starts from the To-Do list, `STATUS.md` §2.1; 0 steps of the
-phase are outstanding.
-In one line: Phase 133 proves the GLM's Golay carrier optimal among all
-4,096-word designs and adds two certified ways to resolve its six-way tie.
+**No round is in flight.** Phase 138 is closed (tool verdicts and the
+nearest fraction): the Lean file (`RequestProject/GLM/NearestFraction.lean`,
+proved), the Farey certificate (`reasoning/rational_approx.py`,
+`runtime/toolbox.py`), the verdict reader (`runtime/tool_values.py`), the
+verdict steps, conditionals and the search (`runtime/stepwise.py`,
+`reasoning/stepwise_script.py`), then the held-out sets and the measurement
+(`evaluation/tool_verdicts_cases.py`, `tools tool-verdicts`, 6 of 6 marks).
+The study is
+[`studies/TOOL_VERDICTS_STUDY.md`](studies/TOOL_VERDICTS_STUDY.md); the record
+is [`MASTER_PLAN.md`](MASTER_PLAN.md), "Phase 138". The next round starts from
+the To-Do list, `STATUS.md` §2.1; 0 steps of the phase are outstanding.
+In one line: a tool's yes/no answer now steers a chain, and the nearest
+fraction is proved for every bound.
+
+**One step owed: the release sign-off** (owed since Phase 134, now for
+Phases 135–138's new and changed test files too). pytest could not be
+installed in this session either (no package index reachable), so the
+test-file units could not be re-signed. The new and changed test files
+(`test_tool_values.py`, `test_connected_machine.py`, `test_connected_two.py`,
+`test_wiring.py`, and in Phase 138 `test_tool_verdicts.py` and the five
+`test_stepwise*.py` files) were run under `unittest` with a local stand-in
+for the pytest import, kept outside the repository, and passed. Resume with
+`python3 -m pip install pytest`, then
+`PYTHONPATH=. python3 -m glm_universal.signoff --close --jobs 8`.

@@ -78,7 +78,7 @@ KINDS: Tuple[str, ...] = (
     "verify", "analogy", "describe", "nearest", "product", "cluster",
     "spatial", "project", "trilinear", "coherence", "report", "angle",
     "task", "pi_groups", "meaning", "real", "compare", "measure",
-    "comparative", "derive", "field", "ordering", "extremum",
+    "comparative", "derive", "field", "ordering", "extremum", "carrier",
     "unknown",
 )
 
@@ -189,6 +189,14 @@ VERBS: Dict[str, str] = {
     # open it.  Which end is asked for is read off the keyword itself.
     "largest": "extremum", "highest": "extremum", "maximum": "extremum",
     "smallest": "extremum", "lowest": "extremum", "minimum": "extremum",
+    # carrier -- one 24-bit word read through the carried fork and the
+    # stages the request supplies information for: a sender tag, a protected
+    # tag, a soft reading (Phase 134).  Start-only like the three
+    # kinds above: `carrier` is an ordinary noun of the substrate's own
+    # documents -- `the carrier of a concept` -- and governs a question only
+    # when it opens it.
+    "carrier": "carrier", "read carrier": "carrier",
+    "decode carrier": "carrier",
     "meaning": "meaning", "meaning of": "meaning", "means": "meaning",
     "denotes": "meaning", "denotation": "meaning", "refers to": "meaning",
     "ground": "meaning", "grounding": "meaning", "relate": "meaning",
@@ -218,6 +226,7 @@ START_ONLY: Tuple[str, ...] = (
     "field", "fields", "field names", "which field", "value of field",
     "order", "orders", "compare field", "rank field",
     "largest", "highest", "maximum", "smallest", "lowest", "minimum",
+    "carrier", "read carrier", "decode carrier",
 )
 
 #: Applied to the raw string before tokenising.  Politeness and filler carry
@@ -1415,6 +1424,18 @@ def _build_keyword_query(text: str, cleaned: str, lowered: str,
             trace.append(f"the {options['end']} {head!r} over the rows of "
                          f"{tail!r}, split at {separator!r}")
         return Query(raw=text, normalised=cleaned, kind="extremum",
+                     domain=domain, operands=(), options=options,
+                     rule=rule, trace=tuple(trace))
+
+    if kind == "carrier":
+        # 'carrier 0xca97a1 tag 0x54' -- one received word and whatever the
+        # request supplies beside it.  The request is carried through as
+        # text: reading the numbers is the solver's, so that a malformed one
+        # is refused there with its reason rather than lost here.
+        options["request"] = remainder.strip()
+        trace.append(f"carrier request {options['request']!r} passes to "
+                     f"the carrier read unresolved")
+        return Query(raw=text, normalised=cleaned, kind="carrier",
                      domain=domain, operands=(), options=options,
                      rule=rule, trace=tuple(trace))
 

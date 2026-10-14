@@ -654,7 +654,7 @@ _CASES: Tuple[EvalCase, ...] = (
             "every measured figure comes back unchanged."),
 
     _c("report-language", "report", "report language",
-       "answer", contains=("7 of 23 answerable query kinds",
+       "answer", contains=("7 of 24 answerable query kinds",
                            "derive, measure, task, compare by slot shape",
                            "verify, analogy, compare by infix shape",
                            "comparative by nested shape",
@@ -751,8 +751,23 @@ _CASES: Tuple[EvalCase, ...] = (
        # Re-pinned at Phase 132: AffineOutput.lean (the corpus refreshed
        # with it) makes the goal-query set 840 and the gate fires on 44 of
        # 1680; still ahead on every set, carrying 8, losing 0.
-       "answer", contains=("699 -> 701 of 840 (ahead)", "44 of 1680",
-                           "carrying 8 queries it misses and losing 0"),
+       # Re-pinned at Phase 134 (ProtectedTag.lean; the corpus refreshed
+       # with Phases 133-134) makes the goal-query set 848 and the gate fires
+       # on 62 of 1696; still ahead on every set, carrying 15, losing 0.
+       # Re-pinned at Phase 135 (ShortestTag.lean) makes the goal-query set
+       # 854 and the gate fires on 62 of 1708; still ahead on every set,
+       # carrying 15, losing 0.
+       # Re-pinned at Phase 136 (CertifiedStreams.lean) makes the goal-query
+       # set 856 and the gate fires on 54 of 1712; still ahead on every set,
+       # carrying 18, losing 0.
+       # Re-pinned at Phase 138 (NearestFraction.lean) makes the goal-query
+       # set 860 and the gate fires on 54 of 1720; still ahead on every set,
+       # carrying 18, losing 0.
+       # Re-pinned again at Phase 138 (the last NearestFraction.lean
+       # declarations, le_fib_succ and search_terminates) makes the set 862
+       # and the gate fires on 54 of 1724; still ahead, carrying 18, losing 0.
+       "answer", contains=("714 -> 719 of 862 (ahead)", "54 of 1724",
+                           "carrying 18 queries it misses and losing 0"),
        note="The faculties arranged as a stack rather than scored one at a "
             "time: below a gate of 1/10 the leading lexical search is "
             "judged to have abstained and the two geometric address books "
@@ -791,7 +806,21 @@ _CASES: Tuple[EvalCase, ...] = (
        # text 686 -> 53, structure 165 -> 163; claim unchanged.
        # Re-pinned at Phase 132 (queries 837 -> 840 with AffineOutput.lean):
        # text 699 -> 53, structure 153 -> 150; claim unchanged.
-       "answer", contains=("699 -> 53 of 840", "153 -> 150 of 840",
+       # Re-pinned at Phase 134 (queries 840 -> 848 with ProtectedTag.lean
+       # and the Phase 133 files): text 692 -> 47, structure 165 -> 164;
+       # claim unchanged.
+       # Re-pinned at Phase 135 (queries 848 -> 854 with ShortestTag.lean):
+       # text 697 -> 47, structure 167 -> 166; claim unchanged.
+       # Re-pinned at Phase 136 (queries 854 -> 856 with
+       # CertifiedStreams.lean): text 711 -> 50, structure 169 -> 168; claim
+       # unchanged.
+       # Re-pinned at Phase 138 (queries 856 -> 860 with
+       # NearestFraction.lean): text 714 -> 49, structure 173 -> 172; claim
+       # unchanged.
+       # Re-pinned again at Phase 138 (queries 860 -> 862 with the last
+       # NearestFraction.lean declarations): text 714 -> 49, structure
+       # 174 -> 173; claim unchanged.
+       "answer", contains=("714 -> 49 of 862", "174 -> 173 of 862",
                            "class, not a residue"),
        note="The register where the geometric address is the only faculty "
             "still reading: rename every identifier of a query outside a "
@@ -1079,6 +1108,53 @@ _CASES: Tuple[EvalCase, ...] = (
        note="No row of the named table answers for the coordinate -- "
             "`boiling_point_K` is the name it holds -- so there is no "
             "column to fold."),
+
+    # -------------------------------------------------------------- carrier
+    #  Phase 134 (studies/PROTECTED_TAG_STUDY.md, section 3.1): one carrier,
+    #  message 0x5a3, codeword 0x8ad5a3, tag 0x54, fifteen-bit tag 0x1a54.
+    _c("carrier-clean", "carrier", "carrier 0x8ad5a3",
+       "answer", contains=("0x8ad5a3", "0x5a3", "0 flips"),
+       note="A codeword read as itself: the decoder alone, no flips."),
+    _c("carrier-two-flips", "carrier", "carrier 0x88d5ab",
+       "answer", contains=("0x8ad5a3", "0x5a3", "2 flips"),
+       note="Two flips are inside the decoder's radius, so the fork has one "
+            "candidate and no stage is needed."),
+    _c("carrier-tie", "carrier", "carrier 0xca97a1",
+       "refusal", classification="boundary",
+       note="Four flips leave six equidistant codewords, and no function of "
+            "the received word resolves them -- "
+            "`GLM.Golay24.weight4_resolved_le_4096` -- so the read refuses "
+            "and names all six rather than picking one."),
+    _c("carrier-tag", "carrier", "carrier 0xca97a1 tag 0x54",
+       "answer", contains=("0x8ad5a3", "0x5a3", "sender tag"),
+       note="The same tie with the sender's seven-bit tag: the tag stage "
+            "removes five candidates, which is `GLM.Golay24.tag_resolves`."),
+    _c("carrier-protected-tag", "carrier",
+       "carrier 0xca97a1 protected tag 0x1256",
+       "answer", contains=("0x8ad5a3", "protected tag"),
+       note="The fifteen-bit tag with two of its bits flipped still resolves "
+            "the tie to the sent carrier, which is "
+            "`GLM.Golay24.tag15_corrects_two`; the seven-bit tag absorbs no "
+            "flip (`tag7_one_flip_misleads`)."),
+    _c("carrier-flagged", "carrier", "carrier 0xca9781 tag 0x54",
+       "refusal", classification="boundary",
+       note="Five flips: the decoder alone answers the wrong codeword "
+            "0x428781 at distance 3, and the intact tag disagrees with it, "
+            "so the read refuses -- `GLM.Golay24.tag_flags_miscorrection`: "
+            "a decoder's silent wrong answer turned into a refusal."),
+    _c("carrier-soft", "carrier",
+       "carrier soft 13/16, 7/16, 1/16, 0, 3/16, 7/8, 1/16, 1, 13/16, 9/16, 15/16, 0, 13/16, 1/8, 13/32, 1, 3/16, 7/8, 1/16, 1, 3/16, 1/8, 19/32, 1",
+       "answer", contains=("0x8ad5a3", "soft certificate"),
+       note="Read 0 of Phase 133's gentle ensemble: the hard word is the "
+            "tie 0xca97a1, and the soft certificate keeps one candidate, "
+            "which is `GLM.Golay24.soft_certificate`."),
+    _c("carrier-not-a-word", "carrier", "carrier 0x1000000",
+       "refusal", classification="boundary",
+       note="Twenty-five bits are not a carrier."),
+    _c("carrier-tag-width", "carrier", "carrier 0xca97a1 tag 0x154",
+       "refusal", classification="boundary",
+       note="A nine-bit value is not a seven-bit tag, and the read says so "
+            "rather than truncating it."),
 
     # ----------------------------------------------------- scale conversion
     _c("scales-mass-across-tables", "ordering",

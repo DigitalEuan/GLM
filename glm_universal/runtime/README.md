@@ -43,7 +43,7 @@ register rather than tabulated.  The counts here are the ones
 
 ## The query kinds
 
-`parser.KINDS` is the authoritative list: **<!--figure:query-kinds-->24 query kinds<!--/figure-->** — twenty-three
+`parser.KINDS` is the authoritative list: **<!--figure:query-kinds-->25 query kinds<!--/figure-->** — twenty-three
 answering kinds plus `unknown`, the honest fallback.
 
 | Kind | Surface | What it does | Wired in |

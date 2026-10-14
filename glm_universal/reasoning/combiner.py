@@ -411,6 +411,13 @@ XOR_SITES: Tuple[Tuple[str, Tuple[str, ...], str], ...] = (
     ("reasoning/designed_substrate.py", ("group-law", "metric"),
      "adds an error pattern to a codeword in F2^24, flips a tag bit and an "
      "extension bit, and reads Hamming distances between candidates"),
+    ("reasoning/shortest_tag.py", ("group-law",),
+     "spans tag masks over F2 (the exclusive-or of chosen masks) and reduces "
+     "a functional against a basis, Gaussian elimination in F2^24 "
+     "(Phase 135; declared at Phase 136)"),
+    ("reasoning/carrier_read.py", ("group-law", "metric"),
+     "adds an error pattern to a codeword in F2^24, flips tag bits, and reads "
+     "Hamming distances between a received tag and each candidate's tag"),
     ("reasoning/decoder_confidence_marks.py", ("group-law", "metric"),
      "adds an error pattern to a codeword in F2^24 and reads the distances "
      "from the received word to the fork's cases"),

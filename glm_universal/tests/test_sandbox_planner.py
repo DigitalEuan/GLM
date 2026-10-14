@@ -266,9 +266,11 @@ def test_the_fallback_is_measured_over_the_whole_evaluation_set(report):
     #  coordinate no row of the table holds), and sixteen since the declared
     #  conversion table added its two (a comparison of two quantities the
     #  table relates no conversion between, and a column gathered by quantity
-    #  with holes in it).  The measurement moved with the evaluation set;
-    #  what it says did not.
-    assert fallback["planner_consulted"] == 16
+    #  with holes in it), and twenty since the carrier query kind (Phase
+    #  134) added its four (an open six-way tie, a tag that contradicts every
+    #  candidate, a value wider than 24 bits and a tag wider than 7 bits).
+    #  The measurement moved with the evaluation set; what it says did not.
+    assert fallback["planner_consulted"] == 20
     assert fallback["gained"] == ()
     assert fallback["principled_refusals_offered_to_the_planner"] == ()
     assert fallback["safety_holds"] is True
@@ -318,14 +320,15 @@ def test_the_by_product_is_two_questions_the_shipped_classifier_does_not_mark():
     added two to the extremum kind's four, the ordering kind's three and the
     field surface's three; all sixteen stop, and the two the planner marks are
     the two it marked when four reached it, so the by-product is the same
-    finding over a larger set each time the set grows.
+    finding over a larger set each time the set grows.  The carrier kind
+    (Phase 134) brought four more, twenty in all, and all twenty stop.
     """
     rows = [row for row in pl.fallback_rows() if row["planner_consulted"]]
-    assert len(rows) == 16
+    assert len(rows) == 20
     stopped = [row for row in rows
                if not row["planner_answered"]
                and row["refusal_tag"] == esl.ESCALATABLE]
-    assert len(stopped) == 16
+    assert len(stopped) == 20
     marked_by_the_planner = [row["question"] for row in stopped
                              if pl.ask(str(row["question"])).refusal_tag
                              != esl.ESCALATABLE]

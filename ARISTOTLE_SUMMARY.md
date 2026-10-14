@@ -1,3 +1,184 @@
+# Summary of changes for run 1942cba5-6401-443b-bdf5-14c0618ffe13
+Phase 138 is finished, covering the three next steps listed in STATUS.md §2.2. Everything is committed and pushed.
+
+**1. The 20,000 limit is gone, backed by a Lean proof.** The new file `overlay/glm_lean/RequestProject/GLM/NearestFraction.lean` builds with no `sorry` and only the standard axioms. It proves:
+- **The classical closest-fraction theorem** (`nearest_fraction_candidates`): for any bound \(N\), a nearest fraction with denominator at most \(N\) is always found among the continued-fraction convergents and the fractions just between them.
+- **The check the tool now runs on every answer** (`farey_certificate`): if \(x\) lies between two neighbouring fractions \(a/b\) and \(c/d\) (with \(bc-ad=\pm1\)) and \(b+d>N\), the nearer of the two is a nearest fraction for bound \(N\).
+- **Why searches always end** (`search_terminates`): convergent denominators grow like Fibonacci numbers, so the search for "the first convergent whose denominator is above \(N\)" always stops. It needs no iteration cap.
+
+In `reasoning/rational_approx.py` I removed the 20,000 brute-force limit, the denominator limit and the 400-term limit. Every best-approximation answer now comes with that proved check. If the two candidates are tied, the tool declines to choose rather than picking one.
+
+**2. The planner can use a tool's yes/no answers.** The tool-reading code (`runtime/tool_values.py`) now reads verdicts as well as numbers, and `runtime/stepwise.py` uses them in three ways:
+- as a step on its own;
+- as the test in "if A, B, otherwise C", where only the chosen branch is built;
+- as the stopping test of a search, which is unrolled with no cap.
+
+**3. Phase 137's two unread phrasings are now read.** I wrote and committed a fresh held-out set before writing the readers that handle them.
+
+**Results** (`tools tool-verdicts`, details in `studies/TOOL_VERDICTS_STUDY.md`):
+- 6 of 6 marks met.
+- 14/14 held-out yes/no questions answered correctly.
+- 12/12 chains re-checked in a fresh interpreter, and 53/53 deliberately broken chains were caught.
+- On the fresh rewordings, 12 of 16 were answered right and none wrong (the baseline got 6). The other 4 were declined because the planner couldn't read them.
+- Both of Phase 137's missed phrasings are now read.
+- The no-limit search was checked on 100 of 100 and 25 of 25 cases, with numbers up to \(10^{60}\).
+
+`tool-values` still scores 8/8 and `connected-two` 8/8. There are 19 new tests in `tests/test_tool_verdicts.py`, and they pass under unittest.
+
+**Evaluation and docs.** Each new Lean file grows the search corpus, so I re-pinned two report cases (`report-relay`, `report-anonymous`) to the new query count of 862; their claims are unchanged. I also re-took two saved measurements (`queryesc`, `frozen-path`). The latest full run scored 186/188. The only two failures were those report cases, before re-pinning; they pass on their own afterwards, along with both escalation report cases. I did not repeat the full run after the fix. `corpus --check` reports "current". STATUS, MASTER_PLAN, SYSTEM, WHITEBOARD, the paper (§19.26) and the tests README are updated. Following your suggestion, I briefly asked the GLM itself for help; what it found is in study §6.
+
+**Still open:**
+- The 4 unread rewordings are left for the next fresh held-out set.
+- Two other limits remain:
+  - **Primality:** answers are only given up to \(10^{12}\).
+  - **Numeric precision:** a fixed precision setting (`MAX_BITS`) still applies.
+- Release sign-off is still owed, because pytest isn't available here.
+
+In the Properties table, the three Lean theorems are marked proved. The planner measurement stays in progress because it is a measurement, not a proof.
+
+# Summary of changes for run dbfb1cea-ede2-464b-9151-6c9a0f537d9d
+I finished Phase 137 ("tool values"), which takes the first open item in `STATUS.md` §2.2. Before this round, the GLM refused any question that used a tool's answer as a number, such as "twice the third term of the continued fraction of pi". It now answers these questions, and each step can be checked. The Lean proofs build with no `sorry` and the full Lean build passes. One step is still owed: the formal test sign-off, because pytest still can't be installed here.
+
+**What the GLM can now do**
+- **Use a tool's number in a calculation.** When the planner can't answer part of a question, a new reader (`overlay/glm_universal/runtime/tool_values.py`) tries to read that part as a number a tool computes. It knows ten phrasings, covering:
+  - a continued-fraction term, or the sum, product, largest, smallest or mean of the first few terms;
+  - a convergent, or its numerator or denominator;
+  - the closest fraction with a bounded denominator;
+  - a gate distance, the kissing number, a Leech-lattice shell count, and a moonshine dimension.
+- **Examples:** "twice the third term of the continued fraction of pi" → 30; "the lcm of the denominator of the fourth convergent of pi and 7" → 791; "the kissing number of the Leech lattice divided by 24" → 8190.
+- **How these answers are checked:** each step passes the existing step check. The answer's check script reruns the tool from scratch and picks out the value again. If a tool refuses, the whole question is refused, with the tool's reason.
+- **Ask for one tool value directly**, e.g. "what is the fourth convergent of pi" → 355/113. This is only tried after every other route has refused.
+- **Two new tools that answer with a fraction:**
+  - `tool convergent K of X` gives the K-th convergent.
+  - `tool best approximation X denominator N` gives the closest fraction with denominator at most N. For N up to 20,000 it also tries every denominator directly, without continued fractions, and refuses if the two methods disagree. Above 20,000 it says this check was not run.
+
+**Proved in Lean** (`overlay/glm_lean/RequestProject/GLM/ToolValues.lean`, standard axioms only)
+- Picking a term, or summing the first few, from the continued-fraction terms a tool has certified gives the true value's terms (`select_certified`, `fold_certified`).
+- The convergent formula gives the value of the finite continued fraction, in lowest terms (`cfValue_eq_conv`, `conv_det`, `conv_coprime`).
+- The rules the closest-fraction tool uses to compare two fractions and to check its answer against every denominator are sound (`closer_iff_midpoint`, `nearer_of_margin`, `farther_than_candidate`).
+- **Not proved:** the classical theorem that the closest fraction is always one of the two candidates the tool compares. The direct check stands in for it up to 20,000.
+
+**Measured** (`python3 -m glm_universal.tools tool-values`): all 8 checks I set before measuring passed.
+- 17 of 17 combined questions came out as expected (13 answered, 4 correctly refused).
+- 13 of 13 answers were confirmed by their check scripts, and all 65 deliberately falsified versions were rejected.
+- Convergents matched independent calculations in 150 of 150 cases, and the closest fraction matched a search over every denominator in 100 of 100.
+- None of the 404 existing test questions and none of the 30 existing multi-step cases changed.
+- **Held-out rewordings** (written before running): 10 of 12 were understood, all 10 answers were right, and none was wrong. Three values on my hand-written answer sheet were themselves wrong. Each was recomputed independently, and the study records the original values.
+- Two fixes came after the first measurement, and both are recorded in the study: a wording clash that made the step check reject one answer, and a bug in how the measurement read single-value answers.
+
+The full evaluation still passes 188 of 188, and the Phase 136 measurement still passes 8 of 8. The new tests (`tests/test_tool_values.py`, 15 tests) and the existing tests I touched pass under a temporary stand-in for pytest kept outside the project. The document check (`corpus --check`) reports current.
+
+**Documents:** the write-up is `studies/TOOL_VALUES_STUDY.md`. I updated `MASTER_PLAN.md`, `STATUS.md` (including the To-Do line), `SYSTEM.md`, `WHITEBOARD.md`, the paper (§19.25, a new proved-results entry, the open-items list and the date) and `tests/README.md`. All work is committed and pushed.
+
+**Still open**
+- **Release sign-off:** needs a real pytest run. `WHITEBOARD.md` has the commands.
+- **Next steps** (listed in `STATUS.md` §2.2):
+  - let the planner use a tool's yes/no answers, not just its numbers;
+  - recognise the two unread phrasings, after a fresh held-out set;
+  - prove the classical closest-fraction theorem in Lean, so the 20,000 limit can go.
+
+# Summary of changes for run 1fb26b90-b373-4fb1-9eef-c4f4f3a9d5a0
+I've finished Phase 136, a wiring round: experiments that had been run but that the GLM couldn't use are now connected to its answering path, and two new Lean theorems back two of the new tools. One sign-off is still owed: the figures test needs a real pytest run, which wasn't possible here.
+
+**Census of what the GLM can reach.** Before this round, 24 of the 177 reasoning modules couldn't be reached from any question the GLM answers. Now 157 are reached and the other 20 are declared measurement-only, each with a written reason (the list `MEASUREMENT_ONLY` in `overlay/glm_universal/runtime/toolbox.py`). The new `tool wiring` re-takes this census whenever you run it.
+
+**Six new tools** in `runtime/toolbox.py`:
+- `continued fraction`: lists continued-fraction terms of a value, keeping only terms both ends of its error interval agree on.
+- `mobius`: applies a fractional-linear map \((at+b)/(ct+d)\) to a continued fraction, writing out a term only once later input can't change it.
+- `bind`, `gates`, `tag length`: expose the binding, gate and shortest-tag experiments as tools.
+- `wiring`: the census above.
+
+Three related changes:
+- The law register now falls back to the law-triage outcome instead of stopping.
+- There are 11 plain-English openings, such as asking for "the continued fraction of …", that route to these tools. The router tries them only after it would otherwise refuse, so existing answers are unchanged. The `--ask` and `-q` paths in `GLM.py` use them too.
+- `substrate_cognition.cf_certified` is a capped version of the continued-fraction routine.
+
+**Lean.** The new file `overlay/glm_lean/RequestProject/GLM/CertifiedStreams.lean` contains:
+- `cfPrefix_certified`: a value lying between two numbers whose first \(n\) continued-fraction terms agree has those same \(n\) terms. This is why every term `continued fraction` writes out is correct.
+- `gosper_emit_sound`: if both ends of the map give the same whole-number part \(q\), with matching signs in the denominator, then every tail \(t \ge 1\) gives \(q\). This is why `mobius` never has to take back a term.
+- Supporting results `cfPrefix_between`, `mobius_between` and `sqrt2_interval_prefix`.
+
+The file builds with no `sorry` and uses only the standard axioms. The full Lean build passes.
+
+**Phase 135 fixes:**
+- A duplicate Lean name in `ShortestTag.lean` is renamed to `card_symmDiff_eq_sdiff`.
+- An undeclared XOR step in `reasoning/shortest_tag.py` is now declared.
+- Stale theorem citations now point to `GLM.Golay24.*`.
+
+**Checks:**
+- The new measurement `tools connected-two` meets all 8 of its marks (W1–W8). It has 15 tests in `tests/test_connected_two.py`, all passing.
+- The full evaluation passes 188 of 188: 156 answered correctly, 32 refused as expected, none wrong and no errors.
+- The document check (`corpus --check`) reports everything current, after the query-escalation, frozen-path and citation caches were re-taken.
+
+**Documents.** The write-up is `studies/CONNECTED_MACHINE_TWO_STUDY.md`. I updated `MASTER_PLAN.md`, `STATUS.md`, `SYSTEM.md`, `WHITEBOARD.md`, the paper (§19.24) and `tests/README.md`.
+
+**Still open:**
+- **Figures test:** the one remaining unit-test failure, `test_figures`, needs a real pytest run, which couldn't be installed here. This is noted in `WHITEBOARD.md`.
+- **Wiring entry in the Properties table:** stays in progress because it is a measurement, not a proof. The two Lean theorems are marked proved.
+
+# Summary of changes for run f74b549d-85b0-4cb6-93ab-b953d603a62b
+Phase 135 is finished. It takes up the item in `STATUS.md` §2.2 that said tags shorter than eleven or fifteen bits had never been searched for. The Lean proofs build with no `sorry`. The search found no shorter tags. One of the six pre-registered predictions failed.
+
+**Proved in Lean** (`overlay/glm_lean/RequestProject/GLM/ShortestTag.lean`, builds with `lake build RequestProject.GLM.ShortestTag`). It uses only the standard axioms plus `native_decide`, and three theorems needed a higher recursion limit (`set_option maxRecDepth 4000`).
+- `tag_length_floor`: a tag protecting distance \(D\) needs at least \(D+6\) bits.
+- `tag7_shortest`: the 7-bit tag is the shortest possible.
+- `tag7_octads_onto`: the 7-bit tag reaches all the octads.
+- `built_tag_floor`: for the tag construction the project uses, the shortest length is 11 bits for \(D=3\) and 15 bits for \(D=5\).
+- `no_14_7_5` and `no_even_15_7_6` rule out the two shorter candidate codes.
+- `tag11_built` and `tag15_built` show those lengths are actually reached.
+- `protected_tags_shortest_of_shape`: so the 11- and 15-bit tags are the shortest of their kind. That holds within that construction's shape, not for every possible tag.
+
+**Measured, not proved:**
+- I added `glm_universal/reasoning/shortest_tag.py`, a new command `tools shortest-tag [--moves] [--json]`, 9 tests in `tests/test_shortest_tag.py`, and the write-up in `studies/SHORTEST_TAG_STUDY.md` (predictions plus results in §7).
+- A fixed-seed search under the 11- and 15-bit lengths found no valid tag. It always fell short of the required distance: by 35 and 9 for \(D=3\), and by 179, 99, 45 and 15 for \(D=5\).
+- **The failed prediction (S5):** the search's control run was meant to find the known 15-bit tag, and it found it on 0 of 3 seeds. So the search alone can't rule out shorter tags; that rests on the Lean proofs. The study records this as a miss, and the measurement row in the Properties table stays open.
+
+**Checks:**
+- I updated `MASTER_PLAN`, `STATUS`, `SYSTEM.md`, the academic paper (§20.16, the ledger, an open item and the date), `WHITEBOARD` and the reasoning and tests READMEs.
+- Two expected outputs in `evaluation/cases.py` changed and are now updated (the `report-relay` and `report-anonymous` cases).
+- I regenerated the frozen-path and query-escalation data files, and `corpus --check` now reports "current".
+- The evaluation passes 188/188 (156 answered correctly, 32 refused as expected, none wrong, no errors).
+- The stack tests pass under unittest.
+- Everything is committed.
+
+**Still owed:** pytest can't be installed here because there is no access to a package index. I ran the new tests by hand and they pass, but the formal sign-off (`signoff --close`) still needs to be run where pytest is available. `WHITEBOARD` notes this.
+
+# Summary of changes for run 7f2c7752-0ed3-4805-bcdd-3c6a354788ce
+I finished the clean-up for Phase 134 (the carrier read and the protected tag) that the last session left partway through. One step is still owed: the release sign-off. It needs pytest, and pytest could not be installed here because no package index was reachable.
+
+**Fixed**
+- **Planner fallback numbers.** `overlay/glm_universal/tests/test_sandbox_planner.py` now expects 20 consulted refusals, up from 16. In `studies/REVERSE_CALL_PLANNER_STUDY.md`, the prose says 188 evaluation cases and 20 refusals and lists the four carrier rows. I also fixed one more stale line there that still said "177 cases".
+- **A failing evaluation case.** `report-language` expected "7 of 23 answerable query kinds", but the carrier kind makes the count 24. I updated `overlay/glm_universal/evaluation/cases.py`. The matching review-sweep entry in `overlay/glm_universal/reasoning/review_sweep.py` now says twenty-four kinds with seventeen remaining, and its study table regenerated to match.
+- **Stored measurements.** `tools queryesc --write` and `tools frozen-path --write` re-took the query-escalation and frozen-path data, which those edits had made stale. `corpus --refresh` was then run until `corpus --check` reported `current`; only timing figures moved.
+
+**Checked**
+- The evaluation passes all 188 cases. The figures check passes. All 6 checks (including the Lean build and the evaluation) are signed and still hold.
+- `lake build RequestProject.GLM.ProtectedTag` succeeds and the file contains no `sorry`.
+- The Properties table entries for Phase 134 are correct as they stand: the four Protected Tag theorems are marked proved, and the measured-study row stays in progress.
+
+**Not done: the test-file sign-off**
+- Only 44 of the 184 test files are still signed (re-signing needs a real pytest run).
+- To get some evidence anyway, I ran the test files with a small temporary stand-in for pytest. It is not part of the project and its results were not used to sign anything. It found no failures that point to a code problem. The 9 failures it reported came from:
+  - its own missing pytest features (on 3 files it could not run at all);
+  - one stale report that a later corpus refresh cleared.
+- `test_signoff.py` showed 6 failures that appear to come from the missing pytest rather than the code.
+- `test_figures.py` will keep failing until a full run happens. The suite total sentence quoted across the documents still says "183 test files" against the tree's 184, and only a full pytest run can rewrite it.
+
+I added a note to `WHITEBOARD.md` recording what is owed and how to resume:
+```
+python3 -m pip install pytest
+cd overlay
+PYTHONPATH=. python3 -m glm_universal.signoff --close --jobs 8
+```
+All work is committed.
+
+# Summary of changes for run 76408236-c6d8-425d-ba3b-fccdfb37feff
+
+
+## Suggested follow-up
+
+I reached this run’s time limit. Send “continue” to pick up where I left off.
+
 # Summary of changes for run 158464cf-6196-4bd0-b726-fe3eb724cf4c
 I brought your substrate study into the GLM as Phase 133, a pre-registered study at `studies/DESIGNED_SUBSTRATE_STUDY.md`. The short answer: **within the regime the GLM uses (4,096 carriers in 24 bits, random bit flips), Golay–Leech/24D is optimal, and this is now proved in Lean. No differently designed substrate of that size removes the six-way tie. What the study adds is two new ways to resolve that tie, and they measurably widen what the GLM can decode.**
 

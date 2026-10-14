@@ -7,7 +7,7 @@
 
 **Verdict.** The system rejects floating-point arithmetic entirely, operating instead with exact rational arithmetic.
 
-**Deciding figure.** A working paper over the whole system — the substrate studies of the supplied archive and the machine built on them, <!--figure:registers-->8 registers<!--/figure--> reached through <!--figure:query-kinds-->24 query kinds<!--/figure--> and checked by <!--figure:lean-files-->205 Lean files<!--/figure--> — kept beside the studies it draws on.
+**Deciding figure.** A working paper over the whole system — the substrate studies of the supplied archive and the machine built on them, <!--figure:registers-->8 registers<!--/figure--> reached through <!--figure:query-kinds-->25 query kinds<!--/figure--> and checked by <!--figure:lean-files-->210 Lean files<!--/figure--> — kept beside the studies it draws on.
 
 **Recomputed by.** (hand-written argument; nothing to recompute)
 
@@ -16,9 +16,9 @@
 ## A Technical Documentation Paper
 
 **Author:** Euan R. A. Craig (DigitalEuan), Auckland, New Zealand  
-**Date:** 02 September 2026; revised 24 September 2026 (Phases 60 and 61) 26 September 2026 (Phases 62–66) 27 September 2026 (Phases 67–70) 1 October 2026 (Phases 71–88) 3 October 2026 (Phases 94–97) 4 October 2026 (Phases 98–101) 8 October 2026 (Phases 102–119) 9 October 2026 (Phases 120 and 121) 10 October 2026 (Phases 122–127), 11 October 2026 (Phases 128–132) and 12 October 2026 (Phase 133)  
+**Date:** 02 September 2026; revised 24 September 2026 (Phases 60 and 61) 26 September 2026 (Phases 62–66) 27 September 2026 (Phases 67–70) 1 October 2026 (Phases 71–88) 3 October 2026 (Phases 94–97) 4 October 2026 (Phases 98–101) 8 October 2026 (Phases 102–119) 9 October 2026 (Phases 120 and 121) 10 October 2026 (Phases 122–127), 11 October 2026 (Phases 128–132), 12 October 2026 (Phase 133), 13 October 2026 (Phases 134–136) and 14 October 2026 (Phases 137 and 138)  
 **Repository:** https://github.com/DigitalEuan/GLM  
-**Status:** Working Paper — the whole system in one place: the substrate studies of the supplied archive (Parts I–IV) and the machine built on them through Phase 70 (Parts V–VI), with one ledger of what is proved, calibrated, measured, refuted and open (Part VII). Phase 61 brought the last small bodies of archive Lean under this repository's own build (`Distinction.lean`, `SeedRoles.lean`, `GolayMOG.lean`) and extended the supplied-material ledger of Appendix C to every part of the archive. The revision of 26 September adds what Phases 62–66 built: three certificate-carrying planner frames and the planner as the default path, the Python dialect, the carried fork at the Golay deep hole, and the connected machine — one question path to every surface, the eight modules nothing reached made into tools, and derivation across a declared union of formula wheels (§19.1–§19.2). The revision of 27 September adds Phases 67–70: reverse Three Column Thinking, in which the mathematics generates the language column and seven semantic operations are taken on it, widened to disjunction and a loop into the planner and then to an integer sort (§19.3); and native parity, in which every place a standard method tied or narrowly beat a Golay/Leech-native one was re-measured and the native method refined until it matched or beat it (§21.1). The revision of 2 October adds Phase 89's outside question sets (§19.6), Phase 90's typed operators (§19.7), Phase 91's frames from a declaration (§19.8), Phase 92's discourse state (§19.9) and Phase 93's register against the world (§19.10). The revision of 3 October adds Phase 96, second readings through a framed register, and Phase 97, which re-scored its two misses with argument unpacking in the dialect and the third view read on demand (§19.12), and Phases 94 and 95, the third sort and the imperative grammar (§19.11): the reverse grammar now speaks strings, tuples and ranges, and programs with state — assignment, loops, branches, functions and `match` — with every sentence read back, every value equal to CPython's and every trace replayed by a fresh interpreter; and it brings the synthesis of Part VII and the appendices up to date with Phases 89–95. The revision of 4 October adds Phase 98, symbolic parameters — answers that are formulas in letters, and one transcendental equation bounded exactly (§19.13); Phase 99, a register held in degrees Celsius and carried onto the kelvin through the scale table's first offset row (§19.14); Phase 100, the declared resampling that decides which of the retrieval figures' small leads are effects (§21.3); and Phase 101, which repaired the citation reader the address book and the retrieval relevance rest on — a bound variable `a` had been read as a citation of a declaration named `a` — checked it against the Lean elaborator's own graph, and built on the repaired graph a new question the machine answers with a checkable witness: *does one result rest on another* (§21.4). The revision of 1 October brings the paper up to Phase 88: the stepwise planner, which made the typed planner the executive of a chain of checked steps and then widened it round by round to units, register values, comparatives, folds over a column, bounds over a column with holes, kinds of quantity and a register of measurands (§19.4); the loop through the planner, in which a program in the Python dialect holds what the planner and the reverse surface derive, so that one surface's answer chooses the next question (§19.5); the complete integer decision behind reverse Three Column Thinking (§19.3); the retained UBP laws re-read, absorbed where they do work and retired where they do not (§18.4); confidence on the decoder's own readings, a hunted confidence floor and the bit-flip rate estimated from the reads (§20.5); native words (§21.2); and the iteration discipline and the merged order of work (§24.1). The revision of 8 October brings the paper from Phase 101 to Phase 119, and from it on the paper is updated in every development run (§24.2): equations in letters past linear — nonlinear elimination, cubics, the trigonometric form, quartic normal modes and roots proved to have no expression in radicals (§19.15); derivations with a checkable end, through Phase 119's copy lemma in Lean, chained copies, five-variable inequalities, rate distortion for any distortion matrix and Robin spectra at both ends and with a symbolic coefficient (§19.16); questions about the machine answered from its own documents (§19.17); what a stray-blind reading must conflate (§20.6); and the end of the retrieval round (§21.5). The revision of 9 October adds Phase 120: the outside questions that ask *why*, answered in the part a register or an exact derivation decides, over a new nuclide register read in from AME2020 and NUBASE2020, with the account refused by name (§19.18); and Phase 121: the separation criterion for the share-carrying rungs of the deep-hole ladder, read at ensembles sixteen times larger, with sorting proved non-expansive in L1 and a per-hole criterion that certifies eight of the ten reference holes (§20.7); and Phase 122: the configuration reading, which reads the affine diagram the arrival vertices form and certifies all ten, the 28-vertex pair included (§20.8). The revision of 10 October adds Phase 123: the configuration reading put into the deep-hole answering path with certified answers and absences, a reference centre for all 23 Niemeier types, and the empty norms of the power-of-two ladder tried with Construction A (§20.9); and Phase 124: a stopping rule for the certifying reading with a proved budget (§20.10); and Phase 125: the owner's DevOps ladder as a register and an old-style batch machine whose programs the machine says, reads and answers questions about with checkable scripts (§19.19); and Phase 126: inert variables, with which the batch machine certifies that a loop with a growing counter never halts (§19.20); and Phase 127: norm 256 and the hex colour (§20.11). The revision of 11 October adds Phases 128 and 129: the escalation ladder's answers certified to be the nearest carrier from two distances, first with the packing radius (safe but nearly silent, §20.12) and then with a radius stored per cell, which answers nothing wrongly on four query sets where the unguarded ladder answers up to 8 wrongly, and keeps 91 to 95 per cent of its correct answers (§20.13). It also adds Phase 130: counter lassos, with which the batch machine decides a loop past its step budget — *halts*, with the exact step count, outputs and exit code, by jumping the passes of a loop whose counters come back translated up to the first pass at which a comparison changes, or *never halts* when none ever does — each verdict proved sufficient in Lean and re-derived by a second interpreter (§19.21); and Phase 131: constant bounds and repeated output, with which it also jumps a pass that prints the same lines on every pass, stating the skipped lines exactly, and a pass whose counter is compared with a variable that is not a counter (§19.22); and Phase 132: passes that print a counter, written from a template at the translated counters, long output stated in run form, and the diagnosis of a refusal — the exact shape of the growth the machine does not jump, with the Non-Random Coherence Index reported beside it as a diagnosis that decides nothing (§19.23). The revision of 12 October adds Phase 133: the owner's separate study of whether the Golay–Leech substrate is optimal, brought in — the development now proves that no 4,096-word design in 24 bits, with any decoder, decodes correctly more often than the GLM's code on the bit-flip channel, that the six-way tie's negative space and its one-sixth cap belong to the parameters, and that a seven-bit sender tag and a soft certificate are sound new stages of the carried fork, the tag resolving every one of 680,064 tied reads (§20.14).
+**Status:** Working Paper — the whole system in one place: the substrate studies of the supplied archive (Parts I–IV) and the machine built on them through Phase 70 (Parts V–VI), with one ledger of what is proved, calibrated, measured, refuted and open (Part VII). Phase 61 brought the last small bodies of archive Lean under this repository's own build (`Distinction.lean`, `SeedRoles.lean`, `GolayMOG.lean`) and extended the supplied-material ledger of Appendix C to every part of the archive. The revision of 26 September adds what Phases 62–66 built: three certificate-carrying planner frames and the planner as the default path, the Python dialect, the carried fork at the Golay deep hole, and the connected machine — one question path to every surface, the eight modules nothing reached made into tools, and derivation across a declared union of formula wheels (§19.1–§19.2). The revision of 27 September adds Phases 67–70: reverse Three Column Thinking, in which the mathematics generates the language column and seven semantic operations are taken on it, widened to disjunction and a loop into the planner and then to an integer sort (§19.3); and native parity, in which every place a standard method tied or narrowly beat a Golay/Leech-native one was re-measured and the native method refined until it matched or beat it (§21.1). The revision of 2 October adds Phase 89's outside question sets (§19.6), Phase 90's typed operators (§19.7), Phase 91's frames from a declaration (§19.8), Phase 92's discourse state (§19.9) and Phase 93's register against the world (§19.10). The revision of 3 October adds Phase 96, second readings through a framed register, and Phase 97, which re-scored its two misses with argument unpacking in the dialect and the third view read on demand (§19.12), and Phases 94 and 95, the third sort and the imperative grammar (§19.11): the reverse grammar now speaks strings, tuples and ranges, and programs with state — assignment, loops, branches, functions and `match` — with every sentence read back, every value equal to CPython's and every trace replayed by a fresh interpreter; and it brings the synthesis of Part VII and the appendices up to date with Phases 89–95. The revision of 4 October adds Phase 98, symbolic parameters — answers that are formulas in letters, and one transcendental equation bounded exactly (§19.13); Phase 99, a register held in degrees Celsius and carried onto the kelvin through the scale table's first offset row (§19.14); Phase 100, the declared resampling that decides which of the retrieval figures' small leads are effects (§21.3); and Phase 101, which repaired the citation reader the address book and the retrieval relevance rest on — a bound variable `a` had been read as a citation of a declaration named `a` — checked it against the Lean elaborator's own graph, and built on the repaired graph a new question the machine answers with a checkable witness: *does one result rest on another* (§21.4). The revision of 1 October brings the paper up to Phase 88: the stepwise planner, which made the typed planner the executive of a chain of checked steps and then widened it round by round to units, register values, comparatives, folds over a column, bounds over a column with holes, kinds of quantity and a register of measurands (§19.4); the loop through the planner, in which a program in the Python dialect holds what the planner and the reverse surface derive, so that one surface's answer chooses the next question (§19.5); the complete integer decision behind reverse Three Column Thinking (§19.3); the retained UBP laws re-read, absorbed where they do work and retired where they do not (§18.4); confidence on the decoder's own readings, a hunted confidence floor and the bit-flip rate estimated from the reads (§20.5); native words (§21.2); and the iteration discipline and the merged order of work (§24.1). The revision of 8 October brings the paper from Phase 101 to Phase 119, and from it on the paper is updated in every development run (§24.2): equations in letters past linear — nonlinear elimination, cubics, the trigonometric form, quartic normal modes and roots proved to have no expression in radicals (§19.15); derivations with a checkable end, through Phase 119's copy lemma in Lean, chained copies, five-variable inequalities, rate distortion for any distortion matrix and Robin spectra at both ends and with a symbolic coefficient (§19.16); questions about the machine answered from its own documents (§19.17); what a stray-blind reading must conflate (§20.6); and the end of the retrieval round (§21.5). The revision of 9 October adds Phase 120: the outside questions that ask *why*, answered in the part a register or an exact derivation decides, over a new nuclide register read in from AME2020 and NUBASE2020, with the account refused by name (§19.18); and Phase 121: the separation criterion for the share-carrying rungs of the deep-hole ladder, read at ensembles sixteen times larger, with sorting proved non-expansive in L1 and a per-hole criterion that certifies eight of the ten reference holes (§20.7); and Phase 122: the configuration reading, which reads the affine diagram the arrival vertices form and certifies all ten, the 28-vertex pair included (§20.8). The revision of 10 October adds Phase 123: the configuration reading put into the deep-hole answering path with certified answers and absences, a reference centre for all 23 Niemeier types, and the empty norms of the power-of-two ladder tried with Construction A (§20.9); and Phase 124: a stopping rule for the certifying reading with a proved budget (§20.10); and Phase 125: the owner's DevOps ladder as a register and an old-style batch machine whose programs the machine says, reads and answers questions about with checkable scripts (§19.19); and Phase 126: inert variables, with which the batch machine certifies that a loop with a growing counter never halts (§19.20); and Phase 127: norm 256 and the hex colour (§20.11). The revision of 11 October adds Phases 128 and 129: the escalation ladder's answers certified to be the nearest carrier from two distances, first with the packing radius (safe but nearly silent, §20.12) and then with a radius stored per cell, which answers nothing wrongly on four query sets where the unguarded ladder answers up to 8 wrongly, and keeps 91 to 95 per cent of its correct answers (§20.13). It also adds Phase 130: counter lassos, with which the batch machine decides a loop past its step budget — *halts*, with the exact step count, outputs and exit code, by jumping the passes of a loop whose counters come back translated up to the first pass at which a comparison changes, or *never halts* when none ever does — each verdict proved sufficient in Lean and re-derived by a second interpreter (§19.21); and Phase 131: constant bounds and repeated output, with which it also jumps a pass that prints the same lines on every pass, stating the skipped lines exactly, and a pass whose counter is compared with a variable that is not a counter (§19.22); and Phase 132: passes that print a counter, written from a template at the translated counters, long output stated in run form, and the diagnosis of a refusal — the exact shape of the growth the machine does not jump, with the Non-Random Coherence Index reported beside it as a diagnosis that decides nothing (§19.23). The revision of 12 October adds Phase 133: the owner's separate study of whether the Golay–Leech substrate is optimal, brought in — the development now proves that no 4,096-word design in 24 bits, with any decoder, decodes correctly more often than the GLM's code on the bit-flip channel, that the six-way tie's negative space and its one-sixth cap belong to the parameters, and that a seven-bit sender tag and a soft certificate are sound new stages of the carried fork, the tag resolving every one of 680,064 tied reads (§20.14). The revision of 13 October adds Phase 134: a query kind that reads a carrier, the first that reads the substrate itself, answering through the carried fork and the stages a request supplies information for and refusing an unresolved tie or a contradicted read, and a sender tag protected by a code of its own, which absorbs two flipped tag bits where the seven-bit tag absorbs none and turns every wrong answer the decoder gives on up to seven flips into a refusal (§20.15); and Phase 135: the length of a tag bounded in the development, with the seven-bit tag proved the shortest that resolves every tie and the protected tags proved the shortest built on seven bits (§20.16); and Phase 136: the connected machine's second pass, in which the operations studies had measured but no question reached — certified continued fractions, Gosper's transform, role binding, reversible-gate distance, the tag floors, the law triage — were made tools, refused English questions were given declared openings to them, and every reasoning module was made either reachable from the answering path or declared measurement-only with its reason (§19.24).
 
 > **Positioning.** This paper is written under the Positioning section of
 > [`PROJECT_DIRECTIVES.md`](../PROJECT_DIRECTIVES.md), which is the one place
@@ -50,7 +50,7 @@ Physical calibration studies anchor the substrate to measured reality: the elect
 
 Application studies demonstrate that encoding chemical elements as 24-bit data objects in the Leech lattice produces element-property correlations exceeding r = 0.90 for electronegativity and boiling point, and that spatial arithmetic operations on these encodings predict bond energies and bond orders with measurable accuracy. A machine-checked semantics on the MOG cube surface builds a complete micro-language — words with physical dimension, true sentences, connectives with measured meanings, and conversation with memory — proved in the supplied archive's own Lean development.
 
-On that substrate this repository has built and measured the machine itself: a pure-standard-library Python package holding <!--figure:registers-->8 registers<!--/figure--> of exact carriers, answering <!--figure:query-kinds-->24 query kinds<!--/figure--> (one of which dispatches <!--figure:report-subjects-->67 report subjects<!--/figure-->) as three-column answers whose third column re-derives the second in a fresh interpreter, and refusing — with a named reason — wherever an answer would have been a guess. Its faculties are measured rather than described: an end-to-end evaluation of <!--figure:evaluation-cases-->179 CLI cases<!--/figure--> with no confidently wrong answer, 33 capability probes of which 13 locate a boundary, five benchmark suites, pre-registered probes for language, conversation, ordering, extremum, scale conversion, typed question plans, engineering languages, a Python dialect and the router that reaches all of them from one question path, and escalation ladders read over the construction ladder and the norm family. The formal layer is a Lean 4 / Mathlib development of <!--figure:lean-files-->205 Lean files<!--/figure--> and <!--figure:lean-declarations-->5,067<!--/figure--> declarations with no `sorry`, and the repository is kept by <!--figure:directive-count-->16<!--/figure--> standing rules, each enforced by an instrument.
+On that substrate this repository has built and measured the machine itself: a pure-standard-library Python package holding <!--figure:registers-->8 registers<!--/figure--> of exact carriers, answering <!--figure:query-kinds-->25 query kinds<!--/figure--> (one of which dispatches <!--figure:report-subjects-->67 report subjects<!--/figure-->) as three-column answers whose third column re-derives the second in a fresh interpreter, and refusing — with a named reason — wherever an answer would have been a guess. Its faculties are measured rather than described: an end-to-end evaluation of <!--figure:evaluation-cases-->188 CLI cases<!--/figure--> with no confidently wrong answer, 33 capability probes of which 13 locate a boundary, five benchmark suites, pre-registered probes for language, conversation, ordering, extremum, scale conversion, typed question plans, engineering languages, a Python dialect and the router that reaches all of them from one question path, and escalation ladders read over the construction ladder and the norm family. The formal layer is a Lean 4 / Mathlib development of <!--figure:lean-files-->210 Lean files<!--/figure--> and <!--figure:lean-declarations-->5,167<!--/figure--> declarations with no `sorry`, and the repository is kept by <!--figure:directive-count-->16<!--/figure--> standing rules, each enforced by an instrument.
 
 Since Phase 72 the machine also reasons in chains. A stepwise planner composes planner questions, derives a target from givens across the formula wheels, stitches the steps nobody asked for and carries every step's three columns, so that each answered chain is re-checked step by step in a fresh interpreter; it reads units, register values through what they measure, conversions through a stated efficiency, and folds and order statistics over a column, bounding an answer exactly where the register is silent and refusing by name where no bound holds. Since Phase 88 the Python dialect can hold what the planner and the reverse surface derive, so a program's own branches and loops choose the next question put to another surface — a reach no single surface has — and the program's script re-runs every sub-answer's own script before binding its value. The retained laws of the UBP knowledge base have been read against the running substrate: a handful are absorbed as computed facts, the rest retired or refuted by measurement.
 
@@ -974,7 +974,7 @@ The "I am Y" study (`light/aristotle_01/Y_STUDY_CLEAN_RESTATEMENT.md`) examines 
 
 ### 14.1 Scope
 
-There is one Lean development in this repository: `RequestProject/GLM/`, built from the repository root by `lake build` against Mathlib for Lean 4.28.0. It holds <!--figure:lean-files-->205 Lean files<!--/figure--> and <!--figure:lean-declarations-->5,067<!--/figure--> top-level declarations, contains no `sorry` and no `admit`, declares no axiom, and is mirrored byte-for-byte in `overlay/glm_lean/RequestProject/GLM/` so that the package's figures and its Lean citations read the same tree (`diff -r -x README.md RequestProject/GLM overlay/glm_lean/RequestProject/GLM` is empty; Phase 60 found and repaired the one time it was not).
+There is one Lean development in this repository: `RequestProject/GLM/`, built from the repository root by `lake build` against Mathlib for Lean 4.28.0. It holds <!--figure:lean-files-->210 Lean files<!--/figure--> and <!--figure:lean-declarations-->5,167<!--/figure--> top-level declarations, contains no `sorry` and no `admit`, declares no axiom, and is mirrored byte-for-byte in `overlay/glm_lean/RequestProject/GLM/` so that the package's figures and its Lean citations read the same tree (`diff -r -x README.md RequestProject/GLM overlay/glm_lean/RequestProject/GLM` is empty; Phase 60 found and repaired the one time it was not).
 
 The development grew in three ways, and Appendix B lists every file under the theme it belongs to:
 
@@ -1192,7 +1192,7 @@ strictly — `substrate`, `data_objects`, `reasoning`, `semantics`, `recipe`,
 opt-in package, the `sandbox` holding what is not yet relied on, `signoff` and
 `corpus` holding the repository's own instruments, and `integrity.py` holding
 every SHA-256 use one level above the core. The reasoning kernel alone is
-<!--figure:reasoning-modules-->175<!--/figure--> modules.
+<!--figure:reasoning-modules-->178<!--/figure--> modules.
 
 ### 17.2 The carrier
 
@@ -1218,7 +1218,7 @@ equivalent ([`ZERO_STORAGE_V5_STUDY.md`](ZERO_STORAGE_V5_STUDY.md)).
 
 ### 17.4 The query, and the three columns
 
-A question enters as one of <!--figure:query-kinds-->24 query kinds<!--/figure-->
+A question enters as one of <!--figure:query-kinds-->25 query kinds<!--/figure-->
 — `verify`, `analogy`, `describe`, `nearest`, `product`, `cluster`, `spatial`,
 `project`, `trilinear`, `coherence`, `report`, `angle`, `task`, `pi_groups`,
 `meaning`, `real`, `compare`, `measure`, `comparative`, `derive`, `field`,
@@ -1335,7 +1335,7 @@ itself whether it is `table`, `address` or `derive` (§22.3).
 
 | operation | what it does | measured on its declared set | study |
 |---|---|---|---|
-| **field surface** | one named field of one named row, over <!--figure:fieldsurface-tables-->14<!--/figure--> tables, <!--figure:fieldsurface-rows-->13,401<!--/figure--> rows and <!--figure:fieldsurface-pairs-->78,762<!--/figure--> addressable pairs | answers <!--figure:fieldsurface-moved-->9<!--/figure--> of the <!--figure:fieldsurface-held-->10<!--/figure--> held-but-unreachable probe questions, exactly the <!--figure:fieldsurface-predicted-->9<!--/figure--> declared reachable | [`FIELD_SURFACE_STUDY.md`](FIELD_SURFACE_STUDY.md) |
+| **field surface** | one named field of one named row, over <!--figure:fieldsurface-tables-->14<!--/figure--> tables, <!--figure:fieldsurface-rows-->13,622<!--/figure--> rows and <!--figure:fieldsurface-pairs-->79,988<!--/figure--> addressable pairs | answers <!--figure:fieldsurface-moved-->9<!--/figure--> of the <!--figure:fieldsurface-held-->10<!--/figure--> held-but-unreachable probe questions, exactly the <!--figure:fieldsurface-predicted-->9<!--/figure--> declared reachable | [`FIELD_SURFACE_STUDY.md`](FIELD_SURFACE_STUDY.md) |
 | **ordering** | one coordinate off two rows, ordered exactly, refused across scales | answers <!--figure:ordering-answered-->4<!--/figure--> and refuses <!--figure:ordering-refused-->3<!--/figure--> of <!--figure:ordering-declared-count-->7<!--/figure-->, every one as declared | [`ORDERING_STUDY.md`](ORDERING_STUDY.md) |
 | **extremum** | one coordinate over every row of a table, folded or refused | folds <!--figure:extremum-answered-->4<!--/figure--> and refuses <!--figure:extremum-refused-->4<!--/figure--> of <!--figure:extremum-declared-count-->8<!--/figure--> columns, every one as declared | [`COLUMN_EXTREMUM_STUDY.md`](COLUMN_EXTREMUM_STUDY.md) |
 | **scale conversion** | a declared table of <!--figure:scales-rows-->10<!--/figure--> scales over <!--figure:scales-quantities-->4<!--/figure--> quantities | answers <!--figure:scales-answered-->7<!--/figure--> and refuses <!--figure:scales-refused-->5<!--/figure--> of <!--figure:scales-declared-->12<!--/figure-->; relates <!--figure:scales-bridged-->8<!--/figure--> of <!--figure:scales-pairs-->7,875<!--/figure--> scale pairs and refuses the rest | [`SCALE_CONVERSION_STUDY.md`](SCALE_CONVERSION_STUDY.md) |
@@ -2167,6 +2167,97 @@ hand-worked expectations: one printed text, where the encoder found a
 two-copy block of sixteen lines the hand computation did not consider, and a
 script-size clause that forgot the checker every script carries.
 
+### 19.24 The connected machine, second pass (Phase 136)
+
+Phase 66 made the eight modules nothing reached into tools (§19.1). By Phase
+135 the wiring audit still found every reasoning module reached, but only
+because it counted the measurement command line as an entry point. Taking the
+closure from the answering path alone, 24 of the 177 reasoning modules were
+reached by no question. Phase 136
+([`CONNECTED_MACHINE_TWO_STUDY.md`](CONNECTED_MACHINE_TWO_STUDY.md)) wired in
+the four that carry an operation a caller can ask for, through six new tools
+and the law register. `tool continued fraction` emits a term of a written
+real only when both ends of an interval around it agree on that term.
+`tool mobius` streams the expansion of `(aX + b)/(cX + d)` from those terms
+by Gosper's rule and checks it against the direct expansion. The other new
+tools bind a typed relation into one word and read the filler back (`tool
+bind`), count reversible-gate distance (`tool gates`) and state the proved
+tag floors (`tool tag length`). The law register now answers the triage fate
+of the 106 unresolved laws. Both stream rules are theorems:
+`GLM.CertifiedStreams.cfPrefix_certified` shows that a value inside an
+interval whose ends share `n` terms shares them, and `gosper_emit_sound`
+shows that an emitted term is the same for every unread tail. Checked
+against references that share no code with the tools, the stream tools
+agree on 43 of 43 surds, on pi, e and phi, and on 12 of 12 transforms of
+quadratic irrationals. A rational written as an expression gets its
+certified prefix and a refusal for the rest; the routine it replaced never
+returned on such a value. Eleven declared English openings reach a tool only
+after every surface has refused, and only if the tool answers. None of the
+404 declared questions matches one, and the evaluation is unchanged. The
+other 20 unreached modules are declared measurement-only, each with its
+reason, and a test fails on any module that is neither reached nor declared.
+All 8 marks were met.
+
+### 19.25 Tool values: a tool's answer as a number in a chain (Phase 137)
+
+Phase 136 made the tools reachable one question at a time, but a tool's
+answer was not something the planner could use. *Twice the third term of the
+continued fraction of pi* was refused because the stepwise planner (§19.4,
+Phase 72) asks every non-numeric part of the question of the typed planner,
+and the typed planner holds no continued fraction. Phase 137
+([`TOOL_VALUES_STUDY.md`](TOOL_VALUES_STUDY.md)) gives the stepwise planner a
+new kind of leaf. A part the typed planner refuses is read as one number a
+tool computes: ten declared noun-phrase patterns cover continued-fraction
+terms and folds, convergents and their parts, the nearest fraction under a
+denominator bound, a gate distance, the kissing number, Leech shell counts and
+moonshine dimensions. Each pattern names the tool and a selector over the
+tool's figures. The step goes through the same step gate as any planner step,
+and the chain's column-3 script re-runs the tool and applies the selector in
+a fresh interpreter. Two new tools answer with a fraction:
+`tool convergent` and `tool best approximation`. The second picks the nearer
+of the last convergent and the semiconvergent by the side of their midpoint
+the value lies on, and, up to a bound of 20,000, checks the result by trying
+every denominator, with no continued fractions. `GLM.ToolValues` proves that
+selecting from a certified prefix is sound (`select_certified`,
+`fold_certified`), that the convergent recurrence gives the value of the
+finite expansion in lowest terms (`cfValue_eq_conv`, `conv_det`,
+`conv_coprime`), and the rules the nearer-fraction choice and its exhaustive
+check use (`closer_iff_midpoint`, `nearer_of_margin`,
+`farther_than_candidate`). The classical best-approximation theorem itself is
+not proved. All 8 marks were met: 17 of 17 composed questions as declared,
+13 of 13 chains verified and 65 of 65 mutants caught, 100 of 100 nearest
+fractions equal to the exhaustive search, and no declared question or
+stepwise case changed. Of twelve held-out rewordings, 10 were read and all 10
+were right. Three values on the hand-written answer sheet were wrong, and
+each was re-derived independently.
+
+### 19.26 Tool verdicts, a conditional, an unrolled search, and the nearest fraction without a bound (Phase 138)
+
+Phase 138 ([`TOOL_VERDICTS_STUDY.md`](TOOL_VERDICTS_STUDY.md)) lets a tool's
+yes/no answer steer a chain. A question one tool decides — a gate target
+reachable from a source, a reasoning module reached by a query, a tool value
+equal to a stated number — becomes a step valued `True` or `False`, re-run by
+the chain's column-3 script; a gate target the tool proves unreachable is a
+`False` that carries the tool's proved reason, not a refusal. *If A, B,
+otherwise C* is a new `choose` step over any verdict step, and only the
+branch the test selects is built, so the other branch may name a value no
+tool gives. *The first convergent of X whose denominator is above N* is
+unrolled into tool-value and comparison steps closed by a `first` step that
+checks every earlier test failed and the last held. The search has no
+iteration cap: it is admitted because convergent denominators grow like the
+Fibonacci numbers (`GLM.NearestFraction.conv_denominators_fib`,
+`search_terminates`). The same file proves the classical closest-fraction
+theorem (`nearest_fraction_candidates`): the nearer of the last convergent
+within N and the semiconvergent below the next is a nearest fraction among
+all with denominator at most N. With it and the Farey certificate
+(`farey_certificate`: Farey neighbours whose denominators add past N, with
+the value between them), the nearest-fraction tool checks a certificate on
+every answer for every bound, and its 20,000 bound is gone. All 6 marks were
+met: 14 of 14 held-out verdict questions as expected, 12 of 12 chains
+verified and 53 of 53 mutants caught, and on a fresh held-out set of sixteen
+rewordings 12 were read and all 12 right; Phase 137's two misses are read by
+two general rules. The four still unread are left for the next fresh set.
+
 ## 20. Escalation and Ladders
 
 §4 proves that loss at a layer boundary is exactly gain above it. The machine
@@ -2492,6 +2583,61 @@ which holds only over all 4,096 codewords together. The stages are measured
 beside the fork, not yet reached from a query, and outside the bit-flip regime
 of 24-bit carriers holding 12 bits the optimality theorem says nothing.
 
+### 20.15 The carrier read and the protected tag (Phase 134)
+
+Phase 133's stages were measured beside the carried fork and reached from no
+question. Phase 134 ([`PROTECTED_TAG_STUDY.md`](PROTECTED_TAG_STUDY.md))
+puts them in the answering path through a new query kind, `carrier` —
+`carrier 0xca97a1 tag 0x54`, with an optional sender tag, protected tag or
+soft reading of 24 exact values — the first kind that reads the substrate
+itself. It answers only when one candidate survives every stage (the
+codeword, its twelve message bits and the flips corrected, with a column-3
+script that re-reads the word by brute force over all 4,096 codewords), and
+refuses as a boundary an open six-way tie and a contradicted read. Nine
+declared evaluation questions came out as declared.
+
+The protected tag answers the weakness Phase 133 measured. Two candidates of
+one fork differ by an octad, and a tag of parities is linear, so how many
+flipped tag bits a stage absorbs is fixed by the least tag weight over the 759
+octads (`GLM.Golay24.mtag_separation`). For the seven-bit tag it is 1, and
+one flip can name the wrong candidate exactly (`tag7_one_flip_misleads`).
+Appending to the seven bits the parities of a code on them raises it: 3 for
+the shortened Hamming `[11,7,3]` code, 5 for the `[15,7,5]` BCH code, so the
+fifteen-bit tag read at radius 2 corrects two flipped tag bits
+(`tag15_corrects_two`), and radius 2 is sharp (`tag15_three_flips_mislead`).
+Because a wrong codeword near a read of a carrier with up to seven flips is
+also an octad from the sent one, an intact tag disagrees with every wrong
+answer the decoder can give there (`tag_flags_miscorrection`). Measured on
+Phase 133's 680,064 tied reads, both protected tags resolve every read with up
+to their radius of flipped tag bits, 0 wrong, where the seven-bit tag with one
+flip answers 28,096 wrongly; on 523,204 reads with five to seven carrier
+flips the decoder alone answers 409,860 wrongly and both tags none — every one
+becomes a refusal. Six of seven marks were met; the seventh declared a
+three-flip pattern expected to mislead radius 2, and it never did (a
+consecutive pattern, run post hoc, does, as the sharpness theorem allows).
+
+### 20.16 The shortest tag (Phase 135)
+
+Phase 134 chose its protected tags by construction and claimed nothing about
+their length. Phase 135 ([`SHORTEST_TAG_STUDY.md`](SHORTEST_TAG_STUDY.md))
+asks how many tag bits a tie needs, in the development first. A Plotkin step
+— a closed, octad-free set of codewords avoiding one coordinate has at most
+24 words (`GLM.Golay24.octadFree_avoiding_card_le`) — shows that every tag of
+six parity bits sends some octad to zero, so a tag giving every octad tag
+weight `D` has at least `D + 6` bits (`tag_length_floor`): the seven-bit
+sender tag is the shortest that resolves every tie (`tag7_shortest`). Both
+protected tags are parities of the seven tag bits, and a seven-bit tag that
+is nonzero on octads takes all 127 values on them (`tag7_octads_onto`), so a
+tag of that shape is a `[r, 7, D]` code: eleven bits for one flipped tag bit,
+by sphere packing, and fifteen for two, because no `[14,7,5]` code exists
+(`no_14_7_5`, proved in the development by the parity extension, a residual
+of nine positions and the first moment). The protected tags are therefore the
+shortest of their shape (`protected_tags_shortest_of_shape`). Between the
+general floor (9 and 11 bits) and these lengths a tag of another shape is
+neither found nor excluded: a deterministic search found none, but its
+control reached the 15-bit length on no seed of three, so for two flipped
+bits that absence is weak evidence. Five of six marks were met.
+
 ## 21. Addressing: The Geometry as an Index
 
 The second of the Positioning's four questions — can language, mathematics and
@@ -2499,7 +2645,7 @@ program text be mapped onto the lattice — is asked most sharply of the Lean
 development itself, because it is a corpus whose ground truth is known.
 
 * **The Lean address book.** Each of the
-  <!--figure:lean-declarations-->5,067<!--/figure--> declarations gets a
+  <!--figure:lean-declarations-->5,167<!--/figure--> declarations gets a
   deterministic Leech address computed from 24 structural counts of its
   statement, read back exactly, with nearest-by-address sharing a source file
   far more often than a SHA-256 control or a seeded reshuffle does
@@ -2682,7 +2828,7 @@ operation the round built stays.
 
 | instrument | what it measures | result |
 |---|---|---|
-| end-to-end CLI evaluation | the command line in a fresh interpreter per question, scored asymmetrically | <!--figure:evaluation-case-count-->179<!--/figure--> cases: 149 answered correctly, 28 refused as expected, **0 confidently wrong** |
+| end-to-end CLI evaluation | the command line in a fresh interpreter per question, scored asymmetrically | <!--figure:evaluation-case-count-->188<!--/figure--> cases: 149 answered correctly, 28 refused as expected, **0 confidently wrong** |
 | capability probes | where the library stops, asked as user questions | 33 probes: 20 hold, 13 break — each break a located boundary, not a failure |
 | benchmark suites | solver functions against curated and exhaustive task sets | 2,389 / 2,390 across 5 suites, every suite above its declared baseline |
 | test suite | the package's own regression net | <!--figure:suite-->5,397 tests across 181 of the 183 test files, 18,972 subtests, outside the document checks<!--/figure--> |
@@ -2833,8 +2979,8 @@ carries a tier-0 block (question, verdict, deciding figure, the function that
 recomputes it), is addressed, and is checked — the verdict must be grounded in
 the document's own words, every link must resolve, and every current-state
 document must be reachable from [`ENTRY.md`](../ENTRY.md). The corpus holds
-<!--figure:corpus-documents-->166<!--/figure--> documents, of which
-<!--figure:corpus-state-documents-->162<!--/figure--> describe the system as it
+<!--figure:corpus-documents-->171<!--/figure--> documents, of which
+<!--figure:corpus-state-documents-->167<!--/figure--> describe the system as it
 is and <!--figure:corpus-archive-documents-->4<!--/figure--> are records of a
 round, and [`DIGEST.md`](../DIGEST.md) is their tier-0 reading, generated.
 
@@ -2930,7 +3076,13 @@ The following are established mathematical facts, machine-checked in Lean in thi
 
 17. **Transcendental spectra are bracketed by theorems.** For one Robin end and for Robin at both ends a root lies in every declared interval (`robin_root_exists`, `robin_both_root_exists`) and the stated function is an eigenfunction there (`robin_eigenfunction`, `robin_both_eigenfunction`); on a symbolic interval each root is bounded in closed form by arctangents (`robin_root_bounds`); and the rate-distortion dual bound is a theorem (`rd_dual_lower_bound`) (§19.16).
 
-18. **The Golay carrier is optimal in its regime, and its tie is forced.** No design of 4,096 words in 24 bits, with any decoder, decodes correctly more often on the bit-flip channel than the GLM's code (`GLM.Golay24.golay_optimal`); every such design leaves at least 7,254,016 received words at distance 4 or more (`negative_space_floor_4096`), and one correcting three flips corrects at most one sixth of the four-flip corruptions (`weight4_resolved_le_4096`); a seven-bit sender tag and a soft reading within squared distance 8 each resolve the tie soundly (`tag_resolves`, `soft_certificate`; Phase 133, §20.14).
+18. **The Golay carrier is optimal in its regime, and its tie is forced.** No design of 4,096 words in 24 bits, with any decoder, decodes correctly more often on the bit-flip channel than the GLM's code (`GLM.Golay24.golay_optimal`); every such design leaves at least 7,254,016 received words at distance 4 or more (`negative_space_floor_4096`), and one correcting three flips corrects at most one sixth of the four-flip corruptions (`weight4_resolved_le_4096`); a seven-bit sender tag and a soft reading within squared distance 8 each resolve the tie soundly (`tag_resolves`, `soft_certificate`; Phase 133, §20.14). A tag absorbs as many flipped bits as the least tag weight over the octads allows (`mtag_separation`): none for the seven-bit tag (`tag7_one_flip_misleads`), two for the fifteen-bit protected tag (`tag15_corrects_two`, sharp), and an intact tag disagrees with every wrong decode on up to seven flips (`tag_flags_miscorrection`; Phase 134, §20.15). Every parity tag giving each octad tag weight `D` has at least `D + 6` bits, so the seven-bit tag is the shortest that resolves every tie, and the protected tags are the shortest built on seven bits (`tag_length_floor`, `tag7_shortest`, `protected_tags_shortest_of_shape`; Phase 135, §20.16).
+
+19. **Continued-fraction streams are certified.** A value inside an interval whose two ends share `n` continued-fraction terms shares them (`GLM.CertifiedStreams.cfPrefix_certified`), and Gosper's homographic transform emits a term only when every tail of the input gives it (`gosper_emit_sound`); `tool continued fraction` and `tool mobius` emit by exactly these rules (Phase 136, §19.24).
+
+20. **A tool's number may be composed without weakening it.** Entry `k` of a certified continued-fraction prefix is the `k`-th term of every value in the interval (`GLM.ToolValues.select_certified`), the convergent recurrence gives the finite expansion's value in lowest terms (`cfValue_eq_conv`, `conv_coprime`), and a reading within `ε` that separates two fractions by more than `2ε` decides the nearer (`nearer_of_margin`); the stepwise planner composes tool values by exactly these rules (Phase 137, §19.25).
+
+21. **The nearest fraction is proved for every bound.** The nearer of the last convergent within `N` and the semiconvergent below the next is at least as near `x` as every fraction with denominator at most `N` (`GLM.NearestFraction.nearest_fraction_candidates`), and a run-time Farey certificate is enough to prove any one answer (`farey_certificate`); convergent denominators grow like the Fibonacci numbers, so the planner's search for the first convergent past a bound ends without a cap (`conv_denominators_fib`, `search_terminates`) (Phase 138, §19.26).
 
 ### 25.2 The Calibrated Results
 
@@ -2952,7 +3104,7 @@ The following are empirical calibrations, internally consistent but not derived 
 
 The following are measurements of the machine, each against a control or a declared set, each recomputed by the instrument named in Part V:
 
-1. **No confidently wrong answer** in <!--figure:evaluation-cases-->179 CLI cases<!--/figure-->, 28 of them refusals the machine was expected to make.
+1. **No confidently wrong answer** in <!--figure:evaluation-cases-->188 CLI cases<!--/figure-->, 28 of them refusals the machine was expected to make.
 2. **The language probe passes through the planner** (<!--figure:plans-probe-correct-->19<!--/figure--> of <!--figure:probe-questions-->20<!--/figure-->) and fails through the grammar alone (<!--figure:probe-correct-->2<!--/figure-->); the planner has been the default path since Phase 63.
 3. **Every declared operation behaves as declared**: field surface, ordering, extremum, scale conversion and conversation each answer and refuse exactly the cases declared before the run.
 4. **Escalation is safe where it is shipped**: 462 of 568 on the construction ladder and <!--figure:normesc-correct-->467<!--/figure--> on the repaired norm ladder, both with 0 wrong — on the queries they were chosen on: on three held-out perturbation sets the norm ladder answers 8, 1 and 2 wrongly, and the placement guard (§20.13) removes every one of those while keeping 91 to 95 per cent of the correct answers; the program-text operation made safe by a second reading at a counted cost.
@@ -3024,7 +3176,8 @@ Kept because a refuted claim is a result: the fine-structure fit is worth less t
 21. **Explanations, the rest** (left by Phase 120). Recognition of rewordings (30 of 35 held-out rewordings are read by no frame); *why* questions outside the declared 35; explanations themselves, still refused; excited states, isomers and abundances, which the nuclide register does not hold ([`EXPLANATION_ANCHOR_STUDY.md`](EXPLANATION_ANCHOR_STUDY.md) §5).
 22. **The separation criterion for the 28-vertex pair** — taken by Phase 122 (§20.8), and the reading put into the answering path by Phase 123 (§20.9), which also reached all 23 Niemeier types (three post hoc) and filled norm 2. Phase 124 (§20.10) gave the certifying reading a proved stopping rule, under which all 23 are certified without a post-hoc step. Open: norm 256, the rule in the walk and the answering path, and the reading in the other deep-hole reports ([`LATTICE_COMPLETION_STUDY.md`](LATTICE_COMPLETION_STUDY.md) §7.6, [`PROBE_BUDGET_STUDY.md`](PROBE_BUDGET_STUDY.md) §7.4). Phase 127 (§20.11) filled norm 256 with the first-hex-digit reading and found the ladder answering 8 of 568 held-out queries wrongly, which became the sharpest open item of the lattice line ([`NORM_256_HEX_STUDY.md`](NORM_256_HEX_STUDY.md) §7.5). Phases 128 and 129 (§20.12, §20.13) took it: the placement guard answers nothing wrongly on four sets and keeps 91 to 95 per cent of the correct answers. Open: the guard in the answering path ([`PLACEMENT_GUARD_STUDY.md`](PLACEMENT_GUARD_STUDY.md) §7.4).
 23. **Operations, the rest** (left by Phase 125). The ladder in the planner and the session under a frozen-path comparison; more of the batch fragment (`2>&1`, `SORT` options, `FOR /F`); a ranking-function certificate so the machine can say *halts* without running a loop out ([`OPERATIONS_LADDER_STUDY.md`](OPERATIONS_LADDER_STUDY.md) §7.4). Phase 126 certified the never-halting side for counters no line reads; Phase 130 took both: counter lassos let the machine say *halts* past its budget with the exact step count, and *never* for a counter only the output reads or read on an unreachable line (§19.21); Phase 131 took passes that write output and counters compared with a constant variable (§19.22); Phase 132 took passes that print a counter and output past 100,000 lines, and diagnoses growth that is not a translation (§19.23); open are jumps over quadratic and geometric growth, whose closed forms are now proved, and the rest of the fragment ([`AFFINE_OUTPUT_STUDY.md`](AFFINE_OUTPUT_STUDY.md) §7.5).
-24. **The designed substrate, the rest** (left by Phase 133). The sender-tag and soft-certificate stages in the answering path, a tag protected by a code of its own (a corrupted tag resolves 4.1 per cent of tied reads wrongly), the certificate on a soft reading the GLM produces itself, and the substrate study's other results — the four-label mirror, the 86–128-value Golay tag, the Delsarte bound — which are cited rather than re-proved ([`DESIGNED_SUBSTRATE_STUDY.md`](DESIGNED_SUBSTRATE_STUDY.md) §7.5).
+24. **The designed substrate, the rest** (left by Phase 133). Phase 134 put the sender-tag and soft-certificate stages in the answering path through the `carrier` query kind and protected the tag with a code of its own (§20.15). Phase 135 bounded the tag lengths (§20.16). Open: a tag of another shape between the floors (9–10 bits for one flip, 11–14 for two; [`SHORTEST_TAG_STUDY.md`](SHORTEST_TAG_STUDY.md) §7.5), the certificate on a soft reading the GLM produces itself, a guard for the carrier read like the ladder's ([`PROTECTED_TAG_STUDY.md`](PROTECTED_TAG_STUDY.md) §7.5), and the substrate study's other results — the four-label mirror, the 86–128-value Golay tag, the Delsarte bound — which are cited rather than re-proved ([`DESIGNED_SUBSTRATE_STUDY.md`](DESIGNED_SUBSTRATE_STUDY.md) §7.5).
+25. **The connected machine, the rest** (left by Phases 136, 137 and 138). The two ladder guards still wait on a query kind that reads a ladder carrier. Since Phase 138 a tool's verdict steers a chain (§19.26), but verdicts come only from the two tools with a boolean figure and from equality with a tool value; the ladder's relations and a law's fate are not yet verdicts. The search reads one shape, whose measure is proved; a search without a proved measure is not admitted, since no cap is to be added. Four of sixteen fresh held-out rewordings are unread and wait for a fresh set ([`TOOL_VERDICTS_STUDY.md`](TOOL_VERDICTS_STUDY.md) §7).
 
 ---
 
@@ -3037,9 +3190,9 @@ The GLM is a mathematically rigorous 24-dimensional substrate with exact rationa
 - The velocity scale is exact (MONAD/13 → v/c = 0.339, but this is a definition, not a prediction)
 - The mass scale is internally consistent (0.009% error, cross-checks pass)
 - The photon as minimum-Tax octad is a mathematical fact on the Golay layer (`octad_min_tax`)
-- The layer architecture, the code's arithmetic and the machine's refusals are formally verified in a development of <!--figure:lean-files-->205 Lean files<!--/figure--> with no `sorry`
+- The layer architecture, the code's arithmetic and the machine's refusals are formally verified in a development of <!--figure:lean-files-->210 Lean files<!--/figure--> with no `sorry`
 - The encoding system predicts element properties at r > 0.90
-- The machine answers <!--figure:query-kinds-->24 query kinds<!--/figure--> over <!--figure:registers-->8 registers<!--/figure-->, re-derives every answer it gives, and refuses with a named reason where an answer would be a guess
+- The machine answers <!--figure:query-kinds-->25 query kinds<!--/figure--> over <!--figure:registers-->8 registers<!--/figure-->, re-derives every answer it gives, and refuses with a named reason where an answer would be a guess
 
 ### 26.2 What the GLM Is Not
 
@@ -3235,6 +3388,7 @@ says what each is *about* and where this paper uses it.
 | [`CELL_GUARD_STUDY.md`](CELL_GUARD_STUDY.md) | a ladder answer certified nearest from two distances and the packing radius; the retirement rule read on two sets; a third query set | §20.12 |
 | [`PLACEMENT_GUARD_STUDY.md`](PLACEMENT_GUARD_STUDY.md) | the certified-nearest ladder with a radius stored per cell: 0 wrong on four query sets, 91–95 per cent of the correct answers kept | §20.13 |
 | [`DESIGNED_SUBSTRATE_STUDY.md`](DESIGNED_SUBSTRATE_STUDY.md) | the owner's substrate study brought in: Golay optimal for every 4,096-word design, the tie forced, a sender tag and a soft certificate as new fork stages | §20.14 |
+| [`PROTECTED_TAG_STUDY.md`](PROTECTED_TAG_STUDY.md) | the `carrier` query kind, and a sender tag with a code of its own that absorbs two flipped tag bits and flags every wrong decode on up to seven flips | §20.15 |
 
 ---
 
@@ -3248,7 +3402,7 @@ statements are in the files; §14.3 names the headline theorems.
 | foundations and the core's generations | `Foundations`, `Gen2`, `Gen3`, `Computable`, `Permutation`, `Reachable` |
 | constants, calibration, physics | `Constants`, `Calibration`, `Lightspeed`, `AlignmentPoints`, `ReadQuantum`, `StepCost`, `Stability`, `TaxConservation`, `DimensionCarrier`, `MeasureView`, `Comparative`, `Denotation` |
 | layers and escalation | `Layers`, `LayerChain`, `Cumulative`, `CumulativityRule`, `Tower`, `Stack`, `Escalation`, `EscalationLoop`, `Irrational`, `ConstructionLadder`, `ScaledLadder`, `NormFamily`, `HullExpansion`, `SecondReading` |
-| the Golay code and its decoding | `DesignedSubstrate`, `DecoderConfidence`, `ConfidenceFloor`, `Agree`, `RatePosterior`, `RateRepair`, `GolayMOG`, `Golay/Code`, `Golay/Census`, `Golay/Cesaro`, `Golay/Dynamics`, `Golay/Sextet`, `Golay/CubeMirror`, `GolayBoundary`, `GolayWeightEnum`, `SecondView`, `OnDemandView`, `Steiner`, `LDP`, `Relaxation`, `Endianness`, `TieBreak`, `Combiner`, `Facets`, `ZeroStorage`, `ZeroStorageV5`, `LLVQTable` |
+| the Golay code and its decoding | `DesignedSubstrate`, `ProtectedTag`, `DecoderConfidence`, `ConfidenceFloor`, `Agree`, `RatePosterior`, `RateRepair`, `GolayMOG`, `Golay/Code`, `Golay/Census`, `Golay/Cesaro`, `Golay/Dynamics`, `Golay/Sextet`, `Golay/CubeMirror`, `GolayBoundary`, `GolayWeightEnum`, `SecondView`, `OnDemandView`, `Steiner`, `LDP`, `Relaxation`, `Endianness`, `TieBreak`, `Combiner`, `Facets`, `ZeroStorage`, `ZeroStorageV5`, `LLVQTable` |
 | the Leech lattice, higher lattices and the algebra above | `Shortcut/Substrate`, `Shortcut/Golay`, `Shortcut/GolayWeights`, `Shortcut/GrayCode`, `Shortcut/Leech`, `Shortcut/Decoder`, `Shortcut/FactorMap`, `Shortcut/Shortcut`, `GrayJump`, `HigherLattices`, `ShellSigma`, `Niemeier`, `DeepHoleClassifier`, `DeepHoleEscalation`, `DeepHoleFailure`, `Extraspecial`, `Sakuma`, `VOA`, `Heisenberg`, `Superposition`, `ModeAlgebra` |
 | the MOG cube (geometric half) | `Cube/Surface`, `Cube/Tax`, `Cube/Stabiliser`, `Cube/Three`, `Cube/HexTiles` |
 | values, streams and number theory | `DeltaSigma`, `Sturmian`, `Mantissa`, `Wobble`, `WobbleLandscape`, `Feedback`, `Cascade`, `NowReceipt`, `Transcendental`, `Reversible`, `LogBucket`, `Harmony`, `Totient`, `SpatialArithmetic`, `GridTension` |

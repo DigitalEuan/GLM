@@ -71,6 +71,8 @@ DECLARED_CAUSES: Dict[str, str] = {
     "report-query-escalation": "this round: the query-escalation report "
                                "counts the evaluation cases, which gain the "
                                "new one, and it is re-taken over them",
+    "unknown-nonsense": "Phase 134: the list of query kinds the refusal "
+                        "names gains 'carrier'",
 }
 
 _SOURCES: Tuple[str, ...] = (

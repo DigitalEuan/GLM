@@ -1525,6 +1525,67 @@ except cx.ExtremumError as _error:
 '''
 
 
+def _body_carrier(args) -> str:
+    """Re-read one carrier by brute force -- and re-witness the tie it refuses.
+
+    The script does not call the decoder the session used: it measures the
+    received word against all 4,096 codewords, keeps every nearest one, and
+    applies each stage the request supplied by its definition (a tag equal,
+    a protected tag within two flips, a soft reading within squared distance
+    8).  It then requires a six-way tie with nothing to resolve it to stay
+    six-way, so a read that answered every tie would fail it.
+    """
+    request = str(args.get("request", ""))
+    return f'''# -- recompute -------------------------------------------------------------
+
+from fractions import Fraction
+
+from glm_universal.reasoning import carrier_read as crd
+from glm_universal.reasoning import designed_substrate as dsub
+from glm_universal.substrate.mog import GOLAY_MASKS
+
+_parts = crd.parse_request({request!r})
+_soft = _parts["soft"]
+_word = _parts["word"]
+if _word is None:
+    _word = sum(1 << _j for _j, _s in enumerate(_soft) if _s > Fraction(1, 2))
+
+
+def _pop(_x):
+    return bin(_x).count("1")
+
+
+_best = min(_pop(_word ^ _c) for _c in GOLAY_MASKS)
+_live = [_c for _c in GOLAY_MASKS if _pop(_word ^ _c) == _best]
+if _parts["tag"] is not None:
+    _live = [_c for _c in _live if dsub.tag(_c) == _parts["tag"]]
+if _parts["protected_tag"] is not None:
+    _live = [_c for _c in _live
+             if _pop(crd.mtag(_c, crd.TAG15_MASKS) ^ _parts["protected_tag"])
+             <= 2]
+if _soft is not None:
+    _live = [_c for _c in _live
+             if sum((1 - 2 * _s - (-1 if (_c >> _j) & 1 else 1)) ** 2
+                    for _j, _s in enumerate(_soft)) < 8]
+assert len(_live) == 1, _live
+_value = _live[0]
+
+observed = {{
+    "codeword": f"{{_value:#08x}}",
+    "message": f"{{_value & 0xFFF:#05x}}",
+    "flips": str(_pop(_value ^ _word)),
+}}
+
+# A six-way tie with nothing to resolve it stays six-way: the read refuses
+# it rather than picking, and so does this script's own brute force.
+_tie = 0xca97a1
+_near = min(_pop(_tie ^ _c) for _c in GOLAY_MASKS)
+assert _near == 4
+assert sum(1 for _c in GOLAY_MASKS if _pop(_tie ^ _c) == 4) == 6
+assert crd.read_carrier(_tie).status == "open"
+'''
+
+
 def _body_report_language(args) -> str:
     """Recompute the question descriptions and the parser comparison."""
     return '''# -- recompute -------------------------------------------------------------
@@ -3572,6 +3633,9 @@ TEMPLATES = {
     # v1.20.0: the extremum operation -- one coordinate off every row of
     # one table, or a refusal naming what is missing.
     "extremum": _body_extremum,
+    # Phase 134: one carrier read through the carried fork and the stages
+    # the request supplies information for, re-read by brute force.
+    "carrier": _body_carrier,
     # v1.12.0: the surface language driven off the same kind of
     # description -- the question shape made an object.
     "report_language": _body_report_language,

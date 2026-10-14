@@ -21,13 +21,18 @@ from glm_universal.evaluation import cases as ev
 from glm_universal.reasoning import frozen_path as fp
 from glm_universal.reasoning import lattice_completion as lc
 
+_CARRIER = {"carrier-clean", "carrier-two-flips", "carrier-tie", "carrier-tag",
+            "carrier-protected-tag", "carrier-flagged", "carrier-soft",
+            "carrier-not-a-word", "carrier-tag-width"}
+
 
 def test_every_baseline_case_is_still_an_evaluation_case():
     ids = {case.id for case in ev.CASES}
     before = [str(row["id"]) for row in fp.baseline()["before"]]
     assert len(before) == len(set(before)) == 178
     assert set(before) <= ids
-    assert ids - set(before) == {"report-hole-configuration"}
+    # Phase 134 added the nine cases of the carrier kind.
+    assert ids - set(before) == {"report-hole-configuration"} | _CARRIER
 
 
 def test_the_declared_causes_name_only_baseline_cases():
@@ -42,7 +47,8 @@ def test_the_stored_comparison_holds():
     assert report["cases"] == report["present"] == 178
     assert report["same_status"] == 178
     assert report["undeclared"] == ()
-    assert report["new_cases"] == ("report-hole-configuration",)
+    assert report["new_cases"] == tuple(sorted(
+        {"report-hole-configuration"} | _CARRIER))
     assert report["holds"] is True
 
 

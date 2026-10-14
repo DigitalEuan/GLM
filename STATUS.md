@@ -52,28 +52,21 @@ standing instruction; it is a row of the close checklist, `ITERATE.md` §4.1).
 
 **Starting a new round? Read [`ITERATE.md`](ITERATE.md) §0, then §2 below.**
 
-**Just closed: Phase 133** (the record is [`MASTER_PLAN.md`](MASTER_PLAN.md),
-"Phase 133"; the study is
-[`DESIGNED_SUBSTRATE_STUDY.md`](studies/DESIGNED_SUBSTRATE_STUDY.md), 7 of 8
-marks), the designed substrate — the owner's separate study of whether the
-Golay–Leech substrate is optimal for the GLM, brought in as
-`source_material/substrate_study/` and taken at the owner's request rather
-than from §2.1. `RequestProject/GLM/DesignedSubstrate.lean` proves, on the
-GLM's own code and for every 4,096-word design with any decoder, that none
-decodes correctly more often on the bit-flip channel (`golay_optimal`), that
-every one leaves at least 7,254,016 received words at distance 4 or more
-(`negative_space_floor_4096`), and that none correcting three flips corrects
-more than one sixth of the four-flip corruptions
-(`weight4_resolved_le_4096`); and it proves two new certified fork stages
-sound, a seven-bit sender tag (`tag_resolves`) and a soft certificate of
-radius 8 (`soft_certificate`, sharp). Measured: the tag resolves 680,064 of
-680,064 tied reads, 0 wrong, where the hard word alone resolves none; the
-certificate resolves every read of a gentle soft ensemble and refuses every
-read of K4b; the eight declared alternative codes each miscorrect 2,695 to
-4,480 four-flip corruptions silently, the GLM's code none. S7 was missed on a
-declaration that expected one sixth on a 64-codeword sample. **Before it,
-Phase 132** (7 of 9 marks): passes that print a counter, long output, and the
-diagnosis of a refusal.
+**Just closed: Phase 138** (the record is [`MASTER_PLAN.md`](MASTER_PLAN.md),
+"Phase 138"; the study is
+[`TOOL_VERDICTS_STUDY.md`](studies/TOOL_VERDICTS_STUDY.md), 6 of 6 marks),
+the three next steps §2.2 listed after Phase 137. A tool's yes/no answer is
+now a planner step (*is 0xff reachable from 0x0* is `False`, with the gate
+tool's proved reason); *if A, B, otherwise C* builds only the branch its test
+selects; *the first convergent of pi whose denominator is above 1000* is
+unrolled into checked steps with no iteration cap, admitted because a proved
+measure ends it (`search_terminates`). The classical closest-fraction theorem
+is proved (`RequestProject/GLM/NearestFraction.lean`:
+`nearest_fraction_candidates`), so `best approximation` checks a Farey
+certificate for every bound and the 20,000 bound (and the 10^12 one) is gone.
+Fresh held-out rewordings: 12 of 16 read, 12 right, 0 wrong; Phase 137's two
+misses now read. Verdict questions: 14 of 14.
+**Before it, Phase 137** (8 of 8 marks): tool values.
 
 ---
 
@@ -82,18 +75,18 @@ diagnosis of a refusal.
 | instrument | command | result |
 |---|---|---|
 | test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->5,397 tests across 181 of the 183 test files, 18,972 subtests, outside the document checks<!--/figure-->**, zero failures |
-| end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->179<!--/figure-->** cases — 0 confidently wrong, every refusal a `boundary` |
+| end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->188<!--/figure-->** cases — 0 confidently wrong, every refusal a `boundary` |
 | benchmark suites | `python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites |
 | capability probes | `python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 surprises |
-| Lean development | `lake build` (repository root) | <!--figure:lean-files-->205 Lean files<!--/figure-->, **0 `sorry`** |
+| Lean development | `lake build` (repository root) | <!--figure:lean-files-->210 Lean files<!--/figure-->, **0 `sorry`** |
 | corpus | `python3 -m glm_universal.corpus --check` | the tier contract, the coverage claim of `ENTRY.md`, every generated block and every derived cache |
 
 The package holds **<!--figure:registers-->8 registers<!--/figure-->** beside a 45-class comparison register,
-**<!--figure:query-kinds-->24 query kinds<!--/figure-->** one of which
+**<!--figure:query-kinds-->25 query kinds<!--/figure-->** one of which
 dispatches **<!--figure:report-subjects-->67 report subjects<!--/figure-->**, and 3 tasks. The Lean development is
 addressed declaration by declaration: `reasoning/lean_address.py` gives each of
-the <!--figure:lean-declarations-->5,067<!--/figure--> declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly <!--figure:lean-declarations-->5,067<!--/figure-->/<!--figure:lean-declarations-->5,067<!--/figure--> with 0 coordinate errors
+the <!--figure:lean-declarations-->5,167<!--/figure--> declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly <!--figure:lean-declarations-->5,167<!--/figure-->/<!--figure:lean-declarations-->5,167<!--/figure--> with 0 coordinate errors
 (`report lean`). The other forty-odd instruments, each with its command and its
 current figure, are the table in [`SYSTEM.md`](SYSTEM.md) §1.
 
@@ -123,6 +116,10 @@ record the round in `MASTER_PLAN.md`.
    first step of this item is a query kind that reads a carrier by its
    address; only then is there an answering path to guard
    ([`COUNTER_LASSO_STUDY.md`](studies/COUNTER_LASSO_STUDY.md) §0).
+   Phase 134's `carrier` kind reads a 24-bit Golay word, not a ladder
+   carrier, so this first step still stands; the carrier read is the pattern
+   it can follow ([`PROTECTED_TAG_STUDY.md`](studies/PROTECTED_TAG_STUDY.md)
+   §7.5).
 2. **The budget rule in the walk and the answering path** (left by Phase
    124). The walk's own reading (patience 40) certified 225 of 256 held-out
    deep holes, and `classify_carrier` still defaults to a patience of 60;
@@ -148,16 +145,44 @@ record the round in `MASTER_PLAN.md`.
 Each is a section a closed study ends on; any of them can be folded into a
 round from §2.1 or taken as a short round of its own.
 
-* **The designed substrate, the rest** (left by Phase 133). The sender-tag
-  and soft-certificate stages are measured beside the carried fork only: no
-  query kind reads a carrier together with its tag or a soft reading, and
-  adding one needs its own evaluation cases. A corrupted tag resolves 4.1 %
-  of tied reads wrongly, so the tag wants a small code of its own. The
-  certificate's acceptance rate is measured on declared ensembles, not on a
-  soft reading the GLM produces itself. The substrate study's other results
-  (the four-label mirror, the 86–128-value Golay tag, the Delsarte bound) are
-  cited, not re-proved.
-  [`DESIGNED_SUBSTRATE_STUDY.md`](studies/DESIGNED_SUBSTRATE_STUDY.md) §7.5.
+* **The connected machine, the rest** (left by Phases 136, 137 and 138).
+  Since Phase 138 a tool's verdict is a planner step, but only from the two
+  tools with a boolean figure (`gates`, `wiring`) and from any tool value by
+  equality; the ladder's relations and a law's fate are not yet verdicts. The
+  search reads one shape (the first convergent past a denominator bound,
+  whose measure is proved); a search without a proved measure — *the first
+  term of the continued fraction of X above 100* — waits for a proof, since
+  no cap is to be added. Four of the sixteen fresh rewordings are unread
+  (*the fraction closest to e with …*, *the kissing number of the
+  24-dimensional leech lattice*, *the number of norm 6 vectors in the leech
+  lattice*, *the minimum number of gate moves to go from …*); reading them
+  now would be a post-hoc fit, so a fresh held-out set comes first. The
+  primality step keeps a ceiling of 10^12. `tool wiring` names the 20
+  modules no question reaches, and the two ladder guards among them wait on
+  item 1 of §2.1.
+  [`TOOL_VERDICTS_STUDY.md`](studies/TOOL_VERDICTS_STUDY.md) §7,
+  [`CONNECTED_MACHINE_TWO_STUDY.md`](studies/CONNECTED_MACHINE_TWO_STUDY.md)
+  §7.3.
+
+* **The designed substrate, the rest** (left by Phases 133, 134 and 135). The
+  `carrier` kind reads the stages and the protected tag, but the soft
+  certificate is reached only through a supplied soft reading: its acceptance
+  rate on a soft reading the GLM produces itself is not measured, because the
+  GLM produces none yet. The carrier read carries no guard of its own beyond
+  the stages' assumptions: a fifteen-bit tag with three or more flipped bits
+  can mislead radius 2 (`tag15_three_flips_mislead`; 26,681 of 680,064 tied
+  reads with three consecutive flips, post hoc), and reading it at radius 1 instead never misleads on three
+  flips but corrects only one. Since Phase 135 the tag lengths are bounded:
+  the seven-bit tag is the shortest possible and the protected tags are the
+  shortest built on seven bits; a tag of another shape with 9–10 bits (one
+  flip) or 11–14 bits (two) is neither found nor excluded, and the search's
+  control never reached 15 bits, so a stronger search comes first
+  ([`SHORTEST_TAG_STUDY.md`](studies/SHORTEST_TAG_STUDY.md) §7.5). The substrate study's other results (the four-label
+  mirror, the 86–128-value Golay tag, the Delsarte bound) are cited, not
+  re-proved.
+  [`PROTECTED_TAG_STUDY.md`](studies/PROTECTED_TAG_STUDY.md) §7.5,
+  [`DESIGNED_SUBSTRATE_STUDY.md`](studies/DESIGNED_SUBSTRATE_STUDY.md) §7.5,
+  [`SHORTEST_TAG_STUDY.md`](studies/SHORTEST_TAG_STUDY.md) §7.5.
 
 * **Norm 256 and the hex colour, the rest** (left by Phase 127). `H16` is
   measured beside the ladder only; putting it into the answering path needs a

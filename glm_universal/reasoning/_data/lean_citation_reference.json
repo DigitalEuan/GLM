@@ -1,5 +1,5 @@
 {
-"constants": 12881,
+"constants": 13063,
 "graph": {
 "GLM.Address.Conflates": [
 "GLM.Address.Quantiser",
@@ -1054,6 +1054,37 @@
 "GLM.CelsiusRegister.register_strictly_increasing": [
 "GLM.CelsiusRegister.its90Celsius"
 ],
+"GLM.CertifiedStreams.cfPrefix": [],
+"GLM.CertifiedStreams.cfPrefix_between": [
+"GLM.CertifiedStreams.cfPrefix",
+"GLM.CertifiedStreams.cfPrefix_succ",
+"GLM.CertifiedStreams.fract_pos_of_prefix",
+"GLM.CertifiedStreams.step_between"
+],
+"GLM.CertifiedStreams.cfPrefix_certified": [
+"GLM.CertifiedStreams.cfPrefix",
+"GLM.CertifiedStreams.cfPrefix_between"
+],
+"GLM.CertifiedStreams.cfPrefix_succ": [
+"GLM.CertifiedStreams.cfPrefix"
+],
+"GLM.CertifiedStreams.cfPrefix_zero": [
+"GLM.CertifiedStreams.cfPrefix"
+],
+"GLM.CertifiedStreams.fract_pos_of_prefix": [
+"GLM.CertifiedStreams.cfPrefix"
+],
+"GLM.CertifiedStreams.gosper_emit_sound": [
+"GLM.CertifiedStreams.mobius_between"
+],
+"GLM.CertifiedStreams.mobius_between": [
+"GLM.CertifiedStreams.mobius_between_pos"
+],
+"GLM.CertifiedStreams.mobius_between_pos": [],
+"GLM.CertifiedStreams.sqrt2_interval_prefix": [
+"GLM.CertifiedStreams.cfPrefix"
+],
+"GLM.CertifiedStreams.step_between": [],
 "GLM.CitationScope.LName": [],
 "GLM.CitationScope.candidates": [
 "GLM.CitationScope.LName",
@@ -7015,6 +7046,20 @@
 "GLM.Golay24.bscWeight_antitone": [
 "GLM.Golay24.bscWeight"
 ],
+"GLM.Golay24.built_tag_floor": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Word",
+"GLM.Golay24.built_tag_packing",
+"GLM.Golay24.no_14_7_5",
+"GLM.Golay24.tag7_octads_onto",
+"GLM.Golay24.wt"
+],
+"GLM.Golay24.built_tag_packing": [
+"GLM.Golay24.card_small_sets",
+"GLM.Golay24.hammingNorm_indVec",
+"GLM.Golay24.indVec",
+"GLM.Golay24.indVec_injective"
+],
 "GLM.Golay24.bundleF2": [
 "GLM.Golay24.Word",
 "GLM.Golay24.candidates",
@@ -7257,10 +7302,12 @@
 "GLM.Golay24.pcDisj",
 "GLM.Golay24.small"
 ],
+"GLM.Golay24.card_small_sets": [],
 "GLM.Golay24.card_symmDiff_add_two_inter": [],
 "GLM.Golay24.card_symmDiff_eq": [
 "GLM.Golay24.Word"
 ],
+"GLM.Golay24.card_symmDiff_eq_sdiff": [],
 "GLM.Golay24.card_syn": [
 "GLM.Golay24.Syn"
 ],
@@ -7346,6 +7393,15 @@
 "GLM.Golay24.Syn",
 "GLM.Golay24.chi",
 "GLM.Golay24.ip"
+],
+"GLM.Golay24.close_pair_octad": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Word",
+"GLM.Golay24.golay_min_weight",
+"GLM.Golay24.golay_weight_mem",
+"GLM.Golay24.hdist",
+"GLM.Golay24.isCodeword_symmDiff",
+"GLM.Golay24.wt"
 ],
 "GLM.Golay24.closed_iff_affine": [
 "GLM.Golay24.IsAffine",
@@ -7917,6 +7973,7 @@
 "GLM.Golay24.tetrads",
 "GLM.Golay24.wt"
 ],
+"GLM.Golay24.first_moment": [],
 "GLM.Golay24.fiveSubsets": [
 "GLM.Golay24.Word"
 ],
@@ -8020,6 +8077,13 @@
 "GLM.Golay24.exists_encode",
 "GLM.Golay24.wt"
 ],
+"GLM.Golay24.hammingNorm_indVec": [
+"GLM.Golay24.indVec"
+],
+"GLM.Golay24.hammingNorm_parityExt": [
+"GLM.Golay24.parityExt",
+"GLM.Golay24.sum_eq_hammingNorm"
+],
 "GLM.Golay24.hammingWeight_indicator": [
 "GLM.Golay24.Word",
 "GLM.Golay24.indicator",
@@ -8085,6 +8149,11 @@
 "GLM.Golay24.Word",
 "GLM.Golay24.hdist"
 ],
+"GLM.Golay24.hdist_triangle": [
+"GLM.Golay24.Word",
+"GLM.Golay24.hdist",
+"GLM.Golay24.hdist_comm"
+],
 "GLM.Golay24.ind": [
 "GLM.Golay24.Word"
 ],
@@ -8112,6 +8181,10 @@
 "GLM.Golay24.Word",
 "GLM.Golay24.indQ",
 "GLM.Hull.indR"
+],
+"GLM.Golay24.indVec": [],
+"GLM.Golay24.indVec_injective": [
+"GLM.Golay24.indVec"
 ],
 "GLM.Golay24.ind_symmDiff": [
 "GLM.Golay24.Word",
@@ -8229,6 +8302,14 @@
 "GLM.Golay24.par",
 "GLM.Golay24.step",
 "GLM.Golay24.step_parity"
+],
+"GLM.Golay24.kernel_card_ge": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Word",
+"GLM.Golay24.card_codewords",
+"GLM.Golay24.codewords",
+"GLM.Golay24.isCodeword_symmDiff",
+"GLM.Golay24.mem_codewords"
 ],
 "GLM.Golay24.key": [
 "GLM.Golay24.Word",
@@ -8370,6 +8451,54 @@
 "GLM.Golay24.octads",
 "GLM.Golay24.through"
 ],
+"GLM.Golay24.mtag": [
+"GLM.Golay24.Word",
+"GLM.Golay24.mtagCol"
+],
+"GLM.Golay24.mtagCol": [],
+"GLM.Golay24.mtag_eq_of_cols": [
+"GLM.Golay24.Word",
+"GLM.Golay24.mtag",
+"GLM.Golay24.mtagCol",
+"GLM.Golay24.parityHom",
+"GLM.Golay24.tagCol",
+"GLM.Golay24.tagOf"
+],
+"GLM.Golay24.mtag_neg_self": [],
+"GLM.Golay24.mtag_resolves": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Word",
+"GLM.Golay24.encode",
+"GLM.Golay24.hdist",
+"GLM.Golay24.hdist_triangle",
+"GLM.Golay24.mtag",
+"GLM.Golay24.mtag_separation",
+"GLM.Golay24.wt"
+],
+"GLM.Golay24.mtag_separation": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Word",
+"GLM.Golay24.close_pair_octad",
+"GLM.Golay24.encode",
+"GLM.Golay24.exists_encode",
+"GLM.Golay24.hdist",
+"GLM.Golay24.mtag",
+"GLM.Golay24.mtag_neg_self",
+"GLM.Golay24.mtag_symmDiff",
+"GLM.Golay24.wt"
+],
+"GLM.Golay24.mtag_symmDiff": [
+"GLM.Golay24.Word",
+"GLM.Golay24.mtag",
+"GLM.Golay24.mtagCol",
+"GLM.Golay24.mtag_neg_self"
+],
+"GLM.Golay24.mtag_tagMasks": [
+"GLM.Golay24.Word",
+"GLM.Golay24.mtag",
+"GLM.Golay24.tagMasks",
+"GLM.Golay24.tagOf"
+],
 "GLM.Golay24.neg_self": [
 "GLM.Golay24.Syn"
 ],
@@ -8383,6 +8512,18 @@
 "GLM.Golay24.Word",
 "GLM.Golay24.hdist",
 "GLM.Golay24.negative_space_floor"
+],
+"GLM.Golay24.no_14_7_5": [
+"GLM.Golay24.hammingNorm_parityExt",
+"GLM.Golay24.no_even_15_7_6",
+"GLM.Golay24.parityExt",
+"GLM.Golay24.parityExt_add",
+"GLM.Golay24.suppV",
+"GLM.Golay24.suppV_add"
+],
+"GLM.Golay24.no_even_15_7_6": [
+"GLM.Golay24.card_symmDiff_eq_sdiff",
+"GLM.Golay24.first_moment"
 ],
 "GLM.Golay24.not_descend_five_pair": [
 "GLM.Golay24.CanDescend",
@@ -8398,6 +8539,21 @@
 "GLM.Golay24.octadB": [
 "GLM.Golay24.Word",
 "GLM.Golay24.octadA"
+],
+"GLM.Golay24.octadFree_avoiding_card_le": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Word",
+"GLM.Golay24.golay_min_weight",
+"GLM.Golay24.golay_weight_mem",
+"GLM.Golay24.two_mul_card_mem_le",
+"GLM.Golay24.wt"
+],
+"GLM.Golay24.octadFree_closed_card_le": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Word",
+"GLM.Golay24.octadFree_avoiding_card_le",
+"GLM.Golay24.two_mul_card_mem_le",
+"GLM.Golay24.wt"
 ],
 "GLM.Golay24.octad_min_tax": [
 "GLM.Calibration.codewordTax",
@@ -8480,6 +8636,11 @@
 "GLM.Golay24.col",
 "GLM.Golay24.par"
 ],
+"GLM.Golay24.parityExt": [],
+"GLM.Golay24.parityExt_add": [
+"GLM.Golay24.parityExt"
+],
+"GLM.Golay24.parityHom": [],
 "GLM.Golay24.parity_conservation": [
 "GLM.Golay24.card_symmDiff_add_two_inter"
 ],
@@ -8518,6 +8679,33 @@
 "GLM.Golay24.prob_unif_subcritical",
 "GLM.Golay24.unif"
 ],
+"GLM.Golay24.protected_tag_floors": [
+"GLM.Golay24.encode",
+"GLM.Golay24.mtag",
+"GLM.Golay24.tag_length_floor",
+"GLM.Golay24.wt"
+],
+"GLM.Golay24.protected_tags_shortest_of_shape": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Word",
+"GLM.Golay24.built_tag_floor",
+"GLM.Golay24.encode",
+"GLM.Golay24.mtag",
+"GLM.Golay24.parityHom",
+"GLM.Golay24.selMat",
+"GLM.Golay24.selRows11",
+"GLM.Golay24.selRows15",
+"GLM.Golay24.tag11_built",
+"GLM.Golay24.tag11_octad_weight",
+"GLM.Golay24.tag15_built",
+"GLM.Golay24.tag15_octad_weight",
+"GLM.Golay24.tag7_ne",
+"GLM.Golay24.tagMasks11",
+"GLM.Golay24.tagMasks15",
+"GLM.Golay24.tagOf",
+"GLM.Golay24.tagOf_symmDiff",
+"GLM.Golay24.wt"
+],
 "GLM.Golay24.relaxSet": [
 "GLM.Golay24.Word",
 "GLM.Golay24.syn",
@@ -8542,6 +8730,9 @@
 "GLM.Golay24.energy_eq_zero_iff",
 "GLM.Golay24.flip"
 ],
+"GLM.Golay24.selMat": [],
+"GLM.Golay24.selRows11": [],
+"GLM.Golay24.selRows15": [],
 "GLM.Golay24.sextetOf": [
 "GLM.Golay24.Syn",
 "GLM.Golay24.Word",
@@ -8593,6 +8784,24 @@
 "GLM.Golay24.tetrad_class_card",
 "GLM.Golay24.tetrads",
 "GLM.Golay24.ties_pairwise_disjoint_diffs",
+"GLM.Golay24.wt"
+],
+"GLM.Golay24.short_mtag_kills_octad": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Word",
+"GLM.Golay24.mtag",
+"GLM.Golay24.mtag_symmDiff",
+"GLM.Golay24.short_tag_kills_octad",
+"GLM.Golay24.wt"
+],
+"GLM.Golay24.short_tag_kills_octad": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Word",
+"GLM.Golay24.codewords",
+"GLM.Golay24.isCodeword_symmDiff",
+"GLM.Golay24.kernel_card_ge",
+"GLM.Golay24.mem_codewords",
+"GLM.Golay24.octadFree_avoiding_card_le",
 "GLM.Golay24.wt"
 ],
 "GLM.Golay24.single_candidate_card": [
@@ -8734,6 +8943,7 @@
 "GLM.Golay24.cosetWt_le_four",
 "GLM.Golay24.coset_census"
 ],
+"GLM.Golay24.sum_eq_hammingNorm": [],
 "GLM.Golay24.sum_inside_split": [
 "GLM.Golay24.Word",
 "GLM.Golay24.hdist"
@@ -8756,6 +8966,10 @@
 ],
 "GLM.Golay24.supp": [
 "GLM.Golay24.Syn"
+],
+"GLM.Golay24.suppV": [],
+"GLM.Golay24.suppV_add": [
+"GLM.Golay24.suppV"
 ],
 "GLM.Golay24.supp_add": [
 "GLM.Golay24.Syn",
@@ -8885,10 +9099,145 @@
 "GLM.Golay24.syn",
 "GLM.Golay24.syn_symmDiff"
 ],
+"GLM.Golay24.tag11_built": [
+"GLM.Golay24.Word",
+"GLM.Golay24.mtag",
+"GLM.Golay24.mtagCol",
+"GLM.Golay24.mtag_eq_of_cols",
+"GLM.Golay24.parityHom",
+"GLM.Golay24.selMat",
+"GLM.Golay24.selRows11",
+"GLM.Golay24.tagCol",
+"GLM.Golay24.tagMasks11",
+"GLM.Golay24.tagOf"
+],
+"GLM.Golay24.tag11_corrects_one": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Word",
+"GLM.Golay24.hdist",
+"GLM.Golay24.hdist_triangle",
+"GLM.Golay24.mtag",
+"GLM.Golay24.mtag_separation",
+"GLM.Golay24.tag11_octad_weight",
+"GLM.Golay24.tagMasks11"
+],
+"GLM.Golay24.tag11_octad_weight": [
+"GLM.Golay24.encode",
+"GLM.Golay24.mtag",
+"GLM.Golay24.tagMasks11",
+"GLM.Golay24.wt"
+],
+"GLM.Golay24.tag15_built": [
+"GLM.Golay24.Word",
+"GLM.Golay24.mtag",
+"GLM.Golay24.mtagCol",
+"GLM.Golay24.mtag_eq_of_cols",
+"GLM.Golay24.parityHom",
+"GLM.Golay24.selMat",
+"GLM.Golay24.selRows15",
+"GLM.Golay24.tagCol",
+"GLM.Golay24.tagMasks15",
+"GLM.Golay24.tagOf"
+],
+"GLM.Golay24.tag15_corrects_two": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Word",
+"GLM.Golay24.hdist",
+"GLM.Golay24.hdist_triangle",
+"GLM.Golay24.mtag",
+"GLM.Golay24.mtag_separation",
+"GLM.Golay24.tag15_octad_weight",
+"GLM.Golay24.tagMasks15"
+],
+"GLM.Golay24.tag15_octad_weight": [
+"GLM.Golay24.encode",
+"GLM.Golay24.mtag",
+"GLM.Golay24.tagMasks15",
+"GLM.Golay24.wt"
+],
+"GLM.Golay24.tag15_radius_one_safe": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Word",
+"GLM.Golay24.hdist",
+"GLM.Golay24.hdist_triangle",
+"GLM.Golay24.mtag",
+"GLM.Golay24.mtag_separation",
+"GLM.Golay24.tag15_octad_weight",
+"GLM.Golay24.tagMasks15"
+],
+"GLM.Golay24.tag15_three_flips_mislead": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Syn",
+"GLM.Golay24.Word",
+"GLM.Golay24.hdist",
+"GLM.Golay24.isCodeword_empty",
+"GLM.Golay24.mtag",
+"GLM.Golay24.syn",
+"GLM.Golay24.tagMasks15"
+],
+"GLM.Golay24.tag7_ne": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Word",
+"GLM.Golay24.encode",
+"GLM.Golay24.exists_encode",
+"GLM.Golay24.tagOf",
+"GLM.Golay24.tag_nonzero_on_octads",
+"GLM.Golay24.wt"
+],
+"GLM.Golay24.tag7_octads_onto": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Word",
+"GLM.Golay24.card_codewords",
+"GLM.Golay24.codewords",
+"GLM.Golay24.isCodeword_symmDiff",
+"GLM.Golay24.mem_codewords",
+"GLM.Golay24.octadFree_closed_card_le",
+"GLM.Golay24.tag7_value_is_octad_value",
+"GLM.Golay24.wt"
+],
+"GLM.Golay24.tag7_one_flip_misleads": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Syn",
+"GLM.Golay24.Word",
+"GLM.Golay24.hdist",
+"GLM.Golay24.isCodeword_empty",
+"GLM.Golay24.syn",
+"GLM.Golay24.tagOf"
+],
+"GLM.Golay24.tag7_shortest": [
+"GLM.Golay24.encode",
+"GLM.Golay24.mtag",
+"GLM.Golay24.mtag_tagMasks",
+"GLM.Golay24.tagMasks",
+"GLM.Golay24.tagOf",
+"GLM.Golay24.tag_length_floor",
+"GLM.Golay24.tag_nonzero_on_octads",
+"GLM.Golay24.wt"
+],
+"GLM.Golay24.tag7_value_is_octad_value": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Word",
+"GLM.Golay24.codewords",
+"GLM.Golay24.isCodeword_symmDiff",
+"GLM.Golay24.kernel_card_ge",
+"GLM.Golay24.mem_codewords",
+"GLM.Golay24.octadFree_closed_card_le",
+"GLM.Golay24.wt"
+],
 "GLM.Golay24.tagCol": [
 "GLM.Golay24.tagMasks"
 ],
 "GLM.Golay24.tagMasks": [],
+"GLM.Golay24.tagMasks11": [],
+"GLM.Golay24.tagMasks11_prefix": [
+"GLM.Golay24.tagMasks",
+"GLM.Golay24.tagMasks11"
+],
+"GLM.Golay24.tagMasks15": [],
+"GLM.Golay24.tagMasks15_prefix": [
+"GLM.Golay24.tagMasks",
+"GLM.Golay24.tagMasks15"
+],
 "GLM.Golay24.tagOf": [
 "GLM.Golay24.Word",
 "GLM.Golay24.tagCol"
@@ -8898,6 +9247,30 @@
 "GLM.Golay24.tagCol",
 "GLM.Golay24.tagOf",
 "GLM.Golay24.tag_neg_self"
+],
+"GLM.Golay24.tag_flags_miscorrection": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Word",
+"GLM.Golay24.encode",
+"GLM.Golay24.hdist",
+"GLM.Golay24.hdist_triangle",
+"GLM.Golay24.mtag",
+"GLM.Golay24.mtag_separation",
+"GLM.Golay24.mtag_tagMasks",
+"GLM.Golay24.tagMasks",
+"GLM.Golay24.tagOf",
+"GLM.Golay24.tag_nonzero_on_octads",
+"GLM.Golay24.wt"
+],
+"GLM.Golay24.tag_length_floor": [
+"GLM.Golay24.IsCodeword",
+"GLM.Golay24.Word",
+"GLM.Golay24.encode",
+"GLM.Golay24.exists_encode",
+"GLM.Golay24.mtag",
+"GLM.Golay24.mtag_symmDiff",
+"GLM.Golay24.short_tag_kills_octad",
+"GLM.Golay24.wt"
 ],
 "GLM.Golay24.tag_neg_self": [],
 "GLM.Golay24.tag_nonzero_on_octads": [
@@ -9034,6 +9407,9 @@
 "GLM.Golay24.Word",
 "GLM.Golay24.tdiff",
 "GLM.Golay24.tsum"
+],
+"GLM.Golay24.two_mul_card_mem_le": [
+"GLM.Golay24.Word"
 ],
 "GLM.Golay24.unif": [
 "GLM.Golay24.Law",
@@ -22836,5 +23212,5 @@
 "GLM.w2": []
 },
 "schema": 1,
-"tree_digest": "8c7283784f341c15a4fc15e31016bdbb4e42a3e462b545122ea53540776f5ee7"
+"tree_digest": "329c0abbf03ded1fee707017bc7c2dc47f207e14a0da395ebd0fcc4dcb576116"
 }

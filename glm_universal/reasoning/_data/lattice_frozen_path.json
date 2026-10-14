@@ -1,5 +1,14 @@
 {
  "new_cases": [
+  "carrier-clean",
+  "carrier-flagged",
+  "carrier-not-a-word",
+  "carrier-protected-tag",
+  "carrier-soft",
+  "carrier-tag",
+  "carrier-tag-width",
+  "carrier-tie",
+  "carrier-two-flips",
   "report-hole-configuration"
  ],
  "rows": [
@@ -519,11 +528,11 @@
   {
    "after_ok": false,
    "before_ok": false,
-   "cause": null,
+   "cause": "Phase 134: the list of query kinds the refusal names gains 'carrier'",
    "id": "unknown-nonsense",
    "present": true,
    "same_status": true,
-   "same_text": true
+   "same_text": false
   },
   {
    "after_ok": true,
@@ -1606,5 +1615,5 @@
    "same_text": true
   }
  ],
- "source_digest": "6a7f00e7fc855c0e188251e20af36359baf295003332b565b8b776727285bb42"
+ "source_digest": "abaf4656b4671a1b3196d0de232233971a2dae8b56f69f17b8d4bb46bfa8ab57"
 }

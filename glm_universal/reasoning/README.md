@@ -7,7 +7,7 @@
 
 **Verdict.** Everything is exact `int` / `fractions.Fraction` / `F_2`; nothing here imports `random`.
 
-**Deciding figure.** 175 modules, one frozen data file, and a runnable audit.
+**Deciding figure.** 176 modules, one frozen data file, and a runnable audit.
 
 **Recomputed by.** `glm_universal.reasoning.reasoning_report`
 
@@ -16,7 +16,7 @@
 **Parent:** [`../README.md`](../README.md) · **Repository root:**
 [`../../README.md`](../../README.md)
 
-**Status: implemented (GLM-3+ Step 3, extended since).** **175 modules**, one
+**Status: implemented (GLM-3+ Step 3, extended since).** **176 modules**, one
 frozen data file,
 and a runnable audit. Everything is exact `int` / `fractions.Fraction` /
 `F_2`; nothing here imports `random`; nothing here imports a third-party
@@ -1057,3 +1057,28 @@ and the sine integral — states the account it asks for as refused
 and carries a column-3 script that embeds the rows it read. Framed by
 `runtime/explanation_frames.py`, after the meta frames; `tools explanations`;
 proved facts in `RequestProject/GLM/ExplanationAnchors.lean`.
+
+## `carrier_read.py` — the carrier read and the protected tag
+
+Phase 134
+([`../../../studies/PROTECTED_TAG_STUDY.md`](../../../studies/PROTECTED_TAG_STUDY.md)):
+the `carrier` query kind reads a 24-bit word through the carried fork and the
+stages the request supplies information for, answering only when one
+candidate survives and refusing an open tie or a contradicted read. A tag
+written beside the word separates every pair of octads at least as far as
+the least tag weight over their symmetric difference: the seven-bit tag
+corrects no flipped bit, the fifteen-bit tag (a `[15,7,5]` BCH code) corrects
+two, and an intact tag disagrees with every wrong decode on up to seven
+flips. `tools protected-tag`; proved facts in
+`RequestProject/GLM/ProtectedTag.lean`.
+
+## `shortest_tag.py` — how many tag bits a tie needs
+
+Phase 135
+([`../../../studies/SHORTEST_TAG_STUDY.md`](../../../studies/SHORTEST_TAG_STUDY.md)):
+the proved floors on a tag's length (`D + 6` bits for octad tag weight `D`;
+7, 11 and 15 bits for tags built on seven bits), the census of the three tags
+in use and of the seven-bit tag's kernel, and a deterministic annealing search
+over the 4,095 nonzero tag functionals for a tag in the gap between the
+floors. `tools shortest-tag`; proved facts in
+`RequestProject/GLM/ShortestTag.lean`.

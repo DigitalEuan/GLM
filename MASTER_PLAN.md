@@ -5,7 +5,7 @@
 
 **Question.** What has each phase of the wiring plan delivered, and what does the next round start from?
 
-**Verdict.** Phase 133 (the designed substrate: the owner's separate study of whether the Golay–Leech substrate is optimal for the GLM, brought in — the GLM's own Lean development now proves that no 4,096-word design with any decoder decodes correctly more often than its Golay code on the bit-flip channel, that the six-way tie's negative space and its one-sixth cap belong to the parameters, and that a seven-bit sender tag and a soft certificate are sound new fork stages; measured, the tag resolves every one of 680,064 tied reads with 0 wrong; 7 of 8 marks, S7 missed on a wrongly declared sample figure) is closed, after Phase 132 (passes that print a counter, long output and the diagnosis of a refusal; 7 of 9 marks) and Phase 131 (constant bounds and repeated output; 6 of 7 marks); Phase 134 starts from the To-Do list in [`STATUS.md`](STATUS.md) §2. Round 9's remaining retrieval items are parked at the owner's direction.
+**Verdict.** Phase 138 (tool verdicts: a tool's yes/no answer is a stepwise step, a conditional builds only the branch its test selects, and the first convergent past a denominator bound is found by an unrolled search with no iteration cap, ended by a proved measure; the classical closest-fraction theorem is proved in `NearestFraction.lean`, so `best approximation` checks a Farey certificate for every bound and the 20,000 bound is gone; 6 of 6 marks) is closed, after Phase 137 (tool values; 8 of 8 marks) and Phase 136 (the connected machine, second pass; 8 of 8 marks); Phase 139 starts from the To-Do list in [`STATUS.md`](STATUS.md) §2.
 
 **Deciding figure.** Every closed phase names what was built, where it lives, and how to see it recompute itself.
 
@@ -24,8 +24,8 @@ addressing. Each item says what was built, where it lives, and how to see it
 recompute itself.
 
 Everything below is reachable from the package's public API and from the query
-runtime — **<!--figure:query-kinds-->24 query kinds<!--/figure-->**, **<!--figure:report-subjects-->67 report subjects<!--/figure-->** and **<!--figure:registers-->8 registers<!--/figure-->** — is
-covered by the test suite (<!--figure:test-files-->183 test files<!--/figure-->),
+runtime — **<!--figure:query-kinds-->25 query kinds<!--/figure-->**, **<!--figure:report-subjects-->67 report subjects<!--/figure-->** and **<!--figure:registers-->8 registers<!--/figure-->** — is
+covered by the test suite (<!--figure:test-files-->188 test files<!--/figure-->),
 and — where it is a report or a task — has a generated column-3 script that
 recomputes the claim in a **fresh interpreter** and fails if anything differs.
 
@@ -182,6 +182,259 @@ written.  A phase is a record of a round, so it is archived by the same rule
 as everything else: only the open phase is state.
 
 ---
+
+## Phase 138 — tool verdicts, and the nearest fraction without a bound
+
+**Status: closed this session.** Taken from `STATUS.md` §2.2, *the connected
+machine, the rest*: its three next steps (a tool's yes/no answer in the
+planner; Phase 137's two unread phrasings, after a fresh held-out set; the
+classical closest-fraction theorem in Lean, so that the 20,000 bound can go).
+The study is
+[`studies/TOOL_VERDICTS_STUDY.md`](studies/TOOL_VERDICTS_STUDY.md) (6 of 6
+marks; both held-out sets were written and committed before any reader of
+the round existed, and run once as a baseline). Tests:
+`tests/test_tool_verdicts.py` (19).
+
+**What was built.**
+* `RequestProject/GLM/NearestFraction.lean` (no `sorry`, standard axioms):
+  `farey_denominator`, `endpoint_nearest`, `farey_certificate`,
+  `complete_quotient`, `conv_denominators`, `between_candidates`,
+  `nearest_fraction_candidates` (the classical theorem),
+  `conv_denominators_fib`, `search_terminates`.
+* `reasoning/rational_approx.py`: `farey_certificate`, checked on every
+  answer of `best_approximation`; `EXHAUSTIVE_CAP`, `MAX_DENOMINATOR` and an
+  undeclared 400-term cap removed. `runtime/toolbox.py`: the tool's answer
+  states the certificate.
+* `runtime/tool_values.py`: `read_verdict`, `decide`, `verdict_of_figures`;
+  the value patterns widened by the two rules Phase 137's misses call for
+  (*partial quotient* names a term by itself; a convergent may be numbered).
+* `runtime/stepwise.py`: verdict, conditional (`choose`) and unrolled search
+  readings;
+  `reasoning/stepwise_script.py`: the `choose` and `first` step forms, their
+  readers and recomputation, and the column-3 script's own versions.
+* `evaluation/tool_verdicts_cases.py` and `tools tool-verdicts`.
+
+**Measured.** 14 of 14 verdict questions; 12 of 12 chains verified, 53 of 53
+mutants caught; fresh rewordings 12 of 16 right, 0 wrong (6 before the
+round), Phase 137's two misses now right; 0 of 404 declared texts read, 0 of
+30 stepwise cases moved; the certificate agrees with the exhaustive search on
+100 of 100 grid cases and certifies 25 of 25 bounds up to 10^60. The full
+evaluation passes 188 of 188 after re-pinning `report-relay` and
+`report-anonymous` (goal-query set 856 -> 860 with the new Lean file).
+
+**Left.** See `STATUS.md` §2.2, *the connected machine, the rest*.
+
+---
+
+## Phase 137 — tool values: a tool's answer handed to the planner as a number
+
+**Status: closed this session.** Taken from `STATUS.md` §2.2, *the connected
+machine, the rest* (its first sentence), at the owner's instruction to widen
+the GLM's reasoning. The study is
+[`studies/TOOL_VALUES_STUDY.md`](studies/TOOL_VALUES_STUDY.md) (8 of 8 marks;
+the held-out rewordings were written before they were run, the other
+batteries after the tools had been tried by hand, and two changes made after
+the first measurement are disclosed in its §5.2–5.3). Tests:
+`tests/test_tool_values.py` (15).
+
+**What was built.**
+* `runtime/tool_values.py`: ten noun-phrase patterns naming one number a
+  tool computes (a continued-fraction term or fold, a convergent or its
+  parts, the nearest fraction under a denominator bound, a gate distance, the
+  kissing number, a Leech shell count, a moonshine dimension), each with a
+  selector over the tool's figures.
+* `runtime/stepwise.py`: `Leaves._tool_value`, consulted only for a part the
+  typed planner refused (or answered with a number the chain cannot
+  re-derive, and then only if the two agree); the step is an ordinary
+  `planned` step through the step gate, and the column-3 script
+  (`stepwise_script.tool_value`) re-runs the tool and the selector in a fresh
+  interpreter. `stepwise.TOOL_VALUES` is the round's switch.
+* `runtime/router.py`: a question that is one tool value is answered after
+  every surface refused, under Phase 136's keep-only-if-answered rule.
+* `reasoning/rational_approx.py` and two tools, `convergent` and
+  `best approximation`; the latter is checked by an exhaustive search over
+  every denominator (no continued fractions) up to 20,000.
+* `RequestProject/GLM/ToolValues.lean` (no `sorry`, standard axioms only):
+  `select_certified`, `fold_certified` (selecting from a certified prefix is
+  sound); `conv_append`, `conv_det`, `conv_coprime`, `cfValue_eq_conv` (the
+  convergent recurrence gives the finite expansion's value in lowest terms);
+  `closer_iff_midpoint`, `nearer_of_margin`, `farther_than_candidate` (the
+  nearer-fraction rule and the exhaustive check's soundness).
+
+**Measured.** V1 the Lean file; V2 17 of 17 composed questions as declared
+(13 answered, 4 refused); V3 13 of 13 chains verified in a fresh interpreter,
+65 of 65 mutants caught; V4 136 of 136 surd and 14 of 14 pi convergents
+against independent references; V5 100 of 100 nearest fractions equal to the
+exhaustive search; V6 0 of 404 declared texts read, 0 of 30 stepwise cases
+moved; V7 8 of 8 single values; V8 10 of 12 held-out rewordings read, 10
+right, 0 wrong (three sheet values were wrong by hand and are re-derived
+independently). The evaluation still passes 188 of 188.
+
+**What it answers.** Under directive D15: **derivation** (answers composed
+from tool values that no register or single tool holds; an optimum over a
+finite set, certified by exhaustion) and **refusal** (a tool's refusal
+propagates by name through every reading that needs it).
+
+## Phase 136 — the connected machine, second pass: every reasoning module reached, or declared not to be
+
+**Status: closed this session.** Not taken from a To-Do line: the owner's
+instruction for the run was to tie loose ends together, so that experiments
+that had been run and measured could be used by the GLM. The study is
+[`studies/CONNECTED_MACHINE_TWO_STUDY.md`](studies/CONNECTED_MACHINE_TWO_STUDY.md)
+(8 of 8 marks; the marks were fixed after the tools had been tried by hand and
+before the measurement, with that order disclosed). Tests:
+`tests/test_connected_two.py` (15).
+
+**The census.** The closure of the answering path (`glm_universal.runtime`)
+reached 153 of the 177 reasoning modules; 24 were reached only by the
+measurement command line or by each other.
+
+**What was built.**
+* `RequestProject/GLM/CertifiedStreams.lean` (no `sorry`, standard axioms
+  only): a value inside an interval whose ends share `n` continued-fraction
+  terms shares them (`cfPrefix_between`, `cfPrefix_certified`); Gosper's
+  emission rule is sound for every tail `t ≥ 1` (`mobius_between`,
+  `gosper_emit_sound`); a worked instance for `√2`.
+* Six toolbox tools (`runtime/toolbox.py`): `continued fraction`, `mobius`,
+  `bind`, `gates`, `tag length`, `wiring`; the law register answers the
+  triage fate of the 106 unresolved laws. `substrate_cognition.cf_certified`
+  is the capped form of `cf_terms`, which looped for ever on a rational
+  written as an expression.
+* Eleven English openings (`toolbox.TOOL_PHRASES`), read by the router
+  (`router._phrased_tool`) and the command line (`GLM.py`, `_print_phrased`)
+  only after the planner, the grammar and the stepwise planner refused, and
+  kept only if the tool answers.
+* `toolbox.wiring_census` and `toolbox.MEASUREMENT_ONLY`: 157 of 177 modules
+  reached, the other 20 declared measurement-only with their reasons; the
+  test fails on an
+  undeclared or stale entry. `tools connected-two` prints the marks.
+
+**Measured.** W1 census clean; W2 the Lean file; W3 43 of 43 surds, pi, e and
+phi against independent references; W4 12 of 12 Möbius transforms against
+the integer recurrence for quadratic irrationals, and against the direct
+expansion; W5 six rationals written as expressions, every emitted term
+correct and none reported complete; W6 0 of 404 declared texts match an
+opening; W7 20 of 20 phrased questions as declared (14 answered, 6 refused);
+W8 21 of 21 tool questions as declared, gate certificate equal to search on
+48 of 48 pairs. The evaluation still passes 188 of 188.
+
+**What it answers.** Under directive D15: **derivation** (continued-fraction
+terms, transformed expansions and gate distances, none held by a register),
+**refusal** (the certified prefix of a value whose expansion ends, and a
+refusal for the rest), and **addressing** of a refused English question to
+the tool that answers it.
+
+## Phase 135 — the shortest tag: how many tag bits a tie needs
+
+**Status: closed this session.** Taken from `STATUS.md` §2.2, "The designed
+substrate, the rest": "tags shorter than eleven or fifteen bits were not
+searched for". The pre-registration
+([`studies/SHORTEST_TAG_STUDY.md`](studies/SHORTEST_TAG_STUDY.md) §§0–6:
+marks S1–S6) was committed after the Lean file and the module were written
+and before the module's search was read, with a prototype search disclosed.
+**5 of 6 marks were met**; S5 was missed on the search's own control (below).
+Tests: `tests/test_shortest_tag.py` (9).
+
+**What was built.**
+* `RequestProject/GLM/ShortestTag.lean` (no `sorry`; `native_decide` only in
+  the two column checks and through the octad checks of Phases 133–134). The
+  Plotkin step: a closed, octad-free set of codewords avoiding one coordinate
+  has at most 24 words (`octadFree_avoiding_card_le`); an additive tag of at
+  most six bits therefore sends some octad to zero
+  (`short_tag_kills_octad`), and octad tag weight `≥ D` needs `D + 6` bits
+  (`tag_length_floor`), so the seven-bit tag is the shortest that resolves
+  every tie (`tag7_shortest`). A seven-bit tag nonzero on octads takes all 127
+  values on them (`tag7_octads_onto`), so a tag built on it is a `[r, 7, D]`
+  code: `r ≥ 11` for `D = 3` by sphere packing, `r ≥ 15` for `D = 5`
+  (`no_14_7_5`, by the parity extension, a nine-position residual and the
+  first moment) (`built_tag_floor`). Both protected tags are of that shape
+  (`tag11_built`, `tag15_built`), hence the shortest of it
+  (`protected_tags_shortest_of_shape`).
+* `reasoning/shortest_tag.py`: the floors, the census of the constructions
+  and the kernel, a deterministic annealing search over the 4,095 nonzero tag
+  functionals, the marks and `shortest_tag_report`; `tools shortest-tag
+  [--moves N] [--json]`.
+
+**Measured.** S2: least octad weight 1, 3, 5 at 7, 11, 15 bits, both
+protected tags built on the seven tag bits with the Lean file's selector
+rows. S3: the seven-bit tag's kernel is 32 codewords, no octad, at most 16
+avoiding a coordinate (cap 24). S4: all 127 nonzero values taken, each by 3
+or 6 octads. S5 (control, 2,000,000 proposals, three seeds): 7 bits found by
+3 seeds, 11 bits by 2, 15 bits by **none** — missed. S6 (gap): least deficit
+35 and 9 at 9 and 10 bits for `D = 3`; 179, 99, 45 and 15 at 11–14 bits for
+`D = 5`. Every tag the control found has rank 7.
+
+**What it answers.** The lengths of the GLM's three tags are now derived from
+proved bounds: the seven-bit tag is minimal among all parity tags, and the
+protected tags are minimal among tags of their shape. Whether a tag of
+another shape fills the gap (9–10 bits for one flip, 11–14 for two) is open;
+the search is evidence for one flip and weak for two. Under directive D15 it
+moves **derivation**; no answer the evaluation pins changed.
+
+## Phase 134 — the carrier read and the protected tag
+
+**Status: closed this session.** Taken from `STATUS.md` §2.2, the first two
+parts of "The designed substrate, the rest": no query kind read a carrier, so
+Phase 133's sender-tag and soft-certificate stages were reached from no
+question; and a tag with one bit flipped resolved 28,096 tied reads wrongly.
+The pre-registration
+([`studies/PROTECTED_TAG_STUDY.md`](studies/PROTECTED_TAG_STUDY.md) §§0–6:
+marks P1–P7) was committed after the Lean file and the module were written and
+before any mark was run, with that order disclosed. **6 of 7 marks were met**;
+P5 was missed on a declared flip pattern (below). Tests:
+`tests/test_carrier_read.py` (10).
+
+**What was built.**
+* `RequestProject/GLM/ProtectedTag.lean` (no `sorry`; `native_decide` for the
+  two octad-weight checks and the witnesses): a tag of parity masks is linear
+  (`mtag_symmDiff`); two distinct codewords at most 11 apart differ by an
+  octad (`close_pair_octad`); so if every octad's tag has weight at least `D`
+  the tags of two such codewords are `D` apart through any received tag
+  (`mtag_separation`), and a stage of radius `s` with `2s < D` keeps at most
+  one candidate of a fork (`mtag_resolves`). The seven-bit tag has an octad of
+  tag weight 1, and one flip can name the wrong candidate exactly
+  (`tag7_one_flip_misleads`); an intact seven-bit tag disagrees with every
+  wrong codeword within 4 of a read of a carrier with up to seven flips
+  (`tag_flags_miscorrection`). The protected tags keep the seven bits and
+  append the parities of the shortened Hamming `[11,7,3]` code
+  (`tagMasks11`, octad weight ≥ 3, `tag11_corrects_one`) or the `[15,7,5]`
+  BCH code (`tagMasks15`, ≥ 5, `tag15_corrects_two`,
+  `tag15_radius_one_safe`), with radius 2 sharp
+  (`tag15_three_flips_mislead`).
+* `reasoning/carrier_read.py`: the protected-tag stage over
+  `carried_fork.CarriedFork`, the request grammar, `read_carrier`, the marks
+  and `protected_tag_report`; `tools protected-tag [--json]`.
+* The `carrier` query kind (`runtime/parser.py`, start-only openings
+  `carrier`, `read carrier`, `decode carrier`), its solver in
+  `runtime/session.py` and its column-3 template in `runtime/tct_engine.py`,
+  which re-reads the word by brute force over all 4,096 codewords and
+  re-witnesses that a tie with nothing to resolve it stays six-way; nine
+  evaluation cases (five answers, four `boundary` refusals).
+
+**Measured.** P2: the masks equal the Lean file's and begin with the
+seven-bit tag; least octad tag weight 1 (42 octads), 3 (78), 5 (108). P3: on
+the 680,064 tied reads the fifteen-bit tag at radius 2 with up to two flipped
+tag bits and the eleven-bit tag at radius 1 with up to one each resolve every
+read, 0 wrong. P4: the seven-bit tag with one flip answers 28,096 wrongly and
+contradicts 651,968, reproducing Phase 133's control. P5: three flips at the
+declared positions `i, i+5, i+10 (mod 15)` never mislead radius 2 — every read
+is contradicted — so the mark, which expected at least one wrong answer, is
+missed; radius 1 is never wrong, as proved. Post hoc, three consecutive flips
+mislead radius 2 on 26,681 of the 680,064 reads, as
+`tag15_three_flips_mislead` allows. P6: on 523,204 reads with five, six or
+seven flips (every error of those weights once, spread over the 64 probe
+codewords) the decoder alone answers 409,860 wrongly; the intact seven-bit tag
+and the fifteen-bit tag with up to two flips answer none wrongly — every read
+is refused. P7: the nine declared questions came out as declared.
+
+**What it answers.** The GLM can now be asked about a carrier, and the
+substrate's tie and its silent miscorrections are both visible in its
+answers: a tie is refused by name, a tag resolves it, a protected tag
+resolves it through two flipped bits, and a tag turns a wrong decode on heavy
+corruption into a refusal. Under directive D15 it moves **derivation** (an
+answer no register holds, computed from the word and the tag) and
+**refusal** (409,860 wrong answers of the decoder alone become refusals when
+a tag is supplied).
 
 ## Phase 133 — the designed substrate: is the Golay carrier optimal, and what resolves its ties?
 

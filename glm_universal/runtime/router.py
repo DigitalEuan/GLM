@@ -214,6 +214,11 @@ def route(session, text: str) -> Routed:
         sol, refused = None, exc
     if refused is not None or sol is None:
         stepped = _stepwise(session, text)
+        if stepped is not None and stepped.answered:
+            return stepped
+        phrased = _phrased_tool(text)
+        if phrased is not None:
+            return phrased
         if stepped is not None:
             return stepped
     if sol is None:
@@ -254,6 +259,31 @@ def handed_surface(text: str, surface: str) -> str:
         return surface
     return "frames" if _handover(text, "reverse refused") is not None \
         else surface
+
+
+def _phrased_tool(text: str) -> Optional[Routed]:
+    """An English opening a tool answers (Phase 136): consulted only after
+    the planner, the grammar and the stepwise planner refused, and kept only
+    if the tool answers, so it never changes an answer and never replaces a
+    refusal with another refusal (:data:`toolbox.TOOL_PHRASES`)."""
+    asked = tb.phrase_tool(text)
+    if asked is None:
+        # Phase 137: a question that is one number a tool computes ("the
+        # fifth term of the continued fraction of e") is read by the tool
+        # values, under the same rule: kept only if the tool answers.
+        from . import tool_values as tv
+        read = tv.answer_text(text)
+        if read is None:
+            return None
+        said, value, got = read
+        return Routed("toolbox", True, f"{said} [read as `{value.tool_text}`"
+                      f" with selector {', '.join(map(str, value.selector))}]",
+                      payload=got, faculty="derive")
+    got = tb.run_tool(asked)
+    if not got.ok:
+        return None
+    return Routed("toolbox", True, f"{got.text} [read as `{asked}`]",
+                  payload=got, faculty="derive")
 
 
 def _stepwise(session, text: str) -> Optional[Routed]:

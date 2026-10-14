@@ -38,7 +38,7 @@ harness can be used as a gate.
 
 ## The question set
 
-`cases.py` holds **<!--figure:evaluation-cases-->179 CLI cases<!--/figure-->**. Between them they cover **all <!--figure:query-kinds-->24 query kinds<!--/figure-->**
+`cases.py` holds **<!--figure:evaluation-cases-->188 CLI cases<!--/figure-->**. Between them they cover **all <!--figure:query-kinds-->25 query kinds<!--/figure-->**
 the runtime recognises (including `unknown`, the kind a question gets when
 nothing else claims it) and **all <!--figure:report-subjects-->67 report subjects<!--/figure-->**. Coverage is not
 asserted in prose: `test_evaluation.py` compares `KINDS_COVERED` and

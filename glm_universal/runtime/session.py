@@ -629,6 +629,12 @@ class GeometricSession(SubstrateReports, LatticeGeometryReports,
             # it and a column gathered from two scales, and reports every
             # row that attains the end rather than picking one.
             "extremum": self._solve_extremum,      # uses cx.extremum
+            # Phase 134: one 24-bit carrier read through the carried fork and
+            # the stages the request supplies information for -- the first
+            # query kind that reads the substrate itself.  It answers only
+            # when one candidate survives every stage, and refuses an open
+            # fork and a contradicted one rather than picking.
+            "carrier": self._solve_carrier,        # uses crd.read_carrier
         }
         solver = table.get(query.kind)
         if solver is None:
@@ -3840,6 +3846,104 @@ class GeometricSession(SubstrateReports, LatticeGeometryReports,
                      "gap": None if result.gap is None else str(result.gap),
                      "derived": result.derived,
                      "provenance": result.winners[0].provenance})
+
+
+    def _solve_carrier(self, query: Query) -> Solution:
+        """``carrier 0xca97a1 tag 0x54`` -- one carrier, read or refused.
+
+        The read is the complete Golay decoder carried as a fork
+        (:mod:`..reasoning.carried_fork`) followed by each stage the request
+        supplies information for: the seven-bit sender tag
+        (``GLM.Golay24.tag_resolves``), the fifteen-bit protected tag read at
+        radius 2 (``GLM.Golay24.tag15_corrects_two``) and the soft
+        certificate (``GLM.Golay24.soft_certificate``).  Every stage is proved
+        to remove only wrong candidates under its stated assumption, so a
+        fork with one candidate left holds the sent carrier
+        (``GLM.CarriedFork.resolved_eq_truth``).
+
+        Two refusals are the point of it.  A six-way tie with nothing to
+        resolve it is refused, because no function of the received word can
+        resolve it (``GLM.Golay24.weight4_resolved_le_4096``); and a fork no
+        candidate of which agrees with the tag is refused, because an intact
+        tag disagrees with every wrong codeword the decoder could answer on
+        up to seven flips (``GLM.Golay24.tag_flags_miscorrection``) -- that
+        is a decoder's silent wrong answer turned into a refusal.
+        """
+        from ..reasoning import carrier_read as crd
+        request = str(query.options.get("request", "")).strip()
+        try:
+            parts = crd.parse_request(request)
+            read = crd.read_carrier(parts["word"], parts["tag"],
+                                    parts["protected_tag"], parts["soft"])
+        except crd.CarrierError as error:
+            raise SolverError(f"carrier ({error.reason}): {error}") from None
+        cands = ", ".join(f"{c:#08x}" for c in read.candidates)
+        stages = [s for s in read.stages if s != "decoder"]
+        source = ("a soft reading thresholded at 1/2" if read.soft_derived
+                  else "the request")
+        steps = [
+            Step("the decoder carries every nearest codeword",
+                 f"The received word {read.received:#08x} (from {source}) is "
+                 f"read by the complete Golay decoder, which returns every "
+                 f"codeword at the least distance rather than one of them. "
+                 f"At coset weight 4 there are six, and no function of the "
+                 f"received word can choose among them: that is "
+                 f"GLM.Golay24.weight4_resolved_le_4096, a fact about the "
+                 f"parameters rather than about this code.",
+                 f"coset weight {read.weight}; candidates {cands}"),
+        ]
+        for name in stages:
+            proof = {"sender tag": "GLM.Golay24.tag_resolves",
+                     "protected tag": "GLM.Golay24.tag15_corrects_two",
+                     "soft certificate": "GLM.Golay24.soft_certificate"}[name]
+            steps.append(Step(
+                f"the {name} stage",
+                f"A candidate inconsistent with the {name} is removed and "
+                f"the removal is recorded with its assumption. Under that "
+                f"assumption the stage removes only wrong candidates and "
+                f"keeps at most one, which is {proof}.",
+                f"{read.removed.get(name, 0)} candidate(s) removed"))
+        if read.status == "open":
+            raise SolverError(
+                f"carrier (open-fork): {read.received:#08x} is at coset "
+                f"weight 4 from six codewords ({cands}) and nothing in the "
+                f"request resolves the tie; no function of the received word "
+                f"can (GLM.Golay24.weight4_resolved_le_4096), so give the "
+                f"sender's tag, a protected tag or a soft reading")
+        if read.status == "contradicted":
+            raise SolverError(
+                f"carrier (contradicted): no candidate of {read.received:#08x} "
+                f"({cands}) is consistent with "
+                f"{' and '.join('the ' + s for s in stages)}; the carrier or "
+                f"the tag took more corruption than the stage assumes, and an "
+                f"intact tag disagrees with every wrong codeword a decoder "
+                f"could answer on up to seven flips "
+                f"(GLM.Golay24.tag_flags_miscorrection)")
+        by = (f"resolved by the {' and the '.join(stages)}" if stages
+              and any(read.removed.get(s, 0) for s in stages)
+              else "resolved by the decoder alone")
+        answer = (f"carrier {read.received:#08x} reads as codeword "
+                  f"{read.value:#08x}, message {read.message:#05x}: "
+                  f"{read.flips} flips corrected; {by}")
+        steps.append(Step(
+            "one candidate is left, and it is the answer",
+            "The fork is resolved only when exactly one candidate survives "
+            "every stage; nothing is picked by order. The twelve message bits "
+            "are coordinates 0-11 of the codeword, the code being systematic.",
+            f"codeword {read.value:#08x}; message {read.message:#05x}; "
+            f"{read.flips} flips"))
+        return Solution(
+            query=query, kind="carrier", answer=answer, steps=tuple(steps),
+            expected={"codeword": f"{read.value:#08x}",
+                      "message": f"{read.message:#05x}",
+                      "flips": str(read.flips)},
+            script_spec={"template": "carrier",
+                         "args": {"request": request}},
+            payload={"received": read.received, "weight": read.weight,
+                     "candidates": read.candidates, "stages": tuple(stages),
+                     "removed": dict(read.removed), "codeword": read.value,
+                     "message": read.message, "flips": read.flips,
+                     "assumptions": read.fork.assumptions})
 
 
 # Keep a module-level reference so the digit-stack import is not flagged as

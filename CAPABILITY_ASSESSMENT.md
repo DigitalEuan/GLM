@@ -27,7 +27,7 @@ Four instruments were used, and all four can be re-run on demand:
 cd overlay
 PYTHONPATH=. python3 -m glm_universal.capabilities                    # 33 probes
 PYTHONPATH=. python3 -m glm_universal.benchmarks                      # 5 suites
-PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8             # <!--figure:evaluation-cases-->179 CLI cases<!--/figure-->
+PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8             # <!--figure:evaluation-cases-->188 CLI cases<!--/figure-->
 PYTHONPATH=. python3 -m pytest glm_universal/tests -q                 # the test suite
 ```
 
@@ -47,7 +47,7 @@ by hand twice: the counts are recomputed into
 | benchmark suites | solver functions against curated and exhaustive task sets | **2,389 / 2,390 tasks across 5 suites; every suite beat its declared baseline** |
 | end-to-end CLI evaluation | the CLI, driven the way a user drives it | **179 cases: 179 passed** — 151 answered correctly, 28 refused as expected, 0 unexpected refusals, **0 confidently wrong**, 0 errored |
 | test suite | the package's own regression net | **<!--figure:suite-->5,397 tests across 181 of the 183 test files, 18,972 subtests, outside the document checks<!--/figure-->**, zero failures |
-| Lean development | the machine-checked layer | **<!--figure:lean-files-->205 Lean files<!--/figure-->, `lake build` clean, no `sorry`** |
+| Lean development | the machine-checked layer | **<!--figure:lean-files-->210 Lean files<!--/figure-->, `lake build` clean, no `sorry`** |
 
 A break in the probe report is not a failure — it is a located boundary, and
 each one names the exact place it stops. A *confidently wrong* answer in the
@@ -62,7 +62,7 @@ This is the instrument that measures what a user gets. It lives in
 `overlay/glm_universal/evaluation/`. Each of its 179 cases starts `GLM.py` in a
 **fresh interpreter** — one subprocess per question, no shared session, no warm
 caches — and scores the `ANSWER` or `UNSOLVED` line the process prints. The
-question set covers **all <!--figure:query-kinds-->24 query kinds<!--/figure-->** the runtime recognises and every one of its
+question set covers **all <!--figure:query-kinds-->25 query kinds<!--/figure-->** the runtime recognises and every one of its
 report subjects; the coverage is checked against the runtime's own tables by
 a test, so a new kind or subject cannot be added without a case.
 

@@ -1,192 +1,192 @@
 {
  "audit": {
   "legacy": {
-   "confirmed": 7951,
-   "declarations": 4692,
-   "edges": 15578,
-   "found_visible": 7933,
-   "one_letter_edges": 3387,
-   "one_letter_unconfirmed": 3312,
+   "confirmed": 8598,
+   "declarations": 5091,
+   "edges": 17067,
+   "found_visible": 8580,
+   "one_letter_edges": 3804,
+   "one_letter_unconfirmed": 3729,
    "precision": {
-    "__fraction__": "7951/15578"
+    "__fraction__": "2866/5689"
    },
    "recall_visible": {
-    "__fraction__": "7933/10997"
+    "__fraction__": "4290/5953"
    },
-   "reference_edges": 13057,
-   "unconfirmed": 7627,
-   "visible_edges": 10997
+   "reference_edges": 14032,
+   "unconfirmed": 8469,
+   "visible_edges": 11906
   },
   "scoped": {
-   "confirmed": 9997,
-   "declarations": 4692,
-   "edges": 10087,
-   "found_visible": 9997,
-   "one_letter_edges": 153,
-   "one_letter_unconfirmed": 4,
+   "confirmed": 10860,
+   "declarations": 5091,
+   "edges": 10964,
+   "found_visible": 10860,
+   "one_letter_edges": 154,
+   "one_letter_unconfirmed": 5,
    "precision": {
-    "__fraction__": "9997/10087"
+    "__fraction__": "2715/2741"
    },
    "recall_visible": {
-    "__fraction__": "9997/10997"
+    "__fraction__": "5430/5953"
    },
-   "reference_edges": 13057,
-   "unconfirmed": 90,
-   "visible_edges": 10997
+   "reference_edges": 14032,
+   "unconfirmed": 104,
+   "visible_edges": 11906
   }
  },
- "constants": 12288,
+ "constants": 13063,
  "headline": {
   "decl": {
    "chance": {
     "1": {
-     "__fraction__": "3721/490383"
+     "__fraction__": "3513/528802"
     },
     "10": {
-     "__fraction__": "23438556653619884923522933454837/322129373218629534908045074119312"
+     "__fraction__": "45794615191135123764771047803681/715902449118386610465393997069950"
     },
     "3": {
-     "__fraction__": "27565423637/1222384896384"
+     "__fraction__": "11469954616/580416512413"
     },
     "5": {
-     "__fraction__": "51011175884048603/1370017821052329408"
+     "__fraction__": "99791900834437799/3055548170446071678"
     }
    },
    "hits": {
     "address": {
-     "1": 49,
-     "10": 97,
-     "3": 66,
-     "5": 77
+     "1": 54,
+     "10": 116,
+     "3": 83,
+     "5": 94
     },
     "digest": {
-     "1": 3,
-     "10": 11,
-     "3": 5,
-     "5": 5
-    },
-    "features": {
-     "1": 49,
-     "10": 99,
-     "3": 71,
-     "5": 81
-    },
-    "lexical": {
-     "1": 88,
-     "10": 138,
-     "3": 112,
-     "5": 125
-    },
-    "name": {
-     "1": 29,
-     "10": 53,
-     "3": 35,
-     "5": 43
-    },
-    "random": {
-     "1": 3,
-     "10": 19,
-     "3": 5,
-     "5": 7
-    },
-    "shuffled": {
      "1": 2,
-     "10": 12,
+     "10": 11,
      "3": 4,
      "5": 6
     },
+    "features": {
+     "1": 54,
+     "10": 115,
+     "3": 85,
+     "5": 93
+    },
+    "lexical": {
+     "1": 77,
+     "10": 129,
+     "3": 104,
+     "5": 114
+    },
+    "name": {
+     "1": 26,
+     "10": 73,
+     "3": 38,
+     "5": 53
+    },
+    "random": {
+     "1": 1,
+     "10": 17,
+     "3": 3,
+     "5": 6
+    },
+    "shuffled": {
+     "1": 0,
+     "10": 8,
+     "3": 2,
+     "5": 5
+    },
     "text": {
-     "1": 145,
-     "10": 191,
-     "3": 174,
-     "5": 183
+     "1": 127,
+     "10": 174,
+     "3": 155,
+     "5": 161
     }
    },
    "mrr10": {
     "address": {
-     "__fraction__": "38923/130410"
+     "__fraction__": "13109/37080"
     },
     "digest": {
-     "__fraction__": "277/12420"
+     "__fraction__": "10349/519120"
     },
     "features": {
-     "__fraction__": "53231/173880"
+     "__fraction__": "12101/34608"
     },
     "lexical": {
-     "__fraction__": "129083/260820"
+     "__fraction__": "29507/64890"
     },
     "name": {
-     "__fraction__": "43529/260820"
+     "__fraction__": "31681/173040"
     },
     "random": {
-     "__fraction__": "206/7245"
+     "__fraction__": "247/12978"
     },
     "shuffled": {
-     "__fraction__": "10153/521640"
+     "__fraction__": "65/7416"
     },
     "text": {
-     "__fraction__": "404851/521640"
+     "__fraction__": "14921/21630"
     }
    },
-   "queries": 207
+   "queries": 206
   },
-  "declarations": 4739,
-  "edges": 10159,
+  "declarations": 5135,
+  "edges": 11030,
   "goal": {
    "hits": {
     "address": {
-     "1": 5,
-     "10": 14,
-     "3": 8,
-     "5": 8
+     "1": 8,
+     "10": 25,
+     "3": 16,
+     "5": 19
     },
     "digest": {
      "1": 1,
-     "10": 6,
-     "3": 1,
-     "5": 4
+     "10": 4,
+     "3": 2,
+     "5": 3
     },
     "lexical": {
-     "1": 22,
-     "10": 45,
-     "3": 31,
-     "5": 39
+     "1": 31,
+     "10": 53,
+     "3": 36,
+     "5": 48
     },
     "name": {
-     "1": 21,
-     "10": 41,
-     "3": 29,
-     "5": 34
+     "1": 14,
+     "10": 32,
+     "3": 17,
+     "5": 19
     },
     "random": {
      "1": 1,
-     "10": 9,
-     "3": 3,
-     "5": 4
+     "10": 6,
+     "3": 1,
+     "5": 2
     },
     "text": {
-     "1": 63,
-     "10": 87,
-     "3": 80,
-     "5": 80
+     "1": 78,
+     "10": 95,
+     "3": 92,
+     "5": 93
     }
    },
    "queries": 101,
    "reproduced": 0
   },
   "injectivity": {
-   "collision_classes": 445,
-   "distinct_addresses": 4038,
+   "collision_classes": 465,
+   "distinct_addresses": 4399,
    "largest_class_size": 19
   },
   "mean_relatives": {
-   "__fraction__": "7442/207"
+   "__fraction__": "3513/103"
   },
   "neighbours": {
-   "linked_nearest": 168,
-   "same_file_nearest": 1015
+   "linked_nearest": 196,
+   "same_file_nearest": 1104
   },
-  "tree": "bbc14f43ead69506482b2b017470210f2e9eeb95bdac6a424d8e6b04aa401563"
+  "tree": "329c0abbf03ded1fee707017bc7c2dc47f207e14a0da395ebd0fcc4dcb576116"
  },
  "lean_file": "RequestProject/GLM/CitationScope.lean",
  "legacy": {
@@ -351,25 +351,25 @@
   "L6": false
  },
  "reference": {
-  "fresh": false,
-  "live_digest": "bbc14f43ead69506482b2b017470210f2e9eeb95bdac6a424d8e6b04aa401563",
+  "fresh": true,
+  "live_digest": "329c0abbf03ded1fee707017bc7c2dc47f207e14a0da395ebd0fcc4dcb576116",
   "present": true,
-  "stored_digest": "22f3b1c42fbe2609c22aa3d25107c4080eccabe4a63fa2e8f5b39cae274945e9",
-  "verdict": "stale"
+  "stored_digest": "329c0abbf03ded1fee707017bc7c2dc47f207e14a0da395ebd0fcc4dcb576116",
+  "verdict": "fresh"
  },
  "source_digest": "da83faa29fdcbeafe67f01c9f54b0ac347a4e7933012c20148051387ad257f19",
  "study": "studies/CITATION_SCOPE_STUDY.md",
  "type_words": {
   "examples_legacy": [
-   "GLM.CarriedFork.ledger_partition",
+   "GLM.Anonymous.Tok",
    "GLM.SubstrateCognition.ker_trivial_of_rank",
-   "GLM.CoordinateOrder.Reading",
-   "GLM.DecoderConfidence.fork_confidence_bound",
-   "GLM.DeepHole.sortedProfile_reindex"
+   "GLM.Golay24._example_80",
+   "GLM.ConfigurationReading.push_shift_le",
+   "GLM.Conjugate._example_99"
   ],
   "examples_repaired": [],
-  "moved_legacy": 48,
+  "moved_legacy": 46,
   "moved_repaired": 0,
-  "queries": 862
+  "queries": 856
  }
 }

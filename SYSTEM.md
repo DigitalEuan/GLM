@@ -29,10 +29,10 @@ account is in
 | instrument | command | result |
 |---|---|---|
 | test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->5,397 tests across 181 of the 183 test files, 18,972 subtests, outside the document checks<!--/figure-->**, zero failures |
-| end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->179<!--/figure--> / <!--figure:evaluation-case-count-->179<!--/figure-->** — 149 answered, 28 refused as expected (all `boundary`, no `gap`), 0 unexpected refusals, 0 confidently wrong, 0 errored |
+| end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->188<!--/figure--> / <!--figure:evaluation-case-count-->188<!--/figure-->** — 149 answered, 28 refused as expected (all `boundary`, no `gap`), 0 unexpected refusals, 0 confidently wrong, 0 errored |
 | benchmark suites | `python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites, every suite above its baseline |
 | capability probes | `python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 errored, 0 surprises |
-| Lean development | `lake build` (repository root) | <!--figure:lean-files-->205 Lean files<!--/figure-->, **0 `sorry`** |
+| Lean development | `lake build` (repository root) | <!--figure:lean-files-->210 Lean files<!--/figure-->, **0 `sorry`** |
 | figures | `python3 -m glm_universal.figures --write` | regenerates `overlay/FIGURES.md`; every documented count |
 | corpus | `python3 -m glm_universal.corpus --check` | the tier contract, the archive partition, the coverage claim of `ENTRY.md`, every generated block and every derived cache — **current**, no drift |
 | construction ladder | `python3 -m glm_universal.tools ladder` | **462 / 568** queries named correctly with **0** wrong on the eleven-rung ladder, against **327** for the note's five rungs and **283** for the best single rung |
@@ -71,6 +71,10 @@ account is in
 | engineering surface | `python3 -m glm_universal.tools engineering` | on **63** engineering questions committed before the code: **53** correct, **10** correct refusals, **0** wrong (both existing paths: 0 correct, 53 refused); formula wheels **41 / 41** at SI7 and EXT10; Smith chart **16 / 16**; force-voltage analogy **9 / 9** laws each way; delta-sigma **6 / 6** |
 | carried fork | `python3 -m glm_universal.tools carried-fork` | the six deep-hole candidates carried until a later decision: **0 wrong** from every certified stage; 592,268 of 658,812 declared-case reads answered (the 90 % mark missed at 32 cases), 4,224 / 4,224 second readings, 3,840 / 3,840 unsure-set reads; 1,771 / 1,771 ties lift to a certified A₁²⁴ Leech deep hole; the soft estimate right on 512 / 768 (mark missed) |
 | designed substrate | `python3 -m glm_universal.tools designed-substrate` | the owner's substrate study brought in: two new certified fork stages — the seven-bit **sender tag** resolves **680,064 / 680,064** tied reads, 0 wrong (the hard word alone resolves 0), and the **soft certificate** resolves **768 / 768** reads of the gentle ensemble, 0 wrong, and refuses all 768 of K4b; the eight declared alternative codes each miscorrect 2,695–4,480 four-flip corruptions silently, the GLM's code 0; 7 of 8 marks ([`DESIGNED_SUBSTRATE_STUDY.md`](studies/DESIGNED_SUBSTRATE_STUDY.md)) |
+| protected tag | `python3 -m glm_universal.tools protected-tag` | the `carrier` query kind and a sender tag with a code of its own: the fifteen-bit tag at radius 2 and the eleven-bit tag at radius 1 resolve **680,064 / 680,064** tied reads with up to their radius of flipped tag bits, 0 wrong (the seven-bit tag with one flip: 28,096 wrong); on 523,204 reads with five to seven flips the decoder alone answers 409,860 wrongly and a tag none; 6 of 7 marks ([`PROTECTED_TAG_STUDY.md`](studies/PROTECTED_TAG_STUDY.md)) |
+| shortest tag | `python3 -m glm_universal.tools shortest-tag` | how many tag bits a tie needs: proved floors of **7, 9, 11** bits for octad tag weight 1, 3, 5 and **7, 11, 15** for tags built on seven bits, met by the tags in use; a search found no tag in the gap, its control missing 15 bits; 5 of 6 marks ([`SHORTEST_TAG_STUDY.md`](studies/SHORTEST_TAG_STUDY.md)) |
+| connected machine, second pass | `python3 -m glm_universal.tools connected-two` | every reasoning module reached from the answering path or declared: **157** of 177 reached (153 before), **20** declared measurement-only, **0** undeclared; certified continued fractions agree with independent references on **43 / 43** surds, pi, e and phi; **12 / 12** Möbius transforms agree with the integer recurrence; **0** of 404 declared texts match an English opening; **20 / 20** phrased and **21 / 21** tool questions as declared; 8 of 8 marks ([`CONNECTED_MACHINE_TWO_STUDY.md`](studies/CONNECTED_MACHINE_TWO_STUDY.md)) |
+| tool values | `python3 -m glm_universal.tools tool-values` | a tool's number composed by the stepwise planner: **17 / 17** composed questions as declared (13 answered, 4 refused), **13 / 13** chains verified in a fresh interpreter, **65 / 65** mutants caught; convergents agree with independent references on **136 / 136** surd and **14 / 14** pi cases; nearest fractions equal the exhaustive search on **100 / 100**; **0** of 404 declared texts read, **0** of 30 stepwise cases moved; held out **10 / 12** read, 10 right, 0 wrong; 8 of 8 marks ([`TOOL_VALUES_STUDY.md`](studies/TOOL_VALUES_STUDY.md)) |
 | second view | `python3 -m glm_universal.tools second-view` | one carrier read through the framed register's views: three views resolve **680,064 / 680,064** common-mode four-error reads, **0 wrong**; two views leave 174 of 10,626 bursts open, as predicted on every read; the composition with the declared cases **658,258 / 658,812**, 0 wrong, open as predicted; the Leech escalation on the views' soft reading equals the intersection on **46,728 / 46,728** reads; 7 of 9 marks met (V4, V8 not met) |
 | unpacking and the third view on demand | `python3 -m glm_universal.tools unpacking` | argument unpacking in the dialect: Phase 96's refused program answered equal to CPython, **33 / 33** declared programs and refusals as declared (0 before), 0 of 311 earlier programs moved; the third view on demand gives the three-view answer on **680,064 / 680,064** reads with **1,371,264** views read instead of 2,040,192; independent faults, three views **84,480 / 84,480**, 0 wrong; 346 open second errors for every frame; 12 of 12 marks met |
 | symbolic parameters | `python3 -m glm_universal.tools symbolic` | formulas in letters: **13 / 13** class-S outside questions answered and verified, **0** wrong; **13 / 13** variants, **18 / 18** systems, **8 / 8** refusals, **44 / 44** mutants rejected; the class-T crossover bracketed to 1/10000; 27 / 27 framed outside answers and 14 / 14 Set B verdicts unchanged; `--battery` 87 / 87 random systems verified; 8 of 8 marks met (S5 after a control repair) |
@@ -107,7 +111,7 @@ taken from a run that selects them.
 The package is `glm_universal` **v1.23.0**: eleven sub-packages, 152 modules,
 **<!--figure:registers-->8 registers<!--/figure-->** holding 1,143 carriers (physics 726, chemistry 118, molecules
 51, mathematics 22, lexicon 149, spatial 28, harmonics 28, economics 21) beside
-a 45-class comparison register, **<!--figure:query-kinds-->24 query kinds<!--/figure-->**
+a 45-class comparison register, **<!--figure:query-kinds-->25 query kinds<!--/figure-->**
 one of which dispatches **<!--figure:report-subjects-->67 report subjects<!--/figure-->**, and 3 tasks.
 
 ---
@@ -800,8 +804,8 @@ bit-flip channel than the GLM's code with a nearest-codeword decoder
 design leaves at least 7,254,016 received words at distance 4 or more
 (`negative_space_floor_4096`), and that one correcting three flips corrects at
 most one sixth of the four-flip corruptions (`weight4_resolved_le_4096`). The
-carried fork gains two stages in `reasoning/designed_substrate.py`, kept
-beside it rather than in the answering path: `sender tag` keeps the
+carried fork gains two stages in `reasoning/designed_substrate.py`, reached
+since Phase 134 through the `carrier` query kind: `sender tag` keeps the
 candidates whose seven parities match a tag the sender stored with the
 carrier (`tag_resolves`; assumption: the tag arrived intact), and
 `soft certificate` keeps a candidate only if its ±1 image is within squared
@@ -810,6 +814,91 @@ the reading is that close to the sent carrier). The owner's study itself is
 kept as supplied in `source_material/substrate_study/`. Recomputed by
 `tools designed-substrate`. Write-up:
 [`DESIGNED_SUBSTRATE_STUDY.md`](studies/DESIGNED_SUBSTRATE_STUDY.md).
+
+**The carrier read and the protected tag.** Since Phase 134 a question can
+read the substrate itself: `carrier 0xca97a1 tag 0x54` reads a 24-bit word
+through the carried fork and each stage the request supplies information for
+— the seven-bit sender tag, a fifteen-bit protected tag (`protected tag
+<p>`, read at radius 2) or a soft reading of 24 exact values (`soft s1, ...,
+s24`) — and answers with the codeword, its twelve message bits and the flips
+corrected only when exactly one candidate survives. An open six-way tie and a
+contradicted read are refused as boundaries, by name. The protected tag is the
+seven tag bits followed by the eight parities of the `[15,7,5]` BCH code on
+them; `RequestProject/GLM/ProtectedTag.lean` proves that a tag absorbs as many
+flipped bits as the least tag weight over the octads allows
+(`mtag_separation`), which is two for the protected tag
+(`tag15_corrects_two`, sharp) and none for the seven-bit tag
+(`tag7_one_flip_misleads`), and that an intact tag disagrees with every wrong
+decode on up to seven flips (`tag_flags_miscorrection`). Implemented in
+`reasoning/carrier_read.py`; the column-3 script re-reads the word by brute
+force. Recomputed by `tools protected-tag`. Write-up:
+[`PROTECTED_TAG_STUDY.md`](studies/PROTECTED_TAG_STUDY.md).
+
+**The length of a tag.** Since Phase 135 the tag lengths are bounded in the
+development (`RequestProject/GLM/ShortestTag.lean`): every parity tag giving
+each octad tag weight `D` has at least `D + 6` bits (`tag_length_floor`), so
+the seven-bit tag is the shortest that resolves every tie (`tag7_shortest`);
+a tag built as parities of seven tag bits needs eleven bits for one flipped
+tag bit and fifteen for two (`built_tag_floor`; no `[14,7,5]` code,
+`no_14_7_5`), so both protected tags are the shortest of their shape. A tag
+of another shape between the floors is neither found nor excluded.
+Implemented in `reasoning/shortest_tag.py`; recomputed by `tools
+shortest-tag`. Write-up:
+[`SHORTEST_TAG_STUDY.md`](studies/SHORTEST_TAG_STUDY.md).
+
+**Every reasoning module reached, or declared not to be.** Since Phase 136
+the toolbox holds six more tools, each answering from a module that a study
+had measured but no question reached: `tool continued fraction X [terms N]`
+(certified terms of a written real; a rational written as an expression gets
+its certified prefix and a refusal for the rest), `tool mobius a b c d of X`
+(the expansion of `(aX + b)/(cX + d)` streamed by Gosper's rule and checked
+against the direct expansion), `tool bind ROLE A B in DOMAIN` (a typed
+relation as one word, and its filler read back or refused by name), `tool
+gates SOURCE to TARGET` (reversible-gate distance, or the block that makes
+the target unreachable), `tool tag length D` (the proved floors) and `tool
+wiring [module]`. `tool law register` answers the fate of any of the 106
+triaged laws. The two stream rules are proved
+(`RequestProject/GLM/CertifiedStreams.lean`: `cfPrefix_certified`,
+`gosper_emit_sound`). Eleven declared English openings
+(`toolbox.TOOL_PHRASES`, e.g. "what is the continued fraction of X") reach a
+tool only after the planner, the grammar and the stepwise planner have all
+refused, and only if the tool answers. `toolbox.wiring_census` takes the
+import closure of the answering path from source; every reasoning module
+outside it is declared in `toolbox.MEASUREMENT_ONLY` with its reason, and
+`tests/test_connected_two.py` fails on one that is neither. Recomputed by
+`tools connected-two`. Write-up:
+[`CONNECTED_MACHINE_TWO_STUDY.md`](studies/CONNECTED_MACHINE_TWO_STUDY.md).
+
+**Tool values.** Since Phase 137 a tool's number is a value the stepwise
+planner can compose. A part of a compound question the typed planner refuses
+is read by `runtime/tool_values.py` (ten declared noun-phrase patterns: a
+continued-fraction term or fold, a convergent or its parts, the nearest
+fraction under a denominator bound, a gate distance, the kissing number, a
+Leech shell count, a moonshine dimension) as a tool text and a selector over
+the tool's figures; the step is a `planned` step through the step gate, and
+the chain's column-3 script re-runs the tool. A question that is one tool
+value is answered after every surface refused. `tool convergent` and
+`tool best approximation` (`reasoning/rational_approx.py`) answer with a
+fraction (`RequestProject/GLM/ToolValues.lean`: `select_certified`,
+`cfValue_eq_conv`, `conv_coprime`). Recomputed by `tools tool-values`.
+Write-up: [`TOOL_VALUES_STUDY.md`](studies/TOOL_VALUES_STUDY.md).
+
+**Tool verdicts and the nearest fraction.** Since Phase 138 a tool's yes/no
+answer is a step too: `tool_values.read_verdict` reads a question one tool
+decides (a gate target reachable, a module reached, a tool value equal to a
+stated number) as a `planned` step valued `True` or `False`, re-run by the
+column-3 script. *If A, B, otherwise C* is a `choose` step over any verdict
+step, and only the branch the test selects is built. *The first convergent
+of X whose denominator is above N* is unrolled into tool-value and `compare`
+steps closed by a `first` step, with no iteration cap; it is admitted because
+the denominators grow like the Fibonacci numbers
+(`RequestProject/GLM/NearestFraction.lean`: `conv_denominators_fib`,
+`search_terminates`). `tool best approximation` answers for any bound: every
+answer carries a Farey certificate checked at run time
+(`farey_certificate`), and the classical theorem that its two candidates
+always pass is proved (`nearest_fraction_candidates`). Recomputed by
+`tools tool-verdicts`. Write-up:
+[`TOOL_VERDICTS_STUDY.md`](studies/TOOL_VERDICTS_STUDY.md).
 
 **Norm 256 and the hex colour.** Since Phase 127 the power-of-two family has
 a rung at norm 256, measured beside the ladder rather than in the answering
@@ -893,8 +982,8 @@ so a confident wrong answer is worse than a refusal). Write-up:
 [`CAPABILITY_ASSESSMENT.md`](CAPABILITY_ASSESSMENT.md).
 
 **The Lean development, addressed.** `reasoning/lean_address.py` gives each of
-the <!--figure:lean-declarations-->5,067<!--/figure--> declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly <!--figure:lean-declarations-->5,067<!--/figure-->/<!--figure:lean-declarations-->5,067<!--/figure--> with 0 coordinate errors;
+the <!--figure:lean-declarations-->5,167<!--/figure--> declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly <!--figure:lean-declarations-->5,167<!--/figure-->/<!--figure:lean-declarations-->5,167<!--/figure--> with 0 coordinate errors;
 3989 distinct addresses, and the quantiser adds no conflation of its own;
 nearest-by-address shares a file 817 times against 35 for a SHA-256 control and
 29 for a seeded reshuffle, with chance at ≈ 0.80 %. `report lean`.
@@ -937,8 +1026,8 @@ twenty questions rather than three samples. `tools oracle`. Write-up:
 **The field surface, and what it was worth.** `runtime/fields.py` answers one
 named field of one named row — `field atomic_weight_u of carbon` — over
 <!--figure:fieldsurface-tables-->14<!--/figure--> declared tables holding
-<!--figure:fieldsurface-rows-->13,401<!--/figure--> rows and
-<!--figure:fieldsurface-pairs-->78,762<!--/figure--> addressable `(row,
+<!--figure:fieldsurface-rows-->13,622<!--/figure--> rows and
+<!--figure:fieldsurface-pairs-->79,988<!--/figure--> addressable `(row,
 field)` pairs: the element and molecule source rows, one table per register's
 carrier attributes, the Lean address book, the package's own top-level
 definitions, and a registry of declared zero-argument functions whose returned
@@ -1135,7 +1224,7 @@ units reach `PROJECT_DIRECTIVES.md` (120 before Phase 78; see
 [`studies/ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) §5g).
 
 The six instruments in the ledger beside the
-<!--figure:test-files-->183 test files<!--/figure--> are `lean-build`,
+<!--figure:test-files-->188 test files<!--/figure--> are `lean-build`,
 `lean-sorry-free`, `capabilities`, `benchmarks`, `evaluation` and `figures`.
 (The seventh, `lean-copies-identical`, went with the second copy of the Lean
 tree in Phase 78: the development lives only in `overlay/glm_lean/`.) Editing a document makes exactly the units that
@@ -1191,7 +1280,7 @@ cd overlay
 PYTHONPATH=. GLM_EXHAUSTIVE=1 python3 -m pytest glm_universal/tests -q
 PYTHONPATH=. python3 -m glm_universal.capabilities           # 33 probes
 PYTHONPATH=. python3 -m glm_universal.benchmarks             # 5 suites
-PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8    # <!--figure:evaluation-cases-->179 CLI cases<!--/figure-->
+PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8    # <!--figure:evaluation-cases-->188 CLI cases<!--/figure-->
 PYTHONPATH=. python3 -m glm_universal.figures --write        # regenerate FIGURES.md
 PYTHONPATH=. python3 -m glm_universal.corpus --refresh       # every derived artefact
 PYTHONPATH=. python3 -m glm_universal.corpus --check          # exit 1 on any drift

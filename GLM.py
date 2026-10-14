@@ -1044,10 +1044,17 @@ def _ask_connected(out: "Out", texts: Sequence[str], columns: Sequence[int],
             if session is None:
                 session = GeometricSession()
             stepped = None
+            phrased = None
             if surface == "planner":
                 stepped = router._stepwise(session, text) \
                     if not _planner_answers(session, text) else None
-            if stepped is not None and fmt != "json":
+                if stepped is not None and not stepped.answered or \
+                        stepped is None and not _planner_answers(session,
+                                                                 text):
+                    phrased = router._phrased_tool(text)
+            if phrased is not None:
+                code = _print_phrased(out, text, phrased, fmt)
+            elif stepped is not None and fmt != "json":
                 verified = _print_chain(out, stepped.payload, columns, verify)
                 code = 0 if stepped.answered and verified is not False else 1
             elif stepped is not None:
@@ -1118,6 +1125,10 @@ def _routed_query(out: "Out", session: GeometricSession, text: str,
         return code, None
     if not _planner_answers(session, text):
         stepped = router._stepwise(session, text)
+        if stepped is None or not stepped.answered:
+            phrased = router._phrased_tool(text)
+            if phrased is not None:
+                return _print_phrased(out, text, phrased, fmt), None
         if stepped is not None:
             out.line("SURFACE planner (stepwise)")
             if fmt != "json":
@@ -1129,6 +1140,22 @@ def _routed_query(out: "Out", session: GeometricSession, text: str,
             return (0 if stepped.answered else 1), None
     return _batch_query(out, session, text, None, columns, fmt, verify,
                         exactness_check, plan=True)
+
+
+def _print_phrased(out: "Out", text: str, routed, fmt: str) -> int:
+    """Print a verdict a tool gave for an English opening (Phase 136): the
+    planner, the grammar and the stepwise planner refused, and
+    :data:`glm_universal.runtime.toolbox.TOOL_PHRASES` read the text as a
+    tool request that answers."""
+    if fmt == "json":
+        out.line(json.dumps({"surface": "toolbox", "phrased": True,
+                             "query": text, "answer": routed.text},
+                            indent=1, ensure_ascii=False))
+        return 0
+    out.line("SURFACE toolbox (phrased, after the planner refused)")
+    out.line(f"QUERY   {text}")
+    out.line("ANSWER  " + routed.text)
+    return 0
 
 
 def _planner_answers(session: GeometricSession, text: str) -> bool:
