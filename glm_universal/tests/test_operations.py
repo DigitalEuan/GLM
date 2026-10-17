@@ -121,9 +121,13 @@ def test_refusals_are_named():
     assert bs.answer("does it halt?", n2, jump=False).refusal == \
         "UNDECIDED_WITHIN_BUDGET"
     assert bs.answer("does it halt?", n2).claim["kind"] == "never_lasso"
-    assert bs.answer("does it halt?", "SET /A A=0\nSET /A B=0\n:UP\n"
-                     "SET /A A=A+1\nSET /A B=B+A\nIF %B% GTR -1 GOTO UP"
-                     ).refusal == "UNDECIDED_WITHIN_BUDGET"
+    # Phase 142 (studies/QUADRATIC_LASSO_STUDY.md) moves L12: B is an
+    # accumulator, and no comparison on the quadratic pass ever changes.
+    l12 = ("SET /A A=0\nSET /A B=0\n:UP\n"
+           "SET /A A=A+1\nSET /A B=B+A\nIF %B% GTR -1 GOTO UP")
+    assert bs.answer("does it halt?", l12, quadratic=False).refusal == \
+        "UNDECIDED_WITHIN_BUDGET"
+    assert bs.answer("does it halt?", l12).claim["kind"] == "never_lasso"
     assert bs.answer("what does it print?", "\n".join(op.M13)).refusal == \
         "NEVER_HALTS"
     assert set(bs.REFUSALS) >= {"UNKNOWN_COMMAND", "UNDEFINED_VARIABLE",

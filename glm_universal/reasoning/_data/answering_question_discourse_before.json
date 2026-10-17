@@ -1,0 +1,1518 @@
+{
+ "conversation": {
+  "alone_answered": 0,
+  "answered": 8,
+  "as_declared": 15,
+  "caveat": "the reference is the whole of the addressing here: every rewritten query is answered by the session that would have answered it written out in full, so no answer is new and no answer is changed. The recency control -- bind the pronoun to the most recent mention, licensing unchecked -- differs from the operation on 3 of the 10 pronoun follow-ups it applies to (pronoun-licensing-skips, pronoun-tie-refused, pronoun-two-subjects), and nothing here parses English beyond three declared surface patterns.",
+  "control_rows": 10,
+  "control_wrong": 3,
+  "control_wrong_keys": [
+   "pronoun-licensing-skips",
+   "pronoun-tie-refused",
+   "pronoun-two-subjects"
+  ],
+  "declared": 15,
+  "reasons_declared": 3,
+  "refusal_reasons": [
+   "ambiguous-antecedent",
+   "no-antecedent",
+   "unlicensed"
+  ],
+  "refused": 7,
+  "rows": [
+   {
+    "alone": "refused",
+    "answer": "C (chemistry): depth 26, plane-0 mask 0x000902, |v|^2 = 1098782843288679/8000000",
+    "as_declared": true,
+    "considered": [
+     "C"
+    ],
+    "control_agrees": true,
+    "control_applies": true,
+    "control_recency": "C",
+    "detail": "pronoun bound to C, from turn 0: 'describe C'",
+    "expected": "C",
+    "key": "pronoun-describe",
+    "note": "the plainest one: the subject of the turn before",
+    "outcome": "C",
+    "rewritten": "describe C",
+    "script": [
+     "describe carbon",
+     "describe it"
+    ],
+    "shape": "pronoun"
+   },
+   {
+    "alone": "refused",
+    "answer": "Og (chemistry): depth 27, plane-0 mask 0x043000, |v|^2 = 3705249727241979/125000",
+    "as_declared": true,
+    "considered": [
+     "Og"
+    ],
+    "control_agrees": true,
+    "control_applies": true,
+    "control_recency": "Og",
+    "detail": "pronoun bound to Og, from turn 0: 'describe Og'",
+    "expected": "Og",
+    "key": "pronoun-after-extremum",
+    "note": "the pronoun stands for a row the fold produced, not one anybody named",
+    "outcome": "Og",
+    "rewritten": "describe Og",
+    "script": [
+     "largest atomic_weight_u in element",
+     "describe it"
+    ],
+    "shape": "pronoun"
+   },
+   {
+    "alone": "refused",
+    "answer": "electronegativity_pauling of C = 51/20 (= 2.55) -- from the element table (source), read as it is held; nothing on this path computes it",
+    "as_declared": true,
+    "considered": [
+     "C"
+    ],
+    "control_agrees": false,
+    "control_applies": true,
+    "control_recency": "unlicensed",
+    "detail": "pronoun bound to C, from turn 0: 'field electronegativity_pauling of C'",
+    "expected": "C",
+    "key": "pronoun-licensing-skips",
+    "note": "the margin over recency: water is nearer and holds no electronegativity",
+    "outcome": "C",
+    "rewritten": "field electronegativity_pauling of C",
+    "script": [
+     "describe carbon",
+     "describe water",
+     "field electronegativity_pauling of it"
+    ],
+    "shape": "pronoun"
+   },
+   {
+    "alone": "refused",
+    "answer": "molar_mass_u of water = 3603/200 (= 18.015) -- from the molecule table (source), recomputed on read by the rule the register declares: sum over the formula of atomic_weight_u times count, from the element register",
+    "as_declared": true,
+    "considered": [
+     "water"
+    ],
+    "control_agrees": true,
+    "control_applies": true,
+    "control_recency": "water",
+    "detail": "pronoun bound to water, from turn 1: 'field molar_mass_u of water'",
+    "expected": "water",
+    "key": "pronoun-licensing-agrees",
+    "note": "the same conversation, the other field: now recency is right, and licensing says so too",
+    "outcome": "water",
+    "rewritten": "field molar_mass_u of water",
+    "script": [
+     "describe carbon",
+     "describe water",
+     "field molar_mass_u of it"
+    ],
+    "shape": "pronoun"
+   },
+   {
+    "alone": "refused",
+    "answer": "Ne (chemistry): depth 40, plane-0 mask 0x000800, |v|^2 = 189475875926012580982001/800000000000000",
+    "as_declared": true,
+    "considered": [
+     "Ne"
+    ],
+    "control_agrees": true,
+    "control_applies": true,
+    "control_recency": "Ne",
+    "detail": "pronoun bound to Ne, from turn 0: 'describe Ne'",
+    "expected": "Ne",
+    "key": "pronoun-analogy-answer",
+    "note": "the answer side outranks the subject side",
+    "outcome": "Ne",
+    "rewritten": "describe Ne",
+    "script": [
+     "H : He :: Li : ?",
+     "describe it"
+    ],
+    "shape": "pronoun"
+   },
+   {
+    "alone": "refused",
+    "answer": "O (chemistry): depth 37, plane-0 mask 0x000800, |v|^2 = 1309722416435648042041/8000000000000",
+    "as_declared": true,
+    "considered": [
+     "O"
+    ],
+    "control_agrees": true,
+    "control_applies": true,
+    "control_recency": "O",
+    "detail": "pronoun bound to O, from turn 0: 'describe O'",
+    "expected": "O",
+    "key": "pronoun-nearest-subject",
+    "note": "a list of neighbours is not a name, so the subject decides",
+    "outcome": "O",
+    "rewritten": "describe O",
+    "script": [
+     "nearest 3 to oxygen",
+     "describe it"
+    ],
+    "shape": "pronoun"
+   },
+   {
+    "alone": "refused",
+    "answer": "the smallest atomic_weight_u over the 118 rows of element is 126/125 (= 1.008), attained by H, ahead of the next distinct value by an exact 14973/5000, every row read on the element:atomic_weight_u scale",
+    "as_declared": true,
+    "considered": [
+     "largest"
+    ],
+    "control_agrees": false,
+    "control_applies": false,
+    "control_recency": "n/a",
+    "detail": "end-flip bound, from turn 0: 'smallest atomic_weight_u in element'",
+    "expected": "answer",
+    "key": "end-flip",
+    "note": "the same column, the other end",
+    "outcome": "answer",
+    "rewritten": "smallest atomic_weight_u in element",
+    "script": [
+     "largest atomic_weight_u in element",
+     "and the smallest?"
+    ],
+    "shape": "end-flip"
+   },
+   {
+    "alone": "refused",
+    "answer": "atomic_weight_u of O = 15999/1000 (= 15.999) -- from the element table (source), read as it is held; nothing on this path computes it",
+    "as_declared": true,
+    "considered": [
+     "carbon"
+    ],
+    "control_agrees": false,
+    "control_applies": false,
+    "control_recency": "n/a",
+    "detail": "subject bound to oxygen, from turn 0: 'field atomic_weight_u of oxygen'",
+    "expected": "oxygen",
+    "key": "subject-substitution",
+    "note": "the same question, a different row",
+    "outcome": "oxygen",
+    "rewritten": "field atomic_weight_u of oxygen",
+    "script": [
+     "field atomic_weight_u of carbon",
+     "and oxygen?"
+    ],
+    "shape": "subject"
+   },
+   {
+    "alone": "refused",
+    "answer": "",
+    "as_declared": true,
+    "considered": [
+     "atom",
+     "bond",
+     "C",
+     "Cl",
+     "computer",
+     "instrument",
+     "ion",
+     "liquid",
+     "molecule",
+     "neutron",
+     "proton",
+     "sky",
+     "solid",
+     "water"
+    ],
+    "control_agrees": false,
+    "control_applies": true,
+    "control_recency": "atom",
+    "detail": "'describe it': turn 0 names 14 carriers that all answer it (atom, bond, C, Cl, computer, instrument, ...); the conversation does not say which is meant",
+    "expected": "ambiguous-antecedent",
+    "key": "pronoun-tie-refused",
+    "note": "fourteen rows attain the end; naming one would be a choice the conversation does not make",
+    "outcome": "ambiguous-antecedent",
+    "rewritten": "",
+    "script": [
+     "largest abstract_concrete in carrier:lexicon",
+     "describe it"
+    ],
+    "shape": ""
+   },
+   {
+    "alone": "refused",
+    "answer": "",
+    "as_declared": true,
+    "considered": [
+     "C",
+     "O"
+    ],
+    "control_agrees": false,
+    "control_applies": true,
+    "control_recency": "C",
+    "detail": "'describe it': turn 0 names 2 carriers that all answer it (C, O); the conversation does not say which is meant",
+    "expected": "ambiguous-antecedent",
+    "key": "pronoun-two-subjects",
+    "note": "a comparison is about two rows and its verdict names neither",
+    "outcome": "ambiguous-antecedent",
+    "rewritten": "",
+    "script": [
+     "order atomic_weight_u of carbon and oxygen",
+     "describe it"
+    ],
+    "shape": ""
+   },
+   {
+    "alone": "refused",
+    "answer": "",
+    "as_declared": true,
+    "considered": [],
+    "control_agrees": true,
+    "control_applies": true,
+    "control_recency": "no-antecedent",
+    "detail": "'describe it': no earlier turn names a carrier for the pronoun to stand for",
+    "expected": "no-antecedent",
+    "key": "pronoun-first-turn",
+    "note": "a follow-up with nothing to follow",
+    "outcome": "no-antecedent",
+    "rewritten": "",
+    "script": [
+     "describe it"
+    ],
+    "shape": ""
+   },
+   {
+    "alone": "refused",
+    "answer": "",
+    "as_declared": true,
+    "considered": [
+     "energy"
+    ],
+    "control_agrees": true,
+    "control_applies": true,
+    "control_recency": "unlicensed",
+    "detail": "'field electronegativity_pauling of it': every carrier this conversation names leaves the question unanswerable",
+    "expected": "unlicensed",
+    "key": "pronoun-unlicensed",
+    "note": "the only carrier in play is not a row of the table the question needs",
+    "outcome": "unlicensed",
+    "rewritten": "",
+    "script": [
+     "describe energy",
+     "field electronegativity_pauling of it"
+    ],
+    "shape": ""
+   },
+   {
+    "alone": "refused",
+    "answer": "",
+    "as_declared": true,
+    "considered": [],
+    "control_agrees": false,
+    "control_applies": false,
+    "control_recency": "n/a",
+    "detail": "'and the smallest?': no earlier turn folds a column, so there is no other end to ask for",
+    "expected": "no-antecedent",
+    "key": "end-flip-no-column",
+    "note": "no column has been folded, so there is no other end",
+    "outcome": "no-antecedent",
+    "rewritten": "",
+    "script": [
+     "describe carbon",
+     "and the smallest?"
+    ],
+    "shape": ""
+   },
+   {
+    "alone": "refused",
+    "answer": "",
+    "as_declared": true,
+    "considered": [
+     "C",
+     "O"
+    ],
+    "control_agrees": false,
+    "control_applies": false,
+    "control_recency": "n/a",
+    "detail": "'and nitrogen?': turn 0 is about 2 rows (carbon, oxygen); which of them 'nitrogen' replaces is not said",
+    "expected": "ambiguous-antecedent",
+    "key": "subject-ambiguous",
+    "note": "which of the two rows nitrogen replaces is not said",
+    "outcome": "ambiguous-antecedent",
+    "rewritten": "",
+    "script": [
+     "order atomic_weight_u of carbon and oxygen",
+     "and nitrogen?"
+    ],
+    "shape": ""
+   },
+   {
+    "alone": "refused",
+    "answer": "",
+    "as_declared": true,
+    "considered": [],
+    "control_agrees": false,
+    "control_applies": false,
+    "control_recency": "n/a",
+    "detail": "'and water?': 'water' in place of the earlier row leaves a question the registers do not answer",
+    "expected": "unlicensed",
+    "key": "subject-unlicensed",
+    "note": "the row exists and the field does not reach it",
+    "outcome": "unlicensed",
+    "rewritten": "",
+    "script": [
+     "field electronegativity_pauling of carbon",
+     "and water?"
+    ],
+    "shape": ""
+   }
+  ],
+  "shapes": 3,
+  "verdict": "the conversation layer answers 8 of the 15 declared follow-ups and refuses 7, every one of them as declared before the run, with the refusals falling under all 3 of its named reasons (ambiguous-antecedent, no-antecedent, unlicensed). Asked of a session with no memory of the conversation, 0 of the same 15 texts are answered."
+ },
+ "discourse": {
+  "cells": {
+   "cells": 32,
+   "differ": [],
+   "met": true,
+   "singles": 7
+  },
+  "census": {
+   "distinct_taken": 16,
+   "met": true,
+   "released": [],
+   "released_count": 0,
+   "strings": 5129,
+   "taken": [
+    [
+     "ast_index_cases",
+     "plural",
+     "retrieval: under `both`, the structural key has a site structurally equal to the source at"
+    ],
+    [
+     "cases",
+     "plural",
+     "1, 2 and 3 are not 2A axes, so the form is not defined on them."
+    ],
+    [
+     "cases",
+     "plural",
+     "SI7 conflates them; EXT10 does not."
+    ],
+    [
+     "cases",
+     "plural",
+     "One recurrence over the odd primes run three ways -- exactly, in binary64, and truncated t"
+    ],
+    [
+     "cases",
+     "plural",
+     "The reversible-gate claims, each answered True or False by measurement -- several of them "
+    ],
+    [
+     "cases",
+     "plural",
+     "The multi-step loop: derive a physical quantity from the ten EXT10 generators one factor a"
+    ],
+    [
+     "cases",
+     "plural",
+     "Cumulativity as a shipping condition: every declared refinement edge is verified on its pr"
+    ],
+    [
+     "cases",
+     "plural",
+     "Fourteen rows sit at the concrete end of the lexicon register's coordinate. Every one of t"
+    ],
+    [
+     "cases",
+     "plural",
+     "Four flips leave six equidistant codewords, and no function of the received word resolves "
+    ],
+    [
+     "derivation_cases",
+     "plural",
+     "every answered reading of R1-R4 verifies by its column-3 script, which shares no code with"
+    ],
+    [
+     "derivation_four_cases",
+     "plural",
+     "every answered reading of P1-P3 verifies by its column-3 script, which shares no code with"
+    ],
+    [
+     "derivation_four_cases",
+     "plural",
+     "the Robin battery: every two-ended root enclosure re-checked by a certified sign change in"
+    ],
+    [
+     "derivation_three_cases",
+     "plural",
+     "every answered reading of N1-N3 verifies by its column-3 script, which shares no code with"
+    ],
+    [
+     "derivation_two_cases",
+     "plural",
+     "every answered reading of Q1-Q6 verifies by its column-3 script, which shares no code with"
+    ],
+    [
+     "explanation_cases",
+     "plural",
+     "What are the paradoxes of material implication, and how does strict implication or relevan"
+    ],
+    [
+     "harness",
+     "plural",
+     "1, 2 and 3 are not 2A axes, so the form is not defined on them."
+    ],
+    [
+     "harness",
+     "plural",
+     "SI7 conflates them; EXT10 does not."
+    ],
+    [
+     "harness",
+     "plural",
+     "One recurrence over the odd primes run three ways -- exactly, in binary64, and truncated t"
+    ],
+    [
+     "harness",
+     "plural",
+     "The reversible-gate claims, each answered True or False by measurement -- several of them "
+    ],
+    [
+     "harness",
+     "plural",
+     "The multi-step loop: derive a physical quantity from the ten EXT10 generators one factor a"
+    ],
+    [
+     "harness",
+     "plural",
+     "Cumulativity as a shipping condition: every declared refinement edge is verified on its pr"
+    ],
+    [
+     "harness",
+     "plural",
+     "Fourteen rows sit at the concrete end of the lexicon register's coordinate. Every one of t"
+    ],
+    [
+     "harness",
+     "plural",
+     "Four flips leave six equidistant codewords, and no function of the received word resolves "
+    ],
+    [
+     "outside_o1",
+     "plural",
+     "The Lanthanide Contraction and Secondary Periodicity: Hafnium ($Z=72$) and zirconium ($Z=4"
+    ]
+   ],
+   "taken_answered_alone": 2,
+   "taken_count": 24
+  },
+  "control": {
+   "base": {
+    "as_declared": [
+     "dead-set-walked-past",
+     "no-tie-unchanged",
+     "comparison-still-ambiguous"
+    ],
+    "cases": 23,
+    "new_as_declared": [],
+    "new_cases": 20,
+    "rows": [
+     {
+      "got": "ambiguous-antecedent",
+      "key": "tie-describe",
+      "ok": false,
+      "want": [
+       "column",
+       [
+        "atom",
+        "bond",
+        "C",
+        "Cl",
+        "computer",
+        "instrument",
+        "ion",
+        "liquid",
+        "molecule",
+        "neutron",
+        "proton",
+        "sky",
+        "solid",
+        "water"
+       ]
+      ]
+     },
+     {
+      "got": "ambiguous-antecedent",
+      "key": "tie-field",
+      "ok": false,
+      "want": [
+       "column",
+       [
+        "carbonate ion",
+        "sulfate ion"
+       ]
+      ]
+     },
+     {
+      "got": "ambiguous-antecedent",
+      "key": "tie-incomplete",
+      "ok": false,
+      "want": "column-incomplete"
+     },
+     {
+      "got": "ambiguous-antecedent",
+      "key": "column-carried",
+      "ok": false,
+      "want": [
+       "column",
+       [
+        "carbonate ion",
+        "sulfate ion"
+       ]
+      ]
+     },
+     {
+      "got": "C",
+      "key": "dead-set-walked-past",
+      "ok": true,
+      "want": "C"
+     },
+     {
+      "got": "Og",
+      "key": "no-tie-unchanged",
+      "ok": true,
+      "want": "Og"
+     },
+     {
+      "got": "ambiguous-antecedent",
+      "key": "comparison-still-ambiguous",
+      "ok": true,
+      "want": "ambiguous-antecedent"
+     },
+     {
+      "got": "unlicensed",
+      "key": "prior",
+      "ok": false,
+      "want": "C"
+     },
+     {
+      "got": "unlicensed",
+      "key": "prior-licensing",
+      "ok": false,
+      "want": "C"
+     },
+     {
+      "got": "unlicensed",
+      "key": "prior-none",
+      "ok": false,
+      "want": "no-antecedent"
+     },
+     {
+      "got": "unlicensed",
+      "key": "prior-set",
+      "ok": false,
+      "want": [
+       "column",
+       [
+        "carbonate ion",
+        "sulfate ion"
+       ]
+      ]
+     },
+     {
+      "got": "unlicensed",
+      "key": "both",
+      "ok": false,
+      "want": [
+       "column",
+       [
+        "C",
+        "O"
+       ]
+      ]
+     },
+     {
+      "got": "unlicensed",
+      "key": "both-field",
+      "ok": false,
+      "want": [
+       "column",
+       [
+        "C",
+        "O"
+       ]
+      ]
+     },
+     {
+      "got": "unlicensed",
+      "key": "both-across-turns",
+      "ok": false,
+      "want": [
+       "column",
+       [
+        "C",
+        "O"
+       ]
+      ]
+     },
+     {
+      "got": "unlicensed",
+      "key": "both-wrong-number",
+      "ok": false,
+      "want": "number-mismatch"
+     },
+     {
+      "got": "unlicensed",
+      "key": "them-set",
+      "ok": false,
+      "want": [
+       "column",
+       [
+        "carbonate ion",
+        "sulfate ion"
+       ]
+      ]
+     },
+     {
+      "got": "unlicensed",
+      "key": "them-one-row",
+      "ok": false,
+      "want": "number-mismatch"
+     },
+     {
+      "got": "unlicensed",
+      "key": "them-incomplete",
+      "ok": false,
+      "want": "column-incomplete"
+     },
+     {
+      "got": "unlicensed",
+      "key": "plural-first-turn",
+      "ok": false,
+      "want": "no-antecedent"
+     },
+     {
+      "got": "unlicensed",
+      "key": "why-after-binding",
+      "ok": false,
+      "want": [
+       "why",
+       "C"
+      ]
+     },
+     {
+      "got": "unlicensed",
+      "key": "why-after-refusal",
+      "ok": false,
+      "want": [
+       "why",
+       "column-incomplete"
+      ]
+     },
+     {
+      "got": "unlicensed",
+      "key": "why-after-whole",
+      "ok": false,
+      "want": [
+       "why",
+       "describe carbon"
+      ]
+     },
+     {
+      "got": "unlicensed",
+      "key": "why-first-turn",
+      "ok": false,
+      "want": "no-antecedent"
+     }
+    ]
+   },
+   "carry_off": {
+    "reverted": [
+     "tie-describe",
+     "tie-field",
+     "tie-incomplete",
+     "column-carried"
+    ],
+    "rows": [
+     {
+      "got": "ambiguous-antecedent",
+      "key": "tie-describe",
+      "want": [
+       "column",
+       [
+        "atom",
+        "bond",
+        "C",
+        "Cl",
+        "computer",
+        "instrument",
+        "ion",
+        "liquid",
+        "molecule",
+        "neutron",
+        "proton",
+        "sky",
+        "solid",
+        "water"
+       ]
+      ]
+     },
+     {
+      "got": "ambiguous-antecedent",
+      "key": "tie-field",
+      "want": [
+       "column",
+       [
+        "carbonate ion",
+        "sulfate ion"
+       ]
+      ]
+     },
+     {
+      "got": "ambiguous-antecedent",
+      "key": "tie-incomplete",
+      "want": "column-incomplete"
+     },
+     {
+      "got": "ambiguous-antecedent",
+      "key": "column-carried",
+      "want": [
+       "column",
+       [
+        "carbonate ion",
+        "sulfate ion"
+       ]
+      ]
+     },
+     {
+      "got": "C",
+      "key": "dead-set-walked-past",
+      "want": "C"
+     },
+     {
+      "got": "Og",
+      "key": "no-tie-unchanged",
+      "want": "Og"
+     },
+     {
+      "got": "ambiguous-antecedent",
+      "key": "comparison-still-ambiguous",
+      "want": "ambiguous-antecedent"
+     }
+    ],
+    "ties": 4
+   },
+   "first_winner": {
+    "answered": 10,
+    "cases": 10,
+    "rows": [
+     {
+      "answered": true,
+      "covers": 1,
+      "key": "tie-describe",
+      "rows": 14
+     },
+     {
+      "answered": true,
+      "covers": 1,
+      "key": "tie-field",
+      "rows": 2
+     },
+     {
+      "answered": true,
+      "covers": 1,
+      "key": "column-carried",
+      "rows": 2
+     },
+     {
+      "answered": true,
+      "covers": 1,
+      "key": "prior-set",
+      "rows": 2
+     },
+     {
+      "answered": true,
+      "covers": 1,
+      "key": "both",
+      "rows": 2
+     },
+     {
+      "answered": true,
+      "covers": 1,
+      "key": "both-field",
+      "rows": 2
+     },
+     {
+      "answered": true,
+      "covers": 1,
+      "key": "both-across-turns",
+      "rows": 2
+     },
+     {
+      "answered": true,
+      "covers": 1,
+      "key": "them-set",
+      "rows": 2
+     },
+     {
+      "answered": true,
+      "covers": 1,
+      "key": "surface-both-ordering",
+      "rows": 2
+     },
+     {
+      "answered": true,
+      "covers": 1,
+      "key": "surface-column",
+      "rows": 2
+     }
+    ],
+    "rows_dropped": 22
+   },
+   "met": true,
+   "recency": {
+    "cases": 4,
+    "differs": [
+     "prior-licensing",
+     "prior-set"
+    ],
+    "rows": [
+     {
+      "agrees": true,
+      "got": "C",
+      "key": "prior",
+      "want": "C"
+     },
+     {
+      "agrees": false,
+      "got": "O",
+      "key": "prior-licensing",
+      "want": "C"
+     },
+     {
+      "agrees": true,
+      "got": "no-antecedent",
+      "key": "prior-none",
+      "want": "no-antecedent"
+     },
+     {
+      "agrees": false,
+      "got": "carbonate ion",
+      "key": "prior-set",
+      "want": [
+       "column",
+       [
+        "carbonate ion",
+        "sulfate ion"
+       ]
+      ]
+     }
+    ]
+   },
+   "session_alone": {
+    "answers_as_declared": [],
+    "cases": 6,
+    "rows": [
+     {
+      "got": "unlicensed",
+      "key": "surface-stepwise-pronoun",
+      "ok": false,
+      "want": "Fe"
+     },
+     {
+      "got": "no-antecedent",
+      "key": "surface-planner-subject",
+      "ok": false,
+      "want": "oxygen"
+     },
+     {
+      "got": "no-antecedent",
+      "key": "surface-both-ordering",
+      "ok": false,
+      "want": [
+       "column",
+       [
+        "C",
+        "O"
+       ]
+      ]
+     },
+     {
+      "got": "unlicensed",
+      "key": "surface-column",
+      "ok": false,
+      "want": [
+       "column",
+       [
+        "carbonate ion",
+        "sulfate ion"
+       ]
+      ]
+     },
+     {
+      "got": "unlicensed",
+      "key": "surface-stepwise-given",
+      "ok": false,
+      "want": "H"
+     },
+     {
+      "got": "unlicensed",
+      "key": "surface-unlicensed",
+      "ok": true,
+      "want": "unlicensed"
+     }
+    ]
+   }
+  },
+  "earlier": {
+   "cases": 15,
+   "declared_moves": [
+    "pronoun-tie-refused"
+   ],
+   "met": true,
+   "met_count": 15,
+   "moved": [
+    "pronoun-tie-refused"
+   ],
+   "rows": [
+    {
+     "declared_now": "C",
+     "got": "C",
+     "key": "pronoun-describe",
+     "ok": true,
+     "phase55": "C"
+    },
+    {
+     "declared_now": "Og",
+     "got": "Og",
+     "key": "pronoun-after-extremum",
+     "ok": true,
+     "phase55": "Og"
+    },
+    {
+     "declared_now": "C",
+     "got": "C",
+     "key": "pronoun-licensing-skips",
+     "ok": true,
+     "phase55": "C"
+    },
+    {
+     "declared_now": "water",
+     "got": "water",
+     "key": "pronoun-licensing-agrees",
+     "ok": true,
+     "phase55": "water"
+    },
+    {
+     "declared_now": "Ne",
+     "got": "Ne",
+     "key": "pronoun-analogy-answer",
+     "ok": true,
+     "phase55": "Ne"
+    },
+    {
+     "declared_now": "O",
+     "got": "O",
+     "key": "pronoun-nearest-subject",
+     "ok": true,
+     "phase55": "O"
+    },
+    {
+     "declared_now": "answer",
+     "got": "answer",
+     "key": "end-flip",
+     "ok": true,
+     "phase55": "answer"
+    },
+    {
+     "declared_now": "oxygen",
+     "got": "oxygen",
+     "key": "subject-substitution",
+     "ok": true,
+     "phase55": "oxygen"
+    },
+    {
+     "declared_now": [
+      "column",
+      [
+       "atom",
+       "bond",
+       "C",
+       "Cl",
+       "computer",
+       "instrument",
+       "ion",
+       "liquid",
+       "molecule",
+       "neutron",
+       "proton",
+       "sky",
+       "solid",
+       "water"
+      ]
+     ],
+     "got": [
+      "column",
+      [
+       "atom",
+       "bond",
+       "C",
+       "Cl",
+       "computer",
+       "instrument",
+       "ion",
+       "liquid",
+       "molecule",
+       "neutron",
+       "proton",
+       "sky",
+       "solid",
+       "water"
+      ]
+     ],
+     "key": "pronoun-tie-refused",
+     "ok": true,
+     "phase55": "ambiguous-antecedent"
+    },
+    {
+     "declared_now": "ambiguous-antecedent",
+     "got": "ambiguous-antecedent",
+     "key": "pronoun-two-subjects",
+     "ok": true,
+     "phase55": "ambiguous-antecedent"
+    },
+    {
+     "declared_now": "no-antecedent",
+     "got": "no-antecedent",
+     "key": "pronoun-first-turn",
+     "ok": true,
+     "phase55": "no-antecedent"
+    },
+    {
+     "declared_now": "unlicensed",
+     "got": "unlicensed",
+     "key": "pronoun-unlicensed",
+     "ok": true,
+     "phase55": "unlicensed"
+    },
+    {
+     "declared_now": "no-antecedent",
+     "got": "no-antecedent",
+     "key": "end-flip-no-column",
+     "ok": true,
+     "phase55": "no-antecedent"
+    },
+    {
+     "declared_now": "ambiguous-antecedent",
+     "got": "ambiguous-antecedent",
+     "key": "subject-ambiguous",
+     "ok": true,
+     "phase55": "ambiguous-antecedent"
+    },
+    {
+     "declared_now": "unlicensed",
+     "got": "unlicensed",
+     "key": "subject-unlicensed",
+     "ok": true,
+     "phase55": "unlicensed"
+    }
+   ]
+  },
+  "groups": {
+   "column": {
+    "cases": 7,
+    "met": 7,
+    "refusals": 2,
+    "rows": [
+     {
+      "detail": "a column of 14 rows, one answer per row of the set turn 0 named -- atom: atom (lexicon): depth 13, plane-0 mask 0x000020, |v|^2 = 5090657/128; bond: bond (lexicon): depth 12, plane-0 mask 0x000028, |v",
+      "got": [
+       "column",
+       [
+        "atom",
+        "bond",
+        "C",
+        "Cl",
+        "computer",
+        "instrument",
+        "ion",
+        "liquid",
+        "molecule",
+        "neutron",
+        "proton",
+        "sky",
+        "solid",
+        "water"
+       ]
+      ],
+      "key": "tie-describe",
+      "ok": true,
+      "want": [
+       "column",
+       [
+        "atom",
+        "bond",
+        "C",
+        "Cl",
+        "computer",
+        "instrument",
+        "ion",
+        "liquid",
+        "molecule",
+        "neutron",
+        "proton",
+        "sky",
+        "solid",
+        "water"
+       ]
+      ]
+     },
+     {
+      "detail": "a column of 2 rows, one answer per row of the set turn 0 named -- carbonate ion: molar_mass_u of carbonate ion = 7501/125 (= 60.008) -- from the molecule table (source), recomputed on read by the rule",
+      "got": [
+       "column",
+       [
+        "carbonate ion",
+        "sulfate ion"
+       ]
+      ],
+      "key": "tie-field",
+      "ok": true,
+      "want": [
+       "column",
+       [
+        "carbonate ion",
+        "sulfate ion"
+       ]
+      ]
+     },
+     {
+      "detail": "'field electronegativity_pauling of it': turn 0 produced a set of 14 rows and 12 of them do not answer the question (atom, bond, computer, instrument, ion, liquid, ...); a hole refuses the column",
+      "got": "column-incomplete",
+      "key": "tie-incomplete",
+      "ok": true,
+      "want": "column-incomplete"
+     },
+     {
+      "detail": "a column of 2 rows, one answer per row of the set turn 1 named -- carbonate ion: molar_mass_u of carbonate ion = 7501/125 (= 60.008) -- from the molecule table (source), recomputed on read by the rule",
+      "got": [
+       "column",
+       [
+        "carbonate ion",
+        "sulfate ion"
+       ]
+      ],
+      "key": "column-carried",
+      "ok": true,
+      "want": [
+       "column",
+       [
+        "carbonate ion",
+        "sulfate ion"
+       ]
+      ]
+     },
+     {
+      "detail": "electronegativity_pauling of C = 51/20 (= 2.55) -- from the element table (source), read as it is held; nothing on this path computes it",
+      "got": "C",
+      "key": "dead-set-walked-past",
+      "ok": true,
+      "want": "C"
+     },
+     {
+      "detail": "Og (chemistry): depth 27, plane-0 mask 0x043000, |v|^2 = 3705249727241979/125000",
+      "got": "Og",
+      "key": "no-tie-unchanged",
+      "ok": true,
+      "want": "Og"
+     },
+     {
+      "detail": "'describe it': turn 0 names 2 carriers that all answer it (C, O); the conversation does not say which is meant",
+      "got": "ambiguous-antecedent",
+      "key": "comparison-still-ambiguous",
+      "ok": true,
+      "want": "ambiguous-antecedent"
+     }
+    ],
+    "wrong": []
+   },
+   "fourth": {
+    "cases": 16,
+    "met": 16,
+    "refusals": 6,
+    "rows": [
+     {
+      "detail": "C (chemistry): depth 26, plane-0 mask 0x000902, |v|^2 = 1098782843288679/8000000",
+      "got": "C",
+      "key": "prior",
+      "ok": true,
+      "want": "C"
+     },
+     {
+      "detail": "electronegativity_pauling of C = 51/20 (= 2.55) -- from the element table (source), read as it is held; nothing on this path computes it",
+      "got": "C",
+      "key": "prior-licensing",
+      "ok": true,
+      "want": "C"
+     },
+     {
+      "detail": "'describe the one before that': 'that' is turn 0, and nothing was named before it",
+      "got": "no-antecedent",
+      "key": "prior-none",
+      "ok": true,
+      "want": "no-antecedent"
+     },
+     {
+      "detail": "a column of 2 rows, one answer per row of the set turn 0 named -- carbonate ion: carbonate ion (molecules): depth 47, plane-0 mask 0x000200, |v|^2 = 1495706191782215652217789781/1800480032000000; sulf",
+      "got": [
+       "column",
+       [
+        "carbonate ion",
+        "sulfate ion"
+       ]
+      ],
+      "key": "prior-set",
+      "ok": true,
+      "want": [
+       "column",
+       [
+        "carbonate ion",
+        "sulfate ion"
+       ]
+      ]
+     },
+     {
+      "detail": "a column of 2 rows, one answer per row of the set turn 0 named -- C: C (chemistry): depth 26, plane-0 mask 0x000902, |v|^2 = 1098782843288679/8000000; O: O (chemistry): depth 37, plane-0 mask 0x000800",
+      "got": [
+       "column",
+       [
+        "C",
+        "O"
+       ]
+      ],
+      "key": "both",
+      "ok": true,
+      "want": [
+       "column",
+       [
+        "C",
+        "O"
+       ]
+      ]
+     },
+     {
+      "detail": "a column of 2 rows, one answer per row of the set turn 0 named -- C: electronegativity_pauling of C = 51/20 (= 2.55) -- from the element table (source), read as it is held; nothing on this path comput",
+      "got": [
+       "column",
+       [
+        "C",
+        "O"
+       ]
+      ],
+      "key": "both-field",
+      "ok": true,
+      "want": [
+       "column",
+       [
+        "C",
+        "O"
+       ]
+      ]
+     },
+     {
+      "detail": "a column of 2 rows, one answer per row of the set turn 0 named -- C: C (chemistry): depth 26, plane-0 mask 0x000902, |v|^2 = 1098782843288679/8000000; O: O (chemistry): depth 37, plane-0 mask 0x000800",
+      "got": [
+       "column",
+       [
+        "C",
+        "O"
+       ]
+      ],
+      "key": "both-across-turns",
+      "ok": true,
+      "want": [
+       "column",
+       [
+        "C",
+        "O"
+       ]
+      ]
+     },
+     {
+      "detail": "'describe both of them': 'both of them' names 2 rows and turn 0 offers 14",
+      "got": "number-mismatch",
+      "key": "both-wrong-number",
+      "ok": true,
+      "want": "number-mismatch"
+     },
+     {
+      "detail": "a column of 2 rows, one answer per row of the set turn 0 named -- carbonate ion: molar_mass_u of carbonate ion = 7501/125 (= 60.008) -- from the molecule table (source), recomputed on read by the rule",
+      "got": [
+       "column",
+       [
+        "carbonate ion",
+        "sulfate ion"
+       ]
+      ],
+      "key": "them-set",
+      "ok": true,
+      "want": [
+       "column",
+       [
+        "carbonate ion",
+        "sulfate ion"
+       ]
+      ]
+     },
+     {
+      "detail": "'describe them': 'them' is plural and the deciding turn 0 offers one row (C)",
+      "got": "number-mismatch",
+      "key": "them-one-row",
+      "ok": true,
+      "want": "number-mismatch"
+     },
+     {
+      "detail": "'field electronegativity_pauling of them': turn 0 produced a set of 14 rows and 12 of them do not answer the question (atom, bond, computer, instrument, ion, liquid, ...); a hole refuses the column",
+      "got": "column-incomplete",
+      "key": "them-incomplete",
+      "ok": true,
+      "want": "column-incomplete"
+     },
+     {
+      "detail": "'describe both of them': no earlier turn names a carrier for 'both of them' to stand for",
+      "got": "no-antecedent",
+      "key": "plural-first-turn",
+      "ok": true,
+      "want": "no-antecedent"
+     },
+     {
+      "detail": "turn 1 ('describe it') was a follow-up: pronoun bound to C, from turn 0: 'describe C'; of the candidates C, C answered; the answer was C (chemistry): depth 26, plane-0 mask 0x000902, |v|^2 = 109878284",
+      "got": [
+       "why",
+       "C"
+      ],
+      "key": "why-after-binding",
+      "ok": true,
+      "want": [
+       "why",
+       "C"
+      ]
+     },
+     {
+      "detail": "turn 1 ('field electronegativity_pauling of it') was refused column-incomplete: 'field electronegativity_pauling of it': turn 0 produced a set of 14 rows and 12 of them do not answer the question (ato",
+      "got": [
+       "why",
+       "column-incomplete"
+      ],
+      "key": "why-after-refusal",
+      "ok": true,
+      "want": [
+       "why",
+       "column-incomplete"
+      ]
+     },
+     {
+      "detail": "turn 0 asked 'describe carbon' as a whole query; the answer was C (chemistry): depth 26, plane-0 mask 0x000902, |v|^2 = 1098782843288679/8000000",
+      "got": [
+       "why",
+       "describe carbon"
+      ],
+      "key": "why-after-whole",
+      "ok": true,
+      "want": [
+       "why",
+       "describe carbon"
+      ]
+     },
+     {
+      "detail": "'why?': nothing has been asked to explain",
+      "got": "no-antecedent",
+      "key": "why-first-turn",
+      "ok": true,
+      "want": "no-antecedent"
+     }
+    ],
+    "wrong": []
+   },
+   "surface": {
+    "cases": 6,
+    "met": 6,
+    "refusals": 1,
+    "rows": [
+     {
+      "detail": "not prime",
+      "got": "Fe",
+      "key": "surface-stepwise-pronoun",
+      "ok": true,
+      "want": "Fe"
+     },
+     {
+      "detail": "electronegativity_pauling of O = 86/25 (= 3.44) -- from the element table (source), read as it is held; nothing on this path computes it",
+      "got": "oxygen",
+      "key": "surface-planner-subject",
+      "ok": true,
+      "want": "oxygen"
+     },
+     {
+      "detail": "a column of 2 rows, one answer per row of the set turn 0 named -- C: C (chemistry): depth 26, plane-0 mask 0x000902, |v|^2 = 1098782843288679/8000000; name = Carbon (from the element table); O: O (che",
+      "got": [
+       "column",
+       [
+        "C",
+        "O"
+       ]
+      ],
+      "key": "surface-both-ordering",
+      "ok": true,
+      "want": [
+       "column",
+       [
+        "C",
+        "O"
+       ]
+      ]
+     },
+     {
+      "detail": "a column of 2 rows, one answer per row of the set turn 0 named -- carbonate ion: molar_mass_u of carbonate ion = 7501/125 (= 60.008) -- from the molecule table (source), recomputed on read by the rule",
+      "got": [
+       "column",
+       [
+        "carbonate ion",
+        "sulfate ion"
+       ]
+      ],
+      "key": "surface-column",
+      "ok": true,
+      "want": [
+       "column",
+       [
+        "carbonate ion",
+        "sulfate ion"
+       ]
+      ]
+     },
+     {
+      "detail": "6621486190496429/72621326230440000000000",
+      "got": "H",
+      "key": "surface-stepwise-given",
+      "ok": true,
+      "want": "H"
+     },
+     {
+      "detail": "'is the atomic number of it prime': every carrier this conversation names leaves the question unanswerable",
+      "got": "unlicensed",
+      "key": "surface-unlicensed",
+      "ok": true,
+      "want": "unlicensed"
+     }
+    ],
+    "wrong": []
+   }
+  },
+  "marks": {
+   "D1": true,
+   "D2": true,
+   "D3": true,
+   "D4": true,
+   "D5": true,
+   "D6": true,
+   "D8": true
+  }
+ }
+}

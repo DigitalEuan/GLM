@@ -37,6 +37,15 @@ from .reasoning import empty_rungs as emr
 from .reasoning import norm256_hex as n256
 from .reasoning import cell_guard as cgd
 from .reasoning import placement_guard as plg
+from .reasoning import address_table as adt
+from .reasoning import address_read_study as ars
+from .reasoning import coordinate_junction as cjn
+from .reasoning import coordinate_junction_study as cjs
+from .reasoning import timed_question as tmq
+from .reasoning import answering_question as anq
+from .reasoning import budget_guard_frozen as bgfz
+from .reasoning import budget_reading_study as brs
+from .reasoning import nearest_address_study as nas
 from .reasoning import probe_budget as prb
 from .reasoning import patience_census as pcs
 from .reasoning import frozen_path as frp
@@ -865,6 +874,142 @@ def _connected_two(args: argparse.Namespace) -> int:
     return 0 if report["met"] == report["taken"] else 1
 
 
+def _elliptic_certificates(args: argparse.Namespace) -> int:
+    """The elliptic-curve round (Phase 141): primes neither ``p - 1`` nor
+    ``p + 1`` reaches, certified by an elliptic-curve chain -- the marks of
+    ``studies/ELLIPTIC_CERTIFICATE_STUDY.md``."""
+    from .evaluation import elliptic_certificate_cases as ecc
+    report = ecc.measure(scripts=not args.no_scripts)
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0
+    m = report["marks"]
+    print(f"E1 Lean           {m['E1']['file']}: missing {m['E1']['missing']}, "
+          f"sorry {m['E1']['sorry']}")
+    e2 = m["E2"]
+    print(f"E2 held out       {e2['numbers']} numbers, {len(e2['wrong'])} wrong; "
+          f"{e2['certified_now']} of the {e2['phase140_refused_primes']} primes "
+          f"Phase 140 refused are now certified; the router agrees on "
+          f"{e2['routed_agree']} of {e2['numbers']}")
+    for r in e2["rows"]:
+        print(f"   {r['id']} {r['n']:>20}  want {r['want']:<9}  140 "
+              f"{r['phase140']:<9} ({r['seconds_140']} s)  141 "
+              f"{r['phase141']:<9} ({r['seconds_141']} s)  routed "
+              f"{r['routed']:<9}  {r['kind'] or '-':<11} "
+              f"{r['entries']} entries, {r['elliptic_entries']} elliptic")
+    e3 = m["E3"]
+    if e3.get("skipped"):
+        print("E3 column 3       skipped (--no-scripts)")
+    else:
+        print(f"E3 column 3       {e3['verified']} of {e3['chains']} chains "
+              f"verified; {e3['caught']} of {e3['mutants']} mutants caught; "
+              f"tampered certificates caught by the gate {e3['gate_caught']} "
+              f"and the script {e3['script_caught']} of {e3['tampered']}")
+    print(f"E4 control        {len(m['E4']['moved'])} of {m['E4']['questions']} "
+          f"Phase 139 and Phase 140 cases moved: {m['E4']['moved']}")
+    print(f"E5 kernel         the {m['E5']['entries']}-entry {m['E5']['kind']} "
+          f"certificate for {m['E5']['id']} is the Lean instance "
+          f"{m['E5']['theorem']}: {m['E5']['in_lean']}")
+    print(f"E6 interference   {len(m['E6']['changed'])} of {m['E6']['numbers']} "
+          f"certified numbers changed; {len(m['E6']['moved'])} of "
+          f"{m['E6']['corpus']} stepwise cases moved")
+    print(f"marks met         {report['met']} of {report['taken']}")
+    return 0 if report["met"] == report["taken"] else 1
+
+
+def _pocklington_certificates(args: argparse.Namespace) -> int:
+    """The Pocklington round (Phase 140): primes whose ``p - 1`` will not
+    split completely, certified from a partial factorisation -- the marks of
+    ``studies/POCKLINGTON_CERTIFICATE_STUDY.md``."""
+    from .evaluation import pocklington_certificate_cases as pkc
+    report = pkc.measure(scripts=not args.no_scripts)
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0
+    m = report["marks"]
+    print(f"Q1 Lean           {m['Q1']['file']}: missing {m['Q1']['missing']}, "
+          f"sorry {m['Q1']['sorry']}")
+    q2 = m["Q2"]
+    print(f"Q2 held out       {q2['numbers']} numbers, {len(q2['wrong'])} wrong; "
+          f"{q2['certified_now']} of the {q2['phase139_refused_primes']} primes "
+          f"Phase 139 refused are now certified; the router agrees on "
+          f"{q2['routed_agree']} of {q2['numbers']} (N+1 off, as registered; "
+          f"with N+1, post hoc: {q2['with_lucas_certified']} of "
+          f"{q2['phase139_refused_primes']})")
+    for r in q2["rows"]:
+        print(f"   {r['id']} {r['n']:>8}  want {r['want']:<9}  139 "
+              f"{r['phase139']:<9}  140 {r['phase140']:<9}  routed "
+              f"{r['routed']:<9}  N+1 {r['with_lucas']:<9} "
+              f"{r['kind'] or '-':<11} {r['seconds']} s")
+    q3 = m["Q3"]
+    if q3.get("skipped"):
+        print("Q3 column 3       skipped (--no-scripts)")
+    else:
+        print(f"Q3 column 3       {q3['verified']} of {q3['chains']} chains "
+              f"verified; {q3['caught']} of {q3['mutants']} mutants caught; "
+              f"tampered certificates caught by the gate {q3['gate_caught']} "
+              f"and the script {q3['script_caught']} of {q3['tampered']}")
+    print(f"Q4 control        off: {len(m['Q4']['moved_off'])} of "
+          f"{m['Q4']['questions']} Phase 139 questions moved; on: "
+          f"{m['Q4']['moved_on']}")
+    print(f"Q5 kernel         the {m['Q5']['entries']}-entry "
+          f"{m['Q5']['kind']} certificate for 2^521-1 is the Lean instance: "
+          f"{m['Q5']['in_lean']}; the {m['Q5']['entries_b']}-entry "
+          f"{m['Q5']['kind_b']} certificate for 33!-1 is the Lean instance: "
+          f"{m['Q5']['in_lean_b']}")
+    print(f"Q6 interference   {len(m['Q6']['changed'])} of {m['Q6']['numbers']} "
+          f"certified numbers changed; {len(m['Q6']['moved'])} of "
+          f"{m['Q6']['corpus']} stepwise cases moved")
+    q7 = m["Q7"]
+    print(f"Q7 held out B     {q7['numbers']} numbers, {len(q7['wrong'])} wrong; "
+          f"{q7['certified']} of {q7['primes']} primes certified "
+          f"({q7['certified_without']} without N+1); the router agrees on "
+          f"{q7['routed_agree']} of {q7['numbers']}")
+    for r in q7["rows"]:
+        print(f"   {r['id']} {r['n']:>10}  want {r['want']:<9}  without "
+              f"{r['without']:<9}  140 {r['phase140']:<9}  routed "
+              f"{r['routed']:<9}  {r['kind'] or '-':<11} {r['seconds']} s")
+    for r in report["known"]:
+        print(f"Q8 known (seen)   {r['n']:>9}  {r['got']:<9}  "
+              f"{r['kind'] or '-':<11} {r['seconds']} s")
+    print(f"marks met         {report['met']} of {report['taken']}")
+    return 0 if report["met"] == report["taken"] else 1
+
+
+def _primality_certificates(args: argparse.Namespace) -> int:
+    """The primality-certificate round (Phase 139): the ``prime`` step past
+    10^12 by checked certificates -- the marks of
+    ``studies/PRIMALITY_CERTIFICATE_STUDY.md``."""
+    from .evaluation import primality_certificate_cases as pcc
+    report = pcc.measure(scripts=not args.no_scripts)
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0
+    m = report["marks"]
+    print(f"P1 Lean           {m['P1']['file']}: missing {m['P1']['missing']}, "
+          f"sorry {m['P1']['sorry']}")
+    print(f"P2 held out       {m['P2']['as_expected']} of "
+          f"{m['P2']['questions']} as expected, {len(m['P2']['wrong'])} wrong")
+    p3 = m["P3"]
+    if p3.get("skipped"):
+        print("P3 column 3       skipped (--no-scripts)")
+    else:
+        print(f"P3 column 3       {p3['verified']} of {p3['chains']} chains "
+              f"verified; {p3['caught']} of {p3['mutants']} mutants caught; "
+              f"tampered certificates caught by the gate {p3['gate_caught']} "
+              f"and the script {p3['script_caught']} of {p3['tampered']}")
+    print(f"P4 agreement      {m['P4']['numbers'] - len(m['P4']['disagree'])} "
+          f"of {m['P4']['numbers']} numbers above 10^12 agree with trial "
+          f"division ({m['P4']['primes']} primes)")
+    print(f"P5 interference   {len(m['P5']['moved'])} of {m['P5']['corpus']} "
+          "stepwise cases moved")
+    print(f"P6 scale          {m['P6']['certified']} of {m['P6']['cases']} "
+          f"certified, {m['P6']['refused']} refused by the work budget, "
+          f"{len(m['P6']['wrong'])} wrong")
+    print(f"marks met         {report['met']} of {report['taken']}")
+    return 0 if report["met"] == report["taken"] else 1
+
+
 def _tool_verdicts(args: argparse.Namespace) -> int:
     """The tool-verdicts round (Phase 138): a tool's yes/no answer as a
     planner step, conditionals, the unrolled search, the Farey certificate --
@@ -1041,6 +1186,42 @@ def _affine_output(args: argparse.Namespace) -> int:
           f"generated {ni['generated_kept']}/300")
     print(f"soundness         {len(snd['halts_agree'])} halts agree, "
           f"{len(snd['halts_disagree'])} disagree; controls {snd['controls']}")
+    print(f"marks             {report['marks']}")
+    return 0 if all(report["marks"].values()) else 1
+
+
+def _quadratic_lasso(args: argparse.Namespace) -> int:
+    """Quadratic lassos (Phase 142): accumulators and the first change of a
+    quadratic comparison; the battery, the questions, column 3, the
+    non-interference, the soundness control and the exhaustive first-change
+    check."""
+    from .reasoning import quadratic_lasso as ql
+    report = ql.quadratic_lasso_report()
+    if args.json:
+        out = {k: v for k, v in report.items()
+               if k not in ("battery", "questions")}
+        print(json.dumps(_plain(out), indent=1, sort_keys=True))
+        return 0
+    for row in report["battery"]["rows"]:
+        print(f"{row['id']:<4} {'as declared' if row['as_declared'] else 'WRONG'}"
+              f"  {row['got']}")
+    que, cer = report["questions"], report["certificates"]
+    print(f"questions         {que['questions'] - que['wrong']} of "
+          f"{que['questions']} as declared; missed {que['missed']}")
+    print(f"column 3          {cer['verified']} of {cer['scripts']} verify; "
+          f"{cer['rejected']} of {cer['mutations']} mutations rejected")
+    ni, snd, fc = (report["noninterference"], report["soundness"],
+                   report["first_change"])
+    print(f"non-interference  battery {ni['battery_kept']}/{ni['battery_total']}"
+          f", questions {ni['questions_kept']}/{ni['questions_total']}, "
+          f"generated {ni['generated_kept']}/{ni['generated_total']}; "
+          f"moved {ni['moved']}; L12 now {ni['l12_now']}")
+    print(f"soundness         {len(snd['halts_agree'])} halts agree, "
+          f"{len(snd['halts_disagree'])} disagree; "
+          f"{len(snd['never_unrefuted'])} never unrefuted, "
+          f"{len(snd['never_refuted'])} refuted (plain budget {snd['budget']})")
+    print(f"first change      {fc['cases']} cases; machine wrong "
+          f"{fc['machine_wrong']}, column 3 wrong {fc['checker_wrong']}")
     print(f"marks             {report['marks']}")
     return 0 if all(report["marks"].values()) else 1
 
@@ -1315,6 +1496,369 @@ def _cell_guard(args: argparse.Namespace) -> int:
           f"{union['third_correct']} correct {union['third_wrong']} wrong")
     print(f"marks             {report['marks']}")
     return 0
+
+
+def _address_table(args: argparse.Namespace) -> int:
+    """The stored address table the `locate` kind reads (Phase 143): the
+    cells and placement radii of the 142 carriers on the eleven rungs, kept
+    beside the digests of its sources, its carriers and its content."""
+    if args.write:
+        path = adt.write_measurements()
+        print(f"wrote {path}")
+        print(f"digest {adt.module_digest()}")
+        return 0
+    condition = adt.state()
+    if args.json:
+        print(json.dumps(_plain(condition), indent=1, sort_keys=True))
+        return 0 if condition["fresh"] else 1
+    print(f"table             {condition['verdict']}"
+          + (f" ({', '.join(condition['failed'])} digest does not hold)"
+             if not condition["fresh"] else ""))
+    stored = adt.measurements()
+    if stored is not None and condition["fresh"]:
+        for rung, cells in stored["rungs"].items():
+            print(f"  {rung:<6} {len(cells['single']):>3} single-carrier "
+                  f"cells, {len(cells['shared']):>3} shared")
+    return 0 if condition["fresh"] else 1
+
+
+def _junction_table(args: argparse.Namespace) -> int:
+    """The stored junction table the `locate` kind reads (Phase 144): for
+    every shared cell whose carriers share exact coordinates, the junction
+    radius, kept beside five digests."""
+    if args.write:
+        path = cjn.write_measurements()
+        print(f"wrote {path}")
+        print(f"digest {cjn.module_digest()}")
+        return 0
+    condition = cjn.state()
+    if args.json:
+        print(json.dumps(_plain(condition), indent=1, sort_keys=True))
+        return 0 if condition["fresh"] else 1
+    print(f"table             {condition['verdict']}"
+          + (f" ({', '.join(condition['failed'])} does not hold)"
+             if not condition["fresh"] else ""))
+    stored = cjn.measurements()
+    if stored is not None and condition["fresh"]:
+        for rung, cells in stored["rungs"].items():
+            print(f"  {rung:<6} {len(cells):>3} junction cells")
+    return 0 if condition["fresh"] else 1
+
+
+def _junction_read(args: argparse.Namespace) -> int:
+    """Register junctions (Phase 144): the junction read on the six sets of
+    Phase 143, the duplicates, the declarations, the tampered tables, the
+    questions and the census -- the marks of
+    ``studies/COORDINATE_JUNCTION_STUDY.md``."""
+    if args.write:
+        path = cjs.write_measurements()
+        print(f"wrote {path}")
+        print(f"digest {cjs.module_digest()}")
+        return 0
+    condition = cjs.state()
+    report = cjs.current()
+    if report is None:
+        print(f"cache             {condition['verdict']}")
+        print("nothing is reported from a cache that does not describe the "
+              "sources; re-take it with --write")
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0
+    print(f"cache             {condition['verdict']}")
+    t = report["table"]
+    print(f"J1 table          {t['entries']} entries, unsound {t['unsound']}, "
+          f"matches recomputation {t['matches_recomputation']}")
+    for name, r in report["sets"].items():
+        print(f"  {name:<9} {r['single']:>3} single {r['junction']:>2} "
+              f"junction {r['refused']:>3} refused; changed {r['changed']}; "
+              f"wrong {r['wrong']}")
+    d = report["duplicates"]
+    print(f"J4 duplicates     {d['duplicates_read']} of {d['duplicates']} read "
+          f"as their junction; others refused {d['others_refused']}")
+    x = report["declarations"]
+    print(f"J5 declarations   {x['covered']} of {x['answerable']} answerable "
+          f"junctions declared")
+    tm = report["tamperings"]
+    print(f"T1 tamperings     {tm['refused']} of {tm['of']} refused")
+    q = report["questions"]
+    print(f"Q1 questions      {q['as_declared']}/{q['predicted']} as declared "
+          f"(missed {q['missed']}), scripts {q['scripts']}/{q['answered']}, "
+          f"mutants {q['mutants_rejected']}/{q['mutants']}")
+    c = report["census"]
+    print(f"census            {c['carriers']} carriers, {c['junctions']} "
+          f"junctions over {c['in_junctions']}, cross-register "
+          f"{c['cross_register']}")
+    print(f"marks             {report['marks']}")
+    print(f"marks met         {report['met']} of {report['taken']}")
+    return 0 if report["met"] == report["taken"] else 1
+
+
+def _timed_question(args: argparse.Namespace) -> int:
+    """Time and the question (Phase 145): waiting against asking on the
+    Golay fork, the register junctions and the dialogues -- the marks of
+    ``studies/TIMED_QUESTION_STUDY.md``."""
+    report = tmq.timed_question_report()
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0 if report["met"] == report["taken"] else 1
+
+    def _m(value) -> str:
+        return f"{value} (~{value.numerator / value.denominator:.2f})"
+
+    g1, g2, g3, g4 = (report[k] for k in ("g1", "g2", "g3", "g4"))
+    print(f"G1 waiting        {g1['resolved']}/{g1['forks']} forks resolved, "
+          f"wrong {g1['wrong']}; reports max {g1['reports']['max']}, mean "
+          f"{_m(g1['reports']['mean'])}")
+    print(f"G2 coord asks     {g2['resolved']}/{g2['forks']} resolved, wrong "
+          f"{g2['wrong']}; questions max {g2['questions']['max']}, mean "
+          f"{_m(g2['questions']['mean'])}")
+    print(f"G3 set asks       {g3['resolved']}/{g3['forks']} resolved, wrong "
+          f"{g3['wrong']}; questions max {g3['questions']['max']}, mean "
+          f"{_m(g3['questions']['mean'])} (clog2 6 = {tmq.clog2(6)})")
+    w, c = g4["without_confirmation"], g4["with_confirmation"]
+    print(f"G4 one false      without confirming: {w['resolved_wrong']}/"
+          f"{w['runs']} resolved wrong; with: {c['contradicted']}/"
+          f"{c['runs']} contradicted, {c['resolved_wrong']} wrong")
+    r1, rr = report["r1"], report["r2_r3"]
+    print(f"R1 coordinates    {r1['unchanged']}/{r1['junctions']} junctions "
+          f"unchanged by waiting on their coordinates")
+    print(f"R2 junction asks  {rr['resolved']}/{rr['runs']} resolved, wrong "
+          f"{rr['wrong']}; {rr['without_direct_choice']} without the direct "
+          f"choice")
+    print(f"R3 questions      mean {_m(rr['questions']['mean'])}, clog2 mean "
+          f"{_m(rr['clog2_mean'])}, one-by-one mean "
+          f"{_m(rr['baseline_mean'])}; max {rr['questions']['max']}")
+    d1 = report["d1"]
+    print(f"D1 dialogues      {d1['as_declared']}/{d1['declared']} as declared"
+          + (f" (missed {', '.join(d1['missed'])})" if d1["missed"] else ""))
+    print(f"marks             {report['marks']}")
+    print(f"marks met         {report['met']} of {report['taken']}")
+    return 0 if report["met"] == report["taken"] else 1
+
+
+def _answering_question(args: argparse.Namespace) -> int:
+    """The question in the answering path (Phase 146): the marks of
+    ``studies/ANSWERING_QUESTION_STUDY.md``, from the stored measurement
+    (``--write`` re-takes it, about twenty minutes)."""
+    if args.write:
+        path = anq.write_measurements()
+        print(f"wrote {path}")
+    report = anq.answering_question_report()
+    if not report.get("available"):
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0 if report["met"] == report["taken"] else 1
+    f1, e1, q1 = report["f1"], report["e1"], report["q1"]
+    c1, c2, c3, t1 = (report[k] for k in ("c1", "c2", "c3", "t1"))
+    print(f"F1 frozen path    {f1['present']}/{f1['cases']} present, "
+          f"{f1['same_status']} same status, {f1['same_text']} same text; "
+          f"moved {[m['id'] for m in f1['moved']]}; undeclared "
+          f"{f1['undeclared']}")
+    print(f"E1 new cases      {e1['as_declared']}/{e1['cases']} as declared")
+    print(f"C1 dialogues      {c1['confirmed_on_truth']} confirmed on the "
+          f"member meant, wrong {c1['wrong']}, within bounds "
+          f"{c1['within_bounds']}; replies {c1['replies']}")
+    print(f"C2 column 3       {c2['verified']}/{c2['turns']} turns verified")
+    print(f"C3 one false      {c3['contradicted']}/{c3['runs']} contradicted, "
+          f"{c3['ended_wrong']} ended wrong")
+    print(f"Q1 full registers {q1['resolved']}/{q1['runs']} resolved, wrong "
+          f"{q1['wrong']}, within n-1 {q1['within_n_minus_1']}; questions "
+          f"{q1['questions_total']} (Phase 145: {q1['phase_145_total']})")
+    r1 = report["r1"]
+    print(f"R1 reply only     controls read as replies "
+          f"{r1['controls']['read_as_reply']}; report differences "
+          f"{[d['path'] for d in r1['reports']['differences']]}")
+    print(f"T1 tampering      {t1['rejected']}/{t1['altered']} altered claims "
+          f"rejected")
+    print(f"D1 converse       {report['d1']['as_declared']}")
+    print(f"marks             {report['marks']}")
+    print(f"marks met         {report['met']} of {report['taken']} (L1 by "
+          f"the build)")
+    return 0 if report["met"] == report["taken"] else 1
+
+
+def _budget_guard_frozen(args: argparse.Namespace) -> int:
+    """The frozen path and ladder audit of Phases 147-148, from the stored
+    measurement (``--write`` re-takes it, about fifteen minutes)."""
+    if args.write:
+        print(f"wrote {bgfz.write_measurements()}")
+    report = bgfz.current()
+    if report is None:
+        print(f"the stored measurement is {bgfz.state()['verdict']}; re-take "
+              f"it with --write")
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0
+    audit = report["audit"]
+    print(f"F1 frozen path    {report['present']}/{report['cases']} present, "
+          f"{report['same_status']} same status, {report['same_text']} same "
+          f"text; moved {[m['id'] for m in report['moved']]}; undeclared "
+          f"{report['undeclared']}; new cases {len(report['new_cases'])}")
+    print(f"A0 ladder audit   {audit['total']} unguarded readings of the "
+          f"construction ladder over {report['asked']} questions "
+          f"({audit['functions_watched']} functions watched)")
+    ok = (report["present"] == report["same_status"] == report["cases"]
+          and not report["undeclared"])
+    return 0 if ok else 1
+
+
+def _budget_reading(args: argparse.Namespace) -> int:
+    """The budget rule in the answering path (Phase 147): the marks of
+    ``studies/BUDGET_READING_STUDY.md`` (``--write`` re-takes them)."""
+    if args.write:
+        print(f"wrote {brs.write_measurements(jobs=args.jobs)}")
+    report = brs.budget_reading_report()
+    if not report.get("available"):
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps(_plain({k: v for k, v in report.items()
+                                 if k != "rows"}), indent=1, sort_keys=True))
+        return 0 if report["met"] == report["taken"] else 1
+    h, c, q = report["heldout"], report["census"], report["questions"]
+    print(f"H1 held-out walks {h['rule_certified']}/{h['reached']} reached "
+          f"deep holes certified under the rule (frozen walk reading "
+          f"{h['frozen_certified']})")
+    print(f"H2 agreement      {len(h['agreement_disagreements'])} "
+          f"disagreements where the frozen reading certified")
+    print(f"H3 budget         {h['budget_reached']} readings ran to the "
+          f"budget; median {h['starts_median']}, max {h['starts_max']} starts")
+    print(f"H4 Phase 124      {len(h['phase124_disagreements'])} type "
+          f"disagreements over {h['phase124_compared']} centres")
+    print(f"R1 report         same types {c['same_types']}: "
+          f"{', '.join(c['types_rule'])}")
+    print(f"Q1 battery        {q['as_declared']}/{q['declared']} as declared, "
+          f"reads sound {q['reads_sound']}/{q['reads']}, column 3 "
+          f"{q['scripts']}/{q['answered']}, mutants rejected "
+          f"{q['mutants_rejected']}/{q['mutants']}")
+    print(f"marks             {report['marks']}")
+    print(f"marks met         {report['met']} of {report['taken']} (L1 by "
+          f"the build)")
+    return 0 if report["met"] == report["taken"] else 1
+
+
+def _nearest_address(args: argparse.Namespace) -> int:
+    """The guarded read in the nearest kind (Phase 148): the marks of
+    ``studies/NEAREST_ADDRESS_STUDY.md`` (``--write`` re-takes them)."""
+    if args.write:
+        print(f"wrote {nas.write_measurements(jobs=args.jobs)}")
+    report = nas.nearest_address_report()
+    if not report.get("available"):
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0 if report["met"] == report["taken"] else 1
+    t, q = report["sets"]["totals"], report["questions"]
+    print(f"N1 head = read    {t['head_disagreements']} disagreements over "
+          f"{t['answered']} certified points of {t['points']}")
+    print(f"N2 certified gap  {t['gap_violations']} violations "
+          f"({t['margin_positive']} with a positive margin)")
+    print(f"N3 origin         {t['origin_violations']} violations over "
+          f"{t['origin_certified']} certified origins")
+    print(f"N4 uncertified    of {t['refused']}: head is the origin "
+          f"{t['refused_head_is_origin']}, tied {t['refused_head_tied']}, "
+          f"another carrier {t['refused_head_other']}")
+    print(f"Q1 battery        {q['as_declared']}/{q['declared']} as declared, "
+          f"reads sound {q['reads_sound']}/{q['reads']}, column 3 "
+          f"{q['scripts']}/{q['answered']}, mutants rejected "
+          f"{q['mutants_rejected']}/{q['mutants']}")
+    print(f"marks             {report['marks']}")
+    print(f"marks met         {report['met']} of {report['taken']} (L1 by "
+          f"the build)")
+    return 0 if report["met"] == report["taken"] else 1
+
+
+def _timed_ask(args: argparse.Namespace) -> int:
+    """One tie held open and resolved by asking (Phase 145): ``locate ...``
+    or ``fork i``.  The informant is the developer told ``--truth``, or the
+    person at the terminal with ``--interactive``."""
+    if args.interactive:
+        informant = tmq.InteractiveInformant()
+    elif args.truth is None and not args.tie.startswith("fork"):
+        print("give --truth LABEL (the developer as informant) or "
+              "--interactive (answer the questions yourself)")
+        return 2
+    else:
+        informant = None
+
+    def _announce(read: str, tie) -> None:
+        if args.json:
+            return
+        print(f"read              {read}")
+        print(f"tie               {len(tie.candidates)} candidates held "
+              f"open: {', '.join(tie.label(c) for c in tie.candidates)}")
+
+    r = tmq.run_dialogue(args.tie, args.truth, informant=informant,
+                         confirm=args.confirm, announce=_announce)
+    if args.json:
+        print(json.dumps(_plain(r), indent=1, sort_keys=True))
+        return 0
+    if not r["opened"]:
+        print(f"read              {r['read']}")
+        return 0
+    for s in r["steps"]:
+        removed = (f"; removes {', '.join(s['removed'])}" if s["removed"]
+                   else "; removes nothing")
+        print(f"  t={s['t']} {s['mode']:<9} {s['question']} -> {s['answer']} "
+              f"({s['informant']}){removed}")
+    print(f"status            {r['status']}"
+          + (f": {r['value']}" if r["value"] else "")
+          + f" after {r['asked']} question(s)")
+    if r["status"] == "resolved":
+        print(f"rests on          {tmq.TRUTHFUL}")
+    elif r["status"] == "contradicted":
+        print("contradicted      no candidate fits every answer, so some "
+              "answer was false (GLM.TimedQuestion.contradicted_not_truthful)")
+    return 0 if r["status"] == "resolved" else 1
+
+
+def _address_read(args: argparse.Namespace) -> int:
+    """The address read (Phase 143): the `locate` kind on six query sets,
+    the tampered tables, the question battery and the wiring census -- the
+    marks of ``studies/ADDRESS_READ_STUDY.md``."""
+    if args.write:
+        path = ars.write_measurements()
+        print(f"wrote {path}")
+        print(f"digest {ars.module_digest()}")
+        return 0
+    condition = ars.state()
+    report = ars.current()
+    if report is None:
+        print(f"cache             {condition['verdict']}")
+        print("nothing is reported from a cache that does not describe the "
+              "sources; re-take it with --write")
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0
+    print(f"cache             {condition['verdict']}")
+    for name, r in report["sets"].items():
+        extra = ""
+        if "unguarded" in r:
+            extra = (f"; unguarded ladder {r['unguarded']['correct']}/"
+                     f"{r['unguarded']['wrong']}")
+        print(f"  {name:<9} {r['correct']:>3} correct {r['wrong']:>2} wrong "
+              f"{r['refused']:>3} refused; origin certified "
+              f"{r['origin_certified']}{extra}")
+    t = report["tamperings"]
+    print(f"T1 tamperings     {t['refused']} of {t['of']} refused stale-table")
+    q = report["questions"]
+    print(f"Q1 questions      fixed {q['fixed_as_declared']}/{q['fixed']}, "
+          f"predicted {q['predicted_as_declared']}/{q['predicted']}, sound "
+          f"{q['reads_sound']}/{q['reads']}, scripts {q['scripts']}/"
+          f"{q['answered']}, mutants {q['mutants_rejected']}/{q['mutants']}")
+    c = report["wiring"]["census"]
+    print(f"W1 wiring         {c['reached']} of {c['reasoning']} reached; "
+          f"guards reached {report['wiring']['guards_reached']}; diverted "
+          f"{report['wiring']['diverted']}")
+    print(f"marks             {report['marks']}")
+    print(f"marks met         {report['met']} of {report['taken']}")
+    return 0 if report["met"] == report["taken"] else 1
 
 
 def _placement_guard(args: argparse.Namespace) -> int:
@@ -4606,6 +5150,14 @@ def _parser() -> argparse.ArgumentParser:
     afo.add_argument("--json", action="store_true")
     afo.set_defaults(handler=_affine_output)
 
+    qla = sub.add_parser(
+        "quadratic-lasso",
+        help="GLM-BAT's quadratic lassos: accumulators, the first change of "
+             "a quadratic comparison, and never verdicts over growing steps; "
+             "the battery and the marks")
+    qla.add_argument("--json", action="store_true")
+    qla.set_defaults(handler=_quadratic_lasso)
+
     dsub = sub.add_parser(
         "designed-substrate",
         help="the owner's substrate study brought in: sender-tag and "
@@ -4653,6 +5205,30 @@ def _parser() -> argparse.ArgumentParser:
     tvrd.add_argument("--no-scripts", action="store_true")
     tvrd.set_defaults(handler=_tool_verdicts)
 
+    prc = sub.add_parser(
+        "primality-certificates",
+        help="the prime step past 10^12 by checked certificates (factor, "
+             "Fermat witness, Pratt); the marks")
+    prc.add_argument("--json", action="store_true")
+    prc.add_argument("--no-scripts", action="store_true")
+    prc.set_defaults(handler=_primality_certificates)
+
+    pkc = sub.add_parser(
+        "pocklington-certificates",
+        help="primes whose p - 1 will not split, certified from a partial "
+             "factorisation (Pocklington); the marks")
+    pkc.add_argument("--json", action="store_true")
+    pkc.add_argument("--no-scripts", action="store_true")
+    pkc.set_defaults(handler=_pocklington_certificates)
+
+    elc = sub.add_parser(
+        "elliptic-certificates",
+        help="primes neither p - 1 nor p + 1 reaches, certified by an "
+             "elliptic-curve chain; the marks")
+    elc.add_argument("--json", action="store_true")
+    elc.add_argument("--no-scripts", action="store_true")
+    elc.set_defaults(handler=_elliptic_certificates)
+
     cfcl = sub.add_parser(
         "configuration-classifier",
         help="the L5 answer rule over the 44 deep-hole queries")
@@ -4699,6 +5275,98 @@ def _parser() -> argparse.ArgumentParser:
                       help="re-take the measurement cache")
     plgp.add_argument("--json", action="store_true")
     plgp.set_defaults(handler=_placement_guard)
+
+    adtp = sub.add_parser(
+        "address-table",
+        help="the stored table the locate kind reads, and its three digests")
+    adtp.add_argument("--write", action="store_true",
+                      help="re-take the table")
+    adtp.add_argument("--json", action="store_true")
+    adtp.set_defaults(handler=_address_table)
+
+    arsp = sub.add_parser(
+        "address-read",
+        help="the address read: the locate kind on six sets, the tampered "
+             "tables, the questions")
+    arsp.add_argument("--write", action="store_true",
+                      help="re-take the measurement cache")
+    arsp.add_argument("--json", action="store_true")
+    arsp.set_defaults(handler=_address_read)
+
+    cjtp = sub.add_parser(
+        "junction-table",
+        help="the stored junction table the locate kind reads (Phase 144)")
+    cjtp.add_argument("--write", action="store_true",
+                      help="re-take the table")
+    cjtp.add_argument("--json", action="store_true")
+    cjtp.set_defaults(handler=_junction_table)
+
+    cjsp = sub.add_parser(
+        "junction-read",
+        help="register junctions: the junction read on six sets, the "
+             "duplicates, the declarations, the questions")
+    cjsp.add_argument("--write", action="store_true",
+                      help="re-take the measurement cache")
+    cjsp.add_argument("--json", action="store_true")
+    cjsp.set_defaults(handler=_junction_read)
+
+    tmqp = sub.add_parser(
+        "timed-question",
+        help="time and the question: waiting against asking on a tie "
+             "(Phase 145)")
+    tmqp.add_argument("--json", action="store_true")
+    tmqp.set_defaults(handler=_timed_question)
+
+    bgfp = sub.add_parser(
+        "budget-guard-frozen",
+        help="the frozen path and ladder audit of Phases 147-148")
+    bgfp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~15 minutes)")
+    bgfp.add_argument("--json", action="store_true")
+    bgfp.set_defaults(handler=_budget_guard_frozen)
+
+    brsp = sub.add_parser(
+        "budget-reading",
+        help="the budget rule in the answering path: no barren stop, 1056 "
+             "starts (Phase 147)")
+    brsp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~10 minutes)")
+    brsp.add_argument("--jobs", type=int, default=8)
+    brsp.add_argument("--json", action="store_true")
+    brsp.set_defaults(handler=_budget_reading)
+
+    nasp = sub.add_parser(
+        "nearest-address",
+        help="the guarded read in the nearest kind: a point no register "
+             "holds, ranked and certified (Phase 148)")
+    nasp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement")
+    nasp.add_argument("--jobs", type=int, default=6)
+    nasp.add_argument("--json", action="store_true")
+    nasp.set_defaults(handler=_nearest_address)
+
+    anqp = sub.add_parser(
+        "answering-question",
+        help="the question in the answering path: a junction answer ends "
+             "with its question, a reply is the next turn (Phase 146)")
+    anqp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~20 minutes)")
+    anqp.add_argument("--json", action="store_true")
+    anqp.set_defaults(handler=_answering_question)
+
+    tmap = sub.add_parser(
+        "timed-ask",
+        help="hold one tie open and resolve it by asking: 'locate ...' or "
+             "'fork i' (Phase 145)")
+    tmap.add_argument("tie", help="'locate albedo', 'fork 0', ...")
+    tmap.add_argument("--truth", default=None,
+                      help="what is meant (the developer as informant)")
+    tmap.add_argument("--interactive", action="store_true",
+                      help="answer the questions at the terminal")
+    tmap.add_argument("--confirm", action="store_true",
+                      help="put one confirming question after resolving")
+    tmap.add_argument("--json", action="store_true")
+    tmap.set_defaults(handler=_timed_ask)
 
     cumul = sub.add_parser(
         "cumulativity", help="the refinement check every layer family passes")

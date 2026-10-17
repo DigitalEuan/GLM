@@ -654,7 +654,7 @@ _CASES: Tuple[EvalCase, ...] = (
             "every measured figure comes back unchanged."),
 
     _c("report-language", "report", "report language",
-       "answer", contains=("7 of 24 answerable query kinds",
+       "answer", contains=("7 of 25 answerable query kinds",
                            "derive, measure, task, compare by slot shape",
                            "verify, analogy, compare by infix shape",
                            "comparative by nested shape",
@@ -766,8 +766,27 @@ _CASES: Tuple[EvalCase, ...] = (
        # Re-pinned again at Phase 138 (the last NearestFraction.lean
        # declarations, le_fib_succ and search_terminates) makes the set 862
        # and the gate fires on 54 of 1724; still ahead, carrying 18, losing 0.
-       "answer", contains=("714 -> 719 of 862 (ahead)", "54 of 1724",
-                           "carrying 18 queries it misses and losing 0"),
+       # Re-pinned at Phase 139 (PrimalityCertificate.lean) makes the set
+       # 864 and the gate fires on 56 of 1728; still ahead on every set,
+       # carrying 16, losing 0.
+       # Re-pinned at Phase 140 (PocklingtonCertificate.lean and
+       # LucasCertificate.lean; the declaration count moves the stride, so
+       # the set is 805) and the gate fires on 36 of 1610; still ahead on
+       # every set, carrying 14, losing 0.
+       # Re-pinned at Phase 141 (EllipticCertificate.lean) makes the set
+       # 809 and the gate fires on 36 of 1618; still ahead on every set,
+       # carrying 14, losing 0.
+       # Re-pinned at Phase 142 (QuadraticLasso.lean) makes the set 813 and
+       # the gate fires on 46 of 1626; still ahead on every set, carrying
+       # 12, losing 0.
+       # Re-pinned at Phase 144 (CoordinateJunction.lean) makes the set 817
+       # and the gate fires on 38 of 1634; still ahead on every set,
+       # carrying 9, losing 0.
+       # Re-pinned at Phase 145 (TimedQuestion.lean) makes the set 822 and
+       # the gate fires on 38 of 1644; still ahead on every set, carrying
+       # 9, losing 0.
+       "answer", contains=("687 -> 690 of 822 (ahead)", "38 of 1644",
+                           "carrying 9 queries it misses and losing 0"),
        note="The faculties arranged as a stack rather than scored one at a "
             "time: below a gate of 1/10 the leading lexical search is "
             "judged to have abstained and the two geometric address books "
@@ -820,7 +839,26 @@ _CASES: Tuple[EvalCase, ...] = (
        # Re-pinned again at Phase 138 (queries 860 -> 862 with the last
        # NearestFraction.lean declarations): text 714 -> 49, structure
        # 174 -> 173; claim unchanged.
-       "answer", contains=("714 -> 49 of 862", "174 -> 173 of 862",
+       # Re-pinned at Phase 139 (queries 862 -> 864 with
+       # PrimalityCertificate.lean): text 713 -> 52, structure 167 -> 165;
+       # claim unchanged.
+       # Re-pinned at Phase 140 (queries 864 -> 805 with
+       # PocklingtonCertificate.lean and LucasCertificate.lean, the stride
+       # moving with the declaration count): text 676 -> 50, structure
+       # 165 -> 161; claim unchanged.
+       # Re-pinned at Phase 141 (queries 805 -> 809 with
+       # EllipticCertificate.lean): text 679 -> 50, structure 167 -> 163;
+       # claim unchanged.
+       # Re-pinned at Phase 142 (queries 809 -> 813 with
+       # QuadraticLasso.lean): text 661 -> 45, structure 161 -> 157; claim
+       # unchanged.
+       # Re-pinned at Phase 144 (queries 813 -> 817 with
+       # CoordinateJunction.lean): text 691 -> 51, structure 143 -> 141;
+       # claim unchanged.
+       # Re-pinned at Phase 145 (queries 817 -> 822 with
+       # TimedQuestion.lean): text 687 -> 51, structure 139 -> 137; claim
+       # unchanged.
+       "answer", contains=("687 -> 51 of 822", "139 -> 137 of 822",
                            "class, not a residue"),
        note="The register where the geometric address is the only faculty "
             "still reading: rename every identifier of a query outside a "
@@ -1155,6 +1193,151 @@ _CASES: Tuple[EvalCase, ...] = (
        "refusal", classification="boundary",
        note="A nine-bit value is not a seven-bit tag, and the read says so "
             "rather than truncating it."),
+
+    # --------------------------------------------------------------- locate
+    #  Phase 143 (studies/ADDRESS_READ_STUDY.md, section 3.2): a point read
+    #  off the construction ladder by its address, under the placement guard.
+    _c("locate-clean", "locate", "locate C",
+       "answer", contains=("chemistry:C", "strictly nearest", "rung C"),
+       note="A carrier read as itself: its own cell at the middle rung holds "
+            "only it and the placement guard holds, so the answer is "
+            "certified the strictly nearest carrier "
+            "(`GLM.AddressRead.read_strict_nearest`)."),
+    _c("locate-moved", "locate", "locate C moved 8 by 1/2",
+       "answer", contains=("chemistry:C", "rung 2A", "read_origin"),
+       note="Carbon moved on eight coordinates by 1/2: the cells of the "
+            "first two rungs visited (C, A) are empty, the third (2A) "
+            "certifies, and the move of length "
+            "sqrt 2 is inside the margin, so the answer is certified to be "
+            "the carrier the point came from (`GLM.AddressRead.read_origin`)."),
+    _c("locate-point", "locate",
+       "locate 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, "
+       "0, 0, 0, 0 within 1/2",
+       "answer", contains=("golay_codeword_1", "rung A/2", "read_origin"),
+       note="Twenty-four coordinates and a bound on the move: five rungs "
+            "find the cell shared, the sixth certifies, and no other carrier "
+            "lies within the margin of 2.581."),
+    _c("locate-uncertified", "locate", "locate perfect_fifth moved 2 by 2",
+       "refusal", classification="boundary",
+       note="No rung's cell holds one carrier with its guard holding, so the "
+            "read refuses rung by rung rather than name an uncertified "
+            "carrier (`GLM.AddressRead.read_none_iff`)."),
+    _c("locate-ambiguous", "locate", "locate water",
+       "refusal", classification="boundary",
+       note="Two registers hold a carrier named water; the read names both "
+            "and asks which, rather than picking one."),
+    _c("locate-unknown", "locate", "locate Fe",
+       "refusal", classification="boundary",
+       note="Iron is not among the 142 carriers the address table holds."),
+    #  Phase 144 (studies/COORDINATE_JUNCTION_STUDY.md): carriers that share
+    #  exact coordinates are read as a junction, Phase 66's rule for names.
+    _c("locate-junction", "locate", "locate albedo",
+       "answer", contains=("junction", "physics:absorptance",
+                           "physics:albedo", "no_read_separates",
+                           "declared distinct"),
+       note="Absorptance and albedo have the same 24 coordinates, so no read "
+            "can name one of them; the read answers their junction, certified "
+            "strictly nearer than every other carrier "
+            "(`GLM.CoordinateJunction.jread_junction_nearest`), and reports "
+            "the declaration that they are two measurands, not one."),
+    _c("locate-junction-moved", "locate", "locate filled_2x12 moved 4 by 1/2",
+       "answer", contains=("junction", "mathematics:filled_4x6",
+                           "jread_origin"),
+       note="A moved matrix of the eight `filled_*` (same entries, different "
+            "shapes): the move is inside the junction's margin, so the "
+            "carrier it came from is certified to be in the junction "
+            "(`GLM.CoordinateJunction.jread_origin`)."),
+    _c("locate-junction-crowded", "locate", "locate golay_codeword_0",
+       "refusal", classification="boundary",
+       note="The zero word's junction (Golay and hexacode) shares every cell "
+            "with two nearby carriers that are not in it, so no rung "
+            "certifies it and the read refuses rather than name it."),
+    _c("locate-dimension", "locate", "locate 1, 2, 3",
+       "refusal", classification="boundary",
+       note="Three coordinates are not a point of the 24-dimensional "
+            "substrate."),
+    #  Phase 146 (studies/ANSWERING_QUESTION_STUDY.md): the junction answer
+    #  ends with the question that would split it, and replies are given.
+    _c("locate-reply", "locate", "locate acoustic_power_level given "
+       "attr:unit is dB",
+       "answer", contains=("leave 2 of the 3 members",
+                           "physics:acoustic_intensity_level",
+                           "the GLM asks: Does its description mention "
+                           "'intensity'?", "after_reply"),
+       note="One reply (the unit is dB) leaves two of the three acoustic "
+            "members, and the answer ends with the next question, which "
+            "splits them (`GLM.AnsweringQuestion.after_reply`)."),
+    _c("locate-reply-confirmed", "locate", "locate albedo given "
+       "word:absorbed is no; confirm:physics:albedo is yes",
+       "answer", contains=("it is physics:albedo", "resolved_eq_truth",
+                           "the confirming reply agrees"),
+       forbids=("the GLM asks",),
+       note="A reply resolves the junction to albedo and the confirming "
+            "reply agrees, so the answer puts no further question."),
+    _c("locate-reply-contradicted", "locate", "locate albedo given "
+       "word:absorbed is no; confirm:physics:albedo is no",
+       "refusal", classification="boundary",
+       note="The confirming reply contradicts the first, so no member is "
+            "left; the GLM reports the contradiction and does not choose "
+            "(`GLM.AnsweringQuestion.confirm_catches`)."),
+    _c("locate-reply-no-tie", "locate", "locate C given attr:unit is dB",
+       "refusal", classification="boundary",
+       note="Carbon reads as a single carrier, so there is no tie for a "
+            "reply to resolve."),
+
+    # ------------------------------------------- the budget rule (Phase 147)
+    _c("hole-walk", "hole", "hole walk 1",
+       "answer", contains=("D_24", "certified complete", "budget rule"),
+       note="A declared walk reaches a deep hole and the reading, with no "
+            "barren stop and the proved budget of 1056 starts, certifies "
+            "its type (`GLM.BudgetReading.budget_agrees`)."),
+    _c("hole-octad-pair", "hole", "hole octad pair",
+       "answer", contains=("A_1^24", "48 vertices"),
+       note="The octad-pair midpoint, built from the substrate's own "
+            "codewords, read under the budget rule."),
+    _c("hole-patience-refused", "hole", "hole walk 3006",
+       "answer", contains=("D_16 E_8", "certified complete"),
+       note="The walk's own reading (200 starts, patience 40) left this "
+            "deep hole uncertified; under the budget rule the reading runs "
+            "on to its certificate (`GLM.BudgetReading.patience_may_refuse`)."),
+    _c("hole-lattice-point", "hole",
+       "hole 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+       "refusal", classification="boundary",
+       note="A lattice point sits in no deep hole, decided by start 0."),
+    _c("hole-malformed", "hole", "hole walk x",
+       "refusal", classification="boundary",
+       note="A walk is named by its index."),
+
+    # ------------------------------ the guarded read in nearest (Phase 148)
+    _c("nearest-address-moved", "nearest", "nearest to C moved 8 by 1/2",
+       "answer", contains=("chemistry:C", "certifies the head",
+                           "ranking_head_origin"),
+       note="A moved carrier no register holds, ranked against the 142 "
+            "carriers of the address table; the guarded read certifies the "
+            "head and the gap after it (`GLM.NearestAddress`)."),
+    _c("nearest-address-point", "nearest",
+       "nearest to 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, "
+       "0, 0, 0, 0, 0",
+       "answer", contains=("mathematics:golay_codeword_1",
+                           "certifies the head"),
+       note="24 exact coordinates ranked by full scan, the head certified."),
+    _c("nearest-address-uncertified", "nearest",
+       "nearest 3 to harmonics:perfect_fifth moved 2 by 2",
+       "answer", contains=("harmonics:perfect_fifth",
+                           "no margin is certified"),
+       note="No rung certifies the point: the ranking stands, its head the "
+            "strict nearest by scan (`ranking_head_of_strict`), and the "
+            "answer says no margin is certified."),
+    _c("nearest-address-junction", "nearest",
+       "nearest to albedo moved 4 by 1/4",
+       "answer", contains=("physics:absorptance", "physics:albedo",
+                           "member of the junction"),
+       note="The head of the ranking is a junction, two carriers at one "
+            "exact coordinate vector."),
+    _c("nearest-address-ambiguous", "nearest",
+       "nearest to water moved 8 by 1/2",
+       "refusal", classification="boundary",
+       note="'water' names two carriers of the address table."),
 
     # ----------------------------------------------------- scale conversion
     _c("scales-mass-across-tables", "ordering",

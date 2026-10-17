@@ -1,0 +1,1216 @@
+{
+ "before": [
+  {
+   "answer": "force = mass * acceleration holds under scalar semantics",
+   "id": "verify-newton",
+   "ok": true,
+   "question": "verify force = mass * acceleration"
+  },
+  {
+   "answer": "power = energy / time holds under scalar semantics",
+   "id": "verify-power",
+   "ok": true,
+   "question": "verify power = energy / time"
+  },
+  {
+   "answer": "pressure = force / area holds under scalar semantics",
+   "id": "verify-pressure",
+   "ok": true,
+   "question": "verify pressure = force / area"
+  },
+  {
+   "answer": "energy = mass * velocity does not hold under scalar semantics",
+   "id": "verify-false",
+   "ok": true,
+   "question": "verify energy = mass * velocity"
+  },
+  {
+   "answer": "force = mass * acceleration * 10 does not hold under scalar semantics",
+   "id": "verify-scaled-false",
+   "ok": true,
+   "question": "verify force = mass * acceleration * 10"
+  },
+  {
+   "answer": "angular_momentum = momentum * length does not hold under scalar semantics",
+   "id": "verify-angular-momentum",
+   "ok": true,
+   "question": "verify angular_momentum = momentum * length"
+  },
+  {
+   "answer": "Li : Na :: Be : Mg",
+   "id": "analogy-alkali",
+   "ok": true,
+   "question": "Li : Na :: Be : ?"
+  },
+  {
+   "answer": "hot : cold :: fast : slow",
+   "id": "analogy-antonym",
+   "ok": true,
+   "question": "hot : cold :: fast : ?"
+  },
+  {
+   "answer": "F : Cl :: O : S",
+   "id": "analogy-halogen",
+   "ok": true,
+   "question": "F : Cl :: O : ?"
+  },
+  {
+   "answer": "length : wavenumber :: time : frequency",
+   "id": "analogy-reciprocal",
+   "ok": true,
+   "question": "length : wavenumber :: time : ?"
+  },
+  {
+   "answer": "He : Ne :: Ar : Kr",
+   "id": "analogy-noble-gas",
+   "ok": true,
+   "question": "He : Ne :: Ar : ?"
+  },
+  {
+   "answer": "B : Al :: C : Si",
+   "id": "analogy-boron-carbon",
+   "ok": true,
+   "question": "B : Al :: C : ?"
+  },
+  {
+   "answer": "solid : liquid :: liquid : gas",
+   "id": "analogy-states-of-matter",
+   "ok": true,
+   "question": "solid : liquid :: liquid : ?"
+  },
+  {
+   "answer": "gram : mass :: millisecond : time",
+   "id": "analogy-scale",
+   "ok": true,
+   "question": "gram : mass :: millisecond : ?"
+  },
+  {
+   "answer": "unsolved: analogy: Ca -> Sc is a step of (+0 period, +1 group) in the derived table coordinates, but the step is well defined -- (+0 period, +1 group) -- but period 6, group 3 holds 15 elements (the f-block sits there), so it names no single element",
+   "id": "analogy-empty-table-position",
+   "ok": false,
+   "question": "Ca : Sc :: Ba : ?"
+  },
+  {
+   "answer": "heat : temperature :: force : work",
+   "id": "analogy-cross-register",
+   "ok": true,
+   "question": "heat : temperature :: force : ?"
+  },
+  {
+   "answer": "unsolved: analogy: temperature effort_of heat -- the energy-conjugate pairing of the thermal row, in which heat is the transfer and temperature the effort, but acceleration occupies no column of the conjugate register, so the relation has no side for it to enter on; the register's names are ['amount', 'angle', 'area', 'charge', 'chemical_potential', 'chemical_work', 'electrical_work', 'entropy', 'flow_work', 'force', 'heat', 'length', 'pressure', 'rotational_work', 'surface_tension', 'surface_work', 'temperature', 'torque', 'voltage', 'volume', 'work'] (the role_typed criterion); and the three terms do not share a register: physics holds acceleration, temperature but not heat.  The query was answerable only in 'lexicon', which holds all three words but is not where the question lives, so transporting a displacement there would name a carrier without meaning it",
+   "id": "analogy-conjugate-unplaced",
+   "ok": false,
+   "question": "heat : temperature :: acceleration : ?"
+  },
+  {
+   "answer": "nearest to water: formaldehyde, hydrochloric acid, hydrogen peroxide, hydroxide ion, sodium hydroxide",
+   "id": "nearest-molecule",
+   "ok": true,
+   "question": "nearest to H2O"
+  },
+  {
+   "answer": "nearest to Cl2Pb: sodium chloride, silicon dioxide, sodium hydroxide, titanium dioxide, dinitrogen monoxide",
+   "id": "nearest-unregistered-molecule",
+   "ok": true,
+   "question": "nearest to PbCl2"
+  },
+  {
+   "answer": "C (chemistry): depth 26, plane-0 mask 0x000902, |v|^2 = 1098782843288679/8000000",
+   "id": "describe-carbon",
+   "ok": true,
+   "question": "describe carbon"
+  },
+  {
+   "answer": "energy (physics): depth 4, plane-0 mask 0x400802, |v|^2 = 47/8",
+   "id": "describe-energy",
+   "ok": true,
+   "question": "what is energy"
+  },
+  {
+   "answer": "water (molecules): depth 34, plane-0 mask 0x000004, |v|^2 = 42527938000719449137/2880000",
+   "id": "describe-water",
+   "ok": true,
+   "question": "describe water"
+  },
+  {
+   "answer": "unsolved: resolve: 'unobtainium' names no carrier in any enabled domain; did you mean ['actinium', 'einsteinium', 'neptunium', 'nobelium', 'potassium']?",
+   "id": "describe-unknown-word",
+   "ok": false,
+   "question": "describe unobtainium"
+  },
+  {
+   "answer": "'PbCl2' denotes compound Z17_2 Z82 [formula: formula PbCl2]; no register entry is spelled that way, so it is described by what it denotes",
+   "id": "describe-formula",
+   "ok": true,
+   "question": "describe PbCl2"
+  },
+  {
+   "answer": "glucose (molecules): depth 50, plane-0 mask 0x000200, |v|^2 = 180901803336573578931796268561/7212485408000000",
+   "id": "describe-registered-formula",
+   "ok": true,
+   "question": "describe C6H12O6"
+  },
+  {
+   "answer": "energy divided by time has dimension L^2 M T^-3, which the register names 6 ways: heat_flow, luminosity, metabolic_rate, power, radiant_flux, sound_power",
+   "id": "describe-arithmetic",
+   "ok": true,
+   "question": "what is energy divided by time"
+  },
+  {
+   "answer": "'2 + 2' denotes number 4 [arithmetic: expression evaluates to 4]; no register entry is spelled that way, so it is described by what it denotes",
+   "id": "describe-numeral-arithmetic",
+   "ok": true,
+   "question": "what is 2 + 2"
+  },
+  {
+   "answer": "nearest to pressure: bar_pressure, blood_pressure, bulk_modulus, dynamic_pressure, elastic_modulus",
+   "id": "nearest-pressure",
+   "ok": true,
+   "question": "nearest 5 to pressure"
+  },
+  {
+   "answer": "nearest to C: N, O, B",
+   "id": "nearest-carbon",
+   "ok": true,
+   "question": "nearest 3 to carbon"
+  },
+  {
+   "answer": "a_127 . a_432 = (1/8)(a_127 + a_432 - a_463)",
+   "id": "product-sakuma",
+   "ok": true,
+   "question": "sakuma product"
+  },
+  {
+   "answer": "2 clusters (single linkage): [['C'], ['N', 'O']]",
+   "id": "cluster-cno",
+   "ok": true,
+   "question": "cluster C, N, O into 2"
+  },
+  {
+   "answer": "O: plane-0 frame weight 1, brick weights [0, 0, 1], Golay distance 1",
+   "id": "spatial-oxygen",
+   "ok": true,
+   "question": "mog grid of oxygen"
+  },
+  {
+   "answer": "project C O: walked 5 layers, final = universal",
+   "id": "project-carbon-oxygen",
+   "ok": true,
+   "question": "project carbon oxygen"
+  },
+  {
+   "answer": "trilinear 127 432 463: <A.B, C> = -3/32",
+   "id": "trilinear-triple",
+   "ok": true,
+   "question": "trilinear 127 432 463"
+  },
+  {
+   "answer": "trilinear 1 2 3: an operand did not resolve to a 2A axis",
+   "id": "trilinear-nonaxes",
+   "ok": false,
+   "question": "trilinear 1 2 3"
+  },
+  {
+   "answer": "coherence C: NRCI = 0.0000 (Subcoherent)",
+   "id": "coherence-carbon",
+   "ok": true,
+   "question": "coherence carbon"
+  },
+  {
+   "answer": "angle C O: cos^2 = 116097855372234966452798019802586761/159900057850008959959491104854594871 (acute)",
+   "id": "angle-carbon-oxygen",
+   "ok": true,
+   "question": "angle carbon oxygen"
+  },
+  {
+   "answer": "task grid: the rule is rotate180; the test grid maps to [[0, 0, 7], [0, 5, 0], [3, 0, 2]]",
+   "id": "task-grid",
+   "ok": true,
+   "question": "task grid"
+  },
+  {
+   "answer": "task physics: energy and torque are the same quantity in SI7 (L^2 M T^-2) and different in EXT10; the carriers first differ at digit plane 0, and the difference is carried by the dimension, tensor_rank, nominal_kind facets",
+   "id": "task-physics",
+   "ok": true,
+   "question": "task physics"
+  },
+  {
+   "answer": "task concepts: the migrated CRG relates entropy to energy in 2 asserted steps, and the dimensional register confirms entropy * temperature = energy while rejecting entropy * temperature = force; the substrate contributes nothing to either, since the carriers were assigned by digest",
+   "id": "task-concepts",
+   "ok": true,
+   "question": "task concepts"
+  },
+  {
+   "answer": "2 Pi group(s) over 5 quantities of rank 3: force^(-1/1) * mass^(1/1) * acceleration^(1/1); force^(1/2) * mass^(-1/2) * length^(-1/2) * time^(1/1)",
+   "id": "pi-groups-force",
+   "ok": true,
+   "question": "pi groups force, mass, acceleration, length, time"
+  },
+  {
+   "answer": "1 Pi group(s) over 3 quantities of rank 2: energy^(-1/2) * mass^(1/2) * velocity^(1/1)",
+   "id": "pi-groups-energy",
+   "ok": true,
+   "question": "pi groups energy, mass, velocity"
+  },
+  {
+   "answer": "'water' denotes compound Z1_2 Z8",
+   "id": "meaning-water",
+   "ok": true,
+   "question": "meaning of water"
+  },
+  {
+   "answer": "'42' denotes number 42",
+   "id": "meaning-numeral",
+   "ok": true,
+   "question": "meaning of 42"
+  },
+  {
+   "answer": "'XIV' denotes number 14",
+   "id": "meaning-roman",
+   "ok": true,
+   "question": "meaning of XIV"
+  },
+  {
+   "answer": "'energy' and 'work' denote the same thing: dimension L^2 M T^-2",
+   "id": "meaning-relate-synonyms",
+   "ok": true,
+   "question": "relate energy work"
+  },
+  {
+   "answer": "'energy' -> dimension L^2 M T^-2; 'torque' -> dimension L^2 M T^-2 A^-1; derived: si7_conflates",
+   "id": "meaning-relate-conflated",
+   "ok": true,
+   "question": "relate energy torque"
+  },
+  {
+   "answer": "'justice' denotes nothing determinate: no determinate referent: the term is not a numeral, a number word, a Roman numeral, an arithmetic expression, an SI defining constant, an element, a chemical formula or named species, a register quantity or an operator",
+   "id": "meaning-open-vocabulary",
+   "ok": true,
+   "question": "meaning of justice"
+  },
+  {
+   "answer": "sqrt(2) = 1.41421356237309504880 (to 20 places); no carrier holds it",
+   "id": "real-sqrt2",
+   "ok": true,
+   "question": "approximate sqrt(2) to 20 places"
+  },
+  {
+   "answer": "pi = 3.14159265358979323846 (to 20 places); no carrier holds it",
+   "id": "real-pi",
+   "ok": true,
+   "question": "approximate pi to 20 places"
+  },
+  {
+   "answer": "exp(1) = 2.71828182845904523536 (to 20 places); no carrier holds it",
+   "id": "real-e",
+   "ok": true,
+   "question": "approximate exp(1) to 20 places"
+  },
+  {
+   "answer": "(1+sqrt(5))/2 = 1.618033988749 (to 12 places); no carrier holds it",
+   "id": "real-phi",
+   "ok": true,
+   "question": "approximate (1+sqrt(5))/2 to 12 places"
+  },
+  {
+   "answer": "unsolved: real: divide: division by an exact zero.  A quotient by an exact zero names no value, so there is nothing to approximate",
+   "id": "real-divide-by-zero",
+   "ok": false,
+   "question": "approximate 1/0 to 5 places"
+  },
+  {
+   "answer": "true: pi < 355/113",
+   "id": "compare-pi-355",
+   "ok": true,
+   "question": "is pi less than 355/113"
+  },
+  {
+   "answer": "sqrt(2) < 1.5",
+   "id": "compare-sqrt2-1_5",
+   "ok": true,
+   "question": "compare sqrt(2) and 1.5"
+  },
+  {
+   "answer": "true: 2^pi < 9",
+   "id": "compare-2pi-9",
+   "ok": true,
+   "question": "is 2^pi less than 9"
+  },
+  {
+   "answer": "0.1 + 0.2 and 0.3 are not distinguished at 2**-256; equality of two processes is not decidable, so the machine does not claim it",
+   "id": "compare-equality",
+   "ok": true,
+   "question": "is 0.1 + 0.2 equal to 0.3"
+  },
+  {
+   "answer": "The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum', 'carrier', 'locate'].",
+   "id": "unknown-nonsense",
+   "ok": false,
+   "question": "please compute the square root of a banana"
+  },
+  {
+   "answer": "coherence Cl2Pb: NRCI = 0.0000 (Subcoherent)",
+   "id": "coherence-unregistered-molecule",
+   "ok": true,
+   "question": "coherence PbCl2"
+  },
+  {
+   "answer": "Cl2Pb: plane-0 frame weight 3, brick weights [0, 0, 3], Golay distance 3",
+   "id": "spatial-unregistered-molecule",
+   "ok": true,
+   "question": "spatial PbCl2"
+  },
+  {
+   "answer": "angle Cl2Pb water: cos^2 = 67258625450524487137881271853508598564/67258641859417466662200642971476436047 (acute)",
+   "id": "angle-unregistered-molecule",
+   "ok": true,
+   "question": "angle PbCl2 water"
+  },
+  {
+   "answer": "2 clusters (single linkage): [['Cl2Pb'], ['ammonia', 'water']]",
+   "id": "cluster-unregistered-molecule",
+   "ok": true,
+   "question": "cluster PbCl2, water, ammonia"
+  },
+  {
+   "answer": "report relations: scalar/scalar 222/222, scalar/full 186/222, tensor/full 71/71",
+   "id": "report-relations",
+   "ok": true,
+   "question": "report relations"
+  },
+  {
+   "answer": "report leech distribution: {0: 93150, 1: 94208, 2: 9200, 4: 2}",
+   "id": "report-leech-distribution",
+   "ok": true,
+   "question": "report leech distribution"
+  },
+  {
+   "answer": "report theta: [1, 0, 196560, 16773120, 398034000, 4629381120]",
+   "id": "report-theta",
+   "ok": true,
+   "question": "report theta"
+  },
+  {
+   "answer": "report subalgebra: {'pairs_checked': 6, 'all_closed': True, 'all_commutative': True, 'none_associative': True, 'all_gram_2A': True, 'all_third_axes_type2': True, 'all_pairwise_invariants_2': True, 'records': [{'labels': [127, 432, 463], 'third_is_type2': True, 'dimension': 3, 'closed': True, 'commutative': True, 'associative': False, 'gram_is_2A': True, 'pairwise_invariants': [2, 2, 2]}, {'labels': [127, 463, 432], 'third_is_type2': True, 'dimension': 3, 'closed': True, 'commutative': True, 'associative': False, 'gram_is_2A': True, 'pairwise_invariants': [2, 2, 2]}, {'labels': [127, 562, 589], 'third_is_type2': True, 'dimension': 3, 'closed': True, 'commutative': True, 'associative': False, 'gram_is_2A': True, 'pairwise_invariants': [2, 2, 2]}, {'labels': [127, 589, 562], 'third_is_type2': True, 'dimension': 3, 'closed': True, 'commutative': True, 'associative': False, 'gram_is_2A': True, 'pairwise_invariants': [2, 2, 2]}, {'labels': [127, 4640, 4703], 'third_is_type2': True, 'dimension': 3, 'closed': True, 'commutative': True, 'associative': False, 'gram_is_2A': True, 'pairwise_invariants': [2, 2, 2]}, {'labels': [127, 4703, 4640], 'third_is_type2': True, 'dimension': 3, 'closed': True, 'commutative': True, 'associative': False, 'gram_is_2A': True, 'pairwise_invariants': [2, 2, 2]}]}",
+   "id": "report-subalgebra",
+   "ok": true,
+   "question": "report subalgebra"
+  },
+  {
+   "answer": "report information loss: resolved substrate 3/7, integer 5/7, rational 7/7, griess 7/7, universal 7/7; lost substrate->integer 8, integer->rational 2, rational->griess 0, griess->universal 0; addition descends at rational, griess, universal; refinement chain intact True; non-cumulative SI7 reading refines substrate False",
+   "id": "report-information-loss",
+   "ok": true,
+   "question": "report information loss"
+  },
+  {
+   "answer": "report golay decoding: 4096 cosets, 12951 leaders, unique below weight 4 and a sextet of six at weight 4; S(5,8,24) verified on 42504 five-subsets, so weight-5 miscorrection is a theorem, not a bug",
+   "id": "report-golay-decoding",
+   "ok": true,
+   "question": "report golay decoding"
+  },
+  {
+   "answer": "report superposition: the covering-radius tie has 6 candidates whose error patterns partition the 24 coordinates; XOR-bundling them is the constant all-ones word, rational bundling is the invertible (1 + 4 v)/6 and recovers the read; context collapses, holds or refutes; 1771 of the 4096 cosets are such ties and the mean distance to the code is 3433/1024, past the packing radius, though the perturbation chain has no limiting law and settles only on average; and widening the emitted alphabet by scale reaches nothing new while widening it by support reaches (1/2) e_0 exactly",
+   "id": "report-superposition",
+   "ok": true,
+   "question": "report superposition"
+  },
+  {
+   "answer": "report leech construction: A gives 48 minimal vectors, B gives 98256, and C with the mod-8 sum condition gives 196560 at norm^2 32",
+   "id": "report-leech-construction",
+   "ok": true,
+   "question": "report leech construction"
+  },
+  {
+   "answer": "report facets: 6 facets partition the 24 coordinates, the projections are strictly linear and orthogonal, and no facet is lattice-autonomous (indices {'dimension': 512, 'scale': 8, 'tensor_rank': 8, 'context': 32, 'nominal_kind': 8, 'domain': 8})",
+   "id": "report-facets",
+   "ok": true,
+   "question": "report facets"
+  },
+  {
+   "answer": "report monster stack: depth 10, 5 planes compose strictly and 8 with pair repair; the Sakuma product is non-associative where the retired XOR shortcut was associative",
+   "id": "report-monster-stack",
+   "ok": true,
+   "question": "report monster stack"
+  },
+  {
+   "answer": "report multiresolution: the F_2^4 -> GF(4) x Z_4 fibre map is a bijection with kernel [0, 1, 14, 15], every column sub-lattice has index [64], and the grid signature is scale-invariant where the ten-plane address is not",
+   "id": "report-multiresolution",
+   "ok": true,
+   "question": "report multiresolution"
+  },
+  {
+   "answer": "report migration: the legacy and canonical codes share 8 of 4096 codewords; the bridge is a weight- and distance-preserving permutation, so legacy data can be decoded through the audited decoder, and all 24 silent ties become explicit",
+   "id": "report-migration",
+   "ok": true,
+   "question": "report migration"
+  },
+  {
+   "answer": "report state migration: 4282 concepts and 4014 edges migrated in the canonical frame, 398 carriers minted, 1828 carriers ambiguous under complete decoding, no float written",
+   "id": "report-state-migration",
+   "ok": true,
+   "question": "report state migration"
+  },
+  {
+   "answer": "report concept store: 4680 concepts, 4014 edges (857 asserted, 3157 auto-proposed), 2186 isolated",
+   "id": "report-concept-store",
+   "ok": true,
+   "question": "report concept store"
+  },
+  {
+   "answer": "report fusion: 9 axes over 3 2A subalgebras; eigenspace dimensions {'1': 1, '0': 1, '1/4': 1, '1/32': 0} everywhere (True); tau = identity True, sigma swaps the other two axes True; all automorphisms True",
+   "id": "report-fusion",
+   "ok": true,
+   "question": "report fusion"
+  },
+  {
+   "answer": "report benchmarks: 2389/2390 tasks (2389/2390) across 5 suites; analogy_chemistry 12/12 vs 1/4, analogy_physics 13/13 vs 0/1, analogy_semantic 10/10 vs 0/1, golay_correction 2325/2325 vs 1/2325, physics_equations 29/30 vs 2/3; every suite beat its baseline",
+   "id": "report-benchmarks",
+   "ok": true,
+   "question": "report benchmarks"
+  },
+  {
+   "answer": "report semantics: 83 of 4282 inherited concepts denote anything determinate; 2 of 4015 inherited edges survive the audit; the grounded graph has 357 meanings and 12859 re-derived edges",
+   "id": "report-semantics",
+   "ok": true,
+   "question": "report semantics"
+  },
+  {
+   "answer": "report infinite values: sqrt(2) = 1.41421356237309504880, pi = 3.14159265358979323846; the 1/N law holds True; the 24-D carrier holds the all-1/2 target exactly and provably cannot hold the ramp target (True); equality of processes stays undecidable (True)",
+   "id": "report-infinite-values",
+   "ok": true,
+   "question": "report infinite values"
+  },
+  {
+   "answer": "report analogies: 5 relation models, 14 cases, 14 as expected",
+   "id": "report-analogies",
+   "ok": true,
+   "question": "report analogies"
+  },
+  {
+   "answer": "report completion: 1257 of 1652 element cells are measured; 87 more are filled by rules that beat the field's own mean out of sample, taking the completed view to 1344, and all 395 empty cells are decided ({'estimated': 87, 'inputs_absent': 62, 'no_admitted_rule': 233, 'not_derivable': 13}) with the register itself unchanged",
+   "id": "report-completion",
+   "ok": true,
+   "question": "report completion"
+  },
+  {
+   "answer": "report vagueness: 35 of 110 related_to triples are decided by rule -- 28 dimensionally, 1 by the conjugate register, 6 by the one proposer rule of four that was admitted -- and the other 75 are referred to a person with the evidence collected",
+   "id": "report-vagueness",
+   "ok": true,
+   "question": "report vagueness"
+  },
+  {
+   "answer": "report admission: a name is admissible exactly when a stated route gives it coordinates computed from a register the machine already checks -- 20 of 27 probes are admitted (11 held, 5 by unit, 4 by arithmetic over register names) and 7 are refused, conditionally and with the condition named, over a held vocabulary of 1147 names that admission leaves unchanged",
+   "id": "report-admission",
+   "ok": true,
+   "question": "report admission"
+  },
+  {
+   "answer": "report conjugates: 7 energy domains, every row dimensionally checked against the physics register, 11 questions re-solved (8 answered, 3 refused) -- heat : temperature :: force : work",
+   "id": "report-conjugates",
+   "ok": true,
+   "question": "report conjugates"
+  },
+  {
+   "answer": "report transform decoder: the 4096 Golay coset costs are one Walsh-Hadamard transform, which costs 49152 add/subtracts against the direct 49152 -- equal, because n = 2k, so the transform is not a speed-up for this code; the transform-driven decoder reproduces the existing one exactly, tie sets included; and the constant-time lookup certifies its own optimality on 137 of 300 sampled profiles -- always on a flat profile, rarely on a very wide one -- with 0 certified answers wrong",
+   "id": "report-transform-decoder",
+   "ok": true,
+   "question": "report transform decoder"
+  },
+  {
+   "answer": "report units: all 726 unit strings in the physics register parse, and all 726 agree with the EXT10 exponents declared beside them, with 0 mismatches; the parser carries the steradian as a dimension, and reading it the SI way -- as dimensionless -- would break 13 quantities, 7 of them written with the lumen or the lux",
+   "id": "report-units",
+   "ok": true,
+   "question": "report units"
+  },
+  {
+   "answer": "report deep holes: a carrier is classified by walking to the hole it sits in and certifying what the walk found, never by enumerating the 196,560 facets or storing the 23 hole centres; this run reached the covering radius on 3 of 3 walks and exhibited 5 of the 23 Niemeier types, every one certified complete, with a shortfall of 18 that is reported as a shortfall",
+   "id": "report-deep-holes",
+   "ok": true,
+   "question": "report deep holes"
+  },
+  {
+   "answer": "report capabilities: 33 probes, 20 hold, 13 break, 0 errored; surprises none",
+   "id": "report-capabilities",
+   "ok": true,
+   "question": "report capabilities"
+  },
+  {
+   "answer": "report molecules: 51 molecules and ions over 17 elements, each held twice -- as the faithful bundle of its element carriers, from which the formula is read back exactly for every entry, and as one composite carrier of 24 coordinates that is a summary and collides 0 times on this register; no measurement is stored and no missing value is imputed",
+   "id": "report-molecules",
+   "ok": true,
+   "question": "report molecules"
+  },
+  {
+   "answer": "report chemistry coverage: 1257 of 1652 measured cells are filled and the sparsest field is homonuclear_bde_kJ_per_mol; coverage is widened three ways that each keep their label -- 4 exactly derived attributes adding 344 cells, a rational fit that carries the covalent radius from 12/59 to 99/118 of the elements with a mean residual of 5825791/450744 pm, and a cross-check against the diatomic register that reports the disagreement instead of merging the two quantities; nothing is written back into the register",
+   "id": "report-chemistry-coverage",
+   "ok": true,
+   "question": "report chemistry coverage"
+  },
+  {
+   "answer": "report noise: the loop tracks a two-tone signal to 7/1152 against the bound 1/128; a periodic input closes its orbit exactly when its period sum is whole (True against False); the cascade's error is a second difference at every tick (True) and its doubly accumulated error stays at 1/3; read through a triangular window it beats a single loop by a factor of 127 at M = 128; and dither trades the idle tone 1/1 down to 33/128 for a bias of -167/461824",
+   "id": "report-noise",
+   "ok": true,
+   "question": "report noise"
+  },
+  {
+   "answer": "report lattices: the ladder past the Leech lattice runs 24 -> 32 -> 48 with minima 4, 4, 6 and centre densities 1/1, 1/1, 282429536481/16777216; the 32-dimensional rung is Construction D over a dual pair of Reed-Muller codes with 146880 minimal vectors and a genuine three-resolution address (indices [67108864, 64]); the 48-dimensional rung needs F_3, because a binary code stops at minimum 2, and the extremal one of the two neighbours is picked out by the fact that all 96 full-weight codewords have an even number of 2s",
+   "id": "report-lattices",
+   "ok": true,
+   "question": "report lattices"
+  },
+  {
+   "answer": "report shells: the shell's support function is computed in closed form over three shapes rather than by enumerating 196560 vectors; a target inside the hull is tracked with the accumulator bounded by |state|^2 <= 2048/81 and the squared error falling from 5/81 to 5/324 when the ticks double; a target with first coordinate 5/1 is separated from the hull by h(e_0) = 4/1 and is unreachable; widening the alphabet to the whole lattice reaches it with |state|^2 <= 16; and the Gibbs rule is realised deterministically to within 1/96 of its weights, against the proved bound 1/12",
+   "id": "report-shells",
+   "ok": true,
+   "question": "report shells"
+  },
+  {
+   "answer": "report llvq: the 4096 Golay codewords are 128 classes of 32 -- a hexacode word and a parity -- read out of a 16-entry column table, so the Leech quantiser's search becomes 128 six-term min-sums and a bound: 320/3 codeword costs per call against the scan's 8192, with 0 mismatches over 91 vectors and 150 of 150 Lean addresses unchanged",
+   "id": "report-llvq",
+   "ok": true,
+   "question": "report llvq"
+  },
+  {
+   "answer": "report signature: the modulator's stream over 10000 ticks reproduces every tabulated column of the spectral study from the target alone (True) -- the ones are exactly floor(N t), the entropy is the binary entropy of the density, and the longest run sits on 1/min(t, 1-t); the oscillator's SNR table is the same function, and at lock the entropy is exactly 0/1, though the entropy dip is local to the resonance band and no quality factor gives both off-resonance figures",
+   "id": "report-signature",
+   "ok": true,
+   "question": "report signature"
+  },
+  {
+   "answer": "report drift: over 200 steps the contractive rule holds every regime inside its own resolution (True) while the accumulative rule amplifies the first rounding into a drift of 7.49e+10 at p = 3 in plain binary64 and 2.22e+22 at four displayed digits; truncation never helps (True), and the lossless regime first exceeds 1e-9 at step 46",
+   "id": "report-drift",
+   "ok": true,
+   "question": "report drift"
+  },
+  {
+   "answer": "report catalog: 58 testable sentences drawn from the six study sections and recomputed here: 33 confirmed, 14 refuted, 8 not reproduced and 3 describing a subsystem the package does not have",
+   "id": "report-catalog",
+   "ok": true,
+   "question": "report catalog"
+  },
+  {
+   "answer": "report containers: eight constants through three containers; 7 of 8 hull verdicts settled by certificate",
+   "id": "report-containers",
+   "ok": true,
+   "question": "report containers"
+  },
+  {
+   "answer": "report companion: 49 testable sentences drawn from the two companion studies and recomputed here: 26 confirmed, 17 refuted, 5 not reproduced and 1 describing a structure the package does not have",
+   "id": "report-companion",
+   "ok": true,
+   "question": "report companion"
+  },
+  {
+   "answer": "report blueprint: 26 of the blueprint's 39 testable claims are reproduced exactly by the package; 9 are false as written and the ledger records what holds instead; 4 are not shown by the measurement they name; 0 describe a subsystem the package does not have.",
+   "id": "report-blueprint",
+   "ok": true,
+   "question": "report blueprint"
+  },
+  {
+   "answer": "report engine: the assembled engine runs 1/3 to error 1/192 in 64 ticks, the radiator turns 57 escalations into 36, the turbocharger skips 6 snaps for 150 operations, the two fuels together clear the depth 16/5 times sooner than the slower one alone, and the claimed 27/10 precision leap is matched by none of the three stated baselines",
+   "id": "report-engine",
+   "ok": true,
+   "question": "report engine"
+  },
+  {
+   "answer": "report mantissa: storing 1/p in binary64 retains at least 53 bits, so the blueprint's ten bits are not lost at the first operation; the period of the expansion is the order of 2 mod p for every prime tested (True); and the loss is structural -- every stored orbit collapses (True) while no exact orbit does",
+   "id": "report-mantissa",
+   "ok": true,
+   "question": "report mantissa"
+  },
+  {
+   "answer": "report reversible: Gray flips 256 bits against binary's 510 over a full 8-bit cycle, so the halving is exact False; 1600 reversible gate applications return the carrier at Hamming distance 0, with the syndrome weight conserved False; the kink count is rotation invariant True and a single flip always moves it by two False",
+   "id": "report-reversible",
+   "ok": true,
+   "question": "report reversible"
+  },
+  {
+   "answer": "report lean: 5348 declarations of the Lean development carry a deterministic Leech address, read back exactly 5348/5348 times with 0 coordinate errors; 4593 addresses are distinct and the quantiser adds no conflation of its own; the nearest declaration by address shares a file 1118 times against 33 for a SHA-256 control and a chance rate of 88843/14297878",
+   "id": "report-lean",
+   "ok": true,
+   "question": "report lean"
+  },
+  {
+   "answer": "report directives: 16 standing rules, 16 of them with every named instrument present in the tree, 0 defects",
+   "id": "report-directives",
+   "ok": true,
+   "question": "report directives"
+  },
+  {
+   "answer": "report searchloop: the archive's loop -- filter on every example, then rank -- measured on the eight symmetries of the square over 512 binary 3 x 3 grids.  One example leaves a coset of the stabiliser of the example's input, so its survivor count does not depend on the output observed at all: the census is 1:288, 2:200, 4:16, 8:8 over 102 orbits, a mean of 51/32 survivors.  Survivors overstate the difficulty -- what is actually undetermined is the orbit of the fresh question under that stabiliser, which is 1:160320, 2:91776, 4:7744, 8:2304 over 262144 pairs, mean 6145/4096, determined outright on 2505/4096 of them and never more than eight ways.  A second example is monotone and raises the determined count from 147456 to 245760.  The soft alternative is refuted by one witness in which the score prefers a candidate the single observation has already ruled out, which is why the gate is hard; the general statements are proved for an arbitrary candidate set in RequestProject/GLM/SearchLoop.lean",
+   "id": "report-searchloop",
+   "ok": true,
+   "question": "report searchloop"
+  },
+  {
+   "answer": "report controller: a propose-check-refuse loop that derives a physical quantity from the ten EXT10 generators one factor at a time, run on 24 reachable targets and 8 unreachable ones with six different scorers.  Every plan returned was re-verified by the digit-stack verifier, which did not build it.  The exact remaining-move count solves 24/24, all minimal, because a descent move always exists.  The Leech address at scale 9 solves 18/24 against 8 for no guidance and 12 for a scorer blind to the target -- so the substrate can steer a loop -- but the same distance measured on the undecoded carrier solves 17, so the lattice adds nothing to its own coordinates; and at the register's native resolution it solves 8, identical to no guidance, which is Address.lean's read-back bound measured.  127 of the 726 register quantities are refused outright by an invariant no move can change, with no search at all; the general statements are proved in RequestProject/GLM/Controller.lean",
+   "id": "report-controller",
+   "ok": true,
+   "question": "report controller"
+  },
+  {
+   "answer": "report landscape: the pre-registered statistic is the stage-0 long-gap frequency S(alpha) = 0.035999, whose two-sided tail against the magnitude-matched stride null is 77/1066 (77 of 1066), so B = 1.79 bits after correcting for 4 statistics -- weak, and the landscape enumeration is not run; the Golay reading is worth 0.00 bits under the same null.  This is not a derivation of alpha",
+   "id": "report-landscape",
+   "ok": true,
+   "question": "report landscape"
+  },
+  {
+   "answer": "report hole classifier: over 44 queries on 10 of the 23 Niemeier types, the arrival-share profile names 15 correctly against 11 for the plain vertex count, 4 for the digest control and 3 for the reshuffle -- so it beats every control and the round still stops, because the pre-registered sanity query fails (sanity holds = False) and the verdict fixed in advance for that case is 'stopped at the sanity query'",
+   "id": "report-hole-classifier",
+   "ok": true,
+   "question": "report hole classifier"
+  },
+  {
+   "answer": "report hole ladder: over 16 cells -- 4 readings at 4 ensemble sizes -- the sanity gate is that all 10 reference holes recognise themselves under a bare seed change; the first round's cell returns 3 of 10 and the best cell of the ladder, joint at 1920 starts, returns 10 of 10, so the verdict fixed in advance for that case is 'the law descends'; over the full query set at that cell the reading names 40 of 44 correctly against 12 for the vertex-count baseline, and the passing cell is the extension rung decided after the pre-registered cells were measured, so it is reported as an extension",
+   "id": "report-hole-ladder",
+   "ok": true,
+   "question": "report hole ladder"
+  },
+  {
+   "answer": "report retrieval: the address book used as an index over 5348 Lean declarations, scored on 206 queries against every control.  The address finds a relative in its top 5 for 77 of them -- 1231/100 times the closed-form chance of 3/100 -- and beats the digest (5/206), the seeded reshuffle (1/103), a random ranking (5/206) and name search (49/206).  It is beaten decisively by a plain lexical search over the statement text (89/103), ranking the raw feature vectors without any lattice scores 85/206, and an address book built from the identifiers rather than the syntax reaches 117/206 -- so the separation is the feature map's and the ceiling is the projection into twenty four capped integers, not the decoder.  No address shortlist improves on the text control at any size.  What the lattice does earn is exactness: the completeness bound of RequestProject/GLM/Retrieval.lean holds on 272697 pairs with 0 violations, so a radius search prunes the corpus to 2255/90916 of itself while provably keeping every feature-close declaration, and an empty shortlist is a proof of absence",
+   "id": "report-retrieval",
+   "ok": true,
+   "question": "report retrieval"
+  },
+  {
+   "answer": "report generated: how much of the substrate can be generated instead of stored, and whether the generated copy is the same object.  Generating is right in principle -- the stored tables audited here cost 9449445 bytes against 24648 for their generators, a ratio of 3149815/8216 to one, every regenerated object checked identical -- and 11249511/11269276 of the overlay's own stored bytes are already caches with a digest.  But the proposed on-the-fly Leech sieve is sound and badly incomplete: it keeps 1152 of the 196560 minimal vectors, because 'all coordinates agree mod 4' is not the Golay condition of Construction C; the repaired sieve agrees with the package's membership test on all 196656 vectors tested.  The snap built on it returned a non-lattice point on 4 of 4 targets in general position, where an exact coset decoder is always inside and within the covering radius.  Of the script's closed-form constants 0 of 3 accuracy claims hold.  The general statements are proved in RequestProject/GLM/ZeroStorage.lean",
+   "id": "report-generated",
+   "ok": true,
+   "question": "report generated"
+  },
+  {
+   "answer": "report pipeline: 33 of 33 rows have passed all six stages",
+   "id": "report-pipeline",
+   "ok": true,
+   "question": "report pipeline"
+  },
+  {
+   "answer": "report harmony: 28 intervals held as exact ratios; equal temperament is exact for unison and octave and for nothing else, missing the fifth by 531441/524288; no stack of fifths is a stack of octaves up to n = 200, and by Harmony.lean none ever is; Tenney height and Euler's gradus agree at tau 313/378; the Leech lattice separates all 28 intervals at scale 8 and orders them at tau 53/63 -- but the undecoded control scores 53/63 and the decoder reorders 0 pairs, so the catalogue's claim is recorded as not reproduced",
+   "id": "report-harmony",
+   "ok": true,
+   "question": "report harmony"
+  },
+  {
+   "answer": "report economics: 21 quoted prices as exact rationals over 7 instruments and 3 quarters, every magnitude bucket decided by integer comparison rather than by a logarithm; the Leech lattice first separates all 21 of them at scale 1024, orders them by magnitude at tau 39/70, and every record's nearest neighbour is another quarter of the same instrument (21/21 against a chance rate of 1/10) -- but the undecoded control scores 21/21 with no lattice at all, so the catalogue's economic claim is recorded as not reproduced",
+   "id": "report-economics",
+   "ok": true,
+   "question": "report economics"
+  },
+  {
+   "answer": "report escalation: the five-layer audit run on 1094 register carriers rather than seven -- resolution 469 -> 598 -> 811, then flat, with every boundary a refinement (True); the ceiling is 811 distinct carriers, so 283 named entries in 104 classes are beyond every layer, the largest being 78 dimensionless quantities; addition descends only where the view is the carrier itself; and the rejected SI7-only reading conflates 13020 pairs the substrate splits",
+   "id": "report-escalation",
+   "ok": true,
+   "question": "report escalation"
+  },
+  {
+   "answer": "report names: the resolution ceiling is a coordinate problem, and the coordinate is supplied -- an exact integer read off the entry's own name recovers all 283 of the 283 entries no layer could separate, lifting even the 24-bit substrate from 469 to 1094 of 1094; that much is forced, so the measurement is the sweep, where 16 bits suffice against a pigeonhole floor of 7 and the tail-of-the-name reduction never gets below 138; and the control settles what is doing the work, since the register label recovers 0 while the first letter recovers 174 and the length 177",
+   "id": "report-names",
+   "ok": true,
+   "question": "report names"
+  },
+  {
+   "answer": "report: unknown subject 'nonsense subject'.  Try one of: relations, leech distribution, theta, subalgebra, information loss, golay decoding, superposition, leech construction, facets, monster stack, multiresolution, migration, state migration, concept store, fusion, benchmarks, semantics, infinite values, capabilities, analogies, conjugates, completion, vagueness, admission, transform decoder, deep holes, units, molecules, chemistry coverage, blueprint, reversible, mantissa, engine, noise, signature, drift, catalog, containers, companion, lattices, shells, llvq, harmony, economics, lean, directives, pipeline, escalation, measure, names, recipe, language, searchloop, retrieval, relay, anonymous, controller, generated, landscape, hole classifier, hole ladder, hole failures, hole configuration, cumulativity, query escalation, review sweep, routes",
+   "id": "report-unknown-subject",
+   "ok": false,
+   "question": "report nonsense subject"
+  },
+  {
+   "answer": "report measure: 45 comparison classes over 11 quantities and 64 degree words make 12 of the lexicon's 23 adjectives measurable -- hot in tea is 363/1 K and hot for a stellar surface is 44000/1 K.  Added as a widening, the relative reading takes the static one from 23 to 67 of 67 uses, gaining 108 pairs and losing nothing (0 violations), while the replacement reading that drops the concept loses 253 on a witness set that still holds an unmeasured use; and 28 of the 110 related_to triples convert to a measured relation, the other 82 declining with a reason -- 80 of those because an endpoint is a verb or an abstraction rather than a quantity, every one of them now decided by name in a register of 83 verdicts that leaves 0 triples waiting on a lookup -- and the conversions carry: 18 of the 26 analogies they license are transported where the unrepaired control answers 1",
+   "id": "report-measure",
+   "ok": true,
+   "question": "report measure"
+  },
+  {
+   "answer": "report measure: 45 comparison classes over 11 quantities and 64 degree words make 12 of the lexicon's 23 adjectives measurable -- hot in tea is 363/1 K and hot for a stellar surface is 44000/1 K.  Added as a widening, the relative reading takes the static one from 23 to 67 of 67 uses, gaining 108 pairs and losing nothing (0 violations), while the replacement reading that drops the concept loses 253 on a witness set that still holds an unmeasured use; and 28 of the 110 related_to triples convert to a measured relation, the other 82 declining with a reason -- 80 of those because an endpoint is a verb or an abstraction rather than a quantity, every one of them now decided by name in a register of 83 verdicts that leaves 0 triples waiting on a lookup -- and the conversions carry: 18 of the 26 analogies they license are transported where the unrepaired control answers 1",
+   "id": "report-denotations",
+   "ok": true,
+   "question": "report denotations"
+  },
+  {
+   "answer": "report recipe: 3 domains described -- comparison, harmonics, economics -- in 72 coordinates, of which 66 are shared primitives and 6 are judgements the domain states for itself (all six of them musical); one generic path builds the carriers, the layer chain, the widening audit and the query surface from each description, and regenerating the three registers from their descriptions alone reproduces 94 of 94 carriers exactly, with every measured figure unchanged, so the round is recorded as regenerated",
+   "id": "report-recipe",
+   "ok": true,
+   "question": "report recipe"
+  },
+  {
+   "answer": "report language: 7 of 25 answerable query kinds -- derive, measure, task, compare by slot shape, verify, analogy, compare by infix shape and comparative by nested shape -- are described rather than hand-written, in 7 slots and 8 operands over 47 and 39 surface forms that cost 15, 13 and 4 decisions about English, all of them counted; every one of those kinds is now read off its description by the runtime with its hand-written branch deleted and frozen in `language.legacy`, and over corpora of 947, 201 and 628 questions generated from the registers that reading gives the same kind and the same options as the deleted branches 947, 201 and 480 times with 0 disagreements, declines all 182 evaluation questions of the undescribed kinds and all 20 narrowing witnesses the branches misread, and round-trips every written question back to the slots it was written from; the 148 questions the nested shape reads and its branch did not are the one declared widening, accounted for with 0 left over, so the round is recorded as described",
+   "id": "report-language",
+   "ok": true,
+   "question": "report language"
+  },
+  {
+   "answer": "report cumulativity: 3 declared layer families, 2 of them shipped; 7 refinement edges verified and 2 declared non-edges witnessed; 0 defect(s) in a shipped family, and 32 conflated pairs reported as resolutions rather than defects",
+   "id": "report-cumulativity",
+   "ok": true,
+   "question": "report cumulativity"
+  },
+  {
+   "answer": "report hole failures: at the single declared cell (joint, 1920 starts) the round reproduces 40 of 44; all 4 failures are rank-2 near misses on a closest reference pair, the type whose spread stalls the ratio is D_6^4, so the failures and the unmet criterion are one mechanism (True); the global negative stands at rho = 2.5943, and 3 of 10 types satisfy the criterion type by type",
+   "id": "report-hole-failures",
+   "ok": true,
+   "question": "report hole failures"
+  },
+  {
+   "answer": "report hole configuration: under the configuration reading's answer rule the 44 deep-hole queries are answered 44 correctly, 0 wrongly and 0 refused (the joint reading named 40), with 396 certified absences and 0 false; 20 of 23 Niemeier types have a certified reference centre (23 with the post-hoc patience follow-up, which reads 23 of 23), and at 7680 starts the reading recognises 20 of 20 under a seed change",
+   "id": "report-hole-configuration",
+   "ok": true,
+   "question": "report hole configuration"
+  },
+  {
+   "answer": "report query escalation: over 202 evaluation cases no answer moves and no principled refusal is converted (safety = True), and 4 of 18 declared probes resolve above the first rung, 2 of the refusals as certified absences",
+   "id": "report-query-escalation",
+   "ok": true,
+   "question": "report query escalation"
+  },
+  {
+   "answer": "report relay: the machine's faculties arranged as a stack rather than scored one at a time.  Gated on the text layer's own confidence -- below 1/10 it is judged to have no evidence for the query -- the two geometric address books carry it, and at k = 5 against the text control the stack reads: the tuning stride 351 -> 353 of 412 (ahead), a disjoint held-out stride 346 -> 350 of 411 (ahead) and bare goal queries 697 -> 698 of 823 (ahead), carrying 7 queries it misses and losing 0.  The same relay to a digest and a reshuffle carries 0, so the gain is the substrate's rather than the list padding's, and the gate fires on only 32 of 1646 queries.  In the grid register the same mechanism runs over 50 ARC puzzles with a generator, a visual filter and a cross-domain check: the filter removes 346/363 of the proposals before the verification gate sees them, and the relay solves 2 against the leading faculty's 1",
+   "id": "report-relay",
+   "ok": true,
+   "question": "report relay"
+  },
+  {
+   "answer": "report anonymous: the register where the geometric address is the only faculty left reading.  Rename every identifier of a query outside a declared vocabulary and at k = 5 over 823 queries the text search falls 697 -> 58 of 823 and the identifier address book 353 -> 31 of 823, both to the 25 hits chance gives, while the structural address holds 156 -> 156 of 823 -- more than twice any other faculty here.  A renaming cannot move a count of the syntax (823 of 823 queries keep every syntax coordinate, and the rest move only the six that count type words), so the stack's existing gate fires on 538 of 823 and lifts the leader 58 -> 93.  The carry set is a class, not a residue",
+   "id": "report-anonymous",
+   "ok": true,
+   "question": "report anonymous"
+  },
+  {
+   "answer": "report review sweep: 8 stalled results ranked by whether the coarse reading discarded anything identifiable -- recoverable 1; recovered 2; needs-a-theorem 1; no-discard 4; a re-reading is licensed for retrieval-hit-at-5, and 0 entry defects",
+   "id": "report-review-sweep",
+   "ok": true,
+   "question": "report review sweep"
+  },
+  {
+   "answer": "report routes: 3 decision points with 8 routes; 9 of 9 reference problems take the route expected; every route reached",
+   "id": "report-routes",
+   "ok": true,
+   "question": "report routes"
+  },
+  {
+   "answer": "hot in tea: 363/1 K -- the temperature scale puts hot at 7/8 of the class bracket [293/1, 373/1] K, and the same word against cryostat is 70001/800 K, weather is 1247/4 K; the measurement is exact and the static concept carrier is unchanged by it",
+   "id": "measure-hot-tea",
+   "ok": true,
+   "question": "measure hot in tea"
+  },
+  {
+   "answer": "hot in stellar_surface: 44000/1 K -- the temperature scale puts hot at 7/8 of the class bracket [2000/1, 50000/1] K, and the same word against cryostat is 70001/800 K, weather is 1247/4 K; the measurement is exact and the static concept carrier is unchanged by it",
+   "id": "measure-hot-star",
+   "ok": true,
+   "question": "measure hot in stellar_surface"
+  },
+  {
+   "answer": "hot measures temperature at 7/8 of its scale, which against the 6 classes the register holds is cryostat 70001/800 K, weather 1247/4 K, human_body 2505/8 K, tea 363/1 K, oven 2075/4 K, stellar_surface 44000/1 K -- a spread of 35200000/70001 between cryostat and stellar_surface",
+   "id": "measure-hot-across-classes",
+   "ok": true,
+   "question": "measure hot"
+  },
+  {
+   "answer": "300/1 K in tea: cold -- it sits at 7/80 of the class bracket, inside it, and the words above it on the temperature scale are ['cool', 'tepid', 'warm', 'hot', 'scalding']",
+   "id": "measure-magnitude-in-tea",
+   "ok": true,
+   "question": "measure 300 in tea"
+  },
+  {
+   "answer": "large in room_volume: 1755/4 m^3 -- the volume scale puts large at 7/8 of the class bracket [10/1, 500/1] m^3, and the same word against droplet is 7001/8000000000 m^3, handheld is 7001/800000 m^3; the measurement is exact and the static concept carrier is unchanged by it",
+   "id": "measure-large-room-volume",
+   "ok": true,
+   "question": "measure large in room_volume"
+  },
+  {
+   "answer": "dark in indoor_lighting: 675/4 lx -- the illuminance scale puts dark at 1/8 of the class bracket [50/1, 1000/1] lx, and the same word against night_sky is 507/8000 lx, overcast_day is 3375/1 lx; the measurement is exact and the static concept carrier is unchanged by it",
+   "id": "measure-dark-indoor",
+   "ok": true,
+   "question": "measure dark in indoor_lighting"
+  },
+  {
+   "answer": "unsolved: measure: 'large' measures volume and 'room' is a class of length; a word cannot be measured against a class of another quantity",
+   "id": "measure-large-room",
+   "ok": false,
+   "question": "measure large in room"
+  },
+  {
+   "answer": "unsolved: measure: 'expensive' is neither a lexicon adjective nor a word on any measure scale, so there is nothing to measure it with",
+   "id": "measure-expensive-market",
+   "ok": false,
+   "question": "measure expensive in market"
+  },
+  {
+   "answer": "unsolved: measure: 'hot' measures temperature and 'walking' is a class of velocity; a word cannot be measured against a class of another quantity",
+   "id": "measure-hot-walking",
+   "ok": false,
+   "question": "measure hot in walking"
+  },
+  {
+   "answer": "Yes: cold in stellar_surface is hotter than hot in tea is true -- cold in stellar_surface is 8000/1 K and hot in tea is 363/1 K; the scale order of the two words disagrees with the magnitudes, so the comparison class decides it",
+   "id": "comparative-cold-star-hotter-than-hot-tea",
+   "ok": true,
+   "question": "is cold in stellar_surface hotter than hot in tea"
+  },
+  {
+   "answer": "Yes: hot in tea is hotter than cold in tea is true -- hot in tea is 363/1 K and cold in tea is 303/1 K; the scale order of the two words agrees with the magnitudes here",
+   "id": "comparative-hot-tea-hotter-than-cold-tea",
+   "ok": true,
+   "question": "is hot in tea hotter than cold in tea"
+  },
+  {
+   "answer": "No: cold in tea is hotter than hot in tea is false -- cold in tea is 303/1 K and hot in tea is 363/1 K; the scale order of the two words agrees with the magnitudes here",
+   "id": "comparative-false-claim",
+   "ok": true,
+   "question": "is cold in tea hotter than hot in tea"
+  },
+  {
+   "answer": "No: warm in tea is as hot as cold in stellar_surface is false -- warm in tea is 343/1 K and cold in stellar_surface is 8000/1 K; the scale order of the two words disagrees with the magnitudes, so the comparison class decides it",
+   "id": "comparative-equative",
+   "ok": true,
+   "question": "is warm in tea as hot as cold in stellar_surface"
+  },
+  {
+   "answer": "unsolved: comparative: 'hot' in 'tea' measures temperature and 'fast' in 'walking' measures velocity; magnitudes of different quantities are not comparable",
+   "id": "comparative-cross-quantity",
+   "ok": false,
+   "question": "is hot in tea hotter than fast in walking"
+  },
+  {
+   "answer": "unsolved: comparative: 'hotter' is a temperature comparative and the two uses measure velocity; a scale word cannot order magnitudes of another quantity",
+   "id": "comparative-wrong-scale-marker",
+   "ok": false,
+   "question": "is fast in walking hotter than slow in airliner"
+  },
+  {
+   "answer": "unsolved: comparative: 'tepid' sits exactly at the middle of the temperature scale, so 'tepid'-er names no direction on it",
+   "id": "comparative-midpoint-word",
+   "ok": false,
+   "question": "is tepid in tea tepider than cold in tea"
+  },
+  {
+   "answer": "span_ratio of tea = 373/293 -- derived by quotient(high / low) from the bracket, in the comparison description (derivation); the answering path holds no rule of its own, only the description",
+   "id": "derive-span-ratio-tea",
+   "ok": true,
+   "question": "derive span_ratio of tea"
+  },
+  {
+   "answer": "numerator of perfect_fifth = 3 -- derived by numerator(ratio) from the held ratio, in the harmonics description (derivation); the answering path holds no rule of its own, only the description",
+   "id": "derive-numerator-perfect-fifth",
+   "ok": true,
+   "question": "derive numerator of perfect_fifth"
+  },
+  {
+   "answer": "euler_gradus of perfect_fifth = 4 -- derived by judgement(1 + sum e_p (p - 1): Euler's gradus suavitatis weights a prime by p - 1) from a stated measure of consonance, in the harmonics description (judgement); the answering path holds no rule of its own, only the description",
+   "id": "derive-euler-gradus",
+   "ok": true,
+   "question": "derive euler_gradus of perfect_fifth"
+  },
+  {
+   "answer": "unsolved: derive: no description derives 'cents'; the described domains are comparison, harmonics, economics",
+   "id": "derive-undescribed-coordinate",
+   "ok": false,
+   "question": "derive cents of perfect_fifth"
+  },
+  {
+   "answer": "atomic_weight_u of C = 12011/1000 (= 12.011) -- from the element table (source), read as it is held; nothing on this path computes it",
+   "id": "field-atomic-weight-carbon",
+   "ok": true,
+   "question": "field atomic_weight_u of carbon"
+  },
+  {
+   "answer": "group_block of Cl = Halogen -- from the element table (source), read as it is held; nothing on this path computes it",
+   "id": "field-group-block-chlorine",
+   "ok": true,
+   "question": "field group_block of chlorine"
+  },
+  {
+   "answer": "molar_mass_u of water = 3603/200 (= 18.015) -- from the molecule table (source), recomputed on read by the rule the register declares: sum over the formula of atomic_weight_u times count, from the element register",
+   "id": "field-molar-mass-water",
+   "ok": true,
+   "question": "field molar_mass_u of water"
+  },
+  {
+   "answer": "file of GLM.NormFamily.family_tower = NormFamily.lean -- from the lean table (address), read as it is held; nothing on this path computes it",
+   "id": "field-lean-declaration-file",
+   "ok": true,
+   "question": "field file of GLM.NormFamily.family_tower"
+  },
+  {
+   "answer": "glm_universal.substrate.norm_family.completeness answers to 8 fields, held by function: bases_used_by_the_chain, complete, filled, gaps, max_log2, norms, rungs, why_interleaving_is_needed",
+   "id": "field-listing-shape",
+   "ok": true,
+   "question": "fields of glm_universal.substrate.norm_family.completeness"
+  },
+  {
+   "answer": "unsolved: field: the row 'C' is held by element, carrier:chemistry, carrier:lexicon and has no field 'boiling_point'; it answers to: arity, atomic_radius_pm, atomic_weight_u, boiling_point_K, covalent_radius_pm, density_g_per_cm3, electron_affinity_eV, electron_configuration, electronegativity_pauling, forms, group_block, group_block_code, has_property, has_symbol, homonuclear_bde_kJ_per_mol, ionization_energy_eV, is_a, kind, melting_point_K, missing_fields, n_primitives_set, name, period, physical_dims, pos, primitives, standard_state, standard_state_code, symbol, triples, valence_electrons, year_discovered, z",
+   "id": "field-unknown-field",
+   "ok": false,
+   "question": "field boiling_point of carbon"
+  },
+  {
+   "answer": "unsolved: field: element holds the row 'He' and records 'electronegativity_pauling' as missing for it; the surface refuses a missing field rather than answering with a blank",
+   "id": "field-missing-value",
+   "ok": false,
+   "question": "field electronegativity_pauling of He"
+  },
+  {
+   "answer": "unsolved: field: no row named 'unobtainium'; nearest rows: Ac (carrier:chemistry), Es (carrier:chemistry), K (carrier:chemistry), No (carrier:chemistry), Np (carrier:chemistry)",
+   "id": "field-unknown-row",
+   "ok": false,
+   "question": "field name of unobtainium"
+  },
+  {
+   "answer": "abstract_concrete of energy = 1/4 is below abstract_concrete of water = 1/1, by an exact 3/4, both read on the carrier:lexicon:primitives.abstract_concrete scale; the register declares 0 = abstract, so energy is the more abstract of the two",
+   "id": "ordering-abstractness",
+   "ok": true,
+   "question": "order abstract_concrete of energy and water"
+  },
+  {
+   "answer": "atomic_weight_u of C = 12011/1000 (= 12.011) is below atomic_weight_u of O = 15999/1000 (= 15.999), by an exact 997/250, both read on the element:atomic_weight_u scale",
+   "id": "ordering-atomic-weight",
+   "ok": true,
+   "question": "order atomic_weight_u of carbon and oxygen"
+  },
+  {
+   "answer": "molar_mass_u of water = 3603/200 (= 18.015) is below molar_mass_u of ethanol = 46069/1000 (= 46.069), by an exact 14027/500, both read on the molecule:molar_mass_u scale",
+   "id": "ordering-derived-coordinate",
+   "ok": true,
+   "question": "order molar_mass_u of water and ethanol"
+  },
+  {
+   "answer": "animate_inanimate of energy = 1/1 is level with animate_inanimate of water = 1/1, both read on the carrier:lexicon:primitives.animate_inanimate scale",
+   "id": "ordering-level",
+   "ok": true,
+   "question": "order animate_inanimate of energy and water"
+  },
+  {
+   "answer": "unsolved: ordering (not-ordered): kind of energy is 'semantic_concept', which is a label rather than a quantity; the ordering operation reads a coordinate with an order and refuses one without",
+   "id": "ordering-nominal",
+   "ok": false,
+   "question": "order kind of energy and water"
+  },
+  {
+   "answer": "unsolved: ordering (different-scale): line of GLM.NormFamily.family_tower is read on the lean:line scale and line of rung_audit on the python:line scale, and the conversion table declares no unit for 'lean:line' or 'python:line'; a conversion is a fact someone wrote down, not a guess from a field name, and the 10 scales it does declare are element:atomic_weight_u, molecule:molar_mass_u, element:ionization_energy_eV, element:electron_affinity_eV, element:homonuclear_bde_kJ_per_mol, element:melting_point_K, element:boiling_point_K, fixed_point:temperature_C, element:atomic_radius_pm, element:covalent_radius_pm; two readings on different scales have no common order, and the operation refuses rather than comparing the bare numbers",
+   "id": "ordering-across-scales",
+   "ok": false,
+   "question": "order line of GLM.NormFamily.family_tower and rung_audit"
+  },
+  {
+   "answer": "unsolved: ordering (unreadable): the row 'water' is held by molecule, carrier:lexicon, carrier:molecules and has no field 'atomic_weight_u'; it answers to: arity, atom_count, charge, composition, contains, counts, distinct_elements, electron_count, elements, essential_for, form_of, formula, heteroatom_count, hill_formula, is_a, kind, missing_fields, molar_mass_u, n_primitives_set, name, physical_dims, pos, primitives, triples, valence_electron_total",
+   "id": "ordering-unreadable",
+   "ok": false,
+   "question": "order atomic_weight_u of carbon and water"
+  },
+  {
+   "answer": "the largest atomic_weight_u over the 118 rows of element is 36902/125 (= 295.216), attained by Og, ahead of the next distinct value by an exact 201/200, every row read on the element:atomic_weight_u scale",
+   "id": "extremum-heaviest",
+   "ok": true,
+   "question": "largest atomic_weight_u in element"
+  },
+  {
+   "answer": "the smallest atomic_weight_u over the 118 rows of element is 126/125 (= 1.008), attained by H, ahead of the next distinct value by an exact 14973/5000, every row read on the element:atomic_weight_u scale",
+   "id": "extremum-lightest",
+   "ok": true,
+   "question": "smallest atomic_weight_u in element"
+  },
+  {
+   "answer": "the largest molar_mass_u over the 51 rows of molecule is 199939/500 (= 399.878), attained by iron(III) sulfate, ahead of the next distinct value by an exact 57581/1000, every row read on the molecule:molar_mass_u scale (a derived column)",
+   "id": "extremum-derived-column",
+   "ok": true,
+   "question": "largest molar_mass_u in molecule"
+  },
+  {
+   "answer": "the largest abstract_concrete over the 149 rows of carrier:lexicon is 1/1, attained by 14 rows -- atom, bond, carbon, chlorine, computer, instrument, ion, liquid, molecule, neutron, proton, sky, solid, water, ahead of the next distinct value by an exact 1/4, every row read on the carrier:lexicon:primitives.abstract_concrete scale",
+   "id": "extremum-tie",
+   "ok": true,
+   "question": "largest abstract_concrete in carrier:lexicon"
+  },
+  {
+   "answer": "unsolved: extremum (incomplete): 23 of 118 rows have no reading of 'electronegativity_pauling' (the register records it as missing): element:Ar, element:Bh, element:Cn, element:Db, element:Ds, .... The extremum of the rows that are filled in is not the extremum of the column -- it is a wrong answer rather than a partial one -- so the operation refuses the column and names what is missing",
+   "id": "extremum-holes",
+   "ok": false,
+   "question": "largest electronegativity_pauling in element"
+  },
+  {
+   "answer": "unsolved: extremum (mixed-scale): 'line' is read on 2 scales -- lean:line, python:line -- and the conversion table declares no unit for 'lean:line'; a column gathered from a scale nobody declared is not one column, so the rows gathered here are not one column; the extremum of two scales together is a fact about neither, and the operation refuses rather than taking it. Name one table to ask for one of them",
+   "id": "extremum-two-tables",
+   "ok": false,
+   "question": "largest line"
+  },
+  {
+   "answer": "unsolved: extremum (not-ordered): name of Ac is 'Actinium', which is a label rather than a quantity; 118 of 118 rows read that way, and a column of labels has no extremum",
+   "id": "extremum-nominal",
+   "ok": false,
+   "question": "largest name in element"
+  },
+  {
+   "answer": "unsolved: extremum (no-such-column): the table element holds no reading of 'boiling_point' at all",
+   "id": "extremum-absent",
+   "ok": false,
+   "question": "largest boiling_point in element"
+  },
+  {
+   "answer": "carrier 0x8ad5a3 reads as codeword 0x8ad5a3, message 0x5a3: 0 flips corrected; resolved by the decoder alone",
+   "id": "carrier-clean",
+   "ok": true,
+   "question": "carrier 0x8ad5a3"
+  },
+  {
+   "answer": "carrier 0x88d5ab reads as codeword 0x8ad5a3, message 0x5a3: 2 flips corrected; resolved by the decoder alone",
+   "id": "carrier-two-flips",
+   "ok": true,
+   "question": "carrier 0x88d5ab"
+  },
+  {
+   "answer": "unsolved: carrier (open-fork): 0xca97a1 is at coset weight 4 from six codewords (0x428781, 0x8ad5a3, 0xca3729, 0xce93e0, 0xdb9fa5, 0xe896b1) and nothing in the request resolves the tie; no function of the received word can (GLM.Golay24.weight4_resolved_le_4096), so give the sender's tag, a protected tag or a soft reading",
+   "id": "carrier-tie",
+   "ok": false,
+   "question": "carrier 0xca97a1"
+  },
+  {
+   "answer": "carrier 0xca97a1 reads as codeword 0x8ad5a3, message 0x5a3: 4 flips corrected; resolved by the sender tag",
+   "id": "carrier-tag",
+   "ok": true,
+   "question": "carrier 0xca97a1 tag 0x54"
+  },
+  {
+   "answer": "carrier 0xca97a1 reads as codeword 0x8ad5a3, message 0x5a3: 4 flips corrected; resolved by the protected tag",
+   "id": "carrier-protected-tag",
+   "ok": true,
+   "question": "carrier 0xca97a1 protected tag 0x1256"
+  },
+  {
+   "answer": "unsolved: carrier (contradicted): no candidate of 0xca9781 (0x428781) is consistent with the sender tag; the carrier or the tag took more corruption than the stage assumes, and an intact tag disagrees with every wrong codeword a decoder could answer on up to seven flips (GLM.Golay24.tag_flags_miscorrection)",
+   "id": "carrier-flagged",
+   "ok": false,
+   "question": "carrier 0xca9781 tag 0x54"
+  },
+  {
+   "answer": "carrier 0xca97a1 reads as codeword 0x8ad5a3, message 0x5a3: 4 flips corrected; resolved by the soft certificate",
+   "id": "carrier-soft",
+   "ok": true,
+   "question": "carrier soft 13/16, 7/16, 1/16, 0, 3/16, 7/8, 1/16, 1, 13/16, 9/16, 15/16, 0, 13/16, 1/8, 13/32, 1, 3/16, 7/8, 1/16, 1, 3/16, 1/8, 19/32, 1"
+  },
+  {
+   "answer": "unsolved: carrier (not-a-word): 0x1000000 is not a 24-bit word: it needs 25 bits",
+   "id": "carrier-not-a-word",
+   "ok": false,
+   "question": "carrier 0x1000000"
+  },
+  {
+   "answer": "unsolved: carrier (tag-width): the sender tag has seven bits, and 0x154 needs 9; a fifteen-bit tag is a 'protected tag'",
+   "id": "carrier-tag-width",
+   "ok": false,
+   "question": "carrier 0xca97a1 tag 0x154"
+  },
+  {
+   "answer": "chemistry:C reads as chemistry:C at rung C: certified the strictly nearest of the 142 carriers (GLM.AddressRead.read_strict_nearest), and no other carrier lies within 17282.963 of the point (GLM.AddressRead.read_unique_in_ball); the point is a carrier itself, and the only carrier at distance 0 is chemistry:C (GLM.AddressRead.read_origin)",
+   "id": "locate-clean",
+   "ok": true,
+   "question": "locate C"
+  },
+  {
+   "answer": "chemistry:C moved on 8 coordinates by 1/2 (codeword 29) reads as chemistry:C at rung 2A: certified the strictly nearest of the 142 carriers (GLM.AddressRead.read_strict_nearest), and no other carrier lies within 17280.447 of the point (GLM.AddressRead.read_unique_in_ball); a move of at most sqrt(2) is inside the margin, so if the point is a carrier moved that far, the carrier is chemistry:C (GLM.AddressRead.read_origin)",
+   "id": "locate-moved",
+   "ok": true,
+   "question": "locate C moved 8 by 1/2"
+  },
+  {
+   "answer": "the given point reads as mathematics:golay_codeword_1 at rung A/2: certified the strictly nearest of the 142 carriers (GLM.AddressRead.read_strict_nearest), and no other carrier lies within 2.581 of the point (GLM.AddressRead.read_unique_in_ball); a move of at most sqrt(1/4) is inside the margin, so if the point is a carrier moved that far, the carrier is mathematics:golay_codeword_1 (GLM.AddressRead.read_origin)",
+   "id": "locate-point",
+   "ok": true,
+   "question": "locate 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 within 1/2"
+  },
+  {
+   "answer": "unsolved: locate (no-certified-rung): no rung certifies a carrier for harmonics:perfect_fifth moved on 2 coordinates by 2 (codeword 102) -- at every rung the cell is empty, shared, or its placement guard fails, so the read refuses (GLM.AddressRead.read_none_iff)",
+   "id": "locate-uncertified",
+   "ok": false,
+   "question": "locate perfect_fifth moved 2 by 2"
+  },
+  {
+   "answer": "unsolved: locate (ambiguous-name): 'water' names 2 carriers: molecules:water, lexicon:water; say which register",
+   "id": "locate-ambiguous",
+   "ok": false,
+   "question": "locate water"
+  },
+  {
+   "answer": "unsolved: locate (unknown-name): 'Fe' names none of the 142 carriers the address table holds",
+   "id": "locate-unknown",
+   "ok": false,
+   "question": "locate Fe"
+  },
+  {
+   "answer": "physics:albedo reads as the junction {physics:absorptance, physics:albedo} at rung C: these 2 carriers have the same coordinates, so no read can separate them (GLM.CoordinateJunction.no_read_separates); the point is certified strictly nearer to their coordinates than to any other of the 142 carriers (GLM.CoordinateJunction.jread_junction_nearest), and nothing else lies within 3.605 of the point (GLM.CoordinateJunction.jread_unique_in_ball); declared distinct: both are dimensionless ratios of the same domain code; absorptance is the absorbed fraction of incident radiation, albedo the reflected fraction; how they are related: for an opaque surface, absorptance = 1 - albedo (a conversion, not an identity); the point is physics:albedo itself, a member of the junction: the only carriers at distance 0 are the junction's (GLM.CoordinateJunction.jread_origin); to separate them, the GLM asks: Does its description mention 'absorbed'? (yes: physics:absorptance; no: physics:albedo) -- reply as the next turn, or ask `locate albedo given word:absorbed is <reply>`",
+   "id": "locate-junction",
+   "ok": true,
+   "question": "locate albedo"
+  },
+  {
+   "answer": "mathematics:filled_2x12 moved on 4 coordinates by 1/2 (codeword 73) reads as the junction {mathematics:filled_1x24, mathematics:filled_2x12, mathematics:filled_3x8, mathematics:filled_4x6, mathematics:filled_6x4, mathematics:filled_8x3, mathematics:filled_12x2, mathematics:filled_24x1} at rung 2A: these 8 carriers have the same coordinates, so no read can separate them (GLM.CoordinateJunction.no_read_separates); the point is certified strictly nearer to their coordinates than to any other of the 142 carriers (GLM.CoordinateJunction.jread_junction_nearest), and nothing else lies within 23.037 of the point (GLM.CoordinateJunction.jread_unique_in_ball); declared distinct: the carrier holds the 24 entries in row order; the shape (rows, cols) is not a coordinate; how they are related: a reshape: the same entries, different matrices; the request names mathematics:filled_2x12, and the stated move of at most sqrt(1) is inside the margin, so the carrier the point came from is in the junction (GLM.CoordinateJunction.jread_origin); to separate them, the GLM asks: What is its cols? (24: mathematics:filled_1x24; 12: mathematics:filled_2x12; 8: mathematics:filled_3x8; 6: mathematics:filled_4x6; 4: mathematics:filled_6x4; 3: mathematics:filled_8x3; 2: mathematics:filled_12x2; 1: mathematics:filled_24x1) -- reply as the next turn, or ask `locate filled_2x12 moved 4 by 1/2 given attr:cols is <reply>`",
+   "id": "locate-junction-moved",
+   "ok": true,
+   "question": "locate filled_2x12 moved 4 by 1/2"
+  },
+  {
+   "answer": "unsolved: locate (no-certified-rung): no rung certifies a carrier for mathematics:golay_codeword_0 -- at every rung the cell is empty, shared, or its placement guard fails, so the read refuses (GLM.AddressRead.read_none_iff)",
+   "id": "locate-junction-crowded",
+   "ok": false,
+   "question": "locate golay_codeword_0"
+  },
+  {
+   "answer": "unsolved: locate (dimension): a carrier has 24 coordinates; the request gives 3",
+   "id": "locate-dimension",
+   "ok": false,
+   "question": "locate 1, 2, 3"
+  },
+  {
+   "answer": "physics:acoustic_power_level reads as the junction {physics:acoustic_absorption, physics:acoustic_intensity_level, physics:acoustic_power_level} at rung A/2: these 3 carriers have the same coordinates, so no read can separate them (GLM.CoordinateJunction.no_read_separates); the point is certified strictly nearer to their coordinates than to any other of the 142 carriers (GLM.CoordinateJunction.jread_junction_nearest), and nothing else lies within 0.732 of the point (GLM.CoordinateJunction.jread_unique_in_ball); declared distinct: the encoding holds the dimension (all three are dimensionless) and the domain; they are a coefficient and two levels in decibels against different references (1 pW/m^2, 1 pW); how they are related: power level = intensity level + 10 log10(S / 1 m^2) over a surface S; the point is physics:acoustic_power_level itself, a member of the junction: the only carriers at distance 0 are the junction's (GLM.CoordinateJunction.jread_origin); the replies given (What is its unit? 'dB') leave 2 of the 3 members: physics:acoustic_intensity_level, physics:acoustic_power_level (GLM.AnsweringQuestion.after_reply); to separate them, the GLM asks: Does its description mention 'intensity'? (yes: physics:acoustic_intensity_level; no: physics:acoustic_power_level) -- reply as the next turn, or ask `locate acoustic_power_level given attr:unit is dB; word:intensity is <reply>`",
+   "id": "locate-reply",
+   "ok": true,
+   "question": "locate acoustic_power_level given attr:unit is dB"
+  },
+  {
+   "answer": "physics:albedo reads as the junction {physics:absorptance, physics:albedo} at rung C: these 2 carriers have the same coordinates, so no read can separate them (GLM.CoordinateJunction.no_read_separates); the point is certified strictly nearer to their coordinates than to any other of the 142 carriers (GLM.CoordinateJunction.jread_junction_nearest), and nothing else lies within 3.605 of the point (GLM.CoordinateJunction.jread_unique_in_ball); declared distinct: both are dimensionless ratios of the same domain code; absorptance is the absorbed fraction of incident radiation, albedo the reflected fraction; how they are related: for an opaque surface, absorptance = 1 - albedo (a conversion, not an identity); the point is physics:albedo itself, a member of the junction: the only carriers at distance 0 are the junction's (GLM.CoordinateJunction.jread_origin); the replies given (Does its description mention 'absorbed'? no; Is it exactly physics:albedo? yes) leave 1 of the 2 members: physics:albedo (GLM.AnsweringQuestion.after_reply); if the replies are true of the carrier meant, it is physics:albedo (GLM.TimedQuestion.resolved_eq_truth), and the confirming reply agrees",
+   "id": "locate-reply-confirmed",
+   "ok": true,
+   "question": "locate albedo given word:absorbed is no; confirm:physics:albedo is yes"
+  },
+  {
+   "answer": "unsolved: locate (contradicted): albedo reads as the junction {physics:absorptance, physics:albedo}, and the replies given (Does its description mention 'absorbed'? no; Is it exactly physics:albedo? no) leave no member: some reply is false of the carrier meant, or the carrier meant is not in the junction (GLM.TimedQuestion.contradicted_not_truthful); the GLM reports the contradiction rather than choose",
+   "id": "locate-reply-contradicted",
+   "ok": false,
+   "question": "locate albedo given word:absorbed is no; confirm:physics:albedo is no"
+  },
+  {
+   "answer": "unsolved: locate (no-tie): chemistry:C reads as the single carrier chemistry:C at rung C, so there is no tie for the 1 given reply to resolve; ask `locate C` alone",
+   "id": "locate-reply-no-tie",
+   "ok": false,
+   "question": "locate C given attr:unit is dB"
+  },
+  {
+   "answer": "atomic_weight_u of C = 12011/1000 (= 12.011) is below molar_mass_u of water = 3603/200 (= 18.015), by an exact 1501/250, compared in u by the declared conversions element:atomic_weight_u x1 and molecule:molar_mass_u x1",
+   "id": "scales-mass-across-tables",
+   "ok": true,
+   "question": "order atomic_weight_u of carbon and molar_mass_u of water"
+  },
+  {
+   "answer": "ionization_energy_eV of H = 6799/500 (= 13.598) is above homonuclear_bde_kJ_per_mol of H = 436/1 (= 436), by an exact 547504716382981018877/625000000000000000, compared in kJ/mol by the declared conversions element:ionization_energy_eV x120606665154137523/1250000000000000 and element:homonuclear_bde_kJ_per_mol x1",
+   "id": "scales-energy-across-units",
+   "ok": true,
+   "question": "order ionization_energy_eV of hydrogen and homonuclear_bde_kJ_per_mol of hydrogen"
+  },
+  {
+   "answer": "the largest mass over the 169 rows of element, molecule is 199939/500 (= 399.878), attained by iron(III) sulfate, ahead of the next distinct value by an exact 57581/1000, every row read on the u scale (a derived column)",
+   "id": "scales-column-by-quantity",
+   "ok": true,
+   "question": "largest mass"
+  },
+  {
+   "answer": "unsolved: ordering (different-scale): atomic_weight_u of C is read on the element:atomic_weight_u scale and melting_point_K of Fe on the element:melting_point_K scale, and element:atomic_weight_u measures mass and element:melting_point_K measures temperature; the table relates scales of one quantity and declares no conversion between two quantities; two readings on different scales have no common order, and the operation refuses rather than comparing the bare numbers",
+   "id": "scales-different-quantity",
+   "ok": false,
+   "question": "order atomic_weight_u of carbon and melting_point_K of iron"
+  },
+  {
+   "answer": "unsolved: extremum (incomplete): 40 of 250 rows have no reading of 'temperature' (the register records it as missing): element:Bh, element:Cn, element:Db, element:Ds, element:Fl, .... The extremum of the rows that are filled in is not the extremum of the column -- it is a wrong answer rather than a partial one -- so the operation refuses the column and names what is missing",
+   "id": "scales-quantity-with-holes",
+   "ok": false,
+   "question": "largest temperature"
+  }
+ ]
+}

@@ -1,0 +1,82 @@
+{
+ "asked": 212,
+ "audit": {
+  "functions_watched": 18,
+  "total": 0,
+  "unguarded_calls": {}
+ },
+ "cases": 202,
+ "moved": [
+  {
+   "cause": "Phase 147: the list of query kinds the refusal names gains 'hole'",
+   "id": "unknown-nonsense"
+  },
+  {
+   "cause": "Phases 147-148: the language report counts the query kinds and the evaluation questions, which gain the new kind and the new cases",
+   "id": "report-language"
+  },
+  {
+   "cause": "Phases 147-148: the query-escalation report counts the evaluation cases, which gain the new ones",
+   "id": "report-query-escalation"
+  }
+ ],
+ "new_answers": {
+  "hole-lattice-point": {
+   "answer": "unsolved: hole (lattice-point): the given point is a lattice point: distance 0, so it sits in no deep hole and has no Niemeier type however long it is read",
+   "ok": false
+  },
+  "hole-malformed": {
+   "answer": "unsolved: hole (malformed): a walk is named by its index, a whole number, not 'x'",
+   "ok": false
+  },
+  "hole-octad-pair": {
+   "answer": "the octad-pair midpoint sits in a deep hole of type A_1^24 (Coxeter number 2), from 48 vertices certified complete by the marked-barycentre identity after 240 of 1056 starts, read under the budget rule with no barren stop (GLM.BudgetReading.budget_agrees)",
+   "ok": true
+  },
+  "hole-patience-refused": {
+   "answer": "walk 3006 (seed 23197687) sits in a deep hole of type D_16 E_8 (Coxeter number 30), from 26 vertices certified complete by the marked-barycentre identity after 83 of 1056 starts, read under the budget rule with no barren stop (GLM.BudgetReading.budget_agrees)",
+   "ok": true
+  },
+  "hole-walk": {
+   "answer": "walk 1 (seed 20261802) sits in a deep hole of type D_24 (Coxeter number 46), from 25 vertices certified complete by the marked-barycentre identity after 2 of 1056 starts, read under the budget rule with no barren stop (GLM.BudgetReading.budget_agrees)",
+   "ok": true
+  },
+  "nearest-address-ambiguous": {
+   "answer": "unsolved: nearest (ambiguous-name): 'water' names 2 carriers: molecules:water, lexicon:water; say which register",
+   "ok": false
+  },
+  "nearest-address-junction": {
+   "answer": "nearest to physics:albedo moved on 4 coordinates by 1/4 (codeword 16) among the 142 carriers of the address table: physics:absorptance (|q-c|^2 = 1/4), physics:albedo (|q-c|^2 = 1/4), physics:alfven_speed (|q-c|^2 = 53/4), physics:adhesion_energy (|q-c|^2 = 63/4), physics:abbe_dispersion_number (|q-c|^2 = 65/4); the guarded read certifies the head at rung C: no other carrier lies within 3.105 of the point (GLM.NearestAddress.ranking_tail_outside); the stated move is inside the margin, so the carrier the point came from is a member of the junction (GLM.CoordinateJunction.jread_origin)",
+   "ok": true
+  },
+  "nearest-address-moved": {
+   "answer": "nearest to chemistry:C moved on 8 coordinates by 1/2 (codeword 29) among the 142 carriers of the address table: chemistry:C (|q-c|^2 = 2/1), chemistry:N (|q-c|^2 = 7470319818358298590009/25000000000000), chemistry:B (|q-c|^2 = 1270245803483/4000), chemistry:Be (|q-c|^2 = 363935741038513399489/1000000000000), chemistry:O (|q-c|^2 = 364117217710452956041/1000000000000); the guarded read certifies the head at rung 2A: no other carrier lies within 17280.447 of the point (GLM.NearestAddress.ranking_tail_outside); the stated move is inside the margin, so the head is the carrier the point came from, chemistry:C (GLM.NearestAddress.ranking_head_origin)",
+   "ok": true
+  },
+  "nearest-address-point": {
+   "answer": "nearest to the given point among the 142 carriers of the address table: mathematics:golay_codeword_1 (|q-c|^2 = 0/1), mathematics:rational_root_thirds (|q-c|^2 = 20/3), mathematics:golay_codeword_2 (|q-c|^2 = 8/1), mathematics:hexacode_word_2 (|q-c|^2 = 10/1), physics:angle (|q-c|^2 = 11/1); the guarded read certifies the head at rung A/2: no other carrier lies within 2.581 of the point (GLM.NearestAddress.ranking_tail_outside)",
+   "ok": true
+  },
+  "nearest-address-uncertified": {
+   "answer": "nearest to harmonics:perfect_fifth moved on 2 coordinates by 2 (codeword 102) among the 142 carriers of the address table: harmonics:perfect_fifth (|q-c|^2 = 8/1), harmonics:octave (|q-c|^2 = 24189306976481/274877906944), harmonics:perfect_fourth (|q-c|^2 = 8151589211050108069361089/77633639847061371224064); the guarded read refuses (no rung certifies the point), so the head, harmonics:perfect_fifth, is the strict nearest by scan but no margin is certified",
+   "ok": true
+  }
+ },
+ "new_cases": [
+  "hole-lattice-point",
+  "hole-malformed",
+  "hole-octad-pair",
+  "hole-patience-refused",
+  "hole-walk",
+  "nearest-address-ambiguous",
+  "nearest-address-junction",
+  "nearest-address-moved",
+  "nearest-address-point",
+  "nearest-address-uncertified"
+ ],
+ "present": 202,
+ "same_status": 202,
+ "same_text": 199,
+ "source_digest": "45a44739f22bd51d63a9951249ea1e06219aa77d1a1bb293e8b66f6f6c01c197",
+ "undeclared": []
+}

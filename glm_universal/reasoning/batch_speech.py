@@ -34,7 +34,7 @@ from . import batch_machine as bm
 __all__ = [
     "say_line", "say_program", "read_sentence", "read_english",
     "read_program", "split_sentences", "Answer", "answer", "column3_script",
-    "run_script", "mutations", "never_claim", "REFUSALS", "say_shift",
+    "run_script", "mutations", "never_claim", "REFUSALS", "say_shift", "say_growth",
     "say_jumps", "output_runs", "decode_runs", "say_runs", "growth_claim",
     "say_diagnosis", "RUN_FORM_LINES",
 ]
@@ -335,6 +335,7 @@ def read_program(text: str) -> Tuple[Tuple[object, ...], str]:
 #: both.  It reads ``PROGRAM``, ``ENV``, ``FILES``, ``DIRS`` and ``CLAIM``.
 CHECKER = r'''
 import re, sys
+from math import isqrt
 V = re.compile(r"%([A-Za-z_][A-Za-z0-9_]*)%")
 
 def split_ops(s):
@@ -650,6 +651,21 @@ def counters_of(prog):
             out.add(g.group(1).upper())
     return sorted(out)
 
+ACC = re.compile(r"SET\s+/A\s+([A-Za-z_]\w*)\s*=\s*([A-Za-z_]\w*)\s*([+-])\s*(%?)([A-Za-z_]\w*)\4", re.I)
+
+def accline(l):
+    g = ACC.fullmatch(l.strip())
+    if not g or g.group(1).upper() != g.group(2).upper(): return None
+    v, w = g.group(1).upper(), g.group(5).upper()
+    if v == w or "ERRORLEVEL" in (v, w): return None
+    return v, w, (1 if g.group(3) == "+" else -1)
+
+def accs_of(prog):
+    cnt = set(counters_of(prog))
+    ups = [a for a in map(accline, prog) if a]
+    tg = {a[0] for a in ups}
+    return sorted({v for v, w, s in ups if w in cnt and w not in tg})
+
 def canon(v):
     return v is not None and re.fullmatch(r"-?\d+", v) is not None and str(int(v)) == v
 
@@ -669,7 +685,7 @@ def opnames(l):
     if not g: return []
     return [h.group(1).upper() for h in (re.fullmatch(r"%([A-Za-z_]\w*)%", g.group(k)) for k in (2, 4)) if h]
 
-def kind(l, live, consts):
+def kind(l, live, consts, quad=None):
     t = l.strip()
     if t.startswith(":") or t.upper().startswith("REM"): return "free", None
     if re.search(r"\bFOR\b", t, re.I): return "no", None
@@ -677,6 +693,10 @@ def kind(l, live, consts):
     g = CNT.fullmatch(t)
     if g and g.group(1).upper() == g.group(2).upper() and g.group(1).upper() in live:
         return "add", None
+    if quad:
+        a = accline(t)
+        if a and a[0] in quad[0] and a[0] in live and a[1] in quad[1] and a[1] in live:
+            return "acc", a
     g = IFC.fullmatch(t)
     if g:
         a, b = opnd(g.group(2), live, consts), opnd(g.group(4), live, consts)
@@ -693,6 +713,24 @@ def flip(x, sl, op):
         if mm >= 1 and f(x + sl * mm) != f(x): return mm
     return None
 
+def qflip(x, b, c, op):
+    # the least t >= 1 where x + b t + c t(t-1)/2 OP 0 changes: t = 1, or an
+    # integer within reach of a real root of c t^2 + (2b - c) t + 2x
+    if c == 0: return flip(x, b, op)
+    f = CMPS[op]
+    v = lambda t: x + b * t + c * (t * (t - 1) // 2)
+    A, B, C0 = c, 2 * b - c, 2 * x
+    D = B * B - 4 * A * C0
+    cands = {1}
+    if D >= 0:
+        r0 = isqrt(D)
+        for sq in (r0, -r0, r0 + 1, -r0 - 1):
+            q = (-B + sq) // (2 * A)
+            cands.update(range(q - 3, q + 4))
+    for t in sorted(cands):
+        if t >= 1 and f(v(t)) != f(x): return t
+    return None
+
 def template(line, m, names):
     t = line.strip()
     if not re.fullmatch(r"ECHO\s+[^<>|&]+", t, re.I): return None
@@ -706,29 +744,40 @@ def template(line, m, names):
         else: out.append("")
     return out
 
-def passread(prog, names, hist, end):
+def passread(prog, names, hist, end, quad=None):
     st, en = hist[0][2], end[2]
     live = [n for n in names if canon(st.get(n))]
     d = {n: int(en[n]) - int(st[n]) for n in live}
+    q = (set(quad[0]) & set(live), set(quad[1]) & set(live)) if quad else None
     best, echo, hok = None, False, True
-    for g, pc, vals, o, e, cs, tp in hist:
-        kd, info = kind(prog[pc], live, cs)
-        if kd == "no": return None
+    kinds = [kind(prog[h[1]], live, h[5], q) for h in hist]
+    if any(kd == "no" for kd, _ in kinds): return None
+    gam, gr = {n: 0 for n in live}, []
+    for kd, info in kinds:
+        gr.append(dict(gam))
+        if kd == "acc": gam[info[0]] += info[2] * d[info[1]]
+    for r, ((g, pc, vals, o, e, cs, tp), (kd, info)) in enumerate(zip(hist, kinds)):
         if kd == "echo":
             echo = True
             if tp is None or any(isinstance(x, list) and x[0] not in live for x in tp): hok = False
         if kd == "test":
             (na, ka), op, (nb, kb) = info
             x = (int(vals[na]) if na else ka) - (int(vals[nb]) if nb else kb)
-            sl = (d[na] if na else 0) - (d[nb] if nb else 0)
-            f = flip(x, sl, op)
+            sl = ((d[na] + gr[r][na]) if na else 0) - ((d[nb] + gr[r][nb]) if nb else 0)
+            cu = (gam[na] if na else 0) - (gam[nb] if nb else 0)
+            f = qflip(x, sl, cu, op)
             if f is not None and (best is None or f < best): best = f
-    return d, best, echo or end[3] != hist[0][3] or end[4] != hist[0][4], echo, hok
+    return (d, best, echo or end[3] != hist[0][3] or end[4] != hist[0][4], echo, hok,
+            {n: v for n, v in gam.items() if v}, gr)
 
 def jumped(prog, env, files, dirs, budget):
     m = M(env, files, dirs)
     labels = {l.strip()[1:].strip().upper(): i for i, l in enumerate(prog) if l.strip().startswith(":")}
     names = counters_of(prog)
+    quad, ac = None, accs_of(prog)
+    if ac:
+        quad = (set(ac), set(names) - set(ac))
+        names = sorted(set(names) | set(ac))
     pc, stack, steps, off, seen, hist, jumps = 0, [], 0, 0, {}, [], []
     while True:
         if pc >= len(prog): return m, "halted", steps + off, m.el, jumps, None
@@ -739,10 +788,10 @@ def jumped(prog, env, files, dirs, budget):
                 template(prog[pc], m, names) if pc < len(prog) else None)
         if key in seen and names:
             k = seen[key]
-            res = passread(prog, names, hist[k:], snap)
+            res = passread(prog, names, hist[k:], snap, quad)
             if res is not None:
-                d, mm, writes, echo, hok = res
-                if mm is None: return m, "never", steps + off, None, jumps, (hist[k][0], snap[0], d)
+                d, mm, writes, echo, hok, gam, gr = res
+                if mm is None: return m, "never", steps + off, None, jumps, (hist[k][0], snap[0], d, gam)
                 bo, be = m.out[hist[k][3]:snap[3]], m.err[hist[k][4]:snap[4]]
                 ok = not writes or ((not echo or hok) and len(m.out) + len(m.err) + (mm - 1) * (len(bo) + len(be)) <= 1000000)
                 if ok and len(jumps) < 100:
@@ -752,14 +801,14 @@ def jumped(prog, env, files, dirs, budget):
                             for r in range(len(span) - 1):
                                 a_, b_ = span[r], span[r + 1]
                                 tp = a_[6] if a_[6] and any(isinstance(x, list) for x in a_[6]) else None
-                                per.append((tp, a_[2], m.out[a_[3]:b_[3]], m.err[a_[4]:b_[4]]))
+                                per.append((tp, a_[2], m.out[a_[3]:b_[3]], m.err[a_[4]:b_[4]], gr[r]))
                             for t in range(1, mm):
-                                for tp, vals, lo, le in per:
+                                for tp, vals, lo, le, gq in per:
                                     if tp is None: m.out.extend(lo); m.err.extend(le)
-                                    else: m.out.append("".join(str(int(vals[x[0]]) + t * d[x[0]]) if isinstance(x, list) else x for x in tp))
+                                    else: m.out.append("".join(str(int(vals[x[0]]) + t * (d[x[0]] + gq.get(x[0], 0)) + t * (t - 1) // 2 * gam.get(x[0], 0)) if isinstance(x, list) else x for x in tp))
                         else:
                             m.out.extend(bo * (mm - 1)); m.err.extend(be * (mm - 1))
-                        for n, dn in d.items(): m.env[n] = str(int(hist[k][2][n]) + mm * dn)
+                        for n, dn in d.items(): m.env[n] = str(int(hist[k][2][n]) + mm * dn + mm * (mm - 1) // 2 * gam.get(n, 0))
                         off += (mm - 1) * (snap[0] - hist[k][0])
                         jumps.append([hist[k][0], snap[0], mm])
                     seen, hist = {}, []
@@ -858,6 +907,7 @@ def check(c):
         assert jumps == c["jumps"], (jumps, c["jumps"])
         assert [cert[0], cert[1]] == c["certificate"], (cert, c["certificate"])
         assert cert[2] == c["d"], (cert[2], c["d"])
+        assert cert[3] == c.get("g", {}), (cert[3], c.get("g", {}))
     elif k == "growth":
         rec = []
         execute(PROGRAM, ENV, FILES, DIRS, limit=c["budget"], rec=rec)
@@ -1038,6 +1088,14 @@ def mutations(claim: Mapping[str, object],
         d0 = dict(c["d"])
         d0[name] = 0 if c["d"][name] else 1
         alt(d=d0)
+        if c.get("g"):
+            gname = sorted(c["g"])[0]
+            g1 = dict(c["g"])
+            g1[gname] = c["g"][gname] + 1
+            alt(g=g1)
+            g0 = dict(c["g"])
+            del g0[gname]
+            alt(g=g0)
     elif k == "growth":
         alt(head=c["head"] + 1)
         alt(visits=c["visits"] + 1)
@@ -1100,10 +1158,13 @@ def never_claim(run: "bm.Run") -> Dict[str, object]:
     lasso (Phase 130)."""
     i, j = run.certificate
     if run.lasso:
-        return {"kind": "never_lasso", "certificate": [i, j],
-                "d": {n: dn for n, dn in run.lasso},
-                "jumps": [list(jp[:3]) for jp in run.jumps],
-                "budget": bm.BUDGET}
+        claim = {"kind": "never_lasso", "certificate": [i, j],
+                 "d": {n: dn for n, dn in run.lasso},
+                 "jumps": [list(jp[:3]) for jp in run.jumps],
+                 "budget": bm.BUDGET}
+        if run.growth:
+            claim["g"] = {n: gn for n, gn in run.growth}
+        return claim
     if run.forgotten:
         return {"kind": "never_inert", "certificate": [i, j],
                 "forgotten": list(run.forgotten)}
@@ -1360,6 +1421,15 @@ def say_shift(d: Sequence[Tuple[str, int]]) -> str:
     return " and ".join(parts) if parts else "changes no counter"
 
 
+def say_growth(g: Sequence[Tuple[str, int]]) -> str:
+    """``, adding 1 more to B on each later pass`` -- how a quadratic pass's
+    step grows (Phase 142); empty for a translation."""
+    parts = [(f"{gn} more to {n}" if gn > 0 else f"{-gn} less to {n}")
+             for n, gn in g]
+    return (", adding " + " and ".join(parts) + " on each later pass"
+            if parts else "")
+
+
 def say_jumps(run: bm.Run, program: Sequence[object]) -> str:
     """The jumps of a halting run, in words (Phase 130)."""
     out = []
@@ -1371,8 +1441,9 @@ def say_jumps(run: bm.Run, program: Sequence[object]) -> str:
                  if w else "")
         if w and named:
             wrote += f" (naming {', '.join(named)})"
-        out.append(f"the pass from step {i} to step {j} {say_shift(d)}, and "
-                   f"was taken {m} times in one jump{wrote}, until {test} "
+        grow = say_growth(jp[7]) if len(jp) > 7 else ""
+        out.append(f"the pass from step {i} to step {j} {say_shift(d)}{grow}, "
+                   f"and was taken {m} times in one jump{wrote}, until {test} "
                    "changed")
     return "; ".join(out)
 
@@ -1397,13 +1468,15 @@ def answer(question: str, program_text: str,
            files: Optional[Mapping[str, Sequence[str]]] = None,
            dirs: Sequence[str] = (), verify: bool = True,
            jump: bool = True, extended: bool = True,
-           affine: bool = True) -> Answer:
+           affine: bool = True, quadratic: bool = True) -> Answer:
     """Answer an English question about a program, or refuse by name.
     ``jump=False`` reads runs as Phase 126 did, without the counter-lasso
     reading of Phase 130; ``extended=False`` reads them as Phase 130 did,
     without Phase 131's constant operands and writing passes; ``affine=False``
     reads them as Phase 131 did, without Phase 132's passes that write a
-    counter (``studies/AFFINE_OUTPUT_STUDY.md``)."""
+    counter (``studies/AFFINE_OUTPUT_STUDY.md``); ``quadratic=False`` reads
+    them as Phase 132 did, without Phase 142's accumulators
+    (``studies/QUADRATIC_LASSO_STUDY.md``)."""
     kind, arg = _classify(question)
     if kind is None:
         return _refuse(question, "UNREAD_QUESTION",
@@ -1450,7 +1523,8 @@ def answer(question: str, program_text: str,
 
     # ----- questions read from a run -----
     run = bm.run_program(program, env, files, dirs, jump=jump,
-                         extended=extended, affine=affine)
+                         extended=extended, affine=affine,
+                         quadratic=quadratic)
     col2 = col2 + [f"trace: {run.status} after {run.steps} steps"
                    + (f", lines {', '.join(map(str, run.trace[:40]))}"
                       if run.trace else "")]
@@ -1460,7 +1534,8 @@ def answer(question: str, program_text: str,
                            f"the run is decided ({run.status} after "
                            f"{run.steps} steps)", column1=col1, column2=col2)
         third = bm.jumped_run(program, env, files, dirs,
-                              extended=extended, affine=affine)
+                              extended=extended, affine=affine,
+                              quadratic=quadratic)
         diag = bm.growth_diagnosis(program, env, files, dirs, run=third)
         claim = growth_claim(diag) if diag["head"] is not None else {}
         a = done(say_diagnosis(diag), claim, diag, faculty="refusal")
@@ -1479,7 +1554,8 @@ def answer(question: str, program_text: str,
                             f"step {j}", claim, False)
             if run.lasso:
                 return done(f"no, it never halts: the pass from step {i} to "
-                            f"step {j} {say_shift(run.lasso)}, and no "
+                            f"step {j} {say_shift(run.lasso)}"
+                            f"{say_growth(run.growth)}, and no "
                             "comparison on it ever changes", claim, False)
             return done(f"no, it never halts: the control state before step "
                         f"{i} recurs before step {j}", claim, False)
@@ -1491,7 +1567,8 @@ def answer(question: str, program_text: str,
     if run.status == "never" and run.lasso:
         return _refuse(question, "NEVER_HALTS", "the run never ends (the pass "
                        f"from step {run.certificate[0]} to step "
-                       f"{run.certificate[1]} {say_shift(run.lasso)}, and no "
+                       f"{run.certificate[1]} {say_shift(run.lasso)}"
+                       f"{say_growth(run.growth)}, and no "
                        "comparison on it ever changes), so it has no final "
                        "answer", column1=col1, column2=col2)
     if run.status == "never":

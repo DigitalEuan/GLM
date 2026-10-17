@@ -40,7 +40,7 @@ __all__ = ["Step", "Chain", "ARITH", "render_value", "parse_value",
            "sentence", "equation", "read_sentence", "read_equation",
            "answer_sentence", "recompute", "step_check", "chain_check",
            "chain_data", "render_script", "mutants", "MUTATION_KINDS",
-           "prime_factor"]
+           "prime_factor", "TRIAL_LIMIT"]
 
 #: The four binary arithmetic operations and their symbols.
 ARITH: Dict[str, str] = {"add": "+", "sub": "-", "mul": "*", "div": "/"}
@@ -333,6 +333,11 @@ def parse_value(s: str) -> object:
         n, d = s.split("/")
         return Fraction(int(n), int(d))
     return s
+
+
+#: Up to this line a ``prime`` step is decided by trial division; above it
+#: by a checked certificate (Phase 139, ``primality_certificate``).
+TRIAL_LIMIT = 10 ** 12
 
 
 def prime_factor(n: int) -> Optional[int]:
@@ -780,6 +785,12 @@ def recompute(s: Step, steps: Sequence[Step]) -> object:
         return Fraction(g if s.op == "gcd" else (abs(a * b) // g if g else 0))
     if s.op == "prime":
         n = int(vals[0])
+        if "certificate" in s.detail or n > TRIAL_LIMIT:
+            from glm_universal.reasoning import primality_certificate as pc
+            try:
+                return pc.check(n, s.detail["certificate"])  # type: ignore
+            except (KeyError, ValueError, TypeError):
+                return None
         return "prime" if n >= 2 and prime_factor(n) is None else "not prime"
     if s.op == "compare":
         a, b = vals
@@ -1113,6 +1124,160 @@ def least_factor(n):
             return f
         f += 1
     return None
+
+
+def certified_verdict(n, cert):
+    # The script's own reading of a primality certificate (Phase 139),
+    # written apart from the runtime's checker; each branch is a theorem of
+    # RequestProject/GLM/PrimalityCertificate.lean.
+    kind = cert["kind"]
+    if kind == "small":
+        assert n < 2, "a small certificate for a number above 1"
+        return "not prime"
+    if kind == "factor":
+        f = int(cert["factor"])
+        assert 1 < f < n and n % f == 0, "the factor does not divide"
+        return "not prime"
+    if kind == "fermat":
+        a = int(cert["base"])
+        assert 1 <= a < n and pow(a, n - 1, n) != 1, "not a Fermat witness"
+        return "not prime"
+    if kind == "pocklington":
+        # Phase 140: RequestProject/GLM/PocklingtonCertificate.lean,
+        # pocklington_sound -- only a part F > sqrt(p) - 1 of p - 1 factored.
+        certified = set()
+        for p, fs in cert["chain"]:
+            part = 1
+            seen = []
+            for q, e, a in fs:
+                assert q in certified, "a factor certified by no earlier entry"
+                assert q not in seen, "a factor named twice"
+                seen.append(q)
+                part *= q ** e
+            assert p >= 2 and part > 0 and (p - 1) % part == 0, \
+                "the factored part does not divide p-1"
+            assert p < (part + 1) * (part + 1), "the factored part is too small"
+            for q, e, a in fs:
+                assert pow(a, p - 1, p) == 1, "the witness fails Fermat"
+                x = pow(a, (p - 1) // q, p)
+                assert gcd((x + p - 1) % p, p) == 1, \
+                    "the witness shares a factor with p"
+            certified.add(p)
+        assert n in certified, "the certificate is about another number"
+        return "prime"
+    if kind in ("lucas", "elliptic"):
+        # Phase 140 part B: RequestProject/GLM/LucasCertificate.lean,
+        # mixed_sound -- Pocklington entries [p, fs] and N+1 entries
+        # [p, P, fs] working in (Z/p)[X]/(X^2 - P X + 1).  Phase 141:
+        # RequestProject/GLM/EllipticCertificate.lean, elliptic_sound --
+        # an "elliptic" chain may also hold entries [p, a, b, x, y, k, q]
+        # on the curve y^2 = x^3 + a x + b modulo p.
+        def mul(p, c, x, y):
+            return ((x[0] * y[0] + x[1] * y[1] * (p - 1)) % p,
+                    (x[0] * y[1] + x[1] * y[0] + c * x[1] * y[1]) % p)
+
+        def power(p, c, e):
+            acc, base = (1 % p, 0), (0, 1 % p)
+            while e > 0:
+                if e % 2 == 1:
+                    acc = mul(p, c, acc, base)
+                base = mul(p, c, base, base)
+                e //= 2
+            return acc
+        certified = set()
+        for entry in cert["chain"]:
+            if len(entry) == 2:
+                p, fs = entry
+                part = 1
+                seen = []
+                for q, e, a in fs:
+                    assert q in certified, "a factor certified by no earlier entry"
+                    assert q not in seen, "a factor named twice"
+                    seen.append(q)
+                    part *= q ** e
+                assert p >= 2 and part > 0 and (p - 1) % part == 0, \
+                    "the factored part does not divide p-1"
+                assert p < (part + 1) * (part + 1), "the factored part is too small"
+                for q, e, a in fs:
+                    assert pow(a, p - 1, p) == 1, "the witness fails Fermat"
+                    x = pow(a, (p - 1) // q, p)
+                    assert gcd((x + p - 1) % p, p) == 1, \
+                        "the witness shares a factor with p"
+            elif len(entry) == 7 and kind == "elliptic":
+                p, a, b, x0, y0, k, q = entry
+                assert p >= 3 and p % 2 == 1, "the modulus is not odd"
+                assert gcd((4 * a ** 3 + 27 * b ** 2) % p, p) == 1, \
+                    "the curve is singular modulo a factor of p"
+                assert (y0 ** 2 - x0 ** 3 - a * x0 - b) % p == 0, \
+                    "the point is not on the curve"
+                assert q in certified, "the order is certified by no earlier entry"
+                assert (q - 1) ** 2 > 4 * p, "the order is too small"
+
+                def inverse(v):
+                    v %= p
+                    try:
+                        w = pow(v, -1, p)
+                    except ValueError:
+                        w = 0
+                    assert v * w % p == 1, "a slope with no inverse modulo p"
+                    return w
+
+                def plus(u, v):
+                    # chord and tangent; None is the point at infinity
+                    if u is None or v is None:
+                        return v if u is None else u
+                    if (u[0] - v[0]) % p == 0:
+                        if (u[1] + v[1]) % p == 0:
+                            return None
+                        assert (u[1] - v[1]) % p == 0, \
+                            "equal abscissae, unrelated ordinates"
+                        s = (3 * u[0] * u[0] + a) * inverse(2 * u[1]) % p
+                    else:
+                        s = (v[1] - u[1]) * inverse(v[0] - u[0]) % p
+                    x3 = (s * s - u[0] - v[0]) % p
+                    return (x3, (s * (u[0] - x3) - u[1]) % p)
+
+                def times(m, u):
+                    acc = None
+                    for bit in format(m, "b") if m else "":
+                        acc = plus(acc, acc)
+                        if bit == "1":
+                            acc = plus(acc, u)
+                    return acc
+                kp = times(k, (x0 % p, y0 % p))
+                assert kp is not None, "k times the point is at infinity"
+                assert times(q, kp) is None, "q does not kill k times the point"
+            else:
+                assert len(entry) == 3, "an entry of an unknown shape"
+                p, c, fs = entry
+                whole = 1
+                for q, e in fs:
+                    assert q in certified, "a factor certified by no earlier entry"
+                    whole *= q ** e
+                assert p >= 2 and whole == p + 1, "the factors do not multiply to p+1"
+                assert power(p, c, p + 1) == (1, 0), "X^(p+1) is not 1"
+                for q, _ in fs:
+                    u, v = power(p, c, (p + 1) // q)
+                    u = (u + p - 1) % p
+                    norm = (u * u + c * u * v + v * v) % p
+                    assert gcd(norm, p) == 1, "X^((p+1)/q) - 1 is not a unit"
+            certified.add(p)
+        assert n in certified, "the certificate is about another number"
+        return "prime"
+    assert kind == "pratt", "an unknown certificate"
+    certified = set()
+    for p, a, fs in cert["chain"]:
+        prod = 1
+        for q, e in fs:
+            assert q in certified, "a factor certified by no earlier entry"
+            prod *= q ** e
+        assert p >= 2 and prod == p - 1, "the factors do not multiply to p-1"
+        assert pow(a, p - 1, p) == 1, "the witness fails Fermat"
+        for q, _ in fs:
+            assert pow(a, (p - 1) // q, p) != 1, "the witness has low order"
+        certified.add(p)
+    assert n in certified, "the certificate is about another number"
+    return "prime"
 
 
 def gcd(a, b):
@@ -1495,6 +1660,8 @@ def value_of(step, done):
         return Fraction(abs(a * b) // gcd(a, b))
     if op == "prime":
         n = as_int(v[0])
+        if "certificate" in d or n > 10 ** 12:
+            return certified_verdict(n, d["certificate"])
         f = least_factor(n)
         if n >= 2 and f is None:
             return "prime"

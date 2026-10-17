@@ -93,6 +93,7 @@ __all__ = [
     "FollowUpError", "REFUSAL_REASONS", "SHAPES", "PRONOUNS", "ENDS",
     "Mention", "Turn", "Binding", "Conversation",
     "DECLARED_FOLLOW_UPS", "conversation_report",
+    "question_put", "reply_rewrite",
 ]
 
 
@@ -115,8 +116,11 @@ REFUSAL_REASONS: Tuple[str, ...] = (
     "not-a-follow-up", "no-antecedent", "ambiguous-antecedent", "unlicensed",
 )
 
-#: The three shapes of follow-up, in detection order.
-SHAPES: Tuple[str, ...] = ("end-flip", "subject", "pronoun")
+#: The shapes of follow-up, in detection order.  ``reply`` (Phase 146) is a
+#: reply to the question the previous turn's answer ended with -- *no*, *2*,
+#: *albedo* after ``locate albedo`` -- and is detected first, but only when
+#: that turn put a question and the text is one of its options.
+SHAPES: Tuple[str, ...] = ("reply", "end-flip", "subject", "pronoun")
 
 #: The tokens that stand for a carrier named earlier.  Deliberately two: a
 #: longer list buys coverage at the price of a rule nobody can state.
@@ -175,6 +179,10 @@ class Turn:
     answer: str
     mentions: Tuple[Mention, ...]
     binding: Optional["Binding"] = None
+    #: The question the turn's answer ended with (Phase 146), as
+    #: :func:`glm_universal.reasoning.timed_question.question_record` keeps
+    #: it, or ``None``.
+    question: Optional[Mapping] = None
 
     def side(self, which: str) -> Tuple[Mention, ...]:
         """The mentions of one side, in the order the turn made them."""
@@ -203,6 +211,27 @@ class Binding:
         who = f" to {self.name}" if self.name else ""
         return (f"{self.shape} bound{who}{against}: "
                 f"{self.rewritten!r}")
+
+
+def question_put(solution) -> Optional[Mapping]:
+    """The question a solved turn's answer ended with (Phase 146): a
+    ``locate`` junction answer carries it in its payload's ``tie``."""
+    if not getattr(solution, "ok", False):
+        return None
+    tie = dict(getattr(solution, "payload", {}) or {}).get("tie")
+    if not isinstance(tie, Mapping):
+        return None
+    return tie.get("question") or None
+
+
+def reply_rewrite(asked: str, record: Mapping, token: str) -> str:
+    """``locate albedo`` + the reply *no* to ``word:absorbed`` ->
+    ``locate albedo given word:absorbed is no``; a query that already carries
+    replies gains one more."""
+    reply = f"{record['key']} is {token}"
+    if re.search(r"\s+given\s+", asked, re.IGNORECASE):
+        return f"{asked.rstrip()}; {reply}"
+    return f"{asked.rstrip()} given {reply}"
 
 
 # ===========================================================================
@@ -275,7 +304,7 @@ class Conversation:
                     kind=solution.kind, ok=bool(solution.ok),
                     answer=solution.answer,
                     mentions=self._mentions_of(len(self._turns), solution),
-                    binding=binding)
+                    binding=binding, question=question_put(solution))
         self._turns.append(turn)
         return turn
 
@@ -338,6 +367,8 @@ class Conversation:
         end-flip even though it also matches the subject pattern, because
         ``the smallest`` names no carrier.
         """
+        if self._reply_to(text) is not None:
+            return "reply"
         stripped = text.strip().rstrip("?").strip()
         lowered = stripped.lower()
         tail = _ELLIPSIS.match(lowered)
@@ -371,11 +402,43 @@ class Conversation:
                 "not-a-follow-up",
                 f"{text!r} is a whole query, not a follow-up: it names no "
                 f"pronoun and opens with no continuation")
+        if shape == "reply":
+            return self._resolve_reply(text)
         if shape == "end-flip":
             return self._record_plan(text, self._resolve_end_flip, shape)
         if shape == "subject":
             return self._record_plan(text, self._resolve_subject, shape)
         return self._record_plan(text, self._resolve_pronoun, shape)
+
+    # -- a reply to the question the last turn put (Phase 146) -------------
+
+    def _reply_to(self, text: str) -> Optional[Tuple[Turn, str]]:
+        """The previous turn and the reply token, when the previous turn's
+        answer ended with a question and ``text`` is one of its options."""
+        if not self._turns:
+            return None
+        last = self._turns[-1]
+        if not last.ok or not last.question:
+            return None
+        from ..reasoning import timed_question as tq
+        token = tq.match_reply(last.question, text)
+        return None if token is None else (last, token)
+
+    def _resolve_reply(self, text: str) -> "Binding":
+        """Bind a reply: the previous turn's query, with the reply added to
+        its replies (``GLM.AnsweringQuestion.after_reply``).  The session
+        answers the rewritten query exactly as it would answer it typed."""
+        found = self._reply_to(text)
+        if found is None:                       # pragma: no cover -- guarded
+            raise FollowUpError("no-antecedent",
+                                f"{text!r} replies to no question")
+        turn, token = found
+        record = turn.question
+        return Binding(
+            shape="reply", name=token, antecedent_turn=turn.index,
+            side="query", rewritten=reply_rewrite(turn.asked, record, token),
+            considered=tuple(str(o["reply"]) for o in record["options"]),
+            licensed=(token,))
 
     # -- the plan store, when there is one ---------------------------------
 

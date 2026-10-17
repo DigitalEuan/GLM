@@ -46,6 +46,7 @@ __all__ = [
     "files_written", "COMMANDS", "inert_variables", "is_closed_inert",
     "counters", "first_change", "jumped_run", "plain_run", "MAX_JUMPS",
     "AFFINE_OUTPUT_CAP", "growth_diagnosis", "GROWTH_WINDOW",
+    "accumulators", "first_change_quadratic",
 ]
 
 #: Steps a run may take before the machine refuses to say whether it halts.
@@ -772,6 +773,10 @@ class Run:
     #: ``("no_recurrence",)``, ``("line", n)``, ``("cap", lines)`` or
     #: ``("jumps",)``.
     blocked: Tuple = ()
+    #: Phase 142: for a ``never`` verdict by a quadratic lasso, the pass's
+    #: ``g`` -- how much more each pass adds to each accumulator than the
+    #: pass before (``GLM.QuadraticLasso.drift``); empty otherwise.
+    growth: Tuple[Tuple[str, int], ...] = ()
 
     @property
     def halted(self) -> bool:
@@ -788,7 +793,8 @@ def run_program(program: Sequence[object], env: Optional[Mapping[str, str]] = No
                 dirs: Sequence[str] = (), budget: int = BUDGET,
                 keep_controls: bool = False, inert: bool = True,
                 forget: Sequence[str] = (), jump: bool = True,
-                extended: bool = True, affine: bool = True) -> Run:
+                extended: bool = True, affine: bool = True,
+                quadratic: bool = True) -> Run:
     """Run a parsed program from the given environment and files.
 
     The control state is recorded *before* each step; the first recurrence
@@ -802,7 +808,9 @@ def run_program(program: Sequence[object], env: Optional[Mapping[str, str]] = No
     counters masked (:func:`jumped_run`, ``jump``, Phase 130); ``extended``
     adds Phase 131's constant operands and writing passes to that reading,
     and ``affine`` (which needs ``extended``) Phase 132's passes that write a
-    counter and its output bound of :data:`AFFINE_OUTPUT_CAP` lines.
+    counter and its output bound of :data:`AFFINE_OUTPUT_CAP` lines;
+    ``quadratic`` (which needs ``affine``) Phase 142's accumulators
+    (``studies/QUADRATIC_LASSO_STUDY.md``).
     """
     first = _run(program, env, files, dirs, budget, keep_controls,
                  frozenset(n.upper() for n in forget))
@@ -817,7 +825,7 @@ def run_program(program: Sequence[object], env: Optional[Mapping[str, str]] = No
     if not jump:
         return first
     third = jumped_run(program, env, files, dirs, budget, extended=extended,
-                       affine=affine)
+                       affine=affine, quadratic=quadratic)
     return third if third.status != "undecided" else first
 
 
@@ -990,6 +998,93 @@ def counters(program: Sequence[object]) -> Tuple[str, ...]:
     return tuple(sorted({u[0] for u in map(_counter_update, program) if u}))
 
 
+def _acc_update(ins: object) -> Optional[Tuple[str, str, int]]:
+    """``(V, W, sigma)`` when ``ins`` is a lone ``SET /A V=V+W`` or ``SET /A
+    V=V-W`` (also with ``%W%``), ``W`` a name other than ``V`` and neither
+    ``ERRORLEVEL``; otherwise ``None`` (Phase 142, ``GLM.QuadraticLasso.
+    accStep``)."""
+    if not isinstance(ins, Cmd) or ins.redirs or ins.name != "SETA":
+        return None
+    m = re.match(rf"^({_NAME})([+-])(%?)({_NAME})\3$", ins.args[1])
+    name = ins.args[0].upper()
+    if m is None or m.group(1).upper() != name:
+        return None
+    w = m.group(4).upper()
+    if w == name or "ERRORLEVEL" in (name, w):
+        return None
+    return name, w, (1 if m.group(2) == "+" else -1)
+
+
+def accumulators(program: Sequence[object]) -> Tuple[str, ...]:
+    """The accumulators of a program, sorted (section 2.1 of
+    ``studies/QUADRATIC_LASSO_STUDY.md``): the names with an accumulator line
+    whose ``W`` is a counter and not itself the target of an accumulator
+    line."""
+    cnt = set(counters(program))
+    ups = [u for u in map(_acc_update, program) if u]
+    targets = {u[0] for u in ups}
+    return tuple(sorted({v for v, w, _s in ups
+                         if w in cnt and w not in targets}))
+
+
+def _sign(x: int) -> int:
+    return (x > 0) - (x < 0)
+
+
+def first_change_quadratic(e0: int, b: int, c: int, op: str) -> Optional[int]:
+    """The least ``t >= 1`` at which ``e0 + b*t + c*C(t, 2) OP 0`` differs
+    from its outcome at ``t = 0``, or ``None`` if it never does (section 2.3
+    of the study).  With ``c == 0`` this is :func:`first_change`.  Otherwise
+    the differences ``b + c*t`` change sign once, at ``T``; the comparison
+    is monotone on ``[0, T]`` and on ``[T, oo)`` (``GLM.QuadraticLasso.
+    monotone_on_of_diff_nonneg``, ``antitone_on_of_diff_nonpos``), so on each
+    stretch the first sign change is found by bisection
+    (``sign_change_persists``), the outcome there is compared
+    (``cmp_of_sign``), and the unbounded stretch is closed by doubling
+    (``quad_eventually_pos``, ``quad_eventually_neg``)."""
+    if c == 0:
+        return first_change(e0, b, op)
+    truth = _CMP_TRUTH[op]
+    t0 = truth(e0)
+
+    def e(t: int) -> int:
+        return e0 + b * t + c * (t * (t - 1) // 2)
+
+    if c > 0:
+        turn = max(0, -(b // c))          # least t with b + c*t >= 0
+    else:
+        turn = max(0, -((-b) // (-c)))    # least t with b + c*t <= 0
+
+    def scan(a: int, hi: Optional[int], rising: bool) -> Optional[int]:
+        while True:
+            s = _sign(e(a))
+            if hi is None:
+                if (rising and s == 1) or (not rising and s == -1):
+                    return None
+                step = 1
+                while _sign(e(a + step)) == s:
+                    step *= 2
+                lo, up = a, a + step
+            else:
+                if a >= hi or _sign(e(hi)) == s:
+                    return None
+                lo, up = a, hi
+            while up - lo > 1:
+                mid = (lo + up) // 2
+                if _sign(e(mid)) == s:
+                    lo = mid
+                else:
+                    up = mid
+            if truth(e(up)) != t0:
+                return up
+            a = up
+
+    first = scan(0, turn, c < 0)
+    if first is not None:
+        return first
+    return scan(turn, None, c > 0)
+
+
 def _canonical(value: Optional[str]) -> bool:
     return value is not None and re.match(r"^-?\d+$", value) is not None \
         and str(int(value)) == value
@@ -1046,10 +1141,12 @@ def _operand_names(ins: object) -> Tuple[str, ...]:
 
 
 def _line_kind(ins: object, live: Sequence[str],
-               consts: Optional[Mapping[str, Optional[str]]] = None) -> str:
+               consts: Optional[Mapping[str, Optional[str]]] = None,
+               quad: Optional[Tuple[frozenset, frozenset]] = None) -> str:
     """How a line may sit on a pass: ``free`` (label, remark, or no live
-    counter mentioned), ``add``, ``test``, ``echo`` (output only, for a
-    *never* verdict), or ``no``."""
+    counter mentioned), ``add``, ``acc`` (Phase 142, with ``quad`` the
+    accumulators and the pure counters), ``test``, ``echo`` (output only,
+    for a *never* verdict), or ``no``."""
     if isinstance(ins, (Label, Rem)):
         return "free"
     line = render_line(ins)
@@ -1061,6 +1158,11 @@ def _line_kind(ins: object, live: Sequence[str],
     upd = _counter_update(ins)
     if upd and upd[0] in live:
         return "add"
+    if quad is not None:
+        acc = _acc_update(ins)
+        if acc and acc[0] in quad[0] and acc[0] in live \
+                and acc[1] in quad[1] and acc[1] in live:
+            return "acc"
     if isinstance(ins, If) and ins.cond[0] == "cmp":
         a, b = (_operand(ins.cond[1], live, consts),
                 _operand(ins.cond[3], live, consts))
@@ -1211,12 +1313,95 @@ def _read_pass(program: Sequence[object], names: Sequence[str],
             "holes_live": holes_live, "first_echo": first_echo}
 
 
+def _read_pass_quad(program: Sequence[object], names: Sequence[str],
+                    hist: Sequence[_Snap], end: _Snap,
+                    quad: Tuple[frozenset, frozenset],
+                    why: Optional[List[int]] = None
+                    ) -> Optional[Dict[str, object]]:
+    """:func:`_read_pass` under the quadratic reading (Phase 142, section 2.2
+    of ``studies/QUADRATIC_LASSO_STUDY.md``): the same keys, ``d`` holding
+    what the first pass adds to every live name (``beta``), and also ``g``
+    (``gamma``: how much more each pass adds than the one before, non-zero
+    entries only) and ``gr`` (for each step of the pass, the part of
+    ``gamma`` contributed by the accumulator lines before it), so that at
+    step ``r`` of pass ``t`` name ``n`` is its first-pass value plus
+    ``t*(beta_n + gr_r(n)) + C(t, 2)*gamma_n`` (``GLM.QuadraticLasso.
+    quadratic_iterate``)."""
+    start = dict(hist[0].values)
+    stop = dict(end.values)
+    live = tuple(n for n in names if _canonical(start.get(n)))
+    d = {n: int(stop[n]) - int(start[n]) for n in live}
+    accs = frozenset(n for n in quad[0] if n in live)
+    pure = frozenset(n for n in quad[1] if n in live)
+    kinds: List[str] = []
+    for snap in hist:
+        kind = _line_kind(program[snap.pc], live, dict(snap.consts), (accs, pure))
+        if kind == "no":
+            if why is not None:
+                why.append(snap.pc + 1)
+            return None
+        kinds.append(kind)
+    gamma = {n: 0 for n in live}
+    gr: List[Dict[str, int]] = []
+    for snap, kind in zip(hist, kinds):
+        gr.append(dict(gamma))
+        if kind == "acc":
+            v, w, sigma = _acc_update(program[snap.pc])
+            gamma[v] += sigma * d[w]
+    best: Optional[Tuple[int, int]] = None
+    echoes = False
+    for r, (snap, kind) in enumerate(zip(hist, kinds)):
+        if kind == "echo":
+            echoes = True
+        if kind != "test":
+            continue
+        ins = program[snap.pc]
+        consts = dict(snap.consts)
+        vals = dict(snap.values)
+        (na, ka), (nb, kb) = (_operand(ins.cond[1], live, consts),
+                              _operand(ins.cond[3], live, consts))
+        a = int(vals[na]) if na else ka
+        bv = int(vals[nb]) if nb else kb
+        slope = ((d[na] + gr[r][na]) if na else 0) - \
+            ((d[nb] + gr[r][nb]) if nb else 0)
+        curve = (gamma[na] if na else 0) - (gamma[nb] if nb else 0)
+        m = first_change_quadratic(a - bv, slope, curve, ins.cond[2])
+        if m is not None and (best is None or m < best[0]):
+            best = (m, snap.pc + 1)
+    writes = echoes or end.out != hist[0].out or end.err != hist[0].err
+    named: set = set()
+    holes_live = True
+    for snap, kind in zip(hist, kinds):
+        if kind != "echo":
+            continue
+        if snap.tmpl is None:
+            holes_live = False
+            continue
+        for part in snap.tmpl:
+            if isinstance(part, tuple):
+                named.add(part[0])
+                holes_live = holes_live and part[0] in live
+    first_echo = next((s.pc + 1 for s, k in zip(hist, kinds) if k == "echo"),
+                      None)
+    return {"d": tuple(sorted(d.items())), "live": live,
+            "m": best[0] if best else None,
+            "line": best[1] if best else None, "writes": writes,
+            "echoes": echoes, "named": tuple(sorted(named)),
+            "holes_live": holes_live, "first_echo": first_echo,
+            "g": tuple(sorted((n, v) for n, v in gamma.items() if v)),
+            "gr": gr}
+
+
+def _choose2(t: int) -> int:
+    return t * (t - 1) // 2
+
+
 def jumped_run(program: Sequence[object],
                env: Optional[Mapping[str, str]] = None,
                files: Optional[Mapping[str, Sequence[str]]] = None,
                dirs: Sequence[str] = (), budget: int = BUDGET,
                max_jumps: int = MAX_JUMPS, extended: bool = True,
-               affine: bool = True) -> Run:
+               affine: bool = True, quadratic: bool = True) -> Run:
     """The third reading (Phase 130): run with the counters masked; at each
     first recurrence of the masked state read the pass, and either certify
     that the run never halts (no test on the pass ever changes), or jump the
@@ -1236,12 +1421,30 @@ def jumped_run(program: Sequence[object],
     hole filled by the counter's value at that step plus ``t`` times its step
     (``GLM.AffineOutput.templated_block``, ``lasso_output_affine``); the
     bound is then :data:`AFFINE_OUTPUT_CAP` lines.  An undecided run records
-    in ``Run.blocked`` why it took no further jump."""
+    in ``Run.blocked`` why it took no further jump.
+
+    ``quadratic`` (Phase 142, ``studies/QUADRATIC_LASSO_STUDY.md`` section 2,
+    needs ``affine``) also masks the accumulators -- names to which a line
+    adds a counter -- and jumps a pass whose step grows: pass ``m`` moves the
+    state by ``d + m*g``, the jump to the first change of a quadratic
+    comparison lands on the start displaced by ``m*d + C(m, 2)*g``
+    (``GLM.QuadraticLasso.quadratic_accelerate``), and a pass on which no
+    comparison ever changes is a ``never`` verdict with ``g`` in
+    ``Run.growth`` (``never_halts_of_quadratic_lasso``).  A program with no
+    accumulator is read exactly as without it."""
     affine = affine and extended
+    quadratic = quadratic and affine
     cap = AFFINE_OUTPUT_CAP if affine else OUTPUT_CAP
     ctx = _Ctx(env or {}, files or {}, dirs)
     labels = _labels(program)
     names = counters(program)
+    quad: Optional[Tuple[frozenset, frozenset]] = None
+    if quadratic:
+        accs = accumulators(program)
+        if accs:
+            quad = (frozenset(accs), frozenset(names) - frozenset(accs))
+            names = tuple(sorted(set(names) | set(accs)))
+    growth: Tuple = ()
     pc, stack = 0, ()
     seen: Dict[Tuple, int] = {}
     hist: List[_Snap] = []
@@ -1262,10 +1465,18 @@ def jumped_run(program: Sequence[object],
         if state in seen and names:
             k = seen[state]
             why: List[int] = []
-            read = _read_pass(program, names, hist[k:], snap, extended, why)
+            if quad is not None:
+                read = _read_pass_quad(program, names, hist[k:], snap, quad,
+                                       why)
+            else:
+                read = _read_pass(program, names, hist[k:], snap, extended,
+                                  why)
+            gam = dict(read["g"]) if read is not None and quad is not None \
+                else {}
             if read is not None and read["m"] is None:
                 status, cert = "never", (hist[k].step, snap.step)
                 lasso = read["d"]
+                growth = tuple(sorted(gam.items()))
                 break
             block_out = ctx.out[hist[k].out:snap.out]
             block_err = ctx.err[hist[k].err:snap.err]
@@ -1312,23 +1523,32 @@ def jumped_run(program: Sequence[object],
                                 raise AssertionError(  # pragma: no cover
                                     "an echo line wrote other than its "
                                     "template")
-                            steps_out.append((tmpl, vals, lines_out, lines_err))
+                            lin = {n: d[n] + (read["gr"][r].get(n, 0)
+                                              if quad is not None else 0)
+                                   for n in vals}
+                            steps_out.append((tmpl, vals, lines_out, lines_err,
+                                              lin))
                         for t in range(1, m):
-                            for tmpl, vals, lines_out, lines_err in steps_out:
+                            c2 = _choose2(t)
+                            for tmpl, vals, lines_out, lines_err, lin in \
+                                    steps_out:
                                 if tmpl is None:
                                     ctx.out.extend(lines_out)
                                     ctx.err.extend(lines_err)
                                 else:
                                     ctx.out.append(_render(tmpl, {
-                                        n: v + t * d[n]
+                                        n: v + t * lin[n] + c2 * gam.get(n, 0)
                                         for n, v in vals.items()}))
                     elif width:
                         ctx.out.extend(block_out * (m - 1))
                         ctx.err.extend(block_err * (m - 1))
                     for n, dn in read["d"]:
-                        ctx.env[n] = str(int(start[n]) + m * dn)
+                        ctx.env[n] = str(int(start[n]) + m * dn
+                                         + _choose2(m) * gam.get(n, 0))
                     jumps.append((hist[k].step, snap.step, m, read["d"],
-                                  read["line"], width, read["named"]))
+                                  read["line"], width, read["named"])
+                                 + ((tuple(sorted(gam.items())),)
+                                    if gam else ()))
                     offset += (m - 1) * length
                 seen, hist = {}, []
                 continue
@@ -1347,7 +1567,7 @@ def jumped_run(program: Sequence[object],
                tuple(sorted(ctx.dirs)), tuple(trace), cert,
                tuple(dict.fromkeys(ctx.undefined)), (), (),
                tuple(jumps) if status != "undecided" else (), lasso,
-               blocked if status == "undecided" else ())
+               blocked if status == "undecided" else (), growth)
 
 
 def plain_run(program: Sequence[object],
@@ -1687,7 +1907,8 @@ def growth_diagnosis(program: Sequence[object],
                      files: Optional[Mapping[str, Sequence[str]]] = None,
                      dirs: Sequence[str] = (), budget: int = BUDGET,
                      window: int = GROWTH_WINDOW,
-                     run: Optional[Run] = None) -> Dict[str, object]:
+                     run: Optional[Run] = None,
+                     quadratic: bool = True) -> Dict[str, object]:
     """Why a run is undecided (section 2 of the study): the loop head (the
     line executed most often in a plain run of ``budget`` steps, ties to the
     earliest), the shape of every variable and file that changes over its
@@ -1710,7 +1931,8 @@ def growth_diagnosis(program: Sequence[object],
         if code is not None:
             break
     if run is None:
-        run = jumped_run(program, env, files, dirs, budget)
+        run = jumped_run(program, env, files, dirs, budget,
+                         quadratic=quadratic)
     out: Dict[str, object] = {"budget": budget, "window": window,
                               "blocked": run.blocked}
     if not counts or max(counts.values()) < _MIN_VISITS:

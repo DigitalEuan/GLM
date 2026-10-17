@@ -544,10 +544,14 @@ def _handle_meta(state: _InteractiveState, line: str) -> bool:
 def _interactive(out: Out, source: TextIO, session: GeometricSession,
                  columns: Sequence[int], verify: bool,
                  exactness_check: bool, banner: bool) -> int:
+    from glm_universal.reasoning.timed_question import match_reply
+    from glm_universal.runtime.conversation import (question_put,
+                                                    reply_rewrite)
     state = _InteractiveState(session, out, columns, verify, exactness_check)
     if banner:
         _print_banner(out)
     idx = 0
+    pending = None
     while True:
         line = source.readline()
         if line == "":
@@ -563,15 +567,38 @@ def _interactive(out: Out, source: TextIO, session: GeometricSession,
                 break
             continue
         idx += 1
-        out.line(f"QUERY   {line}")
-        code, trace = _batch_query(out, session, line, None, state.columns,
+        asked = line
+        if pending is not None:
+            # Phase 146: a reply to the question the previous answer ended
+            # with is that query again, with the reply added
+            token = match_reply(pending[1], line)
+            if token is not None:
+                asked = reply_rewrite(pending[0], pending[1], token)
+                out.line(f"REPLY   {line!r} answers the previous question: "
+                         f"{asked}")
+        out.line(f"QUERY   {asked}")
+        session.last_solution = None
+        code, trace = _batch_query(out, session, asked, None, state.columns,
                                    "text", state.verify, state.exactness_check)
         if trace is not None:
             state.last_trace = trace
+        record = question_put(getattr(session, "last_solution", None))
+        pending = (asked, record) if record else None
+        if record:
+            _print_question(out, record)
         _print_solution_summary(out, idx - 1, trace)
         if code != 0:
             state.exit_code = 1
     return state.exit_code
+
+
+def _print_question(out: Out, record) -> None:
+    """The question an answer ended with, its options numbered (Phase
+    146): the next line typed may be the number or the text of one."""
+    out.line(f"ASKS    {record['text']}")
+    for k, o in enumerate(record["options"], 1):
+        keeps = ", ".join(o["keeps"]) or "no member (a contradiction)"
+        out.line(f"  {k}. {o['reply']}  -> {keeps}")
 
 
 # ===========================================================================
@@ -712,6 +739,9 @@ def main(argv: Optional[Sequence[str]] = None,
     args = parser.parse_args(list(argv) if argv is not None else None)
     out_stream = Out(out)
     source_stream = source if source is not None else sys.stdin
+    if source is None and args.input is not None:
+        # '--input PATH' was declared but never read before Phase 146
+        source_stream = open(args.input, encoding="utf-8")
 
     # ----- list-domains: short-circuit before anything else -----
     if args.list_domains:
@@ -1010,6 +1040,8 @@ def _converse(out: "Out", texts: Sequence[str]) -> int:
             continue
         out.line(("ANSWER  " if solution.ok else "REFUSED ")
                  + str(solution.answer))
+        if turn.question:
+            _print_question(out, turn.question)
         if not solution.ok:
             worst = 1
     return worst

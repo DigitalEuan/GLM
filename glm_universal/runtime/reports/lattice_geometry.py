@@ -360,8 +360,13 @@ class LatticeGeometryReports:
         vertices off the modulator's trajectory, and certify the reading.
         Nothing about the 23 types is stored except the catalogue, which is
         itself derived.
+
+        Phase 147 (``studies/BUDGET_READING_STUDY.md``): every reading at
+        the covering radius is made under the budget rule -- no barren stop,
+        1056 starts -- by :func:`..reasoning.hole_reading.census_report`.
         """
-        report = dhl.deep_holes_report(walks=3)
+        from ...reasoning import hole_reading as hr
+        report = hr.census_report(walks=3)
         census = report["census"]
         catalogue = report["catalogue_size"]
         exhibited = census["types_exhibited"]
@@ -384,6 +389,17 @@ class LatticeGeometryReports:
                  report["certificate"],
                  f"types named = {len(exhibited)}, all certified = "
                  f"{census['every_named_type_certified']}"),
+            Step("the reading stops on its certificate, not on patience",
+                 f"Every reading at the covering radius runs until the "
+                 f"vertices in hand close the certificate, with no barren "
+                 f"stop and a budget of {hr.BUDGET} starts "
+                 f"(GLM.ProbeBudget.budget_serves_every_type).  Wherever the "
+                 f"old patience reading was certified this gives the same "
+                 f"vertex set and type (GLM.BudgetReading.budget_agrees); it "
+                 f"refuses only if no start inside the budget carries the "
+                 f"certificate (GLM.BudgetReading."
+                 f"budget_refuses_only_without_cert).",
+                 f"budget = {hr.BUDGET} starts, no barren stop"),
             Step("what it settles",
                  f"This run exhibited "
                  f"{census['types_exhibited_count']} of the {catalogue} "

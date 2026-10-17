@@ -52,21 +52,27 @@ standing instruction; it is a row of the close checklist, `ITERATE.md` §4.1).
 
 **Starting a new round? Read [`ITERATE.md`](ITERATE.md) §0, then §2 below.**
 
-**Just closed: Phase 138** (the record is [`MASTER_PLAN.md`](MASTER_PLAN.md),
-"Phase 138"; the study is
-[`TOOL_VERDICTS_STUDY.md`](studies/TOOL_VERDICTS_STUDY.md), 6 of 6 marks),
-the three next steps §2.2 listed after Phase 137. A tool's yes/no answer is
-now a planner step (*is 0xff reachable from 0x0* is `False`, with the gate
-tool's proved reason); *if A, B, otherwise C* builds only the branch its test
-selects; *the first convergent of pi whose denominator is above 1000* is
-unrolled into checked steps with no iteration cap, admitted because a proved
-measure ends it (`search_terminates`). The classical closest-fraction theorem
-is proved (`RequestProject/GLM/NearestFraction.lean`:
-`nearest_fraction_candidates`), so `best approximation` checks a Farey
-certificate for every bound and the 20,000 bound (and the 10^12 one) is gone.
-Fresh held-out rewordings: 12 of 16 read, 12 right, 0 wrong; Phase 137's two
-misses now read. Verdict questions: 14 of 14.
-**Before it, Phase 137** (8 of 8 marks): tool values.
+**Just closed: Phases 147 and 148** (the record is
+[`MASTER_PLAN.md`](MASTER_PLAN.md), "Phase 147" and "Phase 148"; the studies
+are [`BUDGET_READING_STUDY.md`](studies/BUDGET_READING_STUDY.md), 8 of 8
+measured marks, and [`NEAREST_ADDRESS_STUDY.md`](studies/NEAREST_ADDRESS_STUDY.md),
+7 of 7). They took items 2 and 1 of the old §2.1 under one frozen-path
+comparison.
+* The budget rule (no barren stop, 1056 starts) is in the answering path: a
+  new `hole` kind reads one deep hole to its certificate (`hole walk 3006`,
+  `hole octad pair`, `hole <24 coordinates>`), and `report deep holes` reads
+  under the rule. All 256 held-out walks are certified (the walk's patience
+  reading certified 225), 0 disagreements, longest reading 174 starts.
+* `nearest` ranks a moved carrier or 24 exact coordinates against the 142
+  address-table carriers, and the guarded read certifies head, gap and
+  origin (`nearest to C moved 8 by 1/2`). 2362 certified points of 2982, 0
+  disagreements.
+* Over the whole evaluation no unguarded reading of the construction ladder
+  is called (0 over 212 questions). The frozen path keeps all 202 statuses.
+
+One prediction was wrong (Phase 148's certified-point count, copied from a
+mis-summed Phase 143 figure); it is recorded, not re-stated. **Before them,
+Phase 146** (8 of 10 marks): the question in the answering path.
 
 ---
 
@@ -75,18 +81,18 @@ misses now read. Verdict questions: 14 of 14.
 | instrument | command | result |
 |---|---|---|
 | test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->5,397 tests across 181 of the 183 test files, 18,972 subtests, outside the document checks<!--/figure-->**, zero failures |
-| end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->188<!--/figure-->** cases — 0 confidently wrong, every refusal a `boundary` |
+| end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->212<!--/figure-->** cases — 0 confidently wrong, every refusal a `boundary` |
 | benchmark suites | `python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites |
 | capability probes | `python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 surprises |
-| Lean development | `lake build` (repository root) | <!--figure:lean-files-->210 Lean files<!--/figure-->, **0 `sorry`** |
+| Lean development | `lake build` (repository root) | <!--figure:lean-files-->221 Lean files<!--/figure-->, **0 `sorry`** |
 | corpus | `python3 -m glm_universal.corpus --check` | the tier contract, the coverage claim of `ENTRY.md`, every generated block and every derived cache |
 
 The package holds **<!--figure:registers-->8 registers<!--/figure-->** beside a 45-class comparison register,
-**<!--figure:query-kinds-->25 query kinds<!--/figure-->** one of which
+**<!--figure:query-kinds-->27 query kinds<!--/figure-->** one of which
 dispatches **<!--figure:report-subjects-->67 report subjects<!--/figure-->**, and 3 tasks. The Lean development is
 addressed declaration by declaration: `reasoning/lean_address.py` gives each of
-the <!--figure:lean-declarations-->5,167<!--/figure--> declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly <!--figure:lean-declarations-->5,167<!--/figure-->/<!--figure:lean-declarations-->5,167<!--/figure--> with 0 coordinate errors
+the <!--figure:lean-declarations-->5,360<!--/figure--> declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly <!--figure:lean-declarations-->5,360<!--/figure-->/<!--figure:lean-declarations-->5,360<!--/figure--> with 0 coordinate errors
 (`report lean`). The other forty-odd instruments, each with its command and its
 current figure, are the table in [`SYSTEM.md`](SYSTEM.md) §1.
 
@@ -102,37 +108,13 @@ record the round in `MASTER_PLAN.md`.
 
 ### 2.1 The next round — take one of these
 
-1. **The placement guard in the answering path** (left by Phase 129). The
-   answering path reads the ladder unguarded, and the unguarded ladder
-   answers 8, 1 and 2 queries wrongly on three held-out perturbation sets;
-   the placement guard removed all of them on four sets at a cost of 5 to 9
-   per cent of the correct answers. Putting it in changes answers the
-   evaluation pins, so it needs a frozen-path comparison, and the per-cell
-   radius table must be kept beside the digest of the carriers it came from.
-   [`PLACEMENT_GUARD_STUDY.md`](studies/PLACEMENT_GUARD_STUDY.md) §7.4.
-   *Correction (Phase 130):* no module a query loads imports the ladder the
-   guard protects (`ladder_escalation`, `cell_guard` and `placement_guard`
-   are reached only from `tools.py` and other measurement modules), so the
-   first step of this item is a query kind that reads a carrier by its
-   address; only then is there an answering path to guard
-   ([`COUNTER_LASSO_STUDY.md`](studies/COUNTER_LASSO_STUDY.md) §0).
-   Phase 134's `carrier` kind reads a 24-bit Golay word, not a ladder
-   carrier, so this first step still stands; the carrier read is the pattern
-   it can follow ([`PROTECTED_TAG_STUDY.md`](studies/PROTECTED_TAG_STUDY.md)
-   §7.5).
-2. **The budget rule in the walk and the answering path** (left by Phase
-   124). The walk's own reading (patience 40) certified 225 of 256 held-out
-   deep holes, and `classify_carrier` still defaults to a patience of 60;
-   replace both with the budget rule (no barren stop, 1056 starts) under a
-   frozen-path comparison, since it changes answers the evaluation pins.
-   [`PROBE_BUDGET_STUDY.md`](studies/PROBE_BUDGET_STUDY.md) §7.4.
-3. **`L5` in the other deep-hole reports** (left by Phase 123). Only
+1. **`L5` in the other deep-hole reports** (left by Phase 123). Only
    `report hole configuration` answers by `L5`; `report hole classifier`,
    `hole ladder` and `hole failures` still name a hole with the ladder's
    readings. Each would move under a frozen-path comparison like B5's.
    [`LATTICE_COMPLETION_STUDY.md`](studies/LATTICE_COMPLETION_STUDY.md) §7.6.
 
-4. **The operations ladder in the planner and the session** (left by Phase
+2. **The operations ladder in the planner and the session** (left by Phase
    125). The ladder and GLM-BAT are reached only through `tool ladder` and
    `tool machine`; giving the planner's plans or the session's default
    domains the ladder's vocabulary (a plan step as a GLM-BAT line, drift and
@@ -140,12 +122,42 @@ record the round in `MASTER_PLAN.md`.
    needs a frozen-path comparison.
    [`OPERATIONS_LADDER_STUDY.md`](studies/OPERATIONS_LADDER_STUDY.md) §7.4.
 
+3. **The question at the other ties** (left by Phases 145, 146 and 148). Since
+   Phase 146 only the `locate` junction answer puts a question and reads a
+   reply. The other refusals at a tie have no declared vocabulary yet:
+   * the crowded zero cell of the address read;
+   * the `report hole` ties;
+   * the decoder's `classify` refusal;
+   * a `nearest` address read that refuses on a tie (Phase 148: 128 of
+     the 620 refused points are ties at the head).
+
+   Giving one a vocabulary, and the reply its turn, changes answers the
+   evaluation pins. It needs a frozen-path comparison, which must declare the
+   evaluation-set counts that new cases move (`report language`,
+   `report query escalation`, the discourse census).
+   [`ANSWERING_QUESTION_STUDY.md`](studies/ANSWERING_QUESTION_STUDY.md) §7.5.
+
 ### 2.2 Smaller follow-ups left by closed studies
 
 Each is a section a closed study ends on; any of them can be folded into a
 round from §2.1 or taken as a short round of its own.
 
-* **The connected machine, the rest** (left by Phases 136, 137 and 138).
+* **The budget rule, the rest** (left by Phase 147). `deep_holes.py` keeps
+  its frozen defaults (the walk's 200 starts with patience 40, and
+  `classify_carrier`'s patience 60), because six stored measurements digest
+  that file; no answering-path caller uses them any more, so changing them is
+  a re-take of those measurements rather than an answer change. The `hole`
+  kind does not read a hole named by its Niemeier type.
+  [`BUDGET_READING_STUDY.md`](studies/BUDGET_READING_STUDY.md) §7.4.
+
+* **The guarded read in `nearest`, the rest** (left by Phase 148). The pool
+  is the 142 carriers of the address table, not the registers in full;
+  ranking a point against a whole register needs a table over it. Where the
+  read refuses, the scan's head is another carrier than the origin on 51 of
+  620 points; the answer says no margin is certified, and nothing more.
+  [`NEAREST_ADDRESS_STUDY.md`](studies/NEAREST_ADDRESS_STUDY.md) §7.5.
+
+* **The connected machine, the rest** (left by Phases 136 to 141).
   Since Phase 138 a tool's verdict is a planner step, but only from the two
   tools with a boolean figure (`gates`, `wiring`) and from any tool value by
   equality; the ladder's relations and a law's fate are not yet verdicts. The
@@ -156,13 +168,57 @@ round from §2.1 or taken as a short round of its own.
   (*the fraction closest to e with …*, *the kissing number of the
   24-dimensional leech lattice*, *the number of norm 6 vectors in the leech
   lattice*, *the minimum number of gate moves to go from …*); reading them
-  now would be a post-hoc fit, so a fresh held-out set comes first. The
-  primality step keeps a ceiling of 10^12. `tool wiring` names the 20
-  modules no question reaches, and the two ladder guards among them wait on
-  item 1 of §2.1.
+  now would be a post-hoc fit, so a fresh held-out set comes first. Since
+  Phase 141 a prime that neither `p - 1` nor `p + 1` reaches is certified by
+  an elliptic curve; a refusal now spends four budgets, and the order of the
+  searches could change (N+1 ahead of Pocklington when `p + 1` is smooth,
+  the elliptic search earlier on large numbers; either re-pins a
+  kernel-checked instance); the measurement's `cert-k` tamper should be
+  restated so that it is invalid by construction; the typed planner's own
+  primality frame keeps its 10^12 limit (giving it certificates changes which
+  surface answers, so it needs a frozen-path comparison)
+  ([`ELLIPTIC_CERTIFICATE_STUDY.md`](studies/ELLIPTIC_CERTIFICATE_STUDY.md)
+  §7.1). `tool wiring` names the 19
+  modules no question reaches; since Phase 143 the two ladder guards and
+  `norm256_hex` are reached from the `locate` kind.
   [`TOOL_VERDICTS_STUDY.md`](studies/TOOL_VERDICTS_STUDY.md) §7,
   [`CONNECTED_MACHINE_TWO_STUDY.md`](studies/CONNECTED_MACHINE_TWO_STUDY.md)
   §7.3.
+
+* **The question in the answering path, the rest** (left by Phase 146). A
+  reply is read only immediately after the question; a reply carried across
+  an unrelated turn is not. Since Phase 148 `nearest` reads junctions on its
+  address path, but it does not put the question (item 3 of §2.1). Replies are
+  written `key is reply`, because an `=` is read as an identity by the
+  description layer's infix `verify` shape; a reply value containing `;` is
+  not expressible.
+  [`ANSWERING_QUESTION_STUDY.md`](studies/ANSWERING_QUESTION_STUDY.md) §7.5.
+
+* **Time and the question, the rest** (left by Phase 145). The vocabularies
+  for the other ties are item 3 of §2.1. The 78-member junction of dimensionless physics quantities takes up to 22
+  questions, because no declared question halves it (`exists_halving` says
+  one exists); a measurand coordinate would be one (the decision of §2.3).
+  Questions are chosen by what splits, not by what a user can answer or what
+  an answer costs; and the developer's answers are taken as true — one
+  confirming question catches a single false answer, more than one is not
+  measured.
+  [`TIMED_QUESTION_STUDY.md`](studies/TIMED_QUESTION_STUDY.md) §7.6.
+
+* **Register junctions, the rest** (left by Phase 144). The zero word's
+  junction (`golay_codeword_0`, `hexacode_word_0`) shares every cell with
+  `high_denominator_2x3` and `rational_root_thirds`, the two carriers refused
+  for crowding: reading the three needs a finer cell near the origin than the
+  ladder has, not a junction. The full registers hold 104 junctions over 387
+  of 1,094 carriers (0 crossing a register), measured but not declared; a
+  register larger than the 142-carrier sample must re-take both tables
+  (`tools address-table --write`, `tools junction-table --write`), and each
+  junction a read can answer should get a declaration. In 87 of the 104 the
+  members differ only in name, symbol and gloss — whether the encoding should
+  carry a coordinate for the measurand (the unit alone would split 8) is a
+  decision for the registers (§2.3). Since Phase 148 `nearest` reads
+  junctions on its address path; the escalation reports do not read the
+  construction ladder at all.
+  [`COORDINATE_JUNCTION_STUDY.md`](studies/COORDINATE_JUNCTION_STUDY.md) §7.7.
 
 * **The designed substrate, the rest** (left by Phases 133, 134 and 135). The
   `carrier` kind reads the stages and the protected tag, but the soft
@@ -190,19 +246,22 @@ round from §2.1 or taken as a short round of its own.
   the rotated Leech rung has no use yet, because that rung was retired; other
   rotations of the Leech lattice were deliberately not compared on the 568
   queries. [`NORM_256_HEX_STUDY.md`](studies/NORM_256_HEX_STUDY.md) §7.5.
-* **GLM-BAT, the rest** (left by Phases 125, 126, 130, 131 and 132). Stream
+* **GLM-BAT, the rest** (left by Phases 125, 126, 130, 131, 132 and 142). Stream
   merging (`2>&1`), `SORT` options, `FOR /F`, `SETLOCAL`/`ENDLOCAL` and
-  delayed expansion are refused. The counter-lasso reading refuses growth that
-  is not a translation (L12, N5, N6: quadratic or geometric; L12 never
-  halts) — since Phase 132 it *diagnoses* them, and the closed forms are
-  proved (`const_second_diff_closed_form`, `const_ratio_closed_form`), so the
-  next step is a jump over a pass whose comparison is quadratic in the pass
-  number; a jump whose output would pass 1,000,000 lines (P6); an `ECHO`
+  delayed expansion are refused. Since Phase 142 a pass whose step grows
+  linearly (an accumulator adding a counter: L12 is now *never*) is jumped or
+  certified; geometric growth (N5, `N=N*2`, whose closed form
+  `const_ratio_closed_form` is proved) and cubic growth (an accumulator fed by
+  an accumulator) are still refused, as are accumulators fed by a constant
+  variable or an expression
+  ([`QUADRATIC_LASSO_STUDY.md`](studies/QUADRATIC_LASSO_STUDY.md) §7.5);
+  a jump whose output would pass 1,000,000 lines (P6); an `ECHO`
   with redirection or inside a chain or test body on a pass (P10); a constant
   read through `ERRORLEVEL`; and comparisons of text. The run encoder takes
   the block covering the most lines even when it has only two copies, so
   P8's printed text opens with two 16-line blocks; asking for three copies
   would state it as the hand computation expected.
+  [`QUADRATIC_LASSO_STUDY.md`](studies/QUADRATIC_LASSO_STUDY.md) §7.5,
   [`AFFINE_OUTPUT_STUDY.md`](studies/AFFINE_OUTPUT_STUDY.md) §7.5,
   [`CONSTANT_BOUND_STUDY.md`](studies/CONSTANT_BOUND_STUDY.md) §7.4,
   [`COUNTER_LASSO_STUDY.md`](studies/COUNTER_LASSO_STUDY.md) §7.4,
@@ -317,7 +376,10 @@ round from §2.1 or taken as a short round of its own.
   — goals from a second Lean development, or from a generator, scored against
   the anonymous-register controls.
   [`ANONYMOUS_REGISTER_STUDY.md`](studies/ANONYMOUS_REGISTER_STUDY.md).
-* **Decisions:** whether any discrepancy found against the outside sources is
+* **Decisions:** whether the registers should carry a coordinate that
+  separates the members of a junction, or keep the junction as the answer
+  ([`COORDINATE_JUNCTION_STUDY.md`](studies/COORDINATE_JUNCTION_STUDY.md)
+  §7.4); whether any discrepancy found against the outside sources is
   ever written back into a register
   ([`REGISTER_WORLD_STUDY.md`](studies/REGISTER_WORLD_STUDY.md) §6); the
   element register's aluminium melting point, 933.437 K against ITS-90's

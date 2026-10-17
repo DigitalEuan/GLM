@@ -1,0 +1,745 @@
+{
+ "census": {
+  "carriers": 1094,
+  "cross_register": 0,
+  "descriptive_only": 87,
+  "descriptive_only_examples": [
+   [
+    "physics:abbe_dispersion_number",
+    "physics:birefringence",
+    "physics:f_number",
+    "physics:finesse",
+    "physics:fringe_visibility",
+    "physics:group_index",
+    "physics:numerical_aperture",
+    "physics:optical_density",
+    "physics:optical_extinction_index",
+    "physics:polarisation_degree",
+    "physics:quantum_efficiency",
+    "physics:refractive_index_medium"
+   ],
+   [
+    "physics:absorbed_dose",
+    "physics:kerma"
+   ],
+   [
+    "physics:absorptance",
+    "physics:albedo",
+    "physics:archimedes_number",
+    "physics:aspect_ratio",
+    "physics:atwood_number",
+    "physics:bagnold_number",
+    "physics:bejan_number",
+    "physics:biot_number",
+    "physics:bond_number",
+    "physics:brinkman_number",
+    "physics:capillary_number",
+    "physics:cauchy_number",
+    "physics:compression_ratio",
+    "physics:courant_number",
+    "physics:damkohler_number",
+    "physics:dean_number",
+    "physics:deborah_number",
+    "physics:drag_coefficient",
+    "physics:duty_cycle",
+    "physics:eckert_number",
+    "physics:efficiency",
+    "physics:ekman_number",
+    "physics:emissivity",
+    "physics:euler_number",
+    "physics:fine_structure",
+    "physics:fine_structure_constant",
+    "physics:fourier_number",
+    "physics:friction_coefficient",
+    "physics:froude_number",
+    "physics:galilei_number",
+    "physics:grashof_number",
+    "physics:hartmann_number",
+    "physics:jakob_number",
+    "physics:knudsen_number",
+    "physics:laplace_number",
+    "physics:lewis_number",
+    "physics:lift_coefficient",
+    "physics:lundquist_number",
+    "physics:mach_number",
+    "physics:magnetic_reynolds_number",
+    "physics:marangoni_number",
+    "physics:mass_fraction",
+    "physics:mole_fraction",
+    "physics:morton_number",
+    "physics:nusselt_number",
+    "physics:ohnesorge_number",
+    "physics:packing_fraction",
+    "physics:peclet_number",
+    "physics:poisson_ratio",
+    "physics:porosity",
+    "physics:power_number",
+    "physics:prandtl_number",
+    "physics:prater_number",
+    "physics:quality_factor",
+    "physics:rayleigh_number",
+    "physics:reflectance",
+    "physics:refractive_index",
+    "physics:relative_permeability",
+    "physics:relative_permittivity",
+    "physics:reynolds_number",
+    "physics:richardson_number",
+    "physics:rossby_number",
+    "physics:safety_factor",
+    "physics:schmidt_number",
+    "physics:sherwood_number",
+    "physics:shields_parameter",
+    "physics:signal_to_noise",
+    "physics:stanton_number",
+    "physics:stokes_number",
+    "physics:strain_ratio",
+    "physics:strouhal_number",
+    "physics:taylor_number",
+    "physics:thiele_modulus",
+    "physics:tortuosity",
+    "physics:transmittance",
+    "physics:void_fraction",
+    "physics:weber_number",
+    "physics:womersley_number"
+   ],
+   [
+    "physics:action_potential_amplitude",
+    "physics:resting_potential_cell"
+   ],
+   [
+    "physics:adhesion_energy",
+    "physics:surface_energy"
+   ],
+   [
+    "physics:admittance",
+    "physics:conductance"
+   ],
+   [
+    "physics:air_density",
+    "physics:cloud_liquid_water_content"
+   ],
+   [
+    "physics:alfven_speed",
+    "physics:ion_sound_speed"
+   ]
+  ],
+  "distinct": 811,
+  "in_junctions": 387,
+  "junctions": 104,
+  "largest": 78,
+  "per_register": {
+   "mathematics": 2,
+   "physics": 102
+  },
+  "separated_by": {
+   "cols": 1,
+   "field_order": 1,
+   "gloss": 102,
+   "is_golay_codeword": 1,
+   "is_hexacode_word": 1,
+   "rows": 1,
+   "symbol": 102,
+   "symbol_count": 1,
+   "unit": 8
+  }
+ },
+ "declarations": {
+  "answerable": 3,
+  "covered": 3,
+  "removals": [
+   {
+    "answered": true,
+    "identity": false,
+    "removed": "physics:absorptance",
+    "table_fresh": true,
+    "undeclared": true
+   },
+   {
+    "answered": true,
+    "identity": false,
+    "removed": "physics:acoustic_absorption",
+    "table_fresh": true,
+    "undeclared": true
+   },
+   {
+    "answered": true,
+    "identity": false,
+    "removed": "mathematics:filled_1x24",
+    "table_fresh": true,
+    "undeclared": true
+   },
+   {
+    "answered": false,
+    "identity": false,
+    "removed": "mathematics:golay_codeword_0",
+    "table_fresh": true,
+    "undeclared": false
+   }
+  ],
+  "stale_declaration_refused": true
+ },
+ "duplicates": {
+  "duplicates": 15,
+  "duplicates_read": 13,
+  "others": [
+   "mathematics:high_denominator_2x3",
+   "mathematics:rational_root_thirds"
+  ],
+  "others_refused": 2,
+  "rows": [
+   {
+    "carrier": "physics:absorptance",
+    "duplicate": true,
+    "margin": "3.605",
+    "own_junction": true,
+    "rung": "C",
+    "status": "answered"
+   },
+   {
+    "carrier": "physics:acoustic_absorption",
+    "duplicate": true,
+    "margin": "0.732",
+    "own_junction": true,
+    "rung": "A/2",
+    "status": "answered"
+   },
+   {
+    "carrier": "physics:acoustic_intensity_level",
+    "duplicate": true,
+    "margin": "0.732",
+    "own_junction": true,
+    "rung": "A/2",
+    "status": "answered"
+   },
+   {
+    "carrier": "physics:acoustic_power_level",
+    "duplicate": true,
+    "margin": "0.732",
+    "own_junction": true,
+    "rung": "A/2",
+    "status": "answered"
+   },
+   {
+    "carrier": "physics:albedo",
+    "duplicate": true,
+    "margin": "3.605",
+    "own_junction": true,
+    "rung": "C",
+    "status": "answered"
+   },
+   {
+    "carrier": "mathematics:filled_1x24",
+    "duplicate": true,
+    "margin": "26.104",
+    "own_junction": true,
+    "rung": "C",
+    "status": "answered"
+   },
+   {
+    "carrier": "mathematics:filled_2x12",
+    "duplicate": true,
+    "margin": "26.104",
+    "own_junction": true,
+    "rung": "C",
+    "status": "answered"
+   },
+   {
+    "carrier": "mathematics:filled_3x8",
+    "duplicate": true,
+    "margin": "26.104",
+    "own_junction": true,
+    "rung": "C",
+    "status": "answered"
+   },
+   {
+    "carrier": "mathematics:filled_4x6",
+    "duplicate": true,
+    "margin": "26.104",
+    "own_junction": true,
+    "rung": "C",
+    "status": "answered"
+   },
+   {
+    "carrier": "mathematics:filled_6x4",
+    "duplicate": true,
+    "margin": "26.104",
+    "own_junction": true,
+    "rung": "C",
+    "status": "answered"
+   },
+   {
+    "carrier": "mathematics:filled_8x3",
+    "duplicate": true,
+    "margin": "26.104",
+    "own_junction": true,
+    "rung": "C",
+    "status": "answered"
+   },
+   {
+    "carrier": "mathematics:filled_12x2",
+    "duplicate": true,
+    "margin": "26.104",
+    "own_junction": true,
+    "rung": "C",
+    "status": "answered"
+   },
+   {
+    "carrier": "mathematics:filled_24x1",
+    "duplicate": true,
+    "margin": "26.104",
+    "own_junction": true,
+    "rung": "C",
+    "status": "answered"
+   },
+   {
+    "carrier": "mathematics:high_denominator_2x3",
+    "duplicate": false,
+    "margin": null,
+    "own_junction": false,
+    "rung": null,
+    "status": "refused"
+   },
+   {
+    "carrier": "mathematics:rational_root_thirds",
+    "duplicate": false,
+    "margin": null,
+    "own_junction": false,
+    "rung": null,
+    "status": "refused"
+   },
+   {
+    "carrier": "mathematics:golay_codeword_0",
+    "duplicate": true,
+    "margin": null,
+    "own_junction": false,
+    "rung": null,
+    "status": "refused"
+   },
+   {
+    "carrier": "mathematics:hexacode_word_0",
+    "duplicate": true,
+    "margin": null,
+    "own_junction": false,
+    "rung": null,
+    "status": "refused"
+   }
+  ]
+ },
+ "marks": {
+  "J1": true,
+  "J2": true,
+  "J3": true,
+  "J4": false,
+  "J5": false,
+  "Q1": false,
+  "T1": true
+ },
+ "met": 4,
+ "questions": {
+  "answered": 7,
+  "as_declared": 6,
+  "missed": [
+   "J-B4",
+   "J-B6"
+  ],
+  "mutants": 18,
+  "mutants_rejected": 18,
+  "predicted": 8,
+  "rows": [
+   {
+    "answer": "physics:albedo reads as the junction {physics:absorptance, physics:albedo} at rung C: these 2 carriers have the same coordinates, so no read can separate them (GLM.CoordinateJunction.no_read_separates); the point is certified strictly nearer to their coordinates than to any other of the 142 carriers (GLM.CoordinateJunction.jread_junction_nearest), and nothing else lies within 3.605 of the point (GLM.CoordinateJunction.jread_unique_in_ball); declared distinct: both are dimensionless ratios of the same domain code; absorptance is the absorbed fraction of incident radiation, albedo the reflected fraction; how they are related: for an opaque surface, absorptance = 1 - albedo (a conversion, not an identity); the point is physics:albedo itself, a member of the junction: the only carriers at distance 0 are the junction's (GLM.CoordinateJunction.jread_origin); to separate them, the GLM asks: Does its description mention 'absorbed'? (yes: physics:absorptance; no: physics:albedo) -- reply as the next turn, or ask `locate albedo given word:absorbed is <reply>`",
+    "as_declared": true,
+    "carrier": "physics:absorptance|physics:albedo",
+    "error": "",
+    "id": "J-B1",
+    "junction": [
+     "physics:absorptance",
+     "physics:albedo"
+    ],
+    "kind": "locate",
+    "mutants": 3,
+    "mutants_rejected": 3,
+    "ok": true,
+    "question": "locate albedo",
+    "reason": "",
+    "script": true
+   },
+   {
+    "answer": "physics:absorptance reads as the junction {physics:absorptance, physics:albedo} at rung C: these 2 carriers have the same coordinates, so no read can separate them (GLM.CoordinateJunction.no_read_separates); the point is certified strictly nearer to their coordinates than to any other of the 142 carriers (GLM.CoordinateJunction.jread_junction_nearest), and nothing else lies within 3.605 of the point (GLM.CoordinateJunction.jread_unique_in_ball); declared distinct: both are dimensionless ratios of the same domain code; absorptance is the absorbed fraction of incident radiation, albedo the reflected fraction; how they are related: for an opaque surface, absorptance = 1 - albedo (a conversion, not an identity); the point is physics:absorptance itself, a member of the junction: the only carriers at distance 0 are the junction's (GLM.CoordinateJunction.jread_origin); to separate them, the GLM asks: Does its description mention 'absorbed'? (yes: physics:absorptance; no: physics:albedo) -- reply as the next turn, or ask `locate physics:absorptance given word:absorbed is <reply>`",
+    "as_declared": true,
+    "carrier": "physics:absorptance|physics:albedo",
+    "error": "",
+    "id": "J-B2",
+    "junction": [
+     "physics:absorptance",
+     "physics:albedo"
+    ],
+    "kind": "locate",
+    "mutants": 3,
+    "mutants_rejected": 3,
+    "ok": true,
+    "question": "locate physics:absorptance",
+    "reason": "",
+    "script": true
+   },
+   {
+    "answer": "mathematics:filled_4x6 reads as the junction {mathematics:filled_1x24, mathematics:filled_2x12, mathematics:filled_3x8, mathematics:filled_4x6, mathematics:filled_6x4, mathematics:filled_8x3, mathematics:filled_12x2, mathematics:filled_24x1} at rung C: these 8 carriers have the same coordinates, so no read can separate them (GLM.CoordinateJunction.no_read_separates); the point is certified strictly nearer to their coordinates than to any other of the 142 carriers (GLM.CoordinateJunction.jread_junction_nearest), and nothing else lies within 26.104 of the point (GLM.CoordinateJunction.jread_unique_in_ball); declared distinct: the carrier holds the 24 entries in row order; the shape (rows, cols) is not a coordinate; how they are related: a reshape: the same entries, different matrices; the point is mathematics:filled_4x6 itself, a member of the junction: the only carriers at distance 0 are the junction's (GLM.CoordinateJunction.jread_origin); to separate them, the GLM asks: What is its cols? (24: mathematics:filled_1x24; 12: mathematics:filled_2x12; 8: mathematics:filled_3x8; 6: mathematics:filled_4x6; 4: mathematics:filled_6x4; 3: mathematics:filled_8x3; 2: mathematics:filled_12x2; 1: mathematics:filled_24x1) -- reply as the next turn, or ask `locate filled_4x6 given attr:cols is <reply>`",
+    "as_declared": true,
+    "carrier": "mathematics:filled_1x24|mathematics:filled_2x12|mathematics:filled_3x8|mathematics:filled_4x6|mathematics:filled_6x4|mathematics:filled_8x3|mathematics:filled_12x2|mathematics:filled_24x1",
+    "error": "",
+    "id": "J-B3",
+    "junction": [
+     "mathematics:filled_1x24",
+     "mathematics:filled_2x12",
+     "mathematics:filled_3x8",
+     "mathematics:filled_4x6",
+     "mathematics:filled_6x4",
+     "mathematics:filled_8x3",
+     "mathematics:filled_12x2",
+     "mathematics:filled_24x1"
+    ],
+    "kind": "locate",
+    "mutants": 3,
+    "mutants_rejected": 3,
+    "ok": true,
+    "question": "locate filled_4x6",
+    "reason": "",
+    "script": true
+   },
+   {
+    "answer": "unsolved: locate (no-certified-rung): no rung certifies a carrier for mathematics:golay_codeword_0 -- at every rung the cell is empty, shared, or its placement guard fails, so the read refuses (GLM.AddressRead.read_none_iff)",
+    "as_declared": false,
+    "error": "locate (no-certified-rung): no rung certifies a carrier for mathematics:golay_codeword_0 -- at every rung the cell is empty, shared, or its placement guard fails, so the read refuses (GLM.AddressRead.read_none_iff)",
+    "id": "J-B4",
+    "kind": "locate",
+    "ok": false,
+    "question": "locate golay_codeword_0",
+    "reason": "no-certified-rung"
+   },
+   {
+    "answer": "physics:acoustic_power_level reads as the junction {physics:acoustic_absorption, physics:acoustic_intensity_level, physics:acoustic_power_level} at rung A/2: these 3 carriers have the same coordinates, so no read can separate them (GLM.CoordinateJunction.no_read_separates); the point is certified strictly nearer to their coordinates than to any other of the 142 carriers (GLM.CoordinateJunction.jread_junction_nearest), and nothing else lies within 0.732 of the point (GLM.CoordinateJunction.jread_unique_in_ball); declared distinct: the encoding holds the dimension (all three are dimensionless) and the domain; they are a coefficient and two levels in decibels against different references (1 pW/m^2, 1 pW); how they are related: power level = intensity level + 10 log10(S / 1 m^2) over a surface S; the point is physics:acoustic_power_level itself, a member of the junction: the only carriers at distance 0 are the junction's (GLM.CoordinateJunction.jread_origin); to separate them, the GLM asks: What is its unit? (1: physics:acoustic_absorption; dB: physics:acoustic_intensity_level, physics:acoustic_power_level) -- reply as the next turn, or ask `locate acoustic_power_level given attr:unit is <reply>`",
+    "as_declared": true,
+    "carrier": "physics:acoustic_absorption|physics:acoustic_intensity_level|physics:acoustic_power_level",
+    "error": "",
+    "id": "J-B5",
+    "junction": [
+     "physics:acoustic_absorption",
+     "physics:acoustic_intensity_level",
+     "physics:acoustic_power_level"
+    ],
+    "kind": "locate",
+    "mutants": 3,
+    "mutants_rejected": 3,
+    "ok": true,
+    "question": "locate acoustic_power_level",
+    "reason": "",
+    "script": true
+   },
+   {
+    "answer": "unsolved: locate (no-certified-rung): no rung certifies a carrier for the given point -- at every rung the cell is empty, shared, or its placement guard fails, so the read refuses (GLM.AddressRead.read_none_iff)",
+    "as_declared": false,
+    "error": "locate (no-certified-rung): no rung certifies a carrier for the given point -- at every rung the cell is empty, shared, or its placement guard fails, so the read refuses (GLM.AddressRead.read_none_iff)",
+    "id": "J-B6",
+    "kind": "locate",
+    "ok": false,
+    "question": "locate 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0",
+    "reason": "no-certified-rung"
+   },
+   {
+    "answer": "physics:albedo moved on 1 coordinates by 1/4 (codeword 16) reads as the junction {physics:absorptance, physics:albedo} at rung C: these 2 carriers have the same coordinates, so no read can separate them (GLM.CoordinateJunction.no_read_separates); the point is certified strictly nearer to their coordinates than to any other of the 142 carriers (GLM.CoordinateJunction.jread_junction_nearest), and nothing else lies within 3.355 of the point (GLM.CoordinateJunction.jread_unique_in_ball); declared distinct: both are dimensionless ratios of the same domain code; absorptance is the absorbed fraction of incident radiation, albedo the reflected fraction; how they are related: for an opaque surface, absorptance = 1 - albedo (a conversion, not an identity); the request names physics:albedo, and the stated move of at most sqrt(1/16) is inside the margin, so the carrier the point came from is in the junction (GLM.CoordinateJunction.jread_origin); to separate them, the GLM asks: Does its description mention 'absorbed'? (yes: physics:absorptance; no: physics:albedo) -- reply as the next turn, or ask `locate albedo moved 1 by 1/4 given word:absorbed is <reply>`",
+    "as_declared": null,
+    "carrier": "physics:absorptance|physics:albedo",
+    "error": "",
+    "id": "J-B7",
+    "junction": [
+     "physics:absorptance",
+     "physics:albedo"
+    ],
+    "kind": "locate",
+    "mutants": 3,
+    "mutants_rejected": 3,
+    "ok": true,
+    "question": "locate albedo moved 1 by 1/4",
+    "reason": "",
+    "script": true
+   },
+   {
+    "answer": "mathematics:filled_2x12 moved on 4 coordinates by 1/2 (codeword 73) reads as the junction {mathematics:filled_1x24, mathematics:filled_2x12, mathematics:filled_3x8, mathematics:filled_4x6, mathematics:filled_6x4, mathematics:filled_8x3, mathematics:filled_12x2, mathematics:filled_24x1} at rung 2A: these 8 carriers have the same coordinates, so no read can separate them (GLM.CoordinateJunction.no_read_separates); the point is certified strictly nearer to their coordinates than to any other of the 142 carriers (GLM.CoordinateJunction.jread_junction_nearest), and nothing else lies within 23.037 of the point (GLM.CoordinateJunction.jread_unique_in_ball); declared distinct: the carrier holds the 24 entries in row order; the shape (rows, cols) is not a coordinate; how they are related: a reshape: the same entries, different matrices; the request names mathematics:filled_2x12, and the stated move of at most sqrt(1) is inside the margin, so the carrier the point came from is in the junction (GLM.CoordinateJunction.jread_origin); to separate them, the GLM asks: What is its cols? (24: mathematics:filled_1x24; 12: mathematics:filled_2x12; 8: mathematics:filled_3x8; 6: mathematics:filled_4x6; 4: mathematics:filled_6x4; 3: mathematics:filled_8x3; 2: mathematics:filled_12x2; 1: mathematics:filled_24x1) -- reply as the next turn, or ask `locate filled_2x12 moved 4 by 1/2 given attr:cols is <reply>`",
+    "as_declared": null,
+    "carrier": "mathematics:filled_1x24|mathematics:filled_2x12|mathematics:filled_3x8|mathematics:filled_4x6|mathematics:filled_6x4|mathematics:filled_8x3|mathematics:filled_12x2|mathematics:filled_24x1",
+    "error": "",
+    "id": "J-B8",
+    "junction": [
+     "mathematics:filled_1x24",
+     "mathematics:filled_2x12",
+     "mathematics:filled_3x8",
+     "mathematics:filled_4x6",
+     "mathematics:filled_6x4",
+     "mathematics:filled_8x3",
+     "mathematics:filled_12x2",
+     "mathematics:filled_24x1"
+    ],
+    "kind": "locate",
+    "mutants": 3,
+    "mutants_rejected": 3,
+    "ok": true,
+    "question": "locate filled_2x12 moved 4 by 1/2",
+    "reason": "",
+    "script": true
+   },
+   {
+    "answer": "unsolved: locate (no-certified-rung): no rung certifies a carrier for mathematics:high_denominator_2x3 -- at every rung the cell is empty, shared, or its placement guard fails, so the read refuses (GLM.AddressRead.read_none_iff)",
+    "as_declared": true,
+    "error": "locate (no-certified-rung): no rung certifies a carrier for mathematics:high_denominator_2x3 -- at every rung the cell is empty, shared, or its placement guard fails, so the read refuses (GLM.AddressRead.read_none_iff)",
+    "id": "J-B9",
+    "kind": "locate",
+    "ok": false,
+    "question": "locate high_denominator_2x3",
+    "reason": "no-certified-rung"
+   },
+   {
+    "answer": "chemistry:C reads as chemistry:C at rung C: certified the strictly nearest of the 142 carriers (GLM.AddressRead.read_strict_nearest), and no other carrier lies within 17282.963 of the point (GLM.AddressRead.read_unique_in_ball); the point is a carrier itself, and the only carrier at distance 0 is chemistry:C (GLM.AddressRead.read_origin)",
+    "as_declared": true,
+    "carrier": "chemistry:C",
+    "error": "",
+    "id": "J-B10",
+    "junction": [],
+    "kind": "locate",
+    "ok": true,
+    "question": "locate C",
+    "reason": "",
+    "script": true
+   }
+  ],
+  "scripts": 7
+ },
+ "sets": {
+  "clean": {
+   "answered": 138,
+   "changed": 0,
+   "junction": 13,
+   "junction_answers": [
+    "mathematics:filled_1x24|mathematics:filled_2x12|mathematics:filled_3x8|mathematics:filled_4x6|mathematics:filled_6x4|mathematics:filled_8x3|mathematics:filled_12x2|mathematics:filled_24x1",
+    "physics:absorptance|physics:albedo",
+    "physics:acoustic_absorption|physics:acoustic_intensity_level|physics:acoustic_power_level"
+   ],
+   "junction_truth_in": 13,
+   "margin_violations": 0,
+   "new_not_junction": 0,
+   "not_scan": 0,
+   "orders_disagree": 0,
+   "origin_certified": 138,
+   "origin_violations": 0,
+   "plain_answered": 125,
+   "queries": 142,
+   "refused": 4,
+   "single": 125,
+   "wrong": 0
+  },
+  "fifth": {
+   "answered": 436,
+   "changed": 0,
+   "junction": 34,
+   "junction_answers": [
+    "mathematics:filled_1x24|mathematics:filled_2x12|mathematics:filled_3x8|mathematics:filled_4x6|mathematics:filled_6x4|mathematics:filled_8x3|mathematics:filled_12x2|mathematics:filled_24x1",
+    "physics:absorptance|physics:albedo"
+   ],
+   "junction_truth_in": 34,
+   "margin_violations": 0,
+   "new_not_junction": 0,
+   "not_scan": 0,
+   "orders_disagree": 0,
+   "origin_certified": 436,
+   "origin_violations": 0,
+   "plain_answered": 402,
+   "queries": 568,
+   "refused": 132,
+   "single": 402,
+   "wrong": 0
+  },
+  "fourth": {
+   "answered": 438,
+   "changed": 0,
+   "junction": 36,
+   "junction_answers": [
+    "mathematics:filled_1x24|mathematics:filled_2x12|mathematics:filled_3x8|mathematics:filled_4x6|mathematics:filled_6x4|mathematics:filled_8x3|mathematics:filled_12x2|mathematics:filled_24x1",
+    "physics:absorptance|physics:albedo"
+   ],
+   "junction_truth_in": 36,
+   "margin_violations": 0,
+   "new_not_junction": 0,
+   "not_scan": 0,
+   "orders_disagree": 0,
+   "origin_certified": 438,
+   "origin_violations": 0,
+   "plain_answered": 402,
+   "queries": 568,
+   "refused": 130,
+   "single": 402,
+   "wrong": 0
+  },
+  "held_out": {
+   "answered": 436,
+   "changed": 0,
+   "junction": 34,
+   "junction_answers": [
+    "mathematics:filled_1x24|mathematics:filled_2x12|mathematics:filled_3x8|mathematics:filled_4x6|mathematics:filled_6x4|mathematics:filled_8x3|mathematics:filled_12x2|mathematics:filled_24x1",
+    "physics:absorptance|physics:albedo"
+   ],
+   "junction_truth_in": 34,
+   "margin_violations": 0,
+   "new_not_junction": 0,
+   "not_scan": 0,
+   "orders_disagree": 0,
+   "origin_certified": 436,
+   "origin_violations": 0,
+   "plain_answered": 402,
+   "queries": 568,
+   "refused": 132,
+   "single": 402,
+   "wrong": 0
+  },
+  "standard": {
+   "answered": 487,
+   "changed": 0,
+   "junction": 42,
+   "junction_answers": [
+    "mathematics:filled_1x24|mathematics:filled_2x12|mathematics:filled_3x8|mathematics:filled_4x6|mathematics:filled_6x4|mathematics:filled_8x3|mathematics:filled_12x2|mathematics:filled_24x1",
+    "physics:absorptance|physics:albedo",
+    "physics:acoustic_absorption|physics:acoustic_intensity_level|physics:acoustic_power_level"
+   ],
+   "junction_truth_in": 42,
+   "margin_violations": 0,
+   "new_not_junction": 0,
+   "not_scan": 0,
+   "orders_disagree": 0,
+   "origin_certified": 487,
+   "origin_violations": 0,
+   "plain_answered": 445,
+   "queries": 568,
+   "refused": 81,
+   "single": 445,
+   "wrong": 0
+  },
+  "third": {
+   "answered": 427,
+   "changed": 0,
+   "junction": 34,
+   "junction_answers": [
+    "mathematics:filled_1x24|mathematics:filled_2x12|mathematics:filled_3x8|mathematics:filled_4x6|mathematics:filled_6x4|mathematics:filled_8x3|mathematics:filled_12x2|mathematics:filled_24x1",
+    "physics:absorptance|physics:albedo"
+   ],
+   "junction_truth_in": 34,
+   "margin_violations": 0,
+   "new_not_junction": 0,
+   "not_scan": 0,
+   "orders_disagree": 0,
+   "origin_certified": 427,
+   "origin_violations": 0,
+   "plain_answered": 393,
+   "queries": 568,
+   "refused": 141,
+   "single": 393,
+   "wrong": 0
+  }
+ },
+ "source_digest": "dfa5b3e7f396e55954ad70f61b073a2abd4e9a6cf8781ebe71dae272945d255e",
+ "table": {
+  "entries": 21,
+  "matches_recomputation": true,
+  "not_one_junction": 0,
+  "per_rung": {
+   "2A": 1,
+   "2C": 1,
+   "2D": 2,
+   "4C": 2,
+   "8A": 1,
+   "8C": 1,
+   "A": 2,
+   "A/2": 3,
+   "C": 2,
+   "D12^2": 3,
+   "Z": 3
+  },
+  "unsound": 0
+ },
+ "taken": 7,
+ "tamperings": {
+  "intact_loads": true,
+  "of": 10,
+  "refused": 10,
+  "rows": {
+   "address table altered": {
+    "failed": [
+     "address"
+    ],
+    "junction_answers": 0,
+    "refused": true
+   },
+   "declaration altered": {
+    "failed": [
+     "declarations"
+    ],
+    "junction_answers": 0,
+    "refused": true
+   },
+   "entry deleted": {
+    "failed": [
+     "content"
+    ],
+    "junction_answers": 0,
+    "refused": true
+   },
+   "file absent": {
+    "failed": [
+     "absent"
+    ],
+    "junction_answers": 0,
+    "refused": true
+   },
+   "live carrier moved": {
+    "failed": [
+     "carriers",
+     "address"
+    ],
+    "junction_answers": 0,
+    "refused": true
+   },
+   "member added": {
+    "failed": [
+     "content"
+    ],
+    "junction_answers": 0,
+    "refused": true
+   },
+   "member dropped": {
+    "failed": [
+     "content"
+    ],
+    "junction_answers": 0,
+    "refused": true
+   },
+   "radius lowered": {
+    "failed": [
+     "content"
+    ],
+    "junction_answers": 0,
+    "refused": true
+   },
+   "radius raised": {
+    "failed": [
+     "content"
+    ],
+    "junction_answers": 0,
+    "refused": true
+   },
+   "representative swapped": {
+    "failed": [
+     "content"
+    ],
+    "junction_answers": 0,
+    "refused": true
+   }
+  }
+ }
+}

@@ -1,0 +1,450 @@
+{
+ "c": {
+  "c1": {
+   "confirmed_on_truth": 13,
+   "replies": [
+    1,
+    1,
+    1,
+    2,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "replies_total": 15,
+   "within_bounds": 13,
+   "wrong": 0
+  },
+  "c2": {
+   "turns": 41,
+   "verified": 41
+  },
+  "c3": {
+   "contradicted": 13,
+   "ended_wrong": 0,
+   "replies": [
+    1,
+    1,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "runs": 13
+  },
+  "junctions": [
+   [
+    "physics:absorptance",
+    "physics:albedo"
+   ],
+   [
+    "physics:acoustic_absorption",
+    "physics:acoustic_intensity_level",
+    "physics:acoustic_power_level"
+   ],
+   [
+    "mathematics:filled_1x24",
+    "mathematics:filled_2x12",
+    "mathematics:filled_3x8",
+    "mathematics:filled_4x6",
+    "mathematics:filled_6x4",
+    "mathematics:filled_8x3",
+    "mathematics:filled_12x2",
+    "mathematics:filled_24x1"
+   ]
+  ],
+  "rows": [
+   {
+    "asked": "locate physics:absorptance given word:absorbed is yes; confirm:physics:absorptance is yes",
+    "confirms": 1,
+    "n": 2,
+    "problems": [],
+    "rejected": 3,
+    "replies": 1,
+    "status": "confirmed",
+    "tampered": 3,
+    "texts": [
+     "locate physics:absorptance",
+     "yes",
+     "yes"
+    ],
+    "truth": "physics:absorptance",
+    "turns": 3,
+    "value": "physics:absorptance",
+    "verified": 3
+   },
+   {
+    "asked": "locate physics:albedo given word:absorbed is no; confirm:physics:albedo is yes",
+    "confirms": 1,
+    "n": 2,
+    "problems": [],
+    "rejected": 3,
+    "replies": 1,
+    "status": "confirmed",
+    "tampered": 3,
+    "texts": [
+     "locate physics:albedo",
+     "no",
+     "yes"
+    ],
+    "truth": "physics:albedo",
+    "turns": 3,
+    "value": "physics:albedo",
+    "verified": 3
+   },
+   {
+    "asked": "locate physics:acoustic_absorption given attr:unit is 1; confirm:physics:acoustic_absorption is yes",
+    "confirms": 1,
+    "n": 3,
+    "problems": [],
+    "rejected": 3,
+    "replies": 1,
+    "status": "confirmed",
+    "tampered": 3,
+    "texts": [
+     "locate physics:acoustic_absorption",
+     "1",
+     "yes"
+    ],
+    "truth": "physics:acoustic_absorption",
+    "turns": 3,
+    "value": "physics:acoustic_absorption",
+    "verified": 3
+   },
+   {
+    "asked": "locate physics:acoustic_intensity_level given attr:unit is dB; word:intensity is yes; confirm:physics:acoustic_intensity_level is yes",
+    "confirms": 1,
+    "n": 3,
+    "problems": [],
+    "rejected": 5,
+    "replies": 2,
+    "status": "confirmed",
+    "tampered": 5,
+    "texts": [
+     "locate physics:acoustic_intensity_level",
+     "dB",
+     "yes",
+     "yes"
+    ],
+    "truth": "physics:acoustic_intensity_level",
+    "turns": 4,
+    "value": "physics:acoustic_intensity_level",
+    "verified": 4
+   },
+   {
+    "asked": "locate physics:acoustic_power_level given attr:unit is dB; word:intensity is no; confirm:physics:acoustic_power_level is yes",
+    "confirms": 1,
+    "n": 3,
+    "problems": [],
+    "rejected": 5,
+    "replies": 2,
+    "status": "confirmed",
+    "tampered": 5,
+    "texts": [
+     "locate physics:acoustic_power_level",
+     "dB",
+     "no",
+     "yes"
+    ],
+    "truth": "physics:acoustic_power_level",
+    "turns": 4,
+    "value": "physics:acoustic_power_level",
+    "verified": 4
+   },
+   {
+    "asked": "locate mathematics:filled_1x24 given attr:cols is 24; confirm:mathematics:filled_1x24 is yes",
+    "confirms": 1,
+    "n": 8,
+    "problems": [],
+    "rejected": 3,
+    "replies": 1,
+    "status": "confirmed",
+    "tampered": 3,
+    "texts": [
+     "locate mathematics:filled_1x24",
+     "24",
+     "yes"
+    ],
+    "truth": "mathematics:filled_1x24",
+    "turns": 3,
+    "value": "mathematics:filled_1x24",
+    "verified": 3
+   },
+   {
+    "asked": "locate mathematics:filled_2x12 given attr:cols is 12; confirm:mathematics:filled_2x12 is yes",
+    "confirms": 1,
+    "n": 8,
+    "problems": [],
+    "rejected": 3,
+    "replies": 1,
+    "status": "confirmed",
+    "tampered": 3,
+    "texts": [
+     "locate mathematics:filled_2x12",
+     "12",
+     "yes"
+    ],
+    "truth": "mathematics:filled_2x12",
+    "turns": 3,
+    "value": "mathematics:filled_2x12",
+    "verified": 3
+   },
+   {
+    "asked": "locate mathematics:filled_3x8 given attr:cols is 8; confirm:mathematics:filled_3x8 is yes",
+    "confirms": 1,
+    "n": 8,
+    "problems": [],
+    "rejected": 3,
+    "replies": 1,
+    "status": "confirmed",
+    "tampered": 3,
+    "texts": [
+     "locate mathematics:filled_3x8",
+     "8",
+     "yes"
+    ],
+    "truth": "mathematics:filled_3x8",
+    "turns": 3,
+    "value": "mathematics:filled_3x8",
+    "verified": 3
+   },
+   {
+    "asked": "locate mathematics:filled_4x6 given attr:cols is 6; confirm:mathematics:filled_4x6 is yes",
+    "confirms": 1,
+    "n": 8,
+    "problems": [],
+    "rejected": 3,
+    "replies": 1,
+    "status": "confirmed",
+    "tampered": 3,
+    "texts": [
+     "locate mathematics:filled_4x6",
+     "6",
+     "yes"
+    ],
+    "truth": "mathematics:filled_4x6",
+    "turns": 3,
+    "value": "mathematics:filled_4x6",
+    "verified": 3
+   },
+   {
+    "asked": "locate mathematics:filled_6x4 given attr:cols is 4; confirm:mathematics:filled_6x4 is yes",
+    "confirms": 1,
+    "n": 8,
+    "problems": [],
+    "rejected": 3,
+    "replies": 1,
+    "status": "confirmed",
+    "tampered": 3,
+    "texts": [
+     "locate mathematics:filled_6x4",
+     "4",
+     "yes"
+    ],
+    "truth": "mathematics:filled_6x4",
+    "turns": 3,
+    "value": "mathematics:filled_6x4",
+    "verified": 3
+   },
+   {
+    "asked": "locate mathematics:filled_8x3 given attr:cols is 3; confirm:mathematics:filled_8x3 is yes",
+    "confirms": 1,
+    "n": 8,
+    "problems": [],
+    "rejected": 3,
+    "replies": 1,
+    "status": "confirmed",
+    "tampered": 3,
+    "texts": [
+     "locate mathematics:filled_8x3",
+     "3",
+     "yes"
+    ],
+    "truth": "mathematics:filled_8x3",
+    "turns": 3,
+    "value": "mathematics:filled_8x3",
+    "verified": 3
+   },
+   {
+    "asked": "locate mathematics:filled_12x2 given attr:cols is 2; confirm:mathematics:filled_12x2 is yes",
+    "confirms": 1,
+    "n": 8,
+    "problems": [],
+    "rejected": 3,
+    "replies": 1,
+    "status": "confirmed",
+    "tampered": 3,
+    "texts": [
+     "locate mathematics:filled_12x2",
+     "2",
+     "yes"
+    ],
+    "truth": "mathematics:filled_12x2",
+    "turns": 3,
+    "value": "mathematics:filled_12x2",
+    "verified": 3
+   },
+   {
+    "asked": "locate mathematics:filled_24x1 given attr:cols is 1; confirm:mathematics:filled_24x1 is yes",
+    "confirms": 1,
+    "n": 8,
+    "problems": [],
+    "rejected": 3,
+    "replies": 1,
+    "status": "confirmed",
+    "tampered": 3,
+    "texts": [
+     "locate mathematics:filled_24x1",
+     "1",
+     "yes"
+    ],
+    "truth": "mathematics:filled_24x1",
+    "turns": 3,
+    "value": "mathematics:filled_24x1",
+    "verified": 3
+   }
+  ],
+  "runs": 13,
+  "t1": {
+   "altered": 43,
+   "rejected": 43
+  }
+ },
+ "d1": {
+  "as_declared": true,
+  "exit": 0,
+  "lines": [
+   "TURN    0",
+   "QUERY   locate albedo",
+   "ANSWER  physics:albedo reads as the junction {physics:absorptance, physics:albedo} at rung C: these 2 carriers have the same coordinates, so no read can separat",
+   "ASKS    Does its description mention 'absorbed'?",
+   "  1. yes  -> physics:absorptance",
+   "  2. no  -> physics:albedo",
+   "TURN    1",
+   "QUERY   no",
+   "BOUND   reply bound to no, against 2 candidates from turn 0: 'locate albedo given word:absorbed is no'",
+   "ANSWER  physics:albedo reads as the junction {physics:absorptance, physics:albedo} at rung C: these 2 carriers have the same coordinates, so no read can separat",
+   "ASKS    Is it exactly physics:albedo?",
+   "  1. yes  -> physics:albedo",
+   "  2. no  -> no member (a contradiction)",
+   "TURN    2",
+   "QUERY   yes",
+   "BOUND   reply bound to yes, against 2 candidates from turn 1: 'locate albedo given word:absorbed is no; confirm:physics:albedo is yes'",
+   "ANSWER  physics:albedo reads as the junction {physics:absorptance, physics:albedo} at rung C: these 2 carriers have the same coordinates, so no read can separat"
+  ]
+ },
+ "e1": {
+  "as_declared": 4,
+  "cases": 4,
+  "rows": [
+   {
+    "as_declared": true,
+    "id": "locate-reply"
+   },
+   {
+    "as_declared": true,
+    "id": "locate-reply-confirmed"
+   },
+   {
+    "as_declared": true,
+    "id": "locate-reply-contradicted"
+   },
+   {
+    "as_declared": true,
+    "id": "locate-reply-no-tie"
+   }
+  ]
+ },
+ "f1": {
+  "cases": 198,
+  "moved": [
+   {
+    "cause": "undeclared",
+    "id": "report-language"
+   },
+   {
+    "cause": "undeclared",
+    "id": "report-query-escalation"
+   },
+   {
+    "cause": "this round: the junction answer ends with its question",
+    "id": "locate-junction"
+   },
+   {
+    "cause": "this round: the junction answer ends with its question",
+    "id": "locate-junction-moved"
+   }
+  ],
+  "new_cases": [
+   "locate-reply",
+   "locate-reply-confirmed",
+   "locate-reply-contradicted",
+   "locate-reply-no-tie"
+  ],
+  "present": 198,
+  "same_status": 198,
+  "same_text": 194,
+  "undeclared": [
+   "report-language",
+   "report-query-escalation"
+  ]
+ },
+ "q1": {
+  "junctions": 104,
+  "phase_145_total": 1280,
+  "questions_total": 1280,
+  "resolved": 387,
+  "runs": 387,
+  "within_n_minus_1": 387,
+  "wrong": 0
+ },
+ "r1": {
+  "controls": {
+   "checked": 12,
+   "read_as_reply": []
+  },
+  "reports": {
+   "differences": [
+    {
+     "after": "4",
+     "before": "3",
+     "path": "/conversation/shapes"
+    },
+    {
+     "after": "17",
+     "before": "16",
+     "path": "/discourse/census/distinct_taken"
+    },
+    {
+     "after": "5167",
+     "before": "5129",
+     "path": "/discourse/census/strings"
+    },
+    {
+     "after": 26,
+     "before": 24,
+     "path": "/discourse/census/taken"
+    },
+    {
+     "after": "26",
+     "before": "24",
+     "path": "/discourse/census/taken_count"
+    }
+   ]
+  }
+ },
+ "source_digest": "06e2a2a2e4e5f8b24ead8f5fa389a2d357c8e3675665b9a88feef536624f4bfe"
+}

@@ -5,7 +5,7 @@
 
 **Question.** What has each phase of the wiring plan delivered, and what does the next round start from?
 
-**Verdict.** Phase 138 (tool verdicts: a tool's yes/no answer is a stepwise step, a conditional builds only the branch its test selects, and the first convergent past a denominator bound is found by an unrolled search with no iteration cap, ended by a proved measure; the classical closest-fraction theorem is proved in `NearestFraction.lean`, so `best approximation` checks a Farey certificate for every bound and the 20,000 bound is gone; 6 of 6 marks) is closed, after Phase 137 (tool values; 8 of 8 marks) and Phase 136 (the connected machine, second pass; 8 of 8 marks); Phase 139 starts from the To-Do list in [`STATUS.md`](STATUS.md) §2.
+**Verdict.** Phases 147 and 148 are closed: the budget rule and the guarded read are in the answering path. A deep hole is read to its certificate on request (the `hole` kind, `BudgetReading.lean`; 8 of 8 measured marks), and `nearest` ranks a moved carrier or 24 coordinates with the guarded read certifying the head and the gap (`NearestAddress.lean`; 7 of 7 measured marks). Before them closed Phase 146 (the question in the answering path; 8 of 10 marks) and Phase 145 (time and the question; 9 of 9 marks). Phase 149 starts from the To-Do list in [`STATUS.md`](STATUS.md) §2.
 
 **Deciding figure.** Every closed phase names what was built, where it lives, and how to see it recompute itself.
 
@@ -24,8 +24,8 @@ addressing. Each item says what was built, where it lives, and how to see it
 recompute itself.
 
 Everything below is reachable from the package's public API and from the query
-runtime — **<!--figure:query-kinds-->25 query kinds<!--/figure-->**, **<!--figure:report-subjects-->67 report subjects<!--/figure-->** and **<!--figure:registers-->8 registers<!--/figure-->** — is
-covered by the test suite (<!--figure:test-files-->188 test files<!--/figure-->),
+runtime — **<!--figure:query-kinds-->27 query kinds<!--/figure-->**, **<!--figure:report-subjects-->67 report subjects<!--/figure-->** and **<!--figure:registers-->8 registers<!--/figure-->** — is
+covered by the test suite (<!--figure:test-files-->198 test files<!--/figure-->),
 and — where it is a report or a task — has a generated column-3 script that
 recomputes the claim in a **fresh interpreter** and fails if anything differs.
 
@@ -183,9 +183,668 @@ as everything else: only the open phase is state.
 
 ---
 
-## Phase 138 — tool verdicts, and the nearest fraction without a bound
+## Phase 148 — the guarded read in `nearest`: a point no register holds, ranked and certified
+
+**Status: closed this session.** Taken from `STATUS.md` §2.1, item 1 (*the
+placement guard in the answering path, the rest*, left by Phases 129 and
+143), together with Phase 147 under one frozen-path comparison. The
+pre-registration
+([`studies/NEAREST_ADDRESS_STUDY.md`](studies/NEAREST_ADDRESS_STUDY.md)
+§§0–6: marks L1, N1–N3, Q1, W1, A0, F1; N4 descriptive) was committed with
+the Lean file and the answering-path code, before the measurement module was
+run. **7 of 7 measured marks were met, and L1 by the build.** Tests:
+`tests/test_nearest_address.py`.
+
+**What the item turned out to be.** Read against the code, of the three
+readings the item named only `nearest` could take the guarded read: the
+escalation reports do not read the construction ladder, and the evaluation's
+pinned cases read it only through `locate`, which has been guarded since
+Phase 143. So the round gave `nearest` an address path, and audited the whole
+evaluation for any unguarded reading of the ladder (A0).
+
+**What was built.**
+* `RequestProject/GLM/NearestAddress.lean` (no `sorry`, standard axioms):
+  a ranking's head is the strict nearest carrier when there is one
+  (`ranking_head_of_strict`); when the guarded read answers, the head is its
+  answer (`ranking_head_eq_read`), every later carrier is outside the
+  certified margin (`ranking_tail_outside`), and a stated move inside the
+  margin puts the origin at the head (`ranking_head_origin`).
+* `reasoning/nearest_address.py`: the request grammar (`nearest [k] to
+  <carrier> moved <n> by <step> [word <w>]`, or 24 coordinates), the exact
+  ranking over the 142 carriers of the address table (ties by register and
+  name), and the guarded junction read of Phase 144 certifying head, gap and
+  origin. A refused read says that no margin is certified.
+* `runtime/parser.py` routes a moved carrier or a coordinate list to the
+  address path; a carrier name keeps its register ranking. `runtime/session.py`
+  (`_solve_nearest_address`), `runtime/tct_engine.py` (the `nearest_address`
+  template: a full re-scan without the table, checking the claimed gap).
+* `reasoning/budget_guard_frozen.py` (shared with Phase 147): the frozen-path
+  comparison F1 and the ladder audit A0, which watches the 18 unguarded
+  functions of `ladder_escalation`, `norm256_hex`, `cell_guard` and
+  `placement_guard` during the whole evaluation.
+* `reasoning/nearest_address_study.py`, `tools nearest-address [--write]`;
+  five evaluation cases (`nearest-address-*`).
+
+**Measured.** Over the six sets of Phase 143 (2982 points), the address path
+certified 2362, with 0 head disagreements, 0 gap violations and 0 origin
+violations. Of the 620 refused points, the scan's head is the origin on 441,
+a tie on 128 and another carrier on 51. The battery came out as declared, and
+column 3 verified 8 of 8 answers and rejected 16 of 16 mutants. A0: 0
+unguarded ladder readings over 212 evaluation questions.
+
+**The prediction that was wrong.** §4 predicted 2,169 certified points of
+3,550. Both were copied from Phase 143's text: 3,550 was a mis-sum (the sets
+hold 2,982; a correction note is now in `ADDRESS_READ_STUDY.md` §7.3), and
+2,169 is the plain read's count, while the path reads with Phase 144's
+junction read (2,362, its stored figure).
+
+**Left.** The pool is the 142 carriers of the address table; a refused tie
+gets no question — `STATUS.md` §2.
+
+## Phase 147 — the budget rule in the answering path: a deep hole read to its certificate
+
+**Status: closed this session.** Taken from `STATUS.md` §2.1, item 2 (*the
+budget rule in the walk and the answering path*, left by Phase 124). The
+pre-registration
+([`studies/BUDGET_READING_STUDY.md`](studies/BUDGET_READING_STUDY.md) §§0–6:
+marks L1, H1–H4, R1, Q1, W1, F1) was committed with the Lean file and the
+answering-path code. Before any answering-path edit, the 202 evaluation
+answers were frozen (`reasoning/_data/budget_guard_baseline.json`, shared
+with Phase 148). **8 of 8 measured marks were met, and L1 by the build.**
+Tests: `tests/test_budget_reading.py`.
+
+**What was built.**
+* `RequestProject/GLM/BudgetReading.lean` (no `sorry`, standard axioms): the
+  two stopping rules as functions (`budgetStop`, `patienceStop`); a reading
+  certified under a patience is certified under the budget with the same
+  vertex set (`budget_agrees`); the budget reading is uncertified only when
+  no start in the budget carries the certificate
+  (`budget_refuses_only_without_cert`); and the converse fails
+  (`patience_may_refuse`).
+* `reasoning/hole_reading.py`: the answering path's reader under the rule (no
+  barren stop, 1056 starts, equal to `probe_budget.BUDGET`), and the request
+  grammar.
+* A new query kind, **`hole`**: `hole walk <n>`, `hole octad pair`, `hole
+  dodecad triangle`, `hole <24 coordinates>`; refusals `lattice-point`,
+  `shallow`, `uncertified`, `dimension`, `malformed`.
+* `report deep holes` reads under the rule (`hole_reading.census_report`).
+* `runtime/tct_engine.py`: the `hole` template re-reads the hole in a fresh
+  interpreter and checks depth, vertices, type and certificate.
+* `reasoning/budget_reading_study.py`, `tools budget-reading [--write]`;
+  `tools budget-guard-frozen [--write]`; five evaluation cases (`hole-*`).
+
+**Measured.** All 256 held-out walks (indices 3000–3255) reached a deep hole,
+and all 256 were certified under the rule, where the walk's own patience
+reading certified 225; 0 disagreements on those 225; 0 type disagreements
+with Phase 124 over 256 centres. No reading ran to the budget (median 25
+starts, maximum 174). `report deep holes` exhibits the same five types and
+kept its text. The frozen path: 202 of 202 cases present with the same status,
+199 with the same text; the three moved texts (`unknown-nonsense`,
+`report-language`, `report-query-escalation`) all have declared causes.
+
+**What it answers.** `hole walk 3006` — *a deep hole of type `D_16 E_8`, from
+26 vertices certified complete* — where the walk's frozen reading stopped
+uncertified at 25 vertices.
+
+**Not changed.** `deep_holes.py` keeps its frozen defaults, because six
+stored measurements digest that file; no answering-path caller uses them.
+The other deep-hole reports still read their own rounds' stored
+measurements (the *`L5` in the other deep-hole reports* item of
+`STATUS.md` §2.1).
+
+**Caches re-taken (both phases).** `tools queryesc --write`, `tools
+frozen-path --write`, `tools address-read --write`, `tools junction-read
+--write`, `tools plans --write`.
+
+## Phase 146 — the question in the answering path: a reply is the next turn
+
+**Status: closed this session.** Taken from `STATUS.md` §2.1, item 5 (*the
+question in the answering path*, left by Phase 145). The pre-registration
+([`studies/ANSWERING_QUESTION_STUDY.md`](studies/ANSWERING_QUESTION_STUDY.md)
+§§0–6: marks L1, F1, E1, C1–C3, Q1, R1, T1, D1) was committed with the Lean
+file and the answering-path code and before the measurement module. Before
+any answering-path edit, the 198 evaluation answers were frozen
+(`reasoning/_data/answering_question_baseline.json`). **8 of 10 marks were
+met.** Tests: `tests/test_answering_question.py` (17 tests).
+
+**What was built.**
+* `RequestProject/GLM/AnsweringQuestion.lean` (no `sorry`, standard axioms):
+  * a reply taken as the next turn prunes the live set the previous turn left
+    (`after_reply`);
+  * every reply to a question that splits the live set removes a candidate,
+    so a dialogue over `n` candidates has fewer than `n` true replies
+    (`reply_removes`, `dialogue_bound`, `dialogue_length_lt`);
+  * the confirming question keeps a resolved tie on *yes*, empties it on
+    *no*, and catches a false resolution (`confirm_yes`, `confirm_no`,
+    `confirm_catches`).
+* `reasoning/timed_question.py` §8 adds:
+  * the reply grammar (`split_given`, `join_given`, replies written
+    `key is answer`);
+  * `apply_given`, `pending_question` (the minimax question, the direct
+    choice, then the confirming question);
+  * `question_record` and `match_reply` (the text of an option before its
+    number).
+* `runtime/session.py` changes:
+  * `_solve_locate` takes `given` replies;
+  * `_locate_question` ends a junction answer with its question, applies the
+    replies, and refuses `contradicted`, `no-tie`, `unknown-question`,
+    `not-an-option` and `malformed-reply`.
+* `runtime/tct_engine.py`: column 3 re-derives every reply from the register
+  attributes, then checks the live set and that the question asked splits it.
+* `runtime/conversation.py` (and through it `discourse.py`): the `reply`
+  shape, detected only right after an answer that put a question. A reply is
+  rewritten to the previous query with the reply added. In `Discourse` it is
+  the one exception to *whole first*.
+* `GLM.py` changes:
+  * `--converse` and `--interactive` print the question with numbered
+    options and read the reply;
+  * `--input PATH` is now read (it was declared and ignored).
+* `reasoning/answering_question.py` and `tools answering-question
+  [--write]`: the measurement, stored beside its digest. It is declared
+  measurement-only in `runtime/toolbox.py`.
+* Four evaluation cases: `locate-reply`, `locate-reply-confirmed`,
+  `locate-reply-contradicted`, `locate-reply-no-tie`.
+
+**Measured.** In the sample's three answered junctions (13 members), 13 of 13
+conversations end confirmed on the member meant, 0 wrong. They take 15
+replies in all, each run within `n - 1` and `Nat.clog 2 n + 1` (C1). Column 3
+verifies 41 of 41 turns (C2) and rejects 43 of 43 altered claims (T1). With
+one false reply, 13 of 13 runs end refused as `contradicted` (C3). On the 387
+full-register runs, the answering path's loop resolves every one, 0 wrong,
+with 1280 questions, as Phase 145 did (Q1). Of 12 control texts, 0 are read as
+replies (R1, part). D1 is met.
+
+**What the frozen path found.** The first take found a real fault. Replies
+were then written `key=reply`, and the description layer's infix `verify`
+shape read the two single-`=` evaluation questions as identities (two false
+positives). `report language` turned from *described* to *not described*,
+with every status unchanged. Replies were rewritten as `key is reply` and the
+measurement re-taken; the fault is gone.
+
+**Two marks missed.** In the second take all 198 statuses are kept, and the
+two junction answers moved only by an appended question. Two further texts
+moved: `report language` (178 → 182) and `report query escalation`
+(198 → 202). Both count the evaluation set, which the four new cases
+enlarged, and F1 had not declared that cause. R1 claimed identical
+conversation and discourse reports. They differ in the declared shape count
+(3 → 4) and in the census of earlier texts, which reads the new cases' notes
+(taken 24 → 26; released still 0). Both misses are recorded, not
+re-declared.
+
+**Caches re-taken.** `tools queryesc --write`, `tools frozen-path --write`
+(B5 holds), `tools address-read --write` and `tools junction-read --write`.
+Their marks are as Phases 143 and 144 recorded them. The goal-query count of
+`report-relay` and `report-anonymous` stayed at 822, so nothing was
+re-pinned.
+
+**What it answers.** Three turns in a conversation:
+1. `locate albedo` reads the junction and ends: *to separate them, the GLM
+   asks: Does its description mention 'absorbed'? (yes: physics:absorptance;
+   no: physics:albedo)*.
+2. The turn *no* becomes `locate albedo given word:absorbed is no`, which
+   leaves `physics:albedo` and puts the confirming question.
+3. *yes* ends confirmed.
+
+A *no* at step 3 is refused as a contradiction.
+
+**Left.** Questions for the other ties; the escalation reports and `nearest`
+reading junctions; a halving question for the 78-member junction; questions
+chosen by what a user can answer; a reply carried across an unrelated turn —
+`STATUS.md` §2.
+
+## Phase 145 — time and the question: a tie resolved by information that comes later
+
+**Status: closed this session.** Taken at the owner's direction rather than
+from `STATUS.md` §2.1: the owner's intuition that *time* is required for the
+more complicated things — that a tie needs information a later step brings,
+which prunes the wrong candidates or clarifies the ambiguity, and that the GLM
+should sometimes give itself that time or simply ask for exactly what it
+needs; at this stage the developers supply the answers, later a user will.
+The pre-registration
+([`studies/TIMED_QUESTION_STUDY.md`](studies/TIMED_QUESTION_STUDY.md) §§0–6:
+marks L1, G1–G4, R1–R3, D1 and six dialogues) was committed with the Lean
+file and before the module that takes the measurement. **9 of 9 marks were
+met.** Tests: `tests/test_timed_question.py` (12 tests).
+
+**What was built.**
+* `RequestProject/GLM/TimedQuestion.lean` (no `sorry`, standard axioms):
+  information only removes candidates and its arrival order does not matter
+  (`after_subset`, `after_perm`, `after_append`); under truthful answers the
+  truth survives, a tie left with one candidate holds it, one left with none
+  proves an answer false, and a resolved tie stays resolved
+  (`truth_mem_after`, `resolved_eq_truth`, `contradicted_not_truthful`,
+  `resolved_stays`); waiting cannot help when every arriving observation is
+  constant on the tie, so no function of the coordinates ever resolves a
+  junction (`no_time_resolves`, `no_coordinate_question_resolves`); a question
+  is worth asking exactly when it splits the live set (`splits_iff`); a
+  halving yes/no question always exists and `Nat.clog 2 n` of them resolve
+  `n` candidates to the truth, while no adaptive strategy of fewer yes/no
+  questions always resolves (`exists_halving`, `halveRun_eq_singleton`,
+  `adversary`, `questions_needed`, `optimal`, `six_needs_three`).
+* `reasoning/timed_question.py`: the open tie (live set, ledger of time
+  steps — waited, asked, confirmed — and the states open, resolved,
+  contradicted); the minimax question over a declared vocabulary, the direct
+  choice when no question splits, the confirming question; three informants
+  (the developer told the truth, the one-false-answer control, and the
+  person at the terminal — the interface a user will later answer through);
+  the Golay fork's two vocabularies and its stream of later reports; the
+  junction vocabulary (register attributes and description words); the
+  measurement.
+* `tools timed-question` (the marks) and `tools timed-ask "locate albedo"
+  --truth physics:albedo | --interactive [--confirm]` (one tie, opened from
+  a `locate` answer or a Golay fork, resolved by asking).
+
+**Measured.** The Golay fork (768 forks of Phase 65's probe): waiting on
+later reports of correctly received coordinates resolves all 768 to the
+transmitted word, after 5 to 13 reports, 209/24 (8.71) on average (G1);
+asking one coordinate at a time takes up to 5 questions, 13/4 on average
+(G2); asking the halving question the GLM constructs takes 2 or 3, 1021/384
+(2.66) on average — 3 is the proved minimum for six (G3). One false answer:
+1536 of 1536 runs resolve wrongly without a confirming question and 1536 of
+1536 end contradicted with one (G4). The junctions (104 over 387 carriers of
+the full registers): waiting on every coordinate observation removes nothing
+in 104 of 104 (R1); asking resolves 387 of 387, 0 wrong, 385 without the
+direct choice (R2), in 1280/387 (3.31) questions on average against a
+`Nat.clog 2` mean of 1174/387 (3.03) and a one-by-one mean of 1253/129
+(9.71) (R3). Six of six dialogues as declared (D1). No answering-path code
+changed. The new Lean file moved the query count of `report-relay` and
+`report-anonymous` (817 -> 822); both were re-pinned (claims unchanged) and
+pass on their own.
+
+**What it answers.** `tools timed-ask "locate albedo" --truth physics:albedo`
+reads the junction {absorptance, albedo} as before, holds it open, asks
+*does its description mention 'absorbed'?*, and on *no* resolves to
+`physics:albedo`, stating that the resolution rests on the answer being true.
+
+**Left.** The question in `GLM.py`'s answering path, with the answer taken as
+the session's next turn (a frozen-path comparison); vocabularies for the other
+ties (the crowded zero cell, `report hole` ties, `classify`); a halving
+question for the 78-member dimensionless junction (up to 22 questions now) —
+`STATUS.md` §2.
+
+## Phase 144 — register junctions: the address read over carriers that share coordinates
+
+**Status: closed this session.** Taken from `STATUS.md` §2.2, *the address
+read, the rest* (left by Phase 143): 15 of the 17 clean carriers the `locate`
+read refused have exactly the coordinates of another carrier. The owner
+proposed the junction method — Phase 66's rule for formula wheels, under which
+a name two wheels share is one quantity only where a declared junction says so
+and is split otherwise — and this round applies it to coordinates. The
+pre-registration
+([`studies/COORDINATE_JUNCTION_STUDY.md`](studies/COORDINATE_JUNCTION_STUDY.md)
+§§0–6: marks L1, J1–J5, T1, Q1, F1, a ten-question battery, a declaration per
+junction of the sample) was committed with the Lean file and before the module
+that takes the measurement. **6 of 9 marks were met**; the three missed marks
+(J4, J5, Q1) all counted the zero word's junction as readable, and it is not
+(below). Tests: `tests/test_coordinate_junction.py` (10 tests, 19 cases with the battery).
+
+**What was built.**
+* `RequestProject/GLM/CoordinateJunction.lean` (no `sorry`, standard axioms),
+  on Phase 143's read unchanged: no function of the coordinates names each of
+  two carriers with equal coordinates (`no_read_separates`); the weaker
+  soundness a junction entry needs (`JSound`), of which every Phase 143 entry
+  is an instance (`jsound_of_sound`, `JTableSound.of_tableSound`); an answer
+  is strictly nearer than every carrier off its coordinates
+  (`jread_junction_nearest`), its junction is exactly the scan's
+  least-distance set (`jread_scan`), the same in every order
+  (`jread_order_independent`), alone inside its margin
+  (`jread_unique_in_ball`) and contains a moved query's origin when the move
+  is inside the margin (`jread_origin`); with distinct coordinates it is the
+  strictly nearest carrier (`jread_strict_nearest_of_injective`).
+* `reasoning/coordinate_junction.py`: the declarations (one per junction of
+  the sample, each argued: all four *distinct*, with what the coordinates do
+  not carry and how the members are related), the junction table
+  (`_data/junction_table.json`, five digests: sources, carriers,
+  declarations, the address table, content; `tools junction-table
+  [--write]`), the junction read, and the census of the full registers.
+* The `locate` solver (`runtime/session.py`) reads through the junction read
+  and answers a junction with its declaration; a junction table that does not
+  hold leaves the read exactly Phase 143's. The column-3 template
+  (`runtime/tct_engine.py`) re-checks a junction as the whole least-distance
+  set at one coordinate vector.
+* `reasoning/coordinate_junction_study.py` and `tools junction-read
+  [--write]`; three `locate` cases in the evaluation (198).
+
+**Measured.** On the six sets of Phase 143, 0 answers changed (J2) and 193
+refusals became junction answers — 42, 34, 34, 36 and 34 on the five moved
+sets and 13 on the clean set — every one containing the query's own carrier,
+exactly the scan's least-distance set, with an honest margin, the three orders
+agreeing and the origin certified (J3). The table's 21 entries equal a
+recomputation from fresh cells and are all junction-sound (J1). 10 of 10
+tamperings refused (T1). 13 of 15 duplicates read (J4, missed): the zero
+junction (`golay_codeword_0`, `hexacode_word_0`) shares every cell with
+`high_denominator_2x3` and `rational_root_thirds`, the two carriers refused
+for crowding, so no rung isolates it. With each declaration removed, the three
+answerable junctions read *undeclared, read as distinct* (J5, missed on the
+unobservable fourth). Questions: 6 of 8 declared as declared (J-B4, J-B6 are
+the zero junction), 7 of 7 scripts, 18 of 18 mutations rejected (Q1, missed).
+The end-to-end evaluation passed 196 of 198 (F1): the two failures were
+`report-relay` and `report-anonymous`, whose pinned figures count queries
+drawn from the Lean declarations, which the new Lean file moved (813 -> 817);
+both were re-pinned (claims unchanged) and pass on their own, as do the three
+new `locate` cases. The census over the six registers in full: 104 junctions
+over 387 of 1,094 carriers, 0 crossing a register; in 87 the members differ
+only in name, symbol and gloss.
+
+**What it answers.** `locate albedo` now answers the junction {absorptance,
+albedo}, certified, and says the two are declared distinct measurands related,
+for an opaque surface, by absorptance = 1 − albedo — where it used to refuse.
+
+**Left.** The zero junction (a crowding problem, not a duplication); the full
+registers' 104 junctions measured but not declared; the registers' decision
+whether the encoding should carry a coordinate for the measurand; junctions
+in the ladder's other readings — `STATUS.md` §2.
+
+## Phase 143 — the address read: the placement guard in the answering path
+
+**Status: closed.** Taken from `STATUS.md` §2.1, item 1, *the
+placement guard in the answering path* (left by Phase 129), at the step its
+correction names first. Phase 130 had found that no module a query loads
+imports the ladder the guard protects, so there was no answering path to put
+the guard into; this round builds one — a query kind that reads a carrier by
+its address — guarded from its first line. The owner's direction was wiring
+that advances the GLM's reasoning and scope: the ladder, the cell guard and
+the placement guard stop being measurement-only. The pre-registration
+([`studies/ADDRESS_READ_STUDY.md`](studies/ADDRESS_READ_STUDY.md) §§0–6:
+marks L1, A1–A4, O1, C1, T1, Q1, W1, a fifth query set, a seventeen-question
+battery) was committed with the Lean file and before the module that takes
+the measurement. **10 of 10 marks were met.** Tests:
+`tests/test_address_read.py` (13).
+
+**What was built.**
+* `RequestProject/GLM/AddressRead.lean` (no `sorry`, standard axioms): a
+  stored table entry and what it is for it to be sound (`Entry.Sound`,
+  `TableSound`); the guarded read of one rung and of the whole ladder
+  (`guarded`, `read`); every answer is the strictly nearest carrier with no
+  hypothesis on the quantiser (`read_strict_nearest`), equal to a full scan
+  (`read_agrees_with_scan`), independent of the order the rungs are tried
+  (`read_order_independent`), unique in its ball (`read_unique_in_ball`),
+  certified as the query's origin whenever the known move plus the distance
+  is inside the radius (`read_origin`), refused exactly when no rung
+  certifies (`read_none_iff`), and with an honest margin (`margin_lower`).
+* `reasoning/address_table.py`: the per-rung table of cells and radii over the
+  142 carriers, stored in `_data/address_table.json` beside three digests
+  (sources, carriers, content); `tools address-table [--write]`.
+* `reasoning/address_read.py`: the request grammar (a name, a
+  `register:name`, a move `moved k by m [word w]`, or 24 coordinates with an
+  optional `within`), the read, the margin and its text; a table whose
+  digests fail refuses `stale-table`.
+* The `locate` query kind (`runtime/parser.py`, 26 kinds), its solver in
+  `runtime/session.py` and its column-3 template in `runtime/tct_engine.py`,
+  which re-checks the answer by a full scan; `runtime/toolbox.py` no longer
+  declares `cell_guard`, `placement_guard` and `norm256_hex` measurement-only.
+* `reasoning/address_read_study.py` and `tools address-read [--write]`; seven
+  `locate` cases in the evaluation (195).
+
+**Measured.** On the four sets of Phase 129 the read names, query by query,
+the carrier `placement_guard.read_set` names: 445, 402, 393 and 402 correct, 0
+wrong (A1). On a fifth set generated after the pre-registration it answers
+402, refuses 166, 0 wrong, where the unguarded ladder answers 4 wrongly (A3).
+Over six sets, 2,169 answers: every one strictly nearest by scan, 0 margin
+violations, 0 order disagreements, 0 origin violations (A2, A4, O1). The clean
+set answers 125 with 0 wrong and refuses 17, 15 of them carriers whose exact
+coordinates another carrier shares (C1). 12 of 12 tamperings of the table are
+refused (T1). The battery: 7 of 7 fixed, 6 of 6 predicted, 10 of 10 sound, 7
+of 7 scripts verify, 14 of 14 mutants rejected (Q1). The census passes with
+the guards reached; the evaluation passes 195 of 195 and the frozen-path
+comparison keeps all 178 baseline cases with the same status (W1). Taking W1
+caught a direct `hashlib` import in the new table module, counted by the
+blueprint audit against the core; the digests now go through
+`integrity.sha256_hex`.
+
+**What it answers.** The GLM can now be asked where a point sits among its
+carriers — `locate C moved 8 by 1/2` — and answers with the carrier, the rung
+and a margin that are certified, or refuses; it never answers with a carrier
+that is not the nearest, and a table that has drifted from the registers is
+refused rather than read.
+
+**Left.** The rest of item 1: the escalation reports, the `nearest` kind and
+the evaluation's pinned cases still read what they read before; giving them
+the guarded read under a frozen-path comparison. Duplicate carriers in the
+registers, and a larger register re-taking the table — `STATUS.md` §2.
+
+## Phase 142 — quadratic lassos: jumping a pass whose step grows (GLM-BAT, the rest)
+
+**Status: closed.** Taken from `STATUS.md` §2.2, the first line
+of *GLM-BAT, the rest* that Phase 132 left
+([`studies/AFFINE_OUTPUT_STUDY.md`](studies/AFFINE_OUTPUT_STUDY.md) §7.5):
+*a jump over a pass whose counter grows quadratically needs the first change
+of a quadratic comparison, which is the next step.* The owner's direction for
+this run was to increase the GLM's reasoning abilities and scope; this round
+gives the batch machine's loop reasoning one more shape of growth. The
+pre-registration
+([`studies/QUADRATIC_LASSO_STUDY.md`](studies/QUADRATIC_LASSO_STUDY.md) §§0–6:
+marks Q1–Q8, a twelve-program battery, the questions) was committed with the
+Lean file and before any code. **7 of 8 marks were met**; Q3 was missed on its
+declaration (below). Tests: `tests/test_quadratic_lasso.py` (10).
+
+**What was built.**
+* `RequestProject/GLM/QuadraticLasso.lean` (no `sorry`, standard axioms): the
+  drift `m • d + C(m, 2) • g` and its recurrence (`drift_succ`); Phase 130's
+  jump and certificates for passes that move the state by any sequence of
+  displacements (`seq_accelerate`, `halts_of_seq_jump`,
+  `never_halts_of_seq_lasso`); the accumulator line `SET /A B=B+A` and how it
+  carries a displacement (`accStep`, `acc_shift`); the quadratic jump and its
+  two certificates (`quadratic_iterate`, `quadratic_accelerate`,
+  `halts_of_quadratic_jump`, `never_halts_of_quadratic_lasso`); a comparison
+  along the passes `e₀ + b·m + c·C(m, 2)` with linear differences
+  (`quad_diff`, `quad_closed_form`), monotone on each side of their sign
+  change (`monotone_on_of_diff_nonneg`, `antitone_on_of_diff_nonpos`), whose
+  sign once changed on a monotone stretch never returns
+  (`sign_change_persists`, `sign_change_persists_anti`) and which each
+  comparison reads only through its sign (`cmp_of_sign`); and with `c ≠ 0` it
+  leaves every bound (`quad_eventually_pos`, `quad_eventually_neg`).
+* `reasoning/batch_machine.py`: `accumulators`, `first_change_quadratic`
+  (bisection on the two monotone stretches), `_read_pass_quad` (each live
+  name's `β`, `γ` and the partial `g_r` at every step of the pass), and
+  `quadratic=True` in `jumped_run`, `run_program` and `growth_diagnosis`; a
+  quadratic jump carries `g` as its eighth field and a *never* verdict in
+  `Run.growth`. A program with no accumulator is read exactly as before.
+* `reasoning/batch_speech.py`: the second interpreter's own accumulators and
+  its own first change (`qflip`: the integers within reach of the real roots,
+  bracketed with an integer square root); `g` in the `never_lasso` claim and
+  two new mutations of it; the answers say how the step grows (`say_growth`);
+  `answer(..., quadratic=False)`.
+* `reasoning/quadratic_lasso.py` and `tools quadratic-lasso [--json]`;
+  `reasoning/affine_output.py` now reads with `quadratic=False`, so that it
+  keeps measuring the rule it declared (its diagnosis battery holds L12 as a
+  refusal).
+
+**Measured.** All 12 battery programs exactly as declared, 0 wrong: Q2 halts
+after 30,004 steps printing `10000 50005000` (jump `(3, 6, 9999)`), Q3 after
+30,004 with `S = -10000`, Q4 after 20,003 printing the 5000 triangular numbers,
+Q5 after 32,001, Q7 after 18,001 (the comparison falls, turns and is zero again
+only at pass 5998), Q10 after 16,003, Q12 after 40,003; Q1 (L12), Q6 and Q11
+never halt, with the declared `d` and `g` (Q11's accumulator passes 50 without
+equalling it); geometric (Q8) and cubic (Q9) growth stay refused (Q2). All 21
+listed questions came out as declared, but the mark said 20 of 20: §3 had
+miscounted its own list, so Q3 is missed as declared. 18 of 18 scripts verify
+and 105 of 105 mutations fail (Q4). 47 of 47 earlier programs, 58 of 58
+earlier questions and 300 of 300 generated programs keep their answers with
+and without the quadratic reading, L12 and N6 apart (Q5). Every jumped *halts*
+equals a plain run of 2,500,000 steps, and no *never* is contradicted by one
+(Q6). On 90,882 small quadratics the machine's first change and the column-3
+route both equal a brute-force scan (Q7). The end-to-end evaluation passed 186 of 188; the two misses were the retrieval figures that count Lean goal queries (809 -> 813), re-pinned with their claims unchanged, and both pass on their own (Q8; the full run was not repeated after the re-pin).
+
+**What it answers.** The machine can now reason through a loop whose step
+grows linearly — the classic `sum += i` loop — to its exact end, or prove it
+endless, without running it out; each verdict is a Lean theorem's instance and
+is re-derived by a second interpreter.
+
+**Left.** Geometric and cubic growth, accumulators fed by a constant variable
+or an expression — `STATUS.md` §2.2, *GLM-BAT, the rest*.
+
+## Phase 141 — elliptic-curve certificates: primes where neither `p - 1` nor `p + 1` splits
 
 **Status: closed this session.** Taken from `STATUS.md` §2.2, *the connected
+machine, the rest*: *a prime that neither side reaches within the budget is
+still refused (elliptic-curve certificates would be the next kind).* The
+study is
+[`studies/ELLIPTIC_CERTIFICATE_STUDY.md`](studies/ELLIPTIC_CERTIFICATE_STUDY.md)
+(5 of 6 marks; the held-out set was written and committed before the search
+existed). Tests: `tests/test_elliptic_certificate.py` (13).
+
+**What was built.**
+* `RequestProject/GLM/EllipticCertificate.lean` (no `sorry`, standard
+  axioms): curve arithmetic on naturals modulo `p` with checked inverses
+  (`finv`, `ecAdd`, `ecMul`), its agreement with Mathlib's Weierstrass group
+  law modulo every prime factor (`rep_ecAdd`, `rep_ecMulF`), the bound of
+  `2r + 1` points (`card_point_le`), the elliptic test `elliptic_prime`, the
+  chain mixing it with Phase 140's entries (`checkEChain_sound`,
+  `elliptic_sound`), and the kernel-checked `prime_2_255_sub_19`.
+* `reasoning/elliptic_certificate.py`: the search for curves by complex
+  multiplication (Cornacchia, Cipolla square roots, class polynomials in fixed-point integer
+  arithmetic, roots modulo `p`, a recursive descent with budgets of 400 nodes
+  and 20,000,000 rho iterations).
+* `reasoning/primality_certificate.py`: the `elliptic` kind, its checker
+  (mirroring `checkEEntry`), the `ELLIPTIC` control, and the stage in
+  `certify` after the mixed search. `reasoning/stepwise_script.py`: column 3's
+  own reader with its own curve arithmetic.
+* `evaluation/elliptic_certificate_cases.py` and `tools
+  elliptic-certificates`; `evaluation/pocklington_certificate_cases.flags`
+  keeps `ELLIPTIC` off, so Phase 140's measurement is unchanged.
+
+**Measured.** On the held-out set (17 numbers): 0 wrong, all 6 primes Phase
+140 refused certified (`2^255 - 19`, `2^448 - 2^224 - 1`, the secp256k1
+prime, `10^100 + 267`, `10^100 - 797`, `R317`), and the router agrees on 17 of
+17. 6 of 6 chains verified, 24 of 24 mutants caught; 40 of 42 tampered
+certificates caught by both the step gate and the script. The 2 accepted are
+`cert-k` on entries with `k = 1`, where the doubled point still has prime
+order, so they are valid certificates: the mutation was mis-stated and mark E3
+is recorded as missed. 0 of 35 earlier held-out cases, 0 of 304 certified
+numbers and 0 of 30 stepwise cases moved. The kernel instance was re-chosen
+after the first run (`2^130 - 5`, first named, is certified by Pratt), as the
+study records.
+The test
+files touched (elliptic, Pocklington, primality and the five stepwise files)
+pass: 168 cases, 0 failures; with the tool and question-frame files, 50 more,
+0 failures, under a stand-in for pytest kept outside the project. `tools
+queryesc --write` and `tools frozen-path --write` re-took the stored
+measurements. The full end-to-end evaluation passed 188 of 188 (156 answered,
+32 refused as expected, 0 wrong) before the corpus refresh; the refreshed Lean
+address book grows the goal-query set of `report-relay` and
+`report-anonymous` 805 -> 809, and both were re-pinned (claims unchanged:
+the stack still ahead on every set, carrying 14 and losing 0; the text search
+and the identifier book to chance, the structure holding 167 -> 163) and pass
+when run on their own. `lake build` passes on all Lean files.
+
+**Left.** See `STATUS.md` §2.2, *the connected machine, the rest*, and the
+study's §7.1: the order of the searches (N+1 ahead of Pocklington, the
+elliptic search earlier on large numbers; a refusal now spends four budgets),
+certificates in the typed planner's frame, and the `cert-k` mutation
+restated.
+
+---
+
+## Phase 140 — Pocklington and N+1 certificates: primes whose `p - 1` will not split
+
+**Status: closed.** Taken from `STATUS.md` §2.2, *the connected
+machine, the rest*: *a prime whose `p - 1` will not factor within the work
+budget (`2^521 - 1`) is refused.* The study is
+[`studies/POCKLINGTON_CERTIFICATE_STUDY.md`](studies/POCKLINGTON_CERTIFICATE_STUDY.md)
+(6 of 7 marks; two held-out sets, each written and committed before the code
+it scores). Tests: `tests/test_pocklington_certificate.py` (19).
+
+**What was built.**
+* `RequestProject/GLM/PocklingtonCertificate.lean` (no `sorry`, standard
+  axioms): `prime_pow_dvd_of_witness`, `prod_dvd_of_pow_dvd`,
+  `prime_of_factor_bound`, `checkPEntry_sound`, `checkPChain_sound`,
+  `pocklington_sound`, and the kernel-checked `prime_2_521_sub_one`.
+* `RequestProject/GLM/LucasCertificate.lean` (no `sorry`, standard axioms):
+  the ring `(ZMod r)[X]/(X^2 - P X + 1)` and its pair arithmetic
+  (`toQuad_qpow`, `isUnit_of_qnorm`, `card_quadRing`), the N+1 test
+  `lucas_prime`, the mixed chain (`checkMChain_sound`, `mixed_sound`) and the
+  kernel-checked `prime_33_factorial_sub_one`. `powModF`, `powMod` and the
+  Pocklington definitions are marked `@[expose]` so the kernel can evaluate
+  them from another module.
+* `reasoning/primality_certificate.py`: the `pocklington` and `lucas`
+  (mixed) certificate kinds, their checkers (mirroring the Lean definitions)
+  and searches, run only after the Pratt search runs out of budget; the
+  controls `POCKLINGTON` and `LUCAS`. `reasoning/stepwise_script.py`: column
+  3's own readers for both kinds.
+* `evaluation/pocklington_certificate_cases.py` (both held-out sets, the
+  marks) and `tools pocklington-certificates`;
+  `evaluation/primality_certificate_cases.py`: `SUPERSEDED` (`h17` now scored
+  against its published verdict).
+
+**Measured.** Part A (Pocklington): `2^521 - 1` certified; on the first
+held-out set 0 wrong but 0 of the 5 primes Phase 139 refused certified, so
+mark Q2 failed. Their factored part of `p - 1` falls far short of even the
+cube root, so the gap was factoring, not the theorem; all five have a smooth
+`p + 1`. Part B (N+1), chosen from that observation and scored on a fresh
+set: 13 of 13 primes certified, 0 wrong (5 of 5 on the first set, post hoc).
+9 of 9 chains verified, 36 of 36 mutants and 46 of 46 tampered certificates
+caught by both the step gate and the script; with both controls off, Phase
+139's held-out set answers exactly as recorded, and with them on only `h17`
+moves, to *prime*; 0 of 304 previously certified numbers and 0 of 30 stepwise
+cases changed. `2^607 - 1` and `2^1279 - 1` (seen in exploration) are
+certified by a single N+1 entry. Phase 139's measurement still meets 6 of 6.
+The test files touched (primality, Pocklington, the five stepwise files and
+both tool files) pass: 189 cases, 0 failures, under a stand-in for pytest kept
+outside the project. The two new Lean files grow the goal-query set of
+`report-relay` and `report-anonymous`, which were re-pinned (claims
+unchanged): the declaration count moves their stride, so the goal-query set
+goes 864 -> 805. `tools queryesc --write` and `tools frozen-path --write`
+re-took the stored measurements. After re-pinning, the full end-to-end
+evaluation passed 188 of 188 (156 answered, 32 refused as expected, 0 wrong),
+and `lake build` passes on all Lean files.
+
+**Left.** See `STATUS.md` §2.2, *the connected machine, the rest*, and the
+study's §7.1: the N+1 search ahead of Pocklington when `p + 1` is smooth (it
+would re-pin the `2^521 - 1` instance), elliptic-curve certificates for
+primes neither side reaches, and the cost of a refusal, which now spends
+three budgets.
+
+---
+
+## Phase 139 — primality certificates: the primality step without a ceiling
+
+**Status: closed.** Taken from `STATUS.md` §2.2, *the connected
+machine, the rest*: *the primality step keeps a ceiling of 10^12.* The study
+is
+[`studies/PRIMALITY_CERTIFICATE_STUDY.md`](studies/PRIMALITY_CERTIFICATE_STUDY.md)
+(6 of 6 marks; the held-out set was written and committed before the
+certified step was run on any of its questions). Tests:
+`tests/test_primality_certificate.py` (15).
+
+**What was built.**
+* `RequestProject/GLM/PrimalityCertificate.lean` (no `sorry`, standard
+  axioms): `powMod_eq`, `factor_witness`, `fermat_witness`,
+  `prime_dvd_prod_pow`, `checkEntry_sound`, `checkChain_sound`,
+  `pratt_sound`, and two kernel-checked instances above the old ceiling,
+  `prime_10_12_39` and `not_prime_10_12_1`.
+* `reasoning/primality_certificate.py`: `certify` (small primes, a strong
+  probable-prime test that only steers, Brent's rho, recursive Pratt
+  certificates; a work budget of 2,000,000 rho iterations) and `check`, which
+  mirrors the Lean checker line for line.
+* `runtime/stepwise.py`: the `prime` step above 10^12 carries a certificate
+  (`CERTIFIED_PRIMALITY`, the round's control); `NO_CERTIFICATE` in the
+  refusal precedence; the reader of *is N a prime* made non-greedy.
+  `reasoning/stepwise_script.py`: `TRIAL_LIMIT`, the step gate's check and
+  column 3's own certificate reader (`certified_verdict`).
+* `evaluation/primality_certificate_cases.py` and
+  `tools primality-certificates`.
+
+**Measured.** 17 of 17 held-out questions as expected (16 answered, 1 refused
+by the work budget as expected); 14 of 14 chains verified, 56 of 56 mutants
+and 41 of 41 tampered certificates caught by both the step gate and the
+script; 300 of 300 numbers above 10^12 agree with trial division; 0 of 30
+stepwise cases moved; Mersenne primes up to `2^127 - 1` certified in
+milliseconds, `2^521 - 1` and `2^607 - 1` refused by the budget, every large
+composite certified, 0 wrong. The full evaluation passed 188 of 188 before the
+corpus refresh; after it, 186 of 188 with `report-relay` and
+`report-anonymous` timing out at 300 s under eight parallel jobs (each takes
+about 3.5 minutes alone, and the new Lean file grows their goal-query set
+862 -> 864). Both were re-pinned to the new counts (claims unchanged) and
+pass when run on their own.
+
+**Left.** See `STATUS.md` §2.2, *the connected machine, the rest*.
+
+---
+
+## Phase 138 — tool verdicts, and the nearest fraction without a bound
+
+**Status: closed.** Taken from `STATUS.md` §2.2, *the connected
 machine, the rest*: its three next steps (a tool's yes/no answer in the
 planner; Phase 137's two unread phrasings, after a fresh held-out set; the
 classical closest-fraction theorem in Lean, so that the 20,000 bound can go).

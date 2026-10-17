@@ -5,11 +5,11 @@
 **Question.** If this session stopped now, what would the next one need to
 know to carry the round on?
 
-**Verdict.** No round is in flight: Phase 138 (tool verdicts, conditionals
-and the unrolled search in the stepwise planner; the classical
-closest-fraction theorem in `NearestFraction.lean`, so the nearest-fraction
-tool has no bound; 6 of 6 marks) is closed and recorded in
-`MASTER_PLAN.md`. The next round starts from the To-Do list,
+**Verdict.** No round is in flight: Phases 147 and 148 (the budget rule in
+the answering path, a deep hole read to its certificate by the `hole` kind,
+proved in `BudgetReading.lean`, 8 of 8 measured marks; and the guarded read in
+`nearest`, proved in `NearestAddress.lean`, 7 of 7 measured marks) are closed
+and recorded in `MASTER_PLAN.md`. The next round starts from the To-Do list,
 `STATUS.md` §2.1. The test-file sign-off is still owed (no pytest here).
 
 **Deciding figure.** 0 steps outstanding.
@@ -46,27 +46,34 @@ absence:
 
 ## Status
 
-**No round is in flight.** Phase 138 is closed (tool verdicts and the
-nearest fraction): the Lean file (`RequestProject/GLM/NearestFraction.lean`,
-proved), the Farey certificate (`reasoning/rational_approx.py`,
-`runtime/toolbox.py`), the verdict reader (`runtime/tool_values.py`), the
-verdict steps, conditionals and the search (`runtime/stepwise.py`,
-`reasoning/stepwise_script.py`), then the held-out sets and the measurement
-(`evaluation/tool_verdicts_cases.py`, `tools tool-verdicts`, 6 of 6 marks).
-The study is
-[`studies/TOOL_VERDICTS_STUDY.md`](studies/TOOL_VERDICTS_STUDY.md); the record
-is [`MASTER_PLAN.md`](MASTER_PLAN.md), "Phase 138". The next round starts from
-the To-Do list, `STATUS.md` §2.1; 0 steps of the phase are outstanding.
-In one line: a tool's yes/no answer now steers a chain, and the nearest
-fraction is proved for every bound.
+**No round is in flight.** Phases 147 and 148 are closed. In order: the Lean
+files (`RequestProject/GLM/BudgetReading.lean`,
+`RequestProject/GLM/NearestAddress.lean`, proved), the frozen-path baseline
+(`reasoning/_data/budget_guard_baseline.json`, 202 cases), then the answering
+path (`reasoning/hole_reading.py` and the `hole` kind;
+`reasoning/nearest_address.py` and the address path of `nearest`; the column-3
+templates `hole` and `nearest_address`), the measurement modules, the tests
+(`tests/test_budget_reading.py`, `tests/test_nearest_address.py`) and the
+pre-registrations; then the measurements, in this order:
+`tools budget-guard-frozen --write`, `tools budget-reading --write --jobs 8`,
+`tools nearest-address --write`. The studies are
+[`studies/BUDGET_READING_STUDY.md`](studies/BUDGET_READING_STUDY.md) and
+[`studies/NEAREST_ADDRESS_STUDY.md`](studies/NEAREST_ADDRESS_STUDY.md); the
+record is [`MASTER_PLAN.md`](MASTER_PLAN.md), "Phase 147" and "Phase 148". 0
+steps of the phases are outstanding. Phase 148's predicted count of certified
+points was wrong (copied from a mis-summed Phase 143 figure); it is recorded
+in its study §7.2.
+
+**What this round invalidated, and re-took.** `runtime/` and
+`evaluation/cases.py` changed, so the query-escalation cache (`tools queryesc
+--write`), the frozen-path comparison (`tools frozen-path --write`), the
+address read (`tools address-read --write`), the junction read (`tools
+junction-read --write`) and the typed plans (`tools plans --write`) were
+re-taken, then `corpus --refresh`.
 
 **One step owed: the release sign-off** (owed since Phase 134, now for
-Phases 135–138's new and changed test files too). pytest could not be
-installed in this session either (no package index reachable), so the
-test-file units could not be re-signed. The new and changed test files
-(`test_tool_values.py`, `test_connected_machine.py`, `test_connected_two.py`,
-`test_wiring.py`, and in Phase 138 `test_tool_verdicts.py` and the five
-`test_stepwise*.py` files) were run under `unittest` with a local stand-in
-for the pytest import, kept outside the repository, and passed. Resume with
-`python3 -m pip install pytest`, then
+Phases 135–148's new and changed test files too). pytest could not be
+installed in this session either (no package index reachable). The two new
+test files were run with a small runner calling each test function. Resume
+with `python3 -m pip install pytest`, then
 `PYTHONPATH=. python3 -m glm_universal.signoff --close --jobs 8`.

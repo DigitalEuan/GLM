@@ -27,7 +27,7 @@ Four instruments were used, and all four can be re-run on demand:
 cd overlay
 PYTHONPATH=. python3 -m glm_universal.capabilities                    # 33 probes
 PYTHONPATH=. python3 -m glm_universal.benchmarks                      # 5 suites
-PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8             # <!--figure:evaluation-cases-->188 CLI cases<!--/figure-->
+PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8             # <!--figure:evaluation-cases-->212 CLI cases<!--/figure-->
 PYTHONPATH=. python3 -m pytest glm_universal/tests -q                 # the test suite
 ```
 
@@ -45,9 +45,9 @@ by hand twice: the counts are recomputed into
 |---|---|---|
 | capability probes | where the library stops, asked as user questions | **33 probes: 20 hold, 13 break, 0 errored, 0 surprises** |
 | benchmark suites | solver functions against curated and exhaustive task sets | **2,389 / 2,390 tasks across 5 suites; every suite beat its declared baseline** |
-| end-to-end CLI evaluation | the CLI, driven the way a user drives it | **179 cases: 179 passed** — 151 answered correctly, 28 refused as expected, 0 unexpected refusals, **0 confidently wrong**, 0 errored |
+| end-to-end CLI evaluation | the CLI, driven the way a user drives it | **195 cases: 195 passed** — 159 answered correctly, 36 refused as expected, 0 unexpected refusals, **0 confidently wrong**, 0 errored |
 | test suite | the package's own regression net | **<!--figure:suite-->5,397 tests across 181 of the 183 test files, 18,972 subtests, outside the document checks<!--/figure-->**, zero failures |
-| Lean development | the machine-checked layer | **<!--figure:lean-files-->210 Lean files<!--/figure-->, `lake build` clean, no `sorry`** |
+| Lean development | the machine-checked layer | **<!--figure:lean-files-->221 Lean files<!--/figure-->, `lake build` clean, no `sorry`** |
 
 A break in the probe report is not a failure — it is a located boundary, and
 each one names the exact place it stops. A *confidently wrong* answer in the
@@ -59,14 +59,14 @@ honest refusal is scored `+1`. There are now none.
 ## 2. The end-to-end CLI evaluation
 
 This is the instrument that measures what a user gets. It lives in
-`overlay/glm_universal/evaluation/`. Each of its 179 cases starts `GLM.py` in a
+`overlay/glm_universal/evaluation/`. Each of its 195 cases starts `GLM.py` in a
 **fresh interpreter** — one subprocess per question, no shared session, no warm
 caches — and scores the `ANSWER` or `UNSOLVED` line the process prints. The
-question set covers **all <!--figure:query-kinds-->25 query kinds<!--/figure-->** the runtime recognises and every one of its
+question set covers **all <!--figure:query-kinds-->27 query kinds<!--/figure-->** the runtime recognises and every one of its
 report subjects; the coverage is checked against the runtime's own tables by
 a test, so a new kind or subject cannot be added without a case.
 
-28 of the 178 questions are ones the machine **should refuse**. Answering them
+36 of the 195 questions are ones the machine **should refuse**. Answering them
 confidently is scored worse than refusing them.
 
 ### Accuracy per query kind
@@ -75,6 +75,7 @@ confidently is scored worse than refusing them.
 |---|---|---|---|---|
 | `analogy` | 11 / 11 | 0 | 0 | 0 |
 | `angle` | 2 / 2 | 0 | 0 | 0 |
+| `carrier` | 9 / 9 | 0 | 0 | 0 |
 | `cluster` | 2 / 2 | 0 | 0 | 0 |
 | `coherence` | 2 / 2 | 0 | 0 | 0 |
 | `comparative` | 7 / 7 | 0 | 0 | 0 |
@@ -83,6 +84,7 @@ confidently is scored worse than refusing them.
 | `describe` | 8 / 8 | 0 | 0 | 0 |
 | `extremum` | 10 / 10 | 0 | 0 | 0 |
 | `field` | 8 / 8 | 0 | 0 | 0 |
+| `locate` | 7 / 7 | 0 | 0 | 0 |
 | `meaning` | 6 / 6 | 0 | 0 | 0 |
 | `measure` | 9 / 9 | 0 | 0 | 0 |
 | `nearest` | 4 / 4 | 0 | 0 | 0 |
@@ -91,13 +93,13 @@ confidently is scored worse than refusing them.
 | `product` | 1 / 1 | 0 | 0 | 0 |
 | `project` | 1 / 1 | 0 | 0 | 0 |
 | `real` | 5 / 5 | 0 | 0 | 0 |
-| `report` | 68 / 68 | 0 | 0 | 0 |
+| `report` | 69 / 69 | 0 | 0 | 0 |
 | `spatial` | 2 / 2 | 0 | 0 | 0 |
 | `task` | 3 / 3 | 0 | 0 | 0 |
 | `trilinear` | 2 / 2 | 0 | 0 | 0 |
 | `unknown` | 1 / 1 | 0 | 0 | 0 |
 | `verify` | 6 / 6 | 0 | 0 | 0 |
-| **total** | **178 / 178** | 0 | 0 | 0 |
+| **total** | **195 / 195** | 0 | 0 | 0 |
 
 Two facts are worth stating plainly. `analogy` — the kind that carried every
 failure in an earlier round — is now 11 / 11, and the set has grown from 8
@@ -107,11 +109,13 @@ is not bought with over-caution.
 
 ### The refusals it got right
 
-All 28 refusal cases refused, and all 28 are **boundaries** — each is a theorem
+All 36 refusal cases refused, and all 36 are **boundaries** — each is a theorem
 or a deliberate commitment, and cannot be closed by writing more code. There
 is no longer a **gap** case: the last one is closed below.
 
-**Boundaries — 28.**
+*The list below was written when the set held 178 cases and 28 refusals; the eight refusal cases added since (four in the `carrier` kind, four in the `locate` kind) are boundaries of the same sort, each stated with its reason in `overlay/glm_universal/evaluation/cases.py`.*
+
+**Boundaries — 28 of the 36.**
 
 | case | question | why the refusal is correct |
 |---|---|---|

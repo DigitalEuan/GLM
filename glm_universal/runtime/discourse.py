@@ -166,10 +166,13 @@ class Discourse(Conversation):
             solution = self._ask_one(text)
             self._record(text, text, solution, None)
             return solution
-        if shape != "why":
+        if shape not in ("why", "reply"):
             # whole first: a text the asker already answers as written is a
             # whole query, whatever words it holds -- so the layer can never
-            # change an answer the machine gives alone
+            # change an answer the machine gives alone.  A reply (Phase 146)
+            # is the exception, and the only one: it is detected only right
+            # after an answer that ended with a question, and only when the
+            # text is one of that question's options
             alone = self._ask_one(text)
             if alone.ok:
                 self._record(text, text, alone, None)

@@ -778,14 +778,26 @@ MEASUREMENT_ONLY: Mapping[str, str] = {
                      "batch_machine, reached through `tool machine`",
     "operations": "the operations-round battery; the ladder and GLM-BAT it "
                   "measures are `tool ladder` and `tool machine`",
-    "cell_guard": "a guard on the operations ladder, which no query reads "
-                  "yet (STATUS 2.1, the placement guard)",
-    "placement_guard": "waits on a query kind that reads a ladder carrier by "
-                       "its address (STATUS 2.1, item 1)",
-    "norm256_hex": "the H16 rung is measured beside the ladder only; its "
-                   "4096-colour subspace has no use yet (STATUS 2.2)",
-    "probe_budget": "the budget rule replaces the walk's patience only under "
-                    "a frozen-path comparison (STATUS 2.1, item 2)",
+    "quadratic_lasso": "the GLM-BAT battery of Phase 142; its rule lives in "
+                       "batch_machine, reached through `tool machine`",
+    "address_read_study": "the address-read battery of Phase 143; the read "
+                          "itself is the `locate` query kind",
+    "coordinate_junction_study": "the register-junction battery of Phase "
+                                 "144; the junction read itself is the "
+                                 "`locate` query kind",
+    "answering_question": "the measurement of Phase 146; the question it "
+                          "measures is put by the `locate` query kind and "
+                          "read back by the conversation's `reply` shape",
+    "probe_budget": "the measurement of Phase 124; the rule it measured is "
+                    "in the answering path through hole_reading (Phase 147: "
+                    "`report deep holes` and the `hole` query kind)",
+    "budget_reading_study": "the measurement of Phase 147; the rule itself is "
+                            "the `hole` query kind and `report deep holes`",
+    "nearest_address_study": "the measurement of Phase 148; the read itself "
+                             "is the `nearest` query kind on a point no "
+                             "register holds",
+    "budget_guard_frozen": "the frozen path and ladder audit of Phases "
+                           "147-148, asked over the whole evaluation",
     "stray_blind": "a census over the 23 deep holes, not a question about one",
     "citation_scope": "a measurement of the Lean corpus readings",
     "document_tree": "the retrieval line, parked at the owner's direction "

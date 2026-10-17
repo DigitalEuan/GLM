@@ -3408,7 +3408,7 @@
   "adversarial",
   "stress"
  ],
- "source_digest": "36b8338ddbc73c4af177f9992b2173b0c070a6dd4ea9dcf30e53d0b6e2f5557f",
+ "source_digest": "768255794c322f9fd309d7b2d1210f7c6abeae61267927c38e02c0797acc7ee5",
  "stress_first_run": {
   "correct": 28,
   "correct-refusal": 6,

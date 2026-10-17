@@ -37,7 +37,8 @@ class TestTheRouterReadsOnlyWhatItShould(unittest.TestCase):
         # 178 -> 179 at Phase 123: the evaluation case
         # report-hole-configuration.
         # 179 -> 188 at Phase 134: the nine cases of the carrier kind.
-        self.assertEqual(c["planner"], 188)
+        # 188 -> 195 at Phase 143: the seven cases of the locate kind.
+        self.assertEqual(c["planner"], 195)
 
     def test_every_engineering_question_reaches_engineering(self):
         self.assertEqual(self.census["engineering"]["engineering"], 63)

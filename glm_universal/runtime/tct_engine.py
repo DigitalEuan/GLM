@@ -1586,6 +1586,141 @@ assert crd.read_carrier(_tie).status == "open"
 '''
 
 
+def _body_locate(args) -> str:
+    """Re-check one address read by a full scan, without the table or the
+    ladder.
+
+    The script rebuilds the point from the request, measures it against all
+    142 carriers, and reports the strictly nearest one; the margin column 2
+    claims is reported back only if the scan finds the answer inside it and
+    every other carrier outside it, and the origin only if no carrier but
+    the claimed one lies within the stated move.  A read that answered a
+    carrier other than the nearest, or overstated its margin, fails here.
+    A junction answer (Phase 144) must be the whole least-distance set, its
+    members at one exact coordinate vector.
+    """
+    request = str(args.get("request", ""))
+    return f'''# -- recompute -------------------------------------------------------------
+
+from fractions import Fraction
+
+from glm_universal.reasoning import address_read as adr
+from glm_universal.reasoning import ladder_escalation as le
+
+import re as _re
+
+_rows = le.sample_carriers()
+# Phase 146: the place is what precedes 'given'; the replies follow it
+_bits = _re.split(r"\s+given\s+", {request!r}.strip(), maxsplit=1,
+                  flags=_re.I)
+_place = _bits[0].strip()
+_replies = [tuple(_x.strip() for _x in _re.split(r"\s+is\s+", _c.strip(), 1))
+            for _c in (_bits[1].split(";") if len(_bits) > 1 else [])
+            if _c.strip()]
+_parts = adr.parse_request(_place, _rows)
+_point = _parts["point"]
+
+
+def _d2(_a, _b):
+    return sum(((Fraction(_x) - Fraction(_y)) ** 2 for _x, _y in zip(_a, _b)),
+               Fraction(0))
+
+
+def _label(_i):
+    return "%s:%s" % (_rows[_i][0], _rows[_i][1])
+
+
+_dist = [_d2(_point, _c) for (_r, _n, _c) in _rows]
+_best = min(_dist)
+_near = [_i for _i, _v in enumerate(_dist) if _v == _best]
+if "junction" in EXPECTED:
+    # Phase 144: a junction answer is the whole least-distance set, and its
+    # members must share exact coordinates.
+    _coords = {{tuple(Fraction(_x) for _x in _rows[_k][2]) for _k in _near}}
+    assert len(_coords) == 1, [_label(_k) for _k in _near]
+    observed = {{"junction": "|".join(_label(_k) for _k in _near)}}
+else:
+    assert len(_near) == 1, [_label(_i) for _i in _near]
+    observed = {{"carrier": _label(_near[0])}}
+_i = _near[0]
+
+_m = Fraction(EXPECTED.get("margin", "0"))
+if _m <= 0 or (_best < _m * _m and all(_v >= _m * _m for _k, _v in
+                                       enumerate(_dist) if _k not in _near)):
+    observed["margin"] = q(_m)
+else:
+    observed["margin"] = "violated"
+
+if "origin" in EXPECTED:
+    _delta2 = Fraction(EXPECTED["delta2"])
+    _claimed = set(EXPECTED["origin"].split("|"))
+    if "junction" in EXPECTED:
+        # the origin is claimed only to lie in the junction (jread_origin)
+        _inside = set(EXPECTED["junction"].split("|"))
+        _others = [_k for _k, _v in enumerate(_dist)
+                   if _v <= _delta2 and _label(_k) not in _inside]
+        _others += sorted(_claimed - _inside)
+    else:
+        _others = [_k for _k, _v in enumerate(_dist)
+                   if _v <= _delta2 and _label(_k) not in _claimed]
+    observed["origin"] = EXPECTED["origin"] if not _others else "violated"
+    observed["delta2"] = q(_delta2)
+
+if "live" in EXPECTED or "asks" in EXPECTED:
+    # Phase 146: re-derive each reply from the register attributes, apart
+    # from the question module: an attribute's value, a gloss word, the
+    # direct choice or a confirmation
+    from glm_universal.reasoning import escalation as _esc
+    _objs = {{}}
+    for _reg in _esc.REGISTERS:
+        for _o in _esc._register_loader(_reg)():
+            _objs["%s:%s" % (_reg, _o.name)] = _o
+
+    def _reply_of(_key, _lab):
+        _at = dict(getattr(_objs[_lab], "attributes", {{}}) or {{}})
+        if _key.startswith("attr:"):
+            _v = repr(_at.get(_key[5:]))
+        elif _key.startswith("word:"):
+            _v = _key[5:] in set(_re.findall(
+                r"[a-z]{{4,}}", str(_at.get("gloss", "")).lower()))
+        elif _key == "choice":
+            _v = _lab
+        elif _key.startswith("confirm:"):
+            _v = _lab == _key[8:]
+        else:
+            raise AssertionError(_key)
+        if _v is True:
+            return "yes"
+        if _v is False:
+            return "no"
+        _v = str(_v)
+        if len(_v) >= 2 and _v[0] == _v[-1] and _v[0] in ("'", '"'):
+            _v = _v[1:-1]
+        return _v
+
+    _live = [_label(_k) for _k in _near]
+    for _key, _tok in _replies:
+        _live = [_m for _m in _live if _reply_of(_key, _m) == _tok]
+    if "live" in EXPECTED:
+        observed["live"] = "|".join(_live)
+    if "asks" in EXPECTED:
+        _key = EXPECTED["asks"].split(" -> ", 1)[0]
+        _groups = []
+        for _m in _live:
+            _r = _reply_of(_key, _m)
+            for _g in _groups:
+                if _g[0] == _r:
+                    _g[1].append(_m)
+                    break
+            else:
+                _groups.append((_r, [_m]))
+        # the question must split the live set: two groups or more
+        observed["asks"] = (_key + " -> " + " / ".join(
+            "|".join(_g[1]) for _g in _groups)) if len(_groups) > 1 \
+            else "does not split"
+'''
+
+
 def _body_report_language(args) -> str:
     """Recompute the question descriptions and the parser comparison."""
     return '''# -- recompute -------------------------------------------------------------
@@ -2399,9 +2534,10 @@ def _body_report_deep_holes(args: Mapping[str, object]) -> str:
     """Recompute the deep-hole census reached by walking (v1.5.0)."""
     return '''# -- recompute -------------------------------------------------------------
 
-from glm_universal.reasoning import deep_holes as dhl
+from glm_universal.reasoning import hole_reading as hr
 
-report = dhl.deep_holes_report(walks=3)
+# Phase 147: the census is read under the budget rule
+report = hr.census_report(walks=3)
 census = report["census"]
 
 observed = {
@@ -2412,6 +2548,101 @@ observed = {
         str(census["every_named_type_certified"]),
     "census_complete": str(census["census_complete"]),
 }
+'''
+
+
+def _body_hole(args: Mapping[str, object]) -> str:
+    """Re-read one deep hole under the budget rule (Phase 147) and check its
+    certificate from the vertex set: every vertex a lattice point at the
+    covering radius, none nearer, and the marked-barycentre identity closed
+    over them."""
+    request = str(args.get("request", ""))
+    return f'''# -- recompute -------------------------------------------------------------
+
+from fractions import Fraction
+
+from glm_universal.reasoning import deep_holes as dhl
+from glm_universal.reasoning import hole_reading as hr
+from glm_universal.reasoning import voronoi_walk as vw
+from glm_universal.reasoning.fwht_decode import nearest_lattice_point_fwht
+
+_parts = hr.parse_request({request!r})
+if _parts["walk"] is not None:
+    _seed = hr.walk_seed(int(_parts["walk"]))
+    _reached = vw.walk_to_deep_hole(seed=_seed)
+    assert _reached is not None and _reached["is_deep"]
+    _centre = [Fraction(_x) for _x in _reached["center"]]
+    _known = _reached["active"]
+else:
+    _seed = hr.REFERENCE_SEED
+    _centre = [Fraction(_x) for _x in _parts["centre"]]
+    _known = ()
+
+# the depth, from the exact decoder alone
+_near = nearest_lattice_point_fwht(_centre).point
+_d2 = sum((_centre[_i] - _near[_i]) ** 2 for _i in range(24))
+assert _d2 / 8 == 2, _d2
+
+# the reading: no barren stop, the proved budget
+_probe = dhl.hole_vertices(_centre, probes=hr.BUDGET, seed=_seed,
+                           patience=hr.BUDGET, known=_known)
+_vertices = _probe["vertices"]
+assert _probe["starts_run"] <= hr.BUDGET
+for _v in _vertices:
+    assert sum((_centre[_i] - _v[_i]) ** 2 for _i in range(24)) == _d2
+_diagram = dhl.hole_diagram(_vertices, center=_centre)
+
+observed = {{
+    "type": str(_diagram["root_system"]),
+    "vertex_count": str(len(_vertices)),
+    "certified": str(bool(_diagram["certified_complete"])),
+}}
+'''
+
+
+def _body_nearest_address(args: Mapping[str, object]) -> str:
+    """Re-rank a point against the 142 carriers by a full scan, without the
+    table or the ladder (Phase 148), and check the certified gap."""
+    request = str(args.get("request", ""))
+    limit = int(args.get("limit", 5))
+    return f'''# -- recompute -------------------------------------------------------------
+
+from fractions import Fraction
+
+from glm_universal.reasoning import address_read as adr
+from glm_universal.reasoning import ladder_escalation as le
+
+_rows = le.sample_carriers()
+_point = adr.parse_request({request!r}, _rows)["point"]
+
+
+def _d2(_a, _b):
+    return sum(((Fraction(_x) - Fraction(_y)) ** 2 for _x, _y in zip(_a, _b)),
+               Fraction(0))
+
+
+def _label(_i):
+    return "%s:%s" % (_rows[_i][0], _rows[_i][1])
+
+
+_scored = sorted(((_d2(_point, _c), _label(_i), _i)
+                  for _i, (_r, _n, _c) in enumerate(_rows)))
+_top = _scored[:{limit}]
+observed = {{
+    "head": _top[0][1],
+    "top_names": str([_l for _d, _l, _i in _top]),
+    "top_distances2": str([q(_d) for _d, _l, _i in _top]),
+    "certified": EXPECTED.get("certified", "False"),
+}}
+if EXPECTED.get("certified") == "True":
+    # GLM.NearestAddress.ranking_tail_outside: the head set inside the
+    # margin, every other carrier outside it
+    _m = Fraction(EXPECTED["margin"])
+    _best = _scored[0][0]
+    _head = {{_i for _d, _l, _i in _scored if _d == _best}}
+    _ok = _m > 0 and _best < _m * _m and all(
+        _d >= _m * _m for _d, _l, _i in _scored if _i not in _head)
+    observed["margin"] = q(_m) if _ok else "violated"
 '''
 
 
@@ -3636,6 +3867,10 @@ TEMPLATES = {
     # Phase 134: one carrier read through the carried fork and the stages
     # the request supplies information for, re-read by brute force.
     "carrier": _body_carrier,
+    # Phase 143: one address read re-checked by a full scan of the carriers.
+    "locate": _body_locate,
+    "hole": _body_hole,
+    "nearest_address": _body_nearest_address,
     # v1.12.0: the surface language driven off the same kind of
     # description -- the question shape made an object.
     "report_language": _body_report_language,

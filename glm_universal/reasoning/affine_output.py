@@ -28,6 +28,11 @@ takes the marks:
 writes a counter is a proof, and why the shapes the diagnosis names have the
 closed forms it predicts with.
 
+Every run here is read with ``quadratic=False``: the module measures the
+Phase 132 rule it declared, and Phase 142's accumulators
+(``studies/QUADRATIC_LASSO_STUDY.md``) would decide L12, which its diagnosis
+battery holds as a refusal.
+
 Exact and deterministic, with no float anywhere: the NRCI is held in
 millionths from an integer square root of its exact rational squared form.
 """
@@ -203,7 +208,7 @@ def battery_marks() -> Dict[str, object]:
     """A2: each battery program as declared."""
     rows: List[Dict[str, object]] = []
     for ident, lines, exp in BATTERY:
-        run = bm.run_program(bm.parse_program(lines))
+        run = bm.run_program(bm.parse_program(lines), quadratic=False)
         jumps = tuple(j[:3] for j in run.jumps)
         if "refusal" in exp:
             ok = run.status == "undecided"
@@ -228,7 +233,7 @@ def question_marks() -> Dict[str, object]:
     """A3: the twenty questions."""
     rows: List[Dict[str, object]] = []
     for ident, question, check in QUESTIONS:
-        a = bs.answer(question, _program_text(ident), verify=False)
+        a = bs.answer(question, _program_text(ident), verify=False, quadratic=False)
         if check[0] == "refused":
             ok = (not a.answered) and a.refusal == check[1]
         elif check[0] == "halts":
@@ -256,7 +261,7 @@ def question_marks() -> Dict[str, object]:
 
 
 def _diagnose(lines: Sequence[str]) -> Dict[str, object]:
-    return bm.growth_diagnosis(bm.parse_program(lines))
+    return bm.growth_diagnosis(bm.parse_program(lines), quadratic=False)
 
 
 def diagnosis_marks() -> Dict[str, object]:
@@ -310,7 +315,7 @@ def prediction_marks(ahead: int = bm.GROWTH_WINDOW) -> Dict[str, object]:
     rows: List[Dict[str, object]] = []
     for ident, lines, _exp in DIAGNOSIS:
         program = bm.parse_program(lines)
-        diag = bm.growth_diagnosis(program)
+        diag = bm.growth_diagnosis(program, quadratic=False)
         for name, shape in sorted(diag["shapes"].items()):
             if shape[0] not in ("translation", "quadratic", "geometric"):
                 continue
@@ -330,7 +335,7 @@ def _undecided_generated() -> List[Tuple[int, Sequence[object]]]:
     out = []
     for i in range(op.FUZZ_COUNT):
         program = bm.parse_program(op.generated_program(i))
-        if bm.run_program(program).status == "undecided":
+        if bm.run_program(program, quadratic=False).status == "undecided":
             out.append((i, program))
     return out
 
@@ -342,7 +347,7 @@ def certificate_marks() -> Dict[str, object]:
     for ident, lines, _exp in BATTERY:
         program = bm.parse_program(lines)
         canon = [bm.render_line(i) for i in program]
-        run = bm.run_program(program)
+        run = bm.run_program(program, quadratic=False)
         if run.status == "never" and run.lasso:
             claims.append((ident, canon, bs.never_claim(run)))
         elif run.status == "halted" and run.jumps:
@@ -350,19 +355,19 @@ def certificate_marks() -> Dict[str, object]:
     for ident, question, check in QUESTIONS:
         if check[0] == "refused":
             continue
-        a = bs.answer(question, _program_text(ident), verify=False)
+        a = bs.answer(question, _program_text(ident), verify=False, quadratic=False)
         canon = [bm.render_line(i)
                  for i in bm.parse_program(_battery_lines(ident))]
         if a.claim:
             claims.append((ident, canon, dict(a.claim)))
     for ident, lines, _exp in DIAGNOSIS:
         program = bm.parse_program(lines)
-        diag = bm.growth_diagnosis(program)
+        diag = bm.growth_diagnosis(program, quadratic=False)
         claims.append((ident, [bm.render_line(i) for i in program],
                        bs.growth_claim(diag)))
     generated = _undecided_generated()
     for i, program in generated:
-        diag = bm.growth_diagnosis(program)
+        diag = bm.growth_diagnosis(program, quadratic=False)
         if diag["head"] is not None:
             claims.append((f"G{i}", [bm.render_line(x) for x in program],
                            bs.growth_claim(diag)))
@@ -420,8 +425,8 @@ def noninterference_marks() -> Dict[str, object]:
             if ident in skip:
                 continue
             total += 1
-            old = bm.run_program(bm.parse_program(lines), affine=False)
-            new = bm.run_program(bm.parse_program(lines))
+            old = bm.run_program(bm.parse_program(lines), affine=False, quadratic=False)
+            new = bm.run_program(bm.parse_program(lines), quadratic=False)
             same = _same_run(old, new)
             kept += same
             if not same:
@@ -431,23 +436,25 @@ def noninterference_marks() -> Dict[str, object]:
                 continue
             q_total += 1
             old = bs.answer(question, texts[ident], verify=False,
-                            affine=False)
-            new = bs.answer(question, texts[ident], verify=False)
+                            affine=False, quadratic=False)
+            new = bs.answer(question, texts[ident], verify=False, quadratic=False)
             same = (old.answered, old.text, old.refusal, old.claim) == (
                 new.answered, new.text, new.refusal, new.claim)
             q_kept += same
             if not same:
                 moved_rows.append(f"{ident}: {question}")
     as_p = all(
-        _same_run(bm.run_program(bm.parse_program(cb._battery_lines(kid))),
-                  bm.run_program(bm.parse_program(_battery_lines(pid))))
+        _same_run(bm.run_program(bm.parse_program(cb._battery_lines(kid)),
+                                 quadratic=False),
+                  bm.run_program(bm.parse_program(_battery_lines(pid)),
+                                 quadratic=False))
         for kid, pid in (("K4", "P2"), ("K5", "P1")))
     gkept = gjumps = 0
     gmoved: List[int] = []
     for i in range(op.FUZZ_COUNT):
         program = bm.parse_program(op.generated_program(i))
-        old = bm.run_program(program, affine=False)
-        new = bm.run_program(program)
+        old = bm.run_program(program, affine=False, quadratic=False)
+        new = bm.run_program(program, quadratic=False)
         same = (old.status, old.certificate, old.lasso, old.forgotten,
                 old.steps, old.out, old.err, old.exit_code, old.files) == (
             new.status, new.certificate, new.lasso, new.forgotten, new.steps,
@@ -480,10 +487,10 @@ def soundness_marks() -> Dict[str, object]:
     decided: List[Tuple[str, Sequence[object], bm.Run]] = []
     for ident, lines, _exp in BATTERY:
         program = bm.parse_program(lines)
-        decided.append((ident, program, bm.run_program(program)))
+        decided.append((ident, program, bm.run_program(program, quadratic=False)))
     for i in range(op.FUZZ_COUNT):
         program = bm.parse_program(op.generated_program(i))
-        run = bm.run_program(program)
+        run = bm.run_program(program, quadratic=False)
         if run.jumps:
             decided.append((f"G{i}", program, run))
     halts_ok: List[str] = []

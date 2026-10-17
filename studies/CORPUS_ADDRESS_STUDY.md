@@ -64,17 +64,17 @@ and `--check` fails if one of them has drifted.
 <!-- generated: corpus-inventory -->
 | figure | value |
 |---|---|
-| documents | 171 |
-| current-state documents | 167 |
+| documents | 181 |
+| current-state documents | 177 |
 | archive documents | 4 |
-| lines, whole corpus | 71,660 |
-| lines, current state | 61,380 |
+| lines, whole corpus | 75,724 |
+| lines, current state | 65,444 |
 | lines, archive | 10,280 |
-| addressable sections | 1,851 |
-| documents carrying a tier 0 | 167 |
-| words in all tier-0 blocks together | 20,501 |
+| addressable sections | 1,951 |
+| documents carrying a tier 0 | 175 |
+| words in all tier-0 blocks together | 22,251 |
 
-Reading every current-state document costs 622,719 words; reading all 167 tier-0 blocks instead costs 20,501 — 3.3 % of it, with a stated bound on what the coarse read may omit.  The archive rule takes 14.3 % of the corpus out of what a session must load, without deleting a line of it.
+Reading every current-state document costs 665,236 words; reading all 175 tier-0 blocks instead costs 22,251 — 3.3 % of it, with a stated bound on what the coarse read may omit.  The archive rule takes 13.6 % of the corpus out of what a session must load, without deleting a line of it.
 <!-- end generated -->
 
 The three numbers that matter are the three resolutions a reader can stop at:
@@ -84,10 +84,10 @@ repository, still linked from [`ENTRY.md`](../ENTRY.md) — it is a statement
 about which half a session must load.
 
 In one sentence, and generated rather than typed: the corpus is
-<!--figure:corpus-documents-->171<!--/figure--> written documents —
-<!--figure:corpus-state-documents-->167<!--/figure--> of current state and
+<!--figure:corpus-documents-->181<!--/figure--> written documents —
+<!--figure:corpus-state-documents-->177<!--/figure--> of current state and
 <!--figure:corpus-archive-documents-->4<!--/figure--> of archive — carrying
-<!--figure:corpus-sections-->1,851<!--/figure--> addressable sections. All
+<!--figure:corpus-sections-->1,951<!--/figure--> addressable sections. All
 four are counted over what was *written*: a generated document is an output of
 the corpus rather than a part of it, which is the same rule the digest keeps,
 and it is why the three documents this machine emits are outside every count
@@ -98,9 +98,9 @@ The documents that cost the most to read:
 <!-- generated: corpus-largest -->
 | document | lines |
 |---|---|
-| `MASTER_PLAN.md` | 8,221 |
+| `MASTER_PLAN.md` | 8,880 |
 | `archive/PACKAGE_README_ARCHIVE.md` | 4,158 |
-| `studies/GLM_ACADEMIC_PAPER.md` | 3,552 |
+| `studies/GLM_ACADEMIC_PAPER.md` | 3,839 |
 | `archive/MASTER_PLAN_ARCHIVE.md` | 3,449 |
 | `archive/STATUS_ROUNDS_ARCHIVE.md` | 2,059 |
 <!-- end generated -->
@@ -117,14 +117,18 @@ recomputing the figure must resolve to something importable.
 <!-- generated: corpus-tiers -->
 | check | documents |
 |---|---|
-| state documents | 167 |
-| carrying a tier-0 block | 167 |
-| verdict found verbatim below tier 0 | 95 |
-| verdict grounded below tier 0 (verbatim or refinement) | 167 |
-| deciding figure's numbers found below tier 0 | 167 |
-| naming a function that recomputes the figure | 158 |
-| named functions that resolve | 158 |
-| documents failing the contract | 0 |
+| state documents | 177 |
+| carrying a tier-0 block | 175 |
+| verdict found verbatim below tier 0 | 101 |
+| verdict grounded below tier 0 (verbatim or refinement) | 175 |
+| deciding figure's numbers found below tier 0 | 175 |
+| naming a function that recomputes the figure | 166 |
+| named functions that resolve | 166 |
+| documents failing the contract | 2 |
+
+Failing:
+* `studies/BUDGET_READING_STUDY.md` — no tier-0 block
+* `studies/NEAREST_ADDRESS_STUDY.md` — no tier-0 block
 <!-- end generated -->
 
 The refinement case is worth stating plainly, because it is the honest half.
@@ -145,8 +149,8 @@ record of a round.** That is testable in both directions, and it is what turns
 <!-- generated: corpus-reachability -->
 | check | documents |
 |---|---|
-| state documents | 170 |
-| reachable from the entry document | 170 |
+| state documents | 180 |
+| reachable from the entry document | 180 |
 | unreachable | 0 |
 | archive documents | 4 |
 | archive documents listed in the entry document | 4 |
@@ -181,7 +185,7 @@ measurements are emitted.
 |---|---|
 | generated documents | 3 |
 | of those, rendered by this module | 1 |
-| lines in them | 1,953 |
+| lines in them | 1,963 |
 | generated blocks inside hand-written documents | 124 |
 | documents carrying at least one block | 29 |
 | renderers in the registry | 124 |
@@ -211,14 +215,14 @@ exact decoder the physical carriers use.
 <!-- generated: corpus-address -->
 | figure | value |
 |---|---|
-| addressable units (sections) | 1,851 |
-| written documents they come from | 171 |
-| distinct addresses | 1,849 |
+| addressable units (sections) | 1,951 |
+| written documents they come from | 181 |
+| distinct addresses | 1,949 |
 | collision classes | 2 |
 | units sharing an address with another | 4 |
 | quantisation adds no conflation of its own | yes |
-| feature vectors read back exactly from the address | 1,851 / 1,851 |
-| coordinate errors | 0 of 44,424 |
+| feature vectors read back exactly from the address | 1,951 / 1,951 |
+| coordinate errors | 0 of 46,824 |
 | cache | fresh |
 <!-- end generated -->
 
@@ -233,15 +237,15 @@ and the strong control, a plain lexical overlap with no geometry at all?
 <!-- generated: corpus-retrieval -->
 | scheme | hit@5 | precision@5 | queries with a hit |
 |---|---|---|---|
-| `lexical` | 26.7 % | 8.0 % | 16 / 60 |
-| `lexical_raw` | 26.7 % | 8.3 % | 16 / 60 |
-| `structural` | 31.7 % | 13.7 % | 19 / 60 |
-| `text` | 81.7 % | 34.7 % | 49 / 60 |
-| `digest` | 5.0 % | 1.3 % | 3 / 60 |
-| `shuffled` | 6.7 % | 1.3 % | 4 / 60 |
-| chance (closed form) | 6.2 % | — | — |
+| `lexical` | 28.3 % | 7.3 % | 17 / 60 |
+| `lexical_raw` | 26.7 % | 7.3 % | 16 / 60 |
+| `structural` | 20.0 % | 10.7 % | 12 / 60 |
+| `text` | 78.3 % | 37.0 % | 47 / 60 |
+| `digest` | 8.3 % | 1.7 % | 5 / 60 |
+| `shuffled` | 1.7 % | 0.3 % | 1 / 60 |
+| chance (closed form) | 5.9 % | — | — |
 
-60 queries over 1,851 sections.  A retrieved section counts as relevant when it shares a document with the query, or lies in a document linked to it — neither relation is in the feature map, so this is a prediction the scheme can fail.  The lexical address beats chance by 433/100×; plain text overlap still beats it, which is the same division of labour the Lean retrieval study measured.
+60 queries over 1,951 sections.  A retrieved section counts as relevant when it shares a document with the query, or lies in a document linked to it — neither relation is in the feature map, so this is a prediction the scheme can fail.  The lexical address beats chance by 483/100×; plain text overlap still beats it, which is the same division of labour the Lean retrieval study measured.
 <!-- end generated -->
 
 The answer is the same answer, and it is worth having reached it twice on two
@@ -265,12 +269,12 @@ one is a proof that nothing in the corpus is that close.
 | figure | value |
 |---|---|
 | queries | 40 |
-| pairs checked | 74,000 |
+| pairs checked | 78,000 |
 | violations of the bound | 0 |
 | bound holds | yes |
 | feature radius | 2 |
 | certified address ball (squared) | 676 |
-| mean certified shortlist | 1/20 |
+| mean certified shortlist | 3/4 |
 | mean shortlist as a fraction of the corpus | 0.0 % |
 | covering radius ρ | 4 |
 | scale | 9 |

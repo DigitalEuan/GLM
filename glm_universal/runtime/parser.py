@@ -79,7 +79,7 @@ KINDS: Tuple[str, ...] = (
     "spatial", "project", "trilinear", "coherence", "report", "angle",
     "task", "pi_groups", "meaning", "real", "compare", "measure",
     "comparative", "derive", "field", "ordering", "extremum", "carrier",
-    "unknown",
+    "locate", "hole", "unknown",
 )
 
 #: Directive keyword -> intent.  Longest surface form is matched first, so
@@ -197,6 +197,17 @@ VERBS: Dict[str, str] = {
     # when it opens it.
     "carrier": "carrier", "read carrier": "carrier",
     "decode carrier": "carrier",
+    # locate -- a point read off the construction ladder by its address and
+    # answered with the carrier the placement guard certifies (Phase 143).
+    # Start-only for the same reason as `carrier`: `locate` is an ordinary
+    # verb of the documents and governs a question only when it opens it.
+    "locate": "locate", "locate point": "locate",
+    # hole -- a carrier classified by the deep hole it sits in, read under
+    # the budget rule (Phase 147).  Start-only: `hole` and `deep hole` are
+    # nouns of the report subjects (`report hole ladder`) and govern a
+    # question only when they open it.
+    "hole": "hole", "deep hole": "hole", "read hole": "hole",
+    "classify hole": "hole",
     "meaning": "meaning", "meaning of": "meaning", "means": "meaning",
     "denotes": "meaning", "denotation": "meaning", "refers to": "meaning",
     "ground": "meaning", "grounding": "meaning", "relate": "meaning",
@@ -227,6 +238,8 @@ START_ONLY: Tuple[str, ...] = (
     "order", "orders", "compare field", "rank field",
     "largest", "highest", "maximum", "smallest", "lowest", "minimum",
     "carrier", "read carrier", "decode carrier",
+    "locate", "locate point",
+    "hole", "deep hole", "read hole", "classify hole",
 )
 
 #: Applied to the raw string before tokenising.  Politeness and filler carry
@@ -1154,6 +1167,21 @@ def _build_keyword_query(text: str, cleaned: str, lowered: str,
                      trace=tuple(trace))
 
     if kind == "nearest":
+        # Phase 148: a point no register holds -- a moved carrier or 24
+        # exact coordinates -- goes to the guarded read of the address
+        # table, carried through as text like a `locate` request.
+        from ..reasoning import nearest_address as _na
+        address = _na.split_request(cleaned)
+        if address is not None:
+            options["address_request"] = address[0]
+            if address[1] is not None:
+                options["limit"] = address[1]
+            trace.append(f"nearest request {address[0]!r} names a point no "
+                         f"register holds; it passes to the guarded read of "
+                         f"the address table")
+            return Query(raw=text, normalised=cleaned, kind="nearest",
+                         domain=domain, operands=(address[0],),
+                         options=options, rule=rule, trace=tuple(trace))
         limit = _extract_int_option(lowered, ("top", "limit", "nearest"))
         if limit is not None:
             options["limit"] = limit
@@ -1436,6 +1464,28 @@ def _build_keyword_query(text: str, cleaned: str, lowered: str,
         trace.append(f"carrier request {options['request']!r} passes to "
                      f"the carrier read unresolved")
         return Query(raw=text, normalised=cleaned, kind="carrier",
+                     domain=domain, operands=(), options=options,
+                     rule=rule, trace=tuple(trace))
+
+    if kind == "locate":
+        # 'locate C moved 8 by 1/2' -- a carrier name, a move or 24
+        # coordinates.  Carried through as text for the same reason the
+        # carrier request is: reading it is the solver's, so a malformed
+        # request is refused there with its reason.
+        options["request"] = remainder.strip()
+        trace.append(f"locate request {options['request']!r} passes to the "
+                     f"address read unresolved")
+        return Query(raw=text, normalised=cleaned, kind="locate",
+                     domain=domain, operands=(), options=options,
+                     rule=rule, trace=tuple(trace))
+
+    if kind == "hole":
+        # 'hole walk 3', 'hole octad pair', 'hole <24 coordinates>' -- read
+        # by the solver, which refuses a malformed request with its reason.
+        options["request"] = remainder.strip()
+        trace.append(f"hole request {options['request']!r} passes to the "
+                     f"budget-rule reading unresolved")
+        return Query(raw=text, normalised=cleaned, kind="hole",
                      domain=domain, operands=(), options=options,
                      rule=rule, trace=tuple(trace))
 

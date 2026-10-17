@@ -83,6 +83,8 @@ PRECEDENCE: Tuple[str, ...] = (
     # round five (Phase 91)
     "ORDER_OUT_OF_RANGE", "TOP_K_TIE", "RANGE_UNDECLARED", "TABLE_MISMATCH",
     "COMPARATIVE_UNDECLARED",
+    # Phase 139: a primality certificate not found within the work budget
+    "NO_CERTIFICATE",
     "TOO_MANY_READINGS", "UNKNOWN_QUANTITY", "NO_DERIVATION",
     "UNKNOWN_STEP",
 )
@@ -124,6 +126,14 @@ TOOL_VALUES = True
 #: convergent of pi whose denominator is above 1000*).  Switched off only by
 #: the round's own control.
 TOOL_VERDICTS = True
+
+#: Phase 139 (``studies/PRIMALITY_CERTIFICATE_STUDY.md``): above the
+#: trial-division line (``stepwise_script.TRIAL_LIMIT``, 10^12) a ``prime``
+#: step carries a certificate -- a factor, a Fermat witness or a Pratt
+#: certificate, each proved sound in ``RequestProject/GLM/
+#: PrimalityCertificate.lean`` -- instead of being refused.  Switched off
+#: only by the round's own control, which restores the old refusal.
+CERTIFIED_PRIMALITY = True
 
 #: The relation words of the search's stopping test (all strict ``>``).
 _ABOVE = r"(?:is )?(?:above|over|greater than|more than|larger than|bigger " \
@@ -684,7 +694,7 @@ def segment_readings(seg: str) -> List[tuple]:
                 key = _fold_set(m.group(1), m.group(3))
                 if key is not None:
                     return [("fold", m.group(2), key, m.group(3))]
-    m = re.fullmatch(r"is (.+) (?:a )?prime(?: number)?", seg)
+    m = re.fullmatch(r"is (.+?) (?:a )?prime(?: number)?", seg)
     if m:
         return [("prime", a) for a in expression_readings(m.group(1))]
     if seg.startswith("is "):
@@ -972,8 +982,22 @@ def _build(tree: tuple, b: Builder, leaves: Leaves, it: Optional[int],
     if kind == "prime":
         i = _build(tree[1], b, leaves, it, session)
         n = _as_int(b.value(i), f"step {i}")
-        if n > 10 ** 12:
+        if n > ss.TRIAL_LIMIT and not CERTIFIED_PRIMALITY:
             raise Refused("UNKNOWN_STEP", f"{n} is above the primality limit")
+        if n > ss.TRIAL_LIMIT:
+            # Phase 139: above the trial-division line the verdict is a
+            # certificate checked in a few modular exponentiations
+            # (GLM.PrimalityCertificate.pratt_sound / fermat_witness /
+            # factor_witness); no size ceiling, only a work budget.
+            from glm_universal.reasoning import primality_certificate as pc
+            try:
+                value, cert = pc.verdict(n)
+            except pc.NoCertificate as exc:
+                raise Refused("NO_CERTIFICATE", str(exc))
+            detail: Dict[str, object] = {"certificate": cert}
+            if cert["kind"] == "factor":
+                detail["factor"] = cert["factor"]
+            return b.add("prime", (i,), value, f"prime?(step {i})", detail)
         f = ss.prime_factor(n)
         value = "prime" if n >= 2 and f is None else "not prime"
         detail = {"factor": f} if f is not None else {}

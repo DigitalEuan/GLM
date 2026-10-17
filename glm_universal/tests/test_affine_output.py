@@ -107,8 +107,9 @@ def test_the_diagnosis_and_its_nrci():
 def test_the_nrci_decides_nothing():
     # The diagnosis is the same whatever the NRCI says: the refusal and the
     # shape come from exact differences alone.
-    a = bs.answer("why is it undecided?", ao._program_text("L12"))
-    b = bs.answer("does it halt?", ao._program_text("L12"))
+    a = bs.answer("why is it undecided?", ao._program_text("L12"),
+                  quadratic=False)
+    b = bs.answer("does it halt?", ao._program_text("L12"), quadratic=False)
     assert a.answered and a.verified and "NRCI 1.0000" in a.text
     assert "B" in a.claim["shapes"] and "nrci" not in a.claim
     assert not b.answered and b.refusal == "UNDECIDED_WITHIN_BUDGET"

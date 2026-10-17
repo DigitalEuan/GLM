@@ -9,6 +9,30 @@
   "carrier-tag-width",
   "carrier-tie",
   "carrier-two-flips",
+  "hole-lattice-point",
+  "hole-malformed",
+  "hole-octad-pair",
+  "hole-patience-refused",
+  "hole-walk",
+  "locate-ambiguous",
+  "locate-clean",
+  "locate-dimension",
+  "locate-junction",
+  "locate-junction-crowded",
+  "locate-junction-moved",
+  "locate-moved",
+  "locate-point",
+  "locate-reply",
+  "locate-reply-confirmed",
+  "locate-reply-contradicted",
+  "locate-reply-no-tie",
+  "locate-uncertified",
+  "locate-unknown",
+  "nearest-address-ambiguous",
+  "nearest-address-junction",
+  "nearest-address-moved",
+  "nearest-address-point",
+  "nearest-address-uncertified",
   "report-hole-configuration"
  ],
  "rows": [
@@ -1615,5 +1639,5 @@
    "same_text": true
   }
  ],
- "source_digest": "abaf4656b4671a1b3196d0de232233971a2dae8b56f69f17b8d4bb46bfa8ab57"
+ "source_digest": "4e128cb99b93a1c60cd14df4e10427991823abdcda0f943c77f3c2e8192731ab"
 }
