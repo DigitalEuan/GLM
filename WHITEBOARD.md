@@ -5,12 +5,10 @@
 **Question.** If this session stopped now, what would the next one need to
 know to carry the round on?
 
-**Verdict.** No round is in flight: Phases 147 and 148 (the budget rule in
-the answering path, a deep hole read to its certificate by the `hole` kind,
-proved in `BudgetReading.lean`, 8 of 8 measured marks; and the guarded read in
-`nearest`, proved in `NearestAddress.lean`, 7 of 7 measured marks) are closed
-and recorded in `MASTER_PLAN.md`. The next round starts from the To-Do list,
-`STATUS.md` §2.1. The test-file sign-off is still owed (no pytest here).
+**Verdict.** No round is in flight: Phase 158 (the oscillator junction tried
+four ways, and the analogy method written down) is closed and recorded in
+`MASTER_PLAN.md`. The next round starts from the To-Do list, `STATUS.md`
+§2.1. The test-file sign-off is still owed (no pytest here).
 
 **Deciding figure.** 0 steps outstanding.
 
@@ -46,34 +44,22 @@ absence:
 
 ## Status
 
-**No round is in flight.** Phases 147 and 148 are closed. In order: the Lean
-files (`RequestProject/GLM/BudgetReading.lean`,
-`RequestProject/GLM/NearestAddress.lean`, proved), the frozen-path baseline
-(`reasoning/_data/budget_guard_baseline.json`, 202 cases), then the answering
-path (`reasoning/hole_reading.py` and the `hole` kind;
-`reasoning/nearest_address.py` and the address path of `nearest`; the column-3
-templates `hole` and `nearest_address`), the measurement modules, the tests
-(`tests/test_budget_reading.py`, `tests/test_nearest_address.py`) and the
-pre-registrations; then the measurements, in this order:
-`tools budget-guard-frozen --write`, `tools budget-reading --write --jobs 8`,
-`tools nearest-address --write`. The studies are
-[`studies/BUDGET_READING_STUDY.md`](studies/BUDGET_READING_STUDY.md) and
-[`studies/NEAREST_ADDRESS_STUDY.md`](studies/NEAREST_ADDRESS_STUDY.md); the
-record is [`MASTER_PLAN.md`](MASTER_PLAN.md), "Phase 147" and "Phase 148". 0
-steps of the phases are outstanding. Phase 148's predicted count of certified
-points was wrong (copied from a mis-summed Phase 143 figure); it is recorded
-in its study §7.2.
+**No round is in flight.** Phase 158 (the oscillator junction tried four
+ways; the analogy method written down) is closed. Done this round: the
+pre-registration of `OSCILLATOR_JUNCTION_STUDY.md`, committed before the
+variant module; `OscillatorJunction.lean` (0 `sorry`);
+`engineering/oscillator_junction.py` and `tools oscjunction`; the four
+censuses and the preservation set, stored; variant B shipped in
+`engineering/domains.py`; the Phase 157 census re-taken; the evaluation
+before and after (222 of 222, nothing moved); `tests/test_oscillator_junction.py`
+(6, run by hand with `tests/test_domains.py`: 18 of 18 pass); §7 of the
+study, §7.6 of `DOMAIN_WHEELS_STUDY.md`, §8 of `FRICTION_STUDY.md`;
+`MASTER_PLAN.md` Phase 158; `STATUS.md`; `SYSTEM.md`; `ITERATE.md`; the paper
+(§20.32); the READMEs. 0 steps of the phase are outstanding.
 
-**What this round invalidated, and re-took.** `runtime/` and
-`evaluation/cases.py` changed, so the query-escalation cache (`tools queryesc
---write`), the frozen-path comparison (`tools frozen-path --write`), the
-address read (`tools address-read --write`), the junction read (`tools
-junction-read --write`) and the typed plans (`tools plans --write`) were
-re-taken, then `corpus --refresh`.
-
-**One step owed: the release sign-off** (owed since Phase 134, now for
-Phases 135–148's new and changed test files too). pytest could not be
-installed in this session either (no package index reachable). The two new
-test files were run with a small runner calling each test function. Resume
-with `python3 -m pip install pytest`, then
+**One step owed: the release sign-off** (owed since Phase 134). pytest is
+still not installable here (no package index). Resume with
+`python3 -m pip install pytest`, then
 `PYTHONPATH=. python3 -m glm_universal.signoff --close --jobs 8`.
+
+Earlier rounds' records are in `MASTER_PLAN.md` (Phases 157, 156, …).

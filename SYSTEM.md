@@ -29,10 +29,10 @@ account is in
 | instrument | command | result |
 |---|---|---|
 | test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->5,397 tests across 181 of the 183 test files, 18,972 subtests, outside the document checks<!--/figure-->**, zero failures |
-| end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->212<!--/figure--> / <!--figure:evaluation-case-count-->212<!--/figure-->** — 149 answered, 28 refused as expected (all `boundary`, no `gap`), 0 unexpected refusals, 0 confidently wrong, 0 errored |
+| end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->222<!--/figure--> / <!--figure:evaluation-case-count-->222<!--/figure-->** — 149 answered, 28 refused as expected (all `boundary`, no `gap`), 0 unexpected refusals, 0 confidently wrong, 0 errored |
 | benchmark suites | `python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites, every suite above its baseline |
 | capability probes | `python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 errored, 0 surprises |
-| Lean development | `lake build` (repository root) | <!--figure:lean-files-->221 Lean files<!--/figure-->, **0 `sorry`** |
+| Lean development | `lake build` (repository root) | <!--figure:lean-files-->231 Lean files<!--/figure-->, **0 `sorry`** |
 | figures | `python3 -m glm_universal.figures --write` | regenerates `overlay/FIGURES.md`; every documented count |
 | corpus | `python3 -m glm_universal.corpus --check` | the tier contract, the archive partition, the coverage claim of `ENTRY.md`, every generated block and every derived cache — **current**, no drift |
 | construction ladder | `python3 -m glm_universal.tools ladder` | **462 / 568** queries named correctly with **0** wrong on the eleven-rung ladder, against **327** for the note's five rungs and **283** for the best single rung |
@@ -57,7 +57,15 @@ account is in
 | the lattice round (`L5` answers, all 23 types, the empty norms) | `python3 -m glm_universal.tools configuration-classifier`, `hole-census`, `empty-rungs`, `frozen-path`; `report hole configuration` | the answer rule names **44 / 44** deep-hole queries correctly, 0 refused, with **396** certified absences and **0** false; **20 / 23** Niemeier types certified as declared, **23 / 23** post hoc, `rho` **0.1929** at `(L5, 7680)` over all 23; norm 2 filled by `D12^2`, norm 256 empty; the frozen path kept **178 / 178** earlier cases' status; 10 of 14 marks ([`LATTICE_COMPLETION_STUDY.md`](studies/LATTICE_COMPLETION_STUDY.md)) |
 | the probe budget (the certifying reading's stopping rule) | `python3 -m glm_universal.tools probe-budget` | no barren stop and a budget of 1056 starts, proved enough for every type under a union-bound model (`GLM.ProbeBudget.budget_serves_every_type`); the model's share hypothesis holds on **46 / 46** (hole, seed) pairs; **23 / 23** references and **256 / 256** held-out deep holes certified, against **252 / 256** under a 60-start patience; median **96**, maximum **254** starts; 6 of 6 marks ([`PROBE_BUDGET_STUDY.md`](studies/PROBE_BUDGET_STUDY.md)) |
 | the budget rule in the answering path (`hole`) | `python3 -m glm_universal.tools budget-reading`; `tools budget-guard-frozen` | one deep hole read to its certificate under the budget rule (no barren stop, 1056 starts) on request, and `report deep holes` read under it: **256 / 256** held-out walks certified inside the walk, against **225** under the walk's patience reading; **0** disagreements where both certify (`GLM.BudgetReading.budget_agrees`); **0** readings at the budget, median **25**, maximum **174** starts; the frozen path **202 / 202** statuses kept; **8 / 8** scripts verify, **16 / 16** mutants rejected; 8 of 8 marks ([`BUDGET_READING_STUDY.md`](studies/BUDGET_READING_STUDY.md)) |
+| `L5` in the other deep-hole reports | `python3 -m glm_universal.tools hole-reports-l5`; `report hole classifier`, `report hole ladder`, `report hole failures` | each report keeps its round's answer verbatim and adds what the configuration reading `L5` says to that round's question: the sanity query **10 / 10** and the 44 queries **44 / 44** correct; the escalation gate at **8 / 8** sizes, first at **240** starts (the joint reading needed 1920), passing with ρ ≥ 1 at 480 (`GLM.HoleReportsL5.criterion_not_necessary`); the joint reading's four failures **4 / 4** correct, **10 / 10** types certified at 1920 starts; the frozen path **212 / 212** statuses kept, 3 / 3 old texts kept as prefixes; **4 / 4** scripts verify, **8 / 8** mutants rejected; 6 of 6 marks ([`HOLE_REPORTS_L5_STUDY.md`](studies/HOLE_REPORTS_L5_STUDY.md)) |
 | the operations ladder and GLM-BAT (an old-style machine learnt as a language) | `python3 -m glm_universal.tools ops-ladder` | the owner's DevOps note as a **97**-term register (0 layering violations, 97 distinct carriers, **14 / 14** cross-overs resolve); **25 / 25** machine runs, **18 / 18** English questions and **6 / 6** English-written programs as declared, 0 wrong; **78 / 78** lines read back; **41 / 41** column-3 scripts verify, **158 / 158** mutations rejected; H **185 / 242** edges monotone; 9 of 9 marks ([`OPERATIONS_LADDER_STUDY.md`](studies/OPERATIONS_LADDER_STUDY.md)) |
+| the machine reads what it carries (registers as files, typed plans and field answers through GLM-BAT) | `python3 -m glm_universal.tools carried-read` | the session's registers as **8,408** `@row.field=value;` entries in **11** tables (0 duplicated keys, the snapshot **1,965 / 1,965** with the element register); **174 / 174** stepwise chains admitted with **2,087** register reads, **102** question reads, **213** computed and **92** carried steps; a lie found at its step **121 / 121** (register), **54 / 54** (question), **42 / 42** (computed) (`GLM.CarriedRead.first_lie_drifts`); typed plans **42 / 42** admitted and **42 / 42** lies refused; field answers **7,716 / 7,716** admitted and **7,716 / 7,716** lies refused; **697 / 697** recorded texts unchanged; 12 of 12 measured marks ([`CARRIED_READ_STUDY.md`](studies/CARRIED_READ_STUDY.md)) |
+| the corpus as what the GLM knows (counted, not trained; the `corpus` query kind) | `python3 -m glm_universal.tools corpus-knowledge` | the repository and `source_material/` (zip members included) read by rule into folder, document, paragraph, sentence and token: **2,187** documents, **184,118** sentences, **2,655,147** tokens; next token **21.5%** on **25,435** novel held-out sentences against **6.9%** (most frequent token) and **2.7%** (order control), rising with every quarter of training documents; counts equal after halving and after reversing the documents (`GLM.CorpusKnowledge.train_append`, `train_perm`); words used like *seven*: *eight, ten, four, nine, five, six, …*; `define`, `context`, `similar`, `related`, `continue`, `spread`, every answer with its witness sentence and column 3 recounting it by brute force; 7 of 9 marks, K3, K8 and both amended marks missed ([`CORPUS_KNOWLEDGE_STUDY.md`](studies/CORPUS_KNOWLEDGE_STUDY.md)) |
+| the corpus's definitions graded, and a word's place on the lattice | `python3 -m glm_universal.tools corpus-definitions` | the paper's **27**-term glossary held out of the corpus and `define` graded against it by shared content words: the pattern ranking **17** against **17** for the first-mention control, the context ranking **26** against **17** (adopted by `corpus define`); every one of **11,157** words given a Leech address from its counts, read back exactly (`GLM.CorpusDefinitions.coord_le_cap`, `coord_mono`); with positional coordinates the number words find number words for **64 / 120** lattice neighbours against **1 / 120** for the control; `corpus address of X`; 3 of 8 marks, 3 of 6 amended marks ([`CORPUS_DEFINITIONS_STUDY.md`](studies/CORPUS_DEFINITIONS_STUDY.md)) |
+| friction: what holds when the question moves, contact over the whole prompt, stick-slip | `python3 -m glm_universal.tools friction` | the **222** evaluation questions moved by seven declared perturbations, each run scored hold / stick / slip: surface motion holds **625 / 650**; refusals read as refusals, **7** slips in **1,291** runs before `settle_question` and **0** after, with **1,136 / 1,291** holding; contact over the whole prompt **4,201** against **4,312** next words correct for the two-token patch, loaded **4,515**; the sticking reader never switches more (`GLM.Friction.held_switches_le`) and cuts returns **15 → 1**; 5 of 12 marks, 5 of 9 amended, 3 of 4 fix marks ([`FRICTION_STUDY.md`](studies/FRICTION_STUDY.md)) |
+| friction, the rest: the did-you-mean, the harness reading refusals, wear, a margin from the noise | `python3 -m glm_universal.tools friction-two` | the respelling restores **194 / 196** transposed-letter questions, **0** changed into another question; after it **193 / 194** typo runs hold, **0** slip, **0** scored `error`, every evaluation outcome unchanged; worn contact leaves the self-made valley (W1–W3 missed); the noise-set margin cuts returns **24 → 1** at **258 → 231** final readings; 7 of 14 marks, 1 of 2 amended, 2 of 2 shipped ([`FRICTION_TWO_STUDY.md`](studies/FRICTION_TWO_STUDY.md)) |
+| domain wheels with their junctions | `python3 -m glm_universal.tools domains` | five wheels W11–W15 (uniform motion; density, volume and amount; the mass-spring oscillator; inductors and the LC circuit; charge and energy over time), chosen by a census of the evaluation's questions, joined at ten declared junctions: *derive … across domains* answers **21 / 23** declared questions and refuses **9 / 9**, **0** wrong; union census **54 / 200** gained answers declared laws; 3 of 5 marks ([`DOMAIN_WHEELS_STUDY.md`](studies/DOMAIN_WHEELS_STUDY.md)) |
+| the oscillator junction | `python3 -m glm_universal.tools oscjunction` | the junction between wave kinematics (W9) and the mass-spring oscillator (W13) tried four ways under one declared rule, read through the reference circle: joining `frequency` only (B) is chosen and ships — **21 / 23** declared answers and **9 / 9** refusals kept, **0 / 249** shipped answers lost, **0** answers tying the oscillator to a rotating body (Phase 157's junction gave **6**); 4 of 4 marks for B ([`OSCILLATOR_JUNCTION_STUDY.md`](studies/OSCILLATOR_JUNCTION_STUDY.md)) |
 | GLM-BAT's inert-variable certificate (a loop with a growing counter, certified never to halt) | `python3 -m glm_universal.tools inert-counter` | **10 / 10** battery programs and **9 / 9** questions as declared, 0 wrong; **8 / 8** `never_inert` scripts verify, **40 / 40** mutations rejected; Phase 125's answers unchanged but M15's, **299 / 299** decided generated programs unchanged; **0 / 4** certified programs halt within 200000 steps; 7 of 7 marks ([`INERT_COUNTER_STUDY.md`](studies/INERT_COUNTER_STUDY.md)) |
 | GLM-BAT's counter-lasso certificates (halting and non-termination past the budget) | `python3 -m glm_universal.tools counter-lasso` | **12 / 12** battery programs and **17 / 17** questions as declared, 0 wrong — six loops of 40,003 to 2,000,003 steps answered *halts* with exact steps, outputs and exit code, two *never*; **20 / 20** `run_jump` and `never_lasso` scripts verify, **112 / 112** mutations rejected; Phases 125 and 126 unchanged but N2 and N3, **299 / 299** decided generated programs unchanged, program 206 newly certified *never*; every verdict agrees with a plain run (up to 2,500,000 steps); 7 of 7 marks ([`COUNTER_LASSO_STUDY.md`](studies/COUNTER_LASSO_STUDY.md)) |
 | GLM-BAT's constant bounds and repeated output (two more counter lassos) | `python3 -m glm_universal.tools constant-bound` | **10 / 10** battery programs with the declared verdict, steps, outputs and exit code (**8 / 10** exactly, K6 and K10 jumping a different pass than declared by hand) and **15 / 15** questions as declared — L10 and L11 now *halt* after 60,002 and 40,003 steps; **18 / 18** scripts verify, **112 / 112** mutations rejected; every earlier answer and all **300** generated programs unchanged; every verdict agrees with a plain run; 6 of 7 marks ([`CONSTANT_BOUND_STUDY.md`](studies/CONSTANT_BOUND_STUDY.md)) |
@@ -118,7 +126,7 @@ taken from a run that selects them.
 The package is `glm_universal` **v1.23.0**: eleven sub-packages, 152 modules,
 **<!--figure:registers-->8 registers<!--/figure-->** holding 1,143 carriers (physics 726, chemistry 118, molecules
 51, mathematics 22, lexicon 149, spatial 28, harmonics 28, economics 21) beside
-a 45-class comparison register, **<!--figure:query-kinds-->27 query kinds<!--/figure-->**
+a 45-class comparison register, **<!--figure:query-kinds-->28 query kinds<!--/figure-->**
 one of which dispatches **<!--figure:report-subjects-->67 report subjects<!--/figure-->**, and 3 tasks.
 
 ---
@@ -141,6 +149,44 @@ through the LLVQ class table rather than by scanning the code, on integers
 scaled by a common denominator, which is exact and is what makes a whole-corpus
 measurement affordable. Write-up:
 [`LLVQ_TABLE_STUDY.md`](studies/LLVQ_TABLE_STUDY.md).
+
+**The corpus as what it knows.** Everything the project has written — the
+studies, the state documents, the Lean development, the Python package, the
+JSON and CSV the instruments emit, and the supplied `source_material/`
+including its zip archives — is read by rule into folder, document,
+paragraph, sentence and token and *counted* (`glm_universal/knowledge/`):
+the one- and two-token continuation tables, document and folder frequency,
+and content-word co-occurrence. The counts are additive, so the model grows
+with the corpus and always equals a recount (`GLM.CorpusKnowledge`), and
+every count has a witness sentence. The `corpus` query kind reads them:
+what the corpus says a term is, the words around it at sentence, paragraph
+or document scale, the words used like it, its own continuation of a phrase
+(stopping at a tie), and how far it reaches. Write-up:
+[`CORPUS_KNOWLEDGE_STUDY.md`](studies/CORPUS_KNOWLEDGE_STUDY.md). Since
+Phase 155 `define` orders the sentences that define a term by how much of
+the term's corpus context they carry — graded against the paper's held-out
+glossary, that ranking beats the term's first mention where the pattern
+ranking alone did not — and a word has a Leech address from its company
+beside the corpus's 12 most frequent tokens, on the same lattice as a
+carrier and a declaration, with the number words landing among number words
+(`corpus address of seven`). Write-up:
+[`CORPUS_DEFINITIONS_STUDY.md`](studies/CORPUS_DEFINITIONS_STUDY.md).
+Since Phase 156 `GLM.py` settles a question before reading it
+(`settle_question`): in a one-line question without quotation marks, runs of
+spaces are one space, and a leading *tell me* is a courtesy unless *about*,
+*whether* or *if* follows. Every evaluation question is returned unchanged;
+moved by seven declared perturbations, 1,136 of 1,291 evaluation questions
+hold and none is answered wrongly, where before doubled spaces stuck 21 and a
+leading *can you tell me* read the *me* of six as the dimension `M`. Write-up:
+[`FRICTION_STUDY.md`](studies/FRICTION_STUDY.md).
+Since Phase 157 a batch question the routed path refuses is asked once more
+with its misspelt words respelt (`runtime/respell.py`: the known words one
+edit away, the most frequent first, the word address of Phase 155 deciding a
+tie) and the respelt answer, after a `RESPELT` line, replaces the refusal only
+if it answers: 193 of 194 transposed-letter evaluation questions hold where
+41 of 196 did, no evaluation outcome moves, and the harness reads a `REFUSED`
+line as a refusal. Write-up:
+[`FRICTION_TWO_STUDY.md`](studies/FRICTION_TWO_STUDY.md).
 
 **The ladders it reads at.** The construction ladder — `Z²⁴`, `D₂₄`,
 Construction `A`, `B` and `C`, all generated from their conditions, and the
@@ -1075,6 +1121,16 @@ rules are `GLM.BudgetReading` (`budget_agrees`,
 `tools budget-reading`. Write-up:
 [`BUDGET_READING_STUDY.md`](studies/BUDGET_READING_STUDY.md).
 
+**`L5` in the other deep-hole reports.** Since Phase 149 the three earlier
+deep-hole reports answer by the configuration reading as well as by their own
+rounds' readings. `reasoning/hole_reports_l5.py` reads the existing stores
+(under a second) and `report hole classifier`, `report hole ladder` and
+`report hole failures` each keep their answer verbatim and add an `L5`
+clause, a step and `l5_*` keys that column 3 recomputes. The rules are
+`GLM.HoleReportsL5` (`rule_fires_of_resolvesAt`, `gate_of_rule`,
+`criterion_not_necessary`). Recomputed by `tools hole-reports-l5`. Write-up:
+[`HOLE_REPORTS_L5_STUDY.md`](studies/HOLE_REPORTS_L5_STUDY.md).
+
 **The guarded read in `nearest`.** Since Phase 148 `nearest` has an address
 path: `nearest [k] to <carrier> moved <n> by <step> [word <w>]`, or `nearest
 to` 24 exact coordinates. `reasoning/nearest_address.py` ranks the point
@@ -1144,8 +1200,8 @@ so a confident wrong answer is worse than a refusal). Write-up:
 [`CAPABILITY_ASSESSMENT.md`](CAPABILITY_ASSESSMENT.md).
 
 **The Lean development, addressed.** `reasoning/lean_address.py` gives each of
-the <!--figure:lean-declarations-->5,360<!--/figure--> declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly <!--figure:lean-declarations-->5,360<!--/figure-->/<!--figure:lean-declarations-->5,360<!--/figure--> with 0 coordinate errors;
+the <!--figure:lean-declarations-->5,489<!--/figure--> declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly <!--figure:lean-declarations-->5,489<!--/figure-->/<!--figure:lean-declarations-->5,489<!--/figure--> with 0 coordinate errors;
 3989 distinct addresses, and the quantiser adds no conflation of its own;
 nearest-by-address shares a file 817 times against 35 for a SHA-256 control and
 29 for a seeded reshuffle, with chance at ≈ 0.80 %. `report lean`.
@@ -1188,8 +1244,8 @@ twenty questions rather than three samples. `tools oracle`. Write-up:
 **The field surface, and what it was worth.** `runtime/fields.py` answers one
 named field of one named row — `field atomic_weight_u of carbon` — over
 <!--figure:fieldsurface-tables-->14<!--/figure--> declared tables holding
-<!--figure:fieldsurface-rows-->14,087<!--/figure--> rows and
-<!--figure:fieldsurface-pairs-->82,585<!--/figure--> addressable `(row,
+<!--figure:fieldsurface-rows-->14,577<!--/figure--> rows and
+<!--figure:fieldsurface-pairs-->85,396<!--/figure--> addressable `(row,
 field)` pairs: the element and molecule source rows, one table per register's
 carrier attributes, the Lean address book, the package's own top-level
 definitions, and a registry of declared zero-argument functions whose returned
@@ -1386,7 +1442,7 @@ units reach `PROJECT_DIRECTIVES.md` (120 before Phase 78; see
 [`studies/ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) §5g).
 
 The six instruments in the ledger beside the
-<!--figure:test-files-->198 test files<!--/figure--> are `lean-build`,
+<!--figure:test-files-->209 test files<!--/figure--> are `lean-build`,
 `lean-sorry-free`, `capabilities`, `benchmarks`, `evaluation` and `figures`.
 (The seventh, `lean-copies-identical`, went with the second copy of the Lean
 tree in Phase 78: the development lives only in `overlay/glm_lean/`.) Editing a document makes exactly the units that
@@ -1442,7 +1498,7 @@ cd overlay
 PYTHONPATH=. GLM_EXHAUSTIVE=1 python3 -m pytest glm_universal/tests -q
 PYTHONPATH=. python3 -m glm_universal.capabilities           # 33 probes
 PYTHONPATH=. python3 -m glm_universal.benchmarks             # 5 suites
-PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8    # <!--figure:evaluation-cases-->212 CLI cases<!--/figure-->
+PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8    # <!--figure:evaluation-cases-->222 CLI cases<!--/figure-->
 PYTHONPATH=. python3 -m glm_universal.figures --write        # regenerate FIGURES.md
 PYTHONPATH=. python3 -m glm_universal.corpus --refresh       # every derived artefact
 PYTHONPATH=. python3 -m glm_universal.corpus --check          # exit 1 on any drift

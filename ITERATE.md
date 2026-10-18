@@ -6,7 +6,7 @@
 
 **Verdict.** Orient from four short reads, run the cheapest gate that could fail, and close the round with one incremental command: write the finding down, refresh, check, `signoff --close`.
 
-**Deciding figure.** The suite is <!--figure:test-files-->198 test files<!--/figure--> and 6 instruments, each signed against a digest of everything it depended on, so a change re-runs what it touched rather than all of it.
+**Deciding figure.** The suite is <!--figure:test-files-->209 test files<!--/figure--> and 6 instruments, each signed against a digest of everything it depended on, so a change re-runs what it touched rather than all of it.
 
 **Recomputed by.** `glm_universal.signoff.ledger.plan`
 
@@ -100,6 +100,15 @@ If either reports drift before you have changed anything, the previous round
 did not close. Fix that first, and record it: an unclosed round is the one
 thing that makes the next three rounds slower.
 
+**When a design question is stuck, try an analogy.** The owner's method,
+first used in the friction study and written down in
+[`studies/FRICTION_STUDY.md`](studies/FRICTION_STUDY.md) §8: name a
+well-established mathematical or physical system the problem resembles, write
+down which of its parts map onto the GLM and which do not, and turn each
+mapped part into a declared mechanism with a control and a mark before
+anything is measured. Phase 158 used it for the oscillator junction (the
+reference circle; [`studies/OSCILLATOR_JUNCTION_STUDY.md`](studies/OSCILLATOR_JUNCTION_STUDY.md)).
+
 ## 2. Work — the three gates
 
 Run the **cheapest gate that could fail on what you just did**. That is the
@@ -111,7 +120,7 @@ whole of the speed discipline; everything below is which gate that is.
 | **documents, unchanged** | the same command | answers from the stored verdict in about three seconds when nothing it reads has moved; `--check --all` forces the full pass | picking the round up |
 | **changed** | `python3 -m glm_universal.signoff --run-everything --jobs 8` | every test unit and instrument whose closure moved, and nothing else | after any code, data or Lean edit |
 | **close** | `python3 -m glm_universal.signoff --close --jobs 8` | the release question -- every unit and instrument signed with the exhaustive cases on -- paying only what is owed: unsigned, changed, failed, or signed fast; then `--verify-release` | once, closing the round, and again if it was interrupted |
-| **release, from scratch** | `python3 -m glm_universal.signoff --release --jobs 8` | all <!--figure:test-files-->198 test files<!--/figure--> and all 6 instruments, ledger ignored | only when the rule itself changed (`signoff/rules.py`), or on purpose; never as a routine close |
+| **release, from scratch** | `python3 -m glm_universal.signoff --release --jobs 8` | all <!--figure:test-files-->209 test files<!--/figure--> and all 6 instruments, ledger ignored | only when the rule itself changed (`signoff/rules.py`), or on purpose; never as a routine close |
 
 All three are run from `overlay/` with `PYTHONPATH=.`.
 

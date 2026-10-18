@@ -6,7 +6,7 @@
 
 **Verdict.** Most of the cost was work repeated on things that had not moved, and a cache keyed on what it is derived from does not repeat it.
 
-**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->13,798<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
+**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->14,243<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
 
 **Recomputed by.** `glm_universal.corpus.cost.cost_report`
 
@@ -73,8 +73,8 @@ nothing.
 <!-- generated: cost-addresses -->
 | book | units | decodes from nothing | decodes now | reused |
 |---|---|---|---|---|
-| Lean declarations | 5,360 | 9,966 | 0 | 10,720 |
-| corpus sections | 1,951 | 3,832 | 0 | 3,902 |
+| Lean declarations | 5,489 | 10,201 | 0 | 10,978 |
+| corpus sections | 2,066 | 4,042 | 0 | 4,132 |
 
 Reuse is checked, not assumed: each rebuild re-decodes a sample of the answers it reused and reports any that moved (4 sampled in the declaration book, 4 in the document book, none moved).
 <!-- end generated -->
@@ -93,7 +93,7 @@ nothing and requiring the two books to be equal byte for byte.
 | reading | value |
 |---|---|
 | blocks quoting the report | 5 |
-| evaluation cases per report | 212 |
+| evaluation cases per report | 222 |
 | reports taken per check, before | 5 |
 | reports taken per check, now | 0 |
 | stored report | fresh |
@@ -122,7 +122,7 @@ works for tables and not for a sentence, and the sentences were where the drift
 lived. The block mechanism is now available at the size of a phrase:
 
 ```markdown
-the suite is <!--figure:test-files-->198 test files<!--/figure--> today
+the suite is <!--figure:test-files-->209 test files<!--/figure--> today
 ```
 
 The markers are HTML comments, so a reader sees only the number. `--refresh`
@@ -909,5 +909,5 @@ that pays for it, with the storage, loading, digesting and rebuilding of the
 table counted on the table's side rather than assumed away.
 
 <!-- generated: cost-tier -->
-**Rebuilding both address books from nothing decodes 13,798 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 212 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  593 figures inside sentences, across 32 documents, are emitted rather than typed.
+**Rebuilding both address books from nothing decodes 14,243 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 222 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  593 figures inside sentences, across 32 documents, are emitted rather than typed.
 <!-- end generated -->

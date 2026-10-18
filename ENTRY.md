@@ -167,6 +167,10 @@ first and descend into the few that bear on the task.
 [`ADDRESS_RETRIEVAL_STUDY.md`](studies/ADDRESS_RETRIEVAL_STUDY.md) ·
 [`STACK_RELAY_STUDY.md`](studies/STACK_RELAY_STUDY.md) ·
 [`CORPUS_ADDRESS_STUDY.md`](studies/CORPUS_ADDRESS_STUDY.md) ·
+[`CORPUS_KNOWLEDGE_STUDY.md`](studies/CORPUS_KNOWLEDGE_STUDY.md) ·
+[`CORPUS_DEFINITIONS_STUDY.md`](studies/CORPUS_DEFINITIONS_STUDY.md) ·
+[`FRICTION_STUDY.md`](studies/FRICTION_STUDY.md) ·
+[`FRICTION_TWO_STUDY.md`](studies/FRICTION_TWO_STUDY.md) ·
 [`ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) ·
 [`HEXCOLOUR_STUDY.md`](studies/HEXCOLOUR_STUDY.md) ·
 [`SEARCH_LOOP_STUDY.md`](studies/SEARCH_LOOP_STUDY.md) ·
@@ -186,7 +190,8 @@ first and descend into the few that bear on the task.
 **Registers and the universality claim.**
 [`HARMONY_STUDY.md`](studies/HARMONY_STUDY.md) ·
 [`ECONOMICS_STUDY.md`](studies/ECONOMICS_STUDY.md) ·
-[`ELEMENT_COMPLETION_STUDY.md`](studies/ELEMENT_COMPLETION_STUDY.md)
+[`ELEMENT_COMPLETION_STUDY.md`](studies/ELEMENT_COMPLETION_STUDY.md) ·
+[`DOMAIN_WHEELS_STUDY.md`](studies/DOMAIN_WHEELS_STUDY.md)
 
 **Constants, and what a signature is worth.**
 [`WOBBLE_LANDSCAPE_STUDY.md`](studies/WOBBLE_LANDSCAPE_STUDY.md)

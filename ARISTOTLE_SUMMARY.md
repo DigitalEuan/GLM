@@ -1,47 +1,16 @@
-# Summary of changes for run c52d76f0-fe22-4188-b7c2-12ec941d3e83
-I ran one round of experiments (Phase 156), using your friction analogy to choose them. Each mechanism got success criteria and a control, committed before any measurement: 12 original criteria, 9 amended ones fixed after the first run, and 4 for the fixes. Write-up: `studies/FRICTION_STUDY.md`.
+# Summary of changes for run 51e503fe-59af-43ef-b67c-1cbdd5148103
+I checked every file the Phase 158 summary names. Nothing is missing. Both studies and all the Lean files are in the repository.
 
-**1. Moving the questions — what holds.** I took all 222 evaluation questions and moved each one a little in seven declared ways: add `?`, capitalise, double the spaces, prefix *please*, prefix *can you tell me*, transpose two letters, drop a *the*. Each run was scored *hold* (still right), *stick* (refuses) or *slip* (answers wrongly), 1,291 runs in all.
-- **Surface changes hold:** 625 of 650 runs.
-- **Wording changes mostly stick rather than slip.** Under motion the machine refuses rather than guesses.
-- **Of the 26 slips, 19 were refusals the evaluation harness can't read** (a `REFUSED` line from the stepwise planner). The other 7 were real wrong answers, all from *can you tell me*: six read the "me" as the dimension M, e.g. *"can you tell me meaning of water" → 'me' denotes dimension M*.
-- **Fix:** `GLM.py` now has `settle_question`. It collapses runs of spaces, and treats a leading *tell me* as politeness unless *about*, *whether* or *if* follows.
-- **After the fix, 1,136 of 1,291 moved questions hold and none slips.** Doubled spaces and *can you tell me* now hold on all 222.
-- **Every evaluation question passes before and after the fix, and every outcome is the same.** One answer line still differs: a lattice distance in `corpus address of seven` changed because the corpus is the project's own text and grew between runs. That criterion asked for identical lines, so it is recorded as missed.
+**What I found**
+- `studies/FRICTION_STUDY.md` is there, including the §8 note on using analogy as a method. `studies/OSCILLATOR_JUNCTION_STUDY.md` is there too.
+- **The Lean files are not at the repository root.** They live under `overlay/glm_lean/RequestProject/`, which `lakefile.toml` names as the source folder. The last summary wrote the new file as `RequestProject/GLM/OscillatorJunction.lean`. That path leaves off the `overlay/glm_lean/` part, so it looks missing if you search from the root. The real file is `overlay/glm_lean/RequestProject/GLM/OscillatorJunction.lean`.
+- **Count:** there are 232 Lean files, 231 under `GLM/` plus `Main.lean`. That matches the 231 that `STATUS.md` reports, since its count covers only `GLM/`. Every Lean module named in an `import` line exists.
+- **Build:** I rebuilt the whole library with `lake build`. It succeeded with no errors, no `sorry` and no added axioms. The Phase 158 theorems use only the standard axioms.
+- I also checked every `.md`, `.lean` and `.py` path mentioned in the main documents and studies. The few that don't resolve are intentional. They name files inside `source_material/GLM-main.zip`, files folded into others in earlier rounds (e.g. `CubeStabiliser.lean`, now `Cube/Stabiliser.lean`), or example file names used in the text.
 
-**2. Contact over the whole prompt.** The text model picks the next word from the last two words only (a contact patch of two asperities). I tried weighting each candidate by how many of the prompt's words it is associated with (real contact area). Test: 1,000 held-out sentences.
-- **At full weight it does worse:** 4,201 correct next words against 4,312.
-- **The signal is real but small:** each variant beats the same rule driven by an unrelated sentence's words.
-- **Kept under the two-word count, it gains 203 correct words but loses precision.**
-- **Continuations escape the corpus's deepest rut** (*"… the same way"*), but then fall into new ruts of their own.
+**What was actually wrong, and the fixes**
+1. **Properties table:** 261 of the 599 entries still pointed at the old path `RequestProject/GLM/…`. That is probably why the Lean files looked absent from your side. I pointed each one at `overlay/glm_lean/RequestProject/GLM/…`. No status changed (530 proved, 69 in progress), and every entry's file now exists and contains the named declaration.
+2. **Visibility:** I published the study documents, the Lean files and the main project documents, so they should now show up for you.
+3. **`STATUS.md`:** I added a short "Where the files are" paragraph. It says where the Lean files live, how to read a bare `RequestProject/…` path in older records, and what this check found. Editing `STATUS.md` made three generated blocks in other study files go stale, so I ran the document-update step: the address book and a block in `studies/CORPUS_ADDRESS_STUDY.md` were refreshed. `python3 -m glm_universal.corpus --check` now reports `current`. The end-to-end evaluation still reports no failures, with all 46 expected refusals at `boundary`.
 
-**3. Stick-slip — a reading that holds until clearly beaten.** I read sentences word by word and guessed which of the project's 138 directories each came from, with and without a "hold your guess" margin.
-- **The holding reader never changes its mind more often.** This is proved in Lean for any margin.
-- **It almost eliminates flip-flops** (returns to an earlier guess: 15 down to 1).
-- **But it ends correct less often** (232 against 272). Most of the reader's changes of mind carry information. Holding a guess only helps where the swings are noise.
-
-**Lean.** `overlay/glm_lean/RequestProject/GLM/Friction.lean` has no `sorry` and uses only the standard axioms. It proves:
-- the holding reader switches no more often than the leader (`held_switches_le`, `stick_switches_le`);
-- the held reading always stays within the margin of the leader (`held_within_margin`);
-- the contact weighting never overturns a large lead, and with no prompt words it ranks exactly like the two-word count (`contact_keeps_large_lead`, `contact_empty_prompt`).
-
-The full `lake build` passed earlier in this session, and the new module was rebuilt after the last edit.
-
-**Score:** 5 of 12 original criteria, 5 of 9 amended, 3 of 4 fix criteria. The misses are kept as misses.
-
-**Status of checks:**
-- The new tests (`tests/test_friction.py`, 17 of 17) pass, run by hand because pytest can't be installed here.
-- The document check (`corpus --check`) is current, and the full evaluation passes 222 of 222.
-- `signoff --close` still needs pytest and is still outstanding.
-- Running some existing test files by hand turned up older failures, recorded in `STATUS.md`:
-  - `runtime/session.py` is 4,716 lines, over its test's 4,500 limit.
-  - `test_figures` fails on the stored suite sentence (*183 test files*), which only a pytest sign-off re-takes.
-  - Four test files had no row in the tests README; I added them.
-
-**Other updates:** `tools friction`, `MASTER_PLAN.md`, `STATUS.md`, `SYSTEM.md`, `WHITEBOARD.md`, the paper (§20.30) and the package READMEs. Everything is committed and pushed.
-
-**Next steps** (`STATUS.md` §2.1, item 4):
-- **Typos are the main remaining weak spot:** 155 of 196 transposed-letter questions are refused. A "did you mean" that reads a word by spelling and by usage is the candidate; it changes refusals the evaluation pins, so it needs a before/after comparison.
-- Let the harness read `REFUSED` lines.
-- Add "wear" so continuations stop reinforcing themselves.
-- Try a holding margin set from how noisy the leader is.
+Everything is committed and pushed. This run was the file check only: no new development round was taken, so the To-Do list in `STATUS.md` §2 is unchanged and Phase 159 is still open.

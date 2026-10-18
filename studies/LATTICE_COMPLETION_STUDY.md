@@ -354,5 +354,8 @@ unchanged. The new case, `report-hole-configuration`, passes.
   starts. A rule that sets the patience from the vertex count would have
   certified them as declared.
 * **The other report subjects** still name a deep hole with the ladder's
-  readings; only `report hole configuration` answers by `L5`.
+  readings; only `report hole configuration` answers by `L5`. *(Taken by
+  Phase 149: `report hole classifier`, `ladder` and `failures` each keep
+  their answer and add an `L5` clause —
+  [`HOLE_REPORTS_L5_STUDY.md`](HOLE_REPORTS_L5_STUDY.md).)*
 * **The statistics count** is now 57 (§4); no bit score was computed.

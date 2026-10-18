@@ -5,7 +5,7 @@
 
 **Question.** What has each phase of the wiring plan delivered, and what does the next round start from?
 
-**Verdict.** Phases 147 and 148 are closed: the budget rule and the guarded read are in the answering path. A deep hole is read to its certificate on request (the `hole` kind, `BudgetReading.lean`; 8 of 8 measured marks), and `nearest` ranks a moved carrier or 24 coordinates with the guarded read certifying the head and the gap (`NearestAddress.lean`; 7 of 7 measured marks). Before them closed Phase 146 (the question in the answering path; 8 of 10 marks) and Phase 145 (time and the question; 9 of 9 marks). Phase 149 starts from the To-Do list in [`STATUS.md`](STATUS.md) §2.
+**Verdict.** Phase 158 is closed: taken at the owner's request, the junction between wave kinematics and the mass-spring oscillator was tried four ways under one declared rule, read through the reference circle — joining `frequency` only keeps all 21 declared answers, all 9 refusals and all 249 shipped answers, and gives no answer tying the oscillator to a rotating body where Phase 157's junction gave 6, so it now ships (`OscillatorJunction.lean`; 4 of 4 marks for the chosen variant); and the analogy method behind the friction study is written down for future rounds. Before it closed Phase 157 (five domain wheels with their junctions, and friction, the rest). Phase 159 starts from the To-Do list in [`STATUS.md`](STATUS.md) §2.
 
 **Deciding figure.** Every closed phase names what was built, where it lives, and how to see it recompute itself.
 
@@ -24,8 +24,8 @@ addressing. Each item says what was built, where it lives, and how to see it
 recompute itself.
 
 Everything below is reachable from the package's public API and from the query
-runtime — **<!--figure:query-kinds-->27 query kinds<!--/figure-->**, **<!--figure:report-subjects-->67 report subjects<!--/figure-->** and **<!--figure:registers-->8 registers<!--/figure-->** — is
-covered by the test suite (<!--figure:test-files-->198 test files<!--/figure-->),
+runtime — **<!--figure:query-kinds-->28 query kinds<!--/figure-->**, **<!--figure:report-subjects-->67 report subjects<!--/figure-->** and **<!--figure:registers-->8 registers<!--/figure-->** — is
+covered by the test suite (<!--figure:test-files-->209 test files<!--/figure-->),
 and — where it is a report or a task — has a generated column-3 script that
 recomputes the claim in a **fresh interpreter** and fails if anything differs.
 
@@ -182,6 +182,591 @@ written.  A phase is a record of a round, so it is archived by the same rule
 as everything else: only the open phase is state.
 
 ---
+
+## Phase 158 — the oscillator junction, tried four ways; the analogy method written down
+
+**Status: closed this session.** Taken at the owner's request: the second half
+of `STATUS.md` To-Do item 5 (the W9/W13 junction that makes an oscillator's
+angular frequency a rotating body's angular velocity), which the owner
+expected to "take some experimentation to see what works best"; and a note
+recording that the friction study was a test of a method — using an
+established mathematical system as an analogy for a development problem,
+applied in the way that works for the GLM — which may be useful in future
+rounds. The pre-registration
+([`studies/OSCILLATOR_JUNCTION_STUDY.md`](studies/OSCILLATOR_JUNCTION_STUDY.md)
+§§0–6: four variants, marks O1–O4 and a choice rule) was committed before the
+variant module was written. **4 of 4 marks for the chosen variant (B).**
+Tests: `tests/test_oscillator_junction.py` (6) and the updated
+`tests/test_domains.py` (12), run by hand: 18 of 18 pass (pytest is not
+installed here).
+
+**In one line.** Of four junctions between wave kinematics and the oscillator,
+joining `frequency` only (B) keeps every declared and every shipped answer and
+gives no answer tying the oscillator to a rotating body, where Phase 157's
+junction gave 6; it now ships.
+
+**What was built.**
+* `RequestProject/GLM/OscillatorJunction.lean` (no `sorry`, standard axioms):
+  under Phase 157's junction `angular_frequency * torque = power` is derivable
+  (`rotor_chain_turn_and_rate`); it is refused once `angle` is split
+  (`rotor_chain_refused_rate_only`) while the wave's period survives
+  (`wave_period_rate_only`); and it is refused with W4/W9 left out
+  (`rotor_chain_refused_reference_circle`), where the reference-circle
+  identity is derivable (`reference_circle_identity`).
+* `glm_universal/engineering/oscillator_junction.py` (the four variant
+  junction tables, the battery, the preservation set, the census and the
+  grading per variant, the choice); `tools oscjunction [--write]`; the four
+  censuses in `engineering/_data/oscillator_junction.json`, the evaluation
+  comparison in `engineering/_data/oscillator_junction_frozen.json`.
+* `engineering/domains.py`: W9/W13 joins `frequency` only, and the split angle
+  is a declared non-identity with its reason.
+* `studies/FRICTION_STUDY.md` §8: the analogy method, as the owner described
+  it, with what it contributed to the friction rounds and how to use it in
+  future ones; `ITERATE.md` points to it.
+
+**Measured.** Battery (of 23 / of 9): A 21 / 9, B 21 / 9, C 17 / 9, D 21 / 9,
+no wrong answer anywhere. Preservation (249 shipped answers among 24150
+questions): A, B, C lose none, D loses 8 (Phase 66's shaft power through a
+wave's angle and frequency). Census, re-read: not-entailed oscillator answers
+A 6 (the rotor chain), B 0, C 0, D 0; entailed and labelled A 11, B 9, C 0,
+D 11. B is chosen by the declared rule. The evaluation gives all 222 cases the
+same outcome and answer line before and after the change. The Phase 157
+census re-taken under B: 99 gained rows, 15 under the post-hoc reading, 12
+right (the rest the RC time constant).
+
+**Faculties.** *derive* moved (6 rotor-chain answers and the reference-circle
+identity no longer derived across domains; every declared answer kept);
+*refuse* and *table* did not move.
+
+**What it invalidated.** The Phase 157 census (re-taken and stored); the
+corpus caches named by `corpus --check` (re-taken with `corpus --refresh`).
+Two evaluation cases, `report-relay` and `report-anonymous`, pin goal-query
+counts that moved with the round's Lean file (843 → 845); they were re-pinned
+in `evaluation/cases.py`, claims unchanged, and the eight measurement caches
+that read the case list were re-taken (`queryesc`, `budget-guard-frozen`,
+`frozen-path`, `hole-reports-l5`, `ties-ladder-frozen`, `nearest-question`,
+`budget-reading`, `nearest-address`; every mark as before). The CLI
+evaluation after the close: 222 of 222 pass, 0 wrong. The test-file sign-off is still owed (pytest
+not installable).
+
+**Left.** Which body drives the wave (a frame that names the wave's source
+would keep the reference-circle identity and the shaft-power answers without
+the rotor chain); a coupled-oscillator question form
+([`OSCILLATOR_JUNCTION_STUDY.md`](studies/OSCILLATOR_JUNCTION_STUDY.md) §7.6).
+
+---
+
+## Phase 157 — five domain wheels with their junctions, and friction, the rest
+
+**Status: closed this session.** Taken at the owner's request: whether more
+wheels or domains are now required, with junctions where applicable (the
+strongest domains being evident from what fails), and the four lines Phase
+156 left — typos, the harness reading `REFUSED`, wear, a margin from the
+leader's noise. Two pre-registrations, each committed before what it judges:
+[`studies/DOMAIN_WHEELS_STUDY.md`](studies/DOMAIN_WHEELS_STUDY.md) (marks
+D1–D5) and [`studies/FRICTION_TWO_STUDY.md`](studies/FRICTION_TWO_STUDY.md)
+(T1–T5, H1–H2, W1–W3, N1–N4; amended T1′, T2′ after the first offline
+measurement; shipped T1″, T2″ before the survey). **Domains: 3 of 5 marks
+(D2, D4, D5). Friction: 7 of 14 marks (T3, T4, H1, H2, N1, N3, N4), 1 of 2
+amended (T1′), 2 of 2 shipped (T1″, T2″).** Tests:
+`tests/test_domains.py` (12) and `tests/test_friction_two.py` (10), run by
+hand: 22 of 22 pass (pytest is not installed here).
+
+**In one line.** Five domain wheels (uniform motion; density, volume and
+amount; the mass-spring oscillator; inductors and the LC circuit; charge and
+energy over time) answer 21 of 23 declared questions across domains with no
+wrong answer; a did-you-mean read by spelling and use, count first, reads
+back 194 of 196 transposed-letter questions, so 193 of 194 typo runs hold;
+wear and a noise-set margin do not do what was hoped.
+
+**What was built.**
+* `RequestProject/GLM/DomainWheels.lean` and `RequestProject/GLM/FrictionTwo.lean`
+  (no `sorry`): over the naive union of the oscillator and LC wheels the
+  conflation `spring_constant * inductance * capacitance = mass` is derivable
+  (`oscillator_naive`) and once `angular_frequency` is split it is not
+  (`oscillator_refused_split`); the swept volume is derivable across the
+  declared junctions (`swept_volume_licensed`); the re-read never takes an
+  answer away (`reread_keeps_answer`, `reread_refuses_iff`); the noise-set
+  reader switches no more often than the leader (`noise_switches_le`); wear
+  bounds the touches (`worn_touches_le`).
+* `glm_universal/engineering/domains.py` (the demand census, wheels W11–W15,
+  ten junctions and the declared non-identities, the frame *derive X from Y
+  … across domains*, the census of the union), `domains_reread.py`,
+  `domains_study.py`, `evaluation/domain_cases.py`; `tools domains
+  [--census] [--write]`; the frame in `engineering/speak.py`.
+* `glm_universal/runtime/respell.py` (the vocabulary table from the corpus,
+  one-edit candidates, use read on the word address of Phase 155, the edit
+  replayed on the original's case); `GLM.py` re-asks a refused batch question
+  respelt and prints the respelt answer, after a `RESPELT` line, only when it
+  answers (`GLM_RESPELL=0` turns it off).
+* `evaluation/harness.py` reads a `REFUSED` line as a refusal.
+* `glm_universal/knowledge/friction_two.py` (worn contact, the noise-set
+  reader) and `friction_two_study.py`; `tools friction-two [--write]
+  [--survey]`.
+* The address-query solvers (`nearest`, `hole`, `locate` and the question at
+  a tie) moved unchanged from `runtime/session.py` to
+  `runtime/reports/questions.py`, putting the session back under its own
+  4,500-line budget (4,015 lines; it was 4,716).
+
+**Measured.** Domains: the census of the evaluation's questions put
+`density`, `length`, `time`, `speed`, `molar_mass`, `volume`, `period` and
+`angular_frequency` at the top of the names no wheel held; the battery
+answers 21 of 23 with the declared law and refuses 9 of 9, 0 wrong (D1 missed:
+*energy from power and time* and its inverse are refused as ambiguous,
+because a capacitor's stored energy is reachable across the charge junction);
+every demanded name is held and the twelve axioms are consistent at SI7 (D4);
+54 of 200 gained answers of the union census are declared laws (D3 missed;
+104 of 116 under the post-hoc reading of the declaration's words, not a
+mark); the ten wheels and the union rule are byte-identical (D2). Friction:
+the respelling restores 194 of 196 typo questions with none changed into
+another question (T1′; T1 missed on the first measurement, 12 changed); use
+alone never beats spelling (T2, T2′ missed), count first with use under load
+equals spelling and beats the wrong company (T2″); after the round 193 of
+194 typo runs hold, 0 slip, 0 runs scored `error` (T3, H1); all 222
+evaluation outcomes unchanged, two answer lines moved with the corpus (T4);
+T5 missed as worded because two cases failed unperturbed when the survey ran.
+Wear leaves the self-made valley in place (W1–W3 missed): it is carved by the
+two-token row, not the touches. The noise-set margin cuts returns 24 → 1 and
+switches 785 → 602 but final readings 258 → 231 (N2 missed).
+
+**Faculties.** *refuse* moved (193 typo questions answered rather than
+refused, none wrongly); *table* did not move (no outcome the evaluation pins
+changed); *derive* moved (the domain frame derives 21 laws across fifteen
+wheels).
+
+**What it invalidated.** Two evaluation cases, `report-relay` and
+`report-anonymous`, pin goal-query counts that moved with the round's Lean
+files (837 → 843); they were re-pinned in `evaluation/cases.py` and pass.
+The corpus caches named by `corpus --check` were re-taken with `corpus
+--refresh`, and the thirteen measurement caches that read the session were
+re-taken (every mark as before). The CLI evaluation after the close: 222 of
+222 pass, 0 wrong. The test-file sign-off is still owed (pytest not
+installable).
+
+**Left.** Which energy (a frame that names the stored or delivered energy);
+the W9/W13 junction's consequences; the union census's code against its
+words ([`DOMAIN_WHEELS_STUDY.md`](studies/DOMAIN_WHEELS_STUDY.md) §7.5). The
+valley in the row; a margin from the scores; register names as known words;
+a declared share for use
+([`FRICTION_TWO_STUDY.md`](studies/FRICTION_TWO_STUDY.md) §7.7).
+
+---
+
+## Phase 156 — friction: what holds when the question moves
+
+**Status: closed this session.** Taken at the owner's request rather than from
+`STATUS.md` §2.1 (whose items are kept): experiment widely enough for a fuller
+picture of what does and does not work functionally in the GLM, and try the analogy of
+friction — the tiny peaks and valleys of two surfaces that interact once there
+is movement. The pre-registration
+([`studies/FRICTION_STUDY.md`](studies/FRICTION_STUDY.md) §§0–6: marks F1–F4,
+C1–C4, S1–S4) was committed before the first measurement; the amended marks
+(§2.4: F1′, F4′, C1′–C3′, S1′–S4′) after it and before the second; the fix
+marks (§2.5: X1–X4) before the edit they judge. **5 of 12 marks (F2, C4, S1,
+S3, S4), 5 of 9 amended marks (F1′, F4′, C2′, S1′, S4′) and 3 of 4 fix marks
+(X2, X3, X4).** Tests: `tests/test_friction.py` (17, run by hand: pytest is
+not installed here).
+
+**What was built.**
+* `RequestProject/GLM/Friction.lean` (no `sorry`, standard axioms): a reader
+  that keeps its reading or moves to the leader switches no more often than
+  the leader (`held_switches_le`, `stick_switches_le`); the sticking reader
+  stays within its margin (`held_within_margin`); the contact score never
+  overturns a lead larger than its factor and with no prompt ranks as the row
+  (`contact_keeps_large_lead`, `contact_empty_prompt`).
+* `glm_universal/knowledge/friction.py` (the hold-out model, the patch,
+  contact, tie-break and loaded predictors, the continuation, the folder
+  readers), `friction_survey.py` (the seven perturbations, hold / stick /
+  slip, the planner-refusal re-scoring), `friction_study.py` (the
+  measurement, the frozen-path comparison); `tools friction [--write]
+  [--survey]`.
+* `GLM.py`: `settle_question`, applied where a question enters the batch and
+  the interactive loop — runs of spaces are one space in a one-line question
+  without quotation marks, and a leading *tell me* is a courtesy unless
+  *about*, *whether* or *if* follows.
+
+**Measured.** The survey: 222 of 222 cases pass unperturbed; of 1,291 moved
+runs 934 hold, 331 stick and 26 slip as declared (F2 met: surface 625 of 650;
+F1, F3, F4 missed). 19 of the 26 slips were stepwise-planner `REFUSED` lines
+the harness does not read; read as refusals, 7 slips remain (F1′, F4′ met),
+all from *can you tell me* (six read *me* as the dimension `M`); these and
+doubled spaces are the two openings that slipped or stuck. After
+`settle_question`: `spaces` 222 of 222 and `tellme` 222 of 222 hold, 1,136 of
+1,291 runs hold and 0 slip (X2, X3, X4); `settle_question` returns all 222
+evaluation questions unchanged and every outcome is unchanged, but one answer
+line moved with the corpus itself (*six* at squared distance 2976, not 3040,
+in `corpus address of seven`), so X1 is recorded as missed as worded.
+Contact (1,000 held-out sentences, 19,533 positions): patch 4,312 correct,
+contact 4,201, mismatched 4,122 (C1–C3 missed); tie-break 4,509 against a
+mismatched 4,459 (C1′ missed); loaded 4,515, wins 194 to 52 (C2′ met), lower
+precision (C3′ missed); continuations overlap the truth 744 against 619 with
+628 distinct against 469 (C4 met). Stick-slip: top folders 264 → 253 switches
+(S2 missed), returns 3 → 1, final 370 → 365 (S3, S4 met); directories 766 →
+552 switches (S2′ missed), returns 15 → 1 (S4′ met), final 272 → 232 (S3′
+missed); S1 and S1′ hold on every sentence.
+
+**Faculties.** *refuse* moved (no moved question is answered wrongly after the
+fix; the remaining failures are refusals); *table* did not move (no answer the
+evaluation pins changed); *derive* did not move.
+
+**What it invalidated.** `GLM.py` and `tools.py` are read by the session-facing
+measurement caches; the stale caches are named by `corpus --check` and
+re-taken in the order Phase 155 used. A pre-existing failure was found by
+running `tests/test_runtime.py` by hand: `session.py` is 4,716 lines, over the
+test's 4,500 limit (the file was not edited this round). Running
+`tests/test_figures.py` by hand found the tests README without rows for four
+earlier test files (`test_carried_read.py`, `test_l5_first_budget.py`,
+`test_nearest_question.py`, `test_planner_ladder.py`); the rows were added.
+Its other failures are the suite sentence (*183 test files*), which only a
+sign-off with pytest can re-take.
+
+**Left.** Typos (155 of 196 moved questions stick); the harness reading a
+`REFUSED` line; contact's own valleys (wear); a margin set from the noise
+([`FRICTION_STUDY.md`](studies/FRICTION_STUDY.md) §7.6).
+
+---
+
+## Phase 155 — the corpus's definitions graded, and a word's place on the lattice
+
+**Status: closed.** Taken from `STATUS.md` §2.1, items 3 and 4
+(left by Phase 154): is what `define` answers a good definition, graded
+against an answer key rather than counted as found, and can a word be given a
+Leech address from its corpus counts that carries how it is used? The
+pre-registration ([`studies/CORPUS_DEFINITIONS_STUDY.md`](studies/CORPUS_DEFINITIONS_STUDY.md)
+§§0–6: marks G1–G4, W1–W4) was committed before the first measurement; the
+amended marks (§2.3: G1′–G4′, W2′, W3′) were committed after it and before
+the second. **3 of 8 marks were met (G4, W1, W4) and 3 of 6 amended marks
+(G1′, G4′, W2′).** Tests: `tests/test_corpus_definitions.py` (18, run by
+hand: pytest is not installed here).
+
+**What was built.**
+* `RequestProject/GLM/CorpusDefinitions.lean` (no `sorry`, standard axioms):
+  the grade is symmetric, bounded and monotone (`grade_comm`,
+  `grade_le_left`, `grade_le_right`, `grade_mono`); the hold-out is complete
+  and removes nothing else (`heldout_clean`, `heldout_keeps`,
+  `heldout_sublist`); a word coordinate lies in `[0, 12]` and is monotone in
+  its count (`coord_le_cap`, `lift_mono`, `coord_mono`).
+* `glm_universal/knowledge/glossary.py` (the held-out glossary, the grade,
+  the controls, the context ranking), `word_address.py` (anchors, exact
+  floor-log coordinates, addresses by the Lean declarations' decoder, the
+  null control, `locate`), `definitions_study.py` (the measurement).
+* `corpus define` now uses the context ranking, with column 3 recomputing the
+  context words and the ranking by brute force; `corpus address of X` is a new
+  reading of the `corpus` kind, with column 3 recounting the coordinates from
+  the sentences; the parser passes a `corpus` request whole (it had stripped
+  a leading *address* as a weak opener). Two evaluation cases
+  (`corpus-address`, `corpus-address-phrase`); `tools corpus-definitions
+  [--write]`.
+
+**Measured** (the second measurement; 2,200 documents, 184,967 sentences;
+121 sentences held out, 0 leaks). Graded agreement with the 27 glossary
+glosses: pattern ranking 17 against 17 for the first-mention control (G1
+missed), 5 and 8 of 27 agreeing first and top-three answers (G2, G3 missed),
+1 against a mismatched gloss (G4); context ranking 26 against 17, wins 9 to
+5 (G1′), 7 and 11 of 27 (G2′, G3′ missed), 9 against the mismatched gloss
+(G4′). Word addresses: 11,157 of 11,157 read back (W1), 4,323 distinct
+vectors and 4,323 distinct addresses (W4); number words 10 of 120 neighbours
+under the window scheme (W2 missed) and 64 of 120 under the positional
+scheme against 1 of 120 for the control (W2′); plurals 19 and 6 of 1,100
+(W3, W3′ missed).
+
+**Faculties.** *address* moved (a corpus word on the Leech lattice, its
+neighbourhood measured); *table* moved (`define` answers with the
+context-ranked sentence); *refuse* moved (a phrase, and a word too rare for
+coordinates, refused with the reason); *derive* did not move.
+
+**What it invalidated, and re-took.** The parser, session-facing tools and
+evaluation edits made eleven measurement caches stale; they were re-taken in
+the order Phase 154 used (`ties-ladder-frozen`, `budget-guard-frozen`,
+`frozen-path`, `queryesc`, `hole-reports-l5`, `address-read`,
+`budget-reading`, `junction-read`, `nearest-question`, `nearest-address`,
+`plans`), and every frozen-path comparison reports 0 undeclared moves, the
+two new cases listed as new. The new Lean file moved the stack relay's query
+set from 835 to 837, so `report-relay` and `report-anonymous` were re-pinned
+to the figures the tree measures of itself (claims unchanged: ahead on every
+set, carrying 12 and losing 0; text to chance, structure holding), and the
+caches that read the evaluation were re-taken once more after the re-pin.
+The CLI evaluation: 222 cases.
+
+**Left.** A grade by context-set cosine rather than word overlap; an
+appositive definitional pattern; a coordinate that lets a plural share its
+singular's company; a declared point on the guard curve; corpus words as the
+parser's *did you mean* (a frozen-path comparison).
+
+---
+
+## Phase 154 — the corpus as what the GLM knows: counted, not trained
+
+**Status: closed.** Taken at the owner's request rather than
+from `STATUS.md` §2.1 (whose item 1 the owner has postponed, and whose item 2
+is kept): can everything the GLM has written down be used as its corpus
+directly — the surrounding-word context, the way a phrase goes on, what a term
+is said to be — without letting chance or probability into the system? The
+pre-registration ([`studies/CORPUS_KNOWLEDGE_STUDY.md`](studies/CORPUS_KNOWLEDGE_STUDY.md)
+§§0–6: marks K1–K9) was committed before the first measurement; two amended
+marks (§3a: K3′, K8′) were committed after it and before the second. **7 of 9
+marks were met; K3 and K8 were missed in both measurements, and both amended
+marks were missed.** Tests: `tests/test_corpus_knowledge.py`. What it reads: every study, state document, Lean file,
+Python module, JSON and CSV, and the supplied material with its zip archives;
+what it answers: what the corpus says a term is, the words around it, the
+words used like it, and its continuation of a phrase.
+
+**What was built.**
+* `RequestProject/GLM/CorpusKnowledge.lean` (no `sorry`, standard axioms):
+  counts over sentences and over documents are additive (`count_append`,
+  `train_append`, `train_snoc`) and order-free (`count_perm`, `train_perm`),
+  every positive count has a witness sentence (`count_pos_iff`,
+  `train_pos_iff`), the guarded prediction answers exactly at a unique strict
+  maximum and refuses a tie (`predict_some_iff`, `predict_some_max`,
+  `predict_eq_none_of_tie`), and the squared cosine of two finite sets lies in
+  `[0, 1]` and is `1` exactly at equality (`sqcos_nonneg`, `sqcos_le_one`,
+  `sqcos_eq_one_iff`).
+* `glm_universal/knowledge/`: `reader.py` (the walk by rule, zip members
+  included, every sentence addressed and tier-0 marked), `model.py` (the
+  counts, the integer association rule, the context sets, the cache re-read
+  per file digest), `answer.py` (`define`, `context`, `similar`, `related`,
+  `continue_text`, `spread`, `predict`), `ask.py` (the request grammar and the
+  brute-force recheck), `study.py`.
+* The `corpus` query kind (start-only) in `runtime/parser.py` and
+  `runtime/session.py`, with the column-3 template `corpus` in
+  `runtime/tct_engine.py` recounting each answer by brute force; three
+  evaluation cases (`corpus-define`, `corpus-continue`, `corpus-unmentioned`);
+  `tools corpus-knowledge [--write]` and `tools corpus-ask`.
+
+**Measured** (the second measurement). 2,187 documents, 184,118 sentences,
+2,655,147 tokens. Next token on 25,435 novel held-out sentences: 21.5%,
+against 6.9% for the most frequent token (K1) and 2.7% for the order control
+(K2); the declared guard 23.8% precision at 62.3% coverage (K3, missed), the
+majority guard 54.0% at 10.7% (K3′, missed on coverage); 16.8 → 18.4 → 19.4 →
+21.5% as the training documents grow by quarters (K4); the counts equal after
+halving and after reversing the documents (K5); number words 61/120 of their
+neighbours (K6); the plural among the related words of the singular 285 of
+1,099 times (K7); `define` 52/80 on the frequency term list (K8, missed) and
+45/60 on the bold-term list (K8′, missed), backwards spellings refused 80/80
+(K9) and 58/60 (*on* and *si* are words of the corpus).
+
+**Faculties.** *refuse* moved (unmentioned and undefined terms, ties, words
+with too little company, each refused with the reason); the readings are
+*table*; *derive* did not move.
+
+**Left.** A graded term list (the paper's glossary held out and used as the
+answer key); a declared point on the guard curve; `similar` as the parser's
+*did you mean*; a Leech address for a word.
+
+## Phase 153 — the machine reads what it carries: the registers as files, the typed planner and the field reads through GLM-BAT
+
+**Status: closed.** Taken from `STATUS.md` §2.1, item 2 (*the
+operations ladder beyond the stepwise planner*, left by Phases 125 and 151),
+at the owner's request: run more of the system through the batch machine (the
+session's default domains and the typed planner) and have the machine check
+carried values itself, with Three Column Thinking's second interpreter as the
+check. Item 1 (*the question at the other three ties*) is postponed by the
+owner until more such ties accumulate. The pre-registration
+([`studies/CARRIED_READ_STUDY.md`](studies/CARRIED_READ_STUDY.md) §§0–6:
+marks L1, R1, R2, C1–C5, T1, T2, S1, S2, F1) was committed with the Lean file,
+the code and the baseline of 697 recorded texts
+(`reasoning/_data/carried_read_baseline.json`, taken with the new gates off),
+before the stored measurement. **12 of 12 measured marks were met, and L1 by
+the build.** Tests: `tests/test_carried_read.py`.
+
+**What was built.**
+* `RequestProject/GLM/CarriedRead.lean` (no `sorry`, standard axioms): a
+  register said as lines `@row.field=value;` and found by `FIND`
+  (`sep_cancel`, `line_infix_iff`, `find_iff_mem`, `find_iff_eq`), the
+  machine honest below the first lie (`machine_honest_below`,
+  `honest_no_drift`), the first lie drifts at its own step
+  (`first_lie_drifts`), and `no_drift_iff`.
+* `reasoning/register_files.py`: the session's registers written as
+  `reg/<table>.txt` (the element table from the stored snapshot), cached by
+  the session's domains.
+* `reasoning/carried_read.py`: the question's numbers as `q.txt`, a declared
+  `NUMBER_JUNCTIONS` table (number words such as *a dozen*, *twice*), and the
+  read lines: a carried step becomes a register read, a question read or a
+  computed step (gcd, lcm, parity, primality to 10^8, larger, comparatives,
+  even/odd/max/min folds).
+* `reasoning/typed_ladder.py`: the typed planner's arith, convert, gcd, lcm
+  and prime plans said as GLM-BAT chains, and the field gate for the
+  session's scalar field answers.
+* Gates in `runtime/stepwise.py` (read mode), `runtime/semantic_plan.py`
+  (`ask_planned`) and `runtime/session.py` (`_solve_field`): a disagreement is
+  refused as `MACHINE_DRIFT`; the program goes to the payload, never to the
+  answer text.
+* `reasoning/carried_read_study.py`, `tools carried-read [--write]`.
+
+**Measured.** 8,408 register entries in 11 tables, 0 duplicated keys, the
+snapshot agreeing with the element register 1,965 of 1,965 (R1); every entry
+found and no altered entry found (R2). 174 of 174 chains admitted with 2,087
+register reads, 102 question reads, 213 computed and 92 carried steps (C1);
+a lie at a register read found at its step 121 of 121 times (C2), at a
+question read 54 of 54 (3 more are other numbers of the question, not seen as
+declared, C3), at a computed step 42 of 42 (C4); column 3 verifies 174 of 174
+runs and pipelines, 348 of 348 mutants rejected (C5). Typed plans 42 of 42
+admitted, 42 of 42 lies refused (T1, T2); field answers 7,716 of 7,716
+admitted, 7,716 of 7,716 lies refused (S1, S2); 697 of 697 texts unchanged
+(F1).
+
+**Left.** 92 steps are still carried (48 folds needing a sort, 31 tool
+answers, 7 axiom steps, 3 `choose`, 3 `first`); a question read is
+membership, not position; the number-word junctions are not yet one table
+shared with the planner; the plan search and the typed planner's other plan
+kinds are not yet said as GLM-BAT.
+
+## Phase 152 — `L5` at the first round's budget: the 44 queries re-profiled at 240 starts
+
+**Status: closed this session.** Taken from `STATUS.md` §2.2, the first
+follow-up (*`L5` in the other deep-hole reports, the rest*, left by Phase
+149). A measurement, not an answering-path change. The pre-registration
+([`studies/L5_FIRST_BUDGET_STUDY.md`](studies/L5_FIRST_BUDGET_STUDY.md)
+§§0–6: marks P0, W1, R1) was committed with the measurement code, before the
+measurement. **3 of 3 marks were met.** Tests:
+`tests/test_l5_first_budget.py`.
+
+**What was built.** `reasoning/l5_first_budget.py`, `tools l5-first-budget
+[--write]`: the declared ensembles cut at 240 starts, the ten references and
+the 44 queries profiled under `L5` and read by the same answer rule.
+
+**Measured.** A 240-start ensemble is the first 240 starts of the 1920-start
+one for all 6 seeds (P0). At 240 starts 43 of 44 correct, 0 wrong, 1 refused
+(the sibling centre of walk 6, `E_8^3`, outside its own radius); seed queries
+10 of 10; 43 of 43 queries inside their radius answered (R1); 397 absences,
+1 false, on the refused query.
+
+**Left.** An absence at 240 starts is not certified for every query; the
+480-start pass for one type is still observed, not certified.
+
+## Phase 151 — the operations ladder in the stepwise planner: the chain as a GLM-BAT program
+
+**Status: closed this session.** Taken from `STATUS.md` §2.1, item 1 (*the
+operations ladder in the planner and the session*, left by Phase 125), for
+the stepwise planner. The pre-registration
+([`studies/PLANNER_LADDER_STUDY.md`](studies/PLANNER_LADDER_STUDY.md) §§0–6:
+marks L1, P1–P5, F1, F2) was committed with the Lean file, the answering-path
+code and two baselines (the 283 recorded single-turn texts,
+`reasoning/_data/planner_ladder_baseline.json`, and the whole evaluation,
+`reasoning/_data/ties_ladder_baseline.json`, shared with Phase 150), before
+the stored measurement and the frozen-path comparison. **7 of 7 measured
+marks were met, and L1 by the build.** Tests: `tests/test_planner_ladder.py`.
+
+**What was built.**
+* `RequestProject/GLM/PlannerLadder.lean` (no `sorry`, standard axioms): the
+  integer-pair representation of a rational under the four operations
+  (`rep_add` … `rep_div`), the cross-multiplication check (`rep_check_iff`),
+  `machine_eq_honest`, `drift_eq_lies`, `no_drift_iff`, `rollback_journal`
+  and `promoted_iff_no_drift`.
+* `reasoning/planner_ladder.py`: a chain said as GLM-BAT (computed steps
+  reduced by a Euclid subroutine, carried steps as data, one file per step),
+  run by the batch machine, its drift against the planner's claims and its
+  gated pipeline with rollback.
+* `runtime/stepwise.py`: `_ladder_gate` in `answer` and the follow-ups; a
+  chain the machine disagrees with is refused as `MACHINE_DRIFT`. The program
+  is added to the steps and the payload, never to the answer text;
+  `GLM.py` prints it, and column 3 verifies the run and the pipeline.
+* `reasoning/planner_ladder_study.py`, `tools planner-ladder [--write]`.
+
+**Measured.** 174 of 174 chains said, read back, halted, drift-free and
+promoted (15,092 lines, 15,457 machine steps; 180 computed and 2,314 carried
+steps); a lie in the last computed step found at that step and not promoted
+in 87 of 87; column 3 174/174 and 174/174, mutants 348/348; the 283 texts all
+unchanged; the evaluation 212/212 same status. Post hoc: a lie in a carried
+step is caught downstream in 87 of 168 chains and not seen in 81.
+
+**Left.** Carried steps (register values, givens) are trusted; the session's
+default domains and the typed planner are not given the ladder vocabulary.
+
+## Phase 150 — the question at the `nearest` ties: a reply turn for the ranking's head
+
+**Status: closed this session.** Taken from `STATUS.md` §2.1, item 2 (*the
+question at the other ties*, left by Phases 145, 146 and 148), for the
+`nearest` ties. The pre-registration
+([`studies/NEAREST_QUESTION_STUDY.md`](studies/NEAREST_QUESTION_STUDY.md)
+§§0–6: marks L1, D1–D3, C1, Q1, R1, E1, F1) was committed with the Lean file
+and the answering-path code, before the stored measurement and the
+frozen-path comparison. **8 of 8 measured marks were met, and L1 by the
+build.** Tests: `tests/test_nearest_question.py`.
+
+**What was built.**
+* `RequestProject/GLM/NearestQuestion.lean` (no `sorry`, standard axioms):
+  `HeadSet`, `head_mem_least`, `after_least`, `resolved_least`,
+  `resolved_is_meant`, `outside_never_confirmed`, `head_card_le_one_iff`.
+* `reasoning/timed_question.py` (`OpenTie`), `reasoning/nearest_address.py`
+  and `runtime/session.py`: a head of two or more carriers is held open,
+  `given` replies are applied in order and the answer ends with the next
+  question or the confirming one; the refusals `no-tie`,
+  `unknown-question`, `not-an-option` and `contradicted`. Column 3
+  (`runtime/tct_engine.py`) re-derives the live set and the split.
+* Five evaluation cases (`nearest-tie-question`, `-reply`, `-confirmed`,
+  `-contradicted`, `-no-tie`); `reasoning/nearest_question_study.py`,
+  `tools nearest-question [--write]`; the shared frozen path
+  `reasoning/ties_ladder_frozen.py`, `tools ties-ladder-frozen [--write]`.
+
+**Measured.** 321 tied points, 18 distinct heads, 48 members; 48 of 48 runs
+confirmed on the member meant, 0 wrong, at most 2 replies; one false reply
+48 of 48 contradicted; 0 of 10 outside-head points confirmed; conversations
+48/48, 150/150 turns verify, 156/156 altered claims rejected; battery 10/10;
+controls 0 of 12 read as replies; frozen path 212/212 same status, 204 same
+text, 8 declared moves (`nearest-address-junction` with its old text as a
+prefix), 0 undeclared.
+
+**Found at the close.** Three evaluation pins had drifted with the tree
+before the round started (the shared baseline already read 26 kinds and an
+826-query set):
+`report language` (26 answerable kinds, not 25) and `report relay` /
+`report anonymous` (the goal-query set at 830 after the Lean files of Phases
+146–151). They were re-pinned with their claims unchanged. The wiring census
+gained the four new measurement-only modules, and Phase 148's `W1` count of
+earlier `nearest` cases now excludes the Phase 150 cases, which reach the
+address path on purpose.
+
+**Left.** The crowded zero cell of the address read, the `report hole` ties
+and the decoder's `classify` refusal still have no vocabulary.
+
+## Phase 149 — `L5` in the other deep-hole reports: each round's question asked of the configuration reading
+
+**Status: closed this session.** Taken from `STATUS.md` §2.1, item 1 (*`L5`
+in the other deep-hole reports*, left by Phase 123). The pre-registration
+([`studies/HOLE_REPORTS_L5_STUDY.md`](studies/HOLE_REPORTS_L5_STUDY.md)
+§§0–6: marks L1, C1, D1, E1, R1, Q1, F1) was committed with the Lean file,
+the answering-path code and the frozen baseline
+(`reasoning/_data/hole_l5_baseline.json`, the 212 evaluation answers taken
+before the answering-path edit), and before the frozen-path comparison was
+run. **6 of 6 measured marks were met, and L1 by the build.** Tests:
+`tests/test_hole_reports_l5.py`.
+
+**What the item turned out to be.** Each of the three reports is the record
+of a closed round, and a record is not rewritten. So each keeps its answer
+verbatim and gains a clause: what `L5` says to the question that round
+asked.
+
+**What was built.**
+* `RequestProject/GLM/HoleReportsL5.lean` (no `sorry`, standard axioms):
+  the rule fires wherever the per-type criterion certifies
+  (`rule_fires_of_resolvesAt`); the rule's answer is the strict nearest for
+  any rung (`rule_sound`); the seed-change gate follows query by query from
+  the rule (`gate_of_rule`); and the global criterion is sufficient, not
+  necessary (`criterion_not_necessary`, a two-reference table on the line).
+* `reasoning/hole_reports_l5.py`: the three `L5` readings from the existing
+  stores, under a second: the classifier's sanity query and 44 queries; the
+  gate at every measured size; the joint reading's four failures and `L5`'s
+  per-type criterion at 1920 starts.
+* `runtime/reports/lattice_geometry.py`: the clause, a step and the `l5_*`
+  expected keys in `report hole classifier`, `ladder` and `failures`;
+  `runtime/tct_engine.py`: the three templates recompute them.
+* `reasoning/hole_reports_l5_study.py`, `tools hole-reports-l5 [--write]`.
+
+**Measured.** Seed queries 10/10, all 44 queries correct at `L5`; the gate at
+8/8 sizes, first at 240 starts (the joint reading needed 1920), and passing
+with ρ ≥ 1 at 480; the four failures 4/4 correct, 10/10 types certified at
+1920 starts (ρ = 0.3048). Battery 4/4, scripts 4/4, mutants 8/8. Frozen path
+212/212 same status, 209 same text, the three moved texts each with the old
+text as a verbatim prefix, 0 undeclared.
+
+**A defect found.** The `report hole ladder` column-3 template never
+recomputed `winner_is_extension`, so that script had never verified since the
+escalation round. Fixed, and pinned by the new test file.
+
+**Left.** The 44 queries are profiled only at 1920 starts, so `L5`'s answers
+at the first round's 240 starts are not measured. The 480-start pass is
+observed, not certified, for one type (`STATUS.md` §2.2).
 
 ## Phase 148 — the guarded read in `nearest`: a point no register holds, ranked and certified
 

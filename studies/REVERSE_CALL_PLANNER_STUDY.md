@@ -175,11 +175,11 @@ evaluation, 188 cases at the last reading.
 <!-- generated: plannersandbox-fallback -->
 | reading | value |
 |---|---|
-| evaluation cases | 212 |
-| the runtime answers | 172 |
-| the runtime refuses | 40 |
+| evaluation cases | 222 |
+| the runtime answers | 178 |
+| the runtime refuses | 44 |
 | of those, classified principled | 10 |
-| the planner is consulted on | 30 |
+| the planner is consulted on | 34 |
 | principled refusals reaching the planner | 0 |
 | answers the runtime does not give | 0 |
 | **safety gate** | **True** |

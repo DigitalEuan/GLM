@@ -99,23 +99,23 @@ not written down here; it is emitted:
 | kind | count |
 |---|---|
 | abbrev | 65 |
-| def | 1,338 |
+| def | 1,378 |
 | example | 21 |
 | inductive | 58 |
-| instance | 29 |
-| lemma | 233 |
-| structure | 61 |
-| theorem | 3,555 |
-| **total** | **5,360** |
+| instance | 30 |
+| lemma | 241 |
+| structure | 62 |
+| theorem | 3,634 |
+| **total** | **5,489** |
 
-5,360 declarations across 221 files, the largest being `Gen3.lean` with 98.
+5,489 declarations across 231 files, the largest being `Gen3.lean` with 98.
 <!-- end generated -->
 
 Written into a sentence, so that a reader who stops here has the size of what
 follows: the reader addresses
-<!--figure:lean-declarations-->5,360<!--/figure--> declarations over
-<!--figure:lean-declaration-files-->221<!--/figure--> files, which is every
-file of <!--figure:lean-files-->221 Lean files<!--/figure--> the development
+<!--figure:lean-declarations-->5,489<!--/figure--> declarations over
+<!--figure:lean-declaration-files-->231<!--/figure--> files, which is every
+file of <!--figure:lean-files-->231 Lean files<!--/figure--> the development
 holds — no Lean file of this repository is outside the corpus this study
 measures.
 
@@ -249,11 +249,11 @@ below half a scale unit in every coordinate.
 <!-- generated: lean-readback -->
 |  | measured |
 |---|---|
-| declarations checked | 5,360 |
-| read back exactly | **5,360 / 5,360** (rate 1) |
-| coordinates checked | 128,640 |
+| declarations checked | 5,489 |
+| read back exactly | **5,489 / 5,489** (rate 1) |
+| coordinates checked | 131,736 |
 | coordinate errors | **0** |
-| moved by the decoder | 5,360 / 5,360 |
+| moved by the decoder | 5,489 / 5,489 |
 | worst observed residual | **3**, at `GLM.AffineOutput.const_ratio_closed_form` |
 | half a scale step | `9/2` |
 | covering radius | 4 |
@@ -276,9 +276,9 @@ declaration" is, at this point, a statement about the feature map alone.
 <!-- generated: lean-injectivity -->
 | scheme | distinct addresses | distinct feature vectors | classes | declarations conflated | quantisation adds conflation? |
 |---|---|---|---|---|---|
-| `feature` | 4,606 / 5,360 | 4,606 | 480 | 1,234 | no |
-| `hash_control` | **5,360 / 5,360** | 4,606 | 0 | 0 | — |
-| `shuffled` | 4,606 / 5,360 | 4,606 | 480 | 1,234 | no |
+| `feature` | 4,712 / 5,489 | 4,712 | 493 | 1,270 | no |
+| `hash_control` | **5,489 / 5,489** | 4,712 | 0 | 0 | — |
+| `shuffled` | 4,712 / 5,489 | 4,712 | 493 | 1,270 | no |
 <!-- end generated -->
 
 Two things to read off this table.
@@ -302,7 +302,7 @@ the sense that a reader shown only the 24 counts would also fail to tell the
 members apart:
 
 <!-- generated: lean-classes -->
-480 classes: 358 pairs, 66 triples, 30 classes of 4, 10 classes of 5, 5 classes of 6, 1 class of 7, 4 classes of 8, 1 class of 9, 1 class of 11, 1 class of 12, 1 class of 14, 1 class of 16, 1 class of 19.
+493 classes: 365 pairs, 69 triples, 32 classes of 4, 11 classes of 5, 5 classes of 6, 1 class of 7, 4 classes of 8, 1 class of 9, 1 class of 11, 1 class of 12, 1 class of 14, 1 class of 16, 1 class of 19.
 
 The widest, written out, because the point they make can only be read from the names:
 
@@ -391,27 +391,27 @@ The third table is on *all* pairs, not just nearest ones.
 <!-- generated: lean-neighbours -->
 | scheme | nearest shares a file | rate | mean tie size |
 |---|---|---|---|
-| `feature` | **1,118 / 5,360** | ≈ **20.86 %** | 1.88 |
-| `hash_control` | 33 / 5,360 | ≈ 0.62 % | 1.00 |
-| `shuffled` | 25 / 5,360 | ≈ 0.47 % | 1.88 |
-| *chance* | — | ≈ 0.62 % | — |
+| `feature` | **1,149 / 5,489** | ≈ **20.93 %** | 1.87 |
+| `hash_control` | 32 / 5,489 | ≈ 0.58 % | 1.00 |
+| `shuffled` | 25 / 5,489 | ≈ 0.46 % | 1.87 |
+| *chance* | — | ≈ 0.60 % | — |
 
 | scheme | nearest is cited, either way | rate |
 |---|---|---|
-| `feature` | **213 / 5,360** | ≈ **3.97 %** |
-| `hash_control` | 4 / 5,360 | ≈ 0.07 % |
-| `shuffled` | 8 / 5,360 | ≈ 0.15 % |
+| `feature` | **223 / 5,489** | ≈ **4.06 %** |
+| `hash_control` | 4 / 5,489 | ≈ 0.07 % |
+| `shuffled` | 4 / 5,489 | ≈ 0.07 % |
 | *chance* | — | ≈ 0.08 % |
 
 | scheme | mean d² within a file | mean d² across files | ratio |
 |---|---|---|---|
-| `feature` | 5,923.3 | 7,432.0 | **0.797** |
-| `hash_control` | 54,229.8 | 54,074.1 | 1.003 |
-| `shuffled` | 7,524.6 | 7,422.0 | 1.014 |
+| `feature` | 5,921.5 | 7,474.0 | **0.792** |
+| `hash_control` | 54,228.9 | 54,058.9 | 1.003 |
+| `shuffled` | 7,500.7 | 7,464.6 | 1.005 |
 
-Against closed-form chance the feature encoding runs 33.7× on the file test and 49.6× on the citation test, from an encoding that is never shown a file name.
+Against closed-form chance the feature encoding runs 35.1× on the file test and 52.4× on the citation test, from an encoding that is never shown a file name.
 
-Over 88,874 same-file pairs and 14,273,246 cross-file pairs.  The feature encoding beats the hash control: yes; beats the seeded reshuffle: yes; beats closed-form chance: yes.
+Over 89,747 same-file pairs and 14,972,069 cross-file pairs.  The feature encoding beats the hash control: yes; beats the seeded reshuffle: yes; beats closed-form chance: yes.
 <!-- end generated -->
 
 The two controls do exactly what they are there for.

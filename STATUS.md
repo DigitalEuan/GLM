@@ -50,29 +50,48 @@ document three thousand lines long.
 GLM as a whole and is kept up to date in every development run (the owner's
 standing instruction; it is a row of the close checklist, `ITERATE.md` §4.1).
 
+**Where the files are.** The Lean development lives in one place only,
+[`overlay/glm_lean/RequestProject/`](overlay/glm_lean/RequestProject/GLM/README.md)
+(`lakefile.toml` sets `srcDir = "overlay/glm_lean"`); there is no
+`RequestProject/` folder at the repository root, so a path written as
+`RequestProject/GLM/X.lean` in a record means
+`overlay/glm_lean/RequestProject/GLM/X.lean`. The studies are in
+[`studies/`](studies/), the Python package in `overlay/glm_universal/`. A file
+audit after Phase 158 (the owner asked whether
+[`FRICTION_STUDY.md`](studies/FRICTION_STUDY.md),
+[`OSCILLATOR_JUNCTION_STUDY.md`](studies/OSCILLATOR_JUNCTION_STUDY.md) and Lean
+files had gone missing) found every file present: 232 Lean files (231 under
+`GLM/` plus `Main.lean`), all building with `lake build` and 0 `sorry`, and
+all 160 study documents. What was wrong was 261 rows of the Properties table
+still pointing at the old root path `RequestProject/GLM/…`; they now point at
+`overlay/glm_lean/RequestProject/GLM/…`.
+
 **Starting a new round? Read [`ITERATE.md`](ITERATE.md) §0, then §2 below.**
 
-**Just closed: Phases 147 and 148** (the record is
-[`MASTER_PLAN.md`](MASTER_PLAN.md), "Phase 147" and "Phase 148"; the studies
-are [`BUDGET_READING_STUDY.md`](studies/BUDGET_READING_STUDY.md), 8 of 8
-measured marks, and [`NEAREST_ADDRESS_STUDY.md`](studies/NEAREST_ADDRESS_STUDY.md),
-7 of 7). They took items 2 and 1 of the old §2.1 under one frozen-path
-comparison.
-* The budget rule (no barren stop, 1056 starts) is in the answering path: a
-  new `hole` kind reads one deep hole to its certificate (`hole walk 3006`,
-  `hole octad pair`, `hole <24 coordinates>`), and `report deep holes` reads
-  under the rule. All 256 held-out walks are certified (the walk's patience
-  reading certified 225), 0 disagreements, longest reading 174 starts.
-* `nearest` ranks a moved carrier or 24 exact coordinates against the 142
-  address-table carriers, and the guarded read certifies head, gap and
-  origin (`nearest to C moved 8 by 1/2`). 2362 certified points of 2982, 0
-  disagreements.
-* Over the whole evaluation no unguarded reading of the construction ladder
-  is called (0 over 212 questions). The frozen path keeps all 202 statuses.
+**Just closed: Phase 158** (the record is [`MASTER_PLAN.md`](MASTER_PLAN.md),
+"Phase 158"; the study is
+[`OSCILLATOR_JUNCTION_STUDY.md`](studies/OSCILLATOR_JUNCTION_STUDY.md), 4 of 4
+marks for the chosen variant). Taken at the owner's request. The junction
+between wave kinematics and the mass-spring oscillator was tried four ways
+under one declared rule, read through the reference circle: joining
+`frequency` only keeps all 21 declared answers, all 9 refusals and all 249
+answers the shipped frame gave, and gives no answer tying the oscillator to a
+rotating body (Phase 157's junction gave 6), so it now ships; leaving the
+rotating body out instead loses 8 of Phase 66's shaft-power answers, and
+keeping the wheels apart loses 4 declared answers. The owner's note on the
+friction study — analogy with an established mathematical system as a method
+for development problems — is written down in
+[`FRICTION_STUDY.md`](studies/FRICTION_STUDY.md) §8 and pointed to from
+[`ITERATE.md`](ITERATE.md) §1. Items 1–4 below are unchanged; item 5 is
+rewritten.
 
-One prediction was wrong (Phase 148's certified-point count, copied from a
-mis-summed Phase 143 figure); it is recorded, not re-stated. **Before them,
-Phase 146** (8 of 10 marks): the question in the answering path.
+**Before it, Phase 157** (five domain wheels with their junctions, and
+friction, the rest; [`DOMAIN_WHEELS_STUDY.md`](studies/DOMAIN_WHEELS_STUDY.md),
+[`FRICTION_TWO_STUDY.md`](studies/FRICTION_TWO_STUDY.md)), and Phase 156
+(friction: what holds when the question moves).
+
+Before those, Phase 155 (the corpus's definitions graded), Phase 154 (the corpus as what the GLM knows), Phase 153 (the
+machine reads what it carries), and Phases 150, 151 and 152.
 
 ---
 
@@ -81,18 +100,18 @@ Phase 146** (8 of 10 marks): the question in the answering path.
 | instrument | command | result |
 |---|---|---|
 | test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->5,397 tests across 181 of the 183 test files, 18,972 subtests, outside the document checks<!--/figure-->**, zero failures |
-| end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->212<!--/figure-->** cases — 0 confidently wrong, every refusal a `boundary` |
+| end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->222<!--/figure-->** cases — 0 confidently wrong, every refusal a `boundary` |
 | benchmark suites | `python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites |
 | capability probes | `python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 surprises |
-| Lean development | `lake build` (repository root) | <!--figure:lean-files-->221 Lean files<!--/figure-->, **0 `sorry`** |
+| Lean development | `lake build` (repository root) | <!--figure:lean-files-->231 Lean files<!--/figure-->, **0 `sorry`** |
 | corpus | `python3 -m glm_universal.corpus --check` | the tier contract, the coverage claim of `ENTRY.md`, every generated block and every derived cache |
 
 The package holds **<!--figure:registers-->8 registers<!--/figure-->** beside a 45-class comparison register,
-**<!--figure:query-kinds-->27 query kinds<!--/figure-->** one of which
+**<!--figure:query-kinds-->28 query kinds<!--/figure-->** one of which
 dispatches **<!--figure:report-subjects-->67 report subjects<!--/figure-->**, and 3 tasks. The Lean development is
 addressed declaration by declaration: `reasoning/lean_address.py` gives each of
-the <!--figure:lean-declarations-->5,360<!--/figure--> declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly <!--figure:lean-declarations-->5,360<!--/figure-->/<!--figure:lean-declarations-->5,360<!--/figure--> with 0 coordinate errors
+the <!--figure:lean-declarations-->5,489<!--/figure--> declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly <!--figure:lean-declarations-->5,489<!--/figure-->/<!--figure:lean-declarations-->5,489<!--/figure--> with 0 coordinate errors
 (`report lean`). The other forty-odd instruments, each with its command and its
 current figure, are the table in [`SYSTEM.md`](SYSTEM.md) §1.
 
@@ -108,39 +127,93 @@ record the round in `MASTER_PLAN.md`.
 
 ### 2.1 The next round — take one of these
 
-1. **`L5` in the other deep-hole reports** (left by Phase 123). Only
-   `report hole configuration` answers by `L5`; `report hole classifier`,
-   `hole ladder` and `hole failures` still name a hole with the ladder's
-   readings. Each would move under a frozen-path comparison like B5's.
-   [`LATTICE_COMPLETION_STUDY.md`](studies/LATTICE_COMPLETION_STUDY.md) §7.6.
-
-2. **The operations ladder in the planner and the session** (left by Phase
-   125). The ladder and GLM-BAT are reached only through `tool ladder` and
-   `tool machine`; giving the planner's plans or the session's default
-   domains the ladder's vocabulary (a plan step as a GLM-BAT line, drift and
-   rollback as planner checks) changes answers the evaluation pins, so it
-   needs a frozen-path comparison.
-   [`OPERATIONS_LADDER_STUDY.md`](studies/OPERATIONS_LADDER_STUDY.md) §7.4.
-
-3. **The question at the other ties** (left by Phases 145, 146 and 148). Since
-   Phase 146 only the `locate` junction answer puts a question and reads a
-   reply. The other refusals at a tie have no declared vocabulary yet:
+1. **The question at the other three ties** (left by Phases 145, 146, 148
+   and 150; *postponed by the owner* until more such ties accumulate as new
+   domains are added, or a higher mechanism that carries them is found). Since Phase 150 the `locate` junction and the `nearest` tie put
+   a question and read a reply. Three refusals at a tie still have no
+   declared vocabulary:
    * the crowded zero cell of the address read;
    * the `report hole` ties;
-   * the decoder's `classify` refusal;
-   * a `nearest` address read that refuses on a tie (Phase 148: 128 of
-     the 620 refused points are ties at the head).
+   * the decoder's `classify` refusal.
 
    Giving one a vocabulary, and the reply its turn, changes answers the
-   evaluation pins. It needs a frozen-path comparison, which must declare the
-   evaluation-set counts that new cases move (`report language`,
-   `report query escalation`, the discourse census).
+   evaluation pins, so it needs a frozen-path comparison that declares the
+   evaluation-set counts new cases move (`report language`, `report query
+   escalation`, the discourse census).
+   [`NEAREST_QUESTION_STUDY.md`](studies/NEAREST_QUESTION_STUDY.md) §7.4,
    [`ANSWERING_QUESTION_STUDY.md`](studies/ANSWERING_QUESTION_STUDY.md) §7.5.
+
+2. **The machine's reading, the rest** (left by Phase 153). 92 steps of
+   the stepwise chains are still carried: 48 folds (rank, median,
+   quartiles, top, the k-th largest, the bounded folds) need a sort said in
+   GLM-BAT, 31 tool answers need the tool's own computation said as GLM-BAT,
+   and 7 axiom, 3 `choose` and 3 `first` steps take inputs the machine does
+   not hold as numbers; a lie at a carried step is seen downstream in 5 of 37
+   chains. A question read is membership, not position. The number-word
+   junctions (`NUMBER_JUNCTIONS`, *a dozen*, *twice*) are a short declared
+   list; one junction table shared by the planner and the machine would make
+   every word the planner reads a word the machine reads. The plan search and
+   the typed planner's other plan kinds (ordering, extremum, linear, Bezout,
+   factorise, substrate facts) are not yet said as GLM-BAT.
+   [`CARRIED_READ_STUDY.md`](studies/CARRIED_READ_STUDY.md) §7.4.
+
+3. **The corpus, read more finely** (left by Phases 154 and 155). The
+   context-ranked `define` beats the first-mention control but agrees with
+   the held-out gloss on only 7 of 27 terms, under a two-shared-word grade
+   that is itself coarse; grade by the squared cosine of context sets
+   instead, and add an appositive pattern for the four glossary terms no
+   declared pattern defines. The positional word address carries the number
+   words but never puts a plural beside its singular (W3′: 6 of 1,100). The
+   counted model knows when it is right only at low coverage (K3′: 54%
+   precision at 10.7%); declare a point on that curve before measuring it.
+   And `similar` or the word address as the parser's *did you mean* (words
+   used like the unknown one, not spelled like it) needs a frozen-path
+   comparison, because it changes refusals the evaluation pins.
+   [`CORPUS_DEFINITIONS_STUDY.md`](studies/CORPUS_DEFINITIONS_STUDY.md) §7.4,
+   [`CORPUS_KNOWLEDGE_STUDY.md`](studies/CORPUS_KNOWLEDGE_STUDY.md) §7.5.
+
+4. **Friction, the third pass** (left by Phase 157). The self-made valley of
+   contact's continuations survives wear: it is carved by the two-token row,
+   so a continuation that will not re-enter a two-token state it has left is
+   the next reading to declare. The noise-set margin reads how often the
+   leader changed; a margin from how much its score moved is untested. The
+   respelling's vocabulary is the corpus, so a carrier name the corpus barely
+   uses (*millisecond*) is not read back; the register names could be known
+   words. Use beats the wrong company but loses to count; a declared share is
+   not measured. `tests/test_figures.py` still fails on the suite sentence,
+   which only `signoff --close` with pytest re-takes.
+   [`FRICTION_TWO_STUDY.md`](studies/FRICTION_TWO_STUDY.md) §7.7.
+
+5. **The domain wheels, the rest** (left by Phases 157 and 158). *Energy
+   from power and time across domains* and its inverse are refused as
+   ambiguous, because a capacitor's stored energy is reachable across the
+   charge junction: a frame that names the energy (stored in a capacitor or an
+   inductor, delivered over a time) would answer both. The oscillator junction
+   now joins `frequency` only (Phase 158), so the reference-circle identity
+   `angular_frequency = angular_velocity` is no longer derived; a frame that
+   says which body drives the wave (a rotating body, or the oscillator) would
+   bring it back with Phase 66's shaft-power answers and without the rotor
+   chain — the same shape of fix as *which energy*. The union census's code
+   still reads its declaration more narrowly than its words, and the naive
+   control should be taken wheel pair by wheel pair.
+   [`DOMAIN_WHEELS_STUDY.md`](studies/DOMAIN_WHEELS_STUDY.md) §7.5,
+   [`OSCILLATOR_JUNCTION_STUDY.md`](studies/OSCILLATOR_JUNCTION_STUDY.md) §7.6.
 
 ### 2.2 Smaller follow-ups left by closed studies
 
 Each is a section a closed study ends on; any of them can be folded into a
 round from §2.1 or taken as a short round of its own.
+
+* **`L5` in the other deep-hole reports, the rest** (left by Phases 149 and
+  152). Phase 152 measured the 44 queries at 240 starts: 43 named correctly,
+  1 refused, 0 wrong. One absence of the 397 issued at that budget is false
+  (on the refused query, which lies outside its own radius), so a reading at
+  240 starts would have to refuse its absences outside the radius as well as
+  its answer; nothing in the answering path reads `L5` at 240 starts. At 480
+  starts `L5` passes the gate with its per-type criterion holding for 9 of
+  10 types, so one type's pass there is observed, not certified.
+  [`L5_FIRST_BUDGET_STUDY.md`](studies/L5_FIRST_BUDGET_STUDY.md) §7.4,
+  [`HOLE_REPORTS_L5_STUDY.md`](studies/HOLE_REPORTS_L5_STUDY.md) §7.4.
 
 * **The budget rule, the rest** (left by Phase 147). `deep_holes.py` keeps
   its frozen defaults (the walk's 200 starts with patience 40, and
@@ -178,8 +251,9 @@ round from §2.1 or taken as a short round of its own.
   primality frame keeps its 10^12 limit (giving it certificates changes which
   surface answers, so it needs a frozen-path comparison)
   ([`ELLIPTIC_CERTIFICATE_STUDY.md`](studies/ELLIPTIC_CERTIFICATE_STUDY.md)
-  §7.1). `tool wiring` names the 19
-  modules no question reaches; since Phase 143 the two ladder guards and
+  §7.1). `tool wiring` names the 29
+  modules no question reaches (171 of 200 are reached), each declared
+  measurement-only with its reason; since Phase 143 the two ladder guards and
   `norm256_hex` are reached from the `locate` kind.
   [`TOOL_VERDICTS_STUDY.md`](studies/TOOL_VERDICTS_STUDY.md) §7,
   [`CONNECTED_MACHINE_TWO_STUDY.md`](studies/CONNECTED_MACHINE_TWO_STUDY.md)
@@ -187,15 +261,15 @@ round from §2.1 or taken as a short round of its own.
 
 * **The question in the answering path, the rest** (left by Phase 146). A
   reply is read only immediately after the question; a reply carried across
-  an unrelated turn is not. Since Phase 148 `nearest` reads junctions on its
-  address path, but it does not put the question (item 3 of §2.1). Replies are
+  an unrelated turn is not. Since Phase 150 `nearest` also puts the question at a tied head and reads
+  `given` replies. Replies are
   written `key is reply`, because an `=` is read as an identity by the
   description layer's infix `verify` shape; a reply value containing `;` is
   not expressible.
   [`ANSWERING_QUESTION_STUDY.md`](studies/ANSWERING_QUESTION_STUDY.md) §7.5.
 
 * **Time and the question, the rest** (left by Phase 145). The vocabularies
-  for the other ties are item 3 of §2.1. The 78-member junction of dimensionless physics quantities takes up to 22
+  for the other ties are item 1 of §2.1. The 78-member junction of dimensionless physics quantities takes up to 22
   questions, because no declared question halves it (`exists_halving` says
   one exists); a measurand coordinate would be one (the decision of §2.3).
   Questions are chosen by what splits, not by what a user can answer or what
