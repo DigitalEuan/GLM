@@ -66,7 +66,9 @@ all 160 study documents. What was wrong was 261 rows of the Properties table
 still pointing at the old root path `RequestProject/GLM/…`; they now point at
 `overlay/glm_lean/RequestProject/GLM/…`.
 
-**Starting a new round? Read [`ITERATE.md`](ITERATE.md) §0, then §2 below.**
+**Starting a new round? Read [`ITERATE.md`](ITERATE.md) §0, then §2 below —
+§2.0 points to the owner's plan for the next runs,
+[`source_material/GLM_19OCT26_1.md`](source_material/GLM_19OCT26_1.md).**
 
 **Just closed: Phase 158** (the record is [`MASTER_PLAN.md`](MASTER_PLAN.md),
 "Phase 158"; the study is
@@ -124,6 +126,68 @@ states the item in full; the bracketed names (`lattice item 6`, `track M`, …)
 are the names earlier records use, kept so that a reference in a study or a
 module docstring still finds its line. When a line is taken, delete it here and
 record the round in `MASTER_PLAN.md`.
+
+### 2.0 The owner's plan for the next runs — read this first
+
+The owner's development plan of 19 October 2026 is
+[`source_material/GLM_19OCT26_1.md`](source_material/GLM_19OCT26_1.md). It
+sets the direction for the next several runs: take the next round from it
+before anything else in §2. It is a supplied document, not a study, so it
+states aims, not measured results. Check any claim it makes about the system's
+current state against the studies before building on it. Its parts and the
+lines of §2.1 they take over:
+
+* **Part I, thermomechanical friction** (experiments A, B and C, each judged
+  on its own). A, the thermal-expansion governor, is aimed at the self-made
+  valley in item 4. B, prompt-anchor recovery, is aimed at the cost of the
+  noise margin and at signal dilution in item 4. C, register-vocabulary
+  sintering, is aimed at the *millisecond* blind spot in item 4. Taking Part I
+  closes item 4.
+* **Part II.1, one evidence and result model** across planner, corpus,
+  domain, lattice, certificate and conversation. This is new.
+* **Part II.2, the carried-value gaps.** This is item 2.
+* **Part II.3, contextual domain frames.** This is item 5 (*which energy*,
+  *which body drives the wave*).
+* **Part II.4, a declared corpus confidence curve.** This is item 3 (the K3′
+  operating point, graded definitions).
+* **Part II.5, adversarial interactive testing.** This extends
+  [`NEAREST_QUESTION_STUDY.md`](studies/NEAREST_QUESTION_STUDY.md). Item 1
+  stays postponed.
+* **Part II.6, a machine-readable study ledger.** This is new.
+* **Part II.7, corpus source tiers reported separately.** This is new. It
+  carries the owner's note on reliability below.
+
+When a part is taken, record it in `MASTER_PLAN.md` and its study as usual,
+and mark it taken here. Leave the plan file as supplied.
+
+**Standing rule: `source_material/` is the less reliable tier** (owner's note,
+19 October 2026). As a corpus, what is under `source_material/` (older
+scripts, supplied studies, the members of `GLM-main.zip`) is less reliable
+than the documents, code and Lean written and checked in this repository.
+Adapt every corpus-facing mechanism to that. Where things stand now:
+
+* **Already tiered:** the document inventory and its checks
+  (`corpus/inventory.py`) never walk `source_material/`. The knowledge
+  corpus's `define`/`ask` readers rank a supplied or archived sentence below
+  every written one (`knowledge/answer.py`, `source_rank`, the "archive or
+  supplied" rank). The K8′ glossary terms are read from written Markdown
+  only (`knowledge/study.py`, `bold_terms`).
+* **Not tiered:** the counted model in `knowledge/model.py` counts a
+  `source_material/` sentence the same as a written one. So does everything
+  built on it: continuation, the guarded predictor, `similar`, the word
+  address, context sets, and the friction respeller's vocabulary. A one-off
+  count taken on 18 October 2026 (from the cache then current, not a
+  pinned instrument) found 1,031 of 2,238 documents, about 45% of sentences
+  and about 36% of tokens coming from `source_material/`.
+* **To do, inside Part II.7:** report each corpus result with
+  `source_material/` separated out: written only, supplied only, both. Then
+  declare how the supplied tier should count: excluded, down-weighted by a
+  declared exact factor, or admitted only as a candidate that written evidence
+  must confirm. Measure that choice under a frozen-path comparison, because it
+  moves answers the evaluation pins. Until then, a corpus reading resting only
+  on `source_material/` should be reported as such, not as what the GLM knows.
+  The same goes for retrieval from the older scripts: a result recovered from
+  `GLM-main.zip` is a candidate until it is re-derived, tested or proved here.
 
 ### 2.1 The next round — take one of these
 
