@@ -1,0 +1,47 @@
+================================================================================================
+ITERATION 2 / PHASE 4 — Per-step cost in multi-step traces
+================================================================================================
+
+For each task with a multi-step trace, measure the per-step F_2 cost
+(syndrome, coset weight), codeword weight, and TAX. Identify decision
+points where the cost spikes — these are the escalation triggers the GLM
+must learn to handle.
+
+--- toggle (trace length mean = 2.0, min = 2, max = 2) ---
+Step                    Δ wt      coset wt      TAX       ambig%    cw wt     
+init                    0.00      0.00          0.000     0.0       0.0       
+bitwise_not             24.00     0.00          9.352     0.0       24.0      
+
+--- translate (trace length mean = 4.0, min = 4, max = 4) ---
+Step                    Δ wt      coset wt      TAX       ambig%    cw wt     
+init                    0.00      0.00          0.000     0.0       0.0       
+mask_block              6.00      4.00          3.117     100.0     8.0       
+erase_old               10.00     4.00          3.117     100.0     8.0       
+paint_new               2.00      2.00          0.000     0.0       0.0       
+
+--- reflect_v (trace length mean = 2.0, min = 2, max = 2) ---
+Step                    Δ wt      coset wt      TAX       ambig%    cw wt     
+init                    0.00      0.00          0.000     0.0       0.0       
+flip_horizontal         8.68      3.48          2.837     78.0      7.3       
+
+--- flood_fill (trace length mean = 2.0, min = 2, max = 2) ---
+Step                    Δ wt      coset wt      TAX       ambig%    cw wt     
+init                    0.00      0.00          0.000     0.0       0.0       
+fill_interior           2.14      2.14          0.000     0.0       0.0       
+
+--- bfs_shortest (trace length mean = 5.3, min = 3, max = 9) ---
+Step                    Δ wt      coset wt      TAX       ambig%    cw wt     
+init                    0.00      0.00          0.000     0.0       0.0       
+step_vertical           0.87      0.87          0.000     0.0       0.0       
+step_horizontal         0.53      0.53          0.000     0.0       0.0       
+final                   0.00      0.00          0.000     0.0       0.0       
+
+Interpretation:
+  * Steps where coset_weight = 4 are ESCALATION TRIGGERS: the substrate
+    cannot decide which octad to credit, and must lift to a higher lattice.
+  * Steps where codeword_weight > 0 (with coset_weight = 0) are CODEWORD
+    OPERATIONS: the displacement IS a codeword, and the substrate can
+    execute it exactly. The cost is the codeword's TAX.
+  * Steps where coset_weight ∈ {1, 2, 3} are WELL-DEFINED but require
+    syndrome decoding — the substrate handles them, but the operation is
+    not a pure codeword move.

@@ -1,0 +1,46 @@
+================================================================================================
+ITERATION 7 PHASE 3 — Compose snap with operation via substrate's analogy.py
+================================================================================================
+
+The substrate's lattice_analogy(a, b, c) solves 'A : B :: C : ?' by:
+  1. Computing D* = C + (B - A) (in Q^24)
+  2. Snapping D* to the nearest Leech lattice point
+  3. Returning that as the predicted answer
+
+We test this on 3 task families:
+  * toggle: A → NOT A, predict C → NOT C
+  * translate: A → B (move block), predict C → ?
+  * reflect_v: A → flip(A), predict C → flip(C)
+
+------------------------------------------------------------------------------------------------
+Task          trials    exact match     mean cell match     in_leech rate   
+------------------------------------------------------------------------------------------------
+toggle        20        0/20 (0%)       0.377          20/20 (100%)
+translate     20        0/20 (0%)       0.717          20/20 (100%)
+reflect_v     20        0/20 (0%)       0.640          20/20 (100%)
+------------------------------------------------------------------------------------------------
+
+Sample results (first 3 trials per task):
+
+--- toggle ---
+  trial a=1 c=2: exact=False, cell_match=0.208, in_leech=True, dist2=7/4
+  trial a=11 c=12: exact=False, cell_match=0.542, in_leech=True, dist2=13/8
+  trial a=21 c=22: exact=False, cell_match=0.125, in_leech=True, dist2=7/4
+
+--- translate ---
+  trial a=1 c=2: exact=False, cell_match=0.792, in_leech=True, dist2=7/4
+  trial a=11 c=12: exact=False, cell_match=0.792, in_leech=True, dist2=7/4
+  trial a=21 c=22: exact=False, cell_match=0.792, in_leech=True, dist2=7/4
+
+--- reflect_v ---
+  trial a=1 c=2: exact=False, cell_match=0.542, in_leech=True, dist2=11/8
+  trial a=11 c=12: exact=False, cell_match=0.833, in_leech=True, dist2=1/2
+  trial a=21 c=22: exact=False, cell_match=0.417, in_leech=True, dist2=13/8
+
+Interpretation:
+  * If exact_match is high, the substrate's analogy solver correctly
+    solves the binary transformation via lattice operations.
+  * If exact_match is low but cell_match is high, the snap rounds to
+    a nearby (but wrong) Leech point — the operation is partially captured.
+  * If both are low, the substrate's analogy can't solve this task via
+    Leech-level operations alone — escalation needed.

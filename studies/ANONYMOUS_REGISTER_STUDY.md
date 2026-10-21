@@ -83,14 +83,14 @@ window it is scored at are all the relay study's.
 <!-- generated: anonymous-faculties -->
 | faculty | hit@5, names kept | hit@5, names replaced |
 |---|---|---|
-| text — exact overlap of the identifiers | 703 (83.2 %) | 47 (5.6 %) |
-| lexical — the identifier address book | 347 (41.1 %) | 36 (4.3 %) |
-| **address — the structural address book** | 165 (19.5 %) | 163 (19.3 %) |
-| name — substring search over the names | 200 (23.7 %) | 6 (0.7 %) |
-| digest — a control that knows nothing | 36 (4.3 %) | 29 (3.4 %) |
-| random — a seeded permutation | 20 (2.4 %) | 20 (2.4 %) |
+| text — exact overlap of the identifiers | 693 (82.3 %) | 53 (6.3 %) |
+| lexical — the identifier address book | 340 (40.4 %) | 30 (3.6 %) |
+| **address — the structural address book** | 145 (17.2 %) | 144 (17.1 %) |
+| name — substring search over the names | 190 (22.6 %) | 4 (0.5 %) |
+| digest — a control that knows nothing | 26 (3.1 %) | 24 (2.9 %) |
+| random — a seeded permutation | 13 (1.5 %) | 13 (1.5 %) |
 
-845 queries over a corpus of 5489 declarations; chance at k = 5 is 3.0 %.  The text search collapses: yes; the identifier address book collapses with it: yes; the structural address holds: yes; and it leads every other faculty in this register: yes.
+842 queries over a corpus of 5893 declarations; chance at k = 5 is 2.8 %.  The text search collapses: yes; the identifier address book collapses with it: yes; the structural address holds: yes; and it leads every other faculty in this register: yes.
 <!-- end generated -->
 
 In numbers, and as a sentence rather than a table: take the names away and the
@@ -138,7 +138,7 @@ query.
 <!-- generated: anonymous-invariance -->
 | reading | queries | what it means |
 |---|---|---|
-| queries whose syntax coordinates are untouched | 845 | 100.0 % of 845 |
+| queries whose syntax coordinates are untouched | 842 | 100.0 % of 842 |
 | queries where a type-word coordinate moves | 0 | the declaration's own name spells `Nat`, `Int`, `Rat`, `Set` or `Decidable`, and the shipped map counts those words wherever they occur |
 | queries where any other syntax coordinate moves | 0 | none, which is `GLM.Anonymous.features_anonymise` holding of the code |
 
@@ -168,8 +168,8 @@ told that this register exists.
 <!-- generated: anonymous-relay -->
 | reading | queries | gate fires on | text alone, hit@5 | the relay, hit@5 |
 |---|---|---|---|---|
-| names kept | 845 | 25 | 703 (83.2 %) | **708 (83.8 %)** |
-| names replaced | 845 | 564 | 47 (5.6 %) | **101 (12.0 %)** |
+| names kept | 842 | 24 | 693 (82.3 %) | **695 (82.5 %)** |
+| names replaced | 842 | 520 | 53 (6.3 %) | **100 (11.9 %)** |
 
 The gate is 1/10, the one the relay study already carries, not re-tuned for this register.  It hands over on most of the register: yes; and the relay beats the text leader here: yes.
 <!-- end generated -->
@@ -199,7 +199,7 @@ it.
 | `placeholders_are_fresh` | holds |
 | `relay_beats_text_in_the_register` | holds |
 | `text_collapses_without_the_names` | holds |
-| `text_is_within_twice_chance` | holds |
+| `text_is_within_twice_chance` | **fails** |
 | `text_leads_when_the_names_are_there` | holds |
 <!-- end generated -->
 

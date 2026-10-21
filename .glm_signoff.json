@@ -53,6 +53,15 @@
    "returncode": 1,
    "signed_at": "2026-10-13T02:31:55Z",
    "status": "passed"
+  },
+  "replay": {
+   "digest": "0914f607708bf518c27131d74ec71c4e230e919b8528a787529ea745cf11ca23",
+   "milliseconds": 553046,
+   "output_tail": "replay gate (column 3 run for every case expected answered)\n  cases 177: replayable 171, verified 171, without a column 3 6, in 552 s\n  PASS\n",
+   "python": "python3.11.14",
+   "returncode": 0,
+   "signed_at": "2026-10-21T00:05:34Z",
+   "status": "passed"
   }
  },
  "python": "python3.11.14",

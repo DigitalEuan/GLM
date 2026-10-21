@@ -5,10 +5,7 @@
 **Question.** If this session stopped now, what would the next one need to
 know to carry the round on?
 
-**Verdict.** No round is in flight: Phase 158 (the oscillator junction tried
-four ways, and the analogy method written down) is closed and recorded in
-`MASTER_PLAN.md`. The next round starts from the To-Do list, `STATUS.md`
-§2.1. The test-file sign-off is still owed (no pytest here).
+**Verdict.** No round is in flight: Phase 175 (the owner's pipeline kit in the GLM: its bridge, its seven Lean files, and `tool induce`) is closed, in `MASTER_PLAN.md`. The next round starts from `STATUS.md` §2.1. The test-file sign-off is still owed (no pytest here).
 
 **Deciding figure.** 0 steps outstanding.
 
@@ -17,6 +14,8 @@ four ways, and the analogy method written down) is closed and recorded in
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict
 and the figure above are grounded in the body below, and
 `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+*Last altered 21 October 2026.*
 
 ---
 
@@ -44,22 +43,28 @@ absence:
 
 ## Status
 
-**No round is in flight.** Phase 158 (the oscillator junction tried four
-ways; the analogy method written down) is closed. Done this round: the
-pre-registration of `OSCILLATOR_JUNCTION_STUDY.md`, committed before the
-variant module; `OscillatorJunction.lean` (0 `sorry`);
-`engineering/oscillator_junction.py` and `tools oscjunction`; the four
-censuses and the preservation set, stored; variant B shipped in
-`engineering/domains.py`; the Phase 157 census re-taken; the evaluation
-before and after (222 of 222, nothing moved); `tests/test_oscillator_junction.py`
-(6, run by hand with `tests/test_domains.py`: 18 of 18 pass); §7 of the
-study, §7.6 of `DOMAIN_WHEELS_STUDY.md`, §8 of `FRICTION_STUDY.md`;
-`MASTER_PLAN.md` Phase 158; `STATUS.md`; `SYSTEM.md`; `ITERATE.md`; the paper
-(§20.32); the READMEs. 0 steps of the phase are outstanding.
+**No round is in flight.** Phase 175 (the owner's pipeline kit, taken at the
+owner's request of 21 October 2026) is closed: the delivered files placed and
+split in `source_material/GLM_Pipeline_Kit/`; the kit's bridge run on the
+GLM's own substrate (0 failures); the kit's seven Lean files under
+`GLM/PipelineKit/` and `PipelineInduction.lean` (17 theorems, 0 `sorry`);
+`reasoning/pipeline_kit.py`, `tool induce`, `reasoning/pipeline_kit_study.py`
+and `tools pipeline-kit` (12 of 12 marks); `tests/test_pipeline_kit.py` (7 of 7
+by hand).
 
-**One step owed: the release sign-off** (owed since Phase 134). pytest is
-still not installable here (no package index). Resume with
+**Standing hazards — read before running anything:** [`ITERATE.md`](ITERATE.md)
+§0.1, *Run-order hazards*. The two that cost the most:
+
+* **Don't edit documents while `corpus --refresh` is running.** It rewrites
+  them from the copies it read when it started.
+* **Re-take order matters after editing `evaluation/cases.py`.** Some saved
+  results read others: `nearest-address` and `budget-reading` digest the
+  budget-guard frozen path, and `nearest-question` reads the ties-ladder
+  frozen path. Re-take `queryesc`, `budget-guard-frozen` and
+  `ties-ladder-frozen` first, then the rest, then refresh the corpus last.
+
+**One step owed: the release sign-off** (owed since Phase 134): the test-file
+sign-off, the gate the evaluation's own runs do not replace. pytest is still
+not installable here (no package index). Resume with
 `python3 -m pip install pytest`, then
 `PYTHONPATH=. python3 -m glm_universal.signoff --close --jobs 8`.
-
-Earlier rounds' records are in `MASTER_PLAN.md` (Phases 157, 156, …).

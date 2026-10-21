@@ -1,0 +1,43 @@
+================================================================================================
+EXPERIMENT A + C (Note 5) -- Leech/Golay representation vs. raw baselines
+================================================================================================
+
+Four solvers on 5 synthetic binary task families, 50 trials each, 4x6 grids (24 bits).
+
+Solvers:
+  oracle         -- rule by name (upper bound)
+  raw_xor        -- y_q := x_q XOR (x_1 XOR y_1)  [displacement baseline]
+  golay_coset    -- work in F_2^24/G_24, transfer the syndrome of the displacement,
+                    decode via the canonical coset leader
+  random_linear  -- same as golay_coset but with a random 12x24 parity matrix
+                    (isolates whether Golay's structure adds anything beyond F_2)
+
+Hypothesis (Note 5):
+  * 'toggle' has invariant displacement, so raw_xor, golay_coset, and random_linear
+    should ALL succeed on toggle.
+  * The other four tasks have non-invariant displacements, so raw_xor should fail.
+  * If golay_coset == raw_xor on the non-toggle tasks, the Leech/Golay binary quotient
+    adds no transfer power. If golay_coset > raw_xor, that is a real finding.
+  * random_linear tests whether any benefit comes from the Golay code specifically
+    vs. an arbitrary F_2 linear projection. If golay_coset == random_linear, the
+    Golay code's Steiner structure provides no extra benefit here.
+
+------------------------------------------------------------------------------------------------
+Task          transfers?  oracle EM   raw_xor EM    golay EM      random EM     
+                          oracle CMR  raw_xor CMR   golay CMR     random CMR    
+------------------------------------------------------------------------------------------------
+toggle        yes         1.000       1.000         0.000         0.000         
+                          1.000       1.000         0.145         0.063         
+translate     no          1.000       0.500         0.000         0.000         
+                          1.000       0.875         0.687         0.833         
+reflect_v     no          1.000       0.000         0.000         0.000         
+                          1.000       0.568         0.570         0.603         
+flood_fill    no          1.000       0.200         0.000         0.000         
+                          1.000       0.948         0.788         0.865         
+bfs_shortest  no          1.000       0.040         0.000         0.020         
+                          1.000       0.836         0.791         0.825         
+------------------------------------------------------------------------------------------------
+
+Verdict:
+  trials where raw_xor EM == golay_coset EM   : 163/250
+  trials where golay_coset EM == random EM   : 249/250

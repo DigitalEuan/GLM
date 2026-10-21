@@ -1,0 +1,33 @@
+================================================================================================
+ITERATION 7 PHASE 2 — Full F_9 lattice (Λ_96^F_9)
+================================================================================================
+
+Construction:
+  F_9 = F_3[α] / (α² + 1)  (α² = -1 = 2 in F_3)
+  F_9 Pless code: [I_24 | α·S] where S = bordered Jacobsthal of 23
+  Lift to F_3^96: each F_9 element (a, b) → F_3 pair (a, b)
+  Λ_96^F_9 = {x ∈ Z^96 : x mod 3 lifts to a C_96^F_9 codeword}
+
+This is the user's predicted 'finer resolution' lattice. F_9 has 8 units
+(multiplicative group C_8) vs F_3's 2 units (C_2). The full F_9 lattice
+should expose up to 8 spin orientations per snap, vs iteration 6's 3.
+
+------------------------------------------------------------------------------------------------
+[Per-task Λ_96^F_9 snap results — 30 samples each]
+------------------------------------------------------------------------------------------------
+Task          snap ok       snap rate     uses α        mean spins    max spins     
+------------------------------------------------------------------------------------------------
+toggle        30/30            100.0%         0/30            8.00          8             
+translate     30/30            100.0%         0/30            8.00          8             
+reflect_v     30/30            100.0%         0/30            8.00          8             
+flood_fill    30/30            100.0%         0/30            8.00          8             
+bfs_shortest  30/30            100.0%         0/30            8.00          8             
+------------------------------------------------------------------------------------------------
+
+Comparison vs iteration 6's Λ_96 (F_3 lift):
+  iter 6 Λ_96 (F_3 lift): 100% snap, 3-element spin superposition
+  iter 7 Λ_96^F_9 (full F_9): see above; uses α for richer embeddings
+
+F_9 has 8 units in C_8 (vs F_3's 2 units in C_2). The full spin test
+multiplies each snapped target by all 8 F_9 units and counts how many
+preserve Λ_96^F_9 membership. Higher count = richer superposition held.

@@ -1,0 +1,59 @@
+================================================================================================
+ITERATION 5 PHASE 1 — Multi-head GLM rule-sequence learner
+================================================================================================
+
+A small multi-head model trained on iteration-4 layered-snap traces.
+Three heads: rule-prediction (6 classes), lattice-selector (4 classes), snap-result (binary).
+Cross-task generalisation: train on 4 tasks, evaluate on the 5th held-out.
+
+------------------------------------------------------------------------------------------------
+[In-distribution validation accuracy (mean across seeds)]
+------------------------------------------------------------------------------------------------
+Held-out task   rule acc      lattice acc     snap acc      
+------------------------------------------------------------------------------------------------
+toggle          0.741         0.741           1.000         
+translate       0.826         0.826           1.000         
+reflect_v       0.737         0.737           1.000         
+flood_fill      0.870         0.870           1.000         
+bfs_shortest    0.670         0.670           0.989         
+------------------------------------------------------------------------------------------------
+
+[Held-out task generalisation accuracy (mean across seeds)]
+------------------------------------------------------------------------------------------------
+Held-out task   rule acc      lattice acc     snap acc      
+------------------------------------------------------------------------------------------------
+toggle          0.627         0.627           1.000         
+translate       0.873         0.873           1.000         
+reflect_v       0.653         0.653           1.000         
+flood_fill      0.967         0.967           1.000         
+bfs_shortest    0.600         0.600           0.980         
+------------------------------------------------------------------------------------------------
+
+[Failure log summary — 200 entries (capped at 200)]
+------------------------------------------------------------------------------------------------
+  rule_misclassification: 100 cases
+    type: rule_misclassification
+    sample_idx: 11
+    task: reflect_v
+    n_ones: 5
+    parity: odd
+    true_rule: 3
+    pred_rule: 0
+    true_lattice: Barnes_Wall_32
+    reason: model predicted wrong rule for this target
+
+  lattice_misclassification: 100 cases
+    type: lattice_misclassification
+    sample_idx: 11
+    task: reflect_v
+    n_ones: 5
+    parity: odd
+    true_lattice: Barnes_Wall_32
+    pred_lattice_idx: 0
+    pred_lattice: Leech_24
+    reason: model predicted wrong lattice layer for this target
+
+[Failures by task]
+  toggle: 126 failures
+  translate: 38 failures
+  reflect_v: 36 failures

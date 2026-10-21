@@ -1,5 +1,8 @@
 """Command line for the sign-off ledger.
 
+*Last altered 20 October 2026 (Phase 174: stage 0 of the close re-takes the
+answer censuses last, ``CENSUS_LAST``).*
+
 ::
 
     PYTHONPATH=. python3 -m glm_universal.signoff --plan
@@ -357,6 +360,13 @@ def _stale_caches() -> Tuple[Tuple[str, str], ...]:
 REFERENCE_COMMAND = "citation-scope --reference"
 
 
+#: The caches that record the system's answers and, since Phase 174, are
+#: guarded by the stored measurements those answers quote
+#: (``studies/QUOTED_MEASUREMENTS_STUDY.md``): re-taken last, in this order,
+#: and again in the second pass if an earlier re-take staled them.
+CENSUS_LAST: Tuple[str, ...] = ("evidence_model_study", "evidence_in_use_study")
+
+
 def _retake_caches() -> int:
     """Stage 0 of the close: re-take every stale measurement cache.
 
@@ -379,7 +389,11 @@ def _retake_caches() -> int:
     status = 0
     tried: Set[str] = set()
     for _ in range(2):
-        stale = [(m, c) for m, c in _stale_caches() if m not in tried]
+        stale = [(m, c) for m, c in _stale_caches()
+                 if m not in tried or m in CENSUS_LAST]
+        stale.sort(key=lambda mc: (mc[0] in CENSUS_LAST,
+                                   CENSUS_LAST.index(mc[0])
+                                   if mc[0] in CENSUS_LAST else 0))
         if not stale:
             break
         for module, command in stale:

@@ -1,0 +1,33 @@
+================================================================================================
+ITERATION 8 PHASE 2 — Binary-Leech dual snap via Λ_48
+================================================================================================
+
+Per rec #1: lift lattice_analogy to Λ_48 so it can TRANSFORM binary targets.
+The substrate's lattice_analogy uses Leech (Λ_24), where binary targets lie
+OUTSIDE the hull. Lifting to Λ_48 (where the trivial 3x scaling works for
+ALL binary targets) should let the analogy solve binary transformations.
+
+Procedure per trial:
+  1. Encode a, b, c as Λ_48 points (3x scaling + pair encoding)
+  2. Compute D* = C + (B - A) in Q^48
+  3. Snap D* to nearest Λ_48 point (Construction A: nearest multiple of 3)
+  4. Decode the snap back to binary (coord 2i -> bit)
+
+------------------------------------------------------------------------------------------------
+[Per-task results — Λ_48 dual snap]
+------------------------------------------------------------------------------------------------
+Task          exact match     mean cell match     snap in Λ_48    
+------------------------------------------------------------------------------------------------
+toggle        0/30 (0%)       0.474               1.000           
+translate     14/30 (47%)       0.900               1.000           
+reflect_v     1/30 (3%)       0.613               1.000           
+------------------------------------------------------------------------------------------------
+
+Interpretation:
+  * If exact match is 100%, the binary-Leech dual snap correctly solves the
+    transformation via Λ_48 lattice operations.
+  * If exact match is 0% but cell match is high, the snap is partially correct
+    — the operation is captured but the snap rounds to the wrong cell.
+  * If snap_in_lambda48 is 100%, the snap always lands in the lattice.
+    The trivial Construction-A snap (nearest multiple of 3) trivially lands
+    in Λ_48 because multiples of 3 are in the zero codeword.

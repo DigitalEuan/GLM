@@ -15,6 +15,12 @@ here, one module above the core, next to :mod:`glm_universal.figures`.
     PYTHONPATH=. python3 -m glm_universal.tools directives
     PYTHONPATH=. python3 -m glm_universal.tools signoff
 
+Last altered 21 October 2026 (Phase 167: ``adversarial-dialogue``; Phase 168:
+``confidence-curve``; Phase 169: ``evidence-model``; Phase 170:
+``context-frames``; Phase 171: ``evidence-in-use``; Phase 172:
+``resumed-dialogue``; Phase 173: ``stacked-dialogue``; Phase 174:
+``quoted-measurements``; Phase 175: ``pipeline-kit``).
+
 Exit codes: ``0`` if what was asked for holds, ``1`` if a report found a
 defect, ``2`` if the arguments were not understood.
 """
@@ -44,6 +50,15 @@ from .reasoning import coordinate_junction_study as cjs
 from .reasoning import timed_question as tmq
 from .reasoning import answering_question as anq
 from .reasoning import budget_guard_frozen as bgfz
+from .reasoning import hole_reports_l5_study as hl5s
+from .reasoning import ties_ladder_frozen as tlfz
+from .reasoning import planner_ladder_study as plls
+from .reasoning import carried_read_study as crs
+from .knowledge import study as cks
+from .knowledge import definitions_study as cds
+from .knowledge import friction_study as fst
+from .reasoning import nearest_question_study as nqs
+from .reasoning import l5_first_budget as l5fb
 from .reasoning import budget_reading_study as brs
 from .reasoning import nearest_address_study as nas
 from .reasoning import probe_budget as prb
@@ -1704,6 +1719,1132 @@ def _budget_guard_frozen(args: argparse.Namespace) -> int:
     ok = (report["present"] == report["same_status"] == report["cases"]
           and not report["undeclared"])
     return 0 if ok else 1
+
+
+def _hole_reports_l5(args: argparse.Namespace) -> int:
+    """The configuration reading in the other deep-hole reports (Phase 149):
+    the marks of ``studies/HOLE_REPORTS_L5_STUDY.md`` (``--write`` re-takes
+    them, about fifteen minutes for the frozen path)."""
+    if args.write:
+        print(f"wrote {hl5s.write_measurements()}")
+    report = hl5s.hole_reports_l5_report()
+    if not report.get("available"):
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0 if report["met"] == report["taken"] else 1
+    r = report["readings"]
+    c, d, e = r["classifier"], r["ladder"], r["failures"]
+    q, f = report["questions"], report["frozen"]
+    print(f"C1 classifier     L5 seed queries {c['seed_correct']}/"
+          f"{c['seed_queries']}; {c['correct']} correct, {c['wrong']} wrong, "
+          f"{c['refused']} refused of {c['queries']}")
+    print(f"D1 ladder         L5 gate at {d['passing']}/{d['sizes']} sizes, "
+          f"first at {d['smallest_passing']} starts; passes with rho >= 1 at "
+          f"{d['passes_without_criterion']}")
+    print(f"E1 failures       {e['l5_correct']}/{e['joint_failures']} joint "
+          f"failures answered correctly at L5; {e['locally_certified']}/"
+          f"{e['types']} types certified at {e['starts']} starts")
+    print(f"R1 rule fires     {c['answered']} answered, {c['within_radius']} "
+          f"inside their own radius of {c['queries']}")
+    print(f"Q1 battery        {q['answered']}/{q['questions']} answered, "
+          f"{q['scripts']} scripts verify, {q['mutants_rejected']}/"
+          f"{q['mutants']} mutants rejected")
+    if f:
+        print(f"F1 frozen path    {f['present']}/{f['cases']} present, "
+              f"{f['same_status']} same status, {f['same_text']} same text; "
+              f"prefix kept {f['prefix_kept']}/{f['prefix_cases']}; moved "
+              f"{[m['id'] for m in f['moved']]}; undeclared "
+              f"{f['undeclared']}")
+    print(f"marks met         {report['met']} of {report['taken']}")
+    return 0 if report["met"] == report["taken"] else 1
+
+
+def _ties_ladder_frozen(args: argparse.Namespace) -> int:
+    """The evaluation's frozen path of Phases 150-151 (``--write`` re-takes
+    it, about fifteen minutes)."""
+    if args.write:
+        print(f"wrote {tlfz.write_measurements()}")
+    stored = tlfz.current()
+    if stored is None:
+        print(f"the stored measurement is {tlfz.state()['verdict']}; re-take "
+              f"it with python3 -m glm_universal.tools ties-ladder-frozen "
+              f"--write")
+        return 1
+    f = stored["frozen"]
+    if args.json:
+        print(json.dumps(_plain(f), indent=1, sort_keys=True))
+        return 0 if stored["marks"]["F1"] else 1
+    print(f"F1 frozen path    {f['present']}/{f['cases']} present, "
+          f"{f['same_status']} same status, {f['same_text']} same text; "
+          f"moved {[m['id'] for m in f['moved']]}; undeclared "
+          f"{f['undeclared']}; prefix broken {f['prefix_broken']}; new "
+          f"cases {len(f['new_cases'])}")
+    return 0 if stored["marks"]["F1"] else 1
+
+
+def _corpus_knowledge(args: argparse.Namespace) -> int:
+    """The corpus as what the GLM knows (Phase 154): the marks of
+    ``studies/CORPUS_KNOWLEDGE_STUDY.md`` (``--write`` re-takes them)."""
+    if args.write:
+        print(f"wrote {cks.write_measurements()}")
+    report = cks.corpus_knowledge_report()
+    if not report.get("available"):
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0 if report["met"] == report["taken"] else 1
+    c, p = report["corpus"], report["prediction"]
+    m, k = p["model"], p["control"]
+    print(f"corpus            {c['documents']} documents, {c['sentences']} "
+          f"sentences, {c['tokens']} tokens, {c['vocabulary']} words")
+    print(f"K1 next token     {m['accuracy']} against {m['baseline_accuracy']} "
+          f"(most frequent token) on {p['novel_sentences']} novel sentences")
+    print(f"K2 order control  {k['accuracy']}")
+    print(f"K3 guard          precision {m['guarded_precision']} at coverage "
+          f"{m['guarded_coverage']}")
+    print(f"K3' majority      precision {m['majority_precision']} at coverage "
+          f"{m['majority_coverage']}")
+    print(f"K4 as it collects {[q['accuracy'] for q in p['curve']]}")
+    a = report["additivity"]
+    print(f"K5 additivity     halves {a['sum_of_halves_equal']}, reversed "
+          f"{a['reverse_order_equal']}")
+    print(f"K6 number words   {report['number_words']['mean_share']}")
+    pl = report["plural"]
+    print(f"K7 plurals        similar {pl['similar_rate']}, related "
+          f"{pl['related_rate']} of {pl['pairs']}")
+    d, b = report["define"], report["define_bold"]
+    print(f"K8 define         {d['answered']}/{d['terms']}; K9 nonsense "
+          f"refused {d['nonsense_refused']}/{d['terms']}")
+    print(f"K8' bold terms    {b['answered']}/{b['terms']}; nonsense refused "
+          f"{b['nonsense_refused']}/{b['terms']}")
+    print(f"marks             {report['met']} of {report['taken']}; amended "
+          f"{report['amended_met']} of {len(report['amended'])}")
+    return 0 if report["met"] == report["taken"] else 1
+
+
+def _corpus_definitions(args: argparse.Namespace) -> int:
+    """The corpus's definitions graded, and a word's place on the lattice
+    (Phase 155): the marks of ``studies/CORPUS_DEFINITIONS_STUDY.md``
+    (``--write`` re-takes them)."""
+    if args.write:
+        print(f"wrote {cds.write_measurements()}")
+    report = cds.corpus_definitions_report()
+    if not report.get("available"):
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0
+    for label, g in (("pattern", report["graded"]), ("context", report["graded_context"])):
+        print(f"define ({label:7s}) grade {g['total_grade']} against first mention "
+              f"{g['control_total']} (wins {g['wins']}, losses {g['losses']}); agree "
+              f"{g['agree']}/{g['terms']}, top-3 {g['agree_top']}/{g['terms']}; "
+              f"mismatched gloss {g['mismatched_total']}")
+    for label, w in (("window", report["words"]), ("positional", report["words_positional"])):
+        print(f"words ({label:10s}) {w['words']} words, {w['distinct_addresses']} "
+              f"addresses, read back {w['readback']}; number words "
+              f"{w['number_share']} (control {w['number_control_share']}); plurals "
+              f"{w['plural_hits']}/{w['pairs']} (control {w['plural_control_hits']})")
+    print(f"marks             {report['met']} of {report['taken']}; amended "
+          f"{report['amended_met']} of {report['amended_taken']}")
+    return 0
+
+
+def _friction(args: argparse.Namespace) -> int:
+    """Friction (Phase 156): the marks of ``studies/FRICTION_STUDY.md`` --
+    the survey of the evaluation's questions under small movements, contact
+    over the whole prompt, and the stick-slip reading (``--write`` re-takes the
+    corpus measurement, ``--survey --write`` the survey)."""
+    if args.write:
+        if args.survey:
+            print(f"wrote {fst.write_survey(jobs=args.jobs)}")
+        else:
+            print(f"wrote {fst.write_measurements()}")
+    report = fst.friction_report()
+    if not report.get("available"):
+        for reason in report.get("reasons", []):
+            print(reason)
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0
+    sv = report["survey"]
+    print(f"survey   {sv['base_passing']}/{sv['cases']} cases pass unperturbed")
+    for pid, t in sv["by_perturbation"].items():
+        print(f"  {pid:9s} hold {t['hold']}/{t['runs']}  stick {t['stick']}  slip {t['slip']}")
+    co = report["corpus"]["contact"]
+    print(f"contact  {co['sentences']} held-out sentences, {co['positions']} positions: "
+          f"correct patch {co['correct']['patch']}, contact {co['correct']['contact']}, "
+          f"mismatched {co['correct']['control']}")
+    st = report["corpus"]["stickslip"]
+    for name, t in st["readers"].items():
+        print(f"  {name:13s} switches {t['switches']}  returns {t['returns']}  "
+              f"final correct {t['final_correct']}/{st['read']}")
+    print(f"marks    {report['met']} of {report['taken']}; amended "
+          f"{report['amended_met']} of {report['amended_taken']}")
+    return 0
+
+
+def _friction_two(args: argparse.Namespace) -> int:
+    """Friction, the rest (Phase 157): the marks of
+    ``studies/FRICTION_TWO_STUDY.md`` -- the did-you-mean re-read, worn
+    contact and the noise-set margin (``--write`` re-takes the corpus
+    measurement, ``--survey --write`` the survey)."""
+    from .knowledge import friction_two_study as f2s
+    if args.write:
+        if args.survey:
+            print(f"wrote {f2s.write_survey(jobs=args.jobs)}")
+        else:
+            print(f"wrote {f2s.write_measurements()}")
+    report = f2s.friction_two_report()
+    if not report.get("available"):
+        for reason in report.get("reasons", []):
+            print(reason)
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0
+    data = report["corpus"]
+    rs = data["respell"]
+    for mode, t in rs["tally"].items():
+        print(f"respell  {mode:9s} restored {t['restored']}/{rs['questions']}  "
+              f"different {t['different']}  unchanged {t['unchanged']}")
+    sw = data["short_words"]
+    for mode, t in sw["tally"].items():
+        print(f"short    {mode:9s} restored {t['restored']}/{sw['moved']}  "
+              f"different {t['different']}")
+    if "survey" in report:
+        for pid, t in report["survey"]["by_perturbation"].items():
+            print(f"survey   {pid:9s} hold {t['hold']}/{t['runs']}  "
+                  f"stick {t['stick']}  slip {t['slip']}")
+    we = data["wear"]
+    for name in ("contact", "worn"):
+        print(f"wear     {name:8s} most frequent {we['most_frequent'][name][1]}  "
+              f"overlap {we['overlap'][name]}  distinct {we['distinct'][name]}")
+    no = data["noise"]
+    for name, t in no["readers"].items():
+        print(f"noise    {name:13s} switches {t['switches']}  returns "
+              f"{t['returns']}  final correct {t['final_correct']}/{no['read']}")
+    if "frozen" in report:
+        fz = report["frozen"]
+        print(f"frozen   {fz['passed_before']} -> {fz['passed_after']} passed; "
+              f"outcomes differ {fz['outcomes_differ']}")
+    marks = report["marks"]
+    print("marks    " + "  ".join(f"{k}:{'met' if v else 'missed'}"
+                                  for k, v in sorted(marks.items())))
+    print(f"         {report['met']} of {report['taken']} met")
+    return 0
+
+
+def _dates(args: argparse.Namespace) -> int:
+    """The date stamps of the repository's files (directive D17, added
+    18 October 2026): how many files carry one, and any stamp that is not a
+    date, is after today, or says a file was altered before it was made."""
+    from .corpus import dates as dts
+    report = dts.dates_report()
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0 if report["sound"] else 1
+    return dts._main()
+
+
+def _source_tiers(args: argparse.Namespace) -> int:
+    """Corpus source tiers (Phase 162, added 18 October 2026): the marks of
+    ``studies/SOURCE_TIERS_STUDY.md`` -- the census by tier, next-token
+    prediction by slice, the three ways the supplied tier might count, and
+    ``define``, the glossary grade and word use by slice (``--write``
+    re-takes the measurement)."""
+    from .knowledge import source_tiers as stt
+    if args.write:
+        print(f"wrote {stt.write_measurements()}")
+    report = stt.source_tiers_report()
+    if not report.get("available"):
+        for reason in report.get("reasons", []):
+            print(reason)
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0
+    cen = report["census"]
+    for tier in stt.TIERS:
+        row = cen["tiers"][tier]
+        print(f"census   {tier:9s} documents {row['documents']:5d}  sentences "
+              f"{row['sentences']:6d}  tokens {row['tokens']:8d}")
+    pred = report["prediction"]
+    for name in stt.SLICES:
+        for test in ("written", "supplied"):
+            r = pred["by_slice"][name][test]
+            print(f"predict  train {name:8s} test {test:8s} accuracy "
+                  f"{r['right']}/{r['positions']}  K3' "
+                  f"{r['majority_right']}/{r['majority_answered']}")
+    for tier in stt.TIERS:
+        r = pred["left_out"][tier]["written"]
+        print(f"leave    {tier:9s} out: written test {r['right']}/{r['positions']}")
+    c = pred["control"]["written"]
+    print(f"leave    pseudo-tier out: written test {c['right']}/{c['positions']}")
+    for test in ("written", "supplied"):
+        for name, r in pred["policies"][test]["policies"].items():
+            print(f"policy   {test:8s} {name:10s} answered {r['answered']:6d}  "
+                  f"right {r['right']:6d}")
+    for name in stt.SLICES:
+        d = report["define"][name]
+        g = report["glossary"][name]
+        print(f"define   {name:8s} {d['answered']}/{d['terms']} answered, tiers "
+              f"{d['answer_tiers']}; glossary agree {g['agree']}/{g['terms']}")
+    print("marks    " + "  ".join(f"{k}:{'met' if v else 'missed'}"
+                                  for k, v in report["marks"].items()))
+    print(f"         {report['met']} of {report['taken']} met; amended "
+          f"{report['amended_met']} of {report['amended_taken']} "
+          + " ".join(f"{k}:{'met' if v else 'missed'}"
+                     for k, v in report["amended"].items()))
+    return 0
+
+
+def _thermo_friction(args: argparse.Namespace) -> int:
+    """Thermomechanical friction (Phase 159): the marks of
+    ``studies/THERMO_FRICTION_STUDY.md`` -- the bimetallic governor, the
+    thermoelectric prompt anchor and the sintered respelling (``--write``
+    re-takes the corpus measurement, ``--blind-spot`` asks ``GLM.py`` the
+    survey's blind-spot question again and stores the answer, ``--frozen
+    PATH`` compares an evaluation report with the one taken before the
+    round)."""
+    from .knowledge import thermo_friction_study as tfs
+    if args.write:
+        print(f"wrote {tfs.write_measurements()}")
+    if args.blind_spot:
+        print(f"wrote {tfs.write_blind_spot()}")
+    if args.frozen:
+        from pathlib import Path
+        print(f"wrote {tfs.write_frozen(Path(args.frozen))}")
+    report = tfs.thermo_friction_report()
+    if not report.get("available"):
+        for reason in report.get("reasons", []):
+            print(reason)
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0
+    data = report["corpus"]
+    gv = data["governor"]
+    for name in ("patch", "contact", "static", "governor",
+                 "contact_governor"):
+        pos = gv["position"][name]
+        print(f"governor {name:16s} most frequent "
+              f"{gv['most_frequent'][name][1]:3d}  overlap "
+              f"{gv['overlap'][name]}  distinct {gv['distinct'][name]}  "
+              f"precision {pos['correct']}/{pos['answered']}")
+    an = data["anchor"]
+    for name, t in an["readers"].items():
+        print(f"anchor   {name:22s} switches {t['switches']}  returns "
+              f"{t['returns']}  final {t['final_correct']}/{an['read']}  "
+              f"hot final {t['hot_final_correct']}/{an['hot_sentences']}")
+    sn = data["sinter"]
+    for name in ("loaded", "sintered"):
+        r = sn["recovery"][name]
+        print(f"sinter   {name:9s} recovery {r['restored']}/"
+              f"{sn['recovery_set']}  different {r['different']}  "
+              f"lexicon changed {sn['lexicon_changed'][name]}")
+    if "blind_spot" in report:
+        b = report["blind_spot"]
+        print(f"blind    {b['question']!r} exit {b['exit']}")
+    if "frozen" in report:
+        fz = report["frozen"]
+        print(f"frozen   {fz['passed_before']} -> {fz['passed_after']} passed; "
+              f"outcomes differ {fz['outcomes_differ']}")
+    print("marks    " + "  ".join(f"{k}:{'met' if v else 'missed'}"
+                                  for k, v in report["marks"].items()))
+    print(f"         {report['met']} of {report['taken']} met; amended "
+          f"{report['amended_met']} of {report['amended_taken']}; sintering "
+          f"{'ships' if report['shipped'] else 'does not ship'}")
+    return 0
+
+
+def _domains(args: argparse.Namespace) -> int:
+    """Domain wheels (Phase 157): W11-W15, their junctions and the marks of
+    ``studies/DOMAIN_WHEELS_STUDY.md`` (``--census`` takes the census of the
+    union afresh, ``--write`` re-takes and stores it)."""
+    from .engineering import domains as dmn
+    from .engineering import domains_study as dms
+    if args.write:
+        print(f"wrote {dmn.write_census()}")
+    report = (dmn.domains_report(census=True) if args.census
+              else dms.study_report())
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True, default=str))
+        return 0
+    for w in report["wheels"]:
+        print(f"{w['id']:4s} {w['title']}: " + "; ".join(w["axioms"]))
+    for k, v in report["junctions"].items():
+        print(f"junction {k:8s} {', '.join(v['names'])}")
+    print("battery  " + ", ".join(f"{k} {v}" for k, v in
+                                  sorted(report["battery"]["tally"].items())))
+    if "census" in report:
+        c = report["census"]
+        print(f"census   gained {c['gained']} (right {c['gained_right']}); "
+              f"naive-new {c['naive_new']} (refused {c['naive_refused']})"
+              + ("" if report.get("census_fresh", True) else "  [stale]"))
+    if "post_hoc" in report:
+        rr = report["post_hoc"]
+        print(f"         post hoc (not a mark): {rr['one_wheel']} one-wheel answers "
+              f"moved to in-wheel; gained {rr['gained']}, right {rr['right']} "
+              f"with labels matched up to any non-zero multiple")
+    print("marks    " + "  ".join(f"{k}:{'met' if v else 'missed'}"
+                                  for k, v in sorted(report["marks"].items())))
+    return 0
+
+def _oscjunction(args: argparse.Namespace) -> int:
+    """The oscillator junction (Phase 158): the W9/W13 junction tried four
+    ways and the marks of ``studies/OSCILLATOR_JUNCTION_STUDY.md``
+    (``--write`` re-takes and stores the four censuses, about half an hour
+    each, run side by side with ``--jobs``)."""
+    from .engineering import oscillator_junction as osj
+    if args.write:
+        from concurrent.futures import ProcessPoolExecutor
+        with ProcessPoolExecutor(max_workers=max(1, args.jobs)) as pool:
+            got = dict(zip(osj.VARIANTS, pool.map(osj.measure,
+                                                   list(osj.VARIANTS))))
+        print(f"wrote {osj.write(got)}")
+    report = osj.report()
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True, default=str))
+        return 0
+    if not report.get("measured"):
+        print("not measured: run with --write")
+        return 1
+    print(f"preservation set: {report['preservation_questions']} questions, "
+          f"{report['shipped_answers']} answered by the shipped frame"
+          + ("" if report.get("fresh", True) else "  [stale]"))
+    for v, m in report["marks"].items():
+        print(f"{v} {osj.VARIANT_READINGS[v]}")
+        print("   battery " + ", ".join(f"{k} {x}" for k, x in
+                                       sorted(m["battery"].items()))
+              + f"; lost {m['lost']}; oscillator answers: not entailed "
+              f"{m['not_entailed']}, entailed {m['entailed_labelled']} "
+              f"labelled + {m['entailed_other']} other")
+        print("   marks  " + "  ".join(
+            f"{k}:{'met' if m[k] else 'missed'}" for k in ("O1", "O2", "O3")))
+    print(f"chosen   {report['chosen']}")
+    return 0
+
+def _corpus_ask(args: argparse.Namespace) -> int:
+    """One corpus reading (Phase 154), outside the session."""
+    from .knowledge import ask as kask
+    try:
+        out = kask.answer_request(" ".join(args.request))
+    except kask.CorpusRefusal as error:
+        print(f"refused: {error}")
+        return 1
+    print(out["answer"])
+    return 0
+
+
+def _study_ledger(args: argparse.Namespace) -> int:
+    """The study ledger (Phase 161): every study as one machine-readable row
+    (``studies/STUDY_LEDGER_STUDY.md``).  ``--json`` prints the ledger,
+    ``--issues`` the disagreements between its sources, ``--files`` the
+    files the documents name that the tree lacks; with no option, the marks.
+    """
+    from .corpus import study_ledger as sl
+    if args.json:
+        print(sl.ledger_json(), end="")
+        return 0
+    if args.issues:
+        for study, kind, detail in sl.ledger_issues(sl.ledger()):
+            print(f"{study}: {kind}: {detail}")
+        return 0
+    if args.files:
+        report = sl.missing_files()
+        print(f"{report['documents']} documents, {report['named']} file "
+              f"names, {report['archive_members']} archive members, "
+              f"{report['placeholders']} placeholders, "
+              f"{len(report['missing'])} missing")
+        for doc, form, path in report["missing"]:
+            print(f"  {doc}: {form} {path}")
+        held = sl.untracked_files()
+        if held["untracked"]:
+            print(f"{len(held['untracked'])} files on disk that version "
+                  f"control does not hold (kept out by .gitignore or not "
+                  f"yet added):")
+            for path in held["untracked"]:
+                print(f"  {path}")
+        return 0 if not report["missing"] else 1
+    report = sl.study_ledger_report()
+    summary = report["summary"]
+    for key in sorted(summary):
+        print(f"{key}: {summary[key]}")
+    print(f"issues: {report['issue_kinds']}")
+    print(f"tamper caught {report['tamper_caught']}/{report['tampered']}; "
+          f"files missing {len(report['files']['missing'])} of "
+          f"{report['files']['named']} named")
+    for mark, held in report["marks"].items():
+        print(f"{mark}: {'met' if held else 'missed'}")
+    print(f"{report['met']} of {report['taken']} marks, "
+          f"{report['amended_met']} of {report['amended_taken']} amended")
+    return 0
+
+
+def _adversarial_dialogue(args: argparse.Namespace) -> int:
+    """Adversarial replies at the ``nearest`` ties (Phase 167): the marks of
+    ``studies/ADVERSARIAL_DIALOGUE_STUDY.md`` (``--write`` re-takes them)."""
+    from .reasoning import adversarial_dialogue_study as ads
+    if args.write:
+        print(f"wrote {ads.write_measurements()}")
+    report = ads.adversarial_dialogue_report()
+    if not report.get("available"):
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0 if report["met"] == report["taken"] else 1
+    r = report
+    print(f"L1 {r['lean']['file']}: {r['lean']['theorems']}/"
+          f"{r['lean']['declared']} theorems, sorry {r['lean']['sorry']}")
+    print(f"A0 truthful        {r['A0']['confirmed']}/{r['A0']['runs']} "
+          f"confirmed, {r['A0']['wrong']} wrong")
+    print(f"A1 consistent liar {r['A1']['confirmed_on_impersonated']}/"
+          f"{r['A1']['runs']} confirmed on the member impersonated")
+    print(f"A2 every reply false {r['A2']['confirmed']}/{r['A2']['runs']} "
+          f"confirmed, all on a member every reply was true of: "
+          f"{r['A2']['confirmed_consistent']}")
+    print(f"A2b first reply false {r['A2b']['contradicted']}/"
+          f"{r['A2b']['runs']} contradicted, {r['A2b']['wrong']} wrong")
+    a3 = r["A3"]
+    print(f"A3 contradictory   given form {a3['given_contradicted']}/"
+          f"{a3['given_asked']} contradicted; next turn, wrong by a number "
+          f"{a3['on']['wrong_by_number']} before, {a3['off']['wrong_by_number']}"
+          f" now")
+    print(f"A4 unanswered      {r['A4']['read_after_interjection']} of "
+          f"{r['A4']['runs']} replies read after an unrelated turn")
+    for key, label in (("A5", "echo"), ("A6", "false then echo")):
+        on, off = r[key]["on"], r[key]["off"]
+        print(f"{key} {label:16s} echo read as a confirmation by number "
+              f"{on['echo_read_confirm_by_number']} before, "
+              f"{off['echo_read_confirm_by_number']} now; confirmed wrong "
+              f"{on.get('confirmed_wrong', on.get('wrong'))} before, "
+              f"{off.get('confirmed_wrong', off.get('wrong'))} now")
+    print(f"A7 outside head    {r['A7']['confirmed']} of {r['A7']['points']} "
+          f"confirmed")
+    print(f"A8 malformed       {len(r['A8']['read'])} of {r['A8']['checked']} "
+          f"read; given form {r['A8']['given_malformed_refused']}/"
+          f"{r['A8']['given_malformed_asked']} refused")
+    print(f"A9 near two options {len(r['A9']['read'])} of "
+          f"{r['A9']['checked']} read; controls {r['A9']['controls_read']}/"
+          f"{r['A9']['controls']}")
+    print(f"P  principle       {r['P']['outside_live']} members outside the "
+          f"head ever live over {r['P']['runs']} runs")
+    print(f"{r['met']} of {r['taken']} marks")
+    return 0 if r["met"] == r["taken"] else 1
+
+
+def _resumed_dialogue(args: argparse.Namespace) -> int:
+    """The open tie kept across turns (Phase 172): the marks of
+    ``studies/RESUMED_DIALOGUE_STUDY.md`` (``--write`` re-takes them)."""
+    from .reasoning import resumed_dialogue_study as rds
+    if args.write:
+        print(f"wrote {rds.write_measurements()}")
+    report = rds.resumed_dialogue_report()
+    if not report.get("available"):
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0 if report["met"] == report["taken"] else 1
+    r = report
+    print(f"L1 {r['lean']['file']}: {r['lean']['theorems']}/"
+          f"{r['lean']['declared']} theorems, sorry {r['lean']['sorry']}")
+    for src in ("nearest", "locate"):
+        r0, r1, r2 = r["R0"][src], r["R1"][src], r["R2"][src]
+        print(f"{src:8s} ties {r['ties'][src]}, members {r['members'][src]}")
+        print(f"  R0 switch off   {r0['read']} of {r0['asked']} replies read "
+              f"after an unrelated turn")
+        print(f"  R1 switch on    {r1['read']} of {r1['asked']} read, "
+              f"{r1['same']} ending as the uninterrupted run")
+        print(f"  R2 adversarial  {r2['same']} of {r2['asked']} ending as "
+              f"the uninterrupted run")
+    print(f"R3 answered once  {r['R3']['read']} of {r['R3']['asked']} "
+          f"repeated replies read after the dialogue ended")
+    print(f"R4 supersedes     {r['R4']['to_first']} of {r['R4']['asked']} "
+          f"bound to the superseded question ({r['R4']['read']} read)")
+    print(f"R5 no hijack      {len(r['R5']['read'])} of {r['R5']['tried']} "
+          f"evaluation questions read as a reply")
+    r6 = r["R6"]
+    print(f"R6 locate battery truthful {r6['truthful_confirmed']}/"
+          f"{r6['truthful']} confirmed; liars {r6['liar_confirmed']}/"
+          f"{r6['liar']} on the member impersonated; first false "
+          f"{r6['first_false_contradicted']}/{r6['first_false']} "
+          f"contradicted; malformed {r6['malformed_read']}/{r6['malformed']}"
+          f" read")
+    print(f"P  principle      {r['P']['outside_live']} members outside the "
+          f"head ever live over {r['P']['runs']} runs")
+    print(f"{r['met']} of {r['taken']} marks")
+    return 0 if r["met"] == r["taken"] else 1
+
+
+def _pipeline_kit(args: argparse.Namespace) -> int:
+    """The owner's pipeline kit in the GLM (Phase 175): the marks of
+    ``studies/PIPELINE_KIT_STUDY.md`` (``--write`` re-takes them)."""
+    from .reasoning import pipeline_kit_study as pks
+    if args.write:
+        print(f"wrote {pks.write_measurements()}")
+    report = pks.pipeline_kit_report()
+    if not report.get("available"):
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0 if report["met"] == report["taken"] else 1
+    r = report
+    b, lean = r["bridge"], r["lean"]
+    print(f"B  bridge         {b['trials']} words: parity wall "
+          f"{b['parity_wall']}, with glue {b['parity_wall_glue']}, 8x "
+          f"{b['eight_mul']}, junction parity {b['junction_parity']} failures")
+    print(f"L1 {lean['file']}: {lean['theorems']}/{lean['declared']} "
+          f"theorems, sorry {lean['sorry']}")
+    print(f"L2 kit Lean files {sum(1 for v in lean['kit'].values() if v['present'])}"
+          f"/{len(lean['kit'])} present, sorry "
+          f"{sum(v['sorry'] for v in lean['kit'].values())}")
+    print(f"{'family':27s} {'group':7s} "
+          + "  ".join(f"{c:>14s}" for c in pks.CONFIGS)
+          + "   (right/wrong/refused at 4 demonstrations)")
+    for name, row in r["families"].items():
+        cells = []
+        for c in pks.CONFIGS:
+            a = row[c]["4"]
+            cells.append(f"{a['right']:>4d}/{a['wrong']}/{a['refused']:<4d}".rjust(14))
+        print(f"{name:27s} {row['group']:7s} " + "  ".join(cells))
+    for c, t in r["totals"].items():
+        print(f"R  {c:9s} over all {sum(t.values())} queries: right "
+              f"{t['right']}, wrong {t['wrong']}, refused {t['refused']}")
+    m, lf, an, tl = r["monotone"], r["layer_filter"], r["analogy"], r["tool"]
+    print(f"M  collapse       {m['exceptions']} exceptions in {m['checked']} "
+          f"nested reads ({m.get('fitted_appearances', 0)} fitted masks "
+          "appeared with a second distinct demonstration)")
+    print(f"W  layer filter   {lf['changed_answers']} answers changed with it "
+          f"off; filtering on {lf['filtered_families']} of "
+          f"{lf['weight_changing_families']} weight-changing families")
+    print(f"A  analogy        threshold {an['threshold_exact']}/{an['trials']}"
+          f", parity {an['parity_exact']}/{an['trials']}")
+    print(f"T  tool           answered {tl['answer']}; refused "
+          f"({tl['refuse_status']})")
+    print(f"{r['met']} of {r['taken']} marks")
+    return 0 if r["met"] == r["taken"] else 1
+
+
+def _stacked_dialogue(args: argparse.Namespace) -> int:
+    """Several open ties at once (Phase 173): the marks of
+    ``studies/STACKED_DIALOGUE_STUDY.md`` (``--write`` re-takes them)."""
+    from .reasoning import stacked_dialogue_study as sds
+    if args.write:
+        print(f"wrote {sds.write_measurements()}")
+    report = sds.stacked_dialogue_report()
+    if not report.get("available"):
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0 if report["met"] == report["taken"] else 1
+    r = report
+    s0, s1, s2, s3, s4 = r["S0"], r["S1"], r["S2"], r["S3"], r["S4"]
+    print(f"L1 {r['lean']['file']}: {r['lean']['theorems']}/"
+          f"{r['lean']['declared']} theorems, sorry {r['lean']['sorry']}")
+    print(f"ties {r['ties']}, ordered pairs {r['pairs']}")
+    print(f"S0 stack off      {s0['to_first']} of {s0['asked']} first-tie "
+          f"replies read against the first tie behind a second question")
+    print(f"S1 interleaved    {s1['asked']} runs: first tie as alone "
+          f"{s1['same_first']}, second as alone {s1['same_second']}, second "
+          f"still open {s1['second_open']}; {s1['misbound']} of "
+          f"{s1['replies']} replies misbound ({s1['addressed']} named a turn)")
+    print(f"S2 newest wins    {s2['to_newest']} of {s2['fit_both']} replies "
+          f"fitting both bound to the newer, {s2['names_first']} naming the "
+          f"older")
+    print(f"S3 named reply    {s3['to_named']} of {s3['asked']} bound to the "
+          f"turn named; naming no question {s3['no_question_read']}/"
+          f"{s3['no_question']} read; naming an answered question "
+          f"{s3['answered_read']}/{s3['answered']} read")
+    print(f"S4 window         after W unrelated turns {s4['inside_read']}/"
+          f"{s4['inside']} read; after W+1 {s4['past_read']}/{s4['past']} "
+          f"(said to be late: {s4.get('past_named', 0)}, observed)")
+    print(f"S5 no hijack      {len(r['S5']['read'])} of {r['S5']['tried']} "
+          f"evaluation questions read as a reply")
+    print(f"P  principle      {r['P']['outside_live']} members outside the "
+          f"head ever live over {r['P']['runs']} runs")
+    print(f"{r['met']} of {r['taken']} marks")
+    return 0 if r["met"] == r["taken"] else 1
+
+
+def _quoted_measurements(args: argparse.Namespace) -> int:
+    """The answer censuses guarded by what their answers quote, and the
+    replay gate as a sign-off instrument (Phase 174): the marks of
+    ``studies/QUOTED_MEASUREMENTS_STUDY.md``, computed now."""
+    from .reasoning import quoted_measurements_study as qms
+    r = qms.quoted_measurements_report()
+    if args.json:
+        print(json.dumps(_plain(r), indent=1, sort_keys=True))
+        return 0 if r["met"] == r["taken"] else 1
+    for name, n in r["Q1"].items():
+        t = r["Q2"][name]
+        print(f"Q1 {name}: {n} stored measurements quoted")
+        print(f"Q2   altered one at a time: {t['moved']} of {t['present']} "
+              f"moved the digest (copy reproduces it: {t['reproduced']})")
+    q3 = r["Q3"]
+    print(f"Q3 cycles: own file quoted by {q3['own'] or 'none'}; downstream "
+          f"quoted by {q3['downstream'] or 'none'}")
+    print(f"Q4 stage-0 order ends {', '.join(r['Q4']['order'][-2:])}")
+    q5 = r["Q5"]
+    print(f"Q5 replay instrument declared {q5['declared']}, closure holds "
+          f"replay.py {q5['closure_replay']} and GLM.py {q5['closure_cli']}, "
+          f"state {q5['state']}")
+    print(f"{r['met']} of {r['taken']} marks")
+    return 0 if r["met"] == r["taken"] else 1
+
+
+def _confidence_curve(args: argparse.Namespace) -> int:
+    """The corpus confidence curve, declared (Phase 168): the marks of
+    ``studies/CONFIDENCE_CURVE_STUDY.md`` (``--write`` re-takes them)."""
+    from .knowledge import confidence_curve as ccv
+    if args.write:
+        print(f"wrote {ccv.write_measurements()}")
+    report = ccv.confidence_curve_report()
+    if not report.get("available"):
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0 if report["met"] == report["taken"] else 1
+
+    def pct(x) -> str:
+        f = Fraction(x)
+        tenths = (f * 1000 + Fraction(1, 2)).__floor__()
+        return f"{tenths // 10}.{tenths % 10}%"
+    cal, held = report["calibration"], report["held"]
+    print(f"folds by path digest: calibration {cal['positions']} positions "
+          f"(unguarded {pct(cal['unguarded'])}), held out {held['positions']}"
+          f" (unguarded {pct(held['unguarded'])})")
+    for name in ("sure", "balanced"):
+        m = report["modes"][name]
+        if not m.get("chosen"):
+            print(f"{name:9s} no guard of the grid meets its bar")
+            continue
+        c, h, k = m["calibration"], m["held"], m["control"]
+        print(f"{name:9s} guard {m['guard'][0]}, {m['guard'][1]}: calibration "
+              f"{pct(c['precision'])} at {pct(c['coverage'])}; held out "
+              f"{pct(h['precision'])} at {pct(h['coverage'])}; order control "
+              f"{pct(k['precision'])}")
+    cd = report["candidate"]["held"]
+    print(f"candidate top {ccv.TOP}: held out hit {pct(cd['hit_rate'])} at "
+          f"{pct(cd['coverage'])}")
+    d = report["definitions"]
+    print(f"definitions: {d['described']}/{d['answered']} described; strong "
+          f"{d['strong_agree']}/{d['strong']} agree, weak {d['weak_agree']}/"
+          f"{d['weak']}")
+    print(" ".join(f"{k} {'met' if v else 'missed'}"
+                   for k, v in report["marks"].items()))
+    print(f"{report['met']} of {report['taken']} marks")
+    return 0 if report["met"] == report["taken"] else 1
+
+
+def _evidence_model(args: argparse.Namespace) -> int:
+    """The common result model, measured (Phase 169): the marks of
+    ``studies/EVIDENCE_MODEL_STUDY.md`` (``--write`` re-takes them)."""
+    from .reasoning import evidence_model_study as ems
+    if args.write:
+        print(f"wrote {ems.write_measurements()}")
+    report = ems.evidence_model_report()
+    if not report.get("available"):
+        print(report["reason"])
+        return 1
+    if args.json:
+        slim = {k: v for k, v in report.items() if k != "rows"}
+        print(json.dumps(_plain(slim), indent=1, sort_keys=True))
+        return 0 if report["met"] == report["taken"] else 1
+    c = report["census"]
+    print(f"{report['cases']} evaluation questions read into one result "
+          f"model; errors {len(report['errors'])}")
+    for key in ("by_status", "by_boundary", "by_evidence", "by_surface"):
+        print(f"{key[3:]:9s} " + ", ".join(f"{k} {v}"
+                                          for k, v in c[key].items()))
+    r6 = report["R6"]
+    print(f"column 3 replayed {r6['replayable']} of {r6['answered']} answers: "
+          f"{r6['verified']} verified, failed {r6['failed'] or 'none'}")
+    print(f"GLM names cited {len(report['R5']['cited'])}, undeclared "
+          f"{len(report['R5']['undeclared'])}; ok-flag alone disagrees with "
+          f"the evaluation on {len(report['R2']['ok_flag_disagree'])}")
+    print(" ".join(f"{k} {'met' if v else 'missed'}"
+                   for k, v in report["marks"].items()))
+    print(f"{report['met']} of {report['taken']} marks")
+    return 0 if report["met"] == report["taken"] else 1
+
+
+def _evidence_in_use(args: argparse.Namespace) -> int:
+    """The evidence model in use (Phase 171): the marks of
+    ``studies/EVIDENCE_IN_USE_STUDY.md`` (``--write`` re-takes them)."""
+    from .reasoning import evidence_in_use_study as eus
+    if args.write:
+        print(f"wrote {eus.write_measurements()}")
+    report = eus.evidence_in_use_report()
+    if not report.get("available"):
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0 if report["met"] == report["taken"] else 1
+    u1, u4, u6 = report["U1"], report["U4"], report["U6"]
+    print(f"--result over {report['cases']} evaluation questions: "
+          f"{u1['agree']} agree with the Phase 169 census, "
+          f"{len(u1['disagree'])} differ")
+    print(f"evaluation {report['U3'].get('passed')} of "
+          f"{report['U3'].get('cases')}")
+    print(f"replay gate: {u4['cases']} cases expected answered, "
+          f"{u4['replayable']} replayed, {u4['verified']} verified, "
+          f"{len(u4['unreplayable'])} without a column 3; failed "
+          f"{u4['failed'] or 'none'}; {u6['seconds']} s on {u6['jobs']} "
+          f"processes")
+    print(" ".join(f"{k} {'met' if v else 'missed'}"
+                   for k, v in report["marks"].items()))
+    print(f"{report['met']} of {report['taken']} marks")
+    return 0 if report["met"] == report["taken"] else 1
+
+
+def _context_frames(args: argparse.Namespace) -> int:
+    """Contextual domain frames (Phase 170): the marks of
+    ``studies/CONTEXT_FRAMES_STUDY.md`` (``--write`` re-takes them)."""
+    from .engineering import context_frames_study as cfs
+    if args.write:
+        print(f"wrote {cfs.write_measurements()}")
+    report = cfs.context_frames_report()
+    if not report.get("available"):
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0 if report["met"] == report["taken"] else 1
+    lean = report["lean"]
+    print(f"X1 {lean['file']}: {lean['theorems']}/{lean['declared']} "
+          f"theorems, sorry {lean['sorry']}")
+    print(f"battery as written {report['battery']}; with a rotating body "
+          f"driving the wave {report['battery_rotating']}")
+    for p in report["probes"]:
+        print(f"{p['key']:4s} {p['grade']:16s} {p['text'][:110]}")
+    c = report["census"]
+    print(f"X6 census: {c['questions']} questions a pinned name enters; "
+          f"answers changed {c['changed_count']}; ambiguities resolved "
+          f"{len(c['resolved'])}")
+    for key, tally in c["per_context"].items():
+        print(f"   {key:24s} " + ", ".join(f"{k} {v}"
+                                         for k, v in tally.items()))
+    print(" ".join(f"{k} {'met' if v else 'missed'}"
+                   for k, v in report["marks"].items()))
+    print(f"{report['met']} of {report['taken']} marks")
+    return 0 if report["met"] == report["taken"] else 1
+
+
+def _pi_machine(args: argparse.Namespace) -> int:
+    """The machine sums ``pi`` (Phase 166): the marks of
+    ``studies/PI_MACHINE_STUDY.md``, recomputed live (``--no-chains`` skips
+    the one-step chain comparison K1)."""
+    from .reasoning import pi_machine_study as pms
+    report = pms.pi_machine_marks(chains=not args.no_chains)
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0 if report["met"] == report["marks"] else 1
+    lm, m, e, t, c = (report["L1"], report["M1"], report["M2"],
+                      report["M3"], report["C1"])
+    print(f"L1 {lm['file']}: {lm['theorems']}/{lm['declared']} theorems, "
+          f"sorry {lm['sorry']}")
+    print(f"M1 machine {m['status']} exit {m['exit']} in {m['steps']} steps "
+          f"({m['lines']} lines, terms {m['terms']}); ends equal "
+          f"{m['ends_equal']}; Lean's evaluation matched "
+          f"{m['lean_eval_equal']}")
+    print(f"M2 width {e['summed_width']} (declared {e['declared_width']}), "
+          f"nested {e['nested']}")
+    print(f"M3 terms certified {t['summed_terms']} (declared "
+          f"{t['declared_terms']}); tool's {t['tool_terms']} agree "
+          f"{t['tool_agrees']}")
+    print(f"C1 {c['wrong_formula']}: disjoint from Mathlib's decimals "
+          f"{c['disjoint']} (gap {c['distance']})")
+    k = report.get("K1")
+    if k:
+        print(f"K1 {k['questions']} questions: admitted declared "
+              f"{k['declared_admitted']}, summed {k['summed_admitted']} of "
+              f"{k['tool_answers']}; lost {k['lost']}, gained {k['gained']}, "
+              f"written where the tool refuses {k['wrote_unanswered']}")
+    print(f"{report['met']} of {report['marks']} marks")
+    return 0 if report["met"] == report["marks"] else 1
+
+
+def _tool_machine(args: argparse.Namespace) -> int:
+    """The machine works the tools out (Phase 163): the marks of
+    ``studies/TOOL_MACHINE_STUDY.md`` (``--write`` re-takes them,
+    ``--baseline`` re-takes the frozen path's baseline with the switch
+    off)."""
+    from .reasoning import tool_machine_study as tms
+    if args.baseline:
+        print(f"wrote {tms.take_baseline()}")
+    if args.write:
+        print(f"wrote {tms.write_measurements()}")
+    report = tms.tool_machine_report()
+    if not report.get("available"):
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0 if report["met"] == report["taken"] else 1
+    c, k, g, f = (report["chains"], report["held_out"], report["leech"],
+                  report["frozen"])
+    print(f"T1 carried steps {c['carried_off']} -> {c['carried_on']}; newly "
+          f"computed {c['newly_computed']} {c['by_category']}")
+    print(f"T2 chains admitted {c['admitted']}/{c['chains']}, read back "
+          f"{c['read_back']}/{c['said']}")
+    print(f"T3 lies found at their step {c['lies_found']}/{c['lies']}")
+    print(f"T4 square-root witness moved: {c['witness_stopped']}/"
+          f"{c['witness_runs']} runs stopped")
+    print(f"T5 column 3 {c['scripts_ok']}/{c['scripts']}, mutants "
+          f"{c['mutants_rejected']}/{c['mutants']}")
+    if k:
+        print(f"K1 held out {k['admitted']}/{k['answered']} admitted, lies "
+              f"{k['lies_refused']}/{k['lies']} refused, tool refusals "
+              f"{k['refused_by_tool']} (machine silent "
+              f"{k['machine_silent']})")
+    print(f"G1 Leech kissing number from the Golay census: "
+          f"{g['admitted']}/{g['texts']} admitted, lies {g['lies_found']}/"
+          f"{g['lies']} found, uncounted shells kept carried "
+          f"{g['uncounted_carried']}/{g['uncounted']}, "
+          f"{g['machine_steps']} machine steps")
+    print(f"P1 largest program {c['max_lines']} lines ({c['max_question']}); "
+          f"most machine steps {c['max_steps']} "
+          f"({c['max_steps_question']})")
+    if f:
+        print(f"F1 frozen path {f['same_status']}/{f['texts']} same status, "
+              f"{f['same_text']}/{f['texts']} same text")
+    p = report.get("paired")
+    if p:
+        print(f"F1' paired off/on {p['same_status']}/{p['texts']} same "
+              f"status, {p['same_text']}/{p['texts']} same text; off answers "
+              f"moved since the baseline "
+              f"{len(p['off_moved_since_baseline'])}")
+    print(f"marks {report['met']}/{report['taken']}: "
+          + ", ".join(f"{m} {'met' if v else 'MISSED'}"
+                      for m, v in sorted(report["marks"].items())))
+    if report.get("amended"):
+        print(f"amended {report['amended_met']}/{report['amended_taken']}: "
+              + ", ".join(f"{m} {'met' if v else 'MISSED'}"
+                          for m, v in sorted(report["amended"].items())))
+    return 0 if report["met"] == report["taken"] else 1
+
+
+def _fold_machine(args: argparse.Namespace) -> int:
+    """The machine sorts (Phase 160): the marks of
+    ``studies/FOLD_MACHINE_STUDY.md`` (``--write`` re-takes them,
+    ``--baseline`` re-takes the frozen path's baseline with the switch
+    off)."""
+    from .reasoning import fold_machine_study as fms
+    if args.baseline:
+        print(f"wrote {fms.take_baseline()}")
+    if args.write:
+        print(f"wrote {fms.write_measurements()}")
+    report = fms.fold_machine_report()
+    if not report.get("available"):
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0 if report["met"] == report["taken"] else 1
+    c, k, f = report["chains"], report["synthetic"], report["frozen"]
+    print(f"M1 folds carried {c['folds_carried_off']} -> "
+          f"{c['folds_carried_on']}; carried steps {c['carried_off']} -> "
+          f"{c['carried_on']}; newly computed {c['folds_newly_computed']} "
+          f"{c['by_fn']}")
+    print(f"M2 chains admitted {c['admitted']}/{c['chains']}, read back "
+          f"{c['read_back']}/{c['said']}")
+    print(f"M3 fold lies found at their step {c['lies_found']}/{c['lies']}")
+    print(f"M4 hole lies stopped {c['hole_lies_stopped']}/{c['hole_lies']}")
+    print(f"M5 witness rotated: {c['witness_runs']} runs, "
+          f"{c['witness_stopped']} stopped, {c['witness_same']} same value, "
+          f"{c['witness_wrong']} wrong value written")
+    print(f"M6 column 3 {c['scripts_ok']}/{c['scripts']}, mutants "
+          f"{c['mutants_rejected']}/{c['mutants']}")
+    if k:
+        print(f"K1 synthetic {k['admitted']}/{k['answered']} admitted, lies "
+              f"{k['lies_refused']}/{k['lies']} refused, planner refusals "
+              f"{k['refused_by_planner']} (machine silent "
+              f"{k['machine_silent']}); {k['with_ties']} with ties, "
+              f"{k['with_holes']} with holes")
+    print(f"P1 largest program {c['max_lines']} lines, {c['max_steps']} "
+          f"machine steps ({c['max_question']})")
+    if f:
+        print(f"F1 frozen path {f['same_status']}/{f['texts']} same status, "
+              f"{f['same_text']}/{f['texts']} same text")
+    first = report.get("first")
+    if first:
+        print(f"M4 (first measurement) hole lies stopped "
+              f"{first['hole_lies_stopped']}/{first['hole_lies']}")
+    print(f"M4' (amended, measurement of record) hole lies stopped "
+          f"{c['hole_lies_stopped']}/{c['hole_lies']}")
+    print(f"marks {report['met']}/{report['taken']}: "
+          + ", ".join(f"{m} {'met' if v else 'MISSED'}"
+                      for m, v in sorted(report["marks"].items()))
+          + f"; amended {report['amended_met']}/{report['amended_taken']}: "
+          + ", ".join(f"{m} {'met' if v else 'MISSED'}"
+                      for m, v in sorted(report["amended"].items())))
+    return 0 if report["amended_met"] == report["amended_taken"] and \
+        report["rest_hold_again"] else 1
+
+
+def _carried_read(args: argparse.Namespace) -> int:
+    """The machine reads what it carries (Phase 153): the marks of
+    ``studies/CARRIED_READ_STUDY.md`` (``--write`` re-takes them,
+    ``--baseline`` re-takes the frozen path's baseline with the round's
+    switches off)."""
+    if args.baseline:
+        print(f"wrote {crs.take_baseline()}")
+    if args.write:
+        print(f"wrote {crs.write_measurements()}")
+    report = crs.carried_read_report()
+    if not report.get("available"):
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0 if report["met"] == report["taken"] else 1
+    r, c, t, f, p = (report["registers"], report["chains"], report["typed"],
+                     report["fields"], report["frozen"])
+    n = c["chains"]
+    print(f"R1 register files {r['entries']} entries in "
+          f"{len(r['tables'])} tables, {r['duplicated']} duplicated keys "
+          f"({r['left_out']} entries not sayable); snapshot "
+          f"{r['snapshot']['agree']}/{r['snapshot']['pairs']} agree")
+    print(f"R2 FIND           every entry found, no altered entry found: "
+          f"{sum(1 for x in r['tables'] if x['all_found'])} tables")
+    print(f"C1 chains         {c['admitted']}/{n} admitted; {c['computed']} "
+          f"computed, {c['read']} read ({c['read_register']} register, "
+          f"{c['read_question']} question), {c['carried']} carried")
+    print(f"C2 register lies  {c['reg_found']}/{c['reg_lies']} first drift "
+          f"at the lie, rolled back")
+    print(f"C3 question lies  {c['q_found']}/{c['q_lies'] - c['q_in_question']}"
+          f" caught; {c['q_in_question']} lies are other numbers of the "
+          f"question")
+    print(f"C4 computed lies  {c['c_found']}/{c['c_lies']}")
+    print(f"C5 column 3       {c['scripts_run']}/{n} run, "
+          f"{c['scripts_pipeline']}/{n} pipeline; mutants "
+          f"{c['mutants_rejected']}/{c['mutants']} rejected")
+    print(f"T  typed planner  {t['admitted']}/{t['said']} said plans "
+          f"admitted, {t['refused']}/{t['lies']} lies refused "
+          f"({t['by_kind']})")
+    print(f"S  field reads    {f['admitted']}/{f['read']} admitted, "
+          f"{f['refused']}/{f['lies']} lies refused ({f['asked']} asked)")
+    print(f"F1 frozen path    {p['same_status']}/{p['texts']} status, "
+          f"{p['same_text']}/{p['texts']} text")
+    print(f"{report['met']} of {report['taken']} marks met")
+    return 0 if report["met"] == report["taken"] else 1
+
+
+def _planner_ladder(args: argparse.Namespace) -> int:
+    """The operations ladder in the stepwise planner (Phase 151): the marks
+    of ``studies/PLANNER_LADDER_STUDY.md`` (``--write`` re-takes them)."""
+    if args.write:
+        print(f"wrote {plls.write_measurements()}")
+    report = plls.planner_ladder_report()
+    if not report.get("available"):
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0 if report["met"] == report["taken"] else 1
+    m, f, e = report["machine"], report["frozen"], report.get("evaluation")
+    n = m["chains"]
+    print(f"P1 said and run   {m['said']}/{n} read back, {m['halted']}/{n} "
+          f"halted with exit 0 ({m['lines']} lines, {m['machine_steps']} "
+          f"machine steps)")
+    print(f"P2 no drift       {m['no_drift']}/{n} chains; {m['computed']} "
+          f"computed and {m['carried']} carried steps")
+    print(f"P3 promoted       {m['promoted']}/{n}")
+    print(f"P4 a lie          {m['lies_found']}/{m['lies']} found at the "
+          f"step, {m['lies_rolled_back']}/{m['lies']} rolled back; read "
+          f"lies (post hoc) {m['read_lies_downstream']} caught downstream, "
+          f"{m['read_lies_unseen']} unseen of {m['read_lies']}")
+    if "scripts_run" in m:
+        print(f"P5 column 3       {m['scripts_run']}/{n} run and "
+              f"{m['scripts_pipeline']}/{n} pipeline scripts verify; "
+              f"{m['mutants_rejected']}/{m['mutants']} mutants rejected")
+    if f:
+        print(f"F1 frozen texts   {f['same_status']}/{f['texts']} same "
+              f"status, {f['same_text']} same text")
+    if e:
+        print(f"F2 evaluation     {e['same_status']}/{e['cases']} same "
+              f"status, {e['same_text']} same text; undeclared "
+              f"{e['undeclared']}")
+    print(f"marks met         {report['met']} of {report['taken']}")
+    return 0 if report["met"] == report["taken"] else 1
+
+
+def _nearest_question(args: argparse.Namespace) -> int:
+    """The question at the `nearest` ties (Phase 150): the marks of
+    ``studies/NEAREST_QUESTION_STUDY.md`` (``--write`` re-takes them)."""
+    if args.write:
+        print(f"wrote {nqs.write_measurements()}")
+    report = nqs.nearest_question_report()
+    if not report.get("available"):
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0 if report["met"] == report["taken"] else 1
+    t, d, o = report["census"], report["dialogues"], report["outside"]
+    c, q, r = report["conversations"], report["battery"], report["controls"]
+    e = report["new_cases"]
+    print(f"T1 census         {t['points']} tied points ({t['certified']} "
+          f"certified, {t['uncertified']} not), {t['heads']} distinct heads")
+    print(f"D1 true replies   {d['confirmed']}/{d['runs']} confirmed, "
+          f"{d['wrong']} wrong; {d['replies']} replies, at most "
+          f"{d['max_replies']}")
+    print(f"D2 a false reply  {d['lie_contradicted']}/{d['lied']} "
+          f"contradicted, {d['lie_wrong']} wrong")
+    print(f"D3 outside head   {o['confirmed']} of {o['points']} confirmed "
+          f"({o['contradicted']} contradicted, {o['refused']} refused)")
+    print(f"C1 conversation   {c['confirmed']}/{c['runs']} confirmed, "
+          f"{c['wrong']} wrong; {c['verified']}/{c['turns']} turns verify; "
+          f"{c['rejected']}/{c['tampered']} altered claims rejected")
+    print(f"Q1 battery        {q['as_declared']}/{q['questions']} as "
+          f"declared, {q['scripts']}/{q['answered']} scripts verify")
+    print(f"R1 controls       {len(r['read_as_reply'])} of {r['checked']} "
+          f"read as a reply")
+    print(f"E1 new cases      {e['passed']}/{e['cases']}")
+    print(f"marks met         {report['met']} of {report['taken']}")
+    return 0 if report["met"] == report["taken"] else 1
+
+
+def _l5_first_budget(args: argparse.Namespace) -> int:
+    """``L5`` at the first round's budget (Phase 152): the marks of
+    ``studies/L5_FIRST_BUDGET_STUDY.md`` (``--write`` re-takes them)."""
+    if args.write:
+        print(f"wrote {l5fb.write_measurements(workers=args.jobs)}")
+    report = l5fb.l5_first_budget_report()
+    if not report.get("available"):
+        print(report["reason"])
+        return 1
+    if args.json:
+        print(json.dumps(_plain(report), indent=1, sort_keys=True))
+        return 0 if report["met"] == report["taken"] else 1
+    r, p, b = report["reading"], report["prefix"], report.get("at_1920") or {}
+    print(f"P0 prefix         {p['prefix']}/{p['seeds']} seeds: 240 offsets "
+          f"are the first 240 of 1920")
+    print(f"S1 sanity query   {r['seed_correct']}/{r['seed_queries']} seed "
+          f"queries named as themselves at 240 starts (1920: "
+          f"{b.get('seed_correct')}/{b.get('seed_queries')})")
+    print(f"N1 the 44         {r['correct']} correct, {r['wrong']} wrong, "
+          f"{r['refused']} refused at 240 starts (1920: {b.get('correct')} "
+          f"correct, {b.get('wrong')} wrong, {b.get('refused')} refused)")
+    print(f"   absences       {r.get('absences')} issued, "
+          f"{r.get('false_absences')} false (1920: {b.get('absences')} "
+          f"issued, {b.get('false_absences')} false)")
+    print(f"W1 no misname     {r['wrong']} wrong")
+    print(f"R1 rule fires     {r['within_answered']}/{r['within_radius']} "
+          f"inside their own radius answered")
+    print(f"marks met         {report['met']} of {report['taken']}")
+    return 0 if report["met"] == report["taken"] else 1
 
 
 def _budget_reading(args: argparse.Namespace) -> int:
@@ -5324,6 +6465,291 @@ def _parser() -> argparse.ArgumentParser:
                       help="re-take the stored measurement (~15 minutes)")
     bgfp.add_argument("--json", action="store_true")
     bgfp.set_defaults(handler=_budget_guard_frozen)
+
+    hl5p = sub.add_parser(
+        "hole-reports-l5",
+        help="the configuration reading in the other deep-hole reports "
+             "(Phase 149)")
+    hl5p.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~15 minutes)")
+    hl5p.add_argument("--json", action="store_true")
+    hl5p.set_defaults(handler=_hole_reports_l5)
+
+    tlfp = sub.add_parser(
+        "ties-ladder-frozen",
+        help="the evaluation's frozen path of Phases 150-151")
+    tlfp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~15 minutes)")
+    tlfp.add_argument("--json", action="store_true")
+    tlfp.set_defaults(handler=_ties_ladder_frozen)
+
+    pllp = sub.add_parser(
+        "planner-ladder",
+        help="the chain of the stepwise planner as a GLM-BAT program "
+             "(Phase 151)")
+    pllp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement")
+    pllp.add_argument("--json", action="store_true")
+    pllp.set_defaults(handler=_planner_ladder)
+
+    slsp = sub.add_parser(
+        "study-ledger",
+        help="the study ledger: every study as one machine-readable row, "
+             "and the disagreements between its sources (Phase 161)")
+    slsp.add_argument("--json", action="store_true",
+                      help="print the whole ledger as JSON")
+    slsp.add_argument("--issues", action="store_true",
+                      help="print every disagreement the ledger sees")
+    slsp.add_argument("--files", action="store_true",
+                      help="print the files the documents name that the "
+                           "tree lacks")
+    slsp.set_defaults(handler=_study_ledger)
+
+    tmsp = sub.add_parser(
+        "tool-machine",
+        help="the machine works the tools out: continued fractions, "
+             "nearest fractions, gate moves and the Leech kissing number "
+             "computed in GLM-BAT (Phase 163)")
+    tmsp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement")
+    tmsp.add_argument("--baseline", action="store_true",
+                      help="re-take the frozen path's baseline (switch off)")
+    tmsp.add_argument("--json", action="store_true")
+    tmsp.set_defaults(handler=_tool_machine)
+
+    cfsp = sub.add_parser(
+        "context-frames",
+        help="contextual domain frames: which energy, which oscillator, "
+             "which body drives the wave (Phase 170)")
+    cfsp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~4 minutes)")
+    cfsp.add_argument("--json", action="store_true")
+    cfsp.set_defaults(handler=_context_frames)
+
+    eusp = sub.add_parser(
+        "evidence-in-use",
+        help="the evidence model in use: GLM.py --result and the "
+             "evaluation's replay gate (Phase 171)")
+    eusp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (the evaluation, "
+                           "the --result census and the replay gate)")
+    eusp.add_argument("--json", action="store_true")
+    eusp.set_defaults(handler=_evidence_in_use)
+
+    emsp = sub.add_parser(
+        "evidence-model",
+        help="one result model for every answer: status, evidence, witness, "
+             "theorems, boundary, budget, candidates, refusal (Phase 169)")
+    emsp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~9 minutes)")
+    emsp.add_argument("--json", action="store_true")
+    emsp.set_defaults(handler=_evidence_model)
+
+    ccvp = sub.add_parser(
+        "confidence-curve",
+        help="the corpus confidence curve: sure, balanced and candidate modes "
+             "declared on a calibration fold; definitions with a quality "
+             "description (Phase 168)")
+    ccvp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~5 minutes)")
+    ccvp.add_argument("--json", action="store_true")
+    ccvp.set_defaults(handler=_confidence_curve)
+
+    adsp = sub.add_parser(
+        "adversarial-dialogue",
+        help="adversarial replies at the nearest ties: false, contradictory, "
+             "stale, unanswered, malformed (Phase 167)")
+    adsp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~2 minutes)")
+    adsp.add_argument("--json", action="store_true")
+    adsp.set_defaults(handler=_adversarial_dialogue)
+
+    rdsp = sub.add_parser(
+        "resumed-dialogue",
+        help="the open tie kept across turns: a reply read after unrelated "
+             "turns, and the locate junctions' adversarial battery "
+             "(Phase 172)")
+    rdsp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~3 minutes)")
+    rdsp.add_argument("--json", action="store_true")
+    rdsp.set_defaults(handler=_resumed_dialogue)
+
+    sdsp = sub.add_parser(
+        "stacked-dialogue",
+        help="several open ties at once: a reply read against the newest "
+             "open question it fits or the turn it names, closing that one "
+             "only, within a window of unrelated turns (Phase 173)")
+    sdsp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~5 minutes)")
+    sdsp.add_argument("--json", action="store_true")
+    sdsp.set_defaults(handler=_stacked_dialogue)
+
+    pksp = sub.add_parser(
+        "pipeline-kit",
+        help="the owner's pipeline kit in the GLM: rule induction from "
+             "demonstrations with an agreement gate, over fifteen task "
+             "families, against the kit as delivered and two controls "
+             "(Phase 175)")
+    pksp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~1 minute)")
+    pksp.add_argument("--json", action="store_true")
+    pksp.set_defaults(handler=_pipeline_kit)
+
+    qmsp = sub.add_parser(
+        "quoted-measurements",
+        help="the answer censuses guarded by the stored measurements their "
+             "answers quote, and the replay gate as a sign-off instrument "
+             "(Phase 174)")
+    qmsp.add_argument("--json", action="store_true")
+    qmsp.set_defaults(handler=_quoted_measurements)
+
+    pmsp = sub.add_parser(
+        "pi-machine",
+        help="the machine sums pi by Machin's formula in GLM-BAT, by rules "
+             "proved in GLM.PiMachine (Phase 166)")
+    pmsp.add_argument("--no-chains", action="store_true",
+                      help="skip the one-step chain comparison (K1)")
+    pmsp.add_argument("--json", action="store_true")
+    pmsp.set_defaults(handler=_pi_machine)
+
+    fmsp = sub.add_parser(
+        "fold-machine",
+        help="the machine sorts: order folds, ranks, top rows and hole "
+             "bounds computed in GLM-BAT by counting (Phase 160)")
+    fmsp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement")
+    fmsp.add_argument("--baseline", action="store_true",
+                      help="re-take the frozen path's baseline (switch off)")
+    fmsp.add_argument("--json", action="store_true")
+    fmsp.set_defaults(handler=_fold_machine)
+
+    crsp = sub.add_parser(
+        "carried-read",
+        help="the machine reads what it carries: register files, the "
+             "typed planner and field reads through GLM-BAT (Phase 153)")
+    crsp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~20 minutes)")
+    crsp.add_argument("--baseline", action="store_true",
+                      help="re-take the frozen path's baseline (switches "
+                           "off; ~17 minutes)")
+    crsp.add_argument("--json", action="store_true")
+    crsp.set_defaults(handler=_carried_read)
+
+    ckp = sub.add_parser(
+        "corpus-knowledge",
+        help="the corpus as what the GLM knows: counted, not trained "
+             "(Phase 154)")
+    ckp.add_argument("--write", action="store_true",
+                     help="re-take the stored measurement (~8 minutes)")
+    ckp.add_argument("--json", action="store_true")
+    ckp.set_defaults(handler=_corpus_knowledge)
+
+    cdp = sub.add_parser(
+        "corpus-definitions",
+        help="the corpus's definitions graded against the held-out glossary, "
+             "and a word's Leech address (Phase 155)")
+    cdp.add_argument("--write", action="store_true",
+                     help="re-take the stored measurement (~3 minutes)")
+    cdp.add_argument("--json", action="store_true")
+    cdp.set_defaults(handler=_corpus_definitions)
+
+    frp = sub.add_parser(
+        "friction",
+        help="friction: the evaluation's questions moved a little, contact over "
+             "the whole prompt, and the stick-slip reading (Phase 156)")
+    frp.add_argument("--write", action="store_true",
+                     help="re-take the corpus measurement (~2 minutes)")
+    frp.add_argument("--survey", action="store_true",
+                     help="with --write: re-take the survey (~25 minutes)")
+    frp.add_argument("--jobs", type=int, default=8)
+    frp.add_argument("--json", action="store_true")
+    frp.set_defaults(handler=_friction)
+
+    f2p = sub.add_parser(
+        "friction-two",
+        help="friction, the rest: did-you-mean, worn contact and the noise-set "
+             "margin (Phase 157)")
+    f2p.add_argument("--write", action="store_true",
+                     help="re-take the corpus measurement (~3 minutes)")
+    f2p.add_argument("--survey", action="store_true",
+                     help="with --write: re-take the survey (~25 minutes)")
+    f2p.add_argument("--jobs", type=int, default=8)
+    f2p.add_argument("--json", action="store_true")
+    f2p.set_defaults(handler=_friction_two)
+
+    tfp = sub.add_parser(
+        "thermo-friction",
+        help="thermomechanical friction: the bimetallic governor, the "
+             "thermoelectric prompt anchor and the sintered respelling "
+             "(Phase 159)")
+    tfp.add_argument("--write", action="store_true",
+                     help="re-take the corpus measurement (~1 minute)")
+    tfp.add_argument("--blind-spot", action="store_true",
+                     help="ask GLM.py the survey's blind-spot question and "
+                          "store the answer")
+    tfp.add_argument("--frozen", metavar="PATH",
+                     help="compare an evaluation report (--json output) "
+                          "with the one taken before the round")
+    tfp.add_argument("--json", action="store_true")
+    tfp.set_defaults(handler=_thermo_friction)
+
+    stp = sub.add_parser(
+        "source-tiers",
+        help="corpus source tiers: every corpus experiment read on the "
+             "written tier, the supplied tier and both (Phase 162)")
+    stp.add_argument("--write", action="store_true",
+                     help="re-take the measurement (a few minutes)")
+    stp.add_argument("--json", action="store_true")
+    stp.set_defaults(handler=_source_tiers)
+
+    dtp = sub.add_parser(
+        "dates",
+        help="the date stamps the repository's files carry (directive D17)")
+    dtp.add_argument("--json", action="store_true")
+    dtp.set_defaults(handler=_dates)
+
+    dmp = sub.add_parser(
+        "domains",
+        help="domain wheels W11-W15, their junctions and the census (Phase 157)")
+    dmp.add_argument("--census", action="store_true",
+                     help="take the census of the union afresh (long)")
+    dmp.add_argument("--write", action="store_true",
+                     help="re-take and store the census of the union (long)")
+    dmp.add_argument("--json", action="store_true")
+    dmp.set_defaults(handler=_domains)
+
+    ojp = sub.add_parser(
+        "oscjunction",
+        help="the W9/W13 oscillator junction tried four ways (Phase 158)")
+    ojp.add_argument("--write", action="store_true",
+                     help="re-take and store the four censuses (long)")
+    ojp.add_argument("--jobs", type=int, default=4)
+    ojp.add_argument("--json", action="store_true")
+    ojp.set_defaults(handler=_oscjunction)
+
+    cap = sub.add_parser(
+        "corpus-ask",
+        help="one corpus reading: define, context of, like, related to, "
+             "continue, spread of (Phase 154), address of (Phase 155)")
+    cap.add_argument("request", nargs="+")
+    cap.set_defaults(handler=_corpus_ask)
+
+    nqsp = sub.add_parser(
+        "nearest-question",
+        help="the question at the nearest ties (Phase 150)")
+    nqsp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement (~10 minutes)")
+    nqsp.add_argument("--json", action="store_true")
+    nqsp.set_defaults(handler=_nearest_question)
+
+    l5fp = sub.add_parser(
+        "l5-first-budget",
+        help="the configuration reading L5 at 240 starts (Phase 152)")
+    l5fp.add_argument("--write", action="store_true",
+                      help="re-take the stored measurement")
+    l5fp.add_argument("--jobs", type=int, default=4)
+    l5fp.add_argument("--json", action="store_true")
+    l5fp.set_defaults(handler=_l5_first_budget)
 
     brsp = sub.add_parser(
         "budget-reading",

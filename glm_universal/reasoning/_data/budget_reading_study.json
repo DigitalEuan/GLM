@@ -113,21 +113,57 @@
   "cases": 202,
   "moved": [
    {
-    "cause": "Phase 147: the list of query kinds the refusal names gains 'hole'",
+    "cause": "Phase 147: the list of query kinds the refusal names gains 'hole' (and, at Phase 154, 'corpus')",
     "id": "unknown-nonsense"
+   },
+   {
+    "cause": "the tree: the Lean declaration count, measured live",
+    "id": "report-lean"
+   },
+   {
+    "cause": "Phase 162: the directives report counts the standing rules, which gain D17 (the owner's dating rule)",
+    "id": "report-directives"
+   },
+   {
+    "cause": "Phase 149: the L5 clause is appended to the round's answer, kept verbatim",
+    "id": "report-hole-classifier"
+   },
+   {
+    "cause": "Phase 149: the L5 clause is appended to the round's answer, kept verbatim",
+    "id": "report-hole-ladder"
+   },
+   {
+    "cause": "the tree: the address-book index over the Lean declarations",
+    "id": "report-retrieval"
+   },
+   {
+    "cause": "the tree: the overlay's stored bytes, measured live",
+    "id": "report-generated"
    },
    {
     "cause": "Phases 147-148: the language report counts the query kinds and the evaluation questions, which gain the new kind and the new cases",
     "id": "report-language"
    },
    {
+    "cause": "Phase 149: the L5 clause is appended to the round's answer, kept verbatim",
+    "id": "report-hole-failures"
+   },
+   {
     "cause": "Phases 147-148: the query-escalation report counts the evaluation cases, which gain the new ones",
     "id": "report-query-escalation"
+   },
+   {
+    "cause": "the tree: the stack relay's strides are drawn from the Lean declarations",
+    "id": "report-relay"
+   },
+   {
+    "cause": "the tree: the anonymous register's queries are the relay's strides",
+    "id": "report-anonymous"
    }
   ],
   "present": 202,
   "same_status": 202,
-  "same_text": 199,
+  "same_text": 190,
   "undeclared": []
  },
  "heldout": {
@@ -5374,43 +5410,58 @@
    "seed": 23440960
   }
  ],
- "source_digest": "eae83194f55fd4ba604f8e76866ec3a60e095b0b9df8ee53ec8392d789719526",
+ "source_digest": "2ae2de84b5b67d1c965fca39738ec7737f5ea2e0e7e4ba64c33c0487beb0b983",
  "taken": 8,
  "wiring": {
   "census": {
    "declared": [
     "address_read_study",
+    "adversarial_dialogue_study",
     "affine_output",
     "answering_question",
     "budget_guard_frozen",
     "budget_reading_study",
+    "carried_read_study",
     "citation_scope",
     "constant_bound",
     "coordinate_junction_study",
     "corpus_resample",
     "counter_lasso",
     "document_tree",
+    "evidence_in_use_study",
+    "evidence_model_study",
+    "fold_machine_study",
+    "hole_reports_l5_study",
     "inert_counter",
+    "l5_first_budget",
     "native_parity",
     "native_words",
     "nearest_address_study",
+    "nearest_question_study",
     "now_float_control",
     "now_receipt",
     "operation_escalation",
     "operations",
+    "pi_machine_study",
+    "planner_ladder_study",
     "probe_budget",
     "quadratic_lasso",
+    "quoted_measurements_study",
+    "resumed_dialogue_study",
     "second_reading",
+    "stacked_dialogue_study",
     "stray_blind",
+    "ties_ladder_frozen",
+    "tool_machine_study",
     "typed_plans"
    ],
-   "reached": 169,
-   "reasoning": 193,
+   "reached": 177,
+   "reasoning": 216,
    "stale_declarations": [],
    "undeclared": []
   },
   "diverted": [],
-  "earlier_cases": 207,
+  "earlier_cases": 218,
   "hole_reading_reached": true
  }
 }

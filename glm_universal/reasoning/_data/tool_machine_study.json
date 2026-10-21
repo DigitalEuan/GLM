@@ -1,0 +1,266 @@
+{
+ "amended": {
+  "F1'": true
+ },
+ "amended_met": 1,
+ "amended_taken": 1,
+ "chains": {
+  "admitted": 174,
+  "by_category": {
+   "axiom": 7,
+   "choose": 3,
+   "conversion": 1,
+   "first": 3,
+   "tool best approximation verdict": 2,
+   "tool continued fraction verdict": 2,
+   "tool convergent": 21,
+   "tool gates": 1,
+   "tool gates verdict": 4
+  },
+  "carried_off": 44,
+  "carried_on": 0,
+  "chains": 174,
+  "failures": [],
+  "lies": 20,
+  "lies_found": 20,
+  "max_lines": 1783,
+  "max_question": "what is the median of the valence electrons of all the elements",
+  "max_steps": 3046,
+  "max_steps_question": "the first convergent of pi whose denominator is above 1000",
+  "mutants": 40,
+  "mutants_rejected": 40,
+  "newly_computed": 44,
+  "read_back": 174,
+  "said": 174,
+  "scripts": 20,
+  "scripts_ok": 20,
+  "witness_runs": 2,
+  "witness_stopped": 2
+ },
+ "first": {
+  "frozen": {
+   "by_set": {
+    "adversarial": [
+     20,
+     20,
+     20
+    ],
+    "compositions": [
+     30,
+     30,
+     30
+    ],
+    "evaluation": [
+     222,
+     222,
+     219
+    ],
+    "paraphrases": [
+     60,
+     60,
+     60
+    ],
+    "probe-canonical": [
+     20,
+     20,
+     20
+    ],
+    "probe-paraphrase": [
+     20,
+     20,
+     20
+    ],
+    "stepwise": [
+     283,
+     283,
+     283
+    ],
+    "stress": [
+     47,
+     47,
+     47
+    ]
+   },
+   "moved": [
+    "evaluation:corpus-continue",
+    "evaluation:corpus-unmentioned",
+    "evaluation:corpus-address"
+   ],
+   "same_status": 702,
+   "same_text": 699,
+   "texts": 702
+  },
+  "marks": {
+   "F1": false,
+   "G1": true,
+   "K1": true,
+   "P1": true,
+   "T1": true,
+   "T2": true,
+   "T3": true,
+   "T4": true,
+   "T5": true
+  }
+ },
+ "frozen": {
+  "by_set": {
+   "adversarial": [
+    20,
+    20,
+    20
+   ],
+   "compositions": [
+    30,
+    30,
+    30
+   ],
+   "evaluation": [
+    222,
+    222,
+    212
+   ],
+   "paraphrases": [
+    60,
+    60,
+    60
+   ],
+   "probe-canonical": [
+    20,
+    20,
+    20
+   ],
+   "probe-paraphrase": [
+    20,
+    20,
+    20
+   ],
+   "stepwise": [
+    283,
+    283,
+    283
+   ],
+   "stress": [
+    47,
+    47,
+    47
+   ]
+  },
+  "moved": [
+   "evaluation:report-lean",
+   "evaluation:report-retrieval",
+   "evaluation:report-generated",
+   "evaluation:report-language",
+   "evaluation:report-query-escalation",
+   "evaluation:report-relay",
+   "evaluation:report-anonymous",
+   "evaluation:corpus-continue",
+   "evaluation:corpus-unmentioned",
+   "evaluation:corpus-address"
+  ],
+  "same_status": 702,
+  "same_text": 692,
+  "texts": 702
+ },
+ "held_out": {
+  "admitted": 2785,
+  "answered": 2785,
+  "by_kind": {
+   "best value": [
+    429,
+    429,
+    429
+   ],
+   "best verdict": [
+    428,
+    428,
+    428
+   ],
+   "convergent denominator": [
+    429,
+    429,
+    429
+   ],
+   "convergent value": [
+    429,
+    429,
+    429
+   ],
+   "gates moves": [
+    428,
+    213,
+    213
+   ],
+   "gates verdict": [
+    428,
+    428,
+    428
+   ],
+   "term verdict": [
+    429,
+    429,
+    429
+   ]
+  },
+  "failure_count": 0,
+  "failures": [],
+  "lies": 2785,
+  "lies_refused": 2785,
+  "machine_silent": 215,
+  "max_steps": 6503,
+  "questions": 3000,
+  "refused_by_tool": 215
+ },
+ "leech": {
+  "admitted": 4,
+  "answered": 4,
+  "carried_off": 4,
+  "computed_on": 4,
+  "failures": [],
+  "lies": 4,
+  "lies_found": 4,
+  "machine_steps": 163831,
+  "texts": 4,
+  "uncounted": 1,
+  "uncounted_carried": 1,
+  "values": {
+   "the kissing number of the leech lattice divided by 24": "8190",
+   "the kissing number of the leech lattice minus 196560": "0",
+   "the kissing number of the leech lattice plus 1": "196561",
+   "the number of vectors of norm 4 in the leech lattice plus 1": "196561"
+  }
+ },
+ "marks": {
+  "F1": false,
+  "G1": true,
+  "K1": true,
+  "P1": true,
+  "T1": true,
+  "T2": true,
+  "T3": true,
+  "T4": true,
+  "T5": true
+ },
+ "met": 8,
+ "paired": {
+  "moved": [],
+  "off_moved_since_baseline": [
+   "evaluation:tool-leech-norm-12",
+   "evaluation:report-lean",
+   "evaluation:report-retrieval",
+   "evaluation:report-generated",
+   "evaluation:report-language",
+   "evaluation:report-query-escalation",
+   "evaluation:report-relay",
+   "evaluation:report-anonymous",
+   "evaluation:corpus-continue",
+   "evaluation:corpus-unmentioned",
+   "evaluation:corpus-address"
+  ],
+  "same_status": 703,
+  "same_text": 703,
+  "texts": 703
+ },
+ "rest_hold_again": true,
+ "source_digest": "fc38ae57ee93babbfce83316eb08e5ca685228fdb983b75b1e5bc282d9361ffb",
+ "taken": 9
+}

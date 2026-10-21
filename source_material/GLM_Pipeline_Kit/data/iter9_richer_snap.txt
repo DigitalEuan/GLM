@@ -1,0 +1,30 @@
+================================================================================================
+ITERATION 9 PHASE 2 — Richer Λ_48 snap (syndrome-coset decoder)
+================================================================================================
+
+Per rec #2: extend nearest_lattice_point to Λ_48 by searching C(23) cosets.
+The trivial snap from iteration 8 only considered the zero codeword — too coarse.
+
+Algorithm:
+  1. Round target to nearest integer
+  2. Compute syndrome s = H · (target mod 3)
+  3. If s = 0, target is in C(23) — snap = target
+  4. If s in weight-1 leaders (96 candidates), snap = target - leader
+  5. If s in weight-2 leaders (1128*4=4512 candidates), snap = target - leader
+  6. Otherwise, fall back to trivial snap (zero codeword)
+
+------------------------------------------------------------------------------------------------
+[Per-task results — comparison vs iteration 8's trivial snap]
+------------------------------------------------------------------------------------------------
+Task          i8 exact      i9 exact      i8 cell match     i9 cell match     i9 snap in Λ_48 
+------------------------------------------------------------------------------------------------
+toggle        0%          0%          0.474             0.474             1.000           
+translate     47%          47%          0.900             0.900             1.000           
+reflect_v     3%          3%          0.613             0.613             1.000           
+------------------------------------------------------------------------------------------------
+
+Interpretation:
+  * If exact match improved, the richer snap correctly recovers the binary answer
+    from the analogy target D* = C + (B - A).
+  * If snap_in_lambda48 is still 100%, the snap always lands in the lattice
+    (as expected — the syndrome-coset decoder finds the nearest C(23) codeword).

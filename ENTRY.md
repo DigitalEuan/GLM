@@ -14,6 +14,8 @@
 
 ---
 
+*Last altered 20 October 2026 (Phase 172: the run-order hazards, at the head of the reading order).*
+
 ## Picking the work up, in one screen
 
 ```bash
@@ -23,8 +25,14 @@ PYTHONPATH=. python3 -m glm_universal.signoff --verify      # which checks are s
 PYTHONPATH=. python3 -m glm_universal.corpus --ask "what bears on the Golay code?"
 ```
 
+0. **Read the run-order hazards first** ([`ITERATE.md`](ITERATE.md) §0.1).
+   Two of them cost the most: don't edit documents while `corpus --refresh`
+   is running (it rewrites them from the copies it read when it started), and
+   after editing `evaluation/cases.py` re-take `queryesc`,
+   `budget-guard-frozen` and `ties-ladder-frozen` first, then the rest, then
+   refresh the corpus last.
 1. Read [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md) — the Positioning
-   section, the target, the <!--figure:directives-->16 standing rules<!--/figure--> and *The round, end to end*.
+   section, the target, the <!--figure:directives-->17 standing rules<!--/figure--> and *The round, end to end*.
 2. Read [`STATUS.md`](STATUS.md) — the To-Do list: §1 (where the work
    stands) and §2.1 (the next round, sharpest first). **Take one of those.**
 3. Use [`DIGEST.md`](DIGEST.md) to find the two or three studies that bear on
@@ -255,7 +263,7 @@ made against a list rather than a hope.
 
 The first two now sit under `archive/`, which is one of the three ways the
 archive rule recognises a record of a round; they were `MASTER_PLAN_ARCHIVE.md`
-at the root and `overlay/README_ARCHIVE.md` beside the package README until
+at the root and a `README_ARCHIVE.md` in `overlay` beside the package README until
 they were gathered here.
 
 Two compressed archives that used to sit at the repository root have been

@@ -28,6 +28,8 @@ it was not.  A confident answer where the honest answer is a refusal, or an
 answer that contradicts the ground truth, counts as a *severe* failure -- the
 scoring in :mod:`glm_universal.evaluation.harness` is deliberately harsher on
 being confidently wrong than on declining to answer.
+
+Last altered 20 October 2026 (Phase 172: `report anonymous` pinned on its claim, read off the measurement, not on counts; Phase 171: two report cases re-pinned for the corpus refreshed with AdversarialDialogue.lean, ContextFrames.lean and EvidenceInUse.lean; Phase 166: two re-pinned for PiMachine.lean).
 """
 
 from __future__ import annotations
@@ -301,6 +303,15 @@ _CASES: Tuple[EvalCase, ...] = (
        "refusal", classification="boundary",
        note="A quotient by an exact zero names no value.  Before this run "
             "the CLI raised an uncaught ZeroDivisionError here."),
+
+    # ------------------------------------------------------------------ tool
+    _c("tool-leech-norm-12", "tool",
+       "the number of vectors of norm 12 in the leech lattice",
+       "answer", contains=("is 34417656000", "counted from the Golay census"),
+       note="Phase 164: the llvq tool's shell table was stored, and its "
+            "norm-12 entry was wrong (34408430950); it is now counted from "
+            "the Golay census by the lattice's definition and checked "
+            "against the theta series."),
 
     # --------------------------------------------------------------- compare
     _c("compare-pi-355", "compare", "is pi less than 355/113",
@@ -654,7 +665,12 @@ _CASES: Tuple[EvalCase, ...] = (
             "every measured figure comes back unchanged."),
 
     _c("report-language", "report", "report language",
-       "answer", contains=("7 of 25 answerable query kinds",
+       # Re-pinned at the Phase 150-152 close: the answerable kinds are 26
+       # (the shared baseline of Phases 150-151 already read 26); claim
+       # unchanged, the same seven kinds described.
+       # Re-pinned at Phase 154: the `corpus` kind makes the answerable
+       # kinds 27; claim unchanged, the same seven kinds described.
+       "answer", contains=("7 of 27 answerable query kinds",
                            "derive, measure, task, compare by slot shape",
                            "verify, analogy, compare by infix shape",
                            "comparative by nested shape",
@@ -785,8 +801,57 @@ _CASES: Tuple[EvalCase, ...] = (
        # Re-pinned at Phase 145 (TimedQuestion.lean) makes the set 822 and
        # the gate fires on 38 of 1644; still ahead on every set, carrying
        # 9, losing 0.
-       "answer", contains=("687 -> 690 of 822 (ahead)", "38 of 1644",
-                           "carrying 9 queries it misses and losing 0"),
+       # Re-pinned at the Phase 150-152 close (the Lean files of Phases
+       # 146-151, the corpus refreshed with them) makes the set 830 and the
+       # gate fires on 32 of 1660; still ahead on every set, carrying 6,
+       # losing 0.
+       # Re-pinned at Phase 154 (CorpusKnowledge.lean and the knowledge
+       # package) makes the set 835 and the gate fires on 40 of 1670; still
+       # ahead on every set, carrying 5, losing 0.
+       # Re-pinned at Phase 155 (CorpusDefinitions.lean and the knowledge
+       # modules) makes the set 837 and the gate fires on 56 of 1674; still
+       # ahead on every set, carrying 12, losing 0.
+       # Re-pinned at Phase 157 (FrictionTwo.lean, DomainWheels.lean and the
+       # Phase 156 file, the corpus refreshed with them) makes the set 843 and
+       # the gate fires on 50 of 1686; still ahead on every set, carrying 17,
+       # losing 0.
+       # Re-pinned at Phase 158 (OscillatorJunction.lean, the corpus refreshed
+       # with it) makes the set 845 and the gate fires on 50 of 1690; still
+       # ahead on every set, carrying 17, losing 0.
+       # Re-pinned at Phase 159 (ThermoFriction.lean, the corpus refreshed
+       # with it) makes the set 847 and the gate fires on 44 of 1694; still
+       # ahead on every set, carrying 15, losing 0.
+       # Re-pinned at Phase 160 (FoldMachine.lean, the corpus refreshed with
+       # it) makes the set 850 and the gate fires on 60 of 1700; still ahead
+       # on every set, carrying 13, losing 0.
+       # Re-pinned at Phase 161 (StudyLedger.lean, the corpus refreshed with
+       # it) makes the set 851 and the gate fires on 58 of 1702; still ahead
+       # on every set, carrying 13, losing 0.
+       # Re-pinned at Phase 162, 18 October 2026 (SourceTiers.lean, the
+       # corpus refreshed with it) makes the set 853 and the gate fires on 58
+       # of 1706; still ahead on every set, carrying 13, losing 0.
+       # Re-pinned at Phase 164, 19 October 2026 (ToolMachine.lean,
+       # LeechMachine.lean and LeechShells.lean, the corpus refreshed with
+       # them): the stride grows by one, so the set is 803 and the gate fires
+       # on 46 of 1606; still ahead on every set, carrying 10, losing 0.
+       # Re-pinned at Phase 165, 19 October 2026 (LeechKissing.lean, the
+       # corpus refreshed with it): the set is 811 and the gate fires on 30
+       # of 1622; still ahead on every set, carrying 7, losing 0.
+       # Re-pinned at Phase 166, 19 October 2026 (PiMachine.lean, the corpus
+       # refreshed with it): the set is 812 and the gate fires on 44 of
+       # 1624; still ahead on every set, carrying 9, losing 0.
+       # Phase 171, 20 October 2026: pinned on the claim, not the counts.
+       # Every Lean file added since Phase 161 moved the counts and forced a
+       # re-pin (the corpus refreshed with AdversarialDialogue.lean and
+       # ContextFrames.lean gave a set of 816, with EvidenceInUse.lean 817),
+       # and every re-pin staled the stored measurements that digest this
+       # file.  The report's standing words are read off the measurement
+       # (`standing`: ahead, level or behind), so the pin now asks for what
+       # the case claims -- ahead on all three sets, losing nothing.
+       "answer", contains=("(ahead), a disjoint held-out stride",
+                           "(ahead) and bare goal queries",
+                           "(ahead), carrying",
+                           "queries it misses and losing 0."),
        note="The faculties arranged as a stack rather than scored one at a "
             "time: below a gate of 1/10 the leading lexical search is "
             "judged to have abstained and the two geometric address books "
@@ -858,8 +923,57 @@ _CASES: Tuple[EvalCase, ...] = (
        # Re-pinned at Phase 145 (queries 817 -> 822 with
        # TimedQuestion.lean): text 687 -> 51, structure 139 -> 137; claim
        # unchanged.
-       "answer", contains=("687 -> 51 of 822", "139 -> 137 of 822",
-                           "class, not a residue"),
+       # Re-pinned at the Phase 150-152 close (queries 822 -> 830 with the
+       # Lean files of Phases 146-151): text 701 -> 41, structure 157 -> 156;
+       # claim unchanged.
+       # Re-pinned at Phase 154 (queries 830 -> 835 with
+       # CorpusKnowledge.lean): text 703 -> 47, structure 147 -> 145; claim
+       # unchanged.
+       # Re-pinned at Phase 155 (queries 835 -> 837 with
+       # CorpusDefinitions.lean): text 677 -> 56, structure 151 -> 149; claim
+       # unchanged.
+       # Re-pinned at Phase 157 (queries 837 -> 843 with FrictionTwo.lean,
+       # DomainWheels.lean and Friction.lean): text 702 -> 47, structure
+       # 164 -> 162; claim unchanged.
+       # Re-pinned at Phase 158 (queries 843 -> 845 with
+       # OscillatorJunction.lean): text 703 -> 47, structure 165 -> 163; claim
+       # unchanged.
+       # Re-pinned at Phase 159 (queries 845 -> 847 with
+       # ThermoFriction.lean): text 710 -> 51, structure 168 -> 166; claim
+       # unchanged.
+       # Re-pinned at Phase 160 (queries 847 -> 850 with FoldMachine.lean):
+       # text 682 -> 54, structure 157 -> 155; claim unchanged.
+       # Re-pinned at Phase 161 (queries 850 -> 851 with StudyLedger.lean):
+       # text 683 -> 54, structure 153 -> 152; claim unchanged.
+       # Re-pinned at Phase 162, 18 October 2026 (queries 851 -> 853 with
+       # SourceTiers.lean): text 685 -> 54, structure 154 -> 153; claim
+       # unchanged.
+       # Re-pinned at Phase 164, 19 October 2026 (queries 853 -> 803: the
+       # three new Lean files grow the sampling stride by one): text
+       # 655 -> 53, structure 156 -> 157; claim unchanged.
+       # Re-pinned at Phase 165, 19 October 2026 (queries 803 -> 811 with
+       # LeechKissing.lean): text 687 -> 63, structure 166 -> 167; claim
+       # unchanged.
+       # Re-pinned at Phase 166, 19 October 2026 (queries 811 -> 812 with
+       # PiMachine.lean): text 671 -> 60, structure 170 -> 171; claim
+       # unchanged.
+       # Re-pinned at Phase 171, 20 October 2026 (queries 812 -> 816 with
+       # AdversarialDialogue.lean, ContextFrames.lean and EvidenceInUse.lean):
+       # text 669 -> 49, structure 153 -> 154; claim unchanged.  With
+       # EvidenceInUse.lean too (queries 816 -> 817): text 674 -> 57,
+       # structure 154 -> 153; claim unchanged.
+       # Phase 172, 20 October 2026: pinned on the claim, not the counts,
+       # as `report relay` has been since Phase 171.  The report now reads
+       # its standing off the measurement's verdict and names any check that
+       # fails; the pin forbids a failure of the four checks the claim rests
+       # on.  Reading it showed that one check the sentence used to assert
+       # does not hold (`text_is_within_twice_chance`: text 57 against 23 by
+       # chance, more than twice), so the words "both to chance" became
+       # "against chance".
+       "answer", contains=("class, not a residue",
+                           "Standing, read off the measurement:"),
+       forbids=("text_collapses_without_the_names", "address_holds",
+                "address_is_the_clear_leader", "gate_hands_over"),
        note="The register where the geometric address is the only faculty "
             "still reading: rename every identifier of a query outside a "
             "declared vocabulary and the text search and the identifier "
@@ -1308,6 +1422,33 @@ _CASES: Tuple[EvalCase, ...] = (
        "refusal", classification="boundary",
        note="A walk is named by its index."),
 
+    # --------------------------- the corpus as what the GLM knows (Phase 154)
+    _c("corpus-define", "corpus", "corpus define golay code",
+       "answer", contains=("The corpus says", "Golay code"),
+       note="What the project's own corpus says the Golay code is, with the "
+            "sentence's address; ranked by where the sentence stands."),
+    _c("corpus-continue", "corpus", "corpus continue a digest addresses",
+       "answer", contains=("integrity never meaning",),
+       note="The corpus's own most frequent continuation, each token with a "
+            "witness sentence; a tie would stop it (GLM.CorpusKnowledge."
+            "predict_eq_none_of_tie)."),
+    _c("corpus-unmentioned", "corpus", "corpus define zyxwv",
+       "refusal", classification="boundary",
+       note="A term no sentence of the corpus mentions is refused, never "
+            "guessed."),
+
+    # ------------- a word's place on the lattice, from its corpus counts (Phase 155)
+    _c("corpus-address", "corpus", "corpus address of seven",
+       "answer", contains=("sits at the Leech point", "read back exactly: True",
+                           "six"),
+       note="A word's 24 positional coordinates, quantised onto the Leech "
+            "lattice and read back exactly; its nearest words on the lattice "
+            "are the other number words (CORPUS_DEFINITIONS_STUDY.md, W2')."),
+    _c("corpus-address-phrase", "corpus", "corpus address of golay code",
+       "refusal", classification="boundary",
+       note="A lattice address is for one word; a phrase is refused with the "
+            "reason."),
+
     # ------------------------------ the guarded read in nearest (Phase 148)
     _c("nearest-address-moved", "nearest", "nearest to C moved 8 by 1/2",
        "answer", contains=("chemistry:C", "certifies the head",
@@ -1338,6 +1479,44 @@ _CASES: Tuple[EvalCase, ...] = (
        "nearest to water moved 8 by 1/2",
        "refusal", classification="boundary",
        note="'water' names two carriers of the address table."),
+
+    # ------------------------------- the question at the ties (Phase 150)
+    _c("nearest-tie-question", "nearest",
+       "nearest to 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "
+       "0, 0, 0, 0, 0",
+       "answer", contains=("no margin is certified",
+                           "the GLM asks: What is its field order?"),
+       note="The scan finds two carriers at distance 0 where the guarded "
+            "read refuses; the answer ends with the question that splits "
+            "them (studies/NEAREST_QUESTION_STUDY.md)."),
+    _c("nearest-tie-reply", "nearest",
+       "nearest to albedo moved 4 by 1/4 given word:absorbed is no",
+       "answer", contains=("leave 1 of the 2 carriers of the head",
+                           "physics:albedo", "after_least",
+                           "Is it exactly physics:albedo?"),
+       note="A reply leaves one member of the certified junction and never "
+            "moves the answer off the head "
+            "(`GLM.NearestQuestion.after_least`); the confirming question "
+            "follows."),
+    _c("nearest-tie-confirmed", "nearest",
+       "nearest to albedo moved 4 by 1/4 given word:absorbed is no; "
+       "confirm:physics:albedo is yes",
+       "answer", contains=("resolved_is_meant", "the confirming reply agrees"),
+       forbids=("the GLM asks",),
+       note="The confirming reply agrees, so no further question is put."),
+    _c("nearest-tie-contradicted", "nearest",
+       "nearest to albedo moved 4 by 1/4 given word:absorbed is no; "
+       "confirm:physics:albedo is no",
+       "refusal", classification="boundary",
+       note="The replies leave no member of the head; the GLM reports the "
+            "contradiction rather than choose "
+            "(`GLM.NearestQuestion.outside_never_confirmed`)."),
+    _c("nearest-tie-no-tie", "nearest",
+       "nearest to C moved 8 by 1/2 given word:absorbed is no",
+       "refusal", classification="boundary",
+       note="The head is the single carrier chemistry:C, so there is no "
+            "tie for a reply to resolve "
+            "(`GLM.NearestQuestion.head_card_le_one_iff`)."),
 
     # ----------------------------------------------------- scale conversion
     _c("scales-mass-across-tables", "ordering",

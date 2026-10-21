@@ -1,0 +1,44 @@
+================================================================================================
+ITERATION 4 — Comparative layered snap: Λ24 vs Λ32 vs Λ48
+================================================================================================
+
+For each binary task target, run three snaps in parallel:
+  * Λ24 snap (Leech, Construction C): binary -> 4*binary -> in_leech
+  * Λ32 snap (Barnes-Wall, Construction D over RM(1,5) ⊂ RM(3,5)):
+    binary embedded in 32-D + padding bits, in_lattice test
+  * Λ48 snap (ternary, Pless symmetry code C(23) over F_3):
+    binary -> pair(b, 0) or pair(b, 1-b) or spin(b, 2b mod 3) in 48-D
+
+User insight: F_2 multiplication by 2 = 0 (deletion, no spin).
+              F_3 multiplication by 2 = -1 (a unit, a rotation).
+The ternary Λ48 is the 'multiplication puncture' — the lattice where
+the binary substrate's no-further-restriction wall gets punctured by
+introducing a non-trivial multiplicative unit.
+
+------------------------------------------------------------------------------------------------
+[Layer distribution per task family — 50 samples each]
+------------------------------------------------------------------------------------------------
+Task          Leech_24    BW_32     T_48    BEYOND    wall    BW32 resolves   T48 resolves    both      
+------------------------------------------------------------------------------------------------
+toggle        29          21        0       0         21      21/21 (100%)     21/21 (100%)     21
+translate     50          0         0       0         0       0/0 (0%)     0/0 (0%)     0
+reflect_v     31          19        0       0         19      19/19 (100%)     19/19 (100%)     19
+flood_fill    50          0         0       0         0       0/0 (0%)     0/0 (0%)     0
+bfs_shortest  50          0         0       0         0       0/0 (0%)     0/0 (0%)     0
+------------------------------------------------------------------------------------------------
+
+Interpretation:
+  * 'Leech_24' column: targets that snap at the Leech layer (even parity).
+  * 'wall' column: how many of the 50 samples hit the parity wall at Λ24.
+  * 'BW32 resolves' column: of those wall hits, how many Λ32 (Barnes-Wall) resolves.
+  * 'T48 resolves' column: of those wall hits, how many Λ48 (ternary) resolves.
+  * 'both' column: cases where BOTH higher lattices resolve the wall.
+
+User insight verification:
+  * F_2 multiplication by 2 = 0 (deletion, no spin) — this is the parity wall.
+  * F_3 multiplication by 2 = -1 (a unit, a rotation) — the 'multiplication puncture'.
+  * Λ32 resolves the wall via the binary-alphabet 'room' mechanism (8 padding bits).
+  * Λ48 resolves the wall via the ternary-alphabet 'spin' mechanism (3 is invertible in F_3).
+  * Both layers independently resolve the wall — the question is which mechanism
+    the GLM should learn to invoke. Λ32 keeps the binary alphabet but adds dimensions;
+    Λ48 abandons binary for ternary, where the 'multiplication puncture' is structural.

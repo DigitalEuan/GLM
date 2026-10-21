@@ -5,7 +5,7 @@
 
 **Question.** What has each phase of the wiring plan delivered, and what does the next round start from?
 
-**Verdict.** Phase 158 is closed: taken at the owner's request, the junction between wave kinematics and the mass-spring oscillator was tried four ways under one declared rule, read through the reference circle — joining `frequency` only keeps all 21 declared answers, all 9 refusals and all 249 shipped answers, and gives no answer tying the oscillator to a rotating body where Phase 157's junction gave 6, so it now ships (`OscillatorJunction.lean`; 4 of 4 marks for the chosen variant); and the analogy method behind the friction study is written down for future rounds. Before it closed Phase 157 (five domain wheels with their junctions, and friction, the rest). Phase 159 starts from the To-Do list in [`STATUS.md`](STATUS.md) §2.
+**Verdict.** Phase 175 is closed: the owner's 9-iteration pipeline kit, delivered into `source_material/GLM_Pipeline_Kit/`, is in the GLM — its bridge holds on the GLM's own substrate (0 failures in 2,000 words), its seven Lean files build under `GLM/PipelineKit/`, and `tool induce` induces a rule from demonstration pairs and answers only when every fitting hypothesis agrees: 0 wrong answers in 2,250 queries over fifteen families at a cost of 129 refusals, the kit's two open families closed (49 of 50 each), two-step tasks and bit strings answered, against 12 and 19 wrong answers for the eager controls (`PipelineInduction.lean`, 17 theorems; 12 of 12 marks). Before it Phases 173 and 174: several open ties at once (`StackedDialogue.lean`, 8 of 8 marks), and the answer censuses guarded by the stored measurements their answers quote (5 of 5 marks). Phase 176 starts from the To-Do list in [`STATUS.md`](STATUS.md) §2.
 
 **Deciding figure.** Every closed phase names what was built, where it lives, and how to see it recompute itself.
 
@@ -25,7 +25,7 @@ recompute itself.
 
 Everything below is reachable from the package's public API and from the query
 runtime — **<!--figure:query-kinds-->28 query kinds<!--/figure-->**, **<!--figure:report-subjects-->67 report subjects<!--/figure-->** and **<!--figure:registers-->8 registers<!--/figure-->** — is
-covered by the test suite (<!--figure:test-files-->209 test files<!--/figure-->),
+covered by the test suite (<!--figure:test-files-->226 test files<!--/figure-->),
 and — where it is a report or a task — has a generated column-3 script that
 recomputes the claim in a **fresh interpreter** and fails if anything differs.
 
@@ -183,9 +183,858 @@ as everything else: only the open phase is state.
 
 ---
 
+## Phase 175 — the owner's pipeline kit in the GLM: rules induced from demonstrations, answered only when every fitting rule agrees
+
+*Created 21 October 2026.*
+
+**Status: closed.** Taken at the owner's request of 21 October 2026, not from
+the To-Do list: the files of the 9-iteration GLM pipeline study were delivered
+and placed in `source_material/GLM_Pipeline_Kit/` (the condensed files split
+back into `python/glm_kit/` (9), `GLMKit/` (7), `scripts/` (40) and `data/`
+(22); `README.md`, `FINDINGS.md`, `worklog.md`, `ARC_20Oct2026.txt` beside
+them), with the instruction to use their methods to raise the GLM's reasoning
+and task steps, for puzzles and beyond. Study:
+[`studies/PIPELINE_KIT_STUDY.md`](studies/PIPELINE_KIT_STUDY.md) (marks B, L1,
+L2, K, D, S, G, R, M, W, A, T; written after one exploratory pass, which the
+study records, and M narrowed after its first take). Marks: 12 of 12. Tests:
+`tests/test_pipeline_kit.py` (7), run by hand: 7 of 7 pass (pytest is not
+installed here).
+
+* **Lean** — the kit's seven files under
+  `overlay/glm_lean/RequestProject/GLM/PipelineKit/` (imports renamed,
+  statements and proofs unchanged, 0 `sorry`); `GLM/PipelineInduction.lean`
+  (17 theorems, 0 `sorry`): the agreement gate is sound (`agree_sound`), the
+  tiered solver's answer is the true rule's whenever the true rule is in the
+  tier read (`solve_sound`), refusal is forced when two fitting rules disagree
+  (`ambiguous_forces_refusal`), the solver never invents an answer
+  (`solve_never_invents`), and a further demonstration only removes
+  hypotheses (`consistentIn_more_demos`).
+* **Python** — `reasoning/pipeline_kit.py`: the solver, with the kit's
+  operators, the region fill and the two-point path writer (the kit's open
+  items), two-step compositions read in the same tier as single operators,
+  the layer filter (`wt_comp_perm`), the evidence guard on fitted masks, and
+  the kit's measuring step read off `substrate/leech2.py` — it induces a
+  rule from demonstration pairs and answers only when every fitting
+  hypothesis agrees;
+  `runtime/toolbox.py`: `tool induce` and the phrase "induce the rule from …
+  ? …"; `reasoning/pipeline_kit_study.py`, `tools pipeline-kit`.
+* **Measured** — the kit's bridge on `leech2`: 0 failures of four checks in
+  2,000 words (it had never been run). Shipped solver over 2,250 queries:
+  2,121 right, 0 wrong, 129 refused; the two eager controls: occam 12 wrong,
+  no gate 19 wrong; the kit as delivered 3 wrong and 1,048 refused. `flood_fill` and
+  `bfs_shortest` 0 → 49 of 50 each at four demonstrations; the three two-step
+  families 0 → 47, 50, 50; the four bit-string families 50 of 50. The layer
+  filter skipped 2,653 hypotheses per query on weight-changing families and
+  changed no answer. Faculties: derive and refuse.
+* **Left** — colours and objects (the operators are binary), chains longer
+  than two steps under a cost bound, and asking the user for the
+  demonstration that would separate the disagreeing hypotheses (To-Do item
+  9).
+
+## Phase 174 — the answer censuses guarded by what their answers quote, and the replay gate as a step of the close
+
+*Created 20 October 2026.*
+
+**Status: closed.** Taken from `STATUS.md` §2.1 item 7 (*the evidence model,
+in use, the rest*), two of its lines — the census's digest not covering the
+stored measurements its answers quote (hazard 4 of `ITERATE.md` §0.1), and the
+replay gate a flag rather than a step of the close. Study:
+[`studies/QUOTED_MEASUREMENTS_STUDY.md`](studies/QUOTED_MEASUREMENTS_STUDY.md)
+(marks Q1–Q5, written with the measuring module before its first run).
+Marks: Q1–Q5 all met (5 of 5). Tests: `tests/test_quoted_measurements.py` (6), run by hand:
+6 of 6 pass (pytest is not installed here).
+
+* **Python** — `glm_universal/quoted_measurements.py` (`recording`,
+  `quoted_paths`, `existing`): the stored measurements a computation opened.
+  `reasoning/evidence_model_study.py` and `reasoning/evidence_in_use_study.py`
+  record `quoted` and digest it (`module_digest(quoted)`), never their own
+  file nor, for the evidence census, the result census's. `signoff/__main__.py`:
+  `CENSUS_LAST`, stage 0 re-takes the two censuses last and again in its
+  second pass. `signoff/checks.py`: the seventh instrument, `replay`
+  (`python3 -m glm_universal.evaluation --replay-only`).
+  `reasoning/quoted_measurements_study.py`, `tools quoted-measurements`;
+  `runtime/toolbox.py` declares the study module.
+* **Measured** — quoted measurements 110 (evidence census) and 111 (result census), each moving its digest when altered (110 of 110, 111 of 111); no cycle; stage 0 ends with the two censuses in order; `replay` signed passed (177 cases, 171 replayed, 171 verified, 6 without a column 3, failed none). Re-taken censuses: evidence 9 of 9, result 7 of 7 (evaluation 223 of 223).
+* **Left** — the other measurements that record answers (the frozen paths,
+  `queryesc`) are still guarded by their sources only; the recorder sees only
+  files read after it starts (To-Do item 7).
+
+## Phase 173 — several open ties at once: a reply read against the question it answers
+
+*Created 20 October 2026.*
+
+**Status: closed.** Taken from `STATUS.md` §2.1 item 8 (*dialogue, the
+rest*), two of its lines — only the newest open question could be resumed,
+and there was no window. Study:
+[`studies/STACKED_DIALOGUE_STUDY.md`](studies/STACKED_DIALOGUE_STUDY.md)
+(marks L1, S0–S5, P, written with the measuring module before its first run).
+**8 of 8 marks on the first take.** Tests: `tests/test_stacked_dialogue.py`
+(7), run by hand: 7 of 7 pass, with `test_resumed_dialogue.py` (7) (pytest is
+not installed here).
+
+* **Lean** — `overlay/glm_lean/RequestProject/GLM/StackedDialogue.lean` (16
+  theorems, 0 `sorry`, standard axioms): `bound_fits`, `bound_newest`,
+  `findIdx_bound`, `findIdx_of_bound`, `reply_reads`, `reply_erases`,
+  `reply_closes_one`, `unfit_unread`, `newest_fit_agrees`,
+  `unrelated_within_window`, `age_mem`, `age_iter_ge`, `window_closes`,
+  `stacked_least`, `older_answered`, `resumed_rule_loses`.
+* **Python** — `runtime/conversation.py`: `Conversation.open_ties`,
+  `expired_ties`, `expired_fit`, the switch `OPEN_TIE_STACK` (on), the window
+  `OPEN_TIE_WINDOW = 5`, the named reply `ADDRESSED_REPLY` (`turn N:
+  <reply>`), `Binding.also` (the other open turns a reply fits, said in the
+  binding's sentence). `GLM.py --converse` says when a reply is late (its
+  question closed by the window). `reasoning/stacked_dialogue_study.py`; `tools
+  stacked-dialogue`; `runtime/toolbox.py` declares the study module. Phase
+  172's measurement is now taken with the stack off, the reading it measured
+  (9 of 9, unchanged).
+* **Measured** — first-tie replies read behind a second question 0 of 61
+  with the stack off; with it on, two dialogues opened one after the other and
+  answered in turn ended as each ends alone in 61 of 61 runs, the second still
+  open when the first ended, 0 of 258 replies bound to another turn (23 said
+  with the turn named); 23 of 23 plain replies fitting both bound to the newer
+  and naming the older; 61 of 61 named replies bound to the turn named, 0 of
+  61 read naming a turn with no question, 0 of 61 naming an answered one; 21
+  of 21 replies read after 5 unrelated turns, 0 of 21 after 6; 0 of 4,683
+  evaluation questions read as a reply; 0 members outside the head ever live
+  over 244 runs.
+* **Process** — the uploaded tree tracked Python bytecode again;
+  `.gitignore` now names `__pycache__/` and `*.pyc`.
+* **Left** — the window's length is declared, not measured; only a turn
+  number points at an older question; the word echo and `not-an-option` as
+  evidence (To-Do item 8).
+
+## Phase 172 — the open tie kept across turns: a reply read after the conversation has moved on
+
+*Created 20 October 2026.*
+
+**Status: closed.** Taken from `STATUS.md` §2.1 item 8 (*adversarial
+dialogue, the rest*), two of its lines — the dialogue dropped after an
+unrelated turn, and the battery not run at the `locate` junction — and one
+line of item 7 (the `report anonymous` pin on the Lean corpus's counts).
+Study: [`studies/RESUMED_DIALOGUE_STUDY.md`](studies/RESUMED_DIALOGUE_STUDY.md)
+(marks L1, R0–R6, P, written with the measuring module before its first run).
+**9 of 9 marks on the first take.** Tests: `tests/test_resumed_dialogue.py`
+(7), run by hand: 7 of 7 pass, with `test_conversation.py` (37) and
+`test_plan_store.py` (18) (pytest is not installed here).
+
+* **Lean** — `overlay/glm_lean/RequestProject/GLM/ResumedDialogue.lean` (10
+  theorems, 0 `sorry`, standard axioms): `run_unrelated`, `run_strip`,
+  `foldl_strip`, `resumed_live_eq`, `resumed_least`, `old_rule_drops`,
+  `resumed_reads`, `reply_closes`, `newest_supersedes`,
+  `agrees_without_unrelated`.
+* **Python** — `runtime/conversation.py`: `Conversation.open_tie` and the
+  switch `RESUME_OPEN_TIE` (on); a reply is read against the newest open
+  question, a reply closes it, an unrelated turn is passed over.
+  `reasoning/resumed_dialogue_study.py`; `tools resumed-dialogue`;
+  `runtime/toolbox.py` declares the study module. Phase 167's A4 is now taken
+  with the switch off, the reading it measured (13 of 13, unchanged).
+* **Measured** — replies read after an unrelated turn 0 of 61 → 183 of 183
+  (1, 2 and 3 unrelated turns, one a refusal), every one ending as the
+  uninterrupted run; 243 of 243 adversarial runs (consistent liar, first
+  false reply) ending as uninterrupted; 0 of 130 repeated replies read once a
+  dialogue ended; 0 of 48 replies bound to a superseded question; 0 of 4,683
+  evaluation questions read as a reply; at the `locate` junctions truthful
+  13 of 13 confirmed, liars 64 of 64 on the member impersonated, first false
+  13 of 13 contradicted, 0 of 182 malformed texts read; 0 members outside the
+  head ever live over 791 runs.
+* **`report anonymous`** — reads its standing off the measurement's verdict
+  and names any check that fails; its evaluation pin forbids a failure of the
+  four checks the claim rests on, instead of quoting counts that every Lean
+  file moved. Reading the verdict showed that `text_is_within_twice_chance`
+  fails (text 57 of 820 against 23 by chance), which the answer had asserted
+  (*both to the 23 hits chance gives*); it now says *against*.
+* **Process** — the run-order hazards (do not edit documents while a refresh
+  runs; the re-take order after editing `evaluation/cases.py`; six more) are
+  written at the head of `ITERATE.md` (§0.1) and pointed to from
+  `README.md`, `ENTRY.md` and `WHITEBOARD.md`. Python bytecode
+  (`__pycache__/`, 902 files) is no longer tracked in version control.
+* **Left** — several open ties at once and a window; the word echo inside
+  the proved limit; `not-an-option` as evidence (To-Do item 8);
+  `MASTER_PLAN.md`'s closed phases still to be archived (§2.2).
+
+## Phase 171 — the evidence model in use: every answer as one result on the command line, and column 3 in the evaluation's gate
+
+*Created 20 October 2026.*
+
+**Status: closed.** Taken from `STATUS.md` §2.1 item 7 (*the evidence model,
+in use*), its first two lines. Study:
+[`studies/EVIDENCE_IN_USE_STUDY.md`](studies/EVIDENCE_IN_USE_STUDY.md) (marks
+L1, U1–U6, pre-registered and committed before the measurement). **7 of 7 marks
+on the fifth take**; the first four takes were moved by stored measurements or
+a corpus that were stale or older than what they described, and are reported. Tests:
+`tests/test_evidence_in_use.py` (7), run by hand: 7 of 7 pass (pytest is not
+installed here).
+
+* **Lean** — `overlay/glm_lean/RequestProject/GLM/EvidenceInUse.lean` (5
+  theorems, 0 `sorry`, standard axioms): `gate_sound`,
+  `gate_fails_of_failed`, `gate_absent_ok`, `gate_append`,
+  `read_keeps_answer`.
+* **Python** — `GLM.py --result` (`routed_result`, `_print_results`): every
+  `-q` answer as the ten-field `Result`, column 3 replayed under
+  `--verify-tct`; `evaluation/replay.py` and `python3 -m
+  glm_universal.evaluation --replay` (`--replay-timeout`, default
+  `REPLAY_TIMEOUT = 1200` s, an amendment after take 1: the Lean-corpus
+  reports take up to about seven minutes with their replay);
+  `reasoning/evidence_in_use_study.py`; `tools evidence-in-use`;
+  `runtime/toolbox.py` declares the study module in the wiring census.
+* **Measured** — `--result` agrees with the Phase 169 census on 223 of 223;
+  ten fields on 223 of 223; the gate replays 171 of the 177 cases expected
+  answered, 171 verify, 6 have no column 3, in about nine minutes on eight
+  processes; the gate's rule as declared on five hand-written batches.
+* **Loose ends of the last run, closed** — the `MASTER_PLAN.md` records of
+  Phases 167–170, their `SYSTEM.md` rows and the paper's §§20.41–20.44 were
+  missing and are written; the corpus had not been refreshed with
+  `AdversarialDialogue.lean` and `ContextFrames.lean`, and is now. A
+  `corpus --refresh` left running while documents were edited rewrote them
+  from the copies it had read at its start; the edits were restored from the
+  commit. Do not edit a document while a refresh runs.
+* **Answers moved** — none from answering code. Two Lean-corpus pins
+  (`report relay`, `report anonymous`) moved with the corpus refreshed with
+  the three new Lean files (812 → 816 → 817 goal queries), claims unchanged:
+  `report relay` is now pinned on its claim (*ahead* on all three sets,
+  *losing 0*, words the report reads off the measurement), `report anonymous`
+  re-pinned to its counts.
+  The Phase 169 census and the query-escalation measurement re-taken, and
+  the stored measurements whose digests cover the evaluation file or the
+  refreshed corpus (tool-machine, address-read, junction-read,
+  nearest-address, nearest-question, lattice frozen path, budget-reading,
+  budget-guard frozen path, ties-ladder frozen path, hole reports L5): their
+  marks are as before (nearest-question 8 of 8 once the ties-ladder frozen
+  path it reads was re-taken first), and no frozen path has an undeclared
+  move.
+* **Left** — the gate in `signoff --close`; the census's digest blind to the
+  stored measurements its answers quote; pins on the Lean corpus's counts;
+  `--result` for the other entry flags (To-Do item 7).
+
+## Phase 170 — contextual domain frames: the question says which energy, which oscillator, and which body drives the wave
+
+*Created 20 October 2026.*
+
+**Status: closed.** Taken from the owner's plan of 19 October 2026, Part II.3
+(*add contextual domain frames*), with `STATUS.md` §2.1 item 5 (*the domain
+wheels, the rest*: which energy, which body drives the wave). Study:
+[`studies/CONTEXT_FRAMES_STUDY.md`](studies/CONTEXT_FRAMES_STUDY.md) (marks
+X1–X8, pre-registered before the measurement). **8 of 9 marks**: X5 missed on
+a mis-written expectation (x5b's law written for the other target), X5′ met.
+Tests: `tests/test_context_frames.py`.
+
+* **Lean** — `overlay/glm_lean/RequestProject/GLM/ContextFrames.lean` (10
+  theorems, 0 `sorry`, standard axioms): `pin_never_changes`,
+  `pin_answer_mem`, `pin_same_answer`, `delivered_energy`,
+  `stored_energy_half`, `energyWitness_vanishes`, `stored_energy_not_full`,
+  `reference_circle_joined`, `circleWitness_vanishes`,
+  `reference_circle_split`.
+* **Python** — `engineering/context_frames.py` (six declared contexts:
+  `energy-delivered`, `energy-stored-capacitor`, `energy-stored-inductor`,
+  `oscillator-spring`, `oscillator-lc`, `rotating-drive`), read by the
+  engineering surface after *across domains where*;
+  `engineering/context_frames_study.py`; `tools context-frames`.
+* **Measured** — battery 21 of 23 and 9 of 9 with and without the
+  rotating-body join, 0 wrong; census of 16,215 questions, 0 answers changed by
+  a pin, 12 ambiguities resolved by each energy pin (in opposite ways); 4 of 4
+  declared refusals.
+* **Answers moved** — none: 223 of 223.
+* **Left** — `STATUS.md` §2.1 item 5 (contexts through the language
+  descriptions, at a `nearest` tie, the stored energy said in words, other
+  couplings declared).
+
+## Phase 169 — one evidence and result model: every evaluation answer read into one `Result`
+
+*Created 20 October 2026.*
+
+**Status: closed.** Taken from the owner's plan, Part II.1 (*one evidence and
+result model*). Study:
+[`studies/EVIDENCE_MODEL_STUDY.md`](studies/EVIDENCE_MODEL_STUDY.md) (marks
+R1–R9). **9 of 9 on the re-take** (7 of 9 on the first: R5 missed on an
+extractor artefact and amended as R5′; R6 missed on two real replay defects,
+repaired). Tests: `tests/test_evidence_model.py`.
+
+* **Python** — `runtime/evidence.py` (the `Result` with its ten fields:
+  answer or candidates, evidence kind, witness, theorem, boundary, cost, open
+  tie, refusal reason, reply history, replayed);
+  `reasoning/evidence_model_study.py`; `tools evidence-model`.
+* **Repairs** — the trilinear column-3 template now replays a triple of axis
+  labels (`trilinear 127 432 463`); the `report language` column 3 consults
+  both frozen parsers, reads `compare`'s dispatch and recomputes the nine
+  figures it had fallen behind on. No answer changed.
+* **Measured** — 223 of 223 read; 171 of 171 column-3 replays verified; 50
+  cited theorem names, all declared; status 172 answered, 5 open, 3
+  contradicted, 43 refused.
+* **Answers moved** — none: 223 of 223.
+* **Left** — `STATUS.md` §2.1 item 7.
+
+## Phase 168 — the corpus confidence curve: declared sure, balanced and candidate modes
+
+*Created 20 October 2026.*
+
+**Status: closed.** Taken from the owner's plan, Part II.4 (*a declared corpus
+confidence curve*), with part of `STATUS.md` §2.1 item 3. Study:
+[`studies/CONFIDENCE_CURVE_STUDY.md`](studies/CONFIDENCE_CURVE_STUDY.md)
+(marks C1–C6, D1, D2). **6 of 8 marks**; C1 (the balanced coverage moved 5.2
+points between folds) and C3 (the sure mode 2.95 times, against a declared
+three) kept as misses. Tests: `tests/test_confidence_curve.py`.
+
+* **Python** — `knowledge/confidence_curve.py` (the modes chosen on a
+  calibration fold by rules written first; `quality`, the definition's
+  description of itself); `tools confidence-curve`.
+* **Measured** — balanced guard `(1, 1/5)`: 33.7% precision at 42.4% coverage
+  held out, 1.6 times unguarded; sure `(2, 2/3)`: 62.0% at 7.3%; candidate
+  top three: 32.7% at 98.4%; the order control 3.3%. Definitions: strong 4 of
+  15 agree with the held-out gloss, weak 2 of 8.
+* **Answers moved** — none; the modes are measured, not wired.
+* **Left** — `STATUS.md` §2.1 item 3.
+
+## Phase 167 — adversarial replies at the `nearest` ties
+
+*Created 20 October 2026.*
+
+**Status: closed.** Taken from the owner's plan, Part II.5 (*adversarial
+interactive testing*). Study:
+[`studies/ADVERSARIAL_DIALOGUE_STUDY.md`](studies/ADVERSARIAL_DIALOGUE_STUDY.md)
+(marks L1, A0–A9, P). **13 of 13 marks.** Tests:
+`tests/test_adversarial_dialogue.py`.
+
+* **Lean** — `overlay/glm_lean/RequestProject/GLM/AdversarialDialogue.lean`
+  (9 theorems, 0 `sorry`): `adversary_live_subset`, `adversary_least`,
+  `adversary_resolved_mem`, `contradicted_iff_inconsistent`,
+  `conflicting_replies_contradict`, `repeat_reply_idem`,
+  `consistent_lie_live`, `consistent_lie_resolves`,
+  `consistent_lie_confirmed`.
+* **Python** — `reasoning/adversarial_dialogue_study.py` (the informants:
+  truthful, consistent liar, every-reply-false, single lie, contradictory,
+  echo, unrelated turn, malformed, near texts); `tools adversarial-dialogue`.
+* **Defect fixed** — a number repeated from the turn before was read as an
+  option number of the confirming question. A yes-or-no question is now
+  answered by its words only; wrong confirmations after a false reply and an
+  echo 10 → 1, the one left inside the proved limit.
+* **Measured** — 560 adversarial runs, 0 members outside the head ever live;
+  118 of 118 consistent liars confirmed on the member impersonated.
+* **Answers moved** — none: 223 of 223.
+* **Left** — `STATUS.md` §2.1 item 8.
+
+## Phase 166 — the machine sums π: Machin's formula and the arctangent series, proved in Lean and run in GLM-BAT
+
+*Created 19 October 2026.*
+
+**Status: closed this session.** Taken from `STATUS.md` §2.1 item 2 (*the
+machine's reading, the rest*: `π`'s enclosure a declared constant), the line
+[`studies/TOOL_MACHINE_STUDY.md`](studies/TOOL_MACHINE_STUDY.md) §7.4 and
+[`studies/LEECH_KISSING_STUDY.md`](studies/LEECH_KISSING_STUDY.md) §7.3 left;
+with it the smaller line of the same item, GLM-BAT's REM line for the
+kissing number. Study:
+[`studies/PI_MACHINE_STUDY.md`](studies/PI_MACHINE_STUDY.md) (marks L1, M1–M3,
+C1, K1, written before the measurement in the same session). **6 of 6
+marks.** Tests: `tests/test_pi_machine.py` (5), run by hand: 5 of 5 pass, and
+`tests/test_tool_machine.py` 7 of 7, `tests/test_leech_kissing.py` 4 of 4
+(pytest is not installed here).
+
+* **Lean** — `overlay/glm_lean/RequestProject/GLM/PiMachine.lean` (0
+  `sorry`, standard axioms): `machin`; `arctan_series_bound`; the loop
+  `atStep`/`atH` with `atH_snd_pos`, `atH_div`, `atH_arctan_sum`;
+  `pi_series_bound`; `piEnds` and `piEnds_enclose`.
+* **Python** — `reasoning/tool_machine.py`: `pi_lines` (the two Horner loops
+  and Machin's combination as GLM-BAT lines), `pi_ends` (the mirror of
+  `piEnds`), `PI_TERMS = (40, 12)`, the switch `PI_SUMMED`; the kissing
+  number's REM line cites `GLM.LeechKissing.minimal_iff` and
+  `leech_kissing_number`. `reasoning/pi_machine_study.py` (the marks, live);
+  `tools pi-machine`. `runtime/toolbox.py` declares `pi_machine_study` in the
+  wiring census (a measurement module no answer reads), as Phase 163 declared
+  `tool_machine_study`.
+* **Measured** — 335 machine steps; enclosure 9.563 × 10⁻⁵⁸ wide, nested in
+  Mathlib's decimals; 53 certified terms against 19; 80 one-step π chains: 47
+  admitted before, 80 now, 0 lost; the 237-for-239 control disjoint from
+  Mathlib's decimals.
+* **Answers moved** — none from answering code: 223 of 223. The two
+  Lean-corpus pins (`report relay`, `report anonymous`) were re-pinned for the
+  corpus refreshed with `PiMachine.lean`, claims unchanged. The stored
+  measurements whose digests cover `tool_machine.py` (tool-machine,
+  carried-read, fold-machine, planner-ladder), the query-escalation
+  measurement and the measurements that read the evaluation file
+  (budget-guard, lattice frozen path, hole reports L5, nearest question, the
+  ties-ladder frozen path, budget reading, nearest address) were re-taken;
+  their marks are as before and no frozen path has an undeclared move.
+* **Left** — reals other than `π`, `e`, `√m` carried; the Leech procedure for
+  `t ≥ 3` argued, not proved; the kissing-number census uncached.
+
+## Phase 165 — the Leech kissing number from the lattice's definition: the minimal shell proved both ways and counted in Lean
+
+*Created 19 October 2026.*
+
+**Status: closed this session.** Taken from `STATUS.md` §2.1 item 2 (*the
+machine's reading, the rest*: the converse of `minimal_shape` and the
+procedure's correctness argued, not proved), the first line of
+[`studies/LEECH_SHELLS_STUDY.md`](studies/LEECH_SHELLS_STUDY.md) §7.3. Study:
+[`studies/LEECH_KISSING_STUDY.md`](studies/LEECH_KISSING_STUDY.md) (marks L1,
+L2, P1, P2, F1, written before the measurement in the same session). **5 of 5
+marks.** Tests: `tests/test_leech_kissing.py` (4), run by hand: 4 of 4 pass,
+and `tests/test_leech_shells.py` 5 of 5 (pytest is not installed here).
+
+* **Lean** — `overlay/glm_lean/RequestProject/GLM/LeechKissing.lean` (0
+  `sorry`): the three parameter families (`octadParams`, `pairParams`,
+  `oddParams`) and their images; `minimalShell`; `mem_minimalShell` (the
+  finite set is exactly the lattice vectors of squared length 32);
+  `minimal_iff` (the converse, with the odd shape's sum condition derived
+  from the code being doubly even); `card_minimalShell` and
+  `leech_kissing_number` (196,560 = 759 · 128 + 276 · 4 + 4096 · 24, by
+  injectivity and disjointness, on the Golay census of
+  `GolayWeightEnum.lean`).
+* **Python** — `reasoning/leech_shells.py`: `minimal_shell_vectors` and
+  `minimal_shell_check` (196,560 vectors, all distinct, all in the lattice by
+  the definition, all of squared length 32); `KISSING_LEAN_FILE` and
+  `KISSING_LEAN_THEOREMS`.
+* **Answers moved** — none from answering code. The evaluation's two
+  Lean-corpus pins (`report relay`, `report anonymous`) were re-pinned for the
+  corpus refreshed with `LeechKissing.lean`, claims unchanged; 223 of 223.
+* **Left** — the generating-function procedure for `t ≥ 3` still argued, not
+  proved; GLM-BAT's REM line still cites `minimal_shape`; `π` still a
+  declared enclosure.
+
+## Phase 164 — the Leech shells from the lattice's definition: the shapes proved, every shell counted from the Golay census
+
+*Created 19 October 2026.*
+
+**Status: closed this session.** Taken from `STATUS.md` §2.1 item 2 (*the
+machine's reading, the rest*: the shapes rule declared, not derived; only the
+minimal shell counted), under the owner's note for this iteration: the GLM is
+to reason, not repeat, using the MOG, Golay and Leech structure where it
+works. Study: [`studies/LEECH_SHELLS_STUDY.md`](studies/LEECH_SHELLS_STUDY.md)
+(marks L1, S1–S3, T1, F1, written before the measurement in the same session).
+**6 of 6 marks.** Tests: `tests/test_leech_shells.py` (5), run by hand: 5 of
+5 pass (pytest is not installed here).
+
+* **Lean** — `overlay/glm_lean/RequestProject/GLM/LeechShells.lean` (0
+  `sorry`): `IsLeech` (Conway's construction), `minimal_shape`,
+  `minimal_even_support`, `minimal_odd_pattern`; the counting procedure
+  `patternCount`/`shellCount` with `minimal_pattern_counts`,
+  `shells_from_census` and `shellCount_eq` (`native_decide` evaluations).
+* **Python** — `reasoning/leech_shells.py`: the weight census walked from the
+  generator, the generating-function count per codeword weight, every shell,
+  and `shell_report` beside the theta series. `reasoning/llvq.py`: the shell
+  table is now `leech_shells()`, derived and checked, raising on a
+  disagreement; its stored fifth entry (34,408,430,950) was wrong.
+* **Answers moved** — one: *the number of vectors of norm 12 in the leech
+  lattice*, 34,408,430,950 → 34,417,656,000; every `llvq` answer's quoted text
+  now says *counted from the Golay census*. The evaluation's two
+  Lean-corpus pins (`report relay`, `report anonymous`) were re-pinned for the
+  corpus refreshed with `LeechMachine.lean`, `ToolMachine.lean` (Phase 163)
+  and `LeechShells.lean`.
+* **Left** — the procedure's correctness for every shell and the converse of
+  `minimal_shape` argued, not proved; GLM-BAT still counts only the minimal
+  shell; `π` still a declared enclosure.
+
+## Phase 163 — the machine works the tools out: convergents, nearest fractions, gate moves and the Leech kissing number computed in GLM-BAT
+
+*Created 19 October 2026.*
+
+**Status: closed this session.** Taken from the owner's plan of 19 October
+2026 ([`source_material/GLM_19OCT26_1.md`](source_material/GLM_19OCT26_1.md),
+Part II.2, the rest; `STATUS.md` §2.1 item 2), with the owner's note for this
+iteration: the GLM is to reason, not repeat — no look-up dictionary — using
+the MOG, Golay and Leech structure where it works. The pre-registration
+([`studies/TOOL_MACHINE_STUDY.md`](studies/TOOL_MACHINE_STUDY.md) §§0–6,
+marks L1, T1–T5, K1, G1, P1, F1) was written before the measurement; one
+amendment (F1′, §3.1) was declared after the first measurement and before
+the second. **8 of 9 marks and L1, 1 of 1 amended.** Tests:
+`tests/test_tool_machine.py` (7), run by hand: 7 of 7 pass (pytest is not
+installed here).
+
+**In one line.** The batch machine no longer repeats any step of an answered
+chain: it computes each one from definitions, checks every witness it is
+offered, and counts the Leech kissing number from the Golay code's generator.
+
+**What was built.**
+* `RequestProject/GLM/ToolMachine.lean` (no `sorry`; standard axioms):
+  Euclid's algorithm on the two ends of an enclosure emits only terms of
+  every number between them (`lockstep_certified`, `euclidTerms_eq`); the
+  convergent recurrence (`convRun_eq`); enclosures of `π` (Mathlib's
+  twenty-digit bounds, `pi_enclosure`), `e` (the series loop and its error
+  bound, `eT_div`, `e_enclosure`) and `√m` (a checked integer root,
+  `sqrt_enclosure`); the Farey certificate of a nearest fraction
+  (`between_of_ends`, `side_of_ends`, `nearest_of_nearer`); Toffoli and
+  Fredkin by arithmetic on bits and a sound breadth-first search
+  (`gateArith_spec`, `machineDist_sound`).
+* `RequestProject/GLM/LeechMachine.lean` (no `sorry`; finite checks by
+  `native_decide`): the Gray-code walk over the 4,096 Golay messages, one
+  generator row a step (`gray_step`, `gray_nodup`), counts 759 octads and
+  4,096 codewords (`machine_octads`, `machine_codewords`), and
+  `128·octads + 4·276 + 24·codewords = 196,560`
+  (`leech_kissing_from_census`).
+* `glm_universal/reasoning/tool_machine.py` (switch `ON`): the GLM-BAT
+  subroutines for each, hooked into `planner_ladder.chain_program`; the
+  Golay census subroutine is written from `substrate.mog.GolayCode.B`, the
+  code's generator, never from its census. An axiom's `^` is read as the
+  power it means (the first attempt read it as Python's exclusive-or with
+  the wrong precedence; the machine's own drift check refused four chains).
+* `glm_universal/reasoning/tool_machine_study.py`; `tools tool-machine
+  [--write] [--baseline] [--json]`; stored in
+  `reasoning/_data/tool_machine_study.json` (the first measurement kept as
+  `tool_machine_study_first.json`).
+
+**Measured.** Carried steps 44 → 0 (convergents 21, continued-fraction and
+nearest-fraction verdicts 2 + 2, gate verdicts 4, gate moves 1, axiom 7,
+`choose` 3, `first` 3, conversion 1); 174 of 174 chains admitted and read
+back; 20 of 20 lies found at their step; a moved square-root witness stopped
+2 of 2 runs; column 3 20 of 20, mutants 40 of 40. Held-out control of 3,000
+tool questions: 2,785 answered by the tool, all admitted, 2,785 lies refused,
+215 tool refusals unwritten. Leech: 4 of 4 texts admitted, lies found, about
+164,000 machine steps; the norm-6 shell kept carried. Largest program 1,783
+lines. F1 missed at the first measurement (699 of 702: the three corpus cases
+had moved with the documents committed between the baseline and the
+measurement); asked off and on in the same run, 702 of 702 (F1′).
+
+**Faculties.** Derivation: every step of an answered chain is now derived by
+the machine. Refusal: a step whose certificate fails stops the machine. No
+answer moved (F1′).
+
+**What it invalidated.** The new files made nine stored measurements stale
+(`runtime/toolbox.py`, `planner_ladder.py` and the new Lean files are in
+their digests); all were re-taken: `carried-read` (12 of 12),
+`fold-machine` (its study measures with the tool machine off; F1 now 693 of
+702 against the Phase 160 baseline, nine evaluation texts moved by later
+rounds, recorded in
+[`FOLD_MACHINE_STUDY.md`](studies/FOLD_MACHINE_STUDY.md) §7.5),
+`planner-ladder` (7 of 7, after `ties-ladder-frozen`, 7 of 7),
+`address-read`, `answering-question` (8 of 10, as before), `budget-reading`
+(8 of 8), `nearest-address` (7 of 7) and the Lean citation reference. The
+evaluation's pinned Lean counts (`report-relay`, `report-anonymous`) did not
+move. The test-file sign-off is still owed (pytest not installable).
+
+**Left.** `π` summed by the machine; the Leech shells beyond the minimal
+one; the census cached by digest; the typed planner's plans said as GLM-BAT
+([`TOOL_MACHINE_STUDY.md`](studies/TOOL_MACHINE_STUDY.md) §7.4).
+
+---
+
+## Phase 162 — corpus source tiers: every corpus experiment read tier by tier, and how the supplied tier should count
+
+*Created 18 October 2026.*
+
+**Status: closed this session.** Taken from the owner's plan of 19 October
+2026 ([`source_material/GLM_19OCT26_1.md`](source_material/GLM_19OCT26_1.md),
+Part II.7, *separate corpus source tiers more clearly*; `STATUS.md` §2.0),
+with the owner's standing rule that `source_material/` is the less reliable
+tier. The pre-registration
+([`studies/SOURCE_TIERS_STUDY.md`](studies/SOURCE_TIERS_STUDY.md) §§0–6,
+marks L1, T1–T8) was written before the measurement; one amendment (T5′,
+§3.1) was declared after the first measurement and before the second.
+**7 of 8 marks and L1, 0 of 1 amended.** Tests:
+`tests/test_source_tiers.py` (8), run by hand: 8 of 8 pass (pytest is not
+installed here). Two instructions of the owner, given on 18 October 2026 with
+this round, were carried out beside it (below).
+
+**In one line.** A corpus result can now be traced to the system's own
+written material or to the supplied material, and the one way of counting the
+supplied tier that raises precision on the system's own text is measured:
+admitting it only as a candidate that written evidence must confirm.
+
+**What was built.**
+* `RequestProject/GLM/SourceTiers.lean` (no `sorry`; standard axioms): the
+  model of the documents a predicate keeps plus the model of those it drops
+  is the whole model (`train_filter_add`); counting a tier `k` times is
+  training on `k` copies (`train_replicate`, `train_downweight`) and a
+  positive common factor never changes the guarded prediction
+  (`predict_smul`); the confirmed reading answers exactly when the whole
+  corpus answers and the written tier has counted the word
+  (`confirm_some_iff`), so every confirmed answer has a written witness
+  (`confirm_witness`) and with no written evidence it refuses
+  (`confirm_eq_none_of_no_written`).
+* `glm_universal/knowledge/source_tiers.py`: the five tiers (`tier_of`: core
+  documentation, code, Lean, studies and reports, archived or supplied), the
+  census, next-token prediction by slice with each tier left out and a
+  size-matched pseudo-tier as control, the four guarded policies, `define`,
+  the glossary grade and word use by slice, and `source_tiers_report`.
+* `tools source-tiers [--write] [--json]`; stored in
+  `knowledge/_data/source_tiers.json` (the first measurement kept as
+  `source_tiers_first.json`).
+
+**Measured.** 2,268 documents, 1,036 in the supplied tier (46% of sentences,
+39% of tokens). On the written test the whole corpus predicts 82,245 of
+346,777 tokens, the written tier alone 80,274 (T2, predicted to hold, is
+missed: the supplied tier helps a little); leaving the supplied tier out costs
+1,971, a size-matched pseudo-tier 9,629 (T4). On the supplied test the
+supplied tier alone beats the whole corpus (42,225 against 41,206). Under the
+K3′ guard on written text: whole corpus 56.4% precision, excluded 54.5%,
+down-weighted by 2 54.6% (and more answers — doubling the counts doubles the
+guard's support), down-weighted with unweighted support 55.4% (T5′ missed),
+confirmed 57.9% keeping 94.5% of the answers (T5). `define` answers 45 of 60
+bold terms, 4 from supplied sentences — all four where the written rival is a
+stored measurement quoting an earlier answer. The held-out sets of the two
+measurements differ (written test 290,779 → 346,777 positions) because the
+held-out rule takes every fifth document of the sorted corpus, so three new
+documents re-dealt the folds; every mark had the same outcome both times.
+
+**The owner's instructions of 18 October 2026.**
+* *Keep `source_material/GLM-main.zip` and the two supplied PDFs in the
+  project folder, as they are.* They stay there, untouched and out of version
+  control; `.gitignore` says so in a comment, and `STATUS.md` §2.0 states it
+  as a standing rule. This settles the item Phase 161 left to the owner.
+* *Date files from now on if they are altered or created.* Directive D17 in
+  [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md), a row of the close
+  checklist (`ITERATE.md` §4.1), a standing rule in `STATUS.md` §2.0, and an
+  instrument: `glm_universal/corpus/dates.py`, `tools dates`, which lists every
+  stamp (`Created …`, `Last altered …`, a study's pre-registered and measured
+  days) and fails on a stamp that is not a date, lies after today, or says a
+  file was altered before it was made. Every file a round creates or alters
+  is now dated, and every file this round created or altered carries a stamp; `source_material/`, generated documents and stored
+  data are exempt.
+
+**Faculties.** None of derivation, addressing or refusal moved for the GLM's
+answers (T8). The round measured a refusal policy for the corpus offline —
+the confirmed reading refuses 5.5% of the whole corpus's guarded answers and
+raises their precision by 1.5 points — and did not ship it.
+
+**What it invalidated.** The new Lean file adds two queries to the
+Lean-address sets, so the two evaluation cases that pin exact counts
+(`report-relay`: 685 → 689 of 853, the gate on 58 of 1706;
+`report-anonymous`: 685 → 54 and 154 → 153 of 853) were re-pinned, their
+claims unchanged, and the measurements that digest the case file were
+re-taken (`queryesc`, `budget-guard-frozen`, `frozen-path`,
+`hole-reports-l5`, `ties-ladder-frozen`, then `nearest-question`,
+`budget-reading`, `nearest-address`), every mark as before. D17
+moves the text of `report-directives` (the count of standing rules, 16 → 17),
+which two frozen-path comparisons did not declare; it is now a declared cause
+in `budget_guard_frozen.py` (inherited by `hole_reports_l5_study.py`) and
+`ties_ladder_frozen.py`, and those measurements were re-taken after the
+declaration. The evaluation then ran 222 of 222. The test-file sign-off is still owed (pytest
+not installable).
+
+**Left.** Ship the confirmed reading behind a frozen-path comparison;
+`define`'s rank for stored data files; a held-out rule that does not re-deal
+when the corpus grows; the other corpus readers by tier; a guard read in the
+units of its decision
+([`SOURCE_TIERS_STUDY.md`](studies/SOURCE_TIERS_STUDY.md) §7.5).
+
+---
+
+## Phase 161 — the study ledger: every study as one machine-readable row, and the files the documents name
+
+**Status: closed this session.** Taken from the owner's plan of 19 October
+2026 ([`source_material/GLM_19OCT26_1.md`](source_material/GLM_19OCT26_1.md),
+Part II.6, *create a machine-readable study ledger*; `STATUS.md` §2.0), with
+the owner's request of this session folded in: *check all documents and files
+have actually been put into the repository*. The pre-registration
+([`studies/STUDY_LEDGER_STUDY.md`](studies/STUDY_LEDGER_STUDY.md) §§0–6,
+marks L1, S1–S10) was written before the measurement; two amendments (S4′,
+S10′, §3.1) were declared after the first measurement and before the second.
+**8 of 10 marks, 1 of 2 amended.** Tests: `tests/test_study_ledger.py` (7),
+run by hand: 7 of 7 pass (pytest is not installed here).
+
+**In one line.** The studies are one ledger read from the documents, the plan,
+the To-Do list and the stored measurements, with nothing typed in, and the
+ledger is also a check: it lists where those sources disagree and which file
+names do not resolve.
+
+**What was built.**
+* `RequestProject/GLM/StudyLedger.lean` (no `sorry`, no axioms): the
+  ledger's predecessor relation (a link to a study of strictly earlier phase)
+  has no cycle whatever the links are (`no_cycle`, `no_cycle_of_phase_lt`),
+  and every chase back through predecessors stops (`ledgerPred_wellFounded`).
+* `glm_universal/corpus/study_ledger.py`: `ledger()` (one row per study:
+  title, tier 0, phase and its source, plan phases, predecessors, successors,
+  related studies, mark counts, missed and amended marks, declared marks,
+  frozen path, dates, status, follow-ups with each section reference looked
+  up, the stored measurement's counts, digests and currency, the code
+  digest), `ledger_json()`, `ledger_issues()`, `missing_files()`,
+  `untracked_files()` and `study_ledger_report()`.
+* `tools study-ledger [--json] [--issues] [--files]`. Nothing is stored;
+  the ledger is re-read each time, so it is never stale.
+
+**Measured.** 155 studies, all with tier 0; a phase for 144, the study's own
+phase and the plan agreeing on 28 of 29; 10 stored measurements with counts:
+7 agree with their figure, 2 differ by the Lean mark the stored file does not
+hold, 1 (`COORDINATE_JUNCTION_STUDY.md`) is not explained by the reader; the
+tamper control seen 7 of 7; 30 of 30 follow-up references resolve; 185
+predecessor edges, none later than its study. File names: 4,254 in 195
+documents; 142 reported missing at the first reading, 0 after the amended
+reading and the corrections below.
+
+**The files** (the owner's request). No file of this repository's own work
+was missing. Stale or misleading names were corrected:
+`HIGHER_LATTICE_STUDY.md` named three test files since merged into
+`test_lattice_high.py`; the paper named the iteration study PDF without its
+` (1)`; the `data_objects` and `reasoning` package READMEs named four
+upstream workflow files as if they were here; three documents named a former
+location, a removed module and a program's output file as files. Phase 160's
+`test_fold_machine.py` had no row in the tests README; it has one. Three
+files are on disk but outside version control — `source_material/GLM-main.zip`
+and the two supplied PDFs, kept out by `.gitignore` (`*.zip`, `*.pdf`) — so
+a clone of the repository lacks them although many documents cite them.
+
+**Faculties.** None of derivation, addressing or refusal moved for the GLM's
+answers (S9: the answering path cannot reach the ledger). For the corpus the
+round added a check that refuses a file name that does not resolve.
+
+**What it invalidated.** Nothing the ledger stores (it stores nothing). The
+new Lean file adds one query to the Lean-address sets, so the two evaluation
+cases that pin exact counts (`report-relay`: 683 → 687 of 851, the gate on 58
+of 1702; `report-anonymous`: 683 → 54 and 153 → 152 of 851) were re-pinned,
+their claims unchanged, and the measurements that digest the case file, or another of these, were
+re-taken (`queryesc`, `budget-guard-frozen`, `frozen-path`, `hole-reports-l5`,
+`ties-ladder-frozen`, then `nearest-question`, `budget-reading`,
+`nearest-address`), every mark as before. `nearest-question` read 7 of 8 when
+it was first re-taken in parallel with `ties-ladder-frozen`, whose stored
+frozen path its F1 reads; taken after it, 8 of 8. The evaluation then ran 222 of 222. The documents
+corrected above, and the tests README, are in the closures of the units that
+name them. The test-file sign-off is still owed (pytest not installable).
+
+**Left.** One convention for counting marks in a deciding figure, so that S4′
+can be met; declared marks written as lists; phases for 11 studies and one
+disagreement; declared dates; the file check in `corpus --check`; the
+supplied binaries in or out of history
+([`STUDY_LEDGER_STUDY.md`](studies/STUDY_LEDGER_STUDY.md) §7.4).
+
+---
+
+## Phase 160 — the machine sorts: order folds, ranks, top rows and hole bounds computed in GLM-BAT
+
+**Status: closed this session.** Taken from the owner's plan of 19 October
+2026 ([`source_material/GLM_19OCT26_1.md`](source_material/GLM_19OCT26_1.md),
+Part II.2, *close the remaining carried-value gaps*; `STATUS.md` §2.0), which
+takes over To-Do item 2 (*the machine's reading, the rest*, left by Phase
+153). The pre-registration
+([`studies/FOLD_MACHINE_STUDY.md`](studies/FOLD_MACHINE_STUDY.md) §§0–6,
+marks L1, M1–M6, K1, P1, F1) was committed before the stored measurement;
+one amendment (M4′, §3.1) was declared after the first measurement and before
+the second. **8 of 9 marks, 1 of 1 amended.** Tests:
+`tests/test_fold_machine.py` (10), run by hand: 10 of 10 pass (pytest is not
+installed here).
+
+**In one line.** Every fold the stepwise planner answers is now computed by
+GLM-BAT from its own reads — an order statistic as the reading whose window
+(readings below it, readings at most it) holds the position, checked by
+counting for a witness the program offers but the machine does not trust —
+and the carried steps fall from 92 to 44 with nothing moved.
+
+**What was built.**
+* `RequestProject/GLM/FoldMachine.lean` (no `sorry`, standard axioms): the
+  window characterises the `k`-th smallest (`kth_lt_iff`, `kth_eq_iff`,
+  `kth_window`, `window_unique`); the stable position of the top rows is a
+  permutation that keeps order and breaks ties by register order
+  (`stablePos_lt`, `stablePos_strict`, `stablePos_tie`,
+  `stablePos_injective`); `FIND "@k="` fails exactly when the register holds
+  no entry at `k` (`hole_needle_iff`, `absent_iff`). `HoleBounds.lean`'s four
+  definitions are now exposed to importing modules (statements unchanged).
+* `glm_universal/reasoning/fold_machine.py` (the switch `ON`): order folds,
+  ranks, top rows, bounds, folds over the present rows, holes read as
+  absences, impossible shapes stop the machine; hooked into
+  `planner_ladder.chain_program` in its reading mode.
+* `batch_machine.run_pipeline` takes a stage budget, and
+  `planner_ladder.check_chain` passes its own (`BUDGET`, 200,000): the gated
+  pipeline had run under the machine's default of 10,000 while the run it
+  gates used 200,000.
+* `glm_universal/reasoning/fold_machine_study.py`,
+  `tools fold-machine [--write] [--baseline]`; the measurements in
+  `reasoning/_data/fold_machine_study.json` (and `_first.json`), the frozen
+  path's baseline in `_data/fold_machine_baseline.json`.
+
+**Measured.** 48 folds carried with the switch off, 0 with it on; carried
+steps 92 → 44; 174 of 174 chains admitted and read back; fold lies 48 of 48
+found at their step; hole lies 22 of 24 stopped at the first measurement, 24
+of 24 after the fix; the witness rotated in 32 chains: 29 stopped, 3 the same
+value, 0 wrong; column 3 48 of 48, mutants 96 of 96; synthetic control 3,000
+columns, 2,188 of 2,188 admitted, 2,168 of 2,168 lies refused, 812 of 812
+planner refusals left unwritten; the largest program 1,783 lines (the
+all-pairs version of the round made 43,346); 702 of 702 recorded texts
+unchanged; the evaluation 222 of 222.
+
+**Faculties.** *refuse* gained a check (a fold whose readings, positions or
+holes disagree with the machine's counting is withheld); no answer the
+evaluation pins moved.
+
+**What it invalidated.** The stored measurements that digest
+`planner_ladder.py` or `batch_machine.py`, re-taken with every mark as
+before: `carried-read` (now measured with the fold switch off, since it
+measures Phase 153's reads; 12 of 12), `ties-ladder-frozen`, then
+`planner-ladder` (7 of 7). The first attempt at the measurement drew the
+synthetic columns with `random`, which turned the blueprint audit's claim 1
+(no randomness in the core sub-packages) to refuted and moved the
+`report-blueprint` answer; the study module now uses a declared linear
+congruential generator. The test-file sign-off is still owed (pytest not
+installable).
+
+**Left.** The 44 carried steps (tool answers, axiom inputs, verdict inputs);
+set membership as a register file; exact question reads; one junction table;
+the typed planner's ordering and extremum plans by the same counting
+([`FOLD_MACHINE_STUDY.md`](studies/FOLD_MACHINE_STUDY.md) §7.4).
+
+---
+
+## Phase 159 — thermomechanical friction: a governor, a prompt anchor, and sintering
+
+**Status: closed this session.** Taken from the owner's plan of 19 October
+2026 ([`source_material/GLM_19OCT26_1.md`](source_material/GLM_19OCT26_1.md),
+Part I; `STATUS.md` §2.0), which takes over To-Do item 4 (friction, the third
+pass). The pre-registration
+([`studies/THERMO_FRICTION_STUDY.md`](studies/THERMO_FRICTION_STUDY.md) §§0–6:
+three experiments judged independently, marks A1–A7, B1–B6, C1–C6) was
+committed with the evaluation run before the round and before any code; one
+amendment (B6′, §2.4) was declared after the first measurement and before the
+second. **13 of 19 marks, 1 of 1 amended; sintering ships.** Tests:
+`tests/test_thermo_friction.py` (10), run by hand: 10 of 10 pass (pytest is not
+installed here).
+
+**In one line.** Sintering the register vocabulary reads back 727 of 735
+misspelt register words and the survey's *mlilisecond* question with nothing
+else moved, and ships; the heat-gated governor almost never acts, because the
+self-made valley is a basin many prompts fall into once each; the prompt anchor
+is a steadier reader but not a more accurate one.
+
+**What was built.**
+* `RequestProject/GLM/ThermoFriction.lean` (no `sorry`, standard axioms): the
+  governor rests when cold (`governor_cold`), its taboo never raises a score
+  (`taboo_le`) and an unrepeated leader is kept (`governor_keeps_unrepeated_leader`);
+  a directory leading both the prompt and the generated scores leads every
+  positive mixture (`anchor_agree_leader`, `anchor_reading_eq`) and the
+  gradient there is zero (`gradient_agree`); the register fallback never takes
+  the solid reading away (`sinter_keeps_solid`, `sinter_refuses_iff`).
+* `glm_universal/knowledge/thermo_friction.py` (the governor, the static-taboo
+  control, the anchor reader and its two mismatched controls, and the offline
+  respelling sets), `knowledge/thermo_friction_study.py`,
+  `tools thermo-friction [--write] [--blind-spot] [--frozen PATH]`; the
+  measurements in `knowledge/_data/thermo_friction*.json`.
+* `glm_universal/runtime/sinter.py` and `runtime/_data/register_lexicon.json`
+  (1,393 entries from the physics, element, interval and comparison-class
+  registers): the sintered respelling. `GLM.py`'s re-read now uses it.
+
+**Measured.** A (1,000 held-out prompts): the governor's most frequent
+continuation 37 against the patch's 37, overlap 694 against 695, 1
+continuation changed; 12 of 2,335 hot rows had a repeating candidate. B (139
+directories, 468 hot sentences): final correct 265 against the frictionless
+271, on the hot sentences 197 against 203; switches 810 against 838; switches
+into the truth 235 of 246 kept; the other-directory control 189. C: recovery
+727 / 735 (8 turned into another word, the same 8 as the shipped respelling);
+typo questions 195 against 194; short-word questions 335 against 334; register
+words respelt 0 against the shipped respelling's 45; the protected class 255
+tokens, 0 differ. The evaluation: 222 of 222 before and after, 0 outcomes
+moved, 2 answer lines differ (corpus witness counts).
+
+**Faculties.** *refuse* moved (a refusal now read back where the respelt
+question names a register word: the survey's *mlilisecond* question answers);
+*derive*, *table* and every answering path the evaluation pins did not move.
+
+**What it invalidated.** The corpus caches named by `corpus --check` (re-taken
+with `corpus --refresh`). The corpus is the project's own text, so writing the
+round moved Phase 156's sample between the first measurement and the
+measurement of record (§7 of the study says where a mark differs). Two
+evaluation cases, `report-relay` and `report-anonymous`, pin goal-query counts
+that moved with the round's Lean file once the corpus was refreshed (845 →
+847); they were re-pinned in `evaluation/cases.py`, claims unchanged, and the
+eight measurement caches that read the case list were re-taken
+(`budget-guard-frozen`, `frozen-path`, `hole-reports-l5`, `queryesc`,
+`ties-ladder-frozen`, then `nearest-question`, `budget-reading` and
+`nearest-address`, which read `ties-ladder-frozen`; every mark as before). The test-file sign-off is still owed
+(pytest not installable).
+
+**Left.** The basin (a continuation scored by how many prompts the corpus sends
+into it); a friction sample frozen by address so that measurements reproduce
+across rounds; the lexicon beyond the four registers
+([`THERMO_FRICTION_STUDY.md`](studies/THERMO_FRICTION_STUDY.md) §7.5).
+
+---
+
 ## Phase 158 — the oscillator junction, tried four ways; the analogy method written down
 
-**Status: closed this session.** Taken at the owner's request: the second half
+**Status: closed.** Taken at the owner's request: the second half
 of `STATUS.md` To-Do item 5 (the W9/W13 junction that makes an oscillator's
 angular frequency a rotating body's angular velocity), which the owner
 expected to "take some experimentation to see what works best"; and a note

@@ -1,0 +1,99 @@
+{
+ "P": {
+  "outside_live": 0,
+  "runs": 791,
+  "values_outside": 0
+ },
+ "R0": {
+  "locate": {
+   "asked": 13,
+   "read": 0
+  },
+  "nearest": {
+   "asked": 48,
+   "read": 0
+  }
+ },
+ "R1": {
+  "locate": {
+   "asked": 39,
+   "read": 39,
+   "same": 39
+  },
+  "nearest": {
+   "asked": 144,
+   "read": 144,
+   "same": 144
+  }
+ },
+ "R2": {
+  "locate": {
+   "asked": 77,
+   "first_false": 13,
+   "first_false_same": 13,
+   "liar": 64,
+   "liar_same": 64,
+   "same": 77
+  },
+  "nearest": {
+   "asked": 166,
+   "first_false": 48,
+   "first_false_same": 48,
+   "liar": 118,
+   "liar_same": 118,
+   "same": 166
+  }
+ },
+ "R3": {
+  "asked": 130,
+  "read": 0
+ },
+ "R4": {
+  "asked": 48,
+  "read": 19,
+  "to_first": 0
+ },
+ "R5": {
+  "read": [],
+  "tried": 4683
+ },
+ "R6": {
+  "first_false": 13,
+  "first_false_contradicted": 13,
+  "liar": 64,
+  "liar_confirmed": 64,
+  "malformed": 182,
+  "malformed_read": 0,
+  "truthful": 13,
+  "truthful_confirmed": 13
+ },
+ "lean": {
+  "declared": 10,
+  "file": "RequestProject/GLM/ResumedDialogue.lean",
+  "met": true,
+  "sorry": 0,
+  "theorems": 10
+ },
+ "marks": {
+  "L1": true,
+  "P": true,
+  "R0": true,
+  "R1": true,
+  "R2": true,
+  "R3": true,
+  "R4": true,
+  "R5": true,
+  "R6": true
+ },
+ "members": {
+  "locate": 13,
+  "nearest": 48
+ },
+ "met": 9,
+ "source_digest": "424bd03cf7f8cf1d1d276b21c34af54ece7e7ef048eb885dfc6dc15f9dd2040a",
+ "taken": 9,
+ "ties": {
+  "locate": 3,
+  "nearest": 18
+ }
+}

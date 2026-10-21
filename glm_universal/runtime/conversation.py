@@ -1,6 +1,13 @@
 """``glm_universal.runtime.conversation`` -- the turn that refers back to an
 earlier turn, and the three ways it can refuse to.
 
+*Last altered 20 October 2026 (Phase 173: several questions stay open at
+once, newest first, each for a window of unrelated turns; a reply is read
+against the newest open question it fits, or the one it names --
+:meth:`Conversation.open_ties`, ``OPEN_TIE_STACK``, ``OPEN_TIE_WINDOW``.
+Phase 172: a question stays open across turns that leave it alone --
+:meth:`Conversation.open_tie`, ``RESUME_OPEN_TIE``).*
+
 Why this module exists
 ----------------------
 Every query this package answers is answered alone.  ``describe carbon`` is a
@@ -93,7 +100,8 @@ __all__ = [
     "FollowUpError", "REFUSAL_REASONS", "SHAPES", "PRONOUNS", "ENDS",
     "Mention", "Turn", "Binding", "Conversation",
     "DECLARED_FOLLOW_UPS", "conversation_report",
-    "question_put", "reply_rewrite",
+    "question_put", "reply_rewrite", "RESUME_OPEN_TIE", "OPEN_TIE_STACK",
+    "OPEN_TIE_WINDOW", "ADDRESSED_REPLY",
 ]
 
 
@@ -117,10 +125,41 @@ REFUSAL_REASONS: Tuple[str, ...] = (
 )
 
 #: The shapes of follow-up, in detection order.  ``reply`` (Phase 146) is a
-#: reply to the question the previous turn's answer ended with -- *no*, *2*,
-#: *albedo* after ``locate albedo`` -- and is detected first, but only when
-#: that turn put a question and the text is one of its options.
+#: reply to the question a turn's answer ended with -- *no*, *2*, *albedo*
+#: after ``locate albedo`` -- and is detected first, but only when that
+#: question is still open (the previous turn's, or since Phase 172 an older
+#: one no later turn superseded or answered) and the text is one of its
+#: options.
 SHAPES: Tuple[str, ...] = ("reply", "end-flip", "subject", "pronoun")
+
+#: Whether a question stays open across turns that leave it alone (Phase
+#: 172, ``studies/RESUMED_DIALOGUE_STUDY.md``).  Off restores the reading of
+#: Phases 146-171: only the previous turn's question can be replied to, and a
+#: reply after an unrelated turn is passed to the session as a whole query.
+RESUME_OPEN_TIE: bool = True
+
+#: Whether several questions stay open at once (Phase 173,
+#: ``studies/STACKED_DIALOGUE_STUDY.md``).  On, the open questions form a
+#: stack, newest first: a new question no longer closes the older ones, a
+#: reply is read against the newest open question it fits (or the one it
+#: names, :data:`ADDRESSED_REPLY`) and closes that question only, and a
+#: question closes after :data:`OPEN_TIE_WINDOW` unrelated turns.  Off
+#: restores the reading of Phase 172: only the newest question is open, for
+#: as long as no later question or reply closes it.  ``GLM.StackedDialogue``
+#: states the rule and proves what it does.
+OPEN_TIE_STACK: bool = True
+
+#: How many unrelated turns a question survives under the stack (Phase 173).
+#: Declared before anything was measured, not fitted: Phase 172 measured
+#: replies after one to three unrelated turns, and five leaves that margin
+#: while bounding how long a forgotten question can capture a reply.
+OPEN_TIE_WINDOW: int = 5
+
+#: A reply that names the turn it answers: ``turn 3: yes``, ``to turn 3,
+#: albedo``.  Read only under the stack, and only against that turn's
+#: question while it is open.
+ADDRESSED_REPLY = re.compile(
+    r"^\s*(?:to\s+)?turn\s+(\d+)\s*[:,]\s*(.+?)\s*$", re.IGNORECASE)
 
 #: The tokens that stand for a carrier named earlier.  Deliberately two: a
 #: longer list buys coverage at the price of a rule nobody can state.
@@ -200,6 +239,11 @@ class Binding:
     rewritten: str
     considered: Tuple[str, ...] = ()  # every candidate weighed on that side
     licensed: Tuple[str, ...] = ()    # those of them that solved
+    #: For a ``reply`` under the stack (Phase 173): the other open turns
+    #: whose question the reply also fits, newest first.  The reply is read
+    #: against the newest; these are said so that the reader knows, and can
+    #: answer one of them with ``turn N: <reply>``.
+    also: Tuple[int, ...] = ()
 
     @property
     def sentence(self) -> str:
@@ -209,8 +253,15 @@ class Binding:
                    if len(self.considered) > 1 else
                    f", from turn {self.antecedent_turn}")
         who = f" to {self.name}" if self.name else ""
-        return (f"{self.shape} bound{who}{against}: "
-                f"{self.rewritten!r}")
+        line = f"{self.shape} bound{who}{against}: {self.rewritten!r}"
+        if self.also:
+            turns = ", ".join(str(t) for t in self.also)
+            line += (f" (the reply also fits the open question of turn"
+                     f"{'s' if len(self.also) > 1 else ''} {turns}; read "
+                     f"against the newest, turn {self.antecedent_turn} -- "
+                     f"say 'turn {self.also[0]}: {self.name}' to answer "
+                     f"that one)")
+        return line
 
 
 def question_put(solution) -> Optional[Mapping]:
@@ -412,33 +463,146 @@ class Conversation:
 
     # -- a reply to the question the last turn put (Phase 146) -------------
 
-    def _reply_to(self, text: str) -> Optional[Tuple[Turn, str]]:
-        """The previous turn and the reply token, when the previous turn's
-        answer ended with a question and ``text`` is one of its options."""
-        if not self._turns:
-            return None
-        last = self._turns[-1]
-        if not last.ok or not last.question:
-            return None
+    def open_tie(self) -> Optional[Turn]:
+        """The turn whose question is the newest still open, or ``None``.
+
+        Before Phase 172 only the previous turn could be replied to.  Since
+        then (:data:`RESUME_OPEN_TIE`) a question stays open across turns
+        that leave it alone.  Under the rule of Phase 172
+        (:data:`OPEN_TIE_STACK` off) it is stated in three clauses, newest
+        turn first:
+
+        * a turn that put a question holds the open one -- the newest
+          question supersedes every older one;
+        * a turn that *replied* (its binding is a ``reply``) and put no
+          question of its own closes the tie: a question is answered once,
+          and an echo of the reply cannot re-open it;
+        * any other turn -- a whole query that put no question, a refusal, a
+          follow-up -- is unrelated and is passed over.
+
+        ``GLM.ResumedDialogue`` proves the two facts that rule rests on.
+        Since Phase 173 (the stack, on by default) this is the head of
+        :meth:`open_ties`.
+        """
+        if OPEN_TIE_STACK and RESUME_OPEN_TIE:
+            ties = self.open_ties()
+            return ties[0] if ties else None
+        for turn in reversed(self._turns):
+            if turn.ok and turn.question:
+                return turn
+            if turn.binding is not None and turn.binding.shape == "reply":
+                return None
+            if not RESUME_OPEN_TIE:
+                return None
+        return None
+
+    def open_ties(self) -> Tuple[Turn, ...]:
+        """Every turn whose question is still open, newest first (Phase 173).
+
+        The conversation is read oldest turn first, exactly as
+        ``GLM.StackedDialogue.step`` reads it:
+
+        * a turn that *replied* closes the question it was read against --
+          that one only (``reply_erases``);
+        * a turn that put a question pushes it on top of the stack, so the
+          newest question is tried first;
+        * any other turn is unrelated: every open question has survived one
+          more, and one that has survived more than :data:`OPEN_TIE_WINDOW`
+          closes (``window_closes``).
+
+        With :data:`OPEN_TIE_STACK` off this is the single question
+        :meth:`open_tie` returns, or nothing.
+        """
+        if not (OPEN_TIE_STACK and RESUME_OPEN_TIE):
+            turn = self.open_tie()
+            return () if turn is None else (turn,)
+        return self._read_stack()[0]
+
+    def expired_ties(self) -> Tuple[Turn, ...]:
+        """The turns whose question the window closed, unanswered, newest
+        first (Phase 173).  Empty without the stack."""
+        if not (OPEN_TIE_STACK and RESUME_OPEN_TIE):
+            return ()
+        return self._read_stack()[1]
+
+    def expired_fit(self, text: str) -> Tuple[int, ...]:
+        """The turns whose window-closed question ``text`` would have
+        answered: so that a late reply is said to be late, rather than read
+        as a whole query without a word (Phase 173)."""
         from ..reasoning import timed_question as tq
-        token = tq.match_reply(last.question, text)
-        return None if token is None else (last, token)
+        return tuple(t.index for t in self.expired_ties()
+                     if tq.match_reply(t.question, text) is not None)
+
+    def _read_stack(self) -> Tuple[Tuple[Turn, ...], Tuple[Turn, ...]]:
+        """The open questions and the window-closed ones, newest first."""
+        stack: List[List[object]] = []          # [turn, unrelated count]
+        expired: List[Turn] = []
+        for turn in self._turns:
+            replied = turn.binding is not None and turn.binding.shape == "reply"
+            if replied:
+                stack = [e for e in stack
+                         if e[0].index != turn.binding.antecedent_turn]
+            if turn.ok and turn.question:
+                stack.insert(0, [turn, 0])
+            elif not replied:
+                for e in stack:
+                    e[1] += 1
+                expired = [e[0] for e in stack
+                           if e[1] > OPEN_TIE_WINDOW] + expired
+                stack = [e for e in stack if e[1] <= OPEN_TIE_WINDOW]
+        return tuple(e[0] for e in stack), tuple(expired)
+
+    def _reply_to(self, text: str
+                  ) -> Optional[Tuple[Turn, str, Tuple[int, ...]]]:
+        """The turn whose open question ``text`` replies to, the reply token,
+        and the other open turns it also fits (:meth:`open_ties`).
+
+        Under the stack the reply is read against the newest open question
+        it fits (``GLM.StackedDialogue.bound``), or -- written
+        ``turn N: <reply>`` (:data:`ADDRESSED_REPLY`) -- against turn N's
+        question only, if that one is open.  Without the stack, against the
+        single open question.
+        """
+        from ..reasoning import timed_question as tq
+        if not (OPEN_TIE_STACK and RESUME_OPEN_TIE):
+            turn = self.open_tie()
+            if turn is None:
+                return None
+            token = tq.match_reply(turn.question, text)
+            return None if token is None else (turn, token, ())
+        ties = self.open_ties()
+        if not ties:
+            return None
+        addressed = ADDRESSED_REPLY.match(text)
+        if addressed is not None:
+            n, said = int(addressed.group(1)), addressed.group(2)
+            for turn in ties:
+                if turn.index == n:
+                    token = tq.match_reply(turn.question, said)
+                    return None if token is None else (turn, token, ())
+            return None
+        fits = [(turn, tq.match_reply(turn.question, text)) for turn in ties]
+        fits = [(turn, token) for turn, token in fits if token is not None]
+        if not fits:
+            return None
+        turn, token = fits[0]
+        return turn, token, tuple(t.index for t, _ in fits[1:])
 
     def _resolve_reply(self, text: str) -> "Binding":
-        """Bind a reply: the previous turn's query, with the reply added to
-        its replies (``GLM.AnsweringQuestion.after_reply``).  The session
+        """Bind a reply: the query of the turn whose open question it
+        answers, with the reply added to its replies (``GLM.AnsweringQuestion.after_reply``).  The session
         answers the rewritten query exactly as it would answer it typed."""
         found = self._reply_to(text)
         if found is None:                       # pragma: no cover -- guarded
             raise FollowUpError("no-antecedent",
                                 f"{text!r} replies to no question")
-        turn, token = found
+        turn, token, also = found
         record = turn.question
         return Binding(
             shape="reply", name=token, antecedent_turn=turn.index,
             side="query", rewritten=reply_rewrite(turn.asked, record, token),
             considered=tuple(str(o["reply"]) for o in record["options"]),
-            licensed=(token,))
+            licensed=(token,), also=also)
 
     # -- the plan store, when there is one ---------------------------------
 

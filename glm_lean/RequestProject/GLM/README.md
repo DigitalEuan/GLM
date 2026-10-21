@@ -13,15 +13,20 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-**<!--figure:lean-files-->231 Lean files<!--/figure-->**, all building against Mathlib at `v4.28.0` — the
+*Last altered 21 October 2026* (Phase 175: `PipelineInduction.lean` and the
+seven files of the owner's pipeline kit under `PipelineKit/`).
+
+**<!--figure:lean-files-->253 Lean files<!--/figure-->**, all building against Mathlib at `v4.28.0` — the
 toolchain already pinned by `glm_lean/lean-toolchain` — and all
-<!--figure:lean-file-count-->231<!--/figure--> of them free of `sorry`.
+<!--figure:lean-file-count-->253<!--/figure--> of them free of `sorry`.
 Every theorem below has been checked with `#print axioms`; none depends on
 anything beyond `propext`, `Classical.choice` and `Quot.sound`, except the
 finite exhaustive checks discharged by `native_decide` — in `Golay/Sextet.lean`,
 `Golay/CubeMirror.lean`, the five `Cube/` files, `GolayWeightEnum.lean`,
 `GolayMOG.lean`, `Niemeier.lean`, `ConditionalInduction.lean`,
-`Relaxation.lean`, `SearchLoop.lean`, `TriadCensus.lean` and `TriadChance.lean`
+`Relaxation.lean`, `SearchLoop.lean`, `TriadCensus.lean`, `TriadChance.lean` and
+the owner's pipeline kit under `PipelineKit/` (Phase 175; `Golay.lean`,
+`Leech.lean`, `Pless.lean`, `Fields.lean`)
 (and the results downstream of them), which
 and so additionally use `Lean.ofReduceBool` and `Lean.trustCompiler`.
 

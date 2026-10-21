@@ -6,11 +6,13 @@
 
 **Verdict.** Orient from four short reads, run the cheapest gate that could fail, and close the round with one incremental command: write the finding down, refresh, check, `signoff --close`.
 
-**Deciding figure.** The suite is <!--figure:test-files-->209 test files<!--/figure--> and 6 instruments, each signed against a digest of everything it depended on, so a change re-runs what it touched rather than all of it.
+**Deciding figure.** The suite is <!--figure:test-files-->226 test files<!--/figure--> and 7 instruments, each signed against a digest of everything it depended on, so a change re-runs what it touched rather than all of it.
 
 **Recomputed by.** `glm_universal.signoff.ledger.plan`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+
+*Last altered 20 October 2026.*
 
 ---
 
@@ -21,6 +23,12 @@ project is not a wrong answer — it is a session that re-runs everything it
 could have skipped, or writes a finding nowhere and loses it.
 
 ## 0. The five-minute pick-up
+
+**Before running anything, read §0.1, *Run-order hazards*.** Eight short
+rules — the first two are *don't edit documents while `corpus --refresh` is
+running* and *after editing `evaluation/cases.py`, re-take `queryesc`,
+`budget-guard-frozen` and `ties-ladder-frozen` first, then the rest, then
+refresh the corpus last*.
 
 **First, read [`WHITEBOARD.md`](WHITEBOARD.md).** It is the round in progress
 written down as it happens: what the last session finished, what it had
@@ -74,11 +82,82 @@ PYTHONPATH=. python3 -m glm_universal.corpus --ask "what bears on the Leech latt
 PYTHONPATH=. python3 -m glm_universal.tools --help      # the study instruments
 ```
 
+### 0.1 Run-order hazards — read these before running anything
+
+*Added 20 October 2026 (Phase 172), at the owner's request. Each line was
+learned by losing time or work to it; keep the list, and add to it.*
+
+1. **Don't edit documents while `corpus --refresh` is running.** It rewrites
+   the documents that carry generated figures from the copies it read when it
+   started, so an edit made meanwhile is silently overwritten. Commit before
+   starting a refresh; if an edit was lost, restore it from the commit
+   (`git diff`, then re-apply). Draft prose outside the tree while a refresh
+   runs, and copy it in after.
+2. **Re-take order matters after editing `evaluation/cases.py`.** Some saved
+   results read others: `nearest-address` and `budget-reading` digest the
+   budget-guard frozen path, and `nearest-question` reads the ties-ladder
+   frozen path. Re-take `queryesc`, `budget-guard-frozen` and
+   `ties-ladder-frozen` first, then the rest, then refresh the corpus last:
+
+   ```bash
+   cd overlay; export PYTHONPATH=.
+   for t in queryesc budget-guard-frozen ties-ladder-frozen; do python3 -m glm_universal.tools $t --write; done
+   python3 -c "from glm_universal.corpus import caches; print('\n'.join(caches.describe()))"   # the rest, with their commands
+   # ... re-take each one it names ...
+   python3 -m glm_universal.corpus --refresh                                              # last
+   ```
+
+   The three frozen paths take about fifteen minutes each.
+3. **A new Lean file changes the Lean-corpus reports** once the corpus is
+   refreshed with it (`report lean`, `report retrieval`, the relay and
+   anonymous registers). Since Phases 171 and 172 `report relay` and
+   `report anonymous` are pinned on their claims, read off the measurement,
+   so their pins no longer move with the counts; any other case that quotes
+   a Lean-corpus count will. Refresh once after adding a Lean file, *before*
+   running the evaluation, or the evaluation checks a corpus that is not the
+   tree's.
+4. **A stored measurement can call itself current and still hold a stale
+   answer.** A cache is guarded by the digest of its *sources*. Since Phase
+   174 the two answer censuses (`evidence-model`, `evidence-in-use`) also
+   digest the stored measurements their answers quote, so re-taking one of
+   those turns them stale, and `signoff --close` re-takes them last. Other
+   measurements that record answers (the frozen paths, `queryesc`) are still
+   guarded by their sources only: after a code change, re-take the
+   measurements a census reads before the census itself. The censuses also
+   quote the document address book (`corpus/_data/document_addresses.json`),
+   which `corpus --refresh` rebuilds whenever a document has changed, so a
+   round that edits documents ends: documents, `corpus --refresh`, the two
+   censuses (`evidence-model` then `evidence-in-use`), `corpus --refresh`
+   again.
+5. **Editing a module a study lists in its `_SOURCES` stales that study's
+   cache.** `runtime/conversation.py`, `runtime/session.py`,
+   `runtime/parser.py` and `evaluation/cases.py` are in many. `corpus
+   --check` (or the `caches.describe()` line above) names every stale cache
+   and the command that re-takes it; do that before the evaluation and
+   before the close.
+6. **pytest cannot be installed here** (no package index). The test-file
+   sign-off of `signoff --close` therefore stays owed (since Phase 134).
+   Test files that do not import pytest can be run by calling their
+   `test_*` functions; record a hand run as a hand run, never as the
+   sign-off.
+7. **Run anything longer than a minute in the background, with a log**
+   (`nohup … > /tmp/x.log 2>&1 &`) and write the resume command on
+   [`WHITEBOARD.md`](WHITEBOARD.md). Measured costs on eight cores: `corpus
+   --refresh` about 5–10 minutes after a code or Lean change; each frozen
+   path about 15 minutes; `evaluation --jobs 8` about 10 minutes;
+   `evaluation --replay` about 9 minutes more; `lake build` of one new Lean
+   file seconds once Mathlib is built.
+8. **Order of a round's close**: code and Lean first; `corpus --refresh`
+   once (so the corpus has the new Lean files); re-take stale measurements
+   in the order of hazard 2; run the evaluation; write every document; then
+   `corpus --refresh` **last**, `corpus --check`, commit. Never touch a
+   document after the last refresh without refreshing again.
+
 ## 1. Orient — four short reads, in this order
 
 1. [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md) — the Positioning section
    (what is claimed and what is not), the standing target, and the
-   <!--figure:directives-->16 standing rules<!--/figure-->. Everything else assumes these have been read.
+   <!--figure:directives-->17 standing rules<!--/figure-->. Everything else assumes these have been read.
 2. [`STATUS.md`](STATUS.md) §1 — where the work stands in one screen (the
    full instrument table is [`SYSTEM.md`](SYSTEM.md) §1).
 3. [`STATUS.md`](STATUS.md) §2, the To-Do list — §2.1 is the next round,
@@ -120,7 +199,7 @@ whole of the speed discipline; everything below is which gate that is.
 | **documents, unchanged** | the same command | answers from the stored verdict in about three seconds when nothing it reads has moved; `--check --all` forces the full pass | picking the round up |
 | **changed** | `python3 -m glm_universal.signoff --run-everything --jobs 8` | every test unit and instrument whose closure moved, and nothing else | after any code, data or Lean edit |
 | **close** | `python3 -m glm_universal.signoff --close --jobs 8` | the release question -- every unit and instrument signed with the exhaustive cases on -- paying only what is owed: unsigned, changed, failed, or signed fast; then `--verify-release` | once, closing the round, and again if it was interrupted |
-| **release, from scratch** | `python3 -m glm_universal.signoff --release --jobs 8` | all <!--figure:test-files-->209 test files<!--/figure--> and all 6 instruments, ledger ignored | only when the rule itself changed (`signoff/rules.py`), or on purpose; never as a routine close |
+| **release, from scratch** | `python3 -m glm_universal.signoff --release --jobs 8` | all <!--figure:test-files-->226 test files<!--/figure--> and all 7 instruments, ledger ignored | only when the rule itself changed (`signoff/rules.py`), or on purpose; never as a routine close |
 
 All three are run from `overlay/` with `PYTHONPATH=.`.
 
@@ -273,6 +352,7 @@ pass (the record is
 | a new Lean file | `lake build` from the repository root, and no `sorry` | the `lean-build` and `lean-sorry-free` instruments |
 | the GLM as a whole | [`studies/GLM_ACADEMIC_PAPER.md`](studies/GLM_ACADEMIC_PAPER.md): a subsection for what the round built, the date line, and Part VII and the appendices brought level with it | the owner's standing instruction (Phase 119): the paper is the record of the whole system and is kept up to date in every development run |
 | the round in flight | [`WHITEBOARD.md`](WHITEBOARD.md) back to "no round in flight" | the next session reads it first |
+| every file created or altered | a date stamp in the file itself: `Created <day Month year>` or `Last altered <day Month year>`; `python3 -m glm_universal.tools dates` lists them and fails on a bad one | the owner's instruction of 18 October 2026, directive D17; nothing under `source_material/` is touched |
 | a new document | a state document: a tier-0 block whose verdict is also written, word for word, as a sentence of the body, and a link from a state document; a record: a place under `archive/` and a line in the archive list of [`ENTRY.md`](ENTRY.md) | the coverage claim, and `test_corpus` wants more than half of all verdicts quoted verbatim |
 
 **Never hand-type a count that moves.** Every count of report subjects,
@@ -331,7 +411,7 @@ test time by roughly six on this machine.
 | `SYSTEM.md` alone, by name | 3 | about 600 s |
 | one Lean file | the units naming it, plus the glob readers | see `--impact` |
 | `PROJECT_DIRECTIVES.md` | 63 | about 5,600 s — batch directive edits |
-| `signoff/rules.py` (the rule) | all 158 and the 6 instruments | about 8,400 s — the whole suite |
+| `signoff/rules.py` (the rule) | all 158 and the 7 instruments | about 8,400 s — the whole suite |
 
 Fixed costs, measured in Phase 111: the whole suite under `--close --jobs 8`
 (what a change to the rule costs) 67 minutes wall-clock; `corpus --refresh` 8 min after a large

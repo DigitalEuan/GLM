@@ -20,6 +20,8 @@ caller can actually ask of them; their censuses stay in their studies.
 
 ``studies/CONNECTED_MACHINE_STUDY.md`` is the study; the decision for each of
 the eight is *reachable*, recorded there with the reason.
+
+Last altered 20 October 2026 (Phase 167: `adversarial_dialogue_study` declared in the wiring census; Phase 169: `evidence_model_study`; Phase 170: the engineering surface's ten frames; Phase 171: `evidence_in_use_study`; Phase 172: `resumed_dialogue_study`; Phase 173: `stacked_dialogue_study`; Phase 174: `quoted_measurements_study`). Last altered 21 October 2026 (Phase 175: `tool induce`, the owner's pipeline kit as a reachable tool; `pipeline_kit_study` declared in the wiring census).
 """
 
 from __future__ import annotations
@@ -98,9 +100,9 @@ SURFACES: Tuple[Surface, ...] = (
             ("RequestProject/GLM/QuestionSetB.lean",
              "RequestProject/GLM/ConnectedMachine.lean"),
             "studies/QUESTION_SET_B_STUDY.md"),
-    Surface("engineering", "a question one of the eight engineering frames "
-            "reads (derive, across wheels, wheel, check, Smith, analogy, "
-            "resonance, delta-sigma)", "GLM.py --ask TEXT, or --eng -q TEXT",
+    Surface("engineering", "a question one of the ten engineering frames "
+            "reads (in a declared context, across domains, across wheels, "
+            "derive, wheel, check, Smith, analogy, resonance, delta-sigma)", "GLM.py --ask TEXT, or --eng -q TEXT",
             "derive", ("RequestProject/GLM/EngineeringWheels.lean",
                        "RequestProject/GLM/ConnectedMachine.lean"),
             "studies/ENGINEERING_LANGUAGE_STUDY.md"),
@@ -142,7 +144,7 @@ def _llvq(arg: str) -> ToolResult:
     shells = "; ".join(f"norm {s['norm2']}: {s['count']}"
                        for s in r["shells"])
     return ToolResult(True, f"llvq: {r['n_shells_catalogued']} Leech shells "
-                      f"catalogued without enumeration ({shells}); kissing "
+                      f"counted from the Golay census ({shells}); kissing "
                       f"number {r['kissing_number']}",
                       {"kissing_number": r["kissing_number"],
                        "shells": r["n_shells_catalogued"],
@@ -798,6 +800,54 @@ MEASUREMENT_ONLY: Mapping[str, str] = {
                              "register holds",
     "budget_guard_frozen": "the frozen path and ladder audit of Phases "
                            "147-148, asked over the whole evaluation",
+    "hole_reports_l5_study": "the measurement of Phase 149; the readings "
+                             "themselves are the L5 clauses of `report hole "
+                             "classifier`, `ladder` and `failures`",
+    "nearest_question_study": "the measurement of Phase 150; the question "
+                              "it measures is put by the `nearest` query "
+                              "kind at a tied head and read back by its "
+                              "`given` replies",
+    "ties_ladder_frozen": "the frozen path of Phases 150-151, asked over the "
+                          "whole evaluation",
+    "planner_ladder_study": "the measurement of Phase 151; the program it "
+                            "measures is said and run by the stepwise "
+                            "planner's gate",
+    "l5_first_budget": "the measurement of Phase 152: L5 re-profiled at 240 "
+                       "starts, which no answer reads",
+    "carried_read_study": "the measurement of Phase 153; the reads it "
+                          "measures are made by the stepwise gate, the "
+                          "typed planner's gate and the `field` query kind",
+    "fold_machine_study": "the measurement of Phase 160; the folds it "
+                          "measures are computed by the batch machine the "
+                          "stepwise planner's gate runs",
+    "tool_machine_study": "the measurement of Phase 163; the tool answers "
+                          "it measures are worked out by the batch machine "
+                          "the stepwise planner's gate runs",
+    "adversarial_dialogue_study": "the measurement of Phase 167; the replies "
+                                  "it measures are read by the conversation "
+                                  "at the `nearest` query kind's tied heads",
+    "resumed_dialogue_study": "the measurement of Phase 172; the replies "
+                              "it measures are read by the conversation at "
+                              "the `nearest` and `locate` ties",
+    "stacked_dialogue_study": "the measurement of Phase 173; the replies "
+                              "it measures are read by the conversation at "
+                              "the `nearest` and `locate` ties, several "
+                              "open at once",
+    "pipeline_kit_study": "the measurement of Phase 175; the solver it "
+                          "measures is `tool induce`",
+    "quoted_measurements_study": "the marks of Phase 174, computed when "
+                                 "asked: whether the answer censuses are "
+                                 "guarded by the stored measurements their "
+                                 "answers quote, and the replay instrument",
+    "evidence_model_study": "the measurement of Phase 169: a census of what "
+                            "every evaluation answer rests on, read through "
+                            "`runtime.evidence`, not a question about one",
+    "evidence_in_use_study": "the measurement of Phase 171: the command "
+                             "line's `--result` reading and the "
+                             "evaluation's replay gate, not a question",
+    "pi_machine_study": "the measurement of Phase 166; the enclosure of pi "
+                        "it measures is summed by the batch machine the "
+                        "stepwise planner's gate runs",
     "stray_blind": "a census over the 23 deep holes, not a question about one",
     "citation_scope": "a measurement of the Lean corpus readings",
     "document_tree": "the retrieval line, parked at the owner's direction "
@@ -882,6 +932,15 @@ def wiring_census() -> Dict[str, object]:
         "stale_declarations": sorted(m for m in MEASUREMENT_ONLY
                                      if m not in unreached),
     }
+
+
+def _induce(arg: str) -> ToolResult:
+    """``IN -> OUT ; IN -> OUT ? QUERY``: the rule the demonstrations
+    determine, applied to the query, or the refusal that says why not
+    (Phase 175; ``reasoning/pipeline_kit.py``)."""
+    from ..reasoning import pipeline_kit as pk
+    ok, text, figures = pk.induce_text(arg)
+    return ToolResult(ok, text, figures)
 
 
 def _wiring(arg: str) -> ToolResult:
@@ -1013,6 +1072,15 @@ TOOLS: Tuple[Tool, ...] = (
           "RequestProject/GLM/NearestFraction.lean"),
          "studies/TOOL_VERDICTS_STUDY.md", _best_approximation,
          takes="X denominator N"),
+    Tool("induce", "reasoning.pipeline_kit", "a rule induced from "
+         "demonstration pairs of 0/1 grids or bit strings and applied to a "
+         "query: every operator hypothesis that fits all the pairs is kept, "
+         "and the query is answered only when they all agree (the owner's "
+         "pipeline kit)", "derive, refusal",
+         ("RequestProject/GLM/PipelineInduction.lean",
+          "RequestProject/GLM/PipelineKit/Permutation.lean"),
+         "studies/PIPELINE_KIT_STUDY.md", _induce,
+         takes="IN -> OUT ; IN -> OUT ? QUERY"),
     Tool("wiring", "runtime.toolbox", "which reasoning modules a query can "
          "reach, and the declared reason for each one it cannot", "address",
          ("RequestProject/GLM/ConnectedMachine.lean",),
@@ -1053,6 +1121,8 @@ TOOL_PHRASES: Tuple[Tuple[str, str], ...] = (
     (r"bind (\S+ \S+ \S+ in \S+)", "tool bind {1}"),
     (r"(?:what (?:is|was) the fate of|what became of|what happened to) "
      r"(law_\w+)", "tool law register {1}"),
+    (r"(?:induce|infer|find) the rule (?:from|of|in) (.+\?.+)",
+     "tool induce {1}"),
     (r"which reasoning modules (?:can a query reach|are reached|are wired)",
      "tool wiring"),
 )

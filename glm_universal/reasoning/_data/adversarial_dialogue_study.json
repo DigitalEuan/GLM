@@ -1,0 +1,145 @@
+{
+ "A0": {
+  "confirmed": 48,
+  "runs": 48,
+  "wrong": 0
+ },
+ "A1": {
+  "confirmed_on_impersonated": 118,
+  "confirmed_on_truth": 0,
+  "contradicted": 0,
+  "runs": 118
+ },
+ "A2": {
+  "confirmed": 48,
+  "confirmed_consistent": 48,
+  "confirmed_on_truth": 0,
+  "contradicted": 0,
+  "other": 0,
+  "refused": 0,
+  "runs": 48
+ },
+ "A2b": {
+  "contradicted": 48,
+  "runs": 48,
+  "wrong": 0
+ },
+ "A3": {
+  "given_asked": 18,
+  "given_contradicted": 18,
+  "off": {
+   "confirmed": 1,
+   "confirmed_wrong": 0,
+   "contradicted": 1,
+   "resolved_wrong": 0,
+   "runs": 48,
+   "wrong_by_number": 0
+  },
+  "on": {
+   "confirmed": 4,
+   "confirmed_wrong": 0,
+   "contradicted": 2,
+   "resolved_wrong": 3,
+   "runs": 48,
+   "wrong_by_number": 3
+  }
+ },
+ "A4": {
+  "read_after_interjection": 0,
+  "runs": 48
+ },
+ "A5": {
+  "off": {
+   "confirmed": 1,
+   "contradicted": 1,
+   "echo_read": 2,
+   "echo_read_confirm": 2,
+   "echo_read_confirm_by_number": 0,
+   "runs": 48,
+   "wrong": 0
+  },
+  "on": {
+   "confirmed": 6,
+   "contradicted": 3,
+   "echo_read": 9,
+   "echo_read_confirm": 9,
+   "echo_read_confirm_by_number": 7,
+   "runs": 48,
+   "wrong": 0
+  }
+ },
+ "A6": {
+  "off": {
+   "confirmed": 1,
+   "confirmed_wrong": 1,
+   "confirmed_wrong_consistent": 1,
+   "contradicted": 1,
+   "echo_read": 2,
+   "echo_read_confirm": 2,
+   "echo_read_confirm_by_number": 0,
+   "runs": 48,
+   "wrong_by_number": 0
+  },
+  "on": {
+   "confirmed": 10,
+   "confirmed_wrong": 10,
+   "confirmed_wrong_consistent": 10,
+   "contradicted": 2,
+   "echo_read": 12,
+   "echo_read_confirm": 12,
+   "echo_read_confirm_by_number": 10,
+   "runs": 48,
+   "wrong_by_number": 9
+  }
+ },
+ "A7": {
+  "confirmed": 0,
+  "contradicted": 5,
+  "points": 10,
+  "refused": 5
+ },
+ "A8": {
+  "checked": 252,
+  "given_malformed_asked": 36,
+  "given_malformed_refused": 36,
+  "read": []
+ },
+ "A9": {
+  "checked": 74,
+  "controls": 45,
+  "controls_read": 45,
+  "read": []
+ },
+ "P": {
+  "outside_live": 0,
+  "runs": 560,
+  "values_outside": 0
+ },
+ "heads": 18,
+ "lean": {
+  "declared": 9,
+  "file": "RequestProject/GLM/AdversarialDialogue.lean",
+  "met": true,
+  "sorry": 0,
+  "theorems": 9
+ },
+ "marks": {
+  "A0": true,
+  "A1": true,
+  "A2": true,
+  "A2b": true,
+  "A3": true,
+  "A4": true,
+  "A5": true,
+  "A6": true,
+  "A7": true,
+  "A8": true,
+  "A9": true,
+  "L1": true,
+  "P": true
+ },
+ "members": 48,
+ "met": 13,
+ "source_digest": "c8ba7e0e4037839a48d98a1fd559a0f81e06b69586e7c33b699c071cb8bc19bb",
+ "taken": 13
+}

@@ -608,6 +608,14 @@ class ReasoningReports:
                     f"of {queries}")
 
         chance_hits = report["chance_at_5"] * queries
+        #  Read off the measurement rather than asserted (Phase 172): the
+        #  counts move with every Lean file the corpus gains, the claim is
+        #  the verdict's checks, and the sentence says which fail if any do.
+        failing = tuple(key for key, held in verdict.items() if not held)
+        claim = ("every one of its checks holds" if not failing else
+                 f"{len(failing)} of its {len(verdict)} checks "
+                 f"{'fails' if len(failing) == 1 else 'fail'} "
+                 f"({', '.join(failing)})")
         steps = [
             Step("the register, stated before it is measured",
                  f"A query is *anonymous* when its identifiers are not the "
@@ -625,7 +633,7 @@ class ReasoningReports:
                  f"{verdict['placeholders_are_fresh']}"),
             Step("what the renaming does to each faculty",
                  f"At k = {k} the text search falls {move('text')} and the "
-                 f"identifier address book falls {move('lexical')}, both to "
+                 f"identifier address book falls {move('lexical')}, against "
                  f"the {chance_hits.numerator // chance_hits.denominator} "
                  f"hits chance alone would give; the structural address "
                  f"holds {move('address')}, which is more than twice what "
@@ -684,7 +692,7 @@ class ReasoningReports:
                    f"identifier of a query outside a declared vocabulary and "
                    f"at k = {k} over {queries} queries the text search falls "
                    f"{move('text')} and the identifier address book "
-                   f"{move('lexical')}, both to the "
+                   f"{move('lexical')}, against the "
                    f"{chance_hits.numerator // chance_hits.denominator} hits "
                    f"chance gives, while the structural address holds "
                    f"{move('address')} -- more than twice any other faculty "
@@ -696,7 +704,8 @@ class ReasoningReports:
                    f"lifts the leader "
                    f"{relay_after['leader']['hits'][k]} -> "
                    f"{relay_after['relay']['hits'][k]}.  The carry set is a "
-                   f"class, not a residue",
+                   f"class, not a residue.  Standing, read off the "
+                   f"measurement: {claim}",
             steps=tuple(steps), expected=expected,
             script_spec={"template": "report_anonymous", "args": {}},
             payload={"report": jsonable({

@@ -40,6 +40,16 @@ reproduced column 2.  ``--check-script-exactness`` AST-scans every generated
 script and refuses to ship one that contains a float literal, a ``float()``
 call, or an RNG import.
 
+The common result model
+-----------------------
+``-q QUERY --result`` (Phase 171, ``studies/EVIDENCE_IN_USE_STUDY.md``) prints
+each answer, or refusal, read into the one result model of Phase 169
+(:mod:`glm_universal.runtime.evidence`) as a JSON list; with ``--verify-tct``
+column 3 is replayed and the field ``replayed`` says whether it verified.  The
+reading changes no answer.
+
+*Last altered 20 October 2026 (Phase 173: `--converse` says when a reply is late -- its question closed by the window; Phase 171: ``--result``).*
+
 Invariants, inherited from :mod:`glm_universal`
 -----------------------------------------------
 Exact arithmetic (``int`` / ``fractions.Fraction``), no randomness, standard
@@ -54,6 +64,7 @@ import ast
 import io
 import json
 import os
+import re
 import sys
 from pathlib import Path
 from typing import (Any, Dict, Iterable, List, Optional, Sequence, TextIO,
@@ -567,6 +578,7 @@ def _interactive(out: Out, source: TextIO, session: GeometricSession,
                 break
             continue
         idx += 1
+        line = settle_question(line)
         asked = line
         if pending is not None:
             # Phase 146: a reply to the question the previous answer ended
@@ -691,6 +703,12 @@ def build_parser() -> argparse.ArgumentParser:
                         "a tie is carried as a column, and a follow-up that "
                         "cannot be bound is refused with its reason "
                         "(repeatable)")
+    p.add_argument("--result", action="store_true",
+                   help="print each -q answer as the common result model "
+                        "(runtime/evidence.py, Phase 169) in JSON: status, "
+                        "evidence, witness, theorems, boundary, budget, open "
+                        "tie, refusal reason, reply history, replayed; with "
+                        "--verify-tct column 3 is replayed (Phase 171)")
     p.add_argument("--no-banner", action="store_true",
                    help="suppress the interactive banner")
     p.add_argument("--input", metavar="PATH", default=None,
@@ -713,6 +731,34 @@ def _load_query_file(path: Path) -> List[str]:
 # ===========================================================================
 # 7.  DISPATCH
 # ===========================================================================
+
+#: Phase 156 (``studies/FRICTION_STUDY.md`` §2.5): a leading *tell me*, after
+#: any courtesy opening the parser already strips, unless *about*, *whether* or
+#: *if* follows it.
+_TELL_ME = re.compile(
+    r"^((?:(?:please|could you|can you|would you|kindly)\s+)*)tell me\s+"
+    r"(?!(?:about|whether|if)\b)", re.IGNORECASE)
+_RUN_OF_SPACE = re.compile(r"[ \t]+")
+
+
+def settle_question(question: str) -> str:
+    """The question with the small movements the survey found settled.
+
+    Phase 156 slid every evaluation question a little (``FRICTION_STUDY.md``):
+    doubled spaces stuck 21 of 222 questions, and a leading *can you tell me*
+    stuck 159 and read the *me* of six as the dimension ``M``.  Here, in a
+    question of one line holding no quotation mark or back-quote (a program or
+    quoted text passes untouched, since its spacing can be its meaning), runs
+    of spaces and tabs become one space, and a leading *tell me* is dropped as
+    a courtesy unless *about*, *whether* or *if* follows it.  A question
+    already written with single spaces and without that opening is returned
+    unchanged.
+    """
+    if "\n" in question or any(q in question for q in "\"'`"):
+        return question
+    settled = _RUN_OF_SPACE.sub(" ", question).strip()
+    return _TELL_ME.sub(lambda m: m.group(1), settled)
+
 
 def main(argv: Optional[Sequence[str]] = None,
         out: Optional[TextIO] = None,
@@ -812,12 +858,15 @@ def main(argv: Optional[Sequence[str]] = None,
         return 2
 
     session = GeometricSession()
+    if args.result:
+        return _print_results(out_stream, session, queries, args.verify_tct)
     traces: List[ThreeColumnTrace] = []
     worst = 0
     routed = _reads_through_router(args)
     for q in queries:
+        q = settle_question(q)
         if routed:
-            code, trace = _routed_query(
+            code, trace = _respelt_query(
                 out_stream, session, q, columns, args.format,
                 args.verify_tct, args.check_script_exactness,
                 cross_check=args.cross_check)
@@ -844,6 +893,48 @@ def main(argv: Optional[Sequence[str]] = None,
         else:
             _write_export(target, traces[-1], traces)
 
+    return worst
+
+
+def routed_result(session: GeometricSession, question: str,
+                  replay: bool = False):
+    """One question read as ``-q`` reads it, returned as the common result
+    model (:class:`glm_universal.runtime.evidence.Result`).
+
+    Phase 171 (``studies/EVIDENCE_IN_USE_STUDY.md``): the question is settled
+    (:func:`settle_question`) and routed (``runtime.router.route``), as the
+    Phase 169 census read it; on a refusal it is re-read once respelt
+    (sintered), and the respelt reading is kept only if it answers, as
+    :func:`_respelt_query` does.  The reading adds no answer and removes
+    none."""
+    from glm_universal.runtime import evidence as evm
+    from glm_universal.runtime import router
+    q = settle_question(question)
+    routed = router.route(session, q)
+    if not routed.answered:
+        from glm_universal.runtime import respell, sinter
+        if respell.enabled():
+            again = sinter.respell_sintered(q)
+            if again.changed:
+                second = router.route(session, again.text)
+                if second.answered:
+                    return evm.from_routed(again.text, second, replay=replay)
+    return evm.from_routed(q, routed, replay=replay)
+
+
+def _print_results(out: "Out", session: GeometricSession,
+                   queries: Sequence[str], replay: bool) -> int:
+    """``-q ... --result``: every question as a :class:`Result`, one JSON
+    list.  Exit code 0 when every question was answered (and, with
+    ``--verify-tct``, every replay that ran verified); 1 otherwise."""
+    rows = []
+    worst = 0
+    for q in queries:
+        r = routed_result(session, q, replay=replay)
+        if not r.answered or r.replayed is False:
+            worst = 1
+        rows.append(r.as_dict())
+    out.line(json.dumps(rows, indent=1, ensure_ascii=False))
     return worst
 
 
@@ -970,6 +1061,17 @@ def _print_chain(out: "Out", a, columns: Sequence[int],
         out.line("  " + ss.answer_sentence(chain))
     for note in chain.notes:
         out.line("  note: " + note)
+    ladder = getattr(a, "ladder", None)
+    if ladder is not None:
+        # Phase 151: the chain said as GLM-BAT and run by the batch machine
+        from glm_universal.reasoning import planner_ladder as pl
+        said = pl.describe(ladder)
+        out.line("MACHINE " + said["program"])
+        if 2 in columns:
+            for line in said["program_lines"].splitlines():
+                out.line("      " + line)
+        out.line("  " + said["drift"])
+        out.line("  " + said["pipeline"])
     script = ss.render_script(chain, str(package_root()))
     if 3 in columns:
         out.line("COLUMN 3 — CHECKING SCRIPT")
@@ -980,8 +1082,16 @@ def _print_chain(out: "Out", a, columns: Sequence[int],
         for line in got["stdout"].splitlines():
             if line.startswith("STEP") or line.startswith("ALIGNED"):
                 out.line("  " + line)
-        out.line(f"VERIFIED {got['verified']}")
-        return bool(got["verified"])
+        ok = bool(got["verified"])
+        if ladder is not None:
+            from glm_universal.reasoning import batch_speech as bs
+            for name, (bat, _claim) in pl.column3_scripts(
+                    chain, ladder).items():
+                passed, last = bs.run_script(bat)
+                out.line(f"  MACHINE {name}: {last}")
+                ok = ok and passed
+        out.line(f"VERIFIED {ok}")
+        return ok
     return None
 
 
@@ -1010,6 +1120,12 @@ def _speak_steps(out: "Out", texts: Sequence[str], columns: Sequence[int],
     return worst
 
 
+def conversation_window() -> int:
+    """The number of unrelated turns a question survives (Phase 173)."""
+    from glm_universal.runtime import conversation as cv
+    return cv.OPEN_TIE_WINDOW
+
+
 def _converse(out: "Out", texts: Sequence[str]) -> int:
     """Answer successive texts as one conversation (Phase 92).
 
@@ -1024,6 +1140,15 @@ def _converse(out: "Out", texts: Sequence[str]) -> int:
     for text in texts:
         out.line(f"TURN    {len(conversation.turns)}")
         out.line(f"QUERY   {text}")
+        if conversation.shape_of(text) is None:
+            late = conversation.expired_fit(text)
+            if late:
+                # Phase 173: a reply to a question the window closed is said
+                # to be late, then read as the whole query it now is
+                out.line(f"NOTE    {text!r} would have answered the question "
+                         f"of turn {late[0]}, closed after "
+                         f"{conversation_window()} unrelated turns; it is "
+                         f"read as a whole query")
         try:
             solution = conversation.ask(text)
         except FollowUpError as error:
@@ -1132,6 +1257,40 @@ def _speak_frames(out: "Out", text: str, columns: Sequence[int],
         out.line(f"DISPUTED {d}")
     out.line("")
     return 0 if rd.answered else 1
+
+
+def _respelt_query(out: "Out", session: GeometricSession, text: str,
+                   columns: Sequence[int], fmt: str, verify: bool,
+                   exactness_check: bool, cross_check: bool = False
+                   ) -> Tuple[int, Optional[ThreeColumnTrace]]:
+    """Phase 157 (``studies/FRICTION_TWO_STUDY.md`` §2.1): the routed reading,
+    and on a refusal one re-read of the question respelt by spelling and by
+    use (:mod:`glm_universal.runtime.respell`).  The respelt reading is
+    printed, after a ``RESPELT`` line, only if it answers; otherwise the
+    original refusal is printed unchanged.  A question that answers is never
+    re-read (``FrictionTwo.lean``, ``reread_keeps_answer``).
+
+    Phase 159 (``studies/THERMO_FRICTION_STUDY.md`` §2.3): the respelling is
+    the sintered one (:mod:`glm_universal.runtime.sinter`) -- the register
+    lexicon's words are known, and a token the corpus vocabulary cannot read
+    back is read against that lexicon once (``sinter_keeps_solid``)."""
+    from glm_universal.runtime import respell, sinter
+    first = io.StringIO()
+    code, trace = _routed_query(Out(first), session, text, columns, fmt,
+                                verify, exactness_check, cross_check)
+    if code != 0 and respell.enabled():
+        again = sinter.respell_sintered(text)
+        if again.changed:
+            second = io.StringIO()
+            code2, trace2 = _routed_query(Out(second), session, again.text,
+                                          columns, fmt, verify,
+                                          exactness_check, cross_check)
+            if code2 == 0:
+                out.line(f"RESPELT  {again.note()}")
+                out.write(second.getvalue())
+                return code2, trace2
+    out.write(first.getvalue())
+    return code, trace
 
 
 def _routed_query(out: "Out", session: GeometricSession, text: str,

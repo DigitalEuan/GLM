@@ -1,0 +1,1260 @@
+{
+ "analogy": {
+  "parity_exact": 30,
+  "threshold_exact": 0,
+  "trials": 30
+ },
+ "bridge": {
+  "eight_mul": 0,
+  "junction_parity": 0,
+  "parity_wall": 0,
+  "parity_wall_glue": 0,
+  "trials": 2000
+ },
+ "demos": [
+  2,
+  3,
+  4
+ ],
+ "families": {
+  "bfs_shortest": {
+   "group": "kit",
+   "kit": {
+    "2": {
+     "refused": 49,
+     "right": 0,
+     "wrong": 1
+    },
+    "3": {
+     "refused": 50,
+     "right": 0,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 50,
+     "right": 0,
+     "wrong": 0
+    }
+   },
+   "no_gate": {
+    "2": {
+     "refused": 0,
+     "right": 49,
+     "wrong": 1
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "occam": {
+    "2": {
+     "refused": 2,
+     "right": 48,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 1,
+     "right": 49,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 1,
+     "right": 49,
+     "wrong": 0
+    }
+   },
+   "shape": [
+    4,
+    6
+   ],
+   "shipped": {
+    "2": {
+     "refused": 2,
+     "right": 48,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 1,
+     "right": 49,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 1,
+     "right": 49,
+     "wrong": 0
+    }
+   },
+   "skipped_by_layer_at_4": 132650
+  },
+  "fill_then_reflect_h": {
+   "group": "steps",
+   "kit": {
+    "2": {
+     "refused": 50,
+     "right": 0,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 50,
+     "right": 0,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 50,
+     "right": 0,
+     "wrong": 0
+    }
+   },
+   "no_gate": {
+    "2": {
+     "refused": 0,
+     "right": 41,
+     "wrong": 9
+    },
+    "3": {
+     "refused": 0,
+     "right": 48,
+     "wrong": 2
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "occam": {
+    "2": {
+     "refused": 9,
+     "right": 32,
+     "wrong": 9
+    },
+    "3": {
+     "refused": 7,
+     "right": 41,
+     "wrong": 2
+    },
+    "4": {
+     "refused": 3,
+     "right": 47,
+     "wrong": 0
+    }
+   },
+   "shape": [
+    4,
+    6
+   ],
+   "shipped": {
+    "2": {
+     "refused": 21,
+     "right": 29,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 9,
+     "right": 41,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 3,
+     "right": 47,
+     "wrong": 0
+    }
+   },
+   "skipped_by_layer_at_4": 132650
+  },
+  "flood_fill": {
+   "group": "kit",
+   "kit": {
+    "2": {
+     "refused": 50,
+     "right": 0,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 50,
+     "right": 0,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 50,
+     "right": 0,
+     "wrong": 0
+    }
+   },
+   "no_gate": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "occam": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "shape": [
+    4,
+    6
+   ],
+   "shipped": {
+    "2": {
+     "refused": 13,
+     "right": 37,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 5,
+     "right": 45,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 1,
+     "right": 49,
+     "wrong": 0
+    }
+   },
+   "skipped_by_layer_at_4": 132650
+  },
+  "path_hv": {
+   "group": "single",
+   "kit": {
+    "2": {
+     "refused": 49,
+     "right": 0,
+     "wrong": 1
+    },
+    "3": {
+     "refused": 50,
+     "right": 0,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 50,
+     "right": 0,
+     "wrong": 0
+    }
+   },
+   "no_gate": {
+    "2": {
+     "refused": 0,
+     "right": 48,
+     "wrong": 2
+    },
+    "3": {
+     "refused": 0,
+     "right": 49,
+     "wrong": 1
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "occam": {
+    "2": {
+     "refused": 2,
+     "right": 48,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 1,
+     "right": 49,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "shape": [
+    4,
+    6
+   ],
+   "shipped": {
+    "2": {
+     "refused": 2,
+     "right": 48,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 1,
+     "right": 49,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "skipped_by_layer_at_4": 132650
+  },
+  "path_then_rotate180": {
+   "group": "steps",
+   "kit": {
+    "2": {
+     "refused": 49,
+     "right": 0,
+     "wrong": 1
+    },
+    "3": {
+     "refused": 50,
+     "right": 0,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 50,
+     "right": 0,
+     "wrong": 0
+    }
+   },
+   "no_gate": {
+    "2": {
+     "refused": 0,
+     "right": 46,
+     "wrong": 4
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "occam": {
+    "2": {
+     "refused": 5,
+     "right": 44,
+     "wrong": 1
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "shape": [
+    4,
+    6
+   ],
+   "shipped": {
+    "2": {
+     "refused": 6,
+     "right": 44,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "skipped_by_layer_at_4": 132650
+  },
+  "reflect_h": {
+   "group": "single",
+   "kit": {
+    "2": {
+     "refused": 1,
+     "right": 49,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "no_gate": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "occam": {
+    "2": {
+     "refused": 1,
+     "right": 49,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "shape": [
+    4,
+    6
+   ],
+   "shipped": {
+    "2": {
+     "refused": 8,
+     "right": 42,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 1,
+     "right": 49,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "skipped_by_layer_at_4": 0
+  },
+  "reflect_v": {
+   "group": "kit",
+   "kit": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "no_gate": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "occam": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "shape": [
+    4,
+    6
+   ],
+   "shipped": {
+    "2": {
+     "refused": 1,
+     "right": 49,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "skipped_by_layer_at_4": 0
+  },
+  "reflect_v_then_toggle": {
+   "group": "steps",
+   "kit": {
+    "2": {
+     "refused": 50,
+     "right": 0,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 50,
+     "right": 0,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 50,
+     "right": 0,
+     "wrong": 0
+    }
+   },
+   "no_gate": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "occam": {
+    "2": {
+     "refused": 1,
+     "right": 49,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "shape": [
+    4,
+    6
+   ],
+   "shipped": {
+    "2": {
+     "refused": 1,
+     "right": 49,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "skipped_by_layer_at_4": 132650
+  },
+  "rotate180": {
+   "group": "single",
+   "kit": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "no_gate": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "occam": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "shape": [
+    4,
+    6
+   ],
+   "shipped": {
+    "2": {
+     "refused": 2,
+     "right": 48,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "skipped_by_layer_at_4": 0
+  },
+  "string_complement": {
+   "group": "string",
+   "kit": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "no_gate": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "occam": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "shape": [
+    1,
+    24
+   ],
+   "shipped": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "skipped_by_layer_at_4": 2850
+  },
+  "string_reverse": {
+   "group": "string",
+   "kit": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "no_gate": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "occam": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "shape": [
+    1,
+    24
+   ],
+   "shipped": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "skipped_by_layer_at_4": 0
+  },
+  "string_reverse_complement": {
+   "group": "string",
+   "kit": {
+    "2": {
+     "refused": 50,
+     "right": 0,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 50,
+     "right": 0,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 50,
+     "right": 0,
+     "wrong": 0
+    }
+   },
+   "no_gate": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "occam": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "shape": [
+    1,
+    24
+   ],
+   "shipped": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "skipped_by_layer_at_4": 2850
+  },
+  "string_rotate": {
+   "group": "string",
+   "kit": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "no_gate": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "occam": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "shape": [
+    1,
+    24
+   ],
+   "shipped": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "skipped_by_layer_at_4": 0
+  },
+  "toggle": {
+   "group": "kit",
+   "kit": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "no_gate": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "occam": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "shape": [
+    4,
+    6
+   ],
+   "shipped": {
+    "2": {
+     "refused": 18,
+     "right": 32,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 12,
+     "right": 38,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 8,
+     "right": 42,
+     "wrong": 0
+    }
+   },
+   "skipped_by_layer_at_4": 132650
+  },
+  "translate": {
+   "group": "kit",
+   "kit": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "no_gate": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "occam": {
+    "2": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 0,
+     "right": 50,
+     "wrong": 0
+    }
+   },
+   "shape": [
+    4,
+    6
+   ],
+   "shipped": {
+    "2": {
+     "refused": 8,
+     "right": 42,
+     "wrong": 0
+    },
+    "3": {
+     "refused": 4,
+     "right": 46,
+     "wrong": 0
+    },
+    "4": {
+     "refused": 1,
+     "right": 49,
+     "wrong": 0
+    }
+   },
+   "skipped_by_layer_at_4": 0
+  }
+ },
+ "layer_filter": {
+  "changed_answers": 0,
+  "filtered_families": 9,
+  "weight_changing_families": 9
+ },
+ "lean": {
+  "declared": 17,
+  "file": "RequestProject/GLM/PipelineInduction.lean",
+  "kit": {
+   "RequestProject/GLM/PipelineKit/Analogy.lean": {
+    "present": true,
+    "sorry": 0,
+    "theorems": 8
+   },
+   "RequestProject/GLM/PipelineKit/Fields.lean": {
+    "present": true,
+    "sorry": 0,
+    "theorems": 16
+   },
+   "RequestProject/GLM/PipelineKit/Golay.lean": {
+    "present": true,
+    "sorry": 0,
+    "theorems": 16
+   },
+   "RequestProject/GLM/PipelineKit/Lattices.lean": {
+    "present": true,
+    "sorry": 0,
+    "theorems": 6
+   },
+   "RequestProject/GLM/PipelineKit/Leech.lean": {
+    "present": true,
+    "sorry": 0,
+    "theorems": 12
+   },
+   "RequestProject/GLM/PipelineKit/Permutation.lean": {
+    "present": true,
+    "sorry": 0,
+    "theorems": 5
+   },
+   "RequestProject/GLM/PipelineKit/Pless.lean": {
+    "present": true,
+    "sorry": 0,
+    "theorems": 7
+   }
+  },
+  "sorry": 0,
+  "theorems": 17
+ },
+ "marks": {
+  "A": true,
+  "B": true,
+  "D": true,
+  "G": true,
+  "K": true,
+  "L1": true,
+  "L2": true,
+  "M": true,
+  "R": true,
+  "S": true,
+  "T": true,
+  "W": true
+ },
+ "met": 12,
+ "monotone": {
+  "checked": 1500,
+  "exceptions": 0,
+  "fitted_appearances": 16
+ },
+ "queries": 50,
+ "source_digest": "a053e41e9ca94dff4ebea1a54714e674e6d245e221b9d9675572fcf1f52e220a",
+ "taken": 12,
+ "tool": {
+  "answer": "010/110/001",
+  "answer_ok": true,
+  "refuse_ok": false,
+  "refuse_status": "ambiguous"
+ },
+ "totals": {
+  "kit": {
+   "refused": 1048,
+   "right": 1199,
+   "wrong": 3
+  },
+  "no_gate": {
+   "refused": 0,
+   "right": 2231,
+   "wrong": 19
+  },
+  "occam": {
+   "refused": 33,
+   "right": 2205,
+   "wrong": 12
+  },
+  "shipped": {
+   "refused": 129,
+   "right": 2121,
+   "wrong": 0
+  }
+ }
+}

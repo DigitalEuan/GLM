@@ -1,5 +1,8 @@
 """Sign-off for the instruments that are not pytest.
 
+*Last altered 20 October 2026 (Phase 174: the ``replay`` instrument -- the
+evaluation's replay gate as a step of the close).*
+
 The test suite is not the only thing this project re-runs from scratch every
 session.  ``lake build`` compiles the Lean development, the end-to-end
 evaluation drives the CLI once per question in a fresh interpreter, the
@@ -125,6 +128,19 @@ CHECKS: Tuple[Check, ...] = (
         entry_points=("evaluation/__main__.py",),
         extra=("overlay/GLM.py",),
         expected_seconds=240,
+    ),
+    Check(
+        # Phase 174 (studies/QUOTED_MEASUREMENTS_STUDY.md): the evaluation's
+        # replay gate of Phase 171, column 3 run for every case expected
+        # answered, as a step of the close rather than a flag to remember.
+        name="replay",
+        description="the evaluation's replay gate: column 3 run for every "
+                    "case expected answered",
+        command=(sys.executable, "-m", "glm_universal.evaluation",
+                 "--replay-only", "--jobs", "8"),
+        entry_points=("evaluation/__main__.py", "evaluation/replay.py"),
+        extra=("overlay/GLM.py",),
+        expected_seconds=540,
     ),
     Check(
         name="figures",

@@ -1,0 +1,289 @@
+{
+ "battery": {
+  "answered": 6,
+  "as_declared": 10,
+  "questions": 10,
+  "rows": [
+   {
+    "as_declared": true,
+    "declared": [
+     "asks",
+     "attr:field_order"
+    ],
+    "got": [
+     "asks",
+     "attr:field_order"
+    ],
+    "id": "B1",
+    "script": true
+   },
+   {
+    "as_declared": true,
+    "declared": [
+     "resolved",
+     "mathematics:golay_codeword_0"
+    ],
+    "got": [
+     "resolved",
+     "mathematics:golay_codeword_0"
+    ],
+    "id": "B2",
+    "script": true
+   },
+   {
+    "as_declared": true,
+    "declared": [
+     "confirmed",
+     "mathematics:hexacode_word_0"
+    ],
+    "got": [
+     "confirmed",
+     "mathematics:hexacode_word_0"
+    ],
+    "id": "B3",
+    "script": true
+   },
+   {
+    "as_declared": true,
+    "declared": [
+     "refused",
+     "contradicted"
+    ],
+    "got": [
+     "refused",
+     "contradicted"
+    ],
+    "id": "B4",
+    "script": null
+   },
+   {
+    "as_declared": true,
+    "declared": [
+     "asks",
+     "word:absorbed"
+    ],
+    "got": [
+     "asks",
+     "word:absorbed"
+    ],
+    "id": "B5",
+    "script": true
+   },
+   {
+    "as_declared": true,
+    "declared": [
+     "resolved",
+     "physics:albedo"
+    ],
+    "got": [
+     "resolved",
+     "physics:albedo"
+    ],
+    "id": "B6",
+    "script": true
+   },
+   {
+    "as_declared": true,
+    "declared": [
+     "refused",
+     "no-tie"
+    ],
+    "got": [
+     "refused",
+     "no-tie"
+    ],
+    "id": "B7",
+    "script": null
+   },
+   {
+    "as_declared": true,
+    "declared": [
+     "refused",
+     "unknown-question"
+    ],
+    "got": [
+     "refused",
+     "unknown-question"
+    ],
+    "id": "B8",
+    "script": null
+   },
+   {
+    "as_declared": true,
+    "declared": [
+     "refused",
+     "not-an-option"
+    ],
+    "got": [
+     "refused",
+     "not-an-option"
+    ],
+    "id": "B9",
+    "script": null
+   },
+   {
+    "as_declared": true,
+    "declared": [
+     "no question"
+    ],
+    "got": [
+     "no question"
+    ],
+    "id": "B10",
+    "script": true
+   }
+  ],
+  "scripts": 6
+ },
+ "census": {
+  "certified": 193,
+  "certified_heads": 3,
+  "heads": 18,
+  "points": 321,
+  "uncertified": 128,
+  "uncertified_heads": 17
+ },
+ "controls": {
+  "checked": 12,
+  "read_as_reply": []
+ },
+ "conversations": {
+  "confirmed": 48,
+  "problems": [],
+  "rejected": 156,
+  "runs": 48,
+  "tampered": 156,
+  "turns": 150,
+  "verified": 150,
+  "wrong": 0
+ },
+ "dialogues": {
+  "confirmed": 48,
+  "heads": 18,
+  "lie_contradicted": 48,
+  "lie_wrong": 0,
+  "lied": 48,
+  "max_replies": 2,
+  "replies": 54,
+  "runs": 48,
+  "within_clog2_plus_1": 48,
+  "within_n_minus_1": 48,
+  "wrong": 0
+ },
+ "frozen": {
+  "F1": true,
+  "asked": 223,
+  "cases": 212,
+  "moved": [
+   {
+    "cause": "Phase 154: the list of query kinds the refusal names gains 'corpus'",
+    "id": "unknown-nonsense"
+   },
+   {
+    "cause": "the tree: the Lean declaration count, measured live",
+    "id": "report-lean"
+   },
+   {
+    "cause": "Phase 162: the directives report counts the standing rules, which gain D17 (the owner's dating rule)",
+    "id": "report-directives"
+   },
+   {
+    "cause": "the tree: the address-book index over the Lean declarations",
+    "id": "report-retrieval"
+   },
+   {
+    "cause": "the tree: the overlay's stored bytes, measured live",
+    "id": "report-generated"
+   },
+   {
+    "cause": "Phase 150: the language report counts the evaluation questions, which gain the round's cases",
+    "id": "report-language"
+   },
+   {
+    "cause": "Phase 150: the query-escalation report counts the evaluation cases, which gain the round's cases",
+    "id": "report-query-escalation"
+   },
+   {
+    "cause": "the tree: the stack relay's strides are drawn from the Lean declarations",
+    "id": "report-relay"
+   },
+   {
+    "cause": "the tree: the anonymous register's queries are the relay's strides",
+    "id": "report-anonymous"
+   },
+   {
+    "cause": "Phase 150: the head is a certified junction, so the answer ends with the question that splits it (prefix kept)",
+    "id": "nearest-address-junction"
+   }
+  ],
+  "new_cases": [
+   "corpus-address",
+   "corpus-address-phrase",
+   "corpus-continue",
+   "corpus-define",
+   "corpus-unmentioned",
+   "nearest-tie-confirmed",
+   "nearest-tie-contradicted",
+   "nearest-tie-no-tie",
+   "nearest-tie-question",
+   "nearest-tie-reply",
+   "tool-leech-norm-12"
+  ],
+  "prefix_broken": [],
+  "present": 212,
+  "same_status": 212,
+  "same_text": 202,
+  "source_digest": "dd371247756ffbd7c566b4ae5d9cee1e475e03f9092957256ab7474cde837caa",
+  "undeclared": []
+ },
+ "marks": {
+  "C1": true,
+  "D1": true,
+  "D2": true,
+  "D3": true,
+  "E1": true,
+  "F1": true,
+  "Q1": true,
+  "R1": true
+ },
+ "met": 8,
+ "new_cases": {
+  "cases": 5,
+  "passed": 5,
+  "rows": [
+   {
+    "id": "nearest-tie-question",
+    "passed": true,
+    "present": true
+   },
+   {
+    "id": "nearest-tie-reply",
+    "passed": true,
+    "present": true
+   },
+   {
+    "id": "nearest-tie-confirmed",
+    "passed": true,
+    "present": true
+   },
+   {
+    "id": "nearest-tie-contradicted",
+    "passed": true,
+    "present": true
+   },
+   {
+    "id": "nearest-tie-no-tie",
+    "passed": true,
+    "present": true
+   }
+  ]
+ },
+ "outside": {
+  "confirmed": 0,
+  "contradicted": 5,
+  "points": 10,
+  "refused": 5
+ },
+ "source_digest": "87a4f20288e540b1930046495b45b5b13fda149d49c555df1ca17fcc2322ddad",
+ "taken": 8
+}

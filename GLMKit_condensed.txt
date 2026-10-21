@@ -1,0 +1,896 @@
+Analogy.lean
+
+import GLMKit.Leech
+
+/-!
+# Analogies, displacements and convex hulls (iterations 1, 2, 7, 8)
+
+* `xor_analogy_exact_iff` : the `F₂` analogy `D = C ⊕ (A ⊕ B)` is exact iff the displacement
+  `x ⊕ f(x)` is the same for `A` and `C` (iteration 1: "a state difference is not generally the
+  rule"); for toggle (`f x = ¬x`) it is always exact (`xor_analogy_toggle`).
+* `threshold_analogy_toggle_iff` : iteration 8's `Λ₄₈` dual snap (integer analogy
+  `3(c + b − a)` decoded by the threshold `≥ 2`) is exact on toggle **only when `A = C`**, which
+  explains its 0 % toggle score. `parity_decode_eq_xor` : decoding by parity instead
+  (the fix) turns it into the `F₂` analogy, which is 100 % exact on toggle.
+* `binary_mem_convexHull_iff` : a 0/1 target lies in the convex hull of a set of 0/1 vectors
+  iff it is one of them. So iteration 2's "100 % hull separation" just says the targets were
+  not Golay codewords; and constant targets `c·𝟙` lie in the hull because `0` and `𝟙` are
+  codewords (`const_mem_convexHull`).
+-/
+
+namespace GLMKit
+
+variable {n : ℕ}
+
+/-- The `F₂` analogy `A : B :: C : D` with `D = C ⊕ (A ⊕ B)`. -/
+def xorAnalogy (a b c : Fin n → Bool) : Fin n → Bool := fun i => xor (c i) (xor (a i) (b i))
+
+theorem xor_analogy_exact_iff (f : (Fin n → Bool) → (Fin n → Bool)) (a c : Fin n → Bool) :
+    xorAnalogy a (f a) c = f c ↔ (fun i => xor (c i) (f c i)) = fun i => xor (a i) (f a i) := by
+  constructor
+  · intro h
+    funext i
+    have := congrFun h i
+    simp only [xorAnalogy] at this
+    rw [← this]
+    cases a i <;> cases c i <;> cases f a i <;> rfl
+  · intro h
+    funext i
+    have := congrFun h i
+    simp only [xorAnalogy]
+    simp only at this
+    rw [← this]
+    cases c i <;> cases f c i <;> rfl
+
+/-- Any coordinatewise "XOR with a fixed mask" rule (toggle = mask `𝟙`) is solved exactly by the
+`F₂` analogy from a single demonstration. -/
+theorem xor_analogy_mask (k a c : Fin n → Bool) :
+    xorAnalogy a (fun i => xor (a i) (k i)) c = fun i => xor (c i) (k i) := by
+  funext i; simp only [xorAnalogy]; cases a i <;> cases c i <;> cases k i <;> rfl
+
+theorem xor_analogy_toggle (a c : Fin n → Bool) :
+    xorAnalogy a (fun i => !a i) c = fun i => !c i := by
+  funext i; simp only [xorAnalogy]; cases a i <;> cases c i <;> rfl
+
+/-- Iteration 8's decode of the `3×`-embedded integer analogy: bit `= [3(c + b − a) ≥ 2]`. -/
+def thresholdAnalogy (a b c : Fin n → Bool) : Fin n → Bool :=
+  fun i => decide (2 ≤ 3 * (bitZ (c i) + bitZ (b i) - bitZ (a i)))
+
+/-- **Why the `Λ₄₈` dual snap scores 0 % on toggle.** It is exact iff the demonstration input
+equals the query input. -/
+theorem threshold_analogy_toggle_iff (a c : Fin n → Bool) :
+    thresholdAnalogy a (fun i => !a i) c = (fun i => !c i) ↔ a = c := by
+  constructor
+  · intro h
+    funext i
+    have := congrFun h i
+    simp only [thresholdAnalogy] at this
+    cases ha : a i <;> cases hc : c i <;> simp_all [bitZ]
+  · rintro rfl
+    funext i
+    simp only [thresholdAnalogy]
+    have key : ∀ x : Bool, decide (2 ≤ 3 * (bitZ x + bitZ (!x) - bitZ x)) = !x := by
+      intro x; cases x <;> decide
+    exact key (a i)
+
+/-- The fix: decode the integer analogy by parity. -/
+def parityAnalogy (a b c : Fin n → Bool) : Fin n → Bool :=
+  fun i => decide ((bitZ (c i) + bitZ (b i) - bitZ (a i)) % 2 = 1)
+
+theorem parity_decode_eq_xor (a b c : Fin n → Bool) : parityAnalogy a b c = xorAnalogy a b c := by
+  funext i
+  simp only [parityAnalogy, xorAnalogy]
+  cases a i <;> cases b i <;> cases c i <;> simp [bitZ]
+
+theorem parity_analogy_toggle (a c : Fin n → Bool) :
+    parityAnalogy a (fun i => !a i) c = fun i => !c i := by
+  rw [parity_decode_eq_xor, xor_analogy_toggle]
+
+/-! ### Convex hulls of 0/1 vectors (iteration 2, phase 2) -/
+
+/-- A 0/1 vector is an extreme point of the unit cube. -/
+lemma binary_mem_extremePoints_cube (t : Fin n → ℝ) (ht : ∀ i, t i = 0 ∨ t i = 1) :
+    t ∈ Set.extremePoints ℝ {x : Fin n → ℝ | ∀ i, 0 ≤ x i ∧ x i ≤ 1} := by
+  rw [mem_extremePoints]
+  refine ⟨fun i => by rcases ht i with h | h <;> rw [h] <;> norm_num, ?_⟩
+  rintro x hx y hy ⟨a, b, ha, hb, hab, hxy⟩
+  have key : ∀ i, x i = t i ∧ y i = t i := by
+    intro i
+    have hi := congrFun hxy i
+    simp only [Pi.add_apply, Pi.smul_apply, smul_eq_mul] at hi
+    obtain ⟨hx0, hx1⟩ := hx i
+    obtain ⟨hy0, hy1⟩ := hy i
+    rcases ht i with h | h <;> rw [h] at hi ⊢
+    · constructor <;> nlinarith
+    · constructor <;> nlinarith
+  exact ⟨funext fun i => (key i).1, funext fun i => (key i).2⟩
+
+/-- **Hull separation is membership.** A 0/1 target lies in the convex hull of a set of 0/1
+vectors iff it belongs to the set. -/
+theorem binary_mem_convexHull_iff (S : Set (Fin n → ℝ)) (hS : ∀ s ∈ S, ∀ i, s i = 0 ∨ s i = 1)
+    (t : Fin n → ℝ) (ht : ∀ i, t i = 0 ∨ t i = 1) : t ∈ convexHull ℝ S ↔ t ∈ S := by
+  refine ⟨fun h => ?_, fun h => subset_convexHull ℝ S h⟩
+  set cube := {x : Fin n → ℝ | ∀ i, 0 ≤ x i ∧ x i ≤ 1}
+  have hcube : Convex ℝ cube := by
+    intro x hx y hy a b ha hb hab i
+    simp only [Pi.add_apply, Pi.smul_apply, smul_eq_mul]
+    obtain ⟨hx0, hx1⟩ := hx i
+    obtain ⟨hy0, hy1⟩ := hy i
+    constructor <;> nlinarith
+  have hsub : convexHull ℝ S ⊆ cube := convexHull_min (fun s hs i => by
+    rcases hS s hs i with h | h <;> rw [h] <;> norm_num) hcube
+  have hext : t ∈ Set.extremePoints ℝ (convexHull ℝ S) :=
+    inter_extremePoints_subset_extremePoints_of_subset hsub
+      ⟨h, binary_mem_extremePoints_cube t ht⟩
+  exact extremePoints_convexHull_subset hext
+
+/-- Constant targets `c·𝟙` (`0 ≤ c ≤ 1`) lie in the hull of any set containing `0` and `𝟙`
+(both are Golay codewords, `GLMKit.zero_mem_golay`, `GLMKit.allOnes_mem_golay`). -/
+theorem const_mem_convexHull (S : Set (Fin n → ℝ)) (h0 : (0 : Fin n → ℝ) ∈ S)
+    (h1 : (fun _ => (1 : ℝ)) ∈ S) (c : ℝ) (hc0 : 0 ≤ c) (hc1 : c ≤ 1) :
+    (fun _ => c) ∈ convexHull ℝ S := by
+  have hseg : segment ℝ (0 : Fin n → ℝ) (fun _ => (1 : ℝ)) ⊆ convexHull ℝ S :=
+    segment_subset_convexHull h0 h1
+  apply hseg
+  refine ⟨1 - c, c, by linarith, hc0, by ring, ?_⟩
+  funext i
+  simp
+
+end GLMKit
+
+
+====
+
+Fields.lean
+
+import Mathlib
+
+/-!
+# Field "punctures" and "spins" (iteration 5, phase 2)
+
+The study's vocabulary: the *puncture* of a field is multiplication by its characteristic
+(it is the zero map, "deletion"); a *spin* is multiplication by a unit of order `≥ 2`.
+
+Verified here:
+* `F₂`: `2 = 0` (deletion, no spin); `F₃`: `2 = -1`, of order 2.
+* `F₅`: `2` has order 4; `F₇`: `2` has order 3 while `3` has the full order 6.
+* There is **no field with 6 elements** (iteration 5's "F₆ is not a field"), and `ℤ/6`
+  has zero divisors.
+* In every field of characteristic 2 (`F₂, F₄, F₈`, …) multiplication by 2 is still the zero
+  map: extending a char-2 field never removes the puncture.
+* `F₄ˣ` has order 3 and `F₈ˣ` has order 7, so every non-identity unit there has order 3 / 7.
+* `F₉ˣ` is cyclic of order 8: there *is* a unit of order 8. An element `α` with `α² = -1`
+  (the `F₃[α]/(α²+1)` generator used by the study's scripts) has order **4**, not 8; so the
+  scripts' `spin_order = 4` for `F₉` is right, while the iteration-5 report text claiming
+  "`F₉`: order 8 (the richest spin)" refers to the full group, which `α` does not generate.
+-/
+
+namespace GLMKit
+
+/-- `F₂`: multiplication by 2 is deletion. -/
+theorem f2_two_eq_zero : (2 : ZMod 2) = 0 := by decide
+
+/-- `F₃`: multiplication by 2 is negation, a unit of order 2 ("spin"). -/
+theorem f3_two_eq_neg_one : (2 : ZMod 3) = -1 := by decide
+
+theorem f3_orderOf_two : orderOf (2 : ZMod 3) = 2 := by
+  haveI : Fact (Nat.Prime 2) := ⟨Nat.prime_two⟩
+  exact orderOf_eq_prime (by decide) (by decide)
+
+theorem f5_orderOf_two : orderOf (2 : ZMod 5) = 4 :=
+  (orderOf_eq_iff (by norm_num)).2 ⟨by decide, by decide⟩
+
+theorem f7_orderOf_two : orderOf (2 : ZMod 7) = 3 := by
+  haveI : Fact (Nat.Prime 3) := ⟨Nat.prime_three⟩
+  exact orderOf_eq_prime (by decide) (by decide)
+
+theorem f7_orderOf_three : orderOf (3 : ZMod 7) = 6 :=
+  (orderOf_eq_iff (by norm_num)).2 ⟨by decide, by decide⟩
+
+/-- `ℤ/6` has zero divisors: `2 · 3 = 0`. -/
+theorem zmod6_zero_divisors : (2 : ZMod 6) * 3 = 0 ∧ (2 : ZMod 6) ≠ 0 ∧ (3 : ZMod 6) ≠ 0 := by
+  decide
+
+theorem zmod6_not_isDomain : ¬ IsDomain (ZMod 6) := by
+  intro h
+  have := zmod6_zero_divisors
+  exact mul_ne_zero this.2.1 this.2.2 this.1
+
+/-- **There is no field with 6 elements.** -/
+theorem no_field_of_card_six (K : Type*) [Field K] [Fintype K] : Fintype.card K ≠ 6 := by
+  obtain ⟨p, -, k, hp, hcard⟩ := FiniteField.card' K
+  rw [hcard]
+  intro h6
+  have hdvd : p ∣ 6 := by
+    rw [← h6]; exact dvd_pow_self p (PNat.ne_zero k)
+  have hp6 : p ≤ 6 := Nat.le_of_dvd (by norm_num) hdvd
+  have hk : (k : ℕ) ≤ 6 := by
+    have : (k : ℕ) < p ^ (k : ℕ) := Nat.lt_pow_self hp.one_lt
+    omega
+  interval_cases p <;> norm_num at hp <;> interval_cases (k : ℕ) <;> simp_all
+
+/-- In any characteristic-2 ring (`F₂`, `F₄`, `F₈`, …) multiplication by 2 is the zero map. -/
+theorem char_two_puncture (K : Type*) [Ring K] [CharP K 2] (x : K) : 2 * x = 0 := by
+  rw [show (2 : K) = ((2 : ℕ) : K) by norm_num, CharP.cast_eq_zero, zero_mul]
+
+/-- An element with `α² = -1` in a ring where `2 ≠ 0` has multiplicative order exactly 4. -/
+theorem orderOf_eq_four_of_sq_eq_neg_one {K : Type*} [Ring K] [NoZeroDivisors K]
+    (h2 : (2 : K) ≠ 0) {a : K} (ha : a ^ 2 = -1) : orderOf a = 4 := by
+  have hneg : (-1 : K) ≠ 1 := by
+    intro h
+    apply h2
+    calc (2 : K) = 1 - (-1) := ((sub_neg_eq_add 1 1).trans one_add_one_eq_two).symm
+      _ = 1 - 1 := by rw [h]
+      _ = 0 := sub_self 1
+  rw [orderOf_eq_iff (by norm_num)]
+  refine ⟨by rw [show 4 = 2 * 2 by rfl, pow_mul, ha]; norm_num, ?_⟩
+  intro m hm hm0
+  interval_cases m
+  · intro h1
+    rw [pow_one] at h1
+    rw [h1] at ha
+    simp at ha
+    exact hneg ha.symm
+  · rw [ha]; exact hneg
+  · intro h3
+    have : a ^ 4 = a := by
+      rw [show 4 = 3 + 1 by rfl, pow_succ, h3, one_mul]
+    rw [show 4 = 2 * 2 by rfl, pow_mul, ha] at this
+    have ha1 : a = 1 := by rw [← this]; norm_num
+    rw [ha1] at ha
+    simp at ha
+    exact hneg ha.symm
+
+/-- The concrete `F₉ = F₃[α]/(α²+1)` generator `α` has order 4 (not 8). -/
+theorem f9_alpha_order_four (K : Type*) [Field K] [CharP K 3] {a : K} (ha : a ^ 2 = -1) :
+    orderOf a = 4 := by
+  refine orderOf_eq_four_of_sq_eq_neg_one ?_ ha
+  intro h
+  have : ((2 : ℕ) : K) = 0 := by exact_mod_cast h
+  rw [CharP.cast_eq_zero_iff K 3] at this
+  norm_num at this
+
+theorem galoisField_card (p : ℕ) [Fact p.Prime] (k : ℕ) (hk : k ≠ 0) :
+    Nat.card (GaloisField p k)ˣ = p ^ k - 1 := by
+  rw [Nat.card_units, GaloisField.card p k hk]
+
+/-- `F₉ˣ` is cyclic of order 8: there is a unit of order 8 (a full "spin" generator). -/
+theorem f9_units_cyclic_order_eight :
+    Nat.card (GaloisField 3 2)ˣ = 8 ∧ ∃ g : (GaloisField 3 2)ˣ, orderOf g = 8 := by
+  haveI : Fact (Nat.Prime 3) := ⟨Nat.prime_three⟩
+  have hcard : Nat.card (GaloisField 3 2)ˣ = 8 := by
+    rw [galoisField_card 3 2 (by norm_num)]; norm_num
+  refine ⟨hcard, ?_⟩
+  obtain ⟨g, hg⟩ := IsCyclic.exists_generator (α := (GaloisField 3 2)ˣ)
+  exact ⟨g, by rw [orderOf_eq_card_of_forall_mem_zpowers hg, hcard]⟩
+
+/-- `F₄ˣ` has order 3: every non-identity unit of `F₄` has order 3. -/
+theorem f4_units_order_three (g : (GaloisField 2 2)ˣ) (hg : g ≠ 1) : orderOf g = 3 := by
+  haveI : Fact (Nat.Prime 2) := ⟨Nat.prime_two⟩
+  haveI : Fact (Nat.Prime 3) := ⟨Nat.prime_three⟩
+  have hcard : Nat.card (GaloisField 2 2)ˣ = 3 := by
+    rw [galoisField_card 2 2 (by norm_num)]; norm_num
+  refine orderOf_eq_prime ?_ hg
+  rw [← hcard]; exact pow_card_eq_one'
+
+/-- `F₈ˣ` has order 7: every non-identity unit of `F₈` has order 7. -/
+theorem f8_units_order_seven (g : (GaloisField 2 3)ˣ) (hg : g ≠ 1) : orderOf g = 7 := by
+  haveI : Fact (Nat.Prime 2) := ⟨Nat.prime_two⟩
+  haveI : Fact (Nat.Prime 7) := ⟨by norm_num⟩
+  have hcard : Nat.card (GaloisField 2 3)ˣ = 7 := by
+    rw [galoisField_card 2 3 (by norm_num)]; norm_num
+  refine orderOf_eq_prime ?_ hg
+  rw [← hcard]; exact pow_card_eq_one'
+
+end GLMKit
+
+
+====
+
+Golay.lean
+
+
+import Mathlib
+
+/-!
+# The binary Golay code `G₂₄` (substrate layers F₂ → Hamming → G₂₃ → G₂₄)
+
+Words of length 24 are stored as natural-number bitmasks (bit `i` = coordinate `i`).
+`G₂₃` is the cyclic code generated by `g(x) = x¹¹+x¹⁰+x⁶+x⁵+x⁴+x²+1` (`0xC75`), and
+`G₂₄` is obtained by appending an overall parity bit (coordinate 23).
+
+All facts in this file are finite checks, evaluated by `native_decide`.
+They re-verify (independently of the GLM substrate code) the Note-4 audit claims:
+4096 codewords, weight enumerator `1 + 759 y⁸ + 2576 y¹² + 759 y¹⁶ + y²⁴`, doubly even,
+self-orthogonal, minimum distance 8, perfect sphere packing of `G₂₃`,
+759 octads forming a Steiner system `S(5,8,24)`.
+-/
+
+
+
+namespace GLMKit
+
+/-- Number of 1-bits among the 24 coordinates of a word. -/
+def popcount24 (w : Nat) : Nat := (List.range 24).countP (fun i => w.testBit i)
+
+/-- Generator polynomial of the cyclic Golay code `G₂₃`. -/
+def golayGenPoly : Nat := 0xC75
+
+/-- Append the overall parity bit (coordinate 23) to a word supported on bits `0..22`. -/
+def extendParity (w : Nat) : Nat := w ||| ((popcount24 w % 2) <<< 23)
+
+/-- The 12 generator rows of `G₂₄`. -/
+def golayRows : List Nat := (List.range 12).map fun i => extendParity (golayGenPoly <<< i)
+
+/-- All `F₂`-linear combinations of a list of rows. -/
+def xorSpan (rows : List Nat) : List Nat :=
+  rows.foldl (fun acc r => acc ++ acc.map (· ^^^ r)) [0]
+
+/-- The extended binary Golay code `G₂₄`, as a list of 24-bit masks. -/
+def golayCode : List Nat := xorSpan golayRows
+
+/-- The all-ones word of length 24. -/
+def allOnes24 : Nat := 2 ^ 24 - 1
+
+/-- Octads = weight-8 codewords. -/
+def octads : List Nat := golayCode.filter (fun c => popcount24 c == 8)
+
+/-- `G₂₄` has exactly `2¹² = 4096` codewords, all distinct and all 24-bit. -/
+theorem golayCode_length : golayCode.length = 4096 := by native_decide
+
+theorem golayCode_nodup : golayCode.Nodup := by native_decide
+
+theorem golayCode_lt : ∀ c ∈ golayCode, c < 2 ^ 24 := by native_decide
+
+/-- Weight enumerator of `G₂₄`: `1 + 759 y⁸ + 2576 y¹² + 759 y¹⁶ + y²⁴`. -/
+theorem golay_weight_enumerator :
+    (List.range 25).map (fun k => golayCode.countP (fun c => popcount24 c == k)) =
+      [1, 0, 0, 0, 0, 0, 0, 0, 759, 0, 0, 0, 2576, 0, 0, 0, 759, 0, 0, 0, 0, 0, 0, 0, 1] := by
+  native_decide
+
+/-- `G₂₄` is doubly even: every codeword weight is divisible by 4. -/
+theorem golay_doubly_even : ∀ c ∈ golayCode, popcount24 c % 4 = 0 := by native_decide
+
+/-- `G₂₄` is self-orthogonal (any two codewords overlap in an even number of places). -/
+theorem golay_self_orthogonal :
+    ∀ a ∈ golayCode, ∀ b ∈ golayCode, popcount24 (a &&& b) % 2 = 0 := by native_decide
+
+/-- `G₂₄` is closed under adding any generator row (together with `0 ∈ G₂₄` this is the
+inductive step showing the list is an `F₂`-linear space). -/
+theorem golay_closed_under_rows : ∀ a ∈ golayCode, ∀ r ∈ golayRows, a ^^^ r ∈ golayCode := by
+  native_decide
+
+private lemma foldl_span_preserves (P : Nat → Prop) (L : List Nat)
+    (hP : ∀ b r, r ∈ L → P b → P (b ^^^ r)) :
+    ∀ (rs acc : List Nat), (∀ r ∈ rs, r ∈ L) → (∀ x ∈ acc, P x) →
+      ∀ x ∈ rs.foldl (fun acc r => acc ++ acc.map (· ^^^ r)) acc, P x := by
+  intro rs
+  induction rs with
+  | nil => intro acc _ hacc x hx; exact hacc x hx
+  | cons r rs ih =>
+    intro acc hrs hacc
+    apply ih
+    · intro r' hr'; exact hrs r' (List.mem_cons_of_mem _ hr')
+    · intro x hx
+      rcases List.mem_append.1 hx with hx | hx
+      · exact hacc x hx
+      · obtain ⟨y, hy, rfl⟩ := List.mem_map.1 hx
+        exact hP y r (hrs r List.mem_cons_self) (hacc y hy)
+
+/-- `G₂₄` is closed under XOR: it is an `F₂`-linear code. -/
+theorem golay_xor_closed : ∀ a ∈ golayCode, ∀ b ∈ golayCode, a ^^^ b ∈ golayCode := by
+  intro a ha b hb
+  revert a
+  refine foldl_span_preserves (fun b => ∀ a ∈ golayCode, a ^^^ b ∈ golayCode) golayRows
+    ?_ golayRows [0] (fun r hr => hr) ?_ b hb
+  · intro b r hr hb a ha
+    rw [← Nat.xor_assoc]
+    exact golay_closed_under_rows _ (hb a ha) r hr
+  · intro x hx a ha
+    simp only [List.mem_singleton] at hx
+    subst hx
+    simpa using ha
+
+/-- Minimum distance 8: distinct codewords differ in at least 8 coordinates. -/
+theorem golay_min_distance :
+    ∀ a ∈ golayCode, ∀ b ∈ golayCode, a ≠ b → 8 ≤ popcount24 (a ^^^ b) := by native_decide
+
+/-- The all-ones word is a Golay codeword (this is why the Golay-coset solver of
+Experiment A decodes the toggle displacement to `0` and scores 0%). -/
+theorem allOnes_mem_golay : allOnes24 ∈ golayCode := by native_decide
+
+theorem zero_mem_golay : 0 ∈ golayCode := by native_decide
+
+/-- There are 759 octads. -/
+theorem octads_length : octads.length = 759 := by native_decide
+
+/-- Perfect-code (sphere-packing) identity for `G₂₃ = [23,12,7]`:
+`2¹² · (C(23,0)+C(23,1)+C(23,2)+C(23,3)) = 2²³`. -/
+theorem golay23_sphere_packing :
+    2 ^ 12 * (Nat.choose 23 0 + Nat.choose 23 1 + Nat.choose 23 2 + Nat.choose 23 3) = 2 ^ 23 := by
+  decide
+
+/-- Any two distinct octads meet in at most 4 points. -/
+theorem octads_pairwise_meet_le_four :
+    ∀ a ∈ octads, ∀ b ∈ octads, a ≠ b → popcount24 (a &&& b) ≤ 4 := by native_decide
+
+/-- All 5-element subsets of the 24 coordinates, as bitmasks. -/
+def fiveSets : List Nat :=
+  ((List.range 24).sublistsLen 5).map fun l => l.foldl (fun acc i => acc ||| (1 <<< i)) 0
+
+theorem fiveSets_length : fiveSets.length = 42504 := by native_decide
+
+/-- Steiner system `S(5,8,24)`: every 5-subset of the 24 points lies in exactly one octad. -/
+theorem steiner_5_8_24 :
+    ∀ s ∈ fiveSets, octads.countP (fun o => o &&& s == s) = 1 := by native_decide
+
+end GLMKit
+
+
+====
+
+Lattices.lean
+
+import GLMKit.Leech
+
+/-!
+# Higher lattice layers: `Λ₃₂` (Construction D), `Λ₄₈`/`Λ₉₆` (Construction A over `F₃`)
+
+What iterations 4, 6, 7, 8 and 9 measured, and why the numbers came out as they did.
+
+* `bw_four_mul_mem` : `4ℤⁿ ⊆ 4ℤⁿ + 2·C₂ + C₁` — iteration 4's `Λ₃₂` "room" success is the
+  inclusion of `4ℤⁿ`; the padding bits play no role.
+* `constrA_p_mul_mem` : `pℤⁿ ⊆` any Construction-A lattice — iteration 4/6's `Λ₄₈`, `Λ₉₆`
+  "spin" success is the inclusion of `3ℤⁿ` (3 ≡ 0 in `F₃`, i.e. *deletion*, not a unit).
+* `constrA_spin_artifact` : every coordinate permutation and every integer rescaling of a
+  `3×`-embedded target stays in the lattice, so the "3-spin" (iter 6) and "8-spin" (iter 7)
+  superposition counts are just the number of operations tried, independent of the target.
+* `constrA_analogy_mem`, `snap_analogy_noop` : for a linear code, `D* = C + (B − A)` of three
+  lattice points is already a lattice point, so **every** snap that fixes lattice points
+  (trivial or the iteration-9 syndrome-coset decoder) returns `D*` unchanged (DI7, explained
+  in full generality — it is not specific to the trivial embedding).
+
+Compare `GLMKit.eight_mul_mem`: the same trivial-scaling phenomenon already happens inside
+`Λ₂₄` with the factor 8.
+-/
+
+namespace GLMKit
+
+variable {n : ℕ}
+
+/-- Construction-D style lattice `4ℤⁿ + 2·C₂ + C₁` for binary codes `C₁ ⊆ C₂`
+(the `Λ₃₂` Barnes–Wall form used in iteration 4, with `C₁ = RM(1,5)`, `C₂ = RM(3,5)`). -/
+def ConstrD (C₁ C₂ : Set (Fin n → Bool)) (x : Fin n → ℤ) : Prop :=
+  ∃ (a : Fin n → ℤ) (c₂ c₁ : Fin n → Bool), c₂ ∈ C₂ ∧ c₁ ∈ C₁ ∧
+    ∀ i, x i = 4 * a i + 2 * bitZ (c₂ i) + bitZ (c₁ i)
+
+/-- `4ℤⁿ` lies in the Construction-D lattice, for any codes containing `0`. -/
+theorem bw_four_mul_mem (C₁ C₂ : Set (Fin n → Bool)) (h₁ : (fun _ => false) ∈ C₁)
+    (h₂ : (fun _ => false) ∈ C₂) (v : Fin n → ℤ) : ConstrD C₁ C₂ (fun i => 4 * v i) :=
+  ⟨v, _, _, h₂, h₁, fun i => by simp [bitZ]⟩
+
+/-- Construction A over `ZMod p`: `x ∈ ℤⁿ` with `x mod p ∈ C` (iteration 4's `Λ₄₈` over the
+Pless code, iteration 6's `Λ₉₆` over `C ⊕ C`). -/
+def ConstrA (p : ℕ) (C : Set (Fin n → ZMod p)) (x : Fin n → ℤ) : Prop :=
+  (fun i => (x i : ZMod p)) ∈ C
+
+/-- `pℤⁿ` lies in every Construction-A lattice whose code contains `0`. -/
+theorem constrA_p_mul_mem (p : ℕ) (C : Set (Fin n → ZMod p)) (h0 : 0 ∈ C) (v : Fin n → ℤ) :
+    ConstrA p C (fun i => p * v i) := by
+  unfold ConstrA
+  convert h0 using 1
+  funext i
+  simp
+
+/-- The `3×`-embedding of a binary word (as in `snap_ternary_48`) is always in `Λ₄₈`. -/
+theorem constrA_three_mul_binary (C : Set (Fin n → ZMod 3)) (h0 : 0 ∈ C) (b : Fin n → Bool) :
+    ConstrA 3 C (fun i => 3 * bitZ (b i)) := by
+  exact_mod_cast constrA_p_mul_mem 3 C h0 (fun i => bitZ (b i))
+
+/-- **Spin-count artifact.** Every permutation of coordinates composed with every integer
+rescaling maps a `p×`-embedded target back into the lattice. -/
+theorem constrA_spin_artifact (p : ℕ) (C : Set (Fin n → ZMod p)) (h0 : 0 ∈ C)
+    (v : Fin n → ℤ) (σ : Equiv.Perm (Fin n)) (k : ℤ) :
+    ConstrA p C (fun i => k * (p * v (σ i))) := by
+  unfold ConstrA
+  convert h0 using 1
+  funext i
+  simp
+
+/-- For a linear code, Construction A is closed under `D* = C + (B − A)`. -/
+theorem constrA_analogy_mem (p : ℕ) (C : AddSubgroup (Fin n → ZMod p)) {a b c : Fin n → ℤ}
+    (ha : ConstrA p C a) (hb : ConstrA p C b) (hc : ConstrA p C c) :
+    ConstrA p C (fun i => c i + (b i - a i)) := by
+  unfold ConstrA at *
+  have := C.add_mem hc (C.sub_mem hb ha)
+  convert this using 1
+  funext i
+  simp
+
+/-- **DI7 in general.** Any snap that fixes lattice points returns `D* = C + (B − A)`
+unchanged when `A, B, C` are lattice points: the snap step of the lattice analogy is a no-op. -/
+theorem snap_analogy_noop (p : ℕ) (C : AddSubgroup (Fin n → ZMod p))
+    (snap : (Fin n → ℤ) → (Fin n → ℤ)) (hsnap : ∀ x, ConstrA p C x → snap x = x)
+    {a b c : Fin n → ℤ} (ha : ConstrA p C a) (hb : ConstrA p C b) (hc : ConstrA p C c) :
+    snap (fun i => c i + (b i - a i)) = fun i => c i + (b i - a i) :=
+  hsnap _ (constrA_analogy_mem p C ha hb hc)
+
+end GLMKit
+
+
+====
+
+Leech.lean
+
+
+import GLMKit.Golay
+
+/-!
+# The Leech lattice layer: the parity wall, its real cause, and junction classes
+
+We use the standard integer model of the Leech lattice (Conway–Sloane, *SPLAG* ch. 4 §11,
+coordinates scaled by `√8`): `x ∈ ℤ²⁴` lies in `Λ₂₄` iff for some `m ∈ {0,1}`
+
+* every `xᵢ ≡ m (mod 2)`,
+* the set `{i | xᵢ ≡ 2 + m (mod 4)}` is a Golay codeword, and
+* `∑ xᵢ ≡ 4m (mod 8)`.
+
+This is the membership test used by the iteration-3/4 snaps. We state everything for an
+*arbitrary* binary code `C` of any length `n` (only `0 ∈ C` is ever needed), so the results
+apply verbatim to the GLM substrate's own (MOG-ordered) Golay code, whatever its coordinate
+order; the concrete Golay instance from `GLMKit.Golay` is plugged in at the end.
+
+Main results
+* `parity_wall`        : `4·b ∈ Λ  ↔  wt(b)` is even (iteration 3's wall, confirmed).
+* `parity_wall_glue`   : the odd-coset candidate `4·b + (-3,1²³)` obeys the same rule.
+* `eight_mul_mem`      : `8·v ∈ Λ` for **every** integer vector `v`. So the wall is an artifact of
+                         the `4×` embedding, not a limit of `Λ₂₄`: the `8×` embedding never hits it.
+* `junction_iff`       : `4b ≡ 4b' (mod 2Λ)  ↔  b ⊕ b' ∈ C ∧ wt b ≡ wt b' (mod 4)`.
+* `junction_same_parity` : carriers in the same junction always have the same parity
+                         (iteration 8's 100 % same-parity observation, now a theorem).
+-/
+
+
+
+namespace GLMKit
+
+open Finset
+
+variable {n : ℕ}
+
+/-- Hamming weight (popcount) of a binary vector. -/
+def wt (b : Fin n → Bool) : ℕ := (univ.filter fun i => b i = true).card
+
+/-- Integer value `0/1` of a bit. -/
+def bitZ (x : Bool) : ℤ := if x then 1 else 0
+
+/-- Leech-type lattice built from a binary code `C` (Construction of SPLAG ch. 4 §11).
+For `n = 24` and `C = G₂₄` this is the Leech lattice `Λ₂₄` (scaled by `√8`). -/
+def LeechMem (C : Set (Fin n → Bool)) (x : Fin n → ℤ) : Prop :=
+  ((∀ i, x i % 2 = 0) ∧ (fun i => decide (x i % 4 = 2)) ∈ C ∧ (∑ i, x i) % 8 = 0) ∨
+  ((∀ i, x i % 2 = 1) ∧ (fun i => decide (x i % 4 = 3)) ∈ C ∧ (∑ i, x i) % 8 = 4)
+
+/-- Two integer vectors lie in the same class of `ℤⁿ / 2Λ` (the substrate's `class_of`). -/
+def SameClass (C : Set (Fin n → Bool)) (x y : Fin n → ℤ) : Prop :=
+  ∃ z, LeechMem C z ∧ ∀ i, x i - y i = 2 * z i
+
+lemma bitZ_cases (x : Bool) : bitZ x = 0 ∨ bitZ x = 1 := by
+  cases x <;> simp [bitZ]
+
+lemma sum_bitZ (b : Fin n → Bool) : ∑ i, bitZ (b i) = (wt b : ℤ) := by
+  simp [bitZ, wt, Finset.sum_boole]
+
+lemma exists_true_of_wt_pos (b : Fin n → Bool) (h : 0 < wt b) : ∃ i, b i = true := by
+  obtain ⟨i, hi⟩ := Finset.card_pos.1 h
+  exact ⟨i, (Finset.mem_filter.1 hi).2⟩
+
+/-- **Parity wall (iteration 3).** The `4×` embedding of a binary word `b` is a lattice point
+iff `b` has even weight. Holds for any code containing `0`. -/
+theorem parity_wall (C : Set (Fin n → Bool)) (h0 : (fun _ => false) ∈ C) (b : Fin n → Bool) :
+    LeechMem C (fun i => 4 * bitZ (b i)) ↔ Even (wt b) := by
+  have hsum : ∑ i, 4 * bitZ (b i) = 4 * (wt b : ℤ) := by rw [← Finset.mul_sum, sum_bitZ]
+  have hset : (fun i => decide (4 * bitZ (b i) % 4 = 2)) = fun _ => false := by
+    funext i; cases b i <;> simp [bitZ]
+  rw [Nat.even_iff]
+  unfold LeechMem
+  rw [hsum, hset]
+  constructor
+  · rintro (⟨-, -, h⟩ | ⟨h1, -, h⟩)
+    · omega
+    · exfalso
+      have hpos : 0 < wt b := by omega
+      obtain ⟨i, hi⟩ := exists_true_of_wt_pos b hpos
+      have := h1 i
+      simp [hi, bitZ] at this
+  · intro h
+    refine Or.inl ⟨fun i => ?_, h0, by omega⟩
+    rcases bitZ_cases (b i) with h' | h' <;> simp only [h'] <;> omega
+
+/-- The canonical odd-coset glue vector `(-3, 1, …, 1)` of length 24. -/
+def glue24 (i : Fin 24) : ℤ := if i = 0 then -3 else 1
+
+lemma sum_glue24 : ∑ i, glue24 i = 20 := by
+  simp [glue24, Finset.sum_ite, Finset.filter_eq', Finset.filter_ne']
+
+/-- **Parity wall, odd coset.** `4·b + (-3,1²³)` is a lattice point iff `wt b` is even.
+So the odd-coset candidate of iteration 3 never rescues an odd-weight target. -/
+theorem parity_wall_glue (C : Set (Fin 24 → Bool)) (h0 : (fun _ => false) ∈ C)
+    (b : Fin 24 → Bool) :
+    LeechMem C (fun i => 4 * bitZ (b i) + glue24 i) ↔ Even (wt b) := by
+  have hsum : ∑ i, (4 * bitZ (b i) + glue24 i) = 4 * (wt b : ℤ) + 20 := by
+    rw [Finset.sum_add_distrib, ← Finset.mul_sum, sum_bitZ, sum_glue24]
+  have hset : (fun i => decide ((4 * bitZ (b i) + glue24 i) % 4 = 3)) = fun _ => false := by
+    funext i; unfold glue24; split_ifs <;> cases b i <;> simp [bitZ]
+  rw [Nat.even_iff]
+  unfold LeechMem
+  rw [hsum, hset]
+  constructor
+  · rintro (⟨h1, -, -⟩ | ⟨-, -, h⟩)
+    · exfalso
+      have := h1 0
+      cases h : b 0 <;> simp [h, bitZ, glue24] at this
+    · omega
+  · intro h
+    refine Or.inr ⟨fun i => ?_, h0, by omega⟩
+    show (4 * bitZ (b i) + glue24 i) % 2 = 1
+    unfold glue24
+    rcases bitZ_cases (b i) with h' | h' <;> rw [h'] <;> split_ifs <;> omega
+
+/-- **The wall is an embedding artifact.** Every vector of `8ℤⁿ` is a lattice point, so the
+`8×` embedding `b ↦ 8·b` places *every* binary target (odd or even) inside `Λ₂₄`, without any
+escalation to `Λ₃₂`/`Λ₄₈`. -/
+theorem eight_mul_mem (C : Set (Fin n → Bool)) (h0 : (fun _ => false) ∈ C) (v : Fin n → ℤ) :
+    LeechMem C (fun i => 8 * v i) := by
+  have hset : (fun i => decide (8 * v i % 4 = 2)) = fun _ => false := by
+    funext i; simp only [decide_eq_false_iff_not]; omega
+  refine Or.inl ⟨fun i => by beta_reduce; omega, by rw [hset]; exact h0, ?_⟩
+  rw [← Finset.mul_sum]; omega
+
+/-- Binary-target corollary of `eight_mul_mem`. -/
+theorem eight_mul_binary_mem (C : Set (Fin n → Bool)) (h0 : (fun _ => false) ∈ C)
+    (b : Fin n → Bool) : LeechMem C (fun i => 8 * bitZ (b i)) :=
+  eight_mul_mem C h0 _
+
+/-- **Junction classes (iteration 8).** Two `4×`-embedded binary words lie in the same
+`Λ/2Λ` class iff they differ by a codeword and their weights agree mod 4. -/
+theorem junction_iff (C : Set (Fin n → Bool)) (b b' : Fin n → Bool) :
+    SameClass C (fun i => 4 * bitZ (b i)) (fun i => 4 * bitZ (b' i)) ↔
+      (fun i => b i != b' i) ∈ C ∧ wt b % 4 = wt b' % 4 := by
+  have hsum : ∑ i, 2 * (bitZ (b i) - bitZ (b' i)) = 2 * ((wt b : ℤ) - wt b') := by
+    rw [← Finset.mul_sum, Finset.sum_sub_distrib, sum_bitZ, sum_bitZ]
+  have hset : (fun i => decide (2 * (bitZ (b i) - bitZ (b' i)) % 4 = 2)) =
+      fun i => b i != b' i := by
+    funext i; cases b i <;> cases b' i <;> simp [bitZ]
+  constructor
+  · rintro ⟨z, hz, hdiff⟩
+    have hz' : z = fun i => 2 * (bitZ (b i) - bitZ (b' i)) := by
+      funext i; have := hdiff i; simp only at this; omega
+    subst hz'
+    unfold LeechMem at hz
+    rw [hsum, hset] at hz
+    rcases hz with ⟨-, hC, h⟩ | ⟨h1, -, h⟩
+    · exact ⟨hC, by omega⟩
+    · exfalso
+      rcases isEmpty_or_nonempty (Fin n) with hn | ⟨⟨i⟩⟩
+      · have hb : wt b = 0 := by simp [wt]
+        have hb' : wt b' = 0 := by simp [wt]
+        rw [hb, hb'] at h; omega
+      · have := h1 i; beta_reduce at this; omega
+  · rintro ⟨hC, hw⟩
+    refine ⟨fun i => 2 * (bitZ (b i) - bitZ (b' i)), ?_, fun i => by ring⟩
+    unfold LeechMem
+    rw [hsum, hset]
+    exact Or.inl ⟨fun i => by beta_reduce; omega, hC, by omega⟩
+
+/-- Carriers in the same junction (same `Λ/2Λ` class) always have the same parity. -/
+theorem junction_same_parity (C : Set (Fin n → Bool)) (b b' : Fin n → Bool)
+    (h : SameClass C (fun i => 4 * bitZ (b i)) (fun i => 4 * bitZ (b' i))) :
+    wt b % 2 = wt b' % 2 := by
+  have := ((junction_iff C b b').1 h).2
+  omega
+
+/-! ### The concrete Leech lattice `Λ₂₄` over the verified Golay code -/
+
+/-- Bitmask of a binary vector of length 24 (coordinate `i` ↦ bit `i`). -/
+def toMask (v : Fin 24 → Bool) : ℕ := ∑ i, if v i then 2 ^ (i : ℕ) else 0
+
+/-- The extended Golay code `G₂₄` as a set of binary vectors. -/
+def golaySet : Set (Fin 24 → Bool) := {v | toMask v ∈ golayCode}
+
+instance : DecidablePred (· ∈ golaySet) := fun v =>
+  inferInstanceAs (Decidable (toMask v ∈ golayCode))
+
+/-- The Leech lattice `Λ₂₄` (integer model, scaled by `√8`). -/
+abbrev Leech24 (x : Fin 24 → ℤ) : Prop := LeechMem golaySet x
+
+instance : DecidablePred Leech24 := fun x => by
+  unfold Leech24 LeechMem; infer_instance
+
+theorem zero_mem_golaySet : (fun _ => false) ∈ golaySet := by
+  show toMask _ ∈ golayCode
+  simp [toMask, zero_mem_golay]
+
+/-- Parity wall for the actual Leech lattice. -/
+theorem leech24_parity_wall (b : Fin 24 → Bool) :
+    Leech24 (fun i => 4 * bitZ (b i)) ↔ Even (wt b) :=
+  parity_wall golaySet zero_mem_golaySet b
+
+/-- `8ℤ²⁴ ⊆ Λ₂₄`: the `8×` embedding of any binary grid lands in the Leech lattice. -/
+theorem leech24_eight_mul (v : Fin 24 → ℤ) : Leech24 (fun i => 8 * v i) :=
+  eight_mul_mem golaySet zero_mem_golaySet v
+
+/-- Sanity checks against the three shapes of minimal Leech vectors (norm 32),
+and a non-member. -/
+example : Leech24 glue24 := by native_decide
+example : Leech24 (fun i => if (i : ℕ) < 2 then 4 else 0) := by native_decide
+example : ¬ Leech24 (fun i => if (i : ℕ) = 0 then 4 else 0) := by native_decide
+
+/-! ### Arithmetic of the Leech / Conway layers -/
+
+/-- Minimal-vector count from the three shapes `(±2⁸0¹⁶)`, `(∓3,±1²³)`, `(±4²0²²)`
+(uses the 759 octads verified in `GLMKit.Golay`). -/
+theorem leech_min_vectors_count :
+    759 * 2 ^ 7 + 24 * 2 ^ 12 + Nat.choose 24 2 * 4 = 196560 := by decide
+
+/-- `Λ/2Λ` class census `1 + 98280 + 8386560 + 8292375 = 2²⁴`. -/
+theorem leech_class_census : 1 + 98280 + 8386560 + 8292375 = 2 ^ 24 := by norm_num
+
+/-- Sum of cubes of divisors. -/
+def sigma3 (k : ℕ) : ℤ := ∑ d ∈ k.divisors, (d : ℤ) ^ 3
+
+/-- Truncated product of power series (coefficient functions). -/
+def psMul (a b : ℕ → ℤ) (k : ℕ) : ℤ := ∑ i ∈ range (k + 1), a i * b (k - i)
+
+/-- Eisenstein series `E₄ = 1 + 240 ∑ σ₃(k) qᵏ`. -/
+def eisenstein4 (k : ℕ) : ℤ := if k = 0 then 1 else 240 * sigma3 k
+
+/-- `∏_{m=1}^{M} (1 - q^m)`, as a coefficient function. -/
+def etaPart : ℕ → ℕ → ℤ
+  | 0 => fun k => if k = 0 then 1 else 0
+  | m + 1 => psMul (etaPart m) (fun k => if k = 0 then 1 else if k = m + 1 then -1 else 0)
+
+/-- `Δ = q ∏ (1-qᵐ)²⁴`, correct for coefficients up to `q⁵`. -/
+def delta (k : ℕ) : ℤ :=
+  if k = 0 then 0 else ((List.replicate 24 (etaPart 5)).foldl psMul (fun k => if k = 0 then 1 else 0)) (k - 1)
+
+/-- **Leech theta series** `E₄³ − 720Δ = 1 + 0·q + 196560 q² + 16773120 q³ + 398034000 q⁴ + …`
+(here `qᵏ` counts vectors of norm `16k` in the `√8`-scaled model; no vectors of norm 16 =
+"no roots", 196560 minimal vectors). -/
+theorem leech_theta_coefficients :
+    (List.range 5).map (fun k => psMul eisenstein4 (psMul eisenstein4 eisenstein4) k - 720 * delta k)
+      = [1, 0, 196560, 16773120, 398034000] := by
+  native_decide
+
+end GLMKit
+
+
+====
+
+Permutation.lean
+
+import GLMKit.Leech
+
+/-!
+# Permutation operators (fix for DI1/DI3 "the combiner cannot express permutations")
+
+The substrate's `combiner.apply_op` acts coordinatewise, so it cannot express `reflect_v`
+(a permutation of cells). The kit adds `permute_op` (Python) whose Lean counterpart is
+precomposition with a permutation `σ` of the coordinates.
+
+* `wt_comp_perm`         : permutations preserve weight;
+* `leech_layer_perm`     : hence a permuted target sits on the same lattice layer
+                           (`4·b ∈ Λ₂₄` iff `4·(b ∘ σ) ∈ Λ₂₄`);
+* `wt_not`               : toggling all `n` bits sends weight `w` to `n − w`, so on 24-cell
+                           grids toggle also preserves parity (and the lattice layer).
+* `reflectV`             : the vertical-axis mirror of an `h × w` grid, as a permutation of
+                           cells; `reflectV_involutive` — applying it twice is the identity.
+-/
+
+namespace GLMKit
+
+variable {n : ℕ}
+
+theorem wt_comp_perm (b : Fin n → Bool) (σ : Equiv.Perm (Fin n)) : wt (b ∘ σ) = wt b := by
+  unfold wt
+  apply Finset.card_bij (fun i _ => σ i)
+  · intro i hi; simpa using hi
+  · intro i _ j _ h; exact σ.injective h
+  · intro j hj; exact ⟨σ.symm j, by simpa using hj, by simp⟩
+
+theorem leech_layer_perm (b : Fin 24 → Bool) (σ : Equiv.Perm (Fin 24)) :
+    Leech24 (fun i => 4 * bitZ ((b ∘ σ) i)) ↔ Leech24 (fun i => 4 * bitZ (b i)) := by
+  rw [leech24_parity_wall, leech24_parity_wall, wt_comp_perm]
+
+theorem wt_not (b : Fin n → Bool) : wt (fun i => !b i) = n - wt b := by
+  unfold wt
+  have h := Finset.card_filter_add_card_filter_not (s := Finset.univ) (fun i => b i = true)
+  simp only [Finset.card_univ, Fintype.card_fin] at h
+  have : (Finset.univ.filter fun i => (!b i) = true) = Finset.univ.filter fun i => ¬ b i = true := by
+    ext i; simp
+  rw [this]
+  omega
+
+/-- On 24-cell grids, toggle preserves the lattice layer. -/
+theorem leech_layer_toggle (b : Fin 24 → Bool) :
+    Leech24 (fun i => 4 * bitZ (!b i)) ↔ Leech24 (fun i => 4 * bitZ (b i)) := by
+  have h1 := leech24_parity_wall (fun i => !b i)
+  have h2 := leech24_parity_wall b
+  simp only at h1
+  rw [h1, h2, wt_not, Nat.even_sub (by
+    unfold wt; exact (Finset.card_filter_le _ _).trans (by simp))]
+  simp [show Even 24 by decide]
+
+/-- Mirror of an `h × w` grid across its vertical axis, as a permutation of cells. -/
+def reflectV (h w : ℕ) : Equiv.Perm (Fin h × Fin w) :=
+  Equiv.prodCongr (Equiv.refl _) Fin.revPerm
+
+theorem reflectV_involutive (h w : ℕ) (x : Fin h × Fin w) : reflectV h w (reflectV h w x) = x := by
+  obtain ⟨r, c⟩ := x
+  simp [reflectV, Fin.revPerm_apply]
+
+end GLMKit
+
+
+====
+
+Pless.lean
+
+import Mathlib
+
+/-!
+# The Pless symmetry code `C(23)` over `F₃` (the code under `Λ₄₈`; iteration 8, phase 4)
+
+`C(23)` is the ternary `[48,24]` code with generator matrix `[I₂₄ | S]`, where `S` is the
+bordered Jacobsthal (Paley) matrix of `q = 23`: indices `0 = ∞, 1..23 ↔ F₂₃`,
+`S ∞ ∞ = 0`, `S ∞ j = 1`, `S i ∞ = -1`, `S i j = χ(j − i)` with `χ` the quadratic character.
+
+Verified here (iteration 8's DI3/DI5 diagnosis):
+* `S · Sᵀ = −I` over `F₃` (since `23 ≡ −1 mod 3`), and `S` is skew-symmetric;
+* hence `[I | S]` generates a **self-dual** code (`I + S Sᵀ = 0`);
+* `S` is invertible, so `ker S = ker Sᵀ = 0`: the iteration-7 `α`-embedding condition
+  "target ∈ ker Sᵀ" is met only by the zero target.
+-/
+
+namespace GLMKit
+
+open Matrix
+
+/-- Quadratic character of `F₂₃`, with values in `F₃`. -/
+def qr23 (x : ZMod 23) : ZMod 3 :=
+  if x = 0 then 0 else if ∃ y : ZMod 23, y * y = x then 1 else -1
+
+/-- The bordered Jacobsthal matrix `S` of the Pless symmetry code `C(23)`. -/
+def plessS : Matrix (Fin 24) (Fin 24) (ZMod 3) :=
+  Matrix.of fun i j =>
+    if i = 0 then (if j = 0 then 0 else 1)
+    else if j = 0 then -1
+    else qr23 ((j : ℕ) - (i : ℕ) : ZMod 23)
+
+theorem plessS_mul_transpose : plessS * plessSᵀ = -1 := by native_decide
+
+theorem plessS_skew : plessSᵀ = -plessS := by native_decide
+
+/-- The rows of `[I | S]` are pairwise orthogonal and self-orthogonal: `I·Iᵀ + S·Sᵀ = 0`,
+so the Pless code `C(23)` (dimension 24, length 48) is self-dual. -/
+theorem pless_generator_self_orthogonal : (1 : Matrix (Fin 24) (Fin 24) (ZMod 3)) + plessS * plessSᵀ = 0 := by
+  rw [plessS_mul_transpose]; exact add_neg_cancel _
+
+theorem plessS_transpose_mul : plessSᵀ * plessS = -1 := by native_decide
+
+theorem plessS_isUnit_det : IsUnit plessS.det := by
+  have h : plessS * (-plessSᵀ) = 1 := by rw [Matrix.mul_neg, plessS_mul_transpose, neg_neg]
+  exact (Matrix.isUnit_det_of_right_inverse h)
+
+/-- `ker S = 0`. -/
+theorem plessS_ker_trivial (v : Fin 24 → ZMod 3) (h : plessS *ᵥ v = 0) : v = 0 := by
+  have : (plessSᵀ * plessS) *ᵥ v = 0 := by rw [← Matrix.mulVec_mulVec, h, Matrix.mulVec_zero]
+  rw [plessS_transpose_mul, Matrix.neg_mulVec, Matrix.one_mulVec, neg_eq_zero] at this
+  exact this
+
+/-- `ker Sᵀ = 0`: the only target admitting the iteration-7 `α`-embedding is `0`. -/
+theorem plessS_transpose_ker_trivial (v : Fin 24 → ZMod 3) (h : plessSᵀ *ᵥ v = 0) : v = 0 := by
+  have : (plessS * plessSᵀ) *ᵥ v = 0 := by rw [← Matrix.mulVec_mulVec, h, Matrix.mulVec_zero]
+  rw [plessS_mul_transpose, Matrix.neg_mulVec, Matrix.one_mulVec, neg_eq_zero] at this
+  exact this
+
+end GLMKit

@@ -1,0 +1,43 @@
+================================================================================================
+ITERATION 2 / PHASE 3 — Leech native 24-D wobble
+================================================================================================
+
+Matched-rule delta-sigma against the FULL Leech minimal-vector shell
+(196,560 vectors of shapes (±4², 0²²), (±2⁸ on octad), (∓3, ±1²³),
+each with norm² 32). This is the paper's Rule 2 (§8.4) against the whole shell.
+
+For each target, the running mean of emitted vectors should converge to the
+target iff the target is in the convex hull of the alphabet.
+
+[Constants baseline — 24-D targets in [-4, +4]]
+------------------------------------------------------------------------------------------------
+Constant            unique v    most share    max dev       acc_max       mean_d      
+------------------------------------------------------------------------------------------------
+0                   24          0.045         3.1800        636.00        16.000      
+1/3                 25          0.045         0.5083        101.67        4.624       
+sqrt2_minus_1       19          0.310         0.0063        5.67          4.505       
+pi_minus_3          24          0.045         2.0473        409.45        10.706      
+e_minus_2           24          0.045         0.9263        185.25        5.944       
+phi_minus_1         27          0.055         0.1293        26.19         3.989       
+------------------------------------------------------------------------------------------------
+
+[Task families — query grid as 24-D target, bipolar ±1 encoding]
+------------------------------------------------------------------------------------------------
+Task          unique v        most share    max dev       acc_max       mean_d      
+------------------------------------------------------------------------------------------------
+toggle          12.3±10.5    0.221         3.3895        677.90        15.668      
+translate       24.0±0.0    0.045         3.1900        638.00        16.000      
+reflect_v       14.6±10.4    0.175         3.4070        681.40        15.771      
+flood_fill      15.2±10.8    0.227         3.1115        622.30        15.587      
+bfs_shortest     2.0±0.0    0.500         3.0000        600.00        14.967      
+------------------------------------------------------------------------------------------------
+
+Interpretation:
+  * If acc_max stays bounded (< ~10) and max_dev shrinks with N, the target
+    IS reachable by the Leech shell alphabet -- the 1/N bound holds.
+  * If acc_max grows linearly with steps (≈ 200 after 200 steps), the target
+    is OUTSIDE the Leech 1104-shell hull. Escalation to the FULL Leech
+    196,560-shell or to the 32-D Barnes-Wall lattice is required.
+  * Compare to Phase 2: the Golay alphabet could not reach ANY task target
+    (all 100% hull-separates). If the Leech 1104-shell CAN reach them, this
+    is a concrete demonstration of the layered-perspective progression.
