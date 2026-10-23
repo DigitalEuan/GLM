@@ -1,0 +1,552 @@
+{
+ "golay": {
+  "conditions": {
+   "4+0": {
+    "budget": "5",
+    "certificate": {
+     "refused": 0,
+     "right": 600,
+     "wrong": 0
+    },
+    "dispersion": {
+     "refused": 0,
+     "right": 600,
+     "wrong": 0
+    },
+    "dispersion_triggered": 0,
+    "guarded": {
+     "refused": 0,
+     "right": 600,
+     "wrong": 0
+    }
+   },
+   "4+1": {
+    "budget": "5",
+    "certificate": {
+     "refused": 0,
+     "right": 600,
+     "wrong": 0
+    },
+    "dispersion": {
+     "refused": 0,
+     "right": 600,
+     "wrong": 0
+    },
+    "dispersion_triggered": 0,
+    "guarded": {
+     "refused": 0,
+     "right": 600,
+     "wrong": 0
+    }
+   },
+   "4+2": {
+    "budget": "5",
+    "certificate": {
+     "refused": 0,
+     "right": 600,
+     "wrong": 0
+    },
+    "dispersion": {
+     "refused": 0,
+     "right": 600,
+     "wrong": 0
+    },
+    "dispersion_triggered": 0,
+    "guarded": {
+     "refused": 0,
+     "right": 600,
+     "wrong": 0
+    }
+   },
+   "4+3": {
+    "budget": "5",
+    "certificate": {
+     "refused": 0,
+     "right": 600,
+     "wrong": 0
+    },
+    "dispersion": {
+     "refused": 0,
+     "right": 600,
+     "wrong": 0
+    },
+    "dispersion_triggered": 0,
+    "guarded": {
+     "refused": 0,
+     "right": 600,
+     "wrong": 0
+    }
+   },
+   "4+4": {
+    "budget": "5",
+    "certificate": {
+     "refused": 14,
+     "right": 586,
+     "wrong": 0
+    },
+    "dispersion": {
+     "refused": 14,
+     "right": 586,
+     "wrong": 0
+    },
+    "dispersion_triggered": 0,
+    "guarded": {
+     "refused": 14,
+     "right": 586,
+     "wrong": 0
+    }
+   },
+   "4+4+4": {
+    "budget": "8",
+    "certificate": {
+     "refused": 0,
+     "right": 600,
+     "wrong": 0
+    },
+    "dispersion": {
+     "refused": 0,
+     "right": 600,
+     "wrong": 0
+    },
+    "dispersion_triggered": 0,
+    "guarded": {
+     "refused": 0,
+     "right": 600,
+     "wrong": 0
+    }
+   },
+   "4+4+6": {
+    "budget": "8",
+    "certificate": {
+     "refused": 6,
+     "right": 594,
+     "wrong": 0
+    },
+    "dispersion": {
+     "refused": 6,
+     "right": 594,
+     "wrong": 0
+    },
+    "dispersion_triggered": 0,
+    "guarded": {
+     "refused": 6,
+     "right": 594,
+     "wrong": 0
+    }
+   },
+   "4+5": {
+    "budget": "5",
+    "certificate": {
+     "refused": 102,
+     "right": 495,
+     "wrong": 3
+    },
+    "dispersion": {
+     "refused": 102,
+     "right": 495,
+     "wrong": 3
+    },
+    "dispersion_triggered": 0,
+    "guarded": {
+     "refused": 102,
+     "right": 495,
+     "wrong": 3
+    }
+   },
+   "4+6": {
+    "budget": "5",
+    "certificate": {
+     "refused": 265,
+     "right": 318,
+     "wrong": 17
+    },
+    "dispersion": {
+     "refused": 258,
+     "right": 318,
+     "wrong": 24
+    },
+    "dispersion_triggered": 0,
+    "guarded": {
+     "refused": 258,
+     "right": 318,
+     "wrong": 24
+    }
+   },
+   "decoy": {
+    "budget": "5",
+    "certificate": {
+     "refused": 563,
+     "right": 10,
+     "wrong": 27
+    },
+    "dispersion": {
+     "refused": 529,
+     "right": 10,
+     "wrong": 61
+    },
+    "dispersion_triggered": 0,
+    "guarded": {
+     "refused": 529,
+     "right": 10,
+     "wrong": 61
+    }
+   }
+  },
+  "decoy_census": {
+   "certificate_wrong": 27,
+   "honest_looking": 27
+  }
+ },
+ "identities": {
+  "checked": 200,
+  "decomposition": 200,
+  "null_iff_agree": 200
+ },
+ "marks": {
+  "E1": true,
+  "G1": true,
+  "G2": true,
+  "G3": true,
+  "G4": true,
+  "G5": false,
+  "G5b": true,
+  "G6": true,
+  "L": true,
+  "P1": true,
+  "P2": true,
+  "P3": true,
+  "P4": false,
+  "S1": true,
+  "S2": true
+ },
+ "met": 13,
+ "physics": {
+  "clean1": {
+   "absent": 152,
+   "first": {
+    "refused": 152,
+    "right": 148,
+    "wrong": 0
+   },
+   "guarded": {
+    "refused": 152,
+    "right": 148,
+    "wrong": 0
+   },
+   "lorentz": {
+    "refused": 99,
+    "right": 148,
+    "wrong": 53
+   },
+   "present": 148,
+   "vote": {
+    "refused": 152,
+    "right": 148,
+    "wrong": 0
+   }
+  },
+  "clean2": {
+   "absent": 134,
+   "first": {
+    "refused": 134,
+    "right": 166,
+    "wrong": 0
+   },
+   "guarded": {
+    "refused": 134,
+    "right": 166,
+    "wrong": 0
+   },
+   "lorentz": {
+    "refused": 76,
+    "right": 166,
+    "wrong": 58
+   },
+   "present": 166,
+   "vote": {
+    "refused": 134,
+    "right": 166,
+    "wrong": 0
+   }
+  },
+  "clean3": {
+   "absent": 154,
+   "first": {
+    "refused": 154,
+    "right": 146,
+    "wrong": 0
+   },
+   "guarded": {
+    "refused": 154,
+    "right": 146,
+    "wrong": 0
+   },
+   "lorentz": {
+    "refused": 77,
+    "right": 146,
+    "wrong": 77
+   },
+   "present": 146,
+   "vote": {
+    "refused": 154,
+    "right": 146,
+    "wrong": 0
+   }
+  },
+  "decoy2": {
+   "absent": 145,
+   "first": {
+    "refused": 133,
+    "right": 80,
+    "wrong": 87
+   },
+   "guarded": {
+    "refused": 300,
+    "right": 0,
+    "wrong": 0
+   },
+   "lorentz": {
+    "refused": 161,
+    "right": 2,
+    "wrong": 137
+   },
+   "present": 155,
+   "vote": {
+    "refused": 300,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "decoy3": {
+   "absent": 145,
+   "first": {
+    "refused": 149,
+    "right": 113,
+    "wrong": 38
+   },
+   "guarded": {
+    "refused": 300,
+    "right": 0,
+    "wrong": 0
+   },
+   "lorentz": {
+    "refused": 12,
+    "right": 73,
+    "wrong": 215
+   },
+   "present": 155,
+   "vote": {
+    "refused": 145,
+    "right": 155,
+    "wrong": 0
+   }
+  },
+  "relations": 8
+ },
+ "physics_names": {
+  "class_answers": 13,
+  "expected_in_class": 12,
+  "rows": [
+   {
+    "class_size": 4,
+    "expected": "force",
+    "expected_in_class": true,
+    "shipped": "drag_force",
+    "shipped_class_right": true,
+    "shipped_right": false,
+    "status": "class",
+    "task": "velocity : acceleration :: momentum : ?"
+   },
+   {
+    "class_size": 5,
+    "expected": "volume",
+    "expected_in_class": true,
+    "shipped": "litre",
+    "shipped_class_right": true,
+    "shipped_right": false,
+    "status": "class",
+    "task": "length : area :: area : ?"
+   },
+   {
+    "class_size": 6,
+    "expected": "area",
+    "expected_in_class": true,
+    "shipped": "body_surface_area",
+    "shipped_class_right": true,
+    "shipped_right": false,
+    "status": "class",
+    "task": "area : volume :: length : ?"
+   },
+   {
+    "class_size": 4,
+    "expected": "force",
+    "expected_in_class": true,
+    "shipped": "drag_force",
+    "shipped_class_right": true,
+    "shipped_right": false,
+    "status": "class",
+    "task": "velocity : momentum :: acceleration : ?"
+   },
+   {
+    "class_size": 4,
+    "expected": "force",
+    "expected_in_class": true,
+    "shipped": "drag_force",
+    "shipped_class_right": true,
+    "shipped_right": false,
+    "status": "class",
+    "task": "energy : power :: momentum : ?"
+   },
+   {
+    "class_size": 6,
+    "expected": "acceleration",
+    "expected_in_class": true,
+    "shipped": "acceleration",
+    "shipped_class_right": true,
+    "shipped_right": true,
+    "status": "class",
+    "task": "length : velocity :: velocity : ?"
+   },
+   {
+    "class_size": 3,
+    "expected": "momentum",
+    "expected_in_class": true,
+    "shipped": "four_momentum",
+    "shipped_class_right": true,
+    "shipped_right": false,
+    "status": "class",
+    "task": "power : energy :: force : ?"
+   },
+   {
+    "class_size": 7,
+    "expected": "surface_tension",
+    "expected_in_class": true,
+    "shipped": "adhesion_energy",
+    "shipped_class_right": true,
+    "shipped_right": false,
+    "status": "class",
+    "task": "force : pressure :: energy : ?"
+   },
+   {
+    "class_size": 1,
+    "expected": "charge_density",
+    "expected_in_class": true,
+    "shipped": "charge_density",
+    "shipped_class_right": true,
+    "shipped_right": true,
+    "status": "class",
+    "task": "mass : density :: charge : ?"
+   },
+   {
+    "class_size": 3,
+    "expected": "mass_flow",
+    "expected_in_class": true,
+    "shipped": "damping_coefficient",
+    "shipped_class_right": true,
+    "shipped_right": false,
+    "status": "class",
+    "task": "volume : volumetric_flow :: mass : ?"
+   },
+   {
+    "class_size": 2,
+    "expected": "entropy_production_rate",
+    "expected_in_class": true,
+    "shipped": "entropy_production_rate",
+    "shipped_class_right": true,
+    "shipped_right": true,
+    "status": "class",
+    "task": "energy : entropy :: power : ?"
+   },
+   {
+    "class_size": 8,
+    "expected": "angular_velocity",
+    "expected_in_class": true,
+    "shipped": "angular_frequency",
+    "shipped_class_right": true,
+    "shipped_right": false,
+    "status": "class",
+    "task": "acceleration : angular_acceleration :: velocity : ?"
+   },
+   {
+    "class_size": 1,
+    "expected": "frequency",
+    "expected_in_class": false,
+    "shipped": "chromatic_dispersion",
+    "shipped_class_right": false,
+    "shipped_right": false,
+    "status": "class",
+    "task": "length : wavenumber :: time : ?"
+   }
+  ],
+  "shipped_name_right": 3,
+  "shipped_name_wrong": 10
+ },
+ "semantic": {
+  "answers_k23": 5968,
+  "by_k": {
+   "1": {
+    "lorentz": {
+     "refused": 399,
+     "right": 172,
+     "wrong": 2572
+    },
+    "queries": 3143,
+    "vote": {
+     "refused": 399,
+     "right": 172,
+     "wrong": 2572
+    }
+   },
+   "2": {
+    "lorentz": {
+     "refused": 521,
+     "right": 191,
+     "wrong": 2634
+    },
+    "queries": 3346,
+    "vote": {
+     "refused": 2300,
+     "right": 91,
+     "wrong": 955
+    }
+   },
+   "3": {
+    "lorentz": {
+     "refused": 203,
+     "right": 207,
+     "wrong": 2936
+    },
+    "queries": 3346,
+    "vote": {
+     "refused": 2497,
+     "right": 94,
+     "wrong": 755
+    }
+   }
+  },
+  "median_dispersion": "145/96",
+  "precision_all": "199/2984",
+  "precision_low_dispersion_half": "125/1492",
+  "relations": 14
+ },
+ "settling": {
+  "asked": {
+   "refused": 0,
+   "right": 600,
+   "wrong": 0
+  },
+  "no_four_settle": 86,
+  "no_four_settle_every": 600,
+  "queries": 600,
+  "question_sizes": {
+   "5": 600
+  },
+  "random5": {
+   "refused": 209,
+   "right": 391,
+   "wrong": 0
+  }
+ },
+ "source_digest": "aadd150f3d52517d753394de6a2604332c3dcf7fdc86a275e7192de673b8bf7f",
+ "taken": 15
+}

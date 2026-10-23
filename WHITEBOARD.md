@@ -5,7 +5,7 @@
 **Question.** If this session stopped now, what would the next one need to
 know to carry the round on?
 
-**Verdict.** No round is in flight: Phase 175 (the owner's pipeline kit in the GLM: its bridge, its seven Lean files, and `tool induce`) is closed, in `MASTER_PLAN.md`. The next round starts from `STATUS.md` §2.1. The test-file sign-off is still owed (no pytest here).
+**Verdict.** No round is in flight: Phase 183 (the Lorentzian evidence space) and Phase 182 (the Lorentzian lift of the ambiguous space, the owner's `iter10_lorentzian.py` audited) are closed, and before them Phases 180 (every Leech shell proved) and 181 (improper Lorentz families with a change of units in `tool frame`), in `MASTER_PLAN.md`. The next round starts from `STATUS.md` §2.1. The test-file sign-off is still owed (no pytest here).
 
 **Deciding figure.** 0 steps outstanding.
 
@@ -15,7 +15,7 @@ know to carry the round on?
 and the figure above are grounded in the body below, and
 `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-*Last altered 21 October 2026.*
+*Last altered 23 October 2026.*
 
 ---
 
@@ -43,14 +43,28 @@ absence:
 
 ## Status
 
-**No round is in flight.** Phase 175 (the owner's pipeline kit, taken at the
-owner's request of 21 October 2026) is closed: the delivered files placed and
-split in `source_material/GLM_Pipeline_Kit/`; the kit's bridge run on the
-GLM's own substrate (0 failures); the kit's seven Lean files under
-`GLM/PipelineKit/` and `PipelineInduction.lean` (17 theorems, 0 `sorry`);
-`reasoning/pipeline_kit.py`, `tool induce`, `reasoning/pipeline_kit_study.py`
-and `tools pipeline-kit` (12 of 12 marks); `tests/test_pipeline_kit.py` (7 of 7
-by hand).
+**No round is in flight.** Phase 183 (owner's request, 23 October 2026; the
+Lorentzian evidence space, taken from `STATUS.md` §2.1 item 11) is closed:
+`LorentzianEvidence.lean` (in `AxiomAuditAll.lean`);
+`reasoning/lorentzian_evidence.py` (`tool evidence`, and the certificate guard
+and settling question in `tool lorentz`); `tools lorentzian-evidence` (13 of 15
+marks); `tests/test_lorentzian_evidence.py` run by hand, all passing. Write-up:
+`studies/LORENTZIAN_EVIDENCE_STUDY.md`.
+Phase 182 (owner's request, 22 October 2026; the
+Lorentzian lift of the ambiguous space, the owner's `iter10_lorentzian.py`
+audited) is closed: `LorentzianLift.lean` and `GolayDeepHole.lean` (in
+`AxiomAuditAll.lean`); `reasoning/lorentzian_lift.py` (`tool lorentz`);
+`tools lorentzian-lift` (11 of 12 marks); `tests/test_lorentzian_lift.py` run
+by hand, all passing. Write-up: `studies/LORENTZIAN_LIFT_STUDY.md`.
+Phases 180 and 181 (taken from `STATUS.md` §2.1
+items 2 and 10, 22 October 2026) are closed. Phase 180:
+`LeechShellCount.lean` (the Leech shell procedure proved for every shell, in
+`AxiomAuditAll.lean`); `reasoning/leech_shells.py` (`proved_shells_check`);
+`tests/test_leech_shell_count.py` run by hand, all passing. Write-up:
+`studies/LEECH_SHELL_COUNT_STUDY.md`. Phase 181: `LorentzUnits.lean` (9
+theorems, in `AxiomAuditAll.lean`); `reasoning/frame_plane.py` (three units
+families); `tools improper-units` (8 of 8); `tests/test_improper_units.py` run
+by hand, all passing. Write-up: `studies/IMPROPER_UNITS_STUDY.md`.
 
 **Standing hazards — read before running anything:** [`ITERATE.md`](ITERATE.md)
 §0.1, *Run-order hazards*. The two that cost the most:

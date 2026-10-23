@@ -1,0 +1,2750 @@
+{
+ "bit_growth": [
+  2,
+  4,
+  7,
+  11,
+  14,
+  17,
+  20,
+  23,
+  26,
+  30,
+  33,
+  36,
+  39,
+  42,
+  45,
+  49
+ ],
+ "demos": [
+  1,
+  2,
+  3
+ ],
+ "extra": {
+  "asks_total": 917,
+  "chain_k_product": 60,
+  "chain_queries": 60,
+  "chain_right": 60,
+  "confound_answered": 0,
+  "confound_first_ask_massive": 270,
+  "confound_null_separates": 268,
+  "confound_queries": 270,
+  "confound_same_ray_separates": 0,
+  "filter_mismatch": 0,
+  "out_wrong_1": 0,
+  "out_wrong_ge2": 0,
+  "shipped_refusals_in": 917,
+  "tried_filter": 7907,
+  "tried_nofilter": 15840,
+  "two_timelike_in": 270,
+  "two_timelike_in_right": 261
+ },
+ "in_vocab": [
+  "identity",
+  "swap",
+  "parity",
+  "units",
+  "boost",
+  "rotation",
+  "boost_units",
+  "rotation_units",
+  "boost_chain3"
+ ],
+ "integrity": {
+  "checks": {
+   "E1": 15379,
+   "E2": 15379,
+   "E3": 13225,
+   "E4": 3276,
+   "E5": 15379,
+   "E6": 15379,
+   "E7": 144
+  },
+  "failures": {
+   "E1": 0,
+   "E2": 0,
+   "E3": 0,
+   "E4": 0,
+   "E5": 0,
+   "E6": 0,
+   "E7": 0
+  },
+  "parameters": 91,
+  "states": 169
+ },
+ "kappa": {
+  "kappa_free": true,
+  "order": [
+   "third significant figure",
+   "register uncertainty",
+   "tick-budget rounding",
+   "which tabulated quantity"
+  ],
+  "ratio_sweep": 24,
+  "shift_digit": "1/951",
+  "shift_quantity": "3/193",
+  "shift_tax_lower": "489181/112500000",
+  "shift_uncertainty": "1/634",
+  "within": true
+ },
+ "kinds": [
+  "timelike",
+  "null"
+ ],
+ "lean": {
+  "RequestProject/GLM/KappaAnchor.lean": {
+   "declared": 11,
+   "sorry": 0,
+   "theorems": 11
+  },
+  "RequestProject/GLM/RationalBoost.lean": {
+   "declared": 26,
+   "sorry": 0,
+   "theorems": 26
+  }
+ },
+ "marks": {
+  "E1": true,
+  "E2": true,
+  "E3": true,
+  "E4": true,
+  "E5": true,
+  "E6": true,
+  "E7": true,
+  "F1": true,
+  "F2": true,
+  "F3": true,
+  "F4": false,
+  "F5": true,
+  "F6": true,
+  "F7": true,
+  "F8": true,
+  "K": true,
+  "L": true,
+  "T": true
+ },
+ "max_asks": 2,
+ "met": 17,
+ "queries": 30,
+ "source_digest": "9ce2c76e73897cd124b3c2f167ef3e86a5371d2fcb4e492a340797942df91f20",
+ "table": {
+  "boost/null/1": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "boost/null/2": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "boost/null/3": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "boost/timelike/1": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 27,
+    "right": 3,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 27,
+    "right": 3,
+    "wrong": 0
+   }
+  },
+  "boost/timelike/2": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 1,
+    "right": 29,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 1,
+    "right": 29,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 1,
+    "right": 29,
+    "wrong": 0
+   }
+  },
+  "boost/timelike/3": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   }
+  },
+  "boost_chain3/null/1": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 1,
+    "wrong": 29
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "boost_chain3/null/2": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "boost_chain3/null/3": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "boost_chain3/timelike/1": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 29,
+    "right": 1,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 29,
+    "right": 1,
+    "wrong": 0
+   }
+  },
+  "boost_chain3/timelike/2": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   }
+  },
+  "boost_chain3/timelike/3": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   }
+  },
+  "boost_then_rotate/null/1": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "boost_then_rotate/null/2": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "boost_then_rotate/null/3": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "boost_then_rotate/timelike/1": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 1,
+    "wrong": 29
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 14,
+    "right": 1,
+    "wrong": 15
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "boost_then_rotate/timelike/2": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 27,
+    "right": 0,
+    "wrong": 3
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 28,
+    "right": 0,
+    "wrong": 2
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 3,
+    "right": 27,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "boost_then_rotate/timelike/3": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "boost_units/null/1": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "boost_units/null/2": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "boost_units/null/3": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "boost_units/timelike/1": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "boost_units/timelike/2": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   }
+  },
+  "boost_units/timelike/3": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   }
+  },
+  "identity/null/1": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "identity/null/2": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "identity/null/3": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "identity/timelike/1": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 3,
+    "right": 27,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 3,
+    "right": 27,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 3,
+    "right": 27,
+    "wrong": 0
+   }
+  },
+  "identity/timelike/2": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   }
+  },
+  "identity/timelike/3": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   }
+  },
+  "parity/null/1": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "parity/null/2": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "parity/null/3": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "parity/timelike/1": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 28,
+    "wrong": 2
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 2,
+    "right": 28,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "parity/timelike/2": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 1,
+    "right": 29,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 2,
+    "right": 28,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 1,
+    "right": 29,
+    "wrong": 0
+   }
+  },
+  "parity/timelike/3": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   }
+  },
+  "rotation/null/1": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   }
+  },
+  "rotation/null/2": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   }
+  },
+  "rotation/null/3": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   }
+  },
+  "rotation/timelike/1": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 28,
+    "wrong": 2
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 10,
+    "right": 20,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 28,
+    "wrong": 2
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 10,
+    "right": 20,
+    "wrong": 0
+   }
+  },
+  "rotation/timelike/2": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 29,
+    "wrong": 1
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 1,
+    "right": 29,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 1,
+    "right": 29,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 29,
+    "wrong": 1
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 1,
+    "right": 29,
+    "wrong": 0
+   }
+  },
+  "rotation/timelike/3": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   }
+  },
+  "rotation_units/null/1": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "rotation_units/null/2": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "rotation_units/null/3": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "rotation_units/timelike/1": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 19,
+    "wrong": 11
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 11,
+    "right": 19,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "rotation_units/timelike/2": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 29,
+    "wrong": 1
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 1,
+    "right": 29,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 2,
+    "right": 28,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 2,
+    "right": 28,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 2,
+    "right": 28,
+    "wrong": 0
+   }
+  },
+  "rotation_units/timelike/3": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   }
+  },
+  "shear/null/1": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "shear/null/2": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "shear/null/3": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "shear/timelike/1": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 22,
+    "right": 0,
+    "wrong": 8
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "shear/timelike/2": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 27,
+    "right": 0,
+    "wrong": 3
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 28,
+    "right": 0,
+    "wrong": 2
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 3,
+    "right": 27,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "shear/timelike/3": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "swap/null/1": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "swap/null/2": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "swap/null/3": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 0,
+    "wrong": 30
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "swap/timelike/1": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 29,
+    "right": 1,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 29,
+    "right": 1,
+    "wrong": 0
+   }
+  },
+  "swap/timelike/2": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 4,
+    "right": 26,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 4,
+    "right": 26,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 4,
+    "right": 26,
+    "wrong": 0
+   }
+  },
+  "swap/timelike/3": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   }
+  },
+  "units/null/1": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "units/null/2": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "units/null/3": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "units/timelike/1": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 30,
+    "right": 0,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   }
+  },
+  "units/timelike/2": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   }
+  },
+  "units/timelike/3": {
+   "after_ask": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_fit": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "first_take": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "linear": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "occam": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   },
+   "shipped": {
+    "queries": 30,
+    "refused": 0,
+    "right": 30,
+    "wrong": 0
+   }
+  }
+ },
+ "taken": 18,
+ "tasks": [
+  "identity",
+  "swap",
+  "parity",
+  "units",
+  "boost",
+  "rotation",
+  "boost_units",
+  "rotation_units",
+  "boost_chain3",
+  "boost_then_rotate",
+  "shear"
+ ],
+ "tool": {
+  "answer": "11/3,-7/3",
+  "answer_ok": true,
+  "ask": "2,1",
+  "kappa_ok": true,
+  "refuse_ok": false,
+  "refuse_status": "ambiguous"
+ },
+ "totals": {
+  "after_ask": {
+   "in": {
+    "queries": 1620,
+    "refused": 0,
+    "right": 1620,
+    "wrong": 0
+   },
+   "out": {
+    "queries": 360,
+    "refused": 360,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "first_fit": {
+   "in": {
+    "queries": 1620,
+    "refused": 0,
+    "right": 1244,
+    "wrong": 376
+   },
+   "out": {
+    "queries": 360,
+    "refused": 114,
+    "right": 1,
+    "wrong": 245
+   }
+  },
+  "first_take": {
+   "in": {
+    "queries": 1620,
+    "refused": 807,
+    "right": 813,
+    "wrong": 0
+   },
+   "out": {
+    "queries": 360,
+    "refused": 152,
+    "right": 1,
+    "wrong": 207
+   }
+  },
+  "linear": {
+   "in": {
+    "queries": 1620,
+    "refused": 1090,
+    "right": 530,
+    "wrong": 0
+   },
+   "out": {
+    "queries": 360,
+    "refused": 246,
+    "right": 114,
+    "wrong": 0
+   }
+  },
+  "occam": {
+   "in": {
+    "queries": 1620,
+    "refused": 697,
+    "right": 920,
+    "wrong": 3
+   },
+   "out": {
+    "queries": 360,
+    "refused": 360,
+    "right": 0,
+    "wrong": 0
+   }
+  },
+  "shipped": {
+   "in": {
+    "queries": 1620,
+    "refused": 917,
+    "right": 703,
+    "wrong": 0
+   },
+   "out": {
+    "queries": 360,
+    "refused": 360,
+    "right": 0,
+    "wrong": 0
+   }
+  }
+ }
+}

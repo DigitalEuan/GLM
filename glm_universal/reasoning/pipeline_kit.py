@@ -1,7 +1,8 @@
 """``glm_universal.reasoning.pipeline_kit`` -- rule induction from
 demonstrations, with an agreement gate (Phase 175).
 
-*Created 21 October 2026.*
+*Created 21 October 2026.* *Last altered 21 October 2026 (Phase 176: an
+ambiguous refusal names the input to ask about, ``reasoning/pipeline_ask.py``).*
 
 Where it comes from
 -------------------
@@ -690,6 +691,11 @@ def induce_text(arg: str) -> Tuple[bool, str, Dict[str, object]]:
                       f"[{trail}]"), figures
     if r["status"] == "ambiguous":
         figures["answers"] = r["answers"]
+        from . import pipeline_ask as pa        # Phase 176: ask to settle it
+        ask_sentence, choice = pa.ask_text(pairs, query)
+        if choice is not None:
+            figures["ask"] = grid_text(choice["input"])
+            figures["ask_decides"] = choice["decides"]
         o = solve(pairs, query, mode="occam")
         hint = ""
         if o["status"] == "answered":
@@ -705,8 +711,8 @@ def induce_text(arg: str) -> Tuple[bool, str, Dict[str, object]]:
                        f"{len(r['answers'])} different answers; any answer "
                        "would be wrong for one of them "
                        "(GLM.PipelineInduction.ambiguous_forces_refusal); "
-                       f"another demonstration would decide{hint} "
-                       f"[{trail}]"), figures
+                       f"another demonstration would decide{hint}; "
+                       f"{ask_sentence} [{trail}]"), figures
     if r["status"] == "undefined":
         return False, (f"induce: refused -- the hypotheses that fit "
                        f"({', '.join(r['survivors'][:4])}) give this query "

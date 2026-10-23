@@ -12,7 +12,7 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-*Last altered 21 October 2026.*
+*Last altered 23 October 2026.*
 
 ---
 
@@ -34,7 +34,7 @@ account is in
 | end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->223<!--/figure--> / <!--figure:evaluation-case-count-->223<!--/figure-->** — 149 answered, 28 refused as expected (all `boundary`, no `gap`), 0 unexpected refusals, 0 confidently wrong, 0 errored |
 | benchmark suites | `python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites, every suite above its baseline |
 | capability probes | `python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 errored, 0 surprises |
-| Lean development | `lake build` (repository root) | <!--figure:lean-files-->253 Lean files<!--/figure-->, **0 `sorry`** |
+| Lean development | `lake build` (repository root) | <!--figure:lean-files-->267 Lean files<!--/figure-->, **0 `sorry`** |
 | figures | `python3 -m glm_universal.figures --write` | regenerates `overlay/FIGURES.md`; every documented count |
 | corpus | `python3 -m glm_universal.corpus --check` | the tier contract, the archive partition, the coverage claim of `ENTRY.md`, every generated block and every derived cache — **current**, no drift |
 | construction ladder | `python3 -m glm_universal.tools ladder` | **462 / 568** queries named correctly with **0** wrong on the eleven-rung ladder, against **327** for the note's five rungs and **283** for the best single rung |
@@ -66,6 +66,7 @@ account is in
 | the machine works the tools out (convergents, nearest fractions, gate moves, the conversion, axiom, `choose` and `first` steps and the Leech kissing number computed in GLM-BAT) | `python3 -m glm_universal.tools tool-machine` | the **44** steps Phase 160 left carried computed: continued-fraction terms by Euclid's algorithm on both ends of an enclosure (`GLM.ToolMachine.lockstep_certified`) of `e` (summed), `√m` (a checked witness) or `π` (Mathlib's bounds); nearest fractions by a Farey certificate the machine checks (`nearest_of_nearer`); gate moves by a search (`machineDist_sound`); carried steps **44 → 0**; **174 / 174** chains admitted; lies **20 / 20** found at their step; held-out **2,785 / 2,785** admitted, **2,785 / 2,785** lies refused, **215 / 215** tool refusals unwritten; the Leech kissing number **196,560** counted from the Golay code's generator rows (759 octads; `GLM.LeechMachine.leech_kissing_from_census`); **702 / 702** texts unchanged off and on; 8 of 9 marks, 1 of 1 amended ([`TOOL_MACHINE_STUDY.md`](studies/TOOL_MACHINE_STUDY.md)) |
 | the Leech shells from the lattice's definition | `PYTHONPATH=. python3 -c "from glm_universal.reasoning import leech_shells as L; print(L.shell_report(7))"` | the minimal shapes **proved** from Conway's definition (`GLM.LeechShells.minimal_shape`); every shell counted from the Golay census walked from the generator (`1, 759, 2576, 759, 1`) and checked against the theta series `E₄³ − 720Δ`: **8 / 8** agree through norm 14; the `llvq` tool's table is the derived one, its norm-12 shell corrected **34,408,430,950 → 34,417,656,000**; 6 of 6 marks ([`LEECH_SHELLS_STUDY.md`](studies/LEECH_SHELLS_STUDY.md)) |
 | the Leech kissing number from the lattice's definition | `PYTHONPATH=. python3 -c "from glm_universal.reasoning import leech_shells as L; print(L.minimal_shell_check())"` | the minimal shell **proved both ways** (`GLM.LeechKissing.minimal_iff`) and its size **proved** to be 196,560 (`leech_kissing_number`) by a bijection with three parameter families; the same families enumerated: **196,560** distinct vectors, all in the lattice by the definition; 5 of 5 marks ([`LEECH_KISSING_STUDY.md`](studies/LEECH_KISSING_STUDY.md)) |
+| every Leech shell, counted and proved | `PYTHONPATH=. python3 -c "from glm_universal.reasoning import leech_shells as L; print(L.proved_shells_check(7))"` | the generating-function procedure **proved** correct for every shell (`GLM.LeechShellCount.shellArr_correct`), the Phase 164 procedure on the shells it ran (`shellCount_correct`), and the first eight shells as theorems (`leech_shell_sizes`); **8 / 8** proved sizes agree with the Python count and the theta series; 6 of 6 marks ([`LEECH_SHELL_COUNT_STUDY.md`](studies/LEECH_SHELL_COUNT_STUDY.md)) |
 | the machine sums π | `PYTHONPATH=. python3 -m glm_universal.tools pi-machine` | GLM-BAT sums π by Machin's formula, by rules **proved** in `GLM.PiMachine` (`machin`, `atH_arctan_sum`, `piEnds_enclose`); enclosure **9.6 × 10⁻⁵⁸** wide, **53** certified continued-fraction terms (the declared constant: 19); 80 of 80 one-step π chains admitted, 0 lost; 6 of 6 marks ([`PI_MACHINE_STUDY.md`](studies/PI_MACHINE_STUDY.md)) |
 | adversarial replies at the `nearest` ties | `PYTHONPATH=. python3 -m glm_universal.tools adversarial-dialogue` | **560** adversarial runs, **0** members outside the head ever live, proved for any replies (`GLM.AdversarialDialogue.adversary_least`); a consistent liar confirmed on the member impersonated **118 / 118**, the proved limit (`consistent_lie_confirmed`); echoes read by number as a confirmation **10 → 0**; 13 of 13 marks ([`ADVERSARIAL_DIALOGUE_STUDY.md`](studies/ADVERSARIAL_DIALOGUE_STUDY.md)) |
 | the corpus confidence curve (declared sure, balanced and candidate modes) | `PYTHONPATH=. python3 -m glm_universal.tools confidence-curve` | balanced `(1, 1/5)` **33.7%** precision at **42.4%** coverage held out (1.6 times unguarded); sure `(2, 2/3)` **62.0%** at **7.3%**; candidate top three **32.7%** at **98.4%**; order control **3.3%**; 6 of 8 marks ([`CONFIDENCE_CURVE_STUDY.md`](studies/CONFIDENCE_CURVE_STUDY.md)) |
@@ -129,6 +130,12 @@ account is in
 | confidence floor | `python3 -m glm_universal.tools confidence-floor` | a declared grid of **7** thresholds hunted at **5** rates over an exact channel census: the working threshold **9999/10000** up to 1/50, **999/1000** at 1/20, **none** at 1/10 (there the graded answer, not a refusal); the promise `P(wrong \| answered) ≤ 1 − t` kept in **210 / 210** cells, and in **210 / 210** with the rate overdeclared (**30** broken underdeclared); **15 / 16** runtime programs as declared, one declaration wrong; **6 / 7** marks |
 | blockers probe | `python3 -m glm_universal.tools blockers` | the pre-registered language probe scores **<!--figure:probe-correct-->2<!--/figure-->** correct, **<!--figure:probe-wrong-->1<!--/figure-->** wrong, **<!--figure:probe-refused-->17<!--/figure-->** refused of **<!--figure:probe-questions-->20<!--/figure-->** — **below the declared pass mark of <!--figure:probe-pass-mark-->10<!--/figure-->**, a declared failure |
 | pipeline kit (rule induction) | `python3 -m glm_universal.tools pipeline-kit` | the owner's pipeline kit in the GLM: its bridge **0** failures in **2,000** words on `leech2`; `tool induce` over **15** families and **2,250** queries: **2,121** right, **0** wrong, **129** refused, against **12** and **19** wrong for the eager controls; `flood_fill` and `bfs_shortest` **0 → 49 / 50** each; 12 of 12 marks ([`PIPELINE_KIT_STUDY.md`](studies/PIPELINE_KIT_STUDY.md)) |
+| colour induction | `python3 -m glm_universal.tools colour-induction` | `tool induce` on colour grids and objects, and `tool arc` on the 50 stored ARC tasks: **683** right, **0** wrong, **397** refused of **1,080** in-vocabulary queries; ARC **2** of **50** right, **0** wrong; 8 of 12 marks ([`COLOUR_INDUCTION_STUDY.md`](studies/COLOUR_INDUCTION_STUDY.md)) |
+| frame plane | `python3 -m glm_universal.tools frame-plane` | `tool frame` in 1+2 dimensions: **536** right, **0** wrong of **1,080** inside its families, **0** wrong of **360** outside; Thomas–Wigner **60 / 60** with the exact Wigner rotation; 8 of 8 marks ([`COLOUR_INDUCTION_STUDY.md`](studies/COLOUR_INDUCTION_STUDY.md)) |
+| improper frame | `python3 -m glm_universal.tools improper-frame` | `tool frame` with reflections, time reversal and the three improper Lorentz components declared: improper queries **361** right, **0** wrong of **720** (Phase 178's families: **3** right); **0** of **361** Phase 178 answers changed; outside **0** wrong of **480**; 8 of 8 marks ([`IMPROPER_FRAME_STUDY.md`](studies/IMPROPER_FRAME_STUDY.md)) |
+| improper units | `python3 -m glm_universal.tools improper-units` | `tool frame` with the three improper Lorentz components times a change of units declared: scaled improper queries **238** right, **0** wrong of **480** (Phase 179's families: **0** right); **0** of **717** Phase 179 answers changed; outside **0** wrong of **480**; 8 of 8 marks ([`IMPROPER_UNITS_STUDY.md`](studies/IMPROPER_UNITS_STUDY.md)) |
+| Lorentzian lift | `python3 -m glm_universal.tools lorentzian-lift` | the owner's `iter10_lorentzian.py` audited: every Golay tie an A_1^24 deep hole named by a null vector of II_25,1 (128 of 128 sampled); no reflection-invariant rule breaks a tie; two tied readings **586** right, **0** wrong of 600 under summed scores; 11 of 12 marks ([`LORENTZIAN_LIFT_STUDY.md`](studies/LORENTZIAN_LIFT_STUDY.md); row added in Phase 183) |
+| Lorentzian evidence | `python3 -m glm_universal.tools lorentzian-evidence` | the lift as an evidence space: the Golay decoy **61** wrong → **27** under the certificate guard, **0** right answers lost on any condition, the 27 indistinguishable from honest readings; the settling question **600** of 600 with five bits (random five 391); physics relations with a decoy example **0** wrong (first example alone 87 and 38); 13 of 15 marks ([`LORENTZIAN_EVIDENCE_STUDY.md`](studies/LORENTZIAN_EVIDENCE_STUDY.md)) |
 
 The test-suite row is the sign-off ledger's own count, recorded by
 `python3 -m glm_universal.signoff --release`, which runs each test file in its
@@ -1151,6 +1158,106 @@ when two fitting rules disagree (`ambiguous_forces_refusal`); the owner's kit
 files are in `GLM/PipelineKit/`. Recomputed by `tools pipeline-kit`.
 Write-up: [`PIPELINE_KIT_STUDY.md`](studies/PIPELINE_KIT_STUDY.md).
 
+**Asking for the separating example.** Since Phase 176 an ambiguous refusal of
+`tool induce` ends by naming one input grid on which the fitting hypotheses
+disagree — chosen from a declared pool so that the worst reply leaves the
+fewest answers to the query — and returns it as the figure `ask`; given its
+output as one more demonstration, the tool answers again
+(`reasoning/pipeline_ask.py`). `GLM.PipelineAsk` proves a separating reply
+removes a fitting hypothesis (`separating_strict_shrink`), the asking stops
+after at most `|H| − 1` asks (`asks_bounded`), and the answer then given is
+the true rule's (`ask_then_sound`). Recomputed by `tools pipeline-ask`; the
+pipeline kit's own tests and demo against the GLM by `tools
+pipeline-kit-crosscheck`. Write-up:
+[`PIPELINE_ASK_STUDY.md`](studies/PIPELINE_ASK_STUDY.md).
+
+**The axiom audit in the build.** Since Phase 176 `lake build` fails if any
+theorem of the development rests on an axiom outside `propext`,
+`Classical.choice`, `Quot.sound`, `Lean.ofReduceBool`, `Lean.trustCompiler`
+and those `native_decide` generates (`GLM/AxiomGuard.lean`,
+`GLM/AxiomAuditAll.lean`, which imports every Lean file; a test fails when a
+file is missing from its imports).
+
+**Frame operators and the anchor κ.** Since Phase 177 `tool frame E,p ->
+E',p' ; … ? E,p` infers an operator on exact rational 2-vectors from example
+pairs, in three layers: which quadratic form each pair keeps (`E² − p²`,
+`E² + p²`) decides which families are fitted; each family is fitted where it
+acts by scaling (light-cone `(E+p, E−p)` for boosts, changes of units and
+their products, `E + ip` for rotations and their products); and the query is
+answered only when every fitting family agrees and at least one has fewer
+parameters than the pairs give independent equations. Otherwise it refuses,
+says which families disagree, and names an input to ask about.
+`GLM.RationalBoost` proves the boost arithmetic, that a boost on one light ray
+is a change of units (`null_confound`), and that one massive state separates
+them (`timelike_separates`). `tool kappa [VALUE]` reads `κ = 190 kJ/mol` as a
+unit: the chain at an anchor, the proof that dimensionless outputs are free of
+it (`GLM.KappaAnchor.cellLength_ratio_kappa_free`), its source in the diatomic
+register (`D0(Br2)`), and its refinement budget. Recomputed by `tools
+frame-operators`. Write-up:
+[`FRAME_OPERATOR_STUDY.md`](studies/FRAME_OPERATOR_STUDY.md).
+
+**Colour grids, objects and the frame plane.** Since Phase 178 `tool induce`
+sends a task whose grids carry more than two colours or change shape to
+`reasoning/colour_induction.py`: the eight symmetries, gravity, crops,
+scaling, tiling, mirrors, halves, symmetry completion and any two of them in
+turn, and fitted families (a colour map, object recolouring by size, rank or
+border contact, enclosed fill, half logic across a divider). Each pair is read
+first for what it keeps (shape, colour counts, colour set); a fitted family
+counts as tested only when leave-one-out reproduces the pair left out; the
+query is answered only when every survivor agrees and one is tested, and a
+fitted survivor whose parameter the query needs but the demonstrations never
+showed forces a refusal (`GLM.ColourInduction.unread_fitted_refuses`). `tool
+arc NAME` runs it on a stored ARC task and grades every test answer. `tool
+frame` on 3-component states `(E, px, py)` goes to `reasoning/frame_plane.py`:
+Gram-matrix invariants, completion from pairs, leave-one-out testing and a
+span guard; a Lorentz answer is split into a pure boost times its Wigner
+rotation (`GLM.LorentzPlane.thomas_wigner`). English reaches `tool arc`
+(*solve the ARC task …*), `tool frame` (*which operator maps …*) and `tool
+kappa` (*what is the anchor kappa*). Recomputed by `tools colour-induction`
+and `tools frame-plane`. Write-up:
+[`COLOUR_INDUCTION_STUDY.md`](studies/COLOUR_INDUCTION_STUDY.md).
+
+**Improper maps in the frame plane.** Since Phase 179 `tool frame` on
+`(E, px, py)` also declares the spatial `reflection` and the three improper
+components of the Lorentz group — `lorentz_parity` (determinant `−1`, time
+kept), `lorentz_time` (determinant `−1`, time reversed), `lorentz_pt`
+(determinant `1`, time reversed) — beside the proper orthochronous `lorentz`.
+An improper answer names its component and is split as a proper map after
+the reflection `py -> -py` and/or time reversal (`improper_split`,
+`GLM.LorentzImproper.lorentz_four_components`). Two demonstrations never fix
+the component (`GLM.LorentzImproper.plane_partner`), so a query off their
+plane is refused as before, and the refusal says so. Recomputed by `tools
+improper-frame`. Write-up:
+[`IMPROPER_FRAME_STUDY.md`](studies/IMPROPER_FRAME_STUDY.md). Since Phase 181
+an improper map times a change of units is a family too
+(`lorentz_parity_units`, `lorentz_time_units`, `lorentz_pt_units`, beside
+`lorentz_units`): completed by dividing the outputs by the scale `s` read from
+the Gram ratio `s²`, the answer naming its component and its scale
+(`GLM.LorentzUnits.conformal_split`, `conformal_eight`). Recomputed by `tools
+improper-units`. Write-up:
+[`IMPROPER_UNITS_STUDY.md`](studies/IMPROPER_UNITS_STUDY.md).
+
+**The Lorentzian lift and the evidence space.** Since Phase 182 `tool lorentz
+MASK ; MASK ; …` decodes one message read one or more times in the
+Lorentzian lift to II_25,1: a single Golay tie is refused with its
+certificate (an A_1^24 deep hole of the Leech lattice, named by the null
+vector `2L(x)`), and further readings are scored in the same frame and added
+(`GLM.LorentzianLift.inner_lift_root`, `reflection_invariant_tie`;
+[`LORENTZIAN_LIFT_STUDY.md`](studies/LORENTZIAN_LIFT_STUDY.md)). Since Phase
+183 the answer must also lie inside the first reading's tie (the certificate
+guard), a single tie is refused with the question that settles it — the sent
+bits at five positions, one in each of five tetrads of its sextet
+(`GLM.LorentzianEvidence.separates_iff`, `card_ge_of_separates`) — and
+`@POS=BIT …` gives the bits back. `reasoning/lorentzian_evidence.py` holds the
+lift as an evidence space for any register: cues add, their sum is the lifted
+consensus plus the Weyl vector times their disagreement
+(`evidence_decomp`), and the Lorentzian norm is minus the disagreement
+(`evid_norm`). `tool evidence A : B [, A2 : B2 …] :: C` uses it over the
+physics register: examples that disagree are refused, examples that agree
+give the dimension class and every name in it. Recomputed by `tools
+lorentzian-evidence`. Write-up:
+[`LORENTZIAN_EVIDENCE_STUDY.md`](studies/LORENTZIAN_EVIDENCE_STUDY.md).
+
 **The budget rule in the answering path.** Since Phase 147 a deep hole is read
 to its certificate on request. `reasoning/hole_reading.py` reads with no
 barren stop and a budget of 1056 starts (`probe_budget.BUDGET`); the query
@@ -1244,8 +1351,8 @@ so a confident wrong answer is worse than a refusal). Write-up:
 [`CAPABILITY_ASSESSMENT.md`](CAPABILITY_ASSESSMENT.md).
 
 **The Lean development, addressed.** `reasoning/lean_address.py` gives each of
-the <!--figure:lean-declarations-->5,893<!--/figure--> declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly <!--figure:lean-declarations-->5,893<!--/figure-->/<!--figure:lean-declarations-->5,893<!--/figure--> with 0 coordinate errors;
+the <!--figure:lean-declarations-->6,202<!--/figure--> declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly <!--figure:lean-declarations-->6,202<!--/figure-->/<!--figure:lean-declarations-->6,202<!--/figure--> with 0 coordinate errors;
 3989 distinct addresses, and the quantiser adds no conflation of its own;
 nearest-by-address shares a file 817 times against 35 for a SHA-256 control and
 29 for a seeded reshuffle, with chance at ≈ 0.80 %. `report lean`.
@@ -1288,8 +1395,8 @@ twenty questions rather than three samples. `tools oracle`. Write-up:
 **The field surface, and what it was worth.** `runtime/fields.py` answers one
 named field of one named row — `field atomic_weight_u of carbon` — over
 <!--figure:fieldsurface-tables-->14<!--/figure--> declared tables holding
-<!--figure:fieldsurface-rows-->15,362<!--/figure--> rows and
-<!--figure:fieldsurface-pairs-->89,702<!--/figure--> addressable `(row,
+<!--figure:fieldsurface-rows-->15,949<!--/figure--> rows and
+<!--figure:fieldsurface-pairs-->92,915<!--/figure--> addressable `(row,
 field)` pairs: the element and molecule source rows, one table per register's
 carrier attributes, the Lean address book, the package's own top-level
 definitions, and a registry of declared zero-argument functions whose returned
@@ -1486,7 +1593,7 @@ units reach `PROJECT_DIRECTIVES.md` (120 before Phase 78; see
 [`studies/ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) §5g).
 
 The seven instruments in the ledger beside the
-<!--figure:test-files-->226 test files<!--/figure--> are `lean-build`,
+<!--figure:test-files-->238 test files<!--/figure--> are `lean-build`,
 `lean-sorry-free`, `capabilities`, `benchmarks`, `evaluation`, `replay` and
 `figures`. `replay` (Phase 174) is the evaluation's replay gate of Phase 171,
 column 3 run for every case expected answered, so the close runs it when what

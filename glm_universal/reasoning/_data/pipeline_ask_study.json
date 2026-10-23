@@ -1,0 +1,148 @@
+{
+ "asks_histogram_right": {
+  "0": 0,
+  "1": 127,
+  "2": 0,
+  "3": 0
+ },
+ "demos": [
+  2,
+  3,
+  4
+ ],
+ "families": {
+  "bfs_shortest": {
+   "ambiguous": 4,
+   "right": 3,
+   "still_refused": 1,
+   "wrong": 0
+  },
+  "fill_then_reflect_h": {
+   "ambiguous": 33,
+   "right": 33,
+   "still_refused": 0,
+   "wrong": 0
+  },
+  "flood_fill": {
+   "ambiguous": 19,
+   "right": 19,
+   "still_refused": 0,
+   "wrong": 0
+  },
+  "path_hv": {
+   "ambiguous": 3,
+   "right": 2,
+   "still_refused": 1,
+   "wrong": 0
+  },
+  "path_then_rotate180": {
+   "ambiguous": 6,
+   "right": 6,
+   "still_refused": 0,
+   "wrong": 0
+  },
+  "reflect_h": {
+   "ambiguous": 9,
+   "right": 9,
+   "still_refused": 0,
+   "wrong": 0
+  },
+  "reflect_v": {
+   "ambiguous": 1,
+   "right": 1,
+   "still_refused": 0,
+   "wrong": 0
+  },
+  "reflect_v_then_toggle": {
+   "ambiguous": 1,
+   "right": 1,
+   "still_refused": 0,
+   "wrong": 0
+  },
+  "rotate180": {
+   "ambiguous": 2,
+   "right": 2,
+   "still_refused": 0,
+   "wrong": 0
+  },
+  "string_complement": {
+   "ambiguous": 0,
+   "right": 0,
+   "still_refused": 0,
+   "wrong": 0
+  },
+  "string_reverse": {
+   "ambiguous": 0,
+   "right": 0,
+   "still_refused": 0,
+   "wrong": 0
+  },
+  "string_reverse_complement": {
+   "ambiguous": 0,
+   "right": 0,
+   "still_refused": 0,
+   "wrong": 0
+  },
+  "string_rotate": {
+   "ambiguous": 0,
+   "right": 0,
+   "still_refused": 0,
+   "wrong": 0
+  },
+  "toggle": {
+   "ambiguous": 38,
+   "right": 38,
+   "still_refused": 0,
+   "wrong": 0
+  },
+  "translate": {
+   "ambiguous": 13,
+   "right": 13,
+   "still_refused": 0,
+   "wrong": 0
+  }
+ },
+ "lean": {
+  "declared": 7,
+  "file": "RequestProject/GLM/PipelineAsk.lean",
+  "sorry": 0,
+  "theorems": 7
+ },
+ "marks": {
+  "A1": true,
+  "A2": true,
+  "A3": true,
+  "A4": true,
+  "A5": true,
+  "A6": true,
+  "L": true,
+  "T": true
+ },
+ "max_asks": 3,
+ "met": 8,
+ "queries": 50,
+ "source_digest": "2ef794640ec9baf44a8c2392d7d3055555143da6db5bfdb612b51028c4dfb127",
+ "taken": 8,
+ "tool": {
+  "ask": "010/000/001",
+  "names_input": true,
+  "ok": false,
+  "status": "ambiguous"
+ },
+ "totals": {
+  "ambiguous": 129,
+  "asks": 128,
+  "control_asks": 128,
+  "control_right": 127,
+  "control_wrong": 0,
+  "fitted_appearances": 8,
+  "no_separating_input": 1,
+  "one_ask": 127,
+  "queries": 2250,
+  "right": 127,
+  "shrink_checked": 128,
+  "shrink_exceptions": 0,
+  "still_refused": 2,
+  "wrong": 0
+ }
+}

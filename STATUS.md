@@ -13,7 +13,7 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-*Last altered 21 October 2026.*
+*Last altered 23 October 2026.*
 
 > **Positioning.** Before starting a round, read the Positioning section of
 > [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md): what is claimed, what is
@@ -68,83 +68,68 @@ all 160 study documents. What was wrong was 261 rows of the Properties table
 still pointing at the old root path `RequestProject/GLM/…`; they now point at
 `overlay/glm_lean/RequestProject/GLM/…`.
 
-**Starting a new round? Read [`ITERATE.md`](ITERATE.md) §0, then §2 below —
-§2.0 points to the owner's plan for the next runs,
-[`source_material/GLM_19OCT26_1.md`](source_material/GLM_19OCT26_1.md).**
+**Repository hygiene: the knowledge cache and the push size.** On 22 October
+2026 pushes were failing because the git server rejected them as too large.
+The cause was the regenerated counted-knowledge cache,
+`overlay/glm_universal/knowledge/_knowledge_cache/knowledge.pickle` (about
+135 MB), which was tracked by git: it is rewritten whenever any corpus file
+moves, so every round committed another full copy. It is now untracked and
+listed in `.gitignore`, and so is the rest of that directory (the two
+word-address books, about 1 MB each, rewritten on the same trigger). Nothing
+is lost: `corpus --refresh` rebuilds the cache, and any reading that finds it
+missing counts the corpus once and writes it (about a minute on this corpus;
+later readings load it in seconds, and a changed file is the only file read
+again). The environment variable `GLM_KNOWLEDGE_CACHE` moves the cache
+directory out of the tree if wanted. The fix is held by
+[`test_repository_hygiene.py`](overlay/glm_universal/tests/test_repository_hygiene.py):
+it fails if any cache file is tracked or not ignored, if any tracked file
+exceeds 10 MB, or if an absent, deleted or corrupt cache is not rebuilt to the
+same knowledge. One consequence to keep in mind: `GLM-main.zip` is also kept
+out of version control but *is* read by the corpus, so a clone without it
+counts a smaller corpus than this working tree does.
 
-**Just closed: Phase 175** (21 October 2026) — **the owner's pipeline kit in
-the GLM** ([`PIPELINE_KIT_STUDY.md`](studies/PIPELINE_KIT_STUDY.md), record in
-[`MASTER_PLAN.md`](MASTER_PLAN.md) "Phase 175"). The files of the
-9-iteration pipeline study are in
-[`source_material/GLM_Pipeline_Kit/`](source_material/GLM_Pipeline_Kit/README.md),
-split back into their nine kit modules, seven Lean files, 40 scripts and 22 data
-files. The kit's bridge, never run before, holds on the GLM's own substrate
-(0 failures in 2,000 words); its seven Lean files build under
-`GLM/PipelineKit/`; and `tool induce` induces a rule from demonstration pairs
-of 0/1 grids or bit strings, keeping every operator hypothesis that fits —
-the kit's permutations and mask, a region fill and a two-point path writer
-(the kit's open items), and every two-step composition — and answers only when
-they all agree. 0 wrong answers in 2,250 queries at a cost of 129 refusals;
-the eager controls gave 12 and 19. `PipelineInduction.lean` (17 theorems)
-proves the gate sound. 12 of 12 marks.
+**Starting a new round? Read [`ITERATE.md`](ITERATE.md) §0, then §2 below.**
+Every part of the owner's plan of 19 October 2026 has been taken (§2.0); the
+next round starts from §2.1.
 
-**Before it, Phases 173 and 174** (several open ties at once,
-[`STACKED_DIALOGUE_STUDY.md`](studies/STACKED_DIALOGUE_STUDY.md); the answer
-censuses guarded by what their answers quote, and the replay gate as a step of
-the close, [`QUOTED_MEASUREMENTS_STUDY.md`](studies/QUOTED_MEASUREMENTS_STUDY.md)).
+**Just closed: Phase 183 — the Lorentzian evidence space** (23 October 2026;
+[`LORENTZIAN_EVIDENCE_STUDY.md`](studies/LORENTZIAN_EVIDENCE_STUDY.md), record
+in `MASTER_PLAN.md` "Phase 183"), at the owner's request: §2.1 item 11 taken
+further, and the question asked whether the ambiguous space is of use for
+general reasoning. `LorentzianEvidence.lean` proves, in any dimension, that
+weighted cues sum to the lifted consensus plus the Weyl vector times their
+disagreement (`evidence_decomp`), that `⟨V, V⟩ = −W·D` (`evid_norm`), that
+analogy is evidence with weights 1, −1, 1 (`analogy_evidence`), and how long
+the question settling a tie must be (`card_ge_of_separates`). In use: the
+certificate guard in `tool lorentz` (Golay decoy 61 wrong → 27, 0 right
+answers lost, the 27 indistinguishable from honest readings); the settling
+question (600 of 600 with five bits); `tool evidence` (relations over the
+physics register, 0 wrong with a decoy example). 13 of 15 marks.
 
-**Before them, Phase 172** (the open tie kept across turns;
-[`RESUMED_DIALOGUE_STUDY.md`](studies/RESUMED_DIALOGUE_STUDY.md)): a question
-stays open across unrelated turns; the adversarial battery at the `locate`
-junctions; `report anonymous` pinned on its claim.
+**Before it, Phase 182 — the Lorentzian lift of the ambiguous space** (22
+October 2026; [`LORENTZIAN_LIFT_STUDY.md`](studies/LORENTZIAN_LIFT_STUDY.md)):
+the owner's `iter10_lorentzian.py` audited; every Golay tie an A_1^24 deep
+hole named by a null vector of II_25,1; no reflection-invariant rule breaks a
+tie; summed scores over further readings resolve ties (`tool lorentz`); 11 of
+12 marks. **Phases 180 and 181** (22 October 2026): every Leech shell counted
+and proved ([`LEECH_SHELL_COUNT_STUDY.md`](studies/LEECH_SHELL_COUNT_STUDY.md),
+6 of 6), and improper maps times a change of units in `tool frame`
+([`IMPROPER_UNITS_STUDY.md`](studies/IMPROPER_UNITS_STUDY.md), 8 of 8).
 
-**Before it, Phase 171** (the evidence model in use;
-[`EVIDENCE_IN_USE_STUDY.md`](studies/EVIDENCE_IN_USE_STUDY.md)): `GLM.py -q …
---result` and the evaluation's replay gate (`evaluation --replay`).
-
-**Before it, Phases 167–170** (four parts of the owner's plan of 19 October
-2026, §2.0): adversarial replies at the `nearest` ties
-([`ADVERSARIAL_DIALOGUE_STUDY.md`](studies/ADVERSARIAL_DIALOGUE_STUDY.md));
-the corpus confidence curve
-([`CONFIDENCE_CURVE_STUDY.md`](studies/CONFIDENCE_CURVE_STUDY.md)); one
-evidence and result model
-([`EVIDENCE_MODEL_STUDY.md`](studies/EVIDENCE_MODEL_STUDY.md)); contextual
-domain frames ([`CONTEXT_FRAMES_STUDY.md`](studies/CONTEXT_FRAMES_STUDY.md)).
-
-**Before them, Phase 166** (the machine sums π;
-[`PI_MACHINE_STUDY.md`](studies/PI_MACHINE_STUDY.md)): Machin's formula and the
-arctangent series proved in Lean and run in GLM-BAT.
-
-**Before it, Phase 165** (the Leech kissing number from the lattice's
-definition; [`LEECH_KISSING_STUDY.md`](studies/LEECH_KISSING_STUDY.md)): the
-minimal shell proved both ways and its 196,560 a theorem.
-
-**Before it, Phase 164** (the Leech shells from the lattice's definition;
-[`LEECH_SHELLS_STUDY.md`](studies/LEECH_SHELLS_STUDY.md)): the minimal shapes
-proved, every shell counted from the Golay census, and the `llvq` tool's wrong
-norm-12 entry replaced.
-
-**Before it, Phase 163** (the machine works the tools out;
-[`TOOL_MACHINE_STUDY.md`](studies/TOOL_MACHINE_STUDY.md)): no step of an
-answered chain is carried, and the Leech kissing number is counted from the
-Golay code's generator rows.
-
-**Before it, Phase 162** (corpus source tiers; [`SOURCE_TIERS_STUDY.md`](studies/SOURCE_TIERS_STUDY.md)),
-Phase 161 (the study ledger: every study as one
-machine-readable row; [`STUDY_LEDGER_STUDY.md`](studies/STUDY_LEDGER_STUDY.md)), and
-Phase 160 (the machine sorts: the 48 carried folds computed by
-counting; [`FOLD_MACHINE_STUDY.md`](studies/FOLD_MACHINE_STUDY.md)), and
-Phase 159 (thermomechanical friction: sintering ships;
-[`THERMO_FRICTION_STUDY.md`](studies/THERMO_FRICTION_STUDY.md)), and
-Phase 158 (the oscillator junction tried four ways;
-[`OSCILLATOR_JUNCTION_STUDY.md`](studies/OSCILLATOR_JUNCTION_STUDY.md)), and
-Phase 157 (five domain wheels with their junctions, and friction, the rest;
-[`DOMAIN_WHEELS_STUDY.md`](studies/DOMAIN_WHEELS_STUDY.md),
-[`FRICTION_TWO_STUDY.md`](studies/FRICTION_TWO_STUDY.md)), and Phase 156
-(friction: what holds when the question moves).
-
-Before those, Phase 155 (the corpus's definitions graded), Phase 154 (the corpus as what the GLM knows), Phase 153 (the
-machine reads what it carries), and Phases 150, 151 and 152.
+**Before those, Phase 179** (improper maps in `tool frame`;
+[`IMPROPER_FRAME_STUDY.md`](studies/IMPROPER_FRAME_STUDY.md)), Phase 178 (colour induction and the frame plane;
+[`COLOUR_INDUCTION_STUDY.md`](studies/COLOUR_INDUCTION_STUDY.md)), Phase 177
+(frame operators: Lorentz boosts in exact arithmetic and the anchor κ;
+[`FRAME_OPERATOR_STUDY.md`](studies/FRAME_OPERATOR_STUDY.md)), Phase 176
+(asking for the separating example;
+[`PIPELINE_ASK_STUDY.md`](studies/PIPELINE_ASK_STUDY.md)), Phase 175 (the
+owner's pipeline kit and `tool induce`;
+[`PIPELINE_KIT_STUDY.md`](studies/PIPELINE_KIT_STUDY.md)), Phases 173 and 174
+([`STACKED_DIALOGUE_STUDY.md`](studies/STACKED_DIALOGUE_STUDY.md),
+[`QUOTED_MEASUREMENTS_STUDY.md`](studies/QUOTED_MEASUREMENTS_STUDY.md)), Phase
+172 ([`RESUMED_DIALOGUE_STUDY.md`](studies/RESUMED_DIALOGUE_STUDY.md)), Phase
+171 ([`EVIDENCE_IN_USE_STUDY.md`](studies/EVIDENCE_IN_USE_STUDY.md)), and
+earlier; each is recorded in `MASTER_PLAN.md`.
 
 ---
 
@@ -156,15 +141,15 @@ machine reads what it carries), and Phases 150, 151 and 152.
 | end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->223<!--/figure-->** cases — 0 confidently wrong, every refusal a `boundary` |
 | benchmark suites | `python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites |
 | capability probes | `python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 surprises |
-| Lean development | `lake build` (repository root) | <!--figure:lean-files-->253 Lean files<!--/figure-->, **0 `sorry`** |
+| Lean development | `lake build` (repository root) | <!--figure:lean-files-->267 Lean files<!--/figure-->, **0 `sorry`** |
 | corpus | `python3 -m glm_universal.corpus --check` | the tier contract, the coverage claim of `ENTRY.md`, every generated block and every derived cache |
 
 The package holds **<!--figure:registers-->8 registers<!--/figure-->** beside a 45-class comparison register,
 **<!--figure:query-kinds-->28 query kinds<!--/figure-->** one of which
 dispatches **<!--figure:report-subjects-->67 report subjects<!--/figure-->**, and 3 tasks. The Lean development is
 addressed declaration by declaration: `reasoning/lean_address.py` gives each of
-the <!--figure:lean-declarations-->5,893<!--/figure--> declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly <!--figure:lean-declarations-->5,893<!--/figure-->/<!--figure:lean-declarations-->5,893<!--/figure--> with 0 coordinate errors
+the <!--figure:lean-declarations-->6,202<!--/figure--> declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly <!--figure:lean-declarations-->6,202<!--/figure-->/<!--figure:lean-declarations-->6,202<!--/figure--> with 0 coordinate errors
 (`report lean`). The other forty-odd instruments, each with its command and its
 current figure, are the table in [`SYSTEM.md`](SYSTEM.md) §1.
 
@@ -178,105 +163,54 @@ are the names earlier records use, kept so that a reference in a study or a
 module docstring still finds its line. When a line is taken, delete it here and
 record the round in `MASTER_PLAN.md`.
 
-### 2.0 The owner's plan for the next runs — read this first
+### 2.0 The owner's plan of 19 October 2026 — every part taken
 
-The owner's development plan of 19 October 2026 is
-[`source_material/GLM_19OCT26_1.md`](source_material/GLM_19OCT26_1.md). It
-sets the direction for the next several runs: take the next round from it
-before anything else in §2. It is a supplied document, not a study, so it
-states aims, not measured results. Check any claim it makes about the system's
-current state against the studies before building on it. Its parts and the
-lines of §2.1 they take over:
-
-* **Part I, thermomechanical friction — taken (Phase 159,
-  [`THERMO_FRICTION_STUDY.md`](studies/THERMO_FRICTION_STUDY.md)).** A, the
-  governor, almost never acts; B, the prompt anchor, is steadier but not more
-  accurate; C, sintering, ships. What it left is the new item 4.
-* **Part II.1, one evidence and result model — taken (Phase 169,
-  [`EVIDENCE_MODEL_STUDY.md`](studies/EVIDENCE_MODEL_STUDY.md)).** Every
-  evaluation answer reads into one `Result` (`runtime/evidence.py`); the
-  census found and repaired two column-3 replays. What it left is the new
-  item 7 of §2.1.
-* **Part II.2, the carried-value gaps — taken (Phase 160,
-  [`FOLD_MACHINE_STUDY.md`](studies/FOLD_MACHINE_STUDY.md), and Phase 163,
-  [`TOOL_MACHINE_STUDY.md`](studies/TOOL_MACHINE_STUDY.md)).** The folds,
-  then the tool answers and verdict-dependent steps, are computed by the
-  machine: no step of an answered chain is carried. What is left is item 2.
-* **Part II.3, contextual domain frames — taken (Phase 170,
-  [`CONTEXT_FRAMES_STUDY.md`](studies/CONTEXT_FRAMES_STUDY.md)).** *Which
-  energy* and *which body drives the wave* are declared contexts a question
-  may name; what is left is item 5.
-* **Part II.4, a declared corpus confidence curve — taken (Phase 168,
-  [`CONFIDENCE_CURVE_STUDY.md`](studies/CONFIDENCE_CURVE_STUDY.md)).** Sure,
-  balanced and candidate modes declared on a calibration fold; definitions
-  carry a quality description. What is left is item 3.
-* **Part II.5, adversarial interactive testing — taken (Phase 167,
-  [`ADVERSARIAL_DIALOGUE_STUDY.md`](studies/ADVERSARIAL_DIALOGUE_STUDY.md)).**
-  Dialogue never promotes a carrier outside the head, proved for any replies;
-  what is left is the new item 8 of §2.1. Item 1 stays postponed.
-
-Every part of the plan has now been taken once. The next round starts from
-§2.1 (Phase 171 took two lines of item 7; Phase 172 took two lines of item 8
-and one of item 7; Phase 173 two more lines of item 8; Phase 174 two more
-lines of item 7).
-* **Part II.6, a machine-readable study ledger — taken (Phase 161,
-  [`STUDY_LEDGER_STUDY.md`](studies/STUDY_LEDGER_STUDY.md)).** Every study is
-  one row read from the files (`tools study-ledger --json`); what it left is
-  the new bullet *the study ledger, the rest* in §2.2.
-* **Part II.7, corpus source tiers reported separately — taken (Phase 162,
-  [`SOURCE_TIERS_STUDY.md`](studies/SOURCE_TIERS_STUDY.md)).** Every corpus
-  experiment is read on five tiers and on the written tier, the supplied tier
-  and both; the confirmed reading is the measured policy; what it left is
-  the new item 6 of §2.1.
-
-When a part is taken, record it in `MASTER_PLAN.md` and its study as usual,
-and mark it taken here. Leave the plan file as supplied.
+The owner's development plan,
+[`source_material/GLM_19OCT26_1.md`](source_material/GLM_19OCT26_1.md), set
+the direction for Phases 159–174. Every part has been taken once, and what
+each left is a line of §2.1 or §2.2: Part I, thermomechanical friction (Phase
+159, [`THERMO_FRICTION_STUDY.md`](studies/THERMO_FRICTION_STUDY.md); item 4);
+II.1, one evidence and result model (Phase 169,
+[`EVIDENCE_MODEL_STUDY.md`](studies/EVIDENCE_MODEL_STUDY.md); item 7); II.2,
+the carried-value gaps (Phases 160 and 163,
+[`FOLD_MACHINE_STUDY.md`](studies/FOLD_MACHINE_STUDY.md),
+[`TOOL_MACHINE_STUDY.md`](studies/TOOL_MACHINE_STUDY.md); item 2); II.3,
+contextual domain frames (Phase 170,
+[`CONTEXT_FRAMES_STUDY.md`](studies/CONTEXT_FRAMES_STUDY.md); item 5); II.4,
+a corpus confidence curve (Phase 168,
+[`CONFIDENCE_CURVE_STUDY.md`](studies/CONFIDENCE_CURVE_STUDY.md); item 3);
+II.5, adversarial interactive testing (Phase 167,
+[`ADVERSARIAL_DIALOGUE_STUDY.md`](studies/ADVERSARIAL_DIALOGUE_STUDY.md); item
+8); II.6, a machine-readable study ledger (Phase 161,
+[`STUDY_LEDGER_STUDY.md`](studies/STUDY_LEDGER_STUDY.md); §2.2); II.7, corpus
+source tiers (Phase 162,
+[`SOURCE_TIERS_STUDY.md`](studies/SOURCE_TIERS_STUDY.md); item 6). The plan
+file stays as supplied. Three standing rules came with it and still hold:
 
 **Standing rule: `source_material/` is the less reliable tier** (owner's note,
-19 October 2026). As a corpus, what is under `source_material/` (older
-scripts, supplied studies, the members of `GLM-main.zip`) is less reliable
-than the documents, code and Lean written and checked in this repository.
-Adapt every corpus-facing mechanism to that. Where things stand now:
-
-* **Already tiered:** the document inventory and its checks
-  (`corpus/inventory.py`) never walk `source_material/`. The knowledge
-  corpus's `define`/`ask` readers rank a supplied or archived sentence below
-  every written one except a stored data file (`knowledge/answer.py`,
-  `source_rank`). The K8′ glossary terms are read from written Markdown
-  only (`knowledge/study.py`, `bold_terms`).
-* **Measured by tier, not yet tiered in use (Phase 162):** the counted model
-  in `knowledge/model.py`, and everything built on it — continuation, the
-  guarded predictor, `similar`, the word address, context sets, the friction
-  respeller's vocabulary — still counts a `source_material/` sentence the same
-  as a written one. `tools source-tiers` now reports the census (1,036 of
-  2,268 documents, 46% of sentences, 39% of tokens in the supplied tier) and
-  every corpus experiment written only, supplied only and both.
-* **The declared way the supplied tier should count** (measured, not yet
-  shipped): *admitted only as a candidate that written evidence must
-  confirm* — the only one of the three declared policies that raises
-  precision on written text; excluding it and down-weighting it both lose
-  precision ([`SOURCE_TIERS_STUDY.md`](studies/SOURCE_TIERS_STUDY.md) §7.4).
-  Until it ships, a corpus reading resting only on `source_material/` is
-  reported as such, not as what the GLM knows. The same goes for retrieval
-  from the older scripts: a result recovered from `GLM-main.zip` is a
-  candidate until it is re-derived, tested or proved here.
+19 October 2026). The document inventory never walks it; `define`/`ask` rank
+a supplied sentence below every written one; the glossary reads written
+Markdown only. The counted model and what is built on it (continuation, the
+guarded predictor, `similar`, the word address, context sets, the respeller's
+vocabulary) still count a supplied sentence like a written one; the declared
+policy — *a supplied reading is a candidate that written evidence must
+confirm* — is measured, not shipped (item 6). Until it ships, a reading
+resting only on `source_material/` is reported as such, and a result recovered
+from `GLM-main.zip` is a candidate until it is re-derived, tested or proved
+here.
 
 **Standing rule: the supplied files stay as supplied** (owner's instruction,
-18 October 2026). `source_material/GLM-main.zip` and the two supplied PDFs
-are kept in the project folder exactly as they are, managed by the owner, and
-out of version control (`.gitignore` keeps every `.zip` and `.pdf` out, with
-a comment saying so). A clone of the repository therefore lacks them; the
-documents that cite them cite files beside the repository, not in it. Nothing
-under `source_material/` is edited, renamed or dated by a round.
+18 October 2026). `source_material/GLM-main.zip` and the supplied PDFs are
+kept in the project folder exactly as they are and out of version control
+(`.gitignore`). Nothing under `source_material/` is edited, renamed or dated
+by a round.
 
 **Standing rule: date every file a round creates or alters** (owner's
 instruction, 18 October 2026; directive D17 in
-[`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md)). A new file says
-`Created <day Month year>`, an altered one `Last altered <day Month year>`,
-in the file itself; a study also says when it was pre-registered and
-measured. `python3 -m glm_universal.tools dates` lists every stamp and fails
-on a bad one. Forward only; `source_material/`, generated documents and
-stored data are exempt.
+[`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md)): `Created <day Month year>`
+or `Last altered <day Month year>` in the file itself; a study also says when
+it was pre-registered and measured. `python3 -m glm_universal.tools dates`
+lists every stamp and fails on a bad one.
 
 ### 2.1 The next round — take one of these
 
@@ -296,17 +230,18 @@ stored data are exempt.
    [`NEAREST_QUESTION_STUDY.md`](studies/NEAREST_QUESTION_STUDY.md) §7.4,
    [`ANSWERING_QUESTION_STUDY.md`](studies/ANSWERING_QUESTION_STUDY.md) §7.5.
 
-2. **The machine's reading, the rest** (left by Phases 153, 160, 163, 164, 165 and 166).
+2. **The machine's reading, the rest** (left by Phases 153, 160, 163, 164, 165, 166 and 180).
    Since Phase 163 no step of an answered stepwise chain is carried, and
    since Phase 166 π is summed by the machine like `e`
    (`PI_MACHINE_STUDY.md`). Since Phase 164
    the Leech shapes are proved and every shell is counted from the Golay
    census (`LEECH_SHELLS_STUDY.md`), but only by the tool: GLM-BAT still
    counts only the minimal shell. Since Phase 165 the minimal shell is proved
-   both ways and its 196,560 is a theorem (`LEECH_KISSING_STUDY.md`); the
-   procedure's correctness for the shells `t ≥ 3` is still argued, not
-   proved (the REM line cites `leech_kissing_number` since Phase 166); a
-   kissing-number question costs about 164,000 machine steps (the census
+   both ways and its 196,560 is a theorem (`LEECH_KISSING_STUDY.md`); since
+   Phase 180 the procedure is proved correct for every shell and the first
+   eight shells are theorems (`LEECH_SHELL_COUNT_STUDY.md`), though the
+   `llvq` answer does not cite the proof yet (citing it moves recorded
+   answers, so the frozen paths need re-taking); a kissing-number question costs about 164,000 machine steps (the census
    could be cached by digest); reals other than
    `π`, `e`, `√m` and tools other than the five computed stay carried. Which
    rows belong to a declared set is still the planner's (a membership file,
@@ -319,6 +254,7 @@ stored data are exempt.
    [`FOLD_MACHINE_STUDY.md`](studies/FOLD_MACHINE_STUDY.md) §7.4,
    [`LEECH_SHELLS_STUDY.md`](studies/LEECH_SHELLS_STUDY.md) §7.3,
    [`LEECH_KISSING_STUDY.md`](studies/LEECH_KISSING_STUDY.md) §7.3,
+   [`LEECH_SHELL_COUNT_STUDY.md`](studies/LEECH_SHELL_COUNT_STUDY.md) §7.3,
    [`PI_MACHINE_STUDY.md`](studies/PI_MACHINE_STUDY.md) §7.3.
 
 3. **The corpus, read more finely** (left by Phases 154, 155 and 168).
@@ -421,17 +357,59 @@ stored data are exempt.
    [`RESUMED_DIALOGUE_STUDY.md`](studies/RESUMED_DIALOGUE_STUDY.md) §7.4,
    [`ADVERSARIAL_DIALOGUE_STUDY.md`](studies/ADVERSARIAL_DIALOGUE_STUDY.md) §7.4.
 
-9. **Rule induction, the rest** (left by Phase 175). `tool induce` answers
-   within a binary operator vocabulary and chains at most two steps. Next:
-   colours and objects (per-colour masks, object extraction, per-object
-   operators) so that real ARC grids can be read; chains of three or more
+9. **Rule induction, the rest** (left by Phases 175, 176 and 178). Since
+   Phase 178 `tool induce` reads colour grids and objects and `tool arc`
+   reads the 50 stored ARC tasks: 0 wrong, but only 2 of 50 right (the vision
+   stack's 2), 48 refused because nothing in the vocabulary fits. Next: a
+   wider vocabulary that pays its way on real grids (per-object operators,
+   line drawing, local rules — a first try at local rules gave 0 new solves
+   and was not shipped), measured on a **fresh held-out ARC set** (the 50
+   stored tasks are no longer held out for this solver); asking for the
+   separating example on colour tasks (C2 missed: 302 of 360 at three
+   demonstrations; 192 disagreements and 122 unread parameters are refusals
+   an ask could resolve); a family set on which the span rule prevents an
+   error the unread rule does not (C4 missed at the second take: the span
+   rule cost 83 right answers and prevented none); chains of three or more
    steps under a declared cost bound per step (D13) rather than enumeration;
-   when it refuses, choose the query grid that would separate the disagreeing
-   hypotheses and ask for its output through the conversation (the stacked
-   dialogue of Phase 173 can hold that question open); and the kit's other
-   open line, re-running the neural learners of iterations 1, 5–7 and 9 on the
-   exact labels (needs `numpy`/`torch`, not available here).
-   [`PIPELINE_KIT_STUDY.md`](studies/PIPELINE_KIT_STUDY.md) §7.4.
+   when choosing the example, count *no output* as a reply of its own; hold
+   the ask open in the conversation and read the reply back as a
+   demonstration (Phase 173's stacked dialogue can carry it); and re-running
+   the kit's neural learners on the exact labels (needs `numpy`/`torch`).
+   [`COLOUR_INDUCTION_STUDY.md`](studies/COLOUR_INDUCTION_STUDY.md) §9,
+   [`PIPELINE_KIT_STUDY.md`](studies/PIPELINE_KIT_STUDY.md) §7.4,
+   [`PIPELINE_ASK_STUDY.md`](studies/PIPELINE_ASK_STUDY.md) §7.4.
+
+10. **Frame operators, the rest** (left by Phases 177, 178, 179 and 181). Since
+    Phase 178 `tool frame` works in 1+2 dimensions (boosts along any axis,
+    rotations, their compositions, Thomas–Wigner read exactly) and the span
+    rule and invariant reading are in `tool induce`; since Phase 179 the
+    improper maps (reflections, time reversal, and their compositions with
+    Lorentz maps) are declared families, named by component
+    ([`IMPROPER_FRAME_STUDY.md`](studies/IMPROPER_FRAME_STUDY.md) §7.4).
+    Since Phase 181 an improper map times a change of units is a family too
+    ([`IMPROPER_UNITS_STUDY.md`](studies/IMPROPER_UNITS_STUDY.md) §7.3), with
+    a rational scale (an irrational one is refused, as for `lorentz_units`).
+    Left: hold `tool
+    frame`'s ask open in the conversation as Phase 173 does; 3+1 dimensions. Test the TAX refractive-index law only with material data
+    fixed independently of the indices (the review's four conditions;
+    [`FRAME_OPERATOR_STUDY.md`](studies/FRAME_OPERATOR_STUDY.md) §9). Decide
+    which tabulated quantity κ names (`D0` or the 298 K bond energy) and
+    whether the tick budget is `27` or `24 + 8Q`; both shift every output
+    more than κ's digits do (§6).
+
+11. **The Lorentzian evidence space, the rest** (left by Phases 182 and
+    183). The lift is an evidence space in any dimension, the certificate
+    guard and the settling question are in `tool lorentz`, and `tool
+    evidence` combines examples of a relation over the physics register
+    ([`LORENTZIAN_EVIDENCE_STUDY.md`](studies/LORENTZIAN_EVIDENCE_STUDY.md)
+    §8). Left: a declared majority rule for conflicting examples (the vote
+    answered 155 of 300 right, 0 wrong, where the dispersion guard refused all
+    300), with its own soundness condition; the evidence space on Leech-level
+    address ties (`reasoning/tie_break.py`) and the other 22 deep-hole types;
+    holding `tool lorentz`'s five-bit question open across conversation turns
+    (as Phase 173 does); and the 27 decoy errors no reading-only rule can
+    remove, which need a record of which message a reading is of (Phase 133's
+    sender tag is the instrument of that kind).
 
 ### 2.2 Smaller follow-ups left by closed studies
 

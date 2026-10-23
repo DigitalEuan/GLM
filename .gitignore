@@ -1,27 +1,24 @@
-.lake/
-*.olean
-*.ilean
-*.trace
-*.ir
-*.o
-*.so
-*.tar
-*.tar.gz
-*.tgz
-*.tar.bz2
-*.tar.xz
-*.tar.zst
-*.gz
-*.bz2
-*.xz
-*.zst
+# Created 22 October 2026 (Phase 178): the tree as uploaded carried no
+# .gitignore, and Python bytecode was tracked again (STATUS.md section 2.2,
+# "Tidiness, the rest").
+#
+# The supplied files stay as supplied and outside version control (owner's
+# instruction, 18 October 2026): GLM-main.zip and the supplied PDFs.
 *.zip
-*.7z
-*.rar
 *.pdf
-*.png
-*.svg
-
-# Python bytecode is never tracked (Phase 172, restored Phase 173)
+# Python bytecode and test caches
 __pycache__/
 *.pyc
+.pytest_cache/
+# Lean build tree
+.lake/
+# Added 22 October 2026 (Phase 179): the 135 MB counted-knowledge cache is
+# rebuilt by `corpus --refresh`; each re-written copy made a push too large
+# for the git server, so it is kept out of version control.
+# Widened 22 October 2026 (after Phase 179): the whole cache directory. The two
+# word-address books beside it (about 1 MB each) are re-written on every
+# corpus change too, so they were the same problem at a smaller size. All of
+# it is rebuilt on first use (see STATUS.md, "Repository hygiene"), and
+# tests/test_repository_hygiene.py fails if any of it is tracked again or if a
+# tracked file grows past 10 MB.
+overlay/glm_universal/knowledge/_knowledge_cache/
