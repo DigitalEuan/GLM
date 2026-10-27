@@ -1,0 +1,27 @@
+--- a/glm_universal/runtime/toolbox.py	2026-10-24 06:06:53.805956047 +0000
++++ b/glm_universal/runtime/toolbox.py	2026-10-24 06:06:53.820659756 +0000
+@@ -975,6 +975,24 @@
+         ok, text, figures = ci.induce_colour_text(pairs, query)
+         return ToolResult(ok, text, figures)
+     ok, text, figures = pk.induce_text(arg)
++    # Rule 30 study, Round 10: a one-row binary task that no kit family fits is read by the
++    # radius-1 wheel family (reasoning/wheel_induction.py).  Answers the kit already gives are
++    # unchanged; the wheel reading answers only when every surviving wheel agrees
++    # (Lean: GLM.Rule30.next_row_determined_iff).
++    if not ok and figures.get("status") == "unsolved":
++        from ..reasoning import wheel_induction as wi
++        grids = [g for part in arg.replace("?", ";").split(";")
++                 for g in part.split("->") if g.strip()]
++        if grids and all(pk.parse_grid(g) is not None and len(pk.parse_grid(g)) == 1
++                         for g in grids):
++            try:
++                wok, wtext, wfig = wi.induce_rows_text(arg)
++            except ValueError:
++                wok = None
++            if wok is not None:
++                wfig = dict(wfig, family="wheel", kit_status="unsolved")
++                return ToolResult(wok, "induce (wheel family; no kit family fits): " + wtext,
++                                  wfig)
+     return ToolResult(ok, text, figures)
+ 
+ 

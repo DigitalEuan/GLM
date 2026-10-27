@@ -5,7 +5,7 @@
 
 **Question.** What has each phase of the wiring plan delivered, and what does the next round start from?
 
-**Verdict.** Phase 183 is closed: the Lorentzian lift read as an evidence space for reasoning in general. `LorentzianEvidence.lean` proves in any dimension that weighted cues sum to the consensus plus the Weyl vector times their disagreement (`evidence_decomp`), that the Lorentzian norm is minus the disagreement (`evid_norm`), that analogy is evidence with weights 1, −1, 1 (`analogy_evidence`), and that a question settling a Golay tie needs five positions (`card_ge_of_separates`); the certificate guard in `tool lorentz` cuts wrong answers on the Golay decoy from 61 to 27 with no right answer lost, the 27 indistinguishable from honest readings; the settling question answers 600 of 600 tied readings with five bits; `tool evidence` refuses examples that do not state one relation; 13 of 15 marks. Before it Phase 182: the owner's `iter10_lorentzian.py` audited and repaired, every Golay tie an A_1^24 deep hole, no reflection-invariant rule breaking a tie, summed scores over further readings resolving ties (11 of 12 marks); and Phases 180 and 181 (every Leech shell proved; improper Lorentz maps times units in `tool frame`). Phase 184 starts from the To-Do list in [`STATUS.md`](STATUS.md) §2.
+**Verdict.** Phase 184 is closed: the declared majority rule for conflicting evidence. `LorentzianMajority.lean` proves that the target a strict majority of the weight states is unique, that the rule is never wrong while the honest examples hold at least half the weight and right above half, that agreeing decoys below half carry it (the condition is tight), and that a wrong answer needs decoys weighing at least the answer's own group; `tool majority` answers 155 and 161 right, 0 wrong, on the decoy conditions the guard refuses, and refuses where a plurality vote is wrong 150 times; 8 of 8 marks. Before it Phase 183: the Lorentzian lift read as an evidence space for reasoning in general. `LorentzianEvidence.lean` proves in any dimension that weighted cues sum to the consensus plus the Weyl vector times their disagreement (`evidence_decomp`), that the Lorentzian norm is minus the disagreement (`evid_norm`), that analogy is evidence with weights 1, −1, 1 (`analogy_evidence`), and that a question settling a Golay tie needs five positions (`card_ge_of_separates`); the certificate guard in `tool lorentz` cuts wrong answers on the Golay decoy from 61 to 27 with no right answer lost, the 27 indistinguishable from honest readings; the settling question answers 600 of 600 tied readings with five bits; `tool evidence` refuses examples that do not state one relation; 13 of 15 marks. Before it Phase 182: the owner's `iter10_lorentzian.py` audited and repaired, every Golay tie an A_1^24 deep hole, no reflection-invariant rule breaking a tie, summed scores over further readings resolving ties (11 of 12 marks); and Phases 180 and 181 (every Leech shell proved; improper Lorentz maps times units in `tool frame`). Phase 185 starts from the To-Do list in [`STATUS.md`](STATUS.md) §2.
 
 **Deciding figure.** Every closed phase names what was built, where it lives, and how to see it recompute itself.
 
@@ -25,7 +25,7 @@ recompute itself.
 
 Everything below is reachable from the package's public API and from the query
 runtime — **<!--figure:query-kinds-->28 query kinds<!--/figure-->**, **<!--figure:report-subjects-->67 report subjects<!--/figure-->** and **<!--figure:registers-->8 registers<!--/figure-->** — is
-covered by the test suite (<!--figure:test-files-->238 test files<!--/figure-->),
+covered by the test suite (<!--figure:test-files-->239 test files<!--/figure-->),
 and — where it is a report or a task — has a generated column-3 script that
 recomputes the claim in a **fresh interpreter** and fails if anything differs.
 
@@ -180,6 +180,70 @@ The detail of each — what was built, where it lives and what recomputes it —
 is in [`archive/MASTER_PLAN_ARCHIVE.md`](archive/MASTER_PLAN_ARCHIVE.md), kept as it was
 written.  A phase is a record of a round, so it is archived by the same rule
 as everything else: only the open phase is state.
+
+---
+
+## Phase 184 — the declared majority rule
+
+*Created 23 October 2026.*
+
+**Status: closed.** Taken from `STATUS.md` §2.1 item 11, its first line: *a
+declared majority rule for conflicting examples, with its own soundness
+condition* (Phase 183's vote answered 155 of 300 right, 0 wrong, where the
+dispersion guard refused all 300). Study:
+[`studies/LORENTZIAN_MAJORITY_STUDY.md`](studies/LORENTZIAN_MAJORITY_STUDY.md)
+(marks written into the measurement module and committed before its first
+run).
+
+* **Lean.** `LorentzianMajority.lean`, over any finite set of cues with
+  rational weights and targets of any type: agreeing groups and the rule
+  (`group`, `gweight`, `IsMajority`, `majorityRule`); at most one strict
+  majority (`majority_unique`); the rule answers exactly a strict majority
+  (`majorityRule_eq_some_iff`, `majorityRule_eq_none_iff`); **the soundness
+  condition** (`majority_never_wrong`, `majority_sound`); its tightness
+  (`majority_misled`); the price of a wrong answer, decoys weighing at
+  least the answer's own group (`majority_wrong_needs_decoys`); unit-weight forms
+  (`majority_sound_count`, `majority_never_wrong_count`); each group null in
+  the evidence space (`group_disp_zero`, `group_evid_null`); the rule extends
+  the dispersion guard (`majority_extends_guard`). In `AxiomAuditAll.lean`:
+  10069 theorems, standard axioms only.
+* **Mechanism.** `reasoning/lorentzian_majority.py`: `groups`, `majority`
+  (exact fractions, non-negative weights), `relation_majority` over the
+  physics register, `majority_text`.
+* **Wiring.** `tool majority A : B [, A2 : B2 …] :: C` is new (the outvoted
+  examples named, every answer with its price); `tools lorentzian-majority`
+  (the study), declared measurement-only. `tool evidence` is unchanged.
+* **Measured.** Physics relations, 300 queries per condition, Phase 183's
+  seed: honest majority (clean1–3, decoy3, decoy5) right on every present
+  target, 0 wrong (decoy3 155 and decoy5 161, the guard 0); honest exactly
+  half (decoy2, decoy4) 0 wrong; collude3 (one honest, two agreeing decoys)
+  wrong 148 times, exactly the queries `majority_misled` predicts; collude5
+  refused 300 of 300 where the plurality vote is wrong 150 times; decoy4 0
+  right where the plurality has 149 (two honest examples against two
+  disagreeing decoys are not a strict majority). Identities on 300 random
+  weighted sets. 8 of 8 marks.
+* **Housekeeping: `report lean` under the ceiling again.** With the Lean
+  development at 6,224 declarations `report lean` took about 199 seconds on
+  its own and timed out at the evaluation's 300-second ceiling when the
+  evaluation ran on eight processes (221 of 223; `report relay` timed out
+  beside it). As in the round that first met this, the arithmetic was fixed
+  rather than the ceiling raised: `lean_address.nearest_points` now orders
+  the points by their projection on an integer principal axis (power
+  iteration in exact integers) and stops a scan when the projected gap
+  exceeds the best distance (Cauchy–Schwarz, an exact bound for any integer
+  direction), and takes each distance as `|p|² + |q|² − 2 p·q` with the norms
+  computed once. The separation search went from about 34 + 133 + 31 seconds
+  to 6 + 32 + 6 for the three schemes, `report lean` from 199 to 56 seconds,
+  every figure unchanged; `TestTheFastRoutinesAreTheDefinitions` (the search
+  against brute force on all three schemes) passes. `report relay` (about
+  230 seconds alone, dominated by the 1,660 ranking queries of the relay
+  study) is unchanged and is a To-Do line. Editing `lean_address.py` made the
+  stored measurements that digest it stale; they were re-taken.
+
+Tests: `tests/test_lorentzian_majority.py` (5), run by hand: all pass (pytest
+is not installed here); `tests/test_connected_machine.py` updated for the new
+tool module and run under unittest with a stand-in for pytest's marker: all
+pass.
 
 ---
 

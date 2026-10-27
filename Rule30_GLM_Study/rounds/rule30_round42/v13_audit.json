@@ -1,0 +1,188 @@
+{
+  "engine": "hypothesis_engine_v13.py (quick mode, unmodified)",
+  "status_counts": {
+    "law-holds": 3,
+    "open": 2,
+    "prediction-confirmed": 1,
+    "refuted-by-prediction": 1,
+    "refuted-heldout": 11,
+    "survives": 27
+  },
+  "tax_range": [
+    2,
+    6000
+  ],
+  "conserved_pairs": 116,
+  "conserved_with_white_member": [
+    2,
+    3,
+    7,
+    8,
+    28,
+    29,
+    399,
+    400
+  ],
+  "conserved_equal_patterns": [
+    6,
+    27,
+    398
+  ],
+  "conserved_other": 105,
+  "H38": {
+    "hid": "H38",
+    "status": "refuted-heldout"
+  },
+  "guards": [
+    {
+      "guard": "identity",
+      "ok": false,
+      "sentence": "v13 docstring 'conserved iff w(a AND b) in {0, w(a), w(b)}': the stated criterion is wrong -- 276 cases satisfy it but are false, 6 are true but fail it (of 819 checked).",
+      "witnesses": [
+        "(1, 1, 0)",
+        "(1, 2, 0)",
+        "(1, 2, 1)",
+        "(1, 3, 0)",
+        "(1, 3, 1)",
+        "(1, 4, 0)",
+        "(1, 4, 1)",
+        "(1, 5, 0)",
+        "(1, 5, 1)",
+        "(1, 6, 0)",
+        "(3, 3, 1)",
+        "(5, 8, 2)",
+        "(6, 6, 2)",
+        "(8, 5, 2)",
+        "(9, 9, 3)",
+        "(12, 12, 4)"
+      ],
+      "n_witnesses": 16,
+      "data": {
+        "checked": "819",
+        "over_accepts": "276",
+        "misses": "6",
+        "first_over": "[(1, 1, 0)]",
+        "first_miss": "[(3, 3, 1)]",
+        "lean": "GLM.HypothesisEngine.Tax.docstring_criterion_wrong"
+      }
+    },
+    {
+      "guard": "identity",
+      "ok": true,
+      "sentence": "closed form 'defect = -2(3c^2 - 2c(a+b) + ab)': the stated criterion agrees with the truth on all 819 cases checked.",
+      "witnesses": [],
+      "n_witnesses": 0,
+      "data": {
+        "checked": "819",
+        "over_accepts": "0",
+        "misses": "0",
+        "first_over": "[]",
+        "first_miss": "[]",
+        "lean": "GLM.HypothesisEngine.Tax.tax_defect_eq"
+      }
+    },
+    {
+      "guard": "explained-away",
+      "ok": false,
+      "sentence": "'TAX is conserved at every period doubling' (v13 POSITIVE FINDING): EXPLAINED -- every event satisfies 'white(D-1)' (hypothesis of the doubling law ldiag_doubles), and the feature holds at all 4 domain points where 'white(D-1)' holds; proved in general: GLM.HypothesisEngine.Tax.tax_conserved_at_doubling. Not a new mechanism.",
+      "witnesses": [
+        "white(D-1)"
+      ],
+      "n_witnesses": 1,
+      "data": {
+        "premise": "white(D-1)",
+        "premise_points": "4",
+        "implication": "GLM.HypothesisEngine.Tax.tax_conserved_at_doubling"
+      }
+    },
+    {
+      "guard": "coincidence",
+      "ok": true,
+      "sentence": "statistics alone: 4 of 4 events carry the feature (expected 0.077); exact P(X >= 4) = 1.33e-07, P(X <= 4) = 1. A statistics-only engine would call this significant; the explained-away guard shows it is forced by white(D-1).",
+      "witnesses": [],
+      "n_witnesses": 0,
+      "data": {
+        "N": "5998",
+        "K": "116",
+        "n": "4",
+        "hit": "4",
+        "expected": "232/2999",
+        "p_upper": "1432049/10774821292301",
+        "p_lower": "1"
+      }
+    },
+    {
+      "guard": "exclusivity",
+      "ok": false,
+      "sentence": "'TAX is CONSERVED only at the white diagonals' (v13 cross-domain lift): false -- 108 of the 116 feature points lie outside the claimed set (first: 6).",
+      "witnesses": [
+        "6",
+        "27",
+        "33",
+        "36",
+        "54",
+        "92",
+        "102",
+        "125",
+        "156",
+        "161",
+        "184",
+        "191",
+        "213",
+        "268",
+        "293",
+        "376",
+        "381",
+        "398",
+        "403",
+        "425"
+      ],
+      "n_witnesses": 108,
+      "data": {
+        "feature_points": "116",
+        "outside": "108",
+        "lean": "GLM.HypothesisEngine.Tax.tax_conserved_not_only_white"
+      }
+    },
+    {
+      "guard": "consistency",
+      "ok": false,
+      "sentence": "2 sentence(s) assert a claim whose hypothesis was refuted (first: utterance 40, H38).",
+      "witnesses": [
+        "(40, 'H38', 'TAX conservation breakdown is NECESSARY (v12:')",
+        "(90, 'H38', 'The honest conclusion is that TAX conservation breakdown is NECESSARY (v12:')"
+      ],
+      "n_witnesses": 2,
+      "data": {
+        "flagged": "2"
+      }
+    }
+  ],
+  "static": [
+    {
+      "check": "header promises an exact permutation test over C(N, k) placements",
+      "ok": false,
+      "finding": "promised in the module docstring (step 4) but not implemented: the code compares the mean distance with its uniform expectation only, with no p-value"
+    },
+    {
+      "check": "self-contained (standard library only)",
+      "ok": true,
+      "finding": "imports: __future__, collections, dataclasses, fractions, json, pathlib, sys, time, typing"
+    },
+    {
+      "check": "'NEW TO THE LEDGER' is printed only for surviving hypotheses",
+      "ok": false,
+      "finding": "printed for every tool-generated key not in the ledger, whatever its status -- including refuted ones (H38 in the run below)"
+    },
+    {
+      "check": "the doubling law is stated with both conjuncts",
+      "ok": false,
+      "finding": "the TAX narrative says 'a jump occurs exactly when the (D-1) pattern is eventually white'; white(D-1) alone is refuted at D = 53208 (C388), the law needs odd parity of D-2 as well (ldiag_doubles, ldiag_keeps_of_even)"
+    },
+    {
+      "check": "Y = 1/(pi + 2/pi) must be irrational for the reduction",
+      "ok": false,
+      "finding": "not needed: the linear part Y*w cancels for every real Y because w(a XOR b) = w(a) + w(b) - 2 w(a AND b) always holds (tax_conserved_iff_defect_zero)"
+    }
+  ]
+}

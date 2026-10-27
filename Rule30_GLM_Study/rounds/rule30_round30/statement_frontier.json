@@ -1,0 +1,1442 @@
+{
+ "levels": {
+  "2": 20,
+  "3": 18,
+  "4": 16
+ },
+ "amort_levels": 12,
+ "statements": [
+  {
+   "statement": [
+    "AMORT",
+    2,
+    1,
+    11
+   ],
+   "chain": [],
+   "witness": [
+    1,
+    11,
+    20,
+    2
+   ],
+   "depth": 0,
+   "cost": 12,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "LIN",
+    2,
+    1,
+    20
+   ],
+   "chain": [],
+   "witness": [
+    1,
+    11,
+    1493,
+    30
+   ],
+   "depth": 0,
+   "cost": 21,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "AMORT",
+    2,
+    2,
+    3
+   ],
+   "chain": [
+    "steeper"
+   ],
+   "witness": [
+    2,
+    1,
+    6,
+    1
+   ],
+   "depth": 1,
+   "cost": 6,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "LIN",
+    2,
+    2,
+    9
+   ],
+   "chain": [
+    "steeper"
+   ],
+   "witness": [
+    1,
+    11,
+    1493,
+    30
+   ],
+   "depth": 1,
+   "cost": 12,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "LIN",
+    2,
+    2,
+    11
+   ],
+   "chain": [
+    "implies(derived)"
+   ],
+   "witness": null,
+   "depth": 1,
+   "cost": 14,
+   "derived_from": [
+    "AMORT",
+    2,
+    1,
+    11
+   ]
+  },
+  {
+   "statement": [
+    "AMORT",
+    3,
+    1,
+    14
+   ],
+   "chain": [
+    "analogy"
+   ],
+   "witness": [
+    4,
+    10,
+    20,
+    6
+   ],
+   "depth": 1,
+   "cost": 17,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "LIN",
+    3,
+    1,
+    39
+   ],
+   "chain": [
+    "analogy"
+   ],
+   "witness": [
+    4,
+    18,
+    133325,
+    56
+   ],
+   "depth": 1,
+   "cost": 42,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "AMORT",
+    2,
+    3,
+    2
+   ],
+   "chain": [
+    "steeper",
+    "steeper"
+   ],
+   "witness": [
+    2,
+    1,
+    6,
+    1
+   ],
+   "depth": 2,
+   "cost": 7,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "AMORT",
+    3,
+    2,
+    4
+   ],
+   "chain": [
+    "steeper",
+    "analogy"
+   ],
+   "witness": [
+    1,
+    3,
+    12,
+    1
+   ],
+   "depth": 2,
+   "cost": 9,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "LIN",
+    2,
+    3,
+    5
+   ],
+   "chain": [
+    "steeper",
+    "steeper"
+   ],
+   "witness": [
+    2,
+    1,
+    1,
+    7
+   ],
+   "depth": 2,
+   "cost": 10,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "LIN",
+    2,
+    3,
+    6
+   ],
+   "chain": [
+    "steeper",
+    "implies(derived)"
+   ],
+   "witness": null,
+   "depth": 2,
+   "cost": 11,
+   "derived_from": [
+    "AMORT",
+    2,
+    2,
+    3
+   ]
+  },
+  {
+   "statement": [
+    "LIN",
+    3,
+    2,
+    14
+   ],
+   "chain": [
+    "analogy",
+    "implies(derived)"
+   ],
+   "witness": null,
+   "depth": 2,
+   "cost": 19,
+   "derived_from": [
+    "AMORT",
+    3,
+    1,
+    14
+   ]
+  },
+  {
+   "statement": [
+    "AMORT",
+    4,
+    1,
+    19
+   ],
+   "chain": [
+    "analogy",
+    "analogy"
+   ],
+   "witness": [
+    4,
+    9,
+    26,
+    2
+   ],
+   "depth": 2,
+   "cost": 24,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "LIN",
+    3,
+    2,
+    21
+   ],
+   "chain": [
+    "steeper",
+    "analogy"
+   ],
+   "witness": [
+    4,
+    18,
+    133325,
+    56
+   ],
+   "depth": 2,
+   "cost": 26,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "LIN",
+    4,
+    1,
+    59
+   ],
+   "chain": [
+    "analogy",
+    "analogy"
+   ],
+   "witness": [
+    2,
+    15,
+    20202,
+    73
+   ],
+   "depth": 2,
+   "cost": 64,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "AMORT",
+    2,
+    4,
+    1
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper"
+   ],
+   "witness": [
+    2,
+    1,
+    4,
+    1
+   ],
+   "depth": 3,
+   "cost": 8,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "AMORT",
+    3,
+    3,
+    2
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "analogy"
+   ],
+   "witness": [
+    1,
+    1,
+    6,
+    1
+   ],
+   "depth": 3,
+   "cost": 9,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "LIN",
+    2,
+    4,
+    4
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper"
+   ],
+   "witness": [
+    2,
+    1,
+    1,
+    7
+   ],
+   "depth": 3,
+   "cost": 11,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "AMORT",
+    4,
+    2,
+    6
+   ],
+   "chain": [
+    "steeper",
+    "analogy",
+    "analogy"
+   ],
+   "witness": [
+    1,
+    1,
+    12,
+    1
+   ],
+   "depth": 3,
+   "cost": 13,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "LIN",
+    2,
+    4,
+    6
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "implies(derived)"
+   ],
+   "witness": null,
+   "depth": 3,
+   "cost": 13,
+   "derived_from": [
+    "AMORT",
+    2,
+    3,
+    2
+   ]
+  },
+  {
+   "statement": [
+    "LIN",
+    3,
+    3,
+    7
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "analogy"
+   ],
+   "witness": [
+    1,
+    3,
+    5,
+    15
+   ],
+   "depth": 3,
+   "cost": 14,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "LIN",
+    3,
+    3,
+    8
+   ],
+   "chain": [
+    "steeper",
+    "analogy",
+    "implies(derived)"
+   ],
+   "witness": null,
+   "depth": 3,
+   "cost": 15,
+   "derived_from": [
+    "AMORT",
+    3,
+    2,
+    4
+   ]
+  },
+  {
+   "statement": [
+    "LIN",
+    4,
+    2,
+    19
+   ],
+   "chain": [
+    "analogy",
+    "analogy",
+    "implies(derived)"
+   ],
+   "witness": null,
+   "depth": 3,
+   "cost": 26,
+   "derived_from": [
+    "AMORT",
+    4,
+    1,
+    19
+   ]
+  },
+  {
+   "statement": [
+    "LIN",
+    4,
+    2,
+    44
+   ],
+   "chain": [
+    "steeper",
+    "analogy",
+    "analogy"
+   ],
+   "witness": [
+    2,
+    15,
+    20202,
+    73
+   ],
+   "depth": 3,
+   "cost": 51,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "AMORT",
+    2,
+    5,
+    1
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper",
+    "steeper"
+   ],
+   "witness": [
+    2,
+    1,
+    5,
+    1
+   ],
+   "depth": 4,
+   "cost": 10,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "AMORT",
+    3,
+    4,
+    1
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper",
+    "analogy"
+   ],
+   "witness": [
+    1,
+    1,
+    4,
+    1
+   ],
+   "depth": 4,
+   "cost": 10,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "LIN",
+    2,
+    5,
+    3
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper",
+    "steeper"
+   ],
+   "witness": [
+    2,
+    1,
+    1,
+    7
+   ],
+   "depth": 4,
+   "cost": 12,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "AMORT",
+    4,
+    3,
+    4
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "analogy",
+    "analogy"
+   ],
+   "witness": [
+    1,
+    1,
+    12,
+    1
+   ],
+   "depth": 4,
+   "cost": 13,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "LIN",
+    2,
+    5,
+    4
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper",
+    "implies(derived)"
+   ],
+   "witness": null,
+   "depth": 4,
+   "cost": 13,
+   "derived_from": [
+    "AMORT",
+    2,
+    4,
+    1
+   ]
+  },
+  {
+   "statement": [
+    "LIN",
+    3,
+    4,
+    4
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper",
+    "analogy"
+   ],
+   "witness": [
+    2,
+    1,
+    1,
+    7
+   ],
+   "depth": 4,
+   "cost": 13,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "LIN",
+    3,
+    4,
+    6
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "analogy",
+    "implies(derived)"
+   ],
+   "witness": null,
+   "depth": 4,
+   "cost": 15,
+   "derived_from": [
+    "AMORT",
+    3,
+    3,
+    2
+   ]
+  },
+  {
+   "statement": [
+    "LIN",
+    4,
+    3,
+    12
+   ],
+   "chain": [
+    "steeper",
+    "analogy",
+    "analogy",
+    "implies(derived)"
+   ],
+   "witness": null,
+   "depth": 4,
+   "cost": 21,
+   "derived_from": [
+    "AMORT",
+    4,
+    2,
+    6
+   ]
+  },
+  {
+   "statement": [
+    "LIN",
+    4,
+    3,
+    29
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "analogy",
+    "analogy"
+   ],
+   "witness": [
+    2,
+    15,
+    20202,
+    73
+   ],
+   "depth": 4,
+   "cost": 38,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "AMORT",
+    2,
+    6,
+    1
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper",
+    "steeper",
+    "steeper"
+   ],
+   "witness": [
+    2,
+    1,
+    6,
+    1
+   ],
+   "depth": 5,
+   "cost": 12,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "AMORT",
+    3,
+    5,
+    1
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper",
+    "steeper",
+    "analogy"
+   ],
+   "witness": [
+    1,
+    1,
+    5,
+    1
+   ],
+   "depth": 5,
+   "cost": 12,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "LIN",
+    2,
+    6,
+    2
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper",
+    "steeper",
+    "steeper"
+   ],
+   "witness": [
+    2,
+    1,
+    1,
+    7
+   ],
+   "depth": 5,
+   "cost": 13,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "AMORT",
+    4,
+    4,
+    3
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper",
+    "analogy",
+    "analogy"
+   ],
+   "witness": [
+    1,
+    1,
+    12,
+    1
+   ],
+   "depth": 5,
+   "cost": 14,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "LIN",
+    3,
+    5,
+    3
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper",
+    "steeper",
+    "analogy"
+   ],
+   "witness": [
+    2,
+    1,
+    1,
+    7
+   ],
+   "depth": 5,
+   "cost": 14,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "LIN",
+    3,
+    5,
+    4
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper",
+    "analogy",
+    "implies(derived)"
+   ],
+   "witness": null,
+   "depth": 5,
+   "cost": 15,
+   "derived_from": [
+    "AMORT",
+    3,
+    4,
+    1
+   ]
+  },
+  {
+   "statement": [
+    "LIN",
+    2,
+    6,
+    5
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper",
+    "steeper",
+    "implies(derived)"
+   ],
+   "witness": null,
+   "depth": 5,
+   "cost": 16,
+   "derived_from": [
+    "AMORT",
+    2,
+    5,
+    1
+   ]
+  },
+  {
+   "statement": [
+    "LIN",
+    4,
+    4,
+    12
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "analogy",
+    "analogy",
+    "implies(derived)"
+   ],
+   "witness": null,
+   "depth": 5,
+   "cost": 23,
+   "derived_from": [
+    "AMORT",
+    4,
+    3,
+    4
+   ]
+  },
+  {
+   "statement": [
+    "LIN",
+    4,
+    4,
+    14
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper",
+    "analogy",
+    "analogy"
+   ],
+   "witness": [
+    2,
+    15,
+    20202,
+    73
+   ],
+   "depth": 5,
+   "cost": 25,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "AMORT",
+    3,
+    6,
+    1
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper",
+    "steeper",
+    "steeper",
+    "analogy"
+   ],
+   "witness": [
+    1,
+    1,
+    6,
+    1
+   ],
+   "depth": 6,
+   "cost": 14,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "AMORT",
+    4,
+    5,
+    2
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper",
+    "steeper",
+    "analogy",
+    "analogy"
+   ],
+   "witness": [
+    1,
+    1,
+    10,
+    1
+   ],
+   "depth": 6,
+   "cost": 15,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "LIN",
+    3,
+    6,
+    2
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper",
+    "steeper",
+    "steeper",
+    "analogy"
+   ],
+   "witness": [
+    2,
+    1,
+    1,
+    7
+   ],
+   "depth": 6,
+   "cost": 15,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "LIN",
+    3,
+    6,
+    5
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper",
+    "steeper",
+    "analogy",
+    "implies(derived)"
+   ],
+   "witness": null,
+   "depth": 6,
+   "cost": 18,
+   "derived_from": [
+    "AMORT",
+    3,
+    5,
+    1
+   ]
+  },
+  {
+   "statement": [
+    "LIN",
+    2,
+    7,
+    6
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper",
+    "steeper",
+    "steeper",
+    "implies(derived)"
+   ],
+   "witness": null,
+   "depth": 6,
+   "cost": 19,
+   "derived_from": [
+    "AMORT",
+    2,
+    6,
+    1
+   ]
+  },
+  {
+   "statement": [
+    "LIN",
+    4,
+    5,
+    9
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper",
+    "steeper",
+    "analogy",
+    "analogy"
+   ],
+   "witness": [
+    2,
+    1,
+    1,
+    13
+   ],
+   "depth": 6,
+   "cost": 22,
+   "derived_from": null
+  },
+  {
+   "statement": [
+    "LIN",
+    4,
+    5,
+    12
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper",
+    "analogy",
+    "analogy",
+    "implies(derived)"
+   ],
+   "witness": null,
+   "depth": 6,
+   "cost": 25,
+   "derived_from": [
+    "AMORT",
+    4,
+    4,
+    3
+   ]
+  },
+  {
+   "statement": [
+    "LIN",
+    3,
+    7,
+    6
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper",
+    "steeper",
+    "steeper",
+    "analogy",
+    "implies(derived)"
+   ],
+   "witness": null,
+   "depth": 7,
+   "cost": 21,
+   "derived_from": [
+    "AMORT",
+    3,
+    6,
+    1
+   ]
+  },
+  {
+   "statement": [
+    "LIN",
+    4,
+    6,
+    10
+   ],
+   "chain": [
+    "steeper",
+    "steeper",
+    "steeper",
+    "steeper",
+    "analogy",
+    "analogy",
+    "implies(derived)"
+   ],
+   "witness": null,
+   "depth": 7,
+   "cost": 25,
+   "derived_from": [
+    "AMORT",
+    4,
+    5,
+    2
+   ]
+  }
+ ],
+ "occam": {
+  "2,6": [
+   2,
+   6
+  ],
+  "2,8": [
+   2,
+   6
+  ],
+  "2,10": [
+   2,
+   6
+  ],
+  "2,12": [
+   0,
+   6
+  ],
+  "2,14": [
+   0,
+   6
+  ],
+  "2,16": [
+   0,
+   6
+  ],
+  "2,18": [
+   0,
+   6
+  ],
+  "2,20": [
+   0,
+   6
+  ],
+  "3,6": [
+   2,
+   6
+  ],
+  "3,8": [
+   2,
+   6
+  ],
+  "3,10": [
+   2,
+   6
+  ],
+  "3,12": [
+   2,
+   6
+  ],
+  "3,14": [
+   2,
+   6
+  ],
+  "3,16": [
+   2,
+   6
+  ],
+  "3,18": [
+   0,
+   6
+  ],
+  "4,6": [
+   4,
+   6
+  ],
+  "4,8": [
+   4,
+   6
+  ],
+  "4,10": [
+   4,
+   6
+  ],
+  "4,12": [
+   4,
+   6
+  ],
+  "4,14": [
+   4,
+   6
+  ],
+  "4,16": [
+   0,
+   6
+  ]
+ },
+ "frontier": {
+  "LIN,2": [
+   [
+    "LIN",
+    2,
+    1,
+    20
+   ],
+   [
+    "LIN",
+    2,
+    2,
+    9
+   ],
+   [
+    "LIN",
+    2,
+    3,
+    5
+   ],
+   [
+    "LIN",
+    2,
+    4,
+    4
+   ],
+   [
+    "LIN",
+    2,
+    5,
+    3
+   ],
+   [
+    "LIN",
+    2,
+    6,
+    2
+   ]
+  ],
+  "AMORT,2": [
+   [
+    "AMORT",
+    2,
+    1,
+    11
+   ],
+   [
+    "AMORT",
+    2,
+    2,
+    3
+   ],
+   [
+    "AMORT",
+    2,
+    3,
+    2
+   ],
+   [
+    "AMORT",
+    2,
+    4,
+    1
+   ]
+  ],
+  "LIN,3": [
+   [
+    "LIN",
+    3,
+    1,
+    39
+   ],
+   [
+    "LIN",
+    3,
+    2,
+    21
+   ],
+   [
+    "LIN",
+    3,
+    3,
+    7
+   ],
+   [
+    "LIN",
+    3,
+    4,
+    4
+   ],
+   [
+    "LIN",
+    3,
+    5,
+    3
+   ],
+   [
+    "LIN",
+    3,
+    6,
+    2
+   ]
+  ],
+  "AMORT,3": [
+   [
+    "AMORT",
+    3,
+    1,
+    14
+   ],
+   [
+    "AMORT",
+    3,
+    2,
+    4
+   ],
+   [
+    "AMORT",
+    3,
+    3,
+    2
+   ],
+   [
+    "AMORT",
+    3,
+    4,
+    1
+   ]
+  ],
+  "LIN,4": [
+   [
+    "LIN",
+    4,
+    1,
+    59
+   ],
+   [
+    "LIN",
+    4,
+    2,
+    44
+   ],
+   [
+    "LIN",
+    4,
+    3,
+    29
+   ],
+   [
+    "LIN",
+    4,
+    4,
+    14
+   ],
+   [
+    "LIN",
+    4,
+    5,
+    9
+   ]
+  ],
+  "AMORT,4": [
+   [
+    "AMORT",
+    4,
+    1,
+    19
+   ],
+   [
+    "AMORT",
+    4,
+    2,
+    6
+   ],
+   [
+    "AMORT",
+    4,
+    3,
+    4
+   ],
+   [
+    "AMORT",
+    4,
+    4,
+    3
+   ],
+   [
+    "AMORT",
+    4,
+    5,
+    2
+   ]
+  ]
+ }
+}

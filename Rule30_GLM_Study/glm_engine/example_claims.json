@@ -1,0 +1,14 @@
+[
+  {"key": "EX.squares.mod4", "text": "every square is 0 or 1 modulo 4",
+   "class": "Pi1", "test": "n * n % 4 in (0, 1)", "scales": [10, 100, 1000, 10000, 100000]},
+  {"key": "EX.n2.plus.1.prime", "text": "n² + 1 is prime for every n ≥ 1",
+   "class": "Pi1", "test": "isprime(n * n + 1)", "start": 1, "scales": [2, 4, 10, 50, 100]},
+  {"key": "EX.primes.two.divisors", "text": "n is prime exactly when it has exactly two divisors",
+   "class": "Pi1", "test": "isprime(n) == (sum(1 for d in range(1, n + 1) if n % d == 0) == 2)",
+   "start": 1, "scales": [10, 50, 100, 300, 600]},
+  {"key": "EX.catalan.small", "text": "comb(2n, n) is divisible by n + 1 for every n < 300",
+   "class": "finite", "test": "comb(2 * n, n) % (n + 1) == 0", "range": [0, 300]},
+  {"key": "EX.twin.primes", "text": "there are infinitely many twin primes",
+   "class": "Pi2"},
+  {"key": "EX.wobble.pendulum", "text": "the Wobble is analogous to a pendulum swinging about 1/2"}
+]

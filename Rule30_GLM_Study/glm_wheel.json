@@ -1,0 +1,387 @@
+{
+  "engine": "GLM Wheel (from v16)",
+  "rings": {
+    "doesn't-know": [
+      {
+        "ring": "doesn't-know",
+        "category": "open-question",
+        "hid": "H11",
+        "statement": "the least periods of the left diagonals are unbounded (equivalently, by the law, infinitely many eventually white diagonals meet odd parity)",
+        "evidence": "status=open; no finite range decides it"
+      },
+      {
+        "ring": "doesn't-know",
+        "category": "gap-from-refutation",
+        "hid": "H41",
+        "statement": "what (if anything) explains the period-doubling law H08, now that TAX conservation has been refuted as the mechanism?",
+        "evidence": "H41 was refuted by guard; the gap it leaves needs filling"
+      },
+      {
+        "ring": "doesn't-know",
+        "category": "gap-from-refutation",
+        "hid": "H42",
+        "statement": "what (if anything) explains the period-doubling law H08, now that TAX conservation has been refuted as the mechanism?",
+        "evidence": "H42 was refuted by guard; the gap it leaves needs filling"
+      },
+      {
+        "ring": "doesn't-know",
+        "category": "decidability",
+        "hid": "H11",
+        "statement": "are the left-diagonal periods truly unbounded? The gap analysis says YES (implied by super-exponential growth) but PRACTICALLY UNDECIDABLE (no finite search can confirm).",
+        "evidence": "6 confirmed jumps; gap ratios growing; no finite verification possible"
+      }
+    ],
+    "thinks-true": [
+      {
+        "ring": "thinks-true",
+        "category": "survives",
+        "hid": "H02",
+        "statement": "for D ≥ 20 the transient of left diagonal D is longer than D (the centre column, which reads diagonal D at time D, always reads it inside its transient)",
+        "evidence": "status=survives; survives held-out but not formally verified"
+      },
+      {
+        "ring": "thinks-true",
+        "category": "survives",
+        "hid": "H03",
+        "statement": "for D ≥ 20 the transient satisfies 30/29 ≤ pre(D)/D ≤ 71/48 (the exact extremes on the development range)",
+        "evidence": "status=survives; survives held-out but not formally verified"
+      },
+      {
+        "ring": "thinks-true",
+        "category": "survives",
+        "hid": "H16",
+        "statement": "the centre column is not eventually periodic with period p ≤ 64 and preperiod ≤ 10000",
+        "evidence": "status=survives; survives held-out but not formally verified"
+      },
+      {
+        "ring": "thinks-true",
+        "category": "survives",
+        "hid": "H17",
+        "statement": "|#black − #white| ≤ 3·√N for every prefix length N (sharpest integer constant on N ≤ 4000)",
+        "evidence": "status=survives; survives held-out but not formally verified"
+      },
+      {
+        "ring": "thinks-true",
+        "category": "survives",
+        "hid": "H19",
+        "statement": "|2·L(n) − n| ≤ 10 for all n (narrowed on n ≤ 3000)",
+        "evidence": "status=survives; survives held-out but not formally verified"
+      },
+      {
+        "ring": "thinks-true",
+        "category": "survives",
+        "hid": "H23",
+        "statement": "The period-doubling law (H08: white(D-1) ∧ odd-parity(D-2)) predicts where the Golay code's addressing system will encounter ambiguous reads: at the period-doubling diagonals, the address resolution has a tie (like the snap at distance 4).",
+        "evidence": "status=survives; survives held-out but not formally verified"
+      },
+      {
+        "ring": "thinks-true",
+        "category": "survives",
+        "hid": "H24",
+        "statement": "The centre column's exact lag-k agreement counts provide an integer fingerprint that can be compared against R-calculus pipeline V trajectories. If a pipeline's V matches the centre column's lag-k profile, it is a model of the centre column.",
+        "evidence": "status=survives; survives held-out but not formally verified"
+      },
+      {
+        "ring": "thinks-true",
+        "category": "survives",
+        "hid": "H25",
+        "statement": "The prediction chain (H09: D=87867 confirmed, and any chain predictions) is forward-looking evidence: the law predicts structure beyond the data, and the prediction is checked. This is the evidence model's 'replay gate' applied to hypotheses.",
+        "evidence": "status=survives; survives held-out but not formally verified"
+      },
+      {
+        "ring": "thinks-true",
+        "category": "survives",
+        "hid": "H26",
+        "statement": "The left-diagonal period structure (1, 2, 4, 8, 16, 32 at D=0, 3, 8, 29, 400, 87867) is a dyadic tower — the same structure as the GLM's layer stack. The period-doubling diagonals are analogous to the rungs of the construction ladder.",
+        "evidence": "status=survives; survives held-out but not formally verified"
+      },
+      {
+        "ring": "thinks-true",
+        "category": "survives",
+        "hid": "H27",
+        "statement": "The centre column's 2-bit and 3-bit block uniformity gaps (H26: 185, H27: 175) provide an exact integer benchmark. The GLM's retrieval feature map can be measured against the same benchmark.",
+        "evidence": "status=survives; survives held-out but not formally verified"
+      },
+      {
+        "ring": "thinks-true",
+        "category": "survives",
+        "hid": "H28",
+        "statement": "The seed-memory law (H22: first difference after a white diagonal = reset erases the seed) is analogous to the GLM's conversation system: a refusal (tie) is a 'reset' that erases the antecedent.",
+        "evidence": "status=survives; survives held-out but not formally verified"
+      },
+      {
+        "ring": "thinks-true",
+        "category": "survives",
+        "hid": "H29",
+        "statement": "the gap ratios between consecutive period-doubling diagonals are themselves growing (super-exponential gap growth), making the unbounded conjecture H11 practically undecidable: the next gap is too large to search",
+        "evidence": "status=survives; survives held-out but not formally verified"
+      },
+      {
+        "ring": "thinks-true",
+        "category": "survives",
+        "hid": "H30",
+        "statement": "the next period-doubling diagonal (period 64) is estimated at D >= 2008133563622280/7294973 (~275276353), based on the super-exponential gap growth. This is beyond any practical search range.",
+        "evidence": "status=survives; survives held-out but not formally verified"
+      },
+      {
+        "ring": "thinks-true",
+        "category": "survives",
+        "hid": "H31",
+        "statement": "the v7 prediction chain found no period-64 jump below D=400,000 because the estimated next jump is at D >= 2008133563622280/7294973 (~275276353) — 250x beyond the search range. The search was not a failure; it was consistent with the gap growth model.",
+        "evidence": "status=survives; survives held-out but not formally verified"
+      },
+      {
+        "ring": "thinks-true",
+        "category": "survives",
+        "hid": "H32",
+        "statement": "the centre column's aperiodicity (H16) follows from the transient bound (H02): the centre column reads diagonal D at time D, and the transient of D is longer than D, so the centre column's first D bits are never in the periodic regime of any diagonal. The aperiodicity is a CONSEQUENCE of the transient structure, not an independent fact.",
+        "evidence": "status=survives; survives held-out but not formally verified"
+      },
+      {
+        "ring": "thinks-true",
+        "category": "survives",
+        "hid": "H33",
+        "statement": "H11 (periods unbounded) is implied by the super-exponential gap growth: if the gaps grow without bound, there are infinitely many jumps, so the periods are unbounded. But the gap growth is so fast that no finite computation can verify more than 6 jumps. H11 is TRUE but PRACTICALLY UNDECIDABLE.",
+        "evidence": "status=survives; survives held-out but not formally verified"
+      },
+      {
+        "ring": "thinks-true",
+        "category": "survives",
+        "hid": "H34",
+        "statement": "the period-doubling tower and the construction ladder are both dyadic towers (each step doubles), but the spacings differ: the construction ladder is uniform (norm × 2), while the period-doubling is super-exponential. The analogy holds in structure but not in scale.",
+        "evidence": "status=survives; survives held-out but not formally verified"
+      },
+      {
+        "ring": "thinks-true",
+        "category": "survives",
+        "hid": "H35",
+        "statement": "R-calculus pipeline (T=0, rho=1, C=0) lag-k biases: [100, 99, 99, 98, 96, 92, 84]. Centre column (scaled): [-1, 0, 0, 0, -1, 0, -1]. Match: NO — the simplest pipeline does NOT model the centre column.",
+        "evidence": "status=survives; survives held-out but not formally verified"
+      },
+      {
+        "ring": "thinks-true",
+        "category": "survives",
+        "hid": "H36",
+        "statement": "centre column 2-bit uniformity gap = 185 (in 60000 bits). Thue-Morse sequence 2-bit gap = 10000. The centre column is less uniform than Thue-Morse.",
+        "evidence": "status=survives; survives held-out but not formally verified"
+      },
+      {
+        "ring": "thinks-true",
+        "category": "survives",
+        "hid": "H39",
+        "statement": "the wobble maximum D(N)^2/N is the same across Rule 30 seeds: ['3200/731', '3200/731']. SAME.",
+        "evidence": "status=survives; survives held-out but not formally verified"
+      },
+      {
+        "ring": "thinks-true",
+        "category": "survives",
+        "hid": "H40",
+        "statement": "the delta-sigma accumulator range grows with N: {1000: '8', 5000: '29', 10000: '30', 20000: '107'}. Growing: True.",
+        "evidence": "status=survives; survives held-out but not formally verified"
+      },
+      {
+        "ring": "thinks-true",
+        "category": "law-holds",
+        "hid": "H44",
+        "statement": "v13 POSITIVE FINDING: at every confirmed period-doubling diagonal D ∈ {3, 8, 29, 400}, TAX is CONSERVED (|defect| = 0), not violated. The reason is structural: the law H08 requires (with odd parity of D-2) the (D-1) pattern to be eventually white (w(D-1) = 0). When w(D-1) = 0, TAX conservation trivially holds because w(D-1 AND D) = 0 and w(D-1 XOR D) = w(D), so the quadratic identity reduces to 0 + w(D)^2 - 0 - w(D)^2 = 0. The white (D-1) pattern is the COMMON CAUSE of both the period doubling (it forces a reset in the one-bit machine) AND the TAX conservation (it makes the AND vanish). The previous round's hypothesis ('TAX breaks at jumps') had the causal arrow reversed: TAX does not break at jumps; TAX is CONSERVED at jumps, because the same white pattern that forces the period to double also forces TAX to be conserved. This is the v13 discovery.",
+        "evidence": "status=law-holds; survives held-out but not formally verified"
+      },
+      {
+        "ring": "thinks-true",
+        "category": "survives",
+        "hid": "H47",
+        "statement": "the wobble maximum D(N)^2/N is the same across Rule 30 seeds: seed 1 → 3200/731, seed 11 → 3200/731, seed 101 → 3200/731. SAME.",
+        "evidence": "status=survives; survives held-out but not formally verified"
+      },
+      {
+        "ring": "thinks-true",
+        "category": "prediction",
+        "hid": "H30",
+        "statement": "the next period-doubling diagonal (period 64) is estimated at D >= 2008133563622280/7294973 (~275276353), based on the super-exponential gap growth. This is beyond any practical search range.",
+        "evidence": "based on super-exponential gap growth; the next jump is estimated at D >= ~275 million"
+      }
+    ],
+    "thinks-needed": [
+      {
+        "ring": "thinks-needed",
+        "category": "new-invariant",
+        "hid": "NEEDED-1",
+        "statement": "find an invariant that is NOT forced by white(D-1) — e.g., the parity of D-2 read two out (doubling_read_two_out). The TAX tool failed because every jump has defect 0 (forced by white(D-1)). A non-forced invariant would be a genuine new mechanism.",
+        "evidence": "v14 dialogue suggestion; the refutation of TAX.mechanism.cluster leaves a gap that a non-forced invariant could fill"
+      },
+      {
+        "ring": "thinks-needed",
+        "category": "new-tool",
+        "hid": "NEEDED-2",
+        "statement": "a guard-extractor for the R-calculus domain — test whether R-calculus pipelines produce the centre column's lag-k profile. The current engine only guards TAX and wobble; R-calculus is unguarded.",
+        "evidence": "the application test APP.rcalculus.model is unguarded; the lag-k fingerprint exists but no guard checks it"
+      },
+      {
+        "ring": "thinks-needed",
+        "category": "new-tool",
+        "hid": "NEEDED-3",
+        "statement": "a guard-extractor for the seed-memory domain — test whether the seed-forgetting law (H22) holds with a layer-aware guard. The current guard is flat.",
+        "evidence": "LD.seed.forgetting is law-holds but not layer-aware-guarded"
+      },
+      {
+        "ring": "thinks-needed",
+        "category": "extend-range",
+        "hid": "NEEDED-4",
+        "statement": "extend the automaton run past D=87867 to test H43 (TAX defects beyond 87867 cluster around the next jump). Currently open because the run exceeds the held-out range.",
+        "evidence": "H43 is open; the test is executable but requires D >= 100000"
+      },
+      {
+        "ring": "thinks-needed",
+        "category": "formalisation",
+        "hid": "NEEDED-5",
+        "statement": "formalise the TAX defect closed form in Lean: defect = -2(3c^2 - 2c(a+b) + ab). The identity guard confirmed this; the Lean statement is proposed but not machine-checked.",
+        "evidence": "identity guard verified the closed form on 819 cases; Lean proof is the next step"
+      },
+      {
+        "ring": "thinks-needed",
+        "category": "new-domain",
+        "hid": "NEEDED-6",
+        "statement": "test the engine on a fourth domain (e.g., the right-diagonal structure or the centre-column aperiodicity) to verify the guard architecture generalises beyond TAX and wobble.",
+        "evidence": "v16 tested 3 domains; a fourth would confirm generality"
+      },
+      {
+        "ring": "thinks-needed",
+        "category": "automatic-extraction",
+        "hid": "NEEDED-7",
+        "statement": "automatic guard-input derivation: parse the hypothesis's Lean statement to extract the algebraic criterion, rather than hand-writing guard-extractors. This would make the engine fully general.",
+        "evidence": "v16's guard-extractors are manual; a parser would automate them"
+      }
+    ]
+  },
+  "verifications": [
+    {
+      "entry": "GAP.next.estimate (the next period-doubling diagonal)",
+      "verified": true,
+      "result": {
+        "last_gap_ratio": "87467/371",
+        "last_ratio_of_ratios": "262401/19663",
+        "estimated_next_ratio": "22951428267/7294973",
+        "estimated_next_gap": "2007492576229689/7294973",
+        "estimated_next_D": "2008133563622280/7294973",
+        "estimated_next_D_decimal": 275276353.13006365
+      },
+      "verdict": "VERIFIED (arithmetic): the next jump is estimated at D = 2008133563622280/7294973 (~275276353), based on exact integer arithmetic. This is beyond any practical search range (~275 million)."
+    },
+    {
+      "entry": "WOBBLE.transportable (wobble maximum is seed-independent)",
+      "verified": false,
+      "result": {
+        "1": "3200/731",
+        "3": "3200/731",
+        "5": "3200/731",
+        "9": "81/25",
+        "17": "441/124",
+        "33": "8/3"
+      },
+      "verdict": "FALSIFIED: the wobble maximum DIFFERS across seeds: ['3200/731', '3200/731', '3200/731', '81/25', '441/124', '8/3']. The claim does not survive."
+    },
+    {
+      "entry": "NEEDED-1 (doubling_read_two_out: is parity(D-2) a non-forced invariant?)",
+      "verified": false,
+      "result": {
+        "3": {
+          "white(D-1)": true,
+          "parity(D-2)": 1
+        },
+        "8": {
+          "white(D-1)": true,
+          "parity(D-2)": 1
+        },
+        "29": {
+          "white(D-1)": true,
+          "parity(D-2)": 1
+        },
+        "400": {
+          "white(D-1)": true,
+          "parity(D-2)": 1
+        }
+      },
+      "verdict": "FALSIFIED: parity(D-2) is the same across all jumps ([1, 1, 1, 1]), so it IS forced by white(D-1). Not a new invariant."
+    }
+  ],
+  "language_wheel": [
+    {
+      "concept": "every left diagonal has eventual period dividing 8",
+      "hid": "H01",
+      "source": "closed in the Lean package",
+      "formal": "LeftDiagonalPeriodsData.not_leftDiagPeriodDivides_eight (refuted)"
+    },
+    {
+      "concept": "the eventually white left diagonals are exactly [2, 7, 28]",
+      "hid": "H04",
+      "source": "closed in the Lean package",
+      "formal": "LeftDiagonalPeriodsData.leftDiag_white_below_87868 (refutes it)"
+    },
+    {
+      "concept": "every left diagonal D < 400 has eventual period dividing 8",
+      "hid": "H05",
+      "source": "closed in the Lean package",
+      "formal": "LeftDiagonalPeriodsData.leftDiag_period_eight_below_400"
+    },
+    {
+      "concept": "every left diagonal has eventual period dividing 16",
+      "hid": "H06",
+      "source": "closed in the Lean package",
+      "formal": "LeftDiagonalPeriodsData.not_leftDiagPeriodDivides_sixteen (refuted)"
+    },
+    {
+      "concept": "a left diagonal's period exceeds the periods of the two diagonals outside it exactly when white(D-1) ∧ odd-parity(D-2)",
+      "hid": "H08",
+      "source": "law-holds (exact on all data)",
+      "formal": "LeftDiagonalPeriods.ldiag_evPer_of_not_white, ldiag_doubles, infinitely_many_white_of_unbounded"
+    },
+    {
+      "concept": "the first left diagonal with least eventual period 32 is D = 87867",
+      "hid": "H09",
+      "source": "prediction-confirmed (checked by direct computation)",
+      "formal": "LeftDiagonalPeriodsData.ldiag_87867_not_evPer_sixteen + leftDiag_period_sixteen_below_87867"
+    },
+    {
+      "concept": "every left diagonal D < 87867 has eventual period dividing 16",
+      "hid": "H10",
+      "source": "closed in the Lean package",
+      "formal": "LeftDiagonalPeriodsData.leftDiag_period_sixteen_below_87867"
+    },
+    {
+      "concept": "the least period of right diagonal D divides 2^D",
+      "hid": "H13",
+      "source": "closed in the Lean package",
+      "formal": "Diagonals.rdiag_periodic"
+    },
+    {
+      "concept": "the least period of right diagonal D exceeds ceil(D/2)",
+      "hid": "H14",
+      "source": "closed in the Lean package",
+      "formal": "Diagonals.rdiag_not_periodic"
+    },
+    {
+      "concept": "(transported from the left-diagonal law) every right diagonal is periodic or anti-periodic with the common period of the",
+      "hid": "H15",
+      "source": "closed in the Lean package",
+      "formal": "RightDiagonalBalance (C113)"
+    },
+    {
+      "concept": "a left-white row can first differ from the seed only one diagonal past an eventually white diagonal of the seed (a reset",
+      "hid": "H22",
+      "source": "law-holds (exact on all data)",
+      "formal": "LeftDiagonalPeriods.first_difference_after_white; LeftDiagonalPeriodsData.seed_first_difference"
+    },
+    {
+      "concept": "v13 POSITIVE FINDING: at every confirmed period-doubling diagonal D ∈ {3, 8, 29, 400}, TAX is CONSERVED (|defect| = 0), ",
+      "hid": "H44",
+      "source": "law-holds (exact on all data)",
+      "formal": "not formalised"
+    },
+    {
+      "concept": "GAP.next.estimate (the next period-doubling diagonal)",
+      "hid": "WHEEL-VERIFY",
+      "source": "verified in this Wheel run",
+      "formal": "VERIFIED (arithmetic): the next jump is estimated at D = 2008133563622280/7294973 (~275276353), based on exact integer a"
+    }
+  ]
+}

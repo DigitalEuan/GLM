@@ -1,0 +1,587 @@
+{
+ "engine": "GLM Hypothesis Engine v5 (Round 38)",
+ "quick": false,
+ "hypotheses": [
+  {
+   "id": "H01",
+   "family": "left-diagonals",
+   "origin": "lift",
+   "parent": null,
+   "statement": "every left diagonal has eventual period dividing 8",
+   "lean_proposal": "∀ D : ℕ, ∃ T, ∀ t ≥ T, ldiag D (t + 8) = ldiag D t",
+   "status": "refuted-heldout",
+   "evidence": [
+    {
+     "stage": "dev D<200",
+     "ok": true,
+     "detail": "passes"
+    },
+    {
+     "stage": "held-out D<2000",
+     "ok": false,
+     "detail": "fails at D=400"
+    }
+   ],
+   "controls": {},
+   "scope": "",
+   "novelty": "rediscovers C133 (EMP: periods ≤ 8 for D ≤ 200)",
+   "lean_status": "LeftDiagonalPeriodsData.not_leftDiagPeriodDivides_eight (refuted)",
+   "closed": true
+  },
+  {
+   "id": "H02",
+   "family": "left-diagonals",
+   "origin": "lift",
+   "parent": null,
+   "statement": "for D ≥ 20 the transient of left diagonal D is longer than D (the centre column, which reads diagonal D at time D, always reads it inside its transient)",
+   "lean_proposal": "∀ D : ℕ, 20 ≤ D → ∃ t ≥ D, ldiag D (t + 64) ≠ ldiag D t",
+   "status": "survives",
+   "evidence": [
+    {
+     "stage": "dev D<200",
+     "ok": true,
+     "detail": "passes"
+    },
+    {
+     "stage": "held-out D<2000",
+     "ok": true,
+     "detail": "passes"
+    },
+    {
+     "stage": "held-out D<20000",
+     "ok": true,
+     "detail": "passes"
+    }
+   ],
+   "controls": {},
+   "scope": "",
+   "novelty": "rediscovers C133 (EMP: preperiod > D for 20 ≤ D ≤ 200)",
+   "lean_status": "partial: LeftDiagonalPeriodsData.leftDiag_transient_at_read certifies 20 ≤ D < 20000 only",
+   "closed": false
+  },
+  {
+   "id": "H03",
+   "family": "left-diagonals",
+   "origin": "lift",
+   "parent": null,
+   "statement": "for D ≥ 20 the transient satisfies 30/29 ≤ pre(D)/D ≤ 71/48 (the exact extremes on the development range)",
+   "lean_proposal": "-- envelope 30/29 ≤ pre(D)/D ≤ 71/48; EMP target, no Lean form proposed",
+   "status": "survives",
+   "evidence": [
+    {
+     "stage": "dev D<200",
+     "ok": true,
+     "detail": "passes"
+    },
+    {
+     "stage": "held-out D<2000",
+     "ok": true,
+     "detail": "passes"
+    },
+    {
+     "stage": "held-out D<20000",
+     "ok": true,
+     "detail": "passes"
+    }
+   ],
+   "controls": {},
+   "scope": "",
+   "novelty": "new to the ledger",
+   "lean_status": "not formalised",
+   "closed": false
+  },
+  {
+   "id": "H04",
+   "family": "left-diagonals",
+   "origin": "lift",
+   "parent": null,
+   "statement": "the eventually white left diagonals are exactly [2, 7, 28]",
+   "lean_proposal": "∀ D : ℕ, (∃ T, ∀ t ≥ T, ldiag D t = false) ↔ D = 2 ∨ D = 7 ∨ D = 28",
+   "status": "refuted-heldout",
+   "evidence": [
+    {
+     "stage": "dev D<200",
+     "ok": true,
+     "detail": "passes"
+    },
+    {
+     "stage": "held-out D<2000",
+     "ok": false,
+     "detail": "fails at D=399"
+    }
+   ],
+   "controls": {},
+   "scope": "",
+   "novelty": "new to the ledger",
+   "lean_status": "LeftDiagonalPeriodsData.leftDiag_white_below_87868 (refutes it)",
+   "closed": true
+  },
+  {
+   "id": "H05",
+   "family": "left-diagonals",
+   "origin": "cut",
+   "parent": "H01",
+   "statement": "every left diagonal D < 400 has eventual period dividing 8",
+   "lean_proposal": "∀ D : ℕ, D < 400 → ∃ T, ∀ t ≥ T, ldiag D (t + 8) = ldiag D t",
+   "status": "survives",
+   "evidence": [
+    {
+     "stage": "cut",
+     "ok": true,
+     "detail": "holds for every D < 400 (exact repeat certificate)"
+    }
+   ],
+   "controls": {
+    "rule 30, seed 11": "holds",
+    "rule 30, seed 101": "holds",
+    "rule 86 (mirror), seed 1": "no period | 64 within the window",
+    "rule 90 (linear), seed 1": "no period | 64 within the window",
+    "rule 45, seed 1": "no period | 64 within the window"
+   },
+   "scope": "Rule-30-specific and robust to the seed changes tested; the other rules do not settle (so the statement is about Rule 30's left side)",
+   "novelty": "new to the ledger",
+   "lean_status": "LeftDiagonalPeriodsData.leftDiag_period_eight_below_400",
+   "closed": true
+  },
+  {
+   "id": "H06",
+   "family": "left-diagonals",
+   "origin": "narrow",
+   "parent": "H01",
+   "statement": "every left diagonal has eventual period dividing 16",
+   "lean_proposal": "∀ D : ℕ, ∃ T, ∀ t ≥ T, ldiag D (t + 16) = ldiag D t",
+   "status": "refuted-by-prediction",
+   "evidence": [
+    {
+     "stage": "all data D<20000",
+     "ok": true,
+     "detail": "passes"
+    },
+    {
+     "stage": "prediction",
+     "ok": false,
+     "detail": "fails at D=87867"
+    }
+   ],
+   "controls": {},
+   "scope": "",
+   "novelty": "new to the ledger",
+   "lean_status": "LeftDiagonalPeriodsData.not_leftDiagPeriodDivides_sixteen (refuted)",
+   "closed": true
+  },
+  {
+   "id": "H07",
+   "family": "left-diagonals",
+   "origin": "mechanism",
+   "parent": null,
+   "statement": "a left diagonal's period exceeds the periods of the two diagonals outside it exactly when white(D-1)",
+   "lean_proposal": "-- jump(D) ↔ white(D-1)",
+   "status": "refuted-heldout",
+   "evidence": [
+    {
+     "stage": "all data D<20000",
+     "ok": true,
+     "detail": "exact on every D < 20000: 4 jumps, the condition holds at 4 indices"
+    },
+    {
+     "stage": "junction",
+     "ok": true,
+     "detail": "not separated by D < 20000 from ['white(D-1)', 'white(D-1) ∧ odd-parity(D-2)']"
+    },
+    {
+     "stage": "separating observation",
+     "ok": false,
+     "detail": "diagonal 53207 is eventually white with even parity outside it; the law predicts a jump at 53208 = True, actual = False"
+    }
+   ],
+   "controls": {},
+   "scope": "",
+   "novelty": "new to the ledger",
+   "lean_status": "not formalised",
+   "closed": false
+  },
+  {
+   "id": "H08",
+   "family": "left-diagonals",
+   "origin": "mechanism",
+   "parent": null,
+   "statement": "a left diagonal's period exceeds the periods of the two diagonals outside it exactly when white(D-1) ∧ odd-parity(D-2)",
+   "lean_proposal": "∀ (D : ℤ) (Q : ℕ), EvPer (ldiag (D - 1)) Q → EvPer (ldiag (D - 2)) Q → ¬ EventuallyWhite (ldiag (D - 1)) → EvPer (ldiag D) Q",
+   "status": "law-holds",
+   "evidence": [
+    {
+     "stage": "all data D<20000",
+     "ok": true,
+     "detail": "exact on every D < 20000: 4 jumps, the condition holds at 4 indices"
+    },
+    {
+     "stage": "junction",
+     "ok": true,
+     "detail": "not separated by D < 20000 from ['white(D-1)', 'white(D-1) ∧ odd-parity(D-2)']"
+    },
+    {
+     "stage": "separating observation",
+     "ok": true,
+     "detail": "correct at the even-parity white diagonal 53207"
+    },
+    {
+     "stage": "separating observation",
+     "ok": true,
+     "detail": "correct at the even-parity white diagonal 58286"
+    }
+   ],
+   "controls": {
+    "rule 30, seed 11": "holds (jumps exactly at white ∧ odd)",
+    "rule 30, seed 101": "holds (jumps exactly at white ∧ odd)",
+    "rule 86 (mirror), seed 1": "no period | 64 within the window",
+    "rule 90 (linear), seed 1": "no period | 64 within the window",
+    "rule 45, seed 1": "no period | 64 within the window"
+   },
+   "scope": "Rule-30-specific and robust to the seed changes tested; the other rules do not settle (so the statement is about Rule 30's left side)",
+   "novelty": "new to the ledger",
+   "lean_status": "LeftDiagonalPeriods.ldiag_evPer_of_not_white, ldiag_doubles, infinitely_many_white_of_unbounded",
+   "closed": true
+  },
+  {
+   "id": "H09",
+   "family": "left-diagonals",
+   "origin": "prediction",
+   "parent": "H08",
+   "statement": "the first left diagonal with least eventual period 32 is D = 87867",
+   "lean_proposal": "¬ (∃ T, ∀ t ≥ T, ldiag 87867 (t + 16) = ldiag 87867 t) ∧ ∀ D < 87867, ∃ T, ∀ t ≥ T, ldiag D (t + 16) = ldiag D t",
+   "status": "prediction-confirmed",
+   "evidence": [
+    {
+     "stage": "direct check",
+     "ok": true,
+     "detail": "automaton run to D = 87867: lp = 32, all earlier lp ≤ 16: True"
+    }
+   ],
+   "controls": {},
+   "scope": "",
+   "novelty": "new to the ledger",
+   "lean_status": "LeftDiagonalPeriodsData.ldiag_87867_not_evPer_sixteen + leftDiag_period_sixteen_below_87867",
+   "closed": true
+  },
+  {
+   "id": "H10",
+   "family": "left-diagonals",
+   "origin": "cut",
+   "parent": "H06",
+   "statement": "every left diagonal D < 87867 has eventual period dividing 16",
+   "lean_proposal": "∀ D : ℕ, D < 87867 → ∃ T, ∀ t ≥ T, ldiag D (t + 16) = ldiag D t",
+   "status": "survives",
+   "evidence": [
+    {
+     "stage": "cut",
+     "ok": true,
+     "detail": "holds for every D < 87867 (exact repeat certificate)"
+    }
+   ],
+   "controls": {},
+   "scope": "",
+   "novelty": "new to the ledger",
+   "lean_status": "LeftDiagonalPeriodsData.leftDiag_period_sixteen_below_87867",
+   "closed": true
+  },
+  {
+   "id": "H11",
+   "family": "left-diagonals",
+   "origin": "lift",
+   "parent": "H08",
+   "statement": "the least periods of the left diagonals are unbounded (equivalently, by the law, infinitely many eventually white diagonals meet odd parity)",
+   "lean_proposal": "∀ m, ∃ D : ℕ, ¬ ∃ T, ∀ t ≥ T, ldiag D (t + 2 ^ m) = ldiag D t",
+   "status": "open",
+   "evidence": [
+    {
+     "stage": "data",
+     "ok": true,
+     "detail": "periods 1, 2, 4, 8, 16, 32 first at D = 0, 3, 8, 29, 400, 87867; no finite range decides it"
+    }
+   ],
+   "controls": {},
+   "scope": "",
+   "novelty": "new to the ledger",
+   "lean_status": "open; LeftDiagonalPeriods.infinitely_many_white_of_unbounded is the proved reduction",
+   "closed": false
+  },
+  {
+   "id": "H12",
+   "family": "right-diagonals",
+   "origin": "lift",
+   "parent": null,
+   "statement": "the least period of right diagonal D is 2^(D - floor((D + 1) / 3))",
+   "lean_proposal": "-- least period of rdiag D equals 2 ^ (D - floor((D + 1) / 3))",
+   "status": "refuted-heldout",
+   "evidence": [
+    {
+     "stage": "dev D≤8",
+     "ok": true,
+     "detail": "fits exactly"
+    },
+    {
+     "stage": "held-out D≤16",
+     "ok": false,
+     "detail": "fails at D=10: exponent 6, form gives 7"
+    }
+   ],
+   "controls": {},
+   "scope": "",
+   "novelty": "new to the ledger",
+   "lean_status": "not formalised",
+   "closed": false
+  },
+  {
+   "id": "H13",
+   "family": "right-diagonals",
+   "origin": "lift",
+   "parent": null,
+   "statement": "the least period of right diagonal D divides 2^D",
+   "lean_proposal": "∀ D t, rdiag D (t + 2 ^ D) = rdiag D t",
+   "status": "survives",
+   "evidence": [
+    {
+     "stage": "all D≤16",
+     "ok": true,
+     "detail": "passes"
+    }
+   ],
+   "controls": {},
+   "scope": "",
+   "novelty": "rediscovers C48 (FORMAL: period 2^D)",
+   "lean_status": "Diagonals.rdiag_periodic",
+   "closed": true
+  },
+  {
+   "id": "H14",
+   "family": "right-diagonals",
+   "origin": "lift",
+   "parent": null,
+   "statement": "the least period of right diagonal D exceeds ceil(D/2)",
+   "lean_proposal": "-- 2^(exponent) > ceil(D/2)",
+   "status": "survives",
+   "evidence": [
+    {
+     "stage": "all D≤16",
+     "ok": true,
+     "detail": "passes"
+    }
+   ],
+   "controls": {},
+   "scope": "",
+   "novelty": "rediscovers C49 (FORMAL: least period > ceil(D/2))",
+   "lean_status": "Diagonals.rdiag_not_periodic",
+   "closed": true
+  },
+  {
+   "id": "H15",
+   "family": "right-diagonals",
+   "origin": "analogy",
+   "parent": null,
+   "statement": "(transported from the left-diagonal law) every right diagonal is periodic or anti-periodic with the common period of the two diagonals outside it",
+   "lean_proposal": "-- rdiag D (t + Q) = rdiag D t xor (parity of (rdiag (D-1) ∨ rdiag (D-2)) over one period Q)",
+   "status": "survives",
+   "evidence": [
+    {
+     "stage": "all D≤16",
+     "ok": true,
+     "detail": "every exponent is at most one more than the larger outer exponent"
+    }
+   ],
+   "controls": {},
+   "scope": "",
+   "novelty": "rediscovers C113 (FORMAL: periodic or anti-periodic)",
+   "lean_status": "RightDiagonalBalance (C113)",
+   "closed": true
+  },
+  {
+   "id": "H16",
+   "family": "centre",
+   "origin": "template",
+   "parent": null,
+   "statement": "the centre column is not eventually periodic with period p ≤ 64 and preperiod ≤ 30000",
+   "lean_proposal": "∀ p, 1 ≤ p → p ≤ 64 → ¬ ∀ t ≥ 30000, centerCol (t + p) = centerCol t",
+   "status": "survives",
+   "evidence": [
+    {
+     "stage": "n<60000",
+     "ok": true,
+     "detail": "a mismatch after the stated preperiod exists for every p (this is a finite refutation of each rung, CERT-able)"
+    }
+   ],
+   "controls": {},
+   "scope": "",
+   "novelty": "rediscovers C235 (CERT: no period with tau + p < 10000)",
+   "lean_status": "partial: PowerSeriesLadderData.no_eventual_period_below_10000 (a smaller range)",
+   "closed": false
+  },
+  {
+   "id": "H17",
+   "family": "centre",
+   "origin": "narrow",
+   "parent": null,
+   "statement": "|#black − #white| ≤ 3·√N for every prefix length N (sharpest integer constant on N ≤ 4000)",
+   "lean_proposal": "-- informal: ∀ N ≥ 1, (2·#black(N) − N)^2 ≤ 9·N; ledger C25: an O(√N) bound is expected to fail eventually (iterated logarithm)",
+   "status": "survives",
+   "evidence": [
+    {
+     "stage": "dev N≤4000",
+     "ok": true,
+     "detail": "max (2·ones−N)²/N = 3200/731 ≤ 9"
+    },
+    {
+     "stage": "held-out N≤60000",
+     "ok": true,
+     "detail": "max = 175561/24979"
+    }
+   ],
+   "controls": {},
+   "scope": "",
+   "novelty": "rediscovers C22 (CERT: max D(N)^2/N on N ≤ 10^6 is 175561/24979)",
+   "lean_status": "partial: WobbleCertificate.wobble_sq_ratio_cert certifies N ≤ 10^6 only",
+   "closed": false
+  },
+  {
+   "id": "H18",
+   "family": "centre",
+   "origin": "lift",
+   "parent": null,
+   "statement": "the GF(2) linear complexity L(n) of the centre column satisfies |2·L(n) − n| ≤ 9 for all n (sharpest on n ≤ 2000)",
+   "lean_proposal": "-- |2 L(n) - n| ≤ 9; would imply Problem 1 via LCUnbounded",
+   "status": "refuted-heldout",
+   "evidence": [
+    {
+     "stage": "dev n≤2000",
+     "ok": true,
+     "detail": "max |2L−n| = 9"
+    },
+    {
+     "stage": "held-out n≤6000",
+     "ok": false,
+     "detail": "max |2L−n| = 10"
+    }
+   ],
+   "controls": {},
+   "scope": "",
+   "novelty": "rediscovers C160 (EMP: linear complexity within 6 of n/2 for n ≤ 20000)",
+   "lean_status": "not formalised",
+   "closed": false
+  },
+  {
+   "id": "H19",
+   "family": "centre",
+   "origin": "narrow",
+   "parent": "H18",
+   "statement": "|2·L(n) − n| ≤ 10 for all n (narrowed on n ≤ 6000)",
+   "lean_proposal": "-- |2 L(n) - n| ≤ 10",
+   "status": "survives",
+   "evidence": [
+    {
+     "stage": "n≤6000",
+     "ok": true,
+     "detail": "EMP only; the narrowing never settles from a finite range"
+    }
+   ],
+   "controls": {},
+   "scope": "",
+   "novelty": "rediscovers C160 (EMP: linear complexity within 6 of n/2 for n ≤ 20000)",
+   "lean_status": "not formalised",
+   "closed": false
+  },
+  {
+   "id": "H20",
+   "family": "centre",
+   "origin": "lift",
+   "parent": null,
+   "statement": "every binary word of length k occurs in the first ⌈3/2·k·2^k⌉ centre bits (sharpest on k ≤ 8)",
+   "lean_proposal": "-- factor complexity: all words of length k occur in a prefix of length O(k 2^k)",
+   "status": "survives",
+   "evidence": [
+    {
+     "stage": "k≤12",
+     "ok": true,
+     "detail": "first full coverage at [3, 8, 15, 66, 120, 422, 1229, 1591, 2872, 5649, 23663, 42760]"
+    }
+   ],
+   "controls": {},
+   "scope": "",
+   "novelty": "rediscovers C235 (CERT: every word of length ≤ 10 occurs (partial match: the position bound is new))",
+   "lean_status": "not formalised",
+   "closed": false
+  },
+  {
+   "id": "H21",
+   "family": "left-diagonals",
+   "origin": "control",
+   "parent": null,
+   "statement": "the eventual left diagonals do not depend on the seed: every finite seed whose leftmost cell is black has the same eventual left diagonals as the single black cell",
+   "lean_proposal": "∀ y, LeftEdgeAtZero y → ∀ D : ℕ, EventuallyEq (ldiag D) (ldiagOf y D)",
+   "status": "refuted-heldout",
+   "evidence": [
+    {
+     "stage": "controls 11, 101",
+     "ok": true,
+     "detail": "identical eventual patterns on D < 400"
+    },
+    {
+     "stage": "all 512 seeds of width ≤ 10",
+     "ok": false,
+     "detail": "first eventual differences at D ∈ [3, 8, 29, 400]; 47 seeds agree on every D < 450"
+    }
+   ],
+   "controls": {},
+   "scope": "",
+   "novelty": "new to the ledger",
+   "lean_status": "refuted by data (seeds of width ≤ 10)",
+   "closed": false
+  },
+  {
+   "id": "H22",
+   "family": "left-diagonals",
+   "origin": "mechanism",
+   "parent": "H21",
+   "statement": "a left-white row can first differ from the seed only one diagonal past an eventually white diagonal of the seed (a reset erases the seed)",
+   "lean_proposal": "∀ x y : Config, LeftEdgeAtZero x → LeftEdgeAtZero y → ∀ D : ℕ, (∀ D' < D, EventuallyEq (ldiagOf x D') (ldiagOf y D')) → ¬ EventuallyEq (ldiagOf x D) (ldiagOf y D) → 2 ≤ D ∧ EventuallyWhite (ldiagOf x ((D : ℤ) - 1))",
+   "status": "law-holds",
+   "evidence": [
+    {
+     "stage": "512 seeds",
+     "ok": true,
+     "detail": "first differences [3, 8, 29, 400] vs white diagonals [2, 7, 28, 399]"
+    }
+   ],
+   "controls": {},
+   "scope": "",
+   "novelty": "new to the ledger",
+   "lean_status": "LeftDiagonalPeriods.first_difference_after_white; LeftDiagonalPeriodsData.seed_first_difference",
+   "closed": true
+  }
+ ],
+ "status_counts": {
+  "refuted-heldout": 6,
+  "survives": 11,
+  "refuted-by-prediction": 1,
+  "law-holds": 2,
+  "prediction-confirmed": 1,
+  "open": 1
+ },
+ "predictions": [
+  {
+   "predicted": 87867,
+   "confirmed": true,
+   "white_diagonals_on_the_way": [
+    53207,
+    58286,
+    87866
+   ]
+  }
+ ],
+ "timings_seconds_wallclock": {
+  "left-diagonals": 12.84,
+  "right-diagonals": 0.03,
+  "centre": 1.57,
+  "controls": 0.02,
+  "seed-memory": 2.28,
+  "total": 16.74
+ }
+}

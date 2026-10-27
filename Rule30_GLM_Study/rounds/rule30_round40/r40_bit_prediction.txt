@@ -1,0 +1,39 @@
+patterns of 99997, 99998: 21c31b6e f687520b
+PAT 1420778966 f9a226ea
+PAT 1420778967 5e1ec271
+PAT 1420848966 b5107275
+PAT 1420848967 e1f13461
+PAT 1420868966 1f01b1a1
+PAT 1420868967 7a64eec6
+PAT 1420875966 1ec3c3c3
+PAT 1420875967 8495fc94
+PAT 1420878967 dae372fa
+WHITE 1420878968
+c=3000 fill=0 WHITE 3000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+c=3000 fill=1 WHITE 3000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+c=3000 fill=2 WHITE 3000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+c=3000 fill=3 WHITE 3000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+c=3000 fill=4 WHITE 3000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+c=3000 fill=5 WHITE 3000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+c=10000 fill=0 WHITE 10000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+c=10000 fill=1 WHITE 10000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+c=10000 fill=2 WHITE 10000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+c=10000 fill=3 WHITE 10000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+c=10000 fill=4 WHITE 10000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+c=10000 fill=5 WHITE 10000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+c=30000 fill=0 WHITE 30000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+c=30000 fill=1 WHITE 30000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+c=30000 fill=2 WHITE 30000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+c=30000 fill=3 WHITE 30000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+c=30000 fill=4 WHITE 30000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+c=30000 fill=5 WHITE 30000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+c=100000 fill=0 WHITE 100000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+c=100000 fill=1 WHITE 100000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+c=100000 fill=2 WHITE 100000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+c=100000 fill=3 WHITE 100000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+c=100000 fill=4 WHITE 100000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+c=100000 fill=5 WHITE 100000 parity 0 Qouter 32 PATNEXT 6cbda3536cbda3536cbda3536cbda353
+candidates (Round 39): bit 0 -> 93425cac (next white 3340408059, even);
+                       bit 1 -> 6cbda353 (next white 2107985254, odd: period 64)
+PAT 2107985253 ed91e45c
+WHITE 2107985254

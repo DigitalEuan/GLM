@@ -1,0 +1,13 @@
+N = 1000000
+lens                                                            centre column             control coin
+plain wobble D(N)                                          1536       1.5360       -676      -0.6760
+strobe max|z| (p<=16, 135 phases)                                     2.7886                  2.3573
+strobe chi2/dof worst p                                       3       2.5895          7       1.6372
+echo max|z| (lags 1..64)                                     21       1.8430         64       2.5081
+words k=4 chi2/dof                                                    1.8571                  1.9727
+words k=8 chi2/dof                                                    1.1957                  0.9718
+words k=12 chi2/dof                                                   1.0410                  1.0443
+Walsh max|z| (1023 window characters, width 10)      0b1011100101      -3.0530 0b100010101       3.1990
+arrow: returns to D=0                                       339       0.3390        804       0.8040
+arrow: fraction of time D>0                                           0.9353                  0.4430
+Cesaro mean of D                                                      0.7473                 -0.1901

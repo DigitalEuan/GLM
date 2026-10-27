@@ -1,0 +1,58 @@
+{
+ "start": 87867,
+ "Q": 32,
+ "first": {
+  "white": 1420878968,
+  "outer_parity": 0,
+  "outer": "dae372fa",
+  "steps": 1420791100
+ },
+ "branches": [
+  {
+   "open_bits": [
+    0
+   ],
+   "after_white": 1420878968,
+   "post_white_pattern": "93425cac",
+   "white": 3340408059,
+   "outer_parity": 0,
+   "outer": "4e27c559",
+   "steps": 1919529090
+  },
+  {
+   "open_bits": [
+    1
+   ],
+   "after_white": 1420878968,
+   "post_white_pattern": "6cbda353",
+   "white": 2107985254,
+   "outer_parity": 1,
+   "outer": "ed91e45c",
+   "steps": 687106285
+  },
+  {
+   "open_bits": [
+    0,
+    0
+   ],
+   "after_white": 3340408059,
+   "post_white_pattern": "743a866e",
+   "white": 4989445007,
+   "outer_parity": 0,
+   "outer": "2c52d13c",
+   "steps": 1649036947
+  },
+  {
+   "open_bits": [
+    0,
+    1
+   ],
+   "after_white": 3340408059,
+   "post_white_pattern": "8bc57991",
+   "white": 8429393530,
+   "outer_parity": 0,
+   "outer": "5d3bd0b6",
+   "steps": 5088985470
+  }
+ ]
+}

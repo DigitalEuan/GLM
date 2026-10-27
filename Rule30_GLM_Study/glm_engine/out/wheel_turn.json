@@ -1,0 +1,1139 @@
+{
+ "moves": [
+  {
+   "was_hid": "H11",
+   "was_ring": "doesn't-know",
+   "was_status": "open-question",
+   "statement": "the least periods of the left diagonals are unbounded (equivalently, by the law, infinitely many eventually white diagonals meet odd parity)",
+   "key": "LD.periods.unbounded",
+   "class": "Pi2",
+   "now_status": "open",
+   "now_ring": "doesn't-know",
+   "reason": "FORMAL open; proved reduction WhiteDiagonals.ldiag_periods_unbounded_iff"
+  },
+  {
+   "was_hid": "H41",
+   "was_ring": "doesn't-know",
+   "was_status": "gap-from-refutation",
+   "statement": "what (if anything) explains the period-doubling law H08, now that TAX conservation has been refuted as the mechanism?",
+   "key": "IMPORT.what.if.anything.explains.the.period.doubling.la",
+   "class": "meta",
+   "now_status": "untested",
+   "now_ring": "doesn't-know",
+   "reason": "[class] new -> untested: class 'meta': no executable test; kept on the wheel"
+  },
+  {
+   "was_hid": "H42",
+   "was_ring": "doesn't-know",
+   "was_status": "gap-from-refutation",
+   "statement": "what (if anything) explains the period-doubling law H08, now that TAX conservation has been refuted as the mechanism?",
+   "key": "IMPORT.what.if.anything.explains.the.period.doubling.la",
+   "class": "meta",
+   "now_status": "untested",
+   "now_ring": "doesn't-know",
+   "reason": "[class] new -> untested: class 'meta': no executable test; kept on the wheel"
+  },
+  {
+   "was_hid": "H11",
+   "was_ring": "doesn't-know",
+   "was_status": "decidability",
+   "statement": "are the left-diagonal periods truly unbounded? The gap analysis says YES (implied by super-exponential growth) but PRACTICALLY UNDECIDABLE (no finite search can",
+   "key": "LD.periods.unbounded",
+   "class": "Pi2",
+   "now_status": "open",
+   "now_ring": "doesn't-know",
+   "reason": "FORMAL open; proved reduction WhiteDiagonals.ldiag_periods_unbounded_iff"
+  },
+  {
+   "was_hid": "H02",
+   "was_ring": "thinks-true",
+   "was_status": "survives",
+   "statement": "for D ≥ 20 the transient of left diagonal D is longer than D (the centre column, which reads diagonal D at time D, always reads it inside its transient)",
+   "key": "LD.preperiod.gt.D",
+   "class": "Pi1",
+   "now_status": "survives-to",
+   "now_ring": "thinks-true",
+   "reason": "CERT LeftDiagonalPeriodsData.centerCol_read_in_transient (20 ≤ D < 20000)"
+  },
+  {
+   "was_hid": "H03",
+   "was_ring": "thinks-true",
+   "was_status": "survives",
+   "statement": "for D ≥ 20 the transient satisfies 30/29 ≤ pre(D)/D ≤ 71/48 (the exact extremes on the development range)",
+   "key": "LD.preperiod.envelope",
+   "class": "Pi1",
+   "now_status": "survives-to",
+   "now_ring": "thinks-true",
+   "reason": "escalation: survives every read, up to 5000"
+  },
+  {
+   "was_hid": "H16",
+   "was_ring": "thinks-true",
+   "was_status": "survives",
+   "statement": "the centre column is not eventually periodic with period p ≤ 64 and preperiod ≤ 10000",
+   "key": "CC.no.short.period",
+   "class": "finite",
+   "now_status": "proved",
+   "now_ring": "knows",
+   "reason": "CERT WheelChecksData.wheel_H16_true"
+  },
+  {
+   "was_hid": "H17",
+   "was_ring": "thinks-true",
+   "was_status": "survives",
+   "statement": "|#black − #white| ≤ 3·√N for every prefix length N (sharpest integer constant on N ≤ 4000)",
+   "key": "CC.balance.sqrt",
+   "class": "Pi1",
+   "now_status": "survives-to",
+   "now_ring": "thinks-true",
+   "reason": "CERT WobbleCertificate.wobble_sq_ratio_cert (holds for N <= 10^6)"
+  },
+  {
+   "was_hid": "H19",
+   "was_ring": "thinks-true",
+   "was_status": "survives",
+   "statement": "|2·L(n) − n| ≤ 10 for all n (narrowed on n ≤ 3000)",
+   "key": "CC.lc.near.half",
+   "class": "Pi1",
+   "now_status": "refuted-on-escalation",
+   "now_ring": "knows",
+   "reason": "CERT WheelChecksData.wheel_H19_false (2·L(11101) − 11101 ≥ 11)"
+  },
+  {
+   "was_hid": "H23",
+   "was_ring": "thinks-true",
+   "was_status": "survives",
+   "statement": "The period-doubling law (H08: white(D-1) ∧ odd-parity(D-2)) predicts where the Golay code's addressing system will encounter ambiguous reads: at the period-doub",
+   "key": "IMPORT.the.period.doubling.law.h08.white.d.1.odd.parity",
+   "class": "analogy",
+   "now_status": "untested",
+   "now_ring": "doesn't-know",
+   "reason": "[class] new -> untested: class 'analogy': no executable test; kept on the wheel"
+  },
+  {
+   "was_hid": "H24",
+   "was_ring": "thinks-true",
+   "was_status": "survives",
+   "statement": "The centre column's exact lag-k agreement counts provide an integer fingerprint that can be compared against R-calculus pipeline V trajectories. If a pipeline's",
+   "key": "IMPORT.the.centre.column.s.exact.lag.k.agreement.counts",
+   "class": "analogy",
+   "now_status": "untested",
+   "now_ring": "doesn't-know",
+   "reason": "[class] new -> untested: class 'analogy': no executable test; kept on the wheel"
+  },
+  {
+   "was_hid": "H25",
+   "was_ring": "thinks-true",
+   "was_status": "survives",
+   "statement": "The prediction chain (H09: D=87867 confirmed, and any chain predictions) is forward-looking evidence: the law predicts structure beyond the data, and the predic",
+   "key": "IMPORT.the.prediction.chain.h09.d.87867.confirmed.and.a",
+   "class": "analogy",
+   "now_status": "untested",
+   "now_ring": "doesn't-know",
+   "reason": "[class] new -> untested: class 'analogy': no executable test; kept on the wheel"
+  },
+  {
+   "was_hid": "H26",
+   "was_ring": "thinks-true",
+   "was_status": "survives",
+   "statement": "The left-diagonal period structure (1, 2, 4, 8, 16, 32 at D=0, 3, 8, 29, 400, 87867) is a dyadic tower — the same structure as the GLM's layer stack. The period",
+   "key": "IMPORT.the.left.diagonal.period.structure.1.2.4.8.16.32",
+   "class": "analogy",
+   "now_status": "untested",
+   "now_ring": "doesn't-know",
+   "reason": "[class] new -> untested: class 'analogy': no executable test; kept on the wheel"
+  },
+  {
+   "was_hid": "H27",
+   "was_ring": "thinks-true",
+   "was_status": "survives",
+   "statement": "The centre column's 2-bit and 3-bit block uniformity gaps (H26: 185, H27: 175) provide an exact integer benchmark. The GLM's retrieval feature map can be measur",
+   "key": "IMPORT.the.centre.column.s.2.bit.and.3.bit.block.unifor",
+   "class": "analogy",
+   "now_status": "untested",
+   "now_ring": "doesn't-know",
+   "reason": "[class] new -> untested: class 'analogy': no executable test; kept on the wheel"
+  },
+  {
+   "was_hid": "H28",
+   "was_ring": "thinks-true",
+   "was_status": "survives",
+   "statement": "The seed-memory law (H22: first difference after a white diagonal = reset erases the seed) is analogous to the GLM's conversation system: a refusal (tie) is a '",
+   "key": "IMPORT.the.seed.memory.law.h22.first.difference.after.a",
+   "class": "analogy",
+   "now_status": "untested",
+   "now_ring": "doesn't-know",
+   "reason": "[class] new -> untested: class 'analogy': no executable test; kept on the wheel"
+  },
+  {
+   "was_hid": "H29",
+   "was_ring": "thinks-true",
+   "was_status": "survives",
+   "statement": "the gap ratios between consecutive period-doubling diagonals are themselves growing (super-exponential gap growth), making the unbounded conjecture H11 practica",
+   "key": "IMPORT.the.gap.ratios.between.consecutive.period.doubli",
+   "class": "trend",
+   "now_status": "untested",
+   "now_ring": "doesn't-know",
+   "reason": "[class] new -> untested: class 'trend': no executable test; kept on the wheel"
+  },
+  {
+   "was_hid": "H30",
+   "was_ring": "thinks-true",
+   "was_status": "survives",
+   "statement": "the next period-doubling diagonal (period 64) is estimated at D >= 2008133563622280/7294973 (~275276353), based on the super-exponential gap growth. This is bey",
+   "key": "IMPORT.the.next.period.doubling.diagonal.period.64.is.e",
+   "class": "estimate",
+   "now_status": "estimate",
+   "now_ring": "doesn't-know",
+   "reason": "[class] new -> estimate: an extrapolation: only reaching the predicted range checks it"
+  },
+  {
+   "was_hid": "H31",
+   "was_ring": "thinks-true",
+   "was_status": "survives",
+   "statement": "the v7 prediction chain found no period-64 jump below D=400,000 because the estimated next jump is at D >= 2008133563622280/7294973 (~275276353) — 250x beyond t",
+   "key": "IMPORT.the.v7.prediction.chain.found.no.period.64.jump",
+   "class": "implication",
+   "now_status": "unchecked-implication",
+   "now_ring": "doesn't-know",
+   "reason": "[implication] new -> unchecked-implication: no checked implication edge"
+  },
+  {
+   "was_hid": "H32",
+   "was_ring": "thinks-true",
+   "was_status": "survives",
+   "statement": "the centre column's aperiodicity (H16) follows from the transient bound (H02): the centre column reads diagonal D at time D, and the transient of D is longer th",
+   "key": "IMP.transient.implies.aperiodic",
+   "class": "implication",
+   "now_status": "refuted-by-ledger",
+   "now_ring": "knows",
+   "reason": "FORMAL DialogueChecks.transient_read_does_not_imply_aperiodic"
+  },
+  {
+   "was_hid": "H33",
+   "was_ring": "thinks-true",
+   "was_status": "survives",
+   "statement": "H11 (periods unbounded) is implied by the super-exponential gap growth: if the gaps grow without bound, there are infinitely many jumps, so the periods are unbo",
+   "key": "IMP.finite.data.decides.unbounded",
+   "class": "implication",
+   "now_status": "refuted-by-ledger",
+   "now_ring": "knows",
+   "reason": "FORMAL NeedsWheel.finite_data_never_forces_infinitely_many"
+  },
+  {
+   "was_hid": "H34",
+   "was_ring": "thinks-true",
+   "was_status": "survives",
+   "statement": "the period-doubling tower and the construction ladder are both dyadic towers (each step doubles), but the spacings differ: the construction ladder is uniform (n",
+   "key": "IMPORT.the.period.doubling.tower.and.the.construction.l",
+   "class": "analogy",
+   "now_status": "untested",
+   "now_ring": "doesn't-know",
+   "reason": "[class] new -> untested: class 'analogy': no executable test; kept on the wheel"
+  },
+  {
+   "was_hid": "H35",
+   "was_ring": "thinks-true",
+   "was_status": "survives",
+   "statement": "R-calculus pipeline (T=0, rho=1, C=0) lag-k biases: [100, 99, 99, 98, 96, 92, 84]. Centre column (scaled): [-1, 0, 0, 0, -1, 0, -1]. Match: NO — the simplest pi",
+   "key": "IMPORT.r.calculus.pipeline.t.0.rho.1.c.0.lag.k.biases.1",
+   "class": "measurement",
+   "now_status": "untested",
+   "now_ring": "doesn't-know",
+   "reason": "[final] new -> untested: no executable test was attached (an import the engine could not recognise)"
+  },
+  {
+   "was_hid": "H36",
+   "was_ring": "thinks-true",
+   "was_status": "survives",
+   "statement": "centre column 2-bit uniformity gap = 185 (in 60000 bits). Thue-Morse sequence 2-bit gap = 10000. The centre column is less uniform than Thue-Morse.",
+   "key": "CC.uniformity.vs.tm",
+   "class": "comparison",
+   "now_status": "refuted-by-recompute",
+   "now_ring": "knows",
+   "reason": "EXACT recomputation: centre gap = 185, Thue–Morse gap = 10000; a smaller gap is more uniform, so the centre column is more uniform"
+  },
+  {
+   "was_hid": "H39",
+   "was_ring": "thinks-true",
+   "was_status": "survives",
+   "statement": "the wobble maximum D(N)^2/N is the same across Rule 30 seeds: ['3200/731', '3200/731']. SAME.",
+   "key": "CC.wobble.transport",
+   "class": "Pi1",
+   "now_status": "refuted-on-escalation",
+   "now_ring": "knows",
+   "reason": "EXACT counterexample: seed 111: max D(N)²/N = 2738/665 ≠ 3200/731 (seed 1)"
+  },
+  {
+   "was_hid": "H40",
+   "was_ring": "thinks-true",
+   "was_status": "survives",
+   "statement": "the delta-sigma accumulator range grows with N: {1000: '8', 5000: '29', 10000: '30', 20000: '107'}. Growing: True.",
+   "key": "IMPORT.the.delta.sigma.accumulator.range.grows.with.n.1",
+   "class": "trend",
+   "now_status": "untested",
+   "now_ring": "doesn't-know",
+   "reason": "[class] new -> untested: class 'trend': no executable test; kept on the wheel"
+  },
+  {
+   "was_hid": "H44",
+   "was_ring": "thinks-true",
+   "was_status": "law-holds",
+   "statement": "v13 POSITIVE FINDING: at every confirmed period-doubling diagonal D ∈ {3, 8, 29, 400}, TAX is CONSERVED (|defect| = 0), not violated. The reason is structural: ",
+   "key": "TAX.conserved.at.jumps",
+   "class": "Pi1",
+   "now_status": "proved",
+   "now_ring": "knows",
+   "reason": "FORMAL TaxChecks.tax_conserved_at_doubling"
+  },
+  {
+   "was_hid": "H47",
+   "was_ring": "thinks-true",
+   "was_status": "survives",
+   "statement": "the wobble maximum D(N)^2/N is the same across Rule 30 seeds: seed 1 → 3200/731, seed 11 → 3200/731, seed 101 → 3200/731. SAME.",
+   "key": "CC.wobble.transport",
+   "class": "Pi1",
+   "now_status": "refuted-on-escalation",
+   "now_ring": "knows",
+   "reason": "EXACT counterexample: seed 111: max D(N)²/N = 2738/665 ≠ 3200/731 (seed 1)"
+  }
+ ],
+ "needs": [
+  {
+   "need": "NEEDED-1",
+   "statement": "find an invariant that is NOT forced by white(D-1) — e.g., the parity of D-2 read two out (doubling_read_two_out). The TAX tool failed because every jump has defect 0 (forced by white(D-1)). A non-forced invariant would be a genuine new mechanism.",
+   "status": "answered (negative for the proposed invariant)",
+   "by": "FORMAL DialogueChecks.doubling_law_tie_unsplittable: at a white diagonal the parities of D−1 and D−2 coincide, so the parity read two out is forced and no data can split the two laws"
+  },
+  {
+   "need": "NEEDED-2",
+   "statement": "a guard-extractor for the R-calculus domain — test whether R-calculus pipelines produce the centre column's lag-k profile. The current engine only guards TAX and wobble; R-calculus is unguarded.",
+   "status": "unmet",
+   "by": "no R-calculus pipeline is available to this engine; the claim stays UNTESTED"
+  },
+  {
+   "need": "NEEDED-3",
+   "statement": "a guard-extractor for the seed-memory domain — test whether the seed-forgetting law (H22) holds with a layer-aware guard. The current guard is flat.",
+   "status": "met",
+   "by": "FORMAL LeftDiagonalPeriods.first_difference_after_white (the seed-memory law is proved, so no guard is needed)"
+  },
+  {
+   "need": "NEEDED-4",
+   "statement": "extend the automaton run past D=87867 to test H43 (TAX defects beyond 87867 cluster around the next jump). Currently open because the run exceeds the held-out range.",
+   "status": "unmet",
+   "by": "beyond this engine's budget; the needed run is stated as a range need"
+  },
+  {
+   "need": "NEEDED-5",
+   "statement": "formalise the TAX defect closed form in Lean: defect = -2(3c^2 - 2c(a+b) + ab). The identity guard confirmed this; the Lean statement is proposed but not machine-checked.",
+   "status": "met",
+   "by": "FORMAL TaxChecks.tax_defect_eq, tax_conserved_iff_defect_zero"
+  },
+  {
+   "need": "NEEDED-6",
+   "statement": "test the engine on a fourth domain (e.g., the right-diagonal structure or the centre-column aperiodicity) to verify the guard architecture generalises beyond TAX and wobble.",
+   "status": "met",
+   "by": "engine v18: general-reasoning and ARC domains in the same gate loop (see the general and ARC reports)"
+  },
+  {
+   "need": "NEEDED-7",
+   "statement": "automatic guard-input derivation: parse the hypothesis's Lean statement to extract the algebraic criterion, rather than hand-writing guard-extractors. This would make the engine fully general.",
+   "status": "partly met",
+   "by": "engine v18: RECOGNISERS map sentences to executable families; unrecognised sentences are classified and kept with a need"
+  }
+ ],
+ "language_recheck": [
+  {
+   "concept": "every left diagonal has eventual period dividing 8",
+   "was_formal": "LeftDiagonalPeriodsData.not_leftDiagPeriodDivides_eight (refuted)",
+   "now_status": "refuted-on-escalation",
+   "now_backing": "CERT LeftDiagonalPeriodsData.not_leftDiagPeriodDivides_eight",
+   "kept_in_language_wheel": true
+  },
+  {
+   "concept": "the eventually white left diagonals are exactly [2, 7, 28]",
+   "was_formal": "LeftDiagonalPeriodsData.leftDiag_white_below_87868 (refutes it)",
+   "now_status": "refuted-on-escalation",
+   "now_backing": "FORMAL WhiteDiagonals.ldiag_infinitely_many_white (infinitely many eventually white diagonals; LeftDiagonalPeriodsData.leftDiag_white_below_87868 lists those below 87868)",
+   "kept_in_language_wheel": true
+  },
+  {
+   "concept": "every left diagonal D < 400 has eventual period dividing 8",
+   "was_formal": "LeftDiagonalPeriodsData.leftDiag_period_eight_below_400",
+   "now_status": "proved",
+   "now_backing": "CERT LeftDiagonalPeriodsData.leftDiag_period_eight_below_400",
+   "kept_in_language_wheel": true
+  },
+  {
+   "concept": "every left diagonal has eventual period dividing 16",
+   "was_formal": "LeftDiagonalPeriodsData.not_leftDiagPeriodDivides_sixteen (refuted)",
+   "now_status": "refuted-by-ledger",
+   "now_backing": "CERT LeftDiagonalPeriodsData.not_leftDiagPeriodDivides_sixteen",
+   "kept_in_language_wheel": true
+  },
+  {
+   "concept": "a left diagonal's period exceeds the periods of the two diagonals outside it exactly when white(D-1) ∧ odd-parity(D-2)",
+   "was_formal": "LeftDiagonalPeriods.ldiag_evPer_of_not_white, ldiag_doubles, infinitely_many_white_of_unbounded",
+   "now_status": "proved",
+   "now_backing": "FORMAL LeftDiagonalPeriods.ldiag_evPer_of_not_white, ldiag_doubles, ldiag_keeps_of_even",
+   "kept_in_language_wheel": true
+  },
+  {
+   "concept": "the first left diagonal with least eventual period 32 is D = 87867",
+   "was_formal": "LeftDiagonalPeriodsData.ldiag_87867_not_evPer_sixteen + leftDiag_period_sixteen_below_87867",
+   "now_status": "proved",
+   "now_backing": "CERT LeftDiagonalPeriodsData.ldiag_87867_not_evPer_sixteen + leftDiag_period_sixteen_below_87867",
+   "kept_in_language_wheel": true
+  },
+  {
+   "concept": "every left diagonal D < 87867 has eventual period dividing 16",
+   "was_formal": "LeftDiagonalPeriodsData.leftDiag_period_sixteen_below_87867",
+   "now_status": "proved",
+   "now_backing": "CERT LeftDiagonalPeriodsData.leftDiag_period_sixteen_below_87867",
+   "kept_in_language_wheel": true
+  },
+  {
+   "concept": "the least period of right diagonal D divides 2^D",
+   "was_formal": "Diagonals.rdiag_periodic",
+   "now_status": "proved",
+   "now_backing": "FORMAL Diagonals.rdiag_periodic",
+   "kept_in_language_wheel": true
+  },
+  {
+   "concept": "the least period of right diagonal D exceeds ceil(D/2)",
+   "was_formal": "Diagonals.rdiag_not_periodic",
+   "now_status": "proved",
+   "now_backing": "FORMAL Diagonals.rdiag_not_periodic",
+   "kept_in_language_wheel": true
+  },
+  {
+   "concept": "(transported from the left-diagonal law) every right diagonal is periodic or anti-periodic with the common period of the",
+   "was_formal": "RightDiagonalBalance (C113)",
+   "now_status": "proved",
+   "now_backing": "FORMAL RightDiagonalBalance.runningXor_periodic_or_antiPeriodic",
+   "kept_in_language_wheel": true
+  },
+  {
+   "concept": "a left-white row can first differ from the seed only one diagonal past an eventually white diagonal of the seed (a reset",
+   "was_formal": "LeftDiagonalPeriods.first_difference_after_white; LeftDiagonalPeriodsData.seed_first_difference",
+   "now_status": "proved",
+   "now_backing": "FORMAL LeftDiagonalPeriods.first_difference_after_white; LeftDiagonalPeriodsData.seed_first_difference",
+   "kept_in_language_wheel": true
+  },
+  {
+   "concept": "v13 POSITIVE FINDING: at every confirmed period-doubling diagonal D ∈ {3, 8, 29, 400}, TAX is CONSERVED (|defect| = 0), ",
+   "was_formal": "not formalised",
+   "now_status": "proved",
+   "now_backing": "FORMAL TaxChecks.tax_conserved_at_doubling",
+   "kept_in_language_wheel": true
+  },
+  {
+   "concept": "GAP.next.estimate (the next period-doubling diagonal)",
+   "was_formal": "VERIFIED (arithmetic): the next jump is estimated at D = 2008133563622280/7294973 (~275276353), based on exact integer a",
+   "now_status": "estimate",
+   "now_backing": "",
+   "kept_in_language_wheel": false
+  }
+ ],
+ "conflicts": [],
+ "wheel": {
+  "engine": "GLM Hypothesis Engine v18",
+  "title": "turned wheel",
+  "format": "glm-wheel/2",
+  "rings": {
+   "knows": [
+    {
+     "hid": "H07",
+     "key": "CC.no.short.period",
+     "params": {
+      "p": 64,
+      "tau": 10000,
+      "source_hid": "H16"
+     },
+     "class": "finite",
+     "statement": "the centre column is not eventually periodic with period p ≤ 64 and preperiod ≤ 10000",
+     "status": "proved",
+     "backing": [
+      "EXACT whole range: for every period q ≤ 64 a mismatch c(t) ≠ c(t+q) with t ≥ 10000 was found",
+      "CERT WheelChecksData.wheel_H16_true"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H09",
+     "key": "CC.lc.near.half",
+     "params": {
+      "b": 10,
+      "source_hid": "H19"
+     },
+     "class": "Pi1",
+     "statement": "|2·L(n) − n| ≤ 10 for all n (narrowed on n ≤ 3000)",
+     "status": "refuted-on-escalation",
+     "backing": [
+      "EXACT counterexample: n = 11101: |2·L(n) − n| = 11 > 10",
+      "CERT WheelChecksData.wheel_H19_false (2·L(11101) − 11101 ≥ 11)"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess"
+      ],
+      "direction": "flipped at griess",
+      "settled": "griess"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H19",
+     "key": "IMP.transient.implies.aperiodic",
+     "params": {
+      "source_hid": "H32"
+     },
+     "class": "implication",
+     "statement": "the centre column's aperiodicity (H16) follows from the transient bound (H02): the centre column reads diagonal D at time D, and the transient of D is longer than D, so the centre column's first D bits are never in the periodic regime of any diagonal. The aperiodicity is a CONSEQUENCE of the transient structure, not an independent fact.",
+     "status": "refuted-by-ledger",
+     "backing": [
+      "FORMAL DialogueChecks.transient_read_does_not_imply_aperiodic"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H20",
+     "key": "IMP.finite.data.decides.unbounded",
+     "params": {
+      "source_hid": "H33"
+     },
+     "class": "implication",
+     "statement": "H11 (periods unbounded) is implied by the super-exponential gap growth: if the gaps grow without bound, there are infinitely many jumps, so the periods are unbounded. But the gap growth is so fast that no finite computation can verify more than 6 jumps. H11 is TRUE but PRACTICALLY UNDECIDABLE.",
+     "status": "refuted-by-ledger",
+     "backing": [
+      "FORMAL NeedsWheel.finite_data_never_forces_infinitely_many"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H23",
+     "key": "CC.uniformity.vs.tm",
+     "params": {
+      "more": false,
+      "source_hid": "H36"
+     },
+     "class": "comparison",
+     "statement": "centre column 2-bit uniformity gap = 185 (in 60000 bits). Thue-Morse sequence 2-bit gap = 10000. The centre column is less uniform than Thue-Morse.",
+     "status": "refuted-by-recompute",
+     "backing": [
+      "EXACT recomputation: centre gap = 185, Thue–Morse gap = 10000; a smaller gap is more uniform, so the centre column is more uniform"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H24",
+     "key": "CC.wobble.transport",
+     "params": {
+      "source_hid": "H39"
+     },
+     "class": "Pi1",
+     "statement": "the wobble maximum D(N)^2/N is the same across Rule 30 seeds: ['3200/731', '3200/731']. SAME.",
+     "status": "refuted-on-escalation",
+     "backing": [
+      "EXACT counterexample: seed 111: max D(N)²/N = 2738/665 ≠ 3200/731 (seed 1)"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer"
+      ],
+      "direction": "flipped at integer",
+      "settled": "integer"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H26",
+     "key": "TAX.conserved.at.jumps",
+     "params": {
+      "source_hid": "H44"
+     },
+     "class": "Pi1",
+     "statement": "v13 POSITIVE FINDING: at every confirmed period-doubling diagonal D ∈ {3, 8, 29, 400}, TAX is CONSERVED (|defect| = 0), not violated. The reason is structural: the law H08 requires (with odd parity of D-2) the (D-1) pattern to be eventually white (w(D-1) = 0). When w(D-1) = 0, TAX conservation trivially holds because w(D-1 AND D) = 0 and w(D-1 XOR D) = w(D), so the quadratic identity reduces to 0 + w(D)^2 - 0 - w(D)^2 = 0. The white (D-1) pattern is the COMMON CAUSE of both the period doubling (it forces a reset in the one-bit machine) AND the TAX conservation (it makes the AND vanish). The previous round's hypothesis ('TAX breaks at jumps') had the causal arrow reversed: TAX does not break at jumps; TAX is CONSERVED at jumps, because the same white pattern that forces the period to double also forces TAX to be conserved. This is the v13 discovery.",
+     "status": "proved",
+     "backing": [
+      "FORMAL TaxChecks.tax_conserved_at_doubling"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H27",
+     "key": "CC.wobble.transport",
+     "params": {
+      "source_hid": "H47"
+     },
+     "class": "Pi1",
+     "statement": "the wobble maximum D(N)^2/N is the same across Rule 30 seeds: seed 1 → 3200/731, seed 11 → 3200/731, seed 101 → 3200/731. SAME.",
+     "status": "refuted-on-escalation",
+     "backing": [
+      "EXACT counterexample: seed 111: max D(N)²/N = 2738/665 ≠ 3200/731 (seed 1)"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer"
+      ],
+      "direction": "flipped at integer",
+      "settled": "integer"
+     },
+     "domain": "rule30"
+    }
+   ],
+   "thinks-true": [
+    {
+     "hid": "H05",
+     "key": "LD.preperiod.gt.D",
+     "params": {
+      "source_hid": "H02"
+     },
+     "class": "Pi1",
+     "statement": "for D ≥ 20 the transient of left diagonal D is longer than D (the centre column, which reads diagonal D at time D, always reads it inside its transient)",
+     "status": "survives-to",
+     "backing": [
+      "escalation: survives every read, up to 5000",
+      "CERT LeftDiagonalPeriodsData.centerCol_read_in_transient (20 ≤ D < 20000)"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "converging",
+      "settled": "universal"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H06",
+     "key": "LD.preperiod.envelope",
+     "params": {
+      "lo": "30/29",
+      "hi": "71/48",
+      "source_hid": "H03"
+     },
+     "class": "Pi1",
+     "statement": "for D ≥ 20 the transient satisfies 30/29 ≤ pre(D)/D ≤ 71/48 (the exact extremes on the development range)",
+     "status": "survives-to",
+     "backing": [
+      "escalation: survives every read, up to 5000"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "converging",
+      "settled": "universal"
+     },
+     "domain": "rule30"
+    },
+    {
+     "hid": "H08",
+     "key": "CC.balance.sqrt",
+     "params": {
+      "c": 3,
+      "source_hid": "H17"
+     },
+     "class": "Pi1",
+     "statement": "|#black − #white| ≤ 3·√N for every prefix length N (sharpest integer constant on N ≤ 4000)",
+     "status": "survives-to",
+     "backing": [
+      "escalation: survives every read, up to 160000",
+      "CERT WobbleCertificate.wobble_sq_ratio_cert (holds for N <= 10^6)"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "converging",
+      "settled": "universal"
+     },
+     "domain": "rule30"
+    }
+   ],
+   "doesn't-know": [
+    {
+     "hid": "H01",
+     "key": "LD.periods.unbounded",
+     "params": {
+      "source_hid": "H11"
+     },
+     "class": "Pi2",
+     "statement": "the least periods of the left diagonals are unbounded (equivalently, by the law, infinitely many eventually white diagonals meet odd parity)",
+     "status": "open",
+     "backing": [
+      "FORMAL open; proved reduction WhiteDiagonals.ldiag_periods_unbounded_iff"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H02",
+     "key": "IMPORT.what.if.anything.explains.the.period.doubling.la",
+     "params": {
+      "source_hid": "H41"
+     },
+     "class": "meta",
+     "statement": "what (if anything) explains the period-doubling law H08, now that TAX conservation has been refuted as the mechanism?",
+     "status": "untested",
+     "backing": [],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H03",
+     "key": "IMPORT.what.if.anything.explains.the.period.doubling.la",
+     "params": {
+      "source_hid": "H42"
+     },
+     "class": "meta",
+     "statement": "what (if anything) explains the period-doubling law H08, now that TAX conservation has been refuted as the mechanism?",
+     "status": "untested",
+     "backing": [],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H04",
+     "key": "LD.periods.unbounded",
+     "params": {
+      "source_hid": "H11"
+     },
+     "class": "Pi2",
+     "statement": "are the left-diagonal periods truly unbounded? The gap analysis says YES (implied by super-exponential growth) but PRACTICALLY UNDECIDABLE (no finite search can confirm).",
+     "status": "open",
+     "backing": [
+      "FORMAL open; proved reduction WhiteDiagonals.ldiag_periods_unbounded_iff"
+     ],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H10",
+     "key": "IMPORT.the.period.doubling.law.h08.white.d.1.odd.parity",
+     "params": {
+      "source_hid": "H23"
+     },
+     "class": "analogy",
+     "statement": "The period-doubling law (H08: white(D-1) ∧ odd-parity(D-2)) predicts where the Golay code's addressing system will encounter ambiguous reads: at the period-doubling diagonals, the address resolution has a tie (like the snap at distance 4).",
+     "status": "untested",
+     "backing": [],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H11",
+     "key": "IMPORT.the.centre.column.s.exact.lag.k.agreement.counts",
+     "params": {
+      "source_hid": "H24"
+     },
+     "class": "analogy",
+     "statement": "The centre column's exact lag-k agreement counts provide an integer fingerprint that can be compared against R-calculus pipeline V trajectories. If a pipeline's V matches the centre column's lag-k profile, it is a model of the centre column.",
+     "status": "untested",
+     "backing": [],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H12",
+     "key": "IMPORT.the.prediction.chain.h09.d.87867.confirmed.and.a",
+     "params": {
+      "source_hid": "H25"
+     },
+     "class": "analogy",
+     "statement": "The prediction chain (H09: D=87867 confirmed, and any chain predictions) is forward-looking evidence: the law predicts structure beyond the data, and the prediction is checked. This is the evidence model's 'replay gate' applied to hypotheses.",
+     "status": "untested",
+     "backing": [],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H13",
+     "key": "IMPORT.the.left.diagonal.period.structure.1.2.4.8.16.32",
+     "params": {
+      "source_hid": "H26"
+     },
+     "class": "analogy",
+     "statement": "The left-diagonal period structure (1, 2, 4, 8, 16, 32 at D=0, 3, 8, 29, 400, 87867) is a dyadic tower — the same structure as the GLM's layer stack. The period-doubling diagonals are analogous to the rungs of the construction ladder.",
+     "status": "untested",
+     "backing": [],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H14",
+     "key": "IMPORT.the.centre.column.s.2.bit.and.3.bit.block.unifor",
+     "params": {
+      "source_hid": "H27"
+     },
+     "class": "analogy",
+     "statement": "The centre column's 2-bit and 3-bit block uniformity gaps (H26: 185, H27: 175) provide an exact integer benchmark. The GLM's retrieval feature map can be measured against the same benchmark.",
+     "status": "untested",
+     "backing": [],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H15",
+     "key": "IMPORT.the.seed.memory.law.h22.first.difference.after.a",
+     "params": {
+      "source_hid": "H28"
+     },
+     "class": "analogy",
+     "statement": "The seed-memory law (H22: first difference after a white diagonal = reset erases the seed) is analogous to the GLM's conversation system: a refusal (tie) is a 'reset' that erases the antecedent.",
+     "status": "untested",
+     "backing": [],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H16",
+     "key": "IMPORT.the.gap.ratios.between.consecutive.period.doubli",
+     "params": {
+      "source_hid": "H29"
+     },
+     "class": "trend",
+     "statement": "the gap ratios between consecutive period-doubling diagonals are themselves growing (super-exponential gap growth), making the unbounded conjecture H11 practically undecidable: the next gap is too large to search",
+     "status": "untested",
+     "backing": [],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H17",
+     "key": "IMPORT.the.next.period.doubling.diagonal.period.64.is.e",
+     "params": {
+      "source_hid": "H30"
+     },
+     "class": "estimate",
+     "statement": "the next period-doubling diagonal (period 64) is estimated at D >= 2008133563622280/7294973 (~275276353), based on the super-exponential gap growth. This is beyond any practical search range.",
+     "status": "estimate",
+     "backing": [],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H18",
+     "key": "IMPORT.the.v7.prediction.chain.found.no.period.64.jump",
+     "params": {
+      "source_hid": "H31"
+     },
+     "class": "implication",
+     "statement": "the v7 prediction chain found no period-64 jump below D=400,000 because the estimated next jump is at D >= 2008133563622280/7294973 (~275276353) — 250x beyond the search range. The search was not a failure; it was consistent with the gap growth model.",
+     "status": "unchecked-implication",
+     "backing": [],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H21",
+     "key": "IMPORT.the.period.doubling.tower.and.the.construction.l",
+     "params": {
+      "source_hid": "H34"
+     },
+     "class": "analogy",
+     "statement": "the period-doubling tower and the construction ladder are both dyadic towers (each step doubles), but the spacings differ: the construction ladder is uniform (norm × 2), while the period-doubling is super-exponential. The analogy holds in structure but not in scale.",
+     "status": "untested",
+     "backing": [],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H22",
+     "key": "IMPORT.r.calculus.pipeline.t.0.rho.1.c.0.lag.k.biases.1",
+     "params": {
+      "source_hid": "H35"
+     },
+     "class": "measurement",
+     "statement": "R-calculus pipeline (T=0, rho=1, C=0) lag-k biases: [100, 99, 99, 98, 96, 92, 84]. Centre column (scaled): [-1, 0, 0, 0, -1, 0, -1]. Match: NO — the simplest pipeline does NOT model the centre column.",
+     "status": "untested",
+     "backing": [],
+     "arrow": null,
+     "domain": "rule30"
+    },
+    {
+     "hid": "H25",
+     "key": "IMPORT.the.delta.sigma.accumulator.range.grows.with.n.1",
+     "params": {
+      "source_hid": "H40"
+     },
+     "class": "trend",
+     "statement": "the delta-sigma accumulator range grows with N: {1000: '8', 5000: '29', 10000: '30', 20000: '107'}. Growing: True.",
+     "status": "untested",
+     "backing": [],
+     "arrow": null,
+     "domain": "rule30"
+    }
+   ]
+  },
+  "needs": [
+   {
+    "kind": "proof",
+    "signature": "proof:LD.periods.unbounded",
+    "because": "open: no finite data decides it",
+    "blocks": [
+     "H01",
+     "H04"
+    ],
+    "acceptance": "a Lean proof, or a proved reduction to a smaller open target"
+   },
+   {
+    "kind": "test",
+    "signature": "test:IMPORT.what.if.anything.explains.the.period.doubling.la",
+    "because": "class 'meta': state an executable prediction that could fail",
+    "blocks": [
+     "H02",
+     "H03"
+    ],
+    "acceptance": "the prediction is run and can be refuted"
+   },
+   {
+    "kind": "proof",
+    "signature": "proof:LD.preperiod.gt.D",
+    "because": "survives every read (to 5000); data cannot prove a universal claim",
+    "blocks": [
+     "H05"
+    ],
+    "acceptance": "a Lean theorem name for the ledger"
+   },
+   {
+    "kind": "proof",
+    "signature": "proof:LD.preperiod.envelope",
+    "because": "survives every read (to 5000); data cannot prove a universal claim",
+    "blocks": [
+     "H06"
+    ],
+    "acceptance": "a Lean theorem name for the ledger"
+   },
+   {
+    "kind": "proof",
+    "signature": "proof:CC.balance.sqrt",
+    "because": "survives every read (to 160000); data cannot prove a universal claim",
+    "blocks": [
+     "H08"
+    ],
+    "acceptance": "a Lean theorem name for the ledger"
+   },
+   {
+    "kind": "test",
+    "signature": "test:IMPORT.the.period.doubling.law.h08.white.d.1.odd.parity",
+    "because": "class 'analogy': state an executable prediction that could fail",
+    "blocks": [
+     "H10"
+    ],
+    "acceptance": "the prediction is run and can be refuted"
+   },
+   {
+    "kind": "test",
+    "signature": "test:IMPORT.the.centre.column.s.exact.lag.k.agreement.counts",
+    "because": "class 'analogy': state an executable prediction that could fail",
+    "blocks": [
+     "H11"
+    ],
+    "acceptance": "the prediction is run and can be refuted"
+   },
+   {
+    "kind": "test",
+    "signature": "test:IMPORT.the.prediction.chain.h09.d.87867.confirmed.and.a",
+    "because": "class 'analogy': state an executable prediction that could fail",
+    "blocks": [
+     "H12"
+    ],
+    "acceptance": "the prediction is run and can be refuted"
+   },
+   {
+    "kind": "test",
+    "signature": "test:IMPORT.the.left.diagonal.period.structure.1.2.4.8.16.32",
+    "because": "class 'analogy': state an executable prediction that could fail",
+    "blocks": [
+     "H13"
+    ],
+    "acceptance": "the prediction is run and can be refuted"
+   },
+   {
+    "kind": "test",
+    "signature": "test:IMPORT.the.centre.column.s.2.bit.and.3.bit.block.unifor",
+    "because": "class 'analogy': state an executable prediction that could fail",
+    "blocks": [
+     "H14"
+    ],
+    "acceptance": "the prediction is run and can be refuted"
+   },
+   {
+    "kind": "test",
+    "signature": "test:IMPORT.the.seed.memory.law.h22.first.difference.after.a",
+    "because": "class 'analogy': state an executable prediction that could fail",
+    "blocks": [
+     "H15"
+    ],
+    "acceptance": "the prediction is run and can be refuted"
+   },
+   {
+    "kind": "test",
+    "signature": "test:IMPORT.the.gap.ratios.between.consecutive.period.doubli",
+    "because": "class 'trend': state an executable prediction that could fail",
+    "blocks": [
+     "H16"
+    ],
+    "acceptance": "the prediction is run and can be refuted"
+   },
+   {
+    "kind": "data",
+    "signature": "range:IMPORT.the.next.period.doubling.diagonal.period.64.is.e",
+    "because": "an extrapolation: only reaching the predicted range checks it",
+    "blocks": [
+     "H17"
+    ],
+    "acceptance": "the predicted range is computed"
+   },
+   {
+    "kind": "edge",
+    "signature": "edge:IMPORT.the.v7.prediction.chain.found.no.period.64.jump",
+    "because": "an implication with no checked edge",
+    "blocks": [
+     "H18"
+    ],
+    "acceptance": "a Lean proof of the implication or a counter-model"
+   },
+   {
+    "kind": "test",
+    "signature": "test:IMPORT.the.period.doubling.tower.and.the.construction.l",
+    "because": "class 'analogy': state an executable prediction that could fail",
+    "blocks": [
+     "H21"
+    ],
+    "acceptance": "the prediction is run and can be refuted"
+   },
+   {
+    "kind": "test",
+    "signature": "test:IMPORT.r.calculus.pipeline.t.0.rho.1.c.0.lag.k.biases.1",
+    "because": "class 'measurement': state an executable prediction that could fail",
+    "blocks": [
+     "H22"
+    ],
+    "acceptance": "the prediction is run and can be refuted"
+   },
+   {
+    "kind": "test",
+    "signature": "test:IMPORT.the.delta.sigma.accumulator.range.grows.with.n.1",
+    "because": "class 'trend': state an executable prediction that could fail",
+    "blocks": [
+     "H25"
+    ],
+    "acceptance": "the prediction is run and can be refuted"
+   }
+  ],
+  "language_wheel": [
+   {
+    "concept": "the centre column is not eventually periodic with period p ≤ 64 and preperiod ≤ 10000",
+    "verdict": true,
+    "key": "CC.no.short.period",
+    "params": {
+     "p": 64,
+     "tau": 10000,
+     "source_hid": "H16"
+    },
+    "backing": "CERT WheelChecksData.wheel_H16_true"
+   },
+   {
+    "concept": "|2·L(n) − n| ≤ 10 for all n (narrowed on n ≤ 3000)",
+    "verdict": false,
+    "key": "CC.lc.near.half",
+    "params": {
+     "b": 10,
+     "source_hid": "H19"
+    },
+    "backing": "CERT WheelChecksData.wheel_H19_false (2·L(11101) − 11101 ≥ 11)"
+   },
+   {
+    "concept": "the centre column's aperiodicity (H16) follows from the transient bound (H02): the centre column reads diagonal D at time D, and the transient of D is longer than D, so the centre column's first D bits are never in the periodic regime of any diagonal. The aperiodicity is a CONSEQUENCE of the transient structure, not an independent fact.",
+    "verdict": false,
+    "key": "IMP.transient.implies.aperiodic",
+    "params": {
+     "source_hid": "H32"
+    },
+    "backing": "FORMAL DialogueChecks.transient_read_does_not_imply_aperiodic"
+   },
+   {
+    "concept": "H11 (periods unbounded) is implied by the super-exponential gap growth: if the gaps grow without bound, there are infinitely many jumps, so the periods are unbounded. But the gap growth is so fast that no finite computation can verify more than 6 jumps. H11 is TRUE but PRACTICALLY UNDECIDABLE.",
+    "verdict": false,
+    "key": "IMP.finite.data.decides.unbounded",
+    "params": {
+     "source_hid": "H33"
+    },
+    "backing": "FORMAL NeedsWheel.finite_data_never_forces_infinitely_many"
+   },
+   {
+    "concept": "centre column 2-bit uniformity gap = 185 (in 60000 bits). Thue-Morse sequence 2-bit gap = 10000. The centre column is less uniform than Thue-Morse.",
+    "verdict": false,
+    "key": "CC.uniformity.vs.tm",
+    "params": {
+     "more": false,
+     "source_hid": "H36"
+    },
+    "backing": "EXACT recomputation: centre gap = 185, Thue–Morse gap = 10000; a smaller gap is more uniform, so the centre column is more uniform"
+   },
+   {
+    "concept": "the wobble maximum D(N)^2/N is the same across Rule 30 seeds: ['3200/731', '3200/731']. SAME.",
+    "verdict": false,
+    "key": "CC.wobble.transport",
+    "params": {
+     "source_hid": "H39"
+    },
+    "backing": "EXACT counterexample: seed 111: max D(N)²/N = 2738/665 ≠ 3200/731 (seed 1)"
+   },
+   {
+    "concept": "v13 POSITIVE FINDING: at every confirmed period-doubling diagonal D ∈ {3, 8, 29, 400}, TAX is CONSERVED (|defect| = 0), not violated. The reason is structural: the law H08 requires (with odd parity of D-2) the (D-1) pattern to be eventually white (w(D-1) = 0). When w(D-1) = 0, TAX conservation trivially holds because w(D-1 AND D) = 0 and w(D-1 XOR D) = w(D), so the quadratic identity reduces to 0 + w(D)^2 - 0 - w(D)^2 = 0. The white (D-1) pattern is the COMMON CAUSE of both the period doubling (it forces a reset in the one-bit machine) AND the TAX conservation (it makes the AND vanish). The previous round's hypothesis ('TAX breaks at jumps') had the causal arrow reversed: TAX does not break at jumps; TAX is CONSERVED at jumps, because the same white pattern that forces the period to double also forces TAX to be conserved. This is the v13 discovery.",
+    "verdict": true,
+    "key": "TAX.conserved.at.jumps",
+    "params": {
+     "source_hid": "H44"
+    },
+    "backing": "FORMAL TaxChecks.tax_conserved_at_doubling"
+   },
+   {
+    "concept": "the wobble maximum D(N)^2/N is the same across Rule 30 seeds: seed 1 → 3200/731, seed 11 → 3200/731, seed 101 → 3200/731. SAME.",
+    "verdict": false,
+    "key": "CC.wobble.transport",
+    "params": {
+     "source_hid": "H47"
+    },
+    "backing": "EXACT counterexample: seed 111: max D(N)²/N = 2738/665 ≠ 3200/731 (seed 1)"
+   }
+  ],
+  "counts": {
+   "knows": 8,
+   "thinks-true": 3,
+   "doesn't-know": 16
+  }
+ },
+ "summary": {
+  "doesn't-know -> doesn't-know": 4,
+  "thinks-true -> thinks-true": 3,
+  "thinks-true -> knows": 8,
+  "thinks-true -> doesn't-know": 12
+ }
+}

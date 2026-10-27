@@ -1,0 +1,23 @@
+training task: drive word 10, d <= 18; held-out: words 100, 110, 1000, 1100, 1110
+Lmax (training): [2, 6, 4, 6, 8, 10, 12, 10, 18, 14, 30, 16, 28, 32, 26, 30, 30, 30]
+
+[enumerate] oracle calls=60 rejected=11 surviving=49 (by origin {'supplied': 2, 'generated': 47}) non-dominated=5 transfer-to-held-out=21/49 work=16755
+   non-dominated survivors (each implies the target by a Lean theorem; none proved): [('AMORT', 4, 1), ('LIN', 1, 20), ('LIN', 2, 9), ('LIN', 3, 4), ('LIN', 4, 0)]
+   tightest survivors: {('AMORT', 4): 1, ('LIN', 1): 20, ('LIN', 2): 9, ('LIN', 3): 4, ('LIN', 4): 0, ('LIN', 5): 0, ('LIN', 6): 0}
+   rejected: forall d: Lmax(d+2) <= Lmax(d) + 12 | origin supplied | cex (12, 16, 32)
+   rejected: potential 1 drops over every surviving post-edge window of 2 steps | origin supplied | cex (1, 1, 0)
+   rejected: forall d S (len S = d): first failure <= 1*d + 0 | origin generated | cex (1, 2)
+   rejected: forall d S (len S = d): first failure <= 1*d + 4 | origin generated | cex (2, 6)
+   rejected: forall d S (len S = d): first failure <= 1*d + 8 | origin generated | cex (9, 18)
+
+[repair] oracle calls=60 rejected=46 surviving=14 (by origin {'supplied': 2, 'repaired': 3, 'generated': 9}) non-dominated=4 transfer-to-held-out=0/14 work=43975
+   non-dominated survivors (each implies the target by a Lean theorem; none proved): [('AMORT', 4, 1), ('LIN', 1, 20), ('LIN', 2, 9), ('WS', 0, 16)]
+   vacuous survivors (untested at this range, no credit): [('RANK', 0, 32)]
+   tightest survivors: {('AMORT', 4): 1, ('LIN', 1): 20, ('LIN', 2): 9, ('WS',): 16}
+   rejected: forall d: Lmax(d+2) <= Lmax(d) + 12 | origin supplied | cex (12, 16, 32)
+   rejected: potential 1 drops over every surviving post-edge window of 2 steps | origin supplied | cex (1, 1, 0)
+   rejected: potential 2 drops over every surviving post-edge window of 2 steps | origin repaired | cex (1, 1, 0)
+   rejected: potential 3 drops over every surviving post-edge window of 2 steps | origin repaired | cex (2, 3, 1)
+   rejected: potential 4 drops over every surviving post-edge window of 2 steps | origin repaired | cex (1, 1, 0)
+
+[glm] not run: pass --glm proposals.json (a list of [family, a, b]) to measure GLM-guided selection under the same budget and oracle.

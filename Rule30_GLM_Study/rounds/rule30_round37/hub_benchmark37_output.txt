@@ -1,0 +1,17 @@
+# Round 37 hub benchmark (To Do 41)
+1. hub index: 8178/8178 words of period <= 12 mapped to a hub with driveN q j t = driveN p k (t + s) (the statement of exists_wheelRep)
+2. work to cover every word of periods 1..P
+   P = 4: 26 words, 7 hubs (3x fewer searches, rounded down)
+   P = 8: 502 words, 70 hubs (7x fewer searches, rounded down)
+   P = 12: 8178 words, 746 hubs (10x fewer searches, rounded down)
+   exact search, periods 1..7, d <= 20: all 247 words 5.19 s; the 40 hubs 0.64 s (wall clock)
+3. per-period slack on the measured range (EMP): true (worst phase) | Round 36 route (hub-phase slack + 2(p-1)) | Round 37 route (best phase + exact turn cost)
+   period 1 (d <= 34): true 2 | Round 36 route 2 | Round 37 route 2
+   period 2 (d <= 34): true 5 | Round 36 route 7 | Round 37 route 5
+   period 3 (d <= 34): true 8 | Round 36 route 12 | Round 37 route 8
+   period 4 (d <= 34): true 7 | Round 36 route 12 | Round 37 route 9
+   period 5 (d <= 30): true 6 | Round 36 route 12 | Round 37 route 10
+   period 6 (d <= 30): true 11 | Round 36 route 18 | Round 37 route 13
+   period 7 (d <= 28): true 12 | Round 36 route 20 | Round 37 route 14
+   period 8 (d <= 28): true 14 | Round 36 route 25 | Round 37 route 17
+   the Round 37 prediction (best phase + exact cost) equals the measured slack at 154 of 471 phases; at every phase in 5 of 70 wheels

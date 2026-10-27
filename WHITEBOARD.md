@@ -5,7 +5,7 @@
 **Question.** If this session stopped now, what would the next one need to
 know to carry the round on?
 
-**Verdict.** No round is in flight: Phase 183 (the Lorentzian evidence space) and Phase 182 (the Lorentzian lift of the ambiguous space, the owner's `iter10_lorentzian.py` audited) are closed, and before them Phases 180 (every Leech shell proved) and 181 (improper Lorentz families with a change of units in `tool frame`), in `MASTER_PLAN.md`. The next round starts from `STATUS.md` §2.1. The test-file sign-off is still owed (no pytest here).
+**Verdict.** No round is in flight: Phase 184 (the declared majority rule, `tool majority`), Phase 183 (the Lorentzian evidence space) and Phase 182 (the Lorentzian lift of the ambiguous space, the owner's `iter10_lorentzian.py` audited) are closed, and before them Phases 180 (every Leech shell proved) and 181 (improper Lorentz families with a change of units in `tool frame`), in `MASTER_PLAN.md`. The next round starts from `STATUS.md` §2.1. The test-file sign-off is still owed (no pytest here).
 
 **Deciding figure.** 0 steps outstanding.
 
@@ -43,7 +43,13 @@ absence:
 
 ## Status
 
-**No round is in flight.** Phase 183 (owner's request, 23 October 2026; the
+**No round is in flight.** Phase 184 (23 October 2026; the declared majority
+rule for conflicting evidence, taken from `STATUS.md` §2.1 item 11's first
+line) is closed: `LorentzianMajority.lean` (in `AxiomAuditAll.lean`);
+`reasoning/lorentzian_majority.py` (`tool majority`); `tools
+lorentzian-majority` (8 of 8 marks); `tests/test_lorentzian_majority.py` run by
+hand, all passing. Write-up: `studies/LORENTZIAN_MAJORITY_STUDY.md`.
+Phase 183 (owner's request, 23 October 2026; the
 Lorentzian evidence space, taken from `STATUS.md` §2.1 item 11) is closed:
 `LorentzianEvidence.lean` (in `AxiomAuditAll.lean`);
 `reasoning/lorentzian_evidence.py` (`tool evidence`, and the certificate guard

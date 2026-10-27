@@ -1,0 +1,400 @@
+{
+  "results": [
+    {
+      "n": 1,
+      "width": 3,
+      "n_evals": 8,
+      "n_nonzero_monomials": 4,
+      "max_degree": 2,
+      "n_highest_degree_monomials": 1,
+      "highest_degree_monomials": [
+        {
+          "monomial_index": 6,
+          "variables": [
+            1,
+            2
+          ],
+          "columns": [
+            0,
+            1
+          ],
+          "weight": 2
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 3,
+        "2": 1
+      }
+    },
+    {
+      "n": 2,
+      "width": 5,
+      "n_evals": 32,
+      "n_nonzero_monomials": 10,
+      "max_degree": 3,
+      "n_highest_degree_monomials": 2,
+      "highest_degree_monomials": [
+        {
+          "monomial_index": 26,
+          "variables": [
+            1,
+            3,
+            4
+          ],
+          "columns": [
+            -1,
+            1,
+            2
+          ],
+          "weight": 3
+        },
+        {
+          "monomial_index": 28,
+          "variables": [
+            2,
+            3,
+            4
+          ],
+          "columns": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 3,
+        "2": 5,
+        "3": 2
+      }
+    },
+    {
+      "n": 3,
+      "width": 7,
+      "n_evals": 128,
+      "n_nonzero_monomials": 30,
+      "max_degree": 5,
+      "n_highest_degree_monomials": 1,
+      "highest_degree_monomials": [
+        {
+          "monomial_index": 124,
+          "variables": [
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "columns": [
+            -1,
+            0,
+            1,
+            2,
+            3
+          ],
+          "weight": 5
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 6,
+        "2": 11,
+        "3": 8,
+        "4": 4,
+        "5": 1
+      }
+    },
+    {
+      "n": 4,
+      "width": 9,
+      "n_evals": 512,
+      "n_nonzero_monomials": 122,
+      "max_degree": 7,
+      "n_highest_degree_monomials": 1,
+      "highest_degree_monomials": [
+        {
+          "monomial_index": 508,
+          "variables": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "columns": [
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "weight": 7
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 4,
+        "2": 18,
+        "3": 37,
+        "4": 35,
+        "5": 20,
+        "6": 7,
+        "7": 1
+      }
+    },
+    {
+      "n": 5,
+      "width": 11,
+      "n_evals": 2048,
+      "n_nonzero_monomials": 346,
+      "max_degree": 9,
+      "n_highest_degree_monomials": 1,
+      "highest_degree_monomials": [
+        {
+          "monomial_index": 2044,
+          "variables": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "columns": [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "weight": 9
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 9,
+        "2": 32,
+        "3": 68,
+        "4": 91,
+        "5": 79,
+        "6": 47,
+        "7": 15,
+        "8": 4,
+        "9": 1
+      }
+    },
+    {
+      "n": 6,
+      "width": 13,
+      "n_evals": 8192,
+      "n_nonzero_monomials": 1360,
+      "max_degree": 11,
+      "n_highest_degree_monomials": 1,
+      "highest_degree_monomials": [
+        {
+          "monomial_index": 8188,
+          "variables": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "columns": [
+            -4,
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "weight": 11
+        }
+      ],
+      "monomials_by_degree": {
+        "1": 5,
+        "2": 33,
+        "3": 118,
+        "4": 240,
+        "5": 314,
+        "6": 292,
+        "7": 203,
+        "8": 107,
+        "9": 38,
+        "10": 9,
+        "11": 1
+      }
+    }
+  ],
+  "inductive_pattern": [
+    {
+      "n_to_n+1": "1 -> 2",
+      "deg_n": 2,
+      "deg_n+1": 3,
+      "increment": 1,
+      "expected_increment": 2,
+      "matches_conjecture": false,
+      "columns_in_highest_deg_monomials_n": [
+        0,
+        1
+      ],
+      "columns_in_highest_deg_monomials_n+1": [
+        -1,
+        0,
+        1,
+        2
+      ],
+      "new_columns": [
+        -1,
+        2
+      ],
+      "dropped_columns": []
+    },
+    {
+      "n_to_n+1": "2 -> 3",
+      "deg_n": 3,
+      "deg_n+1": 5,
+      "increment": 2,
+      "expected_increment": 2,
+      "matches_conjecture": true,
+      "columns_in_highest_deg_monomials_n": [
+        -1,
+        0,
+        1,
+        2
+      ],
+      "columns_in_highest_deg_monomials_n+1": [
+        -1,
+        0,
+        1,
+        2,
+        3
+      ],
+      "new_columns": [
+        3
+      ],
+      "dropped_columns": []
+    },
+    {
+      "n_to_n+1": "3 -> 4",
+      "deg_n": 5,
+      "deg_n+1": 7,
+      "increment": 2,
+      "expected_increment": 2,
+      "matches_conjecture": true,
+      "columns_in_highest_deg_monomials_n": [
+        -1,
+        0,
+        1,
+        2,
+        3
+      ],
+      "columns_in_highest_deg_monomials_n+1": [
+        -2,
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "new_columns": [
+        -2,
+        4
+      ],
+      "dropped_columns": []
+    },
+    {
+      "n_to_n+1": "4 -> 5",
+      "deg_n": 7,
+      "deg_n+1": 9,
+      "increment": 2,
+      "expected_increment": 2,
+      "matches_conjecture": true,
+      "columns_in_highest_deg_monomials_n": [
+        -2,
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "columns_in_highest_deg_monomials_n+1": [
+        -3,
+        -2,
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "new_columns": [
+        -3,
+        5
+      ],
+      "dropped_columns": []
+    },
+    {
+      "n_to_n+1": "5 -> 6",
+      "deg_n": 9,
+      "deg_n+1": 11,
+      "increment": 2,
+      "expected_increment": 2,
+      "matches_conjecture": true,
+      "columns_in_highest_deg_monomials_n": [
+        -3,
+        -2,
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "columns_in_highest_deg_monomials_n+1": [
+        -4,
+        -3,
+        -2,
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "new_columns": [
+        -4,
+        6
+      ],
+      "dropped_columns": []
+    }
+  ],
+  "conjecture": "deg(a(n+1)) = deg(a(n)) + 2 for n >= 2",
+  "conjecture_holds_for_n_2_to_N": true
+}

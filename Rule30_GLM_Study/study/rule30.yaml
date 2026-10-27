@@ -1,0 +1,78 @@
+schema: glm-study-card/v1
+id: rule30
+title: Rule 30 through the GLM
+question: Wolfram's three Rule 30 prize problems, asked through the Geometric Language Machine and checked in Lean 4
+owner: E. R. A. Craig (study, concept, GLM/UBP framework)
+contributors:
+  - "Z.ai and Qwen.ai (the owner's Rounds 1-7: computation and translation)"
+  - Aristotle by Harmonic (Lean 4 formalisation, verification and exact computation, Lean Rounds 1-49)
+status: all three prize problems open
+problems:
+  - id: P1
+    question: Is the centre column never eventually periodic?
+    lean:
+      - GLM.Rule30.Problem1
+    status: open
+    narrowest_targets:
+      - HalfLineDies 2
+      - WheelDies
+      - SeedAPBalanced (every stride and every phase of the centre column balanced)
+      - TuneExcessLog
+  - id: P2
+    question: Does the frequency of black cells in the centre column tend to 1/2?
+    lean:
+      - GLM.Rule30.Problem2
+    status: open
+    narrowest_targets:
+      - SeedAPBalanced (every stride and every phase of the centre column balanced)
+  - id: P3
+    question: Does computing the n-th centre cell need effort growing with n?
+    lean:
+      - GLM.Rule30.Problem3
+      - GLM.Rule30.Problem3Eventual
+    status: open
+    narrowest_targets: []
+package:
+  lean_toolchain: leanprover/lean4:v4.28.0
+  mathlib_commit: "8f9d9cff6bd728b17a24e163c9402775d9e6a365"
+  library: RequestProject
+  root_module: RequestProject.GLM.Rule30Study
+  build: lake build RequestProject.GLM.Rule30Study
+  axioms: "FORMAL: propext, Classical.choice, Quot.sound; CERT also Lean.ofReduceBool, Lean.trustCompiler"
+  unfinished_proofs: 0
+documents:
+  - path: RULE30_STUDY.md
+    role: "the one document to read first: journey, best findings, map, merge, YAML, open questions"
+  - path: MERGE_INTO_GLM.md
+    role: how to merge the package into the GLM repository
+  - path: README.md
+    role: front door
+  - path: RequestProject/GLM/Rule30/README.md
+    role: "the Lean map: every file by topic"
+  - path: RequestProject/GLM/Rule30/PROJECT_DIRECTIVE.md
+    role: goal, rules of evidence, what counts as progress
+  - path: RequestProject/GLM/Rule30/AUDIT.md
+    role: status, missing theorems (section 3), the To Do list (section 4)
+  - path: RequestProject/GLM/Rule30/DEVELOPMENT.md
+    role: how to run a round
+  - path: RequestProject/GLM/Rule30/HISTORY.md
+    role: the record of every round
+  - path: RequestProject/GLM/Rule30/claims.csv
+    role: the evidence ledger
+machine_readable:
+  study/rule30.yaml: this card
+  study/findings.yaml: the best findings with Lean names (curated)
+  study/lessons.yaml: turning points, error record, corrections, lessons (curated)
+  study/rounds.yaml: every round (generated)
+  study/open_questions.yaml: the To Do list with states (generated)
+  study/study_folders.yaml: the owner's study folders and their named files (generated)
+  study/modules.yaml: "every Lean file: topic, evidence, round, ledger rows (generated)"
+  study/claims.yaml: the evidence ledger, row by row (generated)
+  study/docs/: every document of the package, converted losslessly (generated)
+  study/index.yaml: catalogue for queries (generated)
+tools:
+  tools/glm_study_yaml.py: study Markdown <-> YAML parser/creator (md2yaml, yaml2md, new, validate, roundtrip, index, query, get)
+  tools/build_study_yaml.py: regenerate and check the generated study/ files
+  tools/tier0_check.py: the GLM's tier-0 contract on Markdown documents
+  tools/merge_into_glm.py: merge the package into a GLM checkout (dry run by default)
+  tools/lean_decls.py: list the declarations of Lean files

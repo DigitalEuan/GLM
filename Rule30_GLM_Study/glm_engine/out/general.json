@@ -1,0 +1,994 @@
+{
+ "engine": "v18",
+ "title": "General reasoning benchmarks",
+ "use_ledger": true,
+ "hypotheses": [
+  {
+   "hid": "H01",
+   "key": "GEN.euler.prime",
+   "params": {},
+   "class": "Pi1",
+   "origin": "registry",
+   "deps": [],
+   "text": "n² + n + 41 is prime for every n ≥ 0",
+   "status": "refuted-on-escalation",
+   "ring": "knows",
+   "backing": [
+    "EXACT counterexample: n = 40: 1681 is not prime",
+    "FORMAL Benchmarks.euler_not_prime_40"
+   ],
+   "profile": {
+    "claim": "n² + n + 41 is prime for every n ≥ 0",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 10,
+      "verdict": true,
+      "detail": "all n in [0, 10)"
+     },
+     {
+      "layer": "integer",
+      "scale": 20,
+      "verdict": true,
+      "detail": "all n in [0, 20)"
+     },
+     {
+      "layer": "rational",
+      "scale": 30,
+      "verdict": true,
+      "detail": "all n in [0, 30)"
+     },
+     {
+      "layer": "griess",
+      "scale": 40,
+      "verdict": true,
+      "detail": "all n in [0, 40)"
+     },
+     {
+      "layer": "universal",
+      "scale": 100,
+      "verdict": false,
+      "detail": "n = 40: 1681 is not prime"
+     }
+    ],
+    "verdict": false,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess",
+      "universal"
+     ],
+     "direction": "flipped at universal",
+     "settled": "universal"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> refuted-on-escalation: counterexample at universal (scale 100): n = 40: 1681 is not prime"
+   ],
+   "truth": false
+  },
+  {
+   "hid": "H02",
+   "key": "GEN.euler.prime.below40",
+   "params": {},
+   "class": "finite",
+   "origin": "narrow",
+   "deps": [
+    [
+     "H01",
+     "derived"
+    ]
+   ],
+   "text": "n² + n + 41 is prime for every n < 40",
+   "status": "proved",
+   "ring": "knows",
+   "backing": [
+    "EXACT whole range: all n in [0, 40)",
+    "FORMAL Benchmarks.euler_prime_below_40"
+   ],
+   "profile": null,
+   "gate_log": [
+    "[exact] new -> verified-exact: all n in [0, 40)",
+    "[ledger] verified-exact -> proved: FORMAL Benchmarks.euler_prime_below_40"
+   ],
+   "truth": true
+  },
+  {
+   "hid": "H03",
+   "key": "GEN.fermat.prime",
+   "params": {},
+   "class": "Pi1",
+   "origin": "registry",
+   "deps": [],
+   "text": "every Fermat number 2^(2^n) + 1 is prime",
+   "status": "refuted-on-escalation",
+   "ring": "knows",
+   "backing": [
+    "EXACT counterexample: n = 5: 2^(2^5) + 1 = 4294967297 is divisible by 641",
+    "FORMAL Benchmarks.fermat_five_not_prime"
+   ],
+   "profile": {
+    "claim": "every Fermat number 2^(2^n) + 1 is prime",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 1,
+      "verdict": true,
+      "detail": "all n in [0, 2)"
+     },
+     {
+      "layer": "integer",
+      "scale": 2,
+      "verdict": true,
+      "detail": "all n in [0, 3)"
+     },
+     {
+      "layer": "rational",
+      "scale": 3,
+      "verdict": true,
+      "detail": "all n in [0, 4)"
+     },
+     {
+      "layer": "griess",
+      "scale": 4,
+      "verdict": true,
+      "detail": "all n in [0, 5)"
+     },
+     {
+      "layer": "universal",
+      "scale": 6,
+      "verdict": false,
+      "detail": "n = 5: 2^(2^5) + 1 = 4294967297 is divisible by 641"
+     }
+    ],
+    "verdict": false,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess",
+      "universal"
+     ],
+     "direction": "flipped at universal",
+     "settled": "universal"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> refuted-on-escalation: counterexample at universal (scale 6): n = 5: 2^(2^5) + 1 = 4294967297 is divisible by 641"
+   ],
+   "truth": false
+  },
+  {
+   "hid": "H04",
+   "key": "GEN.fermat.coprime",
+   "params": {},
+   "class": "Pi1",
+   "origin": "registry",
+   "deps": [],
+   "text": "distinct Fermat numbers are coprime",
+   "status": "proved",
+   "ring": "knows",
+   "backing": [
+    "escalation: survives every read, up to 9",
+    "FORMAL Benchmarks.fermat_pairwise_coprime"
+   ],
+   "profile": {
+    "claim": "distinct Fermat numbers are coprime",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 2,
+      "verdict": true,
+      "detail": "all n in [1, 3)"
+     },
+     {
+      "layer": "integer",
+      "scale": 3,
+      "verdict": true,
+      "detail": "all n in [1, 4)"
+     },
+     {
+      "layer": "rational",
+      "scale": 4,
+      "verdict": true,
+      "detail": "all n in [1, 5)"
+     },
+     {
+      "layer": "griess",
+      "scale": 6,
+      "verdict": true,
+      "detail": "all n in [1, 7)"
+     },
+     {
+      "layer": "universal",
+      "scale": 9,
+      "verdict": true,
+      "detail": "all n in [1, 10)"
+     }
+    ],
+    "verdict": true,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess",
+      "universal"
+     ],
+     "direction": "converging",
+     "settled": "universal"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> survives-to: no counterexample at any of the five scales (up to 9); open beyond",
+    "[ledger] survives-to -> proved: FORMAL Benchmarks.fermat_pairwise_coprime"
+   ],
+   "truth": true
+  },
+  {
+   "hid": "H05",
+   "key": "GEN.two.squares",
+   "params": {},
+   "class": "Pi1",
+   "origin": "registry",
+   "deps": [],
+   "text": "an odd prime p is a sum of two squares exactly when p ≡ 1 (mod 4)",
+   "status": "proved",
+   "ring": "knows",
+   "backing": [
+    "escalation: survives every read, up to 50000",
+    "FORMAL Benchmarks.two_squares_law"
+   ],
+   "profile": {
+    "claim": "an odd prime p is a sum of two squares exactly when p ≡ 1 (mod 4)",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 100,
+      "verdict": true,
+      "detail": "all n in [3, 100)"
+     },
+     {
+      "layer": "integer",
+      "scale": 1000,
+      "verdict": true,
+      "detail": "all n in [3, 1000)"
+     },
+     {
+      "layer": "rational",
+      "scale": 5000,
+      "verdict": true,
+      "detail": "all n in [3, 5000)"
+     },
+     {
+      "layer": "griess",
+      "scale": 20000,
+      "verdict": true,
+      "detail": "all n in [3, 20000)"
+     },
+     {
+      "layer": "universal",
+      "scale": 50000,
+      "verdict": true,
+      "detail": "all n in [3, 50000)"
+     }
+    ],
+    "verdict": true,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess",
+      "universal"
+     ],
+     "direction": "converging",
+     "settled": "universal"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> survives-to: no counterexample at any of the five scales (up to 50000); open beyond",
+    "[ledger] survives-to -> proved: FORMAL Benchmarks.two_squares_law"
+   ],
+   "truth": true
+  },
+  {
+   "hid": "H06",
+   "key": "GEN.circle.regions",
+   "params": {},
+   "class": "Pi1",
+   "origin": "registry",
+   "deps": [],
+   "text": "n points in general position on a circle cut the disc into 2^(n−1) regions",
+   "status": "refuted-on-escalation",
+   "ring": "knows",
+   "backing": [
+    "EXACT counterexample: n = 6: 31 regions, not 32",
+    "FORMAL Benchmarks.moser_split"
+   ],
+   "profile": {
+    "claim": "n points in general position on a circle cut the disc into 2^(n−1) regions",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 3,
+      "verdict": true,
+      "detail": "all n in [1, 4)"
+     },
+     {
+      "layer": "integer",
+      "scale": 4,
+      "verdict": true,
+      "detail": "all n in [1, 5)"
+     },
+     {
+      "layer": "rational",
+      "scale": 5,
+      "verdict": true,
+      "detail": "all n in [1, 6)"
+     },
+     {
+      "layer": "griess",
+      "scale": 6,
+      "verdict": false,
+      "detail": "n = 6: 31 regions, not 32"
+     },
+     {
+      "layer": "universal",
+      "scale": 10,
+      "verdict": null,
+      "detail": "not read (already refuted)"
+     }
+    ],
+    "verdict": false,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess"
+     ],
+     "direction": "flipped at griess",
+     "settled": "griess"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> refuted-on-escalation: counterexample at griess (scale 6): n = 6: 31 regions, not 32"
+   ],
+   "truth": false
+  },
+  {
+   "hid": "H07",
+   "key": "GEN.josephus",
+   "params": {},
+   "class": "Pi1",
+   "origin": "registry",
+   "deps": [],
+   "text": "in the Josephus problem with every second person removed, the survivor is 2(n − 2^⌊log₂ n⌋) + 1",
+   "status": "proved",
+   "ring": "knows",
+   "backing": [
+    "escalation: survives every read, up to 4096",
+    "FORMAL Benchmarks.josephus_closed_form"
+   ],
+   "profile": {
+    "claim": "in the Josephus problem with every second person removed, the survivor is 2(n − 2^⌊log₂ n⌋) + 1",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 16,
+      "verdict": true,
+      "detail": "1 ≤ n ≤ 16 (simulated)"
+     },
+     {
+      "layer": "integer",
+      "scale": 64,
+      "verdict": true,
+      "detail": "1 ≤ n ≤ 64 (simulated)"
+     },
+     {
+      "layer": "rational",
+      "scale": 256,
+      "verdict": true,
+      "detail": "1 ≤ n ≤ 256 (simulated)"
+     },
+     {
+      "layer": "griess",
+      "scale": 1024,
+      "verdict": true,
+      "detail": "1 ≤ n ≤ 1024 (simulated)"
+     },
+     {
+      "layer": "universal",
+      "scale": 4096,
+      "verdict": true,
+      "detail": "1 ≤ n ≤ 4096 (simulated)"
+     }
+    ],
+    "verdict": true,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess",
+      "universal"
+     ],
+     "direction": "converging",
+     "settled": "universal"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> survives-to: no counterexample at any of the five scales (up to 4096); open beyond",
+    "[ledger] survives-to -> proved: FORMAL Benchmarks.josephus_closed_form"
+   ],
+   "truth": true
+  },
+  {
+   "hid": "H08",
+   "key": "GEN.collatz.bound",
+   "params": {},
+   "class": "Pi1",
+   "origin": "registry",
+   "deps": [],
+   "text": "every positive integer reaches 1 within 100 Collatz steps",
+   "status": "refuted-on-escalation",
+   "ring": "knows",
+   "backing": [
+    "EXACT counterexample: n = 27 needs 111 steps",
+    "FORMAL Benchmarks.collatz_27_slow"
+   ],
+   "profile": {
+    "claim": "every positive integer reaches 1 within 100 Collatz steps",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 10,
+      "verdict": true,
+      "detail": "all n in [1, 11)"
+     },
+     {
+      "layer": "integer",
+      "scale": 20,
+      "verdict": true,
+      "detail": "all n in [1, 21)"
+     },
+     {
+      "layer": "rational",
+      "scale": 26,
+      "verdict": true,
+      "detail": "all n in [1, 27)"
+     },
+     {
+      "layer": "griess",
+      "scale": 50,
+      "verdict": false,
+      "detail": "n = 27 needs 111 steps"
+     },
+     {
+      "layer": "universal",
+      "scale": 100,
+      "verdict": null,
+      "detail": "not read (already refuted)"
+     }
+    ],
+    "verdict": false,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess"
+     ],
+     "direction": "flipped at griess",
+     "settled": "griess"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> refuted-on-escalation: counterexample at griess (scale 50): n = 27 needs 111 steps"
+   ],
+   "truth": false
+  },
+  {
+   "hid": "H09",
+   "key": "GEN.collatz",
+   "params": {},
+   "class": "Pi2",
+   "origin": "registry",
+   "deps": [],
+   "text": "every positive integer eventually reaches 1 under the Collatz map",
+   "status": "open",
+   "ring": "doesn't-know",
+   "backing": [
+    "escalation: survives every read, up to 100000"
+   ],
+   "profile": {
+    "claim": "every positive integer eventually reaches 1 under the Collatz map",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 100,
+      "verdict": true,
+      "detail": "all n in [1, 101)"
+     },
+     {
+      "layer": "integer",
+      "scale": 1000,
+      "verdict": true,
+      "detail": "all n in [1, 1001)"
+     },
+     {
+      "layer": "rational",
+      "scale": 10000,
+      "verdict": true,
+      "detail": "all n in [1, 10001)"
+     },
+     {
+      "layer": "griess",
+      "scale": 30000,
+      "verdict": true,
+      "detail": "all n in [1, 30001)"
+     },
+     {
+      "layer": "universal",
+      "scale": 100000,
+      "verdict": true,
+      "detail": "all n in [1, 100001)"
+     }
+    ],
+    "verdict": true,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess",
+      "universal"
+     ],
+     "direction": "converging",
+     "settled": "universal"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> open: finite proxy holds up to 100000; a Pi2 claim is never decided by data (NeedsWheel.finite_data_never_forces_infinitely_many)"
+   ],
+   "truth": null
+  },
+  {
+   "hid": "H10",
+   "key": "GEN.gcd.trap",
+   "params": {},
+   "class": "Pi1",
+   "origin": "registry",
+   "deps": [],
+   "text": "gcd(n^17 + 9, (n + 1)^17 + 9) = 1 for every n ≥ 0",
+   "status": "refuted-by-ledger",
+   "ring": "knows",
+   "backing": [
+    "escalation: survives every read, up to 20000",
+    "FORMAL Benchmarks.gcd_trap_refuted",
+    "EXACT the cited witness n = 8424432925592889329288197322308900672459420460792433 is recomputed here: gcd = 8936582237915716659950962253358945635793453256935559 ≠ 1"
+   ],
+   "profile": {
+    "claim": "gcd(n^17 + 9, (n + 1)^17 + 9) = 1 for every n ≥ 0",
+    "reads": [
+     {
+      "layer": "substrate",
+      "scale": 100,
+      "verdict": true,
+      "detail": "all n in [0, 100)"
+     },
+     {
+      "layer": "integer",
+      "scale": 1000,
+      "verdict": true,
+      "detail": "all n in [0, 1000)"
+     },
+     {
+      "layer": "rational",
+      "scale": 3000,
+      "verdict": true,
+      "detail": "all n in [0, 3000)"
+     },
+     {
+      "layer": "griess",
+      "scale": 10000,
+      "verdict": true,
+      "detail": "all n in [0, 10000)"
+     },
+     {
+      "layer": "universal",
+      "scale": 20000,
+      "verdict": true,
+      "detail": "all n in [0, 20000)"
+     }
+    ],
+    "verdict": true,
+    "arrow": {
+     "read": [
+      "substrate",
+      "integer",
+      "rational",
+      "griess",
+      "universal"
+     ],
+     "direction": "converging",
+     "settled": "universal"
+    },
+    "shape_ok": true
+   },
+   "gate_log": [
+    "[escalate] new -> survives-to: no counterexample at any of the five scales (up to 20000); open beyond",
+    "[ledger] survives-to -> refuted-by-ledger: FORMAL Benchmarks.gcd_trap_refuted"
+   ],
+   "truth": false
+  }
+ ],
+ "conflicts": [],
+ "rollback": [],
+ "dialogue": [
+  "I hold 10 claims: 9 known (proved, verified, measured or refuted), 0 surviving every read, 1 not known.",
+  "Proved in Lean (4):",
+  "  H02: n² + n + 41 is prime for every n < 40 — FORMAL Benchmarks.euler_prime_below_40",
+  "  H04: distinct Fermat numbers are coprime — FORMAL Benchmarks.fermat_pairwise_coprime",
+  "  H05: an odd prime p is a sum of two squares exactly when p ≡ 1 (mod 4) — FORMAL Benchmarks.two_squares_law",
+  "  H07: in the Josephus problem with every second person removed, the survivor is 2(n − 2^⌊log₂ n⌋) + 1 — FORMAL Benchmarks.josephus_closed_form",
+  "Open (no finite data decides these) (1):",
+  "  H09: every positive integer eventually reaches 1 under the Collatz map — escalation: survives every read, up to 100000",
+  "Refuted — do not say these (5):",
+  "  H01: NOT 'n² + n + 41 is prime for every n ≥ 0' — FORMAL Benchmarks.euler_not_prime_40",
+  "  H03: NOT 'every Fermat number 2^(2^n) + 1 is prime' — FORMAL Benchmarks.fermat_five_not_prime",
+  "  H06: NOT 'n points in general position on a circle cut the disc into 2^(n−1) regions' — FORMAL Benchmarks.moser_split",
+  "  H08: NOT 'every positive integer reaches 1 within 100 Collatz steps' — FORMAL Benchmarks.collatz_27_slow",
+  "  H10: NOT 'gcd(n^17 + 9, (n + 1)^17 + 9) = 1 for every n ≥ 0' — EXACT the cited witness n = 8424432925592889329288197322308900672459420460792433 is recomputed here: gcd = 8936582237915716659950962253358945635793453256935559 ≠ 1",
+  "Arrows that flipped (refuted only by reading higher):",
+  "  H01: read substrate → integer → rational → griess → universal; flipped at universal",
+  "  H03: read substrate → integer → rational → griess → universal; flipped at universal",
+  "  H06: read substrate → integer → rational → griess; flipped at griess",
+  "  H08: read substrate → integer → rational → griess; flipped at griess"
+ ],
+ "dialogue_consistency": {
+  "spoken": 5,
+  "spoken_without_backing_or_unspeakable": [],
+  "ok": true
+ },
+ "score": {
+  "right": 10,
+  "wrong": 0,
+  "overclaim": 0,
+  "abstain": 0,
+  "n": 10
+ },
+ "wheel": {
+  "engine": "GLM Hypothesis Engine v18",
+  "title": "General reasoning benchmarks",
+  "format": "glm-wheel/2",
+  "rings": {
+   "knows": [
+    {
+     "hid": "H01",
+     "key": "GEN.euler.prime",
+     "params": {},
+     "class": "Pi1",
+     "statement": "n² + n + 41 is prime for every n ≥ 0",
+     "status": "refuted-on-escalation",
+     "backing": [
+      "EXACT counterexample: n = 40: 1681 is not prime",
+      "FORMAL Benchmarks.euler_not_prime_40"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "flipped at universal",
+      "settled": "universal"
+     },
+     "domain": "general"
+    },
+    {
+     "hid": "H02",
+     "key": "GEN.euler.prime.below40",
+     "params": {},
+     "class": "finite",
+     "statement": "n² + n + 41 is prime for every n < 40",
+     "status": "proved",
+     "backing": [
+      "EXACT whole range: all n in [0, 40)",
+      "FORMAL Benchmarks.euler_prime_below_40"
+     ],
+     "arrow": null,
+     "domain": "general"
+    },
+    {
+     "hid": "H03",
+     "key": "GEN.fermat.prime",
+     "params": {},
+     "class": "Pi1",
+     "statement": "every Fermat number 2^(2^n) + 1 is prime",
+     "status": "refuted-on-escalation",
+     "backing": [
+      "EXACT counterexample: n = 5: 2^(2^5) + 1 = 4294967297 is divisible by 641",
+      "FORMAL Benchmarks.fermat_five_not_prime"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "flipped at universal",
+      "settled": "universal"
+     },
+     "domain": "general"
+    },
+    {
+     "hid": "H04",
+     "key": "GEN.fermat.coprime",
+     "params": {},
+     "class": "Pi1",
+     "statement": "distinct Fermat numbers are coprime",
+     "status": "proved",
+     "backing": [
+      "escalation: survives every read, up to 9",
+      "FORMAL Benchmarks.fermat_pairwise_coprime"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "converging",
+      "settled": "universal"
+     },
+     "domain": "general"
+    },
+    {
+     "hid": "H05",
+     "key": "GEN.two.squares",
+     "params": {},
+     "class": "Pi1",
+     "statement": "an odd prime p is a sum of two squares exactly when p ≡ 1 (mod 4)",
+     "status": "proved",
+     "backing": [
+      "escalation: survives every read, up to 50000",
+      "FORMAL Benchmarks.two_squares_law"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "converging",
+      "settled": "universal"
+     },
+     "domain": "general"
+    },
+    {
+     "hid": "H06",
+     "key": "GEN.circle.regions",
+     "params": {},
+     "class": "Pi1",
+     "statement": "n points in general position on a circle cut the disc into 2^(n−1) regions",
+     "status": "refuted-on-escalation",
+     "backing": [
+      "EXACT counterexample: n = 6: 31 regions, not 32",
+      "FORMAL Benchmarks.moser_split"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess"
+      ],
+      "direction": "flipped at griess",
+      "settled": "griess"
+     },
+     "domain": "general"
+    },
+    {
+     "hid": "H07",
+     "key": "GEN.josephus",
+     "params": {},
+     "class": "Pi1",
+     "statement": "in the Josephus problem with every second person removed, the survivor is 2(n − 2^⌊log₂ n⌋) + 1",
+     "status": "proved",
+     "backing": [
+      "escalation: survives every read, up to 4096",
+      "FORMAL Benchmarks.josephus_closed_form"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "converging",
+      "settled": "universal"
+     },
+     "domain": "general"
+    },
+    {
+     "hid": "H08",
+     "key": "GEN.collatz.bound",
+     "params": {},
+     "class": "Pi1",
+     "statement": "every positive integer reaches 1 within 100 Collatz steps",
+     "status": "refuted-on-escalation",
+     "backing": [
+      "EXACT counterexample: n = 27 needs 111 steps",
+      "FORMAL Benchmarks.collatz_27_slow"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess"
+      ],
+      "direction": "flipped at griess",
+      "settled": "griess"
+     },
+     "domain": "general"
+    },
+    {
+     "hid": "H10",
+     "key": "GEN.gcd.trap",
+     "params": {},
+     "class": "Pi1",
+     "statement": "gcd(n^17 + 9, (n + 1)^17 + 9) = 1 for every n ≥ 0",
+     "status": "refuted-by-ledger",
+     "backing": [
+      "escalation: survives every read, up to 20000",
+      "FORMAL Benchmarks.gcd_trap_refuted",
+      "EXACT the cited witness n = 8424432925592889329288197322308900672459420460792433 is recomputed here: gcd = 8936582237915716659950962253358945635793453256935559 ≠ 1"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "converging",
+      "settled": "universal"
+     },
+     "domain": "general"
+    }
+   ],
+   "thinks-true": [],
+   "doesn't-know": [
+    {
+     "hid": "H09",
+     "key": "GEN.collatz",
+     "params": {},
+     "class": "Pi2",
+     "statement": "every positive integer eventually reaches 1 under the Collatz map",
+     "status": "open",
+     "backing": [
+      "escalation: survives every read, up to 100000"
+     ],
+     "arrow": {
+      "read": [
+       "substrate",
+       "integer",
+       "rational",
+       "griess",
+       "universal"
+      ],
+      "direction": "converging",
+      "settled": "universal"
+     },
+     "domain": "general"
+    }
+   ]
+  },
+  "needs": [
+   {
+    "kind": "proof",
+    "signature": "proof:GEN.collatz",
+    "because": "open: no finite data decides it",
+    "blocks": [
+     "H09"
+    ],
+    "acceptance": "a Lean proof, or a proved reduction to a smaller open target"
+   }
+  ],
+  "language_wheel": [
+   {
+    "concept": "n² + n + 41 is prime for every n ≥ 0",
+    "verdict": false,
+    "key": "GEN.euler.prime",
+    "params": {},
+    "backing": "FORMAL Benchmarks.euler_not_prime_40"
+   },
+   {
+    "concept": "n² + n + 41 is prime for every n < 40",
+    "verdict": true,
+    "key": "GEN.euler.prime.below40",
+    "params": {},
+    "backing": "FORMAL Benchmarks.euler_prime_below_40"
+   },
+   {
+    "concept": "every Fermat number 2^(2^n) + 1 is prime",
+    "verdict": false,
+    "key": "GEN.fermat.prime",
+    "params": {},
+    "backing": "FORMAL Benchmarks.fermat_five_not_prime"
+   },
+   {
+    "concept": "distinct Fermat numbers are coprime",
+    "verdict": true,
+    "key": "GEN.fermat.coprime",
+    "params": {},
+    "backing": "FORMAL Benchmarks.fermat_pairwise_coprime"
+   },
+   {
+    "concept": "an odd prime p is a sum of two squares exactly when p ≡ 1 (mod 4)",
+    "verdict": true,
+    "key": "GEN.two.squares",
+    "params": {},
+    "backing": "FORMAL Benchmarks.two_squares_law"
+   },
+   {
+    "concept": "n points in general position on a circle cut the disc into 2^(n−1) regions",
+    "verdict": false,
+    "key": "GEN.circle.regions",
+    "params": {},
+    "backing": "FORMAL Benchmarks.moser_split"
+   },
+   {
+    "concept": "in the Josephus problem with every second person removed, the survivor is 2(n − 2^⌊log₂ n⌋) + 1",
+    "verdict": true,
+    "key": "GEN.josephus",
+    "params": {},
+    "backing": "FORMAL Benchmarks.josephus_closed_form"
+   },
+   {
+    "concept": "every positive integer reaches 1 within 100 Collatz steps",
+    "verdict": false,
+    "key": "GEN.collatz.bound",
+    "params": {},
+    "backing": "FORMAL Benchmarks.collatz_27_slow"
+   },
+   {
+    "concept": "gcd(n^17 + 9, (n + 1)^17 + 9) = 1 for every n ≥ 0",
+    "verdict": false,
+    "key": "GEN.gcd.trap",
+    "params": {},
+    "backing": "EXACT the cited witness n = 8424432925592889329288197322308900672459420460792433 is recomputed here: gcd = 8936582237915716659950962253358945635793453256935559 ≠ 1"
+   }
+  ],
+  "counts": {
+   "knows": 9,
+   "thinks-true": 0,
+   "doesn't-know": 1
+  }
+ }
+}

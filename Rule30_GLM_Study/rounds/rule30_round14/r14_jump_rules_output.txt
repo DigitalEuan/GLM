@@ -1,0 +1,54 @@
+Round 14 jump-rule ('shortcut path') study
+
+J1  linear complexity profile L(n), n <= 20000 (pattern-free: L(n) ~ n/2)
+  rule30   L(n) at n=[100, 1000, 5000, 10000, 20000]: [48, 500, 2500, 5001, 10000]; max |L(n) - n/2| = 6
+  prng     L(n) at n=[100, 1000, 5000, 10000, 20000]: [49, 499, 2500, 5000, 10000]; max |L(n) - n/2| = 7
+  sqrt2    L(n) at n=[100, 1000, 5000, 10000, 20000]: [52, 500, 2500, 5000, 10002]; max |L(n) - n/2| = 6
+  lfsr31   L(n) at n=[100, 1000, 5000, 10000, 20000]: [31, 31, 31, 31, 31]; max |L(n) - n/2| = 9969
+  thue     L(n) at n=[100, 1000, 5000, 10000, 20000]: [50, 500, 2500, 5000, 10000]; max |L(n) - n/2| = 1
+  fib      L(n) at n=[100, 1000, 5000, 10000, 20000]: [54, 609, 2583, 4180, 10945]; max |L(n) - n/2| = 2090
+  period7  L(n) at n=[100, 1000, 5000, 10000, 20000]: [4, 4, 4, 4, 4]; max |L(n) - n/2| = 9996
+
+J2  best k-tap jump rule on 2^20 bits (accuracy 0.5 = no better than a coin)
+  k=1 taps in 1..64  rule30   best accuracy 0.50103 taps (36,) (over 64 tap sets; median 0.50065)
+  k=1 taps in 1..64  prng     best accuracy 0.50140 taps (34,) (over 64 tap sets; median 0.50050)
+  k=1 taps in 1..64  sqrt2    best accuracy 0.50112 taps (46,) (over 64 tap sets; median 0.50035)
+  k=1 taps in 1..64  lfsr31   best accuracy 0.50428 taps (60,) (over 64 tap sets; median 0.50423)
+  k=1 taps in 1..64  thue     best accuracy 0.66667 taps (1,) (over 64 tap sets; median 0.55208)
+  k=1 taps in 1..64  fib      best accuracy 0.98374 taps (55,) (over 64 tap sets; median 0.74922)
+  k=1 taps in 1..64  period7  best accuracy 1.00000 taps (7,) (over 64 tap sets; median 0.57143)
+
+  k=2 taps in 1..48  rule30   best accuracy 0.50176 taps (17, 20) (over 1128 tap sets; median 0.50083)
+  k=2 taps in 1..48  prng     best accuracy 0.50177 taps (18, 33) (over 1128 tap sets; median 0.50074)
+  k=2 taps in 1..48  sqrt2    best accuracy 0.50174 taps (29, 44) (over 1128 tap sets; median 0.50073)
+  k=2 taps in 1..48  lfsr31   best accuracy 1.00000 taps (28, 31) (over 1128 tap sets; median 0.50423)
+  k=2 taps in 1..48  thue     best accuracy 0.66667 taps (1, 16) (over 1128 tap sets; median 0.58334)
+  k=2 taps in 1..48  fib      best accuracy 0.98684 taps (1, 33) (over 1128 tap sets; median 0.81966)
+  k=2 taps in 1..48  period7  best accuracy 1.00000 taps (1, 5) (over 1128 tap sets; median 0.57143)
+
+  k=3 taps in 1..32  rule30   best accuracy 0.50226 taps (17, 21, 28) (over 4960 tap sets; median 0.50114)
+  k=3 taps in 1..32  prng     best accuracy 0.50227 taps (5, 18, 21) (over 4960 tap sets; median 0.50106)
+  k=3 taps in 1..32  sqrt2    best accuracy 0.50201 taps (7, 20, 29) (over 4960 tap sets; median 0.50106)
+  k=3 taps in 1..32  lfsr31   best accuracy 1.00000 taps (1, 28, 31) (over 4960 tap sets; median 0.50474)
+  k=3 taps in 1..32  thue     best accuracy 0.95833 taps (1, 16, 17) (over 4960 tap sets; median 0.66667)
+  k=3 taps in 1..32  fib      best accuracy 0.97871 taps (1, 2, 20) (over 4960 tap sets; median 0.86223)
+  k=3 taps in 1..32  period7  best accuracy 1.00000 taps (1, 2, 3) (over 4960 tap sets; median 1.00000)
+
+  k=4 taps in 1..20  rule30   best accuracy 0.50274 taps (5, 9, 17, 20) (over 4845 tap sets; median 0.50164)
+  k=4 taps in 1..20  prng     best accuracy 0.50280 taps (6, 8, 17, 19) (over 4845 tap sets; median 0.50156)
+  k=4 taps in 1..20  sqrt2    best accuracy 0.50256 taps (1, 7, 11, 13) (over 4845 tap sets; median 0.50150)
+  k=4 taps in 1..20  lfsr31   best accuracy 0.50848 taps (3, 8, 12, 15) (over 4845 tap sets; median 0.50526)
+  k=4 taps in 1..20  thue     best accuracy 0.95833 taps (1, 8, 9, 16) (over 4845 tap sets; median 0.70833)
+  k=4 taps in 1..20  fib      best accuracy 0.97871 taps (1, 2, 3, 20) (over 4845 tap sets; median 0.88854)
+  k=4 taps in 1..20  period7  best accuracy 1.00000 taps (1, 2, 3, 4) (over 4845 tap sets; median 1.00000)
+
+J3  local shortcuts: per 256-bit segment, best 2-tap rule (taps in 1..16) and local linear complexity (4096 segments each)
+  rule30   best-2-tap accuracy: mean 0.5993, 99th pct 0.6333, max 0.6667 | local linear complexity: mean 128.22, min 123, max 135  (fair coin: mean ~128)
+  prng     best-2-tap accuracy: mean 0.5996, 99th pct 0.6375, max 0.6625 | local linear complexity: mean 128.19, min 122, max 133  (fair coin: mean ~128)
+  sqrt2    best-2-tap accuracy: mean 0.5993, 99th pct 0.6375, max 0.6708 | local linear complexity: mean 128.22, min 124, max 135  (fair coin: mean ~128)
+  lfsr31   best-2-tap accuracy: mean 0.6233, 99th pct 0.7544, max 0.8958 | local linear complexity: mean 31.00, min 31, max 31  (fair coin: mean ~128)
+  rule30 vs prng: z(best-2-tap mean) = -1.20, z(local LC mean) = +1.41
+
+J4  certificate: no linear jump rule with taps in 1..128 reproduces c(128)..c(256): combination of 67 equations, T = [128, 129, 130, 131, 132, 134, 137, 139, 143, 144, 149, 151, 152, 153, 154, 156, 157, 158, 159, 160, 162, 163, 164, 167, 169, 170, 171, 172, 173, 174, 180, 183, 185, 186, 189, 190, 193, 195, 197, 200, 202, 207, 208, 211, 212, 214, 216, 217, 219, 221, 224, 225, 227, 230, 231, 232, 234, 238, 239, 240, 241, 243, 244, 248, 254, 255, 256]
+
+(elapsed 498s)

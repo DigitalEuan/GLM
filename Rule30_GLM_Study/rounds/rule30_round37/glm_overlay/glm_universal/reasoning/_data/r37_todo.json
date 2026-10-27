@@ -1,0 +1,108 @@
+{
+ "round": 37,
+ "frontier": "GLM.Rule30.TurnCostData.frontier_round37",
+ "narrowest": [
+  "PhaseTwo01Slack3",
+  "HalfLineDies2",
+  "TestCountLinear2"
+ ],
+ "hub_first": true,
+ "items": [
+  {
+   "id": 39,
+   "title": "A uniform proof for an infinite family of hubs",
+   "kind": "Lean",
+   "status": "partly R37",
+   "bears_on": "OneRunFamilyDies",
+   "target": "OneRunFamilyDiesFrom q0: every hub 1^(q-1)0, q >= q0, kills every half-line; the band d <= q - 4 is proved (oneRun_band), codes of length d >= q - 3 remain (oneRunDies_iff_long); q0 = 2 contains HalfLineDies 2",
+   "finite_step": "compute the exact survivor sets of the hubs 1^(q-1)0 after the first two runs for q <= 24 and look for a q-uniform description (To Do 43)",
+   "script": "python3 rule30_round37/one_run_family37.py 20 30",
+   "cost": 3
+  },
+  {
+   "id": 40,
+   "title": "The cost of a turn",
+   "kind": "EMP -> Lean",
+   "status": "done R37",
+   "bears_on": "TestCountLinear2",
+   "target": "exact cost m + tests skipped (testSlack_phase_transfer); attained by some phase pair in 66 of 69 wheels",
+   "finite_step": null,
+   "cost": 1
+  },
+  {
+   "id": 41,
+   "title": "Index the half-line family by hubs",
+   "kind": "GLM",
+   "status": "done R37",
+   "bears_on": null,
+   "target": "tool hub, tool hubs, hub-first tool next",
+   "finite_step": null,
+   "cost": 1
+  },
+  {
+   "id": 42,
+   "title": "Period 2 from its best phase",
+   "kind": "Lean",
+   "status": "open",
+   "bears_on": "PhaseTwo01Slack3",
+   "target": "TestSlack (driveN 2 2) 3 for all d (phase 01: black at odd times); gives the optimal TestCountLinear 2 5 (testCountLinear_two_of_phase)",
+   "finite_step": "measure the window distribution of the surviving codes at each test of the phase 01 (each test is one window read, blackRun_word with r = 1; To Do 38 at the best phase)",
+   "script": "python3 rule30_round37/wheel_phases37.py 2 34",
+   "cost": 2
+  },
+  {
+   "id": 43,
+   "title": "The one-run family beyond the band",
+   "kind": "EMP -> Lean",
+   "status": "open",
+   "bears_on": "OneRunFamilyDies",
+   "target": "for every q, the codes of length q - 3 <= d <= 2q fail within d + c tests of 1^(q-1)0 for a fixed c (measured: c = 7 suffices for q <= 20, d <= 30)",
+   "finite_step": "exact survivor sets after runs 0 and 1 for q <= 24",
+   "script": "python3 rule30_round37/one_run_family37.py 20 30",
+   "cost": 3
+  },
+  {
+   "id": 44,
+   "title": "The GLM proposes spokes",
+   "kind": "GLM",
+   "status": "open",
+   "bears_on": null,
+   "target": "the GLM reads proved spokes but proposes none; measure how many of a round's new spokes it could have proposed beforehand (Round 37: none; it has no proposal step)",
+   "finite_step": null,
+   "ask": "which kind of proposal should count: a statement with a Lean stub, or a stated implication between existing wheel statements?",
+   "cost": 3
+  },
+  {
+   "id": 29,
+   "title": "The sideways reader for period 2",
+   "kind": "Lean",
+   "status": "partly R33",
+   "bears_on": "HalfLineDies2",
+   "target": "an invariant of the sideways map, preserved for admissible inputs, that excludes finite rows",
+   "finite_step": "search low-degree Boolean invariants of consecutive column pairs",
+   "script": "python3 scripts/sideways_period_two.py",
+   "cost": 3
+  },
+  {
+   "id": 38,
+   "title": "Window distribution after the edge",
+   "kind": "Lean",
+   "status": "open",
+   "bears_on": "TestCountLinear2",
+   "target": "at most a fraction theta < 1 of the survivors show a run's word, amortised",
+   "finite_step": "exact window counts after the edge for the best phases (periods 2, 3)",
+   "script": "python3 rule30_round37/wheel_phases37.py 3 30",
+   "cost": 3
+  },
+  {
+   "id": 35,
+   "title": "Does period 4 have a finite slack?",
+   "kind": "EMP -> Lean",
+   "status": "partly R35",
+   "bears_on": "TestCountLinear4",
+   "target": "TestCountLinear 4 7 for all d",
+   "finite_step": null,
+   "cost": 4
+  }
+ ]
+}

@@ -1,0 +1,3378 @@
+{
+ "summary": [
+  {
+   "puzzle": "Rule 30 left diagonals",
+   "utterances": 124,
+   "actions": 66,
+   "hypotheses": 20,
+   "ungrounded": 0,
+   "statuses": {
+    "law-holds": 6,
+    "open": 1,
+    "refuted-heldout": 6,
+    "survives": 7
+   }
+  },
+  {
+   "puzzle": "Euler n\u00b2+n+41",
+   "utterances": 10,
+   "actions": 2,
+   "hypotheses": 2,
+   "ungrounded": 0,
+   "statuses": {
+    "law-holds": 1,
+    "refuted-heldout": 1
+   }
+  },
+  {
+   "puzzle": "Fermat numbers",
+   "utterances": 11,
+   "actions": 0,
+   "hypotheses": 2,
+   "ungrounded": 0,
+   "statuses": {
+    "refuted-heldout": 1,
+    "survives": 1
+   }
+  },
+  {
+   "puzzle": "primes as a\u00b2+b\u00b2",
+   "utterances": 5,
+   "actions": 2,
+   "hypotheses": 1,
+   "ungrounded": 0,
+   "statuses": {
+    "law-holds": 1
+   }
+  },
+  {
+   "puzzle": "circle regions (Moser)",
+   "utterances": 15,
+   "actions": 0,
+   "hypotheses": 3,
+   "ungrounded": 0,
+   "statuses": {
+    "form-holds": 1,
+    "refuted-heldout": 2
+   }
+  },
+  {
+   "puzzle": "Josephus",
+   "utterances": 5,
+   "actions": 1,
+   "hypotheses": 1,
+   "ungrounded": 0,
+   "statuses": {
+    "form-holds": 1
+   }
+  },
+  {
+   "puzzle": "Collatz",
+   "utterances": 63,
+   "actions": 5,
+   "hypotheses": 16,
+   "ungrounded": 0,
+   "statuses": {
+    "open": 2,
+    "refuted-heldout": 5,
+    "survives": 9
+   }
+  },
+  {
+   "puzzle": "gcd(n\u00b9\u2077+9,(n+1)\u00b9\u2077+9)",
+   "utterances": 10,
+   "actions": 0,
+   "hypotheses": 2,
+   "ungrounded": 0,
+   "statuses": {
+    "confirmed": 1,
+    "refuted-structural": 1
+   }
+  },
+  {
+   "puzzle": "16-bit midpoint",
+   "utterances": 23,
+   "actions": 6,
+   "hypotheses": 4,
+   "ungrounded": 0,
+   "statuses": {
+    "law-holds": 2,
+    "refuted-heldout": 1,
+    "survives": 1
+   }
+  }
+ ],
+ "dialogues": {
+  "Rule 30 left diagonals": {
+   "turns": [
+    {
+     "hyp": "G01",
+     "kind": "state",
+     "text": "G01: white holds exactly at [2, 7, 28, 399]. Status survives, evidence class Pi1. Checked up to index 399; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "refute",
+     "text": "It is refuted by one failing index. I checked 51200..102399 and it fails at k = 53207.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "implies",
+     "text": "It implies: white left diagonals never stop: for every D0 there is an eventually white diagonal D >= D0 [FORMAL] (proved for every D0 (Round 39); the refutation of the finite list is consistent with it)",
+     "provenance": "lean:ldiag_infinitely_many_white",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "connect",
+     "text": "No recorded connection to other statements.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "next",
+     "text": "Next: read the counterexample. I mined 2 exact law(s) for 'white(D)' on indices below 102400: G06 white(D) \u27fa pattern(D-2) = pattern(D-1); G07 white(D) \u27fa pattern(D-2) = pattern(D-1) \u2227 lp(D-1) = lp(D-2).",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G06",
+     "kind": "state",
+     "text": "G06: white(D) \u27fa pattern(D-2) = pattern(D-1). Status law-holds, evidence class Pi1. Checked up to index 102399; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G06",
+     "kind": "refute",
+     "text": "It would be refuted by one failing index. I extended the check to every index up to 131071 and found none. Still class Pi1: surviving a range is not a proof.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G06",
+     "kind": "implies",
+     "text": "It is equivalent to: diagonal D+2 is eventually white iff diagonals D and D+1 are eventually equal [FORMAL] (the proved form of the white criterion (Round 39))",
+     "provenance": "lean:ldiag_white_iff_coincide",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G06",
+     "kind": "implies",
+     "text": "It implies: no two consecutive left diagonals are eventually white [FORMAL]",
+     "provenance": "lean:ldiag_no_two_consecutive_white",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G06",
+     "kind": "connect",
+     "text": "derived from G01 (refuted-heldout); about the same invariant `law:white` as G07.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G06",
+     "kind": "next",
+     "text": "Tied with G07, and no observation can split the tie: the two statements are equivalent (the least period is a function of the eventual pattern, so the second conjunct follows from the first).",
+     "provenance": "definition",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G06",
+     "kind": "next",
+     "text": "Ledger C379 [CERT]: white left diagonals below 87868: 2, 7, 28, 399, 53207, 58286, 87866.",
+     "provenance": "ledger:C379",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G06",
+     "kind": "next",
+     "text": "Ledger C370 [EMP]: the next white diagonal after 87866 is 1420878968 (even).",
+     "provenance": "ledger:C370",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G06",
+     "kind": "next",
+     "text": "Next: nothing to compute \u2014 the prover already has it (ldiag_white_iff_coincide).",
+     "provenance": "lean:ldiag_white_iff_coincide",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G07",
+     "kind": "state",
+     "text": "G07: white(D) \u27fa pattern(D-2) = pattern(D-1) \u2227 lp(D-1) = lp(D-2). Status law-holds, evidence class Pi1. Checked up to index 102399; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G07",
+     "kind": "refute",
+     "text": "It would be refuted by one failing index. I extended the check to every index up to 131071 and found none. Still class Pi1: surviving a range is not a proof.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G07",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G07",
+     "kind": "connect",
+     "text": "derived from G01 (refuted-heldout); about the same invariant `law:white` as G06.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G07",
+     "kind": "next",
+     "text": "Tied with G06, and no observation can split the tie: the two statements are equivalent (the least period is a function of the eventual pattern, so the second conjunct follows from the first).",
+     "provenance": "definition",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G07",
+     "kind": "next",
+     "text": "Next: state it in Lean and try to prove it; meanwhile it is only 'law-holds' on the checked range.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "state",
+     "text": "G02: lp(k) divides 8 for every k. Status survives, evidence class Pi1. Checked up to index 399; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "refute",
+     "text": "It is refuted by one failing index. I checked 400..799 and it fails at k = 400.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "implies",
+     "text": "It implies: the period changes only one step past an eventually white diagonal: it doubles when the outer parity is odd, and is kept when it is even [FORMAL] (the law the refutation leads to (Round 38))",
+     "provenance": "lean:ldiag_doubles; ldiag_keeps_of_even",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "connect",
+     "text": "about the same invariant `lp` as G03.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "next",
+     "text": "Next: read the counterexample. I mined 3 exact law(s) for 'Q(D) \u2260 Q(D\u22121), where Q(D) = lcm of the periods of diagonals 0..D' on indices below 800: G08 Q(D) \u2260 Q(D\u22121), where Q(D) = lcm of the periods of diagonals 0..D \u27fa white(D-1); G09 Q(D) \u2260 Q(D\u22121), where Q(D) = lcm of the periods of diagonals 0..D \u27fa white(D-1) \u2227 odd(D-2); G10 Q(D) \u2260 Q(D\u22121), where Q(D) = lcm of the periods of diagonals 0..D \u27fa white(D-1) \u2227 odd(D-3).",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "next",
+     "text": "Next: narrow. 2 refined statement(s): G11 [lp(k) divides 8 for every k] for k < 400 (survives); G12 lp(k) divides 16 for every k (survives).",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G08",
+     "kind": "state",
+     "text": "G08: Q(D) \u2260 Q(D\u22121), where Q(D) = lcm of the periods of diagonals 0..D \u27fa white(D-1). Status law-holds, evidence class Pi1. Checked up to index 799; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G08",
+     "kind": "refute",
+     "text": "It is refuted by one failing index. I checked 51200..102399 and it fails at k = 53208.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G08",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G08",
+     "kind": "connect",
+     "text": "derived from G02 (refuted-heldout); about the same invariant `law:lp` as G09, G10.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G08",
+     "kind": "next",
+     "text": "Next: nothing \u2014 refuted, and no event to explain is registered for this invariant.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G09",
+     "kind": "state",
+     "text": "G09: Q(D) \u2260 Q(D\u22121), where Q(D) = lcm of the periods of diagonals 0..D \u27fa white(D-1) \u2227 odd(D-2). Status law-holds, evidence class Pi1. Checked up to index 799; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G09",
+     "kind": "refute",
+     "text": "It would be refuted by one failing index. I extended the check to every index up to 131071 and found none. Still class Pi1: surviving a range is not a proof.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G09",
+     "kind": "implies",
+     "text": "It is equivalent to: the left-diagonal periods are unbounded iff for every 2^m some eventually white diagonal has an outer neighbour of odd parity [FORMAL] (To Do 45 is exactly this parity question)",
+     "provenance": "lean:ldiag_periods_unbounded_iff",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G09",
+     "kind": "implies",
+     "text": "It does NOT by itself imply: the left-diagonal periods are unbounded [FORMAL] (the law locates the doublings; whether infinitely many occur depends on the parities, which are open)",
+     "provenance": "lean:ldiag_periods_unbounded_iff",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G09",
+     "kind": "connect",
+     "text": "derived from G02 (refuted-heldout); about the same invariant `law:lp` as G08, G10.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G09",
+     "kind": "next",
+     "text": "Tied with G10, and no observation can split the tie: the two statements are equivalent (if diagonal D-1 is eventually white, diagonals D-3 and D-2 are eventually equal, so their parities agree).",
+     "provenance": "lean:GLM.HypothesisEngine.doubling_law_tie_unsplittable",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G09",
+     "kind": "next",
+     "text": "Next: nothing to compute \u2014 the prover already has it (ldiag_doubles; ldiag_keeps_of_even).",
+     "provenance": "lean:ldiag_doubles; ldiag_keeps_of_even",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G10",
+     "kind": "state",
+     "text": "G10: Q(D) \u2260 Q(D\u22121), where Q(D) = lcm of the periods of diagonals 0..D \u27fa white(D-1) \u2227 odd(D-3). Status law-holds, evidence class Pi1. Checked up to index 799; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G10",
+     "kind": "refute",
+     "text": "It would be refuted by one failing index. I extended the check to every index up to 131071 and found none. Still class Pi1: surviving a range is not a proof.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G10",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G10",
+     "kind": "connect",
+     "text": "derived from G02 (refuted-heldout); about the same invariant `law:lp` as G08, G09.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G10",
+     "kind": "next",
+     "text": "Tied with G09, and no observation can split the tie: the two statements are equivalent (if diagonal D-1 is eventually white, diagonals D-3 and D-2 are eventually equal, so their parities agree).",
+     "provenance": "lean:GLM.HypothesisEngine.doubling_law_tie_unsplittable",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G10",
+     "kind": "next",
+     "text": "Next: state it in Lean and try to prove it; meanwhile it is only 'law-holds' on the checked range.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G11",
+     "kind": "state",
+     "text": "G11: [lp(k) divides 8 for every k] for k < 400. Status survives, evidence class FINITE.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G11",
+     "kind": "refute",
+     "text": "Class FINITE: it speaks about finitely many indices, all already checked, so there is nothing further to refute.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G11",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G11",
+     "kind": "connect",
+     "text": "derived from G02 (refuted-heldout).",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G11",
+     "kind": "next",
+     "text": "Next: it is finite and fully checked, so a finite certificate (a decision procedure in the prover) can close it.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G12",
+     "kind": "state",
+     "text": "G12: lp(k) divides 16 for every k. Status survives, evidence class Pi1. Checked up to index 799; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G12",
+     "kind": "refute",
+     "text": "It is refuted by one failing index. I checked 51200..102399 and it fails at k = 87867.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G12",
+     "kind": "implies",
+     "text": "It implies: the period changes only one step past an eventually white diagonal: it doubles when the outer parity is odd, and is kept when it is even [FORMAL] (the law the refutation leads to (Round 38))",
+     "provenance": "lean:ldiag_doubles; ldiag_keeps_of_even",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G12",
+     "kind": "connect",
+     "text": "derived from G02 (refuted-heldout); about the same invariant `lp` as G02, G03.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G12",
+     "kind": "next",
+     "text": "Next: read the counterexample. I mined 2 exact law(s) for 'Q(D) \u2260 Q(D\u22121), where Q(D) = lcm of the periods of diagonals 0..D' on indices below 102400: G13 Q(D) \u2260 Q(D\u22121), where Q(D) = lcm of the periods of diagonals 0..D \u27fa white(D-1) \u2227 odd(D-2); G14 Q(D) \u2260 Q(D\u22121), where Q(D) = lcm of the periods of diagonals 0..D \u27fa white(D-1) \u2227 odd(D-3).",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G12",
+     "kind": "next",
+     "text": "Next: narrow. 2 refined statement(s): G15 [lp(k) divides 16 for every k] for k < 87867 (survives); G16 lp(k) divides 32 for every k (survives).",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G13",
+     "kind": "state",
+     "text": "G13: Q(D) \u2260 Q(D\u22121), where Q(D) = lcm of the periods of diagonals 0..D \u27fa white(D-1) \u2227 odd(D-2). Status law-holds, evidence class Pi1. Checked up to index 102399; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G13",
+     "kind": "refute",
+     "text": "It would be refuted by one failing index. I extended the check to every index up to 131071 and found none. Still class Pi1: surviving a range is not a proof.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G13",
+     "kind": "implies",
+     "text": "It is equivalent to: the left-diagonal periods are unbounded iff for every 2^m some eventually white diagonal has an outer neighbour of odd parity [FORMAL] (To Do 45 is exactly this parity question)",
+     "provenance": "lean:ldiag_periods_unbounded_iff",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G13",
+     "kind": "implies",
+     "text": "It does NOT by itself imply: the left-diagonal periods are unbounded [FORMAL] (the law locates the doublings; whether infinitely many occur depends on the parities, which are open)",
+     "provenance": "lean:ldiag_periods_unbounded_iff",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G13",
+     "kind": "connect",
+     "text": "derived from G12 (refuted-heldout); about the same invariant `law:lp` as G08, G09, G10, G14.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G13",
+     "kind": "next",
+     "text": "Tied with G10, and no observation can split the tie: the two statements are equivalent (if diagonal D-1 is eventually white, diagonals D-3 and D-2 are eventually equal, so their parities agree).",
+     "provenance": "lean:GLM.HypothesisEngine.doubling_law_tie_unsplittable",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G13",
+     "kind": "next",
+     "text": "Tied with G14, and no observation can split the tie: the two statements are equivalent (if diagonal D-1 is eventually white, diagonals D-3 and D-2 are eventually equal, so their parities agree).",
+     "provenance": "lean:GLM.HypothesisEngine.doubling_law_tie_unsplittable",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G13",
+     "kind": "next",
+     "text": "Still tied with G09 on every index up to 131071: the separating observation is beyond the budget, so the tie is reported, not resolved.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G13",
+     "kind": "next",
+     "text": "Next: nothing to compute \u2014 the prover already has it (ldiag_doubles; ldiag_keeps_of_even).",
+     "provenance": "lean:ldiag_doubles; ldiag_keeps_of_even",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G14",
+     "kind": "state",
+     "text": "G14: Q(D) \u2260 Q(D\u22121), where Q(D) = lcm of the periods of diagonals 0..D \u27fa white(D-1) \u2227 odd(D-3). Status law-holds, evidence class Pi1. Checked up to index 102399; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G14",
+     "kind": "refute",
+     "text": "It would be refuted by one failing index. I extended the check to every index up to 131071 and found none. Still class Pi1: surviving a range is not a proof.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G14",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G14",
+     "kind": "connect",
+     "text": "derived from G12 (refuted-heldout); about the same invariant `law:lp` as G08, G09, G10, G13.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G14",
+     "kind": "next",
+     "text": "Tied with G09, and no observation can split the tie: the two statements are equivalent (if diagonal D-1 is eventually white, diagonals D-3 and D-2 are eventually equal, so their parities agree).",
+     "provenance": "lean:GLM.HypothesisEngine.doubling_law_tie_unsplittable",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G14",
+     "kind": "next",
+     "text": "Tied with G13, and no observation can split the tie: the two statements are equivalent (if diagonal D-1 is eventually white, diagonals D-3 and D-2 are eventually equal, so their parities agree).",
+     "provenance": "lean:GLM.HypothesisEngine.doubling_law_tie_unsplittable",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G14",
+     "kind": "next",
+     "text": "Still tied with G10 on every index up to 131071: the separating observation is beyond the budget, so the tie is reported, not resolved.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G14",
+     "kind": "next",
+     "text": "Next: state it in Lean and try to prove it; meanwhile it is only 'law-holds' on the checked range.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G15",
+     "kind": "state",
+     "text": "G15: [lp(k) divides 16 for every k] for k < 87867. Status survives, evidence class FINITE.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G15",
+     "kind": "refute",
+     "text": "Class FINITE: it speaks about finitely many indices, all already checked, so there is nothing further to refute.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G15",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G15",
+     "kind": "connect",
+     "text": "derived from G12 (refuted-heldout).",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G15",
+     "kind": "next",
+     "text": "Next: it is finite and fully checked, so a finite certificate (a decision procedure in the prover) can close it.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G16",
+     "kind": "state",
+     "text": "G16: lp(k) divides 32 for every k. Status survives, evidence class Pi1. Checked up to index 102399; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G16",
+     "kind": "refute",
+     "text": "It would be refuted by one failing index. I extended the check to every index up to 131071 and found none. Still class Pi1: surviving a range is not a proof.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G16",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G16",
+     "kind": "connect",
+     "text": "derived from G12 (refuted-heldout); about the same invariant `lp` as G02, G03, G12.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G16",
+     "kind": "next",
+     "text": "Ledger C381 [EMP]: predicted odd white 2107985254, period 64 from 2107985255.",
+     "provenance": "ledger:C381",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G16",
+     "kind": "next",
+     "text": "Next: state it in Lean and try to prove it; meanwhile it is only 'survives' on the checked range.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G03",
+     "kind": "state",
+     "text": "G03: lp(k) \u2264 8 for every k. Status survives, evidence class Pi1. Checked up to index 399; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G03",
+     "kind": "refute",
+     "text": "It is refuted by one failing index. I checked 400..799 and it fails at k = 400.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G03",
+     "kind": "implies",
+     "text": "It implies: the period changes only one step past an eventually white diagonal: it doubles when the outer parity is odd, and is kept when it is even [FORMAL] (the law the refutation leads to (Round 38))",
+     "provenance": "lean:ldiag_doubles; ldiag_keeps_of_even",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G03",
+     "kind": "connect",
+     "text": "refuted by the same index k = 400 as G02; about the same invariant `lp` as G02, G12, G16.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G03",
+     "kind": "next",
+     "text": "Next: read the counterexample. Already done for 'Q(D) \u2260 Q(D\u22121), where Q(D) = lcm of the periods of diagonals 0..D' (below 102400): G13, G14.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G03",
+     "kind": "next",
+     "text": "Next: narrow. 2 refined statement(s): G17 [lp(k) \u2264 8 for every k] for k < 400 (survives); G18 lp(k) \u2264 16 for every k (survives).",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G17",
+     "kind": "state",
+     "text": "G17: [lp(k) \u2264 8 for every k] for k < 400. Status survives, evidence class FINITE.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G17",
+     "kind": "refute",
+     "text": "Class FINITE: it speaks about finitely many indices, all already checked, so there is nothing further to refute.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G17",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G17",
+     "kind": "connect",
+     "text": "derived from G03 (refuted-heldout).",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G17",
+     "kind": "next",
+     "text": "Next: it is finite and fully checked, so a finite certificate (a decision procedure in the prover) can close it.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G18",
+     "kind": "state",
+     "text": "G18: lp(k) \u2264 16 for every k. Status survives, evidence class Pi1. Checked up to index 799; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G18",
+     "kind": "refute",
+     "text": "It is refuted by one failing index. I checked 51200..102399 and it fails at k = 87867.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G18",
+     "kind": "implies",
+     "text": "It implies: the period changes only one step past an eventually white diagonal: it doubles when the outer parity is odd, and is kept when it is even [FORMAL] (the law the refutation leads to (Round 38))",
+     "provenance": "lean:ldiag_doubles; ldiag_keeps_of_even",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G18",
+     "kind": "connect",
+     "text": "derived from G03 (refuted-heldout); refuted by the same index k = 87867 as G12; about the same invariant `lp` as G02, G03, G12, G16.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G18",
+     "kind": "next",
+     "text": "Next: read the counterexample. Already done for 'Q(D) \u2260 Q(D\u22121), where Q(D) = lcm of the periods of diagonals 0..D' (below 102400): G13, G14.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G18",
+     "kind": "next",
+     "text": "Next: narrow. 2 refined statement(s): G19 [lp(k) \u2264 16 for every k] for k < 87867 (survives); G20 lp(k) \u2264 32 for every k (survives).",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G19",
+     "kind": "state",
+     "text": "G19: [lp(k) \u2264 16 for every k] for k < 87867. Status survives, evidence class FINITE.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G19",
+     "kind": "refute",
+     "text": "Class FINITE: it speaks about finitely many indices, all already checked, so there is nothing further to refute.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G19",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G19",
+     "kind": "connect",
+     "text": "derived from G18 (refuted-heldout).",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G19",
+     "kind": "next",
+     "text": "Next: it is finite and fully checked, so a finite certificate (a decision procedure in the prover) can close it.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G20",
+     "kind": "state",
+     "text": "G20: lp(k) \u2264 32 for every k. Status survives, evidence class Pi1. Checked up to index 102399; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G20",
+     "kind": "refute",
+     "text": "It would be refuted by one failing index. I extended the check to every index up to 131071 and found none. Still class Pi1: surviving a range is not a proof.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G20",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G20",
+     "kind": "connect",
+     "text": "derived from G18 (refuted-heldout); about the same invariant `lp` as G02, G03, G12, G16, G18.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G20",
+     "kind": "next",
+     "text": "Ledger C381 [EMP]: predicted odd white 2107985254, period 64 from 2107985255.",
+     "provenance": "ledger:C381",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G20",
+     "kind": "next",
+     "text": "Next: state it in Lean and try to prove it; meanwhile it is only 'survives' on the checked range.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G04",
+     "kind": "state",
+     "text": "G04: for D \u2265 20 the preperiod of left diagonal D exceeds D. Status survives, evidence class Pi1. Checked up to index 399; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G04",
+     "kind": "refute",
+     "text": "It would be refuted by one failing index. I extended the check to every index up to 15999 and found none. Still class Pi1: surviving a range is not a proof.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G04",
+     "kind": "implies",
+     "text": "It implies: the centre column reads every left diagonal 20 <= D < 20000 before that diagonal has become periodic [CERT] (certificate for 20 <= D < 20000)",
+     "provenance": "lean:centerCol_read_in_transient",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G04",
+     "kind": "implies",
+     "text": "It does NOT by itself imply: the centre column is not eventually periodic (Problem 1) [FORMAL] (a family meets the same premises (for every period) while its diagonal read is constant; hypothesis_engine_v10.py states this implication)",
+     "provenance": "lean:GLM.HypothesisEngine.transient_read_does_not_imply_aperiodic",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G04",
+     "kind": "connect",
+     "text": "No recorded connection to other statements.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G04",
+     "kind": "next",
+     "text": "Ledger C133 [CERT]: left-diagonal preperiod exceeds D for 20 <= D; certified for D < 20000.",
+     "provenance": "ledger:C133",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G04",
+     "kind": "next",
+     "text": "Next: state it in Lean and try to prove it; meanwhile it is only 'survives' on the checked range.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G05",
+     "kind": "state",
+     "text": "G05: the centre column is not eventually periodic (Problem 1). Status open, evidence class Pi2.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G05",
+     "kind": "refute",
+     "text": "Class Pi2 (for all k there exists ...): no finite set of observations can refute it, so I do not extend the range. A proof or a structural argument is needed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G05",
+     "kind": "implies",
+     "text": "It is equivalent to: no finite-state observer reading the centre column is eventually always right [FORMAL]",
+     "provenance": "lean:eventuallyPeriodic_iff_exists_fsObserver",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G05",
+     "kind": "implies",
+     "text": "It does NOT by itself imply: no finite automaton reading the binary digits of n computes bit n (so bit n cannot be computed in O(log n)) [FORMAL] (Thue-Morse is aperiodic and computed by a two-state automaton; Problem 1 would not settle Problem 3)",
+     "provenance": "lean:GLM.HypothesisEngine.aperiodic_but_automatic",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G05",
+     "kind": "connect",
+     "text": "No recorded connection to other statements.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G05",
+     "kind": "next",
+     "text": "Next: look for a finite surrogate (a statement with a certificate) or a structural argument; more sampling cannot settle it.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    }
+   ],
+   "hypotheses": [
+    {
+     "id": "G01",
+     "text": "white holds exactly at [2, 7, 28, 399]",
+     "origin": "lift",
+     "parent": null,
+     "status": "refuted-heldout",
+     "witness": 53207,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "dev 0..399",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 400..799",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 800..1599",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 1600..3199",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 3200..6399",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 6400..12799",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 12800..25599",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 25600..51199",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 51200..102399",
+       false,
+       "fails at k=53207"
+      ]
+     ]
+    },
+    {
+     "id": "G02",
+     "text": "lp(k) divides 8 for every k",
+     "origin": "lift",
+     "parent": null,
+     "status": "refuted-heldout",
+     "witness": 400,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "dev 0..399",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 400..799",
+       false,
+       "fails at k=400"
+      ]
+     ]
+    },
+    {
+     "id": "G03",
+     "text": "lp(k) \u2264 8 for every k",
+     "origin": "lift",
+     "parent": null,
+     "status": "refuted-heldout",
+     "witness": 400,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "dev 0..399",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 400..799",
+       false,
+       "fails at k=400"
+      ]
+     ]
+    },
+    {
+     "id": "G04",
+     "text": "for D \u2265 20 the preperiod of left diagonal D exceeds D",
+     "origin": "given (Round 38 survivor)",
+     "parent": null,
+     "status": "survives",
+     "witness": null,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "dev 0..399",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 400..799",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 800..1599",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 1600..3199",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 3200..6399",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 6400..12799",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 12800..15999",
+       true,
+       "passes"
+      ]
+     ]
+    },
+    {
+     "id": "G05",
+     "text": "the centre column is not eventually periodic (Problem 1)",
+     "origin": "given (prize question)",
+     "parent": null,
+     "status": "open",
+     "witness": null,
+     "class": "Pi2",
+     "lean": null,
+     "evidence": []
+    },
+    {
+     "id": "G06",
+     "text": "white(D) \u27fa pattern(D-2) = pattern(D-1)",
+     "origin": "mechanism",
+     "parent": "G01",
+     "status": "law-holds",
+     "witness": null,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "data 3..102399",
+       true,
+       "exact on 102397 indices (6 events)"
+      ],
+      [
+       "dialogue held-out 102400..131071",
+       true,
+       "passes"
+      ]
+     ]
+    },
+    {
+     "id": "G07",
+     "text": "white(D) \u27fa pattern(D-2) = pattern(D-1) \u2227 lp(D-1) = lp(D-2)",
+     "origin": "mechanism",
+     "parent": "G01",
+     "status": "law-holds",
+     "witness": null,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "data 3..102399",
+       true,
+       "exact on 102397 indices (6 events)"
+      ],
+      [
+       "dialogue held-out 102400..131071",
+       true,
+       "passes"
+      ]
+     ]
+    },
+    {
+     "id": "G08",
+     "text": "Q(D) \u2260 Q(D\u22121), where Q(D) = lcm of the periods of diagonals 0..D \u27fa white(D-1)",
+     "origin": "mechanism",
+     "parent": "G02",
+     "status": "refuted-heldout",
+     "witness": 53208,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "data 3..799",
+       true,
+       "exact on 797 indices (4 events)"
+      ],
+      [
+       "dialogue held-out 800..1599",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 1600..3199",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 3200..6399",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 6400..12799",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 12800..25599",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 25600..51199",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 51200..102399",
+       false,
+       "fails at k=53208"
+      ]
+     ]
+    },
+    {
+     "id": "G09",
+     "text": "Q(D) \u2260 Q(D\u22121), where Q(D) = lcm of the periods of diagonals 0..D \u27fa white(D-1) \u2227 odd(D-2)",
+     "origin": "mechanism",
+     "parent": "G02",
+     "status": "law-holds",
+     "witness": null,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "data 3..799",
+       true,
+       "exact on 797 indices (4 events)"
+      ],
+      [
+       "dialogue held-out 800..1599",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 1600..3199",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 3200..6399",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 6400..12799",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 12800..25599",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 25600..51199",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 51200..102399",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 102400..131071",
+       true,
+       "passes"
+      ]
+     ]
+    },
+    {
+     "id": "G10",
+     "text": "Q(D) \u2260 Q(D\u22121), where Q(D) = lcm of the periods of diagonals 0..D \u27fa white(D-1) \u2227 odd(D-3)",
+     "origin": "mechanism",
+     "parent": "G02",
+     "status": "law-holds",
+     "witness": null,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "data 3..799",
+       true,
+       "exact on 797 indices (4 events)"
+      ],
+      [
+       "dialogue held-out 800..1599",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 1600..3199",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 3200..6399",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 6400..12799",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 12800..25599",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 25600..51199",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 51200..102399",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 102400..131071",
+       true,
+       "passes"
+      ]
+     ]
+    },
+    {
+     "id": "G11",
+     "text": "[lp(k) divides 8 for every k] for k < 400",
+     "origin": "cut",
+     "parent": "G02",
+     "status": "survives",
+     "witness": null,
+     "class": "FINITE",
+     "lean": null,
+     "evidence": [
+      [
+       "cut",
+       true,
+       "holds on every k < 400"
+      ]
+     ]
+    },
+    {
+     "id": "G12",
+     "text": "lp(k) divides 16 for every k",
+     "origin": "narrow",
+     "parent": "G02",
+     "status": "refuted-heldout",
+     "witness": 87867,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "all data <800",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 800..1599",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 1600..3199",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 3200..6399",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 6400..12799",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 12800..25599",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 25600..51199",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 51200..102399",
+       false,
+       "fails at k=87867"
+      ]
+     ]
+    },
+    {
+     "id": "G13",
+     "text": "Q(D) \u2260 Q(D\u22121), where Q(D) = lcm of the periods of diagonals 0..D \u27fa white(D-1) \u2227 odd(D-2)",
+     "origin": "mechanism",
+     "parent": "G12",
+     "status": "law-holds",
+     "witness": null,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "data 3..102399",
+       true,
+       "exact on 102397 indices (5 events)"
+      ],
+      [
+       "dialogue held-out 102400..131071",
+       true,
+       "passes"
+      ]
+     ]
+    },
+    {
+     "id": "G14",
+     "text": "Q(D) \u2260 Q(D\u22121), where Q(D) = lcm of the periods of diagonals 0..D \u27fa white(D-1) \u2227 odd(D-3)",
+     "origin": "mechanism",
+     "parent": "G12",
+     "status": "law-holds",
+     "witness": null,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "data 3..102399",
+       true,
+       "exact on 102397 indices (5 events)"
+      ],
+      [
+       "dialogue held-out 102400..131071",
+       true,
+       "passes"
+      ]
+     ]
+    },
+    {
+     "id": "G15",
+     "text": "[lp(k) divides 16 for every k] for k < 87867",
+     "origin": "cut",
+     "parent": "G12",
+     "status": "survives",
+     "witness": null,
+     "class": "FINITE",
+     "lean": null,
+     "evidence": [
+      [
+       "cut",
+       true,
+       "holds on every k < 87867"
+      ]
+     ]
+    },
+    {
+     "id": "G16",
+     "text": "lp(k) divides 32 for every k",
+     "origin": "narrow",
+     "parent": "G12",
+     "status": "survives",
+     "witness": null,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "all data <102400",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 102400..131071",
+       true,
+       "passes"
+      ]
+     ]
+    },
+    {
+     "id": "G17",
+     "text": "[lp(k) \u2264 8 for every k] for k < 400",
+     "origin": "cut",
+     "parent": "G03",
+     "status": "survives",
+     "witness": null,
+     "class": "FINITE",
+     "lean": null,
+     "evidence": [
+      [
+       "cut",
+       true,
+       "holds on every k < 400"
+      ]
+     ]
+    },
+    {
+     "id": "G18",
+     "text": "lp(k) \u2264 16 for every k",
+     "origin": "narrow",
+     "parent": "G03",
+     "status": "refuted-heldout",
+     "witness": 87867,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "all data <800",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 800..1599",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 1600..3199",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 3200..6399",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 6400..12799",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 12800..25599",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 25600..51199",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 51200..102399",
+       false,
+       "fails at k=87867"
+      ]
+     ]
+    },
+    {
+     "id": "G19",
+     "text": "[lp(k) \u2264 16 for every k] for k < 87867",
+     "origin": "cut",
+     "parent": "G18",
+     "status": "survives",
+     "witness": null,
+     "class": "FINITE",
+     "lean": null,
+     "evidence": [
+      [
+       "cut",
+       true,
+       "holds on every k < 87867"
+      ]
+     ]
+    },
+    {
+     "id": "G20",
+     "text": "lp(k) \u2264 32 for every k",
+     "origin": "narrow",
+     "parent": "G18",
+     "status": "survives",
+     "witness": null,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "all data <102400",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 102400..131071",
+       true,
+       "passes"
+      ]
+     ]
+    }
+   ]
+  },
+  "Euler n\u00b2+n+41": {
+   "turns": [
+    {
+     "hyp": "G02",
+     "kind": "state",
+     "text": "G02: 41 divides n\u00b2+n+41 \u27fa k mod 41 \u2208 [0, 40]. Status law-holds, evidence class Pi1. Checked up to index 19999; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "refute",
+     "text": "It would be refuted by one failing index. I extended the check to every index up to 79999 and found none. Still class Pi1: surviving a range is not a proof.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "implies",
+     "text": "It implies: n^2+n+41 is composite whenever n > 0 and n mod 41 is 0 or 40 [FORMAL]",
+     "provenance": "lean:euler_dvd_iff; euler_composite_of_mod",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "connect",
+     "text": "No recorded connection to other statements.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "next",
+     "text": "Next: nothing to compute \u2014 the prover already has it (euler_dvd_iff).",
+     "provenance": "lean:euler_dvd_iff",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "state",
+     "text": "G01: prime(k) holds for every k. Status refuted-heldout, evidence class Pi1. Refuted at k = 40.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "refute",
+     "text": "Already refuted: held-out 0..199: fails at k=40.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "connect",
+     "text": "No recorded connection to other statements.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "next",
+     "text": "Next: nothing \u2014 refuted, and no event to explain is registered for this invariant.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    }
+   ],
+   "hypotheses": [
+    {
+     "id": "G01",
+     "text": "prime(k) holds for every k",
+     "origin": "lift",
+     "parent": null,
+     "status": "refuted-heldout",
+     "witness": 40,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "dev 0..29",
+       true,
+       "passes"
+      ],
+      [
+       "held-out 0..199",
+       false,
+       "fails at k=40"
+      ]
+     ]
+    },
+    {
+     "id": "G02",
+     "text": "41 divides n\u00b2+n+41 \u27fa k mod 41 \u2208 [0, 40]",
+     "origin": "residue-law",
+     "parent": null,
+     "status": "law-holds",
+     "witness": null,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "data: 2000 indices \u2264 1999",
+       true,
+       "exact; smallest modulus 41"
+      ],
+      [
+       "held-out 0..19999",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 20000..39999",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 40000..79999",
+       true,
+       "passes"
+      ]
+     ]
+    }
+   ]
+  },
+  "Fermat numbers": {
+   "turns": [
+    {
+     "hyp": "G02",
+     "kind": "state",
+     "text": "G02: coprime_to_earlier(k) holds for every k. Status survives, evidence class Pi1. Checked up to index 9; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "refute",
+     "text": "It would be refuted by one index where it fails. The budget for this invariant (10) is already used up.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "implies",
+     "text": "It does NOT by itself imply: the statement holds for every index [FORMAL] (gcd(n^17+9,(n+1)^17+9) = 1 survives every n < 1000 (CERT) and fails at a 52-digit n)",
+     "provenance": "lean:gcd_trap_survives; gcd_trap_refuted",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "implies",
+     "text": "It is equivalent to: distinct Fermat numbers are coprime [FORMAL]",
+     "provenance": "lean:fermat_pairwise_coprime",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "connect",
+     "text": "No recorded connection to other statements.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "next",
+     "text": "Next: nothing to compute \u2014 the prover already has it (fermat_pairwise_coprime).",
+     "provenance": "lean:fermat_pairwise_coprime",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "state",
+     "text": "G01: prime(k) holds for every k. Status refuted-heldout, evidence class Pi1. Refuted at k = 5.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "refute",
+     "text": "Already refuted: held-out 0..6: fails at k=5.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "connect",
+     "text": "No recorded connection to other statements.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "next",
+     "text": "Next: nothing \u2014 refuted, and no event to explain is registered for this invariant.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    }
+   ],
+   "hypotheses": [
+    {
+     "id": "G01",
+     "text": "prime(k) holds for every k",
+     "origin": "lift",
+     "parent": null,
+     "status": "refuted-heldout",
+     "witness": 5,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "dev 0..4",
+       true,
+       "passes"
+      ],
+      [
+       "held-out 0..6",
+       false,
+       "fails at k=5"
+      ]
+     ]
+    },
+    {
+     "id": "G02",
+     "text": "coprime_to_earlier(k) holds for every k",
+     "origin": "lift",
+     "parent": null,
+     "status": "survives",
+     "witness": null,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "dev 0..4",
+       true,
+       "passes"
+      ],
+      [
+       "held-out 0..6",
+       true,
+       "passes"
+      ],
+      [
+       "held-out 0..9",
+       true,
+       "passes"
+      ]
+     ]
+    }
+   ]
+  },
+  "primes as a\u00b2+b\u00b2": {
+   "turns": [
+    {
+     "hyp": "G01",
+     "kind": "state",
+     "text": "G01: prime p is a\u00b2+b\u00b2 \u27fa k mod 4 \u2208 [1, 2] (residues [0] never observed). Status law-holds, evidence class Pi1. Checked up to index 29999; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "refute",
+     "text": "It would be refuted by one failing index. I extended the check to every index up to 119999 and found none. Still class Pi1: surviving a range is not a proof.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "implies",
+     "text": "It is equivalent to: a prime p is a sum of two squares iff p mod 4 is not 3 [FORMAL]",
+     "provenance": "lean:two_squares_law",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "connect",
+     "text": "No recorded connection to other statements.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "next",
+     "text": "Next: nothing to compute \u2014 the prover already has it (two_squares_law).",
+     "provenance": "lean:two_squares_law",
+     "ungrounded_numbers": []
+    }
+   ],
+   "hypotheses": [
+    {
+     "id": "G01",
+     "text": "prime p is a\u00b2+b\u00b2 \u27fa k mod 4 \u2208 [1, 2] (residues [0] never observed)",
+     "origin": "residue-law",
+     "parent": null,
+     "status": "law-holds",
+     "witness": null,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "data: 100 indices \u2264 541",
+       true,
+       "exact; smallest modulus 4"
+      ],
+      [
+       "held-out: all 3245 primes < 30000",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 30000..59999",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 60000..119999",
+       true,
+       "passes"
+      ]
+     ]
+    }
+   ]
+  },
+  "circle regions (Moser)": {
+   "turns": [
+    {
+     "hyp": "G01",
+     "kind": "state",
+     "text": "G01: regions(k) = polynomial of degree 4 fitted on k \u2208 1..5 (interpolant: no spare development point). Status form-holds, evidence class Pi1. Checked up to index 12; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "refute",
+     "text": "It would be refuted by one index where it fails. The budget for this invariant (13) is already used up.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "implies",
+     "text": "It implies: the region count is C(n,4)+C(n,2)+1, not 2^(n-1) [FORMAL] (the two forms agree for n <= 5 and split at n = 6)",
+     "provenance": "lean:moser_junction; moser_split",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "connect",
+     "text": "No recorded connection to other statements.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "next",
+     "text": "Next: hand the form to the prover; no Lean statement is attached yet, so stating one is the next step.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "state",
+     "text": "G02: regions(k) = \u03a3 c_i regions(k\u22121\u2212i) with c = ['2']. Status refuted-heldout, evidence class Pi1. Refuted at k = 6.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "refute",
+     "text": "Already refuted: held-out 1..12: fails at k=6.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "connect",
+     "text": "refuted by the same index k = 6 as G03.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "next",
+     "text": "Next: nothing \u2014 refuted, and no event to explain is registered for this invariant.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G03",
+     "kind": "state",
+     "text": "G03: regions(k) = 0\u00b7k + 1\u00b72^(k\u22121)(k) + 0. Status refuted-heldout, evidence class Pi1. Refuted at k = 6.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G03",
+     "kind": "refute",
+     "text": "Already refuted: junction: separating observation at k=6: G01 says 31, G03 says 32.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G03",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G03",
+     "kind": "connect",
+     "text": "refuted by the same index k = 6 as G02.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G03",
+     "kind": "next",
+     "text": "Next: nothing \u2014 refuted, and no event to explain is registered for this invariant.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    }
+   ],
+   "hypotheses": [
+    {
+     "id": "G01",
+     "text": "regions(k) = polynomial of degree 4 fitted on k \u2208 1..5 (interpolant: no spare development point)",
+     "origin": "formula",
+     "parent": null,
+     "status": "form-holds",
+     "witness": null,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "dev 1..5",
+       true,
+       "passes"
+      ],
+      [
+       "junction",
+       true,
+       "separating observation at k=6: G01 says 31, G03 says 32"
+      ],
+      [
+       "held-out 1..12",
+       true,
+       "passes"
+      ]
+     ]
+    },
+    {
+     "id": "G02",
+     "text": "regions(k) = \u03a3 c_i regions(k\u22121\u2212i) with c = ['2']",
+     "origin": "formula",
+     "parent": null,
+     "status": "refuted-heldout",
+     "witness": 6,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "dev 1..5",
+       true,
+       "passes"
+      ],
+      [
+       "held-out 1..12",
+       false,
+       "fails at k=6"
+      ],
+      [
+       "held-out 1..12",
+       false,
+       "fails at k=6"
+      ]
+     ]
+    },
+    {
+     "id": "G03",
+     "text": "regions(k) = 0\u00b7k + 1\u00b72^(k\u22121)(k) + 0",
+     "origin": "formula",
+     "parent": null,
+     "status": "refuted-heldout",
+     "witness": 6,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "dev 1..5",
+       true,
+       "passes"
+      ],
+      [
+       "junction",
+       false,
+       "separating observation at k=6: G01 says 31, G03 says 32"
+      ]
+     ]
+    }
+   ]
+  },
+  "Josephus": {
+   "turns": [
+    {
+     "hyp": "G01",
+     "kind": "state",
+     "text": "G01: J(k) = 2\u00b7k + -2\u00b72^\u230alog\u2082k\u230b(k) + 0. Status form-holds, evidence class Pi1. Checked up to index 1499; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "refute",
+     "text": "It would be refuted by one failing index. I extended the check to every index up to 2999 and found none. Still class Pi1: surviving a range is not a proof.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "implies",
+     "text": "It is equivalent to: J(n) = 2(n - 2^floor(log2 n)) for every n >= 1 [FORMAL]",
+     "provenance": "lean:josephus_closed_form",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "connect",
+     "text": "No recorded connection to other statements.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "next",
+     "text": "Next: hand the form to the prover; no Lean statement is attached yet, so stating one is the next step.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    }
+   ],
+   "hypotheses": [
+    {
+     "id": "G01",
+     "text": "J(k) = 2\u00b7k + -2\u00b72^\u230alog\u2082k\u230b(k) + 0",
+     "origin": "formula",
+     "parent": null,
+     "status": "form-holds",
+     "witness": null,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "dev 1..39",
+       true,
+       "passes"
+      ],
+      [
+       "held-out 1..399",
+       true,
+       "passes"
+      ],
+      [
+       "held-out 1..1499",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 1500..2999",
+       true,
+       "passes"
+      ]
+     ]
+    }
+   ]
+  },
+  "Collatz": {
+   "turns": [
+    {
+     "hyp": "G01",
+     "kind": "state",
+     "text": "G01: reaches1(k) holds for every k. Status survives, evidence class Pi2. Checked up to index 99999; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "refute",
+     "text": "Class Pi2 (for all k there exists ...): no finite set of observations can refute it, so I do not extend the range. A proof or a structural argument is needed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "implies",
+     "text": "It does NOT by itself imply: the statement holds for every index [FORMAL] (gcd(n^17+9,(n+1)^17+9) = 1 survives every n < 1000 (CERT) and fails at a 52-digit n)",
+     "provenance": "lean:gcd_trap_survives; gcd_trap_refuted",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "implies",
+     "text": "It does NOT by itself imply: every n reaches 1 [CERT] (only n < 10000 is certified; the general statement is the Collatz conjecture)",
+     "provenance": "lean:collatz_reaches_one_below",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "connect",
+     "text": "No recorded connection to other statements.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "next",
+     "text": "Ledger C373 [CERT]: Collatz certified below 10000 within 300 steps.",
+     "provenance": "ledger:C373",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "next",
+     "text": "Next: state it in Lean and try to prove it; meanwhile it is only 'survives' on the checked range.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G03",
+     "kind": "state",
+     "text": "G03: [steps(k) \u2264 118 for every k] for k < 129. Status survives, evidence class FINITE. Checked up to index 99999; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G03",
+     "kind": "refute",
+     "text": "Class FINITE: it speaks about finitely many indices, all already checked, so there is nothing further to refute.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G03",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G03",
+     "kind": "connect",
+     "text": "derived from G02 (refuted-heldout).",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G03",
+     "kind": "next",
+     "text": "Next: it is finite and fully checked, so a finite certificate (a decision procedure in the prover) can close it.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G05",
+     "kind": "state",
+     "text": "G05: [steps(k) \u2264 118 for every k] for k < 129. Status survives, evidence class FINITE. Checked up to index 99999; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G05",
+     "kind": "refute",
+     "text": "Class FINITE: it speaks about finitely many indices, all already checked, so there is nothing further to refute.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G05",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G05",
+     "kind": "connect",
+     "text": "derived from G02 (refuted-heldout).",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G05",
+     "kind": "next",
+     "text": "Next: it is finite and fully checked, so a finite certificate (a decision procedure in the prover) can close it.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G07",
+     "kind": "state",
+     "text": "G07: [steps(k) \u2264 118 for every k] for k < 129. Status survives, evidence class FINITE.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G07",
+     "kind": "refute",
+     "text": "Class FINITE: it speaks about finitely many indices, all already checked, so there is nothing further to refute.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G07",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G07",
+     "kind": "connect",
+     "text": "derived from G02 (refuted-heldout).",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G07",
+     "kind": "next",
+     "text": "Next: it is finite and fully checked, so a finite certificate (a decision procedure in the prover) can close it.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G08",
+     "kind": "state",
+     "text": "G08: steps(k) \u2264 350 for every k. Status survives, evidence class Pi1. Checked up to index 99999; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G08",
+     "kind": "refute",
+     "text": "It is refuted by one failing index. I checked 100000..199999 and it fails at k = 106239.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G08",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G08",
+     "kind": "connect",
+     "text": "derived from G02 (refuted-heldout); about the same invariant `steps` as G02, G04, G06.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G08",
+     "kind": "next",
+     "text": "Next: narrow. 2 refined statement(s): G10 [steps(k) \u2264 350 for every k] for k < 106239 (survives); G11 steps(k) \u2264 382 for every k (survives).",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G08",
+     "kind": "next",
+     "text": "4 successive bounds on `steps` were refuted (at 129, 1161, 10971, 106239); I propose G12: steps(k) is unbounded (every bound is eventually exceeded). It is class Pi2, so it goes to the prover, not to sampling.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G10",
+     "kind": "state",
+     "text": "G10: [steps(k) \u2264 350 for every k] for k < 106239. Status survives, evidence class FINITE.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G10",
+     "kind": "refute",
+     "text": "Class FINITE: it speaks about finitely many indices, all already checked, so there is nothing further to refute.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G10",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G10",
+     "kind": "connect",
+     "text": "derived from G08 (refuted-heldout).",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G10",
+     "kind": "next",
+     "text": "Next: it is finite and fully checked, so a finite certificate (a decision procedure in the prover) can close it.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G11",
+     "kind": "state",
+     "text": "G11: steps(k) \u2264 382 for every k. Status survives, evidence class Pi1. Checked up to index 199999; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G11",
+     "kind": "refute",
+     "text": "It is refuted by one failing index. I checked 200000..399999 and it fails at k = 216367.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G11",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G11",
+     "kind": "connect",
+     "text": "derived from G08 (refuted-heldout); about the same invariant `steps` as G02, G04, G06, G08.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G11",
+     "kind": "next",
+     "text": "Next: narrow. 2 refined statement(s): G13 [steps(k) \u2264 382 for every k] for k < 216367 (survives); G14 steps(k) \u2264 442 for every k (survives).",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G13",
+     "kind": "state",
+     "text": "G13: [steps(k) \u2264 382 for every k] for k < 216367. Status survives, evidence class FINITE.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G13",
+     "kind": "refute",
+     "text": "Class FINITE: it speaks about finitely many indices, all already checked, so there is nothing further to refute.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G13",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G13",
+     "kind": "connect",
+     "text": "derived from G11 (refuted-heldout).",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G13",
+     "kind": "next",
+     "text": "Next: it is finite and fully checked, so a finite certificate (a decision procedure in the prover) can close it.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G14",
+     "kind": "state",
+     "text": "G14: steps(k) \u2264 442 for every k. Status survives, evidence class Pi1. Checked up to index 399999; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G14",
+     "kind": "refute",
+     "text": "It would be refuted by one index where it fails. The budget for this invariant (400000) is already used up.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G14",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G14",
+     "kind": "connect",
+     "text": "derived from G11 (refuted-heldout); about the same invariant `steps` as G02, G04, G06, G08, G11.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G14",
+     "kind": "next",
+     "text": "Next: state it in Lean and try to prove it; meanwhile it is only 'survives' on the checked range.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G12",
+     "kind": "state",
+     "text": "G12: steps(k) is unbounded (every bound is eventually exceeded). Status open, evidence class Pi2.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G12",
+     "kind": "refute",
+     "text": "Class Pi2 (for all k there exists ...): no finite set of observations can refute it, so I do not extend the range. A proof or a structural argument is needed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G12",
+     "kind": "implies",
+     "text": "It does NOT by itself imply: every n reaches 1 [CERT] (unbounded stopping times are compatible with every n reaching 1 (2^m takes m steps))",
+     "provenance": "lean:collatz_reaches_one_below",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G12",
+     "kind": "connect",
+     "text": "derived from G08 (refuted-heldout).",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G12",
+     "kind": "next",
+     "text": "Next: look for a finite surrogate (a statement with a certificate) or a structural argument; more sampling cannot settle it.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G09",
+     "kind": "state",
+     "text": "G09: steps(k) is unbounded (every bound is eventually exceeded). Status open, evidence class Pi2.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G09",
+     "kind": "refute",
+     "text": "Class Pi2 (for all k there exists ...): no finite set of observations can refute it, so I do not extend the range. A proof or a structural argument is needed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G09",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G09",
+     "kind": "connect",
+     "text": "No recorded connection to other statements.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G09",
+     "kind": "next",
+     "text": "Next: look for a finite surrogate (a statement with a certificate) or a structural argument; more sampling cannot settle it.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "state",
+     "text": "G02: steps(k) \u2264 118 for every k. Status refuted-heldout, evidence class Pi1. Refuted at k = 129.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "refute",
+     "text": "Already refuted: held-out 1..999: fails at k=129.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "connect",
+     "text": "parent of G03, G04, G05, G06, G07, G08; about the same invariant `steps` as G04, G06, G08, G11, G14.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "next",
+     "text": "Next: narrow. 2 refined statement(s): G15 [steps(k) \u2264 118 for every k] for k < 129 (survives); G16 steps(k) \u2264 178 for every k (survives).",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    }
+   ],
+   "hypotheses": [
+    {
+     "id": "G01",
+     "text": "reaches1(k) holds for every k",
+     "origin": "lift",
+     "parent": null,
+     "status": "survives",
+     "witness": null,
+     "class": "Pi2",
+     "lean": null,
+     "evidence": [
+      [
+       "dev 1..99",
+       true,
+       "passes"
+      ],
+      [
+       "held-out 1..999",
+       true,
+       "passes"
+      ],
+      [
+       "held-out 1..9999",
+       true,
+       "passes"
+      ],
+      [
+       "held-out 1..99999",
+       true,
+       "passes"
+      ]
+     ]
+    },
+    {
+     "id": "G02",
+     "text": "steps(k) \u2264 118 for every k",
+     "origin": "lift",
+     "parent": null,
+     "status": "refuted-heldout",
+     "witness": 129,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "dev 1..99",
+       true,
+       "passes"
+      ],
+      [
+       "held-out 1..999",
+       false,
+       "fails at k=129"
+      ]
+     ]
+    },
+    {
+     "id": "G03",
+     "text": "[steps(k) \u2264 118 for every k] for k < 129",
+     "origin": "cut",
+     "parent": "G02",
+     "status": "survives",
+     "witness": null,
+     "class": "FINITE",
+     "lean": null,
+     "evidence": [
+      [
+       "cut",
+       true,
+       "holds on every k < 129"
+      ],
+      [
+       "held-out 1..9999",
+       true,
+       "passes"
+      ],
+      [
+       "held-out 1..99999",
+       true,
+       "passes"
+      ]
+     ]
+    },
+    {
+     "id": "G04",
+     "text": "steps(k) \u2264 178 for every k",
+     "origin": "narrow",
+     "parent": "G02",
+     "status": "refuted-heldout",
+     "witness": 1161,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "all data <1000",
+       true,
+       "passes"
+      ],
+      [
+       "held-out 1..9999",
+       false,
+       "fails at k=1161"
+      ]
+     ]
+    },
+    {
+     "id": "G05",
+     "text": "[steps(k) \u2264 118 for every k] for k < 129",
+     "origin": "cut",
+     "parent": "G02",
+     "status": "survives",
+     "witness": null,
+     "class": "FINITE",
+     "lean": null,
+     "evidence": [
+      [
+       "cut",
+       true,
+       "holds on every k < 129"
+      ],
+      [
+       "held-out 1..99999",
+       true,
+       "passes"
+      ]
+     ]
+    },
+    {
+     "id": "G06",
+     "text": "steps(k) \u2264 261 for every k",
+     "origin": "narrow",
+     "parent": "G02",
+     "status": "refuted-heldout",
+     "witness": 10971,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "all data <10000",
+       true,
+       "passes"
+      ],
+      [
+       "held-out 1..99999",
+       false,
+       "fails at k=10971"
+      ]
+     ]
+    },
+    {
+     "id": "G07",
+     "text": "[steps(k) \u2264 118 for every k] for k < 129",
+     "origin": "cut",
+     "parent": "G02",
+     "status": "survives",
+     "witness": null,
+     "class": "FINITE",
+     "lean": null,
+     "evidence": [
+      [
+       "cut",
+       true,
+       "holds on every k < 129"
+      ]
+     ]
+    },
+    {
+     "id": "G08",
+     "text": "steps(k) \u2264 350 for every k",
+     "origin": "narrow",
+     "parent": "G02",
+     "status": "refuted-heldout",
+     "witness": 106239,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "all data <100000",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 100000..199999",
+       false,
+       "fails at k=106239"
+      ]
+     ]
+    },
+    {
+     "id": "G09",
+     "text": "steps(k) is unbounded (every bound is eventually exceeded)",
+     "origin": "pattern-of-refutations",
+     "parent": null,
+     "status": "open",
+     "witness": null,
+     "class": "Pi2",
+     "lean": null,
+     "evidence": [
+      [
+       "refutations",
+       true,
+       "bound lifts refuted at [(1000, 129), (10000, 1161), (100000, 10971)]; proposed as a statement, provable (2^m has m steps)"
+      ]
+     ]
+    },
+    {
+     "id": "G10",
+     "text": "[steps(k) \u2264 350 for every k] for k < 106239",
+     "origin": "cut",
+     "parent": "G08",
+     "status": "survives",
+     "witness": null,
+     "class": "FINITE",
+     "lean": null,
+     "evidence": [
+      [
+       "cut",
+       true,
+       "holds on every k < 106239"
+      ]
+     ]
+    },
+    {
+     "id": "G11",
+     "text": "steps(k) \u2264 382 for every k",
+     "origin": "narrow",
+     "parent": "G08",
+     "status": "refuted-heldout",
+     "witness": 216367,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "all data <200000",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 200000..399999",
+       false,
+       "fails at k=216367"
+      ]
+     ]
+    },
+    {
+     "id": "G12",
+     "text": "steps(k) is unbounded (every bound is eventually exceeded)",
+     "origin": "pattern-of-refutations",
+     "parent": "G08",
+     "status": "open",
+     "witness": null,
+     "class": "Pi2",
+     "lean": null,
+     "evidence": [
+      [
+       "refutations",
+       true,
+       "bounds refuted at 129, 1161, 10971, 106239"
+      ]
+     ]
+    },
+    {
+     "id": "G13",
+     "text": "[steps(k) \u2264 382 for every k] for k < 216367",
+     "origin": "cut",
+     "parent": "G11",
+     "status": "survives",
+     "witness": null,
+     "class": "FINITE",
+     "lean": null,
+     "evidence": [
+      [
+       "cut",
+       true,
+       "holds on every k < 216367"
+      ]
+     ]
+    },
+    {
+     "id": "G14",
+     "text": "steps(k) \u2264 442 for every k",
+     "origin": "narrow",
+     "parent": "G11",
+     "status": "survives",
+     "witness": null,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "all data <400000",
+       true,
+       "passes"
+      ]
+     ]
+    },
+    {
+     "id": "G15",
+     "text": "[steps(k) \u2264 118 for every k] for k < 129",
+     "origin": "cut",
+     "parent": "G02",
+     "status": "survives",
+     "witness": null,
+     "class": "FINITE",
+     "lean": null,
+     "evidence": [
+      [
+       "cut",
+       true,
+       "holds on every k < 129"
+      ]
+     ]
+    },
+    {
+     "id": "G16",
+     "text": "steps(k) \u2264 178 for every k",
+     "origin": "narrow",
+     "parent": "G02",
+     "status": "survives",
+     "witness": null,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "all data <1000",
+       true,
+       "passes"
+      ]
+     ]
+    }
+   ]
+  },
+  "gcd(n\u00b9\u2077+9,(n+1)\u00b9\u2077+9)": {
+   "turns": [
+    {
+     "hyp": "G01",
+     "kind": "state",
+     "text": "G01: coprime(k) holds for every k. Status refuted-structural, evidence class Pi1. Refuted at k = 8424432925592889329288197322308900672459420460792433.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "refute",
+     "text": "Already refuted: structural reader: resultant \u21d2 n = 8424432925592889329288197322308900672459420460792433: gcd = 8936582237915716659950962253358945635793453256935559.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "connect",
+     "text": "No recorded connection to other statements.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "next",
+     "text": "Next: nothing \u2014 refuted, and no event to explain is registered for this invariant.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "state",
+     "text": "G02: the resultant of x^17+9 and (x+1)^17+9 is 8936582237915716659950962253358945635793453256935559; a common factor must divide it, giving the candidate n = 8424432925592889329288197322308900672459420460792433. Status confirmed, evidence class FINITE.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "refute",
+     "text": "Class FINITE: it speaks about finitely many indices, all already checked, so there is nothing further to refute.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "connect",
+     "text": "No recorded connection to other statements.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "next",
+     "text": "Next: nothing \u2014 no rule applies to this status.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    }
+   ],
+   "hypotheses": [
+    {
+     "id": "G01",
+     "text": "coprime(k) holds for every k",
+     "origin": "lift",
+     "parent": null,
+     "status": "refuted-structural",
+     "witness": 8424432925592889329288197322308900672459420460792433,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "dev 0..999",
+       true,
+       "passes"
+      ],
+      [
+       "held-out 0..19999",
+       true,
+       "passes"
+      ],
+      [
+       "held-out 0..99999",
+       true,
+       "passes"
+      ],
+      [
+       "structural reader",
+       false,
+       "resultant \u21d2 n = 8424432925592889329288197322308900672459420460792433: gcd = 8936582237915716659950962253358945635793453256935559"
+      ]
+     ]
+    },
+    {
+     "id": "G02",
+     "text": "the resultant of x^17+9 and (x+1)^17+9 is 8936582237915716659950962253358945635793453256935559; a common factor must divide it, giving the candidate n = 8424432925592889329288197322308900672459420460792433",
+     "origin": "structural-reader",
+     "parent": null,
+     "status": "confirmed",
+     "witness": null,
+     "class": "FINITE",
+     "lean": null,
+     "evidence": []
+    }
+   ]
+  },
+  "16-bit midpoint": {
+   "turns": [
+    {
+     "hyp": "G03",
+     "kind": "state",
+     "text": "G03: buggy midpoint out of range \u27fa overflow. Status law-holds, evidence class Pi1. Checked up to index 19999; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G03",
+     "kind": "refute",
+     "text": "It would be refuted by one failing index. I extended the check to every index up to 79999 and found none. Still class Pi1: surviving a range is not a proof.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G03",
+     "kind": "implies",
+     "text": "It is equivalent to: the buggy midpoint leaves [lo, hi] iff lo + hi overflows 16 bits [CERT] (bit-blasted over all inputs)",
+     "provenance": "lean:midpoint_bug_iff_overflow",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G03",
+     "kind": "connect",
+     "text": "No recorded connection to other statements.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G03",
+     "kind": "next",
+     "text": "Tied with G04, and no observation can split the tie: the two statements are equivalent (with lo \u2264 hi < 2^16, lo + hi \u2265 2^16 forces hi \u2265 2^15, so the second conjunct follows from the first).",
+     "provenance": "definition",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G03",
+     "kind": "next",
+     "text": "Next: nothing to compute \u2014 the prover already has it (midpoint_bug_iff_overflow).",
+     "provenance": "lean:midpoint_bug_iff_overflow",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G04",
+     "kind": "state",
+     "text": "G04: buggy midpoint out of range \u27fa overflow \u2227 hi_big. Status law-holds, evidence class Pi1. Checked up to index 19999; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G04",
+     "kind": "refute",
+     "text": "It would be refuted by one failing index. I extended the check to every index up to 79999 and found none. Still class Pi1: surviving a range is not a proof.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G04",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G04",
+     "kind": "connect",
+     "text": "No recorded connection to other statements.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G04",
+     "kind": "next",
+     "text": "Tied with G03, and no observation can split the tie: the two statements are equivalent (with lo \u2264 hi < 2^16, lo + hi \u2265 2^16 forces hi \u2265 2^15, so the second conjunct follows from the first).",
+     "provenance": "definition",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G04",
+     "kind": "next",
+     "text": "Next: state it in Lean and try to prove it; meanwhile it is only 'law-holds' on the checked range.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "state",
+     "text": "G02: fixed_in_range(k) holds for every k. Status survives, evidence class Pi1. Checked up to index 19999; nothing beyond is claimed.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "refute",
+     "text": "It would be refuted by one failing index. I extended the check to every index up to 79999 and found none. Still class Pi1: surviving a range is not a proof.",
+     "provenance": "computed",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "implies",
+     "text": "It does NOT by itself imply: the statement holds for every index [FORMAL] (gcd(n^17+9,(n+1)^17+9) = 1 survives every n < 1000 (CERT) and fails at a 52-digit n)",
+     "provenance": "lean:gcd_trap_survives; gcd_trap_refuted",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "implies",
+     "text": "It is equivalent to: the repaired midpoint lo + (hi-lo)/2 is in [lo, hi] for every 16-bit input [CERT] (bit-blasted over all inputs)",
+     "provenance": "lean:midpoint_fixed_correct",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "connect",
+     "text": "No recorded connection to other statements.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G02",
+     "kind": "next",
+     "text": "Next: nothing to compute \u2014 the prover already has it (midpoint_fixed_correct).",
+     "provenance": "lean:midpoint_fixed_correct",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "state",
+     "text": "G01: buggy_in_range(k) holds for every k. Status refuted-heldout, evidence class Pi1. Refuted at k = 569.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "refute",
+     "text": "Already refuted: held-out 0..1999: fails at k=569.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "implies",
+     "text": "No checked implication on record for this statement; I do not state one.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "connect",
+     "text": "No recorded connection to other statements.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    },
+    {
+     "hyp": "G01",
+     "kind": "next",
+     "text": "Next: nothing \u2014 refuted, and no event to explain is registered for this invariant.",
+     "provenance": "record",
+     "ungrounded_numbers": []
+    }
+   ],
+   "hypotheses": [
+    {
+     "id": "G01",
+     "text": "buggy_in_range(k) holds for every k",
+     "origin": "lift",
+     "parent": null,
+     "status": "refuted-heldout",
+     "witness": 569,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "dev 0..199",
+       true,
+       "passes"
+      ],
+      [
+       "held-out 0..1999",
+       false,
+       "fails at k=569"
+      ]
+     ]
+    },
+    {
+     "id": "G02",
+     "text": "fixed_in_range(k) holds for every k",
+     "origin": "lift",
+     "parent": null,
+     "status": "survives",
+     "witness": null,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "dev 0..199",
+       true,
+       "passes"
+      ],
+      [
+       "held-out 0..1999",
+       true,
+       "passes"
+      ],
+      [
+       "held-out 0..19999",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 20000..39999",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 40000..79999",
+       true,
+       "passes"
+      ]
+     ]
+    },
+    {
+     "id": "G03",
+     "text": "buggy midpoint out of range \u27fa overflow",
+     "origin": "mechanism",
+     "parent": null,
+     "status": "law-holds",
+     "witness": null,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "data 0..19999",
+       true,
+       "exact on 20000 indices (9588 events)"
+      ],
+      [
+       "dialogue held-out 20000..39999",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 40000..79999",
+       true,
+       "passes"
+      ]
+     ]
+    },
+    {
+     "id": "G04",
+     "text": "buggy midpoint out of range \u27fa overflow \u2227 hi_big",
+     "origin": "mechanism",
+     "parent": null,
+     "status": "law-holds",
+     "witness": null,
+     "class": "Pi1",
+     "lean": null,
+     "evidence": [
+      [
+       "data 0..19999",
+       true,
+       "exact on 20000 indices (9588 events)"
+      ],
+      [
+       "dialogue held-out 20000..39999",
+       true,
+       "passes"
+      ],
+      [
+       "dialogue held-out 40000..79999",
+       true,
+       "passes"
+      ]
+     ]
+    }
+   ]
+  }
+ }
+}

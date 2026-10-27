@@ -1,0 +1,45 @@
+pipeline sha256: 031c6eb5ee2464dfa57462a26d7edd233ecfe23f036c008af5aad4635edd521f
+plan depth <= 2, search budget 20 s per puzzle
+
+=== C. Occam (development families) ===
+--- Round 29 multi-step families: Occam failures by number of demonstrations ---
+   k=1  gate off           RIGHT  62  WRONG 13  REFUSED  33
+          wrong: crop-rotate-recolour: rot90 -> crop_bbox | colour-rank (x1)
+          wrong: crop-rotate-recolour: rot90 -> crop_bbox | obj-blind-size (x1)
+          wrong: crop-transpose: crop_bbox | cell (x1)
+          wrong: gravity-recolour: crop_smallest | tile (x1)
+   k=1  gate from depth 2  RIGHT  62  WRONG 11  REFUSED  35
+          wrong: crop-transpose: crop_bbox | cell (x1)
+          wrong: gravity-recolour: crop_smallest | tile (x1)
+          wrong: gravity-up-crop: crop_smallest | tile (x1)
+          wrong: halves-or-flip: split_or | cell (x1)
+   k=1  gate from depth 1  RIGHT  42  WRONG  2  REFUSED  64
+          wrong: rot-crop-mirror: crop_bbox -> mirror_h_rev | identity (x1)
+          wrong: transpose-erase: transpose | identity (x1)
+   k=1  auto (Round 30)    RIGHT  42  WRONG  2  REFUSED  64
+          wrong: rot-crop-mirror: crop_bbox -> mirror_h_rev | identity (x1)
+          wrong: transpose-erase: transpose | identity (x1)
+   k=2  gate off           RIGHT  94  WRONG  2  REFUSED  12
+          wrong: largest-upscale: crop_smallest_mono | tile (x1)
+          wrong: symfill-rotate: block_most | tile (x1)
+   k=2  gate from depth 2  RIGHT  89  WRONG  2  REFUSED  17
+          wrong: largest-upscale: crop_smallest_mono | tile (x1)
+          wrong: symfill-rotate: block_most | tile (x1)
+   k=2  gate from depth 1  RIGHT  75  WRONG  1  REFUSED  32
+          wrong: symfill-rotate: block_most | tile (x1)
+   k=2  auto (Round 30)    RIGHT  75  WRONG  1  REFUSED  32
+          wrong: symfill-rotate: block_most | tile (x1)
+   k=3  gate off           RIGHT  99  WRONG  0  REFUSED   9
+   k=3  gate from depth 2  RIGHT  96  WRONG  0  REFUSED  12
+   k=3  gate from depth 1  RIGHT  92  WRONG  0  REFUSED  16
+   k=3  auto (Round 30)    RIGHT  96  WRONG  0  REFUSED  12
+   k=4  gate off           RIGHT 102  WRONG  0  REFUSED   6
+   k=4  gate from depth 2  RIGHT 102  WRONG  0  REFUSED   6
+   k=4  gate from depth 1  RIGHT  97  WRONG  0  REFUSED  11
+   k=4  auto (Round 30)    RIGHT 102  WRONG  0  REFUSED   6
+   k=5  gate off           RIGHT 104  WRONG  0  REFUSED   4
+   k=5  gate from depth 2  RIGHT 104  WRONG  0  REFUSED   4
+   k=5  gate from depth 1  RIGHT  99  WRONG  0  REFUSED   9
+   k=5  auto (Round 30)    RIGHT 104  WRONG  0  REFUSED   4
+
+(291 s)

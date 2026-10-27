@@ -1,0 +1,5 @@
+[
+{"id": "C35", "claim": "Problem 3: computing a(n) needs Omega(n) work", "class": "OPEN", "status": "open", "lean": ["GLM.Rule30.Problem3"]},
+{"id": "C80", "claim": "Problem3Eventual (time = Omega(n) eventually) implies Problem3 (time not o(n))", "class": "FORMAL", "status": "proved", "lean": ["GLM.Rule30.problem3_of_eventual"]},
+{"id": "C276", "claim": "Round 27 open statement and frontier: Round27Open := AmortizedHalving 2 4 1 is the one surviving uniform candidate (implies the period-2 rung; certified for d <= 12; smallest unresolved case d = 13). Candidate-generation harness: enumeration vs counterexample-guided repair under one budget, held-out drive words of periods 3 and 4; GLM-guided plug-in not run", "class": "OPEN", "status": "open", "lean": ["GLM.Rule30.Round27Open", "GLM.Rule30.frontier_round27"]}
+]

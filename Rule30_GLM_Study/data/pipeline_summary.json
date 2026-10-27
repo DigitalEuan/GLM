@@ -1,0 +1,30 @@
+{
+  "layer0": {
+    "golay": 4096,
+    "hexacode": 64,
+    "leech": 196560
+  },
+  "layer1": {
+    "verified": true,
+    "n_cells_computed": 100
+  },
+  "layer2": {
+    "max_n": 10,
+    "conjecture_holds": true
+  },
+  "layer3": {
+    "leftmost_purely_linear": true
+  },
+  "layer4": {
+    "weight_increments_all_2": true
+  },
+  "layer5": {
+    "total_lean_lines": 1361,
+    "files": 4
+  },
+  "layer6": {
+    "frequency": 0.500768,
+    "deviation": 0.0007679999999999909,
+    "z_score": 1.5359999999999818
+  }
+}

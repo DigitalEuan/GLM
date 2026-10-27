@@ -1,0 +1,143 @@
+# 1) Hidden Memory, Probing, and Operational Cost
+
+**Purpose:** Test whether adding a binary memory state to the GLM helps it detect and exploit hidden state that cannot be inferred from a single observation. Do not treat this as evidence that GLM “friction” is physical friction.
+
+**Motivation:** The supplied paper, [“The extraction of work from hidden degrees of freedom”](https://doi.org/10.1038/s41567-026-03442-w), experimentally studies a system where delayed measurements reveal information about an unobserved environment. This directive tests the transferable computational idea—history can help predict dynamics—not the paper’s thermodynamic claims.
+
+## Research question
+
+When two situations have the same visible state but different histories, can the GLM use a persistent internal state and carefully chosen follow-up actions to predict their different outcomes better than a memoryless GLM?
+
+## Hypotheses
+
+- **H1 — Memory benefit:** A GLM with a persistent binary memory state predicts held-out outcomes better than an otherwise matched memoryless GLM in environments where hidden state affects future transitions.
+- **H2 — Specificity:** That benefit is absent or substantially smaller in memoryless environments.
+- **H3 — Probe value:** A deliberately chosen second action/observation distinguishes hidden states better than a random probe, under the same interaction budget.
+- **H4 — GLM-specific value:** The benefit survives comparison with a simple history-buffer baseline. If it does not, the result supports memory as a useful design, but not a special GLM capability.
+
+## Benchmark: exact binary environments
+
+Implement small deterministic environments using binary vectors and Boolean transitions only. For the hidden-memory condition, let the simulator state be $(X_t,Y_t)$, where $X_t$ is observable and $Y_t$ is hidden:
+
+$$
+Y_{t+1}=A Y_t\oplus B X_t\oplus C a_t,\qquad
+X_{t+1}=G(X_t,Y_t,a_t).
+$$
+
+All variables and operations are binary; $\oplus$ is XOR. The agent observes $X_t$, chooses action $a_t$, and observes the next $X$. The evaluator retains access to $Y$ for scoring, but **never exposes it to the GLM**.
+
+Create paired cases that reach the **same visible $X_t$ with different hidden $Y_t$**, such that a subsequent action can produce different outcomes. Also create a memoryless control in which $X_{t+1}$ depends only on $X_t,a_t$. Use held-out transition rules, initial states, and action sequences; do not split only by random example.
+
+If the GLM supports only static grids, render $X_t$ as a small binary grid and treat each interaction as one update. Do not introduce continuous decay parameters or real-valued latent states in this study.
+
+## Systems to compare
+
+1. **Memoryless GLM:** prediction uses only the current observation.
+2. **GLM with persistent memory:** prediction uses the current observation plus its binary internal state, updated after every transition.
+3. **History-buffer baseline:** receives the last $k$ observations and actions, with $k$ fixed before testing.
+4. **Oracle upper bound:** evaluator-only predictor given $(X_t,Y_t)$, to check that the task is solvable from the hidden state.
+
+Keep training examples, test cases, action budget, and output capacity matched. Include ablations that reset GLM memory each step and that shuffle histories while preserving current observations.
+
+## Protocol
+
+1. **Verify the benchmark.** Exhaustively enumerate small environments where feasible. Check that the memory condition has identical visible states with different futures; check that the Markov control does not. Confirm the oracle solves both.
+2. **Train or configure each system.** Give agents the same observation/action interface. Keep test transition rules out of training.
+3. **Measure one-step prediction.** From the same visible state, predict the next observation for candidate actions. Score exact binary-state accuracy.
+4. **Measure probing.** Permit one additional action chosen by the agent, then score whether its resulting observation lets it predict the hidden-state-dependent outcome. Compare against a random probe.
+5. **Measure task performance.** In a separate set of environments with a declared goal, compare goal completion under a fixed action budget. Do not use work-extraction or energy claims unless the simulator explicitly defines a physical energy and work calculation.
+6. **Repeat with fixed seeds** and report per-environment results, not only an aggregate.
+
+## Required measurements
+
+Report:
+
+- exact next-state accuracy and goal-completion rate;
+- memory versus memoryless improvement separately on hidden-memory and Markov controls;
+- accuracy after the probe, and the number of probes required;
+- performance of GLM memory versus the history-buffer baseline;
+- false memory detections on Markov controls;
+- update cost: binary operations, active bits, and memory size;
+- results on unseen transition rules and longer sequences.
+
+Use the simulator’s hidden $Y$ only for evaluation. You may report how much past history predicts $Y$ conditional on current $X$ as a diagnostic, but it is **not** an agent input or proof that GLM has identified a physical hidden degree of freedom.
+
+## Decision rule
+
+Count H1–H4 separately. Support for a practical GLM memory benefit requires improved held-out prediction in the hidden-memory condition, no comparable gain caused merely by extra capacity on Markov controls, and an advantage over—or a clear resource trade-off with—the history-buffer baseline. If memory helps but probing does not, report memory-state benefit without claiming active hidden-state inference.
+
+**Scope boundary:** This study tests a computational analogue of history-dependent dynamics. It does not validate a thermodynamic “TAX,” identify real friction, or show that memory can produce physical work. Any later physical claim requires an independently specified model and physical data.
+
+====
+
+#2) Information Machine
+
+**Build the first “Information Machine” as a software-defined engine with explicit state, memory, control, and resource accounting—not as a combustion engine.** In the paper “The extraction of work from hidden degrees of freedom”, the “bath” is a viscoelastic environment with hidden memory, probed through delayed measurements; it is not a piston or heat-recycling apparatus. The useful idea to borrow is **that history in an unobserved state can change what happens next, and carefully chosen observations can reveal it**.
+
+The engine analogy can still help define the system. Just keep **computational resources** separate from **physical energy and heat**. A bit flip, an operation count, and a joule are not interchangeable without a measured hardware model. Nor can waste heat simply be fed back as useful computation: recovering it requires an actual energy-conversion mechanism and temperature gradient.
+
+## Study directive: GLM Information Machine
+
+**Goal.** Test whether a GLM with persistent hidden-state memory and active probing can predict and use history-dependent dynamics more effectively than a memoryless GLM, while tracking its computational cost. This is a computational experiment inspired by information thermodynamics; it does not test a physical heat engine or establish that GLM processing is literal thermodynamic work.
+
+### Machine parts and their computational meanings
+
+| Engine part | GLM implementation |
+|---|---|
+| **Frame / housing** | A reproducible software runtime, fixed interface, and formal checks preventing invalid state transitions. |
+| **Working parts / piston** | The GLM transition operator that updates the visible workspace and memory. |
+| **Observable working state** | The grid or other state the GLM can inspect. |
+| **Bath / hidden degrees of freedom** | A persistent internal state that influences future transitions but is not directly shown to the GLM. |
+| **Sensors** | The observation encoder that turns a state into the GLM’s visible input. |
+| **Valves / governor** | The action-selection policy: it chooses whether to act, wait, or make a probe. |
+| **Useful output** | Correct predictions, completed tasks, or reduced actions to reach a declared goal. |
+| **Fuel / resource budget** | A fixed allowance of updates, memory bits, and—if measured on real hardware—electrical energy. |
+| **Heat / friction** | Record hardware energy dissipated as heat only when measured. In the simulator, track operation cost separately; do not label it physical heat. |
+| **Heat recovery** | First implement as *computational reuse*—retaining useful memory or avoiding repeated work. Do not call it energy recovery. |
+| **Coolant / radiator** | Only needed for a physical computing device, to meet its hardware thermal limits. It does not implement the simulated bath. |
+| **Instrumentation** | Logs of observations, actions, internal memory, predictions, operation counts, and measured hardware energy. |
+
+### Simulator specification
+
+Use small, exact binary states. At each step, the simulator has a visible state $X_t$, hidden state $Y_t$, and agent action $a_t$:
+
+$$
+Y_{t+1}=G(Y_t,X_t,a_t),\qquad
+X_{t+1}=F(X_t,Y_t,a_t).
+$$
+
+The GLM receives $X_t$ and its own memory $H_t$, **not** $Y_t$:
+
+$$
+\hat X_{t+1}=P(X_t,H_t,a_t),\qquad
+H_{t+1}=U(H_t,X_t,a_t,X_{t+1}).
+$$
+
+Construct two matched conditions:
+
+1. **Memoryless control:** $X_{t+1}$ depends only on $X_t$ and $a_t$.
+2. **Hidden-memory condition:** the same visible $X_t$ can occur with different $Y_t$ values and produce different later outcomes under the same action.
+
+Keep the environment’s true hidden state private to the evaluator. Use it only to verify that the benchmark genuinely contains hidden memory and to score predictions.
+
+### Comparisons and procedure
+
+Compare a memoryless GLM, a GLM with persistent binary memory, and a history-buffer baseline receiving the last $k$ observations and actions. Match training data, model capacity where possible, action budget, and evaluation conditions. Include an ablation that resets GLM memory each step.
+
+1. **Verify the simulator.** Exhaustively check small cases. Confirm that identical visible states with different hidden states sometimes yield different futures in the memory condition, but not in the control.
+2. **Test prediction.** Give each system the current visible state and an action; score exact next-state prediction on held-out transition rules.
+3. **Test probing.** Allow one extra action chosen by the agent. Measure whether the observation improves prediction of the hidden-state-dependent future; compare with a random probe under the same budget.
+4. **Test useful output.** In separate environments with explicit goals, measure completion and actions required. Don’t treat prediction accuracy alone as engine performance.
+5. **Track costs independently.** Log binary update count, memory size, probe count, and—only on actual hardware—measured electrical energy and device temperature. These are separate quantities.
+
+### Decision criteria
+
+Support for a **GLM memory benefit** requires better held-out prediction in the hidden-memory condition, without a comparable advantage on the memoryless control. Support for **active probing** requires that selected probes improve future prediction more than random probes. A GLM-specific advantage requires comparison with the history-buffer baseline; otherwise, the conclusion is simply that history helps.
+
+Report wrong predictions, refusals, and resource use separately. Do not credit the system for answering after extra probes without counting those probes.
+
+### Build order
+
+Start with the simulator and tests; then add binary memory and probing; then add task-goal evaluation. Only after these results justify it should you implement a physical hardware demonstrator. For that stage, use a conventional computer, power measurement, and ordinary thermal management; a custom piston, combustion source, or waste-heat loop is not needed to test the GLM hypothesis.
+
+The supplied paper motivates this as a **memory-and-measurement study**: repeated observations can reveal correlations with hidden environmental states that a single observation cannot. Its reported physical work extraction is evidence about that experimental system, not proof that a computational memory register stores recoverable heat or energy.

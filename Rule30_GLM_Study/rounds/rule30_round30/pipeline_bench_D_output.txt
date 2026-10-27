@@ -1,0 +1,85 @@
+pipeline sha256: 031c6eb5ee2464dfa57462a26d7edd233ecfe23f036c008af5aad4635edd521f
+plan depth <= 2, search budget 20 s per puzzle
+
+=== D. fresh held-out set (scored once) ===
+held-out file sha256: 88b2843ecd3498adf46427ec373dafb263d496f49983d8a834408f4b4a4b352f
+--- Round 30 held-out puzzles (132 puzzles) ---
+   Round 29 planner (depth <= 2):           RIGHT  56  WRONG  6  REFUSED  70
+   pipeline, no fitted middle steps:          RIGHT  90  WRONG  4  REFUSED  38
+   pipeline (stage 1):                        RIGHT  96  WRONG  4  REFUSED  32
+   + ask loop, <= 1 question(s):              RIGHT 101  WRONG  4  REFUSED  27
+   + ask loop, <= 2 question(s):              RIGHT 103  WRONG  5  REFUSED  24
+   + ask loop, <= 3 question(s):              RIGHT 104  WRONG  5  REFUSED  23
+   + ask loop, <= 5 question(s):              RIGHT 106  WRONG  5  REFUSED  21
+   answered after asking: 11 puzzles, mean 2.18 questions, 24 of 1093 output cells asked (2.2%)
+   search cost: 256572 step expansions with shape pruning (86112 skipped) vs 342684 without; 15.9 s vs 19.9 s
+      objsize-recolour-rot90     RIGHT   7  WRONG  2  REFUSED   3
+      recolour-transpose         RIGHT  12  WRONG  0  REFUSED   0
+      scale-by-objects           RIGHT  11  WRONG  1  REFUSED   0
+      flip-scale-by-objects      RIGHT  11  WRONG  1  REFUSED   0
+      connect-rot180             RIGHT  12  WRONG  0  REFUSED   0
+      objects-fall               RIGHT  11  WRONG  0  REFUSED   1
+      fall-left-crop             RIGHT  11  WRONG  0  REFUSED   1
+      unique-colour-mirror       RIGHT  10  WRONG  0  REFUSED   2
+      topmost-upscale            RIGHT  11  WRONG  0  REFUSED   1
+      CONTROL-reverse-row-colours RIGHT   0  WRONG  0  REFUSED  12
+      CONTROL-diagonal-rays      RIGHT   0  WRONG  0  REFUSED  12
+--- Round 30 held-out families: Occam failures by number of demonstrations ---
+   k=1  gate off           RIGHT  25  WRONG  9  REFUSED  20
+          wrong: fall-left-crop: crop_smallest | tile (x1)
+          wrong: fall-left-crop: flip_h -> crop_bbox | identity (x1)
+          wrong: flip-scale-by-objects: flip_h -> up2 | identity (x1)
+          wrong: objsize-recolour-rot90: rot90 | cell (x3)
+   k=1  gate from depth 2  RIGHT  25  WRONG  9  REFUSED  20
+          wrong: fall-left-crop: crop_smallest | tile (x1)
+          wrong: fall-left-crop: flip_h -> crop_bbox | identity (x1)
+          wrong: flip-scale-by-objects: flip_h -> up2 | identity (x1)
+          wrong: objsize-recolour-rot90: rot90 | cell (x3)
+   k=1  gate from depth 1  RIGHT  25  WRONG  5  REFUSED  24
+          wrong: fall-left-crop: flip_h -> crop_bbox | identity (x1)
+          wrong: flip-scale-by-objects: flip_h -> up2 | identity (x1)
+          wrong: objsize-recolour-rot90: rot90 | identity (x1)
+          wrong: scale-by-objects: up3 | identity (x2)
+   k=1  auto (Round 30)    RIGHT  25  WRONG  5  REFUSED  24
+          wrong: fall-left-crop: flip_h -> crop_bbox | identity (x1)
+          wrong: flip-scale-by-objects: flip_h -> up2 | identity (x1)
+          wrong: objsize-recolour-rot90: rot90 | identity (x1)
+          wrong: scale-by-objects: up3 | identity (x2)
+   k=2  gate off           RIGHT  39  WRONG  3  REFUSED  12
+          wrong: objsize-recolour-rot90: rot90 | cell (x2)
+          wrong: objsize-recolour-rot90: rot90 | identity (x1)
+   k=2  gate from depth 2  RIGHT  39  WRONG  3  REFUSED  12
+          wrong: objsize-recolour-rot90: rot90 | cell (x2)
+          wrong: objsize-recolour-rot90: rot90 | identity (x1)
+   k=2  gate from depth 1  RIGHT  38  WRONG  2  REFUSED  14
+          wrong: objsize-recolour-rot90: rot90 | cell (x1)
+          wrong: objsize-recolour-rot90: rot90 | identity (x1)
+   k=2  auto (Round 30)    RIGHT  38  WRONG  2  REFUSED  14
+          wrong: objsize-recolour-rot90: rot90 | cell (x1)
+          wrong: objsize-recolour-rot90: rot90 | identity (x1)
+   k=3  gate off           RIGHT  43  WRONG  1  REFUSED  10
+          wrong: objsize-recolour-rot90: rot90 | cell (x1)
+   k=3  gate from depth 2  RIGHT  43  WRONG  1  REFUSED  10
+          wrong: objsize-recolour-rot90: rot90 | cell (x1)
+   k=3  gate from depth 1  RIGHT  42  WRONG  1  REFUSED  11
+          wrong: objsize-recolour-rot90: rot90 | cell (x1)
+   k=3  auto (Round 30)    RIGHT  43  WRONG  1  REFUSED  10
+          wrong: objsize-recolour-rot90: rot90 | cell (x1)
+   k=4  gate off           RIGHT  47  WRONG  1  REFUSED   6
+          wrong: objsize-recolour-rot90: rot90 | colour-rank (x1)
+   k=4  gate from depth 2  RIGHT  47  WRONG  1  REFUSED   6
+          wrong: objsize-recolour-rot90: rot90 | colour-rank (x1)
+   k=4  gate from depth 1  RIGHT  44  WRONG  1  REFUSED   9
+          wrong: objsize-recolour-rot90: rot90 | colour-rank (x1)
+   k=4  auto (Round 30)    RIGHT  47  WRONG  1  REFUSED   6
+          wrong: objsize-recolour-rot90: rot90 | colour-rank (x1)
+   k=5  gate off           RIGHT  50  WRONG  1  REFUSED   3
+          wrong: objsize-recolour-rot90: rot90 | colour-rank (x1)
+   k=5  gate from depth 2  RIGHT  50  WRONG  1  REFUSED   3
+          wrong: objsize-recolour-rot90: rot90 | colour-rank (x1)
+   k=5  gate from depth 1  RIGHT  46  WRONG  1  REFUSED   7
+          wrong: objsize-recolour-rot90: rot90 | colour-rank (x1)
+   k=5  auto (Round 30)    RIGHT  50  WRONG  1  REFUSED   3
+          wrong: objsize-recolour-rot90: rot90 | colour-rank (x1)
+
+(349 s)

@@ -1,29 +1,31 @@
-# Summary of changes for run b869a397-9a30-48dd-bb82-f415f59a5505
-This round (Phase 183, "the Lorentzian evidence space") takes the Lorentzian lift beyond puzzle solving. It treats the lift as a general way to weigh evidence: a set of cues is combined into one lifted point. That point's position gives the agreed answer, and its distance from the light cone measures how much the cues disagree.
+# Summary of changes for run 97fcfeda-6b2b-40a0-b51a-2bce86c24d7e
+This round is **Phase 184, the declared majority rule**. It takes the first line of To-Do item 11 in `STATUS.md` §2.1: a majority rule for conflicting examples, with its own soundness condition. It also fixes a slowdown that was making the end-to-end evaluation time out. Nothing else from the To-Do list was taken.
 
-**Lean** (`overlay/glm_lean/RequestProject/GLM/LorentzianEvidence.lean`): builds with no `sorry` and only the standard axioms. It is included in `AxiomAuditAll.lean`, which reports 10038 theorems on standard axioms only. The file proves, in any dimension:
-- **Decomposition (`evidence_decomp`):** a weighted sum of lifted cues equals the lift of their consensus plus the Weyl vector times their disagreement (a weighted spread about the consensus).
-- **Norm (`evid_norm`, `evid_null_iff`):** the Lorentzian norm of the evidence is exactly minus the disagreement, so it is null exactly when every cue agrees.
-- **Guard (`dispersion_guard_sound`):** the dispersion guard is sound.
-- **Analogy (`analogy_evidence`):** "a is to b as c is to ?" is evidence with weights \(1, -1, 1\).
-- **Settling a tie (`separates_iff`, `card_ge_of_separates`):** a question that tells apart a Golay sextet tie needs at least five revealed positions, and the exact condition is given.
+**Lean** (`overlay/glm_lean/RequestProject/GLM/LorentzianMajority.lean`, added to `AxiomAuditAll.lean`). It builds with no `sorry`, and the whole-development audit reports 10069 theorems on the standard axioms only. The rule splits the examples into groups that state the same target. It answers the target whose group holds more than half the total weight, and refuses if none does. Proved, for any finite set of examples, any rational weights and targets of any type:
+- At most one target can hold more than half the weight (`majority_unique`), and the rule answers exactly that target (`majorityRule_eq_some_iff`).
+- **Soundness condition** (`majority_never_wrong`, `majority_sound`): if the examples stating the true target hold at least half the weight, the rule never answers anything else. If they hold more than half, it answers correctly.
+- **The condition is tight** (`majority_misled`): below half, wrong examples that agree with each other decide the answer. No rule that reads only the answers can check the condition; the caller has to supply it.
+- **A wrong answer needs many wrong examples** (`majority_wrong_needs_decoys`): if an answer is backed by \(g\) of \(k\) examples, at least \(g\) of them must be wrong for it to be wrong.
+- Each agreeing group has zero spread in the evidence space (`group_disp_zero`, `group_evid_null`), and wherever Phase 183's dispersion guard answers, the rule gives the same answer (`majority_extends_guard`).
 
 **Python:**
-- New `reasoning/lorentzian_evidence.py`, exposed as a new `tool evidence`. It refuses examples that do not all state one relation.
-- `tool lorentz` gains a certificate guard and a five-bit settling question, which you answer with `@POS=BIT`.
-- New `tools lorentzian-evidence` measurement: 13 of 15 pre-declared marks met. The two missed marks are explained in the study.
-- New test file `tests/test_lorentzian_evidence.py`. Its 9 tests pass when run by hand.
+- `reasoning/lorentzian_majority.py`, exposed as a new **`tool majority A : B, … :: C`**. It names the examples it outvoted and states with each answer how many examples would have to be wrong for the answer to be wrong. `tool evidence` is unchanged.
+- A new measurement, `tools lorentzian-majority`, whose marks were committed before the first run: **8 of 8 met**. Physics relations, 300 queries per condition:
+  - two good examples and one decoy: 155 right, 0 wrong, where the guard answers none (this reproduces Phase 183's figure);
+  - three good and two decoys: 161 right, 0 wrong;
+  - one good example and two decoys that agree: 148 wrong, exactly the cases `majority_misled` predicts;
+  - one good, two agreeing decoys and two other decoys: the rule refuses all 300, where a simple plurality vote is wrong 150 times.
+- **The cost:** with two good examples against two decoys that disagree with each other, a plurality vote gets 149 right and the majority rule refuses all of them. This is in the study.
+- New tests in `tests/test_lorentzian_majority.py`.
+- New write-up: `studies/LORENTZIAN_MAJORITY_STUDY.md`.
 
-**Measured results** (all exact fractions):
-- **Golay decoy:** the certificate guard cuts wrong answers from 61 to 27 and loses no right answer. The 27 that remain look identical to honest readings.
-- **Settling question:** five bits resolve 600 of 600 tied readings (five random positions resolve 391).
-- **Dispersion guard:** proved sound, but it never fired on this data.
-- **Physics relations:** the guarded rule gives no wrong answers anywhere, but simple voting does better on one decoy set (155 right against 0).
-- **Name analogies:** the existing analogy method got 10 of 13 names wrong. The new class certificate contains the expected name in 12 of 13.
-- **Semantic relations:** gains are small (5.5% → 6.2% right per query).
+**The evaluation fix.** With 6,224 Lean declarations, `report lean` took about 199 seconds, and the 8-process evaluation timed out on it and on `report relay` (221 of 223 passed). I changed the nearest-neighbour search in `lean_address.nearest_points` to sort points along an integer principal axis and stop scanning using an exact bound. `report lean` now takes about 56 seconds and every figure is unchanged; the test comparing the search with brute force passes. `report relay` is still about 230 seconds when run alone and is now a To-Do line in `STATUS.md` §2.2.
 
-So the clearest use for general reasoning is this: the lift can tell when a question is still open and name the smallest question that settles it, rather than having to guess.
+**Checks run:**
+- End-to-end evaluation: 223 of 223 on 8 processes.
+- `corpus --check`: current.
+- `tools dates`: 0 defects.
+- Every measurement made stale by the code changes was re-taken. Their marks are unchanged, except `native_words` W2, which moved from not met to met; that mark had not been re-taken for several corpus updates, so the change reflects the larger corpus.
+- `test_lorentzian_majority`, `test_lorentzian_evidence`, `test_axiom_guard`, `test_connected_machine` and the fast-search tests all pass when run by hand. pytest can't be installed here, so the full test-suite sign-off is still owed, as in earlier rounds.
 
-**Documents:** the write-up is `studies/LORENTZIAN_EVIDENCE_STUDY.md`. STATUS, MASTER_PLAN, SYSTEM, WHITEBOARD, the academic paper (§20.55–20.56) and `tests/README.md` are updated and stamped 23 October 2026.
-
-**Checks:** I re-took the stale stored measurements, including the two answer censuses. The figures did not change, except for counts that grew with the corpus. After `corpus --refresh`, `corpus --check` reports current. The test-file sign-off (`signoff --close`) is still owed because pytest cannot be installed here. All work is committed and pushed, and the Properties table lists the six proved theorems and three definitions.
+**Records updated:** `STATUS.md` (the "Just closed" paragraph, item 11, a new §2.2 line), `MASTER_PLAN.md` (Phase 184), `SYSTEM.md`, the academic paper (§20.57 and result 48), `WHITEBOARD.md` and `tests/README.md`. The proved theorems and the rule's definition are registered in the Properties table. All work is committed and pushed.

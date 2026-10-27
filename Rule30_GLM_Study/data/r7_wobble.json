@@ -1,0 +1,45 @@
+{
+  "wobble_insight": "Boolean, SINE, COSINE are regimes of the wobble (delta-sigma modulator)",
+  "accumulator_analysis": {
+    "D_at_milestones": {
+      "10": 4,
+      "100": 4,
+      "1000": -38,
+      "10000": 64,
+      "100000": 196,
+      "1000000": 1536
+    },
+    "growth_slope": 0.7992449061835303,
+    "max_D_by_window": {
+      "[0,100)": 10,
+      "[100,1000)": 44,
+      "[1000,10000)": 80,
+      "[10000,100000)": 419,
+      "[100000,1000000)": 1744
+    }
+  },
+  "wobble_spectrum": {
+    "n_positive_steps": 500768,
+    "n_negative_steps": 499232,
+    "net_drift": 1536,
+    "ratio_at_milestones": {
+      "100": 0.4,
+      "1000": 1.2016655108639842,
+      "10000": 0.64,
+      "100000": 0.6198064213930023,
+      "1000000": 1.536
+    }
+  },
+  "comparison_with_true_delta_sigma": {
+    "true_ds_max_acc": 1,
+    "rule30_max_acc": 1744,
+    "rule30_max_acc_over_sqrt_n": 1.744
+  },
+  "accumulator_autocorrelation": {
+    "1": 0.9999975476141585,
+    "10": 0.9999754791498995,
+    "100": 0.9997567271250053,
+    "1000": 0.9975072146252538,
+    "10000": 0.9761219160222564
+  }
+}

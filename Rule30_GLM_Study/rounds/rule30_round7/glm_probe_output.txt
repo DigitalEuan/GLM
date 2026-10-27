@@ -1,0 +1,30 @@
+========================================================================
+Q: is it true that the rule 30 centre column is eventually periodic
+A: The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum', 'carrier', 'locate', 'hole'].
+========================================================================
+Q: does it hold that the frequency of black cells in rule 30 tends to one half
+A: The query was not recognised as any of ['verify', 'analogy', 'describe', 'nearest', 'product', 'cluster', 'spatial', 'project', 'trilinear', 'coherence', 'report', 'angle', 'task', 'pi_groups', 'meaning', 'real', 'compare', 'measure', 'comparative', 'derive', 'field', 'ordering', 'extremum', 'carrier', 'locate', 'hole'].
+========================================================================
+Q: describe rule 30
+A: unsolved: resolve: 'rule 30' names no carrier in any enabled domain; did you mean ['al2o3', 'alp_ct', 'alp_i', 'alp_o', 'c_0']?
+========================================================================
+Q: explain cellular automaton
+A: unsolved: resolve: 'cellular automaton' names no carrier in any enabled domain
+========================================================================
+Q: what is the centre column
+A: unsolved: resolve: 'centre column' names no carrier in any enabled domain
+========================================================================
+Q: report golay decoding
+A: report golay decoding: 4096 cosets, 12951 leaders, unique below weight 4 and a sextet of six at weight 4; S(5,8,24) verified on 42504 five-subsets, so weight-5 miscorrection is a theorem, not a bug
+========================================================================
+Q: report capabilities
+A: report capabilities: 33 probes, 20 hold, 13 break, 0 errored; surprises none
+========================================================================
+Q: report lean
+A: report lean: 5952 declarations of the Lean development carry a deterministic Leech address, read back exactly 5952/5952 times with 0 coordinate errors; 5127 addresses are distinct and the quantiser adds no conflation of its own; the nearest declaration by address shares a file 1239 times against 29 for a SHA-256 control and a chance rate of 12101/2213772
+========================================================================
+Q: compare sqrt(2) and 7/5
+A: sqrt(2) > 7/5
+========================================================================
+Q: approximate sqrt(2) to precision 10
+A: unsolved: parse_real: 'sqrt(2) to precision 10' is not a notation this module reads; it understands sqrt(<rational>), pi, e, phi, <integer>, <numerator>/<denominator>, and any arithmetic combination of those, e.g. (1+sqrt(5))/2 or pi/4.  The expression grammar stopped with: parse_expression: 'sqrt(2) to precision 10' -- 'to' is left over after a complete expression

@@ -1,0 +1,1053 @@
+{
+ "v15": {
+  "seconds": 26.6,
+  "score": {
+   "overclaim": 15,
+   "right": 4,
+   "wrong": 5
+  },
+  "rows": [
+   [
+    "H02",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H03",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H11",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H16",
+    true,
+    true,
+    "right"
+   ],
+   [
+    "H17",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H19",
+    false,
+    true,
+    "wrong"
+   ],
+   [
+    "H23",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H24",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H25",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H26",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H27",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H28",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H29",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H30",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H31",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H32",
+    false,
+    true,
+    "wrong"
+   ],
+   [
+    "H33",
+    false,
+    true,
+    "wrong"
+   ],
+   [
+    "H34",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H35",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H36",
+    false,
+    true,
+    "wrong"
+   ],
+   [
+    "H39",
+    false,
+    true,
+    "wrong"
+   ],
+   [
+    "H40",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H41",
+    false,
+    false,
+    "right"
+   ],
+   [
+    "H44",
+    true,
+    true,
+    "right"
+   ]
+  ],
+  "statuses": {
+   "H01": "refuted-heldout",
+   "H02": "survives",
+   "H03": "survives",
+   "H04": "refuted-heldout",
+   "H05": "survives",
+   "H06": "refuted-by-prediction",
+   "H07": "refuted-heldout",
+   "H08": "law-holds",
+   "H09": "prediction-confirmed",
+   "H10": "survives",
+   "H11": "open",
+   "H12": "refuted-heldout",
+   "H13": "survives",
+   "H14": "survives",
+   "H15": "survives",
+   "H16": "survives",
+   "H17": "survives",
+   "H18": "refuted-heldout",
+   "H19": "survives",
+   "H20": "survives",
+   "H21": "refuted-heldout",
+   "H22": "law-holds",
+   "H23": "survives",
+   "H24": "survives",
+   "H25": "survives",
+   "H26": "survives",
+   "H27": "survives",
+   "H28": "survives",
+   "H29": "survives",
+   "H30": "survives",
+   "H31": "survives",
+   "H32": "survives",
+   "H33": "survives",
+   "H34": "survives",
+   "H35": "survives",
+   "H36": "survives",
+   "H37": "refuted-heldout",
+   "H38": "refuted-by-guard",
+   "H39": "survives",
+   "H40": "survives",
+   "H41": "refuted-by-guard",
+   "H42": "refuted-by-guard",
+   "H43": "refuted-by-guard",
+   "H44": "law-holds",
+   "H45": "refuted-by-guard",
+   "H46": "refuted-by-guard",
+   "H47": "survives",
+   "H48": "refuted-heldout",
+   "H49": "refuted-by-guard",
+   "H50": "refuted-by-guard"
+  },
+  "n_hypotheses": 50
+ },
+ "v16": {
+  "seconds": 26.6,
+  "score": {
+   "overclaim": 15,
+   "right": 4,
+   "wrong": 5
+  },
+  "rows": [
+   [
+    "H02",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H03",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H11",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H16",
+    true,
+    true,
+    "right"
+   ],
+   [
+    "H17",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H19",
+    false,
+    true,
+    "wrong"
+   ],
+   [
+    "H23",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H24",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H25",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H26",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H27",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H28",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H29",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H30",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H31",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H32",
+    false,
+    true,
+    "wrong"
+   ],
+   [
+    "H33",
+    false,
+    true,
+    "wrong"
+   ],
+   [
+    "H34",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H35",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H36",
+    false,
+    true,
+    "wrong"
+   ],
+   [
+    "H39",
+    false,
+    true,
+    "wrong"
+   ],
+   [
+    "H40",
+    null,
+    true,
+    "overclaim"
+   ],
+   [
+    "H41",
+    false,
+    false,
+    "right"
+   ],
+   [
+    "H44",
+    true,
+    true,
+    "right"
+   ]
+  ],
+  "statuses": {
+   "H01": "refuted-heldout",
+   "H02": "survives",
+   "H03": "survives",
+   "H04": "refuted-heldout",
+   "H05": "survives",
+   "H06": "refuted-by-prediction",
+   "H07": "refuted-heldout",
+   "H08": "law-holds",
+   "H09": "prediction-confirmed",
+   "H10": "survives",
+   "H11": "open",
+   "H12": "refuted-heldout",
+   "H13": "survives",
+   "H14": "survives",
+   "H15": "survives",
+   "H16": "survives",
+   "H17": "survives",
+   "H18": "refuted-heldout",
+   "H19": "survives",
+   "H20": "survives",
+   "H21": "refuted-heldout",
+   "H22": "law-holds",
+   "H23": "survives",
+   "H24": "survives",
+   "H25": "survives",
+   "H26": "survives",
+   "H27": "survives",
+   "H28": "survives",
+   "H29": "survives",
+   "H30": "survives",
+   "H31": "survives",
+   "H32": "survives",
+   "H33": "survives",
+   "H34": "survives",
+   "H35": "survives",
+   "H36": "survives",
+   "H37": "refuted-heldout",
+   "H38": "refuted-by-guard",
+   "H39": "survives",
+   "H40": "survives",
+   "H41": "refuted-by-guard",
+   "H42": "refuted-by-guard",
+   "H43": "refuted-by-guard",
+   "H44": "law-holds",
+   "H45": "refuted-by-guard",
+   "H46": "refuted-by-guard",
+   "H47": "survives",
+   "H48": "refuted-heldout",
+   "H49": "refuted-by-guard",
+   "H50": "refuted-by-guard"
+  },
+  "n_hypotheses": 50
+ },
+ "v17 without ledger gate": {
+  "seconds": 35.1,
+  "score": {
+   "right": 20,
+   "abstain": 4
+  },
+  "rows": [
+   [
+    "H02",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H03",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H11",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H16",
+    true,
+    null,
+    "abstain"
+   ],
+   [
+    "H17",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H19",
+    false,
+    false,
+    "right"
+   ],
+   [
+    "H23",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H24",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H25",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H26",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H27",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H28",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H29",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H30",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H31",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H32",
+    false,
+    null,
+    "abstain"
+   ],
+   [
+    "H33",
+    false,
+    null,
+    "abstain"
+   ],
+   [
+    "H34",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H35",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H36",
+    false,
+    false,
+    "right"
+   ],
+   [
+    "H39",
+    false,
+    false,
+    "right"
+   ],
+   [
+    "H40",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H41",
+    false,
+    false,
+    "right"
+   ],
+   [
+    "H44",
+    true,
+    null,
+    "abstain"
+   ]
+  ],
+  "statuses": {
+   "H01": "refuted-heldout",
+   "H02": "survives-to",
+   "H03": "survives-to",
+   "H04": "refuted-heldout",
+   "H05": "survives-to",
+   "H06": "refuted-by-prediction",
+   "H07": "refuted-heldout",
+   "H08": "survives-to",
+   "H09": "survives-to",
+   "H10": "survives-to",
+   "H11": "open",
+   "H12": "refuted-heldout",
+   "H13": "survives-to",
+   "H14": "survives-to",
+   "H15": "survives-to",
+   "H16": "survives-to",
+   "H17": "survives-to",
+   "H18": "refuted-heldout",
+   "H19": "refuted-on-escalation",
+   "H20": "survives-to",
+   "H21": "refuted-heldout",
+   "H22": "survives-to",
+   "H23": "untested",
+   "H24": "untested",
+   "H25": "untested",
+   "H26": "untested",
+   "H27": "untested",
+   "H28": "untested",
+   "H29": "untested",
+   "H30": "estimate",
+   "H31": "untested",
+   "H32": "unchecked-implication",
+   "H33": "unchecked-implication",
+   "H34": "untested",
+   "H35": "measured",
+   "H36": "refuted-by-recompute",
+   "H37": "refuted-heldout",
+   "H38": "refuted-by-guard",
+   "H39": "refuted-on-escalation",
+   "H40": "untested",
+   "H41": "refuted-by-guard",
+   "H42": "refuted-heldout",
+   "H43": "retracted",
+   "H44": "survives-to",
+   "H45": "refuted-by-guard",
+   "H46": "refuted-by-guard",
+   "H47": "refuted-on-escalation",
+   "H48": "refuted-heldout",
+   "H49": "refuted-by-guard",
+   "H50": "refuted-by-guard",
+   "H51": "verified-exact"
+  },
+  "n_hypotheses": 51,
+  "consistency": {
+   "spoken": 18,
+   "spoken_not_speakable": [],
+   "spoken_without_backing": [],
+   "ok": true
+  },
+  "conflicts": [],
+  "shape_violations": []
+ },
+ "v17 automatic claim classes": {
+  "seconds": 27.4,
+  "score": {
+   "right": 24
+  },
+  "rows": [
+   [
+    "H02",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H03",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H11",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H16",
+    true,
+    true,
+    "right"
+   ],
+   [
+    "H17",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H19",
+    false,
+    false,
+    "right"
+   ],
+   [
+    "H23",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H24",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H25",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H26",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H27",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H28",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H29",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H30",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H31",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H32",
+    false,
+    false,
+    "right"
+   ],
+   [
+    "H33",
+    false,
+    false,
+    "right"
+   ],
+   [
+    "H34",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H35",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H36",
+    false,
+    false,
+    "right"
+   ],
+   [
+    "H39",
+    false,
+    false,
+    "right"
+   ],
+   [
+    "H40",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H41",
+    false,
+    false,
+    "right"
+   ],
+   [
+    "H44",
+    true,
+    true,
+    "right"
+   ]
+  ],
+  "statuses": {
+   "H01": "refuted-heldout",
+   "H02": "survives-to",
+   "H03": "survives-to",
+   "H04": "refuted-heldout",
+   "H05": "proved",
+   "H06": "refuted-by-prediction",
+   "H07": "refuted-heldout",
+   "H08": "proved",
+   "H09": "proved",
+   "H10": "proved",
+   "H11": "open",
+   "H12": "refuted-heldout",
+   "H13": "proved",
+   "H14": "proved",
+   "H15": "proved",
+   "H16": "proved",
+   "H17": "survives-to",
+   "H18": "refuted-heldout",
+   "H19": "refuted-on-escalation",
+   "H20": "survives-to",
+   "H21": "refuted-heldout",
+   "H22": "proved",
+   "H23": "untested",
+   "H24": "untested",
+   "H25": "untested",
+   "H26": "untested",
+   "H27": "untested",
+   "H28": "untested",
+   "H29": "open",
+   "H30": "estimate",
+   "H31": "unchecked-implication",
+   "H32": "refuted-by-ledger",
+   "H33": "refuted-by-ledger",
+   "H34": "untested",
+   "H35": "measured",
+   "H36": "refuted-by-recompute",
+   "H37": "refuted-heldout",
+   "H38": "refuted-by-guard",
+   "H39": "refuted-on-escalation",
+   "H40": "untested",
+   "H41": "refuted-by-guard",
+   "H42": "refuted-heldout",
+   "H43": "retracted",
+   "H44": "proved",
+   "H45": "refuted-by-guard",
+   "H46": "refuted-by-guard",
+   "H47": "untested",
+   "H48": "refuted-heldout",
+   "H49": "refuted-by-guard",
+   "H50": "refuted-by-guard",
+   "H51": "verified-exact"
+  },
+  "n_hypotheses": 51
+ },
+ "v17": {
+  "seconds": 27.9,
+  "score": {
+   "right": 24
+  },
+  "rows": [
+   [
+    "H02",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H03",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H11",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H16",
+    true,
+    true,
+    "right"
+   ],
+   [
+    "H17",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H19",
+    false,
+    false,
+    "right"
+   ],
+   [
+    "H23",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H24",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H25",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H26",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H27",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H28",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H29",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H30",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H31",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H32",
+    false,
+    false,
+    "right"
+   ],
+   [
+    "H33",
+    false,
+    false,
+    "right"
+   ],
+   [
+    "H34",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H35",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H36",
+    false,
+    false,
+    "right"
+   ],
+   [
+    "H39",
+    false,
+    false,
+    "right"
+   ],
+   [
+    "H40",
+    null,
+    null,
+    "right"
+   ],
+   [
+    "H41",
+    false,
+    false,
+    "right"
+   ],
+   [
+    "H44",
+    true,
+    true,
+    "right"
+   ]
+  ],
+  "statuses": {
+   "H01": "refuted-heldout",
+   "H02": "survives-to",
+   "H03": "survives-to",
+   "H04": "refuted-heldout",
+   "H05": "proved",
+   "H06": "refuted-by-prediction",
+   "H07": "refuted-heldout",
+   "H08": "proved",
+   "H09": "proved",
+   "H10": "proved",
+   "H11": "open",
+   "H12": "refuted-heldout",
+   "H13": "proved",
+   "H14": "proved",
+   "H15": "proved",
+   "H16": "proved",
+   "H17": "survives-to",
+   "H18": "refuted-heldout",
+   "H19": "refuted-on-escalation",
+   "H20": "survives-to",
+   "H21": "refuted-heldout",
+   "H22": "proved",
+   "H23": "untested",
+   "H24": "untested",
+   "H25": "untested",
+   "H26": "untested",
+   "H27": "untested",
+   "H28": "untested",
+   "H29": "untested",
+   "H30": "estimate",
+   "H31": "untested",
+   "H32": "refuted-by-ledger",
+   "H33": "refuted-by-ledger",
+   "H34": "untested",
+   "H35": "measured",
+   "H36": "refuted-by-recompute",
+   "H37": "refuted-heldout",
+   "H38": "refuted-by-guard",
+   "H39": "refuted-on-escalation",
+   "H40": "untested",
+   "H41": "refuted-by-guard",
+   "H42": "refuted-heldout",
+   "H43": "retracted",
+   "H44": "proved",
+   "H45": "refuted-by-guard",
+   "H46": "refuted-by-guard",
+   "H47": "refuted-on-escalation",
+   "H48": "refuted-heldout",
+   "H49": "refuted-by-guard",
+   "H50": "refuted-by-guard",
+   "H51": "verified-exact"
+  },
+  "n_hypotheses": 51,
+  "consistency": {
+   "spoken": 18,
+   "spoken_not_speakable": [],
+   "spoken_without_backing": [],
+   "ok": true
+  },
+  "conflicts": [],
+  "shape_violations": []
+ },
+ "_alignment_ok": true,
+ "_misaligned": []
+}

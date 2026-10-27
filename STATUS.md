@@ -92,7 +92,21 @@ counts a smaller corpus than this working tree does.
 Every part of the owner's plan of 19 October 2026 has been taken (§2.0); the
 next round starts from §2.1.
 
-**Just closed: Phase 183 — the Lorentzian evidence space** (23 October 2026;
+**Just closed: Phase 184 — the declared majority rule** (23 October 2026;
+[`LORENTZIAN_MAJORITY_STUDY.md`](studies/LORENTZIAN_MAJORITY_STUDY.md), record
+in `MASTER_PLAN.md` "Phase 184"), §2.1 item 11's first line.
+`LorentzianMajority.lean` proves that the target a strict majority of the
+weight states is unique (`majority_unique`), that the rule is never wrong while
+the honest examples hold at least half the weight and right above half
+(`majority_never_wrong`, `majority_sound`), that agreeing decoys below half
+carry it (`majority_misled`: the condition is tight), that a wrong answer needs
+decoys weighing at least its own group (`majority_wrong_needs_decoys`), and
+that it answers wherever the dispersion guard does (`majority_extends_guard`).
+In use: `tool majority` (decoy3 155 and decoy5 161 right, 0 wrong, where the
+guard answers none; collude5 refused where the plurality vote is wrong 150
+times; decoy4 0 right where the plurality has 149). 8 of 8 marks.
+
+**Before it, Phase 183 — the Lorentzian evidence space** (23 October 2026;
 [`LORENTZIAN_EVIDENCE_STUDY.md`](studies/LORENTZIAN_EVIDENCE_STUDY.md), record
 in `MASTER_PLAN.md` "Phase 183"), at the owner's request: §2.1 item 11 taken
 further, and the question asked whether the ambiguous space is of use for
@@ -141,15 +155,15 @@ earlier; each is recorded in `MASTER_PLAN.md`.
 | end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->223<!--/figure-->** cases — 0 confidently wrong, every refusal a `boundary` |
 | benchmark suites | `python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites |
 | capability probes | `python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 surprises |
-| Lean development | `lake build` (repository root) | <!--figure:lean-files-->267 Lean files<!--/figure-->, **0 `sorry`** |
+| Lean development | `lake build` (repository root) | <!--figure:lean-files-->268 Lean files<!--/figure-->, **0 `sorry`** |
 | corpus | `python3 -m glm_universal.corpus --check` | the tier contract, the coverage claim of `ENTRY.md`, every generated block and every derived cache |
 
 The package holds **<!--figure:registers-->8 registers<!--/figure-->** beside a 45-class comparison register,
 **<!--figure:query-kinds-->28 query kinds<!--/figure-->** one of which
 dispatches **<!--figure:report-subjects-->67 report subjects<!--/figure-->**, and 3 tasks. The Lean development is
 addressed declaration by declaration: `reasoning/lean_address.py` gives each of
-the <!--figure:lean-declarations-->6,202<!--/figure--> declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly <!--figure:lean-declarations-->6,202<!--/figure-->/<!--figure:lean-declarations-->6,202<!--/figure--> with 0 coordinate errors
+the <!--figure:lean-declarations-->6,224<!--/figure--> declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly <!--figure:lean-declarations-->6,224<!--/figure-->/<!--figure:lean-declarations-->6,224<!--/figure--> with 0 coordinate errors
 (`report lean`). The other forty-odd instruments, each with its command and its
 current figure, are the table in [`SYSTEM.md`](SYSTEM.md) §1.
 
@@ -397,14 +411,18 @@ lists every stamp and fails on a bad one.
     whether the tick budget is `27` or `24 + 8Q`; both shift every output
     more than κ's digits do (§6).
 
-11. **The Lorentzian evidence space, the rest** (left by Phases 182 and
-    183). The lift is an evidence space in any dimension, the certificate
+11. **The Lorentzian evidence space, the rest** (left by Phases 182,
+    183 and 184). The lift is an evidence space in any dimension, the certificate
     guard and the settling question are in `tool lorentz`, and `tool
     evidence` combines examples of a relation over the physics register
     ([`LORENTZIAN_EVIDENCE_STUDY.md`](studies/LORENTZIAN_EVIDENCE_STUDY.md)
-    §8). Left: a declared majority rule for conflicting examples (the vote
-    answered 155 of 300 right, 0 wrong, where the dispersion guard refused all
-    300), with its own soundness condition; the evidence space on Leech-level
+    §8). Since Phase 184 the majority rule is declared and proved sound while
+    the honest examples hold at least half the weight (`tool majority`;
+    [`LORENTZIAN_MAJORITY_STUDY.md`](studies/LORENTZIAN_MAJORITY_STUDY.md)
+    §7): the condition is the caller's and cannot be read from the targets; a
+    plurality rule for sources whose wrong examples are independent (decoy4's
+    149 right answers) and weights from a source's standing are open. Left
+    too: the evidence space on Leech-level
     address ties (`reasoning/tie_break.py`) and the other 22 deep-hole types;
     holding `tool lorentz`'s five-bit question open across conversation turns
     (as Phase 173 does); and the 27 decoy errors no reading-only rule can
@@ -590,6 +608,15 @@ round from §2.1 or taken as a short round of its own.
   would close the gap between the factorisation and the group element. The
   16-modular-factor cap (lattice reduction past it).
   [`PRIMITIVE_RADICAL_STUDY.md`](studies/PRIMITIVE_RADICAL_STUDY.md) §4.
+* **`report relay` near the evaluation's ceiling** (left by Phase 184). With
+  6,224 Lean declarations `report relay` takes about 230 seconds on its own,
+  most of it the 1,660 ranking queries of the relay study (each a full scan
+  of the address table, the text ranking and the name ranking); on eight
+  evaluation processes it can pass the 300-second ceiling. Phase 184 fixed the
+  same drift in `report lean` (199 → 56 seconds, `nearest_points` pruned on
+  the principal axis); the relay's rankings want the same treatment — an exact
+  pruned `k`-nearest search, or the ranked lists cached by digest — not a
+  higher ceiling.
 * **The router's reach into the Lean tree** (left by Phase 115). Every unit
   that reaches the router takes the whole Lean development through
   `reasoning/lean_address.py`'s tree walker, and the median cost of one Lean

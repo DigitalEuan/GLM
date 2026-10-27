@@ -1,0 +1,49 @@
+=== BEFORE (GLM archive + study overlays of Rounds 10-16) ===
+A. stored ARC tasks (50): RIGHT 0  WRONG 0  REFUSED 50  solved=[]
+B1. development local-rule puzzles (12 instances per family)
+   recolour           RIGHT  0  WRONG  0  REFUSED 12
+   interior           RIGHT  0  WRONG  0  REFUSED 12
+   life               RIGHT  0  WRONG  0  REFUSED 12
+   rule30-rows        RIGHT  0  WRONG  0  REFUSED 12
+   shadow             RIGHT  0  WRONG  0  REFUSED 12
+   between            RIGHT  0  WRONG  0  REFUSED 12
+   shift              RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-mirror     RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-majority   RIGHT  0  WRONG  0  REFUSED 12
+   TOTAL              RIGHT  0  WRONG  0  REFUSED 108
+B2. held-out local-rule puzzles (fresh families and seeds) (12 instances per family)
+   col-rule30         RIGHT  0  WRONG  0  REFUSED 12
+   erase-isolated     RIGHT  0  WRONG  0  REFUSED 12
+   count-colour       RIGHT  0  WRONG  0  REFUSED 12
+   shadow-left        RIGHT  0  WRONG  0  REFUSED 12
+   vertical-between   RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-rotate180  RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-flip-rows  RIGHT  0  WRONG  0  REFUSED 12
+   TOTAL              RIGHT  0  WRONG  0  REFUSED 84
+C. Rule 30 knowledge alignment: 0 / 10  [False, False, False, False, False, False, False, False, False, False]
+D. Round 11 claim suite: SCORE by split: frame: 23/23; heldout: 2/5; refuse: 2/2
+
+=== AFTER (+ Round 28: setup_round28.sh) ===
+A. stored ARC tasks (50): RIGHT 1  WRONG 0  REFUSED 49  solved=['a85d4709']
+B1. development local-rule puzzles (12 instances per family)
+   recolour           RIGHT 12  WRONG  0  REFUSED  0
+   interior           RIGHT  7  WRONG  0  REFUSED  5
+   life               RIGHT  1  WRONG  0  REFUSED 11
+   rule30-rows        RIGHT 11  WRONG  0  REFUSED  1
+   shadow             RIGHT  3  WRONG  0  REFUSED  9
+   between            RIGHT  9  WRONG  1  REFUSED  2
+   shift              RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-mirror     RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-majority   RIGHT  1  WRONG  0  REFUSED 11
+   TOTAL              RIGHT 44  WRONG  1  REFUSED 63
+B2. held-out local-rule puzzles (fresh families and seeds) (12 instances per family)
+   col-rule30         RIGHT 10  WRONG  0  REFUSED  2
+   erase-isolated     RIGHT  1  WRONG  0  REFUSED 11
+   count-colour       RIGHT  6  WRONG  0  REFUSED  6
+   shadow-left        RIGHT  1  WRONG  0  REFUSED 11
+   vertical-between   RIGHT  6  WRONG  0  REFUSED  6
+   CONTROL-rotate180  RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-flip-rows  RIGHT  0  WRONG  0  REFUSED 12
+   TOTAL              RIGHT 24  WRONG  0  REFUSED 60
+C. Rule 30 knowledge alignment: 10 / 10  [True, True, True, True, True, True, True, True, True, True]
+D. Round 11 claim suite: SCORE by split: frame: 23/23; heldout: 2/5; refuse: 2/2

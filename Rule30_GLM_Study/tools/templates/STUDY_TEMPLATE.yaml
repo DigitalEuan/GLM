@@ -1,0 +1,81 @@
+schema: glm-study/v1
+id: example
+path: studies/EXAMPLE_STUDY.md
+title: Example — a new GLM study
+kind: study
+archive: false
+tier0:
+  question: TODO — what question does this study answer? One sentence.
+  verdict: TODO — the answer, in one sentence, grounded in the body below.
+  figure: TODO — the single figure that decides the verdict.
+  recomputed: TODO — `glm_universal.<module>.<function>`, or (hand-written argument; nothing to recompute)
+last_altered: null
+summary: TODO — the question, why it matters, and what would count as an answer.
+tags: []
+sections:
+  - heading: Tier 0 — the coarse read
+    anchor: tier-0-the-coarse-read
+    role: tier0
+    body: |
+      **Question.** TODO — what question does this study answer? One sentence.
+
+      **Verdict.** TODO — the answer, in one sentence, grounded in the body below.
+
+      **Deciding figure.** TODO — the single figure that decides the verdict.
+
+      **Recomputed by.** TODO — `glm_universal.<module>.<function>`, or (hand-written argument; nothing to recompute)
+
+      *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
+    subsections: []
+    tables: []
+    links: []
+    code_blocks: 0
+  - heading: 1. The question this answers
+    anchor: "1-the-question-this-answers"
+    body: |
+      TODO — the question, why it matters, and what would count as an answer.
+    subsections: []
+    tables: []
+    links: []
+    code_blocks: 0
+  - heading: 2. What was found
+    anchor: "2-what-was-found"
+    body: |
+      TODO — the result, every figure recomputed by the code that reports it.
+    subsections: []
+    tables: []
+    links: []
+    code_blocks: 0
+  - heading: 3. What is machine-checked
+    anchor: "3-what-is-machine-checked"
+    body: |
+      TODO — the Lean files and declarations that prove the claims above, and what they do not cover.
+    subsections: []
+    tables: []
+    links: []
+    code_blocks: 0
+  - heading: 4. Where it is reachable
+    anchor: "4-where-it-is-reachable"
+    body: |
+      TODO — the modules, functions and commands that reproduce each figure.
+    subsections: []
+    tables: []
+    links: []
+    code_blocks: 0
+  - heading: 5. What this leaves open
+    anchor: "5-what-this-leaves-open"
+    body: |
+      TODO — what is not settled, and the measurement that would settle it.
+    subsections: []
+    tables: []
+    links: []
+    code_blocks: 0
+derived:
+  links: []
+  lean_files: []
+  lean_modules: []
+  python_modules:
+    - glm_universal.corpus.checks.tier_report
+  commands: []
+  word_count: 191
+  line_count: 33

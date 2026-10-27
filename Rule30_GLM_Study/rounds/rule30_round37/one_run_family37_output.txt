@@ -1,0 +1,22 @@
+# Round 37, To Do 39: hubs 1^(q-1)0, q = 2..20, d <= 30 (EMP, exact search)
+# q word slack argmax_d | band d<=q-4: max excess (proved <= 2) | outside band: max excess
+q=2 word=1 slack=5 at d=11 | band max None (consistent) | outside band max 5
+q=3 word=3 slack=3 at d=3 | band max None (consistent) | outside band max 3
+q=4 word=7 slack=5 at d=8 | band max None (consistent) | outside band max 5
+q=5 word=15 slack=4 at d=24 | band max 0 (consistent) | outside band max 4
+q=6 word=31 slack=4 at d=12 | band max 2 (consistent) | outside band max 4
+q=7 word=63 slack=6 at d=23 | band max 2 (consistent) | outside band max 6
+q=8 word=127 slack=3 at d=16 | band max 2 (consistent) | outside band max 3
+q=9 word=255 slack=6 at d=29 | band max 2 (consistent) | outside band max 6
+q=10 word=511 slack=5 at d=27 | band max 2 (consistent) | outside band max 5
+q=11 word=1023 slack=6 at d=8 | band max 2 (consistent) | outside band max 6
+q=12 word=2047 slack=3 at d=30 | band max 2 (consistent) | outside band max 3
+q=13 word=4095 slack=7 at d=22 | band max 2 (consistent) | outside band max 7
+q=14 word=8191 slack=6 at d=16 | band max 2 (consistent) | outside band max 6
+q=15 word=16383 slack=5 at d=24 | band max 2 (consistent) | outside band max 5
+q=16 word=32767 slack=6 at d=23 | band max 2 (consistent) | outside band max 6
+q=17 word=65535 slack=4 at d=14 | band max 2 (consistent) | outside band max 4
+q=18 word=131071 slack=5 at d=23 | band max 2 (consistent) | outside band max 5
+q=19 word=262143 slack=5 at d=16 | band max 2 (consistent) | outside band max 5
+q=20 word=524287 slack=4 at d=21 | band max 2 (consistent) | outside band max 4
+# largest slack over the family on this range: 7

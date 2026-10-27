@@ -1,0 +1,378 @@
+====================================================================================================
+Q: tool next
+SURFACE toolbox
+QUERY   tool next
+ANSWER  NEXT (Round 33; frontier GLM.Rule30.TestCountData.frontier_round33; narrowest open rungs: HalfLineDies2, TestCountLinear2, AmortizedHalving241)
+PICK 1: To Do 35 — Does period 4 have a finite observer-clock slack? [EMP -> Lean, open]
+  COLUMN 1 — LANGUAGE
+    Take this now because it bears on the narrowest rung TestCountLinear2, and its next step is finite (cost 2): run the exact longest-life search for the words 0111, 1110, 1101, 1011 to d = 40 and certify any new record as a refutation like not_testCountLinear_four_six.
+  COLUMN 2 — MATHEMATICS
+    target: TestCountLinear 4 c for some c, or a family of codes refuting every c (the three-black words 0111, 1110, 1101 keep raising the excess: 7 at d = 30)
+    starts from: GLM.Rule30.TestCountData.frontier_round33
+  COLUMN 3 — SCRIPT
+    gcc -O2 -o word_lifetimes33 scripts/word_lifetimes33.c && ./word_lifetimes33 4 40 4 1
+PICK 2: To Do 29 — The sideways reader for period 2 [Lean, partly R33]
+  COLUMN 1 — LANGUAGE
+    Take this now because it bears on the narrowest rung HalfLineDies2, and its next step is finite (cost 3): search low-degree Boolean invariants of consecutive column pairs of the reconstruction in the free bits (columns 1-5 are in closed form: SidewaysTwo.col2_even ... col5_even).
+  COLUMN 2 — MATHEMATICS
+    target: an invariant of the sideways map, preserved for admissible inputs, that excludes finite rows
+    starts from: GLM.Rule30.TestCountData.frontier_round33
+  COLUMN 3 — SCRIPT
+    python3 scripts/sideways_period_two.py
+PICK 3: To Do 34 — Halving on the observer's clock [EMP -> Lean, partly R33]
+  COLUMN 1 — LANGUAGE
+    Take this now because it bears on the narrowest rung TestCountLinear2, and its next step is finite (cost 3): extend the halving certificates (period 2 beyond d = 18, period 3 with its growing excess) and find a per-test halving mechanism; TestHalving.lean, TestHalvingData.lean.
+  COLUMN 2 — MATHEMATICS
+    target: TestHalving p e: for every word of period p, at most 2^(d-1+e) / 2^m codes of length d are alive m tests after the edge (implies TestCountLinear p (e + 1))
+    starts from: GLM.Rule30.TestCountData.frontier_round33
+  COLUMN 3 — SCRIPT
+    gcc -O2 -o test_halving34 scripts/test_halving34.c && ./test_halving34 4 24
+ASK  To Do 32 — The geometry side of the M24 idea: which 24-site geometry (diamond supercell shape, lattice, ARC grid) should be laid out?
+REFUSED  To Do 1 — Period-2 rung, uniformly in d: no finite step is licensed (target: HalfLineDies 2 (or TestCountLinear 2 c, AmortizedHalving 2 c e, HalfLineLinear 2 a b for all d)); it needs an idea, not more search
+REFUSED  To Do 5 — The strobe lens, one stride at a time: no finite step is licensed (target: SeedAPBalanced for one stride); it needs an idea, not more search
+REFUSED  To Do 13 — The automaticity rung: no finite step is licensed (target: CentreNotTwoAutomatic (an infinite 2-kernel)); it needs an idea, not more search
+REFUSED  To Do 14 — The OR-type class: no finite step is licensed (target: non-periodicity of one centre column among wheels 30, 45, 75, 135); it needs an idea, not more search
+REFUSED  To Do 16 — The tuning excess: no finite step is licensed (target: any EchoLogBound a b for all n); it needs an idea, not more search
+REFUSED  To Do 20 — A useful finite quotient: no finite step is licensed (target: a measure on the prefix tree); it needs an idea, not more search
+====================================================================================================
+Q: tool theorem derive HalfLineDies4 => HalfLineDies2
+SURFACE toolbox
+QUERY   tool theorem derive HalfLineDies4 => HalfLineDies2
+REFUSED refused: HalfLineDies4 is not a statement of the wheel
+ALIGNMENT FAIL: expects `halfLineDies_of_dvd`
+====================================================================================================
+Q: tool theorem derive TestCountLinear4 => TestCountLinear2
+SURFACE toolbox
+QUERY   tool theorem derive TestCountLinear4 => TestCountLinear2
+ANSWER  TestCountLinear4 => TestCountLinear2: NOT DERIVABLE from the declared spokes (this is not a proof that it fails)
+ALIGNMENT FAIL: expects `testCountLinear_of_dvd`
+====================================================================================================
+Q: tool theorem derive TestCountLinear2 => TestCountLinear4
+SURFACE toolbox
+QUERY   tool theorem derive TestCountLinear2 => TestCountLinear4
+ANSWER  TestCountLinear2 => TestCountLinear4: NOT DERIVABLE from the declared spokes (this is not a proof that it fails)
+ALIGNMENT PASS: expects `NOT DERIVABLE`
+====================================================================================================
+Q: tool discuss does period 8 need observer clock slack at least 7
+SURFACE toolbox
+QUERY   tool discuss does period 8 need observer clock slack at least 7
+ANSWER  READING  form=bound; property=periodicity | scores P1:3 | target P1
+STAGE 1 BROAD     target P1: the centre column is not eventually periodic (Problem 1) [OPEN]; 43 readings through 16 lenses
+STAGE 2 LENSES    (= restatement, <= sufficient, part = proved partial result, x = blocked by a negative control)
+  [algebraic (ANF)]
+    x  DegreeFormula does not give P1: every property of the n-step maps holds for the all-white row too, whose centre column is periodic [map_properties_cannot_decide_periodicity]
+  [boundary / prefix]
+    x  FinitePrefix does not give P1: every finite prefix extends to an eventually periodic sequence [no_finite_certificate_problem1]
+    x  RightEdgeWhite does not give P1: a right-white row whose centre column is periodic [exists_row_with_periodic_column]
+  [echo (radar)]
+    =  LagMismatchAll: for every lag p >= 1 there are arbitrarily late mismatches a(t+p) != a(t) [problem1_iff_lag_mismatch]
+    <= NoResonance: no lag p >= 1 has a full echo resonance echo(N, p)/N -> 1 [problem1_of_no_resonance]
+  [finite-state observer]
+    =  FSObserversFail: every finite-state observer errs infinitely often [problem1_iff_fsObservers_fail]
+    <= SeedFSTypical: every finite-state observer is right with frequency exactly 1/2 [problems_one_and_two_of_seed_fsTypical]
+  [half-line machine]
+    <= HalfLineDiesAll: for every period p >= 1, every non-white p-periodic drive kills every finite left half-line code (the one-sided target) [problem1_of_halfLineDies]
+    part HalfLineDies1: period 1: the constant black drive kills every code by time d + 2 [FORMAL: halfLineDies_one, constDrive_dies]
+    part PreEdgeIndependent: the tests before the edge are exactly independent: 2^(k - blacks k) codes survive them [FORMAL: survivors_card]
+    part StateNeverRepeats: the half-line state grows by one cell per step, so no state repeats and cycle certificates are vacuous [FORMAL: halfStateD_width, halfStateD_strictMono, window_not_closed]
+    part ProgressMeasuresRefuted: all 8 declared progress measures fail on every window <= 20; width steps <= 17 fail [CERT: ProofRoutesData (Round 27)]
+  [half-line machine (sideways)]
+    <= HalfLineDiesSideways: for every non-white periodic drive word, no admissible first column (u t = !bd (t+1) at black times) reconstructs a finite non-empty row: the half-line target read sideways, from the column outwards [halfLineDies_iff_sideways ; problem1_of_halfLineDies]
+    part InfiniteRowsSurvive: on infinite rows the driven machine survives forever under every drive, so the finiteness of the row is essential [FORMAL: infinite_row_survives, survivor_for_every_horizon]
+    part SidewaysPeriodTwoColumns: period 2 read sideways: column 2 repeats each free bit twice, column 3 is column 2 negated half a period later, column 5 returns to the free bit; a survivor has bit 0 black, bit 2 = not bit 1, bit 4 = bit 2 [FORMAL: SidewaysTwo.col2_even, col3_odd, col5_even, survivor_bits_period_two]
+  [measure]
+    part AlmostEveryRowTypical: for almost every initial row every column is finite-state typical [FORMAL: ae_fsTypical]
+  [observer clock (tests)]
+    <= TestCountLinearAll: for every period p some slack c_p: every code of length d fails within d + c_p tests of every non-white word of period p [problem1_of_testCountLinear]
+    <= TestHalvingAll: for every period p some excess e_p: after n tests at most 2^(d-1+e_p) / 2^n codes of length d are alive [problem1_of_testHalving]
+    part TestCountLinear1: period 1 on the observer's clock: every code of length d fails within d + 2 tests of the constant black drive (exact slack 2) [FORMAL: testCountLinear_one, TestCountData.not_testCountLinear_one_one]
+    part TestCountSlackGrows: the observer-clock slack must grow with the period: a steered word of period 2m+1 lets the code 1 pass m tests, so c_p >= m - 1; no uniform slack exists [FORMAL: not_testCountBound, exists_word_passing_tests, testCountLinear_slack_ge]
+    part PeriodFourSlackAtLeast7: period 4 needs observer-clock slack >= 7: the code 974520100 (d = 30) passes the first 36 tests of 0111 [CERT: TestCountData.not_testCountLinear_four_six, TestHalvingData.not_testHalving_four_six]
+  [off-centre observer]
+    <= OtherColumnPeriodic: some column c != 0 of the seed pattern is eventually periodic [problem1_of_other_periodic_column]
+    part AtMostOnePeriodicColumn: at most one column of the seed pattern is eventually periodic [FORMAL: seed_at_most_one_periodic_column]
+    part OffCentrePair: for c != 0, columns 0 and c are not both eventually periodic [FORMAL: offCentre_pair_problem1]
+  [power-series ladder]
+    =  HankelInfinitelyOften: infinitely many Hankel determinants of the centre column are non-zero [problem1IffHankelInfinitelyOften]
+  [propose-and-check loop]
+    =  EveryProposalRefuted: every proposal 'the centre column has period p from time N' is eventually refuted by an observation [problem1_iff_every_proposal_refuted]
+    part LoopHorizon1: the proposal 'constant from time N' is refuted by time 4N + 6 [FORMAL: refutation_horizon_one]
+  [read angle (diagonals)]
+    part RightDiagonalsPeriodic: every right diagonal is periodic (power-of-two periods) [FORMAL: rdiag_periodic]
+    part LeftDiagonalsPeriodic: every left diagonal is eventually periodic (power-of-two periods) [FORMAL: ldiag_eventually_periodic]
+  [stack lift (every row)]
+    <= LeftWhiteAperiodicAll: for every period p >= 1, no column of any left-white row (white left of a black cell) is eventually p-periodic [problem1_of_leftWhiteAperiodicAll]
+    <= RunBoundsAll: for every period p >= 1 there is a run bound B_p: a column at distance d from the edge of a left-white row stays p-periodic for at most B_p(d) steps [leftWhiteAperiodicAll_iff_runBoundsAll ; problem1_of_leftWhiteAperiodicAll]
+    part LeftWhiteStride1: no column of any left-white row is eventually constant [FORMAL: leftWhiteAperiodic_one]
+    part RunBound2Small: period-2 run bounds 1,7,6,5,5,8,9,9 for distances d <= 7, exact, for every left-white row [CERT: runBound_two_upTo_seven, runBound_two_sharp]
+    part RunBoundSmallPeriods: exact run bounds for periods 3..6 at distances d <= 4, for every left-white row [CERT: runBound_small_periods]
+    part RunBound2Upto16: period-2 run bounds 1,7,6,5,5,8,9,9,16,15,14,13,14,16,19,21,25 for distances d <= 16, exact, for every left-white row [CERT: runBound_two_upTo_sixteen, runBound_two_witness]
+  [strobe (clock)]
+    =  StrobesNonconstant: for every stride p >= 1 some phase of the strobe a(p t + r) keeps changing colour [problem1_iff_strobes]
+    <= SeedAPBalanced: every arithmetic progression a(p t + r) has frequency 1/2 [not_eventuallyPeriodic_of_apBalanced]
+    part Stride1Nonconstant: the centre column is not eventually constant (stride 1, period 1) [FORMAL: centerCol_not_eventually_constant]
+    part StrobeTable1e6: the phase wobbles for strides 2..6 to 10^6 (largest D_{3,1} = 1583) [CERT: strobe_wobble_table]
+  [symmetry (M24)]
+    part OnlyRotationsCommute: a permutation of the 24-cell ring commutes with one Rule 30 step on every pattern exactly when it is a rotation (reflections fail: Rule 30 is chiral) [FORMAL: commutes_iff_rot, reflect_not_commutes]
+    part SharedSymmetriesAtMost12: for every labelling of the ring by the Golay code coordinates at most 12 elements of M24 commute with Rule 30 (12 attained; 2 in the GLM labelling) [CERT: shared_card_le_twelve, shared_card_tau0, shared_card_glm]
+  [tuning by ear]
+    =  TuneCostUnbounded: the periodic tuning loop never settles (unbounded tune cost) [problem1_iff_tuneCost_unbounded]
+    <= TuneExcessLog: the longest echo after n notes is at most 2 log2 n + 2 (certified n <= 131072, sharp offset) [problem1_of_tuneExcessLog]
+STAGE 3 NARROW    restatements dropped (proving one is the same task); blocked routes dropped
+  sufficient open hypotheses, weakest first:
+  HalfLineDiesAll (weaker than TestCountLinearAll, TestHalvingAll): for every period p >= 1, every non-white p-periodic drive kills every finite left half-line code (the one-sided target)
+  HalfLineDiesSideways (weaker than TestCountLinearAll, TestHalvingAll): for every non-white periodic drive word, no admissible first column (u t = !bd (t+1) at black times) reconstructs a finite non-empty row: the half-line target read sideways, from the column outwards
+  SeedAPBalanced (weaker than SeedFSTypical): every arithmetic progression a(p t + r) has frequency 1/2
+  TestCountLinearAll (weaker than TestHalvingAll): for every period p some slack c_p: every code of length d fails within d + c_p tests of every non-white word of period p
+  LeftWhiteAperiodicAll: for every period p >= 1, no column of any left-white row (white left of a black cell) is eventually p-periodic
+  NoResonance: no lag p >= 1 has a full echo resonance echo(N, p)/N -> 1
+  OtherColumnPeriodic: some column c != 0 of the seed pattern is eventually periodic
+  RunBoundsAll: for every period p >= 1 there is a run bound B_p: a column at distance d from the edge of a left-white row stays p-periodic for at most B_p(d) steps
+  SeedFSTypical: every finite-state observer is right with frequency exactly 1/2
+  TestHalvingAll: for every period p some excess e_p: after n tests at most 2^(d-1+e_p) / 2^n codes of length d are alive
+  TuneExcessLog: the longest echo after n notes is at most 2 log2 n + 2 (certified n <= 131072, sharp offset)
+  strictly weaker: SeedAPBalanced =/=> SeedFSTypical [exists_apBalanced_not_fsTypical: a doubled typical sequence is AP-balanced, yet the observer 'repeat the last bit at odd times' is right 3/4 of the time]
+  route  LeftWhiteAperiodicAll -> P1
+  route  NoResonance -> P1
+  route  OtherColumnPeriodic -> P1
+  route  RunBoundsAll -> P1
+  ARROW  SeedFSTypical -> SeedAPBalanced -> P1
+  ARROW  TestHalvingAll -> HalfLineDiesAll -> P1
+  ARROW  TestHalvingAll -> HalfLineDiesSideways -> P1
+  ARROW  TestHalvingAll -> TestCountLinearAll -> HalfLineDiesAll -> P1
+  ARROW  TestHalvingAll -> TestCountLinearAll -> HalfLineDiesSideways -> P1
+  route  TuneExcessLog -> P1
+  (each -> is a proved implication; the arrow runs from the strong end towards the target)
+STAGE 4 EVIDENCE
+  HalfLineDiesSideways: FORMAL exact equivalence halfLineDies_iff_sideways
+  HalfLineDiesSideways: FORMAL period 1 in one line, halfLineDies_one_sideways
+  SeedAPBalanced: CERT strobe_wobble_table: 20 phase wobbles for p = 2..6 to 10^6; largest D_{3,1} = 1583 (z = 2.7 for a fair coin)
+  SeedAPBalanced: EMP r12_lens_survey: 135 phases p <= 16 to 10^7, max |z| = 2.68 (control coin 2.60); D_{3,1} falls back to z = 1.8 at 10^7: a fluctuation, not a drift
+  TestCountLinearAll: EMP per-period maxima of tests - d over the words tried (one word per rotation class for p >= 5): p = 1..8 gives 2, 5, 8, 7, 4, 7, 8, 11
+  TestCountLinearAll: FORMAL lower bound c_p >= m - 1 for p = 2m + 1 (testCountLinear_slack_ge)
+  LeftWhiteAperiodicAll: CERT runBound_two_upTo_seven / runBound_small_periods: exact run bounds, all left-white rows
+  LeftWhiteAperiodicAll: EMP r13_periodic_runs: exact longest runs for p <= 6 at d <= 7-9; the period-2 search relaxation dies within about 1.6 d + 4 steps for every d <= 24
+  NoResonance: EMP r12_lens_survey: echo at lags 1..64 to 10^7, max |z| = 2.58
+  SeedFSTypical: EMP r12_lens_survey: block counts k = 4, 8, 12 to 10^7 give chi2/dof 0.92, 0.89, 0.98; 1023 Walsh window characters max |z| = 3.48 (control 2.94)
+  TuneExcessLog: CERT tuneExcessLog_upto_131072
+  TuneExcessLog: EMP to 10^6
+STAGE 5 LIMITS
+  gap: the 35 proved facts about the seed do NOT reach P1 through the spokes
+  nearest proved facts: Stride1Nonconstant, AtMostOnePeriodicColumn, OffCentrePair, RightDiagonalsPeriodic, LeftDiagonalsPeriodic, AlmostEveryRowTypical, StrobeTable1e6, LeftWhiteStride1, LoopHorizon1, RunBound2Small, RunBoundSmallPeriods, RunBound2Upto16, HalfLineDies1, PreEdgeIndependent, StateNeverRepeats, ProgressMeasuresRefuted, InfiniteRowsSurvive, SidewaysPeriodTwoColumns, TestCountLinear1, TestCountSlackGrows, PeriodFourSlackAtLeast7, OnlyRotationsCommute, SharedSymmetriesAtMost12
+  the wheel chains declared spokes only; it cannot invent a spoke, and finite evidence cannot close an infinite claim (no_finite_certificate_problem1/2)
+NEXT    prove HalfLineDiesAll for the seed, or a new spoke from a proved seed fact into HalfLineDiesAll
+ROUND 28 NARROWEST OPEN RUNGS (Lean package, AUDIT 3.1)
+  HalfLineDies2 [OPEN]: period 2: the drive 1,0 kills every finite half-line code (the only word that matters, halfLineDies_two_iff)
+    evidence: CERT exact longest lives for d <= 32 (lmaxTwo_spec)
+    evidence: EMP Round 28 inner_survivors.py: long survivors do not carry one long inner alternation (min stretch 7..14 while post-edge life grows to 20)
+  TestCountLinear2 [OPEN]: period 2 on the observer's clock: every code of length d fails within d + 5 tests (one test per black drive time) of every period-2 word
+    evidence: CERT slack 5 exact on d <= 22: TestCountData.testCountLinearUpTo_two and the refutation of slack 4 for all d, not_testCountLinear_two_four (frontier_round33)
+    evidence: EMP slack 5 holds for every period-2 word to d = 32 (word_lifetimes33_output.txt)
+  TestHalving2 [OPEN]: period 2 halving: after n tests at most 2^(d-1+e) / 2^n codes of length d are alive, for every period-2 word (e = 6 certified on d <= 18; e = 5 refuted)
+    evidence: CERT e = 6 on d <= 18 (TestHalvingData.testHalvingUpTo_two)
+    evidence: CERT e = 5 false for all d (not_testHalving_two_five)
+    evidence: EMP e = 6 to d = 24 (test_halving34_output.txt)
+  AmortizedHalving241 [OPEN]: m steps after the edge at most 2^d / 2^floor(m/4) codes of length d are alive (Round27Open; certified d <= 12)
+    evidence: CERT d <= 12 (Round27Open; smallest unresolved d = 13)
+    evidence: EMP stable to d = 17 (conjecture_loop_output.txt)
+  PeriodTwoHalfLineLinear [OPEN]: every half-line code of d cells fails the alternating test by time 2d + 8 (certified to d = 36)
+    evidence: CERT prefix search to d = 36 (PrefixSearchData)
+    evidence: EMP prefix_search.c to d = 46
+ROUND 31-33 LENSES (statements matching the question; Lean package)
+  PeriodFourSlackAtLeast7 [CERT]: period 4 needs observer-clock slack >= 7: the code 974520100 (d = 30) passes the first 36 tests of 0111
+    Lean: TestCountData.not_testCountLinear_four_six, TestHalvingData.not_testHalving_four_six
+  TestCountLinear1 [FORMAL]: period 1 on the observer's clock: every code of length d fails within d + 2 tests of the constant black drive (exact slack 2)
+    Lean: testCountLinear_one, TestCountData.not_testCountLinear_one_one
+    spoke: TestCountLinearAll => TestCountLinear1  [(instantiation: the All form quantifies over every period)]
+  TestCountLinearAll [OPEN]: for every period p some slack c_p: every code of length d fails within d + c_p tests of every non-white word of period p
+    spoke: TestCountLinearAll => HalfLineDiesAll  [halfLineDies_of_testCountLinear]
+    spoke: TestCountLinearAll => P1  [problem1_of_testCountLinear]
+    spoke: TestHalvingAll => TestCountLinearAll  [testCountLinear_of_testHalving]
+    spoke: TestCountLinearAll => TestCountLinear1  [(instantiation: the All form quantifies over every period)]
+    spoke: TestCountLinearAll => TestCountLinear2  [(instantiation: the All form quantifies over every period)]
+    spoke: TestCountLinearAll => TestCountLinear3  [(instantiation: the All form quantifies over every period)]
+    spoke: TestCountLinearAll => TestCountLinear4  [(instantiation: the All form quantifies over every period)]
+    evidence: EMP per-period maxima of tests - d over the words tried (one word per rotation class for p >= 5): p = 1..8 gives 2, 5, 8, 7, 4, 7, 8, 11
+    evidence: FORMAL lower bound c_p >= m - 1 for p = 2m + 1 (testCountLinear_slack_ge)
+  TestCountSlackGrows [FORMAL]: the observer-clock slack must grow with the period: a steered word of period 2m+1 lets the code 1 pass m tests, so c_p >= m - 1; no uniform slack exists
+    Lean: not_testCountBound, exists_word_passing_tests, testCountLinear_slack_ge
+ALIGNMENT FAIL: expects `not_testCountLinear_mul_four`
+====================================================================================================
+Q: tool discuss is the period four observer clock slack finite
+SURFACE toolbox
+QUERY   tool discuss is the period four observer clock slack finite
+ANSWER  READING  property=periodicity | scores P1:3 | target P1
+STAGE 1 BROAD     target P1: the centre column is not eventually periodic (Problem 1) [OPEN]; 43 readings through 16 lenses
+STAGE 2 LENSES    (= restatement, <= sufficient, part = proved partial result, x = blocked by a negative control)
+  [algebraic (ANF)]
+    x  DegreeFormula does not give P1: every property of the n-step maps holds for the all-white row too, whose centre column is periodic [map_properties_cannot_decide_periodicity]
+  [boundary / prefix]
+    x  FinitePrefix does not give P1: every finite prefix extends to an eventually periodic sequence [no_finite_certificate_problem1]
+    x  RightEdgeWhite does not give P1: a right-white row whose centre column is periodic [exists_row_with_periodic_column]
+  [echo (radar)]
+    =  LagMismatchAll: for every lag p >= 1 there are arbitrarily late mismatches a(t+p) != a(t) [problem1_iff_lag_mismatch]
+    <= NoResonance: no lag p >= 1 has a full echo resonance echo(N, p)/N -> 1 [problem1_of_no_resonance]
+  [finite-state observer]
+    =  FSObserversFail: every finite-state observer errs infinitely often [problem1_iff_fsObservers_fail]
+    <= SeedFSTypical: every finite-state observer is right with frequency exactly 1/2 [problems_one_and_two_of_seed_fsTypical]
+  [half-line machine]
+    <= HalfLineDiesAll: for every period p >= 1, every non-white p-periodic drive kills every finite left half-line code (the one-sided target) [problem1_of_halfLineDies]
+    part HalfLineDies1: period 1: the constant black drive kills every code by time d + 2 [FORMAL: halfLineDies_one, constDrive_dies]
+    part PreEdgeIndependent: the tests before the edge are exactly independent: 2^(k - blacks k) codes survive them [FORMAL: survivors_card]
+    part StateNeverRepeats: the half-line state grows by one cell per step, so no state repeats and cycle certificates are vacuous [FORMAL: halfStateD_width, halfStateD_strictMono, window_not_closed]
+    part ProgressMeasuresRefuted: all 8 declared progress measures fail on every window <= 20; width steps <= 17 fail [CERT: ProofRoutesData (Round 27)]
+  [half-line machine (sideways)]
+    <= HalfLineDiesSideways: for every non-white periodic drive word, no admissible first column (u t = !bd (t+1) at black times) reconstructs a finite non-empty row: the half-line target read sideways, from the column outwards [halfLineDies_iff_sideways ; problem1_of_halfLineDies]
+    part InfiniteRowsSurvive: on infinite rows the driven machine survives forever under every drive, so the finiteness of the row is essential [FORMAL: infinite_row_survives, survivor_for_every_horizon]
+    part SidewaysPeriodTwoColumns: period 2 read sideways: column 2 repeats each free bit twice, column 3 is column 2 negated half a period later, column 5 returns to the free bit; a survivor has bit 0 black, bit 2 = not bit 1, bit 4 = bit 2 [FORMAL: SidewaysTwo.col2_even, col3_odd, col5_even, survivor_bits_period_two]
+  [measure]
+    part AlmostEveryRowTypical: for almost every initial row every column is finite-state typical [FORMAL: ae_fsTypical]
+  [observer clock (tests)]
+    <= TestCountLinearAll: for every period p some slack c_p: every code of length d fails within d + c_p tests of every non-white word of period p [problem1_of_testCountLinear]
+    <= TestHalvingAll: for every period p some excess e_p: after n tests at most 2^(d-1+e_p) / 2^n codes of length d are alive [problem1_of_testHalving]
+    part TestCountLinear1: period 1 on the observer's clock: every code of length d fails within d + 2 tests of the constant black drive (exact slack 2) [FORMAL: testCountLinear_one, TestCountData.not_testCountLinear_one_one]
+    part TestCountSlackGrows: the observer-clock slack must grow with the period: a steered word of period 2m+1 lets the code 1 pass m tests, so c_p >= m - 1; no uniform slack exists [FORMAL: not_testCountBound, exists_word_passing_tests, testCountLinear_slack_ge]
+    part PeriodFourSlackAtLeast7: period 4 needs observer-clock slack >= 7: the code 974520100 (d = 30) passes the first 36 tests of 0111 [CERT: TestCountData.not_testCountLinear_four_six, TestHalvingData.not_testHalving_four_six]
+  [off-centre observer]
+    <= OtherColumnPeriodic: some column c != 0 of the seed pattern is eventually periodic [problem1_of_other_periodic_column]
+    part AtMostOnePeriodicColumn: at most one column of the seed pattern is eventually periodic [FORMAL: seed_at_most_one_periodic_column]
+    part OffCentrePair: for c != 0, columns 0 and c are not both eventually periodic [FORMAL: offCentre_pair_problem1]
+  [power-series ladder]
+    =  HankelInfinitelyOften: infinitely many Hankel determinants of the centre column are non-zero [problem1IffHankelInfinitelyOften]
+  [propose-and-check loop]
+    =  EveryProposalRefuted: every proposal 'the centre column has period p from time N' is eventually refuted by an observation [problem1_iff_every_proposal_refuted]
+    part LoopHorizon1: the proposal 'constant from time N' is refuted by time 4N + 6 [FORMAL: refutation_horizon_one]
+  [read angle (diagonals)]
+    part RightDiagonalsPeriodic: every right diagonal is periodic (power-of-two periods) [FORMAL: rdiag_periodic]
+    part LeftDiagonalsPeriodic: every left diagonal is eventually periodic (power-of-two periods) [FORMAL: ldiag_eventually_periodic]
+  [stack lift (every row)]
+    <= LeftWhiteAperiodicAll: for every period p >= 1, no column of any left-white row (white left of a black cell) is eventually p-periodic [problem1_of_leftWhiteAperiodicAll]
+    <= RunBoundsAll: for every period p >= 1 there is a run bound B_p: a column at distance d from the edge of a left-white row stays p-periodic for at most B_p(d) steps [leftWhiteAperiodicAll_iff_runBoundsAll ; problem1_of_leftWhiteAperiodicAll]
+    part LeftWhiteStride1: no column of any left-white row is eventually constant [FORMAL: leftWhiteAperiodic_one]
+    part RunBound2Small: period-2 run bounds 1,7,6,5,5,8,9,9 for distances d <= 7, exact, for every left-white row [CERT: runBound_two_upTo_seven, runBound_two_sharp]
+    part RunBoundSmallPeriods: exact run bounds for periods 3..6 at distances d <= 4, for every left-white row [CERT: runBound_small_periods]
+    part RunBound2Upto16: period-2 run bounds 1,7,6,5,5,8,9,9,16,15,14,13,14,16,19,21,25 for distances d <= 16, exact, for every left-white row [CERT: runBound_two_upTo_sixteen, runBound_two_witness]
+  [strobe (clock)]
+    =  StrobesNonconstant: for every stride p >= 1 some phase of the strobe a(p t + r) keeps changing colour [problem1_iff_strobes]
+    <= SeedAPBalanced: every arithmetic progression a(p t + r) has frequency 1/2 [not_eventuallyPeriodic_of_apBalanced]
+    part Stride1Nonconstant: the centre column is not eventually constant (stride 1, period 1) [FORMAL: centerCol_not_eventually_constant]
+    part StrobeTable1e6: the phase wobbles for strides 2..6 to 10^6 (largest D_{3,1} = 1583) [CERT: strobe_wobble_table]
+  [symmetry (M24)]
+    part OnlyRotationsCommute: a permutation of the 24-cell ring commutes with one Rule 30 step on every pattern exactly when it is a rotation (reflections fail: Rule 30 is chiral) [FORMAL: commutes_iff_rot, reflect_not_commutes]
+    part SharedSymmetriesAtMost12: for every labelling of the ring by the Golay code coordinates at most 12 elements of M24 commute with Rule 30 (12 attained; 2 in the GLM labelling) [CERT: shared_card_le_twelve, shared_card_tau0, shared_card_glm]
+  [tuning by ear]
+    =  TuneCostUnbounded: the periodic tuning loop never settles (unbounded tune cost) [problem1_iff_tuneCost_unbounded]
+    <= TuneExcessLog: the longest echo after n notes is at most 2 log2 n + 2 (certified n <= 131072, sharp offset) [problem1_of_tuneExcessLog]
+STAGE 3 NARROW    restatements dropped (proving one is the same task); blocked routes dropped
+  sufficient open hypotheses, weakest first:
+  HalfLineDiesAll (weaker than TestCountLinearAll, TestHalvingAll): for every period p >= 1, every non-white p-periodic drive kills every finite left half-line code (the one-sided target)
+  HalfLineDiesSideways (weaker than TestCountLinearAll, TestHalvingAll): for every non-white periodic drive word, no admissible first column (u t = !bd (t+1) at black times) reconstructs a finite non-empty row: the half-line target read sideways, from the column outwards
+  SeedAPBalanced (weaker than SeedFSTypical): every arithmetic progression a(p t + r) has frequency 1/2
+  TestCountLinearAll (weaker than TestHalvingAll): for every period p some slack c_p: every code of length d fails within d + c_p tests of every non-white word of period p
+  LeftWhiteAperiodicAll: for every period p >= 1, no column of any left-white row (white left of a black cell) is eventually p-periodic
+  NoResonance: no lag p >= 1 has a full echo resonance echo(N, p)/N -> 1
+  OtherColumnPeriodic: some column c != 0 of the seed pattern is eventually periodic
+  RunBoundsAll: for every period p >= 1 there is a run bound B_p: a column at distance d from the edge of a left-white row stays p-periodic for at most B_p(d) steps
+  SeedFSTypical: every finite-state observer is right with frequency exactly 1/2
+  TestHalvingAll: for every period p some excess e_p: after n tests at most 2^(d-1+e_p) / 2^n codes of length d are alive
+  TuneExcessLog: the longest echo after n notes is at most 2 log2 n + 2 (certified n <= 131072, sharp offset)
+  strictly weaker: SeedAPBalanced =/=> SeedFSTypical [exists_apBalanced_not_fsTypical: a doubled typical sequence is AP-balanced, yet the observer 'repeat the last bit at odd times' is right 3/4 of the time]
+  route  LeftWhiteAperiodicAll -> P1
+  route  NoResonance -> P1
+  route  OtherColumnPeriodic -> P1
+  route  RunBoundsAll -> P1
+  ARROW  SeedFSTypical -> SeedAPBalanced -> P1
+  ARROW  TestHalvingAll -> HalfLineDiesAll -> P1
+  ARROW  TestHalvingAll -> HalfLineDiesSideways -> P1
+  ARROW  TestHalvingAll -> TestCountLinearAll -> HalfLineDiesAll -> P1
+  ARROW  TestHalvingAll -> TestCountLinearAll -> HalfLineDiesSideways -> P1
+  route  TuneExcessLog -> P1
+  (each -> is a proved implication; the arrow runs from the strong end towards the target)
+STAGE 4 EVIDENCE
+  HalfLineDiesSideways: FORMAL exact equivalence halfLineDies_iff_sideways
+  HalfLineDiesSideways: FORMAL period 1 in one line, halfLineDies_one_sideways
+  SeedAPBalanced: CERT strobe_wobble_table: 20 phase wobbles for p = 2..6 to 10^6; largest D_{3,1} = 1583 (z = 2.7 for a fair coin)
+  SeedAPBalanced: EMP r12_lens_survey: 135 phases p <= 16 to 10^7, max |z| = 2.68 (control coin 2.60); D_{3,1} falls back to z = 1.8 at 10^7: a fluctuation, not a drift
+  TestCountLinearAll: EMP per-period maxima of tests - d over the words tried (one word per rotation class for p >= 5): p = 1..8 gives 2, 5, 8, 7, 4, 7, 8, 11
+  TestCountLinearAll: FORMAL lower bound c_p >= m - 1 for p = 2m + 1 (testCountLinear_slack_ge)
+  LeftWhiteAperiodicAll: CERT runBound_two_upTo_seven / runBound_small_periods: exact run bounds, all left-white rows
+  LeftWhiteAperiodicAll: EMP r13_periodic_runs: exact longest runs for p <= 6 at d <= 7-9; the period-2 search relaxation dies within about 1.6 d + 4 steps for every d <= 24
+  NoResonance: EMP r12_lens_survey: echo at lags 1..64 to 10^7, max |z| = 2.58
+  SeedFSTypical: EMP r12_lens_survey: block counts k = 4, 8, 12 to 10^7 give chi2/dof 0.92, 0.89, 0.98; 1023 Walsh window characters max |z| = 3.48 (control 2.94)
+  TuneExcessLog: CERT tuneExcessLog_upto_131072
+  TuneExcessLog: EMP to 10^6
+STAGE 5 LIMITS
+  gap: the 35 proved facts about the seed do NOT reach P1 through the spokes
+  nearest proved facts: Stride1Nonconstant, AtMostOnePeriodicColumn, OffCentrePair, RightDiagonalsPeriodic, LeftDiagonalsPeriodic, AlmostEveryRowTypical, StrobeTable1e6, LeftWhiteStride1, LoopHorizon1, RunBound2Small, RunBoundSmallPeriods, RunBound2Upto16, HalfLineDies1, PreEdgeIndependent, StateNeverRepeats, ProgressMeasuresRefuted, InfiniteRowsSurvive, SidewaysPeriodTwoColumns, TestCountLinear1, TestCountSlackGrows, PeriodFourSlackAtLeast7, OnlyRotationsCommute, SharedSymmetriesAtMost12
+  the wheel chains declared spokes only; it cannot invent a spoke, and finite evidence cannot close an infinite claim (no_finite_certificate_problem1/2)
+NEXT    prove HalfLineDiesAll for the seed, or a new spoke from a proved seed fact into HalfLineDiesAll
+ROUND 28 NARROWEST OPEN RUNGS (Lean package, AUDIT 3.1)
+  HalfLineDies2 [OPEN]: period 2: the drive 1,0 kills every finite half-line code (the only word that matters, halfLineDies_two_iff)
+    evidence: CERT exact longest lives for d <= 32 (lmaxTwo_spec)
+    evidence: EMP Round 28 inner_survivors.py: long survivors do not carry one long inner alternation (min stretch 7..14 while post-edge life grows to 20)
+  TestCountLinear2 [OPEN]: period 2 on the observer's clock: every code of length d fails within d + 5 tests (one test per black drive time) of every period-2 word
+    evidence: CERT slack 5 exact on d <= 22: TestCountData.testCountLinearUpTo_two and the refutation of slack 4 for all d, not_testCountLinear_two_four (frontier_round33)
+    evidence: EMP slack 5 holds for every period-2 word to d = 32 (word_lifetimes33_output.txt)
+  TestHalving2 [OPEN]: period 2 halving: after n tests at most 2^(d-1+e) / 2^n codes of length d are alive, for every period-2 word (e = 6 certified on d <= 18; e = 5 refuted)
+    evidence: CERT e = 6 on d <= 18 (TestHalvingData.testHalvingUpTo_two)
+    evidence: CERT e = 5 false for all d (not_testHalving_two_five)
+    evidence: EMP e = 6 to d = 24 (test_halving34_output.txt)
+  AmortizedHalving241 [OPEN]: m steps after the edge at most 2^d / 2^floor(m/4) codes of length d are alive (Round27Open; certified d <= 12)
+    evidence: CERT d <= 12 (Round27Open; smallest unresolved d = 13)
+    evidence: EMP stable to d = 17 (conjecture_loop_output.txt)
+  PeriodTwoHalfLineLinear [OPEN]: every half-line code of d cells fails the alternating test by time 2d + 8 (certified to d = 36)
+    evidence: CERT prefix search to d = 36 (PrefixSearchData)
+    evidence: EMP prefix_search.c to d = 46
+ROUND 31-33 LENSES (statements matching the question; Lean package)
+  PeriodFourSlackAtLeast7 [CERT]: period 4 needs observer-clock slack >= 7: the code 974520100 (d = 30) passes the first 36 tests of 0111
+    Lean: TestCountData.not_testCountLinear_four_six, TestHalvingData.not_testHalving_four_six
+  TestCountLinear1 [FORMAL]: period 1 on the observer's clock: every code of length d fails within d + 2 tests of the constant black drive (exact slack 2)
+    Lean: testCountLinear_one, TestCountData.not_testCountLinear_one_one
+    spoke: TestCountLinearAll => TestCountLinear1  [(instantiation: the All form quantifies over every period)]
+  TestCountLinear4 [OPEN]: period 4 on the observer's clock: every code of length d fails within d + c tests of every period-4 word; c = 5 holds on d <= 22 but is not the law: a code of length 30 passes 36 tests of 0111 (not_testCountLinear_four_six), so c >= 7
+    spoke: TestHalving4 => TestCountLinear4  [testCountLinear_of_testHalving]
+    spoke: TestCountLinearAll => TestCountLinear4  [(instantiation: the All form quantifies over every period)]
+    evidence: CERT slack 5 exact on d <= 22 (testCountLinearUpTo_four, not_testCountLinear_four_four)
+    evidence: CERT but slack 6 is false for all d: the code 974520100 (d = 30) passes 36 tests of 0111 (not_testCountLinear_four_six)
+    evidence: EMP largest excess 7 over every period-4 word to d = 32, still rising for the three-black words (0111: 7 at d = 30; 1110: 6 at d = 31)
+  TestCountLinearAll [OPEN]: for every period p some slack c_p: every code of length d fails within d + c_p tests of every non-white word of period p
+    spoke: TestCountLinearAll => HalfLineDiesAll  [halfLineDies_of_testCountLinear]
+    spoke: TestCountLinearAll => P1  [problem1_of_testCountLinear]
+    spoke: TestHalvingAll => TestCountLinearAll  [testCountLinear_of_testHalving]
+    spoke: TestCountLinearAll => TestCountLinear1  [(instantiation: the All form quantifies over every period)]
+    spoke: TestCountLinearAll => TestCountLinear2  [(instantiation: the All form quantifies over every period)]
+    spoke: TestCountLinearAll => TestCountLinear3  [(instantiation: the All form quantifies over every period)]
+    spoke: TestCountLinearAll => TestCountLinear4  [(instantiation: the All form quantifies over every period)]
+    evidence: EMP per-period maxima of tests - d over the words tried (one word per rotation class for p >= 5): p = 1..8 gives 2, 5, 8, 7, 4, 7, 8, 11
+    evidence: FORMAL lower bound c_p >= m - 1 for p = 2m + 1 (testCountLinear_slack_ge)
+ALIGNMENT FAIL: expects `testCountLinearUpTo_four_seven`
+====================================================================================================
+Q: tool clock 4 14 974520100
+SURFACE toolbox
+QUERY   tool clock 4 14 974520100
+ANSWER  COLUMN 1 — LANGUAGE
+  The column repeats the word 0111 (period 4, 3 black). It asks the cell next to it a question only at black times, so its clock ticks 3 time(s) per 4 steps.
+  The code 974520100 has d = 30 cells. It passes 36 questions and fails question 37, at time 49.
+  Wall clock: 49 steps. Observer's clock: d + 7 questions.
+  Period 4: every code fails within d + 5 questions (exact on d <= 22); this code exceeds (outside the certified range: a new refutation candidate) that slack.
+COLUMN 2 — MATHEMATICS
+  bd = driveN 4 14; check at black t: (halfStateD bd 974520100 t).testBit 0 = !bd (t+1)
+  first failure t = 49;  testsBefore bd 49 = 36;  d = 30
+  FailsWithinTests bd 974520100 37  and  not FailsWithinTests bd 974520100 36  (failsWithinTests_of_dDiesBy, not_failsWithinTests_of_dDiesBy)
+  Lean: GLM.Rule30.testsBefore, FailsWithinTests, TestCountLinear; TestCountData.frontier_round33; not_testCountBound
+COLUMN 3 — SCRIPT
+  p, k, S = 4, 14, 974520100
+  drive = lambda t: (k >> (t % p)) & 1
+  s, t, tests = S, 0, 0
+  while not (drive(t) and (s & 1) == drive(t + 1)):
+      tests += drive(t); s = (s >> 1) ^ (s | (s << 1) | drive(t)); t += 1
+  assert (t, tests + 1, S.bit_length()) == (49, 37, 30)
+ALIGNMENT FAIL: expects `testCountLinearUpTo_four_seven`
+====================================================================================================
+Q: tool slack 4 14 34
+SURFACE toolbox
+QUERY   tool slack 4 14 34
+REFUSED refused: no tool named 'slack 4 14 34'; the tools are clock, next, pipeline, moonshine, llvq, pcgs, salvage, salvage second, deep dive, tie break, stability, native parity, native words, law register, ladder, machine, continued fraction, mobius, bind, gates, tag length, convergent, best approximation, induce, arc, claim, theorem, discuss, frame, kappa, lorentz, evidence, majority, wiring
+ALIGNMENT FAIL: expects `frontier_round34`
+====================================================================================================
+alignment: 1 / 7

@@ -1,0 +1,5772 @@
+[
+ {
+  "id": "C01",
+  "claim": "Rule 30 local rule is f(L,C,R) = L + C + R + C*R over GF(2), matching Wolfram number 30",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.rule30_zmod",
+   "GLM.Rule30.rule30_eq_truthTable"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C02",
+  "claim": "Centre column from a single black cell matches OEIS A051023 (first 30 terms)",
+  "class": "EXH",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.centerCol_first_30"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "centerCol is a definition, not an axiom"
+ },
+ {
+  "id": "C03",
+  "claim": "Cone separation: flipping x_{c-n} flips a(n)(c), for every row, n and c",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.evolve_flip_left_edge",
+   "GLM.Rule30.booleanDerivative_left_edge"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C04",
+  "claim": "Right-edge derivative: d a(n)(c)/d x_{c+n} = prod_{k<n} not a(k)(c+n-1-k)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.booleanDerivative_right_edge"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C05",
+  "claim": "Support of a(n)(c) is exactly [c-n, c+n]: it depends on both edge cells (one new cell per side per step)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.depends_exactly_on_cone"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "growth of the support, not of the degree"
+ },
+ {
+  "id": "C06",
+  "claim": "32-state phase space: two-step map equals r30_local_update on the 5-cell window",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.evolve_two_eq_local"
+  ],
+  "axioms": [
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C07",
+  "claim": "32-state ANF: a(2)(0) = x-2 + x1 + x-1x1 + x0x1 + x2 + x-1x2 + x0x2 + x1x2 + x-1x1x2 + x0x1x2 (degree 3; two top monomials)",
+  "class": "EXH",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.local_anf",
+   "GLM.Rule30.local_degree",
+   "GLM.Rule30.localCoeff_eq_anfCoeff"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "all 32 states; equals the global ANF of a(2)(0)"
+ },
+ {
+  "id": "C08",
+  "claim": "32-state phase space forces +2 degree growth at every step (directive's Bridge Lemma)",
+  "class": "FORMAL",
+  "status": "refuted",
+  "lean": [
+   "GLM.Rule30.phaseSpace_does_not_determine_growth"
+  ],
+  "axioms": [
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "propext"
+  ],
+  "notes": "Rule 180 has the same 32-state profile (left-permutive, two-step degree 3, both edges essential) but three-step degree 4, not 5; the refuting computation uses native_decide"
+ },
+ {
+  "id": "C09",
+  "claim": "ANF degree of a(n)(0) is at most 2n-1 for all n >= 2",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.center_anfDegree_le",
+   "GLM.Rule30.anfDegree_le_at"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C10",
+  "claim": "Top monomial M_n has coefficient 1 iff whiteDiagonalCount n is odd",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.anfCoeff_topMonomial_eq_count",
+   "GLM.Rule30.topMonomialConjecture_iff"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C11",
+  "claim": "whiteDiagonalCount n equals the fast bit-parallel count fastWhiteCount n",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.whiteDiagonalCount_eq_fast"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C12",
+  "claim": "ANF degree of a(n)(0) is exactly 2n-1 for 2 <= n <= 14",
+  "class": "EXH",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.anfDegree_eq_upto14"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "previously 2 <= n <= 7"
+ },
+ {
+  "id": "C13",
+  "claim": "ANF degree of a(n)(0) is exactly 2n-1 for all n >= 2 (TopMonomialConjecture)",
+  "class": "FORMAL",
+  "status": "proved (Round 8)",
+  "lean": [
+   "GLM.Rule30.topMonomialConjecture_holds",
+   "GLM.Rule30.center_anfDegree_eq"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "was OPEN until Round 8; earlier EXH up to n = 20"
+ },
+ {
+  "id": "C14",
+  "claim": "Top monomial is unique for 3 <= n <= 6",
+  "class": "EXH",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.topMonomial_unique_small"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "for n = 2 there are two top monomials (C07)"
+ },
+ {
+  "id": "C15",
+  "claim": "Degree growth (or any property of the n-step maps) implies Problem 1",
+  "class": "FORMAL",
+  "status": "refuted",
+  "lean": [
+   "GLM.Rule30.map_properties_cannot_decide_periodicity"
+  ],
+  "axioms": [
+   "propext"
+  ],
+  "notes": "the all-white row has the same maps and a periodic centre column"
+ },
+ {
+  "id": "C16",
+  "claim": "Degree = Omega(n) implies Problem 3",
+  "class": "DEF",
+  "status": "refuted (argument)",
+  "lean": [],
+  "axioms": [],
+  "notes": "the degree concerns the (2n+1)-input map, not computing a(n) from n; no machine model is formalised"
+ },
+ {
+  "id": "C17",
+  "claim": "No two adjacent columns of the seed pattern are both eventually periodic",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.seed_not_both_adjacent_columns_periodic"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "partial result on Problem 1"
+ },
+ {
+  "id": "C18",
+  "claim": "Frequency 1/2 (balance; not full binary normality) is equivalent to D(n) = o(n)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.hasFrequencyHalf_iff"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "reworded in Round 6: 'normality' here means balance"
+ },
+ {
+  "id": "C19",
+  "claim": "|D(N)| <= C sqrt(N) for all N >= 1 implies frequency -> 1/2, with rate C/(2 sqrt N)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.wobbleBoundedness_implies_normality",
+   "GLM.Rule30.freq_dev_of_wobble_le"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C20",
+  "claim": "Wobble values D(10)=4, D(100)=4, D(1000)=-38, D(10^4)=64, D(2*10^4)=240, D(10^6)=1536",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.wobble_milestones",
+   "GLM.Rule30.wobble_1e6"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C21",
+  "claim": "|D(N)| <= 2 sqrt(N) for the centre column (directive's C = 2)",
+  "class": "CERT",
+  "status": "refuted",
+  "lean": [
+   "GLM.Rule30.sqrt_bound_two_fails"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "fails at N = 1462: |D| = 80 and 80^2 = 6400 > 4*1462"
+ },
+ {
+  "id": "C22",
+  "claim": "max over 1 <= N <= 10^6 of D(N)^2/N is exactly 175561/24979 (N = 24979, |D| = 419), i.e. best C = 2.651...",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.wobble_sq_ratio_cert",
+   "GLM.Rule30.sqrt_bound_fails_below"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "exact integer arithmetic; also reproduced by scripts/wobble_certificate.py"
+ },
+ {
+  "id": "C23",
+  "claim": "Finite prefix data alone (first N bits, no structural theorem) can prove Problem 2",
+  "class": "FORMAL",
+  "status": "refuted",
+  "lean": [
+   "GLM.Rule30.no_finite_certificate_problem2",
+   "GLM.Rule30.prefix_cannot_imply_problem2"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "any prefix extends to sequences with and without frequency 1/2; reworded Round 6: a finite certificate plus a structural theorem can prove statements about infinite sequences"
+ },
+ {
+  "id": "C24",
+  "claim": "Finite prefix data alone (first N bits, no structural theorem) can prove Problem 1",
+  "class": "FORMAL",
+  "status": "refuted",
+  "lean": [
+   "GLM.Rule30.no_finite_certificate_problem1"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "any prefix extends to periodic and non-periodic sequences; reworded Round 6"
+ },
+ {
+  "id": "C25",
+  "claim": "|D(n)| = O(sqrt n) for the centre column",
+  "class": "EMP",
+  "status": "open (likely false; dropped as a target in Round 5)",
+  "lean": [
+   "GLM.Rule30.problem2_of_sqrt_bound"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "law of the iterated logarithm predicts unbounded |D|/sqrt n for random-like sequences; P2 target is D(n) = o(n)"
+ },
+ {
+  "id": "C26",
+  "claim": "Wobble arrow: next bit moves the frequency toward 1/2 iff its step equals -sign D(n)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.deviation_decreases_iff"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "the observer's direction of convergence"
+ },
+ {
+  "id": "C27",
+  "claim": "Rule 30 follows the arrow at 4968 of 9964 non-zero-arrow times n < 10^4",
+  "class": "EXH",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.arrow_stats_10000"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "about half: no feedback"
+ },
+ {
+  "id": "C28",
+  "claim": "Mirror observer (Rule 86) sees the same centre column, with the permutive side reversed",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.centerCol86_eq",
+   "GLM.Rule30.rule86_right_permutive"
+  ],
+  "axioms": [
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C29",
+  "claim": "No eventual period p <= 1000 starting by time 1000",
+  "class": "EXH",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.no_small_eventual_period"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "evidence only (see C24)"
+ },
+ {
+  "id": "C30",
+  "claim": "Original axiom wobbleBoundedness_sqrt (all sequences)",
+  "class": "FORMAL",
+  "status": "refuted",
+  "lean": [
+   "GLM.Rule30.not_forall_sqrt_bound"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "inconsistent as stated"
+ },
+ {
+  "id": "C31",
+  "claim": "Original axiom r30_complexity (unconstrained cost)",
+  "class": "FORMAL",
+  "status": "refuted",
+  "lean": [
+   "GLM.Rule30.unconstrained_cost_refutes"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "inconsistent as stated"
+ },
+ {
+  "id": "C32",
+  "claim": "Golay / Leech lattice hit rates",
+  "class": "DEF",
+  "status": "not formalised",
+  "lean": [],
+  "axioms": [],
+  "notes": "diagnostic mirror only; kept outside the proof track"
+ },
+ {
+  "id": "C33",
+  "claim": "Problem 1: centre column not eventually periodic",
+  "class": "OPEN",
+  "status": "open",
+  "lean": [
+   "GLM.Rule30.Problem1"
+  ],
+  "axioms": [],
+  "notes": ""
+ },
+ {
+  "id": "C34",
+  "claim": "Problem 2: frequency of black cells tends to 1/2",
+  "class": "OPEN",
+  "status": "open",
+  "lean": [
+   "GLM.Rule30.Problem2"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C35",
+  "claim": "Problem 3: computing a(n) needs Omega(n) work",
+  "class": "OPEN",
+  "status": "open",
+  "lean": [
+   "GLM.Rule30.Problem3"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "stated in Round 5 for multi-tape Turing machines with binary input; 'not o(n)' = at least eps*n infinitely often; eventual form Problem3Quantifiers.Problem3Eventual implies it"
+ },
+ {
+  "id": "C36",
+  "claim": "For a fair-coin random row, every column t -> a(t)(c) is an i.i.d. fair-coin sequence (its law is the Bernoulli(1/2) product measure)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.column_law",
+   "GLM.Rule30.column_iIndep",
+   "GLM.Rule30.column_prefix_law"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 4, measure theory"
+ },
+ {
+  "id": "C37",
+  "claim": "Problem 2 holds for almost every initial row (every column)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.ae_column_frequency_half"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "strong law of large numbers (Etemadi) from Mathlib"
+ },
+ {
+  "id": "C38",
+  "claim": "Problem 1 holds for almost every initial row (every column)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.ae_column_not_eventuallyPeriodic"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C39",
+  "claim": "Rule 30 preserves the fair-coin (Bernoulli) measure on rows; so does every iterate",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.step_measurePreserving",
+   "GLM.Rule30.evolve_measurePreserving"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "invariant measure of the dynamical system"
+ },
+ {
+  "id": "C40",
+  "claim": "The seed (indeed every single row) has probability 0",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.bernoulliRow_seed_null"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C41",
+  "claim": "Column inverse: for any right half and any target sequence there is exactly one row with that right half and that centre column",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.column_inverse_exists",
+   "GLM.Rule30.column_inverse_unique"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C42",
+  "claim": "The seed is the unique right-white row with Rule 30's centre column; rows with white right half realise periodic and biased columns",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.seed_unique_preimage",
+   "GLM.Rule30.exists_row_with_periodic_column",
+   "GLM.Rule30.exists_row_with_biased_column"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C43",
+  "claim": "Measure-theory boundary: a.e. results cannot be specialised to the seed",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.measure_theory_boundary"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "packages C37, C38, C40, C41, C42"
+ },
+ {
+  "id": "C44",
+  "claim": "No causal predictor beats chance on a typical row (hit frequency 1/2 a.s.); in particular the wobble arrow is followed half the time",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.ae_predictor_hits_half",
+   "GLM.Rule30.ae_arrow_followed_half"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C45",
+  "claim": "Problem 2 iff the seed is typical for the constant predictor; Problem 1 follows from typicality for all lag predictors",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.problem2_iff_const_typical",
+   "GLM.Rule30.problem1_of_lag_typical"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "reduction, not a proof of P1/P2"
+ },
+ {
+  "id": "C46",
+  "claim": "No row (the seed included) is typical for all causal predictors",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.no_row_typical_for_all_predictors"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "the observer class must be restricted"
+ },
+ {
+  "id": "C47",
+  "claim": "Seed: right diagonal D satisfies rdiag D (t+1) = rdiag D t xor (rdiag (D-1) t or rdiag (D-2) t)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.rdiag_succ"
+  ],
+  "axioms": [
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 4, seed-specific"
+ },
+ {
+  "id": "C48",
+  "claim": "Seed: every right diagonal a(t)(t-D) is periodic from t = 0 with period 2^D; cells at depth D are a lookup on t mod 2^D",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.rdiag_periodic",
+   "GLM.Rule30.rdiag_mod"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C49",
+  "claim": "Seed: the least period of right diagonal D exceeds ceil(D/2); periods are unbounded",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.rdiag_not_periodic",
+   "GLM.Rule30.rdiag_period_unbounded"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C50",
+  "claim": "Least periods of right diagonals D = 0..8 are 1,2,2,4,8,8,16,32,32",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "simulation to t = 600, not machine-checked"
+ },
+ {
+  "id": "C51",
+  "claim": "Left diagonals a(t)(-t+E), E <= 57, are eventually periodic with period <= 8",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "simulation to t = 4000, not machine-checked"
+ },
+ {
+  "id": "C52",
+  "claim": "A sequence is eventually periodic iff some finite-state observer is eventually always right on it",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.eventuallyPeriodic_iff_exists_fsObserver"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 5"
+ },
+ {
+  "id": "C53",
+  "claim": "Problem 1 iff every finite-state observer makes infinitely many mistakes on the centre column",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.problem1_iff_fsObservers_fail"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "exact restatement, not a proof of P1"
+ },
+ {
+  "id": "C54",
+  "claim": "Seed finite-state typicality implies Problems 1 and 2",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.problems_one_and_two_of_seed_fsTypical"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "reduction"
+ },
+ {
+  "id": "C55",
+  "claim": "Almost every row is finite-state typical in every column (all observers at once); the notion is consistent and non-trivial",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.ae_fsTypical",
+   "GLM.Rule30.exists_fsTypical_column",
+   "GLM.Rule30.not_fsTypical_const"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C56",
+  "claim": "Seed Typicality Theorem: the seed's centre column is finite-state typical",
+  "class": "OPEN",
+  "status": "open",
+  "lean": [
+   "GLM.Rule30.SeedFSTypical"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "the precise target for P1 and P2"
+ },
+ {
+  "id": "C57",
+  "claim": "Triangular running-XOR diagonal recursion holds for every row; period 2^D for every right-white row",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.rdiagOf_succ",
+   "GLM.Rule30.rdiagOf_periodic"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "not seed-specific"
+ },
+ {
+  "id": "C58",
+  "claim": "Diagonal coupling + unbounded periods force P1/P2 (proposed Round 5 bridge)",
+  "class": "FORMAL",
+  "status": "refuted",
+  "lean": [
+   "GLM.Rule30.diagonal_coupling_does_not_decide_problem1",
+   "GLM.Rule30.diagonal_coupling_does_not_decide_problem2",
+   "GLM.Rule30.unbounded_periods_do_not_force_aperiodicity"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "right-white rows with the same structure have periodic / frequency-1/3 centre columns"
+ },
+ {
+  "id": "C59",
+  "claim": "Among right-white rows the seed is singled out by its diagonal initial data rdiag D 0 = [D = 0]",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.seed_is_unique_initial_data"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C60",
+  "claim": "A circuit computing a function with k essential inputs has at least (k-1)/2 gates",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.card_essential_le"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C61",
+  "claim": "The light-cone map (x_{-t}..x_t) -> a(t)(0) depends on x_{-t} and x_t",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.centreWindow_essential_left",
+   "GLM.Rule30.centreWindow_essential_right"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C62",
+  "claim": "The light-cone map depends on all 2t+1 cells",
+  "class": "EXH",
+  "status": "proved for t <= 6; superseded by C96 (proved for every t)",
+  "lean": [
+   "GLM.Rule30.wholeCone_le_6",
+   "GLM.Rule30.WholeConeDependence"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "implies >= t gates: MachineModel.circuit_size_ge_of_wholeCone"
+ },
+ {
+  "id": "C63",
+  "claim": "Non-uniform circuits and evaln fuel do not capture Problem 3",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.nonuniform_trivial",
+   "GLM.Rule30.fuel_model_trivial"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "a uniform model with binary input is needed"
+ },
+ {
+  "id": "C64",
+  "claim": "Unbounded diagonal periods force Omega(t) cost for a(t) (proposed Round 5 bridge for P3)",
+  "class": "FORMAL",
+  "status": "refuted",
+  "lean": [
+   "GLM.Rule30.diagonal_coupling_does_not_decide_problem1"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "same coupling, centre column computable in constant time"
+ },
+ {
+  "id": "C65",
+  "claim": "D(N)^2 = N + 2 * sum_{1<=k<N} echo(N,k) (radar / Fejer identity)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.wobble_sq_eq_echo"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C66",
+  "claim": "P2 <=> total echo of the +-1 wave is o(N^2) (no Cesaro atom at frequency 0)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.problem2_iff_totalEcho",
+   "GLM.Rule30.hasFrequencyHalf_iff_totalEcho"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "the spectral route is a restatement of P2, not a shortcut"
+ },
+ {
+  "id": "C67",
+  "claim": "Eventual period p => normalised lag-p echo -> 1 (resonance); no full resonance => P1",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.echo_resonance",
+   "GLM.Rule30.problem1_of_no_resonance"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C68",
+  "claim": "P1 <=> for every p >= 1, arbitrarily late lag-p mismatches <=> unbounded lag-p mismatch counts",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.problem1_iff_lag_mismatch",
+   "GLM.Rule30.problem1_iff_mismatches_unbounded"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C69",
+  "claim": "The seed's right edge is white (feedback #1)",
+  "class": "FORMAL",
+  "status": "refuted",
+  "lean": [
+   "GLM.Rule30.evolve_seed_right_edge",
+   "GLM.Rule30.rdiag_zero_eq_true"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "the right edge is always black; rdiag 1 alternates (rdiag_one_eq)"
+ },
+ {
+  "id": "C70",
+  "claim": "Seed value a(n)(c) = ANF coefficient of x_0 of the map x -> a(n)(c)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.seed_value_eq_linear_coeff",
+   "GLM.Rule30.centerCol_eq_linear_coeff"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "evaluation at a unit vector; not related to the top coefficient"
+ },
+ {
+  "id": "C71",
+  "claim": "A finite-state machine driven by an eventually periodic input has eventually periodic output",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.Transducer.output_eventuallyPeriodic"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C72",
+  "claim": "Centre column = output of a fixed finite NLFSR driven by periodic edge stripes (feedback #1 Track A)",
+  "class": "FORMAL",
+  "status": "refuted (conditional on P1)",
+  "lean": [
+   "GLM.Rule30.problem1_no_finite_driven_register",
+   "GLM.Rule30.not_problem1_of_finite_driven_register"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "such a register would refute P1; an unbounded register is the diagonal read-out of Round 5"
+ },
+ {
+  "id": "C73",
+  "claim": "Every sequence is captured by some causal rule (no sequence is random relative to all rules)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.not_escapes_allRules",
+   "GLM.Rule30.centerCol_captured"
+  ],
+  "axioms": [],
+  "notes": "formal content of 'randomness = undiscovered rule space'"
+ },
+ {
+  "id": "C74",
+  "claim": "P1 <=> escape from lag rules <=> escape from finite-state rules",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.problem1_iff_escapes_lag",
+   "GLM.Rule30.problem1_iff_escapes_fs",
+   "GLM.Rule30.escapes_lag_iff_escapes_fs"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C75",
+  "claim": "P2 = typicality for {always black}; SeedFSTypical = typicality for finite-state rules",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.problem2_iff_typical_const",
+   "GLM.Rule30.seedFSTypical_iff"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C76",
+  "claim": "Some right-white row has a centre column captured by a lag rule",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.exists_rightWhite_row_captured_by_lag"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "escape is seed-specific"
+ },
+ {
+  "id": "C77",
+  "claim": "whiteDiagonalCount n = #zeros of an (n-1)-variable Boolean function (half the cells are forced)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.whiteDiagonalCount_eq_reduced",
+   "GLM.Rule30.topMonomialConjecture_iff_reduced"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C78",
+  "claim": "deg a(n)(0) = 2n-1 for 2 <= n <= 20",
+  "class": "EXH",
+  "status": "proved for 2 <= n <= 20",
+  "lean": [
+   "GLM.Rule30.anfDegree_eq_upto20",
+   "GLM.Rule30.whiteDiagonalCount_eq_fastReduced"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "native_decide; superseded by C93 (every n >= 2)"
+ },
+ {
+  "id": "C79",
+  "claim": "whiteDiagonalCount n is odd for n <= 36",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "outside Lean; superseded by C93 (every n >= 2)"
+ },
+ {
+  "id": "C80",
+  "claim": "Problem3Eventual (time = Omega(n) eventually) implies Problem3 (time not o(n))",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.problem3_of_eventual"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "both open"
+ },
+ {
+  "id": "C81",
+  "claim": "Observer benchmark: no lag (p<=64), context (k<=16), Golay-24 or wobble-arrow predictor exceeds chance on the centre column at N=131072 beyond the multiple-comparison level; all controls captured",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "not a proof of escape"
+ },
+ {
+  "id": "C82",
+  "claim": "Golay-code coset census of 24-bit blocks: centre column chi2=3.5, SHA-256 6.1, Champernowne (normal) 47",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "finite tests do not decide asymptotic properties"
+ },
+ {
+  "id": "C83",
+  "claim": "No column of any row that is white on the left and not all white is eventually constant (period-1 case of P1 for every column)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.column_not_eventually_constant",
+   "GLM.Rule30.seed_column_not_eventually_constant"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C84",
+  "claim": "The centre column is not eventually constant; it changes colour infinitely often and both colours occur infinitely often",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.centerCol_not_eventually_constant",
+   "GLM.Rule30.centerCol_changes_infinitely_often",
+   "GLM.Rule30.centerCol_infinitely_many_true",
+   "GLM.Rule30.centerCol_infinitely_many_false"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "lag-1 instance of problem1_iff_lag_mismatch"
+ },
+ {
+  "id": "C85",
+  "claim": "Finite-window Jen theorem: columns c and c+1 both constant on [N,N+L] implies L <= c - l + N + 1",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.adjacent_run_bound"
+  ],
+  "axioms": [
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C86",
+  "claim": "A constant run of column c on [N,N+L] has L <= 3(c - l + N) + 5; every window [N,4N+6] contains a centre-column colour change",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.column_run_bound",
+   "GLM.Rule30.centerCol_change_in_window"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C87",
+  "claim": "Longest constant run of the centre column up to t=20000 is 14",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "the proved linear bound is far from tight"
+ },
+ {
+  "id": "C88",
+  "claim": "Two distinct columns are never both eventually periodic (extends Jen's adjacent-column theorem to any pair)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.not_both_columns_periodic"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C89",
+  "claim": "At most one column of the single-cell pattern is eventually periodic; P1 iff the centre is not that column; any periodic off-centre column would imply P1",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.seed_at_most_one_periodic_column",
+   "GLM.Rule30.problem1_iff_centre_not_the_exception",
+   "GLM.Rule30.problem1_of_other_periodic_column"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C90",
+  "claim": "With the added parser/session/tct_engine files and a reports/__init__ shim, the GLM session runs but has no cellular-automaton concept and refuses the Rule 30 queries",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "LatticeGeometryReports is a placeholder in the shim"
+ },
+ {
+  "id": "C91",
+  "claim": "Second-cell derivative: turning on cell e+1 changes a(t)(e+t) by the number of white cells mod 2 on the diagonal a(s)(e+s+2), s<t",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.evolve_update_second_left"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C92",
+  "claim": "Triangle parity law: over the rows of a size-m light-cone triangle (m >= 2) with white right side, Sum [gamma + Sum_s beta_s l_s] = beta_0 (mod 2) for every beta, gamma",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.triQ_eq",
+   "GLM.Rule30.triQ_succ",
+   "GLM.Rule30.triQ_one"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "proof by peeling the two leftmost cells; coefficients change by prefix sums"
+ },
+ {
+  "id": "C93",
+  "claim": "whiteDiagonalCount n is odd for every n >= 2",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.whiteDiagonalCount_odd",
+   "GLM.Rule30.whiteDiagonalCount_eq_triQ"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "supersedes C78 (n <= 20) and C79 (n <= 36)"
+ },
+ {
+  "id": "C94",
+  "claim": "ANF degree of a(n)(c) is exactly 2n-1 for every n >= 2 and every position c",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.anfDegree_eq_at"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "map-level only: by C15 it cannot decide P1"
+ },
+ {
+  "id": "C95",
+  "claim": "With the supplied reports/__init__.py, the GLM still needs reports/lattice_geometry.py (defines LatticeGeometryReports); with a stand-in for that one file the session runs and still refuses the Rule 30 queries",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "session.py imports LatticeGeometryReports but does not define it"
+ },
+ {
+  "id": "C96",
+  "claim": "Whole-cone dependence: for every t, the centre cell a(t)(0) depends essentially on all 2t+1 cells of its light cone",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.wholeConeDependence_holds",
+   "GLM.Rule30.essential_second",
+   "GLM.Rule30.essential_interior"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "supersedes C-range check t <= 6 (MachineModelData.wholeCone_le_6); map-level only (E2): WholeCone.wholeCone_compatible_with_periodicity"
+ },
+ {
+  "id": "C97",
+  "claim": "Every fan-in-2 Boolean circuit computing the light-cone map (x_-t..x_t) -> a(t)(0) has at least t gates, for every t",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.circuit_size_ge"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "a different function from P3's n -> a(n) (2t+1 input bits instead of log n)"
+ },
+ {
+  "id": "C98",
+  "claim": "The elementary CA family: wheel r has local rule bit(4L+2C+R) of r; questions 1-3 stated for any wheel, row and column; for (30, impulse, 0) they are P1, P2, P3",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.ecaRule_30",
+   "GLM.Rule30.ecaEvolve_thirty",
+   "GLM.Rule30.problem1_iff_wheel",
+   "GLM.Rule30.problem2_iff_wheel",
+   "GLM.Rule30.problem3_iff_wheel",
+   "GLM.Rule30.problem1_selfContained",
+   "GLM.Rule30.problem2_selfContained"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "the rule is carried inside the question as the number 30"
+ },
+ {
+  "id": "C99",
+  "claim": "Mirror and colour symmetry: the questions have the same answer for wheel r and its mirror (mirrored row/column) and for its colour complement (complemented row); P1/P2 for 30 = for 86 on the impulse = for 135 on the complemented impulse",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.wheelProblem1_mirror_iff",
+   "GLM.Rule30.wheelProblem2_mirror_iff",
+   "GLM.Rule30.wheelProblem1_complement_iff",
+   "GLM.Rule30.wheelProblem2_complement_iff",
+   "GLM.Rule30.problem1_iff_eightySix",
+   "GLM.Rule30.problem2_iff_eightySix",
+   "GLM.Rule30.problem1_iff_oneThirtyFive",
+   "GLM.Rule30.problem2_iff_oneThirtyFive"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C100",
+  "claim": "The 256 wheels form 88 classes under mirror and colour symmetry; 16 wheels are left-permutive; mirrorNum 30 = 86, complementNum 30 = 135",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.card_equivalence_classes",
+   "GLM.Rule30.card_leftPermutive",
+   "GLM.Rule30.mirrorNum_thirty",
+   "GLM.Rule30.complementNum_thirty"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "finite facts proved by kernel evaluation (decide)"
+ },
+ {
+  "id": "C101",
+  "claim": "Cone separation holds for every left-permutive wheel (16 wheels), not only 30",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.ecaEvolve_flip_left_edge"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "so cone separation alone cannot decide the questions for 30 (wheel 90 is left-permutive and answers NO)"
+ },
+ {
+  "id": "C102",
+  "claim": "Wheel 90 from the impulse has centre column 1,0,0,...: questions 1 and 2 answer NO; wheels 0 and 204: question 1 answers NO",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.ecaColumn_ninety_centre",
+   "GLM.Rule30.not_wheelProblem1_ninety",
+   "GLM.Rule30.not_wheelProblem2_ninety",
+   "GLM.Rule30.not_wheelProblem1_zero",
+   "GLM.Rule30.not_wheelProblem1_identity"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C103",
+  "claim": "With the supplied lattice_geometry.py the GLM still needs reasoning/frozen_path.py (imported by lattice_completion.py); with a stand-in for that one file the full session runs and the lattice reports (facets, lattices, subalgebra, fusion) answer",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "frozen_path.py is not in glm_repo.zip"
+ },
+ {
+  "id": "C104",
+  "claim": "An automata register (256 wheels named by truth table, wheel-30 impulse-run carriers with evidence class and Lean reference) enabled as GLM domain 'automata'; describe/compare/real/report wheel answer the three tracks; OPEN carriers refuse to supply a value",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Python, outside Lean; values cross-checked against Lean theorems by rule30_round9/test_automata.py"
+ },
+ {
+  "id": "C105",
+  "claim": "A wheel reproduces rows 0..T of a run iff it agrees with the run's wheel on every neighbourhood occurring in rows 0..T-1",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.rows_agree_iff"
+  ],
+  "axioms": [
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "for every wheel, starting row and T"
+ },
+ {
+  "id": "C106",
+  "claim": "Every wheel reproducing rows 0..T predicts the same row T+1 iff every neighbourhood of row T already occurred in rows 0..T-1 (the GLM refusal rule is exact for wheels)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.next_row_determined_iff",
+   "GLM.Rule30.ecaRule_flip"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C107",
+  "claim": "Rows 0..4 of the impulse run (in the light cone) determine wheel 30 among all 256; rows 0..3 do not (wheel 62, differing only at 101), so row 4 is not determined by rows 0..3",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.rows_identify_thirty",
+   "GLM.Rule30.rows_three_do_not_identify",
+   "GLM.Rule30.row_four_not_determined",
+   "GLM.Rule30.thirty_sixtyTwo_differ_only_at_101"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "finite checks by decide +kernel"
+ },
+ {
+  "id": "C108",
+  "claim": "The centre column of wheel r < 256 from the impulse equals Rule 30's iff r = 30 or r = 86; 7 values give {30,86}, 6 do not",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.centre_column_class",
+   "GLM.Rule30.centre_prefix_class",
+   "GLM.Rule30.centre_six_not_enough"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "the centre observer cannot tell left from right"
+ },
+ {
+  "id": "C109",
+  "claim": "Column 1 of the impulse run determines wheel 30 among all 256 (8 values suffice, 7 do not); every column 1 <= |c| <= 5 does (13 values suffice)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.column_one_identifies",
+   "GLM.Rule30.column_one_prefix_identifies",
+   "GLM.Rule30.column_one_seven_not_enough",
+   "GLM.Rule30.offCentre_column_identifies"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "least numbers for |c| >= 2 are EMP (rule30_round10)"
+ },
+ {
+  "id": "C110",
+  "claim": "The observer's arrow -sign D(N) is unchanged by the mirror and reversed by the colour swap, for every wheel, row, column and N; for Rule 30: equal for 86, negated for 135 on the complemented impulse",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.observerArrow_mirror",
+   "GLM.Rule30.observerArrow_complement",
+   "GLM.Rule30.wobble_complement",
+   "GLM.Rule30.observerArrow_eightySix",
+   "GLM.Rule30.observerArrow_oneThirtyFive"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C111",
+  "claim": "glm_repo.zip lacks 22 modules imported by the GLM (e.g. runtime/respell, runtime/sinter, runtime/stepwise, engineering/speak, reasoning/colour_induction); the connected CLI, tool induce and tool arc cannot run from it; the session runs",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": ""
+ },
+ {
+  "id": "C112",
+  "claim": "Automata register extended with step, induction, observer and arrow carriers and four report subjects; wheel_induction.py adds the radius-1 family; the pipeline-kit families report unsolved on Rule 30 rows",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Python, outside Lean; cross-checked by rule30_round10/test_round10.py"
+ },
+ {
+  "id": "C113",
+  "claim": "Every right diagonal of the seed pattern is periodic or anti-periodic with the common period of the two diagonals outside it; an anti-periodic sequence with half-period Q has |D(N)| <= Q for all N, exactly Q ones in its first 2Q terms and frequency 1/2",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.runningXor_periodic_or_antiPeriodic",
+   "GLM.Rule30.rdiag_periodic_or_antiPeriodic",
+   "GLM.Rule30.wobble_antiPeriodic_bound",
+   "GLM.Rule30.antiPeriodic_balanced",
+   "GLM.Rule30.antiPeriodic_hasFrequencyHalf"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C114",
+  "claim": "For every D0 some right diagonal D >= D0 is anti-periodic, so infinitely many right diagonals have bounded wobble and frequency exactly 1/2",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.exists_antiPeriodic_rdiag",
+   "GLM.Rule30.infinitely_many_balanced_rdiag"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "does not reach the centre column a(t) = rdiag t t"
+ },
+ {
+  "id": "C115",
+  "claim": "Diagonal 5 has 12 black cells per period 32 (D(32k) = -8k, frequency 3/8, not 1/2); diagonal 7 is anti-periodic with half-period 16 (|D(N)| <= 16)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.wobble_rdiag_five_32",
+   "GLM.Rule30.wobble_rdiag_five",
+   "GLM.Rule30.rdiag_five_not_half",
+   "GLM.Rule30.rdiag_seven_antiPeriodic",
+   "GLM.Rule30.rdiag_seven_bounded"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "finite checks by decide +kernel"
+ },
+ {
+  "id": "C116",
+  "claim": "To D = 39: anti-periodic diagonals 1,2,3,4,6,7,9,15,16,24,25,27,29,34,36,37,39; diagonals 8,10,17,18 balanced but not anti-periodic; least periods far below 2^D",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": ""
+ },
+ {
+  "id": "C117",
+  "claim": "The chirality gap D_c(N) - D_-c(N) equals wheel 30 minus wheel 86 at column c; it is 0 at the centre for every N and odd in c; it is first non-zero at N = 3,6,5,9,7 for c = 1..5",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.wobble_mirror_column",
+   "GLM.Rule30.chiralGap_eq_thirty_sub_eightySix",
+   "GLM.Rule30.chiralGap_centre",
+   "GLM.Rule30.chiralGap_neg",
+   "GLM.Rule30.chiralGap_first"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C118",
+  "claim": "To N = 10^6 the chirality gap at columns 1..5 stays within +-886..+-2918 (random-walk size, no drift)",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": ""
+ },
+ {
+  "id": "C119",
+  "claim": "The observer riding the right edge (depth coordinates) sees wheel 86 with a frame moving one cell per step: rdiag D (t+1) = rule86(rdiag (D-2) t, rdiag (D-1) t, rdiag D t)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.rdiag_moving_frame"
+  ],
+  "axioms": [
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "the GLM's moving-frame induction recovers (86, velocity -1) from 4 diagonal rows (rule30_round11)"
+ },
+ {
+  "id": "C120",
+  "claim": "Of the observers at column 0 and any column c != 0, at least one sees a sequence that is not eventually periodic",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.offCentre_pair_problem1",
+   "GLM.Rule30.seed_at_most_one_periodic_column"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C121",
+  "claim": "With the Round 11 attachments (7 new modules) and four labelled stand-ins (evaluation/harness, respell, sinter, colour_induction gate), GLM.py -q, --ask, tool induce and the toolbox run; 11 imported modules remain missing; tool claim scores 23/23 (frame), 2/5 (held-out; misses are refusals), 2/2 (out of frame)",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "supersedes C111; Python, outside Lean"
+ },
+ {
+  "id": "C122",
+  "claim": "D(p N) = sum over r < p of the phase wobbles D_{p,r}(N); balanced phases of one stride give a balanced sequence",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.wobble_strobe_sum",
+   "GLM.Rule30.hasFrequencyHalf_of_strobes"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C123",
+  "claim": "Problem 1 holds iff for every stride p >= 1 some phase of the strobe a(p t + r) of the centre column is not eventually constant",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.problem1_iff_strobes",
+   "GLM.Rule30.eventuallyPeriodic_iff_strobes_const"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "stride 1 = centerCol_not_eventually_constant"
+ },
+ {
+  "id": "C124",
+  "claim": "If every arithmetic progression of the centre column has frequency 1/2 (SeedAPBalanced), Problems 1 and 2 hold",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.problems_one_and_two_of_seed_apBalanced"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C125",
+  "claim": "FSTypical implies APBalanced (a strobe is a clock-only finite-state observer); hence SeedFSTypical implies SeedAPBalanced",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.apBalanced_of_fsTypical",
+   "GLM.Rule30.seedAPBalanced_of_seedFSTypical"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C126",
+  "claim": "APBalanced does not imply FSTypical for general sequences (a doubled typical sequence)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.exists_apBalanced_not_fsTypical"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "so SeedAPBalanced is a strictly weaker sufficient target than SeedFSTypical"
+ },
+ {
+  "id": "C127",
+  "claim": "SeedAPBalanced (every AP of the centre column has frequency 1/2)",
+  "class": "OPEN",
+  "status": "open",
+  "lean": [
+   "GLM.Rule30.SeedAPBalanced"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C128",
+  "claim": "Phase wobbles of the centre column for strides 2..6 at floor(10^6/p); largest D_{3,1}(333333) = 1583",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.strobe_wobble_table",
+   "GLM.Rule30.strobe_three_one"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C129",
+  "claim": "D_{3,1}(3333333) = 3229 (z = 1.8) at 10^7: the stride-3 excess does not grow; 135 phases p <= 16 to 10^7 have max |z| = 2.68",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": ""
+ },
+ {
+  "id": "C130",
+  "claim": "D(195112) = 0 and D(N) > 0 for 195112 < N <= 10^6 (the arrow does not flip)",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.arrow_last_flip_1e6"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "EMP: no zero up to 10^7; D(10^7) = 4440"
+ },
+ {
+  "id": "C131",
+  "claim": "Some sequence with frequency 1/2 has D(N) > 0 for every N >= 1 (a persistent arrow is not bias)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.exists_balanced_persistent_arrow"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C132",
+  "claim": "Every left diagonal ldiag D t = a(t)(D - t) of the seed pattern is eventually periodic with a power-of-two period",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.ldiag_eventually_periodic",
+   "GLM.Rule30.bool_transducer_periodic"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C133",
+  "claim": "Left diagonals have period <= 8 for D <= 200 but preperiod about 1.3 D (> D for 20 <= D <= 200); right diagonal periods exceed D for D <= 200 except D = 2",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "the centre column reads every diagonal before its regularity shows"
+ },
+ {
+  "id": "C134",
+  "claim": "Block counts (k <= 12), 1023 Walsh window characters and echoes at lags 1..64 of the centre column to 10^7 are within fair-coin range",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": ""
+ },
+ {
+  "id": "C135",
+  "claim": "The GLM theorem wheel (25 statements, 13 spokes, 9 negative controls) derives SeedAPBalanced as the weakest sufficient open hypothesis for Problems 1 and 2; no chain reaches any prize problem from the proved seed facts",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Python, outside Lean"
+ },
+ {
+  "id": "C136",
+  "claim": "Every row of the stack of a left-white row is left-white; the lifted statement LeftWhiteAperiodic p may be checked from the first row only",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.isLeftWhite_evolve",
+   "GLM.Rule30.leftWhiteAperiodic_iff_from_start"
+  ],
+  "axioms": [
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C137",
+  "claim": "No column of any left-white row is eventually constant (LeftWhiteAperiodic 1); run bound 3d + 5 for period 1",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.leftWhiteAperiodic_one",
+   "GLM.Rule30.runBound_one"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C138",
+  "claim": "If LeftWhiteAperiodic p holds for every p >= 1 (or only for the factorials), then Problem 1 holds",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.problem1_of_leftWhiteAperiodic",
+   "GLM.Rule30.problem1_of_leftWhiteAperiodic_factorial",
+   "GLM.Rule30.problem1_of_leftWhiteAperiodicAll"
+  ],
+  "axioms": [
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "the lifted statement is stronger than Problem 1 and is open for every p >= 2"
+ },
+ {
+  "id": "C139",
+  "claim": "LeftWhiteAperiodic p holds iff a run bound exists for period p (compactness)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.leftWhiteAperiodic_iff_runBound",
+   "GLM.Rule30.leftWhiteAperiodicAll_iff_runBoundsAll"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C140",
+  "claim": "Problem 1 iff every proposal 'period p from time N' is refuted; with a run bound the refutation arrives by time N + B(N) + 1; for p = 1 by time 4N + 6",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.problem1_iff_every_proposal_refuted",
+   "GLM.Rule30.refutation_horizon_of_runBound",
+   "GLM.Rule30.refutation_horizon_one"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C141",
+  "claim": "Exact period-2 run bounds 1,7,6,5,5,8,9,9 for distances d <= 7, for every left-white row, and they are attained; period 1 exact bound d + 1 for d <= 7",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.runBound_two_upTo_seven",
+   "GLM.Rule30.runBound_two_sharp",
+   "GLM.Rule30.runBound_one_sharp_upTo_seven"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C142",
+  "claim": "Exact run bounds for periods 3..6 at distances d <= 4, for every left-white row",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.runBound_small_periods"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C143",
+  "claim": "Exact longest p-periodic runs for p <= 6 at d <= 7 (p <= 2: d <= 9); the period-2 search relaxation dies within 38 steps for every d <= 24",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": ""
+ },
+ {
+  "id": "C144",
+  "claim": "The reaction table is balanced (4 of 8 neighbourhoods produce black) and the rule is not injective",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.reaction_table_balanced",
+   "GLM.Rule30.step_not_injective"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C145",
+  "claim": "Coboundary weights have total 0 on every finite row",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.coboundary_total_zero",
+   "GLM.Rule30.rowQty_of_isCoboundary"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C146",
+  "claim": "Every additive quantity of range <= 6 whose total is the same on rows 0..T_r of the seed run (T_r = 1,2,4,11,26,32) is a coboundary: no non-trivial conservation law of range <= 6",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.seed_run_no_conservation_law",
+   "GLM.Rule30.seed_run_conserved_quantity_vanishes"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C147",
+  "claim": "The propose-and-check loop on rows identifies wheel 30 at row 4 and then only confirms; on the centre column every proposal p <= 8, N <= 1500 is refuted within 11 steps",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": ""
+ },
+ {
+  "id": "C148",
+  "claim": "The extended GLM theorem wheel (34 statements, 16 spokes) still has no chain from the proved facts to any prize problem; the narrowest unproved rung for Problem 1 is LeftWhiteAperiodic 2",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Python, outside Lean"
+ },
+ {
+  "id": "C149",
+  "claim": "A bit sequence is eventually periodic iff some jump rule a(t) = f(a(t-1..t-J)) holds from some time on, iff some linear (XOR-of-taps) jump rule does",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.eventuallyPeriodic_iff_jumpRule",
+   "GLM.Rule30.eventuallyPeriodic_iff_linearJumpRule"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C150",
+  "claim": "Problem 1 iff no jump rule (any look-back, taps, rule) ever takes over the centre column; equally for linear jump rules",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.problem1_iff_no_jumpRule",
+   "GLM.Rule30.problem1_iff_no_linearJumpRule"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C151",
+  "claim": "Any look-back-1 jump rule that takes over the centre column makes it alternate (the narrowest open rung of Problem 1 is period 2)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.centerCol_lookback_one"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C152",
+  "claim": "Under SeedFSTypical every jump rule is right on the centre column with asymptotic frequency exactly 1/2",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.jumpRule_hits_half_of_seedFSTypical"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C153",
+  "claim": "A lens walk of an eventually periodic sequence is eventually periodic; a never-cycling lens walk of the centre column would prove Problem 1; for lossless lenses this is equivalent to Problem 1",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.evPeriodic_lensWalk",
+   "GLM.Rule30.problem1_of_lensWalk_not_evPeriodic",
+   "GLM.Rule30.problem1_iff_lensWalk_not_evPeriodic"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C154",
+  "claim": "If every k-bit word has frequency 2^-k, every network point of a sliding k-lens has frequency #preimage/2^k; k = 1 gives frequency 1/2",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.lens_freq_of_blockNormal",
+   "GLM.Rule30.hasFrequencyHalf_of_blockNormal_one"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C155",
+  "claim": "The GLM Golay network is a group (hops are codewords) with hop norms 0/8/12/16/24 of multiplicities 1/759/2576/759/1; repeating a hop returns to the start",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.golayWord_xor",
+   "GLM.Rule30.golay_weight_census",
+   "GLM.Rule30.golayWord_nodup",
+   "GLM.Rule30.hop_twice"
+  ],
+  "axioms": [
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C156",
+  "claim": "Every point of the Golay network is within 3 minimal (octad) hops of every other; norm-12/16 hops need exactly 2, the norm-24 hop exactly 3",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.golay_octad_distance"
+  ],
+  "axioms": [
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C157",
+  "claim": "No linear jump rule with taps in 1..128 reproduces the centre column on times 128..256",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.centerCol_no_linear_rule_128",
+   "GLM.Rule30.no_linearRule_of_certificate"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C158",
+  "claim": "No jump rule with 2 taps <= 64, 3 taps <= 32 or 4 taps <= 24 (any Boolean function) reproduces 64 consecutive centre-column bits from time J",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.centerCol_no_tap_rule"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C159",
+  "claim": "Over 4,194,304 steps the GLM network statistics (points, hop vectors, hop norms, norm pairs, return-in-2) of the centre column match the exact pattern-free prediction on block, block+Gray and sliding lenses (|z| <= 1.6; <= 2.1 with the GLM tie-break); an LFSR control is detected",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Python, outside Lean"
+ },
+ {
+  "id": "C160",
+  "claim": "Best k-tap jump rule (k <= 4) on 2^20 centre-column bits is no better than on a fair coin; local (256-bit) shortcuts likewise; linear complexity within 6 of n/2 for n <= 20000",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Python, outside Lean"
+ },
+ {
+  "id": "C161",
+  "claim": "Early-time transient: the first 2^17 centre-column steps have 125 near-white/near-black 24-bit windows (fair-coin mean 36.4, max 103 over 5000); later segments normal; statistic chosen after seeing the data",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "exploratory; not a confirmed pattern"
+ },
+ {
+  "id": "C162",
+  "claim": "What a proof needs: P1 - exclude every jump rule, first unproved instance eventual alternation (period 2); P2 - a balance theorem for the seed; P3 - a lower-bound method; no finite computation suffices",
+  "class": "DEF",
+  "status": "diagnostic",
+  "lean": [
+   "GLM.Rule30.centerCol_lookback_one",
+   "GLM.Rule30.no_finite_certificate_problem1"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C163",
+  "claim": "The seed's space-time diagram has no non-trivial eventual translation symmetry: invariance under (t,i) -> (t+a, i+b) from some time on forces a = 0 and b = 0",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.seed_spacetime_period_trivial"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "tile-theory 'period of the whole collection'"
+ },
+ {
+  "id": "C164",
+  "claim": "No time shift combined with a reflection i -> b - i maps the seed's diagram to itself from some time on",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.seed_no_mirror_symmetry"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "with C163: trivial eventual symmetry group"
+ },
+ {
+  "id": "C165",
+  "claim": "Key forcing: at a black time of column c, the cell to its left equals the complement of the next value of column c (every run)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.key_forcing"
+  ],
+  "axioms": [],
+  "notes": ""
+ },
+ {
+  "id": "C166",
+  "claim": "Period-2 forcing: if column c alternates from time N, then column c-1 is black at black times of c, column c-2 holds its value for one step after each black time of c, and from N+1 column c-3 is the complement of column c-2 one step later",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.alt_forces_left_one",
+   "GLM.Rule30.alt_pair_constant",
+   "GLM.Rule30.alt_shift_complement"
+  ],
+  "axioms": [
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C167",
+  "claim": "One-parameter reduction of the period-2 case: everything at or left of an alternating column is determined, from time N+1, by the phase and the single half-speed sequence 'column c-2'",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.alt_left_determined",
+   "GLM.Rule30.columns_left_determined"
+  ],
+  "axioms": [
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C168",
+  "claim": "Recognizability bridge: if column +1 or -1 of the seed run is, from some time on, a fixed function of a finite window of the centre column (any delay), Problem 1 holds",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.problem1_of_neighbour_recognizable"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C169",
+  "claim": "Over 4,194,304 steps, the uncertainty of column +1 given a centred window of the centre column falls from 1 bit to about 0.58 bits (window 15) and of column -1 to about 0.30 bits; no approach to 0 is seen at reliable window sizes",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "C, outside Lean; recognizability lead not supported"
+ },
+ {
+  "id": "C170",
+  "claim": "For every n >= 3 the only monomial of degree 2n-1 in the ANF of a(n)(0) is M_n = x_{2-n}...x_n (and its translate at every cell c)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.topMonomial_unique",
+   "GLM.Rule30.topMonomial_unique_at"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "extends the n = 3..6 computation (topMonomial_unique_small) to all n; fails at n = 2 (E7)"
+ },
+ {
+  "id": "C171",
+  "claim": "For n >= 3 no ANF monomial of a(n)(0) of degree >= 2n-1 contains the second-left variable x_{1-n}",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.anfCoeff_second_left_small"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "via the second-cell derivative formula of Round 8"
+ },
+ {
+  "id": "C172",
+  "claim": "Right-cone weight growth: for n >= 3 the top-degree monomial of a(n)(0) has weight 2n-2 and that of a(n+1)(0) has weight exactly 2 more",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.topDegree_weight_growth"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "a property of the n-step map; does not decide P1 or P3 (E2)"
+ },
+ {
+  "id": "C173",
+  "claim": "Diagonal recursion and a pruned search over the cells of a left-white row; the search is sound for every left-white row",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.evolve_diag_succ",
+   "GLM.Rule30.searchDead_sound",
+   "GLM.Rule30.runSearch_sound"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C174",
+  "claim": "Period-2 run bounds for every left-white row and every distance d <= 16: B = 1,7,6,5,5,8,9,9,16,15,14,13,14,16,19,21,25",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.runBound_two_upTo_sixteen"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "native_decide; agrees with Round 13 for d <= 7"
+ },
+ {
+  "id": "C175",
+  "claim": "Each of the bounds in C174 is attained by an explicit left-white row",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.runBound_two_witness"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C176",
+  "claim": "Conjectured linear period-2 run bound B(d) <= 2d + 7; it would imply that no column of any left-white row (in particular of the seed) is eventually 2-periodic",
+  "class": "OPEN",
+  "status": "open",
+  "lean": [
+   "GLM.Rule30.PeriodTwoLinearBound",
+   "GLM.Rule30.leftWhiteAperiodic_two_of_linearBound",
+   "GLM.Rule30.runBoundTwoExt_le_linear"
+  ],
+  "axioms": [
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "implication FORMAL; bound checked for d <= 16 (CERT) and d <= 26 (EMP)"
+ },
+ {
+  "id": "C177",
+  "claim": "Exact period-2 run bounds for d = 17..26 are 24,23,35,34,33,32,31,31,30,34; d + B(d) takes only the values 8, 24, 41, 54, 55, 60 in blocks ('barrier diagonals')",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "C, outside Lean"
+ },
+ {
+  "id": "C178",
+  "claim": "The seed's pattern fills exactly the triangle |i| <= t and both corners are black",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.seed_pattern_triangle"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "apex angle 90 degrees with square cells"
+ },
+ {
+  "id": "C179",
+  "claim": "Influence triangle: flipping cell j always flips (n, j+n) on every row (rigid right side); the left side can advance at speed 1 (white row) or stall completely (wall row)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.influence_right_ray",
+   "GLM.Rule30.influence_left_ray_fast",
+   "GLM.Rule30.influence_left_ray_stalls",
+   "GLM.Rule30.influence_inside_cone"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C180",
+  "claim": "On random rows the left edge of the influence triangle advances at mean speed about 0.243 (100 trials to t = 8192); the right edge is +t in every trial",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "C, outside Lean"
+ },
+ {
+  "id": "C181",
+  "claim": "Vertical slices of the 2D Moore light cone are triangles with half-angle tangent between 1 and sqrt 2; apex 90 degrees (face slice) to 2 arctan sqrt 2 with cosine -1/3 (diagonal slice)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.moore_slice_mem",
+   "GLM.Rule30.moore_slice_factor_bounds",
+   "GLM.Rule30.diagonal_slice_angle",
+   "GLM.Rule30.face_slice_angle"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C182",
+  "claim": "In k-dimensional space-time the 2k axis cones cut every set invariant under signed coordinate permutations into equal volumes; the light cone fills exactly 1/(2k) of the Euclidean ball and of the cube",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.LatticeCone.axisCone_fraction",
+   "GLM.LatticeCone.lightCone_ball_fraction",
+   "GLM.LatticeCone.lightCone_cube_fraction"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "1/4 for Rule 30, 1/6 for 2D rules"
+ },
+ {
+  "id": "C183",
+  "claim": "Over all 2^N words, sum of D(N) is 0 and sum of D(N)^2 is N 2^N; z = D/sqrt N has mean square exactly 1; at most 2^N / lambda^2 words have |z| >= lambda",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.sum_wordWobble",
+   "GLM.Rule30.sum_wordWobble_sq",
+   "GLM.Rule30.mean_sq_zScore",
+   "GLM.Rule30.card_large_zScore_le",
+   "GLM.Rule30.seqZScore_eq"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "justifies the normalisation operator"
+ },
+ {
+  "id": "C184",
+  "claim": "The early excess of near-constant 24-bit windows in the first 2^17 centre-column steps (z = 6.5 by window count) drops to z = 3.1 when overlapping windows are counted as one event; after allowing for 32 segments and a post-hoc statistic it is not significant",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Python, outside Lean"
+ },
+ {
+  "id": "C185",
+  "claim": "Spinning Rule 30's triangle |s| <= t about the time axis collects exactly the round cone |z| <= t; a point z != 0 in it is collected exactly at the angles arg z + pi*Z (twice per turn)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Spin.spin_sweep_triangle",
+   "GLM.Spin.spin_tri_moments",
+   "GLM.Spin.spin_tri_two_moments"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "rotation written as multiplication by e^{i theta}"
+ },
+ {
+  "id": "C186",
+  "claim": "The spinning 2D Moore pyramid sweeps the round cone |z| <= sqrt2 * t (apex 2 arctan sqrt2, cos -1/3) and contains the round cone |z| <= t at every moment, and nothing more",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Spin.spin_sweep_pyramid",
+   "GLM.Spin.spin_core_pyramid",
+   "GLM.Spin.mem_spin_pyr_iff"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "dwell fraction 1 - (4/pi) arccos(1/rho) in the shell is not formalised"
+ },
+ {
+  "id": "C187",
+  "claim": "Helical sweep with turn omega per step: if omega/pi is irrational the planes are pairwise distinct and dense; if omega = pi p/q they repeat with period q",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Spin.helical_planes_distinct",
+   "GLM.Spin.helical_planes_dense",
+   "GLM.Spin.helical_planes_periodic"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C188",
+  "claim": "Lattice point (t,a,b) is collected by the spinning triangle iff a^2+b^2 <= t^2 and by the spinning pyramid iff a^2+b^2 <= 2t^2; counts for t <= 10 tabulated",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Spin.lattice_collected_iff",
+   "GLM.Spin.collected_counts"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C189",
+  "claim": "Only the four quarter turns 1, i, -1, -i map the integer grid to itself",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Spin.rot_lattice_iff"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C190",
+  "claim": "Lattice symmetries carry the light-cone pyramid onto each of the 2k axis pyramids; those fixing its axis (with sign +) leave it in place",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.LatticeCone.pyramid_orbit",
+   "GLM.LatticeCone.pyramid_spin_stabilizer"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "with C182: the lattice positions of the pyramid collect all of space-time, 1/(2k) each"
+ },
+ {
+  "id": "C191",
+  "claim": "Rule 30's diagram planted in the grid and turned a half turn reads Rule 86 on the reference axis; the time axis (centre column) reads the same at every angle; a full turn is the identity",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.spun_half_turn_read",
+   "GLM.Rule30.spun_axis_invariant",
+   "GLM.Rule30.spunDiagram_add_four"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C192",
+  "claim": "Rule 30's turned diagram determines the number of quarter turns mod 4; for Rule 90 a half turn is invisible",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.rule30_spin_readable",
+   "GLM.Rule30.rule90_spin_halfturn_invisible"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C193",
+  "claim": "No row of the seed pattern from t = 2 on is mirror-symmetric (cell t-1 vs 1-t for even t, t-2 vs 2-t for odd t); rows 0 and 1 are symmetric; so the half turn is visible in every row from t = 2",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.rule30_row_not_mirror",
+   "GLM.Rule30.rule30_rows_zero_one_mirror",
+   "GLM.Rule30.spun_half_turn_visible_every_row"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C194",
+  "claim": "Spins in one plane commute and add; the 4D double rotation at rates alpha, beta closes up iff alpha/beta is rational, and for an irrational ratio its once-per-turn section is dense",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Spin.plane_spins_commute",
+   "GLM.Spin.double_rotation_closes_iff",
+   "GLM.Spin.double_rotation_section_dense"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C195",
+  "claim": "Quaternion rotations: 3D conjugations compose by multiplication and fix the axis Im q; quarter turns about different axes do not commute; left multiplication by a unit quaternion p != 1 fixes no nonzero vector; v -> e^{i a} v e^{i b} turns planes (1,i) and (j,k) by a+b and a-b",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Spin.conj_comp",
+   "GLM.Spin.conj_fixes_axis",
+   "GLM.Spin.quaternion_spins_noncommute",
+   "GLM.Spin.left_mul_no_fixed_vector",
+   "GLM.Spin.left_right_double_rotation"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C196",
+  "claim": "Period-2 run bounds for every left-white row extended to d = 17, 18: B = 24, 23, both attained",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.runBound_two_upTo_eighteen",
+   "GLM.Rule30.runBound_two_witness18"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "native_decide; agrees with the Round 16 values computed outside Lean"
+ },
+ {
+  "id": "C197",
+  "claim": "An independent C depth-first search reproduces B(d) for d <= 26 and gives B(27) = 33, B(28) = 33 (d + B = 60, 61), all below 2d + 7",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "computed outside Lean; not verified"
+ },
+ {
+  "id": "C198",
+  "claim": "Product formula: the ANF coefficient of x^U in F*G is the GF(2) sum over pairs (S,S') with S union S' = U of coeff_F(S)*coeff_G(S')",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.coeffZ_mul"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C199",
+  "claim": "One Rule 30 step coefficient-wise: coeff of a(n+1)(c) = linear part + injector pair sum; for n >= 2 every coefficient of degree >= 2n comes from the injector C*R alone",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.anfCoeff_succ_split",
+   "GLM.Rule30.linear_part_below_wall",
+   "GLM.Rule30.anfCoeff_succ_high_eq_injector"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C200",
+  "claim": "The C*R injector produces an odd number of surviving pairs (S,S') with S union S' = M_{n+1}, for every n >= 1",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.injectorPairs_card_odd",
+   "GLM.Rule30.injector_pairSum_topMonomial"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C201",
+  "claim": "Exact numbers of surviving injector pairs for M_{n+1}: 3, 3, 5, 3 for n = 1..4",
+  "class": "EXH",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.injectorPairs_card_small"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "native_decide"
+ },
+ {
+  "id": "C202",
+  "claim": "The seed space-time diagram is the degree-one slice of the ANF: a(n)(c) on the seed = coefficient of x_0 in a(n)(c); Problem 1 is a statement about that coefficient; the slice evolves autonomously by Rule 30",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.seed_eq_linearCoeff",
+   "GLM.Rule30.problem1_iff_linearCoeff",
+   "GLM.Rule30.linearCoeff_autonomous",
+   "GLM.Rule30.pairSum_singleton"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C203",
+  "claim": "Decoupling: for any bit sequence b there is a family agreeing with Rule 30's a(n)(0) in every ANF coefficient except that of x_0 whose seed column is b; so the injector parity lock is compatible with a periodic seed column",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.top_structure_cannot_fix_seed",
+   "GLM.Rule30.injector_lock_compatible_with_periodicity"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "refutes the inference 'odd lock => no periodicity'"
+ },
+ {
+  "id": "C204",
+  "claim": "Analogies made exact: Boolean derivative satisfies D_i D_i = 0 and derivatives commute; ANF coefficients are iterated derivatives; Rule 30 = Rule 150 xor C*R; Rule 150 is GF(2)-linear with ANF degree <= 1 for every n; Rule 30 is not additive",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.booleanDerivative_twice",
+   "GLM.Rule30.booleanDerivative_comm",
+   "GLM.Rule30.anfCoeff_eq_anfCoeff_derivative",
+   "GLM.Rule30.rule30_eq_rule150_xor_injector",
+   "GLM.Rule30.rule150_anfDegree_le_one",
+   "GLM.Rule30.rule30_not_additive"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C205",
+  "claim": "The flat triangle, the round 90-degree cone and the square pyramid have the same side view |x| <= t, and are different bodies",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Funnel.sideView_tri",
+   "GLM.Funnel.sideView_roundCone",
+   "GLM.Funnel.sideView_pyr",
+   "GLM.Funnel.side_view_bodies_distinct"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C206",
+  "claim": "A round hole of radius f(t) has side view |x| <= f(t); if that is Rule 30's triangle then f(t) = t for t >= 0 (straight walls); the paraboloid bowl does not give the triangle",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Funnel.sideView_funnel",
+   "GLM.Funnel.funnel_side_view_triangle",
+   "GLM.Funnel.paraboloid_not_triangle"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C207",
+  "claim": "A sector of angle Theta rolled into a cone: points at distance s from the tip; flat metric ds^2 + s^2 dtheta^2 (actual derivatives); circle at distance s has length Theta*s, angle deficit 2*pi - Theta",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Funnel.coneEmbed_dist_apex",
+   "GLM.Funnel.coneDs_hasDeriv",
+   "GLM.Funnel.coneEmbed_metric",
+   "GLM.Funnel.coneEmbed_closes",
+   "GLM.Funnel.coneEmbed_circle_length"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C208",
+  "claim": "Rule 30's triangle rolled up: both edges black in every row (colour-consistent gluing); row t becomes a ring of 2t cells; sector angle 2, deficit 2*pi - 2, wall angle arcsin(1/pi), depth/rim sqrt(pi^2 - 1); the spun cone is Theta = sqrt 2 * pi",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Funnel.rolled_seam_black",
+   "GLM.Funnel.rolledRow_seam",
+   "GLM.Funnel.rolledRow_covers",
+   "GLM.Funnel.rolled_ring_card",
+   "GLM.Funnel.rule30_cone_deficit",
+   "GLM.Funnel.rule30_cone_shape",
+   "GLM.Funnel.spun_cone_angle"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C209",
+  "claim": "On the rolled hole the seam is visible from row 2 on; the centre column is the line opposite the seam; fixed columns wind onto angle pi, fixed right diagonals onto the seam",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Funnel.rolled_seam_visible",
+   "GLM.Funnel.rolledRow_centre",
+   "GLM.Funnel.ringAngle_column_tendsto",
+   "GLM.Funnel.ringAngle_right_diagonal_tendsto"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": ""
+ },
+ {
+  "id": "C210",
+  "claim": "Exact run bounds for periods 3 (d <= 14), 4, 5, 6 (d <= 12) for every left-white row, each attained; all <= 2d + 12",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.runBound_three_upTo_fourteen",
+   "GLM.Rule30.runBound_four_upTo_twelve",
+   "GLM.Rule30.runBound_five_upTo_twelve",
+   "GLM.Rule30.runBound_six_upTo_twelve",
+   "GLM.Rule30.runBound_periods_sharp",
+   "GLM.Rule30.runBoundPeriods_le_linear"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "native_decide"
+ },
+ {
+  "id": "C211",
+  "claim": "Frontier of the study collected as six checked theorems: proved partial results, sufficient open targets (SeedFSTypical -> SeedAPBalanced -> P1 and P2; LeftWhiteAperiodicAll <-> RunBoundsAll -> P1; PeriodTwoLinearBound -> period 2; sqrt wobble bound -> P2; Problem3Eventual -> P3), restatements, blocked routes, strict weakening, observer frame",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.frontier_proved_partial",
+   "GLM.Rule30.frontier_sufficient_targets",
+   "GLM.Rule30.frontier_restatements",
+   "GLM.Rule30.frontier_blocked_routes",
+   "GLM.Rule30.frontier_weakest_target_strictly_weaker",
+   "GLM.Rule30.frontier_observer_frame"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 20 audit; re-packages earlier theorems"
+ },
+ {
+  "id": "C212",
+  "claim": "The wobble arrow is logically independent of frequency 1/2: some sequence has wobble positive and negative infinitely often (arrow flips forever) but no frequency 1/2 (dyadic blocks, 3*D(2^k-1) = 1-(-2)^k); with C-row exists_balanced_persistent_arrow, neither flipping nor persistence says anything about P2",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.exists_flipping_arrow_unbalanced",
+   "GLM.Rule30.arrow_independent_of_frequency",
+   "GLM.Rule30.blockSeq_wobble"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 20 audit; user idea: wobble as perspective"
+ },
+ {
+  "id": "C213",
+  "claim": "Half-line machine for an alternating column: the cells left of the column evolve on their own (the column is the right input); whenever the column is black the cell to its left is black; the machine (bitmask, bit i = cell c-1-i) equals the real run while the column alternates, and a machine failure bounds the real run",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.testBit_halfStep",
+   "GLM.Rule30.halfState_eq_evolve",
+   "GLM.Rule30.alt_forces_left_black",
+   "GLM.Rule30.altRun_lt_of_halfDiesBy",
+   "GLM.Rule30.altRunBoundUpTo_of_halfCheck"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 21; no cell to the right of the column is used"
+ },
+ {
+  "id": "C214",
+  "claim": "One-sided period-2 targets: PeriodTwoHalfLineDies (every half-line word fails eventually under both alternating phases) implies LeftWhiteAperiodic 2; so does the linear form PeriodTwoHalfLineLinear (failure by time 2d+8)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.leftWhiteAperiodic_two_of_halfLineDies",
+   "GLM.Rule30.leftWhiteAperiodic_two_of_halfLineLinear",
+   "GLM.Rule30.halfLineDies_of_halfLineLinear"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 21; open targets stated as Props"
+ },
+ {
+  "id": "C215",
+  "claim": "Alternating period-2 runs certified for d <= 24 (previously d <= 18 for all period-2 runs): machine bounds 7,6,5,6,9,10,12,17,18,17,30,29,28,32,31,30,31,33,38,37,36,41,43,42 (exact for the machine); all <= 2d+8; full period-2 bound max(3d+5, halfBound d); the linear one-sided target holds for d <= 24",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.halfCheck_upTo_24",
+   "GLM.Rule30.altRunBound_upTo_24",
+   "GLM.Rule30.runBound_two_upTo_24",
+   "GLM.Rule30.halfBound_sharp",
+   "GLM.Rule30.halfBound_le_linear",
+   "GLM.Rule30.halfLineLinear_upTo_24"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "native_decide; machine values are upper bounds for real runs and exceed the exact real values (d = 11: 30 vs 13); the machine does not satisfy 2d+7 (d = 11)"
+ },
+ {
+  "id": "C216",
+  "claim": "Driven half-line machine for every period p: a p-periodic column follows the drive whose word is its first p values; when the column is black, the cell to its left is the complement of the column's next value; HalfLineDies p implies LeftWhiteAperiodic p, and HalfLineDies p for all p >= 1 implies Problem 1",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.col_eq_driveN",
+   "GLM.Rule30.col_black_forces_left",
+   "GLM.Rule30.halfStateD_eq_evolve",
+   "GLM.Rule30.run_lt_of_dDiesBy",
+   "GLM.Rule30.leftWhiteAperiodic_of_halfLineDies",
+   "GLM.Rule30.problem1_of_halfLineDies"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 21; Problem 1 reduced to a statement about the left half-line only"
+ },
+ {
+  "id": "C217",
+  "claim": "HalfLineDies 1 is proved: under the constant black drive the machine is forced into the fixed pattern 0101... and fails by time d+2; corollary: a black constant run at distance d from the edge lasts at most d+1 steps (uniform in d)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.constDrive_pattern",
+   "GLM.Rule30.constDrive_dies",
+   "GLM.Rule30.halfLineDies_one",
+   "GLM.Rule30.blackRun_bound"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 21; re-derives the period-1 rung inside the framework; white constant runs are not covered by the machine"
+ },
+ {
+  "id": "C218",
+  "claim": "Driven run bounds certified for period 3 (d <= 20), 4 (d <= 18), 5 and 6 (d <= 16), with full period-p run bounds max(3d+5, machineBound p d); machine values exact for the machine (sharp for d <= 16/14/12/12); all within (p+1)d+14",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.drivenRunBound_three",
+   "GLM.Rule30.drivenRunBound_four",
+   "GLM.Rule30.drivenRunBound_five",
+   "GLM.Rule30.drivenRunBound_six",
+   "GLM.Rule30.runBound_upTo_of_driven",
+   "GLM.Rule30.runBound_three_upTo_20",
+   "GLM.Rule30.runBound_six_upTo_16",
+   "GLM.Rule30.machineBound_sharp",
+   "GLM.Rule30.machineBound_envelope"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "native_decide; previous exact certificates: period 3 to d = 14; periods 4-6 to d = 12"
+ },
+ {
+  "id": "C219",
+  "claim": "Round 21 frontier collected: HalfLineDies 1 proved; one-sided targets for all p imply Problem 1; period-2 one-sided targets imply LeftWhiteAperiodic 2; linear one-sided target certified for d <= 24",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.frontier_halfLine"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "re-packaging; includes a CERT conjunct (native_decide)"
+ },
+ {
+  "id": "C220",
+  "claim": "Period-2 machine bound by the half-speed search (one bit of column c-2 per two steps; about 2^(d/2) branches): agrees with brute force for d <= 20 and stays <= 2d+8 for d <= 42; consecutive d often end on the same left diagonal (d + B(d) plateaus 8,8,8 / 41,41,41 / 46,46,46 / 57,57,57)",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 21; outside Lean; the Lean certificate (C215) covers d <= 24"
+ },
+ {
+  "id": "C221",
+  "claim": "Counting heuristic for the machine: d free cells, one test per black time of the drive; if the tests were independent the machine would fail after about d tests, i.e. at time about p*d/(number of black cells per period); matches the data (period 2: about 2d; period-6 words with one black cell: about 6.5d at d = 16)",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 21; a uniform proof would have to show the tests are independent enough; this is the open core of the period-p rung"
+ },
+ {
+  "id": "C222",
+  "claim": "Light cone and left-permutivity of the driven half-line machine, every drive: codes agreeing below bit n give states agreeing on bits i with i+t<n at time t; flipping bit n flips bit n-t at time t <= n; failure before time k depends only on the bits < k of the code",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.halfStateD_testBit_congr",
+   "GLM.Rule30.halfStateD_testBit_flip",
+   "GLM.Rule30.dDiesBy_congr",
+   "GLM.Rule30.dDiesBy_mod",
+   "GLM.Rule30.dDiesBy_succ"
+  ],
+  "axioms": [
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 22"
+ },
+ {
+  "id": "C223",
+  "claim": "The first tests are exactly independent: for every drive sequence and every k, exactly 2^(k - blacks k) codes P < 2^k pass every check before time k (blacks k = number of black drive times before k); each black time halves the survivors exactly",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.survivors_card",
+   "GLM.Rule30.survivors_card_succ",
+   "GLM.Rule30.blacks_succ"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 22; proves the pre-edge half of the C221 counting heuristic; the post-edge tests (time >= d-1) remain open"
+ },
+ {
+  "id": "C224",
+  "claim": "Prefix search: building the code bit by bit and dropping prefixes that already fail is sound (implies the full Round 21 check); the Round 21 period-2 machine equals the driven machine; linear one-sided target HalfLineLinear p a b for every period implies HalfLineDies p",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.prefixSearch_sound",
+   "GLM.Rule30.dDiesBy_of_prefixSearch",
+   "GLM.Rule30.drivenCheck_of_prefixCheck",
+   "GLM.Rule30.halfDiesBy_eq_dDiesBy",
+   "GLM.Rule30.halfLineLinear_of_prefixCheck",
+   "GLM.Rule30.halfLineDies_of_linear",
+   "GLM.Rule30.halfLineLinear_upTo_of_prefixCheck"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 22; the search visits 2^(k - blacks k) prefixes at depth k (C223)"
+ },
+ {
+  "id": "C225",
+  "claim": "Period-2 linear one-sided target PeriodTwoHalfLineLinear (failure by time 2d+8, both phases) certified for d <= 36 (was 24); every 2-periodic column at distance d <= 36 in a left-white row has run length <= max(3d+5, 2d+8)",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.halfLineLinear_upTo_36",
+   "GLM.Rule30.prefixCheck_two",
+   "GLM.Rule30.drivenRunBound_two_linear",
+   "GLM.Rule30.runBound_two_upTo_36"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "native_decide; machine bounds are upper bounds for real runs"
+ },
+ {
+  "id": "C226",
+  "claim": "Linear one-sided targets HalfLineLinear p (p+1) 15 (failure by time (p+1)d+14) certified for periods 3 (d <= 26), 4 (d <= 23), 5 (d <= 21), 6 (d <= 19), with the matching run bounds max(3d+5, (p+1)d+14)",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.halfLineLinear_three_upTo_26",
+   "GLM.Rule30.halfLineLinear_four_upTo_23",
+   "GLM.Rule30.halfLineLinear_five_upTo_21",
+   "GLM.Rule30.halfLineLinear_six_upTo_19",
+   "GLM.Rule30.runBound_three_to_six_linear"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "native_decide; Round 21 machine bounds reached 20/18/16/16"
+ },
+ {
+  "id": "C227",
+  "claim": "Round 22 frontier collected: survivors_card; HalfLineLinear -> HalfLineDies; PeriodTwoHalfLineLinear -> LeftWhiteAperiodic 2; period-2 linear target for d <= 36",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.frontier_prefixSearch"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "re-packaging; includes a CERT conjunct (native_decide)"
+ },
+ {
+  "id": "C228",
+  "claim": "Exact machine bounds by the prefix search in C: reproduces the Round 21 tables; period 2 exact to d = 46, all <= 2d+8 (d = 44: 87); periods 3/4/5/6 to d = 39/35/33/31, all within (p+1)d+14",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 22; outside Lean"
+ },
+ {
+  "id": "C229",
+  "claim": "After the edge (time >= d-1) the tests keep approximately halving the survivors: the normalised count survivors(k)*2^blacks(k)/2^(d-1) is exactly 1 at k = d-1 (C223) and stays within about 20% of 1 while more than about a thousand codes remain (period 2, d = 30 and 36; period 3, d = 24)",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 22; proving a bounded bias after the edge would give the linear targets"
+ },
+ {
+  "id": "C230",
+  "claim": "Power-series ladder, automaticity rung: eventually periodic sequences are 2-automatic (finite 2-kernel), so CentreNotTwoAutomatic -> Problem1; a kernel path (pairwise distinct members, one per depth) makes the 2-kernel infinite; pairwise distinct decimations indexed by a finite set S give |S| <= #kernel",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.isTwoAutomatic_of_eventuallyPeriodic",
+   "GLM.Rule30.problem1_of_centreNotTwoAutomatic",
+   "GLM.Rule30.not_isTwoAutomatic_of_kernelPath",
+   "GLM.Rule30.card_le_encard_twoKernel"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 23; from the user's Round 21 draft (Rule30PowerSeriesLadder.lean); 2-automatic is defined by a finite 2-kernel (Eilenberg), not via automata"
+ },
+ {
+  "id": "C231",
+  "claim": "Power-series form of P1: a Boolean sequence is eventually periodic iff its linear-complexity profile (least order of a GF(2) linear recurrence generating the first m terms) is bounded; hence Problem1 <-> LCUnbounded centerCol; N <= L(m) rules out every eventual period with tau + p < N",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.eventuallyPeriodic_iff_lcBounded",
+   "GLM.Rule30.problem1_iff_lcUnbounded",
+   "GLM.Rule30.noSmallPeriodicity_of_lcProfile",
+   "GLM.Rule30.exists_fits_all_of_lcBounded"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 23; compactness over the finitely many recurrences of bounded order; lcProfile is a specification (sInf), not Berlekamp-Massey"
+ },
+ {
+  "id": "C232",
+  "claim": "Hankel forms: an eventual period with tau + p < N gives det(hankel a N) = 0 (two equal columns); a recurrence of order L < N on the first 2N-1 terms gives det = 0; so det(hankel a N) != 0 implies L(m) >= N for m >= 2N-1, and infinitely many non-zero Hankel determinants imply Problem1",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.hankel_det_eq_zero_of_periodic",
+   "GLM.Rule30.hankel_det_eq_zero_of_fits",
+   "GLM.Rule30.le_lcProfile_of_hankel_det",
+   "GLM.Rule30.problem1_of_hankel_infinitely_often"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 23; the converse (Kronecker: P1 -> infinitely many non-zero determinants) is stated as Problem1IffHankelInfinitelyOften and NOT proved"
+ },
+ {
+  "id": "C233",
+  "claim": "Morse-Hedlund (one-sided): a Boolean sequence is eventually periodic iff its factor complexity p(n) <= n for some n; hence Problem1 <-> for all n, n + 1 <= complexity centerCol n",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.eventuallyPeriodic_iff_complexity_le",
+   "GLM.Rule30.problem1_iff_complexity",
+   "GLM.Rule30.eventuallyPeriodic_of_complexity_eq",
+   "GLM.Rule30.complexity_le_of_periodic"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 23"
+ },
+ {
+  "id": "C234",
+  "claim": "Audit of the draft's complexity form: with blocks counted in a fixed finite prefix of length M the statement (Problem1 <-> for all n, n+1 <= p_M(n)) is equivalent to NOT Problem1 (the right side fails at n = M+1); a prefix only gives lower bounds on complexity",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.draftComplexityForm_iff",
+   "GLM.Rule30.prefixComplexity_le_complexity"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 23; error E9 (finite prefix in an infinite characterisation)"
+ },
+ {
+  "id": "C235",
+  "claim": "Certificates for the centre column: det(hankel centerCol 10000) != 0 over GF(2); hence linear complexity of the first 19999 bits >= 10000 (no GF(2) linear recurrence of order < 10000) and no eventual period with tau + p < 10000; every word of length n <= 10 occurs (complexity = 2^n); the 1023 decimations a(2^k n + r), k <= 9, are pairwise distinct, so the 2-kernel has >= 1023 elements",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.hankel_centerCol_det_ne_zero",
+   "GLM.Rule30.lcProfile_centerCol_19999",
+   "GLM.Rule30.no_eventual_period_below_10000",
+   "GLM.Rule30.complexity_centerCol_eq",
+   "GLM.Rule30.twoKernel_centerCol_ge"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 23; checked inverse (unverified Gauss-Jordan, verified checker hankel_det_ne_zero_of_check); supersedes no_small_eventual_period (p <= 1000, tau <= 1000) as the periodicity range"
+ },
+ {
+  "id": "C236",
+  "claim": "Counting law (corrected), every period p >= 1: for p - 1 <= T < d exactly 2^(d+p-1) of the 2^(d+T) left-white contexts keep the column at distance d p-periodic through time T; for p = 2, RunCount 2 d T = 2^(d+1) for 1 <= T < d. Proof: Rule 30 is left-permutive, so each test at time t < d reads the fresh free cell d - t by xor, and flipping it is an involution that toggles only that test",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.runCount_law",
+   "GLM.Rule30.runCount_two_law",
+   "GLM.Rule30.card_tests_succ",
+   "GLM.Rule30.evolve_flip_left"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 23; two-sided analogue of survivors_card (C223)"
+ },
+ {
+  "id": "C237",
+  "claim": "The draft counting law at the endpoint T = d is false (RunCount 2 3 3 = 20, RunCount 2 4 4 = 20); the draft deficit monotonicity after T = d is false (d = 1: RunCount 2 1 3 = 1, RunCount 2 1 4 = 2)",
+  "class": "CERT",
+  "status": "refuted",
+  "lean": [
+   "GLM.Rule30.runCountTwoLawDraft_false",
+   "GLM.Rule30.deficitIncreasingAfterD_false",
+   "GLM.Rule30.runCount_samples"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 23; error E9; the T = d test reads the black edge cell, which is not free"
+ },
+ {
+  "id": "C238",
+  "claim": "Counting-law table for d <= 8 and T <= d+3 (p = 2): exactly 2^(d+1) for 1 <= T < d, irregular afterwards (e.g. d = 7: 286, 483, 172, 0); GF(2) ranks of centre-column Hankel matrices (full rank at N = 1000, 1001, 1002, 5001, 10000; not at 1003, 5000)",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 23; outside Lean"
+ },
+ {
+  "id": "C239",
+  "claim": "Round 23 frontier collected: P1 <-> unbounded linear complexity; P1 <-> complexity >= n+1; CentreNotTwoAutomatic -> P1; infinitely many non-zero Hankel determinants -> P1; L(19999) >= 10000; #2-kernel >= 1023; the period-2 counting law",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.frontier_powerSeries"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "re-packaging; includes CERT conjuncts (native_decide)"
+ },
+ {
+  "id": "C240",
+  "claim": "Implementation invariance: seven XOR-free formulas (L != (C or R), branch on L, OR/AND/NOT, L+C+R+CR mod 2, (L-(C or R))^2, |L-(C or R)|, max-min) all compute Rule 30 (wheel number 30); any local rule agreeing with Rule 30 on the eight neighbourhoods has the same evolution from every row; Rule 30 is not monotone",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.rule30_eq_bne",
+   "GLM.Rule30.rule30_eq_ite",
+   "GLM.Rule30.rule30_eq_orAndNot",
+   "GLM.Rule30.rule30_eq_natMod",
+   "GLM.Rule30.rule30_eq_intSq",
+   "GLM.Rule30.rule30_eq_intAbs",
+   "GLM.Rule30.rule30_eq_maxSubMin",
+   "GLM.Rule30.tableNum_implementations",
+   "GLM.Rule30.implementation_invariance",
+   "GLM.Rule30.rule30_not_monotone"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 24; implementation choice cannot change any answer"
+ },
+ {
+  "id": "C241",
+  "claim": "Replace the XOR: for every two-input gate g other than xor, the centre column of g(L, C or R) from a single black cell is eventually periodic (wheels 0, 1, 14, 15, 16, 17, 31, 224, 225, 238, 239, 240, 241, 254, 255); g(L, C or R) is left-permutive iff g is xor, xnor, L or not L; wheel 225 (xnor) is left-permutive but its centre column is black from time 5 on",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.outer_alternative_periodic",
+   "GLM.Rule30.outerRule_mem",
+   "GLM.Rule30.outerRule_leftPermutive_iff",
+   "GLM.Rule30.ecaEvolve_225_seed",
+   "GLM.Rule30.centre225_eventually_black",
+   "GLM.Rule30.leftPermutive_not_sufficient"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 24; closed forms of the whole diagram (ecaEvolve_eq_closed) or one-sided invariants"
+ },
+ {
+  "id": "C242",
+  "claim": "Replace the OR: the wheels L xor h(C, R) are exactly the 16 left-permutive wheels; if h is not of OR type (not exactly three true outputs) the centre column from a single black cell is eventually periodic (wheels 15, 60, 90, 105, 120, 150, 165, 180, 195, 210, 225, 240); the OR-type gates give wheels 30, 45, 75, 135",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.leftPermutive_iff_innerRule",
+   "GLM.Rule30.innerRule_leftPermutive",
+   "GLM.Rule30.inner_alternative_periodic",
+   "GLM.Rule30.innerRule_mem",
+   "GLM.Rule30.innerRule_orType"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 24"
+ },
+ {
+  "id": "C243",
+  "claim": "For each OR-type wheel (30, 45, 75, 135) the centre column from a single black cell has no eventual period p <= 500 starting at or before time 500",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.orType_no_small_period",
+   "GLM.Rule30.orType_check",
+   "GLM.Rule30.centreList_spec"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 24; sound window simulator for every wheel"
+ },
+ {
+  "id": "C244",
+  "claim": "The exact counting law (C236) holds for every left-permutive wheel, hence for every L xor h(C, R); among the 16 wheels g(L, C or R) the period-2 law holds exactly for the left-permutive ones (fails at d = 3 or d = 4 otherwise; AND gives 21 and OR gives 17 instead of 16)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.runCountW_law",
+   "GLM.Rule30.innerRule_runCount_law",
+   "GLM.Rule30.ecaEvolve_flip_left",
+   "GLM.Rule30.runCountW_thirty"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 24; the counting law is a property of the XOR alone"
+ },
+ {
+  "id": "C245",
+  "claim": "Failure of the counting law for the non-permutive outer gates (finite check) and its iff form; RunCountW 224 2 3 2 = 21, RunCountW 254 2 3 2 = 17",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.outer_law_fails",
+   "GLM.Rule30.outer_runCount_law_iff",
+   "GLM.Rule30.outer_and_breaks_law",
+   "GLM.Rule30.outer_or_breaks_law",
+   "GLM.Rule30.runCountW_thirty_edge"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 24; also RunCountW 30 2 3 3 = 20"
+ },
+ {
+  "id": "C246",
+  "claim": "For every right-permutive wheel the counting law holds for all times T >= p - 1 (no edge); for Rule 86 (mirror of Rule 30, same centre column) RunCountW 86 2 d T = 2^(d+1) for all T >= 1, while RunCountW 30 2 3 3 = 20",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.runCountW_law_right",
+   "GLM.Rule30.runCountW_eightySix",
+   "GLM.Rule30.ecaEvolve_flip_right"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 24; the value RunCountW 30 2 3 3 = 20 is the CERT row C245"
+ },
+ {
+  "id": "C247",
+  "claim": "Kronecker's converse: if det H_r != 0 over GF(2) and every larger Hankel determinant vanishes, the sequence is eventually periodic; a Boolean sequence is not eventually periodic iff infinitely many Hankel determinants are non-zero; Problem1IffHankelInfinitelyOften holds",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.eventuallyPeriodic_of_hankel_det_eventually_zero",
+   "GLM.Rule30.hankel_infinitely_often_iff",
+   "GLM.Rule30.problem1IffHankelInfinitelyOften",
+   "GLM.Rule30.hankel_det_ne_zero_at_first_error"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 24; To Do 11 done"
+ },
+ {
+  "id": "C248",
+  "claim": "Round 24 frontier collected",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.frontier_round24"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "re-packaging; includes CERT conjuncts (native_decide)"
+ },
+ {
+  "id": "C249",
+  "claim": "Table of the 32 one-gate variants: smallest (transient, period) fitting the first 601 centre values; none found for wheels 30, 45, 75, 135",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 24; outside Lean; the periodic cases are proved in C241/C242"
+ },
+ {
+  "id": "C250",
+  "claim": "Tuning loop, general: pruning by a finite prefix is permanent and sound; surviving all prefixes means exactly right; a finite family locks in after finite time",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.pruned_forever",
+   "GLM.Rule30.survives_of_eq",
+   "GLM.Rule30.eq_of_survives_all",
+   "GLM.Rule30.finite_lockIn"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 25; user input (tuning by ear)"
+ },
+ {
+  "id": "C251",
+  "claim": "Graded families: with finitely many candidates of each size, the size needed to stay consistent with every prefix is bounded iff some candidate is exactly right",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.graded_settles_iff"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 25"
+ },
+ {
+  "id": "C252",
+  "claim": "Directed loop over an enumeration (first surviving candidate) settles for ever on a correct candidate if one exists, and drifts past every fixed block otherwise",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.tuneIndex_eventually",
+   "GLM.Rule30.tuneIndex_diverges"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 25; identification in the limit"
+ },
+ {
+  "id": "C253",
+  "claim": "No finite confirmation: for every prefix length and candidate there is a sequence agreeing on the prefix that the candidate gets wrong",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.no_finite_confirmation"
+  ],
+  "axioms": [
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 25; same wall as no_finite_certificate_problem1"
+ },
+ {
+  "id": "C254",
+  "claim": "Periodic instrument: tuneCost (least tau+p of a consistent eventually periodic law) is monotone and prefix-local; bounded tuneCost forces an exact period (compactness); each resolution level is decided by a finite prefix; Problem1 iff tuneCost of the centre column is unbounded",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.tuneCost_mono",
+   "GLM.Rule30.tuneCost_congr",
+   "GLM.Rule30.periodic_of_tuneCost_bounded",
+   "GLM.Rule30.resolution_iff",
+   "GLM.Rule30.eventuallyPeriodic_iff_tuneCostBounded",
+   "GLM.Rule30.problem1_iff_tuneCost_unbounded"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 25; new equivalent form of P1"
+ },
+ {
+  "id": "C255",
+  "claim": "Linear complexity profile is at most tuneCost; any sublinear bound on the excess n - tuneCost(n) implies Problem1; TuneExcessLog (excess <= 2 log2 n + 2) implies Problem1",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.lcProfile_le_tuneCost",
+   "GLM.Rule30.problem1_of_tuneExcessBound",
+   "GLM.Rule30.logBound_sublinear",
+   "GLM.Rule30.problem1_of_tuneExcessLog"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 25; TuneExcessLog is OPEN"
+ },
+ {
+  "id": "C256",
+  "claim": "Centre column: excess <= 16 for n <= 1000, attained at n = 448 (tuneCost = 432, tune tau=282 p=150); TuneExcessLog holds for n <= 2000; tuneCost >= 10000 at 19999 bits; Round 25 frontier",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.tuneExcess_le_16",
+   "GLM.Rule30.tuneExcess_16_sharp",
+   "GLM.Rule30.tuneExcessLog_upto",
+   "GLM.Rule30.tuneCost_centerCol_19999",
+   "GLM.Rule30.frontier_round25"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 25; native_decide; finite ranges only"
+ },
+ {
+  "id": "C257",
+  "claim": "Tuning profile to n = 3000: best periodic tune changes 1584 times, excess at most 22, max of excess - (2 log2 n + 2) is 0",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 25; outside Lean"
+ },
+ {
+  "id": "C258",
+  "claim": "Conjecture loop, general: one failing level refutes a candidate; true candidates survive every level; a loop with unbounded test levels prunes every false candidate and no true one",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.Conjecture.refuted_of_fail",
+   "GLM.Rule30.Conjecture.SurvivesTo.of_holds",
+   "GLM.Rule30.Conjecture.holds_iff_survivesTo",
+   "GLM.Rule30.Conjecture.loop_prunes_false",
+   "GLM.Rule30.Conjecture.loop_keeps_true"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 26; user input (GLM proposes and tests lemmas)"
+ },
+ {
+  "id": "C259",
+  "claim": "Narrowing a graded family of candidate statements: the frontier (least surviving parameter) is monotone, never passes a true member, is bounded iff some member is true, and eventually equals the least true parameter",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.Conjecture.narrow_mono",
+   "GLM.Rule30.Conjecture.narrow_le_of_holds",
+   "GLM.Rule30.Conjecture.narrow_bounded_iff",
+   "GLM.Rule30.Conjecture.narrow_eventually_eq"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 26"
+ },
+ {
+  "id": "C260",
+  "claim": "Junctions of candidate statements: members share their fate at the junction level; a true and a false candidate are split by a finite read; a junction persists at every level iff the tests are identical; the meet of a surviving junction survives; analogy (transport) is not truth-preserving",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.Conjecture.survivesTo_of_junction",
+   "GLM.Rule30.Conjecture.junction_split",
+   "GLM.Rule30.Conjecture.junction_forever_iff",
+   "GLM.Rule30.Conjecture.meet_holds_iff",
+   "GLM.Rule30.Conjecture.survivesTo_meet_of_junction",
+   "GLM.Rule30.Conjecture.analogy_transport_unsound"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 26; GLM junction / analogy vocabulary"
+ },
+ {
+  "id": "C261",
+  "claim": "The tuning excess is the longest echo: n <= tuneCost s n + e iff no echo of length e+1 (final block of the first n notes that occurred p >= 1 places earlier) ends at n; the excess grows by at most one per note",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.costFits_iff_echo",
+   "GLM.Rule30.excess_le_iff_not_echo",
+   "GLM.Rule30.tuneExcessBound_iff_noEcho",
+   "GLM.Rule30.excess_succ_le"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 26; new exact identity"
+ },
+ {
+  "id": "C262",
+  "claim": "EchoLogBound a b (excess <= a log2 n + b) is graded in a and b, TuneExcessLog = EchoLogBound 2 2, and every member implies Problem1; sorting certificate for repeat-free prefixes",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.echoLogBound_mono",
+   "GLM.Rule30.tuneExcessLog_iff",
+   "GLM.Rule30.logLinear_sublinear",
+   "GLM.Rule30.problem1_of_echoLogBound",
+   "GLM.Rule30.repeatFree_of_check",
+   "GLM.Rule30.echoLogBound_upto_of_check",
+   "GLM.Rule30.not_echoLogBound_of_echo"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 26; EchoLogBound is OPEN"
+ },
+ {
+  "id": "C263",
+  "claim": "Centre column, n <= 131072: TuneExcessLog holds; sharp frontiers EchoLogBound 0 33, 1 17, 2 2, 3 0 hold on the range; EchoLogBound 0 32, 1 16, 2 1 are false (echoes of length 33 at n = 83154 and 22 at n = 1995)",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.tuneExcessLog_upto_131072",
+   "GLM.Rule30.echoLogBound_0_33_upto",
+   "GLM.Rule30.echoLogBound_1_17_upto",
+   "GLM.Rule30.echoLogBound_3_0_upto",
+   "GLM.Rule30.not_echoLogBound_0_32",
+   "GLM.Rule30.not_echoLogBound_1_16",
+   "GLM.Rule30.not_echoLogBound_2_1"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 26; native_decide; the refutations are final; the bounds are finite-range only"
+ },
+ {
+  "id": "C264",
+  "claim": "Post-edge window halving is false: for drive 1010... and d = 11 two codes stay alive from time 17 to 29, so no fraction < 1 works for any window m <= 12 (certified in C265); a plateau refutes window halving; amortised halving AmortizedHalving p c e implies HalfLineLinear p (c+1) (c e) and HalfLineDies p",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.not_windowHalving_of_plateau",
+   "GLM.Rule30.halfLineLinear_of_amortized",
+   "GLM.Rule30.halfLineDies_of_amortized"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 26; refutes the To Do 1/10 suggestion in its window form"
+ },
+ {
+  "id": "C265",
+  "claim": "AmortizedHalving with (c, e) = (4, 1) holds for periods 2 and 3, every drive word, d <= 12 and all times; slack e = 0 is false for both; WindowHalving 2 m num den is false for every m <= 12 and num < den",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.not_windowHalving_two",
+   "GLM.Rule30.amortizedHalvingUpTo_2_4_1",
+   "GLM.Rule30.amortizedHalvingUpTo_3_4_1",
+   "GLM.Rule30.not_amortizedHalving_2_4_0",
+   "GLM.Rule30.not_amortizedHalving_3_4_0"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 26; native_decide; AmortizedHalving is OPEN"
+ },
+ {
+  "id": "C266",
+  "claim": "Drive symmetry: dying for a late-started drive implies dying for the drive; for periodic drives all rotations are equivalent; HalfLineDies 2 iff the word 10 dies; HalfLineDies 3 iff the words 100 and 110 die",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.wordDies_of_shift",
+   "GLM.Rule30.wordDies_shift_iff_of_periodic",
+   "GLM.Rule30.halfLineDies_two_iff",
+   "GLM.Rule30.halfLineDies_three_iff"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 26; To Do 2 (partly)"
+ },
+ {
+  "id": "C267",
+  "claim": "The conjecture loop run (4 rounds, SEED / ANALOGY / NARROW / JUNCTION / REPAIR): frontiers LIN(2,3,5), LIN(3,3,7), AMORT(p,4,1) stable from d <= 11 to d <= 17; echo profile to 10^6: TuneExcessLog holds with equality only at n = 1995",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 26; outside Lean"
+ },
+ {
+  "id": "C268",
+  "claim": "Two analogies refuted: the period-1 bound d+2 fails for periods 2 and 3 (HalfLineLinear p 1 2 false); the Rule 86 counting law (exact for all T) fails for Rule 30 at d = T = 3; Round 26 frontier theorem",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.not_halfLineLinear_two_one_two",
+   "GLM.Rule30.not_halfLineLinear_three_one_two",
+   "GLM.Rule30.analogy_rule86_rule30",
+   "GLM.Rule30.frontier_round26"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 26; native_decide; refutations are final"
+ },
+ {
+  "id": "C269",
+  "claim": "Transition specification of the driven half-line (every drive): a code of length d has length exactly d+t at time t; the state strictly increases, so no (state, phase) pair ever repeats and the reachable state graph has no cycle; no fixed window of w >= 1 cells determines the next window, while w+1 cells determine w cells one step later; the column history at times < n determines the first n code bits",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.halfStateD_width",
+   "GLM.Rule30.halfStateD_strictMono",
+   "GLM.Rule30.halfStateD_ne",
+   "GLM.Rule30.halfStateD_phase_ne",
+   "GLM.Rule30.window_not_closed",
+   "GLM.Rule30.halfStep_mod",
+   "GLM.Rule30.colHistory_determines"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 27; corrects the fixed-width graph proposal: cycle certificates are vacuous for this machine"
+ },
+ {
+  "id": "C270",
+  "claim": "Width reduction, sound form: the cells beyond an inner column c-k form the half-line machine driven by that column; that inner machine never fails its test; so if the inner column follows a drive bd' on [0, T] the inner code S >>> k survives every bd'-test before T, and an inner column cannot follow a drive past the inner code's failure",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.halfStep_shiftRight",
+   "GLM.Rule30.halfStateD_shiftRight",
+   "GLM.Rule30.inner_never_fails",
+   "GLM.Rule30.inner_alternation_bound",
+   "GLM.Rule30.innerCol_breaks"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 27"
+ },
+ {
+  "id": "C271",
+  "claim": "Four proof routes each give the period-2 rung: a ranking (bounded measure dropping over every surviving post-edge window of c steps) gives the run bound d-1+c(f d+1) and WordDies; a width step (codes of length d+2 die within b steps of some code of length d) with the length-1,2 base gives WordDies; amortised halving; individual termination of the word 10",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.ranking_dies_by",
+   "GLM.Rule30.wordDies_of_ranking",
+   "GLM.Rule30.not_ranking_of_window",
+   "GLM.Rule30.wordDies_of_widthStep",
+   "GLM.Rule30.not_widthStep_of_witness",
+   "GLM.Rule30.halfLineDies_two_of_routes"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 27; a ranking using time and width freely encodes any run bound"
+ },
+ {
+  "id": "C272",
+  "claim": "Exact longest life of the period-2 machine (drive word 10) for every code length d <= 32: Lmax = 2 6 4 6 8 10 12 10 18 14 30 16 28 32 26 30 30 30 38 30 36 40 40 42 44 44 48 48 48 52 66 54 (every code fails by Lmax d, one code first fails exactly at Lmax d); two longest survivors of length 11 merge at time 2",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.lmaxTwo_spec",
+   "GLM.Rule30.lmaxTwo_check",
+   "GLM.Rule30.witnesses_merge"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 27; native_decide with the sound prefix search"
+ },
+ {
+  "id": "C273",
+  "claim": "No declared progress measure is a ranking: width, black cells, adjacent changes, black run at the column, first white pair, white cells, black cells in the original window, alternating block at the column (rankPot 0..7) each fail for every window 1 <= c <= 20 and every bound, by a surviving post-edge window where the measure does not drop",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.no_declared_ranking",
+   "GLM.Rule30.rankTableCheck_eq",
+   "GLM.Rule30.not_ranking_of_check"
+  ],
+  "axioms": [
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 27; native_decide; refutations are final"
+ },
+ {
+  "id": "C274",
+  "claim": "No width step of size b <= 17 for the drive word 10: all codes of length 29 fail by time 48 but a code of length 31 survives to 66; EMP to d = 44: the needed step size is 18 (word 10) and 12 (word 01)",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.not_widthStep_two"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 27; native_decide; EMP part in HISTORY.md Round 27"
+ },
+ {
+  "id": "C275",
+  "claim": "A shared inner survivor: the longest survivors of lengths 11 (1493) and 19 (382293) carry during times 6..19 an inner column alternating at odd times (depths 6 and 14) behind which sits the same inner code 1601, which lives exactly 13 steps under the word 01; both inner columns break at time 20. EMP: 1601 appears in longest witnesses of lengths 11 13 15 19 21 (word 10) and 12 14 16 20 (word 01)",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.shared_inner_survivor"
+  ],
+  "axioms": [
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "propext"
+  ],
+  "notes": "Round 27; scripts/post_edge_witnesses.py; To Do 19"
+ },
+ {
+  "id": "C276",
+  "claim": "Round 27 open statement and frontier: Round27Open := AmortizedHalving 2 4 1 is the one surviving uniform candidate (implies the period-2 rung; certified for d <= 12; smallest unresolved case d = 13). Candidate-generation harness: enumeration vs counterexample-guided repair under one budget, held-out drive words of periods 3 and 4; GLM-guided plug-in not run",
+  "class": "OPEN",
+  "status": "open",
+  "lean": [
+   "GLM.Rule30.Round27Open",
+   "GLM.Rule30.frontier_round27"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 27; OPEN; harness is EMP / GLM prototype"
+ },
+ {
+  "id": "C277",
+  "claim": "Local-rule induction on any grid with any reader (the GLM's induction discipline, generalising the 1-D wheel result): a rule reproduces the demonstrations iff each key's entry is consistent (rules are chosen key by key); consistency is per key; all surviving rules agree at a query cell iff all consistent entries for its key decode alike; for plain tables over >= 2 colours, all survivors agree iff the key was seen, and on a whole query grid iff every needed key was seen; lock-in: if the truth is a rule over the reader and the query is covered, every survivor is right; a clash refutes the reader for good; plain consistency = no clash",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.LocalRule.reproduces_iff_keyOK",
+   "GLM.LocalRule.consistent_iff",
+   "GLM.LocalRule.reproduces_update",
+   "GLM.LocalRule.determined_iff_keyDetermined",
+   "GLM.LocalRule.keyOK_antitone",
+   "GLM.LocalRule.not_consistent_mono",
+   "GLM.LocalRule.determined_iff_seen",
+   "GLM.LocalRule.answer_determined_iff_covered",
+   "GLM.LocalRule.survivor_correct",
+   "GLM.LocalRule.clash_refutes",
+   "GLM.LocalRule.plain_consistent_iff"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 28; namespace GLM.LocalRule; generalises WheelInduction.next_row_determined_iff; basis of the GLM solver rule30_round28/glm_overlay/glm_universal/reasoning/local_rule_induction.py (study folder)"
+ },
+ {
+  "id": "C278",
+  "claim": "Local-rule ladder on the 50 ARC tasks stored in the GLM archive: sound mode 1 right (a85d4709, answered by the Rule 30 row reader (west, centre, east)), 0 wrong, 49 refused; leave-one-out mode the same; the unsound control that guesses unseen keys gives 1 right and 16 wrong, so the refusal rule of C277 prevents 16 wrong answers at no cost in right ones on this set",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 28; EMP; the 50 stored tasks are not a held-out set; the GLM's own colour solver (not in this archive) is recorded in the GLM STATUS.md at 2 of 50 right, 0 wrong"
+ },
+ {
+  "id": "C279",
+  "claim": "GLM benchmark before/after Round 28 through the GLM's own tool entry point: stored ARC 0 -> 1 right (0 wrong both); development local-rule puzzles 0 -> 44 right of 108 (1 wrong after); held-out local-rule puzzles (7 families written after the reader ladder was frozen, fresh seeds) 0 -> 24 right of 84, 0 wrong, both non-local controls refused 24 of 24; Rule 30 knowledge alignment 0 -> 10 of 10; Round 11 claim suite unchanged (frame 23/23, heldout 2/5, refuse 2/2)",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 28; EMP; before = glm_repo.zip + study overlays of Rounds 10-16; after = + setup_round28.sh; the alignment questions measure whether the GLM's knowledge is current, not reasoning power"
+ },
+ {
+  "id": "C280",
+  "claim": "The GLM theorem wheel brought up to date (To Do 6, 8): Round 21-28 statements and spokes (HalfLineDies, the period-2 one-sided targets, AmortizedHalving, the four proof routes, the tuning excess, the Hankel form), the Problem 3 vocabulary (P3Eventual -> P3; the light-cone circuit bound blocked as a different function), the narrowest open rungs per problem, and the whole ledger as carriers (glm/r28_wheel.json, tool theorem ledger ...)",
+  "class": "DEF",
+  "status": "done",
+  "lean": [
+   "GLM.Rule30.problem1_of_halfLineDies",
+   "GLM.Rule30.leftWhiteAperiodic_of_halfLineDies",
+   "GLM.Rule30.leftWhiteAperiodic_two_of_halfLineLinear",
+   "GLM.Rule30.halfLineDies_of_amortized",
+   "GLM.Rule30.halfLineDies_two_of_routes",
+   "GLM.Rule30.problem1_of_tuneExcessLog",
+   "GLM.Rule30.problem1_iff_tuneCost_unbounded",
+   "GLM.Rule30.problem1IffHankelInfinitelyOften",
+   "GLM.Rule30.problem3_of_eventual",
+   "GLM.Rule30.window_not_closed"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 28; GLM code in study:rule30_round28/glm_overlay/glm_universal/reasoning/theorem_wheel_round28.py; every spoke names a Lean theorem listed here"
+ },
+ {
+  "id": "C281",
+  "claim": "To Do 19 probed: for the drive word 10 and every code of length d <= 22 surviving past its edge, the longest stretch on which some inner column alternates is 7..14 steps while the post-edge life grows to 20; the slack K - A grows (0 at K = 7, 8 at K = 19), so the natural uniform form 'an inner column alternates for K - a of the K post-edge steps' is not supported by the data",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 28; EMP only (not certified); inner_alternation_bound (Round 27) is unaffected"
+ },
+ {
+  "id": "C282",
+  "claim": "To Do 2 probed: longest lives Lmax(d) for the drive words 10, 110, 1110, 11110, 111110 and d <= 24 (brute force); word 10 reproduces the certified values of lmaxTwo_spec; for the words 1^(p-1)0 the excess Lmax(d) - d stays <= 10 but grows with d, so the constant-time forcing proof of period 1 (constDrive_dies) does not extend to them",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 28; EMP"
+ },
+ {
+  "id": "C283",
+  "claim": "Multi-step plans (the stepwise planner for puzzles): plans compose (run_append) and the last step can be regressed (run_concat_eq_some); the agreement rule is sound (agree_correct); refutation is permanent; when two hypotheses disagree on the query, its true output refutes one of them (separating_example_refutes); plans with equal signatures on the demonstration inputs and the queries are interchangeable in every continuation; breadth-first layers with merging keep one plan per signature, lose none (layer_complete) and decide consistency and agreement exactly (exists_consistent_iff_layer, agree_iff_layer); the planner (first consistent depth, answer only on agreement) never answers above the shortest explanation, every consistent plan of its depth agrees, and it is correct when the truth is a shortest explanation; the same over any cost order (minAgree_correct, minAgree_unique)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.PlanSearch.run_append",
+   "GLM.PlanSearch.run_concat_eq_some",
+   "GLM.PlanSearch.agree_correct",
+   "GLM.PlanSearch.consistent_antitone",
+   "GLM.PlanSearch.inconsistent_mono",
+   "GLM.PlanSearch.separating_example_refutes",
+   "GLM.PlanSearch.sig_append_congr",
+   "GLM.PlanSearch.sem_congr",
+   "GLM.PlanSearch.consistent_congr",
+   "GLM.PlanSearch.dedup_sub",
+   "GLM.PlanSearch.dedup_rep",
+   "GLM.PlanSearch.layer_sound",
+   "GLM.PlanSearch.layer_complete",
+   "GLM.PlanSearch.exists_consistent_iff_layer",
+   "GLM.PlanSearch.agree_iff_layer",
+   "GLM.PlanSearch.planner_minimal",
+   "GLM.PlanSearch.planner_agree_all",
+   "GLM.PlanSearch.planner_correct",
+   "GLM.PlanSearch.minAgree_correct",
+   "GLM.PlanSearch.minAgree_unique"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 29; namespace GLM.PlanSearch; basis of the GLM planner rule30_round29/glm_overlay/glm_universal/reasoning/grid_planner.py (study folder)"
+ },
+ {
+  "id": "C284",
+  "claim": "Negative controls for the planner: (i) without the Occam premise the tiered agreement rule can be wrong (a consistent hypothesis of higher cost answers differently); (ii) merging partial plans on their states on the demonstration inputs alone, forgetting the queries, is unsound (a concrete instance where the merged layer agrees on an answer the full layer does not determine)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.PlanSearch.minAgree_needs_occam",
+   "GLM.PlanSearch.train_only_signature_unsound"
+  ],
+  "axioms": [
+   "propext"
+  ],
+  "notes": "Round 29; why the GLM planner merges on demonstrations AND queries, and why its wrong answers (C288) are all Occam violations"
+ },
+ {
+  "id": "C285",
+  "claim": "To Do 22: the uniform inner-survivor form InnerFollows a (every code surviving past its edge has an inner column alternating for at least its post-edge life minus a) is false for every a <= 7; witness d = 14, code 11083, first failure at time 32 (post-edge life 19), no inner column at any depth alternates for 12 consecutive times in [0, 32]",
+  "class": "CERT",
+  "status": "refuted",
+  "lean": [
+   "GLM.Rule30.not_innerFollows",
+   "GLM.Rule30.witness_no_long_alternation",
+   "GLM.Rule30.witness_life",
+   "GLM.Rule30.noLongAltCheck_eq"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 29; certifies the EMP finding C281; depths beyond the light cone handled by halfStateD_width; EMP slack on d <= 22 is 8 and grows"
+ },
+ {
+  "id": "C286",
+  "claim": "The Round 29 planner on the 50 ARC tasks stored in the GLM archive: 10 right, 0 wrong, 40 refused at plan depth <= 1, 2 or 3 (5 right, 0 wrong at depth 0 = one fitted step); solved 00dbd492, 1e0a9b12, 662c240a, 7953d61e, 9caf5b84, a85d4709, ae58858e, b91ae062, bc4146bd, d631b094",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 29; EMP; development score (the stored tasks were looked at while the step alphabet was chosen)"
+ },
+ {
+  "id": "C287",
+  "claim": "Held-out multi-step puzzles (11 families written after the planner was frozen, 12 instances each, scored once): 12 right at depth 0 (one step), 47 at depth <= 1, 96 at depth <= 2 and 3, of 132, with 0 wrong at every depth; both non-expressible controls refused 24 of 24; one family (transpose then a local rule) refused 12 of 12 for unseen keys",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 29; EMP; planner sha256 a07403e2... printed in the output; development families scored separately (98 right, 3 wrong of 132 at depth 2)"
+ },
+ {
+  "id": "C288",
+  "claim": "GLM benchmark after Round 29 through the GLM's own tool entry point: stored ARC 1 -> 10 right (0 wrong); Round 28 development puzzles 44 -> 65 right of 108 (1 -> 2 wrong); Round 28 held-out puzzles 24 -> 48 right of 84 (0 wrong; the former controls rotate-180 and flip-rows are one geometric step and now solved); knowledge alignment 10/10; Round 11 claim suite unchanged; every wrong answer seen (here and in C287's development families) is a cheaper hypothesis fitting all demonstrations, i.e. an Occam violation (C284)",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 29; EMP; after = glm_repo.zip + setup_round29.sh (which runs setup_round28.sh)"
+ },
+ {
+  "id": "C289",
+  "claim": "Pipeline stage 1 (goal regression and fitted middle steps): a plan run succeeds iff its backward run does (run_eq_some_iff_runBack, run_append_eq_some_iff_runBack); a fitted middle step answers exactly its fitted map (semMid_eq_some_iff); pruning prefixes whose output shape cannot reach the goal shape loses no consistent plan (shapePrune_sound, shapePrune_skip)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Pipeline.run_append_eq_some_iff_runBack",
+   "GLM.Pipeline.semMid_eq_some_iff",
+   "GLM.Pipeline.shapePrune_sound",
+   "GLM.Pipeline.shapePrune_skip"
+  ],
+  "axioms": [
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 30; To Do 23"
+ },
+ {
+  "id": "C290",
+  "claim": "Pipeline stage 2 (ask loop): asking the cell two surviving plans disagree on keeps the truth and removes at least one plan (truth_mem_askFilter, askFilter_card_lt); the loop asks fewer questions than there are plans (askLoop_questions_lt) and, when it answers, its answer is the true plan's (askLoop_correct)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Pipeline.askFilter_card_lt",
+   "GLM.Pipeline.askLoop_truth_mem",
+   "GLM.Pipeline.askLoop_questions_lt",
+   "GLM.Pipeline.askLoop_correct"
+  ],
+  "axioms": [
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 30; To Do 24; correctness needs the truth among the cheapest surviving plans (the Occam premise of C283)"
+ },
+ {
+  "id": "C291",
+  "claim": "Pipeline stage 3 (Occam gate): a wrong minimal-agreement answer implies a cheaper consistent rival (minAgree_wrong_imp); a gate that keeps the truth preserves correctness (gated_correct); a gate can turn a wrong answer into a refusal (gate_can_fix) and can also drop the truth (gate_can_drop_truth)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Pipeline.minAgree_wrong_imp",
+   "GLM.Pipeline.occam_premise_mono",
+   "GLM.Pipeline.gated_correct",
+   "GLM.Pipeline.gate_can_fix",
+   "GLM.Pipeline.gate_can_drop_truth"
+  ],
+  "axioms": [
+   "propext"
+  ],
+  "notes": "Round 30; To Do 26"
+ },
+ {
+  "id": "C292",
+  "claim": "Pipeline stage 4 (statement frontier): for drive periods 2, 3, 4 the linear half-line bound HalfLineLinearUpTo with slopes 1..6 and the amortised bound with slopes 1..5 hold up to the computed depths (p2 d <= 20, p3 d <= 18, p4 d <= 16 linear; d <= 12 amortised) with the offsets in statement_frontier.json, and each offset minus one is refuted by a certified witness; LIN p2 (1,20)(2,9)(3,5)(4,4)(5,3)(6,2), p3 (1,39)(2,21)(3,7)(4,4)(5,3)(6,2), p4 (1,59)(2,44)(3,29)(4,14)(5,9); AMORT p2 (1,11)(2,3)(3,2)(4,1), p3 (1,14)(2,4)(3,2)(4,1), p4 (1,19)(2,6)(3,4)(4,3)(5,2)",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.PipelineData.frontier_round30",
+   "GLM.Rule30.PipelineData.halfLineLinearUpTo_of_linCheck",
+   "GLM.Rule30.PipelineData.not_halfLineLinear_of_witness",
+   "GLM.Rule30.PipelineData.not_amortizedHalving_of_witness"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 30; To Do 18/25; finite range only; the uniform statements remain open"
+ },
+ {
+  "id": "C293",
+  "claim": "Fresh Round 30 held-out set (11 families x 12, frozen before scoring): Round 29 planner 56 right / 6 wrong; pipeline without middle steps 90 / 4; full stage 1 96 / 4 / 32 refused; with the ask loop at <= 1/2/3/5 questions 101/103/104/106 right, 4/5/5/5 wrong; controls refused 24/24; all wrong answers are Occam failures",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 30; EMP; pipeline sha256 031c6eb5...; held-out sha256 88b2843e..."
+ },
+ {
+  "id": "C294",
+  "claim": "Ask loop on older sets (right answers at <= 1/2/3/5 questions): Round 28 development 65 -> 79/83/88/91 (wrong 2 -> 3/2/2/2); Round 28 held-out 48 -> 60/66/69/77 (wrong 0 -> 1); Round 29 held-out 95 -> 97/100/102/106 (wrong 1); stored ARC no gain; mean 2-2.7 questions per answered puzzle; shape pruning gives identical decisions with fewer expansions (Round 29 held-out 356k -> 235k, 20.5 s -> 14.5 s)",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 30; EMP"
+ },
+ {
+  "id": "C295",
+  "claim": "Occam failures by number of demonstrations k (Round 29 development families): k=1 gate off 62 right / 13 wrong, depth-1 gate 42 / 2; k=2 94 / 2 vs 75 / 1; k >= 3 zero wrong without a gate; on the fresh families k=1 25 / 9 -> 25 / 5 with the automatic gate and one wrong family (objsize-recolour-rot90) persists to k >= 3",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 30; EMP; the automatic gate = depth 1 when k <= 2 else depth 2"
+ },
+ {
+  "id": "C296",
+  "claim": "Planner over statements vs Round 27 at a budget of 60 oracle calls: planner 42 calls, 16 survivors, 8 non-dominated, transfer to held-out levels 0/16; enumeration 5 non-dominated (21/49 transfer), repair 4; Occam for statements: LIN p2 fitted offsets fail later for training depth <= 10 (2/6), none from 12; p3 stable only from 18; p4 only from 16; GLM regression bench unchanged after setup_round30.sh",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 30; EMP"
+ },
+ {
+  "id": "C297",
+  "claim": "Sideways reconstruction (left-permutivity): with column 0 = the drive and column 1 = u, the forced columns recon bd u obey Rule 30 (recon_rule); the driven machine started from a row equal to the reconstruction follows it at every time (halfStateD_testBit_recon), and every machine's columns are the reconstruction from its own first column (recon_of_halfStateD)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.recon_rule",
+   "GLM.Rule30.halfStateD_testBit_recon",
+   "GLM.Rule30.recon_of_halfStateD"
+  ],
+  "axioms": [
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 31; the observer Y turned through 90 degrees"
+ },
+ {
+  "id": "C298",
+  "claim": "Exact sideways form of survival: the machine from code S never fails iff some admissible u (u t = !bd (t+1) at black drive times) reconstructs S as the time-0 row (survives_iff_sideways); hence HalfLineDies p iff no admissible first column of a non-white word of length p reconstructs a finite non-empty row (halfLineDies_iff_sideways)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.survivesForever_iff",
+   "GLM.Rule30.survives_iff_sideways",
+   "GLM.Rule30.halfLineDies_iff_sideways"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 31; exact restatement of the one-sided target; To Do 29"
+ },
+ {
+  "id": "C299",
+  "claim": "Period 1 in the sideways view: under the constant black drive the admissible first column is forced to be white and the reconstruction is the row 0101... at every time (recon_constBlack), so HalfLineDies 1 holds (halfLineDies_one_sideways), independently of the forwards proof halfLineDies_one",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.recon_constBlack",
+   "GLM.Rule30.halfLineDies_one_sideways"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 31; To Do 2"
+ },
+ {
+  "id": "C300",
+  "claim": "Blocked route (To Do 20): on infinite rows the driven machine survives forever under every drive (infinite_row_survives), so no argument insensitive to the finiteness of the row - in particular no finite quotient keeping a bounded window next to the column with free far cells - can prove HalfLineDies p; and for every drive and horizon T some positive code of length T+2 survives T steps (survivor_for_every_horizon)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.infinite_row_survives",
+   "GLM.Rule30.halfStateInf_testBit",
+   "GLM.Rule30.halfStateInf_congr",
+   "GLM.Rule30.survivor_for_every_horizon"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 31; negative control"
+ },
+ {
+  "id": "C301",
+  "claim": "Exact longest lives Lmax(d) of the half-line machine for the drive words 100, 110, 1000, 1100, 1110 (driveN 3 1, 3 3, 4 1, 4 3, 4 7) and every d <= 20, each with a code attaining it; e.g. Lmax(16) = 39, 25, 72, 28, 20",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.lmaxWord_spec",
+   "GLM.Rule30.lmaxWords_check",
+   "GLM.Rule30.isLmax_of_check",
+   "GLM.Rule30.isLmax_unique"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 31; finite range only; To Do 2/3/30"
+ },
+ {
+  "id": "C302",
+  "claim": "To Do 3 answered negatively: the left diagonal d + Lmax(d) on which the longest life ends depends on the drive word (at d = 8 the words 10, 100, 110, 1000, 1100, 1110 give 18, 32, 20, 36, 20, 24) and for the word 10 it takes 28 distinct values for d <= 32, so the small barrier set of the two-sided run bound is not a property of the machine; Lmax(16) = 72 for 1000 and 20 for 1110",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.barrier_depends_on_word",
+   "GLM.Rule30.barrier_set_not_small_two",
+   "GLM.Rule30.lmax_ratio_word",
+   "GLM.Rule30.frontier_round31"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 31; finite range only; EMP extension to d <= 28 in scripts/barrier_diagonals_output.txt (word 100 reaches Lmax(22) = 87; word 1000 reaches Lmax(28) = 96)"
+ },
+ {
+  "id": "C303",
+  "claim": "Exact arithmetic audit: every script in scripts/ and the Round 28-30 study overlays checked for floating point, random numbers and hashing; post_edge_halving.c now prints exact fractions a/2^e (counts unchanged), tuning_by_ear.py computes floor(log2 n) as n.bit_length()-1 (output unchanged); SHA-256 appears only as a benchmark-file fingerprint and floating point only as a wall-clock budget on the GLM side",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 31; housekeeping; earlier study rounds 6-16 not re-audited"
+ },
+ {
+  "id": "C304",
+  "claim": "M24 action on 24-cell seed patterns: pmask is XOR-linear, keeps the number of marked cells, composes; the 12 generator rows decide code-automorphism membership in both directions; the inverse of an automorphism is an automorphism",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.Mathieu.pmask_xor",
+   "GLM.Rule30.Mathieu.weight_pmask",
+   "GLM.Rule30.Mathieu.pmask_mul",
+   "GLM.Rule30.Mathieu.preservesCode_iff_rows",
+   "GLM.Rule30.Mathieu.PreservesCode.symm"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 32; self-contained copy of the GLM Golay rows"
+ },
+ {
+  "id": "C305",
+  "claim": "Orbit enumeration tool: Reach (words in generators) keeps every generator-invariant property and lands in the generated subgroup; a breadth-first certificate checked by certOK lists only orbit members",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.Mathieu.reach_invariant",
+   "GLM.Rule30.Mathieu.reach_mem_closure",
+   "GLM.Rule30.Mathieu.certOK_reach",
+   "GLM.Rule30.Mathieu.reach_of_mem_certValues"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 32; the search is never trusted, only the checked certificate"
+ },
+ {
+  "id": "C306",
+  "claim": "Only rotations commute with Rule 30 on the 24-cell ring: a permutation of the cells commutes with one Rule 30 step on every pattern iff it is a rotation; reflections fail (Rule 30 is chiral); a commuting symmetry carries whole futures",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.Mathieu.commutes_iff_rot",
+   "GLM.Rule30.Mathieu.rot_commutes",
+   "GLM.Rule30.Mathieu.reflect_not_commutes",
+   "GLM.Rule30.Mathieu.transport_iterate",
+   "GLM.Rule30.Mathieu.rot_transport"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 32"
+ },
+ {
+  "id": "C307",
+  "claim": "Pigeonhole: if the one-cell turn is not a code automorphism under a labelling, at most 12 permutations are both Rule 30 symmetries and code automorphisms",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.Mathieu.shared_card_le_of_not_one",
+   "GLM.Rule30.Mathieu.card_le_twelve_of_add_closed",
+   "GLM.Rule30.Mathieu.shared_iff"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 32"
+ },
+ {
+  "id": "C308",
+  "claim": "Two automorphisms gM0, gM1 of the GLM code; their words reach every pattern with 1..5 marked cells from one seed (5-homogeneous); the orbit of an octad is exactly the 759 octads and of a dodecad the 2576 dodecads",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.Mathieu.gens_preserve",
+   "GLM.Rule30.Mathieu.orbit_weight_one",
+   "GLM.Rule30.Mathieu.orbit_weight_two",
+   "GLM.Rule30.Mathieu.orbit_weight_three",
+   "GLM.Rule30.Mathieu.orbit_weight_four",
+   "GLM.Rule30.Mathieu.orbit_weight_five",
+   "GLM.Rule30.Mathieu.orbit_octads",
+   "GLM.Rule30.Mathieu.orbit_dodecads",
+   "GLM.Rule30.Mathieu.codeTargets_counts"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 32; that gM0, gM1 generate all of M24 is classical background (Livingstone-Wagner), not re-proved"
+ },
+ {
+  "id": "C309",
+  "claim": "6 marked cells: exactly two orbits, inside an octad (21252) or not (113344); 7 marked cells: exactly two orbits (6072, 340032)",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.Mathieu.orbit_hexads_special",
+   "GLM.Rule30.Mathieu.orbit_hexads_umbral",
+   "GLM.Rule30.Mathieu.orbit_heptads_special",
+   "GLM.Rule30.Mathieu.orbit_heptads_umbral",
+   "GLM.Rule30.Mathieu.hexad_types_distinct",
+   "GLM.Rule30.Mathieu.heptad_types_distinct",
+   "GLM.Rule30.Mathieu.types_counts"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 32"
+ },
+ {
+  "id": "C310",
+  "claim": "For every labelling of the 24-cell ring by the code coordinates the one-cell turn is not a code automorphism (only 423 of 735471 eight-cell patterns pass the test every octad would pass); hence at most 12 shared symmetries for every labelling; exactly 12 under tau0; exactly 2 (identity, half-turn) in the GLM labelling",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.Mathieu.no_rot_one",
+   "GLM.Rule30.Mathieu.survivors_count",
+   "GLM.Rule30.Mathieu.shared_card_le_twelve",
+   "GLM.Rule30.Mathieu.shared_card_tau0",
+   "GLM.Rule30.Mathieu.shared_card_glm",
+   "GLM.Rule30.Mathieu.shared_glm_iff"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 32; M24 has no 24-cycle"
+ },
+ {
+  "id": "C311",
+  "claim": "Same M24 orbit, different Rule 30 futures: the 759 octads have one-step ring images of every weight 6..21; three octads settle into repetitions of lengths dividing 5448, 102, 185040; Wolfram's single-cell seed is the exception (its orbit is its rotation orbit)",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.Mathieu.octad_rule30_weights",
+   "GLM.Rule30.Mathieu.octad_futures_differ",
+   "GLM.Rule30.Mathieu.octad_cycles",
+   "GLM.Rule30.Mathieu.single_cell_futures"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 32"
+ },
+ {
+  "id": "C312",
+  "claim": "Full M24 census of the 2^24 patterns: 49 orbits with sizes, representatives and stabiliser orders 244823040/size; the 759 octads reach Rule 30 ring cycles of exact lengths 185040 (712), 5448 (8), 102 (39), transients 0..8963",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 32; exact integer arithmetic; Lean certifies weights <= 7, octads, dodecads"
+ },
+ {
+  "id": "C313",
+  "claim": "Observer clock: testsBefore bd t counts the tests (black drive times) before t; FailsWithinTests bd S n says the machine from S fails one of its first n tests; a failure before T with at most n tests before T is a failure within n tests and conversely a code passing every check before T with at least n tests before T does not fail within n tests; a non-white word of period p has at least m+1 tests before time m*p+p, so a failure within n tests happens before time p*n",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.testsBefore_mono",
+   "GLM.Rule30.testsBefore_succ_of_black",
+   "GLM.Rule30.failsWithinTests_of_dDiesBy",
+   "GLM.Rule30.not_failsWithinTests_of_dDiesBy",
+   "GLM.Rule30.dDiesBy_of_failsWithinTests",
+   "GLM.Rule30.testsBefore_mul_ge",
+   "GLM.Rule30.dDiesBy_of_failsWithinTests_driveN"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 33; To Do 30"
+ },
+ {
+  "id": "C314",
+  "claim": "The uniform test-count law is false: for every slack function g there is no bound 'every code of length d fails within d + g(d) tests of every non-white periodic word'; a steered drive passes every check of a given code (steer_passes, at least one test in any two steps) and its cut to period 2m+1 lets the code pass m tests; hence a per-period slack c needs c >= m - 1 for p = 2m+1",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.not_testCountBound",
+   "GLM.Rule30.exists_word_passing_tests",
+   "GLM.Rule30.steer_passes",
+   "GLM.Rule30.steer_tests_ge",
+   "GLM.Rule30.halfStateD_congr_before",
+   "GLM.Rule30.testCountLinear_slack_ge"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 33; the across-periods analogue of survivor_for_every_horizon"
+ },
+ {
+  "id": "C315",
+  "claim": "The per-period test-count law TestCountLinear p c gives HalfLineDies p and the linear target HalfLineLinear p p (p*c); for all periods (slack may depend on p) it gives Problem 1; period 1 holds with slack 2 (from constDrive_dies)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.halfLineDies_of_testCountLinear",
+   "GLM.Rule30.halfLineLinear_of_testCountLinear",
+   "GLM.Rule30.problem1_of_testCountLinear",
+   "GLM.Rule30.testCountLinear_one"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 33"
+ },
+ {
+  "id": "C316",
+  "claim": "Least test-count slack on d <= 22: periods 2, 3, 4 have slack exactly 5, 8, 5 (every code of length d <= 22 fails within d + c tests of every non-white word of the period); the slack one smaller is refuted for all d by one code each (10: d=11 S=1493; 100: d=22 S=4161297; 1010: d=11 S=1493); period 1 slack 1 refuted (d=2 S=2); frontier_round33 collects the round",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.TestCountData.testCountLinearUpTo_two",
+   "GLM.Rule30.TestCountData.testCountLinearUpTo_three",
+   "GLM.Rule30.TestCountData.testCountLinearUpTo_four",
+   "GLM.Rule30.TestCountData.not_testCountLinear_one_one",
+   "GLM.Rule30.TestCountData.not_testCountLinear_two_four",
+   "GLM.Rule30.TestCountData.not_testCountLinear_three_seven",
+   "GLM.Rule30.TestCountData.not_testCountLinear_four_four",
+   "GLM.Rule30.TestCountData.testCountLinearUpTo_of_tcCheck",
+   "GLM.Rule30.TestCountData.not_testCountLinear_of_witness",
+   "GLM.Rule30.TestCountData.frontier_round33"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 33; finite range only for survival; refutations hold for all d; the period-4 range slack 5 is not the law: slack 6 is refuted by a code of length 30 (C323)"
+ },
+ {
+  "id": "C317",
+  "claim": "Exact longest lives on the observer's clock (word_lifetimes33.c): every non-white word of period <= 4 to d = 32, the words 1, 10, 100, 110 to d = 44, one word per rotation class for periods 5..8 to d = 30; the maximum of tests - d per period is 2, 5, 8, 7, 4, 7, 8, 11 for p = 1..8 (over the words run); the period-4 maximum 7 is at d = 30 (word 0111, code 974520100), beyond the d <= 22 certificate; on the wall clock Lmax(d)/d is close to p/b (b = black cells of the word), e.g. 1000 about 3d-4d and 1110 about 1.2d",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 33; To Do 30; exact integer arithmetic; the per-period maxima grow with the number of words, consistent with the refutation C314"
+ },
+ {
+  "id": "C318",
+  "claim": "Period 2 read sideways: for an admissible first column u of the drive 10 (u(2s) = 1, free bits a_s = u(2s+1)) column 2 is not a_s at times 2s and 2s+1, column 3 is a_s at 2s and a_(s+1) at 2s+1, column 4 is not a_(s+1) at 2s, column 5 is a_s at 2s; a code that survives the drive 10 forever has bit 0 black, bit 2 = not bit 1 and bit 4 = bit 2",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.SidewaysTwo.col2_even",
+   "GLM.Rule30.SidewaysTwo.col2_odd",
+   "GLM.Rule30.SidewaysTwo.col3_even",
+   "GLM.Rule30.SidewaysTwo.col3_odd",
+   "GLM.Rule30.SidewaysTwo.col4_even",
+   "GLM.Rule30.SidewaysTwo.col4_odd",
+   "GLM.Rule30.SidewaysTwo.col5_even",
+   "GLM.Rule30.SidewaysTwo.survivor_bits_period_two"
+  ],
+  "axioms": [
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 33; To Do 29 (partly)"
+ },
+ {
+  "id": "C319",
+  "claim": "The period-2 sideways columns as exact GF(2) polynomials in the free bits: columns 1-3 have one or two monomials of degree <= 1, from column 4 on the degree grows (column 14 has degree 6-7 and 24-50 monomials at times 0..7)",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 33; To Do 29"
+ },
+ {
+  "id": "C320",
+  "claim": "GLM Round 33 overlay (study folder rule30_round33): the theorem wheel brought to Round 33 (Rounds 31-33 statements, spokes, negative controls, ledger rows C297-C324, a lens reader for tool discuss) with one new inference rule (instantiation: an All statement gives each period instance), tool clock (the machine on the observer's clock in three columns; reclock step with its Occam measurement, which flagged the period-4 slack as unstable) and tool next (the To Do list ranked by the planner's licensing rule); fixed consultation questions: alignment 0/8 before, 9/9 after on the corrected set (one frozen expectation was wrong and became a negative control; development set, not held out); earlier benchmarks unchanged",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 33; GLM capability; see rule30_round33/README.md"
+ },
+ {
+  "id": "C321",
+  "claim": "Halving on the observer's clock: aliveCount bd d n counts the codes of length d that do not fail within n tests; TestHalving p e (aliveCount * 2^n <= 2^(d-1+e) for every word of period p, every d, n) gives TestCountLinear p e, hence HalfLineDies p; halving for every period gives Problem 1; the bound is free for n <= e and follows from n = d+e for larger n",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.aliveCount_antitone",
+   "GLM.Rule30.aliveCount_le",
+   "GLM.Rule30.testCountLinear_of_testHalving",
+   "GLM.Rule30.testCountLinearUpTo_of_testHalvingUpTo",
+   "GLM.Rule30.halfLineDies_of_testHalving",
+   "GLM.Rule30.problem1_of_testHalving",
+   "GLM.Rule30.testHalving_small_n",
+   "GLM.Rule30.testHalving_large_n"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 33; To Do 34 (partly)"
+ },
+ {
+  "id": "C322",
+  "claim": "Halving certificates: every alive count computed exactly; excess 6 holds for every period-2 word on d <= 18 and every period-4 word on d <= 16; excess 5 is false for period 2 for all d (word 10: 2 of the 1024 codes of length 11 survive 15 tests)",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.TestHalvingData.testHalvingUpTo_two",
+   "GLM.Rule30.TestHalvingData.testHalvingUpTo_four",
+   "GLM.Rule30.TestHalvingData.not_testHalving_two_five",
+   "GLM.Rule30.TestHalvingData.not_testHalving_four_five",
+   "GLM.Rule30.TestHalvingData.aliveCount_eq_aliveB",
+   "GLM.Rule30.TestHalvingData.testHalvingUpTo_of_halvCheck",
+   "GLM.Rule30.TestHalvingData.not_testHalving_of_count",
+   "GLM.Rule30.TestHalvingData.frontier_round33_halving"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 33; To Do 34; finite range only for the halving bound; refutations hold for all d"
+ },
+ {
+  "id": "C323",
+  "claim": "Period 4 needs observer-clock slack at least 7: the code 974520100 of length 30 passes the first 36 tests of the word 0111 (driveN 4 14) and fails the 37th at time 49; so TestCountLinear 4 6 and TestHalving 4 6 are false although slack 5 holds on d <= 22",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.TestCountData.wit_4_long",
+   "GLM.Rule30.TestCountData.not_testCountLinear_four_six",
+   "GLM.Rule30.TestHalvingData.not_testHalving_four_six"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 33; found by word_lifetimes33.c and flagged by the GLM's reclock Occam check; a range certificate is not a law"
+ },
+ {
+  "id": "C324",
+  "claim": "Halving excess measured exactly (test_halving34.c, every code, every word of period <= 4, d <= 24): least excess 2, 6, 11, 6 for p = 1..4 against least slack 2, 5, 8, 5 on the same range; for period 3 the excess is still growing at d = 24",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 33; To Do 34; exact integer arithmetic"
+ },
+ {
+  "id": "C325",
+  "claim": "Divisor rule: a word of period p written out over a multiple q drives the half-line machine identically (driveN_repeat); TestCountLinear q c gives TestCountLinear p c and HalfLineDies q gives HalfLineDies p when p divides q; refutations pass to multiples; a period with divisor 2m+1 needs slack >= m - 1",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.driveN_repeat",
+   "GLM.Rule30.repeatWord_pos",
+   "GLM.Rule30.testCountLinear_of_dvd",
+   "GLM.Rule30.not_testCountLinear_of_dvd",
+   "GLM.Rule30.halfLineDies_of_dvd",
+   "GLM.Rule30.testCountLinear_mono",
+   "GLM.Rule30.testCountLinear_slack_ge_of_dvd"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 34; To Do 35"
+ },
+ {
+  "id": "C326",
+  "claim": "The observer's phase: TestSlack bd c (every code of length d fails within d + c tests of bd); one step of the machine turns a code of length d into one of length d + 1 (halfStep_length); a slack c for the drive started one step later gives slack c + 2 (c + 1 if the skipped time is white); s steps cost at most 2 s",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.TestSlack",
+   "GLM.Rule30.testCountLinear_iff_testSlack",
+   "GLM.Rule30.halfStep_length",
+   "GLM.Rule30.testsBefore_shift",
+   "GLM.Rule30.failsWithinTests_of_shift",
+   "GLM.Rule30.testSlack_of_shift",
+   "GLM.Rule30.testSlack_of_shift_white",
+   "GLM.Rule30.testSlack_of_shift_iter"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 34; the user's perspective idea: the read position (phase) changes the measured excess by a bounded amount, one direction per step"
+ },
+ {
+  "id": "C327",
+  "claim": "Observer-clock slacks on longer ranges: every code of length d <= 30 fails within d + 7 tests of every period-4 word, so with not_testCountLinear_four_six the least period-4 slack on d <= 30 is exactly 7; period 3 slack 8 on d <= 28; period 2 slack 5 on d <= 34; the refuted slacks 4 (p = 2), 7 (p = 3), 6 (p = 4) are refuted for every multiple of the period",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.TestCountPeriodsData.testCountLinearUpTo_four_seven",
+   "GLM.Rule30.TestCountPeriodsData.testCountLinearUpTo_three_eight_long",
+   "GLM.Rule30.TestCountPeriodsData.testCountLinearUpTo_two_five_long",
+   "GLM.Rule30.TestCountPeriodsData.not_testCountLinear_mul_two",
+   "GLM.Rule30.TestCountPeriodsData.not_testCountLinear_mul_three",
+   "GLM.Rule30.TestCountPeriodsData.not_testCountLinear_mul_four",
+   "GLM.Rule30.TestCountPeriodsData.frontier_round34",
+   "GLM.Rule30.SlackCert.testCountLinearUpTo_of_rangeChecks",
+   "GLM.Rule30.SlackCert.rangeCheck_four_1",
+   "GLM.Rule30.SlackCert.rangeCheck_four_rest"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 34; To Do 35; finite ranges for the bounds; refutations hold for all d"
+ },
+ {
+  "id": "C328",
+  "claim": "Exact excess table (every code, exhaustive light-cone search): no period-4 word exceeds excess 7 on d <= 37 (all 15 words); the three-black period-4 words stay within 7 to d >= 102; period 3 record 8 (word 100, d = 22) unchanged to d = 42; period 2 record 5 (word 10, d = 11) unchanged to d = 54; period 1 alternates 0, 2 to d = 300 (matching the proved slack 2)",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 34; To Do 35; exact integer arithmetic"
+ },
+ {
+  "id": "C329",
+  "claim": "Downward drift and phase: on the upper half of their searched ranges the three-black period-4 words have excess at most 3 and the one-black period-4 words at most -1; the rotations 0111, 1110, 1101, 1011 have records 7, 6, 5, 4",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 34; supports a finite period-4 slack; not a proof"
+ },
+ {
+  "id": "C330",
+  "claim": "GLM Round 34: tool slack (the exact excess search in three columns, with the Occam reading of when the record was last raised), the divisor rule and lifted refutations in the theorem wheel (each citing its Lean theorem), tool clock and tool next on the Round 34 frontier; consultation alignment 1/7 before and 7/7 after (development questions); Round 34 self-test passes",
+  "class": "GLM",
+  "status": "built",
+  "lean": [
+   "GLM.Rule30.testCountLinear_of_dvd",
+   "GLM.Rule30.halfLineDies_of_dvd",
+   "GLM.Rule30.TestCountPeriodsData.frontier_round34"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 34; study folder rule30_round34/"
+ },
+ {
+  "id": "C331",
+  "claim": "Alive counts on the observer's clock (every code, d <= 25): excess = (tests after the edge until the last code dies) - (free bits at the edge) - 1, the free bits at the edge being exact by survivors_card; on d <= 25 the post-edge tests remove about one bit each for every word tried (110, the four three-black period-4 words, 10, 100, 1)",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 34; To Do 36 (the GLM's pick after Round 34)"
+ },
+ {
+  "id": "C332",
+  "claim": "Verified diagonal search (To Do 37): one new anti-diagonal of the half-line machine per search node, computed from the two previous diagonals by a prefix xor in log2 k shift-xor rounds (pxor, nextDiag_spec); the search kills every code of length d before T when it succeeds (diagSearch_sound, dDiesBy_of_diagSearch); drop-in replacements of the Round 21/22 checks (drivenCheck_of_diagCheck, halfLineLinear_upTo_of_diagCheck)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.testBit_pxor_zero",
+   "GLM.Rule30.testBit_pxor_succ",
+   "GLM.Rule30.nextDiag_spec",
+   "GLM.Rule30.diagInv_succ",
+   "GLM.Rule30.diagTail_sound",
+   "GLM.Rule30.diagSearch_sound",
+   "GLM.Rule30.dDiesBy_of_diagSearch",
+   "GLM.Rule30.drivenCheck_of_diagCheck",
+   "GLM.Rule30.halfLineLinear_upTo_of_diagCheck"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 35; To Do 37"
+ },
+ {
+  "id": "C333",
+  "claim": "Observer-clock slacks further out: every code of length d <= 42 fails within d + 5 tests of every non-white period-2 word; d <= 32 within d + 8 tests (period 3) and within d + 7 tests (period 4); with the refutations the least slacks on these ranges are exactly 5, 8, 7; certificates on new ranges are joined to the old ones by testCountLinearUpTo_extend",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.DiagCert.testCountLinearUpTo_two_five_42",
+   "GLM.Rule30.DiagCert.testCountLinearUpTo_three_eight_32",
+   "GLM.Rule30.DiagCert.testCountLinearUpTo_four_seven_32",
+   "GLM.Rule30.DiagCert.testCountLinearUpTo_extend",
+   "GLM.Rule30.DiagCert.failsWithinTests_of_tcWordCheckD",
+   "GLM.Rule30.DiagCert.intervalCheck_two_1",
+   "GLM.Rule30.DiagCert.intervalCheck_four_1",
+   "GLM.Rule30.DiagCert.intervalCheck_four_rest"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 35; To Do 35; finite ranges only"
+ },
+ {
+  "id": "C334",
+  "claim": "Bridge back to the original setting: a slack-c observer-clock certificate on d <= D bounds, in every left-white row, the run of a non-white p-periodic column at distance d <= D from the left edge by p (d + c) steps",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.DiagCert.drivenRunBoundUpTo_of_testCountLinearUpTo"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 35"
+ },
+ {
+  "id": "C335",
+  "claim": "Run bounds in every left-white row: a non-white periodic column of period 2 at distance d <= 42 from the left edge lasts at most 2 (d + 5) steps; period 3, d <= 32: at most 3 (d + 8); period 4, d <= 32: at most 4 (d + 7)",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.DiagCert.runBound_two_upTo_42",
+   "GLM.Rule30.DiagCert.runBound_three_upTo_32",
+   "GLM.Rule30.DiagCert.runBound_four_upTo_32",
+   "GLM.Rule30.DiagCert.frontier_round35"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 35; finite ranges of d"
+ },
+ {
+  "id": "C336",
+  "claim": "A black run of the drive is one window read (To Do 36): if the drive is black at t, ..., t + r - 1, the machine passes the run's r tests iff the r cells next to the column at time t show the run's word, which is the period-1 pattern 0101... with the last cell flipped iff the run is followed by a white time; consequently, for every drive, a code of length d cannot survive a black run of length >= d + t + 3 starting at time t",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.window_step",
+   "GLM.Rule30.passesRun_succ",
+   "GLM.Rule30.blackRun_window",
+   "GLM.Rule30.passesRun_iff",
+   "GLM.Rule30.blackPair_window",
+   "GLM.Rule30.runWord_step",
+   "GLM.Rule30.blackRun_word",
+   "GLM.Rule30.not_passesRun_of_long",
+   "GLM.Rule30.halfStateD_length",
+   "GLM.Rule30.dDiesBy_of_long_blackRun"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 35; To Do 36; the post-edge halving question becomes the distribution of windows among surviving codes"
+ },
+ {
+  "id": "C337",
+  "claim": "Checker speed (interpreted native_decide evaluation, same machine): period-4 word 0001, slack 7, d = 28: prefix search about 93 s, diagonal search about 38 s; d = 22: 3.8 s against 1.8 s. Per node the diagonal search does a fixed number of word operations instead of k machine steps; the node count (about 2^(k - tests)) is unchanged, so the gain is a constant factor of about 2-2.5",
+  "class": "EMP",
+  "status": "observed",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 35; To Do 37; timings from one run each"
+ },
+ {
+  "id": "C338",
+  "claim": "The drive wheel: reading a periodic column from phase s gives the word wheelTurn p k s, whose drive is the old drive started s steps later; turns compose and p turns are the identity; periods of a sequence combine by gcd; a drive repeating after g steps is the drive of its first g values; a word kills every non-empty half-line iff each of its turns does",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.driveN_wheelTurn",
+   "GLM.Rule30.wheelTurn_add",
+   "GLM.Rule30.wheelTurn_mod",
+   "GLM.Rule30.period_gcd",
+   "GLM.Rule30.driveN_eq_of_period",
+   "GLM.Rule30.wordDies_wheelTurn_iff"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 36; generalises halfLineDies_two_iff and halfLineDies_three_iff (Round 26) and the divisor rule (Round 34)"
+ },
+ {
+  "id": "C339",
+  "claim": "Wheel reduction: every non-white word of period p is a turn of a primitive least-turn representative (a hub, WheelRep q j; Lyndon words) of a period q dividing p; HalfLineDies p iff the hubs of the divisors of p kill every non-empty half-line; WheelDies (every hub kills) iff HalfLineDies p for all p, iff every periodic drive with a black cell kills every non-empty half-line; WheelDies implies Problem 1",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.exists_wheelRep",
+   "GLM.Rule30.wordDies_of_wheelReps",
+   "GLM.Rule30.halfLineDies_iff_wheel",
+   "GLM.Rule30.wheelDies_iff",
+   "GLM.Rule30.problem1_of_wheelDies",
+   "GLM.Rule30.wheelDies_iff_periodic"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 36; the open status lives in WheelDies"
+ },
+ {
+  "id": "C340",
+  "claim": "The wheel on the observer's clock: a slack c for a word gives slack c + 2(p - 1) for each of its turns; slack c for the hubs of the divisors of p gives TestCountLinear p (c + 2(p - 1)); on finite ranges hubs certified on code lengths <= D + p - 1 give every word of period p on code lengths <= D",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.testSlack_wheelTurn",
+   "GLM.Rule30.testCountLinear_of_wheel",
+   "GLM.Rule30.testSlackUpTo_of_shift_iter",
+   "GLM.Rule30.testSlackUpTo_wheelTurn",
+   "GLM.Rule30.testSlackUpTo_of_wheel"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 36; turns are exact for dying but can raise the slack"
+ },
+ {
+  "id": "C341",
+  "claim": "Hub counts: periods 0..12 have 0, 1, 1, 2, 3, 6, 9, 18, 30, 56, 99, 186, 335 hubs (Lyndon counts minus the white word); up to period 8, 70 hubs replace 502 non-white words; the hubs of periods 1..6 are listed",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.DriveWheelData.wheelReps_count",
+   "GLM.Rule30.DriveWheelData.wheelReps_small",
+   "GLM.Rule30.DriveWheelData.mem_wheelReps"
+  ],
+  "axioms": [
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 36; native_decide"
+ },
+ {
+  "id": "C342",
+  "claim": "The full wheel to period 8 in one certificate: every one of the 70 hubs of period <= 8 has a table slack (max 11, period 8 hub 91) within which every code of length d <= 24 fails; hence for every period 1 <= p <= 8 the per-period law holds on d <= 25 - p with slack wheelSlack p + 2(p - 1), and in every left-white row a non-white periodic column of period 7 (resp. 8) at distance d <= 18 (resp. d <= 17) from the left edge lasts at most 7(d + 20) (resp. 8(d + 25)) steps",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.DriveWheelData.wheelTable_check",
+   "GLM.Rule30.DriveWheelData.wheelTable_complete",
+   "GLM.Rule30.DriveWheelData.wheelTable_sound",
+   "GLM.Rule30.DriveWheelData.le_wheelSlack",
+   "GLM.Rule30.DriveWheelData.testCountLinearUpTo_wheel",
+   "GLM.Rule30.DriveWheelData.runBound_wheel_seven",
+   "GLM.Rule30.DriveWheelData.runBound_wheel_eight",
+   "GLM.Rule30.DriveWheelData.frontier_round36"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 36; finite ranges of d; periods 7 and 8 had no run bound before"
+ },
+ {
+  "id": "C343",
+  "claim": "The exact cost of a turn: starting the observer's clock one step later costs 1 slack plus 1 if the skipped time is a test; m steps cost m plus the tests skipped; between phases a and b of a wheel (a + m = b mod p) slack(a) <= slack(b) + m + testsBefore(phase a, m); the same on finite ranges (a certificate on d <= D + m gives one on d <= D)",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.testSlack_of_shift_exact",
+   "GLM.Rule30.testSlack_of_shift_count",
+   "GLM.Rule30.testSlackUpTo_of_shift_exact",
+   "GLM.Rule30.testSlackUpTo_of_shift_count",
+   "GLM.Rule30.testSlack_phase_transfer",
+   "GLM.Rule30.testSlackUpTo_phase_transfer",
+   "GLM.Rule30.testSlack_wheelTurn_transfer",
+   "GLM.Rule30.testSlackUpTo_wheelTurn_transfer"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 37, To Do 40; sharpens testSlack_wheelTurn (2 per step)"
+ },
+ {
+  "id": "C344",
+  "claim": "The observer's best phase: a slack at any one phase of a word kills every half-line under every turn; one phase per wheel with slack c gives TestCountLinear p (c + 2(p - 1)); one phase per wheel with some slack gives WheelDies; TestSlack (driveN 2 2) 3 gives the optimal TestCountLinear 2 5; TestSlack (driveN 3 2) 5 and TestSlack (driveN 3 5) 2 give the optimal TestCountLinear 3 8",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.wordDies_of_phase",
+   "GLM.Rule30.testCountLinear_of_phases",
+   "GLM.Rule30.wheelDies_of_phases",
+   "GLM.Rule30.testCountLinear_two_of_phase",
+   "GLM.Rule30.testCountLinear_three_of_phases",
+   "GLM.Rule30.exists_phase_gap"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 37, To Do 40; the wobble-as-perspective idea in exact form: the observer picks the read phase"
+ },
+ {
+  "id": "C345",
+  "claim": "Best phases certified: phase 01 of period 2 has slack 3 on d <= 40 and slack 2 is false for all d, while the hub phase 10 needs 5; phases 010 and 101 of period 3 have slacks 5 and 2 on d <= 32 and slacks 4 and 1 are false for all d, while the hub phase 100 needs 8; both gaps equal the proved turn cost; through it phase 01 gives phase 10 slack 5 on d <= 39",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.TurnCostData.phaseTwo01_slack",
+   "GLM.Rule30.TurnCostData.not_phaseTwo01_two",
+   "GLM.Rule30.TurnCostData.not_phaseTwo10_four",
+   "GLM.Rule30.TurnCostData.phaseTwo10_of_01",
+   "GLM.Rule30.TurnCostData.phaseTwo10_slack",
+   "GLM.Rule30.TurnCostData.phaseThree010_slack",
+   "GLM.Rule30.TurnCostData.not_phaseThree010_four",
+   "GLM.Rule30.TurnCostData.phaseThree101_slack",
+   "GLM.Rule30.TurnCostData.not_phaseThree101_one",
+   "GLM.Rule30.TurnCostData.not_phaseThree100_seven",
+   "GLM.Rule30.TurnCostData.not_testSlack_of_witness",
+   "GLM.Rule30.TurnCostData.frontier_round37"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 37; native_decide; finite ranges of d except the refutations"
+ },
+ {
+  "id": "C346",
+  "claim": "Per-phase slack of every wheel of period <= 8 (d <= 34 for p <= 4, d <= 30 for p = 5, 6, d <= 28 for p = 7, 8): per-period slack (worst phase) 2, 5, 8, 7, 6, 11, 12, 14; best-phase slack (worst wheel) 2, 3, 5, 4, 3, 5, 5, 6; no violation of the proved turn cost on 2876 ordered phase pairs (p <= 8, d <= 28); some pair attains it in 66 of the 69 wheels with more than one phase; from the best phase alone it predicts 84 of the 401 other phases exactly and the per-period slack exactly for periods 1-3",
+  "class": "EMP",
+  "status": "measured",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 37, To Do 40; outputs in the study folder rule30_round37/"
+ },
+ {
+  "id": "C347",
+  "claim": "The one-run hub family 1^(q-1)0: a hub for every q >= 2; for every drive with r initial black times every code of length d <= r - 3 fails within d + 2 tests; hence for every q and every d <= q - 4 every code fails within d + 2 tests of 1^(q-1)0 (uniform in q and d); the hub kills every half-line iff it kills every code of length d >= q - 3; the whole family contains HalfLineDies 2; WheelDies gives the family",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.wheelRep_oneRun",
+   "GLM.Rule30.failsWithinTests_of_initial_blackRun",
+   "GLM.Rule30.testsBefore_of_black",
+   "GLM.Rule30.oneRun_band",
+   "GLM.Rule30.oneRunDies_iff_long",
+   "GLM.Rule30.halfLineDies_two_of_oneRunFamily",
+   "GLM.Rule30.oneRunFamilyDiesFrom_of_wheelDies"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 37, To Do 39 (partly)"
+ },
+ {
+  "id": "C348",
+  "claim": "The one-run family measured: slack at most 7 for q = 2..20 on d <= 30 (largest at q = 13); the band bound (excess <= 2 on d <= q - 4) holds on the range",
+  "class": "EMP",
+  "status": "measured",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 37; outputs in the study folder rule30_round37/"
+ },
+ {
+  "id": "C349",
+  "claim": "Open targets of Round 37: OneRunFamilyDiesFrom q0 (every hub 1^(q-1)0 with q >= q0 kills every half-line; q0 = 2 contains HalfLineDies 2) and TestSlack (driveN 2 2) 3 for all d (gives TestCountLinear 2 5)",
+  "class": "OPEN",
+  "status": "open",
+  "lean": [
+   "GLM.Rule30.OneRunFamilyDies",
+   "GLM.Rule30.OneRunFamilyDiesFrom"
+  ],
+  "axioms": [
+   "propext"
+  ],
+  "notes": "Round 37; To Do 42, 43"
+ },
+ {
+  "id": "C350",
+  "claim": "GLM indexed by hubs (study folder rule30_round37/): tool hub, tool hubs, tool requirements, hub-first tool next and the hub rule in the theorem wheel; hub index exact on all 8178 non-white words of period <= 12; consultation 0/11 before and 11/11 after on questions frozen before the overlay (development questions, not held out); exact search over periods 1-7 on d <= 20: 247 words 5.19 s, 40 hubs 0.64 s (wall clock); all earlier self-tests pass",
+  "class": "EMP",
+  "status": "measured",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 37, To Do 41"
+ },
+ {
+  "id": "C351",
+  "claim": "One-bit machine u(t+1) = a(t) xor (b(t) or u(t)): with Q-periodic inputs and a black cell of b after the start the output is Q-periodic (reset law); with b eventually white the output advances by the parity of a over one period, so Q is kept iff the parity is even and doubles (anti-periodic) iff it is odd; two such machines with the same inputs agree after the first black cell of b",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.one_bit_reset",
+   "GLM.Rule30.one_bit_white_input",
+   "GLM.Rule30.parityOn_shift",
+   "GLM.Rule30.one_bit_white_period",
+   "GLM.Rule30.one_bit_doubles",
+   "GLM.Rule30.one_bit_sync"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 38; found by the hypothesis engine's mechanism miner"
+ },
+ {
+  "id": "C352",
+  "claim": "Left-diagonal period law: if diagonals D-1 and D-2 have eventual period Q and D-1 is not eventually white then diagonal D has period Q; if D-1 is eventually white and D-2 has odd parity then D loses Q and has 2Q; hence finitely many eventually white left diagonals give one period for all left diagonals, and unbounded periods force infinitely many eventually white left diagonals",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.ldiag_evPer_of_not_white",
+   "GLM.Rule30.ldiag_doubles",
+   "GLM.Rule30.ldiag_keeps_of_even",
+   "GLM.Rule30.leftDiag_periods_bounded_of_finitely_many_white",
+   "GLM.Rule30.infinitely_many_white_of_unbounded"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 38; engine law H08"
+ },
+ {
+  "id": "C353",
+  "claim": "Seed-forgetting: for two rows white on (-inf,0) and black at 0, the first left diagonal on which they differ eventually comes right after an eventually white diagonal; with the white list, for every such row the first difference from the single black cell below 87868 is at 3, 8, 29, 400, 53208, 58287 or 87867",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.ldiagOf_sync",
+   "GLM.Rule30.first_difference_after_white",
+   "GLM.Rule30.seed_first_difference"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 38; engine law H22, born from the controls (512 seeds of width <= 10: first differences only at 3, 8, 29, 400); seed_first_difference uses native_decide through the white list"
+ },
+ {
+  "id": "C354",
+  "claim": "Packed left-row certificate: bit D of lrow N t is ldiag D t, the first N left diagonals evolve autonomously, and one equality lrow N (s+p) = lrow N s proves eventual p-periodicity of all diagonals D < N for every later time",
+  "class": "FORMAL",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.testBit_lrow",
+   "GLM.Rule30.evPer_of_lrow",
+   "GLM.Rule30.white_of_orRun",
+   "GLM.Rule30.not_white_of_orRun"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 38"
+ },
+ {
+  "id": "C355",
+  "claim": "Left diagonals D < 400 have eventual period 8 (from t = 501); diagonal 399 is eventually white and 398 has odd parity, so by the law diagonal 400 has period 16 and not 8: the engine's lift 'every left diagonal has period dividing 8' (C133 for D <= 200) is false",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.leftDiag_period_eight_below_400",
+   "GLM.Rule30.leftDiag_399_white",
+   "GLM.Rule30.parity_398",
+   "GLM.Rule30.ldiag_400_by_law",
+   "GLM.Rule30.not_leftDiagPeriodDivides_eight",
+   "GLM.Rule30.not_leftDiagPeriodDivides_of_dvd_eight"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 38; engine H01 refuted on held-out data, H05 the cut"
+ },
+ {
+  "id": "C356",
+  "claim": "Left diagonals D < 87867 have eventual period 16 (from t = 117324); diagonal 87867 does not have period 16 (period 32): the narrowed lift 'period dividing 16' is false; D = 87867 was predicted by running the proved law on period patterns before it was checked",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.leftDiag_period_sixteen_below_87867",
+   "GLM.Rule30.ldiag_87867_not_evPer_sixteen",
+   "GLM.Rule30.not_leftDiagPeriodDivides_sixteen"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 38; engine prediction H09 confirmed"
+ },
+ {
+  "id": "C357",
+  "claim": "The eventually white left diagonals below 87868 are exactly 2, 7, 28, 399, 53207, 58286, 87866; least periods 1, 2, 4, 8, 16, 32 first occur at D = 0, 3, 8, 29, 400, 87867",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.leftDiag_white_below_87868"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 38; the first-occurrence list is EMP (hypothesis_engine.py), the white list is CERT"
+ },
+ {
+  "id": "C358",
+  "claim": "For 20 <= D < 20000 left diagonal D is still in its transient at time D (it fails period 16 at some t >= D), so the centre column a(D) = ldiag D D always reads a left diagonal before it settles",
+  "class": "CERT",
+  "status": "proved",
+  "lean": [
+   "GLM.Rule30.leftDiag_transient_at_read",
+   "GLM.Rule30.centerCol_read_in_transient"
+  ],
+  "axioms": [
+   "Classical.choice",
+   "Lean.ofReduceBool",
+   "Lean.trustCompiler",
+   "Quot.sound",
+   "propext"
+  ],
+  "notes": "Round 38; extends the EMP part of C133 (D <= 200); exact envelope 30/29 <= pre(D)/D <= 71/48 on 20 <= D < 20000 is EMP"
+ },
+ {
+  "id": "C359",
+  "claim": "Open: the least eventual periods of the left diagonals are unbounded (LeftDiagPeriodDivides (2^m) fails for every m); by C352 equivalent in strength to infinitely many eventually white left diagonals meeting odd parity",
+  "class": "OPEN",
+  "status": "open",
+  "lean": [
+   "GLM.Rule30.LeftDiagPeriodDivides"
+  ],
+  "axioms": [],
+  "notes": "Round 38; engine H11"
+ },
+ {
+  "id": "C360",
+  "claim": "Hypothesis Engine v4 audit: on Rule 30's centre column, an LFSR m-sequence, a period-7 word, the word 10 and a constant word, v4 returns 'passed' for all five; its hypotheses are parameter triples, not statements; it uses floats and hash inside the check (rule 7)",
+  "class": "EMP",
+  "status": "measured",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 38; study folder"
+ },
+ {
+  "id": "C361",
+  "claim": "Hypothesis Engine v5 on Rule 30 (one run, exact arithmetic): 22 hypotheses; 4 lifts that pass the development range are refuted on held-out data; 7 ledger facts rediscovered without reading the ledger (C22, C48, C49, C113, C133, C160, C235); 1 law junction separated by the predictor; 1 prediction made and confirmed (D = 87867); generic core glm_hypothesis_core.py",
+  "class": "EMP",
+  "status": "measured",
+  "lean": [],
+  "axioms": [],
+  "notes": "Round 38; study folder; partly answers To Do 44"
+ }
+]

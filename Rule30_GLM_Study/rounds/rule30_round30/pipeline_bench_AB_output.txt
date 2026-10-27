@@ -1,0 +1,93 @@
+pipeline sha256: 031c6eb5ee2464dfa57462a26d7edd233ecfe23f036c008af5aad4635edd521f
+plan depth <= 2, search budget 20 s per puzzle
+
+=== A/B. planning and asking (development sets) ===
+--- stored ARC tasks (development) (50 puzzles) ---
+   Round 29 planner (depth <= 2):           RIGHT  10  WRONG  0  REFUSED  40
+   pipeline, no fitted middle steps:          RIGHT  10  WRONG  0  REFUSED  40
+   pipeline (stage 1):                        RIGHT  10  WRONG  0  REFUSED  40
+   + ask loop, <= 1 question(s):              RIGHT  10  WRONG  0  REFUSED  40
+   + ask loop, <= 2 question(s):              RIGHT  10  WRONG  0  REFUSED  40
+   + ask loop, <= 3 question(s):              RIGHT  10  WRONG  0  REFUSED  40
+   + ask loop, <= 5 question(s):              RIGHT  10  WRONG  0  REFUSED  40
+   search cost: 106644 step expansions with shape pruning (29244 skipped) vs 135888 without; 12.7 s vs 14.9 s
+--- Round 28 development local-rule puzzles (108 puzzles) ---
+   Round 29 planner (depth <= 2):           RIGHT  65  WRONG  2  REFUSED  41
+   pipeline, no fitted middle steps:          RIGHT  65  WRONG  2  REFUSED  41
+   pipeline (stage 1):                        RIGHT  65  WRONG  2  REFUSED  41
+   + ask loop, <= 1 question(s):              RIGHT  79  WRONG  3  REFUSED  26
+   + ask loop, <= 2 question(s):              RIGHT  83  WRONG  2  REFUSED  23
+   + ask loop, <= 3 question(s):              RIGHT  88  WRONG  2  REFUSED  18
+   + ask loop, <= 5 question(s):              RIGHT  91  WRONG  2  REFUSED  15
+   answered after asking: 26 puzzles, mean 2.08 questions, 54 of 1067 output cells asked (5.1%)
+   search cost: 276906 step expansions with shape pruning (23826 skipped) vs 300732 without; 19.8 s vs 19.9 s
+      recolour                   RIGHT  12  WRONG  0  REFUSED   0
+      interior                   RIGHT   7  WRONG  1  REFUSED   4
+      life                       RIGHT   1  WRONG  0  REFUSED  11
+      rule30-rows                RIGHT  11  WRONG  0  REFUSED   1
+      shadow                     RIGHT   3  WRONG  0  REFUSED   9
+      between                    RIGHT   9  WRONG  1  REFUSED   2
+      shift                      RIGHT   0  WRONG  0  REFUSED  12
+      CONTROL-mirror             RIGHT  12  WRONG  0  REFUSED   0
+      CONTROL-majority           RIGHT  10  WRONG  0  REFUSED   2
+--- Round 28 held-out local-rule puzzles (84 puzzles) ---
+   Round 29 planner (depth <= 2):           RIGHT  48  WRONG  0  REFUSED  36
+   pipeline, no fitted middle steps:          RIGHT  48  WRONG  0  REFUSED  36
+   pipeline (stage 1):                        RIGHT  48  WRONG  0  REFUSED  36
+   + ask loop, <= 1 question(s):              RIGHT  60  WRONG  1  REFUSED  23
+   + ask loop, <= 2 question(s):              RIGHT  66  WRONG  1  REFUSED  17
+   + ask loop, <= 3 question(s):              RIGHT  69  WRONG  1  REFUSED  14
+   + ask loop, <= 5 question(s):              RIGHT  77  WRONG  1  REFUSED   6
+   answered after asking: 30 puzzles, mean 2.30 questions, 69 of 1287 output cells asked (5.4%)
+   search cost: 214949 step expansions with shape pruning (19663 skipped) vs 234612 without; 14.5 s vs 14.6 s
+      col-rule30                 RIGHT  10  WRONG  0  REFUSED   2
+      erase-isolated             RIGHT   1  WRONG  0  REFUSED  11
+      count-colour               RIGHT   6  WRONG  0  REFUSED   6
+      shadow-left                RIGHT   1  WRONG  0  REFUSED  11
+      vertical-between           RIGHT   6  WRONG  0  REFUSED   6
+      CONTROL-rotate180          RIGHT  12  WRONG  0  REFUSED   0
+      CONTROL-flip-rows          RIGHT  12  WRONG  0  REFUSED   0
+--- Round 29 development multi-step puzzles (132 puzzles) ---
+   Round 29 planner (depth <= 2):           RIGHT 100  WRONG  2  REFUSED  30
+   pipeline, no fitted middle steps:          RIGHT 100  WRONG  2  REFUSED  30
+   pipeline (stage 1):                        RIGHT 100  WRONG  2  REFUSED  30
+   + ask loop, <= 1 question(s):              RIGHT 101  WRONG  2  REFUSED  29
+   + ask loop, <= 2 question(s):              RIGHT 101  WRONG  2  REFUSED  29
+   + ask loop, <= 3 question(s):              RIGHT 101  WRONG  2  REFUSED  29
+   + ask loop, <= 5 question(s):              RIGHT 101  WRONG  2  REFUSED  29
+   answered after asking: 1 puzzles, mean 1.00 questions, 1 of 48 output cells asked (2.1%)
+   search cost: 263250 step expansions with shape pruning (95242 skipped) vs 358492 without; 16.0 s vs 20.3 s
+      crop-flip                  RIGHT  12  WRONG  0  REFUSED   0
+      mirror-recolour            RIGHT  12  WRONG  0  REFUSED   0
+      gravity-recolour           RIGHT  12  WRONG  0  REFUSED   0
+      rotate-upscale             RIGHT  11  WRONG  0  REFUSED   1
+      crop-tile                  RIGHT  12  WRONG  0  REFUSED   0
+      halves-xor                 RIGHT  12  WRONG  0  REFUSED   0
+      symfill-rotate             RIGHT  12  WRONG  0  REFUSED   0
+      objsize-flip               RIGHT  10  WRONG  2  REFUSED   0
+      crop-rotate-recolour       RIGHT   7  WRONG  0  REFUSED   5
+      CONTROL-sort-rows          RIGHT   0  WRONG  0  REFUSED  12
+      CONTROL-shift-by-count     RIGHT   0  WRONG  0  REFUSED  12
+--- Round 29 held-out multi-step puzzles (132 puzzles) ---
+   Round 29 planner (depth <= 2):           RIGHT  95  WRONG  1  REFUSED  36
+   pipeline, no fitted middle steps:          RIGHT  95  WRONG  1  REFUSED  36
+   pipeline (stage 1):                        RIGHT  95  WRONG  1  REFUSED  36
+   + ask loop, <= 1 question(s):              RIGHT  97  WRONG  1  REFUSED  34
+   + ask loop, <= 2 question(s):              RIGHT 100  WRONG  1  REFUSED  31
+   + ask loop, <= 3 question(s):              RIGHT 102  WRONG  1  REFUSED  29
+   + ask loop, <= 5 question(s):              RIGHT 106  WRONG  1  REFUSED  25
+   answered after asking: 11 puzzles, mean 2.73 questions, 30 of 443 output cells asked (6.8%)
+   search cost: 234826 step expansions with shape pruning (121462 skipped) vs 356288 without; 14.5 s vs 20.5 s
+      crop-transpose             RIGHT  12  WRONG  0  REFUSED   0
+      mirror-flip                RIGHT  12  WRONG  0  REFUSED   0
+      gravity-up-crop            RIGHT  11  WRONG  0  REFUSED   1
+      upscale3-recolour          RIGHT  12  WRONG  0  REFUSED   0
+      halves-or-flip             RIGHT  12  WRONG  0  REFUSED   0
+      fill-rotate                RIGHT  11  WRONG  1  REFUSED   0
+      largest-upscale            RIGHT  12  WRONG  0  REFUSED   0
+      rot-crop-mirror            RIGHT  12  WRONG  0  REFUSED   0
+      transpose-erase            RIGHT   1  WRONG  0  REFUSED  11
+      CONTROL-cyclic-shift       RIGHT   0  WRONG  0  REFUSED  12
+      CONTROL-sort-columns       RIGHT   0  WRONG  0  REFUSED  12
+
+(1427 s)

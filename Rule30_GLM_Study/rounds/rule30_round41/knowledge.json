@@ -1,0 +1,351 @@
+{
+ "_comment": "Checked implications (edges) and ledger facts used by glm_dialogue.py. Every edge names the Lean theorem or ledger claim (RequestProject/GLM/Rule30/claims.csv) that backs it. Premise tags are attached to hypotheses structurally by the puzzle (meta['tags'] or the tagger), never by keywords in the text.",
+ "edges": [
+  {
+   "premise": "rule30.white_set:refuted",
+   "conclusion": "white left diagonals never stop: for every D0 there is an eventually white diagonal D >= D0",
+   "verdict": "follows",
+   "backing": "lean:ldiag_infinitely_many_white",
+   "evidence_class": "FORMAL",
+   "note": "proved for every D0 (Round 39); the refutation of the finite list is consistent with it"
+  },
+  {
+   "premise": "law:white:pattern(D-2) = pattern(D-1)",
+   "conclusion": "diagonal D+2 is eventually white iff diagonals D and D+1 are eventually equal",
+   "verdict": "equivalent",
+   "backing": "lean:ldiag_white_iff_coincide",
+   "evidence_class": "FORMAL",
+   "note": "the proved form of the white criterion (Round 39)"
+  },
+  {
+   "premise": "law:white:pattern(D-2) = pattern(D-1)",
+   "conclusion": "no two consecutive left diagonals are eventually white",
+   "verdict": "follows",
+   "backing": "lean:ldiag_no_two_consecutive_white",
+   "evidence_class": "FORMAL",
+   "note": ""
+  },
+  {
+   "premise": "rule30.period_bound:refuted",
+   "conclusion": "the period changes only one step past an eventually white diagonal: it doubles when the outer parity is odd, and is kept when it is even",
+   "verdict": "follows",
+   "backing": "lean:ldiag_doubles; ldiag_keeps_of_even",
+   "evidence_class": "FORMAL",
+   "note": "the law the refutation leads to (Round 38)"
+  },
+  {
+   "premise": "law:lp:white(D-1) ∧ odd(D-2)",
+   "conclusion": "the left-diagonal periods are unbounded iff for every 2^m some eventually white diagonal has an outer neighbour of odd parity",
+   "verdict": "equivalent",
+   "backing": "lean:ldiag_periods_unbounded_iff",
+   "evidence_class": "FORMAL",
+   "note": "To Do 45 is exactly this parity question"
+  },
+  {
+   "premise": "law:lp:white(D-1) ∧ odd(D-2)",
+   "conclusion": "the left-diagonal periods are unbounded",
+   "verdict": "does-not-follow",
+   "backing": "lean:ldiag_periods_unbounded_iff",
+   "evidence_class": "FORMAL",
+   "note": "the law locates the doublings; whether infinitely many occur depends on the parities, which are open"
+  },
+  {
+   "premise": "rule30.transient_at_read",
+   "conclusion": "the centre column reads every left diagonal 20 <= D < 20000 before that diagonal has become periodic",
+   "verdict": "follows",
+   "backing": "lean:centerCol_read_in_transient",
+   "evidence_class": "CERT",
+   "note": "certificate for 20 <= D < 20000"
+  },
+  {
+   "premise": "rule30.transient_at_read",
+   "conclusion": "the centre column is not eventually periodic (Problem 1)",
+   "verdict": "does-not-follow",
+   "backing": "lean:GLM.HypothesisEngine.transient_read_does_not_imply_aperiodic",
+   "evidence_class": "FORMAL",
+   "note": "a family meets the same premises (for every period) while its diagonal read is constant; hypothesis_engine_v10.py states this implication"
+  },
+  {
+   "premise": "rule30.centre_aperiodic",
+   "conclusion": "no finite-state observer reading the centre column is eventually always right",
+   "verdict": "equivalent",
+   "backing": "lean:eventuallyPeriodic_iff_exists_fsObserver",
+   "evidence_class": "FORMAL",
+   "note": ""
+  },
+  {
+   "premise": "rule30.centre_aperiodic",
+   "conclusion": "no finite automaton reading the binary digits of n computes bit n (so bit n cannot be computed in O(log n))",
+   "verdict": "does-not-follow",
+   "backing": "lean:GLM.HypothesisEngine.aperiodic_but_automatic",
+   "evidence_class": "FORMAL",
+   "note": "Thue-Morse is aperiodic and computed by a two-state automaton; Problem 1 would not settle Problem 3"
+  },
+  {
+   "premise": "survives-sampled",
+   "conclusion": "the statement holds for every index",
+   "verdict": "does-not-follow",
+   "backing": "lean:gcd_trap_survives; gcd_trap_refuted",
+   "evidence_class": "FORMAL",
+   "note": "gcd(n^17+9,(n+1)^17+9) = 1 survives every n < 1000 (CERT) and fails at a 52-digit n"
+  },
+  {
+   "premise": "euler.residue_law",
+   "conclusion": "n^2+n+41 is composite whenever n > 0 and n mod 41 is 0 or 40",
+   "verdict": "follows",
+   "backing": "lean:euler_dvd_iff; euler_composite_of_mod",
+   "evidence_class": "FORMAL",
+   "note": ""
+  },
+  {
+   "premise": "proved:euler.residue_law",
+   "conclusion": "41 divides n^2+n+41 iff n mod 41 is 0 or 40",
+   "verdict": "equivalent",
+   "backing": "lean:euler_dvd_iff",
+   "evidence_class": "FORMAL",
+   "note": ""
+  },
+  {
+   "premise": "two_squares.residue_law",
+   "conclusion": "a prime p is a sum of two squares iff p mod 4 is not 3",
+   "verdict": "equivalent",
+   "backing": "lean:two_squares_law",
+   "evidence_class": "FORMAL",
+   "note": ""
+  },
+  {
+   "premise": "proved:two_squares.residue_law",
+   "conclusion": "a prime p is a sum of two squares iff p mod 4 is not 3",
+   "verdict": "equivalent",
+   "backing": "lean:two_squares_law",
+   "evidence_class": "FORMAL",
+   "note": ""
+  },
+  {
+   "premise": "fermat.coprime",
+   "conclusion": "distinct Fermat numbers are coprime",
+   "verdict": "equivalent",
+   "backing": "lean:fermat_pairwise_coprime",
+   "evidence_class": "FORMAL",
+   "note": ""
+  },
+  {
+   "premise": "proved:fermat.coprime",
+   "conclusion": "distinct Fermat numbers are coprime",
+   "verdict": "equivalent",
+   "backing": "lean:fermat_pairwise_coprime",
+   "evidence_class": "FORMAL",
+   "note": ""
+  },
+  {
+   "premise": "josephus.template",
+   "conclusion": "J(n) = 2(n - 2^floor(log2 n)) for every n >= 1",
+   "verdict": "equivalent",
+   "backing": "lean:josephus_closed_form",
+   "evidence_class": "FORMAL",
+   "note": ""
+  },
+  {
+   "premise": "midpoint.fixed",
+   "conclusion": "the repaired midpoint lo + (hi-lo)/2 is in [lo, hi] for every 16-bit input",
+   "verdict": "equivalent",
+   "backing": "lean:midpoint_fixed_correct",
+   "evidence_class": "CERT",
+   "note": "bit-blasted over all inputs"
+  },
+  {
+   "premise": "proved:midpoint.fixed",
+   "conclusion": "the repaired midpoint is always in range",
+   "verdict": "equivalent",
+   "backing": "lean:midpoint_fixed_correct",
+   "evidence_class": "CERT",
+   "note": ""
+  },
+  {
+   "premise": "midpoint.law",
+   "conclusion": "the buggy midpoint leaves [lo, hi] iff lo + hi overflows 16 bits",
+   "verdict": "equivalent",
+   "backing": "lean:midpoint_bug_iff_overflow",
+   "evidence_class": "CERT",
+   "note": "bit-blasted over all inputs"
+  },
+  {
+   "premise": "collatz.reaches1",
+   "conclusion": "every n reaches 1",
+   "verdict": "does-not-follow",
+   "backing": "lean:collatz_reaches_one_below",
+   "evidence_class": "CERT",
+   "note": "only n < 10000 is certified; the general statement is the Collatz conjecture"
+  },
+  {
+   "premise": "moser.poly",
+   "conclusion": "the region count is C(n,4)+C(n,2)+1, not 2^(n-1)",
+   "verdict": "follows",
+   "backing": "lean:moser_junction; moser_split",
+   "evidence_class": "FORMAL",
+   "note": "the two forms agree for n <= 5 and split at n = 6"
+  },
+  {
+   "premise": "proved:josephus.template",
+   "conclusion": "J(n) = 2(n - 2^floor(log2 n))",
+   "verdict": "equivalent",
+   "backing": "lean:josephus_closed_form",
+   "evidence_class": "FORMAL",
+   "note": ""
+  },
+  {
+   "premise": "unbounded:steps",
+   "conclusion": "every n reaches 1",
+   "verdict": "does-not-follow",
+   "backing": "lean:collatz_reaches_one_below",
+   "evidence_class": "CERT",
+   "note": "unbounded stopping times are compatible with every n reaching 1 (2^m takes m steps)"
+  },
+  {
+   "premise": "proved:law:lp:white(D-1) ∧ odd(D-2)",
+   "conclusion": "the period doubles one step past an eventually white diagonal whose inner neighbour has odd parity, and is kept when that parity is even",
+   "verdict": "equivalent",
+   "backing": "lean:ldiag_doubles; ldiag_keeps_of_even",
+   "evidence_class": "FORMAL",
+   "note": ""
+  },
+  {
+   "premise": "proved:law:white:pattern(D-2) = pattern(D-1)",
+   "conclusion": "diagonal D is eventually white iff diagonals D-2 and D-1 are eventually equal",
+   "verdict": "equivalent",
+   "backing": "lean:ldiag_white_iff_coincide",
+   "evidence_class": "FORMAL",
+   "note": ""
+  },
+  {
+   "premise": "law:lp:white(D-1) ∧ odd(D-3)",
+   "same_as": "law:lp:white(D-1) ∧ odd(D-2)",
+   "conclusion": "",
+   "verdict": "equivalent",
+   "backing": "lean:GLM.HypothesisEngine.doubling_law_tie_unsplittable",
+   "evidence_class": "FORMAL",
+   "note": "if diagonal D-1 is eventually white, diagonals D-3 and D-2 are eventually equal, so their parities agree"
+  },
+  {
+   "premise": "law:white:pattern(D-2) = pattern(D-1) ∧ lp(D-1) = lp(D-2)",
+   "same_as": "law:white:pattern(D-2) = pattern(D-1)",
+   "conclusion": "",
+   "verdict": "equivalent",
+   "backing": "definition",
+   "evidence_class": "FORMAL",
+   "note": "the least period is a function of the eventual pattern, so the second conjunct follows from the first"
+  },
+  {
+   "premise": "proved:midpoint.law",
+   "conclusion": "the buggy midpoint leaves [lo, hi] iff lo + hi overflows",
+   "verdict": "equivalent",
+   "backing": "lean:midpoint_bug_iff_overflow",
+   "evidence_class": "CERT",
+   "note": ""
+  },
+  {
+   "premise": "midpoint.law:overflow ∧ hi_big",
+   "same_as": "midpoint.law:overflow",
+   "conclusion": "",
+   "verdict": "equivalent",
+   "backing": "definition",
+   "evidence_class": "FORMAL",
+   "note": "with lo ≤ hi < 2^16, lo + hi ≥ 2^16 forces hi ≥ 2^15, so the second conjunct follows from the first"
+  }
+ ],
+ "facts": [
+  {
+   "id": "C379",
+   "text": "white left diagonals below 87868: 2, 7, 28, 399, 53207, 58286, 87866",
+   "numbers": [
+    2,
+    7,
+    28,
+    399,
+    53207,
+    58286,
+    87866,
+    87867,
+    87868
+   ],
+   "class": "CERT",
+   "lean": "leftDiag_white_below_87868",
+   "tags": [
+    "law:white:pattern(D-2) = pattern(D-1)"
+   ]
+  },
+  {
+   "id": "C370",
+   "text": "the next white diagonal after 87866 is 1420878968 (even)",
+   "numbers": [
+    1420878968
+   ],
+   "class": "EMP",
+   "lean": "",
+   "tags": [
+    "law:white:pattern(D-2) = pattern(D-1)"
+   ]
+  },
+  {
+   "id": "C381",
+   "text": "predicted odd white 2107985254, period 64 from 2107985255",
+   "numbers": [
+    2107985254,
+    2107985255
+   ],
+   "class": "EMP",
+   "lean": "",
+   "tags": [
+    "rule30.period_bound"
+   ]
+  },
+  {
+   "id": "C382",
+   "text": "no white diagonal in 2107985255..32107985254 by the period-64 pattern law",
+   "numbers": [
+    32107985254
+   ],
+   "class": "EMP",
+   "lean": "",
+   "tags": []
+  },
+  {
+   "id": "C133",
+   "text": "left-diagonal preperiod exceeds D for 20 <= D; certified for D < 20000",
+   "numbers": [
+    200,
+    20000
+   ],
+   "class": "CERT",
+   "lean": "centerCol_read_in_transient",
+   "tags": [
+    "rule30.transient_at_read"
+   ]
+  },
+  {
+   "id": "C372",
+   "text": "gcd trap first counterexample",
+   "numbers": [
+    1000,
+    100000,
+    8424432925592889329288197322308900672459420460792433
+   ],
+   "class": "FORMAL",
+   "lean": "gcd_trap_refuted",
+   "tags": []
+  },
+  {
+   "id": "C373",
+   "text": "Collatz certified below 10000 within 300 steps",
+   "numbers": [
+    300,
+    10000
+   ],
+   "class": "CERT",
+   "lean": "collatz_reaches_one_below",
+   "tags": [
+    "collatz.reaches1"
+   ]
+  }
+ ]
+}

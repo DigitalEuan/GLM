@@ -1,0 +1,198 @@
+planner sha256: a07403e297481e0f0548044b2e47f676a058a03bf974b4859ed96ce0dc8fae4e
+=== plan depth <= 0 ===
+A. stored ARC tasks (50, development): RIGHT 5  WRONG 0  REFUSED 45  right=['7953d61e', '9caf5b84', 'a85d4709', 'ae58858e', 'bc4146bd']
+B1. Round 28 development local-rule puzzles
+   recolour                 RIGHT 12  WRONG  0  REFUSED  0
+   interior                 RIGHT  7  WRONG  0  REFUSED  5
+   life                     RIGHT  1  WRONG  0  REFUSED 11
+   rule30-rows              RIGHT 11  WRONG  0  REFUSED  1
+   shadow                   RIGHT  3  WRONG  0  REFUSED  9
+   between                  RIGHT  9  WRONG  1  REFUSED  2
+   shift                    RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-mirror           RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-majority         RIGHT 10  WRONG  0  REFUSED  2
+   TOTAL                    RIGHT 53  WRONG  1  REFUSED 54
+B2. Round 28 held-out local-rule puzzles
+   col-rule30               RIGHT 10  WRONG  0  REFUSED  2
+   erase-isolated           RIGHT  1  WRONG  0  REFUSED 11
+   count-colour             RIGHT  6  WRONG  0  REFUSED  6
+   shadow-left              RIGHT  1  WRONG  0  REFUSED 11
+   vertical-between         RIGHT  6  WRONG  0  REFUSED  6
+   CONTROL-rotate180        RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-flip-rows        RIGHT  0  WRONG  0  REFUSED 12
+   TOTAL                    RIGHT 24  WRONG  0  REFUSED 60
+C1. Round 29 development multi-step puzzles
+   crop-flip                RIGHT  0  WRONG  0  REFUSED 12
+   mirror-recolour          RIGHT 12  WRONG  0  REFUSED  0
+   gravity-recolour         RIGHT  0  WRONG  0  REFUSED 12
+   rotate-upscale           RIGHT  0  WRONG  0  REFUSED 12
+   crop-tile                RIGHT  0  WRONG  0  REFUSED 12
+   halves-xor               RIGHT  0  WRONG  0  REFUSED 12
+   symfill-rotate           RIGHT  0  WRONG  0  REFUSED 12
+   objsize-flip             RIGHT  0  WRONG  0  REFUSED 12
+   crop-rotate-recolour     RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-sort-rows        RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-shift-by-count   RIGHT  0  WRONG  0  REFUSED 12
+   TOTAL                    RIGHT 12  WRONG  0  REFUSED 120
+C2. Round 29 held-out multi-step puzzles
+   crop-transpose           RIGHT  0  WRONG  0  REFUSED 12
+   mirror-flip              RIGHT 12  WRONG  0  REFUSED  0
+   gravity-up-crop          RIGHT  0  WRONG  0  REFUSED 12
+   upscale3-recolour        RIGHT  0  WRONG  0  REFUSED 12
+   halves-or-flip           RIGHT  0  WRONG  0  REFUSED 12
+   fill-rotate              RIGHT  0  WRONG  0  REFUSED 12
+   largest-upscale          RIGHT  0  WRONG  0  REFUSED 12
+   rot-crop-mirror          RIGHT  0  WRONG  0  REFUSED 12
+   transpose-erase          RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-cyclic-shift     RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-sort-columns     RIGHT  0  WRONG  0  REFUSED 12
+   TOTAL                    RIGHT 12  WRONG  0  REFUSED 120
+
+=== plan depth <= 1 ===
+A. stored ARC tasks (50, development): RIGHT 10  WRONG 0  REFUSED 40  right=['00dbd492', '1e0a9b12', '662c240a', '7953d61e', '9caf5b84', 'a85d4709', 'ae58858e', 'b91ae062', 'bc4146bd', 'd631b094']
+B1. Round 28 development local-rule puzzles
+   recolour                 RIGHT 12  WRONG  0  REFUSED  0
+   interior                 RIGHT  7  WRONG  1  REFUSED  4
+   life                     RIGHT  1  WRONG  0  REFUSED 11
+   rule30-rows              RIGHT 11  WRONG  0  REFUSED  1
+   shadow                   RIGHT  3  WRONG  0  REFUSED  9
+   between                  RIGHT  9  WRONG  1  REFUSED  2
+   shift                    RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-mirror           RIGHT 12  WRONG  0  REFUSED  0
+   CONTROL-majority         RIGHT 10  WRONG  0  REFUSED  2
+   TOTAL                    RIGHT 65  WRONG  2  REFUSED 41
+B2. Round 28 held-out local-rule puzzles
+   col-rule30               RIGHT 10  WRONG  0  REFUSED  2
+   erase-isolated           RIGHT  1  WRONG  0  REFUSED 11
+   count-colour             RIGHT  6  WRONG  0  REFUSED  6
+   shadow-left              RIGHT  1  WRONG  0  REFUSED 11
+   vertical-between         RIGHT  6  WRONG  0  REFUSED  6
+   CONTROL-rotate180        RIGHT 12  WRONG  0  REFUSED  0
+   CONTROL-flip-rows        RIGHT 12  WRONG  0  REFUSED  0
+   TOTAL                    RIGHT 48  WRONG  0  REFUSED 36
+C1. Round 29 development multi-step puzzles
+   crop-flip                RIGHT  0  WRONG  0  REFUSED 12
+   mirror-recolour          RIGHT 12  WRONG  0  REFUSED  0
+   gravity-recolour         RIGHT 12  WRONG  0  REFUSED  0
+   rotate-upscale           RIGHT  0  WRONG  0  REFUSED 12
+   crop-tile                RIGHT 12  WRONG  0  REFUSED  0
+   halves-xor               RIGHT 12  WRONG  0  REFUSED  0
+   symfill-rotate           RIGHT  1  WRONG  0  REFUSED 11
+   objsize-flip             RIGHT  8  WRONG  3  REFUSED  1
+   crop-rotate-recolour     RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-sort-rows        RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-shift-by-count   RIGHT  0  WRONG  0  REFUSED 12
+   TOTAL                    RIGHT 57  WRONG  3  REFUSED 72
+C2. Round 29 held-out multi-step puzzles
+   crop-transpose           RIGHT  0  WRONG  0  REFUSED 12
+   mirror-flip              RIGHT 12  WRONG  0  REFUSED  0
+   gravity-up-crop          RIGHT  0  WRONG  0  REFUSED 12
+   upscale3-recolour        RIGHT 12  WRONG  0  REFUSED  0
+   halves-or-flip           RIGHT  0  WRONG  0  REFUSED 12
+   fill-rotate              RIGHT 11  WRONG  0  REFUSED  1
+   largest-upscale          RIGHT  0  WRONG  0  REFUSED 12
+   rot-crop-mirror          RIGHT 12  WRONG  0  REFUSED  0
+   transpose-erase          RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-cyclic-shift     RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-sort-columns     RIGHT  0  WRONG  0  REFUSED 12
+   TOTAL                    RIGHT 47  WRONG  0  REFUSED 85
+
+=== plan depth <= 2 ===
+A. stored ARC tasks (50, development): RIGHT 10  WRONG 0  REFUSED 40  right=['00dbd492', '1e0a9b12', '662c240a', '7953d61e', '9caf5b84', 'a85d4709', 'ae58858e', 'b91ae062', 'bc4146bd', 'd631b094']
+B1. Round 28 development local-rule puzzles
+   recolour                 RIGHT 12  WRONG  0  REFUSED  0
+   interior                 RIGHT  7  WRONG  1  REFUSED  4
+   life                     RIGHT  1  WRONG  0  REFUSED 11
+   rule30-rows              RIGHT 11  WRONG  0  REFUSED  1
+   shadow                   RIGHT  3  WRONG  0  REFUSED  9
+   between                  RIGHT  9  WRONG  1  REFUSED  2
+   shift                    RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-mirror           RIGHT 12  WRONG  0  REFUSED  0
+   CONTROL-majority         RIGHT 10  WRONG  0  REFUSED  2
+   TOTAL                    RIGHT 65  WRONG  2  REFUSED 41
+B2. Round 28 held-out local-rule puzzles
+   col-rule30               RIGHT 10  WRONG  0  REFUSED  2
+   erase-isolated           RIGHT  1  WRONG  0  REFUSED 11
+   count-colour             RIGHT  6  WRONG  0  REFUSED  6
+   shadow-left              RIGHT  1  WRONG  0  REFUSED 11
+   vertical-between         RIGHT  6  WRONG  0  REFUSED  6
+   CONTROL-rotate180        RIGHT 12  WRONG  0  REFUSED  0
+   CONTROL-flip-rows        RIGHT 12  WRONG  0  REFUSED  0
+   TOTAL                    RIGHT 48  WRONG  0  REFUSED 36
+C1. Round 29 development multi-step puzzles
+   crop-flip                RIGHT 12  WRONG  0  REFUSED  0
+   mirror-recolour          RIGHT 12  WRONG  0  REFUSED  0
+   gravity-recolour         RIGHT 12  WRONG  0  REFUSED  0
+   rotate-upscale           RIGHT 11  WRONG  0  REFUSED  1
+   crop-tile                RIGHT 12  WRONG  0  REFUSED  0
+   halves-xor               RIGHT 12  WRONG  0  REFUSED  0
+   symfill-rotate           RIGHT 12  WRONG  0  REFUSED  0
+   objsize-flip             RIGHT  8  WRONG  3  REFUSED  1
+   crop-rotate-recolour     RIGHT  7  WRONG  0  REFUSED  5
+   CONTROL-sort-rows        RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-shift-by-count   RIGHT  0  WRONG  0  REFUSED 12
+   TOTAL                    RIGHT 98  WRONG  3  REFUSED 31
+C2. Round 29 held-out multi-step puzzles
+   crop-transpose           RIGHT 12  WRONG  0  REFUSED  0
+   mirror-flip              RIGHT 12  WRONG  0  REFUSED  0
+   gravity-up-crop          RIGHT 12  WRONG  0  REFUSED  0
+   upscale3-recolour        RIGHT 12  WRONG  0  REFUSED  0
+   halves-or-flip           RIGHT 12  WRONG  0  REFUSED  0
+   fill-rotate              RIGHT 12  WRONG  0  REFUSED  0
+   largest-upscale          RIGHT 12  WRONG  0  REFUSED  0
+   rot-crop-mirror          RIGHT 12  WRONG  0  REFUSED  0
+   transpose-erase          RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-cyclic-shift     RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-sort-columns     RIGHT  0  WRONG  0  REFUSED 12
+   TOTAL                    RIGHT 96  WRONG  0  REFUSED 36
+
+=== plan depth <= 3 ===
+A. stored ARC tasks (50, development): RIGHT 10  WRONG 0  REFUSED 40  right=['00dbd492', '1e0a9b12', '662c240a', '7953d61e', '9caf5b84', 'a85d4709', 'ae58858e', 'b91ae062', 'bc4146bd', 'd631b094']
+B1. Round 28 development local-rule puzzles
+   recolour                 RIGHT 12  WRONG  0  REFUSED  0
+   interior                 RIGHT  7  WRONG  1  REFUSED  4
+   life                     RIGHT  1  WRONG  0  REFUSED 11
+   rule30-rows              RIGHT 11  WRONG  0  REFUSED  1
+   shadow                   RIGHT  3  WRONG  0  REFUSED  9
+   between                  RIGHT  9  WRONG  1  REFUSED  2
+   shift                    RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-mirror           RIGHT 12  WRONG  0  REFUSED  0
+   CONTROL-majority         RIGHT 10  WRONG  0  REFUSED  2
+   TOTAL                    RIGHT 65  WRONG  2  REFUSED 41
+B2. Round 28 held-out local-rule puzzles
+   col-rule30               RIGHT 10  WRONG  0  REFUSED  2
+   erase-isolated           RIGHT  1  WRONG  0  REFUSED 11
+   count-colour             RIGHT  6  WRONG  0  REFUSED  6
+   shadow-left              RIGHT  1  WRONG  0  REFUSED 11
+   vertical-between         RIGHT  6  WRONG  0  REFUSED  6
+   CONTROL-rotate180        RIGHT 12  WRONG  0  REFUSED  0
+   CONTROL-flip-rows        RIGHT 12  WRONG  0  REFUSED  0
+   TOTAL                    RIGHT 48  WRONG  0  REFUSED 36
+C1. Round 29 development multi-step puzzles
+   crop-flip                RIGHT 12  WRONG  0  REFUSED  0
+   mirror-recolour          RIGHT 12  WRONG  0  REFUSED  0
+   gravity-recolour         RIGHT 12  WRONG  0  REFUSED  0
+   rotate-upscale           RIGHT 11  WRONG  0  REFUSED  1
+   crop-tile                RIGHT 12  WRONG  0  REFUSED  0
+   halves-xor               RIGHT 12  WRONG  0  REFUSED  0
+   symfill-rotate           RIGHT 12  WRONG  0  REFUSED  0
+   objsize-flip             RIGHT  8  WRONG  3  REFUSED  1
+   crop-rotate-recolour     RIGHT  7  WRONG  0  REFUSED  5
+   CONTROL-sort-rows        RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-shift-by-count   RIGHT  0  WRONG  0  REFUSED 12
+   TOTAL                    RIGHT 98  WRONG  3  REFUSED 31
+C2. Round 29 held-out multi-step puzzles
+   crop-transpose           RIGHT 12  WRONG  0  REFUSED  0
+   mirror-flip              RIGHT 12  WRONG  0  REFUSED  0
+   gravity-up-crop          RIGHT 12  WRONG  0  REFUSED  0
+   upscale3-recolour        RIGHT 12  WRONG  0  REFUSED  0
+   halves-or-flip           RIGHT 12  WRONG  0  REFUSED  0
+   fill-rotate              RIGHT 12  WRONG  0  REFUSED  0
+   largest-upscale          RIGHT 12  WRONG  0  REFUSED  0
+   rot-crop-mirror          RIGHT 12  WRONG  0  REFUSED  0
+   transpose-erase          RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-cyclic-shift     RIGHT  0  WRONG  0  REFUSED 12
+   CONTROL-sort-columns     RIGHT  0  WRONG  0  REFUSED 12
+   TOTAL                    RIGHT 96  WRONG  0  REFUSED 36
+
+(783 s)

@@ -1,0 +1,11 @@
+n=   10 tuneCost=    7 best tune (tau,p)=(2, 5) excess=  3 max excess so far=3 at n=7 tune=(0, 4) mind changes=7
+n=   50 tuneCost=   45 best tune (tau,p)=(6, 39) excess=  5 max excess so far=10 at n=40 tune=(19, 11) mind changes=31
+n=  100 tuneCost=   92 best tune (tau,p)=(11, 81) excess=  8 max excess so far=10 at n=40 tune=(19, 11) mind changes=55
+n=  200 tuneCost=  193 best tune (tau,p)=(128, 65) excess=  7 max excess so far=13 at n=158 tune=(20, 125) mind changes=115
+n=  448 tuneCost=  432 best tune (tau,p)=(282, 150) excess= 16 max excess so far=16 at n=448 tune=(282, 150) mind changes=249
+n=  500 tuneCost=  491 best tune (tau,p)=(328, 163) excess=  9 max excess so far=16 at n=448 tune=(282, 150) mind changes=281
+n= 1000 tuneCost=  988 best tune (tau,p)=(453, 535) excess= 12 max excess so far=16 at n=448 tune=(282, 150) mind changes=529
+n= 1500 tuneCost= 1488 best tune (tau,p)=(192, 1296) excess= 12 max excess so far=17 at n=1419 tune=(1172, 230) mind changes=793
+n= 2000 tuneCost= 1991 best tune (tau,p)=(1756, 235) excess=  9 max excess so far=22 at n=1995 tune=(206, 1767) mind changes=1072
+n= 3000 tuneCost= 2987 best tune (tau,p)=(2126, 861) excess= 13 max excess so far=22 at n=1995 tune=(206, 1767) mind changes=1584
+max over n<=3000 of excess - (2 log2 n + 2): 0  (<= 0 means TuneExcessLog holds)

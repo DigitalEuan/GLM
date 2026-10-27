@@ -34,7 +34,7 @@ account is in
 | end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->223<!--/figure--> / <!--figure:evaluation-case-count-->223<!--/figure-->** — 149 answered, 28 refused as expected (all `boundary`, no `gap`), 0 unexpected refusals, 0 confidently wrong, 0 errored |
 | benchmark suites | `python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites, every suite above its baseline |
 | capability probes | `python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 errored, 0 surprises |
-| Lean development | `lake build` (repository root) | <!--figure:lean-files-->267 Lean files<!--/figure-->, **0 `sorry`** |
+| Lean development | `lake build` (repository root) | <!--figure:lean-files-->268 Lean files<!--/figure-->, **0 `sorry`** |
 | figures | `python3 -m glm_universal.figures --write` | regenerates `overlay/FIGURES.md`; every documented count |
 | corpus | `python3 -m glm_universal.corpus --check` | the tier contract, the archive partition, the coverage claim of `ENTRY.md`, every generated block and every derived cache — **current**, no drift |
 | construction ladder | `python3 -m glm_universal.tools ladder` | **462 / 568** queries named correctly with **0** wrong on the eleven-rung ladder, against **327** for the note's five rungs and **283** for the best single rung |
@@ -136,6 +136,7 @@ account is in
 | improper units | `python3 -m glm_universal.tools improper-units` | `tool frame` with the three improper Lorentz components times a change of units declared: scaled improper queries **238** right, **0** wrong of **480** (Phase 179's families: **0** right); **0** of **717** Phase 179 answers changed; outside **0** wrong of **480**; 8 of 8 marks ([`IMPROPER_UNITS_STUDY.md`](studies/IMPROPER_UNITS_STUDY.md)) |
 | Lorentzian lift | `python3 -m glm_universal.tools lorentzian-lift` | the owner's `iter10_lorentzian.py` audited: every Golay tie an A_1^24 deep hole named by a null vector of II_25,1 (128 of 128 sampled); no reflection-invariant rule breaks a tie; two tied readings **586** right, **0** wrong of 600 under summed scores; 11 of 12 marks ([`LORENTZIAN_LIFT_STUDY.md`](studies/LORENTZIAN_LIFT_STUDY.md); row added in Phase 183) |
 | Lorentzian evidence | `python3 -m glm_universal.tools lorentzian-evidence` | the lift as an evidence space: the Golay decoy **61** wrong → **27** under the certificate guard, **0** right answers lost on any condition, the 27 indistinguishable from honest readings; the settling question **600** of 600 with five bits (random five 391); physics relations with a decoy example **0** wrong (first example alone 87 and 38); 13 of 15 marks ([`LORENTZIAN_EVIDENCE_STUDY.md`](studies/LORENTZIAN_EVIDENCE_STUDY.md)) |
+| Lorentzian majority | `python3 -m glm_universal.tools lorentzian-majority` | the declared majority rule for conflicting examples: never wrong while the honest examples hold at least half (proved, `majority_never_wrong`), tight below half (`majority_misled`); physics relations decoy3 **155** and decoy5 **161** right, **0** wrong, where the guard answers 0; collude5 **0** wrong where the plurality vote is wrong 150 times; 8 of 8 marks ([`LORENTZIAN_MAJORITY_STUDY.md`](studies/LORENTZIAN_MAJORITY_STUDY.md)) |
 
 The test-suite row is the sign-off ledger's own count, recorded by
 `python3 -m glm_universal.signoff --release`, which runs each test file in its
@@ -1257,6 +1258,15 @@ physics register: examples that disagree are refused, examples that agree
 give the dimension class and every name in it. Recomputed by `tools
 lorentzian-evidence`. Write-up:
 [`LORENTZIAN_EVIDENCE_STUDY.md`](studies/LORENTZIAN_EVIDENCE_STUDY.md).
+Since Phase 184 `tool majority A : B [, A2 : B2 …] :: C` is the second
+policy over the same evidence (`reasoning/lorentzian_majority.py`): the
+examples are split into agreeing groups, each a null vector
+(`GLM.LorentzianMajority.group_evid_null`), and the target a strict majority
+states answers, with the outvoted examples named and the price of a wrong
+answer stated (`majority_wrong_needs_decoys`); it is never wrong while the
+honest examples hold at least half (`majority_never_wrong`). Recomputed by
+`tools lorentzian-majority`. Write-up:
+[`LORENTZIAN_MAJORITY_STUDY.md`](studies/LORENTZIAN_MAJORITY_STUDY.md).
 
 **The budget rule in the answering path.** Since Phase 147 a deep hole is read
 to its certificate on request. `reasoning/hole_reading.py` reads with no
@@ -1351,8 +1361,8 @@ so a confident wrong answer is worse than a refusal). Write-up:
 [`CAPABILITY_ASSESSMENT.md`](CAPABILITY_ASSESSMENT.md).
 
 **The Lean development, addressed.** `reasoning/lean_address.py` gives each of
-the <!--figure:lean-declarations-->6,202<!--/figure--> declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly <!--figure:lean-declarations-->6,202<!--/figure-->/<!--figure:lean-declarations-->6,202<!--/figure--> with 0 coordinate errors;
+the <!--figure:lean-declarations-->6,224<!--/figure--> declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly <!--figure:lean-declarations-->6,224<!--/figure-->/<!--figure:lean-declarations-->6,224<!--/figure--> with 0 coordinate errors;
 3989 distinct addresses, and the quantiser adds no conflation of its own;
 nearest-by-address shares a file 817 times against 35 for a SHA-256 control and
 29 for a seeded reshuffle, with chance at ≈ 0.80 %. `report lean`.
@@ -1395,8 +1405,8 @@ twenty questions rather than three samples. `tools oracle`. Write-up:
 **The field surface, and what it was worth.** `runtime/fields.py` answers one
 named field of one named row — `field atomic_weight_u of carbon` — over
 <!--figure:fieldsurface-tables-->14<!--/figure--> declared tables holding
-<!--figure:fieldsurface-rows-->15,949<!--/figure--> rows and
-<!--figure:fieldsurface-pairs-->92,915<!--/figure--> addressable `(row,
+<!--figure:fieldsurface-rows-->15,982<!--/figure--> rows and
+<!--figure:fieldsurface-pairs-->93,091<!--/figure--> addressable `(row,
 field)` pairs: the element and molecule source rows, one table per register's
 carrier attributes, the Lean address book, the package's own top-level
 definitions, and a registry of declared zero-argument functions whose returned
@@ -1593,7 +1603,7 @@ units reach `PROJECT_DIRECTIVES.md` (120 before Phase 78; see
 [`studies/ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) §5g).
 
 The seven instruments in the ledger beside the
-<!--figure:test-files-->238 test files<!--/figure--> are `lean-build`,
+<!--figure:test-files-->239 test files<!--/figure--> are `lean-build`,
 `lean-sorry-free`, `capabilities`, `benchmarks`, `evaluation`, `replay` and
 `figures`. `replay` (Phase 174) is the evaluation's replay gate of Phase 171,
 column 3 run for every case expected answered, so the close runs it when what

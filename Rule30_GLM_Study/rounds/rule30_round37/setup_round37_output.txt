@@ -1,0 +1,84 @@
+patching file glm_universal/runtime/toolbox.py
+patching file glm_universal/runtime/toolbox.py
+round 11: all checks pass
+patching file glm_universal/runtime/toolbox.py
+round 12: all checks pass
+round 28: 5 toolbox hooks in place
+PASS recolour answered by the cell reader
+PASS unseen colour refused
+PASS a clash refutes every reader
+PASS tool induce answers a colour local-rule task
+PASS tool arc runs (refuses or answers, never crashes)
+PASS narrowest P1 names AmortizedHalving241
+PASS P3Eventual => P3 derived
+PASS light-cone circuit bound blocked from P3
+PASS ledger carriers installed
+round 28: all checks pass
+round 29: 3 toolbox hooks in place
+PASS two-step task answered (crop, then mirror)
+PASS the chosen plan has two steps
+PASS a task outside the alphabet is refused
+PASS consistent plans that disagree on the query: refused
+PASS tool induce answers a multi-step task
+PASS tool arc answers a stored task with a plan (gravity)
+round 29: all checks pass
+round 30: 4 toolbox hooks in place
+PASS scale factor read from the grid (number of objects)
+PASS ... which the Round 29 planner refuses
+PASS recolour, then transpose
+PASS goal-shape pruning skips expansions
+PASS ... and gives the same decision
+PASS unseen colour: refused without a question
+PASS ... answered rightly after one question
+PASS two demonstrations: the gate starts at depth 1
+PASS statement planner: HalfLineLinear 2 2 _ fitted offset 9 at d <= 12
+PASS tool pipeline
+PASS tool pipeline frontier (30 certified statements)
+PASS tool induce answers a scale-by-objects puzzle
+round 30: all checks pass
+round 33: 3 toolbox hooks in place
+PASS 1493 vs 10: fails at test 16 = d + 5 (slack 5 needed)
+PASS 4161297 vs 100: fails at test 30 = d + 8 (slack 8 needed)
+PASS derive TestCountLinear2 => HalfLineDies2 cites halfLineDies_of_testCountLinear
+PASS derive TestCountLinear2 => P1 is refused
+PASS instantiation rule: HalfLineDiesSideways => HalfLineDies2 derived
+PASS halving spoke: TestHalving2 => HalfLineDies2 via testCountLinear_of_testHalving
+PASS ledger carries C297..C320
+PASS lens reader: uniform law -> not_testCountBound
+PASS lens reader: silent on an unrelated question
+PASS tool clock 2 1 1493 answers
+PASS tool clock reclock answers
+PASS tool next answers
+round 33: all checks pass
+round 34: 5 toolbox hooks in place
+PASS slack search: 1493 is the period-2 record at d = 11 (16 tests)
+PASS slack search: 974520100 is the period-4 record at d = 30 (37 tests)
+PASS slack search: 4161297 is the period-3 record at d = 22 (30 tests)
+PASS slack search: every period-4 word within slack 7 on d <= 20
+PASS divisor rule: TestCountLinear4 => TestCountLinear2 declared
+PASS divisor rule: never upwards
+PASS tool theorem derives HalfLineDies4 => HalfLineDies2
+PASS tool theorem refuses TestCountLinear2 => TestCountLinear4
+PASS tool slack answers in three columns
+PASS tool clock reads the Round 34 frontier
+PASS tool next reads the Round 34 To Do list
+round 34: all checks pass
+round 37: 4 toolbox hooks in place
+PASS hub index exact on all 8178 non-white words of period <= 12
+PASS hub counts match DriveWheelData.wheelReps_count
+PASS turn cost 10 <- 01 is 2 (5 = 3 + 2)
+PASS turn cost 100 <- 010 is 3 (8 = 5 + 3)
+PASS wheel_phases37_p8_d28.json: 0 violations of testSlackUpTo_phase_transfer
+PASS wheel_phases37_p6_d30.json: 0 violations of testSlackUpTo_phase_transfer
+PASS wheel_phases37_p4_d34.json: 0 violations of testSlackUpTo_phase_transfer
+PASS tool theorem derives HalfLineDies5 from WheelDies by the hub rule
+PASS tool theorem: best phase 01 gives TestCountLinear2
+PASS tool theorem does not derive the family from period 2
+PASS regression: the divisor rule still answers
+PASS tool hub 4 14 -> period 4 hub 7
+PASS tool hub 6 42 -> period 2 hub 1
+PASS tool hubs 8 -> 30 hubs
+PASS tool next proposes a hub first
+PASS tool requirements answers
+PASS regression: tool slack still answers
+round 37: all checks pass

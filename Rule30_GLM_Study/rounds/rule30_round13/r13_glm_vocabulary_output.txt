@@ -1,0 +1,184 @@
+THEOREM WHEEL  34 statements (17 proved facts, 17 open), 16 spokes, 9 negative controls
+
+====================================================================================================
+QUESTION: Is the centre column eventually periodic? (Problem 1)
+STAGE 1 BROAD     target P1: the centre column is not eventually periodic (Problem 1) [OPEN]; 24 readings through 10 lenses
+STAGE 2 LENSES    (= restatement, <= sufficient, part = proved partial result, x = blocked by a negative control)
+  [algebraic (ANF)]
+    x  DegreeFormula does not give P1: every property of the n-step maps holds for the all-white row too, whose centre column is periodic [map_properties_cannot_decide_periodicity]
+  [boundary / prefix]
+    x  FinitePrefix does not give P1: every finite prefix extends to an eventually periodic sequence [no_finite_certificate_problem1]
+    x  RightEdgeWhite does not give P1: a right-white row whose centre column is periodic [exists_row_with_periodic_column]
+  [echo (radar)]
+    =  LagMismatchAll: for every lag p >= 1 there are arbitrarily late mismatches a(t+p) != a(t) [problem1_iff_lag_mismatch]
+    <= NoResonance: no lag p >= 1 has a full echo resonance echo(N, p)/N -> 1 [problem1_of_no_resonance]
+  [finite-state observer]
+    =  FSObserversFail: every finite-state observer errs infinitely often [problem1_iff_fsObservers_fail]
+    <= SeedFSTypical: every finite-state observer is right with frequency exactly 1/2 [problems_one_and_two_of_seed_fsTypical]
+  [measure]
+    part AlmostEveryRowTypical: for almost every initial row every column is finite-state typical [FORMAL: ae_fsTypical]
+  [off-centre observer]
+    <= OtherColumnPeriodic: some column c != 0 of the seed pattern is eventually periodic [problem1_of_other_periodic_column]
+    part AtMostOnePeriodicColumn: at most one column of the seed pattern is eventually periodic [FORMAL: seed_at_most_one_periodic_column]
+    part OffCentrePair: for c != 0, columns 0 and c are not both eventually periodic [FORMAL: offCentre_pair_problem1]
+  [propose-and-check loop]
+    =  EveryProposalRefuted: every proposal 'the centre column has period p from time N' is eventually refuted by an observation [problem1_iff_every_proposal_refuted]
+    part LoopHorizon1: the proposal 'constant from time N' is refuted by time 4N + 6 [FORMAL: refutation_horizon_one]
+  [read angle (diagonals)]
+    part RightDiagonalsPeriodic: every right diagonal is periodic (power-of-two periods) [FORMAL: rdiag_periodic]
+    part LeftDiagonalsPeriodic: every left diagonal is eventually periodic (power-of-two periods) [FORMAL: ldiag_eventually_periodic]
+  [stack lift (every row)]
+    <= LeftWhiteAperiodicAll: for every period p >= 1, no column of any left-white row (white left of a black cell) is eventually p-periodic [problem1_of_leftWhiteAperiodicAll]
+    <= RunBoundsAll: for every period p >= 1 there is a run bound B_p: a column at distance d from the edge of a left-white row stays p-periodic for at most B_p(d) steps [leftWhiteAperiodicAll_iff_runBoundsAll ; problem1_of_leftWhiteAperiodicAll]
+    part LeftWhiteStride1: no column of any left-white row is eventually constant [FORMAL: leftWhiteAperiodic_one]
+    part RunBound2Small: period-2 run bounds 1,7,6,5,5,8,9,9 for distances d <= 7, exact, for every left-white row [CERT: runBound_two_upTo_seven, runBound_two_sharp]
+    part RunBoundSmallPeriods: exact run bounds for periods 3..6 at distances d <= 4, for every left-white row [CERT: runBound_small_periods]
+  [strobe (clock)]
+    =  StrobesNonconstant: for every stride p >= 1 some phase of the strobe a(p t + r) keeps changing colour [problem1_iff_strobes]
+    <= SeedAPBalanced: every arithmetic progression a(p t + r) has frequency 1/2 [not_eventuallyPeriodic_of_apBalanced]
+    part Stride1Nonconstant: the centre column is not eventually constant (stride 1, period 1) [FORMAL: centerCol_not_eventually_constant]
+    part StrobeTable1e6: the phase wobbles for strides 2..6 to 10^6 (largest D_{3,1} = 1583) [CERT: strobe_wobble_table]
+STAGE 3 NARROW    restatements dropped (proving one is the same task); blocked routes dropped
+  sufficient open hypotheses, weakest first:
+  SeedAPBalanced (weaker than SeedFSTypical): every arithmetic progression a(p t + r) has frequency 1/2
+  LeftWhiteAperiodicAll: for every period p >= 1, no column of any left-white row (white left of a black cell) is eventually p-periodic
+  NoResonance: no lag p >= 1 has a full echo resonance echo(N, p)/N -> 1
+  OtherColumnPeriodic: some column c != 0 of the seed pattern is eventually periodic
+  RunBoundsAll: for every period p >= 1 there is a run bound B_p: a column at distance d from the edge of a left-white row stays p-periodic for at most B_p(d) steps
+  SeedFSTypical: every finite-state observer is right with frequency exactly 1/2
+  strictly weaker: SeedAPBalanced =/=> SeedFSTypical [exists_apBalanced_not_fsTypical: a doubled typical sequence is AP-balanced, yet the observer 'repeat the last bit at odd times' is right 3/4 of the time]
+  route  LeftWhiteAperiodicAll -> P1
+  route  NoResonance -> P1
+  route  OtherColumnPeriodic -> P1
+  route  RunBoundsAll -> P1
+  ARROW  SeedFSTypical -> SeedAPBalanced -> P1
+  (each -> is a proved implication; the arrow runs from the strong end towards the target)
+STAGE 4 EVIDENCE
+  SeedAPBalanced: CERT strobe_wobble_table: 20 phase wobbles for p = 2..6 to 10^6; largest D_{3,1} = 1583 (z = 2.7 for a fair coin)
+  SeedAPBalanced: EMP r12_lens_survey: 135 phases p <= 16 to 10^7, max |z| = 2.68 (control coin 2.60); D_{3,1} falls back to z = 1.8 at 10^7: a fluctuation, not a drift
+  LeftWhiteAperiodicAll: CERT runBound_two_upTo_seven / runBound_small_periods: exact run bounds, all left-white rows
+  LeftWhiteAperiodicAll: EMP r13_periodic_runs: exact longest runs for p <= 6 at d <= 7-9; the period-2 search relaxation dies within about 1.6 d + 4 steps for every d <= 24
+  NoResonance: EMP r12_lens_survey: echo at lags 1..64 to 10^7, max |z| = 2.58
+  SeedFSTypical: EMP r12_lens_survey: block counts k = 4, 8, 12 to 10^7 give chi2/dof 0.92, 0.89, 0.98; 1023 Walsh window characters max |z| = 3.48 (control 2.94)
+STAGE 5 LIMITS
+  gap: the 17 proved facts about the seed do NOT reach P1 through the spokes
+  nearest proved facts: Stride1Nonconstant, AtMostOnePeriodicColumn, OffCentrePair, RightDiagonalsPeriodic, LeftDiagonalsPeriodic, AlmostEveryRowTypical, StrobeTable1e6, LeftWhiteStride1, LoopHorizon1, RunBound2Small, RunBoundSmallPeriods
+  the wheel chains declared spokes only; it cannot invent a spoke, and finite evidence cannot close an infinite claim (no_finite_certificate_problem1/2)
+NEXT    prove SeedAPBalanced for the seed, or a new spoke from a proved seed fact into SeedAPBalanced
+
+VOCABULARY AUDIT  P1: the centre column is not eventually periodic (Problem 1)
+  can the GLM STATE it?   yes: declared statement P1 (a Lean definition, a complete description of the question)
+  can the GLM ANSWER it?  no: the 17 proved facts do not reach P1 through the 16 declared spokes
+  equivalent words (restatements, same difficulty): EveryProposalRefuted, FSObserversFail, LagMismatchAll, StrobesNonconstant
+  missing pieces (any one would answer it), weakest first:
+    SeedAPBalanced: every arithmetic progression a(p t + r) has frequency 1/2
+      shape: one theorem about the seed, quantified over every progression (p, r)
+    LeftWhiteAperiodicAll: for every period p >= 1, no column of any left-white row (white left of a black cell) is eventually p-periodic
+      shape: an infinite family over periods p, about every left-white row; p = 1 is proved, so it needs a uniform argument (an induction on p or a single invariant), not more data
+    NoResonance: no lag p >= 1 has a full echo resonance echo(N, p)/N -> 1
+      shape: one theorem about the seed, quantified over every lag p
+    OtherColumnPeriodic: some column c != 0 of the seed pattern is eventually periodic
+      shape: one theorem about a column c != 0 (expected to fail: off-centre columns look as irregular as the centre in all data so far)
+    RunBoundsAll: for every period p >= 1 there is a run bound B_p: a column at distance d from the edge of a left-white row stays p-periodic for at most B_p(d) steps
+      shape: the same family in quantitative form (a horizon B_p(d) for each p)
+    SeedFSTypical: every finite-state observer is right with frequency exactly 1/2
+      shape: one theorem about the seed, quantified over every finite-state observer
+  nearest proved facts: Stride1Nonconstant, AtMostOnePeriodicColumn, OffCentrePair, RightDiagonalsPeriodic, LeftDiagonalsPeriodic, AlmostEveryRowTypical, StrobeTable1e6, LeftWhiteStride1, LoopHorizon1, RunBound2Small, RunBoundSmallPeriods
+  what it needs:
+    - a proof of any one sufficient statement, or of a new spoke from a proved fact into P1
+    - the narrowest rung of the stack lift that is not yet proved: LeftWhiteAperiodic2 (evidence: CERT for d <= 7, EMP for d <= 24); a proof of it, uniform in d, would be the period-2 case of Problem 1 (and more)
+    - a 'for every p' word: the wheel can hold the family as one statement, but it cannot prove a family; that needs an induction step, which is a new theorem
+
+====================================================================================================
+QUESTION: Is the frequency of black cells one half? (Problem 2)
+STAGE 1 BROAD     target P2: black cells have frequency 1/2 in the centre column (Problem 2) [OPEN]; 16 readings through 8 lenses
+STAGE 2 LENSES    (= restatement, <= sufficient, part = proved partial result, x = blocked by a negative control)
+  [arrow]
+    part ArrowNoFlip1e6: D(195112) = 0 and D(N) > 0 for 195112 < N <= 10^6 [CERT: arrow_last_flip_1e6]
+  [boundary / prefix]
+    x  RightEdgeWhite does not give P2: a right-white row whose centre column has frequency 1/3 [exists_row_with_biased_column]
+    x  FinitePrefix does not give P2: every finite prefix extends to a sequence with frequency != 1/2 [no_finite_certificate_problem2]
+    x  ArrowPersistent does not give NotP2: 1,1,0,1,0,... has frequency 1/2 and D(N) > 0 for every N >= 1 [exists_balanced_persistent_arrow]
+    x  AnySequence does not give SqrtWobble: a sqrt bound is a property of particular sequences, not of all of them [not_forall_sqrt_bound]
+  [continuous wobble]
+    =  SublinearWobble: the wobble is sub-linear: D(N)/N -> 0 [problem2_iff_wobble]
+    <= SqrtWobble: |D(N)| <= C sqrt(N) eventually, for some C [problem2_of_sqrt_bound]
+    part Wobble1e6: D(10^6) = 1536 and D(N)^2/N <= 175561/24979 for N <= 10^6 [CERT: wobble_1e6, wobble_sq_ratio_cert]
+  [echo (radar)]
+    =  TotalEchoSmall: the total echo is o(N^2) (radar identity D(N)^2 = N + 2 * echo) [problem2_iff_totalEcho]
+  [finite-state observer]
+    <= SeedFSTypical: every finite-state observer is right with frequency exactly 1/2 [problems_one_and_two_of_seed_fsTypical]
+  [measure]
+    part AlmostEveryRowTypical: for almost every initial row every column is finite-state typical [FORMAL: ae_fsTypical]
+  [read angle (diagonals)]
+    part RightDiagonalsPeriodic: every right diagonal is periodic (power-of-two periods) [FORMAL: rdiag_periodic]
+    part InfManyBalancedRdiag: infinitely many right diagonals have bounded wobble and frequency exactly 1/2 [FORMAL: infinitely_many_balanced_rdiag]
+    x  RightDiagonalsPeriodic does not give AllRdiagBalanced: right diagonal 5 has frequency 3/8 [rdiag_five_not_half]
+  [strobe (clock)]
+    <= SeedAPBalanced: every arithmetic progression a(p t + r) has frequency 1/2 [hasFrequencyHalf_of_apBalanced]
+    part StrobeTable1e6: the phase wobbles for strides 2..6 to 10^6 (largest D_{3,1} = 1583) [CERT: strobe_wobble_table]
+STAGE 3 NARROW    restatements dropped (proving one is the same task); blocked routes dropped
+  sufficient open hypotheses, weakest first:
+  SeedAPBalanced (weaker than SeedFSTypical): every arithmetic progression a(p t + r) has frequency 1/2
+  SeedFSTypical: every finite-state observer is right with frequency exactly 1/2
+  SqrtWobble: |D(N)| <= C sqrt(N) eventually, for some C
+  strictly weaker: SeedAPBalanced =/=> SeedFSTypical [exists_apBalanced_not_fsTypical: a doubled typical sequence is AP-balanced, yet the observer 'repeat the last bit at odd times' is right 3/4 of the time]
+  ARROW  SeedFSTypical -> SeedAPBalanced -> P2
+  route  SqrtWobble -> P2
+  (each -> is a proved implication; the arrow runs from the strong end towards the target)
+STAGE 4 EVIDENCE
+  SeedAPBalanced: CERT strobe_wobble_table: 20 phase wobbles for p = 2..6 to 10^6; largest D_{3,1} = 1583 (z = 2.7 for a fair coin)
+  SeedAPBalanced: EMP r12_lens_survey: 135 phases p <= 16 to 10^7, max |z| = 2.68 (control coin 2.60); D_{3,1} falls back to z = 1.8 at 10^7: a fluctuation, not a drift
+  SeedFSTypical: EMP r12_lens_survey: block counts k = 4, 8, 12 to 10^7 give chi2/dof 0.92, 0.89, 0.98; 1023 Walsh window characters max |z| = 3.48 (control 2.94)
+  SqrtWobble: CERT wobble_sq_ratio_cert: D(N)^2/N <= 7.03 for N <= 10^6; sqrt_bound_fails_below: no C with C^2 < 7.03 works
+  SqrtWobble: EMP: D(10^7) = 4440 (z = 1.40)
+  P2: CERT wobble_1e6: D(10^6) = 1536
+  P2: CERT arrow_last_flip_1e6: the arrow does not flip on (195112, 10^6]; arcsine law: about 9% for a fair coin, so not a signal
+STAGE 5 LIMITS
+  gap: the 17 proved facts about the seed do NOT reach P2 through the spokes
+  nearest proved facts: RightDiagonalsPeriodic, InfManyBalancedRdiag, AlmostEveryRowTypical, Wobble1e6, StrobeTable1e6, ArrowNoFlip1e6
+  the wheel chains declared spokes only; it cannot invent a spoke, and finite evidence cannot close an infinite claim (no_finite_certificate_problem1/2)
+NEXT    prove SeedAPBalanced for the seed, or a new spoke from a proved seed fact into SeedAPBalanced
+
+VOCABULARY AUDIT  P2: black cells have frequency 1/2 in the centre column (Problem 2)
+  can the GLM STATE it?   yes: declared statement P2 (a Lean definition, a complete description of the question)
+  can the GLM ANSWER it?  no: the 17 proved facts do not reach P2 through the 16 declared spokes
+  equivalent words (restatements, same difficulty): SublinearWobble, TotalEchoSmall
+  missing pieces (any one would answer it), weakest first:
+    SeedAPBalanced: every arithmetic progression a(p t + r) has frequency 1/2
+      shape: one theorem about the seed, quantified over every progression (p, r)
+    SeedFSTypical: every finite-state observer is right with frequency exactly 1/2
+      shape: one theorem about the seed, quantified over every finite-state observer
+    SqrtWobble: |D(N)| <= C sqrt(N) eventually, for some C
+      shape: one quantitative theorem about the seed (stronger than the target)
+  nearest proved facts: RightDiagonalsPeriodic, InfManyBalancedRdiag, AlmostEveryRowTypical, Wobble1e6, StrobeTable1e6, ArrowNoFlip1e6
+  what it needs:
+    - a proof of SeedAPBalanced, SeedFSTypical or SqrtWobble for the seed (each implies P2)
+    - no counting argument of small range can supply it: the seed run has no non-trivial conserved quantity of range <= 6 (NoConservationLaw6, the chemistry lab), and the persistent arrow carries no information (exists_balanced_persistent_arrow)
+    - a normalisation word (D/sqrt N) to compare wobble readings on one scale (Round 12)
+
+====================================================================================================
+QUESTION: Does computing a(n) cost time growing with n? (Problem 3)
+STAGE 1 BROAD     target P3: computing a(n) needs time growing with n on a uniform machine (Problem 3) [OPEN]; 2 readings through 1 lenses
+STAGE 2 LENSES    (= restatement, <= sufficient, part = proved partial result, x = blocked by a negative control)
+  [algebraic (ANF)]
+    part DegreeFormula: the ANF degree of a(n)(c) is exactly 2n - 1 [FORMAL: topMonomialConjecture_holds]
+    part WholeCone: the n-step map depends on all 2n + 1 cells of the light cone [FORMAL: wholeConeDependence_holds]
+STAGE 3 NARROW    restatements dropped (proving one is the same task); blocked routes dropped
+  no sufficient open hypothesis on the wheel: only restatements and partial results
+STAGE 4 EVIDENCE
+  none on file
+STAGE 5 LIMITS
+  gap: the 17 proved facts about the seed do NOT reach P3 through the spokes
+  nearest proved facts: DegreeFormula, WholeCone
+  the wheel chains declared spokes only; it cannot invent a spoke, and finite evidence cannot close an infinite claim (no_finite_certificate_problem1/2)
+
+VOCABULARY AUDIT  P3: computing a(n) needs time growing with n on a uniform machine (Problem 3)
+  can the GLM STATE it?   yes: declared statement P3 (a Lean definition, a complete description of the question)
+  can the GLM ANSWER it?  no: the 17 proved facts do not reach P3 through the 16 declared spokes
+  missing pieces: no sufficient statement is declared
+  nearest proved facts: DegreeFormula, WholeCone
+  what it needs:
+    - a machine model in the vocabulary (Problem3 is stated for Turing machines in MachineModel.lean) and a lower-bound technique for one explicit sequence on that model; no method is currently known that proves a lower bound of this kind for a sequence like this one, so this is beyond the reach of the wheel
+    - the proved facts (DegreeFormula, WholeCone) are about the n-step map, not about the sequence n -> a(n); they cannot reach P3 (map_properties_cannot_decide_periodicity is the analogous block for P1)
+

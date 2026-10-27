@@ -1,0 +1,402 @@
+==============================================================================
+Q: report wheel
+A: report wheel: 256 wheels, 88 classes, 16 left-permutive; questions 1-3 for wheel 00011110 on delta_0 are OPEN; D(10000) = 64
+  [family]
+     words: The register holds every local map GF(2)^3 -> GF(2), named by its truth table.
+     maths: 256 wheels; 88 classes under mirror and colour swap (Lean: card_equivalence_classes); left-permutive: [15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225, 240] (card_leftPermutive = 16)
+  [the run]
+     words: The run asked about: wheel 00011110 (f = L + C + R + C*R over GF(2)) from the impulse row delta_0, read at column 0.
+     maths: a(0..63) = 1101110011000101100100111010111001110101011000011001010110101011; D(10000) = 64; D(10^6) = 1536 (Lean: wobble_1e6)
+  [question 1]
+     words: Aperiodicity of the run's column 0.  Status: OPEN.
+     maths: NOT exists p > 0, N : for all n >= N, a(n+p) = a(n),  a(n) = T_30^n(delta_0)(0).  PROVED partial: no column is eventually constant (p = 1); at most one column of the run is eventually periodic; no two adjacent columns are; same answer as for wheel 86 (mirror) and for wheel 135 on the complemented impulse.
+  [question 2]
+     words: Balance of the run's column 0.  Status: OPEN.
+     maths: #{i < N : a(i) = 1} / N -> 1/2, equivalently D(N)/N -> 0.  PROVED: holds for almost every initial row (fair-coin measure); no finite prefix decides it; SeedFSTypical => questions 1 and 2.
+  [question 3]
+     words: Cost of computing the run's column 0.  Status: OPEN.
+     maths: no multi-tape Turing machine computes n -> a(n) (n in binary) in time o(n).  PROVED nearby: the n-step light-cone map needs all 2n+1 inputs and >= n gates; but that is a different function (2n+1 input bits instead of log n).
+  [settled neighbours]
+     words: Wheels where the same questions are answered, for contrast.
+     maths: wheel 90 (L + R): column 0 = 1,0,0,...: Q1 and Q2 answer NO (Lean: not_wheelProblem1_ninety, not_wheelProblem2_ninety); wheel 0 and wheel 204: Q1 answers NO (not_wheelProblem1_zero, not_wheelProblem1_identity)
+  [symmetry]
+     words: The questions are carried by the class, not by the name.
+     maths: Q1/Q2 for wheel 30 = Q1/Q2 for wheel 86 on delta_0 = Q1/Q2 for wheel 135 on the complemented impulse (problem1_iff_eightySix, problem1_iff_oneThirtyFive, ...)
+==============================================================================
+Q: describe wheel_00011110
+A: wheel_00011110: local map f(L,C,R) = bit (4L+2C+R) of 30 = 0b00011110; over GF(2): f = L + C + R + C*R [FORMAL]
+  [carrier]
+     words: wheel_00011110 is a carrier of the automata register (aliases: wheel_30).  It is a local rule: the eight outputs are the carrier.
+     maths: local map f(L,C,R) = bit (4L+2C+R) of 30 = 0b00011110; over GF(2): f = L + C + R + C*R
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: out_001=1; out_010=1; out_011=1; out_100=1; anf_R=1; anf_C=1; anf_CR=1; anf_L=1; left_permutive=1; mirror_number=86; complement_number=135; class_rep=30; anf_degree=2; number=30
+  [evidence]
+     words: Evidence class FORMAL: a Lean proof for every parameter.
+     maths: Lean: GLM.Rule30.ecaRule, ecaEvolve, ecaColumn (ElementaryCA.lean)
+  [recomputation]
+     words: The run from the impulse row is evolved exactly; the light-cone map at n = 5 is tabulated on all 2^11 rows at once.
+     maths: column 0, t < 32: 11011100110001011001001110101110; D(1000) = -38; essential cells of x -> T^5(x)(0): [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5] (11 of 11); d/dx_(-5) = 1 on every row: True
+  [boundary]
+     words: What this carrier does not establish.
+     maths: A local rule.  Questions 1-3 concern one run of it (initial row and column), so they are posed as WheelProblem1/2/3 r x c, with the run carried in the question.
+==============================================================================
+Q: describe wheel_01011010
+A: wheel_01011010: local map f(L,C,R) = bit (4L+2C+R) of 90 = 0b01011010; over GF(2): f = L + R [FORMAL]
+  [carrier]
+     words: wheel_01011010 is a carrier of the automata register (aliases: wheel_90).  It is a local rule: the eight outputs are the carrier.
+     maths: local map f(L,C,R) = bit (4L+2C+R) of 90 = 0b01011010; over GF(2): f = L + R
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: out_001=1; out_011=1; out_100=1; out_110=1; anf_R=1; anf_L=1; left_permutive=1; right_permutive=1; affine=1; mirror_number=90; complement_number=165; class_rep=90; anf_degree=1; number=90
+  [evidence]
+     words: Evidence class FORMAL: a Lean proof for every parameter.
+     maths: Lean: GLM.Rule30.ecaRule, ecaEvolve, ecaColumn (ElementaryCA.lean)
+  [recomputation]
+     words: The run from the impulse row is evolved exactly; the light-cone map at n = 5 is tabulated on all 2^11 rows at once.
+     maths: column 0, t < 32: 10000000000000000000000000000000; D(1000) = -998; essential cells of x -> T^5(x)(0): [-5, -3, 3, 5] (4 of 11); d/dx_(-5) = 1 on every row: True
+  [boundary]
+     words: What this carrier does not establish.
+     maths: A local rule.  Questions 1-3 concern one run of it (initial row and column), so they are posed as WheelProblem1/2/3 r x c, with the run carried in the question.
+==============================================================================
+Q: describe wheel_family
+A: wheel_family: 256 local maps GF(2)^3 -> GF(2); 88 classes under mirror (c -> -c) and colour swap; 16 left-permutive (wheel 30 among them) [FORMAL]
+  [carrier]
+     words: wheel_family is a carrier of the automata register (aliases: elementary_wheels).  It is one exact fact about the whole family of 256 wheels.
+     maths: 256 local maps GF(2)^3 -> GF(2); 88 classes under mirror (c -> -c) and colour swap; 16 left-permutive (wheel 30 among them)
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: all zero
+  [evidence]
+     words: Evidence class FORMAL: a Lean proof for every parameter.
+     maths: Lean: GLM.Rule30.card_equivalence_classes (= 88), card_leftPermutive (= 16), ecaEvolve_mirror, ecaEvolve_complement
+  [recomputation]
+     words: The 256 tables are closed under mirror and colour swap.
+     maths: 88 classes; left-permutive wheels: [15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225, 240]
+  [boundary]
+     words: What this carrier does not establish.
+     maths: Proved for every parameter stated.
+==============================================================================
+Q: describe r30_wobble_D_10000
+A: wheel_30_wobble_D_10000: D(10000) = 2*#{i < 10000 : a(i) = 1} - 10000 = 64,  a(n) = T_30^n(delta_0)(0) [EMP]
+  [carrier]
+     words: wheel_30_wobble_D_10000 is a carrier of the automata register (aliases: r30_wobble_D_10000, wheel_00011110_wobble_D_10000).  It is one exact fact about the run of wheel 00011110 from the impulse row delta_0, read at column 0.
+     maths: D(10000) = 2*#{i < 10000 : a(i) = 1} - 10000 = 64,  a(n) = T_30^n(delta_0)(0)
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; parameter=10000; value_num=64; value_den=1; evidence_rank=1; aux00=5032
+  [evidence]
+     words: Evidence class EMP: an exact computation in this register, not a Lean theorem.
+     maths: Lean: GLM.Rule30.wobble (definition); value computed exactly by this register.  Lean certifies 24979*D(N)^2 <= 175561*N for all N <= 10^6 (wobble_sq_ratio_cert)
+  [recomputation]
+     words: The run is evolved again for 10000 steps and the accumulator recounted.
+     maths: D(10000) = 2*5032 - 10000 = 64; agrees: True
+  [arrow]
+     words: The observer's arrow is the sign that would pull the accumulator back to zero: the direction the run must move for its black frequency to return to 1/2.
+     maths: arrow(N) = -sign D(N) = -1 (towards white); D(N)/N = 4/625
+  [boundary]
+     words: What this carrier does not establish.
+     maths: A value at one finite N.  No finite prefix decides questions 1 or 2 (Lean: no_finite_certificate_problem1, no_finite_certificate_problem2); the value is a measurement of the run, not a statement about its limit.
+==============================================================================
+Q: describe r30_wobble_D_1000000
+A: wheel_30_wobble_D_1000000: D(1000000) = 1536,  a(n) = T_30^n(delta_0)(0) [CERT]
+  [carrier]
+     words: wheel_30_wobble_D_1000000 is a carrier of the automata register (aliases: r30_wobble_D_1000000, wheel_00011110_wobble_D_1000000).  It is one exact fact about the run of wheel 00011110 from the impulse row delta_0, read at column 0.
+     maths: D(1000000) = 1536,  a(n) = T_30^n(delta_0)(0)
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; parameter=1000000; value_num=1536; value_den=1; evidence_rank=3; aux00=500768
+  [evidence]
+     words: Evidence class CERT: an exact certificate checked in Lean over a stated finite range.
+     maths: Lean: GLM.Rule30.wobble_1e6 : wobble centerCol 1000000 = 1536
+  [recomputation]
+     words: N = 1000000 is beyond the register's in-session run (10000); the value is the Lean certificate, checked there by evaluation.
+     maths: GLM.Rule30.wobble_1e6 : wobble centerCol 1000000 = 1536
+  [arrow]
+     words: The observer's arrow is the sign that would pull the accumulator back to zero: the direction the run must move for its black frequency to return to 1/2.
+     maths: arrow(N) = -sign D(N) = -1 (towards white); D(N)/N = 24/15625
+  [boundary]
+     words: What this carrier does not establish.
+     maths: A value at one finite N.  No finite prefix decides questions 1 or 2 (Lean: no_finite_certificate_problem1, no_finite_certificate_problem2); the value is a measurement of the run, not a statement about its limit.
+==============================================================================
+Q: is r30_wobble_D_1000000 greater than 0
+A: true: r30_wobble_D_1000000 > 0
+  [carriers]
+     words: Each register name is replaced by the exact value its carrier holds, with the evidence class and the Lean reference that certify it.
+     maths: r30_wobble_D_1000000 = 1536 [CERT: GLM.Rule30.wobble_1e6 : wobble centerCol 1000000 = 1536]
+  [the two values]
+     words: Each side is read as a process: a rule that returns an exact rational within any precision asked of it.  Nothing is rounded and no float is built.
+     maths: r30_wobble_D_1000000 = 1536.00000000000000000000..., 0 = 0.00000000000000000000...
+  [the decision]
+     words: The two are compared at increasing precision until their intervals come apart.  The first precision at which they do is the cost of the answer.
+     maths: ladder [8, 16, 32, 64, 128, 256]; separated at 2**-8
+  [the boundary]
+     words: Two unequal processes always separate at some finite precision, and this one is found.  Two equal processes never separate, and no amount of refinement turns that into a proof of equality -- so 'not distinguished' is the only honest answer there.
+     maths: relation asked: greater; verdict: True
+==============================================================================
+Q: real value r30_wobble_D_1000000 / 1000000
+A: r30_wobble_D_1000000 / 1000000 = 0.00153600000000000000 (to 20 places); a carrier holds it exactly
+  [carriers]
+     words: Each register name is replaced by the exact value its carrier holds, with the evidence class and the Lean reference that certify it.
+     maths: r30_wobble_D_1000000 = 1536 [CERT: GLM.Rule30.wobble_1e6 : wobble centerCol 1000000 = 1536]
+  [what it is not]
+     words: A carrier is 24 exact rationals.  r30_wobble_D_1000000 / 1000000 is rational, so a carrier does hold it.
+     maths: rational: True
+  [digits]
+     words: The process is asked for an approximation good to 2**-k with k large enough that 20 decimal places are settled.  No float is constructed.
+     maths: r30_wobble_D_1000000 / 1000000 = 0.00153600000000000000
+  [the tower's stand-ins]
+     words: Level n of the dyadic tower holds floor(x*2^n)/2^n -- a rational carrier that is indistinguishable from the target at that resolution, and is exposed by a higher level.
+     maths: levels 0..5: 0, 0, 0, 0, 0, 0; exposed at 0->10, 1->10, 2->10, 3->10, 4->10
+  [the dynamic carrier]
+     words: The one-bit modulator chases the fractional part with an exact error accumulator.  After N ticks its time average is a rational k/N within 1/N of the target -- the machine-checked bound GLM.Info.dsAverage_error_le.
+     maths: N = 512, average = 0, |average - target| = 24/15625 <= 1/512
+==============================================================================
+Q: describe r30_delta_sigma_accumulator
+A: wheel_30_delta_sigma_accumulator: D(N) = 2*sum_{i<N} a(i) - N.  PROVED: D(N+1) = D(N) + (2a(N) - 1); |D(N)| <= N; D(N) = N mod 2; frequency -> 1/2  <=>  D(N)/N -> 0;  |D(N)| <= C*sqrt(N) eventually => frequency -> 1/2.  OPEN: D(N)/N -> 0 for this run (question 2).  The observer's arrow is -sign D(N). [OPEN]
+  [carrier]
+     words: wheel_30_delta_sigma_accumulator is a carrier of the automata register (aliases: r30_delta_sigma_accumulator, wheel_00011110_accumulator).  It is one exact fact about the run of wheel 00011110 from the impulse row delta_0, read at column 0.
+     maths: D(N) = 2*sum_{i<N} a(i) - N.  PROVED: D(N+1) = D(N) + (2a(N) - 1); |D(N)| <= N; D(N) = N mod 2; frequency -> 1/2  <=>  D(N)/N -> 0;  |D(N)| <= C*sqrt(N) eventually => frequency -> 1/2.  OPEN: D(N)/N -> 0 for this run (question 2).  The observer's arrow is -sign D(N).
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; parameter=10000
+  [evidence]
+     words: Evidence class OPEN: stated exactly, not proved.
+     maths: Lean: GLM.Rule30.wobble_succ, abs_wobble_le, wobble_parity, problem2_iff_wobble, problem2_of_sqrt_bound; Perspective.lean (arrow)
+  [recomputation]
+     words: No finite recomputation applies to an open statement.
+     maths: none
+  [boundary]
+     words: What this carrier does not establish.
+     maths: This is an open statement.  The register holds its exact form and the proved facts around it; it does not hold a value for it, and no finite run decides it (Lean: no_finite_certificate_problem1 / no_finite_certificate_problem2).
+==============================================================================
+Q: describe r30_question_balance
+A: wheel_30_question_2: #{i < N : a(i) = 1} / N -> 1/2, equivalently D(N)/N -> 0.  PROVED: holds for almost every initial row (fair-coin measure); no finite prefix decides it; SeedFSTypical => questions 1 and 2. [OPEN]
+  [carrier]
+     words: wheel_30_question_2 is a carrier of the automata register (aliases: r30_question_balance, wheel_00011110_q2).  It is one of the three questions about the run of wheel 00011110 from the impulse row delta_0, read at column 0, carried as an exact statement.
+     maths: #{i < N : a(i) = 1} / N -> 1/2, equivalently D(N)/N -> 0.  PROVED: holds for almost every initial row (fair-coin measure); no finite prefix decides it; SeedFSTypical => questions 1 and 2.
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; parameter=2
+  [evidence]
+     words: Evidence class OPEN: stated exactly, not proved.
+     maths: Lean: GLM.Rule30.Problem2 = WheelProblem2 30 seed 0; problem2_iff_wobble, ae_fsTypical, no_finite_certificate_problem2, problems_one_and_two_of_seed_fsTypical
+  [recomputation]
+     words: No finite recomputation applies to an open statement.
+     maths: none
+  [boundary]
+     words: What this carrier does not establish.
+     maths: This is an open statement.  The register holds its exact form and the proved facts around it; it does not hold a value for it, and no finite run decides it (Lean: no_finite_certificate_problem1 / no_finite_certificate_problem2).
+==============================================================================
+Q: is r30_question_balance equal to 1/2
+A: unsolved: compare: r30_question_balance is an OPEN statement and has no value: #{i < N : a(i) = 1} / N -> 1/2, equivalently D(N)/N -> 0.  PROVED: holds for almost every initial row (fair-coin measure); no finite prefix decides it; SeedFSTypical => questions 1 and 2.
+  [failure]
+     words: The query parsed as 'compare' but could not be solved.
+     maths: error: compare: r30_question_balance is an OPEN statement and has no value: #{i < N : a(i) = 1} / N -> 1/2, equivalently D(N)/N -> 0.  PROVED: holds for almost every initial row (fair-coin measure); no finite prefix decides it; SeedFSTypical => questions 1 and 2.
+==============================================================================
+Q: describe r30_anf_degree_7
+A: wheel_30_anf_degree_7: deg_GF(2) of x -> T_30^7(x)(0) = 13 = 2n-1; top monomial x_{-5}...x_{7} [FORMAL]
+  [carrier]
+     words: wheel_30_anf_degree_7 is a carrier of the automata register (aliases: r30_anf_degree_7, wheel_00011110_degree_7).  It is one exact fact about the n-step map x -> T_30^n(x)(0) of wheel 00011110, over every initial row x.
+     maths: deg_GF(2) of x -> T_30^7(x)(0) = 13 = 2n-1; top monomial x_{-5}...x_{7}
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; parameter=7; value_num=13; value_den=1; evidence_rank=4
+  [evidence]
+     words: Evidence class FORMAL: a Lean proof for every parameter.
+     maths: Lean: GLM.Rule30.center_anfDegree_eq (every n >= 2)
+  [recomputation]
+     words: The ANF of x -> T^7(x)(0) is computed by a Moebius transform over all 2^15 rows.
+     maths: degree = 13, monomials = 4852, top monomials (cells) = [[-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7]]; agrees: True
+  [boundary]
+     words: What this carrier does not establish.
+     maths: This is a property of the n-step MAP x -> T^n(x)(0) over all rows x.  It holds equally for the all-white row, whose column 0 is periodic, so it cannot by itself decide questions 1-3 for the impulse row (error E2; Lean: map_properties_cannot_decide_periodicity, wholeCone_compatible_with_periodicity).
+==============================================================================
+Q: is r30_anf_degree_10 greater than 18
+A: true: r30_anf_degree_10 > 18
+  [carriers]
+     words: Each register name is replaced by the exact value its carrier holds, with the evidence class and the Lean reference that certify it.
+     maths: r30_anf_degree_10 = 19 [FORMAL: GLM.Rule30.center_anfDegree_eq (every n >= 2)]
+  [the two values]
+     words: Each side is read as a process: a rule that returns an exact rational within any precision asked of it.  Nothing is rounded and no float is built.
+     maths: r30_anf_degree_10 = 19.00000000000000000000..., 18 = 18.00000000000000000000...
+  [the decision]
+     words: The two are compared at increasing precision until their intervals come apart.  The first precision at which they do is the cost of the answer.
+     maths: ladder [8, 16, 32, 64, 128, 256]; separated at 2**-8
+  [the boundary]
+     words: Two unequal processes always separate at some finite precision, and this one is found.  Two equal processes never separate, and no amount of refinement turns that into a proof of equality -- so 'not distinguished' is the only honest answer there.
+     maths: relation asked: greater; verdict: True
+==============================================================================
+Q: is r30_anf_degree_10 equal to 19
+A: r30_anf_degree_10 and 19 are not distinguished at 2**-256; equality of two processes is not decidable, so the machine does not claim it
+  [carriers]
+     words: Each register name is replaced by the exact value its carrier holds, with the evidence class and the Lean reference that certify it.
+     maths: r30_anf_degree_10 = 19 [FORMAL: GLM.Rule30.center_anfDegree_eq (every n >= 2)]
+  [the two values]
+     words: Each side is read as a process: a rule that returns an exact rational within any precision asked of it.  Nothing is rounded and no float is built.
+     maths: r30_anf_degree_10 = 19.00000000000000000000..., 19 = 19.00000000000000000000...
+  [the decision]
+     words: The two are compared at increasing precision until their intervals come apart.  The first precision at which they do is the cost of the answer.
+     maths: ladder [8, 16, 32, 64, 128, 256]; still together at 2**-256
+  [the boundary]
+     words: Two unequal processes always separate at some finite precision, and this one is found.  Two equal processes never separate, and no amount of refinement turns that into a proof of equality -- so 'not distinguished' is the only honest answer there.
+     maths: relation asked: equal; verdict: undecided
+==============================================================================
+Q: describe r30_cone_separation_derivative
+A: wheel_30_cone_separation_derivative: d T_30^n(x)(c) / d x_{c-n} = 1 for every row x and every n (left-permutivity of the n-step map); the right-edge derivative is the product of (1 + x) along the inner diagonal, so it is not constant.  Holds for all 16 left-permutive wheels. [FORMAL]
+  [carrier]
+     words: wheel_30_cone_separation_derivative is a carrier of the automata register (aliases: r30_cone_separation_derivative, wheel_00011110_left_edge_derivative).  It is one exact fact about the n-step map x -> T_30^n(x)(0) of wheel 00011110, over every initial row x.
+     maths: d T_30^n(x)(c) / d x_{c-n} = 1 for every row x and every n (left-permutivity of the n-step map); the right-edge derivative is the product of (1 + x) along the inner diagonal, so it is not constant.  Holds for all 16 left-permutive wheels.
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; value_num=1; value_den=1; evidence_rank=4
+  [evidence]
+     words: Evidence class FORMAL: a Lean proof for every parameter.
+     maths: Lean: GLM.Rule30.evolve_flip_left_edge, booleanDerivative_right_edge, ecaEvolve_flip_left_edge (family)
+  [recomputation]
+     words: The left-edge derivative is tabulated for n = 0..8 on every row.
+     maths: d T^n(x)(0) / d x_(-n) = 1 for n = 0..8: [True, True, True, True, True, True, True, True, True]
+  [boundary]
+     words: What this carrier does not establish.
+     maths: This is a property of the n-step MAP x -> T^n(x)(0) over all rows x.  It holds equally for the all-white row, whose column 0 is periodic, so it cannot by itself decide questions 1-3 for the impulse row (error E2; Lean: map_properties_cannot_decide_periodicity, wholeCone_compatible_with_periodicity).
+==============================================================================
+Q: describe r30_lag_predictor
+A: wheel_30_lag_predictor: lag-p predictor guesses a(t) = a(t-p); errors on p <= t < 10000 for p = 1..16: [4984, 4989, 4960, 4946, 5043, 5092, 4967, 4972, 5066, 4999, 4940, 4991, 4951, 5032, 5023, 5038]; least error rate 4940/9989 at p = 11.  PROVED: question 1  <=>  every finite-state observer (in particular every lag predictor) errs infinitely often. [EMP]
+  [carrier]
+     words: wheel_30_lag_predictor is a carrier of the automata register (aliases: r30_lag_predictor, r30_fs_observer_error_rate).  It is one exact fact about the run of wheel 00011110 from the impulse row delta_0, read at column 0.
+     maths: lag-p predictor guesses a(t) = a(t-p); errors on p <= t < 10000 for p = 1..16: [4984, 4989, 4960, 4946, 5043, 5092, 4967, 4972, 5066, 4999, 4940, 4991, 4951, 5032, 5023, 5038]; least error rate 4940/9989 at p = 11.  PROVED: question 1  <=>  every finite-state observer (in particular every lag predictor) errs infinitely often.
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; parameter=10000; value_num=4940; value_den=9989; evidence_rank=1; aux00=4984; aux01=4989; aux02=4960; aux03=4946; aux04=5043; aux05=5092; aux06=4967; aux07=4972; aux08=5066; aux09=4999; aux10=4940; aux11=4991; aux12=4951; aux13=5032; aux14=5023; aux15=5038
+  [evidence]
+     words: Evidence class EMP: an exact computation in this register, not a Lean theorem.
+     maths: Lean: GLM.Rule30.problem1_iff_fsObservers_fail (FiniteState.lean); lag form in Spectral.lean and RuleSpace.lean
+  [recomputation]
+     words: The lag counts are recomputed from the run.
+     maths: errors for p = 1..16: [4984, 4989, 4960, 4946, 5043, 5092, 4967, 4972, 5066, 4999, 4940, 4991, 4951, 5032, 5023, 5038]
+  [boundary]
+     words: What this carrier does not establish.
+     maths: A value at one finite N.  No finite prefix decides questions 1 or 2 (Lean: no_finite_certificate_problem1, no_finite_certificate_problem2); the value is a measurement of the run, not a statement about its limit.
+==============================================================================
+Q: describe r30_question_aperiodicity
+A: wheel_30_question_1: NOT exists p > 0, N : for all n >= N, a(n+p) = a(n),  a(n) = T_30^n(delta_0)(0).  PROVED partial: no column is eventually constant (p = 1); at most one column of the run is eventually periodic; no two adjacent columns are; same answer as for wheel 86 (mirror) and for wheel 135 on the complemented impulse. [OPEN]
+  [carrier]
+     words: wheel_30_question_1 is a carrier of the automata register (aliases: r30_question_aperiodicity, wheel_00011110_q1).  It is one of the three questions about the run of wheel 00011110 from the impulse row delta_0, read at column 0, carried as an exact statement.
+     maths: NOT exists p > 0, N : for all n >= N, a(n+p) = a(n),  a(n) = T_30^n(delta_0)(0).  PROVED partial: no column is eventually constant (p = 1); at most one column of the run is eventually periodic; no two adjacent columns are; same answer as for wheel 86 (mirror) and for wheel 135 on the complemented impulse.
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; parameter=1
+  [evidence]
+     words: Evidence class OPEN: stated exactly, not proved.
+     maths: Lean: GLM.Rule30.Problem1 = WheelProblem1 30 seed 0 (problem1_iff_wheel); column_not_eventually_constant, seed_at_most_one_periodic_column, problem1_iff_eightySix, problem1_iff_oneThirtyFive
+  [recomputation]
+     words: No finite recomputation applies to an open statement.
+     maths: none
+  [boundary]
+     words: What this carrier does not establish.
+     maths: This is an open statement.  The register holds its exact form and the proved facts around it; it does not hold a value for it, and no finite run decides it (Lean: no_finite_certificate_problem1 / no_finite_certificate_problem2).
+==============================================================================
+Q: describe r30_light_cone_dependency_10
+A: wheel_30_essential_inputs_10: x -> T_30^10(x)(0) depends essentially on all 21 cells x_{-10}..x_{10} of its light cone; every fan-in-2 circuit for it has >= 10 gates [FORMAL]
+  [carrier]
+     words: wheel_30_essential_inputs_10 is a carrier of the automata register (aliases: r30_essential_inputs_10, r30_light_cone_dependency_10).  It is one exact fact about the n-step map x -> T_30^n(x)(0) of wheel 00011110, over every initial row x.
+     maths: x -> T_30^10(x)(0) depends essentially on all 21 cells x_{-10}..x_{10} of its light cone; every fan-in-2 circuit for it has >= 10 gates
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; parameter=10; value_num=21; value_den=1; evidence_rank=4
+  [evidence]
+     words: Evidence class FORMAL: a Lean proof for every parameter.
+     maths: Lean: GLM.Rule30.wholeConeDependence_holds, circuit_size_ge (WholeCone.lean)
+  [recomputation]
+     words: n = 10 is beyond the in-session table size; the value is the Lean theorem for every n.
+     maths: GLM.Rule30.wholeConeDependence_holds, circuit_size_ge (WholeCone.lean)
+  [boundary]
+     words: What this carrier does not establish.
+     maths: This is a property of the n-step MAP x -> T^n(x)(0) over all rows x.  It holds equally for the all-white row, whose column 0 is periodic, so it cannot by itself decide questions 1-3 for the impulse row (error E2; Lean: map_properties_cannot_decide_periodicity, wholeCone_compatible_with_periodicity).
+==============================================================================
+Q: describe r30_essential_inputs_6
+A: wheel_30_essential_inputs_6: x -> T_30^6(x)(0) depends essentially on all 13 cells x_{-6}..x_{6} of its light cone; every fan-in-2 circuit for it has >= 6 gates [FORMAL]
+  [carrier]
+     words: wheel_30_essential_inputs_6 is a carrier of the automata register (aliases: r30_essential_inputs_6, r30_light_cone_dependency_6).  It is one exact fact about the n-step map x -> T_30^n(x)(0) of wheel 00011110, over every initial row x.
+     maths: x -> T_30^6(x)(0) depends essentially on all 13 cells x_{-6}..x_{6} of its light cone; every fan-in-2 circuit for it has >= 6 gates
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; parameter=6; value_num=13; value_den=1; evidence_rank=4
+  [evidence]
+     words: Evidence class FORMAL: a Lean proof for every parameter.
+     maths: Lean: GLM.Rule30.wholeConeDependence_holds, circuit_size_ge (WholeCone.lean)
+  [recomputation]
+     words: Each cell of the light cone is flipped on all 2^13 rows at once and the output compared.
+     maths: essential cells: [-6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6]; count = 13; agrees: True
+  [boundary]
+     words: What this carrier does not establish.
+     maths: This is a property of the n-step MAP x -> T^n(x)(0) over all rows x.  It holds equally for the all-white row, whose column 0 is periodic, so it cannot by itself decide questions 1-3 for the impulse row (error E2; Lean: map_properties_cannot_decide_periodicity, wholeCone_compatible_with_periodicity).
+==============================================================================
+Q: compare r30_essential_inputs_10 and 21
+A: r30_essential_inputs_10 and 21 are not distinguished at 2**-256; equality of two processes is not decidable, so the machine does not claim it
+  [carriers]
+     words: Each register name is replaced by the exact value its carrier holds, with the evidence class and the Lean reference that certify it.
+     maths: r30_essential_inputs_10 = 21 [FORMAL: GLM.Rule30.wholeConeDependence_holds, circuit_size_ge (WholeCone.lean)]
+  [the two values]
+     words: Each side is read as a process: a rule that returns an exact rational within any precision asked of it.  Nothing is rounded and no float is built.
+     maths: r30_essential_inputs_10 = 21.00000000000000000000..., 21 = 21.00000000000000000000...
+  [the decision]
+     words: The two are compared at increasing precision until their intervals come apart.  The first precision at which they do is the cost of the answer.
+     maths: ladder [8, 16, 32, 64, 128, 256]; still together at 2**-256
+  [the boundary]
+     words: Two unequal processes always separate at some finite precision, and this one is found.  Two equal processes never separate, and no amount of refinement turns that into a proof of equality -- so 'not distinguished' is the only honest answer there.
+     maths: relation asked: compare; verdict: undecided
+==============================================================================
+Q: describe r30_question_cost
+A: wheel_30_question_3: no multi-tape Turing machine computes n -> a(n) (n in binary) in time o(n).  PROVED nearby: the n-step light-cone map needs all 2n+1 inputs and >= n gates; but that is a different function (2n+1 input bits instead of log n). [OPEN]
+  [carrier]
+     words: wheel_30_question_3 is a carrier of the automata register (aliases: r30_question_cost, wheel_00011110_q3).  It is one of the three questions about the run of wheel 00011110 from the impulse row delta_0, read at column 0, carried as an exact statement.
+     maths: no multi-tape Turing machine computes n -> a(n) (n in binary) in time o(n).  PROVED nearby: the n-step light-cone map needs all 2n+1 inputs and >= n gates; but that is a different function (2n+1 input bits instead of log n).
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=30; parameter=3
+  [evidence]
+     words: Evidence class OPEN: stated exactly, not proved.
+     maths: Lean: GLM.Rule30.Problem3 = WheelProblem3 30 (problem3_iff_wheel); wholeConeDependence_holds, circuit_size_ge, nonuniform_trivial
+  [recomputation]
+     words: No finite recomputation applies to an open statement.
+     maths: none
+  [boundary]
+     words: What this carrier does not establish.
+     maths: This is an open statement.  The register holds its exact form and the proved facts around it; it does not hold a value for it, and no finite run decides it (Lean: no_finite_certificate_problem1 / no_finite_certificate_problem2).
+==============================================================================
+Q: describe wheel_90_impulse_centre
+A: wheel_90_impulse_centre: wheel 90 (f = L + R) from delta_0: column 0 is 1, 0, 0, 0, ...; questions 1 and 2 both have answer NO, although wheel 90 is left-permutive like wheel 30 [FORMAL]
+  [carrier]
+     words: wheel_90_impulse_centre is a carrier of the automata register (aliases: r90_impulse_centre, wheel_01011010_impulse_centre).  It is one exact fact about the run of wheel 01011010 from the impulse row delta_0, read at column 0.
+     maths: wheel 90 (f = L + R) from delta_0: column 0 is 1, 0, 0, 0, ...; questions 1 and 2 both have answer NO, although wheel 90 is left-permutive like wheel 30
+  [coordinates]
+     words: The carrier's non-zero coordinates, by name.  Every entry is an exact integer.
+     maths: wheel_number=90; value_num=1; value_den=1; evidence_rank=4
+  [evidence]
+     words: Evidence class FORMAL: a Lean proof for every parameter.
+     maths: Lean: GLM.Rule30.ecaColumn_ninety_centre, not_wheelProblem1_ninety, not_wheelProblem2_ninety
+  [recomputation]
+     words: Wheel 90 is evolved from the impulse row.
+     maths: column 0, t < 32: 10000000000000000000000000000000
+  [boundary]
+     words: What this carrier does not establish.
+     maths: Proved for every parameter stated.
+==============================================================================
+Q: compare r30_anf_degree_10 to 19
+REFUSED: QueryError parse_query: 'compare r30_anf_degree_10 to 19' -- 'compare r30_anf_degree_10 to 19' names 1 value(s); a comparison needs two, e.g. 'compare sqrt(2) and 1.5'
+==============================================================================
+Q: derive r30_fs_observer_error_rate from r30_lag_predictor
+REFUSED: QueryError parse_query: 'derive r30_fs_observer_error_rate from r30_lag_predictor' -- a derivation needs a coordinate and an object, written '<coordinate> of <object>'; 'derive r30_fs_observer_error_rate from r30_lag_predictor' names only one thing
+==============================================================================
+Q: describe rule 30
+A: unsolved: resolve: 'rule 30' names no carrier in any enabled domain; did you mean ['wheel_30', 'al2o3', 'alp_ct', 'alp_i', 'alp_o']?
+  [failure]
+     words: The query parsed as 'describe' but could not be solved.
+     maths: error: resolve: 'rule 30' names no carrier in any enabled domain; did you mean ['wheel_30', 'al2o3', 'alp_ct', 'alp_i', 'alp_o']?
+==============================================================================
+Q: what is the centre column
+A: unsolved: resolve: 'centre column' names no carrier in any enabled domain
+  [failure]
+     words: The query parsed as 'describe' but could not be solved.
+     maths: error: resolve: 'centre column' names no carrier in any enabled domain
