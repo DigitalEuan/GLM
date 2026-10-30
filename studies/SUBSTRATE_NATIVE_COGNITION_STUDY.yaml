@@ -1,0 +1,83 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 26 of 33 declared round-two questions answered correctly and 7 refused correctly, with
+  0 wrong, against 0 answered by the grammar alone.
+directives:
+- D15
+- D7
+evidence: []
+faculty: derivation
+file_refs:
+  code: []
+  lean:
+  - CognitionRoundTwo
+  - Cumulative
+  - LayerChain
+  - PCGS
+  - Reversible
+  - Sakuma
+  - SemanticPlan
+  - SubstrateCognition
+  - Tower
+  prose: SUBSTRATE_NATIVE_COGNITION_STUDY.md
+  test:
+  - test_substrate_native_cognition.py
+  wheel: []
+follow_ups: []
+id: SUBSTRATE_NATIVE_COGNITION_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Which concepts of the supplied substrate-native-cognition list move derivation, addressing or
+  refusal when they are run, and which do not?
+recomputed_by: '`glm_universal.reasoning.substrate_cognition.cognition_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-list-one-line-per-concept
+  heading: 1. The list, one line per concept
+- anchor: 2-declarations-written-before-any-measuring-code
+  heading: 2. Declarations — written before any measuring code
+- anchor: 3-what-each-experiment-measured
+  heading: 3. What each experiment measured
+- anchor: 4-which-faculty-moved-d15
+  heading: 4. Which faculty moved (D15)
+- anchor: 5-what-would-earn-the-next-round
+  heading: 5. What would earn the next round
+- anchor: 6-round-two-phase-63-declarations-written-before-any-measuring-code
+  heading: 6. Round two (Phase 63) — declarations, written before any measuring code
+- anchor: 7-round-two-what-was-measured
+  heading: 7. Round two — what was measured
+- anchor: 8-what-would-earn-the-next-round
+  heading: 8. What would earn the next round
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Substrate-native cognition: the supplied list, as experiments'
+verdict: 'Round two wired three more frames into the typed planner, which is now the default path: interval
+  consistency, rational recognition and dimensional derivation answered 26 of 33 declared questions and
+  refused the other 7 as declared, with 0 wrong where the grammar answered none.'
+wobble_deps: []

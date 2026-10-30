@@ -140,11 +140,11 @@ is certified by the rule. It is reported either way; I5 and I6 bind it.
 ## 6. Files
 
 * `RequestProject/GLM/InertCounter.lean` — I1.
-* `overlay/glm_universal/reasoning/batch_machine.py` — `inert_variables`, and
+* `glm_universal/reasoning/batch_machine.py` — `inert_variables`, and
   the forgetful re-run in `run_program`.
-* `overlay/glm_universal/reasoning/batch_speech.py` — the answer and the
+* `glm_universal/reasoning/batch_speech.py` — the answer and the
   `never_inert` column-3 claim, its checker and its mutations.
-* `overlay/glm_universal/reasoning/inert_counter.py` — the battery and the
+* `glm_universal/reasoning/inert_counter.py` — the battery and the
   marks; `python3 -m glm_universal.tools inert-counter`.
 * Tests: `test_inert_counter.py`; `test_operations.py` re-pinned for M15/Q6.
 

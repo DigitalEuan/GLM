@@ -1,0 +1,77 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 4 of 7 marks met; 9 of 10 declared systems with exactly the declared branches; 5 of 5
+  refusals; 10 of 10 scripts verified and 10 of 10 mutants rejected; 24 of 26 Phase 98 questions unchanged,
+  the other 2 being its two `NONLINEAR` refusals; planted battery 19 of 60 answered, 0 wrong.
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - evaluation/nonlinear_cases
+  lean:
+  - NonlinearElimination
+  prose: NONLINEAR_ELIMINATION_STUDY.md
+  test:
+  - test_nonlinear_elimination.py
+  wheel: []
+follow_ups: []
+id: NONLINEAR_ELIMINATION_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 98
+predecessors: []
+question: Phase 98's solver refuses `NONLINEAR` every system in which an unknown appears in a product
+  or in two powers, even when the system has a closed answer. Can a second layer answer those systems
+  exactly, giving every real solution as a branch, without answering anything wrongly and without moving
+  an earlier answer?
+recomputed_by: '`glm_universal.runtime.nonlinear_report.nonlinear_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-layer
+  heading: 1. The layer
+- anchor: 2-the-marks
+  heading: 2. The marks
+- anchor: 3-the-misses-as-they-are
+  heading: 3. The misses, as they are
+- anchor: 4-what-is-proved
+  heading: 4. What is proved
+- anchor: 5-what-did-not-change
+  heading: 5. What did not change
+- anchor: 6-limits-and-what-the-round-leaves
+  heading: 6. Limits, and what the round leaves
+- anchor: 7-re-running-it
+  heading: 7. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Nonlinear elimination: systems in letters that substitution cannot isolate'
+verdict: 'Yes, for systems that reduce to linear and quadratic steps: the new layer answers 9 of the 10
+  declared systems with exactly the declared branches, refuses all 5 declared refusals by name, and moves
+  no earlier answer. Four of the seven marks were met. The planted battery found a defect that lost solutions,
+  which was repaired before the marks were taken; it then gave 0 wrong answers but answered only 19 of
+  60 systems, because most random pairs of conics leave a cubic.'
+wobble_deps: []

@@ -1,0 +1,66 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: '5 of 5 marks met; 106 laws: 0 absorbed, 3 already served, 3 refuted, 100 retired (42
+  PIPELINE, 31 WORLD, 12 NUMEROLOGY, 12 UNDERSPECIFIED, 1 DEFINITION, 2 DUPLICATE); 8 of 8 declared checks
+  as declared.'
+directives:
+- D3
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean: []
+  prose: LAW_TRIAGE_STUDY.md
+  test:
+  - test_law_triage.py
+  wheel: []
+follow_ups: []
+id: LAW_TRIAGE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 81
+predecessors:
+- LAW_ABSORPTION_STUDY
+question: Do any of the 106 laws the law review left unresolved give the GLM a measurable service it does
+  not already have?
+recomputed_by: '`glm_universal.reasoning.law_triage.law_triage_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-declarations-written-before-the-module-that-measures-them
+  heading: 1. Declarations — written before the module that measures them
+- anchor: 2-results
+  heading: 2. Results
+- anchor: 3-what-this-round-moved-and-what-it-leaves
+  heading: 3. What this round moved, and what it leaves
+status: negative
+successors: []
+superseded_by: ''
+supersedes: []
+title: The 106 unresolved laws triaged — a law comes in only if it does measurable work
+verdict: 'No. None of the 106 laws passes the service rule, so none is absorbed: three are already served
+  by code the GLM runs, three are refuted by computation from the substrate, and one hundred are retired
+  with a reason each — most because they rest on a pipeline the GLM does not implement or make claims
+  about the world it cannot observe.'
+wobble_deps: []

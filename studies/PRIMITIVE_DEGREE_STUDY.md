@@ -175,7 +175,7 @@ and is not used by the layer.
 
 ## 5. Re-running it
 
-From `overlay/`:
+From ``:
 
 * `PYTHONPATH=. python3 -m glm_universal.tools primitive-degree` runs every
   mark in about four minutes, most of it Phase 115's report for D8, which

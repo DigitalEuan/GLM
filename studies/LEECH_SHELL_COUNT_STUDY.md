@@ -36,7 +36,7 @@ other shells. This round proves the procedure itself.
 
 ## 1. What is proved
 
-**The Lean file** (`overlay/glm_lean/RequestProject/GLM/LeechShellCount.lean`,
+**The Lean file** (`glm_lean/RequestProject/GLM/LeechShellCount.lean`,
 over `IsLeech`, `normSq` and the census of `LeechShells.lean`).
 
 * **Generating functions.** `GF` is Mathlib's `AddMonoidAlgebra ℕ (ℕ × ZMod 8)`:
@@ -119,7 +119,7 @@ is now a theorem about the lattice, for every shell.
 
 `lake build RequestProject.GLM.LeechShellCount` and `lake build` (the audit);
 `PYTHONPATH=. python3 -c "from glm_universal.reasoning import leech_shells as
-L; print(L.proved_shells_check(7))"` from `overlay/`;
+L; print(L.proved_shells_check(7))"` from ``;
 `tests/test_leech_shell_count.py`; and the evaluation case
 `tool-leech-norm-12`.
 

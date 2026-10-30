@@ -1,0 +1,160 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->22,873<!--/figure-->
+  vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->823<!--/figure-->; the
+  planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure-->
+  times per check.
+directives:
+- D16
+evidence: []
+faculty: derivation
+file_refs:
+  code:
+  - corpus/address
+  - corpus/cost
+  - reasoning/lean_address
+  - signoff/ledger
+  - signoff/rules
+  - tests/test_corpus
+  - tests/test_derived
+  - tests/test_lean_address
+  - tests/test_sandbox_planner
+  lean:
+  - AffineOutput
+  - Agree
+  - AstIndex
+  - CellGuard
+  - CelsiusRegister
+  - CertifiedStreams
+  - CitationReference
+  - CitationScope
+  - ComposedRadicals
+  - ConfidenceFloor
+  - ConfigurationReading
+  - ConstantBound
+  - CopyLemma
+  - CorpusResample
+  - CounterLasso
+  - CubicTrig
+  - DeclaredFrames
+  - Derivations
+  - DerivationsTwo
+  - DesignedSubstrate
+  - DiscourseState
+  - DocumentTree
+  - ExplanationAnchors
+  - FrobeniusRadicals
+  - HexRung
+  - HoleBounds
+  - ImperativeGrammar
+  - InertCounter
+  - IntegerDecision
+  - LatticeCompletion
+  - LawRegister
+  - Main
+  - MeasurandKinds
+  - MeasurandRegister
+  - MetaAnswers
+  - NonShannon
+  - OnDemandView
+  - OperationsLadder
+  - PlacementGuard
+  - PlannerLoop
+  - PrimitiveDegree
+  - PrimitiveRadicals
+  - ProbeBudget
+  - ProtectedTag
+  - QuarticResolvent
+  - QuestionSetB
+  - QuestionSetBAnswers
+  - RatePosterior
+  - RateRepair
+  - RegisterWorld
+  - RobinBoth
+  - SecondView
+  - ShareSeparation
+  - ShortestTag
+  - SignFactor
+  - StepwiseFrames
+  - StepwiseWiden
+  - StrayBlind
+  - Sturmian
+  - ThirdSort
+  - TypedOperators
+  prose: ITERATION_COST_STUDY.md
+  test:
+  - test_iteration_cost.py
+  wheel: []
+follow_ups: []
+id: ITERATION_COST_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Everything this repository claims is recomputed from the tree. What does one iteration of that
+  cost, and how much of the cost is work that did not need doing?
+recomputed_by: '`glm_universal.corpus.cost.cost_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-chain-and-where-the-time-went
+  heading: 1. The chain, and where the time went
+- anchor: 2-what-an-address-book-is-keyed-on-now
+  heading: 2. What an address book is keyed on now
+- anchor: 3-the-report-five-blocks-shared
+  heading: 3. The report five blocks shared
+- anchor: 4-a-figure-inside-a-sentence
+  heading: 4. A figure inside a sentence
+- anchor: 5-one-command-in-the-one-order-that-converges
+  heading: 5. One command, in the one order that converges
+- anchor: 5a-the-line-that-stopped-the-ledger-being-selective
+  heading: 5a. The line that stopped the ledger being selective
+- anchor: 5b-the-check-that-was-paying-for-a-derivation
+  heading: 5b. The check that was paying for a derivation
+- anchor: 5c-the-rule-the-record-and-the-two-questions-a-session-asks
+  heading: 5c. The rule, the record, and the two questions a session asks
+- anchor: 5d-the-caches-nothing-was-watching
+  heading: 5d. The caches nothing was watching
+- anchor: 5e-the-selectivity-that-a-new-feature-quietly-undid
+  heading: 5e. The selectivity that a new feature quietly undid
+- anchor: 5f-the-check-that-does-not-have-to-be-asked
+  heading: 5f. The check that does not have to be asked
+- anchor: 5g-the-round-that-invalidated-itself
+  heading: 5g. The round that invalidated itself
+- anchor: 5h-the-close-that-had-to-be-run-three-times
+  heading: 5h. The close that had to be run three times
+- anchor: 5i-the-two-edits-every-round-makes-and-the-round-that-was-never-closed
+  heading: 5i. The two edits every round makes, and the round that was never closed
+- anchor: 5j-the-address-books-reach-cut-where-it-was-imported
+  heading: 5j. The address book's reach, cut where it was imported
+- anchor: 5k-the-half-line-the-routers-reach-crossed
+  heading: 5k. The half-line the router's reach crossed
+- anchor: 6-what-this-does-not-establish
+  heading: 6. What this does not establish
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'What a round costs: the rebuild chain, measured and cut'
+verdict: Most of the cost was work repeated on things that had not moved, and a cache keyed on what it
+  is derived from does not repeat it.
+wobble_deps: []

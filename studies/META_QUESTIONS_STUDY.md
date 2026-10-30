@@ -12,14 +12,14 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-Code: [`glm_universal/reasoning/meta_evidence.py`](../overlay/glm_universal/reasoning/meta_evidence.py),
-[`glm_universal/runtime/meta_frames.py`](../overlay/glm_universal/runtime/meta_frames.py),
-[`glm_universal/runtime/meta_report.py`](../overlay/glm_universal/runtime/meta_report.py),
-[`glm_universal/evaluation/meta_question_cases.py`](../overlay/glm_universal/evaluation/meta_question_cases.py),
-[`glm_universal/runtime/question_frames.py`](../overlay/glm_universal/runtime/question_frames.py).
-Tests: [`glm_universal/tests/test_meta_questions.py`](../overlay/glm_universal/tests/test_meta_questions.py),
-[`glm_universal/tests/test_question_frames.py`](../overlay/glm_universal/tests/test_question_frames.py).
-Lean: [`RequestProject/GLM/MetaAnswers.lean`](../overlay/glm_lean/RequestProject/GLM/MetaAnswers.lean).
+Code: [`glm_universal/reasoning/meta_evidence.py`](../glm_universal/reasoning/meta_evidence.py),
+[`glm_universal/runtime/meta_frames.py`](../glm_universal/runtime/meta_frames.py),
+[`glm_universal/runtime/meta_report.py`](../glm_universal/runtime/meta_report.py),
+[`glm_universal/evaluation/meta_question_cases.py`](../glm_universal/evaluation/meta_question_cases.py),
+[`glm_universal/runtime/question_frames.py`](../glm_universal/runtime/question_frames.py).
+Tests: [`glm_universal/tests/test_meta_questions.py`](../glm_universal/tests/test_meta_questions.py),
+[`glm_universal/tests/test_question_frames.py`](../glm_universal/tests/test_question_frames.py).
+Lean: [`RequestProject/GLM/MetaAnswers.lean`](../glm_lean/RequestProject/GLM/MetaAnswers.lean).
 
 ---
 
@@ -170,7 +170,7 @@ of [`ITERATION_COST_STUDY.md`](ITERATION_COST_STUDY.md) §5k is not used.
 
 ## 7. Re-running it
 
-From `overlay/`:
+From ``:
 
 ```
 PYTHONPATH=. python3 -m glm_universal.tools meta-questions

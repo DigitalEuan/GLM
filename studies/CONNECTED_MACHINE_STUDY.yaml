@@ -1,0 +1,98 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 136 more declared questions answered correctly on the default path (53 engineering, 83
+  Python) with 0 wrong added; 0 of 96 reasoning modules unreached; naive union 3 right and 158 wrong against
+  the licensed union's 3 right and 0 wrong.
+directives:
+- D15
+evidence: []
+faculty: derivation
+file_refs:
+  code: []
+  lean:
+  - ConnectedMachine
+  - Foundations
+  - GolayWeightEnum
+  - GrayJump
+  - LLVQTable
+  - Lightspeed
+  - PCGS
+  - Relaxation
+  - Stability
+  - Surface
+  - TieBreak
+  - TriadChance
+  prose: CONNECTED_MACHINE_STUDY.md
+  test:
+  - test_connected_machine.py
+  wheel: []
+follow_ups: []
+id: CONNECTED_MACHINE_STUDY
+junctions:
+- rule: current
+  study: ''
+  wheels:
+  - W1
+  - W2
+- rule: energy
+  study: ''
+  wheels:
+  - W5
+  - W8
+- rule: energy
+  study: ''
+  wheels:
+  - W5
+  - W10
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 65
+predecessors: []
+question: Can one question path reach every working surface of the GLM without a flag, and can the engineering
+  surface derive across a union of formula wheels without the wrong answers that naive composition gives?
+recomputed_by: '`glm_universal.runtime.router.connected_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-objects
+  heading: 1. The objects
+- anchor: 2-declarations-written-before-any-router-toolbox-or-union-code
+  heading: 2. Declarations — written before any router, toolbox or union code
+- anchor: 3-results
+  heading: 3. Results
+- anchor: 4-what-is-wired
+  heading: 4. What is wired
+- anchor: 5-d15-said-plainly
+  heading: 5. D15, said plainly
+- anchor: 6-what-would-earn-the-next-round
+  heading: 6. What would earn the next round
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The connected machine: one question path, every tool on it, and derivation across wheels'
+verdict: 'Yes, on every declared mark: one path now can route to the toolbox, the Python dialect, the
+  engineering surface and the planner without a flag, and all 177 contract cases stay with the planner;
+  the eight unreached modules are reachable as tools; and the union mode answers the 3 physically correct
+  cross-wheel derivations and refuses the other 158 that naive composition gets wrong.'
+wobble_deps: []

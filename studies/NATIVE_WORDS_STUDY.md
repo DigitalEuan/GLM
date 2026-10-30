@@ -137,26 +137,7 @@ generated from it and refuse to print when it is stale).
 ### 3.1 The Lean corpus
 
 <!-- generated: nativewords-lean -->
-| queries | ranking | hit@1 | hit@3 | hit@5 | hit@10 | precision@5 | MRR@10 |
-|---|---|---|---|---|---|---|---|
-| declarations | *classes* — Golay classes alone, then Leech distance | 107 | 134 | 143 | 156 | 38.2 % | 0.592 |
-| declarations | **letters** — part letter words alone, then classes, then Leech distance | 146 | 171 | 183 | 190 | 57.0 % | 0.778 |
-| declarations | *lexical* — the lexical Leech address (ledger rows 4 and 5) | 88 | 112 | 125 | 138 | 24.2 % | 0.495 |
-| declarations | *parts* — the parts as strings, then Leech distance (post-hoc control for `letters`) | 148 | 173 | 185 | 190 | 57.5 % | 0.787 |
-| declarations | *text* — token overlap, ties by name (the standard) | 145 | 174 | 183 | 191 | 57.7 % | 0.776 |
-| declarations | *text_leech* — token overlap, ties by Leech distance | 149 | 177 | 185 | 190 | 57.5 % | 0.790 |
-| declarations | *text_parts* — token overlap, then parts as strings, then Leech distance (post-hoc control for `words_native`) | 148 | 176 | 185 | 190 | 57.9 % | 0.788 |
-| declarations | **words_native** — Golay names, then part letter words, then classes, then Leech distance | 147 | 173 | 182 | 190 | 57.5 % | 0.783 |
-| goals | *classes* — Golay classes alone, then Leech distance | 55 | 67 | 74 | 76 | 39.4 % | 0.618 |
-| goals | **letters** — part letter words alone, then classes, then Leech distance | 63 | 78 | 83 | 89 | 49.7 % | 0.709 |
-| goals | *lexical* — the lexical Leech address (ledger rows 4 and 5) | 22 | 31 | 39 | 45 | 13.5 % | 0.286 |
-| goals | *parts* — the parts as strings, then Leech distance (post-hoc control for `letters`) | 62 | 77 | 81 | 88 | 50.3 % | 0.700 |
-| goals | *text* — token overlap, ties by name (the standard) | 63 | 80 | 80 | 87 | 50.3 % | 0.705 |
-| goals | *text_leech* — token overlap, ties by Leech distance | 62 | 80 | 81 | 89 | 51.3 % | 0.708 |
-| goals | *text_parts* — token overlap, then parts as strings, then Leech distance (post-hoc control for `words_native`) | 61 | 78 | 82 | 89 | 51.3 % | 0.701 |
-| goals | **words_native** — Golay names, then part letter words, then classes, then Leech distance | 63 | 80 | 83 | 90 | 51.3 % | 0.717 |
-
-207 declaration queries and 101 goal queries over 4,739 declarations and a vocabulary of 6,136 tokens.  The Golay names are injective on the vocabulary: yes; the top ten of `words_native` carry the overlaps of the top ten of `text` on 207 of 207 declaration queries and 101 of 101 goal queries.
+The native-words measurements do not describe the sources, the Lean tree and the corpus as they now stand, so nothing is reported here.  Run `PYTHONPATH=. python3 -m glm_universal.tools native-words --write`.
 <!-- end generated -->
 
 At the reading taken when the round closed: hits at 1, 3, 5 and 10 on the
@@ -180,19 +161,7 @@ rank. The Golay words do better inside the same ties (**W4 met**: 190 against
 ### 3.2 The documents
 
 <!-- generated: nativewords-documents -->
-| ranking | queries with a hit at 5 | precision@5 |
-|---|---|---|
-| *classes* — Golay classes alone, then Leech distance | 40 / 60 | 22.7 % |
-| **letters** — part letter words alone, then classes, then Leech distance | 49 / 60 | 35.0 % |
-| *lexical* — the lexical Leech address (ledger rows 4 and 5) | 15 / 60 | 6.3 % |
-| *parts* — the parts as strings, then Leech distance (post-hoc control for `letters`) | 46 / 60 | 33.7 % |
-| *text* — token overlap, ties by name (the standard) | 46 / 60 | 38.0 % |
-| *text_leech* — token overlap, ties by Leech distance | 47 / 60 | 38.3 % |
-| *text_parts* — token overlap, then parts as strings, then Leech distance (post-hoc control for `words_native`) | 46 / 60 | 38.0 % |
-| *text*, as shipped by the document layer (a control on the one above) | 46 / 60 | 38.0 % |
-| **words_native** — Golay names, then part letter words, then classes, then Leech distance | 46 / 60 | 38.0 % |
-
-60 section queries over 1,613 sections and a vocabulary of 12,695 words.  The Golay names are injective: yes; the top five of `words_native` carry the overlaps of the top five of `text` on 60 of 60 queries.
+The native-words measurements do not describe the sources, the Lean tree and the corpus as they now stand, so nothing is reported here.  Run `PYTHONPATH=. python3 -m glm_universal.tools native-words --write`.
 <!-- end generated -->
 
 `words_native` equals `text` on the 60 section queries (the same hits at 5
@@ -216,24 +185,7 @@ among the marks. `parts` ranks by the parts themselves as strings, where
 with the parts as strings in place of the Golay layers.
 
 <!-- generated: nativewords-marks -->
-| mark | what it asks | outcome |
-|---|---|---|
-| **W1** | Golay names injective; `words_native` carries the token overlaps of `text` | met |
-| **W2** | `words_native` ≥ `text` at every k and MRR@10 (declarations and goals) | **not met** |
-| **W3** | `words_native` ≥ `text` (documents, hit@5 and precision@5) | met |
-| **W4** | `words_native` ≥ `text_leech` at hit@5 on all three sets | **not met** |
-| **W5** | `letters` > the lexical Leech address at hit@5 (declarations and documents) | met |
-| **W6** | `text_leech` ≥ `text` at every k (declarations and goals) | **not met** |
-
-3 of 6 marks met.
-
-Reported beside the marks and not counted among them, because they were not declared before the measurement:
-
-| comparison | outcome |
-|---|---|
-| `letters` ≥ `parts` in hits at every k, on all three sets | **does not hold** |
-| `letters` ≥ `text` in hits at every k, on all three sets | **does not hold** |
-| `words_native` ≥ `text_parts` in hits at every k, on all three sets | **does not hold** |
+The native-words measurements do not describe the sources, the Lean tree and the corpus as they now stand, so nothing is reported here.  Run `PYTHONPATH=. python3 -m glm_universal.tools native-words --write`.
 <!-- end generated -->
 
 Three readings follow, each post hoc and each for the next round to declare
@@ -360,7 +312,7 @@ closed, and is W4 at the Phase 72 re-reading.
 ## 4. The Lean file
 
 `RequestProject/GLM/NativeWords.lean` (mirrored under
-`overlay/glm_lean/RequestProject/GLM/`) proves, with the standard axioms only:
+`glm_lean/RequestProject/GLM/`) proves, with the standard axioms only:
 
 * `jaccard_image_of_injOn`, `jaccard_image` — a Jaccard overlap is unchanged
   by relabelling both sets with a map injective on their union.

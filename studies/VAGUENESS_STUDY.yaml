@@ -1,0 +1,72 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 34 of the 66 triples are decided without a person — 27 dimensionally, 1 by the conjugate
+  register, 6 by the one proposer rule of 4 that passed the gate — and the other 32 are referred with
+  the evidence collected.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - tests/test_vagueness
+  lean:
+  - Vagueness
+  prose: VAGUENESS_STUDY.md
+  test:
+  - test_vagueness.py
+  wheel: []
+follow_ups: []
+id: VAGUENESS_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: The lexicon's `related_to` triples say *that* two concepts are linked without saying how. Two
+  earlier rounds decided the 66 it holds, the second of them by hand. What decides the next one?
+recomputed_by: '`glm_universal.reasoning.vagueness.vagueness_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-gap-was-never-the-66
+  heading: 1. The gap was never the 66
+- anchor: 2-the-four-routes
+  heading: 2. The four routes
+- anchor: 3-what-the-conjugate-route-adds
+  heading: 3. What the conjugate route adds
+- anchor: 4-the-gate-on-a-proposer-rule
+  heading: 4. The gate on a proposer rule
+- anchor: 5-a-referral-is-a-decision-not-a-failure
+  heading: 5. A referral is a decision, not a failure
+- anchor: 6-the-formal-side
+  heading: 6. The formal side
+- anchor: 7-how-to-re-run-it
+  heading: 7. How to re-run it
+- anchor: 8-limits
+  heading: 8. Limits
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The standing rule for a vague `related_to` triple
+verdict: A router of four routes tried in order, of which only the last asks a person, and a gate that
+  admits a proposer rule only for agreeing with every hand decision it fires on.
+wobble_deps: []

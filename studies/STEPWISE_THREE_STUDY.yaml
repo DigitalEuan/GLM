@@ -1,0 +1,87 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 47 of 47 declared questions (18 comparative, 6 count-noun, 6 prefix, 17 fold) and 2 of
+  2 follow-ups as declared, 0 wrong, where round two's reader answers 0 of the 47 and the whole machine
+  answered 6 of them before the round and 32 after; 34 of 34 chain scripts verified (327 of 327 steps
+  aligned) and every mutation rejected, 13 of 13 member lies and 11 of 11 word lies included; 8 of 8 marks
+  met.
+directives:
+- D15
+- D3
+- D7
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - evaluation/stepwise_three_cases
+  - reasoning/stepwise_script
+  - runtime/declared_frames
+  - runtime/quantity_units
+  - runtime/stepwise
+  - runtime/stepwise_three
+  lean:
+  - StepwiseFrames
+  - StepwiseWiden
+  prose: STEPWISE_THREE_STUDY.md
+  test:
+  - test_stepwise_three.py
+  wheel: []
+follow_ups: []
+id: STEPWISE_THREE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 73
+predecessors:
+- STEPWISE_TWO_STUDY
+question: Can the stepwise planner read the widenings round two named — comparatives such as *heavier*
+  with a declared field, *how many more* over further count nouns, the tera- and pico- prefixes, and sums,
+  means and parity counts over a whole column — without answering anything wrongly?
+recomputed_by: '`glm_universal.runtime.stepwise_three.stepwise_three_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-objects
+  heading: 1. The objects
+- anchor: 2-declarations-written-before-any-code-of-the-round
+  heading: 2. Declarations — written before any code of the round
+- anchor: 3-what-was-built
+  heading: 3. What was built
+- anchor: 4-results
+  heading: 4. Results
+- anchor: 5-lean
+  heading: 5. Lean
+- anchor: 6-what-this-leaves
+  heading: 6. What this leaves
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The stepwise planner, round three: declared comparatives, further count nouns, tera and pico,
+  and folds over a column'
+verdict: 'Yes: the stepwise planner now reads comparatives through a declared register field, *how many
+  more* electrons and valence electrons, the tera- and pico- prefixes, and sums, means and parity counts
+  over every element or a declared class of them, with every declared case as declared, 0 wrong, and a
+  refusal by name when a comparative has no declared field, a value or a column reading is missing, or
+  a class is not the register''s.'
+wobble_deps: []

@@ -1,0 +1,87 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Both matchers re-run over both generated corpora and checked key by key against the branches
+  the parser used to have.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - language/build
+  - language/descriptions
+  - language/infix
+  - language/legacy
+  - language/nested
+  - language/question
+  - language/report
+  - tests/test_language
+  lean:
+  - Question
+  - QuestionNested
+  prose: LANGUAGE_STUDY.md
+  test:
+  - test_language.py
+  wheel: []
+follow_ups: []
+id: LANGUAGE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Can a question's shape be described well enough that the parser's branches can be deleted?
+recomputed_by: '`glm_universal.language.report.language_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-thing-this-round-was-trying-to-remove
+  heading: 1. The thing this round was trying to remove
+- anchor: 2-what-a-description-says
+  heading: 2. What a description says
+- anchor: 3-the-four-descriptions
+  heading: 3. The four descriptions
+- anchor: 4-what-does-not-generalise-is-counted
+  heading: 4. What does not generalise is counted
+- anchor: 5-agreement-the-subtractive-test
+  heading: 5. Agreement — the subtractive test
+- anchor: 6-the-false-positive-half-which-is-the-harder-one
+  heading: 6. The false-positive half, which is the harder one
+- anchor: 7-refusals-each-with-a-witness
+  heading: 7. Refusals, each with a witness
+- anchor: 8-the-round-trip-and-why-the-openings-must-be-disjoint
+  heading: 8. The round trip, and why the openings must be disjoint
+- anchor: 9-the-part-that-is-not-a-measurement
+  heading: 9. The part that is not a measurement
+- anchor: 10-the-second-round-the-branches-deleted-and-a-second-shape-family
+  heading: '10. The second round: the branches deleted, and a second shape family'
+- anchor: 11-what-it-does-not-do
+  heading: 11. What it does not do
+- anchor: 12-where-the-code-is
+  heading: 12. Where the code is
+- anchor: 13-the-third-round-the-four-undescribed-parts-and-the-four-branches-they-were-blocking
+  heading: '13. The third round: the four undescribed parts, and the four branches they were blocking'
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The question shape made an object
+verdict: The branches deleted, and a second shape family.
+wobble_deps: []

@@ -1,0 +1,66 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 6 of 7 marks met; 35 of 35 grid cells classified, working threshold 9999/10000 at 1/1000,
+  1/100 and 1/50, 999/1000 at 1/20, none at 1/10; the promise kept in 210 of 210 cells, and in 210 of
+  210 with the rate overdeclared; 15 of 16 runtime programs as declared.
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code: []
+  lean:
+  - ConfidenceFloor
+  prose: CONFIDENCE_FLOOR_STUDY.md
+  test:
+  - test_confidence_floor.py
+  wheel: []
+follow_ups: []
+id: CONFIDENCE_FLOOR_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 77
+predecessors:
+- DECODER_CONFIDENCE_STUDY
+question: Is there a confidence threshold at which the decoder and the carried fork should refuse, and
+  where there is none, can the reading answer with its confidence instead of refusing?
+recomputed_by: '`glm_universal.reasoning.confidence_floor_marks.confidence_floor_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-declarations-written-before-any-code-of-this-round
+  heading: 1. Declarations — written before any code of this round
+- anchor: 2-results
+  heading: 2. Results
+- anchor: 3-what-this-round-moved-and-what-it-leaves
+  heading: 3. What this round moved, and what it leaves
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The confidence floor, hunted — which threshold works, and a confidence score where none does
+verdict: There is a working threshold at every declared rate up to 1/20 — 999/1000 at 1/20 and 9999/10000
+  below it, so both of the owner's candidates work there — and none at 1/10, where the complete decoder
+  is the reading that binds; there the reading answers with its confidence instead of refusing. The one
+  declared clause that missed was a wrong declaration about one program, not a wrong answer.
+wobble_deps: []

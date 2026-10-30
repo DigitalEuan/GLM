@@ -1,0 +1,89 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 8 of 8 marks; 17 of 17 composed questions as declared (13 answered, 4 refused as declared);
+  13 of 13 chains verified in a fresh interpreter, 65 of 65 mutants caught; 136 of 136 surd convergents
+  and 14 of 14 pi convergents agree with independent references; 100 of 100 nearest fractions agree with
+  the exhaustive search; 0 of 404 declared texts read and 0 of 30 stepwise cases moved; 8 of 8 single-value
+  questions; 10 of 12 held-out rewordings read, 10 right, 0 wrong.
+directives:
+- D15
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - evaluation/tool_values_cases
+  - reasoning/rational_approx
+  - reasoning/stepwise_script
+  - runtime/router
+  - runtime/stepwise
+  - runtime/tool_values
+  - runtime/toolbox
+  - tests/test_tool_values
+  lean:
+  - ToolValues
+  prose: TOOL_VALUES_STUDY.md
+  test:
+  - test_tool_values.py
+  wheel: []
+follow_ups: []
+id: TOOL_VALUES_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 137
+predecessors: []
+question: Can the stepwise planner take a number from a tool — a continued-fraction term, a convergent,
+  the nearest fraction under a denominator bound, a gate distance, a Leech shell count — and compose it
+  with arithmetic, predicates and function forms, without changing any answer the GLM already gives?
+recomputed_by: '`glm_universal.evaluation.tool_values_cases.measure`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-was-built
+  heading: 1. What was built
+- anchor: 2-what-is-proved-requestprojectglmtoolvalueslean
+  heading: 2. What is proved (`RequestProject/GLM/ToolValues.lean`)
+- anchor: 3-the-batteries-evaluationtool_values_casespy
+  heading: 3. The batteries (`evaluation/tool_values_cases.py`)
+- anchor: 4-the-marks
+  heading: 4. The marks
+- anchor: 5-the-measurement
+  heading: 5. The measurement
+- anchor: 6-what-this-round-does-not-do
+  heading: 6. What this round does not do
+- anchor: 7-files
+  heading: 7. Files
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Tool values — a tool's answer handed to the planner as a number
+verdict: 'The planner does now: there are ten noun-phrase patterns in nine shapes. A part the typed planner
+  refuses is now read as one number a tool computes, with a selector that picks it out of the tool''s
+  figures. The step goes through the same step gate as any planner step, and the chain''s column-3 script
+  re-runs the tool in a fresh interpreter. Two new tools answer with a fraction rather than a term list:
+  `convergent` and `best approximation`. The second is checked by trying every denominator, with no continued
+  fractions, up to a bound of 20,000. All 8 marks were met. On the held-out rewordings, 10 of 12 were
+  read and all 10 were right; three values on the hand-written answer sheet were wrong and are recorded
+  as such.'
+wobble_deps: []

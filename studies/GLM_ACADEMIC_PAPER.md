@@ -7,7 +7,7 @@
 
 **Verdict.** The system rejects floating-point arithmetic entirely, operating instead with exact rational arithmetic.
 
-**Deciding figure.** A working paper over the whole system — the substrate studies of the supplied archive and the machine built on them, <!--figure:registers-->8 registers<!--/figure--> reached through <!--figure:query-kinds-->28 query kinds<!--/figure--> and checked by <!--figure:lean-files-->267 Lean files<!--/figure--> — kept beside the studies it draws on.
+**Deciding figure.** A working paper over the whole system — the substrate studies of the supplied archive and the machine built on them, <!--figure:registers-->8 registers<!--/figure--> reached through <!--figure:query-kinds-->27 query kinds<!--/figure--> and checked by <!--figure:lean-files-->425 Lean files<!--/figure--> — kept beside the studies it draws on.
 
 **Recomputed by.** (hand-written argument; nothing to recompute)
 
@@ -52,7 +52,7 @@ Physical calibration studies anchor the substrate to measured reality: the elect
 
 Application studies demonstrate that encoding chemical elements as 24-bit data objects in the Leech lattice produces element-property correlations exceeding r = 0.90 for electronegativity and boiling point, and that spatial arithmetic operations on these encodings predict bond energies and bond orders with measurable accuracy. A machine-checked semantics on the MOG cube surface builds a complete micro-language — words with physical dimension, true sentences, connectives with measured meanings, and conversation with memory — proved in the supplied archive's own Lean development.
 
-On that substrate this repository has built and measured the machine itself: a pure-standard-library Python package holding <!--figure:registers-->8 registers<!--/figure--> of exact carriers, answering <!--figure:query-kinds-->28 query kinds<!--/figure--> (one of which dispatches <!--figure:report-subjects-->67 report subjects<!--/figure-->) as three-column answers whose third column re-derives the second in a fresh interpreter, and refusing — with a named reason — wherever an answer would have been a guess. Its faculties are measured rather than described: an end-to-end evaluation of <!--figure:evaluation-cases-->223 CLI cases<!--/figure--> with no confidently wrong answer, 33 capability probes of which 13 locate a boundary, five benchmark suites, pre-registered probes for language, conversation, ordering, extremum, scale conversion, typed question plans, engineering languages, a Python dialect and the router that reaches all of them from one question path, and escalation ladders read over the construction ladder and the norm family. The formal layer is a Lean 4 / Mathlib development of <!--figure:lean-files-->267 Lean files<!--/figure--> and <!--figure:lean-declarations-->6,202<!--/figure--> declarations with no `sorry`, and the repository is kept by <!--figure:directive-count-->17<!--/figure--> standing rules, each enforced by an instrument.
+On that substrate this repository has built and measured the machine itself: a pure-standard-library Python package holding <!--figure:registers-->8 registers<!--/figure--> of exact carriers, answering <!--figure:query-kinds-->27 query kinds<!--/figure--> (one of which dispatches <!--figure:report-subjects-->67 report subjects<!--/figure-->) as three-column answers whose third column re-derives the second in a fresh interpreter, and refusing — with a named reason — wherever an answer would have been a guess. Its faculties are measured rather than described: an end-to-end evaluation of <!--figure:evaluation-cases-->223 CLI cases<!--/figure--> with no confidently wrong answer, 33 capability probes of which 13 locate a boundary, five benchmark suites, pre-registered probes for language, conversation, ordering, extremum, scale conversion, typed question plans, engineering languages, a Python dialect and the router that reaches all of them from one question path, and escalation ladders read over the construction ladder and the norm family. The formal layer is a Lean 4 / Mathlib development of <!--figure:lean-files-->425 Lean files<!--/figure--> and <!--figure:lean-declarations-->9,126<!--/figure--> declarations with no `sorry`, and the repository is kept by <!--figure:directive-count-->19<!--/figure--> standing rules, each enforced by an instrument.
 
 Since Phase 72 the machine also reasons in chains. A stepwise planner composes planner questions, derives a target from givens across the formula wheels, stitches the steps nobody asked for and carries every step's three columns, so that each answered chain is re-checked step by step in a fresh interpreter; it reads units, register values through what they measure, conversions through a stated efficiency, and folds and order statistics over a column, bounding an answer exactly where the register is silent and refusing by name where no bound holds. Since Phase 88 the Python dialect can hold what the planner and the reverse surface derive, so a program's own branches and loops choose the next question put to another surface — a reach no single surface has — and the program's script re-runs every sub-answer's own script before binding its value. The retained laws of the UBP knowledge base have been read against the running substrate: a handful are absorbed as computed facts, the rest retired or refuted by measurement.
 
@@ -113,9 +113,9 @@ Throughout, we distinguish carefully between what is proved, what is calibrated,
 This paper synthesises GLM development research into a single coherent narrative, and since its revision in Phase 60 it is the document that keeps track of the GLM as a *whole*. The source material comprises:
 
 - **The supplied archive** (`source_material/GLM-main.zip`): the physical calibration studies in `light/`, the encoding experiments and the MOG cube in `data_object/`, the first-principles and projection sub-studies, the `GMHGL` scripts, the Leech-lattice shortcut, the early `glm_lean` and `glm_machine` iterations and the ARC-era loop — together with the other supplied documents in `source_material/`. Parts I–IV summarise these, and Appendix C says, item by item, where each went.
-- **The machine built in this repository**: the package under `overlay/glm_universal/`, its registers, operations, instruments and tests. Part V describes it and Part VI describes the discipline it is kept under.
+- **The machine built in this repository**: the package under `glm_universal/`, its registers, operations, instruments and tests. Part V describes it and Part VI describes the discipline it is kept under.
 - **The studies** in `studies/`, each of which measures one thing against a control and records the result, positive or negative. Appendix A lists every one.
-- **The formal verification** in `RequestProject/GLM/`: a single Lean 4 / Mathlib development that builds with `lake build`, has no `sorry`, and is mirrored byte-for-byte in `overlay/glm_lean/`. §14 and Appendix B describe it.
+- **The formal verification** in `RequestProject/GLM/`: a single Lean 4 / Mathlib development that builds with `lake build`, has no `sorry`, and is mirrored byte-for-byte in `glm_lean/`. §14 and Appendix B describe it.
 
 The paper is not a copy-paste compilation. Each source document is read, its core claims extracted, and the connections between studies made explicit. Where studies contradict or correct each other, the correction is recorded. Where claims are later audited and found wanting, the audit verdict is given.
 
@@ -976,7 +976,7 @@ The "I am Y" study (`light/aristotle_01/Y_STUDY_CLEAN_RESTATEMENT.md`) examines 
 
 ### 14.1 Scope
 
-There is one Lean development in this repository: `RequestProject/GLM/`, built from the repository root by `lake build` against Mathlib for Lean 4.28.0. It holds <!--figure:lean-files-->267 Lean files<!--/figure--> and <!--figure:lean-declarations-->6,202<!--/figure--> top-level declarations, contains no `sorry` and no `admit`, declares no axiom, and is mirrored byte-for-byte in `overlay/glm_lean/RequestProject/GLM/` so that the package's figures and its Lean citations read the same tree (`diff -r -x README.md RequestProject/GLM overlay/glm_lean/RequestProject/GLM` is empty; Phase 60 found and repaired the one time it was not).
+There is one Lean development in this repository: `RequestProject/GLM/`, built from the repository root by `lake build` against Mathlib for Lean 4.28.0. It holds <!--figure:lean-files-->425 Lean files<!--/figure--> and <!--figure:lean-declarations-->9,126<!--/figure--> top-level declarations, contains no `sorry` and no `admit`, declares no axiom, and is mirrored byte-for-byte in `glm_lean/RequestProject/GLM/` so that the package's figures and its Lean citations read the same tree (`diff -r -x README.md RequestProject/GLM glm_lean/RequestProject/GLM` is empty; Phase 60 found and repaired the one time it was not).
 
 The development grew in three ways, and Appendix B lists every file under the theme it belongs to:
 
@@ -1063,7 +1063,7 @@ A selection, grouped by domain; every name is a declaration in `RequestProject/G
 
 ### 14.4 The Axiom Audit
 
-Every headline theorem is audited with `#print axioms`. The kernel-checked theorems depend only on `propext`, `Classical.choice` and `Quot.sound`; the finite searches discharged by `native_decide` additionally depend on `Lean.ofReduceBool` and `Lean.trustCompiler`, which is the compiler-trust boundary the audit makes visible rather than hides. No theorem rests on an added `axiom` declaration: hypotheses such as "π is transcendental" are arguments to theorems, never axioms. "e is irrational" was one such hypothesis, because the pinned Mathlib does not carry it, until Phase 61 proved it (`GLM.SeedRoles.eSeed_irrational`). The per-file audit is recorded in [`overlay/glm_lean/RequestProject/GLM/README.md`](../overlay/glm_lean/RequestProject/GLM/README.md).
+Every headline theorem is audited with `#print axioms`. The kernel-checked theorems depend only on `propext`, `Classical.choice` and `Quot.sound`; the finite searches discharged by `native_decide` additionally depend on `Lean.ofReduceBool` and `Lean.trustCompiler`, which is the compiler-trust boundary the audit makes visible rather than hides. No theorem rests on an added `axiom` declaration: hypotheses such as "π is transcendental" are arguments to theorems, never axioms. "e is irrational" was one such hypothesis, because the pinned Mathlib does not carry it, until Phase 61 proved it (`GLM.SeedRoles.eSeed_irrational`). The per-file audit is recorded in [`glm_lean/RequestProject/GLM/README.md`](../glm_lean/RequestProject/GLM/README.md).
 
 ---
 
@@ -1176,7 +1176,7 @@ stated with the transcendence status as a hypothesis; neither is asserted.
 
 Parts I–IV are the substrate and what can be proved or calibrated about it.
 This part is the machine built on it in this repository — the package
-`overlay/glm_universal/`, reached through `overlay/GLM.py` — and what it has
+`glm_universal/`, reached through `GLM.py` — and what it has
 been measured to do. It is written in the present tense: what the machine *is*
 now, with the study that measured each part named beside it. What each round
 *did* is the phase record in [`MASTER_PLAN.md`](../MASTER_PLAN.md); where the
@@ -1194,7 +1194,7 @@ strictly — `substrate`, `data_objects`, `reasoning`, `semantics`, `recipe`,
 opt-in package, the `sandbox` holding what is not yet relied on, `signoff` and
 `corpus` holding the repository's own instruments, and `integrity.py` holding
 every SHA-256 use one level above the core. The reasoning kernel alone is
-<!--figure:reasoning-modules-->234<!--/figure--> modules.
+<!--figure:reasoning-modules-->229<!--/figure--> modules.
 
 ### 17.2 The carrier
 
@@ -1220,7 +1220,7 @@ equivalent ([`ZERO_STORAGE_V5_STUDY.md`](ZERO_STORAGE_V5_STUDY.md)).
 
 ### 17.4 The query, and the three columns
 
-A question enters as one of <!--figure:query-kinds-->28 query kinds<!--/figure-->
+A question enters as one of <!--figure:query-kinds-->27 query kinds<!--/figure-->
 — `verify`, `analogy`, `describe`, `nearest`, `product`, `cluster`, `spatial`,
 `project`, `trilinear`, `coherence`, `report`, `angle`, `task`, `pi_groups`,
 `meaning`, `real`, `compare`, `measure`, `comparative`, `derive`, `field`,
@@ -1291,8 +1291,8 @@ spelling and snapped it near a codeword, was audited and demoted to evidence: a
 hash of a spelling identifies a string and measures nothing about what the
 string means (directive D3), and `tests/test_inherited_graph.py` walks the
 imports of every module that answers a question to keep it out
-([`Semantics/Meaning.lean`](../overlay/glm_lean/RequestProject/GLM/Semantics/Meaning.lean),
-[`Semantics/Grounding.lean`](../overlay/glm_lean/RequestProject/GLM/Semantics/Grounding.lean)).
+([`Semantics/Meaning.lean`](../glm_lean/RequestProject/GLM/Semantics/Meaning.lean),
+[`Semantics/Grounding.lean`](../glm_lean/RequestProject/GLM/Semantics/Grounding.lean)).
 Torque and energy are the same in SI7 and different in EXT10, which adds plane
 angle, solid angle and information; the projection between them is lossy
 exactly where those exponents are nonzero, and the machine says which.
@@ -1337,7 +1337,7 @@ itself whether it is `table`, `address` or `derive` (§22.3).
 
 | operation | what it does | measured on its declared set | study |
 |---|---|---|---|
-| **field surface** | one named field of one named row, over <!--figure:fieldsurface-tables-->14<!--/figure--> tables, <!--figure:fieldsurface-rows-->15,949<!--/figure--> rows and <!--figure:fieldsurface-pairs-->92,915<!--/figure--> addressable pairs | answers <!--figure:fieldsurface-moved-->9<!--/figure--> of the <!--figure:fieldsurface-held-->10<!--/figure--> held-but-unreachable probe questions, exactly the <!--figure:fieldsurface-predicted-->9<!--/figure--> declared reachable | [`FIELD_SURFACE_STUDY.md`](FIELD_SURFACE_STUDY.md) |
+| **field surface** | one named field of one named row, over <!--figure:fieldsurface-tables-->14<!--/figure--> tables, <!--figure:fieldsurface-rows-->15,367<!--/figure--> rows and <!--figure:fieldsurface-pairs-->89,660<!--/figure--> addressable pairs | answers <!--figure:fieldsurface-moved-->9<!--/figure--> of the <!--figure:fieldsurface-held-->10<!--/figure--> held-but-unreachable probe questions, exactly the <!--figure:fieldsurface-predicted-->9<!--/figure--> declared reachable | [`FIELD_SURFACE_STUDY.md`](FIELD_SURFACE_STUDY.md) |
 | **ordering** | one coordinate off two rows, ordered exactly, refused across scales | answers <!--figure:ordering-answered-->4<!--/figure--> and refuses <!--figure:ordering-refused-->3<!--/figure--> of <!--figure:ordering-declared-count-->7<!--/figure-->, every one as declared | [`ORDERING_STUDY.md`](ORDERING_STUDY.md) |
 | **extremum** | one coordinate over every row of a table, folded or refused | folds <!--figure:extremum-answered-->4<!--/figure--> and refuses <!--figure:extremum-refused-->4<!--/figure--> of <!--figure:extremum-declared-count-->8<!--/figure--> columns, every one as declared | [`COLUMN_EXTREMUM_STUDY.md`](COLUMN_EXTREMUM_STUDY.md) |
 | **scale conversion** | a declared table of <!--figure:scales-rows-->10<!--/figure--> scales over <!--figure:scales-quantities-->4<!--/figure--> quantities | answers <!--figure:scales-answered-->7<!--/figure--> and refuses <!--figure:scales-refused-->5<!--/figure--> of <!--figure:scales-declared-->12<!--/figure-->; relates <!--figure:scales-bridged-->8<!--/figure--> of <!--figure:scales-pairs-->7,875<!--/figure--> scale pairs and refuses the rest | [`SCALE_CONVERSION_STUDY.md`](SCALE_CONVERSION_STUDY.md) |
@@ -2813,7 +2813,7 @@ program text be mapped onto the lattice — is asked most sharply of the Lean
 development itself, because it is a corpus whose ground truth is known.
 
 * **The Lean address book.** Each of the
-  <!--figure:lean-declarations-->6,202<!--/figure--> declarations gets a
+  <!--figure:lean-declarations-->9,126<!--/figure--> declarations gets a
   deterministic Leech address computed from 24 structural counts of its
   statement, read back exactly, with nearest-by-address sharing a source file
   far more often than a SHA-256 control or a seeded reshuffle does
@@ -3924,7 +3924,7 @@ operation the round built stays.
 | end-to-end CLI evaluation | the command line in a fresh interpreter per question, scored asymmetrically | <!--figure:evaluation-case-count-->223<!--/figure--> cases: 149 answered correctly, 28 refused as expected, **0 confidently wrong** |
 | capability probes | where the library stops, asked as user questions | 33 probes: 20 hold, 13 break — each break a located boundary, not a failure |
 | benchmark suites | solver functions against curated and exhaustive task sets | 2,389 / 2,390 across 5 suites, every suite above its declared baseline |
-| test suite | the package's own regression net | <!--figure:suite-->5,397 tests across 181 of the 183 test files, 18,972 subtests, outside the document checks<!--/figure--> |
+| test suite | the package's own regression net | <!--figure:suite-->(not yet measured: suite)<!--/figure--> |
 
 The thirteen probe breaks are the machine's measured edges, spread over nine
 areas (algebra, carriers, dynamic carriers, layers, reals, scale, semantics,
@@ -4048,7 +4048,7 @@ a finding written nowhere, a round re-run in full because nothing recorded what
 it depended on. The repository is built against that failure.
 
 **Standing rules with instruments.** [`PROJECT_DIRECTIVES.md`](../PROJECT_DIRECTIVES.md)
-states <!--figure:directives-->17 standing rules<!--/figure-->, each naming the
+states <!--figure:directives-->19 standing rules<!--/figure-->, each naming the
 instrument that enforces it, and `report directives` prints each instrument's
 live verdict. Among them: no floats (D7), checked by parsing every module; an
 operation that is not the substrate's own used only at declared sites (D9,
@@ -4060,7 +4060,7 @@ addressing and refusal it moved, or that it moved none (D15).
 
 **Every figure generated.** Directive D6: every figure a document quotes is
 generated by the code that reports it. `glm_universal/figures.py` writes
-`overlay/FIGURES.md`, inline figure markers carry the live value into the prose
+`FIGURES.md`, inline figure markers carry the live value into the prose
 (as throughout this paper), generated blocks carry whole tables, and
 `tests/test_figures.py` fails when a document and the code disagree.
 [`GLM_Complete_Number_Theory_Evidence.md`](GLM_Complete_Number_Theory_Evidence.md)
@@ -4072,9 +4072,9 @@ carries a tier-0 block (question, verdict, deciding figure, the function that
 recomputes it), is addressed, and is checked — the verdict must be grounded in
 the document's own words, every link must resolve, and every current-state
 document must be reachable from [`ENTRY.md`](../ENTRY.md). The corpus holds
-<!--figure:corpus-documents-->218<!--/figure--> documents, of which
-<!--figure:corpus-state-documents-->214<!--/figure--> describe the system as it
-is and <!--figure:corpus-archive-documents-->4<!--/figure--> are records of a
+<!--figure:corpus-documents-->244<!--/figure--> documents, of which
+<!--figure:corpus-state-documents-->239<!--/figure--> describe the system as it
+is and <!--figure:corpus-archive-documents-->5<!--/figure--> are records of a
 round, and [`DIGEST.md`](../DIGEST.md) is their tier-0 reading, generated.
 
 **Sign off only what moved.** Directive D16 and `glm_universal/signoff`: every
@@ -4319,9 +4319,9 @@ The GLM is a mathematically rigorous 24-dimensional substrate with exact rationa
 - The velocity scale is exact (MONAD/13 → v/c = 0.339, but this is a definition, not a prediction)
 - The mass scale is internally consistent (0.009% error, cross-checks pass)
 - The photon as minimum-Tax octad is a mathematical fact on the Golay layer (`octad_min_tax`)
-- The layer architecture, the code's arithmetic and the machine's refusals are formally verified in a development of <!--figure:lean-files-->267 Lean files<!--/figure--> with no `sorry`
+- The layer architecture, the code's arithmetic and the machine's refusals are formally verified in a development of <!--figure:lean-files-->425 Lean files<!--/figure--> with no `sorry`
 - The encoding system predicts element properties at r > 0.90
-- The machine answers <!--figure:query-kinds-->28 query kinds<!--/figure--> over <!--figure:registers-->8 registers<!--/figure-->, re-derives every answer it gives, and refuses with a named reason where an answer would be a guess
+- The machine answers <!--figure:query-kinds-->27 query kinds<!--/figure--> over <!--figure:registers-->8 registers<!--/figure-->, re-derives every answer it gives, and refuses with a named reason where an answer would be a guess
 
 ### 26.2 What the GLM Is Not
 
@@ -4611,8 +4611,8 @@ reason where one was recorded.
 | part | what it is | status | where |
 |---|---|---|---|
 | `glm_lean/` | the first Lean-backed GLM (`GLM.lean`, `GLM2.lean`, `GLM3.lean`) | retrieved whole | `Foundations.lean`, `Gen2.lean`, `Gen3.lean` |
-| `GLM.py`, `README.md` (archive root) | the archive's entry point and overview | superseded by `overlay/GLM.py` and the repository's own documents | [`README.md`](../README.md) |
-| `glm_machine/`, `glm_3.1/`, `glm_universal/` | the earlier machine scripts (`glm_machine` is GLM v37) and the earlier package | folded into the package in the early phases — `glm_machine` into the runtime layer — with the frame bridge and state migration in `overlay/glm_universal/migration/` | [`archive/PACKAGE_README_ARCHIVE.md`](../archive/PACKAGE_README_ARCHIVE.md), [`archive/MASTER_PLAN_ARCHIVE.md`](../archive/MASTER_PLAN_ARCHIVE.md) |
+| `GLM.py`, `README.md` (archive root) | the archive's entry point and overview | superseded by `GLM.py` and the repository's own documents | [`README.md`](../README.md) |
+| `glm_machine/`, `glm_3.1/`, `glm_universal/` | the earlier machine scripts (`glm_machine` is GLM v37) and the earlier package | folded into the package in the early phases — `glm_machine` into the runtime layer — with the frame bridge and state migration in `glm_universal/migration/` | [`archive/PACKAGE_README_ARCHIVE.md`](../archive/PACKAGE_README_ARCHIVE.md), [`archive/MASTER_PLAN_ARCHIVE.md`](../archive/MASTER_PLAN_ARCHIVE.md) |
 | `light/aristotle_01/` | EM scale calibration, the lightspeed chain, the observer-Y study, the shortcut | retrieved: `Lightspeed.lean`, the `Shortcut/` files, `ReadQuantum.lean`, and the constants and mass-scale bounds of `SubstrateConstants.lean` in `AlignmentPoints.lean` and `FitCapacity.lean`; **left in part**: `ObserverY.lean` — its tax, NRCI and regime results are rebuilt under other names in `Constants.lean` and `ReadQuantum.lean`, but its minimal-vector tax classes (classes A and B coherent, class C transitional), its loop-closure and history-additivity lemmas and its calibrated regime separation are not | §9–§10, §13.4, [`SOURCE_SALVAGE_AUDIT.md`](SOURCE_SALVAGE_AUDIT.md) |
 | `light/reports/`, `light/scripts/`, `light/source_documents/`, `light/worklogs/` | the twenty-phase floating-point audit of the lightspeed claims, its synthesis and PDF report, and the working notes behind it | summarised: its structural closures are §10.5, its calibrated core §10.3 and §25.2, its open problems §25.5 items 1–3; the scripts are floating-point and are not re-run, and the source documents are working notes rather than claims | §10, §25 |
 | `light/EM_calibration_1/` | the speed-of-light calibration, eleven versions | audited; its surviving arithmetic is in `Calibration.lean` | §10, [`SOURCE_SALVAGE_AUDIT.md`](SOURCE_SALVAGE_AUDIT.md) |

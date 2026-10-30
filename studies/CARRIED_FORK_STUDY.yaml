@@ -1,0 +1,75 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 0 wrong over 658,812 declared-case reads, 4,224 double reads, 3,840 unsure-set reads
+  and 448 certified cuts; 1,771 of 1,771 weight-4 cosets lift to a certified A₁²⁴ deep hole of 48 vertices;
+  the escalated estimate is right on 512 of 768.
+directives:
+- D15
+- D7
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - CarriedFork
+  - Superposition
+  prose: CARRIED_FORK_STUDY.md
+  test:
+  - test_carried_fork.py
+  wheel: []
+follow_ups: []
+id: CARRIED_FORK_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 64
+predecessors: []
+question: If the six equidistant candidates of a deep-hole Golay read are carried forward instead of refused,
+  can later decisions resolve them without a wrong answer, and does escalating the read to the Leech lattice
+  add anything?
+recomputed_by: '`glm_universal.reasoning.carried_fork.carried_fork_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-object
+  heading: 1. The object
+- anchor: 2-declarations-written-before-any-measuring-code
+  heading: 2. Declarations — written before any measuring code
+- anchor: 3-results
+  heading: 3. Results
+- anchor: 4-what-is-wired
+  heading: 4. What is wired
+- anchor: 5-d15-said-plainly
+  heading: 5. D15, said plainly
+- anchor: 6-what-would-earn-the-next-round
+  heading: 6. What would earn the next round
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The carried fork: six Golay candidates carried until a later decision resolves them'
+verdict: 'Partly: carried forward, the six candidates are resolved with 0 wrong by every certified stage
+  — the declared cases, a second reading and an unsure set — and four of the six declared pass marks were
+  met; the declared-case stage missed its 90 % mark at 32 cases, and the escalated Leech-scale estimate
+  missed its 90 % mark.'
+wobble_deps: []

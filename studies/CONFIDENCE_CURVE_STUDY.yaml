@@ -1,0 +1,81 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: '6 of 8 marks; balanced guard `(1, 1/5)`: 33.7% at 42.4% held out (31.7% at 37.3% calibrated);
+  sure guard `(2, 2/3)`: 62.0% at 7.3% held out, 2.95 times the unguarded 21.0%; candidate top three:
+  32.7% hit at 98.4%; C1 and C3 missed.'
+directives:
+- D1
+- D2
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean: []
+  prose: CONFIDENCE_CURVE_STUDY.md
+  test:
+  - test_confidence_curve.py
+  wheel: []
+follow_ups: []
+id: CONFIDENCE_CURVE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 154
+predecessors: []
+question: Can the counted corpus model declare operating points on its precision/coverage curve — a sure
+  mode, a balanced mode and a candidate mode — chosen on a calibration fold by rules written before the
+  held-out measurement, and do they hold on held-out text; and can a definition carry a description of
+  its own quality that tells a good one from a weak one?
+recomputed_by: '`glm_universal.knowledge.confidence_curve.confidence_curve_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-the-folds
+  heading: 1. The folds
+- anchor: 2-the-curve-and-the-modes
+  heading: 2. The curve and the modes
+- anchor: 3-the-definitions-quality
+  heading: 3. The definitions' quality
+- anchor: 4-the-marks
+  heading: 4. The marks
+- anchor: 5-what-would-count-against
+  heading: 5. What would count against
+- anchor: 6-what-is-not-claimed
+  heading: 6. What is not claimed
+- anchor: 7-what-came-out
+  heading: 7. What came out
+- anchor: in-one-paragraph
+  heading: In one paragraph
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The corpus confidence curve, declared — three operating modes chosen before they are measured,
+  and definitions that say how good they are
+verdict: Partly. The balanced mode chosen on the calibration fold meets the bar Phase 154 missed on held-out
+  text — 33.7% precision, 1.6 times the unguarded accuracy, at 42.4% coverage — and the order control
+  falls to 3.3% under the same guard. The sure mode holds 62.0% precision at 7.3% coverage but misses
+  its declared three-times bar narrowly, and the balanced mode's coverage moved by just over the declared
+  tolerance between folds. Strong definitions agree with the held-out gloss only slightly more often than
+  weak ones (4 of 15 against 2 of 8).
+wobble_deps: []

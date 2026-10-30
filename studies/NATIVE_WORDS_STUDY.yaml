@@ -1,0 +1,78 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 'Hits at 5 for the native word ranking against the standard: 190 against 182 of 211 declaration
+  queries and 94 against 92 of 103 goal queries, level on the 60 document queries; 5 of 6 marks met.'
+directives:
+- D15
+- D3
+- D7
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - HeldPrecision
+  - LawAbsorption
+  - LawRegister
+  - NativeParity
+  - NativeWords
+  - StepwiseFrames
+  prose: NATIVE_WORDS_STUDY.md
+  test:
+  - test_native_words.py
+  wheel: []
+follow_ups: []
+id: NATIVE_WORDS_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 70
+predecessors: []
+question: Can the word-overlap ranking — the standard method that stays far ahead of every lexical Leech
+  address — be computed on Golay words of the tokens instead of on the tokens, and refined past the standard
+  ranking?
+recomputed_by: '`glm_universal.reasoning.native_words.native_words_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-objects
+  heading: 1. The objects
+- anchor: 2-declarations-written-before-any-measuring-code
+  heading: 2. Declarations — written before any measuring code
+- anchor: 3-results
+  heading: 3. Results
+- anchor: 4-the-lean-file
+  heading: 4. The Lean file
+- anchor: 5-wiring
+  heading: 5. Wiring
+- anchor: 6-next-round
+  heading: 6. Next round
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Native words: word overlap computed on Golay words of the tokens'
+verdict: The word-overlap ranking computed on Golay words of the tokens carries the standard ranking's
+  overlap exactly and ranks at least as well as it on every declared set, ahead of it on the Lean corpus,
+  so the live document ranking now reads Golay words.
+wobble_deps: []

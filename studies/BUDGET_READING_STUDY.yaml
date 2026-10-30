@@ -1,0 +1,83 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 8 of 8 measured marks and L1; held-out walks 256/256 certified under the rule (frozen
+  walk reading 225), 0 disagreements, 0 type disagreements with Phase 124 over 256 centres; 0 readings
+  at the budget, median 25 and maximum 174 starts; battery 11/11 as declared, column 3 8/8, mutants 16/16
+  rejected; frozen path 202/202 same status, 199 same text.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/budget_guard_frozen
+  - reasoning/budget_reading_study
+  - reasoning/hole_reading
+  - runtime/session
+  - tests/test_budget_reading
+  lean:
+  - BudgetReading
+  prose: BUDGET_READING_STUDY.md
+  test:
+  - test_budget_reading.py
+  wheel: []
+follow_ups: []
+id: BUDGET_READING_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 124
+predecessors:
+- PROBE_BUDGET_STUDY
+question: If the answering path reads a deep hole under the budget rule of Phase 124 (no barren stop,
+  1056 starts) instead of a patience, does it certify every hole the walk reaches without moving any answer
+  the evaluation pins?
+recomputed_by: '`glm_universal.reasoning.budget_reading_study.budget_reading_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved-before-any-code
+  heading: 1. What is proved before any code
+- anchor: 2-the-rule
+  heading: 2. The rule
+- anchor: 3-the-sets-and-the-questions-declared-here
+  heading: 3. The sets and the questions, declared here
+- anchor: 4-the-marks-declared-before-the-measurement
+  heading: 4. The marks, declared before the measurement
+- anchor: 5-what-this-round-does-not-do
+  heading: 5. What this round does not do
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-what-came-out
+  heading: 7. What came out
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The budget rule in the answering path — a deep hole read to its certificate
+verdict: Yes. Under the budget rule every one of the 256 held-out walks has its deep hole certified, where
+  the walk's own patience reading certified 225. Wherever the patience reading had certified, the rule
+  gives the same type and the same vertex set, and no reading ran to the budget. The answering path now
+  reads a hole on request (the `hole` kind), and `report deep holes` reads under the rule with the same
+  five types. The frozen path keeps all 202 statuses; the only moved texts have declared causes. 8 of
+  8 measured marks were met, and L1 by the build.
+wobble_deps: []

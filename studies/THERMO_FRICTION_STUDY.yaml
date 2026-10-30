@@ -1,0 +1,87 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 13 of 19 marks (A3, A5, A7, B2, B3, B4, B5, C1, C2, C3, C4, C5, C6 met; A1, A2, A4, A6,
+  B1, B6 missed) and 1 of 1 amended (B6′ met); sintering ships.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - knowledge/friction
+  - knowledge/thermo_friction
+  - knowledge/thermo_friction_study
+  - runtime/respell
+  - runtime/sinter
+  - tests/test_thermo_friction
+  lean:
+  - ThermoFriction
+  prose: THERMO_FRICTION_STUDY.md
+  test:
+  - test_thermo_friction.py
+  wheel: []
+follow_ups: []
+id: THERMO_FRICTION_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 159
+predecessors:
+- FRICTION_STUDY
+- FRICTION_TWO_STUDY
+question: 'Can measured friction be used as a signal for recovery: does a heat-gated taboo on repeated
+  bigrams move the continuation out of its self-made valley, does a prompt/generated-context gradient
+  tell signal dilution from a change of subject well enough to anchor the directory reader to its prompt,
+  and does a bounded fallback to a register lexicon read back a technical word the corpus barely uses
+  without loosening ordinary correction?'
+recomputed_by: '`glm_universal.knowledge.thermo_friction_study.thermo_friction_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-built
+  heading: 1. What is built
+- anchor: 2-the-rules-fixed-before-the-measurement
+  heading: 2. The rules, fixed before the measurement
+- anchor: 3-what-would-count-against
+  heading: 3. What would count against
+- anchor: 4-what-is-not-claimed
+  heading: 4. What is not claimed
+- anchor: 5-what-is-proved-before-the-measurement
+  heading: 5. What is proved before the measurement
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-what-came-out
+  heading: 7. What came out
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Thermomechanical friction: a governor that heats, an anchor across a gradient, and a vocabulary
+  that sinters'
+verdict: 'Friction is a useful sensor in all three experiments but an actionable one in only one: sintering
+  the register vocabulary ships, reading back 727 of 735 misspelt register words and the survey''s *mlilisecond*
+  question, with ordinary misspellings no worse, no register word respelt where the shipped respelling
+  changed 45, and no evaluation outcome moved; the heat-gated governor almost never acts, because the
+  self-made valley is a basin many prompts fall into once each, not a phrase one continuation re-enters;
+  and the prompt anchor costs a little where it acts, because at a hot step the words read after the prompt
+  name the right directory more often than the prompt does.'
+wobble_deps: []

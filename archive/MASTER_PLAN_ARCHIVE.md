@@ -13,7 +13,7 @@ were written.  Section numbers referred to elsewhere (for example
 *Everything in this file is an archive: each phase records what was measured
 when it was closed, and those counts are deliberately left alone.  For the
 project as it is now, see [`MASTER_PLAN.md`](../MASTER_PLAN.md) and
-[`overlay/FIGURES.md`](../overlay/FIGURES.md), which is regenerated from the code.*
+[`FIGURES.md`](../FIGURES.md), which is regenerated from the code.*
 
 ---
 
@@ -734,7 +734,7 @@ the imports of every module on the answering path.
 ### 7.7 The figures mechanism — **done**
 
 `glm_universal/figures.py` recomputes every count the documentation quotes and
-renders [`overlay/FIGURES.md`](../overlay/FIGURES.md);
+renders [`FIGURES.md`](../FIGURES.md);
 `tests/test_figures.py` compares the committed file against a fresh
 computation and checks each README against the current numbers, so a stale
 figure is a test failure rather than something a reader discovers.
@@ -890,7 +890,7 @@ names only.
 | Lean development | 30 files, 7,388 lines, `lake build` clean, **0 `sorry`** |
 
 (Those are the figures of the round that closed Phase 8. The current ones are
-in §9.5 and, generated, in `overlay/FIGURES.md`.)
+in §9.5 and, generated, in `FIGURES.md`.)
 
 ---
 
@@ -1381,7 +1381,7 @@ in `studies/` and `source_material/` as well as at the root, and
 `tests/test_lean_address.py` names `studies/LEAN_ADDRESS_STUDY.md`. Compiled
 bytecode was removed from the index and ignored. Two over-long documents were
 split at the `<!-- figures:history -->` marker into companions that keep the
-archive as written: `overlay/README_ARCHIVE.md` and `MASTER_PLAN_ARCHIVE.md`.
+archive as written: `README_ARCHIVE.md` and `MASTER_PLAN_ARCHIVE.md`.
 No module name, package structure, query surface or Lean file changed.
 
 *What recomputes it:* the whole suite, `python3 -m glm_universal.tools
@@ -2547,7 +2547,7 @@ claim here that can be stated as a theorem and checked?**
 ### 25.1 What came back
 
 **25 files of Lean, 7,170 lines, 848 declarations**, all building against the
-pinned Mathlib with no `sorry` and all mirrored in `overlay/glm_lean/`. The
+pinned Mathlib with no `sorry` and all mirrored in `glm_lean/`. The
 per-file account is
 [`studies/RETRIEVED_LEAN_STUDY.md`](../studies/RETRIEVED_LEAN_STUDY.md) §2; the
 groups are the MOG cube (`Cube/`, five files: the surface identification, the
@@ -2613,7 +2613,7 @@ and the two copies of the Lean tree were diffed.
 **95 files of Lean, 27,548 lines, 2,764 parsed declarations**, no `sorry`, both
 copies byte-identical — against 73 files and 2,118 declarations at the close of
 Phase 25. The suite was **72 files of tests** at the close of this phase; for
-the project as it is now see [`overlay/FIGURES.md`](../overlay/FIGURES.md).
+the project as it is now see [`FIGURES.md`](../FIGURES.md).
 
 ### 26.2 The archive's second reading
 
@@ -3145,7 +3145,7 @@ and 26 for the reshuffle — and retrieval over 204 queries at hit@5 48.5 %
 against 6.4 % closed-form chance, the text control still ahead at 80.9 %, the
 completeness bound holding on 155,448 pairs with 0 violations. The hand-written
 passages of `STATUS.md` and the overlay README were brought to those figures,
-`overlay/FIGURES.md` regenerated, and `glm_universal.corpus --check` reports
+`FIGURES.md` regenerated, and `glm_universal.corpus --check` reports
 `current`.
 
 ### 32.6 What was deliberately not done

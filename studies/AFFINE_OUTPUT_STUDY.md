@@ -267,16 +267,16 @@ their answers either way).
 ## 6. Files
 
 * `RequestProject/GLM/AffineOutput.lean` — A1.
-* `overlay/glm_universal/reasoning/batch_machine.py` — the templates, the
+* `glm_universal/reasoning/batch_machine.py` — the templates, the
   affine clause and the bound in `jumped_run`, behind `affine` (default on),
   threaded through `run_program`; the reason a run took no jump; and
   `growth_diagnosis`.
-* `overlay/glm_universal/reasoning/batch_speech.py` — the checker's affine
+* `glm_universal/reasoning/batch_speech.py` — the checker's affine
   clause, run-form claims and the `growth` claim, the answer texts, the
   mutations, the new question, and `affine` threaded through `answer`.
-* `overlay/glm_universal/reasoning/affine_output.py` — the batteries and the
+* `glm_universal/reasoning/affine_output.py` — the batteries and the
   marks; `python3 -m glm_universal.tools affine-output`.
-* `overlay/glm_universal/reasoning/constant_bound.py` — Phase 131's
+* `glm_universal/reasoning/constant_bound.py` — Phase 131's
   measurement, read with `affine=False` so that it keeps measuring the rule it
   declared.
 * Tests: `test_affine_output.py`.

@@ -12,7 +12,7 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-*Last altered 23 October 2026.*
+*Last altered 29 October 2026.*
 
 ---
 
@@ -30,12 +30,12 @@ account is in
 
 | instrument | command | result |
 |---|---|---|
-| test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->5,397 tests across 181 of the 183 test files, 18,972 subtests, outside the document checks<!--/figure-->**, zero failures |
+| test suite | `python3 -m pytest src/glm_universal/tests -q` | **<!--figure:suite-->(not yet measured: suite)<!--/figure-->**, zero failures |
 | end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->223<!--/figure--> / <!--figure:evaluation-case-count-->223<!--/figure-->** — 149 answered, 28 refused as expected (all `boundary`, no `gap`), 0 unexpected refusals, 0 confidently wrong, 0 errored |
 | benchmark suites | `python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites, every suite above its baseline |
 | capability probes | `python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 errored, 0 surprises |
-| Lean development | `lake build` (repository root) | <!--figure:lean-files-->268 Lean files<!--/figure-->, **0 `sorry`** |
-| figures | `python3 -m glm_universal.figures --write` | regenerates `overlay/FIGURES.md`; every documented count |
+| Lean development | `lake build` (repository root) | <!--figure:lean-files-->425 Lean files<!--/figure-->, **0 `sorry`** |
+| figures | `python3 -m glm_universal.figures --write` | regenerates `FIGURES.md`; every documented count |
 | corpus | `python3 -m glm_universal.corpus --check` | the tier contract, the archive partition, the coverage claim of `ENTRY.md`, every generated block and every derived cache — **current**, no drift |
 | construction ladder | `python3 -m glm_universal.tools ladder` | **462 / 568** queries named correctly with **0** wrong on the eleven-rung ladder, against **327** for the note's five rungs and **283** for the best single rung |
 | norm-family ladder | `python3 -m glm_universal.tools normladder` | the repaired **<!--figure:normesc-rungs-->10<!--/figure-->**-rung norm ladder names **<!--figure:normesc-correct-->467<!--/figure-->** of **<!--figure:normesc-queries-->568<!--/figure-->** correctly with **<!--figure:normesc-wrong-->0<!--/figure-->** wrong; the full **<!--figure:normesc-family-rungs-->12<!--/figure-->**-rung family it repairs answers **<!--figure:normesc-family-wrong-->1<!--/figure-->** wrongly and is **not safe** |
@@ -64,16 +64,16 @@ account is in
 | the machine reads what it carries (registers as files, typed plans and field answers through GLM-BAT) | `python3 -m glm_universal.tools carried-read` | the session's registers as **8,408** `@row.field=value;` entries in **11** tables (0 duplicated keys, the snapshot **1,965 / 1,965** with the element register); **174 / 174** stepwise chains admitted with **2,087** register reads, **102** question reads, **213** computed and **92** carried steps; a lie found at its step **121 / 121** (register), **54 / 54** (question), **42 / 42** (computed) (`GLM.CarriedRead.first_lie_drifts`); typed plans **42 / 42** admitted and **42 / 42** lies refused; field answers **7,716 / 7,716** admitted and **7,716 / 7,716** lies refused; **697 / 697** recorded texts unchanged; 12 of 12 measured marks ([`CARRIED_READ_STUDY.md`](studies/CARRIED_READ_STUDY.md)) |
 | the machine sorts (order folds, ranks, top rows and hole bounds computed in GLM-BAT) | `python3 -m glm_universal.tools fold-machine` | the **48** folds Phase 153 carried — median, quartiles, the k-th largest, rank, top rows, folds over the present rows, bounds with holes — computed by checking a witness's window by counting (`GLM.FoldMachine.kth_eq_iff`, `stablePos_injective`), each declared hole read as an absence (`absent_iff`); carried steps **92 → 44**; **174 / 174** chains admitted; fold lies **48 / 48** found at their step; hole lies **24 / 24** stopped (22 / 24 at the first measurement); a rotated witness **0** wrong values in 32 runs; synthetic control **2,188 / 2,188** admitted, **2,168 / 2,168** lies refused, **812 / 812** planner refusals unwritten; **702 / 702** recorded texts unchanged; 8 of 9 marks, 1 of 1 amended ([`FOLD_MACHINE_STUDY.md`](studies/FOLD_MACHINE_STUDY.md)) |
 | the machine works the tools out (convergents, nearest fractions, gate moves, the conversion, axiom, `choose` and `first` steps and the Leech kissing number computed in GLM-BAT) | `python3 -m glm_universal.tools tool-machine` | the **44** steps Phase 160 left carried computed: continued-fraction terms by Euclid's algorithm on both ends of an enclosure (`GLM.ToolMachine.lockstep_certified`) of `e` (summed), `√m` (a checked witness) or `π` (Mathlib's bounds); nearest fractions by a Farey certificate the machine checks (`nearest_of_nearer`); gate moves by a search (`machineDist_sound`); carried steps **44 → 0**; **174 / 174** chains admitted; lies **20 / 20** found at their step; held-out **2,785 / 2,785** admitted, **2,785 / 2,785** lies refused, **215 / 215** tool refusals unwritten; the Leech kissing number **196,560** counted from the Golay code's generator rows (759 octads; `GLM.LeechMachine.leech_kissing_from_census`); **702 / 702** texts unchanged off and on; 8 of 9 marks, 1 of 1 amended ([`TOOL_MACHINE_STUDY.md`](studies/TOOL_MACHINE_STUDY.md)) |
-| the Leech shells from the lattice's definition | `PYTHONPATH=. python3 -c "from glm_universal.reasoning import leech_shells as L; print(L.shell_report(7))"` | the minimal shapes **proved** from Conway's definition (`GLM.LeechShells.minimal_shape`); every shell counted from the Golay census walked from the generator (`1, 759, 2576, 759, 1`) and checked against the theta series `E₄³ − 720Δ`: **8 / 8** agree through norm 14; the `llvq` tool's table is the derived one, its norm-12 shell corrected **34,408,430,950 → 34,417,656,000**; 6 of 6 marks ([`LEECH_SHELLS_STUDY.md`](studies/LEECH_SHELLS_STUDY.md)) |
-| the Leech kissing number from the lattice's definition | `PYTHONPATH=. python3 -c "from glm_universal.reasoning import leech_shells as L; print(L.minimal_shell_check())"` | the minimal shell **proved both ways** (`GLM.LeechKissing.minimal_iff`) and its size **proved** to be 196,560 (`leech_kissing_number`) by a bijection with three parameter families; the same families enumerated: **196,560** distinct vectors, all in the lattice by the definition; 5 of 5 marks ([`LEECH_KISSING_STUDY.md`](studies/LEECH_KISSING_STUDY.md)) |
-| every Leech shell, counted and proved | `PYTHONPATH=. python3 -c "from glm_universal.reasoning import leech_shells as L; print(L.proved_shells_check(7))"` | the generating-function procedure **proved** correct for every shell (`GLM.LeechShellCount.shellArr_correct`), the Phase 164 procedure on the shells it ran (`shellCount_correct`), and the first eight shells as theorems (`leech_shell_sizes`); **8 / 8** proved sizes agree with the Python count and the theta series; 6 of 6 marks ([`LEECH_SHELL_COUNT_STUDY.md`](studies/LEECH_SHELL_COUNT_STUDY.md)) |
-| the machine sums π | `PYTHONPATH=. python3 -m glm_universal.tools pi-machine` | GLM-BAT sums π by Machin's formula, by rules **proved** in `GLM.PiMachine` (`machin`, `atH_arctan_sum`, `piEnds_enclose`); enclosure **9.6 × 10⁻⁵⁸** wide, **53** certified continued-fraction terms (the declared constant: 19); 80 of 80 one-step π chains admitted, 0 lost; 6 of 6 marks ([`PI_MACHINE_STUDY.md`](studies/PI_MACHINE_STUDY.md)) |
-| adversarial replies at the `nearest` ties | `PYTHONPATH=. python3 -m glm_universal.tools adversarial-dialogue` | **560** adversarial runs, **0** members outside the head ever live, proved for any replies (`GLM.AdversarialDialogue.adversary_least`); a consistent liar confirmed on the member impersonated **118 / 118**, the proved limit (`consistent_lie_confirmed`); echoes read by number as a confirmation **10 → 0**; 13 of 13 marks ([`ADVERSARIAL_DIALOGUE_STUDY.md`](studies/ADVERSARIAL_DIALOGUE_STUDY.md)) |
-| the corpus confidence curve (declared sure, balanced and candidate modes) | `PYTHONPATH=. python3 -m glm_universal.tools confidence-curve` | balanced `(1, 1/5)` **33.7%** precision at **42.4%** coverage held out (1.6 times unguarded); sure `(2, 2/3)` **62.0%** at **7.3%**; candidate top three **32.7%** at **98.4%**; order control **3.3%**; 6 of 8 marks ([`CONFIDENCE_CURVE_STUDY.md`](studies/CONFIDENCE_CURVE_STUDY.md)) |
-| one evidence and result model (`runtime/evidence.py`) | `PYTHONPATH=. python3 -m glm_universal.tools evidence-model` | **223 / 223** evaluation answers read into one ten-field `Result`; **171 / 171** column-3 replays verified after two repairs; **50** cited theorem names, all declared; 9 of 9 marks on the re-take ([`EVIDENCE_MODEL_STUDY.md`](studies/EVIDENCE_MODEL_STUDY.md)) |
-| contextual domain frames (which energy, which oscillator, which body drives the wave) | `PYTHONPATH=. python3 -m glm_universal.tools context-frames` | six declared contexts; a pin never changes an answer given without it (**proved**, `GLM.ContextFrames.pin_same_answer`; **0** of 16,215 questions); each energy pin resolves **12** ambiguities; the reference-circle identity back under *a rotating body drives the wave*; 8 of 9 marks ([`CONTEXT_FRAMES_STUDY.md`](studies/CONTEXT_FRAMES_STUDY.md)) |
-| the evidence model in use (`GLM.py --result`, the evaluation's replay gate) | `PYTHONPATH=. python3 -m glm_universal.tools evidence-in-use`; `python3 -m glm_universal.evaluation --replay --jobs 8` | every `-q` answer printable as the ten-field `Result`, agreeing with the Phase 169 census on **223 of 223**; the gate replays **171** of the 177 cases expected answered, **171** verify, 6 without a column 3, in about nine minutes; the rule **proved** (`GLM.EvidenceInUse.gate_sound`, `gate_fails_of_failed`); 7 of 7 marks ([`EVIDENCE_IN_USE_STUDY.md`](studies/EVIDENCE_IN_USE_STUDY.md)) |
-| the open tie kept across turns (a reply read after unrelated turns; the adversarial battery at the `locate` junctions) | `PYTHONPATH=. python3 -m glm_universal.tools resumed-dialogue` | a reply after 1, 2 or 3 unrelated turns read **183 / 183**, every dialogue ending as uninterrupted (with the switch off **0 / 61**); **243 / 243** adversarial runs unchanged by the interruption; an unrelated turn **proved** invisible to the replies read (`GLM.ResumedDialogue.run_strip`, `resumed_least`); a question answered once (**0 / 130** echoes read), the newest question superseding (**0 / 48** bound to the older), **0 / 4,683** evaluation questions taken for a reply; at the `locate` junctions truthful **13 / 13** confirmed, liars **64 / 64** on the member impersonated; 9 of 9 marks ([`RESUMED_DIALOGUE_STUDY.md`](studies/RESUMED_DIALOGUE_STUDY.md)) |
+| the Leech shells from the lattice's definition | `PYTHONPATH=src python3 -c "from glm_universal.reasoning import leech_shells as L; print(L.shell_report(7))"` | the minimal shapes **proved** from Conway's definition (`GLM.LeechShells.minimal_shape`); every shell counted from the Golay census walked from the generator (`1, 759, 2576, 759, 1`) and checked against the theta series `E₄³ − 720Δ`: **8 / 8** agree through norm 14; the `llvq` tool's table is the derived one, its norm-12 shell corrected **34,408,430,950 → 34,417,656,000**; 6 of 6 marks ([`LEECH_SHELLS_STUDY.md`](studies/LEECH_SHELLS_STUDY.md)) |
+| the Leech kissing number from the lattice's definition | `PYTHONPATH=src python3 -c "from glm_universal.reasoning import leech_shells as L; print(L.minimal_shell_check())"` | the minimal shell **proved both ways** (`GLM.LeechKissing.minimal_iff`) and its size **proved** to be 196,560 (`leech_kissing_number`) by a bijection with three parameter families; the same families enumerated: **196,560** distinct vectors, all in the lattice by the definition; 5 of 5 marks ([`LEECH_KISSING_STUDY.md`](studies/LEECH_KISSING_STUDY.md)) |
+| every Leech shell, counted and proved | `PYTHONPATH=src python3 -c "from glm_universal.reasoning import leech_shells as L; print(L.proved_shells_check(7))"` | the generating-function procedure **proved** correct for every shell (`GLM.LeechShellCount.shellArr_correct`), the Phase 164 procedure on the shells it ran (`shellCount_correct`), and the first eight shells as theorems (`leech_shell_sizes`); **8 / 8** proved sizes agree with the Python count and the theta series; 6 of 6 marks ([`LEECH_SHELL_COUNT_STUDY.md`](studies/LEECH_SHELL_COUNT_STUDY.md)) |
+| the machine sums π | `PYTHONPATH=src python3 -m glm_universal.tools pi-machine` | GLM-BAT sums π by Machin's formula, by rules **proved** in `GLM.PiMachine` (`machin`, `atH_arctan_sum`, `piEnds_enclose`); enclosure **9.6 × 10⁻⁵⁸** wide, **53** certified continued-fraction terms (the declared constant: 19); 80 of 80 one-step π chains admitted, 0 lost; 6 of 6 marks ([`PI_MACHINE_STUDY.md`](studies/PI_MACHINE_STUDY.md)) |
+| adversarial replies at the `nearest` ties | `PYTHONPATH=src python3 -m glm_universal.tools adversarial-dialogue` | **560** adversarial runs, **0** members outside the head ever live, proved for any replies (`GLM.AdversarialDialogue.adversary_least`); a consistent liar confirmed on the member impersonated **118 / 118**, the proved limit (`consistent_lie_confirmed`); echoes read by number as a confirmation **10 → 0**; 13 of 13 marks ([`ADVERSARIAL_DIALOGUE_STUDY.md`](studies/ADVERSARIAL_DIALOGUE_STUDY.md)) |
+| the corpus confidence curve (declared sure, balanced and candidate modes) | `PYTHONPATH=src python3 -m glm_universal.tools confidence-curve` | balanced `(1, 1/5)` **33.7%** precision at **42.4%** coverage held out (1.6 times unguarded); sure `(2, 2/3)` **62.0%** at **7.3%**; candidate top three **32.7%** at **98.4%**; order control **3.3%**; 6 of 8 marks ([`CONFIDENCE_CURVE_STUDY.md`](studies/CONFIDENCE_CURVE_STUDY.md)) |
+| one evidence and result model (`runtime/evidence.py`) | `PYTHONPATH=src python3 -m glm_universal.tools evidence-model` | **223 / 223** evaluation answers read into one ten-field `Result`; **171 / 171** column-3 replays verified after two repairs; **50** cited theorem names, all declared; 9 of 9 marks on the re-take ([`EVIDENCE_MODEL_STUDY.md`](studies/EVIDENCE_MODEL_STUDY.md)) |
+| contextual domain frames (which energy, which oscillator, which body drives the wave) | `PYTHONPATH=src python3 -m glm_universal.tools context-frames` | six declared contexts; a pin never changes an answer given without it (**proved**, `GLM.ContextFrames.pin_same_answer`; **0** of 16,215 questions); each energy pin resolves **12** ambiguities; the reference-circle identity back under *a rotating body drives the wave*; 8 of 9 marks ([`CONTEXT_FRAMES_STUDY.md`](studies/CONTEXT_FRAMES_STUDY.md)) |
+| the evidence model in use (`GLM.py --result`, the evaluation's replay gate) | `PYTHONPATH=src python3 -m glm_universal.tools evidence-in-use`; `python3 -m glm_universal.evaluation --replay --jobs 8` | every `-q` answer printable as the ten-field `Result`, agreeing with the Phase 169 census on **223 of 223**; the gate replays **171** of the 177 cases expected answered, **171** verify, 6 without a column 3, in about nine minutes; the rule **proved** (`GLM.EvidenceInUse.gate_sound`, `gate_fails_of_failed`); 7 of 7 marks ([`EVIDENCE_IN_USE_STUDY.md`](studies/EVIDENCE_IN_USE_STUDY.md)) |
+| the open tie kept across turns (a reply read after unrelated turns; the adversarial battery at the `locate` junctions) | `PYTHONPATH=src python3 -m glm_universal.tools resumed-dialogue` | a reply after 1, 2 or 3 unrelated turns read **183 / 183**, every dialogue ending as uninterrupted (with the switch off **0 / 61**); **243 / 243** adversarial runs unchanged by the interruption; an unrelated turn **proved** invisible to the replies read (`GLM.ResumedDialogue.run_strip`, `resumed_least`); a question answered once (**0 / 130** echoes read), the newest question superseding (**0 / 48** bound to the older), **0 / 4,683** evaluation questions taken for a reply; at the `locate` junctions truthful **13 / 13** confirmed, liars **64 / 64** on the member impersonated; 9 of 9 marks ([`RESUMED_DIALOGUE_STUDY.md`](studies/RESUMED_DIALOGUE_STUDY.md)) |
 | the study ledger (every study as one machine-readable row; the files the documents name) | `python3 -m glm_universal.tools study-ledger [--json] [--issues] [--files]` | **155** studies, each read from its own file, the plan, the To-Do list and its stored measurement — phase, predecessors (acyclic by construction, `GLM.StudyLedger.no_cycle`), marks met and missed, amendments, frozen path, digests, status, follow-ups; phase for **144**, study and plan agreeing **28 / 29**; stored counts agree **7 / 10** (2 differ by the Lean mark, 1 unexplained); follow-ups **30 / 30** resolve; file names **4,254**, **0** missing after the corrections of Phase 161; 3 supplied files outside version control, by the owner's decision of 18 October 2026; nothing stored, so never stale; 8 of 10 marks, 1 of 2 amended ([`STUDY_LEDGER_STUDY.md`](studies/STUDY_LEDGER_STUDY.md)) |
 | corpus source tiers (every corpus experiment read on five tiers and on the written tier, the supplied tier and both) | `python3 -m glm_universal.tools source-tiers [--write] [--json]` | **2,268** documents, **1,036** supplied (46% of sentences, 39% of tokens); split exact (`GLM.SourceTiers.train_filter_add`); written test **82,245** right with the whole corpus against **80,274** with the written tier alone; supplied tier out costs **1,971**, a size-matched pseudo-tier **9,629**; K3′ precision on written text: whole 56.4%, excluded 54.5%, down-weighted 54.6%, confirmed **57.9%** keeping 94.5%; `define` **45 / 60** bold terms, 4 from supplied sentences; no answer moved; 7 of 8 marks, 0 of 1 amended ([`SOURCE_TIERS_STUDY.md`](studies/SOURCE_TIERS_STUDY.md)) |
 | date stamps (directive D17) | `python3 -m glm_universal.tools dates [--json]` | every `Created …` / `Last altered …` stamp in the repository's own files, with the defects a stamp shows by itself (not a date, after today, altered before created); `source_material/`, generated documents and stored data exempt; forward from 18 October 2026 |
@@ -152,7 +152,7 @@ taken from a run that selects them.
 The package is `glm_universal` **v1.23.0**: eleven sub-packages, 152 modules,
 **<!--figure:registers-->8 registers<!--/figure-->** holding 1,143 carriers (physics 726, chemistry 118, molecules
 51, mathematics 22, lexicon 149, spatial 28, harmonics 28, economics 21) beside
-a 45-class comparison register, **<!--figure:query-kinds-->28 query kinds<!--/figure-->**
+a 45-class comparison register, **<!--figure:query-kinds-->27 query kinds<!--/figure-->**
 one of which dispatches **<!--figure:report-subjects-->67 report subjects<!--/figure-->**, and 3 tasks.
 
 ---
@@ -1361,8 +1361,8 @@ so a confident wrong answer is worse than a refusal). Write-up:
 [`CAPABILITY_ASSESSMENT.md`](CAPABILITY_ASSESSMENT.md).
 
 **The Lean development, addressed.** `reasoning/lean_address.py` gives each of
-the <!--figure:lean-declarations-->6,224<!--/figure--> declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly <!--figure:lean-declarations-->6,224<!--/figure-->/<!--figure:lean-declarations-->6,224<!--/figure--> with 0 coordinate errors;
+the <!--figure:lean-declarations-->9,126<!--/figure--> declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly <!--figure:lean-declarations-->9,126<!--/figure-->/<!--figure:lean-declarations-->9,126<!--/figure--> with 0 coordinate errors;
 3989 distinct addresses, and the quantiser adds no conflation of its own;
 nearest-by-address shares a file 817 times against 35 for a SHA-256 control and
 29 for a seeded reshuffle, with chance at ≈ 0.80 %. `report lean`.
@@ -1376,7 +1376,7 @@ where the structural address holds 258 → 182. Write-up:
 [`ANONYMOUS_REGISTER_STUDY.md`](studies/ANONYMOUS_REGISTER_STUDY.md).
 
 **The standing rules, as instruments.**
-[`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md) states <!--figure:directives-->17 standing rules<!--/figure--> and
+[`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md) states <!--figure:directives-->19 standing rules<!--/figure--> and
 names the instrument for each. `reasoning/directives.py` parses that file and
 gives each instrument a live verdict (`report directives`) — **16 of 16** with
 every named instrument present; `reasoning/pipeline.py` reads the stage each
@@ -1405,8 +1405,8 @@ twenty questions rather than three samples. `tools oracle`. Write-up:
 **The field surface, and what it was worth.** `runtime/fields.py` answers one
 named field of one named row — `field atomic_weight_u of carbon` — over
 <!--figure:fieldsurface-tables-->14<!--/figure--> declared tables holding
-<!--figure:fieldsurface-rows-->15,982<!--/figure--> rows and
-<!--figure:fieldsurface-pairs-->93,091<!--/figure--> addressable `(row,
+<!--figure:fieldsurface-rows-->15,367<!--/figure--> rows and
+<!--figure:fieldsurface-pairs-->89,660<!--/figure--> addressable `(row,
 field)` pairs: the element and molecule source rows, one table per register's
 carrier attributes, the Lean address book, the package's own top-level
 definitions, and a registry of declared zero-argument functions whose returned
@@ -1568,7 +1568,7 @@ default and every test file runs under it: `python3 -m pip install pytest`
 before any gate that runs tests ([`ITERATE.md`](ITERATE.md) §0). The sign-off
 commands check for it and stop with that line if it is missing.
 
-**Start here.** Everything is signed off in `overlay/.glm_signoff.json`: each
+**Start here.** Everything is signed off in `.glm_signoff.json`: each
 test file and each instrument carries the SHA-256 of everything its last
 passing result depended on — the file itself, every module it imports
 transitively, the frozen data those modules read, the documents and Lean
@@ -1577,15 +1577,15 @@ re-running proves nothing; if a byte in the closure differs, the unit is run
 again. Nothing is skipped silently.
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.corpus --check            # documents, ~30 s
-PYTHONPATH=. python3 -m glm_universal.signoff --verify          # what still holds
-PYTHONPATH=. python3 -m glm_universal.signoff --plan            # what would run
-PYTHONPATH=. python3 -m glm_universal.signoff --why             # and why each unit would
-PYTHONPATH=. python3 -m glm_universal.signoff --impact ../DIGEST.md  # what an edit would cost
-PYTHONPATH=. python3 -m glm_universal.signoff --run-everything --jobs 8
-PYTHONPATH=. python3 -m glm_universal.signoff --release --jobs 8   # closing a round
-PYTHONPATH=. python3 -m glm_universal.signoff --release --resume --jobs 8  # after one was interrupted
+cd src
+PYTHONPATH=src python3 -m glm_universal.corpus --check            # documents, ~30 s
+PYTHONPATH=src python3 -m glm_universal.signoff --verify          # what still holds
+PYTHONPATH=src python3 -m glm_universal.signoff --plan            # what would run
+PYTHONPATH=src python3 -m glm_universal.signoff --why             # and why each unit would
+PYTHONPATH=src python3 -m glm_universal.signoff --impact ../DIGEST.md  # what an edit would cost
+PYTHONPATH=src python3 -m glm_universal.signoff --run-everything --jobs 8
+PYTHONPATH=src python3 -m glm_universal.signoff --release --jobs 8   # closing a round
+PYTHONPATH=src python3 -m glm_universal.signoff --release --resume --jobs 8  # after one was interrupted
 ```
 
 A release writes each signature as it is earned rather than at the end, so an
@@ -1603,13 +1603,13 @@ units reach `PROJECT_DIRECTIVES.md` (120 before Phase 78; see
 [`studies/ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md) §5g).
 
 The seven instruments in the ledger beside the
-<!--figure:test-files-->239 test files<!--/figure--> are `lean-build`,
+<!--figure:test-files-->219 test files<!--/figure--> are `lean-build`,
 `lean-sorry-free`, `capabilities`, `benchmarks`, `evaluation`, `replay` and
 `figures`. `replay` (Phase 174) is the evaluation's replay gate of Phase 171,
 column 3 run for every case expected answered, so the close runs it when what
 it reads has moved. (An earlier seventh, `lean-copies-identical`, went with
 the second copy of the Lean tree in Phase 78: the development lives only in
-`overlay/glm_lean/`.) Editing a document makes exactly the units that
+`src/lean/`.) Editing a document makes exactly the units that
 read that document stale — `test_figures.py` yes, `test_substrate.py` no — so
 writing up a finding costs one short re-run rather than a quarter of an hour.
 A median Lean edit makes **27** units stale and a unit's closure is **129**
@@ -1656,16 +1656,16 @@ document drifting from the code.
 
 ```bash
 lake build                                                   # the Lean files, no sorry
-rg -n 'sorry|admit' -g '*.lean' overlay/glm_lean             # expect nothing
+rg -n 'sorry|admit' -g '*.lean' glm_lean             # expect nothing
 
-cd overlay
-PYTHONPATH=. GLM_EXHAUSTIVE=1 python3 -m pytest glm_universal/tests -q
-PYTHONPATH=. python3 -m glm_universal.capabilities           # 33 probes
-PYTHONPATH=. python3 -m glm_universal.benchmarks             # 5 suites
-PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8    # <!--figure:evaluation-cases-->223 CLI cases<!--/figure-->
-PYTHONPATH=. python3 -m glm_universal.figures --write        # regenerate FIGURES.md
-PYTHONPATH=. python3 -m glm_universal.corpus --refresh       # every derived artefact
-PYTHONPATH=. python3 -m glm_universal.corpus --check          # exit 1 on any drift
+cd src
+PYTHONPATH=src GLM_EXHAUSTIVE=1 python3 -m pytest src/glm_universal/tests -q
+PYTHONPATH=src python3 -m glm_universal.capabilities           # 33 probes
+PYTHONPATH=src python3 -m glm_universal.benchmarks             # 5 suites
+PYTHONPATH=src python3 -m glm_universal.evaluation --jobs 8    # <!--figure:evaluation-cases-->223 CLI cases<!--/figure-->
+PYTHONPATH=src python3 -m glm_universal.figures --write        # regenerate FIGURES.md
+PYTHONPATH=src python3 -m glm_universal.corpus --refresh       # every derived artefact
+PYTHONPATH=src python3 -m glm_universal.corpus --check          # exit 1 on any drift
 ```
 
 Spot checks that exercise the runtime the way a user does — each returns
@@ -1674,14 +1674,14 @@ answer's figures in a fresh interpreter and compares them with what was
 printed:
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 GLM.py -q "report analogies"  --verify-tct
-PYTHONPATH=. python3 GLM.py -q "report chemistry coverage" --verify-tct
-PYTHONPATH=. python3 GLM.py -q "report lean"       --verify-tct
-PYTHONPATH=. python3 GLM.py -q "report escalation" --verify-tct
-PYTHONPATH=. python3 -m glm_universal.tools pipeline      # the wiring stages
-PYTHONPATH=. python3 -m glm_universal.tools directives    # the standing rules
-PYTHONPATH=. python3 -m glm_universal.tools signoff       # the ledger summary
+cd src
+PYTHONPATH=src python3 GLM.py -q "report analogies"  --verify-tct
+PYTHONPATH=src python3 GLM.py -q "report chemistry coverage" --verify-tct
+PYTHONPATH=src python3 GLM.py -q "report lean"       --verify-tct
+PYTHONPATH=src python3 GLM.py -q "report escalation" --verify-tct
+PYTHONPATH=src python3 -m glm_universal.tools pipeline      # the wiring stages
+PYTHONPATH=src python3 -m glm_universal.tools directives    # the standing rules
+PYTHONPATH=src python3 -m glm_universal.tools signoff       # the ledger summary
 ```
 
 ---

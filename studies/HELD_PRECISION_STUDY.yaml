@@ -1,0 +1,70 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 8 of 39 goal and narrative chains read a register value and carry an exact interval;
+  2 exact because a held value cancels; 2 where step-by-step interval arithmetic is strictly wider; 5
+  of 5 marks met.
+directives: []
+evidence: []
+faculty: derivation
+file_refs:
+  code: []
+  lean:
+  - HeldPrecision
+  prose: HELD_PRECISION_STUDY.md
+  test:
+  - test_held_precision.py
+  wheel: []
+follow_ups: []
+id: HELD_PRECISION_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 86
+predecessors:
+- MEASURANDS_STUDY
+- STEPWISE_TWO_STUDY
+question: When a register value feeds a formula-wheel derivation, what does its stated precision do to
+  the answer, and can the GLM say so exactly?
+recomputed_by: '`glm_universal.reasoning.held_precision.held_precision_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-declarations-written-before-any-code-of-this-round
+  heading: 1. Declarations — written before any code of this round
+- anchor: 2-results
+  heading: 2. Results
+- anchor: 3-what-this-round-moved
+  heading: 3. What this round moved
+- anchor: 4-addendum-phase-86-h3-is-no-longer-met
+  heading: '4. Addendum (Phase 86): H3 is no longer met'
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Held precision — a register value's stated precision carried through a derivation
+verdict: Every answered derivation that reads a register value now states the exact interval its answer
+  lies in, carried from the precision the register wrote the value at; two chains are exact because the
+  held value cancels, which step-by-step interval arithmetic would have missed. No verdict or value moved.
+  From Phase 86 the two cancelling chains are refused, because they read a temperature level as a difference,
+  and mark H3 is no longer met (§4).
+wobble_deps: []

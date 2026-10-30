@@ -6,22 +6,22 @@
 
 **Verdict.** Most of the cost was work repeated on things that had not moved, and a cache keyed on what it is derived from does not repeat it.
 
-**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->15,340<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->0<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
+**Deciding figure.** Rebuilding both address books from nothing decodes <!--figure:rebuild-decodes-from-nothing-->22,873<!--/figure--> vectors and against the stored books decodes <!--figure:rebuild-decodes-now-->823<!--/figure-->; the planner's report is taken once per change instead of <!--figure:planner-reports-per-check-->5<!--/figure--> times per check.
 
 **Recomputed by.** `glm_universal.corpus.cost.cost_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-Code: [`glm_universal/corpus/cost.py`](../overlay/glm_universal/corpus/cost.py),
-[`glm_universal/reasoning/lean_address.py`](../overlay/glm_universal/reasoning/lean_address.py),
-[`glm_universal/corpus/address.py`](../overlay/glm_universal/corpus/address.py),
-[`glm_universal/derived.py`](../overlay/glm_universal/derived.py),
-[`glm_universal/signoff/rules.py`](../overlay/glm_universal/signoff/rules.py),
-[`glm_universal/signoff/ledger.py`](../overlay/glm_universal/signoff/ledger.py).
-Tests: [`glm_universal/tests/test_corpus.py`](../overlay/glm_universal/tests/test_corpus.py),
-[`glm_universal/tests/test_lean_address.py`](../overlay/glm_universal/tests/test_lean_address.py),
-[`glm_universal/tests/test_derived.py`](../overlay/glm_universal/tests/test_derived.py),
-[`glm_universal/tests/test_sandbox_planner.py`](../overlay/glm_universal/tests/test_sandbox_planner.py).
+Code: [`glm_universal/corpus/cost.py`](../glm_universal/corpus/cost.py),
+[`glm_universal/reasoning/lean_address.py`](../glm_universal/reasoning/lean_address.py),
+[`glm_universal/corpus/address.py`](../glm_universal/corpus/address.py),
+[`glm_universal/derived.py`](../glm_universal/derived.py),
+[`glm_universal/signoff/rules.py`](../glm_universal/signoff/rules.py),
+[`glm_universal/signoff/ledger.py`](../glm_universal/signoff/ledger.py).
+Tests: [`glm_universal/tests/test_corpus.py`](../glm_universal/tests/test_corpus.py),
+[`glm_universal/tests/test_lean_address.py`](../glm_universal/tests/test_lean_address.py),
+[`glm_universal/tests/test_derived.py`](../glm_universal/tests/test_derived.py),
+[`glm_universal/tests/test_sandbox_planner.py`](../glm_universal/tests/test_sandbox_planner.py).
 Run: `cd overlay && PYTHONPATH=. python3 -m glm_universal.corpus --refresh`.
 
 ---
@@ -73,8 +73,8 @@ nothing.
 <!-- generated: cost-addresses -->
 | book | units | decodes from nothing | decodes now | reused |
 |---|---|---|---|---|
-| Lean declarations | 5,893 | 10,958 | 0 | 11,786 |
-| corpus sections | 2,243 | 4,382 | 0 | 4,486 |
+| Lean declarations | 5,965 | 11,104 | 823 | 11,107 |
+| corpus sections | 7,554 | 11,769 | 0 | 15,108 |
 
 Reuse is checked, not assumed: each rebuild re-decodes a sample of the answers it reused and reports any that moved (4 sampled in the declaration book, 4 in the document book, none moved).
 <!-- end generated -->
@@ -95,8 +95,8 @@ nothing and requiring the two books to be equal byte for byte.
 | blocks quoting the report | 5 |
 | evaluation cases per report | 223 |
 | reports taken per check, before | 5 |
-| reports taken per check, now | 0 |
-| stored report | fresh |
+| reports taken per check, now | 1 |
+| stored report | stale |
 
 The store is keyed on the import closure of `glm_universal.sandbox.planner` -- the code the report is derived from, and not the documents that quote it -- so a documentation round does not re-take it and a change to the planner does.
 <!-- end generated -->
@@ -122,7 +122,7 @@ works for tables and not for a sentence, and the sentences were where the drift
 lived. The block mechanism is now available at the size of a phrase:
 
 ```markdown
-the suite is <!--figure:test-files-->226 test files<!--/figure--> today
+the suite is <!--figure:test-files-->215 test files<!--/figure--> today
 ```
 
 The markers are HTML comments, so a reader sees only the number. `--refresh`
@@ -130,7 +130,7 @@ rewrites the body, `--check` fails when it has drifted, and a marker naming a
 figure nothing emits is a reported defect rather than a silent no-op.
 
 <!-- generated: cost-figures -->
-164 figures are registered and 593 markers carry them, across 32 documents.  A marker whose text is not what its figure now says is what `--refresh` rewrites and what `--check` fails on.
+164 figures are registered and 660 markers carry them, across 32 documents.  A marker whose text is not what its figure now says is what `--refresh` rewrites and what `--check` fails on.
 
 The registry: `binding-ambiguous`, `binding-as-declared`, `binding-carriers`, `binding-control-wrong`, `binding-declared-count`, `binding-largest-fibre`, `binding-nameable`, `binding-product-recoverable`, `binding-product-zero`, `binding-readings`, `binding-reasons`, `binding-recovered`, `binding-refused`, `binding-roles`, `conversation-alone`, `conversation-answered`, `conversation-as-declared`, `conversation-control-rows`, `conversation-control-wrong`, `conversation-declared-count`, `conversation-reasons`, `conversation-refused`, `corpus-archive-documents`, `corpus-documents`, `corpus-sections`, `corpus-state-documents`, `directive-count`, `directives`, `evaluation-case-count`, `evaluation-cases`, `extremum-answered`, `extremum-as-declared`, `extremum-declared-count`, `extremum-reasons`, `extremum-reasons-declared`, `extremum-refused`, `extremum-ties`, `fieldsurface-fields`, `fieldsurface-held`, `fieldsurface-moved`, `fieldsurface-pairs`, `fieldsurface-parsed-after`, `fieldsurface-parsed-before`, `fieldsurface-predicted`, `fieldsurface-rows`, `fieldsurface-surface-after`, `fieldsurface-surface-before`, `fieldsurface-tables`, `lean-declaration-files`, `lean-declarations`, `lean-file-count`, `lean-files`, `normesc-correct`, `normesc-family-correct`, `normesc-family-rungs`, `normesc-family-wrong`, `normesc-first-broken`, `normesc-longest-safe`, `normesc-named-correct`, `normesc-named-rungs`, `normesc-queries`, `normesc-refused`, `normesc-rungs`, `normesc-wrong`, `normfamily-norms`, `normfamily-rung-count`, `opesc-count`, `opesc-program-correct`, `opesc-program-queries`, `opesc-program-wrong`, `oracle-absent`, `oracle-english`, `oracle-parsed`, `oracle-parser-worth`, `oracle-questions`, `oracle-surface`, `ordering-answered`, `ordering-as-declared`, `ordering-declared-count`, `ordering-held`, `ordering-parsed-after`, `ordering-parsed-before`, `ordering-reasons`, `ordering-refused`, `ordering-surface-after`, `ordering-surface-before`, `ordering-surface-parsed`, `planner-reports-per-check`, `plans-ambiguous`, `plans-bare-probe-correct`, `plans-bare-probe-refused`, `plans-bare-probe-wrong`, `plans-frames`, `plans-gained`, `plans-gains-address`, `plans-gains-derive`, `plans-gains-table`, `plans-held-bare-correct`, `plans-held-bare-correct-refusal`, `plans-held-bare-wrong`, `plans-held-correct`, `plans-held-correct-refusal`, `plans-held-total`, `plans-held-wrong`, `plans-probe-correct`, `plans-probe-refused`, `plans-probe-wrong`, `plans-questions`, `plans-stress-bare-correct`, `plans-stress-bare-wrong`, `plans-stress-correct`, `plans-stress-correct-refusal`, `plans-stress-first-correct`, `plans-stress-first-refused`, `plans-stress-refused`, `plans-stress-wrong`, `plans-units`, `planstore-coarse-wrong`, `planstore-declared-count`, `planstore-refusals`, `planstore-refusals-replayed`, `planstore-replayed`, `planstore-trials-first`, `planstore-trials-replayed`, `planstore-worst-case`, `probe-correct`, `probe-derived`, `probe-lexicon-held`, `probe-lexicon-words`, `probe-pass-mark`, `probe-questions`, `probe-refused`, `probe-wrong`, `query-kinds`, `reasoning-modules`, `rebuild-decodes-from-nothing`, `rebuild-decodes-now`, `registers`, `repo-cache-bytes`, `repo-cache-share`, `repo-primary-bytes`, `repo-stored-bytes`, `report-subjects`, `scales-answered`, `scales-as-declared`, `scales-bridged`, `scales-declared`, `scales-numeric`, `scales-pairs`, `scales-quantities`, `scales-refused`, `scales-rows`, `scales-still-refused`, `secondread-adopted`, `secondread-configurations`, `secondread-given-up`, `secondread-matched-removes`, `secondread-program-correct`, `secondread-program-refused`, `secondread-program-wrong`, `secondread-shipped`, `suite`, `test-file-count`, `test-files`.
 <!-- end generated -->
@@ -630,7 +630,7 @@ numbers moved again, so the close had to be repeated. Measured on the tree at
 the start of Phase 78, with the ledger's own closure rule:
 
 * the tree held **two copies of the Lean development** (`RequestProject/GLM/`
-  at the repository root and `overlay/glm_lean/RequestProject/GLM/`), both
+  at the repository root and `glm_lean/RequestProject/GLM/`), both
   hashed into every closure that named a Lean file, kept in step by a
   generator and checked by a seventh instrument;
 * a unit's closure averaged **284 files**;
@@ -651,7 +651,7 @@ the start of Phase 78, with the ledger's own closure rule:
 
 **What changed.** Six edits, all computed rather than listed:
 
-1. **One Lean copy.** `lakefile.toml` builds `overlay/glm_lean` in place
+1. **One Lean copy.** `lakefile.toml` builds `glm_lean` in place
    (`srcDir`); the repository-root copy, the mirror generator
    (`tools lean-mirror`, and its module `mirror.py` under `signoff`) and the `lean-copies-identical`
    instrument are gone. `lake build` compiles the files the package reads.
@@ -909,5 +909,5 @@ that pays for it, with the storage, loading, digesting and rebuilding of the
 table counted on the table's side rather than assumed away.
 
 <!-- generated: cost-tier -->
-**Rebuilding both address books from nothing decodes 15,340 vectors; rebuilding them against the stored books decodes 0.**  The planner's report, one pass over 223 evaluation cases, is quoted by 5 generated blocks and is now taken 0 times per check instead of 5.  593 figures inside sentences, across 32 documents, are emitted rather than typed.
+**Rebuilding both address books from nothing decodes 22,873 vectors; rebuilding them against the stored books decodes 823.**  The planner's report, one pass over 223 evaluation cases, is quoted by 5 generated blocks and is now taken 1 times per check instead of 5.  660 figures inside sentences, across 32 documents, are emitted rather than typed.
 <!-- end generated -->

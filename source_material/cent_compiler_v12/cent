@@ -1,0 +1,238 @@
+#!/usr/bin/env python3
+"""
+cent — the £ → ¢ → ∆ physical compiler CLI.
+
+Usage:
+    cent compile "<£ formula>"
+    cent compile "velocity = (2 * energy / mass)^(1/2)"
+    cent compile "y = sqrt(5)"
+    cent showcase                    # delta-sigma irrational carrier demo
+    cent test                        # run all 7 simulations
+    cent enumerate "<£ formula>"    # enumerate all ∆ implementations
+    cent spice "<£ formula>"         # emit SPICE netlist
+
+The CLI takes any £ (abstract operation), decomposes it to a ¢ DAG,
+enumerates all valid ∆ implementations, checks if delta-sigma applies,
+and emits a SPICE netlist for the chosen ∆.
+"""
+import sys
+import os
+import math
+import argparse
+
+# Add the package to the path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from cent_compiler import (
+    decompose_formula, enumerate_delta, compute_cost, rank_and_prune,
+    generate_spice_netlist, build_pound_suite,
+)
+from cent_compiler.delta_sigma import flagship_demonstration
+from cent_compiler.simulator import (
+    test_delta_sigma_integration, test_opamp_sqrt, test_pll_wrap,
+)
+from cent_compiler.scaled_simulator import (
+    test_capacitor_differentiator, test_kcl_summer,
+    test_search_coil, test_thermal_relaxation,
+)
+
+
+def cmd_compile(formula: str, top_n: int = 6):
+    """Compile a £ formula through the full pipeline."""
+    print("=" * 70)
+    print(f"COMPILING: {formula}")
+    print("=" * 70)
+
+    # Parse the formula to extract target and expression
+    if "=" in formula:
+        target, expr = formula.split("=", 1)
+        target = target.strip()
+        expr = expr.strip()
+    else:
+        target = "result"
+        expr = formula.strip()
+
+    # Preprocess: convert sqrt(x) → x**0.5, exp/log/tanh handled by decomposer
+    import re
+    expr = re.sub(r'\bsqrt\s*\(([^)]+)\)', r'(\1)**(1/2)', expr)
+
+    # Step 1: decompose to ¢ DAG
+    print("\n1. ¢ DAG decomposition:")
+    try:
+        dag = decompose_formula(expr, target)
+        for op in dag.ops:
+            c = f", const={op.const}" if op.const else ""
+            print(f"   {op.op}({op.inputs}) → {op.output}{c}")
+    except Exception as e:
+        print(f"   ERROR: {e}")
+        return
+
+    # Step 2: enumerate ∆ implementations
+    print(f"\n2. ∆ enumeration:")
+    impls = enumerate_delta(dag)
+    ds_impls = [i for i in impls if i.is_delta_sigma]
+    print(f"   {len(impls)} total ∆ implementations")
+    print(f"   {len(ds_impls)} are delta-sigma")
+    print(f"   delta-sigma implementable: {'YES' if ds_impls else 'no'}")
+
+    # Step 3: rank by cost
+    print(f"\n3. Top {top_n} by ¢_cost (deduplicated by domain/carrier/∆Σ):")
+    top = rank_and_prune(impls, top_n=top_n)
+    print(f"   {'rank':<5}{'cost':<6}{'domain':<14}{'carrier':<12}{'∆Σ?':<5}components")
+    print(f"   {'-'*75}")
+    for i, (impl, cost) in enumerate(top):
+        comps = ", ".join(impl.components)
+        if len(comps) > 45: comps = comps[:42] + "..."
+        ds = "YES" if impl.is_delta_sigma else "no"
+        print(f"   {i+1:<5}{cost.total:<6}{impl.substrate_domain:<14}"
+              f"{impl.carrier_type:<12}{ds:<5}{comps}")
+
+    # Step 4: emit SPICE netlist for rank-1
+    if top:
+        print(f"\n4. SPICE netlist (for rank-1 ∆):")
+        # Pick the right netlist based on ops
+        ops_set = {op.op for op in dag.ops}
+        if "sqrt" in ops_set:
+            netlist = generate_spice_netlist("opamp_sqrt")
+        elif "accum" in ops_set and "wrap" in ops_set:
+            netlist = generate_spice_netlist("delta_sigma")
+        elif "accum" in ops_set:
+            netlist = generate_spice_netlist("rc_integrator")
+        elif "sum" in ops_set:
+            netlist = generate_spice_netlist("kcl_summer")
+        else:
+            netlist = f"* No SPICE template for ops: {ops_set}\n"
+        print(netlist)
+
+
+def cmd_showcase():
+    """Run the delta-sigma irrational carrier showcase."""
+    flagship_demonstration()
+
+
+def cmd_test():
+    """Run all 7 simulations."""
+    print("=" * 70)
+    print("RUNNING ALL 7 SIMULATIONS")
+    print("=" * 70)
+    print()
+    results = []
+    results.append(("delta-sigma integrator (£_accum)",   test_delta_sigma_integration()))
+    results.append(("op-amp sqrt (£_sqrt)",                test_opamp_sqrt()))
+    results.append(("PLL phase tracker (£_wrap)",          test_pll_wrap()))
+    results.append(("capacitor differentiator (£_rate)",   test_capacitor_differentiator()))
+    results.append(("KCL summer (£_sum)",                  test_kcl_summer()))
+    results.append(("search coil (£_spatial)",             test_search_coil()))
+    results.append(("thermal relaxation (£_eq)",           test_thermal_relaxation()))
+
+    print()
+    print("=" * 70)
+    print("SIMULATION SUMMARY")
+    print("=" * 70)
+    for name, passed in results:
+        flag = "PASS" if passed else "FAIL"
+        print(f"  [{flag}] {name}")
+    n_pass = sum(1 for _, p in results if p)
+    print(f"\n  {n_pass}/{len(results)} simulations passed")
+
+
+def cmd_enumerate(formula: str):
+    """Enumerate ALL ∆ implementations for a £."""
+    import re
+    if "=" in formula:
+        target, expr = formula.split("=", 1)
+        target = target.strip()
+        expr = expr.strip()
+    else:
+        target = "result"
+        expr = formula.strip()
+
+    # Preprocess sqrt() → **(1/2)
+    expr = re.sub(r'\bsqrt\s*\(([^)]+)\)', r'(\1)**(1/2)', expr)
+
+    dag = decompose_formula(expr, target)
+    impls = enumerate_delta(dag)
+    print(f"{len(impls)} ∆ implementations for: {formula}")
+    for i, impl in enumerate(impls):
+        ds = " [∆Σ]" if impl.is_delta_sigma else ""
+        print(f"  {i+1:>3}. [{impl.substrate_domain:<12}] "
+              f"{impl.carrier_type:<12}{ds}  {', '.join(impl.components)}")
+
+
+def cmd_spice(formula: str):
+    """Emit SPICE netlist for a £ and write to disk."""
+    import re
+    if "=" in formula:
+        target, expr = formula.split("=", 1)
+        target = target.strip()
+        expr = expr.strip()
+    else:
+        target = "result"
+        expr = formula.strip()
+
+    # Preprocess sqrt() → **(1/2), exp() stays as call (handled by decomposer)
+    expr = re.sub(r'\bsqrt\s*\(([^)]+)\)', r'(\1)**(1/2)', expr)
+
+    dag = decompose_formula(expr, target)
+    ops_set = {op.op for op in dag.ops}
+    if "sqrt" in ops_set:
+        netlist = generate_spice_netlist("opamp_sqrt")
+        filename = "sqrt_extractor.cir"
+    elif "accum" in ops_set and "wrap" in ops_set:
+        netlist = generate_spice_netlist("delta_sigma")
+        filename = "delta_sigma.cir"
+    elif "accum" in ops_set:
+        netlist = generate_spice_netlist("rc_integrator")
+        filename = "rc_integrator.cir"
+    elif "sum" in ops_set:
+        netlist = generate_spice_netlist("kcl_summer")
+        filename = "kcl_summer.cir"
+    else:
+        print(f"* No SPICE template for ops: {ops_set}")
+        return
+
+    print(netlist)
+    # Write to disk
+    filepath = os.path.join(os.getcwd(), filename)
+    with open(filepath, "w") as f:
+        f.write(netlist)
+    print(f"\n* Netlist written to: {filepath}")
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        prog="cent",
+        description="The £ → ¢ → ∆ physical compiler",
+    )
+    sub = parser.add_subparsers(dest="command", required=True)
+
+    p_compile = sub.add_parser("compile", help="compile a £ through the full pipeline")
+    p_compile.add_argument("formula", help="the £ formula, e.g. 'velocity = (2 * energy / mass)^(1/2)'")
+    p_compile.add_argument("--top", type=int, default=6, help="top N ∆ to show")
+
+    p_show = sub.add_parser("showcase", help="delta-sigma irrational carrier demo")
+
+    p_test = sub.add_parser("test", help="run all 7 simulations")
+
+    p_enum = sub.add_parser("enumerate", help="enumerate all ∆ for a £")
+    p_enum.add_argument("formula")
+
+    p_spice = sub.add_parser("spice", help="emit SPICE netlist for a £")
+    p_spice.add_argument("formula")
+
+    args = parser.parse_args()
+
+    if args.command == "compile":
+        cmd_compile(args.formula, args.top)
+    elif args.command == "showcase":
+        cmd_showcase()
+    elif args.command == "test":
+        cmd_test()
+    elif args.command == "enumerate":
+        cmd_enumerate(args.formula)
+    elif args.command == "spice":
+        cmd_spice(args.formula)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,14 @@
+* Log amplifier: V = Vt * ln(I / Is)
+* ¢: log(I) → V
+* Uses diode in op-amp feedback: V_out = -Vt * ln(I_in / Is)
+IIN 1 0 DC 0.001
+XU1 0 2 3 OPAMP_IDEAL
+D1 3 2 DIODE_LOG
+.MODEL DIODE_LOG D(IS=1e-12 N=1)
+R1 1 2 1k
+.SUBCKT OPAMP_IDEAL NI INV OUT
+EOUT OUT 0 NI INV 1e6
+.ENDS
+.OP
+.PRINT DC V(3)
+.END

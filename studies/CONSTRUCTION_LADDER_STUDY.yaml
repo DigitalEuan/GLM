@@ -1,0 +1,92 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 462 of 568 queries answered correctly with 0 wrong, against 327 for the five-rung ladder
+  and 283 for the best single rung.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - tests/test_construction_ladder
+  lean:
+  - ConstructionLadder
+  - ScaledLadder
+  prose: CONSTRUCTION_LADDER_STUDY.md
+  test:
+  - test_construction_ladder.py
+  wheel: []
+follow_ups: []
+id: CONSTRUCTION_LADDER_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Is reading the substrate at one fixed rung of the Golay–Leech construction ladder a partial
+  system — does escalating the reading across every rung, out from the middle, name more carriers than
+  any single rung can?
+recomputed_by: '`glm_universal.reasoning.ladder_escalation.ladder_escalation_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-the-note-recomputed
+  heading: 1. The note, recomputed
+- anchor: 2-the-ladder-as-it-actually-is
+  heading: 2. The ladder as it actually is
+- anchor: 3-the-escalation-as-declared
+  heading: 3. The escalation, as declared
+- anchor: 4-what-it-measured-the-five-rung-ladder
+  heading: 4. What it measured — the five-rung ladder
+- anchor: 4a-the-ladder-was-too-short
+  heading: 4a. The ladder was too short
+- anchor: 5-what-is-proved-rather-than-measured
+  heading: 5. What is proved rather than measured
+- anchor: 6-limits-and-what-the-next-round-should-take
+  heading: 6. Limits, and what the next round should take
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The construction ladder — the full escalation, generated on the fly, walked out from the middle
+verdict: 'It is a partial system, and the note''s five rungs were too few: escalating across the eleven-rung
+  ladder names 462 of 568 queries correctly with 0 wrong, against 327 for the five-rung ladder and 283
+  for the best single rung.
+
+  The six rungs that were added are not ad-hoc: Construction `A` over the trivial
+
+  code is `2ℤ²⁴` and over the even-weight code is `D₂₄`, so the lattices that
+
+  fill the note''s long step are Construction rungs too, and the scaling `L ↦ 2L`
+
+  generates them. No single rung is best at more than one perturbation, and the
+
+  escalation loses nothing to an oracle that is allowed to pick the rung after
+
+  the fact: 462 is the oracle''s count too. The order of the walk changes the cost
+
+  and not the answer — which is a theorem, not a coincidence — and the sweep over
+
+  ladder lengths finds where that theorem''s hypothesis fails: the ladder stays
+
+  safe to thirteen rungs and breaks at fifteen.'
+wobble_deps: []

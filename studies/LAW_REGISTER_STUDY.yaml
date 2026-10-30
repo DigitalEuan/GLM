@@ -1,0 +1,66 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 10 of 16 exact rows are structural or overclaimed, each citing Lean; 2 of 21 external
+  formulas admitted at p < 1/100 (both m_mu/m_e, 158 and 13204 standard deviations from the measurement);
+  refusing a six-way tie withholds 5 wrong answers per right answer given up; 9 of 9 marks met.
+directives:
+- D7
+evidence: []
+faculty: refusal
+file_refs:
+  code: []
+  lean:
+  - LawRegister
+  - Relaxation
+  prose: LAW_REGISTER_STUDY.md
+  test:
+  - test_law_register.py
+  wheel: []
+follow_ups: []
+id: LAW_REGISTER_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Do the sixty-five laws the earlier GLM-lens review retained hold up when each claim is re-read
+  at GLM resolution, and does anything in them make the GLM reason better?
+recomputed_by: '`glm_universal.reasoning.law_register.law_register_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-declarations-written-before-any-measuring-code
+  heading: 1. Declarations — written before any measuring code
+- anchor: 2-results
+  heading: 2. Results
+- anchor: 3-what-this-round-moved
+  heading: 3. What this round moved
+status: negative
+successors: []
+superseded_by: ''
+supersedes: []
+title: The UBP law register, re-read through the GLM
+verdict: The structural half holds and is now proved or cited in Lean, with three decoder laws made exact
+  and two overclaims refuted; of the numeric half, only the two muon formulas survive the look-elsewhere
+  test, and the GLM now refuses the rest by name.
+wobble_deps: []

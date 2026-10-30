@@ -52,12 +52,12 @@ samples or uses a float.
 
 ## 1. What is built
 
-* `overlay/glm_universal/knowledge/friction.py` — the hold-out model, the
+* `glm_universal/knowledge/friction.py` — the hold-out model, the
   patch and contact predictors, the continuation under both, the folder
   evidence and the two readers.
-* `overlay/glm_universal/knowledge/friction_survey.py` — the perturbations
+* `glm_universal/knowledge/friction_survey.py` — the perturbations
   and the survey over the evaluation's cases.
-* `overlay/glm_universal/knowledge/friction_study.py` — the marks and the
+* `glm_universal/knowledge/friction_study.py` — the marks and the
   stored measurement (`_data/friction.json` and `_data/friction_survey.json`,
   each beside the digest of the code that took it).
 * `python3 -m glm_universal.tools friction [--write] [--survey]` — the
@@ -292,7 +292,7 @@ again after it (`_data/friction_survey_settled.json`):
 
 ## 6. Files
 
-See §1. Tests: `overlay/glm_universal/tests/test_friction.py`.
+See §1. Tests: `glm_universal/tests/test_friction.py`.
 
 ## 7. What came out
 

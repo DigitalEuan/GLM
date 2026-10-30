@@ -1,0 +1,82 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Every testable sentence of the catalogue restated as a claim and given one of four verdicts.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/catalog
+  - reasoning/drift
+  - reasoning/wobble
+  lean:
+  - Harmony
+  - Mantissa
+  - Sturmian
+  prose: GLM_STUDY_CATALOG_AUDIT.md
+  test:
+  - test_glm_study_catalog_audit.py
+  wheel: []
+follow_ups: []
+id: GLM_STUDY_CATALOG_AUDIT
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Which of the supplied catalogue's findings survive recomputation against this package?
+recomputed_by: '`glm_universal.reasoning.catalog.catalog_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: the-four-verdicts
+  heading: The four verdicts
+- anchor: the-result
+  heading: The result
+- anchor: section-13-iteration-drift-over-the-odd-primes
+  heading: Section 1.3 — iteration drift over the odd primes
+- anchor: section-14-the-code-to-lattice-ladder
+  heading: Section 1.4 — the code-to-lattice ladder
+- anchor: section-22-the-cost-of-generating-an-irrational
+  heading: Section 2.2 — the cost of generating an irrational
+- anchor: section-23-the-spectral-signature
+  heading: Section 2.3 — the spectral signature
+- anchor: section-24-the-24-dimensional-hull-census
+  heading: Section 2.4 — the 24-dimensional hull census
+- anchor: section-32-the-53-bit-mantissa-question
+  heading: Section 3.2 — the 53-bit mantissa question
+- anchor: section-4-the-physical-mechanical-engine-family
+  heading: Section 4 — the physical-mechanical engine family
+- anchor: section-5-bit-dynamics-and-reversible-computing
+  heading: Section 5 — bit dynamics and reversible computing
+- anchor: section-61-the-electrical-oscillator
+  heading: Section 6.1 — the electrical oscillator
+- anchor: section-62-the-unified-synthesis-of-homeostasis
+  heading: Section 6.2 — the unified synthesis of homeostasis
+- anchor: what-was-added-to-the-system-by-this-audit
+  heading: What was added to the system by this audit
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The external study findings, tested
+verdict: This study turns it into a live claim ledger.
+wobble_deps: []

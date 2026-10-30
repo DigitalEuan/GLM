@@ -24,26 +24,26 @@ addressing. Each item says what was built, where it lives, and how to see it
 recompute itself.
 
 Everything below is reachable from the package's public API and from the query
-runtime — **<!--figure:query-kinds-->28 query kinds<!--/figure-->**, **<!--figure:report-subjects-->67 report subjects<!--/figure-->** and **<!--figure:registers-->8 registers<!--/figure-->** — is
-covered by the test suite (<!--figure:test-files-->239 test files<!--/figure-->),
+runtime — **<!--figure:query-kinds-->27 query kinds<!--/figure-->**, **<!--figure:report-subjects-->67 report subjects<!--/figure-->** and **<!--figure:registers-->8 registers<!--/figure-->** — is
+covered by the test suite (<!--figure:test-files-->219 test files<!--/figure-->),
 and — where it is a report or a task — has a generated column-3 script that
 recomputes the claim in a **fresh interpreter** and fails if anything differs.
 
 No count in this document is typed by hand twice: every one of them is
 recomputed by `glm_universal/figures.py` into
-[`overlay/FIGURES.md`](overlay/FIGURES.md), and
+[`FIGURES.md`](FIGURES.md), and
 `tests/test_figures.py` fails if a document drifts from it.
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m pytest glm_universal/tests -q
-PYTHONPATH=. python3 GLM.py -q "report migration"          -c 1
-PYTHONPATH=. python3 GLM.py -q "report leech construction" -c 1
-PYTHONPATH=. python3 GLM.py -q "task grid"                 -c 1
-PYTHONPATH=. python3 GLM.py -q "report infinite values"    -c 1
-PYTHONPATH=. python3 GLM.py -q "report capabilities"       -c 1
-PYTHONPATH=. python3 GLM.py -q "report superposition"      -c 1
-PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8
+cd src
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests -q
+PYTHONPATH=src python3 GLM.py -q "report migration"          -c 1
+PYTHONPATH=src python3 GLM.py -q "report leech construction" -c 1
+PYTHONPATH=src python3 GLM.py -q "task grid"                 -c 1
+PYTHONPATH=src python3 GLM.py -q "report infinite values"    -c 1
+PYTHONPATH=src python3 GLM.py -q "report capabilities"       -c 1
+PYTHONPATH=src python3 GLM.py -q "report superposition"      -c 1
+PYTHONPATH=src python3 -m glm_universal.evaluation --jobs 8
 ```
 
 ---
@@ -592,7 +592,7 @@ Phase 175 did not receive were placed in the kit's folder:
 `GLMKit/AxiomAudit.lean`, and the Lean root (`GLMKit.lean`, `lakefile.toml`,
 `lean-toolchain`, uploaded as `lean-toolchain.txt`). The upload had replaced the
 repository's `lakefile.toml` with the kit's; the repository's file
-(`srcDir = "overlay/glm_lean"`) was restored and the kit's kept in its folder.
+(`srcDir = "src/lean"`) was restored and the kit's kept in its folder.
 What the GLM took from them:
 
 * `reasoning/pipeline_kit_crosscheck.py` and `tools pipeline-kit-crosscheck`
@@ -653,7 +653,7 @@ study records, and M narrowed after its first take). Marks: 12 of 12. Tests:
 installed here).
 
 * **Lean** — the kit's seven files under
-  `overlay/glm_lean/RequestProject/GLM/PipelineKit/` (imports renamed,
+  `src/lean/RequestProject/GLM/PipelineKit/` (imports renamed,
   statements and proofs unchanged, 0 `sorry`); `GLM/PipelineInduction.lean`
   (17 theorems, 0 `sorry`): the agreement gate is sound (`agree_sound`), the
   tiered solver's answer is the true rule's whenever the true rule is in the
@@ -724,7 +724,7 @@ and there was no window. Study:
 (7), run by hand: 7 of 7 pass, with `test_resumed_dialogue.py` (7) (pytest is
 not installed here).
 
-* **Lean** — `overlay/glm_lean/RequestProject/GLM/StackedDialogue.lean` (16
+* **Lean** — `src/lean/RequestProject/GLM/StackedDialogue.lean` (16
   theorems, 0 `sorry`, standard axioms): `bound_fits`, `bound_newest`,
   `findIdx_bound`, `findIdx_of_bound`, `reply_reads`, `reply_erases`,
   `reply_closes_one`, `unfit_unread`, `newest_fit_agrees`,
@@ -769,7 +769,7 @@ Study: [`studies/RESUMED_DIALOGUE_STUDY.md`](studies/RESUMED_DIALOGUE_STUDY.md)
 (7), run by hand: 7 of 7 pass, with `test_conversation.py` (37) and
 `test_plan_store.py` (18) (pytest is not installed here).
 
-* **Lean** — `overlay/glm_lean/RequestProject/GLM/ResumedDialogue.lean` (10
+* **Lean** — `src/lean/RequestProject/GLM/ResumedDialogue.lean` (10
   theorems, 0 `sorry`, standard axioms): `run_unrelated`, `run_strip`,
   `foldl_strip`, `resumed_live_eq`, `resumed_least`, `old_rule_drops`,
   `resumed_reads`, `reply_closes`, `newest_supersedes`,
@@ -817,7 +817,7 @@ a corpus that were stale or older than what they described, and are reported. Te
 `tests/test_evidence_in_use.py` (7), run by hand: 7 of 7 pass (pytest is not
 installed here).
 
-* **Lean** — `overlay/glm_lean/RequestProject/GLM/EvidenceInUse.lean` (5
+* **Lean** — `src/lean/RequestProject/GLM/EvidenceInUse.lean` (5
   theorems, 0 `sorry`, standard axioms): `gate_sound`,
   `gate_fails_of_failed`, `gate_absent_ok`, `gate_append`,
   `read_keeps_answer`.
@@ -870,7 +870,7 @@ X1–X8, pre-registered before the measurement). **8 of 9 marks**: X5 missed on
 a mis-written expectation (x5b's law written for the other target), X5′ met.
 Tests: `tests/test_context_frames.py`.
 
-* **Lean** — `overlay/glm_lean/RequestProject/GLM/ContextFrames.lean` (10
+* **Lean** — `src/lean/RequestProject/GLM/ContextFrames.lean` (10
   theorems, 0 `sorry`, standard axioms): `pin_never_changes`,
   `pin_answer_mem`, `pin_same_answer`, `delivered_energy`,
   `stored_energy_half`, `energyWitness_vanishes`, `stored_energy_not_full`,
@@ -946,7 +946,7 @@ interactive testing*). Study:
 (marks L1, A0–A9, P). **13 of 13 marks.** Tests:
 `tests/test_adversarial_dialogue.py`.
 
-* **Lean** — `overlay/glm_lean/RequestProject/GLM/AdversarialDialogue.lean`
+* **Lean** — `src/lean/RequestProject/GLM/AdversarialDialogue.lean`
   (9 theorems, 0 `sorry`): `adversary_live_subset`, `adversary_least`,
   `adversary_resolved_mem`, `contradicted_iff_inconsistent`,
   `conflicting_replies_contradict`, `repeat_reply_idem`,
@@ -980,7 +980,7 @@ marks.** Tests: `tests/test_pi_machine.py` (5), run by hand: 5 of 5 pass, and
 `tests/test_tool_machine.py` 7 of 7, `tests/test_leech_kissing.py` 4 of 4
 (pytest is not installed here).
 
-* **Lean** — `overlay/glm_lean/RequestProject/GLM/PiMachine.lean` (0
+* **Lean** — `src/lean/RequestProject/GLM/PiMachine.lean` (0
   `sorry`, standard axioms): `machin`; `arctan_series_bound`; the loop
   `atStep`/`atH` with `atH_snd_pos`, `atH_div`, `atH_arctan_sum`;
   `pi_series_bound`; `piEnds` and `piEnds_enclose`.
@@ -1021,7 +1021,7 @@ L2, P1, P2, F1, written before the measurement in the same session). **5 of 5
 marks.** Tests: `tests/test_leech_kissing.py` (4), run by hand: 4 of 4 pass,
 and `tests/test_leech_shells.py` 5 of 5 (pytest is not installed here).
 
-* **Lean** — `overlay/glm_lean/RequestProject/GLM/LeechKissing.lean` (0
+* **Lean** — `src/lean/RequestProject/GLM/LeechKissing.lean` (0
   `sorry`): the three parameter families (`octadParams`, `pairParams`,
   `oddParams`) and their images; `minimalShell`; `mem_minimalShell` (the
   finite set is exactly the lattice vectors of squared length 32);
@@ -1054,7 +1054,7 @@ works. Study: [`studies/LEECH_SHELLS_STUDY.md`](studies/LEECH_SHELLS_STUDY.md)
 **6 of 6 marks.** Tests: `tests/test_leech_shells.py` (5), run by hand: 5 of
 5 pass (pytest is not installed here).
 
-* **Lean** — `overlay/glm_lean/RequestProject/GLM/LeechShells.lean` (0
+* **Lean** — `src/lean/RequestProject/GLM/LeechShells.lean` (0
   `sorry`): `IsLeech` (Conway's construction), `minimal_shape`,
   `minimal_even_support`, `minimal_odd_pattern`; the counting procedure
   `patternCount`/`shellCount` with `minimal_pattern_counts`,
@@ -4850,7 +4850,7 @@ round starts from N5, the AST index study's §8, the citation-scope study's
 * `reasoning/_data/ast_index_frozen.json` — the frozen index: every
   statement-level expression (assignment, augmented or annotated
   assignment, `return`) that computes something, 3,438 from
-  `overlay/glm_universal` and 8,231 from `source_material/GLM-main.zip`,
+  `glm_universal` and 8,231 from `source_material/GLM-main.zip`,
   with its file, line and text, beside the SHA-256 of its content
   (`tools ast-index --freeze`).
 * `reasoning/ast_index.py` (new) — the structural form (keywords and exact
@@ -5114,7 +5114,7 @@ the dependency operation's marks D1–D4 before any of its code.
   `scoped_cited_names`, `goal_citations`). `citation_graph` is that reader;
   `legacy_citation_graph` keeps the old one as the record. The type words of
   the carrier coordinates count whole identifiers (`type_words`).
-* `glm_lean/tools/CitationReference.lean` and
+* `src/lean/tools/CitationReference.lean` and
   `reasoning/citation_reference.py` — the elaborator's own constant graph
   (11,790 constants) stored beside the Lean tree's digest, and the audit of
   any reader against it.
@@ -6206,10 +6206,10 @@ than the round's own work. The measurements are
 procedure is [`ITERATE.md`](ITERATE.md).
 
 **One Lean copy.** The development was held twice — `RequestProject/` at the
-root and `overlay/glm_lean/RequestProject/` — with an instrument that checked
+root and `src/lean/RequestProject/` — with an instrument that checked
 they were identical and a `tools lean-mirror` step that copied one onto the
 other. The root copy is gone; `lakefile.toml` builds the overlay copy in place
-(`srcDir = "overlay/glm_lean"`), and the mirror step and the
+(`srcDir = "src/lean"`), and the mirror step and the
 `lean-copies-identical` instrument are retired (six instruments remain). Every
 path that named the root copy (tests, the decoder-confidence, held-precision
 and law-absorption marks, study links) now names the overlay copy.
@@ -6223,7 +6223,7 @@ development. The generated regions of a document — every
 from the digest of any unit that only reads the document; only the three
 modules that render those regions digest them raw. So the counts that change
 every round live in one registry (`corpus/render.py`, recomputed into
-[`overlay/FIGURES.md`](overlay/FIGURES.md)), and a sign-off that moves a count
+[`FIGURES.md`](FIGURES.md)), and a sign-off that moves a count
 no longer makes the units that quote it stale — the circular re-check the
 owner described.
 
@@ -7244,7 +7244,7 @@ the machine answers changed.
 
 **What was brought in.** The Lean that the Phase 60 ledger named as left, and
 that was small enough to take whole, is rebuilt under this repository's
-`lake build` and mirrored into `overlay/glm_lean/`:
+`lake build` and mirrored into `src/lean/`:
 `RequestProject/GLM/Distinction.lean` (Stage 0 of the first-principles
 sub-study), `RequestProject/GLM/SeedRoles.lean` (the archive's `Seeds`,
 `Fibre`, `Cheapest`, `Independence` and the rest of `OneParameter`) and
@@ -7370,7 +7370,7 @@ dictionaries disagree, a load and a reference of different dimensions, a
 formula the axioms do not reach). Five of its 53 correct answers are
 **address** and none is **table**.
 
-**Pre-registration first.** `overlay/glm_universal/evaluation/engineering_heldout.py`
+**Pre-registration first.** `glm_universal/evaluation/engineering_heldout.py`
 was committed on its own before any engineering code (63 questions, labels
 from textbook physics); both existing paths scored 0 correct and 53 refused on
 it. A 38-question stress set was written after the first run and committed
@@ -7378,7 +7378,7 @@ before being run; its first run (27 correct, 10 correct refusals, 1 scored
 wrong — a label-format artifact, recorded and not edited) is frozen in
 `STRESS_FIRST_RUN`.
 
-**What was built.** `overlay/glm_universal/engineering/`: `wheels.py`
+**What was built.** `glm_universal/engineering/`: `wheels.py`
 (relation vectors, span membership with certificates, the ten wheels and 41
 cases verbatim, dimensions at the reference, EXT10 and SI7 layers),
 `smith.py` (Gaussian-rational Smith chart, 16 checks, exact L-section
@@ -7432,7 +7432,7 @@ arithmetic, conversions over declared definitions, comparisons and folds
 reached from English) and **refusal** (two licensed readings that disagree
 are refused, both named), and most of its gains are **table**.
 
-**Pre-registration first.** `overlay/glm_universal/evaluation/heldout.py` was
+**Pre-registration first.** `glm_universal/evaluation/heldout.py` was
 committed on its own at `8064795`, before the planner existed: sixty new
 phrasings of the twenty probe questions, thirty compositions of the same
 operations over rows the probe never names, and twenty adversarial questions
@@ -7443,7 +7443,7 @@ first run (28 correct, 13 refused, 6 correct refusals, none wrong) is frozen
 in `glm_universal.reasoning.typed_plans.STRESS_FIRST_RUN`, and every later
 figure on it is reported beside that one.
 
-**What was built.** `overlay/glm_universal/runtime/semantic_plan.py`: fourteen
+**What was built.** `glm_universal/runtime/semantic_plan.py`: fourteen
 frames, a grounder that names a row only by the field surface's own aliases
 and a field only among the fields that row answers to, exact integer
 arithmetic (primality with a witness, n-ary gcd and lcm, quotients as exact
@@ -8138,7 +8138,7 @@ remaining, the release. Running it failed six units, none of them noise:
 
 **What the release now says.** `signoff --verify-release` reports **99 of 99
 test files and 7 of 7 instruments** signed with the exhaustive cases on; the
-suite is **<!--figure:suite-->5,397 tests across 181 of the 183 test files, 18,972 subtests, outside the document checks<!--/figure-->**,
+suite is **<!--figure:suite-->(not yet measured: suite)<!--/figure-->**,
 one process with `GLM_EXHAUSTIVE=1` collecting 3,979; the end-to-end
 evaluation is **157 / 157** with 19 expected refusals; `corpus --check` is
 current; and `lake build` is clean over 120 Lean files with no `sorry`.
@@ -8208,9 +8208,9 @@ loop — identical output, and the wobble landscape cache re-taken after the
 change differs only in the digest of the code it was taken from.
 
 **Where it lives.** `RequestProject/GLM/NowReceipt.lean` (nine theorems, no
-`sorry`), `overlay/glm_universal/reasoning/now_receipt.py`,
-`overlay/glm_universal/reasoning/now_float_control.py`,
-`overlay/glm_universal/tests/test_now_receipt.py`,
+`sorry`), `glm_universal/reasoning/now_receipt.py`,
+`glm_universal/reasoning/now_float_control.py`,
+`glm_universal/tests/test_now_receipt.py`,
 [`studies/NOW_RECEIPT_STUDY.md`](studies/NOW_RECEIPT_STUDY.md).
 
 **What it deliberately left.** The v4 query-loop reading ("6 of 6 resolved")
@@ -8287,10 +8287,10 @@ that total plus the 28 tests of the document check. The evaluation is back at
 **157 / 157**, `corpus --check` is **current**, `lake build` is clean with no
 `sorry`, and both Lean copies are identical.
 
-**Where it is.** `overlay/glm_universal/reasoning/lean_address.py`
+**Where it is.** `glm_universal/reasoning/lean_address.py`
 (`_group_squared_distance_sum`, `nearest_points`,
 `nearest_points_exhaustive`), the new cases in
-`overlay/glm_universal/tests/test_lean_address.py`, and §7 of
+`glm_universal/tests/test_lean_address.py`, and §7 of
 [`studies/LEAN_ADDRESS_STUDY.md`](studies/LEAN_ADDRESS_STUDY.md).
 
 ---
@@ -8376,9 +8376,9 @@ check it leaves out. The end-to-end evaluation is **157 / 157** (138 answered,
 `sorry`, both Lean copies identical, and `corpus --check` **current** with the
 document checks holding and every inline figure fresh.
 
-**Where it is.** `overlay/glm_universal/reasoning/lean_book.py`,
+**Where it is.** `glm_universal/reasoning/lean_book.py`,
 `reasoning/lean_address.py` (schema 2), `runtime/fields.py`,
-`overlay/glm_universal/corpus/gate.py`, `corpus/__main__.py` (`--check --all`),
+`glm_universal/corpus/gate.py`, `corpus/__main__.py` (`--check --all`),
 the new cases in `tests/test_signoff.py`, `tests/test_corpus.py` and
 `tests/test_field_surface.py`, §5e and §5f of
 [`studies/ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md), and
@@ -8460,7 +8460,7 @@ surface's counterpart of `GLM.Recipe.Spec.answer_eq_none_iff`), `lookup_sound`
 and `lookup_cons_of_some` with `lookup_append_of_isSome` (priority is
 monotone, so extending the surface cannot change an existing answer).
 
-**Where it is.** `overlay/glm_universal/runtime/fields.py`, the `field` branch
+**Where it is.** `glm_universal/runtime/fields.py`, the `field` branch
 of `runtime/parser.py` with its `START_ONLY` set, `_solve_field` in
 `runtime/session.py`, the `field` script template in `runtime/tct_engine.py`,
 `glm_universal/reasoning/field_surface.py` (the measurement),
@@ -8542,7 +8542,7 @@ sample, so the headline reads the same twenty questions three ways),
 can only ever move a question into `surface`, so the experiment cannot flatter
 the grammar).
 
-**Where it is.** `overlay/glm_universal/reasoning/probe_oracle.py`,
+**Where it is.** `glm_universal/reasoning/probe_oracle.py`,
 `glm_universal/tests/test_probe_oracle.py` (18 cases),
 `glm_universal/corpus/render.py` (two generated blocks and six inline
 figures), `glm_universal/tools.py` (`tools oracle`),
@@ -8619,7 +8619,7 @@ pattern, so any document stating a number of standing rules is checked against
 the document that states them — directive **D6** applied to the rules
 themselves.
 
-**Where it is.** `overlay/glm_universal/signoff/rules.py` (the rule),
+**Where it is.** `glm_universal/signoff/rules.py` (the rule),
 `signoff/ledger.py` (`stale_groups`, `reason`, `impact`),
 `signoff/__main__.py` (`--why`, `--impact`),
 `glm_universal/figures.py` and `corpus/render.py` (the directive figure),
@@ -8692,7 +8692,7 @@ had survived in the number-theory paper now points there;
 directives document keeps the rules and the round protocol, with the long-form
 rationale of each rule moved to
 [`archive/PROJECT_DIRECTIVES_RATIONALE_ARCHIVE.md`](archive/PROJECT_DIRECTIVES_RATIONALE_ARCHIVE.md);
-and [`overlay/README.md`](overlay/README.md) is brought up to date with all of
+and [`glm_universal/README.md`](glm_universal/README.md) is brought up to date with all of
 it.
 
 ---
@@ -9055,7 +9055,7 @@ answers and the same refusals.
 *The closed phases that used to follow live in
 [`archive/MASTER_PLAN_ARCHIVE.md`](archive/MASTER_PLAN_ARCHIVE.md), unchanged.  The counts in
 them were true when each phase was closed and are deliberately left alone; for
-the project as it is now, see [`overlay/FIGURES.md`](overlay/FIGURES.md), which
+the project as it is now, see [`FIGURES.md`](FIGURES.md), which
 is regenerated from the code.*
 
 ---
@@ -9472,7 +9472,7 @@ stack cannot cost anything where the leader is strong — and `relay_carry`,
 which says whatever a faculty holds inside its quota survives into the
 answer's window, so a faculty that has the answer cannot be drowned out by the
 ones that do not. `vision_stack.py` runs the identical relay in a register
-with no text in it — 50 ARC training puzzles under `overlay/arc_agi_17` — where
+with no text in it — 50 ARC training puzzles under `arc_agi_17` — where
 an eight-dimension visual look removes **95.3 %** of 1,089 proposals before the
 expensive check sees them and the relay solves a puzzle its leading faculty
 does not. `report relay`. Write-up:
@@ -10102,7 +10102,7 @@ refused outright by `measurements.StaleAddressBook` rather than producing the
 previous tree's figures under the current tree's digest. **The Lean tree's
 second copy is generated** on the same terms as `DIGEST.md`:
 `python3 -m glm_universal.tools lean-mirror` reports whether
-`overlay/glm_lean/RequestProject/GLM` agrees with the compiled copy and
+`src/lean/RequestProject/GLM` agrees with the compiled copy and
 `--write` makes it agree, so the two are no longer kept in step by hand.
 Write-up: [`ITERATION_COST_STUDY.md`](studies/ITERATION_COST_STUDY.md).
 
@@ -10239,7 +10239,7 @@ does when they answer together, and the answer is in
   a faculty that has the answer cannot be drowned out by the ones that do not;
 * **the same stack in a register with no text in it.** `vision_stack.py` runs
   the identical relay over the 50 ARC training puzzles kept under
-  `overlay/arc_agi_17/data/training`, with a generator, an eight-dimension
+  `source_material/arc_agi_17/data/training`, with a generator, an eight-dimension
   visual filter and a cross-domain word check: the cheap look removes **95.3 %**
   of the 1,089 proposals before the expensive verification gate sees them, two
   different faculties supply the rule that verifies, and the relay solves a
@@ -10472,7 +10472,7 @@ distinct addresses, nearest-by-address sharing a file **609 / 3,100** against
 **207** queries at hit@5 **39.1 %** against **6.3 %** chance with the text
 control still ahead at **85.0 %** — and the hand-written passages of this
 document and of the overlay's README, which still quoted the smaller corpus,
-were brought to those measurements. `overlay/FIGURES.md` was regenerated and
+were brought to those measurements. `FIGURES.md` was regenerated and
 `python3 -m glm_universal.corpus --check` reports `current`.
 
 A full release run — every test file in its own process with the exhaustive
@@ -10512,7 +10512,7 @@ documents quoted a sentence no run had produced; a full release run re-measured
 them, with every test file and all **7** instruments passing — the sentence the
 documents carry is re-earned by each release run, and as of the round above it
 reads **3,436 tests across 82 of the 83 test files, 12,836 subtests, outside the document check**
-— and `overlay/FIGURES.md`, which had also frozen the package version at
+— and `FIGURES.md`, which had also frozen the package version at
 1.15.0 against the code's 1.16.0, was regenerated from the code. The two
 hand-typed corpus figures in this document were re-derived with them (688
 sections → **708**; the tier-0 read **2,548** words against roughly
@@ -10657,7 +10657,7 @@ three §3.4 hands over. The parts of `source_material/GLM-main.zip` the brief
 named were gone through script by script and asked one question: is there a
 claim here that can be stated as a theorem and checked? **25 files of Lean,
 7,170 lines, 848 declarations** came back, building against the pinned Mathlib
-with no `sorry` and mirrored in `overlay/glm_lean/` — the MOG cube, the lattice
+with no `sorry` and mirrored in `src/lean/` — the MOG cube, the lattice
 shortcut, the three generations of the paper's formal companion, the
 electromagnetic calibration, the first-principles sub-study, the projection
 sub-study, the graded cost model, spatial arithmetic and the ARC-era reasoning

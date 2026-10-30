@@ -231,34 +231,11 @@ by that one section at others, and the generated block below gives the
 current reading. The document mark is a draw, not a result either way.
 
 <!-- generated: nativeparity-lean -->
-| queries | ranking | hit@1 | hit@3 | hit@5 | hit@10 | precision@5 | MRR@10 |
-|---|---|---|---|---|---|---|---|
-| declarations | *address* — the shipped raw Leech distance | 49 | 66 | 77 | 97 | 11.4 % | 0.298 |
-| declarations | *features* — the raw structural vector (the standard) | 49 | 71 | 81 | 99 | 12.2 % | 0.306 |
-| declarations | *features2* — raw structural, then raw lexical (like for like) | 56 | 80 | 87 | 108 | 13.1 % | 0.343 |
-| declarations | **native** — read-back, then Leech distance, then name | 51 | 69 | 79 | 99 | 11.8 % | 0.307 |
-| declarations | **native2** — structural book, then lexical book, each in two layers | 56 | 80 | 87 | 108 | 13.1 % | 0.343 |
-| goals | *address* — the shipped raw Leech distance | 5 | 8 | 8 | 14 | 2.6 % | 0.069 |
-| goals | *features* — the raw structural vector (the standard) | 5 | 10 | 11 | 16 | 3.2 % | 0.078 |
-| goals | *features2* — raw structural, then raw lexical (like for like) | 7 | 11 | 14 | 18 | 3.6 % | 0.099 |
-| goals | **native** — read-back, then Leech distance, then name | 5 | 9 | 10 | 17 | 3.0 % | 0.075 |
-| goals | **native2** — structural book, then lexical book, each in two layers | 7 | 11 | 14 | 18 | 3.6 % | 0.099 |
-
-207 declaration queries and 101 goal queries over 4,739 declarations.  The read-back is exact for 4,739 of 4,739 stored addresses and 101 of 101 goal addresses (largest residue 3, covering radius 4).  `native` at least matches `features` on the declarations: no; on the goals: no.  `native2` at least matches `features`: yes and yes; and `features2`, like for like: yes and yes.
+The native-parity measurements do not describe the sources, the Lean tree and the corpus as they now stand, so nothing is reported here.  Run `PYTHONPATH=. python3 -m glm_universal.tools native-parity --write`.
 <!-- end generated -->
 
 <!-- generated: nativeparity-documents -->
-| ranking | queries with a hit at 5 | precision@5 |
-|---|---|---|
-| *lexical* — the shipped raw Leech distance | 15 / 60 | 6.3 % |
-| **lexical_native** — read-back, then Leech distance, then name | 17 / 60 | 7.0 % |
-| **lexical_native2** — lexical book, then structural book, each in two layers | 17 / 60 | 7.0 % |
-| *lexical_raw* — the raw lexical vector (the standard) | 17 / 60 | 7.0 % |
-| *lexical_raw2* — raw lexical, then raw structural (like for like) | 17 / 60 | 7.0 % |
-| *text* — word overlap, ties by name (the shipped live ranking) | 46 / 60 | 38.0 % |
-| **text_native** — word overlap, ties by lexical Leech distance | 47 / 60 | 38.3 % |
-
-60 section queries over 1,613 sections; the read-back is exact for 1,613 of 1,613 lexical addresses.  `lexical_native` at least matches `lexical_raw`: yes; `lexical_native2` at least matches it: yes, and `lexical_raw2` like for like: yes; `text_native` at least matches `text`: yes.
+The native-parity measurements do not describe the sources, the Lean tree and the corpus as they now stand, so nothing is reported here.  Run `PYTHONPATH=. python3 -m glm_universal.tools native-parity --write`.
 <!-- end generated -->
 
 ### 3.3 The live document ranking
@@ -281,33 +258,13 @@ metric it was read with, not what it held: the address held the move count all
 along, and reading it in two layers recovers it.
 
 <!-- generated: nativeparity-controller -->
-| scorer | solved | minimal | verified | proposals scored |
-|---|---|---|---|---|
-| *address* — the shipped Leech distance at scale 9 | 18 / 24 | 17 | 18 | 5,020 |
-| *carrier* — the undecoded carrier | 17 / 24 | 17 | 17 | 4,940 |
-| *exponent* — the exact move count (the standard) | 24 / 24 | 24 | 24 | 2,140 |
-| **readback** — moves counted on the read-back of the Leech addresses | 24 / 24 | 24 | 24 | 2,140 |
-
-The read-back scorer meets its mark (24 of 24, all minimal, all verified, the same proposals as the exact scorer): yes.
+The native-parity measurements do not describe the sources, the Lean tree and the corpus as they now stand, so nothing is reported here.  Run `PYTHONPATH=. python3 -m glm_universal.tools native-parity --write`.
 <!-- end generated -->
 
 ### 3.5 Every mark
 
 <!-- generated: nativeparity-marks -->
-| mark | what it asks | outcome |
-|---|---|---|
-| **N1** | `native` ≥ `features` at every k and MRR@10 (declarations) | **not met** |
-| **N1_address** | `native` ≥ the shipped `address` (declarations) | met |
-| **N2** | `native` ≥ `features` at every k (goals) | **not met** |
-| **N3** | every read-back exact (stored and goal addresses) | met |
-| **N4a** | `lexical_native` ≥ `lexical_raw` (documents) | met |
-| **N4b** | `text_native` ≥ `text` (documents, the live ranking) | met |
-| **N5** | `readback` scorer: 24 of 24, minimal, verified, same proposals | met |
-| **N6** | `native2` ≥ `features` (declarations and goals) | met |
-| **N7** | `native2` ≥ `features2`, like for like | met |
-| **N8** | `lexical_native2` ≥ `lexical_raw` and `lexical_raw2` | met |
-
-8 of 10 marks met.
+The native-parity measurements do not describe the sources, the Lean tree and the corpus as they now stand, so nothing is reported here.  Run `PYTHONPATH=. python3 -m glm_universal.tools native-parity --write`.
 <!-- end generated -->
 
 **Re-read at the close of Phase 71.** Phase 71's Lean file moved the corpus
@@ -406,7 +363,7 @@ is recorded, not taken.
 ## 4. The Lean file
 
 `RequestProject/GLM/NativeParity.lean` (mirrored under
-`overlay/glm_lean/RequestProject/GLM/`) proves, with the standard axioms only:
+`glm_lean/RequestProject/GLM/`) proves, with the standard axioms only:
 
 * `readbackCoord_eq`, `readback_eq`, `readback_eq_leech` — the read-back
   `round(p / s)` of a point `p = s·f + e` with `2|e| < s` is exactly `f`; at

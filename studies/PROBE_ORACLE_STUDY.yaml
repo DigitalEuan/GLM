@@ -1,0 +1,72 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: The parser is worth <!--figure:oracle-parser-worth-->4<!--/figure--> questions of <!--figure:oracle-questions-->20<!--/figure-->;
+  a surface onto what the registers already hold is worth <!--figure:oracle-surface-->10<!--/figure-->.
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - tests/test_probe_oracle
+  lean: []
+  prose: PROBE_ORACLE_STUDY.md
+  test:
+  - test_probe_oracle.py
+  wheel: []
+follow_ups: []
+id: PROBE_ORACLE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: The language probe refuses seventeen of twenty questions. How many of those refusals are the
+  parser, and how many are the system having nothing to say?
+recomputed_by: '`glm_universal.reasoning.probe_oracle.oracle_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-what-this-experiment-is
+  heading: 1. What this experiment is
+- anchor: 2-the-three-things-a-translation-can-find
+  heading: 2. The three things a translation can find
+- anchor: 3-the-split
+  heading: 3. The split
+- anchor: 4-question-by-question
+  heading: 4. Question by question
+- anchor: 5-what-each-class-turned-out-to-contain
+  heading: 5. What each class turned out to contain
+- anchor: 6-what-it-decides
+  heading: 6. What it decides
+- anchor: 7-limits
+  heading: 7. Limits
+- anchor: 8-re-running-it
+  heading: 8. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Hand-translating the probe — separating *cannot parse* from *cannot answer*
+verdict: 'The seventeen refusals are three different failures: written into the system''s own query grammar,
+  six of the twenty questions are answered against two asked in English, ten more are held by a register
+  row or a shipped function that no query kind returns, and four are held by nothing at all, where the
+  refusal is right.'
+wobble_deps: []

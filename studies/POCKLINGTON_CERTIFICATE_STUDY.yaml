@@ -1,0 +1,82 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: '6 of 7 marks. First held-out set: 0 wrong, but 0 of the 5 primes Phase 139 refused certified
+  (the missed mark; 5 of 5 with the later N+1 certificate, counted post hoc). Second held-out set: 0 wrong,
+  13 of 13 primes certified (1 without N+1). 9 of 9 chains verified in a fresh interpreter, 36 of 36 mutants
+  and 46 of 46 tampered certificates caught; 0 of 304 previously certified numbers and 0 of 30 stepwise
+  cases changed.'
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - evaluation/pocklington_certificate_cases
+  - reasoning/primality_certificate
+  - tests/test_pocklington_certificate
+  lean:
+  - LucasCertificate
+  - PocklingtonCertificate
+  - PrimalityCertificate
+  prose: POCKLINGTON_CERTIFICATE_STUDY.md
+  test:
+  - test_pocklington_certificate.py
+  wheel: []
+follow_ups: []
+id: POCKLINGTON_CERTIFICATE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 139
+predecessors: []
+question: Can primes that Phase 139 refused because their `p - 1` does not factor within the work budget
+  be certified instead, by certificates proved sound in Lean that need only part of `p - 1` (Pocklington)
+  or the factorisation of `p + 1` (N+1), without changing any answer Phase 139 gave?
+recomputed_by: '`glm_universal.evaluation.pocklington_certificate_cases.measure`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-was-built
+  heading: 1. What was built
+- anchor: 2-what-is-proved
+  heading: 2. What is proved
+- anchor: 3-the-held-out-sets-evaluationpocklington_certificate_casespy
+  heading: 3. The held-out sets (`evaluation/pocklington_certificate_cases.py`)
+- anchor: 4-the-marks
+  heading: 4. The marks
+- anchor: 5-the-measurement
+  heading: 5. The measurement
+- anchor: 6-what-this-round-does-not-do
+  heading: 6. What this round does not do
+- anchor: 7-files
+  heading: 7. Files
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Pocklington and N+1 certificates — primes whose `p - 1` will not split
+verdict: Partly, and in two stages. The Pocklington certificate alone certifies `2^521 - 1` but none of
+  the five primes the first held-out set left refused, so the first set's pre-declared mark failed. Those
+  five all have a smooth `p + 1`, so an N+1 certificate was added and scored on a second, fresh held-out
+  set, where it certified 13 of 13 primes with no wrong verdict. Both certificates are proved sound in
+  Lean, and no answer Phase 139 gave moved. 6 of 7 marks were met.
+wobble_deps: []

@@ -1,0 +1,83 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: '8 of 10 marks; dialogues 13/13 confirmed on the truth, 0 wrong, 15 replies in all (each
+  run at most `n - 1` and `Nat.clog 2 n + 1`); column 3 41/41 turns verified, 43/43 altered claims rejected;
+  one false reply 13/13 contradicted, 0 wrong; full registers 387/387 resolved, 0 wrong, 1280 questions
+  (Phase 145: 1280); frozen path 198/198 present and same status, 194 same text.'
+directives:
+- D1
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - reasoning/answering_question
+  - reasoning/timed_question
+  - runtime/conversation
+  - runtime/session
+  - runtime/tct_engine
+  - tests/test_answering_question
+  lean:
+  - AnsweringQuestion
+  prose: ANSWERING_QUESTION_STUDY.md
+  test:
+  - test_answering_question.py
+  wheel: []
+follow_ups: []
+id: ANSWERING_QUESTION_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 145
+predecessors: []
+question: Can the question Phase 145 computed for a tie be put into the GLM's own answer, and the reply
+  taken as the conversation's next turn, without moving any answer the evaluation pins?
+recomputed_by: '`glm_universal.reasoning.answering_question.answering_question_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved-before-any-code
+  heading: 1. What is proved before any code
+- anchor: 2-the-rule
+  heading: 2. The rule
+- anchor: 3-the-dialogues-declared-here
+  heading: 3. The dialogues declared here
+- anchor: 4-the-marks-declared-before-the-measurement
+  heading: 4. The marks, declared before the measurement
+- anchor: 5-what-this-round-does-not-do
+  heading: 5. What this round does not do
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-what-came-out
+  heading: 7. What came out
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The question in the answering path — a reply is the next turn
+verdict: Yes. A `locate` junction answer now ends with the question that would split it, and a reply typed
+  as the next turn is read as an answer to it. 13 of 13 dialogues end confirmed on the member meant, with
+  0 wrong. A false reply always ends in a refused contradiction. Every turn is verified by column 3. The
+  frozen path keeps all 198 statuses. 8 of 10 marks were met. F1 and R1 were missed only because the round's
+  four new evaluation cases moved two evaluation-set counts and one census of earlier texts, causes the
+  pre-registration did not name.
+wobble_deps: []

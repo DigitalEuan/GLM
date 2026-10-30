@@ -1,0 +1,65 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 36 of 36 declared substrate questions answered or refused as declared through the typed
+  planner, 0 wrong, against 0 answered before the round; 0 of 4687 existing evaluation texts read by the
+  new frame; 8 of 8 marks met.
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - evaluation/law_absorption_cases
+  lean:
+  - LawAbsorption
+  prose: LAW_ABSORPTION_STUDY.md
+  test:
+  - test_law_absorption.py
+  wheel: []
+follow_ups: []
+id: LAW_ABSORPTION_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 74
+predecessors: []
+question: Which of the sixty-five retained UBP laws, tested one by one and corrected where they overclaim,
+  can the GLM actually use, and does using them make it reason better?
+recomputed_by: '`glm_universal.reasoning.law_absorption.law_absorption_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-why-this-round-and-what-it-is-not
+  heading: 0. Why this round, and what it is not
+- anchor: 1-declarations-written-before-any-code-of-this-round
+  heading: 1. Declarations — written before any code of this round
+- anchor: 2-results
+  heading: 2. Results
+- anchor: 3-what-this-round-moved
+  heading: 3. What this round moved
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The UBP laws absorbed — each law tested, improved where it can be, and put to use
+verdict: 'Eleven laws are absorbed as computed self-knowledge of the substrate: questions the GLM refused
+  before this round are now answered from the running code. Two were already GLM definitions, three were
+  retested in dimensionless form and refused, and forty-nine are retired with a reason each.'
+wobble_deps: []

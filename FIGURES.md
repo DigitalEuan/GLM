@@ -14,7 +14,7 @@ Two rows are measured from outside the package and are marked as such: the colle
 
 ## At a glance
 
-**8 registers** holding 1143 carriers, reached through **28 query kinds** of which one dispatches **67 report subjects**; **118 elements** and **51 molecules**; **357 meanings** in the lexicon; **33 probes** of which 20 hold and 13 break; **223 cases** end to end; **226 test files**; **253 Lean files** carrying 0 sorries.
+**8 registers** holding 1143 carriers, reached through **27 query kinds** of which one dispatches **67 report subjects**; **118 elements** and **51 molecules**; **357 meanings** in the lexicon; **33 probes** of which 20 hold and 13 break; **223 cases** end to end; **219 test files**; **425 Lean files** carrying 1 sorries.
 
 ## Sentences
 
@@ -22,14 +22,13 @@ Quote these verbatim.  `tests/test_figures.py` finds every phrase of the shape i
 
 | name | sentence | shape | counts |
 |---|---|---|---|
-| `directives` | 17 standing rules | `\b\d+ standing rules\b` | how many rules there are |
+| `directives` | 19 standing rules | `\b\d+ standing rules\b` | how many rules there are |
 | `evaluation_cases` | 223 CLI cases | `\b\d+ CLI cases\b` | the evaluation set |
-| `lean_files` | 253 Lean files | `\b\d+ Lean files\b` | the Lean development |
-| `query_kinds` | 28 query kinds | `\b\d+ query kinds\b` | how many query kinds |
+| `lean_files` | 425 Lean files | `\b\d+ Lean files\b` | the Lean development |
+| `query_kinds` | 27 query kinds | `\b\d+ query kinds\b` | how many query kinds |
 | `registers` | 8 registers | `\b\d+ registers\b` | how many registers there are |
 | `report_subjects` | 67 report subjects | `\b\d+ report subjects\b` | how many subjects |
-| `suite` | 5,397 tests across 181 of the 183 test files, 18,972 subtests, outside the document checks | `\b[\d,]+ tests across \d+(?: of the \d+)? test files, [\d,]+ subtests(?:, outside the document checks?)?` | what a complete run counts |
-| `test_files` | 226 test files | `\b\d+ test files\b` | how many test files |
+| `test_files` | 219 test files | `\b\d+ test files\b` | how many test files |
 
 ## Package surface
 
@@ -38,17 +37,17 @@ Quote these verbatim.  `tests/test_figures.py` finds every phrase of the shape i
 | `version` | 1.23.0 |
 | `subpackages` | substrate, data_objects, reasoning, semantics, recipe, language, runtime, migration, benchmarks, capabilities, evaluation |
 | `subpackage_count` | 11 |
-| `modules_by_subpackage` | substrate 13, data_objects 14, reasoning 218, semantics 6, recipe 4, language 7, runtime 79, migration 3, benchmarks 2, capabilities 3, evaluation 55 |
-| `module_count` | 404 |
-| `query_kinds` | verify, analogy, describe, nearest, product, cluster, spatial, project, trilinear, coherence, report, angle, task, pi_groups, meaning, real, compare, measure, comparative, derive, field, ordering, extremum, carrier, locate, hole, corpus, unknown |
-| `query_kind_count` | 28 |
+| `modules_by_subpackage` | substrate 13, data_objects 14, reasoning 229, semantics 6, recipe 4, language 7, runtime 77, migration 3, benchmarks 2, capabilities 3, evaluation 54 |
+| `module_count` | 412 |
+| `query_kinds` | verify, analogy, describe, nearest, product, cluster, spatial, project, trilinear, coherence, report, angle, task, pi_groups, meaning, real, compare, measure, comparative, derive, field, ordering, extremum, carrier, locate, hole, unknown |
+| `query_kind_count` | 27 |
 | `report_subjects` | relations, leech distribution, theta, subalgebra, information loss, golay decoding, superposition, leech construction, facets, monster stack, multiresolution, migration, state migration, concept store, fusion, benchmarks, semantics, infinite values, capabilities, analogies, conjugates, completion, vagueness, admission, transform decoder, deep holes, units, molecules, chemistry coverage, blueprint, reversible, mantissa, engine, noise, signature, drift, catalog, containers, companion, lattices, shells, llvq, harmony, economics, lean, directives, pipeline, escalation, measure, names, recipe, language, searchloop, retrieval, relay, anonymous, controller, generated, landscape, hole classifier, hole ladder, hole failures, hole configuration, cumulativity, query escalation, review sweep, routes |
 | `report_subject_count` | 67 |
 | `domains` | physics, chemistry, molecules, mathematics, lexicon, spatial, harmonics, economics |
 | `domain_count` | 8 |
 | `tasks` | grid, physics, concepts |
 | `task_count` | 3 |
-| `directive_count` | 17 |
+| `directive_count` | 19 |
 
 ## Registers
 
@@ -121,13 +120,13 @@ Quote these verbatim.  `tests/test_figures.py` finds every phrase of the shape i
 | `nodes_by_kind` | compound 29, dimension 156, element 118, number 39, operation 8, quantity 7 |
 | `isolated_meanings` | 73 |
 | `collapsed_meanings` | 250 |
-| `inherited_concepts` | 4282 |
-| `inherited_grounded` | 83 |
-| `inherited_edges` | 4015 |
-| `inherited_derivable_edges` | 2 |
-| `inherited_edge_classes` | about_the_pipeline 39, derivable 2, endpoint_ungrounded 815, not_derivable 2, proximity_artefact 3157 |
-| `mean_hamming_related` | 4547/376 |
-| `mean_hamming_unrelated` | 12077/1009 |
+| `inherited_concepts` | 0 |
+| `inherited_grounded` | 0 |
+| `inherited_edges` | 0 |
+| `inherited_derivable_edges` | 0 |
+| `inherited_edge_classes` | (none) |
+| `mean_hamming_related` | None |
+| `mean_hamming_unrelated` | None |
 
 ## Capability probes
 
@@ -171,28 +170,16 @@ Quote these verbatim.  `tests/test_figures.py` finds every phrase of the shape i
 
 | figure | value |
 |---|---|
-| `root` | glm_lean |
-| `files` | 253 |
-| `lines` | 66568 |
-| `sorries` | 0 |
-| `file_names` | RequestProject/GLM/Address.lean, RequestProject/GLM/AddressRead.lean, RequestProject/GLM/Admission.lean, RequestProject/GLM/AdversarialDialogue.lean, RequestProject/GLM/AffineOutput.lean, RequestProject/GLM/Agree.lean, RequestProject/GLM/AlignmentPoints.lean, RequestProject/GLM/Anonymous.lean, RequestProject/GLM/AnsweringQuestion.lean, RequestProject/GLM/AstIndex.lean, RequestProject/GLM/BudgetReading.lean, RequestProject/GLM/Calibration.lean, RequestProject/GLM/CarriedFork.lean, RequestProject/GLM/CarriedRead.lean, RequestProject/GLM/Cascade.lean, RequestProject/GLM/CellGuard.lean, RequestProject/GLM/CelsiusRegister.lean, RequestProject/GLM/CertifiedStreams.lean, RequestProject/GLM/CitationScope.lean, RequestProject/GLM/CognitionRoundTwo.lean, RequestProject/GLM/ColumnExtremum.lean, RequestProject/GLM/Combiner.lean, RequestProject/GLM/Comparative.lean, RequestProject/GLM/Completion.lean, RequestProject/GLM/ComposedRadicals.lean, RequestProject/GLM/Computable.lean, RequestProject/GL... |
+| `root` | lean |
+| `files` | 425 |
+| `lines` | 100570 |
+| `sorries` | 1 |
+| `file_names` | RequestProject/GLM/Address.lean, RequestProject/GLM/AddressRead.lean, RequestProject/GLM/Admission.lean, RequestProject/GLM/AdversarialDialogue.lean, RequestProject/GLM/AffineOutput.lean, RequestProject/GLM/Agree.lean, RequestProject/GLM/AlignmentPoints.lean, RequestProject/GLM/Anonymous.lean, RequestProject/GLM/AnsweringQuestion.lean, RequestProject/GLM/AstIndex.lean, RequestProject/GLM/AxiomAuditAll.lean, RequestProject/GLM/AxiomGuard.lean, RequestProject/GLM/BudgetReading.lean, RequestProject/GLM/Calibration.lean, RequestProject/GLM/CarriedFork.lean, RequestProject/GLM/CarriedRead.lean, RequestProject/GLM/Cascade.lean, RequestProject/GLM/CellGuard.lean, RequestProject/GLM/CelsiusRegister.lean, RequestProject/GLM/CertifiedStreams.lean, RequestProject/GLM/CitationScope.lean, RequestProject/GLM/CognitionRoundTwo.lean, RequestProject/GLM/ColourInduction.lean, RequestProject/GLM/ColumnExtremum.lean, RequestProject/GLM/Combiner.lean, RequestProject/GLM/Comparative.lean, RequestProject/... |
 
 ## The test suite
 
 | figure | value |
 |---|---|
-| `test_files` | 226 |
-| `file_names` | test_address_read.py, test_admission.py, test_adversarial_dialogue.py, test_affine_output.py, test_agree_channel.py, test_analogy_models.py, test_anonymous.py, test_answering_question.py, test_ast_index.py, test_benchmarks.py, test_blockers.py, test_blueprint.py, test_budget_reading.py, test_capabilities.py, test_carried_fork.py, test_carried_read.py, test_carrier_read.py, test_catalog.py, test_cell_guard.py, test_celsius_register.py, test_citation_scope.py, test_coherence.py, test_column_extremum.py, test_combiner.py, test_companion.py, test_comparative.py, test_comparison_classes.py, test_composed_radical.py, test_confidence_curve.py, test_confidence_floor.py, test_configuration_classifier.py, test_configuration_reading.py, test_conjugate.py, test_connected_machine.py, test_connected_two.py, test_constant_bound.py, test_construction_ladder.py, test_containers.py, test_context_frames.py, test_contract_matrix.py, test_controller.py, test_conversation.py, test_coordinate_junction.py,... |
-| `collected` | None |
-
-## What a complete run counted
-
-| figure | value |
-|---|---|
-| `test_files` | 181 |
-| `of_test_files` | 183 |
-| `tests` | 5397 |
-| `subtests` | 18972 |
-| `excludes` | test_corpus.py, test_figures.py |
-| `measured_by` | the sign-off ledger, at the last complete run |
-| `python` | python3.11.14 |
+| `test_files` | 219 |
+| `file_names` | test_address_read.py, test_admission.py, test_affine_output.py, test_agree_channel.py, test_analogy_models.py, test_anonymous.py, test_answering_question.py, test_ast_index.py, test_axiom_guard.py, test_benchmarks.py, test_blockers.py, test_blueprint.py, test_budget_reading.py, test_capabilities.py, test_carried_fork.py, test_carrier_read.py, test_catalog.py, test_cell_guard.py, test_celsius_register.py, test_citation_scope.py, test_coherence.py, test_column_extremum.py, test_combiner.py, test_companion.py, test_comparative.py, test_comparison_classes.py, test_composed_radical.py, test_confidence_floor.py, test_configuration_classifier.py, test_configuration_reading.py, test_conjugate.py, test_connected_machine.py, test_connected_two.py, test_constant_bound.py, test_construction_ladder.py, test_containers.py, test_contract_matrix.py, test_controller.py, test_conversation.py, test_coordinate_junction.py, test_coordinate_order.py, test_corpus.py, test_corpus_resample.py, test_counter_... |
+| `collected` | 5915 |

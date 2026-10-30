@@ -204,7 +204,7 @@ standard axioms (`propext`, `Classical.choice`, `Quot.sound`):
 
 ## 7. Re-running it
 
-From `overlay/`:
+From ``:
 
 * `PYTHONPATH=. python3 -m glm_universal.tools symbolic` runs the full
   report in about 80 s. Add `--quick` to skip S6, `--battery` for §4.1, and

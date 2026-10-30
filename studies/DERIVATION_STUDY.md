@@ -34,7 +34,7 @@ addressing, refusal — derivation had the least behind it.
 ## 1. Declarations — committed before any code
 
 The cases, the expected values (worked by hand) and the marks are in
-`overlay/glm_universal/evaluation/derivation_cases.py`, committed as the
+`glm_universal/evaluation/derivation_cases.py`, committed as the
 first commit of the round, before the prover or the derivation layer
 existed. Nothing in it was changed after code was written.
 
@@ -153,7 +153,7 @@ function containing `(C1 - C2)*R1*R2`), 30 (the heated tank,
 
 ## 5. What is proved
 
-`overlay/glm_lean/RequestProject/GLM/Derivations.lean`, with no sorry and
+`glm_lean/RequestProject/GLM/Derivations.lean`, with no sorry and
 only the standard axioms:
 
 * `g4ip_sound` — every G4ip derivation is sound for every Boolean

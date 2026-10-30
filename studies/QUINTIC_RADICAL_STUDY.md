@@ -178,7 +178,7 @@ citation `quintic_in_letters_no_radical_formula`); it still meets 7 of 7.
 
 ## 5. Re-running it
 
-From `overlay/`:
+From ``:
 
 * `PYTHONPATH=. python3 -m glm_universal.tools quintic-radical` runs every mark
   in about 15 s. `--quick` skips the batteries and `--json` gives the rows.

@@ -1,0 +1,86 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Over 172 evaluation cases, 0 answers moved and 0 principled refusals were converted;
+  of 18 declared probes, 4 resolve above the first rung.
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code: []
+  lean:
+  - Escalation
+  - EscalationLoop
+  - Layers
+  prose: QUERY_ESCALATION_STUDY.md
+  test:
+  - test_query_escalation.py
+  wheel: []
+follow_ups: []
+id: QUERY_ESCALATION_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: 'The deep-hole rounds are the only place in this repository where
+
+  a refusal was answered by raising the resolution of the reading instead of
+
+  stopping. Can that be made a step of the ordinary query loop — with a declared
+
+  ladder, a stated cost, and a rule that stops it turning a principled refusal
+
+  into an answer — without moving any answer the runtime already gives?'
+recomputed_by: '`glm_universal.reasoning.query_escalation.query_escalation_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0a-the-reading-in-one-paragraph
+  heading: 0a. The reading in one paragraph
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-the-four-commitments-fixed-before-the-loop-was-written
+  heading: 1. The four commitments, fixed before the loop was written
+- anchor: 2-the-tower
+  heading: 2. The tower
+- anchor: 3-the-ladders
+  heading: 3. The ladders
+- anchor: 4-what-counts-as-a-principled-refusal
+  heading: 4. What counts as a principled refusal
+- anchor: 5-the-gates-fixed-before-the-measurement
+  heading: 5. The gates, fixed before the measurement
+- anchor: 6-the-probe-set
+  heading: 6. The probe set
+- anchor: 7-the-measurement
+  heading: 7. The measurement
+- anchor: 8-the-lean-half-what-is-proved-rather-than-measured
+  heading: '8. The Lean half: what is proved rather than measured'
+- anchor: 9-what-this-study-does-not-do
+  heading: 9. What this study does not do
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Escalation as a step of the query loop
+verdict: 'Yes, and at no cost to what the runtime already does: over the whole evaluation set no answer
+  moves and no principled refusal is converted, while four of the declared probes are resolved above the
+  first rung and two refusals become certified absences.'
+wobble_deps: []

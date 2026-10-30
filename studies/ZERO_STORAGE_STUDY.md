@@ -13,9 +13,9 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-**Instrument:** `overlay/glm_universal/reasoning/generative.py`.
+**Instrument:** `glm_universal/reasoning/generative.py`.
 **Report subject:** `report generated` (column‑3 verified in a fresh interpreter).
-**Tests:** `overlay/glm_universal/tests/test_generative.py` (16 cases), and the end-to-end case `report-generated` in `overlay/glm_universal/evaluation/cases.py`.
+**Tests:** `glm_universal/tests/test_generative.py` (16 cases), and the end-to-end case `report-generated` in `glm_universal/evaluation/cases.py`.
 **Lean:** `RequestProject/GLM/ZeroStorage.lean` (sorry‑free).
 **Subject of the study:** the proposal in `glm_zero_storage_substrate_v3.txt` —
 stop storing the substrate's tables and regenerate them instead.

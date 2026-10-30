@@ -1,0 +1,79 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 7 of 7 marks; 10 of 10 programs and 9 of 9 questions as declared; 8 of 8 column-3 scripts
+  verify and 40 of 40 mutations rejected; 299 of 299 decided generated programs unchanged; 0 of 4 certified
+  programs halt within 200000 steps.
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - reasoning/batch_machine
+  - reasoning/batch_speech
+  - reasoning/inert_counter
+  lean:
+  - InertCounter
+  prose: INERT_COUNTER_STUDY.md
+  test:
+  - test_inert_counter.py
+  wheel: []
+follow_ups: []
+id: INERT_COUNTER_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 125
+predecessors: []
+question: If GLM-BAT forgets the variables no instruction reads except to update a forgotten variable,
+  does a recurrence of what is left certify that a loop with a growing counter never halts, without changing
+  any verdict the machine already gave and without certifying a program that halts?
+recomputed_by: '`glm_universal.reasoning.inert_counter.inert_counter_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-why-the-counter-is-not-part-of-the-argument
+  heading: 1. Why the counter is not part of the argument
+- anchor: 2-the-rule
+  heading: 2. The rule
+- anchor: 3-the-marks-declared-before-the-code
+  heading: 3. The marks, declared before the code
+- anchor: 4-controls
+  heading: 4. Controls
+- anchor: 5-what-this-round-does-not-do
+  heading: 5. What this round does not do
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-the-measurement
+  heading: 7. The measurement
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Inert variables — a non-termination certificate past the control state
+verdict: 'Yes, within the declared rule. All 10 battery programs and all 9 questions came out as declared
+  with 0 wrong: the four loops whose counters are inert (M15 among them) are certified never to halt,
+  and the four whose growing variable some line reads are still refused. Every Phase 125 answer stands
+  except M15 and Q6, all 299 generated programs Phase 125 decided keep their verdicts, no certified program
+  halts within 200000 steps, and the program that does halt after 40003 steps is refused. The one generated
+  program Phase 125 left undecided is still undecided: its growing variable is read.'
+wobble_deps: []

@@ -217,13 +217,13 @@ claimed junction, and its members' coordinates equal.
 
 ## 6. Files
 
-* `overlay/glm_lean/RequestProject/GLM/CoordinateJunction.lean` — §1.
-* `overlay/glm_universal/reasoning/coordinate_junction.py` — the declarations,
+* `glm_lean/RequestProject/GLM/CoordinateJunction.lean` — §1.
+* `glm_universal/reasoning/coordinate_junction.py` — the declarations,
   the junction table and its digests, the junction read and the census.
-* `overlay/glm_universal/reasoning/coordinate_junction_study.py` — the marks.
-* `overlay/glm_universal/runtime/session.py`, `runtime/tct_engine.py` — the
+* `glm_universal/reasoning/coordinate_junction_study.py` — the marks.
+* `glm_universal/runtime/session.py`, `runtime/tct_engine.py` — the
   `locate` answer and its column-3 script.
-* `overlay/glm_universal/tests/test_coordinate_junction.py` — the tests.
+* `glm_universal/tests/test_coordinate_junction.py` — the tests.
 * `tools junction-table [--write]`, `tools junction-read [--write]`.
 
 ## 7. What came out

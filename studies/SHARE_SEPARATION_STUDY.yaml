@@ -1,0 +1,77 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 3 of 6 marks met (H1–H3; H4–H6 missed); 16 of 16 ladder cells reproduced exactly; best
+  share-carrying ratio 2.3508 at `(L4, 7680)`; per-hole certificate 8 of 10; 10 theorems, 0 `sorry`.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/share_ensemble
+  - reasoning/share_separation
+  - tests/test_share_separation
+  lean:
+  - ShareSeparation
+  prose: SHARE_SEPARATION_STUDY.md
+  test:
+  - test_share_separation.py
+  wheel: []
+follow_ups: []
+id: SHARE_SEPARATION_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Does a share-carrying rung of the deep-hole ladder reach the separation criterion `ρ = 2W/B
+  < 1`, and what bounds the share part's seed shift?
+recomputed_by: '`glm_universal.reasoning.share_separation.share_separation_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-used-rather-than-re-derived
+  heading: 1. What is used rather than re-derived
+- anchor: 2-the-two-halves
+  heading: 2. The two halves
+- anchor: 3-the-marks-declared-before-the-code
+  heading: 3. The marks, declared before the code
+- anchor: 4-controls
+  heading: 4. Controls
+- anchor: 5-what-this-round-does-not-do
+  heading: 5. What this round does not do
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-the-measurement
+  heading: 7. The measurement
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The separation criterion for the share-carrying rungs — lattice item 6
+verdict: 'No share-carrying cell reaches the criterion: up to 30720 starts the best ratio is 2.3508, because
+  the separation falls with the spread. The arrival shares approach a near-uniform profile, so holes with
+  equal vertex counts converge on each other; the per-hole criterion certifies 8 of 10 holes at the joint
+  rung and leaves exactly the two 28-vertex holes, E_6^4 and D_6^4. Sorting is proved non-expansive in
+  L1, so the share part''s seed shift is bounded by the vertex-matched shift, and that bound holds at
+  all 80 measured instances.'
+wobble_deps: []

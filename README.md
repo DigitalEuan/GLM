@@ -1,10 +1,9 @@
-This project was edited by [Aristotle](https://aristotle.harmonic.fun).
+The Geometric Language Machine (GLM)
 
-To cite Aristotle:
-- Tag @Aristotle-Harmonic on GitHub PRs/issues
-- Add as co-author to commits:
 ```
-Co-authored-by: Aristotle (Harmonic) <aristotle-harmonic@harmonic.fun>
+Authored-by: E R A Craig (DigitalEuan), New Zealand <info@digitaleuan.com>
+https://github.com/DigitalEuan/GLM
+30.10.26
 ```
 
 # The Geometric Language Machine (GLM)
@@ -15,7 +14,7 @@ Co-authored-by: Aristotle (Harmonic) <aristotle-harmonic@harmonic.fun>
 
 **Verdict.** This repository holds the Geometric Language Machine system and many studies that came out of developing it so far.
 
-**Deciding figure.** <!--figure:registers-->8 registers<!--/figure--> of carriers, reached through <!--figure:query-kinds-->28 query kinds<!--/figure--> one of which dispatches <!--figure:report-subjects-->67 report subjects<!--/figure-->.
+**Deciding figure.** <!--figure:registers-->8 registers<!--/figure--> of carriers, reached through <!--figure:query-kinds-->27 query kinds<!--/figure--> one of which dispatches <!--figure:report-subjects-->67 report subjects<!--/figure-->.
 
 **Recomputed by.** `glm_universal.figures.figures`
 
@@ -23,7 +22,7 @@ Co-authored-by: Aristotle (Harmonic) <aristotle-harmonic@harmonic.fun>
 
 ---
 
-*Last altered 20 October 2026 (Phase 172: the run-order hazards, at the head of the reading order).*
+*Last altered 30 October 2026 (repository check: directives D17–D21 renumbered, constants single-source rule D21; earlier 29 October 2026 reorganisation: the repository restructured under src/, studies as YAML+MD pairs, wheels centralized, Rule30 Lean absorbed).*
 
 This repository holds the Geometric Language Machine system and many studies that came out of developing it so far.
 
@@ -51,25 +50,29 @@ and this file was written again from the current state documents.
 > * **Re-take order matters after editing `evaluation/cases.py`.** Some saved
 >   results read others. Re-take `queryesc`, `budget-guard-frozen` and
 >   `ties-ladder-frozen` first, then the rest, then refresh the corpus last.
+>
+> **Standing rule (directive D21):** every fundamental constant, shared path
+> and pinned value is defined once, in
+> [`src/glm_universal/constants.py`](src/glm_universal/constants.py), and
+> imported from there ([`ITERATE.md`](ITERATE.md) §0.2).
 
 ## 1. The GLM system
 
 The GLM is a substrate-native reasoning system built on an exact substrate:
 the extended binary Golay code, the Leech lattice, and exact integer and
 rational arithmetic on them — no floating point on any path that feeds a
-result. The package lives in [`overlay/`](overlay/README.md) as
+result. The package lives in [`src/glm_universal/`](src/glm_universal/README.md) as
 `glm_universal`, and holds <!--figure:registers-->8 registers<!--/figure-->
-of carriers reached through <!--figure:query-kinds-->28 query kinds<!--/figure-->,
+of carriers reached through <!--figure:query-kinds-->27 query kinds<!--/figure-->,
 one of which dispatches <!--figure:report-subjects-->67 report subjects<!--/figure-->.
 The formal development is
-[`overlay/glm_lean/RequestProject/GLM/`](overlay/glm_lean/RequestProject/GLM/README.md),
-<!--figure:lean-files-->268 Lean files<!--/figure--> with no `sorry`, built
+[`src/lean/RequestProject/GLM/`](src/lean/RequestProject/GLM/README.md),
+<!--figure:lean-files-->425 Lean files<!--/figure--> with no `sorry`, built
 from the repository root with `lake build`.
 
 ```bash
-cd overlay
-python3 GLM.py -q "address of golay"                    # one query
-PYTHONPATH=. python3 -m glm_universal.tools --help      # the study instruments
+python3 src/GLM.py -q "address of golay"                    # one query
+PYTHONPATH=src python3 -m glm_universal.tools --help      # the study instruments
 ```
 
 ## 1b. What this round closed
@@ -93,7 +96,7 @@ step, and no answer moved. The record of every round is
 ## 2. What the machine can actually do so far, measured
 
 [`CAPABILITY_ASSESSMENT.md`](CAPABILITY_ASSESSMENT.md) reports what happened
-when the machine was run, and [`overlay/REASONING_CAPABILITY.md`](overlay/REASONING_CAPABILITY.md)
+when the machine was run, and [`REASONING_CAPABILITY.md`](REASONING_CAPABILITY.md)
 asks whether it reasons. The end-to-end evaluation, the benchmark suites, the
 capability probes and the test suite are listed with their commands and
 current figures in [`SYSTEM.md`](SYSTEM.md) §1; refusals are stated as
@@ -117,9 +120,8 @@ reads; `signoff --verify` re-checks the signatures without running anything,
 and a round's close runs only what moved.
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.corpus --check
-PYTHONPATH=. python3 -m glm_universal.signoff --verify
+PYTHONPATH=src python3 -m glm_universal.corpus --check
+PYTHONPATH=src python3 -m glm_universal.signoff --verify
 ```
 
 ## 5. The documents are data too
@@ -133,7 +135,7 @@ stops being grounded in its document or a link breaks.
 
 | path | what |
 |---|---|
-| `overlay/` | the package `glm_universal`, the CLI `GLM.py` and the Lean development `glm_lean/` |
+| `` | the package `glm_universal`, the CLI `GLM.py` and the Lean development `src/lean/` |
 | `studies/` | one study per question, each with its pre-registered marks and what came out |
 | `source_material/` | the material the owner supplied, kept as supplied |
 | `archive/` | records of earlier rounds |
@@ -150,5 +152,5 @@ what the rounds were drawn from.
 Every count in a state document that can move — registers, query kinds,
 report subjects, Lean files, test files — is an inline figure rewritten by
 `corpus --refresh` from the code that computes it (`glm_universal/figures.py`,
-[`overlay/FIGURES.md`](overlay/FIGURES.md)), and `tests/test_figures.py`
+[`FIGURES.md`](FIGURES.md)), and `tests/test_figures.py`
 fails if a document drifts from it.

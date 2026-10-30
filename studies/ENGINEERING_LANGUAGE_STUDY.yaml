@@ -1,0 +1,83 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Of 63 preregistered questions the surface answers 53 correctly and refuses 10 correctly
+  with 0 wrong, against 0 correct and 53 refused through both existing paths; the stress set written after
+  the first run scored 27 correct, 10 correct refusals and 1 scored wrong on its first run.
+directives:
+- D15
+evidence: []
+faculty: refusal
+file_refs:
+  code: []
+  lean:
+  - EngineeringWheels
+  prose: ENGINEERING_LANGUAGE_STUDY.md
+  test:
+  - test_engineering_language.py
+  wheel: []
+follow_ups: []
+id: ENGINEERING_LANGUAGE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: The formula-wheel session record built three standalone engineering studies and named, as its
+  first priority, running them against the GLM's own substrate. Can the GLM be asked electrical and mechanical
+  questions in words — derive a formula-wheel spoke, check a formula at two dimensional layers, move a
+  load onto the Smith chart, carry a problem between a spring and a circuit, say what a delta-sigma loop
+  does — and answer them exactly, or refuse with a reason, without a wrong answer?
+recomputed_by: '`glm_universal.engineering.study.engineering_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-what-this-round-took-and-from-where
+  heading: 1. What this round took, and from where
+- anchor: 2-what-was-built
+  heading: 2. What was built
+- anchor: 3-formula-wheels-the-register-against-the-corrected-study
+  heading: 3. Formula wheels — the register against the corrected study
+- anchor: 4-the-smith-chart
+  heading: 4. The Smith chart
+- anchor: 5-electro-mechanical-analogies
+  heading: 5. Electro-mechanical analogies
+- anchor: 6-delta-sigma
+  heading: 6. Delta-sigma
+- anchor: 7-the-language-measurement
+  heading: 7. The language measurement
+- anchor: 8-what-is-proved
+  heading: 8. What is proved
+- anchor: 9-what-is-not-claimed
+  heading: 9. What is not claimed
+- anchor: 10-verdict
+  heading: 10. Verdict
+- anchor: 11-next
+  heading: 11. Next
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Engineering languages — formula wheels, the Smith chart, analogies and delta-sigma
+verdict: Through the engineering surface the GLM answers every preregistered engineering question it was
+  asked and refuses every one whose right outcome is a refusal, with no wrong answer, where both existing
+  paths refused all of them; the register agrees with the corrected formula study on all 41 cases at both
+  layers, and the rules that license the answers are proved.
+wobble_deps: []

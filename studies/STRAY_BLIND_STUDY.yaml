@@ -1,0 +1,71 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 4 of 4 marks met; predicted = measured at 4 of 4 ensemble sizes; 10 of 10 holes at one
+  covering radius (raw squared distance 16); 7 theorems, 0 `sorry`.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - StrayBlind
+  prose: STRAY_BLIND_STUDY.md
+  test:
+  - test_stray_blind.py
+  wheel: []
+follow_ups: []
+id: STRAY_BLIND_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 110
+predecessors:
+- ROADMAP_STUDY
+question: The deep-hole ladder measured that the exact rational distance measure (`L₃`) cannot tell `A_1^24`
+  from `A_2^12`, and `STATUS.md` §3.4 item 10 recorded that as an observation. Which pairs must a reading
+  of distances alone conflate, as a theorem, and does the measured ladder agree with it?
+recomputed_by: '`glm_universal.reasoning.stray_blind.stray_blind_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-theorem
+  heading: 1. The theorem
+- anchor: 2-the-marks-and-what-was-measured
+  heading: 2. The marks, and what was measured
+- anchor: 3-what-it-means-for-lattice-item-6
+  heading: 3. What it means for lattice item 6
+- anchor: 4-what-is-left
+  heading: 4. What is left
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Which pairs a stray-blind reading must conflate — lattice item 10
+verdict: 'A reading of distances alone conflates two equal-size records exactly when their stray spectra
+  agree, whatever the hole types: the arrivals all sit at the one covering radius and contribute only
+  their count. A reading blind to the strays as well conflates every deep hole. This is proved in Lean
+  with no `sorry`. On the ladder''s own ensembles, the predicted pairs equal the measured pairs at all
+  four sizes: the one pair `A_1^24`/`A_2^12`, the only two stray-free holes. A conflated pair of references
+  also makes the separation criterion fail at every spread, so the `L₃` rung cannot reach `ρ < 1` at any
+  measured size. That is the theorem''s bearing on lattice item 6.'
+wobble_deps: []

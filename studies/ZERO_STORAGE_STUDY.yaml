@@ -1,0 +1,73 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: The proposed Leech sieve is sound and 99.4 % incomplete, with the one-line repair stated.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - evaluation/cases
+  - reasoning/generative
+  - tests/test_generative
+  lean:
+  - Tower
+  - ZeroStorage
+  prose: ZERO_STORAGE_STUDY.md
+  test:
+  - test_zero_storage.py
+  wheel: []
+follow_ups: []
+id: ZERO_STORAGE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: How far does generate-rather-than-store go, and where does it have to be checked?
+recomputed_by: '`glm_universal.reasoning.generative.zero_storage_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-idea-is-right-and-it-is-measurable
+  heading: 1. The idea is right, and it is measurable
+- anchor: 2-the-proposed-leech-sieve-is-sound-and-994-incomplete
+  heading: 2. The proposed Leech sieve is sound and 99.4 % incomplete
+- anchor: 3-the-snap-built-on-the-sieve-does-not-snap
+  heading: 3. The snap built on the sieve does not snap
+- anchor: 4-a-generated-number-is-only-as-good-as-its-cost-bound
+  heading: 4. A generated number is only as good as its cost bound
+- anchor: 5-the-niemeier-portal-is-a-real-invariant-with-a-constant-label
+  heading: 5. The "Niemeier portal" is a real invariant with a constant label
+- anchor: 6-what-this-perspective-brings-to-the-glm
+  heading: 6. What this perspective brings to the GLM
+- anchor: 7-follow-up-the-refined-substrate-script
+  heading: '7. Follow-up: the refined substrate script'
+- anchor: 8-the-ledger-has-two-sides-what-a-table-costs-to-keep
+  heading: '8. The ledger has two sides: what a table costs to keep'
+- anchor: reproducing
+  heading: Reproducing
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Generated, not stored — how far the idea goes, and where it has to be checked
+verdict: The idea is right, and it is measurable.
+wobble_deps: []

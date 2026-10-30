@@ -1,0 +1,80 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 9 of 9 marks; replies read after an unrelated turn 0 of 61 → 183 of 183, every one ending
+  as the uninterrupted run; 243 of 243 adversarial runs unchanged by the interruption; 0 of 4,683 evaluation
+  questions read as a reply; 0 members outside the head ever live over 791 runs.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - ResumedDialogue
+  prose: RESUMED_DIALOGUE_STUDY.md
+  test:
+  - test_resumed_dialogue.py
+  wheel: []
+follow_ups: []
+id: RESUMED_DIALOGUE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 167
+predecessors:
+- ANSWERING_QUESTION_STUDY
+question: When the question at a tie is left unanswered for a turn or three and then answered, can the
+  conversation read the reply against the question it answers, without ever reading a reply against the
+  wrong question or taking a whole query for one?
+recomputed_by: '`glm_universal.reasoning.resumed_dialogue_study.resumed_dialogue_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved
+  heading: 1. What is proved
+- anchor: 2-the-mechanism
+  heading: 2. The mechanism
+- anchor: 3-what-is-measured
+  heading: 3. What is measured
+- anchor: 4-faculties
+  heading: 4. Faculties
+- anchor: 5-the-marks
+  heading: 5. The marks
+- anchor: 6-what-is-not-claimed
+  heading: 6. What is not claimed
+- anchor: 7-what-came-out
+  heading: 7. What came out
+- anchor: in-one-paragraph
+  heading: In one paragraph
+status: open
+successors: []
+superseded_by: ''
+supersedes: []
+title: The open tie kept across turns — a reply read after the conversation has moved on
+verdict: Yes. A question now stays open across turns that leave it alone, and a reply after one, two or
+  three unrelated turns ends every dialogue exactly as the uninterrupted dialogue ends, for truthful informants
+  and for adversarial ones. A question is answered once, the newest question supersedes an older one,
+  and no question of the evaluation set is taken for a reply. Lean proves that an unrelated turn is invisible
+  to the replies read. The same round ran Phase 167's adversarial battery at the `locate` junctions for
+  the first time, and pinned `report anonymous` on its claim, which showed that one sentence of that report
+  had asserted more than its measurement holds.
+wobble_deps: []

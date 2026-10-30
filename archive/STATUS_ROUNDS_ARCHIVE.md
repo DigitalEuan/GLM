@@ -14,7 +14,7 @@ status document's own running account, as it stood at the close of Phase 110.*
 *Everything in this file is an archive: each paragraph records what was
 measured when it was written, and those counts are deliberately left alone.
 For the project as it is now, see [`STATUS.md`](../STATUS.md),
-[`SYSTEM.md`](../SYSTEM.md) and [`overlay/FIGURES.md`](../overlay/FIGURES.md).*
+[`SYSTEM.md`](../SYSTEM.md) and [`FIGURES.md`](../FIGURES.md).*
 
 ---
 
@@ -780,13 +780,13 @@ record.
 
 **The round before that (Phase 78) cut the cost of an iteration**, at the
 owner's request. The Lean development is held once, in
-`overlay/glm_lean/RequestProject/`, and `lake build` compiles it in place; the
+`glm_lean/RequestProject/`, and `lake build` compiles it in place; the
 repository-root copy, its mirror step and the instrument that compared the
 two are gone. A unit's closure now follows what the unit reads: data files by
 name, docstrings not dependencies, and the generated figure and block regions
 of a document masked from every unit except the three that render or check
 them — so a refresh that only moves counts (they all live in
-`corpus/render.py`, recomputed into [`overlay/FIGURES.md`](../overlay/FIGURES.md))
+`corpus/render.py`, recomputed into [`FIGURES.md`](../FIGURES.md))
 no longer re-opens the units that quote them. The mean closure fell from 284
 files to 183. A round closes with one command, `signoff --close`, which re-runs
 only what is stale and then verifies the release
@@ -1277,9 +1277,9 @@ the pair of histories that share the receipt.
 
 Last reconciled against a full re-run on 2026-09-21.
 
-Every count below is produced by `overlay/glm_universal/figures.py` and written
-to [`overlay/FIGURES.md`](../overlay/FIGURES.md);
-`overlay/glm_universal/tests/test_figures.py` fails if this document and the
+Every count below is produced by `glm_universal/figures.py` and written
+to [`FIGURES.md`](../FIGURES.md);
+`glm_universal/tests/test_figures.py` fails if this document and the
 code disagree. If a number here looks wrong, regenerate rather than edit:
 
 ```bash

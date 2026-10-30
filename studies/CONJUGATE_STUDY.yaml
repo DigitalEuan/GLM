@@ -1,0 +1,78 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: All 7 rows pass the register check — effort and extent exponents and decimal scales sum
+  to those of energy — and 11 of 11 transport cases behave as stated, 8 answered and 3 refused.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - data_objects/conjugate_pairs
+  - tests/test_conjugate
+  lean:
+  - Conjugate
+  prose: CONJUGATE_STUDY.md
+  test:
+  - test_conjugate.py
+  wheel: []
+follow_ups: []
+id: CONJUGATE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: 'The analogy layer transports a relation within a register; `heat : temperature :: force : ?`
+  asks it to transport one across registers, and the machine refused. Can the question be answered without
+  inventing a relation?'
+recomputed_by: '`glm_universal.reasoning.conjugate.conjugate_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-question-and-why-it-was-refused
+  heading: 1. The question, and why it was refused
+- anchor: 2-the-energy-conjugate-register
+  heading: 2. The energy-conjugate register
+- anchor: 3-what-makes-a-row-admissible
+  heading: 3. What makes a row admissible
+- anchor: 4-the-relations-and-the-transport-rule
+  heading: 4. The relations, and the transport rule
+- anchor: 5-what-the-register-answers-and-what-it-still-refuses
+  heading: 5. What the register answers, and what it still refuses
+- anchor: 6-the-negative-result-worth-keeping
+  heading: 6. The negative result worth keeping
+- anchor: 7-what-it-buys-elsewhere
+  heading: 7. What it buys elsewhere
+- anchor: 8-the-formal-side
+  heading: 8. The formal side
+- anchor: 9-how-to-re-run-it
+  heading: 9. How to re-run it
+- anchor: 10-limits
+  heading: 10. Limits
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The cross-register analogy: what makes `heat : temperature :: force : ?` answerable'
+verdict: 'It can, by admitting the register the question was already about: an energy-conjugate table
+  of 7 rows, each an effort, an extent and the transfer they make, checked against the physics register.
+  `force` reaches `work`.'
+wobble_deps: []

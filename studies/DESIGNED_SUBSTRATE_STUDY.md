@@ -200,10 +200,10 @@ to the received word is unique and is not the one sent.
 
 | file | what |
 |---|---|
-| `overlay/glm_lean/RequestProject/GLM/DesignedSubstrate.lean` | §1 |
-| `overlay/glm_universal/reasoning/designed_substrate.py` | the stages, the ensembles, the marks, `designed_substrate_report` |
-| `overlay/glm_universal/tests/test_designed_substrate.py` | the tests |
-| `overlay/glm_universal/tools.py` | `tools designed-substrate` |
+| `glm_lean/RequestProject/GLM/DesignedSubstrate.lean` | §1 |
+| `glm_universal/reasoning/designed_substrate.py` | the stages, the ensembles, the marks, `designed_substrate_report` |
+| `glm_universal/tests/test_designed_substrate.py` | the tests |
+| `glm_universal/tools.py` | `tools designed-substrate` |
 | `source_material/substrate_study/` | the owner's study, as supplied |
 
 ## 7. The measurement

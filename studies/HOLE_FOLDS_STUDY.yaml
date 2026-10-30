@@ -1,0 +1,85 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 34 of 34 declared questions (11 order, 8 bounded, 8 rank, 7 present-rows) and 2 of 2
+  follow-ups as declared, 0 wrong, where round three's reader answers 0 of the 34 and the whole machine
+  answered 0 of them before the round and 25 after; 9 of 9 bounded answers hold over every one of 200
+  completions with both ends attained; 26 of 26 chain scripts verified (843 of 843 steps aligned) and
+  every mutation rejected, 15 of 15 hole lies included; 8 of 8 marks met.
+directives:
+- D15
+- D3
+- D7
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - evaluation/stepwise_four_cases
+  - reasoning/stepwise_script
+  - runtime/declared_frames
+  - runtime/stepwise
+  - runtime/stepwise_four
+  lean:
+  - HoleBounds
+  prose: HOLE_FOLDS_STUDY.md
+  test:
+  - test_hole_folds.py
+  wheel: []
+follow_ups: []
+id: HOLE_FOLDS_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 84
+predecessors:
+- STEPWISE_THREE_STUDY
+question: What can the stepwise planner say about the median, the ends and the rank of a column when some
+  readings are missing — and can it answer the present-rows question as its own question — without answering
+  anything wrongly?
+recomputed_by: '`glm_universal.runtime.stepwise_four.stepwise_four_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-objects
+  heading: 1. The objects
+- anchor: 2-declarations-written-before-any-code-of-the-round
+  heading: 2. Declarations — written before any code of the round
+- anchor: 3-what-was-built
+  heading: 3. What was built
+- anchor: 4-results
+  heading: 4. Results
+- anchor: 5-lean
+  heading: 5. Lean
+- anchor: 6-what-this-leaves
+  heading: 6. What this leaves
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Folds with a hole: the median, the ends and the rank of a column, bounded where the register is
+  silent, and the present-rows question asked as its own'
+verdict: 'Yes: the stepwise planner now reads the median, the largest and the smallest value and the rank
+  of a row over every element or a declared class, answers a median or a rank over a column with holes
+  as the exact interval every completion of the holes lands in — one value when the interval closes —
+  refuses `COLUMN_HOLE` where the holes leave a side open, and answers the present-rows question asked
+  as its own with the missing rows named, with every declared case as declared and 0 wrong.'
+wobble_deps: []

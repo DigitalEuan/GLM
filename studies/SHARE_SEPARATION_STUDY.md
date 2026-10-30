@@ -124,13 +124,13 @@ doubling fell by 0.80 rather than 0.71; at that rate `ρ` is about 1.06 at
 ## 6. Files
 
 * `RequestProject/GLM/ShareSeparation.lean` — H1.
-* `overlay/glm_universal/reasoning/share_ensemble.py` — the extended ensembles
+* `glm_universal/reasoning/share_ensemble.py` — the extended ensembles
   and their stored sufficient statistics.
-* `overlay/glm_universal/reasoning/share_separation.py` — the readings and the
+* `glm_universal/reasoning/share_separation.py` — the readings and the
   report, computed from the stored statistics.
 * `python3 -m glm_universal.tools share-separation` — the report;
   `share-ensemble --write` re-takes the ensembles.
-* `overlay/glm_universal/tests/test_share_separation.py`.
+* `glm_universal/tests/test_share_separation.py`.
 
 ## 7. The measurement
 

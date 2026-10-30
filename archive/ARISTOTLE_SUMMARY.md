@@ -1,7 +1,7 @@
 # Summary of changes for run b869a397-9a30-48dd-bb82-f415f59a5505
 This round (Phase 183, "the Lorentzian evidence space") takes the Lorentzian lift beyond puzzle solving. It treats the lift as a general way to weigh evidence: a set of cues is combined into one lifted point. That point's position gives the agreed answer, and its distance from the light cone measures how much the cues disagree.
 
-**Lean** (`overlay/glm_lean/RequestProject/GLM/LorentzianEvidence.lean`): builds with no `sorry` and only the standard axioms. It is included in `AxiomAuditAll.lean`, which reports 10038 theorems on standard axioms only. The file proves, in any dimension:
+**Lean** (`glm_lean/RequestProject/GLM/LorentzianEvidence.lean`): builds with no `sorry` and only the standard axioms. It is included in `AxiomAuditAll.lean`, which reports 10038 theorems on standard axioms only. The file proves, in any dimension:
 - **Decomposition (`evidence_decomp`):** a weighted sum of lifted cues equals the lift of their consensus plus the Weyl vector times their disagreement (a weighted spread about the consensus).
 - **Norm (`evid_norm`, `evid_null_iff`):** the Lorentzian norm of the evidence is exactly minus the disagreement, so it is null exactly when every cue agrees.
 - **Guard (`dispersion_guard_sound`):** the dispersion guard is sound.

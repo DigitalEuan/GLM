@@ -1,0 +1,75 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 83 of 83 value cases equal to CPython with every column-3 script printing VERIFIED True
+  and every mutated claim caught; 26 of 26 refusals named; 0 wrong answers over a 7128-expression differential
+  battery.
+directives:
+- D15
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - evaluation/python_speech_cases
+  - reasoning/python_speech
+  - reasoning/python_substrate
+  lean:
+  - PythonSpeech
+  prose: PYTHON_SPEECH_STUDY.md
+  test:
+  - test_python_speech.py
+  wheel: []
+follow_ups: []
+id: PYTHON_SPEECH_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Can the GLM speak Python?
+recomputed_by: '`glm_universal.reasoning.python_speech.python_speech_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-mapping-one-line-per-construct
+  heading: 1. The mapping, one line per construct
+- anchor: 2-pass-marks-declared-before-the-measuring-module-existed
+  heading: 2. Pass marks, declared before the measuring module existed
+- anchor: 3-what-was-built
+  heading: 3. What was built
+- anchor: 4-results
+  heading: 4. Results
+- anchor: 5-what-the-lean-proves
+  heading: 5. What the Lean proves
+- anchor: 6-where-it-stops-said-plainly
+  heading: 6. Where it stops, said plainly
+- anchor: 7-next
+  heading: 7. Next
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Python speech: the GLM reading and evaluating Python on the substrate'
+verdict: 'Yes, as verified symbolic state transformation: all six pass marks declared before the measuring
+  module existed were met, with 83 of 83 declared programs answered equal to CPython in type and value,
+  26 of 26 declared refusals named correctly, and 0 wrong.'
+wobble_deps: []

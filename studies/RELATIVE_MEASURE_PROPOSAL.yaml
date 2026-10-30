@@ -1,0 +1,67 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Everything measured from the code as it stands is in the first section; everything after
+  it is a design argument and is marked as such.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - data_objects/physics
+  - data_objects/semantic_lexicon
+  - reasoning/analogy_models
+  - reasoning/information_loss
+  lean:
+  - Cumulative
+  - LayerChain
+  prose: RELATIVE_MEASURE_PROPOSAL.md
+  test:
+  - test_relative_measure_proposal.py
+  wheel: []
+follow_ups: []
+id: RELATIVE_MEASURE_PROPOSAL
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: What would it take for `hot` to become a relative measure rather than a static concept?
+recomputed_by: (hand-written argument; nothing to recompute)
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-what-is-already-here-measured
+  heading: 1. What is already here (measured)
+- anchor: 2-the-shape-the-fix-should-take-proposal
+  heading: 2. The shape the fix should take (proposal)
+- anchor: 3-will-it-translate-to-other-domains
+  heading: 3. Will it translate to other domains?
+- anchor: 4-growing-the-registers-and-what-that-does-to-escalation
+  heading: 4. Growing the registers, and what that does to escalation
+- anchor: 5-where-to-look
+  heading: 5. Where to look
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Measure words as relative measures — what is already here, and what is missing
+verdict: This is a proposal, not a result.
+wobble_deps: []

@@ -1,0 +1,83 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 44 of 44 declared cases as declared (12 derive, 8 ask, 6 solve, 8 loop, 10 frame), 0
+  wrong; through the router the machine answers 29 of the 29 answer cases and answered 0 of them before
+  the round; the dialect alone answers 0 of the 34 bridge cases; 22 of 22 bridge programs' scripts verified,
+  re-running 47 sub-answer scripts, with all 66 mutations rejected; 8 of 8 marks met.
+directives: []
+evidence: []
+faculty: derivation
+file_refs:
+  code:
+  - evaluation/planner_loop_cases
+  - reasoning/python_speech
+  - reasoning/python_substrate
+  - runtime/planner_bridge
+  - runtime/planner_loop_report
+  lean:
+  - PlannerLoop
+  prose: PLANNER_LOOP_STUDY.md
+  test:
+  - test_planner_loop.py
+  wheel: []
+follow_ups: []
+id: PLANNER_LOOP_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Can a program in the GLM's Python dialect hold what the planner and the reverse surface derive
+  — and so let one surface's answer choose the next question put to another — and can the planner hand
+  a question about a Python expression to the evaluator, without answering anything wrongly?
+recomputed_by: '`glm_universal.runtime.planner_loop_report.planner_loop_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-objects
+  heading: 1. The objects
+- anchor: 2-declarations-written-before-any-code-of-the-round
+  heading: 2. Declarations — written before any code of the round
+- anchor: 3-what-was-built
+  heading: 3. What was built
+- anchor: 4-results
+  heading: 4. Results
+- anchor: 5-item-9-re-read-the-utility-gate
+  heading: '5. Item 9, re-read: the utility gate'
+- anchor: 6-what-this-round-moved
+  heading: 6. What this round moved
+- anchor: 7-the-lean-file
+  heading: 7. The Lean file
+- anchor: 8-what-this-leaves
+  heading: 8. What this leaves
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The loop through the planner: derivations as program values, questions about programs, and one
+  surface''s answer choosing the next step'
+verdict: 'Yes: the dialect now calls the stepwise planner and the reverse surface as values (`derive`,
+  `ask`, `solve`), a declared frame hands a question about a Python expression to the evaluator, and every
+  answered program''s column-3 script re-runs each sub-answer''s own script before it binds the value,
+  with every declared case as declared and 0 wrong.'
+wobble_deps: []

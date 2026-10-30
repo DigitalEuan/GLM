@@ -20,9 +20,9 @@ time, with the first pass's Lean development in hand, **eight more results came
 back**. This is their runtime half: each section recomputes what its Lean file
 proves, from the substrate this package already carries.*
 
-Module: [`overlay/glm_universal/reasoning/salvage_second.py`](../overlay/glm_universal/reasoning/salvage_second.py)
+Module: [`glm_universal/reasoning/salvage_second.py`](../glm_universal/reasoning/salvage_second.py)
 — one call, `second_pass_report()`.
-Tests: `overlay/glm_universal/tests/test_salvage_second.py` — 39 test methods.
+Tests: `glm_universal/tests/test_salvage_second.py` — 39 test methods.
 Arithmetic: exact `int` and `Fraction` (D7). `π` enters only as a rational
 enclosure computed from Machin's formula, never as a float.
 

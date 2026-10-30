@@ -35,7 +35,7 @@ starting another.
 
 ## 1. What is proved
 
-`overlay/glm_lean/RequestProject/GLM/StackedDialogue.lean` (namespace
+`glm_lean/RequestProject/GLM/StackedDialogue.lean` (namespace
 `GLM.StackedDialogue`, on top of `GLM.ResumedDialogue`; 16 theorems, 0
 `sorry`; axioms `propext`, `Classical.choice`, `Quot.sound` at most). The
 conversation is reduced as in Phase 172 — each turn put a question, was read

@@ -1,0 +1,70 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Every claim of both preprints restated and given a verdict, finer than the catalogue
+  ledger could be.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - tests/test_companion
+  - tests/test_containers
+  lean:
+  - Sturmian
+  prose: GLM_COMPANION_STUDIES_AUDIT.md
+  test:
+  - test_glm_companion_studies_audit.py
+  wheel: []
+follow_ups: []
+id: GLM_COMPANION_STUDIES_AUDIT
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Do the two companion preprints hold up when their own definitions are recomputed?
+recomputed_by: '`glm_universal.reasoning.companion.companion_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: the-four-verdicts
+  heading: The four verdicts
+- anchor: the-result
+  heading: The result
+- anchor: 1-the-algorithmic-container
+  heading: 1. The algorithmic container
+- anchor: 2-the-temporal-container
+  heading: 2. The temporal container
+- anchor: 3-the-geometric-container
+  heading: 3. The geometric container
+- anchor: 4-the-recurrence
+  heading: 4. The recurrence
+- anchor: 5-the-lattice-survey
+  heading: 5. The lattice survey
+- anchor: how-to-re-run-it
+  heading: How to re-run it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The two companion studies, tested
+verdict: A summary loses the definitions.
+wobble_deps: []

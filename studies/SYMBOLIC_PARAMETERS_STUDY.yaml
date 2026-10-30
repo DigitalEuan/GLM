@@ -1,0 +1,83 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 8 of 8 marks met; 13 of 13 class-S questions answered and verified, 0 wrong; 13 of 13
+  variants; 18 of 18 declared systems; 8 of 8 refusals; 44 of 44 mutants rejected (43 of 44 as first measured);
+  27 of 27 framed outside answers and 14 of 14 Set B verdicts unchanged; 87 of 87 answered random systems
+  verified after the printer repair (53 of 87 before).
+directives:
+- D3
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - reasoning/symbolic
+  - runtime/symbolic_frames
+  - runtime/symbolic_outside
+  - runtime/symbolic_report
+  - tests/test_symbolic
+  lean:
+  - SymbolicParameters
+  prose: SYMBOLIC_PARAMETERS_STUDY.md
+  test:
+  - test_symbolic_parameters.py
+  wheel: []
+follow_ups: []
+id: SYMBOLIC_PARAMETERS_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Question Set B left 13 outside questions whose answer is a closed formula in letters (class
+  S) and one transcendental equation (class T). Can the machine answer them with a verified reading, by
+  writing the governing laws as equations in letters and eliminating the unknowns exactly, without answering
+  anything wrongly and without moving an earlier answer?
+recomputed_by: '`glm_universal.runtime.symbolic_report.symbolic_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-objects
+  heading: 1. The objects
+- anchor: 2-declarations-written-before-any-code-of-the-round
+  heading: 2. Declarations — written before any code of the round
+- anchor: 3-what-was-built
+  heading: 3. What was built
+- anchor: 4-results
+  heading: 4. Results
+- anchor: 5-what-is-proved-rather-than-measured
+  heading: 5. What is proved rather than measured
+- anchor: 6-limits-and-what-the-round-leaves
+  heading: 6. Limits, and what the round leaves
+- anchor: 7-re-running-it
+  heading: 7. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Symbolic parameters: answers that are formulas in letters'
+verdict: 'Yes: the machine now solves systems of equations in letters exactly, refuses by name the systems
+  it cannot solve, and answers all 13 class-S questions and the class-T question with gate-verified readings
+  and 0 wrong. All eight declared marks were met, one of them only after a control was repaired. A post-hoc
+  battery then found a printer fault that the marks had missed, and a speed limit at four unknowns; both
+  were repaired.'
+wobble_deps: []

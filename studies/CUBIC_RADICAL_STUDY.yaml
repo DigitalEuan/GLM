@@ -1,0 +1,84 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: '8 of 9 marks met; 6 of 6 algebraic and 4 of 4 radical systems with exactly the declared
+  branches; 4 of 4 refusals; 16 of 16 scripts verified and 16 of 16 mutants rejected; 6 of 6 dual-track
+  questions; both planted batteries 60 of 60 answered with the planted point and 0 wrong (Phase 103: 19
+  of 60); 40 of 40 cubics.'
+directives:
+- D7
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - evaluation/cubic_radical_cases
+  lean:
+  - CubicRadicals
+  prose: CUBIC_RADICAL_STUDY.md
+  test:
+  - test_cubic_radical.py
+  wheel: []
+follow_ups: []
+id: CUBIC_RADICAL_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 98
+predecessors: []
+question: 'The nonlinear elimination study left three follow-ups: the cubic that most pairs of conics
+  leave, quadratics whose coefficients hold a square root (nested radicals), and Phase 98''s positive-root
+  answers such as circle and line. Can the branch layer answer the first two exactly and without a wrong
+  answer, and does keeping both tracks for the third, with the branch set as the default, give a stronger
+  answer without losing the substitution reading?'
+recomputed_by: '`glm_universal.runtime.cubic_radical_report.cubic_radical_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-what-was-added
+  heading: 1. What was added
+- anchor: 2-the-marks
+  heading: 2. The marks
+- anchor: 3-the-miss-as-it-is
+  heading: 3. The miss, as it is
+- anchor: 4-testing-the-owners-rule
+  heading: 4. Testing the owner's rule
+- anchor: 5-post-hoc-exploration
+  heading: 5. Post hoc exploration
+- anchor: 6-what-is-proved
+  heading: 6. What is proved
+- anchor: 7-defects-found-on-the-way
+  heading: 7. Defects found on the way
+- anchor: 8-limits-and-what-the-round-leaves
+  heading: 8. Limits, and what the round leaves
+- anchor: 9-re-running-it
+  heading: 9. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Cubics, nested square roots and the positive-root dual track
+verdict: 'Yes on all three: cubics and higher-degree numeric polynomials are answered as exact bracketed
+  algebraic numbers (and Cardano''s root in letters when the cubic has one real root), nested square roots
+  are answered as towers, and positive-root readings now give every real solution with the substitution
+  reading kept beside it. Eight of the nine marks were met. The miss is the no-regression mark: one Phase
+  98 reading gained a stated real condition, with its branches unchanged.'
+wobble_deps: []

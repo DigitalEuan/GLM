@@ -1,0 +1,84 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: <!--figure:secondread-adopted-->1<!--/figure--> of <!--figure:secondread-configurations-->6<!--/figure-->
+  declared configurations is adopted — `<!--figure:secondread-shipped-->strict+margin<!--/figure-->`,
+  which answers <!--figure:secondread-program-correct-->366<!--/figure--> of the program operation's queries
+  correctly, <!--figure:secondread-program-wrong-->0<!--/figure--> wrongly, and gives up <!--figure:secondread-given-up-->150<!--/figure-->
+  answers to remove all thirteen wrong ones, where refusing the same number at random removes <!--figure:secondread-matched-removes-->2<!--/figure-->.
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - tests/test_second_reading
+  lean:
+  - SecondReading
+  prose: SECOND_READING_STUDY.md
+  test:
+  - test_second_reading.py
+  wheel: []
+follow_ups: []
+id: SECOND_READING_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: 'The escalated-operations study left one declared failure: the program-text operation answers
+  13 of 576 queries *wrongly* rather than refusing, because its unanimity contract is applied to a single
+  reading and a cell can be unanimous and unanimously wrong. Does requiring a **second, independent reading**
+  to agree before answering remove the wrong answers, and what does it cost in refusals?'
+recomputed_by: '`glm_universal.reasoning.second_reading.measure`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is-and-what-it-is-not
+  heading: 0. What this document is, and what it is not
+- anchor: 1-the-primary-reading-frozen
+  heading: 1. The primary reading, frozen
+- anchor: 2-the-two-second-readings
+  heading: 2. The two second readings
+- anchor: 3-the-two-guards
+  heading: 3. The two guards
+- anchor: 4-the-controls-and-the-marks
+  heading: 4. The controls, and the marks
+- anchor: 5-what-was-measured
+  heading: 5. What was measured
+- anchor: 6-the-guards-and-the-marks
+  heading: 6. The guards, and the marks
+- anchor: 7-the-controls
+  heading: 7. The controls
+- anchor: 8-what-is-proved-rather-than-measured
+  heading: 8. What is proved rather than measured
+- anchor: 9-what-this-leaves-for-the-next-round
+  heading: 9. What this leaves for the next round
+- anchor: 10-limits
+  heading: 10. Limits
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: A second reading before answering — what agreement buys, and what it costs
+verdict: 'Exactly one of the six declared configurations is adopted: the strict guard against the metric
+  second reading removes every wrong answer the program-text operation gave, keeps most of the correct
+  ones, and beats a matched-refusal control that gives up the same number of answers; the veto guard never
+  reaches safety, and the code-layer reading is too silent to guard with.'
+wobble_deps: []

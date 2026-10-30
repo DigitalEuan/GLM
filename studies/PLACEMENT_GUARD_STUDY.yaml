@@ -1,0 +1,84 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 9 of 9 marks (L1, P1, N1, S1, S2, S3, S4, K1, U2); placement-guarded ladder 445, 402,
+  393 and 402 correct with 0 wrong on the four sets, against the unguarded ladder's 467/0, 435/8, 426/1
+  and 441/2 in the middle-out order; union-retired ladder 386 correct, 0 wrong on the fourth set.
+directives:
+- D12
+- D4
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/placement_guard
+  - tests/test_placement_guard
+  lean:
+  - CellGuard
+  - PlacementGuard
+  prose: PLACEMENT_GUARD_STUDY.md
+  test:
+  - test_placement_guard.py
+  wheel: []
+follow_ups: []
+id: PLACEMENT_GUARD_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 127
+predecessors:
+- CELL_GUARD_STUDY
+question: If the cell guard's packing radius is replaced by the radius that is actually true of the carriers
+  — the distance from the cell's centre to the nearest other carrier, stored once per cell — does the
+  certified-nearest ladder keep enough of its correct answers to be worth having, and does it stay safe
+  on four query sets?
+recomputed_by: '`glm_universal.reasoning.placement_guard.placement_guard_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved-before-any-code
+  heading: 1. What is proved before any code
+- anchor: 2-the-rule
+  heading: 2. The rule
+- anchor: 3-the-marks-declared-before-the-code
+  heading: 3. The marks, declared before the code
+- anchor: 4-the-fourth-query-set-declared-here
+  heading: 4. The fourth query set, declared here
+- anchor: 5-what-this-round-does-not-do
+  heading: 5. What this round does not do
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-the-measurement
+  heading: 7. The measurement
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The placement guard — the cell guard with a radius read from the carriers
+verdict: Yes, on every set read. The placement guard answers no query wrongly on any of the four sets
+  — the standard set, Phase 127's held-out set, Phase 128's third set and a fourth set generated after
+  the pre-registration — while the unguarded ladder answers 0, 8, 1 and 2 wrongly on them; and it keeps
+  445 of the ladder's 467 correct answers on the standard set and between 91 and 93 per cent on the other
+  three. Every guarded answer is the strictly nearest carrier, as the Lean file proves without any hypothesis
+  on the quantiser, and the guarded ladder is order-independent. The coarse-only ladder the retirement
+  rule leaves is also safe on the fourth set, with 386 correct against the placement guard's 402.
+wobble_deps: []

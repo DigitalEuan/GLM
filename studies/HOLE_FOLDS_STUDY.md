@@ -46,7 +46,7 @@ stays, and now says why in terms of that bound.
 
 Exact throughout (D7); no digest decides a meaning (D3); every reading rests
 on a declaration, and the declared sets and columns are round three's own
-([`runtime/declared_frames.py`](../overlay/glm_universal/runtime/declared_frames.py)).
+([`runtime/declared_frames.py`](../glm_universal/runtime/declared_frames.py)).
 
 * **Order folds over a declared set.** *The median (largest, highest,
   maximum, smallest, lowest, minimum) X of S* and *the median of the Xs of
@@ -96,7 +96,7 @@ on a declaration, and the declared sets and columns are round three's own
 ## 2. Declarations — written before any code of the round
 
 The corpus is
-[`evaluation/stepwise_four_cases.py`](../overlay/glm_universal/evaluation/stepwise_four_cases.py),
+[`evaluation/stepwise_four_cases.py`](../glm_universal/evaluation/stepwise_four_cases.py),
 committed with this section and before any code: 11 order questions (8 to be
 answered, 3 refused by name), 8 bounded questions (6 answered — two of them
 closing to one value — and 2 refused), 8 rank questions (5 answered, 3
@@ -117,7 +117,7 @@ The measurement is `glm_universal.runtime.stepwise_four.stepwise_four_report`.
 
 ## 3. What was built
 
-* [`runtime/stepwise.py`](../overlay/glm_universal/runtime/stepwise.py) —
+* [`runtime/stepwise.py`](../glm_universal/runtime/stepwise.py) —
   behind `ROUND_FOUR` (read only while rounds two and three are on): the
   order words (`_ORDER_WORDS`: *median*, *largest*, *highest*, *maximum*,
   *greatest*, *smallest*, *lowest*, *minimum*), the present-rows phrases
@@ -126,7 +126,7 @@ The measurement is `glm_universal.runtime.stepwise_four.stepwise_four_report`.
   is refused, not guessed), the rank frame, and the step builder
   `_build_fold4`, with the two new refusals `NOT_A_MEMBER` and
   `COLUMN_EMPTY` in the precedence list beside `COLUMN_HOLE`.
-* [`reasoning/stepwise_script.py`](../overlay/glm_universal/reasoning/stepwise_script.py)
+* [`reasoning/stepwise_script.py`](../glm_universal/reasoning/stepwise_script.py)
   — `fold_value`, the rule of §1 over the present readings and a count of
   holes; the column-1 and column-2 forms of the new folds (the missing rows
   in column 1 for a present-rows or bounded fold, the ranked row, the holes
@@ -134,7 +134,7 @@ The measurement is `glm_universal.runtime.stepwise_four.stepwise_four_report`.
   generated script; the script's own `order_fold`, which re-derives the
   class, the missing members and the present inputs from the register before
   it recomputes; and the mutation `hole-lie`.
-* [`runtime/stepwise_four.py`](../overlay/glm_universal/runtime/stepwise_four.py)
+* [`runtime/stepwise_four.py`](../glm_universal/runtime/stepwise_four.py)
   — the measurement (`stepwise_four_report`), round three's reader as the
   control, and the completions census of H5; `tools stepwise-four`;
   `tests/test_stepwise_four.py`.
@@ -142,7 +142,7 @@ The measurement is `glm_universal.runtime.stepwise_four.stepwise_four_report`.
   planner refusal to the stepwise planner, so every new question is
   reachable from `GLM.py --ask` and `GLM.py --steps`. The planner's surface
   in `runtime/toolbox.py` now cites the new Lean file.
-* [`RequestProject/GLM/HoleBounds.lean`](../overlay/glm_lean/RequestProject/GLM/HoleBounds.lean)
+* [`RequestProject/GLM/HoleBounds.lean`](../glm_lean/RequestProject/GLM/HoleBounds.lean)
   — §5.
 
 ## 4. Results

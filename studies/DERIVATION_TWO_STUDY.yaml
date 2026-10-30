@@ -1,0 +1,82 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Information inequalities 16 of 16, codes 11 of 11, rate distortion 5 of 5, maximum entropy
+  4 of 4, eigenvalue problems 6 of 6, transmission, FFT and posterior 13 of 13, refusals 14 of 14; 55
+  of 55 scripts verify and 55 of 55 mutants rejected; 400 random inequalities (293 not valid, 107 proved),
+  0 unsound, 0 undecided; 600 random codes (256 uniquely decodable), 0 disagreements, 0 Kraft violations;
+  outside 11 of 11 answered, 0 of 292 other texts moved; marks Q1–Q11 met.
+directives:
+- D15
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - evaluation/derivation_two_cases
+  lean:
+  - DerivationsTwo
+  prose: DERIVATION_TWO_STUDY.md
+  test:
+  - test_derivation_two.py
+  wheel: []
+follow_ups: []
+id: DERIVATION_TWO_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 106
+predecessors: []
+question: Can the GLM take the rest of track P — the eleven class-P outside questions Phase 106 left refused
+  that are derivations (information inequalities, Kraft–McMillan, rate–distortion, maximum entropy, eigenvalue
+  problems, transmission through a barrier, the radix-2 FFT, a rate posterior, compactness, Tarski) —
+  and answer them with a derivation that a stand-alone script re-decides, while the three that are not
+  derivations stay refused?
+recomputed_by: '`glm_universal.runtime.derivation_two_report.derivation_two_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-declarations-committed-before-any-code
+  heading: 1. Declarations — committed before any code
+- anchor: 2-what-was-added
+  heading: 2. What was added
+- anchor: 3-results
+  heading: 3. Results
+- anchor: 4-notes-on-the-way
+  heading: 4. Notes on the way
+- anchor: 5-what-is-proved
+  heading: 5. What is proved
+- anchor: 6-limits
+  heading: 6. Limits
+- anchor: 7-what-the-round-moved
+  heading: 7. What the round moved
+- anchor: 8-re-running
+  heading: 8. Re-running
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The rest of track P: information, codes, spectra and the diagonal argument'
+verdict: 'Yes, within the eight declared operations: every declared case came out as declared, every answer
+  verifies by its own script and every mutated claim is rejected by it, both batteries are sound with
+  nothing left undecided, eleven outside questions that were refused are now answered, questions 29, 39
+  and 96 stay refused, and nothing else the machine answers moved. 11 of 11 marks met.'
+wobble_deps: []

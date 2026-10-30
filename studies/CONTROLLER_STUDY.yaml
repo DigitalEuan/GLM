@@ -1,0 +1,65 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Six heuristics scored on the same 24 tasks.
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - tests/test_controller
+  lean:
+  - Address
+  - Controller
+  prose: CONTROLLER_STUDY.md
+  test:
+  - test_controller.py
+  wheel: []
+follow_ups: []
+id: CONTROLLER_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: The geometry does not do the retrieving — can it do the steering?
+recomputed_by: '`glm_universal.reasoning.controller.controller_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-task-and-why-it-can-be-checked
+  heading: 1. The task, and why it can be checked
+- anchor: 2-two-refusals-and-only-one-of-them-is-a-budget
+  heading: 2. Two refusals, and only one of them is a budget
+- anchor: 3-the-six-scorers-on-the-same-24-tasks
+  heading: 3. The six scorers on the same 24 tasks
+- anchor: 4-what-it-costs
+  heading: 4. What it costs
+- anchor: 5-what-would-falsify-this
+  heading: 5. What would falsify this
+- anchor: 6-what-this-says-about-the-founding-question
+  heading: 6. What this says about the founding question
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The loop: propose, check, refuse — and whether the substrate can steer it'
+verdict: Every returned plan is re-verified, and the refusals carry a proof.
+wobble_deps: []

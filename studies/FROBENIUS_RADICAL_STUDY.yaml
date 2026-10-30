@@ -1,0 +1,81 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 9 of 9 marks met; 6 of 6 non-solvable questions certified; 5 of 5 solvable controls and
+  the composite-degree limit silent; 3 of 3 letter refusals with the declared reason; 0 of 178 solvable
+  polynomials certified; 200 of 200 random irreducible quintics and septics certified (50 by conjugation,
+  all 50 also by Frobenius); 2,561 of 2,561 modular readings and 179 of 179 cycle types read right; 9
+  theorems, 0 `sorry`; Phase 112 still 7 of 7.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - evaluation/frobenius_radical_cases
+  - tests/test_frobenius_radical
+  lean:
+  - FrobeniusRadicals
+  prose: FROBENIUS_RADICAL_STUDY.md
+  test:
+  - test_frobenius_radical.py
+  wheel: []
+follow_ups: []
+id: FROBENIUS_RADICAL_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 112
+predecessors:
+- QUINTIC_RADICAL_STUDY
+question: Phase 112's radical-free certificate reads the Galois group through complex conjugation, so
+  it needs exactly two non-real roots and is silent on `x^5 - x - 1`, whose group is the full symmetric
+  group. Can the branch layer of `solve symbolically` read the group through one Frobenius element instead,
+  say with a proved reason when no root is expressible in radicals, and never say it of a polynomial whose
+  group is solvable?
+recomputed_by: '`glm_universal.runtime.frobenius_radical_report.frobenius_radical_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-what-was-added
+  heading: 1. What was added
+- anchor: 2-the-marks
+  heading: 2. The marks
+- anchor: 3-what-is-proved
+  heading: 3. What is proved
+- anchor: 4-limits-and-what-the-round-leaves
+  heading: 4. Limits, and what the round leaves
+- anchor: 5-re-running-it
+  heading: 5. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Roots with no expression in radicals, read from one Frobenius element
+verdict: 'Yes. The layer now factors an irreducible polynomial of prime degree modulo small primes, and
+  when one factorisation has a cycle shape that no affine map `x ↦ ax + b` has, it states that no root
+  is expressible in radicals, citing Galois''s theorem on groups of prime degree, proved in Lean. All
+  nine marks were met: the statement now reaches `x^5 - x - 1`, the A5 quintic `x^5 + 20x + 16`, Trinks''s
+  septic with group `PSL(2, 7)` and the septic trinomial in letters, it is given to none of 178 polynomials
+  with solvable groups, and it reaches all 200 random irreducible quintics and septics. Dedekind''s theorem,
+  which turns the factorisation into a group element, is used but not proved in Lean, and composite degrees
+  are still out of reach.'
+wobble_deps: []

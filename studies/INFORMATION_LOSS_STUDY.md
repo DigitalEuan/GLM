@@ -22,7 +22,7 @@ Two artifacts back this document:
 * **`RequestProject/GLM/`** — a Lean 4 development in which every claim below
   marked *(proved)* is a machine-checked theorem, compiled with no `sorry` and
   depending only on Lean's standard axioms.
-* **`overlay/glm_universal/reasoning/information_loss.py`** — the
+* **`glm_universal/reasoning/information_loss.py`** — the
   same definitions, executed on the GLM's real carriers, so the numbers are
   measured rather than asserted. It is reachable from the runtime as
   `report information loss` and is covered by

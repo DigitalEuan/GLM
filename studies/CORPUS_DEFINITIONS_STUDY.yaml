@@ -1,0 +1,87 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 3 of 8 marks, 3 of 6 amended marks; graded agreement 26 against 17 for the first-mention
+  control (context ranking), 17 against 17 (pattern ranking); number words 64 of 120 address neighbours
+  against 1 of 120 for the control.
+directives:
+- D15
+evidence: []
+faculty: addressing
+file_refs:
+  code:
+  - knowledge/glossary
+  - knowledge/word_address
+  - tests/test_corpus_definitions
+  lean:
+  - Address
+  - CorpusDefinitions
+  - CorpusKnowledge
+  - Layers
+  prose: CORPUS_DEFINITIONS_STUDY.md
+  test:
+  - test_corpus_definitions.py
+  wheel: []
+follow_ups: []
+id: CORPUS_DEFINITIONS_STUDY
+junctions:
+- rule: ''
+  study: ''
+  wheels:
+  - W2
+  - W3
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 155
+predecessors:
+- CORPUS_KNOWLEDGE_STUDY
+question: When the GLM answers "what is X" from its corpus, is the answer a good definition — graded against
+  a held-out glossary rather than counted as found — and can a word be given a Leech address from its
+  corpus counts that carries how the word is used?
+recomputed_by: '`glm_universal.knowledge.definitions_study.corpus_definitions_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-built
+  heading: 1. What is built
+- anchor: 2-the-rules-fixed-before-the-measurement
+  heading: 2. The rules, fixed before the measurement
+- anchor: 3-what-would-count-against
+  heading: 3. What would count against
+- anchor: 4-what-is-not-claimed
+  heading: 4. What is not claimed
+- anchor: 5-what-is-proved-before-the-measurement
+  heading: 5. What is proved before the measurement
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-what-came-out
+  heading: 7. What came out
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The corpus's definitions graded, and a word's place on the lattice
+verdict: 'Partly: graded against the held-out glossary, `define`''s own ranking chooses definitions no
+  closer to the gloss than a term''s first mention, but ranking the same candidates by the term''s corpus
+  context beats that control and is now how `define` answers; a word''s Leech address read from its positional
+  counts carries word use — number words land among number words — but not the singular-plural relation.'
+wobble_deps: []

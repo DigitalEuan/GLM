@@ -1,0 +1,72 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: <!--figure:opesc-count-->7<!--/figure--> operations measured; every one beats its best
+  single rung and its substrate-removed control; one — program text — answers <!--figure:opesc-program-wrong-->13<!--/figure-->
+  of <!--figure:opesc-program-queries-->576<!--/figure--> queries wrongly.
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - tests/test_operation_escalation
+  lean: []
+  prose: OPERATION_ESCALATION_STUDY.md
+  test:
+  - test_operation_escalation.py
+  wheel: []
+follow_ups: []
+id: OPERATION_ESCALATION_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: 'The construction ladder improves geometric addressing: given a perturbed carrier it names the
+  carrier. Does the same escalation discipline improve any *other* faculty — meaning, dimensional reasoning,
+  the chemistry and physics registers, small-integer structure, program text, and equation checking —
+  or is addressing the only thing it buys?'
+recomputed_by: '`glm_universal.reasoning.operation_escalation.measure`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-the-protocol
+  heading: 1. The protocol
+- anchor: 2-the-operations-and-what-a-rung-is-supposed-to-add
+  heading: 2. The operations, and what a rung is supposed to add
+- anchor: 3-what-was-measured
+  heading: 3. What was measured
+- anchor: 4-equation-checking-the-one-that-derives
+  heading: 4. Equation checking — the one that derives
+- anchor: 5-limits
+  heading: 5. Limits
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Escalating something other than retrieval — six operations, their controls, and the one that is
+  not safe
+verdict: 'All seven operations gain from escalation over their best single rung, and one of them loses
+  the refusal contract while doing it: the program-text operation answers <!--figure:opesc-program-correct-->503<!--/figure-->
+  of <!--figure:opesc-program-queries-->576<!--/figure--> queries correctly and <!--figure:opesc-program-wrong-->13<!--/figure-->
+  wrongly, which is a failure and is reported as one.'
+wobble_deps: []

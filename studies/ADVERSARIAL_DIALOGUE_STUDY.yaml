@@ -1,0 +1,83 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 13 of 13 marks; 0 members outside the head ever live over 560 runs; echoes read as a
+  confirmation by number 10 → 0, wrong confirmations after a false reply and an echo 10 → 1 (the remaining
+  one within the proved limit); 118 of 118 consistent liars confirmed on the member impersonated; 223
+  of 223 evaluation cases unchanged.
+directives:
+- D2
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - AdversarialDialogue
+  prose: ADVERSARIAL_DIALOGUE_STUDY.md
+  test:
+  - test_adversarial_dialogue.py
+  wheel: []
+follow_ups: []
+id: ADVERSARIAL_DIALOGUE_STUDY
+junctions: []
+last_altered: '20 October 2026 (Phase 172: §7.4 says which of its lines that round took)'
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 172
+predecessors:
+- NEAREST_QUESTION_STUDY
+- RESUMED_DIALOGUE_STUDY
+question: When the replies to the question at a `nearest` tie are false, contradictory, repeated, unanswered,
+  malformed or close to two options, does the conversation ever promote a carrier the ranking excluded,
+  and where does it confirm a member the replies did not honestly single out?
+recomputed_by: '`glm_universal.reasoning.adversarial_dialogue_study.adversarial_dialogue_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved
+  heading: 1. What is proved
+- anchor: 2-the-mechanism
+  heading: 2. The mechanism
+- anchor: 3-the-informants
+  heading: 3. The informants
+- anchor: 4-faculties
+  heading: 4. Faculties
+- anchor: 5-the-marks
+  heading: 5. The marks
+- anchor: 6-what-is-not-claimed
+  heading: 6. What is not claimed
+- anchor: 7-what-came-out
+  heading: 7. What came out
+- anchor: in-one-paragraph
+  heading: In one paragraph
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Adversarial replies at the `nearest` ties — what dialogue may and may not do when the informant
+  is not truthful
+verdict: 'No reply of any kind ever made a carrier outside the ranking''s head live, over 560 adversarial
+  runs through the conversation, and Lean proves this for any replies. A consistent liar cannot be told
+  from a truthful informant, and Lean proves that limit too. One defect was found and fixed: a number
+  repeated from the turn before was read as an option number of the confirming question, so a confirmation
+  nobody gave was recorded (10 wrong confirmations after a first false reply). A yes-or-no question is
+  now answered by its words only.'
+wobble_deps: []

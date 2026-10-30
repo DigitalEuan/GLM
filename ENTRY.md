@@ -14,15 +14,15 @@
 
 ---
 
-*Last altered 20 October 2026 (Phase 172: the run-order hazards, at the head of the reading order).*
+*Last altered 29 October 2026 (Reorganisation: src/ layout, YAML study pairs, 19 directives, wheels centralized).*
 
 ## Picking the work up, in one screen
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.corpus --check       # is the tree as the last round left it?  ~30 s
-PYTHONPATH=. python3 -m glm_universal.signoff --verify      # which checks are still signed
-PYTHONPATH=. python3 -m glm_universal.corpus --ask "what bears on the Golay code?"
+cd src
+PYTHONPATH=src python3 -m glm_universal.corpus --check       # is the tree as the last round left it?  ~30 s
+PYTHONPATH=src python3 -m glm_universal.signoff --verify      # which checks are still signed
+PYTHONPATH=src python3 -m glm_universal.corpus --ask "what bears on the Golay code?"
 ```
 
 0. **Read the run-order hazards first** ([`ITERATE.md`](ITERATE.md) §0.1).
@@ -32,7 +32,7 @@ PYTHONPATH=. python3 -m glm_universal.corpus --ask "what bears on the Golay code
    `budget-guard-frozen` and `ties-ladder-frozen` first, then the rest, then
    refresh the corpus last.
 1. Read [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md) — the Positioning
-   section, the target, the <!--figure:directives-->17 standing rules<!--/figure--> and *The round, end to end*.
+   section, the target, the <!--figure:directives-->19 standing rules<!--/figure--> and *The round, end to end*.
 2. Read [`STATUS.md`](STATUS.md) — the To-Do list: §1 (where the work
    stands) and §2.1 (the next round, sharpest first). **Take one of those.**
 3. Use [`DIGEST.md`](DIGEST.md) to find the two or three studies that bear on
@@ -107,14 +107,14 @@ needed to understand the state now, and nothing in it has been deleted.
 
 Then, as the task requires:
 
-* the package — [`overlay/README.md`](overlay/README.md) and
-  [`overlay/glm_universal/README.md`](overlay/glm_universal/README.md), which
+* the package — [`glm_universal/README.md`](glm_universal/README.md) and
+  [`glm_universal/README.md`](glm_universal/README.md), which
   reach every sub-package README;
 * the formal development —
-  [`overlay/glm_lean/RequestProject/GLM/README.md`](overlay/glm_lean/RequestProject/GLM/README.md);
-* the generated figures — [`overlay/FIGURES.md`](overlay/FIGURES.md);
+  [`src/lean/RequestProject/GLM/README.md`](src/lean/RequestProject/GLM/README.md);
+* the generated figures — [`FIGURES.md`](FIGURES.md);
 * whether the machine reasons —
-  [`overlay/REASONING_CAPABILITY.md`](overlay/REASONING_CAPABILITY.md);
+  [`REASONING_CAPABILITY.md`](REASONING_CAPABILITY.md);
 * the studies, listed below.
 
 ## Finding the part that bears on a question
@@ -123,8 +123,8 @@ Two instruments, and the division of labour between them is measured rather
 than assumed (`studies/CORPUS_ADDRESS_STUDY.md`).
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.corpus --ask "what bears on the Golay code?"
+cd src
+PYTHONPATH=src python3 -m glm_universal.corpus --ask "what bears on the Golay code?"
 ```
 
 returns a shortlist of sections that is **complete up to a stated radius** —
@@ -283,8 +283,8 @@ now on: a compressed archive is material a reader cannot search.
 ## What keeps this file honest
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.corpus --check
+cd src
+PYTHONPATH=src python3 -m glm_universal.corpus --check
 ```
 
 fails if a current-state document is unreachable from here, if an archive

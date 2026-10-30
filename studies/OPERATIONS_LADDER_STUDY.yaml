@@ -1,0 +1,86 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 9 of 9 marks; 25 of 25 runs, 18 of 18 questions, 6 of 6 English programs, 78 of 78 lines
+  read back, 41 of 41 scripts verify and 158 of 158 mutations rejected; 14 of 14 cross-overs resolve;
+  H 185/242 against 3/4; post hoc, 299 of 299 decided generated programs agree between the machine and
+  column 3.
+directives:
+- D12
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - reasoning/batch_machine
+  - reasoning/batch_speech
+  - reasoning/operations
+  - reasoning/ops_ladder
+  lean:
+  - OperationsLadder
+  prose: OPERATIONS_LADDER_STUDY.md
+  test:
+  - test_operations_ladder.py
+  wheel: []
+follow_ups: []
+id: OPERATIONS_LADDER_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: 'Can the GLM take the owner''s DevOps ladder as a new domain — ninety-seven operational terms,
+  each defined as a composition of lower ones — and an old-style batch machine built from its two lowest
+  tiers, and use them to work things out: say a program as sentences and read it back exactly, answer
+  what a program prints, leaves behind or exits with, decide whether it halts or is idempotent with a
+  certificate, and refuse by name where it cannot know, without a wrong answer?'
+recomputed_by: '`glm_universal.reasoning.operations.operations_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-the-note-proposes-and-what-is-taken-from-it
+  heading: 1. What the note proposes, and what is taken from it
+- anchor: 2-the-objects
+  heading: 2. The objects
+- anchor: 3-the-marks-declared-before-the-code
+  heading: 3. The marks, declared before the code
+- anchor: 4-controls
+  heading: 4. Controls
+- anchor: 5-what-this-round-does-not-do
+  heading: 5. What this round does not do
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-the-measurement
+  heading: 7. The measurement
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The operations ladder — an old-style machine, learnt as a language
+verdict: Yes, within the declared fragment. The 97 terms of the note are the register tier by tier with
+  every composition layered and grounded; all 25 machine runs, all 18 English questions and all 6 English-written
+  programs came out as declared with 0 wrong answers, every refusal by its declared name; all 78 battery
+  lines were said as sentences and read back exactly; and all 41 answered runs and questions carry a column-3
+  Python script that passes in a fresh interpreter, while all 158 of their mutations fail. Hypothesis
+  H held narrowly (185 of 242 composition edges monotone against 3/4), but the mean Geometric-Cybernetic
+  tier is not monotone in the DevOps tier, so the two ladders agree on most edges and disagree on the
+  coarse order.
+wobble_deps: []

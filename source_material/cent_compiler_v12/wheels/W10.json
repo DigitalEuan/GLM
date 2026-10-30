@@ -1,0 +1,180 @@
+{
+  "id": "W10",
+  "title": "Photon energy and momentum",
+  "axioms": [
+    "energy = planck_constant * frequency",
+    "energy = speed_of_light * momentum"
+  ],
+  "cases": [
+    {
+      "id": "W10-01",
+      "equation": "frequency = energy / planck_constant",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W10-02",
+      "equation": "momentum = energy / speed_of_light",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W10-03",
+      "equation": "momentum = planck_constant / wavelength",
+      "expected_dimensional": true,
+      "expected_derivable": false,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": "needs wave_speed = c as well"
+    },
+    {
+      "id": "W10-N1",
+      "equation": "energy = planck_constant / frequency",
+      "expected_dimensional": false,
+      "expected_derivable": false,
+      "physical_status": "negative_control",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    }
+  ],
+  "quantities": [
+    "energy",
+    "frequency",
+    "momentum",
+    "planck_constant",
+    "speed_of_light"
+  ],
+  "dimensions": {
+    "energy": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        1,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "frequency": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "momentum": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "planck_constant": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "speed_of_light": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "junctions": [
+    {
+      "other_wheel": "W9",
+      "name_in_this_wheel": "speed_of_light",
+      "name_in_other_wheel": "wave_speed",
+      "reason": "a photon's wave_speed = speed_of_light (light is the wave)"
+    },
+    {
+      "other_wheel": "W9",
+      "name_in_this_wheel": "frequency",
+      "name_in_other_wheel": "frequency",
+      "reason": "a photon's frequency = the wave's frequency (a photon is a wave)"
+    }
+  ],
+  "non_identities": []
+}

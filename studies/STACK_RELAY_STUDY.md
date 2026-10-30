@@ -87,10 +87,10 @@ a preferred result:
 Every table below is a **generated block**, emitted from the measurement cache
 that `python3 -m glm_universal.corpus --remeasure` fills, guarded by the digest
 of the Lean sources it was taken from. The formal half is
-[`RequestProject/GLM/Relay.lean`](../overlay/glm_lean/RequestProject/GLM/Relay.lean); the
+[`RequestProject/GLM/Relay.lean`](../glm_lean/RequestProject/GLM/Relay.lean); the
 computational half is `glm_universal.reasoning.stack` and
 `glm_universal.reasoning.vision_stack`; the test that pins the two against each
-other is `overlay/glm_universal/tests/test_stack.py`; and the report prints
+other is `glm_universal/tests/test_stack.py`; and the report prints
 with
 
 ```bash
@@ -293,7 +293,7 @@ Who carried what: **geometry** — `1e0a9b12`; **recolour** — `ae58858e`.  Mor
 A mechanism that only worked in the register it was invented in would be a
 trick. So the same definitions — confidence, gate, quota, interleave — are
 instantiated over the 50 ARC-AGI training puzzles kept under
-`overlay/arc_agi_17/data/training`, with faculties that read no text at all:
+`arc_agi_17/data/training`, with faculties that read no text at all:
 
 * **recolour**, which leads, because it reads the puzzle's own pairs: a flat
   colour map, and the conditional recolour that decides a shape's colour from
@@ -326,7 +326,7 @@ which is the only sense in which "solved" is used here.
 ## 7. What is proved
 
 The measurements above can move with the corpus. The following cannot, because
-they are theorems of [`RequestProject/GLM/Relay.lean`](../overlay/glm_lean/RequestProject/GLM/Relay.lean)
+they are theorems of [`RequestProject/GLM/Relay.lean`](../glm_lean/RequestProject/GLM/Relay.lean)
 about the relay itself, and they hold in whichever register it is instantiated.
 
 | statement | what it says | Lean |

@@ -64,7 +64,7 @@ norm), and when no amount of combining can choose (a mirror).
 
 ## 2. What is proved
 
-**[`overlay/glm_lean/RequestProject/GLM/LorentzianEvidence.lean`](../overlay/glm_lean/RequestProject/GLM/LorentzianEvidence.lean)**
+**[`glm_lean/RequestProject/GLM/LorentzianEvidence.lean`](../glm_lean/RequestProject/GLM/LorentzianEvidence.lean)**
 — over `ℚ`, for any dimension `n`, any finite index set and any weights, built
 on Phase 182's `LorentzianLift.lean`.
 
@@ -313,6 +313,6 @@ python3 GLM.py -q "tool evidence velocity : acceleration, mass : density :: mome
 lake build RequestProject.GLM.LorentzianEvidence
 ```
 
-The mechanism is `overlay/glm_universal/reasoning/lorentzian_evidence.py`,
-the measurement `overlay/glm_universal/reasoning/lorentzian_evidence_study.py`,
-the tests `overlay/glm_universal/tests/test_lorentzian_evidence.py`.
+The mechanism is `glm_universal/reasoning/lorentzian_evidence.py`,
+the measurement `glm_universal/reasoning/lorentzian_evidence_study.py`,
+the tests `glm_universal/tests/test_lorentzian_evidence.py`.

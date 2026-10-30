@@ -1,0 +1,91 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 7 of 9 marks; 10 of 10 programs as declared; 19 of 20 questions as declared; 8 of 8 diagnoses
+  as declared and 8 of 8 closed forms predictive; 33 of 33 column-3 scripts verify and 167 of 167 mutations
+  rejected; 26 of 26 earlier programs, 35 of 35 earlier questions and 300 of 300 generated programs unchanged;
+  8 of 8 jumped *halts* equal to a plain run.
+directives:
+- D2
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - reasoning/affine_output
+  - reasoning/batch_machine
+  - reasoning/batch_speech
+  - reasoning/constant_bound
+  lean:
+  - AffineOutput
+  - ConstantBound
+  prose: AFFINE_OUTPUT_STUDY.md
+  test:
+  - test_affine_output.py
+  wheel: []
+follow_ups: []
+id: AFFINE_OUTPUT_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 132
+predecessors:
+- CONSTANT_BOUND_STUDY
+- COUNTER_LASSO_STUDY
+- STACK_RELAY_STUDY
+question: Can GLM-BAT's counter-lasso reading jump a pass that prints a counter, state output past 100,000
+  lines in a short checkable form, and say *why* when it still cannot decide — with the Non-Random Coherence
+  Index reported as a diagnosis only — without changing any verdict it already gave and without a verdict
+  a long plain run contradicts?
+recomputed_by: '`glm_universal.reasoning.affine_output.affine_output_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved-before-any-code
+  heading: 1. What is proved before any code
+- anchor: 2-the-rule
+  heading: 2. The rule
+- anchor: 3-the-marks-declared-before-the-code
+  heading: 3. The marks, declared before the code
+- anchor: 4-controls
+  heading: 4. Controls
+- anchor: 5-what-this-round-does-not-do
+  heading: 5. What this round does not do
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-the-measurement
+  heading: 7. The measurement
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Passes that print a counter, long output, and the diagnosis of a refusal
+verdict: 'Yes, within the declared rule, with two marks missed on how the hand-worked expectations were
+  stated. All 10 battery programs came out exactly as declared, 0 wrong: K5 (as P1) halts after 60,002
+  steps printing 1 to 20000, K4 (as P2) after 1,500,004 steps printing `tick` 500,000 times with a 208-byte
+  claim in run form, and five more loops that print counters are answered exactly; the 8 refused programs
+  of the diagnosis battery were diagnosed exactly as declared, and the closed forms predicted the next
+  32 visits of all 8 shaped variables. P8''s printed text came out in the declared encoder''s segments,
+  not the hand-worked ones, and P2''s whole script is over the declared 10,000 bytes because the checker
+  alone is 26,819, so marks A3 and A4 are missed. Non-interference on every earlier answer and all 300
+  generated programs, and the soundness control against plain runs, were met. The NRCI of a straight line
+  through L12''s quadratic counter is 0.999993: a soft score would have called it a line.'
+wobble_deps: []

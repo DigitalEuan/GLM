@@ -1,0 +1,84 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 354 of 354 cells decided (atomic weight 73 / 11 / 0 discrepant / 34 world-silent; ionization
+  energy 10 / 68 / 24 discrepant / 6 register-silent / 10 both-silent; configuration 107 / 1 discrepant
+  / 10 world-silent); 24 of 24 declared questions as declared, 0 wrong, where the machine answered 2 of
+  them before; 186 of 186 injected errors caught and 0 of 186 world values flagged; 51 of 51 molecules
+  decided; completed view 1,442 → 1,344 of 1,652 (185 → 87 estimates); 8 of 8 marks met.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - evaluation/register_world_cases
+  - reasoning/element_completion
+  - runtime/register_world
+  - runtime/register_world_report
+  - runtime/semantic_plan
+  - tests/test_register_world
+  lean:
+  - RegisterWorld
+  prose: REGISTER_WORLD_STUDY.md
+  test:
+  - test_register_world.py
+  wheel: []
+follow_ups: []
+id: REGISTER_WORLD_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 63
+predecessors: []
+question: Does the element register agree with the outside world, in every row and every field an outside
+  source holds — read at the precision each value is held to, never writing to the register — and do the
+  chemistry completion rules still earn their place once the choice of rule is itself held out?
+recomputed_by: '`glm_universal.runtime.register_world_report.register_world_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-world-frozen
+  heading: 1. The world, frozen
+- anchor: 2-the-reading-written-before-any-code-of-the-round
+  heading: 2. The reading — written before any code of the round
+- anchor: 3-what-was-built
+  heading: 3. What was built
+- anchor: 4-results
+  heading: 4. Results
+- anchor: 5-what-is-proved-rather-than-measured
+  heading: 5. What is proved rather than measured
+- anchor: 6-limits-and-what-the-round-leaves
+  heading: 6. Limits, and what the round leaves
+- anchor: 7-re-running-it
+  heading: 7. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The register against the world: every element row against cited outside values, and a completion
+  gate that survives its own selection'
+verdict: 'Yes, except where it is now named: every one of the 354 cells is decided, 24 ionization energies
+  and one configuration are discrepant with the cited source, every atomic weight agrees (eleven only
+  at the register''s stated precision), and the register is not written; the completion gate now reads
+  the nested holdout, so the covalent radius rule is demoted and the electron affinity rule is narrowed
+  to the main group.'
+wobble_deps: []

@@ -1,0 +1,83 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 8 of 8 marks on the first take; first-tie replies read behind a second question 0 of
+  61 → 61 of 61 dialogues ending as alone, 0 of 258 replies misbound; 23 of 23 replies fitting both bound
+  to the newer and naming the older; 0 of 4,683 evaluation questions read as a reply; 0 members outside
+  the head ever live over 244 runs.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - StackedDialogue
+  prose: STACKED_DIALOGUE_STUDY.md
+  test:
+  - test_stacked_dialogue.py
+  wheel: []
+follow_ups: []
+id: STACKED_DIALOGUE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 172
+predecessors:
+- RESUMED_DIALOGUE_STUDY
+question: When a second tie's question is put before the first is answered, can the conversation keep
+  both open and read each reply against the question it answers, say which one when a reply fits more
+  than one, and close a question that has been left alone too long, without ever reading a reply against
+  the wrong question or taking a whole query for one?
+recomputed_by: '`glm_universal.reasoning.stacked_dialogue_study.stacked_dialogue_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved
+  heading: 1. What is proved
+- anchor: 2-the-mechanism
+  heading: 2. The mechanism
+- anchor: 3-what-is-measured
+  heading: 3. What is measured
+- anchor: 4-faculties
+  heading: 4. Faculties
+- anchor: 5-the-marks
+  heading: 5. The marks
+- anchor: 6-what-is-not-claimed
+  heading: 6. What is not claimed
+- anchor: 7-what-came-out
+  heading: 7. What came out
+- anchor: in-one-paragraph
+  heading: In one paragraph
+status: open
+successors: []
+superseded_by: ''
+supersedes: []
+title: Several open ties at once — a reply read against the question it answers
+verdict: 'Yes. The open questions now form a stack, newest first: a second question no longer closes the
+  first, a reply is read against the newest open question it fits or against the turn it names (`turn
+  N: <reply>`), it closes that question only, and a question closes after five unrelated turns. Two ties
+  answered one after the other, interleaved, ended exactly as each ends alone in every run, with no reply
+  bound to the wrong question; a reply that fitted both was bound to the newer and named the older every
+  time; no question of the evaluation set was taken for a reply. Lean proves the rule: the bound question
+  is the newest the reply fits, a reply closes exactly one question, the window closes everything after
+  it, and nothing the rule of Phase 172 read is read differently when the newest question fits.'
+wobble_deps: []

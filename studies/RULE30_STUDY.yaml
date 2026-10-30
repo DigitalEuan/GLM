@@ -1,0 +1,94 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 428 ledger rows (259 FORMAL, 67 CERT, 9 EXH, 79 EMP, 4 DEF, 9 OPEN, 1 GLM) over 160 Lean
+  files with no unfinished proof and no added axiom; 3 of 3 prize problems open.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - AxiomAuditAll
+  - Basic
+  - Benchmarks
+  - ColumnInverse
+  - ConjectureLoop
+  - Data
+  - Escalation
+  - Frontier
+  - GLM
+  - LeftWhiteCompactness
+  - LocalRuleInduction
+  - MachineModel
+  - Observer
+  - Pipeline
+  - PlanSearch
+  - Prizes
+  - Problem3Quantifiers
+  - Rule30
+  - Rule30Study
+  - TuningByEar
+  - WheelInduction
+  prose: RULE30_STUDY.md
+  test:
+  - test_rule30.py
+  wheel: []
+follow_ups: []
+id: RULE30_STUDY
+junctions: []
+last_altered: '27 October 2026 (Round 49: the journey written up, the package tidied and prepared for
+  the GLM)'
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: What did the Rule 30 study establish about Wolfram's three prize problems, and what does it
+  hand on to the GLM?
+recomputed_by: (hand-written argument; nothing to recompute)
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-what-the-study-is
+  heading: 1. What the study is
+- anchor: 2-the-journey
+  heading: 2. The journey
+- anchor: 3-the-best-findings
+  heading: 3. The best findings
+- anchor: 4-how-the-package-is-organised
+  heading: 4. How the package is organised
+- anchor: 5-merging-into-the-glm
+  heading: 5. Merging into the GLM
+- anchor: 6-preparing-the-studies-for-yaml
+  heading: 6. Preparing the studies for YAML
+- anchor: 7-what-this-leaves-open-and-how-to-continue
+  heading: 7. What this leaves open, and how to continue
+- anchor: 8-what-is-machine-checked
+  heading: 8. What is machine-checked
+- anchor: 9-where-it-is-reachable
+  heading: 9. Where it is reachable
+status: negative
+successors: []
+superseded_by: ''
+supersedes: []
+title: Rule 30 through the GLM — the journey, the best findings, and the package
+verdict: All three prize problems are still open; the study turned every informal claim into an exact
+  statement, proved the true ones, refuted the false ones, narrowed each problem to named missing theorems,
+  and leaves the GLM a machine-checked reasoning toolkit.
+wobble_deps: []

@@ -19,9 +19,9 @@ verdict, and both numbers invited a second question that the audit did not ask.
 This document asks them. Both answers are negative, and both are more useful
 than the positive would have been.*
 
-Module: [`overlay/glm_universal/reasoning/deep_dive.py`](../overlay/glm_universal/reasoning/deep_dive.py)
+Module: [`glm_universal/reasoning/deep_dive.py`](../glm_universal/reasoning/deep_dive.py)
 — one call, `deep_dive_report()`.
-Tests: `overlay/glm_universal/tests/test_deep_dive.py` — 23 test methods.
+Tests: `glm_universal/tests/test_deep_dive.py` — 23 test methods.
 Specification: `RequestProject/GLM/TriadChance.lean` and
 `RequestProject/GLM/Relaxation.lean` (D8).
 Arithmetic: exact `int` and `Fraction` (D7). Every census below is a full

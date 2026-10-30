@@ -42,7 +42,7 @@ and those are the interesting results:
 The directive fixes `GOLAY_COVERING_RADIUS_TIE_COUNT = 6`. That constant is now
 a theorem about the code the substrate actually uses — the systematic
 `[24, 12, 8]` extended binary Golay code with the symmetric parity block `B` of
-`overlay/glm_universal/substrate/mog.py`, transcribed into
+`glm_universal/substrate/mog.py`, transcribed into
 `RequestProject/GLM/Golay/Code.lean` with the same syndrome convention (spot
 checks agree with `GOLAY.syndrome_int` word for word).
 

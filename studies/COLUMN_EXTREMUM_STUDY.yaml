@@ -1,0 +1,78 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: <!--figure:extremum-as-declared-->8<!--/figure--> of <!--figure:extremum-declared-count-->8<!--/figure-->
+  declared columns came out as declared, <!--figure:extremum-answered-->4<!--/figure--> folded and <!--figure:extremum-refused-->4<!--/figure-->
+  refused under all <!--figure:extremum-reasons-->4<!--/figure--> named reasons.
+directives:
+- D15
+- D7
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - tests/test_column_extremum
+  lean:
+  - ColumnExtremum
+  prose: COLUMN_EXTREMUM_STUDY.md
+  test:
+  - test_column_extremum.py
+  wheel: []
+follow_ups: []
+id: COLUMN_EXTREMUM_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: The ordering operation composes exactly two readings and says so in its own limits. Built, what
+  does the operation over a whole column answer, and what must it refuse?
+recomputed_by: '`glm_universal.reasoning.column_extremum.extremum_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-what-this-round-took-and-from-where
+  heading: 1. What this round took, and from where
+- anchor: 2-what-the-operation-is
+  heading: 2. What the operation is
+- anchor: 3-what-it-refuses-and-why-two-of-the-four-refusals-are-the-result
+  heading: 3. What it refuses, and why two of the four refusals are the result
+- anchor: 4-the-declared-set
+  heading: 4. The declared set
+- anchor: 5-what-is-proved-rather-than-measured
+  heading: 5. What is proved rather than measured
+- anchor: 6-what-it-decides-and-what-it-does-not
+  heading: 6. What it decides, and what it does not
+- anchor: 7-limits
+  heading: 7. Limits
+- anchor: 8-re-running-it
+  heading: 8. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The extremum of a column — the operation the ordering round stopped short of, and the two refusals
+  that are the point of it
+verdict: 'It folds four of the eight columns declared before the run and refuses four, every one of the
+  eight as declared, under all four of its named reasons. The two refusals it was built for are the result
+  rather than fussiness: a column with a hole in it has no extremum, because the largest of the rows that
+  happen to be filled in is a wrong answer rather than a partial one, and a column gathered from two scales
+  is not one column. Where more than one row is at the end, every row attaining it is named.'
+wobble_deps: []

@@ -25,7 +25,7 @@ only the planner's). All three are the next round named by
 [`CONNECTED_MACHINE_STUDY.md`](CONNECTED_MACHINE_STUDY.md) §6.
 
 Before this round the conversation layer
-([`runtime/conversation.py`](../overlay/glm_universal/runtime/conversation.py),
+([`runtime/conversation.py`](../glm_universal/runtime/conversation.py),
 Phase 55) binds three surface shapes and refuses everything else: *describe
 it* after the fourteen-row tie at the top of the lexicon's `abstract_concrete`
 column is refused `ambiguous-antecedent`; *describe the one before that* binds
@@ -81,7 +81,7 @@ the head of the declared cases before any code of the round:
 ## 3. Declarations — written before any code of the round
 
 The corpus is
-[`evaluation/discourse_cases.py`](../overlay/glm_universal/evaluation/discourse_cases.py),
+[`evaluation/discourse_cases.py`](../glm_universal/evaluation/discourse_cases.py),
 committed with §1 and before any code: 7 column cases (0b), 16 fourth-shape
 cases (D = 0a: 4 for *the one before that*, 8 plural, 4 *why?*) and 6
 surface cases (K3), each a whole conversation with its expected outcome — a
@@ -105,7 +105,7 @@ The measurement is `glm_universal.runtime.discourse_report.discourse_report`.
 
 ## 4. What was built
 
-* [`runtime/discourse.py`](../overlay/glm_universal/runtime/discourse.py) —
+* [`runtime/discourse.py`](../glm_universal/runtime/discourse.py) —
   `Discourse`, a subclass of Phase 55's `Conversation`: the set a turn
   produced (`COLUMN_KINDS`: an `extremum` tie and a `column` turn), the
   column (`ColumnBinding`, a `column` solution whose cells are the rows'
@@ -114,13 +114,13 @@ The measurement is `glm_universal.runtime.discourse_report.discourse_report`.
   recorded as a turn, the `surfaces=True` licence through
   `router.ask_routed`, the rows read from a routed question
   (`ROW_DOMAINS`), and whole first. `carry=False` is the round's switch.
-* [`runtime/discourse_report.py`](../overlay/glm_universal/runtime/discourse_report.py)
+* [`runtime/discourse_report.py`](../glm_universal/runtime/discourse_report.py)
   — the measurement; `tools discourse-state`;
   `tests/test_discourse_state.py`.
 * **Wiring.** `GLM.py --converse TEXT` (repeatable): successive texts are one
   conversation over every surface, a column printed row by row, a refusal
   with its reason. `-q`, `--ask` and `--steps` are unchanged.
-* [`RequestProject/GLM/DiscourseState.lean`](../overlay/glm_lean/RequestProject/GLM/DiscourseState.lean)
+* [`RequestProject/GLM/DiscourseState.lean`](../glm_lean/RequestProject/GLM/DiscourseState.lean)
   — §6.
 
 ## 5. Results
@@ -153,9 +153,9 @@ answered there, each row by the surface that would answer it written out.
 
 ## 6. What is proved rather than measured
 
-[`RequestProject/GLM/DiscourseState.lean`](../overlay/glm_lean/RequestProject/GLM/DiscourseState.lean)
+[`RequestProject/GLM/DiscourseState.lean`](../glm_lean/RequestProject/GLM/DiscourseState.lean)
 states the new operation over the same turns as
-[`RequestProject/GLM/Conversation.lean`](../overlay/glm_lean/RequestProject/GLM/Conversation.lean),
+[`RequestProject/GLM/Conversation.lean`](../glm_lean/RequestProject/GLM/Conversation.lean),
 with one more bit per turn — whether its answer side is a set the turn
 produced — and builds with no `sorry`:
 

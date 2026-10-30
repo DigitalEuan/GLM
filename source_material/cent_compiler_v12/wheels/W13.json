@@ -1,0 +1,206 @@
+{
+  "id": "W13",
+  "title": "Period and the mass-spring oscillator",
+  "axioms": [
+    "frequency = 1 / period",
+    "angular_frequency = angle * frequency",
+    "spring_constant = mass * angular_frequency^2"
+  ],
+  "cases": [
+    {
+      "id": "W13-01",
+      "equation": "period = 1 / frequency",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W13-02",
+      "equation": "angular_frequency = angle * frequency",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "model_convention",
+      "expected_dimensional_explicit": null,
+      "note": "numerically omega = 2*pi*f; angle is one turn"
+    },
+    {
+      "id": "W13-03",
+      "equation": "spring_constant = mass * angular_frequency^2",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    }
+  ],
+  "quantities": [
+    "angle",
+    "angular_frequency",
+    "frequency",
+    "mass",
+    "period",
+    "spring_constant"
+  ],
+  "dimensions": {
+    "angle": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "angular_frequency": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "frequency": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "mass": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "period": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "spring_constant": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        1,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "junctions": [
+    {
+      "other_wheel": "W9",
+      "name_in_this_wheel": "frequency",
+      "name_in_other_wheel": "frequency",
+      "reason": "the oscillator's frequency = the wave's frequency"
+    },
+    {
+      "other_wheel": "W5",
+      "name_in_this_wheel": "mass",
+      "name_in_other_wheel": "mass",
+      "reason": "the oscillating body = the dynamic body"
+    }
+  ],
+  "non_identities": [
+    {
+      "other_wheel": "W14",
+      "name": "angular_frequency",
+      "reason": "a mechanical oscillator against an electrical one; identifying them would give spring_constant = mass / (inductance * capacitance)"
+    },
+    {
+      "other_wheel": "W9",
+      "name": "angle",
+      "reason": "Phase 158 split: the oscillator's angle convention vs the wave's angle reference; only frequency is joined"
+    }
+  ]
+}

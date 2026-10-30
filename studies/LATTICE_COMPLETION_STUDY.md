@@ -213,11 +213,11 @@ candidates are tried with the norm-2 result in place.
 ## 6. Files
 
 * `RequestProject/GLM/LatticeCompletion.lean` — L1.
-* `overlay/glm_universal/reasoning/hole_census.py` — Part A: the three
+* `glm_universal/reasoning/hole_census.py` — Part A: the three
   stages, the new ensembles, the 23-reference cells.
-* `overlay/glm_universal/reasoning/configuration_classifier.py` — Part B.
-* `overlay/glm_universal/reasoning/empty_rungs.py` — Part C.
-* `overlay/glm_universal/reasoning/lattice_completion.py` — the marks.
+* `glm_universal/reasoning/configuration_classifier.py` — Part B.
+* `glm_universal/reasoning/empty_rungs.py` — Part C.
+* `glm_universal/reasoning/lattice_completion.py` — the marks.
 * `python3 -m glm_universal.tools hole-census | configuration-classifier |
   empty-rungs` and `report hole configuration`.
 * Tests: `test_hole_census.py`, `test_configuration_classifier.py`,

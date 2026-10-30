@@ -1,0 +1,89 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: '9 of 9 marks; Golay fork: waiting 768/768 resolved (mean 209/24 reports, max 13), coordinate
+  questions mean 13/4 (max 5), set questions mean 1021/384 (max 3 = `Nat.clog 2 6`), 0 wrong in each;
+  one false answer: 1536/1536 resolved wrong without confirmation, 1536/1536 contradicted with it; junctions:
+  104/104 unchanged by waiting, 387/387 resolved by asking, 0 wrong, 385 without the direct choice, mean
+  1280/387 questions against a `Nat.clog 2` mean of 1174/387 and a one-by-one mean of 1253/129; 6 of 6
+  dialogues.'
+directives:
+- D1
+- D2
+- D3
+- D4
+- D5
+- D6
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - reasoning/timed_question
+  - tests/test_timed_question
+  lean:
+  - TimedQuestion
+  prose: TIMED_QUESTION_STUDY.md
+  test:
+  - test_timed_question.py
+  wheel: []
+follow_ups: []
+id: TIMED_QUESTION_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 145
+predecessors:
+- CARRIED_FORK_STUDY
+question: When the GLM meets a tie it cannot separate with what it has, can it hold the tie open and let
+  **time** resolve it — information that a later step supplies — and can it work out and **ask for exactly
+  the information it needs**, rather than refusing or waiting for whatever happens to arrive?
+recomputed_by: '`glm_universal.reasoning.timed_question.timed_question_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved-before-any-code
+  heading: 1. What is proved before any code
+- anchor: 2-the-rule
+  heading: 2. The rule
+- anchor: 3-the-two-ties-and-the-dialogues-declared-here
+  heading: 3. The two ties, and the dialogues declared here
+- anchor: 4-the-marks-declared-before-the-code
+  heading: 4. The marks, declared before the code
+- anchor: 5-what-this-round-does-not-do
+  heading: 5. What this round does not do
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-what-came-out
+  heading: 7. What came out
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Time and the question — resolving a tie by information that comes later
+verdict: 'The intuition holds where it can be measured. Held open as a tie, a refusal becomes a question:
+  time resolves the Golay fork when later steps report sure coordinates (all 768 forks, to the transmitted
+  word, after 8.71 reports on average), and asking resolves it faster — the GLM''s own halving questions
+  take 2.66 on average and never more than 3, the proved minimum. Waiting can never resolve a junction,
+  because every observation of the coordinates is constant on it (proved, and 104 of 104 measured); asking
+  for what the coordinates do not carry resolves all 387 junction runs with 0 wrong. A single false answer
+  is undetectable without a confirming question and always caught with one. All 9 marks met.'
+wobble_deps: []

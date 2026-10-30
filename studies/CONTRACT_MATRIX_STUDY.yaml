@@ -1,0 +1,75 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: '525 cells per variant and frame; on-grid breaks in frame I: A 2, B 0, C 2, D 0; in frame
+  II: A 0, B 0, C 2, D 0; mean on-grid retention in frame II: A 0.7420, B 0.5562, C 0.8003, D 0.6881;
+  prior-averaged promise broken in 0 of 35 cells for every variant.'
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - tests/test_contract_matrix
+  lean:
+  - QuestionSetB
+  prose: CONTRACT_MATRIX_STUDY.md
+  test:
+  - test_contract_matrix.py
+  wheel: []
+follow_ups: []
+id: CONTRACT_MATRIX_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 86
+predecessors:
+- RATE_POSTERIOR_STUDY
+question: Of the current contract, the upper-credible rate rule, the session-marginal confidence and both
+  together, which should the plain readings ship, judged exactly over every fixed-rate cell in two frames?
+recomputed_by: '`glm_universal.reasoning.contract_matrix.matrix`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-four-variants
+  heading: 1. The four variants
+- anchor: 2-the-model-and-the-decision-rule-declared-before-the-table-was-read
+  heading: 2. The model and the decision rule, declared before the table was read
+- anchor: 3-the-matrix
+  heading: 3. The matrix
+- anchor: 4-calibration-of-the-printed-confidence
+  heading: 4. Calibration of the printed confidence
+- anchor: 5-what-was-changed-in-the-runtime
+  heading: 5. What was changed in the runtime
+- anchor: 6-what-is-proved
+  heading: 6. What is proved
+- anchor: 7-re-running
+  heading: 7. Re-running
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The contract matrix — candidate P's two contract changes, tested four ways
+verdict: The combined candidate P (variant D, the upper-credible rule over the session's reads) qualifies
+  and keeps the most right answers among the variants that qualify; it is the production baseline, and
+  the upper-credible rule alone and the session-marginal confidence alone are set aside, still callable
+  by name.
+wobble_deps: []

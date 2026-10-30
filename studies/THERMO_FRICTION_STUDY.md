@@ -49,14 +49,14 @@ nothing about the others, and each ships or does not on its own marks.
 
 ## 1. What is built
 
-* `overlay/glm_universal/knowledge/thermo_friction.py` — the governor (A) and
+* `glm_universal/knowledge/thermo_friction.py` — the governor (A) and
   the anchor reader (B), over Phase 156's held-out sample, hold-out model,
   continuation and directory evidence
-  (`overlay/glm_universal/knowledge/friction.py`), imported and not modified.
-* `overlay/glm_universal/runtime/respell.py` — the sintered reading (C): a
+  (`glm_universal/knowledge/friction.py`), imported and not modified.
+* `glm_universal/runtime/respell.py` — the sintered reading (C): a
   new mode beside the four of Phase 157, and the register lexicon it opens
   (`runtime/_data/register_lexicon.json`, built from the registers).
-* `overlay/glm_universal/knowledge/thermo_friction_study.py` and
+* `glm_universal/knowledge/thermo_friction_study.py` and
   `python3 -m glm_universal.tools thermo-friction [--write]` — the marks and
   the stored measurement (`knowledge/_data/thermo_friction.json`).
 * `RequestProject/GLM/ThermoFriction.lean` — what is proved (§5).
@@ -284,7 +284,7 @@ the answer.
 
 ## 6. Files
 
-See §1. Tests: `overlay/glm_universal/tests/test_thermo_friction.py`.
+See §1. Tests: `glm_universal/tests/test_thermo_friction.py`.
 
 ## 7. What came out
 
@@ -300,7 +300,7 @@ question asked of `GLM.py` (`_data/thermo_friction_blind_spot.json`,
 before (`_data/thermo_friction_frozen.json`, `--frozen`).
 
 Two departures from §1, neither a change of rule: the sintered reading lives
-in its own module, `overlay/glm_universal/runtime/sinter.py`, which imports
+in its own module, `glm_universal/runtime/sinter.py`, which imports
 `runtime/respell.py` and leaves it unchanged (so Phase 157's stored
 measurement, which digests `respell.py`, stays current); and the physics
 register as held has 726 quantities, not the 660 §2.3 quoted — the rule was

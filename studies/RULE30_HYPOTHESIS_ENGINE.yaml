@@ -1,0 +1,84 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: v4 passed all 5 inputs with known answers, including periodic ones; the v5 prediction
+  reached 87,000 diagonals beyond the data.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - Benchmarks
+  - BenchmarksData
+  - ConjectureLoop
+  - DialogueChecks
+  - LeftDiagonalPeriods
+  - LeftDiagonalPeriodsData
+  - WhiteDiagonals
+  prose: RULE30_HYPOTHESIS_ENGINE.md
+  test:
+  - test_rule30_hypothesis_engine.py
+  wheel: []
+follow_ups: []
+id: RULE30_HYPOTHESIS_ENGINE
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Can the owner's Hypothesis Engine produce real, checkable results on Rule 30?
+recomputed_by: (hand-written argument; nothing to recompute)
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-what-v4-does-and-why-it-cannot-answer-a-puzzle-question
+  heading: 1. What v4 does, and why it cannot answer a puzzle question
+- anchor: 2-v5-the-design
+  heading: '2. v5: the design'
+- anchor: 3-what-it-found-on-rule-30-one-run-about-20-seconds
+  heading: 3. What it found on Rule 30 (one run, about 20 seconds)
+- anchor: 4-where-this-leaves-the-puzzle-questions
+  heading: 4. Where this leaves the puzzle questions
+- anchor: 5-the-owners-perspective-idea-in-the-engine
+  heading: 5. The owner's "perspective" idea in the engine
+- anchor: 6-moving-it-into-the-glm
+  heading: 6. Moving it into the GLM
+- anchor: 7-core-v6-what-was-added
+  heading: '7. Core v6: what was added'
+- anchor: 8-rule-30-the-theories-the-engine-generated-this-round
+  heading: '8. Rule 30: the theories the engine generated this round'
+- anchor: 9-the-engine-off-rule-30-general-reasoning
+  heading: 9. The engine off Rule 30 (general reasoning)
+- anchor: 10-hypotheses-tests-and-what-came-of-them
+  heading: 10. Hypotheses, tests and what came of them
+- anchor: 11-every-answer-an-action-every-implication-a-checked-edge
+  heading: 11. Every answer an action, every implication a checked edge
+- anchor: 12-round-42-v13-checked-and-guards-against-plausible-but-wrong-sentences
+  heading: '12. Round 42: v13 checked, and guards against plausible but wrong sentences'
+status: negative
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Round 38 — the GLM Hypothesis Engine (v5): statements, falsification, mechanisms, predictions'
+verdict: Rebuilt as v5, the engine keeps the v4 loop but changes what is guessed and how it is checked;
+  on Rule 30 it gave a new theorem about the left side, two refuted conjectures, and a prediction that
+  was then confirmed, all proved or certified in Lean.
+wobble_deps: []

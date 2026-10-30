@@ -1,0 +1,85 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Information inequalities 8 of 8, rate-distortion sources 5 of 5, Robin problems 8 of
+  8, refusals 5 of 5; 21 of 21 scripts verify and 21 of 21 mutants rejected; 120 random inequalities (64
+  proved, 12 proved past Shannon, 41 not valid, 3 left undecided), 0 unsound, 0 inconsistent; 150 random
+  sources (146 past the bound), 0 failures; 60 random Robin problems, 0 failures; Phase 107 11 of 11,
+  0 of 304 other texts moved; marks N1–N10 met.
+directives:
+- D15
+- D7
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - evaluation/derivation_three_cases
+  lean:
+  - NonShannon
+  prose: DERIVATION_THREE_STUDY.md
+  test:
+  - test_derivation_three.py
+  wheel: []
+follow_ups: []
+id: DERIVATION_THREE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 107
+predecessors:
+- DERIVATION_TWO_STUDY
+question: Can the GLM move past three of the limits the second derivation study drew (its §6) — a four-variable
+  information inequality left `NOT_SHANNON`, rate distortion refused `NOT_TIGHT` past the Shannon lower
+  bound's range, and eigenvalue problems with a Robin condition refused `TRANSCENDENTAL` — and answer
+  them with a derivation a stand-alone script re-decides, while what it still cannot do stays refused
+  by name?
+recomputed_by: '`glm_universal.runtime.derivation_three_report.derivation_three_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-declarations-committed-before-any-code
+  heading: 1. Declarations — committed before any code
+- anchor: 2-what-was-added
+  heading: 2. What was added
+- anchor: 3-results
+  heading: 3. Results
+- anchor: 4-notes-on-the-way
+  heading: 4. Notes on the way
+- anchor: 5-what-is-proved
+  heading: 5. What is proved
+- anchor: 6-limits
+  heading: 6. Limits
+- anchor: 7-what-the-round-moved
+  heading: 7. What the round moved
+- anchor: 8-re-running
+  heading: 8. Re-running
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Past the second derivation study: non-Shannon inequalities, rate distortion on the whole range,
+  Robin spectra'
+verdict: 'Yes, within the three declared operations: every declared case came out as declared, every answer
+  verifies by its own script and every mutated claim is rejected by it, the three batteries are sound,
+  the one Phase 107 refusal this round answers was narrowed as declared, nothing else the machine answers
+  moved, and the Lean file proves what the operations rest on. 10 of 10 marks met.'
+wobble_deps: []

@@ -1,0 +1,81 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Hits at 5 on 211 declaration queries, 95 for the two-book native ranking against 87 for
+  the raw features; on 103 goal queries, 30 against 26; on the 24 controller tasks the read-back scorer
+  solves 24 against 18 for the shipped Leech scorer.
+directives:
+- D15
+- D7
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - Address
+  - LawRegister
+  - NativeParity
+  - StepwiseFrames
+  - StepwisePlanner
+  prose: NATIVE_PARITY_STUDY.md
+  test:
+  - test_native_parity.py
+  wheel: []
+follow_ups: []
+id: NATIVE_PARITY_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 70
+predecessors:
+- CARRIED_FORK_STUDY
+- REVERSE_TCT_STUDY
+- STACK_RELAY_STUDY
+question: Where a standard method equals, or only narrowly beats, a Golay/Leech-native method of the GLM,
+  can the native method be kept and refined until it matches or beats the standard one?
+recomputed_by: '`glm_universal.reasoning.native_parity.native_parity_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-ledger-every-measured-nativestandard-pair-in-the-repository
+  heading: '1. The ledger: every measured native/standard pair in the repository'
+- anchor: 2-declarations-written-before-any-measuring-code
+  heading: 2. Declarations — written before any measuring code
+- anchor: 3-results
+  heading: 3. Results
+- anchor: 4-the-lean-file
+  heading: 4. The Lean file
+- anchor: 5-wiring
+  heading: 5. Wiring
+- anchor: 6-next-round
+  heading: 6. Next round
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Native parity: where a standard method ties or narrowly beats a native one, refine the native
+  one'
+verdict: On the Lean corpus the native ranking that reads two Leech books, each in its two layers, matches
+  the like-for-like standard ranking exactly and beats the raw feature vector, and on the document corpus
+  the native and standard rankings stay within one relevant section of each other, so the native method
+  is kept.
+wobble_deps: []

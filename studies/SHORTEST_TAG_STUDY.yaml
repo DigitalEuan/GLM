@@ -1,0 +1,82 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 5 of 6 marks; floors 7, 9, 11 bits for any tag and 7, 11, 15 for tags built on seven
+  bits, met by the tags in use; least deficit in the gap 35 and 9 (D = 3, 9 and 10 bits) and 179, 99,
+  45, 15 (D = 5, 11 to 14 bits); control found 7 bits on 3 of 3 seeds, 11 bits on 2 of 3, 15 bits on 0
+  of 3.
+directives:
+- D15
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/shortest_tag
+  - tests/test_shortest_tag
+  lean:
+  - ProtectedTag
+  - ShortestTag
+  prose: SHORTEST_TAG_STUDY.md
+  test:
+  - test_shortest_tag.py
+  wheel: []
+follow_ups: []
+id: SHORTEST_TAG_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 135
+predecessors:
+- PROTECTED_TAG_STUDY
+question: Are the GLM's sender tags (seven bits) and protected tags (eleven and fifteen bits) as short
+  as such tags can be, or would fewer bits do?
+recomputed_by: '`glm_universal.reasoning.shortest_tag.shortest_tag_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved-requestprojectglmshortesttaglean
+  heading: 1. What is proved (`RequestProject/GLM/ShortestTag.lean`)
+- anchor: 2-the-module
+  heading: 2. The module
+- anchor: 3-the-marks-declared-before-the-measurement
+  heading: 3. The marks, declared before the measurement
+- anchor: 4-controls
+  heading: 4. Controls
+- anchor: 5-what-this-round-does-not-do
+  heading: 5. What this round does not do
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-the-measurement
+  heading: 7. The measurement
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The shortest tag — how many tag bits a tie needs
+verdict: 'The seven-bit sender tag is proved to be the shortest tag that resolves every tie, and the eleven-
+  and fifteen-bit protected tags are proved to be the shortest tags built as parities of seven tag bits.
+  Every parity tag whose octad tags have weight at least D needs at least D + 6 bits, so 9 and 11 bits
+  is the proved floor for tags of any other shape. The gap between the floors is searched, not settled:
+  the search found no shorter tag at any gap length, but its control found the 15-bit length on none of
+  three seeds, so for two flipped bits the empty search is weak evidence. Five of six marks were met;
+  S5 was missed on that control.'
+wobble_deps: []

@@ -1,0 +1,88 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 6 of 6 marks; 14 of 14 held-out verdict questions as expected (12 answered, 2 refused
+  as expected); 12 of 12 chains verified in a fresh interpreter, 53 of 53 mutants caught; 12 of 16 fresh
+  rewordings read, 12 right, 0 wrong, and Phase 137's 2 misses now right; 0 of 404 declared texts read
+  and 0 of 30 stepwise cases moved; 100 of 100 grid cases agree with the exhaustive search and 25 of 25
+  bounds up to 10^60 certified.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - evaluation/tool_verdicts_cases
+  - reasoning/rational_approx
+  - reasoning/stepwise_script
+  - runtime/stepwise
+  - runtime/tool_values
+  - runtime/toolbox
+  - tests/test_tool_verdicts
+  lean:
+  - NearestFraction
+  prose: TOOL_VERDICTS_STUDY.md
+  test:
+  - test_tool_verdicts.py
+  wheel: []
+follow_ups: []
+id: TOOL_VERDICTS_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 137
+predecessors: []
+question: Can the stepwise planner use a tool's yes/no answer — as the answer, as the test of a conditional,
+  and as the stopping test of a search — with every step re-checked in a fresh interpreter; can it read
+  Phase 137's two unread phrasings by a general rule, measured on a fresh held-out set; and can the nearest-fraction
+  tool drop its 20,000 bound by proving the classical closest-fraction theorem in Lean?
+recomputed_by: '`glm_universal.evaluation.tool_verdicts_cases.measure`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-was-built
+  heading: 1. What was built
+- anchor: 2-what-is-proved-requestprojectglmnearestfractionlean
+  heading: 2. What is proved (`RequestProject/GLM/NearestFraction.lean`)
+- anchor: 3-the-held-out-sets-evaluationtool_verdicts_casespy
+  heading: 3. The held-out sets (`evaluation/tool_verdicts_cases.py`)
+- anchor: 4-the-marks
+  heading: 4. The marks
+- anchor: 5-the-measurement
+  heading: 5. The measurement
+- anchor: 6-asking-the-glm-for-help
+  heading: 6. Asking the GLM for help
+- anchor: 7-what-this-round-does-not-do
+  heading: 7. What this round does not do
+- anchor: 8-files
+  heading: 8. Files
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Tool verdicts — a tool's yes/no answer in the planner, and the nearest fraction without a bound
+verdict: Yes on all three. A tool's verdict is now a planner step; *if A, B, otherwise C* builds only
+  the branch its test selects; *the first convergent of X whose denominator is above N* is unrolled into
+  steps with no iteration cap, admitted because a measure proved in Lean ends it. The classical closest-fraction
+  theorem is proved, and the tool now checks a Farey certificate for every bound instead of an exhaustive
+  search up to 20,000. All 6 marks were met. On the fresh rewordings 12 of 16 were read and all 12 were
+  right; 4 were not read and are left unread.
+wobble_deps: []

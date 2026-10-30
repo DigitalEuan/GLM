@@ -131,10 +131,10 @@ reported as such, verified, and the mark recorded as missed.
 
 | file | what |
 |---|---|
-| `overlay/glm_lean/RequestProject/GLM/ShortestTag.lean` | §1 |
-| `overlay/glm_universal/reasoning/shortest_tag.py` | the floors, the census, the search, `shortest_tag_report` |
-| `overlay/glm_universal/tests/test_shortest_tag.py` | the tests |
-| `overlay/glm_universal/tools.py` | `tools shortest-tag` |
+| `glm_lean/RequestProject/GLM/ShortestTag.lean` | §1 |
+| `glm_universal/reasoning/shortest_tag.py` | the floors, the census, the search, `shortest_tag_report` |
+| `glm_universal/tests/test_shortest_tag.py` | the tests |
+| `glm_universal/tools.py` | `tools shortest-tag` |
 
 ## 7. The measurement
 

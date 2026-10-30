@@ -41,7 +41,7 @@ refusals of this round (mark N4).
 
 The cases, the expected values (worked by hand; the decimal Robin values by a
 throw-away bisection kept nowhere in the package) and the marks are in
-`overlay/glm_universal/evaluation/derivation_three_cases.py`, committed as the
+`glm_universal/evaluation/derivation_three_cases.py`, committed as the
 round's first commit:
 
 * **INEQUALITIES** (8): Zhang–Yeung and three renamings/rescalings
@@ -166,7 +166,7 @@ same answer.
 
 ## 5. What is proved
 
-`overlay/glm_lean/RequestProject/GLM/NonShannon.lean`, with no sorry and only
+`glm_lean/RequestProject/GLM/NonShannon.lean`, with no sorry and only
 the standard axioms (`propext`, `Classical.choice`, `Quot.sound`):
 
 * `zhang_yeung_of_copy` — for any set function on five variables meeting the

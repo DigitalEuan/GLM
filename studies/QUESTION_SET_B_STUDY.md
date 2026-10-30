@@ -428,7 +428,7 @@ already is from it:
 
 ## 9. Re-running
 
-`PYTHONPATH=. python3 -m glm_universal.tools question-set-b` from `overlay/`
+`PYTHONPATH=. python3 -m glm_universal.tools question-set-b` from ``
 (about a minute and a half; `--json` for the rows, `--no-variants` to skip
 §6). `GLM.py -q '<question>' -c 1,2,3` for one question with its three
 columns and gate line. Tests: `glm_universal/tests/test_question_frames.py`.

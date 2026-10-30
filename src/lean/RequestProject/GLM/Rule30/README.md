@@ -1,0 +1,309 @@
+# Rule 30 / GLM study — verified Lean 4 package
+
+## Tier 0 — the coarse read
+
+**Question.** What is in the Rule 30 / GLM Lean package, and where is each topic?
+
+**Verdict.** All three Wolfram Rule 30 prize problems are still open; the package proves partial results, exact reformulations and the failure of several proposed routes, and this README is the map of its files by topic.
+
+**Deciding figure.** Lean 4.28.0; no sorry and no added axioms; 3 prize problems open.
+
+**Recomputed by.** (hand-written argument; nothing to recompute)
+
+*Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `tools/tier0_check.py` (or the GLM's corpus check, after a merge) fails if they stop being.*
+
+**Where things are.** This README is the entry point and the map. The documents are:
+
+| Read | For |
+|---|---|
+| **`PROJECT_DIRECTIVE.md`** | the project's goal, rules of evidence, current focus and what counts as progress (start here) |
+| **`AUDIT.md`** | the status: what was tried, what is missing, the numbered **To Do** list (§4) |
+| **`DEVELOPMENT.md`** | how to run the next round: the loop, the checks, the conventions |
+| **`HISTORY.md`** | the detailed record of every round (2–49), in order |
+| **`claims.csv`** | the evidence ledger: every claim, its evidence class and its Lean names |
+| `glm/` | the hand-off to the GLM: the ledger as carriers (`r28_wheel.json`) and how to install it |
+| `scripts/` | experiments (`EMP`) and tools, each with a header saying what it does |
+| **`M24_ORBITS.md`** | Round 32: `M₂₄` orbits of seed patterns (the enumeration tool) and how much of `M₂₄` Rule 30 keeps |
+| **`../HypothesisEngine/README.md`** | Round 39: the hypothesis engine as a portable GLM module — the core's contract, a playbook for GLM bottlenecks, eight non-Rule-30 benchmarks with Lean-checked verdicts (`Benchmarks.lean`, `BenchmarksData.lean`) |
+| **`HYPOTHESIS_ENGINE.md`** | Round 38 (§1–6), Round 39 (§7–9), Round 40 (§10, the open bit) Round 41 (§11, the self-dialogue) and Round 42 (§12, v13 checked, reasoning guards): the GLM Hypothesis Engine v5 — the owner's v4 audited, the rebuilt engine (statements, held-out falsification, mechanism mining, junctions, predictions, controls), what it found on Rule 30 and how to move it into the GLM |
+| **`TURN_COST.md`** | Round 37: the exact cost of a turn, the observer's best phase, the hub family `1^(q−1)0`, the GLM indexed by hubs (measured), and the exact improvement requirements |
+| **`WHEEL.md`** | Round 36: the drive wheel — the whole family of periodic drives as one object (turns, inner wheels, hubs); what it saves and what it cannot do |
+| **`TEST_COUNT.md`** | Rounds 33–35: the half-line machine on the observer's clock (test-count and halving laws, divisor rule, the observer's phase, black runs as window reads, the faster checker), period 2 read sideways |
+
+The GLM-side code (Python overlays, benchmarks) lives in the study folder, one folder per round
+(`rule30_round10/` … `rule30_round16/`, `rule30_round28/` … `rule30_round30/`, `rule30_round33/`,
+`rule30_round34/`, `rule30_round37/`);
+see `glm/README.md`.
+
+## Status in one paragraph
+
+All three Wolfram Rule 30 prize problems are **still open**, and nothing here claims otherwise.
+The package proves partial results, exact reformulations, and the **failure** of several proposed
+routes, and it narrows each problem to short lists of precisely stated missing theorems
+(`AUDIT.md` §3.1). The narrowest open target for Problem 1 is the period-2 half-line statement
+(`HalfLineDies 2`; its sufficient form `AmortizedHalving 2 4 1` is certified for `d ≤ 12`).
+Problem 2's weakest sufficient target found so far is `SeedAPBalanced` (every stride and every
+phase of the centre column balanced; it gives Problems 1 and 2); Problem 3 is stated for Turing
+machines with binary input (`Problem3`, `Problem3Eventual`). Round 28 made the GLM operational on the
+package (its theorem wheel now reads the ledger) and added local-rule induction for ARC puzzles,
+with a measured effect (`HISTORY.md`, Round 28). Round 29 replaced the single step by a
+**stepwise planner** (chains of grid steps, merged breadth-first search, answer only when every
+cheapest consistent plan agrees), proved what it guarantees (`PlanSearch`), and measured it: 96 of
+132 held-out multi-step puzzles right with 0 wrong (12 with one step), 10 of 50 stored ARC tasks
+right with 0 wrong (was 1). Round 30 joined planning, asking, the Occam gate and the planner over
+statements into **one pipeline** (`Pipeline`, `PipelineData`): 96 of 132 fresh held-out puzzles
+right (Round 29 planner: 56), 106 with at most five questions, and a certified sharp frontier of 30
+half-line statements for periods 2–4. Round 31 read the half-line machine **sideways** (the
+observer standing on the column and reading outwards): `HalfLineDies p` became an exact statement
+about which rows an admissible first column can reconstruct (`SidewaysView`), period 1 follows in
+one line, finite-window quotients are ruled out, and the barrier-diagonal question (To Do 3) is
+answered negatively with certificates (`BarrierDiagonalsData`). All scripts use exact arithmetic.
+Round 32 applied `M₂₄` (the automorphism group of the GLM's Golay code) to seed patterns: a checked
+orbit-enumeration tool, the symmetry types of defect arrangements (one type for up to 5 defects,
+two for 6 and for 7; octads and dodecads), and the limit of the idea for Rule 30 — only rotations
+commute with Rule 30, no labelling makes the one-cell turn an element of `M₂₄`, so at most 12
+symmetries are shared (attained), only 2 in the GLM's own labelling, and seeds in one orbit have
+different futures (`M24_ORBITS.md`).
+Round 33 read the half-line machine on the **observer's clock**, counting the column's reads
+(tests) instead of steps (`TEST_COUNT.md`). No slack works for all periods (`not_testCountBound`).
+A slack for each period, or its counting form *halving*, gives P1. Least slacks on `d ≤ 22` are
+5, 8, 5 for periods 2, 3, 4, but period 4 needs at least 7 (a code of length 30). Halving excess 6
+is certified for period 2 on `d ≤ 18`. Round 34 (To Do 35): the least period-4 slack on `d ≤ 30`
+is exactly 7, an exact search finds no word above 7 much further out, per-period statements pass
+to divisors of the period (refutations to multiples), and starting the observer's clock later
+moves the slack by at most 2 per step. Round 35: a verified checker about twice as fast (To Do 37)
+certifies the least slacks 5, 8, 7 (periods 2, 3, 4) on `d ≤ 42, 32, 32` and turns them into run
+bounds for periodic columns near the left edge of every left-white row; and the tests of a black
+run of the drive are proved to be a single window read with an explicit word (To Do 36). Round 36
+(`WHEEL.md`): the periodic drives form one **wheel** — only the primitive least turns (hubs, the
+Lyndon words) matter, `HalfLineDies p` is exactly a statement about the hubs of the divisors of
+`p`, and one statement `WheelDies` is equivalent to all of them; up to period 8, 70 hubs replace 502
+words and one certificate covers them all, giving the first run bounds for periods 7 and 8.
+Round 37 (`TURN_COST.md`):
+* The exact cost of turning the wheel is proved: `m` + (tests skipped).
+* A slack at the observer's **best phase** of each wheel suffices. For period 2 the phase `01`
+  needs exactly 3 on `d ≤ 40`, and slack 3 there for all `d` would give the optimal period-2 law.
+* The hubs `1^(q−1)0` are settled on the band `d ≤ q − 4`, uniformly in `q`.
+* The GLM now indexes the half-line family by hubs. Consultation went from 0/11 to 11/11, and the
+  GLM states exact improvement requirements.
+Round 38 (`HYPOTHESIS_ENGINE.md`): the owner's Hypothesis Engine rebuilt so that it proposes
+**statements**, checks them on held-out exact data and controls, mines laws from counterexamples
+and predicts. On Rule 30 it found the **period law of the left diagonals** (a left diagonal's
+period grows only right after an eventually white diagonal with odd parity next to it; proved for
+every `D`), refuted "period ≤ 8" (`D = 400`) and "period ≤ 16" (`D = 87867`, predicted by the law and
+then certified), proved that a row's memory of its seed survives only through white diagonals, and
+certified that the centre column reads every left diagonal `20 ≤ D < 20000` inside its transient.
+
+Round 39 (`HYPOTHESIS_ENGINE.md` §7–9): the engine pushed further. It mined the white-diagonal
+criterion (a left diagonal is eventually white iff the two outside it eventually coincide; proved),
+measured the regime map exhaustively for `Q ≤ 16` and refuted two of its own models, and the
+injectivity it exposed proved that **Rule 30 has infinitely many eventually white left diagonals**
+and that the periods are unbounded iff odd white diagonals keep occurring. A law-driven scan found
+the next white left diagonal, 1,420,878,968 (EMP). Off Rule 30, the same core ran on eight
+problems with known answers, all verdicts checked in Lean (`../HypothesisEngine/`).
+
+Round 40 (To Do 45, 46; `Transients.lean`, `TransientsData.lean`): settling times of the left
+diagonals grow at most linearly (`ldiag_perFrom_linear`), so every eventual datum is a finite
+computation of explicit size; at an **odd** white diagonal the open bit does not matter
+(`next_white_independent_of_odd_bit`); the doubling is read two diagonals out
+(`doubling_read_two_out`); and every row with a left edge has the seed's left side up to a time
+shift through `D = 53207` (`left_edge_rows_agree_up_to_shift`, CERT). The engine (study folder
+`rule30_round40/`, EMP) refuted "the bit is a coin toss across rows", validated a run-up method
+for the bit, and predicts period 64 from diagonal `2107985255` (`HYPOTHESIS_ENGINE.md` §10).
+
+Round 41 (the owner's v10 "self-dialogue" engine; `../HypothesisEngine/DialogueChecks.lean`):
+two of v10's fixed implication sentences are settled in Lean. "Read inside the transient ⟹
+Problem 1" does not follow (`transient_read_does_not_imply_aperiodic`). "Aperiodic ⟹ no finite
+automaton" is true only for automata reading the column, not for automata reading `n`
+(`aperiodic_but_automatic`, Thue–Morse). The rebuilt v11 dialogue (study folder
+`rule30_round41/`, EMP) answers by executing checks and citing checked edges. From `D < 400` alone
+it rediscovered the white criterion and the doubling law. It also flagged a tie between two mined
+laws that Lean proves can never be split (`doubling_law_tie_unsplittable`). See
+`HYPOTHESIS_ENGINE.md` §11.
+
+Round 42 (the owner's v13 engine and its TAX tool; `../HypothesisEngine/TaxChecks.lean`,
+`TaxChecksData.lean`): TAX conservation does not depend on `Y` and is the integer condition
+`3c² − 2c(a+b) + ab = 0` on two weights and their overlap (`tax_defect_eq`), not v13's
+`c ∈ {0, a, b}` (`docstring_criterion_wrong`). Every period doubling is TAX-conserved
+(`tax_conserved_at_doubling`), so a TAX defect never marks a doubling. Conservation also holds away
+from the white diagonals (`tax_conserved_not_only_white`, CERT). The study folder
+`rule30_round42/` adds five portable reasoning guards and builds v14 from v13 by named patches.
+See `HYPOTHESIS_ENGINE.md` §12. No prize problem is closed.
+
+Round 46 (engine v18; `../HypothesisEngine/Wheel.lean`): the wheel contract — only the KNOWS ring
+asserts, a turn of two sound wheels is sound, and every refutation in the conjecture loop lifts the
+bound strictly.
+
+Round 47 (the owner's layered, p-adic-like idea; `AdicTower.lean`, `AdicTowerData.lean`): the layers
+`mod 2, 4, 8, …` of a column form a chain whose limit is `ℤ₂`. A column is eventually periodic iff
+one relation `q·x ≡ r` holds on every layer (`eventuallyPeriodic_iff_adicRational`), so **Problem 1
+is equivalent to the 2-adic irrationality of the centre column** (`problem1_iff_padic_irrational`).
+The denominator fixes the period and the numerator bounds the preperiod (`period_of_dvd`), so the
+period certificates become fraction certificates (no `r/q` with `q ∣ 2^p − 1`, `p ≤ 500`,
+`|r| < 2^500`; and none with `|q| ≤ 2^16`, `|r| ≤ 2^200` on layer 256; CERT). The `M₂₄` census is
+complete (49 orbits, `census_49`) and the MOG stabilisers are given with their orbits.
+
+Round 48 (the owner's triangle and line observations; `Triangles.lean`, `TrianglesData.lean`,
+guide `TRIANGLES.md`): a white run of any row is the top of a white triangle fixed by that row
+alone, born from a black run in the row before (`white_triangle`, `white_run_parent`); a black cell
+continues right-down only against two white cells but left-down against one
+(`rightDown_continues_iff`, `leftDown_continues_iff`); infinitely many left-down black lines never
+end while every right-down line inside the pattern does (`ldiag_infinitely_many_black`,
+`rdiag_not_eventuallyBlack`); the right edge prints in bands of length `2^k`, each starting with a
+white triangle of top `≥ k` (`right_band_copy`, `arbitrarily_large_right_triangles`); near the left
+edge the settled white runs are at most `10` (first 400 diagonals) and `16` (first 20000; CERT).
+
+The three prize problems remain open.
+
+## Authors
+
+* **Study, concept and GLM/UBP framework:** the GLM study author (project owner).
+* **Computational Implementation (Lean 4 formalisation, verification and exact computation):**
+  Aristotle, by Harmonic.
+
+## Build and trust
+
+Lean 4.28.0 + Mathlib (pinned in `lean-toolchain`, `lakefile.toml`, `lake-manifest.json`).
+
+```
+lake build RequestProject.GLM.Rule30        # about 35 minutes from scratch (8 cores), 1–2 minutes incremental
+lake build RequestProject.GLM.Rule30Study   # the whole package: this folder, the hypothesis engine, the escalation checks
+```
+
+No `sorry`, no added axioms. `FORMAL` results use only `propext`, `Classical.choice`,
+`Quot.sound`. Finite certificates (`CERT`, `EXH`) use `native_decide` and so also trust Lean's
+compiler (`Lean.ofReduceBool`, `Lean.trustCompiler`); they are kept in separate `…Data.lean` files.
+`python3 RequestProject/GLM/Rule30/scripts/ledger_check.py` checks that every Lean name in the
+ledger exists and that its axioms match its evidence class.
+
+| Class | Meaning |
+|---|---|
+| `FORMAL` | Lean proof for all parameters |
+| `CERT` / `EXH` | exact finite check in Lean; a theorem about the stated range only |
+| `EMP` | computed outside Lean (scripts, data); not a theorem |
+| `DEF` | definition, diagnostic or informal argument |
+| `OPEN` | stated as a Lean `Prop`, not proved |
+
+## Moving it into the GLM repository
+
+Use the merge tool at the top of the project: `python3 tools/merge_into_glm.py /path/to/glm_repo`
+checks the GLM checkout and shows the plan, and `--apply` merges. The full guide, the manual recipe
+and the gates to run afterwards are in [`MERGE_INTO_GLM.md`](../../../MERGE_INTO_GLM.md). In short:
+this folder, `Rule30.lean`, `../HypothesisEngine/`, `../HypothesisEngine.lean`, the folder
+`../Escalation/` and `../Rule30Study.lean` go into `glm_repo/glm_lean/RequestProject/GLM/`
+(the module names already match). Do **not** copy `RequestProject/GLM.lean` or
+`RequestProject/GLM/Escalation.lean`: the GLM has its own, different `Escalation.lean`, and
+`Rule30Study.lean` is the package root to import instead. The files sit in subfolders and do not
+clash with the earlier `Rule30*.lean` files of older GLM snapshots, which state open problems as
+`axiom`s (see `HISTORY.md`, Appendix A, before importing both). For the Python side, run
+`rule30_round29/setup_round29.sh` (it runs the Round 28 setup) with `PKG` pointing at this folder
+(`glm/README.md`).
+
+## Files by topic
+
+Each file starts with a docstring listing its results. `…Data.lean` files hold the certificates.
+
+**Foundations.** `Basic` (Rule 30, `evolve`, `seed`, `centerCol`, light cone) · `Compute`
+(bit-parallel evaluation, OEIS A051023) · `Prizes` (P1, P2 as `Prop`s; audit) ·
+`Problem3Quantifiers`, `MachineModel`, `MachineModelData` (P3 for Turing machines; circuits for the
+light-cone map) · `ElementaryCA` (all 256 wheels, symmetries) · `Frontier` (the frontier as
+checked theorems).
+
+**Problem 1 — proved partial results.** `NoConstantColumn` (period 1) · `AdjacentColumns` ·
+`OnePeriodicColumn` (at most one periodic column) · `ChiralLeak` (off-centre observers) ·
+`Diagonals`, `RightDiagonalBalance`, `ReadAngle` (diagonal reads) · `SeedBoundary`.
+
+**Problem 1 — exact reformulations.** `FiniteState` (finite-state observers) · `Spectral`
+(echoes, resonance) · `RuleSpace` · `WobbleLenses`, `WobbleLensesData` (strobe lens) ·
+`PowerSeriesLadder`, `PowerSeriesLadderData`, `HankelKronecker` (linear complexity, Hankel form) ·
+`TuningByEar`, `TuningByEarData`, `EchoBound` (tuning excess = longest echo).
+
+**Problem 1 — the period-`p` rungs and the half-line machine (the active front).**
+`LeftWhiteLift`, `LeftWhiteCompactness` (lift to left-white rows; run bounds) · `RunBoundData`,
+`RunBoundSearch`, `RunBoundEighteen`, `RunBoundPeriods` (exact run bounds) · `PeriodTwoHalfLine`,
+`PeriodTwoHalfLineData`, `HalfLineMachine`, `HalfLineMachineData` (the one-sided target
+`HalfLineDies p`) · `HalfLineLightCone` (`survivors_card`) · `PrefixSearch`, `PrefixSearchData`
+(certificates to `d = 36`) · `RunCountLaw`, `RunCountGeneral`, `XorAlternatives`,
+`XorAlternativesData` (counting law; alternatives to XOR) · `AmortizedHalving`, `ConjectureLoop`,
+`ConjectureLoopData` (the loop's candidate statements) · `PostEdgeSpec`, `ProofRoutes`,
+`ProofRoutesData` (the machine as a machine; four proof routes) · `InnerSurvivorData` (Round 29:
+the uniform inner-survivor form refuted, To Do 22) · **`SidewaysView`** (Round 31: the observer
+reading outwards from the column; `HalfLineDies p` as a statement about reconstructed rows, period 1
+in one line, infinite rows survive every drive) · **`BarrierDiagonalsData`** (Round 31: exact
+longest lives for five more drive words; the barrier diagonal depends on the word, To Do 3).
+
+**`M₂₄` orbits of seed patterns (Round 32).** `MathieuOrbits` (the action, the orbit tool with
+checkable certificates, only rotations commute with Rule 30, the pigeonhole bound) ·
+`MathieuOrbitsData` (generators, orbits for up to 7 cells, octads, dodecads) · `MathieuRule30Data`
+(no 24-cycle in any labelling, at most 12 shared symmetries and 12 attained, 2 in the GLM labelling,
+symmetric seeds with different futures). These three files need only Mathlib. Guide:
+`M24_ORBITS.md`. **Round 47:** `MathieuCensus`, `MathieuCensusOrbits` (all 49 orbits
+of 24-cell patterns, each with a test and a size) · `MathieuMOG` (octad, sextet and trio stabiliser
+generators and their orbits).
+
+**White triangles and line directions (Round 48).** `Triangles` (the triangle law, birth from
+black runs, left-down vs right-down lines, endless lines, right-edge bands) · `TrianglesData` (no
+large white runs near the left edge, CERT). Guide: `TRIANGLES.md`.
+
+**The 2-adic layer tower (Round 47).** `AdicTower` (a column is eventually periodic iff it is
+2-adically rational; Problem 1 ⇔ the centre column's 2-adic integer is irrational) ·
+`AdicPeriod` (the layer ↔ period dictionary: `q ∣ 2^p − 1` fixes the period, `|r|` bounds the
+preperiod) · `AdicTowerData` (no fraction `r/q` with `|q| ≤ 2^16`, `|r| ≤ 2^200` on layer 256; none
+with `q ∣ 2^p − 1`, `p ≤ 500`, `|r| < 2^500`).
+
+**The observer's clock (Round 33).** `TestCountLaw` (tests, the uniform law refuted, the
+per-period law gives the rung and P1) · `TestCountLawData` (least slacks on `d ≤ 22`, refutations
+for all `d`, period 4 needs slack ≥ 7) · `TestHalving`, `TestHalvingData` (halving gives the
+test-count law; certificates for periods 2 and 4) · `SidewaysPeriodTwo` (period 2 read sideways) ·
+**`TestCountPeriods`** (Round 34: the divisor rule; the observer's phase) · `SlackCert`,
+`SlackCertFour1/2/4/8/Rest`, `SlackCertThreeTwo`, **`TestCountPeriodsData`** (Round 34: least
+period-4 slack exactly 7 on `d ≤ 30`; `frontier_round34`) · **`DiagonalSearch`** (Round 35: the
+verified diagonal search, To Do 37) · `DiagCert`, `DiagCertTwo`, `DiagCertThree`,
+`DiagCertFour1/2/4/8/Rest`, **`DiagonalSearchData`** (Round 35: least slacks 5, 8, 7 on
+`d ≤ 42, 32, 32`; run bounds for periodic columns in every left-white row; `frontier_round35`) ·
+**`BlackRunWindow`** (Round 35: a black run of the drive is one window read; long black runs kill,
+To Do 36) · **`DriveWheel`**, **`DriveWheelData`** (Round 36: the drive wheel; one certificate for
+every period `≤ 8`; `frontier_round36`; guide `WHEEL.md`) · **`TurnCost`**, **`OneRunFamily`**,
+**`TurnCostData`** (Round 37: exact turn cost, best phase, the hub family `1^(q−1)0`;
+`frontier_round37`; guide `TURN_COST.md`). Guide: `TEST_COUNT.md`.
+
+**The left side and the hypothesis engine (Round 38).** **`LeftDiagonalPeriods`** (the one-bit
+machine with a reset: `one_bit_reset`, `one_bit_doubles`, `one_bit_sync`; the period law
+`ldiag_evPer_of_not_white`, `ldiag_doubles`, `infinitely_many_white_of_unbounded`; seed-forgetting
+`first_difference_after_white`) · **`LeftDiagonalPeriodsData`** (the packed-row certificate
+`evPer_of_lrow`; `not_leftDiagPeriodDivides_eight`, `not_leftDiagPeriodDivides_sixteen`,
+`leftDiag_white_below_87868`, `seed_first_difference`, `centerCol_read_in_transient`) ·
+**`Transients`**, **`TransientsData`** (Round 40: settling times, odd white diagonals do not branch, the doubling read two out, every left-edge row agrees with the seed up to a shift through `53207`) · **`WhiteDiagonals`** (Round 39: `white_iff_coincide`, `no_two_consecutive_white`,
+`regime_finite_check`, `regime_periodic`, `white_after_white`, `ldiag_infinitely_many_white`,
+`ldiag_periods_unbounded_iff`). Guide: `HYPOTHESIS_ENGINE.md`.
+
+**Problem 2 — the wobble.** `Wobble` (frequency ⇔ `D(n) = o(n)`; `√n` bound ⇒ P2) ·
+`WobbleCertificate`, `WobbleNormalized` · `Perspective`, `ArrowIndependence` (the observer's
+arrow) · `Ergodic`, `Invariance`, `Unpredictability`, `ColumnInverse` (almost every row; where
+measure theory stops).
+
+**Algebra (ANF) and Problem 3 background.** `ConeSeparation` (Target 1) · `ANF`, `ANFData`,
+`DegreeData`, `ParityReduction`, `ParityReductionData`, `TopMonomial`, `WeightGrowth` (degree
+`2n − 1` for `n ≥ 2`, unique top monomial for `n ≥ 3`, Target 3) · `PhaseSpace32`, `WholeCone`,
+`DiagonalCoupling` · `Injector`, `InjectorAnalogies`, `InjectorData`.
+
+**Geometry and GLM-vocabulary studies.** `ConeGeometry`, `LatticeConeFraction`, `SpinSweep`,
+`SpinLattice`, `SpinQuaternion`, `Funnel`, `TileLeads`, `ShortcutNetwork`, `ShortcutNetworkData`,
+`ChemistryLab`.
+
+**Observer and induction (the GLM's reasoning discipline).** `Observer` (what an observer can
+read; direction of view) · `WheelInduction` (1-D wheels: answer iff every neighbourhood was seen)
+· **`LocalRuleInduction`** (Round 28: the same for any grid and any reader — the ARC bridge) ·
+**`PlanSearch`** (Round 29: multi-step plans — merged breadth-first search loses nothing, answer
+only when every cheapest consistent plan agrees, correct under the Occam premise and not without
+it, the separating example) · **`Pipeline`**, **`PipelineData`** (Round 30: goal regression and
+fitted middle steps, the ask loop, the Occam gate; the certified statement frontier).
+
+## Scripts (`scripts/`)
+
+`ledger_check.py` (ledger ↔ Lean; `--wheel` writes carriers) · `conjecture_loop.py`,
+`candidate_benchmark.py` (candidate statements; measured generation) · `post_edge_witnesses.py`,
+`progress_measures.py`, `half_line_search.py`, `run_count.py`, `xor_alternatives.py`,
+`tuning_by_ear.py`, `wobble_certificate.py`, `barrier_diagonals.c`, `post_edge_halving.c`
+(experiments; outputs in `*_output.txt`). All scripts use exact integer / rational arithmetic only:
+no floating point in any computed value, no random numbers, no hashing.

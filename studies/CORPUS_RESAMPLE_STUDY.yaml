@@ -1,0 +1,86 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: '1 effect among 18 reading-and-set pairs (`native2` ≥ `features` on the declarations,
+  holding in 99.4 % of 171 file drops and 95.5 % of 22 stride offsets, census discordance 185 : 29; re-taken
+  under Phase 101''s scoped citation reader, 95.3 % of 172 file drops, 95.5 % of offsets, 227 : 29 — still
+  the one effect); the control `native2` = `features2` holds in 88.3 % and 77.3 % (Phase 101: 77.9 % and
+  59.1 %); 6 of 7 marks met (M4 not met).'
+directives:
+- D15
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/corpus_resample
+  lean:
+  - Address
+  - CitationScope
+  - Code
+  - CorpusResample
+  - Gen3
+  - Heisenberg
+  - MeasurandRegister
+  - RateRepair
+  - ZeroStorageV5
+  prose: CORPUS_RESAMPLE_STUDY.md
+  test:
+  - test_corpus_resample.py
+  wheel: []
+follow_ups: []
+id: CORPUS_RESAMPLE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 101
+predecessors:
+- NATIVE_PARITY_STUDY
+- NATIVE_WORDS_STUDY
+question: When the Lean corpus loses any one of its files, or the query sample is drawn at any other offset
+  of its stride, which of the native rankings' small leads over the standard ones still hold?
+recomputed_by: '`glm_universal.reasoning.corpus_resample.corpus_resample_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-objects
+  heading: 1. The objects
+- anchor: 2-declarations-written-before-any-measuring-code
+  heading: 2. Declarations — written before any measuring code
+- anchor: 3-what-was-built
+  heading: 3. What was built
+- anchor: 4-results
+  heading: 4. Results
+- anchor: 5-the-lean-file
+  heading: 5. The Lean file
+- anchor: 6-wiring
+  heading: 6. Wiring
+- anchor: 7-what-this-leaves
+  heading: 7. What this leaves
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The declared resampling: are the native rankings'' small leads effects or draws?'
+verdict: 'One lead is an effect: the two-book native ranking ahead of the raw structural vector on the
+  declaration queries; every other resampled reading, the shipped words mark W2 included, is a draw as
+  stated, and the declared control failed.'
+wobble_deps: []

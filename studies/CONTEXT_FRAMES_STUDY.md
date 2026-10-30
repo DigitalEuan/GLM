@@ -45,7 +45,7 @@ inductor, and not the census of X6.
 
 ## 1. The contexts
 
-`overlay/glm_universal/engineering/context_frames.py`. A question may end
+`glm_universal/engineering/context_frames.py`. A question may end
 *across domains where* followed by one or more declared context phrases
 (joined by *and* or a comma). Six contexts are declared, each with its
 phrasings and its reason (`CONTEXTS`):
@@ -73,7 +73,7 @@ which no derivation remains is refused.
 
 ## 2. The formal half
 
-`overlay/glm_lean/RequestProject/GLM/ContextFrames.lean`:
+`glm_lean/RequestProject/GLM/ContextFrames.lean`:
 `pin_never_changes`, `pin_answer_mem`, `pin_same_answer` (a pin only removes
 candidates, so it never changes an answer); `delivered_energy`,
 `stored_energy_half`, `stored_energy_not_full` (the two readings of the

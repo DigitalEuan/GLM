@@ -1,0 +1,78 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 8 of 8 marks met; 5 of 5 compositions certified; 6 of 6 solvable controls silent; 2 of
+  2 letter questions with the declared reason; 0 of 201 solvable polynomials certified; 120 of 120 random
+  irreducible compositions certified; 180 of 180 decompositions exact; 3 theorems, 0 `sorry`; Phase 114
+  still 10 of 10 and Phase 112 still 7 of 7.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - evaluation/composed_radical_cases
+  - tests/test_composed_radical
+  lean:
+  - ComposedRadicals
+  prose: COMPOSED_RADICAL_STUDY.md
+  test:
+  - test_composed_radical.py
+  wheel: []
+follow_ups: []
+id: COMPOSED_RADICAL_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 114
+predecessors:
+- PRIMITIVE_RADICAL_STUDY
+question: Phase 114's certificates need a primitive Galois group, so `solve symbolically` says nothing
+  about `x^10 - x^2 - 1`, whose group is not solvable but has blocks. Can the layer find such a polynomial's
+  decomposition `g(h(x))` exactly, certify the outer polynomial instead, and still never certify a polynomial
+  whose group is solvable?
+recomputed_by: '`glm_universal.runtime.composed_radical_report.composed_radical_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-what-was-added
+  heading: 1. What was added
+- anchor: 2-the-marks
+  heading: 2. The marks
+- anchor: 3-what-is-proved
+  heading: 3. What is proved
+- anchor: 4-limits-and-what-the-round-leaves
+  heading: 4. Limits, and what the round leaves
+- anchor: 5-re-running-it
+  heading: 5. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Roots with no expression in radicals, through a composition
+verdict: 'Yes, whenever the outer polynomial has degree five or more and one of the earlier certificates
+  reaches it. A root `x` in radicals would make `h(x)`, a root of `g`, one too, and that step is proved
+  in Lean, together with a fully proved instance, `x^10 - 4x^2 + 2`. All eight marks were met: the statement
+  reaches the five declared compositions, including Phase 114''s silent `x^10 - x^2 - 1`, and all 120
+  random irreducible compositions of the reach battery; it is given to none of 201 polynomials with solvable
+  groups; and every one of 180 built compositions is decomposed exactly. Dedekind''s theorem is still
+  used, not proved, wherever the outer certificate reads Frobenius elements.'
+wobble_deps: []

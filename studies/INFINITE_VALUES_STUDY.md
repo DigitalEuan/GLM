@@ -336,12 +336,12 @@ answer.
 
 | Piece | File |
 |---|---|
-| Reals as processes; roots; comparison; the modulator | `overlay/glm_universal/reasoning/exact_real.py` |
-| Written arithmetic over them | `overlay/glm_universal/reasoning/real_expr.py` |
-| `exp`, `log`, `sin`, `cos`, `tan`, real powers | `overlay/glm_universal/reasoning/transcendental.py` |
-| Capability probes and their harness | `overlay/glm_universal/capabilities/` |
-| `approximate` / `compare` queries and their scripts | `overlay/glm_universal/runtime/` |
-| Tests for all of it | `overlay/glm_universal/tests/test_exact_real.py`, `test_transcendental.py`, `test_capabilities.py` |
+| Reals as processes; roots; comparison; the modulator | `glm_universal/reasoning/exact_real.py` |
+| Written arithmetic over them | `glm_universal/reasoning/real_expr.py` |
+| `exp`, `log`, `sin`, `cos`, `tan`, real powers | `glm_universal/reasoning/transcendental.py` |
+| Capability probes and their harness | `glm_universal/capabilities/` |
+| `approximate` / `compare` queries and their scripts | `glm_universal/runtime/` |
+| Tests for all of it | `glm_universal/tests/test_exact_real.py`, `test_transcendental.py`, `test_capabilities.py` |
 | The `1/N` law and the separating tower | `RequestProject/GLM/DeltaSigma.lean` |
 | The wall, the stand-ins, the faithful tower | `RequestProject/GLM/Irrational.lean` |
 | The hull, the certificate, periodic reachability | `RequestProject/GLM/Reachable.lean` |

@@ -1,0 +1,500 @@
+{
+  "description": "The engineering formula wheels (W1-W35) that form the data substrate for the cent compiler.",
+  "total_wheels": 31,
+  "total_axioms": 72,
+  "total_cases": 119,
+  "axes": [
+    "L",
+    "M",
+    "T",
+    "I",
+    "H",
+    "N",
+    "J",
+    "A"
+  ],
+  "wheels": {
+    "W1": {
+      "title": "DC Ohm and power",
+      "n_axioms": 2,
+      "n_cases": 4,
+      "n_quantities": 4,
+      "file": "W1.json"
+    },
+    "W2": {
+      "title": "Sinusoidal AC impedance and power",
+      "n_axioms": 2,
+      "n_cases": 4,
+      "n_quantities": 4,
+      "file": "W2.json"
+    },
+    "W3": {
+      "title": "Electrostatics and capacitors",
+      "n_axioms": 2,
+      "n_cases": 4,
+      "n_quantities": 4,
+      "file": "W3.json"
+    },
+    "W4": {
+      "title": "Rotational mechanics (with kinetic energy)",
+      "n_axioms": 4,
+      "n_cases": 5,
+      "n_quantities": 7,
+      "file": "W4.json"
+    },
+    "W5": {
+      "title": "Linear dynamics and work-energy",
+      "n_axioms": 4,
+      "n_cases": 4,
+      "n_quantities": 7,
+      "file": "W5.json"
+    },
+    "W6": {
+      "title": "Fluid statics and flow (with hydraulic power)",
+      "n_axioms": 4,
+      "n_cases": 4,
+      "n_quantities": 6,
+      "file": "W6.json"
+    },
+    "W7": {
+      "title": "Linear plane-wave acoustics",
+      "n_axioms": 2,
+      "n_cases": 4,
+      "n_quantities": 4,
+      "file": "W7.json"
+    },
+    "W8": {
+      "title": "Thermal physics and heat transfer",
+      "n_axioms": 3,
+      "n_cases": 4,
+      "n_quantities": 8,
+      "file": "W8.json"
+    },
+    "W9": {
+      "title": "Wave kinematics",
+      "n_axioms": 2,
+      "n_cases": 4,
+      "n_quantities": 5,
+      "file": "W9.json"
+    },
+    "W10": {
+      "title": "Photon energy and momentum",
+      "n_axioms": 2,
+      "n_cases": 4,
+      "n_quantities": 5,
+      "file": "W10.json"
+    },
+    "W11": {
+      "title": "Uniform motion",
+      "n_axioms": 1,
+      "n_cases": 2,
+      "n_quantities": 3,
+      "file": "W11.json"
+    },
+    "W12": {
+      "title": "Density, volume and amount of substance",
+      "n_axioms": 3,
+      "n_cases": 3,
+      "n_quantities": 7,
+      "file": "W12.json"
+    },
+    "W13": {
+      "title": "Period and the mass-spring oscillator",
+      "n_axioms": 3,
+      "n_cases": 3,
+      "n_quantities": 6,
+      "file": "W13.json"
+    },
+    "W14": {
+      "title": "Inductors and the LC circuit",
+      "n_axioms": 3,
+      "n_cases": 3,
+      "n_quantities": 6,
+      "file": "W14.json"
+    },
+    "W15": {
+      "title": "Charge and energy over time",
+      "n_axioms": 2,
+      "n_cases": 3,
+      "n_quantities": 5,
+      "file": "W15.json"
+    },
+    "W16": {
+      "title": "Magnetic flux and induction",
+      "n_axioms": 3,
+      "n_cases": 4,
+      "n_quantities": 7,
+      "file": "W16.json"
+    },
+    "W17": {
+      "title": "Gravitation and orbital mechanics",
+      "n_axioms": 2,
+      "n_cases": 4,
+      "n_quantities": 5,
+      "file": "W17.json"
+    },
+    "W18": {
+      "title": "Ideal gas law",
+      "n_axioms": 1,
+      "n_cases": 4,
+      "n_quantities": 5,
+      "file": "W18.json"
+    },
+    "W19": {
+      "title": "Electromagnetic waves",
+      "n_axioms": 2,
+      "n_cases": 4,
+      "n_quantities": 5,
+      "file": "W19.json"
+    },
+    "W20": {
+      "title": "Elasticity & Continuum Mechanics",
+      "n_axioms": 3,
+      "n_cases": 4,
+      "n_quantities": 7,
+      "file": "W20.json"
+    },
+    "W21": {
+      "title": "Fracture Mechanics & Plasticity",
+      "n_axioms": 2,
+      "n_cases": 4,
+      "n_quantities": 7,
+      "file": "W21.json"
+    },
+    "W22": {
+      "title": "Chemical Kinetics & Transport",
+      "n_axioms": 2,
+      "n_cases": 4,
+      "n_quantities": 4,
+      "file": "W22.json"
+    },
+    "W23": {
+      "title": "Electrochemistry & Energy Storage",
+      "n_axioms": 2,
+      "n_cases": 4,
+      "n_quantities": 6,
+      "file": "W23.json"
+    },
+    "W24": {
+      "title": "Semiconductor Device Physics",
+      "n_axioms": 2,
+      "n_cases": 4,
+      "n_quantities": 5,
+      "file": "W24.json"
+    },
+    "W25": {
+      "title": "Plasma Physics & Magnetohydrodynamics",
+      "n_axioms": 2,
+      "n_cases": 4,
+      "n_quantities": 5,
+      "file": "W25.json"
+    },
+    "W28": {
+      "title": "Superconductivity & Josephson Effects",
+      "n_axioms": 2,
+      "n_cases": 4,
+      "n_quantities": 4,
+      "file": "W28.json"
+    },
+    "W29": {
+      "title": "Spintronics & Spin Transport",
+      "n_axioms": 2,
+      "n_cases": 4,
+      "n_quantities": 6,
+      "file": "W29.json"
+    },
+    "W32": {
+      "title": "Capillarity & Surface Phenomena",
+      "n_axioms": 2,
+      "n_cases": 4,
+      "n_quantities": 6,
+      "file": "W32.json"
+    },
+    "W33": {
+      "title": "Multi-Phase Heat & Mass Transfer",
+      "n_axioms": 2,
+      "n_cases": 4,
+      "n_quantities": 4,
+      "file": "W33.json"
+    },
+    "W34": {
+      "title": "Biomechanics & Hemodynamics",
+      "n_axioms": 2,
+      "n_cases": 4,
+      "n_quantities": 6,
+      "file": "W34.json"
+    },
+    "W35": {
+      "title": "Electrophysiology & Membrane Transport",
+      "n_axioms": 2,
+      "n_cases": 4,
+      "n_quantities": 6,
+      "file": "W35.json"
+    }
+  },
+  "junctions": [
+    {
+      "wheel_a": "W5",
+      "wheel_b": "W11",
+      "name_a": "velocity",
+      "name_b": "velocity",
+      "reason": "moving body's velocity = uniform-motion velocity"
+    },
+    {
+      "wheel_a": "W5",
+      "wheel_b": "W12",
+      "name_a": "mass",
+      "name_b": "mass",
+      "reason": "the body whose density is read is the body that moves"
+    },
+    {
+      "wheel_a": "W6",
+      "wheel_b": "W12",
+      "name_a": "area",
+      "name_b": "area",
+      "reason": "the flow's cross-section = swept-prism cross-section"
+    },
+    {
+      "wheel_a": "W11",
+      "wheel_b": "W12",
+      "name_a": "length",
+      "name_b": "length",
+      "reason": "the length the fluid moves = length of the swept prism"
+    },
+    {
+      "wheel_a": "W9",
+      "wheel_b": "W13",
+      "name_a": "frequency",
+      "name_b": "frequency",
+      "reason": "the oscillator's frequency = the wave's frequency"
+    },
+    {
+      "wheel_a": "W5",
+      "wheel_b": "W13",
+      "name_a": "mass",
+      "name_b": "mass",
+      "reason": "the oscillating body = the dynamic body"
+    },
+    {
+      "wheel_a": "W3",
+      "wheel_b": "W14",
+      "name_a": "capacitance",
+      "name_b": "capacitance",
+      "reason": "the LC circuit's capacitor = the electrostatics capacitor"
+    },
+    {
+      "wheel_a": "W1",
+      "wheel_b": "W14",
+      "name_a": "current",
+      "name_b": "current",
+      "reason": "the inductor's current = the circuit's current"
+    },
+    {
+      "wheel_a": "W1",
+      "wheel_b": "W15",
+      "name_a": "current",
+      "name_b": "current",
+      "reason": "the charge and energy are carried by the circuit's current"
+    },
+    {
+      "wheel_a": "W1",
+      "wheel_b": "W15",
+      "name_a": "power",
+      "name_b": "power",
+      "reason": "the energy is delivered by the circuit's power"
+    },
+    {
+      "wheel_a": "W3",
+      "wheel_b": "W15",
+      "name_a": "charge",
+      "name_b": "charge",
+      "reason": "the charge moved = the charge stored"
+    },
+    {
+      "wheel_a": "W9",
+      "wheel_b": "W10",
+      "name_a": "wave_speed",
+      "name_b": "speed_of_light",
+      "reason": "a photon's wave_speed = speed_of_light (light is the wave)"
+    },
+    {
+      "wheel_a": "W9",
+      "wheel_b": "W10",
+      "name_a": "frequency",
+      "name_b": "frequency",
+      "reason": "a photon's frequency = the wave's frequency (a photon is a wave)"
+    },
+    {
+      "wheel_a": "W20",
+      "wheel_b": "W1",
+      "name_a": "stress",
+      "name_b": "voltage",
+      "reason": "piezoelectric stress-voltage coupling"
+    },
+    {
+      "wheel_a": "W20",
+      "wheel_b": "W1",
+      "name_a": "strain",
+      "name_b": "charge",
+      "reason": "piezoelectric strain-charge coupling"
+    },
+    {
+      "wheel_a": "W22",
+      "wheel_b": "W8",
+      "name_a": "temperature",
+      "name_b": "temperature",
+      "reason": "reaction temperature is thermodynamic temperature"
+    },
+    {
+      "wheel_a": "W23",
+      "wheel_b": "W1",
+      "name_a": "charge",
+      "name_b": "charge",
+      "reason": "electrochemical charge is electrical charge"
+    },
+    {
+      "wheel_a": "W23",
+      "wheel_b": "W15",
+      "name_a": "charge",
+      "name_b": "charge",
+      "reason": "Faraday charge = circuit charge"
+    },
+    {
+      "wheel_a": "W23",
+      "wheel_b": "W15",
+      "name_a": "time",
+      "name_b": "time",
+      "reason": "electrolysis time = charging time"
+    },
+    {
+      "wheel_a": "W24",
+      "wheel_b": "W1",
+      "name_a": "current",
+      "name_b": "current",
+      "reason": "diode current is circuit current"
+    },
+    {
+      "wheel_a": "W24",
+      "wheel_b": "W1",
+      "name_a": "thermal_voltage",
+      "name_b": "voltage",
+      "reason": "thermal voltage is a voltage"
+    },
+    {
+      "wheel_a": "W25",
+      "wheel_b": "W16",
+      "name_a": "magnetic_field",
+      "name_b": "magnetic_field",
+      "reason": "plasma B-field is the same B-field"
+    },
+    {
+      "wheel_a": "W28",
+      "wheel_b": "W16",
+      "name_a": "magnetic_flux",
+      "name_b": "flux",
+      "reason": "Josephson flux is magnetic flux"
+    },
+    {
+      "wheel_a": "W28",
+      "wheel_b": "W15",
+      "name_a": "time",
+      "name_b": "time",
+      "reason": "Josephson time is circuit time"
+    },
+    {
+      "wheel_a": "W29",
+      "wheel_b": "W25",
+      "name_a": "magnetic_field",
+      "name_b": "magnetic_field",
+      "reason": "spin B-field is plasma B-field"
+    },
+    {
+      "wheel_a": "W32",
+      "wheel_b": "W6",
+      "name_a": "pressure",
+      "name_b": "pressure",
+      "reason": "capillary pressure is fluid pressure"
+    },
+    {
+      "wheel_a": "W32",
+      "wheel_b": "W6",
+      "name_a": "viscosity",
+      "name_b": "velocity",
+      "reason": "capillary viscosity relates to flow velocity"
+    },
+    {
+      "wheel_a": "W33",
+      "wheel_b": "W8",
+      "name_a": "thermal_conductivity",
+      "name_b": "thermal_conductivity",
+      "reason": "heat transfer conductivity is thermal conductivity"
+    },
+    {
+      "wheel_a": "W34",
+      "wheel_b": "W6",
+      "name_a": "volume_flow_rate",
+      "name_b": "volume_flow_rate",
+      "reason": "blood flow is volume flow"
+    },
+    {
+      "wheel_a": "W34",
+      "wheel_b": "W6",
+      "name_a": "pressure",
+      "name_b": "pressure",
+      "reason": "blood pressure is fluid pressure"
+    },
+    {
+      "wheel_a": "W34",
+      "wheel_b": "W12",
+      "name_a": "pipe_radius",
+      "name_b": "area",
+      "reason": "vessel radius relates to cross-sectional area"
+    },
+    {
+      "wheel_a": "W35",
+      "wheel_b": "W8",
+      "name_a": "temperature",
+      "name_b": "temperature",
+      "reason": "Nernst temperature is thermodynamic temperature"
+    },
+    {
+      "wheel_a": "W35",
+      "wheel_b": "W12",
+      "name_a": "ion_concentration",
+      "name_b": "amount",
+      "reason": "ion concentration relates to amount of substance"
+    }
+  ],
+  "non_identities": [
+    {
+      "wheel_a": "W13",
+      "wheel_b": "W14",
+      "name": "angular_frequency",
+      "reason": "a mechanical oscillator against an electrical one; identifying them would give spring_constant = mass / (inductance * capacitance)"
+    },
+    {
+      "wheel_a": "W3",
+      "wheel_b": "W14",
+      "name": "energy",
+      "reason": "the capacitor's stored energy against the inductor's"
+    },
+    {
+      "wheel_a": "W3",
+      "wheel_b": "W15",
+      "name": "energy",
+      "reason": "energy stored in a capacitor against energy delivered over a time"
+    },
+    {
+      "wheel_a": "W11",
+      "wheel_b": "W15",
+      "name": "time",
+      "reason": "a travel time against a charging time"
+    },
+    {
+      "wheel_a": "W9",
+      "wheel_b": "W13",
+      "name": "angle",
+      "reason": "Phase 158 split: the oscillator's angle convention vs the wave's angle reference; only frequency is joined"
+    }
+  ]
+}

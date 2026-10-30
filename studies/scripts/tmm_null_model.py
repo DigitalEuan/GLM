@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Transfer-matrix reflectance of a Sturmian multilayer, against a shuffled control.
 
-Why this script sits *outside* ``overlay/glm_universal``
+Why this script sits *outside* ``glm_universal``
 -------------------------------------------------------
 Directive D7 bans floating point inside the package: everything the GLM itself
 computes is an integer or a :class:`~fractions.Fraction`.  This script is not

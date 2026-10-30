@@ -66,7 +66,7 @@ origin, and the step meant to resolve a tie cannot move the tied point.
 
 ## 2. What is proved
 
-**`overlay/glm_lean/RequestProject/GLM/LorentzianLift.lean`** — over `ℚ`, in
+**`glm_lean/RequestProject/GLM/LorentzianLift.lean`** — over `ℚ`, in
 the script's own coordinates `(x, t, τ)` with the form
 `x·x' + t t' − τ τ'`, for any dimension `n` (24 for the Leech lattice).
 
@@ -90,7 +90,7 @@ the script's own coordinates `(x, t, τ)` with the form
   `context_break` — scoring by a second point prefers the candidate nearer to
   it.
 
-**`overlay/glm_lean/RequestProject/GLM/GolayDeepHole.lean`** — over the
+**`glm_lean/RequestProject/GLM/GolayDeepHole.lean`** — over the
 project's Golay code and Leech lattice (`LeechShells.lean`, raw coordinates).
 
 * `normSq_dbl_sub` — `normSq (2b − 2c) = 4 · hdist b c`;
@@ -263,6 +263,6 @@ python3 GLM.py -q "tool lorentz 15; 0"                                # resolved
 lake build RequestProject.GLM.LorentzianLift RequestProject.GLM.GolayDeepHole
 ```
 
-The mechanism is `overlay/glm_universal/reasoning/lorentzian_lift.py`, the
-measurement `overlay/glm_universal/reasoning/lorentzian_lift_study.py`, the
-tests `overlay/glm_universal/tests/test_lorentzian_lift.py`.
+The mechanism is `glm_universal/reasoning/lorentzian_lift.py`, the
+measurement `glm_universal/reasoning/lorentzian_lift_study.py`, the
+tests `glm_universal/tests/test_lorentzian_lift.py`.

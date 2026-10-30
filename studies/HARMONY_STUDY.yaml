@@ -1,0 +1,71 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 28 intervals, no float anywhere, and a control the lattice does not beat.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - Harmony
+  prose: HARMONY_STUDY.md
+  test:
+  - test_harmony.py
+  wheel: []
+follow_ups: []
+id: HARMONY_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Does the musical third of the universality claim reproduce?
+recomputed_by: '`glm_universal.reasoning.harmony.harmony_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-why-there-is-a-musical-register-at-all
+  heading: 1. Why there is a musical register at all
+- anchor: 2-the-register
+  heading: 2. The register
+- anchor: 3-equal-temperament-decided-by-integer-comparison
+  heading: 3. Equal temperament, decided by integer comparison
+- anchor: 4-no-tuning-ever-closes-counted-here-proved-in-lean
+  heading: 4. No tuning ever closes — counted here, proved in Lean
+- anchor: 5-two-orderings-of-consonance
+  heading: 5. Two orderings of consonance
+- anchor: 6-the-claim-itself-and-the-control-it-has-to-beat
+  heading: 6. The claim itself, and the control it has to beat
+- anchor: 7-the-verdict-not-reproduced
+  heading: '7. The verdict: `not reproduced`'
+- anchor: 8-what-this-did-to-the-claim-ledger
+  heading: 8. What this did to the claim ledger
+- anchor: 9-where-it-is-reachable
+  heading: 9. Where it is reachable
+- anchor: 10-what-is-still-open
+  heading: 10. What is still open
+status: negative
+successors: []
+superseded_by: ''
+supersedes: []
+title: The harmonic register, and the third of a claim it makes testable
+verdict: 'The verdict: `not reproduced`.'
+wobble_deps: []

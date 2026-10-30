@@ -1,0 +1,82 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: '11 of 12 marks; one tied reading: every rule at chance or refusing (the script''s rule
+  0 right of 600); two tied readings 586 right, 0 wrong of 600; readings 4+4+6: 594 right against 0 for
+  the set collapse; decoy: 216 wrong, 61 with the guard (mark M11 not met).'
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - reasoning/lorentzian_lift
+  - reasoning/lorentzian_lift_study
+  - tests/test_lorentzian_lift
+  lean:
+  - AxiomAuditAll
+  - GolayDeepHole
+  - LeechShells
+  - LorentzianLift
+  prose: LORENTZIAN_LIFT_STUDY.md
+  test:
+  - test_lorentzian_lift.py
+  wheel: []
+follow_ups: []
+id: LORENTZIAN_LIFT_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 182
+predecessors: []
+question: Does lifting the GLM's ambiguous 24-bit space to the Lorentzian lattice II_25,1, as `iter10_lorentzian.py`
+  proposes, resolve its ties, and if not, what can the lift be made to do for the GLM's reasoning?
+recomputed_by: '`glm_universal.reasoning.lorentzian_lift_study.lorentzian_lift_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-the-script-audited
+  heading: 1. The script audited
+- anchor: 2-what-is-proved
+  heading: 2. What is proved
+- anchor: 3-what-the-lift-does-give-a-tie-certified-named-and-carried
+  heading: '3. What the lift does give: a tie certified, named and carried'
+- anchor: 4-why-no-reflection-resolves-a-tie
+  heading: 4. Why no reflection resolves a tie
+- anchor: 5-marks-and-measurements
+  heading: 5. Marks and measurements
+- anchor: 6-what-it-achieves-for-the-glms-reasoning
+  heading: 6. What it achieves for the GLM's reasoning
+- anchor: 7-what-this-does-not-do-and-what-is-next
+  heading: 7. What this does not do, and what is next
+- anchor: 8-reproduce
+  heading: 8. Reproduce
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The Lorentzian lift of the ambiguous space — the owner's `iter10_lorentzian.py` audited and repaired
+verdict: The lift certifies every Golay tie exactly as a deep hole of the Leech lattice of type A_1^24,
+  named by a null vector of II_25,1, but no reflection or other reflection-invariant rule can break a
+  tie; summing Lorentzian scores over further readings resolves ties, with 0 wrong answers on readings
+  that each contain the sent codeword among their nearest, and it answers where the existing set collapse
+  refuses, at the cost of being misled by a reading of a different message.
+wobble_deps: []

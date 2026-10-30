@@ -1,0 +1,78 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 'On the 1,506-query census of the frozen corpus, hit@5 / relatives in the top five: `lexical_native3`
+  324 / 413 against `lexical_raw` 323 / 414 (discordance 7 : 6, sign test 1); `lexical_native3` identical
+  to `lexical_native2` on every query''s hit (0 : 0); the oracle third layer `path3` 325 / 414; `path_first`
+  1,506 hits at 1; marks F1, F3 and F5 met, F2, F4 and F6 not met.'
+directives:
+- D15
+- D7
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - DocumentTree
+  prose: DOCUMENT_TREE_STUDY.md
+  test:
+  - test_document_tree.py
+  wheel: []
+follow_ups: []
+id: DOCUMENT_TREE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 101
+predecessors:
+- NATIVE_PARITY_STUDY
+question: Can a third native book for the documents — a section's position in the document tree, held
+  as a Golay word — move the document rankings past parity with the raw lexical vector, when it is measured
+  on a frozen copy of the corpus?
+recomputed_by: '`glm_universal.reasoning.document_tree.document_tree_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-objects
+  heading: 1. The objects
+- anchor: 2-declarations-written-before-any-measuring-code
+  heading: 2. Declarations — written before any measuring code
+- anchor: 3-results
+  heading: 3. Results
+- anchor: 4-the-lean-file
+  heading: 4. The Lean file
+- anchor: 5-wiring
+  heading: 5. Wiring
+- anchor: 6-next-round
+  heading: 6. Next round
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The document tree as a third native book, on a frozen corpus
+verdict: 'No: the document tree cannot move the document rankings past parity. The literal book — the
+  section''s document as a Golay word — reads the relevance relation and scores a hit at 1 on every query,
+  which is a leak and not a refinement; the leak-free part of the tree, where in its document a section
+  sits, changes no hit, because the two earlier books leave a tie across the top-five boundary on only
+  30 of 1,506 queries, and even the leaking book in that layer gains one query. N2 is closed in the negative
+  by its ceiling.'
+wobble_deps: []

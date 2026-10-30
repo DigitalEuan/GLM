@@ -15,7 +15,7 @@ know to carry the round on?
 and the figure above are grounded in the body below, and
 `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-*Last altered 23 October 2026.*
+*Last altered 29 October 2026.*
 
 ---
 
@@ -43,13 +43,13 @@ absence:
 
 ## Status
 
-**No round is in flight.** Phase 184 (23 October 2026; the declared majority
+**No round is in flight.** Phase 184 (29 October 2026; the declared majority
 rule for conflicting evidence, taken from `STATUS.md` §2.1 item 11's first
 line) is closed: `LorentzianMajority.lean` (in `AxiomAuditAll.lean`);
 `reasoning/lorentzian_majority.py` (`tool majority`); `tools
 lorentzian-majority` (8 of 8 marks); `tests/test_lorentzian_majority.py` run by
 hand, all passing. Write-up: `studies/LORENTZIAN_MAJORITY_STUDY.md`.
-Phase 183 (owner's request, 23 October 2026; the
+Phase 183 (owner's request, 29 October 2026; the
 Lorentzian evidence space, taken from `STATUS.md` §2.1 item 11) is closed:
 `LorentzianEvidence.lean` (in `AxiomAuditAll.lean`);
 `reasoning/lorentzian_evidence.py` (`tool evidence`, and the certificate guard
@@ -87,4 +87,4 @@ by hand, all passing. Write-up: `studies/IMPROPER_UNITS_STUDY.md`.
 sign-off, the gate the evaluation's own runs do not replace. pytest is still
 not installable here (no package index). Resume with
 `python3 -m pip install pytest`, then
-`PYTHONPATH=. python3 -m glm_universal.signoff --close --jobs 8`.
+`PYTHONPATH=src python3 -m glm_universal.signoff --close --jobs 8`.

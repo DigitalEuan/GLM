@@ -1,0 +1,65 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: At k = 5 over 801 queries the text search falls from 695 hits to 80 and the identifier
+  address book from 395 to 51 — chance is 43 — while the structural address holds 153 of its 220.
+directives: []
+evidence: []
+faculty: addressing
+file_refs:
+  code:
+  - tests/test_anonymous
+  lean:
+  - Anonymous
+  prose: ANONYMOUS_REGISTER_STUDY.md
+  test:
+  - test_anonymous_register.py
+  wheel: []
+follow_ups: []
+id: ANONYMOUS_REGISTER_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Is there a register in which the geometric address is not a useful second opinion but the only
+  faculty that can read the query at all?
+recomputed_by: '`glm_universal.reasoning.anonymous.anonymous_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-what-the-renaming-does-to-each-faculty
+  heading: 1. What the renaming does to each faculty
+- anchor: 2-why-a-renaming-cannot-move-a-count-of-the-syntax
+  heading: '2. Why: a renaming cannot move a count of the syntax'
+- anchor: 3-the-stack-hands-the-register-over-on-its-own
+  heading: 3. The stack hands the register over on its own
+- anchor: 4-every-claim-as-it-fell
+  heading: 4. Every claim, as it fell
+- anchor: 5-what-this-settles-and-what-it-does-not
+  heading: 5. What this settles, and what it does not
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The anonymous register: where a structural address is the only reader'
+verdict: 'Yes: take the names away and the text search and the identifier address book fall to chance
+  while the structural address holds.'
+wobble_deps: []

@@ -20,15 +20,15 @@ three-resolution address; the 48-dimensional ternary rung and its factor of
 the alphabet is a sphere rather than a ball.*
 
 Code:
-[`overlay/glm_universal/substrate/lattice32.py`](../overlay/glm_universal/substrate/lattice32.py),
-[`overlay/glm_universal/substrate/lattice48.py`](../overlay/glm_universal/substrate/lattice48.py),
-[`overlay/glm_universal/reasoning/higher_lattices.py`](../overlay/glm_universal/reasoning/higher_lattices.py),
-[`overlay/glm_universal/reasoning/shell_sigma.py`](../overlay/glm_universal/reasoning/shell_sigma.py).
+[`glm_universal/substrate/lattice32.py`](../glm_universal/substrate/lattice32.py),
+[`glm_universal/substrate/lattice48.py`](../glm_universal/substrate/lattice48.py),
+[`glm_universal/reasoning/higher_lattices.py`](../glm_universal/reasoning/higher_lattices.py),
+[`glm_universal/reasoning/shell_sigma.py`](../glm_universal/reasoning/shell_sigma.py).
 Queries: `report lattices`, `report shells`.
 Formal development:
-[`RequestProject/GLM/HigherLattices.lean`](../overlay/glm_lean/RequestProject/GLM/HigherLattices.lean),
-[`RequestProject/GLM/ShellSigma.lean`](../overlay/glm_lean/RequestProject/GLM/ShellSigma.lean).
-Tests: `overlay/glm_universal/tests/test_lattice32.py`,
+[`RequestProject/GLM/HigherLattices.lean`](../glm_lean/RequestProject/GLM/HigherLattices.lean),
+[`RequestProject/GLM/ShellSigma.lean`](../glm_lean/RequestProject/GLM/ShellSigma.lean).
+Tests: `glm_universal/tests/test_lattice32.py`,
 `test_lattice48.py`, `test_higher_lattices.py`, `test_shell_sigma.py`.
 
 ---

@@ -1,0 +1,71 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: What the machine can now do, and — in more detail — what it provably cannot.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/exact_real
+  - reasoning/real_expr
+  - reasoning/transcendental
+  - tests/test_exact_real
+  lean:
+  - Computable
+  - DeltaSigma
+  - Irrational
+  - Reachable
+  - Transcendental
+  prose: INFINITE_VALUES_STUDY.md
+  test:
+  - test_infinite_values.py
+  wheel: []
+follow_ups: []
+id: INFINITE_VALUES_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Can the GLM work with infinite values and irrational numbers?
+recomputed_by: '`glm_universal.reasoning.exact_real.exact_real_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-short-answer
+  heading: 1. The short answer
+- anchor: 2-what-the-machine-can-now-do
+  heading: 2. What the machine can now do
+- anchor: 3-where-it-stops-and-why-each-stop-is-where-it-is
+  heading: 3. Where it stops — and why each stop is where it is
+- anchor: 4-how-to-see-all-of-this-at-once
+  heading: 4. How to see all of this at once
+- anchor: 5-answering-the-framing-question-directly
+  heading: 5. Answering the framing question directly
+- anchor: 6-where-the-pieces-live
+  heading: 6. Where the pieces live
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Infinite values and irrational numbers in the GLM
+verdict: Yes, and it has now been built.
+wobble_deps: []

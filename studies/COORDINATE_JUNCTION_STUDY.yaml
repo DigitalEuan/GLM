@@ -1,0 +1,85 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 6 of 9 marks (L1, J1, J2, J3, T1, F1 met; J4, J5, Q1 missed on the zero junction); 0
+  answers changed and 0 wrong on six sets; 193 new junction answers (42, 34, 34, 36, 34 on the five moved
+  sets, 13 clean); 13 of 15 duplicates read; 10 of 10 tamperings refused; census 104 junctions over 387
+  of 1,094 register carriers, 0 crossing a register.
+directives:
+- D4
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - reasoning/coordinate_junction
+  - reasoning/coordinate_junction_study
+  - runtime/session
+  - tests/test_coordinate_junction
+  lean:
+  - CoordinateJunction
+  prose: COORDINATE_JUNCTION_STUDY.md
+  test:
+  - test_coordinate_junction.py
+  wheel: []
+follow_ups: []
+id: COORDINATE_JUNCTION_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 66
+predecessors:
+- CONNECTED_MACHINE_STUDY
+question: Can Phase 66's junction rule — a name two wheels share is one quantity only where a declared
+  junction says so, and is split otherwise — let the address read answer the carriers it refuses because
+  another carrier has exactly their coordinates, without changing any answer it already gives?
+recomputed_by: '`glm_universal.reasoning.coordinate_junction_study.junction_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved-before-any-code
+  heading: 1. What is proved before any code
+- anchor: 2-the-rule
+  heading: 2. The rule
+- anchor: 3-the-questions-declared-here
+  heading: 3. The questions, declared here
+- anchor: 4-the-marks-declared-before-the-code
+  heading: 4. The marks, declared before the code
+- anchor: 5-what-this-round-does-not-do
+  heading: 5. What this round does not do
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-what-came-out
+  heading: 7. What came out
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Register junctions — the address read over carriers that share coordinates
+verdict: The junction method carries over from names to coordinates where a cell of the ladder holds one
+  junction. The `locate` read now answers a set of carriers that share exact coordinates as a **junction**
+  — certified strictly nearer than every other carrier, exactly the scan's least-distance set, with its
+  declaration (identity or distinct) reported beside it — from a junction table kept beside its digests.
+  Every Phase 143 answer is unchanged on all six sets; 193 queries it refused are now answered as junctions,
+  each one holding the carrier the query came from. 13 of the 15 duplicate carriers are read; the junction
+  of the zero word (Golay and hexacode) is not, because every cell that holds it also holds two carriers
+  outside it, so three marks that counted it were missed.
+wobble_deps: []

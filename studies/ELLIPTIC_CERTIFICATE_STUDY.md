@@ -171,7 +171,7 @@ ways:
 ## 5. The measurement
 
 The command is `PYTHONPATH=. python3 -m glm_universal.tools elliptic-certificates`,
-run from `overlay/`. Final run, with the per-number rows abbreviated:
+run from ``. Final run, with the per-number rows abbreviated:
 
 ```
 E1 Lean           RequestProject/GLM/EllipticCertificate.lean: missing [], sorry False
@@ -254,15 +254,15 @@ about 4 s.
 
 ## 7. Files
 
-* `overlay/glm_lean/RequestProject/GLM/EllipticCertificate.lean` — §2.
-* `overlay/glm_universal/reasoning/elliptic_certificate.py` — the search.
-* `overlay/glm_universal/reasoning/primality_certificate.py` — the checker,
+* `glm_lean/RequestProject/GLM/EllipticCertificate.lean` — §2.
+* `glm_universal/reasoning/elliptic_certificate.py` — the search.
+* `glm_universal/reasoning/primality_certificate.py` — the checker,
   the `ELLIPTIC` control and the stage in `certify`.
-* `overlay/glm_universal/reasoning/stepwise_script.py` — column 3's reader.
-* `overlay/glm_universal/evaluation/elliptic_certificate_cases.py` — the
+* `glm_universal/reasoning/stepwise_script.py` — column 3's reader.
+* `glm_universal/evaluation/elliptic_certificate_cases.py` — the
   held-out set and the measurement, printed by `tools elliptic-certificates`.
   `evaluation/pocklington_certificate_cases.py` — `flags` sets `ELLIPTIC` off.
-* `overlay/glm_universal/tests/test_elliptic_certificate.py` — 13 tests.
+* `glm_universal/tests/test_elliptic_certificate.py` — 13 tests.
 
 ### 7.1 What this round leaves
 

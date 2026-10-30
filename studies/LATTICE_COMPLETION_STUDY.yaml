@@ -1,0 +1,86 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 10 of 14 marks met as declared (A1, A3, A4 and C2 missed); 44 of 44 queries answered
+  correctly with 0 false absences; 20 of 23 types certified as declared and 23 of 23 post hoc, `ρ = 0.1929`
+  at `(L5, 7680)` over all 23; norm 2 filled, norm 256 empty; 10 theorems, 0 `sorry`.
+directives:
+- D12
+- D4
+- D8
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - reasoning/configuration_classifier
+  - reasoning/empty_rungs
+  - reasoning/hole_census
+  - reasoning/lattice_completion
+  lean:
+  - LatticeCompletion
+  prose: LATTICE_COMPLETION_STUDY.md
+  test:
+  - test_lattice_completion.py
+  wheel: []
+follow_ups: []
+id: LATTICE_COMPLETION_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 122
+predecessors: []
+question: 'Can the three lattice items of the To-Do list be closed together: the configuration reading
+  `L5` put into the deep-hole answering path with certified answers and absences, a reference centre reached
+  for every one of the 23 Niemeier types and read by `L5`, and the two empty norms (2 and 256) of the
+  power-of-two family filled by Construction A rungs that keep the ladder safe?'
+recomputed_by: '`glm_universal.reasoning.lattice_completion.lattice_completion_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-used-rather-than-re-derived
+  heading: 1. What is used rather than re-derived
+- anchor: 2-the-three-parts
+  heading: 2. The three parts
+- anchor: 3-the-marks-declared-before-the-code
+  heading: 3. The marks, declared before the code
+- anchor: 4-controls
+  heading: 4. Controls
+- anchor: 5-what-this-round-does-not-do
+  heading: 5. What this round does not do
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-the-measurement
+  heading: 7. The measurement
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The lattice round — the configuration reading answers, all 23 holes are reached, and the empty
+  norms are tried
+verdict: 'Partly. The configuration reading now answers in the deep-hole path: under the declared answer
+  rule it names all 44 escalation queries correctly with no refusal, where the joint reading named 40,
+  and issues 396 certified absences of which none is false. The declared walk reached all thirteen missing
+  Niemeier types, but three of its centres failed the second certifying reading, so the pre-registered
+  census certifies 20 of 23 types; a post-hoc re-reading with more patience certifies the other three,
+  and over all 23 the configuration reading recognises every type with a ratio of 0.1929 at 7680 starts.
+  Norm 2 is filled by `D12^2`; norm 256 stays empty, because both candidates answer six queries wrongly.'
+wobble_deps: []

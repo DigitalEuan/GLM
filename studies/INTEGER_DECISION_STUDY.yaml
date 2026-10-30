@@ -1,0 +1,72 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: '22 of 22 declared questions answered as declared, 0 wrong (round three refused all 22);
+  600 of 600 battery questions agree with enumeration, 0 undecided (round three: 31); 22 of 22 scripts
+  `VERIFIED`, 22 of 22 mutants rejected; 6 of 6 marks met.'
+directives:
+- D15
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - evaluation/integer_decision_cases
+  lean:
+  - IntegerDecision
+  prose: INTEGER_DECISION_STUDY.md
+  test:
+  - test_integer_decision.py
+  wheel: []
+follow_ups: []
+id: INTEGER_DECISION_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 69
+predecessors:
+- REVERSE_TCT_STUDY
+question: Can the integer sort of Reverse Three Column Thinking decide every linear question it reads,
+  with a certificate a fresh interpreter checks, instead of refusing `INTEGER_UNDECIDED`?
+recomputed_by: '`glm_universal.reasoning.integer_decision.decision_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-declarations-written-before-any-code-of-this-round
+  heading: 1. Declarations — written before any code of this round
+- anchor: 2-results
+  heading: 2. Results
+- anchor: 3-what-this-is-under-d15
+  heading: 3. What this is, under D15
+- anchor: 4-what-it-is-not
+  heading: 4. What it is not
+- anchor: 5-next
+  heading: 5. Next
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The integer decision, completed — the Omega test behind `INTEGER_UNDECIDED`
+verdict: Every question round three refused `INTEGER_UNDECIDED` in the declared corpus and the declared
+  battery is now decided, as declared and in agreement with enumeration, each refutation a tree the column-3
+  script checks step by step; nothing round three decided moved. The refusal is kept only for a declared
+  limit of search steps.
+wobble_deps: []

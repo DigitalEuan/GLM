@@ -67,7 +67,7 @@ python3 studies/scripts/tmm_null_model.py
 lake build          # 170 files under RequestProject/GLM/, 0 sorry
 ```
 
-The Lean development is <!--figure:lean-file-count-->253<!--/figure--> files under `RequestProject/GLM/`, all building
+The Lean development is <!--figure:lean-file-count-->425<!--/figure--> files under `RequestProject/GLM/`, all building
 against Mathlib for Lean 4.28.0 with **no `sorry` and no `admit`**, and no
 declared axiom anywhere: every proof depends only on `propext`,
 `Classical.choice`, `Quot.sound`, and — for the theorems reached through
@@ -77,7 +77,7 @@ declared axiom anywhere: every proof depends only on `propext`,
 
 Reproducing a number by hand once is not the same as the document staying true,
 so the agreement is now a test:
-`overlay/glm_universal/tests/test_number_theory_evidence.py` reads this file and
+`glm_universal/tests/test_number_theory_evidence.py` reads this file and
 
 * re-runs `studies/scripts/number_theory_tables.py` and compares the tables of
   §1.3, §2.4, §9.2 and §18.3 **cell by cell** with the ones printed in this
@@ -881,7 +881,7 @@ What is and is not being claimed of it is stated once, in the Positioning
 section of [`PROJECT_DIRECTIVES.md`](../PROJECT_DIRECTIVES.md), and this paper
 is written under it. It is a
 mathematical object with unusual fidelity to the structure of numbers, and the
-fidelity is provable (<!--figure:lean-files-->253 Lean files<!--/figure-->, 0 `sorry`) and measurable (exact integer
+fidelity is provable (<!--figure:lean-files-->425 Lean files<!--/figure-->, 0 `sorry`) and measurable (exact integer
 experiments, 24/24 Sturmian matches).
 
 ### 13.2 What it holds
@@ -1703,15 +1703,15 @@ scripts that regenerate the data on demand.
 | what | where |
 |---|---|
 | the exact tables of §1.3, §2.4, §9.2 | `studies/scripts/number_theory_tables.py` |
-| the worked example of §14 | `overlay/glm_universal/examples/number_pipeline.py` |
+| the worked example of §14 | `glm_universal/examples/number_pipeline.py` |
 | the TMM sweep and its null model | `studies/scripts/tmm_null_model.py` |
-| the Lean development | `RequestProject/GLM/` (<!--figure:lean-file-count-->253<!--/figure--> files) and its mirror `overlay/glm_lean/` |
+| the Lean development | `RequestProject/GLM/` (<!--figure:lean-file-count-->425<!--/figure--> files) and its mirror `glm_lean/` |
 | the three-periods table of §18.3 | `studies/scripts/number_theory_tables.py` (table 4) |
-| the delta–sigma periods, in code | `overlay/glm_universal/engineering/delta_sigma.py` |
-| the scale bucket, in code | `overlay/glm_universal/data_objects/economics_register.py` |
-| the wobble implementation | `overlay/glm_universal/reasoning/wobble.py` |
-| the constants | `overlay/glm_universal/reasoning/coherence.py` |
-| the Golay code and its decoder | `overlay/glm_universal/substrate/mog.py`, `.../golay_decode.py` |
+| the delta–sigma periods, in code | `glm_universal/engineering/delta_sigma.py` |
+| the scale bucket, in code | `glm_universal/data_objects/economics_register.py` |
+| the wobble implementation | `glm_universal/reasoning/wobble.py` |
+| the constants | `glm_universal/reasoning/coherence.py` |
+| the Golay code and its decoder | `glm_universal/substrate/mog.py`, `.../golay_decode.py` |
 
 ---
 

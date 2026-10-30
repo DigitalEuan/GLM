@@ -1,0 +1,70 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 7 of 7 marks met; the promise kept under the prior in 35 of 35 cells; 525 fixed-rate
+  cells classified, 37 broken — 35 at 1/5 and 2 on the grid; 10 of 10 runtime programs as computed.
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code: []
+  lean:
+  - RatePosterior
+  - RateRepair
+  prose: RATE_POSTERIOR_STUDY.md
+  test:
+  - test_rate_posterior.py
+  wheel: []
+follow_ups: []
+id: RATE_POSTERIOR_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 80
+predecessors:
+- CONFIDENCE_FLOOR_STUDY
+question: Can the decoder and the second reading estimate the bit-flip rate from the reads themselves,
+  instead of having the caller declare it, and what does a confidence marginalized over that estimate
+  promise?
+recomputed_by: '`glm_universal.reasoning.rate_posterior_marks.rate_posterior_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-declarations-written-before-the-module-that-measures-them
+  heading: 1. Declarations — written before the module that measures them
+- anchor: 2-results
+  heading: 2. Results
+- anchor: 3-what-this-round-moved-and-what-it-leaves
+  heading: 3. What this round moved, and what it leaves
+- anchor: 4-the-repairs-measured-phase-86
+  heading: 4. The repairs, measured (Phase 86)
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The rate from the machine's own readings — a posterior over declared rates, and the soft channel
+verdict: 'The machine can estimate it from the reads, with a measured price: the posterior over the declared
+  grid is exact, the soft floor keeps its promise averaged over the prior in every cell, and the edge
+  refusal catches part of the danger above the grid. At a fixed true rate the promise is not guaranteed:
+  it broke in 2 cells on the grid (1/10, floor 9999/10000), so the declared expectation failed, and in
+  35 cells at 1/5, above the hunted grid.'
+wobble_deps: []

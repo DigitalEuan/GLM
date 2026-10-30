@@ -33,7 +33,7 @@ into the chain) and O5 (measurands rather than units) are left named (§6).
 
 Exact throughout (D7); no digest decides a meaning (D3); every reading rests
 on a declaration in
-[`runtime/declared_frames.py`](../overlay/glm_universal/runtime/declared_frames.py).
+[`runtime/declared_frames.py`](../glm_universal/runtime/declared_frames.py).
 
 * **Declared comparatives.** A comparative word is read only through the
   declared table: *heavier* and *lighter* compare the standard atomic
@@ -89,7 +89,7 @@ on a declaration in
 ## 2. Declarations — written before any code of the round
 
 The corpus is
-[`evaluation/stepwise_three_cases.py`](../overlay/glm_universal/evaluation/stepwise_three_cases.py),
+[`evaluation/stepwise_three_cases.py`](../glm_universal/evaluation/stepwise_three_cases.py),
 committed with this section and before any code: 18 comparative questions
 (13 to be answered, 5 refused by name), 6 count-noun questions (3 answered,
 3 refused), 6 prefix questions (4 answered, 2 refused), 17 fold questions
@@ -111,35 +111,35 @@ The measurement is `glm_universal.runtime.stepwise_three.stepwise_three_report`.
 
 ## 3. What was built
 
-* [`runtime/declared_frames.py`](../overlay/glm_universal/runtime/declared_frames.py)
+* [`runtime/declared_frames.py`](../glm_universal/runtime/declared_frames.py)
   — the declarations: `COMPARATIVES` (five words, each a register phrase and
   a direction), `COUNT_NOUNS` (*electrons*, *valence electrons*),
   `DECLARED_SETS` (every element, and the ten `group_block` classes under
   their plural names), `resolve_field` (a phrase to an element-table column,
   through the planner's own synonym table and the column's own name),
   `members`, and the two gates of §1.
-* [`runtime/stepwise.py`](../overlay/glm_universal/runtime/stepwise.py) —
+* [`runtime/stepwise.py`](../glm_universal/runtime/stepwise.py) —
   the frames (`_comparative_readings`, `_fold_readings`, the *how many of*
   predicate, the declared comparatives in the difference frame, multi-word
   count nouns), the steps (`_build_comparative`, `_build_fold`), and
   `VALUE_MISSING` read from the planner's own missing-field refusal. Behind
   `ROUND_THREE`, read only while round two is on too.
-* [`runtime/quantity_units.py`](../overlay/glm_universal/runtime/quantity_units.py)
+* [`runtime/quantity_units.py`](../glm_universal/runtime/quantity_units.py)
   — `WIDE_PREFIXES` (tera, pico) behind `WIDEN`.
-* [`reasoning/stepwise_script.py`](../overlay/glm_universal/reasoning/stepwise_script.py)
+* [`reasoning/stepwise_script.py`](../glm_universal/reasoning/stepwise_script.py)
   — the column-1 templates, column-2 equations, readers and recomputation of
   `comparative` and `fold`; the script's checks of §1 (the declared table for
   every comparative and every `compare` step with a declared word, the row
   named against the row looked up, the class re-derived from the register);
   the mutations `member-lie` and `word-lie`.
-* [`runtime/stepwise_three.py`](../overlay/glm_universal/runtime/stepwise_three.py)
+* [`runtime/stepwise_three.py`](../glm_universal/runtime/stepwise_three.py)
   — the measurement (`stepwise_three_report`) and both controls; `tools
   stepwise-three`; `tests/test_stepwise_three.py`.
 * **Wiring.** Nothing new: the router already hands a planner refusal to the
   stepwise planner, so every new question is reachable from `GLM.py --ask`
   and `GLM.py --steps`. `mean` in `StepwiseFrames.lean` is now `@[expose]`,
   so the hole theorems can unfold it.
-* [`RequestProject/GLM/StepwiseWiden.lean`](../overlay/glm_lean/RequestProject/GLM/StepwiseWiden.lean)
+* [`RequestProject/GLM/StepwiseWiden.lean`](../glm_lean/RequestProject/GLM/StepwiseWiden.lean)
   — §5.
 
 ## 4. Results

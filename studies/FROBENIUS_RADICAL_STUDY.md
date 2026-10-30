@@ -221,7 +221,7 @@ rare.
 
 ## 5. Re-running it
 
-From `overlay/`:
+From ``:
 
 * `PYTHONPATH=. python3 -m glm_universal.tools frobenius-radical` runs every
   mark in about 20 s. `--quick` skips the batteries and the Phase 112

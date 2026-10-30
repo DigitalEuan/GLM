@@ -171,17 +171,17 @@ is seen to keep a refusal rather than invent an answer.
 
 ## 6. Files
 
-* `overlay/glm_lean/RequestProject/GLM/CertifiedStreams.lean`, the proofs.
-* `overlay/glm_universal/runtime/toolbox.py`: the six tools, the law-triage
+* `glm_lean/RequestProject/GLM/CertifiedStreams.lean`, the proofs.
+* `glm_universal/runtime/toolbox.py`: the six tools, the law-triage
   fallback, `TOOL_PHRASES`, `MEASUREMENT_ONLY`, `wiring_census`.
-* `overlay/glm_universal/runtime/router.py` (`_phrased_tool`) and
-  `overlay/GLM.py` (`_print_phrased`), the refusal-only fallback.
-* `overlay/glm_universal/reasoning/substrate_cognition.py`
+* `glm_universal/runtime/router.py` (`_phrased_tool`) and
+  `GLM.py` (`_print_phrased`), the refusal-only fallback.
+* `glm_universal/reasoning/substrate_cognition.py`
   (`cf_certified`).
-* `overlay/glm_universal/evaluation/connected_two_cases.py`, the batteries
+* `glm_universal/evaluation/connected_two_cases.py`, the batteries
   and `measure()`. `python3 -m glm_universal.tools connected-two` prints the
   marks.
-* `overlay/glm_universal/tests/test_connected_two.py`.
+* `glm_universal/tests/test_connected_two.py`.
 
 ## 7. The measurement
 

@@ -1,0 +1,80 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: <!--figure:ordering-as-declared-->7<!--/figure--> of <!--figure:ordering-declared-count-->7<!--/figure-->
+  comparisons came out as declared, under <!--figure:ordering-reasons-->3<!--/figure--> named refusal
+  reasons; the probe splits <!--figure:ordering-parsed-before-->15<!--/figure--> → <!--figure:ordering-parsed-after-->16<!--/figure-->
+  parsed.
+directives:
+- D7
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - tests/test_coordinate_order
+  lean:
+  - CoordinateOrder
+  prose: ORDERING_STUDY.md
+  test:
+  - test_ordering.py
+  wheel: []
+follow_ups: []
+id: ORDERING_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: The field surface answered nine of ten held-and-unreachable probe questions and named the tenth
+  as needing an operation rather than a surface. Built, what does that operation answer, and what must
+  it refuse?
+recomputed_by: '`glm_universal.reasoning.coordinate_order.comparison_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-what-this-round-took-and-from-where
+  heading: 1. What this round took, and from where
+- anchor: 2-what-the-operation-is
+  heading: 2. What the operation is
+- anchor: 3-what-it-refuses-and-why-the-refusal-is-the-result
+  heading: 3. What it refuses, and why the refusal is the result
+- anchor: 4-the-declared-set
+  heading: 4. The declared set
+- anchor: 5-the-probe-question-it-closes
+  heading: 5. The probe question it closes
+- anchor: 6-what-is-proved-rather-than-measured
+  heading: 6. What is proved rather than measured
+- anchor: 7-what-it-decides-and-what-it-does-not
+  heading: 7. What it decides, and what it does not
+- anchor: 8-limits
+  heading: 8. Limits
+- anchor: 9-re-running-it
+  heading: 9. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The ordering operation — one coordinate, two rows, and the refusal that is the point of it
+verdict: 'It answers four of the seven comparisons declared before the run and refuses three, every one
+  of the seven as declared, and the refusals are the result rather than fussiness: two readings of one
+  coordinate are comparable only when they are readings on one scale, and a rescaling of one of them flips
+  the comparison of the bare numbers. It closes the tenth question, so all ten questions the oracle called
+  held and unreachable are now parsed.'
+wobble_deps: []

@@ -1,0 +1,77 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 7 of 7 measured marks and L1; 174/174 chains said, run, drift-free and promoted (15,092
+  lines, 15,457 machine steps); lies in a computed step 87/87 found, none promoted; 348/348 column-3 mutants
+  rejected; 283/283 recorded texts and 212/212 evaluation statuses unchanged.
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code: []
+  lean:
+  - PlannerLadder
+  prose: PLANNER_LADDER_STUDY.md
+  test:
+  - test_planner_ladder.py
+  wheel: []
+follow_ups: []
+id: PLANNER_LADDER_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 151
+predecessors: []
+question: Can every chain the stepwise planner answers be said as a GLM-BAT program and run by the batch
+  machine, with drift and rollback as planner checks that gate the answer, without moving any answer the
+  planner or the evaluation gives?
+recomputed_by: '`glm_universal.reasoning.planner_ladder_study.planner_ladder_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved-before-any-code
+  heading: 1. What is proved before any code
+- anchor: 2-the-rule
+  heading: 2. The rule
+- anchor: 3-the-questions
+  heading: 3. The questions
+- anchor: 4-the-marks-declared-before-the-measurement
+  heading: 4. The marks, declared before the measurement
+- anchor: 5-what-would-count-against
+  heading: 5. What would count against
+- anchor: 6-what-is-not-claimed
+  heading: 6. What is not claimed
+- anchor: 7-what-came-out
+  heading: 7. What came out
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The operations ladder in the stepwise planner — the chain as a GLM-BAT program
+verdict: 'Yes. All 174 chains the stepwise planner answers among its 283 recorded texts are said as GLM-BAT,
+  read back to the identical lines, run by the batch machine to a halt, leave no drift and are promoted
+  by the gated pipeline, so the gate refused nothing the planner answered. A lie in the last computed
+  step is found at that step in 87 of 87 chains, and the pipeline does not promote and leaves no file.
+  The machine checks what it computes, not what it carries: of the 2,494 steps, 180 are computed and 2,314
+  carried as data, and a lie in a carried step is caught only downstream, in 87 of 168 cases. No mark
+  was missed.'
+wobble_deps: []

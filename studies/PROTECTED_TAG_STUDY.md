@@ -175,12 +175,12 @@ fifteen-bit tag `0x1a54`. The weight-4 error is coordinates 1, 9, 14, 22
 
 | file | what |
 |---|---|
-| `overlay/glm_lean/RequestProject/GLM/ProtectedTag.lean` | §1 |
-| `overlay/glm_universal/reasoning/carrier_read.py` | the protected tags, the read, the marks, `protected_tag_report` |
-| `overlay/glm_universal/runtime/parser.py`, `runtime/session.py` | the `carrier` kind and its solver |
-| `overlay/glm_universal/evaluation/cases.py` | the nine cases of §3.1 |
-| `overlay/glm_universal/tests/test_carrier_read.py` | the tests |
-| `overlay/glm_universal/tools.py` | `tools protected-tag` |
+| `glm_lean/RequestProject/GLM/ProtectedTag.lean` | §1 |
+| `glm_universal/reasoning/carrier_read.py` | the protected tags, the read, the marks, `protected_tag_report` |
+| `glm_universal/runtime/parser.py`, `runtime/session.py` | the `carrier` kind and its solver |
+| `glm_universal/evaluation/cases.py` | the nine cases of §3.1 |
+| `glm_universal/tests/test_carrier_read.py` | the tests |
+| `glm_universal/tools.py` | `tools protected-tag` |
 
 ## 7. The measurement
 

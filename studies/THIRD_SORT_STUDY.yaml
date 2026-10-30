@@ -1,0 +1,89 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 28 of 28 say cases as declared (0 of 28 before the round); battery 1116 of 1116 terms
+  read back, 1116 distinct sentences; 21 of 21 dialect programs inside; 63 of 63 dialect cases equal CPython
+  (0 of 63 before), 63 scripts verified and 63 mutants rejected; battery 0 wrong of 2830 answered; 10
+  of 10 marks met.
+directives:
+- D1
+- D2
+- D3
+- D4
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - evaluation/python_speech_cases
+  - evaluation/third_sort_cases
+  - reasoning/python_containers
+  - reasoning/python_speech
+  - reasoning/reverse_tct
+  - reasoning/reverse_tct_script
+  - reasoning/reverse_tct_seq
+  - runtime/third_sort_report
+  - tests/test_third_sort
+  lean:
+  - ThirdSort
+  prose: THIRD_SORT_STUDY.md
+  test:
+  - test_third_sort.py
+  wheel: []
+follow_ups: []
+id: THIRD_SORT_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 68
+predecessors: []
+question: Can the reverse grammar speak and read back strings, tuples and ranges — a third sort beside
+  numbers and Golay masks, with count-first literals — and can the Python dialect answer string methods,
+  list literals and dict literals exactly, refusing every mutation by name?
+recomputed_by: '`glm_universal.runtime.third_sort_report.third_sort_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-grammar-of-the-third-sort
+  heading: 1. The grammar of the third sort
+- anchor: 2-declarations-written-before-any-code-of-the-round
+  heading: 2. Declarations — written before any code of the round
+- anchor: 3-what-was-built
+  heading: 3. What was built
+- anchor: 4-results
+  heading: 4. Results
+- anchor: 5-what-is-proved-rather-than-measured
+  heading: 5. What is proved rather than measured
+- anchor: 6-limits-and-what-the-round-leaves
+  heading: 6. Limits, and what the round leaves
+- anchor: 7-re-running-it
+  heading: 7. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The third sort: strings, tuples and ranges in the reverse grammar, and the dialect widened to
+  string methods, lists and dicts'
+verdict: 'Yes, for the declared fragment: the reverse grammar now speaks and reads back strings, tuples
+  and ranges with count-first literals, and the dialect answers string methods, lists and dicts exactly
+  as snapshots, refusing every mutation by name; no earlier answer moved, and the imperative grammar is
+  not taken in this round.'
+wobble_deps: []

@@ -1,0 +1,79 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 57 of 57 declared questions and 4 of 4 follow-ups as declared, 0 wrong, where the planner
+  alone answers 0 of the 30 compound questions; 43 of 43 chain scripts verified (149 of 149 steps aligned)
+  and 172 of 172 declared mutations rejected; 8 of 8 marks met.
+directives:
+- D15
+- D3
+- D4
+- D7
+evidence: []
+faculty: derivation
+file_refs:
+  code:
+  - evaluation/stepwise_cases
+  - reasoning/stepwise_script
+  - runtime/stepwise
+  lean:
+  - StepwisePlanner
+  prose: STEPWISE_PLANNER_STUDY.md
+  test:
+  - test_stepwise_planner.py
+  wheel: []
+follow_ups: []
+id: STEPWISE_PLANNER_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 58
+predecessors: []
+question: Can the typed planner, which answers one question with one plan, be made the executive of a
+  *chain* of steps — composing its own answers, finding the steps a question does not ask for, and carrying
+  the three columns step by step — without answering anything wrongly?
+recomputed_by: '`glm_universal.runtime.stepwise.stepwise_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-objects
+  heading: 1. The objects
+- anchor: 2-declarations-written-before-any-stepwise-code
+  heading: 2. Declarations — written before any stepwise code
+- anchor: 3-what-was-built
+  heading: 3. What was built
+- anchor: 4-results
+  heading: 4. Results
+- anchor: 5-lean
+  heading: 5. Lean
+- anchor: 6-what-this-leaves
+  heading: 6. What this leaves
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The stepwise planner: the typed planner as the executive of a chain of steps'
+verdict: 'Yes: the typed planner is now the executive of a chain of steps, each step asked of the planner
+  or computed exactly and checked in all three columns, and on the declared corpus it answered every compound,
+  goal and narrative question as declared with 0 wrong answers, refusing by name wherever readings or
+  derivations disagree.'
+wobble_deps: []

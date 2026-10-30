@@ -205,13 +205,13 @@ reported either way; C5 and C6 bind it.
 ## 6. Files
 
 * `RequestProject/GLM/CounterLasso.lean` — C1.
-* `overlay/glm_universal/reasoning/batch_machine.py` — `counters`, the masked
+* `glm_universal/reasoning/batch_machine.py` — `counters`, the masked
   state, and the jumped run (`accelerated_run`), used by `run_program` after
   the Phase 125 and 126 readings.
-* `overlay/glm_universal/reasoning/batch_speech.py` — the answers and the
+* `glm_universal/reasoning/batch_speech.py` — the answers and the
   `run_jump` and `never_lasso` column-3 claims, their checker and their
   mutations.
-* `overlay/glm_universal/reasoning/counter_lasso.py` — the battery and the
+* `glm_universal/reasoning/counter_lasso.py` — the battery and the
   marks; `python3 -m glm_universal.tools counter-lasso`.
 * Tests: `test_counter_lasso.py`; `test_inert_counter.py` and
   `test_operations.py` re-pinned for N2 and N3 if they pin them.

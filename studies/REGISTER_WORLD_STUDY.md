@@ -44,7 +44,7 @@ outside the step that produced it.
 ## 1. The world, frozen
 
 Two outside sources, fetched once and frozen in
-`overlay/glm_universal/data_objects/_data/` with their URL, retrieval date
+`glm_universal/data_objects/_data/` with their URL, retrieval date
 (2026-10-03) and the SHA-256 of the page each was parsed from:
 
 | file | source | rows | holds |
@@ -58,7 +58,7 @@ moving to a newer table is a new snapshot with a new digest.
 ## 2. The reading — written before any code of the round
 
 The reading is stated at the head of
-[`register_world_cases.py`](../overlay/glm_universal/evaluation/register_world_cases.py),
+[`register_world_cases.py`](../glm_universal/evaluation/register_world_cases.py),
 committed before any code. What was seen first is said there too: the
 snapshots were checked for transcription by a throw-away comparison, so the
 *counts* in the list cases were seen before the declaration. What the
@@ -113,26 +113,26 @@ outcome, with the measured layer still the register; R8 the Lean file.
 
 ## 3. What was built
 
-* [`runtime/register_world.py`](../overlay/glm_universal/runtime/register_world.py)
+* [`runtime/register_world.py`](../glm_universal/runtime/register_world.py)
   — the report. It reads the two snapshots and the register, opens nothing for
   writing, and gives every cell its verdict, both sides as written, and the
   reason; molecules through their elements; the mutation audit.
 * The consistency frame of
-  [`runtime/semantic_plan.py`](../overlay/glm_universal/runtime/semantic_plan.py)
+  [`runtime/semantic_plan.py`](../glm_universal/runtime/semantic_plan.py)
   — *is the atomic weight of X consistent with the standard value* — now reads
   the frozen world for every element in all three fields and for a molecule's
   molar mass, and refuses by name: `WORLD_SILENT`, `REGISTER_SILENT`,
   `STANDARD_UNDECLARED`. A new frame, *which elements have an X inconsistent
   with the standard value*, lists a field's discrepant rows. Both are reached
   through the router and `GLM.py -q`.
-* [`reasoning/element_completion.py`](../overlay/glm_universal/reasoning/element_completion.py)
+* [`reasoning/element_completion.py`](../glm_universal/reasoning/element_completion.py)
   — the nested holdout moved here from the substrate-cognition module (its Y5
   figures are unchanged: it now reads them from here), the second gate, the
   narrowing domain, and a `domain` on each rule. The nested figures take about
   half a minute of exact arithmetic, so they are kept beside the digest of the
   files they read (`_derived/completion_nested_gate.json`) and recomputed only
   when one of them moves. `report completion` gains a step for the nested gate.
-* [`runtime/register_world_report.py`](../overlay/glm_universal/runtime/register_world_report.py)
+* [`runtime/register_world_report.py`](../glm_universal/runtime/register_world_report.py)
   and `tools register-world` — the marks.
 
 ## 4. Results

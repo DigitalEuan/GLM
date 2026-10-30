@@ -1,0 +1,81 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Eight results, each recomputing what its Lean file proves, in exact arithmetic.
+directives:
+- D7
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/salvage_second
+  - tests/test_salvage_second
+  lean:
+  - ConditionalInduction
+  - CubeMirror
+  - GrayJump
+  - GridTension
+  - ModeAlgebra
+  - ReadQuantum
+  - Stabiliser
+  - Surface
+  prose: SOURCE_SALVAGE_SECOND_PASS.md
+  test:
+  - test_source_salvage_second_pass.py
+  wheel: []
+follow_ups: []
+id: SOURCE_SALVAGE_SECOND_PASS
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Read a second time, with the first pass's Lean in hand, what else does the archive give up?
+recomputed_by: '`glm_universal.reasoning.salvage_second.second_pass_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-cubes-surface-is-the-mog-grid
+  heading: 1. The cube's surface is the MOG grid
+- anchor: 2-the-read-quantum-is-a-stipulation
+  heading: 2. The read quantum is a stipulation
+- anchor: 3-the-leech-shortcuts-jump-norm
+  heading: 3. The Leech shortcut's jump norm
+- anchor: 4-the-arc-grid-metrics
+  heading: 4. The ARC grid metrics
+- anchor: 5-the-conditional-lobe
+  heading: 5. The conditional lobe
+- anchor: 6-mode-algebra-and-a-mode-that-never-fires
+  heading: 6. Mode algebra, and a mode that never fires
+- anchor: 7-which-cube-symmetries-are-free
+  heading: 7. Which cube symmetries are free
+- anchor: 8-why-24-is-the-ceiling-the-mirror-argument
+  heading: '8. Why 24 is the ceiling: the mirror argument'
+- anchor: 9-what-the-second-pass-changes
+  heading: 9. What the second pass changes
+- anchor: 10-where-this-sits
+  heading: 10. Where this sits
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The archive, read a second time
+verdict: Eight more results came back.
+wobble_deps: []

@@ -1,0 +1,69 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: At most 12 of the 244823040 elements of M₂₄ commute with the Rule 30 step on a ring of
+  24 cells; 2 in the GLM's own labelling.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - MathieuCensus
+  - MathieuCensusOrbits
+  - MathieuMOG
+  - MathieuOrbits
+  - MathieuOrbitsData
+  - MathieuRule30Data
+  prose: RULE30_M24_ORBITS.md
+  test:
+  - test_rule30_m24_orbits.py
+  wheel: []
+follow_ups: []
+id: RULE30_M24_ORBITS
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: What are the M₂₄ orbits of 24-bit seed patterns, and how much of that symmetry does Rule 30
+  keep?
+recomputed_by: (hand-written argument; nothing to recompute)
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-idea-made-exact
+  heading: 1. The idea, made exact
+- anchor: 2-the-enumeration-tool
+  heading: 2. The enumeration tool
+- anchor: 3-what-the-enumeration-gives-symmetry-types-of-defect-arrangements
+  heading: 3. What the enumeration gives (symmetry types of defect arrangements)
+- anchor: 4-what-rule-30-keeps-of-the-symmetry
+  heading: 4. What Rule 30 keeps of the symmetry
+- anchor: 5-how-to-use-this-and-its-limits
+  heading: 5. How to use this, and its limits
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: '`M₂₄` orbits of seed patterns, and what Rule 30 keeps of them (Round 32)'
+verdict: Orbits of seed patterns are certified exactly by a checked enumeration tool, but only rotations
+  commute with Rule 30, so at most 12 symmetries are shared, for every labelling.
+wobble_deps: []

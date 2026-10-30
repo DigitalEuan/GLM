@@ -1,0 +1,72 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Each layer's resolution and each boundary's gain, measured at register scale.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - Escalation
+  - LayerChain
+  prose: ESCALATION_STUDY.md
+  test:
+  - test_escalation.py
+  wheel: []
+follow_ups: []
+id: ESCALATION_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: What does the layer stack do when the audit is run on every register carrier rather than seven?
+recomputed_by: '`glm_universal.reasoning.escalation.escalation_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-question-this-answers
+  heading: 1. The question this answers
+- anchor: 2-why-the-audit-had-to-be-rewritten-before-it-could-be-run
+  heading: 2. Why the audit had to be rewritten before it could be run
+- anchor: 3-what-each-layer-resolves
+  heading: 3. What each layer resolves
+- anchor: 4-what-each-boundary-gains-and-that-none-of-them-loses
+  heading: 4. What each boundary gains, and that none of them loses
+- anchor: 5-the-ceiling-which-the-seven-carriers-could-not-have-shown
+  heading: 5. The ceiling, which the seven carriers could not have shown
+- anchor: 6-where-addition-still-descends
+  heading: 6. Where addition still descends
+- anchor: 7-the-rejected-reading-measured-at-scale
+  heading: 7. The rejected reading, measured at scale
+- anchor: 8-what-is-machine-checked
+  heading: 8. What is machine-checked
+- anchor: 9-where-it-is-reachable
+  heading: 9. Where it is reachable
+- anchor: 10-what-this-leaves-open
+  heading: 10. What this leaves open
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Escalation at register scale — what the layer stack does on the machine's own data
+verdict: There is a resolution ceiling, and the seven carriers could not have shown it.
+wobble_deps: []

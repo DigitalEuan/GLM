@@ -1,0 +1,93 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 4,096 enumerated histories leave 4 distinct receipts; 20 of 20 recoveries succeed with
+  the state withheld; and the 512 ticks the `real` query kind runs per question are now one multiplication
+  rather than 512 loop steps.
+directives:
+- D11
+- D2
+- D7
+- D9
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - reasoning/exact_real
+  - reasoning/now_float_control
+  - reasoning/now_receipt
+  - tests/test_now_receipt
+  lean:
+  - DeltaSigma
+  - NowReceipt
+  - Sturmian
+  prose: NOW_RECEIPT_STUDY.md
+  test:
+  - test_now_receipt.py
+  wheel: []
+follow_ups: []
+id: NOW_RECEIPT_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Four supplied studies claim that the present state of an exact-rational process is the exact
+  integral of everything that led to it, so the state is the receipt of its own history. Restated exactly,
+  which parts of that hold, and does any of it buy the GLM anything measurable?
+recomputed_by: '`glm_universal.reasoning.now_receipt.now_receipt_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0a-the-reading-in-one-paragraph
+  heading: 0a. The reading in one paragraph
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-the-claim-stated-exactly
+  heading: 1. The claim, stated exactly
+- anchor: 2-what-the-accumulator-records-and-the-control-the-supplied-studies-omit
+  heading: 2. What the accumulator records, and the control the supplied studies omit
+- anchor: 3-what-the-accumulator-does-not-record
+  heading: 3. What the accumulator does not record
+- anchor: 4-the-seven-dimensions-and-how-many-of-them-there-are
+  heading: 4. The seven dimensions, and how many of them there are
+- anchor: 5-the-float-control
+  heading: 5. The float control
+- anchor: 6-the-arrow-of-time
+  heading: 6. The arrow of time
+- anchor: 7-what-the-system-gains
+  heading: 7. What the system gains
+- anchor: 8-every-claim-and-how-it-fell
+  heading: 8. Every claim, and how it fell
+- anchor: 9-what-this-study-does-not-settle
+  heading: 9. What this study does not settle
+- anchor: 10-what-this-round-changed-in-the-tree
+  heading: 10. What this round changed in the tree
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: History recorded in the now — what the receipt actually holds
+verdict: 'The identity holds and the reading of it does not: the accumulator is exactly the fractional
+  part of the integral of its input, which makes it a function of the program and the tick count rather
+  than a record of the run, and the supplied recoveries succeed just as well with the state withheld.
+  What the corrected statement is worth is a shipped path made cheap and a class of question the system
+  can now refuse with a witness rather than answer wrongly.'
+wobble_deps: []

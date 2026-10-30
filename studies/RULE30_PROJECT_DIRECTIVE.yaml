@@ -1,0 +1,78 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 3 questions; 5 evidence classes FORMAL, CERT/EXH, EMP, DEF, OPEN.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - ConeSeparation
+  - MachineModel
+  - Prizes
+  - Problem3Quantifiers
+  - TopMonomial
+  - WeightGrowth
+  - Wobble
+  - WobbleCertificate
+  prose: RULE30_PROJECT_DIRECTIVE.md
+  test:
+  - test_rule30_project_directive.py
+  wheel: []
+follow_ups: []
+id: RULE30_PROJECT_DIRECTIVE
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: What is the project's goal, what are its rules of evidence, and what counts as progress?
+recomputed_by: (hand-written argument; nothing to recompute)
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-purpose
+  heading: 1. Purpose
+- anchor: 2-the-three-questions-exactly-as-stated-in-lean
+  heading: 2. The three questions, exactly as stated in Lean
+- anchor: 3-rules-of-evidence-non-negotiable
+  heading: 3. Rules of evidence (non-negotiable)
+- anchor: 4-current-focus-in-order
+  heading: 4. Current focus (in order)
+- anchor: 5-what-counts-as-progress
+  heading: 5. What counts as progress
+- anchor: 6-the-observer-y-the-wobble-and-perspective-your-idea-where-it-stands
+  heading: 6. The observer `Y`, the wobble and "perspective" (your idea, where it stands)
+- anchor: 7-what-became-of-the-original-verification_directivemd-targets
+  heading: 7. What became of the original `VERIFICATION_DIRECTIVE.md` targets
+- anchor: 8-where-everything-lives
+  heading: 8. Where everything lives
+- anchor: 9-checklist-for-closing-a-round
+  heading: 9. Checklist for closing a round
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Rule 30 / GLM — Project Directive (Round 37)
+verdict: Answer Wolfram's three Rule 30 questions as clearly and fully as possible, with the GLM as the
+  instrument and Lean 4 to check every claim; every claim has an evidence class, open targets are Lean
+  Props, never an axiom, and no finite range decides P1 or P2.
+wobble_deps: []

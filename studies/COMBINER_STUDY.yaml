@@ -1,0 +1,67 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Every map from pairs of 24-bit words to single 24-bit words loses at least as much.
+directives:
+- D3
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - tests/test_combiner
+  lean:
+  - Combiner
+  - Superposition
+  prose: COMBINER_STUDY.md
+  test:
+  - test_combiner.py
+  wheel: []
+follow_ups: []
+id: COMBINER_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Is XOR a choice in this system, and what does it cost?
+recomputed_by: '`glm_universal.reasoning.combiner.combiner_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-on-the-code-xor-is-forced
+  heading: 1. On the code, XOR is forced
+- anchor: 2-what-xor-loses-exactly
+  heading: 2. What XOR loses, exactly
+- anchor: 3-where-xor-actually-occurs-in-the-runtime
+  heading: 3. Where XOR actually occurs in the runtime
+- anchor: 4-if-the-loss-is-not-wanted-widen-the-output
+  heading: 4. If the loss is not wanted, widen the output
+- anchor: 5-what-this-settles
+  heading: 5. What this settles
+- anchor: 6-where-each-claim-lives
+  heading: 6. Where each claim lives
+status: negative
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'XOR: what it is doing here, what it costs, and what could replace it'
+verdict: 'XOR is not a choice where the system uses it: on the carrier the substrate actually runs on
+  it is the only coordinatewise combiner available, up to a constant.'
+wobble_deps: []

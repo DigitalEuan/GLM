@@ -57,7 +57,7 @@ itself would raise).
 
 ## 2. Pass marks, declared before the measuring module existed
 
-The corpus is `overlay/glm_universal/evaluation/python_speech_cases.py`,
+The corpus is `glm_universal/evaluation/python_speech_cases.py`,
 written and committed together with this section. CPython is the reference
 for every value: the same source is run by CPython with the same pure-Python
 prelude, and the GLM's value must equal CPython's in type and value.
@@ -90,14 +90,14 @@ after the measurement.
 
 ## 3. What was built
 
-* `overlay/glm_universal/reasoning/python_substrate.py` — where each Python
+* `glm_universal/reasoning/python_substrate.py` — where each Python
   construct lives on the substrate: the eight vertical 3-lane registers and
   their gate programs, the two's-complement register tower, dyadic shifts
   and plane readings, CPython's slice clamping as an index map with MOG cell
   addresses, frozensets as 24-bit masks, `classify` on the complete Golay
   decoder, the delta-sigma tick generator, AST canonical forms and addresses,
   and the plain-Python prelude.
-* `overlay/glm_universal/reasoning/python_speech.py` — the evaluator
+* `glm_universal/reasoning/python_speech.py` — the evaluator
   (expressions, assignment and unpacking, `if`/`for`/`while`, `break`,
   `continue`, pure `def` functions with recursion, `match`/`case` with value,
   capture, wildcard, or- and sequence patterns and guards, `assert`), the

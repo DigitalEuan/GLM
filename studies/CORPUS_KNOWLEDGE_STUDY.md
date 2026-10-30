@@ -153,14 +153,14 @@ the same rule.
 
 ## 6. Files
 
-* `overlay/glm_universal/knowledge/` — the package (`reader.py`, `model.py`,
+* `glm_universal/knowledge/` — the package (`reader.py`, `model.py`,
   `answer.py`, `ask.py`, `study.py`, `README.md`).
 * the `corpus` query kind: `python3 GLM.py -q "corpus define golay code"`,
   with column 3 recounting the answer by brute force.
-* `overlay/glm_universal/knowledge/_data/corpus_knowledge.json` — the stored
+* `glm_universal/knowledge/_data/corpus_knowledge.json` — the stored
   measurement, beside the digest of the code that took it.
-* `overlay/glm_universal/tests/test_corpus_knowledge.py` — the tests.
-* `overlay/glm_lean/RequestProject/GLM/CorpusKnowledge.lean` — §2.
+* `glm_universal/tests/test_corpus_knowledge.py` — the tests.
+* `glm_lean/RequestProject/GLM/CorpusKnowledge.lean` — §2.
 * `python3 -m glm_universal.tools corpus-knowledge [--write]` — the instrument.
 
 ## 7. What came out
@@ -183,7 +183,7 @@ held-out split moved with it.
 2,187 documents (1,268 Python, 375 Markdown, 310 Lean, 173 JSON, 53 text, 8
 CSV), 184,118 sentences, 2,655,147 tokens and 49,603 distinct words; 1,031
 documents come from `source_material/` (most of them the members of the
-supplied zip archive), 981 from `overlay/`, 160 from `studies/`. Reading it
+supplied zip archive), 981 from ``, 160 from `studies/`. Reading it
 from nothing takes under a minute; after one file changes, only that file is
 read again. The held-out fifth of the documents holds 47,070 sentences, of
 which 25,435 are novel (said nowhere in the training documents); K1–K4 are

@@ -39,12 +39,12 @@ measurement and then into a construction:
 
 ## 1. What is built
 
-* `overlay/glm_universal/engineering/domains.py` — the demand census, the five
+* `glm_universal/engineering/domains.py` — the demand census, the five
   wheels, the junction and non-identity tables, the split system over fifteen
   wheels, the frame's solver, the census of §2.5 and `domains_report`.
 * The frame `domains` in `engineering/speak.py`, tried before every other
   frame and reading only text that ends *across domains*.
-* `overlay/glm_universal/evaluation/domain_cases.py` — the battery of §2.4 and
+* `glm_universal/evaluation/domain_cases.py` — the battery of §2.4 and
   the labels of §2.5, committed with this document.
 * `python3 -m glm_universal.tools domains [--census] [--write]` — the
   instrument; the census is stored in `engineering/_data/domains.json` beside
@@ -206,7 +206,7 @@ of the fifteen wheels:
 
 ## 6. Files
 
-See §1. Tests: `overlay/glm_universal/tests/test_domains.py`.
+See §1. Tests: `glm_universal/tests/test_domains.py`.
 
 ## 7. What came out
 

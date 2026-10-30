@@ -1,0 +1,70 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 5 of 5 marks; 110 of 110 and 111 of 111 quoted measurements move their census's digest
+  when altered; the replay instrument signed passed (171 of 171 answered cases verified by column 3).
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean: []
+  prose: QUOTED_MEASUREMENTS_STUDY.md
+  test:
+  - test_quoted_measurements.py
+  wheel: []
+follow_ups: []
+id: QUOTED_MEASUREMENTS_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 174
+predecessors:
+- EVIDENCE_IN_USE_STUDY
+question: Can a measurement that records the system's answers stop calling itself current after a stored
+  measurement those answers quote has been re-taken, and can the evaluation's replay gate become a step
+  of the close rather than a flag to remember?
+recomputed_by: '`glm_universal.reasoning.quoted_measurements_study.quoted_measurements_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-the-mechanism
+  heading: 1. The mechanism
+- anchor: 2-the-marks
+  heading: 2. The marks
+- anchor: 3-what-is-not-claimed
+  heading: 3. What is not claimed
+- anchor: 4-what-came-out
+  heading: 4. What came out
+- anchor: in-one-paragraph
+  heading: In one paragraph
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The answer censuses guarded by what their answers quote, and the replay gate as a step of the close
+verdict: 'Yes, both. The evidence census and the result census now record, while they run, every stored
+  measurement their answers open, and their digests cover those files: alter any one of them and the census
+  turns stale. The close re-takes the two censuses last, in order, so a re-take earlier in the same stage
+  cannot leave them stale. The replay gate is the sign-off instrument `replay`, re-run when what it reads
+  has moved and signed like the others.'
+wobble_deps: []

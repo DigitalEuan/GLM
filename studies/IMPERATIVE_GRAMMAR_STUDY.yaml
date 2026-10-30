@@ -1,0 +1,79 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 7 of 7 Phase 64 programs with state said (0 before); 13 of 13 sentences as declared;
+  21 of 21 further programs equal CPython; 41 of 41 scripts verified and 41 mutants rejected; battery
+  1412 of 1412 programs read back, 1412 distinct sentences; 8 of 9 marks met (I7 not met).
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - evaluation/imperative_cases
+  - reasoning/reverse_tct
+  - reasoning/reverse_tct_imp
+  - reasoning/reverse_tct_script
+  - runtime/imperative_report
+  - tests/test_imperative_grammar
+  lean:
+  - ImperativeGrammar
+  prose: IMPERATIVE_GRAMMAR_STUDY.md
+  test:
+  - test_imperative_grammar.py
+  wheel: []
+follow_ups: []
+id: IMPERATIVE_GRAMMAR_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 64
+predecessors: []
+question: Can the reverse grammar speak and read back programs with state — assignment, simultaneous assignment,
+  `for` and `while` loops, branches, conditional expressions, functions with recursion and `match` — so
+  that the Phase 64 programs with state have sentences, with their values checked by a fresh interpreter?
+recomputed_by: '`glm_universal.runtime.imperative_report.imperative_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-grammar
+  heading: 1. The grammar
+- anchor: 2-declarations-written-before-any-code-of-the-round
+  heading: 2. Declarations — written before any code of the round
+- anchor: 3-what-was-built
+  heading: 3. What was built
+- anchor: 4-results
+  heading: 4. Results
+- anchor: 5-what-is-proved-rather-than-measured
+  heading: 5. What is proved rather than measured
+- anchor: 6-limits-and-what-the-round-leaves
+  heading: 6. Limits, and what the round leaves
+- anchor: 7-re-running-it
+  heading: 7. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The imperative grammar: sentences for assignment, loops, branches, functions and `match`'
+verdict: 'Yes, for the declared fragment: programs with state are said and read back, their values equal
+  CPython''s, and a fresh interpreter replays every trace; one refusal of an earlier round is made more
+  specific, so the no-regression mark is not met as declared.'
+wobble_deps: []

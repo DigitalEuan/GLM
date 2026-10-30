@@ -1,0 +1,84 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 'Set B: 14 of 14 by audit (protocol +10: 11 right, 1 disputed answer); Outside O1: 27
+  of 112 framed and correct, 0 wrong, 85 located boundaries in six classes; 41 framed questions, 0 verdicts
+  changed by the contract variant; 177 of 177 contract questions identical through the routed `-q`.'
+directives:
+- D15
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - reasoning/exact_forms
+  - runtime/outside_frames
+  - runtime/question_frames
+  - tests/test_question_frames
+  lean:
+  - ConnectedMachine
+  - QuestionSetB
+  - QuestionSetBAnswers
+  prose: QUESTION_SET_B_STUDY.md
+  test:
+  - test_question_set_b.py
+  wheel: []
+follow_ups: []
+id: QUESTION_SET_B_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 89
+predecessors:
+- CONTRACT_MATRIX_STUDY
+question: What do the two outside question sets the owner supplied in Phase 89 find, and how far can declared
+  question frames, each answer checked by its own column-3 script, carry the machine into them?
+recomputed_by: '`glm_universal.evaluation.question_set_b.report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-baseline-before-any-frame
+  heading: 1. The baseline — before any frame
+- anchor: 2-what-was-built
+  heading: 2. What was built
+- anchor: 3-set-b-14-of-14-by-audit
+  heading: 3. Set B — 14 of 14 by audit
+- anchor: 4-outside-o1-the-capability-failure-matrix
+  heading: 4. Outside O1 — the Capability Failure Matrix
+- anchor: 5-k1--q-through-the-router
+  heading: 5. K1 — `-q` through the router
+- anchor: 6-candidate-p-on-the-question-sets
+  heading: 6. Candidate P on the question sets
+- anchor: 7-what-is-proved
+  heading: 7. What is proved
+- anchor: 8-the-boundaries-as-the-next-tracks
+  heading: 8. The boundaries, as the next tracks
+- anchor: 9-re-running
+  heading: 9. Re-running
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The outside question sets — Set B, Outside O1, and the Capability Failure Matrix
+verdict: Before this round the router read none of the 126 questions; with declared question frames, every
+  Set B item and 27 outside questions are read and answered or correctly refused, each checked by its
+  column-3 script, with no confidently wrong answer.
+wobble_deps: []

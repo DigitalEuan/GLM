@@ -75,10 +75,10 @@ block reports staleness rather than printing a figure from a tree that has
 changed.
 
 The formal half is
-[`RequestProject/GLM/Retrieval.lean`](../overlay/glm_lean/RequestProject/GLM/Retrieval.lean),
+[`RequestProject/GLM/Retrieval.lean`](../glm_lean/RequestProject/GLM/Retrieval.lean),
 the computational half is `glm_universal.reasoning.retrieval`, the test that
 pins the two against each other is
-`overlay/glm_universal/tests/test_retrieval.py` (42 tests, 399 subtests), and
+`glm_universal/tests/test_retrieval.py` (42 tests, 399 subtests), and
 the report prints with
 
 ```bash
@@ -102,7 +102,7 @@ seeded sample — and the goal experiment uses a coarser stride, because it
 decodes a fresh Leech point per query.
 
 <!-- generated: retrieval-setup -->
-All **5,893** declarations of the Lean development are the corpus.  The declaration experiment uses **204** queries and the goal experiment **102**, each with at least one relative; the mean query has **33.3** relatives among the 5,892 other declarations.  None of the 102 goal queries reproduces its own stored feature vector (0 of 102), so a goal address is held out every time.
+The stored measurements of the formal development do not describe the Lean tree as it now stands (`stale`), so nothing is reported here rather than a figure taken from a tree that has moved.  Run `python3 -m glm_universal.corpus --remeasure`.
 <!-- end generated -->
 
 **What counts as a hit.** A retrieved declaration is *relevant* when it is a
@@ -123,19 +123,7 @@ The query is a declaration; the scheme ranks the other 3,186; a hit is a
 relative in the top `k`.
 
 <!-- generated: retrieval-declarations -->
-| scheme | hit@1 | hit@3 | hit@5 | hit@10 | precision@5 | MRR@10 |
-|---|---|---|---|---|---|---|
-| **address** — Leech address of the structural feature vector | 42 (20.6 %) | 64 (31.4 %) | 73 (35.8 %) | 90 (44.1 %) | 11.4 % | 0.273 |
-| *features* — the same vector, no lattice (ablation) | 41 (20.1 %) | 63 (30.9 %) | 78 (38.2 %) | 95 (46.6 %) | 12.0 % | 0.275 |
-| *lexical* — Leech address of the identifier-letter vector | 70 (34.3 %) | 101 (49.5 %) | 108 (52.9 %) | 123 (60.3 %) | 20.2 % | 0.423 |
-| *text* — Jaccard overlap of identifier tokens (**the strong control**) | 134 (65.7 %) | 158 (77.5 %) | **168 (82.4 %)** | 180 (88.2 %) | 50.3 % | 0.730 |
-| *name* — name-substring search | 31 (15.2 %) | 43 (21.1 %) | 55 (27.0 %) | 67 (32.8 %) | 9.8 % | 0.200 |
-| *digest* — SHA-256 address (D3 control) | 1 (0.5 %) | 4 (2.0 %) | 5 (2.5 %) | 10 (4.9 %) | 0.5 % | 0.014 |
-| *shuffled* — the feature addresses re-paired by a seeded permutation | 0 (0.0 %) | 4 (2.0 %) | 7 (3.4 %) | 10 (4.9 %) | 0.7 % | 0.013 |
-| *random* — a seeded permutation of the corpus | 0 (0.0 %) | 3 (1.5 %) | 4 (2.0 %) | 11 (5.4 %) | 0.4 % | 0.012 |
-| **chance**, in closed form | 0.6 % | 1.7 % | 2.8 % | 5.5 % | — | — |
-
-204 queries of the 5,893-declaration corpus.  At k = 5 the structural address runs 12.84× closed-form chance; the text control beats the address: yes; the lattice matches the raw features: no.
+The stored measurements of the formal development do not describe the Lean tree as it now stands (`stale`), so nothing is reported here rather than a figure taken from a tree that has moved.  Run `python3 -m glm_universal.corpus --remeasure`.
 <!-- end generated -->
 
 Four readings, in the order of how much they matter.
@@ -187,16 +175,7 @@ zero. **None** of the goal queries reproduces its own stored feature vector, so
 this is a genuinely held-out address every time.
 
 <!-- generated: retrieval-goals -->
-| scheme | hit@1 | hit@3 | hit@5 | hit@10 | precision@5 |
-|---|---|---|---|---|---|
-| address | 7 (6.9 %) | 13 (12.7 %) | 17 (16.7 %) | 23 (22.5 %) | 4.5 % |
-| lexical | 24 (23.5 %) | 31 (30.4 %) | 40 (39.2 %) | 45 (44.1 %) | 14.9 % |
-| text | 70 (68.6 %) | 80 (78.4 %) | 84 (82.4 %) | 91 (89.2 %) | 51.8 % |
-| name | 16 (15.7 %) | 23 (22.5 %) | 30 (29.4 %) | 35 (34.3 %) | 10.8 % |
-| digest | 0 (0.0 %) | 0 (0.0 %) | 0 (0.0 %) | 1 (1.0 %) | 0.0 % |
-| random | 0 (0.0 %) | 2 (2.0 %) | 2 (2.0 %) | 6 (5.9 %) | 0.4 % |
-
-102 goal queries, the two coordinates a goal cannot know set to zero.
+The stored measurements of the formal development do not describe the Lean tree as it now stands (`stale`), so nothing is reported here rather than a figure taken from a tree that has moved.  Run `python3 -m glm_universal.corpus --remeasure`.
 <!-- end generated -->
 
 The goal set is a coarser stride, so the rates are not paired with §2's
@@ -217,16 +196,7 @@ by *pruning*: address-shortlist first, text-rank the survivors. That is the
 standard architecture, and it is worth measuring rather than assuming.
 
 <!-- generated: retrieval-hybrid -->
-| shortlist | fraction of corpus | hit@5 | precision@5 |
-|---|---|---|---|
-| 50 | 0.8 % | 62.7 % | 23.6 % |
-| 100 | 1.7 % | 66.2 % | 26.1 % |
-| 200 | 3.4 % | 71.1 % | 30.4 % |
-| 400 | 6.8 % | 73.0 % | 34.6 % |
-| 800 | 13.6 % | 74.5 % | 39.2 % |
-| **no shortlist** | 100 % | **82.4 %** | **50.3 %** |
-
-Any shortlist beats the text control: no.
+The stored measurements of the formal development do not describe the Lean tree as it now stands (`stale`), so nothing is reported here rather than a figure taken from a tree that has moved.  Run `python3 -m glm_universal.corpus --remeasure`.
 <!-- end generated -->
 
 **No shortlist beats the text control, at any size.** The curve is monotone and
@@ -241,7 +211,7 @@ economic register's undecoded control.
 ## 5. What the lattice does earn: an exact, complete, certifiable shortlist
 
 The theorems of
-[`RequestProject/GLM/Retrieval.lean`](../overlay/glm_lean/RequestProject/GLM/Retrieval.lean)
+[`RequestProject/GLM/Retrieval.lean`](../glm_lean/RequestProject/GLM/Retrieval.lean)
 survive every number above, because none of them is about hit rates.
 
 | statement | what it says | Lean |
@@ -256,15 +226,7 @@ survive every number above, because none of them is about hit rates.
 The completeness bound is the one with teeth, and it is measured:
 
 <!-- generated: retrieval-guarantee -->
-| what was checked | result |
-|---|---|
-| pairs checked against `sqrt(address²) ≤ 9·sqrt(features²) + 2ρ`, ρ = 4 | **300,492** |
-| violations | **0** |
-| tightest observed slack | 64 (squared units) |
-| guaranteed-complete shortlist at feature radius 2 | mean **122.7** declarations = **2.1 %** of the corpus |
-| feature-close declarations it must contain | mean **20.1** |
-
-Over 51 queries of the 5,893-declaration corpus.  The bound holds: yes.
+The stored measurements of the formal development do not describe the Lean tree as it now stands (`stale`), so nothing is reported here rather than a figure taken from a tree that has moved.  Run `python3 -m glm_universal.corpus --remeasure`.
 <!-- end generated -->
 
 So the address book is an exact spatial index with a proved recall guarantee:

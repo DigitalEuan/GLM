@@ -1,0 +1,83 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: <!--figure:scales-as-declared-->12<!--/figure--> of <!--figure:scales-declared-->12<!--/figure-->
+  declared questions came out as declared, <!--figure:scales-answered-->7<!--/figure--> answered and <!--figure:scales-refused-->5<!--/figure-->
+  refused, off a table of <!--figure:scales-rows-->10<!--/figure--> rows that relates <!--figure:scales-bridged-->8<!--/figure-->
+  of the <!--figure:scales-pairs-->7,875<!--/figure--> pairs of the <!--figure:scales-numeric-->126<!--/figure-->
+  numeric scales the field surface holds.
+directives:
+- D15
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - tests/test_scale_conversion
+  lean:
+  - ScaleConversion
+  prose: SCALE_CONVERSION_STUDY.md
+  test:
+  - test_scale_conversion.py
+  wheel: []
+follow_ups: []
+id: SCALE_CONVERSION_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: The ordering operation refuses two readings on two scales and the extremum operation refuses
+  a column gathered from two, both because they hold no conversions. Declared, what does a table of conversions
+  answer, and what must stay refused?
+recomputed_by: '`glm_universal.reasoning.scale_conversion.conversion_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-what-this-round-took-and-from-where
+  heading: 1. What this round took, and from where
+- anchor: 2-what-a-conversion-is-here
+  heading: 2. What a conversion is here
+- anchor: 3-the-table
+  heading: 3. The table
+- anchor: 4-what-the-table-lets-the-two-operations-do
+  heading: 4. What the table lets the two operations do
+- anchor: 5-the-declared-set
+  heading: 5. The declared set
+- anchor: 6-what-it-removes-measured-rather-than-asserted
+  heading: 6. What it removes, measured rather than asserted
+- anchor: 7-what-is-proved-rather-than-measured
+  heading: 7. What is proved rather than measured
+- anchor: 8-what-it-decides-and-what-it-does-not
+  heading: 8. What it decides, and what it does not
+- anchor: 9-limits
+  heading: 9. Limits
+- anchor: 10-re-running-it
+  heading: 10. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The scales neither operation could bridge — what a declared table of conversions buys, and what
+  it must leave refused
+verdict: 'It answers seven of the twelve questions declared before the run and refuses five, every one
+  of the twelve as declared, and it removes nothing the two operations underneath it already did: both
+  come out on their own declared sets exactly as before. A conversion is a row someone wrote down, so
+  the table reaches nine scales of four quantities and leaves every other pair of scales refused.'
+wobble_deps: []

@@ -1,0 +1,113 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 'The number of the ten reference holes that keep their own
+
+  label under a bare seed change: 3 of 10 at `(L₁, 240)`, 9 of 10 at
+
+  `(L₄, 960)`, 10 of 10 at `(L₄, 1920)`.'
+directives:
+- D11
+- D3
+- D4
+- D5
+- D6
+- D7
+- D9
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/deep_hole_escalation
+  lean:
+  - Cumulative
+  - DeepHoleEscalation
+  - Layers
+  prose: DEEP_HOLE_ESCALATION_STUDY.md
+  test:
+  - test_deep_hole_escalation.py
+  wheel: []
+follow_ups: []
+id: DEEP_HOLE_ESCALATION_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: 'The deep-hole round stopped because its statistic could not tell
+
+  the same hole from itself under a changed ensemble. Is that a property of the
+
+  hole, or of the layer it was read at — and does escalating the reading, in the
+
+  declared ladder below, cross the boundary?'
+recomputed_by: '`glm_universal.reasoning.deep_hole_escalation.deep_hole_escalation_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-used-rather-than-re-derived
+  heading: 1. What is used rather than re-derived
+- anchor: 2-the-ensemble-and-why-it-is-nested
+  heading: 2. The ensemble, and why it is nested
+- anchor: 3-the-ladder-of-layers
+  heading: 3. The ladder of layers
+- anchor: 4-the-primary-statistic-and-the-gate
+  heading: 4. The primary statistic, and the gate
+- anchor: 5-the-multiplicity-correction
+  heading: 5. The multiplicity correction
+- anchor: 6-the-controls
+  heading: 6. The controls
+- anchor: 7-the-decision-tree-fixed-before-the-measurement
+  heading: 7. The decision tree, fixed before the measurement
+- anchor: 8-what-this-round-has-to-produce-in-the-shape-d5-requires
+  heading: 8. What this round has to produce, in the shape D5 requires
+- anchor: 9-the-lean-half-what-is-proved-rather-than-measured
+  heading: '9. The Lean half: what is proved rather than measured'
+- anchor: 10-what-the-glm-gains-three-claims-to-be-argued-or-refuted-by-the-numbers
+  heading: 10. What the GLM gains — three claims, to be argued or refuted by the numbers
+- anchor: 11-exactness-and-how-to-re-take-every-number
+  heading: 11. Exactness, and how to re-take every number
+- anchor: 12-the-measurement
+  heading: 12. The measurement
+- anchor: 13-what-this-study-does-not-do
+  heading: 13. What this study does not do
+- anchor: 14-the-extension-rung-declared-after-the-trend-before-the-run
+  heading: 14. The extension rung — declared after the trend, before the run
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The deep-hole ladder — escalating the reading until the law descends
+verdict: 'It was the layer. Escalating the reading takes the sanity count
+
+  from **3 of 10** at the first round''s cell to **10 of 10** — the gate — at the
+
+  joint reading with 1920 starts, where the full query set comes out **40 of
+
+  44** against 12 for the vertex-count baseline. The passing cell is the
+
+  extension rung of §14, decided after the twelve pre-registered cells were
+
+  measured, and is reported as an extension throughout; the best pre-registered
+
+  cell is 9 of 10.'
+wobble_deps: []

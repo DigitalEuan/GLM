@@ -1,0 +1,84 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: '12 of 12 marks; wrong answers 0 of 2,250 (controls: 12 and 19); flood fill and shortest
+  path 0 → 49 of 50 each at four demonstrations; the three two-step families 0 → 47, 50 and 50 of 50;
+  bridge failures 0 in 2,000 words.'
+directives:
+- D13
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - reasoning/pipeline_kit
+  - reasoning/pipeline_kit_study
+  lean:
+  - PipelineInduction
+  prose: PIPELINE_KIT_STUDY.md
+  test:
+  - test_pipeline_kit.py
+  wheel: []
+follow_ups: []
+id: PIPELINE_KIT_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 175
+predecessors: []
+question: Can the owner's 9-iteration pipeline kit be brought into the GLM so that it solves tasks given
+  as demonstrations, closes the two task families the kit left open, chains two operators when one does
+  not fit, works on bit strings as well as grids, and never gives a wrong answer it could have refused?
+recomputed_by: '`glm_universal.reasoning.pipeline_kit_study.pipeline_kit_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved
+  heading: 1. What is proved
+- anchor: 2-the-mechanism
+  heading: 2. The mechanism
+- anchor: 3-what-is-measured
+  heading: 3. What is measured
+- anchor: 4-faculties
+  heading: 4. Faculties
+- anchor: 5-the-marks
+  heading: 5. The marks
+- anchor: 6-what-is-not-claimed
+  heading: 6. What is not claimed
+- anchor: 7-what-came-out
+  heading: 7. What came out
+- anchor: in-one-paragraph
+  heading: In one paragraph
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The pipeline kit in the GLM — rules induced from demonstrations, answered only when every fitting
+  rule agrees
+verdict: 'Yes, within its operator vocabulary. The kit''s bridge, never run before, holds on the GLM''s
+  own substrate; its seven Lean files build in the GLM''s development; `tool induce` keeps every operator
+  hypothesis that fits all the demonstrations, single operators and two-step compositions together, and
+  answers only when they all agree. Over 2,250 queries in fifteen families it gave 0 wrong answers at
+  a cost of 129 refusals, closed both open families (49 of 50 each at four demonstrations), and answered
+  at least 47 of 50 queries of every two-step and bit-string family; the two controls that answer more
+  eagerly gave 12 and 19 wrong answers. Lean proves the gate sound: an answer is the true rule''s whenever
+  the true rule is in the tier read, and refusing is forced when two fitting rules disagree.'
+wobble_deps: []

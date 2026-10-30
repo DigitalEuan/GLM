@@ -1,0 +1,66 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Two questions, two negative answers, every census a full enumeration in exact arithmetic.
+directives:
+- D2
+- D7
+- D8
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/deep_dive
+  - tests/test_deep_dive
+  lean:
+  - LDP
+  - Relaxation
+  - TriadChance
+  prose: ARCHIVE_DEEP_DIVE_STUDY.md
+  test:
+  - test_archive_deep_dive.py
+  wheel: []
+follow_ups: []
+id: ARCHIVE_DEEP_DIVE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Are the archive's 44 balanced octads structure or chance, and is its relaxation a decoder?
+recomputed_by: '`glm_universal.reasoning.deep_dive.deep_dive_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-is-the-44-balanced-octads-a-property-of-the-code-or-of-chance
+  heading: 1. Is the "44 balanced octads" a property of the code, or of chance?
+- anchor: 2-is-the-archives-relaxation-a-decoder
+  heading: 2. Is the archive's "relaxation" a decoder?
+- anchor: 3-what-the-two-answers-have-in-common
+  heading: 3. What the two answers have in common
+- anchor: 4-where-this-sits
+  heading: 4. Where this sits
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Two questions the archive audit left open
+verdict: Both answers are negative, and both are more useful than the positive would have been.
+wobble_deps: []

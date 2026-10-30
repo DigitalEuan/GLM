@@ -1,0 +1,90 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 7 of 8 marks; 680,064 of 680,064 tied reads resolved by the tag, 0 wrong (0 by the hard
+  word alone); 768 of 768 gentle reads resolved by the soft certificate, 0 wrong, and 0 of 768 K4b reads;
+  0 silent four-flip miscorrections for the GLM's code against 2,695 to 4,480 for each declared alternative;
+  7,254,016 received words at distance 4, equal to the proved floor.
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - reasoning/designed_substrate
+  - tests/test_designed_substrate
+  lean:
+  - CarriedFork
+  - Code
+  - DesignedSubstrate
+  - Packing
+  prose: DESIGNED_SUBSTRATE_STUDY.md
+  test:
+  - test_designed_substrate.py
+  wheel: []
+follow_ups: []
+id: DESIGNED_SUBSTRATE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 133
+predecessors:
+- CARRIED_FORK_STUDY
+- DECODER_CONFIDENCE_STUDY
+question: Is the Golay–Leech 24-dimensional substrate optimal for the GLM, can a designed dimensional
+  system improve on it, and does bringing the owner's substrate study into the GLM measurably widen what
+  its reasoning can resolve?
+recomputed_by: '`glm_universal.reasoning.designed_substrate.designed_substrate_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved-requestprojectglmdesignedsubstratelean
+  heading: 1. What is proved (`RequestProject/GLM/DesignedSubstrate.lean`)
+- anchor: 2-the-stages
+  heading: 2. The stages
+- anchor: 3-the-marks-declared-before-the-code
+  heading: 3. The marks, declared before the code
+- anchor: 4-controls
+  heading: 4. Controls
+- anchor: 5-what-this-round-does-not-do
+  heading: 5. What this round does not do
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-the-measurement
+  heading: 7. The measurement
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The designed substrate — is the Golay–Leech carrier optimal for the GLM, and what resolves its
+  ties?
+verdict: 'In the GLM''s regime the Golay carrier is optimal and cannot be beaten by any design of the
+  same size; what can be improved is how its six-way tie is resolved, and the two new certified stages
+  measurably widen that. Proved in the GLM''s own Lean development, for every 4,096-word design with any
+  decoder: none decodes correctly more often on the bit-flip channel, every one leaves at least 7,254,016
+  received words at distance 4 or more, and none that corrects three flips can correct more than one sixth
+  of the four-flip corruptions. The eight declared alternative codes tie or lose and each silently miscorrects
+  2,695 to 4,480 four-flip corruptions, where the GLM''s code miscorrects none. The sender-tag stage resolves
+  every one of 680,064 tied reads to the sent codeword at seven bits per carrier, where the hard word
+  alone resolves none; the soft-certificate stage resolves every read of the gentle ensemble and refuses
+  every read of the existing K4b ensemble, whose noise lies outside its radius. Seven of eight marks were
+  met; S7 was missed on a declaration that wrongly expected one sixth on a 64-codeword sample.'
+wobble_deps: []

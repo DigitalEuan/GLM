@@ -125,7 +125,7 @@ Do not promote this into the main reasoning path yet. First add a real program-t
 
 | Priority | Work package | Why now | Exit gate |
 |---|---|---|---|
-| P0 | Reproducible release and evaluation hygiene | The repository’s documents instruct commands under `overlay/`, while the checked-out layout is flattened; tracked bytecode also conflicts with the stated ignore policy | One clean checkout runs the documented commands in a pinned environment; CI records exact toolchain and dependency versions |
+| P0 | Reproducible release and evaluation hygiene | The repository’s documents instruct commands under ``, while the checked-out layout is flattened; tracked bytecode also conflicts with the stated ignore policy | One clean checkout runs the documented commands in a pinned environment; CI records exact toolchain and dependency versions |
 | P1 | Typed semantic IR and planner | Directly attacks the 17/20 language-probe refusals without changing the substrate | ≥10/20 canonical probe correct, ≤1 wrong, zero confident wrong; paraphrase set reported separately |
 | P2 | Held-out and adversarial evaluation | Prevents closed-world overfitting and makes improvements comparable | Independent labels, fresh-process execution, coverage/safety/calibration dashboard |
 | P3 | Typed compositional derivation | Increases the scarce faculty: producing answers not stored as labels | 30 preregistered tasks, ≥90% solvable exact accuracy, zero confident wrong |
@@ -134,7 +134,7 @@ Do not promote this into the main reasoning path yet. First add a real program-t
 | P6 | Program-text register | Converts an unsafe geometric experiment into a checkable source-navigation faculty | Held-out source-location accuracy with zero confident wrong claims |
 | P7 | Sparse chemistry completion | Useful for coverage, but less valuable than parsing and derivation | Only add values with provenance and out-of-sample validation; preserve unresolved reasons |
 
-P0 should be completed before P1 because the current repository is difficult to reproduce exactly. The documents describe an `overlay/` working directory, but the repository checkout used for this audit has the package at the root. The repository also contains tracked `__pycache__` and `.pyc` files even though the documentation says compiled files should remain untracked. Finally, the corpus check in this sandbox resolves an external `/opt/.manus/webdev/templates/...` path outside the repository and fails before evaluating the corpus. These are operational defects, not evidence of a GLM reasoning failure, but they make every future measurement less trustworthy.
+P0 should be completed before P1 because the current repository is difficult to reproduce exactly. The documents describe an `` working directory, but the repository checkout used for this audit has the package at the root. The repository also contains tracked `__pycache__` and `.pyc` files even though the documentation says compiled files should remain untracked. Finally, the corpus check in this sandbox resolves an external `/opt/.manus/webdev/templates/...` path outside the repository and fails before evaluating the corpus. These are operational defects, not evidence of a GLM reasoning failure, but they make every future measurement less trustworthy.
 
 ## What should not be prioritized yet
 

@@ -206,7 +206,7 @@ ranking moves.
 
 ## 7. Re-running it
 
-From `overlay/`:
+From ``:
 
 * `PYTHONPATH=. python3 -m glm_universal.tools nonlinear` runs the full
   report in about 4 s. Add `--quick` to skip the planted battery, and

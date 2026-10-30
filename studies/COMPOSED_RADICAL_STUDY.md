@@ -153,7 +153,7 @@ Dedekind's theorem, as in Phases 113 and 114.
 
 ## 5. Re-running it
 
-From `overlay/`:
+From ``:
 
 * `PYTHONPATH=. python3 -m glm_universal.tools composed-radical` runs every
   mark in about two minutes, most of it Phase 114's and Phase 112's reports

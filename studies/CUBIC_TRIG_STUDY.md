@@ -190,7 +190,7 @@ remain statements about this round. `tests/test_route_choices.py`.
 
 ## 6. Re-running it
 
-From `overlay/`:
+From ``:
 
 * `PYTHONPATH=. python3 -m glm_universal.tools cubic-trig` runs every mark in
   about two minutes; `--quick` skips the batteries, the Phase 104 re-read and

@@ -40,11 +40,11 @@ Nothing in either part samples, and nothing is a float.
 
 ## 1. What is built
 
-* `overlay/glm_universal/knowledge/glossary.py` — the held-out glossary, the
+* `glm_universal/knowledge/glossary.py` — the held-out glossary, the
   grade, the control, and G1–G4.
-* `overlay/glm_universal/knowledge/word_address.py` — the anchors, the word
+* `glm_universal/knowledge/word_address.py` — the anchors, the word
   coordinates, the addresses, the neighbours, and W1–W4.
-* `overlay/glm_universal/knowledge/_data/corpus_definitions.json` — the stored
+* `glm_universal/knowledge/_data/corpus_definitions.json` — the stored
   measurement, beside the digest of the code that took it.
 * `python3 -m glm_universal.tools corpus-definitions [--write]` — the
   instrument; and the `corpus address of X` reading, which gives a word's
@@ -197,7 +197,7 @@ reported beside the originals, never in place of them.
 
 ## 6. Files
 
-See §1. Tests: `overlay/glm_universal/tests/test_corpus_definitions.py`.
+See §1. Tests: `glm_universal/tests/test_corpus_definitions.py`.
 
 ## 7. What came out
 

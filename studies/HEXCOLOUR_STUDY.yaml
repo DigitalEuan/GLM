@@ -1,0 +1,71 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Every address audited on the shipped data rather than asserted, and lookup by address
+  added where the audit found none.
+directives:
+- D3
+evidence: []
+faculty: addressing
+file_refs:
+  code:
+  - migration/state
+  - migration/store
+  - substrate/isomorphism
+  - tests/test_state_migration
+  lean:
+  - Endianness
+  prose: HEXCOLOUR_STUDY.md
+  test:
+  - test_hexcolour.py
+  wheel: []
+follow_ups: []
+id: HEXCOLOUR_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Are the hexcolour addresses carrying anything, and is anything ever looked up by one?
+recomputed_by: '`glm_universal.migration.store.store_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-what-a-hexcolour-is-and-what-it-is-not
+  heading: 1. What a hexcolour is, and what it is not
+- anchor: 2-the-one-real-question-and-the-one-real-correction
+  heading: 2. The one real question, and the one real correction
+- anchor: 3-the-audit
+  heading: 3. The audit
+- anchor: 4-are-they-used
+  heading: 4. Are they *used*?
+- anchor: 5-what-an-address-does-not-tell-you
+  heading: 5. What an address does *not* tell you
+- anchor: 6-a-stale-figure-annotated-rather-than-deleted
+  heading: 6. A stale figure, annotated rather than deleted
+- anchor: 7-where-each-piece-lives
+  heading: 7. Where each piece lives
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Hexcolour addresses: are they carrying anything?'
+verdict: A hexcolour is a rendering of a 24-bit carrier, and an address is not a measurement.
+wobble_deps: []

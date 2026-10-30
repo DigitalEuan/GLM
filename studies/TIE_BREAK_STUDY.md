@@ -24,22 +24,22 @@ single address is provably unchanged, and the pairwise figures of the address
 study move by one declaration in two thousand.*
 
 Code:
-[`overlay/glm_universal/reasoning/tie_break.py`](../overlay/glm_universal/reasoning/tie_break.py).
+[`glm_universal/reasoning/tie_break.py`](../glm_universal/reasoning/tie_break.py).
 Query: `report tiebreak`.
 Formal development:
-[`RequestProject/GLM/TieBreak.lean`](../overlay/glm_lean/RequestProject/GLM/TieBreak.lean).
-Tests: `overlay/glm_universal/tests/test_tie_break.py`.
+[`RequestProject/GLM/TieBreak.lean`](../glm_lean/RequestProject/GLM/TieBreak.lean).
+Tests: `glm_universal/tests/test_tie_break.py`.
 The decoder it describes:
-[`overlay/glm_universal/reasoning/analogy.py`](../overlay/glm_universal/reasoning/analogy.py)
+[`glm_universal/reasoning/analogy.py`](../glm_universal/reasoning/analogy.py)
 `nearest_lattice_point`, on the hot path through
-[`llvq_table.py`](../overlay/glm_universal/reasoning/llvq_table.py).
+[`llvq_table.py`](../glm_universal/reasoning/llvq_table.py).
 
 ---
 
 ## 1. The question, and where it came from
 
 The stability measurement in
-[`reasoning/stability.py`](../overlay/glm_universal/reasoning/stability.py)
+[`reasoning/stability.py`](../glm_universal/reasoning/stability.py)
 asked how far an input may move
 before its address does, and got an answer nobody had asked for: for most of
 the corpus the answer is **zero**. The input lies exactly on a bisector, two
@@ -300,7 +300,7 @@ have saved.
 
 ## 8. What is proved, and what is only measured
 
-Proved, in [`RequestProject/GLM/TieBreak.lean`](../overlay/glm_lean/RequestProject/GLM/TieBreak.lean),
+Proved, in [`RequestProject/GLM/TieBreak.lean`](../glm_lean/RequestProject/GLM/TieBreak.lean),
 against no assumption about this corpus:
 
 | Lean name | what it says | what it licenses here |

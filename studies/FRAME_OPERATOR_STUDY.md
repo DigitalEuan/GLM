@@ -75,7 +75,7 @@ one is enforced rather than just stated:
 
 ## 2. What is proved
 
-**`overlay/glm_lean/RequestProject/GLM/RationalBoost.lean`** (namespace
+**`glm_lean/RequestProject/GLM/RationalBoost.lean`** (namespace
 `GLM.RationalBoost`; 26 theorems, 0 `sorry`). For rational `u` with `u² ≠ 1`,
 `a(u) = (1+u²)/(1−u²)` and `b(u) = 2u/(1−u²)`, and `B(u)` is the boost with
 entries `a`, `−b`, `−b`, `a`:
@@ -103,7 +103,7 @@ entries `a`, `−b`, `−b`, `a`:
   `E² + p²`), `boost_not_euclid`, `rot_not_inv` (neither family keeps the
   other's form unless it is trivial).
 
-**`overlay/glm_lean/RequestProject/GLM/KappaAnchor.lean`** (namespace
+**`glm_lean/RequestProject/GLM/KappaAnchor.lean`** (namespace
 `GLM.KappaAnchor`; 11 theorems, 0 `sorry`), on top of `Calibration.lean`:
 `cellLength_ratio_kappa_free`, `ratio_free_of_c`, `tick_scale_inv`,
 `tick_relative_change`, `kappa_within_br2_d0`, `kappa_tick_ratio_d0`
@@ -116,7 +116,7 @@ guard now covers 9,722 theorems, all on the standard axioms.
 
 ## 3. The mechanism
 
-`overlay/glm_universal/reasoning/frame_operators.py`, reached as `tool frame
+`glm_universal/reasoning/frame_operators.py`, reached as `tool frame
 E,p -> E',p' ; … ? E,p` (exact rationals). It works in three stacked layers;
 this is the part meant to carry over to other domains (§8):
 
@@ -136,7 +136,7 @@ this is the part meant to carry over to other domains (§8):
 Families: `identity`, `swap`, `parity` (no parameter); `units`, `boost`,
 `rotation` (one); `boost_units`, `rotation_units` (two).
 
-`overlay/glm_universal/reasoning/kappa_anchor.py`, reached as `tool kappa
+`glm_universal/reasoning/kappa_anchor.py`, reached as `tool kappa
 [VALUE in kJ/mol]`: the chain at an anchor (work energy, eV per particle,
 tick, cell, wavelength), the κ-free sweep, the anchor's source in the GLM's
 registers, and the refinement budget.

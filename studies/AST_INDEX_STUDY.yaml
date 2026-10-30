@@ -1,0 +1,86 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 'On 467 query sites of the 11,669-site index under rename-and-commute, hit@1: `ast_v2`
+  467, `ast_v1` 456, `carrier` 412, `text` 343 (discordance against `text` 124 : 0); the bucket key unmoved
+  on 467 of 467 under every perturbation; the matcher and the reference agree on 8,398 of 8,398 calls;
+  106 integer classes, 3,350 evaluations, 0 failures; marks A1, A3, A5, A6 and A7 met, A2 and A4 not met.'
+directives:
+- D15
+- D7
+evidence: []
+faculty: addressing
+file_refs:
+  code:
+  - tests/test_ast_index
+  lean:
+  - AstIndex
+  prose: AST_INDEX_STUDY.md
+  test:
+  - test_ast_index.py
+  wheel: []
+follow_ups: []
+id: AST_INDEX_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 64
+predecessors: []
+question: Can the structural address of a Python expression be indexed as a retrieval key, beside the
+  Lean corpus addresses, so that the GLM finds the places — in its own code and in the archived scripts
+  — where a structurally equal expression is already computed?
+recomputed_by: '`glm_universal.runtime.ast_index_report.ast_index_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-objects
+  heading: 1. The objects
+- anchor: 2-declarations-written-before-any-measuring-code
+  heading: 2. Declarations — written before any measuring code
+- anchor: 3-results
+  heading: 3. Results
+- anchor: 4-the-declaration-error-as-it-is
+  heading: 4. The declaration error, as it is
+- anchor: 5-what-is-proved
+  heading: 5. What is proved
+- anchor: 6-wiring
+  heading: 6. Wiring
+- anchor: 7-defects-found-on-the-way
+  heading: 7. Defects found on the way
+- anchor: 8-limits-and-what-the-round-leaves
+  heading: 8. Limits, and what the round leaves
+- anchor: disposition-phase-106
+  heading: Disposition (Phase 106)
+- anchor: 9-re-running-it
+  heading: 9. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The AST address as a retrieval key
+verdict: 'Yes: the structural key finds a structurally equal site at rank 1 for every perturbed query,
+  where the token overlap finds one for 343 of 467, and the new operation answers where an expression
+  is computed in the live code and in the archive, with a column-3 script that re-decides every member
+  of the bucket. The Phase 64 address, read as it is, is not a usable key: it changes under renaming on
+  a fifth of the queries and merges 23 classes that are not structurally equal. 5 of 7 marks met; A2 missed
+  by one declaration error, A4 missed as predicted by reading the code.'
+wobble_deps: []

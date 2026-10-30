@@ -1,0 +1,85 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 26 of 35 analogy items for the control and every eligible method, 8 of 8 planted queries
+  captured by the giant decoys for every inner-product method, 2 weight bits for the winner against 99,718
+  for the softest method, and an effective support of 1 that no exponential dial reaches within the declared
+  depth budget while the exact dials walk it in integer steps.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - sandbox/aggregation_bench
+  lean: []
+  prose: AGGREGATION_BENCH_STUDY.md
+  test:
+  - test_aggregation_bench.py
+  wheel: []
+follow_ups: []
+id: AGGREGATION_BENCH_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: 'Attention is one way for an architecture to mix a register. Fifteen mixing methods — the two
+  the substrate ships, nine from the literature, four devised from the attention study''s own measurements
+  — run on the same registers under the same instruments: which of them is *best*, by a bar written down
+  before the first measurement?'
+recomputed_by: '`glm_universal.sandbox.aggregation_bench.bench_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-what-this-study-is
+  heading: 1. What this study is
+- anchor: 2-the-pile
+  heading: 2. The pile
+- anchor: 3-instrument-i-validity-and-the-dial-identities
+  heading: 3. Instrument I — validity and the dial identities
+- anchor: 4-instrument-ii-the-analogy-ground-truth
+  heading: 4. Instrument II — the analogy ground truth
+- anchor: 5-instrument-iii-the-norm-domination-probe
+  heading: 5. Instrument III — the norm-domination probe
+- anchor: 6-instrument-iv-the-depth-audit-and-the-inversion-control
+  heading: 6. Instrument IV — the depth audit and the inversion control
+- anchor: 7-instrument-v-the-dial
+  heading: 7. Instrument V — the dial
+- anchor: 8-instrument-vi-cost-in-the-substrates-own-currency
+  heading: 8. Instrument VI — cost in the substrate's own currency
+- anchor: 9-the-pre-registered-verdict
+  heading: 9. The pre-registered verdict
+- anchor: 10-what-promotion-would-take
+  heading: 10. What promotion would take
+- anchor: 11-how-to-recompute
+  heading: 11. How to recompute
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The aggregation bench — fifteen mixing methods, one pre-registered bar
+verdict: 'The incumbent wins: the shipped hard selector `nearest_weights` meets every line of the pre-registered
+  bar, and no newcomer exceeds it — the eligible set is five fully exact distance-family methods (the
+  selector, Shepard IDW, Borda, and the two originals: the neighborhood mean and the exact bridge), all
+  tying the selector''s 26 of 35 analogy items, while the entire inner-product family — raw and Cauchy–Schwarz
+  attention, linear attention, the polynomial family, top-k sparse, and the Padé softmax — is captured
+  by giant decoys on 8 of 8 planted queries and answers 0 of 35 analogy items, so the module stays in
+  the sandbox: a measured comparison, not yet a faculty.'
+wobble_deps: []

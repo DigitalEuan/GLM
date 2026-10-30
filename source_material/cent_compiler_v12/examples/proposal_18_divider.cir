@@ -1,0 +1,11 @@
+* Analog divider: V_out = V_num / V_den
+* ¢: div(V_num, V_den) → V_out
+* Uses op-amp + multiplier in feedback: V_out = 10 * V_num / V_den
+VNUM 1 0 DC 5.0
+VDEN 2 0 DC 2.0
+EOUT 3 0 1 4 1e6
+EMULT 4 0 VALUE = { V(3) * V(2) / 10.0 }
+R1 4 0 1k
+.OP
+.PRINT DC V(3)
+.END

@@ -226,7 +226,7 @@ standard axioms:
 
 ## 9. Re-running it
 
-From `overlay/`:
+From ``:
 
 * `PYTHONPATH=. python3 -m glm_universal.tools cubic-radical` runs the full
   report in about 30 s. Add `--quick` to skip the batteries, `--explore` for

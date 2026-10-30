@@ -1,0 +1,72 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Every address in the corpus decoded both ways, with nothing changed.
+directives:
+- D6
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/analogy
+  - reasoning/fwht_decode
+  - reasoning/llvq
+  - reasoning/llvq_table
+  - substrate/mog
+  - tests/test_llvq_table
+  lean:
+  - LLVQTable
+  prose: LLVQ_TABLE_STUDY.md
+  test:
+  - test_llvq_table.py
+  wheel: []
+follow_ups: []
+id: LLVQ_TABLE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 24
+predecessors: []
+question: Can the quantiser's 4,096-codeword scan be replaced by the MOG's own structure?
+recomputed_by: '`glm_universal.reasoning.llvq_table.llvq_table_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-question-and-why-it-was-still-open
+  heading: 1. The question, and why it was still open
+- anchor: 2-the-table
+  heading: 2. The table
+- anchor: 3-the-class-minimum-is-six-comparisons
+  heading: 3. The class minimum is six comparisons
+- anchor: 4-what-it-costs-measured
+  heading: 4. What it costs, measured
+- anchor: 5-every-address-in-the-corpus-unchanged
+  heading: 5. Every address in the corpus, unchanged
+- anchor: 6-is-it-o1
+  heading: 6. Is it `O(1)`?
+- anchor: 7-what-recomputes-each-figure
+  heading: 7. What recomputes each figure
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The LLVQ table: the quantiser''s search, replaced by a lookup'
+verdict: The scan is a 16-entry column table, the 64 hexacode words, 128 classes of 32.
+wobble_deps: []

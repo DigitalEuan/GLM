@@ -1,0 +1,78 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 6 of 6 marks; 256 of 256 held-out deep holes certified by the rule against 252 by the
+  census convention; 23 of 23 references as recorded; least `k · p_min` 101/160 against the declared 1/2;
+  median 96 and maximum 254 starts against a budget of 1056.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/probe_budget
+  lean:
+  - ProbeBudget
+  prose: PROBE_BUDGET_STUDY.md
+  test:
+  - test_probe_budget.py
+  wheel: []
+follow_ups: []
+id: PROBE_BUDGET_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 123
+predecessors:
+- LATTICE_COMPLETION_STUDY
+question: If the certifying reading of a deep hole stops only on its completeness certificate or on a
+  budget fixed in advance by a proved union bound, instead of after a fixed number of barren starts, does
+  it certify every deep hole the walk reaches, where the patience of 60 starts used by the census does
+  not?
+recomputed_by: '`glm_universal.reasoning.probe_budget.probe_budget_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-why-the-patience-is-the-wrong-stop
+  heading: 1. Why the patience is the wrong stop
+- anchor: 2-the-rule
+  heading: 2. The rule
+- anchor: 3-the-marks-declared-before-the-code
+  heading: 3. The marks, declared before the code
+- anchor: 4-controls
+  heading: 4. Controls
+- anchor: 5-what-this-round-does-not-do
+  heading: 5. What this round does not do
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-the-measurement
+  heading: 7. The measurement
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The probe budget — a stopping rule for the certifying reading
+verdict: 'Yes. With no barren stop and the proved budget of 1056 starts, the certifying reading certified
+  all 256 deep holes reached by the held-out walks and all 23 reference centres as recorded, and no reading
+  came near the budget (median 96 starts, maximum 254). On the same 256 centres the census convention
+  of a 60-start patience left 4 uncertified, so lattice item 7 no longer needs a post-hoc patience: the
+  rule is declared, proved under its model, and its model''s hypothesis holds on every stored ensemble.'
+wobble_deps: []

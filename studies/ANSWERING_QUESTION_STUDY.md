@@ -128,22 +128,22 @@ puts none.
 
 ## 6. Files
 
-* `overlay/glm_lean/RequestProject/GLM/AnsweringQuestion.lean` — §1.
-* `overlay/glm_universal/reasoning/timed_question.py` §8 — replies, the next
+* `glm_lean/RequestProject/GLM/AnsweringQuestion.lean` — §1.
+* `glm_universal/reasoning/timed_question.py` §8 — replies, the next
   question, matching a reply.
-* `overlay/glm_universal/runtime/session.py` — `_locate_question`, the
+* `glm_universal/runtime/session.py` — `_locate_question`, the
   `given` replies in `_solve_locate`.
-* `overlay/glm_universal/runtime/tct_engine.py` — column 3 re-derives the
+* `glm_universal/runtime/tct_engine.py` — column 3 re-derives the
   replies.
-* `overlay/glm_universal/runtime/conversation.py`, `discourse.py` — the
+* `glm_universal/runtime/conversation.py`, `discourse.py` — the
   `reply` shape.
-* `overlay/GLM.py` — the question printed by `--converse` and
+* `GLM.py` — the question printed by `--converse` and
   `--interactive`, and replies read by both.
-* `overlay/glm_universal/reasoning/answering_question.py` — the measurement;
+* `glm_universal/reasoning/answering_question.py` — the measurement;
   `tools answering-question`.
-* `overlay/glm_universal/reasoning/_data/answering_question_baseline.json` —
+* `glm_universal/reasoning/_data/answering_question_baseline.json` —
   the 198 answers before the round.
-* `overlay/glm_universal/tests/test_answering_question.py`.
+* `glm_universal/tests/test_answering_question.py`.
 
 ## 7. What came out
 

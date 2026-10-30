@@ -31,16 +31,16 @@ out). It takes the four lines Phase 156 left
 
 ## 1. What is built
 
-* `overlay/glm_universal/runtime/respell.py` — the respelling of §2.1: the
+* `glm_universal/runtime/respell.py` — the respelling of §2.1: the
   vocabulary table, the candidates, the reading by use, and the re-read.
 * `GLM.py` — a batch question that the routed path refuses is respelt and
   asked again; the respelt reading is printed only if it answers.
-* `overlay/glm_universal/evaluation/harness.py` — the `REFUSED` line read as a
+* `glm_universal/evaluation/harness.py` — the `REFUSED` line read as a
   refusal (§2.2).
-* `overlay/glm_universal/knowledge/friction_two.py` — worn contact (§2.3) and
+* `glm_universal/knowledge/friction_two.py` — worn contact (§2.3) and
   the noise-set margin (§2.4), over Phase 156's held-out sample and readers,
   which it imports and does not modify.
-* `overlay/glm_universal/knowledge/friction_two_study.py` and
+* `glm_universal/knowledge/friction_two_study.py` and
   `python3 -m glm_universal.tools friction-two [--write] [--survey]` — the
   marks and the stored measurements.
 * `RequestProject/GLM/FrictionTwo.lean` — what is proved (§5).
@@ -251,7 +251,7 @@ T3, T4 and T5 are read with the shipped reading.
 
 ## 6. Files
 
-See §1. Tests: `overlay/glm_universal/tests/test_friction_two.py`.
+See §1. Tests: `glm_universal/tests/test_friction_two.py`.
 
 ## 7. What came out
 

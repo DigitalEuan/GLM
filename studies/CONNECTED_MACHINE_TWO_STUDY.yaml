@@ -1,0 +1,84 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 8 of 8 marks; 157 of 177 reasoning modules reached from the answering path (153 before),
+  20 declared; 43 of 43 surds, pi, e and phi agree with independent references; 12 of 12 Möbius transforms
+  agree with the integer recurrence; 0 of 404 declared texts match an opening; 20 of 20 phrased questions
+  and 21 of 21 tool questions as declared; the gate certificate equals search on 48 of 48 pairs.
+directives:
+- D15
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - evaluation/connected_two_cases
+  - reasoning/substrate_cognition
+  - runtime/router
+  - runtime/toolbox
+  - tests/test_connected_two
+  lean:
+  - CertifiedStreams
+  - ConnectedMachine
+  prose: CONNECTED_MACHINE_TWO_STUDY.md
+  test:
+  - test_connected_machine_two.py
+  wheel: []
+follow_ups: []
+id: CONNECTED_MACHINE_TWO_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 136
+predecessors: []
+question: Which operations that earlier studies built and measured could no question reach, and can they
+  be put in the answering path without changing any answer the GLM already gives?
+recomputed_by: '`glm_universal.evaluation.connected_two_cases.measure`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-the-census-what-no-question-reached
+  heading: '1. The census: what no question reached'
+- anchor: 2-what-was-built
+  heading: 2. What was built
+- anchor: 3-what-is-proved-requestprojectglmcertifiedstreamslean
+  heading: 3. What is proved (`RequestProject/GLM/CertifiedStreams.lean`)
+- anchor: 4-the-marks
+  heading: 4. The marks
+- anchor: 5-what-this-round-does-not-do
+  heading: 5. What this round does not do
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-the-measurement
+  heading: 7. The measurement
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The connected machine, second pass — every reasoning module reached, or declared not to be
+verdict: Before this round 24 of the 177 reasoning modules were reached by no query, only by the measurement
+  command line. Six new tools (certified continued fractions, Möbius transforms of continued fractions,
+  role binding, reversible-gate reachability, the proved tag-length floors, and the wiring census itself)
+  and a law-triage fallback in the law register now reach four of them, and a refused English question
+  reaches a tool through eleven declared openings. The other 20 are declared measurement-only, each with
+  its reason, and a test fails if a new module is neither reached nor declared. The stream tools rest
+  on two new Lean theorems. All 8 marks were met, and none of the 404 declared questions changed route.
+wobble_deps: []

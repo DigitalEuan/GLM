@@ -1,0 +1,82 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Proofs 16 of 16, equations of motion 8 of 8, transfer models 6 of 6, profiles 6 of 6,
+  refusals 8 of 8; 36 of 36 scripts verify and 36 of 36 mutants rejected; 2000 random formulas (1769 not
+  valid, 149 intuitionistic, 82 classical, each classical one with a Kripke countermodel), 0 unsound,
+  0 gaps; outside class P 4 of 4 answered, 0 of 299 other texts moved; marks R1–R9 met.
+directives:
+- D15
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - evaluation/derivation_cases
+  lean:
+  - Derivations
+  prose: DERIVATION_STUDY.md
+  test:
+  - test_derivation.py
+  wheel: []
+follow_ups: []
+id: DERIVATION_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 106
+predecessors:
+- AST_INDEX_STUDY
+- QUESTION_SET_B_STUDY
+question: 'Can the GLM derive, rather than look up: prove or refute a propositional sequent with a checkable
+  proof or countermodel, derive the equations of motion of a Lagrangian with its small oscillations, derive
+  the transfer functions of a dynamic model, and solve a boundary value problem in flux form — each answer
+  re-decided by a stand-alone script that shares no code with the layer?'
+recomputed_by: '`glm_universal.runtime.derivation_report.derivation_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-declarations-committed-before-any-code
+  heading: 1. Declarations — committed before any code
+- anchor: 2-what-was-added
+  heading: 2. What was added
+- anchor: 3-results
+  heading: 3. Results
+- anchor: 4-defects-found-on-the-way
+  heading: 4. Defects found on the way
+- anchor: 5-what-is-proved
+  heading: 5. What is proved
+- anchor: 6-limits
+  heading: 6. Limits
+- anchor: 7-what-the-round-moved
+  heading: 7. What the round moved
+- anchor: 8-re-running
+  heading: 8. Re-running
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Derivations and proofs: the machine produces a derivation'
+verdict: 'Yes, within the four declared operations: every declared case came out as declared, every answer
+  verifies by its own script and every mutated claim is rejected by it, the prover is sound and complete
+  on the random battery, four questions of the outside set that were refused are now answered, and nothing
+  else the machine answers moved. 9 of 9 marks met.'
+wobble_deps: []

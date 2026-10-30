@@ -1,0 +1,333 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: A working paper over the whole system — the substrate studies of the supplied archive
+  and the machine built on them, <!--figure:registers-->8 registers<!--/figure--> reached through <!--figure:query-kinds-->27
+  query kinds<!--/figure--> and checked by <!--figure:lean-files-->255 Lean files<!--/figure--> — kept
+  beside the studies it draws on.
+directives:
+- D10
+- D11
+- D12
+- D13
+- D14
+- D15
+- D16
+- D17
+- D2
+- D3
+- D6
+- D7
+- D8
+- D9
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - AffineOutput
+  - AlignmentPoints
+  - Calibration
+  - Capstone
+  - Cascade
+  - CellGuard
+  - CelsiusRegister
+  - Cheapest
+  - CitationScope
+  - ColourInduction
+  - ConditionalInduction
+  - ConfigurationReading
+  - ConnectedMachine
+  - ConstantBound
+  - Constants
+  - Continuous
+  - CopyLemma
+  - CorpusResample
+  - CounterLasso
+  - CubeMirror
+  - Cumulative
+  - DeclaredFrames
+  - DecoderConfidence
+  - DesignedSubstrate
+  - DiscourseState
+  - Distance
+  - Distinction
+  - EscalationLoop
+  - ExplanationAnchors
+  - Facets
+  - Feedback
+  - Fibre
+  - Findings
+  - FitCapacity
+  - Foundations
+  - GLM
+  - GLM2
+  - GLM3
+  - Gen2
+  - Gen3
+  - GolayBoundary
+  - GolayDeepHole
+  - GolayMOG
+  - GolayWeightEnum
+  - GrayJump
+  - GridTension
+  - Grounding
+  - Heisenberg
+  - HexRung
+  - HexTiles
+  - HigherLattices
+  - HoleBounds
+  - ImperativeGrammar
+  - Independence
+  - InertCounter
+  - IntegerDecision
+  - KappaAnchor
+  - LDP
+  - LatticeCompletion
+  - LayerChain
+  - Layers
+  - LeechShellCount
+  - Lightspeed
+  - LorentzImproper
+  - LorentzPlane
+  - LorentzUnits
+  - LorentzianEvidence
+  - Meaning
+  - MeasurandKinds
+  - MeasurandRegister
+  - NativeParity
+  - NativeWords
+  - Niemeier
+  - NonShannon
+  - NormFamily
+  - ObserverY
+  - OneParameter
+  - OperationsLadder
+  - Package
+  - Packing
+  - PipelineAsk
+  - PipelineInduction
+  - PlacementGuard
+  - PlanStore
+  - PlannerLoop
+  - ProbeBudget
+  - QuarticResolvent
+  - QuestionSetB
+  - RationalBoost
+  - ReadQuantum
+  - ReasoningLoop
+  - RegisterWorld
+  - Relative
+  - Relay
+  - ReverseTCT
+  - ReverseTCTThree
+  - ReverseTCTTwo
+  - Reversible
+  - RobinBoth
+  - RoleBinding
+  - Sakuma
+  - Scaling
+  - SecondReading
+  - SecondView
+  - SeedLayers
+  - SeedRoles
+  - Seeds
+  - Sextet
+  - ShareSeparation
+  - SignFactor
+  - SpatialArithmetic
+  - Stabiliser
+  - Stack
+  - Steiner
+  - StepCost
+  - StepwiseFrames
+  - StepwisePlanner
+  - StrayBlind
+  - Substrate
+  - SubstrateConstants
+  - Surface
+  - SymbolicParameters
+  - Tax
+  - TaxConservation
+  - ThirdSort
+  - Three
+  - Totient
+  - Tower
+  - Triad
+  - TypedOperators
+  - VOA
+  prose: GLM_ACADEMIC_PAPER.md
+  test:
+  - test_glm_academic_paper.py
+  wheel: []
+follow_ups: []
+id: GLM_ACADEMIC_PAPER
+junctions: []
+last_altered: 23 October 2026
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 133
+predecessors:
+- ADDRESS_READ_STUDY
+- AFFINE_OUTPUT_STUDY
+- AGREE_CHANNEL_STUDY
+- AST_INDEX_STUDY
+- BUDGET_READING_STUDY
+- CARRIED_FORK_STUDY
+- CELL_GUARD_STUDY
+- CELSIUS_REGISTER_STUDY
+- CITATION_SCOPE_STUDY
+- COMPOSED_RADICAL_STUDY
+- CONFIDENCE_FLOOR_STUDY
+- CONFIGURATION_READING_STUDY
+- CONNECTED_MACHINE_STUDY
+- CONSTANT_BOUND_STUDY
+- CONTRACT_MATRIX_STUDY
+- COORDINATE_JUNCTION_STUDY
+- CORPUS_RESAMPLE_STUDY
+- COUNTER_LASSO_STUDY
+- CUBIC_RADICAL_STUDY
+- CUBIC_TRIG_STUDY
+- DECODER_CONFIDENCE_STUDY
+- DERIVATION_FOUR_STUDY
+- DERIVATION_STUDY
+- DERIVATION_THREE_STUDY
+- DERIVATION_TWO_STUDY
+- DISCOURSE_STATE_STUDY
+- DOCUMENT_TREE_STUDY
+- EXPLANATION_ANCHOR_STUDY
+- FROBENIUS_RADICAL_STUDY
+- HELD_PRECISION_STUDY
+- HOLE_FOLDS_STUDY
+- IMPERATIVE_GRAMMAR_STUDY
+- INERT_COUNTER_STUDY
+- INTEGER_DECISION_STUDY
+- LATTICE_COMPLETION_STUDY
+- LAW_ABSORPTION_STUDY
+- LAW_TRIAGE_STUDY
+- LLVQ_TABLE_STUDY
+- MEASURANDS_STUDY
+- MEASURAND_REGISTER_STUDY
+- NATIVE_PARITY_STUDY
+- NATIVE_WORDS_STUDY
+- NONLINEAR_ELIMINATION_STUDY
+- NORM_256_HEX_STUDY
+- PLACEMENT_GUARD_STUDY
+- PRIMITIVE_DEGREE_STUDY
+- PRIMITIVE_RADICAL_STUDY
+- PROBE_BUDGET_STUDY
+- QUESTION_SET_B_STUDY
+- QUINTIC_RADICAL_STUDY
+- RATE_POSTERIOR_STUDY
+- REGISTER_WORLD_STUDY
+- REVERSE_TCT_STUDY
+- ROADMAP_STUDY
+- SECOND_VIEW_STUDY
+- STACK_RELAY_STUDY
+- STEPWISE_PLANNER_STUDY
+- STEPWISE_THREE_STUDY
+- STEPWISE_TWO_STUDY
+- STRAY_BLIND_STUDY
+- SUPPLIED_PORTS_STUDY
+- THIRD_SORT_STUDY
+- TIE_BREAK_STUDY
+- TYPED_OPERATORS_STUDY
+- UNPACKING_RESCORE_STUDY
+question: What is the GLM, stated as a paper rather than as a repository?
+recomputed_by: (hand-written argument; nothing to recompute)
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: a-technical-documentation-paper
+  heading: A Technical Documentation Paper
+- anchor: abstract
+  heading: Abstract
+- anchor: table-of-contents
+  heading: Table of Contents
+- anchor: 1-introduction-and-scope
+  heading: 1. Introduction and Scope
+- anchor: 2-the-universal-binary-principle-from-distinction-to-substrate
+  heading: '2. The Universal Binary Principle: From Distinction to Substrate'
+- anchor: 3-the-golay-code-and-leech-lattice-the-24-dimensional-foundation
+  heading: '3. The Golay Code and Leech Lattice: The 24-Dimensional Foundation'
+- anchor: 4-the-layer-stack-resolution-boundaries-and-escalation
+  heading: '4. The Layer Stack: Resolution, Boundaries, and Escalation'
+- anchor: 5-dynamic-value-carriers-irrationals-as-processes
+  heading: '5. Dynamic Value Carriers: Irrationals as Processes'
+- anchor: 6-the-thermodynamic-carrier-engine-series
+  heading: 6. The Thermodynamic Carrier Engine Series
+- anchor: 7-bit-dynamics-and-reversible-computing
+  heading: 7. Bit Dynamics and Reversible Computing
+- anchor: 8-higher-lattices-beyond-24-dimensions
+  heading: '8. Higher Lattices: Beyond 24 Dimensions'
+- anchor: 9-physical-calibration-the-electromagnetic-scale
+  heading: '9. Physical Calibration: The Electromagnetic Scale'
+- anchor: 10-the-speed-of-light-calibration-study
+  heading: 10. The Speed-of-Light Calibration Study
+- anchor: 11-chemistry-applications-spatial-arithmetic-on-elements
+  heading: '11. Chemistry Applications: Spatial Arithmetic on Elements'
+- anchor: 12-the-mog-cube-encoding-and-semantics
+  heading: '12. The MOG Cube: Encoding and Semantics'
+- anchor: 13-the-leech-lattice-shortcut
+  heading: 13. The Leech Lattice Shortcut
+- anchor: 14-formal-verification-the-lean-development
+  heading: '14. Formal Verification: The Lean Development'
+- anchor: 15-first-principles-analysis
+  heading: 15. First-Principles Analysis
+- anchor: 16-the-projection-sub-study-where-seeds-enter
+  heading: '16. The Projection Sub-Study: Where Seeds Enter'
+- anchor: 17-architecture-one-carrier-three-columns-named-refusals
+  heading: '17. Architecture: One Carrier, Three Columns, Named Refusals'
+- anchor: 18-registers-and-meaning
+  heading: 18. Registers and Meaning
+- anchor: 19-the-answer-surface-from-a-row-to-a-plan
+  heading: '19. The Answer Surface: From a Row to a Plan'
+- anchor: 20-escalation-and-ladders
+  heading: 20. Escalation and Ladders
+- anchor: 21-addressing-the-geometry-as-an-index
+  heading: '21. Addressing: The Geometry as an Index'
+- anchor: 22-measured-capability
+  heading: 22. Measured Capability
+- anchor: 23-the-negative-results
+  heading: 23. The Negative Results
+- anchor: 24-how-the-repository-keeps-itself-honest
+  heading: 24. How the Repository Keeps Itself Honest
+- anchor: 25-synthesis-proved-calibrated-measured-refuted-open
+  heading: '25. Synthesis: Proved, Calibrated, Measured, Refuted, Open'
+- anchor: 26-conclusion
+  heading: 26. Conclusion
+- anchor: appendix-a-every-study
+  heading: 'Appendix A: Every Study'
+- anchor: appendix-b-the-lean-development-by-theme
+  heading: 'Appendix B: The Lean Development by Theme'
+- anchor: appendix-c-the-supplied-material-and-what-is-still-left-in-it
+  heading: 'Appendix C: The Supplied Material, and What Is Still Left in It'
+- anchor: appendix-d-key-constants
+  heading: 'Appendix D: Key Constants'
+- anchor: appendix-e-glossary
+  heading: 'Appendix E: Glossary'
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The Geometric Language Machine: A Unified Substrate for Exact Computation, Physical Calibration,
+  and Semantic Reasoning'
+verdict: The system rejects floating-point arithmetic entirely, operating instead with exact rational
+  arithmetic.
+wobble_deps: []

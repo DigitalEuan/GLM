@@ -1,0 +1,192 @@
+{
+  "id": "W9",
+  "title": "Wave kinematics",
+  "axioms": [
+    "wave_speed = frequency * wavelength",
+    "angular_velocity = angle * frequency"
+  ],
+  "cases": [
+    {
+      "id": "W9-01",
+      "equation": "frequency = wave_speed / wavelength",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W9-02",
+      "equation": "wavelength = wave_speed / frequency",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W9-03",
+      "equation": "angular_velocity = angle * frequency",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "model_convention",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W9-N1",
+      "equation": "wave_speed = frequency / wavelength",
+      "expected_dimensional": false,
+      "expected_derivable": false,
+      "physical_status": "negative_control",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    }
+  ],
+  "quantities": [
+    "angle",
+    "angular_velocity",
+    "frequency",
+    "wave_speed",
+    "wavelength"
+  ],
+  "dimensions": {
+    "angle": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "angular_velocity": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "frequency": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "wave_speed": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "wavelength": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "junctions": [
+    {
+      "other_wheel": "W13",
+      "name_in_this_wheel": "frequency",
+      "name_in_other_wheel": "frequency",
+      "reason": "the oscillator's frequency = the wave's frequency"
+    },
+    {
+      "other_wheel": "W10",
+      "name_in_this_wheel": "wave_speed",
+      "name_in_other_wheel": "speed_of_light",
+      "reason": "a photon's wave_speed = speed_of_light (light is the wave)"
+    },
+    {
+      "other_wheel": "W10",
+      "name_in_this_wheel": "frequency",
+      "name_in_other_wheel": "frequency",
+      "reason": "a photon's frequency = the wave's frequency (a photon is a wave)"
+    }
+  ],
+  "non_identities": [
+    {
+      "other_wheel": "W13",
+      "name": "angle",
+      "reason": "Phase 158 split: the oscillator's angle convention vs the wave's angle reference; only frequency is joined"
+    }
+  ]
+}

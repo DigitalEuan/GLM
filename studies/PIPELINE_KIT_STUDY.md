@@ -39,13 +39,13 @@ solver's measuring step and layer filter, and adds composition.
 ## 1. What is proved
 
 **The kit's seven files**, unchanged but for their imports, under
-`overlay/glm_lean/RequestProject/GLM/PipelineKit/` (`Golay`, `Leech`,
+`glm_lean/RequestProject/GLM/PipelineKit/` (`Golay`, `Leech`,
 `Lattices`, `Pless`, `Fields`, `Analogy`, `Permutation`; namespace `GLMKit`;
 0 `sorry`). Their finite facts are discharged by `native_decide`, so those
 results carry `Lean.ofReduceBool` and `Lean.trustCompiler` as well as the
 standard axioms; the kit's `README.md` §2 lists what each file proves.
 
-**The solver**, `overlay/glm_lean/RequestProject/GLM/PipelineInduction.lean`
+**The solver**, `glm_lean/RequestProject/GLM/PipelineInduction.lean`
 (namespace `GLM.PipelineInduction`; 17 theorems, 0 `sorry`). A hypothesis is a
 function `α → β`; it is *consistent* with demonstrations `(x, y)` when it maps
 every `x` to its `y`. Hypotheses come in tiers; `solve` reads the first tier
@@ -78,7 +78,7 @@ the wrong-answer counts below measure it.
 
 ## 2. The mechanism
 
-`overlay/glm_universal/reasoning/pipeline_kit.py`, reached as `tool induce`
+`glm_universal/reasoning/pipeline_kit.py`, reached as `tool induce`
 (`GLM.py -q "tool induce IN -> OUT ; IN -> OUT ? QUERY"`, grids as rows of 0s
 and 1s split by `/`; a one-row grid is a bit string). The English opening
 "induce the rule from … ? …" reaches it too, after the planner refuses.
@@ -111,7 +111,7 @@ and 1s split by `/`; a one-row grid is a bit string). The English opening
 
 ## 3. What is measured
 
-`overlay/glm_universal/reasoning/pipeline_kit_study.py`
+`glm_universal/reasoning/pipeline_kit_study.py`
 (`python3 -m glm_universal.tools pipeline-kit`, about a minute). Fifteen
 families, fifty queries each, at two, three and four demonstrations — 2,250
 queries per configuration. Samples come from a fixed integer recurrence, not a

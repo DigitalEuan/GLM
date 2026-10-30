@@ -1,0 +1,81 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 680,064 of 680,064 three-view reads resolved, 0 wrong; 658,258 of 658,812 composed reads
+  answered, 0 wrong, open count as predicted at every `k`; 0 forks resolved by the escalation beyond the
+  intersection in 46,728 reads; 7 of 9 marks met.
+directives:
+- D15
+- D7
+evidence: []
+faculty: refusal
+file_refs:
+  code: []
+  lean:
+  - SecondView
+  - Sextet
+  prose: SECOND_VIEW_STUDY.md
+  test:
+  - test_second_view.py
+  wheel: []
+follow_ups: []
+id: SECOND_VIEW_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 65
+predecessors:
+- CARRIED_FORK_STUDY
+question: Can the runtime itself produce a second, independent view of one stored carrier, so that the
+  deep-hole fork is resolved by a routine second reading rather than by a read the caller supplies; does
+  the composition of the declared cases and a second reading hold on a fresh probe; and does a Leech escalation
+  on a soft channel built from the machine's own readings add anything?
+recomputed_by: '`glm_universal.runtime.second_view_report.second_view_full_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-object-a-framed-register
+  heading: '1. The object: a framed register'
+- anchor: 2-declarations-written-before-any-code-of-the-round
+  heading: 2. Declarations — written before any code of the round
+- anchor: 3-what-was-built
+  heading: 3. What was built
+- anchor: 4-results
+  heading: 4. Results
+- anchor: 5-what-is-proved-rather-than-measured
+  heading: 5. What is proved rather than measured
+- anchor: 6-limits-and-what-the-round-leaves
+  heading: 6. Limits, and what the round leaves
+- anchor: 7-re-running-it
+  heading: 7. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Second readings: a framed register that reads one carrier through several views'
+verdict: 'Partly: the framed register reads one carrier through its own views, and three views resolve
+  every common-mode four-error burst with 0 wrong. The composition of the declared cases and a second
+  reading holds on a fresh probe. Escalating to the Leech lattice on the views'' own soft reading adds
+  nothing, and that is proved. Seven of the nine declared marks were met: V4 (X1''s probe through two
+  views) resolved 4,160 of 4,224, and V8 refused one declared program because the dialect has no argument
+  unpacking.'
+wobble_deps: []

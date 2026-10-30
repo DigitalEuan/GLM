@@ -37,7 +37,7 @@ one that has to be finished in consecutive turns.
 
 ## 1. What is proved
 
-`overlay/glm_lean/RequestProject/GLM/ResumedDialogue.lean` (namespace
+`glm_lean/RequestProject/GLM/ResumedDialogue.lean` (namespace
 `GLM.ResumedDialogue`, on top of `GLM.AdversarialDialogue`; 0 `sorry`; axioms
 `propext`, `Classical.choice`, `Quot.sound` at most). A conversation is reduced
 to what matters for an open question: each turn put a question (`ask q`), was

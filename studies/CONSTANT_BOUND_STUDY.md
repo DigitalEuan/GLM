@@ -182,15 +182,15 @@ concretely); B5 binds their answers either way, and the count is reported.
 ## 6. Files
 
 * `RequestProject/GLM/ConstantBound.lean` — B1.
-* `overlay/glm_universal/reasoning/batch_machine.py` — the two clauses in
+* `glm_universal/reasoning/batch_machine.py` — the two clauses in
   `jumped_run`, behind `extended` (default on), threaded through
   `run_program`.
-* `overlay/glm_universal/reasoning/batch_speech.py` — the checker's two
+* `glm_universal/reasoning/batch_speech.py` — the checker's two
   clauses, the answer texts, the mutation, the script on standard input, and
   `extended` threaded through `answer`.
-* `overlay/glm_universal/reasoning/constant_bound.py` — the battery and the
+* `glm_universal/reasoning/constant_bound.py` — the battery and the
   marks; `python3 -m glm_universal.tools constant-bound`.
-* `overlay/glm_universal/reasoning/counter_lasso.py` — Phase 130's
+* `glm_universal/reasoning/counter_lasso.py` — Phase 130's
   measurement, read with `extended=False` so that it keeps measuring the rule
   it declared.
 * Tests: `test_constant_bound.py`.

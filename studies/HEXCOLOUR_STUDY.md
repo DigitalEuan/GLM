@@ -140,7 +140,7 @@ the mistake this separation exists to prevent.
 
 ## 6. A stale figure, annotated rather than deleted
 
-`overlay/README.md`'s legacy ARC-AGI v35 results block reports **66 hexcolour
+`glm_universal/README.md`'s legacy ARC-AGI v35 results block reports **66 hexcolour
 addresses**. The shipped table `arc_agi_17/results/hexcolour_addresses.json`
 holds **15**. The 66 is the upstream run's own count and has been annotated in
 place rather than removed, since the archive block is a record of what that run
@@ -150,10 +150,10 @@ reported. The live, audited counts are the ones in §3.
 
 | piece | file |
 |---|---|
-| the converters, and the coordinate permutations | `overlay/glm_universal/substrate/isomorphism.py` |
-| the address audit and the frame audit | `overlay/glm_universal/migration/state.py` |
-| lookup by address | `ConceptStore.by_hexcolour` (`overlay/glm_universal/migration/store.py`) |
+| the converters, and the coordinate permutations | `glm_universal/substrate/isomorphism.py` |
+| the address audit and the frame audit | `glm_universal/migration/state.py` |
+| lookup by address | `ConceptStore.by_hexcolour` (`glm_universal/migration/store.py`) |
 | bit order as an isometry, machine-checked | `RequestProject/GLM/Endianness.lean` |
 | the report subject | `report state migration` (`runtime/session.py`), step 6 |
 | the column-3 template | `_body_report_state_migration` (`runtime/tct_engine.py`) |
-| the tests | `overlay/glm_universal/tests/test_state_migration.py` |
+| the tests | `glm_universal/tests/test_state_migration.py` |

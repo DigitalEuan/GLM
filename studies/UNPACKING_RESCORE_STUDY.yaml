@@ -1,0 +1,82 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 12 of 12 marks met; 33 of 33 declared programs and refusals as declared (0 before); 680,064
+  of 680,064 on-demand reads equal to three views with 1,371,264 views read instead of 2,040,192; 84,480
+  of 84,480 independent three-view reads resolved, 0 wrong; 346 open second errors for every first error
+  and every frame.
+directives:
+- D15
+- D7
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - tests/test_unpacking
+  lean:
+  - OnDemandView
+  - Sextet
+  prose: UNPACKING_RESCORE_STUDY.md
+  test:
+  - test_unpacking_rescore.py
+  wheel: []
+follow_ups: []
+id: UNPACKING_RESCORE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 96
+predecessors:
+- SECOND_VIEW_STUDY
+question: 'Phase 96 missed two of its nine marks, V8 and V4. Can the dialect be given argument unpacking
+  so that the refused program is answered, and can the framed register''s results be improved: a correct
+  declaration for independent faults in place of V4''s false analogy, and fewer view reads for the same
+  answers?'
+recomputed_by: '`glm_universal.runtime.unpacking_report.unpacking_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-objects
+  heading: 1. The objects
+- anchor: 2-declarations-written-before-any-code-of-the-round
+  heading: 2. Declarations — written before any code of the round
+- anchor: 3-what-was-built
+  heading: 3. What was built
+- anchor: 4-results
+  heading: 4. Results
+- anchor: 5-what-is-proved-rather-than-measured
+  heading: 5. What is proved rather than measured
+- anchor: 6-limits-and-what-the-round-leaves
+  heading: 6. Limits, and what the round leaves
+- anchor: 7-re-running-it
+  heading: 7. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Argument unpacking and the third view on demand: Phase 96''s two misses, re-declared and re-scored'
+verdict: 'Yes, on every mark: the dialect now admits argument unpacking, and the refused program answers
+  equal to CPython as a fresh declared case. Reading the third view only on demand gives the three-view
+  answer on every read inside the fault model while reading a third fewer views. Re-declared correctly,
+  independent faults are resolved by three views with 0 wrong, and two views cannot be helped by any frame,
+  which is proved. All twelve declared marks were met.'
+wobble_deps: []

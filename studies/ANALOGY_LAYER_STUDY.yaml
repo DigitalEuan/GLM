@@ -1,0 +1,67 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Every figure is recomputed by `report analogies`, by the three `analogy_*` benchmark
+  suites and by the end-to-end evaluation.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/analogy_models
+  - tests/test_analogy_models
+  lean: []
+  prose: ANALOGY_LAYER_STUDY.md
+  test:
+  - test_analogy_layer.py
+  wheel: []
+follow_ups: []
+id: ANALOGY_LAYER_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: 'Why was `A : B :: C : D` the machine''s worst query kind, and what did closing it cost?'
+recomputed_by: '`glm_universal.reasoning.analogy_models.analogy_models_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-measurement-that-started-it
+  heading: 1. The measurement that started it
+- anchor: 2-the-diagnosis-the-relation-is-not-always-a-displacement
+  heading: '2. The diagnosis: the relation is not always a displacement'
+- anchor: 3-the-layer
+  heading: 3. The layer
+- anchor: 4-what-the-layer-left-and-what-it-took-to-finish
+  heading: 4. What the layer left, and what it took to finish
+- anchor: 5-where-it-stands-now
+  heading: 5. Where it stands now
+- anchor: 6-what-is-still-open
+  heading: 6. What is still open
+- anchor: 7-re-running-it
+  heading: 7. Re-running it
+status: negative
+successors: []
+superseded_by: ''
+supersedes: []
+title: Analogy by named relation
+verdict: The relation is not always a displacement.
+wobble_deps: []

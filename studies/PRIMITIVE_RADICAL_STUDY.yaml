@@ -1,0 +1,81 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 10 of 10 marks met; 5 of 5 non-solvable questions certified; 7 of 7 solvable controls
+  and the imprimitive limit silent; 2 of 2 letter questions with the declared reason; 0 of 141 solvable
+  polynomials certified; 200 of 200 random irreducible polynomials of composite degree certified; 182
+  of 182 cycle types read right; 3 theorems, 0 `sorry`; 3 of 3 chain pendulums carry the reason; Phase
+  113 still 9 of 9.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - evaluation/primitive_radical_cases
+  - tests/test_primitive_radical
+  lean:
+  - PrimitiveRadicals
+  prose: PRIMITIVE_RADICAL_STUDY.md
+  test:
+  - test_primitive_radical.py
+  wheel: []
+follow_ups: []
+id: PRIMITIVE_RADICAL_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 113
+predecessors:
+- FROBENIUS_RADICAL_STUDY
+question: Phase 113's Frobenius certificate needs prime degree, so `solve symbolically` says nothing about
+  `x^6 - x - 1`, and the `modes.higher` route names the roots of a characteristic polynomial of degree
+  five or more with no statement about radicals at all. Can the layer read two Frobenius elements in composite
+  degree, carry the certificate to the modes route, and still never certify a polynomial whose group is
+  solvable?
+recomputed_by: '`glm_universal.runtime.primitive_radical_report.primitive_radical_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-what-was-added
+  heading: 1. What was added
+- anchor: 2-the-marks
+  heading: 2. The marks
+- anchor: 3-what-is-proved
+  heading: 3. What is proved
+- anchor: 4-limits-and-what-the-round-leaves
+  heading: 4. Limits, and what the round leaves
+- anchor: 5-re-running-it
+  heading: 5. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Roots with no expression in radicals in composite degree, and on the modes route
+verdict: 'Yes, for groups that hold the two elements the test looks for. An element of cycle type `(n
+  - 1, 1)` makes the Galois group primitive, and an element with a power that is a transposition or a
+  3-cycle then puts the alternating group inside it (Jordan''s theorem); both steps are proved in Lean.
+  All ten marks were met: the statement reaches `x^n - x - 1` for n = 6, 8, 9, 10 and 12, the sextic trinomial
+  in letters, and the chain pendulums of five and six links, it is given to none of 141 polynomials with
+  solvable groups, and it reaches all 200 random irreducible polynomials of degree 6, 8, 9 and 10. It
+  stays silent on an imprimitive group that is not solvable, as declared, and Dedekind''s theorem is still
+  used, not proved.'
+wobble_deps: []

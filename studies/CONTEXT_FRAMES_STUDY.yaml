@@ -1,0 +1,89 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 8 of 9 marks (X5 missed as written, X5′ met); 10 of 10 theorems, 0 `sorry`; battery 21
+  of 23 and 9 of 9 with and without the rotating-body join, 0 wrong; census 16,215 questions, 0 answers
+  changed by a pin, 12 ambiguities resolved by each of the two energy pins; 4 of 4 declared refusals;
+  evaluation 223 of 223.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - engineering/context_frames
+  lean:
+  - ContextFrames
+  prose: CONTEXT_FRAMES_STUDY.md
+  test:
+  - test_context_frames.py
+  wheel: []
+follow_ups: []
+id: CONTEXT_FRAMES_STUDY
+junctions:
+- rule: ''
+  study: ''
+  wheels:
+  - W9
+  - W13
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 170
+predecessors:
+- DOMAIN_WHEELS_STUDY
+- OSCILLATOR_JUNCTION_STUDY
+question: Can a question say the context a shared name is meant in — whether an energy is stored or delivered,
+  which oscillator is meant, whether a rotating body drives the wave — so that the domain wheels recover
+  the relationship the union refuses, without identifying the quantities globally and without changing
+  any answer given without a context?
+recomputed_by: '`glm_universal.engineering.context_frames_study.context_frames_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-the-contexts
+  heading: 1. The contexts
+- anchor: 2-the-formal-half
+  heading: 2. The formal half
+- anchor: 3-faculties
+  heading: 3. Faculties
+- anchor: 4-the-marks
+  heading: 4. The marks
+- anchor: 5-what-would-count-against
+  heading: 5. What would count against
+- anchor: 6-what-is-not-claimed
+  heading: 6. What is not claimed
+- anchor: 7-what-came-out
+  heading: 7. What came out
+- anchor: in-one-paragraph
+  heading: In one paragraph
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Contextual domain frames — the question says which energy, and which body drives the wave
+verdict: Yes. A question can now say which energy is meant, which oscillator, and whether a rotating body
+  drives the wave. Energy from power and time is answered as `energy = power * time` when the energy is
+  delivered over a time and as half of that when it is stored in a capacitor; the source's energy `charge
+  * voltage` and the capacitor's `1/2 * charge * voltage` are told apart the same way; with a rotating
+  body driving the wave, the reference-circle identity and the rotor chain come back. No answer given
+  without a context moved, and over 16,215 questions no pin changed an answer — as Lean proves it cannot.
+  One mark was missed on a mis-written expectation, not on an answer.
+wobble_deps: []

@@ -1,0 +1,67 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 5 of 6 marks met; 1,776,804 resolved-fork readings each equal to a brute-force posterior
+  and at least the proved floor; at 1/10, 294,976 of 592,268 resolved forks below 99 %; 15 of 15 runtime
+  programs as declared.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - DecoderConfidence
+  prose: DECODER_CONFIDENCE_STUDY.md
+  test:
+  - test_decoder_confidence.py
+  wheel: []
+follow_ups: []
+id: DECODER_CONFIDENCE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 75
+predecessors:
+- CARRIED_FORK_STUDY
+- LAW_ABSORPTION_STUDY
+question: When the decoder, the carried fork or the second reading gives an answer, how likely is that
+  answer to be the codeword that was sent, and can the GLM say so exactly?
+recomputed_by: '`glm_universal.reasoning.decoder_confidence_marks.decoder_confidence_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-declarations-written-before-any-code-of-this-round
+  heading: 1. Declarations — written before any code of this round
+- anchor: 2-results
+  heading: 2. Results
+- anchor: 3-what-this-round-moved-and-what-it-leaves
+  heading: 3. What this round moved, and what it leaves
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Decoder confidence — the absorbed law attached to the decoder's own readings
+verdict: 'Every answer of the decoder, the context stage and the second reading now carries the exact
+  probability that it is the codeword sent, at a declared bit-flip rate. A resolved fork is not certain:
+  at a rate of 1/10, nearly half of the resolved forks fall below 99 %. The one declared clause that missed
+  was a wrong declaration about the witness, not a wrong answer.'
+wobble_deps: []

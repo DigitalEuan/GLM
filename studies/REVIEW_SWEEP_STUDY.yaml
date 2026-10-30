@@ -1,0 +1,86 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 8 stalled results registered; 1 licensed for a re-reading, 2 already recovered, 1 needing
+  a theorem, 4 with nothing discarded; 0 entry defects.
+directives:
+- D13
+evidence: []
+faculty: addressing
+file_refs:
+  code:
+  - tests/test_review_sweep
+  lean: []
+  prose: REVIEW_SWEEP_STUDY.md
+  test:
+  - test_review_sweep.py
+  wheel: []
+follow_ups: []
+id: REVIEW_SWEEP_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: 'Directive D13 lets a stalled result be re-read at a finer layer,
+
+  and then constrains the practice: rank candidates by whether there is an
+
+  **identifiable discarded quantity** at the coarse reading, not by how
+
+  disappointing the original result was. Nothing implemented that clause. Can the
+
+  whole standing set of stalled results be ranked by it, *before* the next
+
+  re-reading, and does the ranking then say anything a list sorted by
+
+  disappointment would not?'
+recomputed_by: '`glm_universal.reasoning.review_sweep.review_sweep_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0a-the-reading-in-one-paragraph
+  heading: 0a. The reading in one paragraph
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-the-rule
+  heading: 1. The rule
+- anchor: 2-the-four-classes
+  heading: 2. The four classes
+- anchor: 3-the-register
+  heading: 3. The register
+- anchor: 4-what-each-entry-needs
+  heading: 4. What each entry needs
+- anchor: 5-what-the-ranking-changed
+  heading: 5. What the ranking changed
+- anchor: 6-what-this-study-does-not-do
+  heading: 6. What this study does not do
+- anchor: 7-how-to-re-take-every-number
+  heading: 7. How to re-take every number
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The review sweep — which stalled results are worth re-reading, decided first
+verdict: Yes, and it changes the order. Eight stalled results are registered; one names a quantity the
+  reading discarded and is licensed for a re-reading, two have already been recovered that way, one is
+  a statement no reading settles, and four discarded nothing — so escalation is not licensed for them
+  and each names what is needed instead.
+wobble_deps: []

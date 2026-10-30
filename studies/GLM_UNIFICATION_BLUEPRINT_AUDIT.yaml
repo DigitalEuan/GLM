@@ -1,0 +1,78 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Every testable sentence of the blueprint restated as a claim and given one of four verdicts.
+directives:
+- D11
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/blueprint
+  - reasoning/engine
+  - reasoning/mantissa
+  - reasoning/reversible
+  - tests/test_blueprint
+  lean:
+  - Mantissa
+  - Reversible
+  prose: GLM_UNIFICATION_BLUEPRINT_AUDIT.md
+  test:
+  - test_glm_unification_blueprint_audit.py
+  wheel: []
+follow_ups: []
+id: GLM_UNIFICATION_BLUEPRINT_AUDIT
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Does the supplied blueprint describe the package as it now stands?
+recomputed_by: '`glm_universal.reasoning.blueprint.blueprint_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: the-four-verdicts
+  heading: The four verdicts
+- anchor: the-result
+  heading: The result
+- anchor: section-1-the-universal-binary-principle
+  heading: Section 1 — the Universal Binary Principle
+- anchor: section-2-the-substrate-core-and-the-isometric-bridge-all-confirmed
+  heading: Section 2 — the substrate core and the isometric bridge (all confirmed)
+- anchor: section-3-the-dynamic-value-layer
+  heading: Section 3 — the dynamic value layer
+- anchor: section-4-the-thermo-dynamic-carrier-engine
+  heading: Section 4 — the thermo-dynamic carrier engine
+- anchor: section-5-metrology-coherence-and-escalation
+  heading: Section 5 — metrology, coherence and escalation
+- anchor: section-6-reversible-computing-and-bit-dynamics
+  heading: Section 6 — reversible computing and bit dynamics
+- anchor: section-7-the-roadmap
+  heading: Section 7 — the roadmap
+- anchor: what-was-built-as-a-result
+  heading: What was built as a result
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The unification blueprint, tested
+verdict: A specification that is only read can drift away from the code without anybody noticing.
+wobble_deps: []

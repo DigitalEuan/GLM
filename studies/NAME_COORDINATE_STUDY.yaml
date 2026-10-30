@@ -1,0 +1,70 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: The sweep, and the control that decides what is doing the work.
+directives:
+- D3
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/name_coordinate
+  - tests/test_name_coordinate
+  lean:
+  - NameCoordinate
+  prose: NAME_COORDINATE_STUDY.md
+  test:
+  - test_name_coordinate.py
+  wheel: []
+follow_ups: []
+id: NAME_COORDINATE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Can a coordinate for the name lift the resolution ceiling the escalation audit proved?
+recomputed_by: '`glm_universal.reasoning.name_coordinate.name_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-question-this-answers
+  heading: 1. The question this answers
+- anchor: 2-the-admission-rule-applied-to-a-coordinate
+  heading: 2. The admission rule, applied to a coordinate
+- anchor: 3-the-headline-is-the-least-interesting-number
+  heading: 3. The headline is the least interesting number
+- anchor: 4-the-measurement-is-the-sweep
+  heading: 4. The measurement is the sweep
+- anchor: 5-the-control-decides-what-is-doing-the-work
+  heading: 5. The control decides what is doing the work
+- anchor: 6-what-is-checked-and-what-would-be-vacuous-to-check
+  heading: 6. What is checked, and what would be vacuous to check
+- anchor: 7-what-this-changes-and-what-it-does-not
+  heading: 7. What this changes, and what it does not
+- anchor: 8-surface-and-counts
+  heading: 8. Surface and counts
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: A coordinate for the name — attacking the resolution ceiling where it lives
+verdict: The headline is the least interesting number.
+wobble_deps: []

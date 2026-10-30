@@ -1,0 +1,83 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 7 of 7 marks; 12 of 12 programs and 17 of 17 questions as declared; 20 of 20 column-3
+  scripts verify and 112 of 112 mutations rejected; 299 of 299 decided generated programs unchanged and
+  1 newly decided; 6 of 6 jumped *halts* equal to a plain run, 0 of 3 *never* halting in 200,000 steps.
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - reasoning/batch_machine
+  - reasoning/batch_speech
+  - reasoning/counter_lasso
+  lean:
+  - CounterLasso
+  - OperationsLadder
+  prose: COUNTER_LASSO_STUDY.md
+  test:
+  - test_counter_lasso.py
+  wheel: []
+follow_ups: []
+id: COUNTER_LASSO_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 125
+predecessors: []
+question: If GLM-BAT reads a loop whose state repeats except for integer counters that come back translated
+  by a fixed step, can it say *halts* (with the exact step count, outputs and exit code) or *never halts*
+  for loops its budget cannot run out, without changing any verdict it already gave and without a verdict
+  a long plain run contradicts?
+recomputed_by: '`glm_universal.reasoning.counter_lasso.counter_lasso_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved-before-any-code
+  heading: 1. What is proved before any code
+- anchor: 2-the-rule
+  heading: 2. The rule
+- anchor: 3-the-marks-declared-before-the-code
+  heading: 3. The marks, declared before the code
+- anchor: 4-controls
+  heading: 4. Controls
+- anchor: 5-what-this-round-does-not-do
+  heading: 5. What this round does not do
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-the-measurement
+  heading: 7. The measurement
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Counter lassos — halting and non-termination past the budget
+verdict: 'Yes, within the declared rule. All 12 battery programs and all 17 questions came out as declared
+  with 0 wrong: six loops of 40,003 to 2,000,003 steps are answered *halts* with their exact step count,
+  outputs, values and exit code, two loops are certified never to halt — N2, whose counter only the output
+  reads, and one whose odd counter never reaches the zero it is compared with — and the four controls
+  are refused. Every Phase 125 and 126 answer stands except N2 and N3, all 299 generated programs the
+  earlier readings decided keep their verdicts, and the one they left undecided (206) is now certified
+  never to halt. Every *halts* agrees with a plain run of up to 2,500,000 steps and no *never* halts within
+  200,000; the three refused controls do halt.'
+wobble_deps: []

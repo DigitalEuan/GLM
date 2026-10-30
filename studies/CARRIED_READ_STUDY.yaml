@@ -1,0 +1,82 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 13 of 13 marks; 174/174 chains admitted with 2,087 register reads, 102 question reads,
+  213 computed and 92 carried steps; lies found at their step 121/121 (register), 54/54 (question, 3 more
+  are other numbers of the question), 42/42 (computed); typed plans 42/42 admitted and 42/42 lies refused;
+  field reads 7,716/7,716 admitted and 7,716/7,716 lies refused; 697/697 texts unchanged.
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - reasoning/carried_read_study
+  - reasoning/register_files
+  - tests/test_carried_read
+  lean:
+  - CarriedRead
+  prose: CARRIED_READ_STUDY.md
+  test:
+  - test_carried_read.py
+  wheel: []
+follow_ups: []
+id: CARRIED_READ_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 151
+predecessors: []
+question: Can the batch machine check the values a chain carries by reading the session's registers and
+  the question itself, and can the typed planner's computations and the session's field answers be run
+  and gated by the same machine, without moving any answer?
+recomputed_by: '`glm_universal.reasoning.carried_read_study.carried_read_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved-before-any-code
+  heading: 1. What is proved before any code
+- anchor: 2-the-questions
+  heading: 2. The questions
+- anchor: 3-the-marks-declared-before-the-measurement
+  heading: 3. The marks, declared before the measurement
+- anchor: 4-what-would-count-against
+  heading: 4. What would count against
+- anchor: 5-what-is-not-claimed
+  heading: 5. What is not claimed
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-what-came-out
+  heading: 7. What came out
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The machine reads what it carries — the registers as files, the typed planner and the field reads
+  through GLM-BAT
+verdict: Yes. The machine is given its own copy of the registers (8,408 entries in 11 tables) and the
+  question's numbers, and of the 2,314 steps Phase 151 carried as data it now reads 2,189 and computes
+  33 more, with 92 still carried; every answered chain is still admitted. A lie at a register read is
+  found at its own step every time, a lie at a given whenever it is not another number of the same question,
+  and a lie at a newly computed step every time. The typed planner's 42 exact computations and 7,716 field
+  answers of the session's default domains run through the same machine, every honest one admitted and
+  every altered one refused, and no answer moved. No mark was missed.
+wobble_deps: []

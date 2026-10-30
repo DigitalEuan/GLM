@@ -24,17 +24,17 @@ machine was run.
 Four instruments were used, and all four can be re-run on demand:
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.capabilities                    # 33 probes
-PYTHONPATH=. python3 -m glm_universal.benchmarks                      # 5 suites
-PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8             # <!--figure:evaluation-cases-->223 CLI cases<!--/figure-->
-PYTHONPATH=. python3 -m pytest glm_universal/tests -q                 # the test suite
+cd src
+PYTHONPATH=src python3 -m glm_universal.capabilities                    # 33 probes
+PYTHONPATH=src python3 -m glm_universal.benchmarks                      # 5 suites
+PYTHONPATH=src python3 -m glm_universal.evaluation --jobs 8             # <!--figure:evaluation-cases-->223 CLI cases<!--/figure-->
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests -q                 # the test suite
 ```
 
 Every figure below is the output of one of those commands on the tree as it
 stands. Nothing here is quoted from an earlier run — and nothing here is typed
 by hand twice: the counts are recomputed into
-[`overlay/FIGURES.md`](overlay/FIGURES.md) by `glm_universal/figures.py`, and
+[`FIGURES.md`](FIGURES.md) by `glm_universal/figures.py`, and
 `tests/test_figures.py` fails if this document drifts from them.
 
 ---
@@ -46,8 +46,8 @@ by hand twice: the counts are recomputed into
 | capability probes | where the library stops, asked as user questions | **33 probes: 20 hold, 13 break, 0 errored, 0 surprises** |
 | benchmark suites | solver functions against curated and exhaustive task sets | **2,389 / 2,390 tasks across 5 suites; every suite beat its declared baseline** |
 | end-to-end CLI evaluation | the CLI, driven the way a user drives it | **195 cases: 195 passed** — 159 answered correctly, 36 refused as expected, 0 unexpected refusals, **0 confidently wrong**, 0 errored |
-| test suite | the package's own regression net | **<!--figure:suite-->5,397 tests across 181 of the 183 test files, 18,972 subtests, outside the document checks<!--/figure-->**, zero failures |
-| Lean development | the machine-checked layer | **<!--figure:lean-files-->253 Lean files<!--/figure-->, `lake build` clean, no `sorry`** |
+| test suite | the package's own regression net | **<!--figure:suite-->(not yet measured: suite)<!--/figure-->**, zero failures |
+| Lean development | the machine-checked layer | **<!--figure:lean-files-->425 Lean files<!--/figure-->, `lake build` clean, no `sorry`** |
 
 A break in the probe report is not a failure — it is a located boundary, and
 each one names the exact place it stops. A *confidently wrong* answer in the
@@ -59,10 +59,10 @@ honest refusal is scored `+1`. There are now none.
 ## 2. The end-to-end CLI evaluation
 
 This is the instrument that measures what a user gets. It lives in
-`overlay/glm_universal/evaluation/`. Each of its 195 cases starts `GLM.py` in a
+`glm_universal/evaluation/`. Each of its 195 cases starts `GLM.py` in a
 **fresh interpreter** — one subprocess per question, no shared session, no warm
 caches — and scores the `ANSWER` or `UNSOLVED` line the process prints. The
-question set covers **all <!--figure:query-kinds-->28 query kinds<!--/figure-->** the runtime recognises and every one of its
+question set covers **all <!--figure:query-kinds-->27 query kinds<!--/figure-->** the runtime recognises and every one of its
 report subjects; the coverage is checked against the runtime's own tables by
 a test, so a new kind or subject cannot be added without a case.
 
@@ -113,7 +113,7 @@ All 36 refusal cases refused, and all 36 are **boundaries** — each is a theore
 or a deliberate commitment, and cannot be closed by writing more code. There
 is no longer a **gap** case: the last one is closed below.
 
-*The list below was written when the set held 178 cases and 28 refusals; the eight refusal cases added since (four in the `carrier` kind, four in the `locate` kind) are boundaries of the same sort, each stated with its reason in `overlay/glm_universal/evaluation/cases.py`.*
+*The list below was written when the set held 178 cases and 28 refusals; the eight refusal cases added since (four in the `carrier` kind, four in the `locate` kind) are boundaries of the same sort, each stated with its reason in `glm_universal/evaluation/cases.py`.*
 
 **Boundaries — 28 of the 36.**
 
@@ -493,12 +493,12 @@ a vertex algebra on its own.
 ## 7. Re-running this assessment
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.capabilities
-PYTHONPATH=. python3 -m glm_universal.benchmarks
-PYTHONPATH=. python3 -m glm_universal.evaluation --jobs 8 --json eval.json
-PYTHONPATH=. python3 -m pytest glm_universal/tests -q
-PYTHONPATH=. python3 -m glm_universal.figures            # every count above
+cd src
+PYTHONPATH=src python3 -m glm_universal.capabilities
+PYTHONPATH=src python3 -m glm_universal.benchmarks
+PYTHONPATH=src python3 -m glm_universal.evaluation --jobs 8 --json eval.json
+PYTHONPATH=src python3 -m pytest src/glm_universal/tests -q
+PYTHONPATH=src python3 -m glm_universal.figures            # every count above
 ```
 
 The evaluation exits 0 only when every case passes, so it is usable as a gate.

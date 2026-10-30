@@ -1,0 +1,65 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: '6 systems against the 6 admission criteria: 3 proved, 1 a checked transcription, 2 tested.'
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/pcgs
+  - tests/test_pcgs
+  lean:
+  - PCGS
+  prose: PCGS_STUDY.md
+  test:
+  - test_pcgs.py
+  wheel: []
+follow_ups: []
+id: PCGS_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: How far does "generate, don't store" go once every generated answer has to carry correctness
+  evidence and a cost, and how much of it does the GLM already have?
+recomputed_by: '`glm_universal.reasoning.pcgs.pcgs_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-what-the-concept-adds-to-what-was-already-here
+  heading: 1. What the concept adds to what was already here
+- anchor: 2-the-two-scripts-could-not-be-run-and-what-was-done-instead
+  heading: 2. The two scripts could not be run, and what was done instead
+- anchor: 3-the-systems-and-the-evidence-each-actually-has
+  heading: 3. The systems, and the evidence each actually has
+- anchor: 4-what-the-glm-already-had-and-what-is-new
+  heading: 4. What the GLM already had, and what is new
+- anchor: 5-what-this-does-not-establish
+  heading: 5. What this does *not* establish
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Generate, don''t store — with a proof attached: the PCGS concept tested here'
+verdict: Six systems are admitted; three rest on theorems proved here, one on a checked transcription,
+  two on tests.
+wobble_deps: []

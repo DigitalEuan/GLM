@@ -1,0 +1,80 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 14 of 14 points carried onto the ITS-90 kelvin column; 10 of 10 ordering, 3 of 3 column
+  and 9 of 9 planner cases as declared, 0 wrong; through `GLM.py --ask` the machine answered 0 of the
+  9 planner questions before the round and 6 after; with the offset dropped, 3 ordering verdicts flip
+  and 6 of 6 planner answers are wrong; 6 of 6 chain scripts verified (25 of 25 steps aligned) with every
+  mutation and every offset lie rejected; 8 of 8 marks met.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - data_objects/fixed_points
+  - evaluation/celsius_register_cases
+  - reasoning/scale_conversion
+  - runtime/fields
+  lean:
+  - CelsiusRegister
+  prose: CELSIUS_REGISTER_STUDY.md
+  test:
+  - test_celsius_register.py
+  wheel: []
+follow_ups: []
+id: CELSIUS_REGISTER_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 86
+predecessors: []
+question: Can the system hold a register whose readings are in degrees Celsius, carry them through the
+  scale table's first offset row, and use them — ordered against the element register's kelvins and fed
+  to the stepwise planner as levels — without answering anything wrongly?
+recomputed_by: '`glm_universal.runtime.celsius_register_report.celsius_register_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-register
+  heading: 1. The register
+- anchor: 2-declarations-written-before-any-code-of-the-round
+  heading: 2. Declarations — written before any code of the round
+- anchor: 3-what-was-built
+  heading: 3. What was built
+- anchor: 4-results
+  heading: 4. Results
+- anchor: 5-what-this-moved
+  heading: 5. What this moved
+- anchor: 6-how-the-next-register-goes-in
+  heading: 6. How the next register goes in
+- anchor: 7-what-this-leaves
+  heading: 7. What this leaves
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The Celsius register: the ITS-90 fixed points, and the scale table''s first offset row'
+verdict: 'Yes: the ITS-90 fixed-point register holds its fourteen temperatures in degrees Celsius, the
+  scale table''s first offset row carries them onto the ITS-90 kelvin column exactly, and the ordering
+  operation, the extremum operation and the stepwise planner read them with every declared case as declared
+  and 0 wrong.'
+wobble_deps: []

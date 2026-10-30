@@ -1,0 +1,190 @@
+{
+  "id": "W29",
+  "title": "Spintronics & Spin Transport",
+  "axioms": [
+    "larmor_frequency = gyromagnetic_ratio * magnetic_field",
+    "spin_diffusion_length = diffusion_coefficient * time^(1/2)"
+  ],
+  "cases": [
+    {
+      "id": "W29-01",
+      "equation": "gyromagnetic_ratio = larmor_frequency / magnetic_field",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W29-02",
+      "equation": "magnetic_field = larmor_frequency / gyromagnetic_ratio",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W29-03",
+      "equation": "time = (spin_diffusion_length / diffusion_coefficient)^2",
+      "expected_dimensional": true,
+      "expected_derivable": true,
+      "physical_status": "physically_supported",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    },
+    {
+      "id": "W29-N1",
+      "equation": "larmor_frequency = magnetic_field / gyromagnetic_ratio",
+      "expected_dimensional": false,
+      "expected_derivable": false,
+      "physical_status": "negative_control",
+      "expected_dimensional_explicit": null,
+      "note": ""
+    }
+  ],
+  "quantities": [
+    "diffusion_coefficient",
+    "gyromagnetic_ratio",
+    "larmor_frequency",
+    "magnetic_field",
+    "spin_diffusion_length",
+    "time"
+  ],
+  "dimensions": {
+    "diffusion_coefficient": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        2,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "gyromagnetic_ratio": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        -1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "larmor_frequency": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "magnetic_field": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        1,
+        -2,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "spin_diffusion_length": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "time": {
+      "axes": [
+        "L",
+        "M",
+        "T",
+        "I",
+        "H",
+        "N",
+        "J",
+        "A"
+      ],
+      "exponents": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "junctions": [],
+  "non_identities": []
+}

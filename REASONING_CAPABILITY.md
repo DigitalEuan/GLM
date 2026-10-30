@@ -28,8 +28,8 @@ Everything in this document is generated, not narrated. The transcript is
 produced by
 
 ```
-cd overlay
-PYTHONPATH=. python3 glm_universal/examples/reasoning_showcase.py
+cd src
+PYTHONPATH=src python3 glm_universal/examples/reasoning_showcase.py
 ```
 
 and the full verbatim output is checked in at
@@ -304,21 +304,21 @@ turn a dimensional check into a physical one. Concretely:
 ## 5. Reproducing this
 
 ```
-cd overlay
+cd src
 
 # the transcript in this document (about 4 minutes, spawns one subprocess
 # per probe for column 3)
-PYTHONPATH=. python3 glm_universal/examples/reasoning_showcase.py
+PYTHONPATH=src python3 glm_universal/examples/reasoning_showcase.py
 
 # fast version, no column 3
-PYTHONPATH=. python3 glm_universal/examples/reasoning_showcase.py --no-verify
+PYTHONPATH=src python3 glm_universal/examples/reasoning_showcase.py --no-verify
 
 # regenerate the checked-in transcript
-PYTHONPATH=. python3 glm_universal/examples/reasoning_showcase.py --markdown \
+PYTHONPATH=src python3 glm_universal/examples/reasoning_showcase.py --markdown \
     > glm_universal/examples/reasoning_showcase_transcript.md
 
 # one section only
-PYTHONPATH=. python3 glm_universal/examples/reasoning_showcase.py --only "layered"
+PYTHONPATH=src python3 glm_universal/examples/reasoning_showcase.py --only "layered"
 ```
 
 The showcase is also a test: `glm_universal/tests/test_reasoning_showcase.py`

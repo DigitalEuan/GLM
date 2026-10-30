@@ -1,0 +1,90 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 17 of 18 marks (F4 missed); integrity failures 0 of 78,161; in-vocabulary wrong answers
+  0 of 1,620 (first-fit control 376); after one ask 1,620 of 1,620 right; outside-vocabulary wrong 207
+  at the first take, 0 at the second; κ shifts 0.105 %, 0.158 %, 0.435 %, 1.55 %.
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - reasoning/frame_operators
+  - reasoning/kappa_anchor
+  lean:
+  - AxiomAuditAll
+  - Calibration
+  - KappaAnchor
+  - RationalBoost
+  prose: FRAME_OPERATOR_STUDY.md
+  test:
+  - test_frame_operator.py
+  wheel: []
+follow_ups: []
+id: FRAME_OPERATOR_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 177
+predecessors:
+- PIPELINE_KIT_STUDY
+question: 'Taking the owner''s `Lorentz boosts.pdf` further: can the GLM carry out rational Lorentz boosts
+  exactly, infer an unknown frame operator from example pairs by reading the invariant layer first and
+  fitting in the light-cone layer, and never confuse a change of frame with a change of units; and what
+  does the work-energy anchor κ = 190 kJ/mol actually do, how fine is it, and what is it for?'
+recomputed_by: '`glm_universal.reasoning.frame_operator_study.frame_operator_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-corrections-to-the-source-carried-into-the-work
+  heading: 1. Corrections to the source, carried into the work
+- anchor: 2-what-is-proved
+  heading: 2. What is proved
+- anchor: 3-the-mechanism
+  heading: 3. The mechanism
+- anchor: 4-what-is-measured-and-the-marks
+  heading: 4. What is measured, and the marks
+- anchor: 5-faculties
+  heading: 5. Faculties
+- anchor: 6-the-anchor-κ-the-owners-three-questions
+  heading: '6. The anchor κ: the owner''s three questions'
+- anchor: 7-what-came-out
+  heading: 7. What came out
+- anchor: 8-what-carries-over-the-method-for-puzzles-and-other-domains
+  heading: '8. What carries over: the method for puzzles and other domains'
+- anchor: 9-what-is-not-claimed
+  heading: 9. What is not claimed
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Frame operators — Lorentz boosts in exact arithmetic, operators inferred layer by layer, and the
+  anchor κ = 190 kJ/mol
+verdict: 'Yes, within the declared families. The boost arithmetic held on every one of 78,161 exact checks,
+  and 26 theorems in `RationalBoost.lean` prove it in general. `tool frame` answered 703 of 1,620 in-vocabulary
+  queries outright and every one of the rest after a single asked example, with 0 wrong answers; outside
+  the vocabulary it refused all 360, but only after an evidence guard was added between the first and
+  second take. Light along one ray cannot tell a frame from a unit change, so all 270 such queries were
+  refused; light along both rays can, which broke one declared mark (F4). κ is a unit: no dimensionless
+  output depends on it. It is the bromine dissociation energy to within the register''s ±0.3 kJ/mol, and
+  its digits are the smallest of the four precision knobs.'
+wobble_deps: []

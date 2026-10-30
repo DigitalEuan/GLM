@@ -133,10 +133,10 @@ prediction is made below 1920.
 ## 6. Files
 
 * `RequestProject/GLM/ConfigurationReading.lean` — K1.
-* `overlay/glm_universal/reasoning/configuration_reading.py` — the reading,
+* `glm_universal/reasoning/configuration_reading.py` — the reading,
   the cells, the control and the report, from the stored ensembles.
 * `python3 -m glm_universal.tools configuration-reading` — the report.
-* `overlay/glm_universal/tests/test_configuration_reading.py`.
+* `glm_universal/tests/test_configuration_reading.py`.
 
 ## 7. The measurement
 

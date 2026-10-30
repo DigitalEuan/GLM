@@ -1,0 +1,85 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Every declaration read back exactly from its address, and nearest-by-address shares a
+  source file many times more often than chance.
+directives:
+- D3
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/lean_address
+  - tests/test_lean_address
+  lean:
+  - Address
+  - Denotation
+  - Foundations
+  - Gen3
+  - HigherLattices
+  - LayerChain
+  - Layers
+  - TieBreak
+  prose: LEAN_ADDRESS_STUDY.md
+  test:
+  - test_lean_address.py
+  wheel: []
+follow_ups: []
+id: LEAN_ADDRESS_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Can the system speak Lean results — is a declaration's Leech address unique, readable back,
+  and meaningful?
+recomputed_by: '`glm_universal.reasoning.lean_address.lean_address_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-question
+  heading: 1. The question
+- anchor: 2-the-corpus-reading-lean-without-a-compiler
+  heading: '2. The corpus: reading Lean without a compiler'
+- anchor: 3-the-feature-map-and-what-is-deliberately-absent
+  heading: 3. The feature map, and what is deliberately absent
+- anchor: 4-the-scale-why-9-and-not-the-obvious-8
+  heading: '4. The scale: why 9, and not the obvious 8'
+- anchor: 5-read-back-the-address-is-the-feature-vector
+  heading: '5. Read-back: the address *is* the feature vector'
+- anchor: 6-injectivity-and-where-the-layer-boundary-falls
+  heading: 6. Injectivity, and where the layer boundary falls
+- anchor: 7-does-distance-mean-anything-three-schemes-two-null-models
+  heading: 7. Does distance mean anything? Three schemes, two null models
+- anchor: 8-speaking-lean-back
+  heading: 8. Speaking Lean back
+- anchor: 9-what-is-proved-and-what-is-only-measured
+  heading: 9. What is proved, and what is only measured
+- anchor: 10-what-this-licenses-and-what-it-does-not
+  heading: 10. What this licenses, and what it does not
+- anchor: 11-reproducing-every-number-here
+  heading: 11. Reproducing every number here
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Can the system speak Lean results?
+verdict: Yes to determinism, partly to meaning, and the two are not the same thing.
+wobble_deps: []

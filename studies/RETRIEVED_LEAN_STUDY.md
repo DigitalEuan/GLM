@@ -25,10 +25,10 @@ development as Lean that builds against the current Mathlib, with no `sorry`.
 Where the claim turned out to be false, the refutation was retrieved instead.*
 
 Lean: 25 files, 7,230 lines, 854 declarations, all under
-[`RequestProject/GLM/`](../overlay/glm_lean/RequestProject/GLM/) and mirrored in
-`overlay/glm_lean/`.
+[`RequestProject/GLM/`](../glm_lean/RequestProject/GLM/) and mirrored in
+`glm_lean/`.
 Checked by: `lake build`, the sorry scan, the two-copy diff and
-`overlay/glm_universal/tests/test_retrieved_lean.py`.
+`glm_universal/tests/test_retrieved_lean.py`.
 Addressed by: `report lean` — the corpus these files joined is measured in
 [`LEAN_ADDRESS_STUDY.md`](LEAN_ADDRESS_STUDY.md).
 
@@ -172,7 +172,7 @@ The brief named more than was retrieved, and the omissions are deliberate.
 # the Lean, from the repository root
 lake build
 grep -rInw -e sorry -e admit RequestProject/GLM     # no matches
-diff -r -x README.md RequestProject/GLM overlay/glm_lean/RequestProject/GLM
+diff -r -x README.md RequestProject/GLM glm_lean/RequestProject/GLM
 
 # the retrieval's own test
 cd overlay

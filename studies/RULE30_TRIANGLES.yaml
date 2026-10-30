@@ -1,0 +1,70 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Ledger rows C422–C428; inside the first 400 left diagonals the longest white run from
+  time 501 on is exactly 10.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - ConeGeometry
+  - SidewaysView
+  - Triangles
+  - TrianglesData
+  prose: RULE30_TRIANGLES.md
+  test:
+  - test_rule30_triangles.py
+  wheel: []
+follow_ups: []
+id: RULE30_TRIANGLES
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Do the owner's Round 48 observations about white triangles and line directions hold exactly?
+recomputed_by: (hand-written argument; nothing to recompute)
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: the-owners-observations-round-48
+  heading: The owner's observations (Round 48)
+- anchor: 1-what-a-white-triangle-is-exact-for-every-row
+  heading: 1. What a white triangle is (exact, for every row)
+- anchor: 2-left-down-versus-right-down-lines-exact-for-every-row
+  heading: 2. Left-down versus right-down lines (exact, for every row)
+- anchor: 3-the-print-out-from-the-right-side-in-exact
+  heading: 3. The print-out from the right side in (exact)
+- anchor: 4-the-bands-at-the-right-edge-exact
+  heading: 4. The bands at the right edge (exact)
+- anchor: 5-the-left-edge-no-large-triangles-certified
+  heading: '5. The left edge: no large triangles (certified)'
+- anchor: 6-for-the-glm
+  heading: 6. For the GLM
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Round 48 — white triangles, the two line directions, and the bands printed from the right
+verdict: 'Each part has an exact counterpart: some hold as stated, some need a correction, and one part,
+  whether the left-side triangles are bounded, is still open.'
+wobble_deps: []

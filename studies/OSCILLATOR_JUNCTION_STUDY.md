@@ -41,7 +41,7 @@ four ways of writing that boundary into the junction table.
 
 ## 1. What is built
 
-* `overlay/glm_universal/engineering/oscillator_junction.py` — the four
+* `glm_universal/engineering/oscillator_junction.py` — the four
   variant junction tables, the split system for each (the rule of
   `engineering/domains.py`, which it reads and does not modify), the battery,
   the preservation set and the census for each variant, the grading of §2.3
@@ -158,7 +158,7 @@ W9 (wave kinematics) and W13 (the oscillator):
 
 ## 6. Files
 
-See §1. Tests: `overlay/glm_universal/tests/test_oscillator_junction.py`.
+See §1. Tests: `glm_universal/tests/test_oscillator_junction.py`.
 
 ## 7. What came out
 

@@ -1,0 +1,78 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: <!--figure:probe-correct-->2<!--/figure--> correct, <!--figure:probe-wrong-->1<!--/figure-->
+  wrong and <!--figure:probe-refused-->17<!--/figure--> refused of <!--figure:probe-questions-->20<!--/figure-->
+  pre-registered questions, against a declared pass mark of <!--figure:probe-pass-mark-->10<!--/figure-->
+  correct and at most 1 wrong.
+directives: []
+evidence: []
+faculty: derivation
+file_refs:
+  code:
+  - tests/test_blockers
+  lean:
+  - NormFamily
+  prose: BLOCKERS_STUDY.md
+  test:
+  - test_blockers.py
+  wheel: []
+follow_ups: []
+id: BLOCKERS_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Between what this system does now and reasoning over natural language, mathematics, physics,
+  chemistry and Python script, what is actually in the way — and can each obstacle be demonstrated with
+  a measurement rather than described with an adjective?
+recomputed_by: '`glm_universal.reasoning.blockers.measure`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-three-things-that-are-not-the-same
+  heading: 1. Three things that are not the same
+- anchor: 2-the-pre-registered-language-probe
+  heading: 2. The pre-registered language probe
+- anchor: 3-the-blockers
+  heading: 3. The blockers
+- anchor: 4-the-program-text-experiment-run-rather-than-proposed
+  heading: 4. The program-text experiment, run rather than proposed
+- anchor: 4a-the-vocabulary-experiment-run-rather-than-proposed
+  heading: 4a. The vocabulary experiment, run rather than proposed
+- anchor: 5-what-this-does-and-does-not-claim
+  heading: 5. What this does and does not claim
+- anchor: 6-how-to-re-run-this
+  heading: 6. How to re-run this
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: What is holding the GLM back — six blockers, each with its measurement and the smallest experiment
+  that would remove it
+verdict: 'Every blocker names a measurement: the pre-registered language probe scores 2 correct, 1 wrong
+  and 17 refused of 20 against a declared pass mark, so it fails; the lexicon now holds 57 of the 69 words
+  the probe uses and widening it moved the score by nothing, so the binding blocker is the parser rather
+  than the vocabulary; and of this round''s measured results only 2 derive an answer rather than look
+  one up.'
+wobble_deps: []

@@ -1,0 +1,69 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: An exact magnitude without a logarithm, and a control the lattice does not beat.
+directives:
+- D2
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - data_objects/economics_register
+  - reasoning/economics
+  - tests/test_economics
+  lean:
+  - LogBucket
+  prose: ECONOMICS_STUDY.md
+  test:
+  - test_economics.py
+  wheel: []
+follow_ups: []
+id: ECONOMICS_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Does the economic third of the universality claim reproduce?
+recomputed_by: '`glm_universal.reasoning.economics.economics_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-why-there-is-an-economic-register-at-all
+  heading: 1. Why there is an economic register at all
+- anchor: 2-the-register
+  heading: 2. The register
+- anchor: 3-magnitude-by-integer-comparison-alone
+  heading: 3. Magnitude, by integer comparison alone
+- anchor: 4-the-geometry-and-the-sweep
+  heading: 4. The geometry, and the sweep
+- anchor: 5-the-verdict-not-reproduced
+  heading: '5. The verdict: not reproduced'
+- anchor: 6-what-would-change-the-verdict
+  heading: 6. What would change the verdict
+- anchor: 7-where-each-piece-lives
+  heading: 7. Where each piece lives
+status: negative
+successors: []
+superseded_by: ''
+supersedes: []
+title: The economic register, and the last third of the universality claim
+verdict: 'The verdict: not reproduced.'
+wobble_deps: []

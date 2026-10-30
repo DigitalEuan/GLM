@@ -32,6 +32,13 @@ import os
 
 import pytest
 
+# ── Phase R1: make ``glm_universal`` importable from ``src/`` ──
+import sys as _sys
+from pathlib import Path as _Path
+_SRC = _Path(__file__).resolve().parent / "src"
+if str(_SRC) not in _sys.path:
+    _sys.path.insert(0, str(_SRC))
+
 #: Set this to any non-empty value to run the exhaustive cases.
 EXHAUSTIVE_ENV = "GLM_EXHAUSTIVE"
 

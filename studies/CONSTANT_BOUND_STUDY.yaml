@@ -1,0 +1,86 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 6 of 7 marks; 10 of 10 programs with the declared verdict and end, 8 of 10 with the declared
+  jumps; 15 of 15 questions as declared; 18 of 18 column-3 scripts verify and 112 of 112 mutations rejected;
+  300 of 300 generated programs unchanged; 6 of 6 jumped *halts* equal to a plain run, 0 of 2 *never*
+  halting in 200,000 steps.
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - reasoning/batch_machine
+  - reasoning/batch_speech
+  - reasoning/constant_bound
+  - reasoning/counter_lasso
+  lean:
+  - ConstantBound
+  - CounterLasso
+  prose: CONSTANT_BOUND_STUDY.md
+  test:
+  - test_constant_bound.py
+  wheel: []
+follow_ups: []
+id: CONSTANT_BOUND_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 130
+predecessors:
+- COUNTER_LASSO_STUDY
+question: Can GLM-BAT's counter-lasso reading also jump a pass that writes the same lines on every pass,
+  and a pass whose counter is compared with a variable that is not a counter, so that the two halting
+  controls Phase 130 refused (L10, L11) are answered exactly, without changing any verdict it already
+  gave and without a verdict a long plain run contradicts?
+recomputed_by: '`glm_universal.reasoning.constant_bound.constant_bound_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved-before-any-code
+  heading: 1. What is proved before any code
+- anchor: 2-the-rule
+  heading: 2. The rule
+- anchor: 3-the-marks-declared-before-the-code
+  heading: 3. The marks, declared before the code
+- anchor: 4-controls
+  heading: 4. Controls
+- anchor: 5-what-this-round-does-not-do
+  heading: 5. What this round does not do
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-the-measurement
+  heading: 7. The measurement
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Constant bounds and repeated output — two more counter lassos
+verdict: 'Yes, within the declared rule, with one mark missed on how the hand-worked battery named its
+  jumps. All 10 battery programs came out with the declared verdict, step count, outputs, standard error
+  and exit code, and 0 wrong: L10 (as K1) halts after 60,002 steps printing `tick` 20,000 times, L11 (as
+  K2) after 40,003, and four more loops of 90,002 to 150,004 steps are answered exactly, one constant-bound
+  loop is certified never to halt, and three controls are refused. For K6 and K10 the declared jump named
+  a pass one line before the masked state''s first recurrence, so 8 of 10 are exactly as declared and
+  mark B2 is missed. The 15 questions, the certificates, non-interference on every earlier answer and
+  all 300 generated programs, and the soundness control against plain runs were all met.'
+wobble_deps: []

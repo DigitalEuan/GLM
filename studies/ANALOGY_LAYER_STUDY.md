@@ -16,11 +16,11 @@
 *Why `A : B :: C : D` was the machine's worst query kind, what the diagnosis
 turned out to be, and what closing it cost.*
 
-This study documents the layer added in `overlay/glm_universal/reasoning/analogy_models.py`
+This study documents the layer added in `glm_universal/reasoning/analogy_models.py`
 and the register changes that finished the job. Every figure below is
 recomputed by `report analogies`, by the three `analogy_*` benchmark suites and
 by the end-to-end evaluation, and is carried into
-[`overlay/FIGURES.md`](../overlay/FIGURES.md).
+[`FIGURES.md`](../FIGURES.md).
 
 ---
 

@@ -1,0 +1,76 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: <!--figure:fieldsurface-moved-->9<!--/figure--> of the <!--figure:fieldsurface-held-->10<!--/figure-->
+  held-and-unreachable questions, against <!--figure:fieldsurface-predicted-->9<!--/figure--> declared
+  reachable before the run; the split goes <!--figure:fieldsurface-parsed-before-->6<!--/figure--> → <!--figure:fieldsurface-parsed-after-->15<!--/figure-->
+  parsed.
+directives:
+- D7
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - tests/test_field_surface
+  lean:
+  - FieldSurface
+  prose: FIELD_SURFACE_STUDY.md
+  test:
+  - test_field_surface.py
+  wheel: []
+follow_ups: []
+id: FIELD_SURFACE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: The probe oracle found ten of twenty questions *held and unreachable* and priced a field surface
+  at ten. Built, what does it actually answer?
+recomputed_by: '`glm_universal.reasoning.field_surface.surface_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-what-this-round-took-and-from-where
+  heading: 1. What this round took, and from where
+- anchor: 2-what-is-addressable
+  heading: 2. What is addressable
+- anchor: 3-what-it-refuses
+  heading: 3. What it refuses
+- anchor: 4-the-measurement
+  heading: 4. The measurement
+- anchor: 5-what-is-proved-rather-than-measured
+  heading: 5. What is proved rather than measured
+- anchor: 6-what-it-decides-and-what-it-does-not
+  heading: 6. What it decides, and what it does not
+- anchor: 7-limits
+  heading: 7. Limits
+- anchor: 8-re-running-it
+  heading: 8. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The field surface — buying the cheap instrument, and saying what it bought
+verdict: 'Nine of the ten, which is exactly the number declared reachable before the run: the tenth asks
+  for a comparison across two rows and needs an operation rather than a surface. The whole probe moves
+  from six parsed to fifteen, and none of it is reasoning — a field surface is `table`, the weakest of
+  the three faculties, and every question it moves is one whose answer the system already held.'
+wobble_deps: []

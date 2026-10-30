@@ -1,0 +1,95 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 638 of 638 texts read alike by the generated and the hand-written readers; 54 of 54 declared
+  questions (12 order, 12 superlative, 12 bound, 6 class, 6 prefix, 6 molecule) and 2 of 2 follow-ups
+  as declared, 0 wrong, where round four's reader answers 0 of the 54 and the whole machine answered 5
+  of them before the round and 41 after; 10 of 10 bounded answers hold over every one of 200 completions
+  with both ends attained; 41 of 41 chain scripts verified (858 of 858 steps aligned) and every mutation
+  rejected; 3 of 3 declared moves; 9 of 9 marks met.
+directives:
+- D1
+- D15
+- D2
+- D3
+- D4
+- D5
+- D6
+- D7
+- D8
+- D9
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - evaluation/stepwise_five_cases
+  - reasoning/stepwise_script
+  - runtime/declared_frames
+  - runtime/frame_declarations
+  - runtime/quantity_units
+  - runtime/stepwise
+  - runtime/stepwise_five
+  lean:
+  - DeclaredFrames
+  prose: DECLARED_FRAMES_STUDY.md
+  test:
+  - test_declared_frames.py
+  wheel: []
+follow_ups: []
+id: DECLARED_FRAMES_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Can the stepwise planner's fold frames be generated from a declaration rather than written by
+  hand, and can the widenings the last two rounds left be added as entries in that declaration without
+  answering anything wrongly?
+recomputed_by: '`glm_universal.runtime.stepwise_five.stepwise_five_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-objects
+  heading: 1. The objects
+- anchor: 2-declarations-written-before-any-code-of-the-round
+  heading: 2. Declarations — written before any code of the round
+- anchor: 3-what-was-built
+  heading: 3. What was built
+- anchor: 4-results
+  heading: 4. Results
+- anchor: 5-lean
+  heading: 5. Lean
+- anchor: 6-what-this-leaves
+  heading: 6. What this leaves
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Frames from a declaration: the stepwise planner''s folds generated from one table, and the widenings
+  written as entries in it'
+verdict: 'Yes: the stepwise planner''s fold frames are now generated from one declaration and read every
+  text of rounds one to five and of the router''s declared sets exactly as the hand-written readers did,
+  and the widenings rounds three and four left — further order statistics, superlatives and the top k,
+  bounds through a declared physical range, the present-rows parity count, the metals and the rare earths,
+  the remaining exact SI prefixes and the comparatives over the molecule table — are entries in that declaration,
+  with every declared case as declared and 0 wrong.'
+wobble_deps: []

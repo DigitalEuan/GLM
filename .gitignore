@@ -21,4 +21,4 @@ __pycache__/
 # it is rebuilt on first use (see STATUS.md, "Repository hygiene"), and
 # tests/test_repository_hygiene.py fails if any of it is tracked again or if a
 # tracked file grows past 10 MB.
-overlay/glm_universal/knowledge/_knowledge_cache/
+src/glm_universal/knowledge/_knowledge_cache/

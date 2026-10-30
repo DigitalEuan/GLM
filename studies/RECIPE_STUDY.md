@@ -275,12 +275,12 @@ the keys already decide and non-empty where they do not; and
 
 | piece | file |
 |---|---|
-| the description, and the 25 primitives | `overlay/glm_universal/recipe/spec.py` |
-| the one generic path | `overlay/glm_universal/recipe/build.py` |
-| the three descriptions | `overlay/glm_universal/recipe/descriptions.py` |
-| the measured result, and `ask` | `overlay/glm_universal/recipe/report.py` |
+| the description, and the 25 primitives | `glm_universal/recipe/spec.py` |
+| the one generic path | `glm_universal/recipe/build.py` |
+| the three descriptions | `glm_universal/recipe/descriptions.py` |
+| the measured result, and `ask` | `glm_universal/recipe/report.py` |
 | the report subject | `report recipe` (`runtime/session.py`, column 3 in `runtime/tct_engine.py`) |
 | the query kind | `derive <coordinate> of <object>` (`runtime/parser.py`) |
 | the machine-checked half | `RequestProject/GLM/Recipe.lean` |
-| the tests | `overlay/glm_universal/tests/test_recipe.py` (87 tests) |
+| the tests | `glm_universal/tests/test_recipe.py` (87 tests) |
 | the CLI cases | `report-recipe`, `derive-span-ratio-tea`, `derive-numerator-perfect-fifth`, `derive-euler-gradus`, `derive-undescribed-coordinate` |

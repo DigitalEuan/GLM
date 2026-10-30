@@ -1,0 +1,82 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 5 of 12 marks, 5 of 9 amended marks, 3 of 4 fix marks; after the fix 1,136 of 1,291 perturbed
+  runs hold and 0 slip (938 and 7 before, refusals read as refusals).
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - knowledge/friction
+  - knowledge/friction_study
+  - knowledge/friction_survey
+  - tests/test_friction
+  lean:
+  - Friction
+  prose: FRICTION_STUDY.md
+  test:
+  - test_friction.py
+  wheel: []
+follow_ups: []
+id: FRICTION_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 156
+predecessors: []
+question: Read through the owner's analogy of friction — tiny peaks and valleys that interact when there
+  is movement — which of the GLM's functions hold when the question is moved a little, does a continuation
+  that touches the whole prompt predict the next word better than the two-word patch, and does a reading
+  that sticks until the evidence clearly beats it change its mind less without reading worse?
+recomputed_by: '`glm_universal.knowledge.friction_study.friction_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-built
+  heading: 1. What is built
+- anchor: 2-the-rules-fixed-before-the-measurement
+  heading: 2. The rules, fixed before the measurement
+- anchor: 3-what-would-count-against
+  heading: 3. What would count against
+- anchor: 4-what-is-not-claimed
+  heading: 4. What is not claimed
+- anchor: 5-what-is-proved-before-the-measurement
+  heading: 5. What is proved before the measurement
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-what-came-out
+  heading: 7. What came out
+- anchor: 8-the-method-analogy-as-a-development-tool-the-owners-note
+  heading: '8. The method: analogy as a development tool (the owner''s note)'
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Friction: what holds when the question moves, and contact over the whole prompt'
+verdict: The GLM holds still under small surface movements and, when moved further, mostly sticks (refuses)
+  rather than slips (answers wrongly); the survey found two openings that slipped or stuck — doubled spaces
+  and a leading *can you tell me* — and `GLM.py` now settles both, after which no perturbed run slips;
+  contact over the whole prompt carries a real but small signal that helps only when loaded under the
+  two-token count, and static friction removes a reading's flip-flops but not its informative changes
+  of mind.
+wobble_deps: []

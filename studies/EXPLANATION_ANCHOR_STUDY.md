@@ -12,14 +12,14 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-Code: [`glm_universal/reasoning/explanation_anchors.py`](../overlay/glm_universal/reasoning/explanation_anchors.py),
-[`glm_universal/data_objects/nuclides.py`](../overlay/glm_universal/data_objects/nuclides.py),
-[`glm_universal/runtime/explanation_frames.py`](../overlay/glm_universal/runtime/explanation_frames.py),
-[`glm_universal/runtime/explanation_report.py`](../overlay/glm_universal/runtime/explanation_report.py),
-[`glm_universal/evaluation/explanation_cases.py`](../overlay/glm_universal/evaluation/explanation_cases.py),
-[`glm_universal/runtime/question_frames.py`](../overlay/glm_universal/runtime/question_frames.py).
-Tests: [`glm_universal/tests/test_explanations.py`](../overlay/glm_universal/tests/test_explanations.py).
-Lean: [`RequestProject/GLM/ExplanationAnchors.lean`](../overlay/glm_lean/RequestProject/GLM/ExplanationAnchors.lean).
+Code: [`glm_universal/reasoning/explanation_anchors.py`](../glm_universal/reasoning/explanation_anchors.py),
+[`glm_universal/data_objects/nuclides.py`](../glm_universal/data_objects/nuclides.py),
+[`glm_universal/runtime/explanation_frames.py`](../glm_universal/runtime/explanation_frames.py),
+[`glm_universal/runtime/explanation_report.py`](../glm_universal/runtime/explanation_report.py),
+[`glm_universal/evaluation/explanation_cases.py`](../glm_universal/evaluation/explanation_cases.py),
+[`glm_universal/runtime/question_frames.py`](../glm_universal/runtime/question_frames.py).
+Tests: [`glm_universal/tests/test_explanations.py`](../glm_universal/tests/test_explanations.py).
+Lean: [`RequestProject/GLM/ExplanationAnchors.lean`](../glm_lean/RequestProject/GLM/ExplanationAnchors.lean).
 
 ---
 
@@ -223,7 +223,7 @@ of 21; 3 of 3 disputes; 35 of 35 paraphrases; 5 of 35 held out, 0 misread;
 
 ## 6. Re-running it
 
-From `overlay/`:
+From ``:
 
 ```
 PYTHONPATH=. python3 -m glm_universal.tools explanations

@@ -213,7 +213,7 @@ Every tree word is a Golay codeword (136 words, 0 with a nonzero syndrome);
 `path` takes a different word on each of the 136 documents; distinct place
 words are at least 8 apart. **F2 asked that no place word name a single
 document, and 3 of the 61 place words do**: the only document with exactly
-three sections (`overlay/glm_universal/sandbox/README.md`) has three positions
+three sections (`glm_universal/sandbox/README.md`) has three positions
 no other document has. The leak is real but has no effect, since the place
 word changes no hit.
 

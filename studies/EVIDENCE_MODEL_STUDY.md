@@ -39,7 +39,7 @@ model, no replay and no mark had been computed.
 
 ## 1. The model
 
-`overlay/glm_universal/runtime/evidence.py`: a frozen `Result` with the ten
+`glm_universal/runtime/evidence.py`: a frozen `Result` with the ten
 fields (`FIELDS`), and four adapters that read a surface's own object without
 changing what it answered — `from_routed` (any verdict of the command line's
 router), `from_solution` (a solution of the planner or the grammar),

@@ -1,0 +1,77 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 8 sections, as in the sketch; Round 44.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - GolayTies
+  - LayerChain
+  - LayerStack
+  - LeechResidue
+  - MasterStep
+  - Niemeier
+  - Perspective
+  - ReadAngle
+  prose: RULE30_GLM_Escalation_Boundaries_Exploration_CORRECTED.md
+  test:
+  - test_rule30_glm_escalation_boundaries_exploration_corrected.py
+  wheel: []
+follow_ups: []
+id: RULE30_GLM_Escalation_Boundaries_Exploration_CORRECTED
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: What does the owner's escalation sketch say once every statement is checked?
+recomputed_by: (hand-written argument; nothing to recompute)
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-introduction-the-exploratory-stance
+  heading: 1. Introduction — the exploratory stance
+- anchor: 2-the-master-equation-re-examined
+  heading: 2. The Master Equation, re-examined
+- anchor: 3-the-five-layers-and-their-modular-escapements
+  heading: 3. The five layers and their modular escapements
+- anchor: 4-escalation-mechanics-from-binary-to-graded
+  heading: '4. Escalation mechanics: from binary to graded'
+- anchor: 5-complete-syndrome-decoding-at-the-deep-hole-boundary
+  heading: 5. Complete syndrome decoding at the deep-hole boundary
+- anchor: 6-the-unified-master-equation-corrected
+  heading: 6. The unified master equation (corrected)
+- anchor: 7-real-system-correspondences
+  heading: 7. Real-system correspondences
+- anchor: 8-improvements-and-open-questions-status-after-checking
+  heading: 8. Improvements and open questions (status after checking)
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The Geometric Language Machine: Escalation Boundaries, Modular Escapement, and Deep-Hole Syndrome
+  Decoding — corrected edition (Round 44)'
+verdict: The corrected edition keeps the sketch's sections and aims; each statement is kept, repaired
+  or replaced, and every claim has an evidence tag (FORMAL, CERT, CLASSICAL, REPORTED or PROPOSAL) and
+  its Lean name.
+wobble_deps: []

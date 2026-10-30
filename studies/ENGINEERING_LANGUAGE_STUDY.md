@@ -43,7 +43,7 @@ textbook physics), and both existing paths were run against it:
 
 ## 2. What was built
 
-`overlay/glm_universal/engineering/`, standard library only, exact
+`glm_universal/engineering/`, standard library only, exact
 throughout:
 
 | module | what it does |

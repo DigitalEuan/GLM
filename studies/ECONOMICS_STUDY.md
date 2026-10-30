@@ -173,10 +173,10 @@ in the package as it stands.
 
 | piece | file |
 |---|---|
-| the register, the record, the codec, the exact bucket | `overlay/glm_universal/data_objects/economics_register.py` |
-| the vectors, the sweep, the control, the verdict | `overlay/glm_universal/reasoning/economics.py` |
+| the register, the record, the codec, the exact bucket | `glm_universal/data_objects/economics_register.py` |
+| the vectors, the sweep, the control, the verdict | `glm_universal/reasoning/economics.py` |
 | the machine-checked bucket and the scaling argument | `RequestProject/GLM/LogBucket.lean` |
 | the report subject | `report economics` (`runtime/session.py`) |
 | the column-3 template | `_body_report_economics` (`runtime/tct_engine.py`) |
-| the tests | `overlay/glm_universal/tests/test_economics.py` |
+| the tests | `glm_universal/tests/test_economics.py` |
 | the catalogue entry it settles | §6.2, economic half (`reasoning/catalog.py`) |

@@ -1,0 +1,67 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 8 of 8 marks met; 164,051,805 pairs in 62 census groups with 28 distinct histograms;
+  the promise kept in 35 of 35 cells of the second reading; 245 cells classified; at 1/10 and floor 999/1000
+  the second reading keeps 0.9796 of its answers at residual 4.61e-5; 10 of 10 runtime programs as computed.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - Agree
+  prose: AGREE_CHANNEL_STUDY.md
+  test:
+  - test_agree_channel.py
+  wheel: []
+follow_ups: []
+id: AGREE_CHANNEL_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 80
+predecessors:
+- CONFIDENCE_FLOOR_STUDY
+question: Can the second reading (`agree`, two reads of one carrier) be given an exact channel measure,
+  so that it joins the confidence-floor hunt, and what does it add where the decoder alone has no working
+  floor?
+recomputed_by: '`glm_universal.reasoning.agree_channel_marks.agree_channel_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-declarations-written-before-the-module-that-measures-them
+  heading: 1. Declarations — written before the module that measures them
+- anchor: 2-results
+  heading: 2. Results
+- anchor: 3-what-this-round-moved-and-what-it-leaves
+  heading: 3. What this round moved, and what it leaves
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The second reading's channel — an exact measure for `agree`, and its place in the hunt
+verdict: 'The second reading has an exact channel measure: every pair of reads is counted in one census
+  of rate-independent integer tables, and in the hunt it has a working threshold at every declared rate
+  — 9999/10000 up to 1/20 and 999/1000 at 1/10, where the decoder alone has none. The owner''s expectation
+  holds; the seven-reading grid still has none at 1/10, because the decoder binds.'
+wobble_deps: []

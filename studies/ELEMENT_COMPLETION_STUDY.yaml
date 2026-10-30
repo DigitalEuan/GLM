@@ -1,0 +1,75 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Coverage rises from 1257 to 1442 of 1652 cells, the 210 that stay empty are 100 inputs
+  absent, 97 no admitted rule and 13 not derivable, and the register itself is unchanged.
+directives:
+- D7
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - tests/test_element_completion
+  lean:
+  - Completion
+  prose: ELEMENT_COMPLETION_STUDY.md
+  test:
+  - test_element_completion.py
+  wheel: []
+follow_ups: []
+id: ELEMENT_COMPLETION_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: The element register measures 1257 of its 1652 cells and leaves the rest blank. Can the blanks
+  be *decided* — filled where a rule earns it, and named as something specific where it does not — without
+  writing an estimate into the register?
+recomputed_by: '`glm_universal.reasoning.element_completion.element_completion_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-gap-as-it-stood
+  heading: 1. The gap as it stood
+- anchor: 2-the-rule-that-decides-whether-a-rule-is-allowed
+  heading: 2. The rule that decides whether a rule is allowed
+- anchor: 3-what-was-admitted
+  heading: 3. What was admitted
+- anchor: 4-what-was-refused-and-why-that-is-the-useful-half
+  heading: 4. What was refused, and why that is the useful half
+- anchor: 5-the-four-dispositions
+  heading: 5. The four dispositions
+- anchor: 6-what-is-not-done-to-the-register
+  heading: 6. What is not done to the register
+- anchor: 7-the-formal-side
+  heading: 7. The formal side
+- anchor: 8-how-to-re-run-it
+  heading: 8. How to re-run it
+- anchor: 9-limits
+  heading: 9. Limits
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Sparse chemistry: deciding every empty cell of the element register'
+verdict: 'Every empty cell is decided: 9 fields take a rule that beat the field''s own mean out of sample,
+  185 cells are filled by estimate, and each cell still empty carries one of three stated reasons.'
+wobble_deps: []

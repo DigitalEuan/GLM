@@ -20,9 +20,9 @@ recomputed here from the substrate the package already carries, so the audit is
 a measurement rather than a quotation, and a claim that stopped being true would
 fail the suite rather than age quietly in a paragraph.*
 
-Module: [`overlay/glm_universal/reasoning/salvage.py`](../overlay/glm_universal/reasoning/salvage.py)
+Module: [`glm_universal/reasoning/salvage.py`](../glm_universal/reasoning/salvage.py)
 — one call, `salvage_report()`, returns every section below.
-Tests: `overlay/glm_universal/tests/test_salvage.py` — 24 test methods.
+Tests: `glm_universal/tests/test_salvage.py` — 24 test methods.
 Specification: the eleven Lean files named in the table, by directive D8.
 Arithmetic: exact `int` and `Fraction` throughout (D7). The two archive scores
 that are irrational are returned as a **bracket**, never as a rounded decimal.

@@ -267,19 +267,19 @@ through a chain, by name, to every reading that needs it.
 
 ## 7. Files
 
-* `overlay/glm_lean/RequestProject/GLM/ToolValues.lean`, the proofs.
-* `overlay/glm_universal/runtime/tool_values.py`, the reader and the
+* `glm_lean/RequestProject/GLM/ToolValues.lean`, the proofs.
+* `glm_universal/runtime/tool_values.py`, the reader and the
   selectors.
-* `overlay/glm_universal/runtime/stepwise.py` (`Leaves._tool_value`,
+* `glm_universal/runtime/stepwise.py` (`Leaves._tool_value`,
   `TOOL_VALUES`, the label rule in `_build`) and
-  `overlay/glm_universal/reasoning/stepwise_script.py` (`tool_value` in the
+  `glm_universal/reasoning/stepwise_script.py` (`tool_value` in the
   column-3 script).
-* `overlay/glm_universal/runtime/router.py` (`_phrased_tool`).
-* `overlay/glm_universal/reasoning/rational_approx.py` and the two tools in
-  `overlay/glm_universal/runtime/toolbox.py`.
-* `overlay/glm_universal/evaluation/tool_values_cases.py`, the batteries and
+* `glm_universal/runtime/router.py` (`_phrased_tool`).
+* `glm_universal/reasoning/rational_approx.py` and the two tools in
+  `glm_universal/runtime/toolbox.py`.
+* `glm_universal/evaluation/tool_values_cases.py`, the batteries and
   `measure()`. `python3 -m glm_universal.tools tool-values` prints the marks.
-* `overlay/glm_universal/tests/test_tool_values.py`.
+* `glm_universal/tests/test_tool_values.py`.
 
 ### 7.1 What this round leaves
 

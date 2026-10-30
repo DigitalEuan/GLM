@@ -1,0 +1,89 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 10 of 10 marks met; 35 of 35 questions answered with the declared fragment (3 FULL, 32
+  with the account refused); 25 read a register; 35 of 35 scripts verified, script-claim 35 of 35 and
+  register-row 21 of 21 caught; 3 of 3 disputes; 35 of 35 paraphrases; 5 of 35 held-out rewordings, 0
+  misread; 0 of 279 other texts read; 3558 ground states, 253 stable; 15 named theorems, 0 `sorry`.
+directives:
+- D15
+evidence: []
+faculty: derivation
+file_refs:
+  code:
+  - data_objects/nuclides
+  - evaluation/explanation_cases
+  - reasoning/explanation_anchors
+  - runtime/explanation_frames
+  - runtime/explanation_report
+  - runtime/question_frames
+  - tests/test_explanations
+  lean:
+  - ExplanationAnchors
+  prose: EXPLANATION_ANCHOR_STUDY.md
+  test:
+  - test_explanation_anchor.py
+  wheel: []
+follow_ups: []
+id: EXPLANATION_ANCHOR_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 107
+predecessors:
+- DERIVATION_TWO_STUDY
+- QUESTION_SET_B_STUDY
+question: 'Thirty-two of the outside questions (class E of the Capability Failure Matrix, track E of `QUESTION_SET_B_STUDY.md`
+  §8) ask *why*: why helium is inert, why technetium has no stable isotope, why beryllium-8 falls apart,
+  why a series RLC circuit turns inductive above resonance, why material implication is paradoxical. Three
+  more (29, 39 and 96) were refused by Phase 107 as accounts rather than derivations. Can the machine
+  answer the part of each that a register or an exact derivation decides, refuse the rest by name, and
+  say so when a register contradicts the question''s premise?'
+recomputed_by: '`glm_universal.runtime.explanation_report.explanation_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-what-was-added
+  heading: 1. What was added
+- anchor: 2-the-marks
+  heading: 2. The marks
+- anchor: 3-what-is-answered-and-what-is-refused
+  heading: 3. What is answered, and what is refused
+- anchor: 4-faculty
+  heading: 4. Faculty
+- anchor: 5-limits-and-what-the-round-leaves
+  heading: 5. Limits, and what the round leaves
+- anchor: 6-re-running-it
+  heading: 6. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Explanations anchored in the registers
+verdict: Yes for the thirty-five declared questions, with a large recognition gap on rewordings. Every
+  one is read by its declared topic and answered with values read from the element register or a new nuclide
+  register (AME2020 and NUBASE2020) or with an exact derivation, every causal or philosophical account
+  it asks for is stated as refused EXPLANATION, three register contradictions are reported as disputed
+  premises, and every answer carries a column-3 script that fails when its claim or a register row is
+  altered. All ten marks were met, but only five of thirty-five held-out rewordings were read; none was
+  read by a wrong topic.
+wobble_deps: []

@@ -1,0 +1,86 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 7 of 7 measured marks and L1; 2362 certified points of 2982, 0 head disagreements, 0
+  gap violations, 0 origin violations; of 620 refused points the head is the origin 441, tied 128, another
+  carrier 51; battery 8/8 as declared, reads sound 5/5, column 3 8/8, mutants 16/16 rejected; 0 unguarded
+  ladder readings over 212 questions; frozen path 202/202 same status, 199 same text.
+directives: []
+evidence: []
+faculty: addressing
+file_refs:
+  code:
+  - reasoning/budget_guard_frozen
+  - reasoning/nearest_address
+  - reasoning/nearest_address_study
+  - runtime/parser
+  - tests/test_nearest_address
+  lean:
+  - NearestAddress
+  prose: NEAREST_ADDRESS_STUDY.md
+  test:
+  - test_nearest_address.py
+  wheel: []
+follow_ups: []
+id: NEAREST_ADDRESS_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 148
+predecessors:
+- BUDGET_READING_STUDY
+- COUNTER_LASSO_STUDY
+question: Can the `nearest` kind rank a point no register holds — a moved carrier or 24 exact coordinates
+  — against the construction ladder's carriers, with the guarded read certifying the head of the ranking
+  and the gap after it, while no unguarded reading of the ladder remains anywhere in the answering path?
+recomputed_by: '`glm_universal.reasoning.nearest_address_study.nearest_address_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved-before-any-code
+  heading: 1. What is proved before any code
+- anchor: 2-the-rule
+  heading: 2. The rule
+- anchor: 3-the-sets-and-the-questions-declared-here
+  heading: 3. The sets and the questions, declared here
+- anchor: 4-the-marks-declared-before-the-measurement
+  heading: 4. The marks, declared before the measurement
+- anchor: 5-what-this-round-does-not-do
+  heading: 5. What this round does not do
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-what-came-out
+  heading: 7. What came out
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The guarded read in `nearest` — a point no register holds, ranked and certified
+verdict: 'Yes. `nearest` now ranks a moved carrier or 24 exact coordinates against the 142 carriers of
+  the address table, and the guarded read certifies the head and the gap after it. On every point of the
+  six sets that the read answers, the head of the ranking is the read''s answer, no other carrier is inside
+  the reported margin, and a certified origin is in the head. Over the whole evaluation, no unguarded
+  reading of the construction ladder is called. The frozen path keeps all 202 statuses. 7 of 7 measured
+  marks were met, and L1 by the build. The pre-registration''s predicted count of certified points was
+  wrong, though the marks hold: it quoted a mis-summed point total and the plain read''s answers, where
+  the path reads with the junction read.'
+wobble_deps: []

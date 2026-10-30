@@ -1,0 +1,78 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: The tie class enumerated exactly, with what the tie-break provably cannot touch stated
+  beside what it can.
+directives:
+- D2
+evidence: []
+faculty: addressing
+file_refs:
+  code:
+  - reasoning/analogy
+  - reasoning/llvq_table
+  - reasoning/stability
+  - reasoning/tie_break
+  - tests/test_tie_break
+  lean:
+  - TieBreak
+  prose: TIE_BREAK_STUDY.md
+  test:
+  - test_tie_break.py
+  wheel: []
+follow_ups: []
+id: TIE_BREAK_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 27
+predecessors: []
+question: What is a nearest-point tie, and what does breaking it by index cost?
+recomputed_by: '`glm_universal.reasoning.tie_break.tie_break_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-question-and-where-it-came-from
+  heading: 1. The question, and where it came from
+- anchor: 2-the-tie-class-enumerated-exactly
+  heading: 2. The tie class, enumerated exactly
+- anchor: 3-the-census
+  heading: 3. The census
+- anchor: 4-the-rule-stated-clause-by-clause
+  heading: 4. The rule, stated clause by clause
+- anchor: 5-what-the-tie-break-provably-cannot-touch
+  heading: 5. What the tie-break provably cannot touch
+- anchor: 6-what-it-can-touch-and-by-how-much
+  heading: 6. What it can touch, and by how much
+- anchor: 7-why-not-simply-avoid-the-ties
+  heading: 7. Why not simply avoid the ties?
+- anchor: 8-what-is-proved-and-what-is-only-measured
+  heading: 8. What is proved, and what is only measured
+- anchor: 9-what-this-licenses-and-what-it-does-not
+  heading: 9. What this licenses, and what it does not
+- anchor: 10-reproducing-every-number-here
+  heading: 10. Reproducing every number here
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The tie-break: the part of an address that geometry does not decide'
+verdict: Most of this development's Leech addresses are not unique.
+wobble_deps: []

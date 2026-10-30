@@ -78,7 +78,7 @@ the smaller contract change (A 0, B and C 1, D 2).
 
 ## 3. The matrix
 
-`PYTHONPATH=. python3 -m glm_universal.tools contract-matrix` from `overlay/`
+`PYTHONPATH=. python3 -m glm_universal.tools contract-matrix` from ``
 (about two minutes):
 
 | variant | frame I broken (on grid, at 1/5) | frame I worst residual/(1−t) | frame II broken (on grid, at 1/5) | frame II worst on grid | retention S=20 at 1/20, floor 999/1000 | at 1/10 | mean on-grid retention | prior promise broken |

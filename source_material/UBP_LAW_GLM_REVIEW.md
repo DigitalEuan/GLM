@@ -7,7 +7,7 @@ from the audit data — no figure in this document is typed in by hand.
 | | |
 |---|---|
 | **Review target** | `LAW_*` entries of `ubp_system_kb.json` (UBP_Repo `core_studio_v4.0/system_kb`, 426 records / 425 distinct ids) |
-| **Review instrument** | GLM system (`DigitalEuan/GLM`, `overlay/glm_universal` v5.37): `reasoning.coherence` (exact-rational NRCI) + `substrate.golay_decode` (complete syndrome decoding) |
+| **Review instrument** | GLM system (`DigitalEuan/GLM`, `glm_universal` v5.37): `reasoning.coherence` (exact-rational NRCI) + `substrate.golay_decode` (complete syndrome decoding) |
 | **Current round** | Round 1 — 2026-09-27 |
 | **Companions** | `older_law_audit.csv` (flat register), `older_law_audit.json` (full records incl. vectors, shells, footprints) |
 
@@ -617,7 +617,7 @@ python3 /home/z/my-project/scripts/glm_law_audit.py     # writes CSV+JSON, print
 python3 /home/z/my-project/scripts/anomaly_detail.py    # attention-set detail
 python3 /home/z/my-project/scripts/cohort_stats.py      # cohort aggregates
 
-# GLM instruments used (from DigitalEuan/GLM, overlay/)
+# GLM instruments used (from DigitalEuan/GLM, )
 PYTHONPATH=overlay python3 -c \
   "from glm_universal.reasoning import coherence; \
    from glm_universal.substrate import golay_decode; \

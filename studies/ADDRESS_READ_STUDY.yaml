@@ -1,0 +1,91 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 10 of 10 marks (L1, A1, A2, A3, A4, O1, C1, T1, Q1, W1); correct/wrong 445/0, 402/0,
+  393/0, 402/0 on the four sets and 402/0 on the fifth (unguarded ladder 433/4); clean set 125 answered,
+  0 wrong, 17 refused, 15 of them exact duplicate carriers; 12 of 12 tamperings refused; 0 of 195 evaluation
+  cases read as `locate` other than the 7 new ones.
+directives:
+- D12
+- D4
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - reasoning/address_read
+  - reasoning/address_read_study
+  - runtime/session
+  - runtime/tct_engine
+  - runtime/toolbox
+  - tests/test_address_read
+  lean:
+  - AddressRead
+  - PlacementGuard
+  prose: ADDRESS_READ_STUDY.md
+  test:
+  - test_address_read.py
+  wheel: []
+follow_ups: []
+id: ADDRESS_READ_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 129
+predecessors:
+- COUNTER_LASSO_STUDY
+- PLACEMENT_GUARD_STUDY
+question: Can the GLM answer a question by reading a carrier off the construction ladder by its address
+  — a point in, a named carrier out — with every answer certified by the placement guard from a stored
+  table kept beside the digest of the carriers it came from, without changing any answer the evaluation
+  already pins?
+recomputed_by: '`glm_universal.reasoning.address_read_study.address_read_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved-before-any-code
+  heading: 1. What is proved before any code
+- anchor: 2-the-rule
+  heading: 2. The rule
+- anchor: 3-the-sets-and-the-questions-declared-here
+  heading: 3. The sets and the questions, declared here
+- anchor: 4-the-marks-declared-before-the-code
+  heading: 4. The marks, declared before the code
+- anchor: 5-what-this-round-does-not-do
+  heading: 5. What this round does not do
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-what-came-out
+  heading: 7. What came out
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The address read — a ladder carrier read by its address, under the placement guard
+verdict: Yes. A new query kind, `locate`, reads a carrier off the construction ladder by its address and
+  answers only under the placement guard, from a stored table that refuses to load when any of its three
+  digests fails. On the four sets of Phase 129 it answers exactly what the measurement-only read answered,
+  query by query (445, 402, 393 and 402 correct, 0 wrong); on a fifth set generated after the pre-registration
+  it answers 402 and refuses 166 with 0 wrong, where the unguarded ladder answers 4 wrongly; every one
+  of its 2,169 answers is the strictly nearest carrier by a full scan, with its margin honest and its
+  origin certified; all twelve tamperings of the table are refused; and the evaluation's earlier cases
+  keep their verdicts.
+wobble_deps: []

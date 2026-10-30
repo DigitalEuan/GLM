@@ -40,7 +40,7 @@ the record says so.
 2. *Committed with this document:* the ladder register itself — the 97 terms,
    the declared composition of each, the declared projection onto the
    Geometric–Cybernetic ladder and the declared cross-overs — as data in
-   `overlay/glm_universal/reasoning/ops_ladder.py`, with no code that
+   `glm_universal/reasoning/ops_ladder.py`, with no code that
    measures it; and `RequestProject/GLM/OperationsLadder.lean`, written and
    built first.
 3. **No script of the battery below had been run, and no relation, projection
@@ -338,13 +338,13 @@ Worked by hand from the declared compositions:
 ## 6. Files
 
 * `RequestProject/GLM/OperationsLadder.lean` — O1.
-* `overlay/glm_universal/reasoning/ops_ladder.py` — the register (data
+* `glm_universal/reasoning/ops_ladder.py` — the register (data
   committed with this document), the relation reader, the carrier and codec.
-* `overlay/glm_universal/reasoning/batch_machine.py` — GLM-BAT: reader,
+* `glm_universal/reasoning/batch_machine.py` — GLM-BAT: reader,
   machine, certificates, idempotence, drift, pipelines, unreachable lines.
-* `overlay/glm_universal/reasoning/batch_speech.py` — the sentences, the
+* `glm_universal/reasoning/batch_speech.py` — the sentences, the
   reader of sentences, the questions, and the column-3 transpiler.
-* `overlay/glm_universal/reasoning/operations.py` — the battery and the
+* `glm_universal/reasoning/operations.py` — the battery and the
   report; `python3 -m glm_universal.tools operations`.
 * Tools `tool ladder …` and `tool machine …` on the connected path.
 * Tests: `test_operations.py`.

@@ -1,0 +1,86 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Information inequalities 9 of 9, rate-distortion sources 6 of 6, Robin problems 10 of
+  10, refusals 6 of 6; 25 of 25 scripts verify and 25 of 25 mutants rejected; 40 random five-variable
+  claims (8 proved, 11 proved past Shannon, 12 not valid, 1 refuted by an entropic law, 8 left undecided),
+  0 unsound, 0 inconsistent; 60 random sources (12 with D_min = D_max, 13 Hamming), 0 failures; 40 random
+  Robin problems, 0 failures; Phase 118 10 of 10, 0 of 304 other texts moved; marks P1–P10 met.
+directives:
+- D15
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - evaluation/derivation_four_cases
+  lean:
+  - CopyLemma
+  - RobinBoth
+  prose: DERIVATION_FOUR_STUDY.md
+  test:
+  - test_derivation_four.py
+  wheel: []
+follow_ups: []
+id: DERIVATION_FOUR_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 118
+predecessors:
+- DERIVATION_THREE_STUDY
+question: Can the GLM close the four lines the third derivation study left (its §6) — the copy lemma itself
+  in Lean, information inequalities that need more than Zhang–Yeung or have five variables, rate distortion
+  for distortions other than Hamming, and Robin problems at both ends, with a symbolic coefficient or
+  with no decimals on a symbolic interval — with a derivation a stand-alone script re-decides, while what
+  it still cannot do stays refused by name?
+recomputed_by: '`glm_universal.runtime.derivation_four_report.derivation_four_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-declarations-committed-before-the-reasoning-code
+  heading: 1. Declarations — committed before the reasoning code
+- anchor: 2-what-was-added
+  heading: 2. What was added
+- anchor: 3-results
+  heading: 3. Results
+- anchor: 4-notes-on-the-way
+  heading: 4. Notes on the way
+- anchor: 5-what-is-proved
+  heading: 5. What is proved
+- anchor: 6-limits
+  heading: 6. Limits
+- anchor: 7-what-the-round-moved
+  heading: 7. What the round moved
+- anchor: 8-re-running
+  heading: 8. Re-running
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Past the third derivation study: the copy lemma in Lean, chained copies, five variables, any distortion
+  matrix, Robin at both ends'
+verdict: 'Yes, within the declared operations: the copy lemma and Zhang–Yeung are proved in Lean for every
+  finite distribution, every declared case came out as declared, every answer verifies by its own script
+  and every mutated claim is rejected by it, the three batteries are sound, the four Phase 118 refusals
+  this round answers were narrowed as declared, nothing else the machine answers moved, and none of Phase
+  118''s three undecided battery claims is decided by two copies. 10 of 10 marks met.'
+wobble_deps: []

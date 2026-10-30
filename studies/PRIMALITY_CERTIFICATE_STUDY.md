@@ -150,7 +150,7 @@ names that cofactor.
 ## 5. The measurement
 
 `PYTHONPATH=. python3 -m glm_universal.tools primality-certificates`
-(from `overlay/`):
+(from ``):
 
 ```
 P1 Lean           RequestProject/GLM/PrimalityCertificate.lean: missing [], sorry False
@@ -227,16 +227,16 @@ cofactor that rho does not split within the budget.
 
 ## 7. Files
 
-* `overlay/glm_lean/RequestProject/GLM/PrimalityCertificate.lean` — the
+* `glm_lean/RequestProject/GLM/PrimalityCertificate.lean` — the
   theorems of §2.
-* `overlay/glm_universal/reasoning/primality_certificate.py` — the certifier
+* `glm_universal/reasoning/primality_certificate.py` — the certifier
   and the checker.
-* `overlay/glm_universal/runtime/stepwise.py` — the step, the control and the
+* `glm_universal/runtime/stepwise.py` — the step, the control and the
   refusal precedence; `reasoning/stepwise_script.py` — the step gate and
   column 3's own certificate reader.
-* `overlay/glm_universal/evaluation/primality_certificate_cases.py` — the
+* `glm_universal/evaluation/primality_certificate_cases.py` — the
   held-out set and the measurement; `tools primality-certificates` prints it.
-* `overlay/glm_universal/tests/test_primality_certificate.py` — 15 tests.
+* `glm_universal/tests/test_primality_certificate.py` — 15 tests.
 
 ### 7.1 What this round leaves
 

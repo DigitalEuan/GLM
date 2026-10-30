@@ -1,0 +1,85 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 3 declared families, 2 of them shipped; 7 refinement edges checked and 2 declared non-edges
+  witnessed; 0 defects.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - tests/test_cumulativity
+  lean:
+  - CumulativityRule
+  prose: CUMULATIVITY_STUDY.md
+  test:
+  - test_cumulativity.py
+  wheel: []
+follow_ups: []
+id: CUMULATIVITY_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: 'The information-loss round found a real design flaw by asking
+
+  whether a layer refines the one below it, and the flaw was reported rather than
+
+  quietly patched. Can that question be turned from an inspection anyone might
+
+  run into a condition every layer family has to satisfy before it ships — and
+
+  does the rule, once written down, keep a cumulativity failure distinct from a
+
+  conflation, whose remedy is different?'
+recomputed_by: '`glm_universal.reasoning.cumulativity.cumulativity_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0a-the-reading-in-one-paragraph
+  heading: 0a. The reading in one paragraph
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-the-rule
+  heading: 1. The rule
+- anchor: 2-why-refinement-is-the-right-property
+  heading: 2. Why refinement is the right property
+- anchor: 3-what-a-conflation-is-and-why-it-is-not-a-defect
+  heading: 3. What a conflation is, and why it is not a defect
+- anchor: 4-the-declared-families
+  heading: 4. The declared families
+- anchor: 5-edge-by-edge
+  heading: 5. Edge by edge
+- anchor: 6-what-each-rung-cannot-see
+  heading: 6. What each rung cannot see
+- anchor: 7-what-this-study-does-not-do
+  heading: 7. What this study does not do
+- anchor: 8-how-to-re-take-every-number
+  heading: 8. How to re-take every number
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Cumulativity as a shipping condition — a layer arrives with its check
+verdict: Yes on both counts. Three declared layer families are checked here, seven refinement edges hold
+  on their probe sets, two declared non-edges are witnessed, no shipped family carries a defect, and the
+  conflations each rung inflicts are reported beside the edges as resolutions rather than as defects.
+wobble_deps: []

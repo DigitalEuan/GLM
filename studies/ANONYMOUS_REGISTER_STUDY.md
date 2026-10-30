@@ -59,10 +59,10 @@ those belong to the language and to Mathlib rather than to this development.
 All four hold. Every table below is a **generated block**, emitted from the
 measurement cache that `python3 -m glm_universal.corpus --remeasure` fills,
 guarded by the digest of the Lean sources it was taken from. The formal half is
-[`RequestProject/GLM/Anonymous.lean`](../overlay/glm_lean/RequestProject/GLM/Anonymous.lean);
+[`RequestProject/GLM/Anonymous.lean`](../glm_lean/RequestProject/GLM/Anonymous.lean);
 the computational half is `glm_universal.reasoning.anonymous`; the test that
 pins the two against each other is
-`overlay/glm_universal/tests/test_anonymous.py`; and the report prints with
+`glm_universal/tests/test_anonymous.py`; and the report prints with
 
 ```bash
 cd overlay
@@ -81,16 +81,7 @@ corpus, the relevance ground truth, the depth each faculty is read to and the
 window it is scored at are all the relay study's.
 
 <!-- generated: anonymous-faculties -->
-| faculty | hit@5, names kept | hit@5, names replaced |
-|---|---|---|
-| text — exact overlap of the identifiers | 693 (82.3 %) | 53 (6.3 %) |
-| lexical — the identifier address book | 340 (40.4 %) | 30 (3.6 %) |
-| **address — the structural address book** | 145 (17.2 %) | 144 (17.1 %) |
-| name — substring search over the names | 190 (22.6 %) | 4 (0.5 %) |
-| digest — a control that knows nothing | 26 (3.1 %) | 24 (2.9 %) |
-| random — a seeded permutation | 13 (1.5 %) | 13 (1.5 %) |
-
-842 queries over a corpus of 5893 declarations; chance at k = 5 is 2.8 %.  The text search collapses: yes; the identifier address book collapses with it: yes; the structural address holds: yes; and it leads every other faculty in this register: yes.
+The stored measurements of the formal development do not describe the Lean tree as it now stands (`stale`), so nothing is reported here rather than a figure taken from a tree that has moved.  Run `python3 -m glm_universal.corpus --remeasure`.
 <!-- end generated -->
 
 In numbers, and as a sentence rather than a table: take the names away and the
@@ -136,13 +127,7 @@ it against the **shipped** feature map, coordinate by coordinate, on every
 query.
 
 <!-- generated: anonymous-invariance -->
-| reading | queries | what it means |
-|---|---|---|
-| queries whose syntax coordinates are untouched | 842 | 100.0 % of 842 |
-| queries where a type-word coordinate moves | 0 | the declaration's own name spells `Nat`, `Int`, `Rat`, `Set` or `Decidable`, and the shipped map counts those words wherever they occur |
-| queries where any other syntax coordinate moves | 0 | none, which is `GLM.Anonymous.features_anonymise` holding of the code |
-
-The declared vocabulary a query keeps is 39 words.  Placeholders fresh against the corpus: yes.
+The stored measurements of the formal development do not describe the Lean tree as it now stands (`stale`), so nothing is reported here rather than a figure taken from a tree that has moved.  Run `python3 -m glm_universal.corpus --remeasure`.
 <!-- end generated -->
 
 That middle row is an audit finding rather than a rounding error, and it is
@@ -166,12 +151,7 @@ The gate is the relay study's gate, `1/10`, unchanged. Nothing in the stack was
 told that this register exists.
 
 <!-- generated: anonymous-relay -->
-| reading | queries | gate fires on | text alone, hit@5 | the relay, hit@5 |
-|---|---|---|---|---|
-| names kept | 842 | 24 | 693 (82.3 %) | **695 (82.5 %)** |
-| names replaced | 842 | 520 | 53 (6.3 %) | **100 (11.9 %)** |
-
-The gate is 1/10, the one the relay study already carries, not re-tuned for this register.  It hands over on most of the register: yes; and the relay beats the text leader here: yes.
+The stored measurements of the formal development do not describe the Lean tree as it now stands (`stale`), so nothing is reported here rather than a figure taken from a tree that has moved.  Run `python3 -m glm_universal.corpus --remeasure`.
 <!-- end generated -->
 
 The hand-over is a theorem in the limit case: `GLM.Anonymous.relay_hands_over`
@@ -187,20 +167,7 @@ it.
 ## 4. Every claim, as it fell
 
 <!-- generated: anonymous-verdict -->
-| claim | verdict |
-|---|---|
-| `address_holds` | holds |
-| `address_is_above_twice_chance` | holds |
-| `address_is_the_clear_leader` | holds |
-| `address_stays_above_the_control` | holds |
-| `gate_hands_over` | holds |
-| `lexical_collapses_too` | holds |
-| `only_the_type_vocabulary_moves` | holds |
-| `placeholders_are_fresh` | holds |
-| `relay_beats_text_in_the_register` | holds |
-| `text_collapses_without_the_names` | holds |
-| `text_is_within_twice_chance` | **fails** |
-| `text_leads_when_the_names_are_there` | holds |
+The stored measurements of the formal development do not describe the Lean tree as it now stands (`stale`), so nothing is reported here rather than a figure taken from a tree that has moved.  Run `python3 -m glm_universal.corpus --remeasure`.
 <!-- end generated -->
 
 **One claim moves with the corpus (Phases 81–82, 84, 85, 87, 91, 92, 103, 105, 108, 113, 119 and 122).** The query set

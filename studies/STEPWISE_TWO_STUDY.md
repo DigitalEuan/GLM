@@ -88,7 +88,7 @@ Exact throughout (D7), no digest decides a meaning (D3).
 ## 2. Declarations — written before any code of the round
 
 The corpus is
-[`evaluation/stepwise_two_cases.py`](../overlay/glm_universal/evaluation/stepwise_two_cases.py),
+[`evaluation/stepwise_two_cases.py`](../glm_universal/evaluation/stepwise_two_cases.py),
 committed with this section and before any code: 21 frame questions (16 to be
 answered, 5 refused by name), 18 unit questions (12 answered, 6 refused), 14
 register questions (7 answered, 7 refused), 2 narratives and 2 follow-ups.
@@ -114,7 +114,7 @@ and so rejected a right chain.
 
 ## 3. What was built
 
-* [`runtime/quantity_units.py`](../overlay/glm_universal/runtime/quantity_units.py)
+* [`runtime/quantity_units.py`](../glm_universal/runtime/quantity_units.py)
   — the declared unit table: spelled-out unit names with an exact SI factor
   and a symbol whose dimension is *derived* by
   `reasoning.units.dimension_of_symbol` (so the volt's dimension comes from
@@ -125,7 +125,7 @@ and so rejected a right chain.
   Fahrenheit); and `scale_into_si`, which carries a Phase 55 scale into SI (a
   kelvin is SI, a picometre is 10⁻¹² m, the unified atomic mass unit has no
   exact factor).
-* [`runtime/stepwise.py`](../overlay/glm_universal/runtime/stepwise.py) —
+* [`runtime/stepwise.py`](../glm_universal/runtime/stepwise.py) —
   the three frames (`_difference_readings`, the parity predicate,
   `_mean_readings`) with the steps `mean`, `parity` and the guarded
   difference; `parse_goal_two` and `goal_two`, which read givens written
@@ -135,20 +135,20 @@ and so rejected a right chain.
   (`_goal_core`). A question takes the round-two goal path only when it uses
   a round-two feature; every round-one question takes round one's path
   (`ROUND_TWO` switches the round off for the control).
-* [`reasoning/stepwise_script.py`](../overlay/glm_universal/reasoning/stepwise_script.py)
+* [`reasoning/stepwise_script.py`](../glm_universal/reasoning/stepwise_script.py)
   — the column-1 templates, column-2 equations and readers of the five new
   step kinds (`measured`, `si`, `unit_out`, `parity`, `mean`); the chain's
   script re-reads each unit or scale from the declared tables, re-derives
   the factor and the dimension check itself, re-reads the question for every
   amount and unit, and checks that a conversion is of the unit (or register
   entry) it claims; the sixth mutation `unit-lie`.
-* [`runtime/stepwise_two.py`](../overlay/glm_universal/runtime/stepwise_two.py)
+* [`runtime/stepwise_two.py`](../glm_universal/runtime/stepwise_two.py)
   — the measurement (`stepwise_two_report`) and both controls; `tools
   stepwise-two`; `tests/test_stepwise_two.py`.
 * **Wiring.** Nothing new: the router already hands a planner refusal to the
   stepwise planner, so every new question is reachable from `GLM.py --ask`
   and `GLM.py --steps`, with its three columns and `--verify-tct`.
-* [`RequestProject/GLM/StepwiseFrames.lean`](../overlay/glm_lean/RequestProject/GLM/StepwiseFrames.lean)
+* [`RequestProject/GLM/StepwiseFrames.lean`](../glm_lean/RequestProject/GLM/StepwiseFrames.lean)
   — §5.
 
 ## 4. Results

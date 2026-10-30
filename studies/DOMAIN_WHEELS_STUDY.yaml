@@ -1,0 +1,147 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 3 of 5 marks (D2, D4, D5 met; D1, D3 missed); battery 21 of 23 answered and 9 of 9 refused,
+  0 wrong; census 54 of 200 gained answers are declared laws.
+directives:
+- D1
+- D2
+- D3
+- D4
+- D5
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - engineering/domains
+  - evaluation/domain_cases
+  - tests/test_domains
+  lean:
+  - ConnectedMachine
+  - DomainWheels
+  prose: DOMAIN_WHEELS_STUDY.md
+  test:
+  - test_domain_wheels.py
+  wheel: []
+follow_ups: []
+id: DOMAIN_WHEELS_STUDY
+junctions:
+- rule: velocity
+  study: ''
+  wheels:
+  - W5
+  - W11
+- rule: mass
+  study: ''
+  wheels:
+  - W5
+  - W12
+- rule: mass
+  study: ''
+  wheels:
+  - W6
+  - W12
+- rule: length
+  study: ''
+  wheels:
+  - W11
+  - W12
+- rule: frequency
+  study: ''
+  wheels:
+  - W9
+  - W13
+- rule: mass
+  study: ''
+  wheels:
+  - W5
+  - W13
+- rule: mass
+  study: ''
+  wheels:
+  - W3
+  - W14
+- rule: current
+  study: ''
+  wheels:
+  - W1
+  - W14
+- rule: current
+  study: ''
+  wheels:
+  - W1
+  - W15
+- rule: charge
+  study: ''
+  wheels:
+  - W3
+  - W15
+- rule: angular_frequency
+  study: ''
+  wheels:
+  - W13
+  - W14
+- rule: time
+  study: ''
+  wheels:
+  - W11
+  - W15
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 157
+predecessors: []
+question: Which domains does the machine most visibly lack, measured by the physical quantities its own
+  evaluation questions name that no formula wheel holds, and does adding wheels for them, joined to the
+  ten wheels only at declared junctions, derive the laws of those domains without letting a shared name
+  smuggle in a wrong formula?
+recomputed_by: '`glm_universal.engineering.domains.domains_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-built
+  heading: 1. What is built
+- anchor: 2-the-rules-fixed-before-the-measurement
+  heading: 2. The rules, fixed before the measurement
+- anchor: 3-what-would-count-against
+  heading: 3. What would count against
+- anchor: 4-what-is-not-claimed
+  heading: 4. What is not claimed
+- anchor: 5-what-is-proved-before-the-measurement
+  heading: 5. What is proved before the measurement
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-what-came-out
+  heading: 7. What came out
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Domain wheels: five more formula wheels, chosen from what the evaluation asks for, with their
+  junctions'
+verdict: Five domain wheels — uniform motion; density, volume and amount; period and the mass-spring oscillator;
+  inductors and the LC circuit; charge and energy over time — joined to the ten wheels at ten declared
+  junctions answer 21 of 23 declared questions with the declared law and refuse all 9 declared refusals,
+  with no wrong answer; the two misses are refusals, because an energy from a power and a time is also
+  a capacitor's stored energy across the charge junction; the census of the union shows the frequency-and-angle
+  junction between waves and the oscillator makes angular frequency and angular velocity one quantity,
+  and most of the new answers it gives are not among the declared laws.
+wobble_deps: []

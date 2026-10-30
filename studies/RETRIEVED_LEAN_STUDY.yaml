@@ -1,0 +1,91 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 25 files of Lean came back from the archive, mirrored in the overlay and checked by `lake
+  build`.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - tests/test_retrieved_lean
+  lean:
+  - AlignmentPoints
+  - Calibration
+  - Code
+  - Constants
+  - Decoder
+  - Facets
+  - FactorMap
+  - FitCapacity
+  - Foundations
+  - Gen2
+  - Gen3
+  - Golay
+  - GolayWeights
+  - GrayCode
+  - HexTiles
+  - Layers
+  - Leech
+  - Packing
+  - ReasoningLoop
+  - SeedLayers
+  - Shortcut
+  - SpatialArithmetic
+  - Stabiliser
+  - StepCost
+  - Substrate
+  - Surface
+  - Tax
+  - Three
+  - Triad
+  prose: RETRIEVED_LEAN_STUDY.md
+  test:
+  - test_retrieved_lean.py
+  wheel: []
+follow_ups: []
+id: RETRIEVED_LEAN_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: What did the supplied archive still have to offer, and what of it is a theorem?
+recomputed_by: '`glm_universal.reasoning.salvage.salvage_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-discipline-this-round-was-held-to
+  heading: 1. The discipline this round was held to
+- anchor: 2-what-came-back-file-by-file
+  heading: 2. What came back, file by file
+- anchor: 3-what-the-retrieval-is-worth-counted-rather-than-asserted
+  heading: 3. What the retrieval is worth, counted rather than asserted
+- anchor: 4-what-was-examined-and-not-retrieved
+  heading: 4. What was examined and not retrieved
+- anchor: 5-reproducing-this
+  heading: 5. Reproducing this
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: What was left behind in the archive, and what of it is a theorem
+verdict: What each script claimed, what is now proved, and the nine claims that turned out to be false.
+wobble_deps: []

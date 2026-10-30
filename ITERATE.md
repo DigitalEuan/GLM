@@ -6,13 +6,13 @@
 
 **Verdict.** Orient from four short reads, run the cheapest gate that could fail, and close the round with one incremental command: write the finding down, refresh, check, `signoff --close`.
 
-**Deciding figure.** The suite is <!--figure:test-files-->226 test files<!--/figure--> and 7 instruments, each signed against a digest of everything it depended on, so a change re-runs what it touched rather than all of it.
+**Deciding figure.** The suite is <!--figure:test-files-->219 test files<!--/figure--> and 7 instruments, each signed against a digest of everything it depended on, so a change re-runs what it touched rather than all of it.
 
 **Recomputed by.** `glm_universal.signoff.ledger.plan`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-*Last altered 20 October 2026.*
+*Last altered 29 October 2026.*
 
 ---
 
@@ -48,10 +48,10 @@ line instead of failing every unit.
 Then run this and follow what it says.
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.corpus --check     # is the tree as the last round left it?  ~3 s if nothing moved
-PYTHONPATH=. python3 -m glm_universal.signoff --verify    # which units and instruments are still signed
-PYTHONPATH=. python3 -m glm_universal.signoff --why       # if anything is stale: which kind of file moved
+cd src
+PYTHONPATH=src python3 -m glm_universal.corpus --check     # is the tree as the last round left it?  ~3 s if nothing moved
+PYTHONPATH=src python3 -m glm_universal.signoff --verify    # which units and instruments are still signed
+PYTHONPATH=src python3 -m glm_universal.signoff --why       # if anything is stale: which kind of file moved
 ```
 
 * **Both clean** — the last round closed. Read `STATUS.md` §2 (the To-Do
@@ -75,16 +75,16 @@ finding down, then refresh, check, close, commit.
 **Using the system itself**, rather than maintaining it:
 
 ```bash
-cd overlay
+cd src
 python3 GLM.py -q "address of golay"                    # one query, 23 kinds
 python3 GLM.py -q "report lean"                         # 66 report subjects ('report routes' lists the route choices)
-PYTHONPATH=. python3 -m glm_universal.corpus --ask "what bears on the Leech lattice?"
-PYTHONPATH=. python3 -m glm_universal.tools --help      # the study instruments
+PYTHONPATH=src python3 -m glm_universal.corpus --ask "what bears on the Leech lattice?"
+PYTHONPATH=src python3 -m glm_universal.tools --help      # the study instruments
 ```
 
 ### 0.1 Run-order hazards — read these before running anything
 
-*Added 20 October 2026 (Phase 172), at the owner's request. Each line was
+*Added 29 October 2026 (Phase 172), at the owner's request. Each line was
 learned by losing time or work to it; keep the list, and add to it.*
 
 1. **Don't edit documents while `corpus --refresh` is running.** It rewrites
@@ -100,7 +100,7 @@ learned by losing time or work to it; keep the list, and add to it.*
    `ties-ladder-frozen` first, then the rest, then refresh the corpus last:
 
    ```bash
-   cd overlay; export PYTHONPATH=.
+   cd src; export PYTHONPATH=src
    for t in queryesc budget-guard-frozen ties-ladder-frozen; do python3 -m glm_universal.tools $t --write; done
    python3 -c "from glm_universal.corpus import caches; print('\n'.join(caches.describe()))"   # the rest, with their commands
    # ... re-take each one it names ...
@@ -157,7 +157,7 @@ learned by losing time or work to it; keep the list, and add to it.*
 
 1. [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md) — the Positioning section
    (what is claimed and what is not), the standing target, and the
-   <!--figure:directives-->17 standing rules<!--/figure-->. Everything else assumes these have been read.
+   <!--figure:directives-->19 standing rules<!--/figure-->. Everything else assumes these have been read.
 2. [`STATUS.md`](STATUS.md) §1 — where the work stands in one screen (the
    full instrument table is [`SYSTEM.md`](SYSTEM.md) §1).
 3. [`STATUS.md`](STATUS.md) §2, the To-Do list — §2.1 is the next round,
@@ -170,9 +170,9 @@ learned by losing time or work to it; keep the list, and add to it.*
 Then confirm the tree is where the last round left it:
 
 ```bash
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.corpus --check       # documents, ~30 s
-PYTHONPATH=. python3 -m glm_universal.signoff --verify     # what is still signed
+cd src
+PYTHONPATH=src python3 -m glm_universal.corpus --check       # documents, ~30 s
+PYTHONPATH=src python3 -m glm_universal.signoff --verify     # what is still signed
 ```
 
 If either reports drift before you have changed anything, the previous round
@@ -199,9 +199,9 @@ whole of the speed discipline; everything below is which gate that is.
 | **documents, unchanged** | the same command | answers from the stored verdict in about three seconds when nothing it reads has moved; `--check --all` forces the full pass | picking the round up |
 | **changed** | `python3 -m glm_universal.signoff --run-everything --jobs 8` | every test unit and instrument whose closure moved, and nothing else | after any code, data or Lean edit |
 | **close** | `python3 -m glm_universal.signoff --close --jobs 8` | the release question -- every unit and instrument signed with the exhaustive cases on -- paying only what is owed: unsigned, changed, failed, or signed fast; then `--verify-release` | once, closing the round, and again if it was interrupted |
-| **release, from scratch** | `python3 -m glm_universal.signoff --release --jobs 8` | all <!--figure:test-files-->226 test files<!--/figure--> and all 7 instruments, ledger ignored | only when the rule itself changed (`signoff/rules.py`), or on purpose; never as a routine close |
+| **release, from scratch** | `python3 -m glm_universal.signoff --release --jobs 8` | all <!--figure:test-files-->219 test files<!--/figure--> and all 7 instruments, ledger ignored | only when the rule itself changed (`signoff/rules.py`), or on purpose; never as a routine close |
 
-All three are run from `overlay/` with `PYTHONPATH=.`.
+All three are run from `` with `PYTHONPATH=src`.
 
 **The documents gate skips a question it has already answered.** The verdict
 is stored beside a digest of everything the check can read — the documents,
@@ -235,10 +235,10 @@ instead of quietly spending a quarter of an hour rebuilding it. So:
 Four commands answer "what would that cost?" without paying it:
 
 ```bash
-PYTHONPATH=. python3 -m glm_universal.signoff --plan              # what is stale, and what it costs
-PYTHONPATH=. python3 -m glm_universal.signoff --why               # *why* each stale unit is stale
-PYTHONPATH=. python3 -m glm_universal.signoff --impact ../STATUS.md  # what an edit would cost, before it
-PYTHONPATH=. python3 -m glm_universal.signoff --closure test_x.py # what one unit depends on
+PYTHONPATH=src python3 -m glm_universal.signoff --plan              # what is stale, and what it costs
+PYTHONPATH=src python3 -m glm_universal.signoff --why               # *why* each stale unit is stale
+PYTHONPATH=src python3 -m glm_universal.signoff --impact ../STATUS.md  # what an edit would cost, before it
+PYTHONPATH=src python3 -m glm_universal.signoff --closure test_x.py # what one unit depends on
 ```
 
 **Why the middle gate is worth trusting.** Each unit is signed against the
@@ -303,7 +303,7 @@ Never hand-edit a number that a generator emits. One command puts the derived
 layer back, in the only order that converges in one pass:
 
 ```bash
-PYTHONPATH=. python3 -m glm_universal.corpus --refresh           # address books, caches, documents, blocks, figures, FIGURES.md
+PYTHONPATH=src python3 -m glm_universal.corpus --refresh           # address books, caches, documents, blocks, figures, FIGURES.md
 ```
 
 (`figures --write` still rewrites `FIGURES.md` on its own; since Phase 78 the
@@ -311,9 +311,9 @@ refresh does it too, so it is not a second step. A measurement cache such as
 `tools native-parity --write` refuses to store a reading taken while the
 document address book is stale — run the refresh first.)
 
-The Lean development has **one copy**, `overlay/glm_lean/RequestProject/GLM/`.
+The Lean development has **one copy**, `src/lean/RequestProject/GLM/`.
 The repository's `lakefile.toml` builds it in place (`srcDir =
-"overlay/glm_lean"`), so `lake build` at the repository root compiles exactly
+"glm_lean"`), so `lake build` at the repository root compiles exactly
 the files the package reads. There is no mirror to regenerate and no second
 copy to compare.
 
@@ -347,7 +347,7 @@ pass (the record is
 | the round itself | [`MASTER_PLAN.md`](MASTER_PLAN.md): a new `## Phase N` section at the head of the phases, and the tier-0 verdict naming Phase N+1 | the plan holds the past tense |
 | the To-Do lines taken and left | [`STATUS.md`](STATUS.md) §2: delete what was taken, add what the round left, replace the "Just closed" paragraph | the status document is a To-Do list, not a stack |
 | what the system now is | [`SYSTEM.md`](SYSTEM.md): a row in the §1 table for a new instrument, a paragraph in §2 for a new capability | only if the system changed |
-| a new test file | a row in `overlay/glm_universal/tests/README.md` | `test_figures` fails a test file with no row |
+| a new test file | a row in `glm_universal/tests/README.md` | `test_figures` fails a test file with no row |
 | a new evaluation case file | the skip list of `tests/test_question_frames.py` | Phase 108's close failed on it |
 | a new Lean file | `lake build` from the repository root, and no `sorry` | the `lean-build` and `lean-sorry-free` instruments |
 | the GLM as a whole | [`studies/GLM_ACADEMIC_PAPER.md`](studies/GLM_ACADEMIC_PAPER.md): a subsection for what the round built, the date line, and Part VII and the appendices brought level with it | the owner's standing instruction (Phase 119): the paper is the record of the whole system and is kept up to date in every development run |
@@ -368,10 +368,10 @@ numbers, no figure markers (`corpus --check` fails a figure in a record).
 
 ```bash
 python3 -m pip install pytest                                 # once per session, if missing
-cd overlay
-PYTHONPATH=. python3 -m glm_universal.corpus --refresh        # derived layer, in the one order that converges
-PYTHONPATH=. python3 -m glm_universal.corpus --check          # documents gate; fix anything it names before closing
-PYTHONPATH=. python3 -m glm_universal.signoff --close --jobs 8
+cd src
+PYTHONPATH=src python3 -m glm_universal.corpus --refresh        # derived layer, in the one order that converges
+PYTHONPATH=src python3 -m glm_universal.corpus --check          # documents gate; fix anything it names before closing
+PYTHONPATH=src python3 -m glm_universal.signoff --close --jobs 8
 cd .. && git add -A && git commit -m "Phase N: ..."
 ```
 

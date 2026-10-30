@@ -1,0 +1,84 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 7 of 8 marks; 12 of 12 programs as declared; 21 of 21 questions as declared; 18 of 18
+  column-3 scripts verify and 105 of 105 mutations rejected; 47 of 47 earlier programs, 58 of 58 earlier
+  questions and 300 of 300 generated programs unchanged; 7 of 7 jumped *halts* equal to a plain run and
+  3 of 3 *never* unrefuted; 90,882 of 90,882 first changes equal to brute force.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/batch_machine
+  - reasoning/batch_speech
+  - reasoning/quadratic_lasso
+  - tests/test_quadratic_lasso
+  lean:
+  - CounterLasso
+  - QuadraticLasso
+  prose: QUADRATIC_LASSO_STUDY.md
+  test:
+  - test_quadratic_lasso.py
+  wheel: []
+follow_ups: []
+id: QUADRATIC_LASSO_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 142
+predecessors:
+- AFFINE_OUTPUT_STUDY
+- CONSTANT_BOUND_STUDY
+- COUNTER_LASSO_STUDY
+question: Can GLM-BAT's counter-lasso reading decide loops whose variables grow quadratically — an accumulator
+  that adds a counter on every pass — by jumping to the exact first pass at which a comparison changes,
+  or by certifying that none ever does, without changing any verdict it already gave and without a verdict
+  a long plain run contradicts?
+recomputed_by: '`glm_universal.reasoning.quadratic_lasso.quadratic_lasso_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved-before-any-code
+  heading: 1. What is proved before any code
+- anchor: 2-the-rule
+  heading: 2. The rule
+- anchor: 3-the-battery-declared-before-the-code
+  heading: 3. The battery, declared before the code
+- anchor: 4-the-marks
+  heading: 4. The marks
+- anchor: 5-what-this-round-does-not-do
+  heading: 5. What this round does not do
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-the-measurement
+  heading: 7. The measurement
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Quadratic lassos: jumping a pass whose step grows'
+verdict: 'Yes, within the declared rule: all 12 battery programs came out exactly as declared, the loops
+  whose step grows now halt with their exact step counts and outputs or are certified never to halt, and
+  every answer the machine gave before is unchanged; one mark is missed on its declaration, because the
+  question list it counted held 21 questions, not 20.'
+wobble_deps: []

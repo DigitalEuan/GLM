@@ -168,18 +168,18 @@ confidence. F1 holds.
 
 ## 6. Files
 
-* `overlay/glm_lean/RequestProject/GLM/BudgetReading.lean` — §1.
-* `overlay/glm_universal/reasoning/hole_reading.py` — the reader, the
+* `glm_lean/RequestProject/GLM/BudgetReading.lean` — §1.
+* `glm_universal/reasoning/hole_reading.py` — the reader, the
   request grammar.
-* `overlay/glm_universal/runtime/session.py` (`_solve_hole`),
+* `glm_universal/runtime/session.py` (`_solve_hole`),
   `runtime/parser.py` (the `hole` kind), `runtime/reports/lattice_geometry.py`
   (`report deep holes`), `runtime/tct_engine.py` (the `hole` template; the
   census template under the rule), `runtime/toolbox.py` (the census).
-* `overlay/glm_universal/reasoning/budget_reading_study.py` — the marks;
+* `glm_universal/reasoning/budget_reading_study.py` — the marks;
   `python3 -m glm_universal.tools budget-reading [--write]`.
-* `overlay/glm_universal/reasoning/budget_guard_frozen.py` — F1, shared with
+* `glm_universal/reasoning/budget_guard_frozen.py` — F1, shared with
   Phase 148; `tools budget-guard-frozen [--write]`.
-* `overlay/glm_universal/tests/test_budget_reading.py`.
+* `glm_universal/tests/test_budget_reading.py`.
 
 ## 7. What came out
 

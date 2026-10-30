@@ -1,0 +1,74 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Over 27 probes the door admits 20 and refuses 7, writing nothing back into a held vocabulary
+  of 1093 names.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - tests/test_admission
+  lean:
+  - Admission
+  prose: ADMISSION_STUDY.md
+  test:
+  - test_admission.py
+  wheel: []
+follow_ups: []
+id: ADMISSION_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: '"Open vocabulary" has stood for several rounds as a commitment rather than a mechanism: the
+  machine refuses to invent a coordinate for `justice`. What is missing is the other half — how does a
+  name get *in*?'
+recomputed_by: '`glm_universal.reasoning.admission.admission_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-a-commitment-is-not-a-mechanism
+  heading: 1. A commitment is not a mechanism
+- anchor: 2-the-criterion
+  heading: 2. The criterion
+- anchor: 3-the-four-routes
+  heading: 3. The four routes
+- anchor: 4-what-the-door-was-measured-on
+  heading: 4. What the door was measured on
+- anchor: 5-what-the-vocabulary-actually-is
+  heading: 5. What the vocabulary actually is
+- anchor: 6-two-shapes-of-refusal-and-the-honest-boundary-the-door-turned-up
+  heading: 6. Two shapes of refusal, and the honest boundary the door turned up
+- anchor: 7-the-formal-side
+  heading: 7. The formal side
+- anchor: 8-how-to-re-run-it
+  heading: 8. How to re-run it
+- anchor: 9-limits
+  heading: 9. Limits
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Open vocabulary: the door a new name comes in by'
+verdict: 'A name is admissible exactly when a stated route gives it coordinates computed from a register
+  the machine already checks: stated, reproducible, grounded.'
+wobble_deps: []

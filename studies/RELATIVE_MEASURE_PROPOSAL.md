@@ -217,9 +217,9 @@ document guesses.
 
 | file | what it holds |
 |---|---|
-| `overlay/glm_universal/data_objects/semantic_lexicon.py` | the 10 primitives, the 4-relation cap, the 95 concepts |
-| `overlay/glm_universal/data_objects/physics.py` | the 726 quantities the dimensions would come from |
-| `overlay/glm_universal/reasoning/analogy_models.py` | named-relation transport, and `scale_shift` as the existing precedent for a relative reading |
-| `overlay/glm_universal/reasoning/information_loss.py` | the audit, already parameterised by the carrier set |
+| `glm_universal/data_objects/semantic_lexicon.py` | the 10 primitives, the 4-relation cap, the 95 concepts |
+| `glm_universal/data_objects/physics.py` | the 726 quantities the dimensions would come from |
+| `glm_universal/reasoning/analogy_models.py` | named-relation transport, and `scale_shift` as the existing precedent for a relative reading |
+| `glm_universal/reasoning/information_loss.py` | the audit, already parameterised by the carrier set |
 | [`INFORMATION_LOSS_STUDY.md`](INFORMATION_LOSS_STUDY.md) §3.1 | the widen-rather-than-narrow decision this proposal reuses |
 | `RequestProject/GLM/Cumulative.lean`, `RequestProject/GLM/LayerChain.lean` | the machinery a widened view would be proved correct with |

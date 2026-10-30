@@ -1,0 +1,81 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: '8 of 8 marks; improper queries 361 right, 0 wrong of 720 (Phase 178: 3 right); at three
+  demonstrations 179 of 180; Phase 178 answers changed 0 of 361; outside the families 0 wrong of 480.'
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code: []
+  lean:
+  - AxiomAuditAll
+  - LorentzImproper
+  - LorentzPlane
+  prose: IMPROPER_FRAME_STUDY.md
+  test:
+  - test_improper_frame.py
+  wheel: []
+follow_ups: []
+id: IMPROPER_FRAME_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 178
+predecessors: []
+question: Can `tool frame` in 1+2 dimensions answer a reflection, a time reversal or their compositions
+  with Lorentz maps, which Phase 178 refused as outside its families, without a single wrong answer and
+  without changing any answer it already gave?
+recomputed_by: '`glm_universal.reasoning.improper_frame_study.improper_frame_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved
+  heading: 1. What is proved
+- anchor: 2-the-mechanism
+  heading: 2. The mechanism
+- anchor: 3-what-is-measured
+  heading: 3. What is measured
+- anchor: 4-faculties
+  heading: 4. Faculties
+- anchor: 5-the-marks
+  heading: 5. The marks
+- anchor: 6-what-is-not-claimed
+  heading: 6. What is not claimed
+- anchor: 7-what-came-out
+  heading: 7. What came out
+- anchor: in-one-paragraph
+  heading: In one paragraph
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Improper maps in `tool frame` — reflections, time reversal, and the four components of the Lorentz
+  group
+verdict: Declaring the three improper components of the Lorentz group as families, beside the proper orthochronous
+  one, and the spatial reflection beside the rotation, turned 361 of the 720 improper queries into right
+  answers where Phase 178 answered 3, with 0 wrong; every improper answer names its component and splits
+  exactly into a proper map after a reflection or time reversal; and on all 1,920 queries the 361 answers
+  the Phase 178 family set gives are unchanged. `LorentzImproper.lean` proves the four components exhaust
+  the group and that two demonstrations never fix the component (any Lorentz map has a partner in another
+  component agreeing with it on both), so the span guard's refusals stay.
+wobble_deps: []

@@ -13,7 +13,7 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-*Last altered 23 October 2026.*
+*Last altered 30 October 2026.*
 
 > **Positioning.** Before starting a round, read the Positioning section of
 > [`PROJECT_DIRECTIVES.md`](PROJECT_DIRECTIVES.md): what is claimed, what is
@@ -53,12 +53,12 @@ GLM as a whole and is kept up to date in every development run (the owner's
 standing instruction; it is a row of the close checklist, `ITERATE.md` §4.1).
 
 **Where the files are.** The Lean development lives in one place only,
-[`overlay/glm_lean/RequestProject/`](overlay/glm_lean/RequestProject/GLM/README.md)
-(`lakefile.toml` sets `srcDir = "overlay/glm_lean"`); there is no
+[`src/lean/RequestProject/`](src/lean/RequestProject/GLM/README.md)
+(`lakefile.toml` sets `srcDir = "glm_lean"`); there is no
 `RequestProject/` folder at the repository root, so a path written as
 `RequestProject/GLM/X.lean` in a record means
-`overlay/glm_lean/RequestProject/GLM/X.lean`. The studies are in
-[`studies/`](studies/), the Python package in `overlay/glm_universal/`. A file
+`src/lean/RequestProject/GLM/X.lean`. The studies are in
+[`studies/`](studies/), the Python package in `glm_universal/`. A file
 audit after Phase 158 (the owner asked whether
 [`FRICTION_STUDY.md`](studies/FRICTION_STUDY.md),
 [`OSCILLATOR_JUNCTION_STUDY.md`](studies/OSCILLATOR_JUNCTION_STUDY.md) and Lean
@@ -66,12 +66,12 @@ files had gone missing) found every file present: 232 Lean files (231 under
 `GLM/` plus `Main.lean`), all building with `lake build` and 0 `sorry`, and
 all 160 study documents. What was wrong was 261 rows of the Properties table
 still pointing at the old root path `RequestProject/GLM/…`; they now point at
-`overlay/glm_lean/RequestProject/GLM/…`.
+`src/lean/RequestProject/GLM/…`.
 
 **Repository hygiene: the knowledge cache and the push size.** On 22 October
 2026 pushes were failing because the git server rejected them as too large.
 The cause was the regenerated counted-knowledge cache,
-`overlay/glm_universal/knowledge/_knowledge_cache/knowledge.pickle` (about
+`glm_universal/knowledge/_knowledge_cache/knowledge.pickle` (about
 135 MB), which was tracked by git: it is rewritten whenever any corpus file
 moves, so every round committed another full copy. It is now untracked and
 listed in `.gitignore`, and so is the rest of that directory (the two
@@ -81,7 +81,7 @@ missing counts the corpus once and writes it (about a minute on this corpus;
 later readings load it in seconds, and a changed file is the only file read
 again). The environment variable `GLM_KNOWLEDGE_CACHE` moves the cache
 directory out of the tree if wanted. The fix is held by
-[`test_repository_hygiene.py`](overlay/glm_universal/tests/test_repository_hygiene.py):
+[`test_repository_hygiene.py`](glm_universal/tests/test_repository_hygiene.py):
 it fails if any cache file is tracked or not ignored, if any tracked file
 exceeds 10 MB, or if an absent, deleted or corrupt cache is not rebuilt to the
 same knowledge. One consequence to keep in mind: `GLM-main.zip` is also kept
@@ -151,23 +151,46 @@ earlier; each is recorded in `MASTER_PLAN.md`.
 
 | instrument | command | result |
 |---|---|---|
-| test suite | `python3 -m pytest glm_universal/tests -q` | **<!--figure:suite-->5,397 tests across 181 of the 183 test files, 18,972 subtests, outside the document checks<!--/figure-->**, zero failures |
+| test suite | `python3 -m pytest src/glm_universal/tests -q` | **<!--figure:suite-->(not yet measured: suite)<!--/figure-->**, zero failures |
 | end-to-end CLI evaluation | `python3 -m glm_universal.evaluation --jobs 8` | **<!--figure:evaluation-case-count-->223<!--/figure-->** cases — 0 confidently wrong, every refusal a `boundary` |
 | benchmark suites | `python3 -m glm_universal.benchmarks` | **2,389 / 2,390** across 5 suites |
 | capability probes | `python3 -m glm_universal.capabilities` | 33 probes — 20 hold, 13 break, 0 surprises |
-| Lean development | `lake build` (repository root) | <!--figure:lean-files-->268 Lean files<!--/figure-->, **0 `sorry`** |
+| Lean development | `lake build` (repository root) | <!--figure:lean-files-->425 Lean files<!--/figure-->, **0 `sorry`** |
 | corpus | `python3 -m glm_universal.corpus --check` | the tier contract, the coverage claim of `ENTRY.md`, every generated block and every derived cache |
 
 The package holds **<!--figure:registers-->8 registers<!--/figure-->** beside a 45-class comparison register,
-**<!--figure:query-kinds-->28 query kinds<!--/figure-->** one of which
+**<!--figure:query-kinds-->27 query kinds<!--/figure-->** one of which
 dispatches **<!--figure:report-subjects-->67 report subjects<!--/figure-->**, and 3 tasks. The Lean development is
 addressed declaration by declaration: `reasoning/lean_address.py` gives each of
-the <!--figure:lean-declarations-->6,224<!--/figure--> declarations a deterministic Leech address computed from 24 structural
-counts of its statement. Read back exactly <!--figure:lean-declarations-->6,224<!--/figure-->/<!--figure:lean-declarations-->6,224<!--/figure--> with 0 coordinate errors
+the <!--figure:lean-declarations-->9,126<!--/figure--> declarations a deterministic Leech address computed from 24 structural
+counts of its statement. Read back exactly <!--figure:lean-declarations-->9,126<!--/figure-->/<!--figure:lean-declarations-->9,126<!--/figure--> with 0 coordinate errors
 (`report lean`). The other forty-odd instruments, each with its command and its
 current figure, are the table in [`SYSTEM.md`](SYSTEM.md) §1.
 
 ---
+
+## 1b. Reorganisation status (29 October 2026)
+
+The repository has been reorganised across 15 iterations:
+
+- **Phase R1** (iter 5): executable code moved to `src/` (`glm_universal/`, `lean/`, `GLM.py`)
+- **Phase R2** (iter 6): all 15 wheels centralized under `src/glm_universal/wheels/`
+- **Phase R3** (iter 8): every study converted to a `.yaml` + `.md` pair (189 manifests)
+- **Phase R4** (iter 10): Wobble subsystem (D17) — `reasoning/wobble_registry.py`
+- **Phase R5** (iter 10): Reversibility ledger (D18) — `reasoning/reversibility.py`
+- **Phase R6** (iter 10): Generate-don't-store (D19) — `reasoning/generate_not_store.py`
+- **Stage 3** (iter 10): signoff schema bumped 5->6; YAML_PROTOCOL_ENABLED=True
+- **Rule30 absorption** (iter 7): 156 Lean files absorbed into `src/lean/` (412 total)
+- **Stub implementation** (iters 12-15): 13 of 24 stub modules now have real implementations
+
+Remaining (both need Lean installed):
+- **Phase 5**: 5 reasoning study stubs (`hole_reports_l5`, `ties_ladder_frozen`, `planner_ladder`, `carried_read`, `l5_first_budget`)
+- **Phase 6**: 6 deep-runtime stubs (`evidence`, `frame_plane_study`, `adversarial_dialogue_study`, `nearest_question_study`, `reader`, `model`)
+
+The 19 directives (D1-D19) are in `PROJECT_DIRECTIVES.md`, enforced by `reasoning/directives.py`.
+The fundamental constants are centralized in `src/glm_universal/constants.py`.
+The 12 missing Lean files (placeholders) are documented in `studies/_lean_files_needed.md` — each needs to be recovered from the owner's development environment.
+The study ledger (`corpus/study_ledger.py`) reads the YAML manifests and verifies the predecessor graph is acyclic (153 edges, 189 studies).
 
 ## 2. To Do
 
@@ -226,7 +249,27 @@ or `Last altered <day Month year>` in the file itself; a study also says when
 it was pre-registered and measured. `python3 -m glm_universal.tools dates`
 lists every stamp and fails on a bad one.
 
-### 2.1 The next round — take one of these
+### 2.1 The next rounds
+
+0. **repository check and fix** this repository has been reorganised and needs
+a proper check through everything, some parts may be broken and require fixing.
+   * 'glm_universal.constants' - in 'src/glm_universal' is to be the single source 
+of recording and updating constants for this repository and the GLM - the 
+ITERATION.md document and other top-level documents need to pass this function on to
+'glm_universal.constants' and record that is to be upheld ongoing.
+   * the 'source_material' folder has become the input method for this repository and the
+GLM, it currently has several folders and studies that have yet to be processed and 
+absorbed into the GLM for use, these items must be Lean verified before absorbtion
+so they can be trusted 'studies/_lean_files_needed.md' records some that have been partly
+tested but need Lean verification. Other studies ready for 
+investigation/fixing/testing/lean/absorption (if they work for the GLM): 
+cent_compiler_v12 (of particular interest to test/fix/lean/absorb), attention, 
+conversation_experiment, devops_ladder (may be covered by other studies already), 
+formula_wheel, glm_wheels_bundle, hidden_memory, R_Calculus (becomes 'hypothesis_engine.py' in Rule30_GLM_Study), 
+Rule30_GLM_Study (loads of lean already made).
+- prioritise the ones that have lean already - test for the GLM's reasoning abilities/scope 
+for measurable improvement then absorb into the GLM system for use, then move into the studies 
+that need deeper investigation and fixing/testing.
 
 1. **The question at the other three ties** (left by Phases 145, 146, 148
    and 150; *postponed by the owner* until more such ties accumulate as new
@@ -750,7 +793,7 @@ return the same answers and the same refusals.
 
 The close is one exact sequence, written out with its measured cost in
 [`ITERATE.md`](ITERATE.md) §4. In short: finish the work and write it down
-(study, `MASTER_PLAN.md` phase, this list), then from `overlay/` run
+(study, `MASTER_PLAN.md` phase, this list), then from `` run
 `corpus --refresh`, `corpus --check` and `signoff --close --jobs 8` once,
 touch no document afterwards, and commit. The test-suite row above is the
 sign-off ledger's own count, recorded by the close.

@@ -57,7 +57,7 @@ reason; the gate on the one case `verify-newton` replayed 1 of 1. Nothing of
 
 ## 2. The formal half
 
-`overlay/glm_lean/RequestProject/GLM/EvidenceInUse.lean` states the gate's
+`glm_lean/RequestProject/GLM/EvidenceInUse.lean` states the gate's
 rule over a list of replayed rows (status answered or not; replay verified,
 failed, or absent) and proves: a passing gate leaves no failed replay and no
 unanswered row (`gate_sound`); one failed replay, anywhere, fails the gate

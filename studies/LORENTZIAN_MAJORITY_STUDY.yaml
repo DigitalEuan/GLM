@@ -1,0 +1,86 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 8 of 8 marks; decoy3 155 right, 0 wrong (guard 0 right); decoy5 161 right, 0 wrong (guard
+  0 right); collude5 0 wrong where the plurality vote is wrong 150 times; collude3 148 wrong, exactly
+  the queries the tightness theorem predicts; decoy4 0 right where the vote has 149.
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - reasoning/lorentzian_majority
+  - reasoning/lorentzian_majority_study
+  - tests/test_lorentzian_majority
+  lean:
+  - AxiomAuditAll
+  - LorentzianEvidence
+  - LorentzianMajority
+  prose: LORENTZIAN_MAJORITY_STUDY.md
+  test:
+  - test_lorentzian_majority.py
+  wheel: []
+follow_ups: []
+id: LORENTZIAN_MAJORITY_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 183
+predecessors:
+- LORENTZIAN_EVIDENCE_STUDY
+question: Phase 183's dispersion guard refuses every set of examples that disagree, although on two good
+  examples and one decoy the majority target answered 155 of 300 right and 0 wrong. Can that majority
+  be declared as a rule with its own soundness condition, and what does it cost where the condition fails?
+recomputed_by: '`glm_universal.reasoning.lorentzian_majority_study.lorentzian_majority_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-the-rule-in-the-evidence-space
+  heading: 1. The rule, in the evidence space
+- anchor: 2-what-is-proved
+  heading: 2. What is proved
+- anchor: 3-relations-over-the-physics-register
+  heading: 3. Relations over the physics register
+- anchor: 4-identities
+  heading: 4. Identities
+- anchor: 5-marks
+  heading: 5. Marks
+- anchor: 6-what-it-gives-the-glms-reasoning
+  heading: 6. What it gives the GLM's reasoning
+- anchor: 7-what-this-does-not-do-and-what-is-next
+  heading: 7. What this does not do, and what is next
+- anchor: 8-reproduce
+  heading: 8. Reproduce
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The declared majority rule — conflicting evidence, and when believing the majority is sound
+verdict: 'The rule is declared and proved: split the examples into agreeing groups, each a null vector
+  in the evidence space, and answer the target a strict majority of the weight states; it is never wrong
+  while the honest examples hold at least half the weight and always right above half, the condition is
+  tight because agreeing decoys below half carry it, a wrong answer needs decoys weighing at least the
+  answer''s own group, and wherever the guard answers the rule answers the same; in measurement it recovers
+  every right answer the guard gave up on honest majorities at no wrong answer, refuses where a plurality
+  vote is misled by a colluding pair, but refuses as well where a plurality would have been right because
+  the decoys happened to disagree.'
+wobble_deps: []

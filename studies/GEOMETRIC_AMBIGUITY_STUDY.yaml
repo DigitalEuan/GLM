@@ -1,0 +1,82 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Collapse is a measurement, not a coin flip, and the wiggle really does compute.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - substrate/mog
+  - tests/test_superposition
+  lean:
+  - Census
+  - Cesaro
+  - Code
+  - Dynamics
+  - HullExpansion
+  - Reachable
+  - Sextet
+  - Superposition
+  - VOA
+  - Wobble
+  prose: GEOMETRIC_AMBIGUITY_STUDY.md
+  test:
+  - test_geometric_ambiguity.py
+  wheel: []
+follow_ups: []
+id: GEOMETRIC_AMBIGUITY_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: What happens when the six-fold Golay tie is carried instead of broken?
+recomputed_by: '`glm_universal.reasoning.wobble.wobble_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-tie-is-exactly-six-and-it-is-a-sextet
+  heading: 1. The tie is exactly six, and it is a sextet
+- anchor: 2-the-two-bundling-rules-are-not-interchangeable
+  heading: 2. The two bundling rules are not interchangeable
+- anchor: 3-collapse-is-a-measurement-not-a-coin-flip
+  heading: 3. Collapse is a measurement, not a coin flip
+- anchor: 4-the-wiggle-really-does-compute
+  heading: 4. The wiggle really does compute
+- anchor: 5-how-often-the-tie-happens-the-coset-census
+  heading: '5. How often the tie happens: the coset census'
+- anchor: 6-does-it-settle-there-the-dynamical-half-answered
+  heading: 6. Does it *settle* there? The dynamical half, answered
+- anchor: 7-the-hull-scale-changes-nothing-support-changes-everything
+  heading: '7. The hull: scale changes nothing, support changes everything'
+- anchor: 8-what-this-does-not-settle
+  heading: 8. What this does not settle
+- anchor: 9-re-running-it
+  heading: 9. Re-running it
+- anchor: 10-where-the-statements-live
+  heading: 10. Where the statements live
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Geometric ambiguity as computation
+verdict: The tie is exactly six, and it is a sextet.
+wobble_deps: []

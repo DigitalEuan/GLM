@@ -1,0 +1,76 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 6 of 6 marks; `piEnds_enclose`, 0 `sorry`, standard axioms only; 335 machine steps; 53
+  certified terms against 19; 80 of 80 one-step π chains admitted (47 before, 0 lost); the 237-for-239
+  control is caught by Mathlib's decimals.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/pi_machine_study
+  - reasoning/tool_machine
+  lean:
+  - PiMachine
+  prose: PI_MACHINE_STUDY.md
+  test:
+  - test_pi_machine.py
+  wheel: []
+follow_ups: []
+id: PI_MACHINE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 166
+predecessors: []
+question: Can the batch machine GLM-BAT compute its own enclosure of π from integers, by rules proved
+  in Lean, as it already does for `e`, rather than read π as a declared constant?
+recomputed_by: '`glm_universal.reasoning.pi_machine_study.pi_machine_marks`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-this-round-builds
+  heading: 1. What this round builds
+- anchor: 2-the-control
+  heading: 2. The control
+- anchor: 3-what-is-not-claimed
+  heading: 3. What is not claimed
+- anchor: 4-faculties
+  heading: 4. Faculties
+- anchor: 5-the-marks
+  heading: 5. The marks
+- anchor: 6-how-it-is-measured
+  heading: 6. How it is measured
+- anchor: 7-what-came-out
+  heading: 7. What came out
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The machine sums π — Machin's formula and the arctangent series, proved in Lean and run in GLM-BAT
+verdict: Yes. Machin's formula, the error bound of the series for `arctan` and the machine's Horner loop
+  in two integers are proved in Lean, and the four integers the machine leaves are proved to enclose π
+  for every number of terms. The summed enclosure is about 10⁻⁵⁷ wide (the declared constant was 10⁻²⁰),
+  certifies 53 terms of π's continued fraction (the constant certified 19), and every one-step π chain
+  the constant admitted is admitted with the same value.
+wobble_deps: []

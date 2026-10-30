@@ -1,0 +1,86 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 6 of 7 marks; 680,064 of 680,064 tied reads resolved by each protected tag, 0 wrong (28,096
+  wrong for the seven-bit tag with one flip); 409,860 wrong decodes of 523,204 heavy reads by the decoder
+  alone, 0 with a tag; 9 of 9 declared questions as declared.
+directives:
+- D15
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - evaluation/cases
+  - reasoning/carrier_read
+  - runtime/parser
+  - tests/test_carrier_read
+  lean:
+  - DesignedSubstrate
+  - ProtectedTag
+  prose: PROTECTED_TAG_STUDY.md
+  test:
+  - test_protected_tag.py
+  wheel: []
+follow_ups: []
+id: PROTECTED_TAG_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 133
+predecessors: []
+question: Can the GLM answer a question about a carrier with the stages Phase 133 proved sound, and can
+  the sender tag be made to survive its own corruption?
+recomputed_by: '`glm_universal.reasoning.carrier_read.protected_tag_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved-requestprojectglmprotectedtaglean
+  heading: 1. What is proved (`RequestProject/GLM/ProtectedTag.lean`)
+- anchor: 2-the-stages-and-the-query-kind
+  heading: 2. The stages and the query kind
+- anchor: 3-the-marks-declared-before-the-measurement
+  heading: 3. The marks, declared before the measurement
+- anchor: 4-controls
+  heading: 4. Controls
+- anchor: 5-what-this-round-does-not-do
+  heading: 5. What this round does not do
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-the-measurement
+  heading: 7. The measurement
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The protected tag — a carrier read in the answering path, and a sender tag with a code of its own
+verdict: 'The GLM can now be asked about a carrier, and a sender tag protected by a code of its own absorbs
+  two flipped tag bits where the seven-bit tag absorbs none. The new query kind reads a 24-bit word through
+  the carried fork and the stages the request supplies information for, answers only when one candidate
+  survives and refuses an open tie or a contradicted read; all nine declared questions came out as declared.
+  Proved in the GLM''s Lean development: a tag absorbs as many flipped bits as the least tag weight over
+  the octads allows, which is none for the seven-bit tag and two for the fifteen-bit tag, and an intact
+  tag disagrees with every wrong decode on up to seven flips. Measured, both protected tags resolve all
+  680,064 tied reads with up to their radius of flipped tag bits, 0 wrong, where the seven-bit tag with
+  one flip answers 28,096 wrongly; on 523,204 reads with five to seven flips the decoder alone answers
+  409,860 wrongly and a tag none. Six of seven marks were met; P5 was missed on a declared three-flip
+  pattern that never misled radius 2.'
+wobble_deps: []

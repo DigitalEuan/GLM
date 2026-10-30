@@ -24,7 +24,7 @@ and a small persistent store — and asked the two questions the standing rules
 ask of any supplied material: *does it run?*, and *is what it claims true?*
 
 **It runs.** Every one of the eight scripts executes to completion against the
-package as it stands, with `PYTHONPATH` pointing at `overlay/` and no repair
+package as it stands, with `PYTHONPATH` pointing at `` and no repair
 of any kind — no shimmed import, no stubbed register, no edited call. That is
 worth stating plainly because it is the strongest evidence that the material
 belongs to this system rather than beside it: it was written against these

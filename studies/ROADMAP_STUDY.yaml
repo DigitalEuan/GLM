@@ -1,0 +1,80 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 49 open items; 6 of them are the measurand register, 4 the loop, 4 the discourse state,
+  2 the third sort, 2 the held-out set; 7 tracks; 6 items gated on the owner or on outside material, 2
+  proposed for retirement.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - ObserverY
+  prose: ROADMAP_STUDY.md
+  test:
+  - test_roadmap.py
+  wheel: []
+follow_ups: []
+id: ROADMAP_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 87
+predecessors:
+- CARRIED_FORK_STUDY
+- CONNECTED_MACHINE_STUDY
+- HOLE_FOLDS_STUDY
+- LAW_TRIAGE_STUDY
+- MEASURANDS_STUDY
+- MEASURAND_REGISTER_STUDY
+- RATE_POSTERIOR_STUDY
+- REVERSE_TCT_STUDY
+- STEPWISE_THREE_STUDY
+question: Of the items `STATUS.md` §3.4 names for the next round, which are the same piece of work under
+  different names, which depend on which, and in what order should they be taken so that each round leaves
+  the next one cheaper?
+recomputed_by: (hand-written argument; nothing to recompute)
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-open-items-as-34-states-them
+  heading: 1. The open items, as §3.4 states them
+- anchor: 2-the-merges-one-piece-of-work-under-several-names
+  heading: '2. The merges: one piece of work under several names'
+- anchor: 3-the-tracks-and-what-each-supports
+  heading: 3. The tracks, and what each supports
+- anchor: 4-the-order
+  heading: 4. The order
+- anchor: 5-what-this-does-not-settle
+  heading: 5. What this does not settle
+status: open
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The open candidates, merged and ordered: which developments are one piece of work, and which one
+  supports the next'
+verdict: The 49 open items reduce to 7 tracks of development plus a set of items gated on the owner or
+  on outside material; the measurand register is taken first because six items are that one piece of work
+  and three later tracks read it, and the loop through the planner is taken second because four items
+  are that one piece of work and it is what the standing target calls scarce.
+wobble_deps: []

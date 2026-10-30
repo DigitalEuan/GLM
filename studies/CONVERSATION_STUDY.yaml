@@ -1,0 +1,87 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: <!--figure:conversation-as-declared-->15<!--/figure--> of <!--figure:conversation-declared-count-->15<!--/figure-->
+  declared follow-ups came out as declared, <!--figure:conversation-answered-->8<!--/figure--> bound and
+  <!--figure:conversation-refused-->7<!--/figure--> refused under all <!--figure:conversation-reasons-->3<!--/figure-->
+  named reasons, against <!--figure:conversation-alone-->0<!--/figure--> answered without the conversation.
+directives:
+- D15
+- D8
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - tests/test_conversation
+  lean:
+  - Conversation
+  prose: CONVERSATION_STUDY.md
+  test:
+  - test_conversation.py
+  wheel: []
+follow_ups: []
+id: CONVERSATION_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: A round's worth of supplied material builds a conversational GLM on top of this substrate. Run
+  against the package as it is now, what in it is real, and what does the one operation worth keeping
+  answer and refuse?
+recomputed_by: '`glm_universal.runtime.conversation.conversation_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-what-this-round-took-and-from-where
+  heading: 1. What this round took, and from where
+- anchor: 2-two-claims-re-run-and-what-became-of-them
+  heading: 2. Two claims re-run, and what became of them
+- anchor: 3-what-was-kept-the-turn-that-refers-back
+  heading: '3. What was kept: the turn that refers back'
+- anchor: 4-the-declared-set
+  heading: 4. The declared set
+- anchor: 5-the-two-controls
+  heading: 5. The two controls
+- anchor: 6-what-is-proved-rather-than-measured
+  heading: 6. What is proved rather than measured
+- anchor: 7-what-it-decides-and-what-it-does-not
+  heading: 7. What it decides, and what it does not
+- anchor: 8-limits
+  heading: 8. Limits
+- anchor: 9-what-the-supplied-material-still-holds-and-what-it-would-have-to-prove
+  heading: 9. What the supplied material still holds, and what it would have to prove
+- anchor: 10-re-running-it
+  heading: 10. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The turn that refers back — what the supplied conversation material was worth, and what licensing
+  buys over recency
+verdict: 'All eight of the supplied scripts run unmodified against the package, and two of their claims
+  do not survive being re-run: the higher-order analogy adds no constraint that was satisfied, and the
+  periodic table reading is a renaming of two coordinates. What holds is the thing they were built around
+  and this package as it stands cannot hold: a turn that refers back to an earlier turn. Built here as
+  a binding licensed by the solver, it binds 8 of 15 declared follow-ups and refuses 7, every one as declared,
+  where a session with no memory of the conversation answers 0 of them; and the rule a reader would assume,
+  bind to the most recent mention, differs on 3 of the 10 pronoun follow-ups it applies to — once it loses
+  an answer the registers hold, and twice it gives a wrong answer confidently.'
+wobble_deps: []

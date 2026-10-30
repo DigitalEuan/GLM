@@ -274,18 +274,18 @@ were done by hand.
 
 ## 8. Files
 
-* `overlay/glm_lean/RequestProject/GLM/NearestFraction.lean` — §2.
-* `overlay/glm_universal/reasoning/rational_approx.py` — the certificate; the
+* `glm_lean/RequestProject/GLM/NearestFraction.lean` — §2.
+* `glm_universal/reasoning/rational_approx.py` — the certificate; the
   caps removed.
-* `overlay/glm_universal/runtime/toolbox.py` — the tool's answer and its line.
-* `overlay/glm_universal/runtime/tool_values.py` — verdicts; widened patterns.
-* `overlay/glm_universal/runtime/stepwise.py` — the verdict, `choose` and
+* `glm_universal/runtime/toolbox.py` — the tool's answer and its line.
+* `glm_universal/runtime/tool_values.py` — verdicts; widened patterns.
+* `glm_universal/runtime/stepwise.py` — the verdict, `choose` and
   search readings and steps.
-* `overlay/glm_universal/reasoning/stepwise_script.py` — the `choose` and
+* `glm_universal/reasoning/stepwise_script.py` — the `choose` and
   `first` step forms, readers, recomputation, and the column-3 script.
-* `overlay/glm_universal/evaluation/tool_verdicts_cases.py` — the held-out
+* `glm_universal/evaluation/tool_verdicts_cases.py` — the held-out
   sets and the marks; `tools tool-verdicts`.
-* `overlay/glm_universal/tests/test_tool_verdicts.py` — 19 tests.
+* `glm_universal/tests/test_tool_verdicts.py` — 19 tests.
 
 ### 8.1 What this round leaves
 

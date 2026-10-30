@@ -39,7 +39,7 @@ the close checklist ([`ITERATE.md`](../ITERATE.md) §4.1).
 ## 1. Declarations — committed before the reasoning code
 
 The Lean files came first (as Phase 117's did), then
-`overlay/glm_universal/evaluation/derivation_four_cases.py`, committed before
+`glm_universal/evaluation/derivation_four_cases.py`, committed before
 any reasoning code of the round. The expected verdicts were worked by hand;
 the decimal values were taken by throw-away floating-point computations (a
 Blahut–Arimoto iteration with a bisection on the slope, a bisection on the
@@ -187,7 +187,7 @@ applied, met all 10 of its marks, its own Phase 107 comparison included.
 
 ## 5. What is proved
 
-`overlay/glm_lean/RequestProject/GLM/CopyLemma.lean` and
+`glm_lean/RequestProject/GLM/CopyLemma.lean` and
 `RobinBoth.lean`, with no sorry and only the standard axioms (`propext`,
 `Classical.choice`, `Quot.sound`):
 

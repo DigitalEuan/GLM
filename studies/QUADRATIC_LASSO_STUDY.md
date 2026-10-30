@@ -209,15 +209,15 @@ other query kinds; the answers reach users through the GLM-BAT questions only.
 
 ## 6. Files
 
-* `overlay/glm_lean/RequestProject/GLM/QuadraticLasso.lean` — §1.
-* `overlay/glm_universal/reasoning/batch_machine.py` — `quadratic=True` in
+* `glm_lean/RequestProject/GLM/QuadraticLasso.lean` — §1.
+* `glm_universal/reasoning/batch_machine.py` — `quadratic=True` in
   `jumped_run` and `run_program`; `accumulators`, `first_change_quadratic`.
-* `overlay/glm_universal/reasoning/batch_speech.py` — the second interpreter's
+* `glm_universal/reasoning/batch_speech.py` — the second interpreter's
   accumulators and first change; `g` in the `never_lasso` claim; the answer's
   wording; `answer(..., quadratic=False)`.
-* `overlay/glm_universal/reasoning/quadratic_lasso.py` and
+* `glm_universal/reasoning/quadratic_lasso.py` and
   `tools quadratic-lasso [--json]` — the battery and the marks.
-* `overlay/glm_universal/tests/test_quadratic_lasso.py`.
+* `glm_universal/tests/test_quadratic_lasso.py`.
 
 ## 7. The measurement
 

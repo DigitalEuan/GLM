@@ -52,7 +52,7 @@ disagreeing ones.
 
 ## 2. What is proved
 
-**[`overlay/glm_lean/RequestProject/GLM/LorentzianMajority.lean`](../overlay/glm_lean/RequestProject/GLM/LorentzianMajority.lean)**
+**[`glm_lean/RequestProject/GLM/LorentzianMajority.lean`](../glm_lean/RequestProject/GLM/LorentzianMajority.lean)**
 — over `ℚ` weights, any finite index set, and targets in any type with
 decidable equality (the evidence-space statements in any dimension `n`),
 built on Phase 183's `LorentzianEvidence.lean`.
@@ -206,6 +206,6 @@ python3 GLM.py -q "tool majority velocity : acceleration, mass : density :: mome
 lake build RequestProject.GLM.LorentzianMajority
 ```
 
-The mechanism is `overlay/glm_universal/reasoning/lorentzian_majority.py`,
-the measurement `overlay/glm_universal/reasoning/lorentzian_majority_study.py`,
-the tests `overlay/glm_universal/tests/test_lorentzian_majority.py`.
+The mechanism is `glm_universal/reasoning/lorentzian_majority.py`,
+the measurement `glm_universal/reasoning/lorentzian_majority_study.py`,
+the tests `glm_universal/tests/test_lorentzian_majority.py`.

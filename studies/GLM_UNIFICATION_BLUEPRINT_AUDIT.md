@@ -222,7 +222,7 @@ layer stack resolves 3 / 5 / 7 / 7 / 7 of the seven carriers and loses
   coordinate *prefixes* alone cannot see reliability magnitudes, which is why
   the fast path was given a certificate instead of more stored digits.
 * **The headline figures are stale.** "1,324 tests, 6,331 subtests, 27 Lean
-  files" is a snapshot. The live counts are generated into `overlay/FIGURES.md`
+  files" is a snapshot. The live counts are generated into `FIGURES.md`
   by `glm_universal.figures`, which is the only place in the project a test
   count is allowed to be stated; the Lean tree now holds 29 files.
 
@@ -232,13 +232,13 @@ layer stack resolves 3 / 5 / 7 / 7 / 7 of the seven carriers and loses
 
 | what | where | reachable as |
 |---|---|---|
-| the claim ledger | `overlay/glm_universal/reasoning/blueprint.py` | `report blueprint` |
-| the reversible bit-dynamics audit | `overlay/glm_universal/reasoning/reversible.py` | `report reversible` |
-| the PTB/AOO mantissa metrology | `overlay/glm_universal/reasoning/mantissa.py` | `report mantissa` |
-| the thermo-dynamic carrier engine | `overlay/glm_universal/reasoning/engine.py` | `report engine` |
+| the claim ledger | `glm_universal/reasoning/blueprint.py` | `report blueprint` |
+| the reversible bit-dynamics audit | `glm_universal/reasoning/reversible.py` | `report reversible` |
+| the PTB/AOO mantissa metrology | `glm_universal/reasoning/mantissa.py` | `report mantissa` |
+| the thermo-dynamic carrier engine | `glm_universal/reasoning/engine.py` | `report engine` |
 | the Part V statements, machine-checked | `RequestProject/GLM/Reversible.lean` | `lake build` |
 | the §5.1 statements, machine-checked | `RequestProject/GLM/Mantissa.lean` | `lake build` |
 | the unregistered-molecule path | `runtime/session.py`, `data_objects/molecules.py` | `nearest PbCl2` |
 
-Bound by `overlay/glm_universal/tests/test_blueprint.py`, which fails if a
+Bound by `glm_universal/tests/test_blueprint.py`, which fails if a
 verdict changes without the ledger changing with it.

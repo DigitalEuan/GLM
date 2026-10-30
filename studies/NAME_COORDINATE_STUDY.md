@@ -214,9 +214,9 @@ is measured separately in [`RELATIVE_MEASURE_STUDY.md`](RELATIVE_MEASURE_STUDY.m
 
 | | |
 |---|---|
-| module | `overlay/glm_universal/reasoning/name_coordinate.py` |
+| module | `glm_universal/reasoning/name_coordinate.py` |
 | report subject | `report names` (aliases: `name`, `name coordinate`, `naming`) |
 | column-3 template | `report_names` |
-| tests | `overlay/glm_universal/tests/test_name_coordinate.py`, 30 cases |
+| tests | `glm_universal/tests/test_name_coordinate.py`, 30 cases |
 | evaluation case | `report-names` |
 | Lean | `RequestProject/GLM/NameCoordinate.lean` — 3 definitions, 8 theorems, no `sorry` |

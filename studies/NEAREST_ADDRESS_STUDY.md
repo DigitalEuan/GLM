@@ -161,16 +161,16 @@ W1 and F1 hold.
 
 ## 6. Files
 
-* `overlay/glm_lean/RequestProject/GLM/NearestAddress.lean` — §1.
-* `overlay/glm_universal/reasoning/nearest_address.py` — the request, the
+* `glm_lean/RequestProject/GLM/NearestAddress.lean` — §1.
+* `glm_universal/reasoning/nearest_address.py` — the request, the
   ranking, the read.
-* `overlay/glm_universal/runtime/parser.py` (the address path of `nearest`),
+* `glm_universal/runtime/parser.py` (the address path of `nearest`),
   `runtime/session.py` (`_solve_nearest_address`), `runtime/tct_engine.py`
   (the `nearest_address` template), `runtime/toolbox.py`.
-* `overlay/glm_universal/reasoning/nearest_address_study.py` — the marks;
+* `glm_universal/reasoning/nearest_address_study.py` — the marks;
   `python3 -m glm_universal.tools nearest-address [--write]`.
-* `overlay/glm_universal/reasoning/budget_guard_frozen.py` — F1 and A0.
-* `overlay/glm_universal/tests/test_nearest_address.py`.
+* `glm_universal/reasoning/budget_guard_frozen.py` — F1 and A0.
+* `glm_universal/tests/test_nearest_address.py`.
 
 ## 7. What came out
 

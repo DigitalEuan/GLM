@@ -1,0 +1,79 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 6 of 6 marks; 17 of 17 held-out questions as expected (16 answered, 1 refused by the
+  work budget as expected); 14 of 14 chains verified in a fresh interpreter, 56 of 56 mutants and 41 of
+  41 tampered certificates caught; 300 of 300 numbers above 10^12 agree with trial division; 0 of 30 stepwise
+  cases moved; 9 of 11 large cases certified, 2 refused by the work budget, 0 wrong.
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - evaluation/primality_certificate_cases
+  - reasoning/primality_certificate
+  - runtime/stepwise
+  - tests/test_primality_certificate
+  lean:
+  - PrimalityCertificate
+  prose: PRIMALITY_CERTIFICATE_STUDY.md
+  test:
+  - test_primality_certificate.py
+  wheel: []
+follow_ups: []
+id: PRIMALITY_CERTIFICATE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 139
+predecessors: []
+question: Can the stepwise planner's primality step drop its ceiling of 10^12 by checking a certificate
+  proved sound in Lean instead of running trial division, with every answer re-checked in a fresh interpreter
+  and no answer below the old ceiling changed?
+recomputed_by: '`glm_universal.evaluation.primality_certificate_cases.measure`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-was-built
+  heading: 1. What was built
+- anchor: 2-what-is-proved-requestprojectglmprimalitycertificatelean
+  heading: 2. What is proved (`RequestProject/GLM/PrimalityCertificate.lean`)
+- anchor: 3-the-held-out-set-evaluationprimality_certificate_casespy-held_out-17
+  heading: 3. The held-out set (`evaluation/primality_certificate_cases.py`, `HELD_OUT`, 17)
+- anchor: 4-the-marks
+  heading: 4. The marks
+- anchor: 5-the-measurement
+  heading: 5. The measurement
+- anchor: 6-what-this-round-does-not-do
+  heading: 6. What this round does not do
+- anchor: 7-files
+  heading: 7. Files
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Primality certificates — the primality step without a ceiling
+verdict: Yes. Above 10^12 a primality step now carries a certificate — a factor, a Fermat witness or a
+  Pratt certificate — whose check costs a few modular exponentiations at any size and is proved sound
+  in Lean; below it nothing changed. The only refusal left is a work budget on factoring, never a size
+  ceiling. All 6 marks were met.
+wobble_deps: []

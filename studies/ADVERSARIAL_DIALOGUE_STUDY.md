@@ -35,7 +35,7 @@ that the underlying measurement excluded.**
 
 ## 1. What is proved
 
-`overlay/glm_lean/RequestProject/GLM/AdversarialDialogue.lean` (namespace
+`glm_lean/RequestProject/GLM/AdversarialDialogue.lean` (namespace
 `GLM.AdversarialDialogue`, on top of `GLM.NearestQuestion`; 0 `sorry`; axioms
 `propext`, `Classical.choice`, `Quot.sound`). Phase 150's theorems speak of the
 carrier meant under true replies; these drop the assumption.

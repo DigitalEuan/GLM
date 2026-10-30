@@ -1,0 +1,92 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 'B chosen: O1, O2, O3 met (O4 met); not-entailed oscillator answers A 6, B 0, C 0, D
+  0; preservation lost A 0, B 0, C 0, D 8 of 249; battery answered A 21, B 21, C 17, D 21 of 23.'
+directives:
+- D3
+evidence: []
+faculty: derivation
+file_refs:
+  code:
+  - engineering/oscillator_junction
+  - tests/test_oscillator_junction
+  lean:
+  - OscillatorJunction
+  prose: OSCILLATOR_JUNCTION_STUDY.md
+  test:
+  - test_oscillator_junction.py
+  wheel: []
+follow_ups: []
+id: OSCILLATOR_JUNCTION_STUDY
+junctions:
+- rule: ''
+  study: ''
+  wheels:
+  - W4
+  - W9
+- rule: ''
+  study: ''
+  wheels:
+  - W9
+  - W13
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 157
+predecessors:
+- FRICTION_STUDY
+question: The junction between wave kinematics (W9) and the mass-spring oscillator (W13) joins `frequency`
+  and `angle`, and through the older junction between rotational mechanics and waves (W4/W9) it makes
+  an oscillator's angular frequency the angular velocity of any rotating body; tried four ways under one
+  declared rule, which junction keeps every declared answer and gives no answer that ties an oscillator
+  to a rotating body it was never said to be coupled to?
+recomputed_by: '`glm_universal.engineering.oscillator_junction.report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-built
+  heading: 1. What is built
+- anchor: 2-the-rules-fixed-before-the-measurement
+  heading: 2. The rules, fixed before the measurement
+- anchor: 3-what-would-count-against
+  heading: 3. What would count against
+- anchor: 4-what-is-not-claimed
+  heading: 4. What is not claimed
+- anchor: 5-what-is-proved-before-the-measurement
+  heading: 5. What is proved before the measurement
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-what-came-out
+  heading: 7. What came out
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The oscillator junction: which angular quantity an oscillator shares, tried four ways'
+verdict: 'Of four junctions between wave kinematics and the mass-spring oscillator, the one that joins
+  `frequency` only and splits `angle` (B, rate only) is chosen by the declared rule and now ships: it
+  keeps all 21 declared answers and 9 refusals and every one of the 249 answers the shipped frame gave
+  on the preservation set, and its census has no answer tying the oscillator to a rotating body, where
+  the Phase 157 junction (A) gave 6; the reference circle read literally (D) also removes them but loses
+  8 shaft-power answers of Phase 66, and keeping the wheels apart (C) loses 4 declared answers; the price
+  of B is the reference-circle identity itself, which it no longer derives.'
+wobble_deps: []

@@ -32,7 +32,7 @@ Leech kissing number now cites `GLM.LeechKissing.leech_kissing_number` and
 
 ## 1. What this round builds
 
-**The Lean file** (`overlay/glm_lean/RequestProject/GLM/PiMachine.lean`, 0
+**The Lean file** (`glm_lean/RequestProject/GLM/PiMachine.lean`, 0
 `sorry`, axioms `propext`, `Classical.choice`, `Quot.sound`).
 
 * `machin` — `π = 16 arctan (1/5) − 4 arctan (1/239)`, from Mathlib's
@@ -51,13 +51,13 @@ Leech kissing number now cites `GLM.LeechKissing.leech_kissing_number` and
   theorem that `π` lies between the two fractions, with positive
   denominators, for every `a` and `b`.
 
-**The machine** (`overlay/glm_universal/reasoning/tool_machine.py`).
+**The machine** (`glm_universal/reasoning/tool_machine.py`).
 `pi_lines` writes the two loops and the combination as GLM-BAT lines; with the
 switch `PI_SUMMED` on (the default) they replace the declared constant
 wherever a step needs π. `PI_TERMS = (40, 12)`. `pi_ends` is the Python mirror
 of `piEnds`. The switch off restores Phase 163's constant.
 
-**The marks** (`overlay/glm_universal/reasoning/pi_machine_study.py`,
+**The marks** (`glm_universal/reasoning/pi_machine_study.py`,
 `python3 -m glm_universal.tools pi-machine`), recomputed live in about three
 seconds; no stored measurement.
 
@@ -100,7 +100,7 @@ answers and refusals (223 of 223).
 ## 6. How it is measured
 
 `lake build RequestProject.GLM.PiMachine` from the repository root;
-`PYTHONPATH=. python3 -m glm_universal.tools pi-machine` from `overlay/`;
+`PYTHONPATH=. python3 -m glm_universal.tools pi-machine` from ``;
 `tests/test_pi_machine.py`.
 
 ## 7. What came out

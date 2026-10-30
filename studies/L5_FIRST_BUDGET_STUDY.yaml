@@ -1,0 +1,74 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: '3 of 3 marks; at 240 starts 43 correct, 0 wrong, 1 refused of 44 (1920 starts: 44, 0,
+  0); seed queries 10/10; 43 of 44 inside their own radius, all 43 answered; 397 absences, 1 false (1920:
+  396, 0); prefix property 6/6 seeds.'
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code: []
+  lean: []
+  prose: L5_FIRST_BUDGET_STUDY.md
+  test:
+  - test_l5_first_budget.py
+  wheel: []
+follow_ups: []
+id: L5_FIRST_BUDGET_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 149
+predecessors: []
+question: Does the configuration reading `L5`'s answer rule name the escalation round's 44 queries at
+  240 starts, the classifier round's budget, where Phase 149 had measured them only at 1920?
+recomputed_by: '`glm_universal.reasoning.l5_first_budget.l5_first_budget_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved-before-any-code
+  heading: 1. What is proved before any code
+- anchor: 2-the-rule
+  heading: 2. The rule
+- anchor: 3-the-questions
+  heading: 3. The questions
+- anchor: 4-the-marks-declared-before-the-measurement
+  heading: 4. The marks, declared before the measurement
+- anchor: 5-what-would-count-against
+  heading: 5. What would count against
+- anchor: 6-what-is-not-claimed
+  heading: 6. What is not claimed
+- anchor: 7-what-came-out
+  heading: 7. What came out
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: '`L5` at the first round''s budget — the 44 queries re-profiled at 240 starts'
+verdict: 'At the first round''s budget `L5` names 43 of the 44 queries correctly and refuses the 44th;
+  nothing is named wrongly. The refused query is the sibling centre of walk 6 (`E_8^3`): its nearest reference
+  is the right one, but at 240 starts its distance is not below that reference''s certified radius. The
+  classifier round''s sanity query holds: 10 of 10 seed queries are named as themselves. The same query
+  is the only false absence of the 397 absences issued, so an absence at 240 starts is not certified for
+  every query, as it is at 1920. 3 of 3 marks were met.'
+wobble_deps: []

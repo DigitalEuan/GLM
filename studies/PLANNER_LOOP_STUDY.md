@@ -43,7 +43,7 @@ answer's *value* (not just its text) had no reader at all.
 ## 1. The objects
 
 * **Three dialect builtins that call the rest of the machine**
-  ([`reasoning/python_speech.py`](../overlay/glm_universal/reasoning/python_speech.py),
+  ([`reasoning/python_speech.py`](../glm_universal/reasoning/python_speech.py),
   `b_derive`, `b_ask`, `b_solve`):
   * `derive(target, (name, value), ...)` — the stepwise planner's goal mode,
     *given name = value, …, what is the target*. A value is an `int`, a
@@ -65,7 +65,7 @@ answer's *value* (not just its text) had no reader at all.
   refusal (`NO_DERIVATION`, `VALUE_MISSING`, `NONLINEAR`, …) in the reason.
   Without the runtime's bridge — the dialect as the reasoning layer runs it —
   each refuses `BRIDGE_UNAVAILABLE`.
-* **The bridge** ([`runtime/planner_bridge.py`](../overlay/glm_universal/runtime/planner_bridge.py)):
+* **The bridge** ([`runtime/planner_bridge.py`](../glm_universal/runtime/planner_bridge.py)):
   the runtime object handed to `speak`. Each call returns the value and the
   surface's own checked record: the stepwise chain (its data and its column-3
   script) or the reverse certificate (its read-back and its column-3 script).
@@ -98,7 +98,7 @@ answer's *value* (not just its text) had no reader at all.
 
 ## 2. Declarations — written before any code of the round
 
-The corpus is [`evaluation/planner_loop_cases.py`](../overlay/glm_universal/evaluation/planner_loop_cases.py),
+The corpus is [`evaluation/planner_loop_cases.py`](../glm_universal/evaluation/planner_loop_cases.py),
 committed before any code of the round with its marks: 12 derive, 8 ask, 6
 solve, 8 loop and 10 frame cases, every expected value worked by hand in exact
 fractions from the wheels' axioms, the element register's own values and
@@ -123,16 +123,16 @@ consistently, re-rendering the sub-answer's script from the lied record; and
 
 ## 3. What was built
 
-* In [`reasoning/python_speech.py`](../overlay/glm_universal/reasoning/python_speech.py):
+* In [`reasoning/python_speech.py`](../glm_universal/reasoning/python_speech.py):
   the builtins `derive`, `ask`, `solve`; an `Evaluator` that takes a bridge,
   asks each distinct question once per run, and records a `bridge` step per
   call; `speak(source, bridge=...)`; the payload's `bridge` records; and the
   column-3 block that re-runs the records' scripts and binds their values.
-* In [`reasoning/python_substrate.py`](../overlay/glm_universal/reasoning/python_substrate.py):
+* In [`reasoning/python_substrate.py`](../glm_universal/reasoning/python_substrate.py):
   the four refusal names, and the prelude's `derive`, `ask` and `solve`, which
   build each question exactly as the evaluator does and read the checked
   table — so column 3 also checks that the two sides build the same question.
-* [`runtime/planner_bridge.py`](../overlay/glm_universal/runtime/planner_bridge.py):
+* [`runtime/planner_bridge.py`](../glm_universal/runtime/planner_bridge.py):
   the bridge, the frames, `speak_text` (the one place the router and the
   command line read a program or a frame) and the declared mutations.
 * In `runtime/router.py`: the python surface reads a framed question and
@@ -140,9 +140,9 @@ consistently, re-rendering the sub-answer's script from the lied record; and
   controls); in `runtime/stepwise.py`: `compose(..., single=True)`, used only
   by `ask`; in `GLM.py`: `--ask` and `--python` print a bridge program's
   steps and a frame's refusal.
-* The measurement [`runtime/planner_loop_report.py`](../overlay/glm_universal/runtime/planner_loop_report.py),
+* The measurement [`runtime/planner_loop_report.py`](../glm_universal/runtime/planner_loop_report.py),
   the command `tools planner-loop`, `tests/test_planner_loop.py` (16 tests),
-  and [`RequestProject/GLM/PlannerLoop.lean`](../overlay/glm_lean/RequestProject/GLM/PlannerLoop.lean).
+  and [`RequestProject/GLM/PlannerLoop.lean`](../glm_lean/RequestProject/GLM/PlannerLoop.lean).
 
 ## 4. Results
 
@@ -239,7 +239,7 @@ expression in English now reaches the evaluator.
 
 ## 7. The Lean file
 
-[`RequestProject/GLM/PlannerLoop.lean`](../overlay/glm_lean/RequestProject/GLM/PlannerLoop.lean)
+[`RequestProject/GLM/PlannerLoop.lean`](../glm_lean/RequestProject/GLM/PlannerLoop.lean)
 models a program as a tree that returns a value or calls an oracle at a key
 and continues with the answer, and proves, with the standard axioms only:
 

@@ -1,0 +1,88 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 30 of 30 declared questions as declared (12 register, 14 conversion, 4 charge), 0 wrong;
+  through `GLM.py --ask` the machine answered 2 of the 30 before the round and 18 after; the naive control
+  answers 7 conversion cases, all 7 wrongly; 18 of 18 chain scripts verified (123 of 123 steps aligned)
+  with every mutation rejected; 8 of 8 marks met.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - evaluation/measurand_register_cases
+  - runtime/measurand_register
+  - runtime/stepwise
+  lean:
+  - MeasurandRegister
+  prose: MEASURAND_REGISTER_STUDY.md
+  test:
+  - test_measurand_register.py
+  wheel: []
+follow_ups: []
+id: MEASURAND_REGISTER_STUDY
+junctions:
+- rule: ''
+  study: ''
+  wheels:
+  - W5
+  - W6
+- rule: ''
+  study: ''
+  wheels:
+  - W9
+  - W10
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 86
+predecessors:
+- CONNECTED_MACHINE_STUDY
+- MEASURANDS_STUDY
+question: Can the stepwise planner read a register value through the measurand it is — a first ionization
+  energy as the energy of the photon that ionizes the atom — and carry a power across a conversion only
+  through a stated efficiency, without answering anything wrongly?
+recomputed_by: '`glm_universal.runtime.measurand_register_report.measurand_register_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-objects
+  heading: 1. The objects
+- anchor: 2-declarations-written-before-any-code-of-the-round
+  heading: 2. Declarations — written before any code of the round
+- anchor: 3-what-was-built
+  heading: 3. What was built
+- anchor: 4-results
+  heading: 4. Results
+- anchor: 5-what-this-round-moved
+  heading: 5. What this round moved
+- anchor: 6-what-this-leaves
+  heading: 6. What this leaves
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The measurand register: register values read through what they measure, conversions through a
+  stated efficiency, and the elementary charge'
+verdict: 'Yes: the stepwise planner now reads a register value through a declared register of measurands,
+  carries a power across a motor, generator, pump or turbine only through a stated efficiency in (0, 1],
+  and reads the elementary charge as an exact unit, with every declared case as declared and 0 wrong.'
+wobble_deps: []

@@ -1,0 +1,82 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 7 of 7 marks on the fifth take (4, 6, 6 and 7 of 7 on the first four); `--result` agrees
+  with the census on 223 of 223; the gate replays 171 of 177 cases, 171 verify, 6 without a column 3,
+  in 540 s on eight processes; evaluation 223 of 223; 5 of 5 theorems, 0 `sorry`.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - AdversarialDialogue
+  - ContextFrames
+  - EvidenceInUse
+  prose: EVIDENCE_IN_USE_STUDY.md
+  test:
+  - test_evidence_in_use.py
+  wheel: []
+follow_ups: []
+id: EVIDENCE_IN_USE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 169
+predecessors: []
+question: Can the command line print any answer as the one result model of Phase 169, without changing
+  what it answers, and can the end-to-end evaluation replay column 3 for every answered case, so that
+  a replay which no longer reproduces its answer fails the gate instead of going unseen?
+recomputed_by: '`glm_universal.reasoning.evidence_in_use_study.evidence_in_use_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-was-built
+  heading: 1. What was built
+- anchor: 2-the-formal-half
+  heading: 2. The formal half
+- anchor: 3-faculties
+  heading: 3. Faculties
+- anchor: 4-the-marks
+  heading: 4. The marks
+- anchor: 5-what-would-count-against
+  heading: 5. What would count against
+- anchor: 6-what-is-not-claimed
+  heading: 6. What is not claimed
+- anchor: 7-what-came-out
+  heading: 7. What came out
+- anchor: in-one-paragraph
+  heading: In one paragraph
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The evidence model in use — every answer as one result on the command line, and column 3 in the
+  evaluation's gate
+verdict: 'Yes. `GLM.py -q … --result` prints every evaluation answer as the ten-field result of Phase
+  169 with the same status, surface, kind and answer as the census, and changes no answer; `evaluation
+  --replay` replays column 3 for every case expected answered and fails on a replay that does not verify,
+  by a rule proved in Lean. The measurement took five takes: the first four were moved by stored measurements
+  or a corpus that were stale or older than what they described (a corpus not refreshed with the last
+  round''s Lean files, a re-pin that staled a measurement, a census holding a stale answer, a refresh
+  that had not read this round''s own Lean file), never by the reading.'
+wobble_deps: []

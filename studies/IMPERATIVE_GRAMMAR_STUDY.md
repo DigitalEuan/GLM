@@ -104,13 +104,13 @@ star and mapping patterns, and a `return` outside a function stay
 ## 2. Declarations — written before any code of the round
 
 The declared cases are
-`overlay/glm_universal/evaluation/imperative_cases.py`, committed with this
+`glm_universal/evaluation/imperative_cases.py`, committed with this
 section and before any code of the round. Every expected sentence in
 `SAY_CASES` was worked by hand from §1. CPython with the dialect's prelude is
 the reference for every value. The answers of the whole surface to the 83
 Phase 64 value programs and 26 refusal programs, as they stood before the
 round, are frozen in
-`overlay/glm_universal/reasoning/_data/imperative_baseline.json`.
+`glm_universal/reasoning/_data/imperative_baseline.json`.
 
 * **I1 — sentences.** Every `SAY_CASES` program is said word for word, and
   its value equals CPython's. **0 wrong.**
@@ -153,7 +153,7 @@ after the measurement.
 
 ## 3. What was built
 
-* [`reasoning/reverse_tct_imp.py`](../overlay/glm_universal/reasoning/reverse_tct_imp.py)
+* [`reasoning/reverse_tct_imp.py`](../glm_universal/reasoning/reverse_tct_imp.py)
   — the imperative grammar: the realiser of §1 (each earlier term spelled
   through the earlier realisers, with its children realised here so that a
   nested call, choice or grammar-word name is spelled the imperative way), a
@@ -164,11 +164,11 @@ after the measurement.
   with the trace, the final values and the result in column 1, its own
   column-3 script (an interpreter of its own over the third sort's own script
   evaluator, lifted out of that script) and its mutation, and the battery.
-* [`reasoning/reverse_tct.py`](../overlay/glm_universal/reasoning/reverse_tct.py)
+* [`reasoning/reverse_tct.py`](../glm_universal/reasoning/reverse_tct.py)
   — `say` asks the imperative grammar only after the third sort cannot read
-  the text; [`reasoning/reverse_tct_script.py`](../overlay/glm_universal/reasoning/reverse_tct_script.py)
+  the text; [`reasoning/reverse_tct_script.py`](../glm_universal/reasoning/reverse_tct_script.py)
   dispatches a certificate of kind `say-imp` to its script.
-* [`runtime/imperative_report.py`](../overlay/glm_universal/runtime/imperative_report.py)
+* [`runtime/imperative_report.py`](../glm_universal/runtime/imperative_report.py)
   and `tools imperative` — the marks, and the post-hoc differential battery.
 * `RequestProject/GLM/ImperativeGrammar.lean` — §5.
 

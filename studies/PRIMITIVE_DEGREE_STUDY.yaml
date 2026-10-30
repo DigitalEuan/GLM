@@ -1,0 +1,86 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 8 of 8 marks met; 3 of 3 declared sextics certified; 6 of 6 solvable controls silent;
+  `PGL(2, 5)` and `PSL(2, 5)` built, each holding a `(5, 1)` element and no Jordan element; 0 of 201 solvable
+  polynomials certified; 60 of 60 Cayley sextics certified, 0 by Phase 114; 512 of 512 prime-power readings
+  right and 0 of 100 prime-power-degree polynomials touched; 6 theorems, 0 `sorry`; Phase 115 still 8
+  of 8.
+directives:
+- D2
+- D3
+- D4
+- D6
+- D8
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - evaluation/primitive_degree_cases
+  - tests/test_primitive_degree
+  lean:
+  - PrimitiveDegree
+  prose: PRIMITIVE_DEGREE_STUDY.md
+  test:
+  - test_primitive_degree.py
+  wheel: []
+follow_ups: []
+id: PRIMITIVE_DEGREE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 114
+predecessors:
+- PRIMITIVE_RADICAL_STUDY
+question: Phase 114's composite-degree certificate needs a second Frobenius element, one with a power
+  that is a transposition or a 3-cycle, so `solve symbolically` says nothing about a sextic whose Galois
+  group is `PGL(2, 5)` or `PSL(2, 5)` acting on six points, though neither group is solvable. Can the
+  layer drop the second element where the degree allows it, and still never certify a polynomial whose
+  group is solvable?
+recomputed_by: '`glm_universal.runtime.primitive_degree_report.primitive_degree_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-what-was-added
+  heading: 1. What was added
+- anchor: 2-the-marks
+  heading: 2. The marks
+- anchor: 3-what-is-proved
+  heading: 3. What is proved
+- anchor: 4-limits-and-what-the-round-leaves
+  heading: 4. Limits, and what the round leaves
+- anchor: 5-re-running-it
+  heading: 5. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Roots with no expression in radicals, from one Frobenius element, in a degree that is not a prime
+  power
+verdict: 'Yes, in every degree that is not a prime power. A solvable primitive permutation group has prime-power
+  degree (Galois), so in degree 6, 10, 12, 14, 15 and so on, one element of cycle type `(n - 1, 1)`, which
+  already makes the group primitive, rules solvability out; both steps are proved in Lean. All eight marks
+  were met: the statement reaches the three declared sextics, built as Cayley resolvents of quintics with
+  groups `S5` and `A5`, and all 60 resolvents of the reach battery, none of which Phase 114''s certificate
+  reaches; it is given to none of 201 polynomials with solvable groups, and it stays out of prime-power
+  degree. Dedekind''s theorem is still used, not proved.'
+wobble_deps: []

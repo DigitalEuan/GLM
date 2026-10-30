@@ -1,0 +1,91 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Precision against the elaborator 9,834 of 9,920 edges (legacy 7,795 of 14,949); visible
+  recall 9,834 of 10,819 (legacy 7,778); edges into the ten one-letter declarations unconfirmed 4 (legacy
+  3,162); goals moved by anonymisation 0 of 836 (legacy 41); address hits at 5 on 209 declaration queries
+  79 (legacy 77); 7 of 7 marks met (L1–L7) when the round closed, L6 recorded as a miss by construction
+  since Phase 114's re-take of the headline, and of the dependency marks D2–D4 met, D1 not met as declared
+  (7 of 12, 0 wrong, 5 refused as ambiguous) and met after a scope repair (12 of 12).
+directives:
+- D1
+- D2
+- D3
+- D4
+evidence: []
+faculty: addressing
+file_refs:
+  code: []
+  lean:
+  - CitationReference
+  - CitationScope
+  - Code
+  prose: CITATION_SCOPE_STUDY.md
+  test:
+  - test_citation_scope.py
+  wheel: []
+follow_ups: []
+id: CITATION_SCOPE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 114
+predecessors:
+- CORPUS_RESAMPLE_STUDY
+- DERIVATION_STUDY
+- NATIVE_PARITY_STUDY
+- NATIVE_WORDS_STUDY
+- QUESTION_SET_B_STUDY
+question: Once the citation index stops reading a bound variable, a comment word or an out-of-scope short
+  name as a citation, and the feature map stops counting a type word inside an identifier, how many of
+  the citation edges the GLM reads are edges the Lean elaborator confirms, and which Lean-corpus retrieval
+  findings survive the repaired relevance?
+recomputed_by: '`glm_universal.reasoning.citation_scope.citation_scope_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-objects
+  heading: 1. The objects
+- anchor: 2-declarations-written-before-the-reference-was-taken
+  heading: 2. Declarations — written before the reference was taken
+- anchor: 3-measurements
+  heading: 3. Measurements
+- anchor: 4-what-changed-in-the-system
+  heading: 4. What changed in the system
+- anchor: 5-re-running
+  heading: 5. Re-running
+- anchor: 6-what-this-leaves
+  heading: 6. What this leaves
+- anchor: disposition-phase-106
+  heading: Disposition (Phase 106)
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Citations read in Lean's scope, checked against the elaborator
+verdict: 'The repaired reader is a reader of Lean: 99.1 % of its citation edges are edges the elaborator
+  confirms, against 52.1 % for the legacy reader, it finds more of the real ones, and the one-letter sink
+  is gone; the type-word repair leaves no structural coordinate that a renaming can move; every qualitative
+  retrieval verdict survives the repaired relevance, and the structural address gains on it. The repaired
+  graph then carries a new operation: whether one Lean result rests on another, answered with a checkable
+  witness.'
+wobble_deps: []

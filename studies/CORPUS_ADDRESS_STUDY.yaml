@@ -1,0 +1,75 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Reading every current-state document at tier 0 costs a small fraction of reading them
+  in full, and the completeness bound held on every pair checked with 0 violations.
+directives: []
+evidence: []
+faculty: addressing
+file_refs:
+  code:
+  - tests/test_corpus
+  lean:
+  - Corpus
+  - Retrieval
+  prose: CORPUS_ADDRESS_STUDY.md
+  test:
+  - test_corpus_address.py
+  wheel: []
+follow_ups: []
+id: CORPUS_ADDRESS_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: The project's own prose had grown past what one session can read. Can the substrate's rules
+  — generate rather than store, a truncated read is coarse rather than wrong, a derived table only beside
+  the digest of its inputs — be applied to the documents themselves?
+recomputed_by: '`glm_universal.corpus.report.corpus_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-what-the-corpus-is-and-what-a-session-pays-to-read-it
+  heading: 1. What the corpus is, and what a session pays to read it
+- anchor: 2-the-tier-contract-checked
+  heading: 2. The tier contract, checked
+- anchor: 3-the-coverage-claim
+  heading: 3. The coverage claim
+- anchor: 4-what-is-emitted-rather-than-written
+  heading: 4. What is emitted rather than written
+- anchor: 5-an-address-for-every-section
+  heading: 5. An address for every section
+- anchor: 6-does-the-address-retrieve-measured-against-its-controls
+  heading: 6. Does the address retrieve? Measured against its controls
+- anchor: 7-what-the-lattice-does-earn-a-shortlist-that-is-complete
+  heading: '7. What the lattice does earn: a shortlist that is complete'
+- anchor: 8-what-would-falsify-this
+  heading: 8. What would falsify this
+- anchor: 9-what-this-does-not-claim
+  heading: 9. What this does not claim
+status: negative
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The corpus held the way the data is: tiers, generation, and an address for every section'
+verdict: The address does not rank better than reading the words, and what it contributes is a shortlist
+  that is complete up to a stated radius.
+wobble_deps: []

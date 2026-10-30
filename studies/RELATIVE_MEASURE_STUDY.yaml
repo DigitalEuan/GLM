@@ -1,0 +1,74 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: The comparison-class register, the widening measured, and the queries that refuse at
+  the boundary.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - data_objects/comparison_classes
+  - reasoning/measure_view
+  - runtime/session
+  - tests/test_comparative
+  - tests/test_comparison_classes
+  - tests/test_measure_words
+  lean:
+  - Comparative
+  - Cumulative
+  - MeasureView
+  prose: RELATIVE_MEASURE_STUDY.md
+  test:
+  - test_relative_measure.py
+  wheel: []
+follow_ups: []
+id: RELATIVE_MEASURE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: What did the proposal's steps actually buy, once built?
+recomputed_by: '`glm_universal.reasoning.measure_view.measure_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-question
+  heading: 1. The question
+- anchor: 2-the-comparison-class-register-step-3
+  heading: 2. The comparison-class register (step 3)
+- anchor: 3-what-the-widening-gains-step-4
+  heading: 3. What the widening gains (step 4)
+- anchor: 4-the-related_to-residue-step-2
+  heading: 4. The `related_to` residue (step 2)
+- anchor: 5-the-query-and-its-tested-refusal-step-5
+  heading: 5. The query, and its tested refusal (step 5)
+- anchor: 6-what-this-does-not-do
+  heading: 6. What this does not do
+- anchor: 7-where-to-look
+  heading: 7. Where to look
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Measure words as relative measures — the widening, measured
+verdict: This is the result document for steps 2–5 of the proposal.
+wobble_deps: []

@@ -21,7 +21,7 @@ The identity holds and the reading of it does not: the accumulator is exactly th
 The same reading, recomputed rather than written:
 
 <!-- generated: now-tier -->
-**The accumulator is exactly the fractional part of the integral of its input, and that is all it is.**  Over 20 runs of the supplied demonstrations the state recovers the emitted count 20 times out of 20 — and so does the target and the tick count with the state withheld, 20 times out of 20, so the receipt adds nothing to what the program already says.  Enumerated exhaustively, 4,096 histories leave 4 distinct receipts, the largest class holding 1,024 of them.  The same identity is what makes the shipped modulator cheap: at the 512 ticks the `real` query kind runs, the average costs 2 µs read off the target against 2580 µs run as a loop, with identical output.
+**The accumulator is exactly the fractional part of the integral of its input, and that is all it is.**  Over 20 runs of the supplied demonstrations the state recovers the emitted count 20 times out of 20 — and so does the target and the tick count with the state withheld, 20 times out of 20, so the receipt adds nothing to what the program already says.  Enumerated exhaustively, 4,096 histories leave 4 distinct receipts, the largest class holding 1,024 of them.  The same identity is what makes the shipped modulator cheap: at the 512 ticks the `real` query kind runs, the average costs 2 µs read off the target against 2207 µs run as a loop, with identical output.
 <!-- end generated -->
 
 ---
@@ -309,8 +309,8 @@ modulator computes by looping. `exact_real.delta_sigma_average` and
 <!-- generated: now-shortcut -->
 | ticks | average: loop | average: read off | bits: loop | bits: read off |
 |---:|---:|---:|---:|---:|
-| 512 | 2580 µs | 2 µs | 2561 µs | 75 µs |
-| 4,096 | 20515 µs | 2 µs | 20500 µs | 564 µs |
+| 512 | 2207 µs | 2 µs | 2169 µs | 81 µs |
+| 4,096 | 17342 µs | 2 µs | 17519 µs | 670 µs |
 
 Identical output on every case measured: True. The shipped `real` query kind runs 512 ticks per question, which is the first row.  The theorems are `GLM.NowReceipt.const_count_eq_floor`, `GLM.NowReceipt.const_bit_eq_floor_diff`.
 <!-- end generated -->
@@ -419,8 +419,8 @@ in their "honest boundary" sections, and this study finishes it.
 | what | where |
 |---|---|
 | nine theorems about what the accumulator records | `RequestProject/GLM/NowReceipt.lean` |
-| the audit, and every figure above | `overlay/glm_universal/reasoning/now_receipt.py` |
-| the declared float site, and only it | `overlay/glm_universal/reasoning/now_float_control.py` |
-| the closed forms on the shipped path | `overlay/glm_universal/reasoning/exact_real.py` |
-| the tests, pinned against the raw loop | `overlay/glm_universal/tests/test_now_receipt.py` |
+| the audit, and every figure above | `glm_universal/reasoning/now_receipt.py` |
+| the declared float site, and only it | `glm_universal/reasoning/now_float_control.py` |
+| the closed forms on the shipped path | `glm_universal/reasoning/exact_real.py` |
+| the tests, pinned against the raw loop | `glm_universal/tests/test_now_receipt.py` |
 | the supplied material, unedited | `source_material/HISTORY_RECORDED_NOW*_STUDY.md`, `source_material/history_recorded_now.py` |

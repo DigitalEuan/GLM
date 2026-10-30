@@ -1,0 +1,74 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 'Period 1: slack exactly 2; a steered word of period 2m+1 lets a code pass m questions.'
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - BlackRunWindow
+  - DiagonalSearch
+  - DiagonalSearchData
+  - HalfLineMachine
+  - SidewaysPeriodTwo
+  - TestCountLaw
+  - TestCountLawData
+  - TestCountPeriods
+  - TestCountPeriodsData
+  - TestHalving
+  - TestHalvingData
+  prose: RULE30_TEST_COUNT.md
+  test:
+  - test_rule30_test_count.py
+  wheel: []
+follow_ups: []
+id: RULE30_TEST_COUNT
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Does the half-line machine fail within a bounded number of questions on the observer's clock?
+recomputed_by: (hand-written argument; nothing to recompute)
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-idea
+  heading: 1. The idea
+- anchor: 2-what-is-proved
+  heading: 2. What is proved
+- anchor: 3-to-do-35-does-period-4-have-a-finite-slack
+  heading: 3. To Do 35 — does period 4 have a finite slack?
+- anchor: 4-the-perspective-reading-the-users-wobbleobserver-idea
+  heading: 4. The perspective reading (the user's wobble/observer idea)
+- anchor: 5-a-bookkeeping-identity-emp-data-exact-reason
+  heading: 5. A bookkeeping identity (EMP data, exact reason)
+- anchor: 6-open
+  heading: 6. Open
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The observer's clock — guide to Rounds 33–35
+verdict: On the observer's clock the half-line machine fails after about d questions, whatever the word;
+  no slack works for all periods, period 1 has slack exactly 2, and the per-period laws pass to divisors.
+wobble_deps: []

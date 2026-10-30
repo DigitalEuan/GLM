@@ -299,12 +299,12 @@ of comparable pairs.
 
 | file | what it holds |
 |---|---|
-| `overlay/glm_universal/data_objects/comparison_classes.py` | the 45 classes, the 11 scales, the codec, the lexicon agreement |
-| `overlay/glm_universal/reasoning/measure_view.py` | the reading, the widening audit, the relation repair, the report |
-| `overlay/glm_universal/runtime/session.py` | `_solve_measure` and the `report measure` subject |
-| `overlay/glm_universal/tests/test_comparison_classes.py` | the register: derivation, exact arithmetic, codec round trip, agreement |
-| `overlay/glm_universal/tests/test_measure_words.py` | the view: the reading, the audit figures, the repair, the refusals |
-| `overlay/glm_universal/tests/test_comparative.py` | the comparative: the parse, the verdicts, the audit, the two refusals |
+| `glm_universal/data_objects/comparison_classes.py` | the 45 classes, the 11 scales, the codec, the lexicon agreement |
+| `glm_universal/reasoning/measure_view.py` | the reading, the widening audit, the relation repair, the report |
+| `glm_universal/runtime/session.py` | `_solve_measure` and the `report measure` subject |
+| `glm_universal/tests/test_comparison_classes.py` | the register: derivation, exact arithmetic, codec round trip, agreement |
+| `glm_universal/tests/test_measure_words.py` | the view: the reading, the audit figures, the repair, the refusals |
+| `glm_universal/tests/test_comparative.py` | the comparative: the parse, the verdicts, the audit, the two refusals |
 | `RequestProject/GLM/MeasureView.lean` | the widening, proved on `Cumulative.lean` |
 | `RequestProject/GLM/Comparative.lean` | the comparative as a strict order, and what the word order cannot decide |
 | [`RELATIVE_MEASURE_PROPOSAL.md`](RELATIVE_MEASURE_PROPOSAL.md) | the proposal these five steps come from |

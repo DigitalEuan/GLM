@@ -1,0 +1,85 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 8 of 8 ask marks and 4 of 4 cross-check marks; ambiguous refusals answered right after
+  asking 127 of 129, wrong 0; asks 128; kit demo protocol 235 right, 0 wrong (kit 149, 0); axiom guard
+  9,582 theorems.
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code: []
+  lean:
+  - AxiomAudit
+  - AxiomAuditAll
+  - AxiomGuard
+  - GLMKit
+  - PipelineAsk
+  - PipelineInduction
+  prose: PIPELINE_ASK_STUDY.md
+  test:
+  - test_pipeline_ask.py
+  wheel: []
+follow_ups: []
+id: PIPELINE_ASK_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 175
+predecessors: []
+question: When `tool induce` refuses because two rules that fit every demonstration disagree on the query,
+  can the GLM name the one further example that would settle it, and does asking for it turn refusals
+  into right answers without ever producing a wrong one? And do the pipeline kit's five late files (its
+  test suite, its demo, its axiom audit and its Lean root) hold up inside the GLM?
+recomputed_by: '`glm_universal.reasoning.pipeline_ask_study.pipeline_ask_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved
+  heading: 1. What is proved
+- anchor: 2-the-mechanism
+  heading: 2. The mechanism
+- anchor: 3-what-is-measured
+  heading: 3. What is measured
+- anchor: 4-faculties
+  heading: 4. Faculties
+- anchor: 5-the-marks
+  heading: 5. The marks
+- anchor: 6-what-is-not-claimed
+  heading: 6. What is not claimed
+- anchor: 7-what-came-out
+  heading: 7. What came out
+- anchor: in-one-paragraph
+  heading: In one paragraph
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Asking for the separating example — and the pipeline kit's late files
+verdict: 'Yes to both. Of the 2,250 queries of Phase 175, the 129 refused as ambiguous were handed to
+  the new ask loop with the family''s true rule replying: 127 were answered right after exactly one ask,
+  0 wrong, 2 still refused. Every ask removed survivors, as `separating_strict_shrink` proves it must.
+  The kit''s own suite passes unchanged (14 of 14), its demo table is reproduced exactly, and on the demo''s
+  250 queries, drawn from the kit''s own task generator, `tool induce` gives 235 right and 0 wrong against
+  the kit''s 149. The kit''s audit became a check the build enforces: every one of the 9,582 theorems
+  of the development rests on the standard axioms only.'
+wobble_deps: []

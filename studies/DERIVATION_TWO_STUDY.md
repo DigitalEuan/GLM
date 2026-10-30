@@ -37,7 +37,7 @@ mark Q10 checks that they do.
 ## 1. Declarations — committed before any code
 
 The cases, the expected values (worked by hand) and the marks are in
-`overlay/glm_universal/evaluation/derivation_two_cases.py`, committed as the
+`glm_universal/evaluation/derivation_two_cases.py`, committed as the
 first commit of the round, before any operation existed. Nothing in it was
 changed after code was written.
 
@@ -219,7 +219,7 @@ theorem, not something the frame derived.
 
 ## 5. What is proved
 
-`overlay/glm_lean/RequestProject/GLM/DerivationsTwo.lean`, with no sorry and
+`glm_lean/RequestProject/GLM/DerivationsTwo.lean`, with no sorry and
 only the standard axioms (`propext`, `Classical.choice`, `Quot.sound`;
 `lawvere_fixed_point` uses none):
 

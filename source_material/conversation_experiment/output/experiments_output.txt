@@ -72,7 +72,7 @@ EXPERIMENT E2 — Puzzle solving
         ext10=L M T^-2, names=('drag_force', 'force', 'lift_force')
         expected: force
     ○ force * distance                    -> name=None
-        err: term arithmetic: 'force * distance' is not an expression over register names: [Errno 2] No such file or directory: '/home/z/my-project/upload/extracted/output-final_aristotle/overlay/glm_universal/reasoning/_data/physics_relations.json'
+        err: term arithmetic: 'force * distance' is not an expression over register names: [Errno 2] No such file or directory: '/home/z/my-project/upload/extracted/output-final_aristotle/glm_universal/reasoning/_data/physics_relations.json'
         expected: energy or work or torque
     ○ energy / time                       -> name=None
         ext10=L^2 M T^-3, names=('heat_flow', 'luminosity', 'metabolic_rate')

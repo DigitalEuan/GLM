@@ -178,12 +178,12 @@ declared informant:
 
 ## 6. Files
 
-* `overlay/glm_lean/RequestProject/GLM/TimedQuestion.lean` — §1.
-* `overlay/glm_universal/reasoning/timed_question.py` — the open tie, the
+* `glm_lean/RequestProject/GLM/TimedQuestion.lean` — §1.
+* `glm_universal/reasoning/timed_question.py` — the open tie, the
   informants, the two vocabularies, the measurement.
-* `overlay/glm_universal/tools.py` — `tools timed-question` (the marks) and
+* `glm_universal/tools.py` — `tools timed-question` (the marks) and
   `tools timed-ask` (one tie, with a declared or an interactive informant).
-* `overlay/glm_universal/tests/test_timed_question.py`.
+* `glm_universal/tests/test_timed_question.py`.
 
 ## 7. What came out
 

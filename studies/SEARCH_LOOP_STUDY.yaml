@@ -1,0 +1,66 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: What the hard gate admits, and what the ranking cannot separate, measured as a census.
+directives:
+- D1
+- D2
+- D3
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - tests/test_search_loop
+  lean:
+  - SearchLoop
+  - Totient
+  prose: SEARCH_LOOP_STUDY.md
+  test:
+  - test_search_loop.py
+  wheel: []
+follow_ups: []
+id: SEARCH_LOOP_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: What does the archive's search loop guarantee, and what does its ranking leave undetermined?
+recomputed_by: '`glm_universal.reasoning.search_loop.search_loop_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-loop-proved
+  heading: 1. The loop, proved
+- anchor: 2-what-the-gate-leaves-when-the-candidates-are-symmetries
+  heading: 2. What the gate leaves, when the candidates are symmetries
+- anchor: 3-the-census
+  heading: 3. The census
+- anchor: 4-the-counts-in-one-place
+  heading: 4. The counts, in one place
+- anchor: 5-what-this-changes-and-what-it-does-not
+  heading: 5. What this changes, and what it does not
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The search loop, retrieved from the archive's ARC generations
+verdict: A procedure is retrievable in exactly the way a number is.
+wobble_deps: []

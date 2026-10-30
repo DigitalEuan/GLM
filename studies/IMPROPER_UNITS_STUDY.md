@@ -30,7 +30,7 @@ refused.
 
 ## 1. What is proved
 
-**The Lean file** (`overlay/glm_lean/RequestProject/GLM/LorentzUnits.lean`,
+**The Lean file** (`glm_lean/RequestProject/GLM/LorentzUnits.lean`,
 over `LorentzPlane.lean` and `LorentzImproper.lean`). A map `M` is conformal
 with ratio `k` when `Mᵀ η M = k η`.
 

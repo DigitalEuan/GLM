@@ -32,7 +32,7 @@ next session starts from it instead of from rediscovery.
 5. Leave the tree buildable and the suite green at every commit, so an
    interrupted session hands over something that runs.
 6. Sign the run off as it happens. `python -m glm_universal.signoff --run-everything`
-   writes a signature into `overlay/.glm_signoff.json` after *each* unit, not
+   writes a signature into `.glm_signoff.json` after *each* unit, not
    at the end, so an interrupted session keeps the checks it has already
    earned and the next one starts by re-running only what it changed.
 

@@ -1,0 +1,79 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 9 of 9 marks met; 4 of 4 homogeneous and 3 of 3 Viète cubics with exactly the declared
+  branches; 7 of 7 scripts verified and 7 of 7 mutants rejected; both three-degree-of-freedom systems
+  with 3 of 3 squared frequencies; batteries 30 of 30 and 30 of 30; 303 texts read with the switch off
+  and on, 0 moved.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - evaluation/cubic_trig_cases
+  lean:
+  - CubicTrig
+  - QuarticResolvent
+  - SignFactor
+  prose: CUBIC_TRIG_STUDY.md
+  test:
+  - test_cubic_trig.py
+  wheel: []
+follow_ups: []
+id: CUBIC_TRIG_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 104
+predecessors:
+- CUBIC_RADICAL_STUDY
+question: The cubic radical study left a cubic in letters with three real roots refused (`NONLINEAR`,
+  "no real radical form"), and that refusal blocked the normal modes of three-degree-of-freedom systems.
+  Can the branch layer answer it exactly, list every real root, and do so without moving any earlier answer?
+recomputed_by: '`glm_universal.runtime.cubic_trig_report.cubic_trig_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-what-was-added
+  heading: 1. What was added
+- anchor: 2-the-marks
+  heading: 2. The marks
+- anchor: 3-the-vacuous-answer-it-replaces
+  heading: 3. The vacuous answer it replaces
+- anchor: 4-lean
+  heading: 4. Lean
+- anchor: 5-limits-and-what-the-round-leaves
+  heading: 5. Limits, and what the round leaves
+- anchor: 6-re-running-it
+  heading: 6. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: A cubic in letters with three real roots
+verdict: A cubic whose depressed form has `P^3/Q^2` a number is answered as a ratio of the letters times
+  a bracketed algebraic number, and any other cubic whose discriminant is plainly negative is answered
+  by the trigonometric form, three roots in decreasing order. The identical triple pendulum and three
+  masses on four springs now have their three squared frequencies. A Phase 104 reading that printed Cardano's
+  root under a condition no value of the letters satisfies is now answered by the trigonometric form.
+  All 9 marks were met; with the switch off the layer is Phase 104's exactly, and no other reading moved.
+wobble_deps: []

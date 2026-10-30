@@ -1,0 +1,80 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 8 of 9 marks (L1, Q1, N1, N2, S1, S2, S3, U1; K1 missed); guarded ladder 30, 12 and 12
+  correct with 0 wrong on the three sets; unguarded ladder 467/0, 435/8 and 426/1 (middle-out order);
+  union-retired ladder 388 correct, 0 wrong on the third set.
+directives:
+- D12
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/cell_guard
+  - tests/test_cell_guard
+  lean:
+  - CellGuard
+  prose: CELL_GUARD_STUDY.md
+  test:
+  - test_cell_guard.py
+  wheel: []
+follow_ups: []
+id: CELL_GUARD_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 123
+predecessors: []
+question: Can each rung of the escalation ladder be made to answer only when its answer is provably the
+  nearest carrier to the query — using two distances it already has, not a search over every carrier —
+  and does that remove the wrong answers the ladder gives on held-out perturbations, at what cost in answers?
+recomputed_by: '`glm_universal.reasoning.cell_guard.cell_guard_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved-before-any-code
+  heading: 1. What is proved before any code
+- anchor: 2-the-two-candidates
+  heading: 2. The two candidates
+- anchor: 3-the-marks-declared-before-the-code
+  heading: 3. The marks, declared before the code
+- anchor: 4-the-third-query-set-declared-here
+  heading: 4. The third query set, declared here
+- anchor: 5-what-this-round-does-not-do
+  heading: 5. What this round does not do
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-the-measurement
+  heading: 7. The measurement
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The cell guard — a ladder answer certified to be the nearest carrier
+verdict: Safe but nearly silent. The cell guard answers no query wrongly on any of the three sets, every
+  guarded answer is the strictly nearest carrier as the Lean file proves, and the guarded ladder is order-independent;
+  but it keeps only 30 of the ladder's 467 correct answers on the standard set and 12 of 435 and 12 of
+  426 on the held-out and third sets, because most carriers sit outside the inscribed ball of their own
+  cell. The retirement rule read on the standard and held-out sets together keeps only the five coarse
+  rungs, and that ladder answers 388 of the third set's queries correctly and none wrongly, where the
+  ladder Phase 123 left answers one wrongly.
+wobble_deps: []

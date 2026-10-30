@@ -129,7 +129,7 @@ test pins each verdict that is an effect.
 
 ## 3. What was built
 
-* [`reasoning/corpus_resample.py`](../overlay/glm_universal/reasoning/corpus_resample.py):
+* [`reasoning/corpus_resample.py`](../glm_universal/reasoning/corpus_resample.py):
   the census (every declaration of the pool asked as a declaration query and
   as a goal query under the ten rankings, each kept 108 places down), the two
   families, the declared rule, the sign test, and the marks' own checks. The

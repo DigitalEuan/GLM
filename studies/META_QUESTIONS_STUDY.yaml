@@ -1,0 +1,87 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 6 of 7 marks met; 18 of 18 questions answered with the declared fragment; 30 quotes and
+  24 theorems found at read time; 11 of 11 declared disputes and no others; 4 of 4 mutation kinds caught
+  on 18 of 18 questions; 35 of 36 paraphrases (31 of 36 at the first run); 17 of 18 held-out rewordings;
+  0 of 296 other texts read; 10 named theorems, 0 `sorry`.
+directives:
+- D15
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - evaluation/meta_question_cases
+  - reasoning/meta_evidence
+  - runtime/meta_frames
+  - runtime/meta_report
+  - runtime/question_frames
+  - tests/test_meta_questions
+  - tests/test_question_frames
+  lean:
+  - MetaAnswers
+  prose: META_QUESTIONS_STUDY.md
+  test:
+  - test_meta_questions.py
+  wheel: []
+follow_ups: []
+id: META_QUESTIONS_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: 'Eighteen of the outside questions (class M of the Capability Failure Matrix, track M of `QUESTION_SET_B_STUDY.md`
+  §8) ask about the GLM itself: how it compares distances without a square root, why it refuses `UNCORRECTABLE`
+  past weight 3, how its integer procedure stops, how Lean checks a rational inverse. Can the machine
+  answer them from its own studies, code and Lean development, quoting what it reads at the time it reads
+  it, and say so when a question''s premise is not what the documents say?'
+recomputed_by: '`glm_universal.runtime.meta_report.meta_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-what-was-added
+  heading: 1. What was added
+- anchor: 2-the-marks
+  heading: 2. The marks
+- anchor: 3-what-is-proved-and-what-is-quoted
+  heading: 3. What is proved and what is quoted
+- anchor: 4-faculty
+  heading: 4. Faculty
+- anchor: 5-limits-and-what-the-round-leaves
+  heading: 5. Limits, and what the round leaves
+- anchor: 6-what-citing-studies-costs
+  heading: 6. What citing studies costs
+- anchor: 7-re-running-it
+  heading: 7. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Meta questions answered from the project's own documents
+verdict: 'Yes for the eighteen declared questions, and with a recognition gap on rewordings. Every one
+  is read by its declared topic and answered with quotes found in the studies at read time, Lean declarations
+  found in the stored address book, and the disputed premises the documents contradict; a moved quote
+  or a renamed theorem turns the reading into the refusal `CITATION_MOVED`. Six of the seven marks were
+  met: the paraphrase mark missed one rewording, which an earlier frame reads and answers correctly, and
+  one held-out rewording is not read at all.'
+wobble_deps: []

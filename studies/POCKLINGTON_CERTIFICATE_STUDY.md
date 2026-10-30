@@ -165,7 +165,7 @@ another number.
 ## 5. The measurement
 
 `PYTHONPATH=. python3 -m glm_universal.tools pocklington-certificates`
-(from `overlay/`), the final run:
+(from ``), the final run:
 
 ```
 Q1 Lean           RequestProject/GLM/PocklingtonCertificate.lean, RequestProject/GLM/LucasCertificate.lean: missing [], sorry False
@@ -258,15 +258,15 @@ entry with the one factor 2, which is in effect the Lucas–Lehmer test.
 
 ## 7. Files
 
-* `overlay/glm_lean/RequestProject/GLM/PocklingtonCertificate.lean`,
-  `overlay/glm_lean/RequestProject/GLM/LucasCertificate.lean` — §2.
-* `overlay/glm_universal/reasoning/primality_certificate.py` — the searches,
+* `glm_lean/RequestProject/GLM/PocklingtonCertificate.lean`,
+  `glm_lean/RequestProject/GLM/LucasCertificate.lean` — §2.
+* `glm_universal/reasoning/primality_certificate.py` — the searches,
   the checkers and the controls; `reasoning/stepwise_script.py` — column 3's
   readers for the new kinds.
-* `overlay/glm_universal/evaluation/pocklington_certificate_cases.py` — both
+* `glm_universal/evaluation/pocklington_certificate_cases.py` — both
   held-out sets and the measurement; `tools pocklington-certificates` prints
   it. `evaluation/primality_certificate_cases.py` — `SUPERSEDED`.
-* `overlay/glm_universal/tests/test_pocklington_certificate.py` — 19 tests;
+* `glm_universal/tests/test_pocklington_certificate.py` — 19 tests;
   `tests/test_primality_certificate.py` — two tests now run Phase 139's
   budget refusal under the control.
 

@@ -1,0 +1,87 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 7 of 14 marks (T3, T4, H1, H2, N1, N3, N4 met; T1, T2, T5, W1, W2, W3, N2 missed), 1
+  of 2 amended (T1′ met, T2′ missed) and 2 of 2 shipped marks (T1″, T2″); typo runs 193 of 194 hold after
+  the round, 0 slip.
+directives:
+- D13
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - evaluation/harness
+  - knowledge/friction_two
+  - knowledge/friction_two_study
+  - runtime/respell
+  - tests/test_friction_two
+  lean:
+  - Friction
+  - FrictionTwo
+  prose: FRICTION_TWO_STUDY.md
+  test:
+  - test_friction_two.py
+  wheel: []
+follow_ups: []
+id: FRICTION_TWO_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 157
+predecessors:
+- FRICTION_STUDY
+question: Can a transposed letter be read back by the word's spelling and its use in the question, so
+  that the machine answers what it refused without answering what it should refuse; does the evaluation
+  harness read every refusal the machine prints; does wearing the prompt's asperities stop a continuation
+  from reinforcing itself; and does a sticking margin set from how often the leader has changed keep the
+  reader's informative changes of mind while removing its flip-flops?
+recomputed_by: '`glm_universal.knowledge.friction_two_study.friction_two_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-built
+  heading: 1. What is built
+- anchor: 2-the-rules-fixed-before-the-measurement
+  heading: 2. The rules, fixed before the measurement
+- anchor: 3-what-would-count-against
+  heading: 3. What would count against
+- anchor: 4-what-is-not-claimed
+  heading: 4. What is not claimed
+- anchor: 5-what-is-proved-before-the-measurement
+  heading: 5. What is proved before the measurement
+- anchor: 6-files
+  heading: 6. Files
+- anchor: 7-what-came-out
+  heading: 7. What came out
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Friction, the rest: a did-you-mean read by spelling and by use, the harness reading refusals,
+  wear, and a margin that knows the noise'
+verdict: 'A transposed letter is now read back: the respelling, count first and use under load, restores
+  194 of the 196 typo questions with none turned into a different question, and after the round 193 of
+  194 typo runs hold with no slip where 41 of 196 held before, with no evaluation outcome moved; the harness
+  reads every refusal the machine prints; but use on its own does not beat spelling, wear does not remove
+  the self-made valley, which the two-token row carves rather than the touches, and the noise-set margin
+  removes the flip-flops at a cost of 27 final readings.'
+wobble_deps: []

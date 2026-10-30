@@ -1,0 +1,76 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 43 of 43 declared questions as declared (22 phasor, 9 kind, 12 vector), 0 wrong; through
+  the router 0 before the round and 43 after; the naive monomial control answers 19 cases and 15 of them
+  wrongly; 0 of 2971 earlier questions read; 43 of 43 scripts verified and 29 of 29 mutations rejected;
+  8 of 8 marks met.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - evaluation/typed_operator_cases
+  - runtime/question_frames
+  - runtime/typed_operators
+  lean:
+  - TypedOperators
+  prose: TYPED_OPERATORS_STUDY.md
+  test:
+  - test_typed_operators.py
+  wheel: []
+follow_ups: []
+id: TYPED_OPERATORS_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 59
+predecessors: []
+question: Can the machine keep apart quantities that share one dimension but are different products —
+  real, reactive and apparent power from one pair of phasors, and the work (a dot product) against the
+  torque (a cross product) of one pair of vectors — answering each exactly and refusing a unit of the
+  wrong kind?
+recomputed_by: '`glm_universal.runtime.typed_operators_report.typed_operators_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-objects
+  heading: 1. The objects
+- anchor: 2-declarations-written-before-any-code-of-the-round
+  heading: 2. Declarations — written before any code of the round
+- anchor: 3-what-was-built
+  heading: 3. What was built
+- anchor: 4-results
+  heading: 4. Results
+- anchor: 5-what-this-round-moved
+  heading: 5. What this round moved
+- anchor: 6-what-this-leaves
+  heading: 6. What this leaves
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Typed operators: real, reactive and apparent power, and the dot against the cross product'
+verdict: 'Yes: real, reactive and apparent power, the power factor, the work and the torque are now separate
+  typed operators, computed exactly from phasors, the power triangle or vectors, with each unit read as
+  the kind it names, every declared case as declared and 0 wrong.'
+wobble_deps: []

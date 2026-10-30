@@ -194,7 +194,7 @@ themselves, which the Python side decides.
 
 ## 5. Re-running it
 
-From `overlay/`:
+From ``:
 
 * `PYTHONPATH=. python3 -m glm_universal.tools primitive-radical` runs every
   mark in about 40 s. `--quick` skips the batteries and the Phase 113

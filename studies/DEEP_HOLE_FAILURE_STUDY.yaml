@@ -1,0 +1,94 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 'The rank the correct label takes in each of the four: 2, 2, 2, 2. The worst within-type
+  spread `W = 0.0659` against the closest separation `B = 0.0358`, giving `ρ = 2.5943` on the seed reading,
+  and 3 of 10 types certified.'
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - DeepHoleFailure
+  prose: DEEP_HOLE_FAILURE_STUDY.md
+  test:
+  - test_deep_hole_failure.py
+  wheel: []
+follow_ups: []
+id: DEEP_HOLE_FAILURE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: 'The escalated deep-hole reading names 40 of 44 and certifies
+
+  nothing. Which of four pre-registered mechanisms accounts for the four it does
+
+  not name, and is that mechanism the same one that holds the separation ratio
+
+  `ρ = 2W/B` above 1?'
+recomputed_by: '`glm_universal.reasoning.deep_hole_failures.deep_hole_failure_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0a-the-reading-in-one-paragraph
+  heading: 0a. The reading in one paragraph
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-used-rather-than-re-derived
+  heading: 1. What is used rather than re-derived
+- anchor: 2-the-cell-declared-before-anything-is-measured
+  heading: 2. The cell, declared before anything is measured
+- anchor: 3-the-descriptive-object
+  heading: 3. The descriptive object
+- anchor: 4-the-four-diagnoses-and-the-rule-that-decides-each
+  heading: 4. The four diagnoses, and the rule that decides each
+- anchor: 5-the-spread-opened-up-type-by-type
+  heading: 5. The spread, opened up type by type
+- anchor: 6-what-would-count-as-the-ratio-being-fixed-and-what-would-not
+  heading: 6. What would count as the ratio being fixed, and what would not
+- anchor: 7-the-deletion-sweep-declared-and-reported-in-full
+  heading: 7. The deletion sweep, declared and reported in full
+- anchor: 8-the-original-negative-kept-beside-whatever-this-returns
+  heading: 8. The original negative, kept beside whatever this returns
+- anchor: 9-the-stopping-rule
+  heading: 9. The stopping rule
+- anchor: 10-the-lean-half-what-is-proved-rather-than-measured
+  heading: '10. The Lean half: what is proved rather than measured'
+- anchor: 11-exactness-and-how-to-re-take-every-number
+  heading: 11. Exactness, and how to re-take every number
+- anchor: 12-the-measurement
+  heading: 12. The measurement
+- anchor: 13-what-this-study-does-not-do
+  heading: 13. What this study does not do
+- anchor: 14-what-was-added-after-the-numbers-were-seen
+  heading: 14. What was added after the numbers were seen
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The four failures, and the spread that gates the certificate
+verdict: All four failures are near misses at rank 2, and the type whose within-type spread stalls the
+  separation ratio is the type the failures belong to, so the two open questions are one mechanism and
+  not two. The global ratio stays above 1 and the pre-registered negative stands; read type by type, three
+  of the ten types do satisfy the criterion.
+wobble_deps: []

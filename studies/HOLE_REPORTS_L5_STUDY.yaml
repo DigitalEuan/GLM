@@ -1,0 +1,84 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 6 of 6 measured marks and L1; seed queries 10/10 and 44/44 answered correctly at `L5`;
+  gate at 8/8 sizes, smallest 240 starts, passing with ρ ≥ 1 at 480; 4/4 joint failures answered correctly,
+  10/10 types certified at 1920 starts (ρ = 0.3048); battery 4/4 answered, 4/4 scripts verify, 8/8 mutants
+  rejected; frozen path 212/212 same status, 209 same text, 3/3 prefixes kept, 0 undeclared.
+directives:
+- D1
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - HoleReportsL5
+  prose: HOLE_REPORTS_L5_STUDY.md
+  test:
+  - test_hole_reports_l5.py
+  wheel: []
+follow_ups: []
+id: HOLE_REPORTS_L5_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 149
+predecessors:
+- LATTICE_COMPLETION_STUDY
+question: Can the three deep-hole reports that still named a hole only with their own rounds' readings
+  — `report hole classifier`, `report hole ladder` and `report hole failures` — answer by the configuration
+  reading `L5` as well, keeping each round's record verbatim, under a frozen-path comparison of the whole
+  evaluation?
+recomputed_by: '`glm_universal.reasoning.hole_reports_l5_study.hole_reports_l5_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved-before-any-code
+  heading: 1. What is proved before any code
+- anchor: 2-the-rule
+  heading: 2. The rule
+- anchor: 3-the-questions
+  heading: 3. The questions
+- anchor: 4-the-marks-declared-before-the-measurement
+  heading: 4. The marks, declared before the measurement
+- anchor: 5-what-would-count-against
+  heading: 5. What would count against
+- anchor: 6-what-is-not-claimed
+  heading: 6. What is not claimed
+- anchor: 7-what-came-out
+  heading: 7. What came out
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The configuration reading in the other deep-hole reports — each round's question asked of `L5`
+verdict: Yes. Each of the three reports keeps its round's answer verbatim and adds what `L5` says to that
+  round's question. For the classifier, the sanity query that stopped the first round holds at `L5` for
+  10 of 10 seed queries, and all 44 queries are answered correctly. For the ladder, `L5` passes the escalation
+  gate at every one of its 8 measured sizes, already at 240 starts, where the joint reading needed 1920.
+  At 480 starts it passes with ρ above one, which is the global criterion being sufficient but not necessary.
+  For the failures, `L5` answers all four of the joint reading's failures correctly and meets the criterion
+  for 10 of 10 types at 1920 starts. The whole evaluation keeps all 212 statuses, and only the three intended
+  texts moved, each with its old text as its prefix. 6 of 6 measured marks were met, and L1 by the build.
+  Taking column 3 also found that the `report hole ladder` script had never verified, because its template
+  missed one key. That is now fixed.
+wobble_deps: []

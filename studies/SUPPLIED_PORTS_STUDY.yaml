@@ -1,0 +1,92 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: <!--figure:binding-as-declared-->12<!--/figure--> of <!--figure:binding-declared-count-->12<!--/figure-->
+  declared bindings came out as declared, with <!--figure:binding-nameable-->424<!--/figure--> of <!--figure:binding-carriers-->1,143<!--/figure-->
+  carriers nameable; the store replayed <!--figure:planstore-replayed-->15<!--/figure--> of <!--figure:planstore-declared-count-->15<!--/figure-->
+  follow-ups including <!--figure:planstore-refusals-replayed-->7<!--/figure--> of <!--figure:planstore-refusals-->7<!--/figure-->
+  refusals; and the two sandbox pieces are unpromoted.
+directives:
+- D15
+- D3
+- D4
+- D8
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - tests/test_plan_store
+  - tests/test_role_binding
+  - tests/test_supplied_sandbox
+  lean: []
+  prose: SUPPLIED_PORTS_STUDY.md
+  test:
+  - test_supplied_ports.py
+  wheel: []
+follow_ups: []
+id: SUPPLIED_PORTS_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 54
+predecessors: []
+question: 'Phase 54 read, ran and left four parts of the supplied conversational material unported: a
+  role–filler binding, a content-addressed store of resolved plans, a four-register memory split and a
+  generator of Lean source from carriers. Taken one at a time, with the measurement each was told to make,
+  which of them is worth shipping?'
+recomputed_by: '`glm_universal.reasoning.role_binding.binding_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-what-this-round-took-and-from-where
+  heading: 1. What this round took, and from where
+- anchor: 2-the-binding-one-word-and-what-comes-out-of-it
+  heading: '2. The binding: one word, and what comes out of it'
+- anchor: 3-from-a-reading-to-a-name-the-collision-rate-which-is-the-control
+  heading: 3. From a reading to a name — the collision rate, which is the control
+- anchor: 4-the-plan-store-a-refusal-kept
+  heading: '4. The plan store: a refusal kept'
+- anchor: 5-the-four-register-split-measured-and-left-in-the-sandbox
+  heading: 5. The four-register split, measured and left in the sandbox
+- anchor: 6-the-lean-generator-a-check-that-never-read-what-it-generated
+  heading: '6. The Lean generator: a check that never read what it generated'
+- anchor: 7-what-moved-under-d15
+  heading: 7. What moved, under D15
+- anchor: 8-limits
+  heading: 8. Limits
+- anchor: 9-re-running-it
+  heading: 9. Re-running it
+status: negative
+successors: []
+superseded_by: ''
+supersedes: []
+title: The four pieces left in the source material — two ported, two measured and left in the sandbox
+verdict: 'Two are. The parity binding inverts with no side condition and is proved to; recovering a **name**
+  from it is worth exactly what the registers'' parity readings are worth, which is 424 of 1,143 carriers
+  and a forced refusal on the rest, and the product binding offered beside it is refuted. The plan store
+  keeps a refusal as it keeps an answer, replays all fifteen declared follow-ups unchanged and takes their
+  licensing trials from 27 to 0, while the key that ignores the conversation answers 8 of the 15 with
+  another conversation''s antecedent. The other two are not. The four-register split is recency with a
+  decay rate once a pronoun has named no concept: it agrees with licensing on 5 of the 8 follow-ups the
+  shipped layer binds and answers 6 of the 7 it refuses, mostly by choosing a member of the ambiguity
+  the refusal exists to keep open. The Lean generator''s own round-trip check never reads what it generated
+  — it passes for a generator that emits the empty string — and the real round trip returns the reading
+  it was generated from on 0 of 12 carriers.'
+wobble_deps: []

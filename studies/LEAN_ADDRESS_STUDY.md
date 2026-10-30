@@ -23,13 +23,13 @@ geometry and destroys the pairing — so that "the address means the
 declaration" is a claim with a number attached rather than a metaphor.*
 
 Code:
-[`overlay/glm_universal/reasoning/lean_address.py`](../overlay/glm_universal/reasoning/lean_address.py),
-[`overlay/glm_universal/integrity.py`](../overlay/glm_universal/integrity.py).
+[`glm_universal/reasoning/lean_address.py`](../glm_universal/reasoning/lean_address.py),
+[`glm_universal/integrity.py`](../glm_universal/integrity.py).
 Query: `report lean`.
 Command line: `python3 -m glm_universal.tools lean-address`.
 Formal development:
-[`RequestProject/GLM/Address.lean`](../overlay/glm_lean/RequestProject/GLM/Address.lean).
-Tests: `overlay/glm_universal/tests/test_lean_address.py` (54 tests).
+[`RequestProject/GLM/Address.lean`](../glm_lean/RequestProject/GLM/Address.lean).
+Tests: `glm_universal/tests/test_lean_address.py` (54 tests).
 
 ---
 
@@ -96,26 +96,14 @@ and the ARC-era reasoning loop back from the supplied archive. Its size now is
 not written down here; it is emitted:
 
 <!-- generated: lean-corpus -->
-| kind | count |
-|---|---|
-| abbrev | 67 |
-| def | 1,491 |
-| example | 24 |
-| inductive | 59 |
-| instance | 33 |
-| lemma | 250 |
-| structure | 67 |
-| theorem | 3,902 |
-| **total** | **5,893** |
-
-5,893 declarations across 253 files, the largest being `Gen3.lean` with 98.
+The stored measurements of the formal development do not describe the Lean tree as it now stands (`stale`), so nothing is reported here rather than a figure taken from a tree that has moved.  Run `python3 -m glm_universal.corpus --remeasure`.
 <!-- end generated -->
 
 Written into a sentence, so that a reader who stops here has the size of what
 follows: the reader addresses
-<!--figure:lean-declarations-->5,893<!--/figure--> declarations over
-<!--figure:lean-declaration-files-->253<!--/figure--> files, which is every
-file of <!--figure:lean-files-->253 Lean files<!--/figure--> the development
+<!--figure:lean-declarations-->5,965<!--/figure--> declarations over
+<!--figure:lean-declaration-files-->254<!--/figure--> files, which is every
+file of <!--figure:lean-files-->255 Lean files<!--/figure--> the development
 holds — no Lean file of this repository is outside the corpus this study
 measures.
 
@@ -200,16 +188,7 @@ pull in opposite directions, and `scale_sweep()` measures both on the first 60
 declarations in source order rather than asserting either:
 
 <!-- generated: lean-scale -->
-| scale | read back exactly | moved by the decoder | worst residual | verdict |
-|---|---|---|---|---|
-| 4 | 33 / 60 | 27 | — | **lossy** |
-| 6 | 60 / 60 | 60 | 2 | lossless, non-degenerate |
-| 8 | 60 / 60 | 0 | 0 | **degenerate** |
-| **9** | **60 / 60** | **60** | **2** | **lossless, non-degenerate** |
-| 12 | 60 / 60 | 27 | 4 | lossless, partly degenerate |
-| 16 | 60 / 60 | 0 | 0 | **degenerate** |
-
-On the first 60 declarations in source order, decoding being the expensive step.  The chosen scale is 9.
+The stored measurements of the formal development do not describe the Lean tree as it now stands (`stale`), so nothing is reported here rather than a figure taken from a tree that has moved.  Run `python3 -m glm_universal.corpus --remeasure`.
 <!-- end generated -->
 
 The two failures are different in kind.
@@ -247,17 +226,7 @@ nearest integer — and it succeeds exactly when the quantisation error stayed
 below half a scale unit in every coordinate.
 
 <!-- generated: lean-readback -->
-|  | measured |
-|---|---|
-| declarations checked | 5,893 |
-| read back exactly | **5,893 / 5,893** (rate 1) |
-| coordinates checked | 141,432 |
-| coordinate errors | **0** |
-| moved by the decoder | 5,893 / 5,893 |
-| worst observed residual | **3**, at `GLM.AffineOutput.const_ratio_closed_form` |
-| half a scale step | `9/2` |
-| covering radius | 4 |
-| bound respected | yes |
+The stored measurements of the formal development do not describe the Lean tree as it now stands (`stale`), so nothing is reported here rather than a figure taken from a tree that has moved.  Run `python3 -m glm_universal.corpus --remeasure`.
 <!-- end generated -->
 
 The worst residual anywhere in the development is strictly below the half-step
@@ -274,11 +243,7 @@ declaration" is, at this point, a statement about the feature map alone.
 ## 6. Injectivity, and where the layer boundary falls
 
 <!-- generated: lean-injectivity -->
-| scheme | distinct addresses | distinct feature vectors | classes | declarations conflated | quantisation adds conflation? |
-|---|---|---|---|---|---|
-| `feature` | 5,065 / 5,893 | 5,065 | 518 | 1,346 | no |
-| `hash_control` | **5,893 / 5,893** | 5,065 | 0 | 0 | — |
-| `shuffled` | 5,065 / 5,893 | 5,065 | 518 | 1,346 | no |
+The stored measurements of the formal development do not describe the Lean tree as it now stands (`stale`), so nothing is reported here rather than a figure taken from a tree that has moved.  Run `python3 -m glm_universal.corpus --remeasure`.
 <!-- end generated -->
 
 Two things to read off this table.
@@ -302,51 +267,7 @@ the sense that a reader shown only the 24 counts would also fail to tell the
 members apart:
 
 <!-- generated: lean-classes -->
-518 classes: 380 pairs, 75 triples, 29 classes of 4, 15 classes of 5, 8 classes of 6, 1 class of 7, 4 classes of 8, 1 class of 9, 1 class of 11, 1 class of 13, 1 class of 15, 1 class of 16, 1 class of 19.
-
-The widest, written out, because the point they make can only be read from the names:
-
-```
-19  GLM.Calibration.dLength, GLM.Conjugate.energyDim,
-    GLM.CoordinateOrder.energyAbstractConcrete,
-    GLM.CoordinateOrder.waterAbstractConcrete,
-    GLM.DimensionCarrier.mc4Shift, GLM.Foundations.mc4Shift, GLM.Gen2.mc4,
-    GLM.GolayHex.w2, GLM.Heisenberg.vac, GLM.LawRegister.row1,
-    GLM.LawRegister.row2, GLM.Lightspeed.dLength, GLM.Lightspeed.dMass,
-    GLM.Question.courtesyWords, GLM.Question.deriveDomainWord,
-    GLM.Question.deriveOpening, GLM.Question.deriveSeparator,
-    GLM.Question.interrogativeWords, GLM.QuestionNested.comparativeOperator
-16  GLM.Hull.golayVecs_subset_scaled, GLM.Info.staticLayer_indist_hot_uses,
-    GLM.Info.towerView_injective, GLM.LawRegister.row1_codeword,
-    GLM.LawRegister.row2_codeword, GLM.Lightspeed.codewordTax_strictMono,
-    GLM.PythonSpeech.andP_bijective, GLM.PythonSpeech.andnotP_bijective,
-    GLM.PythonSpeech.copyP_bijective, GLM.PythonSpeech.notP_bijective,
-    GLM.PythonSpeech.orP_bijective, GLM.PythonSpeech.xorP_bijective,
-    GLM.Recipe.ratioSpec_full_lossless,
-    GLM.ShareSeparation.local_can_certify_when_global_fails,
-    GLM.SpatialArithmetic.nodeCount_injective, GLM.ZeroStorage.octad_isGolay
-15  GLM.Calibration.dEnergy, GLM.DimensionCarrier.energyDim,
-    GLM.DimensionCarrier.mc4Dim, GLM.Foundations.energyDim,
-    GLM.Foundations.mc4Dim, GLM.Gen2.mass, GLM.Gen2.torque,
-    GLM.Golay24.octadA, GLM.Golay24.octadB, GLM.Info.large, GLM.Info.small,
-    GLM.Lightspeed.dAction, GLM.Lightspeed.dEnergy,
-    GLM.QuestionSetBMatrix.B, GLM.ResumedDialogue.State.init
-13  GLM.Calibration.dMass, GLM.Calibration.dTime,
-    GLM.ConditionalInduction.twoSurvivorObs, GLM.CubeMirror.sigmaD,
-    GLM.CubeStab.quarterTurn, GLM.CubeTax.synZero, GLM.Gen2.unitT,
-    GLM.Golay24.onesSyn, GLM.GolayHex.w, GLM.Info.fast, GLM.Info.walking,
-    GLM.Lightspeed.dTime, GLM.StackedDialogue.State.init
-11  GLM.GolayMOG.leechAddress_injective,
-    GLM.GolayMOG.mogCoordinate_bijective, GLM.Info.wobbleEntropy_continuous,
-    GLM.PlanStore.exactKey_injective, GLM.PythonSpeech.fredkin_involutive,
-    GLM.PythonSpeech.toffoli_involutive, GLM.Reversible.fredkin_bijective,
-    GLM.Reversible.fredkin_involutive, GLM.Reversible.toffoli_bijective,
-    GLM.Reversible.toffoli_involutive,
-    GLM.SpatialArithmetic.operatorCode_injective
-9   GLM.CitationScope.LName, GLM.Conversation.Licence, GLM.CubeStab.Cell,
-    GLM.CubeStab.CubeSym, GLM.GolayHex.F4, GLM.ModeAlgebra.Cat,
-    GLM.PythonSpeech.Lane, GLM.Question.Token, GLM.ThreeCube.Cube
-```
+The stored measurements of the formal development do not describe the Lean tree as it now stands (`stale`), so nothing is reported here rather than a figure taken from a tree that has moved.  Run `python3 -m glm_universal.corpus --remeasure`.
 <!-- end generated -->
 
 The largest class is the sharpest statement of what the layer cannot see: it is
@@ -390,29 +311,7 @@ declaration shares a file — and it appears as the *chance* row below.
 The third table is on *all* pairs, not just nearest ones.
 
 <!-- generated: lean-neighbours -->
-| scheme | nearest shares a file | rate | mean tie size |
-|---|---|---|---|
-| `feature` | **1,227 / 5,893** | ≈ **20.82 %** | 1.89 |
-| `hash_control` | 33 / 5,893 | ≈ 0.56 % | 1.00 |
-| `shuffled` | 23 / 5,893 | ≈ 0.39 % | 1.89 |
-| *chance* | — | ≈ 0.55 % | — |
-
-| scheme | nearest is cited, either way | rate |
-|---|---|---|
-| `feature` | **244 / 5,893** | ≈ **4.14 %** |
-| `hash_control` | 4 / 5,893 | ≈ 0.07 % |
-| `shuffled` | 3 / 5,893 | ≈ 0.05 % |
-| *chance* | — | ≈ 0.07 % |
-
-| scheme | mean d² within a file | mean d² across files | ratio |
-|---|---|---|---|
-| `feature` | 5,938.4 | 7,481.0 | **0.794** |
-| `hash_control` | 54,190.5 | 53,993.1 | 1.004 |
-| `shuffled` | 7,457.3 | 7,472.7 | 0.998 |
-
-Against closed-form chance the feature encoding runs 38.2× on the file test and 57.9× on the citation test, from an encoding that is never shown a file name.
-
-Over 94,622 same-file pairs and 17,266,156 cross-file pairs.  The feature encoding beats the hash control: yes; beats the seeded reshuffle: yes; beats closed-form chance: yes.
+The stored measurements of the formal development do not describe the Lean tree as it now stands (`stale`), so nothing is reported here rather than a figure taken from a tree that has moved.  Run `python3 -m glm_universal.corpus --remeasure`.
 <!-- end generated -->
 
 The two controls do exactly what they are there for.

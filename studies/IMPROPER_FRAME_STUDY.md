@@ -31,7 +31,7 @@ units, rotation, pure boost, proper orthochronous Lorentz, Lorentz times units
 
 ## 1. What is proved
 
-`overlay/glm_lean/RequestProject/GLM/LorentzImproper.lean`, over `ℚ`, with the
+`glm_lean/RequestProject/GLM/LorentzImproper.lean`, over `ℚ`, with the
 definitions of `LorentzPlane.lean`:
 
 * `parity_lorentz`, `det_parity`, `timeRev_lorentz`, `det_timeRev`,

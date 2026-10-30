@@ -1,0 +1,87 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 10 of 15 declared tasks answered, all 10 independently checked, 5 of them beyond the
+  plain runtime; and over 188 evaluation cases, 20 refusals offered to the planner and 0 answers gained.
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - tests/test_sandbox_planner
+  lean: []
+  prose: REVERSE_CALL_PLANNER_STUDY.md
+  test:
+  - test_reverse_call_planner.py
+  wheel: []
+follow_ups: []
+id: REVERSE_CALL_PLANNER_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: 'The runtime decides a query''s *kind* before it looks at the
+
+  problem, and one kind means one solver. An older proposal in the source
+
+  material inverts that: parse the string into a problem, then let a planner
+
+  select every tool whose declared precondition the problem satisfies. Does that
+
+  inversion buy anything the current system does not already have — and can it be
+
+  made safe enough to promote out of a sandbox?'
+recomputed_by: '`glm_universal.sandbox.planner.planner_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0a-the-reading-in-one-paragraph
+  heading: 0a. The reading in one paragraph
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-the-inversion-stated-exactly
+  heading: 1. The inversion, stated exactly
+- anchor: 2-what-it-takes-from-the-escalation-round
+  heading: 2. What it takes from the escalation round
+- anchor: 3-the-registry
+  heading: 3. The registry
+- anchor: 4-the-declared-task-set
+  heading: 4. The declared task set
+- anchor: 5-the-fallback-reading-the-whole-evaluation-set
+  heading: 5. The fallback reading — the whole evaluation set
+- anchor: 6-the-promotion-checklist
+  heading: 6. The promotion checklist
+- anchor: 7-what-this-round-does-not-do
+  heading: 7. What this round does not do
+- anchor: 8-how-to-re-take-every-number
+  heading: 8. How to re-take every number
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The reverse-call planner — a problem-driven front end, in the sandbox
+verdict: 'It buys something on the declared task set and nothing at all on the project''s own evaluation
+  set, and it is therefore not promoted. The safety gate holds and the utility gate does not: the planner
+  answers five declared tasks the plain runtime refuses, every answer it gives is checked by a second
+  tool, and no principled refusal ever reaches it — but of the twenty evaluation refusals it is offered,
+  it correctly refuses all twenty, so under the declared fallback rule it would add nothing to the shipped
+  system today.'
+wobble_deps: []

@@ -12,9 +12,9 @@
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 
-Code: [`glm_universal/reasoning/pcgs.py`](../overlay/glm_universal/reasoning/pcgs.py),
-tests [`glm_universal/tests/test_pcgs.py`](../overlay/glm_universal/tests/test_pcgs.py).
-Formal development: [`RequestProject/GLM/PCGS.lean`](../overlay/glm_lean/RequestProject/GLM/PCGS.lean).
+Code: [`glm_universal/reasoning/pcgs.py`](../glm_universal/reasoning/pcgs.py),
+tests [`glm_universal/tests/test_pcgs.py`](../glm_universal/tests/test_pcgs.py).
+Formal development: [`RequestProject/GLM/PCGS.lean`](../glm_lean/RequestProject/GLM/PCGS.lean).
 Sources: [`source_material/pcgs_wider_landscape_v4.txt`](../source_material/pcgs_wider_landscape_v4.txt),
 [`source_material/pcgs_wider_landscape.py`](../source_material/pcgs_wider_landscape.py),
 [`source_material/pcgs_glm_integration.py`](../source_material/pcgs_glm_integration.py).

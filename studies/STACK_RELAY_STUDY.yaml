@@ -1,0 +1,83 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 18 queries carried against 0 lost, where a digest-and-reshuffle relay carries 2.
+directives:
+- D3
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - tests/test_stack
+  lean:
+  - CarriedFork
+  - CognitionRoundTwo
+  - ConnectedMachine
+  - DesignedSubstrate
+  - Distinction
+  - EngineeringWheels
+  - GolayMOG
+  - NativeParity
+  - PythonSpeech
+  - Relay
+  - ReverseTCT
+  - ReverseTCTThree
+  - ReverseTCTTwo
+  - SeedRoles
+  prose: STACK_RELAY_STUDY.md
+  test:
+  - test_stack_relay.py
+  wheel: []
+follow_ups: []
+id: STACK_RELAY_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 59
+predecessors: []
+question: Can the faculties of the machine be arranged so that the geometry carries the queries the text
+  layer cannot read?
+recomputed_by: '`glm_universal.reasoning.stack.relay_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-mechanism-and-what-it-is-worth
+  heading: 1. The mechanism, and what it is worth
+- anchor: 2-who-was-carried
+  heading: 2. Who was carried
+- anchor: 3-the-controls
+  heading: 3. The controls
+- anchor: 4-the-gate-swept
+  heading: 4. The gate, swept
+- anchor: 5-the-other-arrangement-the-geometry-inside-the-text-layers-ties
+  heading: '5. The other arrangement: the geometry inside the text layer''s ties'
+- anchor: 6-the-second-register-the-same-relay-over-grids
+  heading: '6. The second register: the same relay over grids'
+- anchor: 7-what-is-proved
+  heading: 7. What is proved
+- anchor: 8-what-would-falsify-this
+  heading: 8. What would falsify this
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The multi-part stack: who carries whom when one faculty goes silent'
+verdict: The relay beats plain text on all three query sets, and the controls carry less.
+wobble_deps: []

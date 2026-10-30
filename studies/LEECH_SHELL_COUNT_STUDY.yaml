@@ -1,0 +1,81 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 6 of 6 marks; `shellArr_correct` for every `t`, 0 `sorry`; the first eight shells proved
+  (`1, 0, 196560, 16773120, 398034000, 4629381120, 34417656000, 187489935360`), 8 of 8 rows agreeing three
+  ways; the Lean file builds in under a minute; the end-to-end evaluation's one Leech shell case unchanged.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - AxiomAuditAll
+  - GolayWeightEnum
+  - LeechShellCount
+  - LeechShells
+  prose: LEECH_SHELL_COUNT_STUDY.md
+  test:
+  - test_leech_shell_count.py
+  wheel: []
+follow_ups: []
+id: LEECH_SHELL_COUNT_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 164
+predecessors: []
+question: Can the GLM prove, from Conway's definition of the Leech lattice, that its generating-function
+  counting procedure gives the number of lattice vectors on every shell — the step Phases 164 and 165
+  left argued for every shell but the minimal one?
+recomputed_by: '`glm_universal.reasoning.leech_shells.proved_shells_check`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved
+  heading: 1. What is proved
+- anchor: 2-the-control
+  heading: 2. The control
+- anchor: 3-what-is-not-claimed
+  heading: 3. What is not claimed
+- anchor: 4-faculties
+  heading: 4. Faculties
+- anchor: 5-the-marks
+  heading: 5. The marks
+- anchor: 6-how-it-is-measured
+  heading: 6. How it is measured
+- anchor: 7-what-came-out
+  heading: 7. What came out
+- anchor: in-one-paragraph
+  heading: In one paragraph
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Every Leech shell, counted and proved — the generating-function procedure proved correct for every
+  shell
+verdict: Yes. For every `t` the number of lattice vectors of squared length `16t` is proved to be the
+  generating-function count, written in Lean as the same three steps the Python procedure takes; the Phase
+  164 procedure is proved to give the lattice's counts on the shells it was run on, and the first eight
+  shells are theorems about the definition, read by the Python package and set beside its own count and
+  the theta series.
+wobble_deps: []

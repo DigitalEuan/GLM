@@ -48,7 +48,7 @@ the first time a comparison across registers needs an offset.
 
 ## 2. Declarations — written before any code of the round
 
-The corpus is [`evaluation/celsius_register_cases.py`](../overlay/glm_universal/evaluation/celsius_register_cases.py):
+The corpus is [`evaluation/celsius_register_cases.py`](../glm_universal/evaluation/celsius_register_cases.py):
 the register (14 rows), 10 ordering cases, 3 column cases and 9 planner
 questions, with expected verdicts worked by hand in exact fractions.
 
@@ -70,16 +70,16 @@ melting points.
 
 ## 3. What was built
 
-* [`data_objects/fixed_points.py`](../overlay/glm_universal/data_objects/fixed_points.py):
+* [`data_objects/fixed_points.py`](../glm_universal/data_objects/fixed_points.py):
   the register — 14 rows keyed by the point (`"zinc freezing point"`), each
   with the substance, the kind of point and `temperature_C`, an exact
   rational parsed from the decimal ITS-90 prints. No row carries a `name` or
   `symbol`, so no row answers to `zinc`: the element register keeps the
   element and this register keeps the point. A switch `ACTIVE` removes it
   from the field surface for the register-absent control.
-* In [`runtime/fields.py`](../overlay/glm_universal/runtime/fields.py): the
+* In [`runtime/fields.py`](../glm_universal/runtime/fields.py): the
   field surface's third source table, `fixed_point`.
-* In [`reasoning/scale_conversion.py`](../overlay/glm_universal/reasoning/scale_conversion.py):
+* In [`reasoning/scale_conversion.py`](../glm_universal/reasoning/scale_conversion.py):
   the row `fixed_point:temperature_C`, quantity `temperature`, unit `K`,
   factor `1`, offset `CELSIUS_ZERO_IN_K = 273.15`, sourced to the SI
   Brochure; the switch `OFFSETS` (off: the offset dropped, the control);

@@ -1,0 +1,89 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 13 of 15 marks; Golay decoy 61 wrong → 27 under the certificate guard with 0 right answers
+  lost on any condition, and all 27 indistinguishable from honest readings; the settling question 600
+  of 600 with five bits (random five 391); physics relations with a decoy example 0 wrong against 87 and
+  38 for the first example alone; names 10 wrong of 13 → class certificates holding the expected name
+  12 times; semantic relations 6.7 % precise.
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - reasoning/lorentzian_evidence
+  - reasoning/lorentzian_evidence_study
+  - tests/test_lorentzian_evidence
+  lean:
+  - AxiomAuditAll
+  - LorentzianEvidence
+  - LorentzianLift
+  prose: LORENTZIAN_EVIDENCE_STUDY.md
+  test:
+  - test_lorentzian_evidence.py
+  wheel: []
+follow_ups: []
+id: LORENTZIAN_EVIDENCE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 182
+predecessors: []
+question: Phase 182 lifted the Golay tie space to II_25,1 and found that the lift certifies a tie but
+  cannot break one. Can the ambiguous space, read in the lift, be of use for reasoning in general, not
+  only for decoding puzzles, and what does it settle of the three lines Phase 182 left?
+recomputed_by: '`glm_universal.reasoning.lorentzian_evidence_study.lorentzian_evidence_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-the-idea-by-analogy-evidence-as-momentum
+  heading: '1. The idea, by analogy: evidence as momentum'
+- anchor: 2-what-is-proved
+  heading: 2. What is proved
+- anchor: 3-the-golay-tie-space-again
+  heading: 3. The Golay tie space, again
+- anchor: 4-relations-over-the-physics-register
+  heading: 4. Relations over the physics register
+- anchor: 5-relations-over-the-semantic-lexicon
+  heading: 5. Relations over the semantic lexicon
+- anchor: 6-marks
+  heading: 6. Marks
+- anchor: 7-what-it-gives-the-glms-reasoning
+  heading: 7. What it gives the GLM's reasoning
+- anchor: 8-what-this-does-not-do-and-what-is-next
+  heading: 8. What this does not do, and what is next
+- anchor: 9-reproduce
+  heading: 9. Reproduce
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The Lorentzian evidence space — what the lift gives reasoning beyond the Golay tie
+verdict: 'The lift is an evidence space: any finite set of weighted cues, in any dimension, sums to one
+  vector that is the lifted consensus plus the Weyl vector times the cues'' disagreement, so cues add,
+  a tie is the consensus on a mirror, disagreement is minus the Lorentzian norm, and analogy is evidence
+  with weights 1, −1, 1; in use it refuses what it should — answers outside the tie''s certificate, examples
+  that do not state one relation, a name the dimension layer cannot choose — at no cost in right answers,
+  and a tie asks the one question that settles it, but where relations are not displacements it helps
+  little, and the decoy readings it still answers wrongly carry no information that could tell them from
+  honest ones.'
+wobble_deps: []

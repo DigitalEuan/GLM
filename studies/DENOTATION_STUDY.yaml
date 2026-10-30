@@ -1,0 +1,70 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Each of the 36 undimensioned endpoints is given a decision rather than a missing entry.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - data_objects/denotation
+  - reasoning/denotation_view
+  - tests/test_denotation
+  lean:
+  - Denotation
+  prose: DENOTATION_STUDY.md
+  test:
+  - test_denotation.py
+  wheel: []
+follow_ups: []
+id: DENOTATION_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: What do the lexicon's undimensioned names denote, once the lookup stops being the answer?
+recomputed_by: '`glm_universal.reasoning.denotation_view.denotation_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-question
+  heading: 1. The question
+- anchor: 2-why-this-is-not-a-search-problem
+  heading: 2. Why this is not a search problem
+- anchor: 3-the-register-of-decisions
+  heading: 3. The register of decisions
+- anchor: 4-the-second-pass-what-the-decisions-change
+  heading: '4. The second pass: what the decisions change'
+- anchor: 5-do-the-conversions-carry
+  heading: 5. Do the conversions carry?
+- anchor: 6-what-is-proved
+  heading: 6. What is proved
+- anchor: 7-what-this-licenses-and-what-it-does-not
+  heading: 7. What this licenses, and what it does not
+- anchor: 8-reproducing-every-number-here
+  heading: 8. Reproducing every number here
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: What the undimensioned names denote — the residue finished as a decision
+verdict: The residue is a vocabulary decision rather than a lookup.
+wobble_deps: []

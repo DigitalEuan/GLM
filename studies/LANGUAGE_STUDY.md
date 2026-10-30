@@ -535,16 +535,16 @@ was measured.*
 
 | piece | file |
 |---|---|
-| the slot shape, its slots and its preamble | `overlay/glm_universal/language/question.py` |
-| the list slot, the second shape family and its matcher | `overlay/glm_universal/language/infix.py` |
-| the nested shape — an operator whose sides are a tightened shape | `overlay/glm_universal/language/nested.py` |
-| the eight descriptions | `overlay/glm_universal/language/descriptions.py` |
-| the three generic matchers, the corpora and the audits | `overlay/glm_universal/language/build.py` |
-| the seven deleted parser branches, frozen | `overlay/glm_universal/language/legacy.py` |
-| the measured result, and `ask` | `overlay/glm_universal/language/report.py` |
+| the slot shape, its slots and its preamble | `glm_universal/language/question.py` |
+| the list slot, the second shape family and its matcher | `glm_universal/language/infix.py` |
+| the nested shape — an operator whose sides are a tightened shape | `glm_universal/language/nested.py` |
+| the eight descriptions | `glm_universal/language/descriptions.py` |
+| the three generic matchers, the corpora and the audits | `glm_universal/language/build.py` |
+| the seven deleted parser branches, frozen | `glm_universal/language/legacy.py` |
+| the measured result, and `ask` | `glm_universal/language/report.py` |
 | the report subject | `report language` (`runtime/reports/language.py`, column 3 in `runtime/tct_engine.py`) |
 | the machine-checked half | `RequestProject/GLM/Question.lean` (the slot shape) and `RequestProject/GLM/QuestionNested.lean` (the nested shape) |
-| the tests | `overlay/glm_universal/tests/test_language.py` (122 tests) |
+| the tests | `glm_universal/tests/test_language.py` (122 tests) |
 | the CLI case | `report-language` |
 
 ---

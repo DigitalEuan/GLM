@@ -1,0 +1,91 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 29 of 29 declared follow-ups as declared (7 column, 16 fourth-shape, 6 surface), 0 wrong;
+  Phase 55's layer gives 0 of the 20 new-behaviour cases as declared; the session alone as the licence
+  answers 0 of the 5 surface answers; 15 of 15 of Phase 55's follow-ups keep their outcome but the 1 declared
+  move; 32 of 32 column cells equal the answer asked alone; 8 of 8 marks met.
+directives:
+- D1
+- D2
+- D3
+- D4
+- D5
+- D6
+- D7
+- D8
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - evaluation/discourse_cases
+  - runtime/conversation
+  - runtime/discourse
+  - runtime/discourse_report
+  - tests/test_discourse_state
+  lean:
+  - Conversation
+  - DiscourseState
+  prose: DISCOURSE_STATE_STUDY.md
+  test:
+  - test_discourse_state.py
+  wheel: []
+follow_ups: []
+id: DISCOURSE_STATE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 55
+predecessors: []
+question: Can the conversation carry what an earlier turn left behind further than one substituted name
+  — a set a fold produced, *the one before that*, *both of them*, *why?* — and bind a follow-up whose
+  rewritten question only another surface of the machine answers?
+recomputed_by: '`glm_universal.runtime.discourse_report.discourse_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-what-the-answer-for-several-rows-at-once-is
+  heading: 1. What *the answer for several rows at once* is
+- anchor: 2-the-fourth-shape-and-the-surfaces
+  heading: 2. The fourth shape, and the surfaces
+- anchor: 3-declarations-written-before-any-code-of-the-round
+  heading: 3. Declarations — written before any code of the round
+- anchor: 4-what-was-built
+  heading: 4. What was built
+- anchor: 5-results
+  heading: 5. Results
+- anchor: 6-what-is-proved-rather-than-measured
+  heading: 6. What is proved rather than measured
+- anchor: 7-limits-and-what-the-round-leaves
+  heading: 7. Limits, and what the round leaves
+- anchor: 8-re-running-it
+  heading: 8. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Discourse state: a tie carried as a column, the fourth shape of follow-up, and follow-ups on every
+  surface'
+verdict: 'Yes: a tie is now carried as a column of the rows'' own answers, the fourth shape binds or refuses
+  with a named reason, and a follow-up is licensed by every surface through the router, with every declared
+  case as declared and 0 wrong.'
+wobble_deps: []

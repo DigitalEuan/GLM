@@ -72,7 +72,7 @@ counterexample.)
 the value of an assignment, an augmented or annotated assignment, or a
 `return` — in two corpora:
 
-* `live` — every Python file under `overlay/glm_universal/`, as it stood when
+* `live` — every Python file under `glm_universal/`, as it stood when
   the snapshot was taken (after §0–§2 of this study were written, before any
   measuring code existed);
 * `archive` — every Python file in `source_material/GLM-main.zip`, the

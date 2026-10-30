@@ -18,12 +18,12 @@ down. Cascaded loops, interacting tones, closed orbits, dither and error
 feedback through a matrix — each measured exactly and each bound to a
 theorem.*
 
-Code: [`overlay/glm_universal/reasoning/noise_lab.py`](../overlay/glm_universal/reasoning/noise_lab.py).
+Code: [`glm_universal/reasoning/noise_lab.py`](../glm_universal/reasoning/noise_lab.py).
 Query: `report noise` (aliases `report wobble`, `report wiggle`,
 `report dither`, `report cascade`).
-Formal development: [`RequestProject/GLM/Cascade.lean`](../overlay/glm_lean/RequestProject/GLM/Cascade.lean)
-and [`RequestProject/GLM/Feedback.lean`](../overlay/glm_lean/RequestProject/GLM/Feedback.lean).
-Tests: `overlay/glm_universal/tests/test_noise_lab.py`.
+Formal development: [`RequestProject/GLM/Cascade.lean`](../glm_lean/RequestProject/GLM/Cascade.lean)
+and [`RequestProject/GLM/Feedback.lean`](../glm_lean/RequestProject/GLM/Feedback.lean).
+Tests: `glm_universal/tests/test_noise_lab.py`.
 
 ---
 

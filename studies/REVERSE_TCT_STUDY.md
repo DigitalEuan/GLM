@@ -109,7 +109,7 @@ above one), `NONCONSTANT_COEFFICIENT`, `NO_UNIQUE_SOLUTION`,
 ## 2. Declarations — written before any realiser, reader or operation code
 
 The declared cases are
-`overlay/glm_universal/evaluation/reverse_tct_cases.py`, committed with this
+`glm_universal/evaluation/reverse_tct_cases.py`, committed with this
 section and before `reasoning/reverse_tct.py` existed.
 
 * **V1 — round trip.** Over the declared battery (every term of depth at most
@@ -303,7 +303,7 @@ The owner, opening the round (Phase 68), on the three items of §6:
 > loop.*
 
 The declared cases are
-`overlay/glm_universal/evaluation/reverse_tct_two_cases.py`, committed with
+`glm_universal/evaluation/reverse_tct_two_cases.py`, committed with
 this section and before any round-two code. The Phase 67 corpus is not
 edited; the four of its cases whose answer the widening changes on purpose
 are listed there as `SUPERSEDED`, with the answer each must now give.
@@ -511,7 +511,7 @@ they are not piecewise linear with finitely many pieces.
 Phase 69 takes the third item of §9 (candidate M of `STATUS.md` §3.4): *an
 integer sort, so that floor quotient and remainder over a variable split into
 finitely many residue cases instead of being refused `NOT_POLYNOMIAL`.* The
-declared cases are `overlay/glm_universal/evaluation/reverse_tct_int_cases.py`,
+declared cases are `glm_universal/evaluation/reverse_tct_int_cases.py`,
 committed with this section and before any round-three code; every expected
 answer in it was worked by hand. The Phase 67 and Phase 68 corpora are not
 edited, and no answer of theirs changes: the integer sort is asked for by its

@@ -1,0 +1,71 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Four boundaries, measured on the GLM's real carriers rather than asserted.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/information_loss
+  - tests/test_information_loss
+  lean:
+  - Constants
+  - Cumulative
+  - GolayBoundary
+  - LayerChain
+  - Layers
+  - Stack
+  - TaxConservation
+  - Tower
+  prose: INFORMATION_LOSS_STUDY.md
+  test:
+  - test_information_loss.py
+  wheel: []
+follow_ups: []
+id: INFORMATION_LOSS_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: What does a layer boundary cost, made precise enough to prove?
+recomputed_by: '`glm_universal.reasoning.information_loss.information_loss_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-thesis-stated-precisely
+  heading: 1. The thesis, stated precisely
+- anchor: 2-four-boundaries-measured
+  heading: 2. Four boundaries, measured
+- anchor: 3-the-measurement-on-the-real-system
+  heading: 3. The measurement on the real system
+- anchor: 4-what-the-study-concludes
+  heading: 4. What the study concludes
+- anchor: 5-where-to-look
+  heading: 5. Where to look
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Information loss at boundaries
+verdict: A system is true up to a point, and past that point a different system takes over and is true
+  in its own right.
+wobble_deps: []

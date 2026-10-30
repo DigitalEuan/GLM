@@ -1,0 +1,74 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: <!--figure:normesc-correct-->467<!--/figure--> of <!--figure:normesc-queries-->568<!--/figure-->
+  queries answered correctly with <!--figure:normesc-wrong-->0<!--/figure--> wrong, against <!--figure:normesc-named-correct-->462<!--/figure-->
+  for the eleven named construction rungs and <!--figure:normesc-family-correct-->470<!--/figure--> with
+  <!--figure:normesc-family-wrong-->1<!--/figure--> wrong for the unrepaired family.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - tests/test_norm_family
+  lean:
+  - NormFamily
+  prose: NORM_FAMILY_STUDY.md
+  test:
+  - test_norm_family.py
+  wheel: []
+follow_ups: []
+id: NORM_FAMILY_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Escalation reads a carrier at rung after rung until one rung resolves it, and what decides whether
+  a rung can resolve a perturbed query is its minimum squared norm. Does indexing the rungs by that quantity
+  — one rung at every power of two, generated rather than named — read more queries than the eleven named
+  construction rungs, and does it still refuse rather than answer wrongly?
+recomputed_by: '`glm_universal.reasoning.norm_escalation.measure`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-why-a-power-of-two-family-needs-two-constructions
+  heading: 1. Why a power-of-two family needs two constructions
+- anchor: 2-the-family-generated
+  heading: 2. The family, generated
+- anchor: 3-the-tower-and-what-is-proved
+  heading: 3. The tower, and what is proved
+- anchor: 4-the-escalation-re-taken
+  heading: 4. The escalation, re-taken
+- anchor: 5-where-it-breaks
+  heading: 5. Where it breaks
+- anchor: 6-limits-and-what-the-next-round-should-take
+  heading: 6. Limits, and what the next round should take
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The norm family — the ladder re-indexed by minimum squared norm, and the rung that had to be retired
+verdict: The complete power-of-two family answers more queries than the named rungs and answers one of
+  them wrongly, so the declared retirement rule retires the rung at fault, and the repaired ladder answers
+  467 of 568 with 0 wrong against 462 for the named construction rungs.
+wobble_deps: []

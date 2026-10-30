@@ -1,0 +1,73 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Cascades, closed orbits, dither and error feedback, each measured exactly and each bound
+  to a theorem.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/noise_lab
+  - tests/test_noise_lab
+  lean:
+  - Cascade
+  - Feedback
+  - HullExpansion
+  - Sextet
+  prose: NOISE_EXPERIMENT_STUDY.md
+  test:
+  - test_noise_experiment.py
+  wheel: []
+follow_ups: []
+id: NOISE_EXPERIMENT_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: What can the wobble compute once it stops being a way of writing a number down?
+recomputed_by: '`glm_universal.reasoning.noise_lab.noise_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-question
+  heading: 1. The question
+- anchor: 2-a-loop-can-chase-a-signal-not-just-a-constant
+  heading: 2. A loop can chase a signal, not just a constant
+- anchor: 3-when-the-wobble-closes-its-orbit
+  heading: 3. When the wobble closes its orbit
+- anchor: 4-what-a-second-loop-buys-an-order-exactly
+  heading: '4. What a second loop buys: an order, exactly'
+- anchor: 5-idle-tones-and-what-dither-costs
+  heading: 5. Idle tones, and what dither costs
+- anchor: 6-error-feedback-through-a-matrix-and-the-symmetry-it-keeps
+  heading: 6. Error feedback through a matrix, and the symmetry it keeps
+- anchor: 7-what-this-does-and-does-not-settle
+  heading: 7. What this does and does not settle
+- anchor: 8-reproducing-it
+  heading: 8. Reproducing it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The noise experiment
+verdict: A loop can chase a signal, not just a constant.
+wobble_deps: []

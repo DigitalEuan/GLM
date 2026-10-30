@@ -1,0 +1,78 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 7 of 7 marks met; 6 of 6 high-degree questions with the declared real roots; 5 of 5 certificate
+  questions and 5 of 5 controls; 4 of 4 letter refusals with the declared reason; planted battery 40 of
+  40 answered, 0 wrong; Zassenhaus = Kronecker on 200 of 200; 7 theorems, 0 `sorry`.
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - evaluation/quintic_radical_cases
+  - tests/test_quintic_radical
+  lean:
+  - QuinticRadicals
+  prose: QUINTIC_RADICAL_STUDY.md
+  test:
+  - test_quintic_radical.py
+  wheel: []
+follow_ups: []
+id: QUINTIC_RADICAL_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 104
+predecessors:
+- CUBIC_RADICAL_STUDY
+question: 'The cubic radical study''s §8 left two limits on the branch layer of `solve symbolically`:
+  a numeric polynomial above degree 6 was refused because its factors were not decided, and the quintic
+  in letters `x^5 + p*x = q` was refused with no reason beyond its degree. Can the layer factor past degree
+  6 without a wrong answer, and can it say, with a proved reason, when a root has no expression in radicals
+  at all?'
+recomputed_by: '`glm_universal.runtime.quintic_radical_report.quintic_radical_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-what-was-added
+  heading: 1. What was added
+- anchor: 2-the-marks
+  heading: 2. The marks
+- anchor: 3-what-is-proved
+  heading: 3. What is proved
+- anchor: 4-limits-and-what-the-round-leaves
+  heading: 4. Limits, and what the round leaves
+- anchor: 5-re-running-it
+  heading: 5. Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Past degree six, and roots with no expression in radicals
+verdict: 'Yes to both. Numeric polynomials up to degree 24 are now factored by Zassenhaus''s algorithm,
+  and their real roots are answered exactly. Any irreducible factor of prime degree at least 5 with exactly
+  two non-real roots is now marked as having no root in radicals, by a theorem proved in Lean. The quintic
+  in letters is still refused, but the refusal now names a rational point where no root is expressible
+  in radicals, so no formula in radicals of the letters can exist. All seven marks were met. Two limits
+  are counted: the certificate is sufficient but not necessary, and the letter search finds nothing for
+  a family that never has two non-real roots.'
+wobble_deps: []

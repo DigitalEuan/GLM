@@ -32,7 +32,7 @@ as the owner asked: `python/tests/test_kit.py`, `python/run_pipeline_demo.py`,
 `GLMKit/AxiomAudit.lean`, and the Lean root `GLMKit.lean`, `lakefile.toml` and
 `lean-toolchain` (uploaded as `lean-toolchain.txt`, renamed back). The upload
 had overwritten the repository's own `lakefile.toml` with the kit's; the
-repository's file (`srcDir = "overlay/glm_lean"`, library `RequestProject`)
+repository's file (`srcDir = "glm_lean"`, library `RequestProject`)
 was restored, and the kit's copy kept in the kit folder.
 
 **Part 2, a To-Do line.** `STATUS.md` §2.1 item 9 asked, among other things:
@@ -41,7 +41,7 @@ hypotheses and ask for its output.* This round does that.
 
 ## 1. What is proved
 
-**`overlay/glm_lean/RequestProject/GLM/PipelineAsk.lean`** (namespace
+**`glm_lean/RequestProject/GLM/PipelineAsk.lean`** (namespace
 `GLM.PipelineAsk`; 7 theorems, 0 `sorry`), for any input type, output type and
 hypothesis class `H`, the reply given by the true rule `f`:
 
@@ -62,7 +62,7 @@ hypothesis class `H`, the reply given by the true rule `f`:
 Not proved: that one ask suffices, or that the declared pool holds a
 separating input. Both are measured.
 
-**`overlay/glm_lean/RequestProject/GLM/AxiomGuard.lean`** turns the kit's
+**`glm_lean/RequestProject/GLM/AxiomGuard.lean`** turns the kit's
 `AxiomAudit.lean` (a list of `#print axioms` lines to be read by eye) into
 commands that fail the build: `#guard_axioms n₁ n₂ …`,
 `#guard_axioms_prefix P` and `#guard_axioms_development`. The accepted set is

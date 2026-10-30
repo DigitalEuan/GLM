@@ -1,0 +1,81 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 8 of 8 measured marks and L1; 321 tied points, 18 distinct heads; 48/48 confirmed on
+  the member meant, 0 wrong, at most 2 replies; 48/48 contradicted after one false reply; 0 of 10 outside-head
+  points confirmed; 150/150 conversation turns verify, 156/156 altered claims rejected; frozen path 212/212
+  same status, 0 undeclared.
+directives:
+- D1
+- D2
+- D3
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - NearestQuestion
+  prose: NEAREST_QUESTION_STUDY.md
+  test:
+  - test_nearest_question.py
+  wheel: []
+follow_ups: []
+id: NEAREST_QUESTION_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 148
+predecessors:
+- ANSWERING_QUESTION_STUDY
+question: Can a `nearest` answer whose ranking head is a tie end with the question that splits it, and
+  read the replies, as the `locate` junction does, without a reply ever moving the answer off the head,
+  under a frozen-path comparison of the whole evaluation?
+recomputed_by: '`glm_universal.reasoning.nearest_question_study.nearest_question_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-proved-before-any-code
+  heading: 1. What is proved before any code
+- anchor: 2-the-rule
+  heading: 2. The rule
+- anchor: 3-the-questions
+  heading: 3. The questions
+- anchor: 4-the-marks-declared-before-the-measurement
+  heading: 4. The marks, declared before the measurement
+- anchor: 5-what-would-count-against
+  heading: 5. What would count against
+- anchor: 6-what-is-not-claimed
+  heading: 6. What is not claimed
+- anchor: 7-what-came-out
+  heading: 7. What came out
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The question at the `nearest` ties — a reply turn for the ranking's head
+verdict: Yes. A `nearest` answer whose ranking head is a tie now ends with the question that splits it,
+  and its `given` replies are read as the next turn. Over the 18 distinct tied heads of Phase 148's six
+  sets, with each of the 48 members as the carrier meant, true replies confirmed the member meant in 48
+  of 48 runs and never a wrong one, with at most 2 replies; one false reply ended contradicted in 48 of
+  48. A carrier meant outside the head was never confirmed. Every one of the 212 evaluation cases keeps
+  its status, and the junction answer keeps its old text as a verbatim prefix. No mark was missed.
+wobble_deps: []

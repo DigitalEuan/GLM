@@ -1,0 +1,74 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: A factor of 16,834 in density at 48 dimensions, and delta–sigma run against a Leech shell.
+directives:
+- D2
+- D8
+evidence: []
+faculty: addressing
+file_refs:
+  code:
+  - reasoning/higher_lattices
+  - reasoning/shell_sigma
+  - tests/test_higher_lattices
+  - tests/test_shell_sigma
+  lean:
+  - HigherLattices
+  - HullExpansion
+  - ShellSigma
+  prose: HIGHER_LATTICE_STUDY.md
+  test:
+  - test_higher_lattice.py
+  wheel: []
+follow_ups: []
+id: HIGHER_LATTICE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: What does the machine gain above the Leech lattice, and what does it give up?
+recomputed_by: '`glm_universal.reasoning.higher_lattices.higher_lattices_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-the-question
+  heading: 1. The question
+- anchor: 2-the-ladder-recomputed
+  heading: 2. The ladder, recomputed
+- anchor: 3-thirty-two-dimensions-an-address-with-three-resolutions
+  heading: '3. Thirty-two dimensions: an address with three resolutions'
+- anchor: 4-forty-eight-dimensions-where-binary-runs-out
+  heading: '4. Forty-eight dimensions: where binary runs out'
+- anchor: 5-the-other-half-deltasigma-against-a-shell
+  heading: '5. The other half: delta–sigma against a shell'
+- anchor: 6-what-this-changes-for-the-system
+  heading: 6. What this changes for the system
+- anchor: 7-reproducing-every-number-here
+  heading: 7. Reproducing every number here
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Past 24: the higher-lattice study'
+verdict: The 32-dimensional Barnes–Wall rung and its three-resolution address; the 48-dimensional ternary
+  rung and its factor of 16,834 in density.
+wobble_deps: []

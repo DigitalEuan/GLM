@@ -1,0 +1,80 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Every number the eleven retrieved Lean files prove, recomputed, with three corrections
+  to the archive's own figures.
+directives:
+- D7
+- D8
+- D9
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/salvage
+  - tests/test_salvage
+  lean:
+  - DimensionCarrier
+  - Extraspecial
+  - GLM
+  - GLM3
+  - GolaySteiner
+  - GolayWeightEnum
+  - LDP
+  - Lightspeed
+  - Packing
+  - Platonic
+  - Steiner
+  - Totient
+  - Triad
+  - TriadCensus
+  prose: SOURCE_SALVAGE_AUDIT.md
+  test:
+  - test_source_salvage_audit.py
+  wheel: []
+follow_ups: []
+id: SOURCE_SALVAGE_AUDIT
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Do the numbers the retrieved Lean files prove come back out of the substrate?
+recomputed_by: '`glm_universal.reasoning.salvage.salvage_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-what-is-being-audited-and-why-twice
+  heading: 1. What is being audited, and why twice
+- anchor: 2-the-retrievals-measured
+  heading: 2. The retrievals, measured
+- anchor: 3-what-the-audit-adds-that-the-lean-does-not
+  heading: 3. What the audit adds that the Lean does not
+- anchor: 4-three-corrections-to-the-archive
+  heading: 4. Three corrections to the archive
+- anchor: 5-where-this-sits
+  heading: 5. Where this sits
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The archive retrievals, recomputed
+verdict: The audit is a measurement rather than a quotation.
+wobble_deps: []

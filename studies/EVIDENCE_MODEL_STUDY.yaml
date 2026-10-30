@@ -1,0 +1,83 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: '9 of 9 marks on the re-take (7 of 9 on the first: R5 and R6 missed); 171 of 171 column-3
+  replays verified (169 of 171 first); 50 cited theorem names, all declared; status: 172 answered, 5 open,
+  3 contradicted, 43 refused; boundary: 171 certified, 5 checkable, 46 refused, 1 uncertified.'
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - runtime/evidence
+  lean: []
+  prose: EVIDENCE_MODEL_STUDY.md
+  test:
+  - test_evidence_model.py
+  wheel: []
+follow_ups: []
+id: EVIDENCE_MODEL_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 169
+predecessors: []
+question: Can the answers of the planner, the grammar, the toolbox, the lattice reads, the corpus and
+  the conversation be read into one result representation that exposes, for each, its answer or candidate
+  set, its kind of evidence, its witness, the theorem behind it, its certification boundary, its cost,
+  its open tie, its refusal reason, its reply history and whether it was replayed — truthfully, over the
+  whole evaluation?
+recomputed_by: '`glm_universal.reasoning.evidence_model_study.evidence_model_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-the-model
+  heading: 1. The model
+- anchor: 2-the-census
+  heading: 2. The census
+- anchor: 3-faculties
+  heading: 3. Faculties
+- anchor: 4-the-marks
+  heading: 4. The marks
+- anchor: 5-what-would-count-against
+  heading: 5. What would count against
+- anchor: 6-what-is-not-claimed
+  heading: 6. What is not claimed
+- anchor: 7-what-came-out
+  heading: 7. What came out
+- anchor: in-one-paragraph
+  heading: In one paragraph
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: One evidence and result model — every answer and refusal of the evaluation read into the same ten
+  fields
+verdict: 'Yes, after two repairs the census itself found. All 223 evaluation questions read into the ten
+  fields; the model''s status agrees with the evaluation on all of them, where the surfaces'' own solved
+  flag alone disagrees on two; every refusal names its reason. The first take missed two marks: 26 cited
+  theorem names did not resolve, all of them a Python repr''s closing quote read as a prime (an extractor
+  artefact, amended), and two answers'' own column 3 did not reproduce them — the trilinear template could
+  not replay a triple of axis labels and the language report''s column 3 had drifted behind its report.
+  Both were real defects of the replay, fixed; on the re-take every one of the 171 replayable answers
+  verifies.'
+wobble_deps: []

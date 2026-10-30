@@ -1,0 +1,168 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Every Lean statement quoted was read back out of the development rather than retyped.
+directives:
+- D7
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - data_objects/economics_register
+  - engineering/delta_sigma
+  - examples/number_pipeline
+  - reasoning/coherence
+  - reasoning/wobble
+  - substrate/mog
+  - tests/test_number_theory_evidence
+  lean:
+  - Calibration
+  - Census
+  - Cesaro
+  - Constants
+  - DeltaSigma
+  - Distinction
+  - EngineeringWheels
+  - FitCapacity
+  - GolayBoundary
+  - GolayMOG
+  - GolayWeightEnum
+  - GrayJump
+  - Harmony
+  - HigherLattices
+  - Irrational
+  - LDP
+  - Leech
+  - LogBucket
+  - Mantissa
+  - NativeParity
+  - Niemeier
+  - NowReceipt
+  - Packing
+  - Platonic
+  - ReverseTCTThree
+  - ReverseTCTTwo
+  - Reversible
+  - SeedLayers
+  - SeedRoles
+  - Sextet
+  - Steiner
+  - Sturmian
+  - TaxConservation
+  - Totient
+  - Tower
+  - Transcendental
+  - Triad
+  - TriadCensus
+  - TriadChance
+  - Wobble
+  - WobbleLandscape
+  prose: GLM_Complete_Number_Theory_Evidence.md
+  test:
+  - test_glm_complete_number_theory_evidence.py
+  wheel: []
+follow_ups: []
+id: GLM_Complete_Number_Theory_Evidence
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 60
+predecessors: []
+question: What does the number-theoretic substrate actually establish?
+recomputed_by: '`glm_universal.reasoning.mantissa.mantissa_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-the-claim-stated
+  heading: 0. The claim, stated
+- anchor: 1-the-constants-lean-constantslean
+  heading: '1. The constants (Lean: `Constants.lean`)'
+- anchor: 2-the-sturmian-bridge-lean-sturmianlean
+  heading: '2. The Sturmian bridge (Lean: `Sturmian.lean`)'
+- anchor: 3-the-mantissa-wall-lean-mantissalean
+  heading: '3. The mantissa wall (Lean: `Mantissa.lean`)'
+- anchor: 4-the-irrational-tower-lean-irrationallean-towerlean
+  heading: '4. The irrational tower (Lean: `Irrational.lean`, `Tower.lean`)'
+- anchor: 5-the-harmony-connection-lean-harmonylean
+  heading: '5. The harmony connection (Lean: `Harmony.lean`)'
+- anchor: 6-the-golay-substrate-census-lean-golaycensuslean-golaycesarolean
+  heading: '6. The Golay substrate census (Lean: `Golay/Census.lean`, `Golay/Cesaro.lean`)'
+- anchor: 7-the-reversible-channel-lean-reversiblelean
+  heading: '7. The reversible channel (Lean: `Reversible.lean`)'
+- anchor: 8-tax-conservation-and-its-boundary-lean-taxconservationlean
+  heading: '8. Tax conservation and its boundary (Lean: `TaxConservation.lean`)'
+- anchor: 9-the-complete-number-theoretic-census
+  heading: 9. The complete number-theoretic census
+- anchor: 10-the-operational-landscape-three-barriers-three-freedoms
+  heading: '10. The operational landscape: three barriers, three freedoms'
+- anchor: 11-the-spectroscopic-duality
+  heading: 11. The spectroscopic duality
+- anchor: 12-the-structural-metamaterial-landscape
+  heading: 12. The structural metamaterial landscape
+- anchor: 13-synthesis
+  heading: 13. Synthesis
+- anchor: 14-worked-example-one-number-through-the-pipeline
+  heading: '14. Worked example: one number through the pipeline'
+- anchor: 15-why-23-and-why-24-as-arithmetic-lean-packinglean
+  heading: '15. Why 23, and why 24 — as arithmetic (Lean: `Packing.lean`)'
+- anchor: 16-the-golay-codes-own-numbers-lean-golayweightenumlean-steinerlean-ldplean
+  heading: '16. The Golay code''s own numbers (Lean: `GolayWeightEnum.lean`, `Steiner.lean`, `LDP.lean`)'
+- anchor: 17-the-polygon-and-the-totient-lean-totientlean
+  heading: '17. The polygon and the totient (Lean: `Totient.lean`)'
+- anchor: 18-the-periods-of-a-stream-lean-engineeringwheelslean-nowreceiptlean
+  heading: '18. The periods of a stream (Lean: `EngineeringWheels.lean`, `NowReceipt.lean`)'
+- anchor: 19-the-gray-layer-and-the-scale-bucket-lean-grayjumplean-logbucketlean
+  heading: '19. The Gray layer and the scale bucket (Lean: `GrayJump.lean`, `LogBucket.lean`)'
+- anchor: 20-where-a-transcendental-may-enter-lean-seedlayerslean-transcendentallean-irrationallean
+  heading: '20. Where a transcendental may enter (Lean: `SeedLayers.lean`, `Transcendental.lean`, `Irrational.lean`)'
+- anchor: 21-the-evidence-ledger
+  heading: 21. The evidence ledger
+- anchor: 22-the-seeds-as-numbers-lean-seedroleslean
+  heading: '22. The seeds as numbers (Lean: `SeedRoles.lean`)'
+- anchor: 23-what-one-distinction-forces-lean-distinctionlean
+  heading: '23. What one distinction forces (Lean: `Distinction.lean`)'
+- anchor: 24-the-two-gap-law-and-the-golay-ball-lean-wobblelandscapelean
+  heading: '24. The two-gap law and the Golay ball (Lean: `WobbleLandscape.lean`)'
+- anchor: 25-three-counting-claims-audited-lean-triadlean-triadcensuslean-triadchancelean-platoniclean
+  heading: '25. Three counting claims, audited (Lean: `Triad.lean`, `TriadCensus.lean`, `TriadChance.lean`,
+    `Platonic.lean`)'
+- anchor: 26-the-element-address-layer-lean-golaymoglean
+  heading: '26. The element address layer (Lean: `GolayMOG.lean`)'
+- anchor: 27-lattices-beside-and-above-λ₂₄-lean-niemeierlean-higherlatticeslean
+  heading: '27. Lattices beside and above Λ₂₄ (Lean: `Niemeier.lean`, `HigherLattices.lean`)'
+- anchor: 28-integer-arithmetic-the-machine-now-decides-lean-reversetcttwolean-reversetctthreelean
+  heading: '28. Integer arithmetic the machine now decides (Lean: `ReverseTCTTwo.lean`, `ReverseTCTThree.lean`)'
+- anchor: 29-the-address-read-back-lean-nativeparitylean
+  heading: '29. The address read back (Lean: `NativeParity.lean`)'
+- anchor: appendix-a-lean-theorem-index
+  heading: 'Appendix A: Lean theorem index'
+- anchor: appendix-b-methodology
+  heading: 'Appendix B: Methodology'
+- anchor: appendix-c-where-the-data-is
+  heading: 'Appendix C: Where the data is'
+- anchor: references
+  heading: References
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The GLM Number-Theoretic Substrate
+verdict: The claim is narrower and testable.
+wobble_deps: []

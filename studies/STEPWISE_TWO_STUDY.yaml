@@ -1,0 +1,86 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 53 of 53 declared questions, 2 of 2 narratives and 2 of 2 follow-ups as declared, 0 wrong,
+  where round one's reader answers 0 of the 53; 39 of 39 chain scripts verified (178 of 178 steps aligned)
+  and every mutation rejected, 22 of 22 unit lies included; 8 of 8 marks met.
+directives:
+- D15
+- D3
+- D7
+evidence: []
+faculty: derivation
+file_refs:
+  code:
+  - evaluation/stepwise_two_cases
+  - reasoning/stepwise_script
+  - runtime/quantity_units
+  - runtime/stepwise
+  - runtime/stepwise_two
+  lean:
+  - StepwiseFrames
+  - StepwisePlanner
+  prose: STEPWISE_TWO_STUDY.md
+  test:
+  - test_stepwise_two.py
+  wheel: []
+follow_ups: []
+id: STEPWISE_TWO_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 72
+predecessors:
+- STEPWISE_PLANNER_STUDY
+question: Can the stepwise planner read the four kinds of question round one could not — *how many more*,
+  parity, averages, givens written with units — and let a register value feed a wheel derivation, without
+  answering anything wrongly?
+recomputed_by: '`glm_universal.runtime.stepwise_two.stepwise_two_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-objects
+  heading: 1. The objects
+- anchor: 2-declarations-written-before-any-code-of-the-round
+  heading: 2. Declarations — written before any code of the round
+- anchor: 3-what-was-built
+  heading: 3. What was built
+- anchor: 4-results
+  heading: 4. Results
+- anchor: 5-lean
+  heading: 5. Lean
+- anchor: 6-what-this-leaves
+  heading: 6. What this leaves
+- anchor: 7-addendum-phase-86-five-verdicts-amended
+  heading: '7. Addendum (Phase 86): five verdicts amended'
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The stepwise planner, round two: the frames the leaves lacked, givens with units, and the register
+  in the wheels'
+verdict: 'Yes: the stepwise planner now reads *how many more*, parity and averages over register values,
+  converts givens and targets written with units through a declared exact unit table, and feeds register
+  values into wheel derivations through the declared scale table, answering every declared case as declared
+  with 0 wrong answers and refusing by name wherever a unit, a scale or an order is not what the question
+  needs.'
+wobble_deps: []

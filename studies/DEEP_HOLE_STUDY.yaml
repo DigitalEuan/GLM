@@ -1,0 +1,90 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: One primary statistic against a digest control, a seeded reshuffle and the vertex-count
+  baseline, corrected for the 4 statistics tried, read against the gate of 3 bits.
+directives:
+- D3
+- D4
+- D5
+- D6
+- D7
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/deep_hole_classifier
+  lean:
+  - Census
+  - DeepHoleClassifier
+  prose: DEEP_HOLE_STUDY.md
+  test:
+  - test_deep_hole.py
+  wheel: []
+follow_ups: []
+id: DEEP_HOLE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Can the distribution of trajectories that arrive at a deep hole of the Leech lattice name the
+  hole's Coxeter–Dynkin type, and does it beat the plain vertex count?
+recomputed_by: '`glm_universal.reasoning.deep_hole_classifier.deep_hole_classifier_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-is-already-known-and-is-used-rather-than-re-derived
+  heading: 1. What is already known, and is used rather than re-derived
+- anchor: 2-the-trajectory-ensemble-stated-exactly
+  heading: 2. The trajectory ensemble, stated exactly
+- anchor: 3-the-statistic
+  heading: 3. The statistic
+- anchor: 4-the-label-and-the-map-from-statistic-to-it
+  heading: 4. The label, and the map from statistic to it
+- anchor: 5-the-nulls-and-the-cheap-baseline-that-is-the-real-competitor
+  heading: 5. The nulls, and the cheap baseline that is the real competitor
+- anchor: 6-what-is-attempted-in-what-order-and-what-stops-the-round
+  heading: 6. What is attempted, in what order, and what stops the round
+- anchor: 7-the-score
+  heading: 7. The score
+- anchor: 8-what-this-round-has-to-produce-in-the-shape-d5-requires
+  heading: 8. What this round has to produce, in the shape D5 requires
+- anchor: 9-the-lean-half-what-can-actually-be-proved
+  heading: '9. The Lean half: what can actually be proved'
+- anchor: 10-what-the-glm-gains-three-claims-to-be-argued-or-refuted-by-the-numbers
+  heading: 10. What the GLM gains — three claims, to be argued or refuted by the numbers
+- anchor: 11-exactness-and-how-to-re-take-every-number
+  heading: 11. Exactness, and how to re-take every number
+- anchor: 12-the-measurement
+  heading: 12. The measurement
+- anchor: 13-what-this-study-does-not-do
+  heading: 13. What this study does not do
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The Niemeier deep holes, classified from trajectories
+verdict: 'The trajectory statistic beats every control, including the vertex-count baseline that was fixed
+  in advance as the real competitor, and the round still stops: the pre-registered sanity query fails,
+  because the same hole under a different declared ensemble is often named as a different hole.'
+wobble_deps: []

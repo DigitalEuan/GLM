@@ -1,0 +1,85 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 5 of 7 stages exactly zero against ground truth, 64 heads where the paper's accounting
+  says 64, the coverage refusal measured at n = 7 where the paper's bound says n ≤ 3, and 1 of 12 rows
+  where inner-product argmax agrees with the shipped nearest.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - sandbox/attention_simulator
+  lean:
+  - Constants
+  prose: ATTENTION_SIMULATOR_STUDY.md
+  test:
+  - test_attention_simulator.py
+  wheel: []
+follow_ups: []
+id: ATTENTION_SIMULATOR_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Can the supplied paper's universal attention simulator (arXiv 2506.18739v2, "On the Existence
+  of Universal Simulators of Attention") run on this substrate — attention built from the elementary operations
+  the package already ships — and what does it cost, exactly?
+recomputed_by: '`glm_universal.sandbox.attention_simulator.attention_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-what-this-study-is
+  heading: 1. What this study is
+- anchor: 2-the-paper-reproduced-exactly
+  heading: 2. The paper reproduced exactly
+- anchor: 3-ground-truth-and-head-counts
+  heading: 3. Ground truth and head counts
+- anchor: 4-the-exponential-declared-precision-and-the-inversion
+  heading: '4. The exponential: declared precision, and the inversion'
+- anchor: 5-the-simulator-tax
+  heading: 5. The simulator tax
+- anchor: 6-the-register-bridge-three-scorings-and-the-dial
+  heading: '6. The register bridge: three scorings and the dial'
+- anchor: 7-coverage-hierarchy-multi-head
+  heading: 7. Coverage, hierarchy, multi-head
+- anchor: what-is-proved-rather-than-measured
+  heading: What is proved rather than measured
+- anchor: what-it-decides-and-what-it-does-not
+  heading: What it decides, and what it does not
+- anchor: limits
+  heading: Limits
+- anchor: re-running-it
+  heading: Re-running it
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: The attention simulator — attention from elementary operations, ported, measured
+verdict: 'Yes, exactly: every elementary operation of the paper''s construction agrees with the shipped
+  ground truth with zero error, the simulator `U` reproduces the paper''s own demonstrations with zero
+  error on every exact stage (the paper''s float error 3.38e-06 becomes 6.4e-105 at declared depth), and
+  every head count matches the paper''s tables — but the exponential is not exact and cannot be, two of
+  the paper''s stated conditions are looser than the truth (the coverage bound is conservative by a factor
+  of two; the hierarchy corollary silently needs a padding mask), and on the live registers raw attention
+  scoring is norm-dominated and inverts at low depth, so the module stays in the sandbox: a compiled library,
+  not yet a faculty.'
+wobble_deps: []

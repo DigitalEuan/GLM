@@ -1,0 +1,97 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: 216,723 widened terms and 18,500 mask terms round-trip with 0 collisions; 650 of 650
+  negated normal forms certified; 36 of 83 dialect programs inside, 36 agreeing; 32 of 32 planner handoffs
+  agree or are consistent, against 0 of 15 answered when the sentences are given verbatim; 92 of 92 round-two
+  scripts VERIFIED True and 84 of 84 mutated certificates rejected; over the integers 29 of 29 entailment
+  and 10 of 10 bounds cases as declared, 34 of 34 scripts VERIFIED True and 34 of 34 mutants rejected.
+directives:
+- D15
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - evaluation/reverse_tct_cases
+  - evaluation/reverse_tct_int_cases
+  - evaluation/reverse_tct_two_cases
+  lean:
+  - ReverseTCT
+  - ReverseTCTThree
+  - ReverseTCTTwo
+  prose: REVERSE_TCT_STUDY.md
+  test:
+  - test_reverse_tct.py
+  wheel: []
+follow_ups: []
+id: REVERSE_TCT_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 68
+predecessors: []
+question: Can the script and the mathematics generate the language column, rather than the other way round,
+  so that every generated sentence reads back to exactly the mathematics it came from, and do semantic
+  operations taken on the mathematics give sentences with certificates — and, in round two (Phase 68),
+  does that still hold over the integer layer, the bitwise operators, Golay masks and disjunction, with
+  the generated questions handed on to the planner — and, in round three (Phase 69), over the integers,
+  with floor quotient and remainder split into residue cases?
+recomputed_by: '`glm_universal.reasoning.reverse_tct_script.reverse_two_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-where-this-comes-from
+  heading: 0. Where this comes from
+- anchor: 1-the-objects
+  heading: 1. The objects
+- anchor: 2-declarations-written-before-any-realiser-reader-or-operation-code
+  heading: 2. Declarations — written before any realiser, reader or operation code
+- anchor: 3-results
+  heading: 3. Results
+- anchor: 4-what-this-is-under-d15
+  heading: 4. What this is, under D15
+- anchor: 5-what-it-is-not
+  heading: 5. What it is not
+- anchor: 6-next
+  heading: 6. Next
+- anchor: 7-round-two-declarations-written-before-any-round-two-code
+  heading: 7. Round two — declarations, written before any round-two code
+- anchor: 8-round-two-results
+  heading: 8. Round two — results
+- anchor: 9-next
+  heading: 9. Next
+- anchor: 10-round-three-the-integer-sort-declarations-written-before-any-round-three-code
+  heading: '10. Round three — the integer sort: declarations, written before any round-three code'
+- anchor: 11-round-three-results
+  heading: 11. Round three — results
+- anchor: 12-next
+  heading: 12. Next
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'Reverse Three Column Thinking: the language column generated from the mathematics and the script'
+verdict: 'Every declared mark of all three rounds is met: the widened language column reads back to exactly
+  the mathematics with 0 collisions, negation is closed under De Morgan with no compound statement refused,
+  36 of the 83 dialect programs are now inside the fragment (8 before), and every relayed question is
+  read, answered and read back by the planner with 0 disagreements, each answer checked by a script; round
+  three decides entailment and bounds over the integers, every declared case as declared and every answer
+  checked by a script.'
+wobble_deps: []

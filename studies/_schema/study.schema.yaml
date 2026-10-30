@@ -1,0 +1,214 @@
+# The GLM study manifest schema (glm-study-manifest/v1)
+#
+# A study is a paired .yaml + .md: the YAML is the semantic manifest the
+# GLM reads for structured operations; the .md is the prose backup the
+# human reader reads and the corpus --check grounds the tier-0 verdict
+# against.  This schema defines the YAML's shape.
+#
+# The schema is intentionally permissive: only `id`, `question`,
+# `verdict`, and `file_refs.prose` are required.  Every other field is
+# optional and may be empty.  This lets the converter auto-extract what
+# it can from the markdown tier-0 block and leave the rest for a future
+# round to fill in.
+#
+# The full-graph fields (predecessors, successors, junctions, directives,
+# wobble_deps, reversibility, evidence, follow_ups) are defined here so
+# the schema is ready for the full reorganisation, but the converter
+# leaves them empty for now -- they require human or machine judgement
+# to fill in correctly.
+#
+# Created 29 October 2026 (Iteration 8 of the reorganisation, Phase R3).
+
+$id: https://github.com/DigitalEuan/GLM/studies/_schema/study.schema.yaml
+title: GLM Study Manifest (glm-study-manifest/v1)
+type: object
+required:
+  - schema
+  - id
+  - question
+  - verdict
+  - file_refs
+properties:
+
+  # ── identity ────────────────────────────────────────────────────────
+  schema:
+    type: string
+    const: glm-study-manifest/v1
+  id:
+    type: string
+    description: The study's stable id (the .md filename without extension)
+  phase:
+    type: integer
+    minimum: 1
+    description: The development phase this study belongs to (if known)
+  status:
+    type: string
+    enum: [open, measured, closed, archived, negative, unknown]
+    description: The study's current status
+  question:
+    type: string
+    description: The tier-0 Question (one sentence)
+  verdict:
+    type: string
+    description: The tier-0 Verdict (one sentence)
+  deciding_figure:
+    type: string
+    description: The tier-0 Deciding figure
+  recomputed_by:
+    type: string
+    description: The tier-0 Recomputed by (a dotted path or the NO_FUNCTION marker)
+  last_altered:
+    type: string
+    description: The Last altered date (if present in the .md)
+  title:
+    type: string
+    description: The H1 title of the .md (without the leading #)
+
+  # ── marks (D5, D15) ─────────────────────────────────────────────────
+  marks:
+    type: object
+    properties:
+      declared: { type: array, items: { type: string } }
+      met: { type: array, items: { type: string } }
+      missed: { type: array, items: { type: string } }
+      amended: { type: array, items: { type: string } }
+
+  # ── faculty (D15) ───────────────────────────────────────────────────
+  faculty:
+    type: string
+    enum: [derivation, addressing, refusal, maintenance, unknown]
+    description: Which faculty this study moved (D15)
+
+  # ── knowledge-graph edges ───────────────────────────────────────────
+  predecessors:
+    type: array
+    items: { type: string }
+    description: Study ids this study builds on
+  successors:
+    type: array
+    items: { type: string }
+    description: Study ids that build on this one (computed by the ledger)
+  supersedes:
+    type: array
+    items: { type: string }
+    description: Study ids this one retires
+  superseded_by:
+    type: string
+    description: The study id that retires this one, if any
+
+  # ── junctions (wheels) ──────────────────────────────────────────────
+  junctions:
+    type: array
+    items:
+      type: object
+      required: [wheels, rule]
+      properties:
+        wheels: { type: array, items: { type: string }, minItems: 2 }
+        rule: { type: string }
+        study: { type: string }
+
+  # ── directive tags ──────────────────────────────────────────────────
+  directives:
+    type: array
+    items: { type: string, pattern: "^D([1-9]|1[0-9])$" }
+    description: The directives this study implements (D1-D19)
+
+  # ── wobble dependencies (D17) ───────────────────────────────────────
+  wobble_deps:
+    type: array
+    items:
+      type: object
+      required: [quantity, generator]
+      properties:
+        quantity: { type: string }
+        generator: { type: string }
+        lean_theorem: { type: string }
+        enclosure_width: { type: string }
+
+  # ── reversibility class (D18) ───────────────────────────────────────
+  reversibility:
+    type: object
+    properties:
+      class:
+        type: string
+        enum: [bijective, has_inverse, forward_only, declared_lossy, unknown]
+      inverse_of: { type: string }
+      inverse_lean: { type: string }
+      loss_witness: { type: string }
+      loss_lean: { type: string }
+
+  # ── layer (D12) ─────────────────────────────────────────────────────
+  layer:
+    type: object
+    properties:
+      primary: { type: string }
+      resolutions_tried: { type: array, items: { type: string } }
+      non_edges: { type: array, items: { type: string } }
+      refinement_of: { type: string }
+
+  # ── controls (D11) ──────────────────────────────────────────────────
+  controls:
+    type: array
+    items:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum: [digest, reshuffle, chance_baseline, layer_escalation, perturbation]
+        description: { type: string }
+        margin: { type: string }
+
+  # ── perturbations (D13) ─────────────────────────────────────────────
+  perturbations:
+    type: array
+    items:
+      type: object
+      properties:
+        name: { type: string }
+        declared_before: { type: boolean }
+        pass_mark: { type: string }
+
+  # ── evidence pointers ───────────────────────────────────────────────
+  evidence:
+    type: array
+    items:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum: [theorem, register_row, script, paraphrase, held_out, negative_result]
+        ref: { type: string }
+
+  # ── file references ─────────────────────────────────────────────────
+  file_refs:
+    type: object
+    required: [prose]
+    properties:
+      prose:
+        type: string
+        description: The .md file (relative to studies/)
+      code: { type: array, items: { type: string } }
+      lean: { type: array, items: { type: string } }
+      test: { type: array, items: { type: string } }
+      wheel: { type: array, items: { type: string } }
+
+  # ── follow-ups ──────────────────────────────────────────────────────
+  follow_ups:
+    type: array
+    items:
+      type: object
+      properties:
+        question: { type: string }
+        status:
+          type: string
+          enum: [open, resolved_by, dropped]
+        resolved_by: { type: string }
+
+  # ── the paired .md's section list (for the corpus --ask shortlist) ──
+  sections:
+    type: array
+    items:
+      type: object
+      properties:
+        heading: { type: string }
+        anchor: { type: string }

@@ -1,0 +1,77 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: One primary statistic against a magnitude-matched null, corrected for the 4 statistics
+  tried, read against the gate of 3 bits.
+directives:
+- D6
+- D7
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - Sturmian
+  - WobbleLandscape
+  prose: WOBBLE_LANDSCAPE_STUDY.md
+  test:
+  - test_wobble_landscape.py
+  wheel: []
+follow_ups: []
+id: WOBBLE_LANDSCAPE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: Is alpha's arithmetic signature distinctive within the space the Golay–Leech substrate permits,
+  or is it what a magnitude-matched number looks like?
+recomputed_by: '`glm_universal.reasoning.wobble_landscape.landscape_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-what-is-already-known-and-is-used-rather-than-simulated
+  heading: 1. What is already known, and is used rather than simulated
+- anchor: 2-the-pre-registered-primary-test
+  heading: 2. The pre-registered primary test
+- anchor: 3-the-decision-tree-fixed-before-measuring
+  heading: 3. The decision tree, fixed before measuring
+- anchor: 4-the-verdict-one-number-and-what-it-is-not
+  heading: '4. The verdict: one number, and what it is not'
+- anchor: 5-phase-1-alphas-gap-spectrum-exactly
+  heading: '5. Phase 1: alpha''s gap spectrum, exactly'
+- anchor: 6-phase-2-the-neighbourhood-test-which-decides-the-study
+  heading: '6. Phase 2: the neighbourhood test, which decides the study'
+- anchor: 7-what-this-study-does-not-do
+  heading: 7. What this study does not do
+- anchor: 8-the-golay-question-done-properly
+  heading: 8. The Golay question, done properly
+- anchor: 9-exactness-and-how-to-re-take-every-number
+  heading: 9. Exactness, and how to re-take every number
+- anchor: 10-bridges-not-yet-tested
+  heading: 10. Bridges not yet tested
+status: negative
+successors: []
+superseded_by: ''
+supersedes: []
+title: 'The wobble landscape: is the fine-structure constant structurally distinctive?'
+verdict: 'The signature is not distinctive enough to spend on: the score falls below the gate that was
+  fixed before the measurement, so the landscape enumeration was not run.'
+wobble_deps: []

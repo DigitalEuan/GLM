@@ -1,0 +1,79 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: The frozen probe scores <!--figure:plans-probe-correct-->19<!--/figure--> correct, <!--figure:plans-probe-wrong-->0<!--/figure-->
+  wrong and <!--figure:plans-probe-refused-->1<!--/figure--> refused through the planner, against <!--figure:plans-bare-probe-correct-->2<!--/figure-->,
+  <!--figure:plans-bare-probe-wrong-->1<!--/figure--> and <!--figure:plans-bare-probe-refused-->17<!--/figure-->
+  through the grammar; of <!--figure:plans-held-total-->110<!--/figure--> held-out questions it answers
+  <!--figure:plans-held-correct-->86<!--/figure--> correctly and refuses <!--figure:plans-held-correct-refusal-->22<!--/figure-->
+  correctly, with <!--figure:plans-held-wrong-->1<!--/figure--> wrong.
+directives:
+- D15
+evidence: []
+faculty: refusal
+file_refs:
+  code: []
+  lean:
+  - SemanticPlan
+  prose: SEMANTIC_PLAN_STUDY.md
+  test:
+  - test_semantic_plan.py
+  wheel: []
+follow_ups: []
+id: SEMANTIC_PLAN_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: The frozen language probe is refused seventeen times of twenty although the registers hold most
+  of the answers behind the formal grammar. Does a typed planner that reads a question into operations
+  the machine already has, and answers only when every licensed reading agrees, reach those answers without
+  a wrong one?
+recomputed_by: '`glm_universal.reasoning.typed_plans.plans_report`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-what-this-round-took-and-from-where
+  heading: 1. What this round took, and from where
+- anchor: 2-what-a-plan-is
+  heading: 2. What a plan is
+- anchor: 3-the-derivation-half
+  heading: 3. The derivation half
+- anchor: 4-the-sets-and-when-each-was-written
+  heading: 4. The sets, and when each was written
+- anchor: 5-what-happened
+  heading: 5. What happened
+- anchor: 6-the-exceptions-by-name
+  heading: 6. The exceptions, by name
+- anchor: 7-what-was-gained-classified
+  heading: 7. What was gained, classified
+- anchor: 8-what-it-does-not-do
+  heading: 8. What it does not do
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Typed question plans — a bridge from English to the operations the machine already has
+verdict: Through the planner the frozen probe passes the mark declared before it was first run, and the
+  held-out questions committed before the planner existed are answered or correctly refused in all but
+  one; the one wrong answer is a register reading that disagrees with the world, not a misreading of the
+  question, and two licensed readings that disagree are refused with both named.
+wobble_deps: []

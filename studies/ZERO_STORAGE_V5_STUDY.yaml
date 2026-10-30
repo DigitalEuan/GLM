@@ -1,0 +1,74 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Golay membership as twelve parity checks against 36 bytes, proved equivalent and checked
+  on the whole shell.
+directives: []
+evidence: []
+faculty: unknown
+file_refs:
+  code: []
+  lean:
+  - Hamming
+  - ZeroStorage
+  - ZeroStorageV5
+  prose: ZERO_STORAGE_V5_STUDY.md
+  test:
+  - test_zero_storage_v5.py
+  wheel: []
+follow_ups: []
+id: ZERO_STORAGE_V5_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: What does removing the last stored table cost, in exact integers?
+recomputed_by: (hand-written argument; nothing to recompute)
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 1-what-was-still-stored-and-what-replaced-it
+  heading: 1. What was still stored, and what replaced it
+- anchor: 2-the-cost-ledger-what-an-answer-costs-in-exact-integers
+  heading: '2. The cost ledger: what an answer costs, in exact integers'
+- anchor: 3-nrci-defined-here
+  heading: 3. NRCI, defined here
+- anchor: 4-continuous-retargeting-the-register-as-a-tracker
+  heading: '4. Continuous retargeting: the register as a tracker'
+- anchor: 5-higher-order-noise-shaping-measured-not-assumed
+  heading: '5. Higher-order noise shaping: measured, not assumed'
+- anchor: 6-demand-driven-precision
+  heading: 6. Demand-driven precision
+- anchor: 7-the-decoder-is-exact-and-now-proved
+  heading: 7. The decoder is exact, and now proved
+- anchor: 8-what-is-proved-and-what-is-only-measured
+  heading: 8. What is proved, and what is only measured
+- anchor: 9-what-this-licenses-and-what-it-does-not
+  heading: 9. What this licenses, and what it does not
+- anchor: 10-what-mathlib-already-has-checked-not-assumed
+  heading: 10. What Mathlib already has — checked, not assumed
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Generate, don't store — and say what generating costs
+verdict: The last stored table is removed, and the cost of the removal is measured rather than assumed.
+wobble_deps: []

@@ -1,0 +1,288 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: Rounds 2 to 49, one section per round.
+directives:
+- D1
+evidence: []
+faculty: unknown
+file_refs:
+  code:
+  - reasoning/wobble_normalize
+  lean:
+  - AdicPeriod
+  - AdicTower
+  - AdicTowerData
+  - AmortizedHalving
+  - ArrowIndependence
+  - BarrierDiagonalsData
+  - Benchmarks
+  - BenchmarksData
+  - BlackRunWindow
+  - ChemistryLab
+  - ChiralLeak
+  - ColumnInverse
+  - ConeGeometry
+  - ConjectureLoop
+  - ConjectureLoopData
+  - DegreeData
+  - DiagonalCoupling
+  - DiagonalSearch
+  - DiagonalSearchData
+  - Diagonals
+  - DialogueChecks
+  - DriveWheel
+  - DriveWheelData
+  - EchoBound
+  - ElementaryCA
+  - Ergodic
+  - Escalation
+  - FiniteState
+  - Frontier
+  - Funnel
+  - GLM
+  - GateLoop
+  - GateLoopData
+  - GolayTies
+  - HalfLineMachine
+  - HalfLineMachineData
+  - HankelKronecker
+  - Injector
+  - InjectorAnalogies
+  - InjectorData
+  - InnerSurvivorData
+  - Invariance
+  - LatticeConeFraction
+  - LayerStack
+  - LeechResidue
+  - LeftDiagonalPeriods
+  - LeftDiagonalPeriodsData
+  - LeftWhiteCompactness
+  - LeftWhiteLift
+  - LocalRuleInduction
+  - MachineModel
+  - MachineModelData
+  - MasterStep
+  - MathieuCensus
+  - MathieuCensusOrbits
+  - MathieuMOG
+  - MathieuOrbits
+  - MathieuOrbitsData
+  - MathieuRule30Data
+  - NeedsWheel
+  - Niemeier
+  - NoConstantColumn
+  - Observer
+  - OnePeriodicColumn
+  - OneRunFamily
+  - ParityReduction
+  - ParityReductionData
+  - PeriodTwoHalfLine
+  - PeriodTwoHalfLineData
+  - Perspective
+  - PhaseSpace32
+  - Pipeline
+  - PipelineData
+  - PlanSearch
+  - PostEdgeSpec
+  - PowerSeriesLadder
+  - PowerSeriesLadderData
+  - PrefixSearch
+  - PrefixSearchData
+  - Problem3Quantifiers
+  - ProofRoutes
+  - ProofRoutesData
+  - ReadAngle
+  - RightDiagonalBalance
+  - Rule30
+  - Rule30Parity
+  - Rule30PowerSeriesLadder
+  - Rule30Study
+  - RuleSpace
+  - RunBoundData
+  - RunBoundEighteen
+  - RunBoundPeriods
+  - RunBoundSearch
+  - RunCountGeneral
+  - RunCountLaw
+  - SearchLoop
+  - SeedBoundary
+  - ShortcutNetwork
+  - ShortcutNetworkData
+  - SidewaysPeriodTwo
+  - SidewaysView
+  - Spectral
+  - SpinLattice
+  - SpinQuaternion
+  - SpinSweep
+  - TaxChecks
+  - TaxChecksData
+  - TestCountLaw
+  - TestCountLawData
+  - TestCountPeriods
+  - TestCountPeriodsData
+  - TestHalving
+  - TestHalvingData
+  - TileLeads
+  - TopMonomial
+  - Transients
+  - TransientsData
+  - Triangles
+  - TrianglesData
+  - TuningByEar
+  - TuningByEarData
+  - TurnCost
+  - TurnCostData
+  - Unpredictability
+  - WeightGrowth
+  - Wheel
+  - WheelChecksData
+  - WheelInduction
+  - WhiteDiagonals
+  - WholeCone
+  - Wobble
+  - WobbleCertificate
+  - WobbleLenses
+  - WobbleLensesData
+  - WobbleNormalized
+  - XorAlternatives
+  - XorAlternativesData
+  prose: RULE30_HISTORY.md
+  test:
+  - test_rule30_history.py
+  wheel: []
+follow_ups: []
+id: RULE30_HISTORY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 0
+predecessors: []
+question: What happened in each development round of the Rule 30 / GLM study?
+recomputed_by: (hand-written argument; nothing to recompute)
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: round-2-results
+  heading: Round 2 results
+- anchor: round-3-the-32-state-phase-space-and-the-wobble-certificate
+  heading: 'Round 3: the 32-state phase space and the wobble certificate'
+- anchor: round-4-ascending-to-measure-theory-and-seed-specific-structure
+  heading: 'Round 4: ascending to measure theory and seed-specific structure'
+- anchor: round-5-finite-state-observers-the-diagonal-bridge-and-a-machine-model
+  heading: 'Round 5: finite-state observers, the diagonal bridge, and a machine model'
+- anchor: round-6-the-full-feedback-push-waves-boundaries-rule-spaces-the-parity-count
+  heading: 'Round 6: the full feedback push (waves, boundaries, rule spaces, the parity count)'
+- anchor: round-7-two-new-partial-results-on-problem-1
+  heading: 'Round 7: two new partial results on Problem 1'
+- anchor: round-8-the-degree-formula-deg-an-2n-1-is-proved-for-all-n-2-topmonomiallean
+  heading: 'Round 8: the degree formula `deg a(n) = 2n − 1` is proved for all `n ≥ 2` (`TopMonomial.lean`)'
+- anchor: round-9-the-light-cone-is-fully-essential-and-the-family-of-wheels
+  heading: 'Round 9: the light cone is fully essential, and the family of wheels'
+- anchor: round-10-the-glm-reads-rule-30-step-by-step-inducing-the-wheel-and-the-observers-frame
+  heading: 'Round 10: the GLM reads Rule 30 step by step — inducing the wheel, and the observer''s frame'
+- anchor: round-11-the-seeds-right-edge-the-off-centre-observer-the-moving-frame
+  heading: 'Round 11: the seed''s right edge, the off-centre observer, the moving frame'
+- anchor: round-12-different-reads-of-the-wobble-the-theorem-wheel-and-a-discussion-with-the-glm
+  heading: 'Round 12: different reads of the wobble, the theorem wheel, and a discussion with the GLM'
+- anchor: round-13-the-stack-lift-the-propose-and-check-loop-and-the-chemistry-lab
+  heading: 'Round 13: the stack lift, the propose-and-check loop, and the chemistry lab'
+- anchor: round-14-what-a-proof-would-take-and-shortcut-paths
+  heading: 'Round 14: what a proof would take, and shortcut paths'
+- anchor: round-15-following-the-what-a-proof-would-take-leads-and-ideas-from-aperiodic-tilings
+  heading: 'Round 15: following the "what a proof would take" leads, and ideas from aperiodic tilings'
+- anchor: round-16-the-period-2-rung-weight-growth-closed-the-triangle-question-glm-operators
+  heading: 'Round 16: the period-2 rung, weight growth closed, the triangle question, GLM operators'
+- anchor: round-17-spinning-the-triangle-and-the-pyramid-spin-as-a-multiplication-factor
+  heading: 'Round 17: spinning the triangle and the pyramid; spin as a multiplication factor'
+- anchor: round-18-the-cr-injector-the-odd-parity-lock-on-m_n1-and-the-three-analogies
+  heading: 'Round 18: the `C·R` injector, the odd parity lock on `M_{n+1}`, and the three analogies'
+- anchor: round-19-the-triangle-as-the-side-view-of-a-hole-the-period-3-to-period-6-rungs
+  heading: 'Round 19: the triangle as the side view of a hole; the period-3 to period-6 rungs'
+- anchor: round-20-audit
+  heading: 'Round 20: audit'
+- anchor: round-21-problem-1-needs-only-the-left-half-line
+  heading: 'Round 21: Problem 1 needs only the left half-line'
+- anchor: round-22-the-first-tests-are-exactly-independent-the-prefix-search
+  heading: 'Round 22: the first tests are exactly independent; the prefix search'
+- anchor: round-23-the-power-series-ladder-your-concept-file-and-the-exact-counting-law
+  heading: 'Round 23: the power-series ladder (your concept file) and the exact counting law'
+- anchor: round-24-alternatives-to-xor-kroneckers-converse
+  heading: 'Round 24: alternatives to XOR; Kronecker''s converse'
+- anchor: round-25-tuning-by-ear-pruned-directed-search-for-an-unknown-law
+  heading: 'Round 25: tuning by ear — pruned, directed search for an unknown law'
+- anchor: round-26-the-conjecture-loop-the-glm-proposes-lemmas-tests-them-narrows-loops
+  heading: 'Round 26: the conjecture loop — the GLM proposes lemmas, tests them, narrows, loops'
+- anchor: round-27-post-edge-witnesses-ranking-functions-and-width-reduction
+  heading: 'Round 27: post-edge witnesses, ranking functions and width reduction'
+- anchor: round-28-the-glm-made-operational-on-the-package-local-rule-induction-for-arc-documentation
+  heading: 'Round 28: the GLM made operational on the package; local-rule induction for ARC; documentation'
+- anchor: round-29-a-stepwise-planner-for-puzzles-the-inner-survivor-form-refuted
+  heading: 'Round 29: a stepwise planner for puzzles; the inner-survivor form refuted'
+- anchor: round-30-one-pipeline-plan-ask-gate-statements-for-the-glm-rule-30-investigation
+  heading: 'Round 30: one pipeline (plan, ask, gate, statements) for the GLM Rule 30 investigation'
+- anchor: round-31-the-sideways-observer-barrier-diagonals-exact-arithmetic-throughout
+  heading: 'Round 31: the sideways observer; barrier diagonals; exact arithmetic throughout'
+- anchor: round-32-m₂₄-orbits-of-seed-patterns-and-how-much-of-m₂₄-rule-30-keeps
+  heading: 'Round 32: `M₂₄` orbits of seed patterns, and how much of `M₂₄` Rule 30 keeps'
+- anchor: round-33-the-observers-clock-test-count-and-halving-laws-period-2-read-sideways-the-glm-grown-to-match
+  heading: 'Round 33: the observer''s clock (test-count and halving laws), period 2 read sideways, the
+    GLM grown to match'
+- anchor: round-34-does-period-4-have-a-finite-slack-the-divisor-rule-and-the-observers-phase-the-glm-takes-its-own-step
+  heading: 'Round 34: does period 4 have a finite slack? The divisor rule and the observer''s phase; the
+    GLM takes its own step'
+- anchor: round-35-a-faster-verified-checker-the-slacks-further-out-and-black-runs-as-window-reads
+  heading: 'Round 35: a faster verified checker, the slacks further out, and black runs as window reads'
+- anchor: round-36-the-drive-wheel
+  heading: 'Round 36: the drive wheel'
+- anchor: round-37-the-cost-of-a-turn-the-observers-best-phase-the-glm-indexed-by-hubs
+  heading: 'Round 37: the cost of a turn, the observer''s best phase, the GLM indexed by hubs'
+- anchor: round-38-the-hypothesis-engine-statements-held-out-falsification-laws-a-prediction
+  heading: 'Round 38: the hypothesis engine — statements, held-out falsification, laws, a prediction'
+- anchor: round-39-the-engine-pushed-further-white-diagonals-never-stop-the-engine-off-rule-30
+  heading: 'Round 39: the engine pushed further — white diagonals never stop; the engine off Rule 30'
+- anchor: round-40-settling-times-the-open-bit-and-the-left-side-of-every-row
+  heading: 'Round 40: settling times, the open bit, and the left side of every row'
+- anchor: round-41-the-self-dialogue-engine-v10-reviewed-v11-rebuilt
+  heading: 'Round 41: the self-dialogue engine — v10 reviewed, v11 rebuilt'
+- anchor: round-42-engine-v13-checked-reasoning-guards-the-tax-route-closed
+  heading: 'Round 42: engine v13 checked; reasoning guards; the TAX route closed'
+- anchor: round-43-the-escalation-boundaries-sketch-checked-the-master-view-rebuilt
+  heading: 'Round 43: the escalation-boundaries sketch checked; the master view rebuilt'
+- anchor: round-44-the-escalation-sketch-corrected-the-needs-wheel-measured
+  heading: 'Round 44: the escalation sketch corrected; the needs wheel measured'
+- anchor: round-45-the-hypothesis-engine-gate-loop-made-to-work-engine-v17
+  heading: 'Round 45: the Hypothesis Engine gate loop made to work (engine v17)'
+- anchor: round-46-engine-v18-and-the-wheel-contract-in-lean
+  heading: 'Round 46: engine v18 and the wheel contract in Lean'
+- anchor: round-47-the-2-adic-layer-tower-the-full-m₂₄-census-mog-subgroups
+  heading: 'Round 47: the 2-adic layer tower; the full `M₂₄` census; MOG subgroups'
+- anchor: round-48-white-triangles-left-down-vs-right-down-lines-bands-printed-from-the-right
+  heading: 'Round 48: white triangles, left-down vs right-down lines, bands printed from the right'
+- anchor: round-49-the-tidy-up-the-journey-written-up-the-package-prepared-for-the-glm
+  heading: 'Round 49: the tidy-up — the journey written up, the package prepared for the GLM'
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Rule 30 / GLM study — round-by-round record (HISTORY)
+verdict: This is the detailed record of every development round, in order; statements in older rounds
+  can be superseded by later ones, and the current state is always in AUDIT.md.
+wobble_deps: []

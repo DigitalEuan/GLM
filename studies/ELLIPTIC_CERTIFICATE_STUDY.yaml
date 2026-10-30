@@ -1,0 +1,83 @@
+# GLM study manifest (glm-study-manifest/v1)
+# Auto-generated from the paired .md by scripts/migrate/05_studies_to_yaml.py.
+# The .md is the prose backup; this YAML is the semantic face the GLM reads.
+# Fill in the empty fields (predecessors, junctions, directives, etc.) by hand
+# or by a future round of the reorganisation.
+
+controls: []
+deciding_figure: '5 of 6 marks. Held-out set: 17 numbers, 0 wrong, 6 of 6 refused primes certified, and
+  the router agrees on 17 of 17. 6 of 6 chains verified in a fresh interpreter, 24 of 24 mutants caught,
+  40 of 42 tampered certificates rejected by both the step gate and the script (the 2 accepted are valid;
+  §5.1). 0 of 35 earlier held-out cases, 0 of 304 previously certified numbers and 0 of 30 stepwise cases
+  changed. `2^255 - 19` is checked by the kernel.'
+directives: []
+evidence: []
+faculty: refusal
+file_refs:
+  code:
+  - evaluation/elliptic_certificate_cases
+  - reasoning/elliptic_certificate
+  - reasoning/primality_certificate
+  - reasoning/stepwise_script
+  - tests/test_elliptic_certificate
+  lean:
+  - EllipticCertificate
+  prose: ELLIPTIC_CERTIFICATE_STUDY.md
+  test:
+  - test_elliptic_certificate.py
+  wheel: []
+follow_ups: []
+id: ELLIPTIC_CERTIFICATE_STUDY
+junctions: []
+last_altered: ''
+layer:
+  non_edges: []
+  primary: ''
+  refinement_of: ''
+  resolutions_tried: []
+marks:
+  amended: []
+  declared: []
+  met: []
+  missed: []
+perturbations: []
+phase: 140
+predecessors: []
+question: Can primes that Phase 140 refused, because neither `p - 1` (Pratt, Pocklington) nor `p + 1`
+  (N+1) splits within the work budget, be certified instead by elliptic-curve certificates proved sound
+  in Lean, without changing any answer Phase 139 or Phase 140 gave?
+recomputed_by: '`glm_universal.evaluation.elliptic_certificate_cases.measure`'
+reversibility:
+  class: unknown
+schema: glm-study-manifest/v1
+sections:
+- anchor: tier-0-the-coarse-read
+  heading: Tier 0 — the coarse read
+- anchor: 0-what-this-document-is
+  heading: 0. What this document is
+- anchor: 1-what-was-built
+  heading: 1. What was built
+- anchor: 2-what-is-proved
+  heading: 2. What is proved
+- anchor: 3-the-held-out-set-evaluationelliptic_certificate_casespy
+  heading: 3. The held-out set (`evaluation/elliptic_certificate_cases.py`)
+- anchor: 4-the-marks
+  heading: 4. The marks
+- anchor: 5-the-measurement
+  heading: 5. The measurement
+- anchor: 6-what-this-round-does-not-do
+  heading: 6. What this round does not do
+- anchor: 7-files
+  heading: 7. Files
+status: closed
+successors: []
+superseded_by: ''
+supersedes: []
+title: Elliptic-curve certificates — primes where neither `p - 1` nor `p + 1` splits
+verdict: 'Yes, on the held-out set. An elliptic-curve entry, proved sound in Lean from the trivial bound
+  on the number of points of a curve and found at run time by complex multiplication, certified all 6
+  of the 6 held-out primes Phase 140 refused, with no wrong verdict, and moved no earlier answer. 5 of
+  6 marks were met. The missed mark is a tampered certificate that was wrongly declared invalid: on the
+  secp256k1 prime the search found a curve of prime order, so raising its cofactor to 2 still gives a
+  valid certificate, and the checker was right to accept it.'
+wobble_deps: []

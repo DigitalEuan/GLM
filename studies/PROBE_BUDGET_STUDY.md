@@ -108,7 +108,7 @@ ensembles and P4 tests its prediction on held-out holes.
 ## 6. Files
 
 * `RequestProject/GLM/ProbeBudget.lean` — P1.
-* `overlay/glm_universal/reasoning/probe_budget.py` — the rule, the share
+* `glm_universal/reasoning/probe_budget.py` — the rule, the share
   check, the references and the held-out walks, stored beside the digest of
   their sources; `python3 -m glm_universal.tools probe-budget [--write]`.
 * Tests: `test_probe_budget.py`.
