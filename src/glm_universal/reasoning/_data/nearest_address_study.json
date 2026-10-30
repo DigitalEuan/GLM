@@ -8,57 +8,21 @@
   "cases": 202,
   "moved": [
    {
-    "cause": "Phase 147: the list of query kinds the refusal names gains 'hole' (and, at Phase 154, 'corpus')",
+    "cause": "Phase 147: the list of query kinds the refusal names gains 'hole'",
     "id": "unknown-nonsense"
-   },
-   {
-    "cause": "the tree: the Lean declaration count, measured live",
-    "id": "report-lean"
-   },
-   {
-    "cause": "Phase 162: the directives report counts the standing rules, which gain D17 (the owner's dating rule)",
-    "id": "report-directives"
-   },
-   {
-    "cause": "Phase 149: the L5 clause is appended to the round's answer, kept verbatim",
-    "id": "report-hole-classifier"
-   },
-   {
-    "cause": "Phase 149: the L5 clause is appended to the round's answer, kept verbatim",
-    "id": "report-hole-ladder"
-   },
-   {
-    "cause": "the tree: the address-book index over the Lean declarations",
-    "id": "report-retrieval"
-   },
-   {
-    "cause": "the tree: the overlay's stored bytes, measured live",
-    "id": "report-generated"
    },
    {
     "cause": "Phases 147-148: the language report counts the query kinds and the evaluation questions, which gain the new kind and the new cases",
     "id": "report-language"
    },
    {
-    "cause": "Phase 149: the L5 clause is appended to the round's answer, kept verbatim",
-    "id": "report-hole-failures"
-   },
-   {
     "cause": "Phases 147-148: the query-escalation report counts the evaluation cases, which gain the new ones",
     "id": "report-query-escalation"
-   },
-   {
-    "cause": "the tree: the stack relay's strides are drawn from the Lean declarations",
-    "id": "report-relay"
-   },
-   {
-    "cause": "the tree: the anonymous register's queries are the relay's strides",
-    "id": "report-anonymous"
    }
   ],
   "present": 202,
   "same_status": 202,
-  "same_text": 190,
+  "same_text": 199,
   "undeclared": []
  },
  "marks": {
@@ -188,7 +152,7 @@
    },
    {
     "address": true,
-    "answer": "nearest to physics:albedo moved on 4 coordinates by 1/4 (codeword 16) among the 142 carriers of the address table: physics:absorptance (|q-c|^2 = 1/4), physics:albedo (|q-c|^2 = 1/4), physics:alfven_speed (|q-c|^2 = 53/4), physics:adhesion_energy (|q-c|^2 = 63/4), physics:abbe_dispersion_number (|q-c|^2 = 65/4); the guarded read certifies the head at rung C: no other carrier lies within 3.105 of the point (GLM.NearestAddress.ranking_tail_outside); the stated move is inside the margin, so the carrier the point came from is a member of the junction (GLM.CoordinateJunction.jread_origin); the head is the certified junction of 2 live carriers, so to separate them the GLM asks: Does its description mention 'absorbed'? (yes: physics:absorptance; no: physics:albedo) -- reply as the next turn, or ask `nearest to albedo moved 4 by 1/4 given word:absorbed is <reply>`",
+    "answer": "nearest to physics:albedo moved on 4 coordinates by 1/4 (codeword 16) among the 142 carriers of the address table: physics:absorptance (|q-c|^2 = 1/4), physics:albedo (|q-c|^2 = 1/4), physics:alfven_speed (|q-c|^2 = 53/4), physics:adhesion_energy (|q-c|^2 = 63/4), physics:abbe_dispersion_number (|q-c|^2 = 65/4); the guarded read certifies the head at rung C: no other carrier lies within 3.105 of the point (GLM.NearestAddress.ranking_tail_outside); the stated move is inside the margin, so the carrier the point came from is a member of the junction (GLM.CoordinateJunction.jread_origin)",
     "as_declared": null,
     "certified": true,
     "head": "physics:absorptance",
@@ -233,7 +197,7 @@
    },
    {
     "address": true,
-    "answer": "nearest to the given point among the 142 carriers of the address table: mathematics:golay_codeword_0 (|q-c|^2 = 0/1), mathematics:hexacode_word_0 (|q-c|^2 = 0/1), mathematics:high_denominator_2x3 (|q-c|^2 = 142942917478/940839860961), mathematics:axis_root_e0 (|q-c|^2 = 1/1), physics:angle (|q-c|^2 = 1/1); the guarded read refuses (no rung certifies the point), so the first 2 are at one distance (mathematics:golay_codeword_0, mathematics:hexacode_word_0) but no margin is certified; the head is a tie of 2 live carriers the scan found, with no margin certified, so to separate them the GLM asks: What is its field order? (2: mathematics:golay_codeword_0; 4: mathematics:hexacode_word_0) -- reply as the next turn, or ask `nearest to 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 given attr:field_order is <reply>`",
+    "answer": "nearest to the given point among the 142 carriers of the address table: mathematics:golay_codeword_0 (|q-c|^2 = 0/1), mathematics:hexacode_word_0 (|q-c|^2 = 0/1), mathematics:high_denominator_2x3 (|q-c|^2 = 142942917478/940839860961), mathematics:axis_root_e0 (|q-c|^2 = 1/1), physics:angle (|q-c|^2 = 1/1); the guarded read refuses (no rung certifies the point), so the first 2 are at one distance (mathematics:golay_codeword_0, mathematics:hexacode_word_0) but no margin is certified",
     "as_declared": null,
     "certified": false,
     "head": "mathematics:golay_codeword_0",
@@ -359,7 +323,7 @@
    "refused_head_tied": 128
   }
  },
- "source_digest": "8132c791d71fc32e7ff383fa673c419788dd336bc7f415463413921e148c5b51",
+ "source_digest": "f3d40269ec6a95bdee969f1f4108015d51555b7c3564e6b651ebc79d3f476965",
  "taken": 7,
  "wiring": {
   "census": {
@@ -379,10 +343,24 @@
     "document_tree",
     "evidence_in_use_study",
     "evidence_model_study",
-    "fold_machine_study",
+    "frame_operator_study",
+    "frame_operators",
+    "frame_plane",
+    "frame_plane_study",
+    "generate_not_store",
     "hole_reports_l5_study",
+    "improper_frame_study",
+    "improper_units_study",
     "inert_counter",
+    "kappa_anchor",
     "l5_first_budget",
+    "leech_shells",
+    "lorentzian_evidence",
+    "lorentzian_evidence_study",
+    "lorentzian_lift",
+    "lorentzian_lift_study",
+    "lorentzian_majority",
+    "lorentzian_majority_study",
     "native_parity",
     "native_words",
     "nearest_address_study",
@@ -392,20 +370,25 @@
     "operation_escalation",
     "operations",
     "pi_machine_study",
+    "pipeline_ask_study",
+    "pipeline_kit_crosscheck",
+    "pipeline_kit_study",
     "planner_ladder_study",
     "probe_budget",
     "quadratic_lasso",
     "quoted_measurements_study",
     "resumed_dialogue_study",
+    "reversibility",
     "second_reading",
     "stacked_dialogue_study",
     "stray_blind",
     "ties_ladder_frozen",
-    "tool_machine_study",
-    "typed_plans"
+    "tool_machine",
+    "typed_plans",
+    "wobble_registry"
    ],
-   "reached": 177,
-   "reasoning": 216,
+   "reached": 171,
+   "reasoning": 229,
    "stale_declarations": [],
    "undeclared": []
   },

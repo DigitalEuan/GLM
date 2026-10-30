@@ -40,17 +40,17 @@ def test_the_lean_file_states_the_theorems_without_sorry():
     assert "import RequestProject.GLM.AddressRead" in text
 
 
-@pytest.mark.parametrize("text, request, limit", [
+@pytest.mark.parametrize("text, request_text, limit", [
     ("nearest to C moved 8 by 1/2", "C moved 8 by 1/2", None),
     ("nearest 3 to C moved 8 by 1/2", "C moved 8 by 1/2", 3),
     ("nearest to C moved 8 by 1/2 top 2", "C moved 8 by 1/2", 2),
     ("nearest to 1, 2", "1, 2", None),
 ])
-def test_the_address_path_is_taken_for_a_point(text, request, limit):
-    assert na.split_request(text) == (request, limit)
+def test_the_address_path_is_taken_for_a_point(text, request_text, limit):
+    assert na.split_request(text) == (request_text, limit)
     q = parse_query(text)
     assert q.kind == "nearest"
-    assert q.options["address_request"] == request
+    assert q.options["address_request"] == request_text
 
 
 @pytest.mark.parametrize("text", [
@@ -82,15 +82,15 @@ def test_the_head_agrees_with_the_read():
     assert not refused["certified"] and len(refused["ranked"]) == 3
 
 
-@pytest.mark.parametrize("request, reason", [
+@pytest.mark.parametrize("request_text, reason", [
     ("water moved 8 by 1/2", "ambiguous-name"),
     ("Fe moved 8 by 1/2", "unknown-name"),
     ("1, 2, 3", "dimension"),
     ("C moved 30 by 1/2", "malformed"),
 ])
-def test_a_refused_request_keeps_its_reason(request, reason):
+def test_a_refused_request_keeps_its_reason(request_text, reason):
     with pytest.raises(ar.AddressError) as caught:
-        na.nearest_read(request)
+        na.nearest_read(request_text)
     assert caught.value.reason == reason
 
 

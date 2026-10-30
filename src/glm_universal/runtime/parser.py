@@ -1171,7 +1171,11 @@ def _build_keyword_query(text: str, cleaned: str, lowered: str,
         # exact coordinates -- goes to the guarded read of the address
         # table, carried through as text like a `locate` request.
         from ..reasoning import nearest_address as _na
-        address = _na.split_request(cleaned)
+        # A later conversational turn may contain the same moved-point text
+        # together with ``given``/``confirm`` evidence.  That is the ordinary
+        # nearest-tie dialogue path, not a fresh address-table request.
+        conversational = " given " in f" {lowered} " or " confirm:" in lowered
+        address = None if conversational else _na.split_request(cleaned)
         if address is not None:
             options["address_request"] = address[0]
             if address[1] is not None:

@@ -8,7 +8,7 @@
 
 **Deciding figure.** 8 of 9 marks (X5 missed as written, X5′ met); 10 of 10 theorems, 0 `sorry`; battery 21 of 23 and 9 of 9 with and without the rotating-body join, 0 wrong; census 16,215 questions, 0 answers changed by a pin, 12 ambiguities resolved by each of the two energy pins; 4 of 4 declared refusals; evaluation 223 of 223.
 
-**Recomputed by.** `glm_universal.engineering.context_frames_study.context_frames_report`
+**Recomputed by.** `glm_universal.reasoning.frame_plane_study.frame_plane_report`
 
 *Tier 0 is a coarse read of what follows, never a claim of its own: the verdict and the figure above are grounded in the body below, and `glm_universal.corpus.checks.tier_report` fails if they stop being.*
 

@@ -817,12 +817,6 @@ MEASUREMENT_ONLY: Mapping[str, str] = {
     "carried_read_study": "the measurement of Phase 153; the reads it "
                           "measures are made by the stepwise gate, the "
                           "typed planner's gate and the `field` query kind",
-    "fold_machine_study": "the measurement of Phase 160; the folds it "
-                          "measures are computed by the batch machine the "
-                          "stepwise planner's gate runs",
-    "tool_machine_study": "the measurement of Phase 163; the tool answers "
-                          "it measures are worked out by the batch machine "
-                          "the stepwise planner's gate runs",
     "adversarial_dialogue_study": "the measurement of Phase 167; the replies "
                                   "it measures are read by the conversation "
                                   "at the `nearest` query kind's tied heads",
@@ -864,6 +858,46 @@ MEASUREMENT_ONLY: Mapping[str, str] = {
                             "one refusal contract",
     "second_reading": "measures guards on those operations; the adopted one "
                       "is already in the answering path",
+    "frame_operator_study": "the Archive 25 frame-operator measurement; it "
+                            "is read by the study instrument, not a query",
+    "frame_operators": "the Archive 25 frame-operator implementation; it is "
+                       "called by the frame study instrument",
+    "frame_plane": "the Archive 25 frame-plane implementation; it is called "
+                   "by the frame study instrument",
+    "frame_plane_study": "the Archive 25 frame-plane measurement; it is read "
+                         "by the study instrument, not a query",
+    "generate_not_store": "directive D19's document-backed measurement; it is "
+                          "not a direct query surface",
+    "improper_frame_study": "the Archive 25 improper-frame measurement; it is "
+                            "read by the study instrument, not a query",
+    "improper_units_study": "the Archive 25 improper-units measurement; it is "
+                            "read by the study instrument, not a query",
+    "kappa_anchor": "the Archive 25 calibration measurement; it is reached "
+                    "through the frame study instrument",
+    "leech_shells": "the Archive 25 Leech-shell measurement; it is read by "
+                    "the formal study instrument",
+    "lorentzian_evidence": "the Archive 25 Lorentzian evidence implementation; "
+                          "it is called by its study instrument",
+    "lorentzian_evidence_study": "the Archive 25 Lorentzian evidence "
+                                 "measurement; it is not a direct query",
+    "lorentzian_lift": "the Archive 25 Lorentzian-lift implementation; it is "
+                      "called by its study instrument",
+    "lorentzian_lift_study": "the Archive 25 Lorentzian-lift measurement; it "
+                             "is not a direct query",
+    "lorentzian_majority": "the Archive 25 majority implementation; it is "
+                           "called by its study instrument",
+    "lorentzian_majority_study": "the Archive 25 majority measurement; it is "
+                                 "not a direct query",
+    "pipeline_ask_study": "the Archive 25 separating-question measurement; it "
+                          "is read by the study instrument",
+    "pipeline_kit_crosscheck": "the Archive 25 Pipeline Kit cross-check; it is "
+                               "not a direct query",
+    "reversibility": "directive D18's document-backed measurement; it is not a "
+                     "direct query surface",
+    "tool_machine": "the retained tool-machine study implementation; it is "
+                    "measured through the batch machine",
+    "wobble_registry": "directive D17's document-backed measurement; it is not "
+                       "a direct query surface",
     "typed_plans": "measures the typed planner on held-out questions",
 }
 

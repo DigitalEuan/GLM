@@ -216,7 +216,7 @@ def wiring() -> Dict[str, object]:
     from ..runtime.toolbox import wiring_census
     census = wiring_census()
     earlier = [c for c in CASES if c.kind == "nearest"
-               and not c.id.startswith("nearest-address")]
+               and not c.id.startswith(("nearest-address", "nearest-tie"))]
     diverted = [c.id for c in earlier
                 if parse_query(c.question).options.get("address_request")]
     return {"census": census,
